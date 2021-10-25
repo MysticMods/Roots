@@ -2,15 +2,10 @@ package epicsquid.roots.advancements;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import epicsquid.mysticallib.advancement.IGenericPredicate;
-import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.modifiers.IModifierCore;
-import epicsquid.roots.modifiers.Modifier;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.recipe.FeyCraftingRecipe;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.JsonUtils;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -27,7 +22,7 @@ public class ModifierPredicate implements IGenericPredicate<IModifierCore> {
   }
 
   @Override
-  public boolean test(EntityPlayerMP player, IModifierCore condition) {
+  public boolean test(ServerPlayerEntity player, IModifierCore condition) {
     if (this.registryName == null) {
       return false;
     }
@@ -38,8 +33,8 @@ public class ModifierPredicate implements IGenericPredicate<IModifierCore> {
   public IGenericPredicate<IModifierCore> deserialize(@Nullable JsonElement element) {
     if (element != null) {
       JsonObject object = element.getAsJsonObject();
-      if (JsonUtils.isString(object, "modifier")) {
-        ResourceLocation modifier = new ResourceLocation(JsonUtils.getString(object, "modifier"));
+      if (JSONUtils.isString(object, "modifier")) {
+        ResourceLocation modifier = new ResourceLocation(JSONUtils.getString(object, "modifier"));
         return new ModifierPredicate(modifier);
       }
     }

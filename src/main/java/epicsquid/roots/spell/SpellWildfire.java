@@ -1,6 +1,5 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.init.ModItems;
@@ -8,11 +7,10 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -80,7 +78,7 @@ public class SpellWildfire extends SpellBase {
     setCastSound(ModSounds.Spells.WILDFIRE);
   }
 
-  private void createJet(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  private void createJet(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     EntityFireJet fireJet = new EntityFireJet(player.world);
     fireJet.setPlayer(player.getUniqueID());
     fireJet.setPosition(player.posX, player.posY, player.posZ);
@@ -89,7 +87,7 @@ public class SpellWildfire extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
       createJet(player, info, ticks);
       if (info.has(DUALITY)) {

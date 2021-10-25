@@ -5,7 +5,7 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implements INBTSerializable<NBTTagCompound> {
+public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implements INBTSerializable<CompoundNBT> {
   protected ItemStack stack;
   protected int selectedSlot = 1;
 
@@ -90,10 +90,10 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
   }
 
   @Override
-  public abstract NBTTagCompound serializeNBT();
+  public abstract CompoundNBT serializeNBT();
 
   @Override
-  public abstract void deserializeNBT(NBTTagCompound tag);
+  public abstract void deserializeNBT(CompoundNBT tag);
 
   @Nullable
   protected static <V extends AbstractSpellInfo, T extends AbstractSpellStorage<V>> T fromStack(ItemStack stack, Function<ItemStack, T> factory) {
@@ -101,7 +101,7 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
     if (!result.isValid()) {
       return null;
     }
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
     if (tag.hasKey("spell_storage")) {
       result.deserializeNBT(tag.getCompoundTag("spell_storage"));
     } else if (tag.hasKey("spell_holder")) {
@@ -113,7 +113,7 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
   }
 
   public void saveToStack() {
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
     tag.setTag("spell_storage", this.serializeNBT());
   }
 }

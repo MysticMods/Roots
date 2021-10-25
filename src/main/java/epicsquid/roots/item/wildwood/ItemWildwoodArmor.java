@@ -6,12 +6,12 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.model.armor.ModelWildwoodArmor;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -21,8 +21,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILivingRepair {
-  public ItemWildwoodArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name) {
+public class ItemWildwoodArmor extends ArmorItem implements IModeledObject, ILivingRepair {
+  public ItemWildwoodArmor(ArmorMaterial material, EquipmentSlotType slot, String name) {
     super(material, 0, slot);
     setTranslationKey(name);
     setRegistryName(new ResourceLocation(Roots.MODID, name));
@@ -37,19 +37,19 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
 
   @Nullable
   @Override
-  public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+  public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
     return Roots.MODID + ":textures/models/armor/wildwood_armor.png";
   }
 
   @Nullable
   @Override
   @SideOnly(Side.CLIENT)
-  public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+  public ModelBiped getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, ModelBiped _default) {
     return ModelWildwoodArmor.getInstance(armorSlot);
   }
 
   @Override
-  public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+  public void onArmorTick(World world, PlayerEntity player, ItemStack itemStack) {
     // TODO: Make configurable?
     switch (piecesWorn(player)) {
       case 1:
@@ -72,7 +72,7 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
     }
   }
 
-  public static int piecesWorn(EntityPlayer player) {
+  public static int piecesWorn(PlayerEntity player) {
     int count = 0;
     for (ItemStack stack : player.getArmorInventoryList()) {
       if (stack.getItem() instanceof ItemWildwoodArmor)

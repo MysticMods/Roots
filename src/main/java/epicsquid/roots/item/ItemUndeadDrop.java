@@ -5,12 +5,12 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.recipe.SpiritDrops;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,18 +30,18 @@ public class ItemUndeadDrop extends ItemBase {
   }
 
   @Override
-  public EnumRarity getRarity(ItemStack stack) {
+  public Rarity getRarity(ItemStack stack) {
     switch (type) {
       default:
       case POUCH:
-        return EnumRarity.UNCOMMON;
+        return Rarity.UNCOMMON;
       case RELIQUARY:
-        return EnumRarity.RARE;
+        return Rarity.RARE;
     }
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
     ItemStack stack = playerIn.getHeldItem(handIn);
     if (!worldIn.isRemote) {
       ItemStack result = type == DropType.POUCH ? SpiritDrops.getRandomPouch() : SpiritDrops.getRandomReliquary();
@@ -53,7 +53,7 @@ public class ItemUndeadDrop extends ItemBase {
         stack.shrink(1);
       }
     }
-    return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+    return ActionResult.newResult(ActionResultType.SUCCESS, stack);
   }
 
   @Override

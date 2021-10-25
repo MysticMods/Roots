@@ -18,12 +18,10 @@ import epicsquid.roots.network.MessageInvalidateContainer;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
@@ -42,9 +40,9 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
   private boolean shiftDown = false;
   private boolean altDown = false;
   private boolean ctrlDown = false;
-  private final EntityPlayer player;
+  private final PlayerEntity player;
 
-  public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
+  public ContainerImposer(PlayerEntity player, TileEntityImposer tile) {
     this.tile = tile;
     this.player = player;
 
@@ -53,7 +51,7 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
     createSpellSlots();
   }
 
-  public EntityPlayer getPlayer() {
+  public PlayerEntity getPlayer() {
     return player;
   }
 
@@ -153,7 +151,7 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
 
   @SuppressWarnings("ConstantConditions")
   @Override
-  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
     if (slotId >= 0 && !player.world.isRemote) {
       Slot slot = getSlot(slotId);
       if (slot instanceof SlotImposerSpellInfo) {
@@ -162,7 +160,7 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
           tile.setSlot(((SlotImposerSpellInfo) slot).getSlot());
           invalidate();
           MessageInvalidateContainer message = new MessageInvalidateContainer();
-          PacketHandler.INSTANCE.sendTo(message, (EntityPlayerMP) player);
+          PacketHandler.INSTANCE.sendTo(message, (ServerPlayerEntity) player);
         }
       } else if (slot instanceof SlotImposerModifierInfo) {
         SlotImposerModifierInfo info = (SlotImposerModifierInfo) slot;
@@ -187,7 +185,7 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
                 tile.updatePacketViaState();
                 invalidate();
                 MessageInvalidateContainer message = new MessageInvalidateContainer();
-                PacketHandler.INSTANCE.sendTo(message, (EntityPlayerMP) player);
+                PacketHandler.INSTANCE.sendTo(message, (ServerPlayerEntity) player);
               }
             }
           }
@@ -197,22 +195,22 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
     return super.slotClick(slotId, dragType, clickTypeIn, player);
   }
 
-  private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
+  private void createPlayerInventory(PlayerInventory inventoryPlayer) {
     int xOffset = 8;
     int yOffset = 160;
 
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, xOffset + j * 18, yOffset + i * 18));
+        addSlotToContainer(new net.minecraft.inventory.container.Slot(inventoryPlayer, j + i * 9 + 9, xOffset + j * 18, yOffset + i * 18));
       }
     }
     for (int i = 0; i < 9; i++) {
-      addSlotToContainer(new Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
+      addSlotToContainer(new net.minecraft.inventory.container.Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
     }
   }
 
   @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
+  public boolean canInteractWith(@Nonnull PlayerEntity player) {
     BlockPos pos = this.tile.getPos();
     if (this.tile.getWorld().getTileEntity(pos) != this.tile) {
       return false;
@@ -223,7 +221,7 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
 
   @Override
   @Nonnull
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     Slot slot = this.inventorySlots.get(index);
 
     if (isSelectSpell()) {
@@ -240,7 +238,7 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
       return ItemStack.EMPTY;
     }
 
-    Slot coreSlot = coreSlotMap.get(core);
+    net.minecraft.inventory.container.Slot coreSlot = coreSlotMap.get(core);
     if (coreSlot == null) {
       throw new IllegalStateException("slot for modifier core " + core + " must exist and cannot be null");
     }

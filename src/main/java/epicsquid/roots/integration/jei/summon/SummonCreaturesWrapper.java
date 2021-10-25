@@ -8,7 +8,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SummonCreaturesWrapper implements IRecipeWrapper {
-  public EntityLivingBase entity = null;
+  public LivingEntity entity = null;
   public final SummonCreatureRecipe recipe;
 
   public SummonCreaturesWrapper(SummonCreatureRecipe recipe) {

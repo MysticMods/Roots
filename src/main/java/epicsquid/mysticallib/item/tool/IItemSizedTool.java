@@ -2,21 +2,19 @@ package epicsquid.mysticallib.item.tool;
 
 import epicsquid.mysticallib.util.BreakUtil;
 import epicsquid.mysticallib.util.Util;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.Set;
 
 public interface IItemSizedTool extends IEffectiveTool, IBlacklistingTool {
   float getEfficiency();
 
-  default float getSizedDestroySpeed(ItemStack stack, IBlockState state) {
+  default float getSizedDestroySpeed(ItemStack stack, BlockState state) {
     Material material = state.getMaterial();
     if (getEffectiveMaterials().contains(material)) {
       return this.getEfficiency();
@@ -24,7 +22,7 @@ public interface IItemSizedTool extends IEffectiveTool, IBlacklistingTool {
     return -999;
   }
 
-  default boolean onSizedBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player) {
+  default boolean onSizedBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
     final Set<BlockPos> breakableBlocks = BreakUtil.nearbyBlocks(itemstack, pos, player);
     if (breakableBlocks.isEmpty()) {
       //maybeDamage(itemstack, 1, player);
@@ -45,7 +43,7 @@ public interface IItemSizedTool extends IEffectiveTool, IBlacklistingTool {
     }
   }
 
-  default void maybeDamage(ItemStack stack, int amount, EntityPlayer player) {
+  default void maybeDamage(ItemStack stack, int amount, PlayerEntity player) {
     if (!player.isCreative()) {
       stack.damageItem(amount, player);
     }

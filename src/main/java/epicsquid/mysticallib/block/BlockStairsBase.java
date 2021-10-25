@@ -11,15 +11,15 @@ import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.model.block.BakedModelBlock;
 import epicsquid.mysticallib.model.block.BakedModelStairs;
-import net.minecraft.block.BlockStairs;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -28,17 +28,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("deprecation")
-public class BlockStairsBase extends BlockStairs implements IBlock, IModeledObject, ICustomModeledObject {
+public class BlockStairsBase extends StairsBlock implements IBlock, IModeledObject, ICustomModeledObject {
   private @Nonnull Item itemBlock;
   public List<ItemStack> drops = null;
   private boolean isOpaque = false;
   private boolean hasCustomModel = false;
   private boolean isFlammable = false;
   private BlockRenderLayer layer = BlockRenderLayer.SOLID;
-  private IBlockState parent;
+  private BlockState parent;
   public String name;
 
-  public BlockStairsBase(@Nonnull IBlockState base, @Nonnull SoundType type, float hardness, @Nonnull String name) {
+  public BlockStairsBase(@Nonnull BlockState base, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(base);
     this.setCreativeTab(null);
     this.parent = base;
@@ -50,11 +50,11 @@ public class BlockStairsBase extends BlockStairs implements IBlock, IModeledObje
     setLightOpacity(0);
     setOpacity(false);
     this.fullBlock = false;
-    itemBlock = new ItemBlock(this).setRegistryName(LibRegistry.getActiveModid(), name);
+    itemBlock = new BlockItem(this).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
   @Nonnull
-  public IBlockState getParent() {
+  public BlockState getParent() {
     return parent;
   }
 
@@ -96,7 +96,7 @@ public class BlockStairsBase extends BlockStairs implements IBlock, IModeledObje
   }
 
   @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return isOpaque;
   }
 
@@ -105,17 +105,17 @@ public class BlockStairsBase extends BlockStairs implements IBlock, IModeledObje
   }
 
   @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Override
-  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction face) {
     return isFlammable || super.isFlammable(world, pos, face);
   }
 
   @Override
-  public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+  public int getFlammability(IBlockAccess world, BlockPos pos, Direction face) {
     return isFlammable ? 100 : super.getFlammability(world, pos, face);
   }
 
@@ -126,7 +126,7 @@ public class BlockStairsBase extends BlockStairs implements IBlock, IModeledObje
       ModelLoader.setCustomStateMapper(this, new CustomStateMapper());
     }
     if (!hasCustomModel) {
-      ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "handlers"));
+      ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new net.minecraft.client.renderer.model.ModelResourceLocation(getRegistryName(), "handlers"));
     } else {
       ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "handlers"));
     }
@@ -164,7 +164,7 @@ public class BlockStairsBase extends BlockStairs implements IBlock, IModeledObje
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     this.itemBlock = block;
     return block;
   }

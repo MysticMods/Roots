@@ -1,10 +1,10 @@
 package epicsquid.roots.recipe.transmutation;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 
 @FunctionalInterface
 public interface BlockStatePredicate extends MatchingStates {
   BlockStatePredicate TRUE = (o) -> true;
 
-  boolean test(IBlockState state);
+  boolean test(BlockState state);
 }

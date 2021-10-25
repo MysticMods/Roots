@@ -6,7 +6,7 @@ import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.Modifier;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.*;
 
@@ -36,19 +36,19 @@ public class StaffModifierInstance extends LibraryModifierInstance {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound tag = super.serializeNBT();
+  public CompoundNBT serializeNBT() {
+    CompoundNBT tag = super.serializeNBT();
     tag.setBoolean("e", enabled);
     return tag;
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound tag) {
+  public void deserializeNBT(CompoundNBT tag) {
     super.deserializeNBT(tag);
     this.enabled = tag.getBoolean("e");
   }
 
-  public static StaffModifierInstance fromNBT(NBTTagCompound tag) {
+  public static StaffModifierInstance fromNBT(CompoundNBT tag) {
     StaffModifierInstance result = new StaffModifierInstance();
     result.deserializeNBT(tag);
     return result;

@@ -10,7 +10,7 @@ import epicsquid.roots.spell.SpellBase;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -38,7 +38,7 @@ public class ItemSpellModifier extends ItemBase {
           continue;
         }
         ItemStack mod = new ItemStack(this);
-        NBTTagCompound tag = ItemUtil.getOrCreateTag(mod);
+        CompoundNBT tag = ItemUtil.getOrCreateTag(mod);
         tag.setString("modifier", modifier.getRegistryName().toString());
         subItems.add(mod);
       }
@@ -47,7 +47,7 @@ public class ItemSpellModifier extends ItemBase {
 
   @Override
   public String getItemStackDisplayName(ItemStack stack) {
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
     if (tag.hasKey("modifier")) {
       ResourceLocation mod = new ResourceLocation(tag.getString("modifier"));
       Modifier modifier = ModifierRegistry.get(mod);
@@ -63,7 +63,7 @@ public class ItemSpellModifier extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
     if (tag.hasKey("modifier")) {
       ResourceLocation mod = new ResourceLocation(tag.getString("modifier"));
       Modifier modifier = ModifierRegistry.get(mod);

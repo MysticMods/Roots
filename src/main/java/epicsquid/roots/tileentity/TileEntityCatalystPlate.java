@@ -3,21 +3,17 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -41,7 +37,7 @@ public class TileEntityCatalystPlate extends TileBase {
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public CompoundNBT writeToNBT(CompoundNBT tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("progress", progress);
@@ -52,7 +48,7 @@ public class TileEntityCatalystPlate extends TileBase {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound tag) {
+  public void readFromNBT(CompoundNBT tag) {
     super.readFromNBT(tag);
     if (tag.hasKey("lastPlayer")) {
       lastPlayer = NBTUtil.getUUIDFromTag(tag.getCompoundTag("lastPlayer"));
@@ -62,22 +58,22 @@ public class TileEntityCatalystPlate extends TileBase {
   }
 
   @Override
-  public NBTTagCompound getUpdateTag() {
-    return writeToNBT(new NBTTagCompound());
+  public CompoundNBT getUpdateTag() {
+    return writeToNBT(new CompoundNBT());
   }
 
   @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
+  public SUpdateTileEntityPacket getUpdatePacket() {
+    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
     readFromNBT(pkt.getNbtCompound());
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     this.lastPlayer = player.getUniqueID();
     markDirty();
@@ -113,7 +109,7 @@ public class TileEntityCatalystPlate extends TileBase {
       }
     }
     ItemStack inSlot = inventory.getStackInSlot(0);
-    if ((heldItem.isEmpty() || ItemUtil.equalWithoutSize(heldItem, inSlot)) && !world.isRemote && hand == EnumHand.MAIN_HAND) {
+    if ((heldItem.isEmpty() || ItemUtil.equalWithoutSize(heldItem, inSlot)) && !world.isRemote && hand == Hand.MAIN_HAND) {
       if (!inSlot.isEmpty()) {
         count = inSlot.getCount();
         if (player.isSneaking()) {
@@ -153,7 +149,7 @@ public class TileEntityCatalystPlate extends TileBase {
   }
 
   @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }

@@ -2,14 +2,14 @@ package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionSlowFall extends Potion {
+public class PotionSlowFall extends Effect {
 
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
@@ -21,7 +21,7 @@ public class PotionSlowFall extends Potion {
   }
 
   @Override
-  public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
+  public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
     super.performEffect(entityLivingBaseIn, amplifier);
     if (!entityLivingBaseIn.onGround && entityLivingBaseIn.motionY < 0.0D && !entityLivingBaseIn.isInWater() && !entityLivingBaseIn.isOnLadder() && !entityLivingBaseIn.isElytraFlying() && !entityLivingBaseIn.isSneaking()) {
       entityLivingBaseIn.fallDistance *= 0.6f;
@@ -35,7 +35,7 @@ public class PotionSlowFall extends Potion {
   }
 
   @Override
-  public boolean shouldRender(PotionEffect effect) {
+  public boolean shouldRender(EffectInstance effect) {
     return true;
   }
 

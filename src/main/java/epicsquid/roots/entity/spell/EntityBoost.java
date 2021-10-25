@@ -8,13 +8,13 @@ import epicsquid.roots.network.fx.MessageChemTrailsFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSkySoarer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityBoat;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.item.BoatEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -66,7 +66,7 @@ public class EntityBoost extends Entity {
   @Nullable
   private Entity[] getTargets() {
     if (this.playerId != null) {
-      EntityPlayer player = world.getPlayerEntityByUUID(playerId);
+      PlayerEntity player = world.getPlayerEntityByUUID(playerId);
       if (player != null) {
         Entity riding = player.getLowestRidingEntity();
         if (riding != player) {
@@ -100,7 +100,7 @@ public class EntityBoost extends Entity {
       if (!world.isRemote) {
         Entity[] target = getTargets();
         if (target != null) {
-          if (target[1] instanceof EntityBoat) {
+          if (target[1] instanceof BoatEntity) {
             target[1].motionX += MathHelper.sin(-target[1].rotationYaw * 0.017453292F) * 0.25;
             target[1].motionY = 0;
             target[1].motionZ += MathHelper.cos(target[1].rotationYaw * 0.017453292F) * 0.25;
@@ -109,9 +109,9 @@ public class EntityBoost extends Entity {
             target[1].motionY = origY;
             target[1].motionZ = origZ;
           }
-          EntityPlayer player = (EntityPlayer) target[0];
+          PlayerEntity player = (PlayerEntity) target[0];
           if (this.modifiers.has(SpellSkySoarer.SLOW_FALL)) {
-            player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, SpellSkySoarer.instance.slow_duration));
+            player.addPotionEffect(new EffectInstance(ModPotions.slow_fall, SpellSkySoarer.instance.slow_duration));
           }
           if (this.modifiers.has(SpellSkySoarer.NO_FALL_DAMAGE)) {
             markSafe(player);
@@ -139,12 +139,12 @@ public class EntityBoost extends Entity {
         amplifier = amplifier;
         Entity[] result = getTargets();
         if (result != null) {
-          EntityPlayer player = (EntityPlayer) result[0];
+          PlayerEntity player = (PlayerEntity) result[0];
           if (this.modifiers.has(SpellSkySoarer.NO_FALL_DAMAGE)) {
             markSafe(player);
           }
           Entity target = result[1];
-          boolean boat = target instanceof EntityBoat;
+          boolean boat = target instanceof BoatEntity;
           this.posX = player.posX;
           this.posY = boat ? this.posY : player.posY + 1.0;
           this.posZ = player.posZ;
@@ -167,7 +167,7 @@ public class EntityBoost extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
     if (compound.hasKey("modifiers")) {
       this.modifiers = new ModifierSnapshot(compound.getIntArray("modifiers"));
@@ -175,7 +175,7 @@ public class EntityBoost extends Entity {
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
     if (this.modifiers != null) {
       this.modifiers.toCompound(compound);
@@ -188,7 +188,7 @@ public class EntityBoost extends Entity {
     return playerMap;
   }
 
-  public static boolean safe(EntityPlayer player) {
+  public static boolean safe(PlayerEntity player) {
     PlayerTracker result = playerMap.get(player.getUniqueID());
     if (result == null) {
       return false;
@@ -201,7 +201,7 @@ public class EntityBoost extends Entity {
     return res;
   }
 
-  public static void markSafe(EntityPlayer player) {
+  public static void markSafe(PlayerEntity player) {
     PlayerTracker track = playerMap.computeIfAbsent(player.getUniqueID(), PlayerTracker::new);
     track.setStart(player.ticksExisted);
   }
@@ -216,7 +216,7 @@ public class EntityBoost extends Entity {
       this.start = start;
     }
 
-    public boolean safe(EntityPlayer player) {
+    public boolean safe(PlayerEntity player) {
       return player.ticksExisted - start < SpellSkySoarer.instance.fall_duration;
 
     }

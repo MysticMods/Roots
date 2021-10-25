@@ -5,7 +5,7 @@ import epicsquid.roots.particle.ParticleUtil;
 import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -23,7 +23,7 @@ public class BlockNormalFeyLight extends BlockFeyLight {
   }
 
   @Override
-  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
+  public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
     int ind = Util.rand.nextInt(5);
 
     float r = reds.getFloat(ind);

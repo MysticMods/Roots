@@ -2,7 +2,6 @@ package epicsquid.roots.modifiers.instance.staff;
 
 import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCore;
-import epicsquid.roots.modifiers.ModifierCores;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
@@ -11,14 +10,12 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagIntArray;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.IntArrayNBT;
 import net.minecraftforge.common.util.Constants;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffModifierInstance> implements ISpellMulitipliers, ISnapshot {
   public StaffModifierInstanceList(SpellBase spell) {
@@ -26,11 +23,11 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound tag) {
+  public void deserializeNBT(CompoundNBT tag) {
     super.deserializeNBT(tag, StaffModifierInstance::fromNBT);
   }
 
-  public static StaffModifierInstanceList fromNBT(NBTTagCompound tag) {
+  public static StaffModifierInstanceList fromNBT(CompoundNBT tag) {
     StaffModifierInstanceList result = new StaffModifierInstanceList(AbstractSpellInfo.getSpellFromTag(tag));
     result.deserializeNBT(tag);
     return result;
@@ -72,7 +69,7 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
   }
 
   @Override
-  public void toCompound (NBTTagCompound tag) {
+  public void toCompound (CompoundNBT tag) {
     tag.setIntArray("modifiers", getCores().stream().mapToInt(IModifierCore::getKey).toArray());
   }
 
@@ -81,7 +78,7 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     return getCores().stream().mapToInt(IModifierCore::getKey).toArray();
   }
 
-  public static ModifierSnapshot fromSnapshot(NBTTagCompound tag, SpellBase spell) {
+  public static ModifierSnapshot fromSnapshot(CompoundNBT tag, SpellBase spell) {
     if (tag.hasKey(spell.getCachedName(), Constants.NBT.TAG_INT_ARRAY)) {
       return new ModifierSnapshot(tag.getIntArray(spell.getCachedName()));
     } else {

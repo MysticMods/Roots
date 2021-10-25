@@ -6,11 +6,10 @@ import epicsquid.roots.spell.SpellGeas;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,7 +27,7 @@ public class MessageTargetedGeasFX implements IMessage {
     this.stop = stop;
   }
 
-  public MessageTargetedGeasFX(EntityPlayer player, Entity target) {
+  public MessageTargetedGeasFX(PlayerEntity player, Entity target) {
     this.start = player.getPositionVector().add(0, player.getEyeHeight(), 0);
     this.stop = target.getPositionVector().add(0, target.getEyeHeight(), 0);
   }

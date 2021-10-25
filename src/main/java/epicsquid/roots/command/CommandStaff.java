@@ -10,11 +10,11 @@ import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.Direction;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -48,15 +48,15 @@ public class CommandStaff extends CommandBase {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-    if (sender instanceof EntityPlayer && args.length != 0) {
-      EntityPlayer player = (EntityPlayer) sender;
+    if (sender instanceof PlayerEntity && args.length != 0) {
+      PlayerEntity player = (PlayerEntity) sender;
       String spellName = args[0];
       if (!spellName.startsWith("spell")) {
         spellName = "spell_" + spellName;
       }
       SpellBase spell = SpellRegistry.getSpell(spellName);
       if (spell == null) {
-        player.sendMessage(new TextComponentString("Invalid spell: " + args[0]));
+        player.sendMessage(new StringTextComponent("Invalid spell: " + args[0]));
         return;
       }
 
@@ -80,7 +80,7 @@ public class CommandStaff extends CommandBase {
         }
       }
 
-      IItemHandler inv = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+      IItemHandler inv = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP);
 
       ItemStack result = ItemHandlerHelper.insertItemStacked(inv, staff, false);
       if (!result.isEmpty()) {

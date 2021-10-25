@@ -10,8 +10,8 @@ import epicsquid.roots.entity.render.RenderIcicle;
 import epicsquid.roots.entity.ritual.*;
 import epicsquid.roots.entity.spell.*;
 import epicsquid.roots.proxy.ClientProxy;
-import net.minecraft.client.renderer.entity.RenderHusk;
-import net.minecraft.client.renderer.entity.RenderZombie;
+import net.minecraft.client.renderer.entity.HuskRenderer;
+import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraft.entity.Entity;
 
 import java.util.Arrays;
@@ -66,8 +66,8 @@ public class ModEntities {
 
       ritualClasses.forEach(c -> LibRegistry.registerEntityRenderer(c, new RenderNull.Factory()));
 
-      LibRegistry.registerEntityRenderer(EntityHuskSlave.class, RenderHusk::new);
-      LibRegistry.registerEntityRenderer(EntityZombieSlave.class, RenderZombie::new);
+      LibRegistry.registerEntityRenderer(EntityHuskSlave.class, HuskRenderer::new);
+      LibRegistry.registerEntityRenderer(EntityZombieSlave.class, ZombieRenderer::new);
       LibRegistry.registerEntityRenderer(EntityIcicle.class, RenderIcicle::new);
     }
   }

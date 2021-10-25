@@ -9,20 +9,20 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.vecmath.Matrix4f;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.util.Direction;
 import org.apache.commons.lang3.tuple.Pair;
 
 import epicsquid.mysticallib.model.CustomModelBase;
 import epicsquid.mysticallib.model.DefaultTransformations;
 import epicsquid.mysticallib.model.ModelUtil;
 import epicsquid.mysticallib.model.parts.Cube;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ItemOverrideList;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.model.IModelState;
 
@@ -56,8 +56,8 @@ public class BakedModelBlock implements IBakedModel {
   // TODO Clean this up
   @Override
   @Nonnull
-  public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
-    List<BakedQuad> finalQuads = new ArrayList<>();
+  public List<net.minecraft.client.renderer.model.BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, long rand) {
+    List<net.minecraft.client.renderer.model.BakedQuad> finalQuads = new ArrayList<>();
     if (state != null) {
       TextureAtlasSprite[] sprites = new TextureAtlasSprite[] { getParticleTexture() };
       for (int i = 0; i < sprites.length; i++) {
@@ -70,11 +70,11 @@ public class BakedModelBlock implements IBakedModel {
     return finalQuads;
   }
 
-  public void addGeometry(@Nonnull List<BakedQuad> quads, @Nonnull EnumFacing side, IBlockState state, TextureAtlasSprite[] texes, int tintIndex) {
+  public void addGeometry(@Nonnull List<BakedQuad> quads, @Nonnull Direction side, BlockState state, TextureAtlasSprite[] texes, int tintIndex) {
     ModelUtil.makeCube(format, 0, 0, 0, 1, 1, 1, ModelUtil.FULL_FACES, texes, tintIndex).addToList(quads, side);
   }
 
-  public void addItemModel(@Nonnull List<BakedQuad> quads, @Nonnull EnumFacing side) {
+  public void addItemModel(@Nonnull List<net.minecraft.client.renderer.model.BakedQuad> quads, @Nonnull Direction side) {
     cube.addToList(quads, side);
   }
 
@@ -102,12 +102,12 @@ public class BakedModelBlock implements IBakedModel {
   @Override
   @Nonnull
   public ItemOverrideList getOverrides() {
-    return new ItemOverrideList(Arrays.asList());
+    return new net.minecraft.client.renderer.model.ItemOverrideList(Arrays.asList());
   }
 
   @Override
   @Nonnull
-  public Pair<? extends IBakedModel, javax.vecmath.Matrix4f> handlePerspective(@Nonnull ItemCameraTransforms.TransformType type) {
+  public Pair<? extends net.minecraft.client.renderer.model.IBakedModel, javax.vecmath.Matrix4f> handlePerspective(@Nonnull ItemCameraTransforms.TransformType type) {
     Matrix4f matrix;
     if (DefaultTransformations.blockTransforms.containsKey(type)) {
       matrix = DefaultTransformations.blockTransforms.get(type).getMatrix();

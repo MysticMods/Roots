@@ -5,7 +5,7 @@ import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -63,13 +63,13 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     this.playerId = compound.getUniqueId("playerId");
     this.modifiers = new ModifierSnapshot(compound.getIntArray("modifiers"));
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setUniqueId("playerId", playerId);
     compound.setIntArray("modifiers", this.modifiers.toArray());
   }

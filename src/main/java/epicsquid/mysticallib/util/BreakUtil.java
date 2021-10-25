@@ -1,23 +1,22 @@
 package epicsquid.mysticallib.util;
 
 
-import epicsquid.mysticallib.MysticalLib;
 import epicsquid.mysticallib.item.tool.IBlacklistingTool;
 import epicsquid.mysticallib.item.tool.ISizedTool;
 import epicsquid.mysticallib.item.tool.ItemPloughBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.client.network.play.ClientPlayNetHandler;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.client.CPacketPlayerDigging;
-import net.minecraft.network.play.server.SPacketBlockChange;
+import net.minecraft.network.play.client.CPlayerDiggingPacket;
+import net.minecraft.network.play.server.SChangeBlockPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -27,7 +26,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.reflect.internal.Mirrors;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,9 +34,9 @@ import java.util.Set;
 // Concept based partially on ToolFunctions.java by astradamus from MIT Licensed Practical Tools
 // https://github.com/astradamus/PracticalTools/blob/master/src/main/java/com/alexanderstrada/practicaltools/ToolFunctions.java
 public class BreakUtil {
-  public static Set<BlockPos> nearbyBlocks(ItemStack itemstack, BlockPos pos, EntityPlayer player) {
+  public static Set<BlockPos> nearbyBlocks(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
     final World world = player.world;
-    final IBlockState state = world.getBlockState(pos);
+    final BlockState state = world.getBlockState(pos);
     final Item tool = itemstack.getItem();
     final Block block = state.getBlock();
     final String harvestTool = block.getHarvestTool(state);
@@ -78,7 +76,7 @@ public class BreakUtil {
       width = (width - 1) / 2;
     }
 
-    EnumFacing facing = ray.sideHit;
+    Direction facing = ray.sideHit;
     Set<BlockPos> result = new HashSet<>();
 
     for (int x = -width; x < width + 1; x++) {
@@ -103,7 +101,7 @@ public class BreakUtil {
             continue;
         }
 
-        final IBlockState potentialState = world.getBlockState(potential);
+        final BlockState potentialState = world.getBlockState(potential);
         final Material material = potentialState.getMaterial();
         final Block potentialBlock = potentialState.getBlock();
         if (blacklist.isBlacklisted(potentialBlock)) {
@@ -128,19 +126,19 @@ public class BreakUtil {
     return result;
   }
 
-  public static boolean harvestBlock(World world, BlockPos pos, EntityPlayer player) {
+  public static boolean harvestBlock(World world, BlockPos pos, PlayerEntity player) {
     if (world.isAirBlock(pos)) {
       return false;
     }
 
     final ItemStack stack = player.getHeldItemMainhand();
-    final IBlockState state = world.getBlockState(pos);
+    final BlockState state = world.getBlockState(pos);
     final Block block = state.getBlock();
     if (!ForgeHooks.canToolHarvestBlock(world, pos, stack) || !ForgeHooks.canHarvestBlock(state.getBlock(), player, world, pos)) {
       return false;
     }
 
-    final EntityPlayerMP playerMP = (player instanceof EntityPlayerMP) ? (EntityPlayerMP) player : null;
+    final ServerPlayerEntity playerMP = (player instanceof ServerPlayerEntity) ? (ServerPlayerEntity) player : null;
     final boolean creative = player.isCreative();
     final GameType type = (playerMP == null) ? null : playerMP.interactionManager.getGameType();
 
@@ -165,7 +163,7 @@ public class BreakUtil {
           }
         }
       }
-      playerMP.connection.sendPacket(new SPacketBlockChange(world, pos));
+      playerMP.connection.sendPacket(new SChangeBlockPacket(world, pos));
     } else {
       clientSideRemoval(state, world, pos, player);
     }
@@ -173,21 +171,21 @@ public class BreakUtil {
   }
 
   @SideOnly(Side.CLIENT)
-  private static void clientSideRemoval(IBlockState state, World world, BlockPos pos, EntityPlayer player) {
+  private static void clientSideRemoval(BlockState state, World world, BlockPos pos, PlayerEntity player) {
     final Block block = state.getBlock();
     if (block.removedByPlayer(state, world, pos, player, !player.isCreative())) {
       block.onPlayerDestroy(world, pos, state);
     }
     final Minecraft mc = Minecraft.getMinecraft();
-    final EnumFacing side = mc.objectMouseOver.sideHit;
-    final CPacketPlayerDigging packet = new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, pos, side);
-    final NetHandlerPlayClient connection = mc.getConnection();
+    final Direction side = mc.objectMouseOver.sideHit;
+    final CPlayerDiggingPacket packet = new CPlayerDiggingPacket(Action.START_DESTROY_BLOCK, pos, side);
+    final ClientPlayNetHandler connection = mc.getConnection();
     if (connection != null) {
       connection.sendPacket(packet);
     }
   }
 
-  public static RayTraceResult rayTrace(World world, EntityPlayer player) {
+  public static RayTraceResult rayTrace(World world, PlayerEntity player) {
     Vec3d eyes = player.getPositionEyes(1f);
     float yawCos = MathHelper.cos(-player.rotationYaw * (float) (Math.PI / 180F) - (float) Math.PI);
     float yawSin = MathHelper.sin(-player.rotationYaw * (float) (Math.PI / 180F) - (float) Math.PI);
@@ -197,7 +195,7 @@ public class BreakUtil {
     float f1 = yawSin * pitchCos;
     float f2 = yawCos * pitchCos;
 
-    double reach = player.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue();
+    double reach = player.getEntityAttribute(PlayerEntity.REACH_DISTANCE).getAttributeValue();
     Vec3d reachVec = eyes.add((double) f1 * reach, (double) pitchSin * reach, (double) f2 * reach);
     return world.rayTraceBlocks(eyes, reachVec, false, true, true);
   }

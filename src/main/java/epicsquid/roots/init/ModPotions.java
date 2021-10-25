@@ -2,23 +2,23 @@ package epicsquid.roots.init;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.potion.*;
-import net.minecraft.potion.Potion;
+import net.minecraft.potion.Effect;
 import net.minecraftforge.event.RegistryEvent;
 
 public class ModPotions {
-  public static Potion storm_cloud;
-  public static Potion geas;
-  public static Potion time_stop;
-  public static Potion nondetection;
-  public static Potion petal_shell;
-  public static Potion danger_sense;
-  public static Potion animal_sense;
+  public static Effect storm_cloud;
+  public static Effect geas;
+  public static Effect time_stop;
+  public static Effect nondetection;
+  public static Effect petal_shell;
+  public static Effect danger_sense;
+  public static Effect animal_sense;
   public static PotionReach reach;
   public static PotionBleeding bleeding;
   public static PotionAquaBubble aqua_bubble;
   public static PotionSlowFall slow_fall;
 
-  public static void registerPotions(RegistryEvent.Register<Potion> event) {
+  public static void registerPotions(RegistryEvent.Register<Effect> event) {
     event.getRegistry().register(storm_cloud = new PotionStormCloud().setRegistryName(Roots.MODID, "storm_cloud"));
     event.getRegistry().register(geas = new PotionGeas().setRegistryName(Roots.MODID, "geas"));
     event.getRegistry().register(time_stop = new PotionTimeStop().setRegistryName(Roots.MODID, "time_stop"));

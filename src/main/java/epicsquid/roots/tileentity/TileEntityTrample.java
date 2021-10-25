@@ -1,8 +1,8 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -21,7 +21,7 @@ public class TileEntityTrample extends TileBase {
   }
 
   @Override
-  public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nullable EntityPlayer player) {
+  public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable PlayerEntity player) {
     super.breakBlock(world, pos, state, player);
 
     onChunkUnload();

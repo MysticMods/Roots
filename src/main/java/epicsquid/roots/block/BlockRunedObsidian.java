@@ -3,8 +3,11 @@ package epicsquid.roots.block;
 import epicsquid.mysticallib.block.BlockBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
+import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
@@ -16,8 +19,8 @@ public class BlockRunedObsidian extends BlockBase {
     setResistance(5000f);
   }
 
-  public static boolean checkEntityBlocked(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
-    if (entity instanceof net.minecraft.entity.boss.EntityDragon || (entity instanceof net.minecraft.entity.boss.EntityWither) || (entity instanceof net.minecraft.entity.projectile.EntityWitherSkull)) {
+  public static boolean checkEntityBlocked(BlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+    if (entity instanceof EnderDragonEntity || (entity instanceof WitherEntity) || (entity instanceof WitherSkullEntity)) {
       return true;
     }
 
@@ -25,7 +28,7 @@ public class BlockRunedObsidian extends BlockBase {
   }
 
   @Override
-  public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+  public boolean canEntityDestroy(BlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
     if (BlockRunedObsidian.checkEntityBlocked(state, world, pos, entity)) {
       return false;
     }

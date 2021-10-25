@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -16,10 +16,10 @@ import net.minecraft.world.World;
 
 public class StructureData implements IGeneratable {
   public Map<Vec3i, String> data = new HashMap<>();
-  public Map<String, IBlockState> blocks = new HashMap<>();
+  public Map<String, BlockState> blocks = new HashMap<>();
   private int width = 0, height = 0, length = 0;
 
-  public void addBlock(@Nonnull String string, @Nonnull IBlockState state) {
+  public void addBlock(@Nonnull String string, @Nonnull BlockState state) {
     blocks.put(string, state);
   }
 
@@ -85,11 +85,11 @@ public class StructureData implements IGeneratable {
     }
   }
 
-  private void placeBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Rotation rotation, @Nonnull Mirror mirror,
-      boolean replaceWithAir, boolean force) {
-    IBlockState at = world.getBlockState(pos);
+  private void placeBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Rotation rotation, @Nonnull Mirror mirror,
+                          boolean replaceWithAir, boolean force) {
+    BlockState at = world.getBlockState(pos);
     if (world.isAirBlock(pos) || at.getBlock().isReplaceable(world, pos) || force) {
-      if (state.getBlock() != Blocks.AIR || state.getBlock() == Blocks.AIR && replaceWithAir) {
+      if (state.getBlock() != Blocks.AIR || state.getBlock() == net.minecraft.block.Blocks.AIR && replaceWithAir) {
         world.setBlockState(pos, state.withRotation(rotation).withMirror(mirror));
       }
     }

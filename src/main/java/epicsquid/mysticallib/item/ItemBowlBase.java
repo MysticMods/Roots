@@ -3,11 +3,11 @@ package epicsquid.mysticallib.item;
 import epicsquid.mysticallib.model.CustomModelItem;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.util.ItemUtil;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -47,13 +47,13 @@ public class ItemBowlBase extends ItemFoodBase {
   }
 
   @Override
-  public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
+  public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entity) {
     ItemStack result = super.onItemUseFinish(stack, world, entity);
     ItemStack returned = new ItemStack(Items.BOWL);
     if (result.isEmpty()) {
       return returned;
-    } else if (entity instanceof EntityPlayer && !world.isRemote) {
-      EntityPlayer player = (EntityPlayer) entity;
+    } else if (entity instanceof PlayerEntity && !world.isRemote) {
+      PlayerEntity player = (PlayerEntity) entity;
       if (!player.addItemStackToInventory(returned)) {
         ItemUtil.spawnItem(world, player.getPosition(), returned);
       }

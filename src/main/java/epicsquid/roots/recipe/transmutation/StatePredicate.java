@@ -1,22 +1,22 @@
 package epicsquid.roots.recipe.transmutation;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collections;
 import java.util.List;
 
 public class StatePredicate implements BlockStatePredicate {
-  protected IBlockState state;
+  protected BlockState state;
   protected ItemStack stack;
 
-  public StatePredicate(IBlockState state) {
+  public StatePredicate(BlockState state) {
     this.state = state;
     this.stack = new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
   }
 
   @Override
-  public List<IBlockState> matchingStates() {
+  public List<BlockState> matchingStates() {
     return Collections.singletonList(state);
   }
 
@@ -26,7 +26,7 @@ public class StatePredicate implements BlockStatePredicate {
   }
 
   @Override
-  public boolean test(IBlockState state) {
+  public boolean test(BlockState state) {
     return state.getBlock() == this.state.getBlock();
   }
 }

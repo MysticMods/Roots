@@ -1,7 +1,11 @@
 package epicsquid.roots.container;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.*;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.IContainerListener;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
@@ -11,11 +15,11 @@ import java.util.List;
 
 public class FakeContainer extends Container {
   private final static NonNullList<ItemStack> INVENTORY = NonNullList.create();
-  private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
-  private final static Slot SLOT = new Slot(emptyInventory, 0, 0, 0);
+  private static IInventory emptyInventory = new Inventory("[Null]", true, 0);
+  private final static net.minecraft.inventory.container.Slot SLOT = new net.minecraft.inventory.container.Slot(emptyInventory, 0, 0, 0);
 
   @Override
-  public boolean canInteractWith(EntityPlayer entityPlayer) {
+  public boolean canInteractWith(PlayerEntity entityPlayer) {
     return true;
   }
 
@@ -24,7 +28,7 @@ public class FakeContainer extends Container {
   }
 
   @Override
-  protected Slot addSlotToContainer(Slot slotIn) {
+  protected net.minecraft.inventory.container.Slot addSlotToContainer(net.minecraft.inventory.container.Slot slotIn) {
     return slotIn;
   }
 
@@ -38,7 +42,7 @@ public class FakeContainer extends Container {
   }
 
   @Override
-  public void removeListener(IContainerListener listener) {
+  public void removeListener(net.minecraft.inventory.container.IContainerListener listener) {
   }
 
   @Override
@@ -46,7 +50,7 @@ public class FakeContainer extends Container {
   }
 
   @Override
-  public boolean enchantItem(EntityPlayer playerIn, int id) {
+  public boolean enchantItem(PlayerEntity playerIn, int id) {
     return false;
   }
 
@@ -57,31 +61,31 @@ public class FakeContainer extends Container {
   }
 
   @Override
-  public Slot getSlot(int slotId) {
+  public net.minecraft.inventory.container.Slot getSlot(int slotId) {
     return SLOT;
   }
 
   @Override
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     return ItemStack.EMPTY;
   }
 
   @Override
-  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
     return ItemStack.EMPTY;
   }
 
   @Override
-  public boolean canMergeSlot(ItemStack stack, Slot slotIn) {
+  public boolean canMergeSlot(ItemStack stack, net.minecraft.inventory.container.Slot slotIn) {
     return false;
   }
 
   @Override
-  public void onContainerClosed(EntityPlayer playerIn) {
+  public void onContainerClosed(PlayerEntity playerIn) {
   }
 
   @Override
-  protected void clearContainer(EntityPlayer playerIn, World worldIn, IInventory inventoryIn) {
+  protected void clearContainer(PlayerEntity playerIn, World worldIn, IInventory inventoryIn) {
   }
 
   @Override
@@ -101,12 +105,12 @@ public class FakeContainer extends Container {
   }
 
   @Override
-  public boolean getCanCraft(EntityPlayer player) {
+  public boolean getCanCraft(PlayerEntity player) {
     return false;
   }
 
   @Override
-  public void setCanCraft(EntityPlayer player, boolean canCraft) {
+  public void setCanCraft(PlayerEntity player, boolean canCraft) {
   }
 
   @Override
@@ -119,11 +123,11 @@ public class FakeContainer extends Container {
   }
 
   @Override
-  public boolean canDragIntoSlot(Slot slotIn) {
+  public boolean canDragIntoSlot(net.minecraft.inventory.container.Slot slotIn) {
     return false;
   }
 
   @Override
-  protected void slotChangedCraftingGrid(World p_192389_1_, EntityPlayer p_192389_2_, InventoryCrafting p_192389_3_, InventoryCraftResult p_192389_4_) {
+  protected void slotChangedCraftingGrid(World p_192389_1_, PlayerEntity p_192389_2_, CraftingInventory p_192389_3_, CraftResultInventory p_192389_4_) {
   }
 }

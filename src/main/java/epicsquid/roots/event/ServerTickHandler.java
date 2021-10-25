@@ -2,7 +2,7 @@ package epicsquid.roots.event;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityBoost;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.server.management.PlayerList;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -28,7 +28,7 @@ public class ServerTickHandler {
       PlayerList list = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
       Set<UUID> toCull = new HashSet<>();
       for (Map.Entry<UUID, EntityBoost.PlayerTracker> entry : players.entrySet()) {
-        EntityPlayerMP player = list.getPlayerByUUID(entry.getKey());
+        ServerPlayerEntity player = list.getPlayerByUUID(entry.getKey());
         //noinspection ConstantConditions
         if (player == null) {
           toCull.add(entry.getKey());

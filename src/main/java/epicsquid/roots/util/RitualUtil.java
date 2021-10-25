@@ -6,23 +6,18 @@ import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.config.RunedWoodConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityCatalystPlate;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public class RitualUtil {
 
@@ -60,7 +55,7 @@ public class RitualUtil {
           yRadius > 0 ? rand.nextInt(yRadius * 2) : 0,
           zRadius > 0 ? rand.nextInt(zRadius * 2) : 0);
 
-      IBlockState state = world.getBlockState(pos);
+      BlockState state = world.getBlockState(pos);
 
       if (blocks.contains(state.getBlock())) {
         return pos;
@@ -83,7 +78,7 @@ public class RitualUtil {
    * @return True if at least one side is touching a water source block
    */
   public static boolean isAdjacentToWater(World world, BlockPos pos) {
-    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+    for (Direction facing : Direction.HORIZONTALS) {
       Block block = world.getBlockState(pos.offset(facing)).getBlock();
       if (GeneralConfig.getWaterBlocks().contains(block)) {
         return true;
@@ -106,7 +101,7 @@ public class RitualUtil {
         continue;
       }
 
-      IBlockState state = world.getBlockState(p);
+      BlockState state = world.getBlockState(p);
       if (state.getBlock() == ModBlocks.catalyst_plate || state.getBlock() == ModBlocks.reinforced_catalyst_plate) {
         TileEntity te = world.getTileEntity(p);
         if (te instanceof TileEntityCatalystPlate) {
@@ -147,10 +142,10 @@ public class RitualUtil {
     BlockPos min = min(bounds);
 
     for (BlockPos p : BlockPos.getAllInBoxMutable(max, min)) {
-      IBlockState state = world.getBlockState(p);
+      BlockState state = world.getBlockState(p);
       if (pillar.matchesTop(state)) {
         BlockPos start = p.toImmutable().down();
-        IBlockState startState;
+        BlockState startState;
         int column = 1;
 
         while (start.getY() > (p.getY() - 10)) {
@@ -181,9 +176,9 @@ public class RitualUtil {
   }
 
   public interface StandingPillar {
-    boolean matchesBase(IBlockState state);
+    boolean matchesBase(BlockState state);
 
-    boolean matchesTop(IBlockState state);
+    boolean matchesTop(BlockState state);
   }
 
   public static class Runestone implements StandingPillar {
@@ -210,12 +205,12 @@ public class RitualUtil {
     }
 
     @Override
-    public boolean matchesBase(IBlockState state) {
+    public boolean matchesBase(BlockState state) {
       return bases.contains(state.getBlock());
     }
 
     @Override
-    public boolean matchesTop(IBlockState state) {
+    public boolean matchesTop(BlockState state) {
       return toppers.contains(state.getBlock());
     }
   }
@@ -239,7 +234,7 @@ public class RitualUtil {
       return this.config.getItemStack();
     }
 
-    public IBlockState getBase() {
+    public BlockState getBase() {
       return this.config.getPillarState();
     }
 
@@ -248,17 +243,17 @@ public class RitualUtil {
     }
 
     @Override
-    public boolean matchesBase(IBlockState state) {
+    public boolean matchesBase(BlockState state) {
       return this.config.getPillarMatcher().test(state);
     }
 
     @Override
-    public boolean matchesTop(IBlockState state) {
+    public boolean matchesTop(BlockState state) {
       return this.config.getCapstoneMatcher().test(state);
     }
 
     @Nullable
-    public static IBlockState matchesAny(IBlockState state) {
+    public static BlockState matchesAny(BlockState state) {
       for (RunedWoodType type : RunedWoodType.values()) {
         if (type.matchesBase(state)) {
           return type.getTopper().getDefaultState();

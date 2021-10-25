@@ -4,18 +4,15 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemBlockMultiblock extends ItemBlock {
+public class ItemBlockMultiblock extends BlockItem {
 
   private int offset;
 
@@ -30,9 +27,9 @@ public class ItemBlockMultiblock extends ItemBlock {
 
   @Override
   @Nonnull
-  public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand,
-      @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
-    IBlockState iblockstate = worldIn.getBlockState(pos);
+  public ActionResultType onItemUse(@Nonnull PlayerEntity player, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Hand hand,
+                                    @Nonnull Direction facing, float hitX, float hitY, float hitZ) {
+    BlockState iblockstate = worldIn.getBlockState(pos);
     Block block = iblockstate.getBlock();
 
     if (!block.isReplaceable(worldIn, pos)) {
@@ -43,7 +40,7 @@ public class ItemBlockMultiblock extends ItemBlock {
 
     if (!itemstack.isEmpty() && player.canPlayerEdit(pos, facing, itemstack) && worldIn.mayPlace(this.block, pos, false, facing, null)) {
       int i = this.getMetadata(itemstack.getMetadata());
-      IBlockState iblockstate1 = this.block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, i, player, hand);
+      BlockState iblockstate1 = this.block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, i, player, hand);
 
       if (placeBlockAt(itemstack, player, worldIn, pos, facing, hitX, hitY, hitZ, iblockstate1)) {
         iblockstate1 = worldIn.getBlockState(pos);
@@ -52,9 +49,9 @@ public class ItemBlockMultiblock extends ItemBlock {
         itemstack.shrink(1);
       }
 
-      return EnumActionResult.SUCCESS;
+      return ActionResultType.SUCCESS;
     } else {
-      return EnumActionResult.FAIL;
+      return ActionResultType.FAIL;
     }
   }
 }

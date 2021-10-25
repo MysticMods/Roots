@@ -17,15 +17,15 @@ import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.util.SpellUtil;
 import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -57,7 +57,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     return slot;
   }
 
-  public void updateInSlot(EntityPlayer player) {
+  public void updateInSlot(PlayerEntity player) {
     if (SpellUtil.isStaff(inventory.getStackInSlot(0))) {
       ItemStack staff = inventory.getStackInSlot(0);
       SpellUtil.updateModifiers(staff, player);
@@ -74,7 +74,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public CompoundNBT writeToNBT(CompoundNBT tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("slot", slot);
@@ -82,29 +82,29 @@ public class TileEntityImposer extends TileBase implements ITickable {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound tag) {
+  public void readFromNBT(CompoundNBT tag) {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
     slot = tag.getInteger("slot");
   }
 
   @Override
-  public NBTTagCompound getUpdateTag() {
-    return writeToNBT(new NBTTagCompound());
+  public CompoundNBT getUpdateTag() {
+    return writeToNBT(new CompoundNBT());
   }
 
   @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
+  public SUpdateTileEntityPacket getUpdatePacket() {
+    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
     readFromNBT(pkt.getNbtCompound());
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty() && heldItem.getItem() == ModItems.staff) {
       if (inventory.getStackInSlot(0).isEmpty()) {
@@ -131,7 +131,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
         }
       }
       return true;
-    } else if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
+    } else if (heldItem.isEmpty() && !world.isRemote && hand == Hand.MAIN_HAND) {
       for (int i = 0; i < inventory.getSlots(); i++) {
         if (this.dropItemInInventory(inventory, i)) {
           return true;
@@ -142,7 +142,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
   }
 
   @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
@@ -188,8 +188,8 @@ public class TileEntityImposer extends TileBase implements ITickable {
       storage.saveToStack();
       markDirty();
       updatePacketViaState();
-      EntityPlayer player = container.getPlayer();
-      Advancements.MODIFIER_TRIGGER.trigger((EntityPlayerMP) player, modifier.getModifier().getCore());
+      PlayerEntity player = container.getPlayer();
+      Advancements.MODIFIER_TRIGGER.trigger((ServerPlayerEntity) player, modifier.getModifier().getCore());
       SpellLibraryData data = SpellLibraryRegistry.getData(player);
       StaffSpellInfo info = storage.getSpellInSlot(slot);
       if (info == null) {

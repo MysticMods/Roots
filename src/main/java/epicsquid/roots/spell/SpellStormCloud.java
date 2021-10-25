@@ -7,16 +7,15 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
@@ -67,19 +66,19 @@ public class SpellStormCloud extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(ModItems.dewgonia),
-        new ItemStack(Items.WATER_BUCKET),
+        new ItemStack(net.minecraft.item.Items.WATER_BUCKET),
         new OreIngredient("sugarcane"),
         new ItemStack(Items.CLAY_BALL),
-        new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, BlockFlower.EnumFlowerType.BLUE_ORCHID.getMeta())
+        new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, FlowerBlock.EnumFlowerType.BLUE_ORCHID.getMeta())
     );
     setCastSound(ModSounds.Spells.STORM_CLOUD);
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     World world = player.world;
     if (!world.isRemote) {
-      player.addPotionEffect(new PotionEffect(ModPotions.storm_cloud, duration, 0, false, false));
+      player.addPotionEffect(new EffectInstance(ModPotions.storm_cloud, duration, 0, false, false));
       player.getEntityData().setIntArray(getCachedName(), info.toArray());
     }
     return true;

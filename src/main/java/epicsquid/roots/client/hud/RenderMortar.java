@@ -1,11 +1,10 @@
 package epicsquid.roots.client.hud;
 
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.tileentity.TileEntityMortar;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,7 +22,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class RenderMortar {
-  public static void render(Minecraft mc, BlockPos pos, IBlockState state, RenderGameOverlayEvent.Post event) {
+  public static void render(Minecraft mc, BlockPos pos, BlockState state, RenderGameOverlayEvent.Post event) {
     World world = mc.world;
 
     if (!(world.getTileEntity(pos) instanceof TileEntityMortar)) return;

@@ -12,13 +12,12 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -57,7 +56,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     return ((ItemPouch) pouch.getItem()).getType();
   }
 
-  public static double getHerbQuantity(EntityPlayer player, ItemStack pouch, Herb herb) {
+  public static double getHerbQuantity(PlayerEntity player, ItemStack pouch, Herb herb) {
     if (player.world.isRemote) {
       return 0;
     }
@@ -77,17 +76,17 @@ public class ItemPouch extends ItemBase implements IItemPouch {
 
   @Override
   @Nonnull
-  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+  public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
     ItemStack stack = player.getHeldItem(hand);
     if (!world.isRemote) {
       player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
     }
-    return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    return new ActionResult<>(ActionResultType.SUCCESS, stack);
   }
 
   private static ItemStack createData(ItemStack stack, Herb herb, double quantity) {
     if (!stack.hasTagCompound()) {
-      stack.setTagCompound(new NBTTagCompound());
+      stack.setTagCompound(new CompoundNBT());
     }
     stack.getTagCompound().setDouble(herb.getName(), quantity);
     return stack;
@@ -102,7 +101,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     return 0.0;
   }
 
-  public static double useQuantity(EntityPlayer player, ItemStack stack, Herb herb, double quantity) {
+  public static double useQuantity(PlayerEntity player, ItemStack stack, Herb herb, double quantity) {
     if (player.world.isRemote) {
       return 0;
     }
@@ -126,7 +125,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     return temp;
   }
 
-  private static boolean addHerbToNbt(EntityPlayer player, ItemStack pouch, Herb herb) {
+  private static boolean addHerbToNbt(PlayerEntity player, ItemStack pouch, Herb herb) {
     if (player.world.isRemote) {
       return false;
     }
@@ -161,10 +160,10 @@ public class ItemPouch extends ItemBase implements IItemPouch {
       tooltip.add(TextFormatting.LIGHT_PURPLE + I18n.format("roots.tooltip.refill"));
     }
 
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
-    EnumDyeColor color = this == ModItems.fey_pouch ? EnumDyeColor.BLUE : EnumDyeColor.BROWN;
+    CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
+    DyeColor color = this == ModItems.fey_pouch ? DyeColor.BLUE : DyeColor.BROWN;
     if (tag.hasKey("color", Constants.NBT.TAG_INT)) {
-      color = EnumDyeColor.byMetadata(tag.getInteger("color"));
+      color = DyeColor.byMetadata(tag.getInteger("color"));
     }
     tooltip.add("");
     tooltip.add(I18n.format("roots.tooltip.color", I18n.format(color.getTranslationKey())));
@@ -174,7 +173,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
 
   @Nullable
   @Override
-  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
 /*    if (Loader.isModLoaded("baubles")) {
       return BaublesHook.getInstance();
     }*/

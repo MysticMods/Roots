@@ -2,12 +2,10 @@ package epicsquid.roots.client;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
-import epicsquid.roots.client.gui.GuiLibrary;
-import epicsquid.roots.container.slots.SlotSpellInfo;
 import epicsquid.roots.network.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

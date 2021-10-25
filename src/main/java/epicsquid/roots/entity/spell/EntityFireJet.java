@@ -2,20 +2,19 @@ package epicsquid.roots.entity.spell;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModDamage;
-import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellWildfire;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -74,7 +73,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
       ParticleUtil.spawnParticleFiery(world, (float) posX + (float) motionX * 2.5f + offX, (float) posY + 1.62F + (float) motionY * 2.5f, (float) posZ + (float) motionZ * 2.5f + offZ, (float) motionX + 0.125f * (rand.nextFloat() - 0.5f), (float) motionY + 0.125f * (rand.nextFloat() - 0.5f), (float) motionZ + 0.125f * (rand.nextFloat() - 0.5f), color, 7.5f, 24);
     } else {
       if (this.playerId != null) {
-        EntityPlayer player = world.getPlayerEntityByUUID(this.playerId);
+        PlayerEntity player = world.getPlayerEntityByUUID(this.playerId);
         if (player != null) {
           Vec3d lookVec = player.getLookVec();
           this.posX = player.posX;
@@ -88,10 +87,10 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
             float vx = (float) lookVec.x * 3.0f;
             float vy = (float) lookVec.y * 3.0f;
             float vz = (float) lookVec.z * 3.0f;
-            List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX + vx * i - 1.5, posY + vy * i - 1.5, posZ + vz * i - 1.5, posX + vx * i + 1.5, posY + vy * i + 1.5, posZ + vz * i + 1.5));
+            List<LivingEntity> entities = world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX + vx * i - 1.5, posY + vy * i - 1.5, posZ + vz * i - 1.5, posX + vx * i + 1.5, posY + vy * i + 1.5, posZ + vz * i + 1.5));
             boolean hit = false;
-            for (EntityLivingBase entity : entities) {
-              if (entity != player && !(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+            for (LivingEntity entity : entities) {
+              if (entity != player && !(entity instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
                 if (modifiers != null) {
                   if (modifiers.has(SpellWildfire.PEACEFUL) && EntityUtil.isFriendly(entity, SpellWildfire.instance)) {
                     continue;
@@ -100,16 +99,16 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                   entity.setFire(instance.fire_duration);
                   entity.attackEntityFrom(ModDamage.fireDamageFrom(player), instance.damage);
                   if (modifiers.has(SpellWildfire.WEAKNESS)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, instance.weakness_duration, instance.weakness_amplifier));
+                    entity.addPotionEffect(new EffectInstance(Effects.WEAKNESS, instance.weakness_duration, instance.weakness_amplifier));
                   }
                   if (modifiers.has(SpellWildfire.SLOW)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, instance.slow_duration, instance.slow_amplifier));
+                    entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, instance.slow_duration, instance.slow_amplifier));
                   }
                   if (modifiers.has(SpellWildfire.LEVITATE)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, instance.levitate_duration, 0));
+                    entity.addPotionEffect(new EffectInstance(Effects.LEVITATION, instance.levitate_duration, 0));
                   }
                   if (modifiers.has(SpellWildfire.POISON)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.POISON, instance.poison_duration, instance.poison_amplifier));
+                    entity.addPotionEffect(new EffectInstance(Effects.POISON, instance.poison_duration, instance.poison_amplifier));
                   }
                   if (modifiers.has(SpellWildfire.ICICLES)) {
                     int count = instance.icicle_count;
@@ -149,7 +148,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
   }
 
   private void wildFire(BlockPos center) {
-    IBlockState state = world.getBlockState(center);
+    BlockState state = world.getBlockState(center);
     if (world.isAirBlock(center) || state.getBlock().isReplaceable(world, center)) {
       // TODO: Check down
       int x = 4;

@@ -1,10 +1,10 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.roots.init.ModItems;
-import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.DyeUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -18,7 +18,7 @@ public class DyeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRec
   }
 
   @Override
-  public boolean matches(InventoryCrafting inv, World worldIn) {
+  public boolean matches(CraftingInventory inv, World worldIn) {
     boolean foundPouch = false;
     boolean foundDye = false;
 
@@ -45,7 +45,7 @@ public class DyeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRec
   }
 
   @Override
-  public ItemStack getCraftingResult(InventoryCrafting inv) {
+  public ItemStack getCraftingResult(CraftingInventory inv) {
     ItemStack pouch = ItemStack.EMPTY;
     ItemStack dye = ItemStack.EMPTY;
 
@@ -71,9 +71,9 @@ public class DyeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRec
     }
 
     ItemStack result = pouch.copy();
-    NBTTagCompound tag = result.getTagCompound();
+    CompoundNBT tag = result.getTagCompound();
     if (tag == null) {
-      tag = new NBTTagCompound();
+      tag = new CompoundNBT();
       result.setTagCompound(tag);
     }
 

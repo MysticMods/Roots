@@ -6,10 +6,10 @@ import epicsquid.roots.block.itemblock.ItemBlockUnendingBowl;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -26,18 +26,18 @@ public class BlockUnendingBowl extends BlockTEBase {
   }
 
   @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Nonnull
   @Override
-  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
     return new AxisAlignedBB(0.125, 0, 0.125, 0.875, 0.3125, 0.875);
   }
 
@@ -50,12 +50,12 @@ public class BlockUnendingBowl extends BlockTEBase {
   @Override
   @Nonnull
   @SuppressWarnings("deprecation")
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, BlockState state, BlockPos pos, Direction face) {
     return BlockFaceShape.BOWL;
   }
 
   @Override
-  public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+  public void onBlockAdded(World worldIn, BlockPos pos, BlockState state) {
 /*    if (PetalApothecaryFiller.hasBotania()) {
       PetalApothecaryFiller.getAdjacentApothecary(worldIn, pos);
     }*/
@@ -63,7 +63,7 @@ public class BlockUnendingBowl extends BlockTEBase {
   }
 
   @Override
-  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+  public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand) {
     worldIn.scheduleUpdate(pos, this, tickRate(worldIn));
 /*    if (PetalApothecaryFiller.hasBotania()) {
       PetalApothecaryFiller.getAdjacentApothecary(worldIn, pos);

@@ -10,7 +10,7 @@ import epicsquid.roots.util.RenderUtil;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
@@ -31,7 +31,7 @@ public class TransmutationWrapper implements IRecipeWrapper {
     List<ItemStack> inputs = recipe.getStartPredicate().matchingItems();
     ItemStack output = ItemStack.EMPTY;
     if (recipe.getStack().isEmpty() && recipe.getState().isPresent()) {
-      IBlockState state = recipe.getState().get();
+      BlockState state = recipe.getState().get();
       output = new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
     } else if (!recipe.getStack().isEmpty()) {
       output = recipe.getStack();
@@ -50,12 +50,12 @@ public class TransmutationWrapper implements IRecipeWrapper {
     }
 
     ItemStack result = recipe.getStack();
-    IBlockState outputState = recipe.getState().orElse(null);
+    BlockState outputState = recipe.getState().orElse(null);
     WorldBlockStatePredicate condition = recipe.getCondition();
     BlockStatePredicate input = recipe.getStartPredicate();
 
-    IBlockState initial = timer.getCycledItem(input.matchingStates());
-    IBlockState cond = timer.getCycledItem(condition.matchingStates());
+    BlockState initial = timer.getCycledItem(input.matchingStates());
+    BlockState cond = timer.getCycledItem(condition.matchingStates());
     timer.onDraw();
     Minecraft mc = Minecraft.getMinecraft();
 

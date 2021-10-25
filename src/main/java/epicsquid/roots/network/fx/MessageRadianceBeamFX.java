@@ -6,14 +6,13 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRadiance;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -67,7 +66,7 @@ public class MessageRadianceBeamFX implements IMessage {
     @Override
     protected void handleMessage(final MessageRadianceBeamFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
-      EntityPlayer player = world.getPlayerEntityByUUID(message.id);
+      PlayerEntity player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         float distance = SpellRadiance.instance.distance;
         RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)), false, true, true);

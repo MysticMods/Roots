@@ -6,7 +6,7 @@ import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.storage.LibrarySpellStorage;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.Objects;
 
@@ -47,15 +47,15 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound result = super.serializeNBT();
+  public CompoundNBT serializeNBT() {
+    CompoundNBT result = super.serializeNBT();
     result.setTag("m", modifiers.serializeNBT());
     result.setBoolean("o", obtained);
     return result;
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
+  public void deserializeNBT(CompoundNBT nbt) {
     super.deserializeNBT(nbt);
     SpellBase spell = getSpell();
     if (spell != null) {
@@ -73,7 +73,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   @Override
   public ItemStack asStack() {
     ItemStack stack = new ItemStack(ModItems.spell_icon);
-    NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
+    CompoundNBT comp = ItemUtil.getOrCreateTag(stack);
     comp.setBoolean("library", true);
     LibrarySpellStorage storage = LibrarySpellStorage.fromStack(stack);
     Objects.requireNonNull(storage).addSpell(this);
@@ -91,7 +91,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
     }
   }
 
-  public static LibrarySpellInfo fromNBT(NBTTagCompound tag) {
+  public static LibrarySpellInfo fromNBT(CompoundNBT tag) {
     LibrarySpellInfo instance = new LibrarySpellInfo();
     instance.deserializeNBT(tag);
     return instance;

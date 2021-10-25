@@ -8,17 +8,16 @@ import epicsquid.mysticallib.model.CustomModelItem;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.types.OneTimeSupplier;
 import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.ToolItem;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemToolBase extends ItemTool implements IModeledObject, ICustomModeledObject {
+public class ItemToolBase extends ToolItem implements IModeledObject, ICustomModeledObject {
 
   private boolean hasCustomModel = false;
   protected Supplier<Ingredient> repairIngredient;

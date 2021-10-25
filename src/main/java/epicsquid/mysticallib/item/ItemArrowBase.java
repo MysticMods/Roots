@@ -5,17 +5,17 @@ import epicsquid.mysticallib.model.CustomModelItem;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityTippedArrow;
-import net.minecraft.item.ItemArrow;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemArrowBase extends ItemArrow implements IModeledObject, ICustomModeledObject {
+public class ItemArrowBase extends ArrowItem implements IModeledObject, ICustomModeledObject {
 
   private boolean hasCustomModel = false;
 
@@ -31,8 +31,8 @@ public class ItemArrowBase extends ItemArrow implements IModeledObject, ICustomM
   }
 
   @Override
-  public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
-    EntityTippedArrow entitytippedarrow = new EntityTippedArrow(worldIn, shooter);
+  public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
+    ArrowEntity entitytippedarrow = new ArrowEntity(worldIn, shooter);
     entitytippedarrow.setPotionEffect(stack);
     entitytippedarrow.setDamage(3.0D);
     return entitytippedarrow;

@@ -3,8 +3,8 @@ package epicsquid.roots.container.slots;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.world.data.SpellLibraryData;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -13,7 +13,7 @@ public class SlotClientLibraryInfo extends Slot implements ILibrarySlot {
   private final IInventory inventory;
 
   public SlotClientLibraryInfo(SpellLibraryData data, int index, int xPosition, int yPosition) {
-    this(new InventoryBasic("[Slot]", true, 1), index, xPosition, yPosition);
+    this(new Inventory("[Slot]", true, 1), index, xPosition, yPosition);
   }
 
   public SlotClientLibraryInfo(IInventory inventoryIn, int index, int xPosition, int yPosition) {

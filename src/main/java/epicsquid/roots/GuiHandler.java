@@ -15,18 +15,16 @@ import epicsquid.roots.tileentity.TileEntityImposer;
 import epicsquid.roots.util.PlayerSyncUtil;
 import epicsquid.roots.util.SpellUtil;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
@@ -40,7 +38,7 @@ public class GuiHandler implements IGuiHandler {
   public static final int LIBRARY_ID = 20;
 
   @Nullable
-  private static Supplier<ItemStack> getStaff(EntityPlayer player) {
+  private static Supplier<ItemStack> getStaff(PlayerEntity player) {
     ItemStack staff = player.getHeldItemMainhand();
     if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
       return player::getHeldItemMainhand;
@@ -67,7 +65,7 @@ public class GuiHandler implements IGuiHandler {
 
   @Nullable
   @Override
-  public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+  public Object getServerGuiElement(int id, PlayerEntity player, World world, int x, int y, int z) {
     switch (id) {
       case POUCH_ID:
         return new ContainerPouch(player, true);
@@ -95,7 +93,7 @@ public class GuiHandler implements IGuiHandler {
           PlayerSyncUtil.syncPlayer(player);
           return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
         } else {
-          player.sendStatusMessage(new TextComponentTranslation("roots.message.hold_staff").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)), true);
+          player.sendStatusMessage(new TranslationTextComponent("roots.message.hold_staff").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)), true);
           return new FakeContainer();
         }
     }
@@ -104,7 +102,7 @@ public class GuiHandler implements IGuiHandler {
 
   @Nullable
   @Override
-  public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+  public Object getClientGuiElement(int id, PlayerEntity player, World world, int x, int y, int z) {
     switch (id) {
       case POUCH_ID:
         return new GuiPouch(new ContainerPouch(player, false));

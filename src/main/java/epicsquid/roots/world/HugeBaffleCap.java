@@ -2,7 +2,7 @@ package epicsquid.roots.world;
 
 import epicsquid.mysticallib.world.StructureData;
 import epicsquid.roots.init.ModBlocks;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.world.World;

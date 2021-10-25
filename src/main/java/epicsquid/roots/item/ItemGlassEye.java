@@ -3,14 +3,14 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,24 +28,24 @@ public class ItemGlassEye extends ItemBase {
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
     ItemStack stack = playerIn.getHeldItem(handIn);
     if (!worldIn.isRemote) {
-      if (playerIn.getActivePotionEffect(MobEffects.NIGHT_VISION) != null) {
-        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+      if (playerIn.getActivePotionEffect(Effects.NIGHT_VISION) != null) {
+        return ActionResult.newResult(ActionResultType.SUCCESS, stack);
       }
-      playerIn.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 15 * 20, 0, false, false));
+      playerIn.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 15 * 20, 0, false, false));
 
       if (!playerIn.isCreative()) {
         stack.shrink(1);
       }
     }
-    return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+    return ActionResult.newResult(ActionResultType.SUCCESS, stack);
   }
 
   @Override
-  public EnumRarity getRarity(ItemStack stack) {
-    return EnumRarity.UNCOMMON;
+  public Rarity getRarity(ItemStack stack) {
+    return Rarity.UNCOMMON;
   }
 
   @Override

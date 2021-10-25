@@ -3,7 +3,7 @@ package epicsquid.roots.tileentity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 
 public class TileEntityImbuerRenderer extends TileEntityRenderer<TileEntityImbuer> {
 
@@ -11,7 +11,7 @@ public class TileEntityImbuerRenderer extends TileEntityRenderer<TileEntityImbue
   public void render(TileEntityImbuer tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!tei.inventory.getStackInSlot(1).isEmpty()) {
       GlStateManager.pushMatrix();
-      EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(1));
+      ItemEntity item = new ItemEntity(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(1));
       item.hoverStart = 0;
       GlStateManager.translate(x + 0.5, y + 0.3125, z + 0.5);
       GlStateManager.rotate(tei.angle, 0, 1.0f, 0);
@@ -20,7 +20,7 @@ public class TileEntityImbuerRenderer extends TileEntityRenderer<TileEntityImbue
     }
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       GlStateManager.pushMatrix();
-      EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(0));
+      ItemEntity item = new ItemEntity(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(0));
       item.hoverStart = 0;
       GlStateManager.translate(x + 0.5, y + 0.125, z);
       GlStateManager.rotate(90, 1.0f, 0, 0);

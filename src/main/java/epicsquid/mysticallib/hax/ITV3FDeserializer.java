@@ -2,6 +2,7 @@ package epicsquid.mysticallib.hax;
 
 import java.lang.reflect.Type;
 
+import net.minecraft.client.renderer.model.ItemTransformVec3f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.google.gson.JsonArray;
@@ -11,18 +12,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
-import net.minecraft.util.JsonUtils;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.math.MathHelper;
 
 @SuppressWarnings("deprecation")
-public class ITV3FDeserializer implements JsonDeserializer<ItemTransformVec3f> {
+public class ITV3FDeserializer implements JsonDeserializer<net.minecraft.client.renderer.model.ItemTransformVec3f> {
   private static final Vector3f ROTATION_DEFAULT = new Vector3f(0.0F, 0.0F, 0.0F);
   private static final Vector3f TRANSLATION_DEFAULT = new Vector3f(0.0F, 0.0F, 0.0F);
   private static final Vector3f SCALE_DEFAULT = new Vector3f(1.0F, 1.0F, 1.0F);
 
   @Override
-  public ItemTransformVec3f deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+  public net.minecraft.client.renderer.model.ItemTransformVec3f deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
       throws JsonParseException {
     JsonObject jsonobject = p_deserialize_1_.getAsJsonObject();
     Vector3f vector3f = this.parseVector3f(jsonobject, "rotation", ROTATION_DEFAULT);
@@ -42,7 +42,7 @@ public class ITV3FDeserializer implements JsonDeserializer<ItemTransformVec3f> {
     if (!jsonObject.has(key)) {
       return defaultValue;
     } else {
-      JsonArray jsonarray = JsonUtils.getJsonArray(jsonObject, key);
+      JsonArray jsonarray = JSONUtils.getJsonArray(jsonObject, key);
 
       if (jsonarray.size() != 3) {
         throw new JsonParseException("Expected 3 " + key + " values, found: " + jsonarray.size());
@@ -50,7 +50,7 @@ public class ITV3FDeserializer implements JsonDeserializer<ItemTransformVec3f> {
         float[] afloat = new float[3];
 
         for (int i = 0; i < afloat.length; ++i) {
-          afloat[i] = JsonUtils.getFloat(jsonarray.get(i), key + "[" + i + "]");
+          afloat[i] = JSONUtils.getFloat(jsonarray.get(i), key + "[" + i + "]");
         }
 
         return new Vector3f(afloat[0], afloat[1], afloat[2]);

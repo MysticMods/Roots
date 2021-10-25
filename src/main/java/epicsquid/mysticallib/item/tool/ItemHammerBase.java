@@ -1,19 +1,15 @@
 package epicsquid.mysticallib.item.tool;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import epicsquid.mysticallib.item.ItemPickaxeBase;
-import epicsquid.mysticallib.types.OneTimeSupplier;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.Set;
 import java.util.function.Supplier;
@@ -43,7 +39,7 @@ public abstract class ItemHammerBase extends ItemPickaxeBase implements IItemSiz
   }
 
   @Override
-  public float getDestroySpeed(ItemStack stack, IBlockState state) {
+  public float getDestroySpeed(ItemStack stack, BlockState state) {
     float destroy = getSizedDestroySpeed(stack, state);
     if (destroy != -999) {
       return destroy;
@@ -52,7 +48,7 @@ public abstract class ItemHammerBase extends ItemPickaxeBase implements IItemSiz
   }
 
   @Override
-  public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player) {
+  public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
     return onSizedBlockStartBreak(itemstack, pos, player);
   }
 }

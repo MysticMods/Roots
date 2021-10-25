@@ -5,11 +5,8 @@ import epicsquid.mysticallib.model.CustomModelItem;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.types.OneTimeSupplier;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemShears;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.item.ShearsItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +14,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.function.Supplier;
 
-public class ItemShearsBase extends ItemShears implements ICustomModeledObject, IModeledObject {
+public class ItemShearsBase extends ShearsItem implements ICustomModeledObject, IModeledObject {
 
   private boolean hasCustomModel;
   protected Supplier<Ingredient> repairIngredient;

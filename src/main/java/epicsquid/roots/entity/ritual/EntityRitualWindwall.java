@@ -5,7 +5,7 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualWindwall;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -62,8 +62,8 @@ public class EntityRitualWindwall extends EntityRitualBase {
       for (Entity e : entities) {
         if (EntityUtil.isHostile(e, RitualRegistry.ritual_windwall) && (Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2)) < ritual.distance) {
           if (!world.isRemote) {
-            if (e instanceof EntityLivingBase) {
-              ((EntityLivingBase) e).knockBack(this, ritual.knockback, posX - e.posX, posZ - e.posZ);
+            if (e instanceof LivingEntity) {
+              ((LivingEntity) e).knockBack(this, ritual.knockback, posX - e.posX, posZ - e.posZ);
             } else {
               knockBack(e, ritual.knockback, posX - e.posX, posZ - e.posZ);
             }

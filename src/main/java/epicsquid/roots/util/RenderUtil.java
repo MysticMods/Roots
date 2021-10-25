@@ -1,19 +1,19 @@
 package epicsquid.roots.util;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderUtil {
-  public static void drawEntityOnScreen(int posX, int posY, float scale, float mouseX, float mouseY, EntityLivingBase ent) {
+  public static void drawEntityOnScreen(int posX, int posY, float scale, float mouseX, float mouseY, LivingEntity ent) {
     if (ent.world == null) {
       ent.world = Minecraft.getMinecraft().world;
     }
@@ -38,7 +38,7 @@ public class RenderUtil {
     ent.rotationYawHead = ent.rotationYaw;
     ent.prevRotationYawHead = ent.rotationYaw;
     GlStateManager.translate(0.0F, 0.0F, 0.0F);
-    RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
+    EntityRendererManager rendermanager = Minecraft.getMinecraft().getRenderManager();
     rendermanager.setPlayerViewY(180.0F);
     rendermanager.setRenderShadow(false);
     rendermanager.renderEntity(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);
@@ -56,7 +56,7 @@ public class RenderUtil {
     GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
   }
 
-  public static void renderBlock(IBlockState block, float posX, float posY, float posZ, float rotation, float scale) {
+  public static void renderBlock(BlockState block, float posX, float posY, float posZ, float rotation, float scale) {
     GlStateManager.enableRescaleNormal();
     GlStateManager.pushMatrix();
     GlStateManager.rotate(-30, 0, 1, 0);
@@ -69,7 +69,7 @@ public class RenderUtil {
     GlStateManager.translate(0.5f, 0.5f, 0.5f);
     GlStateManager.rotate(rotation, 0, 1, 0);
     GlStateManager.translate(-0.5f, -0.5f, -0.5f);
-    Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+    Minecraft.getMinecraft().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
     Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(block, 1);
     GlStateManager.popMatrix();
     RenderHelper.disableStandardItemLighting();

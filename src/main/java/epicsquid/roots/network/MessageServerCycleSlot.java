@@ -4,9 +4,9 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
@@ -25,7 +25,7 @@ public class MessageServerCycleSlot implements IMessage {
   public static class MessageHolder extends ServerMessageHandler<MessageServerCycleSlot> {
     @Override
     protected void handleMessage(MessageServerCycleSlot message, MessageContext ctx) {
-      EntityPlayerMP player = ctx.getServerHandler().player;
+      ServerPlayerEntity player = ctx.getServerHandler().player;
       ItemStack stack = player.getHeldItemMainhand();
       ItemStack staff = ItemStack.EMPTY;
       if (stack.getItem() == ModItems.staff) {
@@ -42,7 +42,7 @@ public class MessageServerCycleSlot implements IMessage {
           ((ItemStaff) ModItems.staff).nextSlot(player.world, player, stack, capability);
         }
       } else {
-        player.sendStatusMessage(new TextComponentTranslation("roots.message.no_staff"), true);
+        player.sendStatusMessage(new TranslationTextComponent("roots.message.no_staff"), true);
       }
     }
   }

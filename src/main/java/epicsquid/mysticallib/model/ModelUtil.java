@@ -10,10 +10,10 @@ import epicsquid.mysticallib.model.parts.Segment;
 import epicsquid.mysticallib.struct.Vec2f;
 import epicsquid.mysticallib.struct.Vec4f;
 import epicsquid.mysticallib.util.MathUtil;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 
@@ -29,8 +29,8 @@ public class ModelUtil {
   public static boolean[] NO_CULL = new boolean[] { true, true, true, true, true, true };
 
   @Nonnull
-  public static BakedQuad makeCubeFace(@Nonnull VertexFormat format, @Nonnull EnumFacing side, double x, double y, double z, double w, double h, double l,
-      float u, float v, float uw, float vh, @Nonnull TextureAtlasSprite sprite, int tintIndex) {
+  public static BakedQuad makeCubeFace(@Nonnull VertexFormat format, @Nonnull Direction side, double x, double y, double z, double w, double h, double l,
+                                       float u, float v, float uw, float vh, @Nonnull TextureAtlasSprite sprite, int tintIndex) {
     switch (side) {
     case NORTH:
       return createQuad(format, x + w, y + h, z, x + w, y, z, x, y, z, x, y + h, z, u, v, uw, vh, new Vec3d(0, 0, -1), sprite, tintIndex);
@@ -54,8 +54,8 @@ public class ModelUtil {
   }
 
   @Nonnull
-  public static BakedQuad makeCubeFace(@Nonnull VertexFormat format, @Nonnull EnumFacing side, double x, double y, double z, double w, double h, double l,
-      float u, float v, float uw, float vh, @Nonnull TextureAtlasSprite sprite, @Nonnull Function<Vec3d, Vec3d> transform, int tintIndex) {
+  public static BakedQuad makeCubeFace(@Nonnull VertexFormat format, @Nonnull Direction side, double x, double y, double z, double w, double h, double l,
+                                       float u, float v, float uw, float vh, @Nonnull TextureAtlasSprite sprite, @Nonnull Function<Vec3d, Vec3d> transform, int tintIndex) {
     Vec3d[] vertices = new Vec3d[0];
     switch (side) {
     case NORTH:
@@ -100,12 +100,12 @@ public class ModelUtil {
           new Vec4f((float) MathUtil.nclamp(w * 16f - x * 16f, 16f), (float) MathUtil.nclamp(h * 16f - y * 16f, 16f), (float) w * 16f, (float) h * 16f),
           new Vec4f((float) (x * 16f), (float) MathUtil.nclamp(h * 16f - y * 16f, 16f), (float) w * 16f, (float) h * 16f) };
     }
-    return new Cube(makeCubeFace(format, EnumFacing.WEST, x, y, z, w, h, l, uv[0].x, uv[0].y, uv[0].z, uv[0].w, sprites[0], transform, tintIndex),
-        makeCubeFace(format, EnumFacing.EAST, x, y, z, w, h, l, uv[1].x, uv[1].y, uv[1].z, uv[1].w, sprites[1], transform, tintIndex),
-        makeCubeFace(format, EnumFacing.DOWN, x, y, z, w, h, l, uv[2].x, uv[2].y, uv[2].z, uv[2].w, sprites[2], transform, tintIndex),
-        makeCubeFace(format, EnumFacing.UP, x, y, z, w, h, l, uv[3].x, uv[3].y, uv[3].z, uv[3].w, sprites[3], transform, tintIndex),
-        makeCubeFace(format, EnumFacing.NORTH, x, y, z, w, h, l, uv[4].x, uv[4].y, uv[4].z, uv[4].w, sprites[4], transform, tintIndex),
-        makeCubeFace(format, EnumFacing.SOUTH, x, y, z, w, h, l, uv[5].x, uv[5].y, uv[5].z, uv[5].w, sprites[5], transform, tintIndex));
+    return new Cube(makeCubeFace(format, Direction.WEST, x, y, z, w, h, l, uv[0].x, uv[0].y, uv[0].z, uv[0].w, sprites[0], transform, tintIndex),
+        makeCubeFace(format, Direction.EAST, x, y, z, w, h, l, uv[1].x, uv[1].y, uv[1].z, uv[1].w, sprites[1], transform, tintIndex),
+        makeCubeFace(format, Direction.DOWN, x, y, z, w, h, l, uv[2].x, uv[2].y, uv[2].z, uv[2].w, sprites[2], transform, tintIndex),
+        makeCubeFace(format, Direction.UP, x, y, z, w, h, l, uv[3].x, uv[3].y, uv[3].z, uv[3].w, sprites[3], transform, tintIndex),
+        makeCubeFace(format, Direction.NORTH, x, y, z, w, h, l, uv[4].x, uv[4].y, uv[4].z, uv[4].w, sprites[4], transform, tintIndex),
+        makeCubeFace(format, Direction.SOUTH, x, y, z, w, h, l, uv[5].x, uv[5].y, uv[5].z, uv[5].w, sprites[5], transform, tintIndex));
   }
 
   @Nonnull
@@ -119,24 +119,24 @@ public class ModelUtil {
           new Vec4f((float) MathUtil.nclamp(w * 16f - x * 16f, 16f), (float) MathUtil.nclamp(h * 16f - y * 16f, 16f), w * 16f, h * 16f),
           new Vec4f((x * 16f), (float) MathUtil.nclamp(h * 16f - y * 16f, 16f), w * 16f, h * 16f) };
     }
-    return new Cube(makeCubeFace(format, EnumFacing.WEST, x, y, z, w, h, l, uv[0].x, uv[0].y, uv[0].z, uv[0].w, sprites[0], tintIndex),
-        makeCubeFace(format, EnumFacing.EAST, x, y, z, w, h, l, uv[1].x, uv[1].y, uv[1].z, uv[1].w, sprites[1], tintIndex),
-        makeCubeFace(format, EnumFacing.DOWN, x, y, z, w, h, l, uv[2].x, uv[2].y, uv[2].z, uv[2].w, sprites[2], tintIndex),
-        makeCubeFace(format, EnumFacing.UP, x, y, z, w, h, l, uv[3].x, uv[3].y, uv[3].z, uv[3].w, sprites[3], tintIndex),
-        makeCubeFace(format, EnumFacing.NORTH, x, y, z, w, h, l, uv[4].x, uv[4].y, uv[4].z, uv[4].w, sprites[4], tintIndex),
-        makeCubeFace(format, EnumFacing.SOUTH, x, y, z, w, h, l, uv[5].x, uv[5].y, uv[5].z, uv[5].w, sprites[5], tintIndex));
+    return new Cube(makeCubeFace(format, Direction.WEST, x, y, z, w, h, l, uv[0].x, uv[0].y, uv[0].z, uv[0].w, sprites[0], tintIndex),
+        makeCubeFace(format, Direction.EAST, x, y, z, w, h, l, uv[1].x, uv[1].y, uv[1].z, uv[1].w, sprites[1], tintIndex),
+        makeCubeFace(format, Direction.DOWN, x, y, z, w, h, l, uv[2].x, uv[2].y, uv[2].z, uv[2].w, sprites[2], tintIndex),
+        makeCubeFace(format, Direction.UP, x, y, z, w, h, l, uv[3].x, uv[3].y, uv[3].z, uv[3].w, sprites[3], tintIndex),
+        makeCubeFace(format, Direction.NORTH, x, y, z, w, h, l, uv[4].x, uv[4].y, uv[4].z, uv[4].w, sprites[4], tintIndex),
+        makeCubeFace(format, Direction.SOUTH, x, y, z, w, h, l, uv[5].x, uv[5].y, uv[5].z, uv[5].w, sprites[5], tintIndex));
   }
 
   @Nonnull
   public static Segment makeSegm(@Nonnull VertexFormat format, double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3,
       double z3, double x4, double y4, double z4, double x5, double y5, double z5, double x6, double y6, double z6, double x7, double y7, double z7, double x8,
       double y8, double z8, boolean[] culling, @Nonnull TextureAtlasSprite[] sprites, @Nonnull Function<Vec3d, Vec3d> transform, int tintIndex) {
-    Vec2f[] west = getQuadUV(x1, y1, z1, x4, y4, z4, x8, y8, z8, x5, y5, z5, EnumFacing.WEST);
-    Vec2f[] east = getQuadUV(x3, y3, z3, x2, y2, z2, x6, y6, z6, x7, y7, z7, EnumFacing.EAST);
-    Vec2f[] down = getQuadUV(x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, EnumFacing.DOWN);
-    Vec2f[] up = getQuadUV(x6, y6, z6, x5, y5, z5, x8, y8, z8, x7, y7, z7, EnumFacing.UP);
-    Vec2f[] north = getQuadUV(x4, y4, z4, x3, y3, z3, x7, y7, z7, x8, y8, z8, EnumFacing.NORTH);
-    Vec2f[] south = getQuadUV(x2, y2, z2, x1, y1, z1, x5, y5, z5, x6, y6, z6, EnumFacing.SOUTH);
+    Vec2f[] west = getQuadUV(x1, y1, z1, x4, y4, z4, x8, y8, z8, x5, y5, z5, Direction.WEST);
+    Vec2f[] east = getQuadUV(x3, y3, z3, x2, y2, z2, x6, y6, z6, x7, y7, z7, Direction.EAST);
+    Vec2f[] down = getQuadUV(x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, Direction.DOWN);
+    Vec2f[] up = getQuadUV(x6, y6, z6, x5, y5, z5, x8, y8, z8, x7, y7, z7, Direction.UP);
+    Vec2f[] north = getQuadUV(x4, y4, z4, x3, y3, z3, x7, y7, z7, x8, y8, z8, Direction.NORTH);
+    Vec2f[] south = getQuadUV(x2, y2, z2, x1, y1, z1, x5, y5, z5, x6, y6, z6, Direction.SOUTH);
     Vec3d[] v = { new Vec3d(x1, y1, z1), new Vec3d(x2, y2, z2), new Vec3d(x3, y3, z3), new Vec3d(x4, y4, z4), new Vec3d(x5, y5, z5), new Vec3d(x6, y6, z6),
         new Vec3d(x7, y7, z7), new Vec3d(x8, y8, z8) };
     for (int i = 0; i < v.length; i++) {
@@ -178,12 +178,12 @@ public class ModelUtil {
   public static Segment makeSegm(@Nonnull VertexFormat format, double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3,
       double z3, double x4, double y4, double z4, double x5, double y5, double z5, double x6, double y6, double z6, double x7, double y7, double z7, double x8,
       double y8, double z8, boolean[] culling, @Nonnull TextureAtlasSprite[] sprites, int tintIndex) {
-    return new Segment(createQuad(format, x1, y1, z1, x4, y4, z4, x8, y8, z8, x5, y5, z5, EnumFacing.WEST, sprites[0], tintIndex),
-        createQuad(format, x3, y3, z3, x2, y2, z2, x6, y6, z6, x7, y7, z7, EnumFacing.EAST, sprites[1], tintIndex),
-        createQuad(format, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, EnumFacing.DOWN, sprites[2], tintIndex),
-        createQuad(format, x6, y6, z6, x5, y5, z5, x8, y8, z8, x7, y7, z7, EnumFacing.UP, sprites[3], tintIndex),
-        createQuad(format, x4, y4, z4, x3, y3, z3, x7, y7, z7, x8, y8, z8, EnumFacing.NORTH, sprites[4], tintIndex),
-        createQuad(format, x2, y2, z2, x1, y1, z1, x5, y5, z5, x6, y6, z6, EnumFacing.SOUTH, sprites[5], tintIndex), culling);
+    return new Segment(createQuad(format, x1, y1, z1, x4, y4, z4, x8, y8, z8, x5, y5, z5, Direction.WEST, sprites[0], tintIndex),
+        createQuad(format, x3, y3, z3, x2, y2, z2, x6, y6, z6, x7, y7, z7, Direction.EAST, sprites[1], tintIndex),
+        createQuad(format, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, Direction.DOWN, sprites[2], tintIndex),
+        createQuad(format, x6, y6, z6, x5, y5, z5, x8, y8, z8, x7, y7, z7, Direction.UP, sprites[3], tintIndex),
+        createQuad(format, x4, y4, z4, x3, y3, z3, x7, y7, z7, x8, y8, z8, Direction.NORTH, sprites[4], tintIndex),
+        createQuad(format, x2, y2, z2, x1, y1, z1, x5, y5, z5, x6, y6, z6, Direction.SOUTH, sprites[5], tintIndex), culling);
   }
 
   @Nonnull
@@ -210,12 +210,12 @@ public class ModelUtil {
   public static Segment makeSegmUp(@Nonnull VertexFormat format, double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3,
       double z3, double x4, double y4, double z4, double x5, double y5, double z5, double x6, double y6, double z6, double x7, double y7, double z7, double x8,
       double y8, double z8, boolean[] culling, @Nonnull TextureAtlasSprite[] sprites, int tintIndex) {
-    return new Segment(ModelUtil.createQuad(format, x8, y8, z8, x5, y5, z5, x1, y1, z1, x4, y4, z4, EnumFacing.WEST, sprites[0], tintIndex),
-        ModelUtil.createQuad(format, x6, y6, z6, x7, y7, z7, x3, y3, z3, x2, y2, z2, EnumFacing.EAST, sprites[1], tintIndex),
-        ModelUtil.createQuad(format, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, EnumFacing.DOWN, sprites[2], tintIndex),
-        ModelUtil.createQuad(format, x8, y8, z8, x7, y7, z7, x6, y6, z6, x5, y5, z5, EnumFacing.UP, sprites[3], tintIndex),
-        ModelUtil.createQuad(format, x7, y7, z7, x8, y8, z8, x4, y4, z4, x3, y3, z3, EnumFacing.NORTH, sprites[4], tintIndex),
-        ModelUtil.createQuad(format, x5, y5, z5, x6, y6, z6, x2, y2, z2, x1, y1, z1, EnumFacing.SOUTH, sprites[5], tintIndex), ModelUtil.NO_CULL);
+    return new Segment(ModelUtil.createQuad(format, x8, y8, z8, x5, y5, z5, x1, y1, z1, x4, y4, z4, Direction.WEST, sprites[0], tintIndex),
+        ModelUtil.createQuad(format, x6, y6, z6, x7, y7, z7, x3, y3, z3, x2, y2, z2, Direction.EAST, sprites[1], tintIndex),
+        ModelUtil.createQuad(format, x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4, Direction.DOWN, sprites[2], tintIndex),
+        ModelUtil.createQuad(format, x8, y8, z8, x7, y7, z7, x6, y6, z6, x5, y5, z5, Direction.UP, sprites[3], tintIndex),
+        ModelUtil.createQuad(format, x7, y7, z7, x8, y8, z8, x4, y4, z4, x3, y3, z3, Direction.NORTH, sprites[4], tintIndex),
+        ModelUtil.createQuad(format, x5, y5, z5, x6, y6, z6, x2, y2, z2, x1, y1, z1, Direction.SOUTH, sprites[5], tintIndex), ModelUtil.NO_CULL);
   }
 
   @Nonnull
@@ -228,7 +228,7 @@ public class ModelUtil {
   }
 
   @Nonnull
-  public static Vec2f getUVForPos(double x, double y, double z, @Nonnull EnumFacing face) {
+  public static Vec2f getUVForPos(double x, double y, double z, @Nonnull Direction face) {
     Vec2f uv = new Vec2f(0, 0);
     switch (face) {
     case DOWN:
@@ -257,7 +257,7 @@ public class ModelUtil {
 
   @Nonnull
   public static Vec2f[] getQuadUV(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3, double x4, double y4,
-      double z4, EnumFacing face) {
+      double z4, Direction face) {
     Vec2f uv1 = getUVForPos(x1, y1, z1, face);
     Vec2f uv2 = getUVForPos(x2, y2, z2, face);
     Vec2f uv3 = getUVForPos(x3, y3, z3, face);
@@ -287,7 +287,7 @@ public class ModelUtil {
 
   @Nonnull
   public static BakedQuad createQuad(@Nonnull VertexFormat format, double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3,
-      double z3, double x4, double y4, double z4, @Nonnull EnumFacing face, @Nonnull TextureAtlasSprite sprite, int tintIndex) {
+                                     double z3, double x4, double y4, double z4, @Nonnull Direction face, @Nonnull TextureAtlasSprite sprite, int tintIndex) {
     Vec3d normal = getNormal(x1, y1, z1, x2, y2, z2, x4, y4, z4);
     UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
     builder.setTexture(sprite);
@@ -349,12 +349,12 @@ public class ModelUtil {
           new Vec4f((16f - (float) w * 16f) - (float) x * 16f, (float) -y * 16f + (16f - (float) (h) * 16f), (float) w * 16f, (float) h * 16f),
           new Vec4f((float) x * 16f, (float) -y * 16f + (16f - (float) (h) * 16f), (float) w * 16f, (float) h * 16f), };
     }
-    return new Cube(makeCubeFace(format, EnumFacing.WEST, x, y, z, w, h, l, uv[0].x, uv[0].y, uv[0].z, uv[0].w, sprites[0], tintIndex),
-        makeCubeFace(format, EnumFacing.EAST, x, y, z, w, h, l, uv[1].x, uv[1].y, uv[1].z, uv[1].w, sprites[1], tintIndex),
-        makeCubeFace(format, EnumFacing.DOWN, x, y, z, w, h, l, uv[2].x, uv[2].y, uv[2].z, uv[2].w, sprites[2], tintIndex),
-        makeCubeFace(format, EnumFacing.UP, x, y, z, w, h, l, uv[3].x, uv[3].y, uv[3].z, uv[3].w, sprites[3], tintIndex),
-        makeCubeFace(format, EnumFacing.NORTH, x, y, z, w, h, l, uv[4].x, uv[4].y, uv[4].z, uv[4].w, sprites[4], tintIndex),
-        makeCubeFace(format, EnumFacing.SOUTH, x, y, z, w, h, l, uv[5].x, uv[5].y, uv[5].z, uv[5].w, sprites[5], tintIndex));
+    return new Cube(makeCubeFace(format, Direction.WEST, x, y, z, w, h, l, uv[0].x, uv[0].y, uv[0].z, uv[0].w, sprites[0], tintIndex),
+        makeCubeFace(format, Direction.EAST, x, y, z, w, h, l, uv[1].x, uv[1].y, uv[1].z, uv[1].w, sprites[1], tintIndex),
+        makeCubeFace(format, Direction.DOWN, x, y, z, w, h, l, uv[2].x, uv[2].y, uv[2].z, uv[2].w, sprites[2], tintIndex),
+        makeCubeFace(format, Direction.UP, x, y, z, w, h, l, uv[3].x, uv[3].y, uv[3].z, uv[3].w, sprites[3], tintIndex),
+        makeCubeFace(format, Direction.NORTH, x, y, z, w, h, l, uv[4].x, uv[4].y, uv[4].z, uv[4].w, sprites[4], tintIndex),
+        makeCubeFace(format, Direction.SOUTH, x, y, z, w, h, l, uv[5].x, uv[5].y, uv[5].z, uv[5].w, sprites[5], tintIndex));
   }
 
   @Nonnull
@@ -363,9 +363,9 @@ public class ModelUtil {
   }
 
   @Nonnull
-  public static BakedQuad createQuad(@Nonnull VertexFormat format, double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3,
-      double z3, double x4, double y4, double z4, float u, float v, float uw, float vh, @Nonnull Vec3d normal, @Nonnull TextureAtlasSprite sprite,
-      int tintIndex) {
+  public static net.minecraft.client.renderer.model.BakedQuad createQuad(@Nonnull VertexFormat format, double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3,
+                                                                         double z3, double x4, double y4, double z4, float u, float v, float uw, float vh, @Nonnull Vec3d normal, @Nonnull TextureAtlasSprite sprite,
+                                                                         int tintIndex) {
     UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
     builder.setTexture(sprite);
     if (tintIndex > -1) {

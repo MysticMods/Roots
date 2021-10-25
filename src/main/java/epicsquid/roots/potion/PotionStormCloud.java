@@ -13,15 +13,15 @@ import epicsquid.roots.network.fx.MessageStormCloudStormFX;
 import epicsquid.roots.spell.SpellStormCloud;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.effect.LightningBoltEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.potion.Effects;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class PotionStormCloud extends Potion {
+public class PotionStormCloud extends Effect {
 
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
@@ -49,7 +49,7 @@ public class PotionStormCloud extends Potion {
   }
 
   @Override
-  public void performEffect(@Nonnull EntityLivingBase entity, int amplifier) {
+  public void performEffect(@Nonnull LivingEntity entity, int amplifier) {
     World world = entity.getEntityWorld();
     BlockPos posDown = entity.getPosition().down();
     ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellStormCloud.instance);
@@ -58,16 +58,16 @@ public class PotionStormCloud extends Potion {
       for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
           BlockPos pos = posDown.add(i, 0, j);
-          IBlockState state = world.getBlockState(pos);
+          BlockState state = world.getBlockState(pos);
 
-          if (state.getBlock() == Blocks.FIRE) {
-            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+          if (state.getBlock() == net.minecraft.block.Blocks.FIRE) {
+            world.setBlockState(pos, net.minecraft.block.Blocks.AIR.getDefaultState());
           } else if (state.getBlock() == Blocks.LAVA && mods.has(SpellStormCloud.OBSIDIAN)) {
-            world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
+            world.setBlockState(pos, net.minecraft.block.Blocks.OBSIDIAN.getDefaultState());
           } else if (GeneralConfig.getWaterBlocks().contains(state.getBlock()) && mods.has(SpellStormCloud.ICE)) {
             if (state.getPropertyKeys().contains(BlockLiquid.LEVEL)) {
               if (state.getValue(BlockLiquid.LEVEL) == 0) {
-                world.setBlockState(pos, Blocks.ICE.getDefaultState());
+                world.setBlockState(pos, net.minecraft.block.Blocks.ICE.getDefaultState());
               }
             }
           }
@@ -79,15 +79,15 @@ public class PotionStormCloud extends Potion {
         radius += SpellStormCloud.instance.radius_extended;
       }
 
-      List<EntityLivingBase> entities = Util.getEntitiesWithinRadius(world, EntityLivingBase.class, entity.getPosition(), radius, radius, radius);
-      for (EntityLivingBase e : entities) {
+      List<LivingEntity> entities = Util.getEntitiesWithinRadius(world, LivingEntity.class, entity.getPosition(), radius, radius, radius);
+      for (LivingEntity e : entities) {
         if (EntityUtil.isFriendly(e, SpellStormCloud.instance) || e == entity) {
           if (entity.ticksExisted % SpellStormCloud.instance.heal_interval == 0) {
             if (mods.has(SpellStormCloud.HEALING)) {
               e.heal(SpellStormCloud.instance.heal_amount);
             }
           }
-          e.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, SpellStormCloud.instance.duration, SpellStormCloud.instance.fire_resistance, false, false));
+          e.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, SpellStormCloud.instance.duration, SpellStormCloud.instance.fire_resistance, false, false));
           e.extinguish();
           if (mods.has(SpellStormCloud.PEACEFUL) || e == entity) {
             continue;
@@ -96,12 +96,12 @@ public class PotionStormCloud extends Potion {
 
         if (mods.has(SpellStormCloud.LIGHTNING) && e.ticksExisted % SpellStormCloud.instance.lightning_interval == 0) {
           if (Util.rand.nextFloat() < SpellStormCloud.instance.lightning_chance) {
-            world.addWeatherEffect(new EntityLightningBolt(world, e.posX, e.posY, e.posZ, false));
+            world.addWeatherEffect(new LightningBoltEntity(world, e.posX, e.posY, e.posZ, false));
           }
         }
 
         if (mods.has(SpellStormCloud.POISON)) {
-          e.addPotionEffect(new PotionEffect(MobEffects.POISON, SpellStormCloud.instance.poison_duration, SpellStormCloud.instance.poison_amplifier));
+          e.addPotionEffect(new EffectInstance(Effects.POISON, SpellStormCloud.instance.poison_duration, SpellStormCloud.instance.poison_amplifier));
         }
 
         if (mods.has(SpellStormCloud.ICICLES)) {
@@ -134,7 +134,7 @@ public class PotionStormCloud extends Potion {
   }
 
   @Override
-  public boolean shouldRender(PotionEffect effect) {
+  public boolean shouldRender(EffectInstance effect) {
     return true;
   }
 
@@ -147,7 +147,7 @@ public class PotionStormCloud extends Potion {
 
 
   @Override
-  public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+  public void removeAttributesModifiersFromEntity(LivingEntity entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
     if (SpellStormCloud.instance.shouldPlaySound()) {
       entityLivingBaseIn.playSound(ModSounds.Spells.STORM_CLOUD_END, SpellStormCloud.instance.getSoundVolume(), 1);

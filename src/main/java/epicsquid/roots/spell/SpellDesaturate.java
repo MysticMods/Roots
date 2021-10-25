@@ -12,16 +12,14 @@ import epicsquid.roots.network.fx.MessageDesaturationFX;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.network.play.server.SUpdateHealthPacket;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.SPacketUpdateHealth;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
@@ -99,7 +97,7 @@ public class SpellDesaturate extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.BOWL),
+        new ItemStack(net.minecraft.item.Items.BOWL),
         new ItemStack(ModItems.petals),
         new ItemStack(Items.ROTTEN_FLESH),
         new OreIngredient("bone"),
@@ -109,7 +107,7 @@ public class SpellDesaturate extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks) {
     if (!caster.shouldHeal()) {
       return false;
     }
@@ -153,11 +151,11 @@ public class SpellDesaturate extends SpellBase {
 
       if (!info.has(THOUGHTFUL) && overheal > 0) {
         if (info.has(PEACEFUL)) {
-          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), o -> EntityUtil.isFriendly(o, SpellDesaturate.instance));
+          List<LivingEntity> entities = caster.world.getEntitiesWithinAABB(LivingEntity.class, box.offset(caster.getPosition()), o -> EntityUtil.isFriendly(o, SpellDesaturate.instance));
           int count = 0;
           while (entities.size() > 0 && count < heal_amount) {
             int targ = Util.rand.nextInt(entities.size());
-            EntityLivingBase target = entities.remove(targ);
+            LivingEntity target = entities.remove(targ);
             // TODO: Visual
             target.heal(overheal);
             count++;
@@ -169,7 +167,7 @@ public class SpellDesaturate extends SpellBase {
             int targ = Util.rand.nextInt(positions.size());
             BlockPos pos = positions.remove(targ);
             for (int i = 0; i < (growth_ticks * overheal); i++) {
-              IBlockState state = caster.world.getBlockState(pos);
+              BlockState state = caster.world.getBlockState(pos);
               state.getBlock().randomTick(caster.world, pos, state, Util.rand);
             }
             PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), caster);
@@ -177,38 +175,38 @@ public class SpellDesaturate extends SpellBase {
           }
         } else if (info.has(SHIELD)) {
           // TODO: Visual
-          caster.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, (int) (shield_base * overheal), shield_amplifier, false, false));
+          caster.addPotionEffect(new EffectInstance(Effects.ABSORPTION, (int) (shield_base * overheal), shield_amplifier, false, false));
           // Add a shield
         } else if (info.has(DAMAGE)) {
-          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), o -> EntityUtil.isHostile(o, SpellDesaturate.instance));
+          List<LivingEntity> entities = caster.world.getEntitiesWithinAABB(LivingEntity.class, box.offset(caster.getPosition()), o -> EntityUtil.isHostile(o, SpellDesaturate.instance));
           int count = 0;
           while (entities.size() > 0 && count < damage_amount) {
             int targ = Util.rand.nextInt(entities.size());
-            EntityLivingBase target = entities.remove(targ);
+            LivingEntity target = entities.remove(targ);
             // TODO: Visual
             target.attackEntityFrom(DamageSource.causeMobDamage(caster), overheal);
             count++;
           }
         } else if (info.has(LEVITATE)) {
-          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), o->EntityUtil.isHostile(o, SpellDesaturate.instance));
+          List<LivingEntity> entities = caster.world.getEntitiesWithinAABB(LivingEntity.class, box.offset(caster.getPosition()), o->EntityUtil.isHostile(o, SpellDesaturate.instance));
           int count = 0;
           while (entities.size() > 0 && count < levitation_targets) {
             int targ = Util.rand.nextInt(entities.size());
-            EntityLivingBase target = entities.remove(targ);
+            LivingEntity target = entities.remove(targ);
             // TODO: Visual
-            target.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, (int) (levitation_duration * overheal), 0));
+            target.addPotionEffect(new EffectInstance(Effects.LEVITATION, (int) (levitation_duration * overheal), 0));
             count++;
           }
         } else if (info.has(RESISTANCE)) {
           // TODO: Visual
-          caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, (int) (resistance_base * overheal), resistance_amplifier, false, false));
+          caster.addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) (resistance_base * overheal), resistance_amplifier, false, false));
           // Grant resistance
         } else if (info.has(PURIFY)) {
-          List<Potion> effects = new ArrayList<>();
+          List<Effect> effects = new ArrayList<>();
           int c = (int) Math.floor(overheal) + 1;
-          for (PotionEffect ef : caster.getActivePotionEffects()) {
+          for (EffectInstance ef : caster.getActivePotionEffects()) {
             if (ef.getPotion().isBadEffect()) {
-              Potion pot = ef.getPotion();
+              Effect pot = ef.getPotion();
               if (pot != null) {
                 effects.add(pot);
                 c--;
@@ -219,13 +217,13 @@ public class SpellDesaturate extends SpellBase {
             }
           }
 
-          for (Potion pot : effects) {
+          for (Effect pot : effects) {
             caster.removePotionEffect(pot);
           }
         }
       }
 
-      ((EntityPlayerMP) caster).connection.sendPacket(new SPacketUpdateHealth(caster.getHealth(), stats.getFoodLevel(), stats.getSaturationLevel()));
+      ((ServerPlayerEntity) caster).connection.sendPacket(new SUpdateHealthPacket(caster.getHealth(), stats.getFoodLevel(), stats.getSaturationLevel()));
 
       MessageDesaturationFX message = new MessageDesaturationFX(caster);
       PacketHandler.sendToAllTracking(message, caster);

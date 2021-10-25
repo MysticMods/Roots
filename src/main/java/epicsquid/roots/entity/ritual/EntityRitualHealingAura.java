@@ -4,8 +4,8 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualHealingAura;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -40,8 +40,8 @@ public class EntityRitualHealingAura extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % ritual.player_interval == 0) {
-      List<EntityPlayer> entities = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
-      for (EntityPlayer e : entities) {
+      List<PlayerEntity> entities = world.getEntitiesWithinAABB(PlayerEntity.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
+      for (PlayerEntity e : entities) {
         if (!world.isRemote) {
           e.heal(ritual.player_amount);
         }
@@ -53,9 +53,9 @@ public class EntityRitualHealingAura extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % ritual.interval == 0) {
-      List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
-      for (EntityLivingBase e : entities) {
-        if (e instanceof EntityPlayer) {
+      List<LivingEntity> entities = world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
+      for (LivingEntity e : entities) {
+        if (e instanceof PlayerEntity) {
           continue;
         }
         if (EntityUtil.isHostile(e, RitualRegistry.ritual_healing_aura)) {

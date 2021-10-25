@@ -5,17 +5,17 @@ import epicsquid.mysticallib.item.tool.IEffectiveTool;
 import epicsquid.mysticallib.item.tool.ISizedTool;
 import epicsquid.mysticallib.util.BreakUtil;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.PlayerControllerMP;
+import net.minecraft.client.multiplayer.PlayerController;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.DestroyBlockProgress;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -38,13 +38,13 @@ public class ToolOverlayRenderer {
   @SubscribeEvent(priority = EventPriority.LOW)
   public static void renderExtraBlockStuff(RenderWorldLastEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
-    PlayerControllerMP controller = mc.playerController;
+    PlayerController controller = mc.playerController;
 
     if (controller == null) {
       return;
     }
 
-    EntityPlayer player = MysticalLib.proxy.getPlayer();
+    PlayerEntity player = MysticalLib.proxy.getPlayer();
     if (player == null) {
       return;
     }
@@ -100,7 +100,7 @@ public class ToolOverlayRenderer {
     GlStateManager.popMatrix();
   }
 
-  public static void drawBlockDamage(World world, Tessellator tessellator, BufferBuilder bufferBuilder, EntityPlayer player, Set<BlockPos> positions, BlockPos origin) {
+  public static void drawBlockDamage(World world, Tessellator tessellator, BufferBuilder bufferBuilder, PlayerEntity player, Set<BlockPos> positions, BlockPos origin) {
     final Minecraft mc = Minecraft.getMinecraft();
     float partialTicks = mc.getRenderPartialTicks();
     DestroyBlockProgress progress = null;
@@ -120,7 +120,7 @@ public class ToolOverlayRenderer {
     double d1 = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTicks;
     double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) partialTicks;
 
-    Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+    Minecraft.getMinecraft().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
     preRenderDamagedBlocks();
     bufferBuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
     bufferBuilder.setTranslation(-d0, -d1, -d2);
@@ -131,7 +131,7 @@ public class ToolOverlayRenderer {
       boolean hasBreak = te != null && te.canRenderBreaking();
 
       if (!hasBreak) {
-        IBlockState state = world.getBlockState(blockpos);
+        BlockState state = world.getBlockState(blockpos);
         if (state.getMaterial() != Material.AIR) {
           mc.getBlockRendererDispatcher().renderBlockDamage(state, blockpos, mc.renderGlobal.destroyBlockIcons[progress.getPartialBlockDamage()], world);
         }

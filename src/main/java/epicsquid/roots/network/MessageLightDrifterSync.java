@@ -3,12 +3,11 @@ package epicsquid.roots.network;
 import epicsquid.roots.client.SpectatorHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -70,7 +69,7 @@ public class MessageLightDrifterSync implements IMessage {
         return;
       }
       World world = mc.world;
-      EntityPlayer player = world.getPlayerEntityByUUID(message.id);
+      PlayerEntity player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         if (!message.enable) {
           player.setPositionAndUpdate(message.x, message.y, message.z);

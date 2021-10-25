@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -73,7 +73,7 @@ public class RenderHerbHUD {
     INSTANCE.slots.forEach(HerbAlert::tick);
   }
 
-  public void resolveSlots(EntityPlayer player, Herb herb, double amount) {
+  public void resolveSlots(PlayerEntity player, Herb herb, double amount) {
     if (player.world == null || !player.world.isRemote) {
       return;
     }

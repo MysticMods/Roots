@@ -4,11 +4,9 @@ import epicsquid.roots.tileentity.TileEntityImposer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageSetImposerSlot implements IMessage {
@@ -44,7 +42,7 @@ public class MessageSetImposerSlot implements IMessage {
   public static class MessageHolder extends ServerMessageHandler<MessageSetImposerSlot> {
     @Override
     protected void handleMessage(MessageSetImposerSlot message, MessageContext ctx) {
-      WorldServer server = DimensionManager.getWorld(message.dimension);
+      ServerWorld server = DimensionManager.getWorld(message.dimension);
       TileEntity te = server.getTileEntity(message.pos);
       if (te instanceof TileEntityImposer) {
         TileEntityImposer tei = (TileEntityImposer) te;

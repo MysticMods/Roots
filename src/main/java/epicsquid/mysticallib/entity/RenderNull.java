@@ -2,17 +2,17 @@ package epicsquid.mysticallib.entity;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.client.renderer.entity.RenderEntity;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.DefaultRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 /**
  * Renders an empty entity
  */
-public class RenderNull extends RenderEntity {
+public class RenderNull extends DefaultRenderer {
 
-  public RenderNull(@Nonnull RenderManager renderManager) {
+  public RenderNull(@Nonnull EntityRendererManager renderManager) {
     super(renderManager);
   }
 
@@ -29,7 +29,7 @@ public class RenderNull extends RenderEntity {
   public static class Factory implements IRenderFactory {
 
     @Override
-    public RenderEntity createRenderFor(@Nonnull RenderManager manager) {
+    public DefaultRenderer createRenderFor(@Nonnull EntityRendererManager manager) {
       return new RenderNull(manager);
     }
   }

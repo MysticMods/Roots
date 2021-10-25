@@ -1,7 +1,7 @@
 package epicsquid.roots.client.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiSpectator;
+import net.minecraft.client.gui.SpectatorGui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.spectator.SpectatorMenu;
 import net.minecraft.client.gui.spectator.categories.SpectatorDetails;
@@ -9,9 +9,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiFakeSpectator extends GuiSpectator {
+public class GuiFakeSpectator extends SpectatorGui {
   private static GuiFakeSpectator instance = null;
-  private static GuiSpectator actualInstance = null;
+  private static SpectatorGui actualInstance = null;
 
   private static void init() {
     if (instance == null) {

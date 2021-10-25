@@ -14,7 +14,7 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -102,14 +102,14 @@ public class AnimalHarvestTweaker {
     public Add(EntityEntry entry) {
       super("add_animal_harvest");
       this.entry = entry;
-      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+      if (!LivingEntity.class.isAssignableFrom(this.entry.getEntityClass())) {
         CraftTweakerAPI.logError("Invalid Animal Harvest class to add: " + this.entry.getEntityClass().getSimpleName());
       }
     }
 
     @Override
     public void apply() {
-      ModRecipes.addAnimalHarvestRecipe(entry.getName(), (Class<? extends EntityLivingBase>) entry.getEntityClass());
+      ModRecipes.addAnimalHarvestRecipe(entry.getName(), (Class<? extends LivingEntity>) entry.getEntityClass());
     }
 
     @Override

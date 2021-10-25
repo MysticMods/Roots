@@ -4,16 +4,16 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityArmorStand;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumAction;
-import net.minecraft.util.EnumHandSide;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ArmorStandEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.UseAction;
+import net.minecraft.util.HandSide;
 
 public class ModelArmorBase extends ModelBiped {
 
 
-  public EntityEquipmentSlot slot;
+  public EquipmentSlotType slot;
   public float armorScale = 1.05f;
   protected ModelRenderer head;
   protected ModelRenderer chest;
@@ -24,7 +24,7 @@ public class ModelArmorBase extends ModelBiped {
   protected ModelRenderer bootR;
   protected ModelRenderer bootL;
 
-  public ModelArmorBase(EntityEquipmentSlot slot) {
+  public ModelArmorBase(EquipmentSlotType slot) {
     super(0.0f, 1.0f, 64, 64);
     this.textureHeight = 64;
     this.textureWidth = 64;
@@ -46,8 +46,8 @@ public class ModelArmorBase extends ModelBiped {
    */
   @Override
   public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity entityIn) {
-    if (entityIn instanceof EntityArmorStand) {
-      EntityArmorStand entityarmorstand = (EntityArmorStand) entityIn;
+    if (entityIn instanceof ArmorStandEntity) {
+      ArmorStandEntity entityarmorstand = (ArmorStandEntity) entityIn;
       bipedHead.rotateAngleX = 0.017453292F * entityarmorstand.getHeadRotation().getX();
       bipedHead.rotateAngleY = 0.017453292F * entityarmorstand.getHeadRotation().getY();
       bipedHead.rotateAngleZ = 0.017453292F * entityarmorstand.getHeadRotation().getZ();
@@ -82,14 +82,14 @@ public class ModelArmorBase extends ModelBiped {
     this.setLegsRotation();
     this.setBootRotation();
     GlStateManager.pushMatrix();
-    head.showModel = slot == EntityEquipmentSlot.HEAD;
-    chest.showModel = slot == EntityEquipmentSlot.CHEST;
-    armR.showModel = slot == EntityEquipmentSlot.CHEST;
-    armL.showModel = slot == EntityEquipmentSlot.CHEST;
-    legR.showModel = slot == EntityEquipmentSlot.LEGS;
-    legL.showModel = slot == EntityEquipmentSlot.LEGS;
-    bootR.showModel = slot == EntityEquipmentSlot.FEET;
-    bootL.showModel = slot == EntityEquipmentSlot.FEET;
+    head.showModel = slot == EquipmentSlotType.HEAD;
+    chest.showModel = slot == EquipmentSlotType.CHEST;
+    armR.showModel = slot == EquipmentSlotType.CHEST;
+    armL.showModel = slot == EquipmentSlotType.CHEST;
+    legR.showModel = slot == EquipmentSlotType.LEGS;
+    legL.showModel = slot == EquipmentSlotType.LEGS;
+    bootR.showModel = slot == EquipmentSlotType.FEET;
+    bootL.showModel = slot == EquipmentSlotType.FEET;
     if (this.isChild) {
       float f = 2.0F;
       GlStateManager.scale(1.5F / f, 1.5F / f, 1.5F / f);
@@ -188,7 +188,7 @@ public class ModelArmorBase extends ModelBiped {
    * borrowed from: https://github.com/williewillus/Botania/blob/MC19/src/main/java/vazkii/botania/client/model/armor/ModelArmorManasteel.java
    */
   public void prepareForRender(Entity entity) {
-    EntityLivingBase living = (EntityLivingBase) entity;
+    LivingEntity living = (LivingEntity) entity;
     isSneak = living != null && living.isSneaking();
     isChild = living != null && living.isChild();
     isRiding = living.isRiding();
@@ -199,10 +199,10 @@ public class ModelArmorBase extends ModelBiped {
       if (living.getHeldItemMainhand() != null) {
         mainPose = ModelBiped.ArmPose.ITEM;
         if (living.getItemInUseCount() > 0) {
-          EnumAction enumaction = living.getHeldItemMainhand().getItemUseAction();
-          if (enumaction == EnumAction.BLOCK) {
+          UseAction enumaction = living.getHeldItemMainhand().getItemUseAction();
+          if (enumaction == UseAction.BLOCK) {
             mainPose = ModelBiped.ArmPose.BLOCK;
-          } else if (enumaction == EnumAction.BOW) {
+          } else if (enumaction == UseAction.BOW) {
             mainPose = ModelBiped.ArmPose.BOW_AND_ARROW;
           }
         }
@@ -210,13 +210,13 @@ public class ModelArmorBase extends ModelBiped {
       if (living.getHeldItemOffhand() != null) {
         offPose = ModelBiped.ArmPose.ITEM;
         if (living.getItemInUseCount() > 0) {
-          EnumAction enumaction1 = living.getHeldItemOffhand().getItemUseAction();
-          if (enumaction1 == EnumAction.BLOCK) {
+          UseAction enumaction1 = living.getHeldItemOffhand().getItemUseAction();
+          if (enumaction1 == UseAction.BLOCK) {
             offPose = ModelBiped.ArmPose.BLOCK;
           }
         }
       }
-      if (living.getPrimaryHand() == EnumHandSide.RIGHT) {
+      if (living.getPrimaryHand() == HandSide.RIGHT) {
         rightArmPose = mainPose;
         leftArmPose = offPose;
       } else {

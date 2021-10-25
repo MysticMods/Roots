@@ -2,10 +2,8 @@ package epicsquid.roots.network;
 
 import epicsquid.roots.container.ContainerLibrary;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.inventory.Container;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraft.inventory.container.Container;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageResetLibraryScreen implements IMessage {

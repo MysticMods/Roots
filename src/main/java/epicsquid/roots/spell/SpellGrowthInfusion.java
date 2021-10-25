@@ -18,18 +18,15 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.FlowerRecipe;
 import epicsquid.roots.recipe.OreChances;
 import epicsquid.roots.util.OreDictCache;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFarmland;
-import net.minecraft.block.BlockMushroom;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
+import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -116,13 +113,13 @@ public class SpellGrowthInfusion extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     // TODO: HYDRATION
     boolean didSomething = false;
     if (info.has(BREED)) {
-      List<EntityAnimal> animals = player.world.getEntitiesWithinAABB(EntityAnimal.class, breedingBox.offset(player.getPosition()));
+      List<AnimalEntity> animals = player.world.getEntitiesWithinAABB(AnimalEntity.class, breedingBox.offset(player.getPosition()));
       int count = 0;
-      for (EntityAnimal animal : animals) {
+      for (AnimalEntity animal : animals) {
         if (animal.isInLove() || animal.getGrowingAge() != 0) {
           continue;
         }
@@ -138,11 +135,11 @@ public class SpellGrowthInfusion extends SpellBase {
     }
 
     if (info.has(ANIMAL_GROWTH) && ticks % animal_growth_interval == 0) {
-      List<EntityAnimal> animals = player.world.getEntitiesWithinAABB(EntityAnimal.class, breedingBox.offset(player.getPosition()), EntityAgeable::isChild);
+      List<AnimalEntity> animals = player.world.getEntitiesWithinAABB(AnimalEntity.class, breedingBox.offset(player.getPosition()), AgeableEntity::isChild);
       if (!animals.isEmpty()) {
         didSomething = true;
         if (!player.world.isRemote) {
-          EntityAnimal choice = animals.get(Util.rand.nextInt(animals.size()));
+          AnimalEntity choice = animals.get(Util.rand.nextInt(animals.size()));
           // TODO: CONSIDER ADDING HOSTILE CHECK
           int amount = animal_growth + Util.rand.nextInt(animal_growth_vary);
           choice.addGrowth(amount);
@@ -152,16 +149,16 @@ public class SpellGrowthInfusion extends SpellBase {
     }
 
     if (info.has(VILLAGERS) && Util.rand.nextDouble() < villager_growth) {
-      List<EntityVillager> villagers = player.world.getEntitiesWithinAABB(EntityVillager.class, villagerBox.offset(player.getPosition()), o -> o != null && !o.isChild() && o.getActivePotionEffect(MobEffects.REGENERATION) == null);
+      List<VillagerEntity> villagers = player.world.getEntitiesWithinAABB(VillagerEntity.class, villagerBox.offset(player.getPosition()), o -> o != null && !o.isChild() && o.getActivePotionEffect(Effects.REGENERATION) == null);
       if (!villagers.isEmpty()) {
         // TODO: Particles
         int q = villager_count;
         didSomething = true;
         if (!player.world.isRemote) {
           while (q > 0 && !villagers.isEmpty()) {
-            EntityVillager villager = villagers.remove(Util.rand.nextInt(villagers.size()));
+            VillagerEntity villager = villagers.remove(Util.rand.nextInt(villagers.size()));
             if (Util.rand.nextFloat() < villager_growth) {
-              EntityPlayer oldPlayer = villager.getCustomer();
+              PlayerEntity oldPlayer = villager.getCustomer();
               villager.setCustomer(player);
               MerchantRecipeList recipes = villager.getRecipes(player);
               villager.setCustomer(oldPlayer);
@@ -180,7 +177,7 @@ public class SpellGrowthInfusion extends SpellBase {
                 villager.needsInitilization = true;
                 villager.isWillingToMate = true;
               } else {
-                villager.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200));
+                villager.addPotionEffect(new EffectInstance(Effects.REGENERATION, 200));
               }
               MessageTradeResetFX message = new MessageTradeResetFX(villager.posX, villager.posY + villager.getEyeHeight(), villager.posZ, doReset);
               PacketHandler.sendToAllTracking(message, villager);
@@ -216,14 +213,14 @@ public class SpellGrowthInfusion extends SpellBase {
       if (!player.world.isRemote) {
         for (int i = 0; i < count + player.world.rand.nextInt((additional_count)); i++) {
           BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
-          IBlockState state = player.world.getBlockState(pos);
+          BlockState state = player.world.getBlockState(pos);
           for (int j = 0; j < this.growth_ticks; j++) {
             state.getBlock().randomTick(player.world, pos, state, Util.rand);
           }
           if (info.has(HYDRATE)) {
-            IBlockState below = player.world.getBlockState(pos.down());
-            if (below.getPropertyKeys().contains(BlockFarmland.MOISTURE)) {
-              player.world.setBlockState(pos.down(), below.withProperty(BlockFarmland.MOISTURE, 7), 2 | 16);
+            BlockState below = player.world.getBlockState(pos.down());
+            if (below.getPropertyKeys().contains(FarmlandBlock.MOISTURE)) {
+              player.world.setBlockState(pos.down(), below.withProperty(FarmlandBlock.MOISTURE, 7), 2 | 16);
             }
           }
           // TODO: CENTRALISE EFFECT COLOURS
@@ -238,7 +235,7 @@ public class SpellGrowthInfusion extends SpellBase {
       if (result != null) {
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
           BlockPos pos = result.getBlockPos();
-          IBlockState state = player.world.getBlockState(pos);
+          BlockState state = player.world.getBlockState(pos);
           Block block = state.getBlock();
 
           // Test for flower
@@ -255,19 +252,19 @@ public class SpellGrowthInfusion extends SpellBase {
 
           // Test for mushroom or tree
           if (info.has(EMBIGGEN)) {
-            if (block instanceof BlockMushroom) {
+            if (block instanceof MushroomBlock) {
               didSomething = true;
               if (!player.world.isRemote && Util.rand.nextFloat() < embiggen_chance) {
-                BlockMushroom shroom = (BlockMushroom) block;
+                MushroomBlock shroom = (MushroomBlock) block;
 
                 if (shroom.generateBigMushroom(player.world, pos, state, Util.rand)) {
                   // TODO: Particles/sound?
                 }
               }
-            } else if (block instanceof BlockSapling) {
+            } else if (block instanceof SaplingBlock) {
               didSomething = true;
               if (!player.world.isRemote && Util.rand.nextFloat() < embiggen_chance) {
-                BlockSapling sapling = (BlockSapling) block;
+                SaplingBlock sapling = (SaplingBlock) block;
                 sapling.generateTree(player.world, pos, state, Util.rand);
               }
             }
@@ -290,9 +287,9 @@ public class SpellGrowthInfusion extends SpellBase {
                 state.getBlock().randomTick(player.world, pos, state, new Random());
               }
               if (info.has(HYDRATE)) {
-                IBlockState below = player.world.getBlockState(pos.down());
-                if (below.getPropertyKeys().contains(BlockFarmland.MOISTURE)) {
-                  player.world.setBlockState(pos.down(), below.withProperty(BlockFarmland.MOISTURE, 7), 2 | 16);
+                BlockState below = player.world.getBlockState(pos.down());
+                if (below.getPropertyKeys().contains(FarmlandBlock.MOISTURE)) {
+                  player.world.setBlockState(pos.down(), below.withProperty(FarmlandBlock.MOISTURE, 7), 2 | 16);
                 }
               }
               PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);

@@ -1,6 +1,5 @@
 package epicsquid.roots.util;
 
-import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
@@ -13,9 +12,9 @@ import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -32,12 +31,12 @@ public class SpellUtil {
     return stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.spell_icon;
   }
 
-  public static void updateModifiers (EntityPlayer player) {
+  public static void updateModifiers (PlayerEntity player) {
     if (player.world.isRemote) {
       return;
     }
 
-    IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+    IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP);
     if (handler == null) {
       return;
     }
@@ -50,7 +49,7 @@ public class SpellUtil {
     }
   }
 
-  public static boolean updateModifiers(ItemStack stack, EntityPlayer player) {
+  public static boolean updateModifiers(ItemStack stack, PlayerEntity player) {
     if (player.world.isRemote) {
       return false;
     }

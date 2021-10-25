@@ -14,15 +14,15 @@ import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import epicsquid.roots.network.fx.MessageTargetedLifeDrainFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -91,8 +91,8 @@ public class SpellLifeDrain extends SpellBase {
     setCastSound(ModSounds.Spells.LIFE_DRAIN);
   }
 
-  private boolean handleEntity(EntityPlayer player, EntityLivingBase e, StaffModifierInstanceList info, List<EntityLivingBase> peacefuls, float dam, float h) {
-    if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+  private boolean handleEntity(PlayerEntity player, LivingEntity e, StaffModifierInstanceList info, List<LivingEntity> peacefuls, float dam, float h) {
+    if (e != player && !(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
       if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellLifeDrain.instance)) {
         return false;
       }
@@ -103,10 +103,10 @@ public class SpellLifeDrain extends SpellBase {
           }
           e.attackEntityFrom(DamageSource.causeMobDamage(player), dam);
           if (e.rand.nextInt(witherChance) == 0) {
-            e.addPotionEffect(new PotionEffect(MobEffects.WITHER, witherDuration, witherAmplification));
+            e.addPotionEffect(new EffectInstance(Effects.WITHER, witherDuration, witherAmplification));
           }
           if (info.has(SLOWING)) {
-            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slow_duration, slow_amplifier));
+            e.addPotionEffect(new EffectInstance(Effects.SLOWNESS, slow_duration, slow_amplifier));
           }
           if (info.has(FIRE)) {
             e.setFire(fire_duration);
@@ -127,7 +127,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     // TODO: Make this more elegant
     if (!player.world.isRemote) {
       boolean foundTarget = false;
@@ -142,9 +142,9 @@ public class SpellLifeDrain extends SpellBase {
       }
       final float h = heal;
       if (info.has(TARGET)) {
-        List<EntityLivingBase> entitiesBeam = RayCastUtil.rayTraceEntities(EntityLivingBase.class, player, distance);
-        EntityLivingBase targeted = null;
-        for (EntityLivingBase target : entitiesBeam) {
+        List<LivingEntity> entitiesBeam = RayCastUtil.rayTraceEntities(LivingEntity.class, player, distance);
+        LivingEntity targeted = null;
+        for (LivingEntity target : entitiesBeam) {
           if (handleEntity(player, target, info, Collections.emptyList(), dam, h)) {
             targeted = target;
           }
@@ -152,7 +152,7 @@ public class SpellLifeDrain extends SpellBase {
         if (targeted != null) {
           foundTarget = true;
           MessageTargetedLifeDrainFX packet = new MessageTargetedLifeDrainFX(player, targeted);
-          PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
+          PacketHandler.INSTANCE.sendTo(packet, (ServerPlayerEntity) player);
         }
       } else {
         PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
@@ -160,9 +160,9 @@ public class SpellLifeDrain extends SpellBase {
           double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
           double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
           double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-          List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
-          List<EntityLivingBase> peacefuls = entities.stream().filter(o -> EntityUtil.isFriendly(o, SpellLifeDrain.instance)).collect(Collectors.toList());
-          for (EntityLivingBase e : entities) {
+          List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
+          List<LivingEntity> peacefuls = entities.stream().filter(o -> EntityUtil.isFriendly(o, SpellLifeDrain.instance)).collect(Collectors.toList());
+          for (LivingEntity e : entities) {
             if (handleEntity(player, e, info, peacefuls, dam, h)) {
               foundTarget = true;
             }

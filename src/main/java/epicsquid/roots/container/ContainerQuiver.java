@@ -10,12 +10,12 @@ package epicsquid.roots.container;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.item.ItemQuiver;
 import epicsquid.roots.util.QuiverInventoryUtil;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemArrow;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -26,10 +26,10 @@ public class ContainerQuiver extends Container {
 
   private ItemStackHandler quiverHandler;
   private QuiverHandler handler;
-  private EntityPlayer player;
+  private PlayerEntity player;
   private ItemStack quiver;
 
-  public ContainerQuiver(EntityPlayer player) {
+  public ContainerQuiver(PlayerEntity player) {
     this.player = player;
     ItemStack main = player.getHeldItemMainhand();
     ItemStack off = player.getHeldItemOffhand();
@@ -60,34 +60,34 @@ public class ContainerQuiver extends Container {
       addSlotToContainer(new SlotItemHandler(quiverHandler, i, xOffset + 11 + (((i >= 3) ? i - 3 : i) * 21), yOffset + 23 + ((i >= 3) ? 21 : 0)) {
         @Override
         public boolean isItemValid(@Nonnull ItemStack stack) {
-          return stack.getItem() instanceof ItemArrow;
+          return stack.getItem() instanceof ArrowItem;
         }
       });
     }
   }
 
-  private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
+  private void createPlayerInventory(PlayerInventory inventoryPlayer) {
     int xOffset = 8;
     int yOffset = 67;
 
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, xOffset + j * 18, yOffset + i * 18));
+        addSlotToContainer(new net.minecraft.inventory.container.Slot(inventoryPlayer, j + i * 9 + 9, xOffset + j * 18, yOffset + i * 18));
       }
     }
     for (int i = 0; i < 9; i++) {
-      addSlotToContainer(new Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
+      addSlotToContainer(new net.minecraft.inventory.container.Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
     }
   }
 
   @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
+  public boolean canInteractWith(@Nonnull PlayerEntity player) {
     return true;
   }
 
   @Override
   @Nonnull
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     ItemStack slotStack = ItemStack.EMPTY;
 
     Slot slot = inventorySlots.get(index);
@@ -95,7 +95,7 @@ public class ContainerQuiver extends Container {
     if (slot != null && slot.getHasStack()) {
       ItemStack stack = slot.getStack();
 
-      boolean isArrow = stack.getItem() instanceof ItemArrow;
+      boolean isArrow = stack.getItem() instanceof ArrowItem;
 
       if (isArrow && index < 36 && !mergeItemStack(stack, 36, 42, false)) {
         slot.onSlotChanged();
@@ -113,7 +113,7 @@ public class ContainerQuiver extends Container {
 
   @Override
   @Nonnull
-  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
     if (slotId >= 0) {
       ItemStack stack = getSlot(slotId).getStack();
       if (stack.getItem() instanceof ItemQuiver) {

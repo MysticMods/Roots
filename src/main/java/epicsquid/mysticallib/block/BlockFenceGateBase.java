@@ -1,23 +1,17 @@
 package epicsquid.mysticallib.block;
 
 import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.model.CustomModelBlock;
-import epicsquid.mysticallib.model.CustomModelLoader;
-import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.model.block.BakedModelBlock;
-import epicsquid.mysticallib.model.block.BakedModelFence;
 import net.minecraft.block.*;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
@@ -28,7 +22,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BlockFenceGateBase extends BlockFenceGate implements IBlock, IModeledObject {
+public class BlockFenceGateBase extends FenceGateBlock implements IBlock, IModeledObject {
   private @Nonnull Item itemBlock;
   public List<ItemStack> drops = null;
   private boolean isOpaque = false;
@@ -50,7 +44,7 @@ public class BlockFenceGateBase extends BlockFenceGate implements IBlock, IModel
     setHardness(hardness);
     setOpacity(false);
     this.fullBlock = false;
-    itemBlock = new ItemBlock(this).setRegistryName(LibRegistry.getActiveModid(), name);
+    itemBlock = new BlockItem(this).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
   @Nonnull
@@ -91,7 +85,7 @@ public class BlockFenceGateBase extends BlockFenceGate implements IBlock, IModel
   }
 
   @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return isOpaque;
   }
 
@@ -100,7 +94,7 @@ public class BlockFenceGateBase extends BlockFenceGate implements IBlock, IModel
   }
 
   @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
@@ -114,17 +108,17 @@ public class BlockFenceGateBase extends BlockFenceGate implements IBlock, IModel
       ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "handlers"));
       ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(POWERED).build());
     } else {
-      ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "handlers"));
+      ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new net.minecraft.client.renderer.model.ModelResourceLocation(getRegistryName(), "handlers"));
     }
   }
 
   @Override
-  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction face) {
     return isFlammable || super.isFlammable(world, pos, face);
   }
 
   @Override
-  public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+  public int getFlammability(IBlockAccess world, BlockPos pos, Direction face) {
     return isFlammable ? 100 : super.getFlammability(world, pos, face);
   }
 
@@ -142,7 +136,7 @@ public class BlockFenceGateBase extends BlockFenceGate implements IBlock, IModel
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     this.itemBlock = block;
     return block;
   }

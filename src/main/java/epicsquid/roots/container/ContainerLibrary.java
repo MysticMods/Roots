@@ -19,10 +19,10 @@ import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.util.PlayerSyncUtil;
 import epicsquid.roots.world.data.SpellLibraryData;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -42,7 +42,7 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
 
   private int slot;
 
-  public ContainerLibrary(EntityPlayer player, Supplier<ItemStack> staff, SpellLibraryData data) {
+  public ContainerLibrary(PlayerEntity player, Supplier<ItemStack> staff, SpellLibraryData data) {
     this.data = data;
 
     if (staff == null) {
@@ -183,13 +183,13 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
   }
 
   @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
+  public boolean canInteractWith(@Nonnull PlayerEntity player) {
     return true;
   }
 
   @Override
   @Nonnull
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     Slot slot = inventorySlots.get(index);
 
     if (slot != null && slot.getHasStack()) {
@@ -201,9 +201,9 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
 
   @Override
   @Nonnull
-  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
     if (slotId != -999) {
-      Slot slot = getSlot(slotId);
+      net.minecraft.inventory.container.Slot slot = getSlot(slotId);
       if (isSelectSpell()) {
         if (slot instanceof SlotLibraryInfo) {
           SlotLibraryInfo info = (SlotLibraryInfo) slot;

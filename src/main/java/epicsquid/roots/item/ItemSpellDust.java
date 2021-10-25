@@ -14,7 +14,7 @@ import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,7 +44,7 @@ public class ItemSpellDust extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
     if (tag.hasKey("staff") && tag.getBoolean("staff")) {
       StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);
       if (storage == null) {

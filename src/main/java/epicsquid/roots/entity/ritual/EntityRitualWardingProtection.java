@@ -3,9 +3,9 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualWardingProtection;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.Effects;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -42,9 +42,9 @@ public class EntityRitualWardingProtection extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % ritual.interval == 0) {
-      List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
-      for (EntityLivingBase e : entities) {
-        e.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, ritual.invuln_duration, 10, false, false));
+      List<LivingEntity> entities = world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
+      for (LivingEntity e : entities) {
+        e.addPotionEffect(new EffectInstance(Effects.RESISTANCE, ritual.invuln_duration, 10, false, false));
       }
     }
   }

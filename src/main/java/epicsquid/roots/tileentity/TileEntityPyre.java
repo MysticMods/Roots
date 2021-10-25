@@ -24,21 +24,21 @@ import epicsquid.roots.util.ItemHandlerUtil;
 import epicsquid.roots.util.XPUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemBucket;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -115,12 +115,12 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     GameRegistry.registerTileEntity(TileEntityPyre.class, new ResourceLocation(Roots.MODID, "tile_entity_bonfire"));
   }
 
-  protected void readFromNBTLegacy(NBTTagCompound tag) {
+  protected void readFromNBTLegacy(CompoundNBT tag) {
   }
 
   @Nonnull
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public CompoundNBT writeToNBT(CompoundNBT tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("burnTime", burnTime);
@@ -133,7 +133,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound tag) {
+  public void readFromNBT(CompoundNBT tag) {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
     burnTime = tag.getInteger("burnTime");
@@ -152,17 +152,17 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   @Nonnull
   @Override
-  public NBTTagCompound getUpdateTag() {
-    return writeToNBT(new NBTTagCompound());
+  public CompoundNBT getUpdateTag() {
+    return writeToNBT(new CompoundNBT());
   }
 
   @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
+  public SUpdateTileEntityPacket getUpdatePacket() {
+    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
   }
 
   @Override
-  public void onDataPacket(@Nonnull NetworkManager net, SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(@Nonnull NetworkManager net, SUpdateTileEntityPacket pkt) {
     readFromNBT(pkt.getNbtCompound());
   }
 
@@ -184,13 +184,13 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   public boolean startRitual(@Nullable UUID playerId, boolean refire) {
     if (playerId == null || lastPlayerId == null) {
-      return startRitual((EntityPlayer) null, refire);
+      return startRitual((PlayerEntity) null, refire);
     } else {
       return startRitual(Objects.requireNonNull(world.getMinecraftServer()).getPlayerList().getPlayerByUUID(lastPlayerId), refire);
     }
   }
 
-  public boolean startRitual(@Nullable EntityPlayer player, boolean refire) {
+  public boolean startRitual(@Nullable PlayerEntity player, boolean refire) {
     RitualBase ritual = RitualRegistry.getRitual(this, player);
 
     if (ritual != null && !ritual.isDisabled()) {
@@ -269,7 +269,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
 
     if (heldItem.getItem() == ModItems.firestarter) {
@@ -310,9 +310,9 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
               }
               if (!player.capabilities.isCreativeMode) {
                 cap.drain(stack, true);
-                if (heldItem.getItem() instanceof ItemBucket) {
+                if (heldItem.getItem() instanceof BucketItem) {
                   player.setHeldItem(hand, new ItemStack(Items.BUCKET));
-                  ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
+                  ((ServerPlayerEntity) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
                 }
               }
               break;
@@ -335,7 +335,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         }
         isBurning = false;
         BlockPyre.setState(false, world, pos);
-        world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1F);
+        world.playSound(null, pos, net.minecraft.util.SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1F);
         world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1F, 1F);
         return true;
       } else {
@@ -368,7 +368,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         }
       }
     }
-    if (player.isSneaking() && heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
+    if (player.isSneaking() && heldItem.isEmpty() && hand == Hand.MAIN_HAND) {
       resolveLastIngredients();
       if (this.lastUsedIngredients != null) {
         if (player.capabilities.isCreativeMode) {
@@ -377,7 +377,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
             inventory.setStackInSlot(i++, ingredient.getMatchingStacks()[0]);
           }
         } else {
-          IItemHandler inventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+          IItemHandler inventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP);
           assert inventory != null;
           for (Ingredient ingredient : lastUsedIngredients) {
             for (int i = 0; i < inventory.getSlots(); i++) {
@@ -393,7 +393,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
       return true;
     }
 
-    if (heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
+    if (heldItem.isEmpty() && hand == Hand.MAIN_HAND) {
       for (int i = 4; i >= 0; i--) {
         if (!inventory.getStackInSlot(i).isEmpty()) {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
@@ -410,7 +410,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   }
 
   @Override
-  public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+  public boolean shouldRefresh(World world, BlockPos pos, BlockState oldState, BlockState newState) {
     if (oldState.getBlock() instanceof BlockPyre && newState.getBlock() instanceof BlockPyre) {
       return false;
     }
@@ -419,7 +419,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   }
 
   @Override
-  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
@@ -431,7 +431,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   public void ongoingFlame() {
     if (world.isRemote) {
-      IBlockState state = world.getBlockState(getPos());
+      BlockState state = world.getBlockState(getPos());
       if (state.getBlock() instanceof BlockPyre) {
         if (state.getValue(BlockPyre.BURNING)) {
           for (int i = 0; i < 2; i++) {
@@ -507,10 +507,10 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
         for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
-          if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
+          if (world.getBlockState(pos).getBlock() == net.minecraft.block.Blocks.FIRE) {
             found = true;
-            if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
-              world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), Direction.UP)) {
+              world.setBlockState(pos, net.minecraft.block.Blocks.AIR.getDefaultState());
             }
             break;
           }
@@ -598,7 +598,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         this.lastRecipeUsed.postCraft(result, inventory_storage, this);
       }
 
-      EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
+      ItemEntity item = new ItemEntity(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
       item.setCustomNameTag("pyre");
       ItemUtil.spawnItem(world, item);
       XPUtil.spawnXP(world, getPos(), this.craftingXP);
@@ -624,7 +624,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         for (int z = -4; z < 5; z++) {
           BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z));
           topBlockPos = topBlockPos.subtract(new Vec3i(0, 1, 0));
-          IBlockState topBlockState = world.getBlockState(topBlockPos);
+          BlockState topBlockState = world.getBlockState(topBlockPos);
           if (topBlockState.getMaterial() == Material.SNOW || topBlockState.getMaterial() == Material.ICE) {
             nearbySnowOrIce.add(topBlockPos);
           }
@@ -638,16 +638,16 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
       if (world.getBlockState(posToMelt).getMaterial() == Material.SNOW) {
         world.setBlockState(posToMelt, Blocks.AIR.getDefaultState());
       } else if (world.getBlockState(posToMelt).getMaterial() == Material.ICE) {
-        world.setBlockState(posToMelt, Blocks.WATER.getDefaultState());
+        world.setBlockState(posToMelt, net.minecraft.block.Blocks.WATER.getDefaultState());
       }
     }
   }
 
   private void pickupItem() {
     if ((int) this.ticker % 20 == 0 && pickupDelay == 0) {
-      List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
+      List<ItemEntity> items = world.getEntitiesWithinAABB(ItemEntity.class,
           new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
-      for (EntityItem item : items) {
+      for (ItemEntity item : items) {
         ItemStack stack = item.getItem();
         if (item.getCustomNameTag().equalsIgnoreCase("pyre")) {
           continue;
@@ -668,7 +668,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     }
   }
 
-  private void insertItemFromPlayerInventory(ItemStack stack, EntityPlayer player, int slot) {
+  private void insertItemFromPlayerInventory(ItemStack stack, PlayerEntity player, int slot) {
     for (int i = 0; i < 5; i++) {
       if (inventory.getStackInSlot(i).isEmpty()) {
         ItemStack toInsert = stack.copy();

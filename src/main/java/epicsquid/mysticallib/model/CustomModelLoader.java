@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import epicsquid.mysticallib.event.RegisterCustomModelsEvent;
-import net.minecraft.client.renderer.block.model.FaceBakery;
+import net.minecraft.client.renderer.model.FaceBakery;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;

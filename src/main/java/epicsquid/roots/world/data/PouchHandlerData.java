@@ -4,7 +4,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.item.PouchType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -79,7 +79,7 @@ public class PouchHandlerData extends WorldSavedData {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound nbt) {
+  public void readFromNBT(CompoundNBT nbt) {
     this.type = PouchType.fromOrdinal(nbt.getInteger("pouch"));
     if (defer) {
       createHandler();
@@ -89,7 +89,7 @@ public class PouchHandlerData extends WorldSavedData {
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+  public CompoundNBT writeToNBT(CompoundNBT compound) {
     compound.setInteger("pouch", type.ordinal());
     compound.setTag("inventory", inventoryHandler.serializeNBT());
     compound.setTag("herbs", herbHandler.serializeNBT());

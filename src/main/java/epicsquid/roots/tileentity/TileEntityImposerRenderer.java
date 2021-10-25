@@ -3,14 +3,14 @@ package epicsquid.roots.tileentity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 
 public class TileEntityImposerRenderer extends TileEntityRenderer<TileEntityImposer> {
   @Override
   public void render(TileEntityImposer tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       GlStateManager.pushMatrix();
-      EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(0));
+      ItemEntity item = new ItemEntity(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(0));
       item.hoverStart = 0;
       float rotation = tei.ticks + partialTicks;
       GlStateManager.translate(x + 0.5, (y + 0.15) + Math.sin(rotation / 20.d) / 19.5, z + 0.5);

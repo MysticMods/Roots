@@ -1,20 +1,20 @@
 package epicsquid.roots.handler;
 
-import net.minecraft.item.ItemArrow;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
+public class QuiverHandler implements INBTSerializable<CompoundNBT> {
   private ItemStack quiver;
   private ItemStackHandler handler = new ItemStackHandler(6) {
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-      return stack.getItem() instanceof ItemArrow;
+      return stack.getItem() instanceof ArrowItem;
     }
 
     @Override
@@ -61,12 +61,12 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
+  public CompoundNBT serializeNBT() {
     return handler.serializeNBT();
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
+  public void deserializeNBT(CompoundNBT nbt) {
     handler.deserializeNBT(nbt);
   }
 
@@ -90,9 +90,9 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   public void saveToStack() {
-    NBTTagCompound tag = quiver.getTagCompound();
+    CompoundNBT tag = quiver.getTagCompound();
     if (tag == null) {
-      tag = new NBTTagCompound();
+      tag = new CompoundNBT();
       quiver.setTagCompound(tag);
     }
 

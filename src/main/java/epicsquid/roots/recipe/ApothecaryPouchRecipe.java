@@ -2,7 +2,7 @@ package epicsquid.roots.recipe;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class ApothecaryPouchRecipe extends FeyCraftingRecipe {
   }
 
   @Override
-  public void postCraft(ItemStack output, List<ItemStack> inputs, EntityPlayer player) {
+  public void postCraft(ItemStack output, List<ItemStack> inputs, PlayerEntity player) {
     ItemStack oldPouch = null;
     for (ItemStack stack : inputs) {
       if (stack.getItem() == ModItems.component_pouch) {

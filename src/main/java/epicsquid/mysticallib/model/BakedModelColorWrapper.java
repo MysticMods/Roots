@@ -6,20 +6,20 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.model.ItemOverrideList;
+import net.minecraft.util.Direction;
 import org.apache.commons.lang3.tuple.Pair;
 
 import epicsquid.mysticallib.hax.Hax;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ItemOverrideList;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.EnumFacing;
 
-public class BakedModelColorWrapper implements IBakedModel {
+public class BakedModelColorWrapper implements net.minecraft.client.renderer.model.IBakedModel {
   private IBakedModel internal;
-  private List<BakedQuad> quads = new ArrayList<>();
+  private List<net.minecraft.client.renderer.model.BakedQuad> quads = new ArrayList<>();
 
   public BakedModelColorWrapper(@Nonnull IBakedModel model) {
     this.internal = model;
@@ -27,10 +27,10 @@ public class BakedModelColorWrapper implements IBakedModel {
 
   @Override
   @Nonnull
-  public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+  public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, long rand) {
     if (quads.size() == 0) {
-      List<BakedQuad> list = new ArrayList<>();
-      for (EnumFacing f : EnumFacing.values()) {
+      List<net.minecraft.client.renderer.model.BakedQuad> list = new ArrayList<>();
+      for (Direction f : Direction.values()) {
         list.addAll(internal.getQuads(state, f, rand));
       }
       list.addAll(internal.getQuads(state, null, rand));
@@ -75,7 +75,7 @@ public class BakedModelColorWrapper implements IBakedModel {
 
   @Override
   @Nonnull
-  public Pair<? extends IBakedModel, javax.vecmath.Matrix4f> handlePerspective(@Nonnull ItemCameraTransforms.TransformType type) {
+  public Pair<? extends net.minecraft.client.renderer.model.IBakedModel, javax.vecmath.Matrix4f> handlePerspective(@Nonnull ItemCameraTransforms.TransformType type) {
     return internal.handlePerspective(type);
   }
 

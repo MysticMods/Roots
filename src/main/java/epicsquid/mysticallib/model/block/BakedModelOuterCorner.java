@@ -11,11 +11,11 @@ import epicsquid.mysticallib.block.BlockCornerBase;
 import epicsquid.mysticallib.model.CustomModelBase;
 import epicsquid.mysticallib.model.ModelUtil;
 import epicsquid.mysticallib.model.parts.Segment;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.model.IModelState;
 
@@ -39,13 +39,13 @@ public class BakedModelOuterCorner extends BakedModelBlock {
 
   @Override
   @Nonnull
-  public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+  public List<net.minecraft.client.renderer.model.BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, long rand) {
     List<BakedQuad> quads = new ArrayList<>();
     getFaceQuads(quads, side, state);
     return quads;
   }
 
-  private void getFaceQuads(@Nonnull List<BakedQuad> quads, @Nullable EnumFacing side, @Nullable IBlockState state) {
+  private void getFaceQuads(@Nonnull List<net.minecraft.client.renderer.model.BakedQuad> quads, @Nullable Direction side, @Nullable BlockState state) {
     if (state == null) {
       segm_down_pxpz.addToList(quads, side);
     } else {

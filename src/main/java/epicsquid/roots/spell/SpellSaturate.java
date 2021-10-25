@@ -12,17 +12,17 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.OreDictCache;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.SPacketUpdateHealth;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.network.play.server.SUpdateHealthPacket;
+import net.minecraft.util.Direction;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -110,16 +110,16 @@ public class SpellSaturate extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(Items.MUSHROOM_STEW),
-        new ItemStack(Items.MILK_BUCKET),
+        new ItemStack(net.minecraft.item.Items.MILK_BUCKET),
         ItemStack.EMPTY,
-        new ItemStack(Items.EGG),
+        new ItemStack(net.minecraft.item.Items.EGG),
         new ItemStack(epicsquid.roots.init.ModItems.wildewheet)
     );
     setCastSound(ModSounds.Spells.SATURATE);
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks) {
     World world = caster.world;
     FoodStats stats = caster.getFoodStats();
     int currentFood = stats.getFoodLevel();
@@ -131,7 +131,7 @@ public class SpellSaturate extends SpellBase {
     double newSat = currentSat;
     int newFood = currentFood;
 
-    IItemHandler handler = caster.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+    IItemHandler handler = caster.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP);
     Object2IntOpenHashMap<ItemStack> foods = new Object2IntOpenHashMap<>();
     for (int i = 0; i < Objects.requireNonNull(handler).getSlots(); i++) {
       ItemStack inSlot = handler.getStackInSlot(i);
@@ -139,9 +139,9 @@ public class SpellSaturate extends SpellBase {
         foods.put(inSlot, i);
       }
     }
-    List<EntityItem> entities = new ArrayList<>();
+    List<ItemEntity> entities = new ArrayList<>();
     if (info.has(ITEMS)) {
-      entities.addAll(Util.getEntitiesWithinRadius(caster.world, EntityItem.class, caster.getPosition(), (float) radius_x, (float) radius_y, (float) radius_z));
+      entities.addAll(Util.getEntitiesWithinRadius(caster.world, ItemEntity.class, caster.getPosition(), (float) radius_x, (float) radius_y, (float) radius_z));
       entities.removeIf(o -> !(o.getItem().getItem() instanceof ItemFood));
     }
     if (foods.isEmpty() && (entities.isEmpty() || !info.has(ITEMS))) {
@@ -172,11 +172,11 @@ public class SpellSaturate extends SpellBase {
       }
     }
 
-    List<EntityItem> usedItems = new ArrayList<>();
+    List<ItemEntity> usedItems = new ArrayList<>();
     List<ItemStack> consumedStacks = new ArrayList<>();
 
     if (info.has(ITEMS)) {
-      for (EntityItem item : entities) {
+      for (ItemEntity item : entities) {
         ItemStack stack = item.getItem();
         double thisSaturation = saturation(stack, info);
         int thisFood = health(stack, info);
@@ -204,7 +204,7 @@ public class SpellSaturate extends SpellBase {
       }
 
       if (!caster.world.isRemote) {
-        for (EntityItem item : usedItems) {
+        for (ItemEntity item : usedItems) {
           if (item.getItem().isEmpty()) {
             caster.world.removeEntity(item);
           }
@@ -227,24 +227,24 @@ public class SpellSaturate extends SpellBase {
     List<ItemStack> containers = new ArrayList<>();
 
     suppressSound = true;
-    PotionEffect poison = null;
-    PotionEffect hunger = null;
-    PotionEffect blindness = null;
-    PotionEffect wither = null;
-    PotionEffect nausea = null;
+    EffectInstance poison = null;
+    EffectInstance hunger = null;
+    EffectInstance blindness = null;
+    EffectInstance wither = null;
+    EffectInstance nausea = null;
     if (info.has(POISONED)) {
-      poison = caster.getActivePotionEffect(MobEffects.POISON);
-      caster.removeActivePotionEffect(MobEffects.POISON);
+      poison = caster.getActivePotionEffect(Effects.POISON);
+      caster.removeActivePotionEffect(Effects.POISON);
     }
     if (info.has(NAUSEA)) {
-      nausea = caster.getActivePotionEffect(MobEffects.NAUSEA);
-      caster.removeActivePotionEffect(MobEffects.NAUSEA);
-      hunger = caster.getActivePotionEffect(MobEffects.HUNGER);
-      caster.removeActivePotionEffect(MobEffects.HUNGER);
-      blindness = caster.getActivePotionEffect(MobEffects.BLINDNESS);
-      caster.removeActivePotionEffect(MobEffects.BLINDNESS);
-      wither = caster.getActivePotionEffect(MobEffects.WITHER);
-      caster.removeActivePotionEffect(MobEffects.WITHER);
+      nausea = caster.getActivePotionEffect(Effects.NAUSEA);
+      caster.removeActivePotionEffect(Effects.NAUSEA);
+      hunger = caster.getActivePotionEffect(Effects.HUNGER);
+      caster.removeActivePotionEffect(Effects.HUNGER);
+      blindness = caster.getActivePotionEffect(Effects.BLINDNESS);
+      caster.removeActivePotionEffect(Effects.BLINDNESS);
+      wither = caster.getActivePotionEffect(Effects.WITHER);
+      caster.removeActivePotionEffect(Effects.WITHER);
     }
     for (Object2IntMap.Entry<ItemStack> entry : usedFoods.object2IntEntrySet()) {
       int used = entry.getIntValue();
@@ -261,16 +261,16 @@ public class SpellSaturate extends SpellBase {
     }
 
     if (info.has(POISONED)) {
-      caster.removePotionEffect(MobEffects.POISON);
+      caster.removePotionEffect(Effects.POISON);
       if (poison != null) {
         caster.addPotionEffect(poison);
       }
     }
     if (info.has(NAUSEA)) {
-      caster.removePotionEffect(MobEffects.HUNGER);
-      caster.removePotionEffect(MobEffects.NAUSEA);
-      caster.removePotionEffect(MobEffects.BLINDNESS);
-      caster.removePotionEffect(MobEffects.WITHER);
+      caster.removePotionEffect(Effects.HUNGER);
+      caster.removePotionEffect(Effects.NAUSEA);
+      caster.removePotionEffect(Effects.BLINDNESS);
+      caster.removePotionEffect(Effects.WITHER);
       if (hunger != null) {
         caster.addPotionEffect(hunger);
       }
@@ -306,12 +306,12 @@ public class SpellSaturate extends SpellBase {
       int excessFood = newFood - 20;
       if (excessSat > 0 || excessFood > 0) {
         int amount = MathHelper.ceil(excessSat) * Math.min(1, excessFood);
-        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, amount * resistance_duration, resistance_amplifier, false, false));
+        caster.addPotionEffect(new EffectInstance(Effects.RESISTANCE, amount * resistance_duration, resistance_amplifier, false, false));
       }
     }
 
-    EntityPlayerMP playerMP = (EntityPlayerMP) caster;
-    playerMP.connection.sendPacket(new SPacketUpdateHealth(playerMP.getHealth(), playerMP.getFoodStats().getFoodLevel(), playerMP.getFoodStats().getSaturationLevel()));
+    ServerPlayerEntity playerMP = (ServerPlayerEntity) caster;
+    playerMP.connection.sendPacket(new SUpdateHealthPacket(playerMP.getHealth(), playerMP.getFoodStats().getFoodLevel(), playerMP.getFoodStats().getSaturationLevel()));
 
     MessageSaturationFX message = new MessageSaturationFX(caster);
     PacketHandler.sendToAllTracking(message, caster);
@@ -319,7 +319,7 @@ public class SpellSaturate extends SpellBase {
     return true;
   }
 
-  private List<ItemStack> handleContainers(EntityPlayer caster, StaffModifierInstanceList info, ItemStack result) {
+  private List<ItemStack> handleContainers(PlayerEntity caster, StaffModifierInstanceList info, ItemStack result) {
     List<ItemStack> containers = new ArrayList<>();
     for (int i = 0; i < result.getCount(); i++) {
       ItemStack container = result.onItemUseFinish(caster.world, caster);
@@ -336,7 +336,7 @@ public class SpellSaturate extends SpellBase {
     }
 
     ItemFood food = (ItemFood) stack.getItem();
-    return food.potionId != null && food.potionId.getPotion() == MobEffects.POISON;
+    return food.potionId != null && food.potionId.getPotion() == Effects.POISON;
 
   }
 
@@ -347,16 +347,16 @@ public class SpellSaturate extends SpellBase {
 
     ItemFood food = (ItemFood) stack.getItem();
     if (food.potionId != null) {
-      if (food.potionId.getPotion() == MobEffects.NAUSEA) {
+      if (food.potionId.getPotion() == Effects.NAUSEA) {
         return true;
       }
-      if (food.potionId.getPotion() == MobEffects.HUNGER) {
+      if (food.potionId.getPotion() == Effects.HUNGER) {
         return true;
       }
-      if (food.potionId.getPotion() == MobEffects.BLINDNESS) {
+      if (food.potionId.getPotion() == Effects.BLINDNESS) {
         return true;
       }
-      return food.potionId.getPotion() == MobEffects.WITHER;
+      return food.potionId.getPotion() == Effects.WITHER;
     }
 
     return false;

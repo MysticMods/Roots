@@ -1,6 +1,6 @@
 package epicsquid.roots.recipe.transmutation;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -12,5 +12,5 @@ public interface WorldBlockStatePredicate extends MatchingStates {
     return StatePosition.NULL;
   }
 
-  boolean test(IBlockState state, World world, BlockPos pos);
+  boolean test(BlockState state, World world, BlockPos pos);
 }

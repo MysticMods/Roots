@@ -12,11 +12,11 @@ import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -69,7 +69,7 @@ public class SpellSanctuary extends SpellBase {
     addIngredients(
         new ItemStack(Items.ARMOR_STAND),
         new ItemStack(ModItems.pereskia),
-        new ItemStack(Items.BOWL),
+        new ItemStack(net.minecraft.item.Items.BOWL),
         new ItemStack(ModItems.bark_spruce),
         new OreIngredient("wildroot")
     );
@@ -77,7 +77,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     int x = radius_x;
     int y = radius_y;
     int z = radius_z;
@@ -118,17 +118,17 @@ public class SpellSanctuary extends SpellBase {
             if (!e.isInvisible()) {
               PacketHandler.sendToAllTracking(new MessageSanctuaryBurstFX(e.posX, e.posY + 0.6f * e.getEyeHeight(), e.posZ), e);
             }
-            if (e instanceof EntityLivingBase) {
-              if (info.has(SPIDER) && ((EntityLivingBase) e).getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD) {
+            if (e instanceof LivingEntity) {
+              if (info.has(SPIDER) && ((LivingEntity) e).getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD) {
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), spider_damage);
               }
               if (info.has(WITHER)) {
-                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.WITHER, wither_duration, wither_amplifier));
+                ((LivingEntity) e).addPotionEffect(new EffectInstance(Effects.WITHER, wither_duration, wither_amplifier));
               }
               if (info.has(LEVITATE)) {
-                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, levitation_duration, 0));
+                ((LivingEntity) e).addPotionEffect(new EffectInstance(Effects.LEVITATION, levitation_duration, 0));
               }
-              if (info.has(UNDEAD) && ((EntityLivingBase) e).isEntityUndead()) {
+              if (info.has(UNDEAD) && ((LivingEntity) e).isEntityUndead()) {
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), undead_damage);
               }
             }

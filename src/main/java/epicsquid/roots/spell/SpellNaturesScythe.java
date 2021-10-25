@@ -11,20 +11,20 @@ import epicsquid.roots.network.fx.MessageFallBladesFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.OreDictCache;
 import net.minecraft.block.*;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
@@ -48,9 +48,9 @@ public class SpellNaturesScythe extends SpellBase {
 
   static {
     try {
-      Method getSilkDrop = ObfuscationReflectionHelper.findMethod(Block.class, "func_180643_i", ItemStack.class, IBlockState.class);
+      Method getSilkDrop = ObfuscationReflectionHelper.findMethod(Block.class, "func_180643_i", ItemStack.class, BlockState.class);
       getSilkDrop.setAccessible(true);
-      GET_SILK_DROP = MethodHandles.lookup().unreflect(getSilkDrop).asType(MethodType.methodType(ItemStack.class, Block.class, IBlockState.class));
+      GET_SILK_DROP = MethodHandles.lookup().unreflect(getSilkDrop).asType(MethodType.methodType(ItemStack.class, Block.class, BlockState.class));
     } catch (IllegalAccessException e) {
       throw new RuntimeException("Unable to properly handle silk touch drops", e);
     }
@@ -100,21 +100,21 @@ public class SpellNaturesScythe extends SpellBase {
         new OreIngredient("wildroot"),
         new OreIngredient("wildroot"),
         ItemStack.EMPTY,
-        new ItemStack(Items.STONE_HOE),
+        new ItemStack(net.minecraft.item.Items.STONE_HOE),
         new OreIngredient("tallgrass")
     );
     setCastSound(ModSounds.Spells.NATURES_SCYTHE);
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks) {
     int x = max_affected;
     if (info.has(SPEED)) {
       x *= 2;
     }
 
     if (!info.has(WEBS) && !info.has(LEAVES) && !info.has(GRASS) && !info.has(MUSHROOM) && !info.has(FLOWER)) {
-      caster.sendMessage(new TextComponentTranslation("roots.message.natures_scythe.no_modifier", new TextComponentTranslation(WEBS.getTranslationKey()), new TextComponentTranslation(LEAVES.getTranslationKey()), new TextComponentTranslation(GRASS.getTranslationKey()), new TextComponentTranslation(MUSHROOM.getTranslationKey()), new TextComponentTranslation(FLOWER.getTranslationKey())).setStyle(new Style().setColor(TextFormatting.YELLOW)));
+      caster.sendMessage(new TranslationTextComponent("roots.message.natures_scythe.no_modifier", new TranslationTextComponent(WEBS.getTranslationKey()), new TranslationTextComponent(LEAVES.getTranslationKey()), new TranslationTextComponent(GRASS.getTranslationKey()), new TranslationTextComponent(MUSHROOM.getTranslationKey()), new TranslationTextComponent(FLOWER.getTranslationKey())).setStyle(new Style().setColor(TextFormatting.YELLOW)));
       return false;
     }
 
@@ -148,16 +148,16 @@ public class SpellNaturesScythe extends SpellBase {
     return true;
   }
 
-  public boolean canSilkTouch(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+  public boolean canSilkTouch(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     Block block = state.getBlock();
     return (block instanceof IShearable && ((IShearable) block).isShearable(SHEARS, world, pos)) || block.canSilkHarvest(world, pos, state, player);
   }
 
-  public void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player, List<Function<ItemStack, ItemStack>> converters) {
-    IBlockState state = world.getBlockState(pos);
+  public void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, PlayerEntity player, List<Function<ItemStack, ItemStack>> converters) {
+    BlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
     int fortune = (info.has(FORTUNE) || info.has(SpellShatter.FORTUNE)) ? 2 : 0;
-    int xp = ForgeHooks.onBlockBreakEvent(world, GameType.SURVIVAL, (EntityPlayerMP) player, pos);
+    int xp = ForgeHooks.onBlockBreakEvent(world, GameType.SURVIVAL, (ServerPlayerEntity) player, pos);
     if (xp == -1) {
       return;
     }
@@ -213,9 +213,9 @@ public class SpellNaturesScythe extends SpellBase {
         pos2 = player.getPosition();
       }
       while (xp > 0) {
-        int i = EntityXPOrb.getXPSplit(xp);
+        int i = ExperienceOrbEntity.getXPSplit(xp);
         xp -= i;
-        world.spawnEntity(new EntityXPOrb(world, (double) pos2.getX() + 0.5D, (double) pos2.getY() + 0.5D, (double) pos2.getZ() + 0.5D, i));
+        world.spawnEntity(new ExperienceOrbEntity(world, (double) pos2.getX() + 0.5D, (double) pos2.getY() + 0.5D, (double) pos2.getZ() + 0.5D, i));
       }
     }
   }
@@ -225,30 +225,30 @@ public class SpellNaturesScythe extends SpellBase {
       return false;
     }
 
-    IBlockState state = world.getBlockState(pos);
+    BlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
     if (info.has(WEBS)) {
-      if (block instanceof BlockWeb || OreDictCache.matches(this.web, state)) {
+      if (block instanceof WebBlock || OreDictCache.matches(this.web, state)) {
         return true;
       }
     }
     if (info.has(LEAVES)) {
-      if (block instanceof BlockLeaves || OreDictCache.matches(this.tree, state)) {
+      if (block instanceof LeavesBlock || OreDictCache.matches(this.tree, state)) {
         return true;
       }
     }
     if (info.has(GRASS)) {
-      if (block == Blocks.TALLGRASS || (block == Blocks.DOUBLE_PLANT) && (state.getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN || state.getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS) || OreDictCache.matches(this.grass, state) || block instanceof BlockVine || OreDictCache.matches(this.vines, state)) {
+      if (block == Blocks.TALLGRASS || (block == Blocks.DOUBLE_PLANT) && (state.getValue(DoublePlantBlock.VARIANT) == DoublePlantBlock.EnumPlantType.FERN || state.getValue(DoublePlantBlock.VARIANT) == DoublePlantBlock.EnumPlantType.GRASS) || OreDictCache.matches(this.grass, state) || block instanceof VineBlock || OreDictCache.matches(this.vines, state)) {
         return true;
       }
     }
     if (info.has(FLOWER)) {
-      if (block instanceof BlockFlower || (block instanceof BlockDoublePlant && state.getValue(BlockDoublePlant.VARIANT) != BlockDoublePlant.EnumPlantType.GRASS && state.getValue(BlockDoublePlant.VARIANT) != BlockDoublePlant.EnumPlantType.FERN) || OreDictCache.matches(this.flower, state)) {
+      if (block instanceof FlowerBlock || (block instanceof DoublePlantBlock && state.getValue(DoublePlantBlock.VARIANT) != DoublePlantBlock.EnumPlantType.GRASS && state.getValue(DoublePlantBlock.VARIANT) != DoublePlantBlock.EnumPlantType.FERN) || OreDictCache.matches(this.flower, state)) {
         return true;
       }
     }
     if (info.has(MUSHROOM)) {
-      return block instanceof BlockMushroom || OreDictCache.matches(this.mushroom, state);
+      return block instanceof MushroomBlock || OreDictCache.matches(this.mushroom, state);
     }
 
     return false;

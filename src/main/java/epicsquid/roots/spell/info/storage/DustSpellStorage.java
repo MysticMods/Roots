@@ -4,7 +4,7 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.SpellDustInfo;
 import epicsquid.roots.util.SpellUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import javax.annotation.Nullable;
 
@@ -75,16 +75,16 @@ public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
+  public CompoundNBT serializeNBT() {
     if (this.info == null) {
-      return new NBTTagCompound();
+      return new CompoundNBT();
     } else {
       return this.info.serializeNBT();
     }
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound tag) {
+  public void deserializeNBT(CompoundNBT tag) {
     this.info = SpellDustInfo.fromNBT(tag);
   }
 

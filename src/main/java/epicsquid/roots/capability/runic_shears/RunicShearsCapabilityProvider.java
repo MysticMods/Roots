@@ -1,8 +1,8 @@
 package epicsquid.roots.capability.runic_shears;
 
 import epicsquid.roots.Roots;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -11,7 +11,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import javax.annotation.Nonnull;
 
-public class RunicShearsCapabilityProvider implements ICapabilityProvider, ICapabilitySerializable<NBTTagCompound> {
+public class RunicShearsCapabilityProvider implements ICapabilityProvider, ICapabilitySerializable<CompoundNBT> {
   public static final ResourceLocation IDENTIFIER = new ResourceLocation(Roots.MODID, "new_runic_shears_capability");
 
   @CapabilityInject(RunicShearsCapability.class)
@@ -20,22 +20,22 @@ public class RunicShearsCapabilityProvider implements ICapabilityProvider, ICapa
   private final RunicShearsCapability instance = RUNIC_SHEARS_CAPABILITY.getDefaultInstance();
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    return (NBTTagCompound) RUNIC_SHEARS_CAPABILITY.getStorage().writeNBT(RUNIC_SHEARS_CAPABILITY, this.instance, null);
+  public CompoundNBT serializeNBT() {
+    return (CompoundNBT) RUNIC_SHEARS_CAPABILITY.getStorage().writeNBT(RUNIC_SHEARS_CAPABILITY, this.instance, null);
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
+  public void deserializeNBT(CompoundNBT nbt) {
     RUNIC_SHEARS_CAPABILITY.getStorage().readNBT(RUNIC_SHEARS_CAPABILITY, this.instance, null, nbt);
   }
 
   @Override
-  public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+  public boolean hasCapability(Capability<?> capability, Direction facing) {
     return capability == RUNIC_SHEARS_CAPABILITY;
   }
 
   @Override
-  public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing) {
+  public <T> T getCapability(@Nonnull Capability<T> capability, Direction facing) {
     return capability == RUNIC_SHEARS_CAPABILITY ? RUNIC_SHEARS_CAPABILITY.cast(this.instance) : null;
   }
 

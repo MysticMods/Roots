@@ -6,19 +6,20 @@ import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -39,48 +40,48 @@ public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
   }
 
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public ActionResultType onItemUse(PlayerEntity player, World worldIn, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
     ItemStack itemstack = player.getHeldItem(hand);
 
     if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
-      return EnumActionResult.FAIL;
+      return ActionResultType.FAIL;
     } else {
       int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(itemstack, player, worldIn, pos);
-      if (hook != 0) return hook > 0 ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+      if (hook != 0) return hook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
 
-      IBlockState iblockstate = worldIn.getBlockState(pos);
+      BlockState iblockstate = worldIn.getBlockState(pos);
       Block block = iblockstate.getBlock();
-      IBlockState farmland;
+      BlockState farmland;
       if (ToolConfig.HoeMoisturises) {
-        farmland = Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7);
+        farmland = net.minecraft.block.Blocks.FARMLAND.getDefaultState().withProperty(FarmlandBlock.MOISTURE, 7);
       } else {
         farmland = Blocks.FARMLAND.getDefaultState();
       }
 
-      if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up())) {
-        if (block == Blocks.GRASS || block == Blocks.GRASS_PATH) {
+      if (facing != Direction.DOWN && worldIn.isAirBlock(pos.up())) {
+        if (block == net.minecraft.block.Blocks.GRASS || block == net.minecraft.block.Blocks.GRASS_PATH) {
           this.setBlock(itemstack, player, worldIn, pos, farmland);
-          return EnumActionResult.SUCCESS;
+          return ActionResultType.SUCCESS;
         }
 
-        if (block == Blocks.DIRT) {
+        if (block == net.minecraft.block.Blocks.DIRT) {
           switch (iblockstate.getValue(BlockDirt.VARIANT)) {
             case DIRT:
               this.setBlock(itemstack, player, worldIn, pos, farmland);
-              return EnumActionResult.SUCCESS;
+              return ActionResultType.SUCCESS;
             case COARSE_DIRT:
-              this.setBlock(itemstack, player, worldIn, pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
-              return EnumActionResult.SUCCESS;
+              this.setBlock(itemstack, player, worldIn, pos, net.minecraft.block.Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+              return ActionResultType.SUCCESS;
           }
         }
       }
 
-      return EnumActionResult.PASS;
+      return ActionResultType.PASS;
     }
   }
 
   @Override
-  public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+  public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
     if (!worldIn.isRemote) {
       stack.damageItem(1, entityLiving);
     }
@@ -92,21 +93,21 @@ public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
   }
 
   @Override
-  public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, net.minecraft.entity.player.EntityPlayer player) {
+  public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
     if (player.world.isRemote || player.capabilities.isCreativeMode) {
       return false;
     }
     if (!ToolConfig.HoeSilkTouch) {
       return super.onBlockStartBreak(itemstack, pos, player);
     }
-    final IBlockState state = player.world.getBlockState(pos);
+    final BlockState state = player.world.getBlockState(pos);
     final Block block = state.getBlock();
     final Material material = state.getMaterial();
     if (block instanceof net.minecraftforge.common.IShearable && (material == Material.VINE || material == Material.LEAVES)) {
       net.minecraftforge.common.IShearable target = (net.minecraftforge.common.IShearable) block;
       if (target.isShearable(itemstack, player.world, pos)) {
         java.util.List<ItemStack> drops = target.onSheared(itemstack, player.world, pos,
-            net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.FORTUNE, itemstack));
+            net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemstack));
         java.util.Random rand = new java.util.Random();
 
         for (ItemStack stack : drops) {
@@ -114,14 +115,14 @@ public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
           double d = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
           double d1 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
           double d2 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-          net.minecraft.entity.item.EntityItem entityitem = new net.minecraft.entity.item.EntityItem(player.world, (double) pos.getX() + d, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
+          ItemEntity entityitem = new ItemEntity(player.world, (double) pos.getX() + d, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
           entityitem.setDefaultPickupDelay();
           player.world.spawnEntity(entityitem);
         }
 
         itemstack.damageItem(1, player);
-        player.addStat(net.minecraft.stats.StatList.getBlockStats(block));
-        player.world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11); //TODO: Move to IShearable implementors in 1.12+
+        player.addStat(Stats.getBlockStats(block));
+        player.world.setBlockState(pos, net.minecraft.block.Blocks.AIR.getDefaultState(), 11); //TODO: Move to IShearable implementors in 1.12+
         return true;
       }
     }

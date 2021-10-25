@@ -5,17 +5,17 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.tileentity.TileEntityCatalystPlate;
 import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class ConditionValidSummon implements ICondition {
   @Override
-  public boolean checkCondition(TileEntityPyre tile, @Nullable EntityPlayer player) {
+  public boolean checkCondition(TileEntityPyre tile, @Nullable PlayerEntity player) {
     List<TileEntityCatalystPlate> plates = RitualUtil.getNearbyCatalystPlates(tile.getWorld(), tile.getPos());
     List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);
 
@@ -35,6 +35,6 @@ public class ConditionValidSummon implements ICondition {
   @Nullable
   @Override
   public ITextComponent failMessage() {
-    return new TextComponentTranslation("roots.ritual.condition.invalid_summon");
+    return new TranslationTextComponent("roots.ritual.condition.invalid_summon");
   }
 }

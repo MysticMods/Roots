@@ -6,8 +6,8 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.MysticalLib;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
@@ -30,8 +30,8 @@ public class GenerationData extends WorldSavedData {
   }
 
   @Override
-  public void readFromNBT(@Nonnull NBTTagCompound nbt) {
-    NBTTagList list = nbt.getTagList("gen_data_nodes", Constants.NBT.TAG_COMPOUND);
+  public void readFromNBT(@Nonnull CompoundNBT nbt) {
+    ListNBT list = nbt.getTagList("gen_data_nodes", Constants.NBT.TAG_COMPOUND);
     for (int i = 0; i < list.tagCount(); i++) {
       nodes.add(new GenerationNode(list.getCompoundTagAt(i)));
     }
@@ -39,8 +39,8 @@ public class GenerationData extends WorldSavedData {
 
   @Override
   @Nonnull
-  public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound) {
-    NBTTagList list = new NBTTagList();
+  public CompoundNBT writeToNBT(@Nonnull CompoundNBT compound) {
+    ListNBT list = new ListNBT();
     for (GenerationNode g : nodes) {
       list.appendTag(g.writeToNBT());
     }

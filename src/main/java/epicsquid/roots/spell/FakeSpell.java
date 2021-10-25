@@ -2,7 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -14,7 +14,7 @@ public class FakeSpell extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks) {
     return false;
   }
 

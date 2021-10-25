@@ -2,7 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
-import net.minecraft.nbt.NBTTagString;
+import net.minecraft.nbt.StringNBT;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;
@@ -33,7 +33,7 @@ public class SpellRegistry {
     return spell;
   }
 
-  public static SpellBase getSpell(NBTTagString tag) {
+  public static SpellBase getSpell(StringNBT tag) {
     ResourceLocation rl = new ResourceLocation(tag.getString());
     return getSpell(rl);
   }

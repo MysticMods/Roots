@@ -10,22 +10,19 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.particle.ParticlePyreLeaf;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockTallGrass;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -43,13 +40,13 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BlockGroveStone extends BlockBase {
   public static final PropertyEnum<Half> HALF = PropertyEnum.create("half", Half.class);
-  public static final PropertyDirection FACING = PropertyDirection.create("facing", (facing) -> facing == EnumFacing.NORTH || facing == EnumFacing.EAST);
+  public static final PropertyDirection FACING = PropertyDirection.create("facing", (facing) -> facing == Direction.NORTH || facing == Direction.EAST);
   public static final PropertyBool VALID = PropertyBool.create("valid");
 
   public BlockGroveStone(@Nonnull String name) {
     super(Material.ROCK, SoundType.STONE, 2.5f, name);
 
-    this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
+    this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, Direction.NORTH));
     this.setTickRandomly(true);
     useNeighborBrightness = true;
   }
@@ -61,19 +58,19 @@ public class BlockGroveStone extends BlockBase {
   }
 
   @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Nonnull
   @Override
-  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    if (state.getValue(FACING) == EnumFacing.NORTH) {
+  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    if (state.getValue(FACING) == Direction.NORTH) {
       if (state.getValue(HALF) == Half.TOP) {
         return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 0.7, 0.8);
       } else {
@@ -90,13 +87,13 @@ public class BlockGroveStone extends BlockBase {
 
   @Override
   @SuppressWarnings("deprecation")
-  public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(VALID, (meta & 1) == 1).withProperty(HALF, Half.fromInt((meta & 7) >> 1)).withProperty(FACING, (meta >> 3) == 0 ? EnumFacing.NORTH : EnumFacing.EAST);
+  public BlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(VALID, (meta & 1) == 1).withProperty(HALF, Half.fromInt((meta & 7) >> 1)).withProperty(FACING, (meta >> 3) == 0 ? Direction.NORTH : Direction.EAST);
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
-    return (((state.getValue(FACING) == EnumFacing.NORTH ? 0 : 1) << 2 ^ state.getValue(HALF).ordinal())) << 1 ^ (state.getValue(VALID) ? 1 : 0);
+  public int getMetaFromState(BlockState state) {
+    return (((state.getValue(FACING) == Direction.NORTH ? 0 : 1) << 2 ^ state.getValue(HALF).ordinal())) << 1 ^ (state.getValue(VALID) ? 1 : 0);
   }
 
   @Override
@@ -108,14 +105,14 @@ public class BlockGroveStone extends BlockBase {
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     if (worldIn.getBlockState(pos.down()).getBlock() == this) return false;
 
-    IBlockState up = worldIn.getBlockState(pos.up());
-    IBlockState upup = worldIn.getBlockState(pos.up().up());
+    BlockState up = worldIn.getBlockState(pos.up());
+    BlockState upup = worldIn.getBlockState(pos.up().up());
 
     return up.getBlock() != this && upup.getBlock() != this && super.canPlaceBlockAt(worldIn, pos) && up.getBlock().isReplaceable(worldIn, pos.up()) && upup.getBlock().isReplaceable(worldIn, pos.up().up());
   }
 
   @Override
-  public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+  public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, Half.MIDDLE).withProperty(FACING, state.getValue(FACING)));
     worldIn.setBlockState(pos.up().up(), this.getDefaultState().withProperty(HALF, Half.TOP).withProperty(FACING, state.getValue(FACING)));
@@ -123,25 +120,25 @@ public class BlockGroveStone extends BlockBase {
 
   @Override
   @SuppressWarnings("deprecation")
-  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+  public BlockState getStateForPlacement(World worldIn, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta, LivingEntity placer) {
     // Work out the facing
-    EnumFacing f = EnumFacing.fromAngle(placer.rotationYaw).getOpposite();
-    if (f == EnumFacing.NORTH || f == EnumFacing.SOUTH || f == EnumFacing.DOWN || f == EnumFacing.UP) {
-      f = EnumFacing.NORTH;
+    Direction f = Direction.fromAngle(placer.rotationYaw).getOpposite();
+    if (f == Direction.NORTH || f == Direction.SOUTH || f == Direction.DOWN || f == Direction.UP) {
+      f = Direction.NORTH;
     } else {
-      f = EnumFacing.EAST;
+      f = Direction.EAST;
     }
     return this.getDefaultState().withProperty(HALF, Half.BOTTOM).withProperty(FACING, f);
   }
 
   @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+  public void breakBlock(World worldIn, BlockPos pos, BlockState state) {
     super.breakBlock(worldIn, pos, state);
 
-    IBlockState down = worldIn.getBlockState(pos.down());
-    IBlockState downdown = worldIn.getBlockState(pos.down().down());
-    IBlockState up = worldIn.getBlockState(pos.up());
-    IBlockState upup = worldIn.getBlockState(pos.up().up());
+    BlockState down = worldIn.getBlockState(pos.down());
+    BlockState downdown = worldIn.getBlockState(pos.down().down());
+    BlockState up = worldIn.getBlockState(pos.up());
+    BlockState upup = worldIn.getBlockState(pos.up().up());
 
     if (down.getBlock() == this) {
       worldIn.setBlockToAir(pos.down());
@@ -158,7 +155,7 @@ public class BlockGroveStone extends BlockBase {
   }
 
   @Override
-  public int damageDropped(IBlockState state) {
+  public int damageDropped(BlockState state) {
     return 0;
   }
 
@@ -190,7 +187,7 @@ public class BlockGroveStone extends BlockBase {
   }
 
   @Override
-  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+  public void randomTick(World world, BlockPos pos, BlockState state, Random random) {
     super.randomTick(world, pos, state, random);
 
     if (!GeneralConfig.EnableGroveStoneEnvironment) return;
@@ -204,7 +201,7 @@ public class BlockGroveStone extends BlockBase {
 
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, pos.down(), 4, 5, 4, (p) -> {
         if (world.isAirBlock(p.up())) {
-          IBlockState s = world.getBlockState(p);
+          BlockState s = world.getBlockState(p);
           return s.getMaterial() == Material.GRASS;
         }
         return false;
@@ -215,40 +212,40 @@ public class BlockGroveStone extends BlockBase {
       for (BlockPos p : positions) {
         if (effectsCount <= 0) break;
 
-        IBlockState s = world.getBlockState(p);
+        BlockState s = world.getBlockState(p);
         Block b = s.getBlock();
         // TODO: Improve this somehow
         if (s.getMaterial() == Material.GRASS && world.isAirBlock(p.up().up())) {
           switch (random.nextInt(50)) {
             case 0:
-              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
-                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.ROSE, 3);
+              if (b.canSustainPlant(s, world, p, Direction.UP, net.minecraft.block.Blocks.DOUBLE_PLANT)) {
+                net.minecraft.block.Blocks.DOUBLE_PLANT.placeAt(world, p.up(), DoublePlantBlock.EnumPlantType.ROSE, 3);
                 break;
               }
             case 1:
-              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
-                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.SUNFLOWER, 3);
+              if (b.canSustainPlant(s, world, p, Direction.UP, net.minecraft.block.Blocks.DOUBLE_PLANT)) {
+                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), DoublePlantBlock.EnumPlantType.SUNFLOWER, 3);
                 break;
               }
             case 2:
             case 3:
-              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
-                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.GRASS, 3);
+              if (b.canSustainPlant(s, world, p, Direction.UP, net.minecraft.block.Blocks.DOUBLE_PLANT)) {
+                net.minecraft.block.Blocks.DOUBLE_PLANT.placeAt(world, p.up(), DoublePlantBlock.EnumPlantType.GRASS, 3);
                 break;
               }
             case 4:
-              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
-                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.PAEONIA, 3);
+              if (b.canSustainPlant(s, world, p, Direction.UP, net.minecraft.block.Blocks.DOUBLE_PLANT)) {
+                net.minecraft.block.Blocks.DOUBLE_PLANT.placeAt(world, p.up(), DoublePlantBlock.EnumPlantType.PAEONIA, 3);
                 break;
               }
             case 5:
-              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
-                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.SYRINGA, 3);
+              if (b.canSustainPlant(s, world, p, Direction.UP, net.minecraft.block.Blocks.DOUBLE_PLANT)) {
+                net.minecraft.block.Blocks.DOUBLE_PLANT.placeAt(world, p.up(), DoublePlantBlock.EnumPlantType.SYRINGA, 3);
                 break;
               }
             default:
-              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.TALLGRASS)) {
-                world.setBlockState(p.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 3);
+              if (b.canSustainPlant(s, world, p, Direction.UP, net.minecraft.block.Blocks.TALLGRASS)) {
+                world.setBlockState(p.up(), net.minecraft.block.Blocks.TALLGRASS.getDefaultState().withProperty(TallGrassBlock.TYPE, TallGrassBlock.EnumType.GRASS), 3);
                 break;
               }
               continue;
@@ -263,7 +260,7 @@ public class BlockGroveStone extends BlockBase {
 
   @Override
   @SideOnly(Side.CLIENT)
-  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+  public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     super.randomDisplayTick(stateIn, worldIn, pos, rand);
 
     if (stateIn.getValue(VALID) && stateIn.getValue(HALF) == Half.MIDDLE) {
@@ -331,8 +328,8 @@ public class BlockGroveStone extends BlockBase {
 
   @Override
   @Nonnull
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    if (face == EnumFacing.UP) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, BlockState state, BlockPos pos, Direction face) {
+    if (face == Direction.UP) {
       return BlockFaceShape.UNDEFINED;
     }
     return super.getBlockFaceShape(worldIn, state, pos, face);

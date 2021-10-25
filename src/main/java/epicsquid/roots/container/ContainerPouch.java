@@ -7,7 +7,6 @@
 
 package epicsquid.roots.container;
 
-import epicsquid.roots.Roots;
 import epicsquid.roots.handler.ClientPouchHandler;
 import epicsquid.roots.handler.IPouchHandler;
 import epicsquid.roots.handler.PouchHandler;
@@ -16,11 +15,11 @@ import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.item.PouchType;
 import epicsquid.roots.util.CommonHerbUtil;
 import epicsquid.roots.util.ServerHerbUtil;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.inventory.container.ClickType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -34,7 +33,7 @@ public class ContainerPouch extends Container {
   private IItemHandlerModifiable inventoryHandler;
   private IItemHandlerModifiable herbsHandler;
   private IPouchHandler handler;
-  private EntityPlayer player;
+  private PlayerEntity player;
   private ItemStack pouch;
 
   private int inventoryBegin;
@@ -44,7 +43,7 @@ public class ContainerPouch extends Container {
 
   private boolean isServerSide;
 
-  public ContainerPouch(EntityPlayer player, boolean isServerSide) {
+  public ContainerPouch(PlayerEntity player, boolean isServerSide) {
     this.player = player;
     this.isServerSide = isServerSide;
     ItemStack main = player.getHeldItemMainhand();
@@ -219,7 +218,7 @@ public class ContainerPouch extends Container {
     herbsEnd = q;
   }
 
-  private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
+  private void createPlayerInventory(PlayerInventory inventoryPlayer) {
 
     int xOffset = -5;
     int yOffset = 70;
@@ -235,7 +234,7 @@ public class ContainerPouch extends Container {
   }
 
   @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
+  public boolean canInteractWith(@Nonnull PlayerEntity player) {
     ItemStack main = player.getHeldItemMainhand();
     ItemStack off = player.getHeldItemOffhand();
     ItemStack first = ServerHerbUtil.getFirstPouch(player);
@@ -244,7 +243,7 @@ public class ContainerPouch extends Container {
 
   @Override
   @Nonnull
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     ItemStack slotStack = ItemStack.EMPTY;
 
     Slot slot = inventorySlots.get(index);
@@ -285,7 +284,7 @@ public class ContainerPouch extends Container {
 
   @Override
   @Nonnull
-  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
     if (slotId >= 0) {
       ItemStack stack = getSlot(slotId).getStack();
       if (stack.getItem() instanceof ItemPouch) {
@@ -304,7 +303,7 @@ public class ContainerPouch extends Container {
   }
 
   @Override
-  public void onContainerClosed(EntityPlayer playerIn) {
+  public void onContainerClosed(PlayerEntity playerIn) {
     super.onContainerClosed(playerIn);
 
     if (!player.world.isRemote) {

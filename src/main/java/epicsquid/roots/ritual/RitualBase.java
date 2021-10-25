@@ -7,8 +7,8 @@ import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.recipe.IRootsRecipe;
 import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.tileentity.TileEntityPyre;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -103,14 +103,14 @@ public abstract class RitualBase {
     this.conditions.add(condition);
   }
 
-  public boolean isRitualRecipe(TileEntityPyre tileEntityPyre, @Nullable EntityPlayer player) {
+  public boolean isRitualRecipe(TileEntityPyre tileEntityPyre, @Nullable PlayerEntity player) {
     if (isDisabled()) return false;
     return recipe.matches(tileEntityPyre, player);
   }
 
-  public boolean canFire(TileEntityPyre Pyre, @Nullable EntityPlayer player, boolean refire) {
+  public boolean canFire(TileEntityPyre Pyre, @Nullable PlayerEntity player, boolean refire) {
     if (!refire) {
-      IBlockState state = Pyre.getWorld().getBlockState(Pyre.getPos());
+      BlockState state = Pyre.getWorld().getBlockState(Pyre.getPos());
       if (state.getValue(BlockPyre.BURNING)) {
         return false;
       }
@@ -119,7 +119,7 @@ public abstract class RitualBase {
     return checkTileConditions(Pyre, player);
   }
 
-  private boolean checkTileConditions(TileEntityPyre tileEntityPyre, @Nullable EntityPlayer player) {
+  private boolean checkTileConditions(TileEntityPyre tileEntityPyre, @Nullable PlayerEntity player) {
     boolean success = true;
     for (ICondition condition : this.conditions) {
       if (!condition.check(tileEntityPyre, player)) {
@@ -130,12 +130,12 @@ public abstract class RitualBase {
   }
 
   @Nullable
-  public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable EntityPlayer player) {
+  public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable PlayerEntity player) {
     return this.spawnEntity(world, pos, getEntityClass(), player);
   }
 
   @Nullable
-  protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity, @Nullable EntityPlayer player) {
+  protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity, @Nullable PlayerEntity player) {
     List<EntityRitualBase> pastRituals = world
         .getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
     pastRituals.removeIf(o -> !o.getClass().equals(entity));
@@ -252,7 +252,7 @@ public abstract class RitualBase {
       return ingredients;
     }
 
-    public boolean matches(TileEntityPyre tile, @Nullable EntityPlayer player) {
+    public boolean matches(TileEntityPyre tile, @Nullable PlayerEntity player) {
       List<ItemStack> stacks = new ArrayList<>();
       for (int i = 0; i < tile.inventory.getSlots(); i++) {
         stacks.add(tile.inventory.extractItem(i, 1, true));

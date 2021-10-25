@@ -2,9 +2,9 @@ package epicsquid.roots.util;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -15,18 +15,18 @@ public class StateUtil {
   public static StateMatcher ANY = new StateMatcher("any");
   public static StateMatcher AIR = new StateMatcher("air");
 
-  public static class StateMatcher implements Predicate<IBlockState> {
+  public static class StateMatcher implements Predicate<BlockState> {
     private final String initial;
     private boolean invalid = false;
-    private IBlockState state = null;
+    private BlockState state = null;
 
-    private Predicate<IBlockState> tester = null;
-    private final Predicate<IBlockState> air = (s) -> s.getBlock() == Blocks.AIR;
-    private final Predicate<IBlockState> any = (s) -> true;
+    private Predicate<BlockState> tester = null;
+    private final Predicate<BlockState> air = (s) -> s.getBlock() == Blocks.AIR;
+    private final Predicate<BlockState> any = (s) -> true;
 
     private Set<IProperty<?>> pairList = null;
 
-    public IBlockState getState() {
+    public BlockState getState() {
       if (state == null) {
         state = calculateState();
       }
@@ -38,7 +38,7 @@ public class StateUtil {
     }
 
     @Override
-    public boolean test(IBlockState state) {
+    public boolean test(BlockState state) {
       if (invalid) {
         return false;
       }
@@ -52,7 +52,7 @@ public class StateUtil {
       return this.tester.test(state);
     }
 
-    private <T extends Comparable<T>> IBlockState findProperty(IBlockState baseState, IProperty<T> property, String keyName, String newValue) {
+    private <T extends Comparable<T>> BlockState findProperty(BlockState baseState, IProperty<T> property, String keyName, String newValue) {
       if (keyName.equals(property.getName())) {
         for (T value : property.getAllowedValues()) {
           if (property.getName(value).equals(newValue)) {
@@ -64,7 +64,7 @@ public class StateUtil {
       return null;
     }
 
-    private Predicate<IBlockState> calculateTester() {
+    private Predicate<BlockState> calculateTester() {
       if (initial.isEmpty()) {
         return null;
       }
@@ -83,13 +83,13 @@ public class StateUtil {
       return new Matcher(this.pairList, this.state);
     }
 
-    private IBlockState calculateState() {
+    private BlockState calculateState() {
       pairList = new HashSet<>();
 
       String[] split = initial.split("\\[");
       Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(split[0]));
       if (block != null) {
-        IBlockState startingState = block.getDefaultState();
+        BlockState startingState = block.getDefaultState();
         if (split.length > 1) {
           String[] split2 = split[1].replace("]", "").split(",");
           for (String part : split2) {
@@ -98,7 +98,7 @@ public class StateUtil {
               continue;
             }
             for (IProperty<?> property : startingState.getPropertyKeys()) {
-              IBlockState potential = findProperty(startingState, property, pair[0], pair[1]);
+              BlockState potential = findProperty(startingState, property, pair[0], pair[1]);
               if (potential != null) {
                 startingState = potential;
               }
@@ -111,17 +111,17 @@ public class StateUtil {
       }
     }
 
-    private static class Matcher implements Predicate<IBlockState> {
+    private static class Matcher implements Predicate<BlockState> {
       private final Set<IProperty<?>> props;
-      private final IBlockState state;
+      private final BlockState state;
 
-      public Matcher(Set<IProperty<?>> props, IBlockState state) {
+      public Matcher(Set<IProperty<?>> props, BlockState state) {
         this.props = props;
         this.state = state;
       }
 
       @Override
-      public boolean test(IBlockState state) {
+      public boolean test(BlockState state) {
         if (this.state.getBlock() != state.getBlock()) {
           return false;
         }
@@ -156,7 +156,7 @@ public class StateUtil {
    * all of the same property keys as state2, and that the values of these
    * properties match.
    */
-  public static boolean compareStates(IBlockState state1, IBlockState state2) {
+  public static boolean compareStates(BlockState state1, BlockState state2) {
     // This should cover most options
     if (state1.getBlock() != state2.getBlock()) return false;
 
@@ -189,7 +189,7 @@ public class StateUtil {
    * @param stateWithValues
    * @return
    */
-  public static boolean stateContainsValues(IBlockState stateBeingChecked, IBlockState stateWithValues) {
+  public static boolean stateContainsValues(BlockState stateBeingChecked, BlockState stateWithValues) {
     // If they aren't the same block then they aren't the same state
     if (stateBeingChecked.getBlock() != stateWithValues.getBlock()) return false;
 

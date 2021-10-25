@@ -1,7 +1,7 @@
 package epicsquid.roots.recipe;
 
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -30,7 +30,7 @@ public class BarkRecipe {
   public ItemStack getBlockStack() {
     if (this.blockStack == null) {
       if (this.type == BlockPlanks.EnumType.ACACIA || this.type == BlockPlanks.EnumType.DARK_OAK) {
-        return new ItemStack(Blocks.LOG2, 1, this.type.getMetadata() - 4);
+        return new ItemStack(net.minecraft.block.Blocks.LOG2, 1, this.type.getMetadata() - 4);
       } else {
         return new ItemStack(Blocks.LOG, 1, Objects.requireNonNull(this.type).getMetadata());
       }

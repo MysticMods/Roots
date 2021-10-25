@@ -7,10 +7,10 @@ import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.*;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Map;
 
@@ -25,13 +25,13 @@ public class CommandRecipes extends CraftTweakerCommand {
 
   @Override
   protected void init() {
-    setDescription(new TextComponentTranslation("roots.commands.dump_recipes.desc"));
+    setDescription(new TranslationTextComponent("roots.commands.dump_recipes.desc"));
   }
 
   @Override
   public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
     if (args.length < 1) {
-      sender.sendMessage(new TextComponentTranslation("roots.commands.dump_recipes.usage"));
+      sender.sendMessage(new TranslationTextComponent("roots.commands.dump_recipes.usage"));
       return;
     }
     Optional<SubCommand> command = Enums.getIfPresent(SubCommand.class, args[0]);
@@ -119,7 +119,7 @@ public class CommandRecipes extends CraftTweakerCommand {
           }
         case life_essence:
           CraftTweakerAPI.getLogger().logInfo("Life Essence reipes:");
-          for (Class<? extends EntityLivingBase> clazz : ModRecipes.getLifeEssenceList()) {
+          for (Class<? extends LivingEntity> clazz : ModRecipes.getLifeEssenceList()) {
             CraftTweakerAPI.getLogger().logInfo("  Entity: " + clazz.getSimpleName());
           }
           if (command.get() == SubCommand.life_essence) {

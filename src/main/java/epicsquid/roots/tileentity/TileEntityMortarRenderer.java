@@ -3,7 +3,7 @@ package epicsquid.roots.tileentity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class TileEntityMortarRenderer extends TileEntityRenderer<TileEntityMorta
 
     for (int i = 0; i < renderItems.size(); i++) {
       GlStateManager.pushMatrix();
-      EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, renderItems.get(i));
+      ItemEntity item = new ItemEntity(Minecraft.getMinecraft().world, x, y, z, renderItems.get(i));
       item.hoverStart = 0;
       Random random = new Random();
       random.setSeed(item.getItem().hashCode());

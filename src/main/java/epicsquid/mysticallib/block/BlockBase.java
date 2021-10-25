@@ -13,18 +13,15 @@ import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.model.block.BakedModelBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -55,7 +52,7 @@ public class BlockBase extends Block implements IBlock, IModeledObject, ICustomM
     setSoundType(type);
     setLightOpacity(15);
     setHardness(hardness);
-    itemBlock = new ItemBlock(this).setRegistryName(LibRegistry.getActiveModid(), name);
+    itemBlock = new BlockItem(this).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
   @Nonnull
@@ -91,7 +88,7 @@ public class BlockBase extends Block implements IBlock, IModeledObject, ICustomM
 
   @Override
   @Nonnull
-  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
     return box;
   }
 
@@ -137,7 +134,7 @@ public class BlockBase extends Block implements IBlock, IModeledObject, ICustomM
   }
 
   @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return isOpaque;
   }
 
@@ -146,7 +143,7 @@ public class BlockBase extends Block implements IBlock, IModeledObject, ICustomM
   }
 
   @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return isOpaque;
   }
 
@@ -199,19 +196,19 @@ public class BlockBase extends Block implements IBlock, IModeledObject, ICustomM
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     this.itemBlock = block;
     return block;
   }
 
 
   @Nullable
-  protected IBlockState getParentState() {
+  protected BlockState getParentState() {
     return null;
   }
 
   @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+  public Item getItemDropped(BlockState state, Random rand, int fortune) {
     if (drops != null && drops.size() > 0) {
       return drops.get(0).getItem();
     }
@@ -219,12 +216,12 @@ public class BlockBase extends Block implements IBlock, IModeledObject, ICustomM
   }
 
   @Override
-  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction face) {
     return isFlammable || super.isFlammable(world, pos, face);
   }
 
   @Override
-  public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+  public int getFlammability(IBlockAccess world, BlockPos pos, Direction face) {
     return isFlammable ? 100 : super.getFlammability(world, pos, face);
   }
 

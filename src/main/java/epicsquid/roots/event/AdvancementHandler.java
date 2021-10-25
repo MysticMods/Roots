@@ -5,14 +5,13 @@ import epicsquid.roots.util.XPUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.PlayerAdvancements;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.AdvancementEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
@@ -49,17 +48,17 @@ public class AdvancementHandler {
       grantXP(adv, world, pos);
 
       Advancement advancement = event.getAdvancement();
-      EntityPlayer player = event.getEntityPlayer();
+      PlayerEntity player = event.getEntityPlayer();
       if (player.world.isRemote) return;
 
-      PlayerAdvancements advancements = ((EntityPlayerMP) player).getAdvancements();
+      PlayerAdvancements advancements = ((ServerPlayerEntity) player).getAdvancements();
       for (Advancement parent = advancement.getParent(); parent != null; parent = parent.getParent()) {
         AdvancementProgress progress = advancements.getProgress(parent);
         if (progress.isDone()) continue;
         for (String criterion : progress.getRemaningCriteria()) {
           progress.grantCriterion(criterion);
         }
-        advancement.getRewards().apply((EntityPlayerMP) player);
+        advancement.getRewards().apply((ServerPlayerEntity) player);
         grantXP(parent.getId(), world, pos);
       }
       advancements.save();

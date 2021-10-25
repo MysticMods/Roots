@@ -6,11 +6,11 @@ import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.tileentity.TileEntityImposer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SlotImposerModifierInfo extends Slot {
-  private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
+  private static IInventory emptyInventory = new Inventory("[Null]", true, 0);
   private final IModifierProvider info;
   private final IModifierCore core;
   private final IBooleanProvider isHidden;
@@ -44,7 +44,7 @@ public class SlotImposerModifierInfo extends Slot {
   }
 
   @Override
-  public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
+  public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack) {
     return ItemStack.EMPTY;
   }
 
@@ -151,7 +151,7 @@ public class SlotImposerModifierInfo extends Slot {
   }
 
   @Override
-  public boolean canTakeStack(EntityPlayer playerIn) {
+  public boolean canTakeStack(PlayerEntity playerIn) {
     return false;
   }
 

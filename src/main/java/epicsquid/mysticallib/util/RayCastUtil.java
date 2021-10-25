@@ -3,12 +3,12 @@ package epicsquid.mysticallib.util;
 import com.google.common.base.Predicates;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
@@ -53,7 +53,7 @@ public class RayCastUtil {
         int i1 = MathHelper.floor(vec31.y);
         int j1 = MathHelper.floor(vec31.z);
         BlockPos blockpos = new BlockPos(l, i1, j1);
-        IBlockState iblockstate = world.getBlockState(blockpos);
+        BlockState iblockstate = world.getBlockState(blockpos);
         Block block = iblockstate.getBlock();
 
         if (((!ignoreBlockWithoutBoundingBox || iblockstate.getCollisionBoundingBox(world, blockpos) != Block.NULL_AABB)) && block.canCollideCheck(iblockstate, stopOnLiquid) || (!block.isAir(iblockstate, world, blockpos) && !block.canCollideCheck(iblockstate, stopOnLiquid) && allowNonfullCube)) {
@@ -138,24 +138,24 @@ public class RayCastUtil {
             d5 = -1.0E-4D;
           }
 
-          EnumFacing enumfacing;
+          Direction enumfacing;
 
           if (d3 < d4 && d3 < d5) {
-            enumfacing = i > l ? EnumFacing.WEST : EnumFacing.EAST;
+            enumfacing = i > l ? Direction.WEST : Direction.EAST;
             vec31 = new Vec3d(d0, vec31.y + d7 * d3, vec31.z + d8 * d3);
           } else if (d4 < d5) {
-            enumfacing = j > i1 ? EnumFacing.DOWN : EnumFacing.UP;
+            enumfacing = j > i1 ? Direction.DOWN : Direction.UP;
             vec31 = new Vec3d(vec31.x + d6 * d4, d1, vec31.z + d8 * d4);
           } else {
-            enumfacing = k > j1 ? EnumFacing.NORTH : EnumFacing.SOUTH;
+            enumfacing = k > j1 ? Direction.NORTH : Direction.SOUTH;
             vec31 = new Vec3d(vec31.x + d6 * d5, vec31.y + d7 * d5, d2);
           }
 
-          l = MathHelper.floor(vec31.x) - (enumfacing == EnumFacing.EAST ? 1 : 0);
-          i1 = MathHelper.floor(vec31.y) - (enumfacing == EnumFacing.UP ? 1 : 0);
-          j1 = MathHelper.floor(vec31.z) - (enumfacing == EnumFacing.SOUTH ? 1 : 0);
+          l = MathHelper.floor(vec31.x) - (enumfacing == Direction.EAST ? 1 : 0);
+          i1 = MathHelper.floor(vec31.y) - (enumfacing == Direction.UP ? 1 : 0);
+          j1 = MathHelper.floor(vec31.z) - (enumfacing == Direction.SOUTH ? 1 : 0);
           blockpos = new BlockPos(l, i1, j1);
-          IBlockState iblockstate1 = world.getBlockState(blockpos);
+          BlockState iblockstate1 = world.getBlockState(blockpos);
           Block block1 = iblockstate1.getBlock();
           if (!ignoreBlockWithoutBoundingBox || iblockstate1.getMaterial() == Material.PORTAL || iblockstate1.getCollisionBoundingBox(world, blockpos) != Block.NULL_AABB || block.canCollideCheck(iblockstate, stopOnLiquid) && (!block.isAir(iblockstate, world, blockpos) && !block.canCollideCheck(iblockstate, stopOnLiquid) && allowNonfullCube)) {
             if (block1.canCollideCheck(iblockstate1, stopOnLiquid) || allowNonfullCube) {
@@ -180,34 +180,34 @@ public class RayCastUtil {
   }
 
   @Nullable
-  public static Entity mouseOverEntity(EntityLivingBase entity) {
+  public static Entity mouseOverEntity(LivingEntity entity) {
     return mouseOverEntity(entity, 3.0);
   }
 
   @Nullable
-  public static Entity mouseOverEntity(EntityLivingBase entity, double maxReach) {
+  public static Entity mouseOverEntity(LivingEntity entity, double maxReach) {
     RayTraceAndEntityResult result = rayTraceMouseOver(entity, maxReach);
     return result.getPointedEntity();
   }
 
-  public static RayTraceAndEntityResult rayTraceMouseOver(EntityLivingBase traceEntity) {
+  public static RayTraceAndEntityResult rayTraceMouseOver(LivingEntity traceEntity) {
     return rayTraceMouseOver(traceEntity, 3.0d);
   }
 
-  public static RayTraceAndEntityResult rayTraceMouseOver(EntityLivingBase traceEntity, double maxEntity) {
+  public static RayTraceAndEntityResult rayTraceMouseOver(LivingEntity traceEntity, double maxEntity) {
     World world = traceEntity.world;
     Entity pointedEntity = null;
     RayTraceResult objectMouseOver;
-    boolean player = traceEntity instanceof EntityPlayer;
+    boolean player = traceEntity instanceof PlayerEntity;
     Vec3d eyePos = traceEntity.getPositionEyes(1);
     Vec3d lookVec = traceEntity.getLook(1.0F);
-    double reach = player ? traceEntity.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() : 5;
+    double reach = player ? traceEntity.getEntityAttribute(PlayerEntity.REACH_DISTANCE).getAttributeValue() : 5;
     Vec3d modifiedLookVec = eyePos.add(lookVec.x * reach, lookVec.y * reach, lookVec.z * reach);
     objectMouseOver = world.rayTraceBlocks(eyePos, modifiedLookVec, false, false, true);
     boolean flag = false;
     double distance = reach;
 
-    if (player && ((EntityPlayer) traceEntity).isCreative()) {
+    if (player && ((PlayerEntity) traceEntity).isCreative()) {
       distance = 6.0D;
     } else {
       if (reach > maxEntity) {
@@ -220,7 +220,7 @@ public class RayCastUtil {
     }
 
     Vec3d hitVec = null;
-    @SuppressWarnings("Guava") List<Entity> list = world.getEntitiesInAABBexcluding(traceEntity, traceEntity.getEntityBoundingBox().expand(modifiedLookVec.x, modifiedLookVec.y, modifiedLookVec.z).grow(1.0D, 1.0D, 1.0D), Predicates.and(EntitySelectors.NOT_SPECTATING, e -> e != null && e.canBeCollidedWith()));
+    @SuppressWarnings("Guava") List<Entity> list = world.getEntitiesInAABBexcluding(traceEntity, traceEntity.getEntityBoundingBox().expand(modifiedLookVec.x, modifiedLookVec.y, modifiedLookVec.z).grow(1.0D, 1.0D, 1.0D), Predicates.and(EntityPredicates.NOT_SPECTATING, e -> e != null && e.canBeCollidedWith()));
     double distance2 = distance;
 
     for (Entity entity : list) {

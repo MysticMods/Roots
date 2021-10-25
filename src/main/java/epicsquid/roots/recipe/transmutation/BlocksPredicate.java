@@ -2,7 +2,7 @@ package epicsquid.roots.recipe.transmutation;
 
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class BlocksPredicate implements BlockStatePredicate {
   private Set<Block> blocks;
-  private List<IBlockState> states;
+  private List<BlockState> states;
   private List<ItemStack> items;
 
   public BlocksPredicate(Block... blocks) {
@@ -22,12 +22,12 @@ public class BlocksPredicate implements BlockStatePredicate {
   }
 
   @Override
-  public boolean test(IBlockState state) {
+  public boolean test(BlockState state) {
     return blocks.contains(state.getBlock());
   }
 
   @Override
-  public List<IBlockState> matchingStates() {
+  public List<BlockState> matchingStates() {
     return states;
   }
 

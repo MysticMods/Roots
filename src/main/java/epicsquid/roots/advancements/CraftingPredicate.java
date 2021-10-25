@@ -6,8 +6,8 @@ import com.google.gson.JsonSyntaxException;
 import epicsquid.mysticallib.advancement.IGenericPredicate;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.JsonUtils;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -23,7 +23,7 @@ public class CraftingPredicate implements IGenericPredicate<FeyCraftingRecipe> {
   }
 
   @Override
-  public boolean test(EntityPlayerMP player, FeyCraftingRecipe condition) {
+  public boolean test(ServerPlayerEntity player, FeyCraftingRecipe condition) {
     return recipe.equals(condition);
   }
 
@@ -31,8 +31,8 @@ public class CraftingPredicate implements IGenericPredicate<FeyCraftingRecipe> {
   public IGenericPredicate<FeyCraftingRecipe> deserialize(@Nullable JsonElement element) {
     if (element != null) {
       JsonObject object = element.getAsJsonObject();
-      if (JsonUtils.isString(object, "recipe")) {
-        ResourceLocation rl = new ResourceLocation(JsonUtils.getString(object, "recipe"));
+      if (JSONUtils.isString(object, "recipe")) {
+        ResourceLocation rl = new ResourceLocation(JSONUtils.getString(object, "recipe"));
         FeyCraftingRecipe recipe = ModRecipes.getFeyCraftingRecipe(rl);
         if (recipe != null) {
           return new CraftingPredicate(recipe);

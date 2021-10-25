@@ -10,14 +10,14 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -59,43 +59,43 @@ public class TileEntityMortar extends TileBase {
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public CompoundNBT writeToNBT(CompoundNBT tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
     return tag;
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound tag) {
+  public void readFromNBT(CompoundNBT tag) {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
   }
 
   @Override
-  public NBTTagCompound getUpdateTag() {
-    return writeToNBT(new NBTTagCompound());
+  public CompoundNBT getUpdateTag() {
+    return writeToNBT(new CompoundNBT());
   }
 
   @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
+  public SUpdateTileEntityPacket getUpdatePacket() {
+    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
     readFromNBT(pkt.getNbtCompound());
   }
 
   @Override
-  public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.UP;
+  public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
+    return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == Direction.UP;
   }
 
   @SuppressWarnings("unchecked")
   @Nullable
   @Override
-  public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-    if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.UP) {
+  public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
+    if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == Direction.UP) {
       return (T) inventory;
     }
 
@@ -195,8 +195,8 @@ public class TileEntityMortar extends TileBase {
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
-    if (hand != EnumHand.MAIN_HAND) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
+    if (hand != Hand.MAIN_HAND) {
       return true;
     }
     ItemStack heldItem = player.getHeldItem(hand);
@@ -250,7 +250,7 @@ public class TileEntityMortar extends TileBase {
   }
 
   @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }

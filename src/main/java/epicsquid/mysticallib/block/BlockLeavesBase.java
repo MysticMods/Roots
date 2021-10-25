@@ -3,19 +3,19 @@ package epicsquid.mysticallib.block;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.item.ItemBlockLeaves;
 import epicsquid.mysticallib.model.IModeledObject;
-import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +31,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
-public class BlockLeavesBase extends BlockLeaves implements IBlock, IModeledObject, INoCullBlock {
+public class BlockLeavesBase extends LeavesBlock implements IBlock, IModeledObject, INoCullBlock {
   private @Nonnull
   Item itemBlock;
   private List<ItemStack> drops;
@@ -81,12 +81,12 @@ public class BlockLeavesBase extends BlockLeaves implements IBlock, IModeledObje
   }
 
   @Override
-  protected int getSaplingDropChance(IBlockState state) {
+  protected int getSaplingDropChance(BlockState state) {
     return saplingChance;
   }
 
   @Override
-  public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+  public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, BlockState state, int fortune) {
     Random rand = world instanceof World ? ((World) world).rand : new Random();
     int chance = getSaplingDropChance(state);
 
@@ -108,7 +108,7 @@ public class BlockLeavesBase extends BlockLeaves implements IBlock, IModeledObje
 
   @Override
   @Nonnull
-  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
     return box;
   }
 
@@ -124,18 +124,18 @@ public class BlockLeavesBase extends BlockLeaves implements IBlock, IModeledObje
   }
 
   @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return Blocks.LEAVES.isOpaqueCube(state);
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public BlockRenderLayer getRenderLayer() {
-    return Blocks.LEAVES.getRenderLayer();
+    return net.minecraft.block.Blocks.LEAVES.getRenderLayer();
   }
 
   @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return true;
   }
 
@@ -164,13 +164,13 @@ public class BlockLeavesBase extends BlockLeaves implements IBlock, IModeledObje
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     this.itemBlock = block;
     return block;
   }
 
   @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+  public Item getItemDropped(BlockState state, Random rand, int fortune) {
     if (drops != null && drops.size() > 0) {
       return drops.get(0).getItem();
     }
@@ -178,12 +178,12 @@ public class BlockLeavesBase extends BlockLeaves implements IBlock, IModeledObje
   }
 
   @Override
-  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction face) {
     return isFlammable || super.isFlammable(world, pos, face);
   }
 
   @Override
-  public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+  public int getFlammability(IBlockAccess world, BlockPos pos, Direction face) {
     return isFlammable ? 100 : super.getFlammability(world, pos, face);
   }
 
@@ -194,12 +194,12 @@ public class BlockLeavesBase extends BlockLeaves implements IBlock, IModeledObje
   }
 
   @Override
-  public IBlockState getStateFromMeta(int meta) {
+  public BlockState getStateFromMeta(int meta) {
     return this.getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY, (meta & 8) > 0);
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
+  public int getMetaFromState(BlockState state) {
     int i = 0;
 
     if (!state.getValue(DECAYABLE)) {
@@ -220,7 +220,7 @@ public class BlockLeavesBase extends BlockLeaves implements IBlock, IModeledObje
 
   @Override
   @SideOnly(Side.CLIENT)
-  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-    return Blocks.LEAVES.shouldSideBeRendered(blockState, blockAccess, pos, side);
+  public boolean shouldSideBeRendered(BlockState blockState, IBlockAccess blockAccess, BlockPos pos, Direction side) {
+    return net.minecraft.block.Blocks.LEAVES.shouldSideBeRendered(blockState, blockAccess, pos, side);
   }
 }

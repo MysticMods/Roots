@@ -7,9 +7,9 @@ import epicsquid.roots.item.ItemDruidKnife;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -29,14 +29,14 @@ public class ItemRunedKnife extends ItemDruidKnife implements ILivingRepair {
   }
 
   @Override
-  public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+  public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
     if (super.hitEntity(stack, target, attacker)) {
       if (Util.rand.nextBoolean()) {
-        PotionEffect bleed = target.getActivePotionEffect(ModPotions.bleeding);
+        EffectInstance bleed = target.getActivePotionEffect(ModPotions.bleeding);
         if (bleed == null) {
-          target.addPotionEffect(new PotionEffect(ModPotions.bleeding, 30));
+          target.addPotionEffect(new EffectInstance(ModPotions.bleeding, 30));
         } else {
-          target.addPotionEffect(new PotionEffect(ModPotions.bleeding, 30 + bleed.getDuration(), Math.max(2, bleed.getAmplifier() + 1)));
+          target.addPotionEffect(new EffectInstance(ModPotions.bleeding, 30 + bleed.getDuration(), Math.max(2, bleed.getAmplifier() + 1)));
         }
       }
       return true;

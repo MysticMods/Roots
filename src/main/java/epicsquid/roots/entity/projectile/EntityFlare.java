@@ -7,11 +7,11 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualFireStorm;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -51,14 +51,14 @@ public class EntityFlare extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     getDataManager().set(EntityFlare.value, compound.getFloat("value"));
     getDataManager().setDirty(EntityFlare.value);
     this.threshhold = compound.getDouble("threshold");
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setFloat("value", getDataManager().get(value));
     compound.setDouble("threhsold", this.threshhold);
   }
@@ -79,14 +79,14 @@ public class EntityFlare extends Entity {
     this.posX += this.motionX;
     this.posY += this.motionY;
     this.posZ += this.motionZ;
-    IBlockState state = getEntityWorld().getBlockState(getPosition());
+    BlockState state = getEntityWorld().getBlockState(getPosition());
     if (state.isFullCube() && state.isOpaqueCube() && this.posY <= threshhold + VARIANCE) {
       if (getEntityWorld().isRemote) {
         for (int i = 0; i < 40; i++) {
           ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha, val + rand.nextFloat() * val, 40);
         }
       }
-      List<EntityLivingBase> entities = Util.getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), val * 0.125f, val * 0.125f, val * 0.125f);
+      List<LivingEntity> entities = Util.getEntitiesWithinRadius(getEntityWorld(), LivingEntity.class, this.getPosition(), val * 0.125f, val * 0.125f, val * 0.125f);
       this.attackWithFire(entities);
       if (world.isAirBlock(getPosition().up())) {
         world.setBlockState(getPosition().up(), ModBlocks.fey_fire.getDefaultState());
@@ -99,7 +99,7 @@ public class EntityFlare extends Entity {
         ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) (prevPosX + (posX - prevPosX) * coeff), (float) (prevPosY + (posY - prevPosY) * coeff), (float) (prevPosZ + (posZ - prevPosZ) * coeff), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha, val + rand.nextFloat() * val, 40);
       }
     }
-    List<EntityLivingBase> entities = Util.getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), val * 0.125f, val * 0.125f, val * 0.125f);
+    List<LivingEntity> entities = Util.getEntitiesWithinRadius(getEntityWorld(), LivingEntity.class, this.getPosition(), val * 0.125f, val * 0.125f, val * 0.125f);
     if (entities.size() > 0) {
       this.attackWithFire(entities);
       if (getEntityWorld().isRemote) {
@@ -111,9 +111,9 @@ public class EntityFlare extends Entity {
     }
   }
 
-  private void attackWithFire(List<EntityLivingBase> entities) {
-    for (EntityLivingBase target : entities) {
-      if (target instanceof EntityPlayer) {
+  private void attackWithFire(List<LivingEntity> entities) {
+    for (LivingEntity target : entities) {
+      if (target instanceof PlayerEntity) {
         continue;
       }
       if (EntityUtil.isFriendly(target, RitualRegistry.ritual_fire_storm) || !EntityUtil.isHostile(target, RitualRegistry.ritual_fire_storm)) {

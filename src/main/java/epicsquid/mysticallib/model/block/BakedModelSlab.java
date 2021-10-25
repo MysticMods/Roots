@@ -11,13 +11,13 @@ import epicsquid.mysticallib.model.CustomModelBase;
 import epicsquid.mysticallib.model.ModelUtil;
 import epicsquid.mysticallib.model.parts.Cube;
 import epicsquid.mysticallib.struct.Vec4f;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockSlab.EnumBlockHalf;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.SlabBlock.EnumBlockHalf;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.model.IModelState;
 
@@ -34,23 +34,23 @@ public class BakedModelSlab extends BakedModelBlock {
       @Nonnull CustomModelBase model) {
     super(format, bakedTextureGetter, model);
     TextureAtlasSprite[] texes = new TextureAtlasSprite[] { texwest, texeast, texdown, texup, texnorth, texsouth };
-    cube_down = ModelUtil.makeCube(format, 0, 0, 0, 1, 0.5, 1, null, texes, 0).setNoCull(EnumFacing.UP);
-    cube_up = ModelUtil.makeCube(format, 0, 0.5, 0, 1, 0.5, 1, null, texes, 0).setNoCull(EnumFacing.DOWN);
+    cube_down = ModelUtil.makeCube(format, 0, 0, 0, 1, 0.5, 1, null, texes, 0).setNoCull(Direction.UP);
+    cube_up = ModelUtil.makeCube(format, 0, 0.5, 0, 1, 0.5, 1, null, texes, 0).setNoCull(Direction.DOWN);
   }
 
   @Override
   @Nonnull
-  public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+  public List<net.minecraft.client.renderer.model.BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, long rand) {
     List<BakedQuad> quads = new ArrayList<>();
     getFaceQuads(quads, side, state);
     return quads;
   }
 
-  private void getFaceQuads(@Nonnull List<BakedQuad> quads, @Nullable EnumFacing side, @Nullable IBlockState state) {
+  private void getFaceQuads(@Nonnull List<net.minecraft.client.renderer.model.BakedQuad> quads, @Nullable Direction side, @Nullable BlockState state) {
     if (state == null) {
       cube_down.addToList(quads, side);
     } else {
-      EnumBlockHalf half = state.getValue(BlockSlab.HALF);
+      EnumBlockHalf half = state.getValue(SlabBlock.HALF);
       if (half == EnumBlockHalf.BOTTOM) {
         cube_down.addToList(quads, side);
       } else if (half == EnumBlockHalf.TOP) {

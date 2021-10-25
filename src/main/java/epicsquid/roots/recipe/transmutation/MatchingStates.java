@@ -1,13 +1,13 @@
 package epicsquid.roots.recipe.transmutation;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collections;
 import java.util.List;
 
 public interface MatchingStates {
-  default List<IBlockState> matchingStates() {
+  default List<BlockState> matchingStates() {
     return Collections.emptyList();
   }
 

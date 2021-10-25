@@ -18,7 +18,7 @@ import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementList;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.advancements.GuiScreenAdvancements;
+import net.minecraft.client.gui.advancements.AdvancementsScreen;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -412,7 +412,7 @@ public class PatchouliHack {
           state.color = state.book.linkColor;
           state.tooltip = adv.getDisplay().getDescription().getFormattedText();
           state.onClick = () -> {
-            GuiScreenAdvancements screen = new GuiScreenAdvancements(mc.player.connection.getAdvancementManager());
+            AdvancementsScreen screen = new AdvancementsScreen(mc.player.connection.getAdvancementManager());
             screen.setSelectedTab(adv);
             mc.displayGuiScreen(screen);
           };

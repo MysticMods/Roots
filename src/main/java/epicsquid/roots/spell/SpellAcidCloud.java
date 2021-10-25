@@ -13,13 +13,13 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.DamageUtil;
 import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.types.RandomIterable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -115,14 +115,14 @@ public class SpellAcidCloud extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
-      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, info.has(RADIUS) ? boxBoost.offset(player.getPosition()) : boxGeneral.offset(player.getPosition()));
+      List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class, info.has(RADIUS) ? boxBoost.offset(player.getPosition()) : boxGeneral.offset(player.getPosition()));
       int healed = 0;
       int damaged = 0;
       if (info.has(SPEED)) {
-        player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1, 18, false, false));
-        player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 1, 0, false, false));
+        player.addPotionEffect(new EffectInstance(Effects.SPEED, 1, 18, false, false));
+        player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1, 0, false, false));
       }
       float modifier = 1;
       if (info.has(NIGHT)) {
@@ -132,7 +132,7 @@ public class SpellAcidCloud extends SpellBase {
       if (info.has(UNDERWATER)) {
         modifier += underwater_boost;
       }
-      for (EntityLivingBase e : new RandomIterable<>(entities)) {
+      for (LivingEntity e : new RandomIterable<>(entities)) {
         // TODO: Visual effect of cloud (white or gold)
         // TODO: Enforce healing check
         // TODO: Additional visual effect
@@ -142,7 +142,7 @@ public class SpellAcidCloud extends SpellBase {
             continue;
           }
           if (regen_duration != -1) {
-            e.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, regen_duration, regen_amp));
+            e.addPotionEffect(new EffectInstance(Effects.REGENERATION, regen_duration, regen_amp));
           }
           // TODO: Particle effect to denote entities being healed
           if (healing > 0) {
@@ -154,13 +154,13 @@ public class SpellAcidCloud extends SpellBase {
           }
         } else {
           // TODO: Make instanceof check helper function
-          if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+          if (e != player && !(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
             if (e.hurtTime <= 0 && !e.isDead) {
               if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellAcidCloud.instance)) {
                 continue;
               }
               if (info.has(WEAKNESS)) {
-                e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, weakness_duration, weakness_amplifier));
+                e.addPotionEffect(new EffectInstance(Effects.WEAKNESS, weakness_duration, weakness_amplifier));
               }
               if (info.has(FIRE)) {
                 DamageUtil.unhurt(e);
@@ -178,10 +178,10 @@ public class SpellAcidCloud extends SpellBase {
                 e.attackEntityFrom(ModDamage.radiantDamageFrom(player), undead_damage * modifier);
               }
               if (info.has(SLOWING)) {
-                e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slow_duration, slow_amplifier));
+                e.addPotionEffect(new EffectInstance(Effects.SLOWNESS, slow_duration, slow_amplifier));
               }
               if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
-                e.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplification));
+                e.addPotionEffect(new EffectInstance(Effects.POISON, poisonDuration, poisonAmplification));
               }
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);

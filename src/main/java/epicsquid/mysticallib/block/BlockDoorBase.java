@@ -13,18 +13,18 @@ import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.model.block.BakedModelBlock;
 import epicsquid.mysticallib.model.block.BakedModelDoor;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
+import net.minecraft.block.DoorBlock;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -34,7 +34,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("deprecation")
-public class BlockDoorBase extends BlockDoor implements IBlock, IModeledObject, ICustomModeledObject {
+public class BlockDoorBase extends DoorBlock implements IBlock, IModeledObject, ICustomModeledObject {
   private @Nonnull Item itemBlock;
   public List<ItemStack> drops = null;
   private boolean isOpaque = false;
@@ -97,7 +97,7 @@ public class BlockDoorBase extends BlockDoor implements IBlock, IModeledObject, 
   }
 
   @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return isOpaque;
   }
 
@@ -106,22 +106,22 @@ public class BlockDoorBase extends BlockDoor implements IBlock, IModeledObject, 
   }
 
   @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Override
-  public boolean canPlaceTorchOnTop(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+  public boolean canPlaceTorchOnTop(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
     return true;
   }
 
   @Override
-  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction face) {
     return isFlammable || super.isFlammable(world, pos, face);
   }
 
   @Override
-  public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+  public int getFlammability(IBlockAccess world, BlockPos pos, Direction face) {
     return isFlammable ? 100 : super.getFlammability(world, pos, face);
   }
 
@@ -139,21 +139,21 @@ public class BlockDoorBase extends BlockDoor implements IBlock, IModeledObject, 
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     this.itemBlock = block;
     return block;
   }
 
   @Nonnull
   @Override
-  public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+  public ItemStack getItem(World worldIn, BlockPos pos, BlockState state) {
     return new ItemStack(itemBlock);
   }
 
   @Nonnull
   @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? Items.AIR : itemBlock;
+  public Item getItemDropped(BlockState state, Random rand, int fortune) {
+    return state.getValue(HALF) == DoorBlock.EnumDoorHalf.UPPER ? Items.AIR : itemBlock;
   }
 
   @Override
@@ -176,7 +176,7 @@ public class BlockDoorBase extends BlockDoor implements IBlock, IModeledObject, 
       ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(getRegistryName(), "handlers"));
       ModelLoader.setCustomStateMapper(this, (new StateMap.Builder()).ignore(POWERED).build());
     } else {
-      ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(getRegistryName(), "handler"));
+      ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new net.minecraft.client.renderer.model.ModelResourceLocation(getRegistryName(), "handler"));
     }
   }
 

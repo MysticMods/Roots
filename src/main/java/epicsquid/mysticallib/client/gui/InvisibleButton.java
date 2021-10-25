@@ -2,14 +2,14 @@ package epicsquid.mysticallib.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.GlStateManager;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
 
-public class InvisibleButton extends GuiButton {
+public class InvisibleButton extends Button {
 
   public static boolean DEBUG_LOCATION = false;
 
@@ -23,7 +23,7 @@ public class InvisibleButton extends GuiButton {
       this.mouseDragged(mc, mouseX, mouseY);
 
       if (DEBUG_LOCATION) {
-        GuiContainer.drawRect(x, y, x + width, y + height, Color.BLUE.getRGB());
+        ContainerScreen.drawRect(x, y, x + width, y + height, Color.BLUE.getRGB());
       }
 
       if (!displayString.isEmpty()) {

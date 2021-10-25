@@ -6,10 +6,9 @@ import epicsquid.roots.spell.SpellDesaturate;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,7 +25,7 @@ public class MessageDesaturationFX implements IMessage {
     this.entityId = id;
   }
 
-  public MessageDesaturationFX(EntityPlayer player) {
+  public MessageDesaturationFX(PlayerEntity player) {
     this.entityId = player.getEntityId();
   }
 
@@ -47,8 +46,8 @@ public class MessageDesaturationFX implements IMessage {
     protected void handleMessage(MessageDesaturationFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       Entity entity = world.getEntityByID(message.entityId);
-      if (entity instanceof EntityPlayer) {
-        EntityPlayer player = (EntityPlayer) entity;
+      if (entity instanceof PlayerEntity) {
+        PlayerEntity player = (PlayerEntity) entity;
         for (int i = 0; i <= 360; i += 16) {
           float tx = (float) entity.posX + 0.5f * (float) Math.sin(Math.toRadians(i));
           float ty = (float) entity.posY + (player.height / 2) + 0.5f;

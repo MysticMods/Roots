@@ -3,14 +3,12 @@ package epicsquid.mysticallib.util;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -37,8 +35,8 @@ public class Util {
         new AxisAlignedBB(pos.getX() - xradius, pos.getY() - yradius, pos.getZ() - zradius, pos.getX() + 1 + +xradius, pos.getY() + 1 + yradius, pos.getZ() + 1 + zradius));
   }
 
-  public static List<EntityLiving> getEntitiesWithinRadius(World world, Predicate<Entity> comparison, BlockPos pos, float xradius, float yradius, float zradius) {
-    return world.getEntitiesWithinAABB(EntityLiving.class,
+  public static List<MobEntity> getEntitiesWithinRadius(World world, Predicate<Entity> comparison, BlockPos pos, float xradius, float yradius, float zradius) {
+    return world.getEntitiesWithinAABB(MobEntity.class,
         new AxisAlignedBB(pos.getX() - xradius, pos.getY() - yradius, pos.getZ() - zradius, pos.getX() + 1 + xradius, pos.getY() + 1 + yradius, pos.getZ() + 1 + zradius))
         .stream().filter(comparison).collect(Collectors.toList());
   }
@@ -160,46 +158,46 @@ public class Util {
     if (inventory != null && !world.isRemote) {
       for (int i = 0; i < inventory.getSlots(); i++) {
         if (!inventory.getStackInSlot(i).isEmpty()) {
-          world.spawnEntity(new EntityItem(world, x, y, z, inventory.getStackInSlot(i)));
+          world.spawnEntity(new ItemEntity(world, x, y, z, inventory.getStackInSlot(i)));
         }
       }
     }
   }
 
   public static void appendLoreTag(ItemStack stack, String... lines) {
-    NBTTagCompound tag = stack.getTagCompound();
+    CompoundNBT tag = stack.getTagCompound();
     if (tag == null) {
-      tag = new NBTTagCompound();
+      tag = new CompoundNBT();
       stack.setTagCompound(tag);
     }
 
-    NBTTagCompound display;
-    if (!tag.hasKey("display") || !(tag.getTag("display") instanceof NBTTagCompound)) {
-      display = new NBTTagCompound();
+    CompoundNBT display;
+    if (!tag.hasKey("display") || !(tag.getTag("display") instanceof CompoundNBT)) {
+      display = new CompoundNBT();
       tag.setTag("display", display);
     } else {
       display = tag.getCompoundTag("display");
     }
 
-    NBTTagList lore;
-    if (!display.hasKey("Lore") || !(display.getTag("Lore") instanceof NBTTagList)) {
-      lore = new NBTTagList();
+    ListNBT lore;
+    if (!display.hasKey("Lore") || !(display.getTag("Lore") instanceof ListNBT)) {
+      lore = new ListNBT();
       display.setTag("Lore", lore);
     } else {
       lore = display.getTagList("Lore", Constants.NBT.TAG_STRING);
     }
 
     for (String string : lines) {
-      lore.appendTag(new NBTTagString(string));
+      lore.appendTag(new StringNBT(string));
     }
   }
 
   public static AxisAlignedBB box = new AxisAlignedBB(-3, -1, -3, 4, 2, 4);
 
   @Nullable
-  public static EntityPlayerMP getPlayerByContainer(World world, Container container) {
+  public static ServerPlayerEntity getPlayerByContainer(World world, Container container) {
     if (!world.isRemote) {
-      for (EntityPlayerMP player : world.getPlayers(EntityPlayerMP.class, (o) -> true)) {
+      for (ServerPlayerEntity player : world.getPlayers(ServerPlayerEntity.class, (o) -> true)) {
         if (player.openContainer == container) {
           return player;
         }

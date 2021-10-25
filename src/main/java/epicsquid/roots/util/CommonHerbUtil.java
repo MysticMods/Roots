@@ -1,14 +1,14 @@
 package epicsquid.roots.util;
 
 import epicsquid.roots.item.ItemPouch;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommonHerbUtil {
-  public static ItemStack getFirstPouch(EntityPlayer player) {
+  public static ItemStack getFirstPouch(PlayerEntity player) {
     List<ItemStack> pouches = getPouches(player);
     if (pouches.isEmpty()) {
       return ItemStack.EMPTY;
@@ -17,7 +17,7 @@ public class CommonHerbUtil {
     return pouches.get(0);
   }
 
-  public static List<ItemStack> getPouches(EntityPlayer player) {
+  public static List<ItemStack> getPouches(PlayerEntity player) {
     List<ItemStack> result = new ArrayList<>();
 /*    if (Loader.isModLoaded("baubles")) {
       ItemStack stack = BaublePowderInventoryUtil.getPouch(player);

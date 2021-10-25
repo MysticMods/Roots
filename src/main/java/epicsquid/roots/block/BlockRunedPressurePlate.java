@@ -3,7 +3,7 @@ package epicsquid.roots.block;
 import epicsquid.mysticallib.block.BlockPressurePlateBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -17,7 +17,7 @@ public class BlockRunedPressurePlate extends BlockPressurePlateBase {
   }
 
   @Override
-  public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+  public boolean canEntityDestroy(BlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
     if (BlockRunedObsidian.checkEntityBlocked(state, world, pos, entity)) {
       return false;
     }

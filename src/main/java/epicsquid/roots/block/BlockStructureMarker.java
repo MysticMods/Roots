@@ -5,7 +5,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -35,12 +35,12 @@ public class BlockStructureMarker extends BlockBase {
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
+  public int getMetaFromState(BlockState state) {
     return state.getValue(marker_value);
   }
 
   @Override
-  public IBlockState getStateFromMeta(int meta) {
+  public BlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(marker_value, meta);
   }
 

@@ -4,7 +4,7 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualDivineProtection;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -60,9 +60,9 @@ public class EntityRitualDivineProtection extends EntityRitualBase {
           world.getWorldInfo().setRaining(false);
         }
       }
-      List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
-      for (EntityLivingBase e : entities) {
+      List<LivingEntity> entities = world
+          .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
+      for (LivingEntity e : entities) {
         if (e.isEntityUndead()) {
           if (Loader.isModLoaded("consecration")) {
             e.attackEntityFrom(ModDamage.radiantDamageFrom(null), ritual.consecration_damage);

@@ -13,7 +13,7 @@ import epicsquid.roots.util.SpellUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
@@ -241,7 +241,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
+  public CompoundNBT serializeNBT() {
     if (getSelectedInfo() == null) {
       for (int i = MIN_SPELL_SLOT; i <= MAX_SPELL_SLOT; i++) {
         if (spells.get(i) != null) {
@@ -250,10 +250,10 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
         }
       }
     }
-    NBTTagCompound compound = new NBTTagCompound();
-    NBTTagCompound spells = new NBTTagCompound();
+    CompoundNBT compound = new CompoundNBT();
+    CompoundNBT spells = new CompoundNBT();
     for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
-      spells.setTag(String.valueOf(entry.getIntKey()), entry.getValue() == null ? new NBTTagCompound() : entry.getValue().serializeNBT());
+      spells.setTag(String.valueOf(entry.getIntKey()), entry.getValue() == null ? new CompoundNBT() : entry.getValue().serializeNBT());
     }
     compound.setTag("spells", spells);
     compound.setInteger("selectedSlot", this.selectedSlot);
@@ -261,9 +261,9 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound tag) {
+  public void deserializeNBT(CompoundNBT tag) {
     if (tag.hasKey("spells", Constants.NBT.TAG_COMPOUND)) {
-      NBTTagCompound spells = tag.getCompoundTag("spells");
+      CompoundNBT spells = tag.getCompoundTag("spells");
       Set<String> keys = spells.getKeySet();
       if (keys.size() > MAX_SPELL_SLOT) {
         Roots.logger.error("Invalid spell when deserializing storage: spells list is " + keys.size() + " which is greater than MAX_SPELL_SLOT " + MAX_SPELL_SLOT + ": " + tag.toString());

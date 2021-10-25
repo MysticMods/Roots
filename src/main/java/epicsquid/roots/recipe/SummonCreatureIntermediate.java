@@ -3,10 +3,10 @@ package epicsquid.roots.recipe;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.IngredientNBT;
 
@@ -17,7 +17,7 @@ public class SummonCreatureIntermediate extends SummonCreatureRecipe {
 
   private final ItemStack essenceStack;
 
-  private SummonCreatureIntermediate(Class<? extends EntityLivingBase> clazz, ItemStack essenceStack, Ingredient... ingredients) {
+  private SummonCreatureIntermediate(Class<? extends LivingEntity> clazz, ItemStack essenceStack, Ingredient... ingredients) {
     super(empty, clazz, ingredients);
     this.essenceStack = essenceStack;
   }
@@ -27,16 +27,16 @@ public class SummonCreatureIntermediate extends SummonCreatureRecipe {
   }
 
   @Nullable
-  public static SummonCreatureIntermediate create(Class<? extends EntityLivingBase> clazz) {
+  public static SummonCreatureIntermediate create(Class<? extends LivingEntity> clazz) {
     ResourceLocation rl = EntityList.getKey(clazz);
     if (rl == null) {
       return null;
     }
 
     ItemStack stack = new ItemStack(ModItems.life_essence);
-    NBTTagCompound tag = stack.getTagCompound();
+    CompoundNBT tag = stack.getTagCompound();
     if (tag == null) {
-      tag = new NBTTagCompound();
+      tag = new CompoundNBT();
       stack.setTagCompound(tag);
     }
 

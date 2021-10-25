@@ -18,10 +18,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -40,7 +40,8 @@ public class BlockCornerBase extends BlockBase {
   public static final PropertyBool INNER = PropertyBool.create("inner");
 
   public boolean inner;
-  protected @Nullable IBlockState parent = null;
+  protected @Nullable
+  BlockState parent = null;
 
   public BlockCornerBase(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, boolean inner) {
     super(mat, type, hardness, name);
@@ -51,7 +52,7 @@ public class BlockCornerBase extends BlockBase {
     this.inner = inner;
   }
 
-  public BlockCornerBase(@Nonnull IBlockState parent, @Nonnull SoundType type, float hardness, @Nonnull String name, boolean inner) {
+  public BlockCornerBase(@Nonnull BlockState parent, @Nonnull SoundType type, float hardness, @Nonnull String name, boolean inner) {
     this(parent.getMaterial(), type, hardness, name, inner);
     this.parent = parent;
   }
@@ -64,25 +65,25 @@ public class BlockCornerBase extends BlockBase {
 
   @Override
   @Nonnull
-  public IBlockState getStateFromMeta(int meta) {
+  public BlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(INNER, inner).withProperty(UP, (meta / 4) > 0).withProperty(DIR, meta % 4);
   }
 
   @Override
-  public int getMetaFromState(@Nonnull IBlockState state) {
+  public int getMetaFromState(@Nonnull BlockState state) {
     return (state.getValue(UP) ? 1 : 0) * 4 + state.getValue(DIR);
   }
 
   @Override
   @Nonnull
-  public IBlockState withRotation(@Nonnull IBlockState state, @Nonnull Rotation rot) {
+  public BlockState withRotation(@Nonnull BlockState state, @Nonnull Rotation rot) {
     int newDir = (state.getValue(DIR) + rot.ordinal()) % 4;
     return state.withProperty(DIR, newDir);
   }
 
   @Override
-  public void addCollisionBoxToList(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB entityBox,
-      @Nonnull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity, boolean advanced) {
+  public void addCollisionBoxToList(@Nonnull BlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB entityBox,
+                                    @Nonnull List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity, boolean advanced) {
     float box_precision = BlockSlantBase.box_precision;
     List<AxisAlignedBB> temp = new ArrayList<>();
     boolean up = state.getValue(UP);
@@ -215,8 +216,8 @@ public class BlockCornerBase extends BlockBase {
 
   @Override
   @Nonnull
-  public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing face, float hitX, float hitY, float hitZ, int meta,
-      @Nonnull EntityLivingBase placer) {
+  public BlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull Direction face, float hitX, float hitY, float hitZ, int meta,
+                                         @Nonnull LivingEntity placer) {
     boolean up = (hitY > 0.5f);
     if (hitY == 1) {
       up = false;
@@ -275,12 +276,12 @@ public class BlockCornerBase extends BlockBase {
   }
 
   @Override
-  public boolean shouldSideBeRendered(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
+  public boolean shouldSideBeRendered(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction side) {
     return true;
   }
 
   @Override
-  public boolean doesSideBlockRendering(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
+  public boolean doesSideBlockRendering(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction side) {
     return false;
   }
 

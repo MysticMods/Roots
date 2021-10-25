@@ -16,21 +16,21 @@ import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.util.IngredientWithStack;
 import epicsquid.roots.util.ItemHandlerUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -73,7 +73,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
   }
 
   @Override
-  public List<ItemStack> craft(EntityPlayer player) {
+  public List<ItemStack> craft(PlayerEntity player) {
     FeyCraftingRecipe recipe = getRecipe();
     ItemStack result = ItemStack.EMPTY;
     List<ItemStack> inputItems = new ArrayList<>();
@@ -113,13 +113,13 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     if (player.world.isRemote) {
       return true;
     }
 
     if (!hasValidGroveStone()) {
-      player.sendMessage(new TextComponentTranslation("roots.message.runic_crafter.no_grove").setStyle(new Style().setColor(TextFormatting.YELLOW)));
+      player.sendMessage(new TranslationTextComponent("roots.message.runic_crafter.no_grove").setStyle(new Style().setColor(TextFormatting.YELLOW)));
       return true;
     }
 
@@ -237,11 +237,11 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
         }
       } else {
         countdown = -1;
-        for (EnumFacing facing : EnumFacing.values()) {
-          if (facing == EnumFacing.DOWN) {
+        for (Direction facing : Direction.values()) {
+          if (facing == Direction.DOWN) {
             continue;
           }
-          IBlockState state = world.getBlockState(getPos().offset(facing));
+          BlockState state = world.getBlockState(getPos().offset(facing));
           if (GeneralConfig.getCrafterOutputIgnore().contains(state.getBlock())) {
             continue;
           }
@@ -261,7 +261,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
           }
         }
         for (ItemStack stack : storedItems) {
-          EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
+          ItemEntity item = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
           world.spawnEntity(item);
         }
         this.storedItems.clear();
@@ -341,20 +341,20 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
 
   @Nonnull
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public CompoundNBT writeToNBT(CompoundNBT tag) {
     tag = super.writeToNBT(tag);
     tag.setTag("pedestal", pedestal.serializeNBT());
     return tag;
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound tag) {
+  public void readFromNBT(CompoundNBT tag) {
     super.readFromNBT(tag);
     pedestal.deserializeNBT(tag.getCompoundTag("pedestal"));
   }
 
   @Override
-  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull BlockState state, PlayerEntity player) {
     super.breakBlock(world, pos, state, player);
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, pedestal);

@@ -1,8 +1,8 @@
 package epicsquid.roots.entity;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -43,7 +43,7 @@ public abstract class EntityLifetimeBase extends Entity {
   }
 
   @Nullable
-  public EntityPlayer getPlayerEntity() {
+  public PlayerEntity getPlayerEntity() {
     if (player == null || world.isRemote) {
       return null;
     }
@@ -82,7 +82,7 @@ public abstract class EntityLifetimeBase extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     this.x = compound.getDouble("x");
     this.y = compound.getDouble("y");
     this.z = compound.getDouble("z");
@@ -96,7 +96,7 @@ public abstract class EntityLifetimeBase extends Entity {
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setDouble("x", x);
     compound.setDouble("y", y);
     compound.setDouble("z", z);

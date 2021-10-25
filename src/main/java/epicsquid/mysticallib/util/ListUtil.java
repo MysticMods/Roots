@@ -6,14 +6,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
 public class ListUtil {
-  public static class StateComparator implements Comparator<IBlockState> {
+  public static class StateComparator implements Comparator<BlockState> {
     @Override
-    public int compare(IBlockState arg0, IBlockState arg1) {
+    public int compare(BlockState arg0, BlockState arg1) {
       return (arg0.getBlock().getRegistryName().toString() + "_" + arg0.getBlock().getMetaFromState(arg0))
           .compareTo(arg1.getBlock().getRegistryName().toString() + "_" + arg1.getBlock().getMetaFromState(arg1));
     }
@@ -29,7 +29,7 @@ public class ListUtil {
 
   public static StateComparator stateComparator = new StateComparator();
 
-  public static boolean stateListsMatch(List<IBlockState> list1, List<IBlockState> list2) {
+  public static boolean stateListsMatch(List<BlockState> list1, List<BlockState> list2) {
     list1.sort(stateComparator);
     list2.sort(stateComparator);
     boolean doMatch = list1.size() == list2.size();

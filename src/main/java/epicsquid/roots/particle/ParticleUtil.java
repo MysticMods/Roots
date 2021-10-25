@@ -8,7 +8,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModParticles;
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -173,7 +173,7 @@ public class ParticleUtil {
   }
 
   // // Stuff // //
-  public static void renderBeam(EntityPlayer player, double distance, ParticleSpawner spawner, SpellBase colors) {
+  public static void renderBeam(PlayerEntity player, double distance, ParticleSpawner spawner, SpellBase colors) {
     if (!player.world.isRemote) {
       return;
     }

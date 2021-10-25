@@ -4,14 +4,14 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.spell.SpellStormCloud;
 import epicsquid.roots.spell.SpellWildfire;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityIcicle extends EntityFireball {
+public class EntityIcicle extends DamagingProjectileEntity {
   private ISnapshot modifiers = null;
   private SpellType type = null;
 
@@ -20,7 +20,7 @@ public class EntityIcicle extends EntityFireball {
     this.setSize(0.25F, 0.25F);
   }
 
-  public EntityIcicle(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ, SpellType type) {
+  public EntityIcicle(World worldIn, LivingEntity shooter, double accelX, double accelY, double accelZ, SpellType type) {
     super(worldIn, shooter, accelX, accelY, accelZ);
     this.setSize(0.25F, 0.25F);
     this.type = type;

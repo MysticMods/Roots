@@ -9,12 +9,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Enchantments;
+import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -26,9 +26,9 @@ public class BarkHandler {
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void barkHarvested(BlockEvent.HarvestDropsEvent event) {
     if (event.getHarvester() != null) {
-      ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
+      ItemStack tool = event.getHarvester().getHeldItem(Hand.MAIN_HAND);
       if (tool.getItem().getToolClasses(tool).contains("druidKnife")) {
-        IBlockState blockstate = event.getState();
+        BlockState blockstate = event.getState();
         Block block = blockstate.getBlock();
         BlockPlanks.EnumType type = (block == Blocks.LOG) ?
             blockstate.getValue(BlockOldLog.VARIANT) :
@@ -51,6 +51,6 @@ public class BarkHandler {
   }
 
   private static int getAdditionalBarkAmount(ItemStack stack) {
-    return Math.max(EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) + 2, EnchantmentHelper.getEnchantmentLevel(Enchantments.LOOTING, stack) + 2);
+    return Math.max(EnchantmentHelper.getEnchantmentLevel(net.minecraft.enchantment.Enchantments.FORTUNE, stack) + 2, EnchantmentHelper.getEnchantmentLevel(Enchantments.LOOTING, stack) + 2);
   }
 }

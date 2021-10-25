@@ -1,7 +1,7 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -78,6 +78,6 @@ public class FeyCraftingRecipe implements IRootsRecipe<TileEntityFeyCrafter> {
    * @param output
    * @param inputs
    */
-  public void postCraft(ItemStack output, List<ItemStack> inputs, EntityPlayer player) {
+  public void postCraft(ItemStack output, List<ItemStack> inputs, PlayerEntity player) {
   }
 }

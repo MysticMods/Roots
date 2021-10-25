@@ -8,25 +8,25 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.util.Direction;
 
 public class Cube {
 
-  public Map<EnumFacing, BakedQuad> quads = new EnumMap<EnumFacing, BakedQuad>(EnumFacing.class);
-  public List<BakedQuad> unculledQuads = new ArrayList<>();
+  public Map<Direction, BakedQuad> quads = new EnumMap<Direction, BakedQuad>(Direction.class);
+  public List<net.minecraft.client.renderer.model.BakedQuad> unculledQuads = new ArrayList<>();
 
-  public Cube(@Nonnull BakedQuad west, @Nonnull BakedQuad east, @Nonnull BakedQuad down, @Nonnull BakedQuad up, @Nonnull BakedQuad north,
-      @Nonnull BakedQuad south) {
-    quads.put(EnumFacing.WEST, west);
-    quads.put(EnumFacing.EAST, east);
-    quads.put(EnumFacing.DOWN, down);
-    quads.put(EnumFacing.UP, up);
-    quads.put(EnumFacing.NORTH, north);
-    quads.put(EnumFacing.SOUTH, south);
+  public Cube(@Nonnull net.minecraft.client.renderer.model.BakedQuad west, @Nonnull net.minecraft.client.renderer.model.BakedQuad east, @Nonnull BakedQuad down, @Nonnull BakedQuad up, @Nonnull net.minecraft.client.renderer.model.BakedQuad north,
+              @Nonnull BakedQuad south) {
+    quads.put(Direction.WEST, west);
+    quads.put(Direction.EAST, east);
+    quads.put(Direction.DOWN, down);
+    quads.put(Direction.UP, up);
+    quads.put(Direction.NORTH, north);
+    quads.put(Direction.SOUTH, south);
   }
 
-  public void addToList(@Nonnull List<BakedQuad> list, @Nullable EnumFacing face) {
+  public void addToList(@Nonnull List<net.minecraft.client.renderer.model.BakedQuad> list, @Nullable Direction face) {
     if (face != null && quads.containsKey(face)) {
       list.add(quads.get(face));
     } else if (face == null) {
@@ -40,7 +40,7 @@ public class Cube {
     return this;
   }
 
-  public Cube setNoCull(@Nonnull EnumFacing face) {
+  public Cube setNoCull(@Nonnull Direction face) {
     BakedQuad quad = quads.get(face);
     unculledQuads.add(quad);
     quads.remove(face);

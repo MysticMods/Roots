@@ -10,11 +10,11 @@ import epicsquid.roots.network.fx.MessageChrysopoeiaFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.ChrysopoeiaRecipe;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
@@ -52,14 +52,14 @@ public class SpellChrysopoeia extends SpellBase {
     setCastSound(ModSounds.Spells.CHRYSOPOEIA);
   }
 
-  private static final Object2LongOpenHashMap<EntityPlayer> soundTimer = new Object2LongOpenHashMap<>();
+  private static final Object2LongOpenHashMap<PlayerEntity> soundTimer = new Object2LongOpenHashMap<>();
   private static final long DELAY = 6 * 20;
 
   static {
     soundTimer.defaultReturnValue(-1);
   }
 
-  public static boolean shouldPlaySound(EntityPlayer player) {
+  public static boolean shouldPlaySound(PlayerEntity player) {
     long val = soundTimer.getLong(player);
     if (val == -1) {
       soundTimer.put(player, player.ticksExisted);
@@ -73,7 +73,7 @@ public class SpellChrysopoeia extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks) {
     World world = caster.world;
     ItemStack offHand = caster.getHeldItemOffhand();
     if (offHand.isEmpty()) {
@@ -134,7 +134,7 @@ public class SpellChrysopoeia extends SpellBase {
         }
       }*/
       ItemStack handResult = recipe.process(caster, offHand, over, by);
-      caster.setHeldItem(EnumHand.OFF_HAND, handResult);
+      caster.setHeldItem(Hand.OFF_HAND, handResult);
 
       MessageChrysopoeiaFX message = new MessageChrysopoeiaFX(caster);
       PacketHandler.sendToAllTracking(message, caster);

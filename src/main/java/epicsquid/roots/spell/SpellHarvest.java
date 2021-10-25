@@ -17,13 +17,13 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.FoodPoisoning;
 import epicsquid.roots.recipe.MortarRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -84,12 +84,12 @@ public class SpellHarvest extends SpellBase {
         ItemStack.EMPTY,
         new ItemStack(ModItems.wildewheet),
         new ItemStack(ModItems.wildewheet_seed),
-        new ItemStack(Items.WHEAT_SEEDS)
+        new ItemStack(net.minecraft.item.Items.WHEAT_SEEDS)
     );
     setCastSound(ModSounds.Spells.HARVEST);
   }
 
-  private static final List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.FLOWING_WATER, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
+  private static final List<Block> skipBlocks = Arrays.asList(net.minecraft.block.Blocks.BEDROCK, net.minecraft.block.Blocks.GRASS, net.minecraft.block.Blocks.DIRT, net.minecraft.block.Blocks.STONE, net.minecraft.block.Blocks.TALLGRASS, net.minecraft.block.Blocks.FLOWING_WATER, net.minecraft.block.Blocks.WATER, Blocks.LAVA, net.minecraft.block.Blocks.DOUBLE_PLANT, net.minecraft.block.Blocks.MELON_STEM, net.minecraft.block.Blocks.PUMPKIN_STEM);
 
   public ItemStack tryCook(ItemStack input) {
     ItemStack result = FurnaceRecipes.instance().getSmeltingResult(input);
@@ -108,7 +108,7 @@ public class SpellHarvest extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     Harvest.prepare();
 
     List<Function<ItemStack, ItemStack>> converters = new ArrayList<>();
@@ -135,8 +135,8 @@ public class SpellHarvest extends SpellBase {
       z -= radius_unboost;
     }
 
-    Predicate<IBlockState> pumpkinOrMelonTest = new Harvest.Matcher(Blocks.PUMPKIN).or(new Harvest.Matcher(Blocks.MELON_BLOCK));
-    Predicate<IBlockState> reedsOrCactusTest = new Harvest.Matcher(Blocks.REEDS).or(new Harvest.Matcher(Blocks.CACTUS));
+    Predicate<BlockState> pumpkinOrMelonTest = new Harvest.Matcher(net.minecraft.block.Blocks.PUMPKIN).or(new Harvest.Matcher(net.minecraft.block.Blocks.MELON_BLOCK));
+    Predicate<BlockState> reedsOrCactusTest = new Harvest.Matcher(net.minecraft.block.Blocks.REEDS).or(new Harvest.Matcher(net.minecraft.block.Blocks.CACTUS));
 
     List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
@@ -144,7 +144,7 @@ public class SpellHarvest extends SpellBase {
     List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(),
         x, y, z, (pos) -> {
           if (player.world.isAirBlock(pos)) return false;
-          IBlockState state = player.world.getBlockState(pos);
+          BlockState state = player.world.getBlockState(pos);
           Block block = state.getBlock();
 
           if (skipBlocks.contains(block)) return false;
@@ -154,7 +154,7 @@ public class SpellHarvest extends SpellBase {
             return false;
           }
           if (reedsOrCactusTest.test(state)) {
-            IBlockState down = player.world.getBlockState(pos.down());
+            BlockState down = player.world.getBlockState(pos.down());
             if (reedsOrCactusTest.test(down)) {
               reedsAndCactus.add(pos);
             }
@@ -174,7 +174,7 @@ public class SpellHarvest extends SpellBase {
 
     List<ItemStack> drops = new ArrayList<>();
     for (BlockPos pos : crops) {
-      IBlockState state = player.world.getBlockState(pos);
+      BlockState state = player.world.getBlockState(pos);
 
       if (!player.world.isRemote) {
         List<ItemStack> origBlockDrops = Harvest.harvestReturnDrops(state, pos, player.world, player);
@@ -241,7 +241,7 @@ public class SpellHarvest extends SpellBase {
 
       if (info.has(GROWTH)) {
         for (BlockPos pos : affectedPositions) {
-          IBlockState state = player.world.getBlockState(pos);
+          BlockState state = player.world.getBlockState(pos);
           if (Growth.canGrow(player.world, pos, state)) {
             int c = growth_count + Util.rand.nextInt(growth_additional);
             for (int i = 0; i < c; i++) {

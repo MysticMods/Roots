@@ -5,10 +5,9 @@ import epicsquid.mysticallib.model.CustomModelItem;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.types.OneTimeSupplier;
 import epicsquid.mysticallib.util.ItemUtil;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.ItemAxe;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +15,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.function.Supplier;
 
-public class ItemAxeBase extends ItemAxe implements IModeledObject, ICustomModeledObject {
+public class ItemAxeBase extends AxeItem implements IModeledObject, ICustomModeledObject {
 
   private boolean hasCustomModel = false;
   protected Supplier<Ingredient> repairIngredient;

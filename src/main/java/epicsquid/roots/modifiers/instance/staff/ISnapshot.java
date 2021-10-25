@@ -3,7 +3,7 @@ package epicsquid.roots.modifiers.instance.staff;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.IModifier;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public interface ISnapshot {
   int[] toArray();
@@ -17,6 +17,6 @@ public interface ISnapshot {
   default void toBytes(ByteBuf buf) {
   }
 
-  default void toCompound(NBTTagCompound tag) {
+  default void toCompound(CompoundNBT tag) {
   }
 }

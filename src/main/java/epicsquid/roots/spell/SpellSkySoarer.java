@@ -7,15 +7,16 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -77,13 +78,13 @@ public class SpellSkySoarer extends SpellBase {
     setCastSound(ModSounds.Spells.SKY_SOARER);
   }
 
-  private boolean playerSafe(EntityPlayer player, BlockPos.MutableBlockPos position, EnumFacing direction) {
+  private boolean playerSafe(PlayerEntity player, BlockPos.MutableBlockPos position, Direction direction) {
     int safe_count = 0;
     int start_y = position.getY();
 
-    position.setY(start_y - (direction == EnumFacing.DOWN ? 2 : 1));
-    IBlockState state = player.world.getBlockState(position);
-    if (!state.isSideSolid(player.world, position, EnumFacing.UP)) {
+    position.setY(start_y - (direction == Direction.DOWN ? 2 : 1));
+    BlockState state = player.world.getBlockState(position);
+    if (!state.isSideSolid(player.world, position, Direction.UP)) {
       return false;
     }
 
@@ -103,7 +104,7 @@ public class SpellSkySoarer extends SpellBase {
   }
 
   @Nullable
-  private Vec3d findSafePosition(EntityPlayer player) {
+  private Vec3d findSafePosition(PlayerEntity player) {
     Vec3d realPos = new Vec3d(player.posX, player.posY, player.posZ).add(Vec3d.fromPitchYaw(0, player.rotationYaw).scale(jaunt_distance));
     BlockPos real = new BlockPos(realPos);
     BlockPos pos = player.world.getHeight(real);
@@ -113,7 +114,7 @@ public class SpellSkySoarer extends SpellBase {
       int safe_y = -1;
       for (int i = height - 1; i > real.getY(); i--) {
         dest.setY(i);
-        if (playerSafe(player, dest, EnumFacing.UP)) {
+        if (playerSafe(player, dest, Direction.UP)) {
           safe_y = i;
           break;
         }
@@ -122,7 +123,7 @@ public class SpellSkySoarer extends SpellBase {
       if (safe_y == -1) {
         for (int i = 0; i < real.getY(); i++) {
           dest.setY(i);
-          if (playerSafe(player, dest, EnumFacing.DOWN)) {
+          if (playerSafe(player, dest, Direction.DOWN)) {
             safe_y = i;
             break;
           }
@@ -135,10 +136,10 @@ public class SpellSkySoarer extends SpellBase {
 
       return new Vec3d(realPos.x, safe_y + 0.01, realPos.z);
     } else {
-      IBlockState state = player.world.getBlockState(pos);
-      IBlockState state2 = player.world.getBlockState(pos.up());
-      IBlockState state3 = player.world.getBlockState(pos.down());
-      if (state.getBlock().isPassable(player.world, pos) && state2.getBlock().isPassable(player.world, pos.up()) && state3.isSideSolid(player.world, pos.down(), EnumFacing.UP)) {
+      BlockState state = player.world.getBlockState(pos);
+      BlockState state2 = player.world.getBlockState(pos.up());
+      BlockState state3 = player.world.getBlockState(pos.down());
+      if (state.getBlock().isPassable(player.world, pos) && state2.getBlock().isPassable(player.world, pos.up()) && state3.isSideSolid(player.world, pos.down(), Direction.UP)) {
         return new Vec3d(realPos.x, pos.getY() + 0.01, realPos.z);
       }
 
@@ -147,7 +148,7 @@ public class SpellSkySoarer extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
       if (info.has(JAUNT)) {
         Vec3d dest = findSafePosition(player);
@@ -175,7 +176,7 @@ public class SpellSkySoarer extends SpellBase {
         player.world.spawnEntity(boost);
       }
       if (info.has(REGENERATION)) {
-        player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, regen_duration, regen_amplifier, false, false));
+        player.addPotionEffect(new EffectInstance(Effects.REGENERATION, regen_duration, regen_amplifier, false, false));
       }
     }
     return true;

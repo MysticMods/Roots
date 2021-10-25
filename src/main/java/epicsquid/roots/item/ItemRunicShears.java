@@ -22,30 +22,23 @@ import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.*;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.util.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -69,7 +62,7 @@ public class ItemRunicShears extends ItemShearsBase {
     setHasSubtypes(false);
     random = new Random();
 
-    BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseRunicShears.getInstance());
+    DispenserBlock.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseRunicShears.getInstance());
   }
 
   @Override
@@ -79,16 +72,16 @@ public class ItemRunicShears extends ItemShearsBase {
 
   @Override
   @Nonnull
-  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    IBlockState state = world.getBlockState(pos);
+  public ActionResultType onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
+    BlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
     if (block == ModBlocks.imbuer) {
-      return EnumActionResult.PASS;
+      return ActionResultType.PASS;
     }
 
     if (!MossConfig.getBlacklistDimensions().contains(player.world.provider.getDimension())) {
-      IBlockState moss = MossConfig.scrapeResult(state);
-      IBlockState moss2 = MossConfig.mossConversion(state);
+      BlockState moss = MossConfig.scrapeResult(state);
+      BlockState moss2 = MossConfig.mossConversion(state);
 
       if (moss != null || moss2 != null) {
         if (!world.isRemote) {
@@ -97,8 +90,8 @@ public class ItemRunicShears extends ItemShearsBase {
           BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
           List<BlockPos> affectedBlocks = new ArrayList<>();
           for (BlockPos.MutableBlockPos p : BlockPos.getAllInBoxMutable(start, stop)) {
-            IBlockState pState = world.getBlockState(p);
-            IBlockState m = MossConfig.scrapeResult(pState);
+            BlockState pState = world.getBlockState(p);
+            BlockState m = MossConfig.scrapeResult(pState);
             if (m != null) {
               affectedBlocks.add(p.toImmutable());
               world.setBlockState(p, m);
@@ -116,7 +109,7 @@ public class ItemRunicShears extends ItemShearsBase {
         }
         player.swingArm(hand);
         world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
-        return EnumActionResult.SUCCESS;
+        return ActionResultType.SUCCESS;
       }
     }
 
@@ -137,11 +130,11 @@ public class ItemRunicShears extends ItemShearsBase {
         }
       }
     }
-    return EnumActionResult.SUCCESS;
+    return ActionResultType.SUCCESS;
   }
 
   @Override
-  public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity, EnumHand hand) {
+  public boolean itemInteractionForEntity(ItemStack itemstack, PlayerEntity player, LivingEntity entity, Hand hand) {
     World world = player.world;
     Random rand = itemRand;
 
@@ -156,7 +149,7 @@ public class ItemRunicShears extends ItemShearsBase {
           if (cap != null) {
             if (cap.canHarvest()) {
               cap.setCooldown(recipe.getCooldown());
-              EntityItem ent = entity.entityDropItem(recipe.getDrop(entity).copy(), 1.0F);
+              ItemEntity ent = entity.entityDropItem(recipe.getDrop(entity).copy(), 1.0F);
               ent.motionY += rand.nextFloat() * 0.05F;
               ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
               ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
@@ -169,7 +162,7 @@ public class ItemRunicShears extends ItemShearsBase {
               return true;
             } else {
               // TODO: play particles (failure)?
-              player.sendStatusMessage(new TextComponentTranslation("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
+              player.sendStatusMessage(new TranslationTextComponent("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
             }
           }
         }
@@ -182,13 +175,13 @@ public class ItemRunicShears extends ItemShearsBase {
           if (!world.isRemote) {
             cap.setCooldown(20 * 360);
             ItemStack stack = new ItemStack(ModItems.life_essence);
-            NBTTagCompound tag = stack.getTagCompound();
+            CompoundNBT tag = stack.getTagCompound();
             if (tag == null) {
-              tag = new NBTTagCompound();
+              tag = new CompoundNBT();
               stack.setTagCompound(tag);
             }
             tag.setString("id", EntityList.getKey(entity).toString());
-            EntityItem ent = entity.entityDropItem(stack, 1.0F);
+            ItemEntity ent = entity.entityDropItem(stack, 1.0F);
             ent.motionY += rand.nextFloat() * 0.05F;
             ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
             ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
@@ -201,10 +194,10 @@ public class ItemRunicShears extends ItemShearsBase {
             return true;
           }
         } else {
-          player.sendStatusMessage(new TextComponentTranslation("roots.life_essence.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
+          player.sendStatusMessage(new TranslationTextComponent("roots.life_essence.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
         }
       } else {
-        player.sendStatusMessage(new TextComponentTranslation("roots.life_essence.invalid").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
+        player.sendStatusMessage(new TranslationTextComponent("roots.life_essence.invalid").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
       }
     }
 
@@ -213,13 +206,13 @@ public class ItemRunicShears extends ItemShearsBase {
       if (Items.SHEARS.itemInteractionForEntity(itemstack, player, entity, hand)) count++;
 
       float radius = GeneralConfig.RunicShearsRadius;
-      List<EntityLiving> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
-      for (EntityLiving e : entities) {
+      List<MobEntity> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
+      for (MobEntity e : entities) {
         e.captureDrops = true;
         if (Items.SHEARS.itemInteractionForEntity(itemstack, player, e, hand)) count++;
         e.captureDrops = false;
         if (!world.isRemote) {
-          for (EntityItem ent : e.capturedDrops) {
+          for (ItemEntity ent : e.capturedDrops) {
             ent.setPosition(entity.posX, entity.posY, entity.posZ);
             ent.motionY = 0;
             ent.motionX = 0;

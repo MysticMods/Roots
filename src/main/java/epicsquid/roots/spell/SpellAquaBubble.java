@@ -9,12 +9,12 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -84,7 +84,7 @@ public class SpellAquaBubble extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks) {
     int dur = duration;
     int dur2 = resistance_duration;
     if (info.has(AMPLIFIED)) {
@@ -93,18 +93,18 @@ public class SpellAquaBubble extends SpellBase {
     }
     if (!caster.world.isRemote) {
       caster.getEntityData().setIntArray(getCachedName(), info.toArray());
-      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, dur, 0, false, false));
+      caster.addPotionEffect(new EffectInstance(ModPotions.aqua_bubble, dur, 0, false, false));
       if (info.has(RESISTANCE)) {
-        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, dur2, resistance_amplifier));
+        caster.addPotionEffect(new EffectInstance(Effects.RESISTANCE, dur2, resistance_amplifier));
       }
       if (info.has(FAMILIARS)) {
-        List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, radius.offset(caster.getPosition()), o -> EntityUtil.isFamiliar(caster, o));
+        List<LivingEntity> entities = caster.world.getEntitiesWithinAABB(LivingEntity.class, radius.offset(caster.getPosition()), o -> EntityUtil.isFamiliar(caster, o));
         if (!entities.isEmpty()) {
-          EntityLivingBase other = entities.get(Util.rand.nextInt(entities.size()));
+          LivingEntity other = entities.get(Util.rand.nextInt(entities.size()));
           other.getEntityData().setIntArray(getCachedName(), info.toArray());
-          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, dur/*, 0, false, false*/));
+          other.addPotionEffect(new EffectInstance(ModPotions.aqua_bubble, dur/*, 0, false, false*/));
           if (info.has(RESISTANCE)) {
-            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, dur2, resistance_amplifier));
+            other.addPotionEffect(new EffectInstance(Effects.RESISTANCE, dur2, resistance_amplifier));
           }
         }
       }

@@ -5,8 +5,8 @@ import epicsquid.roots.container.ContainerImposer;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Slot;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -19,7 +19,7 @@ public class ModifierContext {
       return StaffSpellInfo.EMPTY;
     }
 
-    EntityPlayer player = mc.player;
+    PlayerEntity player = mc.player;
     if (!(player.openContainer instanceof ContainerImposer)) {
       return StaffSpellInfo.EMPTY;
     }

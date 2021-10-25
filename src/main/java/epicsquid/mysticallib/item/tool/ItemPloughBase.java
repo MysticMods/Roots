@@ -2,30 +2,24 @@ package epicsquid.mysticallib.item.tool;
 
 import com.google.common.collect.Sets;
 import epicsquid.mysticallib.item.ItemHoeBase;
-import epicsquid.mysticallib.types.OneTimeSupplier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
 public abstract class ItemPloughBase extends ItemHoeBase implements IEffectiveTool, ILimitAxis, IBlacklistingTool {
-  public static Set<Block> EFFECTIVE_BLOCKS = Sets.newHashSet(Blocks.GRASS, Blocks.GRASS_PATH, Blocks.DIRT, Blocks.FARMLAND);
+  public static Set<Block> EFFECTIVE_BLOCKS = Sets.newHashSet(Blocks.GRASS, net.minecraft.block.Blocks.GRASS_PATH, net.minecraft.block.Blocks.DIRT, net.minecraft.block.Blocks.FARMLAND);
 
   public ItemPloughBase(ToolMaterial material, String name, int toolLevel, int maxDamage, Supplier<Ingredient> repair) {
     super(material, name, toolLevel, maxDamage, repair);
@@ -39,7 +33,7 @@ public abstract class ItemPloughBase extends ItemHoeBase implements IEffectiveTo
 
   @SuppressWarnings("incomplete-switch")
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos origin, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public ActionResultType onItemUse(PlayerEntity player, World worldIn, BlockPos origin, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
     ItemStack itemstack = player.getHeldItem(hand);
 
     // TODO: HAndle Sneaking
@@ -68,24 +62,24 @@ public abstract class ItemPloughBase extends ItemHoeBase implements IEffectiveTo
               failed = true;
             }
           } else {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
+            BlockState iblockstate = worldIn.getBlockState(pos);
             Block block = iblockstate.getBlock();
-            IBlockState newState = Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7);
+            BlockState newState = Blocks.FARMLAND.getDefaultState().withProperty(FarmlandBlock.MOISTURE, 7);
 
-            if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up())) {
+            if (facing != Direction.DOWN && worldIn.isAirBlock(pos.up())) {
               if (block == Blocks.GRASS || block == Blocks.GRASS_PATH) {
                 if (!worldIn.isRemote) {
                   worldIn.setBlockState(pos, newState, 11);
                   worldIn.notifyBlockUpdate(pos, newState, newState, 8);
                 }
                 uses++;
-              } else if (block == Blocks.FARMLAND && iblockstate.getValue(BlockFarmland.MOISTURE) < 7) {
+              } else if (block == Blocks.FARMLAND && iblockstate.getValue(FarmlandBlock.MOISTURE) < 7) {
                 if (!worldIn.isRemote) {
                   worldIn.setBlockState(pos, newState, 11);
                   worldIn.notifyBlockUpdate(pos, newState, newState, 8);
                 }
                 uses++;
-              } else if (block == Blocks.DIRT) {
+              } else if (block == net.minecraft.block.Blocks.DIRT) {
                 switch (iblockstate.getValue(BlockDirt.VARIANT)) {
                   case DIRT:
                     if (!worldIn.isRemote) {
@@ -115,9 +109,9 @@ public abstract class ItemPloughBase extends ItemHoeBase implements IEffectiveTo
       itemstack.damageItem(3 + itemRand.nextInt(Math.max(1, uses - 3)), player);
     }
     if (failed || uses == 0) {
-      return EnumActionResult.FAIL;
+      return ActionResultType.FAIL;
     } else {
-      return EnumActionResult.PASS;
+      return ActionResultType.PASS;
     }
   }
 
@@ -133,10 +127,10 @@ public abstract class ItemPloughBase extends ItemHoeBase implements IEffectiveTo
     return false;
   }
 
-  private static Set<EnumFacing.Axis> AXES_LIMIT = Sets.newHashSet(EnumFacing.Axis.Y);
+  private static Set<Axis> AXES_LIMIT = Sets.newHashSet(Axis.Y);
 
   @Override
-  public Set<EnumFacing.Axis> getLimits() {
+  public Set<Axis> getLimits() {
     return AXES_LIMIT;
   }
 }

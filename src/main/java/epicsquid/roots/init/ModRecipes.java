@@ -2,7 +2,6 @@ package epicsquid.roots.init;
 
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
-import epicsquid.mysticallib.recipe.factories.AccessibleCompoundIngredient;
 import epicsquid.mysticallib.recipe.factories.MultiOreIngredient;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.ItemUtil;
@@ -16,22 +15,19 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.IngredientWithStack;
 import net.minecraft.block.*;
-import net.minecraft.block.BlockFlower.EnumFlowerType;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.FlowerBlock.EnumFlowerType;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -47,12 +43,12 @@ public class ModRecipes {
   // TODO: Registries
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
   private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
-  private static Set<Class<? extends EntityLivingBase>> harvestClasses = null;
+  private static Set<Class<? extends LivingEntity>> harvestClasses = null;
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
 
   // TODO: REGISTRIES FUCKING REGISTRIES PLEASE OH GOD REGISTRIES
   private static Map<ResourceLocation, SummonCreatureRecipe> summonCreatureRecipes = new HashMap<>();
-  private static Map<Class<? extends EntityLivingBase>, SummonCreatureRecipe> summonCreatureClasses = new HashMap<>();
+  private static Map<Class<? extends LivingEntity>, SummonCreatureRecipe> summonCreatureClasses = new HashMap<>();
 
   // TODO: ResourceLocation-based
   private static Map<ResourceLocation, MortarRecipe> mortarRecipes = new HashMap<>();
@@ -69,11 +65,11 @@ public class ModRecipes {
   private static Map<ResourceLocation, FlowerRecipe> flowerRecipes = new HashMap<>();
 
   public static void initChrysopoeiaRecipes() {
-    addChrysopoeiaRecipe("gold_from_silver", new IngredientWithStack(new OreIngredient("ingotSilver"), 2), new ItemStack(Items.GOLD_INGOT));
-    addChrysopoeiaRecipe("iron_from_copper", new IngredientWithStack(new OreIngredient("ingotCopper"), 2), new ItemStack(Items.IRON_INGOT));
-    addChrysopoeiaRecipe("gold_nugget_from_silver", new IngredientWithStack(new OreIngredient("nuggetSilver"), 2), new ItemStack(Items.GOLD_NUGGET));
-    addChrysopoeiaRecipe("iron_nugget_from_copper", new IngredientWithStack(new OreIngredient("nuggetCopper"), 2), new ItemStack(Items.IRON_NUGGET));
-    addChrysopoeiaRecipe("leather_from_rotten_flesh", new IngredientWithStack(Ingredient.fromItem(Items.ROTTEN_FLESH), 10), new ItemStack(Items.LEATHER));
+    addChrysopoeiaRecipe("gold_from_silver", new IngredientWithStack(new OreIngredient("ingotSilver"), 2), new ItemStack(net.minecraft.item.Items.GOLD_INGOT));
+    addChrysopoeiaRecipe("iron_from_copper", new IngredientWithStack(new OreIngredient("ingotCopper"), 2), new ItemStack(net.minecraft.item.Items.IRON_INGOT));
+    addChrysopoeiaRecipe("gold_nugget_from_silver", new IngredientWithStack(new OreIngredient("nuggetSilver"), 2), new ItemStack(net.minecraft.item.Items.GOLD_NUGGET));
+    addChrysopoeiaRecipe("iron_nugget_from_copper", new IngredientWithStack(new OreIngredient("nuggetCopper"), 2), new ItemStack(net.minecraft.item.Items.IRON_NUGGET));
+    addChrysopoeiaRecipe("leather_from_rotten_flesh", new IngredientWithStack(Ingredient.fromItem(net.minecraft.item.Items.ROTTEN_FLESH), 10), new ItemStack(net.minecraft.item.Items.LEATHER));
   }
 
   public static Collection<ChrysopoeiaRecipe> getChrysopoeiaRecipes() {
@@ -176,13 +172,13 @@ public class ModRecipes {
     addSummonCreatureEntry("stray", EntityStray.class, Ingredient.fromItem(Items.SNOWBALL), Ingredient.fromItem(Items.FLINT), Ingredient.fromStacks(new ItemStack(Items.BOW, 1, OreDictionary.WILDCARD_VALUE)));*/
   }
 
-  public static SummonCreatureRecipe addSummonCreatureEntry(String name, Class<? extends EntityLivingBase> clazz, Ingredient... ingredients) {
+  public static SummonCreatureRecipe addSummonCreatureEntry(String name, Class<? extends LivingEntity> clazz, Ingredient... ingredients) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     SummonCreatureRecipe recipe = new SummonCreatureRecipe(rl, clazz, ingredients);
     return addSummonCreatureEntry(recipe);
   }
 
-  public static SummonCreatureRecipe addSummonCreatureEntry(String name, Class<? extends EntityLivingBase> clazz, List<Ingredient> ingredients) {
+  public static SummonCreatureRecipe addSummonCreatureEntry(String name, Class<? extends LivingEntity> clazz, List<Ingredient> ingredients) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     SummonCreatureRecipe recipe = new SummonCreatureRecipe(rl, clazz, ingredients);
     return addSummonCreatureEntry(recipe);
@@ -239,16 +235,16 @@ public class ModRecipes {
   }
 
   public static boolean lifeEssenceCleared = false;
-  public static Set<Class<? extends EntityLivingBase>> lifeEssenceAdditions = new HashSet<>();
-  public static Set<Class<? extends EntityLivingBase>> lifeEssenceRemovals = new HashSet<>();
+  public static Set<Class<? extends LivingEntity>> lifeEssenceAdditions = new HashSet<>();
+  public static Set<Class<? extends LivingEntity>> lifeEssenceRemovals = new HashSet<>();
 
-  private static Set<Class<? extends EntityLivingBase>> lifeEssenceList = new HashSet<>();
+  private static Set<Class<? extends LivingEntity>> lifeEssenceList = new HashSet<>();
 
-  public static void removeLifeEssence(Class<? extends EntityLivingBase> clzz) {
+  public static void removeLifeEssence(Class<? extends LivingEntity> clzz) {
     lifeEssenceRemovals.add(clzz);
   }
 
-  public static void addLifeEssence(Class<? extends EntityLivingBase> clazz) {
+  public static void addLifeEssence(Class<? extends LivingEntity> clazz) {
     lifeEssenceAdditions.add(clazz);
   }
 
@@ -267,19 +263,19 @@ public class ModRecipes {
     lifeEssenceList.removeAll(lifeEssenceRemovals);
   }
 
-  public static Set<Class<? extends EntityLivingBase>> getLifeEssenceList() {
+  public static Set<Class<? extends LivingEntity>> getLifeEssenceList() {
     return lifeEssenceList;
   }
 
-  public static boolean isLifeEssenceAllowed(Class<? extends EntityLivingBase> clzz) {
+  public static boolean isLifeEssenceAllowed(Class<? extends LivingEntity> clzz) {
     return lifeEssenceList.contains(clzz);
   }
 
-  public static boolean isLifeEssenceAllowed(EntityLivingBase entity) {
+  public static boolean isLifeEssenceAllowed(LivingEntity entity) {
     return isLifeEssenceAllowed(entity.getClass());
   }
 
-  public static void removeSummonCreatureEntry(Class<? extends EntityLivingBase> clazz) {
+  public static void removeSummonCreatureEntry(Class<? extends LivingEntity> clazz) {
     SummonCreatureRecipe recipe = summonCreatureClasses.remove(clazz);
     if (recipe != null) {
       summonCreatureRecipes.remove(recipe.getRegistryName());
@@ -369,7 +365,7 @@ public class ModRecipes {
     addPacifistEntry("clam", EntityClam.class);*/
   }
 
-  public static void addFlowerRecipe(String name, IBlockState state) {
+  public static void addFlowerRecipe(String name, BlockState state) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     FlowerRecipe recipe = new FlowerRecipe(rl, state);
     flowerRecipes.put(rl, recipe);
@@ -389,9 +385,9 @@ public class ModRecipes {
     flowerRecipes.remove(name);
   }
 
-  public static IBlockState getRandomFlowerRecipe(IBlockState soil) {
+  public static BlockState getRandomFlowerRecipe(BlockState soil) {
     if (flowerRecipes.isEmpty()) {
-      return Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
+      return net.minecraft.block.Blocks.YELLOW_FLOWER.getStateFromMeta(FlowerBlock.EnumFlowerType.DANDELION.getMeta());
     }
 
     ItemStack soilStack = ItemUtil.stackFromState(soil);
@@ -419,7 +415,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static FlowerRecipe getFlowerRecipe(IBlockState state) {
+  public static FlowerRecipe getFlowerRecipe(BlockState state) {
     Block block = state.getBlock();
     int meta = block.getMetaFromState(state);
     for (FlowerRecipe recipe : flowerRecipes.values()) {
@@ -431,16 +427,16 @@ public class ModRecipes {
   }
 
   public static void initFlowerRecipes() {
-    addFlowerRecipe("dandelion", Blocks.YELLOW_FLOWER.getStateFromMeta(EnumFlowerType.DANDELION.getMeta()));
-    addFlowerRecipe("poppy", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.POPPY.getMeta()));
-    addFlowerRecipe("blue_orchid", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.BLUE_ORCHID.getMeta()));
-    addFlowerRecipe("allium", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.ALLIUM.getMeta()));
-    addFlowerRecipe("houstonia", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.HOUSTONIA.getMeta()));
-    addFlowerRecipe("red_tulip", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.RED_TULIP.getMeta()));
-    addFlowerRecipe("orange_tulip", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.ORANGE_TULIP.getMeta()));
-    addFlowerRecipe("white_tulip", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.WHITE_TULIP.getMeta()));
-    addFlowerRecipe("pink_tulip", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.PINK_TULIP.getMeta()));
-    addFlowerRecipe("oxeye_daisy", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.OXEYE_DAISY.getMeta()));
+    addFlowerRecipe("dandelion", net.minecraft.block.Blocks.YELLOW_FLOWER.getStateFromMeta(EnumFlowerType.DANDELION.getMeta()));
+    addFlowerRecipe("poppy", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.POPPY.getMeta()));
+    addFlowerRecipe("blue_orchid", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.BLUE_ORCHID.getMeta()));
+    addFlowerRecipe("allium", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.ALLIUM.getMeta()));
+    addFlowerRecipe("houstonia", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.HOUSTONIA.getMeta()));
+    addFlowerRecipe("red_tulip", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.RED_TULIP.getMeta()));
+    addFlowerRecipe("orange_tulip", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.ORANGE_TULIP.getMeta()));
+    addFlowerRecipe("white_tulip", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.WHITE_TULIP.getMeta()));
+    addFlowerRecipe("pink_tulip", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.PINK_TULIP.getMeta()));
+    addFlowerRecipe("oxeye_daisy", net.minecraft.block.Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.OXEYE_DAISY.getMeta()));
   }
 
   public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, ItemStack item) {
@@ -462,9 +458,9 @@ public class ModRecipes {
   }
 
   public static void addModdedBarkRecipe(String name, ItemStack item, ItemStack blockStack) {
-    if (blockStack.getItem() instanceof ItemBlock) {
+    if (blockStack.getItem() instanceof BlockItem) {
       for (Item knife : ModItems.knives) {
-        ((ItemDruidKnife) knife).addEffectiveBlock(((ItemBlock) blockStack.getItem()).getBlock());
+        ((ItemDruidKnife) knife).addEffectiveBlock(((BlockItem) blockStack.getItem()).getBlock());
       }
     }
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
@@ -477,7 +473,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static BarkRecipe getModdedBarkRecipe(IBlockState block) {
+  public static BarkRecipe getModdedBarkRecipe(BlockState block) {
     ItemStack stack = new ItemStack(block.getBlock(), 1, block.getBlock().damageDropped(block));
     for (BarkRecipe recipe : barkRecipes.values()) {
       if (ItemUtil.equalWithoutSize(recipe.getBlockStack(), stack)) {
@@ -546,11 +542,11 @@ public class ModRecipes {
   }
 
   public static List<TransmutationRecipe> getTransmutationRecipesFor(World world, BlockPos pos) {
-    IBlockState state = world.getBlockState(pos);
+    BlockState state = world.getBlockState(pos);
     return getTransmutationRecipesFor(state, world, pos);
   }
 
-  public static List<TransmutationRecipe> getTransmutationRecipesFor(IBlockState state, World world, BlockPos pos) {
+  public static List<TransmutationRecipe> getTransmutationRecipesFor(BlockState state, World world, BlockPos pos) {
     List<TransmutationRecipe> result = new ArrayList<>();
     for (TransmutationRecipe recipe : getTransmutationRecipes()) {
       if (recipe.matches(state, world, pos)) {
@@ -563,67 +559,67 @@ public class ModRecipes {
   public static void initTransmutationRecipes() {
     BlocksPredicate water = new WaterPredicate();
     BlocksPredicate lava = new LavaPredicate();
-    StatePredicate wool = new StatePredicate(Blocks.WOOL.getDefaultState());
+    StatePredicate wool = new StatePredicate(net.minecraft.block.Blocks.WOOL.getDefaultState());
     LeavesPredicate leaves = new LeavesPredicate();
-    StatePredicate cobblestone = new StatePredicate(Blocks.COBBLESTONE.getDefaultState());
+    StatePredicate cobblestone = new StatePredicate(net.minecraft.block.Blocks.COBBLESTONE.getDefaultState());
     StatePredicate sand = new StatePredicate(Blocks.SAND.getDefaultState());
-    StatePredicate cobblestoneSlab = new StatePredicate(ModBlocks.runestone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM));
+    StatePredicate cobblestoneSlab = new StatePredicate(ModBlocks.runestone_slab.getDefaultState().withProperty(SlabBlock.HALF, SlabBlock.EnumBlockHalf.BOTTOM));
 
-    TransmutationRecipe deadbush_cocoa = new TransmutationRecipe(Blocks.DEADBUSH.getDefaultState()).item(new ItemStack(Items.DYE, 3, EnumDyeColor.BROWN.getDyeDamage()));
+    TransmutationRecipe deadbush_cocoa = new TransmutationRecipe(net.minecraft.block.Blocks.DEADBUSH.getDefaultState()).item(new ItemStack(Items.DYE, 3, DyeColor.BROWN.getDyeDamage()));
     addTransmutationRecipe("deadbush_cocoa", deadbush_cocoa);
 
-    TransmutationRecipe birch_jungle = new TransmutationRecipe(new PropertyPredicate(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLog.VARIANT)).state(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
+    TransmutationRecipe birch_jungle = new TransmutationRecipe(new PropertyPredicate(net.minecraft.block.Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLog.VARIANT)).state(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle", birch_jungle);
 
-    TransmutationRecipe birch_jungle_leaves = new TransmutationRecipe(new PropertyPredicate(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLeaf.VARIANT)).state(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
+    TransmutationRecipe birch_jungle_leaves = new TransmutationRecipe(new PropertyPredicate(net.minecraft.block.Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLeaf.VARIANT)).state(net.minecraft.block.Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle_leaves", birch_jungle_leaves);
 
-    TransmutationRecipe pumpkin_to_melon = new TransmutationRecipe(Blocks.PUMPKIN.getDefaultState()).state(Blocks.MELON_BLOCK.getDefaultState()).condition(new BlockStateBelow(water));
+    TransmutationRecipe pumpkin_to_melon = new TransmutationRecipe(net.minecraft.block.Blocks.PUMPKIN.getDefaultState()).state(net.minecraft.block.Blocks.MELON_BLOCK.getDefaultState()).condition(new BlockStateBelow(water));
     addTransmutationRecipe("pumpkin_to_melon", pumpkin_to_melon);
 
-    TransmutationRecipe pumpkin_to_cactus = new TransmutationRecipe(Blocks.PUMPKIN.getDefaultState()).state(Blocks.CACTUS.getDefaultState()).condition(new BlockStateBelow(sand));
+    TransmutationRecipe pumpkin_to_cactus = new TransmutationRecipe(net.minecraft.block.Blocks.PUMPKIN.getDefaultState()).state(net.minecraft.block.Blocks.CACTUS.getDefaultState()).condition(new BlockStateBelow(sand));
     addTransmutationRecipe("pumpkin_to_cactus", pumpkin_to_cactus);
 
-    TransmutationRecipe cocoa_to_carrot = new TransmutationRecipe(Blocks.COCOA.getDefaultState()).item(new ItemStack(Items.CARROT));
+    TransmutationRecipe cocoa_to_carrot = new TransmutationRecipe(net.minecraft.block.Blocks.COCOA.getDefaultState()).item(new ItemStack(net.minecraft.item.Items.CARROT));
     addTransmutationRecipe("cocoa_to_carrot", cocoa_to_carrot);
 
-    TransmutationRecipe carrot_to_beetroot = new TransmutationRecipe(new PropertyPredicate(Blocks.CARROTS.getDefaultState().withProperty(BlockCrops.AGE, 7), BlockCrops.AGE)).state(Blocks.BEETROOTS.getDefaultState().withProperty(BlockBeetroot.BEETROOT_AGE, 3));
+    TransmutationRecipe carrot_to_beetroot = new TransmutationRecipe(new PropertyPredicate(net.minecraft.block.Blocks.CARROTS.getDefaultState().withProperty(CropsBlock.AGE, 7), CropsBlock.AGE)).state(net.minecraft.block.Blocks.BEETROOTS.getDefaultState().withProperty(BeetrootBlock.BEETROOT_AGE, 3));
     addTransmutationRecipe("carrot_to_beetroot", carrot_to_beetroot);
 
-    TransmutationRecipe carpet_to_lilypad = new TransmutationRecipe(Blocks.CARPET.getDefaultState()).state(Blocks.WATERLILY.getDefaultState()).condition(new BlockStateBelow(water));
+    TransmutationRecipe carpet_to_lilypad = new TransmutationRecipe(net.minecraft.block.Blocks.CARPET.getDefaultState()).state(net.minecraft.block.Blocks.WATERLILY.getDefaultState()).condition(new BlockStateBelow(water));
     addTransmutationRecipe("carpet_to_lilypad", carpet_to_lilypad);
 
-    TransmutationRecipe trapdoor_to_cobweb = new TransmutationRecipe(Blocks.TRAPDOOR.getDefaultState()).state(Blocks.WEB.getDefaultState()).condition(new BlockStateBelow(wool));
+    TransmutationRecipe trapdoor_to_cobweb = new TransmutationRecipe(net.minecraft.block.Blocks.TRAPDOOR.getDefaultState()).state(net.minecraft.block.Blocks.WEB.getDefaultState()).condition(new BlockStateBelow(wool));
     addTransmutationRecipe("trapdoor_to_cobweb", trapdoor_to_cobweb);
 
-    TransmutationRecipe redstone_to_vines = new TransmutationRecipe(Blocks.REDSTONE_WIRE.getDefaultState()).item(new ItemStack(Blocks.VINE)).condition(new BlockStateAbove(cobblestone));
+    TransmutationRecipe redstone_to_vines = new TransmutationRecipe(net.minecraft.block.Blocks.REDSTONE_WIRE.getDefaultState()).item(new ItemStack(net.minecraft.block.Blocks.VINE)).condition(new BlockStateAbove(cobblestone));
     addTransmutationRecipe("redstone_to_vines", redstone_to_vines);
 
-    TransmutationRecipe melon_to_pumpkin = new TransmutationRecipe(Blocks.MELON_BLOCK.getDefaultState()).state(Blocks.PUMPKIN.getDefaultState()).condition(new BlockStateBelow(cobblestone));
+    TransmutationRecipe melon_to_pumpkin = new TransmutationRecipe(net.minecraft.block.Blocks.MELON_BLOCK.getDefaultState()).state(net.minecraft.block.Blocks.PUMPKIN.getDefaultState()).condition(new BlockStateBelow(cobblestone));
     addTransmutationRecipe("melon_to_pumpkin", melon_to_pumpkin);
 
-    TransmutationRecipe redstone_block_to_glowstone = new TransmutationRecipe(Blocks.REDSTONE_BLOCK.getDefaultState()).state(Blocks.GLOWSTONE.getDefaultState()).condition(new BlockStateBelow(lava));
+    TransmutationRecipe redstone_block_to_glowstone = new TransmutationRecipe(net.minecraft.block.Blocks.REDSTONE_BLOCK.getDefaultState()).state(net.minecraft.block.Blocks.GLOWSTONE.getDefaultState()).condition(new BlockStateBelow(lava));
     addTransmutationRecipe("redstone_block_to_glowstone", redstone_block_to_glowstone);
 
-    TransmutationRecipe carpet_diorite = new TransmutationRecipe(Blocks.CARPET.getDefaultState()).state(Blocks.SNOW_LAYER.getDefaultState()).condition(new BlockStateBelow(new MultiStatePropertyPredicate(BlockStone.VARIANT, Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH))));
+    TransmutationRecipe carpet_diorite = new TransmutationRecipe(Blocks.CARPET.getDefaultState()).state(net.minecraft.block.Blocks.SNOW_LAYER.getDefaultState()).condition(new BlockStateBelow(new MultiStatePropertyPredicate(BlockStone.VARIANT, net.minecraft.block.Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), net.minecraft.block.Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH))));
     addTransmutationRecipe("carpet_to_snow", carpet_diorite);
 
-    TransmutationRecipe lever_brown_mushroom = new TransmutationRecipe(Blocks.LEVER.getDefaultState()).state(Blocks.BROWN_MUSHROOM.getDefaultState()).condition(new BlockStateBelow(new PropertyPredicate(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL), BlockDirt.VARIANT)));
+    TransmutationRecipe lever_brown_mushroom = new TransmutationRecipe(net.minecraft.block.Blocks.LEVER.getDefaultState()).state(net.minecraft.block.Blocks.BROWN_MUSHROOM.getDefaultState()).condition(new BlockStateBelow(new PropertyPredicate(net.minecraft.block.Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL), BlockDirt.VARIANT)));
     addTransmutationRecipe("lever_to_brown_mushroom", lever_brown_mushroom);
 
-    TransmutationRecipe redstone_torch_red_mushroom = new TransmutationRecipe(Blocks.REDSTONE_TORCH.getDefaultState()).state(Blocks.RED_MUSHROOM.getDefaultState()).condition(new BlockStateBelow(new PropertyPredicate(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL), BlockDirt.VARIANT)));
+    TransmutationRecipe redstone_torch_red_mushroom = new TransmutationRecipe(net.minecraft.block.Blocks.REDSTONE_TORCH.getDefaultState()).state(net.minecraft.block.Blocks.RED_MUSHROOM.getDefaultState()).condition(new BlockStateBelow(new PropertyPredicate(net.minecraft.block.Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL), BlockDirt.VARIANT)));
     addTransmutationRecipe("redstone_torch_to_red_mushroom", redstone_torch_red_mushroom);
   }
 
-  public static void addAnimalHarvestRecipe(EntityLivingBase entity) {
+  public static void addAnimalHarvestRecipe(LivingEntity entity) {
     addAnimalHarvestRecipe(EntityList.getEntityString(entity), entity);
   }
 
-  public static void addAnimalHarvestRecipe(String name, EntityLivingBase entity) {
+  public static void addAnimalHarvestRecipe(String name, LivingEntity entity) {
     addAnimalHarvestRecipe(name, entity.getClass());
   }
 
-  public static void addAnimalHarvestRecipe(String name, Class<? extends EntityLivingBase> clazz) {
+  public static void addAnimalHarvestRecipe(String name, Class<? extends LivingEntity> clazz) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     if (harvestRecipes.containsKey(n)) {
       Roots.logger.error("Animal Harvest recipe name is already registered: " + n.toString());
@@ -697,7 +693,7 @@ public class ModRecipes {
     return null;
   }
 
-  public static Set<Class<? extends EntityLivingBase>> getAnimalHarvestClasses() {
+  public static Set<Class<? extends LivingEntity>> getAnimalHarvestClasses() {
     if (harvestClasses == null || harvestClasses.size() != harvestRecipes.size()) {
       harvestClasses = new HashSet<>();
       for (AnimalHarvestRecipe recipe : harvestRecipes.values()) {
@@ -806,7 +802,7 @@ public class ModRecipes {
     }
   }
 
-  public static RunicShearRecipe getRunicShearRecipe(IBlockState state) {
+  public static RunicShearRecipe getRunicShearRecipe(BlockState state) {
     for (RunicShearRecipe recipe : runicShearRecipes.values()) {
       if (recipe.matches(state)) {
         return recipe;
@@ -827,7 +823,7 @@ public class ModRecipes {
   }
 
 
-  public static RunicShearEntityRecipe getRunicShearRecipe(EntityLivingBase entity) {
+  public static RunicShearEntityRecipe getRunicShearRecipe(LivingEntity entity) {
     if (generatedEntityRecipes == null || generatedEntityRecipes.isEmpty()) {
       generateEntityRecipes();
     }
@@ -862,7 +858,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static RunicShearEntityRecipe getRunicShearEntityRecipe(Class<? extends EntityLivingBase> entity) {
+  public static RunicShearEntityRecipe getRunicShearEntityRecipe(Class<? extends LivingEntity> entity) {
     for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
       if (recipe.getClazz().equals(entity)) {
         return recipe;
@@ -1174,7 +1170,7 @@ public class ModRecipes {
     initSummonCreatureEntries();
     initChrysopoeiaRecipes();
 
-    GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
+    GameRegistry.addSmelting(ModItems.flour, new ItemStack(net.minecraft.item.Items.BREAD), 0.125f);
     GameRegistry.addSmelting(ModItems.pereskia_bulb, new ItemStack(ModItems.cooked_pereskia), 0.125f);
 
     initCraftingRecipes();
@@ -1187,18 +1183,18 @@ public class ModRecipes {
     addPyreCraftingRecipe("infernal_bulb",
         new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb, 3), 1).addIngredients(
             new OreIngredient("wildroot"),
-            new ItemStack(Items.MAGMA_CREAM),
+            new ItemStack(net.minecraft.item.Items.MAGMA_CREAM),
             new OreIngredient("gunpowder"),
-            new ItemStack(Items.LAVA_BUCKET),
+            new ItemStack(net.minecraft.item.Items.LAVA_BUCKET),
             new OreIngredient("dustGlowstone")));
 
     addPyreCraftingRecipe("dewgonia",
         new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia, 3), 1).addIngredients(
             new OreIngredient("tallgrass"),
-            new ItemStack(Items.SUGAR),
+            new ItemStack(net.minecraft.item.Items.SUGAR),
             new OreIngredient("dyeBlue"),
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(Item.getItemFromBlock(Blocks.WATERLILY))));
+            new ItemStack(Item.getItemFromBlock(net.minecraft.block.Blocks.WATERLILY))));
 
     addPyreCraftingRecipe("cloud_berry",
         new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry, 3), 1).addIngredients(
@@ -1227,7 +1223,7 @@ public class ModRecipes {
     addPyreCraftingRecipe("pereskia",
         new PyreCraftingRecipe(new ItemStack(ModItems.pereskia, 3), 1).addIngredients(
             new OreIngredient("wildroot"),
-            new ItemStack(Items.SPECKLED_MELON),
+            new ItemStack(net.minecraft.item.Items.SPECKLED_MELON),
             new OreIngredient("dustRedstone"),
             new ItemStack(Items.BEETROOT),
             new OreIngredient("sugarcane")));
@@ -1235,9 +1231,9 @@ public class ModRecipes {
     addPyreCraftingRecipe("baffle_cap",
         new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), 3), 1).addIngredients(
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(Items.ROTTEN_FLESH),
-            new ItemStack(Items.WHEAT_SEEDS),
-            new ItemStack(Blocks.RED_MUSHROOM),
+            new ItemStack(net.minecraft.item.Items.ROTTEN_FLESH),
+            new ItemStack(net.minecraft.item.Items.WHEAT_SEEDS),
+            new ItemStack(net.minecraft.block.Blocks.RED_MUSHROOM),
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
     // Cooking!!!
@@ -1248,7 +1244,7 @@ public class ModRecipes {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds)).setBurnTime(20));*/
 
-    addPyreCraftingRecipe("dead_bush", new PyreCraftingRecipe(new ItemStack(Blocks.DEADBUSH, 3))
+    addPyreCraftingRecipe("dead_bush", new PyreCraftingRecipe(new ItemStack(net.minecraft.block.Blocks.DEADBUSH, 3))
         .addIngredients(
             new OreIngredient("treeSapling"),
             new OreIngredient("treeSapling"),
@@ -1263,16 +1259,16 @@ public class ModRecipes {
         new OreIngredient("cropPotato"),
         new OreIngredient("cropPotato")).setBurnTime(300));
 
-    addPyreCraftingRecipe("cooked_chicken", new PyreCraftingRecipe(new ItemStack(Items.COOKED_CHICKEN, 5), 1).addIngredients(
-        new ItemStack(Items.CHICKEN),
-        new ItemStack(Items.CHICKEN),
-        new ItemStack(Items.CHICKEN),
-        new ItemStack(Items.CHICKEN),
+    addPyreCraftingRecipe("cooked_chicken", new PyreCraftingRecipe(new ItemStack(net.minecraft.item.Items.COOKED_CHICKEN, 5), 1).addIngredients(
+        new ItemStack(net.minecraft.item.Items.CHICKEN),
+        new ItemStack(net.minecraft.item.Items.CHICKEN),
+        new ItemStack(net.minecraft.item.Items.CHICKEN),
+        new ItemStack(net.minecraft.item.Items.CHICKEN),
         new ItemStack(Items.CHICKEN)).setBurnTime(300));
 
-    Ingredient acceptableFish = Ingredient.fromStacks(new ItemStack(Items.FISH, 1, ItemFishFood.FishType.CLOWNFISH.getMetadata()), new ItemStack(Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()));
+    Ingredient acceptableFish = Ingredient.fromStacks(new ItemStack(Items.FISH, 1, ItemFishFood.FishType.CLOWNFISH.getMetadata()), new ItemStack(net.minecraft.item.Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()));
 
-    addPyreCraftingRecipe("cooked_fish", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 5), 1).addIngredients(
+    addPyreCraftingRecipe("cooked_fish", new PyreCraftingRecipe(new ItemStack(net.minecraft.item.Items.COOKED_FISH, 5), 1).addIngredients(
         acceptableFish,
         acceptableFish,
         acceptableFish,
@@ -1280,39 +1276,39 @@ public class ModRecipes {
         acceptableFish).setBurnTime(300));
 
     addPyreCraftingRecipe("cooked_salmon", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 5, ItemFishFood.FishType.SALMON.getMetadata()), 1).addIngredients(
-        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
-        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
-        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
-        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
-        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata())).setBurnTime(300));
+        new ItemStack(net.minecraft.item.Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(net.minecraft.item.Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(net.minecraft.item.Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(net.minecraft.item.Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(net.minecraft.item.Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata())).setBurnTime(300));
 
     addPyreCraftingRecipe("steak", new PyreCraftingRecipe(new ItemStack(Items.COOKED_BEEF, 5), 1).addIngredients(
-        new ItemStack(Items.BEEF),
-        new ItemStack(Items.BEEF),
-        new ItemStack(Items.BEEF),
-        new ItemStack(Items.BEEF),
-        new ItemStack(Items.BEEF)).setBurnTime(300));
+        new ItemStack(net.minecraft.item.Items.BEEF),
+        new ItemStack(net.minecraft.item.Items.BEEF),
+        new ItemStack(net.minecraft.item.Items.BEEF),
+        new ItemStack(net.minecraft.item.Items.BEEF),
+        new ItemStack(net.minecraft.item.Items.BEEF)).setBurnTime(300));
 
-    addPyreCraftingRecipe("cooked_mutton", new PyreCraftingRecipe(new ItemStack(Items.COOKED_MUTTON, 5), 1).addIngredients(
-        new ItemStack(Items.MUTTON),
-        new ItemStack(Items.MUTTON),
-        new ItemStack(Items.MUTTON),
-        new ItemStack(Items.MUTTON),
-        new ItemStack(Items.MUTTON)).setBurnTime(300));
+    addPyreCraftingRecipe("cooked_mutton", new PyreCraftingRecipe(new ItemStack(net.minecraft.item.Items.COOKED_MUTTON, 5), 1).addIngredients(
+        new ItemStack(net.minecraft.item.Items.MUTTON),
+        new ItemStack(net.minecraft.item.Items.MUTTON),
+        new ItemStack(net.minecraft.item.Items.MUTTON),
+        new ItemStack(net.minecraft.item.Items.MUTTON),
+        new ItemStack(net.minecraft.item.Items.MUTTON)).setBurnTime(300));
 
-    addPyreCraftingRecipe("cooked_porkchop", new PyreCraftingRecipe(new ItemStack(Items.COOKED_PORKCHOP, 5), 1).addIngredients(
-        new ItemStack(Items.PORKCHOP),
-        new ItemStack(Items.PORKCHOP),
-        new ItemStack(Items.PORKCHOP),
-        new ItemStack(Items.PORKCHOP),
-        new ItemStack(Items.PORKCHOP)).setBurnTime(300));
+    addPyreCraftingRecipe("cooked_porkchop", new PyreCraftingRecipe(new ItemStack(net.minecraft.item.Items.COOKED_PORKCHOP, 5), 1).addIngredients(
+        new ItemStack(net.minecraft.item.Items.PORKCHOP),
+        new ItemStack(net.minecraft.item.Items.PORKCHOP),
+        new ItemStack(net.minecraft.item.Items.PORKCHOP),
+        new ItemStack(net.minecraft.item.Items.PORKCHOP),
+        new ItemStack(net.minecraft.item.Items.PORKCHOP)).setBurnTime(300));
 
-    addPyreCraftingRecipe("cooked_rabbit", new PyreCraftingRecipe(new ItemStack(Items.COOKED_RABBIT, 5), 1).addIngredients(
-        new ItemStack(Items.RABBIT),
-        new ItemStack(Items.RABBIT),
-        new ItemStack(Items.RABBIT),
-        new ItemStack(Items.RABBIT),
-        new ItemStack(Items.RABBIT)).setBurnTime(300));
+    addPyreCraftingRecipe("cooked_rabbit", new PyreCraftingRecipe(new ItemStack(net.minecraft.item.Items.COOKED_RABBIT, 5), 1).addIngredients(
+        new ItemStack(net.minecraft.item.Items.RABBIT),
+        new ItemStack(net.minecraft.item.Items.RABBIT),
+        new ItemStack(net.minecraft.item.Items.RABBIT),
+        new ItemStack(net.minecraft.item.Items.RABBIT),
+        new ItemStack(net.minecraft.item.Items.RABBIT)).setBurnTime(300));
 
     addPyreCraftingRecipe("cooked_pereskia", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_pereskia, 5), 1).addIngredients(
         new ItemStack(ModItems.pereskia_bulb),
@@ -1345,9 +1341,9 @@ public class ModRecipes {
     // END OF COOKING
 
     addFeyCraftingRecipe("unending_bowl",
-        new FeyCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
+        new FeyCraftingRecipe(new ItemStack(BlockItem.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
             new ItemStack(Items.WATER_BUCKET),
-            new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)),
+            new ItemStack(BlockItem.getItemFromBlock(ModBlocks.mortar)),
             new ItemStack(ModItems.dewgonia),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.dewgonia)));
@@ -1357,13 +1353,13 @@ public class ModRecipes {
             new OreIngredient("dirt"),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("wildroot"),
-            new ItemStack(Blocks.GRAVEL),
+            new ItemStack(net.minecraft.block.Blocks.GRAVEL),
             new OreIngredient("dye")));
 
     addFeyCraftingRecipe("living_pickaxe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
-            new ItemStack(Items.WOODEN_PICKAXE),
+            new ItemStack(net.minecraft.item.Items.WOODEN_PICKAXE),
             new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
@@ -1371,7 +1367,7 @@ public class ModRecipes {
     addFeyCraftingRecipe("living_axe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
-            new ItemStack(Items.WOODEN_AXE),
+            new ItemStack(net.minecraft.item.Items.WOODEN_AXE),
             new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
@@ -1379,7 +1375,7 @@ public class ModRecipes {
     addFeyCraftingRecipe("living_shovel",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
-            new ItemStack(Items.WOODEN_SHOVEL),
+            new ItemStack(net.minecraft.item.Items.WOODEN_SHOVEL),
             new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
@@ -1387,7 +1383,7 @@ public class ModRecipes {
     addFeyCraftingRecipe("living_hoe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
-            new ItemStack(Items.WOODEN_HOE),
+            new ItemStack(net.minecraft.item.Items.WOODEN_HOE),
             new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
@@ -1395,7 +1391,7 @@ public class ModRecipes {
     addFeyCraftingRecipe("living_sword",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
-            new ItemStack(Items.WOODEN_SWORD),
+            new ItemStack(net.minecraft.item.Items.WOODEN_SWORD),
             new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
@@ -1406,7 +1402,7 @@ public class ModRecipes {
             new OreIngredient("treeLeaves"),
             new OreIngredient("rootsBark"),
             new OreIngredient("wildroot"),
-            new ItemStack(Items.FLINT)));
+            new ItemStack(net.minecraft.item.Items.FLINT)));
 
     addFeyCraftingRecipe("wildwood_quiver",
         new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_quiver), 2).addIngredients(
@@ -1426,7 +1422,7 @@ public class ModRecipes {
 
     addFeyCraftingRecipe("runic_shears",
         new FeyCraftingRecipe(new ItemStack(ModItems.runic_shears), 1).addIngredients(
-            new ItemStack(Items.SHEARS),
+            new ItemStack(net.minecraft.item.Items.SHEARS),
             new ItemStack(ModItems.pereskia),
             new ItemStack(ModItems.pereskia),
             new OreIngredient("runestone"),
@@ -1458,28 +1454,28 @@ public class ModRecipes {
                 new ItemStack(ModItems.mystic_feather)));
 
     addFeyCraftingRecipe("wildwood_helmet", new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_helmet), 1).addIngredients(
-        new ItemStack(Items.IRON_HELMET),
+        new ItemStack(net.minecraft.item.Items.IRON_HELMET),
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.bark_wildwood),
         new OreIngredient("plankWood"),
         new OreIngredient("gemDiamond")));
 
     addFeyCraftingRecipe("wildwood_chestplate", new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_chestplate), 1).addIngredients(
-        new ItemStack(Items.IRON_CHESTPLATE),
+        new ItemStack(net.minecraft.item.Items.IRON_CHESTPLATE),
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.bark_wildwood),
         new OreIngredient("plankWood"),
         new OreIngredient("gemDiamond")));
 
     addFeyCraftingRecipe("wildwood_leggings", new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_leggings), 1).addIngredients(
-        new ItemStack(Items.IRON_LEGGINGS),
+        new ItemStack(net.minecraft.item.Items.IRON_LEGGINGS),
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.bark_wildwood),
         new OreIngredient("plankWood"),
         new OreIngredient("gemDiamond")));
 
     addFeyCraftingRecipe("wildwood_boots", new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_boots), 1).addIngredients(
-        new ItemStack(Items.IRON_BOOTS),
+        new ItemStack(net.minecraft.item.Items.IRON_BOOTS),
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.bark_wildwood),
         new OreIngredient("plankWood"),
@@ -1510,7 +1506,7 @@ public class ModRecipes {
 
     addFeyCraftingRecipe("salmon_of_knowledge", new SalmonRecipe(new ItemStack(ModItems.salmon), 1).addIngredients(
         new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
-        new ItemStack(Items.EXPERIENCE_BOTTLE),
+        new ItemStack(net.minecraft.item.Items.EXPERIENCE_BOTTLE),
         new OreIngredient("rootsBark"),
         new ItemStack(Items.BOOK),
         new ItemStack(ModItems.terra_moss)
@@ -1521,21 +1517,21 @@ public class ModRecipes {
         new OreIngredient("vine"),
         new ItemStack(ModItems.bark_birch),
         new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
-        new ItemStack(Items.IRON_HELMET)));
+        new ItemStack(net.minecraft.item.Items.IRON_HELMET)));
 
     addFeyCraftingRecipe("sylvan_chestplate", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_chestplate), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new OreIngredient("vine"),
         new ItemStack(ModItems.bark_birch),
         new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
-        new ItemStack(Items.IRON_CHESTPLATE)));
+        new ItemStack(net.minecraft.item.Items.IRON_CHESTPLATE)));
 
     addFeyCraftingRecipe("sylvan_leggings", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_leggings), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new OreIngredient("vine"),
         new ItemStack(ModItems.bark_birch),
         new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
-        new ItemStack(Items.IRON_LEGGINGS)));
+        new ItemStack(net.minecraft.item.Items.IRON_LEGGINGS)));
 
     addFeyCraftingRecipe("sylvan_boots", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_boots), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
@@ -1548,7 +1544,7 @@ public class ModRecipes {
     addFeyCraftingRecipe("terrastone_pickaxe",
         new FeyCraftingRecipe(new ItemStack(ModItems.terrastone_pickaxe), 1).addIngredients(
             new OreIngredient("runestone"),
-            new ItemStack(Items.STONE_PICKAXE),
+            new ItemStack(net.minecraft.item.Items.STONE_PICKAXE),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
             new OreIngredient("mossyCobblestone")));
@@ -1564,7 +1560,7 @@ public class ModRecipes {
     addFeyCraftingRecipe("terrastone_shovel",
         new FeyCraftingRecipe(new ItemStack(ModItems.terrastone_shovel), 1).addIngredients(
             new OreIngredient("runestone"),
-            new ItemStack(Items.STONE_SHOVEL),
+            new ItemStack(net.minecraft.item.Items.STONE_SHOVEL),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
             new OreIngredient("mossyCobblestone")));
@@ -1572,7 +1568,7 @@ public class ModRecipes {
     addFeyCraftingRecipe("terrastone_hoe",
         new FeyCraftingRecipe(new ItemStack(ModItems.terrastone_hoe), 1).addIngredients(
             new OreIngredient("runestone"),
-            new ItemStack(Items.STONE_HOE),
+            new ItemStack(net.minecraft.item.Items.STONE_HOE),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
             new OreIngredient("mossyCobblestone")));
@@ -1580,7 +1576,7 @@ public class ModRecipes {
     addFeyCraftingRecipe("terrastone_sword",
         new FeyCraftingRecipe(new ItemStack(ModItems.terrastone_sword), 1).addIngredients(
             new OreIngredient("runestone"),
-            new ItemStack(Items.STONE_SWORD),
+            new ItemStack(net.minecraft.item.Items.STONE_SWORD),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
             new OreIngredient("mossyCobblestone")));
@@ -1635,7 +1631,7 @@ public class ModRecipes {
 
     // END OF ARMOR/etc
 
-    addFeyCraftingRecipe("mycelium", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.MYCELIUM), 5), 1).addIngredients(
+    addFeyCraftingRecipe("mycelium", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(net.minecraft.block.Blocks.MYCELIUM), 5), 1).addIngredients(
         new OreIngredient("mushroom"),
         new OreIngredient("dirt"),
         new ItemStack(ModItems.terra_spores),
@@ -1648,18 +1644,18 @@ public class ModRecipes {
         new ItemStack(ModItems.terra_moss),
         new OreIngredient("sand"),
         new ItemStack(ModItems.stalicripe),
-        new ItemStack(Items.WATER_BUCKET)
+        new ItemStack(net.minecraft.item.Items.WATER_BUCKET)
     ));
 
-    addFeyCraftingRecipe("podzol", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 5, BlockDirt.DirtType.PODZOL.getMetadata()), 1).addIngredients(
-        new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1, BlockDirt.DirtType.COARSE_DIRT.getMetadata()),
+    addFeyCraftingRecipe("podzol", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(net.minecraft.block.Blocks.DIRT), 5, BlockDirt.DirtType.PODZOL.getMetadata()), 1).addIngredients(
+        new ItemStack(Item.getItemFromBlock(net.minecraft.block.Blocks.DIRT), 1, BlockDirt.DirtType.COARSE_DIRT.getMetadata()),
         new OreIngredient("rootsBark"),
         new OreIngredient("treeLeaves"),
         new ItemStack(ModItems.stalicripe),
         new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1, BlockDirt.DirtType.COARSE_DIRT.getMetadata())
     ));
 
-    addFeyCraftingRecipe("sand", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.SAND), 5, BlockSand.EnumType.SAND.getMetadata()), 1).addIngredients(
+    addFeyCraftingRecipe("sand", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(net.minecraft.block.Blocks.SAND), 5, SandBlock.EnumType.SAND.getMetadata()), 1).addIngredients(
         new OreIngredient("gravel"),
         new OreIngredient("gravel"),
         new OreIngredient("gravel"),
@@ -1667,7 +1663,7 @@ public class ModRecipes {
         new ItemStack(ModItems.stalicripe)
     ));
 
-    addFeyCraftingRecipe("gravel", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.GRAVEL), 5), 1).addIngredients(
+    addFeyCraftingRecipe("gravel", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(net.minecraft.block.Blocks.GRAVEL), 5), 1).addIngredients(
         new OreIngredient("cobblestone"),
         new OreIngredient("cobblestone"),
         new OreIngredient("cobblestone"),
@@ -1675,7 +1671,7 @@ public class ModRecipes {
         new ItemStack(ModItems.stalicripe)
     ));
 
-    addFeyCraftingRecipe("red_sand", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.SAND), 2, BlockSand.EnumType.RED_SAND.getMetadata()), 1).addIngredients(
+    addFeyCraftingRecipe("red_sand", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(net.minecraft.block.Blocks.SAND), 2, SandBlock.EnumType.RED_SAND.getMetadata()), 1).addIngredients(
         new OreIngredient("dustRedstone"),
         new OreIngredient("sand"),
         new OreIngredient("dustRedstone"),
@@ -1683,11 +1679,11 @@ public class ModRecipes {
         new OreIngredient("dyeRed")
     ));
 
-    addFeyCraftingRecipe("gunpowder", new FeyCraftingRecipe(new ItemStack(Items.GUNPOWDER, 5), 1).addIngredients(
+    addFeyCraftingRecipe("gunpowder", new FeyCraftingRecipe(new ItemStack(net.minecraft.item.Items.GUNPOWDER, 5), 1).addIngredients(
         new OreIngredient("netherrack"),
-        new ItemStack(Items.COAL, 1, 1), // Charcoal
+        new ItemStack(net.minecraft.item.Items.COAL, 1, 1), // Charcoal
         new OreIngredient("netherrack"),
-        new ItemStack(Items.MAGMA_CREAM, 1),
+        new ItemStack(net.minecraft.item.Items.MAGMA_CREAM, 1),
         new ItemStack(ModItems.infernal_bulb)
     ));
   }

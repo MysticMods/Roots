@@ -16,15 +16,15 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -75,8 +75,8 @@ public class BlockElementalSoil extends BlockBase {
 
   public void doHarvest(BlockEvent.CropGrowEvent.Post cropGrowEvent) {
     BlockPos pos = cropGrowEvent.getPos();
-    IBlockState soil = cropGrowEvent.getWorld().getBlockState(pos.down());
-    IBlockState plant = cropGrowEvent.getWorld().getBlockState(pos);
+    BlockState soil = cropGrowEvent.getWorld().getBlockState(pos.down());
+    BlockState plant = cropGrowEvent.getWorld().getBlockState(pos);
     World world = cropGrowEvent.getWorld();
     doHarvest(world, pos, soil, plant);
     world.scheduleUpdate(pos, this, 30);
@@ -87,10 +87,10 @@ public class BlockElementalSoil extends BlockBase {
     return world.getBlockState(pos.down().down()).getBlock() != Blocks.GRAVEL;
   }
 
-  private void doHarvest(World world, BlockPos pos, IBlockState soil, IBlockState plant) {
+  private void doHarvest(World world, BlockPos pos, BlockState soil, BlockState plant) {
     if (soil.getBlock() != ModBlocks.elemental_soil_water) return;
 
-    if (shouldHarvest(world, pos) && plant.getBlock() instanceof IPlantable && Harvest.isGrown(plant) && soil.getBlock().canSustainPlant(soil, world, pos.down(), EnumFacing.UP, (IPlantable) plant.getBlock())) {
+    if (shouldHarvest(world, pos) && plant.getBlock() instanceof IPlantable && Harvest.isGrown(plant) && soil.getBlock().canSustainPlant(soil, world, pos.down(), Direction.UP, (IPlantable) plant.getBlock())) {
       if (soil.getBlock() == ModBlocks.elemental_soil_water) {
         int speed = soil.getValue(BlockElementalSoil.WATER_SPEED);
         if (speed > 0) {
@@ -133,7 +133,7 @@ public class BlockElementalSoil extends BlockBase {
   @SuppressWarnings("deprecation")
   @Override
   @Nonnull
-  public IBlockState getStateFromMeta(int meta) {
+  public BlockState getStateFromMeta(int meta) {
     if (soilType == null) {
       soilType = SOIL_INIT;
     }
@@ -174,7 +174,7 @@ public class BlockElementalSoil extends BlockBase {
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
+  public int getMetaFromState(BlockState state) {
     PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
         WATER_SPEED :
         this.soilType == EnumElementalSoilType.EARTH ? EARTH_FERTILITY : this.soilType == EnumElementalSoilType.AIR ? AIR_SPEED :
@@ -186,7 +186,7 @@ public class BlockElementalSoil extends BlockBase {
   }
 
   @Override
-  public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, BlockPos pos, @Nonnull EnumFacing direction, IPlantable plantable) {
+  public boolean canSustainPlant(@Nonnull BlockState state, @Nonnull IBlockAccess world, BlockPos pos, @Nonnull Direction direction, IPlantable plantable) {
     if (soilType == EnumElementalSoilType.WATER && plantable == Blocks.REEDS) {
       return true;
     } else if (plantable == Blocks.CACTUS) {
@@ -209,14 +209,14 @@ public class BlockElementalSoil extends BlockBase {
   }
 
   @Override
-  public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+  public void updateTick(World world, BlockPos pos, BlockState state, Random rand) {
     super.updateTick(world, pos, state, rand);
 
     if (world.isAirBlock(pos.up())) {
       return;
     }
 
-    IBlockState upState = world.getBlockState(pos.up());
+    BlockState upState = world.getBlockState(pos.up());
     Block upBlock = upState.getBlock();
     doHarvest(world, pos.up(), world.getBlockState(pos), upState);
 
@@ -231,7 +231,7 @@ public class BlockElementalSoil extends BlockBase {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+  public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (GeneralConfig.DisableParticles) {
       return;
     }
@@ -294,8 +294,8 @@ public class BlockElementalSoil extends BlockBase {
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-    if (stack.getItem() instanceof ItemBlock) {
-      Block type = ((ItemBlock) stack.getItem()).getBlock();
+    if (stack.getItem() instanceof BlockItem) {
+      Block type = ((BlockItem) stack.getItem()).getBlock();
       if (type == ModBlocks.elemental_soil_fire) {
         tooltip.add("");
         tooltip.add(TextFormatting.RED + "" + TextFormatting.BOLD + I18n.format("tile.magmatic_soil.effect"));
@@ -314,7 +314,7 @@ public class BlockElementalSoil extends BlockBase {
 
   @Override
   @SuppressWarnings("deprecation")
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+  public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
   }

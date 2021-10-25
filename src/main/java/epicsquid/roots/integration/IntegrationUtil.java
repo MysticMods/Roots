@@ -5,7 +5,7 @@ import mezz.jei.api.IRecipeRegistry;
 import mezz.jei.api.IRecipesGui;
 import mezz.jei.api.recipe.IFocus;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -34,7 +34,7 @@ public class IntegrationUtil {
    * @param page             the page number
    */
   @SideOnly(Side.CLIENT)
-  public static void openBook(World world, EntityPlayer player, ResourceLocation resourceLocation, ResourceLocation entryLocation, int page) {
+  public static void openBook(World world, PlayerEntity player, ResourceLocation resourceLocation, ResourceLocation entryLocation, int page) {
     if (world.isRemote) {
       PatchouliAPI.instance.openBookGUI(resourceLocation);
       SoundEvent sfx = SoundEvent.REGISTRY.getObject(new ResourceLocation("patchouli", "book_open"));
@@ -73,7 +73,7 @@ public class IntegrationUtil {
   }
 
   @SideOnly(Side.CLIENT)
-  public static void openCategory(World world, EntityPlayer player, ResourceLocation resourceLocation, ResourceLocation categoryLocation) {
+  public static void openCategory(World world, PlayerEntity player, ResourceLocation resourceLocation, ResourceLocation categoryLocation) {
     if (world.isRemote) {
       PatchouliAPI.instance.openBookGUI(resourceLocation);
       SoundEvent sfx = SoundEvent.REGISTRY.getObject(new ResourceLocation("patchouli", "book_open"));

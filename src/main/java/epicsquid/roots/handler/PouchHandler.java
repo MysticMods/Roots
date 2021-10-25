@@ -7,7 +7,7 @@ import epicsquid.roots.item.PouchType;
 import epicsquid.roots.world.data.PouchHandlerData;
 import epicsquid.roots.world.data.PouchHandlerRegistry;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -28,7 +28,7 @@ public class PouchHandler implements IPouchHandler {
   public PouchHandler(ItemStack pouch) {
     this.pouch = pouch;
 
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(pouch);
+    CompoundNBT tag = ItemUtil.getOrCreateTag(pouch);
     PouchHandlerData data;
     PouchType type = ItemPouch.getPouchType(pouch);
     if (tag.hasUniqueId("bag_id")) {

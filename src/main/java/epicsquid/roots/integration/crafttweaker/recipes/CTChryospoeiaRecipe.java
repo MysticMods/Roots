@@ -5,7 +5,7 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.recipe.ChrysopoeiaRecipe;
 import epicsquid.roots.util.IngredientWithStack;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public class CTChryospoeiaRecipe extends ChrysopoeiaRecipe {
@@ -32,7 +32,7 @@ public class CTChryospoeiaRecipe extends ChrysopoeiaRecipe {
   }
 
   @Override
-  public ItemStack process(EntityPlayer player, ItemStack stack, int overload, int by) {
+  public ItemStack process(PlayerEntity player, ItemStack stack, int overload, int by) {
     if (!matches(stack)) {
       return stack;
     }

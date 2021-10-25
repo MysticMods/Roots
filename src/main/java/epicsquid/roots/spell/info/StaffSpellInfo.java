@@ -10,7 +10,7 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -78,8 +78,8 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound result = super.serializeNBT();
+  public CompoundNBT serializeNBT() {
+    CompoundNBT result = super.serializeNBT();
     result.setTag("m", modifiers.serializeNBT());
     result.setInteger("c", cooldown);
     result.setLong("l", cooldownStop);
@@ -87,7 +87,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
+  public void deserializeNBT(CompoundNBT nbt) {
     super.deserializeNBT(nbt);
     this.modifiers = StaffModifierInstanceList.fromNBT(nbt.getCompoundTag("m"));
     this.cooldown = nbt.getInteger("c");
@@ -100,7 +100,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   }
 
   @Nullable
-  public static StaffSpellInfo fromNBT(NBTTagCompound tag) {
+  public static StaffSpellInfo fromNBT(CompoundNBT tag) {
     SpellBase spell = getSpellFromTag(tag);
     if (spell == null) {
       return null;
@@ -156,7 +156,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   @Override
   public ItemStack asStack() {
     ItemStack stack = new ItemStack(ModItems.spell_icon);
-    NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
+    CompoundNBT comp = ItemUtil.getOrCreateTag(stack);
     comp.setBoolean("staff", true);
     StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);
     storage.addSpell(this);

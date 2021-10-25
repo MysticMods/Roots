@@ -6,7 +6,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -78,12 +78,12 @@ public class BlockColoredFeyLight extends BlockFeyLight {
 
   @SuppressWarnings("deprecation")
   @Override
-  public IBlockState getStateFromMeta(int meta) {
+  public BlockState getStateFromMeta(int meta) {
     return this.getDefaultState().withProperty(COLOR, meta);
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
+  public int getMetaFromState(BlockState state) {
     return state.getValue(COLOR);
   }
 
@@ -93,7 +93,7 @@ public class BlockColoredFeyLight extends BlockFeyLight {
   }
 
   @Override
-  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
+  public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
     int col = state.getValue(COLOR);
     // SANITY CHECK THIS
     float[][] color = colors[col];

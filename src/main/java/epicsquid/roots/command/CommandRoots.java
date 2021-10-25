@@ -24,21 +24,21 @@ import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.WorldServer;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.ServerWorld;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -76,14 +76,14 @@ public class CommandRoots extends CommandBase {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-    if (sender instanceof EntityPlayerMP && args.length != 0) {
-      EntityPlayerMP player = (EntityPlayerMP) sender;
-      WorldServer world = player.getServerWorld();
+    if (sender instanceof ServerPlayerEntity && args.length != 0) {
+      ServerPlayerEntity player = (ServerPlayerEntity) sender;
+      ServerWorld world = player.getServerWorld();
       if (args[0].equalsIgnoreCase("slave")) {
         Entity target = RayCastUtil.mouseOverEntity(player);
         if (SlaveUtil.canBecomeSlave(target) || SlaveUtil.isSlave(target)) {
-          EntityLivingBase parent = (EntityLivingBase) target;
-          EntityLivingBase slave = SlaveUtil.canBecomeSlave(target) ? SlaveUtil.enslave(parent) : SlaveUtil.revert(parent);
+          LivingEntity parent = (LivingEntity) target;
+          LivingEntity slave = SlaveUtil.canBecomeSlave(target) ? SlaveUtil.enslave(parent) : SlaveUtil.revert(parent);
           world.spawnEntity(slave);
           parent.setDropItemsWhenDead(false);
           parent.setDead();
@@ -101,10 +101,10 @@ public class CommandRoots extends CommandBase {
         try {
           Files.write(path, modifierList, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
         } catch (IOException e) {
-          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          player.sendMessage(new StringTextComponent("Unable to write roots.log"));
           return;
         }
-        player.sendMessage(new TextComponentString("Modifiers written to roots.log"));
+        player.sendMessage(new StringTextComponent("Modifiers written to roots.log"));
       } else if (args[0].equalsIgnoreCase("library")) {
         if (args.length == 2 && args[1].equals("fill") || args[1].equals("all")) {
           SpellLibraryData library = SpellLibraryRegistry.getData(player);
@@ -117,19 +117,19 @@ public class CommandRoots extends CommandBase {
           SpellLibraryData data = SpellLibraryRegistry.getData(player);
           for (LibrarySpellInfo info : data) {
             if (info.isObtained()) {
-              player.sendMessage(new TextComponentString("Obtained: " + info.getNonNullSpell().getRegistryName()));
+              player.sendMessage(new StringTextComponent("Obtained: " + info.getNonNullSpell().getRegistryName()));
             }
           }
           for (LibrarySpellInfo info : data) {
             if (!info.isObtained()) {
-              player.sendMessage(new TextComponentString("Unobtained: " + info.getNonNullSpell().getRegistryName()));
+              player.sendMessage(new StringTextComponent("Unobtained: " + info.getNonNullSpell().getRegistryName()));
             }
           }
         }
       } else if (args[0].equalsIgnoreCase("activate")) {
         List<BlockPos> positions = Util.getBlocksWithinRadius(world, sender.getPosition(), 50, 50, 50, ModBlocks.grove_stone);
         for (BlockPos pos : positions) {
-          IBlockState state = world.getBlockState(pos);
+          BlockState state = world.getBlockState(pos);
           if (state.getBlock() != ModBlocks.grove_stone) {
             continue;
           }
@@ -159,7 +159,7 @@ public class CommandRoots extends CommandBase {
         PacketHandler.INSTANCE.sendTo(message, player);
         Item guide = Item.REGISTRY.getObject(new ResourceLocation("patchouli", "guide_book"));
         ItemStack book = new ItemStack(guide);
-        NBTTagCompound tag = new NBTTagCompound();
+        CompoundNBT tag = new CompoundNBT();
         tag.setString("patchouli:book", "roots:roots_guide");
         book.setTagCompound(tag);
         if (!player.addItemStackToInventory(book)) {
@@ -176,10 +176,10 @@ public class CommandRoots extends CommandBase {
         try {
           Files.write(path, growablesList, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
         } catch (IOException e) {
-          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          player.sendMessage(new StringTextComponent("Unable to write roots.log"));
           return;
         }
-        player.sendMessage(new TextComponentString("Growables written to roots.log"));
+        player.sendMessage(new StringTextComponent("Growables written to roots.log"));
       } else if (args[0].equalsIgnoreCase("rituals")) {
         List<String> rituals = new ArrayList<>();
 
@@ -202,11 +202,11 @@ public class CommandRoots extends CommandBase {
         try {
           Files.write(path, rituals, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
         } catch (IOException e) {
-          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          player.sendMessage(new StringTextComponent("Unable to write roots.log"));
           Roots.logger.error("Unable to write to roots.log: ", e);
           return;
         }
-        player.sendMessage(new TextComponentString("Rituals written to roots.log"));
+        player.sendMessage(new StringTextComponent("Rituals written to roots.log"));
       } else if (args[0].equalsIgnoreCase("spells")) {
         List<String> spells = new ArrayList<>();
 
@@ -232,10 +232,10 @@ public class CommandRoots extends CommandBase {
         try {
           Files.write(path, spells, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
         } catch (IOException e) {
-          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          player.sendMessage(new StringTextComponent("Unable to write roots.log"));
           return;
         }
-        player.sendMessage(new TextComponentString("Spells written to roots.log"));
+        player.sendMessage(new StringTextComponent("Spells written to roots.log"));
       }
     }
   }

@@ -25,9 +25,9 @@ import epicsquid.roots.util.ClientHerbUtil;
 import epicsquid.roots.util.ServerHerbUtil;
 import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -37,8 +37,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -194,7 +194,7 @@ public abstract class SpellBase extends RegistryItem {
     return this;
   }
 
-  public boolean costsMet(EntityPlayer player, StaffModifierInstanceList modifiers) {
+  public boolean costsMet(PlayerEntity player, StaffModifierInstanceList modifiers) {
     boolean matches = true;
     for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
@@ -210,11 +210,11 @@ public abstract class SpellBase extends RegistryItem {
         if (!matches && !player.isCreative()) {
           if (r == -1.0) {
             if (!player.world.isRemote) {
-              player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_pouch").setStyle(new Style().setColor(TextFormatting.RED)), true);
+              player.sendStatusMessage(new TranslationTextComponent("roots.info.pouch.no_pouch").setStyle(new Style().setColor(TextFormatting.RED)), true);
             }
           } else {
             if (!player.world.isRemote) {
-              player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
+              player.sendStatusMessage(new TranslationTextComponent("roots.info.pouch.no_herbs", new TranslationTextComponent(String.format("item.%s.name", herb.getName()))), true);
             }
           }
         }
@@ -223,7 +223,7 @@ public abstract class SpellBase extends RegistryItem {
     return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
   }
 
-  public void enactCosts(EntityPlayer player, StaffModifierInstanceList modifiers) {
+  public void enactCosts(PlayerEntity player, StaffModifierInstanceList modifiers) {
     for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
@@ -231,7 +231,7 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  public void enactTickCosts(EntityPlayer player, StaffModifierInstanceList modifiers) {
+  public void enactTickCosts(PlayerEntity player, StaffModifierInstanceList modifiers) {
     for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
@@ -287,7 +287,7 @@ public abstract class SpellBase extends RegistryItem {
       double addition = 0;
       double subtraction = 0;
 
-      if (!GuiScreen.isShiftKeyDown()) {
+      if (!Screen.isShiftKeyDown()) {
         StringJoiner joiner = new StringJoiner(", ");
         for (StaffModifierInstance m : list) {
           if (m.getModifier() == null || !m.isApplied() || !m.isEnabled()) {
@@ -310,7 +310,7 @@ public abstract class SpellBase extends RegistryItem {
         if (!result.isEmpty()) {
           tooltip.add(result);
         }
-        if (GuiScreen.isShiftKeyDown()) {
+        if (Screen.isShiftKeyDown()) {
           if (!result.isEmpty()) {
             tooltip.add(result);
           }
@@ -384,7 +384,7 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
+  public CastResult cast(PlayerEntity caster, StaffSpellInfo info, int ticks) {
     StaffModifierInstanceList mods = info.getModifiers();
 
     CastResult result = CastResult.FAIL;
@@ -402,7 +402,7 @@ public abstract class SpellBase extends RegistryItem {
     return result;
   }
 
-  protected abstract boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks);
+  protected abstract boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks);
 
   public float getRed1() {
     return red1;
@@ -539,12 +539,12 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   @Nullable
-  protected EntitySpellBase spawnEntity(World world, BlockPos pos, Class<? extends EntitySpellBase> entity, @Nullable EntityPlayer player, double amplifier, double speedy) {
+  protected EntitySpellBase spawnEntity(World world, BlockPos pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
     return spawnEntity(world, new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, player, amplifier, speedy);
   }
 
   @Nullable
-  protected EntitySpellBase spawnEntity(World world, Vec3d pos, Class<? extends EntitySpellBase> entity, @Nullable EntityPlayer player, double amplifier, double speedy) {
+  protected EntitySpellBase spawnEntity(World world, Vec3d pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
     List<EntitySpellBase> pastRituals = world.getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.x, pos.y, pos.z - 100, pos.x + 2, pos.y + 100, pos.z + 1), o -> o != null && o.getClass().equals(entity));
     if (pastRituals.isEmpty() && !world.isRemote) {
       EntitySpellBase spell = null;

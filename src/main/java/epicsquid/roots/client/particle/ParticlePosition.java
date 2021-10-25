@@ -1,7 +1,7 @@
 package epicsquid.roots.client.particle;
 
 import epicsquid.roots.spell.SpellExtension;
-import net.minecraft.client.particle.ParticleCloud;
+import net.minecraft.client.particle.CloudParticle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 // Based off ParticlePosition from FindMe by Buuz
 // https://github.com/Buuz135/FindMe/blob/1.12/src/main/java/com/buuz135/findme/proxy/client/ParticlePosition.java
 
-public class ParticlePosition extends ParticleCloud {
+public class ParticlePosition extends CloudParticle {
   private final SpellExtension.SenseType type;
 
   public ParticlePosition(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, SpellExtension.SenseType type) {

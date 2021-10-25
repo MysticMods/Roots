@@ -5,7 +5,7 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public class LibraryModifierInstanceList extends BaseModifierInstanceList<LibraryModifierInstance> {
   public LibraryModifierInstanceList(SpellBase spell) {
@@ -13,11 +13,11 @@ public class LibraryModifierInstanceList extends BaseModifierInstanceList<Librar
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound tag) {
+  public void deserializeNBT(CompoundNBT tag) {
     super.deserializeNBT(tag, LibraryModifierInstance::fromNBT);
   }
 
-  public static LibraryModifierInstanceList fromNBT(NBTTagCompound tag) {
+  public static LibraryModifierInstanceList fromNBT(CompoundNBT tag) {
     LibraryModifierInstanceList result = new LibraryModifierInstanceList(AbstractSpellInfo.getSpellFromTag(tag));
     result.deserializeNBT(tag);
     return result;

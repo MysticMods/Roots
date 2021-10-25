@@ -17,15 +17,11 @@ import epicsquid.roots.item.terrastone.*;
 import epicsquid.roots.item.wildwood.ItemWildwoodArmor;
 import epicsquid.roots.item.wildwood.ItemWildwoodBow;
 import net.minecraft.block.*;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
+import net.minecraft.block.Blocks;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
@@ -65,8 +61,8 @@ public class ModItems {
 
   // TODO: Refactor this out of this file
   //Armor Materials
-  public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
-  public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, SoundEvents.BLOCK_WOOD_PLACE, 1F);
+  public static final ArmorItem.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
+  public static final ArmorItem.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, net.minecraft.util.SoundEvents.BLOCK_WOOD_PLACE, 1F);
 
   /**
    * Register all items
@@ -85,7 +81,7 @@ public class ModItems {
     event.addItem(wildewheet_seed = new ItemSeedBase("wildewheet_seed", ModBlocks.wildewheet, Blocks.DIRT).setCreativeTab(Roots.tab));
     event.addItem(cloud_berry = new ItemSeedBase("cloud_berry", ModBlocks.cloud_berry, Blocks.DIRT).setCreativeTab(Roots.tab));
     event.addItem(infernal_bulb = new ItemSeedBase("infernal_bulb", ModBlocks.infernal_bulb, Blocks.MAGMA).setCreativeTab(Roots.tab));
-    event.addItem(dewgonia = new ItemSeedBase("dewgonia", ModBlocks.dewgonia, Blocks.SAND).setCreativeTab(Roots.tab));
+    event.addItem(dewgonia = new ItemSeedBase("dewgonia", ModBlocks.dewgonia, net.minecraft.block.Blocks.SAND).setCreativeTab(Roots.tab));
     event.addItem(stalicripe = new ItemSeedBase("stalicripe", ModBlocks.stalicripe, Blocks.STONE).setCreativeTab(Roots.tab));
     event.addItem(terra_spores = new ItemTerraSpore("terra_spores").setCreativeTab(Roots.tab));
     event.addItem(petals = new ItemBase("petals").setCreativeTab(Roots.tab));
@@ -105,22 +101,22 @@ public class ModItems {
     event.addItem(fey_leather = new ItemBase("fey_leather") {
       @Override
       @SuppressWarnings("deprecation")
-      public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+      public Rarity getRarity(ItemStack stack) {
+        return Rarity.RARE;
       }
     }.setCreativeTab(Roots.tab));
     event.addItem(mystic_feather = new ItemBase("mystic_feather") {
       @Override
       @SuppressWarnings("deprecation")
-      public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+      public Rarity getRarity(ItemStack stack) {
+        return Rarity.RARE;
       }
     }.setCreativeTab(Roots.tab));
     event.addItem(strange_ooze = new ItemBase("strange_ooze") {
       @Override
       @SuppressWarnings("deprecation")
-      public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.UNCOMMON;
+      public Rarity getRarity(ItemStack stack) {
+        return Rarity.UNCOMMON;
       }
     }.setCreativeTab(Roots.tab));
     event.addItem(salmon = new ItemSalmon("salmon_of_knowledge").setCreativeTab(Roots.tab));
@@ -137,8 +133,8 @@ public class ModItems {
     event.addItem(gramary = new ItemBase("gramary") {
       @SuppressWarnings("deprecation")
       @Override
-      public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.UNCOMMON;
+      public Rarity getRarity(ItemStack stack) {
+        return Rarity.UNCOMMON;
       }
     }.setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(spirit_bag = new ItemUndeadDrop("spirit_bag", ItemUndeadDrop.DropType.POUCH)).setCreativeTab(Roots.tab);
@@ -173,22 +169,22 @@ public class ModItems {
     event.addItem(wildwood_quiver = CreateToolEvent.createTool("wildwood_quiver", () -> new ItemQuiver("wildwood_quiver").setCreativeTab(Roots.tab)));
     event.addItem(wildwood_bow = CreateToolEvent.createTool("wildwood_bow", () -> new ItemWildwoodBow("wildwood_bow").setCreativeTab(Roots.tab)));
 
-    event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
-    event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.CHEST, "sylvan_chestplate").setMaxStackSize(1));
-    event.addItem(sylvan_leggings = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.LEGS, "sylvan_leggings").setMaxStackSize(1));
-    event.addItem(sylvan_boots = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.FEET, "sylvan_boots").setMaxStackSize(1));
-    event.addItem(wildwood_helmet = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.HEAD, "wildwood_helmet").setMaxStackSize(1));
-    event.addItem(wildwood_chestplate = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.CHEST, "wildwood_chestplate").setMaxStackSize(1));
-    event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
-    event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
+    event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EquipmentSlotType.HEAD, "sylvan_helmet").setMaxStackSize(1));
+    event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EquipmentSlotType.CHEST, "sylvan_chestplate").setMaxStackSize(1));
+    event.addItem(sylvan_leggings = new ItemSylvanArmor(sylvanArmorMaterial, EquipmentSlotType.LEGS, "sylvan_leggings").setMaxStackSize(1));
+    event.addItem(sylvan_boots = new ItemSylvanArmor(sylvanArmorMaterial, EquipmentSlotType.FEET, "sylvan_boots").setMaxStackSize(1));
+    event.addItem(wildwood_helmet = new ItemWildwoodArmor(wildwoodArmorMaterial, EquipmentSlotType.HEAD, "wildwood_helmet").setMaxStackSize(1));
+    event.addItem(wildwood_chestplate = new ItemWildwoodArmor(wildwoodArmorMaterial, EquipmentSlotType.CHEST, "wildwood_chestplate").setMaxStackSize(1));
+    event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EquipmentSlotType.LEGS, "wildwood_leggings").setMaxStackSize(1));
+    event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EquipmentSlotType.FEET, "wildwood_boots").setMaxStackSize(1));
 
     event.addItem(runic_shears = CreateToolEvent.createTool("runic_shears", () -> new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab)));
 
     MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, null, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
     MaterialTypes.addMaterial("vanilla:stone", ToolMaterial.STONE, null, ToolMaterial.STONE.getAttackDamage(), -1.7f);
-    MaterialTypes.addMaterial("vanilla:iron", ToolMaterial.IRON, ItemArmor.ArmorMaterial.IRON, ToolMaterial.IRON.getAttackDamage(), -1.5f);
-    MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ItemArmor.ArmorMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
-    MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ItemArmor.ArmorMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
+    MaterialTypes.addMaterial("vanilla:iron", ToolMaterial.IRON, ArmorItem.ArmorMaterial.IRON, ToolMaterial.IRON.getAttackDamage(), -1.5f);
+    MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ArmorItem.ArmorMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
+    MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ArmorItem.ArmorMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
 
     event.addItem(wood_knife = CreateToolEvent.createTool("wood_knife", () -> new ItemDruidKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab)));
     event.addItem(stone_knife = CreateToolEvent.createTool("stone_knife", () -> new ItemDruidKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab)));
@@ -238,11 +234,11 @@ public class ModItems {
    */
   public static void registerOredict() {
     OreDictionary.registerOre("dustBlaze", Items.BLAZE_POWDER);
-    for (BlockFlower.EnumFlowerType type : BlockFlower.EnumFlowerType.values()) {
+    for (FlowerBlock.EnumFlowerType type : FlowerBlock.EnumFlowerType.values()) {
       OreDictionary.registerOre("allFlowers", new ItemStack(type.getBlockType().getBlock(), 1, type.getMeta()));
     }
-    for (BlockDoublePlant.EnumPlantType type : BlockDoublePlant.EnumPlantType.values()) {
-      if (type == BlockDoublePlant.EnumPlantType.FERN || type == BlockDoublePlant.EnumPlantType.GRASS) continue;
+    for (DoublePlantBlock.EnumPlantType type : DoublePlantBlock.EnumPlantType.values()) {
+      if (type == DoublePlantBlock.EnumPlantType.FERN || type == DoublePlantBlock.EnumPlantType.GRASS) continue;
 
       OreDictionary.registerOre("allTallFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
     }
@@ -283,8 +279,8 @@ public class ModItems {
     OreDictionary.registerOre("eye", ModItems.glass_eye);
     OreDictionary.registerOre("eye", Items.SPIDER_EYE);
     OreDictionary.registerOre("eye", Items.FERMENTED_SPIDER_EYE);
-    OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()));
-    OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.FERN.getMeta()));
+    OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, TallGrassBlock.EnumType.GRASS.getMeta()));
+    OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, TallGrassBlock.EnumType.FERN.getMeta()));
     OreDictionary.registerOre("mushroom", new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));
     OreDictionary.registerOre("mushroom", new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)));
     OreDictionary.registerOre("blockMushroom", new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM_BLOCK)));
@@ -293,7 +289,7 @@ public class ModItems {
     OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.DEFAULT_META));
     OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.MOSSY_META));
     OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.CHISELED_META));
-    OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.CRACKED_META));
+    OreDictionary.registerOre("stonebrick", new ItemStack(net.minecraft.block.Blocks.STONEBRICK, 1, BlockStoneBrick.CRACKED_META));
 
     OreDictionary.registerOre("mossyCobblestone", new ItemStack(Blocks.MOSSY_COBBLESTONE));
     OreDictionary.registerOre("pyreFireStarters", new ItemStack(Items.FLINT_AND_STEEL, 1, OreDictionary.WILDCARD_VALUE));

@@ -1,12 +1,10 @@
 package epicsquid.mysticallib.proxy;
 
 import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.MysticalLib;
 import epicsquid.mysticallib.event.RegisterFXEvent;
 import epicsquid.mysticallib.event.RegisterWorldGenEvent;
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.particle.ParticleRegistry;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
@@ -33,7 +31,7 @@ public class CommonProxy {
   }
 
   @Nullable
-  public EntityPlayer getPlayer () {
+  public PlayerEntity getPlayer () {
     return null;
   }
 }

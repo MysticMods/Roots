@@ -4,16 +4,16 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.spell.SpellAugment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionReach extends Potion {
+public class PotionReach extends Effect {
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
   public PotionReach() {
@@ -24,7 +24,7 @@ public class PotionReach extends Potion {
   }
 
   public void loadComplete(double amount) {
-    registerPotionAttributeModifier(EntityPlayer.REACH_DISTANCE, "c7e53f18-fd9a-427f-afca-36ee974a7adf", amount, 0);
+    registerPotionAttributeModifier(PlayerEntity.REACH_DISTANCE, "c7e53f18-fd9a-427f-afca-36ee974a7adf", amount, 0);
     // Hopefully that's additive to the base
   }
 
@@ -36,17 +36,17 @@ public class PotionReach extends Potion {
   }
 
   @Override
-  public boolean shouldRenderHUD(PotionEffect effect) {
+  public boolean shouldRenderHUD(EffectInstance effect) {
     return false;
   }
 
   @Override
-  public boolean shouldRenderInvText(PotionEffect effect) {
+  public boolean shouldRenderInvText(EffectInstance effect) {
     return true;
   }
 
   @Override
-  public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+  public void removeAttributesModifiersFromEntity(LivingEntity entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
     if (SpellAugment.instance.shouldPlaySound()) {
       entityLivingBaseIn.playSound(ModSounds.Spells.REACH_EFFECT_END, SpellAugment.instance.getSoundVolume(), 1);

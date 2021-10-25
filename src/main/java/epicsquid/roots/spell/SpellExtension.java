@@ -14,22 +14,19 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.OreDictCache;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
 import net.minecraft.block.*;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.*;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
@@ -114,8 +111,8 @@ public class SpellExtension extends SpellBase {
         new OreIngredient("chestWood"),
         new ItemStack(Items.STONE_PICKAXE),
         new OreIngredient("eye"),
-        new ItemStack(Items.COMPASS),
-        new ItemStack(Items.GOLDEN_CARROT)
+        new ItemStack(net.minecraft.item.Items.COMPASS),
+        new ItemStack(net.minecraft.item.Items.GOLDEN_CARROT)
     );
     setCastSound(ModSounds.Spells.EXTENSION);
   }
@@ -184,17 +181,17 @@ public class SpellExtension extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, night_vision, 0, false, false));
+  public boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks) {
+    caster.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, night_vision, 0, false, false));
     if (info.has(NONDETECTION)) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.nondetection, night_vision, 0, false, false));
+      caster.addPotionEffect(new EffectInstance(ModPotions.nondetection, night_vision, 0, false, false));
     }
     if (info.has(SENSE_ANIMALS)) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, animal_duration, 0, false, false));
+      caster.addPotionEffect(new EffectInstance(ModPotions.animal_sense, animal_duration, 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.toArray());
     }
     if (info.has(SENSE_DANGER)) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, enemy_duration, 0, false, false));
+      caster.addPotionEffect(new EffectInstance(ModPotions.danger_sense, enemy_duration, 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.toArray());
     }
     if (info.has(SENSE_HOME)) {
@@ -206,9 +203,9 @@ public class SpellExtension extends SpellBase {
             home = caster.world.provider.getSpawnPoint();
           }
           MessageSenseHomeFX packet = new MessageSenseHomeFX(home);
-          PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) caster);
+          PacketHandler.INSTANCE.sendTo(packet, (ServerPlayerEntity) caster);
         } else {
-          caster.sendMessage(new TextComponentTranslation("roots.message.respawn.cant_respawn_dimension").setStyle(new Style().setColor(TextFormatting.RED)));
+          caster.sendMessage(new TranslationTextComponent("roots.message.respawn.cant_respawn_dimension").setStyle(new Style().setColor(TextFormatting.RED)));
         }
       }
     }
@@ -219,8 +216,8 @@ public class SpellExtension extends SpellBase {
         int hours = (int) ((total % 24000) / 1000);
         int minutes = (int) (total % 24000 % 1000 / 1000.0 * 60.0);
         int moon = (int) (caster.world.getWorldTime() / 24000L % 8L + 8L) % 8;
-        ITextComponent moonComp = new TextComponentTranslation("roots.message.sense_time.moon." + moon).setStyle(new Style().setColor(TextFormatting.GOLD));
-        caster.sendMessage(new TextComponentTranslation("roots.message.sense_time", new TextComponentTranslation("roots.message.sense_time.format", String.format("%02d", hours), String.format("%02d", minutes)).setStyle(new Style().setColor(TextFormatting.GOLD)), day, hours < 18 && hours > 6 ? new TextComponentTranslation("roots.message.sense_time.moon.will", moonComp) : new TextComponentTranslation("roots.message.sense_time.moon.is", moonComp)).setStyle(new Style().setColor(TextFormatting.YELLOW)));
+        ITextComponent moonComp = new TranslationTextComponent("roots.message.sense_time.moon." + moon).setStyle(new Style().setColor(TextFormatting.GOLD));
+        caster.sendMessage(new TranslationTextComponent("roots.message.sense_time", new TranslationTextComponent("roots.message.sense_time.format", String.format("%02d", hours), String.format("%02d", minutes)).setStyle(new Style().setColor(TextFormatting.GOLD)), day, hours < 18 && hours > 6 ? new TranslationTextComponent("roots.message.sense_time.moon.will", moonComp) : new TranslationTextComponent("roots.message.sense_time.moon.is", moonComp)).setStyle(new Style().setColor(TextFormatting.YELLOW)));
       }
     }
     boolean c = info.has(SENSE_CONTAINERS);
@@ -254,15 +251,15 @@ public class SpellExtension extends SpellBase {
             continue;
           }
           Vec3d vec = new Vec3d(pos);
-          IBlockState state = caster.world.getBlockState(pos);
+          BlockState state = caster.world.getBlockState(pos);
           Block block = state.getBlock();
           if (c && containers.contains(vec)) {
-            if (block instanceof BlockContainer && block.getClass() != BlockMobSpawner.class) {
+            if (block instanceof ContainerBlock && block.getClass() != SpawnerBlock.class) {
               positions.computeIfAbsent(SenseType.CONTAINER, (q) -> new ArrayList<>()).add(pos);
             }
           }
           if (s && spawners.contains(vec)) {
-            if (block instanceof BlockMobSpawner) {
+            if (block instanceof SpawnerBlock) {
               positions.computeIfAbsent(SenseType.SPAWNER, (q) -> new ArrayList<>()).add(pos);
             }
           }
@@ -307,7 +304,7 @@ public class SpellExtension extends SpellBase {
         }
         if (positions.values().stream().anyMatch(t -> !t.isEmpty())) {
           MessageSenseFX message = new MessageSenseFX(positions);
-          PacketHandler.INSTANCE.sendTo(message, (EntityPlayerMP) caster);
+          PacketHandler.INSTANCE.sendTo(message, (ServerPlayerEntity) caster);
         }
       }
     }

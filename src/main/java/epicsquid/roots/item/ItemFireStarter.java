@@ -4,14 +4,14 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityPyre;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumAction;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.item.UseAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -33,10 +33,10 @@ public class ItemFireStarter extends ItemBase {
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand hand) {
     ItemStack stack = player.getHeldItem(hand);
     player.setActiveHand(hand);
-    return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+    return ActionResult.newResult(ActionResultType.SUCCESS, stack);
   }
 
   @Override
@@ -45,16 +45,16 @@ public class ItemFireStarter extends ItemBase {
   }
 
   @Override
-  public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
-    if (!world.isRemote && entity instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) entity;
+  public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entity) {
+    if (!world.isRemote && entity instanceof PlayerEntity) {
+      PlayerEntity player = (PlayerEntity) entity;
       RayTraceResult result = rayTrace(entity.world, player, false);
       //noinspection ConstantConditions
       if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
-        EnumFacing facing = result.sideHit;
+        Direction facing = result.sideHit;
         BlockPos hit = result.getBlockPos();
 
-        IBlockState hitState = world.getBlockState(hit);
+        BlockState hitState = world.getBlockState(hit);
         boolean pyre = hitState.getBlock() == ModBlocks.pyre || hitState.getBlock() == ModBlocks.reinforced_pyre;
 
         hit = hit.offset(facing);
@@ -91,8 +91,8 @@ public class ItemFireStarter extends ItemBase {
   }
 
   @Override
-  public EnumAction getItemUseAction(ItemStack stack) {
-    return EnumAction.BOW;
+  public UseAction getItemUseAction(ItemStack stack) {
+    return UseAction.BOW;
   }
 
   @Override
@@ -102,9 +102,9 @@ public class ItemFireStarter extends ItemBase {
 
   @SuppressWarnings("ConstantConditions")
   @Override
-  public void onUsingTick(ItemStack stack, EntityLivingBase entity, int count) {
-    if (entity.world.isRemote && entity instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) entity;
+  public void onUsingTick(ItemStack stack, LivingEntity entity, int count) {
+    if (entity.world.isRemote && entity instanceof PlayerEntity) {
+      PlayerEntity player = (PlayerEntity) entity;
       RayTraceResult result = rayTrace(entity.world, player, false);
       if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK && count % 3 == 0) {
         for (int i = 0; i < 2 + player.rand.nextInt(3); i++) {

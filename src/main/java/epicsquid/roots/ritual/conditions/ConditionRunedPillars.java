@@ -2,9 +2,9 @@ package epicsquid.roots.ritual.conditions;
 
 import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
 
@@ -33,13 +33,13 @@ public class ConditionRunedPillars implements ICondition {
   }
 
   @Override
-  public boolean checkCondition(TileEntityPyre tile, EntityPlayer player) {
+  public boolean checkCondition(TileEntityPyre tile, PlayerEntity player) {
     return RitualUtil.getNearbyPillar(type, tile.getWorld(), tile.getPos(), this.height) >= this.amount;
   }
 
   @Nullable
   @Override
   public ITextComponent failMessage() {
-    return new TextComponentTranslation("roots.ritual.condition.pillar", new TextComponentTranslation("roots.ritual.condition.pillar.types", getAmount(), getHeight(), getType().toString()));
+    return new TranslationTextComponent("roots.ritual.condition.pillar", new TranslationTextComponent("roots.ritual.condition.pillar.types", getAmount(), getHeight(), getType().toString()));
   }
 }

@@ -11,14 +11,14 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effects;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -64,8 +64,8 @@ public class SpellDisarm extends SpellBase {
     POISON.addConflict(FLOWERS);
   }
 
-  public static List<EntityEquipmentSlot> HANDS;
-  public static List<EntityEquipmentSlot> ARMOR;
+  public static List<EquipmentSlotType> HANDS;
+  public static List<EquipmentSlotType> ARMOR;
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_disarm");
   public static SpellDisarm instance = new SpellDisarm(spellName);
@@ -92,7 +92,7 @@ public class SpellDisarm extends SpellBase {
         new ItemStack(ModItems.moonglow_leaf),
         new OreIngredient("gemDiamond"),
         new OreIngredient("bone"),
-        new ItemStack(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),
+        new ItemStack(Item.getItemFromBlock(net.minecraft.block.Blocks.TRIPWIRE_HOOK)),
         new ItemStack(ModItems.moonglow_leaf)
     );
     setCastSound(ModSounds.Spells.DISARM);
@@ -100,17 +100,17 @@ public class SpellDisarm extends SpellBase {
 
   @SuppressWarnings("ConstantConditions")
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity caster, StaffModifierInstanceList info, int ticks) {
     if (ARMOR == null) {
-      ARMOR = Arrays.asList(EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET);
+      ARMOR = Arrays.asList(EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET);
     }
     if (HANDS == null) {
-      HANDS = Arrays.asList(EntityEquipmentSlot.MAINHAND, EntityEquipmentSlot.OFFHAND);
+      HANDS = Arrays.asList(EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND);
     }
     BlockPos playerPos = caster.getPosition();
     World world = caster.world;
 
-    List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(playerPos.getX() - radius_x, playerPos.getY() - radius_y, playerPos.getZ() - radius_z, playerPos.getX() + radius_x, playerPos.getY() + radius_y, playerPos.getZ() + radius_z));
+    List<LivingEntity> entities = world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(playerPos.getX() - radius_x, playerPos.getY() - radius_y, playerPos.getZ() - radius_z, playerPos.getX() + radius_x, playerPos.getY() + radius_y, playerPos.getZ() + radius_z));
     entities.remove(caster);
 
     if (entities.isEmpty()) {
@@ -119,10 +119,10 @@ public class SpellDisarm extends SpellBase {
 
     int count = 0;
 
-    for (EntityLivingBase entity : entities) {
+    for (LivingEntity entity : entities) {
       if (EntityUtil.isHostile(entity, SpellDisarm.instance)) {
         boolean disarmed = false;
-        for (EntityEquipmentSlot handSlot : HANDS) {
+        for (EquipmentSlotType handSlot : HANDS) {
           ItemStack stack = entity.getItemStackFromSlot(handSlot);
           if (stack.isEmpty() || stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER)) {
             continue;
@@ -144,7 +144,7 @@ public class SpellDisarm extends SpellBase {
         if (info.has(ARMOR2)) {
           armorChance += armor_chance;
         }
-        for (EntityEquipmentSlot slot : ARMOR) {
+        for (EquipmentSlotType slot : ARMOR) {
           ItemStack stack = entity.getItemStackFromSlot(slot);
           if (stack.isEmpty()) {
             continue;
@@ -161,13 +161,13 @@ public class SpellDisarm extends SpellBase {
         if (disarmed) {
           if (!world.isRemote) {
             if (info.has(POISON)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
+              entity.addPotionEffect(new EffectInstance(Effects.POISON, poison_duration, poison_amplifier));
             }
             if (info.has(FIRE)) {
               entity.setFire(fire_duration);
             }
             if (info.has(WEAKNESS)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, weakness_duration, weakness_amplifier));
+              entity.addPotionEffect(new EffectInstance(Effects.WEAKNESS, weakness_duration, weakness_amplifier));
             }
             if (info.has(KNOCKBACK)) {
               entity.knockBack(caster, knockback, caster.posX - entity.posX, caster.posZ - entity.posZ);

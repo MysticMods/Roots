@@ -11,15 +11,15 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -80,7 +80,7 @@ public class SpellDandelionWinds extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Blocks.YELLOW_FLOWER),
+        new ItemStack(net.minecraft.block.Blocks.YELLOW_FLOWER),
         new OreIngredient("treeLeaves"),
         new ItemStack(ModItems.runic_dust),
         new ItemStack(ModItems.cloud_berry),
@@ -90,7 +90,7 @@ public class SpellDandelionWinds extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     Vec3d lookVec = player.getLookVec();
     float d = info.has(STRONGER) ? distance + additional_distance : distance;
     float motion = d * d + d;
@@ -101,7 +101,7 @@ public class SpellDandelionWinds extends SpellBase {
 
     if (!info.has(CIRCLE)) {
       AxisAlignedBB bounding = new AxisAlignedBB(player.posX + lookVec.x * r1 - r1, player.posY + lookVec.y * r1 - r1, player.posZ + lookVec.z * r1 - r2, player.posX + lookVec.x * r1 + r1, player.posY + lookVec.y * r1 + r1, player.posZ + lookVec.z * r1 + r1);
-      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, bounding);
+      List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class, bounding);
       count = entities.size() - 1;
       if (!player.world.isRemote) {
         entities.forEach(o -> {
@@ -120,7 +120,7 @@ public class SpellDandelionWinds extends SpellBase {
       }
 
       if (info.has(ITEMS)) {
-        List<EntityItem> items = player.world.getEntitiesWithinAABB(EntityItem.class, bounding);
+        List<ItemEntity> items = player.world.getEntitiesWithinAABB(ItemEntity.class, bounding);
         count += items.size();
         if (!player.world.isRemote) {
           items.forEach(o -> {
@@ -138,8 +138,8 @@ public class SpellDandelionWinds extends SpellBase {
       }
       if (info.has(EXTINGUISH)) {
         for (BlockPos pos : AABBUtil.unique(bounding)) {
-          IBlockState state = player.world.getBlockState(pos);
-          if (state.getBlock() == Blocks.FIRE) {
+          BlockState state = player.world.getBlockState(pos);
+          if (state.getBlock() == net.minecraft.block.Blocks.FIRE) {
             extinguish++;
             if (!player.world.isRemote) {
               player.world.setBlockToAir(pos);
@@ -150,7 +150,7 @@ public class SpellDandelionWinds extends SpellBase {
     } else {
       double val = (r1 + r2) / 2;
       AxisAlignedBB bounding = new AxisAlignedBB(val, val, val, -(val) - 0.5, -(val) - 0.5, -(val) - 0.5).offset(player.getPosition());
-      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, bounding);
+      List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class, bounding);
       if (!player.world.isRemote) {
         entities.forEach(o -> {
           if (o != player) {
@@ -168,7 +168,7 @@ public class SpellDandelionWinds extends SpellBase {
           }
         });
         if (info.has(ITEMS)) {
-          List<EntityItem> items = player.world.getEntitiesWithinAABB(EntityItem.class, bounding);
+          List<ItemEntity> items = player.world.getEntitiesWithinAABB(ItemEntity.class, bounding);
           count += items.size();
           if (!player.world.isRemote) {
             items.forEach(o -> {
@@ -189,7 +189,7 @@ public class SpellDandelionWinds extends SpellBase {
       }
       if (info.has(EXTINGUISH)) {
         for (BlockPos pos : AABBUtil.unique(bounding)) {
-          IBlockState state = player.world.getBlockState(pos);
+          BlockState state = player.world.getBlockState(pos);
           if (state.getBlock() == Blocks.FIRE) {
             extinguish++;
             if (!player.world.isRemote) {
@@ -215,8 +215,8 @@ public class SpellDandelionWinds extends SpellBase {
       return;
     }
 
-    if (world.isAirBlock(pos) && Blocks.FIRE.canPlaceBlockAt(world, pos)) {
-      world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+    if (world.isAirBlock(pos) && net.minecraft.block.Blocks.FIRE.canPlaceBlockAt(world, pos)) {
+      world.setBlockState(pos, net.minecraft.block.Blocks.FIRE.getDefaultState());
     }
   }
 
@@ -231,16 +231,16 @@ public class SpellDandelionWinds extends SpellBase {
     e.velocityChanged = true;
   }
 
-  private void flingLivingEntity(EntityLivingBase e, Vec3d lookVec, double motion, StaffModifierInstanceList info) {
+  private void flingLivingEntity(LivingEntity e, Vec3d lookVec, double motion, StaffModifierInstanceList info) {
     if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellDandelionWinds.instance)) {
       return;
     }
     flingEntity(e, lookVec, motion, info);
     if (info.has(SLOW_FALL)) {
-      e.addPotionEffect(new PotionEffect(ModPotions.slow_fall, slow_duration, 0, false, false));
+      e.addPotionEffect(new EffectInstance(ModPotions.slow_fall, slow_duration, 0, false, false));
     }
     if (info.has(POISON)) {
-      e.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
+      e.addPotionEffect(new EffectInstance(Effects.POISON, poison_duration, poison_amplifier));
     }
     if (info.has(FIRE)) {
       e.setFire(fire_duration);

@@ -4,19 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ArmorItem;
 
 public class MaterialTypes {
   public static Map<String, Item.ToolMaterial> materialMap = new HashMap<>();
-  public static Map<String, ItemArmor.ArmorMaterial> armorMaterialMap = new HashMap<>();
+  public static Map<String, ArmorItem.ArmorMaterial> armorMaterialMap = new HashMap<>();
   public static Map<String, KnifeStats> statsMap = new HashMap<>();
   public static Map<Item.ToolMaterial, KnifeStats> materialToStatsMap = new HashMap<>();
 
-  public static void addMaterial(String name, Item.ToolMaterial material, ItemArmor.ArmorMaterial armor, float damage, float speed) {
+  public static void addMaterial(String name, Item.ToolMaterial material, ArmorItem.ArmorMaterial armor, float damage, float speed) {
     addMaterial(name, material, armor, new KnifeStats(damage, speed));
   }
 
-  public static void addMaterial(String name, Item.ToolMaterial material, ItemArmor.ArmorMaterial armor, KnifeStats stats) {
+  public static void addMaterial(String name, Item.ToolMaterial material, ArmorItem.ArmorMaterial armor, KnifeStats stats) {
     materialToStatsMap.put(material, stats);
     armorMaterialMap.put(name, armor);
     statsMap.put(name, stats);
@@ -27,7 +27,7 @@ public class MaterialTypes {
     return materialMap.get(name);
   }
 
-  public static ItemArmor.ArmorMaterial armor (String name) {
+  public static ArmorItem.ArmorMaterial armor (String name) {
     return armorMaterialMap.get(name);
   }
 

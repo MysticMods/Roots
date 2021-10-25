@@ -3,10 +3,9 @@ package epicsquid.roots.client.hud;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.tileentity.TileEntityPyre;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -15,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class RenderPyre {
-  public static void render(Minecraft mc, BlockPos pos, IBlockState state, RenderGameOverlayEvent.Post event) {
+  public static void render(Minecraft mc, BlockPos pos, BlockState state, RenderGameOverlayEvent.Post event) {
     World world = mc.world;
     if (!(world.getTileEntity(pos) instanceof TileEntityPyre)) return;
 

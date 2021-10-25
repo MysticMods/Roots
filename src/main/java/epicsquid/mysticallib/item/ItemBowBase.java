@@ -6,13 +6,13 @@ import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.util.ItemUtil;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.ItemBow;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemBowBase extends ItemBow implements IModeledObject, ICustomModeledObject {
+public class ItemBowBase extends BowItem implements IModeledObject, ICustomModeledObject {
   private boolean hasCustomModel = false;
   private final int enchantability;
 

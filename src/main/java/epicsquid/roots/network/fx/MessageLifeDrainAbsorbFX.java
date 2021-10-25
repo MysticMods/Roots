@@ -6,12 +6,11 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellLifeDrain;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -60,7 +59,7 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
     @Override
     protected void handleMessage(final MessageLifeDrainAbsorbFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
-      EntityPlayer player = world.getPlayerEntityByUUID(message.id);
+      PlayerEntity player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         Vec3d lookVec = player.getLookVec();
         for (int i = 0; i < 4; i++) {

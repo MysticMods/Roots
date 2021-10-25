@@ -13,18 +13,18 @@ import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.Constants;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 
@@ -102,20 +102,20 @@ public class SpellAugment extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     // TODO: Particle
     boolean acted = false;
     if (info.has(REACH)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(ModPotions.reach, reach_duration, 0, false, false));
+      player.addPotionEffect(new EffectInstance(ModPotions.reach, reach_duration, 0, false, false));
     }
     if (info.has(SPEED)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.SPEED, speed_duration, speed_amplifier, false, false));
+      player.addPotionEffect(new EffectInstance(Effects.SPEED, speed_duration, speed_amplifier, false, false));
     }
     if (info.has(SLOW_FALL)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, slow_fall, 0, false, false));
+      player.addPotionEffect(new EffectInstance(ModPotions.slow_fall, slow_fall, 0, false, false));
     }
     if (info.has(LIGHT_DRIFTER)) {
       acted = true;
@@ -141,9 +141,9 @@ public class SpellAugment extends SpellBase {
     }
     if (info.has(MAGNETISM)) {
       int count = 0;
-      count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
+      count += Magnetize.pull(ItemEntity.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
       if (SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP) {
-        count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
+        count += Magnetize.pull(ExperienceOrbEntity.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
       }
 
       if (!acted) {
@@ -152,15 +152,15 @@ public class SpellAugment extends SpellBase {
     }
     if (info.has(LUCK)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.LUCK, luck_duration, luck_amplifier, false, false));
+      player.addPotionEffect(new EffectInstance(Effects.LUCK, luck_duration, luck_amplifier, false, false));
     }
     if (info.has(STRENGTH)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, strength_duration, strength_amplifier, false, false));
+      player.addPotionEffect(new EffectInstance(Effects.STRENGTH, strength_duration, strength_amplifier, false, false));
     }
     if (info.has(ABSORPTION)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, absorption_duration, absorption_amplifier, false, false));
+      player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, absorption_duration, absorption_amplifier, false, false));
     }
     if (info.has(SECOND_WIND)) {
       int air = player.getAir();
@@ -174,10 +174,10 @@ public class SpellAugment extends SpellBase {
     }
     if (info.has(HASTE)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.HASTE, haste_duration, haste_amplifier, false, false));
+      player.addPotionEffect(new EffectInstance(Effects.HASTE, haste_duration, haste_amplifier, false, false));
     }
     if (!acted) {
-      player.sendMessage(new TextComponentTranslation("roots.message.augment.no_modifier").setStyle(new Style().setColor(TextFormatting.YELLOW)));
+      player.sendMessage(new TranslationTextComponent("roots.message.augment.no_modifier").setStyle(new Style().setColor(TextFormatting.YELLOW)));
     }
     return acted;
   }

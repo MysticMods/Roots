@@ -4,10 +4,9 @@ import epicsquid.roots.entity.ritual.EntityRitualAnimalHarvest;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
-import net.minecraft.init.Items;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualAnimalHarvest extends RitualBase {

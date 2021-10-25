@@ -4,14 +4,14 @@ import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompound> {
+public abstract class AbstractSpellInfo implements INBTSerializable<CompoundNBT> {
   protected SpellBase spell;
 
   public AbstractSpellInfo() {
@@ -34,7 +34,7 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
     return spell;
   }
 
-  public static SpellBase getSpellFromTag(NBTTagCompound nbt) {
+  public static SpellBase getSpellFromTag(CompoundNBT nbt) {
     String name = nbt.getString("s");
     if (name.contains(":")) {
       return SpellRegistry.getSpell(new ResourceLocation(name));
@@ -44,8 +44,8 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound result = new NBTTagCompound();
+  public CompoundNBT serializeNBT() {
+    CompoundNBT result = new CompoundNBT();
     if (spell != null) {
       result.setString("s", spell.getRegistryName().toString());
     }
@@ -53,7 +53,7 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
+  public void deserializeNBT(CompoundNBT nbt) {
     if (nbt.hasKey("s")) {
       String name = nbt.getString("s");
       if (name.contains(":")) {

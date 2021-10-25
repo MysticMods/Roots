@@ -2,14 +2,13 @@ package epicsquid.mysticallib.block;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 
 public interface IBlock {
 
   @Nullable
   Item getItemBlock();
 
-  ItemBlock setItemBlock (ItemBlock block);
+  BlockItem setItemBlock (BlockItem block);
 }

@@ -4,12 +4,12 @@ import epicsquid.roots.entity.mob.EntityHuskSlave;
 import epicsquid.roots.entity.mob.EntityPigZombieSlave;
 import epicsquid.roots.entity.mob.EntityZombieSlave;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityHusk;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.HuskEntity;
+import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.monster.ZombiePigmanEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -18,16 +18,16 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class SlaveUtil {
-  private static Map<Class<?>, Function<World, EntityLivingBase>> slaveMap = new HashMap<>();
-  private static Map<Class<?>, Function<World, EntityLivingBase>> reverseSlaveMap = new HashMap<>();
+  private static Map<Class<?>, Function<World, LivingEntity>> slaveMap = new HashMap<>();
+  private static Map<Class<?>, Function<World, LivingEntity>> reverseSlaveMap = new HashMap<>();
 
   static {
-    slaveMap.put(EntityZombie.class, EntityZombieSlave::new);
-    slaveMap.put(EntityHusk.class, EntityHuskSlave::new);
-    slaveMap.put(EntityPigZombie.class, EntityPigZombieSlave::new);
-    reverseSlaveMap.put(EntityZombieSlave.class, EntityZombie::new);
-    reverseSlaveMap.put(EntityHuskSlave.class, EntityHusk::new);
-    reverseSlaveMap.put(EntityPigZombieSlave.class, EntityPigZombie::new);
+    slaveMap.put(ZombieEntity.class, EntityZombieSlave::new);
+    slaveMap.put(HuskEntity.class, EntityHuskSlave::new);
+    slaveMap.put(ZombiePigmanEntity.class, EntityPigZombieSlave::new);
+    reverseSlaveMap.put(EntityZombieSlave.class, ZombieEntity::new);
+    reverseSlaveMap.put(EntityHuskSlave.class, HuskEntity::new);
+    reverseSlaveMap.put(EntityPigZombieSlave.class, ZombiePigmanEntity::new);
   }
 
   public static boolean canBecomeSlave(Entity entity) {
@@ -38,27 +38,27 @@ public class SlaveUtil {
     return entity != null && reverseSlaveMap.keySet().contains(entity.getClass());
   }
 
-  public static EntityLivingBase enslave(EntityLivingBase parent) {
+  public static LivingEntity enslave(LivingEntity parent) {
     return convert(slaveMap.get(parent.getClass()), parent);
   }
 
-  public static EntityLivingBase revert(EntityLivingBase parent) {
+  public static LivingEntity revert(LivingEntity parent) {
     return convert(reverseSlaveMap.get(parent.getClass()), parent);
   }
 
   @Nullable
-  public static EntityLivingBase convert(Function<World, EntityLivingBase> builder, EntityLivingBase parent) {
+  public static LivingEntity convert(Function<World, LivingEntity> builder, LivingEntity parent) {
     if (parent.world.isRemote) {
       return null;
     }
 
-    EntityLivingBase slave = builder.apply(parent.world);
+    LivingEntity slave = builder.apply(parent.world);
 
-    for (PotionEffect pot : parent.getActivePotionEffects()) {
+    for (EffectInstance pot : parent.getActivePotionEffects()) {
       slave.addPotionEffect(pot);
     }
 
-    for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
+    for (EquipmentSlotType slot : EquipmentSlotType.values()) {
       slave.setItemStackToSlot(slot, parent.getItemStackFromSlot(slot));
     }
 

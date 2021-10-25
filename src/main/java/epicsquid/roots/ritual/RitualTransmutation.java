@@ -5,7 +5,7 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -29,7 +29,7 @@ public class RitualTransmutation extends RitualBase {
   public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(Blocks.FURNACE),
-        new ItemStack(Blocks.GRAVEL),
+        new ItemStack(net.minecraft.block.Blocks.GRAVEL),
         new ItemStack(ModItems.cloud_berry),
         new OreIngredient("rootsBark"),
         new ItemStack(ModBlocks.chiseled_runestone)

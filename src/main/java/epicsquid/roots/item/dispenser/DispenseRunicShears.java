@@ -16,26 +16,22 @@ import epicsquid.roots.network.fx.MessageRunicShearsFX;
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.dispenser.IBehaviorDispenseItem;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.CropsBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.*;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.util.*;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -43,7 +39,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DispenseRunicShears implements IBehaviorDispenseItem {
+public class DispenseRunicShears implements IDispenseItemBehavior {
   private static final DispenseRunicShears INSTANCE = new DispenseRunicShears();
 
   public static DispenseRunicShears getInstance() {
@@ -62,11 +58,11 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
 
     boolean successful = false;
     if (!world.isRemote) {
-      EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
+      Direction facing = source.getBlockState().getValue(DispenserBlock.FACING);
       BlockPos pos = source.getBlockPos().offset(facing);
-      IBlockState targetState = world.getBlockState(pos);
-      IBlockState moss = MossConfig.scrapeResult(targetState);
-      IBlockState moss2 = MossConfig.mossConversion(targetState);
+      BlockState targetState = world.getBlockState(pos);
+      BlockState moss = MossConfig.scrapeResult(targetState);
+      BlockState moss2 = MossConfig.mossConversion(targetState);
       Block block = targetState.getBlock();
 
       // AoE moss
@@ -76,8 +72,8 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
         List<BlockPos> affectedBlocks = new ArrayList<>();
         for (BlockPos.MutableBlockPos p : BlockPos.getAllInBoxMutable(start, stop)) {
-          IBlockState pState = world.getBlockState(p);
-          IBlockState m = MossConfig.scrapeResult(pState);
+          BlockState pState = world.getBlockState(p);
+          BlockState m = MossConfig.scrapeResult(pState);
           if (m != null) {
             affectedBlocks.add(p.toImmutable());
             world.setBlockState(p, m);
@@ -86,7 +82,7 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
           }
         }
         if (!affectedBlocks.isEmpty()) {
-          if (stack.attemptDamageItem(1 + Math.min(6, world.rand.nextInt(affectedBlocks.size())), world.rand, FakePlayerFactory.getMinecraft((WorldServer) world))) {
+          if (stack.attemptDamageItem(1 + Math.min(6, world.rand.nextInt(affectedBlocks.size())), world.rand, FakePlayerFactory.getMinecraft((ServerWorld) world))) {
             stack.setCount(0);
           }
           MessageRunicShearsAOEFX message = new MessageRunicShearsAOEFX(affectedBlocks);
@@ -100,8 +96,8 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
         RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(targetState);
 
         if (recipe != null) {
-          if (block instanceof BlockCrops) {
-            BlockCrops crop = (BlockCrops) block;
+          if (block instanceof CropsBlock) {
+            CropsBlock crop = (CropsBlock) block;
             if (crop.isMaxAge(world.getBlockState(pos))) {
               world.setBlockState(pos, crop.withAge(0));
               successful = true;
@@ -113,7 +109,7 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
 
           if (successful) {
             ItemUtil.spawnItem(world, pos.up(), recipe.getDrop().copy());
-            if (stack.attemptDamageItem(1, world.rand, FakePlayerFactory.getMinecraft((WorldServer) world))) {
+            if (stack.attemptDamageItem(1, world.rand, FakePlayerFactory.getMinecraft((ServerWorld) world))) {
               stack.setCount(0);
             }
             MessageRunicShearsBlockFX message = new MessageRunicShearsBlockFX(pos);
@@ -124,14 +120,14 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
 
       // Runic Shears individual recipe
       if (!successful) {
-        List<Entity> entities = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(pos), e -> !(e instanceof EntityPlayer) && e instanceof EntityLivingBase);
+        List<Entity> entities = world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(pos), e -> !(e instanceof PlayerEntity) && e instanceof LivingEntity);
         if (!entities.isEmpty()) {
           Entity entity = null;
           RunicShearEntityRecipe recipe = null;
           RunicShearsCapability cap = null;
           while (!entities.isEmpty()) {
             entity = entities.remove(world.rand.nextInt(entities.size()));
-            recipe = ModRecipes.getRunicShearRecipe((EntityLivingBase) entity);
+            recipe = ModRecipes.getRunicShearRecipe((LivingEntity) entity);
             if (recipe != null) {
               cap = entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY, null);
               if (cap != null) {
@@ -147,11 +143,11 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
 
           if (entity != null && recipe != null && cap != null) {
             cap.setCooldown(recipe.getCooldown());
-            EntityItem ent = entity.entityDropItem(recipe.getDrop((EntityLivingBase) entity).copy(), 1.0F);
+            ItemEntity ent = entity.entityDropItem(recipe.getDrop((LivingEntity) entity).copy(), 1.0F);
             ent.motionY += Util.rand.nextFloat() * 0.05F;
             ent.motionX += (Util.rand.nextFloat() - Util.rand.nextFloat()) * 0.1F;
             ent.motionZ += (Util.rand.nextFloat() - Util.rand.nextFloat()) * 0.1F;
-            if (stack.attemptDamageItem(1, world.rand, FakePlayerFactory.getMinecraft((WorldServer) world))) {
+            if (stack.attemptDamageItem(1, world.rand, FakePlayerFactory.getMinecraft((ServerWorld) world))) {
               stack.setCount(0);
             }
             IMessage packet = new MessageRunicShearsFX(entity);
@@ -166,20 +162,20 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
         if (!closeEntities.isEmpty()) {
           Entity entity = closeEntities.get(world.rand.nextInt(closeEntities.size()));
           successful = true;
-          Items.SHEARS.itemInteractionForEntity(stack, FakePlayerFactory.getMinecraft((WorldServer) world), (EntityLivingBase) entity, EnumHand.MAIN_HAND);
+          Items.SHEARS.itemInteractionForEntity(stack, FakePlayerFactory.getMinecraft((ServerWorld) world), (LivingEntity) entity, Hand.MAIN_HAND);
 
           List<BlockPos> affectedSpots = new ArrayList<>();
           affectedSpots.add(entity.getPosition());
 
           float radius = GeneralConfig.RunicShearsRadius;
-          List<EntityLiving> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
-          for (EntityLiving e : entities) {
+          List<MobEntity> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
+          for (MobEntity e : entities) {
             e.captureDrops = true;
-            if (Items.SHEARS.itemInteractionForEntity(stack, FakePlayerFactory.getMinecraft((WorldServer) world), e, EnumHand.MAIN_HAND)) {
+            if (Items.SHEARS.itemInteractionForEntity(stack, FakePlayerFactory.getMinecraft((ServerWorld) world), e, Hand.MAIN_HAND)) {
               affectedSpots.add(e.getPosition());
             }
             e.captureDrops = false;
-            for (EntityItem ent : e.capturedDrops) {
+            for (ItemEntity ent : e.capturedDrops) {
               ent.setPosition(entity.posX, entity.posY, entity.posZ);
               ent.motionY = 0;
               ent.motionX = 0;

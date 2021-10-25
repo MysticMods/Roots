@@ -2,7 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.tileentity.TileEntityPyre;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -17,7 +17,7 @@ public class RitualRegistry {
       ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures,
       ritual_wildroot_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering, ritual_grove_supplication;
 
-  public static RitualBase getRitual(TileEntityPyre tileEntity, @Nullable EntityPlayer player) {
+  public static RitualBase getRitual(TileEntityPyre tileEntity, @Nullable PlayerEntity player) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
       RitualBase ritual = ritualRegistry.values().toArray(new RitualBase[0])[i];
       if (ritual.isRitualRecipe(tileEntity, player)) {

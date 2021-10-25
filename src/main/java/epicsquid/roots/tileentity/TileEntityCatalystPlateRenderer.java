@@ -3,15 +3,15 @@ package epicsquid.roots.tileentity;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockCatalystPlate;
 import epicsquid.roots.init.ModBlocks;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
+import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 
 import java.util.Random;
 
@@ -22,16 +22,16 @@ public class TileEntityCatalystPlateRenderer extends TileEntityRenderer<TileEnti
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       int count = getCount(tei.inventory.getStackInSlot(0));
       ItemRenderer r = Minecraft.getMinecraft().getRenderItem();
-      IBlockState state = tei.getWorld().getBlockState(tei.getPos());
+      BlockState state = tei.getWorld().getBlockState(tei.getPos());
       if (state.getBlock() != ModBlocks.catalyst_plate && state.getBlock() != ModBlocks.reinforced_catalyst_plate) {
         Roots.logger.error("Fatal error rendering catalyst plate, block state was " + state.toString() + " when catalyst plate was expected.");
         return;
       }
-      EnumFacing f = state.getValue(BlockCatalystPlate.FACING);
+      Direction f = state.getValue(BlockCatalystPlate.FACING);
       for (int i = 0; i < count; i++) {
         GlStateManager.pushMatrix();
         GlStateManager
-            .translate(x + 0.5, y + 0.8125 + 0.0625 * (double) i + 0.0625 * (tei.inventory.getStackInSlot(0).getItem() instanceof ItemBlock ? 1.0 : 0),
+            .translate(x + 0.5, y + 0.8125 + 0.0625 * (double) i + 0.0625 * (tei.inventory.getStackInSlot(0).getItem() instanceof BlockItem ? 1.0 : 0),
                 z + 0.5);
         GlStateManager.rotate(180 - f.getHorizontalAngle(), 0, 1, 0);
         GlStateManager.rotate(67.5f, 1.0f, 0, 0);

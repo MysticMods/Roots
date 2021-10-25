@@ -6,10 +6,8 @@ import crafttweaker.api.block.IBlock;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
-import crafttweaker.api.oredict.IOreDictEntry;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
-import crafttweaker.mc1120.item.MCItemStack;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
@@ -18,7 +16,8 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -84,11 +83,11 @@ public class FlowerTweaker {
   @ZenMethod
   public static void addRecipeItem(String name, IItemStack stack) {
     ItemStack converted = CraftTweakerMC.getItemStack(stack);
-    if (!(converted.getItem() instanceof ItemBlock)) {
+    if (!(converted.getItem() instanceof BlockItem)) {
       CraftTweakerAPI.logError("Cannot set " + stack.toString() + " as a Flower Growth ritual item as it is not an ItemBlock.");
       return;
     }
-    Block block = ((ItemBlock) converted.getItem()).getBlock();
+    Block block = ((BlockItem) converted.getItem()).getBlock();
     CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata(), null));
   }
 
@@ -104,7 +103,7 @@ public class FlowerTweaker {
   @ZenMethod
   public static void addRecipeItemOnSoils(String name, IItemStack stack, List<IIngredient> allowedSoils) {
     ItemStack converted = CraftTweakerMC.getItemStack(stack);
-    if (!(converted.getItem() instanceof ItemBlock)) {
+    if (!(converted.getItem() instanceof BlockItem)) {
       CraftTweakerAPI.logError("Cannot set " + stack.toString() + " as a Flower Growth ritual item as it is not an ItemBlock.");
       return;
     }
@@ -112,7 +111,7 @@ public class FlowerTweaker {
     for (IIngredient soil : allowedSoils) {
       allowedSoilsMC.add(CraftTweakerMC.getIngredient(soil));
     }
-    Block block = ((ItemBlock) converted.getItem()).getBlock();
+    Block block = ((BlockItem) converted.getItem()).getBlock();
     CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata(), allowedSoilsMC));
   }
 
@@ -140,10 +139,10 @@ public class FlowerTweaker {
   }
 
   private static class FlowerBlockState extends Action {
-    private final net.minecraft.block.state.IBlockState state;
+    private final BlockState state;
     private final String name;
 
-    protected FlowerBlockState(String name, net.minecraft.block.state.IBlockState state) {
+    protected FlowerBlockState(String name, BlockState state) {
       super("add_flower_block_state");
       this.name = name;
       this.state = state;

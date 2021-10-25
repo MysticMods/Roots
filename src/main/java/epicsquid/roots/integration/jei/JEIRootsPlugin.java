@@ -51,13 +51,13 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IVanillaRecipeFactory;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
-import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.TallGrassBlock;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -237,7 +237,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_SUMMON_ENTITY);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_summon_creatures), SUMMON_CREATURES);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_transmutation), TRANSMUTATION);
-    registry.addRecipeCatalyst(new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()), BLOCK_BREAK);
+    registry.addRecipeCatalyst(new ItemStack(Blocks.TALLGRASS, 1, TallGrassBlock.EnumType.GRASS.getMeta()), BLOCK_BREAK);
     registry.addRecipeCatalyst(new ItemStack(ModItems.terra_spores), RIGHT_CLICK_BLOCK);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.elemental_soil), SOIL);
     registry.addRecipeCatalyst(new ItemStack(ModItems.gramary), SPELL_IMBUING);
@@ -310,7 +310,7 @@ public class JEIRootsPlugin implements IModPlugin {
       if (stackItem != ModItems.spell_modifier) {
         return ISubtypeRegistry.ISubtypeInterpreter.NONE;
       }
-      NBTTagCompound tag = ItemUtil.getOrCreateTag(itemStack);
+      CompoundNBT tag = ItemUtil.getOrCreateTag(itemStack);
       if (tag.hasKey("modifier")) {
         Modifier mod = ModifierRegistry.get(new ResourceLocation(tag.getString("modifier")));
         if (mod != null) {

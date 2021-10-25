@@ -11,15 +11,15 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -82,7 +82,7 @@ public class SpellFeyLight extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(Item.getItemFromBlock(Blocks.LIT_PUMPKIN)),
-        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta()),
+        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, DoublePlantBlock.EnumPlantType.SUNFLOWER.getMeta()),
         new ItemStack(ModItems.cloud_berry),
         new OreIngredient("rootsBark"),
         new ItemStack(ModItems.cloud_berry)
@@ -97,7 +97,7 @@ public class SpellFeyLight extends SpellBase {
   private static Set<Block> lightSet = null;
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     World world = player.world;
     if (info.has(CONSUME)) {
       if (lightSet == null) {
@@ -134,7 +134,7 @@ public class SpellFeyLight extends SpellBase {
       }
       if (world.isAirBlock(pos)) {
         if (!world.isRemote) {
-          IBlockState state = ModBlocks.fey_light.getDefaultState();
+          BlockState state = ModBlocks.fey_light.getDefaultState();
           if (info.has(PINK)) {
             state = ModBlocks.fey_colored_light.getDefaultState().withProperty(BlockColoredFeyLight.COLOR, 0);
           }
@@ -183,12 +183,12 @@ public class SpellFeyLight extends SpellBase {
   }
 
   @Nullable
-  public RayTraceResult rayTrace(EntityPlayer player, double blockReachDistance) {
+  public RayTraceResult rayTrace(PlayerEntity player, double blockReachDistance) {
     return rayTrace(player, blockReachDistance, true);
   }
 
   @Nullable
-  public RayTraceResult rayTrace(EntityPlayer player, double blockReachDistance, boolean ignore) {
+  public RayTraceResult rayTrace(PlayerEntity player, double blockReachDistance, boolean ignore) {
     Vec3d vec3d = player.getPositionEyes(1.0F);
     Vec3d vec3d1 = player.getLook(1.0F);
     Vec3d vec3d2 = vec3d.add(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance, vec3d1.z * blockReachDistance);

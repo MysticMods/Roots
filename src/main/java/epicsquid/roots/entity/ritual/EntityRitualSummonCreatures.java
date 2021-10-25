@@ -6,19 +6,18 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.ItemLifeEssence;
 import epicsquid.roots.network.fx.MessageCreatureSummonedFX;
-import epicsquid.roots.network.fx.MessageTimeStopStartFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualSummonCreatures;
 import epicsquid.roots.util.RitualUtil;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -89,7 +88,7 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
       for (int i = 0; i < ritual.tries; i++) {
         suitable = RitualUtil.getRandomPosRadialXZ(getPosition(), ritual.radius_x, ritual.radius_z);
         BlockPos solid = suitable;
-        while (world.isAirBlock(solid) || !world.isSideSolid(solid, EnumFacing.UP)) {
+        while (world.isAirBlock(solid) || !world.isSideSolid(solid, Direction.UP)) {
           solid = solid.down();
         }
         if (suitable == solid) {
@@ -112,15 +111,15 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
       entity.setPosition(suitable.getX() + 0.5, suitable.getY() + 0.5, suitable.getZ() + 0.5);
 
       world.spawnEntity(entity);
-      if (entity instanceof EntityLivingBase) {
-        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING, ritual.glow_duration));
+      if (entity instanceof LivingEntity) {
+        ((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.GLOWING, ritual.glow_duration));
       }
       PacketHandler.sendToAllTracking(new MessageCreatureSummonedFX(entity), entity);
     }
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     if (compound.hasKey("summonRecipe")) {
       this.summonRecipe = ModRecipes.getSummonCreatureEntry(new ResourceLocation(compound.getString("summonRecipe")));
     }
@@ -129,7 +128,7 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     if (this.summonRecipe != null) {
       compound.setString("summonRecipe", this.summonRecipe.getRegistryName().toString());
     }

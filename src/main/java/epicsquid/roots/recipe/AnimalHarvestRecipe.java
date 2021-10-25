@@ -2,18 +2,18 @@ package epicsquid.roots.recipe;
 
 import epicsquid.roots.util.types.RegistryItem;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class AnimalHarvestRecipe extends RegistryItem {
-  private Class<? extends EntityLivingBase> clazz;
+  private Class<? extends LivingEntity> clazz;
 
-  public AnimalHarvestRecipe(ResourceLocation name, Class<? extends EntityLivingBase> clazz) {
+  public AnimalHarvestRecipe(ResourceLocation name, Class<? extends LivingEntity> clazz) {
     this.setRegistryName(name);
     this.clazz = clazz;
   }
 
-  public Class<? extends EntityLivingBase> getHarvestClass() {
+  public Class<? extends LivingEntity> getHarvestClass() {
     return this.clazz;
   }
 

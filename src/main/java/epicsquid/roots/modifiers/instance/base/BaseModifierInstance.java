@@ -6,9 +6,9 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class BaseModifierInstance extends RegistryItem implements INBTSerializable<NBTTagCompound>, IModifier {
+public abstract class BaseModifierInstance extends RegistryItem implements INBTSerializable<CompoundNBT>, IModifier {
   protected Modifier modifier;
   protected boolean applied;
 
@@ -70,7 +70,7 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
 
   @SideOnly(Side.CLIENT)
   public String describe() {
-    if (GuiScreen.isShiftKeyDown()) {
+    if (Screen.isShiftKeyDown()) {
       return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.GRAY + ": " + I18n.format(getTranslationKey() + ".desc");
     } else {
       return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.RESET;
@@ -139,8 +139,8 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound tag = new NBTTagCompound();
+  public CompoundNBT serializeNBT() {
+    CompoundNBT tag = new CompoundNBT();
     try {
       tag.setString("m", modifier.getRegistryName().toString());
     } catch (NullPointerException e) {
@@ -150,7 +150,7 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound tag) {
+  public void deserializeNBT(CompoundNBT tag) {
     this.modifier = ModifierRegistry.get(new ResourceLocation(tag.getString("m")));
     this.applied = tag.getBoolean("a");
   }

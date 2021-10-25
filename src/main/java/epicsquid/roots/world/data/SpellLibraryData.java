@@ -6,9 +6,9 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.spell.info.SpellDustInfo;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 
@@ -40,7 +40,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     generateMap();
   }
 
-  public SpellLibraryData(EntityPlayer player) {
+  public SpellLibraryData(PlayerEntity player) {
     super(identifier + player.getCachedUniqueIdString());
     this.uuid = player.getUniqueID();
     generateMap();
@@ -111,8 +111,8 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
 
   @SuppressWarnings("NullableProblems")
   @Override
-  public void readFromNBT(NBTTagCompound nbt) {
-    NBTTagList list = nbt.getTagList("spells", Constants.NBT.TAG_COMPOUND);
+  public void readFromNBT(CompoundNBT nbt) {
+    ListNBT list = nbt.getTagList("spells", Constants.NBT.TAG_COMPOUND);
     generateMap();
     for (int i = 0; i < list.tagCount(); i++) {
       LibrarySpellInfo instance = LibrarySpellInfo.fromNBT(list.getCompoundTagAt(i));
@@ -126,8 +126,8 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-    NBTTagList list = new NBTTagList();
+  public CompoundNBT writeToNBT(CompoundNBT compound) {
+    ListNBT list = new ListNBT();
     for (LibrarySpellInfo instance : spells.values()) {
       if (instance == null) {
         continue;

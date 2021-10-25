@@ -18,13 +18,13 @@ import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Items;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntity;
@@ -88,14 +88,14 @@ public class LibRegistry {
 
   @FunctionalInterface
   public interface SlabBuilder {
-    BlockSlabBase build(Material mat, SoundType type, float hardness, String name, IBlockState parent, boolean isDouble, @Nullable Block slab);
+    BlockSlabBase build(Material mat, SoundType type, float hardness, String name, BlockState parent, boolean isDouble, @Nullable Block slab);
   }
 
-  public static void addSlabPair(Material material, SoundType type, float hardness, String name, IBlockState parent, Block[] refs, ItemGroup tab) {
+  public static void addSlabPair(Material material, SoundType type, float hardness, String name, BlockState parent, Block[] refs, ItemGroup tab) {
     addSlabPair(material, type, hardness, name, parent, refs, tab, BlockSlabBase::new);
   }
 
-  public static void addSlabPair(Material material, SoundType type, float hardness, String name, IBlockState parent, Block[] refs, ItemGroup tab, SlabBuilder builder) {
+  public static void addSlabPair(Material material, SoundType type, float hardness, String name, BlockState parent, Block[] refs, ItemGroup tab, SlabBuilder builder) {
     BlockSlabBase double_slab = builder.build(material, type, hardness, name + "_double_slab", parent, true, null).setModelCustom(false);
     BlockSlabBase slab = builder.build(material, type, hardness, name + "_slab", parent, false, double_slab).setModelCustom(false);
     double_slab.slab = slab;
@@ -159,7 +159,7 @@ public class LibRegistry {
   }
 
   private static Set<ModelResourceLocation> noCullMRLs = new HashSet<>();
-  private static Set<ModelResourceLocation> colorMRLs = new HashSet<>();
+  private static Set<net.minecraft.client.renderer.model.ModelResourceLocation> colorMRLs = new HashSet<>();
 
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
@@ -217,7 +217,7 @@ public class LibRegistry {
   }
 
   public class RegisterTintedModelsEvent extends Event {
-    public void addModel(ModelResourceLocation mrl) {
+    public void addModel(net.minecraft.client.renderer.model.ModelResourceLocation mrl) {
       colorMRLs.add(mrl);
     }
   }

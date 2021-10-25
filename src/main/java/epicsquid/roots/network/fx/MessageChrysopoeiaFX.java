@@ -6,7 +6,7 @@ import epicsquid.roots.spell.SpellChrysopoeia;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -25,7 +25,7 @@ public class MessageChrysopoeiaFX implements IMessage {
     this.entityId = id;
   }
 
-  public MessageChrysopoeiaFX(EntityPlayer player) {
+  public MessageChrysopoeiaFX(PlayerEntity player) {
     this.entityId = player.getEntityId();
   }
 
@@ -46,8 +46,8 @@ public class MessageChrysopoeiaFX implements IMessage {
     protected void handleMessage(MessageChrysopoeiaFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       Entity entity = world.getEntityByID(message.entityId);
-      if (entity instanceof EntityPlayer) {
-        EntityPlayer player = (EntityPlayer) entity;
+      if (entity instanceof PlayerEntity) {
+        PlayerEntity player = (PlayerEntity) entity;
         float height = player.height;
         float increment = 0.08f;
 

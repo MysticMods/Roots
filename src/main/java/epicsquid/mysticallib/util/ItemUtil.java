@@ -1,15 +1,15 @@
 package epicsquid.mysticallib.util;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -56,33 +56,33 @@ public class ItemUtil {
     }
   }
 
-  public static EntityItem spawnItem(World world, BlockPos pos, ItemStack stack) {
+  public static ItemEntity spawnItem(World world, BlockPos pos, ItemStack stack) {
     return spawnItem(world, pos, stack, -1);
   }
 
-  public static EntityItem spawnItem(World world, BlockPos pos, ItemStack stack, float hoverStart) {
+  public static ItemEntity spawnItem(World world, BlockPos pos, ItemStack stack, float hoverStart) {
     return spawnItem(world, pos, stack, true, -1, hoverStart);
   }
 
-  public static EntityItem spawnItem(World world, BlockPos pos, ItemStack stack, int ticks) {
+  public static ItemEntity spawnItem(World world, BlockPos pos, ItemStack stack, int ticks) {
     return spawnItem(world, pos, stack, true, ticks, -1);
   }
 
-  public static EntityItem spawnItem(World world, BlockPos pos, ItemStack stack, boolean offset) {
+  public static ItemEntity spawnItem(World world, BlockPos pos, ItemStack stack, boolean offset) {
     return spawnItem(world, pos, stack, offset, -1, -1);
   }
 
-  public static EntityItem spawnItem(World world, BlockPos pos, ItemStack stack, boolean offset, int ticks, float hoverStart) {
+  public static ItemEntity spawnItem(World world, BlockPos pos, ItemStack stack, boolean offset, int ticks, float hoverStart) {
     return spawnItem(world, pos.getX(), pos.getY(), pos.getZ(), offset, stack, ticks, hoverStart);
   }
 
-  public static EntityItem spawnItem(World world, double x, double y, double z, boolean offset, ItemStack stack, int ticks, float hoverStart) {
+  public static ItemEntity spawnItem(World world, double x, double y, double z, boolean offset, ItemStack stack, int ticks, float hoverStart) {
     if (offset) {
       x += 0.5;
       y += 0.5;
       z += 0.5;
     }
-    EntityItem item = new EntityItem(world, x, y, z, stack);
+    ItemEntity item = new ItemEntity(world, x, y, z, stack);
     if (ticks != -1) {
       item.setPickupDelay(ticks);
     }
@@ -92,7 +92,7 @@ public class ItemUtil {
     return spawnItem(world, item);
   }
 
-  public static EntityItem spawnItem(World world, EntityItem item) {
+  public static ItemEntity spawnItem(World world, ItemEntity item) {
     item.motionZ = 0;
     item.motionX = 0;
     item.motionY = 0;
@@ -100,7 +100,7 @@ public class ItemUtil {
     return item;
   }
 
-  public static ItemStack stackFromState (IBlockState state) {
+  public static ItemStack stackFromState (BlockState state) {
     Block block = state.getBlock();
     Item item = Item.getItemFromBlock(block);
     int meta = block.getMetaFromState(state);
@@ -109,11 +109,11 @@ public class ItemUtil {
 
   @Nullable
   @SuppressWarnings("deprecation")
-  public static IBlockState stateFromStack (ItemStack stack) {
+  public static BlockState stateFromStack (ItemStack stack) {
     Item item = stack.getItem();
-    if (!(item instanceof ItemBlock)) return null;
+    if (!(item instanceof BlockItem)) return null;
 
-    Block block = ((ItemBlock) item).getBlock();
+    Block block = ((BlockItem) item).getBlock();
     return block.getStateFromMeta(stack.getMetadata());
   }
 
@@ -144,7 +144,7 @@ public class ItemUtil {
 
   @SideOnly(Side.CLIENT)
   public static boolean shouldDisplayMore(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn, String shiftForMore, TextFormatting color) {
-    if (!GuiScreen.isShiftKeyDown()) {
+    if (!Screen.isShiftKeyDown()) {
       tooltip.add("");
       tooltip.add(color + I18n.format(shiftForMore));
       return false;
@@ -155,10 +155,10 @@ public class ItemUtil {
     return true;
   }
 
-  public static NBTTagCompound getOrCreateTag (ItemStack stack) {
-    NBTTagCompound tag = stack.getTagCompound();
+  public static CompoundNBT getOrCreateTag (ItemStack stack) {
+    CompoundNBT tag = stack.getTagCompound();
     if (tag == null) {
-      tag = new NBTTagCompound();
+      tag = new CompoundNBT();
       stack.setTagCompound(tag);
     }
     return tag;

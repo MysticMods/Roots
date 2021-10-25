@@ -3,7 +3,7 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualGroveSupplication;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.properties.Property;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;

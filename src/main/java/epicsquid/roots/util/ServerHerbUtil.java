@@ -6,15 +6,15 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.item.ItemSylvanArmor;
 import epicsquid.roots.network.MessageUpdateHerb;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collections;
 import java.util.List;
 
 public class ServerHerbUtil {
-  public static ItemStack getFirstPouch(EntityPlayer player) {
+  public static ItemStack getFirstPouch(PlayerEntity player) {
     if (player.world.isRemote) {
       return ItemStack.EMPTY;
     }
@@ -22,7 +22,7 @@ public class ServerHerbUtil {
     return CommonHerbUtil.getFirstPouch(player);
   }
 
-  public static List<ItemStack> getPouches(EntityPlayer player) {
+  public static List<ItemStack> getPouches(PlayerEntity player) {
     if (player.world.isRemote) {
       return Collections.emptyList();
     }
@@ -30,7 +30,7 @@ public class ServerHerbUtil {
     return CommonHerbUtil.getPouches(player);
   }
 
-  public static double getHerbAmount(EntityPlayer player, Herb herb) {
+  public static double getHerbAmount(PlayerEntity player, Herb herb) {
     if (player.world.isRemote) {
       return 0;
     }
@@ -51,7 +51,7 @@ public class ServerHerbUtil {
     return quantity;
   }
 
-  public static void removePowder(EntityPlayer player, Herb herb, double amount) {
+  public static void removePowder(PlayerEntity player, Herb herb, double amount) {
     if (player.world.isRemote) {
       return;
     }
@@ -75,6 +75,6 @@ public class ServerHerbUtil {
     }
 
     MessageUpdateHerb message = new MessageUpdateHerb(herb, quantity);
-    PacketHandler.INSTANCE.sendTo(message, (EntityPlayerMP) player);
+    PacketHandler.INSTANCE.sendTo(message, (ServerPlayerEntity) player);
   }
 }

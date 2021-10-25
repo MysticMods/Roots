@@ -3,14 +3,13 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.block.IBlock;
 import epicsquid.mysticallib.entity.villager.EmeraldForRandomItem;
 import epicsquid.mysticallib.entity.villager.ListRandomItemForEmerald;
-import epicsquid.mysticallib.entity.villager.ListRandomItemForRandomEmeralds;
 import epicsquid.mysticallib.entity.villager.ListRandomItemWithPrice;
 import epicsquid.mysticallib.entity.villager.ListRandomItemWithPrice.ItemAndPriceInfo;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityVillager.PriceInfo;
-import net.minecraft.init.Items;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity.PriceInfo;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
@@ -46,7 +45,7 @@ public class ModVillagers {
               new EmeraldForRandomItem(new PriceInfo(1, 4), ModItems.mystic_feather, ModItems.strange_ooze, ModItems.fey_leather),
               new EmeraldForRandomItem(new PriceInfo(2, 5), ModItems.dewgonia, ModItems.cloud_berry, ModItems.stalicripe, ModItems.infernal_bulb, ((IBlock) ModBlocks.baffle_cap_mushroom).getItemBlock()),
 /*              new EmeraldForRandomItem(new PriceInfo(7, 12), epicsquid.mysticalworld.init.ModItems.aubergine_seed, ModItems.wildewheet_seed, ModItems.moonglow_seed, ModItems.spirit_herb_seed, ModItems.pereskia_bulb),*/
-              new EntityVillager.ListItemForEmeralds(ModItems.living_arrow, new PriceInfo(3, 7)),
+              new VillagerEntity.ListItemForEmeralds(ModItems.living_arrow, new PriceInfo(3, 7)),
               new ListRandomItemWithPrice(
                   new ItemAndPriceInfo(ModItems.component_pouch, 21, 35),
                   new ItemAndPriceInfo(ModItems.runic_shears, 18, 27)
@@ -58,9 +57,9 @@ public class ModVillagers {
           ).
           addTrade(3,
 /*              new ListRandomItemForRandomEmeralds(new PriceInfo(8, 13), Materials.amethyst.getItem(), Items.DIAMOND),*/
-              new EntityVillager.ListItemForEmeralds(new ItemStack(ModBlocks.wildwood_sapling), new PriceInfo(42, 64)),
-              new EntityVillager.ListItemForEmeralds(new ItemStack(ModItems.spirit_bag), new PriceInfo(16, 28)),
-              new EntityVillager.ListItemForEmeralds(new ItemStack(ModItems.reliquary), new PriceInfo(21, 42)),
+              new VillagerEntity.ListItemForEmeralds(new ItemStack(ModBlocks.wildwood_sapling), new PriceInfo(42, 64)),
+              new VillagerEntity.ListItemForEmeralds(new ItemStack(ModItems.spirit_bag), new PriceInfo(16, 28)),
+              new VillagerEntity.ListItemForEmeralds(new ItemStack(ModItems.reliquary), new PriceInfo(21, 42)),
               new ListRandomItemWithPrice(
                   new ItemAndPriceInfo(ModItems.mystic_feather, 1, 3, 3, 6),
                   new ItemAndPriceInfo(ModItems.fey_leather, 1, 3, 3, 6),

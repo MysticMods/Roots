@@ -10,20 +10,17 @@ import javax.annotation.Nullable;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.model.block.BakedModelBlock;
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +32,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObject, IGrowable {
+public class BlockSaplingBase extends BushBlock implements IBlock, IModeledObject, IGrowable {
   private @Nonnull Item itemBlock;
   private List<ItemStack> drops;
   private boolean isOpaque = true;
@@ -58,7 +55,7 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
     setRegistryName(LibRegistry.getActiveModid(), name);
     setLightOpacity(0);
     setOpacity(false);
-    itemBlock = new ItemBlock(this).setRegistryName(LibRegistry.getActiveModid(), name);
+    itemBlock = new BlockItem(this).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
   @Nonnull
@@ -89,7 +86,7 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
   @Override
   @Nonnull
   @SuppressWarnings("deprecation")
-  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
     return box;
   }
 
@@ -125,7 +122,7 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
 
   @Override
   @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return isOpaque;
   }
 
@@ -135,7 +132,7 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
 
   @Override
   @SuppressWarnings("deprecation")
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
@@ -146,7 +143,7 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
       ModelLoader.setCustomStateMapper(this, new CustomStateMapper());
     }
     if (!hasCustomModel) {
-      ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "handlers"));
+      ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new net.minecraft.client.renderer.model.ModelResourceLocation(getRegistryName(), "handlers"));
     } else {
       ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "handlers"));
     }
@@ -170,18 +167,18 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     this.itemBlock = block;
     return block;
   }
 
   @Nullable
-  protected IBlockState getParentState() {
+  protected BlockState getParentState() {
     return null;
   }
 
   @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+  public Item getItemDropped(BlockState state, Random rand, int fortune) {
     if (drops != null && drops.size() > 0) {
       return drops.get(0).getItem();
     }
@@ -189,12 +186,12 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
   }
 
   @Override
-  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction face) {
     return isFlammable || super.isFlammable(world, pos, face);
   }
 
   @Override
-  public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+  public int getFlammability(IBlockAccess world, BlockPos pos, Direction face) {
     return isFlammable ? 100 : super.getFlammability(world, pos, face);
   }
 
@@ -208,11 +205,11 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
     return BakedModelBlock.class;
   }
 
-  public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+  public void generateTree(World worldIn, BlockPos pos, BlockState state, Random rand) {
     if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos))
       return;
     Feature worldgenerator = treeGenerator.get();
-    IBlockState iblockstate2 = Blocks.AIR.getDefaultState();
+    BlockState iblockstate2 = Blocks.AIR.getDefaultState();
     worldIn.setBlockState(pos, iblockstate2, 4);
     if (!worldgenerator.generate(worldIn, rand, pos)) {
       worldIn.setBlockState(pos, state, 4);
@@ -220,12 +217,12 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
   }
 
   @Override
-  public int damageDropped(IBlockState state) {
+  public int damageDropped(BlockState state) {
     return 0;
   }
 
   @Override
-  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+  public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand) {
     if (!worldIn.isRemote) {
       super.updateTick(worldIn, pos, state, rand);
 
@@ -237,42 +234,42 @@ public class BlockSaplingBase extends BlockBush implements IBlock, IModeledObjec
     }
   }
 
-  public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    if (state.getValue(BlockSapling.STAGE) == 0) {
-      worldIn.setBlockState(pos, state.cycleProperty(BlockSapling.STAGE), 4);
+  public void grow(World worldIn, BlockPos pos, BlockState state, Random rand) {
+    if (state.getValue(SaplingBlock.STAGE) == 0) {
+      worldIn.setBlockState(pos, state.cycleProperty(SaplingBlock.STAGE), 4);
     } else {
       this.generateTree(worldIn, pos, state, rand);
     }
   }
 
   @Override
-  public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+  public boolean canGrow(World worldIn, BlockPos pos, BlockState state, boolean isClient) {
     return true;
   }
 
   @Override
-  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+  public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
     return (double) worldIn.rand.nextFloat() < 0.45D;
   }
 
   @Override
-  public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+  public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
     this.grow(worldIn, pos, state, rand);
   }
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, BlockSapling.STAGE);
+    return new BlockStateContainer(this, SaplingBlock.STAGE);
   }
 
   @Override
   @SuppressWarnings("deprecation")
-  public IBlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(BlockSapling.STAGE, meta);
+  public BlockState getStateFromMeta(int meta) {
+    return this.getDefaultState().withProperty(SaplingBlock.STAGE, meta);
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(BlockSapling.STAGE);
+  public int getMetaFromState(BlockState state) {
+    return state.getValue(SaplingBlock.STAGE);
   }
 }

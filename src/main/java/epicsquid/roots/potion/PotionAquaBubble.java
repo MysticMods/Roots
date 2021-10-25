@@ -9,19 +9,17 @@ import epicsquid.roots.network.fx.MessageAquaBubbleFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellAquaBubble;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("NullableProblems")
-public class PotionAquaBubble extends Potion {
+public class PotionAquaBubble extends Effect {
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
   private float absorb_amount = 0;
   private float amplifier = 0;
@@ -59,13 +57,13 @@ public class PotionAquaBubble extends Potion {
   }
 
   @Override
-  public void performEffect(EntityLivingBase entity, int amplifier) {
+  public void performEffect(LivingEntity entity, int amplifier) {
     if (!entity.world.isRemote) {
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellAquaBubble.instance);
       if (mods.has(SpellAquaBubble.POISON_RESIST)) {
-        entity.removePotionEffect(MobEffects.POISON);
+        entity.removePotionEffect(Effects.POISON);
       }
-      if (!(entity instanceof EntityPlayer)) {
+      if (!(entity instanceof PlayerEntity)) {
         if (Util.rand.nextInt(10) == 0) {
           PacketHandler.sendToAllTracking(new MessageAquaBubbleFX(entity.posX, entity.posY, entity.posZ), entity);
         }
@@ -83,7 +81,7 @@ public class PotionAquaBubble extends Potion {
   }
 
   @Override
-  public boolean shouldRender(PotionEffect effect) {
+  public boolean shouldRender(EffectInstance effect) {
     return true;
   }
 
@@ -95,7 +93,7 @@ public class PotionAquaBubble extends Potion {
   }
 
   @Override
-  public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+  public void removeAttributesModifiersFromEntity(LivingEntity entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
     ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entityLivingBaseIn.getEntityData(), SpellAquaBubble.instance);
     float absorb = absorb_amount;
     if (mods.has(SpellAquaBubble.AMPLIFIED)) {
@@ -106,7 +104,7 @@ public class PotionAquaBubble extends Potion {
   }
 
   @Override
-  public void applyAttributesModifiersToEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+  public void applyAttributesModifiersToEntity(LivingEntity entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
     ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entityLivingBaseIn.getEntityData(), SpellAquaBubble.instance);
     float absorb = absorb_amount;
     if (mods.has(SpellAquaBubble.AMPLIFIED)) {

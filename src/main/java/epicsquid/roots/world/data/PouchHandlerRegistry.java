@@ -1,7 +1,7 @@
 package epicsquid.roots.world.data;
 
 import epicsquid.roots.item.PouchType;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.UUID;
@@ -14,7 +14,7 @@ public class PouchHandlerRegistry {
 
   @SuppressWarnings("ConstantConditions")
   public static PouchHandlerData getData(UUID id, PouchType type) {
-    WorldServer server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
+    ServerWorld server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
     PouchHandlerData data = (PouchHandlerData) server.getMapStorage().getOrLoadData(PouchHandlerData.class, PouchHandlerData.name(id));
 
     // I feel this check could be problematic

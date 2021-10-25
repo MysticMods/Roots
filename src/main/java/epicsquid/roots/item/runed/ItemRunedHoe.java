@@ -5,11 +5,11 @@ import epicsquid.roots.config.ToolConfig;
 import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
@@ -36,16 +36,16 @@ public class ItemRunedHoe extends ItemPloughBase implements ILivingRepair {
   }
 
   @Override
-  public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+  public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
     // TODO: Some better effect
-    if (entityLiving instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) entityLiving;
+    if (entityLiving instanceof PlayerEntity) {
+      PlayerEntity player = (PlayerEntity) entityLiving;
       Block block = state.getBlock();
       if (block instanceof IPlantable) {
         for (int x = -2; x < 3; x++) {
           for (int z = -2; z < 3; z++) {
             BlockPos nPos = pos.add(x, 0, z);
-            IBlockState state2 = worldIn.getBlockState(nPos);
+            BlockState state2 = worldIn.getBlockState(nPos);
             block = state2.getBlock();
             if (!(block instanceof IPlantable)) continue;
             block.harvestBlock(worldIn, player, nPos, state2, worldIn.getTileEntity(nPos), stack);

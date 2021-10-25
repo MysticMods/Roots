@@ -10,14 +10,14 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.SlaveUtil;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -74,16 +74,16 @@ public class SpellGeas extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.ROTTEN_FLESH),
+        new ItemStack(net.minecraft.item.Items.ROTTEN_FLESH),
         new ItemStack(Items.LEAD),
-        new ItemStack(Items.FISHING_ROD),
+        new ItemStack(net.minecraft.item.Items.FISHING_ROD),
         new ItemStack(ModItems.terra_spores),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom))
     );
     setCastSound(ModSounds.Spells.GEAS); // todo
   }
 
-  private int affect(EntityLivingBase e, EntityPlayer player, StaffModifierInstanceList info, int dur) {
+  private int affect(LivingEntity e, PlayerEntity player, StaffModifierInstanceList info, int dur) {
     if (e.getActivePotionEffect(ModPotions.geas) == null) {
       if (EntityUtil.isBoss(e)) {
         return 0;
@@ -91,18 +91,18 @@ public class SpellGeas extends SpellBase {
       if (EntityUtil.isHostileTo(e, player, SpellGeas.instance)) {
         if (!player.world.isRemote) {
           if (info.has(GUARDIANS) && SlaveUtil.canBecomeSlave(e)) {
-            EntityLivingBase slave = SlaveUtil.enslave(e);
+            LivingEntity slave = SlaveUtil.enslave(e);
             e.world.spawnEntity(slave);
             e.setDropItemsWhenDead(false);
             e.setDead();
             slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
             slave.getEntityData().setIntArray(getCachedName(), info.toArray());
-            slave.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
+            slave.addPotionEffect(new EffectInstance(ModPotions.geas, dur, 0, false, false));
           } else {
             e.getEntityData().setIntArray(getCachedName(), info.toArray());
-            e.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
-            if (e instanceof EntityLiving) {
-              ((EntityLiving) e).setAttackTarget(null);
+            e.addPotionEffect(new EffectInstance(ModPotions.geas, dur, 0, false, false));
+            if (e instanceof MobEntity) {
+              ((MobEntity) e).setAttackTarget(null);
             }
           }
         }
@@ -113,7 +113,7 @@ public class SpellGeas extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     int count = 1;
     int affected = 0;
     int dur = duration;
@@ -133,15 +133,15 @@ public class SpellGeas extends SpellBase {
       double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
       double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
       double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
+      List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
       if (peaceful) {
-        for (EntityLivingBase e : entities) {
+        for (LivingEntity e : entities) {
           if (EntityUtil.isFriendlyTo(e, player, SpellGeas.instance)) {
-            e.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, savior_duration, savior_amplifier));
+            e.addPotionEffect(new EffectInstance(Effects.ABSORPTION, savior_duration, savior_amplifier));
           }
         }
       }
-      for (EntityLivingBase e : entities) {
+      for (LivingEntity e : entities) {
         if (affected == count) {
           break;
         }

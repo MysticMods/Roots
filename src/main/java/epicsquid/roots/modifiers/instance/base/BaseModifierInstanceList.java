@@ -6,8 +6,8 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
@@ -16,7 +16,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, NBTTagCompound> {
+public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, CompoundNBT> {
   protected final List<T> internal;
   protected final Map<IModifierCore, T> coreToInstance;
   protected final SpellBase spell;
@@ -127,9 +127,9 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound result = new NBTTagCompound();
-    NBTTagList list = new NBTTagList();
+  public CompoundNBT serializeNBT() {
+    CompoundNBT result = new CompoundNBT();
+    ListNBT list = new ListNBT();
     for (T m : this) {
       if (m.getModifier() != null) {
         list.appendTag(m.serializeNBT());
@@ -140,11 +140,11 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
     return result;
   }
 
-  public void deserializeNBT(NBTTagCompound tag, Function<NBTTagCompound, T> creator) {
-    NBTTagList nbt = tag.getTagList("l", Constants.NBT.TAG_COMPOUND);
+  public void deserializeNBT(CompoundNBT tag, Function<CompoundNBT, T> creator) {
+    ListNBT nbt = tag.getTagList("l", Constants.NBT.TAG_COMPOUND);
 
     for (int i = 0; i < nbt.tagCount(); i++) {
-      NBTTagCompound thisTag = nbt.getCompoundTagAt(i);
+      CompoundNBT thisTag = nbt.getCompoundTagAt(i);
       this.add(creator.apply(thisTag));
     }
 

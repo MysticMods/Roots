@@ -1,10 +1,9 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.util.IngredientWithStack;
 import epicsquid.roots.util.types.RegistryItem;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -35,7 +34,7 @@ public class ChrysopoeiaRecipe extends RegistryItem {
     return inputs.getIngredient().test(stack) && stack.getCount() >= inputs.getCount();
   }
 
-  public ItemStack process(EntityPlayer player, ItemStack stack, int overload, int by) {
+  public ItemStack process(PlayerEntity player, ItemStack stack, int overload, int by) {
     if (!matches(stack)) {
       return stack;
     }

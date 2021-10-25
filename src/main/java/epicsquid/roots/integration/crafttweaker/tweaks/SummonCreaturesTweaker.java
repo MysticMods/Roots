@@ -13,7 +13,7 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -93,7 +93,7 @@ public class SummonCreaturesTweaker {
     public Remove(EntityEntry entry) {
       super("remove_summon_creature");
       this.entry = entry;
-      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+      if (!LivingEntity.class.isAssignableFrom(this.entry.getEntityClass())) {
         CraftTweakerAPI.logError("Invalid Summon Creature entity class to remove: " + this.entry.getEntityClass().getSimpleName());
       }
     }
@@ -101,7 +101,7 @@ public class SummonCreaturesTweaker {
     @SuppressWarnings("unchecked")
     @Override
     public void apply() {
-      Class<? extends EntityLivingBase> clz = (Class<? extends EntityLivingBase>) entry.getEntityClass();
+      Class<? extends LivingEntity> clz = (Class<? extends LivingEntity>) entry.getEntityClass();
       ModRecipes.removeSummonCreatureEntry(clz);
     }
 
@@ -117,14 +117,14 @@ public class SummonCreaturesTweaker {
     public RemoveLifeEssence(EntityEntry entry) {
       super("remove_life_essence");
       this.entry = entry;
-      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+      if (!LivingEntity.class.isAssignableFrom(this.entry.getEntityClass())) {
         CraftTweakerAPI.logError("Invalid Summon Creature entity class to remove: " + this.entry.getEntityClass().getSimpleName());
       }
     }
 
     @Override
     public void apply() {
-      @SuppressWarnings("unchecked") Class<? extends EntityLivingBase> clz = (Class<? extends EntityLivingBase>) entry.getEntityClass();
+      @SuppressWarnings("unchecked") Class<? extends LivingEntity> clz = (Class<? extends LivingEntity>) entry.getEntityClass();
       ModRecipes.removeLifeEssence(clz);
     }
 
@@ -158,7 +158,7 @@ public class SummonCreaturesTweaker {
       super("add_summon_creature");
       this.entry = entry;
       this.ingredients = ingredients;
-      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+      if (!LivingEntity.class.isAssignableFrom(this.entry.getEntityClass())) {
         CraftTweakerAPI.logError("Invalid Summon Creature entity class to add: " + this.entry.getEntityClass().getSimpleName());
       }
     }
@@ -166,7 +166,7 @@ public class SummonCreaturesTweaker {
     @SuppressWarnings("unchecked")
     @Override
     public void apply() {
-      Class<? extends EntityLivingBase> elb = (Class<? extends EntityLivingBase>) entry.getEntityClass();
+      Class<? extends LivingEntity> elb = (Class<? extends LivingEntity>) entry.getEntityClass();
       if (ModRecipes.getSummonCreatureEntry(elb) != null) {
         CraftTweakerAPI.logError("Summon Creature Recipe already exists for entity: " + entry.getName());
         return;
@@ -188,14 +188,14 @@ public class SummonCreaturesTweaker {
     public AddLifeEssence(EntityEntry entry) {
       super("add_life_essence");
       this.entry = entry;
-      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+      if (!LivingEntity.class.isAssignableFrom(this.entry.getEntityClass())) {
         CraftTweakerAPI.logError("Invalid Summon Creature life essence entity class to add: " + this.entry.getEntityClass().getSimpleName());
       }
     }
 
     @Override
     public void apply() {
-      ModRecipes.addLifeEssence((Class<? extends EntityLivingBase>) entry.getEntityClass());
+      ModRecipes.addLifeEssence((Class<? extends LivingEntity>) entry.getEntityClass());
     }
 
     @Override

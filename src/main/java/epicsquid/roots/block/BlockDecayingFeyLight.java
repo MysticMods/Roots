@@ -5,8 +5,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,17 +30,17 @@ public class BlockDecayingFeyLight extends BlockNormalFeyLight {
 
   @SuppressWarnings("deprecation")
   @Override
-  public IBlockState getStateFromMeta(int meta) {
+  public BlockState getStateFromMeta(int meta) {
     return this.getDefaultState().withProperty(DECAY, meta);
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
+  public int getMetaFromState(BlockState state) {
     return state.getValue(DECAY);
   }
 
   @Override
-  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+  public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand) {
     super.updateTick(worldIn, pos, state, rand);
 
     if (!worldIn.isAreaLoaded(pos, 1)) {

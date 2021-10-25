@@ -10,23 +10,21 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.UseAction;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -47,9 +45,9 @@ public class ItemSalmon extends ItemBase {
 
   @SuppressWarnings("Duplicates")
   @Override
-  public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-    if (entityLiving instanceof EntityPlayer) {
-      NBTTagCompound tag = stack.getTagCompound();
+  public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+    if (entityLiving instanceof PlayerEntity) {
+      CompoundNBT tag = stack.getTagCompound();
       if (tag == null || (!tag.hasKey("crafter", Constants.NBT.TAG_STRING) || !tag.hasKey("advancements", Constants.NBT.TAG_LIST))) {
         return stack;
       }
@@ -60,7 +58,7 @@ public class ItemSalmon extends ItemBase {
 
       List<ResourceLocation> advancements = new ArrayList<>();
 
-      NBTTagList advancementsList = tag.getTagList("advancements", Constants.NBT.TAG_STRING);
+      ListNBT advancementsList = tag.getTagList("advancements", Constants.NBT.TAG_STRING);
       for (int i = 0; i < advancementsList.tagCount(); i++) {
         String adv = advancementsList.getStringTagAt(i);
         if (adv.equals("pacifist")) {
@@ -69,8 +67,8 @@ public class ItemSalmon extends ItemBase {
         advancements.add(new ResourceLocation(Roots.MODID, adv));
       }
 
-      EntityPlayerMP player = (EntityPlayerMP) entityLiving;
-      WorldServer world = (WorldServer) player.world;
+      ServerPlayerEntity player = (ServerPlayerEntity) entityLiving;
+      ServerWorld world = (ServerWorld) player.world;
       AdvancementManager manager = world.getAdvancementManager();
       PlayerAdvancements playerAdvancements = player.getAdvancements();
 
@@ -101,7 +99,7 @@ public class ItemSalmon extends ItemBase {
       PacketHandler.INSTANCE.sendTo(message, player);
       AdvancementSyncHandler.syncPlayer(player, false);
       worldIn.playSound(null, player.getPosition(), SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1f, 0.8f);
-      player.sendMessage(new TextComponentTranslation("roots.message.salmon_eaten").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)));
+      player.sendMessage(new TranslationTextComponent("roots.message.salmon_eaten").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)));
     }
 
     return ItemStack.EMPTY;
@@ -111,14 +109,14 @@ public class ItemSalmon extends ItemBase {
   public void getSubItems(ItemGroup tab, NonNullList<ItemStack> items) {
     if (isInCreativeTab(tab)) {
       ItemStack inTab = new ItemStack(this);
-      NBTTagCompound tag = inTab.getTagCompound();
+      CompoundNBT tag = inTab.getTagCompound();
       if (tag == null) {
-        tag = new NBTTagCompound();
+        tag = new CompoundNBT();
         inTab.setTagCompound(tag);
       }
       tag.setString("crafter", "Nature");
-      NBTTagList advancements = new NBTTagList();
-      advancements.appendTag(new NBTTagString("everything"));
+      ListNBT advancements = new ListNBT();
+      advancements.appendTag(new StringNBT("everything"));
       tag.setTag("advancements", advancements);
       items.add(inTab);
     }
@@ -130,20 +128,20 @@ public class ItemSalmon extends ItemBase {
   }
 
   @Override
-  public EnumAction getItemUseAction(ItemStack stack) {
-    return EnumAction.EAT;
+  public UseAction getItemUseAction(ItemStack stack) {
+    return UseAction.EAT;
   }
 
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
     ItemStack itemstack = playerIn.getHeldItem(handIn);
     playerIn.setActiveHand(handIn);
-    return ActionResult.newResult(EnumActionResult.SUCCESS, itemstack);
+    return ActionResult.newResult(ActionResultType.SUCCESS, itemstack);
   }
 
   @Override
-  public EnumRarity getRarity(ItemStack stack) {
-    return EnumRarity.EPIC;
+  public Rarity getRarity(ItemStack stack) {
+    return Rarity.EPIC;
   }
 
   @Override
@@ -153,12 +151,12 @@ public class ItemSalmon extends ItemBase {
 
     tooltip.add("");
 
-    NBTTagCompound tag = stack.getTagCompound();
+    CompoundNBT tag = stack.getTagCompound();
     if (tag == null || !tag.hasKey("crafter", Constants.NBT.TAG_STRING) && !tag.hasKey("advancements", Constants.NBT.TAG_LIST)) {
       tooltip.add(TextFormatting.BOLD + "" + TextFormatting.RED + I18n.format("roots.tooltip.salmon.invalid"));
     } else {
       String crafter = tag.getString("crafter");
-      NBTTagList advancements = tag.getTagList("advancements", Constants.NBT.TAG_STRING);
+      ListNBT advancements = tag.getTagList("advancements", Constants.NBT.TAG_STRING);
       tooltip.add(I18n.format("roots.tooltip.salmon.crafter", crafter));
       StringJoiner joiner = new StringJoiner(", ", "[", "]");
       for (int i = 0; i < advancements.tagCount(); i++) {

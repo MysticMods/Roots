@@ -8,15 +8,15 @@ import epicsquid.roots.network.fx.MessageRoseThornsBurstFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRoseThorns;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -96,11 +96,11 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
 
       if (playerId != null) {
         double offset = modifiers.has(SpellRoseThorns.BIGGER) ? 3 : 1.5;
-        EntityPlayer player = world.getPlayerEntityByUUID(playerId);
+        PlayerEntity player = world.getPlayerEntityByUUID(playerId);
         if (player != null) {
-          List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - offset, posY - offset, posZ - offset, posX + offset, posY + offset, posZ + offset), o -> o != player);
-          for (EntityLivingBase entity : entities) {
-            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+          List<LivingEntity> entities = world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - offset, posY - offset, posZ - offset, posX + offset, posY + offset, posZ + offset), o -> o != player);
+          for (LivingEntity entity : entities) {
+            if (!(entity instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
               if (modifiers.has(instance.PEACEFUL) && EntityUtil.isFriendly(entity, SpellRoseThorns.instance)) {
                 continue;
               }
@@ -110,20 +110,20 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
                 entity.attackEntityFrom(ModDamage.roseDamageFrom(player), SpellRoseThorns.instance.undead_damage);
               }
               if (modifiers.has(SpellRoseThorns.STRENGTH)) {
-                player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, SpellRoseThorns.instance.strength_duration, SpellRoseThorns.instance.slowness_amplifier, false, false));
+                player.addPotionEffect(new EffectInstance(Effects.STRENGTH, SpellRoseThorns.instance.strength_duration, SpellRoseThorns.instance.slowness_amplifier, false, false));
               }
               if (modifiers.has(SpellRoseThorns.FIRE)) {
                 int fire_dur = SpellRoseThorns.instance.fire_duration;
                 entity.setFire(fire_dur);
               }
               if (modifiers.has(SpellRoseThorns.WEAKNESS)) {
-                entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, SpellRoseThorns.instance.weakness_duration, SpellRoseThorns.instance.weakness_amplifier));
+                entity.addPotionEffect(new EffectInstance(Effects.WEAKNESS, SpellRoseThorns.instance.weakness_duration, SpellRoseThorns.instance.weakness_amplifier));
               }
               if (modifiers.has(SpellRoseThorns.SLOW)) {
-                entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, SpellRoseThorns.instance.slowness_duration, SpellRoseThorns.instance.slowness_amplifier));
+                entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, SpellRoseThorns.instance.slowness_duration, SpellRoseThorns.instance.slowness_amplifier));
               }
               if (modifiers.has(SpellRoseThorns.POISON)) {
-                entity.addPotionEffect(new PotionEffect(MobEffects.POISON, SpellRoseThorns.instance.poison_duration, SpellRoseThorns.instance.poison_amplifier));
+                entity.addPotionEffect(new EffectInstance(Effects.POISON, SpellRoseThorns.instance.poison_duration, SpellRoseThorns.instance.poison_amplifier));
               }
               if (modifiers.has(SpellRoseThorns.BOOST)) {
                 entity.motionY = SpellRoseThorns.instance.knockup;
@@ -141,12 +141,12 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     super.readEntityFromNBT(compound);
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     super.writeEntityToNBT(compound);
   }
 

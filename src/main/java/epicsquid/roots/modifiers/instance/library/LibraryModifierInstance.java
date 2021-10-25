@@ -9,7 +9,7 @@ import epicsquid.roots.modifiers.instance.base.BaseModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.Collections;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class LibraryModifierInstance extends BaseModifierInstance {
   public LibraryModifierInstance() {
   }
 
-  public static LibraryModifierInstance fromNBT(NBTTagCompound tag) {
+  public static LibraryModifierInstance fromNBT(CompoundNBT tag) {
     LibraryModifierInstance result = new LibraryModifierInstance();
     result.deserializeNBT(tag);
     return result;

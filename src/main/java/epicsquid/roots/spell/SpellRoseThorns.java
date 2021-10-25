@@ -7,9 +7,9 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -67,7 +67,7 @@ public class SpellRoseThorns extends SpellBase {
   public void init() {
     addIngredients(
         new OreIngredient("blockCactus"),
-        new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.ROSE.getMeta()),
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, DoublePlantBlock.EnumPlantType.ROSE.getMeta()),
         new OreIngredient("stickWood"),
         new OreIngredient("dyeRed"),
         new ItemStack(ModItems.terra_moss)
@@ -76,7 +76,7 @@ public class SpellRoseThorns extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
       EntityThornTrap trap = new EntityThornTrap(player.world);
       trap.setPlayer(player.getUniqueID());

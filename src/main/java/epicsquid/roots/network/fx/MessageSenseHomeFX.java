@@ -5,12 +5,11 @@ import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -50,7 +49,7 @@ public class MessageSenseHomeFX implements IMessage {
         return;
       }
       World world = mc.world;
-      EntityPlayer player = mc.player;
+      PlayerEntity player = mc.player;
       Vec3d playerPos = player.getPositionVector().add(0, 1, 0);
       Vec3d line = new Vec3d(message.home.getX(), player.posY, message.home.getZ()).add(0.5, 0.5, 0.5);
       for (Vec3d vec : VecUtil.pointsBetween(playerPos, line, 15)) {

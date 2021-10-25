@@ -4,11 +4,11 @@ import epicsquid.mysticallib.block.BlockBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.item.Items;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -31,41 +31,41 @@ public abstract class BlockFeyLight extends BlockBase {
   }
 
   @Override
-  public BlockFaceShape getBlockFaceShape(final IBlockAccess worldIn, final IBlockState state, final BlockPos pos, final EnumFacing face) {
+  public BlockFaceShape getBlockFaceShape(final IBlockAccess worldIn, final BlockState state, final BlockPos pos, final Direction face) {
     return BlockFaceShape.UNDEFINED;
   }
 
   @Override
-  public EnumBlockRenderType getRenderType(final IBlockState state) {
-    return EnumBlockRenderType.INVISIBLE;
+  public BlockRenderType getRenderType(final BlockState state) {
+    return BlockRenderType.INVISIBLE;
   }
 
   @Override
-  public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos) {
+  public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockAccess source, final BlockPos pos) {
     return new AxisAlignedBB(0.33, 0.33, 0.33, 0.66, 0.66, 0.66);
   }
 
   @Override
-  public AxisAlignedBB getCollisionBoundingBox(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos) {
+  public AxisAlignedBB getCollisionBoundingBox(final BlockState state, final IBlockAccess worldIn, final BlockPos pos) {
     return null;
   }
 
   @Override
-  public boolean isFullCube(final IBlockState state) {
+  public boolean isFullCube(final BlockState state) {
     return false;
   }
 
   @Override
-  public boolean isOpaqueCube(final IBlockState state) {
+  public boolean isOpaqueCube(final BlockState state) {
     return false;
   }
 
   @SideOnly(Side.CLIENT)
   @Override
-  public abstract void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random);
+  public abstract void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random);
 
   @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+  public Item getItemDropped(BlockState state, Random rand, int fortune) {
     return Items.AIR;
   }
 }

@@ -5,9 +5,8 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
-import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.init.Items;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 

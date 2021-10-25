@@ -1,34 +1,29 @@
 package epicsquid.roots.entity.layer;
 
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellStormCloud;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.model.ModelWolf;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLivingBase;
-import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-public class AquaBubbleRenderer<T extends EntityLivingBase> implements LayerRenderer<T> {
+public class AquaBubbleRenderer<T extends LivingEntity> implements LayerRenderer<T> {
   private static final ResourceLocation AQUA_TEXTURE = new ResourceLocation(Roots.MODID, "textures/entity/aqua_bubble.png");
-  private final RenderLivingBase<T> renderer;
+  private final LivingRenderer<T> renderer;
   private final ModelBase model;
   private final boolean player;
 
-  public AquaBubbleRenderer(RenderLivingBase<T> renderer) {
+  public AquaBubbleRenderer(LivingRenderer<T> renderer) {
     this.renderer = renderer;
-    if (renderer instanceof RenderPlayer) {
-      boolean smallArms = ObfuscationReflectionHelper.getPrivateValue(ModelPlayer.class, ((RenderPlayer)renderer).getMainModel(), "field_178735_y");
+    if (renderer instanceof PlayerRenderer) {
+      boolean smallArms = ObfuscationReflectionHelper.getPrivateValue(ModelPlayer.class, ((PlayerRenderer)renderer).getMainModel(), "field_178735_y");
       this.model = new ModelPlayer(1.3f, smallArms);
       this.player = true;
     } else {

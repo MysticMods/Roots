@@ -8,7 +8,7 @@ import epicsquid.mysticallib.hax.Hax;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.particle.ParticleRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -56,7 +56,7 @@ public class ClientProxy extends CommonProxy {
 
   @Nullable
   @Override
-  public EntityPlayer getPlayer() {
+  public PlayerEntity getPlayer() {
     Minecraft mc = Minecraft.getMinecraft();
     //noinspection ConstantConditions
     if (mc == null) {

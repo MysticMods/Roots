@@ -13,13 +13,13 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import epicsquid.roots.properties.Property;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -75,7 +75,7 @@ public class SpellShatter extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.FLINT),
+        new ItemStack(net.minecraft.item.Items.FLINT),
         new ItemStack(Items.STONE_PICKAXE),
         new ItemStack(ModItems.stalicripe),
         new ItemStack(Item.getItemFromBlock(Blocks.TNT)),
@@ -85,14 +85,14 @@ public class SpellShatter extends SpellBase {
   }
 
   @Nullable
-  public static AxisAlignedBB getBox(EntityPlayer player, StaffModifierInstanceList info, RayTraceResult result) {
+  public static AxisAlignedBB getBox(PlayerEntity player, StaffModifierInstanceList info, RayTraceResult result) {
     if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
       BlockPos pos = result.getBlockPos();
-      EnumFacing side = result.sideHit;
-      EnumFacing playerFacing = player.getHorizontalFacing();
-      EnumFacing width = EnumFacing.fromAngle(playerFacing.getHorizontalAngle() + 90);
-      EnumFacing height = side.getAxis() != EnumFacing.Axis.Y ? EnumFacing.DOWN : playerFacing.getOpposite();
-      EnumFacing depth = side.getOpposite();
+      Direction side = result.sideHit;
+      Direction playerFacing = player.getHorizontalFacing();
+      Direction width = Direction.fromAngle(playerFacing.getHorizontalAngle() + 90);
+      Direction height = side.getAxis() != Axis.Y ? Direction.DOWN : playerFacing.getOpposite();
+      Direction depth = side.getOpposite();
 
       BlockPos start = pos;
       BlockPos stop = pos;
@@ -124,7 +124,7 @@ public class SpellShatter extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     Vec3d eyes = new Vec3d(0, (double) player.getEyeHeight(), 0);
     RayTraceResult result = RayCastUtil.rayTraceBlocks(player.world, player.getPositionVector().add(eyes), player.getLookVec().scale(distance).add(player.getPositionVector().add(eyes)), false, false, false, false);
 
@@ -140,11 +140,11 @@ public class SpellShatter extends SpellBase {
     List<BlockPos> mossPositions = new ArrayList<>();
     boolean noMoss = MossConfig.getBlacklistDimensions().contains(player.world.provider.getDimension());
     for (BlockPos p : AABBUtil.unique(box)) {
-      IBlockState state = player.world.getBlockState(p);
+      BlockState state = player.world.getBlockState(p);
       // TODO: Update this as per silk touch
       boolean didMoss = false;
       if (info.has(KNIFE) && !noMoss) {
-        IBlockState mossState = MossConfig.scrapeResult(state);
+        BlockState mossState = MossConfig.scrapeResult(state);
         if (mossState != null) {
           broke = true;
           didMoss = true;

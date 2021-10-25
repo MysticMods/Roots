@@ -1,17 +1,16 @@
 package epicsquid.roots.integration.jei.shears;
 
 import com.google.common.collect.Lists;
-import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.SummonCreatureIntermediate;
 import epicsquid.roots.util.RenderUtil;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 
 public class RunicShearsSummonEntityWrapper implements IRecipeWrapper {
-  public EntityLivingBase entity = null;
+  public LivingEntity entity = null;
   public final SummonCreatureIntermediate recipe;
 
   public RunicShearsSummonEntityWrapper(SummonCreatureIntermediate recipe) {
@@ -36,7 +35,7 @@ public class RunicShearsSummonEntityWrapper implements IRecipeWrapper {
     RenderUtil.drawEntityOnScreen(30, 70, scale, 38 - mouseX, 70 - mouseY, entity);
   }
 
-  public static float getScale(EntityLivingBase entityLivingBase) {
+  public static float getScale(LivingEntity entityLivingBase) {
     float width = entityLivingBase.width;
     float height = entityLivingBase.height;
     if (width <= height) {

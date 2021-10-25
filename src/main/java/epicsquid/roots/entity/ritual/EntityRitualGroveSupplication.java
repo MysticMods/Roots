@@ -9,8 +9,8 @@ import epicsquid.roots.network.fx.MessageGroveCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualGroveSupplication;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -54,7 +54,7 @@ public class EntityRitualGroveSupplication extends EntityRitualBase {
       List<BlockPos> changed = new ArrayList<>();
 
       for (BlockPos pos : positions) {
-        IBlockState state = world.getBlockState(pos);
+        BlockState state = world.getBlockState(pos);
         if (state.getBlock() != ModBlocks.grove_stone) {
           continue;
         }
@@ -69,7 +69,7 @@ public class EntityRitualGroveSupplication extends EntityRitualBase {
         if (!world.isRemote) {
           world.setBlockState(pos, state.withProperty(BlockGroveStone.VALID, true));
           // -> How to handle this
-          EntityPlayerMP player = (EntityPlayerMP) getPlayerEntity();
+          ServerPlayerEntity player = (ServerPlayerEntity) getPlayerEntity();
           if (player != null) {
             Advancements.GROVE_TRIGGER.trigger(player, null);
           }

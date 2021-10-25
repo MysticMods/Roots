@@ -11,11 +11,11 @@ import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
@@ -87,7 +87,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       float w = width;
       if (info.has(BIGGER)) {
@@ -165,9 +165,9 @@ public class SpellRadiance extends SpellBase {
             double x = positions.get(i).x * (1.0f - j) + positions.get(i + 1).x * j;
             double y = positions.get(i).y * (1.0f - j) + positions.get(i + 1).y * j;
             double z = positions.get(i).z * (1.0f - j) + positions.get(i + 1).z * j;
-            List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
-            for (EntityLivingBase e : entities) {
-              if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+            List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
+            for (LivingEntity e : entities) {
+              if (e != player && !(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
                 if (info.has(HEALING)) {
                   if (!EntityUtil.isFriendly(e, SpellRadiance.instance)) {
                     continue;
@@ -192,19 +192,19 @@ public class SpellRadiance extends SpellBase {
                     e.setRevengeTarget(player);
                     player.setLastAttackedEntity(e);
                     if (info.has(WITHER)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.WITHER, wither_duration));
+                      e.addPotionEffect(new EffectInstance(Effects.WITHER, wither_duration));
                     }
                     if (info.has(GLOWING)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.GLOWING, glow_duration));
+                      e.addPotionEffect(new EffectInstance(Effects.GLOWING, glow_duration));
                     }
                     if (info.has(POISON)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
+                      e.addPotionEffect(new EffectInstance(Effects.POISON, poison_duration, poison_amplifier));
                     }
                     if (info.has(FIRE)) {
                       e.setFire(fire_duration);
                     }
                     if (info.has(SLOW)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slowness_duration, slowness_amplifier));
+                      e.addPotionEffect(new EffectInstance(Effects.SLOWNESS, slowness_duration, slowness_amplifier));
                     }
 
                     count++;

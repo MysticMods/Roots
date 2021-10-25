@@ -1,6 +1,6 @@
 package epicsquid.roots.world.data;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 
 import java.util.UUID;
 
@@ -15,7 +15,7 @@ public class SpellLibraryRegistry extends UUIDRegistry<SpellLibraryData> {
     return INSTANCE.getDataInternal(id);
   }
 
-  public static SpellLibraryData getData(EntityPlayer player) {
+  public static SpellLibraryData getData(PlayerEntity player) {
     return getData(player.getUniqueID());
   }
 
@@ -23,7 +23,7 @@ public class SpellLibraryRegistry extends UUIDRegistry<SpellLibraryData> {
     return INSTANCE.clearDataInternal(id);
   }
 
-  public static SpellLibraryData clearData (EntityPlayer player) {
+  public static SpellLibraryData clearData (PlayerEntity player) {
     return clearData(player.getUniqueID());
   }
 }

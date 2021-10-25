@@ -5,13 +5,13 @@ import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.item.PouchType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class OldPouchHandler implements INBTSerializable<NBTTagCompound> {
+public class OldPouchHandler implements INBTSerializable<CompoundNBT> {
   public static final int COMPONENT_POUCH_HERB_SLOTS = 6;
   public static final int COMPONENT_POUCH_INVENTORY_SLOTS = 12;
   public static final int APOTHECARY_POUCH_HERB_SLOTS = 9;
@@ -41,17 +41,17 @@ public class OldPouchHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound tag = new NBTTagCompound();
+  public CompoundNBT serializeNBT() {
+    CompoundNBT tag = new CompoundNBT();
     tag.setTag("inventory_slots", inventorySlots.serializeNBT());
     tag.setTag("herb_slots", herbSlots.serializeNBT());
     return tag;
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
-    NBTTagCompound inv = nbt.getCompoundTag("inventory_slots");
-    NBTTagCompound herb = nbt.getCompoundTag("herb_slots");
+  public void deserializeNBT(CompoundNBT nbt) {
+    CompoundNBT inv = nbt.getCompoundTag("inventory_slots");
+    CompoundNBT herb = nbt.getCompoundTag("herb_slots");
     if (isApoth) {
       if (inv.getInteger("Size") != APOTHECARY_POUCH_INVENTORY_SLOTS) {
         inv.setInteger("Size", APOTHECARY_POUCH_INVENTORY_SLOTS);
@@ -73,7 +73,7 @@ public class OldPouchHandler implements INBTSerializable<NBTTagCompound> {
       handler = new OldPouchHandler(stack, COMPONENT_POUCH_INVENTORY_SLOTS, COMPONENT_POUCH_HERB_SLOTS);
     }
     if (stack.hasTagCompound()) {
-      NBTTagCompound tag = stack.getTagCompound();
+      CompoundNBT tag = stack.getTagCompound();
       if (tag.hasKey("handler")) {
         handler.deserializeNBT(tag.getCompoundTag("handler"));
       }
@@ -83,9 +83,9 @@ public class OldPouchHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   public void saveToStack() {
-    NBTTagCompound tag = pouch.getTagCompound();
+    CompoundNBT tag = pouch.getTagCompound();
     if (tag == null) {
-      tag = new NBTTagCompound();
+      tag = new CompoundNBT();
       pouch.setTagCompound(tag);
     }
 

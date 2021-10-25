@@ -9,22 +9,22 @@ import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.model.ModelBakery;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.UseAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -50,13 +50,13 @@ public class ItemStaff extends ItemBase {
     return slotChanged || (oldCapability != null && newCapability != null && oldCapability.getSelectedSlot() != newCapability.getSelectedSlot());
   }
 
-  public ItemStack nextSlot(World world, EntityPlayer player, ItemStack stack, StaffSpellStorage capability) {
+  public ItemStack nextSlot(World world, PlayerEntity player, ItemStack stack, StaffSpellStorage capability) {
     capability.nextSlot();
     if (world.isRemote) {
       StaffSpellInfo info = capability.getSelectedInfo();
       if (info != null) {
         SpellBase spell = info.getSpell();
-        player.sendStatusMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot(), spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)), true);
+        player.sendStatusMessage(new TranslationTextComponent("roots.info.staff.slot_and_spell", capability.getSelectedSlot(), spell == null ? "none" : new TranslationTextComponent("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)), true);
       }
     }
     return stack;
@@ -64,11 +64,11 @@ public class ItemStaff extends ItemBase {
 
   @Nonnull
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+  public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
     ItemStack stack = player.getHeldItem(hand);
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
     if (player.isSneaking() && capability != null) {
-      return new ActionResult<>(EnumActionResult.SUCCESS, nextSlot(world, player, stack, capability));
+      return new ActionResult<>(ActionResultType.SUCCESS, nextSlot(world, player, stack, capability));
     } else {
       if (capability != null && !capability.onCooldown()) {
         StaffSpellInfo info = capability.getSelectedInfo();
@@ -85,30 +85,30 @@ public class ItemStaff extends ItemBase {
                   }
                 }
               }
-              return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+              return new ActionResult<>(ActionResultType.SUCCESS, stack);
             }
           } else if (spell != null && spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             player.setActiveHand(hand);
-            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+            return new ActionResult<>(ActionResultType.SUCCESS, stack);
           }
         }
       }
     }
-    return new ActionResult<>(EnumActionResult.FAIL, player.getHeldItem(hand));
+    return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
   }
 
   @Override
-  public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
+  public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-    if (player instanceof EntityPlayer && capability != null) {
+    if (player instanceof PlayerEntity && capability != null) {
       StaffSpellInfo info = capability.getSelectedInfo();
       SpellBase spell = info == null ? null : info.getSpell();
       if (spell != null) {
         if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-          if (spell.costsMet((EntityPlayer) player, info.getModifiers())) {
-            SpellBase.CastResult result = spell.cast((EntityPlayer) player, info, count);
+          if (spell.costsMet((PlayerEntity) player, info.getModifiers())) {
+            SpellBase.CastResult result = spell.cast((PlayerEntity) player, info, count);
             if (result.isSuccess() && !player.world.isRemote) {
-              spell.enactTickCosts((EntityPlayer) player, info.getModifiers());
+              spell.enactTickCosts((PlayerEntity) player, info.getModifiers());
             }
           }
         }
@@ -117,14 +117,14 @@ public class ItemStaff extends ItemBase {
   }
 
   @Override
-  public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entity, int timeLeft) {
+  public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entity, int timeLeft) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
     if (capability == null) {
       return;
     }
     StaffSpellInfo info = capability.getSelectedInfo();
     SpellBase spell = info == null ? null : info.getSpell();
-    EntityPlayer player = (EntityPlayer) entity;
+    PlayerEntity player = (PlayerEntity) entity;
     if (spell != null) {
       if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
         if (!player.isCreative()) {
@@ -180,7 +180,7 @@ public class ItemStaff extends ItemBase {
       tooltip.add("");
       tooltip.add("No spell.");
     }
-    if (GuiScreen.isShiftKeyDown()) {
+    if (Screen.isShiftKeyDown()) {
       tooltip.add("");
       for (int i = StaffSpellStorage.MIN_SPELL_SLOT; i <= StaffSpellStorage.MAX_SPELL_SLOT; i++) {
         info = capability.getSpellInSlot(i);
@@ -237,29 +237,29 @@ public class ItemStaff extends ItemBase {
 
   @Nonnull
   @Override
-  public EnumAction getItemUseAction(ItemStack stack) {
+  public UseAction getItemUseAction(ItemStack stack) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
     if (capability == null) {
-      return EnumAction.NONE;
+      return UseAction.NONE;
     }
     StaffSpellInfo info = capability.getSelectedInfo();
     if (info != null) {
       SpellBase spell = info.getSpell();
       if (spell != null) {
         if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-          return EnumAction.BOW;
+          return UseAction.BOW;
         } else {
-          return EnumAction.NONE;
+          return UseAction.NONE;
         }
       }
     }
-    return EnumAction.NONE;
+    return UseAction.NONE;
   }
 
   @SideOnly(Side.CLIENT)
   @Override
   public void initModel() {
-    ModelBakery.registerItemVariants(this, new ModelResourceLocation(getRegistryName().toString()), new ModelResourceLocation(getRegistryName().toString() + "_1"));
+    ModelBakery.registerItemVariants(this, new ModelResourceLocation(getRegistryName().toString()), new net.minecraft.client.renderer.model.ModelResourceLocation(getRegistryName().toString() + "_1"));
     ModelLoader.setCustomMeshDefinition(this, stack -> {
       ResourceLocation baseName = getRegistryName();
 
@@ -267,7 +267,7 @@ public class ItemStaff extends ItemBase {
       if (capability != null && capability.hasSpellInSlot()) {
         return new ModelResourceLocation(baseName.toString() + "_1");
       } else {
-        return new ModelResourceLocation(baseName.toString());
+        return new net.minecraft.client.renderer.model.ModelResourceLocation(baseName.toString());
       }
     });
   }

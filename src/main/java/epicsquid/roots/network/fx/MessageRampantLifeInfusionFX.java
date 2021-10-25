@@ -4,13 +4,12 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -55,7 +54,7 @@ public class MessageRampantLifeInfusionFX implements IMessage {
     protected void handleMessage(final MessageRampantLifeInfusionFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       BlockPos pos = new BlockPos(message.posX, message.posY, message.posZ);
-      IBlockState state = world.getBlockState(pos);
+      BlockState state = world.getBlockState(pos);
       state.getBlock().randomDisplayTick(state, world, pos, Util.rand);
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {

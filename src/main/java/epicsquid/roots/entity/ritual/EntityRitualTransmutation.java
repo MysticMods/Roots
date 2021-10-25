@@ -9,7 +9,7 @@ import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualTransmutation;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

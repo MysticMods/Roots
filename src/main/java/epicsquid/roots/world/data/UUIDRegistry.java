@@ -1,6 +1,6 @@
 package epicsquid.roots.world.data;
 
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -22,7 +22,7 @@ public abstract class UUIDRegistry<T extends WorldSavedData> {
 
   @SuppressWarnings("unchecked")
   public T getDataInternal(UUID id) {
-    WorldServer server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
+    ServerWorld server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
     MapStorage storage = server.getMapStorage();
     if (storage == null) {
       throw new NullPointerException("Map storage is null");
@@ -38,7 +38,7 @@ public abstract class UUIDRegistry<T extends WorldSavedData> {
   }
 
   public T clearDataInternal(UUID id) {
-    WorldServer server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
+    ServerWorld server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
     MapStorage storage = server.getMapStorage();
     if (storage == null) {
       throw new NullPointerException("Map storage is null");

@@ -3,7 +3,7 @@ package epicsquid.roots.network;
 import epicsquid.roots.container.IInvalidatingContainer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,7 +30,7 @@ public class MessageInvalidateContainer implements IMessage {
       if (mc == null || mc.player == null) {
         return;
       }
-      EntityPlayer player = mc.player;
+      PlayerEntity player = mc.player;
       if (player.openContainer instanceof IInvalidatingContainer) {
         ((IInvalidatingContainer) player.openContainer).invalidate();
       }

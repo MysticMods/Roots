@@ -4,8 +4,8 @@ import epicsquid.roots.container.ContainerLibrary;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.util.PlayerSyncUtil;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
@@ -32,7 +32,7 @@ public class MessageServerDeleteSpell implements IMessage {
   public static class MessageHolder extends ServerMessageHandler<MessageServerDeleteSpell> {
     @Override
     protected void handleMessage(MessageServerDeleteSpell message, MessageContext ctx) {
-      EntityPlayerMP player = ctx.getServerHandler().player;
+      ServerPlayerEntity player = ctx.getServerHandler().player;
       if (player.openContainer instanceof ContainerLibrary) {
         ContainerLibrary container = (ContainerLibrary) player.openContainer;
         StaffSpellStorage storage = container.getSpellStorage();
@@ -40,10 +40,10 @@ public class MessageServerDeleteSpell implements IMessage {
           storage.clearSlot(message.slot);
           PlayerSyncUtil.syncPlayer(player);
         } else {
-          player.sendStatusMessage(new TextComponentTranslation("roots.message.no_storage"), true);
+          player.sendStatusMessage(new TranslationTextComponent("roots.message.no_storage"), true);
         }
       } else {
-        player.sendStatusMessage(new TextComponentTranslation("roots.message.no_library"), true);
+        player.sendStatusMessage(new TranslationTextComponent("roots.message.no_library"), true);
       }
     }
   }

@@ -12,20 +12,20 @@ import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.model.block.BakedModelBlock;
 import epicsquid.mysticallib.model.block.BakedModelPressurePlate;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPressurePlate;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +35,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockPressurePlateBase extends BlockPressurePlate implements IBlock, IModeledObject, ICustomModeledObject {
+public class BlockPressurePlateBase extends PressurePlateBlock implements IBlock, IModeledObject, ICustomModeledObject {
   private @Nonnull Item itemBlock;
   public List<ItemStack> drops = null;
   private boolean isOpaque = false;
@@ -59,7 +59,7 @@ public class BlockPressurePlateBase extends BlockPressurePlate implements IBlock
     setHardness(hardness);
     setOpacity(false);
     this.fullBlock = false;
-    itemBlock = new ItemBlock(this).setTranslationKey(name).setRegistryName(LibRegistry.getActiveModid(), name);
+    itemBlock = new BlockItem(this).setTranslationKey(name).setRegistryName(LibRegistry.getActiveModid(), name);
     this.plateType = plateType;
   }
 
@@ -102,7 +102,7 @@ public class BlockPressurePlateBase extends BlockPressurePlate implements IBlock
 
   @Override
   @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return isOpaque;
   }
 
@@ -112,22 +112,22 @@ public class BlockPressurePlateBase extends BlockPressurePlate implements IBlock
 
   @Override
   @SuppressWarnings("deprecation")
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Override
-  public boolean canPlaceTorchOnTop(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+  public boolean canPlaceTorchOnTop(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
     return true;
   }
 
   @Override
-  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction face) {
     return isFlammable || super.isFlammable(world, pos, face);
   }
 
   @Override
-  public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+  public int getFlammability(IBlockAccess world, BlockPos pos, Direction face) {
     return isFlammable ? 100 : super.getFlammability(world, pos, face);
   }
 
@@ -145,14 +145,14 @@ public class BlockPressurePlateBase extends BlockPressurePlate implements IBlock
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     this.itemBlock = block;
     return block;
   }
 
   @Override
   @SuppressWarnings("deprecation")
-  public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+  public ItemStack getItem(World worldIn, BlockPos pos, BlockState state) {
     return new ItemStack(itemBlock);
   }
 
@@ -196,13 +196,13 @@ public class BlockPressurePlateBase extends BlockPressurePlate implements IBlock
       list = worldIn.getEntitiesWithinAABBExcludingEntity(null, axisalignedbb);
       break;
     case MOBS:
-      list = worldIn.<Entity>getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
+      list = worldIn.<Entity>getEntitiesWithinAABB(LivingEntity.class, axisalignedbb);
       break;
     case ITEMS:
-      list = worldIn.getEntitiesWithinAABB(EntityItem.class, axisalignedbb);
+      list = worldIn.getEntitiesWithinAABB(ItemEntity.class, axisalignedbb);
       break;
     case PLAYER:
-      list = worldIn.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
+      list = worldIn.getEntitiesWithinAABB(PlayerEntity.class, axisalignedbb);
       break;
     default:
       return 0;

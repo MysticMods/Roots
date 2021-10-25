@@ -8,18 +8,14 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.dispenser.DispenseKnife;
 import epicsquid.roots.util.RitualUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -36,24 +32,24 @@ public class ItemDruidKnife extends ItemKnifeBase {
     super(name, material, () -> Ingredient.EMPTY);
     ModItems.knives.add(this);
 
-    BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseKnife.getInstance());
+    DispenserBlock.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseKnife.getInstance());
   }
 
   @Override
   @Nonnull
   @SuppressWarnings("deprecation")
-  public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
-    if (hand == EnumHand.MAIN_HAND) {
-      IBlockState state = world.getBlockState(pos);
+  public ActionResultType onItemUse(@Nonnull PlayerEntity player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Hand hand, @Nonnull Direction facing, float hitX, float hitY, float hitZ) {
+    if (hand == Hand.MAIN_HAND) {
+      BlockState state = world.getBlockState(pos);
       Block block = state.getBlock();
       if (player.isSneaking() && block == ModBlocks.reinforced_pyre || block == ModBlocks.pyre) {
         if (block.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ)) {
-          return EnumActionResult.SUCCESS;
+          return ActionResultType.SUCCESS;
         }
       }
       if (!MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
         // Used to get terramoss from a block of cobble. This can also be done using runic shears.
-        IBlockState result = MossConfig.scrapeResult(state);
+        BlockState result = MossConfig.scrapeResult(state);
         if (result != null) {
           if (!world.isRemote) {
             world.setBlockState(pos, result);
@@ -63,11 +59,11 @@ public class ItemDruidKnife extends ItemKnifeBase {
               player.getHeldItem(hand).damageItem(1, player);
             }
           }
-          world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
-          return EnumActionResult.SUCCESS;
+          world.playSound(player, pos, net.minecraft.util.SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+          return ActionResultType.SUCCESS;
         }
       }
-      IBlockState result = RitualUtil.RunedWoodType.matchesAny(state);
+      BlockState result = RitualUtil.RunedWoodType.matchesAny(state);
       ItemStack offHand = player.getHeldItemOffhand();
       if (result != null && offHand.getItem() == ModItems.wildroot) {
         if (!world.isRemote) {
@@ -76,14 +72,14 @@ public class ItemDruidKnife extends ItemKnifeBase {
           if (!player.capabilities.isCreativeMode) {
             player.getHeldItem(hand).damageItem(1, player);
             offHand.shrink(1);
-            player.setHeldItem(EnumHand.OFF_HAND, offHand.isEmpty() ? ItemStack.EMPTY : offHand);
+            player.setHeldItem(Hand.OFF_HAND, offHand.isEmpty() ? ItemStack.EMPTY : offHand);
           }
           world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1f, 1f);
         }
-        return EnumActionResult.SUCCESS;
+        return ActionResultType.SUCCESS;
       }
     }
-    return EnumActionResult.PASS;
+    return ActionResultType.PASS;
   }
 
   @Override

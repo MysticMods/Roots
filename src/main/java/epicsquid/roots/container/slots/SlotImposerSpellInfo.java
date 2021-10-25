@@ -1,16 +1,16 @@
 package epicsquid.roots.container.slots;
 
 import epicsquid.roots.spell.info.StaffSpellInfo;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 
 public class SlotImposerSpellInfo extends Slot {
-  private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
+  private static IInventory emptyInventory = new Inventory("[Null]", true, 0);
   private final ISlotProvider info;
   private final IBooleanProvider isHidden;
   private int slot;
@@ -23,7 +23,7 @@ public class SlotImposerSpellInfo extends Slot {
   }
 
   @Override
-  public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
+  public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack) {
     return ItemStack.EMPTY;
   }
 
@@ -93,7 +93,7 @@ public class SlotImposerSpellInfo extends Slot {
   }
 
   @Override
-  public boolean canTakeStack(EntityPlayer playerIn) {
+  public boolean canTakeStack(PlayerEntity playerIn) {
     return false;
   }
 
@@ -103,7 +103,7 @@ public class SlotImposerSpellInfo extends Slot {
   }
 
   @Override
-  public boolean isSameInventory(Slot other) {
+  public boolean isSameInventory(net.minecraft.inventory.container.Slot other) {
     if (other instanceof SlotImposerSpellInfo) {
       return ((SlotImposerSpellInfo) other).info.apply(slot).equals(info.apply(slot));
     }

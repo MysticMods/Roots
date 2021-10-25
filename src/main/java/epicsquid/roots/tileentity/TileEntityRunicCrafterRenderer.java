@@ -4,10 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
 
@@ -80,16 +80,16 @@ public class TileEntityRunicCrafterRenderer extends TileEntityRenderer<TileEntit
     TextureManager tm = mc.getTextureManager();
 
     IBakedModel bakedmodel = ri.getItemModelWithOverrides(result, null, null);
-    tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-    tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
+    tm.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
+    tm.getTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
     GlStateManager.pushMatrix();
     ri.renderItem(result, bakedmodel);
     GlStateManager.cullFace(GlStateManager.CullFace.BACK);
     GlStateManager.popMatrix();
     GlStateManager.disableRescaleNormal();
     GlStateManager.disableBlend();
-    tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-    tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
+    tm.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
+    tm.getTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
 
     GlStateManager.popMatrix();
     GlStateManager.color(1F, 1F, 1F, 1F);

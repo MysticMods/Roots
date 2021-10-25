@@ -4,7 +4,7 @@ import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
 import epicsquid.roots.tileentity.TileEntityPyre;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +16,7 @@ public class CTSummonCreaturesRecipe extends SummonCreatureRecipe {
   private List<IIngredient> ingredients;
   private List<Ingredient> convertedIngredients;
 
-  public CTSummonCreaturesRecipe(ResourceLocation resource, Class<? extends EntityLivingBase> clazz, List<IIngredient> ingredients) {
+  public CTSummonCreaturesRecipe(ResourceLocation resource, Class<? extends LivingEntity> clazz, List<IIngredient> ingredients) {
     super(resource, clazz);
     this.ingredients = ingredients;
     this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());

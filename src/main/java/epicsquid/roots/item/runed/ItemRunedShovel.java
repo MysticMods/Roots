@@ -6,14 +6,11 @@ import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -33,21 +30,21 @@ public class ItemRunedShovel extends ItemExcavatorBase implements ILivingRepair 
   }
 
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public ActionResultType onItemUse(PlayerEntity player, World worldIn, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     Block block = worldIn.getBlockState(pos).getBlock();
 
     // TODO: Make this AoE
 
-    if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == Blocks.DIRT)) {
+    if (facing != Direction.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == net.minecraft.block.Blocks.DIRT)) {
       if (!worldIn.isRemote) {
-        worldIn.playSound(null, pos, Blocks.GRASS_PATH.getSoundType().getStepSound(), SoundCategory.BLOCKS, 1F, 1F);
-        worldIn.setBlockState(pos, Blocks.GRASS_PATH.getDefaultState());
+        worldIn.playSound(null, pos, net.minecraft.block.Blocks.GRASS_PATH.getSoundType().getStepSound(), SoundCategory.BLOCKS, 1F, 1F);
+        worldIn.setBlockState(pos, net.minecraft.block.Blocks.GRASS_PATH.getDefaultState());
         if (!player.capabilities.isCreativeMode) {
           stack.damageItem(1, player);
         }
       }
-      return EnumActionResult.SUCCESS;
+      return ActionResultType.SUCCESS;
     }
 
     return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

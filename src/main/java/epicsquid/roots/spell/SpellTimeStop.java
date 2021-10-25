@@ -9,12 +9,12 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageTimeStopStartFX;
 import epicsquid.roots.properties.Property;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.PotionTypes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Potions;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Effects;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -74,7 +74,7 @@ public class SpellTimeStop extends SpellBase {
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
-        PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.SLOWNESS),
+        PotionUtils.addPotionToItemStack(new ItemStack(net.minecraft.item.Items.POTIONITEM), Potions.SLOWNESS),
         new ItemStack(ModItems.pereskia),
         new ItemStack(Items.CLOCK)
     );
@@ -82,7 +82,7 @@ public class SpellTimeStop extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
       int dur = duration;
       if (info.has(LONGER)) {
@@ -98,7 +98,7 @@ public class SpellTimeStop extends SpellBase {
       player.world.spawnEntity(timeStop);
       PacketHandler.sendToAllTracking(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ), player);
       if (info.has(SPEED)) {
-        player.addPotionEffect(new PotionEffect(MobEffects.SPEED, speed_duration, speed_amplifier));
+        player.addPotionEffect(new EffectInstance(Effects.SPEED, speed_duration, speed_amplifier));
       }
     }
     return true;

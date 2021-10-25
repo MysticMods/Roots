@@ -5,23 +5,23 @@ import epicsquid.mysticallib.model.CustomModelItem;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nullable;
 
-public class ItemArmorBase extends ItemArmor implements IModeledObject, ICustomModeledObject {
+public class ItemArmorBase extends ArmorItem implements IModeledObject, ICustomModeledObject {
   private boolean hasCustomModel;
 
   private String armor1;
   private String armor2;
 
-  public ItemArmorBase(String name, ArmorMaterial materialIn, EntityEquipmentSlot equipmentSlotIn, ResourceLocation armor) {
+  public ItemArmorBase(String name, ArmorMaterial materialIn, EquipmentSlotType equipmentSlotIn, ResourceLocation armor) {
     super(materialIn, 0, equipmentSlotIn);
     this.armor1 = armor.toString() + "_1.png";
     this.armor2 = armor.toString() + "_2.png";
@@ -31,8 +31,8 @@ public class ItemArmorBase extends ItemArmor implements IModeledObject, ICustomM
 
   @Nullable
   @Override
-  public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-    if (slot == EntityEquipmentSlot.LEGS) {
+  public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+    if (slot == EquipmentSlotType.LEGS) {
       return armor2;
     }
 

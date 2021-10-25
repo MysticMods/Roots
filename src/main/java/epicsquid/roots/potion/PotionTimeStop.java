@@ -3,19 +3,17 @@ package epicsquid.roots.potion;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityTimeStop;
 import epicsquid.roots.init.ModDamage;
-import epicsquid.roots.init.ModSounds;
-import epicsquid.roots.spell.SpellAugment;
 import epicsquid.roots.spell.SpellTimeStop;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionTimeStop extends Potion {
+public class PotionTimeStop extends Effect {
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
   public PotionTimeStop() {
@@ -31,7 +29,7 @@ public class PotionTimeStop extends Potion {
   }
 
   @Override
-  public boolean shouldRender(PotionEffect effect) {
+  public boolean shouldRender(EffectInstance effect) {
     return true;
   }
 
@@ -43,7 +41,7 @@ public class PotionTimeStop extends Potion {
   }
 
   @Override
-  public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+  public void removeAttributesModifiersFromEntity(LivingEntity entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
     if (!EntityTimeStop.refreshing) {
       entityLivingBaseIn.attackEntityFrom(ModDamage.COLD_DAMAGE, SpellTimeStop.instance.cold_damage);

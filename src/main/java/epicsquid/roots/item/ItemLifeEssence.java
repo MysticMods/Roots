@@ -5,11 +5,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -50,9 +50,9 @@ public class ItemLifeEssence extends ItemBase {
 
   @Nullable
   public ResourceLocation getEntityID(ItemStack stack) {
-    NBTTagCompound tag = stack.getTagCompound();
+    CompoundNBT tag = stack.getTagCompound();
     if (tag == null) {
-      tag = new NBTTagCompound();
+      tag = new CompoundNBT();
       stack.setTagCompound(tag);
     }
 
@@ -108,6 +108,6 @@ public class ItemLifeEssence extends ItemBase {
 
   @Override
   public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-    return stack.getItem() == this && enchantment == Enchantments.UNBREAKING;
+    return stack.getItem() == this && enchantment == net.minecraft.enchantment.Enchantments.UNBREAKING;
   }
 }

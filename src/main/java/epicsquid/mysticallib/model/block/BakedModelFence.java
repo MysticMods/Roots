@@ -11,12 +11,12 @@ import epicsquid.mysticallib.model.CustomModelBase;
 import epicsquid.mysticallib.model.ModelUtil;
 import epicsquid.mysticallib.model.parts.Cube;
 import epicsquid.mysticallib.struct.Vec4f;
-import net.minecraft.block.BlockWall;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.WallBlock;
+import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.model.IModelState;
 
@@ -45,23 +45,23 @@ public class BakedModelFence extends BakedModelBlock {
 
   @Override
   @Nonnull
-  public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
-    List<BakedQuad> quads = new ArrayList<>();
+  public List<net.minecraft.client.renderer.model.BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, long rand) {
+    List<net.minecraft.client.renderer.model.BakedQuad> quads = new ArrayList<>();
     getFaceQuads(quads, side, state);
     return quads;
   }
 
-  private void getFaceQuads(@Nonnull List<BakedQuad> quads, @Nullable EnumFacing side, @Nullable IBlockState state) {
+  private void getFaceQuads(@Nonnull List<BakedQuad> quads, @Nullable Direction side, @Nullable BlockState state) {
     if (state == null) {
       post_left.addToList(quads, side);
       post_right.addToList(quads, side);
       west.addToList(quads, side);
       west_top.addToList(quads, side);
     } else {
-      boolean cnorth = state.getValue(BlockWall.NORTH);
-      boolean csouth = state.getValue(BlockWall.SOUTH);
-      boolean cwest = state.getValue(BlockWall.WEST);
-      boolean ceast = state.getValue(BlockWall.EAST);
+      boolean cnorth = state.getValue(WallBlock.NORTH);
+      boolean csouth = state.getValue(WallBlock.SOUTH);
+      boolean cwest = state.getValue(WallBlock.WEST);
+      boolean ceast = state.getValue(WallBlock.EAST);
 
       post.addToList(quads, side);
 

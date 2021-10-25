@@ -6,17 +6,16 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.model.IModeledObject;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockButtonWood;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.block.*;
+import net.minecraft.block.WoodButtonBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -24,7 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockButtonWoodBase extends BlockButtonWood implements IBlock, IModeledObject {
+public class BlockButtonWoodBase extends WoodButtonBlock implements IBlock, IModeledObject {
   private @Nonnull Item itemBlock;
   public List<ItemStack> drops = null;
   private boolean isOpaque = false;
@@ -46,7 +45,7 @@ public class BlockButtonWoodBase extends BlockButtonWood implements IBlock, IMod
     setHardness(hardness);
     setOpacity(false);
     this.fullBlock = false;
-    itemBlock = new ItemBlock(this).setTranslationKey(name).setRegistryName(LibRegistry.getActiveModid(), name);
+    itemBlock = new BlockItem(this).setTranslationKey(name).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
   @Nonnull
@@ -88,7 +87,7 @@ public class BlockButtonWoodBase extends BlockButtonWood implements IBlock, IMod
 
   @Override
   @SuppressWarnings("deprecation")
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return isOpaque;
   }
 
@@ -98,22 +97,22 @@ public class BlockButtonWoodBase extends BlockButtonWood implements IBlock, IMod
 
   @Override
   @SuppressWarnings("deprecation")
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Override
-  public boolean canPlaceTorchOnTop(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+  public boolean canPlaceTorchOnTop(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
     return true;
   }
 
   @Override
-  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+  public boolean isFlammable(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Direction face) {
     return isFlammable || super.isFlammable(world, pos, face);
   }
 
   @Override
-  public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+  public int getFlammability(IBlockAccess world, BlockPos pos, Direction face) {
     return isFlammable ? 100 : super.getFlammability(world, pos, face);
   }
 
@@ -131,14 +130,14 @@ public class BlockButtonWoodBase extends BlockButtonWood implements IBlock, IMod
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     this.itemBlock = block;
     return block;
   }
 
   @Override
   @SuppressWarnings("deprecation")
-  public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+  public ItemStack getItem(World worldIn, BlockPos pos, BlockState state) {
     return new ItemStack(itemBlock);
   }
 

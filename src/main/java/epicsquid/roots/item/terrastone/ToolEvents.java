@@ -7,10 +7,10 @@ import epicsquid.roots.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +25,7 @@ import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class ToolEvents {
-  private static final Set<Block> SILK_TOUCH_BLOCKS = Sets.newHashSet(Blocks.MYCELIUM, Blocks.GRASS, Blocks.DIRT, Blocks.WEB);
+  private static final Set<Block> SILK_TOUCH_BLOCKS = Sets.newHashSet(Blocks.MYCELIUM, net.minecraft.block.Blocks.GRASS, Blocks.DIRT, Blocks.WEB);
   private static final Item DIRT_ITEM = Item.getItemFromBlock(Blocks.DIRT);
 
   @SubscribeEvent
@@ -34,8 +34,8 @@ public class ToolEvents {
       return;
     }
 
-    final EntityPlayer player = event.getHarvester();
-    final IBlockState state = event.getState();
+    final PlayerEntity player = event.getHarvester();
+    final BlockState state = event.getState();
 
     if (player == null || state == null) {
       return;
@@ -109,14 +109,14 @@ public class ToolEvents {
       return;
     }
 
-    final EntityPlayer player = event.getEntityPlayer();
+    final PlayerEntity player = event.getEntityPlayer();
     final Item heldItem = player.getHeldItemMainhand().getItem();
     if (heldItem != ModItems.terrastone_pickaxe && heldItem != ModItems.terrastone_sword && heldItem != ModItems.terrastone_axe && heldItem != ModItems.terrastone_hoe) {
       return;
     }
 
-    final IBlockState state = event.getState();
-    if (heldItem == ModItems.terrastone_sword && state.getBlock() != Blocks.WEB) {
+    final BlockState state = event.getState();
+    if (heldItem == ModItems.terrastone_sword && state.getBlock() != net.minecraft.block.Blocks.WEB) {
       return;
     } else if (heldItem == ModItems.terrastone_sword) {
       if (ToolConfig.SwordCobwebBreak) {

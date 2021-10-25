@@ -3,7 +3,7 @@ package epicsquid.roots.config;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.util.StateUtil;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 
@@ -63,11 +63,11 @@ public class RunedWoodConfig {
       return capstoneMatcher;
     }
 
-    public IBlockState getCapstoneState () {
+    public BlockState getCapstoneState () {
       return getCapstoneMatcher().getState();
     }
 
-    public IBlockState getPillarState () {
+    public BlockState getPillarState () {
       return getPillarMatcher().getState();
     }
 

@@ -3,10 +3,10 @@ package epicsquid.roots.container.slots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.world.data.SpellLibraryData;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -19,7 +19,7 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   private Supplier<Boolean> visibility;
 
   public static SlotLibraryInfo create(SpellLibraryData data, Supplier<Boolean> visibility, int slot, int x, int y) {
-    IInventory inventory = new InventoryBasic("[Slot: " + slot + "]", true, 1);
+    IInventory inventory = new Inventory("[Slot: " + slot + "]", true, 1);
     inventory.setInventorySlotContents(0, ItemStack.EMPTY);
     return new SlotLibraryInfo(data, visibility, inventory, slot, x, y);
   }
@@ -33,7 +33,7 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   }
 
   @Override
-  public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
+  public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack) {
     return ItemStack.EMPTY;
   }
 
@@ -110,7 +110,7 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   }
 
   @Override
-  public boolean canTakeStack(EntityPlayer playerIn) {
+  public boolean canTakeStack(PlayerEntity playerIn) {
     return false;
   }
 

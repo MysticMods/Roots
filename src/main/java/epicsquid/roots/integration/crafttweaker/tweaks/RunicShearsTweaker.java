@@ -17,9 +17,9 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -65,7 +65,7 @@ public class RunicShearsTweaker {
   )
   @ZenMethod
   public static void addRecipeViaItem(String name, IItemStack outputDrop, IItemStack inputBlock, IItemStack replacementBlock, IItemStack displayItem) {
-    if (!(CraftTweakerMC.getItemStack(inputBlock).getItem() instanceof ItemBlock) || (replacementBlock != null && !(CraftTweakerMC.getItemStack(replacementBlock).getItem() instanceof ItemBlock))) {
+    if (!(CraftTweakerMC.getItemStack(inputBlock).getItem() instanceof BlockItem) || (replacementBlock != null && !(CraftTweakerMC.getItemStack(replacementBlock).getItem() instanceof BlockItem))) {
       CraftTweakerAPI.logError("Runic Shears require input and replacement to be blocks. Recipe: " + name);
       return;
     }
@@ -85,8 +85,8 @@ public class RunicShearsTweaker {
   @ZenMethod
   public static void addEntityRecipe(String name, IItemStack outputDrop, IEntityDefinition entity, int cooldown) {
     EntityEntry internal = (EntityEntry) entity.getInternal();
-    if (EntityLivingBase.class.isAssignableFrom(internal.getEntityClass())) {
-      CraftTweaker.LATE_ACTIONS.add(new AddEntity(name, CraftTweakerMC.getItemStack(outputDrop), (Class<? extends EntityLivingBase>) internal.getEntityClass(), cooldown));
+    if (LivingEntity.class.isAssignableFrom(internal.getEntityClass())) {
+      CraftTweaker.LATE_ACTIONS.add(new AddEntity(name, CraftTweakerMC.getItemStack(outputDrop), (Class<? extends LivingEntity>) internal.getEntityClass(), cooldown));
     } else {
       CraftTweakerAPI.logError("Invalid class: " + internal.getEntityClass().getSimpleName() + " does not derive from EntityLivingBase; could not add Runic Shears recipe");
     }
@@ -114,8 +114,8 @@ public class RunicShearsTweaker {
   @ZenMethod
   public static void removeEntityRecipe(IEntityDefinition entity) {
     EntityEntry internal = (EntityEntry) entity.getInternal();
-    if (EntityLivingBase.class.isAssignableFrom(internal.getEntityClass())) {
-      CraftTweaker.LATE_ACTIONS.add(new RemoveEntity((Class<? extends EntityLivingBase>) internal.getEntityClass()));
+    if (LivingEntity.class.isAssignableFrom(internal.getEntityClass())) {
+      CraftTweaker.LATE_ACTIONS.add(new RemoveEntity((Class<? extends LivingEntity>) internal.getEntityClass()));
     } else {
       CraftTweakerAPI.logError("Invalid class: " + internal.getEntityClass().getSimpleName() + " does not derive from EntityLivingBase; could not remove entity Runic Shears recipe");
     }
@@ -193,9 +193,9 @@ public class RunicShearsTweaker {
     private ItemStack displayItem;
     private ItemStack outputItem;
     private IPredicate input;
-    private IBlockState outputState;
+    private BlockState outputState;
 
-    private AddState(String name, ItemStack outputItem, IBlockState replacementState, IPredicate input, ItemStack displayItem) {
+    private AddState(String name, ItemStack outputItem, BlockState replacementState, IPredicate input, ItemStack displayItem) {
       super("Runic Shears recipe add");
 
       this.name = name;
@@ -224,11 +224,11 @@ public class RunicShearsTweaker {
 
   private static class AddEntity extends Action {
     private String name;
-    private Class<? extends EntityLivingBase> entity;
+    private Class<? extends LivingEntity> entity;
     private ItemStack outputItem;
     private int cooldown;
 
-    private AddEntity(String name, ItemStack outputItem, Class<? extends EntityLivingBase> entity, int cooldown) {
+    private AddEntity(String name, ItemStack outputItem, Class<? extends LivingEntity> entity, int cooldown) {
       super("Runic Shears entity recipe add");
 
       this.name = name;
@@ -255,9 +255,9 @@ public class RunicShearsTweaker {
   }
 
   private static class RemoveEntity extends Action {
-    private Class<? extends EntityLivingBase> entity;
+    private Class<? extends LivingEntity> entity;
 
-    private RemoveEntity(Class<? extends EntityLivingBase> entity) {
+    private RemoveEntity(Class<? extends LivingEntity> entity) {
       super("Runic Shears entity recipe removal");
       this.entity = entity;
     }

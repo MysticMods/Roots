@@ -7,12 +7,11 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
-import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
 import epicsquid.roots.ritual.conditions.ConditionValidSummon;
 import epicsquid.roots.tileentity.TileEntityCatalystPlate;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -46,8 +45,8 @@ public class RitualSummonCreatures extends RitualBase {
         new ItemStack(Items.WHEAT_SEEDS),
         new OreIngredient("cropWheat"),
         new OreIngredient("egg"),
-        new ItemStack(Items.ROTTEN_FLESH),
-        new ItemStack(Items.WHEAT_SEEDS)
+        new ItemStack(net.minecraft.item.Items.ROTTEN_FLESH),
+        new ItemStack(net.minecraft.item.Items.WHEAT_SEEDS)
     );
     addCondition(new ConditionValidSummon());
     setIcon(ModItems.ritual_summon_creatures);
@@ -67,7 +66,7 @@ public class RitualSummonCreatures extends RitualBase {
   }
 
   @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable EntityPlayer player) {
+  public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable PlayerEntity player) {
     EntityRitualSummonCreatures entity = (EntityRitualSummonCreatures) this.spawnEntity(world, pos, EntityRitualSummonCreatures.class, player);
     if (!world.isRemote) {
       List<TileEntityCatalystPlate> plates = RitualUtil.getNearbyCatalystPlates(world, pos);

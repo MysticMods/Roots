@@ -4,9 +4,9 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.ritual.RitualFlowerGrowth;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -46,7 +46,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     if (world.isAirBlock(pos.down())) {
       return false;
     }
-    IBlockState flower = ModRecipes.getRandomFlowerRecipe(world.getBlockState(pos.down()));
+    BlockState flower = ModRecipes.getRandomFlowerRecipe(world.getBlockState(pos.down()));
     if (!flower.getBlock().canPlaceBlockAt(world, pos)) {
       return false;
     }

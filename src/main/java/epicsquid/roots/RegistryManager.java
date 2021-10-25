@@ -10,10 +10,10 @@ import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.RootsPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityList;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.Effect;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -74,11 +74,11 @@ public class RegistryManager {
     }, ModItems.life_essence);
     Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
       if (tintIndex == 0) {
-        NBTTagCompound tag = stack.getTagCompound();
+        CompoundNBT tag = stack.getTagCompound();
         if (stack.hasTagCompound() && tag != null && tag.hasKey("color", Constants.NBT.TAG_INT)) {
-          return EnumDyeColor.byMetadata(tag.getInteger("color")).getColorValue();
+          return DyeColor.byMetadata(tag.getInteger("color")).getColorValue();
         } else {
-          return EnumDyeColor.BROWN.getColorValue();
+          return DyeColor.BROWN.getColorValue();
         }
       } else {
         return 0xFFFFFF;
@@ -87,7 +87,7 @@ public class RegistryManager {
   }
 
   @SubscribeEvent
-  public static void registerPotions(RegistryEvent.Register<Potion> event) {
+  public static void registerPotions(RegistryEvent.Register<Effect> event) {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
     ModPotions.registerPotions(event);

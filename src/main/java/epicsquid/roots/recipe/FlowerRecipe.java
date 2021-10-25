@@ -1,7 +1,7 @@
 package epicsquid.roots.recipe;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -12,14 +12,14 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
 public class FlowerRecipe {
-  private final IBlockState flower;
+  private final BlockState flower;
   private final ResourceLocation registryName;
   private final int meta;
   private final Block block;
   private final ItemStack stack;
   private final List<Ingredient> allowedSoils;
 
-  public FlowerRecipe(ResourceLocation name, IBlockState flower, List<Ingredient> allowedSoils) {
+  public FlowerRecipe(ResourceLocation name, BlockState flower, List<Ingredient> allowedSoils) {
     this.flower = flower;
     this.registryName = name;
     this.block = flower.getBlock();
@@ -28,7 +28,7 @@ public class FlowerRecipe {
     this.allowedSoils = allowedSoils;
   }
 
-  public FlowerRecipe(ResourceLocation name, IBlockState flower) {
+  public FlowerRecipe(ResourceLocation name, BlockState flower) {
     this.flower = flower;
     this.registryName = name;
     this.block = flower.getBlock();
@@ -60,7 +60,7 @@ public class FlowerRecipe {
     return this.stack.copy();
   }
 
-  public boolean matches(IBlockState state) {
+  public boolean matches(BlockState state) {
     Block block = state.getBlock();
     int meta = block.getMetaFromState(state);
     return matches(block, meta);
@@ -71,7 +71,7 @@ public class FlowerRecipe {
   }
 
   @Nullable
-  public IBlockState getFlower() {
+  public BlockState getFlower() {
     return flower;
   }
 

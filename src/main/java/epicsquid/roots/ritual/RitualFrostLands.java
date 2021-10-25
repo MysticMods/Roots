@@ -3,12 +3,10 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.properties.Property;
-import epicsquid.roots.ritual.conditions.ConditionStandingStones;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualFrostLands extends RitualBase implements IColdRitual {

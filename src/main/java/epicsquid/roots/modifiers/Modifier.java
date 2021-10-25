@@ -10,7 +10,7 @@ import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.*;
@@ -57,7 +57,7 @@ public class Modifier extends RegistryItem implements IModifier {
   public ItemStack getModifierStack () {
     if (modifierStack.isEmpty()) {
       modifierStack = new ItemStack(ModItems.spell_modifier);
-      NBTTagCompound tag = ItemUtil.getOrCreateTag(modifierStack);
+      CompoundNBT tag = ItemUtil.getOrCreateTag(modifierStack);
       tag.setString("modifier", this.getRegistryName().toString());
     }
     return modifierStack;

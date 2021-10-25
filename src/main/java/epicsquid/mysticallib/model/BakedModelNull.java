@@ -9,16 +9,16 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.vecmath.Matrix4f;
 
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.model.ItemOverrideList;
 import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ItemOverrideList;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 
 public class BakedModelNull implements IBakedModel {
@@ -32,7 +32,7 @@ public class BakedModelNull implements IBakedModel {
 
   @Override
   @Nonnull
-  public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+  public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, long rand) {
     return new ArrayList<>();
   }
 
@@ -60,7 +60,7 @@ public class BakedModelNull implements IBakedModel {
   @Override
   @Nonnull
   public ItemOverrideList getOverrides() {
-    return new ItemOverrideList(Arrays.asList());
+    return new net.minecraft.client.renderer.model.ItemOverrideList(Arrays.asList());
   }
 
   @Override

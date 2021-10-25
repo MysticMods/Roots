@@ -9,15 +9,14 @@ import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,13 +50,13 @@ public class ParticleRenderer {
     }
   }
 
-  public synchronized void renderParticles(@Nonnull EntityPlayer dumbplayer, float partialTicks) {
+  public synchronized void renderParticles(@Nonnull PlayerEntity dumbplayer, float partialTicks) {
     float f = ActiveRenderInfo.getRotationX();
     float f1 = ActiveRenderInfo.getRotationZ();
     float f2 = ActiveRenderInfo.getRotationYZ();
     float f3 = ActiveRenderInfo.getRotationXY();
     float f4 = ActiveRenderInfo.getRotationXZ();
-    EntityPlayer player = MysticalLib.proxy.getPlayer();
+    PlayerEntity player = MysticalLib.proxy.getPlayer();
     if (player != null) {
       Particle.interpPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
       Particle.interpPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
@@ -70,7 +69,7 @@ public class ParticleRenderer {
 
       GlStateManager.depthMask(false);
 
-      Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+      Minecraft.getMinecraft().renderEngine.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
       Tessellator tess = Tessellator.getInstance();
       BufferBuilder buffer = tess.getBuffer();
 

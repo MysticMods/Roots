@@ -11,14 +11,14 @@ import epicsquid.mysticallib.model.CustomModelBase;
 import epicsquid.mysticallib.model.ModelUtil;
 import epicsquid.mysticallib.model.parts.Cube;
 import epicsquid.mysticallib.struct.Vec4f;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockStairs.EnumHalf;
-import net.minecraft.block.BlockStairs.EnumShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.block.StairsBlock.EnumHalf;
+import net.minecraft.block.StairsBlock.EnumShape;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.model.IModelState;
 
@@ -39,42 +39,42 @@ public class BakedModelStairs extends BakedModelBlock {
       @Nonnull CustomModelBase model) {
     super(format, bakedTextureGetter, model);
     TextureAtlasSprite[] texes = new TextureAtlasSprite[] { texwest, texeast, texdown, texup, texnorth, texsouth };
-    cube_down = ModelUtil.makeCube(format, 0, 0, 0, 1, 0.5, 1, null, texes, 0).setNoCull(EnumFacing.UP);
-    cube_up = ModelUtil.makeCube(format, 0, 0.5, 0, 1, 0.5, 1, null, texes, 0).setNoCull(EnumFacing.DOWN);
-    q_up_nx = ModelUtil.makeCube(format, 0, 0.5, 0, 0.5, 0.5, 1, null, texes, 0).setNoCull(EnumFacing.EAST);
-    q_up_px = ModelUtil.makeCube(format, 0.5, 0.5, 0, 0.5, 0.5, 1, null, texes, 0).setNoCull(EnumFacing.WEST);
-    q_up_nz = ModelUtil.makeCube(format, 0, 0.5, 0, 1, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.SOUTH);
-    q_up_pz = ModelUtil.makeCube(format, 0, 0.5, 0.5, 1, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.NORTH);
-    q_down_nx = ModelUtil.makeCube(format, 0, 0, 0, 0.5, 0.5, 1, null, texes, 0).setNoCull(EnumFacing.EAST);
-    q_down_px = ModelUtil.makeCube(format, 0.5, 0, 0, 0.5, 0.5, 1, null, texes, 0).setNoCull(EnumFacing.WEST);
-    q_down_nz = ModelUtil.makeCube(format, 0, 0, 0, 1, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.SOUTH);
-    q_down_pz = ModelUtil.makeCube(format, 0, 0, 0.5, 1, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.NORTH);
-    e_up_nxnz = ModelUtil.makeCube(format, 0, 0.5, 0, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.EAST).setNoCull(EnumFacing.SOUTH);
-    e_up_pxnz = ModelUtil.makeCube(format, 0.5, 0.5, 0, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.WEST).setNoCull(EnumFacing.SOUTH);
-    e_up_pxpz = ModelUtil.makeCube(format, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.WEST).setNoCull(EnumFacing.NORTH);
-    e_up_nxpz = ModelUtil.makeCube(format, 0, 0.5, 0.5, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.EAST).setNoCull(EnumFacing.NORTH);
-    e_down_nxnz = ModelUtil.makeCube(format, 0, 0, 0, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.EAST).setNoCull(EnumFacing.SOUTH);
-    e_down_pxnz = ModelUtil.makeCube(format, 0.5, 0, 0, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.WEST).setNoCull(EnumFacing.SOUTH);
-    e_down_pxpz = ModelUtil.makeCube(format, 0.5, 0, 0.5, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.WEST).setNoCull(EnumFacing.NORTH);
-    e_down_nxpz = ModelUtil.makeCube(format, 0, 0, 0.5, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(EnumFacing.EAST).setNoCull(EnumFacing.NORTH);
+    cube_down = ModelUtil.makeCube(format, 0, 0, 0, 1, 0.5, 1, null, texes, 0).setNoCull(Direction.UP);
+    cube_up = ModelUtil.makeCube(format, 0, 0.5, 0, 1, 0.5, 1, null, texes, 0).setNoCull(Direction.DOWN);
+    q_up_nx = ModelUtil.makeCube(format, 0, 0.5, 0, 0.5, 0.5, 1, null, texes, 0).setNoCull(Direction.EAST);
+    q_up_px = ModelUtil.makeCube(format, 0.5, 0.5, 0, 0.5, 0.5, 1, null, texes, 0).setNoCull(Direction.WEST);
+    q_up_nz = ModelUtil.makeCube(format, 0, 0.5, 0, 1, 0.5, 0.5, null, texes, 0).setNoCull(Direction.SOUTH);
+    q_up_pz = ModelUtil.makeCube(format, 0, 0.5, 0.5, 1, 0.5, 0.5, null, texes, 0).setNoCull(Direction.NORTH);
+    q_down_nx = ModelUtil.makeCube(format, 0, 0, 0, 0.5, 0.5, 1, null, texes, 0).setNoCull(Direction.EAST);
+    q_down_px = ModelUtil.makeCube(format, 0.5, 0, 0, 0.5, 0.5, 1, null, texes, 0).setNoCull(Direction.WEST);
+    q_down_nz = ModelUtil.makeCube(format, 0, 0, 0, 1, 0.5, 0.5, null, texes, 0).setNoCull(Direction.SOUTH);
+    q_down_pz = ModelUtil.makeCube(format, 0, 0, 0.5, 1, 0.5, 0.5, null, texes, 0).setNoCull(Direction.NORTH);
+    e_up_nxnz = ModelUtil.makeCube(format, 0, 0.5, 0, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(Direction.EAST).setNoCull(Direction.SOUTH);
+    e_up_pxnz = ModelUtil.makeCube(format, 0.5, 0.5, 0, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(Direction.WEST).setNoCull(Direction.SOUTH);
+    e_up_pxpz = ModelUtil.makeCube(format, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(Direction.WEST).setNoCull(Direction.NORTH);
+    e_up_nxpz = ModelUtil.makeCube(format, 0, 0.5, 0.5, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(Direction.EAST).setNoCull(Direction.NORTH);
+    e_down_nxnz = ModelUtil.makeCube(format, 0, 0, 0, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(Direction.EAST).setNoCull(Direction.SOUTH);
+    e_down_pxnz = ModelUtil.makeCube(format, 0.5, 0, 0, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(Direction.WEST).setNoCull(Direction.SOUTH);
+    e_down_pxpz = ModelUtil.makeCube(format, 0.5, 0, 0.5, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(Direction.WEST).setNoCull(Direction.NORTH);
+    e_down_nxpz = ModelUtil.makeCube(format, 0, 0, 0.5, 0.5, 0.5, 0.5, null, texes, 0).setNoCull(Direction.EAST).setNoCull(Direction.NORTH);
   }
 
   @Override
   @Nonnull
-  public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+  public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, long rand) {
     List<BakedQuad> quads = new ArrayList<>();
     getFaceQuads(quads, side, state);
     return quads;
   }
 
-  private void getFaceQuads(@Nonnull List<BakedQuad> quads, @Nullable EnumFacing side, @Nullable IBlockState state) {
+  private void getFaceQuads(@Nonnull List<BakedQuad> quads, @Nullable Direction side, @Nullable BlockState state) {
     if (state == null) {
       cube_down.addToList(quads, side);
       q_up_pz.addToList(quads, side);
     } else {
-      EnumHalf half = state.getValue(BlockStairs.HALF);
-      EnumShape shape = state.getValue(BlockStairs.SHAPE);
-      EnumFacing face = state.getValue(BlockStairs.FACING);
+      EnumHalf half = state.getValue(StairsBlock.HALF);
+      EnumShape shape = state.getValue(StairsBlock.SHAPE);
+      Direction face = state.getValue(StairsBlock.FACING);
       if (half == EnumHalf.BOTTOM) {
         cube_down.addToList(quads, side);
         if (shape == EnumShape.STRAIGHT) {

@@ -5,10 +5,10 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellTimeStop;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -52,9 +52,9 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
       if (box == null) {
         box = new AxisAlignedBB(posX - SpellTimeStop.instance.radius_x - 1, posY - 1.0, posZ - SpellTimeStop.instance.radius_z - 1, posX + SpellTimeStop.instance.radius_x, posY + SpellTimeStop.instance.radius_y, posZ + SpellTimeStop.instance.radius_z);
       }
-      List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, box);
-      for (EntityLivingBase e : entities) {
-        if (!(e instanceof EntityPlayer)) {
+      List<LivingEntity> entities = world.getEntitiesWithinAABB(LivingEntity.class, box);
+      for (LivingEntity e : entities) {
+        if (!(e instanceof PlayerEntity)) {
           if (modifiers != null && modifiers.has(SpellTimeStop.PEACEFUL) && EntityUtil.isFriendly(e, SpellTimeStop.instance)) {
             continue;
           }
@@ -63,13 +63,13 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
           }
           refreshing = true;
           e.getEntityData().setIntArray(SpellTimeStop.instance.getCachedName(), modifiers.toArray());
-          e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));
+          e.addPotionEffect(new EffectInstance(ModPotions.time_stop, 40, 0, false, false));
           refreshing = false;
           if (modifiers.has(SpellTimeStop.SLOW)) {
-            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, instance.slow_duration + 40, instance.slow_amplifier));
+            e.addPotionEffect(new EffectInstance(Effects.SLOWNESS, instance.slow_duration + 40, instance.slow_amplifier));
           }
           if (modifiers.has(SpellTimeStop.WEAKNESS)) {
-            e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, instance.weakness_duration + 40, instance.weakness_amplifier));
+            e.addPotionEffect(new EffectInstance(Effects.WEAKNESS, instance.weakness_duration + 40, instance.weakness_amplifier));
           }
           if (modifiers.has(SpellTimeStop.FIRE)) {
             e.setFire(SpellTimeStop.instance.fire_duration);

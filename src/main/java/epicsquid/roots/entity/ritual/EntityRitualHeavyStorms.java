@@ -4,8 +4,8 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualHeavyStorms;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -81,9 +81,9 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
           world.getWorldInfo().setRaining(true);
         }
       }
-      List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
-      for (EntityLivingBase e : entities) {
+      List<LivingEntity> entities = world
+          .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
+      for (LivingEntity e : entities) {
         if (e.isBurning()) {
           e.extinguish();
           if (world.isRemote) {
@@ -101,7 +101,7 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
           }
 
           if (pos != null) {
-            world.weatherEffects.add(new EntityLightningBolt(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, false));
+            world.weatherEffects.add(new LightningBoltEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, false));
             strike_count++;
           }
         }

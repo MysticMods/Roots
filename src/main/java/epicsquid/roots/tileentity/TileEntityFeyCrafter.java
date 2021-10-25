@@ -18,20 +18,17 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
 import epicsquid.roots.particle.ParticleWhirlwindLeaf;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -70,12 +67,12 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
 
   @Nonnull
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public CompoundNBT writeToNBT(CompoundNBT tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
     tag.setLong("groveStone", groveStone == null ? -1 : groveStone.toLong());
     if (!storedItems.isEmpty()) {
-      NBTTagList tagList = new NBTTagList();
+      ListNBT tagList = new ListNBT();
       for (ItemStack stack : storedItems) {
         tagList.appendTag(stack.serializeNBT());
       }
@@ -87,7 +84,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound tag) {
+  public void readFromNBT(CompoundNBT tag) {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
     long gpos = tag.getLong("groveStone");
@@ -98,7 +95,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     }
     this.storedItems = new ArrayList<>();
     if (tag.hasKey("storedItems")) {
-      NBTTagList stored = tag.getTagList("storedItems", Constants.NBT.TAG_COMPOUND);
+      ListNBT stored = tag.getTagList("storedItems", Constants.NBT.TAG_COMPOUND);
       for (int i = 0; i < stored.tagCount(); i++) {
         this.storedItems.add(new ItemStack(stored.getCompoundTagAt(i)));
       }
@@ -112,22 +109,22 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
 
   @Nonnull
   @Override
-  public NBTTagCompound getUpdateTag() {
-    return writeToNBT(new NBTTagCompound());
+  public CompoundNBT getUpdateTag() {
+    return writeToNBT(new CompoundNBT());
   }
 
   @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
+  public SUpdateTileEntityPacket getUpdatePacket() {
+    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
   }
 
   @Override
-  public void onDataPacket(@Nonnull NetworkManager net, SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(@Nonnull NetworkManager net, SUpdateTileEntityPacket pkt) {
     readFromNBT(pkt.getNbtCompound());
   }
 
   @Override
-  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
@@ -135,7 +132,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
 
   public boolean hasValidGroveStone() {
     if (groveStone != null) {
-      IBlockState grove = world.getBlockState(groveStone);
+      BlockState grove = world.getBlockState(groveStone);
       if (grove.getBlock() == ModBlocks.grove_stone && grove.getValue(BlockGroveStone.VALID)) {
         return true;
       } else {
@@ -147,7 +144,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     if (potentials.isEmpty()) return false;
 
     for (BlockPos pos : potentials) {
-      IBlockState grove = world.getBlockState(pos);
+      BlockState grove = world.getBlockState(pos);
       if (grove.getValue(BlockGroveStone.VALID)) {
         groveStone = pos;
         return true;
@@ -157,7 +154,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     return false;
   }
 
-  public List<ItemStack> craft(EntityPlayer player) {
+  public List<ItemStack> craft(PlayerEntity player) {
     FeyCraftingRecipe recipe = getRecipe();
     List<ItemStack> result = new ArrayList<>();
     ItemStack current = ItemStack.EMPTY;
@@ -220,7 +217,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
 
     boolean shouldGui = !hasValidGroveStone();
 
@@ -254,7 +251,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
     PacketHandler.sendToAllTracking(packet, this);
     world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.WHIRLWIND, SoundCategory.NEUTRAL, 1f, 1f);
-    Advancements.CRAFTING_TRIGGER.trigger((EntityPlayerMP) player, lastRecipe);
+    Advancements.CRAFTING_TRIGGER.trigger((ServerPlayerEntity) player, lastRecipe);
     lastRecipe = null;
     return true;
   }
@@ -333,8 +330,8 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
         }
       } else {
         countdown = -1;
-        for (EnumFacing facing : EnumFacing.values()) {
-          IBlockState state = world.getBlockState(getPos().offset(facing));
+        for (Direction facing : Direction.values()) {
+          BlockState state = world.getBlockState(getPos().offset(facing));
           if (GeneralConfig.getCrafterOutputIgnore().contains(state.getBlock())) {
             continue;
           }
@@ -354,7 +351,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
           }
         }
         for (ItemStack stack : storedItems) {
-          EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
+          ItemEntity item = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
           world.spawnEntity(item);
         }
         this.storedItems.clear();

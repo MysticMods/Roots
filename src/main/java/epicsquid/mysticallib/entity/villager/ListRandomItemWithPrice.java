@@ -2,15 +2,15 @@ package epicsquid.mysticallib.entity.villager;
 
 import java.util.Random;
 
-import net.minecraft.entity.IMerchant;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.init.Items;
+import net.minecraft.entity.merchant.IMerchant;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 
-public class ListRandomItemWithPrice implements EntityVillager.ITradeList {
+public class ListRandomItemWithPrice implements VillagerEntity.ITradeList {
   private ItemAndPriceInfo[] itemsList;
 
   public ListRandomItemWithPrice(ItemAndPriceInfo... itemsList) {
@@ -28,18 +28,18 @@ public class ListRandomItemWithPrice implements EntityVillager.ITradeList {
   }
 
   public static class ItemAndPriceInfo {
-    private EntityVillager.PriceInfo price;
+    private VillagerEntity.PriceInfo price;
     private Item item;
     private int minCount = 1;
     private int maxCount = 1;
 
     public ItemAndPriceInfo(Item item, int lower, int upper) {
-      this.price = new EntityVillager.PriceInfo(lower, upper);
+      this.price = new VillagerEntity.PriceInfo(lower, upper);
       this.item = item;
     }
 
     public ItemAndPriceInfo(Item item, int minCount, int maxCount, int lower, int upper) {
-      this.price = new EntityVillager.PriceInfo(lower, upper);
+      this.price = new VillagerEntity.PriceInfo(lower, upper);
       this.item = item;
       this.minCount = minCount;
       this.maxCount = maxCount;

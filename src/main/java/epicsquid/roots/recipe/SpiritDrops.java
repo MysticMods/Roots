@@ -2,9 +2,9 @@ package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.types.OneTimeSupplier;
 import epicsquid.mysticallib.util.Util;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -13,7 +13,6 @@ import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public class SpiritDrops {
@@ -105,9 +104,9 @@ public class SpiritDrops {
   }
 
   static {
-    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.APPLE, 3)), 31));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.APPLE, 3)), 31));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Blocks.WEB, 2)), 22));
-    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.FEATHER, 6)), 29));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.FEATHER, 6)), 29));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.COAL, 7, 1)), 45));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.BOOK)), 26));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.WRITABLE_BOOK)), 23));
@@ -115,24 +114,24 @@ public class SpiritDrops {
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.IRON_NUGGET, 4)), 21));
 /*    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.copper.getNugget()), 4)), 21));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.silver.getNugget()), 4)), 16));*/
-    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.FISH, 4, ItemFishFood.FishType.PUFFERFISH.getMetadata())), 14));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.FISH, 4, ItemFishFood.FishType.PUFFERFISH.getMetadata())), 14));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.FISH, 4, ItemFishFood.FishType.CLOWNFISH.getMetadata())), 13));
-    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.GUNPOWDER, 3)), 7));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.GUNPOWDER, 3)), 7));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.SLIME_BALL, 2)), 5));
-    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.DYE, 3, EnumDyeColor.BLUE.getMetadata())), 9));
-    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.GOLD_INGOT)), 11));
-    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.IRON_INGOT)), 13));
-    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.REDSTONE, 6)), 10));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.DYE, 3, DyeColor.BLUE.getMetadata())), 9));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.GOLD_INGOT)), 11));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.IRON_INGOT)), 13));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.REDSTONE, 6)), 10));
 /*    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.copper.getItem()))), 11));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.silver.getItem()))), 13));*/
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.NAME_TAG, 2)), 8));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.COMPASS)), 6));
     addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.CLOCK)), 5));
 /*    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(ModItems.unripe_pearl, 4)), 4));*/
-    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.EXPERIENCE_BOTTLE)), 35));
-    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.NETHER_WART, 3)), 29));
-    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.SPIDER_EYE, 2)), 32));
-    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.GLOWSTONE_DUST, 5)), 14));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.EXPERIENCE_BOTTLE)), 35));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.NETHER_WART, 3)), 29));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.SPIDER_EYE, 2)), 32));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(net.minecraft.item.Items.GLOWSTONE_DUST, 5)), 14));
     addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.DIAMOND)), 12));
     addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.ENDER_PEARL, 2)), 14));
     addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.BLAZE_ROD, 2)), 12));

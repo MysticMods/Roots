@@ -6,11 +6,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class TileEntityPyreRenderer extends TileEntityRenderer<TileEntityPyre> {
 
     for (int i = 0; i < renderItems.size(); i++) {
       GlStateManager.pushMatrix();
-      EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, renderItems.get(i));
+      ItemEntity item = new ItemEntity(Minecraft.getMinecraft().world, x, y, z, renderItems.get(i));
       item.hoverStart = 0;
       float shifted = (float) (tem.getTicker() + partialTicks + i * (360.0 / renderItems.size()));
       Random random = new Random();
@@ -70,16 +70,16 @@ public class TileEntityPyreRenderer extends TileEntityRenderer<TileEntityPyre> {
       GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
       GlStateManager.color(1F, 1F, 1F, alpha);
     }
-    tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-    tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
+    tm.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
+    tm.getTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
     GlStateManager.pushMatrix();
     ri.renderItem(result, bakedmodel);
     GlStateManager.cullFace(GlStateManager.CullFace.BACK);
     GlStateManager.popMatrix();
     GlStateManager.disableRescaleNormal();
     GlStateManager.disableBlend();
-    tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-    tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
+    tm.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
+    tm.getTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
 
     GlStateManager.popMatrix();
     GlStateManager.color(1F, 1F, 1F, 1F);

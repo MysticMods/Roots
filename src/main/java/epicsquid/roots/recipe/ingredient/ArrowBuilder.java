@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArrow;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -24,7 +24,7 @@ public class ArrowBuilder {
         if (item == ModItems.wildwood_quiver) {
           continue;
         }
-        if (item instanceof ItemArrow) {
+        if (item instanceof ArrowItem) {
           item.getSubItems(ItemGroup.SEARCH, matchingStacks);
         }
       }

@@ -19,12 +19,12 @@ import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class GuiImposer extends GuiContainer {
+public class GuiImposer extends ContainerScreen {
 
   private ContainerImposer container;
   private InvisibleButton backButton;
@@ -167,7 +167,7 @@ public class GuiImposer extends GuiContainer {
   }
 
   @Override
-  protected void actionPerformed(GuiButton button) throws IOException {
+  protected void actionPerformed(Button button) throws IOException {
     if (button.id == backButton.id) {
       if (this.mc != null && this.mc.player != null) {
         MessageSetImposerSlot packet = new MessageSetImposerSlot(this.mc.player.world.provider.getDimension(), container.tile.getPos(), 0);

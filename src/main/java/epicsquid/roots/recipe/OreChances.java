@@ -4,9 +4,9 @@ import epicsquid.mysticallib.types.OneTimeSupplier;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.WeightedRandom;
@@ -28,12 +28,12 @@ public class OreChances {
     items.add(item);
   }
 
-  public static IBlockState getRandomState() {
+  public static BlockState getRandomState() {
     if (items.isEmpty()) {
-      return Blocks.AIR.getDefaultState();
+      return net.minecraft.block.Blocks.AIR.getDefaultState();
     }
     OreItem item = WeightedRandom.getRandomItem(Util.rand, items);
-    IBlockState state = item.getState();
+    BlockState state = item.getState();
     if (state == null) {
       int tries = 20;
       while (tries > 0 && state == null) {
@@ -51,16 +51,16 @@ public class OreChances {
   }
 
   public static class StateItem extends OreItem {
-    private final IBlockState state;
+    private final BlockState state;
 
-    public StateItem(IBlockState state, int itemWeightIn) {
+    public StateItem(BlockState state, int itemWeightIn) {
       super(itemWeightIn);
       this.state = state;
     }
 
     @Nullable
     @Override
-    public IBlockState getState() {
+    public BlockState getState() {
       return state;
     }
   }
@@ -79,10 +79,10 @@ public class OreChances {
     @SuppressWarnings("deprecation")
     @Override
     @Nullable
-    public IBlockState getState() {
+    public BlockState getState() {
       ItemStack stack = ore.get().getMatchingStacks()[0];
-      if (stack.getItem() instanceof ItemBlock) {
-        Block block = ((ItemBlock) stack.getItem()).getBlock();
+      if (stack.getItem() instanceof BlockItem) {
+        Block block = ((BlockItem) stack.getItem()).getBlock();
         return block.getStateFromMeta(stack.getMetadata());
       } else {
         Roots.logger.error("OreDictItem for " + name + " does not contain a usable itemblock.");
@@ -97,7 +97,7 @@ public class OreChances {
     }
 
     @Nullable
-    public abstract IBlockState getState();
+    public abstract BlockState getState();
   }
 
   static {

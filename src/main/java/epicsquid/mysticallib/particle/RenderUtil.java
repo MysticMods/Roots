@@ -5,9 +5,9 @@ import epicsquid.mysticallib.struct.Vec4f;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec2f;
@@ -38,7 +38,7 @@ public class RenderUtil {
     final float maxV = whiteTexture.getMaxV();
     final BufferBuilder tes = Tessellator.getInstance().getBuffer();
     tes.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-    for (EnumFacing e : EnumFacing.values()) {
+    for (Direction e : Direction.values()) {
       for (Vertex v : getCornersWithUvForFace(bb, e, minU, maxU, minV, maxV)) {
         tes.pos(v.x(), v.y(), v.z()).tex(v.u(), v.v()).color(color.x, color.y, color.z, color.w).endVertex();
       }
@@ -46,7 +46,7 @@ public class RenderUtil {
     Tessellator.getInstance().draw();
   }
 
-  private static List<Vertex> getCornersWithUvForFace(@Nonnull AxisAlignedBB bb, @Nonnull EnumFacing face, float minU, float maxU, float minV, float maxV) {
+  private static List<Vertex> getCornersWithUvForFace(@Nonnull AxisAlignedBB bb, @Nonnull Direction face, float minU, float maxU, float minV, float maxV) {
     List<Vertex> result = new ArrayList<>();
     switch (face) {
       case NORTH:
@@ -124,7 +124,7 @@ public class RenderUtil {
 
   @SubscribeEvent
   public static void onIconLoad(TextureStitchEvent.Pre event) {
-    final TextureMap map = event.getMap();
+    final AtlasTexture map = event.getMap();
     if (map != null) {
       whiteTexture = map.registerSprite(new ResourceLocation(MysticalLib.MODID, "white"));
     }

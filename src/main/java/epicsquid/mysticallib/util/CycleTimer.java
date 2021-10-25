@@ -1,6 +1,6 @@
 package epicsquid.mysticallib.util;
 
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -46,7 +46,7 @@ public class CycleTimer {
   }
 
   public void onDraw() {
-    if (!GuiScreen.isShiftKeyDown()) {
+    if (!Screen.isShiftKeyDown()) {
       if (pausedDuration > 0) {
         startTime += pausedDuration;
         pausedDuration = 0;

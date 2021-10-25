@@ -2,8 +2,8 @@ package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.types.OneTimeSupplier;
 import epicsquid.mysticallib.util.Util;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.oredict.OreIngredient;
 

@@ -4,7 +4,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public class SpellDustInfo extends AbstractSpellInfo {
   public static SpellDustInfo EMPTY = new SpellDustInfo();
@@ -38,7 +38,7 @@ public class SpellDustInfo extends AbstractSpellInfo {
     }
   }
 
-  public static SpellDustInfo fromNBT(NBTTagCompound tag) {
+  public static SpellDustInfo fromNBT(CompoundNBT tag) {
     SpellDustInfo instance = new SpellDustInfo();
     instance.deserializeNBT(tag);
     return instance;

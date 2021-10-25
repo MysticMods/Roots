@@ -7,10 +7,10 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 
 public class RunicShearsEntityWrapper implements IRecipeWrapper {
-  public EntityLivingBase entity = null;
+  public LivingEntity entity = null;
   public final RunicShearEntityRecipe recipe;
 
   public RunicShearsEntityWrapper(RunicShearEntityRecipe recipe) {
@@ -35,7 +35,7 @@ public class RunicShearsEntityWrapper implements IRecipeWrapper {
     RenderUtil.drawEntityOnScreen(30, 70, scale, 38 - mouseX, 70 - mouseY, entity);
   }
 
-  public static float getScale(EntityLivingBase entityLivingBase) {
+  public static float getScale(LivingEntity entityLivingBase) {
     float width = entityLivingBase.width;
     float height = entityLivingBase.height;
     if (width <= height) {

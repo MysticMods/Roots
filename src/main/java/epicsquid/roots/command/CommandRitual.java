@@ -9,18 +9,18 @@ import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.RitualUtil;
+import net.minecraft.block.Blocks;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.WorldServer;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.ServerWorld;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,8 +55,8 @@ public class CommandRitual extends CommandBase {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-    if (sender instanceof EntityPlayerMP && args.length != 0) {
-      EntityPlayerMP player = (EntityPlayerMP) sender;
+    if (sender instanceof ServerPlayerEntity && args.length != 0) {
+      ServerPlayerEntity player = (ServerPlayerEntity) sender;
       String ritualName = args[0];
       if (!ritualName.startsWith("ritual")) {
         ritualName = "ritual_" + ritualName;
@@ -65,17 +65,17 @@ public class CommandRitual extends CommandBase {
       RitualBase ritual = RitualRegistry.getRitual(ritualName);
 
       if (ritual == null || ritual.isDisabled()) {
-        player.sendMessage(new TextComponentString("Invalid or disabled ritual: " + args[0]));
+        player.sendMessage(new StringTextComponent("Invalid or disabled ritual: " + args[0]));
         return;
       }
 
-      WorldServer world = player.getServerWorld();
+      ServerWorld world = player.getServerWorld();
       BlockPos pos = player.getPosition();
 
       world.setBlockState(pos.down(), Blocks.CHEST.getDefaultState());
       world.setBlockState(pos, ModBlocks.pyre.getDefaultState());
 
-      TileEntityChest chest = (TileEntityChest) world.getTileEntity(pos.down());
+      ChestTileEntity chest = (ChestTileEntity) world.getTileEntity(pos.down());
       TileEntityPyre pyre = (TileEntityPyre) world.getTileEntity(pos);
       pyre.setLastRitualUsed(ritual);
 

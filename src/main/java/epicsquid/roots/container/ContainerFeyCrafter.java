@@ -9,9 +9,11 @@ package epicsquid.roots.container;
 
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.*;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -24,17 +26,17 @@ import java.util.List;
 public class ContainerFeyCrafter extends Container {
 
   private TileEntityFeyCrafter crafter;
-  private EntityPlayer player;
+  private PlayerEntity player;
 
   private FeyCraftingRecipe recipe;
 
-  private final InventoryCraftResult craftResult;
+  private final CraftResultInventory craftResult;
 
-  public ContainerFeyCrafter(EntityPlayer player, TileEntityFeyCrafter crafter) {
+  public ContainerFeyCrafter(PlayerEntity player, TileEntityFeyCrafter crafter) {
     this.player = player;
     this.crafter = crafter;
 
-    craftResult = new InventoryCraftResult();
+    craftResult = new CraftResultInventory();
 
     createCrafterSlots();
     createPlayerInventory(player.inventory);
@@ -48,23 +50,23 @@ public class ContainerFeyCrafter extends Container {
     addSlotToContainer(new SlotGrid(crafter.inventory, this, 4, 70, 59));
   }
 
-  private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
+  private void createPlayerInventory(PlayerInventory inventoryPlayer) {
     int xOffset = 8;
     int yOffset = 105;
 
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(inventoryPlayer, (j + i * 9 + 9), xOffset + j * 18, yOffset + i * 18));
+        addSlotToContainer(new net.minecraft.inventory.container.Slot(inventoryPlayer, (j + i * 9 + 9), xOffset + j * 18, yOffset + i * 18));
       }
     }
     for (int i = 0; i < 9; i++) {
-      addSlotToContainer(new Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
+      addSlotToContainer(new net.minecraft.inventory.container.Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
     }
   }
 
   @Nonnull
   @Override
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     Slot slot = this.inventorySlots.get(index);
 
     if (slot == null || !slot.getHasStack()) {
@@ -119,7 +121,7 @@ public class ContainerFeyCrafter extends Container {
       k = endIndex - 1;
     }
 
-    Slot slot;
+    net.minecraft.inventory.container.Slot slot;
     ItemStack itemstack1;
 
     if (stack.isStackable()) {
@@ -171,7 +173,7 @@ public class ContainerFeyCrafter extends Container {
     }
 
     while (!useEndIndex && k < endIndex || useEndIndex && k >= startIndex) {
-      Slot slot = this.inventorySlots.get(k);
+      net.minecraft.inventory.container.Slot slot = this.inventorySlots.get(k);
       ItemStack itemstack1 = slot.getStack();
 
       if (itemstack1.isEmpty() && slot.isItemValid(stack) && this.canMergeSlot(stack, slot)) // Forge: Make sure to respect isItemValid in the slot.
@@ -205,7 +207,7 @@ public class ContainerFeyCrafter extends Container {
   }
 
   @Override
-  public boolean canMergeSlot(ItemStack p_94530_1_, Slot p_94530_2_) {
+  public boolean canMergeSlot(ItemStack p_94530_1_, net.minecraft.inventory.container.Slot p_94530_2_) {
     return p_94530_2_.inventory != this.craftResult && super.canMergeSlot(p_94530_1_, p_94530_2_);
   }
 
@@ -225,7 +227,7 @@ public class ContainerFeyCrafter extends Container {
   }
 
   @Override
-  protected void slotChangedCraftingGrid(World world, EntityPlayer player, InventoryCrafting inv, InventoryCraftResult result) {
+  protected void slotChangedCraftingGrid(World world, PlayerEntity player, CraftingInventory inv, CraftResultInventory result) {
     List<ItemStack> items = crafter.getContents();
 
     if (recipe == null || !recipe.matches(items)) {
@@ -242,7 +244,7 @@ public class ContainerFeyCrafter extends Container {
   }
 
   @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
+  public boolean canInteractWith(@Nonnull PlayerEntity player) {
     BlockPos pos = this.crafter.getPos();
     if (this.crafter.getWorld().getTileEntity(pos) != this.crafter) {
       return false;
@@ -252,9 +254,9 @@ public class ContainerFeyCrafter extends Container {
   }
 
   public static class SlotGrid extends SlotItemHandler {
-    Container eventHandler;
+    net.minecraft.inventory.container.Container eventHandler;
 
-    public SlotGrid(IItemHandler itemHandler, Container eventHandler, int index, int xPosition, int yPosition) {
+    public SlotGrid(IItemHandler itemHandler, net.minecraft.inventory.container.Container eventHandler, int index, int xPosition, int yPosition) {
       super(itemHandler, index, xPosition, yPosition);
       this.eventHandler = eventHandler;
     }

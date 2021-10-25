@@ -5,7 +5,7 @@ import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -52,7 +52,7 @@ public class MessageDandelionCastFX implements IMessage {
     @Override
     protected void handleMessage(final MessageDandelionCastFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
-      EntityPlayer player = world.getPlayerEntityByUUID(message.id);
+      PlayerEntity player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         for (int k = 0; k < 40; k++) {
           ParticleUtil.spawnParticleSmoke(world, (float) player.posX, (float) player.posY + player.getEyeHeight(), (float) player.posZ, (float) player.getLookVec().x + (Util.rand.nextFloat() - 0.5f), (float) player.getLookVec().y + (Util.rand.nextFloat() - 0.5f), (float) player.getLookVec().z + (Util.rand.nextFloat() - 0.5f), 0.65f, 0.65f, 0.65f, 0.15f, 12f, 40, false);

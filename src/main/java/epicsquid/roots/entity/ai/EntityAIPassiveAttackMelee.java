@@ -1,34 +1,34 @@
 package epicsquid.roots.entity.ai;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 
 import javax.annotation.Nonnull;
 
-public class EntityAIPassiveAttackMelee extends EntityAIAttackMelee {
-  public EntityAIPassiveAttackMelee(EntityCreature creature, double speedIn, boolean useLongMemory) {
+public class EntityAIPassiveAttackMelee extends MeleeAttackGoal {
+  public EntityAIPassiveAttackMelee(CreatureEntity creature, double speedIn, boolean useLongMemory) {
     super(creature, speedIn, useLongMemory);
   }
 
   @Override
-  protected void checkAndPerformAttack(EntityLivingBase enemy, double distToEnemySqr) {
+  protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
     double d0 = this.getAttackReachSqr(enemy);
 
     if (distToEnemySqr <= d0 && this.attackTick <= 0) {
       this.attackTick = 20;
-      this.attacker.swingArm(EnumHand.MAIN_HAND);
+      this.attacker.swingArm(Hand.MAIN_HAND);
       attackEntityAsMob(this.attacker, enemy);
     }
   }
 
-  private boolean attackEntityAsMob(EntityLivingBase thisEntity, @Nonnull EntityLivingBase entityIn) {
+  private boolean attackEntityAsMob(LivingEntity thisEntity, @Nonnull LivingEntity entityIn) {
     float f = 4.0f;
     int i = 0;
 
@@ -50,8 +50,8 @@ public class EntityAIPassiveAttackMelee extends EntityAIAttackMelee {
         entityIn.setFire(j * 4);
       }
 
-      if (entityIn instanceof EntityPlayer) {
-        EntityPlayer entityplayer = (EntityPlayer) entityIn;
+      if (entityIn instanceof PlayerEntity) {
+        PlayerEntity entityplayer = (PlayerEntity) entityIn;
         ItemStack itemstack = thisEntity.getHeldItemMainhand();
         ItemStack itemstack1 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : ItemStack.EMPTY;
 

@@ -4,8 +4,8 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.world.ServerWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fml.common.Loader;
@@ -130,7 +130,7 @@ public class ModDamage {
       throw new IllegalStateException("can't get a fake player on a client side");
     }
 
-    WorldServer server = (WorldServer) world;
+    ServerWorld server = (ServerWorld) world;
     return FakePlayerFactory.get(server, profile);
   }
 

@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.JsonUtils;
+import net.minecraft.util.JSONUtils;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientFactory;
 import net.minecraftforge.common.crafting.JsonContext;
@@ -68,12 +68,12 @@ public class OreFallbackIngredient extends Ingredient {
     @Nonnull
     @Override
     public Ingredient parse(JsonContext context, JsonObject json) {
-      String ore = JsonUtils.getString(json, "ore");
-      if (JsonUtils.hasField(json, "fallback") && !JsonUtils.isString(json, "fallback")) {
-        Ingredient fallback = CraftingHelper.getIngredient(JsonUtils.getJsonObject(json, "fallback"), context);
+      String ore = JSONUtils.getString(json, "ore");
+      if (JSONUtils.hasField(json, "fallback") && !JSONUtils.isString(json, "fallback")) {
+        Ingredient fallback = CraftingHelper.getIngredient(JSONUtils.getJsonObject(json, "fallback"), context);
         return new OreFallbackIngredient(ore, fallback);
       } else {
-        return new OreFallbackIngredient(ore, JsonUtils.getString(json, "fallback"));
+        return new OreFallbackIngredient(ore, JSONUtils.getString(json, "fallback"));
       }
     }
   }

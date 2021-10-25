@@ -11,9 +11,9 @@ import epicsquid.roots.network.MessageServerTryPickupArrows;
 import epicsquid.roots.spell.SpellExtension;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -45,12 +45,12 @@ public class SneakHandler {
 
   @SubscribeEvent(priority = EventPriority.LOWEST)
   public static void onCheckAttack(LivingSetAttackTargetEvent event) {
-    if (!(event.getTarget() instanceof EntityPlayer) || !(event.getEntityLiving() instanceof EntityMob)) {
+    if (!(event.getTarget() instanceof PlayerEntity) || !(event.getEntityLiving() instanceof MonsterEntity)) {
       return;
     }
 
-    EntityPlayer player = (EntityPlayer) event.getTarget();
-    EntityMob attacker = (EntityMob) event.getEntityLiving();
+    PlayerEntity player = (PlayerEntity) event.getTarget();
+    MonsterEntity attacker = (MonsterEntity) event.getEntityLiving();
     if (player.getActivePotionEffect(ModPotions.nondetection) != null) {
       attacker.setRevengeTarget(null);
       attacker.attackTarget = null;
@@ -70,7 +70,7 @@ public class SneakHandler {
     if (lastSneak != mc.player.isSneaking() && !lastSneak) {
       lastSneak = mc.player.isSneaking();
 
-      List<EntityArrow> arrows = mc.world.getEntitiesWithinAABB(EntityArrow.class, ItemQuiver.bounding.offset(mc.player.getPosition()));
+      List<AbstractArrowEntity> arrows = mc.world.getEntitiesWithinAABB(AbstractArrowEntity.class, ItemQuiver.bounding.offset(mc.player.getPosition()));
       if (arrows.isEmpty()) return;
 
       ItemStack quiver = QuiverInventoryUtil.getQuiver(mc.player);

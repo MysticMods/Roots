@@ -2,7 +2,7 @@ package epicsquid.roots.network;
 
 import epicsquid.roots.container.IModifierContainer;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
@@ -37,7 +37,7 @@ public class MessageServerModifier implements IMessage {
   public static class MessageHolder extends ServerMessageHandler<MessageServerModifier> {
     @Override
     protected void handleMessage(MessageServerModifier message, MessageContext ctx) {
-      EntityPlayerMP player = ctx.getServerHandler().player;
+      ServerPlayerEntity player = ctx.getServerHandler().player;
       if (player.openContainer instanceof IModifierContainer) {
         ((IModifierContainer) player.openContainer).setModifierStatus(0, message.shiftDown);
         ((IModifierContainer) player.openContainer).setModifierStatus(1, message.ctrlDown);

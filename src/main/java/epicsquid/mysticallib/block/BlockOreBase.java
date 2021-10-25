@@ -2,7 +2,7 @@ package epicsquid.mysticallib.block;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -26,7 +26,7 @@ public class BlockOreBase extends BlockBase {
   }
 
   @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+  public Item getItemDropped(BlockState state, Random rand, int fortune) {
     if (drop != null) {
       return drop;
     }
@@ -51,7 +51,7 @@ public class BlockOreBase extends BlockBase {
   }
 
   @Override
-  public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
+  public int getExpDrop(BlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
     if (minXP == -1 || maxXP == -1)
       return 0;
 

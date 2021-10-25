@@ -1,28 +1,22 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
-import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
-import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
-import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.tileentity.TileEntityRunicCrafter;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class BlockFeyCrafter extends BlockTEBase {
@@ -34,18 +28,18 @@ public class BlockFeyCrafter extends BlockTEBase {
   }
 
   @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
+  public boolean isFullCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
     return false;
   }
 
   @Nonnull
   @Override
-  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
     return new AxisAlignedBB(0, 0, 0, 1, 1.1, 1);
   }
 
@@ -58,20 +52,20 @@ public class BlockFeyCrafter extends BlockTEBase {
   @Override
   @Nonnull
   @SuppressWarnings("deprecation")
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    if (face == EnumFacing.UP) {
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, BlockState state, BlockPos pos, Direction face) {
+    if (face == Direction.UP) {
       return BlockFaceShape.UNDEFINED;
     }
     return super.getBlockFaceShape(worldIn, state, pos, face);
   }
 
   @Override
-  public boolean hasComparatorInputOverride(IBlockState state) {
+  public boolean hasComparatorInputOverride(BlockState state) {
     return true;
   }
 
   @Override
-  public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
+  public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
     TileEntity te = worldIn.getTileEntity(pos);
     if (te instanceof TileEntityRunicCrafter) {
       TileEntityRunicCrafter tile = (TileEntityRunicCrafter) te;
