@@ -1,7 +1,6 @@
 package epicsquid.roots.item.terrastone;
 
 import com.google.common.collect.Sets;
-import epicsquid.mysticalworld.events.LeafHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ToolConfig;
 import epicsquid.roots.init.ModItems;
@@ -126,10 +125,10 @@ public class ToolEvents {
       return;
     }
 
-    if (((heldItem == ModItems.terrastone_axe && ToolConfig.AxeLeaves) || (heldItem == ModItems.terrastone_hoe && ToolConfig.HoeSilkTouch)) && LeafHandler.isLeafBlock(state.getBlock())) {
+/*    if (((heldItem == ModItems.terrastone_axe && ToolConfig.AxeLeaves) || (heldItem == ModItems.terrastone_hoe && ToolConfig.HoeSilkTouch)) && LeafHandler.isLeafBlock(state.getBlock())) {
       event.setNewSpeed(100f);
       return;
-    }
+    }*/
 
     final float speed = event.getNewSpeed();
 

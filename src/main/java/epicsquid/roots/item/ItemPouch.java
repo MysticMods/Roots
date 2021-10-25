@@ -10,8 +10,6 @@ import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
-import epicsquid.roots.integration.baubles.pouch.BaublesHook;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -177,9 +175,9 @@ public class ItemPouch extends ItemBase implements IItemPouch {
   @Nullable
   @Override
   public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    if (Loader.isModLoaded("baubles")) {
+/*    if (Loader.isModLoaded("baubles")) {
       return BaublesHook.getInstance();
-    }
+    }*/
     return null;
   }
 }

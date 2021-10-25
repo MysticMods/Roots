@@ -2,7 +2,6 @@ package epicsquid.roots.mechanics;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.SpellConfig;
-import epicsquid.roots.integration.botania.SolegnoliaHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -71,6 +70,7 @@ public class Magnetize {
       return true;
     }
 
-    return SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(entity);
+    return true;
+    //return SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(entity);
   }
 }

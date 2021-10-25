@@ -4,7 +4,6 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
@@ -110,7 +109,7 @@ public class SpellGrowthInfusion extends SpellBase {
         new OreIngredient("allFlowers"),
         new OreIngredient("treeSapling"),
         new ItemStack(ModItems.terra_moss),
-        Ingredients.AUBERGINE,
+        ItemStack.EMPTY,
         new OreIngredient("cropWheat")
     );
     setCastSound(ModSounds.Spells.GROWTH_INFUSION);

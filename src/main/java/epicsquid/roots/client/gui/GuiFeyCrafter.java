@@ -7,10 +7,10 @@
 
 package epicsquid.roots.client.gui;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerFeyCrafter;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -66,7 +66,7 @@ public class GuiFeyCrafter extends GuiContainer {
     int i3 = -1;
     if (container.getRecipe() != null) {
       if (knife.isEmpty()) {
-        knife = new ItemStack(ModItems.amethyst_knife);
+        knife = new ItemStack(ModItems.diamond_knife);
       }
       if (fey_crafter.isEmpty()) {
         fey_crafter = new ItemStack(ModBlocks.fey_crafter);

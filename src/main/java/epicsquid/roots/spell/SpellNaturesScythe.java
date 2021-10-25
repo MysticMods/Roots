@@ -99,7 +99,7 @@ public class SpellNaturesScythe extends SpellBase {
     addIngredients(
         new OreIngredient("wildroot"),
         new OreIngredient("wildroot"),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        ItemStack.EMPTY,
         new ItemStack(Items.STONE_HOE),
         new OreIngredient("tallgrass")
     );

@@ -81,7 +81,7 @@ public class SpellHarvest extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(Items.STONE_HOE),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
+        ItemStack.EMPTY,
         new ItemStack(ModItems.wildewheet),
         new ItemStack(ModItems.wildewheet_seed),
         new ItemStack(Items.WHEAT_SEEDS)

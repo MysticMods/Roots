@@ -64,9 +64,6 @@ minecraft {
 }
 
 dependencies {
-    compile project(':MysticalLib')
-    compile project(':MysticalWorld')
-
     compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
     deobfCompile "com.azanor:Baubles:${version_baubles}"
     // compile against the JEI API but do not include it at runtime
@@ -148,7 +145,6 @@ idea {
         inheritOutputDirs = true
     }
 }
-/*
 sourceSets {
     main.output.resourcesDir = main.java.outputDir
-}*/
+}

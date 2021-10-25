@@ -9,8 +9,6 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
-import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
-import epicsquid.roots.item.IItemPouch;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageLightDrifterSync;

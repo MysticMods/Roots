@@ -10,11 +10,8 @@ import epicsquid.roots.integration.cfb.RootsCFB;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
 import epicsquid.roots.integration.crafttweaker.commands.Inject;
-import epicsquid.roots.integration.endercore.EndercoreHarvest;
-import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.integration.patchouli.ConfigKeys;
-import epicsquid.roots.integration.thaumcraft.ThaumcraftInit;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraftforge.fml.common.Loader;
@@ -32,9 +29,6 @@ public class CommonProxy {
     SpellRegistry.preInit();
     RitualRegistry.preInit();
     ModEntities.registerLootTables();
-    if (Loader.isModLoaded("thaumcraft")) {
-      ThaumcraftInit.init();
-    }
   }
 
   public void init(FMLInitializationEvent event) {
@@ -46,9 +40,6 @@ public class CommonProxy {
     }
     if (Loader.isModLoaded("chisel")) {
       RootsChisel.init();
-    }
-    if (Loader.isModLoaded("endercore")) {
-      EndercoreHarvest.init();
     }
     if (Loader.isModLoaded("consecration")) {
       Consecration.init();
@@ -67,9 +58,6 @@ public class CommonProxy {
   }
 
   public void loadComplete(FMLLoadCompleteEvent event) {
-    if (Loader.isModLoaded("harvest")) {
-      HarvestIntegration.init();
-    }
     Advancements.init();
     ModRecipes.clearGeneratedEntityRecipes();
     ModRecipes.generateLifeEssence();

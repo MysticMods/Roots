@@ -71,7 +71,7 @@ public class SpellSkySoarer extends SpellBase {
         new ItemStack(Item.getItemFromBlock(Blocks.LADDER)),
         new ItemStack(ModItems.petals),
         new ItemStack(Items.BOW),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
+        ItemStack.EMPTY,
         new ItemStack(ModItems.cloud_berry)
     );
     setCastSound(ModSounds.Spells.SKY_SOARER);

@@ -35,7 +35,7 @@ public class RitualHealingAura extends RitualBase {
   public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(ModItems.terra_moss),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        ItemStack.EMPTY,
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("wildroot"),
         new OreIngredient("treeSapling")

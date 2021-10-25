@@ -88,7 +88,7 @@ public class SpellPetalShell extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(ModItems.petals),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        ItemStack.EMPTY,
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(Items.SHIELD),
         new ItemStack(ModItems.pereskia)

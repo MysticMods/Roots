@@ -33,7 +33,7 @@ public class RitualGermination extends RitualBase {
     recipe = new RitualRecipe(this,
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.wildroot),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        ItemStack.EMPTY,
         new OreIngredient("dyeWhite"),
         new OreIngredient("rootsBark")
     );

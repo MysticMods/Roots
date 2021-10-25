@@ -28,7 +28,7 @@ public class RitualGathering extends RitualBase {
     recipe = new RitualRecipe(this,
         new OreIngredient("slimeball"),
         new ItemStack(ModItems.wildewheet),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
+        ItemStack.EMPTY,
         new OreIngredient("ingotIron"),
         new OreIngredient("dustRedstone")
     );

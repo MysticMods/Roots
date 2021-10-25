@@ -3,7 +3,6 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
@@ -112,7 +111,7 @@ public class SpellSaturate extends SpellBase {
     addIngredients(
         new ItemStack(Items.MUSHROOM_STEW),
         new ItemStack(Items.MILK_BUCKET),
-        new ItemStack(ModItems.cooked_aubergine),
+        ItemStack.EMPTY,
         new ItemStack(Items.EGG),
         new ItemStack(epicsquid.roots.init.ModItems.wildewheet)
     );

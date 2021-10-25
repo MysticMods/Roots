@@ -33,7 +33,7 @@ public class RitualPurity extends RitualBase {
   public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(ModItems.terra_moss),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        ItemStack.EMPTY,
         new ItemStack(ModBlocks.baffle_cap_mushroom),
         new ItemStack(Items.MILK_BUCKET),
         new ItemStack(Items.GLASS_BOTTLE)
