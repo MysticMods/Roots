@@ -10,7 +10,7 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -108,7 +108,7 @@ public class ItemSalmon extends ItemBase {
   }
 
   @Override
-  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+  public void getSubItems(ItemGroup tab, NonNullList<ItemStack> items) {
     if (isInCreativeTab(tab)) {
       ItemStack inTab = new ItemStack(this);
       NBTTagCompound tag = inTab.getTagCompound();

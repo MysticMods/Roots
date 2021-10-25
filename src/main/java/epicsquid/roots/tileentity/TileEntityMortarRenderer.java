@@ -2,14 +2,14 @@ package epicsquid.roots.tileentity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileEntityMortarRenderer extends TileEntitySpecialRenderer<TileEntityMortar> {
+public class TileEntityMortarRenderer extends TileEntityRenderer<TileEntityMortar> {
 
   @Override
   public void render(TileEntityMortar te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

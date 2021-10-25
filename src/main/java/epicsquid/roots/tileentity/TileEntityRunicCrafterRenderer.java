@@ -1,22 +1,20 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityRunicCrafterRenderer extends TileEntitySpecialRenderer<TileEntityRunicCrafter> {
+public class TileEntityRunicCrafterRenderer extends TileEntityRenderer<TileEntityRunicCrafter> {
   public static ItemStack GROVE_STONE = ItemStack.EMPTY;
 
   @Override
@@ -78,7 +76,7 @@ public class TileEntityRunicCrafterRenderer extends TileEntitySpecialRenderer<Ti
     GlStateManager.rotate(ticks, 0, 1, 0);
 
     Minecraft mc = Minecraft.getMinecraft();
-    RenderItem ri = mc.getRenderItem();
+    ItemRenderer ri = mc.getRenderItem();
     TextureManager tm = mc.getTextureManager();
 
     IBakedModel bakedmodel = ri.getItemModelWithOverrides(result, null, null);

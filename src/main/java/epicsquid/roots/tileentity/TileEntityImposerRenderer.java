@@ -2,10 +2,10 @@ package epicsquid.roots.tileentity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.item.EntityItem;
 
-public class TileEntityImposerRenderer extends TileEntitySpecialRenderer<TileEntityImposer> {
+public class TileEntityImposerRenderer extends TileEntityRenderer<TileEntityImposer> {
   @Override
   public void render(TileEntityImposer tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {

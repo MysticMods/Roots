@@ -2,7 +2,7 @@ package epicsquid.roots.recipe.ingredient;
 
 import com.google.gson.JsonObject;
 import epicsquid.roots.init.ModItems;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public class ArrowBuilder {
           continue;
         }
         if (item instanceof ItemArrow) {
-          item.getSubItems(CreativeTabs.SEARCH, matchingStacks);
+          item.getSubItems(ItemGroup.SEARCH, matchingStacks);
         }
       }
       ARROW = Ingredient.fromStacks(matchingStacks.toArray(new ItemStack[0]));

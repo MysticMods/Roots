@@ -6,22 +6,22 @@ import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 
 import java.util.Random;
 
-public class TileEntityCatalystPlateRenderer extends TileEntitySpecialRenderer<TileEntityCatalystPlate> {
+public class TileEntityCatalystPlateRenderer extends TileEntityRenderer<TileEntityCatalystPlate> {
 
   @Override
   public void render(TileEntityCatalystPlate tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       int count = getCount(tei.inventory.getStackInSlot(0));
-      RenderItem r = Minecraft.getMinecraft().getRenderItem();
+      ItemRenderer r = Minecraft.getMinecraft().getRenderItem();
       IBlockState state = tei.getWorld().getBlockState(tei.getPos());
       if (state.getBlock() != ModBlocks.catalyst_plate && state.getBlock() != ModBlocks.reinforced_catalyst_plate) {
         Roots.logger.error("Fatal error rendering catalyst plate, block state was " + state.toString() + " when catalyst plate was expected.");

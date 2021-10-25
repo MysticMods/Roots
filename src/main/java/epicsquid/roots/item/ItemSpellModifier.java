@@ -2,25 +2,13 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCost;
 import epicsquid.roots.modifiers.Modifier;
 import epicsquid.roots.modifiers.ModifierRegistry;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.spell.info.LibrarySpellInfo;
-import epicsquid.roots.spell.info.SpellDustInfo;
-import epicsquid.roots.spell.info.StaffSpellInfo;
-import epicsquid.roots.spell.info.storage.DustSpellStorage;
-import epicsquid.roots.spell.info.storage.LibrarySpellStorage;
-import epicsquid.roots.spell.info.storage.StaffSpellStorage;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
@@ -28,13 +16,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
 
 @SuppressWarnings("deprecation")
@@ -46,7 +31,7 @@ public class ItemSpellModifier extends ItemBase {
   }
 
   @Override
-  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+  public void getSubItems(ItemGroup tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
       for (Modifier modifier : ModifierRegistry.getModifiers()) {
         if (ModifierRegistry.isDisabled(modifier)) {

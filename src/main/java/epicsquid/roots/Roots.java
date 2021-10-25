@@ -8,7 +8,7 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.materials.Materials;
 import epicsquid.roots.proxy.CommonProxy;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -49,7 +49,7 @@ public class Roots {
   @Instance(MODID)
   public static Roots instance;
 
-  public static CreativeTabs tab = new CreativeTabs("roots") {
+  public static ItemGroup tab = new ItemGroup("roots") {
     @Override
     public String getTabLabel() {
       return "roots";

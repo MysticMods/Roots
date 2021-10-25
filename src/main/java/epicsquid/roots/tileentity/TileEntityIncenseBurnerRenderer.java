@@ -2,18 +2,18 @@ package epicsquid.roots.tileentity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 
 import java.util.Random;
 
-public class TileEntityIncenseBurnerRenderer extends TileEntitySpecialRenderer<TileEntityIncenseBurner> {
+public class TileEntityIncenseBurnerRenderer extends TileEntityRenderer<TileEntityIncenseBurner> {
 
   @Override
   public void render(TileEntityIncenseBurner tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {
-      RenderItem r = Minecraft.getMinecraft().getRenderItem();
+      ItemRenderer r = Minecraft.getMinecraft().getRenderItem();
       GlStateManager.pushMatrix();
       GlStateManager.translate(x + 0.5, y + 0.575, z + 0.35);
       GlStateManager.rotate(90f, 1.0f, 0, 0);

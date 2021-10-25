@@ -5,18 +5,18 @@ import epicsquid.roots.ritual.RitualBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileEntityPyreRenderer extends TileEntitySpecialRenderer<TileEntityPyre> {
+public class TileEntityPyreRenderer extends TileEntityRenderer<TileEntityPyre> {
 
   @Override
   public void render(TileEntityPyre tem, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -62,7 +62,7 @@ public class TileEntityPyreRenderer extends TileEntitySpecialRenderer<TileEntity
     GlStateManager.scale(0.5, 0.5, 0.5);
 
     Minecraft mc = Minecraft.getMinecraft();
-    RenderItem ri = mc.getRenderItem();
+    ItemRenderer ri = mc.getRenderItem();
     TextureManager tm = mc.getTextureManager();
 
     IBakedModel bakedmodel = ri.getItemModelWithOverrides(result, null, null);

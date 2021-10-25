@@ -16,7 +16,7 @@ import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
@@ -80,7 +80,7 @@ public class ItemSpellIcon extends ItemBase {
   }
 
   @Override
-  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+  public void getSubItems(ItemGroup tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
       for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
         subItems.add(entry.getIcon());

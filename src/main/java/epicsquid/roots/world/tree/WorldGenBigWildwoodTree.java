@@ -8,13 +8,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.AbstractTreeFeature;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
+public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
   private Random rand;
   private World world;
   private BlockPos basePos = BlockPos.ORIGIN;

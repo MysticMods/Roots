@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -318,7 +318,7 @@ public class ItemStaff extends ItemBase {
   }
 
   @Override
-  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+  public void getSubItems(ItemGroup tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
       subItems.add(new ItemStack(this));
       for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
