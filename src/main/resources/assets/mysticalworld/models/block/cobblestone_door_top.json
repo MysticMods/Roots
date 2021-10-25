@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_top",
+    "textures": {
+        "bottom": "mysticalworld:blocks/cobblestone_door_bottom",
+        "top": "mysticalworld:blocks/cobblestone_door_top"
+    }
+}

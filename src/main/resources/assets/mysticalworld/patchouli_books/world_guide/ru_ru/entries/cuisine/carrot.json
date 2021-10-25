@@ -1,0 +1,24 @@
+{
+  "name": "Морковные рецепты",
+  "icon": "mysticalworld:cooked_carrot",
+  "category": "cuisine",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:cooked_carrot",
+      "text": "Как и свёкла, морковь тоже может быть пожарена. Вы также можете нарезать её в меньшую, более удобную закуску!"
+    },
+    {
+      "type": "smelting",
+      "recipe": "mysticalworld:cooked_carrot",
+      "title": "Приготовленная морковь",
+      "text": "Морковь готовится медленнее на костре, в печи, или даже быстрее в коптильне."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:knife_recipe",
+      "title": "Sliced Carrot",
+      "text": "Ножи можно использовать для нарезки моркови на быстро съедаемые закуски!"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "mysticalworld:pelt"
+    }
+  ],
+  "result": {
+    "item": "minecraft:leather"
+  }
+}

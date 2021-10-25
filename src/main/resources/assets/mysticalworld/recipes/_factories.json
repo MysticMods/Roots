@@ -1,0 +1,16 @@
+{
+  "conditions": {
+    "config": "epicsquid.mysticalworld.recipe.ConfigurableRecipesFactory"
+  },
+  "ingredients": {
+    "multi_ore": "epicsquid.mysticallib.recipe.factories.MultiOreIngredient$Factory",
+    "flint_and_steel": "epicsquid.mysticalworld.recipe.IngredientFlintAndSteel$Factory",
+    "spindle": "epicsquid.mysticalworld.recipe.IngredientSpindle$Factory",
+    "seed": "epicsquid.mysticalworld.recipe.SeedBuilder$Factory"
+  },
+  "recipes": {
+    "charred_wood": "epicsquid.mysticalworld.recipe.CharredWoodRecipe$Factory",
+    "shaped_charred_wood": "epicsquid.mysticalworld.recipe.ShapedCharredWoodRecipe$Factory",
+    "spindle": "epicsquid.mysticalworld.recipe.SpindleStringRecipe$Factory"
+  }
+}

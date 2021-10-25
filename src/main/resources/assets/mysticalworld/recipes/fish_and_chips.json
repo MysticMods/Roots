@@ -1,0 +1,32 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "FP",
+    "PF"
+  ],
+  "key": {
+    "F": [
+      {
+        "item": "minecraft:cooked_fish",
+        "data": 0
+      },
+      {
+        "item": "minecraft:cooked_fish",
+        "data": 1
+      },
+      {
+        "item": "mysticalworld:cooked_squid"
+      }
+    ],
+    "P": [
+      {
+        "item": "minecraft:baked_potato"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:fish_and_chips",
+    "data": 0,
+    "count": 2
+  }
+}

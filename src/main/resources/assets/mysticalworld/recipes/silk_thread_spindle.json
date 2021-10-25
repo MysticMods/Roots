@@ -1,0 +1,16 @@
+{
+  "type": "mysticalworld:spindle",
+  "ingredients": [
+      {
+        "item": "mysticalworld:silk_cocoon"
+      },
+      {
+        "type": "mysticalworld:spindle"
+      }
+    ],
+  "result": {
+    "item": "mysticalworld:silk_thread",
+    "data": 0,
+    "count": 9
+  }
+}

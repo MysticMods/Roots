@@ -1,0 +1,32 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CAC",
+    "AEA",
+    "CAC"
+    ],
+  "key": {
+    "A": [
+      {
+        "type": "mysticalworld:multi_ore",
+        "ores": ["gemAmethyst", "gemDiamond"]
+      }
+    ],
+    "E": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemEmerald"
+      }
+    ],
+    "C": [
+      {
+        "item": "mysticalworld:cooked_squid"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:epic_squid",
+    "data": 0,
+    "count": 1
+  }
+}

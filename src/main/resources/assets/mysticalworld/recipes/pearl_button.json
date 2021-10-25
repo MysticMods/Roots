@@ -1,0 +1,12 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+      {
+        "item": "mysticalworld:pearl_block"
+      }
+    ],
+  "result": {
+    "item": "mysticalworld:pearl_button",
+    "data": 0
+  }
+}

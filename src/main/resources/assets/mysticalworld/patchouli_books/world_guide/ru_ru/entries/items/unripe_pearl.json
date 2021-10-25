@@ -1,0 +1,19 @@
+{
+  "name": "Молодые жемчуга",
+  "icon": "mysticalworld:unripe_pearl",
+  "category": "items",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:unripe_pearl",
+      "text": "Молодой жемчуг может быть найден сброшенным молодняком Эндермена, известным как $(l:creatures/endermini)Эндермини$()."
+    },
+    {
+      "type": "crafting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:ender_pearl",
+      "text": "Когда используется как предмет, он телепортирует случайно. Может быть соединён с 8 другими, чтобы сделать эндер-жемчуг.",
+      "title": "Эндер-жемчуг"
+    }
+  ]
+}

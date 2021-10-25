@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "D"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:silver_ingot"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:silver_nugget",
+    "count": 9
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "silver_ingot"
+    }
+  ]
+}

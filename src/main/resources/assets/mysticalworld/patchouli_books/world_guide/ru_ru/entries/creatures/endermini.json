@@ -1,0 +1,22 @@
+{
+  "name": "Эндермини",
+  "icon": "mysticalworld:young_pearl",
+  "category": "creatures",
+  "flag": "roots:endermini",
+  "pages": [{
+      "type": "animal_spawn_info",
+      "animal": "endermini",
+      "breed": "Разводить: не разводимый.",
+      "tame": "Приручать: не приручаемый.",
+      "blurb": "Эти милые маленькие существа всё так же не любят, когда на них смотрят!"
+    },
+    {
+      "type": "entity",
+      "name": "Эндермини",
+      "entity": "mysticalworld:entity_endermini",
+      "scale": 0.7,
+      "offset": 0,
+      "text": "Эти существа часто населяют Край вместе со своими старшими сородичами, эндерменами."
+    }
+  ]
+}

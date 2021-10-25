@@ -1,0 +1,91 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "texture": "mysticalworld:blocks/mud_block"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "facing": {
+      "east": {},
+      "west": {},
+      "south": {},
+      "north": {}
+    },
+    "in_wall": {
+      "true": {},
+      "false": {}
+    },
+    "open": {
+      "false": {},
+      "true": {}
+    },
+    "inventory": [
+      { "model":  "fence_gate_closed" }
+    ],
+    "handlers": [
+      { "model":  "fence_gate_closed" }
+    ],
+    "facing=east,in_wall=true,open=false": {
+      "model": "fence_gate_closed",
+      "y": 270
+    },
+    "facing=east,in_wall=true,open=true": {
+      "model": "fence_gate_open",
+      "y": 270
+    },
+    "facing=east,in_wall=false,open=false": {
+      "model": "fence_gate_closed",
+      "y": 270
+    },
+    "facing=east,in_wall=false,open=true": {
+      "model": "fence_gate_open",
+      "y": 270
+    },
+    "facing=west,in_wall=true,open=false": {
+      "model": "fence_gate_closed",
+      "y": 90
+    },
+    "facing=west,in_wall=true,open=true": {
+      "model": "fence_gate_open",
+      "y": 90
+    },
+    "facing=west,in_wall=false,open=false": {
+      "model": "fence_gate_closed",
+      "y": 90
+    },
+    "facing=west,in_wall=false,open=true": {
+      "model": "fence_gate_open",
+      "y": 90
+    },
+    "facing=south,in_wall=true,open=false": {
+      "model": "fence_gate_closed"
+    },
+    "facing=south,in_wall=true,open=true": {
+      "model": "fence_gate_open"
+    },
+    "facing=south,in_wall=false,open=false": {
+      "model": "fence_gate_closed"
+    },
+    "facing=south,in_wall=false,open=true": {
+      "model": "fence_gate_open"
+    },
+    "facing=north,in_wall=true,open=false": {
+      "model": "fence_gate_closed",
+      "y": 180
+    },
+    "facing=north,in_wall=true,open=true": {
+      "model": "fence_gate_open",
+      "y": 180
+    },
+    "facing=north,in_wall=false,open=false": {
+      "model": "fence_gate_closed",
+      "y": 180
+    },
+    "facing=north,in_wall=false,open=true": {
+      "model": "fence_gate_open",
+      "y": 180
+    }
+  }
+}

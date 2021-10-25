@@ -1,0 +1,33 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " GP",
+    " SG",
+    "G  "
+    ],
+  "key": {
+    "G": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "nuggetGold"
+      }
+    ],
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ],
+    "P": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemPearl"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:pearleporter",
+    "data": 0,
+    "count": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_side",
+    "textures": {
+        "wall": "mysticalworld:blocks/pearl_block"
+    }
+}

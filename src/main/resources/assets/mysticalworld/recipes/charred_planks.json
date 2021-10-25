@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "R"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "mysticalworld:charred_log"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:charred_planks",
+    "data": 0,
+    "count": 4
+  }
+}

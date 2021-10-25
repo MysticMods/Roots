@@ -1,0 +1,46 @@
+{
+  "name": "Обугленное дерево",
+  "icon": "mysticalworld:charred_log",
+  "category": "blocks",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:charred_log",
+      "text": "Найденные в мире, где древесина была сожжена или деревья, возможно, были поражены молнией, эти бревна служат в основном для декоративных целей.$(br2)Они могут быть дополнительно обуглены с использованием огнива, которое повреждается (не потребляется полностью) в процессе. Вы также можете использовать заряд огня, который потребляется."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:charred_wood_eight",
+      "recipe2": "mysticalworld:charred_wood"
+    },
+    {
+      "type": "crafting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:charred_planks",
+      "text": "Бревна могут быть переработаны в доски стандартным способом."
+    },
+    {
+      "type": "crafting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:charred_stairs",
+      "recipe2": "mysticalworld:charred_slab",
+      "text": "Доски можно превратить в различные декоративные блоки."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:charred_wall",
+      "recipe2": "mysticalworld:charred_fence",
+      "link_recipe": true
+    },
+    {
+      "type": "crafting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:charred_button",
+      "recipe2": "mysticalworld:charred_pressure_plate"
+    },
+    {
+      "type": "smelting",
+      "recipe": "mysticalworld:charred_log"
+    }
+  ]
+}

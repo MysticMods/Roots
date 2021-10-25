@@ -1,0 +1,32 @@
+{
+  "name": "Польза грязевых блоков",
+  "icon": "mysticalworld:mud_block_pressure_plate",
+  "category": "blocks",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:mud_block_pressure_plate",
+      "link_recipe": true,
+      "text": "Нажимные плиты могут быть изготовлены как из грязевого блока, так и из грязевого кирпича. Как каменные нажимные плиты, они в первую очередь реагируют на мобов."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:mud_block_pressure_plate",
+      "recipe2": "mysticalworld:mud_brick_pressure_plate",
+      "link_recipe": true,
+      "title": "Нажимные плиты"
+    },
+    {
+      "type": "spotlight",
+      "item": "mysticalworld:mud_block_button",
+      "link_recipe": true,
+      "text": "Кнопки могут быть изготовлены как из грязевого блока, так и из грязевого кирпича."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:mud_block_button",
+      "recipe2": "mysticalworld:mud_brick_button",
+      "link_recipe": true,
+      "title": "Кнопки"
+    }
+  ]
+}

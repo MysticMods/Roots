@@ -1,0 +1,21 @@
+{
+  "name": "Росток",
+  "icon": "mysticalworld:aubergine",
+  "category": "creatures",
+  "pages": [{
+      "type": "animal_spawn_info",
+      "animal": "sprout",
+      "breed": "Разводить: особенно.",
+      "tame": "Приручать: не приручаемый.",
+      "blurb": "Добыча с них зависит от цвета ростка!"
+    },
+    {
+      "type": "entity",
+      "name": "Росток",
+      "entity": "mysticalworld:entity_sprout",
+      "scale": 1,
+      "offset": 0,
+      "text": "Эти восхитительные корнеплоды любят долгие прогулки по пляжу, бродить по лесам, и пытаются научиться танцевать!"
+    }
+  ]
+}

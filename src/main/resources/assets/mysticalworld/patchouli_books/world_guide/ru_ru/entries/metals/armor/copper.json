@@ -1,0 +1,21 @@
+{
+  "name": "Медные доспехи",
+  "icon": "mysticalworld:copper_helmet",
+  "category": "metals_armor",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:copper_helmet",
+      "text": "Из этого блестящего оранжевого металла получается прочная броня, которая дает $(l:metals/modifiers/healthy)Живучесть$()."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:copper_helmet",
+      "recipe2": "mysticalworld:copper_chestplate"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:copper_leggings",
+      "recipe2": "mysticalworld:copper_boots"
+    }
+  ]
+}

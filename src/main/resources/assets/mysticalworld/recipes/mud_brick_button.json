@@ -1,0 +1,12 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+      {
+        "item": "mysticalworld:mud_brick"
+      }
+    ],
+  "result": {
+    "item": "mysticalworld:mud_brick_button",
+    "data": 0
+  }
+}

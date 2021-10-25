@@ -1,0 +1,223 @@
+#####Translation into Spanish by OdinsRagnarok#####
+
+itemGroup.mysticalworld=Mundo Místico
+
+entity.entity_fox.name=Zorro
+entity.entity_frog.name=Rana
+entity.entity_beetle.name=Escarabajo
+entity.entity_deer.name=Ciervo
+entity.entity_sprout.name=Brote
+entity.entity_endermini.name=MiniEnder
+entity.entity_owl.name=Búho
+entity.entity_silkworm.name=Gusano de seda
+entity.entity_lava_cat.name=Gato de Lava
+entity.entity_obsidian_cat.name=Gato de Obsidiana
+
+item.carapace.name=Carapacho
+item.pelt.name=Piel
+item.raw_squid.name=Calamar crudo
+item.cooked_squid.name=Calamares
+item.epic_squid.name=Calamar épico
+item.unripe_pearl.name=Perla inmadura
+item.silk_thread.name=Hilo de seda
+item.silk_cocoon.name=Capullo de seda
+item.spindle.name=Huso
+item.silkworm_egg.name=Huevo de gusano de seda
+item.cooked_apple.name=Manzana cocinada
+
+# Ingots
+item.copper_ingot.name=Lingote de Cobre
+item.tin_ingot.name=Lingote de Estaño
+item.silver_ingot.name=Lingote de Plata
+item.lead_ingot.name=Lingote de Plomo
+item.nickel_ingot.name=Lingote de Níquel
+item.aluminum_ingot.name=Lingote de Aluminio
+item.zinc_ingot.name=Lingote de Zinc
+item.invar_ingot.name=Lingote de Invar
+item.electrum_ingot.name=Lingote de Electro
+item.brass_ingot.name=Lingote de Latón
+item.bronze_ingot.name=Lingote de Bronce
+item.amethyst_gem.name=Amatista
+
+# Nuggets
+item.copper_nugget.name=Pepita de Cobre
+item.tin_nugget.name=Pepita de Estaño
+item.silver_nugget.name=Pepita de Plata
+item.lead_nugget.name=Pepita de Plomo
+item.nickel_nugget.name=Pepita de Níquel
+item.aluminum_nugget.name=Pepita de Aluminio
+item.zinc_nugget.name=Pepita de Zinc
+item.invar_nugget.name=Pepita de Invar
+item.electrum_nugget.name=Pepita de Electro
+item.brass_nugget.name=Pepita de Latón
+item.bronze_nugget.name=Pepita de Bronce
+
+# Metal Blocks
+tile.copper_block.name=Bloque de Cobre
+tile.tin_block.name=Bloque de Estaño
+tile.silver_block.name=Bloque de Plata
+tile.lead_block.name=Bloque de Plomo
+tile.nickel_block.name=Bloque de Níquel
+tile.aluminum_block.name=Bloque de Aluminio
+tile.zinc_block.name=Bloque de Zinc
+tile.invar_block.name=Bloque de Invar
+tile.electrum_block.name=Bloque de Electro
+tile.brass_block.name=Bloque de Latón
+tile.bronze_block.name=Bloque de Bronce
+tile.amethyst_block.name=Bloque de Amatista
+
+# Dusts
+item.copper_dust.name=Polvo de Cobre
+item.tin_dust.name=Polvo de Estaño
+item.silver_dust.name=Polvo de Plata
+item.lead_dust.name=Polvo de Plomo
+item.nickel_dust.name=Polvo de Níquel
+item.aluminum_dust.name=Polvo de Aluminio
+item.zinc_dust.name=Polvo de Zinc
+item.invar_dust.name=Polvo de Invar
+item.electrum_dust.name=Polvo de Electro
+item.brass_dust.name=Polvo de Latón
+item.bronze_dust.name=Polvo de Bronce
+
+item.iron_dust.name=Polvo de Hierro
+item.gold_dust.name=Polvo de Oro
+
+# Tiny Dusts
+item.copper_dust_tiny.name=Pequeña Pila de Polvo de Cobre
+item.tin_dust_tiny.name=Pequeña Pila de Polvo de Estaño
+item.silver_dust_tiny.name=Pequeña Pila de Polvo de Plata
+item.lead_dust_tiny.name=Pequeña Pila de Polvo de Plomo
+item.nickel_dust_tiny.name=Pequeña Pila de Polvo de Níquel
+item.aluminum_dust_tiny.name=Pequeña Pila de Polvo de Aluminio
+item.zinc_dust_tiny.name=Pequeña Pila de Polvo de Zinc
+item.invar_dust_tiny.name=Pequeña Pila de Polvo de Invar
+item.electrum_dust_tiny.name=Pequeña Pila de Polvo de Electro
+item.brass_dust_tiny.name=Pequeña Pila de Polvo de Latón
+item.bronze_dust_tiny.name=Pequeña Pila de Polvo de Bronce
+
+item.iron_dust_tiny.name=Pequeña Pila de Polvo de Hierro
+item.gold_dust_tiny.name=Pequeña Pila de Polvo de Oro
+
+# Ores
+tile.copper_ore.name=Mena de Cobre
+tile.tin_ore.name=Mena de Estaño
+tile.silver_ore.name=Mena de Plata
+tile.lead_ore.name=Mena de Plomo
+tile.nickel_ore.name=Mena de Níquel
+tile.aluminum_ore.name=Mena de Aluminio
+tile.zinc_ore.name=Mena de Zinc
+tile.amethyst_ore.name=Mena de Amatista
+
+#Tools
+item.copper_axe.name=Hacha de Cobre
+item.silver_axe.name=Hacha de Plata
+item.amethyst_axe.name=Hacha de Amatista
+item.copper_hoe.name=Azada de Cobre
+item.silver_hoe.name=Azada de Plata
+item.amethyst_hoe.name=Azada de Amatista
+item.copper_pickaxe.name=Pico de Cobre
+item.silver_pickaxe.name=Pico de Plata
+item.amethyst_pickaxe.name=Pico de Amatista
+item.copper_shovel.name=Pala de Cobre
+item.silver_shovel.name=Pala de Plata
+item.amethyst_shovel.name=Pala de Amatista
+item.copper_sword.name=Espada de Cobre
+item.silver_sword.name=Espada de Plata
+item.amethyst_sword.name=Espada de Amatista
+item.silver_knife.name=Cuchillo de Plata
+item.copper_knife.name=Cuchillo de Cobre
+item.amethyst_knife.name=Cuchillo de Amatista
+
+# Embers Metals
+item.dawnstone_ingot.name=Lingote de Piedra del Amanecer
+item.sooty_iron_ingot.name=Lingote de Hierro hollinoso
+
+item.dawnstone_nugget.name=Pepita de Piedra del Amanecer
+item.sooty_iron_nugget.name=Pepita de Hierro hollinoso
+
+tile.dawnstone_block.name=Bloque de Piedra del Amanecer
+tile.sooty_iron_block.name=Bloque de Hierro hollinoso
+
+# Caminite
+tile.caminite.name=Bloque de Caminita
+tile.caminite_stairs.name=Escaleras de Caminita
+tile.caminite_slab.name=Losa de Caminita
+tile.caminite_double_slab.name=Losa doble de Caminita
+tile.caminite_wall.name=Muro de Caminita
+
+tile.caminite_bricks.name=Ladrillos de Caminita
+tile.caminite_bricks_stairs.name=Escalera de ladrillo de Caminita
+tile.caminite_bricks_slab.name=Losa de ladrillo de Caminita
+tile.caminite_bricks_double_slab.name=Losa doble de ladrillo de Caminita
+tile.caminite_bricks_wall.name=Muro de ladrillo de Caminita
+
+# Mud Brick
+tile.wet_mud_brick.name=Ladrillo de Barro húmedo
+tile.wet_mud_block.name=Bloque de Barro húmedo
+tile.mud_brick.name=Ladrillo de Barro
+tile.mud_block.name=Bloque de Barro
+tile.mud_block_stairs.name=Escalera de Bloque de Barro
+tile.mud_block_slab.name=Losa de Bloque de Barro
+tile.mud_block_wall.name=Muro de Bloque de Barro
+tile.mud_block_button.name=Botón de Bloque de Barro
+tile.mud_block_pressure_plate.name=Placa de presión de Bloque de Barro
+tile.mud_block_fence.name=Valla de Bloque de Barro
+tile.mud_brick_stairs.name=Escalera de Ladrillo de Barro
+tile.mud_brick_slab.name=Losa de Ladrillo de Barro
+tile.mud_brick_wall.name=Muro de Ladrillo de Barro
+tile.mud_brick_button.name=Botón de Ladrillo de Barro
+tile.mud_brick_pressure_plate.name=Placa de presión de Ladrillo de Barro
+tile.mud_brick_fence.name=Valla de Ladrillo de Barro
+
+# Charred
+tile.charred_planks.name=Tablones de Carbonizado
+tile.charred_log.name=Tronco de Carbonizado
+tile.charred_stairs.name=Escalera de Carbonizado
+tile.charred_slab.name=Losa de Carbonizado
+tile.charred_wall.name=Muro de Carbonizado
+tile.charred_button.name=Botón de Carbonizado
+tile.charred_pressure_plate.name=Placa de presión de Carbonizado
+tile.charred_fence.name=Valla de Carbonizado
+
+
+#Solar Infused
+tile.solar_infused_stone.name=Piedra con Infusión Solar
+tile.solar_infused_stone_stairs.name=Escalera de Piedra con Infusión Solar
+tile.solar_infused_stone_slab.name=Losa de Piedra con Infusión Solar
+tile.solar_infused_stone_double_slab.name=Losa doble de Piedra con Infusión Solar
+tile.solar_infused_stone_wall.name=Muro de Piedra con Infusión Solar
+
+#Advancements
+advancement.mysticalworld.root=Mundo Místico
+advancement.mysticalworld.root.desc=Respira en un nuevo mundo místico!
+advancement.mysticalworld.amethyst=Prueba de sobriedad
+advancement.mysticalworld.amethyst.desc=Encuentra una gema más divina que el diamante!
+advancement.mysticalworld.aubergine=Eso no es zanahoria...
+advancement.mysticalworld.aubergine.desc=Una vez, las zanahorias moradas estaban de moda. Pero esto es una berenjena.
+advancement.mysticalworld.epic_squid=Calamar Épico!
+advancement.mysticalworld.epic_squid.desc=Disfruta de algunas de las sabrosas y púrpuras delicias del Calamar Épico.
+
+item.venison.name=Venado
+item.cooked_venison.name=Venado cocinado
+item.antlers.name=Cornamenta
+item.ink_bottle.name=Bote de tinta
+item.aubergine_seed.name=Semilla de berenjena
+item.aubergine.name=Berenjena
+item.cooked_aubergine.name=Berenjena cocinada
+item.stuffed_aubergine.name=Berenjena rellena
+
+message.squid.cooldown=Dale tiempo para producir más tinta!
+
+item.charm.plain.name=Talismán Inválido
+item.charm.iron.emerald.name=Talismán de Hierro & Esmeralda
+item.charm.iron.diamond.name=Talismán de Hierro & Diamante
+item.charm.iron.amethyst.name=Talismán de Hierro & Amatista
+item.charm.silver.emerald.name=Talismán de Plata & Esmeralda
+item.charm.silver.diamond.name=Talismán de Plata & Diamante
+item.charm.silver.amethyst.name=Talismán de Plata & Amatista
+item.charm.copper.emerald.name=Talismán de Cobre & Esmeralda
+item.charm.copper.diamond.name=Talismán de Cobre & Diamante
+item.charm.copper.amethyst.name=Talismán de Cobre & Amatista
+item.charm.gold.emerald.name=Talismán de Oro & Esmeralda
+item.charm.gold.diamond.name=Talismán de Oro & Diamante
+item.charm.gold.amethyst.name=Talismán de Oro & Amatista

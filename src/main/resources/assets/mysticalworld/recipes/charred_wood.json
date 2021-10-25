@@ -1,0 +1,17 @@
+{
+  "type": "mysticalworld:charred_wood",
+  "ingredients": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "logWood"
+      },
+      {
+        "type": "mysticalworld:flint_and_steel"
+      }
+    ],
+  "result": {
+    "item": "mysticalworld:charred_log",
+    "data": 0,
+    "count": 1
+  }
+}

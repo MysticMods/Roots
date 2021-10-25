@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "mysticalworld:charred_log" },
+    "axis=z":   { "model": "mysticalworld:charred_log", "x": 90 },
+    "axis=x":   { "model": "mysticalworld:charred_log", "x": 90, "y": 90 },
+    "axis=none": { "model": "mysticalworld:charred_log" }
+  }
+}

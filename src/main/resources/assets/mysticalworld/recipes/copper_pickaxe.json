@@ -1,0 +1,37 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CCC",
+    " S ",
+    " S "
+    ],
+  "key": {
+    "C": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "ingotCopper"
+      }
+    ],
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:copper_pickaxe",
+    "data": 0,
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "copper"
+    },
+    {
+      "type": "mysticalworld:config",
+      "config": "copper_pickaxe"
+    }
+  ]
+}

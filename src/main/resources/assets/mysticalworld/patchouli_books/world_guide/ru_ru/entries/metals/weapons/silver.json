@@ -1,0 +1,21 @@
+{
+  "name": "Серебряное оружие",
+  "icon": "mysticalworld:silver_knife",
+  "category": "metals_weapons",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:silver_ingot",
+      "text": "Серебро - это драгоценный металл."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:silver_knife",
+      "recipe2": "mysticalworld:silver_spear",
+      "title": "Серебряное оружие"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:silver_sword"
+    }
+  ]
+}

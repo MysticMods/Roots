@@ -1,0 +1,23 @@
+{
+  "name": "Медные инструменты",
+  "icon": "mysticalworld:copper_axe",
+  "category": "metals_tools",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:copper_ingot",
+      "text": "Медь - это обычный металл, который можно плавить в слитки, а затем перерабатывать в прочные инструменты.$(br2)Эти инструменты имеют тот же уровень сбора, что и железные инструменты."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:copper_axe",
+      "recipe2": "mysticalworld:copper_hoe",
+      "title": "Медные инструменты"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:copper_shovel",
+      "recipe2": "mysticalworld:copper_pickaxe",
+      "title": "Медные инструменты"
+    }
+  ]
+}

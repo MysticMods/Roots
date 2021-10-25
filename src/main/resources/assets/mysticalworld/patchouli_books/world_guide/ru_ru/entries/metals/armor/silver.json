@@ -1,0 +1,21 @@
+{
+  "name": "Серебряные доспехи",
+  "icon": "mysticalworld:silver_helmet",
+  "category": "metals_armor",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:silver_helmet",
+      "text": "Серебряные доспехи обеспечивают как духовную, так и физическую защиту, предоставляя $(l:metals/modifiers/smiting_blessed)Благословение$()."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:silver_helmet",
+      "recipe2": "mysticalworld:silver_chestplate"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:silver_leggings",
+      "recipe2": "mysticalworld:silver_boots"
+    }
+  ]
+}

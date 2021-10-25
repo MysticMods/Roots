@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "D"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:copper_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:copper_ingot",
+    "count": 9
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "copper_block"
+    }
+  ]
+}

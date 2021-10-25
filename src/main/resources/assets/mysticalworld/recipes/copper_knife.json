@@ -1,0 +1,35 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "  W",
+    " W ",
+    "S  "  ],
+  "key": {
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ],
+    "W": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "ingotCopper"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:copper_knife",
+    "data": 0
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "copper"
+    },
+    {
+      "type": "mysticalworld:config",
+      "config": "copper_knife"
+    }
+  ]
+}

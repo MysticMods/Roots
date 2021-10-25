@@ -1,0 +1,46 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "button",
+    "textures": {
+      "texture": "mysticalworld:blocks/pearl_block"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "powered": {
+      "true": {
+        "model": "button_pressed"
+      },
+      "false": {}
+    },
+    "inventory": {
+      "model": "button_inventory"
+    },
+    "facing": {
+      "up": {},
+      "down": {
+        "x": 180
+      },
+      "east": {
+        "x": 90,
+        "y": 90
+      },
+      "west": {
+        "x": 90,
+        "y": 270
+      },
+      "south": {
+        "x": 90,
+        "y": 180
+      },
+      "north": {
+        "x": 90
+      }
+    }
+  }
+}
+

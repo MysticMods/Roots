@@ -1,0 +1,21 @@
+{
+  "name": "Аметистовое оружие",
+  "icon": "mysticalworld:amethyst_knife",
+  "category": "metals_weapons",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:amethyst",
+      "text": "Драгоценные камни аметиста можно превратить в деликатное, но мощное оружие, которое наносит огромный урон большинству врагов."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:amethyst_knife",
+      "recipe2": "mysticalworld:amethyst_spear",
+      "title": "Аметистовое оружие"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:amethyst_sword"
+    }
+  ]
+}

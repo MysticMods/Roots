@@ -1,0 +1,79 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "count=0": [
+      {
+        "model": "mysticalworld:slime_egg"
+      },
+      {
+        "model": "mysticalworld:slime_egg",
+        "y": 90
+      },
+      {
+        "model": "mysticalworld:slime_egg",
+        "y": 180
+      },
+      {
+        "model": "mysticalworld:slime_egg",
+        "y": 270
+      }
+    ],
+    "count=1": [
+      {
+        "model": "mysticalworld:slime_egg_two"
+      },
+      {
+        "model": "mysticalworld:slime_egg_two",
+        "y": 90
+      },
+      {
+        "model": "mysticalworld:slime_egg_two",
+        "y": 180
+      },
+      {
+        "model": "mysticalworld:slime_egg_two",
+        "y": 270
+      }
+    ],
+    "count=2": [
+      {
+        "model": "mysticalworld:slime_egg_three"
+      },
+      {
+        "model": "mysticalworld:slime_egg_three",
+        "y": 90
+      },
+      {
+        "model": "mysticalworld:slime_egg_three",
+        "y": 180
+      },
+      {
+        "model": "mysticalworld:slime_egg_three",
+        "y": 270
+      }
+    ],
+    "count=3": [
+      {
+        "model": "mysticalworld:slime_egg_four"
+      },
+      {
+        "model": "mysticalworld:slime_egg_four",
+        "y": 90
+      },
+      {
+        "model": "mysticalworld:slime_egg_four",
+        "y": 180
+      },
+      {
+        "model": "mysticalworld:slime_egg_four",
+        "y": 270
+      }
+    ],
+    "handlers": [
+      {}
+    ]
+  }
+}

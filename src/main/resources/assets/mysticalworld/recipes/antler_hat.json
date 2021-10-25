@@ -1,0 +1,32 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "A A",
+    "WWW",
+    "S S"
+    ],
+  "key": {
+    "A": [
+      {
+        "item": "mysticalworld:antlers"
+      }
+    ],
+    "W": [
+        {
+            "type": "forge:ore_dict",
+            "ore": "wool"
+        }
+    ],
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "string"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:antler_hat",
+    "data": 0,
+    "count": 1
+  }
+}

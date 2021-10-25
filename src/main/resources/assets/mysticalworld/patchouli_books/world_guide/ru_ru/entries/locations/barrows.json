@@ -1,0 +1,17 @@
+{
+  "name": "Курганы",
+  "icon": "minecraft:stonebrick:1",
+  "category": "locations",
+  "pages": [{
+      "type": "text",
+      "title": "Курганы",
+      "text": "Когда-то места захоронения для покойных, эти локации были разрушены за годы. Неизвестно, останутся ли сокровища - или мертвецы."
+    },
+    {
+      "type": "image",
+      "title": "Курган",
+      "text": "Что-то для исследований.",
+      "images": ["mysticalworld:textures/barrow.png"]
+    }
+  ]
+}

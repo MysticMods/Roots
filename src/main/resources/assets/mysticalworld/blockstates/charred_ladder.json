@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "mysticalworld:charred_ladder" },
+        "facing=east":  { "model": "mysticalworld:charred_ladder", "y": 90 },
+        "facing=south": { "model": "mysticalworld:charred_ladder", "y": 180 },
+        "facing=west":  { "model": "mysticalworld:charred_ladder", "y": 270 }
+    }
+}

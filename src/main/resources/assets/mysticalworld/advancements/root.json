@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "mysticalworld:antlers"
+    },
+    "title": {
+      "translate": "advancement.mysticalworld.root"
+    },
+    "description": {
+      "translate": "advancement.mysticalworld.root.desc"
+    },
+    "background": "mysticalworld:textures/blocks/thatch.png",
+    "show_toast": false,
+    "announce_to_chat" : false
+  },
+  "criteria": {
+    "auto": {
+      "trigger": "minecraft:location"
+    }
+  }
+}

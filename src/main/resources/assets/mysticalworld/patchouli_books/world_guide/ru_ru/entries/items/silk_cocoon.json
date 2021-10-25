@@ -1,0 +1,11 @@
+{
+  "name": "Шёлковый кокон",
+  "icon": "mysticalworld:silk_cocoon",
+  "category": "items",
+  "pages": [{
+    "type": "spotlight",
+    "item": "mysticalworld:silk_cocoon",
+    "link_recipe": true,
+    "text": "Такие коконы сотканы $(l:creatures/silkworm)шелкопрядами$() после взросления. Процесс взросления можно ускорить, кидая листья на землю рядом с шелкопрядом, которые тот должен съесть."
+  }]
+}

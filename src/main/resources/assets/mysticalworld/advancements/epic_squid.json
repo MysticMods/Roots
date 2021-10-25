@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "mysticalworld:epic_squid"
+    },
+    "title": {
+      "translate": "advancement.mysticalworld.epic_squid"
+    },
+    "description": {
+      "translate": "advancement.mysticalworld.epic_squid.desc"
+    },
+    "frame": "challenge"
+  },
+  "parent": "mysticalworld:root",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "mysticalworld:epic_squid"
+        }
+      }
+    }
+  }
+}

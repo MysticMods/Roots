@@ -1,0 +1,7 @@
+{
+    "variants":{
+        "custom": { "model": "mysticalworld:charred_sapling" },
+        "stage=0": { "model": "mysticalworld:charred_sapling" },
+        "stage=1": { "model": "mysticalworld:charred_sapling" }
+    }
+}

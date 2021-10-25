@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mysticalworld:silk_thread"
+    },
+    {
+      "item": "mysticalworld:silk_thread"
+    }
+  ],
+  "result": {
+    "item": "minecraft:string"
+  }
+}

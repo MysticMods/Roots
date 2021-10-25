@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CCC",
+    "C C"
+    ],
+  "key": {
+    "C": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "ingotCopper"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:copper_helmet",
+    "data": 0,
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "copper"
+    },
+    {
+      "type": "mysticalworld:config",
+      "config": "copper_armor"
+    }
+  ]
+}

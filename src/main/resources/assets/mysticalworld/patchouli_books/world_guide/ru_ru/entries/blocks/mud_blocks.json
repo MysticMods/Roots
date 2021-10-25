@@ -1,0 +1,29 @@
+{
+  "name": "Блоки грязи",
+  "icon": "mysticalworld:wet_mud_block",
+  "category": "blocks",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:wet_mud_block",
+      "link_recipe": true,
+      "title": "Мокрый грязевой блок",
+      "text": "После изготовления их можно высушить в печи."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:wet_mud_block",
+      "recipe2": "mysticalworld:wet_mud_brick",
+      "link_recipe": true,
+      "title": "Блоки из мокрой грязи",
+      "text": "Мокрые кирпичи также могут быть изготовлены."
+    },
+    {
+      "type": "smelting",
+      "recipe": "mysticalworld:wet_mud_block",
+      "recipe2": "mysticalworld:wet_mud_brick",
+      "link_recipe": true,
+      "title": "Быстрое изготовление",
+      "text": "Вы можете сушить грязевые блоки и кирпичи в печи, для преобразования."
+    }
+  ]
+}

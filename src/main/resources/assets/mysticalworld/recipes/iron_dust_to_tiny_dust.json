@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "D"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:iron_dust"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:iron_dust_tiny",
+    "count": 9
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "iron_tiny_dust"
+    }
+  ]
+}

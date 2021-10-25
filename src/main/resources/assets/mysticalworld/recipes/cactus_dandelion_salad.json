@@ -1,0 +1,32 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DCD",
+    "CDC",
+    "BBB"
+  ],
+  "key": {
+    "C": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "blockCactus"
+      }
+    ],
+    "D": [
+      {
+        "item": "minecraft:yellow_flower",
+        "data": 0
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:bowl"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:cactus_dandelion_salad",
+    "data": 0,
+    "count": 3
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "farmland",
+    "textures": {
+      "dirt": "mysticalworld:blocks/wet_mud_brick",
+      "top": "mysticalworld:blocks/wet_mud_brick"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
+}

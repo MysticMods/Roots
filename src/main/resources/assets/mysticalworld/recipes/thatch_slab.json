@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DDD"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:thatch"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:thatch_slab",
+    "data": 0,
+    "count": 6
+  }
+}

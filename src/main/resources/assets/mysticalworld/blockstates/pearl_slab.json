@@ -1,0 +1,26 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "half_slab",
+    "textures": {
+      "bottom": "mysticalworld:blocks/pearl_block",
+      "top": "mysticalworld:blocks/pearl_block",
+      "side": "mysticalworld:blocks/pearl_block"
+    }
+  },
+  "variants": {
+    "half": {
+      "bottom": {
+      },
+      "top": {
+        "model": "upper_slab"
+      }
+    },
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
+}

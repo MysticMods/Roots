@@ -1,0 +1,21 @@
+{
+"forge_marker": 1,
+  "defaults": {
+    "model": "pressure_plate_up",
+    "textures": {
+      "texture": "mysticalworld:blocks/pearl_block"
+    }
+  },
+  "variants": {
+    "powered=true": {
+      "model": "pressure_plate_down"
+    },
+    "powered=false": {
+      "model": "pressure_plate_up"
+    },
+    "inventory": [{
+    }],
+    "handlers": [{
+    }]
+  }
+}

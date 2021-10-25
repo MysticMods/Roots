@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "D  ",
+    "DD ",
+    "DDD"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:mud_brick"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:mud_brick_stairs",
+    "data": 0,
+    "count": 8
+  }
+}

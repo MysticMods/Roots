@@ -1,0 +1,20 @@
+{
+  "name": "Баклажан",
+  "icon": "mysticalworld:aubergine",
+  "category": "crops",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:aubergine_seed",
+      "text": "Семена баклажана можно найти по всему миру, где есть трава, которую можно сломать.",
+      "title": "Семена баклажана"
+    },
+    {
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:aubergine",
+      "text": "Когда баклажаны собирают зрелыми, это вкусная и лакомая закуска, которую можно использовать в других блюдах!",
+      "title": "Баклажан"
+    }
+  ]
+}

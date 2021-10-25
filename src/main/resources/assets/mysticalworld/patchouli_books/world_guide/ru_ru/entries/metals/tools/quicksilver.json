@@ -1,0 +1,23 @@
+{
+  "name": "Ртутные инструменты",
+  "icon": "mysticalworld:quicksilver_axe",
+  "category": "metals_tools",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:quicksilver_ingot",
+      "text": "Ртуть - это необычный, волшебный металл, который, хотя обычно и жидкий, может быть превращен в твердый предмет, который можно использовать для изготовления инструментов. $(br2)Помимо того, что они имеют такой же уровень сбора, что и железные, они не теряют прочности от использования, а портятся со временем."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:quicksilver_axe",
+      "recipe2": "mysticalworld:quicksilver_hoe",
+      "title": "Ртутные инструменты"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:quicksilver_shovel",
+      "recipe2": "mysticalworld:quicksilver_pickaxe",
+      "title": "Ртутные инструменты"
+    }
+  ]
+}

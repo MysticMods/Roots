@@ -1,0 +1,23 @@
+{
+  "name": "Оловянные инструменты",
+  "icon": "mysticalworld:tin_axe",
+  "category": "metals_tools",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:tin_ingot",
+      "text": "Олово является обычным, хотя и мягким металлом, который может быть использован для изготовления различных инструментов.$(br2)Эти инструменты имеют тот же уровень урожая, что и железные инструменты."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:tin_axe",
+      "recipe2": "mysticalworld:tin_hoe",
+      "title": "Оловянные инструменты"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:tin_shovel",
+      "recipe2": "mysticalworld:tin_pickaxe",
+      "title": "Оловянные инструменты"
+    }
+  ]
+}

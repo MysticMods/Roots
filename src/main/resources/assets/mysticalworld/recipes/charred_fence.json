@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DSD",
+    "DSD"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:charred_planks"
+      }
+    ],
+    "S": [
+        {
+            "type": "forge:ore_dict",
+            "ore": "stickWood"
+        }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:charred_fence",
+    "data": 0,
+    "count": 6
+  }
+}

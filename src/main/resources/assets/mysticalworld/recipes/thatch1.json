@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "WB",
+    "BW"
+    ],
+  "key": {
+    "W": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "cropWheat"
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:hay_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:thatch",
+    "data": 0,
+    "count": 16
+  }
+}

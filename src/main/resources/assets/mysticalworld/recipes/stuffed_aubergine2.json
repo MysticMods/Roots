@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mysticalworld:cooked_aubergine",
+      "data": 0
+    },
+    {
+      "item": "minecraft:carrot",
+      "data": 0
+    },
+    {
+      "item": "minecraft:beetroot",
+      "data": 0
+    },
+    {
+      "item": "mysticalworld:cooked_carrot",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "mysticalworld:stuffed_aubergine",
+    "data": 0
+  }
+}

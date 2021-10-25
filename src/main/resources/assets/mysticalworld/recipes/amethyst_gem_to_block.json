@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DDD",
+    "DDD",
+    "DDD"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:amethyst_gem"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:amethyst_block",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "amethyst_gem"
+    }
+  ]
+}

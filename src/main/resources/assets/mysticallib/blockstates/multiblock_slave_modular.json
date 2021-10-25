@@ -1,0 +1,5 @@
+{
+	"variants":{
+		"custom":{"model": "elulib:multiblock_slave_modular"}
+	}
+}

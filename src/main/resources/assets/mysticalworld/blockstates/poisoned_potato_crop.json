@@ -1,0 +1,58 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "crop"
+    },
+    "variants":{
+        "age": {
+            "0": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/poisoned_potatoes_stage_0",
+                    "crop": "mysticalworld:blocks/poisoned_potatoes_stage_0"
+                }
+            },
+            "1": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/poisoned_potatoes_stage_0",
+                    "crop": "mysticalworld:blocks/poisoned_potatoes_stage_0"
+                }
+            },
+            "2": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/poisoned_potatoes_stage_1",
+                    "crop": "mysticalworld:blocks/poisoned_potatoes_stage_1"
+                }
+            },
+            "3": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/poisoned_potatoes_stage_1",
+                    "crop": "mysticalworld:blocks/poisoned_potatoes_stage_1"
+                }
+            },
+            "4": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/poisoned_potatoes_stage_2",
+                    "crop": "mysticalworld:blocks/poisoned_potatoes_stage_2"
+                }
+            },
+            "5": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/poisoned_potatoes_stage_2",
+                    "crop": "mysticalworld:blocks/poisoned_potatoes_stage_2"
+                }
+            },
+            "6": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/poisoned_potatoes_stage_2",
+                    "crop": "mysticalworld:blocks/poisoned_potatoes_stage_2"
+                }
+            },
+            "7": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/poisoned_potatoes_stage_3",
+                    "crop": "mysticalworld:blocks/poisoned_potatoes_stage_3"
+                }
+            }
+        }
+    }
+}

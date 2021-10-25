@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mysticalworld:aubergine",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "mysticalworld:aubergine_seed",
+    "data": 0
+  }
+}

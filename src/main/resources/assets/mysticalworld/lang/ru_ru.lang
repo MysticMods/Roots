@@ -1,0 +1,326 @@
+itemGroup.mysticalworld=Mystical World
+
+entity.entity_fox.name=Лис
+entity.entity_frog.name=Лягушка
+entity.entity_beetle.name=Жук
+entity.entity_deer.name=Олень
+entity.entity_sprout.name=Росток
+entity.entity_endermini.name=Эндермини
+entity.entity_owl.name=Сова
+entity.entity_silkworm.name=Шелкопряд
+entity.entity_lava_cat.name=Лавовый кот
+entity.entity_obsidian_cat.name=Обсидиановый кот
+entity.entity_hell_sprout.name=Адский росток
+
+item.carapace.name=Панцирь
+item.pelt.name=Шкура
+item.raw_squid.name=Сырой спрут
+item.cooked_squid.name=Приготовленный спрут
+item.epic_squid.name=Эпический спрут
+item.unripe_pearl.name=Незрелая жемчужина
+item.silk_thread.name=Шелковая нить
+item.silk_cocoon.name=Шелковый кокон
+item.spindle.name=Веретено
+item.silkworm_egg.name=Яйцо шелкопряда
+item.cooked_apple.name=Приготовленное яблоко
+item.pearl.name=Блестящая жемчужина
+item.gall_apple.name=Желчное яблоко
+item.wasp_attractant.name=Аттрактант осы
+item.tannins.name=Танины
+item.antler_hat.name=Олений шлем
+item.beetle_mask.name=Жучья маска
+
+# Ingots
+item.copper_ingot.name=Медный слиток
+item.tin_ingot.name=Оловянный слиток
+item.silver_ingot.name=Серебряный слиток
+item.lead_ingot.name=Свинцовый слиток
+item.nickel_ingot.name=Никелевый слиток
+item.aluminum_ingot.name=Алюминиевый слиток
+item.zinc_ingot.name=Цинковый слиток
+item.invar_ingot.name=Инваровый слиток
+item.electrum_ingot.name=Электрумовый слиток
+item.brass_ingot.name=Латунный слиток
+item.bronze_ingot.name=Бронзовый слиток
+item.amethyst_gem.name=Аметист
+
+# Nuggets
+item.copper_nugget.name=Медный самородок
+item.tin_nugget.name=Оловянный самородок
+item.silver_nugget.name=Серебряный самородок
+item.lead_nugget.name=Свинцовый самородок
+item.nickel_nugget.name=Никелевый самородок
+item.aluminum_nugget.name=Алюминиевый самородок
+item.zinc_nugget.name=Цинковый самородок
+item.invar_nugget.name=Инваровый самородок
+item.electrum_nugget.name=Электрумовый самородок
+item.brass_nugget.name=Латунный самородок
+item.bronze_nugget.name=Бронзовый самородок
+
+# Metal Blocks
+tile.copper_block.name=Блок меди
+tile.tin_block.name=Блок олова
+tile.silver_block.name=Блок серебра
+tile.lead_block.name=Блок свинца
+tile.nickel_block.name=Блок никеля
+tile.aluminum_block.name=Блок алюминия
+tile.zinc_block.name=Блок цинка
+tile.invar_block.name=Блок инвара
+tile.electrum_block.name=Блок электрума
+tile.brass_block.name=Блок латуни
+tile.bronze_block.name=Блок бронзы
+tile.amethyst_block.name=Блок аметиста
+
+# Dusts
+item.copper_dust.name=Медная пыль
+item.tin_dust.name=Оловянная пыль
+item.silver_dust.name=Серебряная пыль
+item.lead_dust.name=Свинцовая пыль
+item.nickel_dust.name=Никелевая пыль
+item.aluminum_dust.name=Алюминиевая пыль
+item.zinc_dust.name=Цинковая пыль
+item.invar_dust.name=Инваровая пыль
+item.electrum_dust.name=Электрумовая пыль
+item.brass_dust.name=Латуниевая пыль
+item.bronze_dust.name=Бронзовая пыль
+
+item.iron_dust.name=Железная пыль
+item.gold_dust.name=Золотая пыль
+
+# Tiny Dusts
+item.copper_dust_tiny.name=Маленькая кучка медной пыли
+item.tin_dust_tiny.name=Маленькая кучка оловянной пыли
+item.silver_dust_tiny.name=Маленькая кучка серебряной пыли
+item.lead_dust_tiny.name=Маленькая кучка свинцовой пыли
+item.nickel_dust_tiny.name=Маленькая кучка никелевой пыли
+item.aluminum_dust_tiny.name=Маленькая кучка алюминиевой пыли
+item.zinc_dust_tiny.name=Маленькая кучка цинковой пыли
+item.invar_dust_tiny.name=Маленькая кучка инваровой пыли
+item.electrum_dust_tiny.name=Маленькая кучка электрумовой пыли
+item.brass_dust_tiny.name=Маленькая кучка латуниевой пыли
+item.bronze_dust_tiny.name=Маленькая кучка бронзовой пыли
+
+item.iron_dust_tiny.name=Маленькая кучка железной пыли
+item.gold_dust_tiny.name=Маленькая кучка золотой пыли
+
+# Ores
+tile.copper_ore.name=Медная руда
+tile.tin_ore.name=Оловянная руда
+tile.silver_ore.name=Серебряная руда
+tile.lead_ore.name=Свинцовая руда
+tile.nickel_ore.name=Никелевая руда
+tile.aluminum_ore.name=Алюминиевая руда
+tile.zinc_ore.name=Цинковая руда
+tile.amethyst_ore.name=Аметистовая руда
+
+#Tools
+item.copper_axe.name=Медный топор
+item.silver_axe.name=Серебряный топор
+item.amethyst_axe.name=Аметистовый топор
+item.copper_hoe.name=Медная мотыга
+item.silver_hoe.name=Серебряная мотыга
+item.amethyst_hoe.name=Аметистовая мотыга
+item.copper_pickaxe.name=Медная кирка
+item.silver_pickaxe.name=Серебряная кирка
+item.amethyst_pickaxe.name=Аметистовая кирка
+item.copper_shovel.name=Медная лопата
+item.silver_shovel.name=Серебряная лопата
+item.amethyst_shovel.name=Аметистовая лопата
+item.copper_sword.name=Медный меч
+item.silver_sword.name=Серебряный меч
+item.amethyst_sword.name=Аметистовый меч
+item.silver_knife.name=Серебряный нож
+item.copper_knife.name=Медный нож
+item.amethyst_knife.name=Аметистовый нож
+
+# Embers Metals
+item.dawnstone_ingot.name=Золотитовый слиток
+item.sooty_iron_ingot.name=Прокоптелый железный слиток
+
+item.dawnstone_nugget.name=Золотитовый самородок
+item.sooty_iron_nugget.name=Прокоптелый железный самородок
+
+tile.dawnstone_block.name=Блок золотита
+tile.sooty_iron_block.name=Блок прокоптелого железа
+
+# Caminite
+tile.caminite.name=Каминитовый Блок
+tile.caminite_stairs.name=Каминитовые ступеньки
+tile.caminite_slab.name=Каминитовая плита
+tile.caminite_double_slab.name=Двойная каминитовая плита
+tile.caminite_wall.name=Каминитовая ограда
+
+tile.caminite_bricks.name=Каминитовые кирпичи
+tile.caminite_bricks_stairs.name=Ступеньки из каминитового кирпича
+tile.caminite_bricks_slab.name=Плита из каминитового кирпича
+tile.caminite_bricks_double_slab.name=Двойная плита из каминитового кирпича
+tile.caminite_bricks_wall.name=Каминитовая кирпичная ограда
+
+# Mud Brick
+tile.wet_mud_brick.name=Кирпич из мокрой грязи
+tile.wet_mud_block.name=Блок из мокрой грязи
+tile.mud_brick.name=Кирпич из грязи
+tile.mud_block.name=Блок из грязи
+tile.mud_block_stairs.name=Ступеньки из грязи
+tile.mud_block_slab.name=Плита из грязи
+tile.mud_block_wall.name=Ограда из грязи
+tile.mud_block_button.name=Кнопка из грязи
+tile.mud_block_pressure_plate.name=Нажимная плита из грязи
+tile.mud_block_fence.name=Забор из грязи
+tile.mud_block_fence_gate.name=Калитка из грязи
+tile.mud_brick_stairs.name=Ступеньки из грязевых кирпичей
+tile.mud_brick_slab.name=Плита из грязевых кирпичей
+tile.mud_brick_wall.name=Ограда из грязевых кирпичей
+tile.mud_brick_button.name=Кнопка из грязевых кирпичей
+tile.mud_brick_pressure_plate.name=Нажимная плита из грязевых кирпичей
+tile.mud_brick_fence.name=Забор из грязевых кирпичей
+tile.mud_brick_fence_gat.ename=Калитка из грязевых кирпичей
+
+# Charred
+tile.charred_planks.name=Обугленные доски
+tile.charred_log.name=Обугленное бревно
+tile.charred_stairs.name=Обугленные ступеньки
+tile.charred_slab.name=Обугленная плита
+tile.charred_wall.name=Обугленная ограда
+tile.charred_button.name=Обугленная кнопка
+tile.charred_pressure_plate.name=Обугленная нажимная плита
+tile.charred_fence.name=Обугленный забор
+tile.charred_fence_gate.name=Обугленная калитка
+
+# Pearl
+tile.pearl_block.name=Жемчужный блок
+tile.pearl_stairs.name=Жемчужные ступеньки
+tile.pearl_slab.name=Жемчужная плита
+tile.pearl_wall.name=Жемчужная ограда
+tile.pearl_button.name=Жемчужная кнопка
+tile.pearl_pressure_plate.name=Жемчужная нажимная плита
+tile.pearl_fence.name=Жемчужный забор
+tile.pearl_fence_gate.name=Жемчужная калитка
+
+# Thatch
+tile.thatch.name=Солома
+tile.thatch_stairs.name=Соломенные ступеньки
+tile.thatch_slab.name=Соломенная плита
+tile.thatch_wall.name=Соломенная ограда
+
+# Slime
+tile.slime_puddle.name=Лужа слизи
+
+# Ore
+tile.granite_quartz_ore.name=Кварцевая руда
+tile.quartz_ore.name=Кварцевая руда
+
+#Solar Infused
+tile.solar_infused_stone.name=Солнечный камень
+tile.solar_infused_stone_stairs.name=Ступеньки из солнечного камня
+tile.solar_infused_stone_slab.name=Плита из солнечного камня
+tile.solar_infused_stone_double_slab.name=Двойная плита из солнечного камня
+tile.solar_infused_stone_wall.name=Ограда из солнечного камня
+
+#Advancements
+advancement.mysticalworld.root=Мистический мир
+advancement.mysticalworld.root.desc=Дыши в совершенно новом, мистическом мире!
+advancement.mysticalworld.amethyst=Тест на трезвость
+advancement.mysticalworld.amethyst.desc=Найти самоцвет совершеннее алмаза!
+advancement.mysticalworld.aubergine=Это не морковь...
+advancement.mysticalworld.aubergine.desc=Когда-то фиолетовая морковь была в моде. Но это баклажан.
+advancement.mysticalworld.epic_squid=Эпический спрут!
+advancement.mysticalworld.epic_squid.desc=Познайте вкуснейшее фиолетовое совершенство Эпического Спрута.
+
+item.venison.name=Оленина
+item.cooked_venison.name=Жареная оленина
+item.antlers.name=Оленьи рога
+item.ink_bottle.name=Пузырёк чернил
+item.aubergine_seed.name=Семена баклажана
+item.aubergine.name=Баклажан
+item.cooked_aubergine.name=Приготовленный баклажан
+item.stuffed_aubergine.name=Фаршерованный баклажан
+item.assorted_seeds.name=Смешеные семена
+item.cooked_seeds.name=Жареные семена
+item.copper_helmet.name=Медный шлем
+item.copper_chestplate.name=Медный нагрудник
+item.copper_leggings.name=Медные поножи
+item.copper_boots.name=Медные ботинки
+item.silver_helmet.name=Серебряный шлем
+item.silver_chestplate.name=Серебряный нагрудник
+item.silver_leggings.name=Серебряные поножи
+item.silver_boots.name=Серебряные ботинки
+
+message.squid.cooldown=Дайте время, чтобы произвести больше чернил!
+
+# Sounds
+mysticalworld.subtitles.entity.fox.aggro=Лиса тявкает
+mysticalworld.subtitles.entity.fox.bark=Лиса лает
+mysticalworld.subtitles.entity.fox.bite=Лиса кусает
+mysticalworld.subtitles.entity.fox.death=Лиса умирает
+mysticalworld.subtitles.entity.fox.eat=Лиса ест
+mysticalworld.subtitles.entity.fox.idle=Лиса тявкает
+mysticalworld.subtitles.entity.fox.sleep=Лиса спит
+mysticalworld.subtitles.entity.fox.sniff=Лиса принюхивается
+mysticalworld.subtitles.entity.fox.spit=Лиса сплёвывает
+mysticalworld.subtitles.entity.sprout.ambient=Росток бродит
+mysticalworld.subtitles.entity.endermini.death=Эндермини умирает
+mysticalworld.subtitles.entity.endermini.hit=Эндермини ранен
+mysticalworld.subtitles.entity.endermini.idle=Эндермини стрекочет
+mysticalworld.subtitles.entity.endermini.portal=Эндермини телепортируется
+mysticalworld.subtitles.entity.endermini.scream=Эндермини кричит
+mysticalworld.subtitles.entity.endermini.stare=Эндермини глазеет
+mysticalworld.subtitles.entity.silkworm.egg.use=Яйцо шелкопряда трескается
+mysticalworld.subtitles.entity.lava_cat.sizzle=Лавовый кот шипит
+mysticalworld.subtitles.entity.frog.slime=Лягушка выплёвывает слизь
+mysticalworld.subtitles.entity.lava_cat.ambient=Лавовый кот мяукает
+mysticalworld.subtitles.entity.lava_cat.death=Лавовый кот умирает
+mysticalworld.subtitles.entity.lava_cat.hurt=Лавовый кот ранен
+mysticalworld.subtitles.entity.lava_cat.purr=Лавовый кот мурчит
+mysticalworld.subtitles.entity.silkworm.plop=Шелкопряд шлёпает
+mysticalworld.subtitles.entity.squid.milk=Спрут подоен
+mysticalworld.subtitles.item.unripe_pearl.use=Телепортация незрелой жемчужины
+mysticalworld.subtitles.entity.silkworm.ambient=Шелкопряд стрекочет
+mysticalworld.subtitles.entity.silkworm.death=Шелкопряд умирает
+mysticalworld.subtitles.entity.silkworm.hurt=Шелкопряд ранен
+mysticalworld.subtitles.entity.silkworm.step=Шелкопряд ползёт
+mysticalworld.subtitles.entity.silkworm.eat=Шелкопряд ест
+
+# Tags
+forge.biome.tags.hot.name=Горячий
+forge.biome.tags.cold.name=Холодный
+forge.biome.tags.sparse.name=Негустой
+forge.biome.tags.dense.name=Густой
+forge.biome.tags.wet.name=Влажный
+forge.biome.tags.dry.name=Сухой
+forge.biome.tags.savanna.name=Саванна
+forge.biome.tags.coniferous.name=Хвойный
+forge.biome.tags.jungle.name=Джунгли
+forge.biome.tags.spooky.name=Пугающий
+forge.biome.tags.dead.name=Мёртвый
+forge.biome.tags.lush.name=Буйный
+forge.biome.tags.nether.name=Нижний мир
+forge.biome.tags.end.name=Край
+forge.biome.tags.mushroom.name=Грибной
+forge.biome.tags.magical.name=Магический
+forge.biome.tags.rare.name=Редкий
+forge.biome.tags.ocean.name=Океан
+forge.biome.tags.river.name=Речка
+forge.biome.tags.water.name=Вода
+forge.biome.tags.mesa.name=Меза
+forge.biome.tags.forest.name=Лес
+forge.biome.tags.plains.name=Равнины
+forge.biome.tags.mountain.name=Горы
+forge.biome.tags.hills.name=Холмы
+forge.biome.tags.swamp.name=Болото
+forge.biome.tags.sandy.name=Песчаный
+forge.biome.tags.snowy.name=Снежный
+forge.biome.tags.wasteland.name=Пустошь
+forge.biome.tags.beach.name=Пляж
+forge.biome.tags.void.name=Пустота
+forge.biome.tags.end.name=Край
+forge.biome.tags.default.name=По умолчанию
+
+# Patchouli integration
+mysticalworld.guidebook.landing_text=Это очень загадочный мир! Эта книга даст вам некоторое представление о многих таинственных и мистических вещах, с которыми Вы можете столкнуться.
+mysticalworld.patchouli.standard_group=Стандартные размеры группы.
+mysticalworld.patchouli.groups=Группы по %s-%s.
+mysticalworld.patchouli.biomes=Биомы с меткой: %s
+
+# Attributes
+attribute.name.mysticalworld.blessed=Благословенный

@@ -1,0 +1,22 @@
+{
+  "name": "Лягушка",
+  "icon": "minecraft:slime_ball",
+  "category": "creatures",
+  "flag": "roots:frog",
+  "pages": [{
+      "type": "animal_spawn_info",
+      "animal": "frog",
+      "breed": "Разводить: коричневыми грибами.",
+      "tame": "Приручать: не приручаема.",
+      "blurb": ""
+    },
+    {
+      "type": "entity",
+      "name": "Лягушка",
+      "entity": "mysticalworld:entity_frog",
+      "scale": 1.5,
+      "offset": -0.3,
+      "text": "Эти лягушки регулярно сбрасывают шарики слизи, прыгая вокруг!"
+    }
+  ]
+}

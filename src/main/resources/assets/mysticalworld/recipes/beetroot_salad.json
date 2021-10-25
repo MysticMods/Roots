@@ -1,0 +1,39 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "AAA",
+    "GGG",
+    "BBB"
+  ],
+  "key": {
+    "G": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "tallgrass"
+      }
+    ],
+    "A": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "foodBeetroot"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "beetroot"
+      },
+      {
+        "item": "minecraft:beetroot"
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:bowl"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:beetroot_salad",
+    "data": 0,
+    "count": 3
+  }
+}

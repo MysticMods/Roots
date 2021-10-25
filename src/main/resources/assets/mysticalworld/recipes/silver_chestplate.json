@@ -1,0 +1,31 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "C C",
+    "CCC",
+    "CCC"
+    ],
+  "key": {
+    "C": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "ingotSilver"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:silver_chestplate",
+    "data": 0,
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "silver"
+    },
+    {
+      "type": "mysticalworld:config",
+      "config": "silver_armor"
+    }
+  ]
+}

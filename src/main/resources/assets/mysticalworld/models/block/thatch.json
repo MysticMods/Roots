@@ -1,0 +1,64 @@
+{
+	"__comment": "Designed by Elucent with Cubik Studio - https://cubik.studio",
+	"parent": "block/block",
+	"textures": {
+		"particle": "mysticalworld:blocks/thatch",
+		"face": "mysticalworld:blocks/thatch",
+		"border": "mysticalworld:blocks/thatch_border"
+	},
+	"elements": [
+		{
+			"__comment": "Cube1",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#face" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#face" }
+			}
+		},
+		{
+			"__comment": "Cube1",
+			"from": [ 10.1072, -8, -5.2405 ],
+			"to": [ 10.1082, 24, 26.7595 ],
+			"rotation": { "origin": [ 14, -8, -5.5 ], "axis": "y", "angle": -22.5 },
+			"faces": {
+				"west": { "uv": [ 0, 16, 16, 0 ], "texture": "#border", "rotation": 180 },
+				"east": { "uv": [ 0, 16, 16, 0 ], "texture": "#border", "rotation": 180 }
+			}
+		},
+		{
+			"__comment": "Cube1",
+			"from": [ -7.6432, -8, 10.5597 ],
+			"to": [ 24.3568, 24, 10.5607 ],
+			"rotation": { "origin": [ 24.5, 24, 6.5 ], "axis": "y", "angle": -22.5 },
+			"faces": {
+				"north": { "uv": [ 0, 16, 16, 0 ], "texture": "#border", "rotation": 180 },
+				"south": { "uv": [ 0, 16, 16, 0 ], "texture": "#border", "rotation": 180 }
+			}
+		},
+		{
+			"__comment": "Cube1",
+			"from": [ 18.1072, -8, -5.2405 ],
+			"to": [ 18.1082, 24, 26.7595 ],
+			"rotation": { "origin": [ 22, -8, -5.5 ], "axis": "y", "angle": -22.5 },
+			"faces": {
+				"west": { "uv": [ 0, 16, 16, 0 ], "texture": "#border", "rotation": 180 },
+				"east": { "uv": [ 0, 16, 16, 0 ], "texture": "#border", "rotation": 180 }
+			}
+		},
+		{
+			"__comment": "Cube1",
+			"from": [ -7.6432, -8, 19.0597 ],
+			"to": [ 24.3568, 24, 19.0607 ],
+			"rotation": { "origin": [ 24.5, 24, 15 ], "axis": "y", "angle": -22.5 },
+			"faces": {
+				"north": { "uv": [ 0, 16, 16, 0 ], "texture": "#border", "rotation": 180 },
+				"south": { "uv": [ 0, 16, 16, 0 ], "texture": "#border", "rotation": 180 }
+			}
+		}
+	]
+}

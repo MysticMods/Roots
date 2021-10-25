@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SS ",
+    "SC ",
+    "  S"
+    ],
+  "key": {
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "string"
+      }
+    ],
+    "C": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "clayBall"
+      }
+    ]
+  },
+  "result": {
+    "item": "minecraft:lead",
+    "data": 0,
+    "count": 2
+  }
+}

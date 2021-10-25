@@ -1,0 +1,21 @@
+{
+  "name": "Медное орижие",
+  "icon": "mysticalworld:copper_knife",
+  "category": "metals_weapons",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:copper_ingot",
+      "text": "Медные слитки могут быть превращены в различные виды оружия."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:copper_knife",
+      "recipe2": "mysticalworld:copper_spear",
+      "title": "Медное орижие"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:copper_sword"
+    }
+  ]
+}

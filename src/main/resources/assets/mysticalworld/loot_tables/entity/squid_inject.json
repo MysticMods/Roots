@@ -1,0 +1,38 @@
+{
+    "pools": [
+        {
+            "name": "pool1",
+            "entries": [
+                {
+                    "entryName": "mysticalworld:raw_squid",
+                    "weight": 40,
+                    "quality": 0,
+                    "type": "item",
+                    "functions": [
+                        {
+                            "function": "minecraft:furnace_smelt",
+                            "conditions": [
+                                {
+                                    "properties": {
+                                        "minecraft:on_fire": true
+                                    },
+                                    "entity": "this",
+                                    "condition": "minecraft:entity_properties"
+                                }
+                            ]
+                        },
+                        {
+                            "count": {
+                                "min": 1.0,
+                                "max": 3.0
+                            },
+                            "function": "minecraft:looting_enchant"
+                        }
+                    ],
+                    "name": "mysticalworld:raw_squid"
+                }
+            ],
+            "rolls": 1.0
+        }
+    ]
+}

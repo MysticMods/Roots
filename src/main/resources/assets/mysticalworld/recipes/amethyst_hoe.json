@@ -1,0 +1,37 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CC ",
+    " S ",
+    " S "
+    ],
+  "key": {
+    "C": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemAmethyst"
+      }
+    ],
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:amethyst_hoe",
+    "data": 0,
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "amethyst"
+    },
+    {
+      "type": "mysticalworld:config",
+      "config": "amethyst_hoe"
+    }
+  ]
+}

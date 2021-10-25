@@ -1,0 +1,22 @@
+{
+  "name": "Олень",
+  "icon": "mysticalworld:venison",
+  "category": "creatures",
+  "flag": "roots:deer",
+  "pages": [{
+      "type": "animal_spawn_info",
+      "animal": "deer",
+      "breed": "Разводить: пшеницей.",
+      "tame": "Приручать: не приручаемый.",
+      "blurb": ""
+    },
+    {
+      "type": "entity",
+      "name": "Олень",
+      "entity": "mysticalworld:entity_deer",
+      "scale": 0.6,
+      "offset": 0.4,
+      "text": "Эти олени - смесь оленей и олених."
+    }
+  ]
+}

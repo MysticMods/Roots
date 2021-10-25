@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DDD",
+    "DDD",
+    "DDD"
+  ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:unripe_pearl"
+      }
+    ]
+  },
+  "result": {
+    "item": "minecraft:ender_pearl",
+    "data": 0,
+    "count": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Ртутное оружие",
+  "icon": "mysticalworld:quicksilver_knife",
+  "category": "metals_weapons",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:quicksilver_ingot",
+      "text": "Ртуть - это летучий металл, магически держащийся в твердой форме. Хотя получается отличное оружие, которое не теряет прочности от использования, оно портится со временем."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:quicksilver_knife",
+      "recipe2": "mysticalworld:quicksilver_spear",
+      "title": "Ртутное оружие"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:quicksilver_sword"
+    }
+  ]
+}

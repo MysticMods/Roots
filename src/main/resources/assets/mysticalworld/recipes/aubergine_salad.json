@@ -1,0 +1,47 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "AAA",
+    "GGG",
+    "BBB"
+  ],
+  "key": {
+    "G": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "tallgrass"
+      }
+    ],
+    "A": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "eggplant"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "aubergine"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "foodEggplant"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "foodAubergine"
+      },
+      {
+        "item": "mysticalworld:aubergine"
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:bowl"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:aubergine_salad",
+    "data": 0,
+    "count": 3
+  }
+}

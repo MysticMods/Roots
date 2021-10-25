@@ -1,0 +1,13 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+      {
+        "item": "mysticalworld:silk_cocoon"
+      }
+    ],
+  "result": {
+    "item": "mysticalworld:silk_thread",
+    "data": 0,
+    "count": 2
+  }
+}

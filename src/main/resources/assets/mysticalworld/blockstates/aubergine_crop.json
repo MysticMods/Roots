@@ -1,0 +1,58 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "crop"
+    },
+    "variants":{
+        "age": {
+            "0": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/aubergine_0",
+                    "crop": "mysticalworld:blocks/aubergine_0"
+                }
+            },
+            "1": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/aubergine_1",
+                    "crop": "mysticalworld:blocks/aubergine_1"
+                }
+            },
+            "2": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/aubergine_2",
+                    "crop": "mysticalworld:blocks/aubergine_2"
+                }
+            },
+            "3": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/aubergine_3",
+                    "crop": "mysticalworld:blocks/aubergine_3"
+                }
+            },
+            "4": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/aubergine_4",
+                    "crop": "mysticalworld:blocks/aubergine_4"
+                }
+            },
+            "5": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/aubergine_5",
+                    "crop": "mysticalworld:blocks/aubergine_5"
+                }
+            },
+            "6": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/aubergine_6",
+                    "crop": "mysticalworld:blocks/aubergine_6"
+                }
+            },
+            "7": {
+                "textures": {
+                    "particle": "mysticalworld:blocks/aubergine_7",
+                    "crop": "mysticalworld:blocks/aubergine_7"
+                }
+            }
+        }
+    }
+}

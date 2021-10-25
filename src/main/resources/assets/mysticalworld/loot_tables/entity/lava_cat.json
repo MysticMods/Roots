@@ -1,0 +1,44 @@
+{
+    "pools": [
+        {
+            "name": "main",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:obsidian",
+                    "conditions": [
+                        {
+                            "condition": "is_obsidian"
+                        },
+                        {
+                            "condition": "random_chance",
+                            "chance": 0.7
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:cobblestone",
+                    "conditions": [
+                        {
+                            "condition": "is_obsidian"
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

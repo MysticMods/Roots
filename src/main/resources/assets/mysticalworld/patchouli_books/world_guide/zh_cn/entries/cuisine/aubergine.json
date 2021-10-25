@@ -1,0 +1,26 @@
+{
+    "name": "茄子",
+    "icon": "mysticalworld:aubergine",
+    "category": "cuisine",
+    "pages": [
+      {
+        "type": "spotlight",
+        "link_recipe": true,
+        "item": "mysticalworld:cooked_aubergine",
+        "text": "茄子可以收割$(l:crops/aubergine)成熟的茄子作物$()得到，并且有很多用途。"
+      },
+      {
+        "type": "smelting",
+        "recipe": "mysticalworld:aubergine",
+        "title": "烤茄子",
+        "text": "去掉籽烤熟的茄子，进一步加工更好吃喔！"
+      },
+      {
+        "type": "crafting",
+        "recipe": "mysticalworld:stuffed_aubergine",
+        "title": "酿茄子",
+        "text": "结合多种蔬菜制作的茄子料理，素食者的大餐！"
+      }
+    ]
+  }
+  

@@ -1,0 +1,26 @@
+{
+  "type": "mysticalworld:shaped_charred_wood",
+  "pattern": [
+    "WWW",
+    "WFW",
+    "WWW"
+    ],
+  "key": {
+    "F": [
+      {
+        "type": "mysticalworld:flint_and_steel"
+      }
+    ],
+    "W": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "logWood"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:charred_log",
+    "data": 0,
+    "count": 8
+  }
+}

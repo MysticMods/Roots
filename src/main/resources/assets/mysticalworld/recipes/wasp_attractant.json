@@ -1,0 +1,103 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:dye",
+      "data": 15
+    },
+    [
+      {
+        "item": "minecraft:sugar"
+      },
+      {
+        "item": "minecraft:apple"
+      },
+      {
+        "item": "minecraft:cookie"
+      },
+      {
+        "item": "minecraft:melon"
+      },
+      {
+        "item": "minecraft:cake"
+      },
+      {
+        "item": "minecraft:pumpkin_pie"
+      }
+    ],
+    [
+      {
+        "item": "minecraft:rotten_flesh"
+      },
+      {
+        "item": "minecraft:porkchop"
+      },
+      {
+        "item": "minecraft:beef"
+      },
+      {
+        "item": "minecraft:chicken"
+      },
+      {
+        "item": "minecraft:mutton"
+      },
+      {
+        "item": "minecraft:fish",
+        "data": 0
+      },
+      {
+        "item": "minecraft:fish",
+        "data": 1
+      },
+      {
+        "item": "minecraft:fish",
+        "data": 2
+      },
+      {
+        "item": "minecraft:rabbit"
+      },
+      {
+        "item": "mysticalworld:raw_squid"
+      },
+      {
+        "item": "mysticalworld:venison"
+      },
+      {
+        "item": "minecraft:cooked_fish",
+        "data": 0
+      },
+      {
+        "item": "minecraft:cooked_fish",
+        "data": 1
+      },
+      {
+        "item": "minecraft:cooked_porkchop"
+      },
+      {
+        "item": "minecraft:cooked_beef"
+      },
+      {
+        "item": "mysticalworld:cooked_squid"
+      },
+      {
+        "item": "mysticalworld:cooked_venison"
+      },
+      {
+        "item": "minecraft:cooked_chicken"
+      },
+      {
+        "item": "minecraft:cooked_rabbit"
+      },
+      {
+        "item": "minecraft:cooked_mutton"
+      },
+      {
+        "item": "minecraft:egg"
+      }
+    ]
+  ],
+  "result": {
+    "item": "mysticalworld:wasp_attractant",
+    "count": 4
+  }
+}

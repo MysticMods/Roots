@@ -1,0 +1,21 @@
+{
+  "name": "Свинцовое оружие",
+  "icon": "mysticalworld:lead_knife",
+  "category": "metals_weapons",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:lead_ore",
+      "text": "Свинец - это тяжелый металл из которого получается грозное оружие."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:lead_knife",
+      "recipe2": "mysticalworld:lead_spear",
+      "title": "Свинцовое оружие"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:lead_sword"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "WWW",
+    "WFW",
+    "WWW"
+    ],
+  "key": {
+    "F": [
+      {
+        "item": "minecraft:fire_charge"
+      }
+    ],
+    "W": [
+        {
+            "type": "forge:ore_dict",
+            "ore": "logWood"
+        }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:charred_log",
+    "data": 0,
+    "count": 8
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Серебряная руда",
+  "icon": "mysticalworld:silver_ore",
+  "category": "metals",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:silver_ore",
+      "text": "Серебро можно найти во многих местах, где можно найти золото. Точно так же драгоценно, оно немного прочнее золота."
+    },
+    {
+      "type": "smelting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:silver_ingot_from_smelting",
+      "title": "Серебряные слитки",
+      "text": "Серебряные слитки можно переплавлять как в печи, так и в плавильной печи."
+    }
+  ]
+}

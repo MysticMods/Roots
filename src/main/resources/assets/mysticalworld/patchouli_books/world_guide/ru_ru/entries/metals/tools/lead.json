@@ -1,0 +1,23 @@
+{
+  "name": "Свинцовые инструменты",
+  "icon": "mysticalworld:lead_axe",
+  "category": "metals_tools",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:lead_ingot",
+      "text": "Свинец - это редкий тяжелый металл, который можно использовать для изготовления долговечных инструментов.$(br2)Эти инструменты имеют тот же уровень сбора, что и железные инструменты."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:lead_axe",
+      "recipe2": "mysticalworld:lead_hoe",
+      "title": "Свинцовые инструменты"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:lead_shovel",
+      "recipe2": "mysticalworld:lead_pickaxe",
+      "title": "Свинцовые инструменты"
+    }
+  ]
+}

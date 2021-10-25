@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "D"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:amethyst_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:amethyst_gem",
+    "count": 9
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "amethyst_gem"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DSD",
+    "DSD"
+    ],
+  "key": {
+    "S": [
+      {
+        "item": "mysticalworld:mud_brick"
+      }
+    ],
+    "D": [
+        {
+            "type": "forge:ore_dict",
+            "ore": "stickWood"
+        }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:mud_brick_fence_gate",
+    "data": 0,
+    "count": 1
+  }
+}

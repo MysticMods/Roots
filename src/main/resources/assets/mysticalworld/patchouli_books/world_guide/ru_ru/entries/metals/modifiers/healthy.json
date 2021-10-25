@@ -1,0 +1,9 @@
+{
+  "name": "Живучесть",
+  "icon": "mysticalworld:copper_leggings",
+  "category": "metals_modifiers",
+  "pages": [{
+    "type": "text",
+    "text": "Каждый предмет с модификатором Живучести, что сделан из меди, даст Вам пол сердца здоровья."
+  }]
+}

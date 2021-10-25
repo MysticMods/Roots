@@ -1,0 +1,35 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "  W",
+    " W ",
+    "S  "  ],
+  "key": {
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ],
+    "W": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemAmethyst"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:amethyst_knife",
+    "data": 0
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "amethyst"
+    },
+    {
+      "type": "mysticalworld:config",
+      "config": "amethyst_knife"
+    }
+  ]
+}

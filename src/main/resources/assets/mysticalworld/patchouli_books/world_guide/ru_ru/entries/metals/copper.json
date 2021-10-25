@@ -1,0 +1,20 @@
+{
+  "name": "Медная руда",
+  "icon": "mysticalworld:copper_ore",
+  "category": "metals",
+  "flags": "roots:copper",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:copper_ore",
+      "text": "Медная руда может быть найдена во всем мире, хотя в целом и, возможно, отличительно, на гораздо больших высотах, чем другие руды."
+    },
+    {
+      "type": "smelting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:copper_ingot_from_smelting",
+      "title": "Медные слитки",
+      "text": "Как и в случае с другими рудами, медь можно переплавлять как в печи, так и в плавильной печи."
+    }
+  ]
+}

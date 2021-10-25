@@ -1,0 +1,12 @@
+{
+  "name": "Кварцевая руда",
+  "icon": "mysticalworld:granite_quartz_ore",
+  "category": "ores",
+  "flag": "roots:quartz",
+  "pages": [{
+    "type": "spotlight",
+    "link_recipe": true,
+    "item": "mysticalworld:granite_quartz_ore",
+    "text": "Кварц может быть найден в скоплениях гранита в обычном мире, и при разбивании даёт те же результаты, что и в Незере."
+  }]
+}

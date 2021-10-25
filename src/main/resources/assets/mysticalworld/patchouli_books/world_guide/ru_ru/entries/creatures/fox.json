@@ -1,0 +1,22 @@
+{
+  "name": "Серебряная лиса",
+  "icon": "mysticalworld:pelt",
+  "category": "creatures",
+  "flag": "roots:fox",
+  "pages": [{
+      "type": "animal_spawn_info",
+      "animal": "fox",
+      "breed": "Разводить: яблоками.",
+      "tame": "Приручать: яблоками.",
+      "blurb": ""
+    },
+    {
+      "type": "entity",
+      "name": "Лиса",
+      "entity": "mysticalworld:entity_fox",
+      "scale": 0.8,
+      "offset": 0,
+      "text": "Будучи злобными убийцами куриц и кроликов, они становятся послушными будучи приручёнными!"
+    }
+  ]
+}

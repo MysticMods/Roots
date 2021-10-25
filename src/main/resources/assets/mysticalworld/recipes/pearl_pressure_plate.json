@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DD"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:pearl_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:pearl_pressure_plate",
+    "data": 0,
+    "count": 1
+  }
+}

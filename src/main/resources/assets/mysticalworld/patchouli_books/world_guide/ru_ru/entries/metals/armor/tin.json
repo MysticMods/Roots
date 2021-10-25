@@ -1,0 +1,21 @@
+{
+  "name": "Оловянные доспехи",
+  "icon": "mysticalworld:tin_helmet",
+  "category": "metals_armor",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:tin_helmet",
+      "text": "Легкие, но защищают. Оловянные доспехи так же дают $(l:metals/modifiers/extension)Удлинение$()."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:tin_helmet",
+      "recipe2": "mysticalworld:tin_chestplate"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:tin_leggings",
+      "recipe2": "mysticalworld:tin_boots"
+    }
+  ]
+}

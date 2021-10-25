@@ -1,0 +1,19 @@
+{
+  "name": "Оловянная руда",
+  "icon": "mysticalworld:tin_ore",
+  "category": "metals",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:tin_ore",
+      "text": "Более мягкий и гибкий материал, эта руда обычно встречается у поверхности."
+    },
+    {
+      "type": "smelting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:tin_ingot_from_smelting",
+      "title": "Tin Ingots",
+      "text": "Оловянную руду можно переплавлять в слитки как в печи, так и в плавильной печи."
+    }
+  ]
+}

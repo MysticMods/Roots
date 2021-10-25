@@ -1,0 +1,12 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+      {
+        "item": "mysticalworld:charred_planks"
+      }
+    ],
+  "result": {
+    "item": "mysticalworld:charred_button",
+    "data": 0
+  }
+}

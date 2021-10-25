@@ -1,0 +1,342 @@
+itemGroup.mysticalworld=Mystical World
+
+entity.entity_fox.name=Renard
+entity.entity_frog.name=Grenouille
+entity.entity_beetle.name=Scarabée
+entity.entity_deer.name=Cerf
+entity.entity_sprout.name=Sprout
+entity.entity_endermini.name=Endermini
+entity.entity_owl.name=Hibou
+entity.entity_silkworm.name=Ver à soie
+entity.entity_lava_cat.name=Chat de lave
+entity.entity_obsidian_cat.name=Chat d'obsidienne
+entity.entity_hell_sprout.name=Sprout de l'enfer
+entity.entity_clam.name=Palourde
+
+item.carapace.name=Carapace
+item.pelt.name=Peau
+item.raw_squid.name=Calamar cru
+item.cooked_squid.name=Calamar
+item.epic_squid.name=Calamar épique
+item.unripe_pearl.name=Perle immature
+item.silk_thread.name=Fil de soie
+item.silk_cocoon.name=Cocon de soie
+item.spindle.name=Fuseau
+item.silkworm_egg.name=Oeuf de ver à soie
+item.cooked_apple.name=Pomme Cuite
+item.pearl.name=Perle lustrée
+item.gall_apple.name=Pomme de chêne
+item.wasp_attractant.name=Attractif de guêpe
+item.tannins.name=Tanins
+item.antler_hat.name=Heaume en bois de cerf
+item.beetle_mask.name=Masque de scarabée
+item.pearleporter.name=Porte-perle
+item.beetroot_salad.name=Salade de Betteraves
+item.cactus_dandelion_salad.name=Salade Cactus Pissenlit
+item.cooked_beetroot.name=Betterave Cuite
+item.cooked_carrot.name=Carotte Cuite
+item.dandelion_cornflower_salad.name=Salade de bleuet au pissenlit
+item.fish_and_chips.name=Fish & Chips
+item.stewed_eggplant.name=Aubergine mijotée
+item.aubergine_salad.name=Salade d'Aubergines
+
+# Ingots
+item.copper_ingot.name=Lingot de cuivre
+item.tin_ingot.name=Lingot d'étain
+item.silver_ingot.name=Lingot d'argent
+item.lead_ingot.name=Lingot de plomb
+item.nickel_ingot.name=Lingot de nickel
+item.aluminum_ingot.name=Lingot d'aluminium
+item.zinc_ingot.name=Lingot de zinc
+item.invar_ingot.name=Lingot d'Invar
+item.electrum_ingot.name=Lingot d'électrum
+item.brass_ingot.name=Lingot de laiton
+item.bronze_ingot.name=Lingot de bronze
+item.amethyst_gem.name=Améthyste
+
+# Nuggets
+item.copper_nugget.name=Pépite de Cuivre
+item.tin_nugget.name=Pépite d'étain
+item.silver_nugget.name=Pépite d'argent
+item.lead_nugget.name=Pépite de plomb
+item.nickel_nugget.name=Pépite de nickel
+item.aluminum_nugget.name=Pépite d'aluminium
+item.zinc_nugget.name=Pépite de zinc
+item.invar_nugget.name=Pépite d'invar
+item.electrum_nugget.name=Pépite d'électrum
+item.brass_nugget.name=Pépite de laiton
+item.bronze_nugget.name=Pépite de bronze
+
+# Metal Blocks
+tile.copper_block.name=Bloc de Cuivre
+tile.tin_block.name=Bloc d'étain
+tile.silver_block.name=Bloc d'argent
+tile.lead_block.name=Bloc de plomb
+tile.nickel_block.name=Bloc de Nickel
+tile.aluminum_block.name=Bloc d'aluminium
+tile.zinc_block.name=Bloc de Zinc
+tile.invar_block.name=Bloc d'Invar
+tile.electrum_block.name=Bloc d'Électrum
+tile.brass_block.name=Bloc de laiton
+tile.bronze_block.name=Bloc de Bronze
+tile.amethyst_block.name=Bloc d'Améthyste
+
+# Dusts
+item.copper_dust.name=Poussière de cuivre
+item.tin_dust.name=Poussière d'étain
+item.silver_dust.name=Poussière d'argent
+item.lead_dust.name=Poussière de plomb
+item.nickel_dust.name=Poussière De Nickel
+item.aluminum_dust.name=Poussière d'aluminium
+item.zinc_dust.name=Poussière de zinc
+item.invar_dust.name=Poussière d'Invar
+item.electrum_dust.name=Poussière d'électrum
+item.brass_dust.name=Laiton Poussière
+item.bronze_dust.name=Poussière de bronze
+
+item.iron_dust.name=Poussière de fer
+item.gold_dust.name=Poussière d'or
+
+# Tiny Dusts
+item.copper_dust_tiny.name=Petit tas de poussière de cuivre
+item.tin_dust_tiny.name=Petit tas de poussière d'étain
+item.silver_dust_tiny.name=Petit tas de poussière d'argent
+item.lead_dust_tiny.name=Petit tas de poussière de plomb
+item.nickel_dust_tiny.name=Petit tas de poussière de nickel
+item.aluminum_dust_tiny.name=Petit tas de poussière d'aluminium
+item.zinc_dust_tiny.name=Petit tas de poussière de zinc
+item.invar_dust_tiny.name=Petit tas de poussière d'invar
+item.electrum_dust_tiny.name=Petit tas de poussière d'électrum
+item.brass_dust_tiny.name=Petit tas de poussière de laiton
+item.bronze_dust_tiny.name=Petit tas de poussière de bronze
+
+item.iron_dust_tiny.name=Petit tas de poussière de fer
+item.gold_dust_tiny.name=Petit tas de poussière d'or
+
+# Ores
+tile.copper_ore.name=Minerai de cuivre
+tile.tin_ore.name=Minerai d'étain
+tile.silver_ore.name=Minerai d'argent
+tile.lead_ore.name=Minerai de plomb
+tile.nickel_ore.name=Minerai de nickel
+tile.aluminum_ore.name=Minerai d'aluminium
+tile.zinc_ore.name=Minerai de zinc
+tile.amethyst_ore.name=Minerai d'améthyste
+
+#Tools
+item.copper_axe.name=Hache en cuivre
+item.silver_axe.name=Hache d'argent
+item.amethyst_axe.name=Hache Améthyste
+item.copper_hoe.name=Houe en cuivre
+item.silver_hoe.name=Houe en argent
+item.amethyst_hoe.name=Houe en Améthyste
+item.copper_pickaxe.name=Pioche en cuivre
+item.silver_pickaxe.name=Pioche en argent
+item.amethyst_pickaxe.name=Pioche en améthyste
+item.copper_shovel.name=Pelle en cuivre
+item.silver_shovel.name=Pelle d'argent
+item.amethyst_shovel.name=Pelle en Améthyste
+item.copper_sword.name=Épée en cuivre
+item.silver_sword.name=Épée en argent
+item.amethyst_sword.name=Épée en améthyste
+item.silver_knife.name=Couteau en argent
+item.copper_knife.name=Couteau en cuivre
+item.amethyst_knife.name=Couteau en améthyste
+
+# Embers Metals
+item.dawnstone_ingot.name=Lingot de pierre de l'aube
+item.sooty_iron_ingot.name=Lingot de fer fuligineux
+
+item.dawnstone_nugget.name=Pépite de pierre de l'aube
+item.sooty_iron_nugget.name=Pépite de fer fuligineux
+
+tile.dawnstone_block.name=Bloc de pierre de l'aube
+tile.sooty_iron_block.name=Bloc de fer fuligineux
+
+# Caminite
+tile.caminite.name=Bloc de Caminite
+tile.caminite_stairs.name=Escaliers en Caminite
+tile.caminite_slab.name=Dalle en caminite
+tile.caminite_double_slab.name=Dalle double en caminite
+tile.caminite_wall.name=Mur en caminite
+
+tile.caminite_bricks.name=Briques en Caminite
+tile.caminite_bricks_stairs.name=Escalier en brique de caminite
+tile.caminite_bricks_slab.name=Dalle en brique de caminite
+tile.caminite_bricks_double_slab.name=Dalle double en brique de caminite
+tile.caminite_bricks_wall.name=Mur en briques de caminite
+
+# Mud Brick
+tile.wet_mud_brick.name=Brique de boue humide
+tile.wet_mud_block.name=Bloc de boue humide
+tile.mud_brick.name=Brique de boue
+tile.mud_block.name=Bloc de boue
+tile.mud_block_stairs.name=Escaliers en blocs de boue
+tile.mud_block_slab.name=Dalle de bloc de boue
+tile.mud_block_wall.name=Mur de blocs de boue
+tile.mud_block_button.name=Bouton de bloc de boue
+tile.mud_block_pressure_plate.name=Plaque de pression de bloc de boue
+tile.mud_block_fence.name=Clôture en blocs de boue
+tile.mud_block_fence_gate.name=Portillon de clôture en blocs de boue
+tile.mud_brick_stairs.name=Escaliers en brique de boue
+tile.mud_brick_slab.name=Dalle de brique de boue
+tile.mud_brick_wall.name=Mur de briques de boue
+tile.mud_brick_button.name=Bouton de brique de boue
+tile.mud_brick_pressure_plate.name=Plaque de pression de brique de boue
+tile.mud_brick_fence.name=Clôture en brique de boue
+tile.mud_brick_fence_gate.name=Portillon de clôture en brique de boue
+
+# Charred
+tile.charred_planks.name=Planches carbonisées
+tile.charred_log.name=Bûche carbonisée
+tile.charred_stairs.name=Escaliers carbonisés
+tile.charred_slab.name=Dalle carbonisée
+tile.charred_wall.name=Mur carbonisé
+tile.charred_button.name=Bouton carbonisé
+tile.charred_pressure_plate.name=Plaque de pression carbonisée
+tile.charred_fence.name=Clôture carbonisée
+tile.charred_fence_gate.name=Portillon de clôture carbonisé
+
+# Pearl
+tile.pearl_block.name=Bloc de perles
+tile.pearl_stairs.name=Escaliers de perles
+tile.pearl_slab.name=Dalle de perles
+tile.pearl_wall.name=Mur de perles
+tile.pearl_button.name=Bouton en Perle
+tile.pearl_pressure_plate.name=Plaque de pression en perles
+tile.pearl_fence.name=Clôture de perles
+tile.pearl_fence_gate.name=Portillon de clôture en perles
+
+# Thatch
+tile.thatch.name=Chaume
+tile.thatch_stairs.name=Escalier de chaume
+tile.thatch_slab.name=Dalle de chaume
+tile.thatch_wall.name=Mur de chaume
+
+# Slime
+tile.slime_puddle.name=Flaque de Slime
+
+# Ore
+tile.granite_quartz_ore.name=Minerai de quartz
+tile.quartz_ore.name=Minerai de quartz
+
+#Solar Infused
+tile.solar_infused_stone.name=Pierre solaire infusée
+tile.solar_infused_stone_stairs.name=Escaliers en pierre solaires infusés
+tile.solar_infused_stone_slab.name=Dalle de pierre solaire infusée
+tile.solar_infused_stone_double_slab.name=Dalle double en pierre solaire infusée
+tile.solar_infused_stone_wall.name=Mur de pierre solaire infusé
+
+#Advancements
+advancement.mysticalworld.root=Mur de pierre solaire infusé
+advancement.mysticalworld.root.desc=Respirez dans un tout nouveau monde mystique!
+advancement.mysticalworld.amethyst=Test de sobriété
+advancement.mysticalworld.amethyst.desc=Trouvez une gemme plus divine que le diamant!
+advancement.mysticalworld.aubergine=Ce n'est pas une carotte...
+advancement.mysticalworld.aubergine.desc=Autrefois, les carottes violettes faisaient fureur. Mais c'est une aubergine.
+advancement.mysticalworld.epic_squid=Calmar épique!
+advancement.mysticalworld.epic_squid.desc=Participez à certains des délicieux bienfaits violets de calmar épique.
+
+item.venison.name=Venaison
+item.cooked_venison.name=Cerf Cuit
+item.antlers.name=Bois
+item.ink_bottle.name=Bouteille d'encre
+item.aubergine_seed.name=Graine d'aubergine
+item.aubergine.name=Aubergine
+item.cooked_aubergine.name=Aubergines cuites
+item.stuffed_aubergine.name=Aubergines farcies
+item.assorted_seeds.name=Graines mélangées
+item.cooked_seeds.name=Graines Grillées
+item.copper_helmet.name=Casque de cuivre
+item.copper_chestplate.name=Plastron en cuivre
+item.copper_leggings.name=Jambières en cuivre
+item.copper_boots.name=Bottes en cuivre
+item.silver_helmet.name=Casque d'argent
+item.silver_chestplate.name=Plastron d'argent
+item.silver_leggings.name=Jambières d'argent
+item.silver_boots.name=Bottes d'argent
+
+message.squid.cooldown=Donnez-lui le temps de produire plus d'encre!
+message.pearleporter.immature=Cette palourde n'a pas encore produit de perle. Attendez qu'elle émette des particules!
+
+# Sounds
+mysticalworld.subtitles.entity.fox.aggro=Renard qui jappe
+mysticalworld.subtitles.entity.fox.bark=Renard qui aboie
+mysticalworld.subtitles.entity.fox.bite=Morsures de renard
+mysticalworld.subtitles.entity.fox.death=Renard qui meurt
+mysticalworld.subtitles.entity.fox.eat=Renard qui mange
+mysticalworld.subtitles.entity.fox.idle=Renard qui jappe
+mysticalworld.subtitles.entity.fox.sleep=Renard qui dort
+mysticalworld.subtitles.entity.fox.sniff=Renard qui renifle
+mysticalworld.subtitles.entity.fox.spit=Renard qui crache
+mysticalworld.subtitles.entity.sprout.ambient=Sprout qui erre
+mysticalworld.subtitles.entity.endermini.death=Endermini qui meurt
+mysticalworld.subtitles.entity.endermini.hit=Endermini qui frappe
+mysticalworld.subtitles.entity.endermini.idle=Endermini qui gazouille
+mysticalworld.subtitles.entity.endermini.portal=Endermini qui se téléporte
+mysticalworld.subtitles.entity.endermini.scream=Endermini qui crie
+mysticalworld.subtitles.entity.endermini.stare=Endermini qui regarde
+mysticalworld.subtitles.entity.silkworm.egg.use=Oeuf de ver à soie qui se casse
+mysticalworld.subtitles.entity.lava_cat.sizzle=Chat de lave qui brûle
+mysticalworld.subtitles.entity.frog.slime=Grenouille qui crache de la bave
+mysticalworld.subtitles.entity.lava_cat.ambient=Chat de lave qui miaule
+mysticalworld.subtitles.entity.lava_cat.death=Chat de lave qui meurt
+mysticalworld.subtitles.entity.lava_cat.hurt=Chat de lave qui frappe
+mysticalworld.subtitles.entity.lava_cat.purr=Chat de lave qui ronronne
+mysticalworld.subtitles.entity.lava_cat.purreow=Chat de lave qui trille
+mysticalworld.subtitles.entity.silkworm.plop=Plops de ver à soie
+mysticalworld.subtitles.entity.squid.milk=Calmar qui se fait traire
+mysticalworld.subtitles.item.unripe_pearl.use=Téléportation de perle non mûre
+mysticalworld.subtitles.item.pearleporter.use=Téléporteur de perle activé
+mysticalworld.subtitles.entity.silkworm.ambient=Ver à soie qui gazouille
+mysticalworld.subtitles.entity.silkworm.death=Ver à soie qui meurt
+mysticalworld.subtitles.entity.silkworm.hurt=Ver à soie qui frappe
+mysticalworld.subtitles.entity.silkworm.step=Ver à soie qui rampe
+mysticalworld.subtitles.entity.silkworm.eat=Ver à soie qui mange
+
+# Tags
+forge.biome.tags.hot.name=Chaud
+forge.biome.tags.cold.name=Froid
+forge.biome.tags.sparse.name=Clairsemé
+forge.biome.tags.dense.name=Dense
+forge.biome.tags.wet.name=humide
+forge.biome.tags.dry.name=Sec
+forge.biome.tags.savanna.name=Savane
+forge.biome.tags.coniferous.name=Conifère
+forge.biome.tags.jungle.name=Jungle
+forge.biome.tags.spooky.name=Effrayant
+forge.biome.tags.dead.name=Mort
+forge.biome.tags.lush.name=Luxuriant
+forge.biome.tags.nether.name=Nether
+forge.biome.tags.end.name=End
+forge.biome.tags.mushroom.name=Champignon
+forge.biome.tags.magical.name=Magique
+forge.biome.tags.rare.name=Rare
+forge.biome.tags.ocean.name=Ocean
+forge.biome.tags.river.name=rivière
+forge.biome.tags.water.name=Eau
+forge.biome.tags.mesa.name=Mesa
+forge.biome.tags.forest.name=Forêt
+forge.biome.tags.plains.name=Plaine
+forge.biome.tags.mountain.name=Montagne
+forge.biome.tags.hills.name=Collines
+forge.biome.tags.swamp.name=Marais
+forge.biome.tags.sandy.name=Sablonneux
+forge.biome.tags.snowy.name=Neigeux
+forge.biome.tags.wasteland.name=Terre en friche
+forge.biome.tags.beach.name=Plage
+forge.biome.tags.void.name=Void
+forge.biome.tags.default.name=Défaut
+
+# Patchouli integration
+mysticalworld.guidebook.name=Encyclopédie mystique
+mysticalworld.guidebook.landing_text=C'est un monde très mystérieux dehors ! Ce livre vous donnera un aperçu des nombreuses choses mystérieuses et mystiques que vous pourriez rencontrer.
+mysticalworld.patchouli.standard_group=Tailles de groupe standard.
+mysticalworld.patchouli.groups=Groupes de %s-%s.
+mysticalworld.patchouli.biomes=Biomes marqué avec: %s
+
+# Attributes
+attribute.name.mysticalworld.blessed=Blessé
+
+# Tooltips
+mysticalworld.tooltip.pearleporter=Faites un clic droit sur une palourde mature pour extraire sa perle sans la tuer.

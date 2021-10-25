@@ -1,0 +1,21 @@
+{
+  "name": "Ртутные доспехи",
+  "icon": "mysticalworld:quicksilver_helmet",
+  "category": "metals_armor",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:quicksilver_helmet",
+      "text": "Практически жидкая по природе, затвердевшая форма этого металла дает $(l:metals/modifiers/speedy)Проворность$()."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:quicksilver_helmet",
+      "recipe2": "mysticalworld:quicksilver_chestplate"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:quicksilver_leggings",
+      "recipe2": "mysticalworld:quicksilver_boots"
+    }
+  ]
+}

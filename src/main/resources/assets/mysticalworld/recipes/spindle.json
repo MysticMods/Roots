@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " S ",
+    "HHH",
+    " T "
+    ],
+  "key": {
+    "H": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "slabWood"
+      }
+    ],
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ],
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    }
+  },
+  "result": {
+    "item": "mysticalworld:spindle",
+    "data": 0,
+    "count": 1
+  }
+}

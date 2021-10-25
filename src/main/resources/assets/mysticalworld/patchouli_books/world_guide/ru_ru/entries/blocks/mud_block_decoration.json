@@ -1,0 +1,58 @@
+{
+  "name": "Грязевые украшения",
+  "icon": "mysticalworld:mud_block_stairs",
+  "category": "blocks",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:mud_block_stairs",
+      "link_recipe": true,
+      "text": "Ступеньки могут быть изготовлены как из сухих грязевых блоков, так и из сухого грязевого кирпича."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:mud_block_stairs",
+      "recipe2": "mysticalworld:mud_brick_stairs",
+      "link_recipe": true,
+      "title": "Ступеньки"
+    },
+    {
+      "type": "spotlight",
+      "item": "mysticalworld:mud_block_slab",
+      "link_recipe": true,
+      "text": "Плиты могут быть изготовлены как из сухих грязевых блоков, так и из сухого грязевого кирпича."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:mud_block_slab",
+      "recipe2": "mysticalworld:mud_brick_slab",
+      "link_recipe": true,
+      "title": "Плиты"
+    },
+    {
+      "type": "spotlight",
+      "item": "mysticalworld:mud_block_wall",
+      "link_recipe": true,
+      "text": "Ограды могут быть изготовлены как из сухих грязевых блоков, так и из сухого грязевого кирпича."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:mud_block_wall",
+      "recipe2": "mysticalworld:mud_brick_wall",
+      "link_recipe": true,
+      "title": "Ограды"
+    },
+    {
+      "type": "spotlight",
+      "item": "mysticalworld:mud_block_fence",
+      "link_recipe": true,
+      "text": "Заборы могут быть изготовлены как из сухих грязевых блоков, так и из сухого грязевого кирпича."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:mud_block_fence",
+      "recipe2": "mysticalworld:mud_brick_fence",
+      "link_recipe": true,
+      "title": "Заборы"
+    }
+  ]
+}

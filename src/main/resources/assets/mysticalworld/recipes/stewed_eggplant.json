@@ -1,0 +1,39 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "AAA",
+    "MLM",
+    "BBB"
+  ],
+  "key": {
+    "A": [
+      {
+        "item": "mysticalworld:cooked_aubergine"
+      }
+    ],
+    "M": [
+      {
+        "item": "minecraft:red_mushroom"
+      },
+      {
+        "item": "minecraft:brown_mushroom"
+      }
+    ],
+    "L": [
+      {
+        "item": "minecraft:red_flower",
+        "data": 2
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:bowl"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:stewed_eggplant",
+    "data": 0,
+    "count": 3
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Свинцовые доспехи",
+  "icon": "mysticalworld:lead_helmet",
+  "category": "metals_armor",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:lead_helmet",
+      "text": "Тяжелы, но защищают. Не обременяют Вашего движения, но предают $(l:metals/modifiers/weighty)Весомости$() и не позволяют другим сдвигать Вас."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:lead_helmet",
+      "recipe2": "mysticalworld:lead_chestplate"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:lead_leggings",
+      "recipe2": "mysticalworld:lead_boots"
+    }
+  ]
+}

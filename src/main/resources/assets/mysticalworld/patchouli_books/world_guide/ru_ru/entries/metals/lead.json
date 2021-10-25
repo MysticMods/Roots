@@ -1,0 +1,19 @@
+{
+  "name": "Свинцовая руда",
+  "icon": "mysticalworld:lead_ore",
+  "category": "metals",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:lead_ore",
+      "text": "Находящийся в нижних частях света, свинец представляет собой плотный материал, который можно использовать для различных целей."
+    },
+    {
+      "type": "smelting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:lead_ingot_from_smelting",
+      "title": "Свинцовый слиток",
+      "text": "К счастью, в этой форме свинец не может быть ядовитым, и его можно плавить в слитки, используя как печь, так и плавильную печь."
+    }
+  ]
+}

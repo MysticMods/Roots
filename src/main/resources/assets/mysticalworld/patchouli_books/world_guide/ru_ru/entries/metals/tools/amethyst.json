@@ -1,0 +1,23 @@
+{
+  "name": "Аметистовые инструменты",
+  "icon": "mysticalworld:amethyst_axe",
+  "category": "metals_tools",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:amethyst",
+      "text": "Аметист - это драгоценный камень, который можно использовать для изготовления целого ряда прочных высококачественных инструментов.$(br2)Эти инструменты имеют уровень сбора обсидиана, идентичный уровню алмазных инструментов."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:amethyst_axe",
+      "recipe2": "mysticalworld:amethyst_hoe",
+      "title": "Аметистовые инструменты"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:amethyst_shovel",
+      "recipe2": "mysticalworld:amethyst_pickaxe",
+      "title": "Аметистовые инструменты"
+    }
+  ]
+}

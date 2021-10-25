@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DDD",
+    "DDD"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:charred_planks"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:charred_wall",
+    "data": 0,
+    "count": 6
+  }
+}

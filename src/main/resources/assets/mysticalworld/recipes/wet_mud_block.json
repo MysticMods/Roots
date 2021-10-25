@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DDD",
+    "DWD",
+    "DDD"
+    ],
+  "key": {
+    "W": [
+      {
+        "item": "minecraft:water_bucket"
+      }
+    ],
+    "D": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "dirt"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:wet_mud_block",
+    "data": 0,
+    "count": 8
+  }
+}

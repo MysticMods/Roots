@@ -1,0 +1,21 @@
+{
+  "name": "Аметистовые доспехи",
+  "icon": "mysticalworld:amethyst_helmet",
+  "category": "metals_armor",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:amethyst_helmet",
+      "text": "Плотная, красивая и восхваляема многими, аметистовая броня даёт $(l:metals/modifiers/serendipity)Серендипность$()."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:amethyst_helmet",
+      "recipe2": "mysticalworld:amethyst_chestplate"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:amethyst_leggings",
+      "recipe2": "mysticalworld:amethyst_boots"
+    }
+  ]
+}

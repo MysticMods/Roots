@@ -1,0 +1,310 @@
+{
+  "mob.fox.aggro": {
+    "sounds": [
+      "mysticalworld:fox/aggro1",
+      "mysticalworld:fox/aggro2",
+      "mysticalworld:fox/aggro3",
+      "mysticalworld:fox/aggro4",
+      "mysticalworld:fox/aggro5",
+      "mysticalworld:fox/aggro6",
+      "mysticalworld:fox/aggro7"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.aggro"
+  },
+  "mob.fox.bark": {
+    "sounds": [
+      "mysticalworld:fox/bark1",
+      "mysticalworld:fox/bark2",
+      "mysticalworld:fox/bark3",
+      "mysticalworld:fox/bark4"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.bark"
+  },
+  "mob.fox.bite": {
+    "sounds": [
+      "mysticalworld:fox/bite1",
+      "mysticalworld:fox/bite2",
+      "mysticalworld:fox/bite3"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.bite"
+  },
+  "mob.fox.death": {
+    "sounds": [
+      "mysticalworld:fox/death1",
+      "mysticalworld:fox/death2"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.death"
+  },
+  "mob.fox.eat": {
+    "sounds": [
+      "mysticalworld:fox/eat1",
+      "mysticalworld:fox/eat2",
+      "mysticalworld:fox/eat3"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.eat"
+  },
+  "mob.fox.idle": {
+    "sounds": [
+      "mysticalworld:fox/idle1",
+      "mysticalworld:fox/idle2",
+      "mysticalworld:fox/idle3",
+      "mysticalworld:fox/idle4",
+      "mysticalworld:fox/idle5",
+      "mysticalworld:fox/idle6"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.idle"
+  },
+  "mob.fox.sleep": {
+    "sounds": [
+      "mysticalworld:fox/sleep1",
+      "mysticalworld:fox/sleep2",
+      "mysticalworld:fox/sleep3",
+      "mysticalworld:fox/sleep4",
+      "mysticalworld:fox/sleep5"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.sleep"
+  },
+  "mob.fox.sniff": {
+    "sounds": [
+      "mysticalworld:fox/sniff1",
+      "mysticalworld:fox/sniff2",
+      "mysticalworld:fox/sniff3",
+      "mysticalworld:fox/sniff4"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.sniff"
+  },
+  "mob.fox.spit": {
+    "sounds": [
+      "mysticalworld:fox/spit1",
+      "mysticalworld:fox/spit2",
+      "mysticalworld:fox/spit3"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.fox.spit"
+  },
+  "mob.sprout.ambient": {
+    "sounds": [
+      "mysticalworld:sprout/sprout1",
+      "mysticalworld:sprout/sprout2",
+      "mysticalworld:sprout/sprout3",
+      "mysticalworld:sprout/sprout4",
+      "mysticalworld:sprout/sprout5"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.sprout.ambient"
+  },
+  "mob.endermini.death": {
+    "sounds": [
+      "mysticalworld:endermini/death"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.endermini.death"
+  },
+  "mob.endermini.hit": {
+    "sounds": [
+      "mysticalworld:endermini/hit1",
+      "mysticalworld:endermini/hit2",
+      "mysticalworld:endermini/hit3",
+      "mysticalworld:endermini/hit4"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.endermini.hit"
+  },
+  "mob.endermini.idle": {
+    "sounds": [
+      "mysticalworld:endermini/idle1",
+      "mysticalworld:endermini/idle2",
+      "mysticalworld:endermini/idle3",
+      "mysticalworld:endermini/idle4",
+      "mysticalworld:endermini/idle5"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.endermini.idle"
+  },
+  "mob.endermini.portal": {
+    "sounds": [
+      "mysticalworld:endermini/portal1",
+      "mysticalworld:endermini/portal2"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.endermini.portal"
+  },
+  "mob.endermini.scream": {
+    "sounds": [
+      "mysticalworld:endermini/scream1",
+      "mysticalworld:endermini/scream2",
+      "mysticalworld:endermini/scream3",
+      "mysticalworld:endermini/scream4"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.endermini.scream"
+  },
+  "mob.endermini.stare": {
+    "sounds": [
+      "mysticalworld:endermini/stare"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.endermini.stare"
+  },
+  "mob.silkworm.egg.use": {
+    "sounds": [
+      "random/glass1",
+      "random/glass2",
+      "random/glass3"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.silkworm.egg.use"
+  },
+  "mob.lava_cat.sizzle": {
+    "sounds": [
+      "random/fizz"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.lava_cat.sizzle"
+  },
+  "mob.frog.slime": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.frog.slime"
+  },
+  "mob.lava_cat.ambient": {
+    "sounds": [
+      "mob/cat/meow1",
+      "mob/cat/meow2",
+      "mob/cat/meow3",
+      "mob/cat/meow4"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.lava_cat.ambient"
+  },
+  "mob.lava_cat.death": {
+    "sounds": [
+      {
+        "name": "mob/cat/hitt1",
+        "volume": 0.75,
+        "pitch": 0.9
+      },
+      {
+        "name": "mob/cat/hitt2",
+        "volume": 0.75,
+        "pitch": 0.9
+      },
+      {
+        "name": "mob/cat/hitt3",
+        "volume": 0.75,
+        "pitch": 0.9
+      }
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.lava_cat.death"
+  },
+  "mob.lava_cat.hurt": {
+    "sounds": [
+      {
+        "name": "mob/cat/hitt1",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/cat/hitt2",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/cat/hitt3",
+        "volume": 0.65
+      }
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.lava_cat.hurt"
+  },
+  "mob.lava_cat.purr": {
+    "sounds": [
+      {
+        "name": "mob/cat/purr1",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/cat/purr2",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/cat/purr3",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.lava_cat.purr"
+  },
+  "mob.lava_cat.purreow": {
+    "sounds": [
+      {
+        "name": "mob/cat/purreow1",
+        "volume": 0.5
+      },
+      {
+        "name": "mob/cat/purreow2",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.lava_cat.purreow"
+  },
+  "mob.silkworm.plop": {
+    "sounds": [
+      "mob/chicken/plop"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.silkworm.plop"
+  },
+  "mob.squid.milk": {
+    "sounds": [
+      "entity/cow/milk1",
+      "entity/cow/milk2",
+      "entity/cow/milk3"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.squid.milk"
+  },
+  "item.unripe_pearl.use": {
+    "sounds": [
+      "mob/endermen/portal",
+      "mob/endermen/portal2"
+    ],
+    "subtitle": "mysticalworld.subtitles.item.unripe_pearl.use"
+  },
+  "item.pearleporter.use": {
+    "sounds": [
+      {
+        "name": "block/end_portal/eyeplace3",
+        "pitch": 0.5
+      }
+    ],
+    "subtitle": "mysticalworld.subtitles.item.pearleporter.use"
+  },
+  "mob.silkworm.ambient": {
+    "sounds": [
+      "mob/silverfish/say1",
+      "mob/silverfish/say2",
+      "mob/silverfish/say3",
+      "mob/silverfish/say4"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.silkworm.ambient"
+  },
+  "mob.silkworm.death": {
+    "sounds": [
+      "mob/silverfish/kill"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.silkworm.death"
+  },
+  "mob.silkworm.hurt": {
+    "sounds": [
+      "mob/silverfish/hit1",
+      "mob/silverfish/hit2",
+      "mob/silverfish/hit3"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.silkworm.hurt"
+  },
+  "mob.silkworm.step": {
+    "sounds": [
+      "mob/silverfish/step1",
+      "mob/silverfish/step2",
+      "mob/silverfish/step3",
+      "mob/silverfish/step4"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.silkworm.step"
+  },
+  "mob.silkworm.eat": {
+    "sounds": [
+      "mob/llama/eat1",
+      "mob/llama/eat2",
+      "mob/llama/eat3"
+    ],
+    "subtitle": "mysticalworld.subtitles.entity.silkworm.eat"
+  }
+}

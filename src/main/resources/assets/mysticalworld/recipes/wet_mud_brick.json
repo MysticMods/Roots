@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DD",
+    "DD"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:wet_mud_block"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:wet_mud_brick",
+    "data": 0,
+    "count": 4
+  }
+}

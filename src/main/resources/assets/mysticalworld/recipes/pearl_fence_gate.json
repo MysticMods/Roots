@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DSD",
+    "DSD"
+  ],
+  "key": {
+    "S": [
+      {
+        "item": "mysticalworld:pearl_block"
+      }
+    ],
+    "D": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemPearl"
+      },
+      {
+        "item": "mysticalworld:pearl"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:pearl_fence_gate",
+    "data": 0,
+    "count": 1
+  }
+}

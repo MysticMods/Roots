@@ -1,0 +1,19 @@
+{
+  "name": "Ртутная руда",
+  "icon": "mysticalworld:quicksilver_ore",
+  "category": "metals",
+  "pages": [{
+      "type": "spotlight",
+      "link_recipe": true,
+      "item": "mysticalworld:quicksilver_ore",
+      "text": "Эта фантастическая, мистическая руда содержит затвердевшую ртуть. Он может быть сформирован в слитки, которые в основном сохраняют свою твёрдость, и, таким образом, могут быть использованы для крафта."
+    },
+    {
+      "type": "smelting",
+      "link_recipe": true,
+      "recipe": "mysticalworld:quicksilver_ingot_from_smelting",
+      "title": "Ртутные слитки",
+      "text": "Как и все другие руды, эта может плавится в печи или плавильной печи."
+    }
+  ]
+}

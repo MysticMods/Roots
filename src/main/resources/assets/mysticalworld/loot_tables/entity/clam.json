@@ -1,0 +1,106 @@
+{
+    "pools": [
+        {
+            "name": "pool1",
+            "entries": [
+                {
+                    "entryName": "mysticalworld:pearl",
+                    "weight": 1,
+                    "quality": 2,
+                    "type": "item",
+                    "conditions": [
+                        {
+                            "condition": "is_ender",
+                            "inverse": "true"
+                        },
+                        {
+                            "condition": "is_mature"
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        },
+                        {
+                            "count": {
+                                "min": 1.0,
+                                "max": 3.0
+                            },
+                            "function": "minecraft:looting_enchant"
+                        }
+                    ],
+                    "name": "mysticalworld:pearl"
+                }
+            ],
+            "rolls": 1.0
+        },
+        {
+            "name": "pool2",
+            "entries": [
+                {
+                    "entryName": "minecraft:ender_pearl",
+                    "weight": 1,
+                    "quality": 2,
+                    "type": "item",
+                    "conditions": [
+                        {
+                            "condition": "is_ender"
+                        },
+                        {
+                            "condition": "is_mature"
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 1
+                            }
+                        },
+                        {
+                            "count": {
+                                "min": 0.0,
+                                "max": 2.0
+                            },
+                            "function": "minecraft:looting_enchant"
+                        }
+                    ],
+                    "name": "minecraft:ender_pearl"
+                }
+            ],
+            "rolls": 1.0
+        },
+        {
+            "name": "pool1_ritual",
+            "entries": [
+                {
+                    "entryName": "mysticalworld:pearl",
+                    "weight": 1,
+                    "quality": 2,
+                    "type": "item",
+                    "conditions": [
+                        {
+                            "condition": "was_ritual"
+                        }
+                    ],
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 0,
+                                "max": 1
+                            }
+                        }
+                    ],
+                    "name": "mysticalworld:pearl"
+                }
+            ],
+            "rolls": 1.0
+        }
+    ]
+}

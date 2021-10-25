@@ -1,0 +1,21 @@
+{
+  "name": "Оловянное оружие",
+  "icon": "mysticalworld:tin_knife",
+  "category": "metals_weapons",
+  "pages": [{
+      "type": "spotlight",
+      "item": "mysticalworld:tin_ingot",
+      "text": "Оловянное оружие легкое и гибкое."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:tin_knife",
+      "recipe2": "mysticalworld:tin_spear",
+      "title": "Оловянное оружие"
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:tin_sword"
+    }
+  ]
+}

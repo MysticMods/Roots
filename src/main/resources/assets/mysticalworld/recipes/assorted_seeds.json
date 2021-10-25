@@ -1,0 +1,16 @@
+{
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "S": {
+      "type": "mysticalworld:seed"
+    }
+  },
+  "result": {
+    "item": "mysticalworld:assorted_seeds",
+    "count": 4
+  }
+}

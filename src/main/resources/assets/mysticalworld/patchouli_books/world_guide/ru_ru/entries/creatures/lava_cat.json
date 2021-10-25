@@ -1,0 +1,22 @@
+{
+  "name": "Лавовый кот",
+  "icon": "minecraft:lava_bucket",
+  "category": "creatures",
+  "flag": "roots:lava_cat",
+  "pages": [{
+      "type": "animal_spawn_info",
+      "animal": "lava_cat",
+      "breed": "Разводить: огненными стержнями.",
+      "tame": "Приручать: огненными стержнями.",
+      "blurb": "Обливание водой превратит этих кошачьих в обсидиановых!"
+    },
+    {
+      "type": "entity",
+      "name": "Лавовый кот",
+      "entity": "mysticalworld:entity_lava_cat",
+      "scale": 0.5,
+      "offset": -0.3,
+      "text": "Аналогично, окунание в лаву вернет обратную форму."
+    }
+  ]
+}

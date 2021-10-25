@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DDD",
+    "DDD",
+    "DDD"
+    ],
+  "key": {
+    "D": [
+      {
+        "item": "mysticalworld:gold_dust_tiny"
+      }
+    ]
+  },
+  "result": {
+    "item": "mysticalworld:gold_dust",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "mysticalworld:config",
+      "config": "gold_tiny_dust"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "mysticalworld:blocks/solar_infused_stone",
+    "all": "mysticalworld:blocks/solar_infused_stone"
+  }
+}
