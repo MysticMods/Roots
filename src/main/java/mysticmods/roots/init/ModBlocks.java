@@ -3,8 +3,8 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import mysticmods.roots.blocks.*;
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.blocks.FeyLightBlock;
 import mysticmods.roots.blocks.crops.CropBlock;
 import mysticmods.roots.blocks.crops.ElementalCropBlock;
 import mysticmods.roots.blocks.crops.ThreeStageCropBlock;
@@ -98,8 +98,15 @@ public class ModBlocks {
    public static BlockEntry<FeyLightBlock> FEYLIGHT = REGISTRATE.block("feylight", FeyLightBlock::new)
         .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
         .register();
+  public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", CatalystPlateBlock::new).register();
+  public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new).register();
+  public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("fey_crafter", FeyCrafterBlock::new).register();
+  public static BlockEntry<ImbuerBlock> IMBUER = REGISTRATE.block("imbuer", ImbuerBlock::new).register();
+  public static BlockEntry<ImposerBlock> IMPOSER = REGISTRATE.block("imposer", ImposerBlock::new).register();
+  public static BlockEntry<IncenseBurnerBlock> INCENSE_BURNER = REGISTRATE.block("incense_burner", IncenseBurnerBlock::new).register();
+  public static BlockEntry<MortarBlock> MORTAR = REGISTRATE.block("mortar", MortarBlock::new).register();
+  public static BlockEntry<PyreBlock> PYRE = REGISTRATE.block("pyre", PyreBlock::new).register();
 
   public static void load() {
-
   }
 }
