@@ -1,9 +1,6 @@
 package mysticmods.roots;
 
-import mysticmods.roots.init.ModBlocks;
-import mysticmods.roots.init.ModHerbs;
-import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ModRegistries;
+import mysticmods.roots.init.*;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -36,6 +33,7 @@ public class Roots {
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
 
     ModBlocks.load();
+    ModBlockEntities.load();
     ModItems.load();
     ModHerbs.load();
     ModRegistries.load();
