@@ -13,7 +13,7 @@ import epicsquid.roots.util.types.BlockPosDimension;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.BooleanProperty;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.entity.LivingEntity;
@@ -21,7 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -37,11 +37,11 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BlockPyre extends BlockTEBase {
 
-  public static PropertyBool BURNING = PropertyBool.create("burning");
+  public static BooleanProperty BURNING = BooleanProperty.create("burning");
 
   public BlockPyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
-    setDefaultState(blockState.getBaseState().withProperty(BURNING, false));
+    setDefaultState(blockState.getBaseState().with(BURNING, false));
   }
 
   @Override
@@ -91,14 +91,14 @@ public class BlockPyre extends BlockTEBase {
   @Nonnull
   @Override
   public BlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull Direction facing, float hitX, float hitY, float hitZ, int meta, @Nonnull LivingEntity placer, Hand hand) {
-    return this.getDefaultState().withProperty(BURNING, false);
+    return this.getDefaultState().with(BURNING, false);
   }
 
   public static void setState(boolean burning, World world, BlockPos pos) {
     if (burning) {
-      world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, true), 3);
+      world.setBlockState(pos, world.getBlockState(pos).with(BURNING, true), 3);
     } else {
-      world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, false), 3);
+      world.setBlockState(pos, world.getBlockState(pos).with(BURNING, false), 3);
     }
   }
 
@@ -106,7 +106,7 @@ public class BlockPyre extends BlockTEBase {
   @Nonnull
   @Override
   public BlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(BURNING, meta == 1);
+    return this.getDefaultState().with(BURNING, meta == 1);
   }
 
   @Override
@@ -117,7 +117,7 @@ public class BlockPyre extends BlockTEBase {
   @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World world, BlockPos pos, Random rand) {
-    if (stateIn.getValue(BURNING)) {
+    if (stateIn.get(BURNING)) {
       world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
 
       List<BlockPos> standingStones = RitualUtil.getNearbyPositions(RitualUtil.Runestone.get(), world, pos, -1);
@@ -125,11 +125,11 @@ public class BlockPyre extends BlockTEBase {
         standingStones.addAll(RitualUtil.getNearbyPositions(type, world, pos, -1));
       }
       if (!standingStones.isEmpty()) {
-        Vec3d me = new Vec3d(pos).add(0.5, 0.5, 0.5);
+        Vector3d me = new Vector3d(pos).add(0.5, 0.5, 0.5);
         for (BlockPos runestone : standingStones) {
           if (rand.nextInt(6) == 0) {
-            Vec3d origAngle = me.subtract(new Vec3d(runestone).add(0.5 + rand.nextDouble() - 0.5, 0.5 + rand.nextDouble() - 0.5, 0.5 + rand.nextDouble() - 0.5));
-            Vec3d angle = origAngle.normalize().scale(0.05);
+            Vector3d origAngle = me.subtract(new Vector3d(runestone).add(0.5 + rand.nextDouble() - 0.5, 0.5 + rand.nextDouble() - 0.5, 0.5 + rand.nextDouble() - 0.5));
+            Vector3d angle = origAngle.normalize().scale(0.05);
             ClientProxy.particleRenderer.spawnParticle(world, ParticlePyreLeaf.class,
                 (double) runestone.getX() + 0.5D,
                 (double) runestone.getY() + 0.5D,

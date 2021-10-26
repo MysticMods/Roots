@@ -52,7 +52,7 @@ public class SpellSummersThaw extends SpellBase {
         new ItemStack(Blocks.TORCH),
         new ItemStack(ModItems.infernal_bulb),
         new OreIngredient("gunpowder"),
-        new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta())
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.PlantType.SUNFLOWER.getMeta())
     );
   }
 

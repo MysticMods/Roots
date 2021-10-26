@@ -1,6 +1,6 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockBase;
+import epicsquid.mysticallib.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.OnlyIn;
 
 @SuppressWarnings("deprecation")
-public class BlockStructureMarker extends BlockBase {
+public class BlockStructureMarker extends Block {
 
   public static final PropertyInteger marker_value = PropertyInteger.create("marker_value", 0, 15);
 
@@ -41,7 +41,7 @@ public class BlockStructureMarker extends BlockBase {
 
   @Override
   public BlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(marker_value, meta);
+    return getDefaultState().with(marker_value, meta);
   }
 
 }

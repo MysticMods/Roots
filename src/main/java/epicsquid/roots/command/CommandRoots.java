@@ -138,7 +138,7 @@ public class CommandRoots extends CommandBase {
             continue;
           }
 
-          world.setBlockState(pos, state.withProperty(BlockGroveStone.VALID, true));
+          world.setBlockState(pos, state.with(BlockGroveStone.VALID, true));
         }
       } else if (args[0].equalsIgnoreCase("book")) {
         AdvancementManager manager = world.getAdvancementManager();

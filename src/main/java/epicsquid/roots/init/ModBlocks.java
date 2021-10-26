@@ -17,7 +17,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.PlantType;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -73,16 +73,16 @@ public class ModBlocks {
    */
   public static void registerBlocks(@Nonnull RegisterContentEvent event) {
     // Roots
-    event.addBlock(moonglow = new BlockMoonglowCrop("moonglow_crop", EnumPlantType.Crop));
-    event.addBlock(pereskia = new BlockPereskiaCrop("pereskia_crop", EnumPlantType.Crop));
-    event.addBlock(wildroot = new BlockWildrootCrop("wildroot_crop", EnumPlantType.Crop));
-    event.addBlock(spirit_herb = new BlockSpiritHerbCrop("spirit_herb_crop", EnumPlantType.Crop));
+    event.addBlock(moonglow = new BlockMoonglowCrop("moonglow_crop", PlantType.Crop));
+    event.addBlock(pereskia = new BlockPereskiaCrop("pereskia_crop", PlantType.Crop));
+    event.addBlock(wildroot = new BlockWildrootCrop("wildroot_crop", PlantType.Crop));
+    event.addBlock(spirit_herb = new BlockSpiritHerbCrop("spirit_herb_crop", PlantType.Crop));
     event.addBlock(baffle_cap_huge_stem = new BlockHugeMushroomBase(Material.WOOD, SoundType.WOOD, 0.8f, "baffle_cap_huge_stem").setCreativeTab(Roots.tab));
     event.addBlock(baffle_cap_huge_top = new BlockHugeMushroomBase(Material.WOOD, SoundType.WOOD, 0.8f, "baffle_cap_huge_top").setCreativeTab(Roots.tab));
     event.addBlock(baffle_cap_mushroom = new BlockMushroomBase("baffle_cap_mushroom", new HugeBaffleCap().getData()));
     ((BlockHugeMushroomBase) baffle_cap_huge_stem).setSmallBlock(baffle_cap_mushroom);
     ((BlockHugeMushroomBase) baffle_cap_huge_top).setSmallBlock(baffle_cap_mushroom);
-    event.addBlock(wildewheet = new BlockWildewheetCrop("wildewheet_crop", EnumPlantType.Crop));
+    event.addBlock(wildewheet = new BlockWildewheetCrop("wildewheet_crop", PlantType.Crop));
     event.addBlock(cloud_berry = new BlockCloudBerryCrop("cloud_berry_crop", CustomPlantType.ELEMENT_AIR));
     event.addBlock(infernal_bulb = new BlockInfernalBulbCrop("infernal_bulb_crop", CustomPlantType.ELEMENT_FIRE));
     // TODO 1.13 make the dewgonia work only underwater
@@ -103,10 +103,10 @@ public class ModBlocks {
     ((BlockMushroomBase) baffle_cap_mushroom).setItemBlock(new BlockItem(baffle_cap_mushroom).setRegistryName(LibRegistry.getActiveModid(), "baffle_cap_mushroom"));
 
     //Runestones
-    event.addBlock(runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
-    event.addBlock(runestone_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick")).setCreativeTab(Roots.tab);
-    event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt")).setCreativeTab(Roots.tab);
-    event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
+    event.addBlock(runestone = new Block(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
+    event.addBlock(runestone_brick = new Block(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick")).setCreativeTab(Roots.tab);
+    event.addBlock(runestone_brick_alt = new Block(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt")).setCreativeTab(Roots.tab);
+    event.addBlock(chiseled_runestone = new Block(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian_brick = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian_brick")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian_brick_alt = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian_brick_alt")).setCreativeTab(Roots.tab);
@@ -127,7 +127,7 @@ public class ModBlocks {
 
     event.addBlock(wildwood_leaves = new BlockLeavesBase(0.8f, "wildwood_leaves", () -> new ItemStack(ModItems.wildroot), 50).setFlammable(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_log = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));
-    event.addBlock(wildwood_planks = new BlockBase(Material.WOOD, SoundType.WOOD, 2.0f, "wildwood_planks").setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_planks = new Block(Material.WOOD, SoundType.WOOD, 2.0f, "wildwood_planks").setCreativeTab(Roots.tab));
     event.addBlock(wildwood_sapling = new BlockSaplingBase("wildwood_sapling", () -> new WorldGenBigWildwoodTree(true)).setModelCustom(false).setCreativeTab(Roots.tab));
 
     event.addBlock(wildwood_door = new BlockDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_door").setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));

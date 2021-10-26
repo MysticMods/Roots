@@ -23,7 +23,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
@@ -91,10 +91,10 @@ public class SpellDandelionWinds extends SpellBase {
 
   @Override
   public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
-    Vec3d lookVec = player.getLookVec();
+    Vector3d lookVec = player.getLookVec();
     float d = info.has(STRONGER) ? distance + additional_distance : distance;
     float motion = d * d + d;
-    Vec3d playVec = player.getPositionVector();
+    Vector3d playVec = player.getPositionVector();
 
     int count = 0;
     int extinguish = 0;
@@ -107,7 +107,7 @@ public class SpellDandelionWinds extends SpellBase {
         entities.forEach(o -> {
           if (o != player) {
             BlockPos pos = o.getPosition();
-            Vec3d vec = lookVec;
+            Vector3d vec = lookVec;
             if (info.has(SUCTION)) {
               vec = playVec.subtract(o.getPositionVector()).normalize();
             }
@@ -125,7 +125,7 @@ public class SpellDandelionWinds extends SpellBase {
         if (!player.world.isRemote) {
           items.forEach(o -> {
             BlockPos pos = o.getPosition();
-            Vec3d vec = lookVec;
+            Vector3d vec = lookVec;
             if (info.has(SUCTION)) {
               vec = playVec.subtract(o.getPositionVector()).normalize();
             }
@@ -155,7 +155,7 @@ public class SpellDandelionWinds extends SpellBase {
         entities.forEach(o -> {
           if (o != player) {
             BlockPos pos = o.getPosition();
-            Vec3d vec;
+            Vector3d vec;
             if (info.has(SUCTION)) {
               vec = playVec.subtract(o.getPositionVector()).normalize();
             } else {
@@ -173,7 +173,7 @@ public class SpellDandelionWinds extends SpellBase {
           if (!player.world.isRemote) {
             items.forEach(o -> {
               BlockPos pos = o.getPosition();
-              Vec3d vec;
+              Vector3d vec;
               if (info.has(SUCTION)) {
                 vec = playVec.subtract(o.getPositionVector()).normalize();
               } else {
@@ -220,7 +220,7 @@ public class SpellDandelionWinds extends SpellBase {
     }
   }
 
-  private void flingEntity(Entity e, Vec3d lookVec, double motion, StaffModifierInstanceList info) {
+  private void flingEntity(Entity e, Vector3d lookVec, double motion, StaffModifierInstanceList info) {
     e.motionX += lookVec.x;
     // TODO: Improve suction
     e.motionY += (motion * 0.7);
@@ -231,7 +231,7 @@ public class SpellDandelionWinds extends SpellBase {
     e.velocityChanged = true;
   }
 
-  private void flingLivingEntity(LivingEntity e, Vec3d lookVec, double motion, StaffModifierInstanceList info) {
+  private void flingLivingEntity(LivingEntity e, Vector3d lookVec, double motion, StaffModifierInstanceList info) {
     if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellDandelionWinds.instance)) {
       return;
     }

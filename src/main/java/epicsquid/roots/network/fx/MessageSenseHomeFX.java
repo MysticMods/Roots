@@ -7,7 +7,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -50,9 +50,9 @@ public class MessageSenseHomeFX implements IMessage {
       }
       World world = mc.world;
       PlayerEntity player = mc.player;
-      Vec3d playerPos = player.getPositionVector().add(0, 1, 0);
-      Vec3d line = new Vec3d(message.home.getX(), player.posY, message.home.getZ()).add(0.5, 0.5, 0.5);
-      for (Vec3d vec : VecUtil.pointsBetween(playerPos, line, 15)) {
+      Vector3d playerPos = player.getPositionVector().add(0, 1, 0);
+      Vector3d line = new Vector3d(message.home.getX(), player.posY, message.home.getZ()).add(0.5, 0.5, 0.5);
+      for (Vector3d vec : VecUtil.pointsBetween(playerPos, line, 15)) {
         ParticleUtil.spawnParticlePetal(world, (float) vec.x, (float) vec.y, (float) vec.z, 0, 0, 0, color, 15, 19 * 20);
       }
     }

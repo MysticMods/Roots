@@ -57,7 +57,7 @@ public class StateUtil {
         for (T value : property.getAllowedValues()) {
           if (property.getName(value).equals(newValue)) {
             pairList.add(property);
-            return baseState.withProperty(property, value);
+            return baseState.with(property, value);
           }
         }
       }

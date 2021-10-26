@@ -3,13 +3,13 @@ package epicsquid.roots.block;
 import epicsquid.mysticallib.block.BlockCropBase;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.PlantType;
 
 import javax.annotation.Nonnull;
 
 public class BlockStalicripeCrop extends BlockCropBase {
 
-  public BlockStalicripeCrop(@Nonnull String name, @Nonnull EnumPlantType plantType) {
+  public BlockStalicripeCrop(@Nonnull String name, @Nonnull PlantType plantType) {
     super(name, plantType);
   }
 

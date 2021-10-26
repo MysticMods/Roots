@@ -7,7 +7,7 @@ import epicsquid.roots.network.ClientMessageHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageCreatureSummonedFX implements IMessage {
-  private Vec3d position;
+  private Vector3d position;
   private float height;
 
   public MessageCreatureSummonedFX() {
@@ -30,7 +30,7 @@ public class MessageCreatureSummonedFX implements IMessage {
 
   @Override
   public void fromBytes(ByteBuf buf) {
-    this.position = new Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
+    this.position = new Vector3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
     this.height = buf.readFloat();
   }
 

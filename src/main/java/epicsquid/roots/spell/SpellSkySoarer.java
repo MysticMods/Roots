@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nullable;
@@ -97,8 +97,8 @@ public class SpellSkySoarer extends SpellBase {
   }
 
   @Nullable
-  private Vec3d findSafePosition(PlayerEntity player) {
-    Vec3d realPos = new Vec3d(player.posX, player.posY, player.posZ).add(Vec3d.fromPitchYaw(0, player.rotationYaw).scale(jaunt_distance));
+  private Vector3d findSafePosition(PlayerEntity player) {
+    Vector3d realPos = new Vector3d(player.posX, player.posY, player.posZ).add(Vector3d.fromPitchYaw(0, player.rotationYaw).scale(jaunt_distance));
     BlockPos real = new BlockPos(realPos);
     BlockPos pos = player.world.getHeight(real);
     int height = player.world.provider.isNether() ? 128 : 256;
@@ -127,13 +127,13 @@ public class SpellSkySoarer extends SpellBase {
         return null;
       }
 
-      return new Vec3d(realPos.x, safe_y + 0.01, realPos.z);
+      return new Vector3d(realPos.x, safe_y + 0.01, realPos.z);
     } else {
       BlockState state = player.world.getBlockState(pos);
       BlockState state2 = player.world.getBlockState(pos.up());
       BlockState state3 = player.world.getBlockState(pos.down());
       if (state.getBlock().isPassable(player.world, pos) && state2.getBlock().isPassable(player.world, pos.up()) && state3.isSideSolid(player.world, pos.down(), Direction.UP)) {
-        return new Vec3d(realPos.x, pos.getY() + 0.01, realPos.z);
+        return new Vector3d(realPos.x, pos.getY() + 0.01, realPos.z);
       }
 
       return null;
@@ -144,7 +144,7 @@ public class SpellSkySoarer extends SpellBase {
   public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
       if (info.has(JAUNT)) {
-        Vec3d dest = findSafePosition(player);
+        Vector3d dest = findSafePosition(player);
         if (dest == null) {
           return false;
         }

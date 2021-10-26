@@ -25,7 +25,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.util.text.*;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
@@ -250,7 +250,7 @@ public class SpellExtension extends SpellBase {
           if (caster.world.isAirBlock(pos)) {
             continue;
           }
-          Vec3d vec = new Vec3d(pos);
+          Vector3d vec = new Vector3d(pos);
           BlockState state = caster.world.getBlockState(pos);
           Block block = state.getBlock();
           if (c && containers.contains(vec)) {

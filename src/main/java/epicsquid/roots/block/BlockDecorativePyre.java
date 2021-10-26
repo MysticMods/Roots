@@ -4,7 +4,7 @@ import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.roots.Roots;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.BooleanProperty;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.*;
@@ -23,7 +23,7 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BlockDecorativePyre extends BlockPyre {
 
-  public static PropertyBool BURNING = PropertyBool.create("burning");
+  public static BooleanProperty BURNING = BooleanProperty.create("burning");
 
   public BlockDecorativePyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
@@ -57,7 +57,7 @@ public class BlockDecorativePyre extends BlockPyre {
   @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World world, BlockPos pos, Random rand) {
-    if (stateIn.getValue(BURNING)) {
+    if (stateIn.get(BURNING)) {
       world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
     }
   }

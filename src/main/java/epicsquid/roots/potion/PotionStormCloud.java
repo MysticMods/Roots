@@ -24,7 +24,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.OnlyIn;
@@ -107,9 +107,9 @@ public class PotionStormCloud extends Effect {
         if (mods.has(SpellStormCloud.ICICLES)) {
           if (e.ticksExisted % SpellStormCloud.instance.icicle_interval == 0) {
             if (Util.rand.nextFloat() < SpellStormCloud.instance.icicle_chance) {
-              Vec3d pos = e.getPositionVector();
-              Vec3d playerPos = entity.getPositionVector().add(0, entity.getEyeHeight(), 0);
-              Vec3d accel = pos.subtract(playerPos);
+              Vector3d pos = e.getPositionVector();
+              Vector3d playerPos = entity.getPositionVector().add(0, entity.getEyeHeight(), 0);
+              Vector3d accel = pos.subtract(playerPos);
               EntityIcicle icicle = new EntityIcicle(world, entity, accel.x, accel.y, accel.z, EntityIcicle.SpellType.STORM_CLOUD);
               icicle.posX = playerPos.x;
               icicle.posY = playerPos.y + Util.rand.nextDouble() - 0.5;

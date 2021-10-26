@@ -38,7 +38,7 @@ public class BlockWildFire extends FireBlock implements IBlock, IModeledObject, 
     setRegistryName(LibRegistry.getActiveModid(), name);
     setLightOpacity(15);
     setLightLevel(1.0f / 4);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0).withProperty(NORTH, false).withProperty(EAST, false).withProperty(SOUTH, false).withProperty(WEST, false).withProperty(UPPER, false));
+    this.setDefaultState(this.blockState.getBaseState().with(AGE, 0).with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false).with(UPPER, false));
     //itemBlock = new ItemBlock(this).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
@@ -111,7 +111,7 @@ public class BlockWildFire extends FireBlock implements IBlock, IModeledObject, 
     int i = state.get(AGE);
 
     if (i < 15) {
-      state = state.withProperty(AGE, Math.max(15, i + rand.nextInt(6) / 2));
+      state = state.with(AGE, Math.max(15, i + rand.nextInt(6) / 2));
       worldIn.setBlockState(pos, state, 4);
     } else {
       worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());

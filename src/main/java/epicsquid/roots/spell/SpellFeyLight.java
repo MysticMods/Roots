@@ -23,7 +23,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
@@ -82,7 +82,7 @@ public class SpellFeyLight extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(Item.getItemFromBlock(Blocks.LIT_PUMPKIN)),
-        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, DoublePlantBlock.EnumPlantType.SUNFLOWER.getMeta()),
+        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, DoublePlantBlock.PlantType.SUNFLOWER.getMeta()),
         new ItemStack(ModItems.cloud_berry),
         new OreIngredient("rootsBark"),
         new ItemStack(ModItems.cloud_berry)
@@ -118,7 +118,7 @@ public class SpellFeyLight extends SpellBase {
     } else {
       BlockPos pos = BlockPos.ORIGIN;
       if (info.has(FIXED)) {
-        Vec3d lookVec = player.getLookVec().scale(1.5);
+        Vector3d lookVec = player.getLookVec().scale(1.5);
         pos = new BlockPos(player.posX + lookVec.x, player.posY + 1, player.posZ + lookVec.z);
       } else {
         RayTraceResult result = this.rayTrace(player, 10);
@@ -136,25 +136,25 @@ public class SpellFeyLight extends SpellBase {
         if (!world.isRemote) {
           BlockState state = ModBlocks.fey_light.getDefaultState();
           if (info.has(PINK)) {
-            state = ModBlocks.fey_colored_light.getDefaultState().withProperty(BlockColoredFeyLight.COLOR, 0);
+            state = ModBlocks.fey_colored_light.getDefaultState().with(BlockColoredFeyLight.COLOR, 0);
           }
           if (info.has(YELLOW)) {
-            state = ModBlocks.fey_colored_light.getDefaultState().withProperty(BlockColoredFeyLight.COLOR, 1);
+            state = ModBlocks.fey_colored_light.getDefaultState().with(BlockColoredFeyLight.COLOR, 1);
           }
           if (info.has(PURPLE)) {
-            state = ModBlocks.fey_colored_light.getDefaultState().withProperty(BlockColoredFeyLight.COLOR, 2);
+            state = ModBlocks.fey_colored_light.getDefaultState().with(BlockColoredFeyLight.COLOR, 2);
           }
           if (info.has(GREEN)) {
-            state = ModBlocks.fey_colored_light.getDefaultState().withProperty(BlockColoredFeyLight.COLOR, 3);
+            state = ModBlocks.fey_colored_light.getDefaultState().with(BlockColoredFeyLight.COLOR, 3);
           }
           if (info.has(RED)) {
-            state = ModBlocks.fey_colored_light.getDefaultState().withProperty(BlockColoredFeyLight.COLOR, 4);
+            state = ModBlocks.fey_colored_light.getDefaultState().with(BlockColoredFeyLight.COLOR, 4);
           }
           if (info.has(BROWN)) {
-            state = ModBlocks.fey_colored_light.getDefaultState().withProperty(BlockColoredFeyLight.COLOR, 5);
+            state = ModBlocks.fey_colored_light.getDefaultState().with(BlockColoredFeyLight.COLOR, 5);
           }
           if (info.has(BLUE)) {
-            state = ModBlocks.fey_colored_light.getDefaultState().withProperty(BlockColoredFeyLight.COLOR, 6);
+            state = ModBlocks.fey_colored_light.getDefaultState().with(BlockColoredFeyLight.COLOR, 6);
           }
           if (info.has(DECAY)) {
             state = ModBlocks.fey_decaying_light.getDefaultState();
@@ -189,10 +189,10 @@ public class SpellFeyLight extends SpellBase {
 
   @Nullable
   public RayTraceResult rayTrace(PlayerEntity player, double blockReachDistance, boolean ignore) {
-    Vec3d vec3d = player.getPositionEyes(1.0F);
-    Vec3d vec3d1 = player.getLook(1.0F);
-    Vec3d vec3d2 = vec3d.add(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance, vec3d1.z * blockReachDistance);
-    return player.world.rayTraceBlocks(vec3d, vec3d2, false, ignore, true);
+    Vector3d Vector3d = player.getPositionEyes(1.0F);
+    Vector3d Vector3d1 = player.getLook(1.0F);
+    Vector3d Vector3d2 = Vector3d.add(Vector3d1.x * blockReachDistance, Vector3d1.y * blockReachDistance, Vector3d1.z * blockReachDistance);
+    return player.world.rayTraceBlocks(Vector3d, Vector3d2, false, ignore, true);
   }
 }
 

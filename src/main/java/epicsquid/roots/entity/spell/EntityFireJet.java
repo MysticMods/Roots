@@ -17,7 +17,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -75,7 +75,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
       if (this.playerId != null) {
         PlayerEntity player = world.getPlayerEntityByUUID(this.playerId);
         if (player != null) {
-          Vec3d lookVec = player.getLookVec();
+          Vector3d lookVec = player.getLookVec();
           this.posX = player.posX;
           this.posY = player.posY;
           this.posZ = player.posZ;
@@ -112,9 +112,9 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                   }
                   if (modifiers.has(SpellWildfire.ICICLES)) {
                     int count = instance.icicle_count;
-                    Vec3d pos = entity.getPositionVector();
-                    Vec3d playerPos = player.getPositionVector().add(0, player.getEyeHeight(), 0);
-                    Vec3d accel = pos.subtract(playerPos);
+                    Vector3d pos = entity.getPositionVector();
+                    Vector3d playerPos = player.getPositionVector().add(0, player.getEyeHeight(), 0);
+                    Vector3d accel = pos.subtract(playerPos);
                     for (int k = 0; k < count; k++) {
                       EntityIcicle icicle = new EntityIcicle(world, player, accel.x, accel.y, accel.z, EntityIcicle.SpellType.WILDFIRE);
                       icicle.posX = playerPos.x;

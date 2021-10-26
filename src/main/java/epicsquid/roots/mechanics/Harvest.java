@@ -136,7 +136,7 @@ public class Harvest {
   }
 
   public static List<ItemStack> harvestReturnDrops(BlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable PlayerEntity player) {
-    BlockState newState = state.withProperty((IProperty<Integer>) prop, 0);
+    BlockState newState = state.with((IProperty<Integer>) prop, 0);
     NonNullList<ItemStack> drops = NonNullList.create();
     Harvest.add(seed, world.provider.getDimension(), pos, state);
     state.getBlock().getDrops(drops, world, pos, state, 0);

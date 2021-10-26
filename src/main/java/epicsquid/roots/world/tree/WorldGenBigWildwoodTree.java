@@ -135,7 +135,7 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
    */
   private void generateLeafNode(BlockPos pos) {
     for (int i = 0; i < this.leafDistanceLimit; ++i) {
-      this.crosSection(pos.up(i), this.leafSize(i), ModBlocks.wildwood_leaves.getDefaultState().withProperty(LeavesBlock.CHECK_DECAY, false));
+      this.crosSection(pos.up(i), this.leafSize(i), ModBlocks.wildwood_leaves.getDefaultState().with(LeavesBlock.CHECK_DECAY, false));
     }
   }
 
@@ -149,7 +149,7 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     for (int j = 0; j <= i; ++j) {
       BlockPos blockpos1 = p_175937_1_.add((double) (0.5F + (float) j * f), (double) (0.5F + (float) j * f1), (double) (0.5F + (float) j * f2));
       LogBlock.EnumAxis blocklog$enumaxis = this.getLogAxis(p_175937_1_, blockpos1);
-      this.setBlockAndNotifyAdequately(this.world, blockpos1, p_175937_3_.getDefaultState().withProperty(LogBlock.LOG_AXIS, blocklog$enumaxis));
+      this.setBlockAndNotifyAdequately(this.world, blockpos1, p_175937_3_.getDefaultState().with(LogBlock.LOG_AXIS, blocklog$enumaxis));
       affectedBlocks.add(blockpos1);
     }
   }

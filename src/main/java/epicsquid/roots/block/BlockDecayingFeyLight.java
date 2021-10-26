@@ -20,7 +20,7 @@ public class BlockDecayingFeyLight extends BlockNormalFeyLight {
   public BlockDecayingFeyLight(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
     setTickRandomly(true);
-    this.setDefaultState(this.getDefaultState().withProperty(DECAY, 0));
+    this.setDefaultState(this.getDefaultState().with(DECAY, 0));
   }
 
   @Override
@@ -31,7 +31,7 @@ public class BlockDecayingFeyLight extends BlockNormalFeyLight {
   @SuppressWarnings("deprecation")
   @Override
   public BlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(DECAY, meta);
+    return this.getDefaultState().with(DECAY, meta);
   }
 
   @Override
@@ -53,7 +53,7 @@ public class BlockDecayingFeyLight extends BlockNormalFeyLight {
         worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.PLAYERS, 0.25f, 1);
         worldIn.setBlockToAir(pos);
       } else {
-        worldIn.setBlockState(pos, state.withProperty(DECAY, Math.min(state.get(DECAY) + 1, 15)));
+        worldIn.setBlockState(pos, state.with(DECAY, Math.min(state.get(DECAY) + 1, 15)));
         worldIn.scheduleUpdate(pos, this, SpellFeyLight.instance.nextTick());
       }
     }

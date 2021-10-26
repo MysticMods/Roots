@@ -53,7 +53,7 @@ public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
       Block block = iblockstate.getBlock();
       BlockState farmland;
       if (ToolConfig.HoeMoisturises) {
-        farmland = net.minecraft.block.Blocks.FARMLAND.getDefaultState().withProperty(FarmlandBlock.MOISTURE, 7);
+        farmland = net.minecraft.block.Blocks.FARMLAND.getDefaultState().with(FarmlandBlock.MOISTURE, 7);
       } else {
         farmland = Blocks.FARMLAND.getDefaultState();
       }
@@ -70,7 +70,7 @@ public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
               this.setBlock(itemstack, player, worldIn, pos, farmland);
               return ActionResultType.SUCCESS;
             case COARSE_DIRT:
-              this.setBlock(itemstack, player, worldIn, pos, net.minecraft.block.Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+              this.setBlock(itemstack, player, worldIn, pos, net.minecraft.block.Blocks.DIRT.getDefaultState().with(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
               return ActionResultType.SUCCESS;
           }
         }

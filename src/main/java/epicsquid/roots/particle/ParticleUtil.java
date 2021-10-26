@@ -9,7 +9,7 @@ import epicsquid.roots.init.ModParticles;
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -178,11 +178,11 @@ public class ParticleUtil {
       return;
     }
 
-    List<Vec3d> positions = RayCastUtil.rayTraceEntitiesPositions(player, distance);
+    List<Vector3d> positions = RayCastUtil.rayTraceEntitiesPositions(player, distance);
     renderBeam(player.world, positions.get(0), positions.get(1), spawner, colors);
   }
 
-  public static void renderBeam(World world, Vec3d startPosition, Vec3d stopPosition, ParticleSpawner spawner, SpellBase colors) {
+  public static void renderBeam(World world, Vector3d startPosition, Vector3d stopPosition, ParticleSpawner spawner, SpellBase colors) {
     double dist = stopPosition.subtract(startPosition).length();
     double alphaDist = 0;
     for (double j = 0; j < dist; j += 0.15) {

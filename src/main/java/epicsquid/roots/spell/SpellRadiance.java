@@ -19,7 +19,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -95,11 +95,11 @@ public class SpellRadiance extends SpellBase {
       }
       float distance = this.distance;
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)), false, true, true);
-      Vec3d direction = player.getLookVec();
-      ArrayList<Vec3d> positions = new ArrayList<>();
+      Vector3d direction = player.getLookVec();
+      ArrayList<Vector3d> positions = new ArrayList<>();
       float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
       float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
-      positions.add(new Vec3d(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ));
+      positions.add(new Vector3d(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ));
       if (result != null) {
         positions.add(result.hitVec);
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
@@ -116,7 +116,7 @@ public class SpellRadiance extends SpellBase {
           if (hitSide.getZ() != 0) {
             zCoeff = -1f;
           }
-          direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
+          direction = new Vector3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
           distance -= result.hitVec.subtract(player.getPositionVector()).length();
           if (distance > 0) {
             RayTraceResult result2 = player.world.rayTraceBlocks(result.hitVec, result.hitVec.add(direction.scale(distance)));
@@ -136,7 +136,7 @@ public class SpellRadiance extends SpellBase {
                 if (hitSide.getZ() != 0) {
                   zCoeff = -1f;
                 }
-                direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
+                direction = new Vector3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
                 distance -= result2.hitVec.subtract(player.getPositionVector()).length();
                 if (distance > 0) {
                   RayTraceResult result3 = player.world.rayTraceBlocks(result2.hitVec, result2.hitVec.add(direction.scale(distance)));

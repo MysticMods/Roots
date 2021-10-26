@@ -35,7 +35,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -540,11 +540,11 @@ public abstract class SpellBase extends RegistryItem {
 
   @Nullable
   protected EntitySpellBase addEntity(World world, BlockPos pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
-    return addEntity(world, new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, player, amplifier, speedy);
+    return addEntity(world, new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, player, amplifier, speedy);
   }
 
   @Nullable
-  protected EntitySpellBase addEntity(World world, Vec3d pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
+  protected EntitySpellBase addEntity(World world, Vector3d pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
     List<EntitySpellBase> pastRituals = world.getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.x, pos.y, pos.z - 100, pos.x + 2, pos.y + 100, pos.z + 1), o -> o != null && o.getClass().equals(entity));
     if (pastRituals.isEmpty() && !world.isRemote) {
       EntitySpellBase spell = null;

@@ -1,6 +1,6 @@
 package epicsquid.roots.event;
 
-import epicsquid.mysticallib.block.BlockBase;
+import epicsquid.mysticallib.block.Block;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.entity.item.EntityItemMagmaticSoil;
@@ -16,7 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -42,7 +42,7 @@ public class ItemEventHandler {
 
     ItemRunicShears item = (ItemRunicShears) ModItems.runic_shears;
 
-    Vec3d hit = event.getHitVec();
+    Vector3d hit = event.getHitVec();
     ActionResultType result = item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
     if (result == ActionResultType.SUCCESS) {
       event.setCanceled(true);
@@ -93,7 +93,7 @@ public class ItemEventHandler {
   @SubscribeEvent
   public static void onEntityItemJoinWorld(EntityJoinWorldEvent event) {
     if (MAGMATIC_SOIL == null) {
-      MAGMATIC_SOIL = ((BlockBase) ModBlocks.elemental_soil_fire).getItemBlock();
+      MAGMATIC_SOIL = ((Block) ModBlocks.elemental_soil_fire).getItemBlock();
     }
     Entity entity = event.getEntity();
     if (event.getWorld().isRemote) return;

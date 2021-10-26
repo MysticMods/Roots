@@ -1,6 +1,6 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockBase;
+import epicsquid.mysticallib.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public abstract class BlockFeyLight extends BlockBase {
+public abstract class BlockFeyLight extends Block {
   public BlockFeyLight(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
     this.setLightLevel(1.0f);

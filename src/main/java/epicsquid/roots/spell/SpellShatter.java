@@ -24,7 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -125,7 +125,7 @@ public class SpellShatter extends SpellBase {
 
   @Override
   public boolean cast(PlayerEntity player, StaffModifierInstanceList info, int ticks) {
-    Vec3d eyes = new Vec3d(0, (double) player.getEyeHeight(), 0);
+    Vector3d eyes = new Vector3d(0, (double) player.getEyeHeight(), 0);
     RayTraceResult result = RayCastUtil.rayTraceBlocks(player.world, player.getPositionVector().add(eyes), player.getLookVec().scale(distance).add(player.getPositionVector().add(eyes)), false, false, false, false);
 
     List<Function<ItemStack, ItemStack>> converters = new ArrayList<>();

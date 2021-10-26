@@ -16,7 +16,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -148,7 +148,7 @@ public class EntityBoost extends Entity {
           this.posX = player.posX;
           this.posY = boat ? this.posY : player.posY + 1.0;
           this.posZ = player.posZ;
-          Vec3d vec = player.getLookVec();
+          Vector3d vec = player.getLookVec();
           if (!modifiers.has(SpellSkySoarer.VERTICAL)) {
             target.motionX = vec.x * amplifier;
             target.motionZ = vec.z * amplifier;

@@ -1,34 +1,8 @@
 package epicsquid.roots.init;
 
-import epicsquid.mysticallib.block.BlockDoorBase;
-import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.mysticallib.item.ItemBowlBase;
-import epicsquid.mysticallib.item.ItemFoodBase;
-import epicsquid.mysticallib.item.ItemSeedBase;
-import epicsquid.mysticallib.material.MaterialTypes;
-import epicsquid.roots.Roots;
-import epicsquid.roots.api.CreateToolEvent;
-import epicsquid.roots.item.*;
-import epicsquid.roots.item.living.*;
-import epicsquid.roots.item.materials.Materials;
-import epicsquid.roots.item.runed.*;
-import epicsquid.roots.item.terrastone.*;
-import epicsquid.roots.item.wildwood.ItemWildwoodArmor;
-import epicsquid.roots.item.wildwood.ItemWildwoodBow;
-import net.minecraft.block.*;
-import net.minecraft.block.Blocks;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.util.SoundEvents;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.item.Item;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ModItems {
@@ -61,14 +35,14 @@ public class ModItems {
 
   // TODO: Refactor this out of this file
   //Armor Materials
-  public static final ArmorItem.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
-  public static final ArmorItem.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, net.minecraft.util.SoundEvents.BLOCK_WOOD_PLACE, 1F);
+/*  public static final ArmorItem.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
+  public static final ArmorItem.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, net.minecraft.util.SoundEvents.BLOCK_WOOD_PLACE, 1F);*/
 
   /**
    * Register all items
    */
-  public static void registerItems(@Nonnull RegisterContentEvent event) {
-    event.addItem(guide = new ItemGuide("roots_guide")).setCreativeTab(Roots.tab);
+  public static void registerItems() {
+/*    event.addItem(guide = new ItemGuide("roots_guide")).setCreativeTab(Roots.tab);
     event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setCreativeTab(Roots.tab));
     event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setCreativeTab(Roots.tab));
     event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setCreativeTab(Roots.tab));
@@ -226,19 +200,19 @@ public class ModItems {
     event.addItem(fey_fire = new ItemBase("fey_fire").setCreativeTab(null));
 
     // KEEP AT END
-    registerSeedDrops();
+    registerSeedDrops();*/
   }
 
   /**
    * Register item oredicts here
    */
-  public static void registerOredict() {
+/*  public static void registerOredict() {
     OreDictionary.registerOre("dustBlaze", Items.BLAZE_POWDER);
     for (FlowerBlock.EnumFlowerType type : FlowerBlock.EnumFlowerType.values()) {
       OreDictionary.registerOre("allFlowers", new ItemStack(type.getBlockType().getBlock(), 1, type.getMeta()));
     }
-    for (DoublePlantBlock.EnumPlantType type : DoublePlantBlock.EnumPlantType.values()) {
-      if (type == DoublePlantBlock.EnumPlantType.FERN || type == DoublePlantBlock.EnumPlantType.GRASS) continue;
+    for (DoublePlantBlock.PlantType type : DoublePlantBlock.PlantType.values()) {
+      if (type == DoublePlantBlock.PlantType.FERN || type == DoublePlantBlock.PlantType.GRASS) continue;
 
       OreDictionary.registerOre("allTallFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
     }
@@ -293,10 +267,9 @@ public class ModItems {
 
     OreDictionary.registerOre("mossyCobblestone", new ItemStack(Blocks.MOSSY_COBBLESTONE));
     OreDictionary.registerOre("pyreFireStarters", new ItemStack(Items.FLINT_AND_STEEL, 1, OreDictionary.WILDCARD_VALUE));
-  }
-
+  }*/
   private static void registerSeedDrops() {
-    MinecraftForge.addGrassSeed(new ItemStack(terra_spores, 1), 5);
-    MinecraftForge.addGrassSeed(new ItemStack(wildroot, 1), 7);
+/*    MinecraftForge.addGrassSeed(new ItemStack(terra_spores, 1), 5);
+    MinecraftForge.addGrassSeed(new ItemStack(wildroot, 1), 7);*/
   }
 }

@@ -2,7 +2,7 @@ package epicsquid.roots.block;
 
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.block.BlockBase;
+import epicsquid.mysticallib.block.Block;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.config.GeneralConfig;
@@ -30,7 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.PlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockElementalSoil extends BlockBase {
+public class BlockElementalSoil extends Block {
   public static final PropertyInteger WATER_SPEED = PropertyInteger.create("water", 0, 4);
   public static final PropertyInteger AIR_SPEED = PropertyInteger.create("air", 0, 4);
   public static final PropertyInteger EARTH_FERTILITY = PropertyInteger.create("earth", 0, 4);
@@ -62,14 +62,14 @@ public class BlockElementalSoil extends BlockBase {
     this.soilType = soilType;
     this.itemBlock = new ItemBlockElementalSoil(this).setRegistryName(LibRegistry.getActiveModid(), name);
     this.setHarvestReqs("shovel", 0);
-    this.setTickRandomly(true);
+    // TODO: TICK RANDOMLY
 
     if (this.soilType != EnumElementalSoilType.BASE) {
       PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
           WATER_SPEED :
           this.soilType == EnumElementalSoilType.EARTH ? EARTH_FERTILITY : this.soilType == EnumElementalSoilType.AIR ? AIR_SPEED : FIRE_MULTIPLIER;
 
-      this.setDefaultState(this.blockState.getBaseState().withProperty(property, 1));
+      this.setDefaultState(this.blockState.getBaseState().with(property, 1));
     }
   }
 
@@ -139,13 +139,13 @@ public class BlockElementalSoil extends BlockBase {
     }
     switch (soilType) {
       case AIR:
-        return getDefaultState().withProperty(AIR_SPEED, meta + 1);
+        return getDefaultState().with(AIR_SPEED, meta + 1);
       case FIRE:
-        return getDefaultState().withProperty(FIRE_MULTIPLIER, meta + 1);
+        return getDefaultState().with(FIRE_MULTIPLIER, meta + 1);
       case EARTH:
-        return getDefaultState().withProperty(EARTH_FERTILITY, meta + 1);
+        return getDefaultState().with(EARTH_FERTILITY, meta + 1);
       case WATER:
-        return getDefaultState().withProperty(WATER_SPEED, meta + 1);
+        return getDefaultState().with(WATER_SPEED, meta + 1);
       case BASE:
       default:
         return getDefaultState();
@@ -193,7 +193,7 @@ public class BlockElementalSoil extends BlockBase {
       return soilType == EnumElementalSoilType.EARTH;
     }
 
-    EnumPlantType plant = plantable.getPlantType(world, pos.offset(direction));
+    PlantType plant = plantable.getPlantType(world, pos.offset(direction));
     switch (plant) {
       case Nether:
       case Cave:

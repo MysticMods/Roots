@@ -67,7 +67,7 @@ public class EntityRitualGroveSupplication extends EntityRitualBase {
         changed.add(pos);
 
         if (!world.isRemote) {
-          world.setBlockState(pos, state.withProperty(BlockGroveStone.VALID, true));
+          world.setBlockState(pos, state.with(BlockGroveStone.VALID, true));
           // -> How to handle this
           ServerPlayerEntity player = (ServerPlayerEntity) getPlayerEntity();
           if (player != null) {

@@ -4,7 +4,7 @@ import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.roots.Roots;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.DirectionProperty;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 
 @SuppressWarnings("deprecation")
 public class BlockCatalystPlate extends BlockTEBase {
-  public static final PropertyDirection FACING = PropertyDirection.create("facing");
+  public static final DirectionProperty FACING = DirectionProperty.create("facing");
 
   public BlockCatalystPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
@@ -58,12 +58,12 @@ public class BlockCatalystPlate extends BlockTEBase {
 
   @Override
   public BlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, Direction.byIndex(meta));
+    return getDefaultState().with(FACING, Direction.byIndex(meta));
   }
 
   @Override
   public BlockState getStateForPlacement(World world, BlockPos pos, Direction face, float hitX, float hitY, float hitZ, int meta, LivingEntity placer) {
-    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    return getDefaultState().with(FACING, placer.getHorizontalFacing().getOpposite());
   }
 
   @Nonnull

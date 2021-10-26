@@ -7,7 +7,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -15,14 +15,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageTargetedGeasFX implements IMessage {
-  private Vec3d start;
-  private Vec3d stop;
+  private Vector3d start;
+  private Vector3d stop;
 
   public MessageTargetedGeasFX() {
     super();
   }
 
-  public MessageTargetedGeasFX(Vec3d start, Vec3d stop) {
+  public MessageTargetedGeasFX(Vector3d start, Vector3d stop) {
     this.start = start;
     this.stop = stop;
   }
@@ -34,8 +34,8 @@ public class MessageTargetedGeasFX implements IMessage {
 
   @Override
   public void fromBytes(ByteBuf buf) {
-    this.start = new Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
-    this.stop = new Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
+    this.start = new Vector3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
+    this.stop = new Vector3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
   }
 
   @Override

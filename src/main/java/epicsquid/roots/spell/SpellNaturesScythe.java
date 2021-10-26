@@ -238,12 +238,12 @@ public class SpellNaturesScythe extends SpellBase {
       }
     }
     if (info.has(GRASS)) {
-      if (block == Blocks.TALLGRASS || (block == Blocks.DOUBLE_PLANT) && (state.get(DoublePlantBlock.VARIANT) == DoublePlantBlock.EnumPlantType.FERN || state.get(DoublePlantBlock.VARIANT) == DoublePlantBlock.EnumPlantType.GRASS) || OreDictCache.matches(this.grass, state) || block instanceof VineBlock || OreDictCache.matches(this.vines, state)) {
+      if (block == Blocks.TALLGRASS || (block == Blocks.DOUBLE_PLANT) && (state.get(DoublePlantBlock.VARIANT) == DoublePlantBlock.PlantType.FERN || state.get(DoublePlantBlock.VARIANT) == DoublePlantBlock.PlantType.GRASS) || OreDictCache.matches(this.grass, state) || block instanceof VineBlock || OreDictCache.matches(this.vines, state)) {
         return true;
       }
     }
     if (info.has(FLOWER)) {
-      if (block instanceof FlowerBlock || (block instanceof DoublePlantBlock && state.get(DoublePlantBlock.VARIANT) != DoublePlantBlock.EnumPlantType.GRASS && state.get(DoublePlantBlock.VARIANT) != DoublePlantBlock.EnumPlantType.FERN) || OreDictCache.matches(this.flower, state)) {
+      if (block instanceof FlowerBlock || (block instanceof DoublePlantBlock && state.get(DoublePlantBlock.VARIANT) != DoublePlantBlock.PlantType.GRASS && state.get(DoublePlantBlock.VARIANT) != DoublePlantBlock.PlantType.FERN) || OreDictCache.matches(this.flower, state)) {
         return true;
       }
     }

@@ -8,7 +8,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -61,7 +61,7 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
       World world = Minecraft.getMinecraft().world;
       PlayerEntity player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
-        Vec3d lookVec = player.getLookVec();
+        Vector3d lookVec = player.getLookVec();
         for (int i = 0; i < 4; i++) {
           float x = (float) player.posX + (float) lookVec.x * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
           float y = (float) player.posY + 1.0f + (float) lookVec.y * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);

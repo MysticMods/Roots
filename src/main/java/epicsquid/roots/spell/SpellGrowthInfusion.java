@@ -220,7 +220,7 @@ public class SpellGrowthInfusion extends SpellBase {
           if (info.has(HYDRATE)) {
             BlockState below = player.world.getBlockState(pos.down());
             if (below.getPropertyKeys().contains(FarmlandBlock.MOISTURE)) {
-              player.world.setBlockState(pos.down(), below.withProperty(FarmlandBlock.MOISTURE, 7), 2 | 16);
+              player.world.setBlockState(pos.down(), below.with(FarmlandBlock.MOISTURE, 7), 2 | 16);
             }
           }
           // TODO: CENTRALISE EFFECT COLOURS
@@ -289,7 +289,7 @@ public class SpellGrowthInfusion extends SpellBase {
               if (info.has(HYDRATE)) {
                 BlockState below = player.world.getBlockState(pos.down());
                 if (below.getPropertyKeys().contains(FarmlandBlock.MOISTURE)) {
-                  player.world.setBlockState(pos.down(), below.withProperty(FarmlandBlock.MOISTURE, 7), 2 | 16);
+                  player.world.setBlockState(pos.down(), below.with(FarmlandBlock.MOISTURE, 7), 2 | 16);
                 }
               }
               PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);

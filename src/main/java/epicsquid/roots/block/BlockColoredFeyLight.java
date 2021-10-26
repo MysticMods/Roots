@@ -73,13 +73,13 @@ public class BlockColoredFeyLight extends BlockFeyLight {
   public BlockColoredFeyLight(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
     setTickRandomly(true);
-    this.setDefaultState(this.getDefaultState().withProperty(COLOR, 0));
+    this.setDefaultState(this.getDefaultState().with(COLOR, 0));
   }
 
   @SuppressWarnings("deprecation")
   @Override
   public BlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(COLOR, meta);
+    return this.getDefaultState().with(COLOR, meta);
   }
 
   @Override

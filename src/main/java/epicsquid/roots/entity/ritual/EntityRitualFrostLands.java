@@ -54,7 +54,7 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
             break;
           }
         } else if (choicestate.get(SnowBlock.LAYERS) < 8 && Util.rand.nextInt(5) == 0) {
-          world.setBlockState(choice, choiceState.withProperty(SnowBlock.LAYERS, Math.min(choicestate.get(SnowBlock.LAYERS) + 1, 3)));
+          world.setBlockState(choice, choiceState.with(SnowBlock.LAYERS, Math.min(choicestate.get(SnowBlock.LAYERS) + 1, 3)));
           affectedPositions.add(choice);
           break;
         }
@@ -108,7 +108,7 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
       for (BlockPos pos : positions) {
         BlockState state = world.getBlockState(pos);
         if (state.get(FarmlandBlock.MOISTURE) != 7) {
-          world.setBlockState(pos, state.withProperty(FarmlandBlock.MOISTURE, state.get(FarmlandBlock.MOISTURE) + 1));
+          world.setBlockState(pos, state.with(FarmlandBlock.MOISTURE, state.get(FarmlandBlock.MOISTURE) + 1));
           affectedPositions.add(pos);
         }
       }
