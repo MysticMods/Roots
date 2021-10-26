@@ -17,6 +17,10 @@ public class ModItems {
     return p.generated(ctx::getEntry, new ResourceLocation(Roots.MODID, "item/herbs/" + ctx.getName()));
   }
 
+  private static <T extends Item> ItemModelBuilder blockModel (DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
+    return p.generated(ctx::getEntry, new ResourceLocation(Roots.MODID, "block/" + ctx.getName()));
+  }
+
   public static class Herbs {
     public static ItemEntry<BlockNamedItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new BlockNamedItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
         .model(ModItems::cropModel)
