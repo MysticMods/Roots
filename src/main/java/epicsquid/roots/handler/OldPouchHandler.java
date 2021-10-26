@@ -86,7 +86,7 @@ public class OldPouchHandler implements INBTSerializable<CompoundNBT> {
     CompoundNBT tag = pouch.getTagCompound();
     if (tag == null) {
       tag = new CompoundNBT();
-      pouch.setTagCompound(tag);
+      pouch.setTag(tag);
     }
 
     tag.put("handler", serializeNBT());

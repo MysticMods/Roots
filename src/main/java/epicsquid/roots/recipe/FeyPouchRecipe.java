@@ -26,7 +26,7 @@ public class FeyPouchRecipe extends FeyCraftingRecipe {
       Roots.logger.error("Couldn't find original!");
     } else {
       // Copy nbt!
-      output.setTagCompound(oldPouch.getTagCompound());
+      output.setTag(oldPouch.getTagCompound());
     }
   }
 }

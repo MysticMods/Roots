@@ -70,7 +70,7 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
 
   @Override
   protected void writeEntityToNBT(CompoundNBT compound) {
-    compound.setUniqueId("playerId", playerId);
+    compound.putUniqueId("playerId", playerId);
     compound.setIntArray("modifiers", this.modifiers.toArray());
   }
 }

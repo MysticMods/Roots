@@ -86,7 +86,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
 
   private static ItemStack createData(ItemStack stack, Herb herb, double quantity) {
     if (!stack.hasTagCompound()) {
-      stack.setTagCompound(new CompoundNBT());
+      stack.setTag(new CompoundNBT());
     }
     stack.getTagCompound().setDouble(herb.getName(), quantity);
     return stack;
@@ -109,7 +109,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     if (stack.hasTagCompound() && stack.getTagCompound().contains(herb.getName())) {
       temp = temp - stack.getTagCompound().getDouble(herb.getName());
       if (temp >= 0) {
-        stack.getTagCompound().removeTag(herb.getName());
+        stack.getTagCompound().remove(herb.getName());
         if (temp > 0 && addHerbToNbt(player, stack, herb)) {
           temp = useQuantity(player, stack, herb, temp);
         }

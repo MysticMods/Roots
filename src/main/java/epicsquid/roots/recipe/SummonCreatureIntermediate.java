@@ -37,7 +37,7 @@ public class SummonCreatureIntermediate extends SummonCreatureRecipe {
     CompoundNBT tag = stack.getTagCompound();
     if (tag == null) {
       tag = new CompoundNBT();
-      stack.setTagCompound(tag);
+      stack.setTag(tag);
     }
 
     tag.setString("id", rl.toString());

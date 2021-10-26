@@ -124,11 +124,11 @@ public class JEIRootsPlugin implements IModPlugin {
     for (ItemStack repairMat : repairItem.getMatchingStacks()) {
       for (ItemStack toRepair : itemsToRepair) {
         ItemStack damaged1 = toRepair.copy();
-        damaged1.setItemDamage(damaged1.getMaxDamage());
+        damaged1.setDamage(damaged1.getMaxDamage());
         ItemStack damaged2 = toRepair.copy();
-        damaged2.setItemDamage(damaged2.getMaxDamage() * 3 / 4);
+        damaged2.setDamage(damaged2.getMaxDamage() * 3 / 4);
         ItemStack damaged3 = toRepair.copy();
-        damaged3.setItemDamage(damaged3.getMaxDamage() * 2 / 4);
+        damaged3.setDamage(damaged3.getMaxDamage() * 2 / 4);
 
         if (first) {
           IRecipeWrapper repairWithSame = vanillaFactory.createAnvilRecipe(damaged2, Collections.singletonList(damaged2), Collections.singletonList(damaged3));

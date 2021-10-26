@@ -74,7 +74,7 @@ public class DyeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRec
     CompoundNBT tag = result.getTagCompound();
     if (tag == null) {
       tag = new CompoundNBT();
-      result.setTagCompound(tag);
+      result.setTag(tag);
     }
 
     tag.putInt("color", dyeColor);

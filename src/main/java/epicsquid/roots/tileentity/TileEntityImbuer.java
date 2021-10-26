@@ -1,13 +1,9 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.tile.TileEntity;
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModSounds;
-import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
@@ -24,15 +20,14 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ITickableTileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -53,7 +48,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
   private UUID inserter = null;
 
   public TileEntityImbuer() {
-    super();
+    super(null);
   }
 
   @Override
@@ -62,14 +57,14 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
     tag.put("handler", inventory.serializeNBT());
     tag.putInt("progress", progress);
     if (inserter != null) {
-      tag.setUniqueId("inserter", inserter);
+      tag.putUniqueId("inserter", inserter);
     }
     return tag;
   }
 
   @Override
   public void read(BlockState state, CompoundNBT tag) {
-    super.readFromNBT(tag);
+    super.read(state, tag);
     inventory.deserializeNBT(tag.getCompound("handler"));
     progress = tag.getInt("progress");
     if (tag.hasUniqueId("inserter")) {
@@ -86,12 +81,12 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
 
   @Override
   public SUpdateTileEntityPacket getUpdatePacket() {
-    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
+    return new SUpdateTileEntityPacket(getPos(), 9, getUpdateTag());
   }
 
   @Override
   public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-    readFromNBT(pkt.getNbtCompound());
+    read(ModBlocks.imbuer.getDefaultState(), pkt.getNbtCompound());
   }
 
   private boolean checkExists(int slot, ItemStack heldItem, PlayerEntity player, World world) {
@@ -107,7 +102,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
         spellDust = heldItem;
       }
       if (spellDust.isEmpty()) {
-        player.sendStatusMessage(new TranslationTextComponent("roots.message.spell_invalid").setStyle(new Style().setColor(FakeSpell.INSTANCE.getTextColor()).setBold(true)), true);
+        /*        player.sendStatusMessage(new TranslationTextComponent("roots.message.spell_invalid").setStyle(new Style().setColor(FakeSpell.INSTANCE.getTextColor()).setBold(true)), true);*/
         return true;
       }
       DustSpellStorage cap = DustSpellStorage.fromStack(spellDust);
@@ -117,19 +112,18 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
       }
       SpellLibraryData library = SpellLibraryRegistry.getData(player);
       if (spell == FakeSpell.INSTANCE) {
-        player.sendStatusMessage(new TranslationTextComponent("roots.message.spell_invalid").setStyle(new Style().setColor(spell.getTextColor()).setBold(true)), true);
+        /*        player.sendStatusMessage(new TranslationTextComponent("roots.message.spell_invalid").setStyle(new Style().setColor(spell.getTextColor()).setBold(true)), true);*/
         return true;
       }
       LibrarySpellInfo lib = library.getData(spell);
       if (lib.isObtained()) {
-        player.sendStatusMessage(new TranslationTextComponent("roots.message.spell_already", new TranslationTextComponent(spell.getTranslationKey() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))), true);
+        /*        player.sendStatusMessage(new TranslationTextComponent("roots.message.spell_already", new TranslationTextComponent(spell.getTranslationKey() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))), true);*/
         return true;
       }
     }
     return false;
   }
 
-  @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
@@ -162,7 +156,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
       } else {
         // Check for a damaged item in the other slot and see if this matches
         if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty()) {
-          if (heldItem.isItemDamaged() || (heldItem.isItemEnchanted() && heldItem.getItem() != Items.ENCHANTED_BOOK)) {
+          if (heldItem.isDamaged() || (heldItem.isEnchanted() && heldItem.getItem() != Items.ENCHANTED_BOOK)) {
             ItemStack toInsert = heldItem.copy();
             ItemStack attemptedInsert = inventory.insertItem(1, toInsert, true);
             if (attemptedInsert.isEmpty()) {
@@ -179,10 +173,10 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
           }
         } else {
           ItemStack toRepair = inventory.getStackInSlot(1);
-          if (GeneralConfig.AllowImbuerRepair && !toRepair.isEmpty() && toRepair.isItemDamaged() && toRepair.getItem().getIsRepairable(toRepair, heldItem) && inventory.getStackInSlot(0).isEmpty()) {
+          if (GeneralConfig.AllowImbuerRepair && !toRepair.isEmpty() && toRepair.isDamaged() && toRepair.getItem().getIsRepairable(toRepair, heldItem) && inventory.getStackInSlot(0).isEmpty()) {
             ItemStack repairItem = heldItem.copy();
             repairItem.setCount(1);
-            int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / GeneralConfig.MaxDamageDivisor);
+            int repairAmount = Math.min(toRepair.getDamage(), toRepair.getMaxDamage() / GeneralConfig.MaxDamageDivisor);
             if (repairAmount > 0) {
               ItemStack result = inventory.insertItem(0, repairItem, true);
               if (result.isEmpty()) {
@@ -197,7 +191,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
                 return true;
               }
             }
-          } else if (GeneralConfig.AllowImbuerDisenchant && !toRepair.isEmpty() && toRepair.isItemEnchanted() && heldItem.getItem() == ModItems.runic_dust) {
+          } else if (GeneralConfig.AllowImbuerDisenchant && !toRepair.isEmpty() && toRepair.isEnchanted() && heldItem.getItem() == ModItems.runic_dust) {
             ItemStack runicDust = heldItem.copy();
             runicDust.setCount(1);
             ItemStack result = inventory.insertItem(0, runicDust, true);
@@ -218,21 +212,21 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
     }
     if (heldItem.isEmpty() && !world.isRemote && hand == Hand.MAIN_HAND) {
       for (int i = inventory.getSlots() - 1; i >= 0; i--) {
-        if (this.dropItemInInventory(inventory, i)) {
+/*        if (this.dropItemInInventory(inventory, i)) {
           world.playSound(null, getPos(), ModSounds.Events.IMBUER_REMOVE_ITEM, SoundCategory.BLOCKS, 1f, 1f);
           return true;
-        }
+        }*/
       }
     }
     return false;
   }
 
-  @Override
+/*  @Override
   public void breakBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
-  }
+  }*/
 
   @Override
   public void tick() {
@@ -256,10 +250,10 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
         float x = pos.getX();
         float y = pos.getY();
         float z = pos.getZ();
-        if (Util.rand.nextInt(2) == 0) {
-          ParticleUtil.spawnParticleLineGlow(world, x + 0.5f, y + 0.125f, z + 0.5f, x + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), y + 1.0f, z + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getFirstColours(0.25f), 4.0f, 40);
+        if (world.rand.nextInt(2) == 0) {
+          ParticleUtil.spawnParticleLineGlow(world, x + 0.5f, y + 0.125f, z + 0.5f, x + 0.5f + 0.5f * (world.rand.nextFloat() - 0.5f), y + 1.0f, z + 0.5f + 0.5f * (world.rand.nextFloat() - 0.5f), spell.getFirstColours(0.25f), 4.0f, 40);
         } else {
-          ParticleUtil.spawnParticleLineGlow(world, x + 0.5f, y + 0.125f, z + 0.5f, x + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), y + 1.0f, z + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getSecondColours(0.25f), 4.0f, 40);
+          ParticleUtil.spawnParticleLineGlow(world, x + 0.5f, y + 0.125f, z + 0.5f, x + 0.5f + 0.5f * (world.rand.nextFloat() - 0.5f), y + 1.0f, z + 0.5f + 0.5f * (world.rand.nextFloat() - 0.5f), spell.getSecondColours(0.25f), 4.0f, 40);
         }
       } else {
         if (progress % 20 == 0) {
@@ -272,14 +266,14 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
           ItemStack inSlot = inventory.getStackInSlot(1);
           if (inSlot.getItem() == ModItems.gramary && spell != FakeSpell.INSTANCE) {
             if (inserter == null) {
-              Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
+              /*              Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);*/
             } else {
               SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
               library.addSpell(spell);
-              PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
+              /*              PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);*/
               if (inserter != null) {
-                ServerPlayerEntity player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(inserter);
-                player.sendStatusMessage(new TranslationTextComponent("roots.message.spell_imbued", new TranslationTextComponent(spell.getTranslationKey() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))), true);
+                ServerPlayerEntity player = ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayerByUUID(inserter);
+                /*                player.sendStatusMessage(new TranslationTextComponent("roots.message.spell_imbued", new TranslationTextComponent(spell.getTranslationKey() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))), true);*/
               }
             }
             inventory.extractItem(0, 1, false);
@@ -294,10 +288,10 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
             ItemStack repairItem = inventory.extractItem(0, 1, false);
             ItemStack toRepair = inventory.extractItem(1, 1, false);
             if (repairItem.getItem() == ModItems.runic_dust) {
-              CompoundNBT tag = ItemUtil.getOrCreateTag(toRepair);
+              CompoundNBT tag = toRepair.getOrCreateTag();
               if (tag.contains("ench")) {
-                tag.removeTag("ench");
-                toRepair.setTagCompound(tag);
+                tag.remove("ench");
+                toRepair.setTag(tag);
                 if (GeneralConfig.AllowImbuerDisenchantReduceCost) {
                   int rep = toRepair.getRepairCost();
                   if (rep > 0) {
@@ -306,16 +300,16 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
                 }
               }
             } else {
-              int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / 4);
+              int repairAmount = Math.min(toRepair.getDamage(), toRepair.getMaxDamage() / 4);
               if (repairAmount > 0) {
-                toRepair.setItemDamage(toRepair.getItemDamage() - repairAmount);
+                toRepair.setDamage(toRepair.getDamage() - repairAmount);
               }
             }
             world.addEntity(new ItemEntity(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, toRepair));
             world.playSound(null, getPos(), ModSounds.Events.IMBUER_FINISHED, SoundCategory.BLOCKS, 1f, 1f);
             markDirty();
             //TODO: updatePacketViaState();
-            PacketHandler.sendToAllTracking(new MessageImbueCompleteFX("fake_spell", getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
+            /*            PacketHandler.sendToAllTracking(new MessageImbueCompleteFX("fake_spell", getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);*/
           }
         }
       }

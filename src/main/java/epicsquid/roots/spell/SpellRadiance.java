@@ -182,7 +182,7 @@ public class SpellRadiance extends SpellBase {
                   if (e.hurtTime <= 0 && !e.isDead) {
                     // TODO: NOT THE RIGHT WAY TO DO THIS
                     if (info.has(MAGNETISM)) {
-                      e.getEntityData().setUniqueId("magnetic", player.getUniqueID());
+                      e.getEntityData().putUniqueId("magnetic", player.getUniqueID());
                       e.getEntityData().putInt("magnetic_ticks", e.ticksExisted);
                     }
                     e.attackEntityFrom(ModDamage.radiantDamageFrom(player), damage);

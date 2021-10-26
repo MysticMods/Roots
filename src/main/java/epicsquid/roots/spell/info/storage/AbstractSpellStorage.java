@@ -106,7 +106,7 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
       result.deserializeNBT(tag.getCompound("spell_storage"));
     } else if (tag.contains("spell_holder")) {
       result.deserializeNBT(tag.getCompound("spell_holder"));
-      tag.removeTag("spell_holder");
+      tag.remove("spell_holder");
       result.saveToStack();
     }
     return result;

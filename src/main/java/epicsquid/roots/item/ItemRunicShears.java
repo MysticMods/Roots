@@ -178,7 +178,7 @@ public class ItemRunicShears extends ItemShearsBase {
             CompoundNBT tag = stack.getTagCompound();
             if (tag == null) {
               tag = new CompoundNBT();
-              stack.setTagCompound(tag);
+              stack.setTag(tag);
             }
             tag.setString("id", EntityList.getKey(entity).toString());
             ItemEntity ent = entity.entityDropItem(stack, 1.0F);

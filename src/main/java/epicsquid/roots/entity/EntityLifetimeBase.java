@@ -103,7 +103,7 @@ public abstract class EntityLifetimeBase extends Entity {
     compound.putInt("entity_id", getEntityId());
     compound.putInt("lifetime", getDataManager().get(lifetime));
     if (player != null) {
-      compound.setUniqueId("player", player);
+      compound.putUniqueId("player", player);
     }
   }
 

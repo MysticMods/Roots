@@ -112,7 +112,7 @@ public class ItemSalmon extends ItemBase {
       CompoundNBT tag = inTab.getTagCompound();
       if (tag == null) {
         tag = new CompoundNBT();
-        inTab.setTagCompound(tag);
+        inTab.setTag(tag);
       }
       tag.setString("crafter", "Nature");
       ListNBT advancements = new ListNBT();

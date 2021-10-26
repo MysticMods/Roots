@@ -93,7 +93,7 @@ public class QuiverHandler implements INBTSerializable<CompoundNBT> {
     CompoundNBT tag = quiver.getTagCompound();
     if (tag == null) {
       tag = new CompoundNBT();
-      quiver.setTagCompound(tag);
+      quiver.setTag(tag);
     }
 
     tag.put("quiver", serializeNBT());

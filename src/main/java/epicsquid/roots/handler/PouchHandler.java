@@ -35,7 +35,7 @@ public class PouchHandler implements IPouchHandler {
       data = PouchHandlerRegistry.getData(tag.getUniqueId("bag_id"), type);
     } else {
       data = PouchHandlerRegistry.getNewData(type);
-      tag.setUniqueId("bag_id", data.getUuid());
+      tag.putUniqueId("bag_id", data.getUuid());
     }
     this.inventorySlots = data.getInventoryHandler();
     this.herbSlots = data.getHerbHandler();
@@ -72,7 +72,7 @@ public class PouchHandler implements IPouchHandler {
           Roots.logger.error("Unable to fully merge itemstack " + stack.toString() + " into new component/apothecary herbs.");
         }
       }
-      tag.removeTag("handler");
+      tag.remove("handler");
       markDirty();
     }
   }

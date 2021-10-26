@@ -135,7 +135,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
       list.add(instance.serializeNBT());
     }
     compound.put("spells", list);
-    compound.setUniqueId("uuid", uuid);
+    compound.putUniqueId("uuid", uuid);
     return compound;
   }
 

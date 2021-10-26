@@ -13,9 +13,9 @@ public interface ILivingRepair {
       if (player.isHandActive() && isSelected) {
         return;
       }
-      if (stack.getItemDamage() > 0) {
+      if (stack.getDamage() > 0) {
         if (Util.rand.nextInt(Math.max(1, bound)) == 0) {
-          stack.setItemDamage(stack.getItemDamage() - 1);
+          stack.setDamage(stack.getDamage() - 1);
         }
       }
     }

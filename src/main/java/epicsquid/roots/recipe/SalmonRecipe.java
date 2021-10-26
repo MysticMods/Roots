@@ -45,7 +45,7 @@ public class SalmonRecipe extends FeyCraftingRecipe {
     CompoundNBT tag = output.getTagCompound();
     if (tag == null) {
       tag = new CompoundNBT();
-      output.setTagCompound(tag);
+      output.setTag(tag);
     }
 
     tag.put("advancements", tagList);

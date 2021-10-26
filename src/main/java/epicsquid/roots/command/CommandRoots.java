@@ -161,7 +161,7 @@ public class CommandRoots extends CommandBase {
         ItemStack book = new ItemStack(guide);
         CompoundNBT tag = new CompoundNBT();
         tag.setString("patchouli:book", "roots:roots_guide");
-        book.setTagCompound(tag);
+        book.setTag(tag);
         if (!player.addItemStackToInventory(book)) {
           ItemUtil.spawnItem(world, player.getPosition(), book);
         }

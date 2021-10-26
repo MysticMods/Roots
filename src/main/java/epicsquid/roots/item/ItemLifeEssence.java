@@ -53,7 +53,7 @@ public class ItemLifeEssence extends ItemBase {
     CompoundNBT tag = stack.getTagCompound();
     if (tag == null) {
       tag = new CompoundNBT();
-      stack.setTagCompound(tag);
+      stack.setTag(tag);
     }
 
     if (tag.contains("id")) {
@@ -70,7 +70,7 @@ public class ItemLifeEssence extends ItemBase {
 
     tooltip.add("");
     int max_uses = stack.getMaxDamage();
-    int uses_left = max_uses - stack.getItemDamage();
+    int uses_left = max_uses - stack.getDamage();
     tooltip.add(TextFormatting.AQUA + I18n.format("roots.tooltip.life_essence.uses", uses_left, max_uses));
     tooltip.add(TextFormatting.AQUA + I18n.format("roots.tooltip.life_essence"));
   }

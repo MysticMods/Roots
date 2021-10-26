@@ -244,11 +244,11 @@ public class EventManager {
         player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInt(Constants.LIGHT_DRIFTER_MODE)));
         player.extinguish();
         //PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
-        event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_TAG);
-        event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_X);
-        event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);
-        event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Z);
-        event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_MODE);
+        event.getEntity().getEntityData().remove(Constants.LIGHT_DRIFTER_TAG);
+        event.getEntity().getEntityData().remove(Constants.LIGHT_DRIFTER_X);
+        event.getEntity().getEntityData().remove(Constants.LIGHT_DRIFTER_Y);
+        event.getEntity().getEntityData().remove(Constants.LIGHT_DRIFTER_Z);
+        event.getEntity().getEntityData().remove(Constants.LIGHT_DRIFTER_MODE);
         if (SpellAugment.instance.shouldPlaySound()) {
           player.world.playSound(null, player.getPosition(), ModSounds.Spells.LIGHT_DRIFTER_EFFECT_END, SoundCategory.PLAYERS, SpellAugment.instance.getSoundVolume(), 1);
         }
