@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "roots:block/crops/moonglow_leaf_5"
+  }
+}

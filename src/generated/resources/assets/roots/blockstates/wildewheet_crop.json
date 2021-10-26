@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "roots:block/wildewheet_0"
+    },
+    "age=1": {
+      "model": "roots:block/wildewheet_1"
+    },
+    "age=2": {
+      "model": "roots:block/wildewheet_2"
+    },
+    "age=3": {
+      "model": "roots:block/wildewheet_3"
+    },
+    "age=4": {
+      "model": "roots:block/wildewheet_4"
+    },
+    "age=5": {
+      "model": "roots:block/wildewheet_5"
+    },
+    "age=6": {
+      "model": "roots:block/wildewheet_6"
+    },
+    "age=7": {
+      "model": "roots:block/wildewheet_7"
+    }
+  }
+}

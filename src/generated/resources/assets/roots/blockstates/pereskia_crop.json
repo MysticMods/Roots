@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "roots:block/pereskia_0"
+    },
+    "age=1": {
+      "model": "roots:block/pereskia_1"
+    },
+    "age=2": {
+      "model": "roots:block/pereskia_2"
+    },
+    "age=3": {
+      "model": "roots:block/pereskia_3"
+    },
+    "age=4": {
+      "model": "roots:block/pereskia_4"
+    },
+    "age=5": {
+      "model": "roots:block/pereskia_5"
+    },
+    "age=6": {
+      "model": "roots:block/pereskia_6"
+    },
+    "age=7": {
+      "model": "roots:block/pereskia_7"
+    }
+  }
+}
