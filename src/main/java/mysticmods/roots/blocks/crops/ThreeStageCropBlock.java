@@ -1,6 +1,5 @@
 package mysticmods.roots.blocks.crops;
 
-import mysticmods.roots.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.IntegerProperty;
@@ -13,11 +12,12 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import noobanidus.libs.noobutil.block.BaseBlocks;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class ThreeStageCropBlock extends CropBlock {
+public class ThreeStageCropBlock extends BaseBlocks.SeededCropsBlock {
   public static IntegerProperty AGE = BlockStateProperties.AGE_3;
   private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D)};
 

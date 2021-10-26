@@ -2,18 +2,18 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
-import mysticmods.roots.blocks.*;
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.blocks.crops.CropBlock;
+import mysticmods.roots.blocks.*;
 import mysticmods.roots.blocks.crops.ElementalCropBlock;
 import mysticmods.roots.blocks.crops.ThreeStageCropBlock;
 import mysticmods.roots.blocks.crops.WaterElementalCropBlock;
-import mysticmods.roots.datagen.Blockstates;
 import net.minecraft.block.*;
 import net.minecraft.tags.BlockTags;
 import noobanidus.libs.noobutil.block.BaseBlocks;
+import noobanidus.libs.noobutil.data.BlockstateGenerator;
 
 import static mysticmods.roots.Roots.REGISTRATE;
+import static noobanidus.libs.noobutil.block.BaseBlocks.SeededCropsBlock;
 
 public class ModBlocks {
   public static class Decoration {
@@ -65,56 +65,59 @@ public class ModBlocks {
   public static class Crops {
     public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, ModItems.Herbs.WILDROOT))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::cropBlockstate)
+        .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.WILDROOT_CROP)
         .register();
 
     public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, ModItems.Herbs.CLOUD_BERRY))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::cropBlockstate)
+        .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.CLOUD_BERRY_CROP)
         .register();
+
     public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, ModItems.Herbs.DEWGONIA))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::cropBlockstate)
+        .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.DEWGONIA_CROP)
         .register();
+
     public static BlockEntry<ElementalCropBlock> INFERNAL_BULB_CROP = REGISTRATE.block("infernal_bulb_crop", (p) -> new ElementalCropBlock(p, ModItems.Herbs.INFERNAL_BULB))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::crossBlockstate)
+        .blockstate(BlockstateGenerator::crossBlockstate)
         .tag(RootsTags.Blocks.INFERNAL_BULB_CROP)
         .register();
+
     public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, ModItems.Herbs.STALICRIPE))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::cropBlockstate)
+        .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.STALICRIPE_CROP)
         .register();
 
-    public static BlockEntry<CropBlock> MOONGLOW_LEAF_CROP = REGISTRATE.block("moonglow_leaf_crop", (p) -> new CropBlock(p, ModItems.Seeds.MOONGLOW_LEAF_SEEDS))
+    public static BlockEntry<SeededCropsBlock> MOONGLOW_LEAF_CROP = REGISTRATE.block("moonglow_leaf_crop", (p) -> new SeededCropsBlock(p, ModItems.Seeds.MOONGLOW_LEAF_SEEDS))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::cropBlockstate)
+        .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.MOONGLOW_LEAF_CROP)
         .register();
-    public static BlockEntry<CropBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new CropBlock(p, ModItems.Seeds.PERESKIA_BULB))
+    public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, ModItems.Seeds.PERESKIA_BULB))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::crossBlockstate)
+        .blockstate(BlockstateGenerator::crossBlockstate)
         .tag(RootsTags.Blocks.PERESKIA_CROP)
         .register();
     public static BlockEntry<ThreeStageCropBlock> SPIRIT_HERB_CROP = REGISTRATE.block("spirit_herb_crop", (p) -> new ThreeStageCropBlock(p, ModItems.Seeds.SPIRIT_HERB_SEEDS))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::cropBlockstate)
+        .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.SPIRIT_HERB_CROP)
         .register();
-    public static BlockEntry<CropBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new CropBlock(p, ModItems.Seeds.WILDEWHEET_SEEDS))
+    public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, ModItems.Seeds.WILDEWHEET_SEEDS))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
-        .blockstate(Blockstates::cropBlockstate)
+        .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.WILDEWHEET_CROP)
         .register();
   }
 
-   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
-        .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
-        .register();
+  public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
+      .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
+      .register();
   public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", CatalystPlateBlock::new).register();
   public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new).register();
   public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("fey_crafter", FeyCrafterBlock::new).register();
