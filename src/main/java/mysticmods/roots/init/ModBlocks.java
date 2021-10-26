@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import mysticmods.roots.RootsTags;
+import mysticmods.roots.blocks.FeyLightBlock;
 import mysticmods.roots.blocks.crops.CropBlock;
 import mysticmods.roots.blocks.crops.ElementalCropBlock;
 import mysticmods.roots.blocks.crops.ThreeStageCropBlock;
@@ -93,6 +94,10 @@ public class ModBlocks {
         .tag(RootsTags.Blocks.WILDEWHEET_CROP)
         .register();
   }
+
+   public static BlockEntry<FeyLightBlock> FEYLIGHT = REGISTRATE.block("feylight", FeyLightBlock::new)
+        .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
+        .register();
 
   public static void load() {
 
