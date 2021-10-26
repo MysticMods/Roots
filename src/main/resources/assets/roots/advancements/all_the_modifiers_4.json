@@ -1,0 +1,82 @@
+{
+  "display": {
+    "icon": {
+      "item": "roots:imposer"
+    },
+    "title": {
+      "translate": "advancement.roots.all_the_modifiers_4"
+    },
+    "description": {
+      "translate": "advancement.roots.all_the_modifiers_4.desc"
+    }
+  },
+  "parent": "roots:wildroot",
+  "criteria": {
+    "baffle_cap": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:baffle_cap_mushroom"
+      }
+    },
+    "cloud_berry": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:cloud_berry"
+      }
+    },
+    "dewgonia": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:dewgonia"
+      }
+    },
+    "infernal_bulb": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:infernal_bulb"
+      }
+    },
+    "moonglow_leaf": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:moonglow_leaf"
+      }
+    },
+    "pereskia": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:pereskia"
+      }
+    },
+    "spirit_herb": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:spirit_herb"
+      }
+    },
+    "stalicripe": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:stalicripe"
+      }
+    },
+    "terra_moss": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:terra_moss"
+      }
+    },
+    "wildewheet": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:wildewheet"
+      }
+    },
+    "wildroot": {
+      "trigger": "roots:modifier",
+      "conditions": {
+        "modifier": "roots:wildroot"
+      }
+    }
+  }
+}

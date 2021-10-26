@@ -1,0 +1,498 @@
+{
+  "whirlwind": {
+    "category": "neutral",
+    "sounds": [
+      "roots:whirlwind"
+    ]
+  },
+  "spell.acid_cloud": {
+    "sounds": [
+      {
+        "name": "minecraft:ambient/cave/cave4",
+        "pitch": 0.7
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.acid_cloud"
+  },
+  "spell.acid_cloud_alt": {
+    "sounds": [
+      {
+        "name": "minecraft:ambient/cave/cave13",
+        "pitch": 0.7
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.acid_cloud_alt"
+  },
+  "spell.chrysopoeia": {
+    "sounds": [
+      "minecraft:block/furnace/fire_crackle1",
+      "minecraft:block/furnace/fire_crackle2",
+      "minecraft:block/furnace/fire_crackle3",
+      "minecraft:block/furnace/fire_crackle4",
+      "minecraft:block/furnace/fire_crackle5"
+    ],
+    "subtitle": "subtitle.roots.spell.chrysopoeia"
+  },
+  "spell.dandelion_winds": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/zombie/infect",
+        "pitch": 0.7
+      },
+      {
+        "name": "minecraft:mob/zombie/infect",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:mob/zombie/infect",
+        "pitch": 0.9
+      },
+      {
+        "name": "minecraft:mob/zombie/infect",
+        "pitch": 1.0
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.dandelion_winds"
+  },
+  "spell.desaturate": {
+    "sounds": [
+      {
+        "name": "minecraft:random/burp",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:random/burp",
+        "pitch": 0.9
+      },
+      {
+        "name": "minecraft:random/burp",
+        "pitch": 1.0
+      },
+      {
+        "name": "minecraft:random/burp",
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.desaturate"
+  },
+  "spell.disarm": {
+    "sounds": [
+      "minecraft:entity/player/attack/knockback1",
+      "minecraft:entity/player/attack/knockback2",
+      "minecraft:entity/player/attack/knockback3",
+      "minecraft:entity/player/attack/knockback4"
+    ],
+    "subtitle": "subtitle.roots.spell.disarm"
+  },
+  "spell.fey_light": {
+    "sounds": [
+      {
+        "name": "minecraft:random/orb",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:random/orb",
+        "pitch": 0.9
+      },
+      {
+        "name": "minecraft:random/orb",
+        "pitch": 1.0
+      },
+      {
+        "name": "minecraft:random/orb",
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.fey_light"
+  },
+  "spell.geas": {
+    "sounds": [
+      "minecraft:mob/vex/charge1",
+      "minecraft:mob/vex/charge2",
+      "minecraft:mob/vex/charge3"
+    ],
+    "subtitle": "subtitle.roots.spell.geas"
+  },
+  "spell.geas_end": {
+    "sounds": [
+      "minecraft:ui/toast/out"
+    ],
+    "subtitle": "subtitle.roots.spell.geas_end"
+  },
+  "spell.growth_infusion": {
+    "sounds": [
+      "minecraft:block/chorus_flower/grow1",
+      "minecraft:block/chorus_flower/grow2",
+      "minecraft:block/chorus_flower/grow3",
+      "minecraft:block/chorus_flower/grow4"
+    ],
+    "subtitle": "subtitle.roots.spell.growth_infusion"
+  },
+  "spell.harvest": {
+    "sounds": [
+      "minecraft:entity/player/attack/sweep1"
+    ],
+    "subtitle": "subtitle.roots.spell.harvest"
+  },
+  "spell.aqua_bubble": {
+    "sounds": [
+      {
+        "name": "roots:aqua_bubble",
+        "pitch": 1,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.aqua_bubble"
+  },
+  "spell.aqua_bubble_alt": {
+    "sounds": [
+      "minecraft:item/elytra/elytra_loop"
+    ],
+    "subtitle": "subtitle.roots.spell.aqua_bubble_alt"
+  },
+  "spell.aqua_bubble_alt_end": {
+    "sounds": [
+      "minecraft:ui/toast/out"
+    ],
+    "subtitle": "subtitle.roots.aqua_bubble_alt_end"
+  },
+  "spell.extension": {
+    "sounds": [
+      {
+        "name": "roots:extension",
+        "pitch": 0.8,
+        "volume": 0.2
+      }
+    ],
+    "subtitle": "subtitle.roots.extension"
+  },
+  "spell.augment": {
+    "sounds": [
+      {
+        "name": "roots:extension",
+        "pitch": 1.4,
+        "volume": 0.2
+      }
+    ],
+    "subtitle": "subtitle.roots.augment"
+  },
+  "spell.life_drain": {
+    "sounds": [
+      "minecraft:mob/vex/idle1",
+      "minecraft:mob/vex/idle2",
+      "minecraft:mob/vex/idle3",
+      "minecraft:mob/vex/idle4"
+    ],
+    "subtitle": "subtitle.roots.spell.life_drain"
+  },
+  "spell.light_drifter": {
+    "sounds": [
+      "minecraft:item/elytra/elytra_loop"
+    ],
+    "subtitle": "subtitle.roots.spell.light_drifter"
+  },
+  "spell.light_drifter_end": {
+    "sounds": [
+      "minecraft:ui/toast/out"
+    ],
+    "subtitle": "subtitle.roots.spell.light_drifter_end"
+  },
+  "spell.magnetism": {
+    "sounds": [
+      "minecraft:note/icechime"
+    ],
+    "subtitle": "subtitle.roots.spell.magnetism"
+  },
+  "spell.nature_scythe": {
+    "sounds": [
+      "minecraft:block/chorus_flower/death1",
+      "minecraft:block/chorus_flower/death2",
+      "minecraft:block/chorus_flower/death3"
+    ],
+    "subtitle": "subtitle.roots.spell.nature_scythe"
+  },
+  "spell.petal_shell": {
+    "sounds": [
+      "minecraft:item/totem/use_totem"
+    ],
+    "subtitle": "subtitle.roots.spell.petal_shell"
+  },
+  "spell.petal_shell_break": {
+    "sounds": [
+      {
+        "name": "minecraft:random/break",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:random/break",
+        "pitch": 0.9
+      },
+      {
+        "name": "minecraft:random/break",
+        "pitch": 1.0
+      },
+      {
+        "name": "minecraft:random/break",
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.petal_shell_break"
+  },
+  "spell.petal_shell_end": {
+    "sounds": [
+      "minecraft:ui/toast/out"
+    ],
+    "subtitle": "subtitle.roots.spell.petal_shell_end"
+  },
+  "spell.radiance": {
+    "sounds": [
+      "minecraft:mob/guardian/attack_loop"
+    ],
+    "subtitle": "subtitle.roots.spell.radiance"
+  },
+  "spell.reach": {
+    "sounds": [
+      "minecraft:ui/toast/challenge_complete"
+    ],
+    "subtitle": "subtitle.roots.spell.reach"
+  },
+  "spell.reach_end": {
+    "sounds": [
+      "minecraft:ui/toast/out"
+    ],
+    "subtitle": "subtitle.roots.spell.reach_end"
+  },
+  "spell.rose_thorns": {
+    "sounds": [
+      {
+        "name": "minecraft:fireworks/launch1",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:fireworks/launch1",
+        "pitch": 0.9
+      },
+      {
+        "name": "minecraft:fireworks/launch1",
+        "pitch": 1.0
+      },
+      {
+        "name": "minecraft:fireworks/launch1",
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.rose_thorns"
+  },
+  "spell.sanctuary": {
+    "sounds": [
+      "minecraft:item/elytra/elytra_loop"
+    ],
+    "subtitle": "subtitle.roots.spell.sanctuary"
+  },
+  "spell.saturate": {
+    "sounds": [
+      "minecraft:entity/horse/eat1",
+      "minecraft:entity/horse/eat2",
+      "minecraft:entity/horse/eat3",
+      "minecraft:entity/horse/eat4",
+      "minecraft:entity/horse/eat5"
+    ],
+    "subtitle": "subtitle.roots.spell.saturate"
+  },
+  "spell.second_wind": {
+    "sounds": [
+      {
+        "name": "minecraft:random/breath",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:random/breath",
+        "pitch": 0.9
+      },
+      {
+        "name": "minecraft:random/breath",
+        "pitch": 1.0
+      },
+      {
+        "name": "minecraft:random/breath",
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.second_wind"
+  },
+  "spell.sense_animals": {
+    "sounds": [
+      "minecraft:mob/guardian/curse"
+    ],
+    "subtitle": "subtitle.roots.spell.sense_animals"
+  },
+  "spell.sense_animals_end": {
+    "sounds": [
+      "minecraft:ui/toast/out"
+    ],
+    "subtitle": "subtitle.roots.spell.sense_animals_end"
+  },
+  "spell.sense_danger": {
+    "sounds": [
+      "minecraft:mob/guardian/curse"
+    ],
+    "subtitle": "subtitle.roots.spell.sense_danger"
+  },
+  "spell.sense_danger_end": {
+    "sounds": [
+      "minecraft:ui/toast/out"
+    ],
+    "subtitle": "subtitle.roots.spell.sense_danger_end"
+  },
+  "spell.shatter": {
+    "sounds": [
+      "roots:shatter"
+    ],
+    "volume": 0.5,
+    "subtitle": "subtitle.roots.spell.shatter"
+  },
+  "spell.sky_soarer": {
+    "sounds": [
+      "minecraft:mob/zombie/infect"
+    ],
+    "subtitle": "subtitle.roots.spell.sky_soarer"
+  },
+  "spell.storm_cloud": {
+    "sounds": [
+      {
+        "name": "roots:storm_cloud",
+        "pitch": 0.95,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.storm_cloud"
+  },
+  "spell.storm_cloud_end": {
+    "sounds": [
+      "minecraft:ui/toast/out"
+    ],
+    "subtitle": "subtitle.roots.spell.storm_cloud_end"
+  },
+  "spell.summers_thaw": {
+    "sounds": [
+      "minecraft:block/enchantment_table/enchant1",
+      "minecraft:block/enchantment_table/enchant2",
+      "minecraft:block/enchantment_table/enchant3"
+    ],
+    "subtitle": "subtitle.roots.spell.summers_thaw"
+  },
+  "spell.time_stop": {
+    "sounds": [
+      "roots:time_stop"
+    ],
+    "subtitle": "subtitle.roots.spell.time_stop"
+  },
+  "spell.time_stop_end": {
+    "sounds": [
+      "roots:time_stop_end"
+    ],
+    "subtitle": "subtitle.roots.spell.time_stop_end"
+  },
+  "spell.wildfire": {
+    "sounds": [
+      {
+        "name": "minecraft:fire/fire",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:fire/fire",
+        "pitch": 0.9
+      },
+      {
+        "name": "minecraft:fire/fire",
+        "pitch": 1.0
+      },
+      {
+        "name": "minecraft:fire/fire",
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitle.roots.spell.wildfire"
+  },
+  "event.imbuer.add_item": {
+    "sounds": [
+      "minecraft:entity/itemframe/add_item1",
+      "minecraft:entity/itemframe/add_item2",
+      "minecraft:entity/itemframe/add_item3",
+      "minecraft:entity/itemframe/add_item4"
+    ],
+    "subtitle": "subtitle.roots.event.imbuer.add_item"
+  },
+  "event.imbuer.remove_item": {
+    "sounds": [
+      "minecraft:entity/itemframe/remove_item1",
+      "minecraft:entity/itemframe/remove_item2",
+      "minecraft:entity/itemframe/remove_item3",
+      "minecraft:entity/itemframe/remove_item4"
+    ],
+    "subtitle": "subtitle.roots.event.imbuer.remove_item"
+  },
+  "event.imbuer.use": {
+    "sounds": [
+      "minecraft:block/furnace/fire_crackle1",
+      "minecraft:block/furnace/fire_crackle2",
+      "minecraft:block/furnace/fire_crackle3",
+      "minecraft:block/furnace/fire_crackle4",
+      "minecraft:block/furnace/fire_crackle5"
+    ],
+    "subtitle": "subtitle.roots.event.imbuer.use"
+  },
+  "event.imbuer.finished": {
+    "sounds": [
+      "minecraft:mob/chicken/plop"
+    ],
+    "subtitle": "subtitle.roots.event.imbuer.finished"
+  },
+  "event.mortar.add_item": {
+    "sounds": [
+      "minecraft:entity/itemframe/add_item1",
+      "minecraft:entity/itemframe/add_item2",
+      "minecraft:entity/itemframe/add_item3",
+      "minecraft:entity/itemframe/add_item4"
+    ],
+    "subtitle": "subtitle.roots.event.mortar.add_item"
+  },
+  "event.mortar.remove_item": {
+    "sounds": [
+      "minecraft:entity/itemframe/remove_item1",
+      "minecraft:entity/itemframe/remove_item2",
+      "minecraft:entity/itemframe/remove_item3",
+      "minecraft:entity/itemframe/remove_item4"
+    ],
+    "subtitle": "subtitle.roots.event.mortar.remove_item"
+  },
+  "event.mortar.use": {
+    "sounds": [
+      "minecraft:mob/parrot/eat1",
+      "minecraft:mob/parrot/eat2",
+      "minecraft:mob/parrot/eat3"
+    ],
+    "subtitle": "subtitle.roots.event.mortar.use"
+  },
+  "event.pyre.add_item": {
+    "sounds": [
+      "minecraft:entity/itemframe/add_item1",
+      "minecraft:entity/itemframe/add_item2",
+      "minecraft:entity/itemframe/add_item3",
+      "minecraft:entity/itemframe/add_item4"
+    ],
+    "subtitle": "subtitle.roots.event.pyre.add_item"
+  },
+  "event.pyre.remove_item": {
+    "sounds": [
+      "minecraft:entity/itemframe/remove_item1",
+      "minecraft:entity/itemframe/remove_item2",
+      "minecraft:entity/itemframe/remove_item3",
+      "minecraft:entity/itemframe/remove_item4"
+    ],
+    "subtitle": "subtitle.roots.event.pyre.remove_item"
+  }
+}
+
+
+

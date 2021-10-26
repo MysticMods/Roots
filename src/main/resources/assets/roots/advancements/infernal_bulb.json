@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:infernal_bulb"
+        },
+        "title": {
+            "translate": "advancement.roots.infernal_bulb"
+        },
+        "description": {
+            "translate": "advancement.roots.infernal_bulb.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:infernal_bulb"
+                    }
+                ]
+            }
+        }
+    }
+}

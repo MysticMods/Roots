@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:terra_moss"
+        },
+        "title": {
+            "translate": "advancement.roots.terra_moss"
+        },
+        "description": {
+            "translate": "advancement.roots.terra_moss.desc"
+        }
+    },
+    "parent": "roots:guide",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:terra_moss"
+                    }
+                ]
+            }
+        }
+    }
+}

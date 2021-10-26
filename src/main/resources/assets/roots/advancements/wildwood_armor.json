@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "item": "roots:wildwood_helmet"
+    },
+    "title": {
+      "translate": "advancement.roots.wildwood_armor"
+    },
+    "description": {
+      "translate": "advancement.roots.wildwood_armor.desc"
+    }
+  },
+  "parent": "roots:wildwood",
+  "criteria": {
+    "helmet": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:wildwood_helmet"
+      }
+    },
+    "chestplate": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:wildwood_chestplate"
+      }
+    },
+    "leggings": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:wildwood_leggings"
+      }
+    },
+    "boots": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:wildwood_boots"
+      }
+    }
+  }
+}

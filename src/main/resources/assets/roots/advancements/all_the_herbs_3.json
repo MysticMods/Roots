@@ -1,0 +1,126 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:apothecary_pouch"
+        },
+        "title": {
+            "translate": "advancement.roots.all_the_herbs_3"
+        },
+        "description": {
+            "translate": "advancement.roots.all_the_herbs_3.desc"
+        }
+    },
+    "parent": "roots:wildroot",
+    "criteria": {
+        "baffle_cap": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:baffle_cap_mushroom"
+                    }
+                ]
+            }
+        },
+        "cloud_berry": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:cloud_berry"
+                    }
+                ]
+            }
+        },
+        "dewgonia": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:dewgonia"
+                    }
+                ]
+            }
+        },
+        "infernal_bulb": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:infernal_bulb"
+                    }
+                ]
+            }
+        },
+        "moonglow_leaf": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:moonglow_leaf"
+                    }
+                ]
+            }
+        },
+        "pereskia": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:pereskia"
+                    }
+                ]
+            }
+        },
+        "spirit_herb": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:spirit_herb"
+                    }
+                ]
+            }
+        },
+        "stalicripe": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:stalicripe"
+                    }
+                ]
+            }
+        },
+        "terra_moss": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:terra_moss"
+                    }
+                ]
+            }
+        },
+        "wildewheet": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:wildewheet"
+                    }
+                ]
+            }
+        },
+        "wildroot": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:wildroot"
+                    }
+                ]
+            }
+        }
+    }
+}

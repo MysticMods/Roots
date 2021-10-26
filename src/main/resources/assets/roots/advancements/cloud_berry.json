@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:cloud_berry"
+        },
+        "title": {
+            "translate": "advancement.roots.cloud_berry"
+        },
+        "description": {
+            "translate": "advancement.roots.cloud_berry.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:cloud_berry"
+                    }
+                ]
+            }
+        }
+    }
+}

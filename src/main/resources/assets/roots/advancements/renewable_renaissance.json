@@ -1,0 +1,70 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:farmland"
+        },
+        "title": {
+            "translate": "advancement.roots.renewable_renaissance"
+        },
+        "description": {
+            "translate": "advancement.roots.renewable_renaissance.desc"
+        }
+    },
+    "parent": "roots:wildroot",
+    "criteria": {
+        "cloud_berry": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:cloud_berry_crop"
+            }
+        },
+        "dewgonia": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:dewgonia_crop"
+            }
+        },
+        "infernal_bulb": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:infernal_bulb_crop"
+            }
+        },
+        "moonglow_leaf": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:moonglow_crop"
+            }
+        },
+        "pereskia": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:pereskia_crop"
+            }
+        },
+        "spirit_herb": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:spirit_herb_crop"
+            }
+        },
+        "wildewheet": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:wildewheet_crop"
+            }
+        },
+        "stalicripe_crop": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:stalicripe_crop"
+            }
+        },
+        "wildroot": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "block": "roots:wildroot_crop"
+            }
+        }
+    }
+}

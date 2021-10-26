@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:baffle_cap_mushroom"
+        },
+        "title": {
+            "translate": "advancement.roots.baffle_cap"
+        },
+        "description": {
+            "translate": "advancement.roots.baffle_cap.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:baffle_cap_mushroom"
+                    }
+                ]
+            }
+        }
+    }
+}

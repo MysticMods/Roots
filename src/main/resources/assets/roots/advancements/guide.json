@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "patchouli:guide_book",
+            "nbt": "{\"patchouli:book\":  \"roots:roots_guide\"}"
+        },
+        "title": {
+            "translate": "advancement.roots.guide"
+        },
+        "description": {
+            "translate": "advancement.roots.guide.desc"
+        }
+    },
+    "parent": "roots:wildroot",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "patchouli:guide_book",
+                        "nbt": "{\"patchouli:book\":  \"roots:roots_guide\"}"
+                    }
+                ]
+            }
+        }
+    }
+}

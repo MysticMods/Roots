@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "roots:fey_crafter"
+    },
+    "title": {
+      "translate": "advancement.roots.fey_crafter"
+    },
+    "description": {
+      "translate": "advancement.roots.fey_crafter.desc"
+    }
+  },
+  "parent": "roots:terra_moss",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:fey_crafter"
+          }
+        ]
+      }
+    }
+  }
+}

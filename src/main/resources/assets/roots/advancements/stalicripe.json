@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:stalicripe"
+        },
+        "title": {
+            "translate": "advancement.roots.stalicripe"
+        },
+        "description": {
+            "translate": "advancement.roots.stalicripe.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:stalicripe"
+                    }
+                ]
+            }
+        }
+    }
+}

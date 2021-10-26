@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "item": "roots:sylvan_helmet"
+    },
+    "title": {
+      "translate": "advancement.roots.sylvan_armor"
+    },
+    "description": {
+      "translate": "advancement.roots.sylvan_armor.desc"
+    }
+  },
+  "parent": "roots:fey_crafter",
+  "criteria": {
+    "helmet": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:sylvan_helmet"
+      }
+    },
+    "chestplate": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:sylvan_chestplate"
+      }
+    },
+    "leggings": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:sylvan_leggings"
+      }
+    },
+    "boots": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:sylvan_boots"
+      }
+    }
+  }
+}

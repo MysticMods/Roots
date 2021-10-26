@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:runestone"
+        },
+        "title": {
+            "translate": "advancement.roots.runestone"
+        },
+        "description": {
+            "translate": "advancement.roots.runestone.desc"
+        }
+    },
+    "parent": "roots:fey_crafter",
+    "criteria": {
+        "runestone": {
+            "trigger": "roots:fey_crafting",
+            "conditions": {
+                "recipe": "roots:runestone"
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:staff"
+        },
+        "title": {
+            "translate": "advancement.roots.staff"
+        },
+        "description": {
+            "translate": "advancement.roots.staff.desc"
+        }
+    },
+    "parent": "roots:guide",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:staff"
+                    }
+                ]
+            }
+        }
+    }
+}

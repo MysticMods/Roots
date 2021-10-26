@@ -1,0 +1,46 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:living_hoe"
+        },
+        "title": {
+            "translate": "advancement.roots.living"
+        },
+        "description": {
+            "translate": "advancement.roots.living.desc"
+        }
+    },
+    "parent": "roots:fey_crafter",
+    "criteria": {
+        "pickaxe": {
+            "trigger": "roots:fey_crafting",
+            "conditions": {
+                "recipe": "roots:living_pickaxe"
+            }
+        },
+        "axe": {
+            "trigger": "roots:fey_crafting",
+            "conditions": {
+                "recipe": "roots:living_axe"
+            }
+        },
+        "shovel": {
+            "trigger": "roots:fey_crafting",
+            "conditions": {
+                "recipe": "roots:living_shovel"
+            }
+        },
+        "hoe": {
+            "trigger": "roots:fey_crafting",
+            "conditions": {
+                "recipe": "roots:living_hoe"
+            }
+        },
+        "sword": {
+            "trigger": "roots:fey_crafting",
+            "conditions": {
+                "recipe": "roots:living_sword"
+            }
+        }
+    }
+}
