@@ -2,8 +2,8 @@ package mysticmods.roots.blocks;
 
 import net.minecraft.block.Block;
 
-public class IncenseBurnerBlock extends Block {
-    public IncenseBurnerBlock(Properties builder) {
+public class IncensePlateBlock extends Block {
+    public IncensePlateBlock(Properties builder) {
         super(builder);
     }
 }
