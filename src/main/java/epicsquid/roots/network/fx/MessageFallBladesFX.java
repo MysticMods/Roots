@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageFallBladesFX implements IMessage {
   private static final float[] colors1 = new float[]{227 / 255F, 179 / 255F, 66 / 255F, 1f};
@@ -50,7 +50,7 @@ public class MessageFallBladesFX implements IMessage {
   }
 
   public static class Handler extends ClientMessageHandler<MessageFallBladesFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(MessageFallBladesFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

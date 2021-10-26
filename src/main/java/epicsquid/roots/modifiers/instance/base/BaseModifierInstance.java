@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
     return modifier.getFormatting();
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public String describe() {
     if (Screen.isShiftKeyDown()) {
       return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.GRAY + ": " + I18n.format(getTranslationKey() + ".desc");
@@ -77,17 +77,17 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public String describeName() {
     return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.GRAY + ":";
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public String describeFunction() {
     return "- " + I18n.format(getTranslationKey() + ".desc");
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public List<String> describeCost() {
     // TODO: Sort by type
     List<String> result = new ArrayList<>();
@@ -145,7 +145,7 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
       tag.setString("m", modifier.getRegistryName().toString());
     } catch (NullPointerException e) {
     }
-    tag.setBoolean("a", applied);
+    tag.putBoolean("a", applied);
     return tag;
   }
 

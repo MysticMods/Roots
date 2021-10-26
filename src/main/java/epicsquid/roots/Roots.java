@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = Roots.DEPENDENCIES)
@@ -56,7 +56,7 @@ public class Roots {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public ItemStack createIcon() {
       return new ItemStack(ModItems.pestle, 1);
     }

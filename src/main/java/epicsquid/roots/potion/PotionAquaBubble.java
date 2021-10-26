@@ -16,7 +16,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 @SuppressWarnings("NullableProblems")
 public class PotionAquaBubble extends Effect {
@@ -85,7 +85,7 @@ public class PotionAquaBubble extends Effect {
     return true;
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public int getStatusIconIndex() {
     Minecraft.getMinecraft().getTextureManager().bindTexture(texture);

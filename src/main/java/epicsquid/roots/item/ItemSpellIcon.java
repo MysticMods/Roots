@@ -25,7 +25,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.HashMap;
 import java.util.List;
@@ -130,7 +130,7 @@ public class ItemSpellIcon extends ItemBase {
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     CompoundNBT tag = ItemUtil.getOrCreateTag(stack);

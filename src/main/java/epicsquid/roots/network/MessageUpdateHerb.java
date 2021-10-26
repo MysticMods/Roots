@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageUpdateHerb implements IMessage {
   private Herb herb = null;
@@ -37,7 +37,7 @@ public class MessageUpdateHerb implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageUpdateHerb> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageUpdateHerb message, final MessageContext ctx) {
       Minecraft mc = Minecraft.getMinecraft();

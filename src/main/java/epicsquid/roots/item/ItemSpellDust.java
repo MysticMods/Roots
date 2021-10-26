@@ -18,7 +18,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class ItemSpellDust extends ItemBase {
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     CompoundNBT tag = ItemUtil.getOrCreateTag(stack);

@@ -34,7 +34,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -229,7 +229,7 @@ public class BlockElementalSoil extends BlockBase {
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (GeneralConfig.DisableParticles) {
@@ -292,7 +292,7 @@ public class BlockElementalSoil extends BlockBase {
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     if (stack.getItem() instanceof BlockItem) {
       Block type = ((BlockItem) stack.getItem()).getBlock();

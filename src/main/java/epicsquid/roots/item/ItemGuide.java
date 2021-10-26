@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 import vazkii.patchouli.common.base.PatchouliSounds;
 import vazkii.patchouli.common.book.Book;
 import vazkii.patchouli.common.book.BookRegistry;
@@ -31,7 +31,7 @@ public class ItemGuide extends ItemBase {
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 

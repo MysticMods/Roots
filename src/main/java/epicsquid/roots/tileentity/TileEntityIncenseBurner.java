@@ -1,19 +1,20 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileEntity;
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.*;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+import noobanidus.libs.noobutil.util.ItemUtil;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +27,7 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
     protected void onContentsChanged(int slot) {
       TileEntityIncenseBurner.this.markDirty();
       if (!world.isRemote) {
-        //TileEntityIncenseBurner.this.updatePacketViaState();
+        //TileEntityIncenseBurner.this.//TODO: updatePacketViaState();
       }
     }
   };
@@ -35,6 +36,7 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
   private boolean lit;
 
   public TileEntityIncenseBurner() {
+    super(null);
     burnTick = 0;
     lit = false;
   }
@@ -42,7 +44,7 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
   @Override
   public CompoundNBT write(CompoundNBT compound) {
     compound.putInt("burnTick", this.burnTick);
-    compound.setBoolean("lit", this.lit);
+    compound.putBoolean("lit", this.lit);
     compound.put("handler", inventory.serializeNBT());
     return super.write(compound);
   }
@@ -52,10 +54,9 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
     this.burnTick = compound.getInt("burnTick");
     this.lit = compound.getBoolean("lit");
     inventory.deserializeNBT(compound.getCompound("handler"));
-    super.readFromNBT(compound);
+    super.read(state, compound);
   }
 
-  @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     if (hand != Hand.MAIN_HAND) {
       return false;
@@ -67,13 +68,13 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
         this.lit = false;
         markDirty();
         if (!world.isRemote)
-          updatePacketViaState();
-        return false;
+          //TODO: updatePacketViaState();
+          return false;
       }
       ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
       if (!world.isRemote) {
-        ItemUtil.spawnItem(world, getPos(), extracted);
-        updatePacketViaState();
+        ItemUtil.Spawn.spawnItem(world, getPos(), extracted);
+        //TODO: updatePacketViaState();
       }
       return false;
     }
@@ -82,8 +83,8 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
         this.lit = true;
         markDirty();
         if (!world.isRemote)
-          updatePacketViaState();
-        return false;
+          //TODO: updatePacketViaState();
+          return false;
       }
     }
     if (!HerbRegistry.isHerb(stack)) {
@@ -106,8 +107,9 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
     }
 
     markDirty();
-    if (!world.isRemote)
-      updatePacketViaState();
+    if (!world.isRemote) {
+      //TODO: updatePacketViaState();
+    }
 
     return false;
   }
@@ -115,10 +117,10 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
   @Override
   public void tick() {
     if (this.lit) {
-      double d3 = (double) pos.getX() + 0.5 + Util.rand.nextDouble() * 0.10000000149011612D;
+      double d3 = (double) pos.getX() + 0.5 + world.rand.nextDouble() * 0.10000000149011612D;
       double d8 = (double) pos.getY() + 0.6;
       double d13 = (double) pos.getZ() + 0.5;
-      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d3, d8, d13, 0.0D, 0.0D, 0.0D);
+      /*      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d3, d8, d13, 0.0D, 0.0D, 0.0D);*/
 
       burnTick++;
 
@@ -131,20 +133,21 @@ public class TileEntityIncenseBurner extends TileEntity implements ITickableTile
         }
 
         markDirty();
-        if (!world.isRemote)
-          updatePacketViaState();
+        if (!world.isRemote) {
+          //TODO: updatePacketViaState();
+        }
       }
 
 
     }
   }
 
-  @Override
+/*  @Override
   public void breakBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
-  }
+  }*/
 
   public boolean isLit() {
     return lit;

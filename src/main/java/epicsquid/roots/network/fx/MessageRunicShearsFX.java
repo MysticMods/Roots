@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -38,14 +38,14 @@ public class MessageRunicShearsFX implements IMessage {
     buf.writeInt(this.entityId);
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Nullable
   public Entity getEntity(World world) {
     return world.getEntityByID(this.entityId);
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageRunicShearsFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageRunicShearsFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -64,12 +64,12 @@ public class BlockWildFire extends FireBlock implements IBlock, IModeledObject, 
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void initModel() {
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void initCustomModel() {
   }
 
@@ -121,7 +121,7 @@ public class BlockWildFire extends FireBlock implements IBlock, IModeledObject, 
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (rand.nextInt(24) == 0) {
       worldIn.playSound((double) ((float) pos.getX() + 0.5F), (double) ((float) pos.getY() + 0.5F), (double) ((float) pos.getZ() + 0.5F), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
@@ -138,7 +138,7 @@ public class BlockWildFire extends FireBlock implements IBlock, IModeledObject, 
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @SuppressWarnings("deprecation")
   public int getPackedLightmapCoords(BlockState state, IBlockAccess source, BlockPos pos) {
     return source.getCombinedLight(pos, 15);

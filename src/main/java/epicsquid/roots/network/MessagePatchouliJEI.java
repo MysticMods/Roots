@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessagePatchouliJEI implements IMessage {
   private boolean isJEI;
@@ -35,7 +35,7 @@ public class MessagePatchouliJEI implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessagePatchouliJEI> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessagePatchouliJEI message, final MessageContext ctx) {
       if (message.isJEI) {

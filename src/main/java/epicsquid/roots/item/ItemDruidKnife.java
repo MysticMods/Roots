@@ -13,26 +13,31 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ToolItem;
 import net.minecraft.util.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
+import noobanidus.libs.noobutil.util.ItemUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemDruidKnife extends ItemKnifeBase {
+public class ItemDruidKnife extends ToolItem {
 
   public ItemDruidKnife(String name, ToolMaterial material) {
     super(name, material, () -> Ingredient.EMPTY);
     ModItems.knives.add(this);
 
-    DispenserBlock.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseKnife.getInstance());
+    //DispenserBlock.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseKnife.getInstance());
   }
 
   @Override
@@ -83,7 +88,7 @@ public class ItemDruidKnife extends ItemKnifeBase {
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
@@ -91,8 +96,8 @@ public class ItemDruidKnife extends ItemKnifeBase {
     tooltip.add(I18n.format("roots.tooltip.knife1", TextFormatting.GOLD + I18n.format("roots.tooltip.logs") + TextFormatting.RESET, TextFormatting.GOLD + I18n.format("roots.tooltip.bark") + TextFormatting.RESET));
     tooltip.add(I18n.format("roots.tooltip.knife2", TextFormatting.DARK_GREEN + I18n.format("roots.tooltip.eligible") + TextFormatting.RESET, TextFormatting.GREEN + "" + TextFormatting.BOLD + I18n.format("roots.tooltip.terra_moss") + TextFormatting.RESET));
 
-    if (ItemUtil.shouldDisplayMore(stack, worldIn, tooltip, flagIn, "roots.tooltip.shift", TextFormatting.DARK_GRAY)) {
+/*    if (ItemUtil.shouldDisplayMore(stack, worldIn, tooltip, flagIn, "roots.tooltip.shift", TextFormatting.DARK_GRAY)) {
       tooltip.add(I18n.format("roots.tooltip.knife_dispenser"));
-    }
+    }*/
   }
 }

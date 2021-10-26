@@ -23,7 +23,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -129,7 +129,7 @@ public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
     return false;
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     tooltip.add("");

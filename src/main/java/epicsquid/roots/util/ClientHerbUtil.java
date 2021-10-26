@@ -6,11 +6,11 @@ import epicsquid.roots.init.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class ClientHerbUtil {
   @SuppressWarnings("ConstantConditions")
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static boolean isCreativePouch() {
     Minecraft mc = Minecraft.getMinecraft();
     if (mc == null || mc.player == null) {

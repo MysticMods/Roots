@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessagePyreBigFlameFX implements IMessage {
 
@@ -44,7 +44,7 @@ public class MessagePyreBigFlameFX implements IMessage {
 
   public static class Handler extends ClientMessageHandler<MessagePyreBigFlameFX> {
     @Override
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     protected void handleMessage(MessagePyreBigFlameFX message, MessageContext context) {
       World world = Minecraft.getMinecraft().world;
       if (message.isCold) {

@@ -24,7 +24,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
@@ -147,7 +147,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     return false;
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     if (GeneralConfig.AutoEquipPouches && Loader.isModLoaded("baubles")) {

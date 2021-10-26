@@ -51,7 +51,7 @@ public class EventManager {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onTick(TickEvent.ClientTickEvent event) {
-    if (event.side == Side.CLIENT) {
+    if (event.side == Dist.CLIENT) {
       ClientProxy.particleRenderer.updateParticles();
       ticks++;
     }

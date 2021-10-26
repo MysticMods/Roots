@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class Keybinds {
@@ -41,7 +41,7 @@ public class Keybinds {
   }
 
   @SubscribeEvent
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void onInput(InputEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
     if (POUCH_KEYBIND.isKeyDown() && mc.inGameHasFocus) {

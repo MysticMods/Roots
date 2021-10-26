@@ -10,11 +10,11 @@ import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nullable;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class RenderIcicle extends EntityRenderer<EntityIcicle> {
   private static final ResourceLocation RES_ICICLE = new ResourceLocation(Roots.MODID, "textures/entity/icicle.png");
 

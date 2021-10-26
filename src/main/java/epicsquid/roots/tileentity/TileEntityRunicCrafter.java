@@ -1,17 +1,11 @@
 package epicsquid.roots.tileentity;
 
 import com.google.common.collect.Lists;
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.particle.particles.ParticleLeaf;
-import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
-import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.util.IngredientWithStack;
 import epicsquid.roots.util.ItemHandlerUtil;
@@ -26,17 +20,13 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ITickableTileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import noobanidus.libs.noobutil.util.ItemUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -53,7 +43,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
     protected void onContentsChanged(int slot) {
       TileEntityRunicCrafter.this.markDirty();
       if (!world.isRemote) {
-        //TileEntityRunicCrafter.this.updatePacketViaState();
+        //TileEntityRunicCrafter.this.//TODO: updatePacketViaState();
         TileEntityRunicCrafter.this.world.updateComparatorOutputLevel(pos, ModBlocks.runic_crafter);
       }
     }
@@ -93,7 +83,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
       }
 
       for (ItemStack stack : recipe.transformIngredients(inputItems, this)) {
-        ItemUtil.spawnItem(world, pos.add(Util.rand.nextBoolean() ? -1 : 1, 1, Util.rand.nextBoolean() ? -1 : 1), stack);
+        ItemUtil.Spawn.spawnItem(world, pos.add(world.rand.nextBoolean() ? -1 : 1, 1, world.rand.nextBoolean() ? -1 : 1), stack);
       }
 
       result = recipe.getResult().copy();
@@ -113,14 +103,13 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
     }
   }
 
-  @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     if (player.world.isRemote) {
       return true;
     }
 
     if (!hasValidGroveStone()) {
-      player.sendMessage(new TranslationTextComponent("roots.message.runic_crafter.no_grove").setStyle(new Style().setColor(TextFormatting.YELLOW)));
+      /*      player.sendMessage(new TranslationTextComponent("roots.message.runic_crafter.no_grove").setStyle(new Style().setColor(TextFormatting.YELLOW)));*/
       return true;
     }
 
@@ -149,7 +138,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
       }
       if (update) {
         currentRecipe = ModRecipes.getFeyCraftingRecipe(pedestal.getStackInSlot(0));
-        updatePacketViaState();
+        //TODO: updatePacketViaState();
       }
     } else {
       if (this.countdown != -1) {
@@ -159,8 +148,8 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
       if (!this.storedItems.isEmpty()) {
         this.countdown = COUNTDOWN;
 
-        MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
-        PacketHandler.sendToAllTracking(packet, this);
+/*        MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
+        PacketHandler.sendToAllTracking(packet, this);*/
         world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.WHIRLWIND, SoundCategory.NEUTRAL, 0.6f, 1f);
       }
     }
@@ -186,7 +175,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
   @Override
   public void tick() {
     if (world.isRemote) {
-      if (!hasValidGroveStone()) {
+/*      if (!hasValidGroveStone()) {
         if (world.getTotalWorldTime() % 3 != 0) {
           ClientProxy.particleRenderer.spawnParticle(
               world,
@@ -226,13 +215,13 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
               1
           );
         }
-      }
+      }*/
     }
     if (!world.isRemote) {
       if (countdown > 0) {
         if (storedItems.isEmpty() || getRecipe() == null) {
           countdown = -1;
-          updatePacketViaState();
+          //TODO: updatePacketViaState();
         } else {
           countdown--;
         }
@@ -248,8 +237,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
           }
           TileEntity te = world.getTileEntity(getPos().offset(facing));
           if (te != null) {
-            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (cap != null) {
+            te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(cap -> {
               List<ItemStack> newItems = new ArrayList<>();
               for (ItemStack toPut : storedItems) {
                 ItemStack result = ItemHandlerHelper.insertItemStacked(cap, toPut, false);
@@ -258,7 +246,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
                 }
               }
               storedItems = newItems;
-            }
+            });
           }
         }
         for (ItemStack stack : storedItems) {
@@ -274,13 +262,12 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
           // Eject these
           TileEntity te = world.getTileEntity(getPos().down());
           if (te != null) {
-            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (cap != null) {
+            te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(cap -> {
               for (int i = 0; i < inventory.getSlots(); i++) {
                 ItemStack toPut = inventory.getStackInSlot(i);
                 inventory.setStackInSlot(i, ItemHandlerHelper.insertItemStacked(cap, toPut, false));
               }
-            }
+            });
           }
         }
         if (recipe != null && !items.isEmpty() && (items.size() != 5 || recipe.matches(items))) {
@@ -300,14 +287,13 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
       if (ItemHandlerUtil.isEmpty(inventory)) {
         TileEntity te = world.getTileEntity(getPos().down());
         if (te != null) {
-          IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-          if (cap != null) {
+          te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(cap -> {
             Int2ObjectOpenHashMap<IngredientWithStack> slotsToIngredient = new Int2ObjectOpenHashMap<>();
             int amount = 0;
             for (Ingredient ingredient : requirements) {
               for (int i = 0; i < cap.getSlots(); i++) {
                 ItemStack inSlot = cap.getStackInSlot(i);
-                if (ingredient.apply(inSlot)) {
+                if (ingredient.test(inSlot)) {
                   if (slotsToIngredient.containsKey(i)) {
                     if (inSlot.getCount() > slotsToIngredient.get(i).getCount()) {
                       amount++;
@@ -331,10 +317,10 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
                   inventory.setStackInSlot(i, stack);
                 }
                 markDirty();
-                updatePacketViaState();
+                //TODO: updatePacketViaState();
               }
             }
-          }
+          });
         }
       }
     }
@@ -350,16 +336,16 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
 
   @Override
   public void read(BlockState state, CompoundNBT tag) {
-    super.readFromNBT(tag);
+    super.read(state, tag);
     pedestal.deserializeNBT(tag.getCompound("pedestal"));
   }
 
   @Override
   public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull BlockState state, PlayerEntity player) {
     super.breakBlock(world, pos, state, player);
-    if (!world.isRemote) {
+/*    if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, pedestal);
-    }
+    }*/
   }
 }
 

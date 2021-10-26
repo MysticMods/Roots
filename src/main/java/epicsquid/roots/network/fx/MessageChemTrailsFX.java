@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageChemTrailsFX implements IMessage {
   private double[] pos;
@@ -44,7 +44,7 @@ public class MessageChemTrailsFX implements IMessage {
   private static final float[] smoke = new float[]{87 / 255.0f, 79 / 255.0f, 75 / 255.0f, 1.0f};
 
   public static class Handler extends ClientMessageHandler<MessageChemTrailsFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(MessageChemTrailsFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

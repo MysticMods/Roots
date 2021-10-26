@@ -10,7 +10,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 @SuppressWarnings("deprecation")
 public class BlockStructureMarker extends BlockBase {
@@ -21,7 +21,7 @@ public class BlockStructureMarker extends BlockBase {
     super(Material.STRUCTURE_VOID, SoundType.ANVIL, 0.1f, "structure_marker");
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void getSubBlocks(ItemGroup tab, NonNullList<ItemStack> list) {
     if (tab == this.getCreativeTab()) {

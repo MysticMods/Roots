@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -60,7 +60,7 @@ public abstract class BlockFeyLight extends BlockBase {
     return false;
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public abstract void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random);
 

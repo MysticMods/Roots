@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class SneakHandler {
   }
 
   @SubscribeEvent
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void onPlayerSneak(TickEvent.ClientTickEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
     //noinspection ConstantConditions

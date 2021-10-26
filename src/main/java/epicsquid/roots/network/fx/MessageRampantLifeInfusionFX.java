@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageRampantLifeInfusionFX implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
@@ -49,7 +49,7 @@ public class MessageRampantLifeInfusionFX implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageRampantLifeInfusionFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageRampantLifeInfusionFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

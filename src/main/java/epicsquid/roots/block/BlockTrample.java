@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nonnull;
 
@@ -23,7 +23,7 @@ public class BlockTrample extends BlockTEBase {
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void initModel() {
     ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "handlers"));
   }

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageDisarmFX implements IMessage {
 
@@ -43,7 +43,7 @@ public class MessageDisarmFX implements IMessage {
   }
 
   public static class Handler extends ClientMessageHandler<MessageDisarmFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(MessageDisarmFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

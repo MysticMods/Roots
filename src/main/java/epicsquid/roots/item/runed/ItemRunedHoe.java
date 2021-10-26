@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -60,7 +60,7 @@ public class ItemRunedHoe extends ItemPloughBase implements ILivingRepair {
     return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     tooltip.add("");

@@ -28,7 +28,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -161,7 +161,7 @@ public class ItemStaff extends ItemBase {
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
@@ -202,7 +202,7 @@ public class ItemStaff extends ItemBase {
     return capability != null && capability.onCooldown();
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public int getRGBDurabilityForDisplay(@Nonnull ItemStack stack) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
@@ -256,7 +256,7 @@ public class ItemStaff extends ItemBase {
     return UseAction.NONE;
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void initModel() {
     ModelBakery.registerItemVariants(this, new ModelResourceLocation(getRegistryName().toString()), new net.minecraft.client.renderer.model.ModelResourceLocation(getRegistryName().toString() + "_1"));

@@ -13,16 +13,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @SuppressWarnings("Duplicates")
-@Mod.EventBusSubscriber(modid = Roots.MODID, value = Side.CLIENT)
+@Mod.EventBusSubscriber(modid = Roots.MODID, value = Dist.CLIENT)
 public class RenderHerbHUD {
   public static RenderHerbHUD INSTANCE = new RenderHerbHUD();
 
@@ -53,7 +53,7 @@ public class RenderHerbHUD {
   }
 
   @SubscribeEvent
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void renderHUD(RenderGameOverlayEvent.Post event) {
     if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
       ScaledResolution res = event.getResolution();
@@ -68,7 +68,7 @@ public class RenderHerbHUD {
   }
 
   @SubscribeEvent
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void clientTick(TickEvent.ClientTickEvent event) {
     INSTANCE.slots.forEach(HerbAlert::tick);
   }

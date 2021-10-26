@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class RenderUtil {
   public static void drawEntityOnScreen(int posX, int posY, float scale, float mouseX, float mouseY, LivingEntity ent) {
     if (ent.world == null) {

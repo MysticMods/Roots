@@ -15,12 +15,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class RenderMortar {
   public static void render(Minecraft mc, BlockPos pos, BlockState state, RenderGameOverlayEvent.Post event) {
     World world = mc.world;

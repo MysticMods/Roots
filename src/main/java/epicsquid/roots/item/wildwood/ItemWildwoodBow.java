@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -21,7 +21,7 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
 
     this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
       @Override
-      @SideOnly(Side.CLIENT)
+      @OnlyIn(Dist.CLIENT)
       public float apply(ItemStack stack, @Nullable World worldIn, @Nullable LivingEntity entityIn) {
         if (entityIn == null) {
           return 0.0F;
@@ -32,7 +32,7 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
     });
     this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter() {
       @Override
-      @SideOnly(Side.CLIENT)
+      @OnlyIn(Dist.CLIENT)
       public float apply(ItemStack stack, @Nullable World worldIn, @Nullable LivingEntity entityIn) {
         return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
       }

@@ -41,7 +41,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
@@ -239,7 +239,7 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addToolTipBase(List<String> tooltip, @Nullable BaseModifierInstanceList<?> list) {
     Object2DoubleOpenHashMap<Herb> costs = this.costs;
     if (list != null) {
@@ -260,7 +260,7 @@ public abstract class SpellBase extends RegistryItem {
     return "roots.spell." + name;
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addToolTip(List<String> tooltip, @Nullable LibraryModifierInstanceList list) {
     addToolTipBase(tooltip, list);
     if (list != null) {
@@ -275,13 +275,13 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addToolTip(List<String> tooltip, @Nullable StaffModifierInstanceList list) {
     addToolTipBase(tooltip, list);
     addToolTipInfo(tooltip, list);
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addToolTipInfo(List<String> tooltip, @Nullable StaffModifierInstanceList list) {
     if (list != null) {
       double addition = 0;

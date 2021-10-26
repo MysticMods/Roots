@@ -13,14 +13,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
-@Mod.EventBusSubscriber(value = Side.CLIENT, modid = Roots.MODID)
+@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Roots.MODID)
 public class RenderHUD {
   private RenderHUD() {
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onDrawScreenPost(RenderGameOverlayEvent.Post event) {
     if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) return;

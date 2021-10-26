@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageClearToasts implements IMessage {
   public MessageClearToasts() {
@@ -22,7 +22,7 @@ public class MessageClearToasts implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageClearToasts> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void handleMessage(final MessageClearToasts message, final MessageContext ctx) {
       ClientTickHandler.addRunnable(() -> Minecraft.getMinecraft().getToastGui().clear(), 20);

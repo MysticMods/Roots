@@ -6,9 +6,9 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.spectator.SpectatorMenu;
 import net.minecraft.client.gui.spectator.categories.SpectatorDetails;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class GuiFakeSpectator extends SpectatorGui {
   private static GuiFakeSpectator instance = null;
   private static SpectatorGui actualInstance = null;

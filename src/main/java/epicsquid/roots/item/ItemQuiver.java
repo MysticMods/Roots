@@ -46,13 +46,13 @@ public class ItemQuiver extends ItemArrowBase {
     ItemStack arrow = findArrow(stack);
     if (!arrow.isEmpty()) {
       AbstractArrowEntity entityArrow = ((ArrowItem) arrow.getItem()).createArrow(worldIn, arrow, shooter);
-      entityArrow.getEntityData().setBoolean("return", true);
+      entityArrow.getEntityData().putBoolean("return", true);
       return entityArrow;
     }
 
     AbstractArrowEntity entityArrow = new ArrowEntity(worldIn, shooter);
     entityArrow.setDamage(1.5D);
-    entityArrow.getEntityData().setBoolean("generated", true);
+    entityArrow.getEntityData().putBoolean("generated", true);
 
     stack.damageItem(itemRand.nextInt(2), shooter);
     return entityArrow;

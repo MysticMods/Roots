@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.Random;
 
@@ -84,7 +84,7 @@ public class ElementalSoilTransformFX implements IMessage {
   }
 
   public static class Handler extends ClientMessageHandler<ElementalSoilTransformFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(ElementalSoilTransformFX message, MessageContext ctx) {
 

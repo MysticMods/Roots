@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 @Deprecated
 public class MessageWildfireFX extends ModifierPacket implements IMessage {
@@ -68,7 +68,7 @@ public class MessageWildfireFX extends ModifierPacket implements IMessage {
   private static final float[] greenColor = new float[]{148 / 255.0f, 212 / 255.0f, 11 / 255.0f, 0.5f};
 
   public static class MessageHolder extends ClientMessageHandler<MessageWildfireFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageWildfireFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

@@ -50,7 +50,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   public CompoundNBT serializeNBT() {
     CompoundNBT result = super.serializeNBT();
     result.put("m", modifiers.serializeNBT());
-    result.setBoolean("o", obtained);
+    result.putBoolean("o", obtained);
     return result;
   }
 
@@ -74,7 +74,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   public ItemStack asStack() {
     ItemStack stack = new ItemStack(ModItems.spell_icon);
     CompoundNBT comp = ItemUtil.getOrCreateTag(stack);
-    comp.setBoolean("library", true);
+    comp.putBoolean("library", true);
     LibrarySpellStorage storage = LibrarySpellStorage.fromStack(stack);
     Objects.requireNonNull(storage).addSpell(this);
     return stack;

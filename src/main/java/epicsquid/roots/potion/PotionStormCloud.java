@@ -27,7 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -138,7 +138,7 @@ public class PotionStormCloud extends Effect {
     return true;
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public int getStatusIconIndex() {
     Minecraft.getMinecraft().getTextureManager().bindTexture(texture);

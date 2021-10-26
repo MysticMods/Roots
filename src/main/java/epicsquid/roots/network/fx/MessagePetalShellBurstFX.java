@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessagePetalShellBurstFX extends ModifierPacket implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
@@ -57,7 +57,7 @@ public class MessagePetalShellBurstFX extends ModifierPacket implements IMessage
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static float[] getColours(boolean first, final MessagePetalShellBurstFX message) {
     if (first) {
       if (message.has(SpellPetalShell.COLOUR)) {
@@ -75,7 +75,7 @@ public class MessagePetalShellBurstFX extends ModifierPacket implements IMessage
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessagePetalShellBurstFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessagePetalShellBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

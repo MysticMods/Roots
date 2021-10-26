@@ -16,7 +16,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class PotionAnimalSense extends Effect {
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
@@ -34,7 +34,7 @@ public class PotionAnimalSense extends Effect {
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public int getStatusIconIndex() {
     Minecraft.getMinecraft().renderEngine.bindTexture(texture);
     return super.getStatusIconIndex();

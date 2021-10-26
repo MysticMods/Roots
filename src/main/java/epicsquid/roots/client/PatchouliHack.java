@@ -27,7 +27,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 import vazkii.patchouli.client.book.BookCategory;
 import vazkii.patchouli.client.book.BookEntry;
 import vazkii.patchouli.client.book.gui.GuiBook;
@@ -41,7 +41,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class PatchouliHack {
   public static final CycleTimer timer = new CycleTimer(10);
 

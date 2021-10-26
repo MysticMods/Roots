@@ -38,7 +38,7 @@ public class StaffModifierInstance extends LibraryModifierInstance {
   @Override
   public CompoundNBT serializeNBT() {
     CompoundNBT tag = super.serializeNBT();
-    tag.setBoolean("e", enabled);
+    tag.putBoolean("e", enabled);
     return tag;
   }
 

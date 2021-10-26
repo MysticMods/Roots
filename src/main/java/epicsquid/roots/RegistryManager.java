@@ -19,7 +19,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nonnull;
 
@@ -45,7 +45,7 @@ public class RegistryManager {
     ModRecipes.initRecipes(event);
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @SubscribeEvent
   public static void onRegisterCustomModels(@Nonnull RegisterParticleEvent event) {
     ModParticles.init();
@@ -58,7 +58,7 @@ public class RegistryManager {
     ModItems.registerOredict();
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void registerColorHandlers() {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 

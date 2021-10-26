@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageTargetedLifeDrainFX implements IMessage {
   private Vec3d start;
@@ -49,7 +49,7 @@ public class MessageTargetedLifeDrainFX implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageTargetedLifeDrainFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageTargetedLifeDrainFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

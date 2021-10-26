@@ -8,9 +8,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Slot;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ModifierContext {
   @SuppressWarnings("ConstantConditions")
   public static StaffSpellInfo getHoveredSpellInfo() {

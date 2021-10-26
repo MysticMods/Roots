@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageLightDrifterFX implements IMessage {
   private static float[] set1 = new float[]{196f / 255f, 240f / 255f, 255f / 255f, 0.125f};
@@ -48,7 +48,7 @@ public class MessageLightDrifterFX implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageLightDrifterFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageLightDrifterFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageImbueCompleteFX implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
@@ -53,7 +53,7 @@ public class MessageImbueCompleteFX implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageImbueCompleteFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageImbueCompleteFX message, final MessageContext ctx) {
       SpellBase spell = (message.spellName.equals("fake_spell")) ? new FakeSpell() : SpellRegistry.getSpell(message.spellName);

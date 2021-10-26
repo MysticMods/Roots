@@ -7,7 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class MessageInvalidateContainer implements IMessage {
   public MessageInvalidateContainer() {
@@ -22,7 +22,7 @@ public class MessageInvalidateContainer implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageInvalidateContainer> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageInvalidateContainer message, final MessageContext ctx) {
       Minecraft mc = Minecraft.getMinecraft();

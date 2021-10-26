@@ -9,7 +9,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.function.Function;
@@ -47,7 +47,7 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
     return getSpellInSlot(selectedSlot);
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public String formatSelectedSpell() {
     V info = getSelectedInfo();
     if (info == null) {

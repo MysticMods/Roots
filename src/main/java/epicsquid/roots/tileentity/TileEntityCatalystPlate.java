@@ -1,8 +1,6 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileEntity;
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,9 +11,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+import noobanidus.libs.noobutil.util.ItemUtil;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;
@@ -26,7 +26,7 @@ public class TileEntityCatalystPlate extends TileEntity {
     protected void onContentsChanged(int slot) {
       TileEntityCatalystPlate.this.markDirty();
       if (!world.isRemote) {
-        updatePacketViaState();
+        //TODO: //TODO: updatePacketViaState();
       }
     }
   };
@@ -34,7 +34,7 @@ public class TileEntityCatalystPlate extends TileEntity {
   private int progress = 0;
 
   public TileEntityCatalystPlate() {
-    super();
+    super(null);
   }
 
   @Override
@@ -43,16 +43,16 @@ public class TileEntityCatalystPlate extends TileEntity {
     tag.put("handler", inventory.serializeNBT());
     tag.putInt("progress", progress);
     if (lastPlayer != null) {
-      tag.put("lastPlayer", NBTUtil.createUUIDTag(lastPlayer));
+      tag.put("lastPlayer", NBTUtil.func_240626_a_(lastPlayer));
     }
     return tag;
   }
 
   @Override
   public void read(BlockState state, CompoundNBT tag) {
-    super.readFromNBT(tag);
+    super.read(state, tag);
     if (tag.contains("lastPlayer")) {
-      lastPlayer = NBTUtil.getUUIDFromTag(tag.getCompound("lastPlayer"));
+      lastPlayer = NBTUtil.readUniqueId(tag.getCompound("lastPlayer"));
     }
     inventory.deserializeNBT(tag.getCompound("handler"));
     progress = tag.getInt("progress");
@@ -65,15 +65,14 @@ public class TileEntityCatalystPlate extends TileEntity {
 
   @Override
   public SUpdateTileEntityPacket getUpdatePacket() {
-    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
+    return new SUpdateTileEntityPacket(getPos(), 9, getUpdateTag());
   }
 
   @Override
   public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-    readFromNBT(pkt.getNbtCompound());
+    read(ModBlocks.catalyst_plate.getDefaultState(), pkt.getNbtCompound());
   }
 
-  @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     this.lastPlayer = player.getUniqueID();
@@ -103,7 +102,7 @@ public class TileEntityCatalystPlate extends TileEntity {
               player.setHeldItem(hand, ItemStack.EMPTY);
             }
 
-            updatePacketViaState();
+            //TODO: //TODO: updatePacketViaState();
           }
           return true;
         }
@@ -117,8 +116,8 @@ public class TileEntityCatalystPlate extends TileEntity {
           count = 1;
         }
         ItemStack extracted = inventory.extractItem(0, count, false);
-        ItemUtil.spawnItem(world, getPos(), extracted);
-        updatePacketViaState();
+        ItemUtil.Spawn.spawnItem(world, getPos(), extracted);
+        //TODO: updatePacketViaState();
         return true;
       }
     }
@@ -132,7 +131,7 @@ public class TileEntityCatalystPlate extends TileEntity {
   public ItemStack removeItem() {
     ItemStack stack = this.inventory.getStackInSlot(0);
     if (stack.getItem() == ModItems.life_essence) {
-      if (stack.attemptDamageItem(1, Util.rand, null)) {
+      if (stack.attemptDamageItem(1, world.rand, null)) {
         inventory.setStackInSlot(0, ItemStack.EMPTY);
       }
       return ItemStack.EMPTY;
@@ -149,10 +148,10 @@ public class TileEntityCatalystPlate extends TileEntity {
     }
   }
 
-  @Override
   public void breakBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
-      Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
+      // TODO:
+      //Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
   }
 

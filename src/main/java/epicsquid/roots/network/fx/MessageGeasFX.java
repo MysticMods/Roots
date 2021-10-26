@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.Random;
 
@@ -49,7 +49,7 @@ public class MessageGeasFX implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageGeasFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(final MessageGeasFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

@@ -38,7 +38,7 @@ public class TileEntityMortar extends TileEntity {
     protected void onContentsChanged(int slot) {
       TileEntityMortar.this.markDirty();
       if (!world.isRemote) {
-        updatePacketViaState();
+        //TODO: updatePacketViaState();
         TileEntityMortar.this.world.updateComparatorOutputLevel(pos, ModBlocks.mortar);
       }
     }
@@ -126,7 +126,7 @@ public class TileEntityMortar extends TileEntity {
         ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), dust);
         world.playSound(null, crafterPos, ModSounds.Events.MORTAR_USE, SoundCategory.PLAYERS, 1f, 1f);
         markDirty();
-        updatePacketViaState();
+        //TODO: updatePacketViaState();
       }
       List<ItemStack> items = new ArrayList<>();
       for (int i = 0; i < inventory.getSlots(); i++) {
@@ -167,7 +167,7 @@ public class TileEntityMortar extends TileEntity {
         ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), mortarRecipe.getResult().copy());
         world.playSound(null, crafterPos, ModSounds.Events.MORTAR_USE, SoundCategory.PLAYERS, 1f, 1f);
         markDirty();
-        updatePacketViaState();
+        //TODO: updatePacketViaState();
       }
       List<ItemStack> items = new ArrayList<>();
       for (int i = 0; i < inventory.getSlots(); i++) {
@@ -219,7 +219,7 @@ public class TileEntityMortar extends TileEntity {
               }
               world.playSound(null, getPos(), ModSounds.Events.MORTAR_ADD_ITEM, SoundCategory.PLAYERS, 1f, 1f);
               markDirty();
-              updatePacketViaState();
+              //TODO: updatePacketViaState();
               return true;
             }
           }
@@ -231,7 +231,7 @@ public class TileEntityMortar extends TileEntity {
             player.setHeldItem(hand, ItemStack.EMPTY);
             markDirty();
             world.playSound(null, getPos(), ModSounds.Events.MORTAR_ADD_ITEM, SoundCategory.PLAYERS, 1f, 1f);
-            updatePacketViaState();
+            //TODO: updatePacketViaState();
             return true;
           }
         }

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +81,7 @@ public class MessageSenseFX implements IMessage {
 
   public static class Handler extends ClientMessageHandler<MessageSenseFX> {
     @Override
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     protected void handleMessage(MessageSenseFX message, MessageContext ctx) {
       Minecraft minecraft = Minecraft.getMinecraft();
       World world = minecraft.world;

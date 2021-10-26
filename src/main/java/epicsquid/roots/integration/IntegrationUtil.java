@@ -12,7 +12,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 import vazkii.patchouli.api.PatchouliAPI;
 import vazkii.patchouli.client.book.BookCategory;
 import vazkii.patchouli.client.book.BookEntry;
@@ -33,7 +33,7 @@ public class IntegrationUtil {
    * @param entryLocation    patchouli entry resourceLocation
    * @param page             the page number
    */
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void openBook(World world, PlayerEntity player, ResourceLocation resourceLocation, ResourceLocation entryLocation, int page) {
     if (world.isRemote) {
       PatchouliAPI.instance.openBookGUI(resourceLocation);
@@ -63,7 +63,7 @@ public class IntegrationUtil {
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void openCategory(ResourceLocation book, ResourceLocation category) {
     Minecraft mc = Minecraft.getMinecraft();
     if (mc == null || mc.player == null) {
@@ -72,7 +72,7 @@ public class IntegrationUtil {
     openCategory(mc.world, mc.player, book, category);
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void openCategory(World world, PlayerEntity player, ResourceLocation resourceLocation, ResourceLocation categoryLocation) {
     if (world.isRemote) {
       PatchouliAPI.instance.openBookGUI(resourceLocation);
@@ -101,7 +101,7 @@ public class IntegrationUtil {
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void showUses(ItemStack stack) {
     if (JEIRootsPlugin.runtime == null) {
       return;
@@ -111,7 +111,7 @@ public class IntegrationUtil {
     gui.show(registry.createFocus(IFocus.Mode.INPUT, stack));
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void showSources (ItemStack stack) {
     if (JEIRootsPlugin.runtime == null) {
       return;

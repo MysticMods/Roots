@@ -1,7 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.roots.GuiHandler;
-import epicsquid.roots.Roots;
 import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.config.GeneralConfig;
@@ -9,7 +7,6 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
-import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
@@ -25,7 +22,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -36,6 +32,7 @@ import noobanidus.libs.noobutil.util.ItemUtil;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TileEntityFeyCrafter extends TileEntity implements ITickableTileEntity {
@@ -50,7 +47,7 @@ public class TileEntityFeyCrafter extends TileEntity implements ITickableTileEnt
     protected void onContentsChanged(int slot) {
       TileEntityFeyCrafter.this.markDirty();
       if (!world.isRemote) {
-        TileEntityFeyCrafter//TODO: tile.updatePacketViaState();
+        //TileEntityFeyCrafter.this.//TODO: updatePacketViaState();
       }
     }
   };
@@ -59,7 +56,7 @@ public class TileEntityFeyCrafter extends TileEntity implements ITickableTileEnt
   protected FeyCraftingRecipe lastRecipe;
 
   public TileEntityFeyCrafter() {
-    super();
+    super(null);
   }
 
   @Nonnull
@@ -94,7 +91,7 @@ public class TileEntityFeyCrafter extends TileEntity implements ITickableTileEnt
     if (tag.contains("storedItems")) {
       ListNBT stored = tag.getList("storedItems", Constants.NBT.TAG_COMPOUND);
       for (int i = 0; i < stored.size(); i++) {
-        this.storedItems.add(new ItemStack(stored.getCompound(i)));
+        this.storedItems.add(ItemStack.read(stored.getCompound(i)));
       }
     }
     if (tag.contains("countdown")) {
@@ -112,19 +109,19 @@ public class TileEntityFeyCrafter extends TileEntity implements ITickableTileEnt
 
   @Override
   public SUpdateTileEntityPacket getUpdatePacket() {
-    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
+    return new SUpdateTileEntityPacket(getPos(), 9, getUpdateTag());
   }
 
   @Override
   public void onDataPacket(@Nonnull NetworkManager net, SUpdateTileEntityPacket pkt) {
-    readFromNBT(pkt.getNbtCompound());
+    read(ModBlocks.fey_crafter.getDefaultState(), pkt.getNbtCompound());
   }
 
   // TODO:
   public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       // TODO: Port
-      ItemUtil.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
+      //ItemUtil.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
   }
 
@@ -143,7 +140,7 @@ public class TileEntityFeyCrafter extends TileEntity implements ITickableTileEnt
     }
 
     // TODO: Port
-    List<BlockPos> potentials = Util.getBlocksWithinRadius(world, pos, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, ModBlocks.grove_stone);
+    List<BlockPos> potentials = Collections.emptyList(); //Util.getBlocksWithinRadius(world, pos, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, ModBlocks.grove_stone);
     if (potentials.isEmpty()) return false;
 
     for (BlockPos pos : potentials) {
@@ -244,7 +241,7 @@ public class TileEntityFeyCrafter extends TileEntity implements ITickableTileEnt
     }
 
     if (shouldGui) {
-/*      player.openGui(Roots.instance, GuiHandler.CRAFTER_ID, world, pos.getX(), pos.getY(), pos.getZ());*/
+      /*      player.openGui(Roots.instance, GuiHandler.CRAFTER_ID, world, pos.getX(), pos.getY(), pos.getZ());*/
       return true;
     }
 

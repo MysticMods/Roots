@@ -1,8 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.container.ContainerImposer;
@@ -28,7 +25,6 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ITickableTileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
@@ -44,7 +40,7 @@ public class TileEntityImposer extends TileEntity implements ITickableTileEntity
       TileEntityImposer.this.slot = 0;
       TileEntityImposer.this.markDirty();
       if (!world.isRemote) {
-        //TileEntityImposer.this.updatePacketViaState();
+        //TileEntityImposer.this.//TODO: updatePacketViaState();
       }
     }
   };
@@ -53,7 +49,7 @@ public class TileEntityImposer extends TileEntity implements ITickableTileEntity
   private int slot = 0;
 
   public TileEntityImposer() {
-    super();
+    super(null);
   }
 
   public int getSlot() {
@@ -66,14 +62,14 @@ public class TileEntityImposer extends TileEntity implements ITickableTileEntity
       SpellUtil.updateModifiers(staff, player);
       inventory.setStackInSlot(0, staff);
       markDirty();
-      updatePacketViaState();
+      //TODO: updatePacketViaState();
     }
   }
 
   public void setSlot(int slot) {
     this.slot = slot;
     markDirty();
-    updatePacketViaState();
+    //TODO: updatePacketViaState();
   }
 
   @Override
@@ -121,7 +117,7 @@ public class TileEntityImposer extends TileEntity implements ITickableTileEntity
             player.setHeldItem(hand, ItemStack.EMPTY);
           }
           markDirty();
-          updatePacketViaState();
+          //TODO: updatePacketViaState();
           return true;
         }
       }
@@ -129,15 +125,15 @@ public class TileEntityImposer extends TileEntity implements ITickableTileEntity
       ItemStack inSlot = inventory.getStackInSlot(0);
       if (inSlot.getItem() == ModItems.staff) {
         if (!world.isRemote) {
-          player.openGui(Roots.instance, GuiHandler.IMPOSER_ID, world, pos.getX(), pos.getY(), pos.getZ());
+          /*          player.openGui(Roots.instance, GuiHandler.IMPOSER_ID, world, pos.getX(), pos.getY(), pos.getZ());*/
         }
       }
       return true;
     } else if (heldItem.isEmpty() && !world.isRemote && hand == Hand.MAIN_HAND) {
       for (int i = 0; i < inventory.getSlots(); i++) {
-        if (this.dropItemInInventory(inventory, i)) {
+/*        if (this.dropItemInInventory(inventory, i)) {
           return true;
-        }
+        }*/
       }
     }
     return false;
@@ -189,7 +185,7 @@ public class TileEntityImposer extends TileEntity implements ITickableTileEntity
       modifier.setApplied();
       storage.saveToStack();
       markDirty();
-      updatePacketViaState();
+      //TODO: updatePacketViaState();
       PlayerEntity player = container.getPlayer();
       Advancements.MODIFIER_TRIGGER.trigger((ServerPlayerEntity) player, modifier.getModifier().getCore());
       SpellLibraryData data = SpellLibraryRegistry.getData(player);

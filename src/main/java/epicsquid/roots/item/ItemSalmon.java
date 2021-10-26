@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.ServerWorld;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 import vazkii.patchouli.common.handler.AdvancementSyncHandler;
 
 import javax.annotation.Nonnull;
@@ -145,7 +145,7 @@ public class ItemSalmon extends ItemBase {
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 

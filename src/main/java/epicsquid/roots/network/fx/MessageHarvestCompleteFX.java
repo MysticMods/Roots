@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class MessageHarvestCompleteFX implements IMessage {
   }
 
   public static class MessageHolder extends ClientMessageHandler<MessageHarvestCompleteFX> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     protected void handleMessage(MessageHarvestCompleteFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

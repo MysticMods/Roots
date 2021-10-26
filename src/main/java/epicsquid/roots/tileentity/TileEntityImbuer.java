@@ -44,7 +44,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
     protected void onContentsChanged(int slot) {
       TileEntityImbuer.this.markDirty();
       if (!world.isRemote) {
-        //TileEntityImbuer.this.updatePacketViaState();
+        //TileEntityImbuer.this.//TODO: updatePacketViaState();
       }
     }
   };
@@ -154,7 +154,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
             inserter = player.getUniqueID();
             player.getHeldItem(hand).shrink(1);
             markDirty();
-            updatePacketViaState();
+            //TODO: updatePacketViaState();
             world.playSound(null, getPos(), ModSounds.Events.IMBUER_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
             return true;
           }
@@ -172,7 +172,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
                 player.setHeldItem(hand, ItemStack.EMPTY);
               }
               markDirty();
-              updatePacketViaState();
+              //TODO: updatePacketViaState();
               world.playSound(null, getPos(), ModSounds.Events.IMBUER_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
               return true;
             }
@@ -192,7 +192,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
                   player.setHeldItem(hand, ItemStack.EMPTY);
                 }
                 markDirty();
-                updatePacketViaState();
+                //TODO: updatePacketViaState();
                 world.playSound(null, getPos(), ModSounds.Events.IMBUER_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
                 return true;
               }
@@ -208,7 +208,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
                 player.setHeldItem(hand, ItemStack.EMPTY);
               }
               markDirty();
-              updatePacketViaState();
+              //TODO: updatePacketViaState();
               world.playSound(null, getPos(), ModSounds.Events.IMBUER_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
               return true;
             }
@@ -288,7 +288,7 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
               inventory.extractItem(1, 1, false);*/
 
             markDirty();
-            updatePacketViaState();
+            //TODO: updatePacketViaState();
           } else {
             // Handle the repair
             ItemStack repairItem = inventory.extractItem(0, 1, false);
@@ -314,21 +314,21 @@ public class TileEntityImbuer extends TileEntity implements ITickableTileEntity 
             world.addEntity(new ItemEntity(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, toRepair));
             world.playSound(null, getPos(), ModSounds.Events.IMBUER_FINISHED, SoundCategory.BLOCKS, 1f, 1f);
             markDirty();
-            updatePacketViaState();
+            //TODO: updatePacketViaState();
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX("fake_spell", getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
           }
         }
       }
       this.markDirty();
       if (!world.isRemote) {
-        updatePacketViaState();
+        //TODO: updatePacketViaState();
       }
     } else {
       if (progress != 0) {
         progress = 0;
         this.markDirty();
         if (!world.isRemote) {
-          updatePacketViaState();
+          //TODO: updatePacketViaState();
         }
       }
     }
