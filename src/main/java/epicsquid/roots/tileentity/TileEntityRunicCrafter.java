@@ -22,10 +22,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ITickable;
+import net.minecraft.util.ITickableTileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
@@ -44,7 +45,7 @@ import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("Duplicates")
-public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITickable {
+public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITickableTileEntity {
   protected FeyCraftingRecipe currentRecipe;
 
   public ItemStackHandler pedestal = new ItemStackHandler(1) {
@@ -52,7 +53,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
     protected void onContentsChanged(int slot) {
       TileEntityRunicCrafter.this.markDirty();
       if (!world.isRemote) {
-        TileEntityRunicCrafter.this.updatePacketViaState();
+        //TileEntityRunicCrafter.this.updatePacketViaState();
         TileEntityRunicCrafter.this.world.updateComparatorOutputLevel(pos, ModBlocks.runic_crafter);
       }
     }
@@ -183,7 +184,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
   }
 
   @Override
-  public void update() {
+  public void tick() {
     if (world.isRemote) {
       if (!hasValidGroveStone()) {
         if (world.getTotalWorldTime() % 3 != 0) {
@@ -262,7 +263,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
         }
         for (ItemStack stack : storedItems) {
           ItemEntity item = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
-          world.spawnEntity(item);
+          world.addEntity(item);
         }
         this.storedItems.clear();
       }
@@ -341,16 +342,16 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
 
   @Nonnull
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    tag = super.writeToNBT(tag);
-    tag.setTag("pedestal", pedestal.serializeNBT());
+  public CompoundNBT write(CompoundNBT tag) {
+    tag = super.write(tag);
+    tag.put("pedestal", pedestal.serializeNBT());
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
+  public void read(BlockState state, CompoundNBT tag) {
     super.readFromNBT(tag);
-    pedestal.deserializeNBT(tag.getCompoundTag("pedestal"));
+    pedestal.deserializeNBT(tag.getCompound("pedestal"));
   }
 
   @Override

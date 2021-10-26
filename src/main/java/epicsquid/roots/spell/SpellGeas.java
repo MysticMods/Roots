@@ -92,7 +92,7 @@ public class SpellGeas extends SpellBase {
         if (!player.world.isRemote) {
           if (info.has(GUARDIANS) && SlaveUtil.canBecomeSlave(e)) {
             LivingEntity slave = SlaveUtil.enslave(e);
-            e.world.spawnEntity(slave);
+            e.world.addEntity(slave);
             e.setDropItemsWhenDead(false);
             e.setDead();
             slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);

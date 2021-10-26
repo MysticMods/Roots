@@ -1,6 +1,6 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
@@ -17,7 +17,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityIncenseBurner extends TileBase implements ITickable {
+public class TileEntityIncenseBurner extends TileEntity implements ITickableTileEntity {
 
   public static final int BURN_TICKS = 1200;
 
@@ -26,7 +26,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
     protected void onContentsChanged(int slot) {
       TileEntityIncenseBurner.this.markDirty();
       if (!world.isRemote) {
-        TileEntityIncenseBurner.this.updatePacketViaState();
+        //TileEntityIncenseBurner.this.updatePacketViaState();
       }
     }
   };
@@ -40,18 +40,18 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT compound) {
-    compound.setInteger("burnTick", this.burnTick);
+  public CompoundNBT write(CompoundNBT compound) {
+    compound.putInt("burnTick", this.burnTick);
     compound.setBoolean("lit", this.lit);
-    compound.setTag("handler", inventory.serializeNBT());
-    return super.writeToNBT(compound);
+    compound.put("handler", inventory.serializeNBT());
+    return super.write(compound);
   }
 
   @Override
-  public void readFromNBT(CompoundNBT compound) {
-    this.burnTick = compound.getInteger("burnTick");
+  public void read(BlockState state, CompoundNBT compound) {
+    this.burnTick = compound.getInt("burnTick");
     this.lit = compound.getBoolean("lit");
-    inventory.deserializeNBT(compound.getCompoundTag("handler"));
+    inventory.deserializeNBT(compound.getCompound("handler"));
     super.readFromNBT(compound);
   }
 
@@ -113,7 +113,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
   }
 
   @Override
-  public void update() {
+  public void tick() {
     if (this.lit) {
       double d3 = (double) pos.getX() + 0.5 + Util.rand.nextDouble() * 0.10000000149011612D;
       double d8 = (double) pos.getY() + 0.6;

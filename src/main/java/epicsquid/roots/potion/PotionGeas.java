@@ -37,7 +37,7 @@ public class PotionGeas extends Effect {
     }
     if (SlaveUtil.isSlave(target)) {
       LivingEntity slave = SlaveUtil.revert(target);
-      target.world.spawnEntity(slave);
+      target.world.addEntity(slave);
       target.setDropItemsWhenDead(false);
       target.setDead();
       slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);

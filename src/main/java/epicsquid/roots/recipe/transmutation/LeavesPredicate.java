@@ -31,10 +31,10 @@ public class LeavesPredicate implements BlockStatePredicate {
         if (stack.getItem() instanceof BlockItem) {
           Block block = ((BlockItem) stack.getItem()).getBlock();
           for (BlockState state : block.getBlockState().getValidStates()) {
-            if (state.getPropertyKeys().contains(LeavesBlock.CHECK_DECAY) && state.getValue(LeavesBlock.CHECK_DECAY)) {
+            if (state.getPropertyKeys().contains(LeavesBlock.CHECK_DECAY) && state.get(LeavesBlock.CHECK_DECAY)) {
               continue;
             }
-            if (state.getPropertyKeys().contains(LeavesBlock.DECAYABLE) && state.getValue(LeavesBlock.CHECK_DECAY)) {
+            if (state.getPropertyKeys().contains(LeavesBlock.DECAYABLE) && state.get(LeavesBlock.CHECK_DECAY)) {
               continue;
             }
             leafBlocks.add(state);

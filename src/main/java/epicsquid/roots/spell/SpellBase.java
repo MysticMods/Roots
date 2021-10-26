@@ -539,12 +539,12 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   @Nullable
-  protected EntitySpellBase spawnEntity(World world, BlockPos pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
-    return spawnEntity(world, new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, player, amplifier, speedy);
+  protected EntitySpellBase addEntity(World world, BlockPos pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
+    return addEntity(world, new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, player, amplifier, speedy);
   }
 
   @Nullable
-  protected EntitySpellBase spawnEntity(World world, Vec3d pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
+  protected EntitySpellBase addEntity(World world, Vec3d pos, Class<? extends EntitySpellBase> entity, @Nullable PlayerEntity player, double amplifier, double speedy) {
     List<EntitySpellBase> pastRituals = world.getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.x, pos.y, pos.z - 100, pos.x + 2, pos.y + 100, pos.z + 1), o -> o != null && o.getClass().equals(entity));
     if (pastRituals.isEmpty() && !world.isRemote) {
       EntitySpellBase spell = null;
@@ -561,7 +561,7 @@ public abstract class SpellBase extends RegistryItem {
       if (player != null) {
         spell.setPlayer(player.getUniqueID());
       }
-      world.spawnEntity(spell);
+      world.addEntity(spell);
       return spell;
     }
     return null;

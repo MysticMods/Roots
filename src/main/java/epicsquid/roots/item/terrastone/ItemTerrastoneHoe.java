@@ -65,7 +65,7 @@ public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
         }
 
         if (block == net.minecraft.block.Blocks.DIRT) {
-          switch (iblockstate.getValue(BlockDirt.VARIANT)) {
+          switch (iblockstate.get(BlockDirt.VARIANT)) {
             case DIRT:
               this.setBlock(itemstack, player, worldIn, pos, farmland);
               return ActionResultType.SUCCESS;
@@ -117,7 +117,7 @@ public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
           double d2 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
           ItemEntity entityitem = new ItemEntity(player.world, (double) pos.getX() + d, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
           entityitem.setDefaultPickupDelay();
-          player.world.spawnEntity(entityitem);
+          player.world.addEntity(entityitem);
         }
 
         itemstack.damageItem(1, player);

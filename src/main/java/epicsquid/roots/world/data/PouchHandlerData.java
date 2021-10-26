@@ -79,20 +79,20 @@ public class PouchHandlerData extends WorldSavedData {
   }
 
   @Override
-  public void readFromNBT(CompoundNBT nbt) {
-    this.type = PouchType.fromOrdinal(nbt.getInteger("pouch"));
+  public void read(BlockState state, CompoundNBT nbt) {
+    this.type = PouchType.fromOrdinal(nbt.getInt("pouch"));
     if (defer) {
       createHandler();
     }
-    inventoryHandler.deserializeNBT(nbt.getCompoundTag("inventory"));
-    herbHandler.deserializeNBT(nbt.getCompoundTag("herbs"));
+    inventoryHandler.deserializeNBT(nbt.getCompound("inventory"));
+    herbHandler.deserializeNBT(nbt.getCompound("herbs"));
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT compound) {
-    compound.setInteger("pouch", type.ordinal());
-    compound.setTag("inventory", inventoryHandler.serializeNBT());
-    compound.setTag("herbs", herbHandler.serializeNBT());
+  public CompoundNBT write(CompoundNBT compound) {
+    compound.putInt("pouch", type.ordinal());
+    compound.put("inventory", inventoryHandler.serializeNBT());
+    compound.put("herbs", herbHandler.serializeNBT());
     return compound;
   }
 

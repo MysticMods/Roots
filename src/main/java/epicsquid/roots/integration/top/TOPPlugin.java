@@ -26,7 +26,7 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
   public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
     Block block = blockState.getBlock();
     if (block == ModBlocks.grove_stone) {
-      if (blockState.getValue(BlockGroveStone.VALID)) {
+      if (blockstate.get(BlockGroveStone.VALID)) {
         probeInfo.text(TextFormatting.GREEN + "" + TextFormatting.BOLD + "{*roots.hud.grove_stone.valid*}");
       }
     } else if (block instanceof BlockPyre) {

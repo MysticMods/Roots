@@ -24,6 +24,6 @@ public class PropertyPredicate extends StatePredicate {
   public boolean test(BlockState state) {
     Collection<IProperty<?>> incoming = state.getPropertyKeys();
     Collection<IProperty<?>> current = this.state.getPropertyKeys();
-    return super.test(state) && props.stream().allMatch(prop -> incoming.contains(prop) && current.contains(prop) && state.getValue(prop).equals(this.state.getValue(prop)));
+    return super.test(state) && props.stream().allMatch(prop -> incoming.contains(prop) && current.contains(prop) && state.get(prop).equals(this.state.get(prop)));
   }
 }

@@ -1,6 +1,6 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -12,7 +12,7 @@ import net.minecraftforge.common.ticket.AABBTicket;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityTrample extends TileBase {
+public class TileEntityTrample extends TileEntity {
   public static AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(-4, -1, -4, 5, 1, 5);
 
   private AABBTicket ticket = null;

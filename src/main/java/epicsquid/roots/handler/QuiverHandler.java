@@ -77,8 +77,8 @@ public class QuiverHandler implements INBTSerializable<CompoundNBT> {
   public static QuiverHandler getHandler(ItemStack stack) {
     QuiverHandler handler = new QuiverHandler(stack);
     if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("quiver")) {
-        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("quiver"));
+      if (stack.getTagCompound().contains("quiver")) {
+        handler.deserializeNBT(stack.getTagCompound().getCompound("quiver"));
       }
     }
 
@@ -96,6 +96,6 @@ public class QuiverHandler implements INBTSerializable<CompoundNBT> {
       quiver.setTagCompound(tag);
     }
 
-    tag.setTag("quiver", serializeNBT());
+    tag.put("quiver", serializeNBT());
   }
 }

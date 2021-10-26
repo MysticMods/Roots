@@ -94,7 +94,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
 
   private static double getNbtQuantity(@Nonnull ItemStack stack, String plantName) {
     if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey(plantName)) {
+      if (stack.getTagCompound().contains(plantName)) {
         return stack.getTagCompound().getDouble(plantName);
       }
     }
@@ -106,7 +106,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
       return 0;
     }
     double temp = quantity;
-    if (stack.hasTagCompound() && stack.getTagCompound().hasKey(herb.getName())) {
+    if (stack.hasTagCompound() && stack.getTagCompound().contains(herb.getName())) {
       temp = temp - stack.getTagCompound().getDouble(herb.getName());
       if (temp >= 0) {
         stack.getTagCompound().removeTag(herb.getName());
@@ -162,8 +162,8 @@ public class ItemPouch extends ItemBase implements IItemPouch {
 
     CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
     DyeColor color = this == ModItems.fey_pouch ? DyeColor.BLUE : DyeColor.BROWN;
-    if (tag.hasKey("color", Constants.NBT.TAG_INT)) {
-      color = DyeColor.byMetadata(tag.getInteger("color"));
+    if (tag.contains("color", Constants.NBT.TAG_INT)) {
+      color = DyeColor.byMetadata(tag.getInt("color"));
     }
     tooltip.add("");
     tooltip.add(I18n.format("roots.tooltip.color", I18n.format(color.getTranslationKey())));

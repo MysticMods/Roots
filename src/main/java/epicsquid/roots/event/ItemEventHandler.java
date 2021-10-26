@@ -80,7 +80,7 @@ public class ItemEventHandler {
               newEntity.motionY = entity.motionY;
               newEntity.motionZ = entity.motionZ;
               newEntity.setPickupDelay(0);
-              entity.world.spawnEntity(newEntity);
+              entity.world.addEntity(newEntity);
             }
           }
         }
@@ -108,7 +108,7 @@ public class ItemEventHandler {
         soil.motionY = entity.motionY;
         soil.motionZ = entity.motionZ;
         entity.setDead();
-        event.getWorld().spawnEntity(soil);
+        event.getWorld().addEntity(soil);
       }
     }
   }

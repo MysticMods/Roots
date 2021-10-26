@@ -80,17 +80,17 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   @Override
   public CompoundNBT serializeNBT() {
     CompoundNBT result = super.serializeNBT();
-    result.setTag("m", modifiers.serializeNBT());
-    result.setInteger("c", cooldown);
-    result.setLong("l", cooldownStop);
+    result.put("m", modifiers.serializeNBT());
+    result.putInt("c", cooldown);
+    result.putLong("l", cooldownStop);
     return result;
   }
 
   @Override
   public void deserializeNBT(CompoundNBT nbt) {
     super.deserializeNBT(nbt);
-    this.modifiers = StaffModifierInstanceList.fromNBT(nbt.getCompoundTag("m"));
-    this.cooldown = nbt.getInteger("c");
+    this.modifiers = StaffModifierInstanceList.fromNBT(nbt.getCompound("m"));
+    this.cooldown = nbt.getInt("c");
     this.cooldownStop = nbt.getLong("l");
   }
 

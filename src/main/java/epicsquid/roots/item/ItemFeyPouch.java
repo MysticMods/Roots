@@ -31,8 +31,8 @@ public class ItemFeyPouch extends ItemPouch {
 
     ModelLoader.setCustomMeshDefinition(ModItems.fey_pouch, (stack) -> {
           CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
-          if (tag.hasKey("color")) {
-            return colorMap.get(tag.getInteger("color"));
+          if (tag.contains("color")) {
+            return colorMap.get(tag.getInt("color"));
           }
           return res;
         }

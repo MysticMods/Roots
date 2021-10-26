@@ -67,7 +67,7 @@ public class RitualSummonCreatures extends RitualBase {
 
   @Override
   public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable PlayerEntity player) {
-    EntityRitualSummonCreatures entity = (EntityRitualSummonCreatures) this.spawnEntity(world, pos, EntityRitualSummonCreatures.class, player);
+    EntityRitualSummonCreatures entity = (EntityRitualSummonCreatures) this.addEntity(world, pos, EntityRitualSummonCreatures.class, player);
     if (!world.isRemote) {
       List<TileEntityCatalystPlate> plates = RitualUtil.getNearbyCatalystPlates(world, pos);
       List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);

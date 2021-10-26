@@ -120,7 +120,7 @@ public class Growth {
         AGE_MAP.put(prop, max);
       }
 
-      return state.getValue(prop) < max;
+      return state.get(prop) < max;
     }
 
     return false;

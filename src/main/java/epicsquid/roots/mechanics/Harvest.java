@@ -171,7 +171,7 @@ public class Harvest {
     IProperty<?> prop = resolveStates(state);
     if (prop == null) return false;
 
-    return state.getValue((IProperty<Integer>) prop) == getMaxState(prop);
+    return state.get((IProperty<Integer>) prop) == getMaxState(prop);
   }
 
   public static class HarvestEntry {

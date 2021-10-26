@@ -132,7 +132,7 @@ public class StateUtil {
             return false;
           }
 
-          if (!this.state.getValue(mine).equals(state.getValue(mine))) {
+          if (!this.state.get(mine).equals(state.get(mine))) {
             return false;
           }
         }

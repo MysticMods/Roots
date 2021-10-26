@@ -48,7 +48,7 @@ public class ItemSpellModifier extends ItemBase {
   @Override
   public String getItemStackDisplayName(ItemStack stack) {
     CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
-    if (tag.hasKey("modifier")) {
+    if (tag.contains("modifier")) {
       ResourceLocation mod = new ResourceLocation(tag.getString("modifier"));
       Modifier modifier = ModifierRegistry.get(mod);
       if (modifier == null) {
@@ -64,7 +64,7 @@ public class ItemSpellModifier extends ItemBase {
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
-    if (tag.hasKey("modifier")) {
+    if (tag.contains("modifier")) {
       ResourceLocation mod = new ResourceLocation(tag.getString("modifier"));
       Modifier modifier = ModifierRegistry.get(mod);
       if (modifier == null) {

@@ -89,9 +89,9 @@ public abstract class EntityLifetimeBase extends Entity {
     if (compound.hasUniqueId("player")) {
       this.setPlayer(compound.getUniqueId("player"));
     }
-    this.setEntityId(compound.getInteger("entity_id"));
+    this.setEntityId(compound.getInt("entity_id"));
     this.setPosition(x, y, z);
-    getDataManager().set(lifetime, compound.getInteger("lifetime"));
+    getDataManager().set(lifetime, compound.getInt("lifetime"));
     getDataManager().setDirty(lifetime);
   }
 
@@ -100,8 +100,8 @@ public abstract class EntityLifetimeBase extends Entity {
     compound.setDouble("x", x);
     compound.setDouble("y", y);
     compound.setDouble("z", z);
-    compound.setInteger("entity_id", getEntityId());
-    compound.setInteger("lifetime", getDataManager().get(lifetime));
+    compound.putInt("entity_id", getEntityId());
+    compound.putInt("lifetime", getDataManager().get(lifetime));
     if (player != null) {
       compound.setUniqueId("player", player);
     }

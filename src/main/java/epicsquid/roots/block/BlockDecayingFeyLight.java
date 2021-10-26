@@ -36,7 +36,7 @@ public class BlockDecayingFeyLight extends BlockNormalFeyLight {
 
   @Override
   public int getMetaFromState(BlockState state) {
-    return state.getValue(DECAY);
+    return state.get(DECAY);
   }
 
   @Override
@@ -48,12 +48,12 @@ public class BlockDecayingFeyLight extends BlockNormalFeyLight {
     }
 
     if (!worldIn.isRemote) {
-      if (state.getValue(DECAY) == 15) {
+      if (state.get(DECAY) == 15) {
         // TODO: FIX SOUND EFFECTS
         worldIn.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.PLAYERS, 0.25f, 1);
         worldIn.setBlockToAir(pos);
       } else {
-        worldIn.setBlockState(pos, state.withProperty(DECAY, Math.min(state.getValue(DECAY) + 1, 15)));
+        worldIn.setBlockState(pos, state.withProperty(DECAY, Math.min(state.get(DECAY) + 1, 15)));
         worldIn.scheduleUpdate(pos, this, SpellFeyLight.instance.nextTick());
       }
     }

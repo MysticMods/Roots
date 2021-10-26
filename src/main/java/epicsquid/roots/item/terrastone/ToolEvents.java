@@ -57,7 +57,7 @@ public class ToolEvents {
     ItemStack output;
 
     if (state.getBlock() == Blocks.DIRT) {
-      if (state.getValue(BlockDirt.VARIANT) != BlockDirt.DirtType.PODZOL) {
+      if (state.get(BlockDirt.VARIANT) != BlockDirt.DirtType.PODZOL) {
         return;
       } else {
         output = new ItemStack(Blocks.DIRT, 1, Blocks.DIRT.getMetaFromState(state));

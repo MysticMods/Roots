@@ -1,6 +1,6 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("NullableProblems")
-public class TileEntityMortar extends TileBase {
+public class TileEntityMortar extends TileEntity {
 
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
@@ -59,21 +59,21 @@ public class TileEntityMortar extends TileBase {
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
-    tag.setTag("handler", inventory.serializeNBT());
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
+    tag.put("handler", inventory.serializeNBT());
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
+  public void read(BlockState state, CompoundNBT tag) {
     super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("handler"));
+    inventory.deserializeNBT(tag.getCompound("handler"));
   }
 
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override

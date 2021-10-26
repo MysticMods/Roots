@@ -253,37 +253,37 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     CompoundNBT compound = new CompoundNBT();
     CompoundNBT spells = new CompoundNBT();
     for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
-      spells.setTag(String.valueOf(entry.getIntKey()), entry.getValue() == null ? new CompoundNBT() : entry.getValue().serializeNBT());
+      spells.put(String.valueOf(entry.getIntKey()), entry.getValue() == null ? new CompoundNBT() : entry.getValue().serializeNBT());
     }
-    compound.setTag("spells", spells);
-    compound.setInteger("selectedSlot", this.selectedSlot);
+    compound.put("spells", spells);
+    compound.putInt("selectedSlot", this.selectedSlot);
     return compound;
   }
 
   @Override
   public void deserializeNBT(CompoundNBT tag) {
-    if (tag.hasKey("spells", Constants.NBT.TAG_COMPOUND)) {
-      CompoundNBT spells = tag.getCompoundTag("spells");
+    if (tag.contains("spells", Constants.NBT.TAG_COMPOUND)) {
+      CompoundNBT spells = tag.getCompound("spells");
       Set<String> keys = spells.getKeySet();
       if (keys.size() > MAX_SPELL_SLOT) {
         Roots.logger.error("Invalid spell when deserializing storage: spells list is " + keys.size() + " which is greater than MAX_SPELL_SLOT " + MAX_SPELL_SLOT + ": " + tag.toString());
       }
       for (String key : keys) {
         int value = Integer.parseInt(key);
-        StaffSpellInfo info = StaffSpellInfo.fromNBT(spells.getCompoundTag(key));
+        StaffSpellInfo info = StaffSpellInfo.fromNBT(spells.getCompound(key));
         //Probably just spell swapping
-        //Roots.logger.error("Tried to deserialize spell " + spells.getCompoundTag(key) + " but got null!");
+        //Roots.logger.error("Tried to deserialize spell " + spells.getCompound(key) + " but got null!");
         this.spells.put(value, info);
       }
-      this.selectedSlot = tag.getInteger("selectedSlot");
-    } else if (tag.hasKey("spell_0")) {
+      this.selectedSlot = tag.getInt("selectedSlot");
+    } else if (tag.contains("spell_0")) {
       for (int i = 0; i < 5; i++) {
-        if (tag.hasKey("spell_" + i)) {
+        if (tag.contains("spell_" + i)) {
           StaffSpellInfo info = resolveSpell(tag.getString("spell_" + i));
           spells.put(i+1, info);
         }
       }
-      this.selectedSlot = tag.getInteger("selectedSlot");
+      this.selectedSlot = tag.getInt("selectedSlot");
       this.saveToStack();
     }
   }

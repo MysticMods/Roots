@@ -45,7 +45,7 @@ public class ItemSpellDust extends ItemBase {
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
-    if (tag.hasKey("staff") && tag.getBoolean("staff")) {
+    if (tag.contains("staff") && tag.getBoolean("staff")) {
       StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);
       if (storage == null) {
         return;
@@ -57,7 +57,7 @@ public class ItemSpellDust extends ItemBase {
       }
 
       spell.addToolTip(tooltip, info.getModifiers());
-    } else if (tag.hasKey("library") && tag.getBoolean("library")) {
+    } else if (tag.contains("library") && tag.getBoolean("library")) {
       LibrarySpellStorage storage = LibrarySpellStorage.fromStack(stack);
       if (storage == null) {
         return;

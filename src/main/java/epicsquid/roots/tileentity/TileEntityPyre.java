@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.RangeParticle;
 import epicsquid.mysticallib.particle.RenderUtil;
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
@@ -61,7 +61,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IRanged {
+public class TileEntityPyre extends TileEntity implements ITickableTileEntity, RenderUtil.IRanged {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
 
   private float ticker = 0;
@@ -120,25 +120,25 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   @Nonnull
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
-    tag.setTag("handler", inventory.serializeNBT());
-    tag.setInteger("burnTime", burnTime);
-    tag.setTag("craftingResult", this.craftingResult.serializeNBT());
-    tag.setInteger("craftingXP", craftingXP);
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
+    tag.put("handler", inventory.serializeNBT());
+    tag.putInteger("burnTime", burnTime);
+    tag.put("craftingResult", this.craftingResult.serializeNBT());
+    tag.putInteger("craftingXP", craftingXP);
     tag.setString("lastRitualUsed", (this.lastRitualUsed != null) ? this.lastRitualUsed.getName() : "");
     tag.setString("lastRecipeUsed", (this.lastRecipeUsed != null) ? this.lastRecipeUsed.getName() : "");
-    tag.setInteger("entity", (ritualEntity == null) ? -1 : ritualEntity.getEntityId());
+    tag.putInteger("entity", (ritualEntity == null) ? -1 : ritualEntity.getEntityId());
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
+  public void read(BlockState state, CompoundNBT tag) {
     super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("handler"));
+    inventory.deserializeNBT(tag.getCompound("handler"));
     burnTime = tag.getInteger("burnTime");
-    if (tag.hasKey("craftingResult")) {
-      craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
+    if (tag.contains("craftingResult")) {
+      craftingResult = new ItemStack(tag.getCompound("craftingResult"));
     } else {
       craftingResult = ItemStack.EMPTY;
     }
@@ -153,7 +153,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   @Nonnull
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override

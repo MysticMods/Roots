@@ -1,7 +1,7 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
@@ -26,7 +26,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ITickable;
+import net.minecraft.util.ITickableTileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
@@ -38,13 +38,13 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class TileEntityImbuer extends TileBase implements ITickable {
+public class TileEntityImbuer extends TileEntity implements ITickableTileEntity {
   public ItemStackHandler inventory = new ItemStackHandler(2) {
     @Override
     protected void onContentsChanged(int slot) {
       TileEntityImbuer.this.markDirty();
       if (!world.isRemote) {
-        TileEntityImbuer.this.updatePacketViaState();
+        //TileEntityImbuer.this.updatePacketViaState();
       }
     }
   };
@@ -57,10 +57,10 @@ public class TileEntityImbuer extends TileBase implements ITickable {
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
-    tag.setTag("handler", inventory.serializeNBT());
-    tag.setInteger("progress", progress);
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
+    tag.put("handler", inventory.serializeNBT());
+    tag.putInt("progress", progress);
     if (inserter != null) {
       tag.setUniqueId("inserter", inserter);
     }
@@ -68,10 +68,10 @@ public class TileEntityImbuer extends TileBase implements ITickable {
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
+  public void read(BlockState state, CompoundNBT tag) {
     super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("handler"));
-    progress = tag.getInteger("progress");
+    inventory.deserializeNBT(tag.getCompound("handler"));
+    progress = tag.getInt("progress");
     if (tag.hasUniqueId("inserter")) {
       inserter = tag.getUniqueId("inserter");
     } else {
@@ -81,7 +81,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
 
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override
@@ -235,7 +235,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
   }
 
   @Override
-  public void update() {
+  public void tick() {
     angle++;
     if (!inventory.getStackInSlot(0).isEmpty() && !inventory.getStackInSlot(1).isEmpty()) {
       progress++;
@@ -295,7 +295,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             ItemStack toRepair = inventory.extractItem(1, 1, false);
             if (repairItem.getItem() == ModItems.runic_dust) {
               CompoundNBT tag = ItemUtil.getOrCreateTag(toRepair);
-              if (tag.hasKey("ench")) {
+              if (tag.contains("ench")) {
                 tag.removeTag("ench");
                 toRepair.setTagCompound(tag);
                 if (GeneralConfig.AllowImbuerDisenchantReduceCost) {
@@ -311,7 +311,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
                 toRepair.setItemDamage(toRepair.getItemDamage() - repairAmount);
               }
             }
-            world.spawnEntity(new ItemEntity(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, toRepair));
+            world.addEntity(new ItemEntity(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, toRepair));
             world.playSound(null, getPos(), ModSounds.Events.IMBUER_FINISHED, SoundCategory.BLOCKS, 1f, 1f);
             markDirty();
             updatePacketViaState();

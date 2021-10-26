@@ -74,7 +74,7 @@ public class Spell {
       },
       description = "If the property is not of the integer type, an error will occur."
   )
-  public Spell setInteger(String propertyName, int value) {
+  public Spell putInt(String propertyName, int value) {
     return set(propertyName, value);
   }
 

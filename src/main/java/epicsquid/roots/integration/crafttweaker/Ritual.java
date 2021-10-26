@@ -74,7 +74,7 @@ public class Ritual {
       },
       description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
   )
-  public Ritual setInteger(String propertyName, int value) {
+  public Ritual putInt(String propertyName, int value) {
     return set(propertyName, value);
   }
 
@@ -84,7 +84,7 @@ public class Ritual {
       args = {
           @ZenDocArg(arg = "value", info = "the new duration for the ritual")
       },
-      description = "Changes the duration of the ritual and returns the Ritual object for further modification. Is shorthand for `setInteger(\"duration\", value)`."
+      description = "Changes the duration of the ritual and returns the Ritual object for further modification. Is shorthand for `putInt(\"duration\", value)`."
   )
   public Ritual setDuration(int value) {
     return set("duration", value);

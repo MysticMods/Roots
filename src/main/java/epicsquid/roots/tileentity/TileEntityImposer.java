@@ -1,12 +1,12 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.container.ContainerImposer;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.modifiers.IModifierCore;
@@ -24,24 +24,27 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ITickable;
+import net.minecraft.util.ITickableTileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+import noobanidus.libs.noobutil.util.ItemUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityImposer extends TileBase implements ITickable {
+public class TileEntityImposer extends TileEntity implements ITickableTileEntity {
   public ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
       TileEntityImposer.this.slot = 0;
       TileEntityImposer.this.markDirty();
       if (!world.isRemote) {
-        TileEntityImposer.this.updatePacketViaState();
+        //TileEntityImposer.this.updatePacketViaState();
       }
     }
   };
@@ -74,23 +77,23 @@ public class TileEntityImposer extends TileBase implements ITickable {
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
-    tag.setTag("handler", inventory.serializeNBT());
-    tag.setInteger("slot", slot);
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
+    tag.put("handler", inventory.serializeNBT());
+    tag.putInt("slot", slot);
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
-    super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("handler"));
-    slot = tag.getInteger("slot");
+  public void read(BlockState state, CompoundNBT tag) {
+    super.read(state, tag);
+    inventory.deserializeNBT(tag.getCompound("handler"));
+    slot = tag.getInt("slot");
   }
 
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override
@@ -100,10 +103,9 @@ public class TileEntityImposer extends TileBase implements ITickable {
 
   @Override
   public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-    readFromNBT(pkt.getNbtCompound());
+    read(ModBlocks.imposer.getDefaultState(), pkt.getNbtCompound());
   }
 
-  @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty() && heldItem.getItem() == ModItems.staff) {
@@ -141,10 +143,10 @@ public class TileEntityImposer extends TileBase implements ITickable {
     return false;
   }
 
-  @Override
   public void breakBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
-      Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
+      // TODO
+      //Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
   }
 
@@ -211,7 +213,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
   }
 
   @Override
-  public void update() {
+  public void tick() {
     ticks++;
   }
 }

@@ -132,19 +132,19 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
     ListNBT list = new ListNBT();
     for (T m : this) {
       if (m.getModifier() != null) {
-        list.appendTag(m.serializeNBT());
+        list.add(m.serializeNBT());
       }
     }
     result.setString("s", spell.getRegistryName().toString());
-    result.setTag("l", list);
+    result.put("l", list);
     return result;
   }
 
   public void deserializeNBT(CompoundNBT tag, Function<CompoundNBT, T> creator) {
-    ListNBT nbt = tag.getTagList("l", Constants.NBT.TAG_COMPOUND);
+    ListNBT nbt = tag.getList("l", Constants.NBT.TAG_COMPOUND);
 
-    for (int i = 0; i < nbt.tagCount(); i++) {
-      CompoundNBT thisTag = nbt.getCompoundTagAt(i);
+    for (int i = 0; i < nbt.size(); i++) {
+      CompoundNBT thisTag = nbt.getCompound(i);
       this.add(creator.apply(thisTag));
     }
 

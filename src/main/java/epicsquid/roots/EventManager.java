@@ -227,21 +227,21 @@ public class EventManager {
       entity.removePotionEffect(ModPotions.time_stop);
       event.setCanceled(true);
     }
-    if (entity instanceof PlayerEntity && event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
-      event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);
-      if (event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) <= 0) {
+    if (entity instanceof PlayerEntity && event.getEntity().getEntityData().contains(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
+      event.getEntity().getEntityData().putInt(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInt(Constants.LIGHT_DRIFTER_TAG) - 1);
+      if (event.getEntity().getEntityData().getInt(Constants.LIGHT_DRIFTER_TAG) <= 0) {
         PlayerEntity player = ((PlayerEntity) event.getEntity());
         player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 40, 10, false, false));
         player.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
         player.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
         player.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);
-        PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)), player);
+        PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, event.getEntity().getEntityData().getInt(Constants.LIGHT_DRIFTER_MODE)), player);
         player.capabilities.allowFlying = false;
         player.capabilities.disableDamage = false;
         player.noClip = false;
         player.capabilities.isFlying = false;
         player.setPositionAndUpdate(player.posX, player.posY, player.posZ);
-        player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
+        player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInt(Constants.LIGHT_DRIFTER_MODE)));
         player.extinguish();
         //PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_TAG);

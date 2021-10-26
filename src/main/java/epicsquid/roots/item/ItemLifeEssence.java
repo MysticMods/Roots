@@ -56,7 +56,7 @@ public class ItemLifeEssence extends ItemBase {
       stack.setTagCompound(tag);
     }
 
-    if (tag.hasKey("id")) {
+    if (tag.contains("id")) {
       return new ResourceLocation(tag.getString("id"));
     }
 

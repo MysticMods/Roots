@@ -1,6 +1,6 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.config.GeneralConfig;
 import net.minecraft.block.BlockState;
@@ -21,7 +21,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityUnendingBowl extends TileBase {
+public class TileEntityUnendingBowl extends TileEntity {
   public static UnendingBowlFluidHandler HANDLER = new UnendingBowlFluidHandler();
 
   @Override
@@ -74,7 +74,7 @@ public class TileEntityUnendingBowl extends TileBase {
     }
 
     @Override
-    public CompoundNBT writeToNBT(CompoundNBT nbt) {
+    public CompoundNBT write(CompoundNBT nbt) {
       return nbt;
     }
 

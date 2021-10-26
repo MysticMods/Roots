@@ -110,7 +110,7 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
 
       entity.setPosition(suitable.getX() + 0.5, suitable.getY() + 0.5, suitable.getZ() + 0.5);
 
-      world.spawnEntity(entity);
+      world.addEntity(entity);
       if (entity instanceof LivingEntity) {
         ((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.GLOWING, ritual.glow_duration));
       }
@@ -120,10 +120,10 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
 
   @Override
   protected void readEntityFromNBT(CompoundNBT compound) {
-    if (compound.hasKey("summonRecipe")) {
+    if (compound.contains("summonRecipe")) {
       this.summonRecipe = ModRecipes.getSummonCreatureEntry(new ResourceLocation(compound.getString("summonRecipe")));
     }
-    this.essence = new ItemStack(compound.getCompoundTag("essence"));
+    this.essence = new ItemStack(compound.getCompound("essence"));
     super.readEntityFromNBT(compound);
   }
 
@@ -132,7 +132,7 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
     if (this.summonRecipe != null) {
       compound.setString("summonRecipe", this.summonRecipe.getRegistryName().toString());
     }
-    compound.setTag("essence", this.essence.serializeNBT());
+    compound.put("essence", this.essence.serializeNBT());
     super.writeEntityToNBT(compound);
   }
 }

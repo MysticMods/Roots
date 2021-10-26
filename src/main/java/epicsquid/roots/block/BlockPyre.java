@@ -64,7 +64,7 @@ public class BlockPyre extends BlockTEBase {
 
   @Override
   public int getLightValue(BlockState state, IBlockAccess world, BlockPos pos) {
-    if (state.getValue(BURNING))
+    if (state.get(BURNING))
       return 15;
     else
       return 0;
@@ -111,7 +111,7 @@ public class BlockPyre extends BlockTEBase {
 
   @Override
   public int getMetaFromState(BlockState state) {
-    return state.getValue(BURNING) ? 1 : 0;
+    return state.get(BURNING) ? 1 : 0;
   }
 
   @Override

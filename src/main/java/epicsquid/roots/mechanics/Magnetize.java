@@ -62,7 +62,7 @@ public class Magnetize {
 
     // Supporting Demagnetize
     // https://www.curseforge.com/minecraft/mc-mods/demagnetize
-    if (entity instanceof ItemEntity && entity.getEntityData().hasKey("PreventRemoteMovement")) {
+    if (entity instanceof ItemEntity && entity.getEntityData().contains("PreventRemoteMovement")) {
       return true;
     }
 

@@ -2,11 +2,11 @@ package epicsquid.roots.advancements;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import epicsquid.mysticallib.advancement.IGenericPredicate;
 import epicsquid.roots.modifiers.IModifierCore;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+import noobanidus.libs.noobutil.advancement.IGenericPredicate;
 
 import javax.annotation.Nullable;
 

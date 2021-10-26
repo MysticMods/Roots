@@ -42,7 +42,7 @@ public class PouchHandler implements IPouchHandler {
     markDirty = data::markDirty;
     filler = data::refill;
 
-    if (tag.hasKey("handler", Constants.NBT.TAG_COMPOUND)) {
+    if (tag.contains("handler", Constants.NBT.TAG_COMPOUND)) {
       OldPouchHandler oldPouch = OldPouchHandler.getHandler(pouch);
       List<ItemStack> oldInventory = new ArrayList<>();
       List<ItemStack> oldHerbs = new ArrayList<>();

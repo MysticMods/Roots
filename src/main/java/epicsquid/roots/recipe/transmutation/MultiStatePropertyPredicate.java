@@ -25,7 +25,7 @@ public class MultiStatePropertyPredicate extends MultiStatePredicate {
     Collection<IProperty<?>> incoming = incState.getPropertyKeys();
     for (BlockState state : this.states) {
       Collection<IProperty<?>> current = state.getPropertyKeys();
-      if (super.test(incState) && props.stream().allMatch(prop -> incoming.contains(prop) && current.contains(prop) && state.getValue(prop).equals(incState.getValue(prop)))) {
+      if (super.test(incState) && props.stream().allMatch(prop -> incoming.contains(prop) && current.contains(prop) && state.get(prop).equals(incstate.get(prop)))) {
         return true;
       }
     }

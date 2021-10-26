@@ -43,7 +43,7 @@ public class BlockCatalystPlate extends BlockTEBase {
 
   @Override
   public int getMetaFromState(BlockState state) {
-    return state.getValue(FACING).getIndex();
+    return state.get(FACING).getIndex();
   }
 
   @Override

@@ -163,7 +163,7 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
         boolean twoByTwo = false;
         BlockPlanks.EnumType type = null;
         if (state.getPropertyKeys().contains(SaplingBlock.TYPE)) {
-          type = state.getValue(SaplingBlock.TYPE);
+          type = state.get(SaplingBlock.TYPE);
           if (type == BlockPlanks.EnumType.DARK_OAK || ((type == BlockPlanks.EnumType.JUNGLE || type == BlockPlanks.EnumType.SPRUCE) && rand.nextFloat() <= ritual.double_chance)) {
             twoByTwo = true;
           }

@@ -84,7 +84,7 @@ public class CommandRoots extends CommandBase {
         if (SlaveUtil.canBecomeSlave(target) || SlaveUtil.isSlave(target)) {
           LivingEntity parent = (LivingEntity) target;
           LivingEntity slave = SlaveUtil.canBecomeSlave(target) ? SlaveUtil.enslave(parent) : SlaveUtil.revert(parent);
-          world.spawnEntity(slave);
+          world.addEntity(slave);
           parent.setDropItemsWhenDead(false);
           parent.setDead();
           slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
@@ -134,7 +134,7 @@ public class CommandRoots extends CommandBase {
             continue;
           }
 
-          if (state.getValue(BlockGroveStone.VALID)) {
+          if (state.get(BlockGroveStone.VALID)) {
             continue;
           }
 

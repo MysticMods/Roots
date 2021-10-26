@@ -1,11 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.particle.particles.ParticleLeaf;
-import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.mysticallib.tile.TileBase;
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.advancements.Advancements;
@@ -16,7 +10,6 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
-import epicsquid.roots.particle.ParticleWhirlwindLeaf;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
@@ -27,21 +20,25 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import noobanidus.libs.noobutil.util.ItemUtil;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityFeyCrafter extends TileBase implements ITickable {
+public class TileEntityFeyCrafter extends TileEntity implements ITickableTileEntity {
   public static int COUNTDOWN = 40;
   public static int GROVE_STONE_RADIUS = 10;
 
@@ -53,7 +50,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     protected void onContentsChanged(int slot) {
       TileEntityFeyCrafter.this.markDirty();
       if (!world.isRemote) {
-        TileEntityFeyCrafter.this.updatePacketViaState();
+        TileEntityFeyCrafter//TODO: tile.updatePacketViaState();
       }
     }
   };
@@ -67,26 +64,26 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
 
   @Nonnull
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
-    tag.setTag("handler", inventory.serializeNBT());
-    tag.setLong("groveStone", groveStone == null ? -1 : groveStone.toLong());
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
+    tag.put("handler", inventory.serializeNBT());
+    tag.putLong("groveStone", groveStone == null ? -1 : groveStone.toLong());
     if (!storedItems.isEmpty()) {
       ListNBT tagList = new ListNBT();
       for (ItemStack stack : storedItems) {
-        tagList.appendTag(stack.serializeNBT());
+        tagList.add(stack.serializeNBT());
       }
-      tag.setTag("storedItems", tagList);
+      tag.put("storedItems", tagList);
     }
-    tag.setInteger("countdown", countdown);
+    tag.putInt("countdown", countdown);
 
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
-    super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("handler"));
+  public void read(BlockState state, CompoundNBT tag) {
+    super.read(state, tag);
+    inventory.deserializeNBT(tag.getCompound("handler"));
     long gpos = tag.getLong("groveStone");
     if (gpos == -1) {
       groveStone = null;
@@ -94,14 +91,14 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
       groveStone = BlockPos.fromLong(gpos);
     }
     this.storedItems = new ArrayList<>();
-    if (tag.hasKey("storedItems")) {
-      ListNBT stored = tag.getTagList("storedItems", Constants.NBT.TAG_COMPOUND);
-      for (int i = 0; i < stored.tagCount(); i++) {
-        this.storedItems.add(new ItemStack(stored.getCompoundTagAt(i)));
+    if (tag.contains("storedItems")) {
+      ListNBT stored = tag.getList("storedItems", Constants.NBT.TAG_COMPOUND);
+      for (int i = 0; i < stored.size(); i++) {
+        this.storedItems.add(new ItemStack(stored.getCompound(i)));
       }
     }
-    if (tag.hasKey("countdown")) {
-      this.countdown = tag.getInteger("countdown");
+    if (tag.contains("countdown")) {
+      this.countdown = tag.getInt("countdown");
     } else {
       this.countdown = -1;
     }
@@ -110,7 +107,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
   @Nonnull
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override
@@ -123,29 +120,35 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     readFromNBT(pkt.getNbtCompound());
   }
 
-  @Override
+  // TODO:
   public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
-      Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
+      // TODO: Port
+      ItemUtil.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
   }
 
   public boolean hasValidGroveStone() {
     if (groveStone != null) {
       BlockState grove = world.getBlockState(groveStone);
-      if (grove.getBlock() == ModBlocks.grove_stone && grove.getValue(BlockGroveStone.VALID)) {
-        return true;
+      if (grove.get(BlockGroveStone.VALID)) {
+        if (grove.getBlock() == ModBlocks.grove_stone) {
+          return true;
+        } else {
+          groveStone = null;
+        }
       } else {
         groveStone = null;
       }
     }
 
+    // TODO: Port
     List<BlockPos> potentials = Util.getBlocksWithinRadius(world, pos, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, ModBlocks.grove_stone);
     if (potentials.isEmpty()) return false;
 
     for (BlockPos pos : potentials) {
       BlockState grove = world.getBlockState(pos);
-      if (grove.getValue(BlockGroveStone.VALID)) {
+      if (grove.get(BlockGroveStone.VALID)) {
         groveStone = pos;
         return true;
       }
@@ -167,7 +170,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
       }
 
       for (ItemStack stack : recipe.transformIngredients(inputItems, this)) {
-        ItemUtil.spawnItem(world, pos.add(Util.rand.nextBoolean() ? -1 : 1, 1, Util.rand.nextBoolean() ? -1 : 1), stack);
+        ItemUtil.Spawn.spawnItem(world, pos.add(world.rand.nextBoolean() ? -1 : 1, 1, world.rand.nextBoolean() ? -1 : 1), stack);
       }
 
       if (current.isEmpty()) {
@@ -216,7 +219,6 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     return result;
   }
 
-  @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
 
     boolean shouldGui = !hasValidGroveStone();
@@ -242,14 +244,14 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     }
 
     if (shouldGui) {
-      player.openGui(Roots.instance, GuiHandler.CRAFTER_ID, world, pos.getX(), pos.getY(), pos.getZ());
+/*      player.openGui(Roots.instance, GuiHandler.CRAFTER_ID, world, pos.getX(), pos.getY(), pos.getZ());*/
       return true;
     }
 
     this.countdown = COUNTDOWN;
 
-    MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
-    PacketHandler.sendToAllTracking(packet, this);
+/*    MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
+    PacketHandler.sendToAllTracking(packet, this);*/
     world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.WHIRLWIND, SoundCategory.NEUTRAL, 1f, 1f);
     Advancements.CRAFTING_TRIGGER.trigger((ServerPlayerEntity) player, lastRecipe);
     lastRecipe = null;
@@ -259,7 +261,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
   private static final double[] stages = new double[]{0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1};
 
   public void doVisual() {
-    if (world.isRemote) {
+/*    if (world.isRemote) {
       BlockPos pos = getPos();
       for (int s = 0; s < 12; s++) {
         double r = stages[s];
@@ -297,12 +299,12 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
           );
         }
       }
-    }
+    }*/
   }
 
   @Override
-  public void update() {
-    if (world.isRemote && world.getTotalWorldTime() % 2 == 0 && getRecipe() != null) {
+  public void tick() {
+/*    if (world.isRemote && world.getTotalWorldTime() % 2 == 0 && getRecipe() != null) {
       ClientProxy.particleRenderer.spawnParticle(
           world,
           ParticleLeaf.class,
@@ -320,7 +322,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
           1,
           1
       );
-    }
+    }*/
     if (!world.isRemote) {
       if (countdown > 0) {
         if (storedItems.isEmpty()) {
@@ -337,8 +339,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
           }
           TileEntity te = world.getTileEntity(getPos().offset(facing));
           if (te != null) {
-            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (cap != null) {
+            te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(cap -> {
               List<ItemStack> newItems = new ArrayList<>();
               for (ItemStack toPut : storedItems) {
                 ItemStack result = ItemHandlerHelper.insertItemStacked(cap, toPut, false);
@@ -347,12 +348,12 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
                 }
               }
               storedItems = newItems;
-            }
+            });
           }
         }
         for (ItemStack stack : storedItems) {
           ItemEntity item = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
-          world.spawnEntity(item);
+          world.addEntity(item);
         }
         this.storedItems.clear();
       }

@@ -1,11 +1,11 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import net.minecraft.util.ITickable;
+import net.minecraft.util.ITickableTileEntity;
 
-public class TileEntityDecorativePyre extends TileBase implements ITickable {
+public class TileEntityDecorativePyre extends TileEntity implements ITickableTileEntity {
 
   private boolean doBigFlame = true;
 
@@ -14,7 +14,7 @@ public class TileEntityDecorativePyre extends TileBase implements ITickable {
   }
 
   @Override
-  public void update() {
+  public void tick() {
     //Spawn the Ignite flame particle
     if (world.isRemote && this.doBigFlame) {
       for (int i = 0; i < 40; i++) {

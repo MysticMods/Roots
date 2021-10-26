@@ -111,7 +111,7 @@ public abstract class RitualBase {
   public boolean canFire(TileEntityPyre Pyre, @Nullable PlayerEntity player, boolean refire) {
     if (!refire) {
       BlockState state = Pyre.getWorld().getBlockState(Pyre.getPos());
-      if (state.getValue(BlockPyre.BURNING)) {
+      if (state.get(BlockPyre.BURNING)) {
         return false;
       }
     }
@@ -131,11 +131,11 @@ public abstract class RitualBase {
 
   @Nullable
   public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable PlayerEntity player) {
-    return this.spawnEntity(world, pos, getEntityClass(), player);
+    return this.addEntity(world, pos, getEntityClass(), player);
   }
 
   @Nullable
-  protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity, @Nullable PlayerEntity player) {
+  protected EntityRitualBase addEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity, @Nullable PlayerEntity player) {
     List<EntityRitualBase> pastRituals = world
         .getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
     pastRituals.removeIf(o -> !o.getClass().equals(entity));
@@ -154,7 +154,7 @@ public abstract class RitualBase {
       if (player != null) {
         ritual.setPlayer(player.getUniqueID());
       }
-      world.spawnEntity(ritual);
+      world.addEntity(ritual);
       return ritual;
     } else if (pastRituals.size() > 0) {
 

@@ -95,7 +95,7 @@ public class SpellTimeStop extends SpellBase {
       timeStop.setPlayer(player.getUniqueID());
       timeStop.setPosition(player.posX, player.posY, player.posZ);
       timeStop.setModifiers(info);
-      player.world.spawnEntity(timeStop);
+      player.world.addEntity(timeStop);
       PacketHandler.sendToAllTracking(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ), player);
       if (info.has(SPEED)) {
         player.addPotionEffect(new EffectInstance(Effects.SPEED, speed_duration, speed_amplifier));

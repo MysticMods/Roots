@@ -85,7 +85,7 @@ public class SpellRoseThorns extends SpellBase {
       trap.motionX = player.getLookVec().x * 0.75f;
       trap.motionY = player.getLookVec().y * 0.75f;
       trap.motionZ = player.getLookVec().z * 0.75f;
-      player.world.spawnEntity(trap);
+      player.world.addEntity(trap);
     }
     return true;
   }

@@ -1,6 +1,6 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
@@ -11,6 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,7 +20,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class TileEntityCatalystPlate extends TileBase {
+public class TileEntityCatalystPlate extends TileEntity {
   public ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
@@ -37,29 +38,29 @@ public class TileEntityCatalystPlate extends TileBase {
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
-    tag.setTag("handler", inventory.serializeNBT());
-    tag.setInteger("progress", progress);
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
+    tag.put("handler", inventory.serializeNBT());
+    tag.putInt("progress", progress);
     if (lastPlayer != null) {
-      tag.setTag("lastPlayer", NBTUtil.createUUIDTag(lastPlayer));
+      tag.put("lastPlayer", NBTUtil.createUUIDTag(lastPlayer));
     }
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
+  public void read(BlockState state, CompoundNBT tag) {
     super.readFromNBT(tag);
-    if (tag.hasKey("lastPlayer")) {
-      lastPlayer = NBTUtil.getUUIDFromTag(tag.getCompoundTag("lastPlayer"));
+    if (tag.contains("lastPlayer")) {
+      lastPlayer = NBTUtil.getUUIDFromTag(tag.getCompound("lastPlayer"));
     }
-    inventory.deserializeNBT(tag.getCompoundTag("handler"));
-    progress = tag.getInteger("progress");
+    inventory.deserializeNBT(tag.getCompound("handler"));
+    progress = tag.getInt("progress");
   }
 
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override

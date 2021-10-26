@@ -31,8 +31,8 @@ public class BarkHandler {
         BlockState blockstate = event.getState();
         Block block = blockstate.getBlock();
         BlockPlanks.EnumType type = (block == Blocks.LOG) ?
-            blockstate.getValue(BlockOldLog.VARIANT) :
-            (block == Blocks.LOG2) ? blockstate.getValue(BlockNewLog.VARIANT) : null;
+            blockstate.get(BlockOldLog.VARIANT) :
+            (block == Blocks.LOG2) ? blockstate.get(BlockNewLog.VARIANT) : null;
         BarkRecipe bark;
         if (type == null) {
           bark = ModRecipes.getModdedBarkRecipe(blockstate);

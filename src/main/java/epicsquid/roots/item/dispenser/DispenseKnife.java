@@ -1,6 +1,6 @@
 package epicsquid.roots.item.dispenser;
 
-import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.tile.TileEntity;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
@@ -37,10 +37,10 @@ public class DispenseKnife implements IDispenseItemBehavior {
     BlockState targetState = world.getBlockState(target);
     if (targetState.getBlock() == ModBlocks.fey_crafter || targetState.getBlock() == ModBlocks.runic_crafter) {
       TileEntity te = world.getTileEntity(target);
-      if (te instanceof TileBase) {
+      if (te instanceof TileEntity) {
         FakePlayer crafter = ModDamage.getFakePlayer(world, ModDamage.FEY_CRAFTER_FAKE_PLAYER);
         crafter.setHeldItem(Hand.MAIN_HAND, stack);
-        ((TileBase)te).activate(world, target, targetState, crafter, Hand.MAIN_HAND, facing.getOpposite(), 0.5f, 0.5f, 0.5f);
+        ((TileEntity)te).activate(world, target, targetState, crafter, Hand.MAIN_HAND, facing.getOpposite(), 0.5f, 0.5f, 0.5f);
       }
     } else {
       if (MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {

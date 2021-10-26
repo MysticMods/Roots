@@ -77,7 +77,7 @@ public class DyeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRec
       result.setTagCompound(tag);
     }
 
-    tag.setInteger("color", dyeColor);
+    tag.putInt("color", dyeColor);
     return result;
   }
 

@@ -43,21 +43,21 @@ public class OldPouchHandler implements INBTSerializable<CompoundNBT> {
   @Override
   public CompoundNBT serializeNBT() {
     CompoundNBT tag = new CompoundNBT();
-    tag.setTag("inventory_slots", inventorySlots.serializeNBT());
-    tag.setTag("herb_slots", herbSlots.serializeNBT());
+    tag.put("inventory_slots", inventorySlots.serializeNBT());
+    tag.put("herb_slots", herbSlots.serializeNBT());
     return tag;
   }
 
   @Override
   public void deserializeNBT(CompoundNBT nbt) {
-    CompoundNBT inv = nbt.getCompoundTag("inventory_slots");
-    CompoundNBT herb = nbt.getCompoundTag("herb_slots");
+    CompoundNBT inv = nbt.getCompound("inventory_slots");
+    CompoundNBT herb = nbt.getCompound("herb_slots");
     if (isApoth) {
-      if (inv.getInteger("Size") != APOTHECARY_POUCH_INVENTORY_SLOTS) {
-        inv.setInteger("Size", APOTHECARY_POUCH_INVENTORY_SLOTS);
+      if (inv.getInt("Size") != APOTHECARY_POUCH_INVENTORY_SLOTS) {
+        inv.putInt("Size", APOTHECARY_POUCH_INVENTORY_SLOTS);
       }
-      if (herb.getInteger("Size") != APOTHECARY_POUCH_HERB_SLOTS) {
-        herb.setInteger("Size", APOTHECARY_POUCH_HERB_SLOTS);
+      if (herb.getInt("Size") != APOTHECARY_POUCH_HERB_SLOTS) {
+        herb.putInt("Size", APOTHECARY_POUCH_HERB_SLOTS);
       }
     }
     inventorySlots.deserializeNBT(inv);
@@ -74,8 +74,8 @@ public class OldPouchHandler implements INBTSerializable<CompoundNBT> {
     }
     if (stack.hasTagCompound()) {
       CompoundNBT tag = stack.getTagCompound();
-      if (tag.hasKey("handler")) {
-        handler.deserializeNBT(tag.getCompoundTag("handler"));
+      if (tag.contains("handler")) {
+        handler.deserializeNBT(tag.getCompound("handler"));
       }
     }
 
@@ -89,7 +89,7 @@ public class OldPouchHandler implements INBTSerializable<CompoundNBT> {
       pouch.setTagCompound(tag);
     }
 
-    tag.setTag("handler", serializeNBT());
+    tag.put("handler", serializeNBT());
   }
 
   public class PouchItemHandler extends ItemStackHandler {

@@ -108,7 +108,7 @@ public class BlockWildFire extends FireBlock implements IBlock, IModeledObject, 
       worldIn.setBlockToAir(pos);
     }
 
-    int i = state.getValue(AGE);
+    int i = state.get(AGE);
 
     if (i < 15) {
       state = state.withProperty(AGE, Math.max(15, i + rand.nextInt(6) / 2));

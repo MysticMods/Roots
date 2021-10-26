@@ -48,7 +48,7 @@ public class ItemSalmon extends ItemBase {
   public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
     if (entityLiving instanceof PlayerEntity) {
       CompoundNBT tag = stack.getTagCompound();
-      if (tag == null || (!tag.hasKey("crafter", Constants.NBT.TAG_STRING) || !tag.hasKey("advancements", Constants.NBT.TAG_LIST))) {
+      if (tag == null || (!tag.contains("crafter", Constants.NBT.TAG_STRING) || !tag.contains("advancements", Constants.NBT.TAG_LIST))) {
         return stack;
       }
 
@@ -58,8 +58,8 @@ public class ItemSalmon extends ItemBase {
 
       List<ResourceLocation> advancements = new ArrayList<>();
 
-      ListNBT advancementsList = tag.getTagList("advancements", Constants.NBT.TAG_STRING);
-      for (int i = 0; i < advancementsList.tagCount(); i++) {
+      ListNBT advancementsList = tag.getList("advancements", Constants.NBT.TAG_STRING);
+      for (int i = 0; i < advancementsList.size(); i++) {
         String adv = advancementsList.getStringTagAt(i);
         if (adv.equals("pacifist")) {
           continue;
@@ -116,8 +116,8 @@ public class ItemSalmon extends ItemBase {
       }
       tag.setString("crafter", "Nature");
       ListNBT advancements = new ListNBT();
-      advancements.appendTag(new StringNBT("everything"));
-      tag.setTag("advancements", advancements);
+      advancements.add(new StringNBT("everything"));
+      tag.put("advancements", advancements);
       items.add(inTab);
     }
   }
@@ -152,14 +152,14 @@ public class ItemSalmon extends ItemBase {
     tooltip.add("");
 
     CompoundNBT tag = stack.getTagCompound();
-    if (tag == null || !tag.hasKey("crafter", Constants.NBT.TAG_STRING) && !tag.hasKey("advancements", Constants.NBT.TAG_LIST)) {
+    if (tag == null || !tag.contains("crafter", Constants.NBT.TAG_STRING) && !tag.contains("advancements", Constants.NBT.TAG_LIST)) {
       tooltip.add(TextFormatting.BOLD + "" + TextFormatting.RED + I18n.format("roots.tooltip.salmon.invalid"));
     } else {
       String crafter = tag.getString("crafter");
-      ListNBT advancements = tag.getTagList("advancements", Constants.NBT.TAG_STRING);
+      ListNBT advancements = tag.getList("advancements", Constants.NBT.TAG_STRING);
       tooltip.add(I18n.format("roots.tooltip.salmon.crafter", crafter));
       StringJoiner joiner = new StringJoiner(", ", "[", "]");
-      for (int i = 0; i < advancements.tagCount(); i++) {
+      for (int i = 0; i < advancements.size(); i++) {
         joiner.add(advancements.getStringTagAt(i));
       }
       tooltip.add(I18n.format("roots.tooltip.salmon.advancements", joiner.toString()));

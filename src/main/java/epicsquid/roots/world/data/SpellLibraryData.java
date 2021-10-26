@@ -111,11 +111,11 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
 
   @SuppressWarnings("NullableProblems")
   @Override
-  public void readFromNBT(CompoundNBT nbt) {
-    ListNBT list = nbt.getTagList("spells", Constants.NBT.TAG_COMPOUND);
+  public void read(BlockState state, CompoundNBT nbt) {
+    ListNBT list = nbt.getList("spells", Constants.NBT.TAG_COMPOUND);
     generateMap();
-    for (int i = 0; i < list.tagCount(); i++) {
-      LibrarySpellInfo instance = LibrarySpellInfo.fromNBT(list.getCompoundTagAt(i));
+    for (int i = 0; i < list.size(); i++) {
+      LibrarySpellInfo instance = LibrarySpellInfo.fromNBT(list.getCompound(i));
       SpellBase spell = instance.getSpell();
       if (spell != null) {
         spells.put(spell, instance);
@@ -126,15 +126,15 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT compound) {
+  public CompoundNBT write(CompoundNBT compound) {
     ListNBT list = new ListNBT();
     for (LibrarySpellInfo instance : spells.values()) {
       if (instance == null) {
         continue;
       }
-      list.appendTag(instance.serializeNBT());
+      list.add(instance.serializeNBT());
     }
-    compound.setTag("spells", list);
+    compound.put("spells", list);
     compound.setUniqueId("uuid", uuid);
     return compound;
   }

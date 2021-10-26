@@ -36,7 +36,7 @@ public class BlockStructureMarker extends BlockBase {
 
   @Override
   public int getMetaFromState(BlockState state) {
-    return state.getValue(marker_value);
+    return state.get(marker_value);
   }
 
   @Override

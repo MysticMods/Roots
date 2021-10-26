@@ -49,7 +49,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   @Override
   public CompoundNBT serializeNBT() {
     CompoundNBT result = super.serializeNBT();
-    result.setTag("m", modifiers.serializeNBT());
+    result.put("m", modifiers.serializeNBT());
     result.setBoolean("o", obtained);
     return result;
   }
@@ -60,7 +60,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
     SpellBase spell = getSpell();
     if (spell != null) {
       this.modifiers = new LibraryModifierInstanceList(spell);
-      this.modifiers.deserializeNBT(nbt.getCompoundTag("m"));
+      this.modifiers.deserializeNBT(nbt.getCompound("m"));
       this.obtained = nbt.getBoolean("o");
     }
   }

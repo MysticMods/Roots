@@ -37,7 +37,7 @@ public class SalmonRecipe extends FeyCraftingRecipe {
       if (id.getNamespace().equals(Roots.MODID) && !id.getPath().equals("pacifist")) {
         AdvancementProgress progress = advancements.getProgress(advancement);
         if (progress.isDone()) {
-          tagList.appendTag(new StringNBT(advancement.getId().getPath()));
+          tagList.add(new StringNBT(advancement.getId().getPath()));
         }
       }
     }
@@ -48,7 +48,7 @@ public class SalmonRecipe extends FeyCraftingRecipe {
       output.setTagCompound(tag);
     }
 
-    tag.setTag("advancements", tagList);
+    tag.put("advancements", tagList);
     tag.setString("crafter", crafter.getDisplayNameString());
   }
 }

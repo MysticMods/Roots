@@ -75,8 +75,8 @@ public class RegistryManager {
     Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
       if (tintIndex == 0) {
         CompoundNBT tag = stack.getTagCompound();
-        if (stack.hasTagCompound() && tag != null && tag.hasKey("color", Constants.NBT.TAG_INT)) {
-          return DyeColor.byMetadata(tag.getInteger("color")).getColorValue();
+        if (stack.hasTagCompound() && tag != null && tag.contains("color", Constants.NBT.TAG_INT)) {
+          return DyeColor.byMetadata(tag.getInt("color")).getColorValue();
         } else {
           return DyeColor.BROWN.getColorValue();
         }

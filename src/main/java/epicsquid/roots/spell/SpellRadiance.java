@@ -183,7 +183,7 @@ public class SpellRadiance extends SpellBase {
                     // TODO: NOT THE RIGHT WAY TO DO THIS
                     if (info.has(MAGNETISM)) {
                       e.getEntityData().setUniqueId("magnetic", player.getUniqueID());
-                      e.getEntityData().setInteger("magnetic_ticks", e.ticksExisted);
+                      e.getEntityData().putInt("magnetic_ticks", e.ticksExisted);
                     }
                     e.attackEntityFrom(ModDamage.radiantDamageFrom(player), damage);
                     if (e.isEntityUndead()) {

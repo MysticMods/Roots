@@ -180,7 +180,7 @@ public class DispenseRunicShears implements IDispenseItemBehavior {
               ent.motionY = 0;
               ent.motionX = 0;
               ent.motionZ = 0;
-              ent.world.spawnEntity(ent);
+              ent.world.addEntity(ent);
             }
           }
 

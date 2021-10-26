@@ -79,7 +79,7 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
   }
 
   public static ModifierSnapshot fromSnapshot(CompoundNBT tag, SpellBase spell) {
-    if (tag.hasKey(spell.getCachedName(), Constants.NBT.TAG_INT_ARRAY)) {
+    if (tag.contains(spell.getCachedName(), Constants.NBT.TAG_INT_ARRAY)) {
       return new ModifierSnapshot(tag.getIntArray(spell.getCachedName()));
     } else {
       return new ModifierSnapshot();

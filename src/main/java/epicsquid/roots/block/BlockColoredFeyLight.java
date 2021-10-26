@@ -84,7 +84,7 @@ public class BlockColoredFeyLight extends BlockFeyLight {
 
   @Override
   public int getMetaFromState(BlockState state) {
-    return state.getValue(COLOR);
+    return state.get(COLOR);
   }
 
   @Override
@@ -94,7 +94,7 @@ public class BlockColoredFeyLight extends BlockFeyLight {
 
   @Override
   public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-    int col = state.getValue(COLOR);
+    int col = state.get(COLOR);
     // SANITY CHECK THIS
     float[][] color = colors[col];
 

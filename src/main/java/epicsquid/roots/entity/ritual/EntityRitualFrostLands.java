@@ -53,8 +53,8 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
             affectedPositions.add(choice.up());
             break;
           }
-        } else if (choiceState.getValue(SnowBlock.LAYERS) < 8 && Util.rand.nextInt(5) == 0) {
-          world.setBlockState(choice, choiceState.withProperty(SnowBlock.LAYERS, Math.min(choiceState.getValue(SnowBlock.LAYERS) + 1, 3)));
+        } else if (choicestate.get(SnowBlock.LAYERS) < 8 && Util.rand.nextInt(5) == 0) {
+          world.setBlockState(choice, choiceState.withProperty(SnowBlock.LAYERS, Math.min(choicestate.get(SnowBlock.LAYERS) + 1, 3)));
           affectedPositions.add(choice);
           break;
         }
@@ -67,7 +67,7 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
         if (!positions.isEmpty()) {
           BlockPos chosen = positions.get(Util.rand.nextInt(positions.size()));
           snowy.setPosition(chosen.getX() + 0.5, chosen.getY() + 1, chosen.getZ());
-          world.spawnEntity(snowy);
+          world.addEntity(snowy);
           affectedPositions.add(snowy.getPosition());
         }
       }
@@ -78,12 +78,12 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
         BlockState state = world.getBlockState(choice);
 
         if (GeneralConfig.getWaterBlocks().contains(state.getBlock())) {
-          if (state.getValue(BlockLiquid.LEVEL) == 0) {
+          if (state.get(BlockLiquid.LEVEL) == 0) {
             world.setBlockState(choice, Blocks.ICE.getDefaultState());
             affectedPositions.add(choice);
           }
         } else if (state.getBlock() == net.minecraft.block.Blocks.LAVA) {
-          if (state.getValue(BlockLiquid.LEVEL) == 0) {
+          if (state.get(BlockLiquid.LEVEL) == 0) {
             if (!world.isRemote) {
               world.setBlockState(choice, net.minecraft.block.Blocks.OBSIDIAN.getDefaultState());
               //world.playSound(null, choice, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
@@ -107,8 +107,8 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
       positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, Blocks.FARMLAND);
       for (BlockPos pos : positions) {
         BlockState state = world.getBlockState(pos);
-        if (state.getValue(FarmlandBlock.MOISTURE) != 7) {
-          world.setBlockState(pos, state.withProperty(FarmlandBlock.MOISTURE, state.getValue(FarmlandBlock.MOISTURE) + 1));
+        if (state.get(FarmlandBlock.MOISTURE) != 7) {
+          world.setBlockState(pos, state.withProperty(FarmlandBlock.MOISTURE, state.get(FarmlandBlock.MOISTURE) + 1));
           affectedPositions.add(pos);
         }
       }

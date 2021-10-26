@@ -168,15 +168,15 @@ public class EntityBoost extends Entity {
 
   @Override
   protected void readEntityFromNBT(CompoundNBT compound) {
-    this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
-    if (compound.hasKey("modifiers")) {
+    this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompound("id"));
+    if (compound.contains("modifiers")) {
       this.modifiers = new ModifierSnapshot(compound.getIntArray("modifiers"));
     }
   }
 
   @Override
   protected void writeEntityToNBT(CompoundNBT compound) {
-    compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
+    compound.put("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
     if (this.modifiers != null) {
       this.modifiers.toCompound(compound);
     }

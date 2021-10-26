@@ -69,7 +69,7 @@ public class SoilHandler {
 
               if (Harvest.isGrown(event.getState())) {
                 if (Util.rand.nextInt(3) == 0 && !world.isRemote) {
-                  world.spawnEntity(new ExperienceOrbEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1));
+                  world.addEntity(new ExperienceOrbEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1));
                 }
               }
 

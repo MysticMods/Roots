@@ -28,15 +28,15 @@ public class DropsHandler {
     if (entity instanceof PlayerEntity) {
       LivingEntity dying = event.getEntityLiving();
       CompoundNBT data = dying.getEntityData();
-      if (data.hasKey("magnetic_ticks", Constants.NBT.TAG_INT)) {
-        int ticks = data.getInteger("magnetic_ticks");
+      if (data.contains("magnetic_ticks", Constants.NBT.TAG_INT)) {
+        int ticks = data.getInt("magnetic_ticks");
         if (ticks < dying.ticksExisted || (dying.ticksExisted - ticks) < 3 * 20) {
           if (data.hasUniqueId("magnetic")) {
             UUID id = data.getUniqueId("magnetic");
             if (id != null && id.equals(entity.getUniqueID())) {
               for (ItemEntity item : event.getDrops()) {
                 item.setPosition(entity.posX, entity.posY, entity.posZ);
-                entity.world.spawnEntity(item);
+                entity.world.addEntity(item);
               }
               event.setCanceled(true);
             }
@@ -51,8 +51,8 @@ public class DropsHandler {
     if (SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP) {
       LivingEntity dying = event.getEntityLiving();
       CompoundNBT data = dying.getEntityData();
-      if (data.hasKey("magnetic_ticks", Constants.NBT.TAG_INT)) {
-        int ticks = data.getInteger("magnetic_ticks");
+      if (data.contains("magnetic_ticks", Constants.NBT.TAG_INT)) {
+        int ticks = data.getInt("magnetic_ticks");
         if (ticks < dying.ticksExisted || (dying.ticksExisted - ticks) < 3 * 20) {
           if (data.hasUniqueId("magnetic")) {
             UUID id = data.getUniqueId("magnetic");
@@ -63,7 +63,7 @@ public class DropsHandler {
               while (i > 0) {
                 int j = ExperienceOrbEntity.getXPSplit(i);
                 i -= j;
-                world.spawnEntity(new ExperienceOrbEntity(world, player.posX, player.posY, player.posZ, j));
+                world.addEntity(new ExperienceOrbEntity(world, player.posX, player.posY, player.posZ, j));
               }
               event.setCanceled(true);
             }

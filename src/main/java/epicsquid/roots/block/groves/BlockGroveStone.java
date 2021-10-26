@@ -70,14 +70,14 @@ public class BlockGroveStone extends BlockBase {
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    if (state.getValue(FACING) == Direction.NORTH) {
-      if (state.getValue(HALF) == Half.TOP) {
+    if (state.get(FACING) == Direction.NORTH) {
+      if (state.get(HALF) == Half.TOP) {
         return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 0.7, 0.8);
       } else {
         return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 1, 0.8);
       }
     } else {
-      if (state.getValue(HALF) == Half.TOP) {
+      if (state.get(HALF) == Half.TOP) {
         return new AxisAlignedBB(0.2, 0, 0.15, 0.8, 0.7, 0.85);
       } else {
         return new AxisAlignedBB(0.2, 0, 0.15, 0.8, 1, 0.85);
@@ -93,7 +93,7 @@ public class BlockGroveStone extends BlockBase {
 
   @Override
   public int getMetaFromState(BlockState state) {
-    return (((state.getValue(FACING) == Direction.NORTH ? 0 : 1) << 2 ^ state.getValue(HALF).ordinal())) << 1 ^ (state.getValue(VALID) ? 1 : 0);
+    return (((state.get(FACING) == Direction.NORTH ? 0 : 1) << 2 ^ state.get(HALF).ordinal())) << 1 ^ (state.get(VALID) ? 1 : 0);
   }
 
   @Override
@@ -114,8 +114,8 @@ public class BlockGroveStone extends BlockBase {
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-    worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, Half.MIDDLE).withProperty(FACING, state.getValue(FACING)));
-    worldIn.setBlockState(pos.up().up(), this.getDefaultState().withProperty(HALF, Half.TOP).withProperty(FACING, state.getValue(FACING)));
+    worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, Half.MIDDLE).withProperty(FACING, state.get(FACING)));
+    worldIn.setBlockState(pos.up().up(), this.getDefaultState().withProperty(HALF, Half.TOP).withProperty(FACING, state.get(FACING)));
   }
 
   @Override
@@ -194,7 +194,7 @@ public class BlockGroveStone extends BlockBase {
 
     if (world.isRemote) return;
 
-    if (!state.getValue(VALID)) return;
+    if (!state.get(VALID)) return;
 
     if (random.nextInt(GeneralConfig.GroveStoneChance) == 1) {
       int effectsCount = 1 + random.nextInt(1);

@@ -42,7 +42,7 @@ public class EntityRitualFireStorm extends EntityRitualBase {
       if (projectiles.size() < ritual.projectile_count && !world.isRemote) {
         EntityFlare flare = new EntityFlare(world);
         flare.initCustom(posX + 16.0f * (rand.nextFloat() - 0.5f), posY + 43.0f, posZ + 16.0f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), -0.5f - rand.nextFloat() * 0.5f, 0.125f * (rand.nextFloat() - 0.5f), 4.0f + 8.0f * rand.nextFloat(), posY - 5);
-        world.spawnEntity(flare);
+        world.addEntity(flare);
       }
     }
   }

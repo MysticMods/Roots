@@ -166,7 +166,7 @@ public class SpellSkySoarer extends SpellBase {
         boost.setModifiers(info);
         boost.setPlayer(player.getUniqueID());
         boost.setPosition(player.posX, player.posY, player.posZ);
-        player.world.spawnEntity(boost);
+        player.world.addEntity(boost);
       }
       if (info.has(REGENERATION)) {
         player.addPotionEffect(new EffectInstance(Effects.REGENERATION, regen_duration, regen_amplifier, false, false));

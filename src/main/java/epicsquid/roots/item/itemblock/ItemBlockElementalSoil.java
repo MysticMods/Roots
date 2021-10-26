@@ -91,7 +91,7 @@ public class ItemBlockElementalSoil extends BlockItem {
 
         //Magmatic Soil Crafting
         if (entityItem.isInLava()) {
-          world.spawnEntity(new ItemEntity(world, entityItem.posX, entityItem.posY + 0.5, entityItem.posZ,
+          world.addEntity(new ItemEntity(world, entityItem.posX, entityItem.posY + 0.5, entityItem.posZ,
               new ItemStack(ModBlocks.elemental_soil_fire, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 0), entityItem);
           entityItem.setDead();
@@ -100,7 +100,7 @@ public class ItemBlockElementalSoil extends BlockItem {
 
         //Aqueous Soil Crafting
         if (entityItem.isInWater() && entityItem.ticksExisted >= ElementalSoilConfig.WaterSoilDelay) {
-          world.spawnEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+          world.addEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
               new ItemStack(ModBlocks.elemental_soil_water, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 1), entityItem);
           entityItem.setDead();
@@ -118,7 +118,7 @@ public class ItemBlockElementalSoil extends BlockItem {
           }
           if (!found_roof) return super.onEntityItemUpdate(entityItem);
 
-          world.spawnEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+          world.addEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
               new ItemStack(ModBlocks.elemental_soil_earth, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 3), entityItem);
           entityItem.setDead();
@@ -131,7 +131,7 @@ public class ItemBlockElementalSoil extends BlockItem {
           int height = world.getChunk(pos).getHeight(pos);
           if (pos.getY() < height) return super.onEntityItemUpdate(entityItem);
 
-          world.spawnEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+          world.addEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
               new ItemStack(ModBlocks.elemental_soil_air, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 2), entityItem);
           entityItem.setDead();

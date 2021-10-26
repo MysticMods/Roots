@@ -33,7 +33,7 @@ public class EntityRitualWildrootGrowth extends EntityRitualBase {
       if (this.ticksExisted % ritual.interval == 0) {
         List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (pos) -> {
           BlockState state = world.getBlockState(pos);
-          return state.getBlock() == ModBlocks.wildroot && state.getValue(BlockCropBase.AGE) == 7;
+          return state.getBlock() == ModBlocks.wildroot && state.get(BlockCropBase.AGE) == 7;
         });
         if (eligiblePositions.isEmpty()) return;
 

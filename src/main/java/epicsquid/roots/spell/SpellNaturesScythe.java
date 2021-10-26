@@ -215,7 +215,7 @@ public class SpellNaturesScythe extends SpellBase {
       while (xp > 0) {
         int i = ExperienceOrbEntity.getXPSplit(xp);
         xp -= i;
-        world.spawnEntity(new ExperienceOrbEntity(world, (double) pos2.getX() + 0.5D, (double) pos2.getY() + 0.5D, (double) pos2.getZ() + 0.5D, i));
+        world.addEntity(new ExperienceOrbEntity(world, (double) pos2.getX() + 0.5D, (double) pos2.getY() + 0.5D, (double) pos2.getZ() + 0.5D, i));
       }
     }
   }
@@ -238,12 +238,12 @@ public class SpellNaturesScythe extends SpellBase {
       }
     }
     if (info.has(GRASS)) {
-      if (block == Blocks.TALLGRASS || (block == Blocks.DOUBLE_PLANT) && (state.getValue(DoublePlantBlock.VARIANT) == DoublePlantBlock.EnumPlantType.FERN || state.getValue(DoublePlantBlock.VARIANT) == DoublePlantBlock.EnumPlantType.GRASS) || OreDictCache.matches(this.grass, state) || block instanceof VineBlock || OreDictCache.matches(this.vines, state)) {
+      if (block == Blocks.TALLGRASS || (block == Blocks.DOUBLE_PLANT) && (state.get(DoublePlantBlock.VARIANT) == DoublePlantBlock.EnumPlantType.FERN || state.get(DoublePlantBlock.VARIANT) == DoublePlantBlock.EnumPlantType.GRASS) || OreDictCache.matches(this.grass, state) || block instanceof VineBlock || OreDictCache.matches(this.vines, state)) {
         return true;
       }
     }
     if (info.has(FLOWER)) {
-      if (block instanceof FlowerBlock || (block instanceof DoublePlantBlock && state.getValue(DoublePlantBlock.VARIANT) != DoublePlantBlock.EnumPlantType.GRASS && state.getValue(DoublePlantBlock.VARIANT) != DoublePlantBlock.EnumPlantType.FERN) || OreDictCache.matches(this.flower, state)) {
+      if (block instanceof FlowerBlock || (block instanceof DoublePlantBlock && state.get(DoublePlantBlock.VARIANT) != DoublePlantBlock.EnumPlantType.GRASS && state.get(DoublePlantBlock.VARIANT) != DoublePlantBlock.EnumPlantType.FERN) || OreDictCache.matches(this.flower, state)) {
         return true;
       }
     }

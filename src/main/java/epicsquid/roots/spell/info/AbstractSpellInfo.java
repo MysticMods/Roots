@@ -54,7 +54,7 @@ public abstract class AbstractSpellInfo implements INBTSerializable<CompoundNBT>
 
   @Override
   public void deserializeNBT(CompoundNBT nbt) {
-    if (nbt.hasKey("s")) {
+    if (nbt.contains("s")) {
       String name = nbt.getString("s");
       if (name.contains(":")) {
         this.spell = SpellRegistry.getSpell(new ResourceLocation(name));

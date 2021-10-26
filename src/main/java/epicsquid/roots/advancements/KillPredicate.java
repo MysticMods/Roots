@@ -1,9 +1,9 @@
 package epicsquid.roots.advancements;
 
 import com.google.gson.JsonElement;
-import epicsquid.mysticallib.advancement.IGenericPredicate;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import noobanidus.libs.noobutil.advancement.IGenericPredicate;
 
 import javax.annotation.Nullable;
 

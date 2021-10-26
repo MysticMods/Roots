@@ -105,11 +105,11 @@ public class ItemQuiver extends ItemArrowBase {
       }
 
       arrow.setDead();
-      if (arrow.getEntityData().hasKey("generated")) {
+      if (arrow.getEntityData().contains("generated")) {
         generated++;
         continue;
       }
-      if (Util.rand.nextInt(3) != 0 || arrow.getEntityData().hasKey("return")) {
+      if (Util.rand.nextInt(3) != 0 || arrow.getEntityData().contains("return")) {
         ItemStack result = ItemHandlerHelper.insertItemStacked(handler.getInventory(), stack, false);
         if (result.isEmpty()) {
           consumed++;

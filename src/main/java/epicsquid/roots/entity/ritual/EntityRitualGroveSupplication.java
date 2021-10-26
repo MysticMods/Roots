@@ -59,7 +59,7 @@ public class EntityRitualGroveSupplication extends EntityRitualBase {
           continue;
         }
 
-        if (state.getValue(BlockGroveStone.VALID)) {
+        if (state.get(BlockGroveStone.VALID)) {
           continue;
         }
 

@@ -27,7 +27,7 @@ public class TileEntityCatalystPlateRenderer extends TileEntityRenderer<TileEnti
         Roots.logger.error("Fatal error rendering catalyst plate, block state was " + state.toString() + " when catalyst plate was expected.");
         return;
       }
-      Direction f = state.getValue(BlockCatalystPlate.FACING);
+      Direction f = state.get(BlockCatalystPlate.FACING);
       for (int i = 0; i < count; i++) {
         GlStateManager.pushMatrix();
         GlStateManager

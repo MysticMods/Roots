@@ -182,7 +182,7 @@ public class BlockElementalSoil extends BlockBase {
 
     if (property == null) return 0;
 
-    return state.getValue(property) - 1 > 0 ? state.getValue(property) - 1 : 0;
+    return state.get(property) - 1 > 0 ? state.get(property) - 1 : 0;
   }
 
   @Override

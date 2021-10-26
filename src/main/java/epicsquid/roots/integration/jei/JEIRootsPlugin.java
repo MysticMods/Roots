@@ -311,7 +311,7 @@ public class JEIRootsPlugin implements IModPlugin {
         return ISubtypeRegistry.ISubtypeInterpreter.NONE;
       }
       CompoundNBT tag = ItemUtil.getOrCreateTag(itemStack);
-      if (tag.hasKey("modifier")) {
+      if (tag.contains("modifier")) {
         Modifier mod = ModifierRegistry.get(new ResourceLocation(tag.getString("modifier")));
         if (mod != null) {
           return mod.getIdentifier();

@@ -66,7 +66,7 @@ public class PotionStormCloud extends Effect {
             world.setBlockState(pos, net.minecraft.block.Blocks.OBSIDIAN.getDefaultState());
           } else if (GeneralConfig.getWaterBlocks().contains(state.getBlock()) && mods.has(SpellStormCloud.ICE)) {
             if (state.getPropertyKeys().contains(BlockLiquid.LEVEL)) {
-              if (state.getValue(BlockLiquid.LEVEL) == 0) {
+              if (state.get(BlockLiquid.LEVEL) == 0) {
                 world.setBlockState(pos, net.minecraft.block.Blocks.ICE.getDefaultState());
               }
             }
@@ -115,7 +115,7 @@ public class PotionStormCloud extends Effect {
               icicle.posY = playerPos.y + Util.rand.nextDouble() - 0.5;
               icicle.posZ = playerPos.z;
               icicle.setModifiers(mods);
-              world.spawnEntity(icicle);
+              world.addEntity(icicle);
             }
           }
         }

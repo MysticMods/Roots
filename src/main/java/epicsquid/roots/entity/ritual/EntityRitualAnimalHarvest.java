@@ -66,7 +66,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     if (RitualConfig.animalHarvestDoFish) {
       List<BlockPos> waterSourceBlocks = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (p) -> {
         BlockState state = world.getBlockState(p);
-        return (state.getMaterial() == Material.WATER && state.getPropertyKeys().contains(BlockLiquid.LEVEL) && state.getValue(BlockLiquid.LEVEL) == 0);
+        return (state.getMaterial() == Material.WATER && state.getPropertyKeys().contains(BlockLiquid.LEVEL) && state.get(BlockLiquid.LEVEL) == 0);
       });
       WeightedRegistry<AnimalHarvestFishRecipe> recipes = new WeightedRegistry<>(ModRecipes.getFishRecipes());
       if (!recipes.isEmpty() && !waterSourceBlocks.isEmpty() && (rand.nextFloat() <= ritual.fish_chance) || entityList.isEmpty()) {
@@ -100,7 +100,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
           item.motionY = 0;
           item.motionX = 0;
           item.motionZ = 0;
-          world.spawnEntity(item);
+          world.addEntity(item);
           didDrops = true;
         }
       }

@@ -1,13 +1,12 @@
 package epicsquid.roots.advancements;
 
-import epicsquid.mysticallib.advancement.GenericTrigger;
 import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.IModifierCore;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import noobanidus.libs.noobutil.advancement.GenericTrigger;
 
 public class Advancements {
   public static final ResourceLocation PACIFIST_ID = new ResourceLocation(Roots.MODID, "pacifist");

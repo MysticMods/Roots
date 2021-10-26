@@ -102,10 +102,10 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
       return null;
     }
     CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
-    if (tag.hasKey("spell_storage")) {
-      result.deserializeNBT(tag.getCompoundTag("spell_storage"));
-    } else if (tag.hasKey("spell_holder")) {
-      result.deserializeNBT(tag.getCompoundTag("spell_holder"));
+    if (tag.contains("spell_storage")) {
+      result.deserializeNBT(tag.getCompound("spell_storage"));
+    } else if (tag.contains("spell_holder")) {
+      result.deserializeNBT(tag.getCompound("spell_holder"));
       tag.removeTag("spell_holder");
       result.saveToStack();
     }
@@ -114,6 +114,6 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
 
   public void saveToStack() {
     CompoundNBT tag = ItemUtil.getOrCreateTag(stack);
-    tag.setTag("spell_storage", this.serializeNBT());
+    tag.put("spell_storage", this.serializeNBT());
   }
 }
