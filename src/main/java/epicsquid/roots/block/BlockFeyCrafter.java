@@ -1,6 +1,6 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.mysticallib.block.Block;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import epicsquid.roots.tileentity.TileEntityRunicCrafter;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 @SuppressWarnings("deprecation")
-public class BlockFeyCrafter extends BlockTEBase {
+public class BlockFeyCrafter extends Block {
 
   public BlockFeyCrafter(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);

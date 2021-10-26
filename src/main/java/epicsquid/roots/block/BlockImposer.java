@@ -1,6 +1,6 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.mysticallib.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nonnull;
 
-public class BlockImposer extends BlockTEBase {
+public class BlockImposer extends Block {
 
   public BlockImposer(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);

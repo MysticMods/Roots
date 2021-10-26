@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots;
 
 import epicsquid.mysticallib.LibRegistry;
@@ -93,3 +94,4 @@ public class RegistryManager {
     ModPotions.registerPotions(event);
   }
 }
+*/

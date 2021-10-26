@@ -3,7 +3,7 @@ package epicsquid.roots.block;
 import epicsquid.roots.spell.SpellFeyLight;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.properties.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.SoundEvents;
@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class BlockDecayingFeyLight extends BlockNormalFeyLight {
-  public static final PropertyInteger DECAY = PropertyInteger.create("decay", 0, 15);
+  public static final IntegerProperty DECAY = IntegerProperty.create("decay", 0, 15);
 
   public BlockDecayingFeyLight(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);

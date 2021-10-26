@@ -1,6 +1,6 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.mysticallib.block.Block;
 import epicsquid.roots.Roots;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import javax.annotation.Nonnull;
 
 @SuppressWarnings("deprecation")
-public class BlockCatalystPlate extends BlockTEBase {
+public class BlockCatalystPlate extends Block {
   public static final DirectionProperty FACING = DirectionProperty.create("facing");
 
   public BlockCatalystPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
@@ -30,8 +30,8 @@ public class BlockCatalystPlate extends BlockTEBase {
 
   @Override
   public void attemptRegistry(@Nonnull Class<? extends TileEntity> c, String name) {
-    if (!BlockTEBase.classes.contains(c)) {
-      BlockTEBase.classes.add(c);
+    if (!Block.classes.contains(c)) {
+      Block.classes.add(c);
       GameRegistry.registerTileEntity(c, new ResourceLocation(Roots.MODID, "tile_entity_offertory_plate"));
     }
   }

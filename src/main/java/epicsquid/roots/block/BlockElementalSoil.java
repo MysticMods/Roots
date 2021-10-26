@@ -14,7 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.properties.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
@@ -23,6 +23,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.EnumParticleTypes;
@@ -46,10 +47,10 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockElementalSoil extends Block {
-  public static final PropertyInteger WATER_SPEED = PropertyInteger.create("water", 0, 4);
-  public static final PropertyInteger AIR_SPEED = PropertyInteger.create("air", 0, 4);
-  public static final PropertyInteger EARTH_FERTILITY = PropertyInteger.create("earth", 0, 4);
-  public static final PropertyInteger FIRE_MULTIPLIER = PropertyInteger.create("fire", 0, 4);
+  public static final IntegerProperty WATER_SPEED = IntegerProperty.create("water", 0, 4);
+  public static final IntegerProperty AIR_SPEED = IntegerProperty.create("air", 0, 4);
+  public static final IntegerProperty EARTH_FERTILITY = IntegerProperty.create("earth", 0, 4);
+  public static final IntegerProperty FIRE_MULTIPLIER = IntegerProperty.create("fire", 0, 4);
 
   private final @Nonnull
   Item itemBlock;
@@ -65,7 +66,7 @@ public class BlockElementalSoil extends Block {
     // TODO: TICK RANDOMLY
 
     if (this.soilType != EnumElementalSoilType.BASE) {
-      PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
+      IntegerProperty property = this.soilType == EnumElementalSoilType.WATER ?
           WATER_SPEED :
           this.soilType == EnumElementalSoilType.EARTH ? EARTH_FERTILITY : this.soilType == EnumElementalSoilType.AIR ? AIR_SPEED : FIRE_MULTIPLIER;
 
@@ -175,7 +176,7 @@ public class BlockElementalSoil extends Block {
 
   @Override
   public int getMetaFromState(BlockState state) {
-    PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
+    IntegerProperty property = this.soilType == EnumElementalSoilType.WATER ?
         WATER_SPEED :
         this.soilType == EnumElementalSoilType.EARTH ? EARTH_FERTILITY : this.soilType == EnumElementalSoilType.AIR ? AIR_SPEED :
             this.soilType == EnumElementalSoilType.BASE ? null : FIRE_MULTIPLIER;

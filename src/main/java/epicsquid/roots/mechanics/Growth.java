@@ -5,7 +5,7 @@ import epicsquid.roots.config.CropConfig;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.properties.IntegerProperty;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -17,7 +17,7 @@ import java.util.*;
 public class Growth {
   private static Set<Block> BLACKLIST = new HashSet();
   private static Set<IProperty<?>> AGE_PROPERTIES = new HashSet<>();
-  private static Object2IntOpenHashMap<PropertyInteger> AGE_MAP = new Object2IntOpenHashMap();
+  private static Object2IntOpenHashMap<IntegerProperty> AGE_MAP = new Object2IntOpenHashMap();
 
   static {
     AGE_MAP.defaultReturnValue(-1);
@@ -113,7 +113,7 @@ public class Growth {
         return false;
       }
 
-      PropertyInteger prop = (PropertyInteger) toCheck;
+      IntegerProperty prop = (IntegerProperty) toCheck;
       int max = AGE_MAP.getInt(prop);
       if (max == -1) {
         max = Collections.max(prop.getAllowedValues());

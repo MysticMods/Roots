@@ -1,6 +1,6 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.mysticallib.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.OnlyIn;
 import javax.annotation.Nonnull;
 
 @SuppressWarnings("deprecation")
-public class BlockTrample extends BlockTEBase {
+public class BlockTrample extends Block {
   public static int SAFE_RANGE_X = 30;
   public static int SAFE_RANGE_Y = 5;
   public static int SAFE_RANGE_Z = 30;

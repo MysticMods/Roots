@@ -3,7 +3,7 @@ package epicsquid.roots.block;
 import epicsquid.mysticallib.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.properties.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemGroup;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.OnlyIn;
 @SuppressWarnings("deprecation")
 public class BlockStructureMarker extends Block {
 
-  public static final PropertyInteger marker_value = PropertyInteger.create("marker_value", 0, 15);
+  public static final IntegerProperty marker_value = IntegerProperty.create("marker_value", 0, 15);
 
   public BlockStructureMarker() {
     super(Material.STRUCTURE_VOID, SoundType.ANVIL, 0.1f, "structure_marker");

@@ -1,7 +1,7 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.mysticallib.block.Block;
 import epicsquid.roots.block.itemblock.ItemBlockUnendingBowl;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockUnendingBowl extends BlockTEBase {
+public class BlockUnendingBowl extends Block {
 
   public BlockUnendingBowl(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);

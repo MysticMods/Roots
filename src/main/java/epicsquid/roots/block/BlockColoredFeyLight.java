@@ -4,7 +4,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.properties.IntegerProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -68,7 +68,7 @@ public class BlockColoredFeyLight extends BlockFeyLight {
 
   // PINK, YELLOW, PURPLE, GREEN, RED, BROWN, BLUE
 
-  public static final PropertyInteger COLOR = PropertyInteger.create("color", 0, 6);
+  public static final IntegerProperty COLOR = IntegerProperty.create("color", 0, 6);
 
   public BlockColoredFeyLight(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
