@@ -20,42 +20,42 @@ public class ModBlocks {
     public static class RunedObsidian {
       public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN);
 
-      public static BlockEntry<Block> RUNED_OBSIDIAN = REGISTRATE.block("runed_obsidian", Block::new)
+      public static BlockEntry<RunedObsidianBlocks.Block> RUNED_OBSIDIAN = REGISTRATE.block("runed_obsidian", RunedObsidianBlocks.Block::new)
           .properties(RUNED_PROPERTIES)
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNED_BUTTON = REGISTRATE.block("runed_button", BaseBlocks.StoneButtonBlock::new)
+      public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
           .properties(RUNED_PROPERTIES)
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
+      public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
           .properties(RUNED_PROPERTIES)
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<SlabBlock> RUNED_SLAB = REGISTRATE.block("runed_slab", SlabBlock::new)
+      public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_SLAB = REGISTRATE.block("runed_slab", RunedObsidianBlocks.Slab::new)
           .properties(RUNED_PROPERTIES)
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<StairsBlock> RUNED_STAIRS = REGISTRATE.block("runed_stairs", (p) -> new StairsBlock(() -> RunedObsidian.RUNED_OBSIDIAN.getDefaultState(), p))
+      public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_STAIRS = REGISTRATE.block("runed_stairs", RunedObsidianBlocks.Stairs::new)
           .properties(RUNED_PROPERTIES)
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<WallBlock> RUNED_WALL = REGISTRATE.block("runed_wall", WallBlock::new)
+      public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_WALL = REGISTRATE.block("runed_wall", RunedObsidianBlocks.Wall::new)
           .properties(RUNED_PROPERTIES)
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<BaseBlocks.NarrowPostBlock> RUNED_NARROW_POST = REGISTRATE.block("runed_narrow_post", BaseBlocks.NarrowPostBlock::new)
+      public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_NARROW_POST = REGISTRATE.block("runed_narrow_post", RunedObsidianBlocks.NarrowPost::new)
           .properties(RUNED_PROPERTIES)
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<BaseBlocks.WidePostBlock> RUNED_WIDE_POST = REGISTRATE.block("runed_wide_post", BaseBlocks.WidePostBlock::new)
+      public static BlockEntry<RunedObsidianBlocks.WidePost> RUNED_WIDE_POST = REGISTRATE.block("runed_wide_post", RunedObsidianBlocks.WidePost::new)
           .properties(RUNED_PROPERTIES)
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
