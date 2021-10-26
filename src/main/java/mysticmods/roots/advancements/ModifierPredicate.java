@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.advancements;
 
 import com.google.gson.JsonElement;
@@ -41,3 +42,4 @@ public class ModifierPredicate implements IGenericPredicate<IModifierCore> {
     return new ModifierPredicate();
   }
 }
+*/
