@@ -365,6 +365,35 @@ public class ModBlocks {
         .register();
   }
 
+  public static class Soils {
+    public static NonNullUnaryOperator<AbstractBlock.Properties> SOIL_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.DIRT);
+
+    public static BlockEntry<Block> AQUEOUS_SOIL = REGISTRATE.block("aqueous_soil", Block::new)
+            .properties(SOIL_PROPERTIES)
+            .tag(RootsTags.Blocks.SOILS)
+            .register();
+
+    public static BlockEntry<Block> CAELIC_SOIL = REGISTRATE.block("caelic_soil", Block::new)
+            .properties(SOIL_PROPERTIES)
+            .tag(RootsTags.Blocks.SOILS)
+            .register();
+
+    public static BlockEntry<Block> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", Block::new)
+            .properties(SOIL_PROPERTIES)
+            .tag(RootsTags.Blocks.SOILS)
+            .register();
+
+    public static BlockEntry<Block> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", Block::new)
+            .properties(SOIL_PROPERTIES)
+            .tag(RootsTags.Blocks.SOILS)
+            .register();
+
+    public static BlockEntry<Block> TERRAN_SOIL = REGISTRATE.block("terran_soil", Block::new)
+            .properties(SOIL_PROPERTIES)
+            .tag(RootsTags.Blocks.SOILS)
+            .register();
+    }
+
   public static class Wildwood {
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LOG_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LOG);
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LEAVES);
@@ -459,7 +488,6 @@ public class ModBlocks {
       .register();
   public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", CatalystPlateBlock::new).register();
   public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", CatalystPlateBlock::new).register();
-  public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new).register();
   public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("fey_crafter", FeyCrafterBlock::new).register();
   public static BlockEntry<GroveStoneBlock> GROVE_STONE = REGISTRATE.block("grove_stone", GroveStoneBlock::new).register();
   public static BlockEntry<ImbuerBlock> IMBUER = REGISTRATE.block("imbuer", ImbuerBlock::new).register();

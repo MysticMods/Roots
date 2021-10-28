@@ -24,6 +24,7 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Block> RUNED_OBSIDIAN_BRICKS = modTag("runed_obsidian_bricks");
     public static Tags.IOptionalNamedTag<Block> RUNESTONE = modTag("runestone");
     public static Tags.IOptionalNamedTag<Block> RUNESTONE_BRICKS = modTag("runestone_bricks");
+    public static Tags.IOptionalNamedTag<Block> SOILS = modTag("soils");
     public static Tags.IOptionalNamedTag<Block> SPIRIT_HERB_CROP = modTag("crops/spirit_herb");
     public static Tags.IOptionalNamedTag<Block> STALICRIPE_CROP = modTag("crops/stalicripe");
     public static Tags.IOptionalNamedTag<Block> WILDEWHEET_CROP = modTag("crops/wildewheet");
