@@ -19,10 +19,16 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Block> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
     public static Tags.IOptionalNamedTag<Block> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
     public static Tags.IOptionalNamedTag<Block> PERESKIA_CROP = modTag("crops/pereskia");
+    public static Tags.IOptionalNamedTag<Block> RUNED_LOGS = modTag("runed_logs");
+    public static Tags.IOptionalNamedTag<Block> RUNED_OBSIDIAN = modTag("runed_obsidian");
+    public static Tags.IOptionalNamedTag<Block> RUNED_OBSIDIAN_BRICKS = modTag("runed_obsidian_bricks");
+    public static Tags.IOptionalNamedTag<Block> RUNESTONE = modTag("runestone");
+    public static Tags.IOptionalNamedTag<Block> RUNESTONE_BRICKS = modTag("runestone_bricks");
     public static Tags.IOptionalNamedTag<Block> SPIRIT_HERB_CROP = modTag("crops/spirit_herb");
     public static Tags.IOptionalNamedTag<Block> STALICRIPE_CROP = modTag("crops/stalicripe");
     public static Tags.IOptionalNamedTag<Block> WILDEWHEET_CROP = modTag("crops/wildewheet");
     public static Tags.IOptionalNamedTag<Block> WILDROOT_CROP = modTag("crops/wildroot");
+    public static Tags.IOptionalNamedTag<Block> WILDWOOD_LOGS = modTag("wildwood_logs");
 
     static Tags.IOptionalNamedTag<Block> modTag(String name) {
       return BlockTags.createOptional(new ResourceLocation(Roots.MODID, name));
@@ -45,6 +51,7 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Item> WILDEWHEET_SEEDS = modTag("seeds/wildewheet");
     public static Tags.IOptionalNamedTag<Item> WILDROOT_SEEDS = modTag("seeds/wildroot");
     public static Tags.IOptionalNamedTag<Item> FORGE_KNIVES = compatTag("tools/knife");
+    public static Tags.IOptionalNamedTag<Item> WILDWOOD_LOGS = modTag("wildwood_logs");
 
     static Tags.IOptionalNamedTag<Item> modTag(String name)  {
       return ItemTags.createOptional(new ResourceLocation(Roots.MODID, name));
