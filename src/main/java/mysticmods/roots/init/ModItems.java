@@ -7,6 +7,7 @@ import mysticmods.roots.Roots;
 import mysticmods.roots.RootsTags;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 
@@ -19,6 +20,30 @@ public class ModItems {
 
   private static <T extends Item> ItemModelBuilder blockModel (DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
     return p.generated(ctx::getEntry, new ResourceLocation(Roots.MODID, "block/" + ctx.getName()));
+  }
+
+  public static class Decoration {
+    public static class Wildwood {
+      public static ItemEntry<BlockNamedItem> WILDWOOD_LOG = REGISTRATE.item("wildwood_log", (p) -> new BlockNamedItem(ModBlocks.Wildwood.WILDWOOD_LOG.get(), p))
+              .model(ModItems::blockModel)
+              .tag(ItemTags.LOGS, ItemTags.LOGS_THAT_BURN, RootsTags.Items.WILDWOOD_LOGS)
+              .register();
+
+      public static ItemEntry<BlockNamedItem> WILDWOOD_WOOD = REGISTRATE.item("wildwood_wood", (p) -> new BlockNamedItem(ModBlocks.Wildwood.WILDWOOD_WOOD.get(), p))
+              .model(ModItems::blockModel)
+              .tag(ItemTags.LOGS, ItemTags.LOGS_THAT_BURN, RootsTags.Items.WILDWOOD_LOGS)
+              .register();
+
+      public static ItemEntry<BlockNamedItem> STRIPPED_WILDWOOD_LOG = REGISTRATE.item("stripped_wildwood_log", (p) -> new BlockNamedItem(ModBlocks.Wildwood.STRIPPED_WILDWOOD_LOG.get(), p))
+              .model(ModItems::blockModel)
+              .tag(ItemTags.LOGS, ItemTags.LOGS_THAT_BURN, RootsTags.Items.WILDWOOD_LOGS)
+              .register();
+
+      public static ItemEntry<BlockNamedItem> STRIPPED_WILDWOOD_WOOD = REGISTRATE.item("stripped_wildwood_wood", (p) -> new BlockNamedItem(ModBlocks.Wildwood.STRIPPED_WILDWOOD_WOOD.get(), p))
+              .model(ModItems::blockModel)
+              .tag(ItemTags.LOGS, ItemTags.LOGS_THAT_BURN, RootsTags.Items.WILDWOOD_LOGS)
+              .register();
+    }
   }
 
   public static class Herbs {
