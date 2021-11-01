@@ -13,21 +13,28 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class RootsTags {
   public static class Blocks extends RootsTags {
+    // Crops & Adjacent
     public static Tags.IOptionalNamedTag<Block> CROPS = modTag("crops");
     public static Tags.IOptionalNamedTag<Block> CLOUD_BERRY_CROP = modTag("crops/cloud_berry");
     public static Tags.IOptionalNamedTag<Block> DEWGONIA_CROP = modTag("crops/dewgonia");
-    public static Tags.IOptionalNamedTag<Block> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
-    public static Tags.IOptionalNamedTag<Block> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
-    public static Tags.IOptionalNamedTag<Block> PERESKIA_CROP = modTag("crops/pereskia");
-    public static Tags.IOptionalNamedTag<Block> RUNED_OBSIDIAN = modTag("runed_obsidian");
-    public static Tags.IOptionalNamedTag<Block> RUNED_OBSIDIAN_BRICKS = modTag("runed_obsidian_bricks");
-    public static Tags.IOptionalNamedTag<Block> RUNESTONE = modTag("runestone");
-    public static Tags.IOptionalNamedTag<Block> RUNESTONE_BRICKS = modTag("runestone_bricks");
-    public static Tags.IOptionalNamedTag<Block> SOILS = modTag("soils");
     public static Tags.IOptionalNamedTag<Block> SPIRIT_HERB_CROP = modTag("crops/spirit_herb");
     public static Tags.IOptionalNamedTag<Block> STALICRIPE_CROP = modTag("crops/stalicripe");
     public static Tags.IOptionalNamedTag<Block> WILDEWHEET_CROP = modTag("crops/wildewheet");
     public static Tags.IOptionalNamedTag<Block> WILDROOT_CROP = modTag("crops/wildroot");
+    public static Tags.IOptionalNamedTag<Block> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
+    public static Tags.IOptionalNamedTag<Block> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
+    public static Tags.IOptionalNamedTag<Block> PERESKIA_CROP = modTag("crops/pereskia");
+
+    public static Tags.IOptionalNamedTag<Block> RUNED_OBSIDIAN = modTag("runed_obsidian");
+    public static Tags.IOptionalNamedTag<Block> RUNESTONE = modTag("runestone");
+
+    public static Tags.IOptionalNamedTag<Block> SOILS = modTag("soils");
+    public static Tags.IOptionalNamedTag<Block> WATER_SOIL = modTag("soils/water");
+    public static Tags.IOptionalNamedTag<Block> AIR_SOIL = modTag("soils/air");
+    public static Tags.IOptionalNamedTag<Block> EARTH_SOIL = modTag("soils/earth");
+    public static Tags.IOptionalNamedTag<Block> FIRE_SOIL = modTag("soils/fire");
+    public static Tags.IOptionalNamedTag<Block> ELEMENTAL_SOIL = modTag("soils/elemental");
+
     public static Tags.IOptionalNamedTag<Block> WILDWOOD_LOGS = modTag("wildwood_logs");
 
     // Specific types of Runed Logs
