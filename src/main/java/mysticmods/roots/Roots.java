@@ -7,6 +7,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
+import noobanidus.libs.noobutil.data.RecipeGenerator;
 import noobanidus.libs.noobutil.registrate.CustomRegistrate;
 import noobanidus.libs.particleslib.config.ConfigManager;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +18,7 @@ public class Roots {
   public static final String MODID = "roots";
   public static CustomRegistrate REGISTRATE;
   public static Logger LOG = LogManager.getLogger();
+  public static final RecipeGenerator RECIPES = new RecipeGenerator(MODID);
 
   public static final ItemGroup ITEM_GROUP = new ItemGroup(MODID) {
     @Override
