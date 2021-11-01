@@ -19,7 +19,6 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Block> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
     public static Tags.IOptionalNamedTag<Block> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
     public static Tags.IOptionalNamedTag<Block> PERESKIA_CROP = modTag("crops/pereskia");
-    public static Tags.IOptionalNamedTag<Block> RUNED_LOGS = modTag("runed_logs");
     public static Tags.IOptionalNamedTag<Block> RUNED_OBSIDIAN = modTag("runed_obsidian");
     public static Tags.IOptionalNamedTag<Block> RUNED_OBSIDIAN_BRICKS = modTag("runed_obsidian_bricks");
     public static Tags.IOptionalNamedTag<Block> RUNESTONE = modTag("runestone");
@@ -30,6 +29,18 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Block> WILDEWHEET_CROP = modTag("crops/wildewheet");
     public static Tags.IOptionalNamedTag<Block> WILDROOT_CROP = modTag("crops/wildroot");
     public static Tags.IOptionalNamedTag<Block> WILDWOOD_LOGS = modTag("wildwood_logs");
+
+    // Specific types of Runed Logs
+    public static Tags.IOptionalNamedTag<Block> RUNED_LOGS = modTag("runed_logs");
+    public static Tags.IOptionalNamedTag<Block> RUNED_ACACIA_LOG = modTag("runed_logs/acacia");
+    public static Tags.IOptionalNamedTag<Block> RUNED_DARK_OAK_LOG = modTag("runed_logs/dark_oak");
+    public static Tags.IOptionalNamedTag<Block> RUNED_OAK_LOG = modTag("runed_logs/oak");
+    public static Tags.IOptionalNamedTag<Block> RUNED_BIRCH_LOG = modTag("runed_logs/birch");
+    public static Tags.IOptionalNamedTag<Block> RUNED_JUNGLE_LOG = modTag("runed_logs/jungle");
+    public static Tags.IOptionalNamedTag<Block> RUNED_SPRUCE_LOG = modTag("runed_logs/spruce");
+    public static Tags.IOptionalNamedTag<Block> RUNED_WILDWOOD_LOG = modTag("runed_logs/wildwood");
+    public static Tags.IOptionalNamedTag<Block> RUNED_CRIMSON_STEM = modTag("runed_logs/crimson");
+    public static Tags.IOptionalNamedTag<Block> RUNED_WARPED_STEM = modTag("runed_logs/warped");
 
     static Tags.IOptionalNamedTag<Block> modTag(String name) {
       return BlockTags.createOptional(new ResourceLocation(Roots.MODID, name));
