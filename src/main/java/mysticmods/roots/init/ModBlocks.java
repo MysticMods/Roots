@@ -33,27 +33,27 @@ public class ModBlocks {
 
       public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_SLAB = REGISTRATE.block("runed_slab", RunedObsidianBlocks.Slab::new)
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_STAIRS = REGISTRATE.block("runed_stairs", RunedObsidianBlocks.Stairs::new)
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_WALL = REGISTRATE.block("runed_wall", RunedObsidianBlocks.Wall::new)
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_NARROW_POST = REGISTRATE.block("runed_narrow_post", RunedObsidianBlocks.NarrowPost::new)
