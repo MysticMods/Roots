@@ -1,0 +1,27 @@
+{
+  "parent": "block/block",
+  "display": {
+    "gui": {
+      "rotation": [ 30, 135, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 0.625, 0.625, 0.625 ]
+    }
+  },
+  "textures": {
+    "particle": "#wall"
+  },
+  "elements": [
+    {   "from": [ 6, 0, 6 ],
+      "to": [ 10, 16, 10 ],
+      "faces": {
+        "down":  { "uv": [ 6, 6, 10, 10 ], "texture": "#wall", "cullface": "down" },
+        "up":    { "uv": [ 6, 6, 10, 10 ], "texture": "#wall", "cullface": "up" },
+        "north": { "uv": [ 6, 0, 10, 16 ], "texture": "#wall" },
+        "south": { "uv": [ 6, 0, 10, 16 ], "texture": "#wall" },
+        "west":  { "uv": [ 6, 0, 10, 16 ], "texture": "#wall" },
+        "east":  { "uv": [ 6, 0, 10, 16 ], "texture": "#wall" }
+      },
+      "__comment": "Center post"
+    }
+  ]
+}

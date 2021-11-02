@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class ElementalCropBlock extends ThreeStageCropBlock {
-  public ElementalCropBlock(Properties builder, Supplier<? extends IItemProvider> seedProvider) {
+  public ElementalCropBlock(Properties builder, Supplier<Supplier<? extends IItemProvider>> seedProvider) {
     super(builder, seedProvider);
   }
 

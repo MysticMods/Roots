@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "roots:block/magmatic_soil"
+    }
+  }
+}
