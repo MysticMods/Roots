@@ -2,7 +2,6 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.blocks.*;
@@ -197,17 +196,17 @@ public class ModBlocks {
       public static BlockEntry<BaseBlocks.WidePostBlock> RUNESTONE_WIDE_POST = REGISTRATE.block("runestone_wide_post", BaseBlocks.WidePostBlock::new)
           .properties(RUNESTONE_PROPERTIES)
           .register();
+
+      public static BlockEntry<Block> CHISELED_RUNESTONE_BRICK = REGISTRATE.block("chiseled_runestone_brick", Block::new)
+          .properties(RUNESTONE_PROPERTIES)
+          .tag(RootsTags.Blocks.RUNESTONE)
+          .register();
     }
 
     public static class RunestoneBrick {
       public static NonNullUnaryOperator<AbstractBlock.Properties> RUNESTONE_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.STONE);
 
       public static BlockEntry<Block> RUNESTONE_BRICK = REGISTRATE.block("runestone_brick", Block::new)
-          .properties(RUNESTONE_BRICK_PROPERTIES)
-          .tag(RootsTags.Blocks.RUNESTONE)
-          .register();
-
-      public static BlockEntry<Block> CHISELED_RUNESTONE_BRICK = REGISTRATE.block("chiseled_runestone_brick", Block::new)
           .properties(RUNESTONE_BRICK_PROPERTIES)
           .tag(RootsTags.Blocks.RUNESTONE)
           .register();
