@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "roots:runed_obsidian",
+    "roots:runed_button",
+    "roots:runed_pressure_plate",
+    "roots:runed_slab",
+    "roots:runed_stairs",
+    "roots:runed_wall",
+    "roots:runed_narrow_post",
+    "roots:runed_wide_post"
+  ]
+}

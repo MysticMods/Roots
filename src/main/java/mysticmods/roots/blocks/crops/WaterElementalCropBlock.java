@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class WaterElementalCropBlock extends ElementalCropBlock implements ILiquidContainer {
-  public WaterElementalCropBlock(Properties builder, Supplier<? extends IItemProvider> seedProvider) {
+  public WaterElementalCropBlock(Properties builder, Supplier<Supplier<? extends IItemProvider>> seedProvider) {
     super(builder, seedProvider);
   }
 

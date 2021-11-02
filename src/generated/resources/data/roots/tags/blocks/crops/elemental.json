@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#roots:crops/elemental/water",
+    "#roots:crops/elemental/air",
+    "#roots:crops/elemental/earth",
+    "#roots:crops/elemental/fire"
+  ]
+}

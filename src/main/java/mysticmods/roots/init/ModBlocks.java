@@ -1,18 +1,18 @@
 package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.blocks.*;
+import mysticmods.roots.blocks.RunedObsidianBlocks;
 import mysticmods.roots.blocks.crops.ElementalCropBlock;
 import mysticmods.roots.blocks.crops.ThreeStageCropBlock;
 import mysticmods.roots.blocks.crops.WaterElementalCropBlock;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.tags.BlockTags;
-import net.minecraftforge.common.Tags;
-import noobanidus.libs.noobutil.block.BaseBlocks;
+import net.minecraft.tags.ItemTags;
 import noobanidus.libs.noobutil.data.BlockstateGenerator;
 import noobanidus.libs.noobutil.data.ItemModelGenerator;
 
@@ -34,41 +34,80 @@ public class ModBlocks {
 
       public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
           .properties(RUNED_PROPERTIES)
+          .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN))
+          .item()
+          .model(ItemModelGenerator::inventoryModel)
+          .tag(ItemTags.BUTTONS)
+          .build()
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
           .properties(RUNED_PROPERTIES)
+          .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_SLAB = REGISTRATE.block("runed_slab", RunedObsidianBlocks.Slab::new)
           .properties(RUNED_PROPERTIES)
+          .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .tag(ItemTags.SLABS)
+          .build()
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_STAIRS = REGISTRATE.block("runed_stairs", RunedObsidianBlocks.Stairs::new)
           .properties(RUNED_PROPERTIES)
+          .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .tag(ItemTags.STAIRS)
+          .build()
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_WALL = REGISTRATE.block("runed_wall", RunedObsidianBlocks.Wall::new)
           .properties(RUNED_PROPERTIES)
+          .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN))
+          .item()
+          .model(ItemModelGenerator::inventoryModel)
+          .tag(ItemTags.WALLS)
+          .build()
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_NARROW_POST = REGISTRATE.block("runed_narrow_post", RunedObsidianBlocks.NarrowPost::new)
           .properties(RUNED_PROPERTIES)
+          .blockstate(BlockstateGenerator.narrowPost(RUNED_OBSIDIAN))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.WidePost> RUNED_WIDE_POST = REGISTRATE.block("runed_wide_post", RunedObsidianBlocks.WidePost::new)
           .properties(RUNED_PROPERTIES)
+          .blockstate(BlockstateGenerator.widePost(RUNED_OBSIDIAN))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
+
+      public static void load () {
+      }
     }
 
-    public static class RunedObsidianBrick {
+    public static void load () {
+      RunedObsidian.load();
+    }
+
+/*    public static class RunedObsidianBrick {
       public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN);
 
       public static BlockEntry<RunedObsidianBlocks.Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick", RunedObsidianBlocks.Block::new)
@@ -325,60 +364,63 @@ public class ModBlocks {
           .properties(RUNED_STEM_PROPERTIES)
           .tag(BlockTags.LOGS, RootsTags.Blocks.RUNED_WARPED_STEM)
           .register();
-    }
+    }*/
   }
 
   public static class Crops {
-    public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, ModItems.Herbs.WILDROOT))
+    public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Herbs.WILDROOT))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.WILDROOT_CROP)
         .register();
 
-    public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, ModItems.Herbs.CLOUD_BERRY))
+    public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.CLOUD_BERRY))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.CLOUD_BERRY_CROP)
         .register();
 
-    public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, ModItems.Herbs.DEWGONIA))
+    public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.Herbs.DEWGONIA))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.DEWGONIA_CROP)
         .register();
 
-    public static BlockEntry<ElementalCropBlock> INFERNAL_BULB_CROP = REGISTRATE.block("infernal_bulb_crop", (p) -> new ElementalCropBlock(p, ModItems.Herbs.INFERNAL_BULB))
+    public static BlockEntry<ElementalCropBlock> INFERNAL_BULB_CROP = REGISTRATE.block("infernal_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.INFERNAL_BULB))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::crossBlockstate)
         .tag(RootsTags.Blocks.INFERNAL_BULB_CROP)
         .register();
 
-    public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, ModItems.Herbs.STALICRIPE))
+    public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.STALICRIPE))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.STALICRIPE_CROP)
         .register();
 
-    public static BlockEntry<SeededCropsBlock> MOONGLOW_LEAF_CROP = REGISTRATE.block("moonglow_leaf_crop", (p) -> new SeededCropsBlock(p, ModItems.Seeds.MOONGLOW_LEAF_SEEDS))
+    public static BlockEntry<SeededCropsBlock> MOONGLOW_LEAF_CROP = REGISTRATE.block("moonglow_leaf_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.MOONGLOW_LEAF_SEEDS))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.MOONGLOW_LEAF_CROP)
         .register();
-    public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, ModItems.Seeds.PERESKIA_BULB))
+    public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.PERESKIA_BULB))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::crossBlockstate)
         .tag(RootsTags.Blocks.PERESKIA_CROP)
         .register();
-    public static BlockEntry<ThreeStageCropBlock> SPIRIT_HERB_CROP = REGISTRATE.block("spirit_herb_crop", (p) -> new ThreeStageCropBlock(p, ModItems.Seeds.SPIRIT_HERB_SEEDS))
+    public static BlockEntry<ThreeStageCropBlock> SPIRIT_HERB_CROP = REGISTRATE.block("spirit_herb_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Seeds.SPIRIT_HERB_SEEDS))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.SPIRIT_HERB_CROP)
         .register();
-    public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, ModItems.Seeds.WILDEWHEET_SEEDS))
+    public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.WILDEWHEET_SEEDS))
         .properties(o -> AbstractBlock.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.WILDEWHEET_CROP)
         .register();
+
+    public static void load () {
+    }
   }
 
   public static class Soils {
@@ -386,31 +428,53 @@ public class ModBlocks {
 
     public static BlockEntry<Block> AQUEOUS_SOIL = REGISTRATE.block("aqueous_soil", Block::new)
         .properties(SOIL_PROPERTIES)
+        .blockstate(BlockstateGenerator.pillar("block/water_soil_side", "block/water_soil_top"))
+        .item()
+        .model(ItemModelGenerator::itemModel)
+        .build()
         .tag(RootsTags.Blocks.WATER_SOIL)
         .register();
 
     public static BlockEntry<Block> CAELIC_SOIL = REGISTRATE.block("caelic_soil", Block::new)
         .properties(SOIL_PROPERTIES)
+        .blockstate(BlockstateGenerator.pillar("block/air_soil_side", "block/air_soil_top"))
+        .item()
+        .model(ItemModelGenerator::itemModel)
+        .build()
         .tag(RootsTags.Blocks.AIR_SOIL)
         .register();
 
     public static BlockEntry<Block> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", Block::new)
         .properties(SOIL_PROPERTIES)
+        .item()
+        .model(ItemModelGenerator::itemModel)
+        .build()
         .tag(RootsTags.Blocks.ELEMENTAL_SOIL)
         .register();
 
     public static BlockEntry<Block> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", Block::new)
         .properties(SOIL_PROPERTIES)
+        .blockstate(BlockstateGenerator.pillar("block/fire_soil_side", "block/fire_soil_top"))
+        .item()
+        .model(ItemModelGenerator::itemModel)
+        .build()
         .tag(RootsTags.Blocks.FIRE_SOIL)
         .register();
 
     public static BlockEntry<Block> TERRAN_SOIL = REGISTRATE.block("terran_soil", Block::new)
         .properties(SOIL_PROPERTIES)
+        .blockstate(BlockstateGenerator.pillar("block/earth_soil_side", "block/earth_soil_top"))
+        .item()
+        .model(ItemModelGenerator::itemModel)
+        .build()
         .tag(RootsTags.Blocks.EARTH_SOIL)
         .register();
+
+    public static void load () {
+    }
   }
 
-  public static class Wildwood {
+  /*public static class Wildwood {
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LOG_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LOG);
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LEAVES);
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_PLANKS_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_PLANKS);
@@ -510,8 +574,11 @@ public class ModBlocks {
   public static BlockEntry<PyreBlock> PYRE = REGISTRATE.block("pyre", PyreBlock::new).register();
   public static BlockEntry<PyreBlock> DECORATIVE_PYRE = REGISTRATE.block("decorative_pyre", PyreBlock::new).register();
   public static BlockEntry<PyreBlock> REINFORCED_PYRE = REGISTRATE.block("reinforced_pyre", PyreBlock::new).register();
-  public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL_BLOCK = REGISTRATE.block("unending_bowl", UnendingBowlBlock::new).register();
+  public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL_BLOCK = REGISTRATE.block("unending_bowl", UnendingBowlBlock::new).register();*/
 
   public static void load() {
+    Decoration.load();
+    Soils.load();
+    Crops.load();
   }
 }

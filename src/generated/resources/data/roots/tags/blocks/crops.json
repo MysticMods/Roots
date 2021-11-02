@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#roots:crops/wildewheet",
+    "#roots:crops/wildroot",
+    "#roots:crops/spirit_herb",
+    "#roots:crops/pereskia",
+    "#roots:crops/moonglow_leaf",
+    "#roots:crops/elemental"
+  ]
+}
