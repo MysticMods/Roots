@@ -1,6 +1,7 @@
 package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.blocks.*;
@@ -33,27 +34,27 @@ public class ModBlocks {
 
       public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_SLAB = REGISTRATE.block("runed_slab", RunedObsidianBlocks.Slab::new)
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_STAIRS = REGISTRATE.block("runed_stairs", RunedObsidianBlocks.Stairs::new)
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_WALL = REGISTRATE.block("runed_wall", RunedObsidianBlocks.Wall::new)
           .properties(RUNED_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_NARROW_POST = REGISTRATE.block("runed_narrow_post", RunedObsidianBlocks.NarrowPost::new)
@@ -72,12 +73,12 @@ public class ModBlocks {
 
       public static BlockEntry<RunedObsidianBlocks.Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick", RunedObsidianBlocks.Block::new)
           .properties(RUNED_BRICK_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN_BRICKS)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Block> CHISELED_RUNED_OBSIDIAN = REGISTRATE.block("chiseled_runed_obsidian", RunedObsidianBlocks.Block::new)
           .properties(RUNED_BRICK_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN_BRICKS)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = REGISTRATE.block("runed_obsidian_brick_button", RunedObsidianBlocks.Button::new)
@@ -121,7 +122,7 @@ public class ModBlocks {
 
       public static BlockEntry<RunedObsidianBlocks.Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick_alt", RunedObsidianBlocks.Block::new)
           .properties(RUNED_BRICK_PROPERTIES)
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN_BRICKS)
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN)
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = REGISTRATE.block("runed_obsidian_brick_button_alt", RunedObsidianBlocks.Button::new)
@@ -195,19 +196,19 @@ public class ModBlocks {
       public static BlockEntry<BaseBlocks.WidePostBlock> RUNESTONE_WIDE_POST = REGISTRATE.block("runestone_wide_post", BaseBlocks.WidePostBlock::new)
           .properties(RUNESTONE_PROPERTIES)
           .register();
+
+      public static BlockEntry<Block> CHISELED_RUNESTONE_BRICK = REGISTRATE.block("chiseled_runestone_brick", Block::new)
+          .properties(RUNESTONE_PROPERTIES)
+          .tag(RootsTags.Blocks.RUNESTONE)
+          .register();
     }
 
     public static class RunestoneBrick {
-      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNESTONE_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.STONE_BRICKS);
+      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNESTONE_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.STONE);
 
       public static BlockEntry<Block> RUNESTONE_BRICK = REGISTRATE.block("runestone_brick", Block::new)
           .properties(RUNESTONE_BRICK_PROPERTIES)
-          .tag(RootsTags.Blocks.RUNESTONE_BRICKS)
-          .register();
-
-      public static BlockEntry<Block> CHISELED_RUNESTONE_BRICK = REGISTRATE.block("chiseled_runestone_brick", Block::new)
-          .properties(RUNESTONE_BRICK_PROPERTIES)
-          .tag(RootsTags.Blocks.RUNESTONE_BRICKS)
+          .tag(RootsTags.Blocks.RUNESTONE)
           .register();
 
       public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_BUTTON = REGISTRATE.block("runestone_brick_button", BaseBlocks.StoneButtonBlock::new)
@@ -240,11 +241,11 @@ public class ModBlocks {
     }
 
     public static class RunestoneBrickAlt {
-      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNESTONE_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.STONE_BRICKS);
+      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNESTONE_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.STONE);
 
       public static BlockEntry<Block> RUNESTONE_BRICK_ALT = REGISTRATE.block("runestone_brick_alt", Block::new)
           .properties(RUNESTONE_BRICK_PROPERTIES)
-          .tag(RootsTags.Blocks.RUNESTONE_BRICKS)
+          .tag(RootsTags.Blocks.RUNESTONE)
           .register();
 
       public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_ALT_BUTTON = REGISTRATE.block("runestone_brick_alt_button", BaseBlocks.StoneButtonBlock::new)
@@ -278,40 +279,51 @@ public class ModBlocks {
 
     public static class RunedWood {
       public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_LOG_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LOG);
+      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_STEM_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.CRIMSON_STEM);
 
       public static BlockEntry<Block> RUNED_ACACIA = REGISTRATE.block("runed_acacia", Block::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.ACACIA_LOGS, RootsTags.Blocks.RUNED_LOGS)
+          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.ACACIA_LOGS, RootsTags.Blocks.RUNED_ACACIA_LOG)
           .register();
 
       public static BlockEntry<Block> RUNED_DARK_OAK = REGISTRATE.block("runed_dark_oak", Block::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.DARK_OAK_LOGS, RootsTags.Blocks.RUNED_LOGS)
+          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.DARK_OAK_LOGS)
           .register();
 
       public static BlockEntry<Block> RUNED_OAK = REGISTRATE.block("runed_oak", Block::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.OAK_LOGS, RootsTags.Blocks.RUNED_LOGS)
+          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.OAK_LOGS)
           .register();
 
       public static BlockEntry<Block> RUNED_BIRCH = REGISTRATE.block("runed_birch", Block::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.BIRCH_LOGS, RootsTags.Blocks.RUNED_LOGS)
+          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.BIRCH_LOGS)
           .register();
 
       public static BlockEntry<Block> RUNED_JUNGLE = REGISTRATE.block("runed_jungle", Block::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.JUNGLE_LOGS, RootsTags.Blocks.RUNED_LOGS)
+          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.JUNGLE_LOGS)
           .register();
 
       public static BlockEntry<Block> RUNED_SPRUCE = REGISTRATE.block("runed_spruce", Block::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.SPRUCE_LOGS, RootsTags.Blocks.RUNED_LOGS)
+          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.SPRUCE_LOGS)
           .register();
 
       public static BlockEntry<Block> RUNED_WILDWOOD = REGISTRATE.block("runed_wildwood", Block::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Blocks.RUNED_LOGS)
+          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS)
+          .register();
+
+      public static BlockEntry<Block> RUNED_CRIMSON_STEM = REGISTRATE.block("runed_crimson", Block::new)
+          .properties(RUNED_STEM_PROPERTIES)
+          .tag(BlockTags.LOGS, RootsTags.Blocks.RUNED_CRIMSON_STEM)
+          .register();
+
+      public static BlockEntry<Block> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped", Block::new)
+          .properties(RUNED_STEM_PROPERTIES)
+          .tag(BlockTags.LOGS, RootsTags.Blocks.RUNED_WARPED_STEM)
           .register();
     }
   }
@@ -374,27 +386,27 @@ public class ModBlocks {
 
     public static BlockEntry<Block> AQUEOUS_SOIL = REGISTRATE.block("aqueous_soil", Block::new)
         .properties(SOIL_PROPERTIES)
-        .tag(RootsTags.Blocks.SOILS)
+        .tag(RootsTags.Blocks.WATER_SOIL)
         .register();
 
     public static BlockEntry<Block> CAELIC_SOIL = REGISTRATE.block("caelic_soil", Block::new)
         .properties(SOIL_PROPERTIES)
-        .tag(RootsTags.Blocks.SOILS)
+        .tag(RootsTags.Blocks.AIR_SOIL)
         .register();
 
     public static BlockEntry<Block> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", Block::new)
         .properties(SOIL_PROPERTIES)
-        .tag(RootsTags.Blocks.SOILS)
+        .tag(RootsTags.Blocks.ELEMENTAL_SOIL)
         .register();
 
     public static BlockEntry<Block> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", Block::new)
         .properties(SOIL_PROPERTIES)
-        .tag(RootsTags.Blocks.SOILS)
+        .tag(RootsTags.Blocks.FIRE_SOIL)
         .register();
 
     public static BlockEntry<Block> TERRAN_SOIL = REGISTRATE.block("terran_soil", Block::new)
         .properties(SOIL_PROPERTIES)
-        .tag(RootsTags.Blocks.SOILS)
+        .tag(RootsTags.Blocks.EARTH_SOIL)
         .register();
   }
 
@@ -427,11 +439,6 @@ public class ModBlocks {
     public static BlockEntry<Block> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", Block::new)
         .properties(WILDWOOD_LEAVES_PROPERTIES)
         .tag(BlockTags.LEAVES)
-        .register();
-
-    public static BlockEntry<Block> WILDROOT_RUNE = REGISTRATE.block("wildroot_rune", Block::new)
-        .properties(WILDWOOD_LOG_PROPERTIES)
-        .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS)
         .register();
 
     public static BlockEntry<Block> WILDWOOD_PLANKS = REGISTRATE.block("wildwood_planks", Block::new)
@@ -489,7 +496,9 @@ public class ModBlocks {
 
   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
       .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
+      .blockstate(NonNullBiConsumer.noop())
       .register();
+
   public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", CatalystPlateBlock::new).register();
   public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", CatalystPlateBlock::new).register();
   public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("fey_crafter", FeyCrafterBlock::new).register();

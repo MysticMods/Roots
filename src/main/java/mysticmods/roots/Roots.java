@@ -39,5 +39,6 @@ public class Roots {
     ModItems.load();
     ModHerbs.load();
     ModRegistries.load();
+    ModTags.load();
   }
 }
