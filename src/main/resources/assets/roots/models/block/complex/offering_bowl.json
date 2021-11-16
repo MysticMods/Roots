@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "roots:blocks/runestone",
-		"particle": "roots:blocks/runestone"
+		"0": "roots:block/runestone",
+		"particle": "roots:block/runestone"
 	},
 	"elements": [
 		{

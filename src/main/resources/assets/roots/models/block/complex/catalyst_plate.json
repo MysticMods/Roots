@@ -2,9 +2,9 @@
 	"__comment": "Designed by Elucent with Cubik Studio - https://cubik.studio",
 	"parent":"block/block",
 	"textures": {
-		"particle": "roots:blocks/catalyst_plate_2",
-		"base": "roots:blocks/catalyst_plate_2",
-		"sym": "roots:blocks/catalyst_plate"
+		"particle": "roots:block/catalyst_plate_2",
+		"base": "roots:block/catalyst_plate_2",
+		"sym": "roots:block/catalyst_plate"
 	},
 	"elements": [
 		{

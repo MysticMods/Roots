@@ -1,7 +1,7 @@
 {
     "parent": "roots:block/pyre",
 	"textures": {
-		"particle": "roots:blocks/reinforced_pyre",
-		"texture": "roots:blocks/reinforced_pyre"
+		"particle": "roots:block/reinforced_pyre",
+		"texture": "roots:block/reinforced_pyre"
 	}
 }

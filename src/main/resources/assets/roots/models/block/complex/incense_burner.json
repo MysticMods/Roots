@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "roots:blocks/mortar",
-		"particle": "roots:blocks/mortar"
+		"0": "roots:block/mortar",
+		"particle": "roots:block/mortar"
 	},
 	"elements": [
 		{

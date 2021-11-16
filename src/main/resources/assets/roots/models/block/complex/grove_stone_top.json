@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"monolith": "roots:blocks/ob_stone",
-		"particle": "roots:blocks/ob_stone"
+		"monolith": "roots:block/ob_stone",
+		"particle": "roots:block/ob_stone"
 	},
 	"elements": [
 		{

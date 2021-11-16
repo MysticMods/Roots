@@ -1,8 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "0": "roots:blocks/imbuer",
-        "particle": "roots:blocks/imbuer"
+        "0": "roots:block/imbuer",
+        "particle": "roots:block/imbuer"
     },
     "display": {
 		"gui": {

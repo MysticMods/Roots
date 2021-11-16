@@ -2,8 +2,8 @@
 	"__comment": "Designed by Elucent with Cubik Studio - https://cubik.studio",
 	"parent": "block/block",
 	"textures": {
-		"particle": "roots:blocks/pyre",
-		"texture": "roots:blocks/pyre"
+		"particle": "roots:block/pyre",
+		"texture": "roots:block/pyre"
 	},
 	"elements": [
 		{

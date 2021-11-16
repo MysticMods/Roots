@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"4": "roots:blocks/baffle_cap_huge_stem",
-		"5": "roots:blocks/baffle_cap_huge_top",
-		"particle": "roots:blocks/baffle_cap_huge_top"
+		"4": "roots:block/baffle_cap_huge_stem",
+		"5": "roots:block/baffle_cap_huge_top",
+		"particle": "roots:block/baffle_cap_huge_top"
 	},
     "display": {
         "gui": {

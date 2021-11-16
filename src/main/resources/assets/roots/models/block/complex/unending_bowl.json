@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "roots:blocks/runestone",
+		"0": "roots:block/runestone",
 		"1": "blocks/water_still",
-		"particle": "roots:blocks/runestone"
+		"particle": "roots:block/runestone"
 	},
 	"elements": [
 		{

@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "roots:block/grove_stone_full",
 	"textures": {
-		"monolith": "roots:blocks/ob_stone_active",
-		"particle": "roots:blocks/ob_stone_active"
+		"monolith": "roots:block/ob_stone_active",
+		"particle": "roots:block/ob_stone_active"
 	}
 }

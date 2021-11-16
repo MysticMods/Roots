@@ -1,8 +1,8 @@
 {
 	"__comment": "Designed by Elucent with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "roots:blocks/mortar",
-		"texture": "roots:blocks/mortar"
+		"particle": "roots:block/mortar",
+		"texture": "roots:block/mortar"
 	},
 	"elements": [
 		{

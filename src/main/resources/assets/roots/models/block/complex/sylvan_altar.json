@@ -1,13 +1,13 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "roots:blocks/sylvan_altar_stone",
-		"1": "roots:blocks/sylvan_altar_bottom",
-		"2": "roots:blocks/sylvan_altar_wood",
-		"3": "roots:blocks/sylvan_altar_top",
-		"4": "roots:blocks/sylvan_altar_shelf",
+		"0": "roots:block/sylvan_altar_stone",
+		"1": "roots:block/sylvan_altar_bottom",
+		"2": "roots:block/sylvan_altar_wood",
+		"3": "roots:block/sylvan_altar_top",
+		"4": "roots:block/sylvan_altar_shelf",
 		"5": "roots:sylvan_altar (1)/sylvan_altar_shelf_2",
-		"particle": "roots:blocks/sylvan_altar_stone"
+		"particle": "roots:block/sylvan_altar_stone"
 	},
 	"elements": [
 		{

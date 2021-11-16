@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"2": "roots:blocks/runed_obsidian",
-		"3": "roots:blocks/runed_obsidian_brick",
-		"particle": "roots:blocks/pyre"
+		"2": "roots:block/runed_obsidian",
+		"3": "roots:block/runed_obsidian_brick",
+		"particle": "roots:block/pyre"
 	},
 	"elements": [
 		{

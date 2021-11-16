@@ -3,8 +3,8 @@
 	"textures": {
 		"1": "roots:models/oakleaves",
 		"4": "roots:models/log_oak",
-		"7": "roots:blocks/chiseled_runestone",
-		"10": "roots:blocks/runestone",
+		"7": "roots:block/chiseled_runestone",
+		"10": "roots:block/runestone",
 		"particle": "roots:models/log_oak"
 	},
 	"elements": [
