@@ -1,18 +1,19 @@
 package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.blocks.RunedObsidianBlocks;
+import mysticmods.roots.blocks.*;
 import mysticmods.roots.blocks.crops.ElementalCropBlock;
 import mysticmods.roots.blocks.crops.ThreeStageCropBlock;
 import mysticmods.roots.blocks.crops.WaterElementalCropBlock;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraftforge.common.Tags;
+import noobanidus.libs.noobutil.block.BaseBlocks;
 import noobanidus.libs.noobutil.data.BlockstateGenerator;
 import noobanidus.libs.noobutil.data.ItemModelGenerator;
 
@@ -99,15 +100,15 @@ public class ModBlocks {
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static void load () {
+      public static void load() {
       }
     }
 
-    public static void load () {
+    public static void load() {
       RunedObsidian.load();
     }
 
-/*    public static class RunedObsidianBrick {
+    public static class RunedObsidianBrick {
       public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN);
 
       public static BlockEntry<RunedObsidianBlocks.Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick", RunedObsidianBlocks.Block::new)
@@ -364,7 +365,7 @@ public class ModBlocks {
           .properties(RUNED_STEM_PROPERTIES)
           .tag(BlockTags.LOGS, RootsTags.Blocks.RUNED_WARPED_STEM)
           .register();
-    }*/
+    }
   }
 
   public static class Crops {
@@ -419,7 +420,7 @@ public class ModBlocks {
         .tag(RootsTags.Blocks.WILDEWHEET_CROP)
         .register();
 
-    public static void load () {
+    public static void load() {
     }
   }
 
@@ -470,11 +471,11 @@ public class ModBlocks {
         .tag(RootsTags.Blocks.EARTH_SOIL)
         .register();
 
-    public static void load () {
+    public static void load() {
     }
   }
 
-  /*public static class Wildwood {
+  public static class Wildwood {
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LOG_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LOG);
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LEAVES);
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_PLANKS_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_PLANKS);
@@ -579,18 +580,18 @@ public class ModBlocks {
 
   public static BlockEntry<ImposerBlock> IMPOSER = REGISTRATE.block("imposer", ImposerBlock::new).register();
 
-  public static BlockEntry<IncensePlateBlock> INCENSE_BURNER = REGISTRATE.block("incense_burner", IncensePlateBlock::new).register();
+  public static BlockEntry<IncensePlateBlock> INCENSE_PLATE = REGISTRATE.block("incense_plate", IncensePlateBlock::new).register();
 
   public static BlockEntry<MortarBlock> MORTAR = REGISTRATE.block("mortar", MortarBlock::new).register();
 
   public static BlockEntry<PyreBlock> PYRE = REGISTRATE.block("pyre", PyreBlock::new).register();
 
+  // TODO: Decorative Pyre Block
   public static BlockEntry<PyreBlock> DECORATIVE_PYRE = REGISTRATE.block("decorative_pyre", PyreBlock::new).register();
 
   public static BlockEntry<PyreBlock> REINFORCED_PYRE = REGISTRATE.block("reinforced_pyre", PyreBlock::new).register();
 
   public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL = REGISTRATE.block("unending_bowl", UnendingBowlBlock::new).register();
-  */
 
   public static void load() {
     Decoration.load();
