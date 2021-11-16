@@ -563,18 +563,34 @@ public class ModBlocks {
       .blockstate(NonNullBiConsumer.noop())
       .register();
 
-  public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", CatalystPlateBlock::new).register();
+  public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", Material.STONE, CatalystPlateBlock::new)
+      .properties(o -> o)
+
+      .register();
+
+
   public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", CatalystPlateBlock::new).register();
+
   public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("fey_crafter", FeyCrafterBlock::new).register();
+
   public static BlockEntry<GroveStoneBlock> GROVE_STONE = REGISTRATE.block("grove_stone", GroveStoneBlock::new).register();
+
   public static BlockEntry<ImbuerBlock> IMBUER = REGISTRATE.block("imbuer", ImbuerBlock::new).register();
+
   public static BlockEntry<ImposerBlock> IMPOSER = REGISTRATE.block("imposer", ImposerBlock::new).register();
+
   public static BlockEntry<IncensePlateBlock> INCENSE_BURNER = REGISTRATE.block("incense_burner", IncensePlateBlock::new).register();
+
   public static BlockEntry<MortarBlock> MORTAR = REGISTRATE.block("mortar", MortarBlock::new).register();
+
   public static BlockEntry<PyreBlock> PYRE = REGISTRATE.block("pyre", PyreBlock::new).register();
+
   public static BlockEntry<PyreBlock> DECORATIVE_PYRE = REGISTRATE.block("decorative_pyre", PyreBlock::new).register();
+
   public static BlockEntry<PyreBlock> REINFORCED_PYRE = REGISTRATE.block("reinforced_pyre", PyreBlock::new).register();
-  public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL_BLOCK = REGISTRATE.block("unending_bowl", UnendingBowlBlock::new).register();*/
+
+  public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL = REGISTRATE.block("unending_bowl", UnendingBowlBlock::new).register();
+  */
 
   public static void load() {
     Decoration.load();

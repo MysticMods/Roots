@@ -64,6 +64,27 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Block> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
     public static Tags.IOptionalNamedTag<Block> RUNED_WARPED_STEM = modTag("logs/runed/warped");
 
+    // Catalyst plates and offering plates
+    public static Tags.IOptionalNamedTag<Block> PLATE = modTag("plate");
+
+    // Pyres (does not include decorative)
+    public static Tags.IOptionalNamedTag<Block> PYRE = modTag("pyre");
+
+    // Fey and runic crafters
+    public static Tags.IOptionalNamedTag<Block> CRAFTER = modTag("crafter");
+
+    // Incense burners
+    public static Tags.IOptionalNamedTag<Block> BURNER = modTag("burner");
+
+    // Imposers
+    public static Tags.IOptionalNamedTag<Block> IMPOSER = modTag("imposer");
+
+    // Imbuer
+    public static Tags.IOptionalNamedTag<Block> IMBUER = modTag("imbuer");
+
+    // Mortars
+    public static Tags.IOptionalNamedTag<Block> MORTAR = modTag("mortar");
+
     static Tags.IOptionalNamedTag<Block> modTag(String name) {
       return BlockTags.createOptional(new ResourceLocation(Roots.MODID, name));
     }
