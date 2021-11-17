@@ -1,10 +1,7 @@
 package mysticmods.roots.blocks;
 
 import mysticmods.roots.init.ModBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.WallBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.material.PushReaction;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 
@@ -94,6 +91,28 @@ public class RunedObsidianBlocks {
 
   public static class WidePost extends BaseBlocks.WidePostBlock {
     public WidePost(Properties properties) {
+      super(properties);
+    }
+
+    @Override
+    public PushReaction getPistonPushReaction(BlockState pState) {
+      return PushReaction.BLOCK;
+    }
+  }
+
+  public static class Fence extends FenceBlock {
+    public Fence(Properties properties) {
+      super(properties);
+    }
+
+    @Override
+    public PushReaction getPistonPushReaction(BlockState pState) {
+      return PushReaction.BLOCK;
+    }
+  }
+
+  public static class Gate extends FenceGateBlock {
+    public Gate(Properties properties) {
       super(properties);
     }
 

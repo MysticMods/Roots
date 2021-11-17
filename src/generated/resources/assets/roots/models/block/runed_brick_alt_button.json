@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "roots:block/runed_obsidian_brick_alt"
+  }
+}

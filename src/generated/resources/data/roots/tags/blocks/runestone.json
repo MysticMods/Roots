@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "roots:runestone",
+    "roots:chiseled_runestone",
+    "roots:runestone_brick",
+    "roots:runestone_brick_alt"
+  ]
+}

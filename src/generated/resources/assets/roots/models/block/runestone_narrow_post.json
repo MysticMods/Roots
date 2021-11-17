@@ -1,0 +1,6 @@
+{
+  "parent": "roots:block/narrow_post",
+  "textures": {
+    "wall": "roots:block/runestone"
+  }
+}

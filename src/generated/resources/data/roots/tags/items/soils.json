@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#roots:soils/earth",
+    "#roots:soils/air",
+    "#roots:soils/fire",
+    "#roots:soils/water",
+    "#roots:soils/elemental"
+  ]
+}

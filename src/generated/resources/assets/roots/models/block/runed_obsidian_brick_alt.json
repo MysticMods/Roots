@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "roots:block/runed_obsidian_brick_alt"
+  }
+}
