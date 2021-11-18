@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:runestone"
+    }
+  ],
+  "result": {
+    "item": "roots:runestone_button"
+  }
+}

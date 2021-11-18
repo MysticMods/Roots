@@ -17,6 +17,10 @@ public class RootsTags {
     // Forge compat tag (filled by ModTags)
     public static Tags.IOptionalNamedTag<Block> FORGE_CROPS = compatTag("crops");
 
+    // Minecraft compat tag (filled by ModTags)
+    public static Tags.IOptionalNamedTag<Block> MINECRAFT_LOGS_THAT_BURN = compatTag("minecraft", "logs_that_burn");
+    public static Tags.IOptionalNamedTag<Block> MINECRAFT_LOGS = compatTag("minecraft", "logs");
+
     // General crops (filled by ModTags)
     public static Tags.IOptionalNamedTag<Block> CROPS = modTag("crops");
     public static Tags.IOptionalNamedTag<Block> ELEMENTAL_CROPS = modTag("crops/elemental");
@@ -88,6 +92,10 @@ public class RootsTags {
 
     static Tags.IOptionalNamedTag<Block> compatTag(String name) {
       return BlockTags.createOptional(new ResourceLocation("forge", name));
+    }
+
+    static Tags.IOptionalNamedTag<Block> compatTag(String prefix, String name) {
+      return BlockTags.createOptional(new ResourceLocation(prefix, name));
     }
   }
 

@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import mysticmods.roots.RootsTags;
+import net.minecraft.tags.BlockTags;
 import noobanidus.libs.noobutil.data.TagBuilder;
 
 import static mysticmods.roots.Roots.REGISTRATE;
@@ -14,7 +15,7 @@ public class ModTags {
       TagBuilder.BlocksBuilder b = new TagBuilder.BlocksBuilder(p);
       // Internal mod tags
       b.add(Blocks.SOILS, Blocks.EARTH_SOIL, Blocks.AIR_SOIL, Blocks.FIRE_SOIL, Blocks.WATER_SOIL, Blocks.ELEMENTAL_SOIL);
-/*      b.add(Blocks.RUNED_LOGS, Blocks.RUNED_ACACIA_LOG, Blocks.RUNED_BIRCH_LOG, Blocks.RUNED_OAK_LOG, Blocks.RUNED_DARK_OAK_LOG, Blocks.RUNED_CRIMSON_STEM, Blocks.RUNED_JUNGLE_LOG, Blocks.RUNED_SPRUCE_LOG, Blocks.RUNED_WARPED_STEM, Blocks.RUNED_WILDWOOD_LOG);*/
+      b.add(Blocks.RUNED_LOGS, Blocks.RUNED_ACACIA_LOG, Blocks.RUNED_BIRCH_LOG, Blocks.RUNED_OAK_LOG, Blocks.RUNED_DARK_OAK_LOG, Blocks.RUNED_CRIMSON_STEM, Blocks.RUNED_JUNGLE_LOG, Blocks.RUNED_SPRUCE_LOG, Blocks.RUNED_WARPED_STEM, Blocks.RUNED_WILDWOOD_LOG);
       b.add(Blocks.AIR_CROPS, Blocks.CLOUD_BERRY_CROP);
       b.add(Blocks.FIRE_CROPS, Blocks.INFERNAL_BULB_CROP);
       b.add(Blocks.WATER_CROPS, Blocks.DEWGONIA_CROP);
@@ -24,6 +25,10 @@ public class ModTags {
 
       // Forge compat tags
       b.add(Blocks.FORGE_CROPS, Blocks.CROPS);
+
+      // Logs that burn
+      b.add(Blocks.MINECRAFT_LOGS_THAT_BURN, Blocks.WILDWOOD_LOGS);
+      b.add(Blocks.MINECRAFT_LOGS, Blocks.WILDWOOD_LOGS);
     });
 
     REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, p -> {

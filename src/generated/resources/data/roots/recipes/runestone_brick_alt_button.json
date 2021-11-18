@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:runestone_brick_alt"
+    }
+  ],
+  "result": {
+    "item": "roots:runestone_brick_alt_button"
+  }
+}

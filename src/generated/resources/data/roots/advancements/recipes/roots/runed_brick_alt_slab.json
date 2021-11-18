@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "roots:runed_brick_alt_slab"
+    ]
+  },
+  "criteria": {
+    "has_runed_obsidian_brick_alt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:runed_obsidian_brick_alt"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "roots:runed_brick_alt_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_runed_obsidian_brick_alt",
+      "has_the_recipe"
+    ]
+  ]
+}

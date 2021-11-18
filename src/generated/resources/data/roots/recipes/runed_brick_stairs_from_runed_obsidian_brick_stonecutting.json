@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "roots:runed_obsidian_brick"
+  },
+  "result": "roots:runed_brick_stairs",
+  "count": 1
+}

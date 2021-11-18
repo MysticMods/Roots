@@ -11,9 +11,12 @@ import mysticmods.roots.blocks.crops.ElementalCropBlock;
 import mysticmods.roots.blocks.crops.ThreeStageCropBlock;
 import mysticmods.roots.blocks.crops.WaterElementalCropBlock;
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 import noobanidus.libs.noobutil.data.BlockstateGenerator;
@@ -27,7 +30,15 @@ public class ModBlocks {
     public static class RunedObsidian {
       public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN);
 
-      public static BlockEntry<RunedObsidianBlocks.Block> RUNED_OBSIDIAN = REGISTRATE.block("runed_obsidian", RunedObsidianBlocks.Block::new)
+      public static BlockEntry<Block> RUNED_OBSIDIAN = REGISTRATE.block("runed_obsidian", Block::new)
+          .properties(RUNED_PROPERTIES)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN)
+          .register();
+
+      public static BlockEntry<Block> CHISELED_RUNED_OBSIDIAN = REGISTRATE.block("chiseled_runed_obsidian", Block::new)
           .properties(RUNED_PROPERTIES)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -36,12 +47,12 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
-          .properties(RUNED_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.STONE_BUTTON))
+          .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN))
           .recipe((ctx, p) -> {
             p.singleItem(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_BUTTON, 1, 1);
             p.stonecutting(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_BUTTON);
           })
-          .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN))
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.BUTTONS)
@@ -50,7 +61,8 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
-          .properties(RUNED_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
+          .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN))
           .recipe((ctx, p) -> {
             ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
                 .pattern("XX")
@@ -59,7 +71,6 @@ public class ModBlocks {
                 .save(p, p.safeId(ctx.getEntry()));
             p.stonecutting(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_PRESSURE_PLATE);
           })
-          .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN))
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -67,11 +78,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_SLAB = REGISTRATE.block("runed_slab", RunedObsidianBlocks.Slab::new)
-          .properties(RUNED_PROPERTIES)
-          .recipe((ctx, p) ->
-              p.slab(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_SLAB, null, true)
-          )
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN).requiresCorrectToolForDrops())
           .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN))
+          .recipe((ctx, p) -> p.slab(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_SLAB, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.SLABS)
@@ -82,9 +91,8 @@ public class ModBlocks {
 
       public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_STAIRS = REGISTRATE.block("runed_stairs", RunedObsidianBlocks.Stairs::new)
           .properties(RUNED_PROPERTIES)
-          .recipe((ctx, p) ->
-              p.stairs(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_STAIRS, null, true))
           .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN))
+          .recipe((ctx, p) -> p.stairs(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_STAIRS, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.STAIRS)
@@ -94,9 +102,8 @@ public class ModBlocks {
 
       public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_WALL = REGISTRATE.block("runed_wall", RunedObsidianBlocks.Wall::new)
           .properties(RUNED_PROPERTIES)
-          .recipe((ctx, p) ->
-              p.wall(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_WALL))
           .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN))
+          .recipe((ctx, p) -> p.wall(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_WALL))
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.WALLS)
@@ -124,16 +131,13 @@ public class ModBlocks {
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<RunedObsidianBlocks.Block> CHISELED_RUNED_OBSIDIAN = REGISTRATE.block("chiseled_runed_obsidian", RunedObsidianBlocks.Block::new)
+      public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_FENCE = REGISTRATE.block("runed_fence", RunedObsidianBlocks.Fence::new)
           .properties(RUNED_PROPERTIES)
-          .item()
-          .model(ItemModelGenerator::itemModel)
-          .build()
-          .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN)
-          .register();
-
-      public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_OBSIDIAN_FENCE = REGISTRATE.block("runed_fence", RunedObsidianBlocks.Fence::new)
-          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+                p.fence(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_FENCE, null);
+                p.stonecutting(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_FENCE, 2);
+              }
+          )
           .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN))
           .item()
           .model(ItemModelGenerator::inventoryModel)
@@ -141,8 +145,12 @@ public class ModBlocks {
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, Tags.Blocks.FENCES)
           .register();
 
-      public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_OBSIDIAN_GATE = REGISTRATE.block("runed_gate", RunedObsidianBlocks.Gate::new)
+      public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_GATE = REGISTRATE.block("runed_gate", RunedObsidianBlocks.Gate::new)
           .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+            p.fenceGate(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_GATE, null);
+            p.stonecutting(DataIngredient.items(RunedObsidian.RUNED_OBSIDIAN), RunedObsidian.RUNED_GATE, 2);
+          })
           .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -155,10 +163,10 @@ public class ModBlocks {
     }
 
     public static class RunedObsidianBrick {
-      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN);
+      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN);
 
-      public static BlockEntry<RunedObsidianBlocks.Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick", RunedObsidianBlocks.Block::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+      public static BlockEntry<Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick", Block::new)
+          .properties(RUNED_PROPERTIES)
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -166,8 +174,12 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = REGISTRATE.block("runed_brick_button", RunedObsidianBlocks.Button::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.STONE_BUTTON))
           .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN_BRICK))
+          .recipe((ctx, p) -> {
+            p.singleItem(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_BUTTON, 1, 1);
+            p.stonecutting(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_BUTTON);
+          })
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.BUTTONS)
@@ -176,8 +188,16 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_BRICK_PRESSURE_PLATE = REGISTRATE.block("runed_brick_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
           .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN_BRICK))
+          .recipe((ctx, p) -> {
+            ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+                .pattern("XX")
+                .define('X', DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK))
+                .unlockedBy("has_runed_obsidian_brick", DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK).getCritereon(p))
+                .save(p, p.safeId(ctx.getEntry()));
+            p.stonecutting(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_PRESSURE_PLATE);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -185,8 +205,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_BRICK_SLAB = REGISTRATE.block("runed_brick_slab", RunedObsidianBlocks.Slab::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN).requiresCorrectToolForDrops())
           .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN_BRICK))
+          .recipe((ctx, p) -> p.slab(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_SLAB, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.SLABS)
@@ -196,8 +217,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_BRICK_STAIRS = REGISTRATE.block("runed_brick_stairs", RunedObsidianBlocks.Stairs::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(RUNED_PROPERTIES)
           .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN_BRICK))
+          .recipe((ctx, p) -> p.stairs(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_STAIRS, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.STAIRS)
@@ -206,8 +228,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_BRICK_WALL = REGISTRATE.block("runed_brick_wall", RunedObsidianBlocks.Wall::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(RUNED_PROPERTIES)
           .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN_BRICK))
+          .recipe((ctx, p) -> p.wall(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_WALL))
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.WALLS)
@@ -216,7 +239,8 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_BRICK_NARROW_POST = REGISTRATE.block("runed_brick_narrow_post", RunedObsidianBlocks.NarrowPost::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.narrowPost(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK, RunedObsidianBrick.RUNED_BRICK_NARROW_POST, null, true, p))
           .blockstate(BlockstateGenerator.narrowPost(RUNED_OBSIDIAN_BRICK))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -225,7 +249,8 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.WidePost> RUNED_BRICK_WIDE_POST = REGISTRATE.block("runed_brick_wide_post", RunedObsidianBlocks.WidePost::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.widePost(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK, RunedObsidianBrick.RUNED_BRICK_WIDE_POST, null, true, p))
           .blockstate(BlockstateGenerator.widePost(RUNED_OBSIDIAN_BRICK))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -233,8 +258,13 @@ public class ModBlocks {
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_OBSIDIAN_BRICK_FENCE = REGISTRATE.block("runed_brick_fence", RunedObsidianBlocks.Fence::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+      public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_BRICK_FENCE = REGISTRATE.block("runed_brick_fence", RunedObsidianBlocks.Fence::new)
+          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+                p.fence(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_FENCE, null);
+                p.stonecutting(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_FENCE, 2);
+              }
+          )
           .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN_BRICK))
           .item()
           .model(ItemModelGenerator::inventoryModel)
@@ -242,8 +272,12 @@ public class ModBlocks {
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, Tags.Blocks.FENCES)
           .register();
 
-      public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_OBSIDIAN_BRICK_GATE = REGISTRATE.block("runed_brick_gate", RunedObsidianBlocks.Gate::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+      public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_BRICK_GATE = REGISTRATE.block("runed_brick_gate", RunedObsidianBlocks.Gate::new)
+          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+            p.fenceGate(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_GATE, null);
+            p.stonecutting(DataIngredient.items(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK), RunedObsidianBrick.RUNED_BRICK_GATE, 2);
+          })
           .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN_BRICK))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -256,10 +290,10 @@ public class ModBlocks {
     }
 
     public static class RunedObsidianBrickAlt {
-      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_BRICK_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN);
+      public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN);
 
-      public static BlockEntry<RunedObsidianBlocks.Block> RUNED_OBSIDIAN_BRICK_ALT = REGISTRATE.block("runed_obsidian_brick_alt", RunedObsidianBlocks.Block::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+      public static BlockEntry<Block> RUNED_OBSIDIAN_BRICK_ALT = REGISTRATE.block("runed_obsidian_brick_alt", Block::new)
+          .properties(RUNED_PROPERTIES)
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -267,8 +301,12 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_ALT_BUTTON = REGISTRATE.block("runed_brick_alt_button", RunedObsidianBlocks.Button::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.STONE_BUTTON))
           .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN_BRICK_ALT))
+          .recipe((ctx, p) -> {
+            p.singleItem(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_BUTTON, 1, 1);
+            p.stonecutting(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_BUTTON);
+          })
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.BUTTONS)
@@ -277,8 +315,16 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_BRICK_ALT_PRESSURE_PLATE = REGISTRATE.block("runed_brick_alt_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
           .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN_BRICK_ALT))
+          .recipe((ctx, p) -> {
+            ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+                .pattern("XX")
+                .define('X', DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT))
+                .unlockedBy("has_runed_obsidian_brick_alt", DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT).getCritereon(p))
+                .save(p, p.safeId(ctx.getEntry()));
+            p.stonecutting(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_PRESSURE_PLATE);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -286,8 +332,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_BRICK_ALT_SLAB = REGISTRATE.block("runed_brick_alt_slab", RunedObsidianBlocks.Slab::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.OBSIDIAN).requiresCorrectToolForDrops())
           .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN_BRICK_ALT))
+          .recipe((ctx, p) -> p.slab(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_SLAB, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.SLABS)
@@ -297,8 +344,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_BRICK_ALT_STAIRS = REGISTRATE.block("runed_brick_alt_stairs", RunedObsidianBlocks.Stairs::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(RUNED_PROPERTIES)
           .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN_BRICK_ALT))
+          .recipe((ctx, p) -> p.stairs(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_STAIRS, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.STAIRS)
@@ -307,8 +355,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_BRICK_ALT_WALL = REGISTRATE.block("runed_brick_alt_wall", RunedObsidianBlocks.Wall::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(RUNED_PROPERTIES)
           .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN_BRICK_ALT))
+          .recipe((ctx, p) -> p.wall(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_WALL))
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.WALLS)
@@ -317,7 +366,8 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_BRICK_ALT_NARROW_POST = REGISTRATE.block("runed_brick_alt_narrow_post", RunedObsidianBlocks.NarrowPost::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.narrowPost(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT, RunedObsidianBrickAlt.RUNED_BRICK_ALT_NARROW_POST, null, true, p))
           .blockstate(BlockstateGenerator.narrowPost(RUNED_OBSIDIAN_BRICK_ALT))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -326,7 +376,8 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<RunedObsidianBlocks.WidePost> RUNED_BRICK_ALT_WIDE_POST = REGISTRATE.block("runed_brick_alt_wide_post", RunedObsidianBlocks.WidePost::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.widePost(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT, RunedObsidianBrickAlt.RUNED_BRICK_ALT_WIDE_POST, null, true, p))
           .blockstate(BlockstateGenerator.widePost(RUNED_OBSIDIAN_BRICK_ALT))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -334,8 +385,13 @@ public class ModBlocks {
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
           .register();
 
-      public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_OBSIDIAN_BRICK_ALT_FENCE = REGISTRATE.block("runed_brick_alt_fence", RunedObsidianBlocks.Fence::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+      public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_BRICK_ALT_FENCE = REGISTRATE.block("runed_brick_alt_fence", RunedObsidianBlocks.Fence::new)
+          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+                p.fence(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_FENCE, null);
+                p.stonecutting(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_FENCE, 2);
+              }
+          )
           .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN_BRICK_ALT))
           .item()
           .model(ItemModelGenerator::inventoryModel)
@@ -343,8 +399,12 @@ public class ModBlocks {
           .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, Tags.Blocks.FENCES)
           .register();
 
-      public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_OBSIDIAN_BRICK_ALT_GATE = REGISTRATE.block("runed_brick_alt_gate", RunedObsidianBlocks.Gate::new)
-          .properties(RUNED_BRICK_PROPERTIES)
+      public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_BRICK_ALT_GATE = REGISTRATE.block("runed_brick_alt_gate", RunedObsidianBlocks.Gate::new)
+          .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+            p.fenceGate(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_GATE, null);
+            p.stonecutting(DataIngredient.items(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT), RunedObsidianBrickAlt.RUNED_BRICK_ALT_GATE, 2);
+          })
           .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN_BRICK_ALT))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -364,12 +424,24 @@ public class ModBlocks {
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
-          .tag(RootsTags.Blocks.RUNESTONE)
+          .tag(RootsTags.Blocks.RUNED_OBSIDIAN)
+          .register();
+
+      public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
+          .properties(RUNESTONE_PROPERTIES)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(RootsTags.Blocks.RUNED_OBSIDIAN)
           .register();
 
       public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BUTTON = REGISTRATE.block("runestone_button", BaseBlocks.StoneButtonBlock::new)
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.STONE_BUTTON))
           .blockstate(BlockstateGenerator.button(RUNESTONE))
+          .recipe((ctx, p) -> {
+            p.singleItem(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_BUTTON, 1, 1);
+            p.stonecutting(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_BUTTON);
+          })
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.BUTTONS)
@@ -378,8 +450,16 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_PRESSURE_PLATE = REGISTRATE.block("runestone_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
           .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE))
+          .recipe((ctx, p) -> {
+            ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+                .pattern("XX")
+                .define('X', DataIngredient.items(Runestone.RUNESTONE))
+                .unlockedBy("has_runestone", DataIngredient.items(Runestone.RUNESTONE).getCritereon(p))
+                .save(p, p.safeId(ctx.getEntry()));
+            p.stonecutting(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_PRESSURE_PLATE);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -387,8 +467,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<SlabBlock> RUNESTONE_SLAB = REGISTRATE.block("runestone_slab", SlabBlock::new)
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
           .blockstate(BlockstateGenerator.slab(RUNESTONE))
+          .recipe((ctx, p) -> p.slab(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_SLAB, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.SLABS)
@@ -397,9 +478,10 @@ public class ModBlocks {
           .loot((p, t) -> p.add(t, RegistrateBlockLootTables.droppingSlab(t)))
           .register();
 
-      public static BlockEntry<StairsBlock> RUNESTONE_STAIRS = REGISTRATE.block("runestone_stairs", (p) -> new StairsBlock(RUNESTONE::getDefaultState, p))
+      public static BlockEntry<StairsBlock> RUNESTONE_STAIRS = REGISTRATE.block("runestone_stairs", (p) -> new StairsBlock(Runestone.RUNESTONE::getDefaultState, p))
           .properties(RUNESTONE_PROPERTIES)
           .blockstate(BlockstateGenerator.stairs(RUNESTONE))
+          .recipe((ctx, p) -> p.stairs(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_STAIRS, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.STAIRS)
@@ -410,6 +492,7 @@ public class ModBlocks {
       public static BlockEntry<WallBlock> RUNESTONE_WALL = REGISTRATE.block("runestone_wall", WallBlock::new)
           .properties(RUNESTONE_PROPERTIES)
           .blockstate(BlockstateGenerator.wall(RUNESTONE))
+          .recipe((ctx, p) -> p.wall(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_WALL))
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.WALLS)
@@ -419,6 +502,7 @@ public class ModBlocks {
 
       public static BlockEntry<BaseBlocks.NarrowPostBlock> RUNESTONE_NARROW_POST = REGISTRATE.block("runestone_narrow_post", BaseBlocks.NarrowPostBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.narrowPost(Runestone.RUNESTONE, Runestone.RUNESTONE_NARROW_POST, null, true, p))
           .blockstate(BlockstateGenerator.narrowPost(RUNESTONE))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -428,6 +512,7 @@ public class ModBlocks {
 
       public static BlockEntry<BaseBlocks.WidePostBlock> RUNESTONE_WIDE_POST = REGISTRATE.block("runestone_wide_post", BaseBlocks.WidePostBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.widePost(Runestone.RUNESTONE, Runestone.RUNESTONE_WIDE_POST, null, true, p))
           .blockstate(BlockstateGenerator.widePost(RUNESTONE))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -437,6 +522,11 @@ public class ModBlocks {
 
       public static BlockEntry<FenceBlock> RUNESTONE_FENCE = REGISTRATE.block("runestone_fence", FenceBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+                p.fence(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_FENCE, null);
+                p.stonecutting(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_FENCE, 2);
+              }
+          )
           .blockstate(BlockstateGenerator.fence(RUNESTONE))
           .item()
           .model(ItemModelGenerator::inventoryModel)
@@ -446,19 +536,15 @@ public class ModBlocks {
 
       public static BlockEntry<FenceGateBlock> RUNESTONE_GATE = REGISTRATE.block("runestone_gate", FenceGateBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+            p.fenceGate(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_GATE, null);
+            p.stonecutting(DataIngredient.items(Runestone.RUNESTONE), Runestone.RUNESTONE_GATE, 2);
+          })
           .blockstate(BlockstateGenerator.gate(RUNESTONE))
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
           .tag(BlockTags.FENCE_GATES, Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER)
-          .register();
-
-      public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
-          .properties(RUNESTONE_PROPERTIES)
-          .item()
-          .model(ItemModelGenerator::itemModel)
-          .build()
-          .tag(RootsTags.Blocks.RUNESTONE)
           .register();
 
       public static void load() {
@@ -473,12 +559,16 @@ public class ModBlocks {
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
-          .tag(RootsTags.Blocks.RUNESTONE)
+          .tag(RootsTags.Blocks.RUNED_OBSIDIAN)
           .register();
 
       public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_BUTTON = REGISTRATE.block("runestone_brick_button", BaseBlocks.StoneButtonBlock::new)
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.STONE_BUTTON))
           .blockstate(BlockstateGenerator.button(RUNESTONE_BRICK))
+          .recipe((ctx, p) -> {
+            p.singleItem(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_BUTTON, 1, 1);
+            p.stonecutting(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_BUTTON);
+          })
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.BUTTONS)
@@ -487,8 +577,16 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_BRICK_PRESSURE_PLATE = REGISTRATE.block("runestone_brick_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
           .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE_BRICK))
+          .recipe((ctx, p) -> {
+            ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+                .pattern("XX")
+                .define('X', DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK))
+                .unlockedBy("has_runestone_brick", DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK).getCritereon(p))
+                .save(p, p.safeId(ctx.getEntry()));
+            p.stonecutting(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_PRESSURE_PLATE);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -496,8 +594,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<SlabBlock> RUNESTONE_BRICK_SLAB = REGISTRATE.block("runestone_brick_slab", SlabBlock::new)
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
           .blockstate(BlockstateGenerator.slab(RUNESTONE_BRICK))
+          .recipe((ctx, p) -> p.slab(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_SLAB, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.SLABS)
@@ -506,9 +605,10 @@ public class ModBlocks {
           .loot((p, t) -> p.add(t, RegistrateBlockLootTables.droppingSlab(t)))
           .register();
 
-      public static BlockEntry<StairsBlock> RUNESTONE_BRICK_STAIRS = REGISTRATE.block("runestone_brick_stairs", (p) -> new StairsBlock(RUNESTONE_BRICK::getDefaultState, p))
+      public static BlockEntry<StairsBlock> RUNESTONE_BRICK_STAIRS = REGISTRATE.block("runestone_brick_stairs", (p) -> new StairsBlock(RunestoneBrick.RUNESTONE_BRICK::getDefaultState, p))
           .properties(RUNESTONE_PROPERTIES)
           .blockstate(BlockstateGenerator.stairs(RUNESTONE_BRICK))
+          .recipe((ctx, p) -> p.stairs(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_STAIRS, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.STAIRS)
@@ -519,6 +619,7 @@ public class ModBlocks {
       public static BlockEntry<WallBlock> RUNESTONE_BRICK_WALL = REGISTRATE.block("runestone_brick_wall", WallBlock::new)
           .properties(RUNESTONE_PROPERTIES)
           .blockstate(BlockstateGenerator.wall(RUNESTONE_BRICK))
+          .recipe((ctx, p) -> p.wall(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_WALL))
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.WALLS)
@@ -528,6 +629,7 @@ public class ModBlocks {
 
       public static BlockEntry<BaseBlocks.NarrowPostBlock> RUNESTONE_BRICK_NARROW_POST = REGISTRATE.block("runestone_brick_narrow_post", BaseBlocks.NarrowPostBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.narrowPost(RunestoneBrick.RUNESTONE_BRICK, RunestoneBrick.RUNESTONE_BRICK_NARROW_POST, null, true, p))
           .blockstate(BlockstateGenerator.narrowPost(RUNESTONE_BRICK))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -537,6 +639,7 @@ public class ModBlocks {
 
       public static BlockEntry<BaseBlocks.WidePostBlock> RUNESTONE_BRICK_WIDE_POST = REGISTRATE.block("runestone_brick_wide_post", BaseBlocks.WidePostBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.widePost(RunestoneBrick.RUNESTONE_BRICK, RunestoneBrick.RUNESTONE_BRICK_WIDE_POST, null, true, p))
           .blockstate(BlockstateGenerator.widePost(RUNESTONE_BRICK))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -546,6 +649,11 @@ public class ModBlocks {
 
       public static BlockEntry<FenceBlock> RUNESTONE_BRICK_FENCE = REGISTRATE.block("runestone_brick_fence", FenceBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+                p.fence(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_FENCE, null);
+                p.stonecutting(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_FENCE, 2);
+              }
+          )
           .blockstate(BlockstateGenerator.fence(RUNESTONE_BRICK))
           .item()
           .model(ItemModelGenerator::inventoryModel)
@@ -555,6 +663,10 @@ public class ModBlocks {
 
       public static BlockEntry<FenceGateBlock> RUNESTONE_BRICK_GATE = REGISTRATE.block("runestone_brick_gate", FenceGateBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+            p.fenceGate(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_GATE, null);
+            p.stonecutting(DataIngredient.items(RunestoneBrick.RUNESTONE_BRICK), RunestoneBrick.RUNESTONE_BRICK_GATE, 2);
+          })
           .blockstate(BlockstateGenerator.gate(RUNESTONE_BRICK))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -574,12 +686,16 @@ public class ModBlocks {
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
-          .tag(RootsTags.Blocks.RUNESTONE)
+          .tag(RootsTags.Blocks.RUNED_OBSIDIAN)
           .register();
 
       public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_ALT_BUTTON = REGISTRATE.block("runestone_brick_alt_button", BaseBlocks.StoneButtonBlock::new)
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.STONE_BUTTON))
           .blockstate(BlockstateGenerator.button(RUNESTONE_BRICK_ALT))
+          .recipe((ctx, p) -> {
+            p.singleItem(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_BUTTON, 1, 1);
+            p.stonecutting(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_BUTTON);
+          })
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.BUTTONS)
@@ -588,8 +704,16 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_BRICK_ALT_PRESSURE_PLATE = REGISTRATE.block("runestone_brick_alt_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
           .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE_BRICK_ALT))
+          .recipe((ctx, p) -> {
+            ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+                .pattern("XX")
+                .define('X', DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT))
+                .unlockedBy("has_runestone_brick_alt", DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT).getCritereon(p))
+                .save(p, p.safeId(ctx.getEntry()));
+            p.stonecutting(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_PRESSURE_PLATE);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -597,8 +721,9 @@ public class ModBlocks {
           .register();
 
       public static BlockEntry<SlabBlock> RUNESTONE_BRICK_ALT_SLAB = REGISTRATE.block("runestone_brick_alt_slab", SlabBlock::new)
-          .properties(RUNESTONE_PROPERTIES)
+          .properties(o -> AbstractBlock.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
           .blockstate(BlockstateGenerator.slab(RUNESTONE_BRICK_ALT))
+          .recipe((ctx, p) -> p.slab(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_SLAB, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.SLABS)
@@ -607,9 +732,10 @@ public class ModBlocks {
           .loot((p, t) -> p.add(t, RegistrateBlockLootTables.droppingSlab(t)))
           .register();
 
-      public static BlockEntry<StairsBlock> RUNESTONE_BRICK_ALT_STAIRS = REGISTRATE.block("runestone_brick_alt_stairs", (p) -> new StairsBlock(RUNESTONE_BRICK_ALT::getDefaultState, p))
+      public static BlockEntry<StairsBlock> RUNESTONE_BRICK_ALT_STAIRS = REGISTRATE.block("runestone_brick_alt_stairs", (p) -> new StairsBlock(RunestoneBrickAlt.RUNESTONE_BRICK_ALT::getDefaultState, p))
           .properties(RUNESTONE_PROPERTIES)
           .blockstate(BlockstateGenerator.stairs(RUNESTONE_BRICK_ALT))
+          .recipe((ctx, p) -> p.stairs(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_STAIRS, null, true))
           .item()
           .model(ItemModelGenerator::itemModel)
           .tag(ItemTags.STAIRS)
@@ -620,6 +746,7 @@ public class ModBlocks {
       public static BlockEntry<WallBlock> RUNESTONE_BRICK_ALT_WALL = REGISTRATE.block("runestone_brick_alt_wall", WallBlock::new)
           .properties(RUNESTONE_PROPERTIES)
           .blockstate(BlockstateGenerator.wall(RUNESTONE_BRICK_ALT))
+          .recipe((ctx, p) -> p.wall(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_WALL))
           .item()
           .model(ItemModelGenerator::inventoryModel)
           .tag(ItemTags.WALLS)
@@ -629,6 +756,7 @@ public class ModBlocks {
 
       public static BlockEntry<BaseBlocks.NarrowPostBlock> RUNESTONE_BRICK_ALT_NARROW_POST = REGISTRATE.block("runestone_brick_alt_narrow_post", BaseBlocks.NarrowPostBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.narrowPost(RunestoneBrickAlt.RUNESTONE_BRICK_ALT, RunestoneBrickAlt.RUNESTONE_BRICK_ALT_NARROW_POST, null, true, p))
           .blockstate(BlockstateGenerator.narrowPost(RUNESTONE_BRICK_ALT))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -638,6 +766,7 @@ public class ModBlocks {
 
       public static BlockEntry<BaseBlocks.WidePostBlock> RUNESTONE_BRICK_ALT_WIDE_POST = REGISTRATE.block("runestone_brick_alt_wide_post", BaseBlocks.WidePostBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.widePost(RunestoneBrickAlt.RUNESTONE_BRICK_ALT, RunestoneBrickAlt.RUNESTONE_BRICK_ALT_WIDE_POST, null, true, p))
           .blockstate(BlockstateGenerator.widePost(RUNESTONE_BRICK_ALT))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -647,6 +776,11 @@ public class ModBlocks {
 
       public static BlockEntry<FenceBlock> RUNESTONE_BRICK_ALT_FENCE = REGISTRATE.block("runestone_brick_alt_fence", FenceBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+                p.fence(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_FENCE, null);
+                p.stonecutting(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_FENCE, 2);
+              }
+          )
           .blockstate(BlockstateGenerator.fence(RUNESTONE_BRICK_ALT))
           .item()
           .model(ItemModelGenerator::inventoryModel)
@@ -656,6 +790,10 @@ public class ModBlocks {
 
       public static BlockEntry<FenceGateBlock> RUNESTONE_BRICK_ALT_GATE = REGISTRATE.block("runestone_brick_alt_gate", FenceGateBlock::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+            p.fenceGate(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_GATE, null);
+            p.stonecutting(DataIngredient.items(RunestoneBrickAlt.RUNESTONE_BRICK_ALT), RunestoneBrickAlt.RUNESTONE_BRICK_ALT_GATE, 2);
+          })
           .blockstate(BlockstateGenerator.gate(RUNESTONE_BRICK_ALT))
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -667,55 +805,101 @@ public class ModBlocks {
       }
     }
 
-/*    public static class RunedWood {
+    public static class RunedWood {
       public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_LOG_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LOG);
       public static NonNullUnaryOperator<AbstractBlock.Properties> RUNED_STEM_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.CRIMSON_STEM);
 
-      public static BlockEntry<Block> RUNED_ACACIA = REGISTRATE.block("runed_acacia", Block::new)
+      public static BlockEntry<RotatedPillarBlock> RUNED_ACACIA_LOG = REGISTRATE.block("runed_acacia_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.ACACIA_LOGS, RootsTags.Blocks.RUNED_ACACIA_LOG)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_acacia"), new ResourceLocation("minecraft", "block/acacia_log_top")))
+          .tag(BlockTags.ACACIA_LOGS, RootsTags.Blocks.RUNED_ACACIA_LOG)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
 
-      public static BlockEntry<Block> RUNED_DARK_OAK = REGISTRATE.block("runed_dark_oak", Block::new)
+
+      public static BlockEntry<RotatedPillarBlock> RUNED_DARK_OAK_LOG = REGISTRATE.block("runed_dark_oak_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.DARK_OAK_LOGS)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_dark_oak"), new ResourceLocation("minecraft", "block/dark_oak_log_top")))
+          .tag(BlockTags.DARK_OAK_LOGS, RootsTags.Blocks.RUNED_DARK_OAK_LOG)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
 
-      public static BlockEntry<Block> RUNED_OAK = REGISTRATE.block("runed_oak", Block::new)
+
+      public static BlockEntry<RotatedPillarBlock> RUNED_OAK_LOG = REGISTRATE.block("runed_oak_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.OAK_LOGS)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_oak"), new ResourceLocation("minecraft", "block/oak_log_top")))
+          .tag(BlockTags.OAK_LOGS, RootsTags.Blocks.RUNED_OAK_LOG)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
 
-      public static BlockEntry<Block> RUNED_BIRCH = REGISTRATE.block("runed_birch", Block::new)
+
+      public static BlockEntry<RotatedPillarBlock> RUNED_BIRCH_LOG = REGISTRATE.block("runed_birch_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.BIRCH_LOGS)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_birch"), new ResourceLocation("minecraft", "block/birch_log_top")))
+          .tag(BlockTags.BIRCH_LOGS, RootsTags.Blocks.RUNED_BIRCH_LOG)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
 
-      public static BlockEntry<Block> RUNED_JUNGLE = REGISTRATE.block("runed_jungle", Block::new)
+
+      public static BlockEntry<RotatedPillarBlock> RUNED_JUNGLE_LOG = REGISTRATE.block("runed_jungle_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.JUNGLE_LOGS)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_jungle"), new ResourceLocation("minecraft", "block/jungle_log_top")))
+          .tag(BlockTags.JUNGLE_LOGS, RootsTags.Blocks.RUNED_JUNGLE_LOG)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
 
-      public static BlockEntry<Block> RUNED_SPRUCE = REGISTRATE.block("runed_spruce", Block::new)
+
+      public static BlockEntry<RotatedPillarBlock> RUNED_SPRUCE_LOG = REGISTRATE.block("runed_spruce_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, BlockTags.SPRUCE_LOGS)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_spruce"), new ResourceLocation("minecraft", "block/spruce_log_top")))
+          .tag(BlockTags.SPRUCE_LOGS, RootsTags.Blocks.RUNED_SPRUCE_LOG)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
 
-      public static BlockEntry<Block> RUNED_WILDWOOD = REGISTRATE.block("runed_wildwood", Block::new)
+
+      public static BlockEntry<RotatedPillarBlock> RUNED_WILDWOOD_LOG = REGISTRATE.block("runed_wildwood_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_wildwood"), new ResourceLocation(Roots.MODID, "block/wildwood_log_top")))
+          .tag(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Blocks.RUNED_WILDWOOD_LOG)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
 
-      public static BlockEntry<Block> RUNED_CRIMSON_STEM = REGISTRATE.block("runed_crimson", Block::new)
-          .properties(RUNED_STEM_PROPERTIES)
-          .tag(BlockTags.LOGS, RootsTags.Blocks.RUNED_CRIMSON_STEM)
+
+      public static BlockEntry<RotatedPillarBlock> RUNED_CRIMSON_STEM = REGISTRATE.block("runed_crimson_stem", RotatedPillarBlock::new)
+          .properties(RUNED_LOG_PROPERTIES)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_crimson"), new ResourceLocation("minecraft", "block/crimson_stem_top")))
+          .tag(BlockTags.CRIMSON_STEMS, RootsTags.Blocks.RUNED_CRIMSON_STEM)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
 
-      public static BlockEntry<Block> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped", Block::new)
-          .properties(RUNED_STEM_PROPERTIES)
-          .tag(BlockTags.LOGS, RootsTags.Blocks.RUNED_WARPED_STEM)
+
+      public static BlockEntry<RotatedPillarBlock> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped_stem", RotatedPillarBlock::new)
+          .properties(RUNED_LOG_PROPERTIES)
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_warped"), new ResourceLocation("minecraft", "block/warped_stem_top")))
+          .tag(BlockTags.WARPED_STEMS, RootsTags.Blocks.RUNED_WARPED_STEM)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
           .register();
-    }*/
+
+      public static void load () {}
+    }
 
     public static void load() {
       RunedObsidian.load();
@@ -724,9 +908,8 @@ public class ModBlocks {
       Runestone.load();
       RunestoneBrick.load();
       RunestoneBrickAlt.load();
+      RunedWood.load();
     }
-
-
   }
 
   public static class Crops {
@@ -842,7 +1025,7 @@ public class ModBlocks {
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_PLANKS_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_PLANKS);
     public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_DECORATION_PROPERTIES = r -> AbstractBlock.Properties.of(Material.DECORATION);
 
-    public static BlockEntry<Block> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Block::new)
+    public static BlockEntry<Block> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Material.WOOD, Block::new)
         .properties(WILDWOOD_LOG_PROPERTIES)
         .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS)
         .register();
@@ -904,6 +1087,15 @@ public class ModBlocks {
 
     public static BlockEntry<LadderBlock> WILDWOOD_LADDER = REGISTRATE.block("willdwood_ladder", LadderBlock::new)
         .properties(WILDWOOD_DECORATION_PROPERTIES)
+        .recipe((ctx, p) ->
+            ShapedRecipeBuilder.shaped(ctx.getEntry(), 3)
+                .pattern("X X")
+                .pattern("XWX")
+                .pattern("X X")
+                .define('X', Tags.Items.RODS_WOODEN)
+                .define('W', DataIngredient.items(Wildwood.WILDWOOD_PLANKS))
+                .unlockedBy("has_wildwood_planks", DataIngredient.items(Wildwood.WILDWOOD_PLANKS).getCritereon(p))
+                .save(p, p.safeId(ctx.getEntry())))
         .tag(BlockTags.CLIMBABLE)
         .register();
 
@@ -918,9 +1110,9 @@ public class ModBlocks {
         .register();
 
     // todo: wildwood sign, wildwood boat, wildwood sapling?
-  }
+  }*/
 
-  public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
+/*  public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
       .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
       .blockstate(NonNullBiConsumer.noop())
       .register();

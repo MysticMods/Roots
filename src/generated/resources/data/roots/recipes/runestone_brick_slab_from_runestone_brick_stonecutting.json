@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "roots:runestone_brick"
+  },
+  "result": "roots:runestone_brick_slab",
+  "count": 2
+}
