@@ -32,6 +32,9 @@ public class ModBlocks {
 
       public static BlockEntry<Block> RUNED_OBSIDIAN = REGISTRATE.block("runed_obsidian", Block::new)
           .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+            Roots.RECIPES.twoByTwo(RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT, RunedObsidian.RUNED_OBSIDIAN, null, 4, p);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -40,6 +43,9 @@ public class ModBlocks {
 
       public static BlockEntry<Block> CHISELED_RUNED_OBSIDIAN = REGISTRATE.block("chiseled_runed_obsidian", Block::new)
           .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+            Roots.RECIPES.twoByTwo(RunedObsidianBrick.RUNED_OBSIDIAN_BRICK, RunedObsidian.CHISELED_RUNED_OBSIDIAN, null, 4, p);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -167,6 +173,9 @@ public class ModBlocks {
 
       public static BlockEntry<Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick", Block::new)
           .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+            Roots.RECIPES.twoByTwo(RunedObsidian.RUNED_OBSIDIAN, RunedObsidianBrick.RUNED_OBSIDIAN_BRICK, null, 4, p);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -294,6 +303,9 @@ public class ModBlocks {
 
       public static BlockEntry<Block> RUNED_OBSIDIAN_BRICK_ALT = REGISTRATE.block("runed_obsidian_brick_alt", Block::new)
           .properties(RUNED_PROPERTIES)
+          .recipe((ctx, p) -> {
+            Roots.RECIPES.twoByTwo(RunedObsidian.CHISELED_RUNED_OBSIDIAN, RunedObsidianBrickAlt.RUNED_OBSIDIAN_BRICK_ALT, null, 4, p);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -421,6 +433,9 @@ public class ModBlocks {
 
       public static BlockEntry<Block> RUNESTONE = REGISTRATE.block("runestone", Block::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+            Roots.RECIPES.twoByTwo(RunestoneBrickAlt.RUNESTONE_BRICK_ALT, Runestone.RUNESTONE, null, 4, p);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -429,6 +444,9 @@ public class ModBlocks {
 
       public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+            Roots.RECIPES.twoByTwo(RunestoneBrick.RUNESTONE_BRICK, Runestone.CHISELED_RUNESTONE, null, 4, p);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -556,6 +574,9 @@ public class ModBlocks {
 
       public static BlockEntry<Block> RUNESTONE_BRICK = REGISTRATE.block("runestone_brick", Block::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+            Roots.RECIPES.twoByTwo(Runestone.RUNESTONE, RunestoneBrick.RUNESTONE_BRICK, null, 4, p);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -683,6 +704,9 @@ public class ModBlocks {
 
       public static BlockEntry<Block> RUNESTONE_BRICK_ALT = REGISTRATE.block("runestone_brick_alt", Block::new)
           .properties(RUNESTONE_PROPERTIES)
+          .recipe((ctx, p) -> {
+            Roots.RECIPES.twoByTwo(Runestone.CHISELED_RUNESTONE, RunestoneBrickAlt.RUNESTONE_BRICK_ALT, null, 4, p);
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -880,7 +904,7 @@ public class ModBlocks {
 
 
       public static BlockEntry<RotatedPillarBlock> RUNED_CRIMSON_STEM = REGISTRATE.block("runed_crimson_stem", RotatedPillarBlock::new)
-          .properties(RUNED_LOG_PROPERTIES)
+          .properties(RUNED_STEM_PROPERTIES)
           .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_crimson"), new ResourceLocation("minecraft", "block/crimson_stem_top")))
           .tag(BlockTags.CRIMSON_STEMS, RootsTags.Blocks.RUNED_CRIMSON_STEM)
           .item()
@@ -890,7 +914,7 @@ public class ModBlocks {
 
 
       public static BlockEntry<RotatedPillarBlock> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped_stem", RotatedPillarBlock::new)
-          .properties(RUNED_LOG_PROPERTIES)
+          .properties(RUNED_STEM_PROPERTIES)
           .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_warped"), new ResourceLocation("minecraft", "block/warped_stem_top")))
           .tag(BlockTags.WARPED_STEMS, RootsTags.Blocks.RUNED_WARPED_STEM)
           .item()
@@ -1018,99 +1042,6 @@ public class ModBlocks {
     public static void load() {
     }
   }
-
-/*  public static class Wildwood {
-    public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LOG_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LOG);
-    public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LEAVES);
-    public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_PLANKS_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_PLANKS);
-    public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_DECORATION_PROPERTIES = r -> AbstractBlock.Properties.of(Material.DECORATION);
-
-    public static BlockEntry<Block> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Material.WOOD, Block::new)
-        .properties(WILDWOOD_LOG_PROPERTIES)
-        .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS)
-        .register();
-
-    public static BlockEntry<Block> WILDWOOD_WOOD = REGISTRATE.block("wildwood_wood", Block::new)
-        .properties(WILDWOOD_LOG_PROPERTIES)
-        .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS)
-        .register();
-
-    public static BlockEntry<Block> STRIPPED_WILDWOOD_LOG = REGISTRATE.block("stripped_wildwood_log", Block::new)
-        .properties(WILDWOOD_LOG_PROPERTIES)
-        .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS)
-        .register();
-
-    public static BlockEntry<Block> STRIPPED_WILDWOOD_WOOD = REGISTRATE.block("stripped_wildwood_wood", Block::new)
-        .properties(WILDWOOD_LOG_PROPERTIES)
-        .tag(BlockTags.LOGS_THAT_BURN, BlockTags.LOGS, RootsTags.Blocks.WILDWOOD_LOGS)
-        .register();
-
-    public static BlockEntry<Block> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", Block::new)
-        .properties(WILDWOOD_LEAVES_PROPERTIES)
-        .tag(BlockTags.LEAVES)
-        .register();
-
-    public static BlockEntry<Block> WILDWOOD_PLANKS = REGISTRATE.block("wildwood_planks", Block::new)
-        .properties(WILDWOOD_PLANKS_PROPERTIES)
-        .tag(BlockTags.PLANKS)
-        .register();
-
-    public static BlockEntry<BaseBlocks.WoodButtonBlock> WILDWOOD_BUTTON = REGISTRATE.block("wildwood_button", BaseBlocks.WoodButtonBlock::new)
-        .properties(WILDWOOD_DECORATION_PROPERTIES)
-        .tag(BlockTags.WOODEN_BUTTONS, BlockTags.BUTTONS)
-        .register();
-
-    public static BlockEntry<BaseBlocks.PressurePlateBlock> WILDWOOD_PRESSURE_PLATE = REGISTRATE.block("wildwood_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, p))
-        .properties(WILDWOOD_DECORATION_PROPERTIES)
-        .tag(BlockTags.WALL_POST_OVERRIDE, BlockTags.PRESSURE_PLATES, BlockTags.WOODEN_PRESSURE_PLATES)
-        .register();
-
-    public static BlockEntry<SlabBlock> WILDWOOD_SLAB = REGISTRATE.block("wildwood_slab", SlabBlock::new)
-        .properties(WILDWOOD_PLANKS_PROPERTIES)
-        .tag(BlockTags.WOODEN_SLABS, BlockTags.SLABS)
-        .register();
-
-    public static BlockEntry<StairsBlock> WILDWOOD_STAIRS = REGISTRATE.block("wildwood_stairs", (p) -> new StairsBlock(() -> WILDWOOD_PLANKS.getDefaultState(), p))
-        .properties(WILDWOOD_PLANKS_PROPERTIES)
-        .tag(BlockTags.STAIRS, BlockTags.WOODEN_STAIRS)
-        .register();
-
-    public static BlockEntry<FenceBlock> WILDWOOD_FENCE = REGISTRATE.block("wildwood_fence", FenceBlock::new)
-        .properties(WILDWOOD_PLANKS_PROPERTIES)
-        .tag(BlockTags.FENCES, BlockTags.WOODEN_FENCES, Tags.Blocks.FENCES, Tags.Blocks.FENCES_WOODEN)
-        .register();
-
-    public static BlockEntry<FenceGateBlock> WILDWOOD_FENCE_GATE = REGISTRATE.block("wildwood_fence_Gate", FenceGateBlock::new)
-        .properties(WILDWOOD_PLANKS_PROPERTIES)
-        .tag(BlockTags.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, Tags.Blocks.FENCE_GATES, Tags.Blocks.FENCE_GATES_WOODEN)
-        .register();
-
-    public static BlockEntry<LadderBlock> WILDWOOD_LADDER = REGISTRATE.block("willdwood_ladder", LadderBlock::new)
-        .properties(WILDWOOD_DECORATION_PROPERTIES)
-        .recipe((ctx, p) ->
-            ShapedRecipeBuilder.shaped(ctx.getEntry(), 3)
-                .pattern("X X")
-                .pattern("XWX")
-                .pattern("X X")
-                .define('X', Tags.Items.RODS_WOODEN)
-                .define('W', DataIngredient.items(Wildwood.WILDWOOD_PLANKS))
-                .unlockedBy("has_wildwood_planks", DataIngredient.items(Wildwood.WILDWOOD_PLANKS).getCritereon(p))
-                .save(p, p.safeId(ctx.getEntry())))
-        .tag(BlockTags.CLIMBABLE)
-        .register();
-
-    public static BlockEntry<BaseBlocks.TrapDoorBlock> WILDWOOD_TRAPDOOR = REGISTRATE.block("wildwood_trapdoor", BaseBlocks.TrapDoorBlock::new)
-        .properties(WILDWOOD_PLANKS_PROPERTIES)
-        .tag(BlockTags.TRAPDOORS, BlockTags.WOODEN_TRAPDOORS)
-        .register();
-
-    public static BlockEntry<BaseBlocks.DoorBlock> WILDWOOD_DOOR = REGISTRATE.block("wildwood_door", BaseBlocks.DoorBlock::new)
-        .properties(WILDWOOD_PLANKS_PROPERTIES)
-        .tag(BlockTags.DOORS, BlockTags.WOODEN_DOORS)
-        .register();
-
-    // todo: wildwood sign, wildwood boat, wildwood sapling?
-  }*/
 
 /*  public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
       .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
