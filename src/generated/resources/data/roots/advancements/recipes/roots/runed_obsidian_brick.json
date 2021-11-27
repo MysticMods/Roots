@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "roots:runed_obsidian_brick"
+    ]
+  },
+  "criteria": {
+    "has_runed_obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:runed_obsidian"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "roots:runed_obsidian_brick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_runed_obsidian",
+      "has_the_recipe"
+    ]
+  ]
+}

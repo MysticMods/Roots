@@ -948,6 +948,9 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> WILDWOOD_WOOD = REGISTRATE.block("wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
           .properties(WILDWOOD_LOG_PROPERTIES)
+          .blockstate((ctx, p) -> {
+            p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/wildwood_log"), new ResourceLocation(Roots.MODID, "block/wildwood_log"));
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -956,6 +959,9 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_WOOD = REGISTRATE.block("stripped_wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
           .properties(WILDWOOD_LOG_PROPERTIES)
+          .blockstate((ctx, p) -> {
+            p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/stripped_wildwood_log"), new ResourceLocation(Roots.MODID, "block/stripped_wildwood_log"));
+          })
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()

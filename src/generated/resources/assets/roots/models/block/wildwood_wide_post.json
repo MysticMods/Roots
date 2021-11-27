@@ -1,0 +1,6 @@
+{
+  "parent": "roots:block/wide_post",
+  "textures": {
+    "wall": "roots:block/wildwood_planks"
+  }
+}

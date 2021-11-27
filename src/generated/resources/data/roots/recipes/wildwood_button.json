@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:wildwood_planks"
+    }
+  ],
+  "result": {
+    "item": "roots:wildwood_button"
+  }
+}
