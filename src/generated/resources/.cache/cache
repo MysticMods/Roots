@@ -888,6 +888,17 @@ c4c66cd577555a2376174cd6ca20771bf62b73ac data/roots/tags/items/crops/spirit_herb
 0ce6393fac758fecc2ce81c6d9752aec3cc1471b data/roots/tags/items/crops/stalicripe.json
 717fe92061ce07ceee281b1357c83e42fce354a0 data/roots/tags/items/crops/wildewheet.json
 62fc77cb24f1a15584cda999f691103b9d26eb1c data/roots/tags/items/crops/wildroot.json
+08b3271993de8d99793a75d721c0453d54ea6679 data/roots/tags/items/logs/runed.json
+aecb4f08b6157cd63519bdce1ed48c78582cfdd2 data/roots/tags/items/logs/runed/acacia.json
+391f4f144a2719a8b0212aeb2f8f32caf6171324 data/roots/tags/items/logs/runed/birch.json
+6e85e0aab8d79f691d54f2df3cd035ae9e7135e3 data/roots/tags/items/logs/runed/crimson.json
+67b5fb45342d1bb6245948630be6b999e656cad5 data/roots/tags/items/logs/runed/dark_oak.json
+ac8a57eab5a24f1e8e579c85b3bb4dfa6c41f7d3 data/roots/tags/items/logs/runed/jungle.json
+88733c0dc1ccbb20c9c31ab3f62b995835bd8053 data/roots/tags/items/logs/runed/oak.json
+4255fe4c69a3fc59c74e49ed73d4c04e458ac4c5 data/roots/tags/items/logs/runed/spruce.json
+e031af98b1de5756dc2bc3be9a5502aafbd17836 data/roots/tags/items/logs/runed/warped.json
+5e545888a9803eaee876c2ed1c0855e51cbaacc8 data/roots/tags/items/logs/runed/wildwood.json
+1e5db8d6dba399d0fe1ce9abc94d3f14c0202de9 data/roots/tags/items/logs/wildwood.json
 2e317ad6ec906d1e05c3eb1046bf313b7289cbec data/roots/tags/items/runed_obsidian.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/roots/tags/items/runestone.json
 c84247021b812e56145a12750229af395dcad0e5 data/roots/tags/items/seeds/cloud_berry.json

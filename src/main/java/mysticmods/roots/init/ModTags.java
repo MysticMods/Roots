@@ -58,8 +58,8 @@ public class ModTags {
       b.addBlocks(RootsTags.Items.Blocks.ELEMENTAL_SOIL, RootsTags.Blocks.ELEMENTAL_SOIL);
       b.addBlocks(RootsTags.Items.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNED_OBSIDIAN);
       b.addBlocks(RootsTags.Items.Blocks.RUNESTONE, RootsTags.Blocks.RUNESTONE);
-/*      b.addBlocks(RootsTags.Items.Blocks.WILDWOOD_LOGS, RootsTags.Blocks.WILDWOOD_LOGS);*/
-/*      b.addBlocks(RootsTags.Items.Blocks.RUNED_LOGS, RootsTags.Blocks.RUNED_LOGS);
+      b.addBlocks(RootsTags.Items.Blocks.WILDWOOD_LOGS, RootsTags.Blocks.WILDWOOD_LOGS);
+      b.addBlocks(RootsTags.Items.Blocks.RUNED_LOGS, RootsTags.Blocks.RUNED_LOGS);
       b.addBlocks(RootsTags.Items.Blocks.RUNED_ACACIA_LOG, RootsTags.Blocks.RUNED_ACACIA_LOG);
       b.addBlocks(RootsTags.Items.Blocks.RUNED_DARK_OAK_LOG, RootsTags.Blocks.RUNED_DARK_OAK_LOG);
       b.addBlocks(RootsTags.Items.Blocks.RUNED_OAK_LOG, RootsTags.Blocks.RUNED_OAK_LOG);
@@ -68,7 +68,7 @@ public class ModTags {
       b.addBlocks(RootsTags.Items.Blocks.RUNED_SPRUCE_LOG, RootsTags.Blocks.RUNED_SPRUCE_LOG);
       b.addBlocks(RootsTags.Items.Blocks.RUNED_WILDWOOD_LOG, RootsTags.Blocks.RUNED_WILDWOOD_LOG);
       b.addBlocks(RootsTags.Items.Blocks.RUNED_CRIMSON_STEM, RootsTags.Blocks.RUNED_CRIMSON_STEM);
-      b.addBlocks(RootsTags.Items.Blocks.RUNED_WARPED_STEM, RootsTags.Blocks.RUNED_WARPED_STEM);*/
+      b.addBlocks(RootsTags.Items.Blocks.RUNED_WARPED_STEM, RootsTags.Blocks.RUNED_WARPED_STEM);
 /*      b.addBlocks(RootsTags.Items.Blocks.PLATE, RootsTags.Blocks.PLATE);
       b.addBlocks(RootsTags.Items.Blocks.PYRE, RootsTags.Blocks.PYRE);
       b.addBlocks(RootsTags.Items.Blocks.CRAFTER, RootsTags.Blocks.CRAFTER);

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "roots:runed_wildwood_log",
+    "roots:wildwood_log",
+    "roots:stripped_wildwood_log",
+    "roots:wildwood_wood",
+    "roots:stripped_wildwood_wood"
+  ]
+}
