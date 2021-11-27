@@ -925,6 +925,171 @@ public class ModBlocks {
       public static void load () {}
     }
 
+    public static class Wildwood {
+      public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_PLANKS_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_PLANKS);
+      public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LOG_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LOG);
+      public static NonNullUnaryOperator<AbstractBlock.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> AbstractBlock.Properties.copy(Blocks.OAK_LEAVES);
+
+      public static BlockEntry<RotatedPillarBlock> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Material.WOOD, RotatedPillarBlock::new)
+          .properties(WILDWOOD_LOG_PROPERTIES)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(RootsTags.Blocks.WILDWOOD_LOGS)
+          .register();
+
+      public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_LOG = REGISTRATE.block("stripped_wildwood_log", Material.WOOD, RotatedPillarBlock::new)
+          .properties(WILDWOOD_LOG_PROPERTIES)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(RootsTags.Blocks.WILDWOOD_LOGS)
+          .register();
+
+      public static BlockEntry<RotatedPillarBlock> WILDWOOD_WOOD = REGISTRATE.block("wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
+          .properties(WILDWOOD_LOG_PROPERTIES)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(RootsTags.Blocks.WILDWOOD_LOGS)
+          .register();
+
+      public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_WOOD = REGISTRATE.block("stripped_wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
+          .properties(WILDWOOD_LOG_PROPERTIES)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(RootsTags.Blocks.WILDWOOD_LOGS)
+          .register();
+
+      public static BlockEntry<Block> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", Block::new)
+          .properties(WILDWOOD_LEAVES_PROPERTIES)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(BlockTags.LEAVES)
+          .register();
+
+      public static BlockEntry<Block> WILDWOOD_PLANKS = REGISTRATE.block("wildwood_planks", Block::new)
+          .properties(WILDWOOD_PLANKS_PROPERTIES)
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(BlockTags.PLANKS)
+          .register();
+
+      public static BlockEntry<BaseBlocks.WoodButtonBlock> WILDWOOD_BUTTON = REGISTRATE.block("wildwood_button", BaseBlocks.WoodButtonBlock::new)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.OAK_BUTTON))
+          .blockstate(BlockstateGenerator.button(WILDWOOD_PLANKS))
+          .recipe((ctx, p) -> {
+            p.singleItem(DataIngredient.items(Wildwood.WILDWOOD_PLANKS), Wildwood.WILDWOOD_BUTTON, 1, 1);
+          })
+          .item()
+          .model(ItemModelGenerator::inventoryModel)
+          .tag(ItemTags.BUTTONS)
+          .build()
+          .tag(BlockTags.WOODEN_BUTTONS)
+          .register();
+
+      public static BlockEntry<BaseBlocks.PressurePlateBlock> WILDWOOD_PRESSURE_PLATE = REGISTRATE.block("wildwood_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, p))
+          .properties(o -> AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
+          .blockstate(BlockstateGenerator.pressurePlate(WILDWOOD_PLANKS))
+          .recipe((ctx, p) -> {
+            ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+                .pattern("XX")
+                .define('X', DataIngredient.items(Wildwood.WILDWOOD_PLANKS))
+                .unlockedBy("has_wildwood", DataIngredient.items(Wildwood.WILDWOOD_PLANKS).getCritereon(p))
+                .save(p, p.safeId(ctx.getEntry()));
+          })
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(BlockTags.WOODEN_PRESSURE_PLATES)
+          .register();
+
+      public static BlockEntry<SlabBlock> WILDWOOD_SLAB = REGISTRATE.block("wildwood_slab", SlabBlock::new)
+          .properties(o -> AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).requiresCorrectToolForDrops())
+          .blockstate(BlockstateGenerator.slab(WILDWOOD_PLANKS))
+          .recipe((ctx, p) -> p.slab(DataIngredient.items(Wildwood.WILDWOOD_PLANKS), Wildwood.WILDWOOD_SLAB, null, false))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .tag(ItemTags.SLABS)
+          .build()
+          .tag(BlockTags.WOODEN_SLABS)
+          .loot((p, t) -> p.add(t, RegistrateBlockLootTables.droppingSlab(t)))
+          .register();
+
+      public static BlockEntry<StairsBlock> WILDWOOD_STAIRS = REGISTRATE.block("wildwood_stairs", (p) -> new StairsBlock(Wildwood.WILDWOOD_PLANKS::getDefaultState, p))
+          .properties(WILDWOOD_PLANKS_PROPERTIES)
+          .blockstate(BlockstateGenerator.stairs(WILDWOOD_PLANKS))
+          .recipe((ctx, p) -> p.stairs(DataIngredient.items(Wildwood.WILDWOOD_PLANKS), Wildwood.WILDWOOD_STAIRS, null, false))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .tag(ItemTags.STAIRS)
+          .build()
+          .tag(BlockTags.WOODEN_STAIRS)
+          .register();
+
+      public static BlockEntry<WallBlock> WILDWOOD_WALL = REGISTRATE.block("wildwood_wall", WallBlock::new)
+          .properties(WILDWOOD_PLANKS_PROPERTIES)
+          .blockstate(BlockstateGenerator.wall(WILDWOOD_PLANKS))
+          .recipe((ctx, p) -> p.wall(DataIngredient.items(Wildwood.WILDWOOD_PLANKS), Wildwood.WILDWOOD_WALL))
+          .item()
+          .model(ItemModelGenerator::inventoryModel)
+          .tag(ItemTags.WALLS)
+          .build()
+          .tag(BlockTags.WALLS)
+          .register();
+
+      public static BlockEntry<BaseBlocks.NarrowPostBlock> WILDWOOD_NARROW_POST = REGISTRATE.block("wildwood_narrow_post", BaseBlocks.NarrowPostBlock::new)
+          .properties(WILDWOOD_PLANKS_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.narrowPost(Wildwood.WILDWOOD_PLANKS, Wildwood.WILDWOOD_NARROW_POST, null, false, p))
+          .blockstate(BlockstateGenerator.narrowPost(WILDWOOD_PLANKS))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag()
+          .register();
+
+      public static BlockEntry<BaseBlocks.WidePostBlock> WILDWOOD_WIDE_POST = REGISTRATE.block("wildwood_wide_post", BaseBlocks.WidePostBlock::new)
+          .properties(WILDWOOD_PLANKS_PROPERTIES)
+          .recipe((ctx, p) -> Roots.RECIPES.widePost(Wildwood.WILDWOOD_PLANKS, Wildwood.WILDWOOD_WIDE_POST, null, false, p))
+          .blockstate(BlockstateGenerator.widePost(WILDWOOD_PLANKS))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag()
+          .register();
+
+      public static BlockEntry<FenceBlock> WILDWOOD_FENCE = REGISTRATE.block("wildwood_fence", FenceBlock::new)
+          .properties(WILDWOOD_PLANKS_PROPERTIES)
+          .recipe((ctx, p) -> {
+                p.fence(DataIngredient.items(Wildwood.WILDWOOD_PLANKS), Wildwood.WILDWOOD_FENCE, null);
+              }
+          )
+          .blockstate(BlockstateGenerator.fence(WILDWOOD_PLANKS))
+          .item()
+          .model(ItemModelGenerator::inventoryModel)
+          .build()
+          .tag(BlockTags.WOODEN_FENCES, Tags.Blocks.FENCES_WOODEN)
+          .register();
+
+      public static BlockEntry<FenceGateBlock> WILDWOOD_GATE = REGISTRATE.block("wildwood_gate", FenceGateBlock::new)
+          .properties(WILDWOOD_PLANKS_PROPERTIES)
+          .recipe((ctx, p) -> {
+            p.fenceGate(DataIngredient.items(Wildwood.WILDWOOD_PLANKS), Wildwood.WILDWOOD_GATE, null);
+          })
+          .blockstate(BlockstateGenerator.gate(WILDWOOD_PLANKS))
+          .item()
+          .model(ItemModelGenerator::itemModel)
+          .build()
+          .tag(BlockTags.FENCE_GATES, Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, Tags.Blocks.FENCE_GATES_WOODEN)
+          .register();
+
+      public static void load() {
+      }
+    }
+
     public static void load() {
       RunedObsidian.load();
       RunedObsidianBrick.load();
@@ -933,6 +1098,7 @@ public class ModBlocks {
       RunestoneBrick.load();
       RunestoneBrickAlt.load();
       RunedWood.load();
+      Wildwood.load();
     }
   }
 
