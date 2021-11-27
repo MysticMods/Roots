@@ -1219,6 +1219,7 @@ public class ModBlocks {
 
   public static final NonNullUnaryOperator<AbstractBlock.Properties> BASE_PROPERTIES = r -> r.dynamicShape().noOcclusion().strength(1.5f).sound(SoundType.STONE);
   public static final NonNullUnaryOperator<AbstractBlock.Properties> BASE_WOODEN_PROPERTIES = r -> BASE_PROPERTIES.apply(r).sound(SoundType.WOOD);
+  public static final NonNullUnaryOperator<AbstractBlock.Properties> BASE_REINFORCED_PROPERTIES = r -> BASE_PROPERTIES.apply(r).requiresCorrectToolForDrops().strength(50.0F, 1200.0F);
 
   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
       .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
@@ -1230,7 +1231,7 @@ public class ModBlocks {
       .register();
 
   public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", Material.STONE, CatalystPlateBlock::new)
-      .properties(o -> BASE_PROPERTIES.apply(o).requiresCorrectToolForDrops().strength(50.0F, 1200.0F))
+      .properties(BASE_REINFORCED_PROPERTIES)
       .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
       .register();
 
@@ -1263,7 +1264,7 @@ public class ModBlocks {
       .register();
 
   public static BlockEntry<PyreBlock> REINFORCED_PYRE = REGISTRATE.block("reinforced_pyre", Material.STONE, PyreBlock::new)
-      .properties(o -> BASE_PROPERTIES.apply(o).requiresCorrectToolForDrops().strength(50.0F, 1200.0F))
+      .properties(BASE_REINFORCED_PROPERTIES)
       .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
       .register();
 
