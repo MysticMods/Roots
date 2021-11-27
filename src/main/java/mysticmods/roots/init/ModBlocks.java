@@ -3,10 +3,11 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mysticmods.roots.Roots;
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.blocks.RunedObsidianBlocks;
+import mysticmods.roots.blocks.*;
 import mysticmods.roots.blocks.crops.ElementalCropBlock;
 import mysticmods.roots.blocks.crops.ThreeStageCropBlock;
 import mysticmods.roots.blocks.crops.WaterElementalCropBlock;
@@ -922,7 +923,8 @@ public class ModBlocks {
           .build()
           .register();
 
-      public static void load () {}
+      public static void load() {
+      }
     }
 
     public static class Wildwood {
@@ -1215,39 +1217,63 @@ public class ModBlocks {
     }
   }
 
-/*  public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
+  public static final NonNullUnaryOperator<AbstractBlock.Properties> BASE_PROPERTIES = r -> r.dynamicShape().noOcclusion().strength(1.5f).sound(SoundType.STONE);
+  public static final NonNullUnaryOperator<AbstractBlock.Properties> BASE_WOODEN_PROPERTIES = r -> BASE_PROPERTIES.apply(r).sound(SoundType.WOOD);
+
+  public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
       .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
       .blockstate(NonNullBiConsumer.noop())
       .register();
 
   public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", Material.STONE, CatalystPlateBlock::new)
-      .properties(o -> o)
-
+      .properties(BASE_PROPERTIES)
       .register();
 
+  public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", Material.STONE, CatalystPlateBlock::new)
+      .properties(o -> BASE_PROPERTIES.apply(o).requiresCorrectToolForDrops().strength(50.0F, 1200.0F))
+      .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
+      .register();
 
-  public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", CatalystPlateBlock::new).register();
+  public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("fey_crafter", Material.WOOD, FeyCrafterBlock::new)
+      .properties(BASE_WOODEN_PROPERTIES)
+      .register();
 
-  public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("fey_crafter", FeyCrafterBlock::new).register();
+  public static BlockEntry<GroveStoneBlock> GROVE_STONE = REGISTRATE.block("grove_stone", Material.STONE, GroveStoneBlock::new)
+      .properties(BASE_PROPERTIES)
+      .register();
 
-  public static BlockEntry<GroveStoneBlock> GROVE_STONE = REGISTRATE.block("grove_stone", GroveStoneBlock::new).register();
+  public static BlockEntry<ImbuerBlock> IMBUER = REGISTRATE.block("imbuer", Material.WOOD, ImbuerBlock::new)
+      .properties(BASE_WOODEN_PROPERTIES)
+      .register();
 
-  public static BlockEntry<ImbuerBlock> IMBUER = REGISTRATE.block("imbuer", ImbuerBlock::new).register();
+  public static BlockEntry<ImposerBlock> IMPOSER = REGISTRATE.block("imposer", Material.STONE, ImposerBlock::new)
+      .properties(BASE_PROPERTIES)
+      .register();
 
-  public static BlockEntry<ImposerBlock> IMPOSER = REGISTRATE.block("imposer", ImposerBlock::new).register();
+  public static BlockEntry<IncensePlateBlock> INCENSE_PLATE = REGISTRATE.block("incense_plate", Material.STONE, IncensePlateBlock::new)
+      .properties(BASE_PROPERTIES)
+      .register();
 
-  public static BlockEntry<IncensePlateBlock> INCENSE_PLATE = REGISTRATE.block("incense_plate", IncensePlateBlock::new).register();
+  public static BlockEntry<MortarBlock> MORTAR = REGISTRATE.block("mortar", Material.STONE, MortarBlock::new)
+      .properties(BASE_PROPERTIES)
+      .register();
 
-  public static BlockEntry<MortarBlock> MORTAR = REGISTRATE.block("mortar", MortarBlock::new).register();
+  public static BlockEntry<PyreBlock> PYRE = REGISTRATE.block("pyre", Material.WOOD, PyreBlock::new)
+      .properties(BASE_WOODEN_PROPERTIES)
+      .register();
 
-  public static BlockEntry<PyreBlock> PYRE = REGISTRATE.block("pyre", PyreBlock::new).register();
+  public static BlockEntry<PyreBlock> REINFORCED_PYRE = REGISTRATE.block("reinforced_pyre", Material.STONE, PyreBlock::new)
+      .properties(o -> BASE_PROPERTIES.apply(o).requiresCorrectToolForDrops().strength(50.0F, 1200.0F))
+      .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
+      .register();
 
-  // TODO: Decorative Pyre Block
-  public static BlockEntry<PyreBlock> DECORATIVE_PYRE = REGISTRATE.block("decorative_pyre", PyreBlock::new).register();
+  public static BlockEntry<DecorativePyreBlock> DECORATIVE_PYRE = REGISTRATE.block("decorative_pyre", Material.WOOD, DecorativePyreBlock::new)
+      .properties(BASE_WOODEN_PROPERTIES)
+      .register();
 
-  public static BlockEntry<PyreBlock> REINFORCED_PYRE = REGISTRATE.block("reinforced_pyre", PyreBlock::new).register();
-
-  public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL = REGISTRATE.block("unending_bowl", UnendingBowlBlock::new).register();*/
+  public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL = REGISTRATE.block("unending_bowl", Material.STONE, UnendingBowlBlock::new)
+      .properties(BASE_PROPERTIES)
+      .register();
 
   public static void load() {
     Decoration.load();
