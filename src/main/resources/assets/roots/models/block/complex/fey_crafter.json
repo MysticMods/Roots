@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "roots:models/oakleaves",
-		"3": "roots:models/oak_tabletop_2",
-		"4": "roots:models/log_oak",
-		"6": "roots:models/oak_tabletop_under",
-		"particle": "roots:models/log_oak"
+		"1": "roots:block/oakleaves",
+		"3": "roots:block/oak_tabletop_2",
+		"4": "roots:block/log_oak",
+		"6": "roots:block/oak_tabletop_under",
+		"particle": "roots:block/log_oak"
 	},
 	"elements": [
 		{

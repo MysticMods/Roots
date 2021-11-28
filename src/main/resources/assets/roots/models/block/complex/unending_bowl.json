@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "roots:block/runestone",
-		"1": "blocks/water_still",
+		"1": "block/water_still",
 		"particle": "roots:block/runestone"
 	},
 	"elements": [

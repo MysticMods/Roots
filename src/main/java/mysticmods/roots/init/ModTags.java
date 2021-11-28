@@ -54,12 +54,6 @@ public class ModTags {
       b.addBlocks(RootsTags.Items.Blocks.RUNED_WILDWOOD_LOG, RootsTags.Blocks.RUNED_WILDWOOD_LOG);
       b.addBlocks(RootsTags.Items.Blocks.RUNED_CRIMSON_STEM, RootsTags.Blocks.RUNED_CRIMSON_STEM);
       b.addBlocks(RootsTags.Items.Blocks.RUNED_WARPED_STEM, RootsTags.Blocks.RUNED_WARPED_STEM);
-      b.addBlocks(RootsTags.Items.Blocks.PLATE, RootsTags.Blocks.PLATE);
-      b.addBlocks(RootsTags.Items.Blocks.PYRE, RootsTags.Blocks.PYRE);
-      b.addBlocks(RootsTags.Items.Blocks.CRAFTER, RootsTags.Blocks.CRAFTER);
-      b.addBlocks(RootsTags.Items.Blocks.IMPOSER, RootsTags.Blocks.IMPOSER);
-      b.addBlocks(RootsTags.Items.Blocks.IMBUER, RootsTags.Blocks.IMBUER);
-      b.addBlocks(RootsTags.Items.Blocks.MORTAR, RootsTags.Blocks.MORTAR);
 
       b.add(RootsTags.Items.AIR_CROPS, RootsTags.Items.CLOUD_BERRY_CROP);
       b.add(RootsTags.Items.WATER_CROPS, RootsTags.Items.DEWGONIA_CROP);

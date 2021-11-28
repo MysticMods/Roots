@@ -1,5 +1,5 @@
 {
-	"parent":"roots:block/catalyst_plate",
+	"parent":"roots:block/complex/catalyst_plate",
 	"textures": {
 		"particle": "roots:block/reinforced_catalyst_plate_2",
 		"base": "roots:block/reinforced_catalyst_plate_2",

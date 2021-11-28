@@ -2,10 +2,10 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "blocks/mushroom_block_inside",
-		"1": "blocks/mushroom_block_skin_brown",
-		"3": "blocks/mushroom_block_skin_stem",
-		"particle": "blocks/mushroom_block_skin_brown"
+		"0": "block/mushroom_block_inside",
+		"1": "block/mushroom_block_skin_brown",
+		"3": "block/mushroom_block_skin_stem",
+		"particle": "block/mushroom_block_skin_brown"
 	},
     "display": {
         "gui": {
