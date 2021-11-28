@@ -934,6 +934,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Material.WOOD, RotatedPillarBlock::new)
           .properties(WILDWOOD_LOG_PROPERTIES)
+          .blockstate((ctx, p) -> p.logBlock(ctx.getEntry()))
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
@@ -942,6 +943,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_LOG = REGISTRATE.block("stripped_wildwood_log", Material.WOOD, RotatedPillarBlock::new)
           .properties(WILDWOOD_LOG_PROPERTIES)
+          .blockstate((ctx, p) -> p.logBlock(ctx.getEntry()))
           .item()
           .model(ItemModelGenerator::itemModel)
           .build()
