@@ -1221,11 +1221,17 @@ public class ModBlocks {
   public static final NonNullUnaryOperator<AbstractBlock.Properties> BASE_WOODEN_PROPERTIES = r -> BASE_PROPERTIES.apply(r).sound(SoundType.WOOD);
   public static final NonNullUnaryOperator<AbstractBlock.Properties> BASE_REINFORCED_PROPERTIES = r -> BASE_PROPERTIES.apply(r).requiresCorrectToolForDrops().strength(50.0F, 1200.0F);
 
+  // TODO all: voxel shapes & bounding boxes
+
+  // TODO: Blockstate
   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
       .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
       .blockstate(NonNullBiConsumer.noop())
       .register();
 
+  // TODO: Both catalyst plates require rotation
+  // or alternately improve model to not require
+  // any rotation.
   public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", Material.STONE, CatalystPlateBlock::new)
       .properties(BASE_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/catalyst_plate"))
@@ -1266,6 +1272,7 @@ public class ModBlocks {
       .build()
       .register();
 
+  // TODO: Multipart grove stone, rotation
 /*  public static BlockEntry<GroveStoneBlock> GROVE_STONE = REGISTRATE.block("grove_stone", Material.STONE, GroveStoneBlock::new)
       .properties(BASE_PROPERTIES)
       .register();*/
