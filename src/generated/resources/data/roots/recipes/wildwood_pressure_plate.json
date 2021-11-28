@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "roots:wildwood_planks"
+    }
+  },
+  "result": {
+    "item": "roots:wildwood_pressure_plate"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:runed_obsidian"
+    }
+  ],
+  "result": {
+    "item": "roots:runed_button"
+  }
+}

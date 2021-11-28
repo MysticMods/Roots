@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "roots:runed_obsidian_brick_alt"
+    ]
+  },
+  "criteria": {
+    "has_chiseled_runed_obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:chiseled_runed_obsidian"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "roots:runed_obsidian_brick_alt"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chiseled_runed_obsidian",
+      "has_the_recipe"
+    ]
+  ]
+}

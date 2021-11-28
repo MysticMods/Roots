@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "roots:runed_obsidian"
+  },
+  "result": "roots:runed_gate",
+  "count": 2
+}

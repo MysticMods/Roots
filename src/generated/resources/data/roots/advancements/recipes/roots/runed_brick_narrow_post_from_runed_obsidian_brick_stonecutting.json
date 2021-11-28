@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "roots:runed_brick_narrow_post_from_runed_obsidian_brick_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_runed_obsidian_brick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:runed_obsidian_brick"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "roots:runed_brick_narrow_post_from_runed_obsidian_brick_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_runed_obsidian_brick",
+      "has_the_recipe"
+    ]
+  ]
+}

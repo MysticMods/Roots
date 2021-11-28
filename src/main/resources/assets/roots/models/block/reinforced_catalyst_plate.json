@@ -1,8 +1,0 @@
-{
-	"parent":"roots:block/catalyst_plate",
-	"textures": {
-		"particle": "roots:blocks/reinforced_catalyst_plate_2",
-		"base": "roots:blocks/reinforced_catalyst_plate_2",
-		"sym": "roots:blocks/reinforced_catalyst_plate"
-	}
-}

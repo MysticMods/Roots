@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "roots:runed_obsidian_brick"
+    }
+  },
+  "result": {
+    "item": "roots:runed_brick_wall",
+    "count": 6
+  }
+}

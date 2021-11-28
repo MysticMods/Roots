@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "roots:wildwood_pressure_plate"
+    ]
+  },
+  "criteria": {
+    "has_wildwood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:wildwood_planks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "roots:wildwood_pressure_plate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wildwood",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "roots:block/wildwood_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "roots:block/wildwood_log"
+    },
+    "axis=z": {
+      "model": "roots:block/wildwood_log_horizontal",
+      "x": 90
+    }
+  }
+}

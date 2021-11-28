@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:runed_obsidian_brick_alt"
+    }
+  ],
+  "result": {
+    "item": "roots:runed_brick_alt_button"
+  }
+}

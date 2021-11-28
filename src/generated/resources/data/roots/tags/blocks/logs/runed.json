@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#roots:logs/runed/acacia",
+    "#roots:logs/runed/birch",
+    "#roots:logs/runed/oak",
+    "#roots:logs/runed/dark_oak",
+    "#roots:logs/runed/crimson",
+    "#roots:logs/runed/jungle",
+    "#roots:logs/runed/spruce",
+    "#roots:logs/runed/warped",
+    "#roots:logs/runed/wildwood"
+  ]
+}

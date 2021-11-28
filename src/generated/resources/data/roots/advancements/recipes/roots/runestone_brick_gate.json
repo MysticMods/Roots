@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "roots:runestone_brick_gate"
+    ]
+  },
+  "criteria": {
+    "has_runestone_brick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:runestone_brick"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "roots:runestone_brick_gate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_runestone_brick",
+      "has_the_recipe"
+    ]
+  ]
+}

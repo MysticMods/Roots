@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "roots:runestone_brick_alt_wall"
+    ]
+  },
+  "criteria": {
+    "has_runestone_brick_alt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:runestone_brick_alt"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "roots:runestone_brick_alt_wall"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_runestone_brick_alt",
+      "has_the_recipe"
+    ]
+  ]
+}
