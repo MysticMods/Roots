@@ -35,21 +35,6 @@ public class ModTags {
       // Block copies
 
       TagBuilder.ItemsBuilder b = new TagBuilder.ItemsBuilder(p);
-      b.addBlocks(RootsTags.Items.Blocks.CROPS, RootsTags.Blocks.CROPS);
-      b.addBlocks(RootsTags.Items.Blocks.ELEMENTAL_CROPS, RootsTags.Blocks.ELEMENTAL_CROPS);
-      b.addBlocks(RootsTags.Items.Blocks.WATER_CROPS, RootsTags.Blocks.WATER_CROPS);
-      b.addBlocks(RootsTags.Items.Blocks.EARTH_CROPS, RootsTags.Blocks.EARTH_CROPS);
-      b.addBlocks(RootsTags.Items.Blocks.AIR_CROPS, RootsTags.Blocks.AIR_CROPS);
-      b.addBlocks(RootsTags.Items.Blocks.FIRE_CROPS, RootsTags.Blocks.FIRE_CROPS);
-      b.addBlocks(RootsTags.Items.Blocks.CLOUD_BERRY_CROP, RootsTags.Blocks.CLOUD_BERRY_CROP);
-      b.addBlocks(RootsTags.Items.Blocks.DEWGONIA_CROP, RootsTags.Blocks.DEWGONIA_CROP);
-      b.addBlocks(RootsTags.Items.Blocks.SPIRIT_HERB_CROP, RootsTags.Blocks.SPIRIT_HERB_CROP);
-      b.addBlocks(RootsTags.Items.Blocks.STALICRIPE_CROP, RootsTags.Blocks.STALICRIPE_CROP);
-      b.addBlocks(RootsTags.Items.Blocks.WILDEWHEET_CROP, RootsTags.Blocks.WILDEWHEET_CROP);
-      b.addBlocks(RootsTags.Items.Blocks.WILDROOT_CROP, RootsTags.Blocks.WILDROOT_CROP);
-      b.addBlocks(RootsTags.Items.Blocks.INFERNAL_BULB_CROP, RootsTags.Blocks.INFERNAL_BULB_CROP);
-      b.addBlocks(RootsTags.Items.Blocks.MOONGLOW_LEAF_CROP, RootsTags.Blocks.MOONGLOW_LEAF_CROP);
-      b.addBlocks(RootsTags.Items.Blocks.PERESKIA_CROP, RootsTags.Blocks.PERESKIA_CROP);
       b.addBlocks(RootsTags.Items.Blocks.SOILS, RootsTags.Blocks.SOILS);
       b.addBlocks(RootsTags.Items.Blocks.WATER_SOIL, RootsTags.Blocks.WATER_SOIL);
       b.addBlocks(RootsTags.Items.Blocks.AIR_SOIL, RootsTags.Blocks.AIR_SOIL);
@@ -76,6 +61,14 @@ public class ModTags {
       b.addBlocks(RootsTags.Items.Blocks.IMBUER, RootsTags.Blocks.IMBUER);
       b.addBlocks(RootsTags.Items.Blocks.MORTAR, RootsTags.Blocks.MORTAR);
 
+      b.add(RootsTags.Items.AIR_CROPS, RootsTags.Items.CLOUD_BERRY_CROP);
+      b.add(RootsTags.Items.WATER_CROPS, RootsTags.Items.DEWGONIA_CROP);
+      b.add(RootsTags.Items.EARTH_CROPS, RootsTags.Items.STALICRIPE_CROP);
+      b.add(RootsTags.Items.FIRE_CROPS, RootsTags.Items.INFERNAL_BULB_CROP);
+
+      b.add(RootsTags.Items.CROPS, RootsTags.Items.AIR_CROPS, RootsTags.Items.FIRE_CROPS, RootsTags.Items.EARTH_CROPS, RootsTags.Items.WATER_CROPS, RootsTags.Items.WILDEWHEET_CROP, RootsTags.Items.SPIRIT_HERB_CROP, RootsTags.Items.PERESKIA_CROP, RootsTags.Items.WILDROOT_CROP, RootsTags.Items.MOONGLOW_LEAF_CROP);
+
+      // TODO: Copying crops to the actual item tag?
     });
   }
 

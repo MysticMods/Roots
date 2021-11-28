@@ -25,35 +25,39 @@ public class ModItems {
   public static class Herbs {
     public static ItemEntry<BlockNamedItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new BlockNamedItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
         .model(ModItems::cropModel)
-        .tag(RootsTags.Items.WILDROOT_SEEDS)
+        .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.WILDROOT_CROP)
         .register();
     public static ItemEntry<BlockNamedItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new BlockNamedItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
         .model(ModItems::cropModel)
-        .tag(RootsTags.Items.CLOUD_BERRY_SEEDS)
+        .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
         .register();
     public static ItemEntry<BlockNamedItem> DEWGONIA = REGISTRATE.item("dewgonia", (p) -> new BlockNamedItem(ModBlocks.Crops.DEWGONIA_CROP.get(), p))
         .model(ModItems::cropModel)
-        .tag(RootsTags.Items.DEWGONIA_SEEDS)
+        .tag(RootsTags.Items.DEWGONIA_SEEDS, RootsTags.Items.DEWGONIA_CROP)
         .register();
     public static ItemEntry<BlockNamedItem> INFERNAL_BULB = REGISTRATE.item("infernal_bulb", (p) -> new BlockNamedItem(ModBlocks.Crops.INFERNAL_BULB_CROP.get(), p))
         .model(ModItems::cropModel)
-        .tag(RootsTags.Items.INFERNAL_BULB_SEEDS)
-        .register();
-    public static ItemEntry<Item> MOONGLOW_LEAF = REGISTRATE.item("moonglow_leaf", Item::new)
-        .model(ModItems::cropModel)
-        .register();
-    public static ItemEntry<Item> PERESKIA = REGISTRATE.item("pereskia", Item::new)
-        .model(ModItems::cropModel)
-        .register();
-    public static ItemEntry<Item> SPIRIT_HERB = REGISTRATE.item("spirit_herb", Item::new)
-        .model(ModItems::cropModel)
+        .tag(RootsTags.Items.INFERNAL_BULB_SEEDS, RootsTags.Items.INFERNAL_BULB_CROP)
         .register();
     public static ItemEntry<BlockNamedItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new BlockNamedItem(ModBlocks.Crops.STALICRIPE_CROP.get(), p))
         .model(ModItems::cropModel)
-        .tag(RootsTags.Items.STALICRIPE_SEEDS)
+        .tag(RootsTags.Items.STALICRIPE_SEEDS, RootsTags.Items.STALICRIPE_CROP)
+        .register();
+    public static ItemEntry<Item> MOONGLOW_LEAF = REGISTRATE.item("moonglow_leaf", Item::new)
+        .model(ModItems::cropModel)
+        .tag(RootsTags.Items.MOONGLOW_LEAF_CROP)
+        .register();
+    public static ItemEntry<Item> PERESKIA = REGISTRATE.item("pereskia", Item::new)
+        .model(ModItems::cropModel)
+        .tag(RootsTags.Items.PERESKIA_CROP)
+        .register();
+    public static ItemEntry<Item> SPIRIT_HERB = REGISTRATE.item("spirit_herb", Item::new)
+        .model(ModItems::cropModel)
+        .tag(RootsTags.Items.SPIRIT_HERB_CROP)
         .register();
     public static ItemEntry<Item> WILDEWHEET = REGISTRATE.item("wildewheet", Item::new)
         .model(ModItems::cropModel)
+        .tag(RootsTags.Items.WILDEWHEET_CROP)
         .register();
 
     public static void load () {

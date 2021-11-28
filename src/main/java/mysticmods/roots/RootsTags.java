@@ -115,24 +115,24 @@ public class RootsTags {
 
     public static Tags.IOptionalNamedTag<Item> WILDWOOD_LOGS = modTag("wildwood_logs");
 
+    public static Tags.IOptionalNamedTag<Item> CROPS = modTag("crops");
+    public static Tags.IOptionalNamedTag<Item> ELEMENTAL_CROPS = modTag("crops/elemental");
+    public static Tags.IOptionalNamedTag<Item> WATER_CROPS = modTag("crops/elemental/water");
+    public static Tags.IOptionalNamedTag<Item> EARTH_CROPS = modTag("crops/elemental/earth");
+    public static Tags.IOptionalNamedTag<Item> AIR_CROPS = modTag("crops/elemental/air");
+    public static Tags.IOptionalNamedTag<Item> FIRE_CROPS = modTag("crops/elemental/fire");
+    public static Tags.IOptionalNamedTag<Item> CLOUD_BERRY_CROP = modTag("crops/cloud_berry");
+    public static Tags.IOptionalNamedTag<Item> DEWGONIA_CROP = modTag("crops/dewgonia");
+    public static Tags.IOptionalNamedTag<Item> SPIRIT_HERB_CROP = modTag("crops/spirit_herb");
+    public static Tags.IOptionalNamedTag<Item> STALICRIPE_CROP = modTag("crops/stalicripe");
+    public static Tags.IOptionalNamedTag<Item> WILDEWHEET_CROP = modTag("crops/wildewheet");
+    public static Tags.IOptionalNamedTag<Item> WILDROOT_CROP = modTag("crops/wildroot");
+    public static Tags.IOptionalNamedTag<Item> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
+    public static Tags.IOptionalNamedTag<Item> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
+    public static Tags.IOptionalNamedTag<Item> PERESKIA_CROP = modTag("crops/pereskia");
+
     // These are all filled in by ModTags
     public static class Blocks extends RootsTags {
-      public static Tags.IOptionalNamedTag<Item> CROPS = modTag("crops");
-      public static Tags.IOptionalNamedTag<Item> ELEMENTAL_CROPS = modTag("crops/elemental");
-      public static Tags.IOptionalNamedTag<Item> WATER_CROPS = modTag("crops/elemental/water");
-      public static Tags.IOptionalNamedTag<Item> EARTH_CROPS = modTag("crops/elemental/earth");
-      public static Tags.IOptionalNamedTag<Item> AIR_CROPS = modTag("crops/elemental/air");
-      public static Tags.IOptionalNamedTag<Item> FIRE_CROPS = modTag("crops/elemental/fire");
-      public static Tags.IOptionalNamedTag<Item> CLOUD_BERRY_CROP = modTag("crops/cloud_berry");
-      public static Tags.IOptionalNamedTag<Item> DEWGONIA_CROP = modTag("crops/dewgonia");
-      public static Tags.IOptionalNamedTag<Item> SPIRIT_HERB_CROP = modTag("crops/spirit_herb");
-      public static Tags.IOptionalNamedTag<Item> STALICRIPE_CROP = modTag("crops/stalicripe");
-      public static Tags.IOptionalNamedTag<Item> WILDEWHEET_CROP = modTag("crops/wildewheet");
-      public static Tags.IOptionalNamedTag<Item> WILDROOT_CROP = modTag("crops/wildroot");
-      public static Tags.IOptionalNamedTag<Item> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
-      public static Tags.IOptionalNamedTag<Item> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
-      public static Tags.IOptionalNamedTag<Item> PERESKIA_CROP = modTag("crops/pereskia");
-
       public static Tags.IOptionalNamedTag<Item> SOILS = modTag("soils");
       public static Tags.IOptionalNamedTag<Item> WATER_SOIL = modTag("soils/water");
       public static Tags.IOptionalNamedTag<Item> AIR_SOIL = modTag("soils/air");
@@ -163,7 +163,7 @@ public class RootsTags {
       public static Tags.IOptionalNamedTag<Item> MORTAR = modTag("mortar");
     }
 
-    static Tags.IOptionalNamedTag<Item> modTag(String name)  {
+    static Tags.IOptionalNamedTag<Item> modTag(String name) {
       return ItemTags.createOptional(new ResourceLocation(Roots.MODID, name));
     }
 

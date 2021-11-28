@@ -1,11 +1,14 @@
 {
   "replace": false,
   "values": [
+    "#roots:crops/elemental/air",
+    "#roots:crops/elemental/fire",
+    "#roots:crops/elemental/earth",
+    "#roots:crops/elemental/water",
     "#roots:crops/wildewheet",
-    "#roots:crops/wildroot",
     "#roots:crops/spirit_herb",
     "#roots:crops/pereskia",
-    "#roots:crops/moonglow_leaf",
-    "#roots:crops/elemental"
+    "#roots:crops/wildroot",
+    "#roots:crops/moonglow_leaf"
   ]
 }

@@ -1299,7 +1299,7 @@ public class ModBlocks {
 
   public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL = REGISTRATE.block("unending_bowl", Material.STONE, UnendingBowlBlock::new)
       .properties(BASE_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/unending_Bowl"))
+      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/unending_bowl"))
       .register();
 
   public static void load() {
