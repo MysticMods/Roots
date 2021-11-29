@@ -1236,7 +1236,7 @@ public class ModBlocks {
   // any rotation.
   public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", Material.STONE, CatalystPlateBlock::new)
       .properties(BASE_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/catalyst_plate"))
+      .blockstate(BlockstateGenerator.existingRotation("block/complex/catalyst_plate"))
       .tag(RootsTags.Blocks.PLATE)
       .item()
       .model(ItemModelGenerator::complexItemModel)
@@ -1246,7 +1246,7 @@ public class ModBlocks {
 
   public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", Material.STONE, CatalystPlateBlock::new)
       .properties(BASE_REINFORCED_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_catalyst_plate"))
+      .blockstate(BlockstateGenerator.existingRotation("block/complex/reinforced_catalyst_plate"))
       .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PLATE)
       .item()
       .model(ItemModelGenerator::complexItemModel)

@@ -1,7 +1,8 @@
 {
   "variants": {
     "": {
-      "model": "roots:block/complex/catalyst_plate"
+      "model": "roots:block/complex/catalyst_plate",
+      "y": 270
     }
   }
 }
