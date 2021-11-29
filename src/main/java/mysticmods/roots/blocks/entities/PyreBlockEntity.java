@@ -6,7 +6,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntityType;
 
-public class PyreBlockEntity extends BaseBlockEntity  {
+public class PyreBlockEntity extends BaseBlockEntity {
   public PyreBlockEntity(TileEntityType<?> blockEntityType) {
     super(blockEntityType);
   }

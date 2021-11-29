@@ -10,12 +10,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryManager;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID, bus= Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Roots.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RegistryHandler {
   public static final ResourceLocation HERB_REGISTRY = new ResourceLocation(Roots.MODID, "herbs");
 
   @SubscribeEvent
-  public static void onRegistryCreation (RegistryEvent.NewRegistry event) {
+  public static void onRegistryCreation(RegistryEvent.NewRegistry event) {
     new RegistryBuilder<IHerb>()
         .setName(HERB_REGISTRY)
         .setType(IHerb.class)

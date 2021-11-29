@@ -1,7 +1,6 @@
 package mysticmods.roots.api.herbs;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.block.Block;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.registries.ForgeRegistryEntry;

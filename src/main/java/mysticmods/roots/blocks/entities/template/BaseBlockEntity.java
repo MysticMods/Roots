@@ -14,7 +14,7 @@ public abstract class BaseBlockEntity extends TileEntity {
     super(blockEntityType);
   }
 
-  public void updateViaState () {
+  public void updateViaState() {
     TileUtil.updateViaState(this);
   }
 

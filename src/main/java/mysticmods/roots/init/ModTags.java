@@ -2,7 +2,6 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import mysticmods.roots.RootsTags;
-import net.minecraft.tags.BlockTags;
 import noobanidus.libs.noobutil.data.TagBuilder;
 
 import static mysticmods.roots.Roots.REGISTRATE;

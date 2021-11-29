@@ -3,11 +3,8 @@ package mysticmods.roots.config;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import net.minecraftforge.common.ForgeConfigSpec;
-import noobanidus.libs.noobutil.config.BiomeConfig;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConfigManager {
 

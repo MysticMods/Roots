@@ -6,7 +6,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModRegistries {
   public static IForgeRegistry<IHerb> HERB;
 
-  public static void load () {
+  public static void load() {
   }
 }
 

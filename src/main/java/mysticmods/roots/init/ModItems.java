@@ -7,14 +7,13 @@ import mysticmods.roots.Roots;
 import mysticmods.roots.RootsTags;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModItems {
-  private static <T extends Item> ItemModelBuilder cropModel (DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
+  private static <T extends Item> ItemModelBuilder cropModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
     return p.generated(ctx::getEntry, new ResourceLocation(Roots.MODID, "item/herbs/" + ctx.getName()));
   }
 
@@ -56,7 +55,7 @@ public class ModItems {
         .tag(RootsTags.Items.WILDEWHEET_CROP)
         .register();
 
-    public static void load () {
+    public static void load() {
 
     }
   }
@@ -80,12 +79,12 @@ public class ModItems {
         .tag(RootsTags.Items.WILDEWHEET_SEEDS)
         .register();
 
-    public static void load () {
+    public static void load() {
 
     }
   }
 
-  public static void load () {
+  public static void load() {
     Herbs.load();
     Seeds.load();
   }

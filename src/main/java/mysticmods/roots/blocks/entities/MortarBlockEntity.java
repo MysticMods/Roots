@@ -6,7 +6,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntityType;
 
-public class MortarBlockEntity extends BaseBlockEntity  {
+public class MortarBlockEntity extends BaseBlockEntity {
   public MortarBlockEntity(TileEntityType<?> blockEntityType) {
     super(blockEntityType);
   }
