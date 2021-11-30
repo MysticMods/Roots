@@ -15,5 +15,6 @@ public class ClientSetup {
   public static void clientSetup(FMLClientSetupEvent event) {
     RenderType cutout = RenderType.cutoutMipped();
     RenderTypeLookup.setRenderLayer(ModBlocks.Decoration.Wildwood.WILDWOOD_LEAVES.get(), cutout);
+    RenderTypeLookup.setRenderLayer(ModBlocks.FEY_LIGHT.get(), cutout);
   }
 }

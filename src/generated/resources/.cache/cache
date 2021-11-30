@@ -8,6 +8,7 @@ b79f1e14268055d86c1cc436152f6c10d4c8105e assets/roots/blockstates/cloud_berry_cr
 0be5d27268148dcb3e95307b9e8d8ebe94b83f7a assets/roots/blockstates/dewgonia_crop.json
 d2e17b4be37b73597201a07f70b64db8c58a15a5 assets/roots/blockstates/elemental_soil.json
 f95caeda06c4e37462b6cb66dc61982f7d837dc0 assets/roots/blockstates/fey_crafter.json
+302173a55670bb808cd5eb6659159f86fdaf4311 assets/roots/blockstates/fey_light.json
 66a9debf12afcff3b29774b8f94f0c777e8438d2 assets/roots/blockstates/imbuer.json
 f01de1e0bc80aeb14cd86097dfcaaf9aec2d727f assets/roots/blockstates/imposer.json
 6f95e47a38e3e701b5fd7cb4f2a4cd8e4df99a49 assets/roots/blockstates/incense_plate.json
@@ -125,6 +126,7 @@ bf42c7be19fe8e3a084779a29406d7fdb7ddd743 assets/roots/models/block/dewgonia_0.js
 4771766916a4bb3d9871ed5b34eca10e96200702 assets/roots/models/block/dewgonia_2.json
 ad976fb4ec0a027350ebcac21aa584c4c55704f3 assets/roots/models/block/dewgonia_3.json
 da4c2312167533bb173fa2ab462a93c8cb8e0574 assets/roots/models/block/elemental_soil.json
+89c8a4e3623e9c6574a16e8c50fbdf2c01c6ecce assets/roots/models/block/fey_light.json
 89e60f1c6d1cb80c7d6f77c96c7f440ab1b291d9 assets/roots/models/block/infernal_bulb_0.json
 c47ba5320c39421ddc8edd61f1b7a20d787914eb assets/roots/models/block/infernal_bulb_1.json
 4a4c081377df1e19844fd19590eb9aa06c14f3e0 assets/roots/models/block/infernal_bulb_2.json

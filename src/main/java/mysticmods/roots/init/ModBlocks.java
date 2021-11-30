@@ -1231,7 +1231,7 @@ public class ModBlocks {
   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
       .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH).lightLevel(l -> 15).sound(SoundType.WOOL))
       .blockstate((ctx, p) -> {
-        ModelFile model = p.models().cubeAll(ctx.getName(), new ResourceLocation(Roots.MODID, "blank"));
+        ModelFile model = p.models().cubeAll(ctx.getName(), new ResourceLocation(Roots.MODID, "block/grove_padding"));
         p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> ConfiguredModel.builder().modelFile(model).build());
       })
       .register();
