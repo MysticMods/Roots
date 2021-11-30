@@ -4,5 +4,5 @@ import net.minecraft.block.Block;
 import net.minecraft.util.math.shapes.VoxelShape;
 
 public interface Shapes {
-  VoxelShape FEY_LIGHT = Block.box(0.33, 0.33, 0.33, 0.66, 0.66, 0.66);
+  VoxelShape FEY_LIGHT = Block.box(6, 6, 6, 10, 10, 10);
 }
