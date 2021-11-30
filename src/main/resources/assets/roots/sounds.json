@@ -1,8 +1,7 @@
 {
   "whirlwind": {
-    "category": "neutral",
     "sounds": [
-      "roots:whirlwind"
+      "roots:block/whirlwind"
     ]
   },
   "spell.acid_cloud": {
@@ -137,7 +136,7 @@
   "spell.aqua_bubble": {
     "sounds": [
       {
-        "name": "roots:aqua_bubble",
+        "name": "roots:spell/aqua_bubble",
         "pitch": 1,
         "volume": 0.5
       }
@@ -159,7 +158,7 @@
   "spell.extension": {
     "sounds": [
       {
-        "name": "roots:extension",
+        "name": "roots:spell/extension",
         "pitch": 0.8,
         "volume": 0.2
       }
@@ -169,7 +168,7 @@
   "spell.augment": {
     "sounds": [
       {
-        "name": "roots:extension",
+        "name": "roots:spell/extension",
         "pitch": 1.4,
         "volume": 0.2
       }
@@ -346,7 +345,7 @@
   },
   "spell.shatter": {
     "sounds": [
-      "roots:shatter"
+      "roots:spell/shatter"
     ],
     "volume": 0.5,
     "subtitle": "subtitle.roots.spell.shatter"
@@ -360,7 +359,7 @@
   "spell.storm_cloud": {
     "sounds": [
       {
-        "name": "roots:storm_cloud",
+        "name": "roots:spell/storm_cloud",
         "pitch": 0.95,
         "volume": 0.3
       }
@@ -383,13 +382,13 @@
   },
   "spell.time_stop": {
     "sounds": [
-      "roots:time_stop"
+      "roots:spell/time_stop"
     ],
     "subtitle": "subtitle.roots.spell.time_stop"
   },
   "spell.time_stop_end": {
     "sounds": [
-      "roots:time_stop_end"
+      "roots:spell/time_stop_end"
     ],
     "subtitle": "subtitle.roots.spell.time_stop_end"
   },
