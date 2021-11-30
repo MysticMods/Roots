@@ -1,6 +1,17 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
+      "model": "roots:block/complex/reinforced_catalyst_plate",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "roots:block/complex/reinforced_catalyst_plate"
+    },
+    "facing=west": {
+      "model": "roots:block/complex/reinforced_catalyst_plate",
+      "y": 90
+    },
+    "facing=east": {
       "model": "roots:block/complex/reinforced_catalyst_plate",
       "y": 270
     }
