@@ -1,11 +1,8 @@
 package mysticmods.roots.blocks;
 
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.state.DirectionProperty;
+import noobanidus.libs.noobutil.block.BaseBlocks;
 
-public class CatalystPlateBlock extends HorizontalBlock {
-  public static final DirectionProperty FACING = HorizontalBlock.FACING;
-
+public class CatalystPlateBlock extends BaseBlocks.HorizontalBlock {
   public CatalystPlateBlock(Properties builder) {
     super(builder);
   }
