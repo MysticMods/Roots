@@ -1,5 +1,6 @@
 package mysticmods.roots.blocks;
 
+import mysticmods.roots.api.reference.Shapes;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,6 +10,9 @@ import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import noobanidus.libs.particleslib.client.particle.Particles;
 import noobanidus.libs.particleslib.init.ModParticles;
@@ -17,11 +21,11 @@ import java.util.Random;
 
 public class FeyLightBlock extends Block {
   public static BooleanProperty DECAYING = BooleanProperty.create("decaying");
-  public static IntegerProperty DECAY = IntegerProperty.create("decay", 0, 15);
+  public static IntegerProperty DECAY = IntegerProperty.create("decay", 0, 10);
   public static BooleanProperty COLORED = BooleanProperty.create("colored");
   public static EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
 
-  private static int[][] UNCOLORED = {
+  private static final int[][] UNCOLORED = {
       {177, 255, 255, 219, 122},
       {255, 223, 163, 179, 144},
       {117, 163, 255, 255, 255}
@@ -30,6 +34,12 @@ public class FeyLightBlock extends Block {
   public FeyLightBlock(Properties builder) {
     super(builder);
     this.registerDefaultState(this.defaultBlockState().setValue(DECAYING, false).setValue(DECAY, 0).setValue(COLORED, false).setValue(COLOR, DyeColor.WHITE));
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  public VoxelShape getShape(BlockState pState, IBlockReader pLevel, BlockPos pPos, ISelectionContext pContext) {
+    return Shapes.FEY_LIGHT;
   }
 
   @Override
