@@ -18,6 +18,8 @@ import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 import noobanidus.libs.noobutil.data.BlockstateGenerator;
@@ -1227,8 +1229,11 @@ public class ModBlocks {
 
   // TODO: Blockstate
   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
-      .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
-      .blockstate(NonNullBiConsumer.noop())
+      .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH).lightLevel(l -> 15).sound(SoundType.WOOL))
+      .blockstate((ctx, p) -> {
+        ModelFile model = p.models().cubeAll(ctx.getName(), new ResourceLocation(Roots.MODID, "blank"));
+        p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> ConfiguredModel.builder().modelFile(model).build());
+      })
       .register();
 
   // TODO: Both catalyst plates require rotation
