@@ -1,8 +1,8 @@
 package mysticmods.roots.blocks;
 
-import net.minecraft.block.Block;
+import noobanidus.libs.noobutil.block.BaseBlocks;
 
-public class CatalystPlateBlock extends Block {
+public class CatalystPlateBlock extends BaseBlocks.HorizontalBlock {
   public CatalystPlateBlock(Properties builder) {
     super(builder);
   }

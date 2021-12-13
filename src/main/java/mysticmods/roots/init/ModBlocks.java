@@ -18,6 +18,8 @@ import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 import noobanidus.libs.noobutil.data.BlockstateGenerator;
@@ -1227,8 +1229,11 @@ public class ModBlocks {
 
   // TODO: Blockstate
   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
-      .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH))
-      .blockstate(NonNullBiConsumer.noop())
+      .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH).lightLevel(l -> 15).sound(SoundType.WOOL))
+      .blockstate((ctx, p) -> {
+        ModelFile model = p.models().cubeAll(ctx.getName(), new ResourceLocation(Roots.MODID, "block/grove_padding"));
+        p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> ConfiguredModel.builder().modelFile(model).build());
+      })
       .register();
 
   // TODO: Both catalyst plates require rotation
@@ -1236,7 +1241,7 @@ public class ModBlocks {
   // any rotation.
   public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", Material.STONE, CatalystPlateBlock::new)
       .properties(BASE_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/catalyst_plate"))
+      .blockstate(BlockstateGenerator.existingRotation("block/complex/catalyst_plate"))
       .tag(RootsTags.Blocks.PLATE)
       .item()
       .model(ItemModelGenerator::complexItemModel)
@@ -1246,7 +1251,7 @@ public class ModBlocks {
 
   public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", Material.STONE, CatalystPlateBlock::new)
       .properties(BASE_REINFORCED_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_catalyst_plate"))
+      .blockstate(BlockstateGenerator.existingRotation("block/complex/reinforced_catalyst_plate"))
       .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PLATE)
       .item()
       .model(ItemModelGenerator::complexItemModel)
