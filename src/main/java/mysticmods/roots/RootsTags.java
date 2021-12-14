@@ -68,6 +68,11 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Block> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
     public static Tags.IOptionalNamedTag<Block> RUNED_WARPED_STEM = modTag("logs/runed/warped");
 
+    // Grove Stones
+    public static Tags.IOptionalNamedTag<Block> GROVE_STONES = modTag("grove_stones");
+
+    public static Tags.IOptionalNamedTag<Block> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
+
     // Catalyst plates, offering plates and incense plates
     public static Tags.IOptionalNamedTag<Block> PLATE = modTag("plate");
 
@@ -154,6 +159,9 @@ public class RootsTags {
       public static Tags.IOptionalNamedTag<Item> RUNED_WILDWOOD_LOG = modTag("logs/runed/wildwood");
       public static Tags.IOptionalNamedTag<Item> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
       public static Tags.IOptionalNamedTag<Item> RUNED_WARPED_STEM = modTag("logs/runed/warped");
+
+      public static Tags.IOptionalNamedTag<Item> GROVE_STONES = modTag("grove_stones");
+      public static Tags.IOptionalNamedTag<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
 
       public static Tags.IOptionalNamedTag<Item> PLATE = modTag("plate");
       public static Tags.IOptionalNamedTag<Item> PYRE = modTag("pyre");

@@ -1,5 +1,7 @@
 package mysticmods.roots.init;
 
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -17,7 +19,9 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
@@ -1279,10 +1283,60 @@ public class ModBlocks {
       .build()
       .register();
 
+  public static <T extends Block> NonNullBiConsumer<DataGenContext<Block, T>, RegistrateBlockstateProvider> groveStone(String type) {
+    return (ctx, p) -> {
+      p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> {
+        BlockModelBuilder model;
+        boolean valid = state.getValue(GroveStoneBlock.VALID);
+
+        switch (state.getValue(GroveStoneBlock.PART)) {
+          case MIDDLE:
+            model = p.models().withExistingParent(type + "_grove_stone_middle" + (valid ? "_valid" : ""), new ResourceLocation(Roots.MODID, "block/complex/grove_stone_top"));
+            break;
+          case BOTTOM:
+            model = p.models().withExistingParent(type + "_grove_stone_middle" + (valid ? "_valid" : ""), new ResourceLocation(Roots.MODID, "block/complex/grove_stone_bottom"));
+            break;
+          default:
+          case TOP:
+            model = p.models().withExistingParent(type + "_grove_stone_top" + (valid ? "_valid" : ""), new ResourceLocation(Roots.MODID, "block/complex/grove_stone_top"));
+            break;
+        }
+
+        ResourceLocation active = new ResourceLocation(Roots.MODID, type.equals("primal") ? "block/ob_stone_active" : "block/ob_stone_active_" + type);
+
+        if (valid) {
+          model.texture("monolith", active);
+          model.texture("particle", active);
+        }
+
+        if (type.equals("primal")) {
+          p.models().withExistingParent(type + "_grove_stone_inventory", new ResourceLocation(Roots.MODID, "block/complex/grove_stone_full"));
+        } else {
+          p.models().withExistingParent(type + "_grove_stone_inventory", new ResourceLocation(Roots.MODID, "block/complex/grove_stone_full")).texture("monolith", active).texture("particle", active);
+        }
+
+        Direction dir = state.getValue(GroveStoneBlock.FACING);
+
+        return ConfiguredModel.builder()
+            .modelFile(model)
+            .rotationX(0)
+            .rotationY(dir.getAxis().isVertical() ? 0 : (int) (dir.toYRot() % 360))
+            .build();
+
+      });
+    };
+  }
+
   // TODO: Multipart grove stone, rotation
-/*  public static BlockEntry<GroveStoneBlock> GROVE_STONE = REGISTRATE.block("grove_stone", Material.STONE, GroveStoneBlock::new)
+  public static BlockEntry<GroveStoneBlock> PRIMAL_GROVE_STONE = REGISTRATE.block("primal_grove_stone", Material.STONE, GroveStoneBlock::new)
       .properties(BASE_PROPERTIES)
-      .register();*/
+      .blockstate(groveStone("primal"))
+      .tag(RootsTags.Blocks.GROVE_STONE_PRIMAL)
+      .item()
+      .model((ctx, p) -> p.blockWithInventoryModel(ctx::getEntry))
+      .tag(RootsTags.Items.Blocks.GROVE_STONE_PRIMAL)
+      .build()
+      .register();
 
   public static BlockEntry<ImbuerBlock> IMBUER = REGISTRATE.block("imbuer", Material.WOOD, ImbuerBlock::new)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/imbuer"))
