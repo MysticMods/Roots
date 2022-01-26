@@ -1,0 +1,7 @@
+{
+  "parent": "roots:block/complex/grove_stone_top",
+  "textures": {
+    "monolith": "roots:block/ob_stone_active",
+    "particle": "roots:block/ob_stone_active"
+  }
+}
