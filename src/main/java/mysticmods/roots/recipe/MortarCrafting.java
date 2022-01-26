@@ -1,9 +1,13 @@
 package mysticmods.roots.recipe;
 
-import noobanidus.libs.noobutil.types.IInvWrapper;
+import mysticmods.roots.block.entity.MortarBlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import noobanidus.libs.noobutil.crafting.Crafting;
 
-public class MortarCrafting extends IInvWrapper<MortarInventory> {
-  public MortarCrafting(MortarInventory handler) {
-    super(handler);
+import javax.annotation.Nullable;
+
+public class MortarCrafting extends Crafting<MortarInventory, MortarBlockEntity> {
+  public MortarCrafting(MortarBlockEntity blockentity, MortarInventory handler, @Nullable PlayerEntity player) {
+    super(blockentity, handler, player);
   }
 }
