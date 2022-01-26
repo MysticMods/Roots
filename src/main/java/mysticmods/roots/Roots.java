@@ -7,8 +7,9 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
-import noobanidus.libs.noobutil.data.BlockstateGenerator;
-import noobanidus.libs.noobutil.data.RecipeGenerator;
+import noobanidus.libs.noobutil.data.generator.BlockstateGenerator;
+import noobanidus.libs.noobutil.data.generator.RecipeGenerator;
+import noobanidus.libs.noobutil.reference.ModData;
 import noobanidus.libs.noobutil.registrate.CustomRegistrate;
 import noobanidus.libs.particleslib.config.ConfigManager;
 import org.apache.logging.log4j.LogManager;
@@ -31,7 +32,7 @@ public class Roots {
   public Roots() {
     REGISTRATE = CustomRegistrate.create(MODID);
     REGISTRATE.itemGroup(() -> ITEM_GROUP);
-    BlockstateGenerator.setModid(MODID);
+    ModData.setIdAndIdentifier("roots", "Roots");
 
     ConfigManager.loadConfig(ConfigManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MODID + "-common.toml"));
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);

@@ -26,8 +26,8 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.block.BaseBlocks;
-import noobanidus.libs.noobutil.data.BlockstateGenerator;
-import noobanidus.libs.noobutil.data.ItemModelGenerator;
+import noobanidus.libs.noobutil.data.generator.BlockstateGenerator;
+import noobanidus.libs.noobutil.data.generator.ItemModelGenerator;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 import static noobanidus.libs.noobutil.block.BaseBlocks.SeededCropsBlock;
