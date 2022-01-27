@@ -1,4 +1,4 @@
-package mysticmods.roots.recipe;
+package mysticmods.roots.recipe.mortar;
 
 import net.minecraftforge.items.ItemStackHandler;
 
