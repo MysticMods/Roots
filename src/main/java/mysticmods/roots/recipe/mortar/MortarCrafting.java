@@ -1,4 +1,4 @@
-package mysticmods.roots.recipe;
+package mysticmods.roots.recipe.mortar;
 
 import mysticmods.roots.block.entity.MortarBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
