@@ -1,5 +1,6 @@
 package mysticmods.roots;
 
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
@@ -92,7 +93,7 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Block> MORTAR = modTag("mortar");
 
     static Tags.IOptionalNamedTag<Block> modTag(String name) {
-      return BlockTags.createOptional(new ResourceLocation(Roots.MODID, name));
+      return BlockTags.createOptional(new ResourceLocation(RootsAPI.MODID, name));
     }
 
     static Tags.IOptionalNamedTag<Block> compatTag(String name) {
@@ -172,7 +173,7 @@ public class RootsTags {
     }
 
     static Tags.IOptionalNamedTag<Item> modTag(String name) {
-      return ItemTags.createOptional(new ResourceLocation(Roots.MODID, name));
+      return ItemTags.createOptional(new ResourceLocation(RootsAPI.MODID, name));
     }
 
     static Tags.IOptionalNamedTag<Item> compatTag(String name) {
@@ -184,7 +185,7 @@ public class RootsTags {
     public static ITag.INamedTag<Potion> RANDOM_BLACKLIST = compatTag("random_potion_blacklist");
 
     static ITag.INamedTag<Potion> modTag(String name) {
-      return ForgeTagHandler.createOptionalTag(ForgeRegistries.POTION_TYPES, new ResourceLocation(Roots.MODID, name));
+      return ForgeTagHandler.createOptionalTag(ForgeRegistries.POTION_TYPES, new ResourceLocation(RootsAPI.MODID, name));
     }
 
     static ITag.INamedTag<Potion> compatTag(String name) {

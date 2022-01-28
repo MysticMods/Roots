@@ -1,6 +1,6 @@
 package mysticmods.roots.event.forge;
 
-import mysticmods.roots.Roots;
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -16,7 +16,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Roots.MODID)
+@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class HoeHandler {
   @SubscribeEvent
   public static void onHoeUse(UseHoeEvent event) {

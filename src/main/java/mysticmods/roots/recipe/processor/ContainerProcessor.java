@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContainerProcessor<C extends ICrafting<?, ?>> extends Processor<C> {
+  private final Class<C> craftingClass;
+
+  public ContainerProcessor(Class<C> craftingClass) {
+    this.craftingClass = craftingClass;
+  }
 
   @Override
   public List<ItemStack> processIngredient(ItemStack result, IngredientStack ingredient, ItemStack usedItem, C crafter) {

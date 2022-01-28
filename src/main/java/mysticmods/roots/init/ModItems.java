@@ -3,8 +3,8 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import mysticmods.roots.Roots;
 import mysticmods.roots.RootsTags;
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -14,7 +14,7 @@ import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModItems {
   private static <T extends Item> ItemModelBuilder cropModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
-    return p.generated(ctx::getEntry, new ResourceLocation(Roots.MODID, "item/herbs/" + ctx.getName()));
+    return p.generated(ctx::getEntry, new ResourceLocation(RootsAPI.MODID, "item/herbs/" + ctx.getName()));
   }
 
   public static class Herbs {

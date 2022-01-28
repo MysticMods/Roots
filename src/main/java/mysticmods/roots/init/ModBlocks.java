@@ -9,6 +9,7 @@ import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mysticmods.roots.Roots;
 import mysticmods.roots.RootsTags;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
@@ -842,7 +843,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_ACACIA_LOG = REGISTRATE.block("runed_acacia_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_acacia"), new ResourceLocation("minecraft", "block/acacia_log_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_acacia"), new ResourceLocation("minecraft", "block/acacia_log_top")))
           .tag(BlockTags.ACACIA_LOGS, RootsTags.Blocks.RUNED_ACACIA_LOG)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -852,7 +853,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_DARK_OAK_LOG = REGISTRATE.block("runed_dark_oak_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_dark_oak"), new ResourceLocation("minecraft", "block/dark_oak_log_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_dark_oak"), new ResourceLocation("minecraft", "block/dark_oak_log_top")))
           .tag(BlockTags.DARK_OAK_LOGS, RootsTags.Blocks.RUNED_DARK_OAK_LOG)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -862,7 +863,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_OAK_LOG = REGISTRATE.block("runed_oak_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_oak"), new ResourceLocation("minecraft", "block/oak_log_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_oak"), new ResourceLocation("minecraft", "block/oak_log_top")))
           .tag(BlockTags.OAK_LOGS, RootsTags.Blocks.RUNED_OAK_LOG)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -872,7 +873,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_BIRCH_LOG = REGISTRATE.block("runed_birch_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_birch"), new ResourceLocation("minecraft", "block/birch_log_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_birch"), new ResourceLocation("minecraft", "block/birch_log_top")))
           .tag(BlockTags.BIRCH_LOGS, RootsTags.Blocks.RUNED_BIRCH_LOG)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -882,7 +883,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_JUNGLE_LOG = REGISTRATE.block("runed_jungle_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_jungle"), new ResourceLocation("minecraft", "block/jungle_log_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_jungle"), new ResourceLocation("minecraft", "block/jungle_log_top")))
           .tag(BlockTags.JUNGLE_LOGS, RootsTags.Blocks.RUNED_JUNGLE_LOG)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -892,7 +893,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_SPRUCE_LOG = REGISTRATE.block("runed_spruce_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_spruce"), new ResourceLocation("minecraft", "block/spruce_log_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_spruce"), new ResourceLocation("minecraft", "block/spruce_log_top")))
           .tag(BlockTags.SPRUCE_LOGS, RootsTags.Blocks.RUNED_SPRUCE_LOG)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -902,7 +903,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_WILDWOOD_LOG = REGISTRATE.block("runed_wildwood_log", RotatedPillarBlock::new)
           .properties(RUNED_LOG_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_wildwood"), new ResourceLocation(Roots.MODID, "block/wildwood_log_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_wildwood"), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log_top")))
           .tag(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Blocks.RUNED_WILDWOOD_LOG)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -912,7 +913,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_CRIMSON_STEM = REGISTRATE.block("runed_crimson_stem", RotatedPillarBlock::new)
           .properties(RUNED_STEM_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_crimson"), new ResourceLocation("minecraft", "block/crimson_stem_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_crimson"), new ResourceLocation("minecraft", "block/crimson_stem_top")))
           .tag(BlockTags.CRIMSON_STEMS, RootsTags.Blocks.RUNED_CRIMSON_STEM)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -922,7 +923,7 @@ public class ModBlocks {
 
       public static BlockEntry<RotatedPillarBlock> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped_stem", RotatedPillarBlock::new)
           .properties(RUNED_STEM_PROPERTIES)
-          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/runed_warped"), new ResourceLocation("minecraft", "block/warped_stem_top")))
+          .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_warped"), new ResourceLocation("minecraft", "block/warped_stem_top")))
           .tag(BlockTags.WARPED_STEMS, RootsTags.Blocks.RUNED_WARPED_STEM)
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -959,7 +960,7 @@ public class ModBlocks {
       public static BlockEntry<RotatedPillarBlock> WILDWOOD_WOOD = REGISTRATE.block("wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
           .properties(WILDWOOD_LOG_PROPERTIES)
           .blockstate((ctx, p) -> {
-            p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/wildwood_log"), new ResourceLocation(Roots.MODID, "block/wildwood_log"));
+            p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log"), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log"));
           })
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -970,7 +971,7 @@ public class ModBlocks {
       public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_WOOD = REGISTRATE.block("stripped_wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
           .properties(WILDWOOD_LOG_PROPERTIES)
           .blockstate((ctx, p) -> {
-            p.axisBlock(ctx.getEntry(), new ResourceLocation(Roots.MODID, "block/stripped_wildwood_log"), new ResourceLocation(Roots.MODID, "block/stripped_wildwood_log"));
+            p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/stripped_wildwood_log"), new ResourceLocation(RootsAPI.MODID, "block/stripped_wildwood_log"));
           })
           .item()
           .model(ItemModelGenerator::itemModel)
@@ -1235,7 +1236,7 @@ public class ModBlocks {
   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
       .properties(o -> AbstractBlock.Properties.copy(Blocks.TORCH).lightLevel(l -> 15).sound(SoundType.WOOL))
       .blockstate((ctx, p) -> {
-        ModelFile model = p.models().cubeAll(ctx.getName(), new ResourceLocation(Roots.MODID, "block/grove_padding"));
+        ModelFile model = p.models().cubeAll(ctx.getName(), new ResourceLocation(RootsAPI.MODID, "block/grove_padding"));
         p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> ConfiguredModel.builder().modelFile(model).build());
       })
       .register();
@@ -1291,18 +1292,18 @@ public class ModBlocks {
 
         switch (state.getValue(GroveStoneBlock.PART)) {
           case MIDDLE:
-            model = p.models().withExistingParent(type + "_grove_stone_middle" + (valid ? "_valid" : ""), new ResourceLocation(Roots.MODID, "block/complex/grove_stone_top"));
+            model = p.models().withExistingParent(type + "_grove_stone_middle" + (valid ? "_valid" : ""), new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_top"));
             break;
           case BOTTOM:
-            model = p.models().withExistingParent(type + "_grove_stone_middle" + (valid ? "_valid" : ""), new ResourceLocation(Roots.MODID, "block/complex/grove_stone_bottom"));
+            model = p.models().withExistingParent(type + "_grove_stone_middle" + (valid ? "_valid" : ""), new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_bottom"));
             break;
           default:
           case TOP:
-            model = p.models().withExistingParent(type + "_grove_stone_top" + (valid ? "_valid" : ""), new ResourceLocation(Roots.MODID, "block/complex/grove_stone_top"));
+            model = p.models().withExistingParent(type + "_grove_stone_top" + (valid ? "_valid" : ""), new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_top"));
             break;
         }
 
-        ResourceLocation active = new ResourceLocation(Roots.MODID, type.equals("primal") ? "block/ob_stone_active" : "block/ob_stone_active_" + type);
+        ResourceLocation active = new ResourceLocation(RootsAPI.MODID, type.equals("primal") ? "block/ob_stone_active" : "block/ob_stone_active_" + type);
 
         if (valid) {
           model.texture("monolith", active);
@@ -1310,9 +1311,9 @@ public class ModBlocks {
         }
 
         if (type.equals("primal")) {
-          p.models().withExistingParent(type + "_grove_stone_inventory", new ResourceLocation(Roots.MODID, "block/complex/grove_stone_full"));
+          p.models().withExistingParent(type + "_grove_stone_inventory", new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_full"));
         } else {
-          p.models().withExistingParent(type + "_grove_stone_inventory", new ResourceLocation(Roots.MODID, "block/complex/grove_stone_full")).texture("monolith", active).texture("particle", active);
+          p.models().withExistingParent(type + "_grove_stone_inventory", new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_full")).texture("monolith", active).texture("particle", active);
         }
 
         Direction dir = state.getValue(GroveStoneBlock.FACING);
@@ -1403,7 +1404,7 @@ public class ModBlocks {
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/pyre"))
       .tag(RootsTags.Blocks.PYRE)
       .item()
-      .model((ctx, p) -> p.withExistingParent(p.name(ctx::getEntry), new ResourceLocation(Roots.MODID, "block/complex/pyre")))
+      .model((ctx, p) -> p.withExistingParent(p.name(ctx::getEntry), new ResourceLocation(RootsAPI.MODID, "block/complex/pyre")))
       .tag(RootsTags.Items.Blocks.PYRE)
       .build()
       .register();
