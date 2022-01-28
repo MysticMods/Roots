@@ -4,13 +4,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.block.entity.MortarBlockEntity;
 import mysticmods.roots.block.entity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModRegistries;
+import mysticmods.roots.recipe.mortar.MortarCrafting;
+import mysticmods.roots.recipe.mortar.MortarInventory;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -66,6 +70,17 @@ public class RitualCraftingRecipe extends RootsRecipe<PyreInventory, PyreBlockEn
       } catch (ClassCastException e) {
         throw new JsonSyntaxException("Invalid processor type: " + rl);
       }
+    }
+  }
+
+  public static class Builder extends RootsRecipe.Builder<PyreInventory, PyreBlockEntity, RitualCrafting> {
+    protected Builder(IItemProvider item, int count) {
+      super(item, count);
+    }
+
+    @Override
+    public IRecipeSerializer<?> getSerializer() {
+      return ModRecipes.Serializers.RITUAL_CRAFTING.get();
     }
   }
 }

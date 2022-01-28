@@ -10,6 +10,7 @@ import mysticmods.roots.init.ModRegistries;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -65,6 +66,17 @@ public class FeyCraftingRecipe extends RootsRecipe<FeyCraftingInventory, FeyCraf
       } catch (ClassCastException e) {
         throw new JsonSyntaxException("Invalid processor type: " + rl);
       }
+    }
+  }
+
+  public static class Builder extends RootsRecipe.Builder<FeyCraftingInventory, FeyCrafterBlockEntity, FeyCrafting> {
+    protected Builder(IItemProvider item, int count) {
+      super(item, count);
+    }
+
+    @Override
+    public IRecipeSerializer<?> getSerializer() {
+      return ModRecipes.Serializers.FEY_CRAFTING.get();
     }
   }
 }
