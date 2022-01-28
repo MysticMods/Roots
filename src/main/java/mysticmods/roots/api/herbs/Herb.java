@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.util.function.Supplier;
 
+// TODO: This relies on registrate?
 public class Herb extends ForgeRegistryEntry<IHerb> implements IHerb {
   private final Supplier<? extends IItemProvider> item;
   private final Supplier<? extends IItemProvider> seed;
