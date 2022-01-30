@@ -14,6 +14,7 @@ import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.block.crop.WaterElementalCropBlock;
+import mysticmods.roots.block.entity.RunicCrafterBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -1274,7 +1275,7 @@ public class ModBlocks {
       .build()
       .register();
 
-  public static BlockEntry<FeyCrafterBlock> RUNIC_CRAFTER = REGISTRATE.block("runic_crafter", Material.STONE, FeyCrafterBlock::new)
+  public static BlockEntry<RunicCrafterBlock> RUNIC_CRAFTER = REGISTRATE.block("runic_crafter", Material.STONE, RunicCrafterBlock::new)
       .properties(BASE_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/runic_crafter"))
       .tag(RootsTags.Blocks.CRAFTER)
@@ -1346,16 +1347,6 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::complexItemModel)
       .tag(RootsTags.Items.Blocks.IMBUER)
-      .build()
-      .register();
-
-  public static BlockEntry<ImposerBlock> IMPOSER = REGISTRATE.block("imposer", Material.STONE, ImposerBlock::new)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/imposer"))
-      .properties(BASE_PROPERTIES)
-      .tag(RootsTags.Blocks.IMPOSER)
-      .item()
-      .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.IMPOSER)
       .build()
       .register();
 
