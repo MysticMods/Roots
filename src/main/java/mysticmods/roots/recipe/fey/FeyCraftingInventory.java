@@ -1,8 +1,8 @@
 package mysticmods.roots.recipe.fey;
 
-import net.minecraftforge.items.ItemStackHandler;
+import mysticmods.roots.api.recipe.VariableItemStackHandler;
 
-public class FeyCraftingInventory extends ItemStackHandler {
+public class FeyCraftingInventory extends VariableItemStackHandler {
   public FeyCraftingInventory() {
     super(5);
   }

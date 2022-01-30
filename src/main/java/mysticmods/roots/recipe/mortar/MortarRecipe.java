@@ -3,6 +3,10 @@ package mysticmods.roots.recipe.mortar;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
+import it.unimi.dsi.fastutil.ints.Int2BooleanMap;
+import it.unimi.dsi.fastutil.ints.Int2BooleanOpenHashMap;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import mysticmods.roots.api.recipe.IBoundlessRecipe;
 import mysticmods.roots.api.recipe.IIngredientStackRecipe;
 import mysticmods.roots.api.recipe.RootsRecipe;
@@ -34,7 +38,36 @@ public class MortarRecipe extends RootsRecipe<MortarInventory, MortarBlockEntity
 
   @Override
   public boolean matches(MortarCrafting pInv, World pLevel) {
-    return false;
+    MortarInventory inv = pInv.getHandler();
+    if (inv.size() < getIngredients().size()) {
+      return false;
+    }
+
+    Int2BooleanMap map = new Int2BooleanOpenHashMap();
+    IntList usedSlots = new IntArrayList();
+
+    List<ItemStack> stacks = inv.getContainedItems();
+
+    outer: for (int i = 0; i < ingredients.size(); i++) {
+      IngredientStack stack = ingredients.get(i);
+      for (int z = 0; z < stacks.size(); z++) {
+        if (usedSlots.contains(z)) {
+          continue;
+        }
+
+        if (stack.apply(stacks.get(z))) {
+          map.put(i, true);
+          usedSlots.add(z);
+          continue outer;
+        }
+      }
+    }
+
+    if (map.size() != ingredients.size()) {
+      return false;
+    }
+
+    return true;
   }
 
   @Override

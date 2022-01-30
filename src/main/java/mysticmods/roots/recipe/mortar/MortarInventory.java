@@ -1,8 +1,8 @@
 package mysticmods.roots.recipe.mortar;
 
-import net.minecraftforge.items.ItemStackHandler;
+import mysticmods.roots.api.recipe.VariableItemStackHandler;
 
-public class MortarInventory extends ItemStackHandler {
+public class MortarInventory extends VariableItemStackHandler {
   public MortarInventory() {
     super(5);
   }
