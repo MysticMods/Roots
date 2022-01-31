@@ -10,14 +10,13 @@ d2e17b4be37b73597201a07f70b64db8c58a15a5 assets/roots/blockstates/elemental_soil
 f95caeda06c4e37462b6cb66dc61982f7d837dc0 assets/roots/blockstates/fey_crafter.json
 ff7d581d88718727ee81558a2eeff80b62837c2b assets/roots/blockstates/fey_light.json
 66a9debf12afcff3b29774b8f94f0c777e8438d2 assets/roots/blockstates/imbuer.json
-f01de1e0bc80aeb14cd86097dfcaaf9aec2d727f assets/roots/blockstates/imposer.json
 6f95e47a38e3e701b5fd7cb4f2a4cd8e4df99a49 assets/roots/blockstates/incense_plate.json
 ab83667a1cd0d2f0bbe6b354a9bb0b1361b6338c assets/roots/blockstates/infernal_bulb_crop.json
 488bb8dd26a36e686fb09b2157beb5156a361b62 assets/roots/blockstates/magmatic_soil.json
 62f368641e98b6cc05132a8680b5bc16e21e3c7e assets/roots/blockstates/moonglow_leaf_crop.json
 81a8601f4320985e2cf67a5aed63c10372b25b62 assets/roots/blockstates/mortar.json
 a84bb3889f0852bfab1036c38186e52eaa42ab59 assets/roots/blockstates/pereskia_crop.json
-2414c2f90a865e4371ab51aad953e8e7fb8e68dd assets/roots/blockstates/primal_grove_stone.json
+8ddec833b391ef12431b30ca968cc13b457ecdfd assets/roots/blockstates/primal_grove_stone.json
 991a9e6c2883a9eb135e850e59b62ca53b714e82 assets/roots/blockstates/pyre.json
 030cfe7b35104c35e103d50739bb8cc23d68329c assets/roots/blockstates/reinforced_catalyst_plate.json
 05d79e2bfdfaaab324f3514a1346b0b45b7ffa49 assets/roots/blockstates/reinforced_pyre.json
@@ -112,8 +111,8 @@ a5c36ec64ac2c2abcbe96a426561480dc298160a assets/roots/blockstates/wildwood_plank
 a6d6ea901876671011ce386898b01a41b562190c assets/roots/blockstates/wildwood_wall.json
 5140883c9a9c3d3547209c731df369aa6af8bbe5 assets/roots/blockstates/wildwood_wide_post.json
 ff4eb19a48799d4735163b470aa5ada8e60adef9 assets/roots/blockstates/wildwood_wood.json
-7f1c47fe7e241190a45fd9c18b0bc02cad6b8368 assets/roots/lang/en_ud.json
-a02004bc5fb89ed1123e16250146c2d7665b59a8 assets/roots/lang/en_us.json
+d0232398c0adee31dbeacf7c5344f2ed3782e41c assets/roots/lang/en_ud.json
+ce5a346810cb6a342d77510fa4f9c3736bcf8271 assets/roots/lang/en_us.json
 fc3d8e3568e4eab4235ec9f7af8369da99798a29 assets/roots/models/block/aqueous_soil.json
 250aa6676dc5313fda19ee559fd8e00a29760653 assets/roots/models/block/caelic_soil.json
 4b7444c4ec021dff288d8eecb087daa9a7d279d6 assets/roots/models/block/chiseled_runed_obsidian.json
@@ -149,9 +148,11 @@ de80ff7b92bb6389abde4f08249e07b35b6f950f assets/roots/models/block/pereskia_4.js
 50fc583c45e61da9285732e688daf31e36edce75 assets/roots/models/block/pereskia_5.json
 0f2fc853ca234f2d263de4bc8741410221026d36 assets/roots/models/block/pereskia_6.json
 d3efae112ba91eac85fdc9eb5234254732c2529c assets/roots/models/block/pereskia_7.json
+84b97adf11decc25b772b1aa5c002935a014976a assets/roots/models/block/primal_grove_stone_bottom.json
+64c16c8e38ae861b2b3c1c339502fe1b958c5e26 assets/roots/models/block/primal_grove_stone_bottom_valid.json
 06391015bcdf6aef570e4c0e650b709bffd52c30 assets/roots/models/block/primal_grove_stone_inventory.json
-84b97adf11decc25b772b1aa5c002935a014976a assets/roots/models/block/primal_grove_stone_middle.json
-64c16c8e38ae861b2b3c1c339502fe1b958c5e26 assets/roots/models/block/primal_grove_stone_middle_valid.json
+61146c2026515c7645776c9994cb178c546b3aaf assets/roots/models/block/primal_grove_stone_middle.json
+39d8d3e647e7f03d80b2ba8711324a17fd8acce9 assets/roots/models/block/primal_grove_stone_middle_valid.json
 6dac564a02f4799edaea968dd95c7f8bd1a04db2 assets/roots/models/block/primal_grove_stone_top.json
 7df9c29540f3cefdba33588947e8803955c8bcc0 assets/roots/models/block/primal_grove_stone_top_valid.json
 2da1062c374e6938a770aeb32a8058a810018838 assets/roots/models/block/runed_acacia_log.json
@@ -381,7 +382,6 @@ bd5903dc3b5491bad4014a8549094a52901ac5a0 assets/roots/models/item/dewgonia.json
 d9b421c85b3d61a36ad87add5f6b1599f54c6419 assets/roots/models/item/elemental_soil.json
 c3de1bd9f7c127e9817124a315a1bd94b31ff154 assets/roots/models/item/fey_crafter.json
 1ab127d87ee24150ada0d9b38a5a756c23aa4dad assets/roots/models/item/imbuer.json
-f050783e3c29f0a1080a2bf2959a341c969a2c87 assets/roots/models/item/imposer.json
 1827ba3dadb50d330cd2db562fae82fb7a0e2dd4 assets/roots/models/item/incense_plate.json
 8637ebd2f7078d64e2e61e7bb62f2d4296c092dd assets/roots/models/item/infernal_bulb.json
 6b0dabf504459aaf494412c30716dafcb4097d7c assets/roots/models/item/magmatic_soil.json
@@ -661,7 +661,6 @@ fb0965747a1f860c6aedf367b94cd8b9e813335e data/roots/loot_tables/blocks/cloud_ber
 1f45754e53bd00c236eb83da2c21792d1a277bd5 data/roots/loot_tables/blocks/fey_crafter.json
 205f5899101262f31f5c1a88bb7d954918d08d04 data/roots/loot_tables/blocks/fey_light.json
 47cbc628c35f05532baa9b2b6b115d640fc1fe70 data/roots/loot_tables/blocks/imbuer.json
-3b756ee36a7a820567c2fb69abf869cf2a8c32be data/roots/loot_tables/blocks/imposer.json
 6e5e84ea0c6bfcda68fc70ed40e1e7c51903a03e data/roots/loot_tables/blocks/incense_plate.json
 137161b0affcfd687060c72b00d16baf944f31bc data/roots/loot_tables/blocks/infernal_bulb_crop.json
 3a22ad84e81d2a37d61791de8d598b7e810fe60e data/roots/loot_tables/blocks/magmatic_soil.json
@@ -907,7 +906,6 @@ c4c66cd577555a2376174cd6ca20771bf62b73ac data/roots/tags/blocks/crops/spirit_her
 62fc77cb24f1a15584cda999f691103b9d26eb1c data/roots/tags/blocks/crops/wildroot.json
 95a0eb13668bb4d984e4f12f42086d772e185570 data/roots/tags/blocks/grove_stones/primal.json
 324d32bb45a709d7438ca2da2411157dc77e1e03 data/roots/tags/blocks/imbuer.json
-599d4a18b8d05c5a7c4c2167728ffa73ddb9f6f7 data/roots/tags/blocks/imposer.json
 08b3271993de8d99793a75d721c0453d54ea6679 data/roots/tags/blocks/logs/runed.json
 aecb4f08b6157cd63519bdce1ed48c78582cfdd2 data/roots/tags/blocks/logs/runed/acacia.json
 391f4f144a2719a8b0212aeb2f8f32caf6171324 data/roots/tags/blocks/logs/runed/birch.json
@@ -946,7 +944,6 @@ c84247021b812e56145a12750229af395dcad0e5 data/roots/tags/items/crops/cloud_berry
 734341e40d89d6b0b37b37e85f6272d55aeff664 data/roots/tags/items/crops/wildroot.json
 95a0eb13668bb4d984e4f12f42086d772e185570 data/roots/tags/items/grove_stones/primal.json
 324d32bb45a709d7438ca2da2411157dc77e1e03 data/roots/tags/items/imbuer.json
-599d4a18b8d05c5a7c4c2167728ffa73ddb9f6f7 data/roots/tags/items/imposer.json
 08b3271993de8d99793a75d721c0453d54ea6679 data/roots/tags/items/logs/runed.json
 aecb4f08b6157cd63519bdce1ed48c78582cfdd2 data/roots/tags/items/logs/runed/acacia.json
 391f4f144a2719a8b0212aeb2f8f32caf6171324 data/roots/tags/items/logs/runed/birch.json

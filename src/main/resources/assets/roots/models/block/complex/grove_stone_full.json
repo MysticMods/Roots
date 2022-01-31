@@ -1,46 +1,14 @@
 {
 	"credit": "Made with Blockbench",
-    "display": {
-        "gui": {
-            "rotation": [ 30, 225, 0 ],
-            "translation": [ 0, -3.5, 0],
-            "scale":[ 0.35, 0.35, 0.35 ]
-        },
-        "ground": {
-            "rotation": [ 0, 0, 0 ],
-            "translation": [ 0, 3, 0],
-            "scale":[ 0.25, 0.25, 0.25 ]
-        },
-        "fixed": {
-            "rotation": [ 0, 0, 0 ],
-            "translation": [ 0, 0, 0],
-            "scale":[ 0.5, 0.5, 0.5 ]
-        },
-        "thirdperson_righthand": {
-            "rotation": [ 75, 45, 0 ],
-            "translation": [ 0, 2.5, 0],
-            "scale": [ 0.375, 0.375, 0.375 ]
-        },
-        "firstperson_righthand": {
-            "rotation": [ 0, 45, 0 ],
-            "translation": [ 0, 0, 0 ],
-            "scale": [ 0.40, 0.40, 0.40 ]
-        },
-        "firstperson_lefthand": {
-            "rotation": [ 0, 225, 0 ],
-            "translation": [ 0, 0, 0 ],
-            "scale": [ 0.40, 0.40, 0.40 ]
-        }
-    },
 	"textures": {
-		"monolith": "roots:block/ob_stone",
-        "particle": "roots:block/ob_stone"
+		"particle": "roots:block/ob_stone",
+		"monolith": "roots:block/ob_stone"
 	},
 	"elements": [
 		{
 			"name": "Base",
-			"from": [0, 0, 0],
-			"to": [16, 4.5, 16],
+			"from": [0, -11, 0],
+			"to": [16, -6.5, 16],
 			"faces": {
 				"north": {"uv": [0, 0, 16, 4.5], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 16, 4.5], "texture": "#monolith"},
@@ -52,8 +20,8 @@
 		},
 		{
 			"name": "Stone1",
-			"from": [2.5, 3, 3.5],
-			"to": [13.5, 19, 12.5],
+			"from": [2.5, -7, 3.5],
+			"to": [13.5, 9, 12.5],
 			"faces": {
 				"north": {"uv": [0, 0, 11, 16], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 9, 15.9], "texture": "#monolith"},
@@ -63,8 +31,8 @@
 		},
 		{
 			"name": "Stone2B",
-			"from": [3, 20.9, 4],
-			"to": [13, 25.9, 12],
+			"from": [3, 11, 4],
+			"to": [13, 16, 12],
 			"faces": {
 				"north": {"uv": [0, 0, 10, 5], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 8, 5], "texture": "#monolith"},
@@ -75,8 +43,8 @@
 		},
 		{
 			"name": "Stone2L",
-			"from": [3, 25.9, 4],
-			"to": [6, 30.9, 12],
+			"from": [3, 16, 4],
+			"to": [6, 21, 12],
 			"faces": {
 				"north": {"uv": [0, 0, 3, 5], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 8, 5], "texture": "#monolith"},
@@ -86,8 +54,8 @@
 		},
 		{
 			"name": "Stone2R",
-			"from": [10, 25.9, 4],
-			"to": [13, 30.9, 12],
+			"from": [10, 16, 4],
+			"to": [13, 21, 12],
 			"faces": {
 				"north": {"uv": [0, 0, 3, 5], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 8, 5], "texture": "#monolith"},
@@ -97,8 +65,8 @@
 		},
 		{
 			"name": "Stone2T",
-			"from": [3, 30.9, 4],
-			"to": [13, 34.9, 12],
+			"from": [3, 21, 4],
+			"to": [13, 25, 12],
 			"faces": {
 				"north": {"uv": [0, 0, 10, 4], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 8, 4], "texture": "#monolith"},
@@ -110,8 +78,8 @@
 		},
 		{
 			"name": "Stone3",
-			"from": [3.5, 33.9, 4.5],
-			"to": [12.5, 36.9, 11.5],
+			"from": [3.5, 25, 4.5],
+			"to": [12.5, 28, 11.5],
 			"faces": {
 				"north": {"uv": [0, 0, 9, 3], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 7, 3], "texture": "#monolith"},
@@ -122,8 +90,8 @@
 		},
 		{
 			"name": "Stone4",
-			"from": [4, 36.9, 5],
-			"to": [12, 38.9, 11],
+			"from": [4, 28, 5],
+			"to": [12, 30, 11],
 			"faces": {
 				"north": {"uv": [0, 0, 8, 2], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 6, 2], "texture": "#monolith"},
@@ -134,8 +102,8 @@
 		},
 		{
 			"name": "Stone5",
-			"from": [5, 38.9, 6],
-			"to": [11, 40.9, 10],
+			"from": [5, 30, 6],
+			"to": [11, 32, 10],
 			"faces": {
 				"north": {"uv": [0, 0, 6, 2], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 4, 2], "texture": "#monolith"},
@@ -146,8 +114,8 @@
 		},
 		{
 			"name": "Stone6",
-			"from": [6, 40.9, 7],
-			"to": [10, 41.9, 9],
+			"from": [6, 31, 7],
+			"to": [10, 32, 9],
 			"faces": {
 				"north": {"uv": [0, 0, 4, 1], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 2, 1], "texture": "#monolith"},
@@ -158,8 +126,8 @@
 		},
 		{
 			"name": "Stone2",
-			"from": [2.5, 19, 3.5],
-			"to": [13.5, 21, 12.5],
+			"from": [2.5, 9, 3.5],
+			"to": [13.5, 11, 12.5],
 			"faces": {
 				"north": {"uv": [0, 0, 11, 2], "texture": "#monolith"},
 				"east": {"uv": [0, 0, 9, 1.9], "texture": "#monolith"},
@@ -168,5 +136,32 @@
 				"up": {"uv": [0, 0, 11, 9], "texture": "#monolith"}
 			}
 		}
-	]
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [0, -3.5, 0],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
 }
