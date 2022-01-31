@@ -17,6 +17,10 @@ public class ModItems {
     return p.generated(ctx::getEntry, new ResourceLocation(RootsAPI.MODID, "item/herbs/" + ctx.getName()));
   }
 
+  private static <T extends Item> ItemModelBuilder barkModel (DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
+    return p.generated(ctx::getEntry, new ResourceLocation(RootsAPI.MODID, "item/bark/" + ctx.getName()));
+  }
+
   public static class Herbs {
     public static ItemEntry<BlockNamedItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new BlockNamedItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
         .model(ModItems::cropModel)
@@ -84,8 +88,65 @@ public class ModItems {
     }
   }
 
+  public static class Bark {
+    public static ItemEntry<Item> ACACIA_BARK = REGISTRATE.item("acacia_bark", Item::new)
+        .tag(RootsTags.Items.ACACIA_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> BIRCH_BARK = REGISTRATE.item("birch_bark", Item::new)
+        .tag(RootsTags.Items.BIRCH_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> DARK_OAK_BARK = REGISTRATE.item("dark_oak_bark", Item::new)
+        .tag(RootsTags.Items.DARK_OAK_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> JUNGLE_BARK = REGISTRATE.item("jungle_bark", Item::new)
+        .tag(RootsTags.Items.JUNGLE_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> OAK_BARK = REGISTRATE.item("oak_bark", Item::new)
+        .tag(RootsTags.Items.OAK_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> SPRUCE_BARK = REGISTRATE.item("spruce_bark", Item::new)
+        .tag(RootsTags.Items.SPRUCE_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> WILDWOOD_BARK = REGISTRATE.item("wildwood_bark", Item::new)
+        .tag(RootsTags.Items.WILDWOOD_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> CRIMSON_BARK = REGISTRATE.item("crimson_bark", Item::new)
+        .tag(RootsTags.Items.CRIMSON_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> WARPED_BARK = REGISTRATE.item("warped_bark", Item::new)
+        .tag(RootsTags.Items.WARPED_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static ItemEntry<Item> MIXED_BARK = REGISTRATE.item("mixed_bark", Item::new)
+        .tag(RootsTags.Items.MIXED_BARK)
+        .model(ModItems::barkModel)
+        .register();
+
+    public static void load() {
+
+    }
+  }
+
   public static void load() {
     Herbs.load();
     Seeds.load();
+    Bark.load();
   }
 }
