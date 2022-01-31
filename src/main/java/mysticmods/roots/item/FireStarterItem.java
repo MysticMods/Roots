@@ -47,7 +47,7 @@ public class FireStarterItem extends Item {
       BlockRayTraceResult ray = getPlayerPOVHitResult(level, player, RayTraceContext.FluidMode.NONE);
       boolean used = false;
       if (ray.getType() == RayTraceResult.Type.BLOCK) {
-        BlockPos blockpos = ray.getBlockPos();
+        BlockPos blockpos = ray.getBlockPos().relative(ray.getDirection());
         if (level.mayInteract(player, blockpos) && player.mayUseItemAt(blockpos, ray.getDirection(), stack)) {
           BlockState stateAt = level.getBlockState(blockpos);
           if (stateAt.isAir()) {
