@@ -61,6 +61,8 @@ public class ModTags {
 
       b.add(RootsTags.Items.CROPS, RootsTags.Items.AIR_CROPS, RootsTags.Items.FIRE_CROPS, RootsTags.Items.EARTH_CROPS, RootsTags.Items.WATER_CROPS, RootsTags.Items.WILDEWHEET_CROP, RootsTags.Items.SPIRIT_HERB_CROP, RootsTags.Items.PERESKIA_CROP, RootsTags.Items.WILDROOT_CROP, RootsTags.Items.MOONGLOW_LEAF_CROP);
 
+      b.add(RootsTags.Items.BARKS, RootsTags.Items.BIRCH_BARK, RootsTags.Items.ACACIA_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
+
       // TODO: Copying crops to the actual item tag?
     });
   }

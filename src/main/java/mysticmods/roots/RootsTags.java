@@ -137,6 +137,18 @@ public class RootsTags {
     public static Tags.IOptionalNamedTag<Item> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
     public static Tags.IOptionalNamedTag<Item> PERESKIA_CROP = modTag("crops/pereskia");
 
+    public static Tags.IOptionalNamedTag<Item> BARKS = modTag("barks");
+    public static Tags.IOptionalNamedTag<Item> ACACIA_BARK = modTag("barks/acacia");
+    public static Tags.IOptionalNamedTag<Item> BIRCH_BARK = modTag("barks/birch");
+    public static Tags.IOptionalNamedTag<Item> DARK_OAK_BARK = modTag("barks/dark_oak");
+    public static Tags.IOptionalNamedTag<Item> JUNGLE_BARK = modTag("barks/jungle");
+    public static Tags.IOptionalNamedTag<Item> OAK_BARK = modTag("barks/oak");
+    public static Tags.IOptionalNamedTag<Item> SPRUCE_BARK = modTag("barks/spruce");
+    public static Tags.IOptionalNamedTag<Item> WILDWOOD_BARK = modTag("barks/wildwood");
+    public static Tags.IOptionalNamedTag<Item> CRIMSON_BARK = modTag("barks/crimson");
+    public static Tags.IOptionalNamedTag<Item> WARPED_BARK = modTag("barks/warped");
+    public static Tags.IOptionalNamedTag<Item> MIXED_BARK = modTag("barks/mixed");
+
     // These are all filled in by ModTags
     public static class Blocks extends RootsTags {
       public static Tags.IOptionalNamedTag<Item> SOILS = modTag("soils");
