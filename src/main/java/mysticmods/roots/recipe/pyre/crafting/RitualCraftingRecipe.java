@@ -1,32 +1,21 @@
 package mysticmods.roots.recipe.pyre.crafting;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.recipe.RootsRecipe;
-import mysticmods.roots.block.entity.MortarBlockEntity;
+import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.block.entity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
-import mysticmods.roots.init.ModRegistries;
-import mysticmods.roots.recipe.mortar.MortarCrafting;
-import mysticmods.roots.recipe.mortar.MortarInventory;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import noobanidus.libs.noobutil.ingredient.IngredientStack;
-import noobanidus.libs.noobutil.processor.IProcessor;
-import noobanidus.libs.noobutil.processor.Processor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class RitualCraftingRecipe extends RootsRecipe<PyreInventory, PyreBlockEntity, RitualCrafting> {
-  public RitualCraftingRecipe(NonNullList<IngredientStack> ingredients, ItemStack result, ResourceLocation recipeId) {
+public class RitualCraftingRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, RitualCrafting> {
+  public RitualCraftingRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
     super(ingredients, result, recipeId);
   }
 
@@ -45,35 +34,13 @@ public class RitualCraftingRecipe extends RootsRecipe<PyreInventory, PyreBlockEn
     return ModRecipes.Types.RITUAL_CRAFTING;
   }
 
-  public static class Serializer extends RootsRecipe.Serializer<PyreInventory, PyreBlockEntity, RitualCrafting, RitualCraftingRecipe> {
+  public static class Serializer extends RootsRecipe.Serializer<PyreInventory, RitualCrafting, RitualCraftingRecipe> {
     public Serializer() {
       super(RitualCraftingRecipe::new);
     }
-
-    @Override
-    public List<Processor<RitualCrafting>> parseProcessors(JsonArray processors) {
-      List<Processor<RitualCrafting>> processorsResult = new ArrayList<>();
-      for (JsonElement element : processors) {
-        ResourceLocation procRl = new ResourceLocation(element.getAsString());
-        processorsResult.add(getProcessor(procRl));
-      }
-
-      return processorsResult;
-    }
-
-    @Override
-    public Processor<RitualCrafting> getProcessor(ResourceLocation rl) {
-      IProcessor<?> proc = ModRegistries.PROCESSOR_REGISTRY.getValue(rl);
-      try {
-//noinspection unchecked
-        return (Processor<RitualCrafting>) proc;
-      } catch (ClassCastException e) {
-        throw new JsonSyntaxException("Invalid processor type: " + rl);
-      }
-    }
   }
 
-  public static class Builder extends RootsRecipe.Builder<PyreInventory, PyreBlockEntity, RitualCrafting> {
+  public static class Builder extends RootsRecipe.Builder {
     protected Builder(IItemProvider item, int count) {
       super(item, count);
     }

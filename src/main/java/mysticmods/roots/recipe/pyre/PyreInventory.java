@@ -1,8 +1,8 @@
 package mysticmods.roots.recipe.pyre;
 
-import mysticmods.roots.api.recipe.VariableItemStackHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
-public class PyreInventory extends VariableItemStackHandler {
+public class PyreInventory extends ItemStackHandler {
   public PyreInventory() {
     super(5);
   }

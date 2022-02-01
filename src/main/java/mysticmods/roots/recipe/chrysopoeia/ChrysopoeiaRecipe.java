@@ -19,6 +19,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 
+// TODO: Convert to RootsRecipe
 public class ChrysopoeiaRecipe implements IRecipe<PlayerOffhandInventoryHandler> {
   private final NonNullList<Ingredient> ingredients;
   private final ItemStack result;
