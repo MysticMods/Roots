@@ -8,10 +8,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.RecipeMatcher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEntity, MortarCrafting> {
   public MortarRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
@@ -20,36 +25,16 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   @Override
   public boolean matches(MortarCrafting pInv, World pLevel) {
-/*    MortarInventory inv = pInv.getHandler();
-    if (inv.size() < getIngredients().size()) {
-      return false;
-    }
-
-    Int2BooleanMap map = new Int2BooleanOpenHashMap();
-    IntList usedSlots = new IntArrayList();
-
-    List<ItemStack> stacks = inv.getContainedItems();
-
-    outer: for (int i = 0; i < ingredients.size(); i++) {
-      IngredientStack stack = ingredients.get(i);
-      for (int z = 0; z < stacks.size(); z++) {
-        if (usedSlots.contains(z)) {
-          continue;
-        }
-
-        if (stack.apply(stacks.get(z))) {
-          map.put(i, true);
-          usedSlots.add(z);
-          continue outer;
-        }
+    List<ItemStack> inputs = new ArrayList<>();
+    MortarInventory inv = pInv.getHandler();
+    for (int i = 0; i < inv.getSlots(); i++) {
+      ItemStack stack = inv.getStackInSlot(i);
+      if (!stack.isEmpty()) {
+        inputs.add(stack);
       }
     }
 
-    if (map.size() != ingredients.size()) {*/
-    return false;
-/*    }
-
-    return true;*/
+    return RecipeMatcher.findMatches(inputs, ingredients) != null;
   }
 
   @Override
