@@ -1,7 +1,7 @@
 package mysticmods.roots.recipe.summon;
 
-import mysticmods.roots.api.recipe.VariableItemStackHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 // TODO
-public class SummonCreaturesInventory extends VariableItemStackHandler {
+public class SummonCreaturesInventory extends ItemStackHandler {
 }

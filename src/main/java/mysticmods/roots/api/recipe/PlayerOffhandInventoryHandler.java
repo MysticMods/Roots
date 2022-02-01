@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 
+// TODO: Convert to IRootsCrafting
 // TODO: Move to NoobUtil
 public class PlayerOffhandInventoryHandler implements IInventory {
   private final PlayerEntity player;

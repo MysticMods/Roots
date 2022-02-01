@@ -1,14 +1,13 @@
 package mysticmods.roots.api.recipe;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import mysticmods.roots.api.recipe.processors.RootsProcessor;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.network.PacketBuffer;
@@ -32,26 +31,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public abstract class RootsRecipe<H extends IItemHandler, T extends TileEntity & IReferentialBlockEntity, W extends Crafting<H, T>> implements IRootsRecipe<H, T, W> {
-  protected final NonNullList<IngredientStack> ingredients;
+public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<H, W> {
+  protected final NonNullList<Ingredient> ingredients;
   protected final ItemStack result;
-  protected final List<Processor<W>> processors = new ArrayList<>();
+  protected final List<RootsProcessor<? super W>> processors = new ArrayList<>();
   protected final ResourceLocation recipeId;
 
   @FunctionalInterface
-  public interface RootsRecipeBuilder<R extends RootsRecipe<?, ?, ?>> {
-    R create(NonNullList<IngredientStack> ingredients, ItemStack result, ResourceLocation recipeId);
+  public interface RootsRecipeBuilder<R extends RootsRecipe<?, ?>> {
+    R create(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId);
   }
 
-  public RootsRecipe(NonNullList<IngredientStack> ingredients, ItemStack result, ResourceLocation recipeId) {
+  public RootsRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
     this.ingredients = ingredients;
     this.result = result;
     this.recipeId = recipeId;
-  }
-
-  @Override
-  public NonNullList<IngredientStack> getIngredientStacks() {
-    return ingredients;
   }
 
   @Override
@@ -64,17 +58,7 @@ public abstract class RootsRecipe<H extends IItemHandler, T extends TileEntity &
     return recipeId;
   }
 
-  @Override
-  public List<Processor<W>> getProcessors() {
-    return processors;
-  }
-
-  @Override
-  public void addProcessor(Processor<W> processor) {
-    this.processors.add(processor);
-  }
-
-  public abstract static class Serializer<H extends IItemHandler, T extends TileEntity & IReferentialBlockEntity, W extends Crafting<H, T>, R extends RootsRecipe<H, T, W>> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<R> {
+  public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<R> {
 
     private final RootsRecipeBuilder<R> builder;
 
@@ -82,20 +66,14 @@ public abstract class RootsRecipe<H extends IItemHandler, T extends TileEntity &
       this.builder = builder;
     }
 
-    public abstract List<Processor<W>> parseProcessors(JsonArray processors);
-
-    public abstract Processor<W> getProcessor(ResourceLocation rl);
-
     @Override
     public R fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
       JsonArray incoming = JSONUtils.getAsJsonArray(pJson, "ingredients");
-      NonNullList<IngredientStack> ingredients = NonNullList.withSize(incoming.size(), IngredientStack.EMPTY);
+      NonNullList<Ingredient> ingredients = NonNullList.create();
       for (int i = 0; i < incoming.size(); i++) {
-        JsonElement element = incoming.get(i);
-        if (element.isJsonObject()) {
-          ingredients.set(i, IngredientStack.deserialize(element.getAsJsonObject()));
-        } else {
-          throw new JsonSyntaxException("Invalid ingredient at index " + i + " in recipe " + pRecipeId + ", ingredient " + element + " is not a JsonObject");
+        Ingredient ingredient = Ingredient.fromJson(incoming.get(i));
+        if (!ingredient.isEmpty()) {
+          ingredients.add(ingredient);
         }
       }
       ItemStack result;
@@ -117,62 +95,37 @@ public abstract class RootsRecipe<H extends IItemHandler, T extends TileEntity &
       }
 
 
-      R recipe = builder.create(ingredients, result, pRecipeId);
-
-      if (pJson.has("processors")) {
-        JsonArray jsonProcessors = JSONUtils.getAsJsonArray(pJson, "processors");
-        for (Processor<W> proc : parseProcessors(jsonProcessors)) {
-          recipe.addProcessor(proc);
-        }
-      }
-
-      return recipe;
+      return builder.create(ingredients, result, pRecipeId);
     }
 
     @Nullable
     @Override
     public R fromNetwork(ResourceLocation pRecipeId, PacketBuffer pBuffer) {
       int ingCount = pBuffer.readVarInt();
-      NonNullList<IngredientStack> ingredients = NonNullList.withSize(ingCount, IngredientStack.EMPTY);
+      NonNullList<Ingredient> ingredients = NonNullList.withSize(ingCount, Ingredient.EMPTY);
       for (int i = 0; i < ingCount; i++) {
-        ingredients.set(i, IngredientStack.read(pBuffer));
+        ingredients.set(i, Ingredient.fromNetwork(pBuffer));
       }
 
       ItemStack result = pBuffer.readItem();
-      R recipe = builder.create(ingredients, result, pRecipeId);
-
-      int procCount = pBuffer.readVarInt();
-      for (int i = 0; i < procCount; i++) {
-        ResourceLocation rl = pBuffer.readResourceLocation();
-        Processor<W> processor = getProcessor(rl);
-        if (processor != null) {
-          recipe.addProcessor(processor);
-        }
-      }
-
-      return recipe;
+      return builder.create(ingredients, result, pRecipeId);
     }
 
     @Override
     public void toNetwork(PacketBuffer pBuffer, R recipe) {
-      pBuffer.writeVarInt(recipe.getIngredientStacks().size());
-      for (IngredientStack ingredient : recipe.getIngredientStacks()) {
-        ingredient.write(pBuffer);
+      pBuffer.writeVarInt(recipe.getIngredients().size());
+      for (Ingredient ingredient : recipe.getIngredients()) {
+        ingredient.toNetwork(pBuffer);
       }
       pBuffer.writeItem(recipe.getResultItem());
-      pBuffer.writeVarInt(recipe.getProcessors().size());
-      for (Processor<W> processor : recipe.getProcessors()) {
-        pBuffer.writeResourceLocation(Objects.requireNonNull(processor.getRegistryName()));
-      }
     }
   }
 
   // TODO: NBT SUPPORT???
-  public abstract static class Builder<H extends IItemHandler, T extends TileEntity & IReferentialBlockEntity, W extends Crafting<H, T>> {
+  public abstract static class Builder {
     private final int count;
     private final Item result;
     private final List<IngredientStack> ingredients = new ArrayList<>();
-    private final List<Processor<?>> processors = new ArrayList<>();
 
     protected Builder(IItemProvider item, int count) {
       this.result = item.asItem();
@@ -181,48 +134,43 @@ public abstract class RootsRecipe<H extends IItemHandler, T extends TileEntity &
 
     public abstract IRecipeSerializer<?> getSerializer();
 
-    public Builder<H, T, W> addIngredient (ITag<Item> ingredient) {
+    public Builder addIngredient(ITag<Item> ingredient) {
       addIngredient(ingredient, 1);
       return this;
     }
 
-    public Builder<H, T, W> addIngredient (ITag<Item> ingredient, int count) {
+    public Builder addIngredient(ITag<Item> ingredient, int count) {
       addIngredient(Ingredient.of(ingredient), count);
       return this;
     }
 
-    public Builder<H, T, W> addIngredient(Ingredient ingredient) {
+    public Builder addIngredient(Ingredient ingredient) {
       addIngredient(ingredient, 1);
       return this;
     }
 
-    public Builder<H, T, W> addIngredient(Ingredient ingredient, int count) {
+    public Builder addIngredient(Ingredient ingredient, int count) {
       addIngredient(new IngredientStack(ingredient, count));
       return this;
     }
 
-    public Builder<H, T, W> addIngredient (IItemProvider item) {
+    public Builder addIngredient(IItemProvider item) {
       addIngredient(item, 1);
       return this;
     }
 
-    public Builder<H, T, W> addIngredient (IItemProvider item, int count) {
+    public Builder addIngredient(IItemProvider item, int count) {
       addIngredient(new IngredientStack(Ingredient.of(item), count));
       return this;
     }
 
-    public Builder<H, T, W> addIngredient(IngredientStack ingredientStack) {
+    public Builder addIngredient(IngredientStack ingredientStack) {
       this.ingredients.add(ingredientStack);
       return this;
     }
 
-    public Builder<H, T, W> addProcessor (Processor<W> processor) {
-      this.processors.add(processor);
-      return this;
-    }
-
     public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new Result(recipeName, result, count, ingredients, processors, getSerializer()));
+      consumer.accept(new Result(recipeName, result, count, ingredients, getSerializer()));
     }
 
     public static class Result implements IFinishedRecipe {
@@ -230,15 +178,13 @@ public abstract class RootsRecipe<H extends IItemHandler, T extends TileEntity &
       private final Item result;
       private final int count;
       private final List<IngredientStack> ingredients;
-      private final List<Processor<?>> processors;
       private final IRecipeSerializer<?> serializer;
 
-      public Result(ResourceLocation id, Item result, int count, List<IngredientStack> ingredients, List<Processor<?>> processors, IRecipeSerializer<?> serializer) {
+      public Result(ResourceLocation id, Item result, int count, List<IngredientStack> ingredients, IRecipeSerializer<?> serializer) {
         this.id = id;
         this.result = result;
         this.count = count;
         this.ingredients = ingredients;
-        this.processors = processors;
         this.serializer = serializer;
         if (this.ingredients.isEmpty()) {
           throw new IllegalArgumentException("ingredients for recipe " + id + " cannot be empty");
@@ -260,12 +206,6 @@ public abstract class RootsRecipe<H extends IItemHandler, T extends TileEntity &
           item.addProperty("count", count);
         }
         json.add("result", item);
-
-        JsonArray processors = new JsonArray();
-        for (Processor<?> processor : this.processors) {
-          processors.add(Objects.requireNonNull(processor.getRegistryName()).toString());
-        }
-        json.add("processors", processors);
       }
 
       @Override
