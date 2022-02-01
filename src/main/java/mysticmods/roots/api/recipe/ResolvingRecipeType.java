@@ -25,11 +25,11 @@ public class ResolvingRecipeType<C extends IInventory, T extends IRecipe<C>> ext
   }
 
   @Nullable
-  public T getRecipe(C inventory, World level) {
+  public T findRecipe(C inventory, World level) {
     if (lastRecipe != null && lastRecipe.matches(inventory, level)) {
       return lastRecipe;
     }
-    for (T recipe : getRecipesList()) {
+    for (T recipe : getRecipes()) {
       if (recipe.matches(inventory, level)) {
         lastRecipe = recipe;
         return recipe;
