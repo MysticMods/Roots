@@ -224,4 +224,8 @@ return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
       }
     }
   }
+
+  public static Builder builder(EntityType<?> result) {
+    return new Builder(result);
+  }
 }

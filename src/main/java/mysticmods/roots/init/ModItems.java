@@ -7,6 +7,7 @@ import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.FireStarterItem;
+import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ShearsItem;
@@ -347,6 +348,11 @@ public class ModItems {
 
   public static ItemEntry<Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
       .model(subfolder("resources"))
+      .recipe((ctx, p) -> {
+        MortarRecipe.builder(ctx.getEntry(), 1, 1)
+            .addIngredient(RootsTags.Items.Blocks.RUNESTONE)
+            .build(p, new ResourceLocation(RootsAPI.MODID, "runic_dust"));
+      })
       .register();
 
   public static ItemEntry<Item> STRANGE_OOZE = REGISTRATE.item("strange_ooze", Item::new)

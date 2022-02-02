@@ -59,4 +59,8 @@ public class FeyCraftingRecipe extends RootsTileRecipe<FeyCraftingInventory, Fey
       return ModRecipes.Serializers.FEY_CRAFTING.get();
     }
   }
+
+  public static Builder builder (IItemProvider item, int count) {
+    return new Builder(item, count);
+  }
 }

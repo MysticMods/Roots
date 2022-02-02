@@ -50,4 +50,8 @@ public class RitualCraftingRecipe extends RootsTileRecipe<PyreInventory, PyreBlo
       return ModRecipes.Serializers.RITUAL_CRAFTING.get();
     }
   }
+
+  public static Builder builder (IItemProvider item, int count) {
+    return new Builder(item, count);
+  }
 }

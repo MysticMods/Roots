@@ -66,6 +66,9 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       this.builder = builder;
     }
 
+    protected void fromJsonAdditional (R recipe, ResourceLocation pRecipeId, JsonObject pJson) {
+    }
+
     @Override
     public R fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
       JsonArray incoming = JSONUtils.getAsJsonArray(pJson, "ingredients");
@@ -94,8 +97,12 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         result = new ItemStack(item, count);
       }
 
+      R recipe = builder.create(ingredients, result, pRecipeId);
+      fromJsonAdditional(recipe, pRecipeId, pJson);
+      return recipe;
+    }
 
-      return builder.create(ingredients, result, pRecipeId);
+    protected void fromNetworkAdditional (R recipe, ResourceLocation pRecipeId, PacketBuffer pBuffer) {
     }
 
     @Nullable
@@ -108,7 +115,12 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       }
 
       ItemStack result = pBuffer.readItem();
-      return builder.create(ingredients, result, pRecipeId);
+      R recipe = builder.create(ingredients, result, pRecipeId);
+      fromNetworkAdditional(recipe, pRecipeId, pBuffer);
+      return recipe;
+    }
+
+    protected void toNetworkAdditional (R recipe, PacketBuffer pBuffer) {
     }
 
     @Override
@@ -118,14 +130,15 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         ingredient.toNetwork(pBuffer);
       }
       pBuffer.writeItem(recipe.getResultItem());
+      toNetworkAdditional(recipe, pBuffer);
     }
   }
 
   // TODO: NBT SUPPORT???
   public abstract static class Builder {
-    private final int count;
-    private final Item result;
-    private final List<IngredientStack> ingredients = new ArrayList<>();
+    protected final int count;
+    protected final Item result;
+    protected final List<IngredientStack> ingredients = new ArrayList<>();
 
     protected Builder(IItemProvider item, int count) {
       this.result = item.asItem();
