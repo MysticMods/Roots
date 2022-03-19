@@ -32,10 +32,10 @@ public class SoilHandler {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onCropHarvest(BlockEvent.HarvestDropsEvent event) {
-    if (event.getHarvester() != null) {
+    IBlockState soil = event.getWorld().getBlockState(event.getPos().offset(EnumFacing.DOWN));
+    if (event.getHarvester() != null && (soil.getBlock() == ModBlocks.elemental_soil_fire || soil.getBlock() == ModBlocks.elemental_soil_fire)) {
       if (event.getState().getBlock() instanceof IPlantable) {
-        IBlockState soil = event.getWorld().getBlockState(event.getPos().offset(EnumFacing.DOWN));
-        if (event.getState().getBlock() instanceof IPlantable && soil.getBlock()
+        if (soil.getBlock()
             .canSustainPlant(soil, event.getWorld(), event.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) event.getState().getBlock())) {
           if (soil.getBlock() == ModBlocks.elemental_soil_fire) {
             int cookingMultiplier = soil.getValue(BlockElementalSoil.FIRE_MULTIPLIER);
@@ -115,13 +115,11 @@ public class SoilHandler {
   public static void onCropsGrowPre(BlockEvent.CropGrowEvent.Pre cropGrowEvent) {
     IBlockState soil = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos().offset(EnumFacing.DOWN));
     IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
-    if (plant.getBlock() instanceof IPlantable && soil.getBlock()
+    if (soil.getBlock() == ModBlocks.elemental_soil_air && plant.getBlock() instanceof IPlantable && soil.getBlock()
         .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
-      if (soil.getBlock() == ModBlocks.elemental_soil_air) {
         int speed = soil.getValue(BlockElementalSoil.AIR_SPEED);
         if (speed > 0) {
           cropGrowEvent.setResult(Util.rand.nextInt(3) == 0 ? Event.Result.ALLOW : Event.Result.DEFAULT);
-        }
       }
     }
   }
