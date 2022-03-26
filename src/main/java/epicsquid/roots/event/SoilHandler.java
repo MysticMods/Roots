@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class SoilHandler {
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public static void onCropHarvest(final BlockEvent.HarvestDropsEvent event) {
