@@ -89,6 +89,7 @@ minecraft {
 
 repositories {
     mavenLocal()
+    maven { url = 'https://maven.minecraftforge.net' }
     maven {
         name = 'Patchouli'
         url = "https://maven.blamejared.com"
@@ -171,6 +172,7 @@ dependencies {
 fancyGradle {
     patches {
         resources
+        coremods
     }
 }
 
