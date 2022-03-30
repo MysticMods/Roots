@@ -2,6 +2,7 @@ package epicsquid.roots.event;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockElementalSoil;
 import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.init.ModBlocks;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -45,9 +47,7 @@ public class SoilHandler {
 			if (cookingMultiplier > 0) {
 				ItemStack seed = Harvest.getSeed(event.getState());
 				
-				event.getDrops().clear();
-				
-				List<ItemStack> drops = event.getDrops();
+				List<ItemStack> newDrops = new ArrayList<>();
 				final Random random = eventWorld.rand;
 				
 				boolean foundSeed = false;
@@ -57,13 +57,13 @@ public class SoilHandler {
 						if (!seed.isEmpty()) {
 							if (ItemUtil.equalWithoutSize(seed, stack)) {
 								foundSeed = true;
-								drops.add(stack);
+								newDrops.add(stack);
 							}
 						}
 						else if (stack.getItem() instanceof IPlantable) {
 							foundSeed = true;
 							seed = stack;
-							drops.add(stack);
+							newDrops.add(stack);
 						}
 					}
 					else {
@@ -71,9 +71,9 @@ public class SoilHandler {
 						if (!result.isEmpty()) {
 							ItemStack copy = result.copy();
 							copy.setCount(cookingMultiplier - 1 > 0 ? random.nextInt(cookingMultiplier - 1) + 1 : 1);
-							drops.add(copy);
+							newDrops.add(copy);
 						} else {
-							drops.add(stack);
+							newDrops.add(stack);
 						}
 					}
 					
@@ -84,27 +84,32 @@ public class SoilHandler {
 						eventWorld.spawnEntity(new EntityXPOrb(eventWorld, eventPos.getX() + 0.5, eventPos.getY() + 0.5, eventPos.getZ() + 0.5, 1));
 					}
 				}
+				
+				event.getDrops().clear();
+				event.getDrops().addAll(newDrops);
 			}
 		} else if (soilBlock == ModBlocks.elemental_soil_earth && soilCanSustainPlant(event, soilBlock, soil)) {
 			if (Harvest.isGrown(event.getState())) {
 				int fertility = soil.getValue(BlockElementalSoil.EARTH_FERTILITY);
 				if (fertility > 0) {
-					final List<ItemStack> drops = event.getDrops();
-					drops.clear();
+					final List<ItemStack> newDrops = new ArrayList<>();
+					
 					
 					final Random random = eventWorld.rand;
 					
 					for (ItemStack stack : event.getDrops()) {
-						drops.add(stack);
+						newDrops.add(stack);
 						if (ElementalSoilConfig.EarthSkipSeeds && stack.getItem() instanceof IPlantable) {
 							continue;
 						}
 						if (random.nextInt(3) < fertility) {
 							ItemStack copy = stack.copy();
 							copy.setCount(fertility > 2 ? 2 : 1);
-							drops.add(stack.copy());
+							newDrops.add(stack.copy());
 						}
 					}
+					event.getDrops().clear();
+					event.getDrops().addAll(newDrops);
 				}
 			}
 		}
@@ -123,10 +128,7 @@ public class SoilHandler {
 	
 	@SubscribeEvent
 	public static void onCropsGrowPost(BlockEvent.CropGrowEvent.Post cropGrowEvent) {
-		if (cropGrowEvent.getWorld()
-				.getBlockState(cropGrowEvent.getPos().offset(EnumFacing.DOWN))
-				.getBlock() == ModBlocks.elemental_soil_water)
-			((BlockElementalSoil) ModBlocks.elemental_soil_water).doHarvest(cropGrowEvent);
+		((BlockElementalSoil) ModBlocks.elemental_soil_water).doHarvest(cropGrowEvent);
 	}
 	
 	@SubscribeEvent
