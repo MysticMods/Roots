@@ -46,7 +46,11 @@ public class ItemBlockUnendingBowl extends ItemBlock {
 
     @Override
     public FluidStack drain(FluidStack resource, boolean doDrain) {
-      return resource.copy();
+      if (resource.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName)) {
+        return resource.copy();
+      } else {
+        return null;
+      }
     }
 
     @Override
@@ -56,7 +60,7 @@ public class ItemBlockUnendingBowl extends ItemBlock {
 
     @Override
     public boolean canFillFluidType(FluidStack fluid) {
-      return false;
+      return fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
     }
 
     @Override
