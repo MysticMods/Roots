@@ -5,8 +5,8 @@ import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -16,15 +16,13 @@ import noobanidus.libs.noobutil.data.generator.RecipeGenerator;
 import noobanidus.libs.noobutil.reference.ModData;
 import noobanidus.libs.noobutil.registrate.CustomRegistrate;
 import noobanidus.libs.particleslib.config.ConfigManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod("roots")
 public class Roots {
   public static CustomRegistrate REGISTRATE;
   public static final RecipeGenerator RECIPES = new RecipeGenerator(RootsAPI.MODID);
 
-  public static final ItemGroup ITEM_GROUP = new ItemGroup(RootsAPI.MODID) {
+  public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(RootsAPI.MODID) {
     @Override
     public ItemStack makeIcon() {
       return new ItemStack(ModItems.Herbs.WILDROOT.get());
@@ -33,7 +31,7 @@ public class Roots {
 
   public Roots() {
     REGISTRATE = CustomRegistrate.create(RootsAPI.MODID);
-    REGISTRATE.itemGroup(() -> ITEM_GROUP);
+    REGISTRATE.creativeModeTab(() -> ITEM_GROUP);
     ModData.setIdAndIdentifier(RootsAPI.MODID, RootsAPI.MOD_IDENTIFIERS);
 
     ConfigManager.loadConfig(ConfigManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(RootsAPI.MODID + "-common.toml"));

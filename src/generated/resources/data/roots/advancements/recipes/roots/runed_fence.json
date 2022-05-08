@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "roots:runed_obsidian"
+            "items": [
+              "roots:runed_obsidian"
+            ]
           }
         ]
       }

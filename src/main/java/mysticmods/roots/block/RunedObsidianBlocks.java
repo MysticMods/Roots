@@ -1,8 +1,9 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.init.ModBlocks;
-import net.minecraft.block.*;
-import net.minecraft.block.material.PushReaction;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.PushReaction;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 
 /**
@@ -11,7 +12,7 @@ import noobanidus.libs.noobutil.block.BaseBlocks;
  */
 @SuppressWarnings("deprecation")
 public class RunedObsidianBlocks {
-  public static class Block extends net.minecraft.block.Block {
+  public static class Block extends net.minecraft.world.level.block.Block {
     public Block(Properties p_i48440_1_) {
       super(p_i48440_1_);
     }
@@ -55,7 +56,7 @@ public class RunedObsidianBlocks {
     }
   }
 
-  public static class Stairs extends StairsBlock {
+  public static class Stairs extends StairBlock {
     public Stairs(Properties properties) {
       // TODO
       super(() -> ModBlocks.Decoration.RunedObsidian.RUNED_OBSIDIAN.getDefaultState(), properties);

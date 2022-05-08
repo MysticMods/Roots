@@ -1,8 +1,8 @@
 package mysticmods.roots.api.recipe.processors;
 
 import mysticmods.roots.api.recipe.IRootsCrafting;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.Collections;

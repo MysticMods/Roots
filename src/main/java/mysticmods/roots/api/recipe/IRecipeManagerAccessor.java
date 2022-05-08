@@ -1,6 +1,6 @@
 package mysticmods.roots.api.recipe;
 
-import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeManager;
 
 import javax.annotation.Nullable;
 

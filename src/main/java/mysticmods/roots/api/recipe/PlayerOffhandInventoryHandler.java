@@ -1,16 +1,16 @@
 package mysticmods.roots.api.recipe;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
+import net.minecraft.world.Container;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 // TODO: Convert to IRootsCrafting
 // TODO: Move to NoobUtil
-public class PlayerOffhandInventoryHandler implements IInventory {
-  private final PlayerEntity player;
+public class PlayerOffhandInventoryHandler implements Container {
+  private final Player player;
 
-  public PlayerOffhandInventoryHandler(PlayerEntity player) {
+  public PlayerOffhandInventoryHandler(Player player) {
     this.player = player;
   }
 
@@ -37,10 +37,10 @@ public class PlayerOffhandInventoryHandler implements IInventory {
     }
     if (pCount < item.getCount()) {
       ItemStack result = item.split(pCount);
-      this.player.setItemInHand(Hand.OFF_HAND, item);
+      this.player.setItemInHand(InteractionHand.OFF_HAND, item);
       return result;
     } else {
-      this.player.setItemInHand(Hand.OFF_HAND, ItemStack.EMPTY);
+      this.player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
       return item.copy();
     }
   }
@@ -52,7 +52,7 @@ public class PlayerOffhandInventoryHandler implements IInventory {
 
   @Override
   public void setItem(int pIndex, ItemStack pStack) {
-    this.player.setItemInHand(Hand.OFF_HAND, pStack);
+    this.player.setItemInHand(InteractionHand.OFF_HAND, pStack);
   }
 
   @Override
@@ -61,12 +61,12 @@ public class PlayerOffhandInventoryHandler implements IInventory {
   }
 
   @Override
-  public boolean stillValid(PlayerEntity pPlayer) {
+  public boolean stillValid(Player pPlayer) {
     return true;
   }
 
   @Override
   public void clearContent() {
-    this.player.setItemInHand(Hand.OFF_HAND, ItemStack.EMPTY);
+    this.player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
   }
 }

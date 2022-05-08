@@ -8,10 +8,10 @@ import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.FireStarterItem;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
-import net.minecraft.item.BlockNamedItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ShearsItem;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.ShearsItem;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -23,23 +23,23 @@ public class ModItems {
   }
 
   public static class Herbs {
-    public static ItemEntry<BlockNamedItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new BlockNamedItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.WILDROOT_CROP)
         .register();
-    public static ItemEntry<BlockNamedItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new BlockNamedItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
         .register();
-    public static ItemEntry<BlockNamedItem> DEWGONIA = REGISTRATE.item("dewgonia", (p) -> new BlockNamedItem(ModBlocks.Crops.DEWGONIA_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> DEWGONIA = REGISTRATE.item("dewgonia", (p) -> new ItemNameBlockItem(ModBlocks.Crops.DEWGONIA_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.DEWGONIA_SEEDS, RootsTags.Items.DEWGONIA_CROP)
         .register();
-    public static ItemEntry<BlockNamedItem> INFERNAL_BULB = REGISTRATE.item("infernal_bulb", (p) -> new BlockNamedItem(ModBlocks.Crops.INFERNAL_BULB_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> INFERNAL_BULB = REGISTRATE.item("infernal_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.INFERNAL_BULB_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.INFERNAL_BULB_SEEDS, RootsTags.Items.INFERNAL_BULB_CROP)
         .register();
-    public static ItemEntry<BlockNamedItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new BlockNamedItem(ModBlocks.Crops.STALICRIPE_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new ItemNameBlockItem(ModBlocks.Crops.STALICRIPE_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.STALICRIPE_SEEDS, RootsTags.Items.STALICRIPE_CROP)
         .register();
@@ -67,19 +67,19 @@ public class ModItems {
 
   public static class Seeds {
 
-    public static ItemEntry<BlockNamedItem> MOONGLOW_LEAF_SEEDS = REGISTRATE.item("moonglow_leaf_seeds", (p) -> new BlockNamedItem(ModBlocks.Crops.MOONGLOW_LEAF_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> MOONGLOW_LEAF_SEEDS = REGISTRATE.item("moonglow_leaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.MOONGLOW_LEAF_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.MOONGLOW_LEAF_SEEDS)
         .register();
-    public static ItemEntry<BlockNamedItem> PERESKIA_BULB = REGISTRATE.item("pereskia_bulb", (p) -> new BlockNamedItem(ModBlocks.Crops.PERESKIA_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> PERESKIA_BULB = REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.PERESKIA_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.PERESKIA_SEEDS)
         .register();
-    public static ItemEntry<BlockNamedItem> SPIRIT_HERB_SEEDS = REGISTRATE.item("spirit_herb_seeds", (p) -> new BlockNamedItem(ModBlocks.Crops.SPIRIT_HERB_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> SPIRIT_HERB_SEEDS = REGISTRATE.item("spirit_herb_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.SPIRIT_HERB_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.SPIRIT_HERB_SEEDS)
         .register();
-    public static ItemEntry<BlockNamedItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new BlockNamedItem(ModBlocks.Crops.WILDEWHEET_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDEWHEET_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.WILDEWHEET_SEEDS)
         .register();

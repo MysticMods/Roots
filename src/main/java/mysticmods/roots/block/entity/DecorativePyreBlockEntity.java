@@ -1,30 +1,25 @@
 package mysticmods.roots.block.entity;
 
 import mysticmods.roots.block.entity.template.BaseBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class DecorativePyreBlockEntity extends BaseBlockEntity {
-  public DecorativePyreBlockEntity(TileEntityType<?> blockEntityType) {
-    super(blockEntityType);
+  public DecorativePyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
+    super(pType, pWorldPosition, pBlockState);
   }
 
   @Override
-  public CompoundNBT getUpdateTag() {
+  public CompoundTag getUpdateTag() {
     return null;
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
 
   }
 }

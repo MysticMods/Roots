@@ -2,17 +2,17 @@ package mysticmods.roots.block.entity;
 
 import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.recipe.mortar.MortarInventory;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class MortarBlockEntity extends UseDelegatedBlockEntity {
   private final MortarInventory inventory = new MortarInventory() {
@@ -24,22 +24,23 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity {
     }
   };
 
-  public MortarBlockEntity(TileEntityType<?> blockEntityType) {
-    super(blockEntityType);
+  public MortarBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
+    super(pType, pWorldPosition, pBlockState);
   }
 
+
   @Override
-  public CompoundNBT getUpdateTag() {
+  public CompoundTag getUpdateTag() {
     return null;
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
 
   }
 
   @Override
-  public ActionResultType use(BlockState state, World level, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult ray) {
+  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
     return null;
   }
 }

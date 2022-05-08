@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "roots:chiseled_runed_obsidian"
+            "items": [
+              "roots:chiseled_runed_obsidian"
+            ]
           }
         ]
       }

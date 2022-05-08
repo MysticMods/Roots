@@ -1,7 +1,7 @@
 package mysticmods.roots.api;
 
 import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
-import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

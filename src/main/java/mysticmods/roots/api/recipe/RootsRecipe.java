@@ -4,31 +4,27 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.recipe.processors.RootsProcessor;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tags.ITag;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.NonNullList;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
-import noobanidus.libs.noobutil.crafting.Crafting;
 import noobanidus.libs.noobutil.ingredient.IngredientStack;
-import noobanidus.libs.noobutil.processor.Processor;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<H, W> {
@@ -58,7 +54,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     return recipeId;
   }
 
-  public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<R> {
+  public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<R> {
 
     private final RootsRecipeBuilder<R> builder;
 
@@ -71,7 +67,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
     @Override
     public R fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
-      JsonArray incoming = JSONUtils.getAsJsonArray(pJson, "ingredients");
+      JsonArray incoming = GsonHelper.getAsJsonArray(pJson, "ingredients");
       NonNullList<Ingredient> ingredients = NonNullList.create();
       for (int i = 0; i < incoming.size(); i++) {
         Ingredient ingredient = Ingredient.fromJson(incoming.get(i));
@@ -81,9 +77,9 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       }
       ItemStack result;
       if (pJson.get("result").isJsonObject()) {
-        result = ShapedRecipe.itemFromJson(pJson.getAsJsonObject("result"));
+        result = ShapedRecipe.itemStackFromJson(pJson.getAsJsonObject("result"));
       } else {
-        ResourceLocation id = new ResourceLocation(JSONUtils.getAsString(pJson, "result"));
+        ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(pJson, "result"));
         Item item = ForgeRegistries.ITEMS.getValue(id);
         if (item == null) {
           throw new JsonSyntaxException("Unknown item '" + id + "'");
@@ -92,7 +88,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         if (!pJson.has("count")) {
           count = 1;
         } else {
-          count = JSONUtils.getAsInt(pJson, "count");
+          count = GsonHelper.getAsInt(pJson, "count");
         }
         result = new ItemStack(item, count);
       }
@@ -102,12 +98,12 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return recipe;
     }
 
-    protected void fromNetworkAdditional (R recipe, ResourceLocation pRecipeId, PacketBuffer pBuffer) {
+    protected void fromNetworkAdditional (R recipe, ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
     }
 
     @Nullable
     @Override
-    public R fromNetwork(ResourceLocation pRecipeId, PacketBuffer pBuffer) {
+    public R fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
       int ingCount = pBuffer.readVarInt();
       NonNullList<Ingredient> ingredients = NonNullList.withSize(ingCount, Ingredient.EMPTY);
       for (int i = 0; i < ingCount; i++) {
@@ -120,11 +116,11 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return recipe;
     }
 
-    protected void toNetworkAdditional (R recipe, PacketBuffer pBuffer) {
+    protected void toNetworkAdditional (R recipe, FriendlyByteBuf pBuffer) {
     }
 
     @Override
-    public void toNetwork(PacketBuffer pBuffer, R recipe) {
+    public void toNetwork(FriendlyByteBuf pBuffer, R recipe) {
       pBuffer.writeVarInt(recipe.getIngredients().size());
       for (Ingredient ingredient : recipe.getIngredients()) {
         ingredient.toNetwork(pBuffer);
@@ -140,19 +136,19 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     protected final Item result;
     protected final List<IngredientStack> ingredients = new ArrayList<>();
 
-    protected Builder(IItemProvider item, int count) {
+    protected Builder(ItemLike item, int count) {
       this.result = item.asItem();
       this.count = count;
     }
 
-    public abstract IRecipeSerializer<?> getSerializer();
+    public abstract RecipeSerializer<?> getSerializer();
 
-    public Builder addIngredient(ITag<Item> ingredient) {
+    public Builder addIngredient(TagKey<Item> ingredient) {
       addIngredient(ingredient, 1);
       return this;
     }
 
-    public Builder addIngredient(ITag<Item> ingredient, int count) {
+    public Builder addIngredient(TagKey<Item> ingredient, int count) {
       addIngredient(Ingredient.of(ingredient), count);
       return this;
     }
@@ -167,12 +163,12 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return this;
     }
 
-    public Builder addIngredient(IItemProvider item) {
+    public Builder addIngredient(ItemLike item) {
       addIngredient(item, 1);
       return this;
     }
 
-    public Builder addIngredient(IItemProvider item, int count) {
+    public Builder addIngredient(ItemLike item, int count) {
       addIngredient(new IngredientStack(Ingredient.of(item), count));
       return this;
     }
@@ -182,18 +178,18 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return this;
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation recipeName) {
+    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new Result(recipeName, result, count, ingredients, getSerializer()));
     }
 
-    public static class Result implements IFinishedRecipe {
+    public static class Result implements FinishedRecipe {
       private final ResourceLocation id;
       private final Item result;
       private final int count;
       private final List<IngredientStack> ingredients;
-      private final IRecipeSerializer<?> serializer;
+      private final RecipeSerializer<?> serializer;
 
-      public Result(ResourceLocation id, Item result, int count, List<IngredientStack> ingredients, IRecipeSerializer<?> serializer) {
+      public Result(ResourceLocation id, Item result, int count, List<IngredientStack> ingredients, RecipeSerializer<?> serializer) {
         this.id = id;
         this.result = result;
         this.count = count;
@@ -227,7 +223,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       }
 
       @Override
-      public IRecipeSerializer<?> getType() {
+      public RecipeSerializer<?> getType() {
         return serializer;
       }
 

@@ -1,6 +1,6 @@
 package mysticmods.roots.recipe.processor;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import noobanidus.libs.noobutil.crafting.ICrafting;
 import noobanidus.libs.noobutil.ingredient.IngredientStack;
 import noobanidus.libs.noobutil.processor.Processor;

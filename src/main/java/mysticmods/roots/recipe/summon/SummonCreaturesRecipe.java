@@ -1,30 +1,28 @@
 package mysticmods.roots.recipe.summon;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.recipe.IBoundlessRecipe;
 import mysticmods.roots.init.ModRecipes;
-import mysticmods.roots.init.ModRegistries;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import noobanidus.libs.noobutil.ingredient.IngredientStack;
-import noobanidus.libs.noobutil.processor.Processor;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCrafting>, net.minecraft.item.crafting.IRecipe<SummonCreaturesCrafting> {
+public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCrafting>, net.minecraft.world.item.crafting.Recipe<SummonCreaturesCrafting> {
   protected final NonNullList<Ingredient> ingredients;
   protected final EntityType<?> result;
   protected final ResourceLocation recipeId;
@@ -49,7 +47,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
 
   // TODO:
   @Override
-  public boolean matches(SummonCreaturesCrafting pInv, World pLevel) {
+  public boolean matches(SummonCreaturesCrafting pInv, Level pLevel) {
     return false;
   }
 
@@ -69,20 +67,20 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
   }
 
   @Override
-  public IRecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<?> getSerializer() {
     return null;
   }
 
   @Override
-  public IRecipeType<?> getType() {
+  public RecipeType<?> getType() {
     return null;
   }
 
-  public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<SummonCreaturesRecipe> {
+  public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<SummonCreaturesRecipe> {
 
     @Override
     public SummonCreaturesRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
-      JsonArray incoming = JSONUtils.getAsJsonArray(pJson, "ingredients");
+      JsonArray incoming = GsonHelper.getAsJsonArray(pJson, "ingredients");
       NonNullList<Ingredient> ingredients = NonNullList.create();
       for (int i = 0; i < incoming.size(); i++) {
         Ingredient ingredient = Ingredient.fromJson(incoming.get(i));
@@ -92,9 +90,9 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
       }
       EntityType<?> result;
       if (pJson.has("result")) {
-        result = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(JSONUtils.getAsString(pJson, "result")));
+        result = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(GsonHelper.getAsString(pJson, "result")));
         if (result == null) {
-          throw new JsonSyntaxException("Entity Type '" + JSONUtils.getAsString(pJson, "result") + "' does not exist");
+          throw new JsonSyntaxException("Entity Type '" + GsonHelper.getAsString(pJson, "result") + "' does not exist");
         }
       } else {
         throw new JsonSyntaxException("Missing entity type for recipe " + pRecipeId);
@@ -105,7 +103,7 @@ return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
 
     @Nullable
     @Override
-    public SummonCreaturesRecipe fromNetwork(ResourceLocation pRecipeId, PacketBuffer pBuffer) {
+    public SummonCreaturesRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
       int ingCount = pBuffer.readVarInt();
       NonNullList<Ingredient> ingredients = NonNullList.withSize(ingCount, Ingredient.EMPTY);
       for (int i = 0; i < ingCount; i++) {
@@ -119,7 +117,7 @@ return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
     }
 
     @Override
-    public void toNetwork(PacketBuffer pBuffer, SummonCreaturesRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf pBuffer, SummonCreaturesRecipe recipe) {
       pBuffer.writeVarInt(recipe.getIngredients().size());
       for (Ingredient ingredient : recipe.getIngredients()) {
         ingredient.toNetwork(pBuffer);
@@ -136,12 +134,12 @@ return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
       this.result = result;
     }
 
-    public Builder addIngredient(ITag<Item> ingredient) {
+    public Builder addIngredient(TagKey<Item> ingredient) {
       addIngredient(ingredient, 1);
       return this;
     }
 
-    public Builder addIngredient(ITag<Item> ingredient, int count) {
+    public Builder addIngredient(TagKey<Item> ingredient, int count) {
       addIngredient(Ingredient.of(ingredient), count);
       return this;
     }
@@ -156,12 +154,12 @@ return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
       return this;
     }
 
-    public Builder addIngredient(IItemProvider item) {
+    public Builder addIngredient(ItemLike item) {
       addIngredient(item, 1);
       return this;
     }
 
-    public Builder addIngredient(IItemProvider item, int count) {
+    public Builder addIngredient(ItemLike item, int count) {
       addIngredient(new IngredientStack(Ingredient.of(item), count));
       return this;
     }
@@ -171,11 +169,11 @@ return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
       return this;
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation recipeName) {
+    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new Result(recipeName, result, ingredients));
     }
 
-    public static class Result implements IFinishedRecipe {
+    public static class Result implements FinishedRecipe {
       private final ResourceLocation id;
       private final ResourceLocation result;
       private final List<IngredientStack> ingredients;
@@ -207,7 +205,7 @@ return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
       }
 
       @Override
-      public IRecipeSerializer<?> getType() {
+      public RecipeSerializer<?> getType() {
         return ModRecipes.Serializers.SUMMON_CREATURES.get();
       }
 

@@ -2,7 +2,7 @@ package mysticmods.roots.advancements;
 
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import noobanidus.libs.noobutil.advancement.GenericTrigger;
 

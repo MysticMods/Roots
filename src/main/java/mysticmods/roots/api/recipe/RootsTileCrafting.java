@@ -1,24 +1,24 @@
 package mysticmods.roots.api.recipe;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
 
 import javax.annotation.Nullable;
 
-public abstract class RootsTileCrafting<H extends IItemHandler, T extends TileEntity & IReferentialBlockEntity> extends RootsCrafting<H> implements IRootsTileCrafting<H, T> {
+public abstract class RootsTileCrafting<H extends IItemHandler, T extends BlockEntity & IReferentialBlockEntity> extends RootsCrafting<H> implements IRootsTileCrafting<H, T> {
   protected T blockEntity;
 
-  public RootsTileCrafting(H handler, T blockEntity, @Nullable PlayerEntity player) {
+  public RootsTileCrafting(H handler, T blockEntity, @Nullable Player player) {
     super(handler, player);
     this.blockEntity = blockEntity;
   }
 
   @Nullable
   @Override
-  public World getLevel() {
+  public Level getLevel() {
     return this.blockEntity.getLevel();
   }
 

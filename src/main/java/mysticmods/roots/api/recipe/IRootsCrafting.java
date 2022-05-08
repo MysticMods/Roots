@@ -1,19 +1,18 @@
 package mysticmods.roots.api.recipe;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.world.World;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import noobanidus.libs.noobutil.inventory.IIInvWrapper;
 
 import javax.annotation.Nullable;
 
-public interface IRootsCrafting<H extends IItemHandler> extends IInventory, IIInvWrapper<H> {
+public interface IRootsCrafting<H extends IItemHandler> extends Container, IIInvWrapper<H> {
   @Nullable
-  default World getLevel() {
-    PlayerEntity player = getPlayer();
+  default Level getLevel() {
+    Player player = getPlayer();
     if (player == null) {
       return null;
     }
@@ -22,16 +21,16 @@ public interface IRootsCrafting<H extends IItemHandler> extends IInventory, IIIn
   }
 
   @Nullable
-  PlayerEntity getPlayer();
+  Player getPlayer();
 
   @Nullable
-  default PlayerInventory getPlayerInventory() {
-    PlayerEntity player = getPlayer();
+  default Inventory getPlayerInventory() {
+    Player player = getPlayer();
     if (player == null) {
       return null;
     }
 
-    return player.inventory;
+    return player.getInventory();
   }
 
   @Override

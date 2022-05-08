@@ -1,16 +1,17 @@
 package mysticmods.roots.event.forge;
 
 import mysticmods.roots.api.RootsAPI;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemUseContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,15 +21,15 @@ import net.minecraftforge.fml.common.Mod;
 public class HoeHandler {
   @SubscribeEvent
   public static void onHoeUse(UseHoeEvent event) {
-    World world = event.getPlayer().level;
-    ItemUseContext pContext = event.getContext();
+    Level world = event.getPlayer().level;
+    UseOnContext pContext = event.getContext();
     BlockPos blockpos = pContext.getClickedPos();
     FluidState fluidstate = world.getFluidState(blockpos.above());
     if (pContext.getClickedFace() != Direction.DOWN && fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8) {
-      BlockState blockstate = world.getBlockState(blockpos).getToolModifiedState(world, blockpos, pContext.getPlayer(), pContext.getItemInHand(), net.minecraftforge.common.ToolType.HOE);
+      BlockState blockstate = world.getBlockState(blockpos).getToolModifiedState(world, blockpos, pContext.getPlayer(), pContext.getItemInHand(), ToolActions.HOE_TILL);
       if (blockstate != null) {
-        PlayerEntity playerentity = pContext.getPlayer();
-        world.playSound(playerentity, blockpos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        Player playerentity = pContext.getPlayer();
+        world.playSound(playerentity, blockpos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (!world.isClientSide()) {
           world.setBlock(blockpos, blockstate, 11);
         }

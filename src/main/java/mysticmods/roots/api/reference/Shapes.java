@@ -1,7 +1,7 @@
 package mysticmods.roots.api.reference;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import noobanidus.libs.noobutil.util.VoxelUtil;
 
 public interface Shapes {

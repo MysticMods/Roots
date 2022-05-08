@@ -1,9 +1,10 @@
+/*
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herbs.IHerb;
 import mysticmods.roots.init.ModRegistries;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,3 +37,4 @@ public class RegistryHandler {
         .setMaxID(Integer.MAX_VALUE);
   }
 }
+*/

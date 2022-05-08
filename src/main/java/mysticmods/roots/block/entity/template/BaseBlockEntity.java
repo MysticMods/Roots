@@ -1,25 +1,20 @@
 package mysticmods.roots.block.entity.template;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
 import noobanidus.libs.noobutil.util.BlockEntityUtil;
 
 import javax.annotation.Nullable;
 
-public abstract class BaseBlockEntity extends TileEntity implements IReferentialBlockEntity {
-  public BaseBlockEntity(TileEntityType<?> blockEntityType) {
-    super(blockEntityType);
+public abstract class BaseBlockEntity extends BlockEntity implements IReferentialBlockEntity {
+  public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
+    super(pType, pWorldPosition, pBlockState);
   }
 
   public void updateViaState() {
@@ -29,18 +24,18 @@ public abstract class BaseBlockEntity extends TileEntity implements IReferential
 
   @Nullable
   @Override
-  public SUpdateTileEntityPacket getUpdatePacket() {
-    return new SUpdateTileEntityPacket(getBlockPos(), 9, getUpdateTag());
+  public ClientboundBlockEntityDataPacket getUpdatePacket() {
+    return ClientboundBlockEntityDataPacket.create(this);
   }
 
   @Override
-  public abstract CompoundNBT getUpdateTag();
+  public abstract CompoundTag getUpdateTag();
 
   @Override
-  public abstract void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt);
+  public abstract void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt);
 
   @Override
-  public TileEntity getBlockEntity() {
+  public BlockEntity getBlockEntity() {
     return this;
   }
 

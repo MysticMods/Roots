@@ -1,14 +1,14 @@
 package mysticmods.roots.api.recipe;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
 
-public abstract class RootsTileRecipe<H extends IItemHandler, T extends TileEntity & IReferentialBlockEntity, W extends IRootsTileCrafting<H, T>> extends RootsRecipe<H, W> {
+public abstract class RootsTileRecipe<H extends IItemHandler, T extends BlockEntity & IReferentialBlockEntity, W extends IRootsTileCrafting<H, T>> extends RootsRecipe<H, W> {
   public RootsTileRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
     super(ingredients, result, recipeId);
   }

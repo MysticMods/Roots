@@ -1,24 +1,24 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 
 import javax.annotation.Nullable;
@@ -34,14 +34,14 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
   }
 
   @Override
-  protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
     pBuilder.add(PART, VALID);
   }
 
   // TODO: ROTATION
   @Override
-  public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+  public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
     switch (p_220053_1_.getValue(PART)) {
       case TOP:
         return Shapes.GROVE_STONE_TOP;
@@ -55,23 +55,23 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
 
   @Override
   @Nullable
-  public BlockState getStateForPlacement(BlockItemUseContext pContext) {
+  public BlockState getStateForPlacement(BlockPlaceContext pContext) {
     BlockPos blockpos = pContext.getClickedPos();
     return blockpos.getY() < 255 && pContext.getLevel().getBlockState(blockpos.above()).canBeReplaced(pContext) && pContext.getLevel().getBlockState(blockpos.above().above()).canBeReplaced(pContext) ? super.getStateForPlacement(pContext) : null;
   }
 
   @Override
-  public void setPlacedBy(World pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
+  public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
     pLevel.setBlock(pPos.above(), this.defaultBlockState().setValue(PART, Part.MIDDLE).setValue(FACING, pState.getValue(FACING)), 3);
     pLevel.setBlock(pPos.above().above(), this.defaultBlockState().setValue(PART, Part.TOP).setValue(FACING, pState.getValue(FACING)), 3);
   }
 
   @Override
-  public void playerWillDestroy(World pLevel, BlockPos pPos, BlockState pState, PlayerEntity pPlayer) {
+  public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
     if (!pLevel.isClientSide) {
       preventDrops(pLevel, pPos, pState, pPlayer);
       if (!pPlayer.isCreative()) {
-        dropResources(pState, pLevel, pPos, (TileEntity) null, pPlayer, pPlayer.getMainHandItem());
+        dropResources(pState, pLevel, pPos, (BlockEntity) null, pPlayer, pPlayer.getMainHandItem());
       }
     }
 
@@ -79,11 +79,11 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
   }
 
   @Override
-  public void playerDestroy(World pLevel, PlayerEntity pPlayer, BlockPos pPos, BlockState pState, @Nullable TileEntity pTe, ItemStack pStack) {
+  public void playerDestroy(Level pLevel, Player pPlayer, BlockPos pPos, BlockState pState, @Nullable BlockEntity pTe, ItemStack pStack) {
     super.playerDestroy(pLevel, pPlayer, pPos, Blocks.AIR.defaultBlockState(), pTe, pStack);
   }
 
-  protected static void preventDrops(World pLevel, BlockPos pPos, BlockState pState, PlayerEntity pPlayer) {
+  protected static void preventDrops(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
     Part part = pState.getValue(PART);
     if (part == Part.TOP) {
       BlockPos blockpos = pPos.below();
@@ -121,7 +121,7 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
     }
   }
 
-  public enum Part implements IStringSerializable {
+  public enum Part implements StringRepresentable {
     TOP("top"),
     MIDDLE("middle"),
     BOTTOM("bottom");

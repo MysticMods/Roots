@@ -1,18 +1,18 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.DyeColor;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import noobanidus.libs.particleslib.client.particle.Particles;
 import noobanidus.libs.particleslib.init.ModParticles;
 
@@ -37,18 +37,18 @@ public class FeyLightBlock extends Block {
 
   @SuppressWarnings("deprecation")
   @Override
-  public VoxelShape getShape(BlockState pState, IBlockReader pLevel, BlockPos pPos, ISelectionContext pContext) {
+  public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
     return Shapes.FEY_LIGHT;
   }
 
   @Override
-  protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> pBuilder) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
     pBuilder.add(DECAYING, DECAY, COLORED, COLOR);
   }
 
   @Override
-  public void animateTick(BlockState pState, World pLevel, BlockPos pPos, Random pRand) {
+  public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRand) {
     super.animateTick(pState, pLevel, pPos, pRand);
 
     DyeColor color = null;
