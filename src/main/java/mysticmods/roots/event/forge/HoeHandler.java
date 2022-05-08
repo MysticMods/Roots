@@ -25,7 +25,7 @@ public class HoeHandler {
     UseOnContext pContext = event.getContext();
     BlockPos blockpos = pContext.getClickedPos();
     FluidState fluidstate = world.getFluidState(blockpos.above());
-    if (pContext.getClickedFace() != Direction.DOWN && fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8) {
+    if (pContext.getClickedFace() != Direction.DOWN && fluidstate.is(FluidTags.WATER)) {
       BlockState blockstate = world.getBlockState(blockpos).getToolModifiedState(world, blockpos, pContext.getPlayer(), pContext.getItemInHand(), ToolActions.HOE_TILL);
       if (blockstate != null) {
         Player playerentity = pContext.getPlayer();
