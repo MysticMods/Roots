@@ -15,10 +15,6 @@ public class IncensePlateBlockEntity extends BaseBlockEntity {
     super(pType, pWorldPosition, pBlockState);
   }
 
-  @Override
-  public CompoundTag getUpdateTag() {
-    return null;
-  }
 
   @Override
   public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {

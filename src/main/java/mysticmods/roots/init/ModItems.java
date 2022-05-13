@@ -17,9 +17,7 @@ import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModItems {
   private static <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateItemModelProvider> subfolder(String subfolder) {
-    return (ctx, p) -> {
-      p.generated(ctx::getEntry, new ResourceLocation(RootsAPI.MODID, "item/" + subfolder + "/" + ctx.getName()));
-    };
+    return (ctx, p) -> p.generated(ctx::getEntry, new ResourceLocation(RootsAPI.MODID, "item/" + subfolder + "/" + ctx.getName()));
   }
 
   public static class Herbs {
@@ -348,11 +346,9 @@ public class ModItems {
 
   public static ItemEntry<Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
       .model(subfolder("resources"))
-      .recipe((ctx, p) -> {
-        MortarRecipe.builder(ctx.getEntry(), 1, 1)
-            .addIngredient(RootsTags.Items.Blocks.RUNESTONE)
-            .build(p, new ResourceLocation(RootsAPI.MODID, "runic_dust"));
-      })
+      .recipe((ctx, p) -> MortarRecipe.builder(ctx.getEntry(), 1, 1)
+          .addIngredient(RootsTags.Items.Blocks.RUNESTONE)
+          .build(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
       .register();
 
   public static ItemEntry<Item> STRANGE_OOZE = REGISTRATE.item("strange_ooze", Item::new)

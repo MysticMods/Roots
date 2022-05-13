@@ -29,7 +29,9 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
   }
 
   @Override
-  public abstract CompoundTag getUpdateTag();
+  public CompoundTag getUpdateTag() {
+    return new CompoundTag();
+  }
 
   @Override
   public abstract void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt);

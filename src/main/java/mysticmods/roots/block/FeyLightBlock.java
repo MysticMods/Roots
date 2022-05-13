@@ -72,7 +72,7 @@ public class FeyLightBlock extends Block {
           .setColor(r, g, b)
           .setScale(0.2f)
           .setAlpha(0.25f)
-          .setLifetime(40)
+          .setLifetime(60)
           .disableGravity()
           .addVelocity((pRand.nextFloat() - 0.5f) * 0.003, 0f, (pRand.nextFloat() - 0.5f) * 0.003f)
           .spawn(pLevel, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5);

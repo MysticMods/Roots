@@ -1,14 +1,13 @@
-/*
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herbs.IHerb;
 import mysticmods.roots.init.ModRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryManager;
 import noobanidus.libs.noobutil.processor.IProcessor;
@@ -20,11 +19,10 @@ public class RegistryHandler {
 
   @SuppressWarnings("unchecked")
   @SubscribeEvent
-  public static void onRegistryCreation(RegistryEvent.NewRegistry event) {
-    makeRegistry(HERB_REGISTRY, IHerb.class).create();
-    makeRegistry(PROCESSOR_REGISTRY, IProcessor.class).create();
+  public static void onRegistryCreation(NewRegistryEvent event) {
+    event.create(makeRegistry(HERB_REGISTRY, IHerb.class), (registry) -> ModRegistries.HERB_REGISTRY = registry);
+    event.create(makeRegistry(PROCESSOR_REGISTRY, IProcessor.class));
 
-    ModRegistries.HERB_REGISTRY = RegistryManager.ACTIVE.getRegistry(IHerb.class);
     ModRegistries.PROCESSOR_REGISTRY = RegistryManager.ACTIVE.getRegistry(IProcessor.class);
   }
 
@@ -37,4 +35,3 @@ public class RegistryHandler {
         .setMaxID(Integer.MAX_VALUE);
   }
 }
-*/

@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "roots:reinforced_catalyst_plate",
-    "roots:reinforced_pyre",
     "roots:runed_obsidian",
     "roots:chiseled_runed_obsidian",
     "roots:runed_button",
@@ -33,6 +31,8 @@
     "roots:runed_brick_alt_narrow_post",
     "roots:runed_brick_alt_wide_post",
     "roots:runed_brick_alt_fence",
-    "roots:runed_brick_alt_gate"
+    "roots:runed_brick_alt_gate",
+    "roots:reinforced_catalyst_plate",
+    "roots:reinforced_pyre"
   ]
 }

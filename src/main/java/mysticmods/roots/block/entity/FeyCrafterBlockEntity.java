@@ -14,11 +14,6 @@ public class FeyCrafterBlockEntity extends BaseBlockEntity {
   }
 
   @Override
-  public CompoundTag getUpdateTag() {
-    return null;
-  }
-
-  @Override
   public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
 
   }

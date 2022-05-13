@@ -10,8 +10,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 public class CommonSetup {
   @SubscribeEvent
   public static void init(FMLCommonSetupEvent event) {
-    event.enqueueWork(() -> {
-      ModRecipes.Types.register();
-    });
+    event.enqueueWork(() -> ModRecipes.Types.register());
   }
 }
