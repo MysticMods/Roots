@@ -50,9 +50,7 @@ public class Roots {
 
       // TODO:
       @Override
-      public void grant(ServerPlayer player, Grant.GrantType type, ResourceLocation id) {
-        if (type == Grant.GrantType.SPELL) {
-        }
+      public void grant(ServerPlayer player, Grant grant) {
       }
     };
 

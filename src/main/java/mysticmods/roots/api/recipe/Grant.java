@@ -35,7 +35,7 @@ public class Grant implements Consumer<ServerPlayer> {
 
   @Override
   public void accept(ServerPlayer serverPlayer) {
-    RootsAPI.getInstance().grant(serverPlayer, type, id);
+    RootsAPI.getInstance().grant(serverPlayer, this);
   }
 
   public static Grant fromJson(JsonElement pJson) {

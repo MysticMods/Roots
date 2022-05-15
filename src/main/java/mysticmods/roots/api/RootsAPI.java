@@ -25,7 +25,7 @@ public abstract class RootsAPI {
 
   public abstract IRecipeManagerAccessor getRecipeAccessor();
 
-  public abstract void grant (ServerPlayer player, Grant.GrantType type, ResourceLocation id);
+  public abstract void grant (ServerPlayer player, Grant grant);
 
   public RecipeManager getRecipeManager() {
     return getRecipeAccessor().getManager();
