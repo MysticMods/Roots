@@ -1,33 +1,21 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"monolith": "roots:block/ob_stone",
-		"particle": "roots:block/ob_stone"
+		"particle": "roots:block/ob_stone",
+		"monolith": "roots:block/ob_stone"
 	},
 	"elements": [
 		{
-			"name": "Base",
-			"from": [0, 0, 0],
-			"to": [16, 4.5, 16],
+			"from": [3, 0, 4],
+			"to": [13, 16, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 0, 4]},
 			"faces": {
-				"north": {"uv": [0, 0, 16, 4.5], "texture": "#monolith"},
-				"east": {"uv": [0, 0, 16, 4.5], "texture": "#monolith"},
-				"south": {"uv": [0, 0, 14, 4], "texture": "#monolith"},
-				"west": {"uv": [0, 0, 12, 4], "texture": "#monolith"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#monolith"},
-				"down": {"uv": [0, 0, 14, 12], "texture": "#monolith"}
-			}
-		},
-		{
-			"name": "Stone1",
-			"from": [2.5, 3, 3.5],
-			"to": [13.5, 16, 12.5],
-			"faces": {
-				"north": {"uv": [0, 3, 11, 15.999], "texture": "#monolith"},
-				"east": {"uv": [0, 3, 9, 15.9], "texture": "#monolith"},
-				"south": {"uv": [0, 3, 11, 13.999], "texture": "#monolith"},
-				"west": {"uv": [0, 3, 9, 13.999], "texture": "#monolith"},
-				"up": {"uv": [0, 0, 11, 9], "texture": "#monolith"}
+				"north": {"uv": [1, 0, 11, 16], "texture": "#monolith"},
+				"east": {"uv": [5, 0, 13, 16], "texture": "#monolith"},
+				"south": {"uv": [3, 0, 13, 16], "texture": "#monolith"},
+				"west": {"uv": [5, 0, 13, 16], "texture": "#monolith"},
+				"up": {"uv": [0, 0, 10, 8], "texture": "#monolith"},
+				"down": {"uv": [0, 0, 10, 8], "texture": "#monolith"}
 			}
 		}
 	],

@@ -7,6 +7,7 @@ public interface IRootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H
   @Override
   default ItemStack assemble(W pInv) {
     ItemStack resultCopy = getResultItem();
+    // TODO: Processors???
 /*    for (RootsProcessor<? super W> processor : getProcessors()) {
       resultCopy = processor.processOutput(resultCopy, getIngredients(), null, pInv);
     }*/

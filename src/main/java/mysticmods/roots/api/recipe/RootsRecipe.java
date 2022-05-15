@@ -17,6 +17,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -77,7 +78,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       }
       ItemStack result;
       if (pJson.get("result").isJsonObject()) {
-        result = ShapedRecipe.itemStackFromJson(pJson.getAsJsonObject("result"));
+        result = CraftingHelper.getItemStack(pJson.getAsJsonObject("result"), true, false);
       } else {
         ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(pJson, "result"));
         Item item = ForgeRegistries.ITEMS.getValue(id);
@@ -134,7 +135,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   public abstract static class Builder {
     protected final int count;
     protected final Item result;
-    protected final List<IngredientStack> ingredients = new ArrayList<>();
+    protected final List<Ingredient> ingredients = new ArrayList<>();
 
     protected Builder(ItemLike item, int count) {
       this.result = item.asItem();
@@ -144,37 +145,17 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     public abstract RecipeSerializer<?> getSerializer();
 
     public Builder addIngredient(TagKey<Item> ingredient) {
-      addIngredient(ingredient, 1);
-      return this;
-    }
-
-    public Builder addIngredient(TagKey<Item> ingredient, int count) {
-      addIngredient(Ingredient.of(ingredient), count);
-      return this;
-    }
-
-    public Builder addIngredient(Ingredient ingredient) {
-      addIngredient(ingredient, 1);
-      return this;
-    }
-
-    public Builder addIngredient(Ingredient ingredient, int count) {
-      addIngredient(new IngredientStack(ingredient, count));
+      addIngredient(Ingredient.of(ingredient));
       return this;
     }
 
     public Builder addIngredient(ItemLike item) {
-      addIngredient(item, 1);
+      addIngredient(Ingredient.of(item));
       return this;
     }
 
-    public Builder addIngredient(ItemLike item, int count) {
-      addIngredient(new IngredientStack(Ingredient.of(item), count));
-      return this;
-    }
-
-    public Builder addIngredient(IngredientStack ingredientStack) {
-      this.ingredients.add(ingredientStack);
+    public Builder addIngredient(Ingredient ingredient) {
+      this.ingredients.add(ingredient);
       return this;
     }
 
@@ -186,10 +167,10 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       private final ResourceLocation id;
       private final Item result;
       private final int count;
-      private final List<IngredientStack> ingredients;
+      private final List<Ingredient> ingredients;
       private final RecipeSerializer<?> serializer;
 
-      public Result(ResourceLocation id, Item result, int count, List<IngredientStack> ingredients, RecipeSerializer<?> serializer) {
+      public Result(ResourceLocation id, Item result, int count, List<Ingredient> ingredients, RecipeSerializer<?> serializer) {
         this.id = id;
         this.result = result;
         this.count = count;
@@ -204,11 +185,12 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       public void serializeRecipeData(JsonObject json) {
         JsonArray array = new JsonArray();
 
-        for (IngredientStack ingredient : this.ingredients) {
-          array.add(ingredient.serialize());
+        for (Ingredient ingredient : this.ingredients) {
+          array.add(ingredient.toJson());
         }
 
         json.add("ingredients", array);
+        // TODO: NBT
         JsonObject item = new JsonObject();
         item.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result).toString());
         if (count > 1) {

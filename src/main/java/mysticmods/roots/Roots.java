@@ -1,10 +1,13 @@
 package mysticmods.roots;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.recipe.Grant;
 import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.DistExecutor;
@@ -43,6 +46,13 @@ public class Roots {
       @Override
       public IRecipeManagerAccessor getRecipeAccessor() {
         return accessor;
+      }
+
+      // TODO:
+      @Override
+      public void grant(ServerPlayer player, Grant.GrantType type, ResourceLocation id) {
+        if (type == Grant.GrantType.SPELL) {
+        }
       }
     };
 

@@ -65,7 +65,7 @@ public class ModItems {
 
   public static class Seeds {
 
-    public static ItemEntry<ItemNameBlockItem> MOONGLOW_LEAF_SEEDS = REGISTRATE.item("moonglow_leaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.MOONGLOW_LEAF_CROP.get(), p))
+    public static ItemEntry<ItemNameBlockItem> MOONGLOW_SEEDS = REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.MOONGLOW_LEAF_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.MOONGLOW_LEAF_SEEDS)
         .register();

@@ -967,7 +967,7 @@ public class ModBlocks {
         .tag(RootsTags.Blocks.STALICRIPE_CROP)
         .register();
 
-    public static BlockEntry<SeededCropsBlock> MOONGLOW_LEAF_CROP = REGISTRATE.block("moonglow_leaf_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.MOONGLOW_LEAF_SEEDS))
+    public static BlockEntry<SeededCropsBlock> MOONGLOW_LEAF_CROP = REGISTRATE.block("moonglow_leaf_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.MOONGLOW_SEEDS))
         .properties(o -> BlockBehaviour.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsTags.Blocks.MOONGLOW_LEAF_CROP)
