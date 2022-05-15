@@ -13,7 +13,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -82,6 +84,19 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     }
 
     return RecipeMatcher.findMatches(inputs, ingredients) != null;
+  }
+
+  @Override
+  public ItemStack assemble(MortarCrafting pInv) {
+    ItemStack result = super.assemble(pInv);
+    Player player = pInv.getPlayer();
+    if (player != null && player.level.isClientSide()) {
+      for (Grant grant : getGrants()) {
+        grant.accept((ServerPlayer) player);
+      }
+    }
+
+    return result;
   }
 
   @Override

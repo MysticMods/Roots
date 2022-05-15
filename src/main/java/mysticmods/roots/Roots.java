@@ -20,7 +20,7 @@ import noobanidus.libs.noobutil.reference.ModData;
 import noobanidus.libs.noobutil.registrate.CustomRegistrate;
 import noobanidus.libs.particleslib.config.ConfigManager;
 
-@Mod("roots")
+@Mod(RootsAPI.MODID)
 public class Roots {
   public static CustomRegistrate REGISTRATE;
   public static final RecipeGenerator RECIPES = new RecipeGenerator(RootsAPI.MODID);
