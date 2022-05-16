@@ -15,22 +15,26 @@ import java.util.function.Consumer;
 public class Grant implements Consumer<ServerPlayer> {
   private final GrantType type;
   private final ResourceLocation id;
+  private final int quantity;
 
-  public Grant(GrantType type, ResourceLocation id) {
+  public Grant(GrantType type, ResourceLocation id, int quantity) {
     this.type = type;
     this.id = id;
+    this.quantity = quantity;
   }
 
   public JsonElement toJson() {
     JsonObject result = new JsonObject();
     result.addProperty("id", id.toString());
     result.addProperty("type", type.toString());
+    result.addProperty("quantity", quantity);
     return result;
   }
 
   public void toNetwork(FriendlyByteBuf pBuffer) {
     pBuffer.writeResourceLocation(id);
     pBuffer.writeVarInt(type.ordinal());
+    pBuffer.writeVarInt(quantity);
   }
 
   @Override
@@ -52,12 +56,16 @@ public class Grant implements Consumer<ServerPlayer> {
         throw new JsonSyntaxException("Grant must have an id");
       }
       GrantType type = EnumUtil.fromString(GrantType.class, GsonHelper.getAsString(pJsonObject, "type"));
-      return new Grant(type, new ResourceLocation(GsonHelper.getAsString(pJsonObject, "id")));
+      int quantity = -1;
+      if (!pJsonObject.get("quantity").isJsonNull()) {
+        quantity = GsonHelper.getAsInt(pJsonObject, "quantity");
+      }
+      return new Grant(type, new ResourceLocation(GsonHelper.getAsString(pJsonObject, "id")), quantity);
     }
   }
 
   public static Grant fromNetwork (FriendlyByteBuf pBuffer) {
-    return new Grant(EnumUtil.fromOrdinal(GrantType.class, pBuffer.readVarInt()), pBuffer.readResourceLocation());
+    return new Grant(EnumUtil.fromOrdinal(GrantType.class, pBuffer.readVarInt()), pBuffer.readResourceLocation(), pBuffer.readVarInt());
   }
 
   public enum GrantType {

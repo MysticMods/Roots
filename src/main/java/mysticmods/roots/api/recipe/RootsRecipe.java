@@ -3,7 +3,6 @@ package mysticmods.roots.api.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.api.recipe.processors.RootsProcessor;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
@@ -31,7 +30,6 @@ import java.util.function.Consumer;
 public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<H, W> {
   protected final NonNullList<Ingredient> ingredients;
   protected final ItemStack result;
-  protected final List<RootsProcessor<? super W>> processors = new ArrayList<>();
   protected final ResourceLocation recipeId;
 
   @FunctionalInterface
