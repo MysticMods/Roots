@@ -24,6 +24,11 @@ public class FeyCraftingRecipe extends RootsTileRecipe<FeyCraftingInventory, Fey
   }
 
   @Override
+  public ItemStack assemble(FeyCrafting pContainer) {
+    return result.copy();
+  }
+
+  @Override
   public RecipeSerializer<?> getSerializer() {
     return ModRecipes.Serializers.FEY_CRAFTING.get();
   }

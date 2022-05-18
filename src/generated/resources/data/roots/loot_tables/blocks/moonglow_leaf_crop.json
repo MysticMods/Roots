@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "roots:moonglow_leaf_seeds"
+          "name": "roots:moonglow_seeds"
         }
       ],
       "conditions": [

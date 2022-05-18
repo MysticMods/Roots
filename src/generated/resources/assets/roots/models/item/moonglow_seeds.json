@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "roots:item/herbs/moonglow_leaf_seeds"
+    "layer0": "roots:item/herbs/moonglow_seeds"
   }
 }

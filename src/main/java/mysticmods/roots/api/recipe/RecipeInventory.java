@@ -41,6 +41,17 @@ public class RecipeInventory extends ItemStackHandler {
     return result;
   }
 
+  public List<ItemStack> getItemsCopy () {
+    List<ItemStack> result = new ArrayList<>();
+    for (int i = 0; i < getSlots(); i++) {
+      ItemStack inSlot = getStackInSlot(i);
+      if (!inSlot.isEmpty()) {
+        result.add(inSlot.copy());
+      }
+    }
+    return result;
+  }
+
   public List<ItemStack> getItemsAndClear() {
     List<ItemStack> result = getItems();
     for (int i = 0; i < getSlots(); i++) {

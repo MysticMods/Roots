@@ -69,6 +69,6 @@ public class Grant implements Consumer<ServerPlayer> {
   }
 
   public enum GrantType {
-    SPELL;
+    SPELL
   }
 }

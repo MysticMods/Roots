@@ -2,10 +2,7 @@
   "type": "roots:mortar",
   "ingredients": [
     {
-      "ingredient": {
-        "tag": "roots:runestone"
-      },
-      "count": 1
+      "tag": "roots:runestone"
     }
   ],
   "result": {

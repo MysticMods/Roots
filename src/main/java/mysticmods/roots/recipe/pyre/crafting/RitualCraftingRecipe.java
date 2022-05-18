@@ -25,6 +25,11 @@ public class RitualCraftingRecipe extends RootsTileRecipe<PyreInventory, PyreBlo
   }
 
   @Override
+  public ItemStack assemble(RitualCrafting pContainer) {
+    return result.copy();
+  }
+
+  @Override
   public RecipeSerializer<?> getSerializer() {
     return ModRecipes.Serializers.RITUAL_CRAFTING.get();
   }

@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import mysticmods.roots.Roots;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.FireStarterItem;
@@ -11,6 +12,7 @@ import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShearsItem;
 
 import static mysticmods.roots.Roots.REGISTRATE;
@@ -174,6 +176,15 @@ public class ModItems {
 
   public static ItemEntry<Item> FLOUR = REGISTRATE.item("flour", Item::new)
       .model(subfolder("food"))
+      .recipe((ctx, p) -> {
+        MortarRecipe.builder(ctx.getEntry(), 5, 4)
+            .addIngredient(Items.WHEAT)
+            .addIngredient(Items.WHEAT)
+            .addIngredient(Items.WHEAT)
+            .addIngredient(Items.WHEAT)
+            .addIngredient(Items.WHEAT)
+            .build(p, new ResourceLocation(RootsAPI.MODID, "mortar/flour"));
+      })
       .register();
 
   public static ItemEntry<Item> WILDEWHEET_BREAD = REGISTRATE.item("wildewheet_bread", Item::new)

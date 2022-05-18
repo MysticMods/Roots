@@ -88,7 +88,6 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   @Override
   public ItemStack assemble(MortarCrafting pInv) {
-    ItemStack result = super.assemble(pInv);
     Player player = pInv.getPlayer();
     if (player != null && player.level.isClientSide()) {
       for (Grant grant : getGrants()) {
@@ -96,7 +95,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
       }
     }
 
-    return result;
+    return result.copy();
   }
 
   @Override
@@ -118,7 +117,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     protected void fromJsonAdditional(MortarRecipe recipe, ResourceLocation pRecipeId, JsonObject pJson) {
       super.fromJsonAdditional(recipe, pRecipeId, pJson);
       recipe.setTimes(pJson.get("times").getAsInt());
-      if (pJson.get("conditional_outputs").isJsonArray()) {
+      if (GsonHelper.isArrayNode(pJson, "conditional_outputs")) {
         List<ConditionalOutput> outputs = new ArrayList<>();
         JsonArray conditionalOutputs = GsonHelper.getAsJsonArray(pJson, "conditional_outputs");
         for (int i = 0; i < conditionalOutputs.size(); i++) {
@@ -130,7 +129,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
         }
         recipe.addConditionalOutputs(outputs);
       }
-      if (pJson.get("grants").isJsonArray()) {
+      if (GsonHelper.isArrayNode(pJson, "grants")) {
         List<Grant> grants = new ArrayList<>();
         JsonArray thisGrants = GsonHelper.getAsJsonArray(pJson, "grants");
         for (int i = 0; i < thisGrants.size(); i++) {

@@ -1,12 +1,15 @@
 package mysticmods.roots.block.entity;
 
 import mysticmods.roots.api.InventoryBlockEntity;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.recipe.mortar.MortarCrafting;
 import mysticmods.roots.recipe.mortar.MortarInventory;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -17,7 +20,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +40,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
       }
     }
   };
+  private final MortarCrafting playerlessCrafting = new MortarCrafting(inventory, this, null);
   private final List<ItemStack> previousRecipeItems = new ArrayList<>();
   private MortarRecipe lastRecipe = null;
   private MortarRecipe cachedRecipe = null;
@@ -48,7 +51,21 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
   }
 
   protected void revalidateRecipe () {
-    // Re-check recipe matches
+    if (cachedRecipe == null) {
+      cachedRecipe = ResolvedRecipes.MORTAR.findRecipe(playerlessCrafting, getLevel());
+      uses = -1;
+    }
+
+    if (cachedRecipe != null) {
+      if (!cachedRecipe.matches(playerlessCrafting, getLevel())) {
+        cachedRecipe = null;
+        uses = -1;
+      } else {
+        if (uses == -1) {
+          uses = 0;
+        }
+      }
+    }
   }
 
   @Override
@@ -122,6 +139,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
+    RootsAPI.LOG.info(cachedRecipe);
     ItemStack inHand = player.getItemInHand(hand);
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
@@ -133,12 +151,30 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
     } else if (inHand.is(ModItems.PESTLE.get())) {
-      // check if recipe is valid
-      // increment uses
-      // if maximum uses, reduce items
-      // cache the last used items
-      // set the last used recipe
-      // produce a result!!!
+      if (cachedRecipe == null) {
+        // should this revalidate?
+        revalidateRecipe();
+      }
+      if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
+        uses++;
+
+        if (uses >= cachedRecipe.getTimes()) {
+          MortarCrafting playerCrafting = new MortarCrafting(inventory, this, player);
+          lastRecipe = cachedRecipe;
+          previousRecipeItems.clear();
+          previousRecipeItems.addAll(inventory.getItemsCopy());
+          ItemStack result = cachedRecipe.assemble(playerCrafting);
+          // process
+          NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
+          ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);
+          for (ItemStack stack : processed) {
+            ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+          }
+          uses = -1;
+          cachedRecipe = null;
+          setChanged();
+        }
+      }
     } else {
       // insert
       player.setItemInHand(hand, inventory.insert(inHand));
