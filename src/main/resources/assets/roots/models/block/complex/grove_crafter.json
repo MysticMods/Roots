@@ -1,0 +1,37 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "block/stripped_oak_log",
+		"1": "block/mossy_cobblestone",
+		"2": "roots:block/grove_crafter_top",
+		"particle": "block/stripped_oak_log"
+	},
+	"elements": [
+		{
+			"from": [0.5, 8, 0.5],
+			"to": [15.5, 15, 15.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-0.5, 0, -0.5]},
+			"faces": {
+				"north": {"uv": [0, 0, 15, 7], "texture": "#0"},
+				"east": {"uv": [0, 0, 15, 7], "texture": "#0"},
+				"south": {"uv": [0, 0, 15, 7], "texture": "#0"},
+				"west": {"uv": [0, 0, 15, 7], "texture": "#0"},
+				"up": {"uv": [0, 0, 15, 15], "texture": "#2"},
+				"down": {"uv": [0, 0, 15, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2, 0, 2],
+			"to": [14, 8, 14],
+			"faces": {
+				"north": {"uv": [0, 0, 12, 8], "texture": "#1"},
+				"east": {"uv": [0, 0, 12, 8], "texture": "#1"},
+				"south": {"uv": [0, 0, 12, 8], "texture": "#1"},
+				"west": {"uv": [0, 0, 12, 8], "texture": "#1"},
+				"up": {"uv": [0, 0, 12, 12], "texture": "#1"},
+				"down": {"uv": [0, 0, 12, 12], "texture": "#1"}
+			}
+		}
+	]
+}

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "roots:fey_crafter",
+    "roots:grove_crafter",
     "roots:runic_crafter"
   ]
 }

@@ -8,13 +8,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class FeyCrafterBlock extends Block {
-  public FeyCrafterBlock(Properties builder) {
-    super(builder);
+public class GrovePedestalBlock extends Block {
+  public GrovePedestalBlock(Properties p_49795_) {
+    super(p_49795_);
   }
 
   @Override
-  public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
-    return Shapes.GROVE_CRAFTER;
+  public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    return Shapes.GROVE_PEDESTAL;
   }
 }

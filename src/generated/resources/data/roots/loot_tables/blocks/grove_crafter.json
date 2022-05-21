@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "roots:fey_crafter"
+          "name": "roots:grove_crafter"
         }
       ],
       "conditions": [

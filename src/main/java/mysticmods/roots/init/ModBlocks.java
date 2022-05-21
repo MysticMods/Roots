@@ -1081,13 +1081,21 @@ public class ModBlocks {
       .build()
       .register();
 
-  public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("fey_crafter", Material.WOOD, FeyCrafterBlock::new)
+  public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("grove_crafter", Material.WOOD, FeyCrafterBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/fey_crafter"))
+      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_crafter"))
       .tag(RootsTags.Blocks.CRAFTER)
       .item()
       .model(ItemModelGenerator::complexItemModel)
       .tag(RootsTags.Items.Blocks.CRAFTER)
+      .build()
+      .register();
+
+  public static BlockEntry<Block> GROVE_PEDESTAL = REGISTRATE.block("grove_pedestal", Material.WOOD, Block::new)
+      .properties(BASE_WOODEN_PROPERTIES)
+      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_pedestal"))
+      .item()
+      .model(ItemModelGenerator::complexItemModel)
       .build()
       .register();
 
