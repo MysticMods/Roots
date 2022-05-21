@@ -23,6 +23,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.VineBlock;
 import net.minecraftforge.common.util.RecipeMatcher;
 
 import java.util.ArrayList;

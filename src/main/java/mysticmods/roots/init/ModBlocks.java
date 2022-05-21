@@ -1099,6 +1099,18 @@ public class ModBlocks {
       .build()
       .register();
 
+  public static BlockEntry<Block> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, Block::new)
+      .properties(BASE_WOODEN_PROPERTIES)
+      .blockstate(BlockstateGenerator.existingNoRotation("block/wild_roots"))
+
+      .register();
+
+  public static BlockEntry<Block> SACRED_MOSS = REGISTRATE.block("creeping_sacred_moss", Material.GRASS, Block::new)
+      .properties(BASE_WOODEN_PROPERTIES)
+      .blockstate(BlockstateGenerator.existingNoRotation("block/moss"))
+
+      .register();
+
   public static BlockEntry<RunicCrafterBlock> RUNIC_CRAFTER = REGISTRATE.block("runic_crafter", Material.STONE, RunicCrafterBlock::new)
       .properties(BASE_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/runic_crafter"))
