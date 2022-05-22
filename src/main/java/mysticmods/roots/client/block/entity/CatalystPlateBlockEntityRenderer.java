@@ -2,25 +2,22 @@ package mysticmods.roots.client.block.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import mysticmods.roots.block.entity.CatalystPlateBlockEntity;
+import mysticmods.roots.block.entity.PedestalBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemFrameRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import noobanidus.libs.particleslib.client.events.RenderTickHandler;
 
-public class CatalystPlateBlockEntityRenderer implements BlockEntityRenderer<CatalystPlateBlockEntity> {
+public class CatalystPlateBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
   public CatalystPlateBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
   }
 
   @Override
-  public void render(CatalystPlateBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+  public void render(PedestalBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     ItemStack inSlot = pBlockEntity.getHeldItem();
     if (!inSlot.isEmpty()) {
       int loc = (int) pBlockEntity.getBlockPos().asLong();

@@ -12,24 +12,23 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.items.ItemStackHandler;
 import noobanidus.libs.noobutil.util.ItemUtil;
 
-public class CatalystPlateBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
+public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
   private final ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
-      if (CatalystPlateBlockEntity.this.hasLevel() && !CatalystPlateBlockEntity.this.getLevel().isClientSide()) {
-        CatalystPlateBlockEntity.this.updateViaState();
+      if (PedestalBlockEntity.this.hasLevel() && !PedestalBlockEntity.this.getLevel().isClientSide()) {
+        PedestalBlockEntity.this.updateViaState();
       }
     }
   };
 
-  public CatalystPlateBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
+  public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
   }
 

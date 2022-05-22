@@ -1061,9 +1061,9 @@ public class ModBlocks {
   // TODO: Both catalyst plates require rotation
   // or alternately improve model to not require
   // any rotation.
-  public static BlockEntry<CatalystPlateBlock> CATALYST_PLATE = REGISTRATE.block("catalyst_plate", Material.STONE, CatalystPlateBlock::new)
+  public static BlockEntry<RitualPedestalBlock> RITUAL_PEDESTAL = REGISTRATE.block("ritual_pedestal", Material.STONE, RitualPedestalBlock::new)
       .properties(BASE_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/catalyst_plate"))
+      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/ritual_pedestal"))
       .tag(RootsTags.Blocks.PLATE)
       .item()
       .model(ItemModelGenerator::complexItemModel)
@@ -1071,9 +1071,9 @@ public class ModBlocks {
       .build()
       .register();
 
-  public static BlockEntry<CatalystPlateBlock> REINFORCED_CATALYST_PLATE = REGISTRATE.block("reinforced_catalyst_plate", Material.STONE, CatalystPlateBlock::new)
+  public static BlockEntry<RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = REGISTRATE.block("reinforced_ritual_pedestal", Material.STONE, RitualPedestalBlock::new)
       .properties(BASE_REINFORCED_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_catalyst_plate"))
+      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_ritual_pedestal"))
       .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PLATE)
       .item()
       .model(ItemModelGenerator::complexItemModel)
@@ -1081,7 +1081,7 @@ public class ModBlocks {
       .build()
       .register();
 
-  public static BlockEntry<FeyCrafterBlock> FEY_CRAFTER = REGISTRATE.block("grove_crafter", Material.WOOD, FeyCrafterBlock::new)
+  public static BlockEntry<FeyCrafterBlock> GROVE_CRAFTER = REGISTRATE.block("grove_crafter", Material.WOOD, FeyCrafterBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_crafter"))
       .tag(RootsTags.Blocks.CRAFTER)

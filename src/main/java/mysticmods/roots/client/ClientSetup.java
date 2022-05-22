@@ -24,7 +24,7 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-    event.registerBlockEntityRenderer(ModBlockEntities.CATALYST_PLATE.get(), CatalystPlateBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.PEDESTAL.get(), CatalystPlateBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.MORTAR.get(), MortarBlockEntityRenderer::new);
   }
 }
