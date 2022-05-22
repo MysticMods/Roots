@@ -2,6 +2,7 @@ package mysticmods.roots.block.entity;
 
 import mysticmods.roots.api.InventoryBlockEntity;
 import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -90,5 +91,18 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   @Override
   public ItemStackHandler getInventory() {
     return inventory;
+  }
+
+  private double offset = -1;
+
+  public double offset () {
+    if (offset == -1) {
+      if (this.getBlockState().is(ModBlocks.RITUAL_PEDESTAL.get())) {
+        offset = 1.4;
+      } else /* if (this.getBlockState().is(ModBlocks.GROVE_PEDESTAL.get())) */ {
+        offset = 0.8;
+      }
+    }
+    return offset;
   }
 }

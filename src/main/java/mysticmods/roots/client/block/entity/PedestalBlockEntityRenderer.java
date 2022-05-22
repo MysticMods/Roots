@@ -12,17 +12,18 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import noobanidus.libs.particleslib.client.events.RenderTickHandler;
 
-public class CatalystPlateBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
-  public CatalystPlateBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
+  public PedestalBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
   }
 
+  // TODO: Render more when there's more
   @Override
   public void render(PedestalBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     ItemStack inSlot = pBlockEntity.getHeldItem();
     if (!inSlot.isEmpty()) {
       int loc = (int) pBlockEntity.getBlockPos().asLong();
       pPoseStack.pushPose();
-      pPoseStack.translate(0.5, 1.4 + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float)Math.PI * 2f) * 0.05f, 0.5);
+      pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float)Math.PI * 2f) * 0.05f, 0.5);
       pPoseStack.scale(0.5f, 0.5f, 0.5f);
       pPoseStack.mulPose(Vector3f.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
       Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemTransforms.TransformType.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, 0);

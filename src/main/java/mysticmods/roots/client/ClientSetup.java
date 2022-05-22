@@ -1,7 +1,7 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.block.entity.CatalystPlateBlockEntityRenderer;
+import mysticmods.roots.client.block.entity.PedestalBlockEntityRenderer;
 import mysticmods.roots.client.block.entity.MortarBlockEntityRenderer;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModBlocks;
@@ -24,7 +24,7 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-    event.registerBlockEntityRenderer(ModBlockEntities.PEDESTAL.get(), CatalystPlateBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.PEDESTAL.get(), PedestalBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.MORTAR.get(), MortarBlockEntityRenderer::new);
   }
 }

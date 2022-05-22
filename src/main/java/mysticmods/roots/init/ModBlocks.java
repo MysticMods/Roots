@@ -1091,7 +1091,7 @@ public class ModBlocks {
       .build()
       .register();
 
-  public static BlockEntry<Block> GROVE_PEDESTAL = REGISTRATE.block("grove_pedestal", Material.WOOD, Block::new)
+  public static BlockEntry<GrovePedestalBlock> GROVE_PEDESTAL = REGISTRATE.block("grove_pedestal", Material.WOOD, GrovePedestalBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_pedestal"))
       .item()
