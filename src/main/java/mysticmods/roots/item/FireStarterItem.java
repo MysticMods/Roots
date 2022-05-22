@@ -54,7 +54,7 @@ public class FireStarterItem extends Item {
             level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.setBlock(blockpos, Blocks.FIRE.defaultBlockState(), 11);
             used = true;
-          } else if (stateAt.is(RootsTags.Blocks.PYRE)) {
+          } else if (stateAt.is(RootsTags.Blocks.PYRES)) {
             // TODO: Light the Pyre
           }
         }

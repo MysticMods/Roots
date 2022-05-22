@@ -8,13 +8,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class ImbuerBlock extends Block {
-  public ImbuerBlock(Properties builder) {
+public class IncenseBurnerBlock extends Block {
+  public IncenseBurnerBlock(Properties builder) {
     super(builder);
   }
 
   @Override
-  public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
-    return Shapes.IMBUER;
+  public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    return Shapes.INCENSE_BURNER;
   }
 }

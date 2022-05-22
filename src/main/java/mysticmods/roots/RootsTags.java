@@ -73,22 +73,18 @@ public class RootsTags {
     public static TagKey<Block> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
 
     // Catalyst plates, offering plates and incense plates
-    public static TagKey<Block> PLATE = modTag("plate");
+    public static TagKey<Block> PEDESTALS = modTag("pedestals");
+    public static TagKey<Block> RITUAL_PEDESTALS = modTag("pedestals/ritual");
+    public static TagKey<Block> GROVE_PEDESTALS = modTag("pedestals/grove");
 
     // Pyres (does not include decorative)
-    public static TagKey<Block> PYRE = modTag("pyre");
+    public static TagKey<Block> PYRES = modTag("pyres");
 
     // Fey and runic crafters
-    public static TagKey<Block> CRAFTER = modTag("crafter");
-
-    // Imposers
-    public static TagKey<Block> IMPOSER = modTag("imposer");
-
-    // Imbuer
-    public static TagKey<Block> IMBUER = modTag("imbuer");
+    public static TagKey<Block> CRAFTERS = modTag("crafters");
 
     // Mortars
-    public static TagKey<Block> MORTAR = modTag("mortar");
+    public static TagKey<Block> MORTARS = modTag("mortars");
 
     static TagKey<Block> modTag(String name) {
       return BlockTags.create(new ResourceLocation(RootsAPI.MODID, name));
@@ -174,12 +170,12 @@ public class RootsTags {
       public static TagKey<Item> GROVE_STONES = modTag("grove_stones");
       public static TagKey<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
 
-      public static TagKey<Item> PLATE = modTag("plate");
-      public static TagKey<Item> PYRE = modTag("pyre");
-      public static TagKey<Item> CRAFTER = modTag("crafter");
-      public static TagKey<Item> IMPOSER = modTag("imposer");
-      public static TagKey<Item> IMBUER = modTag("imbuer");
-      public static TagKey<Item> MORTAR = modTag("mortar");
+      public static TagKey<Item> PEDESTALS = modTag("pedestals");
+      public static TagKey<Item> RITUAL_PEDESTALS = modTag("pedestals/ritual");
+      public static TagKey<Item> GROVE_PEDESTALS = modTag("pedestals/grove");
+      public static TagKey<Item> PYRES = modTag("pyres");
+      public static TagKey<Item> CRAFTERS = modTag("crafters");
+      public static TagKey<Item> MORTARS = modTag("mortars");
     }
 
     static TagKey<Item> modTag(String name) {

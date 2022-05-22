@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "roots:catalyst_plate",
-    "roots:reinforced_catalyst_plate",
+    "roots:ritual_pedestal",
+    "roots:reinforced_ritual_pedestal",
     "roots:incense_plate"
   ]
 }

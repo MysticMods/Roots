@@ -1,7 +1,6 @@
 {
   "block.roots.aqueous_soil": "Aqueous Soil",
   "block.roots.caelic_soil": "Caelic Soil",
-  "block.roots.catalyst_plate": "Catalyst Plate",
   "block.roots.chiseled_runed_obsidian": "Chiseled Runed Obsidian",
   "block.roots.chiseled_runestone": "Chiseled Runestone",
   "block.roots.cloud_berry_crop": "Cloud Berry Crop",
@@ -21,8 +20,9 @@
   "block.roots.pereskia_crop": "Pereskia Crop",
   "block.roots.primal_grove_stone": "Primal Grove Stone",
   "block.roots.pyre": "Pyre",
-  "block.roots.reinforced_catalyst_plate": "Reinforced Catalyst Plate",
   "block.roots.reinforced_pyre": "Reinforced Pyre",
+  "block.roots.reinforced_ritual_pedestal": "Reinforced Ritual Pedestal",
+  "block.roots.ritual_pedestal": "Ritual Pedestal",
   "block.roots.runed_acacia_log": "Runed Acacia Log",
   "block.roots.runed_birch_log": "Runed Birch Log",
   "block.roots.runed_brick_alt_button": "Runed Brick Alt Button",

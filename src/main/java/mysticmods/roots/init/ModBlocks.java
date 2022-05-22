@@ -1064,30 +1064,30 @@ public class ModBlocks {
   public static BlockEntry<RitualPedestalBlock> RITUAL_PEDESTAL = REGISTRATE.block("ritual_pedestal", Material.STONE, RitualPedestalBlock::new)
       .properties(BASE_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/ritual_pedestal"))
-      .tag(RootsTags.Blocks.PLATE)
+      .tag(RootsTags.Blocks.PEDESTALS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.PLATE)
+      .tag(RootsTags.Items.Blocks.PEDESTALS)
       .build()
       .register();
 
   public static BlockEntry<RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = REGISTRATE.block("reinforced_ritual_pedestal", Material.STONE, RitualPedestalBlock::new)
       .properties(BASE_REINFORCED_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_ritual_pedestal"))
-      .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PLATE)
+      .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PEDESTALS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.PLATE)
+      .tag(RootsTags.Items.Blocks.PEDESTALS)
       .build()
       .register();
 
   public static BlockEntry<FeyCrafterBlock> GROVE_CRAFTER = REGISTRATE.block("grove_crafter", Material.WOOD, FeyCrafterBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_crafter"))
-      .tag(RootsTags.Blocks.CRAFTER)
+      .tag(RootsTags.Blocks.CRAFTERS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.CRAFTER)
+      .tag(RootsTags.Items.Blocks.CRAFTERS)
       .build()
       .register();
 
@@ -1114,10 +1114,10 @@ public class ModBlocks {
   public static BlockEntry<RunicCrafterBlock> RUNIC_CRAFTER = REGISTRATE.block("runic_crafter", Material.STONE, RunicCrafterBlock::new)
       .properties(BASE_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/runic_crafter"))
-      .tag(RootsTags.Blocks.CRAFTER)
+      .tag(RootsTags.Blocks.CRAFTERS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.CRAFTER)
+      .tag(RootsTags.Items.Blocks.CRAFTERS)
       .build()
       .register();
 
@@ -1174,63 +1174,53 @@ public class ModBlocks {
       .build()
       .register();
 
-  public static BlockEntry<ImbuerBlock> IMBUER = REGISTRATE.block("imbuer", Material.WOOD, ImbuerBlock::new)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/imbuer"))
-      .properties(BASE_WOODEN_PROPERTIES)
-      .tag(RootsTags.Blocks.IMBUER)
-      .item()
-      .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.IMBUER)
-      .build()
-      .register();
-
-  public static BlockEntry<IncensePlateBlock> INCENSE_PLATE = REGISTRATE.block("incense_plate", Material.STONE, IncensePlateBlock::new)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/incense_plate"))
+  public static BlockEntry<IncenseBurnerBlock> INCENSE_BURNER = REGISTRATE.block("incense_burner", Material.STONE, IncenseBurnerBlock::new)
+      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/incense_burner"))
       .properties(BASE_PROPERTIES)
-      .tag(RootsTags.Blocks.PLATE)
+      .tag(RootsTags.Blocks.PEDESTALS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.PLATE)
+      .tag(RootsTags.Items.Blocks.PEDESTALS)
       .build()
       .register();
 
   public static BlockEntry<MortarBlock> MORTAR = REGISTRATE.block("mortar", Material.STONE, MortarBlock::new)
       .properties(BASE_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/mortar"))
-      .tag(RootsTags.Blocks.MORTAR)
+      .tag(RootsTags.Blocks.MORTARS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.MORTAR)
+      .tag(RootsTags.Items.Blocks.MORTARS)
       .build()
       .register();
 
   public static BlockEntry<PyreBlock> PYRE = REGISTRATE.block("pyre", Material.WOOD, PyreBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/pyre"))
-      .tag(RootsTags.Blocks.PYRE)
+      .tag(RootsTags.Blocks.PYRES)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.PYRE)
+      .tag(RootsTags.Items.Blocks.PYRES)
       .build()
       .register();
 
   public static BlockEntry<PyreBlock> REINFORCED_PYRE = REGISTRATE.block("reinforced_pyre", Material.STONE, PyreBlock::new)
       .properties(BASE_REINFORCED_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_pyre"))
-      .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PYRE)
+      .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PYRES)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.PYRE)
+      .tag(RootsTags.Items.Blocks.PYRES)
       .build()
       .register();
 
   public static BlockEntry<DecorativePyreBlock> DECORATIVE_PYRE = REGISTRATE.block("decorative_pyre", Material.WOOD, DecorativePyreBlock::new)
       .properties(BASE_WOODEN_PROPERTIES.andThen(o -> o.lightLevel((state) -> 15)))
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/pyre"))
-      .tag(RootsTags.Blocks.PYRE)
+      .tag(RootsTags.Blocks.PYRES)
       .item()
       .model((ctx, p) -> p.withExistingParent(p.name(ctx::getEntry), new ResourceLocation(RootsAPI.MODID, "block/complex/pyre")))
-      .tag(RootsTags.Items.Blocks.PYRE)
+      .tag(RootsTags.Items.Blocks.PYRES)
       .build()
       .register();
 

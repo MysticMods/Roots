@@ -1,7 +1,6 @@
 {
   "block.roots.aqueous_soil": "\u05DF\u0131oS sno\u01DDnb\u2C6F",
   "block.roots.caelic_soil": "\u05DF\u0131oS \u0254\u0131\u05DF\u01DD\u0250\u0186",
-  "block.roots.catalyst_plate": "\u01DD\u0287\u0250\u05DF\u0500 \u0287s\u028E\u05DF\u0250\u0287\u0250\u0186",
   "block.roots.chiseled_runed_obsidian": "u\u0250\u0131p\u0131sqO p\u01DDun\u1D1A p\u01DD\u05DF\u01DDs\u0131\u0265\u0186",
   "block.roots.chiseled_runestone": "\u01DDuo\u0287s\u01DDun\u1D1A p\u01DD\u05DF\u01DDs\u0131\u0265\u0186",
   "block.roots.cloud_berry_crop": "do\u0279\u0186 \u028E\u0279\u0279\u01DD\u15FA pno\u05DF\u0186",
@@ -21,8 +20,9 @@
   "block.roots.pereskia_crop": "do\u0279\u0186 \u0250\u0131\u029Es\u01DD\u0279\u01DD\u0500",
   "block.roots.primal_grove_stone": "\u01DDuo\u0287S \u01DD\u028Co\u0279\u2141 \u05DF\u0250\u026F\u0131\u0279\u0500",
   "block.roots.pyre": "\u01DD\u0279\u028E\u0500",
-  "block.roots.reinforced_catalyst_plate": "\u01DD\u0287\u0250\u05DF\u0500 \u0287s\u028E\u05DF\u0250\u0287\u0250\u0186 p\u01DD\u0254\u0279o\u025Fu\u0131\u01DD\u1D1A",
   "block.roots.reinforced_pyre": "\u01DD\u0279\u028E\u0500 p\u01DD\u0254\u0279o\u025Fu\u0131\u01DD\u1D1A",
+  "block.roots.reinforced_ritual_pedestal": "\u05DF\u0250\u0287s\u01DDp\u01DD\u0500 \u05DF\u0250n\u0287\u0131\u1D1A p\u01DD\u0254\u0279o\u025Fu\u0131\u01DD\u1D1A",
+  "block.roots.ritual_pedestal": "\u05DF\u0250\u0287s\u01DDp\u01DD\u0500 \u05DF\u0250n\u0287\u0131\u1D1A",
   "block.roots.runed_acacia_log": "bo\uA780 \u0250\u0131\u0254\u0250\u0254\u2C6F p\u01DDun\u1D1A",
   "block.roots.runed_birch_log": "bo\uA780 \u0265\u0254\u0279\u0131\u15FA p\u01DDun\u1D1A",
   "block.roots.runed_brick_alt_button": "uo\u0287\u0287n\u15FA \u0287\u05DF\u2C6F \u029E\u0254\u0131\u0279\u15FA p\u01DDun\u1D1A",
