@@ -2,6 +2,7 @@ package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import noobanidus.libs.noobutil.block.BaseBlocks;
+import noobanidus.libs.noobutil.util.VoxelUtil;
 
 import javax.annotation.Nullable;
 
@@ -27,6 +29,9 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
   public static final DirectionProperty FACING = BaseBlocks.HorizontalBlock.FACING;
   public static final EnumProperty<Part> PART = EnumProperty.create("part", Part.class);
   public static final BooleanProperty VALID = BooleanProperty.create("valid");
+
+  public static final VoxelShape[] EAST_WEST = {VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_TOP, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_MIDDLE, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_BOTTOM, Direction.EAST)};
+  public static final VoxelShape[] NORTH_SOUTH = {Shapes.GROVE_STONE_TOP, Shapes.GROVE_STONE_MIDDLE, Shapes.GROVE_STONE_BOTTOM};
 
   public GroveStoneBlock(Properties builder) {
     super(builder);
@@ -41,16 +46,21 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
 
   // TODO: ROTATION
   @Override
-  public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
-    switch (p_220053_1_.getValue(PART)) {
-      case TOP:
-        return Shapes.GROVE_STONE_TOP;
-      case MIDDLE:
-        return Shapes.GROVE_STONE_MIDDLE;
-      default:
-      case BOTTOM:
-        return Shapes.GROVE_STONE_BOTTOM;
+  public VoxelShape getShape(BlockState state, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
+    VoxelShape[] parts;
+    Direction facing = state.getValue(FACING);
+
+    if (facing == Direction.SOUTH || facing == Direction.NORTH) {
+      parts = NORTH_SOUTH;
+    } else {
+      parts = EAST_WEST;
     }
+
+    return switch (state.getValue(PART)) {
+      case TOP -> parts[0];
+      case MIDDLE -> parts[1];
+      case BOTTOM -> parts[2];
+    };
   }
 
   @Override
