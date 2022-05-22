@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class FeyCrafterBlock extends Block {
-  public FeyCrafterBlock(Properties builder) {
+public class GroveCrafterBlock extends Block {
+  public GroveCrafterBlock(Properties builder) {
     super(builder);
   }
 

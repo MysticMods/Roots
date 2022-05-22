@@ -1,14 +1,14 @@
 package mysticmods.roots.block.entity;
 
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.block.FeyCrafterBlock;
+import mysticmods.roots.block.GroveCrafterBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class RunicCrafterBlock extends FeyCrafterBlock {
+public class RunicCrafterBlock extends GroveCrafterBlock {
   public RunicCrafterBlock(Properties builder) {
     super(builder);
   }

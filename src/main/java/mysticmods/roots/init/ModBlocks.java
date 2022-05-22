@@ -1081,7 +1081,7 @@ public class ModBlocks {
       .build()
       .register();
 
-  public static BlockEntry<FeyCrafterBlock> GROVE_CRAFTER = REGISTRATE.block("grove_crafter", Material.WOOD, FeyCrafterBlock::new)
+  public static BlockEntry<GroveCrafterBlock> GROVE_CRAFTER = REGISTRATE.block("grove_crafter", Material.WOOD, GroveCrafterBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_crafter"))
       .tag(RootsTags.Blocks.CRAFTERS)
