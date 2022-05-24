@@ -8,6 +8,7 @@ import mysticmods.roots.init.ModBlocks;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -22,6 +23,16 @@ public class ClientSetup {
     RenderType cutout = RenderType.cutoutMipped();
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_LEAVES.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEY_LIGHT.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.DEWGONIA_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.INFERNAL_BULB_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.MOONGLOW_LEAF_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.PERESKIA_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.SPIRIT_HERB_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.STALICRIPE_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDEWHEET_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDROOT_CROP.get(), cutout);
   }
 
   @SubscribeEvent
@@ -31,7 +42,12 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onColorHandler (ColorHandlerEvent.Block event) {
+  public static void onColorHandlerBlock (ColorHandlerEvent.Block event) {
     event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null && pPos != null ? BiomeColors.getAverageWaterColor(pLevel, pPos) : -1, ModBlocks.UNENDING_BOWL.get());
+  }
+
+  @SubscribeEvent
+  public static void onColorHandlerItem (ColorHandlerEvent.Item event) {
+    event.getItemColors().register((stack, index) -> index == 1 ? OverworldBiomes.NORMAL_WATER_COLOR : -1, ModBlocks.UNENDING_BOWL.get());
   }
 }
