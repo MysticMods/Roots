@@ -167,9 +167,9 @@ public class SpellRadiance extends SpellBase {
             double z = positions.get(i).z * (1.0f - j) + positions.get(i + 1).z * j;
             List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
             for (EntityLivingBase e : entities) {
-              if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+              if (e != player) {
                 if (info.has(HEALING)) {
-                  if (!EntityUtil.isFriendly(e, SpellRadiance.instance)) {
+                  if (!EntityUtil.isFriendly(e, SpellRadiance.instance) && !(e instanceof EntityPlayer)) {
                     continue;
                   }
 
@@ -177,6 +177,9 @@ public class SpellRadiance extends SpellBase {
                   count++;
                 } else {
                   if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellRadiance.instance)) {
+                    continue;
+                  }
+                  if (e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled()) {
                     continue;
                   }
                   if (e.hurtTime <= 0 && !e.isDead) {
