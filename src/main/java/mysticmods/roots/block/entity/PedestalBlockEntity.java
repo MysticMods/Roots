@@ -20,6 +20,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import noobanidus.libs.noobutil.util.ItemUtil;
 
 public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
+  private BlockPos associated = null;
   private final ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
@@ -31,6 +32,14 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+  }
+
+  public BlockPos getAssociated() {
+    return associated;
+  }
+
+  public void setAssociated(BlockPos associated) {
+    this.associated = associated;
   }
 
   @Override
@@ -71,17 +80,11 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   @Override
   public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+    super.onDataPacket(net, pkt);
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
       load(tag);
     }
-  }
-
-  @Override
-  public CompoundTag getUpdateTag() {
-    CompoundTag tag = super.getUpdateTag();
-    saveAdditional(tag);
-    return tag;
   }
 
   public ItemStack getHeldItem () {

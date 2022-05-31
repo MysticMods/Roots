@@ -6,8 +6,4 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public interface IHerb extends IForgeRegistryEntry<IHerb> {
   ItemLike getItem();
-
-  ItemLike getSeed();
-
-  Block getCrop();
 }

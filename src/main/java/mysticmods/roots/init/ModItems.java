@@ -23,39 +23,39 @@ public class ModItems {
   }
 
   public static class Herbs {
-    public static ItemEntry<ItemNameBlockItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.WILDROOT_CROP)
         .register();
-    public static ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
         .register();
-    public static ItemEntry<ItemNameBlockItem> DEWGONIA = REGISTRATE.item("dewgonia", (p) -> new ItemNameBlockItem(ModBlocks.Crops.DEWGONIA_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> DEWGONIA = REGISTRATE.item("dewgonia", (p) -> new ItemNameBlockItem(ModBlocks.Crops.DEWGONIA_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.DEWGONIA_SEEDS, RootsTags.Items.DEWGONIA_CROP)
         .register();
-    public static ItemEntry<ItemNameBlockItem> INFERNAL_BULB = REGISTRATE.item("infernal_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.INFERNAL_BULB_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> INFERNAL_BULB = REGISTRATE.item("infernal_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.INFERNAL_BULB_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.INFERNAL_BULB_SEEDS, RootsTags.Items.INFERNAL_BULB_CROP)
         .register();
-    public static ItemEntry<ItemNameBlockItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new ItemNameBlockItem(ModBlocks.Crops.STALICRIPE_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new ItemNameBlockItem(ModBlocks.Crops.STALICRIPE_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.STALICRIPE_SEEDS, RootsTags.Items.STALICRIPE_CROP)
         .register();
-    public static ItemEntry<Item> MOONGLOW_LEAF = REGISTRATE.item("moonglow_leaf", Item::new)
+    public static final ItemEntry<Item> MOONGLOW_LEAF = REGISTRATE.item("moonglow_leaf", Item::new)
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.MOONGLOW_LEAF_CROP)
         .register();
-    public static ItemEntry<Item> PERESKIA = REGISTRATE.item("pereskia", Item::new)
+    public static final ItemEntry<Item> PERESKIA = REGISTRATE.item("pereskia", Item::new)
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.PERESKIA_CROP)
         .register();
-    public static ItemEntry<Item> SPIRIT_HERB = REGISTRATE.item("spirit_herb", Item::new)
+    public static final ItemEntry<Item> SPIRIT_HERB = REGISTRATE.item("spirit_herb", Item::new)
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.SPIRIT_HERB_CROP)
         .register();
-    public static ItemEntry<Item> WILDEWHEET = REGISTRATE.item("wildewheet", Item::new)
+    public static final ItemEntry<Item> WILDEWHEET = REGISTRATE.item("wildewheet", Item::new)
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.WILDEWHEET_CROP)
         .register();
@@ -67,19 +67,19 @@ public class ModItems {
 
   public static class Seeds {
 
-    public static ItemEntry<ItemNameBlockItem> MOONGLOW_SEEDS = REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.MOONGLOW_LEAF_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> MOONGLOW_SEEDS = REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.MOONGLOW_LEAF_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.MOONGLOW_LEAF_SEEDS)
         .register();
-    public static ItemEntry<ItemNameBlockItem> PERESKIA_BULB = REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.PERESKIA_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> PERESKIA_BULB = REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.PERESKIA_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.PERESKIA_SEEDS)
         .register();
-    public static ItemEntry<ItemNameBlockItem> SPIRIT_HERB_SEEDS = REGISTRATE.item("spirit_herb_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.SPIRIT_HERB_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> SPIRIT_HERB_SEEDS = REGISTRATE.item("spirit_herb_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.SPIRIT_HERB_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.SPIRIT_HERB_SEEDS)
         .register();
-    public static ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDEWHEET_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDEWHEET_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.WILDEWHEET_SEEDS)
         .register();
@@ -90,52 +90,52 @@ public class ModItems {
   }
 
   public static class Bark {
-    public static ItemEntry<Item> ACACIA_BARK = REGISTRATE.item("acacia_bark", Item::new)
+    public static final ItemEntry<Item> ACACIA_BARK = REGISTRATE.item("acacia_bark", Item::new)
         .tag(RootsTags.Items.ACACIA_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> BIRCH_BARK = REGISTRATE.item("birch_bark", Item::new)
+    public static final ItemEntry<Item> BIRCH_BARK = REGISTRATE.item("birch_bark", Item::new)
         .tag(RootsTags.Items.BIRCH_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> DARK_OAK_BARK = REGISTRATE.item("dark_oak_bark", Item::new)
+    public static final ItemEntry<Item> DARK_OAK_BARK = REGISTRATE.item("dark_oak_bark", Item::new)
         .tag(RootsTags.Items.DARK_OAK_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> JUNGLE_BARK = REGISTRATE.item("jungle_bark", Item::new)
+    public static final ItemEntry<Item> JUNGLE_BARK = REGISTRATE.item("jungle_bark", Item::new)
         .tag(RootsTags.Items.JUNGLE_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> OAK_BARK = REGISTRATE.item("oak_bark", Item::new)
+    public static final ItemEntry<Item> OAK_BARK = REGISTRATE.item("oak_bark", Item::new)
         .tag(RootsTags.Items.OAK_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> SPRUCE_BARK = REGISTRATE.item("spruce_bark", Item::new)
+    public static final ItemEntry<Item> SPRUCE_BARK = REGISTRATE.item("spruce_bark", Item::new)
         .tag(RootsTags.Items.SPRUCE_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> WILDWOOD_BARK = REGISTRATE.item("wildwood_bark", Item::new)
+    public static final ItemEntry<Item> WILDWOOD_BARK = REGISTRATE.item("wildwood_bark", Item::new)
         .tag(RootsTags.Items.WILDWOOD_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> CRIMSON_BARK = REGISTRATE.item("crimson_bark", Item::new)
+    public static final ItemEntry<Item> CRIMSON_BARK = REGISTRATE.item("crimson_bark", Item::new)
         .tag(RootsTags.Items.CRIMSON_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> WARPED_BARK = REGISTRATE.item("warped_bark", Item::new)
+    public static final ItemEntry<Item> WARPED_BARK = REGISTRATE.item("warped_bark", Item::new)
         .tag(RootsTags.Items.WARPED_BARK)
         .model(subfolder("bark"))
         .register();
 
-    public static ItemEntry<Item> MIXED_BARK = REGISTRATE.item("mixed_bark", Item::new)
+    public static final ItemEntry<Item> MIXED_BARK = REGISTRATE.item("mixed_bark", Item::new)
         .tag(RootsTags.Items.MIXED_BARK)
         .model(subfolder("bark"))
         .register();
@@ -146,23 +146,23 @@ public class ModItems {
   }
 
   public static class Pouches {
-    public static ItemEntry<Item> APOTHECARY_POUCH = REGISTRATE.item("apothecary_pouch", Item::new)
+    public static final ItemEntry<Item> APOTHECARY_POUCH = REGISTRATE.item("apothecary_pouch", Item::new)
         .model(subfolder("pouches"))
         .register();
 
-    public static ItemEntry<Item> COMPONENT_POUCH = REGISTRATE.item("component_pouch", Item::new)
+    public static final ItemEntry<Item> COMPONENT_POUCH = REGISTRATE.item("component_pouch", Item::new)
         .model(subfolder("pouches"))
         .register();
 
-    public static ItemEntry<Item> CREATIVE_POUCH = REGISTRATE.item("creative_pouch", Item::new)
+    public static final ItemEntry<Item> CREATIVE_POUCH = REGISTRATE.item("creative_pouch", Item::new)
         .model(subfolder("pouches"))
         .register();
 
-    public static ItemEntry<Item> FEY_POUCH = REGISTRATE.item("fey_pouch", Item::new)
+    public static final ItemEntry<Item> FEY_POUCH = REGISTRATE.item("fey_pouch", Item::new)
         .model(subfolder("pouches"))
         .register();
 
-    public static ItemEntry<Item> HERB_POUCH = REGISTRATE.item("herb_pouch", Item::new)
+    public static final ItemEntry<Item> HERB_POUCH = REGISTRATE.item("herb_pouch", Item::new)
         .model(subfolder("pouches"))
         .register();
 
@@ -170,11 +170,11 @@ public class ModItems {
     }
   }
 
-  public static ItemEntry<Item> COOKED_PERESKIA = REGISTRATE.item("cooked_pereskia", Item::new)
+  public static final ItemEntry<Item> COOKED_PERESKIA = REGISTRATE.item("cooked_pereskia", Item::new)
       .model(subfolder("food"))
       .register();
 
-  public static ItemEntry<Item> FLOUR = REGISTRATE.item("flour", Item::new)
+  public static final ItemEntry<Item> FLOUR = REGISTRATE.item("flour", Item::new)
       .model(subfolder("food"))
       .recipe((ctx, p) -> {
         MortarRecipe.builder(ctx.getEntry(), 5, 4)
@@ -187,182 +187,182 @@ public class ModItems {
       })
       .register();
 
-  public static ItemEntry<Item> WILDEWHEET_BREAD = REGISTRATE.item("wildewheet_bread", Item::new)
+  public static final ItemEntry<Item> WILDEWHEET_BREAD = REGISTRATE.item("wildewheet_bread", Item::new)
       .model(subfolder("food"))
       .register();
 
-  public static ItemEntry<Item> WILDROOT_STEW = REGISTRATE.item("wildroot_stew", Item::new)
+  public static final ItemEntry<Item> WILDROOT_STEW = REGISTRATE.item("wildroot_stew", Item::new)
       .model(subfolder("food"))
       .register();
 
-  public static ItemEntry<Item> SYLVAN_BOOTS = REGISTRATE.item("sylvan_boots", Item::new)
+  public static final ItemEntry<Item> SYLVAN_BOOTS = REGISTRATE.item("sylvan_boots", Item::new)
       .model(subfolder("armor"))
       .register();
 
-  public static ItemEntry<Item> SYLVAN_CHESTPLATE = REGISTRATE.item("sylvan_chestplate", Item::new)
+  public static final ItemEntry<Item> SYLVAN_CHESTPLATE = REGISTRATE.item("sylvan_chestplate", Item::new)
       .model(subfolder("armor"))
       .register();
 
-  public static ItemEntry<Item> SYLVAN_HELMET = REGISTRATE.item("sylvan_helmet", Item::new)
+  public static final ItemEntry<Item> SYLVAN_HELMET = REGISTRATE.item("sylvan_helmet", Item::new)
       .model(subfolder("armor"))
       .register();
 
-  public static ItemEntry<Item> SYLVAN_LEGGINGS = REGISTRATE.item("sylvan_leggings", Item::new)
+  public static final ItemEntry<Item> SYLVAN_LEGGINGS = REGISTRATE.item("sylvan_leggings", Item::new)
       .model(subfolder("armor"))
       .register();
 
-  public static ItemEntry<Item> WILDWOOD_BOOTS = REGISTRATE.item("wildwood_boots", Item::new)
+  public static final ItemEntry<Item> WILDWOOD_BOOTS = REGISTRATE.item("wildwood_boots", Item::new)
       .model(subfolder("armor"))
       .register();
 
-  public static ItemEntry<Item> WILDWOOD_CHESTPLATE = REGISTRATE.item("wildwood_chestplate", Item::new)
+  public static final ItemEntry<Item> WILDWOOD_CHESTPLATE = REGISTRATE.item("wildwood_chestplate", Item::new)
       .model(subfolder("armor"))
       .register();
 
-  public static ItemEntry<Item> WILDWOOD_HELMET = REGISTRATE.item("wildwood_helmet", Item::new)
+  public static final ItemEntry<Item> WILDWOOD_HELMET = REGISTRATE.item("wildwood_helmet", Item::new)
       .model(subfolder("armor"))
       .register();
 
-  public static ItemEntry<Item> WILDWOOD_LEGGINGS = REGISTRATE.item("wildwood_leggings", Item::new)
+  public static final ItemEntry<Item> WILDWOOD_LEGGINGS = REGISTRATE.item("wildwood_leggings", Item::new)
       .model(subfolder("armor"))
       .register();
 
-  public static ItemEntry<FireStarterItem> FIRE_STARTER = REGISTRATE.item("fire_starter", FireStarterItem::new)
+  public static final ItemEntry<FireStarterItem> FIRE_STARTER = REGISTRATE.item("fire_starter", FireStarterItem::new)
       .properties(o -> o.stacksTo(1))
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> GRAMARY = REGISTRATE.item("gramary", Item::new)
+  public static final ItemEntry<Item> GRAMARY = REGISTRATE.item("gramary", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> LIVING_ARROW = REGISTRATE.item("living_arrow", Item::new)
+  public static final ItemEntry<Item> LIVING_ARROW = REGISTRATE.item("living_arrow", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> LIVING_AXE = REGISTRATE.item("living_axe", Item::new)
+  public static final ItemEntry<Item> LIVING_AXE = REGISTRATE.item("living_axe", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> LIVING_HOE = REGISTRATE.item("living_hoe", Item::new)
+  public static final ItemEntry<Item> LIVING_HOE = REGISTRATE.item("living_hoe", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> LIVING_PICKAXE = REGISTRATE.item("living_pickaxe", Item::new)
+  public static final ItemEntry<Item> LIVING_PICKAXE = REGISTRATE.item("living_pickaxe", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> LIVING_SHOVEL = REGISTRATE.item("living_shovel", Item::new)
+  public static final ItemEntry<Item> LIVING_SHOVEL = REGISTRATE.item("living_shovel", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> LIViNG_SWORD = REGISTRATE.item("living_sword", Item::new)
+  public static final ItemEntry<Item> LIViNG_SWORD = REGISTRATE.item("living_sword", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> PESTLE = REGISTRATE.item("pestle", Item::new)
+  public static final ItemEntry<Item> PESTLE = REGISTRATE.item("pestle", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> RUNED_AXE = REGISTRATE.item("runed_axe", Item::new)
+  public static final ItemEntry<Item> RUNED_AXE = REGISTRATE.item("runed_axe", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> RUNED_DAGGER = REGISTRATE.item("runed_dagger", Item::new)
+  public static final ItemEntry<Item> RUNED_DAGGER = REGISTRATE.item("runed_dagger", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> RUNED_HOE = REGISTRATE.item("runed_hoe", Item::new)
+  public static final ItemEntry<Item> RUNED_HOE = REGISTRATE.item("runed_hoe", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> RUNED_SHOVEL = REGISTRATE.item("runed_shovel", Item::new)
+  public static final ItemEntry<Item> RUNED_SHOVEL = REGISTRATE.item("runed_shovel", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> RUNED_SWORD = REGISTRATE.item("runed_sword", Item::new)
+  public static final ItemEntry<Item> RUNED_SWORD = REGISTRATE.item("runed_sword", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> RUNIC_SHEARS = REGISTRATE.item("runic_shears", Item::new)
+  public static final ItemEntry<Item> RUNIC_SHEARS = REGISTRATE.item("runic_shears", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> STAFF = REGISTRATE.item("staff", Item::new)
+  public static final ItemEntry<Item> STAFF = REGISTRATE.item("staff", Item::new)
       // TODO: CUSTOM MODEL
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> TERRASTONE_AXE = REGISTRATE.item("terrastone_axe", Item::new)
+  public static final ItemEntry<Item> TERRASTONE_AXE = REGISTRATE.item("terrastone_axe", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> TERRASTONE_HOE = REGISTRATE.item("terrastone_hoe", Item::new)
+  public static final ItemEntry<Item> TERRASTONE_HOE = REGISTRATE.item("terrastone_hoe", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> TERRASTONE_PICKAXE = REGISTRATE.item("terrastone_pickaxe", Item::new)
+  public static final ItemEntry<Item> TERRASTONE_PICKAXE = REGISTRATE.item("terrastone_pickaxe", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> TERRASTONE_SHOVEL = REGISTRATE.item("terrastone_shovel", Item::new)
+  public static final ItemEntry<Item> TERRASTONE_SHOVEL = REGISTRATE.item("terrastone_shovel", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> TERRASTONE_SWORD = REGISTRATE.item("terrastone_sword", Item::new)
+  public static final ItemEntry<Item> TERRASTONE_SWORD = REGISTRATE.item("terrastone_sword", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> WILDWOOD_BOW = REGISTRATE.item("wildwood_bow", Item::new)
+  public static final ItemEntry<Item> WILDWOOD_BOW = REGISTRATE.item("wildwood_bow", Item::new)
       // TODO: MODEL, ETC
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> WILDWOOD_QUIVER = REGISTRATE.item("wildwood_quiver", Item::new)
+  public static final ItemEntry<Item> WILDWOOD_QUIVER = REGISTRATE.item("wildwood_quiver", Item::new)
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<ShearsItem> WOODEN_SHEARS = REGISTRATE.item("wooden_shears", ShearsItem::new)
+  public static final ItemEntry<ShearsItem> WOODEN_SHEARS = REGISTRATE.item("wooden_shears", ShearsItem::new)
       .properties(o -> o.durability(120))
       .model(subfolder("tools"))
       .register();
 
-  public static ItemEntry<Item> RELIQUARY = REGISTRATE.item("reliquary", Item::new)
+  public static final ItemEntry<Item> RELIQUARY = REGISTRATE.item("reliquary", Item::new)
       .model(subfolder("containers"))
       .register();
 
-  public static ItemEntry<Item> SPIRIT_BAG = REGISTRATE.item("spirit_bag", Item::new)
+  public static final ItemEntry<Item> SPIRIT_BAG = REGISTRATE.item("spirit_bag", Item::new)
       .model(subfolder("containers"))
       .register();
 
-  public static ItemEntry<Item> FEY_LEATHER = REGISTRATE.item("fey_leather", Item::new)
+  public static final ItemEntry<Item> FEY_LEATHER = REGISTRATE.item("fey_leather", Item::new)
       .model(subfolder("resources"))
       .register();
 
-  public static ItemEntry<Item> GLASS_EYE = REGISTRATE.item("glass_eye", Item::new)
+  public static final ItemEntry<Item> GLASS_EYE = REGISTRATE.item("glass_eye", Item::new)
       .model(subfolder("resources"))
       .register();
 
-  public static ItemEntry<Item> LIFE_ESSENCE = REGISTRATE.item("life_essence", Item::new)
+  public static final ItemEntry<Item> LIFE_ESSENCE = REGISTRATE.item("life_essence", Item::new)
       .model(subfolder("resources"))
       .register();
 
-  public static ItemEntry<Item> MYSTIC_FEATHER = REGISTRATE.item("mystic_feather", Item::new)
+  public static final ItemEntry<Item> MYSTIC_FEATHER = REGISTRATE.item("mystic_feather", Item::new)
       .model(subfolder("resources"))
       .register();
 
-  public static ItemEntry<Item> PETALS = REGISTRATE.item("petals", Item::new)
+  public static final ItemEntry<Item> PETALS = REGISTRATE.item("petals", Item::new)
       .model(subfolder("resources"))
       .register();
 
-  public static ItemEntry<Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
+  public static final ItemEntry<Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
       .model(subfolder("resources"))
       .recipe((ctx, p) -> MortarRecipe.builder(ctx.getEntry(), 1, 1)
           .addIngredient(RootsTags.Items.Blocks.RUNESTONE)
           .build(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
       .register();
 
-  public static ItemEntry<Item> STRANGE_OOZE = REGISTRATE.item("strange_ooze", Item::new)
+  public static final ItemEntry<Item> STRANGE_OOZE = REGISTRATE.item("strange_ooze", Item::new)
       .model(subfolder("resources"))
       .register();
 

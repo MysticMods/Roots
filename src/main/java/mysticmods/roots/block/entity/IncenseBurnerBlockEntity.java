@@ -17,6 +17,8 @@ public class IncenseBurnerBlockEntity extends BaseBlockEntity {
 
   @Override
   public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+    super.onDataPacket(net, pkt);
 
   }
+
 }

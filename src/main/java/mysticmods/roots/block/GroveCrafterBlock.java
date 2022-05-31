@@ -1,14 +1,19 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
+import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
+import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-public class GroveCrafterBlock extends Block {
+public class GroveCrafterBlock extends Block implements EntityBlock {
   public GroveCrafterBlock(Properties builder) {
     super(builder);
   }
@@ -16,5 +21,11 @@ public class GroveCrafterBlock extends Block {
   @Override
   public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
     return Shapes.GROVE_CRAFTER;
+  }
+
+  @Nullable
+  @Override
+  public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    return new GroveCrafterBlockEntity(ModBlockEntities.GROVE_CRAFTER.get(), pPos, pState);
   }
 }

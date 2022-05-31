@@ -123,14 +123,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
   }
 
   @Override
-  public CompoundTag getUpdateTag() {
-    CompoundTag tag = super.getUpdateTag();
-    saveAdditional(tag);
-    return tag;
-  }
-
-  @Override
   public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+    super.onDataPacket(net, pkt);
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
       load(tag);

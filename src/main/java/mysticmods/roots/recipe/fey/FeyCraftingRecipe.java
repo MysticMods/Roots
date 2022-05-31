@@ -2,7 +2,7 @@ package mysticmods.roots.recipe.fey;
 
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
-import mysticmods.roots.block.entity.FeyCrafterBlockEntity;
+import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 
-public class FeyCraftingRecipe extends RootsTileRecipe<FeyCraftingInventory, FeyCrafterBlockEntity, FeyCrafting> {
+public class FeyCraftingRecipe extends RootsTileRecipe<FeyCraftingInventory, GroveCrafterBlockEntity, FeyCrafting> {
   public FeyCraftingRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
     super(ingredients, result, recipeId);
   }

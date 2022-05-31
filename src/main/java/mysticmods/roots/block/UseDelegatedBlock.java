@@ -23,8 +23,8 @@ public abstract class UseDelegatedBlock extends Block implements EntityBlock {
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
     BlockEntity be = level.getBlockEntity(pos);
-    if (be instanceof UseDelegatedBlockEntity) {
-      return ((UseDelegatedBlockEntity)be).use(state, level, pos, player, hand, ray);
+    if (be instanceof UseDelegatedBlockEntity ube) {
+      return ube.use(state, level, pos, player, hand, ray);
     }
 
     return super.use(state, level, pos, player, hand, ray);
