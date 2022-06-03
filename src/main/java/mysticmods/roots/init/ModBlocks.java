@@ -1058,26 +1058,23 @@ public class ModBlocks {
       })
       .register();
 
-  // TODO: Both catalyst plates require rotation
-  // or alternately improve model to not require
-  // any rotation.
   public static BlockEntry<RitualPedestalBlock> RITUAL_PEDESTAL = REGISTRATE.block("ritual_pedestal", Material.STONE, RitualPedestalBlock::new)
       .properties(BASE_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/ritual_pedestal"))
-      .tag(RootsTags.Blocks.PEDESTALS)
+      .tag(RootsTags.Blocks.PEDESTALS, RootsTags.Blocks.RITUAL_PEDESTALS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.PEDESTALS)
+      .tag(RootsTags.Items.Blocks.PEDESTALS, RootsTags.Items.Blocks.RITUAL_PEDESTALS)
       .build()
       .register();
 
   public static BlockEntry<RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = REGISTRATE.block("reinforced_ritual_pedestal", Material.STONE, RitualPedestalBlock::new)
       .properties(BASE_REINFORCED_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_ritual_pedestal"))
-      .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PEDESTALS)
+      .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PEDESTALS, RootsTags.Blocks.RITUAL_PEDESTALS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
-      .tag(RootsTags.Items.Blocks.PEDESTALS)
+      .tag(RootsTags.Items.Blocks.PEDESTALS, RootsTags.Items.Blocks.RITUAL_PEDESTALS)
       .build()
       .register();
 
@@ -1094,8 +1091,10 @@ public class ModBlocks {
   public static BlockEntry<GrovePedestalBlock> GROVE_PEDESTAL = REGISTRATE.block("grove_pedestal", Material.WOOD, GrovePedestalBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_pedestal"))
+      .tag(RootsTags.Blocks.PEDESTALS, RootsTags.Blocks.GROVE_PEDESTALS)
       .item()
       .model(ItemModelGenerator::complexItemModel)
+      .tag(RootsTags.Items.Blocks.PEDESTALS, RootsTags.Items.Blocks.GROVE_PEDESTALS)
       .build()
       .register();
 

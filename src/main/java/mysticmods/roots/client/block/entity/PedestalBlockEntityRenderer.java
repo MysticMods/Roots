@@ -3,7 +3,9 @@ package mysticmods.roots.client.block.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
+import mysticmods.roots.block.PedestalBlock;
 import mysticmods.roots.block.entity.PedestalBlockEntity;
+import mysticmods.roots.init.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -12,6 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import noobanidus.libs.particleslib.client.events.RenderTickHandler;
 
@@ -31,10 +34,19 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       double pX = 0;
       double pY = 0;
       double pZ = 0;
-      float pRed = 1f;
-      float pGreen = 0f;
-      float pBlue = 1f;
+      float pRed, pGreen;
+      float pBlue = 0f;
       float pAlpha = 1f;
+
+      BlockState state = pBlockEntity.getBlockState();
+
+      if (state.hasProperty(PedestalBlock.VALIDATED) && state.getValue(PedestalBlock.VALIDATED)) {
+        pRed = 0f;
+        pGreen = 1f;
+      } else {
+        pRed = 1f;
+        pGreen = 0f;
+      }
 
       pShape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
         float f = (float) (pMaxX - pMinX);

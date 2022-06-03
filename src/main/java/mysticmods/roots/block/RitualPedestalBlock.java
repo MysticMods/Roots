@@ -14,7 +14,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class RitualPedestalBlock extends UseDelegatedBlock {
+public class RitualPedestalBlock extends PedestalBlock {
   public RitualPedestalBlock(Properties builder) {
     super(builder);
   }
@@ -22,19 +22,5 @@ public class RitualPedestalBlock extends UseDelegatedBlock {
   @Override
   public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
     return Shapes.RITUAL_PEDESTAL;
-  }
-
-  @Nullable
-  @Override
-  public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-    return new PedestalBlockEntity(ModBlockEntities.PEDESTAL.get(), pPos, pState);
-  }
-
-  @Override
-  public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-    if (pState.hasBlockEntity() && (!pState.is(pNewState.getBlock()) || !pNewState.hasBlockEntity()) && pLevel.getBlockEntity(pPos) instanceof InventoryBlockEntity ibe) {
-      Containers.dropContents(pLevel, pPos, ibe.getItems());
-    }
-    super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
   }
 }

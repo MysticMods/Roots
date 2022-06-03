@@ -1,6 +1,7 @@
 package mysticmods.roots.block.entity;
 
 import mysticmods.roots.api.InventoryBlockEntity;
+import mysticmods.roots.block.PedestalBlock;
 import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -20,26 +21,22 @@ import net.minecraftforge.items.ItemStackHandler;
 import noobanidus.libs.noobutil.util.ItemUtil;
 
 public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
-  private BlockPos associated = null;
   private final ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
       if (PedestalBlockEntity.this.hasLevel() && !PedestalBlockEntity.this.getLevel().isClientSide()) {
-        PedestalBlockEntity.this.updateViaState();
+        PedestalBlockEntity.this.setChanged();
+        Level level = PedestalBlockEntity.this.getLevel();
+        BlockPos pos = PedestalBlockEntity.this.getBlockPos();
+        BlockState newState = PedestalBlockEntity.this.getBlockState().setValue(PedestalBlock.VALIDATED, false);
+        level.setBlock(pos, newState, 8);
+        level.sendBlockUpdated(pos, newState, newState, 8);
       }
     }
   };
 
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
-  }
-
-  public BlockPos getAssociated() {
-    return associated;
-  }
-
-  public void setAssociated(BlockPos associated) {
-    this.associated = associated;
   }
 
   @Override

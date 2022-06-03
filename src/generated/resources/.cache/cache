@@ -9,7 +9,7 @@ b79f1e14268055d86c1cc436152f6c10d4c8105e assets/roots/blockstates/cloud_berry_cr
 d2e17b4be37b73597201a07f70b64db8c58a15a5 assets/roots/blockstates/elemental_soil.json
 ff7d581d88718727ee81558a2eeff80b62837c2b assets/roots/blockstates/fey_light.json
 abac7da7401c992ec124b484cf51046631936297 assets/roots/blockstates/grove_crafter.json
-3edc546e0392fe0472540a1f31e6d487f8ec4312 assets/roots/blockstates/grove_pedestal.json
+64e37c6fbe6ae23b9b81d683a68b8e196add3697 assets/roots/blockstates/grove_pedestal.json
 36f5484d5ebe9b0262098640893f4a9ca5bd5501 assets/roots/blockstates/incense_burner.json
 ab83667a1cd0d2f0bbe6b354a9bb0b1361b6338c assets/roots/blockstates/infernal_bulb_crop.json
 488bb8dd26a36e686fb09b2157beb5156a361b62 assets/roots/blockstates/magmatic_soil.json
@@ -19,8 +19,8 @@ a84bb3889f0852bfab1036c38186e52eaa42ab59 assets/roots/blockstates/pereskia_crop.
 8ddec833b391ef12431b30ca968cc13b457ecdfd assets/roots/blockstates/primal_grove_stone.json
 991a9e6c2883a9eb135e850e59b62ca53b714e82 assets/roots/blockstates/pyre.json
 05d79e2bfdfaaab324f3514a1346b0b45b7ffa49 assets/roots/blockstates/reinforced_pyre.json
-cd0b2cbf4417fa633fb0fd8d3fcccff370fa3342 assets/roots/blockstates/reinforced_ritual_pedestal.json
-74ae501e6cffed9de466dcea630bbac62290020d assets/roots/blockstates/ritual_pedestal.json
+61832933ca80a56d1b7517e2272b2842884b3e31 assets/roots/blockstates/reinforced_ritual_pedestal.json
+38f4e618d782015633a329ee3edffdb799b37d10 assets/roots/blockstates/ritual_pedestal.json
 bc3956111538ff86ee93fb6a5a6533e71b113cf5 assets/roots/blockstates/runed_acacia_log.json
 16b1a9526a7dcfba9dbb2d90dc0acfe74b010299 assets/roots/blockstates/runed_birch_log.json
 bac6f65da42157f76ecbcedffd8d51a9a7e7a401 assets/roots/blockstates/runed_brick_alt_button.json
@@ -983,7 +983,9 @@ e031af98b1de5756dc2bc3be9a5502aafbd17836 data/roots/tags/blocks/logs/runed/warpe
 5e545888a9803eaee876c2ed1c0855e51cbaacc8 data/roots/tags/blocks/logs/runed/wildwood.json
 d3f31134d833ab32914d12bc8d9ed4df0a03afeb data/roots/tags/blocks/logs/wildwood.json
 2afc9c16418dd6f3d26cc231c9ed8cbab61e1ff9 data/roots/tags/blocks/mortars.json
-1e58c7f4bc12d699d98ec7b4a42427045215b9bf data/roots/tags/blocks/pedestals.json
+faf860912682748231d5da88de7f32869fdd866b data/roots/tags/blocks/pedestals.json
+1af6ab60f4c7bf1e01b35638d0c90987de9ca492 data/roots/tags/blocks/pedestals/grove.json
+8f898dcabd6ae5550d333e67cc011adf4a8ebc94 data/roots/tags/blocks/pedestals/ritual.json
 70d8cdcbebab77a1eb2208326a69eb6aca41c043 data/roots/tags/blocks/pyres.json
 2e317ad6ec906d1e05c3eb1046bf313b7289cbec data/roots/tags/blocks/runed_obsidian.json
 7935f6287ed8b1f05629c5d70a9f8b650343fa27 data/roots/tags/blocks/soils.json
@@ -1031,7 +1033,9 @@ e031af98b1de5756dc2bc3be9a5502aafbd17836 data/roots/tags/items/logs/runed/warped
 5e545888a9803eaee876c2ed1c0855e51cbaacc8 data/roots/tags/items/logs/runed/wildwood.json
 d3f31134d833ab32914d12bc8d9ed4df0a03afeb data/roots/tags/items/logs/wildwood.json
 2afc9c16418dd6f3d26cc231c9ed8cbab61e1ff9 data/roots/tags/items/mortars.json
-1e58c7f4bc12d699d98ec7b4a42427045215b9bf data/roots/tags/items/pedestals.json
+faf860912682748231d5da88de7f32869fdd866b data/roots/tags/items/pedestals.json
+1af6ab60f4c7bf1e01b35638d0c90987de9ca492 data/roots/tags/items/pedestals/grove.json
+8f898dcabd6ae5550d333e67cc011adf4a8ebc94 data/roots/tags/items/pedestals/ritual.json
 70d8cdcbebab77a1eb2208326a69eb6aca41c043 data/roots/tags/items/pyres.json
 2e317ad6ec906d1e05c3eb1046bf313b7289cbec data/roots/tags/items/runed_obsidian.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/roots/tags/items/runestone.json

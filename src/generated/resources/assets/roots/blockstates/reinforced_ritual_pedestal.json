@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "validated=false": {
+      "model": "roots:block/complex/reinforced_ritual_pedestal"
+    },
+    "validated=true": {
       "model": "roots:block/complex/reinforced_ritual_pedestal"
     }
   }

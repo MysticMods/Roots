@@ -1,18 +1,18 @@
 package mysticmods.roots.block.entity.template;
 
 import mysticmods.roots.api.BoundedBlockEntity;
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.ClientTickBlockEntity;
+import mysticmods.roots.api.ServerTickBlockEntity;
 import mysticmods.roots.event.forge.BlockHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.phys.AABB;
 import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
 import noobanidus.libs.noobutil.util.BlockEntityUtil;
 
@@ -99,5 +99,17 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
       boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX() + 1, getRadiusY() + 1, getRadiusZ() + 1).move(getBlockPos());
     }
     return boundingBox;
+  }
+
+  public static <T extends BlockEntity> void clientTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
+    if (pBlockEntity instanceof ClientTickBlockEntity clientBlockEntity) {
+      clientBlockEntity.clientTick(pLevel, pPos, pState);
+    }
+  }
+
+  public static <T extends BlockEntity> void serverTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
+    if (pBlockEntity instanceof ServerTickBlockEntity serverBlockEntity) {
+      serverBlockEntity.serverTick(pLevel, pPos, pState);
+    }
   }
 }
