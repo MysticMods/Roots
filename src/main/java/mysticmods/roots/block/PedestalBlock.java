@@ -8,18 +8,17 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PedestalBlock extends UseDelegatedBlock {
-  public static final BooleanProperty VALIDATED = BooleanProperty.create("validated");
+  public static final BooleanProperty VALID = BooleanProperty.create("valid");
 
   public PedestalBlock(Properties p_49795_) {
     super(p_49795_);
-    registerDefaultState(defaultBlockState().setValue(VALIDATED, false));
+    registerDefaultState(defaultBlockState().setValue(VALID, false));
   }
 
   @Nullable
@@ -39,6 +38,6 @@ public abstract class PedestalBlock extends UseDelegatedBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(VALIDATED);
+    pBuilder.add(VALID);
   }
 }

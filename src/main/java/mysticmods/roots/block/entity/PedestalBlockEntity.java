@@ -28,7 +28,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
         PedestalBlockEntity.this.setChanged();
         Level level = PedestalBlockEntity.this.getLevel();
         BlockPos pos = PedestalBlockEntity.this.getBlockPos();
-        BlockState newState = PedestalBlockEntity.this.getBlockState().setValue(PedestalBlock.VALIDATED, false);
+        BlockState newState = PedestalBlockEntity.this.getBlockState().setValue(PedestalBlock.VALID, false);
         level.setBlock(pos, newState, 8);
         level.sendBlockUpdated(pos, newState, newState, 8);
       }

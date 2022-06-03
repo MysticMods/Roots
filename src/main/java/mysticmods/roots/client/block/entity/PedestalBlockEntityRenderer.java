@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import mysticmods.roots.block.PedestalBlock;
 import mysticmods.roots.block.entity.PedestalBlockEntity;
-import mysticmods.roots.init.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -40,7 +39,7 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
 
       BlockState state = pBlockEntity.getBlockState();
 
-      if (state.hasProperty(PedestalBlock.VALIDATED) && state.getValue(PedestalBlock.VALIDATED)) {
+      if (state.hasProperty(PedestalBlock.VALID) && state.getValue(PedestalBlock.VALID)) {
         pRed = 0f;
         pGreen = 1f;
         pBlue = 0f;
