@@ -1,8 +1,8 @@
-package mysticmods.roots.recipe.fey;
+package mysticmods.roots.recipe.pyre;
 
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
-import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
+import mysticmods.roots.block.entity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
@@ -13,34 +13,34 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 
-public class FeyCraftingRecipe extends RootsTileRecipe<FeyCraftingInventory, GroveCrafterBlockEntity, FeyCrafting> {
-  public FeyCraftingRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
+public class PyreRitual extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
+  public PyreRitual(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
     super(ingredients, result, recipeId);
   }
 
   @Override
-  public boolean matches(FeyCrafting pInv, Level pLevel) {
+  public boolean matches(PyreCrafting pInv, Level pLevel) {
     return false;
   }
 
   @Override
-  public ItemStack assemble(FeyCrafting pContainer) {
+  public ItemStack assemble(PyreCrafting pContainer) {
     return result.copy();
   }
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModRecipes.Serializers.FEY_CRAFTING.get();
+    return ModRecipes.Serializers.PYRE.get();
   }
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.FEY_CRAFTING;
+    return ModRecipes.Types.PYRE;
   }
 
-  public static class Serializer extends RootsRecipe.Serializer<FeyCraftingInventory, FeyCrafting, FeyCraftingRecipe> {
+  public static class Serializer extends RootsRecipe.Serializer<PyreInventory, PyreCrafting, PyreRitual> {
     public Serializer() {
-      super(FeyCraftingRecipe::new);
+      super(PyreRitual::new);
     }
   }
 
@@ -51,7 +51,7 @@ public class FeyCraftingRecipe extends RootsTileRecipe<FeyCraftingInventory, Gro
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-      return ModRecipes.Serializers.FEY_CRAFTING.get();
+      return ModRecipes.Serializers.PYRE.get();
     }
   }
 

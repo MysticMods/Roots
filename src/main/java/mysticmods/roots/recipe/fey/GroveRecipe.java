@@ -1,10 +1,9 @@
-package mysticmods.roots.recipe.pyre.crafting;
+package mysticmods.roots.recipe.fey;
 
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
-import mysticmods.roots.block.entity.PyreBlockEntity;
+import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
 import mysticmods.roots.init.ModRecipes;
-import mysticmods.roots.recipe.pyre.PyreInventory;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -14,34 +13,34 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 
-public class RitualCraftingRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, RitualCrafting> {
-  public RitualCraftingRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
+public class GroveRecipe extends RootsTileRecipe<GroveCrafterInventory, GroveCrafterBlockEntity, GroveCrafting> {
+  public GroveRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
     super(ingredients, result, recipeId);
   }
 
   @Override
-  public boolean matches(RitualCrafting pInv, Level pLevel) {
+  public boolean matches(GroveCrafting pInv, Level pLevel) {
     return false;
   }
 
   @Override
-  public ItemStack assemble(RitualCrafting pContainer) {
+  public ItemStack assemble(GroveCrafting pContainer) {
     return result.copy();
   }
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModRecipes.Serializers.RITUAL_CRAFTING.get();
+    return ModRecipes.Serializers.GROVE_CRAFTING.get();
   }
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.RITUAL_CRAFTING;
+    return ModRecipes.Types.GROVE;
   }
 
-  public static class Serializer extends RootsRecipe.Serializer<PyreInventory, RitualCrafting, RitualCraftingRecipe> {
+  public static class Serializer extends RootsRecipe.Serializer<GroveCrafterInventory, GroveCrafting, GroveRecipe> {
     public Serializer() {
-      super(RitualCraftingRecipe::new);
+      super(GroveRecipe::new);
     }
   }
 
@@ -52,7 +51,7 @@ public class RitualCraftingRecipe extends RootsTileRecipe<PyreInventory, PyreBlo
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-      return ModRecipes.Serializers.RITUAL_CRAFTING.get();
+      return ModRecipes.Serializers.GROVE_CRAFTING.get();
     }
   }
 

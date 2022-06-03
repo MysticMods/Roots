@@ -6,8 +6,10 @@ import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
 
-public class FeyCrafting extends RootsTileCrafting<FeyCraftingInventory, GroveCrafterBlockEntity> {
-  public FeyCrafting(FeyCraftingInventory handler, GroveCrafterBlockEntity blockEntity, @Nullable Player player) {
+// TODO: Pedestal access
+
+public class GroveCrafting extends RootsTileCrafting<GroveCrafterInventory, GroveCrafterBlockEntity> {
+  public GroveCrafting(GroveCrafterInventory handler, GroveCrafterBlockEntity blockEntity, @Nullable Player player) {
     super(handler, blockEntity, player);
   }
 }
