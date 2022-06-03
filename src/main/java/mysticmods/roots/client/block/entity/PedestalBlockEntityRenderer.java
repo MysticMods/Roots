@@ -25,6 +25,7 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
   // TODO: Render more when there's more
   @Override
   public void render(PedestalBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+    ItemStack inSlot = pBlockEntity.getHeldItem();
     if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
       pPoseStack.pushPose();
       VoxelShape pShape = pBlockEntity.getBlockState().getCollisionShape(pBlockEntity.getLevel(), pBlockEntity.getBlockPos());
@@ -34,8 +35,7 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       double pX = 0;
       double pY = 0;
       double pZ = 0;
-      float pRed, pGreen;
-      float pBlue = 0f;
+      float pRed, pGreen, pBlue;
       float pAlpha = 1f;
 
       BlockState state = pBlockEntity.getBlockState();
@@ -43,9 +43,15 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       if (state.hasProperty(PedestalBlock.VALIDATED) && state.getValue(PedestalBlock.VALIDATED)) {
         pRed = 0f;
         pGreen = 1f;
+        pBlue = 0f;
+      } else if (inSlot.isEmpty()) {
+        pRed = 1f;
+        pBlue = 1f;
+        pGreen = 0f;
       } else {
         pRed = 1f;
         pGreen = 0f;
+        pBlue = 0f;
       }
 
       pShape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
@@ -61,7 +67,6 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       });
       pPoseStack.popPose();
     }
-    ItemStack inSlot = pBlockEntity.getHeldItem();
 
     if (!inSlot.isEmpty()) {
       int loc = (int) pBlockEntity.getBlockPos().asLong();
