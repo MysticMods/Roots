@@ -2,11 +2,9 @@ package mysticmods.roots.event.forge;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import it.unimi.dsi.fastutil.objects.ObjectOpenCustomHashSet;
 import mysticmods.roots.api.RootsAPI;
-import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -23,61 +21,85 @@ public class BlockHandler {
   @SubscribeEvent
   public static void onBlockNeighbor(BlockEvent.NeighborNotifyEvent event) {
     if (event.getWorld() instanceof ServerLevel level) {
+      MinecraftServer server = level.getServer();
+      if (!server.isSameThread()) {
+        return;
+      }
       ResourceKey<Level> dimension = level.dimension();
-/*      synchronized (bounds) {*/
-        Object2BooleanMap<BoundingBox> boxes = bounds.get(dimension);
-        if (boxes != null) {
-          Set<BoundingBox> toMark = new HashSet<>();
-          for (BoundingBox box : boxes.keySet()) {
-            if (box.isInside(event.getPos())) {
-              toMark.add(box);
-            }
-          }
-          for (BoundingBox marked : toMark) {
-            boxes.put(marked, false);
+      Object2BooleanMap<BoundingBox> boxes = bounds.get(dimension);
+      if (boxes != null) {
+        Set<BoundingBox> toMark = new HashSet<>();
+        for (BoundingBox box : boxes.keySet()) {
+          if (box.isInside(event.getPos())) {
+            toMark.add(box);
           }
         }
-/*      }*/
+        for (BoundingBox marked : toMark) {
+          boxes.put(marked, false);
+        }
+      }
     }
   }
 
-  public static boolean isDirty(ResourceKey<Level> dimension, BoundingBox box) {
-/*    synchronized (bounds) {*/
-      Object2BooleanMap<BoundingBox> boxes = bounds.get(dimension);
-      if (boxes != null) {
-        return boxes.getBoolean(box);
-      }
-/*    }*/
+  public static boolean isDirty(Level level, BoundingBox box) {
+    if (level == null || level.isClientSide()) {
+      return false;
+    }
+
+    MinecraftServer server = level.getServer();
+    if (server == null || !server.isSameThread()) {
+      return false;
+    }
+    Object2BooleanMap<BoundingBox> boxes = bounds.get(level.dimension());
+    if (boxes != null) {
+      return boxes.getBoolean(box);
+    }
 
     return false;
   }
 
-  public static void clean (ResourceKey<Level> dimension, BoundingBox box) {
-/*    synchronized (bounds) {*/
-      Object2BooleanMap<BoundingBox> boxes = bounds.get(dimension);
-      if (boxes != null) {
-        boxes.put(box, true);
-      }
-/*    }*/
+  public static void clean(Level level, BoundingBox box) {
+    if (level == null || level.isClientSide()) {
+      return;
+    }
+
+    MinecraftServer server = level.getServer();
+    if (server == null || server.isSameThread()) {
+      return;
+    }
+
+    Object2BooleanMap<BoundingBox> boxes = bounds.get(level.dimension());
+    if (boxes != null) {
+      boxes.put(box, true);
+    }
   }
 
-  public static void register (ResourceKey<Level> dimension, BoundingBox box) {
-/*    synchronized (bounds) {*/
-      Object2BooleanMap<BoundingBox> boxes = bounds.computeIfAbsent(dimension, (k) -> new Object2BooleanLinkedOpenHashMap<>());
-      boxes.put(box, false);
-/*    }*/
-
+  public static void register(Level level, BoundingBox box) {
+    if (level == null || level.isClientSide()) {
+      return;
+    }
+    MinecraftServer server = level.getServer();
+    if (server != null && !server.isSameThread()) {
+      return;
+    }
+    Object2BooleanMap<BoundingBox> boxes = bounds.computeIfAbsent(level.dimension(), (k) -> new Object2BooleanLinkedOpenHashMap<>());
+    boxes.put(box, false);
   }
 
-  public static void unregister (ResourceKey<Level> dimension, BoundingBox box) {
-/*    synchronized (bounds) {*/
-      Object2BooleanMap<BoundingBox> boxes = bounds.get(dimension);
-      if (boxes != null) {
-        boxes.removeBoolean(box);
-        if (boxes.isEmpty()) {
-          bounds.remove(dimension);
-        }
+  public static void unregister(Level level, BoundingBox box) {
+    if (level == null || level.isClientSide()) {
+      return;
+    }
+    MinecraftServer server = level.getServer();
+    if (server != null && !server.isSameThread()) {
+      return;
+    }
+    Object2BooleanMap<BoundingBox> boxes = bounds.get(level.dimension());
+    if (boxes != null) {
+      boxes.removeBoolean(box);
+      if (boxes.isEmpty()) {
+        bounds.remove(level.dimension());
       }
-/*    }*/
+    }
   }
 }

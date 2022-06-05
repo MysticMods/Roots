@@ -9,7 +9,7 @@ import net.minecraftforge.items.IItemHandler;
 import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
 
 public abstract class RootsTileRecipe<H extends IItemHandler, T extends BlockEntity & IReferentialBlockEntity, W extends IRootsTileCrafting<H, T>> extends RootsRecipe<H, W> {
-  public RootsTileRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
-    super(ingredients, result, recipeId);
+  public RootsTileRecipe(ResourceLocation recipeId) {
+    super(recipeId);
   }
 }

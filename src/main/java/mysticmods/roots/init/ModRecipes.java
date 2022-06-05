@@ -3,9 +3,9 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.recipe.chrysopoeia.ChrysopoeiaRecipe;
-import mysticmods.roots.recipe.fey.GroveRecipe;
+import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
-import mysticmods.roots.recipe.pyre.PyreRitual;
+import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +22,7 @@ public class ModRecipes {
     public static final RegistryEntry<GroveRecipe.Serializer> GROVE_CRAFTING = REGISTRATE.simple("grove", RecipeSerializer.class, GroveRecipe.Serializer::new);
     public static final RegistryEntry<MortarRecipe.Serializer> MORTAR = REGISTRATE.simple("mortar", RecipeSerializer.class, MortarRecipe.Serializer::new);
     public static final RegistryEntry<SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = REGISTRATE.simple("summon_creatures", RecipeSerializer.class, SummonCreaturesRecipe.Serializer::new);
-    public static final RegistryEntry<PyreRitual.Serializer> PYRE = REGISTRATE.simple("pyre", RecipeSerializer.class, PyreRitual.Serializer::new);
+    public static final RegistryEntry<PyreRecipe.Serializer> PYRE = REGISTRATE.simple("pyre", RecipeSerializer.class, PyreRecipe.Serializer::new);
 
     public static void load () {
     }
@@ -33,7 +33,7 @@ public class ModRecipes {
     public static RecipeType<GroveRecipe> GROVE;
     public static RecipeType<MortarRecipe> MORTAR;
     public static RecipeType<SummonCreaturesRecipe> SUMMON_CREATURES;
-    public static RecipeType<PyreRitual> PYRE;
+    public static RecipeType<PyreRecipe> PYRE;
 
     public static void register() {
       CHRYSOPOEIA = register(new ResourceLocation(RootsAPI.MODID, "chrysopoeia"));

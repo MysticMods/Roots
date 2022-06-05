@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+// TODO: However this is going to work
 public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCrafting>, net.minecraft.world.item.crafting.Recipe<SummonCreaturesCrafting> {
   protected final NonNullList<Ingredient> ingredients;
   protected final EntityType<?> result;

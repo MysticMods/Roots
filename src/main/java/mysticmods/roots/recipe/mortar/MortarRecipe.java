@@ -33,12 +33,10 @@ import java.util.function.Consumer;
 
 // TODO: Conditional outputs
 public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEntity, MortarCrafting> {
-  private final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
   private int times;
-  private final List<Grant> grants = new ArrayList<>();
 
-  public MortarRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
-    super(ingredients, result, recipeId);
+  public MortarRecipe(ResourceLocation recipeId) {
+    super(recipeId);
   }
 
   public int getTimes() {
@@ -49,29 +47,6 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     this.times = times;
   }
 
-  public void addConditionalOutput(ConditionalOutput output) {
-    conditionalOutputs.add(output);
-  }
-
-  public void addConditionalOutputs(Collection<ConditionalOutput> outputs) {
-    conditionalOutputs.addAll(outputs);
-  }
-
-  public void addGrant (Grant grant) {
-    grants.add(grant);
-  }
-
-  public void addGrants (Collection<Grant> grants) {
-    this.grants.addAll(grants);
-  }
-
-  public List<ConditionalOutput> getConditionalOutputs() {
-    return conditionalOutputs;
-  }
-
-  public List<Grant> getGrants() {
-    return grants;
-  }
 
   @Override
   public boolean matches(MortarCrafting pInv, Level pLevel) {
@@ -85,18 +60,6 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     }
 
     return RecipeMatcher.findMatches(inputs, ingredients) != null;
-  }
-
-  @Override
-  public ItemStack assemble(MortarCrafting pInv) {
-    Player player = pInv.getPlayer();
-    if (player != null && player.level.isClientSide()) {
-      for (Grant grant : getGrants()) {
-        grant.accept((ServerPlayer) player);
-      }
-    }
-
-    return result.copy();
   }
 
   @Override
@@ -118,70 +81,28 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     protected void fromJsonAdditional(MortarRecipe recipe, ResourceLocation pRecipeId, JsonObject pJson) {
       super.fromJsonAdditional(recipe, pRecipeId, pJson);
       recipe.setTimes(pJson.get("times").getAsInt());
-      if (GsonHelper.isArrayNode(pJson, "conditional_outputs")) {
-        List<ConditionalOutput> outputs = new ArrayList<>();
-        JsonArray conditionalOutputs = GsonHelper.getAsJsonArray(pJson, "conditional_outputs");
-        for (int i = 0; i < conditionalOutputs.size(); i++) {
-          if (conditionalOutputs.get(i).isJsonObject()) {
-            outputs.add(ConditionalOutput.fromJson(conditionalOutputs.get(i)));
-          } else {
-            throw new JsonSyntaxException("Invalid conditional output: " + conditionalOutputs.get(i));
-          }
-        }
-        recipe.addConditionalOutputs(outputs);
-      }
-      if (GsonHelper.isArrayNode(pJson, "grants")) {
-        List<Grant> grants = new ArrayList<>();
-        JsonArray thisGrants = GsonHelper.getAsJsonArray(pJson, "grants");
-        for (int i = 0; i < thisGrants.size(); i++) {
-          if (thisGrants.get(i).isJsonObject()) {
-            grants.add(Grant.fromJson(thisGrants.get(i)));
-          } else {
-            throw new JsonSyntaxException("Invalid grant: " + thisGrants.get(i));
-          }
-        }
-        recipe.addGrants(grants);
-      }
+
     }
 
     @Override
     protected void fromNetworkAdditional(MortarRecipe recipe, ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
       super.fromNetworkAdditional(recipe, pRecipeId, pBuffer);
       recipe.setTimes(pBuffer.readVarInt());
-      int count = pBuffer.readVarInt();
-      for (int i = 0; i < count; i++) {
-        recipe.addConditionalOutput(ConditionalOutput.fromNetwork(pBuffer));
-      }
-      count = pBuffer.readVarInt();
-      for (int i = 0; i < count; i++) {
-        recipe.addGrant(Grant.fromNetwork(pBuffer));
-      }
+
     }
 
     @Override
     protected void toNetworkAdditional(MortarRecipe recipe, FriendlyByteBuf pBuffer) {
       super.toNetworkAdditional(recipe, pBuffer);
       pBuffer.writeVarInt(recipe.getTimes());
-      List<ConditionalOutput> conditionalOutputs = recipe.getConditionalOutputs();
-      pBuffer.writeVarInt(conditionalOutputs.size());
-      for (ConditionalOutput output : conditionalOutputs) {
-        output.toNetwork(pBuffer);
-      }
-      List<Grant> grants = recipe.getGrants();
-      pBuffer.writeVarInt(grants.size());
-      for (Grant grant : grants) {
-        grant.toNetwork(pBuffer);
-      }
     }
   }
 
   public static class Builder extends RootsRecipe.Builder {
-    private final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
-    private final List<Grant> grants = new ArrayList<>();
     private final int times;
 
-    protected Builder(ItemLike item, int count, int times) {
-      super(item, count);
+    protected Builder(ItemStack result, int times) {
+      super(result);
       this.times = times;
     }
 
@@ -199,7 +120,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
     @Override
     public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new Result(recipeName, result, count, ingredients, getSerializer(), times, conditionalOutputs, grants));
+      consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, getSerializer(), times));
     }
 
     @Override
@@ -208,40 +129,22 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     }
 
     public static class Result extends RootsRecipe.Builder.Result {
-      private final List<ConditionalOutput> conditionalOutputs;
-      private final List<Grant> grants;
       private final int times;
 
-      public Result(ResourceLocation id, Item result, int count, List<Ingredient> ingredients, RecipeSerializer<?> serializer, int times, List<ConditionalOutput> conditionalOutputs, List<Grant> grants) {
-        super(id, result, count, ingredients, serializer);
+      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, RecipeSerializer<?> serializer, int times) {
+        super(id, result, ingredients, conditionalOutputs, grants, serializer);
         this.times = times;
-        this.conditionalOutputs = conditionalOutputs;
-        this.grants = grants;
       }
 
       @Override
       public void serializeRecipeData(JsonObject json) {
         super.serializeRecipeData(json);
         json.addProperty("times", times);
-        if (!conditionalOutputs.isEmpty()) {
-          JsonArray outputs = new JsonArray();
-          for (ConditionalOutput output : conditionalOutputs) {
-            outputs.add(output.toJson());
-          }
-          json.add("conditional_outputs", outputs);
-        }
-        if (!grants.isEmpty()) {
-          JsonArray grants = new JsonArray();
-          for (Grant grant : this.grants) {
-            grants.add(grant.toJson());
-          }
-          json.add("grants", grants);
-        }
       }
     }
   }
 
   public static Builder builder(ItemLike item, int count, int times) {
-    return new Builder(item, count, times);
+    return new Builder(new ItemStack(item, count), times);
   }
 }

@@ -1,4 +1,4 @@
-package mysticmods.roots.recipe.fey;
+package mysticmods.roots.recipe.grove;
 
 import net.minecraftforge.items.ItemStackHandler;
 

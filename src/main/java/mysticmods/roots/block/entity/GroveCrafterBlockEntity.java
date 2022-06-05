@@ -4,6 +4,7 @@ import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.DualTickBlockEntity;
 import mysticmods.roots.block.PedestalBlock;
 import mysticmods.roots.block.entity.template.BaseBlockEntity;
+import mysticmods.roots.event.forge.BlockHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -37,19 +38,28 @@ public class GroveCrafterBlockEntity extends BaseBlockEntity implements DualTick
   }
 
   @Override
-  public void dualTick(Level pLevel, BlockPos pPos, BlockState pState, boolean isClient) {
+  public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (isBounded()) {
       // TODO: Caching?!?!
-      BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
-        BlockState state = pLevel.getBlockState(pos);
-        if (state.is(RootsTags.Blocks.GROVE_PEDESTALS) && !state.getValue(PedestalBlock.VALID)) {
-          if (pLevel.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
-            if (!pedestal.getHeldItem().isEmpty()) {
-              pLevel.setBlock(pos, state.setValue(PedestalBlock.VALID, true), 8);
+      if (BlockHandler.isDirty(level, getBoundingBox())) {
+        BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
+          BlockState state = pLevel.getBlockState(pos);
+          if (state.is(RootsTags.Blocks.GROVE_PEDESTALS) && !state.getValue(PedestalBlock.VALID)) {
+            if (pLevel.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
+              if (!pedestal.getHeldItem().isEmpty()) {
+                pLevel.setBlock(pos, state.setValue(PedestalBlock.VALID, true), 8);
+              }
             }
           }
-        }
-      });
+        });
+
+        BlockHandler.clean(level, getBoundingBox());
+      }
     }
+  }
+
+  @Override
+  public void dualTick(Level pLevel, BlockPos pPos, BlockState pState, boolean isClient) {
+
   }
 }

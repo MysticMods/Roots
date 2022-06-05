@@ -1,8 +1,8 @@
-package mysticmods.roots.recipe.fey;
+package mysticmods.roots.recipe.pyre;
 
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
-import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
+import mysticmods.roots.block.entity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
@@ -13,49 +13,49 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 
-public class GroveRecipe extends RootsTileRecipe<GroveCrafterInventory, GroveCrafterBlockEntity, GroveCrafting> {
-  public GroveRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation recipeId) {
-    super(ingredients, result, recipeId);
+public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
+  public PyreRecipe(ResourceLocation recipeId) {
+    super(recipeId);
   }
 
   @Override
-  public boolean matches(GroveCrafting pInv, Level pLevel) {
+  public boolean matches(PyreCrafting pInv, Level pLevel) {
     return false;
   }
 
   @Override
-  public ItemStack assemble(GroveCrafting pContainer) {
+  public ItemStack assemble(PyreCrafting pContainer) {
     return result.copy();
   }
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModRecipes.Serializers.GROVE_CRAFTING.get();
+    return ModRecipes.Serializers.PYRE.get();
   }
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.GROVE;
+    return ModRecipes.Types.PYRE;
   }
 
-  public static class Serializer extends RootsRecipe.Serializer<GroveCrafterInventory, GroveCrafting, GroveRecipe> {
+  public static class Serializer extends RootsRecipe.Serializer<PyreInventory, PyreCrafting, PyreRecipe> {
     public Serializer() {
-      super(GroveRecipe::new);
+      super(PyreRecipe::new);
     }
   }
 
   public static class Builder extends RootsRecipe.Builder {
-    protected Builder(ItemLike item, int count) {
-      super(item, count);
+    protected Builder(ItemStack result) {
+      super(result);
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-      return ModRecipes.Serializers.GROVE_CRAFTING.get();
+      return ModRecipes.Serializers.PYRE.get();
     }
   }
 
   public static Builder builder (ItemLike item, int count) {
-    return new Builder(item, count);
+    return new Builder(new ItemStack(item, count));
   }
 }

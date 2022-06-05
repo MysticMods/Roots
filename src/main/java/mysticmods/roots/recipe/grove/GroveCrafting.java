@@ -1,4 +1,4 @@
-package mysticmods.roots.recipe.fey;
+package mysticmods.roots.recipe.grove;
 
 import mysticmods.roots.api.recipe.RootsTileCrafting;
 import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
