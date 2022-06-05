@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,14 +22,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class BlockHandler {
   private static final Map<ResourceKey<Level>, Object2ObjectLinkedOpenHashMap<BoundingBox, BlockPos>> bounds = Collections.synchronizedMap(new Object2ObjectLinkedOpenHashMap<>());
 
-  @SubscribeEvent
   // TODO: convert to mixin
-  public static void onBlockNeighbor(BlockEvent.NeighborNotifyEvent event) {
-    if (event.getWorld() instanceof ServerLevel level) {
+  public static void onBlockChanged(Level pLevel, BlockPos pPos, BlockState newState) {
+    if (pLevel instanceof ServerLevel level) {
       MinecraftServer server = level.getServer();
       if (!server.isSameThread()) {
         return;
@@ -38,13 +37,13 @@ public class BlockHandler {
       if (boxes != null) {
         Set<BlockPos> toMark = new HashSet<>();
         for (Object2ObjectMap.Entry<BoundingBox, BlockPos> entry : boxes.object2ObjectEntrySet()) {
-          if (entry.getKey().isInside(event.getPos())) {
+          if (entry.getKey().isInside(pPos)) {
             toMark.add(entry.getValue());
           }
         }
         for (BlockPos pos : toMark) {
           if (level.hasChunkAt(pos) && level.getBlockEntity(pos) instanceof MonitoringBlockEntity monitor) {
-            monitor.notify(level, event.getPos());
+            monitor.notify(level, pPos);
           }
         }
       }
