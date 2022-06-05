@@ -2,7 +2,11 @@ package mysticmods.roots.event.forge;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import mysticmods.roots.api.MonitoringBlockEntity;
 import mysticmods.roots.api.RootsAPI;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -12,13 +16,17 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class BlockHandler {
-  private static final Map<ResourceKey<Level>, Object2BooleanMap<BoundingBox>> bounds = Collections.synchronizedMap(new LinkedHashMap<>());
+  private static final Map<ResourceKey<Level>, Object2ObjectLinkedOpenHashMap<BoundingBox, BlockPos>> bounds = Collections.synchronizedMap(new Object2ObjectLinkedOpenHashMap<>());
 
   @SubscribeEvent
+  // TODO: convert to mixin
   public static void onBlockNeighbor(BlockEvent.NeighborNotifyEvent event) {
     if (event.getWorld() instanceof ServerLevel level) {
       MinecraftServer server = level.getServer();
@@ -26,55 +34,24 @@ public class BlockHandler {
         return;
       }
       ResourceKey<Level> dimension = level.dimension();
-      Object2BooleanMap<BoundingBox> boxes = bounds.get(dimension);
+      Object2ObjectMap<BoundingBox, BlockPos> boxes = bounds.get(dimension);
       if (boxes != null) {
-        Set<BoundingBox> toMark = new HashSet<>();
-        for (BoundingBox box : boxes.keySet()) {
-          if (box.isInside(event.getPos())) {
-            toMark.add(box);
+        Set<BlockPos> toMark = new HashSet<>();
+        for (Object2ObjectMap.Entry<BoundingBox, BlockPos> entry : boxes.object2ObjectEntrySet()) {
+          if (entry.getKey().isInside(event.getPos())) {
+            toMark.add(entry.getValue());
           }
         }
-        for (BoundingBox marked : toMark) {
-          boxes.put(marked, false);
+        for (BlockPos pos : toMark) {
+          if (level.hasChunkAt(pos) && level.getBlockEntity(pos) instanceof MonitoringBlockEntity monitor) {
+            monitor.notify(level, event.getPos());
+          }
         }
       }
     }
   }
 
-  public static boolean isDirty(Level level, BoundingBox box) {
-    if (level == null || level.isClientSide()) {
-      return false;
-    }
-
-    MinecraftServer server = level.getServer();
-    if (server == null || !server.isSameThread()) {
-      return false;
-    }
-    Object2BooleanMap<BoundingBox> boxes = bounds.get(level.dimension());
-    if (boxes != null) {
-      return boxes.getBoolean(box);
-    }
-
-    return false;
-  }
-
-  public static void clean(Level level, BoundingBox box) {
-    if (level == null || level.isClientSide()) {
-      return;
-    }
-
-    MinecraftServer server = level.getServer();
-    if (server == null || server.isSameThread()) {
-      return;
-    }
-
-    Object2BooleanMap<BoundingBox> boxes = bounds.get(level.dimension());
-    if (boxes != null) {
-      boxes.put(box, true);
-    }
-  }
-
-  public static void register(Level level, BoundingBox box) {
+  public static void register(Level level, BoundingBox box, BlockPos pos) {
     if (level == null || level.isClientSide()) {
       return;
     }
@@ -82,8 +59,8 @@ public class BlockHandler {
     if (server != null && !server.isSameThread()) {
       return;
     }
-    Object2BooleanMap<BoundingBox> boxes = bounds.computeIfAbsent(level.dimension(), (k) -> new Object2BooleanLinkedOpenHashMap<>());
-    boxes.put(box, false);
+    Object2ObjectMap<BoundingBox, BlockPos> boxes = bounds.computeIfAbsent(level.dimension(), (k) -> new Object2ObjectLinkedOpenHashMap<>());
+    boxes.put(box, pos);
   }
 
   public static void unregister(Level level, BoundingBox box) {
@@ -94,9 +71,9 @@ public class BlockHandler {
     if (server != null && !server.isSameThread()) {
       return;
     }
-    Object2BooleanMap<BoundingBox> boxes = bounds.get(level.dimension());
+    Object2ObjectMap<BoundingBox, BlockPos> boxes = bounds.get(level.dimension());
     if (boxes != null) {
-      boxes.removeBoolean(box);
+      boxes.remove(box);
       if (boxes.isEmpty()) {
         bounds.remove(level.dimension());
       }

@@ -70,7 +70,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
   public void onLoad() {
     super.onLoad();
     if (isBounded()) {
-      BlockHandler.register(level, getBoundingBox());
+      BlockHandler.register(level, getBoundingBox(), getBlockPos());
     }
   }
 
@@ -86,7 +86,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
   public void clearRemoved() {
     super.clearRemoved();
     if (isBounded()) {
-      BlockHandler.register(level, getBoundingBox());
+      BlockHandler.register(level, getBoundingBox(), getBlockPos());
     }
   }
 
