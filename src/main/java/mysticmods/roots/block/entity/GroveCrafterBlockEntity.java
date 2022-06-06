@@ -16,6 +16,9 @@ import java.util.List;
 
 public class GroveCrafterBlockEntity extends BaseBlockEntity implements MonitoringBlockEntity {
   private List<BlockPos> pedestalPositions = null;
+  private GroveRecipe lastRecipe = null;
+  private GroveRecipe cachedRecipe = null;
+
 
   public GroveCrafterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);

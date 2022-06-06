@@ -50,20 +50,27 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     super(pType, pWorldPosition, pBlockState);
   }
 
-  protected void revalidateRecipe () {
+  protected void revalidateRecipe() {
+    boolean matched = false;
     if (cachedRecipe == null) {
-      cachedRecipe = ResolvedRecipes.MORTAR.findRecipe(playerlessCrafting, getLevel());
       uses = -1;
+      if (lastRecipe != null && lastRecipe.matches(playerlessCrafting, getLevel())) {
+        cachedRecipe = lastRecipe;
+        matched = true;
+      } else {
+        cachedRecipe = ResolvedRecipes.MORTAR.findRecipe(playerlessCrafting, getLevel());
+      }
     }
 
     if (cachedRecipe != null) {
-      if (!cachedRecipe.matches(playerlessCrafting, getLevel())) {
-        cachedRecipe = null;
-        uses = -1;
-      } else {
+      // only test once
+      if (matched || cachedRecipe.matches(playerlessCrafting, getLevel())) {
         if (uses == -1) {
           uses = 0;
         }
+      } else {
+        cachedRecipe = null;
+        uses = -1;
       }
     }
   }
@@ -177,7 +184,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     return InteractionResult.SUCCESS;
   }
 
-  public int getUses () {
+  public int getUses() {
     return uses;
   }
 
