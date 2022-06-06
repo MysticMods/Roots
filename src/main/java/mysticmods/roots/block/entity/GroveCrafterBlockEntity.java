@@ -4,9 +4,12 @@ import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.MonitoringBlockEntity;
 import mysticmods.roots.block.PedestalBlock;
 import mysticmods.roots.block.entity.template.BaseBlockEntity;
+import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,7 +21,6 @@ public class GroveCrafterBlockEntity extends BaseBlockEntity implements Monitori
   private List<BlockPos> pedestalPositions = null;
   private GroveRecipe lastRecipe = null;
   private GroveRecipe cachedRecipe = null;
-
 
   public GroveCrafterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -47,7 +49,7 @@ public class GroveCrafterBlockEntity extends BaseBlockEntity implements Monitori
     }
   }
 
-  public List<BlockPos> pedestalPositions () {
+  public List<BlockPos> pedestalPositions() {
     if (pedestalPositions != null) {
       return pedestalPositions;
     } else {
@@ -86,5 +88,27 @@ public class GroveCrafterBlockEntity extends BaseBlockEntity implements Monitori
     });
   }
 
+  @Override
+  protected void saveAdditional(CompoundTag pTag) {
+    super.saveAdditional(pTag);
+    if (cachedRecipe != null) {
+      pTag.putString("cached_recipe", cachedRecipe.getId().toString());
+    }
+    if (lastRecipe != null) {
+      pTag.putString("last_recipe", lastRecipe.getId().toString());
+    }
+  }
 
+  @Override
+  public void load(CompoundTag pTag) {
+    super.load(pTag);
+    if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
+      ResourceLocation cachedId = new ResourceLocation(pTag.getString("cached_recipe"));
+      cachedRecipe = ResolvedRecipes.GROVE.getRecipe(cachedId);
+    }
+    if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
+      ResourceLocation lastId = new ResourceLocation(pTag.getString("last_recipe"));
+      lastRecipe = ResolvedRecipes.GROVE.getRecipe(lastId);
+    }
+  }
 }
