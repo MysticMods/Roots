@@ -1,0 +1,17 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_pickaxe"
+    },
+    {
+      "tag": "forge:ingots/gold"
+    },
+    {
+      "tag": "roots:crops/wildroot"
+    }
+  ],
+  "result": {
+    "item": "roots:living_pickaxe"
+  }
+}
