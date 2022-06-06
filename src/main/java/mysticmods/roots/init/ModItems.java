@@ -8,12 +8,11 @@ import mysticmods.roots.Roots;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.FireStarterItem;
+import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.*;
+import net.minecraftforge.common.Tags;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -250,6 +249,12 @@ public class ModItems {
 
   public static final ItemEntry<Item> LIVING_PICKAXE = REGISTRATE.item("living_pickaxe", Item::new)
       .model(subfolder("tools"))
+      .recipe((ctx, p) -> GroveRecipe.builder(new ItemStack(ctx.getEntry()))
+          .addIngredient(Items.WOODEN_PICKAXE)
+          .addIngredient(Tags.Items.INGOTS_GOLD)
+          .addIngredient(RootsTags.Items.WILDROOT_CROP)
+          .build(p, new ResourceLocation(RootsAPI.MODID, "living_pickaxe")))
+
       .register();
 
   public static final ItemEntry<Item> LIVING_SHOVEL = REGISTRATE.item("living_shovel", Item::new)

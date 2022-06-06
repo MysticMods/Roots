@@ -82,7 +82,10 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
   @Override
   public int getViewDistance () {
     return 64*4;
+  }
 
-/*    return BlockEntityRenderer.super.getViewDistance();*/
+  @Override
+  public boolean shouldRenderOffScreen(T pBlockEntity) {
+    return true;
   }
 }

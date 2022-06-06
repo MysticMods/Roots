@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.phys.AABB;
 import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
 import noobanidus.libs.noobutil.util.BlockEntityUtil;
 
@@ -99,6 +100,21 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
       boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX() + 1, getRadiusY() + 1, getRadiusZ() + 1).move(getBlockPos());
     }
     return boundingBox;
+  }
+
+  private AABB clientBounds;
+
+  @Override
+  public AABB getRenderBoundingBox() {
+    if (!isBounded()) {
+      return super.getRenderBoundingBox();
+    }
+
+    if (clientBounds == null) {
+      clientBounds = AABB.of(boundingBox.inflatedBy(getRadiusX() + getRadiusY() + getRadiusZ()));
+    }
+
+    return clientBounds;
   }
 
   public static <T extends BlockEntity> void clientTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {

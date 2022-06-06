@@ -34,8 +34,7 @@ public class RenderResizableCuboid {
   private RenderResizableCuboid() {
   }
 
-  public static void renderCube(Model3D cube, PoseStack matrix, VertexConsumer buffer, int argb, int light, int overlay, FaceDisplay faceDisplay,
-                                boolean fakeDisableDiffuse) {
+  public static void renderCube(Model3D cube, PoseStack matrix, VertexConsumer buffer, int argb, int light, int overlay, FaceDisplay faceDisplay, boolean fakeDisableDiffuse) {
     Arrays.fill(combinedARGB, argb);
     renderCube(cube, matrix, buffer, combinedARGB, light, overlay, faceDisplay, fakeDisableDiffuse);
   }
@@ -43,8 +42,7 @@ public class RenderResizableCuboid {
   /**
    * @implNote Based off of Tinker's
    */
-  public static void renderCube(Model3D cube, PoseStack matrix, VertexConsumer buffer, int[] colors, int light, int overlay, FaceDisplay faceDisplay,
-                                boolean fakeDisableDiffuse) {
+  public static void renderCube(Model3D cube, PoseStack matrix, VertexConsumer buffer, int[] colors, int light, int overlay, FaceDisplay faceDisplay, boolean fakeDisableDiffuse) {
     //TODO: Further attempt to fix z-fighting at larger distances if we make it not render the sides when it is in a solid block
     // that may improve performance some, but definitely would reduce/remove the majority of remaining z-fighting that is going on
     //Shift it so that the min values are all greater than or equal to zero as the various drawing code

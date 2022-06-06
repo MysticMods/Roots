@@ -10,8 +10,9 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
-public class GroveRecipe extends RootsTileRecipe<GroveCrafterInventory, GroveCrafterBlockEntity, GroveCrafting> {
+public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCrafterBlockEntity, GroveCrafting> {
   public GroveRecipe(ResourceLocation recipeId) {
     super(recipeId);
   }
@@ -36,7 +37,7 @@ public class GroveRecipe extends RootsTileRecipe<GroveCrafterInventory, GroveCra
     return ModRecipes.Types.GROVE;
   }
 
-  public static class Serializer extends RootsRecipe.Serializer<GroveCrafterInventory, GroveCrafting, GroveRecipe> {
+  public static class Serializer extends RootsRecipe.Serializer<GroveInventoryWrapper, GroveCrafting, GroveRecipe> {
     public Serializer() {
       super(GroveRecipe::new);
     }
