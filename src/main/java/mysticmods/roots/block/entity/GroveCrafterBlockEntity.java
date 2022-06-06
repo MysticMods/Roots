@@ -22,11 +22,6 @@ public class GroveCrafterBlockEntity extends BaseBlockEntity implements Monitori
   }
 
   @Override
-  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-    super.onDataPacket(net, pkt);
-  }
-
-  @Override
   public int getRadiusX() {
     return 5;
   }
