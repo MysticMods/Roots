@@ -1,5 +1,6 @@
 package mysticmods.roots.block.entity;
 
+import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.InventoryBlockEntity;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
@@ -151,7 +152,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
       if (!popped.isEmpty()) {
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
-    } else if (inHand.is(ModItems.PESTLE.get())) {
+    } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION)) {
       if (cachedRecipe == null) {
         // should this revalidate?
         revalidateRecipe();

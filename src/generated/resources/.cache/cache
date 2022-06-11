@@ -554,6 +554,7 @@ a4b7fd572b43c05ffacd27d4aa83e46e9c3579a2 data/forge/tags/blocks/crops.json
 a7a83688c8db310a3aff1d9217316275bb52c9a4 data/forge/tags/blocks/fence_gates/wooden.json
 4cd402bfd9a414e8ece8ebd70220f114ef66d828 data/forge/tags/blocks/fences.json
 ffae885a2eac991d1d61f6eda1349c27c69b18a1 data/forge/tags/blocks/fences/wooden.json
+74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/forge/tags/items/tools/knife.json
 aecb4f08b6157cd63519bdce1ed48c78582cfdd2 data/minecraft/tags/blocks/acacia_logs.json
 391f4f144a2719a8b0212aeb2f8f32caf6171324 data/minecraft/tags/blocks/birch_logs.json
 2beb2052b03fc6dcff9134760dccdbb9d3853efa data/minecraft/tags/blocks/buttons.json
@@ -1021,6 +1022,7 @@ c84247021b812e56145a12750229af395dcad0e5 data/roots/tags/items/crops/cloud_berry
 14bc94c87eaa186b2dc2dd1a0374727edaffca0d data/roots/tags/items/crops/stalicripe.json
 2624b2e1f7322054e73c2bdc28a39cb6e1746984 data/roots/tags/items/crops/wildewheet.json
 734341e40d89d6b0b37b37e85f6272d55aeff664 data/roots/tags/items/crops/wildroot.json
+3f9802d9e60125f4fc4f3fcf4f649575fea0bba1 data/roots/tags/items/grove_crafter_activation.json
 95a0eb13668bb4d984e4f12f42086d772e185570 data/roots/tags/items/grove_stones/primal.json
 08b3271993de8d99793a75d721c0453d54ea6679 data/roots/tags/items/logs/runed.json
 aecb4f08b6157cd63519bdce1ed48c78582cfdd2 data/roots/tags/items/logs/runed/acacia.json
@@ -1033,10 +1035,12 @@ ac8a57eab5a24f1e8e579c85b3bb4dfa6c41f7d3 data/roots/tags/items/logs/runed/jungle
 e031af98b1de5756dc2bc3be9a5502aafbd17836 data/roots/tags/items/logs/runed/warped.json
 5e545888a9803eaee876c2ed1c0855e51cbaacc8 data/roots/tags/items/logs/runed/wildwood.json
 d3f31134d833ab32914d12bc8d9ed4df0a03afeb data/roots/tags/items/logs/wildwood.json
+4e019df5fa2defbbb518eb582c8d1c1f27417e1d data/roots/tags/items/mortar_activation.json
 2afc9c16418dd6f3d26cc231c9ed8cbab61e1ff9 data/roots/tags/items/mortars.json
 faf860912682748231d5da88de7f32869fdd866b data/roots/tags/items/pedestals.json
 1af6ab60f4c7bf1e01b35638d0c90987de9ca492 data/roots/tags/items/pedestals/grove.json
 8f898dcabd6ae5550d333e67cc011adf4a8ebc94 data/roots/tags/items/pedestals/ritual.json
+1f8ca890dba974f2d2e5130d21009ef26b10c16e data/roots/tags/items/pyre_activation.json
 70d8cdcbebab77a1eb2208326a69eb6aca41c043 data/roots/tags/items/pyres.json
 2e317ad6ec906d1e05c3eb1046bf313b7289cbec data/roots/tags/items/runed_obsidian.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/roots/tags/items/runestone.json

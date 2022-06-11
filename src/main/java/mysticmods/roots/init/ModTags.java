@@ -1,8 +1,10 @@
 package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
+import mysticmods.mysticalworld.MWTags;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.RootsTags.Blocks;
+import net.minecraft.world.item.Items;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -59,6 +61,10 @@ public class ModTags {
       b.tag(RootsTags.Items.CROPS).addTags(RootsTags.Items.AIR_CROPS, RootsTags.Items.FIRE_CROPS, RootsTags.Items.EARTH_CROPS, RootsTags.Items.WATER_CROPS, RootsTags.Items.WILDEWHEET_CROP, RootsTags.Items.SPIRIT_HERB_CROP, RootsTags.Items.PERESKIA_CROP, RootsTags.Items.WILDROOT_CROP, RootsTags.Items.MOONGLOW_LEAF_CROP);
 
       b.tag(RootsTags.Items.BARKS).addTags(RootsTags.Items.BIRCH_BARK, RootsTags.Items.ACACIA_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
+
+      b.tag(MWTags.Items.FORGE_KNIVES);
+      b.tag(RootsTags.Items.GROVE_CRAFTER_ACTIVATION).addTag(MWTags.Items.FORGE_KNIVES);
+      b.tag(RootsTags.Items.PYRE_ACTIVATION).add(Items.FLINT_AND_STEEL);
 
       // TODO: Copying crops to the actual item tag?
     });

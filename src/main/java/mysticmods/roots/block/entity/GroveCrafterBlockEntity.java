@@ -8,6 +8,7 @@ import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
@@ -17,10 +18,13 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import noobanidus.libs.noobutil.util.ItemUtil;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -34,23 +38,56 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     super(pType, pWorldPosition, pBlockState);
   }
 
+  // TODO: SUPPORT EMPTY PEDESTALS
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
-    return InteractionResult.SUCCESS;
+    if (level.isClientSide()) {
+      return InteractionResult.CONSUME;
+    }
+
+    ItemStack inHand = player.getItemInHand(hand);
+    if (inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
+      GroveCrafting playerCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals()), this, player);
+      if (cachedRecipe == null) {
+        cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
+      }
+      if (cachedRecipe == null) {
+        return InteractionResult.FAIL;
+      }
+
+      lastRecipe = cachedRecipe;
+      ItemStack result = cachedRecipe.assemble(playerCrafting);
+      NonNullList<ItemStack> processed = cachedRecipe.process(playerCrafting.popItems());
+      ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);
+      for (ItemStack stack : processed) {
+        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+      }
+      cachedRecipe = null;
+      setChanged();
+      updateViaState();
+
+      return InteractionResult.SUCCESS;
+    }
+
+    return InteractionResult.FAIL;
   }
 
-  protected void revalidateRecipe() {
-    GroveRecipe original = cachedRecipe;
+  protected List<PedestalBlockEntity> pedestals () {
     List<PedestalBlockEntity> pedestals = new ArrayList<>();
     for (BlockPos pedestal : pedestalPositions()) {
       if (getLevel().getBlockEntity(pedestal) instanceof PedestalBlockEntity pedestalBlockEntity) {
         pedestals.add(pedestalBlockEntity);
       }
     }
+    return pedestals;
+  }
+
+  protected void revalidateRecipe() {
+    List<PedestalBlockEntity> pedestals = pedestals();
     if (pedestals.isEmpty()) {
       return;
     }
-    GroveCrafting playerlessCrafting = new GroveCrafting(GroveInventoryWrapper.of(pedestals), this, null);
+    GroveCrafting playerlessCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals), this, null);
     boolean changed = false;
     if (cachedRecipe == null) {
       cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerlessCrafting, getLevel());
@@ -91,7 +128,11 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
         BlockState state = getLevel().getBlockState(pos);
         if (state.is(RootsTags.Blocks.GROVE_PEDESTALS)) {
-          pedestalPositions.add(pos.immutable());
+          if (getLevel().getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
+            if (!pedestal.getHeldItem().isEmpty()) {
+              pedestalPositions.add(pos.immutable());
+            }
+          }
         }
       });
     }

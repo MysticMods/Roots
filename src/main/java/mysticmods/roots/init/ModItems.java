@@ -4,7 +4,6 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
-import mysticmods.roots.Roots;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.FireStarterItem;
@@ -267,6 +266,7 @@ public class ModItems {
 
   public static final ItemEntry<Item> PESTLE = REGISTRATE.item("pestle", Item::new)
       .model(subfolder("tools"))
+      .tag(RootsTags.Items.MORTAR_ACTIVATION)
       .register();
 
   public static final ItemEntry<Item> RUNED_AXE = REGISTRATE.item("runed_axe", Item::new)
