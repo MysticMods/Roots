@@ -53,12 +53,13 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     this.result = result;
   }
 
+  // TODO: Ensure that not copying this item won't cause problems
   @Override
   public ItemStack getResultItem() {
     if (result == null) {
       return ItemStack.EMPTY;
     }
-    return result.copy();
+    return result;
   }
 
   public void addConditionalOutput(ConditionalOutput output) {
@@ -243,7 +244,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       }
     }
 
-    return getResultItem();
+    return getResultItem().copy();
   }
 
 

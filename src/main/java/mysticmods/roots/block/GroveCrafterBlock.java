@@ -3,6 +3,7 @@ package mysticmods.roots.block;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
 import mysticmods.roots.block.entity.template.BaseBlockEntity;
+import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -17,7 +18,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class GroveCrafterBlock extends Block implements EntityBlock {
+public class GroveCrafterBlock extends UseDelegatedBlock implements EntityBlock {
   public GroveCrafterBlock(Properties builder) {
     super(builder);
   }

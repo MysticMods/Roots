@@ -4,13 +4,18 @@ import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
 import mysticmods.roots.init.ModRecipes;
+import mysticmods.roots.recipe.mortar.MortarInventory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCrafterBlockEntity, GroveCrafting> {
   public GroveRecipe(ResourceLocation recipeId) {
@@ -19,12 +24,21 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
 
   @Override
   public boolean matches(GroveCrafting pInv, Level pLevel) {
-    return false;
+    List<ItemStack> inputs = new ArrayList<>();
+    GroveInventoryWrapper inv = pInv.getHandler();
+    for (int i = 0; i < inv.getSlots(); i++) {
+      ItemStack stack = inv.getStackInSlot(i);
+      if (!stack.isEmpty()) {
+        inputs.add(stack);
+      }
+    }
+
+    return RecipeMatcher.findMatches(inputs, ingredients) != null;
   }
 
   @Override
   public ItemStack assemble(GroveCrafting pContainer) {
-    return result.copy();
+    return super.assemble(pContainer);
   }
 
   @Override

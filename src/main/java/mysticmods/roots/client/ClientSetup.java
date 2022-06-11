@@ -2,6 +2,7 @@ package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.block.entity.BoundedBlockEntityRenderer;
+import mysticmods.roots.client.block.entity.GroveCrafterBlockEntityRenderer;
 import mysticmods.roots.client.block.entity.PedestalBlockEntityRenderer;
 import mysticmods.roots.client.block.entity.MortarBlockEntityRenderer;
 import mysticmods.roots.init.ModBlockEntities;
@@ -42,7 +43,7 @@ public class ClientSetup {
   public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
     event.registerBlockEntityRenderer(ModBlockEntities.PEDESTAL.get(), PedestalBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.MORTAR.get(), MortarBlockEntityRenderer::new);
-    event.registerBlockEntityRenderer(ModBlockEntities.GROVE_CRAFTER.get(), BoundedBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.GROVE_CRAFTER.get(), GroveCrafterBlockEntityRenderer::new);
   }
 
   @SubscribeEvent

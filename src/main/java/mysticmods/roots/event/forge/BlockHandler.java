@@ -22,7 +22,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/*
 public class BlockHandler {
+  // TODO: clear when dimensions unload, server restart
   private static final Map<ResourceKey<Level>, Object2ObjectLinkedOpenHashMap<BoundingBox, BlockPos>> bounds = Collections.synchronizedMap(new Object2ObjectLinkedOpenHashMap<>());
 
   // TODO: convert to mixin
@@ -37,7 +39,7 @@ public class BlockHandler {
       if (boxes != null) {
         Set<BlockPos> toMark = new HashSet<>();
         for (Object2ObjectMap.Entry<BoundingBox, BlockPos> entry : boxes.object2ObjectEntrySet()) {
-          if (entry.getKey().isInside(pPos)) {
+          if (entry.getKey().isInside(pPos) && !entry.getValue().equals(pPos)) {
             toMark.add(entry.getValue());
           }
         }
@@ -79,3 +81,4 @@ public class BlockHandler {
     }
   }
 }
+*/

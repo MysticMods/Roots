@@ -3,10 +3,12 @@ package mysticmods.roots.api.recipe;
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
@@ -21,7 +23,12 @@ public class ResolvingRecipeType<C extends Container, T extends Recipe<C>> exten
 
   @Override
   protected List<T> getRecipesList() {
-    return RootsAPI.getInstance().getRecipeManager().getAllRecipesFor(type.get());
+    RecipeManager manager = RootsAPI.getInstance().getRecipeManager();
+    if (manager == null) {
+      // TODO:
+      return Collections.emptyList();
+    }
+    return manager.getAllRecipesFor(type.get());
   }
 
   @Nullable

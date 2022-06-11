@@ -1,6 +1,7 @@
 package mysticmods.roots.client.block.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.BoundedBlockEntity;
 import mysticmods.roots.client.Model3D;
 import mysticmods.roots.client.RenderResizableCuboid;
@@ -8,14 +9,19 @@ import mysticmods.roots.client.RootsRenderer;
 import mysticmods.roots.util.EnumUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEntity> implements BlockEntityRenderer<T> {
   protected final BlockEntityRendererProvider.Context context;
@@ -48,6 +54,27 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
       }
     }
     if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
+      if (bounds != null) {
+        pPoseStack.pushPose();
+        BlockPos position = pBlockEntity.getBlockPos();
+        VoxelShape pShape = Shapes.create(bounds.move(-position.getX(), -position.getY(), -position.getZ()));
+        VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
+        PoseStack.Pose pose = pPoseStack.last();
+
+        pShape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
+          float f = (float) (pMaxX - pMinX);
+          float f1 = (float) (pMaxY - pMinY);
+          float f2 = (float) (pMaxZ - pMinZ);
+          float f3 = Mth.sqrt(f * f + f1 * f1 + f2 * f2);
+          f /= f3;
+          f1 /= f3;
+          f2 /= f3;
+          pConsumer.vertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ)).color(1f, 0.5f, 0.25f, 1f).normal(pose.normal(), f, f1, f2).endVertex();
+          pConsumer.vertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ)).color(1f, 0.5f, 0.25f, 1f).normal(pose.normal(), f, f1, f2).endVertex();
+        });
+        pPoseStack.popPose();
+      }
+
       //  TODO: Check for bounds being shown
       if (model == null) {
         model = new Model3D();
@@ -80,8 +107,8 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
   }
 
   @Override
-  public int getViewDistance () {
-    return 64*4;
+  public int getViewDistance() {
+    return 64 * 4;
   }
 
   @Override

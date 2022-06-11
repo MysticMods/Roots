@@ -8,14 +8,20 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 import javax.annotation.Nullable;
 
 public class ServerRecipeAccessor implements IRecipeManagerAccessor {
+  private RecipeManager manager = null;
+
   @Nullable
   @Override
   public RecipeManager getManager() {
+    if (manager != null) {
+      return manager;
+    }
     MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     if (server == null) {
       return null;
     }
 
-    return server.getRecipeManager();
+    manager = server.getRecipeManager();
+    return manager;
   }
 }

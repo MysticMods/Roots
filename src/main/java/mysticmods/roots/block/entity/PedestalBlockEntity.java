@@ -28,9 +28,12 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
         PedestalBlockEntity.this.setChanged();
         Level level = PedestalBlockEntity.this.getLevel();
         BlockPos pos = PedestalBlockEntity.this.getBlockPos();
-        BlockState newState = PedestalBlockEntity.this.getBlockState().setValue(PedestalBlock.VALID, false);
-        level.setBlock(pos, newState, 1 | 2 | 8);
-        level.sendBlockUpdated(pos, newState, newState, 8);
+        BlockState state = PedestalBlockEntity.this.getBlockState();
+/*        if (state.getValue(PedestalBlock.VALID)) {
+          state = state.setValue(PedestalBlock.VALID, false);
+          level.setBlock(pos, state, 1 | 2 | 8);
+        }*/
+        level.sendBlockUpdated(pos, state, state, 8);
       }
     }
   };
@@ -100,7 +103,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       if (this.getBlockState().is(ModBlocks.RITUAL_PEDESTAL.get())) {
         offset = 1.4;
       } else /* if (this.getBlockState().is(ModBlocks.GROVE_PEDESTAL.get())) */ {
-        offset = 0.8;
+        offset = 0.95;
       }
     }
     return offset;

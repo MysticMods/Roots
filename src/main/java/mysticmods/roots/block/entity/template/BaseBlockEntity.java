@@ -3,7 +3,6 @@ package mysticmods.roots.block.entity.template;
 import mysticmods.roots.api.BoundedBlockEntity;
 import mysticmods.roots.api.ClientTickBlockEntity;
 import mysticmods.roots.api.ServerTickBlockEntity;
-import mysticmods.roots.event.forge.BlockHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -67,7 +66,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
     return this;
   }
 
-  @Override
+/*  @Override
   public void onLoad() {
     super.onLoad();
     if (isBounded()) {
@@ -89,7 +88,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
     if (isBounded()) {
       BlockHandler.register(level, getBoundingBox(), getBlockPos());
     }
-  }
+  }*/
 
   @Override
   public BoundingBox getBoundingBox() {
@@ -97,7 +96,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
       return null;
     }
     if (boundingBox == null) {
-      boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX() + 1, getRadiusY() + 1, getRadiusZ() + 1).move(getBlockPos());
+      boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX(), getRadiusY(), getRadiusZ()).move(getBlockPos());
     }
     return boundingBox;
   }
@@ -111,7 +110,10 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
     }
 
     if (clientBounds == null) {
-      clientBounds = AABB.of(boundingBox.inflatedBy(getRadiusX() + getRadiusY() + getRadiusZ()));
+      BoundingBox box = getBoundingBox();
+      if (box != null) {
+        clientBounds = AABB.of(box.inflatedBy(getRadiusX() + getRadiusY() + getRadiusZ()));
+      }
     }
 
     return clientBounds;
