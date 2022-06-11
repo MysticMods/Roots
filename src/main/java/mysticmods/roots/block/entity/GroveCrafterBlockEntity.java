@@ -53,10 +53,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     GroveCrafting playerlessCrafting = new GroveCrafting(GroveInventoryWrapper.of(pedestals), this, null);
     boolean changed = false;
     if (cachedRecipe == null) {
-       cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerlessCrafting, getLevel());
-       if (cachedRecipe != null) {
-         changed = true;
-       }
+      cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerlessCrafting, getLevel());
+      if (cachedRecipe != null) {
+        changed = true;
+      }
     } else {
       if (!cachedRecipe.matches(playerlessCrafting, getLevel())) {
         cachedRecipe = null;
@@ -128,8 +128,6 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     super.saveAdditional(pTag);
     if (cachedRecipe != null) {
       pTag.putString("cached_recipe", cachedRecipe.getId().toString());
-    } else {
-      pTag.putString("cached_recipe", "NO_RECIPE");
     }
     if (lastRecipe != null) {
       pTag.putString("last_recipe", lastRecipe.getId().toString());
@@ -140,17 +138,16 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   public void load(CompoundTag pTag) {
     super.load(pTag);
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
-      String value = pTag.getString("cached_recipe");
-      if (value.equals("NO_RECIPE")) {
-        cachedRecipe = null;
-      } else {
-        ResourceLocation cachedId = new ResourceLocation(value);
-        cachedRecipe = ResolvedRecipes.GROVE.getRecipe(cachedId);
-      }
+      ResourceLocation cachedId = new ResourceLocation(pTag.getString("cached_recipe"));
+      cachedRecipe = ResolvedRecipes.GROVE.getRecipe(cachedId);
+    } else {
+      cachedRecipe = null;
     }
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
       ResourceLocation lastId = new ResourceLocation(pTag.getString("last_recipe"));
       lastRecipe = ResolvedRecipes.GROVE.getRecipe(lastId);
+    } else {
+      lastRecipe = null;
     }
   }
 
@@ -173,6 +170,9 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
       load(tag);
+    } else {
+      lastRecipe = null;
+      cachedRecipe = null;
     }
   }
 }
