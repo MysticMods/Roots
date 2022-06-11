@@ -160,6 +160,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
         uses++;
 
         if (uses >= cachedRecipe.getTimes()) {
+          // CRAFTING HAPPENS HERE
           MortarCrafting playerCrafting = new MortarCrafting(inventory, this, player);
           lastRecipe = cachedRecipe;
           previousRecipeItems.clear();

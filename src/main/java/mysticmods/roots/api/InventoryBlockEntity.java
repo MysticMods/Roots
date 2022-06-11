@@ -31,4 +31,23 @@ public interface InventoryBlockEntity {
     }
     return items;
   }
+
+  default ItemStack popOne () {
+    ItemStackHandler inventory = getInventory();
+    ItemStack inSlot = inventory.getStackInSlot(0);
+    if (inSlot.isEmpty()) {
+      return ItemStack.EMPTY;
+    }
+
+    if (inSlot.getCount() > 1) {
+      ItemStack result = inSlot.copy();
+      result.setCount(1);
+      inSlot.shrink(1);
+      inventory.setStackInSlot(0, inSlot);
+      return result;
+    } else {
+      inventory.setStackInSlot(0, ItemStack.EMPTY);
+      return inSlot;
+    }
+  }
 }
