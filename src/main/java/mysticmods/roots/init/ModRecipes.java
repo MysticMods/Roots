@@ -1,5 +1,6 @@
 package mysticmods.roots.init;
 
+import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.recipe.chrysopoeia.ChrysopoeiaRecipe;
@@ -12,10 +13,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.common.Tags;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModRecipes {
+  static {
+    REGISTRATE.addDataGenerator(ProviderType.RECIPE, (p) -> {
+      PyreRecipe.builder(ModRituals.TRANSMUTATION.get()).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).build(p, new ResourceLocation(RootsAPI.MODID, "ritual/recipe/transmutation"));
+    });
+  }
+
   public static class Serializers {
 
     public static final RegistryEntry<ChrysopoeiaRecipe.Serializer> CHRYSOPOEIA = REGISTRATE.simple("chrysopoeia", RecipeSerializer.class, ChrysopoeiaRecipe.Serializer::new);

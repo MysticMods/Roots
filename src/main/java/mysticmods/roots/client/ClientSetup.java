@@ -1,10 +1,7 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.block.entity.BoundedBlockEntityRenderer;
-import mysticmods.roots.client.block.entity.GroveCrafterBlockEntityRenderer;
-import mysticmods.roots.client.block.entity.PedestalBlockEntityRenderer;
-import mysticmods.roots.client.block.entity.MortarBlockEntityRenderer;
+import mysticmods.roots.client.block.entity.*;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModBlocks;
 import net.minecraft.client.renderer.BiomeColors;
@@ -44,6 +41,7 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.PEDESTAL.get(), PedestalBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.MORTAR.get(), MortarBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.GROVE_CRAFTER.get(), GroveCrafterBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.PYRE.get(), PyreBlockEntityRenderer::new);
   }
 
   @SubscribeEvent

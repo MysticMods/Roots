@@ -3,6 +3,7 @@ package mysticmods.roots.api.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import mysticmods.roots.recipe.mortar.MortarInventory;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +18,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -60,6 +63,20 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return ItemStack.EMPTY;
     }
     return result;
+  }
+
+  @Override
+  public boolean matches(W pContainer, Level pLevel) {
+    List<ItemStack> inputs = new ArrayList<>();
+    H inv = pContainer.getHandler();
+    for (int i = 0; i < inv.getSlots(); i++) {
+      ItemStack stack = inv.getStackInSlot(i);
+      if (!stack.isEmpty()) {
+        inputs.add(stack);
+      }
+    }
+
+    return RecipeMatcher.findMatches(inputs, ingredients) != null;
   }
 
   public void addConditionalOutput(ConditionalOutput output) {

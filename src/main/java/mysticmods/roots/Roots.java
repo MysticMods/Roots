@@ -61,5 +61,6 @@ public class Roots {
     ModRegistries.load();
     ModTags.load();
     ModRecipes.load();
+    ModRituals.load();
   }
 }

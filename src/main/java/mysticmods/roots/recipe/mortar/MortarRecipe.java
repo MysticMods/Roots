@@ -31,7 +31,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
-// TODO: Conditional outputs
 public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEntity, MortarCrafting> {
   private int times;
 
@@ -45,21 +44,6 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   public void setTimes(int times) {
     this.times = times;
-  }
-
-
-  @Override
-  public boolean matches(MortarCrafting pInv, Level pLevel) {
-    List<ItemStack> inputs = new ArrayList<>();
-    MortarInventory inv = pInv.getHandler();
-    for (int i = 0; i < inv.getSlots(); i++) {
-      ItemStack stack = inv.getStackInSlot(i);
-      if (!stack.isEmpty()) {
-        inputs.add(stack);
-      }
-    }
-
-    return RecipeMatcher.findMatches(inputs, ingredients) != null;
   }
 
   @Override

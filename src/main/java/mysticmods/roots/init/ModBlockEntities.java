@@ -4,6 +4,7 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
 import mysticmods.roots.block.entity.PedestalBlockEntity;
 import mysticmods.roots.block.entity.MortarBlockEntity;
+import mysticmods.roots.block.entity.PyreBlockEntity;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -13,6 +14,8 @@ public class ModBlockEntities {
   public static final BlockEntityEntry<MortarBlockEntity> MORTAR = REGISTRATE.blockEntity("mortar", MortarBlockEntity::new).validBlock(ModBlocks.MORTAR).register();
 
   public static final BlockEntityEntry<GroveCrafterBlockEntity> GROVE_CRAFTER = REGISTRATE.blockEntity("grove_crafter", GroveCrafterBlockEntity::new).validBlock(ModBlocks.GROVE_CRAFTER).register();
+
+  public static final BlockEntityEntry<PyreBlockEntity> PYRE = REGISTRATE.blockEntity("pyre", PyreBlockEntity::new).validBlocks(ModBlocks.PYRE, ModBlocks.DECORATIVE_PYRE).register();
 
   public static void load() {
   }

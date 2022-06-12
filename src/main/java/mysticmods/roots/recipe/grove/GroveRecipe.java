@@ -23,20 +23,6 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
   }
 
   @Override
-  public boolean matches(GroveCrafting pInv, Level pLevel) {
-    List<ItemStack> inputs = new ArrayList<>();
-    GroveInventoryWrapper inv = pInv.getHandler();
-    for (int i = 0; i < inv.getSlots(); i++) {
-      ItemStack stack = inv.getStackInSlot(i);
-      if (!stack.isEmpty()) {
-        inputs.add(stack);
-      }
-    }
-
-    return RecipeMatcher.findMatches(inputs, ingredients) != null;
-  }
-
-  @Override
   public ItemStack assemble(GroveCrafting pContainer) {
     return super.assemble(pContainer);
   }
