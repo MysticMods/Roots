@@ -63,7 +63,7 @@ public class ChrysopoeiaRecipe implements Recipe<PlayerOffhandInventoryHandler> 
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.SUMMON_CREATURES;
+    return ModRecipes.Types.SUMMON_CREATURES.get();
   }
 
   public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ChrysopoeiaRecipe> {

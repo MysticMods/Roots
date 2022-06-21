@@ -34,7 +34,7 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.GROVE;
+    return ModRecipes.Types.GROVE.get();
   }
 
   public static class Serializer extends RootsRecipe.Serializer<GroveInventoryWrapper, GroveCrafting, GroveRecipe> {

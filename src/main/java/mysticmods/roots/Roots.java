@@ -10,10 +10,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import noobanidus.libs.noobutil.data.generator.RecipeGenerator;
 import noobanidus.libs.noobutil.reference.ModData;
@@ -39,6 +41,7 @@ public class Roots {
 
     ConfigManager.loadConfig(ConfigManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(RootsAPI.MODID + "-common.toml"));
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
+    IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
     RootsAPI.INSTANCE = new RootsAPI() {
       private final IRecipeManagerAccessor accessor = DistExecutor.safeRunForDist(() -> ClientRecipeAccessor::new, () -> ServerRecipeAccessor::new);
@@ -62,5 +65,7 @@ public class Roots {
     ModTags.load();
     ModRecipes.load();
     ModRituals.load();
+    ModRegistries.register(bus);
+    ModRecipes.Types.register(bus);
   }
 }

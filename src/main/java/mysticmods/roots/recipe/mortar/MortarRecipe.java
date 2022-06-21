@@ -53,7 +53,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.MORTAR;
+    return ModRecipes.Types.MORTAR.get();
   }
 
   public static class Serializer extends RootsRecipe.Serializer<MortarInventory, MortarCrafting, MortarRecipe> {

@@ -46,7 +46,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.PYRE;
+    return ModRecipes.Types.PYRE.get();
   }
 
   public static class Serializer extends RootsRecipe.Serializer<PyreInventory, PyreCrafting, PyreRecipe> {
@@ -59,7 +59,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       super.fromJsonAdditional(recipe, pRecipeId, pJson);
       if (GsonHelper.isStringValue(pJson, "ritual")) {
         ResourceLocation ritualName = new ResourceLocation(GsonHelper.getAsString(pJson, "ritual"));
-        Ritual ritual = ModRegistries.RITUAL_REGISTRY.getValue(ritualName);
+        Ritual ritual = ModRegistries.RITUAL_REGISTRY.get().getValue(ritualName);
         if (ritual == null) {
           throw new JsonSyntaxException("Ritual '" + ritualName + "' does not exist!");
         }
@@ -72,7 +72,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       super.fromNetworkAdditional(recipe, pRecipeId, pBuffer);
       if (pBuffer.readBoolean()) {
         ResourceLocation ritualName = new ResourceLocation(pBuffer.readUtf());
-        Ritual ritual = ModRegistries.RITUAL_REGISTRY.getValue(ritualName);
+        Ritual ritual = ModRegistries.RITUAL_REGISTRY.get().getValue(ritualName);
         if (ritual == null) {
           // TODO: something here?
         }

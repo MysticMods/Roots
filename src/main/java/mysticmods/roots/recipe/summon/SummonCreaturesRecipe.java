@@ -69,12 +69,12 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return null;
+    return ModRecipes.Serializers.SUMMON_CREATURES.get();
   }
 
   @Override
   public RecipeType<?> getType() {
-    return null;
+    return ModRecipes.Types.SUMMON_CREATURES.get();
   }
 
   public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<SummonCreaturesRecipe> {

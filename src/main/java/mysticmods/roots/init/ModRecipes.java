@@ -10,10 +10,18 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Optional;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -37,34 +45,49 @@ public class ModRecipes {
   }
 
   public static class Types {
-    public static RecipeType<ChrysopoeiaRecipe> CHRYSOPOEIA;
-    public static RecipeType<GroveRecipe> GROVE;
-    public static RecipeType<MortarRecipe> MORTAR;
-    public static RecipeType<SummonCreaturesRecipe> SUMMON_CREATURES;
-    public static RecipeType<PyreRecipe> PYRE;
+    private static final DeferredRegister<RecipeType<?>> SERIALIZER = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, RootsAPI.MODID);
 
-    public static void register() {
-      CHRYSOPOEIA = register(new ResourceLocation(RootsAPI.MODID, "chrysopoeia"));
-      GROVE = register(new ResourceLocation(RootsAPI.MODID, "fey_crafting"));
-      MORTAR = register(new ResourceLocation(RootsAPI.MODID, "mortar"));
-      SUMMON_CREATURES = register(new ResourceLocation(RootsAPI.MODID, "summon_creatures"));
-      PYRE = register(new ResourceLocation(RootsAPI.MODID, "ritual_crafting"));
-    }
+    public static RegistryObject<RecipeType<ChrysopoeiaRecipe>> CHRYSOPOEIA = SERIALIZER.register("chrysopoeia", () -> new RecipeType<>() {
+      @Override
+      public String toString() {
+        return "roots:chrysopoeia";
+      }
+    });
 
-    private static <T extends Recipe<?>> RecipeType<T> register(final ResourceLocation key) {
-      return Registry.register(Registry.RECIPE_TYPE, key, new RecipeType<T>() {
-        public String toString() {
-          return key.toString();
-        }
-      });
-    }
+    public static RegistryObject<RecipeType<GroveRecipe>> GROVE = SERIALIZER.register("grove", () -> new RecipeType<>() {
+      @Override
+      public String toString() {
+        return "roots:grove";
+      }
+    });
 
-    public static void load () {
+    public static RegistryObject<RecipeType<MortarRecipe>> MORTAR = SERIALIZER.register("mortar", () -> new RecipeType<>() {
+      @Override
+      public String toString() {
+        return "roots:mortar";
+      }
+    });
+
+    public static RegistryObject<RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = SERIALIZER.register("summon_creatures", () -> new RecipeType<>() {
+      @Override
+      public String toString() {
+        return "roots:summon_creatures";
+      }
+    });
+
+    public static RegistryObject<RecipeType<PyreRecipe>> PYRE = SERIALIZER.register("pyre", () -> new RecipeType<>() {
+      @Override
+      public String toString() {
+        return "roots:pyre";
+      }
+    });
+
+    public static void register(IEventBus bus) {
+      SERIALIZER.register(bus);
     }
   }
 
   public static void load() {
     Serializers.load();
-    Types.load();
   }
 }

@@ -21,11 +21,11 @@ import java.util.Comparator;
 
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class ResolvedRecipes {
-  public static final ResolvingRecipeType<PlayerOffhandInventoryHandler, ChrysopoeiaRecipe> CHRYSOPOEIA = new ResolvingRecipeType<>(new LazySupplier<>(() -> ModRecipes.Types.CHRYSOPOEIA), Comparator.comparing(o -> o.getId().getPath()));
-  public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(new LazySupplier<>(() -> ModRecipes.Types.GROVE), Comparator.comparing(o -> o.getId().getPath()));
-  public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(new LazySupplier<>(() -> ModRecipes.Types.MORTAR), Comparator.comparing(o -> o.getId().getPath()));
-  public static final ResolvingRecipeType<PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>(new LazySupplier<>(() -> ModRecipes.Types.PYRE), Comparator.comparing(o -> o.getId().getPath()));
-  public static final ResolvingRecipeType<SummonCreaturesCrafting, SummonCreaturesRecipe> SUMMON_CREATURES = new ResolvingRecipeType<>(new LazySupplier<>(() -> ModRecipes.Types.SUMMON_CREATURES), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<PlayerOffhandInventoryHandler, ChrysopoeiaRecipe> CHRYSOPOEIA = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.CHRYSOPOEIA), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.GROVE), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.MORTAR), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.PYRE), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<SummonCreaturesCrafting, SummonCreaturesRecipe> SUMMON_CREATURES = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.SUMMON_CREATURES), Comparator.comparing(o -> o.getId().getPath()));
 
   @SubscribeEvent
   public static void onReloadListeners(AddReloadListenerEvent event) {
