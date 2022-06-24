@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.init.ModRegistries;
+import mysticmods.roots.api.spells.Spell;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -113,6 +113,37 @@ public abstract class Property<T> {
     @Override
     public Class<RitualProperty<?>> getRegistryType() {
       return c(RitualProperty.class);
+    }
+  }
+
+  public static class SpellProperty<V> extends Property<V> implements IForgeRegistryEntry<SpellProperty<?>> {
+    private ResourceLocation registryName;
+    protected ResourceKey<Spell> spell;
+
+    public SpellProperty(ResourceKey<Spell> spell, V defaultValue, Serializer<V> serializer) {
+      super(defaultValue, serializer);
+      this.spell = spell;
+    }
+
+    public ResourceKey<Spell> getSpell() {
+      return spell;
+    }
+
+    @Override
+    public SpellProperty<?> setRegistryName(ResourceLocation name) {
+      this.registryName = name;
+      return this;
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public ResourceLocation getRegistryName() {
+      return this.registryName;
+    }
+
+    @Override
+    public Class<SpellProperty<?>> getRegistryType() {
+      return c(SpellProperty.class);
     }
   }
 }

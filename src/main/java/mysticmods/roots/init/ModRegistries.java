@@ -17,11 +17,13 @@ public class ModRegistries {
   private static final DeferredRegister<Ritual> DEFERRED_RITUAL_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<Spell> DEFERRED_SPELL_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<Property.RitualProperty<?>> DEFERRED_RITUAL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_PROPERTY_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<Property.SpellProperty<?>> DEFERRED_SPELL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_PROPERTY_REGISTRY, RootsAPI.MODID);
 
   public static Supplier<IForgeRegistry<Herb>> HERB_REGISTRY = DEFERRED_HERB_REGISTRY.makeRegistry(Herb.class, () -> new RegistryBuilder<Herb>().disableSaving().disableSync());
   public static Supplier<IForgeRegistry<Ritual>> RITUAL_REGISTRY = DEFERRED_RITUAL_REGISTRY.makeRegistry(Ritual.class, () -> new RegistryBuilder<Ritual>().disableSync().disableSaving());
   public static Supplier<IForgeRegistry<Spell>> SPELL_REGISTRY = DEFERRED_SPELL_REGISTRY.makeRegistry(Spell.class, () -> new RegistryBuilder<Spell>().disableSaving().disableSync());
   public static Supplier<IForgeRegistry<Property.RitualProperty<?>>> RITUAL_PROPERTY_REGISTRY = DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry(c(Property.RitualProperty.class), () -> new RegistryBuilder<Property.RitualProperty<?>>().disableSync().disableSaving());
+  public static Supplier<IForgeRegistry<Property.SpellProperty<?>>> SPELL_PROPERTY_REGISTRY = DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(Property.SpellProperty.class), () -> new RegistryBuilder<Property.SpellProperty<?>>().disableSync().disableSaving());
 
   private static <T> Class<T> c(Class<?> cls) {
     return (Class<T>) cls;
@@ -32,6 +34,7 @@ public class ModRegistries {
     DEFERRED_RITUAL_REGISTRY.register(bus);
     DEFERRED_SPELL_REGISTRY.register(bus);
     DEFERRED_RITUAL_PROPERTY_REGISTRY.register(bus);
+    DEFERRED_SPELL_PROPERTY_REGISTRY.register(bus);
   }
 
   public static void load() {

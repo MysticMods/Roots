@@ -16,12 +16,6 @@ public class ModRituals {
   public static final RegistryEntry<Ritual> TRANSMUTATION = ritual(Rituals.TRANSMUTATION, () -> new Ritual());
   public static final RegistryEntry<Property.RitualProperty<?>> TRANSMUTATION_COUNT = REGISTRATE.simple("transmutation/count", Property.RitualProperty.class, () -> new Property.RitualProperty<>(Rituals.TRANSMUTATION, 10, Property.INTEGER_SERIALIZER));
 
-  static {
-    REGISTRATE.addDataGenerator(ProviderType.RECIPE, (p) -> {
-
-    });
-  }
-
   private static RegistryEntry<Ritual> ritual (ResourceKey<Ritual> key, NonNullSupplier<Ritual> builder) {
     return REGISTRATE.simple(key.location().getPath(), Ritual.class, builder);
   }

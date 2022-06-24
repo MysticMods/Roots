@@ -20,12 +20,12 @@ import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Set;
 
-public class PropertyProvider implements DataProvider {
+public class SpellPropertyProvider implements DataProvider {
   private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
 
   protected final DataGenerator generator;
 
-  public PropertyProvider(DataGenerator generator) {
+  public SpellPropertyProvider(DataGenerator generator) {
     this.generator = generator;
   }
 
@@ -33,20 +33,21 @@ public class PropertyProvider implements DataProvider {
   public void run(HashCache pCache) throws IOException {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
-    for (Property.RitualProperty<?> prop : ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getValues()) {
-      ResourceLocation id = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getKey(prop);
+    for (Property.SpellProperty<?> prop : ModRegistries.SPELL_PROPERTY_REGISTRY.get().getValues()) {
+      ResourceLocation id = ModRegistries.SPELL_PROPERTY_REGISTRY.get().getKey(prop);
       if (!set.add(id)) {
         throw new IllegalStateException("Duplicate recipe " + id);
       } else {
         JsonObject recipe = new JsonObject();
-        recipe.addProperty("ritual", prop.getRitual().location().toString());
+        recipe.addProperty("spell", prop.getSpell().location().toString());
         recipe.add("value", prop.serializeValueJson());
         recipe.add("default_value", prop.serializeDefaultValueJson());
-        saveRecipe(pCache, recipe, path.resolve("data/" + id.getNamespace() + "/properties/ritual/" + id.getPath() + ".json"));
+        saveRecipe(pCache, recipe, path.resolve("data/" + id.getNamespace() + "/properties/spell/" + id.getPath() + ".json"));
       }
     }
   }
 
+  // TODO: abstract this up a level
   private static void saveRecipe(HashCache pCache, JsonObject pRecipeJson, Path pPath) {
     try {
       String s = GSON.toJson((JsonElement) pRecipeJson);
@@ -82,6 +83,6 @@ public class PropertyProvider implements DataProvider {
 
   @Override
   public String getName() {
-    return null;
+    return "Spell properties";
   }
 }

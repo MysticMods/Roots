@@ -1,7 +1,9 @@
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.data.PropertyProvider;
+import mysticmods.roots.data.RitualPropertyProvider;
+import mysticmods.roots.data.SpellPropertyProvider;
+import mysticmods.roots.data.SpellPropertyReloadListener;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -10,7 +12,9 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 public class Data {
   @SubscribeEvent
   public static void onDataGenerated (GatherDataEvent event) {
-    PropertyProvider properties = new PropertyProvider(event.getGenerator());
+    RitualPropertyProvider properties = new RitualPropertyProvider(event.getGenerator());
     event.getGenerator().addProvider(properties);
+    SpellPropertyProvider spell_properties = new SpellPropertyProvider(event.getGenerator());
+    event.getGenerator().addProvider(spell_properties);
   }
 }

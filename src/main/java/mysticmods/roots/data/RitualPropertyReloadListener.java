@@ -20,12 +20,12 @@ import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid= RootsAPI.MODID)
-public class PropertyReloadListener extends SimpleJsonResourceReloadListener {
-  private static final Gson GSON = (new GsonBuilder()).create();
-  private static final PropertyReloadListener INSTANCE = new PropertyReloadListener();
 
-  public PropertyReloadListener() {
+public class RitualPropertyReloadListener extends SimpleJsonResourceReloadListener {
+  private static final Gson GSON = (new GsonBuilder()).create();
+  private static final RitualPropertyReloadListener INSTANCE = new RitualPropertyReloadListener();
+
+  public RitualPropertyReloadListener() {
     super(GSON, "properties/ritual");
   }
 
@@ -41,17 +41,7 @@ public class PropertyReloadListener extends SimpleJsonResourceReloadListener {
     });
   }
 
-  @SubscribeEvent
-  public static void onReloadListeners (AddReloadListenerEvent event) {
-    event.addListener(INSTANCE);
-  }
-
-  @SubscribeEvent
-  public static void onDataReloaded (OnDatapackSyncEvent event) {
-    if (event.getPlayer() != null) {
-      Networking.sendTo(new ClientBoundRitualPropertyPacket(), event.getPlayer());
-    } else {
-      Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundRitualPropertyPacket());
-    }
+  public static RitualPropertyReloadListener getInstance() {
+    return INSTANCE;
   }
 }
