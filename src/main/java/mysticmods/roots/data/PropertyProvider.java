@@ -40,8 +40,8 @@ public class PropertyProvider implements DataProvider {
       } else {
         JsonObject recipe = new JsonObject();
         recipe.addProperty("ritual", prop.getRitual().location().toString());
-        recipe.add("value", prop.valueToJson());
-        recipe.add("default_value", prop.defaultValueToJson());
+        recipe.add("value", prop.serializeValueJson());
+        recipe.add("default_value", prop.serializeDefaultValueJson());
         saveRecipe(pCache, recipe, path.resolve("data/" + id.getNamespace() + "/properties/ritual/" + id.getPath() + ".json"));
       }
     }

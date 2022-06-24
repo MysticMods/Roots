@@ -4,12 +4,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.init.ModRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -22,7 +24,7 @@ public abstract class Property<T> {
   protected final Serializer<T> serializer;
   protected T value;
 
-  public Property(/*PropertyType type, */T defaultValue, Serializer<T> serializer) {
+  public Property(T defaultValue, Serializer<T> serializer) {
     this.defaultValue = defaultValue;
     this.serializer = serializer;
   }
@@ -43,12 +45,27 @@ public abstract class Property<T> {
     return serializer;
   }
 
-  public JsonElement valueToJson() {
+  public JsonElement serializeValueJson() {
     return serializer.jsonWriter.apply(value == null ? defaultValue : value);
   }
 
-  public JsonElement defaultValueToJson () {
+  public JsonElement serializeDefaultValueJson() {
     return serializer.jsonWriter.apply(defaultValue);
+  }
+
+  public void serializeNetwork (FriendlyByteBuf buf) {
+    if (this.value == null) {
+      throw new IllegalStateException("Cannot serialize null value: " + this);
+    }
+    this.serializer.networkWriter.accept(buf, this.value);
+  }
+
+  public void reset () {
+    this.value = null;
+  }
+
+  public boolean shouldSerialize() {
+    return this.value == null || !this.value.equals(defaultValue);
   }
 
   public void updateFromJson(JsonObject object) {
@@ -60,13 +77,13 @@ public abstract class Property<T> {
   }
 
   public record Serializer<T>(Function<FriendlyByteBuf, T> networkReader,
-                              BiFunction<JsonObject, String, T> jsonReader, Function<T, JsonElement> jsonWriter) {
+                              BiFunction<JsonObject, String, T> jsonReader, Function<T, JsonElement> jsonWriter, BiConsumer<FriendlyByteBuf, T> networkWriter) {
   }
 
-  public static Serializer<Integer> INTEGER_SERIALIZER = new Serializer<>(FriendlyByteBuf::readVarInt, GsonHelper::getAsInt, JsonPrimitive::new);
-  public static Serializer<Boolean> BOOLEAN_SERIALIZER = new Serializer<>(FriendlyByteBuf::readBoolean, GsonHelper::getAsBoolean, JsonPrimitive::new);
-  public static Serializer<Float> FLOAT_SERIALIZER = new Serializer<>(FriendlyByteBuf::readFloat, GsonHelper::getAsFloat, JsonPrimitive::new);
-  public static Serializer<String> STRING_SERIALIZER = new Serializer<>(FriendlyByteBuf::readUtf, GsonHelper::getAsString, JsonPrimitive::new);
+  public static Serializer<Integer> INTEGER_SERIALIZER = new Serializer<>(FriendlyByteBuf::readVarInt, GsonHelper::getAsInt, JsonPrimitive::new, FriendlyByteBuf::writeVarInt);
+  public static Serializer<Boolean> BOOLEAN_SERIALIZER = new Serializer<>(FriendlyByteBuf::readBoolean, GsonHelper::getAsBoolean, JsonPrimitive::new, FriendlyByteBuf::writeBoolean);
+  public static Serializer<Float> FLOAT_SERIALIZER = new Serializer<>(FriendlyByteBuf::readFloat, GsonHelper::getAsFloat, JsonPrimitive::new, FriendlyByteBuf::writeFloat);
+  public static Serializer<String> STRING_SERIALIZER = new Serializer<>(FriendlyByteBuf::readUtf, GsonHelper::getAsString, JsonPrimitive::new, FriendlyByteBuf::writeUtf);
 
   public static class RitualProperty<V> extends Property<V> implements IForgeRegistryEntry<RitualProperty<?>> {
     private ResourceLocation registryName;
