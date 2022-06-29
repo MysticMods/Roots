@@ -13,12 +13,15 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
 import noobanidus.libs.noobutil.util.BlockEntityUtil;
 
 import javax.annotation.Nullable;
 
 public abstract class BaseBlockEntity extends BlockEntity implements IReferentialBlockEntity, BoundedBlockEntity {
+  private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
+  protected AABB singleBlockBoundingBox;
   protected BoundingBox boundingBox;
 
   public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -117,6 +120,14 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
     }
 
     return clientBounds;
+  }
+
+  public AABB getSingleBlockBoundingBox () {
+    if (singleBlockBoundingBox == null) {
+      singleBlockBoundingBox = singleBlock.move(getBlockPos());
+    }
+
+    return singleBlockBoundingBox;
   }
 
   public static <T extends BlockEntity> void clientTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {

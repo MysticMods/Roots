@@ -1,18 +1,19 @@
 package mysticmods.roots.block.entity;
 
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.api.DualTickBlockEntity;
+import mysticmods.roots.api.ClientTickBlockEntity;
 import mysticmods.roots.api.InventoryBlockEntity;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.ServerTickBlockEntity;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.block.entity.template.BaseBlockEntity;
 import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.entity.RitualEntity;
+import mysticmods.roots.init.ModRegistries;
 import mysticmods.roots.init.ResolvedRecipes;
-import mysticmods.roots.recipe.mortar.MortarCrafting;
-import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.util.RitualUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -23,6 +24,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -32,10 +34,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.items.ItemStackHandler;
 import noobanidus.libs.noobutil.util.ItemUtil;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PyreBlockEntity extends UseDelegatedBlockEntity implements DualTickBlockEntity, InventoryBlockEntity {
+public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {
   private final PyreInventory inventory = new PyreInventory() {
     @Override
     protected void onContentsChanged(int slot) {
@@ -50,6 +53,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements DualTick
   private PyreRecipe lastRecipe = null;
   private PyreRecipe cachedRecipe = null;
   private Ritual currentRitual = null;
+  private RitualEntity ritualEntity = null;
+  private int ritualEntityId = -1;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -74,21 +79,21 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements DualTick
         revalidateRecipe();
       }
       if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
-          // CRAFTING HAPPENS HERE, OR IT BECOMES A RITUAL!!!
-          PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
-          // ritual things have to happen
-          lastRecipe = cachedRecipe;
-          previousRecipeItems.clear();
-          previousRecipeItems.addAll(inventory.getItemsCopy());
-          ItemStack result = cachedRecipe.assemble(playerCrafting);
-          // process
-          NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
-          ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);
-          for (ItemStack stack : processed) {
-            ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
-          }
-          cachedRecipe = null;
-          setChanged();
+        // CRAFTING HAPPENS HERE, OR IT BECOMES A RITUAL!!!
+        PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
+        // ritual things have to happen
+        lastRecipe = cachedRecipe;
+        previousRecipeItems.clear();
+        previousRecipeItems.addAll(inventory.getItemsCopy());
+        ItemStack result = cachedRecipe.assemble(playerCrafting);
+        // process
+        NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
+        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);
+        for (ItemStack stack : processed) {
+          ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+        }
+        cachedRecipe = null;
+        setChanged();
       }
     } else {
       // insert
@@ -152,6 +157,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements DualTick
     if (lastRecipe != null) {
       pTag.putString("last_recipe", lastRecipe.getId().toString());
     }
+    if (currentRitual != null) {
+      pTag.putString("current_ritual", ModRegistries.RITUAL_REGISTRY.get().getKey(currentRitual).toString());
+    }
+    if (ritualEntity != null) {
+      pTag.putInt("ritual_entity", ritualEntity.getId());
+    } else if (ritualEntityId != -1) {
+      pTag.putInt("ritual_entity", ritualEntityId);
+    }
     pTag.put("inventory", inventory.serializeNBT());
   }
 
@@ -176,15 +189,58 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements DualTick
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(pTag.getCompound("inventory"));
     }
+    if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
+      ResourceLocation ritualId = new ResourceLocation(pTag.getString("current_ritual"));
+      currentRitual = ModRegistries.RITUAL_REGISTRY.get().getValue(ritualId);
+    }
+    if (pTag.contains("ritual_entity", Tag.TAG_INT)) {
+      ritualEntityId = pTag.getInt("ritual_entity");
+    }
   }
 
-  @Override
-  public void dualTick(Level pLevel, BlockPos pPos, BlockState pState, boolean isClient) {
+  @Nullable
+  public RitualEntity getRitualEntity() {
+    // TODO: what are the conditions of this
+    if (ritualEntity != null) {
+      this.ritualEntity = RitualUtil.validateRitualEntity(ritualEntity, currentRitual);
+    }
 
+    if (getLevel() == null) {
+      return null;
+    }
+
+    if (ritualEntity == null && ritualEntityId != -1) {
+      Entity entity = getLevel().getEntity(ritualEntityId);
+      if (entity instanceof RitualEntity newRitualEntity) {
+        this.ritualEntity = RitualUtil.validateRitualEntity(newRitualEntity, currentRitual);
+      }
+    }
+
+    if (ritualEntity == null) {
+      List<RitualEntity> ritualEntities = getLevel().getEntitiesOfClass(RitualEntity.class, getSingleBlockBoundingBox(), o -> !o.isRemoved());
+      if (!ritualEntities.isEmpty()) {
+        if (ritualEntities.size() > 1) {
+          // TODO: validate the other entities
+        }
+        this.ritualEntity = RitualUtil.validateRitualEntity(ritualEntities.get(0), currentRitual);
+      }
+    }
+
+    return this.ritualEntity;
   }
 
   @Override
   public ItemStackHandler getInventory() {
     return inventory;
+  }
+
+  @Override
+  public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
+
+  }
+
+  @Override
+  public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
+
   }
 }
