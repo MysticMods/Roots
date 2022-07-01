@@ -7,7 +7,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.ServerTickBlockEntity;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
-import mysticmods.roots.entity.RitualEntity;
 import mysticmods.roots.init.ModRegistries;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
