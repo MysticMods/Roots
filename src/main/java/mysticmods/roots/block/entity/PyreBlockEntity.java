@@ -53,8 +53,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private PyreRecipe lastRecipe = null;
   private PyreRecipe cachedRecipe = null;
   private Ritual currentRitual = null;
-  private RitualEntity ritualEntity = null;
-  private int ritualEntityId = -1;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -160,11 +158,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (currentRitual != null) {
       pTag.putString("current_ritual", ModRegistries.RITUAL_REGISTRY.get().getKey(currentRitual).toString());
     }
-    if (ritualEntity != null) {
-      pTag.putInt("ritual_entity", ritualEntity.getId());
-    } else if (ritualEntityId != -1) {
-      pTag.putInt("ritual_entity", ritualEntityId);
-    }
     pTag.put("inventory", inventory.serializeNBT());
   }
 
@@ -193,40 +186,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       ResourceLocation ritualId = new ResourceLocation(pTag.getString("current_ritual"));
       currentRitual = ModRegistries.RITUAL_REGISTRY.get().getValue(ritualId);
     }
-    if (pTag.contains("ritual_entity", Tag.TAG_INT)) {
-      ritualEntityId = pTag.getInt("ritual_entity");
-    }
-  }
-
-  @Nullable
-  public RitualEntity getRitualEntity() {
-    // TODO: what are the conditions of this
-    if (ritualEntity != null) {
-      this.ritualEntity = RitualUtil.validateRitualEntity(ritualEntity, currentRitual);
-    }
-
-    if (getLevel() == null) {
-      return null;
-    }
-
-    if (ritualEntity == null && ritualEntityId != -1) {
-      Entity entity = getLevel().getEntity(ritualEntityId);
-      if (entity instanceof RitualEntity newRitualEntity) {
-        this.ritualEntity = RitualUtil.validateRitualEntity(newRitualEntity, currentRitual);
-      }
-    }
-
-    if (ritualEntity == null) {
-      List<RitualEntity> ritualEntities = getLevel().getEntitiesOfClass(RitualEntity.class, getSingleBlockBoundingBox(), o -> !o.isRemoved());
-      if (!ritualEntities.isEmpty()) {
-        if (ritualEntities.size() > 1) {
-          // TODO: validate the other entities
-        }
-        this.ritualEntity = RitualUtil.validateRitualEntity(ritualEntities.get(0), currentRitual);
-      }
-    }
-
-    return this.ritualEntity;
   }
 
   @Override
@@ -236,11 +195,15 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
-
+    if (currentRitual != null) {
+      currentRitual.animateTick(this);
+    }
   }
 
   @Override
   public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
-
+    if (currentRitual != null) {
+      currentRitual.ritualTick(this);
+    }
   }
 }
