@@ -1,14 +1,12 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
-import mysticmods.roots.block.entity.template.BaseBlockEntity;
-import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;

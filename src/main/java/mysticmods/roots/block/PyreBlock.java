@@ -1,23 +1,25 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.block.entity.PyreBlockEntity;
-import mysticmods.roots.block.entity.template.BaseBlockEntity;
+import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
+  public static final BooleanProperty LIT = BooleanProperty.create("lit");
+
   public PyreBlock(Properties builder) {
     super(builder);
   }

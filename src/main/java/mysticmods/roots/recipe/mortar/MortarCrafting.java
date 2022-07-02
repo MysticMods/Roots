@@ -1,7 +1,7 @@
 package mysticmods.roots.recipe.mortar;
 
 import mysticmods.roots.api.recipe.RootsTileCrafting;
-import mysticmods.roots.block.entity.MortarBlockEntity;
+import mysticmods.roots.blockentity.MortarBlockEntity;
 import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;

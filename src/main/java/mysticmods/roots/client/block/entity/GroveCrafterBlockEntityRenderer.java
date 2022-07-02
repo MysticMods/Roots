@@ -2,7 +2,7 @@ package mysticmods.roots.client.block.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
+import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;

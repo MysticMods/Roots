@@ -1,7 +1,6 @@
 package mysticmods.roots.recipe.property;
 
-import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.property.RitualProperty;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -11,9 +10,9 @@ import net.minecraft.world.level.Level;
 
 public class RitualPropertyRecipe implements Recipe<PropertyContainer> {
   private final ResourceLocation recipeId;
-  private final Property.RitualProperty<?> property;
+  private final RitualProperty<?> property;
 
-  public RitualPropertyRecipe(ResourceLocation recipeId, Property.RitualProperty<?> property) {
+  public RitualPropertyRecipe(ResourceLocation recipeId, RitualProperty<?> property) {
     this.recipeId = recipeId;
     this.property = property;
   }

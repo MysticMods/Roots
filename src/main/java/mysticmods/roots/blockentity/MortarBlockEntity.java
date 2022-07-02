@@ -1,10 +1,9 @@
-package mysticmods.roots.block.entity;
+package mysticmods.roots.blockentity;
 
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.InventoryBlockEntity;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
-import mysticmods.roots.init.ModItems;
+import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
 import mysticmods.roots.recipe.mortar.MortarInventory;

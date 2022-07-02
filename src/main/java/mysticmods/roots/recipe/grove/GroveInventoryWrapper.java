@@ -1,6 +1,6 @@
 package mysticmods.roots.recipe.grove;
 
-import mysticmods.roots.block.entity.PedestalBlockEntity;
+import mysticmods.roots.blockentity.PedestalBlockEntity;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 

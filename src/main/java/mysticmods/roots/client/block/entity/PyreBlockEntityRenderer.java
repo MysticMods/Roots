@@ -2,7 +2,7 @@ package mysticmods.roots.client.block.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import mysticmods.roots.block.entity.PyreBlockEntity;
+import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;

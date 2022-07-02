@@ -14,7 +14,7 @@ import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.block.crop.WaterElementalCropBlock;
-import mysticmods.roots.block.entity.RunicCrafterBlock;
+import mysticmods.roots.blockentity.RunicCrafterBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;

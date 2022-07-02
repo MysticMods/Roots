@@ -1,6 +1,6 @@
-package mysticmods.roots.block.entity;
+package mysticmods.roots.blockentity;
 
-import mysticmods.roots.block.entity.template.BaseBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;

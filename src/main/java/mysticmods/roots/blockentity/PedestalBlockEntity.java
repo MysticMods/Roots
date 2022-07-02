@@ -1,8 +1,7 @@
-package mysticmods.roots.block.entity;
+package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.InventoryBlockEntity;
-import mysticmods.roots.block.PedestalBlock;
-import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

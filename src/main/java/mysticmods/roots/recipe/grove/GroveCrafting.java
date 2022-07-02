@@ -1,12 +1,10 @@
 package mysticmods.roots.recipe.grove;
 
 import mysticmods.roots.api.recipe.RootsTileCrafting;
-import mysticmods.roots.block.PedestalBlock;
-import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
-import mysticmods.roots.block.entity.PedestalBlockEntity;
+import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
+import mysticmods.roots.blockentity.PedestalBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

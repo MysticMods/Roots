@@ -2,21 +2,16 @@ package mysticmods.roots.block;
 
 import mysticmods.roots.api.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.block.entity.MortarBlockEntity;
+import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.world.Containers;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.items.ItemStackHandler;
-
-import javax.annotation.Nullable;
 
 public class MortarBlock extends UseDelegatedBlock {
   public MortarBlock(Properties builder) {

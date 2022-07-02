@@ -1,10 +1,10 @@
 package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import mysticmods.roots.block.entity.GroveCrafterBlockEntity;
-import mysticmods.roots.block.entity.PedestalBlockEntity;
-import mysticmods.roots.block.entity.MortarBlockEntity;
-import mysticmods.roots.block.entity.PyreBlockEntity;
+import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
+import mysticmods.roots.blockentity.PedestalBlockEntity;
+import mysticmods.roots.blockentity.MortarBlockEntity;
+import mysticmods.roots.blockentity.PyreBlockEntity;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 

@@ -1,4 +1,4 @@
-package mysticmods.roots.block.entity.template;
+package mysticmods.roots.blockentity.template;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

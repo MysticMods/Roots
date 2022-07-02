@@ -1,8 +1,8 @@
-package mysticmods.roots.block.entity;
+package mysticmods.roots.blockentity;
 
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.ServerTickBlockEntity;
-import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import noobanidus.libs.noobutil.util.ItemUtil;
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

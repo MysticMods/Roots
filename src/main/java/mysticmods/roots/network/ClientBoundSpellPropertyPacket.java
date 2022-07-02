@@ -1,7 +1,7 @@
 package mysticmods.roots.network;
 
 import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.init.ModRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,7 +16,7 @@ public class ClientBoundSpellPropertyPacket {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
       ResourceLocation rl = buffer.readResourceLocation();
-      Property.SpellProperty<?> prop = ModRegistries.SPELL_PROPERTY_REGISTRY.get().getValue(rl);
+      SpellProperty<?> prop = ModRegistries.SPELL_PROPERTY_REGISTRY.get().getValue(rl);
       if (prop != null) {
         prop.updateFromNetwork(buffer);
       } else {
@@ -29,9 +29,9 @@ public class ClientBoundSpellPropertyPacket {
   }
 
   public void encode(FriendlyByteBuf buffer) {
-    Collection<Property.SpellProperty<?>> props = ModRegistries.SPELL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
+    Collection<SpellProperty<?>> props = ModRegistries.SPELL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
     buffer.writeVarInt(props.size());
-    for (Property.SpellProperty<?> prop : props) {
+    for (SpellProperty<?> prop : props) {
       ResourceLocation rl = ModRegistries.SPELL_PROPERTY_REGISTRY.get().getKey(prop);
       if (rl == null) {
       } else {

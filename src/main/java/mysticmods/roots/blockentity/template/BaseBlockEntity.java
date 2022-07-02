@@ -1,4 +1,4 @@
-package mysticmods.roots.block.entity.template;
+package mysticmods.roots.blockentity.template;
 
 import mysticmods.roots.api.BoundedBlockEntity;
 import mysticmods.roots.api.ClientTickBlockEntity;

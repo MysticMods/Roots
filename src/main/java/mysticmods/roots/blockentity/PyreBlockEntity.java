@@ -1,4 +1,4 @@
-package mysticmods.roots.block.entity;
+package mysticmods.roots.blockentity;
 
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.ClientTickBlockEntity;
@@ -6,13 +6,13 @@ import mysticmods.roots.api.InventoryBlockEntity;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.ServerTickBlockEntity;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.block.entity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.block.PyreBlock;
+import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModRegistries;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
-import mysticmods.roots.util.RitualUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +23,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -37,6 +36,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+// This controls the LIT state
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {
   private final PyreInventory inventory = new PyreInventory() {
     @Override
@@ -52,6 +52,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private PyreRecipe lastRecipe = null;
   private PyreRecipe cachedRecipe = null;
   private Ritual currentRitual = null;
+  private ItemStack storedItem = null;
+  private int lifetime = -1;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -76,6 +78,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         revalidateRecipe();
       }
       if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
+        // TODO: CRAFTING RITUAL
         // CRAFTING HAPPENS HERE, OR IT BECOMES A RITUAL!!!
         PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
         // ritual things have to happen
@@ -85,7 +88,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         ItemStack result = cachedRecipe.assemble(playerCrafting);
         // process
         NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
-        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);
+        /*        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);*/
         for (ItemStack stack : processed) {
           ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
         }
@@ -110,6 +113,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       lastRecipe = null;
       cachedRecipe = null;
       currentRitual = null;
+      storedItem = ItemStack.EMPTY;
     }
   }
 
@@ -135,16 +139,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   protected void saveAdditional(CompoundTag pTag) {
     super.saveAdditional(pTag);
-    boolean previous = false;
     ListTag previousItems = new ListTag();
     for (ItemStack stack : previousRecipeItems) {
       if (!stack.isEmpty()) {
-        previous = true;
         previousItems.add(stack.save(new CompoundTag()));
       }
     }
 
-    if (previous) {
+    if (!previousItems.isEmpty()) {
       pTag.put("previous_items", previousItems);
     }
 
@@ -157,6 +159,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (currentRitual != null) {
       pTag.putString("current_ritual", ModRegistries.RITUAL_REGISTRY.get().getKey(currentRitual).toString());
     }
+    if (!storedItem.isEmpty()) {
+      pTag.put("stored_item", storedItem.serializeNBT());
+    }
+    pTag.putInt("lifetime", lifetime);
     pTag.put("inventory", inventory.serializeNBT());
   }
 
@@ -185,6 +191,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       ResourceLocation ritualId = new ResourceLocation(pTag.getString("current_ritual"));
       currentRitual = ModRegistries.RITUAL_REGISTRY.get().getValue(ritualId);
     }
+    if (pTag.contains("lifetime", Tag.TAG_INT)) {
+      lifetime = pTag.getInt("lifetime");
+    }
+    if (pTag.contains("stored_item", Tag.TAG_COMPOUND)) {
+      storedItem = ItemStack.of(pTag.getCompound("stored_item"));
+    }
   }
 
   @Override
@@ -192,17 +204,45 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return inventory;
   }
 
+  public ItemStack getStoredItem() {
+    return storedItem;
+  }
+
+  public int getLifetime () {
+    return lifetime;
+  }
+
+  @Nullable
+  public Ritual getCurrentRitual() {
+    return currentRitual;
+  }
+
   @Override
+  // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
-    if (currentRitual != null) {
+    if (currentRitual != null && lifetime > 0) {
       currentRitual.animateTick(this);
     }
   }
 
   @Override
   public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
-    if (currentRitual != null) {
-      currentRitual.ritualTick(this);
+    if (currentRitual != null && lifetime > 0) {
+      lifetime--;
+      setChanged();
+      if (lifetime <= 0) {
+        currentRitual = null;
+        if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT)) {
+          pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, false), 3);
+        } else {
+          updateViaState();
+        }
+      } else {
+        currentRitual.ritualTick(this);
+        if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
+          pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, true), 3);
+        }
+      }
     }
   }
 }

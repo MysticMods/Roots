@@ -1,12 +1,11 @@
 package mysticmods.roots.network;
 
 import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.init.ModRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Collection;
@@ -17,7 +16,7 @@ public class ClientBoundRitualPropertyPacket {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
       ResourceLocation rl = buffer.readResourceLocation();
-      Property.RitualProperty<?> prop = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getValue(rl);
+      RitualProperty<?> prop = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getValue(rl);
       if (prop != null) {
         prop.updateFromNetwork(buffer);
       } else {
@@ -30,9 +29,9 @@ public class ClientBoundRitualPropertyPacket {
   }
 
   public void encode(FriendlyByteBuf buffer) {
-    Collection<Property.RitualProperty<?>> props = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
+    Collection<RitualProperty<?>> props = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
     buffer.writeVarInt(props.size());
-    for (Property.RitualProperty<?> prop : props) {
+    for (RitualProperty<?> prop : props) {
       ResourceLocation rl = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getKey(prop);
       if (rl == null) {
       } else {

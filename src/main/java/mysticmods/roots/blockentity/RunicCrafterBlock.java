@@ -1,4 +1,4 @@
-package mysticmods.roots.block.entity;
+package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.block.GroveCrafterBlock;

@@ -1,7 +1,7 @@
 package mysticmods.roots.recipe.summon;
 
 import mysticmods.roots.api.recipe.RootsTileCrafting;
-import mysticmods.roots.block.entity.PyreBlockEntity;
+import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;

@@ -1,7 +1,7 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.InventoryBlockEntity;
-import mysticmods.roots.block.entity.PedestalBlockEntity;
+import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
