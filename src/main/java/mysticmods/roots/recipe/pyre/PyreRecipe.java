@@ -23,6 +23,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.List;
 import java.util.function.Consumer;
 
+// TODO: Validate that ritual is exclusive with output, conditional output
 public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
   private Ritual ritual;
 
@@ -32,6 +33,10 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
   public Ritual getRitual() {
     return ritual;
+  }
+
+  public boolean hasOutput () {
+    return (result != null && result.isEmpty()) || !conditionalOutputs.isEmpty();
   }
 
   public void setRitual(Ritual ritual) {
@@ -57,6 +62,9 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     protected void fromJsonAdditional(PyreRecipe recipe, ResourceLocation pRecipeId, JsonObject pJson) {
       super.fromJsonAdditional(recipe, pRecipeId, pJson);
       if (GsonHelper.isStringValue(pJson, "ritual")) {
+        if (recipe.hasOutput()) {
+          throw new JsonSyntaxException("Recipe '" + pRecipeId + "' cannot have both a ritual and an output");
+        }
         ResourceLocation ritualName = new ResourceLocation(GsonHelper.getAsString(pJson, "ritual"));
         Ritual ritual = ModRegistries.RITUAL_REGISTRY.get().getValue(ritualName);
         if (ritual == null) {
