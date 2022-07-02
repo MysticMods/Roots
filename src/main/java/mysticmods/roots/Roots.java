@@ -66,7 +66,6 @@ public class Roots {
     ModRecipes.load();
     ModRituals.load();
     ModSpells.load();
-    ModEntities.load();
     ModRegistries.register(bus);
     ModRecipes.Types.register(bus);
   }

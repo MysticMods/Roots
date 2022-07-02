@@ -1,5 +1,6 @@
 {
   "ritual": "roots:transmutation",
-  "value": 2,
-  "default_value": 10
+  "value": 10,
+  "default_value": 10,
+  "_comment": "Number of times the ritual will operate per interval"
 }

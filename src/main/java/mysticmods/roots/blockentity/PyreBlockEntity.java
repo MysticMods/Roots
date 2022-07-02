@@ -9,6 +9,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModRegistries;
+import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
@@ -52,6 +53,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private PyreRecipe lastRecipe = null;
   private PyreRecipe cachedRecipe = null;
   private Ritual currentRitual = null;
+  // List<ItemStack> -> conditional outputs
   private ItemStack storedItem = null;
   private int lifetime = -1;
 
@@ -78,21 +80,24 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         revalidateRecipe();
       }
       if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
-        // TODO: CRAFTING RITUAL
-        // CRAFTING HAPPENS HERE, OR IT BECOMES A RITUAL!!!
+        Ritual newRitual = cachedRecipe.getRitual();
+        if (newRitual == null) {
+          currentRitual = ModRituals.CRAFTING.get();
+        }
         PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
-        // ritual things have to happen
         lastRecipe = cachedRecipe;
         previousRecipeItems.clear();
         previousRecipeItems.addAll(inventory.getItemsCopy());
-        ItemStack result = cachedRecipe.assemble(playerCrafting);
+        if (newRitual == ModRituals.CRAFTING.get()) {
+          this.storedItem = cachedRecipe.assemble(playerCrafting);
+        }
         // process
         NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
-        /*        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);*/
         for (ItemStack stack : processed) {
           ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
         }
         cachedRecipe = null;
+        startRitual(player);
         setChanged();
       }
     } else {
@@ -101,6 +106,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
 
     return InteractionResult.SUCCESS;
+  }
+
+  public void startRitual(Player player) {
+    if (currentRitual != null) {
+      this.lifetime = currentRitual.getDuration();
+    } else {
+      RootsAPI.LOG.error("tried to start a ritual but the ritual is null");
+    }
   }
 
   @Override
@@ -208,7 +221,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return storedItem;
   }
 
-  public int getLifetime () {
+  public ItemStack popStoredItem() {
+    ItemStack inSlot = storedItem;
+    storedItem = ItemStack.EMPTY;
+    return inSlot;
+  }
+
+  public int getLifetime() {
     return lifetime;
   }
 

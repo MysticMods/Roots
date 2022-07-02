@@ -1,0 +1,6 @@
+{
+  "ritual": "roots:crafting",
+  "value": 120,
+  "default_value": 120,
+  "_comment": "How often the ritual is executed (must be shorter than duration)"
+}

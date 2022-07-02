@@ -12,7 +12,7 @@ import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModSpells {
   public static final RegistryEntry<Spell> GROWTH_INFUSION = ritual(Spells.GROWTH_INFUSION, () -> new Spell());
-  public static final RegistryEntry<SpellProperty<?>> GROWTH_INFUSION_INTERVAL = REGISTRATE.simple("growth_infusion/interval", SpellProperty.class, () -> new SpellProperty<>(Spells.GROWTH_INFUSION, 110, Property.INTEGER_SERIALIZER));
+  public static final RegistryEntry<SpellProperty<?>> GROWTH_INFUSION_INTERVAL = REGISTRATE.simple("growth_infusion/interval", SpellProperty.class, () -> new SpellProperty<>(Spells.GROWTH_INFUSION, 110, Property.INTEGER_SERIALIZER, "How often the spell is executed"));
 
   private static RegistryEntry<Spell> ritual (ResourceKey<Spell> key, NonNullSupplier<Spell> builder) {
     return REGISTRATE.simple(key.location().getPath(), Spell.class, builder);
