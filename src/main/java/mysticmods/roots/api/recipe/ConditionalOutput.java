@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.NBTIngredient;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +31,13 @@ public class ConditionalOutput {
     }
   }
 
-  @Nullable
+  @Nonnull
   public ItemStack getResult (Random random) {
     if (random.nextFloat() < this.chance) {
       return this.output.copy();
     }
 
-    // TODO: Null or empty?
-    //return ItemStack.EMPTY;
-    return null;
+    return ItemStack.EMPTY;
   }
 
   public ItemStack getOutput() {

@@ -5,6 +5,7 @@ import mysticmods.roots.api.ClientTickBlockEntity;
 import mysticmods.roots.api.InventoryBlockEntity;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.ServerTickBlockEntity;
+import mysticmods.roots.api.recipe.ConditionalOutput;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
@@ -53,8 +54,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private PyreRecipe lastRecipe = null;
   private PyreRecipe cachedRecipe = null;
   private Ritual currentRitual = null;
-  // List<ItemStack> -> conditional outputs
-  private ItemStack storedItem = null;
+  private List<ItemStack> storedItems = new ArrayList<>();
   private int lifetime = -1;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -74,6 +74,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       if (!popped.isEmpty()) {
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
+      // TODO: starting a ritual while one is already active
     } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION)) {
       if (cachedRecipe == null) {
         // should this revalidate?
@@ -88,8 +89,16 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         lastRecipe = cachedRecipe;
         previousRecipeItems.clear();
         previousRecipeItems.addAll(inventory.getItemsCopy());
+        storedItems.clear();
         if (newRitual == ModRituals.CRAFTING.get()) {
-          this.storedItem = cachedRecipe.assemble(playerCrafting);
+          storedItems.add(cachedRecipe.assemble(playerCrafting));
+          // TODO: conditional outputs
+          for (ConditionalOutput conditionalOutput : cachedRecipe.getConditionalOutputs() ) {
+            ItemStack output = conditionalOutput.getResult(level.getRandom());
+            if (!output.isEmpty()) {
+              storedItems.add(output);
+            }
+          }
         }
         // process
         NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
@@ -126,7 +135,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       lastRecipe = null;
       cachedRecipe = null;
       currentRitual = null;
-      storedItem = ItemStack.EMPTY;
+      storedItems.clear();
     }
   }
 
@@ -172,8 +181,15 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (currentRitual != null) {
       pTag.putString("current_ritual", ModRegistries.RITUAL_REGISTRY.get().getKey(currentRitual).toString());
     }
-    if (!storedItem.isEmpty()) {
-      pTag.put("stored_item", storedItem.serializeNBT());
+
+    ListTag storedItems = new ListTag();
+    for (ItemStack stack : this.storedItems) {
+      if (!stack.isEmpty()) {
+        storedItems.add(stack.save(new CompoundTag()));
+      }
+    }
+    if (!storedItems.isEmpty()) {
+      pTag.put("stored_items", storedItems);
     }
     pTag.putInt("lifetime", lifetime);
     pTag.put("inventory", inventory.serializeNBT());
@@ -182,8 +198,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   public void load(CompoundTag pTag) {
     super.load(pTag);
+    previousRecipeItems.clear();
     if (pTag.contains("previous_items", Tag.TAG_LIST)) {
-      previousRecipeItems.clear();
       ListTag previousItems = pTag.getList("previous_items", Tag.TAG_COMPOUND);
       for (int i = 0; i < previousItems.size(); i++) {
         previousRecipeItems.add(ItemStack.of(previousItems.getCompound(i)));
@@ -207,8 +223,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (pTag.contains("lifetime", Tag.TAG_INT)) {
       lifetime = pTag.getInt("lifetime");
     }
-    if (pTag.contains("stored_item", Tag.TAG_COMPOUND)) {
-      storedItem = ItemStack.of(pTag.getCompound("stored_item"));
+    storedItems.clear();
+    if (pTag.contains("stored_items", Tag.TAG_LIST)) {
+      ListTag incomingStoredItems = pTag.getList("stored_items", Tag.TAG_COMPOUND);
+      for (int i = 0; i < incomingStoredItems.size(); i++) {
+        storedItems.add(ItemStack.of(incomingStoredItems.getCompound(i)));
+      }
     }
   }
 
@@ -217,14 +237,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return inventory;
   }
 
-  public ItemStack getStoredItem() {
-    return storedItem;
-  }
-
-  public ItemStack popStoredItem() {
-    ItemStack inSlot = storedItem;
-    storedItem = ItemStack.EMPTY;
-    return inSlot;
+  public List<ItemStack> popStoredItems () {
+    List<ItemStack> result = new ArrayList<>(storedItems);
+    storedItems.clear();
+    return result;
   }
 
   public int getLifetime() {

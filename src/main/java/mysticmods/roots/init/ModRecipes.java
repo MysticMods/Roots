@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.RegistryEntry;
+import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.recipe.chrysopoeia.ChrysopoeiaRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -10,18 +11,13 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.Optional;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -29,6 +25,7 @@ public class ModRecipes {
   static {
     REGISTRATE.addDataGenerator(ProviderType.RECIPE, (p) -> {
       PyreRecipe.builder(ModRituals.TRANSMUTATION.get()).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).build(p, new ResourceLocation(RootsAPI.MODID, "ritual/recipe/transmutation"));
+      PyreRecipe.builder(ModItems.Herbs.MOONGLOW_LEAF.get(), 1).addIngredient(ItemTags.LEAVES).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GEMS_QUARTZ).addIngredient(RootsTags.Items.BIRCH_BARK).addIngredient(RootsTags.Items.BIRCH_BARK).build(p, new ResourceLocation(RootsAPI.MODID, "moonglow_leaf"));
     });
   }
 

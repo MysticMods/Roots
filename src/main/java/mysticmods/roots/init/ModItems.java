@@ -260,7 +260,7 @@ public class ModItems {
       .model(subfolder("tools"))
       .register();
 
-  public static final ItemEntry<Item> LIViNG_SWORD = REGISTRATE.item("living_sword", Item::new)
+  public static final ItemEntry<Item> LIVING_SWORD = REGISTRATE.item("living_sword", Item::new)
       .model(subfolder("tools"))
       .register();
 

@@ -20,6 +20,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -117,7 +118,37 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       this.ritual = ritual;
     }
 
+    @Override
+    public RootsRecipe.Builder setOutput(ItemStack output) {
+      if (this.ritual != null) {
+        throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
+      }
+      return super.setOutput(output);
+    }
 
+    @Override
+    public RootsRecipe.Builder addConditionalOutput(ConditionalOutput output) {
+      if (this.ritual != null) {
+        throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
+      }
+      return super.addConditionalOutput(output);
+    }
+
+    @Override
+    public RootsRecipe.Builder addConditionalOutputs(Collection<ConditionalOutput> output) {
+      if (this.ritual != null) {
+        throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
+      }
+      return super.addConditionalOutputs(output);
+    }
+
+    @Override
+    public RootsRecipe.Builder addConditionalOutput(ItemStack output, float chance) {
+      if (this.ritual != null) {
+        throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
+      }
+      return super.addConditionalOutput(output, chance);
+    }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
