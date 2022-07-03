@@ -87,13 +87,15 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         Ritual newRitual = cachedRecipe.getRitual();
         if (newRitual == null) {
           currentRitual = ModRituals.CRAFTING.get();
+        } else {
+          currentRitual = newRitual;
         }
         PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
         lastRecipe = cachedRecipe;
         previousRecipeItems.clear();
         previousRecipeItems.addAll(inventory.getItemsCopy());
         storedItems.clear();
-        if (newRitual == ModRituals.CRAFTING.get()) {
+        if (currentRitual == ModRituals.CRAFTING.get()) {
           storedItems.add(cachedRecipe.assemble(playerCrafting));
           // TODO: conditional outputs
           for (ConditionalOutput conditionalOutput : cachedRecipe.getConditionalOutputs() ) {
