@@ -7,11 +7,13 @@ import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -22,11 +24,18 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
 
   public PyreBlock(Properties builder) {
     super(builder);
+    registerDefaultState(defaultBlockState().setValue(LIT, false));
   }
 
   @Override
   public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
     return Shapes.PYRE;
+  }
+
+  @Override
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    super.createBlockStateDefinition(pBuilder);
+    pBuilder.add(PyreBlock.LIT);
   }
 
   @Nullable

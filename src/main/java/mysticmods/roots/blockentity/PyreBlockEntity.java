@@ -33,10 +33,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.items.ItemStackHandler;
 import noobanidus.libs.noobutil.util.ItemUtil;
+import noobanidus.libs.particleslib.client.particle.Particles;
+import noobanidus.libs.particleslib.init.ModParticles;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 // This controls the LIT state
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {
@@ -75,7 +78,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
       // TODO: starting a ritual while one is already active
-    } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION)) {
+    } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
       if (cachedRecipe == null) {
         // should this revalidate?
         revalidateRecipe();
@@ -108,6 +111,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         cachedRecipe = null;
         startRitual(player);
         setChanged();
+        updateViaState();
       }
     } else {
       // insert
@@ -255,6 +259,19 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
+    Random pRandom = pLevel.getRandom();
+    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.LIT)) {
+      Particles.create(ModParticles.FIERY_PARTICLE.get())
+          .addVelocity(0.00525f * (pRandom.nextFloat() - 0.5f), 0, 0.00525f * (pRandom.nextFloat() - 0.5f))
+          .setAlpha(0.5f, 0.2f)
+          .setScale(0.8f + 0.5f * pRandom.nextFloat())
+          .setColor(230 / 255.0f, 55 / 255.0f, 16 / 255.0f, 230 / 255.0f, 83 / 255.0f, 16 / 255.0f)
+          .setLifetime(80)
+          .disableGravity()
+          .setSpin(0)
+          .spawn(pLevel, pPos.getX() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f), pPos.getY() + 0.625f + 0.125f * pRandom.nextFloat(), pPos.getZ() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f));
+    }
+
     if (currentRitual != null && lifetime > 0) {
       currentRitual.animateTick(this);
     }

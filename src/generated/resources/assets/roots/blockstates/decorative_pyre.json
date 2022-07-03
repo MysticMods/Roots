@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "lit=false": {
+      "model": "roots:block/complex/pyre"
+    },
+    "lit=true": {
       "model": "roots:block/complex/pyre"
     }
   }
