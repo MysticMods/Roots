@@ -78,18 +78,6 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
       this.times = times;
     }
 
-    public void addConditionalOutput(ItemStack output, float chance) {
-      addConditionalOutput(new ConditionalOutput(output, chance));
-    }
-
-    public void addConditionalOutput(ConditionalOutput output) {
-      conditionalOutputs.add(output);
-    }
-
-    public void grants (Grant grant) {
-      grants.add(grant);
-    }
-
     @Override
     public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, getSerializer(), times));

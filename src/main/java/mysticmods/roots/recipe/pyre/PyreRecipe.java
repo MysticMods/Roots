@@ -111,8 +111,13 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
 
     public void setRitual(Ritual ritual) {
+      if (!this.conditionalOutputs.isEmpty() || (this.result != null && !this.result.isEmpty())) {
+        throw new IllegalStateException("can't set a ritual for a recipe that has an output");
+      }
       this.ritual = ritual;
     }
+
+
 
     @Override
     public RecipeSerializer<?> getSerializer() {

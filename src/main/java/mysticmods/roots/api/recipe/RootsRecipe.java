@@ -268,16 +268,38 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   // TODO: NBT SUPPORT???
   public abstract static class Builder {
     // TODO: Not final?
-    protected final ItemStack result;
+    protected ItemStack result;
     protected final List<Ingredient> ingredients = new ArrayList<>();
     protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
     protected final List<Grant> grants = new ArrayList<>();
+
+    protected Builder () {
+    }
 
     protected Builder(ItemStack result) {
       this.result = result;
     }
 
     public abstract RecipeSerializer<?> getSerializer();
+
+    public Builder setOutput (ItemStack output) {
+      this.result = output;
+      return this;
+    }
+
+    public Builder addConditionalOutput (ConditionalOutput output) {
+      this.conditionalOutputs.add(output);
+      return this;
+    }
+
+    public Builder addConditionalOutputs (Collection<ConditionalOutput> output) {
+      this.conditionalOutputs.addAll(output);
+      return this;
+    }
+
+    public Builder addConditionalOutput(ItemStack output, float chance) {
+      return addConditionalOutput(new ConditionalOutput(output, chance));
+    }
 
     public Builder addIngredient(TagKey<Item> ingredient) {
       addIngredient(Ingredient.of(ingredient));
@@ -291,6 +313,11 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
     public Builder addIngredient(Ingredient ingredient) {
       this.ingredients.add(ingredient);
+      return this;
+    }
+
+    public Builder addGrant (Grant grant) {
+      this.grants.add(grant);
       return this;
     }
 
