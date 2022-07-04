@@ -1,4 +1,4 @@
-package mysticmods.roots.data;
+package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.network.ClientBoundRitualPropertyPacket;

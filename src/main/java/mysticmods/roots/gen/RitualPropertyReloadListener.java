@@ -1,4 +1,4 @@
-package mysticmods.roots.data;
+package mysticmods.roots.gen;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

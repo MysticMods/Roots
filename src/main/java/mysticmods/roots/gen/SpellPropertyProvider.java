@@ -1,9 +1,8 @@
-package mysticmods.roots.data;
+package mysticmods.roots.gen;
 
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.property.SpellProperty;
