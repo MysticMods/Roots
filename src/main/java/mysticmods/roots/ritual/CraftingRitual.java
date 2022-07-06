@@ -1,14 +1,21 @@
 package mysticmods.roots.ritual;
 
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.Rituals;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import noobanidus.libs.noobutil.util.ItemUtil;
 
 import java.util.List;
 
 public class CraftingRitual extends Ritual {
+  @Override
+  public ResourceKey<Ritual> getKey() {
+    return Rituals.CRAFTING;
+  }
+
   @Override
   public void ritualTick(PyreBlockEntity blockEntity) {
     int dur = getDuration() - blockEntity.getLifetime();

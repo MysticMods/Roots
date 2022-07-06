@@ -1,10 +1,10 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.block.entity.GroveCrafterBlockEntityRenderer;
-import mysticmods.roots.client.block.entity.MortarBlockEntityRenderer;
-import mysticmods.roots.client.block.entity.PedestalBlockEntityRenderer;
-import mysticmods.roots.client.block.entity.PyreBlockEntityRenderer;
+import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
+import mysticmods.roots.client.blockentity.MortarBlockEntityRenderer;
+import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;
+import mysticmods.roots.client.blockentity.PyreBlockEntityRenderer;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModBlocks;
 import net.minecraft.client.renderer.BiomeColors;

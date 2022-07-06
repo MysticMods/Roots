@@ -1,4 +1,4 @@
-package mysticmods.roots.client.block.entity;
+package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
