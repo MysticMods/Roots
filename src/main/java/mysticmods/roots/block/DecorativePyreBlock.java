@@ -9,8 +9,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import noobanidus.libs.particleslib.client.particle.Particles;
-import noobanidus.libs.particleslib.init.ModParticles;
 
 import java.util.Random;
 

@@ -47,7 +47,7 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
     }
   }
 
-  public static Builder builder (ItemStack stack) {
+  public static Builder builder(ItemStack stack) {
     return new Builder(stack);
   }
 }

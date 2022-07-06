@@ -3,7 +3,6 @@ package mysticmods.roots.data;
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.spells.Spell;
 import net.minecraft.nbt.CompoundTag;
@@ -23,11 +22,11 @@ public class Grants extends DirectorySavedData {
   private final Map<UUID, Set<ResourceLocation>> GRANTED_SPELLS = new Object2ObjectLinkedOpenHashMap<>();
   private final Map<UUID, Set<ResourceLocation>> GRANTED_MODIFIERS = new Object2ObjectLinkedOpenHashMap<>();
 
-  public boolean hasSpell (Player player, Spell spell) {
+  public boolean hasSpell(Player player, Spell spell) {
     return hasSpell(player, spell.getKey());
   }
 
-  public boolean hasSpell (Player player, ResourceKey<Spell> spell) {
+  public boolean hasSpell(Player player, ResourceKey<Spell> spell) {
     return hasSpell(player, spell.location());
   }
 
@@ -36,7 +35,7 @@ public class Grants extends DirectorySavedData {
     return spells != null && spells.contains(spell);
   }
 
-  public void addSpell (Player player, Spell spell) {
+  public void addSpell(Player player, Spell spell) {
     addSpell(player, spell.getKey());
   }
 
@@ -49,7 +48,7 @@ public class Grants extends DirectorySavedData {
   }
 
   @Nullable
-  public Set<ResourceLocation> getSpells (Player player) {
+  public Set<ResourceLocation> getSpells(Player player) {
     Set<ResourceLocation> result = GRANTED_SPELLS.get(player.getUUID());
     if (result == null) {
       return null;
@@ -62,11 +61,11 @@ public class Grants extends DirectorySavedData {
     return GRANTED_SPELLS.computeIfAbsent(player.getUUID(), (k) -> new ObjectLinkedOpenHashSet<>());
   }
 
-  public boolean hasModifier (Player player, Modifier modifier) {
+  public boolean hasModifier(Player player, Modifier modifier) {
     return hasModifier(player, modifier.getKey());
   }
 
-  public boolean hasModifier (Player player, ResourceKey<Modifier> modifier) {
+  public boolean hasModifier(Player player, ResourceKey<Modifier> modifier) {
     return hasModifier(player, modifier.location());
   }
 
@@ -75,11 +74,11 @@ public class Grants extends DirectorySavedData {
     return modifiers != null && modifiers.contains(modifier);
   }
 
-  public void addModifier (Player player, Modifier modifier) {
+  public void addModifier(Player player, Modifier modifier) {
     addModifier(player, modifier.getKey());
   }
 
-  public void addModifier (Player player, ResourceKey<Modifier> modifier) {
+  public void addModifier(Player player, ResourceKey<Modifier> modifier) {
     addModifier(player, modifier.location());
   }
 
@@ -88,7 +87,7 @@ public class Grants extends DirectorySavedData {
   }
 
   @Nullable
-  public Set<ResourceLocation> getModifiers (Player player) {
+  public Set<ResourceLocation> getModifiers(Player player) {
     Set<ResourceLocation> result = GRANTED_MODIFIERS.get(player.getUUID());
     if (result == null) {
       return null;

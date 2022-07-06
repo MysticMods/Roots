@@ -4,10 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.spells.Spell;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
@@ -67,7 +64,7 @@ public class Grant implements Consumer<ServerPlayer> {
     }
   }
 
-  public static Grant fromNetwork (FriendlyByteBuf pBuffer) {
+  public static Grant fromNetwork(FriendlyByteBuf pBuffer) {
     return new Grant(EnumUtil.fromOrdinal(GrantType.class, pBuffer.readVarInt()), pBuffer.readResourceLocation());
   }
 

@@ -6,7 +6,7 @@ import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
 
 import javax.annotation.Nullable;
 
-public interface IRootsTileCrafting <H extends IItemHandler, T extends BlockEntity & IReferentialBlockEntity> extends IRootsCrafting<H> {
+public interface IRootsTileCrafting<H extends IItemHandler, T extends BlockEntity & IReferentialBlockEntity> extends IRootsCrafting<H> {
   @Nullable
-  T getBlockEntity ();
+  T getBlockEntity();
 }

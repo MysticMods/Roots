@@ -1,7 +1,6 @@
 package mysticmods.roots.api.spells;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 

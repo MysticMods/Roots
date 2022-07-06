@@ -59,12 +59,12 @@ public class FeyLightBlock extends Block {
 
     float r, g, b;
 
-/*    if (color == null) {*/
-      int index = pRand.nextInt(5);
-      r = UNCOLORED[0][index] / 255.0f;
-      g = UNCOLORED[1][index] / 255.0f;
-      b = UNCOLORED[2][index] / 255.0f;
-/*    }*/
+    /*    if (color == null) {*/
+    int index = pRand.nextInt(5);
+    r = UNCOLORED[0][index] / 255.0f;
+    g = UNCOLORED[1][index] / 255.0f;
+    b = UNCOLORED[2][index] / 255.0f;
+    /*    }*/
 
     // TODO: Handle additional colors
     for (int i = 0; i < 2; i++) {

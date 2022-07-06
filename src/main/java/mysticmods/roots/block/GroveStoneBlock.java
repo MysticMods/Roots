@@ -81,7 +81,7 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
     if (!pLevel.isClientSide) {
       preventDrops(pLevel, pPos, pState, pPlayer);
       if (!pPlayer.isCreative()) {
-        dropResources(pState, pLevel, pPos, (BlockEntity) null, pPlayer, pPlayer.getMainHandItem());
+        dropResources(pState, pLevel, pPos, null, pPlayer, pPlayer.getMainHandItem());
       }
     }
 

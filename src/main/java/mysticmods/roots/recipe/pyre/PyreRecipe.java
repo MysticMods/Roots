@@ -36,7 +36,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     return ritual;
   }
 
-  public boolean hasOutput () {
+  public boolean hasOutput() {
     return (result != null && result.isEmpty()) || !conditionalOutputs.isEmpty();
   }
 

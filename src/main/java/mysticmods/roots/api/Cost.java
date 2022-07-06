@@ -26,7 +26,6 @@ public class Cost {
   }
 
 
-
   // TODO: tojson, tonetwork, fromjson, fromnetwork
 
   public enum CostType {

@@ -1,23 +1,16 @@
 package mysticmods.roots.api.recipe;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.NBTIngredient;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public class ConditionalOutput {
   private final ItemStack output;
@@ -32,7 +25,7 @@ public class ConditionalOutput {
   }
 
   @Nonnull
-  public ItemStack getResult (Random random) {
+  public ItemStack getResult(Random random) {
     if (random.nextFloat() < this.chance) {
       return this.output.copy();
     }
@@ -48,7 +41,7 @@ public class ConditionalOutput {
     return chance;
   }
 
-  public JsonElement toJson () {
+  public JsonElement toJson() {
     JsonObject result = new JsonObject();
     result.addProperty("chance", this.chance);
     JsonObject item = new JsonObject();
@@ -61,12 +54,12 @@ public class ConditionalOutput {
     return result;
   }
 
-  public void toNetwork (FriendlyByteBuf pBuffer) {
+  public void toNetwork(FriendlyByteBuf pBuffer) {
     pBuffer.writeItem(getOutput());
     pBuffer.writeFloat(getChance());
   }
 
-  public static ConditionalOutput fromJson (JsonElement pJson) {
+  public static ConditionalOutput fromJson(JsonElement pJson) {
     if (pJson != null && !pJson.isJsonNull()) {
       if (pJson.isJsonObject()) {
         JsonObject pJsonObject = pJson.getAsJsonObject();
@@ -85,11 +78,11 @@ public class ConditionalOutput {
     }
   }
 
-  public static ConditionalOutput fromNetwork (FriendlyByteBuf pBuffer) {
+  public static ConditionalOutput fromNetwork(FriendlyByteBuf pBuffer) {
     return new ConditionalOutput(pBuffer.readItem(), pBuffer.readFloat());
   }
 
-  public static List<ItemStack> getOutputs (List<ConditionalOutput> conditionalOutputs, Random random) {
+  public static List<ItemStack> getOutputs(List<ConditionalOutput> conditionalOutputs, Random random) {
     List<ItemStack> result = new ArrayList<>();
     for (ConditionalOutput output : conditionalOutputs) {
       ItemStack thisResult = output.getResult(random);

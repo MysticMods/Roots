@@ -41,7 +41,7 @@ public class RecipeInventory extends ItemStackHandler {
     return result;
   }
 
-  public List<ItemStack> getItemsCopy () {
+  public List<ItemStack> getItemsCopy() {
     List<ItemStack> result = new ArrayList<>();
     for (int i = 0; i < getSlots(); i++) {
       ItemStack inSlot = getStackInSlot(i);
@@ -60,7 +60,7 @@ public class RecipeInventory extends ItemStackHandler {
     return result;
   }
 
-  public ItemStack pop () {
+  public ItemStack pop() {
     for (int i = getSlots() - 1; i >= 0; i--) {
       ItemStack inSlot = getStackInSlot(i);
       if (!inSlot.isEmpty()) {
@@ -73,7 +73,7 @@ public class RecipeInventory extends ItemStackHandler {
     return ItemStack.EMPTY;
   }
 
-  public ItemStack insert (ItemStack stack) {
+  public ItemStack insert(ItemStack stack) {
     ItemStack result;
     int slot = -1;
     for (int i = 0; i < getSlots(); i++) {

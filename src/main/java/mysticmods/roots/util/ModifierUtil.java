@@ -14,7 +14,7 @@ public class ModifierUtil {
   private static final Map<Modifier, Spell> MODIFIER_TO_SPELL_MAP = new Object2ObjectLinkedOpenHashMap<>();
   private static final Map<Spell, Set<Modifier>> SPELL_TO_MODIFIERS_MAP = new Object2ObjectLinkedOpenHashMap<>();
 
-  public static void registerModifier (Spell spell, Modifier ... modifiers) {
+  public static void registerModifier(Spell spell, Modifier... modifiers) {
     SPELL_TO_MODIFIERS_MAP.computeIfAbsent(spell, (k) -> new ObjectLinkedOpenHashSet<>()).addAll(Arrays.asList(modifiers));
     for (Modifier modifier : modifiers) {
       MODIFIER_TO_SPELL_MAP.put(modifier, spell);
@@ -22,12 +22,12 @@ public class ModifierUtil {
   }
 
   @Nullable
-  public static Spell spellForModifier (Modifier modifier) {
+  public static Spell spellForModifier(Modifier modifier) {
     return MODIFIER_TO_SPELL_MAP.get(modifier);
   }
 
   @Nullable
-  public static Set<Modifier> modifiersForSpell (Spell spell) {
+  public static Set<Modifier> modifiersForSpell(Spell spell) {
     return SPELL_TO_MODIFIERS_MAP.get(spell);
   }
 }

@@ -9,12 +9,20 @@ public interface BoundedBlockEntity {
     return getRadiusX() != 0 || getRadiusY() != 0 || getRadiusZ() != 0;
   }
 
-  default int getRadiusX() { return 0; }
+  default int getRadiusX() {
+    return 0;
+  }
 
-  default int getRadiusY() { return 0; }
+  default int getRadiusY() {
+    return 0;
+  }
 
-  default int getRadiusZ() { return 0; }
+  default int getRadiusZ() {
+    return 0;
+  }
 
   @Nullable
-  default BoundingBox getBoundingBox () { return null; }
+  default BoundingBox getBoundingBox() {
+    return null;
+  }
 }

@@ -71,7 +71,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     return InteractionResult.FAIL;
   }
 
-  protected List<PedestalBlockEntity> pedestals () {
+  protected List<PedestalBlockEntity> pedestals() {
     List<PedestalBlockEntity> pedestals = new ArrayList<>();
     for (BlockPos pedestal : pedestalPositions()) {
       if (getLevel().getBlockEntity(pedestal) instanceof PedestalBlockEntity pedestalBlockEntity) {

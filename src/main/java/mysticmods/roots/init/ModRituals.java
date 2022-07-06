@@ -36,7 +36,7 @@ public class ModRituals {
   public static final RegistryEntry<RitualProperty<Integer>> CRAFTING_DURATION = REGISTRATE.simple("crafting/duration", RitualProperty.class, () -> new RitualProperty<>(Rituals.CRAFTING, 160, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> CRAFTING_INTERVAL = REGISTRATE.simple("crafting/interval", RitualProperty.class, () -> new RitualProperty<>(Rituals.CRAFTING, 120, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
 
-  private static <T extends Ritual> RegistryEntry<T> ritual (ResourceKey<Ritual> key, NonNullSupplier<T> builder) {
+  private static <T extends Ritual> RegistryEntry<T> ritual(ResourceKey<Ritual> key, NonNullSupplier<T> builder) {
     return REGISTRATE.simple(key.location().getPath(), Ritual.class, builder);
   }
 

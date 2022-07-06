@@ -86,7 +86,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     }
   }
 
-  public ItemStack getHeldItem () {
+  public ItemStack getHeldItem() {
     return inventory.getStackInSlot(0);
   }
 
@@ -97,7 +97,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   private double offset = -1;
 
-  public double offset () {
+  public double offset() {
     if (offset == -1) {
       if (this.getBlockState().is(ModBlocks.RITUAL_PEDESTAL.get())) {
         offset = 1.4;

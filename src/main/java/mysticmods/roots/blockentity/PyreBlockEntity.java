@@ -57,7 +57,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private PyreRecipe lastRecipe = null;
   private PyreRecipe cachedRecipe = null;
   private Ritual currentRitual = null;
-  private List<ItemStack> storedItems = new ArrayList<>();
+  private final List<ItemStack> storedItems = new ArrayList<>();
   private int lifetime = -1;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -98,7 +98,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         if (currentRitual == ModRituals.CRAFTING.get()) {
           storedItems.add(cachedRecipe.assemble(playerCrafting));
           // TODO: conditional outputs
-          for (ConditionalOutput conditionalOutput : cachedRecipe.getConditionalOutputs() ) {
+          for (ConditionalOutput conditionalOutput : cachedRecipe.getConditionalOutputs()) {
             ItemStack output = conditionalOutput.getResult(level.getRandom());
             if (!output.isEmpty()) {
               storedItems.add(output);
@@ -243,7 +243,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return inventory;
   }
 
-  public List<ItemStack> popStoredItems () {
+  public List<ItemStack> popStoredItems() {
     List<ItemStack> result = new ArrayList<>(storedItems);
     storedItems.clear();
     return result;

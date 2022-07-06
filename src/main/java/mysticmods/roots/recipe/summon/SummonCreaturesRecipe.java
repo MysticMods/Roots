@@ -9,7 +9,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.EntityType;
@@ -99,7 +98,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
         throw new JsonSyntaxException("Missing entity type for recipe " + pRecipeId);
       }
 
-return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
+      return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
     }
 
     @Nullable

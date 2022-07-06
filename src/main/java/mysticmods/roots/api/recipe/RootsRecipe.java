@@ -3,7 +3,6 @@ package mysticmods.roots.api.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.recipe.mortar.MortarInventory;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
@@ -273,7 +272,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
     protected final List<Grant> grants = new ArrayList<>();
 
-    protected Builder () {
+    protected Builder() {
     }
 
     protected Builder(ItemStack result) {
@@ -282,17 +281,17 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
     public abstract RecipeSerializer<?> getSerializer();
 
-    public Builder setOutput (ItemStack output) {
+    public Builder setOutput(ItemStack output) {
       this.result = output;
       return this;
     }
 
-    public Builder addConditionalOutput (ConditionalOutput output) {
+    public Builder addConditionalOutput(ConditionalOutput output) {
       this.conditionalOutputs.add(output);
       return this;
     }
 
-    public Builder addConditionalOutputs (Collection<ConditionalOutput> output) {
+    public Builder addConditionalOutputs(Collection<ConditionalOutput> output) {
       this.conditionalOutputs.addAll(output);
       return this;
     }
@@ -316,7 +315,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return this;
     }
 
-    public Builder addGrant (Grant grant) {
+    public Builder addGrant(Grant grant) {
       this.grants.add(grant);
       return this;
     }

@@ -2,7 +2,6 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.property.ModifierProperty;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.recipe.Grant;
@@ -42,14 +41,13 @@ public abstract class RootsAPI {
 
   public abstract IRecipeManagerAccessor getRecipeAccessor();
 
-  public abstract void grant (ServerPlayer player, Grant grant);
+  public abstract void grant(ServerPlayer player, Grant grant);
 
   public RecipeManager getRecipeManager() {
     return getRecipeAccessor().getManager();
   }
 
-  private static <T> ResourceKey<Registry<T>> key(ResourceLocation name)
-  {
+  private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
     return ResourceKey.createRegistryKey(name);
   }
 }

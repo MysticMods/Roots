@@ -6,7 +6,6 @@ import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;

@@ -122,7 +122,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
     return clientBounds;
   }
 
-  public AABB getSingleBlockBoundingBox () {
+  public AABB getSingleBlockBoundingBox() {
     if (singleBlockBoundingBox == null) {
       singleBlockBoundingBox = singleBlock.move(getBlockPos());
     }

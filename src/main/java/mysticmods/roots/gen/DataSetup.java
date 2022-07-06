@@ -10,16 +10,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 
-@Mod.EventBusSubscriber(modid= RootsAPI.MODID)
+@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class DataSetup {
   @SubscribeEvent
-  public static void onReloadListeners (AddReloadListenerEvent event) {
+  public static void onReloadListeners(AddReloadListenerEvent event) {
     event.addListener(RitualPropertyReloadListener.getInstance());
     event.addListener(SpellPropertyReloadListener.getInstance());
   }
 
   @SubscribeEvent
-  public static void onDataReloaded (OnDatapackSyncEvent event) {
+  public static void onDataReloaded(OnDatapackSyncEvent event) {
     if (event.getPlayer() != null) {
       Networking.sendTo(new ClientBoundRitualPropertyPacket(), event.getPlayer());
       Networking.sendTo(new ClientBoundSpellPropertyPacket(), event.getPlayer());

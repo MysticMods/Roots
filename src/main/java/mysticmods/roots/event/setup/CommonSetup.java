@@ -1,7 +1,6 @@
 package mysticmods.roots.event.setup;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.network.Networking;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

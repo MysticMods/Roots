@@ -84,7 +84,7 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       pPoseStack.pushPose();
       int loc = pBlockEntity.getBlockPos().hashCode();
       random.setSeed(loc);
-      BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(inSlot, pBlockEntity.getLevel(), (LivingEntity) null, inSlot.hashCode());
+      BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(inSlot, pBlockEntity.getLevel(), null, inSlot.hashCode());
       boolean flag = bakedmodel.isGui3d();
       int j = this.getRenderAmount(inSlot);
       pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
