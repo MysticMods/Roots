@@ -11,6 +11,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public abstract class Property<T> {
+  @SuppressWarnings("unchecked")
   protected static <T> Class<T> c(Class<?> cls) {
     return (Class<T>) cls;
   }

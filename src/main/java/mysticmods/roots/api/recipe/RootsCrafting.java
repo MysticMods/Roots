@@ -11,6 +11,7 @@ public abstract class RootsCrafting<H extends IItemHandler> extends IInvWrapper<
 
   public RootsCrafting(H handler, @Nullable Player player) {
     super(handler);
+    this.player = player;
   }
 
   @Nullable
