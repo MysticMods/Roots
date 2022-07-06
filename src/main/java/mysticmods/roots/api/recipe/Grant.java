@@ -24,6 +24,14 @@ public class Grant implements Consumer<ServerPlayer> {
     this.id = id;
   }
 
+  public GrantType getType() {
+    return type;
+  }
+
+  public ResourceLocation getId() {
+    return id;
+  }
+
   public JsonElement toJson() {
     JsonObject result = new JsonObject();
     result.addProperty("id", id.toString());
@@ -57,20 +65,6 @@ public class Grant implements Consumer<ServerPlayer> {
       GrantType type = EnumUtil.fromString(GrantType.class, GsonHelper.getAsString(pJsonObject, "type"));
       return new Grant(type, new ResourceLocation(GsonHelper.getAsString(pJsonObject, "id")));
     }
-  }
-
-  public ResourceKey<Spell> asSpell () {
-    if (type != GrantType.SPELL) {
-      throw new IllegalStateException("grant isn't a spell: " + this);
-    }
-    return ResourceKey.create(RootsAPI.SPELL_REGISTRY, id);
-  }
-
-  public ResourceKey<Modifier> asModifier () {
-    if (type != GrantType.MODIFIER) {
-      throw new IllegalStateException("grant isn't a modifier: " + this);
-    }
-    return ResourceKey.create(RootsAPI.SPELL_REGISTRY, id);
   }
 
   public static Grant fromNetwork (FriendlyByteBuf pBuffer) {

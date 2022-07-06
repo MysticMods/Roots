@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class ModifierUtil {
-  private static Map<Modifier, Spell> MODIFIER_TO_SPELL_MAP = new Object2ObjectLinkedOpenHashMap<>();
-  private static Map<Spell, Set<Modifier>> SPELL_TO_MODIFIERS_MAP = new Object2ObjectLinkedOpenHashMap<>();
+  private static final Map<Modifier, Spell> MODIFIER_TO_SPELL_MAP = new Object2ObjectLinkedOpenHashMap<>();
+  private static final Map<Spell, Set<Modifier>> SPELL_TO_MODIFIERS_MAP = new Object2ObjectLinkedOpenHashMap<>();
 
   public static void registerModifier (Spell spell, Modifier ... modifiers) {
     SPELL_TO_MODIFIERS_MAP.computeIfAbsent(spell, (k) -> new ObjectLinkedOpenHashSet<>()).addAll(Arrays.asList(modifiers));

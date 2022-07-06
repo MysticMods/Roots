@@ -1,7 +1,5 @@
 package mysticmods.roots.network;
 
-import mysticmods.mysticalworld.MysticalWorld;
-import mysticmods.mysticalworld.network.ShoulderRide;
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
