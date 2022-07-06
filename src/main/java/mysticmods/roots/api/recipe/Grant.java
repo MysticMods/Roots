@@ -4,7 +4,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.spells.Spell;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
@@ -15,26 +18,22 @@ import java.util.function.Consumer;
 public class Grant implements Consumer<ServerPlayer> {
   private final GrantType type;
   private final ResourceLocation id;
-  private final int quantity;
 
-  public Grant(GrantType type, ResourceLocation id, int quantity) {
+  public Grant(GrantType type, ResourceLocation id) {
     this.type = type;
     this.id = id;
-    this.quantity = quantity;
   }
 
   public JsonElement toJson() {
     JsonObject result = new JsonObject();
     result.addProperty("id", id.toString());
     result.addProperty("type", type.toString());
-    result.addProperty("quantity", quantity);
     return result;
   }
 
   public void toNetwork(FriendlyByteBuf pBuffer) {
     pBuffer.writeResourceLocation(id);
     pBuffer.writeVarInt(type.ordinal());
-    pBuffer.writeVarInt(quantity);
   }
 
   @Override
@@ -56,19 +55,30 @@ public class Grant implements Consumer<ServerPlayer> {
         throw new JsonSyntaxException("Grant must have an id");
       }
       GrantType type = EnumUtil.fromString(GrantType.class, GsonHelper.getAsString(pJsonObject, "type"));
-      int quantity = -1;
-      if (!pJsonObject.get("quantity").isJsonNull()) {
-        quantity = GsonHelper.getAsInt(pJsonObject, "quantity");
-      }
-      return new Grant(type, new ResourceLocation(GsonHelper.getAsString(pJsonObject, "id")), quantity);
+      return new Grant(type, new ResourceLocation(GsonHelper.getAsString(pJsonObject, "id")));
     }
   }
 
+  public ResourceKey<Spell> asSpell () {
+    if (type != GrantType.SPELL) {
+      throw new IllegalStateException("grant isn't a spell: " + this);
+    }
+    return ResourceKey.create(RootsAPI.SPELL_REGISTRY, id);
+  }
+
+  public ResourceKey<Modifier> asModifier () {
+    if (type != GrantType.MODIFIER) {
+      throw new IllegalStateException("grant isn't a modifier: " + this);
+    }
+    return ResourceKey.create(RootsAPI.SPELL_REGISTRY, id);
+  }
+
   public static Grant fromNetwork (FriendlyByteBuf pBuffer) {
-    return new Grant(EnumUtil.fromOrdinal(GrantType.class, pBuffer.readVarInt()), pBuffer.readResourceLocation(), pBuffer.readVarInt());
+    return new Grant(EnumUtil.fromOrdinal(GrantType.class, pBuffer.readVarInt()), pBuffer.readResourceLocation());
   }
 
   public enum GrantType {
-    SPELL
+    SPELL,
+    MODIFIER
   }
 }
