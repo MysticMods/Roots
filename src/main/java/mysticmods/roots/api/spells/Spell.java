@@ -1,8 +1,12 @@
 package mysticmods.roots.api.spells;
 
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import mysticmods.roots.api.KeyedRegistryEntry;
+import net.minecraft.resources.ResourceKey;
 
-public class Spell extends ForgeRegistryEntry<Spell> {
-  public void initialize () {
+public abstract class Spell extends KeyedRegistryEntry<Spell> {
+  @Override
+  public abstract ResourceKey<Spell> getKey();
+
+  public void initialize() {
   }
 }

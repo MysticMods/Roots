@@ -23,6 +23,10 @@ public class Grants extends DirectorySavedData {
   private final Map<UUID, Set<ResourceLocation>> GRANTED_SPELLS = new Object2ObjectLinkedOpenHashMap<>();
   private final Map<UUID, Set<ResourceLocation>> GRANTED_MODIFIERS = new Object2ObjectLinkedOpenHashMap<>();
 
+  public boolean hasSpell (Player player, Spell spell) {
+    return hasSpell(player, spell.getKey());
+  }
+
   public boolean hasSpell (Player player, ResourceKey<Spell> spell) {
     return hasSpell(player, spell.location());
   }
@@ -30,6 +34,10 @@ public class Grants extends DirectorySavedData {
   public boolean hasSpell(Player player, ResourceLocation spell) {
     Set<ResourceLocation> spells = GRANTED_SPELLS.get(player.getUUID());
     return spells != null && spells.contains(spell);
+  }
+
+  public void addSpell (Player player, Spell spell) {
+    addSpell(player, spell.getKey());
   }
 
   public void addSpell(Player player, ResourceKey<Spell> spell) {
@@ -54,6 +62,10 @@ public class Grants extends DirectorySavedData {
     return GRANTED_SPELLS.computeIfAbsent(player.getUUID(), (k) -> new ObjectLinkedOpenHashSet<>());
   }
 
+  public boolean hasModifier (Player player, Modifier modifier) {
+    return hasModifier(player, modifier.getKey());
+  }
+
   public boolean hasModifier (Player player, ResourceKey<Modifier> modifier) {
     return hasModifier(player, modifier.location());
   }
@@ -61,6 +73,10 @@ public class Grants extends DirectorySavedData {
   public boolean hasModifier(Player player, ResourceLocation modifier) {
     Set<ResourceLocation> modifiers = GRANTED_MODIFIERS.get(player.getUUID());
     return modifiers != null && modifiers.contains(modifier);
+  }
+
+  public void addModifier (Player player, Modifier modifier) {
+    addModifier(player, modifier.getKey());
   }
 
   public void addModifier (Player player, ResourceKey<Modifier> modifier) {

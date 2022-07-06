@@ -1,8 +1,12 @@
 package mysticmods.roots.api.modifier;
 
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import mysticmods.roots.api.KeyedRegistryEntry;
+import net.minecraft.resources.ResourceKey;
 
-public class Modifier extends ForgeRegistryEntry<Modifier> {
-  public void initialize () {
+public abstract class Modifier extends KeyedRegistryEntry<Modifier> {
+  @Override
+  public abstract ResourceKey<Modifier> getKey();
+
+  public void initialize() {
   }
 }

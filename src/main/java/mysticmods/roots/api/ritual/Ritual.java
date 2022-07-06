@@ -1,21 +1,25 @@
 package mysticmods.roots.api.ritual;
 
+import mysticmods.roots.api.KeyedRegistryEntry;
 import mysticmods.roots.blockentity.PyreBlockEntity;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraft.resources.ResourceKey;
 
-public abstract class Ritual extends ForgeRegistryEntry<Ritual> {
+public abstract class Ritual extends KeyedRegistryEntry<Ritual> {
+  @Override
+  public abstract ResourceKey<Ritual> getKey();
+
   protected int duration;
   protected int radiusX;
   protected int radiusY;
   protected int radiusZ;
   protected int interval;
 
-  public abstract void ritualTick (PyreBlockEntity blockEntity);
+  public abstract void ritualTick(PyreBlockEntity blockEntity);
 
   // Still executed on the server
-  public abstract void animateTick (PyreBlockEntity blockEntity);
+  public abstract void animateTick(PyreBlockEntity blockEntity);
 
-  public abstract void initialize ();
+  public abstract void initialize();
 
   public int getDuration() {
     return duration;
