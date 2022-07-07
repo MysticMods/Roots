@@ -5,6 +5,8 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.init.ModRegistries;
+import mysticmods.roots.util.ModifierUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -12,15 +14,40 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.server.ServerLifecycleHooks;
 
 import javax.annotation.Nullable;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class Grants extends DirectorySavedData {
   private final Map<UUID, Set<ResourceLocation>> GRANTED_SPELLS = new Object2ObjectLinkedOpenHashMap<>();
   private final Map<UUID, Set<ResourceLocation>> GRANTED_MODIFIERS = new Object2ObjectLinkedOpenHashMap<>();
+
+  // TODO: does this make any sense?
+  public static Map<Spell, SpellData> spellDataFromGrants (Player player) {
+    Map<Spell, SpellData> result = new HashMap<>();
+    Collection<Spell> spells = ModRegistries.SPELL_REGISTRY.get().getValues();
+    Grants grants = getGrants();
+    for (Spell spell : spells) {
+      if (grants.hasSpell(player, spell)) {
+        Set<Modifier> unlockedModifiers = new HashSet<>();
+        Set<ResourceLocation> modifiers = ModifierUtil.modifiersForSpell(spell);
+        if (modifiers != null) {
+          for (ResourceLocation modId : modifiers) {
+            if (grants.hasModifier(player, modId)) {
+              Modifier thisMod = ModRegistries.MODIFIER_REGISTRY.get().getValue(modId);
+              if (thisMod != null) {
+                unlockedModifiers.add(thisMod);
+              }
+            }
+          }
+        }
+        result.put(spell, new SpellData(spell, unlockedModifiers));
+      }
+    }
+    return result;
+  }
 
   public boolean hasSpell(Player player, Spell spell) {
     return hasSpell(player, spell.getKey());
@@ -156,5 +183,10 @@ public class Grants extends DirectorySavedData {
     pCompoundTag.put("granted_spells", spells);
     pCompoundTag.put("granted_modifiers", modifiers);
     return pCompoundTag;
+  }
+
+  public static Grants getGrants () {
+    //noinspection ConstantConditions
+    return ServerLifecycleHooks.getCurrentServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(Grants::load, Grants::new, "roots/Grants");
   }
 }
