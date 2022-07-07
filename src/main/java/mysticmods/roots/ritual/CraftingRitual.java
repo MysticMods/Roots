@@ -17,8 +17,7 @@ public class CraftingRitual extends Ritual {
   }
 
   @Override
-  public void ritualTick(PyreBlockEntity blockEntity) {
-    int dur = getDuration() - blockEntity.getLifetime();
+  public void functionalTick(PyreBlockEntity blockEntity, int dur) {
     if (dur == getInterval()) {
       List<ItemStack> output = blockEntity.popStoredItems();
       for (ItemStack stack : output) {
@@ -28,7 +27,7 @@ public class CraftingRitual extends Ritual {
   }
 
   @Override
-  public void animateTick(PyreBlockEntity blockEntity) {
+  public void animationTick(PyreBlockEntity blockEntity, int dur) {
 
   }
 

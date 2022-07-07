@@ -74,30 +74,6 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
         });
         pPoseStack.popPose();
       }
-
-      //  TODO: Check for bounds being shown
-      if (model == null) {
-        model = new Model3D();
-        model.setTexture(RootsRenderer.whiteIcon);
-        model.minX = 0;
-        model.minY = 0;
-        model.minZ = 0;
-        model.maxX = 1;
-        model.maxY = 1;
-        model.maxZ = 1;
-      }
-
-      pPoseStack.pushPose();
-      //Adjust translation and scale ever so slightly so that no z-fighting happens at the edges if there are blocks there
-      pPoseStack.translate(-pBlockEntity.getRadiusX() + 0.01, -pBlockEntity.getRadiusY() + 0.01, -pBlockEntity.getRadiusZ() + 0.01);
-      // TODO: ???
-      float diameter = (pBlockEntity.getRadiusX() + pBlockEntity.getRadiusZ() + 1) - 0.02f;
-      pPoseStack.scale(diameter, diameter, diameter);
-      //If we are inside the visualization we don't have to render the "front" face, otherwise we need to render both given how the visualization works
-      // we want to be able to see all faces easily
-      RenderResizableCuboid.FaceDisplay faceDisplay = isInsideBounds(pBlockEntity.getBlockPos().getX() - pBlockEntity.getRadiusX(), pBlockEntity.getBlockPos().getY() - pBlockEntity.getRadiusY(), pBlockEntity.getBlockPos().getZ() - pBlockEntity.getRadiusZ(), pBlockEntity.getBlockPos().getX() + pBlockEntity.getRadiusX() + 1, pBlockEntity.getBlockPos().getY() + pBlockEntity.getRadiusY() + 1, pBlockEntity.getBlockPos().getZ() + pBlockEntity.getRadiusZ() + 1) ? RenderResizableCuboid.FaceDisplay.BACK : RenderResizableCuboid.FaceDisplay.BOTH;
-      RootsRenderer.renderObject(model, pPoseStack, pBufferSource.getBuffer(Sheets.translucentCullBlockSheet()), colors, RootsRenderer.FULL_LIGHT, pPackedOverlay, faceDisplay);
-      pPoseStack.popPose();
     }
   }
 

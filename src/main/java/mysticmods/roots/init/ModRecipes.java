@@ -26,6 +26,7 @@ public class ModRecipes {
     REGISTRATE.addDataGenerator(ProviderType.RECIPE, (p) -> {
       PyreRecipe.builder(ModRituals.TRANSMUTATION.get()).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).addIngredient(Tags.Items.COBBLESTONE).build(p, new ResourceLocation(RootsAPI.MODID, "ritual/recipe/transmutation"));
       PyreRecipe.builder(ModItems.Herbs.MOONGLOW_LEAF.get(), 1).addIngredient(ItemTags.LEAVES).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GEMS_QUARTZ).addIngredient(RootsTags.Items.BIRCH_BARK).addIngredient(RootsTags.Items.BIRCH_BARK).build(p, new ResourceLocation(RootsAPI.MODID, "moonglow_leaf"));
+      PyreRecipe.builder(ModRituals.ANIMAL_HARVEST.get()).addIngredient(RootsTags.Items.WILDEWHEET_CROP).addIngredient(ItemTags.WOOL).addIngredient(Tags.Items.CROPS_CARROT).addIngredient(Tags.Items.SLIMEBALLS).addIngredient(RootsTags.Items.WILDROOT_CROP).build(p, new ResourceLocation(RootsAPI.MODID, "ritual/recipe/animal_harvest"));
     });
   }
 

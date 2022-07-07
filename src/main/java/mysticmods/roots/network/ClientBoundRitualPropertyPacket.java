@@ -47,7 +47,7 @@ public class ClientBoundRitualPropertyPacket {
 
   private static void handle(ClientBoundRitualPropertyPacket message, Supplier<NetworkEvent.Context> context) {
     for (Ritual ritual : ModRegistries.RITUAL_REGISTRY.get().getValues()) {
-      ritual.initialize();
+      ritual.init();
     }
     context.get().setPacketHandled(true);
   }

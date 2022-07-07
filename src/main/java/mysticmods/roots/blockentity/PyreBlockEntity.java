@@ -243,6 +243,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return inventory;
   }
 
+  public Random getRandom () {
+    return getLevel().getRandom();
+  }
+
   public List<ItemStack> popStoredItems() {
     List<ItemStack> result = new ArrayList<>(storedItems);
     storedItems.clear();
@@ -273,10 +277,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           .setSpin(0)
           .spawn(pLevel, pPos.getX() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f), pPos.getY() + 0.625f + 0.125f * pRandom.nextFloat(), pPos.getZ() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f));
     }
-
-    if (currentRitual != null && lifetime > 0) {
-      currentRitual.animateTick(this);
-    }
+    // ritual animation tick still happens ON THE SERVER
   }
 
   @Override
@@ -292,7 +293,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           updateViaState();
         }
       } else {
-        currentRitual.ritualTick(this);
+        currentRitual.tick(this);
         if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
           pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, true), 3);
         }

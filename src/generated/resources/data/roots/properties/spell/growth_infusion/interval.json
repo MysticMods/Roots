@@ -2,5 +2,5 @@
   "spell": "roots:growth_infusion",
   "value": 110,
   "default_value": 110,
-  "_comment": "How often the spell is executed"
+  "_comment": "How often the spell is executed while channeling"
 }

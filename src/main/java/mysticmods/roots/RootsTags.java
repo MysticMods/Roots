@@ -4,8 +4,11 @@ import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
@@ -200,6 +203,19 @@ public class RootsTags {
 
     static TagKey<Potion> compatTag(String name) {
       return TagKey.create(Registry.POTION_REGISTRY, new ResourceLocation("forge", name));
+    }
+  }
+
+  public static class Entities extends RootsTags {
+    public static TagKey<EntityType<?>> ANIMAL_HARVEST = modTag("animal_harvest_entities");
+    public static TagKey<EntityType<?>> PACIFIST = modTag("pacifist");
+
+    static TagKey<EntityType<?>> modTag (String name) {
+      return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+    }
+
+    static TagKey<EntityType<?>> compatTag (String name) {
+      return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation("forge", name));
     }
   }
 }

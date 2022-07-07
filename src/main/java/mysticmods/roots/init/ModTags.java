@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.ProviderType;
 import mysticmods.mysticalworld.MWTags;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.RootsTags.Blocks;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 
 import static mysticmods.roots.Roots.REGISTRATE;
@@ -11,6 +12,11 @@ import static mysticmods.roots.Roots.REGISTRATE;
 @SuppressWarnings("unchecked")
 public class ModTags {
   static {
+    REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, b -> {
+      b.tag(RootsTags.Entities.PACIFIST).add(EntityType.AXOLOTL, EntityType.CAT, EntityType.CHICKEN, EntityType.COD, EntityType.COW, EntityType.DOLPHIN, EntityType.DONKEY, EntityType.FOX, EntityType.GLOW_SQUID, EntityType.HORSE, EntityType.IRON_GOLEM, EntityType.LLAMA, EntityType.MULE, EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PARROT, EntityType.POLAR_BEAR, EntityType.RABBIT, EntityType.SALMON, EntityType.SHEEP, EntityType.SNOW_GOLEM, EntityType.SQUID, EntityType.TRADER_LLAMA, EntityType.TROPICAL_FISH, EntityType.TURTLE, EntityType.VILLAGER, EntityType.WOLF);
+      b.tag(RootsTags.Entities.ANIMAL_HARVEST).addTag(RootsTags.Entities.PACIFIST);
+    });
+
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
       // Internal mod tags
       b.tag(Blocks.SOILS).addTags(Blocks.EARTH_SOIL, Blocks.AIR_SOIL, Blocks.FIRE_SOIL, Blocks.WATER_SOIL, Blocks.ELEMENTAL_SOIL);

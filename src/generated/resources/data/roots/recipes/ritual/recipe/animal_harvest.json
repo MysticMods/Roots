@@ -1,0 +1,21 @@
+{
+  "type": "roots:pyre",
+  "ingredients": [
+    {
+      "tag": "roots:crops/wildewheet"
+    },
+    {
+      "tag": "minecraft:wool"
+    },
+    {
+      "tag": "forge:crops/carrot"
+    },
+    {
+      "tag": "forge:slimeballs"
+    },
+    {
+      "tag": "roots:crops/wildroot"
+    }
+  ],
+  "ritual": "roots:animal_harvest"
+}
