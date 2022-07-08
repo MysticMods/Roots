@@ -93,8 +93,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       super.toNetworkAdditional(recipe, pBuffer);
       pBuffer.writeBoolean(recipe.getRitual() != null);
       if (recipe.getRitual() != null) {
-        // TODO: getRegistryName is gone in 1.19
-        pBuffer.writeUtf(recipe.getRitual().getRegistryName().toString());
+        pBuffer.writeUtf(ModRegistries.RITUAL_REGISTRY.get().getKey(recipe.getRitual()).toString());
       }
     }
   }
@@ -174,7 +173,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
         super.serializeRecipeData(json);
         if (ritual != null) {
           // TODO: 1.19 has no more getRegistryName
-          json.addProperty("ritual", ritual.getRegistryName().toString());
+          json.addProperty("ritual", ModRegistries.RITUAL_REGISTRY.get().getKey(ritual).toString());
         }
       }
     }

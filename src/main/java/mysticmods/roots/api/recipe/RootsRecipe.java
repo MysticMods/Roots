@@ -354,7 +354,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         }
         if (result != null) {
           JsonObject item = new JsonObject();
-          item.addProperty("item", result.getItem().getRegistryName().toString());
+          item.addProperty("item", ForgeRegistries.ITEMS.getKey(result.getItem()).toString());
           if (result.getCount() > 1) {
             item.addProperty("count", result.getCount());
           }

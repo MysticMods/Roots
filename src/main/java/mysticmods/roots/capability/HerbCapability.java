@@ -31,7 +31,7 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
     ListTag result = new ListTag();
     HERB_MAP.forEach((herb, value) -> {
       CompoundTag tag = new CompoundTag();
-      tag.putString("herb", herb.getRegistryName().toString());
+      tag.putString("herb", ModRegistries.HERB_REGISTRY.get().getKey(herb).toString());
       tag.putFloat("value", value);
       result.add(tag);
     });

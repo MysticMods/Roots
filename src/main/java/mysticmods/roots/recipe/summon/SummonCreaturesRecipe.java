@@ -122,7 +122,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
       for (Ingredient ingredient : recipe.getIngredients()) {
         ingredient.toNetwork(pBuffer);
       }
-      pBuffer.writeResourceLocation(Objects.requireNonNull(recipe.getResultEntity().getRegistryName()));
+      pBuffer.writeResourceLocation(ForgeRegistries.ENTITIES.getKey(recipe.getResultEntity()));
     }
   }
 
@@ -180,7 +180,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
 
       public Result(ResourceLocation id, EntityType<?> result, List<IngredientStack> ingredients) {
         this.id = id;
-        this.result = result.getRegistryName();
+        this.result = ForgeRegistries.ENTITIES.getKey(result);
         this.ingredients = ingredients;
         if (this.ingredients.isEmpty()) {
           throw new IllegalArgumentException("ingredients for recipe " + id + " cannot be empty");
