@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
-// TODO: Validate that ritual is exclusive with output, conditional output
+// TODO: RITUAL CONDITIONS
 public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
   private Ritual ritual;
 
