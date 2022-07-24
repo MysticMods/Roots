@@ -1,6 +1,6 @@
 package mysticmods.roots.block;
 
-import mysticmods.roots.api.InventoryBlockEntity;
+import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;

@@ -1,6 +1,6 @@
 package mysticmods.roots.blockentity;
 
-import mysticmods.roots.api.InventoryBlockEntity;
+import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.BlockPos;

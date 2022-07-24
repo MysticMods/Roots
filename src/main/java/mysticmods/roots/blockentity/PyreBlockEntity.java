@@ -1,10 +1,10 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.api.ClientTickBlockEntity;
-import mysticmods.roots.api.InventoryBlockEntity;
+import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
+import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.ServerTickBlockEntity;
+import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;

@@ -1,4 +1,4 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.blockentity;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;

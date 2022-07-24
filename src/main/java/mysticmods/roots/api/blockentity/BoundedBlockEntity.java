@@ -1,4 +1,4 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.blockentity;
 
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 

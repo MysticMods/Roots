@@ -1,7 +1,7 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.api.InventoryBlockEntity;
+import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ResolvedRecipes;

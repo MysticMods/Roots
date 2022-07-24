@@ -1,8 +1,8 @@
 package mysticmods.roots.blockentity.template;
 
-import mysticmods.roots.api.BoundedBlockEntity;
-import mysticmods.roots.api.ClientTickBlockEntity;
-import mysticmods.roots.api.ServerTickBlockEntity;
+import mysticmods.roots.api.blockentity.BoundedBlockEntity;
+import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
+import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;

@@ -2,7 +2,7 @@ package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.roots.api.BoundedBlockEntity;
+import mysticmods.roots.api.blockentity.BoundedBlockEntity;
 import mysticmods.roots.client.Model3D;
 import mysticmods.roots.client.RootsRenderer;
 import mysticmods.roots.util.EnumUtils;

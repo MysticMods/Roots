@@ -1,7 +1,7 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.RootsTags;
-import mysticmods.roots.api.ServerTickBlockEntity;
+import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.grove.GroveCrafting;
