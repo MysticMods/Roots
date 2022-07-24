@@ -3,7 +3,7 @@ package mysticmods.roots.data;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.spells.Spell;
 
-import java.util.*;
+import java.util.Set;
 
 // If this exists then it's unlocked
 public class SpellData {
@@ -14,5 +14,4 @@ public class SpellData {
     this.spell = spell;
     this.unlockedModifiers = unlockedModifiers;
   }
-
 }

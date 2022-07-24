@@ -1,15 +1,14 @@
 package mysticmods.roots.api.ritual;
 
-import mysticmods.roots.api.KeyedRegistryEntry;
+import mysticmods.roots.api.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
-public abstract class Ritual extends KeyedRegistryEntry<Ritual> {
-  @Override
-  public abstract ResourceKey<Ritual> getKey();
-
+public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
+  protected String descriptionId;
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected int duration;
@@ -62,5 +61,15 @@ public abstract class Ritual extends KeyedRegistryEntry<Ritual> {
 
   public AABB getAABB() {
     return aabb;
+  }
+
+  @Override
+  protected String getDescriptor() {
+    return "ritual";
+  }
+
+  @Override
+  public ResourceLocation getKey() {
+    return Registries.RITUAL_REGISTRY.get().getKey(this);
   }
 }

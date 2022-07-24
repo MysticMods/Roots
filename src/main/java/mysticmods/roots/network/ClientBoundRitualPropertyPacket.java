@@ -2,8 +2,8 @@ package mysticmods.roots.network;
 
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.RitualProperty;
+import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.init.ModRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkEvent;
@@ -16,7 +16,7 @@ public class ClientBoundRitualPropertyPacket {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
       ResourceLocation rl = buffer.readResourceLocation();
-      RitualProperty<?> prop = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getValue(rl);
+      RitualProperty<?> prop = Registries.RITUAL_PROPERTY_REGISTRY.get().getValue(rl);
       if (prop != null) {
         prop.updateFromNetwork(buffer);
       } else {
@@ -29,10 +29,10 @@ public class ClientBoundRitualPropertyPacket {
   }
 
   public void encode(FriendlyByteBuf buffer) {
-    Collection<RitualProperty<?>> props = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
+    Collection<RitualProperty<?>> props = Registries.RITUAL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
     buffer.writeVarInt(props.size());
     for (RitualProperty<?> prop : props) {
-      ResourceLocation rl = ModRegistries.RITUAL_PROPERTY_REGISTRY.get().getKey(prop);
+      ResourceLocation rl = Registries.RITUAL_PROPERTY_REGISTRY.get().getKey(prop);
       if (rl == null) {
       } else {
         buffer.writeResourceLocation(rl);
@@ -46,7 +46,7 @@ public class ClientBoundRitualPropertyPacket {
   }
 
   private static void handle(ClientBoundRitualPropertyPacket message, Supplier<NetworkEvent.Context> context) {
-    for (Ritual ritual : ModRegistries.RITUAL_REGISTRY.get().getValues()) {
+    for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {
       ritual.init();
     }
     context.get().setPacketHandled(true);

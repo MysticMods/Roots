@@ -3,14 +3,12 @@ package mysticmods.roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.Grant;
 import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
-import mysticmods.roots.capability.Capabilities;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -67,6 +65,7 @@ public class Roots {
     ModRecipes.load();
     ModRituals.load();
     ModSpells.load();
+    ModLang.load();
     ModRegistries.register(bus);
     ModRecipes.Types.register(bus);
   }

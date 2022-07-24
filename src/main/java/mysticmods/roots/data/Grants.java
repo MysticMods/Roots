@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
-import mysticmods.roots.init.ModRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -55,7 +55,7 @@ public class Grants extends DirectorySavedData {
   // TODO: does this make any sense?
   public static Map<Spell, SpellData> spellDataFromGrants(Player player) {
     Map<Spell, SpellData> result = new HashMap<>();
-    Collection<Spell> spells = ModRegistries.SPELL_REGISTRY.get().getValues();
+    Collection<Spell> spells = Registries.SPELL_REGISTRY.get().getValues();
     Grants grants = getGrants();
     for (Spell spell : spells) {
       if (grants.hasSpell(player, spell)) {
@@ -128,7 +128,7 @@ public class Grants extends DirectorySavedData {
       Set<Spell> grantedSpells = result.GRANTED_SPELLS.computeIfAbsent(thisEntry.getUUID("player"), (k) -> new ObjectLinkedOpenHashSet<>());
       ListTag incomingSpells = thisEntry.getList("spells", Tag.TAG_STRING);
       for (int j = 0; j < incomingSpells.size(); j++) {
-        grantedSpells.add(ModRegistries.SPELL_REGISTRY.get().getValue(new ResourceLocation(incomingSpells.getString(j))));
+        grantedSpells.add(Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(incomingSpells.getString(j))));
       }
     }
 
@@ -138,7 +138,7 @@ public class Grants extends DirectorySavedData {
       Set<Modifier> grantedModifiers = result.GRANTED_MODIFIERS.computeIfAbsent(thisEntry.getUUID("player"), (k) -> new ObjectLinkedOpenHashSet<>());
       ListTag incomingModifiers = thisEntry.getList("modifiers", Tag.TAG_STRING);
       for (int j = 0; j < incomingModifiers.size(); j++) {
-        grantedModifiers.add(ModRegistries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(incomingModifiers.getString(j))));
+        grantedModifiers.add(Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(incomingModifiers.getString(j))));
       }
     }
 
@@ -153,7 +153,7 @@ public class Grants extends DirectorySavedData {
       thisEntry.putUUID("player", entry.getKey());
       ListTag thisSpells = new ListTag();
       for (Spell spell : entry.getValue()) {
-        thisSpells.add(StringTag.valueOf(ModRegistries.SPELL_REGISTRY.get().getKey(spell).toString()));
+        thisSpells.add(StringTag.valueOf(Registries.SPELL_REGISTRY.get().getKey(spell).toString()));
       }
       if (!thisSpells.isEmpty()) {
         thisEntry.put("spells", thisSpells);
@@ -166,7 +166,7 @@ public class Grants extends DirectorySavedData {
       thisEntry.putUUID("player", entry.getKey());
       ListTag thisModifiers = new ListTag();
       for (Modifier modifier : entry.getValue()) {
-        thisModifiers.add(StringTag.valueOf(ModRegistries.MODIFIER_REGISTRY.get().getKey(modifier).toString()));
+        thisModifiers.add(StringTag.valueOf(Registries.MODIFIER_REGISTRY.get().getKey(modifier).toString()));
       }
       if (!thisModifiers.isEmpty()) {
         thisEntry.put("modifiers", thisModifiers);

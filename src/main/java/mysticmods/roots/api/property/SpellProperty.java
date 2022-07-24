@@ -1,11 +1,15 @@
 package mysticmods.roots.api.property;
 
+import mysticmods.roots.api.IDescribedRegistryEntry;
+import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
+import net.minecraft.Util;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class SpellProperty<V> extends Property<V> implements IForgeRegistryEntry<SpellProperty<?>> {
+public class SpellProperty<V> extends Property<V> implements IForgeRegistryEntry<SpellProperty<?>>, IDescribedRegistryEntry {
+  private String descriptionId;
   private ResourceLocation registryName;
   protected ResourceKey<Spell> spell;
 
@@ -33,5 +37,19 @@ public class SpellProperty<V> extends Property<V> implements IForgeRegistryEntry
   @Override
   public Class<mysticmods.roots.api.property.SpellProperty<?>> getRegistryType() {
     return c(mysticmods.roots.api.property.SpellProperty.class);
+  }
+
+  @Override
+  public ResourceLocation getKey() {
+    return Registries.SPELL_PROPERTY_REGISTRY.get().getKey(this);
+  }
+
+  @Override
+  public String getOrCreateDescriptionId() {
+    if (this.descriptionId == null) {
+      this.descriptionId = Util.makeDescriptionId("spell_property", getKey());
+    }
+
+    return this.descriptionId;
   }
 }

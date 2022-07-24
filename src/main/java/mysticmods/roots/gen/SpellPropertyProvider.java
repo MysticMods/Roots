@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.init.ModRegistries;
+import mysticmods.roots.api.registry.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -32,8 +32,8 @@ public class SpellPropertyProvider implements DataProvider {
   public void run(HashCache pCache) {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
-    for (SpellProperty<?> prop : ModRegistries.SPELL_PROPERTY_REGISTRY.get().getValues()) {
-      ResourceLocation id = ModRegistries.SPELL_PROPERTY_REGISTRY.get().getKey(prop);
+    for (SpellProperty<?> prop : Registries.SPELL_PROPERTY_REGISTRY.get().getValues()) {
+      ResourceLocation id = Registries.SPELL_PROPERTY_REGISTRY.get().getKey(prop);
       if (!set.add(id)) {
         throw new IllegalStateException("Duplicate recipe " + id);
       } else {

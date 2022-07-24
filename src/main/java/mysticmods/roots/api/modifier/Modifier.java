@@ -1,12 +1,20 @@
 package mysticmods.roots.api.modifier;
 
-import mysticmods.roots.api.KeyedRegistryEntry;
-import net.minecraft.resources.ResourceKey;
+import mysticmods.roots.api.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.Registries;
+import net.minecraft.resources.ResourceLocation;
 
-public abstract class Modifier extends KeyedRegistryEntry<Modifier> {
-  @Override
-  public abstract ResourceKey<Modifier> getKey();
-
+public class Modifier extends DescribedRegistryEntry<Modifier> {
   public void initialize() {
+  }
+
+  @Override
+  public ResourceLocation getKey() {
+    return Registries.MODIFIER_REGISTRY.get().getKey(this);
+  }
+
+  @Override
+  protected String getDescriptor() {
+    return "modifier";
   }
 }

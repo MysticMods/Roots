@@ -2,7 +2,7 @@ package mysticmods.roots.capability;
 
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import mysticmods.roots.api.herbs.Herb;
-import mysticmods.roots.init.ModRegistries;
+import mysticmods.roots.api.registry.Registries;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -31,7 +31,7 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
     ListTag result = new ListTag();
     HERB_MAP.forEach((herb, value) -> {
       CompoundTag tag = new CompoundTag();
-      tag.putString("herb", ModRegistries.HERB_REGISTRY.get().getKey(herb).toString());
+      tag.putString("herb", Registries.HERB_REGISTRY.get().getKey(herb).toString());
       tag.putFloat("value", value);
       result.add(tag);
     });
@@ -43,7 +43,7 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
     HERB_MAP.clear();
     for (int i = 0; i < nbt.size(); i++) {
       CompoundTag tag = nbt.getCompound(i);
-      HERB_MAP.put(ModRegistries.HERB_REGISTRY.get().getValue(new ResourceLocation(tag.getString("herb"))), tag.getFloat("value"));
+      HERB_MAP.put(Registries.HERB_REGISTRY.get().getValue(new ResourceLocation(tag.getString("herb"))), tag.getFloat("value"));
     }
   }
 }
