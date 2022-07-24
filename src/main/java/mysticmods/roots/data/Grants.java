@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.init.ModRegistries;
-import mysticmods.roots.util.ModifierUtil;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -15,31 +15,56 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
+// TODO: Rename this?
 public class Grants extends DirectorySavedData {
-  private final Map<UUID, Set<ResourceLocation>> GRANTED_SPELLS = new Object2ObjectLinkedOpenHashMap<>();
-  private final Map<UUID, Set<ResourceLocation>> GRANTED_MODIFIERS = new Object2ObjectLinkedOpenHashMap<>();
+  private final Map<UUID, Set<Spell>> GRANTED_SPELLS = new Object2ObjectLinkedOpenHashMap<>();
+  private final Map<UUID, Set<Modifier>> GRANTED_MODIFIERS = new Object2ObjectLinkedOpenHashMap<>();
+
+  private static final Map<Modifier, Spell> MODIFIER_TO_SPELL_MAP = new Object2ObjectLinkedOpenHashMap<>();
+  private static final Map<Spell, Set<Modifier>> SPELL_TO_MODIFIERS_MAP = new Object2ObjectLinkedOpenHashMap<>();
+
+  @Nullable
+  public static <T extends IForgeRegistryEntry<T>> T getRegistryEntry(ResourceKey<T> key) {
+    Registry<T> registry = ServerLifecycleHooks.getCurrentServer().registryAccess().registryOrThrow(ResourceKey.createRegistryKey(key.location()));
+    return registry.get(key);
+  }
+
+  public static void registerModifier(Spell spell, Modifier... modifiers) {
+    SPELL_TO_MODIFIERS_MAP.computeIfAbsent(spell, (k) -> new ObjectLinkedOpenHashSet<>()).addAll(Arrays.asList(modifiers));
+    for (Modifier modifier : modifiers) {
+      MODIFIER_TO_SPELL_MAP.put(modifier, spell);
+    }
+  }
+
+  @Nullable
+  public static Spell spellForModifier(Modifier modifier) {
+    return MODIFIER_TO_SPELL_MAP.get(modifier);
+  }
+
+  @Nullable
+  public static Set<Modifier> modifiersForSpell(Spell spell) {
+    return SPELL_TO_MODIFIERS_MAP.get(spell);
+  }
 
   // TODO: does this make any sense?
-  public static Map<Spell, SpellData> spellDataFromGrants (Player player) {
+  public static Map<Spell, SpellData> spellDataFromGrants(Player player) {
     Map<Spell, SpellData> result = new HashMap<>();
     Collection<Spell> spells = ModRegistries.SPELL_REGISTRY.get().getValues();
     Grants grants = getGrants();
     for (Spell spell : spells) {
       if (grants.hasSpell(player, spell)) {
         Set<Modifier> unlockedModifiers = new HashSet<>();
-        Set<ResourceLocation> modifiers = ModifierUtil.modifiersForSpell(spell);
+        Set<Modifier> modifiers = modifiersForSpell(spell);
         if (modifiers != null) {
-          for (ResourceLocation modId : modifiers) {
+          for (Modifier modId : modifiers) {
             if (grants.hasModifier(player, modId)) {
-              Modifier thisMod = ModRegistries.MODIFIER_REGISTRY.get().getValue(modId);
-              if (thisMod != null) {
-                unlockedModifiers.add(thisMod);
-              }
+              unlockedModifiers.add(modId);
             }
           }
         }
@@ -50,79 +75,47 @@ public class Grants extends DirectorySavedData {
   }
 
   public boolean hasSpell(Player player, Spell spell) {
-    return hasSpell(player, spell.getKey());
-  }
-
-  public boolean hasSpell(Player player, ResourceKey<Spell> spell) {
-    return hasSpell(player, spell.location());
-  }
-
-  public boolean hasSpell(Player player, ResourceLocation spell) {
-    Set<ResourceLocation> spells = GRANTED_SPELLS.get(player.getUUID());
+    Set<Spell> spells = GRANTED_SPELLS.get(player.getUUID());
     return spells != null && spells.contains(spell);
   }
 
   public void addSpell(Player player, Spell spell) {
-    addSpell(player, spell.getKey());
-  }
-
-  public void addSpell(Player player, ResourceKey<Spell> spell) {
-    addSpell(player, spell.location());
-  }
-
-  public void addSpell(Player player, ResourceLocation spell) {
     getOrCreateSpells(player).add(spell);
   }
 
   @Nullable
-  public Set<ResourceLocation> getSpells(Player player) {
-    Set<ResourceLocation> result = GRANTED_SPELLS.get(player.getUUID());
+  public Set<Spell> getSpells(Player player) {
+    Set<Spell> result = GRANTED_SPELLS.get(player.getUUID());
     if (result == null) {
       return null;
     }
     return ImmutableSet.copyOf(result);
   }
 
-  protected Set<ResourceLocation> getOrCreateSpells(Player player) {
+  protected Set<Spell> getOrCreateSpells(Player player) {
     setDirty();
     return GRANTED_SPELLS.computeIfAbsent(player.getUUID(), (k) -> new ObjectLinkedOpenHashSet<>());
   }
 
   public boolean hasModifier(Player player, Modifier modifier) {
-    return hasModifier(player, modifier.getKey());
-  }
-
-  public boolean hasModifier(Player player, ResourceKey<Modifier> modifier) {
-    return hasModifier(player, modifier.location());
-  }
-
-  public boolean hasModifier(Player player, ResourceLocation modifier) {
-    Set<ResourceLocation> modifiers = GRANTED_MODIFIERS.get(player.getUUID());
+    Set<Modifier> modifiers = GRANTED_MODIFIERS.get(player.getUUID());
     return modifiers != null && modifiers.contains(modifier);
   }
 
   public void addModifier(Player player, Modifier modifier) {
-    addModifier(player, modifier.getKey());
-  }
-
-  public void addModifier(Player player, ResourceKey<Modifier> modifier) {
-    addModifier(player, modifier.location());
-  }
-
-  public void addModifier(Player player, ResourceLocation modifier) {
     getOrCreateModifiers(player).add(modifier);
   }
 
   @Nullable
-  public Set<ResourceLocation> getModifiers(Player player) {
-    Set<ResourceLocation> result = GRANTED_MODIFIERS.get(player.getUUID());
+  public Set<Modifier> getModifiers(Player player) {
+    Set<Modifier> result = GRANTED_MODIFIERS.get(player.getUUID());
     if (result == null) {
       return null;
     }
     return ImmutableSet.copyOf(result);
   }
 
-  protected Set<ResourceLocation> getOrCreateModifiers(Player player) {
+  protected Set<Modifier> getOrCreateModifiers(Player player) {
     setDirty();
     return GRANTED_MODIFIERS.computeIfAbsent(player.getUUID(), (k) -> new ObjectLinkedOpenHashSet<>());
   }
@@ -132,20 +125,20 @@ public class Grants extends DirectorySavedData {
     ListTag spells = pCompoundTag.getList("spells", Tag.TAG_COMPOUND);
     for (int i = 0; i < spells.size(); i++) {
       CompoundTag thisEntry = spells.getCompound(i);
-      Set<ResourceLocation> grantedSpells = result.GRANTED_SPELLS.computeIfAbsent(thisEntry.getUUID("player"), (k) -> new ObjectLinkedOpenHashSet<>());
+      Set<Spell> grantedSpells = result.GRANTED_SPELLS.computeIfAbsent(thisEntry.getUUID("player"), (k) -> new ObjectLinkedOpenHashSet<>());
       ListTag incomingSpells = thisEntry.getList("spells", Tag.TAG_STRING);
       for (int j = 0; j < incomingSpells.size(); j++) {
-        grantedSpells.add(new ResourceLocation(incomingSpells.getString(j)));
+        grantedSpells.add(ModRegistries.SPELL_REGISTRY.get().getValue(new ResourceLocation(incomingSpells.getString(j))));
       }
     }
 
     ListTag modifiers = pCompoundTag.getList("modifiers", Tag.TAG_COMPOUND);
     for (int i = 0; i < modifiers.size(); i++) {
       CompoundTag thisEntry = modifiers.getCompound(i);
-      Set<ResourceLocation> grantedModifiers = result.GRANTED_MODIFIERS.computeIfAbsent(thisEntry.getUUID("player"), (k) -> new ObjectLinkedOpenHashSet<>());
+      Set<Modifier> grantedModifiers = result.GRANTED_MODIFIERS.computeIfAbsent(thisEntry.getUUID("player"), (k) -> new ObjectLinkedOpenHashSet<>());
       ListTag incomingModifiers = thisEntry.getList("modifiers", Tag.TAG_STRING);
       for (int j = 0; j < incomingModifiers.size(); j++) {
-        grantedModifiers.add(new ResourceLocation(incomingModifiers.getString(j)));
+        grantedModifiers.add(ModRegistries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(incomingModifiers.getString(j))));
       }
     }
 
@@ -155,12 +148,12 @@ public class Grants extends DirectorySavedData {
   @Override
   public CompoundTag save(CompoundTag pCompoundTag) {
     ListTag spells = new ListTag();
-    for (Map.Entry<UUID, Set<ResourceLocation>> entry : GRANTED_SPELLS.entrySet()) {
+    for (Map.Entry<UUID, Set<Spell>> entry : GRANTED_SPELLS.entrySet()) {
       CompoundTag thisEntry = new CompoundTag();
       thisEntry.putUUID("player", entry.getKey());
       ListTag thisSpells = new ListTag();
-      for (ResourceLocation spell : entry.getValue()) {
-        thisSpells.add(StringTag.valueOf(spell.toString()));
+      for (Spell spell : entry.getValue()) {
+        thisSpells.add(StringTag.valueOf(ModRegistries.SPELL_REGISTRY.get().getKey(spell).toString()));
       }
       if (!thisSpells.isEmpty()) {
         thisEntry.put("spells", thisSpells);
@@ -168,12 +161,12 @@ public class Grants extends DirectorySavedData {
       }
     }
     ListTag modifiers = new ListTag();
-    for (Map.Entry<UUID, Set<ResourceLocation>> entry : GRANTED_MODIFIERS.entrySet()) {
+    for (Map.Entry<UUID, Set<Modifier>> entry : GRANTED_MODIFIERS.entrySet()) {
       CompoundTag thisEntry = new CompoundTag();
       thisEntry.putUUID("player", entry.getKey());
       ListTag thisModifiers = new ListTag();
-      for (ResourceLocation modifier : entry.getValue()) {
-        thisModifiers.add(StringTag.valueOf(modifier.toString()));
+      for (Modifier modifier : entry.getValue()) {
+        thisModifiers.add(StringTag.valueOf(ModRegistries.MODIFIER_REGISTRY.get().getKey(modifier).toString()));
       }
       if (!thisModifiers.isEmpty()) {
         thisEntry.put("modifiers", thisModifiers);
@@ -185,7 +178,7 @@ public class Grants extends DirectorySavedData {
     return pCompoundTag;
   }
 
-  public static Grants getGrants () {
+  public static Grants getGrants() {
     //noinspection ConstantConditions
     return ServerLifecycleHooks.getCurrentServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(Grants::load, Grants::new, "roots/Grants");
   }
