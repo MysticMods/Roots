@@ -13,7 +13,7 @@
   "parent": "roots:terra_moss",
   "criteria": {
     "book": {
-      "trigger": "roots:grove_activate"
+      "trigger": "roots:grove_activation"
     }
   }
 }
