@@ -1,9 +1,13 @@
 package mysticmods.roots;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.recipe.Grant;
 import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
+import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
+import mysticmods.roots.data.Grants;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,6 +57,17 @@ public class Roots {
       // TODO:
       @Override
       public void grant(ServerPlayer player, Grant grant) {
+        if (grant.getType() == Grant.GrantType.SPELL) {
+          Spell spell = Registries.SPELL_REGISTRY.get().getValue(grant.getId());
+          if (spell != null) {
+            Grants.getGrants().addSpell(player, spell);
+          }
+        } else if (grant.getType() == Grant.GrantType.MODIFIER) {
+          Modifier modifier = Registries.MODIFIER_REGISTRY.get().getValue(grant.getId());
+          if (modifier != null) {
+            Grants.getGrants().addModifier(player, modifier);
+          }
+        }
       }
     };
 
