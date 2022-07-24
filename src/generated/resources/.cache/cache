@@ -844,8 +844,8 @@ c8f8e8b2d267b080d48ea5ded40157576fca3bd8 data/roots/recipes/chiseled_runestone.j
 98d2e82ed882bad9235ba32f49536bca7f3a660d data/roots/recipes/living_pickaxe.json
 18b59a46c4edf395fa4c39047e4c019d916f4d5a data/roots/recipes/moonglow_leaf.json
 5baad916a59fb4702797f69eeeb0fbe488ddf292 data/roots/recipes/mortar/flour.json
-add400e087e4b19ee91c41dc5ace3090afdea6dd data/roots/recipes/ritual/recipe/animal_harvest.json
-d454c5ab4e64927da075abe382fd547dd8156fe0 data/roots/recipes/ritual/recipe/transmutation.json
+add400e087e4b19ee91c41dc5ace3090afdea6dd data/roots/recipes/ritual/animal_harvest.json
+d454c5ab4e64927da075abe382fd547dd8156fe0 data/roots/recipes/ritual/transmutation.json
 04ef087c25064b21eb7deaeac1d6b1e73718f639 data/roots/recipes/runed_brick_alt_button.json
 70eabf4823b3ae58261dfd09ce9183ae569663a9 data/roots/recipes/runed_brick_alt_button_from_runed_obsidian_brick_alt_stonecutting.json
 fbd2df284d767f06b4cdd425072f18562c5d38e6 data/roots/recipes/runed_brick_alt_fence.json
@@ -961,6 +961,7 @@ db9ae9f5c0c18d620aa7418ec6cb4b0a903fa208 data/roots/recipes/runestone_wall.json
 32eb0c03b02b2c595b541fa1a21fa842f11948d2 data/roots/recipes/runestone_wide_post.json
 6820d4f9b87d6998611e8d75e83d2a0368fecb79 data/roots/recipes/runestone_wide_post_from_runestone_stonecutting.json
 2b34dd6ea97269064054020540a7d6cd08d9f01e data/roots/recipes/runic_dust.json
+404f949e6a8448f605010a7fde1b2e363d4be258 data/roots/recipes/spell/growth_infusion.json
 ff55b31cc7bd328ab875a2ecc9b10db05ba3a057 data/roots/recipes/wildwood_button.json
 e79fcc89e0bcfebba2f298a21b6e55dab9db4f2d data/roots/recipes/wildwood_fence.json
 ac1efdbd29d7aefde352fc90001c226f8a52e428 data/roots/recipes/wildwood_gate.json
@@ -1024,6 +1025,7 @@ b61343ad6b4b6cfb52fadb6ad2a1f3c70d7fa822 data/roots/tags/items/barks/jungle.json
 0a685949817c21d07783bcb699eb17148f6cd927 data/roots/tags/items/barks/spruce.json
 d946a8c0378cabc13993d69be460ee60bfaaffb9 data/roots/tags/items/barks/warped.json
 18748b13a0fb5fbaace8f751c71d93030f5920f5 data/roots/tags/items/barks/wildwood.json
+527c9662633b264f6e53613ebd1c8f2169a5f834 data/roots/tags/items/casting_tools.json
 ae09d4792ca79960ffa464f3bbd52b42abfca374 data/roots/tags/items/crafters.json
 451566b9c02dfaecae6bad95c1fb26a07f796e2a data/roots/tags/items/crops.json
 c84247021b812e56145a12750229af395dcad0e5 data/roots/tags/items/crops/cloud_berry.json

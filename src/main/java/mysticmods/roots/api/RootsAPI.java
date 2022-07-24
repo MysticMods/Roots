@@ -4,7 +4,6 @@ import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.recipe.Grant;
 import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spells.Spell;

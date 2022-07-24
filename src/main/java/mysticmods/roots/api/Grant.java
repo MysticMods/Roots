@@ -1,15 +1,15 @@
-package mysticmods.roots.api.recipe;
+package mysticmods.roots.api;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.api.RootsAPI;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import noobanidus.libs.noobutil.util.EnumUtil;
 
+import java.util.Locale;
 import java.util.function.Consumer;
 
 public class Grant implements Consumer<ServerPlayer> {
@@ -32,7 +32,7 @@ public class Grant implements Consumer<ServerPlayer> {
   public JsonElement toJson() {
     JsonObject result = new JsonObject();
     result.addProperty("id", id.toString());
-    result.addProperty("type", type.toString());
+    result.addProperty("type", type.toString().toLowerCase(Locale.ROOT));
     return result;
   }
 

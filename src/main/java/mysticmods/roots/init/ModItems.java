@@ -298,6 +298,7 @@ public class ModItems {
   public static final ItemEntry<Item> STAFF = REGISTRATE.item("staff", Item::new)
       // TODO: CUSTOM MODEL
       .model(subfolder("tools"))
+      .tag(RootsTags.Items.CASTING_TOOLS)
       .register();
 
   public static final ItemEntry<Item> TERRASTONE_AXE = REGISTRATE.item("terrastone_axe", Item::new)

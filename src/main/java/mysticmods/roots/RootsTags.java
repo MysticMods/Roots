@@ -148,6 +148,8 @@ public class RootsTags {
     public static TagKey<Item> MORTAR_ACTIVATION = modTag("mortar_activation");
     public static TagKey<Item> PYRE_ACTIVATION = modTag("pyre_activation");
 
+    public static TagKey<Item> CASTING_TOOLS = modTag("casting_tools");
+
     // These are all filled in by ModTags
     public static class Blocks extends RootsTags {
       public static TagKey<Item> SOILS = modTag("soils");

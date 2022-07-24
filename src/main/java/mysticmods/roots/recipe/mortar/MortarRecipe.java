@@ -2,7 +2,7 @@ package mysticmods.roots.recipe.mortar;
 
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.recipe.ConditionalOutput;
-import mysticmods.roots.api.recipe.Grant;
+import mysticmods.roots.api.Grant;
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.blockentity.MortarBlockEntity;
@@ -73,6 +73,11 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
   public static class Builder extends RootsRecipe.Builder {
     private final int times;
 
+    protected Builder (int times) {
+      super();
+      this.times = times;
+    }
+
     protected Builder(ItemStack result, int times) {
       super(result);
       this.times = times;
@@ -106,5 +111,9 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   public static Builder builder(ItemLike item, int count, int times) {
     return new Builder(new ItemStack(item, count), times);
+  }
+
+  public static Builder builder (int times) {
+    return new Builder(times);
   }
 }
