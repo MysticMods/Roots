@@ -7,6 +7,7 @@ import noobanidus.libs.noobutil.advancement.IGenericPredicate;
 
 import javax.annotation.Nullable;
 
+// TODO
 public class KillPredicate implements IGenericPredicate<LivingDeathEvent> {
   @Override
   public boolean test(ServerPlayer player, LivingDeathEvent event) {

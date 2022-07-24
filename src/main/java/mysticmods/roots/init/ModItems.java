@@ -7,6 +7,7 @@ import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.FireStarterItem;
+import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -24,6 +25,7 @@ public class ModItems {
     public static final ItemEntry<ItemNameBlockItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.WILDROOT_CROP)
+        .defaultLang()
         .register();
     public static final ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
         .model(subfolder("herbs"))
@@ -369,6 +371,10 @@ public class ModItems {
 
   public static final ItemEntry<Item> STRANGE_OOZE = REGISTRATE.item("strange_ooze", Item::new)
       .model(subfolder("resources"))
+      .register();
+
+  public static final ItemEntry<TokenItem> TOKEN = REGISTRATE.item("token", TokenItem::new)
+      .model((ctx, p) -> { })
       .register();
 
   public static void load() {

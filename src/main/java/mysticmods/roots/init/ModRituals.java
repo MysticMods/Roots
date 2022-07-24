@@ -17,11 +17,6 @@ import static mysticmods.roots.Roots.REGISTRATE;
 public class ModRituals {
   public static final RegistryEntry<Ritual> TRANSMUTATION = ritual(Rituals.TRANSMUTATION, () -> new Ritual() {
     @Override
-    public ResourceKey<Ritual> getKey() {
-      return Rituals.TRANSMUTATION;
-    }
-
-    @Override
     protected void functionalTick(PyreBlockEntity blockEntity, int duration) {
 
     }

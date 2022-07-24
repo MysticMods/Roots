@@ -12,11 +12,6 @@ import java.util.List;
 
 public class CraftingRitual extends Ritual {
   @Override
-  public ResourceKey<Ritual> getKey() {
-    return Rituals.CRAFTING;
-  }
-
-  @Override
   public void functionalTick(PyreBlockEntity blockEntity, int dur) {
     if (dur == getInterval()) {
       List<ItemStack> output = blockEntity.popStoredItems();

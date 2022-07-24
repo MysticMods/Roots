@@ -32,11 +32,6 @@ public class AnimalHarvestRitual extends Ritual {
   private float lootingChance;
 
   @Override
-  public ResourceKey<Ritual> getKey() {
-    return Rituals.ANIMAL_HARVEST;
-  }
-
-  @Override
   public void functionalTick(PyreBlockEntity blockEntity, int duration) {
     if (duration % getInterval() == 0) {
       ITag<EntityType<?>> harvestTag = ForgeRegistries.ENTITIES.tags().getTag(RootsTags.Entities.ANIMAL_HARVEST);
