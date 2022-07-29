@@ -153,20 +153,20 @@ dependencies {
 //    inputs.property "version", project.version
 //    inputs.property "mcversion", project.minecraft_version
 //
-////    // replace stuff in mcmod.info, nothing else
-////    from(sourceSets.main.resources.srcDirs) {
-////        include 'mcmod.info'
-////
-////        // replace version and mcversion
-////        expand 'version':project.version, 'mcversion':project.minecraft_version
-////    }
-////
-////    // copy everything else except the mcmod.info
-////    from(sourceSets.main.resources.srcDirs) {
-////        exclude 'mcmod.info'
-////    }
+//    // replace stuff in mcmod.info, nothing else
+//    from(sourceSets.main.resources.srcDirs) {
+//        include 'mcmod.info'
 //
-////    rename '(.+_at.cfg)', 'META-INF/$1'
+//        // replace version and mcversion
+//        expand 'version':project.version, 'mcversion':project.minecraft_version
+//    }
+//
+//    // copy everything else except the mcmod.info
+//    from(sourceSets.main.resources.srcDirs) {
+//        exclude 'mcmod.info'
+//    }
+//
+//    rename '(.+_at.cfg)', 'META-INF/$1'
 //}
 
 fancyGradle {
@@ -177,6 +177,12 @@ fancyGradle {
 }
 
 
-
+jar{
+    manifest {
+        attributes([
+                "FMLAT": 'roots_at.cfg'
+        ])
+    }
+}
 
 jar.finalizedBy('reobfJar')
