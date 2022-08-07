@@ -1,10 +1,7 @@
 package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.network.ClientBoundModifierPropertyPacket;
-import mysticmods.roots.network.ClientBoundRitualPropertyPacket;
-import mysticmods.roots.network.ClientBoundSpellPropertyPacket;
-import mysticmods.roots.network.Networking;
+import mysticmods.roots.network.*;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,10 +24,12 @@ public class DataSetup {
       Networking.sendTo(new ClientBoundRitualPropertyPacket(), event.getPlayer());
       Networking.sendTo(new ClientBoundSpellPropertyPacket(), event.getPlayer());
       Networking.sendTo(new ClientBoundModifierPropertyPacket(), event.getPlayer());
+      Networking.sendTo(new ClientBoundSpellCostsPacket(), event.getPlayer());
     } else {
       Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundRitualPropertyPacket());
       Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundSpellPropertyPacket());
       Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundModifierPropertyPacket());
+      Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundSpellCostsPacket());
     }
   }
 }
