@@ -113,8 +113,8 @@ a5c36ec64ac2c2abcbe96a426561480dc298160a assets/roots/blockstates/wildwood_plank
 a6d6ea901876671011ce386898b01a41b562190c assets/roots/blockstates/wildwood_wall.json
 5140883c9a9c3d3547209c731df369aa6af8bbe5 assets/roots/blockstates/wildwood_wide_post.json
 ff4eb19a48799d4735163b470aa5ada8e60adef9 assets/roots/blockstates/wildwood_wood.json
-a08fc66fb7f7087f2c2f426eaf8b41d45827c932 assets/roots/lang/en_ud.json
-315b918f09b0e10a38129411413ac6061b364f0b assets/roots/lang/en_us.json
+8d2f54607c16facfb0abb2bdffaff7ff37a219a1 assets/roots/lang/en_ud.json
+6e74fcb644bcb0e0c1246d317b452c856b8fbc46 assets/roots/lang/en_us.json
 fc3d8e3568e4eab4235ec9f7af8369da99798a29 assets/roots/models/block/aqueous_soil.json
 250aa6676dc5313fda19ee559fd8e00a29760653 assets/roots/models/block/caelic_soil.json
 4b7444c4ec021dff288d8eecb087daa9a7d279d6 assets/roots/models/block/chiseled_runed_obsidian.json
@@ -502,6 +502,7 @@ e7166eba628eae03debb02c807d65c793a7b1943 assets/roots/models/item/runestone_bric
 7143ed697620aece4fe66bcc230cc2e9df4d1b0d assets/roots/models/item/runic_crafter.json
 3b22000236c69a0ebb1a3f7f71b3e751368d9b2f assets/roots/models/item/runic_dust.json
 1861f2d5ab4eef803cea58f1be5219a94dbde6b3 assets/roots/models/item/runic_shears.json
+116ebb161495a95b603f35261607c571755d168f assets/roots/models/item/sacred_moss.json
 95eb9d521c2e800f0998e600cb02aaed9d19ea5c assets/roots/models/item/spirit_bag.json
 fcc8c5ad58147de95358d99ef0d44a19fa79a6ba assets/roots/models/item/spirit_herb.json
 efd259d02bfc95a3fd53241d96a6d7858ac1f694 assets/roots/models/item/spirit_herb_seeds.json
@@ -712,6 +713,7 @@ b558d07c958525677ca7e2cad1e3f723bd082ba4 data/roots/advancements/recipes/roots/w
 065e6c5a618f81808dd61f94c454a84a9f41a848 data/roots/advancements/recipes/roots/wildwood_wall.json
 fd3ae89daa8ea14066122d618e430d87afb0966f data/roots/advancements/recipes/roots/wildwood_wall_from_wildwood_planks_stonecutting.json
 38b94eb6a25f60c1e5a66aa98218f7b65c9450fd data/roots/advancements/recipes/roots/wildwood_wide_post.json
+b878005e3ec522a41f3fffac3bef8e1330007a55 data/roots/costs/spell/growth_infusion.json
 99d31961c3e50f4c1f91c2e82d12768b78200c4c data/roots/loot_tables/blocks/aqueous_soil.json
 b3a25f94c1c6b6172847371ba3218b45cc6f60a1 data/roots/loot_tables/blocks/caelic_soil.json
 779c2b051570c7608784b6cf8931211a389cef32 data/roots/loot_tables/blocks/chiseled_runed_obsidian.json
@@ -1037,6 +1039,7 @@ c84247021b812e56145a12750229af395dcad0e5 data/roots/tags/items/crops/cloud_berry
 666cb85667a2709a906df2e01593944e2f4ced66 data/roots/tags/items/crops/infernal_bulb.json
 8a1e04899004201b1710290df077d3e6960b8107 data/roots/tags/items/crops/moonglow_leaf.json
 85ee31dff4ac1305040726b5feec693a986a44b1 data/roots/tags/items/crops/pereskia.json
+e3db83d84c0aef652bb84d956ed5d80c059048bb data/roots/tags/items/crops/sacred_moss.json
 8b1587aa82fd8dec81363393e1603d8f758b364a data/roots/tags/items/crops/spirit_herb.json
 14bc94c87eaa186b2dc2dd1a0374727edaffca0d data/roots/tags/items/crops/stalicripe.json
 2624b2e1f7322054e73c2bdc28a39cb6e1746984 data/roots/tags/items/crops/wildewheet.json

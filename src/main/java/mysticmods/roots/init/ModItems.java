@@ -27,6 +27,10 @@ public class ModItems {
         .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.WILDROOT_CROP)
         .defaultLang()
         .register();
+    public static final ItemEntry<Item> SACRED_MOSS = REGISTRATE.item("sacred_moss", Item::new)
+        .model(subfolder("herbs"))
+        .tag(RootsTags.Items.SACRED_MOSS_CROP)
+        .register();
     public static final ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)

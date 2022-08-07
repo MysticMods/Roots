@@ -4,18 +4,17 @@ import mysticmods.roots.api.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
 import net.minecraft.Util;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.function.Supplier;
 
-public class SpellProperty<V> extends Property<V> implements IForgeRegistryEntry<SpellProperty<?>>, IDescribedRegistryEntry {
+public class ModifierProperty<V> extends Property<V> implements IForgeRegistryEntry<ModifierProperty<?>>, IDescribedRegistryEntry {
   private String descriptionId;
   private ResourceLocation registryName;
   protected Supplier<Spell> spell;
 
-  public SpellProperty(Supplier<Spell> spell, V defaultValue, Serializer<V> serializer, String comment) {
+  public ModifierProperty(Supplier<Spell> spell, V defaultValue, Serializer<V> serializer, String comment) {
     super(defaultValue, serializer, comment);
     this.spell = spell;
   }
@@ -25,7 +24,7 @@ public class SpellProperty<V> extends Property<V> implements IForgeRegistryEntry
   }
 
   @Override
-  public SpellProperty<?> setRegistryName(ResourceLocation name) {
+  public ModifierProperty<?> setRegistryName(ResourceLocation name) {
     this.registryName = name;
     return this;
   }
@@ -37,19 +36,19 @@ public class SpellProperty<V> extends Property<V> implements IForgeRegistryEntry
   }
 
   @Override
-  public Class<SpellProperty<?>> getRegistryType() {
-    return c(SpellProperty.class);
+  public Class<ModifierProperty<?>> getRegistryType() {
+    return c(ModifierProperty.class);
   }
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.SPELL_PROPERTY_REGISTRY.get().getKey(this);
+    return Registries.MODIFIER_PROPERTY_REGISTRY.get().getKey(this);
   }
 
   @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("spell_property", getKey());
+      this.descriptionId = Util.makeDescriptionId("modifier_property", getKey());
     }
 
     return this.descriptionId;

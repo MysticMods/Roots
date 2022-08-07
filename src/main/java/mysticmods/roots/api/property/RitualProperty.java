@@ -8,18 +8,20 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.function.Supplier;
+
 public class RitualProperty<V> extends Property<V> implements IForgeRegistryEntry<RitualProperty<?>>, IDescribedRegistryEntry {
   protected String descriptionId;
   private ResourceLocation registryName;
-  protected ResourceKey<Ritual> ritual;
+  protected Supplier<Ritual> ritual;
 
-  public RitualProperty(ResourceKey<Ritual> ritual, V defaultValue, Serializer<V> serializer, String comment) {
+  public RitualProperty(Supplier<Ritual> ritual, V defaultValue, Serializer<V> serializer, String comment) {
     super(defaultValue, serializer, comment);
     this.ritual = ritual;
   }
 
-  public ResourceKey<Ritual> getRitual() {
-    return ritual;
+  public Ritual getRitual() {
+    return ritual.get();
   }
 
   @Override

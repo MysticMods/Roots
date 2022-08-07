@@ -128,6 +128,7 @@ public class RootsTags {
     public static TagKey<Item> STALICRIPE_CROP = modTag("crops/stalicripe");
     public static TagKey<Item> WILDEWHEET_CROP = modTag("crops/wildewheet");
     public static TagKey<Item> WILDROOT_CROP = modTag("crops/wildroot");
+    public static TagKey<Item> SACRED_MOSS_CROP = modTag("crops/sacred_moss");
     public static TagKey<Item> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
     public static TagKey<Item> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
     public static TagKey<Item> PERESKIA_CROP = modTag("crops/pereskia");

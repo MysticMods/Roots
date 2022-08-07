@@ -31,21 +31,21 @@ public class ModRituals {
 
     }
   });
-  public static final RegistryEntry<RitualProperty<Integer>> TRANSMUTATION_COUNT = REGISTRATE.simple("transmutation/count", RitualProperty.class, () -> new RitualProperty<>(Rituals.TRANSMUTATION, 10, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
+  public static final RegistryEntry<RitualProperty<Integer>> TRANSMUTATION_COUNT = REGISTRATE.simple("transmutation/count", RitualProperty.class, () -> new RitualProperty<>(TRANSMUTATION, 10, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
 
   public static final RegistryEntry<CraftingRitual> CRAFTING = ritual(Rituals.CRAFTING, CraftingRitual::new);
-  public static final RegistryEntry<RitualProperty<Integer>> CRAFTING_DURATION = REGISTRATE.simple("crafting/duration", RitualProperty.class, () -> new RitualProperty<>(Rituals.CRAFTING, 160, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
-  public static final RegistryEntry<RitualProperty<Integer>> CRAFTING_INTERVAL = REGISTRATE.simple("crafting/interval", RitualProperty.class, () -> new RitualProperty<>(Rituals.CRAFTING, 120, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
+  public static final RegistryEntry<RitualProperty<Integer>> CRAFTING_DURATION = REGISTRATE.simple("crafting/duration", RitualProperty.class, () -> new RitualProperty<>(CRAFTING::get, 160, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
+  public static final RegistryEntry<RitualProperty<Integer>> CRAFTING_INTERVAL = REGISTRATE.simple("crafting/interval", RitualProperty.class, () -> new RitualProperty<>(CRAFTING::get, 120, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
 
   public static final RegistryEntry<AnimalHarvestRitual> ANIMAL_HARVEST = ritual(Rituals.ANIMAL_HARVEST, AnimalHarvestRitual::new);
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_DURATION = REGISTRATE.simple("animal_harvest/duration", RitualProperty.class, () -> new RitualProperty<>(Rituals.ANIMAL_HARVEST, 3200, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_INTERVAL = REGISTRATE.simple("animal_harvest/interval", RitualProperty.class, () -> new RitualProperty<>(Rituals.ANIMAL_HARVEST, 110, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_COUNT = REGISTRATE.simple("animal_harvest/count", RitualProperty.class, () -> new RitualProperty<>(Rituals.ANIMAL_HARVEST, 1, Property.INTEGER_SERIALIZER, RitualProperties.COUNT));
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_RADIUS_XZ = REGISTRATE.simple("animal_harvest/radius_xz", RitualProperty.class, () -> new RitualProperty<>(Rituals.ANIMAL_HARVEST, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_RADIUS_Y = REGISTRATE.simple("animal_harvest/radius_y", RitualProperty.class, () -> new RitualProperty<>(Rituals.ANIMAL_HARVEST, 10, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
-  public static final RegistryEntry<RitualProperty<Float>> ANIMAL_HARVEST_LOOTING_CHANCE = REGISTRATE.simple("animal_harvest/looting_chance", RitualProperty.class, () -> new RitualProperty<>(Rituals.ANIMAL_HARVEST, 0.2f, Property.FLOAT_SERIALIZER, "Chance per operation that the loot level will be set to looting_value"));
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_LOOTING_VALUE = REGISTRATE.simple("animal_harvest/looting_value", RitualProperty.class, () -> new RitualProperty<>(Rituals.ANIMAL_HARVEST, 2, Property.INTEGER_SERIALIZER, "The value passed to the loot function if looting_chance was successful."));
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_GLOW_DURATION = REGISTRATE.simple("animal_harvest/glow_duration", RitualProperty.class, () -> new RitualProperty<>(Rituals.ANIMAL_HARVEST, 10, Property.INTEGER_SERIALIZER, "The duration of the glow effect applied to entities that have been harvest."));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_DURATION = REGISTRATE.simple("animal_harvest/duration", RitualProperty.class, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 3200, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_INTERVAL = REGISTRATE.simple("animal_harvest/interval", RitualProperty.class, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 110, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_COUNT = REGISTRATE.simple("animal_harvest/count", RitualProperty.class, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 1, Property.INTEGER_SERIALIZER, RitualProperties.COUNT));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_RADIUS_XZ = REGISTRATE.simple("animal_harvest/radius_xz", RitualProperty.class, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_RADIUS_Y = REGISTRATE.simple("animal_harvest/radius_y", RitualProperty.class, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 10, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
+  public static final RegistryEntry<RitualProperty<Float>> ANIMAL_HARVEST_LOOTING_CHANCE = REGISTRATE.simple("animal_harvest/looting_chance", RitualProperty.class, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 0.2f, Property.FLOAT_SERIALIZER, "Chance per operation that the loot level will be set to looting_value"));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_LOOTING_VALUE = REGISTRATE.simple("animal_harvest/looting_value", RitualProperty.class, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 2, Property.INTEGER_SERIALIZER, "The value passed to the loot function if looting_chance was successful."));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_GLOW_DURATION = REGISTRATE.simple("animal_harvest/glow_duration", RitualProperty.class, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 10, Property.INTEGER_SERIALIZER, "The duration of the glow effect applied to entities that have been harvest."));
 
 
   private static <T extends Ritual> RegistryEntry<T> ritual(ResourceKey<Ritual> key, NonNullSupplier<T> builder) {

@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.property.ModifierProperty;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
@@ -19,6 +20,7 @@ public class ModRegistries {
   private static final DeferredRegister<Modifier> DEFERRED_MODIFIER_REGISTRY = DeferredRegister.create(RootsAPI.MODIFIER_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<RitualProperty<?>> DEFERRED_RITUAL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_PROPERTY_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<SpellProperty<?>> DEFERRED_SPELL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_PROPERTY_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<ModifierProperty<?>> DEFERRED_MODIFIER_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.MODIFIER_PROPERTY_REGISTRY, RootsAPI.MODID);
 
   static {
     Registries.HERB_REGISTRY = DEFERRED_HERB_REGISTRY.makeRegistry(Herb.class, () -> new RegistryBuilder<Herb>().disableSaving().disableSync());
@@ -27,6 +29,7 @@ public class ModRegistries {
     Registries.MODIFIER_REGISTRY = DEFERRED_MODIFIER_REGISTRY.makeRegistry(Modifier.class, () -> new RegistryBuilder<Modifier>().disableSaving().disableSync());
     Registries.RITUAL_PROPERTY_REGISTRY = DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry(c(RitualProperty.class), () -> new RegistryBuilder<RitualProperty<?>>().disableSync().disableSaving());
     Registries.SPELL_PROPERTY_REGISTRY = DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(SpellProperty.class), () -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving());
+    Registries.MODIFIER_PROPERTY_REGISTRY = DEFERRED_MODIFIER_PROPERTY_REGISTRY.makeRegistry(c(ModifierProperty.class), () -> new RegistryBuilder<ModifierProperty<?>>().disableSync().disableSaving());
   }
 
   private static <T> Class<T> c(Class<?> cls) {
@@ -40,6 +43,7 @@ public class ModRegistries {
     DEFERRED_MODIFIER_REGISTRY.register(bus);
     DEFERRED_RITUAL_PROPERTY_REGISTRY.register(bus);
     DEFERRED_SPELL_PROPERTY_REGISTRY.register(bus);
+    DEFERRED_MODIFIER_PROPERTY_REGISTRY.register(bus);
   }
 
   public static void load() {

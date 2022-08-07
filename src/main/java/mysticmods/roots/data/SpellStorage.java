@@ -13,10 +13,36 @@ import java.util.List;
 public class SpellStorage {
   private final List<SpellInstance> spells = new ArrayList<>();
   private int index;
-  // TODO: :-?
-  private ItemStack stack;
+  boolean dirty = false;
 
   protected SpellStorage() {
+  }
+
+  // cycle next spell
+  // slots?
+  // cycle previous spell
+  // add spell
+  // remove spell
+  // adjust modifiers
+  // save
+
+
+  public boolean isDirty() {
+    return dirty;
+  }
+
+  public void setDirty(boolean dirty) {
+    this.dirty = dirty;
+  }
+
+  public void save (ItemStack toSave) {
+    CompoundTag tag = toSave.getOrCreateTag();
+    tag.putInt("index", this.index);
+    ListTag spells = new ListTag();
+    for (SpellInstance spell : this.spells) {
+      spells.add(spell.toNBT());
+    }
+    tag.put("spells", spells);
   }
 
   @Nullable

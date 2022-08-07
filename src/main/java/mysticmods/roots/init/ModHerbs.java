@@ -6,6 +6,7 @@ import mysticmods.roots.api.herbs.Herb;
 import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModHerbs {
+  public static final RegistryEntry<Herb> SACRED_MOSS = REGISTRATE.simple("sacred_moss", Herb.class, () -> new Herb(ModItems.Herbs.SACRED_MOSS));
   public static final RegistryEntry<Herb> WILDROOT = REGISTRATE.simple("wildroot", Herb.class, () -> new Herb(ModItems.Herbs.WILDROOT));
   public static final RegistryEntry<Herb> CLOUD_BERRY = REGISTRATE.simple("cloud_berry", Herb.class, () -> new Herb(ModItems.Herbs.CLOUD_BERRY));
   public static final RegistryEntry<Herb> DEWGONIA = REGISTRATE.simple("dewgonia", Herb.class, () -> new Herb(ModItems.Herbs.DEWGONIA));
