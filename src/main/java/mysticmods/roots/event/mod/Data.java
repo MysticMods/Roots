@@ -1,10 +1,7 @@
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.gen.ModifierPropertyProvider;
-import mysticmods.roots.gen.RitualPropertyProvider;
-import mysticmods.roots.gen.SpellCostProvider;
-import mysticmods.roots.gen.SpellPropertyProvider;
+import mysticmods.roots.gen.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -21,5 +18,7 @@ public class Data {
     event.getGenerator().addProvider(modifier_properties);
     SpellCostProvider spell_costs = new SpellCostProvider(event.getGenerator());
     event.getGenerator().addProvider(spell_costs);
+    ModifierCostProvider modifier_costs = new ModifierCostProvider(event.getGenerator());
+    event.getGenerator().addProvider(modifier_costs);
   }
 }

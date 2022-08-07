@@ -16,6 +16,7 @@ public class DataSetup {
     event.addListener(SpellPropertyReloadListener.getInstance());
     event.addListener(ModifierPropertyReloadListener.getInstance());
     event.addListener(SpellCostReloadListener.getInstance());
+    event.addListener(ModifierCostReloadListener.getInstance());
   }
 
   @SubscribeEvent

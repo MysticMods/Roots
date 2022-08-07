@@ -5,6 +5,7 @@ import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Spell extends DescribedRegistryEntry<Spell> {
@@ -13,7 +14,7 @@ public abstract class Spell extends DescribedRegistryEntry<Spell> {
 
   public Spell(Type type, List<Cost> costs) {
     this.type = type;
-    this.costs = costs;
+    this.costs = new ArrayList<>(costs);
   }
 
   // TODO: API
