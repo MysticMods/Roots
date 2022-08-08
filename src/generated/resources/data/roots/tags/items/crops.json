@@ -6,9 +6,9 @@
     "#roots:crops/elemental/earth",
     "#roots:crops/elemental/water",
     "#roots:crops/wildewheet",
-    "#roots:crops/spirit_herb",
+    "#roots:crops/spirit_leaf",
     "#roots:crops/pereskia",
     "#roots:crops/wildroot",
-    "#roots:crops/moonglow_leaf"
+    "#roots:crops/moonglow"
   ]
 }

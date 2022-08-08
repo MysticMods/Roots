@@ -26,7 +26,7 @@ public class ModTags {
       b.tag(Blocks.WATER_CROPS).addTags(Blocks.DEWGONIA_CROP);
       b.tag(Blocks.EARTH_CROPS).addTags(Blocks.STALICRIPE_CROP);
       b.tag(Blocks.ELEMENTAL_CROPS).addTags(Blocks.WATER_CROPS, Blocks.AIR_CROPS, Blocks.EARTH_CROPS, Blocks.FIRE_CROPS);
-      b.tag(Blocks.CROPS).addTags(Blocks.WILDEWHEET_CROP, Blocks.WILDROOT_CROP, Blocks.SPIRIT_HERB_CROP, Blocks.PERESKIA_CROP, Blocks.MOONGLOW_LEAF_CROP, Blocks.ELEMENTAL_CROPS);
+      b.tag(Blocks.CROPS).addTags(Blocks.WILDEWHEET_CROP, Blocks.WILDROOT_CROP, Blocks.SPIRIT_LEAF_CROP, Blocks.PERESKIA_CROP, Blocks.MOONGLOW_CROP, Blocks.ELEMENTAL_CROPS);
 
       // Forge compat tags
       b.tag(Blocks.FORGE_CROPS).addTag(Blocks.CROPS);
@@ -64,13 +64,25 @@ public class ModTags {
       b.tag(RootsTags.Items.EARTH_CROPS).addTags(RootsTags.Items.STALICRIPE_CROP);
       b.tag(RootsTags.Items.FIRE_CROPS).addTags(RootsTags.Items.INFERNAL_BULB_CROP);
 
-      b.tag(RootsTags.Items.CROPS).addTags(RootsTags.Items.AIR_CROPS, RootsTags.Items.FIRE_CROPS, RootsTags.Items.EARTH_CROPS, RootsTags.Items.WATER_CROPS, RootsTags.Items.WILDEWHEET_CROP, RootsTags.Items.SPIRIT_HERB_CROP, RootsTags.Items.PERESKIA_CROP, RootsTags.Items.WILDROOT_CROP, RootsTags.Items.MOONGLOW_LEAF_CROP);
+      b.tag(RootsTags.Items.CROPS).addTags(RootsTags.Items.AIR_CROPS, RootsTags.Items.FIRE_CROPS, RootsTags.Items.EARTH_CROPS, RootsTags.Items.WATER_CROPS, RootsTags.Items.WILDEWHEET_CROP, RootsTags.Items.SPIRIT_LEAF_CROP, RootsTags.Items.PERESKIA_CROP, RootsTags.Items.WILDROOT_CROP, RootsTags.Items.MOONGLOW_CROP);
 
       b.tag(RootsTags.Items.BARKS).addTags(RootsTags.Items.BIRCH_BARK, RootsTags.Items.ACACIA_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
 
       b.tag(MWTags.Items.FORGE_KNIVES);
       b.tag(RootsTags.Items.GROVE_CRAFTER_ACTIVATION).addTag(MWTags.Items.FORGE_KNIVES);
       b.tag(RootsTags.Items.PYRE_ACTIVATION).add(Items.FLINT_AND_STEEL);
+
+      b.tag(RootsTags.Herbs.MOONGLOW).addTag(RootsTags.Items.MOONGLOW_CROP);
+      b.tag(RootsTags.Herbs.SPIRIT_LEAF).addTag(RootsTags.Items.SPIRIT_LEAF_CROP);
+      b.tag(RootsTags.Herbs.CLOUD_BERRY).addTag(RootsTags.Items.CLOUD_BERRY_CROP);
+      b.tag(RootsTags.Herbs.DEWGONIA).addTag(RootsTags.Items.DEWGONIA_CROP);
+      b.tag(RootsTags.Herbs.PERESKIA).addTag(RootsTags.Items.PERESKIA_CROP);
+      b.tag(RootsTags.Herbs.STALICRIPE).addTag(RootsTags.Items.STALICRIPE_CROP);
+      b.tag(RootsTags.Herbs.INFERNAL_BULB).addTag(RootsTags.Items.INFERNAL_BULB_CROP);
+      b.tag(RootsTags.Herbs.WILDROOT).addTag(RootsTags.Items.WILDROOT_CROP);
+      b.tag(RootsTags.Herbs.WILDEWHEET).addTag(RootsTags.Items.WILDEWHEET_CROP);
+      b.tag(RootsTags.Herbs.SPIRIT_LEAF).addTag(RootsTags.Items.SPIRIT_LEAF_CROP);
+      b.tag(RootsTags.Herbs.SACRED_MOSS).addTag(RootsTags.Items.SACRED_MOSS_CROP);
 
       // TODO: Copying crops to the actual item tag?
     });

@@ -34,12 +34,12 @@ public class RootsTags {
     // Specific crops (filled in by ModBlocks)
     public static TagKey<Block> CLOUD_BERRY_CROP = modTag("crops/cloud_berry");
     public static TagKey<Block> DEWGONIA_CROP = modTag("crops/dewgonia");
-    public static TagKey<Block> SPIRIT_HERB_CROP = modTag("crops/spirit_herb");
+    public static TagKey<Block> SPIRIT_LEAF_CROP = modTag("crops/spirit_leaf");
     public static TagKey<Block> STALICRIPE_CROP = modTag("crops/stalicripe");
     public static TagKey<Block> WILDEWHEET_CROP = modTag("crops/wildewheet");
     public static TagKey<Block> WILDROOT_CROP = modTag("crops/wildroot");
     public static TagKey<Block> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
-    public static TagKey<Block> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
+    public static TagKey<Block> MOONGLOW_CROP = modTag("crops/moonglow");
     public static TagKey<Block> PERESKIA_CROP = modTag("crops/pereskia");
 
     // General soils (filled in by ModTags)
@@ -105,9 +105,9 @@ public class RootsTags {
     public static TagKey<Item> CLOUD_BERRY_SEEDS = modTag("seeds/cloud_berry");
     public static TagKey<Item> DEWGONIA_SEEDS = modTag("seeds/dewgonia");
     public static TagKey<Item> INFERNAL_BULB_SEEDS = modTag("seeds/infernal_bulb");
-    public static TagKey<Item> MOONGLOW_LEAF_SEEDS = modTag("seeds/moonglow_leaf");
+    public static TagKey<Item> MOONGLOW_SEEDS = modTag("seeds/moonglow");
     public static TagKey<Item> PERESKIA_SEEDS = modTag("seeds/pereskia");
-    public static TagKey<Item> SPIRIT_HERB_SEEDS = modTag("seeds/spirit_herb");
+    public static TagKey<Item> SPIRIT_LEAF_SEEDS = modTag("seeds/spirit_leaf");
     public static TagKey<Item> STALICRIPE_SEEDS = modTag("seeds/stalicripe");
     public static TagKey<Item> WILDEWHEET_SEEDS = modTag("seeds/wildewheet");
     public static TagKey<Item> WILDROOT_SEEDS = modTag("seeds/wildroot");
@@ -124,13 +124,13 @@ public class RootsTags {
     public static TagKey<Item> FIRE_CROPS = modTag("crops/elemental/fire");
     public static TagKey<Item> CLOUD_BERRY_CROP = modTag("crops/cloud_berry");
     public static TagKey<Item> DEWGONIA_CROP = modTag("crops/dewgonia");
-    public static TagKey<Item> SPIRIT_HERB_CROP = modTag("crops/spirit_herb");
+    public static TagKey<Item> SPIRIT_LEAF_CROP = modTag("crops/spirit_leaf");
     public static TagKey<Item> STALICRIPE_CROP = modTag("crops/stalicripe");
     public static TagKey<Item> WILDEWHEET_CROP = modTag("crops/wildewheet");
     public static TagKey<Item> WILDROOT_CROP = modTag("crops/wildroot");
     public static TagKey<Item> SACRED_MOSS_CROP = modTag("crops/sacred_moss");
     public static TagKey<Item> INFERNAL_BULB_CROP = modTag("crops/infernal_bulb");
-    public static TagKey<Item> MOONGLOW_LEAF_CROP = modTag("crops/moonglow_leaf");
+    public static TagKey<Item> MOONGLOW_CROP = modTag("crops/moonglow");
     public static TagKey<Item> PERESKIA_CROP = modTag("crops/pereskia");
 
     public static TagKey<Item> BARKS = modTag("barks");
@@ -192,6 +192,23 @@ public class RootsTags {
 
     static TagKey<Item> compatTag(String name) {
       return ItemTags.create(new ResourceLocation("forge", name));
+    }
+  }
+
+  public static class Herbs extends RootsTags {
+    public static TagKey<Item> SACRED_MOSS = modTag("herbs/sacred_moss");
+    public static TagKey<Item> INFERNAL_BULB = modTag("herbs/infernal_bulb");
+    public static TagKey<Item> MOONGLOW = modTag("herbs/moonglow");
+    public static TagKey<Item> PERESKIA = modTag("herbs/pereskia");
+    public static TagKey<Item> SPIRIT_LEAF = modTag("herbs/spirit_leaf");
+    public static TagKey<Item> STALICRIPE = modTag("herbs/stalicripe");
+    public static TagKey<Item> WILDEWHEET = modTag("herbs/wildewheet");
+    public static TagKey<Item> WILDROOT = modTag("herbs/wildroot");
+    public static TagKey<Item> CLOUD_BERRY = modTag("herbs/cloud_berry");
+    public static TagKey<Item> DEWGONIA = modTag("herbs/dewgonia");
+
+    static TagKey<Item> modTag(String name) {
+      return ItemTags.create(new ResourceLocation(RootsAPI.MODID, name));
     }
   }
 

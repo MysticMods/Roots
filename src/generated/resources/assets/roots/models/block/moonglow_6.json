@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/crop",
   "textures": {
-    "crop": "roots:block/crops/moonglow_leaf_6"
+    "crop": "roots:block/crops/moonglow_6"
   }
 }

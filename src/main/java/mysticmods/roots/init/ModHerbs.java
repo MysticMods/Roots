@@ -12,9 +12,9 @@ public class ModHerbs {
   public static final RegistryEntry<Herb> DEWGONIA = REGISTRATE.simple("dewgonia", Herb.class, () -> new Herb(ModItems.Herbs.DEWGONIA));
   public static final RegistryEntry<Herb> INFERNAL_BULB = REGISTRATE.simple("infernal_bulb", Herb.class, () -> new Herb(ModItems.Herbs.INFERNAL_BULB));
   public static final RegistryEntry<Herb> STALICRIPE = REGISTRATE.simple("stalicripe", Herb.class, () -> new Herb(ModItems.Herbs.STALICRIPE));
-  public static final RegistryEntry<Herb> MOONGLOW_LEAF = REGISTRATE.simple("moonglow_leaf", Herb.class, () -> new Herb(ModItems.Herbs.MOONGLOW_LEAF));
+  public static final RegistryEntry<Herb> MOONGLOW = REGISTRATE.simple("moonglow", Herb.class, () -> new Herb(ModItems.Herbs.MOONGLOW));
   public static final RegistryEntry<Herb> PERESKIA = REGISTRATE.simple("pereskia", Herb.class, () -> new Herb(ModItems.Herbs.PERESKIA));
-  public static final RegistryEntry<Herb> SPIRIT_HERB = REGISTRATE.simple("spirit_herb", Herb.class, () -> new Herb(ModItems.Herbs.SPIRIT_HERB));
+  public static final RegistryEntry<Herb> SPIRIT_LEAF = REGISTRATE.simple("spirit_leaf", Herb.class, () -> new Herb(ModItems.Herbs.SPIRIT_LEAF));
   public static final RegistryEntry<Herb> WILDEWHEET = REGISTRATE.simple("wildewheet", Herb.class, () -> new Herb(ModItems.Herbs.WILDEWHEET));
 
   public static void load() {

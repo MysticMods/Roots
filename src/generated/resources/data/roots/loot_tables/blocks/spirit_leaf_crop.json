@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "roots:spirit_herb_seeds"
+          "name": "roots:spirit_leaf_seeds"
         }
       ],
       "conditions": [
