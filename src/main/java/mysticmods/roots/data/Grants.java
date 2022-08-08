@@ -35,6 +35,7 @@ public class Grants extends DirectorySavedData {
     return registry.get(key);
   }
 
+  // TODO: move all of this into the classes
   public static void registerModifier(Spell spell, Modifier... modifiers) {
     SPELL_TO_MODIFIERS_MAP.computeIfAbsent(spell, (k) -> new ObjectLinkedOpenHashSet<>()).addAll(Arrays.asList(modifiers));
     for (Modifier modifier : modifiers) {
