@@ -11,7 +11,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid=RootsAPI.MODID)
+@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class Capabilities {
   public static final ResourceLocation HERB_CAPABILITY_ID = new ResourceLocation(RootsAPI.MODID, "herb_capability");
 
@@ -19,7 +19,7 @@ public class Capabilities {
   });
 
   @SubscribeEvent
-  public static void attachCapability (AttachCapabilitiesEvent<Entity> event) {
+  public static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
     if (event.getObject().getType() == EntityType.PLAYER) {
       event.addCapability(HERB_CAPABILITY_ID, new HerbCapability());
     }

@@ -35,7 +35,7 @@ public class SpellStorage {
     this.dirty = dirty;
   }
 
-  public void save (ItemStack toSave) {
+  public void save(ItemStack toSave) {
     CompoundTag tag = toSave.getOrCreateTag();
     tag.putInt("index", this.index);
     ListTag spells = new ListTag();
@@ -46,7 +46,7 @@ public class SpellStorage {
   }
 
   @Nullable
-  public static SpellStorage fromItem (ItemStack stack) {
+  public static SpellStorage fromItem(ItemStack stack) {
     if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
       return null;
     }

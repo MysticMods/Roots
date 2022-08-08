@@ -16,7 +16,7 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   protected int radiusY;
   protected int interval;
 
-  public void tick (PyreBlockEntity blockEntity) {
+  public void tick(PyreBlockEntity blockEntity) {
     int dur = getDuration() - blockEntity.getLifetime();
     functionalTick(blockEntity, dur);
     animationTick(blockEntity, dur);
@@ -27,12 +27,12 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   // Still executed on the server
   protected abstract void animationTick(PyreBlockEntity blockEntity, int duration);
 
-  protected void rebuildBounds () {
+  protected void rebuildBounds() {
     boundingBox = new BoundingBox(-getRadiusXZ(), -getRadiusY(), -getRadiusXZ(), getRadiusXZ() + 1, getRadiusY() + 1, getRadiusXZ() + 1);
     aabb = AABB.of(getBoundingBox());
   }
 
-  protected abstract void initialize ();
+  protected abstract void initialize();
 
   public void init() {
     initialize();

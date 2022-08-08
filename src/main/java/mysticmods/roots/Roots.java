@@ -1,8 +1,8 @@
 package mysticmods.roots;
 
+import mysticmods.roots.api.Grant;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.Grant;
 import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;

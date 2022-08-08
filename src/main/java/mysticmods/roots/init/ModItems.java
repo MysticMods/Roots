@@ -379,7 +379,8 @@ public class ModItems {
       .register();
 
   public static final ItemEntry<TokenItem> TOKEN = REGISTRATE.item("token", TokenItem::new)
-      .model((ctx, p) -> { })
+      .model((ctx, p) -> {
+      })
       .register();
 
   public static void load() {

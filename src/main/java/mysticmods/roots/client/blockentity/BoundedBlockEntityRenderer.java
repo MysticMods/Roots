@@ -24,7 +24,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEntity> implements BlockEntityRenderer<T> {
   protected final BlockEntityRendererProvider.Context context;
 
-  private Model3D model = null;
+  private final Model3D model = null;
   // TODO: dynamic bounds?
   private AABB bounds = null;
 

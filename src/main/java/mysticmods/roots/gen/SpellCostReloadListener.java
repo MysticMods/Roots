@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import mysticmods.roots.api.herbs.Cost;
-import mysticmods.roots.api.property.ModifierProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
 import net.minecraft.resources.ResourceLocation;

@@ -26,7 +26,7 @@ public class SpellInstance /*implements INBTSerializable<CompoundTag>*/ {
     enabledModifiers.addAll(Arrays.asList(modifiers));
   }
 
-  protected SpellInstance (CompoundTag tag) {
+  protected SpellInstance(CompoundTag tag) {
     spell = Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell")));
     ListTag modifiers = tag.getList("modifiers", 8);
     for (int i = 0; i < modifiers.size(); i++) {

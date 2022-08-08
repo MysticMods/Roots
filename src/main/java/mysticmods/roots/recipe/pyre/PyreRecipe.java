@@ -2,8 +2,8 @@ package mysticmods.roots.recipe.pyre;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.api.recipe.ConditionalOutput;
 import mysticmods.roots.api.Grant;
+import mysticmods.roots.api.recipe.ConditionalOutput;
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.registry.Registries;

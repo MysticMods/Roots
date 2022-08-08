@@ -22,21 +22,21 @@ public abstract class Spell extends DescribedRegistryEntry<Spell> {
   }
 
   // TODO: API
-  public List<Cost> getCosts () {
+  public List<Cost> getCosts() {
     return costs;
   }
 
   // TODO: ick? :/
-  public void setCosts (List<Cost> costs) {
+  public void setCosts(List<Cost> costs) {
     this.costs.clear();
     this.costs.addAll(costs);
   }
 
-  public Set<Modifier> getModifiers () {
+  public Set<Modifier> getModifiers() {
     return modifiers;
   }
 
-  public void addModifier (Modifier modifier) {
+  public void addModifier(Modifier modifier) {
     modifiers.add(modifier);
   }
 

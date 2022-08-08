@@ -211,11 +211,11 @@ public class RootsTags {
     public static TagKey<EntityType<?>> ANIMAL_HARVEST = modTag("animal_harvest_entities");
     public static TagKey<EntityType<?>> PACIFIST = modTag("pacifist");
 
-    static TagKey<EntityType<?>> modTag (String name) {
+    static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
     }
 
-    static TagKey<EntityType<?>> compatTag (String name) {
+    static TagKey<EntityType<?>> compatTag(String name) {
       return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation("forge", name));
     }
   }

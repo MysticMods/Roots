@@ -1,22 +1,14 @@
 package mysticmods.roots.gen;
 
 import com.google.common.collect.Sets;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.property.ModifierProperty;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.Set;
 
 public class ModifierPropertyProvider extends BaseProvider {

@@ -2,11 +2,9 @@ package mysticmods.roots.ritual;
 
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.ritual.Rituals;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.FakePlayerUtil;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;

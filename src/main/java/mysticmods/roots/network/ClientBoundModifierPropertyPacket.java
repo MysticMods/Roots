@@ -1,8 +1,8 @@
 package mysticmods.roots.network;
 
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.ModifierProperty;
+import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

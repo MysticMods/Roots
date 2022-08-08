@@ -94,7 +94,7 @@ public class Cost {
     return new Cost(pJson);
   }
 
-  public static List<Cost> fromNetworkArray (FriendlyByteBuf buf) {
+  public static List<Cost> fromNetworkArray(FriendlyByteBuf buf) {
     List<Cost> costs = new ArrayList<>();
     int count = buf.readVarInt();
     for (int i = 0; i < count; i++) {
@@ -103,7 +103,7 @@ public class Cost {
     return costs;
   }
 
-  public static List<Cost> fromJsonArray (JsonElement pJson) {
+  public static List<Cost> fromJsonArray(JsonElement pJson) {
     if (pJson.isJsonNull() || !pJson.isJsonArray() && !pJson.isJsonObject()) {
       throw new JsonSyntaxException("Costs must be an array or object");
     }

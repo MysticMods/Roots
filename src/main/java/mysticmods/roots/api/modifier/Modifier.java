@@ -1,6 +1,5 @@
 package mysticmods.roots.api.modifier;
 
-import com.google.common.base.Suppliers;
 import mysticmods.roots.api.DescribedRegistryEntry;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.registry.Registries;
@@ -22,16 +21,16 @@ public class Modifier extends DescribedRegistryEntry<Modifier> {
   }
 
   // TODO: API
-  public List<Cost> getCosts () {
+  public List<Cost> getCosts() {
     return costs;
   }
 
-  public Spell getSpell () {
+  public Spell getSpell() {
     return spell.get();
   }
 
   // TODO: ick? :/
-  public void setCosts (List<Cost> costs) {
+  public void setCosts(List<Cost> costs) {
     this.costs.clear();
     this.costs.addAll(costs);
   }

@@ -1,9 +1,9 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.RootsTags;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
@@ -243,7 +243,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return inventory;
   }
 
-  public Random getRandom () {
+  public Random getRandom() {
     return getLevel().getRandom();
   }
 

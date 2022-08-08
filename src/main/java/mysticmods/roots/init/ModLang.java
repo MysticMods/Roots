@@ -5,16 +5,10 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
-import mysticmods.roots.api.property.SpellProperties;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spells.Spell;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -46,7 +40,7 @@ public class ModLang {
     });
   }
 
-  public static String getComplexDescription (String value) {
+  public static String getComplexDescription(String value) {
     String[] split = value.split("/");
     return String.format("%s: %s", RegistrateLangProvider.toEnglishName(split[0]), RegistrateLangProvider.toEnglishName(split[1]));
   }

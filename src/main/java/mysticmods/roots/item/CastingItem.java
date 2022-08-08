@@ -1,6 +1,5 @@
 package mysticmods.roots.item;
 
-import mysticmods.mysticalworld.init.ModItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
