@@ -37,6 +37,7 @@ public class Modifier extends DescribedRegistryEntry<Modifier> {
   }
 
   public void initialize() {
+    getSpell().addModifier(this);
   }
 
   @Override

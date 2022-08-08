@@ -26,33 +26,6 @@ public class Grants extends DirectorySavedData {
   private final Map<UUID, Set<Spell>> GRANTED_SPELLS = new Object2ObjectLinkedOpenHashMap<>();
   private final Map<UUID, Set<Modifier>> GRANTED_MODIFIERS = new Object2ObjectLinkedOpenHashMap<>();
 
-  private static final Map<Modifier, Spell> MODIFIER_TO_SPELL_MAP = new Object2ObjectLinkedOpenHashMap<>();
-  private static final Map<Spell, Set<Modifier>> SPELL_TO_MODIFIERS_MAP = new Object2ObjectLinkedOpenHashMap<>();
-
-  @Nullable
-  public static <T extends IForgeRegistryEntry<T>> T getRegistryEntry(ResourceKey<T> key) {
-    Registry<T> registry = ServerLifecycleHooks.getCurrentServer().registryAccess().registryOrThrow(ResourceKey.createRegistryKey(key.location()));
-    return registry.get(key);
-  }
-
-  // TODO: move all of this into the classes
-  public static void registerModifier(Spell spell, Modifier... modifiers) {
-    SPELL_TO_MODIFIERS_MAP.computeIfAbsent(spell, (k) -> new ObjectLinkedOpenHashSet<>()).addAll(Arrays.asList(modifiers));
-    for (Modifier modifier : modifiers) {
-      MODIFIER_TO_SPELL_MAP.put(modifier, spell);
-    }
-  }
-
-  @Nullable
-  public static Spell spellForModifier(Modifier modifier) {
-    return MODIFIER_TO_SPELL_MAP.get(modifier);
-  }
-
-  @Nullable
-  public static Set<Modifier> modifiersForSpell(Spell spell) {
-    return SPELL_TO_MODIFIERS_MAP.get(spell);
-  }
-
   // TODO: does this make any sense?
   public static Map<Spell, SpellData> spellDataFromGrants(Player player) {
     Map<Spell, SpellData> result = new HashMap<>();
@@ -61,7 +34,8 @@ public class Grants extends DirectorySavedData {
     for (Spell spell : spells) {
       if (grants.hasSpell(player, spell)) {
         Set<Modifier> unlockedModifiers = new HashSet<>();
-        Set<Modifier> modifiers = modifiersForSpell(spell);
+        // TODO
+        Set<Modifier> modifiers = null; //modifiersForSpell(spell);
         if (modifiers != null) {
           for (Modifier modId : modifiers) {
             if (grants.hasModifier(player, modId)) {
