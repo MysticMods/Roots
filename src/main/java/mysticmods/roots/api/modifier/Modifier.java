@@ -1,6 +1,7 @@
 package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.DescribedRegistryEntry;
+import mysticmods.roots.api.IHasCost;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
@@ -11,16 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class Modifier extends DescribedRegistryEntry<Modifier> {
+public class Modifier extends DescribedRegistryEntry<Modifier> implements IHasCost {
   protected final Supplier<Spell> spell;
-  protected final List<Cost> costs;
+  protected final List<Cost> costs = new ArrayList<>();
 
   public Modifier(Supplier<Spell> spell, List<Cost> costs) {
     this.spell = new LazySupplier<>(spell);
-    this.costs = new ArrayList<>(costs);
+    setCosts(costs);
   }
 
-  // TODO: API
+  @Override
   public List<Cost> getCosts() {
     return costs;
   }
@@ -29,7 +30,7 @@ public class Modifier extends DescribedRegistryEntry<Modifier> {
     return spell.get();
   }
 
-  // TODO: ick? :/
+  @Override
   public void setCosts(List<Cost> costs) {
     this.costs.clear();
     this.costs.addAll(costs);

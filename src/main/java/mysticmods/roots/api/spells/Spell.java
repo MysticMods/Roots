@@ -1,6 +1,7 @@
 package mysticmods.roots.api.spells;
 
 import mysticmods.roots.api.DescribedRegistryEntry;
+import mysticmods.roots.api.IHasCost;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
@@ -11,22 +12,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class Spell extends DescribedRegistryEntry<Spell> {
-  private final Type type;
-  private final List<Cost> costs;
-  private final Set<Modifier> modifiers = new HashSet<>();
+public abstract class Spell extends DescribedRegistryEntry<Spell> implements IHasCost {
+  protected final Type type;
+  protected final List<Cost> costs = new ArrayList<>();
+  protected final Set<Modifier> modifiers = new HashSet<>();
 
   public Spell(Type type, List<Cost> costs) {
     this.type = type;
-    this.costs = new ArrayList<>(costs);
+    setCosts(costs);
   }
 
-  // TODO: API
+  @Override
   public List<Cost> getCosts() {
     return costs;
   }
 
-  // TODO: ick? :/
+  @Override
   public void setCosts(List<Cost> costs) {
     this.costs.clear();
     this.costs.addAll(costs);
@@ -34,6 +35,10 @@ public abstract class Spell extends DescribedRegistryEntry<Spell> {
 
   public Set<Modifier> getModifiers() {
     return modifiers;
+  }
+
+  public Type getType() {
+    return type;
   }
 
   public void addModifier(Modifier modifier) {
