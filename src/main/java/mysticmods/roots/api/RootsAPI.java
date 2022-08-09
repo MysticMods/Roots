@@ -30,6 +30,8 @@ public abstract class RootsAPI {
   public static ResourceKey<Registry<SpellProperty<?>>> SPELL_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "spell_properties"));
   public static ResourceKey<Registry<ModifierProperty<?>>> MODIFIER_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "modifier_properties"));
 
+  public static final ResourceLocation HERB_CAPABILITY_ID = new ResourceLocation(MODID, "herb_capability");
+
   public static RootsAPI INSTANCE;
 
   public static RootsAPI getInstance() {

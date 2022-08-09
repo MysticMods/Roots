@@ -1,8 +1,7 @@
-package mysticmods.roots.data;
+package mysticmods.roots.api.spells;
 
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.spells.Spell;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -12,7 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SpellInstance /*implements INBTSerializable<CompoundTag>*/ {
+public class SpellInstance {
   private final Spell spell;
   private final Set<Modifier> enabledModifiers = new HashSet<>();
   private long cooldown;
@@ -33,6 +32,14 @@ public class SpellInstance /*implements INBTSerializable<CompoundTag>*/ {
       enabledModifiers.add(Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(modifiers.getString(i))));
     }
     cooldown = tag.getLong("cooldown");
+  }
+
+  public Spell getSpell() {
+    return spell;
+  }
+
+  public Set<Modifier> getEnabledModifiers() {
+    return enabledModifiers;
   }
 
   public long getCooldown() {

@@ -1,4 +1,4 @@
-package mysticmods.roots.data;
+package mysticmods.roots.api.spells;
 
 import mysticmods.roots.RootsTags;
 import net.minecraft.nbt.CompoundTag;

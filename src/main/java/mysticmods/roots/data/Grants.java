@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.spells.SpellData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -24,6 +25,7 @@ public class Grants extends DirectorySavedData {
   private final Map<UUID, Set<Modifier>> GRANTED_MODIFIERS = new Object2ObjectLinkedOpenHashMap<>();
 
   // TODO: does this make any sense?
+  // TODO: i'm still not sure what this is actually used for yet
   public static Map<Spell, SpellData> spellDataFromGrants(Player player) {
     Map<Spell, SpellData> result = new HashMap<>();
     Collection<Spell> spells = Registries.SPELL_REGISTRY.get().getValues();
@@ -31,8 +33,7 @@ public class Grants extends DirectorySavedData {
     for (Spell spell : spells) {
       if (grants.hasSpell(player, spell)) {
         Set<Modifier> unlockedModifiers = new HashSet<>();
-        // TODO
-        Set<Modifier> modifiers = null; //modifiersForSpell(spell);
+        Set<Modifier> modifiers = spell.getModifiers();
         if (modifiers != null) {
           for (Modifier modId : modifiers) {
             if (grants.hasModifier(player, modId)) {

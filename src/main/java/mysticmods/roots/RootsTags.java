@@ -145,6 +145,8 @@ public class RootsTags {
     public static TagKey<Item> WARPED_BARK = modTag("barks/warped");
     public static TagKey<Item> MIXED_BARK = modTag("barks/mixed");
 
+    public static TagKey<Item> POUCHES = modTag("pouches");
+
     public static TagKey<Item> GROVE_CRAFTER_ACTIVATION = modTag("grove_crafter_activation");
     public static TagKey<Item> MORTAR_ACTIVATION = modTag("mortar_activation");
     public static TagKey<Item> PYRE_ACTIVATION = modTag("pyre_activation");
@@ -206,6 +208,7 @@ public class RootsTags {
     public static TagKey<Item> WILDROOT = modTag("herbs/wildroot");
     public static TagKey<Item> CLOUD_BERRY = modTag("herbs/cloud_berry");
     public static TagKey<Item> DEWGONIA = modTag("herbs/dewgonia");
+    public static TagKey<Item> HERBS = modTag("herbs");
 
     static TagKey<Item> modTag(String name) {
       return ItemTags.create(new ResourceLocation(RootsAPI.MODID, name));

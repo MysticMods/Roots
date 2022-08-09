@@ -84,6 +84,8 @@ public class ModTags {
       b.tag(RootsTags.Herbs.SPIRIT_LEAF).addTag(RootsTags.Items.SPIRIT_LEAF_CROP);
       b.tag(RootsTags.Herbs.SACRED_MOSS).addTag(RootsTags.Items.SACRED_MOSS_CROP);
 
+      b.tag(RootsTags.Herbs.HERBS).addTags(RootsTags.Herbs.MOONGLOW, RootsTags.Herbs.SPIRIT_LEAF, RootsTags.Herbs.CLOUD_BERRY, RootsTags.Herbs.DEWGONIA, RootsTags.Herbs.PERESKIA, RootsTags.Herbs.STALICRIPE, RootsTags.Herbs.INFERNAL_BULB, RootsTags.Herbs.WILDROOT, RootsTags.Herbs.WILDEWHEET, RootsTags.Herbs.SPIRIT_LEAF, RootsTags.Herbs.SACRED_MOSS);
+
       // TODO: Copying crops to the actual item tag?
     });
   }
