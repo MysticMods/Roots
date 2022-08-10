@@ -7,10 +7,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class SpellInstance {
   private final Spell spell;
@@ -25,7 +22,7 @@ public class SpellInstance {
     this(spell, Arrays.asList(modifiers));
   }
 
-  public SpellInstance (Spell spell, List<Modifier> modifiers) {
+  public SpellInstance (Spell spell, Collection<Modifier> modifiers) {
     this(spell);
     enabledModifiers.addAll(modifiers);
   }

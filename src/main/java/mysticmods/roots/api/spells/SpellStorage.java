@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 // NOTE: THIS IS 0 INDEXED
 public class SpellStorage {
@@ -22,13 +23,7 @@ public class SpellStorage {
     spells = Arrays.asList(new SpellInstance[size]);
   }
 
-  // cycle next spell
-  // slots?
-  // cycle previous spell
-  // add spell
-  // remove spell
   // adjust modifiers
-
   protected void validateSlot (int index) {
     if (index < 0 || index >= spells.size()) {
       throw new IndexOutOfBoundsException("Index " + index + " is out of bounds for SpellStorage of size " + spells.size());
@@ -106,12 +101,12 @@ public class SpellStorage {
   @Nullable
   public SpellInstance get (int slot) {
     validateSlot(slot);
-    return this.spells.get(slot);
+    return new StorageInstance(this.spells.get(slot));
   }
 
   @Nullable
   public SpellInstance get () {
-    return this.spells.get(this.index);
+    return new StorageInstance(this.spells.get(this.index));
   }
 
   @Nullable
@@ -170,5 +165,55 @@ public class SpellStorage {
 
     result.index = tag.getInt("index");
     return result;
+  }
+
+  protected class StorageInstance extends SpellInstance {
+    private final SpellInstance instance;
+
+    public StorageInstance(SpellInstance instance) {
+      super(instance.getSpell());
+      this.instance = instance;
+    }
+
+    @Override
+    public Spell getSpell() {
+      return instance.getSpell();
+    }
+
+    @Override
+    public Set<Modifier> getEnabledModifiers() {
+      return instance.getEnabledModifiers();
+    }
+
+    @Override
+    public long getCooldown() {
+      return instance.getCooldown();
+    }
+
+    @Override
+    public void setCooldown(long cooldown) {
+      SpellStorage.this.setDirty(true);
+      instance.setCooldown(cooldown);
+    }
+
+    @Override
+    public boolean hasModifier(Modifier modifier) {
+      return instance.hasModifier(modifier);
+    }
+
+    @Override
+    public CompoundTag toNBT() {
+      return instance.toNBT();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      return instance.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+      return instance.hashCode();
+    }
   }
 }
