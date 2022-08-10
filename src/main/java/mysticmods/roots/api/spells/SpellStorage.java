@@ -1,6 +1,7 @@
 package mysticmods.roots.api.spells;
 
 import mysticmods.roots.RootsTags;
+import mysticmods.roots.api.modifier.Modifier;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -8,14 +9,17 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+// NOTE: THIS IS 0 INDEXED
 public class SpellStorage {
-  private final List<SpellInstance> spells = new ArrayList<>();
-  private int index;
+  private final List<SpellInstance> spells;
+  private int index = 0;
   boolean dirty = false;
 
-  protected SpellStorage() {
+  protected SpellStorage(int size) {
+    spells = Arrays.asList(new SpellInstance[size]);
   }
 
   // cycle next spell
@@ -24,8 +28,101 @@ public class SpellStorage {
   // add spell
   // remove spell
   // adjust modifiers
-  // save
 
+  protected void validateSlot (int index) {
+    if (index < 0 || index >= spells.size()) {
+      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds for SpellStorage of size " + spells.size());
+    }
+  }
+
+  public int size () {
+    return spells.size();
+  }
+
+  public void next () {
+    int lastIndex = index;
+    for (int i = index; i < spells.size(); i++) {
+      if (spells.get(i) != null) {
+        index = i;
+        setDirty(true);
+        return;
+      }
+    }
+    for (int i = 0; i < lastIndex; i++) {
+      if (spells.get(i) != null) {
+        index = i;
+        setDirty(true);
+        return;
+      }
+    }
+  }
+
+  public void previous () {
+    int lastIndex = index;
+    for (int i = index; i >= 0; i--) {
+      if (spells.get(i) != null) {
+        index = i;
+        setDirty(true);
+        return;
+      }
+    }
+    for (int i = spells.size() - 1; i > lastIndex; i--) {
+      if (spells.get(i) != null) {
+        index = i;
+        setDirty(true);
+        return;
+      }
+    }
+  }
+
+  public void set (int slot) {
+    validateSlot(slot);
+    this.setDirty(true);
+    this.index = slot;
+  }
+
+  public int add (Spell spell, List<Modifier> modifiers) {
+    int slot = -1;
+    for (int i = 0; i < spells.size(); i++) {
+      if (get(i) == null) {
+        slot = i;
+        break;
+      }
+    }
+    if (slot == -1) {
+      return -1;
+    }
+    setDirty(true);
+    set(slot, spell, modifiers);
+    return slot;
+  }
+
+  public boolean set (int slot, Spell spell, List<Modifier> modifiers) {
+    validateSlot(slot);
+    this.setDirty(true);
+    return this.spells.set(slot, new SpellInstance(spell, modifiers)) == null;
+  }
+
+  @Nullable
+  public SpellInstance get (int slot) {
+    validateSlot(slot);
+    return this.spells.get(slot);
+  }
+
+  @Nullable
+  public SpellInstance get () {
+    return this.spells.get(this.index);
+  }
+
+  @Nullable
+  public SpellInstance remove (int slot) {
+    validateSlot(slot);
+    SpellInstance result = this.spells.remove(slot);
+    if (result != null) {
+      this.setDirty(true);
+    }
+    return result;
+  }
 
   public boolean isDirty() {
     return dirty;
@@ -39,10 +136,13 @@ public class SpellStorage {
     CompoundTag tag = toSave.getOrCreateTag();
     tag.putInt("index", this.index);
     ListTag spells = new ListTag();
-    for (SpellInstance spell : this.spells) {
-      spells.add(spell.toNBT());
+    for (int i = 0; i < this.spells.size(); i++) {
+      CompoundTag thisTag = new CompoundTag();
+      thisTag.putInt("index", i);
+      thisTag.put("spell", this.spells.get(i).toNBT());
     }
     tag.put("spells", spells);
+    tag.putInt("count", this.spells.size());
   }
 
   @Nullable
@@ -56,11 +156,16 @@ public class SpellStorage {
       return null;
     }
 
-    SpellStorage result = new SpellStorage();
+    // TODO: checking for stuff
+
+    int size = tag.getInt("count");
+
+    SpellStorage result = new SpellStorage(size);
 
     ListTag spells = tag.getList("spells", Tag.TAG_COMPOUND);
     for (int i = 0; i < spells.size(); i++) {
-      result.spells.add(SpellInstance.fromNBT(spells.getCompound(i)));
+      CompoundTag thisTag = spells.getCompound(i);
+      result.spells.set(thisTag.getInt("index"), SpellInstance.fromNBT(thisTag.getCompound("spell")));
     }
 
     result.index = tag.getInt("index");

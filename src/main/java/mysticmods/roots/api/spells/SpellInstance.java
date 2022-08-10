@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SpellInstance {
@@ -21,8 +22,12 @@ public class SpellInstance {
   }
 
   public SpellInstance(Spell spell, Modifier... modifiers) {
+    this(spell, Arrays.asList(modifiers));
+  }
+
+  public SpellInstance (Spell spell, List<Modifier> modifiers) {
     this(spell);
-    enabledModifiers.addAll(Arrays.asList(modifiers));
+    enabledModifiers.addAll(modifiers);
   }
 
   protected SpellInstance(CompoundTag tag) {
