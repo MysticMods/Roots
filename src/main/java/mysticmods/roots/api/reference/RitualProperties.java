@@ -1,4 +1,4 @@
-package mysticmods.roots.api.property;
+package mysticmods.roots.api.reference;
 
 public interface RitualProperties {
   String INTERVAL = "How often the ritual is executed (must be shorter than duration)";

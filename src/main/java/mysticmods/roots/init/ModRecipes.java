@@ -5,7 +5,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.Grant;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.spells.Spells;
+import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.recipe.chrysopoeia.ChrysopoeiaRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;

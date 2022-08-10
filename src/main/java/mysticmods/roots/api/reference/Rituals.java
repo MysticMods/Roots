@@ -1,6 +1,7 @@
-package mysticmods.roots.api.ritual;
+package mysticmods.roots.api.reference;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
