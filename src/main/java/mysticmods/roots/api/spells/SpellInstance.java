@@ -52,6 +52,8 @@ public class SpellInstance {
     this.cooldown = cooldown;
   }
 
+  // TODO: add/remove modifiers
+
   public boolean hasModifier(Modifier modifier) {
     return enabledModifiers.contains(modifier);
   }

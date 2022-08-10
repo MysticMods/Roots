@@ -196,6 +196,8 @@ public class SpellStorage {
       instance.setCooldown(cooldown);
     }
 
+    // TODO: add/remove modifiers
+
     @Override
     public boolean hasModifier(Modifier modifier) {
       return instance.hasModifier(modifier);
