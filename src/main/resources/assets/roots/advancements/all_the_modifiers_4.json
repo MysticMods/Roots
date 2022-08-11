@@ -15,7 +15,7 @@
     "baffle_cap": {
       "trigger": "roots:modifier",
       "conditions": {
-        "modifier": "roots:baffle_cap_mushroom"
+        "modifier": "roots:baffle_cap"
       }
     },
     "cloud_berry": {
