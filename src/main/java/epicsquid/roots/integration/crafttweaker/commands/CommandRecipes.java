@@ -10,9 +10,16 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static crafttweaker.mc1120.commands.SpecialMessagesChat.getLinkToCraftTweakerLog;
 
 public class CommandRecipes extends CraftTweakerCommand {
   public CommandRecipes() {
@@ -22,7 +29,12 @@ public class CommandRecipes extends CraftTweakerCommand {
   private enum SubCommand {
     all, animal_harvest, bark, fey_crafting, flower_growth, mortar, pacifist, pyre_crafting, runic_shears, life_essence
   }
-
+  
+  @Override
+  public List<String> getSubSubCommand(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
+    return Arrays.stream(SubCommand.values()).map(Enum::toString).collect(Collectors.toList());
+  }
+  
   @Override
   protected void init() {
     setDescription(new TextComponentTranslation("roots.commands.dump_recipes.desc"));
@@ -39,93 +51,94 @@ public class CommandRecipes extends CraftTweakerCommand {
       switch (command.get()) {
         case all:
         case animal_harvest:
-          CraftTweakerAPI.getLogger().logInfo("Animal Harvest recipes:");
+          CraftTweakerAPI.logCommand("Animal Harvest recipes:");
           for (Map.Entry<ResourceLocation, AnimalHarvestRecipe> entry : ModRecipes.getAnimalHarvestRecipes().entrySet()) {
-            CraftTweakerAPI.getLogger().logInfo("  Key: " + entry.getKey().toString() + " for class: " + entry.getValue().getHarvestClass().getSimpleName());
+            CraftTweakerAPI.logCommand("  Key: " + entry.getKey().toString() + " for class: " + entry.getValue().getHarvestClass().getSimpleName());
           }
-          CraftTweakerAPI.getLogger().logInfo("Animal Harvest Fish recipes:");
+          CraftTweakerAPI.logCommand("Animal Harvest Fish recipes:");
           for (Map.Entry<ResourceLocation, AnimalHarvestFishRecipe> entry : ModRecipes.getAnimalHarvestFishRecipes().entrySet()) {
-            CraftTweakerAPI.getLogger().logInfo("  Key: " + entry.getKey().toString() + " for item: " + entry.getValue().getItemStack().toString() + " with weight: " + entry.getValue().getWeight());
+            CraftTweakerAPI.logCommand("  Key: " + entry.getKey().toString() + " for item: " + entry.getValue().getItemStack().toString() + " with weight: " + entry.getValue().getWeight());
           }
           if (command.get() == SubCommand.animal_harvest) {
             break;
           }
         case bark:
-          CraftTweakerAPI.getLogger().logInfo("Bark recipes:");
+          CraftTweakerAPI.logCommand("Bark recipes:");
           for (Map.Entry<ResourceLocation, BarkRecipe> entry : ModRecipes.getBarkRecipeMap().entrySet()) {
             BarkRecipe recipe = entry.getValue();
             if (recipe.getType() == null) {
-              CraftTweakerAPI.getLogger().logInfo("  Modded Bark Recipe: " + entry.getKey().toString() + " converting " + recipe.getBlockStack() + " into " + recipe.getBarkStack(1));
+              CraftTweakerAPI.logCommand("  Modded Bark Recipe: " + entry.getKey().toString() + " converting " + recipe.getBlockStack() + " into " + recipe.getBarkStack(1));
             } else {
-              CraftTweakerAPI.getLogger().logInfo("  Vanilla Bark Recipe: " + entry.getKey().toString() + " converting " + recipe.getType().getName() + " into " + recipe.getBarkStack(1));
+              CraftTweakerAPI.logCommand("  Vanilla Bark Recipe: " + entry.getKey().toString() + " converting " + recipe.getType().getName() + " into " + recipe.getBarkStack(1));
             }
           }
           if (command.get() == SubCommand.bark) {
             break;
           }
         case fey_crafting:
-          CraftTweakerAPI.getLogger().logInfo("Fey Crafting recipes:");
+          CraftTweakerAPI.logCommand("Fey Crafting recipes:");
           for (Map.Entry<ResourceLocation, FeyCraftingRecipe> entry : ModRecipes.getFeyCraftingRecipes().entrySet()) {
             FeyCraftingRecipe recipe = entry.getValue();
-            CraftTweakerAPI.getLogger().logInfo("  Key: " + entry.getKey().toString() + " produces " + recipe.getResult().toString());
+            CraftTweakerAPI.logCommand("  Key: " + entry.getKey().toString() + " produces " + recipe.getResult().toString());
           }
           if (command.get() == SubCommand.fey_crafting) {
             break;
           }
         case flower_growth:
-          CraftTweakerAPI.getLogger().logInfo("Flower Growth recipes:");
+          CraftTweakerAPI.logCommand("Flower Growth recipes:");
           for (Map.Entry<ResourceLocation, FlowerRecipe> entry : ModRecipes.getFlowerRecipes().entrySet()) {
             FlowerRecipe recipe = entry.getValue();
-            CraftTweakerAPI.getLogger().logInfo("  Key: " + entry.getKey().toString() + " linked to: " + recipe.getFlower().toString());
+            CraftTweakerAPI.logCommand("  Key: " + entry.getKey().toString() + " linked to: " + recipe.getFlower().toString());
           }
           if (command.get() == SubCommand.flower_growth) {
             break;
           }
         case mortar:
-          CraftTweakerAPI.getLogger().logInfo("Mortar recipes: ");
+          CraftTweakerAPI.logCommand("Mortar recipes: ");
           for (MortarRecipe recipe : ModRecipes.getMortarRecipes()) {
-            CraftTweakerAPI.getLogger().logInfo("  Result: " + recipe.getResult().toString());
+            CraftTweakerAPI.logCommand("  Result: " + recipe.getResult().toString());
           }
           if (command.get() == SubCommand.mortar) {
             break;
           }
         case pacifist:
-          CraftTweakerAPI.getLogger().logInfo("Pacifist recipes:");
+          CraftTweakerAPI.logCommand("Pacifist recipes:");
           for (Map.Entry<ResourceLocation, PacifistEntry> entry : ModRecipes.getPacifistEntities().entrySet()) {
-            CraftTweakerAPI.getLogger().logInfo("  Key: " + entry.getKey().toString() + " for class: " + entry.getValue().getEntityClass().getSimpleName());
+            CraftTweakerAPI.logCommand("  Key: " + entry.getKey().toString() + " for class: " + entry.getValue().getEntityClass().getSimpleName());
           }
           if (command.get() == SubCommand.pacifist) {
             break;
           }
         case pyre_crafting:
-          CraftTweakerAPI.getLogger().logInfo("Pyre Crafting recipes:");
+          CraftTweakerAPI.logCommand("Pyre Crafting recipes:");
           for (Map.Entry<ResourceLocation, PyreCraftingRecipe> entry : ModRecipes.getPyreCraftingRecipes().entrySet()) {
-            CraftTweakerAPI.getLogger().logInfo("  Key: roots:" + entry.getKey() + " with output: " + entry.getValue().getResult().toString());
+            CraftTweakerAPI.logCommand("  Key: roots:" + entry.getKey() + " with output: " + entry.getValue().getResult().toString());
           }
           if (command.get() == SubCommand.pyre_crafting) {
             break;
           }
         case runic_shears:
-          CraftTweakerAPI.getLogger().logInfo("Runic Shears recipes:");
+          CraftTweakerAPI.logCommand("Runic Shears recipes:");
           for (Map.Entry<ResourceLocation, RunicShearRecipe> entry : ModRecipes.getRunicShearRecipes().entrySet()) {
-            CraftTweakerAPI.getLogger().logInfo("  Key: " + entry.getKey().toString() + " with the result of " + entry.getValue().getDrop().toString());
+            CraftTweakerAPI.logCommand("  Key: " + entry.getKey().toString() + " with the result of " + entry.getValue().getDrop().toString());
           }
-          CraftTweakerAPI.getLogger().logInfo("Runic Shears Entity recipes:");
+          CraftTweakerAPI.logCommand("Runic Shears Entity recipes:");
           for (Map.Entry<ResourceLocation, RunicShearEntityRecipe> entry : ModRecipes.getRunicShearEntityRecipes().entrySet()) {
-            CraftTweakerAPI.getLogger().logInfo("  Key: " + entry.getKey().toString() + " with the result of " + entry.getValue().getDrop().toString() + " for entity with class: " + entry.getValue().getClazz().getSimpleName());
+            CraftTweakerAPI.logCommand("  Key: " + entry.getKey().toString() + " with the result of " + entry.getValue().getDrop().toString() + " for entity with class: " + entry.getValue().getClazz().getSimpleName());
           }
           if (command.get() == SubCommand.runic_shears) {
             break;
           }
         case life_essence:
-          CraftTweakerAPI.getLogger().logInfo("Life Essence reipes:");
+          CraftTweakerAPI.logCommand("Life Essence reipes:");
           for (Class<? extends EntityLivingBase> clazz : ModRecipes.getLifeEssenceList()) {
-            CraftTweakerAPI.getLogger().logInfo("  Entity: " + clazz.getSimpleName());
+            CraftTweakerAPI.logCommand("  Entity: " + clazz.getSimpleName());
           }
           if (command.get() == SubCommand.life_essence) {
             break;
           }
       }
+      sender.sendMessage(getLinkToCraftTweakerLog("Dumped to CraftTweaker log.", sender));
     }
   }
 }

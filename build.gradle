@@ -50,57 +50,56 @@ dependencies {
     deobfCompile 'curse.maven:SimpleHarvest-240783:2897811'
     deobfCompile "vazkii.patchouli:Patchouli:${patchouli_version}"
     
-    
     compile("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}") {
         exclude group: 'mezz.jei'
     }
     
     
-    deobfCompile('curse.maven:JustEnoughResources-240630:2728585') {
+    deobfProvided('curse.maven:JustEnoughResources-240630:2728585') {
         exclude group: 'mezz.jei'
     }
-    deobfCompile "curse.maven:Baubles-227083:2518667"
-    deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfCompile("vazkii.botania:Botania:${botania_version}") {
+    deobfProvided "curse.maven:Baubles-227083:2518667"
+    deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}"
+    deobfProvided("vazkii.botania:Botania:${botania_version}") {
         exclude group: 'mezz.jei'
     }
-    deobfCompile "curse.maven:Thaumcraft6-223628:2629023"
-    deobfCompile "curse.maven:Hwyla-253449:2568751"
-    deobfCompile  "mcjty.theoneprobe:TheOneProbe-${top_version}"
+    deobfProvided "curse.maven:Thaumcraft6-223628:2629023"
+    deobfProvided "curse.maven:Hwyla-253449:2568751"
+    deobfProvided  "mcjty.theoneprobe:TheOneProbe-${top_version}"
 }
 
 repositories {
     mavenLocal()
     maven {
         name = 'CurseMaven'
-        url = "https://cursemaven.com"
+        url = "https://cursemaven.com/"
     }
     maven {
         name = 'Patchouli'
-        url = "https://maven.blamejared.com"
+        url = "https://maven.blamejared.com/"
     }
     maven {
         // location of the maven that hosts JEI files
         name = "Progwml6 maven"
-        url = "http://dvs1.progwml6.com/files/maven"
+        url = "http://dvs1.progwml6.com/files/maven/"
     }
     maven {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
-        url = "modmaven.k-4u.nl"
+        url = "modmaven.k-4u.nl/"
     }
     maven {
         name = "MMD Maven"
-        url 'https://maven.mcmoddev.com'
+        url 'https://maven.mcmoddev.com/'
     }
     maven {
         //Also contains Patchouli
         name = "Jared Maven"
-        url = "https://maven.blamejared.com"
+        url = "https://maven.blamejared.com/"
     }
     maven {
         name = 'Tterrag Maven'
-        url "http://maven.tterrag.com"
+        url "http://maven.tterrag.com/"
     }
 }
 

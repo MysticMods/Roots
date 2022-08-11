@@ -6,6 +6,7 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.properties.PropertyTable;
+import epicsquid.roots.recipe.SpiritDrops;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
@@ -13,9 +14,16 @@ import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static crafttweaker.mc1120.commands.SpecialMessagesChat.getLinkToCraftTweakerLog;
 
 public class CommandProperties extends CraftTweakerCommand {
   public CommandProperties() {
@@ -23,14 +31,19 @@ public class CommandProperties extends CraftTweakerCommand {
   }
 
   private enum SubCommand {
-    all, ritual, spell
+    all, ritual, spell, spirit_drops
   }
 
   @Override
   protected void init() {
     setDescription(new TextComponentTranslation("roots.commands.dump.desc"));
   }
-
+  
+  @Override
+  public List<String> getSubSubCommand(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
+    return Arrays.stream(SubCommand.values()).map(Enum::toString).collect(Collectors.toList());
+  }
+  
   private void logProperty(Map.Entry<String, Property<?>> entry) {
     String propName = entry.getKey();
     Property<?> property = entry.getValue();
@@ -69,7 +82,7 @@ public class CommandProperties extends CraftTweakerCommand {
       default:
         break;
     }
-    CraftTweakerAPI.getLogger().logInfo("  - Property: " + propName + " (type: " + propType + "), default value: " + property.getDefaultValue() + ": " + desc);
+    CraftTweakerAPI.logCommand("  - Property: " + propName + " (type: " + propType + "), default value: " + property.getDefaultValue() + ": " + desc);
   }
 
   @Override
@@ -87,9 +100,9 @@ public class CommandProperties extends CraftTweakerCommand {
             String name = entry.getKey();
             RitualBase ritual = entry.getValue();
             PropertyTable props = ritual.getProperties();
-            CraftTweakerAPI.getLogger().logInfo("Ritual: " + name);
+            CraftTweakerAPI.logCommand("Ritual: " + name);
             props.forEach(this::logProperty);
-            CraftTweakerAPI.getLogger().logInfo("----------");
+            CraftTweakerAPI.logCommand("----------");
           }
           if (command.get() == SubCommand.ritual) {
             break;
@@ -99,12 +112,23 @@ public class CommandProperties extends CraftTweakerCommand {
             String name = entry.getKey().getPath();
             SpellBase spell = entry.getValue();
             PropertyTable props = spell.getProperties();
-            CraftTweakerAPI.getLogger().logInfo("Spell: " + name);
+            CraftTweakerAPI.logCommand("Spell: " + name);
             props.forEach(this::logProperty);
-            CraftTweakerAPI.getLogger().logInfo("----------");
+            CraftTweakerAPI.logCommand("----------");
           }
-          break;
+          if (command.get() == SubCommand.spell)
+            break;
+        case spirit_drops:
+          CraftTweakerAPI.logCommand("Pouch:");
+          SpiritDrops.getPouch().forEach(el -> CraftTweakerAPI.logCommand("\t-" + el.getItem().getDisplayName()));
+          CraftTweakerAPI.logCommand("----------");
+          CraftTweakerAPI.logCommand("Reliquary:");
+          SpiritDrops.getReliquary().forEach(el -> CraftTweakerAPI.logCommand("\t-" + el.getItem().getDisplayName()));
+          CraftTweakerAPI.logCommand("----------");
+          if (command.get() == SubCommand.spirit_drops)
+            break;
       }
+      sender.sendMessage(getLinkToCraftTweakerLog("Dumped to CraftTweaker log.", sender));
     }
   }
 }
