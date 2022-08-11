@@ -9,12 +9,14 @@ import net.minecraftforge.fml.common.eventhandler.Event;
  */
 public class AspectRegistryEvent extends Event {
 	
-	/** this should always be set by TC itself - do not assign your own proxy */
+	/**
+	 * this should always be set by TC itself - do not assign your own proxy
+	 */
 	public AspectEventProxy register;
-
+	
 	public AspectRegistryEvent() {
 		
 	}
-		
+	
 	
 }

@@ -9,29 +9,29 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class BlockStateBelow implements WorldBlockStatePredicate {
-  protected BlockStatePredicate state;
-
-  public BlockStateBelow(BlockStatePredicate state) {
-    this.state = state;
-  }
-
-  @Override
-  public boolean test(IBlockState state, World world, BlockPos pos) {
-    return this.state.test(world.getBlockState(pos.down()));
-  }
-
-  @Override
-  public List<IBlockState> matchingStates() {
-    return this.state.matchingStates();
-  }
-
-  @Override
-  public List<ItemStack> matchingItems() {
-    return this.state.matchingItems();
-  }
-
-  @Override
-  public StatePosition getPosition() {
-    return StatePosition.BELOW;
-  }
+	protected BlockStatePredicate state;
+	
+	public BlockStateBelow(BlockStatePredicate state) {
+		this.state = state;
+	}
+	
+	@Override
+	public boolean test(IBlockState state, World world, BlockPos pos) {
+		return this.state.test(world.getBlockState(pos.down()));
+	}
+	
+	@Override
+	public List<IBlockState> matchingStates() {
+		return this.state.matchingStates();
+	}
+	
+	@Override
+	public List<ItemStack> matchingItems() {
+		return this.state.matchingItems();
+	}
+	
+	@Override
+	public StatePosition getPosition() {
+		return StatePosition.BELOW;
+	}
 }

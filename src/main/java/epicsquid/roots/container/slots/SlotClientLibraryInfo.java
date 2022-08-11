@@ -10,26 +10,26 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nullable;
 
 public class SlotClientLibraryInfo extends Slot implements ILibrarySlot {
-  private final IInventory inventory;
-
-  public SlotClientLibraryInfo(SpellLibraryData data, int index, int xPosition, int yPosition) {
-    this(new InventoryBasic("[Slot]", true, 1), index, xPosition, yPosition);
-  }
-
-  public SlotClientLibraryInfo(IInventory inventoryIn, int index, int xPosition, int yPosition) {
-    super(inventoryIn, index, xPosition, yPosition);
-    this.inventory = inventoryIn;
-  }
-
-
-  @Nullable
-  @Override
-  public LibrarySpellInfo getInfo() {
-    ItemStack stack = getStack();
-    if (stack.isEmpty()) {
-      return null;
-    }
-
-    return null;
-  }
+	private final IInventory inventory;
+	
+	public SlotClientLibraryInfo(SpellLibraryData data, int index, int xPosition, int yPosition) {
+		this(new InventoryBasic("[Slot]", true, 1), index, xPosition, yPosition);
+	}
+	
+	public SlotClientLibraryInfo(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+		super(inventoryIn, index, xPosition, yPosition);
+		this.inventory = inventoryIn;
+	}
+	
+	
+	@Nullable
+	@Override
+	public LibrarySpellInfo getInfo() {
+		ItemStack stack = getStack();
+		if (stack.isEmpty()) {
+			return null;
+		}
+		
+		return null;
+	}
 }

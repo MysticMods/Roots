@@ -16,26 +16,26 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods." + Roots.MODID + ".predicates.StatePredicate")
 @ZenRegister
 public class StatePredicate implements Predicates.IPredicate {
-  private IBlockState state;
-
-  public StatePredicate(IBlockState state) {
-    this.state = state;
-  }
-
-  @ZenMethod
-  @ZenDocMethod(
-      order = 1,
-      args = {
-          @ZenDocArg(arg = "state", info = "description of a blockstate against which only blocks themselves (and not state properties) will be compared"),
-      },
-      description = "Creates an IPredicate where the state is stored, and is matched against other states purely by ensuring that they are of the same block, ignoring any property values."
-  )
-  public static StatePredicate create(IBlockState state) {
-    return new StatePredicate(state);
-  }
-
-  @Override
-  public epicsquid.roots.recipe.transmutation.StatePredicate get() {
-    return new epicsquid.roots.recipe.transmutation.StatePredicate(CraftTweakerMC.getBlockState(state));
-  }
+	private IBlockState state;
+	
+	public StatePredicate(IBlockState state) {
+		this.state = state;
+	}
+	
+	@ZenMethod
+	@ZenDocMethod(
+			order = 1,
+			args = {
+					@ZenDocArg(arg = "state", info = "description of a blockstate against which only blocks themselves (and not state properties) will be compared"),
+			},
+			description = "Creates an IPredicate where the state is stored, and is matched against other states purely by ensuring that they are of the same block, ignoring any property values."
+	)
+	public static StatePredicate create(IBlockState state) {
+		return new StatePredicate(state);
+	}
+	
+	@Override
+	public epicsquid.roots.recipe.transmutation.StatePredicate get() {
+		return new epicsquid.roots.recipe.transmutation.StatePredicate(CraftTweakerMC.getBlockState(state));
+	}
 }

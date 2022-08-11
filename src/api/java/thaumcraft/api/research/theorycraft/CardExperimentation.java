@@ -6,7 +6,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import thaumcraft.api.research.ResearchCategories;
 
 public class CardExperimentation extends TheorycraftCard {
-
+	
 	@Override
 	public int getInspirationCost() {
 		return 2;
@@ -23,15 +23,15 @@ public class CardExperimentation extends TheorycraftCard {
 	}
 	
 	@Override
-	public boolean activate(EntityPlayer player, ResearchTableData data) {		
+	public boolean activate(EntityPlayer player, ResearchTableData data) {
 		try {
-			String[] s = ResearchCategories.researchCategories.keySet().toArray(new String[] {});
-			String cat = s[ player.getRNG().nextInt(s.length) ];
+			String[] s = ResearchCategories.researchCategories.keySet().toArray(new String[]{});
+			String cat = s[player.getRNG().nextInt(s.length)];
 			data.addTotal(cat, MathHelper.getInt(player.getRNG(), 15, 30));
 			data.addTotal("BASICS", MathHelper.getInt(player.getRNG(), 1, 10));
 		} catch (Exception e) {
 			return false;
-		}		
+		}
 		return true;
 	}
 	

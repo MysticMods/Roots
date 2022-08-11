@@ -18,38 +18,35 @@ import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class GuiHandler implements IGuiHandler {
-
-  public static final int POUCH_ID = 16;
-  public static final int QUIVER_ID = 17;
-  public static final int CRAFTER_ID = 18;
-  public static final int IMPOSER_ID = 19;
-  public static final int LIBRARY_ID = 20;
-
-  @Nullable
-  private static Supplier<ItemStack> getStaff(EntityPlayer player) {
-    ItemStack staff = player.getHeldItemMainhand();
-    if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
-      return player::getHeldItemMainhand;
-    }
-
-    staff = player.getHeldItemOffhand();
-    if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
-      return player::getHeldItemOffhand;
-    }
+	
+	public static final int POUCH_ID = 16;
+	public static final int QUIVER_ID = 17;
+	public static final int CRAFTER_ID = 18;
+	public static final int IMPOSER_ID = 19;
+	public static final int LIBRARY_ID = 20;
+	
+	@Nullable
+	private static Supplier<ItemStack> getStaff(EntityPlayer player) {
+		ItemStack staff = player.getHeldItemMainhand();
+		if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
+			return player::getHeldItemMainhand;
+		}
+		
+		staff = player.getHeldItemOffhand();
+		if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
+			return player::getHeldItemOffhand;
+		}
 
 /*    IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
     if (handler != null) {
@@ -61,74 +58,74 @@ public class GuiHandler implements IGuiHandler {
         }
       }
     }*/
-
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-    switch (id) {
-      case POUCH_ID:
-        return new ContainerPouch(player, true);
-      case QUIVER_ID:
-        return new ContainerQuiver(player);
-      case CRAFTER_ID:
-        TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
-        if (te instanceof TileEntityFeyCrafter) {
-          return new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te);
-        } else {
-          return new FakeContainer();
-        }
-      case IMPOSER_ID:
-        te = world.getTileEntity(new BlockPos(x, y, z));
-        if (te instanceof TileEntityImposer) {
-          ((TileEntityImposer) te).updateInSlot(player);
-          return new ContainerImposer(player, (TileEntityImposer) te);
-        } else {
-          return new FakeContainer();
-        }
-      case LIBRARY_ID:
-        Supplier<ItemStack> staff = getStaff(player);
-        if (staff != null) {
-          SpellUtil.updateModifiers(staff.get(), player);
-          PlayerSyncUtil.syncPlayer(player);
-          return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
-        } else {
-          player.sendStatusMessage(new TextComponentTranslation("roots.message.hold_staff").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)), true);
-          return new FakeContainer();
-        }
-    }
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-    switch (id) {
-      case POUCH_ID:
-        return new GuiPouch(new ContainerPouch(player, false));
-      case QUIVER_ID:
-        return new GuiQuiver(new ContainerQuiver(player));
-      case CRAFTER_ID:
-        TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
-        if (te instanceof TileEntityFeyCrafter) {
-          return new GuiFeyCrafter(new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te));
-        }
-        break;
-      case IMPOSER_ID:
-        te = world.getTileEntity(new BlockPos(x, y, z));
-        if (te instanceof TileEntityImposer) {
-          return new GuiImposer(new ContainerImposer(player, (TileEntityImposer) te));
-        }
-        break;
-      case LIBRARY_ID:
-        Supplier<ItemStack> staff = getStaff(player);
-        if (staff != null) {
-          return new GuiLibrary(new ContainerLibrary(player, staff, null));
-        }
-        break;
-    }
-    return null;
-  }
+		
+		return null;
+	}
+	
+	@Nullable
+	@Override
+	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+		switch (id) {
+			case POUCH_ID:
+				return new ContainerPouch(player, true);
+			case QUIVER_ID:
+				return new ContainerQuiver(player);
+			case CRAFTER_ID:
+				TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
+				if (te instanceof TileEntityFeyCrafter) {
+					return new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te);
+				} else {
+					return new FakeContainer();
+				}
+			case IMPOSER_ID:
+				te = world.getTileEntity(new BlockPos(x, y, z));
+				if (te instanceof TileEntityImposer) {
+					((TileEntityImposer) te).updateInSlot(player);
+					return new ContainerImposer(player, (TileEntityImposer) te);
+				} else {
+					return new FakeContainer();
+				}
+			case LIBRARY_ID:
+				Supplier<ItemStack> staff = getStaff(player);
+				if (staff != null) {
+					SpellUtil.updateModifiers(staff.get(), player);
+					PlayerSyncUtil.syncPlayer(player);
+					return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
+				} else {
+					player.sendStatusMessage(new TextComponentTranslation("roots.message.hold_staff").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)), true);
+					return new FakeContainer();
+				}
+		}
+		return null;
+	}
+	
+	@Nullable
+	@Override
+	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+		switch (id) {
+			case POUCH_ID:
+				return new GuiPouch(new ContainerPouch(player, false));
+			case QUIVER_ID:
+				return new GuiQuiver(new ContainerQuiver(player));
+			case CRAFTER_ID:
+				TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
+				if (te instanceof TileEntityFeyCrafter) {
+					return new GuiFeyCrafter(new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te));
+				}
+				break;
+			case IMPOSER_ID:
+				te = world.getTileEntity(new BlockPos(x, y, z));
+				if (te instanceof TileEntityImposer) {
+					return new GuiImposer(new ContainerImposer(player, (TileEntityImposer) te));
+				}
+				break;
+			case LIBRARY_ID:
+				Supplier<ItemStack> staff = getStaff(player);
+				if (staff != null) {
+					return new GuiLibrary(new ContainerLibrary(player, staff, null));
+				}
+				break;
+		}
+		return null;
+	}
 }

@@ -9,7 +9,7 @@ public interface IFocusElement {
 	public EnumUnitType getType();
 	
 	enum EnumUnitType {
-		EFFECT, MEDIUM, MOD, PACKAGE; 		
+		EFFECT, MEDIUM, MOD, PACKAGE;
 	}
 	
 	

@@ -17,7 +17,7 @@ public class CardInspired extends TheorycraftCard {
 		nbt.setInteger("amt", amt);
 		return nbt;
 	}
-
+	
 	@Override
 	public void deserialize(NBTTagCompound nbt) {
 		super.deserialize(nbt);
@@ -31,22 +31,22 @@ public class CardInspired extends TheorycraftCard {
 	}
 	
 	@Override
-	public boolean initialize(EntityPlayer player, ResearchTableData data) { 
-		if (data.categoryTotals.size()<1) return false;
-		int hVal=0;
-		String hKey="";
-		for (String category:data.categoryTotals.keySet()) {
+	public boolean initialize(EntityPlayer player, ResearchTableData data) {
+		if (data.categoryTotals.size() < 1) return false;
+		int hVal = 0;
+		String hKey = "";
+		for (String category : data.categoryTotals.keySet()) {
 			int q = data.getTotal(category);
-			if (q>hVal) {
+			if (q > hVal) {
 				hVal = q;
 				hKey = category;
 			}
 		}
-		cat=hKey;
+		cat = hKey;
 		amt = 10 + (hVal / 2);
 		return true;
 	}
-
+	
 	@Override
 	public int getInspirationCost() {
 		return 2;
@@ -59,8 +59,8 @@ public class CardInspired extends TheorycraftCard {
 	
 	@Override
 	public String getLocalizedText() {
-		return new TextComponentTranslation("card.inspired.text", new Object[] {
-				amt, TextFormatting.BOLD+new TextComponentTranslation("tc.research_category."+cat).getFormattedText()+TextFormatting.RESET}).getUnformattedText();
+		return new TextComponentTranslation("card.inspired.text", new Object[]{
+				amt, TextFormatting.BOLD + new TextComponentTranslation("tc.research_category." + cat).getFormattedText() + TextFormatting.RESET}).getUnformattedText();
 	}
 	
 	@Override

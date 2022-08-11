@@ -14,30 +14,30 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class DispensePestle implements IBehaviorDispenseItem {
-  private static final DispensePestle INSTANCE = new DispensePestle();
-
-  public static DispensePestle getInstance() {
-    return INSTANCE;
-  }
-
-  private DispensePestle() {
-  }
-
-  @Override
-  public ItemStack dispense(IBlockSource source, ItemStack stack) {
-    World world = source.getWorld();
-    EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
-    BlockPos target = source.getBlockPos().offset(facing);
-    IBlockState targetState = world.getBlockState(target);
-    Block targetBlock = targetState.getBlock();
-
-    if (targetBlock == ModBlocks.mortar) {
-      TileEntity te = world.getTileEntity(target);
-      if (te instanceof TileEntityMortar) {
-        ((TileEntityMortar) te).handleCraft(source.getBlockPos());
-      }
-    }
-
-    return stack;
-  }
+	private static final DispensePestle INSTANCE = new DispensePestle();
+	
+	public static DispensePestle getInstance() {
+		return INSTANCE;
+	}
+	
+	private DispensePestle() {
+	}
+	
+	@Override
+	public ItemStack dispense(IBlockSource source, ItemStack stack) {
+		World world = source.getWorld();
+		EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
+		BlockPos target = source.getBlockPos().offset(facing);
+		IBlockState targetState = world.getBlockState(target);
+		Block targetBlock = targetState.getBlock();
+		
+		if (targetBlock == ModBlocks.mortar) {
+			TileEntity te = world.getTileEntity(target);
+			if (te instanceof TileEntityMortar) {
+				((TileEntityMortar) te).handleCraft(source.getBlockPos());
+			}
+		}
+		
+		return stack;
+	}
 }

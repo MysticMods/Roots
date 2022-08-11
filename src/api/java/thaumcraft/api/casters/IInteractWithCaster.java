@@ -8,15 +8,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
- *  
  * @author azanor
- * 
- * Add this to a tile entity that you wish casters to interact with in some way. 
- *
+ * <p>
+ * Add this to a tile entity that you wish casters to interact with in some way.
  */
 
 public interface IInteractWithCaster {
-
+	
 	public boolean onCasterRightClick(World world, ItemStack casterStack, EntityPlayer player, BlockPos pos, EnumFacing side, EnumHand hand);
 	
 }

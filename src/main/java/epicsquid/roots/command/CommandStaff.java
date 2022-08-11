@@ -23,69 +23,69 @@ import java.util.Collections;
 import java.util.List;
 
 public class CommandStaff extends CommandBase {
-  public CommandStaff() {
-  }
-
-  @Override
-  public String getName() {
-    return "staff";
-  }
-
-  @Override
-  public String getUsage(ICommandSender sender) {
-    return "/staff <spell name>";
-  }
-
-  @Override
-  public List<String> getAliases() {
-    return Collections.singletonList("staff");
-  }
-
-  @Override
-  public int getRequiredPermissionLevel() {
-    return 2;
-  }
-
-  @Override
-  public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-    if (sender instanceof EntityPlayer && args.length != 0) {
-      EntityPlayer player = (EntityPlayer) sender;
-      String spellName = args[0];
-      if (!spellName.startsWith("spell")) {
-        spellName = "spell_" + spellName;
-      }
-      SpellBase spell = SpellRegistry.getSpell(spellName);
-      if (spell == null) {
-        player.sendMessage(new TextComponentString("Invalid spell: " + args[0]));
-        return;
-      }
-
-      SpellLibraryData library = SpellLibraryRegistry.getData(player);
-      library.addSpell(spell);
-
-      ItemStack staff = player.getHeldItemMainhand();
-      boolean newStaff = false;
-      if (staff.getItem() != ModItems.staff) {
-        staff = new ItemStack(ModItems.staff);
-        newStaff = true;
-      }
-      StaffSpellStorage storage = StaffSpellStorage.fromStack(staff);
-      StaffSpellInfo info = StaffSpellInfo.fromSpell(spell, true);
-      if (storage != null && storage.hasFreeSlot()) {
-        storage.setSpellToSlot(storage.getNextFreeSlot(), info);
-        storage.setSelectedSlot(1);
-        storage.saveToStack();
-        if (!newStaff) {
-          return;
-        }
-      }
-
-      IItemHandler inv = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-
-      ItemStack result = ItemHandlerHelper.insertItemStacked(inv, staff, false);
-      if (!result.isEmpty()) {
-        ItemUtil.spawnItem(player.world, player.getPosition(), result);
-      }
-    }
-  }
+	public CommandStaff() {
+	}
+	
+	@Override
+	public String getName() {
+		return "staff";
+	}
+	
+	@Override
+	public String getUsage(ICommandSender sender) {
+		return "/staff <spell name>";
+	}
+	
+	@Override
+	public List<String> getAliases() {
+		return Collections.singletonList("staff");
+	}
+	
+	@Override
+	public int getRequiredPermissionLevel() {
+		return 2;
+	}
+	
+	@Override
+	public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+		if (sender instanceof EntityPlayer && args.length != 0) {
+			EntityPlayer player = (EntityPlayer) sender;
+			String spellName = args[0];
+			if (!spellName.startsWith("spell")) {
+				spellName = "spell_" + spellName;
+			}
+			SpellBase spell = SpellRegistry.getSpell(spellName);
+			if (spell == null) {
+				player.sendMessage(new TextComponentString("Invalid spell: " + args[0]));
+				return;
+			}
+			
+			SpellLibraryData library = SpellLibraryRegistry.getData(player);
+			library.addSpell(spell);
+			
+			ItemStack staff = player.getHeldItemMainhand();
+			boolean newStaff = false;
+			if (staff.getItem() != ModItems.staff) {
+				staff = new ItemStack(ModItems.staff);
+				newStaff = true;
+			}
+			StaffSpellStorage storage = StaffSpellStorage.fromStack(staff);
+			StaffSpellInfo info = StaffSpellInfo.fromSpell(spell, true);
+			if (storage != null && storage.hasFreeSlot()) {
+				storage.setSpellToSlot(storage.getNextFreeSlot(), info);
+				storage.setSelectedSlot(1);
+				storage.saveToStack();
+				if (!newStaff) {
+					return;
+				}
+			}
+			
+			IItemHandler inv = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+			
+			ItemStack result = ItemHandlerHelper.insertItemStacked(inv, staff, false);
+			if (!result.isEmpty()) {
+				ItemUtil.spawnItem(player.world, player.getPosition(), result);
+			}
+		}
+	}
 }

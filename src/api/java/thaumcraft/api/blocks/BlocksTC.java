@@ -1,13 +1,13 @@
 package thaumcraft.api.blocks;
 
-import java.util.HashMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.EnumDyeColor;
 
-public class BlocksTC {
+import java.util.HashMap;
 
+public class BlocksTC {
+	
 	
 	// World
 	public static Block oreAmber;
@@ -21,7 +21,7 @@ public class BlocksTC {
 	public static Block saplingSilverwood;
 	public static Block shimmerleaf;
 	public static Block cinderpearl;
-	public static Block vishroom;	
+	public static Block vishroom;
 	public static Block plankGreatwood;
 	public static Block plankSilverwood;
 	
@@ -32,8 +32,8 @@ public class BlocksTC {
 	public static Block stoneAncientRock;
 	public static Block stoneAncientDoorway;
 	public static Block stoneAncientGlyphed;
-	public static Block stoneEldritchTile;	
-	public static Block stonePorous;		
+	public static Block stoneEldritchTile;
+	public static Block stonePorous;
 	
 	public static Block empty;
 	public static Block amberBlock;
@@ -86,9 +86,9 @@ public class BlocksTC {
 	public static Block metalBlockVoid;
 	public static Block metalBlockBrass;
 	public static Block metalAlchemical;
-	public static Block metalAlchemicalAdvanced;	
+	public static Block metalAlchemicalAdvanced;
 	public static Block bloom;
-	public static Block pedestalArcane;	
+	public static Block pedestalArcane;
 	public static Block pedestalAncient;
 	public static Block pedestalEldritch;
 	public static Block fleshBlock;
@@ -103,9 +103,9 @@ public class BlocksTC {
 	public static Block matrixCost;
 	public static Block visBattery;
 	
-	public static HashMap<EnumDyeColor,Block> candles = new HashMap<>();
-	public static HashMap<EnumDyeColor,Block> banners = new HashMap<>();
-	public static HashMap<EnumDyeColor,Block> nitor = new HashMap<>();
+	public static HashMap<EnumDyeColor, Block> candles = new HashMap<>();
+	public static HashMap<EnumDyeColor, Block> banners = new HashMap<>();
+	public static HashMap<EnumDyeColor, Block> nitor = new HashMap<>();
 	
 	public static Block bannerCrimsonCult;
 	
@@ -114,7 +114,7 @@ public class BlocksTC {
 	public static Block arcaneEarToggle;
 	public static Block levitator;
 	public static Block dioptra;
-	public static Block crucible;	
+	public static Block crucible;
 	public static Block arcaneWorkbench;
 	public static Block arcaneWorkbenchCharger;
 	public static Block wandWorkbench;
@@ -166,11 +166,11 @@ public class BlocksTC {
 	public static Block voidSiphon;
 	
 	// Fluids
-	public static Block fluxGoo;	
+	public static Block fluxGoo;
 	public static Block purifyingFluid;
 	public static Block liquidDeath;
 	public static Block taintDust;
-		
+	
 	// Misc
 	public static Block hole;
 	public static Block effectShock;
@@ -185,39 +185,4 @@ public class BlocksTC {
 	public static Block placeholderTable;
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-
 }

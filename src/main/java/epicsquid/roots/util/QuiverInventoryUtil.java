@@ -8,13 +8,13 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class QuiverInventoryUtil {
-  public static ItemStack getQuiver(EntityPlayer player) {
-    for (int i = 0; i < 36; i++) {
-      if (player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver) {
-        return player.inventory.getStackInSlot(i);
-      }
-    }
-
-    return ItemStack.EMPTY;
-  }
+	public static ItemStack getQuiver(EntityPlayer player) {
+		for (int i = 0; i < 36; i++) {
+			if (player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver) {
+				return player.inventory.getStackInSlot(i);
+			}
+		}
+		
+		return ItemStack.EMPTY;
+	}
 }

@@ -8,14 +8,14 @@ import net.minecraft.util.BlockRenderLayer;
 import javax.annotation.Nonnull;
 
 public class BlockFakeLiquid extends BlockBase {
-  public BlockFakeLiquid(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
-    super(mat, type, hardness, name);
-    setItemBlock(null);
-  }
-
-  @Nonnull
-  @Override
-  public BlockRenderLayer getRenderLayer() {
-    return BlockRenderLayer.TRANSLUCENT;
-  }
+	public BlockFakeLiquid(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
+		super(mat, type, hardness, name);
+		setItemBlock(null);
+	}
+	
+	@Nonnull
+	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.TRANSLUCENT;
+	}
 }

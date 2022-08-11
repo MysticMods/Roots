@@ -11,17 +11,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ChrysopoeiaWrapper implements IRecipeWrapper {
-
-  public ChrysopoeiaRecipe recipe;
-
-  public ChrysopoeiaWrapper(ChrysopoeiaRecipe recipe) {
-    this.recipe = recipe;
-  }
-
-  @Override
-  public void getIngredients(IIngredients ingredients) {
-    List<ItemStack> inputs = Stream.of(recipe.getIngredient().getIngredient().getMatchingStacks()).map(ItemStack::copy).peek(o -> o.setCount(recipe.getIngredient().getCount())).collect(Collectors.toList());
-    ingredients.setInputs(VanillaTypes.ITEM, inputs);
-    ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
-  }
+	
+	public ChrysopoeiaRecipe recipe;
+	
+	public ChrysopoeiaWrapper(ChrysopoeiaRecipe recipe) {
+		this.recipe = recipe;
+	}
+	
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		List<ItemStack> inputs = Stream.of(recipe.getIngredient().getIngredient().getMatchingStacks()).map(ItemStack::copy).peek(o -> o.setCount(recipe.getIngredient().getCount())).collect(Collectors.toList());
+		ingredients.setInputs(VanillaTypes.ITEM, inputs);
+		ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
+	}
 }

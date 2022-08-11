@@ -17,33 +17,33 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SummonCreaturesWrapper implements IRecipeWrapper {
-  public EntityLivingBase entity = null;
-  public final SummonCreatureRecipe recipe;
-
-  public SummonCreaturesWrapper(SummonCreatureRecipe recipe) {
-    this.recipe = recipe;
-  }
-
-  public SummonCreaturesWrapper(SummonCreatureIntermediate recipe) {
-    this.recipe = recipe;
-  }
-
-  @Override
-  public void getIngredients(IIngredients ingredients) {
-    List<Ingredient> ingreds = recipe.getIngredients();
-    List<List<ItemStack>> inputs = new ArrayList<>();
-    for (Ingredient ingredient : ingreds) {
-      inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
-    }
-    ingredients.setInputLists(VanillaTypes.ITEM, inputs);
-  }
-
-  @Override
-  public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-    if (entity == null) {
-      entity = recipe.getEntity(minecraft.world);
-    }
-    float scale = RunicShearsEntityWrapper.getScale(entity);
-    RenderUtil.drawEntityOnScreen(137, 70, scale, 38 - mouseX, 70 - mouseY, entity);
-  }
+	public EntityLivingBase entity = null;
+	public final SummonCreatureRecipe recipe;
+	
+	public SummonCreaturesWrapper(SummonCreatureRecipe recipe) {
+		this.recipe = recipe;
+	}
+	
+	public SummonCreaturesWrapper(SummonCreatureIntermediate recipe) {
+		this.recipe = recipe;
+	}
+	
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		List<Ingredient> ingreds = recipe.getIngredients();
+		List<List<ItemStack>> inputs = new ArrayList<>();
+		for (Ingredient ingredient : ingreds) {
+			inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
+		}
+		ingredients.setInputLists(VanillaTypes.ITEM, inputs);
+	}
+	
+	@Override
+	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+		if (entity == null) {
+			entity = recipe.getEntity(minecraft.world);
+		}
+		float scale = RunicShearsEntityWrapper.getScale(entity);
+		RenderUtil.drawEntityOnScreen(137, 70, scale, 38 - mouseX, 70 - mouseY, entity);
+	}
 }

@@ -1,7 +1,6 @@
 package epicsquid.roots.integration.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
-import crafttweaker.annotations.ZenDoc;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
@@ -25,7 +24,8 @@ import javax.annotation.Nullable;
 @ZenDocAppend({"docs/include/spiritdrops.example.md"})
 @ZenDocClass("mods." + Roots.MODID + ".SpiritDrops")
 public class SpiritDrops {
-	@ZenMethod @ZenDocMethod(order = 1, description = {
+	@ZenMethod
+	@ZenDocMethod(order = 1, description = {
 			"Adds an item or oredict entry to the spell:Harvest -> \"Gifts of Undeath\" loot pouch."
 	}, args = {
 			@ZenDocArg(arg = "ingredient", info = "The OreDict type or Item to add."),
@@ -40,12 +40,14 @@ public class SpiritDrops {
 		epicsquid.roots.recipe.SpiritDrops.addPouch(out);
 	}
 	
-	@ZenMethod @ZenDocMethod(order = 2, description = "Clears the Spirit Pouch loot table.")
+	@ZenMethod
+	@ZenDocMethod(order = 2, description = "Clears the Spirit Pouch loot table.")
 	public static void clearPouch() {
 		epicsquid.roots.recipe.SpiritDrops.clearPouch();
 	}
 	
-	@ZenMethod @ZenDocMethod(order = 3, description = {
+	@ZenMethod
+	@ZenDocMethod(order = 3, description = {
 			"Adds an item or oredict entry to the spell:Harvest -> \"Gifts of Undeath\" reliquary drop."
 	}, args = {
 			@ZenDocArg(arg = "ingredient", info = "The OreDict type or Item to add."),
@@ -60,11 +62,11 @@ public class SpiritDrops {
 		epicsquid.roots.recipe.SpiritDrops.addReliquary(out);
 	}
 	
-	@ZenMethod @ZenDocMethod(order=4, description = "Clears the Reliquary loot table.")
+	@ZenMethod
+	@ZenDocMethod(order = 4, description = "Clears the Reliquary loot table.")
 	public static void clearReliquary() {
 		epicsquid.roots.recipe.SpiritDrops.clearReliquary();
 	}
-	
 	
 	
 	@Nullable
@@ -73,8 +75,7 @@ public class SpiritDrops {
 		if (ingredient instanceof IItemStack) {
 			ItemStack item = CraftTweakerMC.getItemStack(ingredient);
 			out = new StackItem(new OneTimeSupplier<>(() -> item), weight);
-		}
-		else if (ingredient instanceof IOreDictEntry) {
+		} else if (ingredient instanceof IOreDictEntry) {
 			out = new epicsquid.roots.recipe.SpiritDrops.OreSpiritItem(((IOreDictEntry) ingredient).getName(), weight);
 		}
 		return out;

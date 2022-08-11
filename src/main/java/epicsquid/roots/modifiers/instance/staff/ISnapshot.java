@@ -6,17 +6,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 
 public interface ISnapshot {
-  int[] toArray();
-
-  boolean has(IModifier modifier);
-
-  default boolean hasRand(IModifier modifier, int rand) {
-    return has(modifier) && Util.rand.nextInt(rand) == 0;
-  }
-
-  default void toBytes(ByteBuf buf) {
-  }
-
-  default void toCompound(NBTTagCompound tag) {
-  }
+	int[] toArray();
+	
+	boolean has(IModifier modifier);
+	
+	default boolean hasRand(IModifier modifier, int rand) {
+		return has(modifier) && Util.rand.nextInt(rand) == 0;
+	}
+	
+	default void toBytes(ByteBuf buf) {
+	}
+	
+	default void toCompound(NBTTagCompound tag) {
+	}
 }

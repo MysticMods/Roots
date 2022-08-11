@@ -8,13 +8,13 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import javax.annotation.Nullable;
 
 public class KillPredicate implements IGenericPredicate<LivingDeathEvent> {
-  @Override
-  public boolean test(EntityPlayerMP player, LivingDeathEvent event) {
-    return true; // Actual logic for this handled in DeathEventHandler
-  }
-
-  @Override
-  public KillPredicate deserialize(@Nullable JsonElement element) {
-    return new KillPredicate();
-  }
+	@Override
+	public boolean test(EntityPlayerMP player, LivingDeathEvent event) {
+		return true; // Actual logic for this handled in DeathEventHandler
+	}
+	
+	@Override
+	public KillPredicate deserialize(@Nullable JsonElement element) {
+		return new KillPredicate();
+	}
 }

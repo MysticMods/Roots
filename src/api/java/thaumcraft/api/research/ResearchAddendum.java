@@ -18,12 +18,13 @@ public class ResearchAddendum {
 	public String getTextLocalized() {
 		return I18n.translateToLocal(getText());
 	}
+	
 	/**
 	 * @param text the text to set
 	 */
 	public void setText(String text) {
 		this.text = text;
-	}	
+	}
 	
 	/**
 	 * @return the recipes
@@ -31,6 +32,7 @@ public class ResearchAddendum {
 	public ResourceLocation[] getRecipes() {
 		return recipes;
 	}
+	
 	/**
 	 * @param recipes the recipes to set
 	 */
@@ -44,6 +46,7 @@ public class ResearchAddendum {
 	public String[] getResearch() {
 		return research;
 	}
+	
 	/**
 	 * @param research the research to set
 	 */

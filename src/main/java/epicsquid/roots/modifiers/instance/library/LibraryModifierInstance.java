@@ -16,48 +16,48 @@ import java.util.Map;
 import java.util.Set;
 
 public class LibraryModifierInstance extends BaseModifierInstance {
-  public LibraryModifierInstance(Modifier modifier, boolean applied) {
-    super(modifier, applied);
-  }
-
-  public LibraryModifierInstance(Modifier modifier) {
-    super(modifier, false);
-  }
-
-  public LibraryModifierInstance() {
-  }
-
-  public static LibraryModifierInstance fromNBT(NBTTagCompound tag) {
-    LibraryModifierInstance result = new LibraryModifierInstance();
-    result.deserializeNBT(tag);
-    return result;
-  }
-
-  public static LibraryModifierInstance fromStaff(StaffModifierInstance instance) {
-    return new LibraryModifierInstance(instance.getModifier(), instance.isApplied());
-  }
-
-  public StaffModifierInstance toStaff() {
-    return new StaffModifierInstance(modifier, applied, false);
-  }
-
-  @Override
-  public ItemStack getStack() {
-    return getCore().getStack();
-  }
-
-  @Override
-  public Map<CostType, IModifierCost> getCosts() {
-    return Collections.emptyMap();
-  }
-
-  @Override
-  public Set<IModifier> getConflicts() {
-    return modifier.getConflicts();
-  }
-
-  @Override
-  public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs, CostType phase) {
-    return costs;
-  }
+	public LibraryModifierInstance(Modifier modifier, boolean applied) {
+		super(modifier, applied);
+	}
+	
+	public LibraryModifierInstance(Modifier modifier) {
+		super(modifier, false);
+	}
+	
+	public LibraryModifierInstance() {
+	}
+	
+	public static LibraryModifierInstance fromNBT(NBTTagCompound tag) {
+		LibraryModifierInstance result = new LibraryModifierInstance();
+		result.deserializeNBT(tag);
+		return result;
+	}
+	
+	public static LibraryModifierInstance fromStaff(StaffModifierInstance instance) {
+		return new LibraryModifierInstance(instance.getModifier(), instance.isApplied());
+	}
+	
+	public StaffModifierInstance toStaff() {
+		return new StaffModifierInstance(modifier, applied, false);
+	}
+	
+	@Override
+	public ItemStack getStack() {
+		return getCore().getStack();
+	}
+	
+	@Override
+	public Map<CostType, IModifierCost> getCosts() {
+		return Collections.emptyMap();
+	}
+	
+	@Override
+	public Set<IModifier> getConflicts() {
+		return modifier.getConflicts();
+	}
+	
+	@Override
+	public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs, CostType phase) {
+		return costs;
+	}
 }

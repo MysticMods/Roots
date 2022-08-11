@@ -26,77 +26,77 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = Roots.DEPENDENCIES)
 public class Roots {
-  public static final String MODID = "roots";
-  public static final String DOMAIN = "roots";
-  public static final String NAME = "Roots";
-  public static final String VERSION = "@VERSION@";
-
-  public static final String DEPENDENCIES = "after:maindependencies";
-
-  public static final GuiHandler GUI_HANDLER = new GuiHandler();
-
-  public static ModContainer CONTAINER = null;
-
-  public static Logger logger;
-
-  static {
-    Materials.load();
-  }
-
-  @SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy")
-  public static CommonProxy proxy;
-
-  @Instance(MODID)
-  public static Roots instance;
-
-  public static CreativeTabs tab = new CreativeTabs("roots") {
-    @Override
-    public String getTabLabel() {
-      return "roots";
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public ItemStack createIcon() {
-      return new ItemStack(ModItems.pestle, 1);
-    }
-  };
-
-  @EventHandler
-  public void preInit(FMLPreInitializationEvent event) {
-    CONTAINER = Loader.instance().activeModContainer();
-    // We load before MysticalLib so we can't use an annotation or it will crash
-    MinecraftForge.EVENT_BUS.register(RegistryManager.class);
-    CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
-    CapabilityManager.INSTANCE.register(LifeEssenceCapability.class, new LifeEssenceCapabilityStorage(), LifeEssenceCapability::new);
-    NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
-    logger = event.getModLog();
-    ModDamage.init();
-    proxy.preInit(event);
-  }
-
-  public static Roots getInstance() {
-    return instance;
-  }
-
-  @EventHandler
-  public void init(FMLInitializationEvent event) {
-    proxy.init(event);
-  }
-
-  @EventHandler
-  public void postInit(FMLPostInitializationEvent event) {
-    proxy.postInit(event);
-  }
-
-  @EventHandler
-  public void loadComplete(FMLLoadCompleteEvent event) {
-/*    ExportDocumentation.main(new String[]{});*/
-    proxy.loadComplete(event);
-  }
-
-  @EventHandler
-  public void serverStarting(FMLServerStartingEvent event) {
-    proxy.serverStarting(event);
-  }
+	public static final String MODID = "roots";
+	public static final String DOMAIN = "roots";
+	public static final String NAME = "Roots";
+	public static final String VERSION = "@VERSION@";
+	
+	public static final String DEPENDENCIES = "after:maindependencies";
+	
+	public static final GuiHandler GUI_HANDLER = new GuiHandler();
+	
+	public static ModContainer CONTAINER = null;
+	
+	public static Logger logger;
+	
+	static {
+		Materials.load();
+	}
+	
+	@SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy")
+	public static CommonProxy proxy;
+	
+	@Instance(MODID)
+	public static Roots instance;
+	
+	public static CreativeTabs tab = new CreativeTabs("roots") {
+		@Override
+		public String getTabLabel() {
+			return "roots";
+		}
+		
+		@Override
+		@SideOnly(Side.CLIENT)
+		public ItemStack createIcon() {
+			return new ItemStack(ModItems.pestle, 1);
+		}
+	};
+	
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		CONTAINER = Loader.instance().activeModContainer();
+		// We load before MysticalLib so we can't use an annotation or it will crash
+		MinecraftForge.EVENT_BUS.register(RegistryManager.class);
+		CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
+		CapabilityManager.INSTANCE.register(LifeEssenceCapability.class, new LifeEssenceCapabilityStorage(), LifeEssenceCapability::new);
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
+		logger = event.getModLog();
+		ModDamage.init();
+		proxy.preInit(event);
+	}
+	
+	public static Roots getInstance() {
+		return instance;
+	}
+	
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
+		proxy.init(event);
+	}
+	
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		proxy.postInit(event);
+	}
+	
+	@EventHandler
+	public void loadComplete(FMLLoadCompleteEvent event) {
+		/*    ExportDocumentation.main(new String[]{});*/
+		proxy.loadComplete(event);
+	}
+	
+	@EventHandler
+	public void serverStarting(FMLServerStartingEvent event) {
+		proxy.serverStarting(event);
+	}
 }

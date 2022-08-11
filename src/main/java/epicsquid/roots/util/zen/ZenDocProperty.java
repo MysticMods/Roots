@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ZenDocProperty {
-
-  int order() default 0;
-
-  String[] description() default {};
+	
+	int order() default 0;
+	
+	String[] description() default {};
 }

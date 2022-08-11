@@ -4,57 +4,55 @@ import epicsquid.roots.entity.ritual.EntityRitualHealingAura;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
-import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualHealingAura extends RitualBase {
-  public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(800);
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
-  public static Property<Integer> PROP_INTERVAL = new Property<>("passive_interval", 40).setDescription("interval in ticks between each ritual healing pulse");
-  public static Property.PropertyInterval PROP_PLAYER_INTERVAL = new Property.PropertyInterval(60).setDescription("interval in ticks between each ritual healing pulse specifically for players");
-  public static Property<Float> PROP_PLAYER_AMOUNT = new Property<>("player_amount", 1.0f).setDescription("the amount of life points is healed for players for of each ritual pulse");
-  public static Property<Float> PROP_AMOUNT = new Property<>("amount", 4.0f).setDescription("the amount of life points a non-player entity is healed for each ritual pulse");
-
-  public double radius_x, radius_y, radius_z;
-  public float amount, player_amount;
-  public int interval, player_interval;
-
-  public RitualHealingAura(String name, boolean disabled) {
-    super(name, disabled);
-    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_PLAYER_AMOUNT, PROP_AMOUNT, PROP_PLAYER_INTERVAL);
-    setEntityClass(EntityRitualHealingAura.class);
-  }
-
-  @Override
-  public void init() {
-    recipe = new RitualRecipe(this,
-        new ItemStack(ModItems.terra_moss),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-        new ItemStack(ModItems.bark_birch),
-        new OreIngredient("wildroot"),
-        new OreIngredient("treeSapling")
-    );
-    addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.BIRCH, 3, 1));
-    setIcon(ModItems.ritual_healing_aura);
-    setColor(TextFormatting.GOLD);
-  }
-
-  @Override
-  public void doFinalise() {
-    duration = properties.get(PROP_DURATION);
-    int[] radius = properties.getRadius();
-    radius_x = radius[0] + 0.5;
-    radius_y = radius[1] + 0.5;
-    radius_z = radius[2] + 0.5;
-    amount = properties.get(PROP_AMOUNT);
-    player_amount = properties.get(PROP_PLAYER_AMOUNT);
-    interval = properties.get(PROP_INTERVAL);
-    player_interval = properties.get(PROP_PLAYER_INTERVAL);
-  }
+	public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(800);
+	public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
+	public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
+	public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
+	public static Property<Integer> PROP_INTERVAL = new Property<>("passive_interval", 40).setDescription("interval in ticks between each ritual healing pulse");
+	public static Property.PropertyInterval PROP_PLAYER_INTERVAL = new Property.PropertyInterval(60).setDescription("interval in ticks between each ritual healing pulse specifically for players");
+	public static Property<Float> PROP_PLAYER_AMOUNT = new Property<>("player_amount", 1.0f).setDescription("the amount of life points is healed for players for of each ritual pulse");
+	public static Property<Float> PROP_AMOUNT = new Property<>("amount", 4.0f).setDescription("the amount of life points a non-player entity is healed for each ritual pulse");
+	
+	public double radius_x, radius_y, radius_z;
+	public float amount, player_amount;
+	public int interval, player_interval;
+	
+	public RitualHealingAura(String name, boolean disabled) {
+		super(name, disabled);
+		properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_PLAYER_AMOUNT, PROP_AMOUNT, PROP_PLAYER_INTERVAL);
+		setEntityClass(EntityRitualHealingAura.class);
+	}
+	
+	@Override
+	public void init() {
+		recipe = new RitualRecipe(this,
+				new ItemStack(ModItems.terra_moss),
+				new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+				new ItemStack(ModItems.bark_birch),
+				new OreIngredient("wildroot"),
+				new OreIngredient("treeSapling")
+		);
+		addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.BIRCH, 3, 1));
+		setIcon(ModItems.ritual_healing_aura);
+		setColor(TextFormatting.GOLD);
+	}
+	
+	@Override
+	public void doFinalise() {
+		duration = properties.get(PROP_DURATION);
+		int[] radius = properties.getRadius();
+		radius_x = radius[0] + 0.5;
+		radius_y = radius[1] + 0.5;
+		radius_z = radius[2] + 0.5;
+		amount = properties.get(PROP_AMOUNT);
+		player_amount = properties.get(PROP_PLAYER_AMOUNT);
+		interval = properties.get(PROP_INTERVAL);
+		player_interval = properties.get(PROP_PLAYER_INTERVAL);
+	}
 }

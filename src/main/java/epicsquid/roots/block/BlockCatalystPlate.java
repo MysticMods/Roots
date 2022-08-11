@@ -22,59 +22,59 @@ import javax.annotation.Nonnull;
 
 @SuppressWarnings("deprecation")
 public class BlockCatalystPlate extends BlockTEBase {
-  public static final PropertyDirection FACING = PropertyDirection.create("facing");
-
-  public BlockCatalystPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-    super(mat, type, hardness, name, teClass);
-  }
-
-  @Override
-  public void attemptRegistry(@Nonnull Class<? extends TileEntity> c, String name) {
-    if (!BlockTEBase.classes.contains(c)) {
-      BlockTEBase.classes.add(c);
-      GameRegistry.registerTileEntity(c, new ResourceLocation(Roots.MODID, "tile_entity_offertory_plate"));
-    }
-  }
-
-  @Override
-  public BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, FACING);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(FACING).getIndex();
-  }
-
-  @Override
-  public boolean isFullCube(@Nonnull IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public boolean isOpaqueCube(@Nonnull IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
-  }
-
-  @Override
-  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-  }
-
-  @Nonnull
-  @Override
-  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.875, 0.875);
-  }
-
-  @Override
-  @Nonnull
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    return BlockFaceShape.BOWL;
-  }
+	public static final PropertyDirection FACING = PropertyDirection.create("facing");
+	
+	public BlockCatalystPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+		super(mat, type, hardness, name, teClass);
+	}
+	
+	@Override
+	public void attemptRegistry(@Nonnull Class<? extends TileEntity> c, String name) {
+		if (!BlockTEBase.classes.contains(c)) {
+			BlockTEBase.classes.add(c);
+			GameRegistry.registerTileEntity(c, new ResourceLocation(Roots.MODID, "tile_entity_offertory_plate"));
+		}
+	}
+	
+	@Override
+	public BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
+	}
+	
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
+	
+	@Override
+	public boolean isFullCube(@Nonnull IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(@Nonnull IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
+	}
+	
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+	
+	@Nonnull
+	@Override
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+		return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.875, 0.875);
+	}
+	
+	@Override
+	@Nonnull
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.BOWL;
+	}
 }

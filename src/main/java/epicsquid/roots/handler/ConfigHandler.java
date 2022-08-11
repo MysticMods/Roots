@@ -9,11 +9,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class ConfigHandler {
-
-  @SubscribeEvent
-  public static void syncConfig(ConfigChangedEvent.OnConfigChangedEvent event) {
-    if (event.getModID().equals(Roots.MODID))
-      ConfigManager.sync(Roots.MODID, Config.Type.INSTANCE);
-  }
-
+	
+	@SubscribeEvent
+	public static void syncConfig(ConfigChangedEvent.OnConfigChangedEvent event) {
+		if (event.getModID().equals(Roots.MODID))
+			ConfigManager.sync(Roots.MODID, Config.Type.INSTANCE);
+	}
+	
 }

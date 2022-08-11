@@ -11,22 +11,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CTSpellRecipe extends SpellBase.SpellRecipe {
-  private List<IIngredient> ingredients;
-  private List<Ingredient> convertedIngredients;
-
-  public CTSpellRecipe(SpellBase result, List<IIngredient> ingredients) {
-    super();
-    this.ingredients = ingredients;
-    this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
-  }
-
-  @Override
-  public List<Ingredient> getIngredients() {
-    return convertedIngredients;
-  }
-
-  @Override
-  public List<ItemStack> transformIngredients(List<ItemStack> items, TileEntityMortar pyre) {
-    return CTTransformer.transformIngredients(ingredients, items, pyre);
-  }
+	private List<IIngredient> ingredients;
+	private List<Ingredient> convertedIngredients;
+	
+	public CTSpellRecipe(SpellBase result, List<IIngredient> ingredients) {
+		super();
+		this.ingredients = ingredients;
+		this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<Ingredient> getIngredients() {
+		return convertedIngredients;
+	}
+	
+	@Override
+	public List<ItemStack> transformIngredients(List<ItemStack> items, TileEntityMortar pyre) {
+		return CTTransformer.transformIngredients(ingredients, items, pyre);
+	}
 }

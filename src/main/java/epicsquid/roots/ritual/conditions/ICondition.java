@@ -7,19 +7,19 @@ import net.minecraft.util.text.ITextComponent;
 import javax.annotation.Nullable;
 
 public interface ICondition {
-
-  default boolean check(TileEntityPyre tile, @Nullable EntityPlayer player) {
-    if (!checkCondition(tile, player)) {
-      if (player != null) {
-        player.sendMessage(failMessage());
-      }
-      return false;
-    }
-    return true;
-  }
-
-  boolean checkCondition(TileEntityPyre tile, @Nullable EntityPlayer player);
-
-  @Nullable
-  ITextComponent failMessage();
+	
+	default boolean check(TileEntityPyre tile, @Nullable EntityPlayer player) {
+		if (!checkCondition(tile, player)) {
+			if (player != null) {
+				player.sendMessage(failMessage());
+			}
+			return false;
+		}
+		return true;
+	}
+	
+	boolean checkCondition(TileEntityPyre tile, @Nullable EntityPlayer player);
+	
+	@Nullable
+	ITextComponent failMessage();
 }

@@ -8,9 +8,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ZenDocArg {
-
-  String arg();
-
-  String info() default "";
-
+	
+	String arg();
+	
+	String info() default "";
+	
 }

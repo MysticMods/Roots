@@ -16,29 +16,29 @@ import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class ServerTickHandler {
-
-  @SubscribeEvent
-  public static void clientTick(TickEvent.ServerTickEvent event) {
-    if (event.phase != TickEvent.Phase.END) {
-      return;
-    }
-
-    Map<UUID, EntityBoost.PlayerTracker> players = EntityBoost.getPlayers();
-    if (!players.isEmpty()) {
-      PlayerList list = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
-      Set<UUID> toCull = new HashSet<>();
-      for (Map.Entry<UUID, EntityBoost.PlayerTracker> entry : players.entrySet()) {
-        EntityPlayerMP player = list.getPlayerByUUID(entry.getKey());
-        //noinspection ConstantConditions
-        if (player == null) {
-          toCull.add(entry.getKey());
-        } else {
-          if (!entry.getValue().safe(player)) {
-            toCull.add(entry.getKey());
-          }
-        }
-      }
-      toCull.forEach(players::remove);
-    }
-  }
+	
+	@SubscribeEvent
+	public static void clientTick(TickEvent.ServerTickEvent event) {
+		if (event.phase != TickEvent.Phase.END) {
+			return;
+		}
+		
+		Map<UUID, EntityBoost.PlayerTracker> players = EntityBoost.getPlayers();
+		if (!players.isEmpty()) {
+			PlayerList list = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
+			Set<UUID> toCull = new HashSet<>();
+			for (Map.Entry<UUID, EntityBoost.PlayerTracker> entry : players.entrySet()) {
+				EntityPlayerMP player = list.getPlayerByUUID(entry.getKey());
+				//noinspection ConstantConditions
+				if (player == null) {
+					toCull.add(entry.getKey());
+				} else {
+					if (!entry.getValue().safe(player)) {
+						toCull.add(entry.getKey());
+					}
+				}
+			}
+			toCull.forEach(players::remove);
+		}
+	}
 }

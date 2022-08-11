@@ -1,8 +1,5 @@
 package thaumcraft.api.research.theorycraft;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
@@ -12,6 +9,9 @@ import thaumcraft.api.capabilities.IPlayerKnowledge.EnumKnowledgeType;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchCategory;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class CardAnalyze extends TheorycraftCard {
 	
@@ -23,7 +23,7 @@ public class CardAnalyze extends TheorycraftCard {
 		nbt.setString("cat", cat);
 		return nbt;
 	}
-
+	
 	@Override
 	public void deserialize(NBTTagCompound nbt) {
 		super.deserialize(nbt);
@@ -36,21 +36,21 @@ public class CardAnalyze extends TheorycraftCard {
 	}
 	
 	@Override
-	public boolean initialize(EntityPlayer player, ResearchTableData data) { 
+	public boolean initialize(EntityPlayer player, ResearchTableData data) {
 		Random r = new Random(this.getSeed());
 		ArrayList<String> cats = new ArrayList<>();
-		for (ResearchCategory rc:ResearchCategories.researchCategories.values()) {
-			if (rc.key=="BASICS") continue;
+		for (ResearchCategory rc : ResearchCategories.researchCategories.values()) {
+			if (rc.key == "BASICS") continue;
 			if (ThaumcraftCapabilities.getKnowledge(player).getKnowledge(
-				EnumKnowledgeType.OBSERVATION, ResearchCategories.researchCategories.get(cat))>0)
+					EnumKnowledgeType.OBSERVATION, ResearchCategories.researchCategories.get(cat)) > 0)
 				cats.add(rc.key);
 		}
-		if (cats.size()>0) { 
+		if (cats.size() > 0) {
 			cat = cats.get(r.nextInt(cats.size()));
-		}		
-		return cat!=null;
+		}
+		return cat != null;
 	}
-
+	
 	@Override
 	public int getInspirationCost() {
 		return 2;
@@ -58,24 +58,24 @@ public class CardAnalyze extends TheorycraftCard {
 	
 	@Override
 	public String getLocalizedName() {
-		return new TextComponentTranslation("card.analyze.name", new Object[] {
-				TextFormatting.DARK_BLUE+""+TextFormatting.BOLD+new TextComponentTranslation("tc.research_category."+cat).getFormattedText()+TextFormatting.RESET
-				}).getUnformattedText();
+		return new TextComponentTranslation("card.analyze.name", new Object[]{
+				TextFormatting.DARK_BLUE + "" + TextFormatting.BOLD + new TextComponentTranslation("tc.research_category." + cat).getFormattedText() + TextFormatting.RESET
+		}).getUnformattedText();
 	}
 	
 	@Override
 	public String getLocalizedText() {
-		return new TextComponentTranslation("card.analyze.text", new Object[] {
-				TextFormatting.BOLD+new TextComponentTranslation("tc.research_category."+cat).getFormattedText()+TextFormatting.RESET,
-				TextFormatting.BOLD+new TextComponentTranslation("tc.research_category.BASICS").getFormattedText()+TextFormatting.RESET
-				}).getUnformattedText();
+		return new TextComponentTranslation("card.analyze.text", new Object[]{
+				TextFormatting.BOLD + new TextComponentTranslation("tc.research_category." + cat).getFormattedText() + TextFormatting.RESET,
+				TextFormatting.BOLD + new TextComponentTranslation("tc.research_category.BASICS").getFormattedText() + TextFormatting.RESET
+		}).getUnformattedText();
 	}
 	
 	@Override
 	public boolean activate(EntityPlayer player, ResearchTableData data) {
 		ResearchCategory rc = ResearchCategories.getResearchCategory(cat);
-		int k = ThaumcraftCapabilities.getKnowledge(player).getKnowledge(EnumKnowledgeType.OBSERVATION, rc);		
-		if (k>=1) {
+		int k = ThaumcraftCapabilities.getKnowledge(player).getKnowledge(EnumKnowledgeType.OBSERVATION, rc);
+		if (k >= 1) {
 			data.addTotal("BASICS", 5);
 			ThaumcraftCapabilities.getKnowledge(player).addKnowledge(
 					EnumKnowledgeType.OBSERVATION, rc, -EnumKnowledgeType.OBSERVATION.getProgression());

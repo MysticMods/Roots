@@ -11,22 +11,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CTRitualRecipe extends RitualBase.RitualRecipe {
-  private List<IIngredient> ingredients;
-  private List<Ingredient> convertedIngredients;
-
-  public CTRitualRecipe(RitualBase ritual, List<IIngredient> ingredients) {
-    super(ritual);
-    this.ingredients = ingredients;
-    this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
-  }
-
-  @Override
-  public List<Ingredient> getIngredients() {
-    return convertedIngredients;
-  }
-
-  @Override
-  public List<ItemStack> transformIngredients(List<ItemStack> items, TileEntityPyre pyre) {
-    return CTTransformer.transformIngredients(ingredients, items, pyre);
-  }
+	private List<IIngredient> ingredients;
+	private List<Ingredient> convertedIngredients;
+	
+	public CTRitualRecipe(RitualBase ritual, List<IIngredient> ingredients) {
+		super(ritual);
+		this.ingredients = ingredients;
+		this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<Ingredient> getIngredients() {
+		return convertedIngredients;
+	}
+	
+	@Override
+	public List<ItemStack> transformIngredients(List<ItemStack> items, TileEntityPyre pyre) {
+		return CTTransformer.transformIngredients(ingredients, items, pyre);
+	}
 }

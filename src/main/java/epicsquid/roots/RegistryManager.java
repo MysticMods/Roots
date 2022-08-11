@@ -24,72 +24,72 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 
 public class RegistryManager {
-
-  @SubscribeEvent
-  public static void init(@Nonnull RegisterContentEvent event) {
-    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
-
-    ModBlocks.registerBlocks(event);
-    ModSounds.initSounds(event);
-    ModItems.registerItems(event);
-
-    ModEntities.registerMobs();
-    RootsPacketHandler.registerMessages();
-  }
-
-  @SubscribeEvent
-  public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
-    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
-
-    ModItems.registerOredict();
-    ModRecipes.initRecipes(event);
-  }
-
-  @SideOnly(Side.CLIENT)
-  @SubscribeEvent
-  public static void onRegisterCustomModels(@Nonnull RegisterParticleEvent event) {
-    ModParticles.init();
-  }
-
-  @SubscribeEvent(priority = EventPriority.LOWEST)
-  public static void registerOredict(@Nonnull RegistryEvent.Register<Item> event) {
-    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
-
-    ModItems.registerOredict();
-  }
-
-  @SideOnly(Side.CLIENT)
-  public static void registerColorHandlers() {
-    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
-
-    Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
-    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-      EntityList.EntityEggInfo info = EntityList.ENTITY_EGGS.get(((ItemLifeEssence) ModItems.life_essence).getEntityID(stack));
-
-      if (info == null) {
-        return -1;
-      } else {
-        return tintIndex == 0 ? info.primaryColor : info.secondaryColor;
-      }
-    }, ModItems.life_essence);
-    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-      if (tintIndex == 0) {
-        NBTTagCompound tag = stack.getTagCompound();
-        if (stack.hasTagCompound() && tag != null && tag.hasKey("color", Constants.NBT.TAG_INT)) {
-          return EnumDyeColor.byMetadata(tag.getInteger("color")).getColorValue();
-        } else {
-          return EnumDyeColor.BROWN.getColorValue();
-        }
-      } else {
-        return 0xFFFFFF;
-      }
-    }, ModItems.component_pouch, ModItems.apothecary_pouch, ModItems.herb_pouch);
-  }
-
-  @SubscribeEvent
-  public static void registerPotions(RegistryEvent.Register<Potion> event) {
-    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
-
-    ModPotions.registerPotions(event);
-  }
+	
+	@SubscribeEvent
+	public static void init(@Nonnull RegisterContentEvent event) {
+		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+		
+		ModBlocks.registerBlocks(event);
+		ModSounds.initSounds(event);
+		ModItems.registerItems(event);
+		
+		ModEntities.registerMobs();
+		RootsPacketHandler.registerMessages();
+	}
+	
+	@SubscribeEvent
+	public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
+		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+		
+		ModItems.registerOredict();
+		ModRecipes.initRecipes(event);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public static void onRegisterCustomModels(@Nonnull RegisterParticleEvent event) {
+		ModParticles.init();
+	}
+	
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void registerOredict(@Nonnull RegistryEvent.Register<Item> event) {
+		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+		
+		ModItems.registerOredict();
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void registerColorHandlers() {
+		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+		
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+			EntityList.EntityEggInfo info = EntityList.ENTITY_EGGS.get(((ItemLifeEssence) ModItems.life_essence).getEntityID(stack));
+			
+			if (info == null) {
+				return -1;
+			} else {
+				return tintIndex == 0 ? info.primaryColor : info.secondaryColor;
+			}
+		}, ModItems.life_essence);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+			if (tintIndex == 0) {
+				NBTTagCompound tag = stack.getTagCompound();
+				if (stack.hasTagCompound() && tag != null && tag.hasKey("color", Constants.NBT.TAG_INT)) {
+					return EnumDyeColor.byMetadata(tag.getInteger("color")).getColorValue();
+				} else {
+					return EnumDyeColor.BROWN.getColorValue();
+				}
+			} else {
+				return 0xFFFFFF;
+			}
+		}, ModItems.component_pouch, ModItems.apothecary_pouch, ModItems.herb_pouch);
+	}
+	
+	@SubscribeEvent
+	public static void registerPotions(RegistryEvent.Register<Potion> event) {
+		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+		
+		ModPotions.registerPotions(event);
+	}
 }

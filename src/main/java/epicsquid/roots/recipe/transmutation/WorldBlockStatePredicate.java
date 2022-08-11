@@ -6,11 +6,11 @@ import net.minecraft.world.World;
 
 @FunctionalInterface
 public interface WorldBlockStatePredicate extends MatchingStates {
-  WorldBlockStatePredicate TRUE = (a, b, c) -> true;
-
-  default StatePosition getPosition() {
-    return StatePosition.NULL;
-  }
-
-  boolean test(IBlockState state, World world, BlockPos pos);
+	WorldBlockStatePredicate TRUE = (a, b, c) -> true;
+	
+	default StatePosition getPosition() {
+		return StatePosition.NULL;
+	}
+	
+	boolean test(IBlockState state, World world, BlockPos pos);
 }

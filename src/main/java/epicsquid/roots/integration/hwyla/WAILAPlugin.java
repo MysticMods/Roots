@@ -11,13 +11,13 @@ import mcp.mobius.waila.api.WailaPlugin;
 @WailaPlugin
 @SuppressWarnings("unused")
 public class WAILAPlugin implements IWailaPlugin {
-  @SuppressWarnings("unused")
-  public WAILAPlugin() {
-  }
-
-  @Override
-  public void register(IWailaRegistrar registrar) {
-    registrar.registerBodyProvider(new ProviderGroveStone(), BlockGroveStone.class);
-    registrar.registerBodyProvider(new ProviderPyre(), TileEntityPyre.class);
-  }
+	@SuppressWarnings("unused")
+	public WAILAPlugin() {
+	}
+	
+	@Override
+	public void register(IWailaRegistrar registrar) {
+		registrar.registerBodyProvider(new ProviderGroveStone(), BlockGroveStone.class);
+		registrar.registerBodyProvider(new ProviderPyre(), TileEntityPyre.class);
+	}
 }

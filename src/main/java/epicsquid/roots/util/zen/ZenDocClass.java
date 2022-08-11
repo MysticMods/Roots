@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ZenDocClass {
-
-  String value();
-
-  String[] description() default {};
+	
+	String value();
+	
+	String[] description() default {};
 }

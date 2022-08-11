@@ -29,59 +29,59 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class SneakHandler {
-  private static boolean lastSneak = false;
-
-  @SubscribeEvent
-  public static void onPlayerVisibility(PlayerEvent.Visibility event) {
-    if (event.getEntityPlayer().getActivePotionEffect(ModPotions.nondetection) != null) {
-      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(event.getEntityPlayer().getEntityData(), SpellExtension.instance);
-      if (mods.has(SpellExtension.SENSE_PLANTS)) {
-        event.modifyVisibility(999);
-      } else {
-        event.modifyVisibility(0);
-      }
-    }
-  }
-
-  @SubscribeEvent(priority = EventPriority.LOWEST)
-  public static void onCheckAttack(LivingSetAttackTargetEvent event) {
-    if (!(event.getTarget() instanceof EntityPlayer) || !(event.getEntityLiving() instanceof EntityMob)) {
-      return;
-    }
-
-    EntityPlayer player = (EntityPlayer) event.getTarget();
-    EntityMob attacker = (EntityMob) event.getEntityLiving();
-    if (player.getActivePotionEffect(ModPotions.nondetection) != null) {
-      attacker.setRevengeTarget(null);
-      attacker.attackTarget = null;
-    }
-  }
-
-  @SubscribeEvent
-  @SideOnly(Side.CLIENT)
-  public static void onPlayerSneak(TickEvent.ClientTickEvent event) {
-    Minecraft mc = Minecraft.getMinecraft();
-    //noinspection ConstantConditions
-    if (mc == null || mc.player == null) {
-      return;
-    }
-
-
-    if (lastSneak != mc.player.isSneaking() && !lastSneak) {
-      lastSneak = mc.player.isSneaking();
-
-      List<EntityArrow> arrows = mc.world.getEntitiesWithinAABB(EntityArrow.class, ItemQuiver.bounding.offset(mc.player.getPosition()));
-      if (arrows.isEmpty()) return;
-
-      ItemStack quiver = QuiverInventoryUtil.getQuiver(mc.player);
-      if (quiver.isEmpty()) return;
-
-      QuiverHandler handler = QuiverHandler.getHandler(quiver);
-
-      MessageServerTryPickupArrows packet = new MessageServerTryPickupArrows();
-      PacketHandler.INSTANCE.sendToServer(packet);
-    }
-
-    lastSneak = mc.player.isSneaking();
-  }
+	private static boolean lastSneak = false;
+	
+	@SubscribeEvent
+	public static void onPlayerVisibility(PlayerEvent.Visibility event) {
+		if (event.getEntityPlayer().getActivePotionEffect(ModPotions.nondetection) != null) {
+			ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(event.getEntityPlayer().getEntityData(), SpellExtension.instance);
+			if (mods.has(SpellExtension.SENSE_PLANTS)) {
+				event.modifyVisibility(999);
+			} else {
+				event.modifyVisibility(0);
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onCheckAttack(LivingSetAttackTargetEvent event) {
+		if (!(event.getTarget() instanceof EntityPlayer) || !(event.getEntityLiving() instanceof EntityMob)) {
+			return;
+		}
+		
+		EntityPlayer player = (EntityPlayer) event.getTarget();
+		EntityMob attacker = (EntityMob) event.getEntityLiving();
+		if (player.getActivePotionEffect(ModPotions.nondetection) != null) {
+			attacker.setRevengeTarget(null);
+			attacker.attackTarget = null;
+		}
+	}
+	
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public static void onPlayerSneak(TickEvent.ClientTickEvent event) {
+		Minecraft mc = Minecraft.getMinecraft();
+		//noinspection ConstantConditions
+		if (mc == null || mc.player == null) {
+			return;
+		}
+		
+		
+		if (lastSneak != mc.player.isSneaking() && !lastSneak) {
+			lastSneak = mc.player.isSneaking();
+			
+			List<EntityArrow> arrows = mc.world.getEntitiesWithinAABB(EntityArrow.class, ItemQuiver.bounding.offset(mc.player.getPosition()));
+			if (arrows.isEmpty()) return;
+			
+			ItemStack quiver = QuiverInventoryUtil.getQuiver(mc.player);
+			if (quiver.isEmpty()) return;
+			
+			QuiverHandler handler = QuiverHandler.getHandler(quiver);
+			
+			MessageServerTryPickupArrows packet = new MessageServerTryPickupArrows();
+			PacketHandler.INSTANCE.sendToServer(packet);
+		}
+		
+		lastSneak = mc.player.isSneaking();
+	}
 }

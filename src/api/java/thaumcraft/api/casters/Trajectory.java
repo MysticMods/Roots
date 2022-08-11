@@ -11,5 +11,5 @@ public class Trajectory {
 		this.source = source;
 		this.direction = direction;
 	}
-
+	
 }

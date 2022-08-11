@@ -8,27 +8,27 @@ import net.minecraftforge.common.EnumPlantType;
 import javax.annotation.Nonnull;
 
 public class BlockMoonglowCrop extends BlockCropBase {
-
-  public BlockMoonglowCrop(@Nonnull String name, @Nonnull EnumPlantType plantType) {
-    super(name, plantType);
-  }
-
-  /**
-   * Gets the seed to drop for the crop
-   */
-  @Override
-  @Nonnull
-  public Item getSeed() {
-    return ModItems.moonglow_seed;
-  }
-
-  /**
-   * Gets the crop to drop for the plant
-   */
-  @Override
-  @Nonnull
-  public Item getCrop() {
-    return ModItems.moonglow_leaf;
-  }
-
+	
+	public BlockMoonglowCrop(@Nonnull String name, @Nonnull EnumPlantType plantType) {
+		super(name, plantType);
+	}
+	
+	/**
+	 * Gets the seed to drop for the crop
+	 */
+	@Override
+	@Nonnull
+	public Item getSeed() {
+		return ModItems.moonglow_seed;
+	}
+	
+	/**
+	 * Gets the crop to drop for the plant
+	 */
+	@Override
+	@Nonnull
+	public Item getCrop() {
+		return ModItems.moonglow_leaf;
+	}
+	
 }

@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import thaumcraft.api.golems.EnumGolemTrait;
 
-public class GolemMaterial {		
+public class GolemMaterial {
 	
 	protected static GolemMaterial[] materials = new GolemMaterial[1];
 	
@@ -13,7 +13,7 @@ public class GolemMaterial {
 	public String key;
 	public String[] research;
 	/**
-	 * The actual base model texture file that will be used for this material. 
+	 * The actual base model texture file that will be used for this material.
 	 */
 	public ResourceLocation texture;
 	/**
@@ -27,13 +27,13 @@ public class GolemMaterial {
 	public ItemStack componentMechanism;
 	public EnumGolemTrait[] traits;
 	
-	public GolemMaterial(String key,String[] research,ResourceLocation texture, int itemColor,
-			int hp, int armor, int damage, ItemStack compb, ItemStack compm, EnumGolemTrait[] tags) {
+	public GolemMaterial(String key, String[] research, ResourceLocation texture, int itemColor,
+	                     int hp, int armor, int damage, ItemStack compb, ItemStack compm, EnumGolemTrait[] tags) {
 		
 		this.key = key;
-		this.research=research;
-		this.texture=texture;
-		this.itemColor=itemColor;
+		this.research = research;
+		this.texture = texture;
+		this.itemColor = itemColor;
 		this.componentBase = compb;
 		this.componentMechanism = compm;
 		this.healthMod = hp;
@@ -42,27 +42,28 @@ public class GolemMaterial {
 		this.damage = damage;
 	}
 	
-	private static byte lastID = 0; 
-	public static void register(GolemMaterial thing)  {
-		thing.id = lastID;	
+	private static byte lastID = 0;
+	
+	public static void register(GolemMaterial thing) {
+		thing.id = lastID;
 		lastID++;
 		// allocate space
-		if (thing.id>=materials.length) {
-			GolemMaterial[] temp = new GolemMaterial[thing.id+1];
+		if (thing.id >= materials.length) {
+			GolemMaterial[] temp = new GolemMaterial[thing.id + 1];
 			System.arraycopy(materials, 0, temp, 0, materials.length);
 			materials = temp;
-		}			
+		}
 		materials[thing.id] = thing;
 	}
 	
 	public String getLocalizedName() {
-		return I18n.translateToLocal("golem.material."+this.key.toLowerCase());
+		return I18n.translateToLocal("golem.material." + this.key.toLowerCase());
 	}
 	
 	public String getLocalizedDescription() {
-		return I18n.translateToLocal("golem.material.text."+this.key.toLowerCase());
+		return I18n.translateToLocal("golem.material.text." + this.key.toLowerCase());
 	}
-
+	
 	public static GolemMaterial[] getMaterials() {
 		return materials;
 	}

@@ -13,37 +13,37 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MortarWrapper implements IRecipeWrapper {
-
-  public MortarRecipe recipe;
-  public SpellBase spellBase;
-
-  public MortarWrapper(MortarRecipe recipe) {
-    this.recipe = recipe;
-  }
-
-  public MortarWrapper(SpellBase spellBase) {
-    this.spellBase = spellBase;
-  }
-
-  @Override
-  public void getIngredients(IIngredients ingredients) {
-    List<List<ItemStack>> inputs = new ArrayList<>();
-
-    if (recipe != null) {
-      for (Ingredient ingredient : recipe.getIngredients()) {
-        if (ingredient == null || ingredient == Ingredient.EMPTY) {
-          inputs.add(new ArrayList<>());
-        } else {
-          inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
-        }
-      }
-      ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getResult());
-    } else if (spellBase != null) {
-      for (Ingredient ingredient : spellBase.getIngredients()) {
-        inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
-      }
-      ingredients.setOutputs(VanillaTypes.ITEM, Arrays.asList(spellBase.getIcon(), spellBase.getResult()));
-    }
-    ingredients.setInputLists(VanillaTypes.ITEM, inputs);
-  }
+	
+	public MortarRecipe recipe;
+	public SpellBase spellBase;
+	
+	public MortarWrapper(MortarRecipe recipe) {
+		this.recipe = recipe;
+	}
+	
+	public MortarWrapper(SpellBase spellBase) {
+		this.spellBase = spellBase;
+	}
+	
+	@Override
+	public void getIngredients(IIngredients ingredients) {
+		List<List<ItemStack>> inputs = new ArrayList<>();
+		
+		if (recipe != null) {
+			for (Ingredient ingredient : recipe.getIngredients()) {
+				if (ingredient == null || ingredient == Ingredient.EMPTY) {
+					inputs.add(new ArrayList<>());
+				} else {
+					inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
+				}
+			}
+			ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getResult());
+		} else if (spellBase != null) {
+			for (Ingredient ingredient : spellBase.getIngredients()) {
+				inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
+			}
+			ingredients.setOutputs(VanillaTypes.ITEM, Arrays.asList(spellBase.getIcon(), spellBase.getResult()));
+		}
+		ingredients.setInputLists(VanillaTypes.ITEM, inputs);
+	}
 }

@@ -14,34 +14,34 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("deprecation")
 public class BlockStructureMarker extends BlockBase {
-
-  public static final PropertyInteger marker_value = PropertyInteger.create("marker_value", 0, 15);
-
-  public BlockStructureMarker() {
-    super(Material.STRUCTURE_VOID, SoundType.ANVIL, 0.1f, "structure_marker");
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-    if (tab == this.getCreativeTab()) {
-      list.clear();
-    }
-  }
-
-  @Override
-  public BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, marker_value);
-  }
-
-  @Override
-  public int getMetaFromState(IBlockState state) {
-    return state.getValue(marker_value);
-  }
-
-  @Override
-  public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(marker_value, meta);
-  }
-
+	
+	public static final PropertyInteger marker_value = PropertyInteger.create("marker_value", 0, 15);
+	
+	public BlockStructureMarker() {
+		super(Material.STRUCTURE_VOID, SoundType.ANVIL, 0.1f, "structure_marker");
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == this.getCreativeTab()) {
+			list.clear();
+		}
+	}
+	
+	@Override
+	public BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, marker_value);
+	}
+	
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(marker_value);
+	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(marker_value, meta);
+	}
+	
 }

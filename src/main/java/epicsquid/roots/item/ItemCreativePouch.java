@@ -18,33 +18,33 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemCreativePouch extends ItemPouch {
-  public ItemCreativePouch(@Nonnull String name) {
-    super(name, PouchType.CREATIVE);
-  }
-
-  @Override
-  public boolean hasEffect(ItemStack stack) {
-    return true;
-  }
-
-  @Nonnull
-  @Override
-  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
-    ItemStack stack = player.getHeldItem(hand);
-    return new ActionResult<>(EnumActionResult.SUCCESS, stack);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public EnumRarity getRarity(ItemStack stack) {
-    return EnumRarity.EPIC;
-  }
-
-  @Override
-  @SideOnly(Side.CLIENT)
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-    tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("roots.tooltip.creative_pouch1"));
-    tooltip.add("");
-    tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("roots.tooltip.creative_pouch2"));
-  }
+	public ItemCreativePouch(@Nonnull String name) {
+		super(name, PouchType.CREATIVE);
+	}
+	
+	@Override
+	public boolean hasEffect(ItemStack stack) {
+		return true;
+	}
+	
+	@Nonnull
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
+		return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public EnumRarity getRarity(ItemStack stack) {
+		return EnumRarity.EPIC;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("roots.tooltip.creative_pouch1"));
+		tooltip.add("");
+		tooltip.add(TextFormatting.DARK_PURPLE + I18n.format("roots.tooltip.creative_pouch2"));
+	}
 }

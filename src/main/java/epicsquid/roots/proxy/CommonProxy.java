@@ -28,61 +28,61 @@ import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 
 public class CommonProxy {
-  public void preInit(FMLPreInitializationEvent event) {
-    SpellRegistry.preInit();
-    RitualRegistry.preInit();
-    ModEntities.registerLootTables();
-    if (Loader.isModLoaded("thaumcraft")) {
-      ThaumcraftInit.init();
-    }
-  }
-
-  public void init(FMLInitializationEvent event) {
-    SpellRegistry.init();
-    RitualRegistry.init();
-    ConfigKeys.init();
-    if (Loader.isModLoaded("jeresources")) {
-      JERIntegration.init();
-    }
-    if (Loader.isModLoaded("chisel")) {
-      RootsChisel.init();
-    }
-    if (Loader.isModLoaded("endercore")) {
-      EndercoreHarvest.init();
-    }
-    if (Loader.isModLoaded("consecration")) {
-      Consecration.init();
-    }
-    if (Loader.isModLoaded("crafttweaker")) {
-      Inject.inject();
-    }
-    if (Loader.isModLoaded("cookingforblockheads")) {
-      RootsCFB.init();
-    }
-  }
-
-  public void postInit(FMLPostInitializationEvent event) {
-    SpellRegistry.finalise();
-    RitualRegistry.finalise();
-  }
-
-  public void loadComplete(FMLLoadCompleteEvent event) {
-    if (Loader.isModLoaded("harvest")) {
-      HarvestIntegration.init();
-    }
-    Advancements.init();
-    ModRecipes.clearGeneratedEntityRecipes();
-    ModRecipes.generateLifeEssence();
-
-    try {
-      Files.write(Paths.get("roots.log"), Collections.singletonList(""), StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-    } catch (IOException ignored) {
-    }
-  }
-
-  public void serverStarting(FMLServerStartingEvent event) {
-    event.registerServerCommand(new CommandStaff());
-    event.registerServerCommand(new CommandRoots());
-    event.registerServerCommand(new CommandRitual());
-  }
+	public void preInit(FMLPreInitializationEvent event) {
+		SpellRegistry.preInit();
+		RitualRegistry.preInit();
+		ModEntities.registerLootTables();
+		if (Loader.isModLoaded("thaumcraft")) {
+			ThaumcraftInit.init();
+		}
+	}
+	
+	public void init(FMLInitializationEvent event) {
+		SpellRegistry.init();
+		RitualRegistry.init();
+		ConfigKeys.init();
+		if (Loader.isModLoaded("jeresources")) {
+			JERIntegration.init();
+		}
+		if (Loader.isModLoaded("chisel")) {
+			RootsChisel.init();
+		}
+		if (Loader.isModLoaded("endercore")) {
+			EndercoreHarvest.init();
+		}
+		if (Loader.isModLoaded("consecration")) {
+			Consecration.init();
+		}
+		if (Loader.isModLoaded("crafttweaker")) {
+			Inject.inject();
+		}
+		if (Loader.isModLoaded("cookingforblockheads")) {
+			RootsCFB.init();
+		}
+	}
+	
+	public void postInit(FMLPostInitializationEvent event) {
+		SpellRegistry.finalise();
+		RitualRegistry.finalise();
+	}
+	
+	public void loadComplete(FMLLoadCompleteEvent event) {
+		if (Loader.isModLoaded("harvest")) {
+			HarvestIntegration.init();
+		}
+		Advancements.init();
+		ModRecipes.clearGeneratedEntityRecipes();
+		ModRecipes.generateLifeEssence();
+		
+		try {
+			Files.write(Paths.get("roots.log"), Collections.singletonList(""), StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+		} catch (IOException ignored) {
+		}
+	}
+	
+	public void serverStarting(FMLServerStartingEvent event) {
+		event.registerServerCommand(new CommandStaff());
+		event.registerServerCommand(new CommandRoots());
+		event.registerServerCommand(new CommandRitual());
+	}
 }

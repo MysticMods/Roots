@@ -17,27 +17,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = Roots.MODID)
 public class RenderHUD {
-  private RenderHUD() {
-  }
-
-  @SideOnly(Side.CLIENT)
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onDrawScreenPost(RenderGameOverlayEvent.Post event) {
-    if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) return;
-
-    Minecraft mc = Minecraft.getMinecraft();
-    if (mc.currentScreen instanceof GuiChat) return;
-
-    RayTraceResult trace = mc.objectMouseOver;
-    if (trace == null || trace.typeOfHit != RayTraceResult.Type.BLOCK) return;
-
-    IBlockState state = mc.world.getBlockState(trace.getBlockPos());
-    Block block = state.getBlock();
-
-    if (block == ModBlocks.mortar) {
-      RenderMortar.render(mc, trace.getBlockPos(), state, event);
-    } else if (block instanceof BlockPyre) {
-      RenderPyre.render(mc, trace.getBlockPos(), state, event);
-    }
-  }
+	private RenderHUD() {
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onDrawScreenPost(RenderGameOverlayEvent.Post event) {
+		if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) return;
+		
+		Minecraft mc = Minecraft.getMinecraft();
+		if (mc.currentScreen instanceof GuiChat) return;
+		
+		RayTraceResult trace = mc.objectMouseOver;
+		if (trace == null || trace.typeOfHit != RayTraceResult.Type.BLOCK) return;
+		
+		IBlockState state = mc.world.getBlockState(trace.getBlockPos());
+		Block block = state.getBlock();
+		
+		if (block == ModBlocks.mortar) {
+			RenderMortar.render(mc, trace.getBlockPos(), state, event);
+		} else if (block instanceof BlockPyre) {
+			RenderPyre.render(mc, trace.getBlockPos(), state, event);
+		}
+	}
 }

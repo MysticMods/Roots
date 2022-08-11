@@ -1,29 +1,31 @@
 package thaumcraft.api.aspects;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+
 public class AspectList implements Serializable {
 	
-	public LinkedHashMap<Aspect,Integer> aspects = new LinkedHashMap<Aspect,Integer>();//aspects associated with this object
-
+	public LinkedHashMap<Aspect, Integer> aspects = new LinkedHashMap<Aspect, Integer>();//aspects associated with this object
+	
 	
 	/**
 	 * this creates a new aspect list with preloaded values based off the aspects of the given item.
+	 *
 	 * @param the itemstack of the given item
 	 */
 	public AspectList(ItemStack stack) {
 		try {
 			AspectList temp = AspectHelper.getObjectAspects(stack);
-			if (temp!=null)
-			for (Aspect tag:temp.getAspects()) {
-				add(tag,temp.getAmount(tag));
-			}
-		} catch (Exception e) {}
+			if (temp != null)
+				for (Aspect tag : temp.getAspects()) {
+					add(tag, temp.getAmount(tag));
+				}
+		} catch (Exception e) {
+		}
 	}
 	
 	public AspectList() {
@@ -31,7 +33,7 @@ public class AspectList implements Serializable {
 	
 	public AspectList copy() {
 		AspectList out = new AspectList();
-		for (Aspect a:this.getAspects())
+		for (Aspect a : this.getAspects())
 			out.add(a, this.getAmount(a));
 		return out;
 	}
@@ -50,8 +52,8 @@ public class AspectList implements Serializable {
 	public int visSize() {
 		int q = 0;
 		
-		for (Aspect as:aspects.keySet()) {
-			q+=this.getAmount(as);
+		for (Aspect as : aspects.keySet()) {
+			q += this.getAmount(as);
 		}
 		
 		return q;
@@ -64,30 +66,30 @@ public class AspectList implements Serializable {
 		return aspects.keySet().toArray(new Aspect[]{});
 	}
 	
-		
+	
 	/**
 	 * @return an array of all the aspects in this collection sorted by name
 	 */
 	public Aspect[] getAspectsSortedByName() {
 		try {
 			Aspect[] out = aspects.keySet().toArray(new Aspect[]{});
-			boolean change=false;
+			boolean change = false;
 			do {
-				change=false;
-				for(int a=0;a<out.length-1;a++) {
+				change = false;
+				for (int a = 0; a < out.length - 1; a++) {
 					Aspect e1 = out[a];
-					Aspect e2 = out[a+1];
-					if (e1!=null && e2!=null && e1.getTag().compareTo(e2.getTag())>0) {
+					Aspect e2 = out[a + 1];
+					if (e1 != null && e2 != null && e1.getTag().compareTo(e2.getTag()) > 0) {
 						out[a] = e2;
-						out[a+1] = e1;
+						out[a + 1] = e1;
 						change = true;
 						break;
 					}
 				}
-			} while (change==true);
+			} while (change == true);
 			return out;
 		} catch (Exception e) {
-			return this.getAspects(); 
+			return this.getAspects();
 		}
 	}
 	
@@ -97,22 +99,22 @@ public class AspectList implements Serializable {
 	public Aspect[] getAspectsSortedByAmount() {
 		try {
 			Aspect[] out = aspects.keySet().toArray(new Aspect[]{});
-			boolean change=false;
+			boolean change = false;
 			do {
-				change=false;
-				for(int a=0;a<out.length-1;a++) {
-					int e1 = getAmount(out[a]); 
-					int e2 = getAmount(out[a+1]);
-					if (e1>0 && e2>0 && e2>e1) {
+				change = false;
+				for (int a = 0; a < out.length - 1; a++) {
+					int e1 = getAmount(out[a]);
+					int e2 = getAmount(out[a + 1]);
+					if (e1 > 0 && e2 > 0 && e2 > e1) {
 						Aspect ea = out[a];
-						Aspect eb = out[a+1];
+						Aspect eb = out[a + 1];
 						out[a] = eb;
-						out[a+1] = ea;
+						out[a + 1] = ea;
 						change = true;
 						break;
 					}
 				}
-			} while (change==true);
+			} while (change == true);
 			return out;
 		} catch (Exception e) {
 			return this.getAspects();
@@ -124,18 +126,19 @@ public class AspectList implements Serializable {
 	 * @return the amount associated with the given aspect in this collection
 	 */
 	public int getAmount(Aspect key) {
-		return  aspects.get(key)==null?0:aspects.get(key);
+		return aspects.get(key) == null ? 0 : aspects.get(key);
 	}
 	
 	/**
-	 * Reduces the amount of an aspect in this collection by the given amount. 
+	 * Reduces the amount of an aspect in this collection by the given amount.
+	 *
 	 * @param key
 	 * @param amount
-	 * @return 
+	 * @return
 	 */
 	public boolean reduce(Aspect key, int amount) {
-		if (getAmount(key)>=amount) {
-			int am = getAmount(key)-amount;
+		if (getAmount(key) >= amount) {
+			int am = getAmount(key) - amount;
 			aspects.put(key, am);
 			return true;
 		}
@@ -143,33 +146,37 @@ public class AspectList implements Serializable {
 	}
 	
 	/**
-	 * Reduces the amount of an aspect in this collection by the given amount. 
-	 * If reduced to 0 or less the aspect will be removed completely. 
+	 * Reduces the amount of an aspect in this collection by the given amount.
+	 * If reduced to 0 or less the aspect will be removed completely.
+	 *
 	 * @param key
 	 * @param amount
 	 * @return
 	 */
 	public AspectList remove(Aspect key, int amount) {
-		int am = getAmount(key)-amount;
-		if (am<=0) aspects.remove(key); else
-		this.aspects.put(key, am);
+		int am = getAmount(key) - amount;
+		if (am <= 0) aspects.remove(key);
+		else
+			this.aspects.put(key, am);
 		return this;
 	}
 	
 	/**
 	 * Simply removes the aspect from the list
+	 *
 	 * @param key
 	 * @param amount
 	 * @return
 	 */
 	public AspectList remove(Aspect key) {
-		aspects.remove(key); 
+		aspects.remove(key);
 		return this;
 	}
 	
 	/**
-	 * Adds this aspect and amount to the collection. 
+	 * Adds this aspect and amount to the collection.
 	 * If the aspect exists then its value will be increased by the given amount.
+	 *
 	 * @param aspect
 	 * @param amount
 	 * @return
@@ -177,16 +184,17 @@ public class AspectList implements Serializable {
 	public AspectList add(Aspect aspect, int amount) {
 		if (this.aspects.containsKey(aspect)) {
 			int oldamount = this.aspects.get(aspect);
-			amount+=oldamount;
+			amount += oldamount;
 		}
-		this.aspects.put( aspect, amount );
+		this.aspects.put(aspect, amount);
 		return this;
 	}
-
+	
 	
 	/**
-	 * Adds this aspect and amount to the collection. 
+	 * Adds this aspect and amount to the collection.
 	 * If the aspect exists then only the highest of the old or new amount will be used.
+	 *
 	 * @param aspect
 	 * @param amount
 	 * @return
@@ -194,70 +202,69 @@ public class AspectList implements Serializable {
 	public AspectList merge(Aspect aspect, int amount) {
 		if (this.aspects.containsKey(aspect)) {
 			int oldamount = this.aspects.get(aspect);
-			if (amount<oldamount) amount=oldamount;
+			if (amount < oldamount) amount = oldamount;
 			
 		}
-		this.aspects.put( aspect, amount );
+		this.aspects.put(aspect, amount);
 		return this;
 	}
 	
 	public AspectList add(AspectList in) {
-		for (Aspect a:in.getAspects()) 
+		for (Aspect a : in.getAspects())
 			this.add(a, in.getAmount(a));
 		return this;
 	}
 	
 	public AspectList remove(AspectList in) {
-		for (Aspect a:in.getAspects()) 
+		for (Aspect a : in.getAspects())
 			this.remove(a, in.getAmount(a));
 		return this;
 	}
 	
 	public AspectList merge(AspectList in) {
-		for (Aspect a:in.getAspects()) 
+		for (Aspect a : in.getAspects())
 			this.merge(a, in.getAmount(a));
 		return this;
 	}
-		
+	
 	/**
 	 * Reads the list of aspects from nbt
+	 *
 	 * @param nbttagcompound
-	 * @return 
+	 * @return
 	 */
-	public void readFromNBT(NBTTagCompound nbttagcompound)
-    {
-        aspects.clear();
-        NBTTagList tlist = nbttagcompound.getTagList("Aspects",(byte)10);
+	public void readFromNBT(NBTTagCompound nbttagcompound) {
+		aspects.clear();
+		NBTTagList tlist = nbttagcompound.getTagList("Aspects", (byte) 10);
 		for (int j = 0; j < tlist.tagCount(); j++) {
 			NBTTagCompound rs = (NBTTagCompound) tlist.getCompoundTagAt(j);
 			if (rs.hasKey("key")) {
-				add(	Aspect.getAspect(rs.getString("key")),
+				add(Aspect.getAspect(rs.getString("key")),
 						rs.getInteger("amount"));
 			}
 		}
-    }
+	}
 	
-	public void readFromNBT(NBTTagCompound nbttagcompound, String label)
-    {
-        aspects.clear();
-        NBTTagList tlist = nbttagcompound.getTagList(label,(byte)10);
+	public void readFromNBT(NBTTagCompound nbttagcompound, String label) {
+		aspects.clear();
+		NBTTagList tlist = nbttagcompound.getTagList(label, (byte) 10);
 		for (int j = 0; j < tlist.tagCount(); j++) {
 			NBTTagCompound rs = (NBTTagCompound) tlist.getCompoundTagAt(j);
 			if (rs.hasKey("key")) {
-				add(	Aspect.getAspect(rs.getString("key")),
+				add(Aspect.getAspect(rs.getString("key")),
 						rs.getInteger("amount"));
 			}
 		}
-    }
+	}
 	
 	/**
 	 * Writes the list of aspects to nbt
+	 *
 	 * @param nbttagcompound
-	 * @return 
+	 * @return
 	 */
-	public void writeToNBT(NBTTagCompound nbttagcompound)
-    {
-        NBTTagList tlist = new NBTTagList();
+	public void writeToNBT(NBTTagCompound nbttagcompound) {
+		NBTTagList tlist = new NBTTagList();
 		nbttagcompound.setTag("Aspects", tlist);
 		for (Aspect aspect : getAspects())
 			if (aspect != null) {
@@ -266,11 +273,10 @@ public class AspectList implements Serializable {
 				f.setInteger("amount", getAmount(aspect));
 				tlist.appendTag(f);
 			}
-    }
+	}
 	
-	public void writeToNBT(NBTTagCompound nbttagcompound, String label)
-    {
-        NBTTagList tlist = new NBTTagList();
+	public void writeToNBT(NBTTagCompound nbttagcompound, String label) {
+		NBTTagList tlist = new NBTTagList();
 		nbttagcompound.setTag(label, tlist);
 		for (Aspect aspect : getAspects())
 			if (aspect != null) {
@@ -279,6 +285,6 @@ public class AspectList implements Serializable {
 				f.setInteger("amount", getAmount(aspect));
 				tlist.appendTag(f);
 			}
-    }
+	}
 	
 }

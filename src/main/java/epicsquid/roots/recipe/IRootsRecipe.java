@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface IRootsRecipe<T extends TileEntity> {
-  default boolean matches(List<ItemStack> ingredients) {
-    return ListUtil.matchesIngredients(ingredients, getIngredients());
-  }
-
-  default List<ItemStack> getRecipe() {
-    return getIngredients().stream().map(ingredient -> ingredient.getMatchingStacks()[0].copy()).collect(Collectors.toList());
-  }
-
-  List<Ingredient> getIngredients();
-
-  default List<ItemStack> transformIngredients(List<ItemStack> items, T tile) {
-    return ItemUtil.transformContainers(items);
-  }
+	default boolean matches(List<ItemStack> ingredients) {
+		return ListUtil.matchesIngredients(ingredients, getIngredients());
+	}
+	
+	default List<ItemStack> getRecipe() {
+		return getIngredients().stream().map(ingredient -> ingredient.getMatchingStacks()[0].copy()).collect(Collectors.toList());
+	}
+	
+	List<Ingredient> getIngredients();
+	
+	default List<ItemStack> transformIngredients(List<ItemStack> items, T tile) {
+		return ItemUtil.transformContainers(items);
+	}
 }

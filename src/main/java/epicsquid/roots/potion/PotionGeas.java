@@ -14,54 +14,54 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 
 public class PotionGeas extends Potion {
-  public PotionGeas() {
-    super(false, 0xffe100);
-    setPotionName("Geas");
-    setIconIndex(0, 0);
-    setBeneficial();
-  }
-
-  @Override
-  public boolean isReady(int duration, int amplifier) {
-    return true;
-  }
-
-  @Override
-  public void applyAttributesModifiersToEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
-    super.applyAttributesModifiersToEntity(target, attributeMapIn, amplifier);
-  }
-
-  @Override
-  public void removeAttributesModifiersFromEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
-    super.removeAttributesModifiersFromEntity(target, attributeMapIn, amplifier);
-    if (SpellGeas.instance.shouldPlaySound()) {
-      target.playSound(ModSounds.Spells.GEAS_EFFECT_END, SpellGeas.instance.getSoundVolume(), 1);
-    }
-    if (SlaveUtil.isSlave(target)) {
-      EntityLivingBase slave = SlaveUtil.revert(target);
-      target.world.spawnEntity(slave);
-      target.setDropItemsWhenDead(false);
-      target.setDead();
-      slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
-    } else {
-      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
-      if (mods.has(SpellGeas.WEAKNESS)) {
-        target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, SpellGeas.instance.weakness_duration, SpellGeas.instance.weakness_amplifier));
-      } else if (mods.has(SpellGeas.FIRE)) {
-        target.setFire(SpellGeas.instance.fire_duration);
-        target.attackEntityFrom(DamageSource.IN_FIRE, SpellGeas.instance.fire_damage);
-      } else if (mods.has(SpellGeas.PHYSICAL)) {
-        // TODO: VISUAL EFFECT
-        target.attackEntityFrom(ModDamage.PHYSICAL_DAMAGE, SpellGeas.instance.physical_damage);
-      } else if (mods.has(SpellGeas.WATER)) {
-        // TODO: ROCK FALL EVERYONE DIE
-        target.attackEntityFrom(ModDamage.waterDamageFrom(null), SpellGeas.instance.water_damage);
-      }
-    }
-  }
-
-  @Override
-  public boolean shouldRender(PotionEffect effect) {
-    return false;
-  }
+	public PotionGeas() {
+		super(false, 0xffe100);
+		setPotionName("Geas");
+		setIconIndex(0, 0);
+		setBeneficial();
+	}
+	
+	@Override
+	public boolean isReady(int duration, int amplifier) {
+		return true;
+	}
+	
+	@Override
+	public void applyAttributesModifiersToEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
+		super.applyAttributesModifiersToEntity(target, attributeMapIn, amplifier);
+	}
+	
+	@Override
+	public void removeAttributesModifiersFromEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
+		super.removeAttributesModifiersFromEntity(target, attributeMapIn, amplifier);
+		if (SpellGeas.instance.shouldPlaySound()) {
+			target.playSound(ModSounds.Spells.GEAS_EFFECT_END, SpellGeas.instance.getSoundVolume(), 1);
+		}
+		if (SlaveUtil.isSlave(target)) {
+			EntityLivingBase slave = SlaveUtil.revert(target);
+			target.world.spawnEntity(slave);
+			target.setDropItemsWhenDead(false);
+			target.setDead();
+			slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
+		} else {
+			ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
+			if (mods.has(SpellGeas.WEAKNESS)) {
+				target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, SpellGeas.instance.weakness_duration, SpellGeas.instance.weakness_amplifier));
+			} else if (mods.has(SpellGeas.FIRE)) {
+				target.setFire(SpellGeas.instance.fire_duration);
+				target.attackEntityFrom(DamageSource.IN_FIRE, SpellGeas.instance.fire_damage);
+			} else if (mods.has(SpellGeas.PHYSICAL)) {
+				// TODO: VISUAL EFFECT
+				target.attackEntityFrom(ModDamage.PHYSICAL_DAMAGE, SpellGeas.instance.physical_damage);
+			} else if (mods.has(SpellGeas.WATER)) {
+				// TODO: ROCK FALL EVERYONE DIE
+				target.attackEntityFrom(ModDamage.waterDamageFrom(null), SpellGeas.instance.water_damage);
+			}
+		}
+	}
+	
+	@Override
+	public boolean shouldRender(PotionEffect effect) {
+		return false;
+	}
 }

@@ -8,13 +8,13 @@ public class CardRethink extends TheorycraftCard {
 	
 	@Override
 	public boolean initialize(EntityPlayer player, ResearchTableData data) {
-		int a=0;
-		for (String category:data.categoryTotals.keySet()) {
-			a+=data.getTotal(category);
+		int a = 0;
+		for (String category : data.categoryTotals.keySet()) {
+			a += data.getTotal(category);
 		}
-		return a>=10;
+		return a >= 10;
 	}
-
+	
 	@Override
 	public int getInspirationCost() {
 		return -1;
@@ -29,22 +29,22 @@ public class CardRethink extends TheorycraftCard {
 	public String getLocalizedText() {
 		return new TextComponentTranslation("card.rethink.text").getUnformattedText();
 	}
-
+	
 	@Override
 	public boolean activate(EntityPlayer player, ResearchTableData data) {
-		if (!initialize(player,data)) return false;
-		int a=0;
-		for (String category:data.categoryTotals.keySet()) {
-			a+=data.getTotal(category);
+		if (!initialize(player, data)) return false;
+		int a = 0;
+		for (String category : data.categoryTotals.keySet()) {
+			a += data.getTotal(category);
 		}
 		a = Math.min(a, 10);
 		int tries = 0;
-		while (a>0 && tries < 1000) {
+		while (a > 0 && tries < 1000) {
 			tries++;
-			for (String category:data.categoryTotals.keySet()) {
+			for (String category : data.categoryTotals.keySet()) {
 				data.addTotal(category, -1);
 				a--;
-				if (a<=0 || !data.hasTotal(category)) break;
+				if (a <= 0 || !data.hasTotal(category)) break;
 			}
 		}
 		data.bonusDraws++;

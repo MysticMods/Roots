@@ -14,27 +14,27 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ConditionValidSummon implements ICondition {
-  @Override
-  public boolean checkCondition(TileEntityPyre tile, @Nullable EntityPlayer player) {
-    List<TileEntityCatalystPlate> plates = RitualUtil.getNearbyCatalystPlates(tile.getWorld(), tile.getPos());
-    List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);
-
-    if (ModRecipes.findSummonCreatureEntry(plateItems) != null) {
-      return true;
-    }
-
-    for (ItemStack stack : plateItems) {
-      if (stack.getItem() == ModItems.life_essence) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  @Nullable
-  @Override
-  public ITextComponent failMessage() {
-    return new TextComponentTranslation("roots.ritual.condition.invalid_summon");
-  }
+	@Override
+	public boolean checkCondition(TileEntityPyre tile, @Nullable EntityPlayer player) {
+		List<TileEntityCatalystPlate> plates = RitualUtil.getNearbyCatalystPlates(tile.getWorld(), tile.getPos());
+		List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);
+		
+		if (ModRecipes.findSummonCreatureEntry(plateItems) != null) {
+			return true;
+		}
+		
+		for (ItemStack stack : plateItems) {
+			if (stack.getItem() == ModItems.life_essence) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	@Nullable
+	@Override
+	public ITextComponent failMessage() {
+		return new TextComponentTranslation("roots.ritual.condition.invalid_summon");
+	}
 }

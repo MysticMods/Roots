@@ -14,63 +14,63 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ItemBlockUnendingBowl extends ItemBlock {
-  public ItemBlockUnendingBowl(Block block) {
-    super(block);
-  }
-
-  @Nullable
-  @Override
-  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new UnendingBowlItemHandler(stack);
-  }
-
-  public static class UnendingBowlItemHandler extends FluidHandlerItemStack {
-    public UnendingBowlItemHandler(@Nonnull ItemStack container) {
-      super(container, Integer.MAX_VALUE);
-    }
-
-    @Nullable
-    @Override
-    public FluidStack getFluid() {
-      return new FluidStack(FluidRegistry.getFluid(GeneralConfig.FluidName), Integer.MAX_VALUE);
-    }
-
-    @Override
-    protected void setFluid(FluidStack fluid) {
-    }
-
-    @Override
-    public int fill(FluidStack resource, boolean doFill) {
-      return 0;
-    }
-
-    @Override
-    public FluidStack drain(FluidStack resource, boolean doDrain) {
-      if (resource.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName)) {
-        return resource.copy();
-      } else {
-        return null;
-      }
-    }
-
-    @Override
-    public FluidStack drain(int maxDrain, boolean doDrain) {
-      return new FluidStack(FluidRegistry.getFluid(GeneralConfig.FluidName), maxDrain);
-    }
-
-    @Override
-    public boolean canFillFluidType(FluidStack fluid) {
-      return fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
-    }
-
-    @Override
-    public boolean canDrainFluidType(FluidStack fluid) {
-      return fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
-
-    }
-
-    @Override
-    protected void setContainerToEmpty() {
-    }
-  }
+	public ItemBlockUnendingBowl(Block block) {
+		super(block);
+	}
+	
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		return new UnendingBowlItemHandler(stack);
+	}
+	
+	public static class UnendingBowlItemHandler extends FluidHandlerItemStack {
+		public UnendingBowlItemHandler(@Nonnull ItemStack container) {
+			super(container, Integer.MAX_VALUE);
+		}
+		
+		@Nullable
+		@Override
+		public FluidStack getFluid() {
+			return new FluidStack(FluidRegistry.getFluid(GeneralConfig.FluidName), Integer.MAX_VALUE);
+		}
+		
+		@Override
+		protected void setFluid(FluidStack fluid) {
+		}
+		
+		@Override
+		public int fill(FluidStack resource, boolean doFill) {
+			return 0;
+		}
+		
+		@Override
+		public FluidStack drain(FluidStack resource, boolean doDrain) {
+			if (resource.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName)) {
+				return resource.copy();
+			} else {
+				return null;
+			}
+		}
+		
+		@Override
+		public FluidStack drain(int maxDrain, boolean doDrain) {
+			return new FluidStack(FluidRegistry.getFluid(GeneralConfig.FluidName), maxDrain);
+		}
+		
+		@Override
+		public boolean canFillFluidType(FluidStack fluid) {
+			return fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
+		}
+		
+		@Override
+		public boolean canDrainFluidType(FluidStack fluid) {
+			return fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
+			
+		}
+		
+		@Override
+		protected void setContainerToEmpty() {
+		}
+	}
 }

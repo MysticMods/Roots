@@ -1,22 +1,22 @@
 package thaumcraft.api.casters;
 
-import java.util.ArrayList;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import java.util.ArrayList;
+
 public abstract class FocusModSplit extends FocusMod {
 	
-	private ArrayList<FocusPackage> packages = new ArrayList<>(); 
-
+	private ArrayList<FocusPackage> packages = new ArrayList<>();
+	
 	public final ArrayList<FocusPackage> getSplitPackages() {
 		return packages;
 	}
 	
 	public void deserialize(NBTTagCompound nbt) {
-		NBTTagList nodelist = nbt.getTagList("packages", (byte)10);
+		NBTTagList nodelist = nbt.getTagList("packages", (byte) 10);
 		packages.clear();
-		for (int x=0;x<nodelist.tagCount();x++) {
+		for (int x = 0; x < nodelist.tagCount(); x++) {
 			NBTTagCompound nodenbt = (NBTTagCompound) nodelist.getCompoundTagAt(x);
 			FocusPackage fp = new FocusPackage();
 			fp.deserialize(nodenbt);
@@ -25,12 +25,12 @@ public abstract class FocusModSplit extends FocusMod {
 	}
 	
 	public NBTTagCompound serialize() {
-		NBTTagCompound nbt = new NBTTagCompound();		
+		NBTTagCompound nbt = new NBTTagCompound();
 		NBTTagList nodelist = new NBTTagList();
-		for (FocusPackage node:packages) {
+		for (FocusPackage node : packages) {
 			nodelist.appendTag(node.serialize());
 		}
-		nbt.setTag("packages", nodelist);		
+		nbt.setTag("packages", nodelist);
 		return nbt;
 	}
 	
@@ -38,5 +38,5 @@ public abstract class FocusModSplit extends FocusMod {
 	public float getPowerMultiplier() {
 		return .75f;
 	}
-
+	
 }

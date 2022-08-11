@@ -7,13 +7,13 @@ import net.minecraft.util.math.Vec3d;
 import thaumcraft.api.aspects.Aspect;
 
 public class FocusMediumRoot extends FocusMedium {
-		
+	
 	public FocusMediumRoot() {
 		super();
 	}
 	
-	Trajectory[] trajectories=null;
-	RayTraceResult[] targets=null;
+	Trajectory[] trajectories = null;
+	RayTraceResult[] targets = null;
 	
 	public FocusMediumRoot(Trajectory[] trajectories, RayTraceResult[] targets) {
 		super();
@@ -25,7 +25,7 @@ public class FocusMediumRoot extends FocusMedium {
 	public String getResearch() {
 		return "BASEAUROMANCY";
 	}
-
+	
 	@Override
 	public String getKey() {
 		return "ROOT";
@@ -38,42 +38,44 @@ public class FocusMediumRoot extends FocusMedium {
 	
 	@Override
 	public EnumSupplyType[] willSupply() {
-		return new EnumSupplyType[] {EnumSupplyType.TARGET, EnumSupplyType.TRAJECTORY};
+		return new EnumSupplyType[]{EnumSupplyType.TARGET, EnumSupplyType.TRAJECTORY};
 	}
-
+	
 	@Override
 	public RayTraceResult[] supplyTargets() {
 		return targets;
 	}
-
+	
 	@Override
 	public Trajectory[] supplyTrajectories() {
 		return trajectories;
 	}
 	
-	public void setupFromCaster (EntityLivingBase caster) {
-		trajectories = new Trajectory[] { new Trajectory(generateSourceVector(caster), caster.getLookVec()) };
-		targets = new RayTraceResult[] { new RayTraceResult(caster) };
+	public void setupFromCaster(EntityLivingBase caster) {
+		trajectories = new Trajectory[]{new Trajectory(generateSourceVector(caster), caster.getLookVec())};
+		targets = new RayTraceResult[]{new RayTraceResult(caster)};
 	}
 	
 	/**
 	 * Useful if you want to cast stuff from something other than the player and where their getLookVec() is often not accurate.
+	 *
 	 * @param caster
 	 * @param target
 	 * @param offset use to aim above or below the target
 	 */
 	public void setupFromCasterToTarget(EntityLivingBase caster, Entity target, double offset) {
-		Vec3d sv = generateSourceVector(caster);	
+		Vec3d sv = generateSourceVector(caster);
 		double d0 = target.posX - sv.x;
-        double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 2.0F) - sv.y;
-        double d2 = target.posZ - sv.z;
-        Vec3d lv = new Vec3d(d0,d1 + offset,d2);
-		trajectories = new Trajectory[] { new Trajectory(sv, lv.normalize()) };
-		targets = new RayTraceResult[] { new RayTraceResult(caster) };
+		double d1 = target.getEntityBoundingBox().minY + (double) (target.height / 2.0F) - sv.y;
+		double d2 = target.posZ - sv.z;
+		Vec3d lv = new Vec3d(d0, d1 + offset, d2);
+		trajectories = new Trajectory[]{new Trajectory(sv, lv.normalize())};
+		targets = new RayTraceResult[]{new RayTraceResult(caster)};
 	}
 	
 	/**
 	 * Useful if you want to cast stuff from something other than the player and where their getLookVec() is often not accurate.
+	 *
 	 * @param caster
 	 * @param x
 	 * @param y
@@ -82,24 +84,23 @@ public class FocusMediumRoot extends FocusMedium {
 	public void setupFromCasterToTargetLoc(EntityLivingBase caster, double x, double y, double z) {
 		Vec3d sv = generateSourceVector(caster);
 		double d0 = x - sv.x;
-        double d1 = y - sv.y;
-        double d2 = z - sv.z;
-        Vec3d lv = new Vec3d(d0,d1,d2);
-		trajectories = new Trajectory[] { new Trajectory(sv, lv.normalize()) };
-		targets = new RayTraceResult[] { new RayTraceResult(caster) };
+		double d1 = y - sv.y;
+		double d2 = z - sv.z;
+		Vec3d lv = new Vec3d(d0, d1, d2);
+		trajectories = new Trajectory[]{new Trajectory(sv, lv.normalize())};
+		targets = new RayTraceResult[]{new RayTraceResult(caster)};
 	}
 	
 	private Vec3d generateSourceVector(EntityLivingBase e) {
-		Vec3d v = e.getPositionVector();		
+		Vec3d v = e.getPositionVector();
 		v = v.add(0, e.getEyeHeight() - 0.10000000149011612D, 0);
 		return v;
 	}
-
+	
 	@Override
 	public Aspect getAspect() {
 		return null;
 	}
-
 	
 	
 }

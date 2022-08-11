@@ -25,43 +25,43 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BlockDecorativePyre extends BlockPyre {
-
-  public static PropertyBool BURNING = PropertyBool.create("burning");
-
-  public BlockDecorativePyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-    super(mat, type, hardness, name, teClass);
-  }
-
-  @Override
-  public void attemptRegistry(@Nonnull Class<? extends TileEntity> c, String name) {
-    if (!BlockTEBase.classes.contains(c)) {
-      BlockTEBase.classes.add(c);
-      GameRegistry.registerTileEntity(c, new ResourceLocation(Roots.MODID, "tile_entity_decorative_pyre"));
-    }
-  }
-
-  @Override
-  public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-    return 15;
-  }
-
-  @Override
-  @Nonnull
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-    return BlockFaceShape.BOWL;
-  }
-
-  @Nonnull
-  @Override
-  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(-0.125, 0, -0.125, 1.125, 0.25, 1.125);
-  }
-
-  @Override
-  @SideOnly(Side.CLIENT)
-  public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random rand) {
-    if (stateIn.getValue(BURNING)) {
-      world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
-    }
-  }
+	
+	public static PropertyBool BURNING = PropertyBool.create("burning");
+	
+	public BlockDecorativePyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+		super(mat, type, hardness, name, teClass);
+	}
+	
+	@Override
+	public void attemptRegistry(@Nonnull Class<? extends TileEntity> c, String name) {
+		if (!BlockTEBase.classes.contains(c)) {
+			BlockTEBase.classes.add(c);
+			GameRegistry.registerTileEntity(c, new ResourceLocation(Roots.MODID, "tile_entity_decorative_pyre"));
+		}
+	}
+	
+	@Override
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return 15;
+	}
+	
+	@Override
+	@Nonnull
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.BOWL;
+	}
+	
+	@Nonnull
+	@Override
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+		return new AxisAlignedBB(-0.125, 0, -0.125, 1.125, 0.25, 1.125);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random rand) {
+		if (stateIn.getValue(BURNING)) {
+			world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
+		}
+	}
 }

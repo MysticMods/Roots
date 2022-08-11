@@ -22,51 +22,51 @@ import java.util.List;
 @ZenClass("mods." + Roots.MODID + ".predicates.PropertyPredicate")
 @ZenRegister
 public class PropertyPredicate implements Predicates.IPredicate {
-  private IBlockState state;
-  private List<IProperty<?>> properties;
-
-  public PropertyPredicate(IBlockState state, String[] properties) {
-    this.state = state;
-    this.properties = new ArrayList<>();
-    BlockStateContainer container = CraftTweakerMC.getBlockState(state).getBlock().getBlockState();
-    for (String name : properties) {
-      IProperty<?> prop = container.getProperty(name);
-      if (prop != null) {
-        this.properties.add(prop);
-      } else {
-        CraftTweakerAPI.logError("Invalid property name '" + name + "' for " + state.toString());
-      }
-    }
-  }
-
-  @ZenMethod
-  @ZenDocMethod(
-      order = 1,
-      args = {
-          @ZenDocArg(arg = "state", info = "description of a simple blockstate"),
-          @ZenDocArg(arg = "properties", info = "a string containing the property name that must match")
-      },
-      description = "Creates an IPredicate where the specified state is compared against other states, where the block type must match and the values of the specified property names must match."
-  )
-  public static PropertyPredicate create(IBlockState state, String properties) {
-    return new PropertyPredicate(state, new String[]{properties});
-  }
-
-  @ZenMethod
-  @ZenDocMethod(
-      order = 2,
-      args = {
-          @ZenDocArg(arg = "state", info = "description of a simple blockstate"),
-          @ZenDocArg(arg = "properties", info = "an array of strings containing property names that must match")
-      },
-      description = "Creates an IPredicate where the specified state is compared against other states, where the block type must match and the values of all of the specified property names must match."
-  )
-  public static PropertyPredicate create(IBlockState state, String[] properties) {
-    return new PropertyPredicate(state, properties);
-  }
-
-  @Override
-  public epicsquid.roots.recipe.transmutation.PropertyPredicate get() {
-    return new epicsquid.roots.recipe.transmutation.PropertyPredicate(CraftTweakerMC.getBlockState(state), properties);
-  }
+	private IBlockState state;
+	private List<IProperty<?>> properties;
+	
+	public PropertyPredicate(IBlockState state, String[] properties) {
+		this.state = state;
+		this.properties = new ArrayList<>();
+		BlockStateContainer container = CraftTweakerMC.getBlockState(state).getBlock().getBlockState();
+		for (String name : properties) {
+			IProperty<?> prop = container.getProperty(name);
+			if (prop != null) {
+				this.properties.add(prop);
+			} else {
+				CraftTweakerAPI.logError("Invalid property name '" + name + "' for " + state.toString());
+			}
+		}
+	}
+	
+	@ZenMethod
+	@ZenDocMethod(
+			order = 1,
+			args = {
+					@ZenDocArg(arg = "state", info = "description of a simple blockstate"),
+					@ZenDocArg(arg = "properties", info = "a string containing the property name that must match")
+			},
+			description = "Creates an IPredicate where the specified state is compared against other states, where the block type must match and the values of the specified property names must match."
+	)
+	public static PropertyPredicate create(IBlockState state, String properties) {
+		return new PropertyPredicate(state, new String[]{properties});
+	}
+	
+	@ZenMethod
+	@ZenDocMethod(
+			order = 2,
+			args = {
+					@ZenDocArg(arg = "state", info = "description of a simple blockstate"),
+					@ZenDocArg(arg = "properties", info = "an array of strings containing property names that must match")
+			},
+			description = "Creates an IPredicate where the specified state is compared against other states, where the block type must match and the values of all of the specified property names must match."
+	)
+	public static PropertyPredicate create(IBlockState state, String[] properties) {
+		return new PropertyPredicate(state, properties);
+	}
+	
+	@Override
+	public epicsquid.roots.recipe.transmutation.PropertyPredicate get() {
+		return new epicsquid.roots.recipe.transmutation.PropertyPredicate(CraftTweakerMC.getBlockState(state), properties);
+	}
 }

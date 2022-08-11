@@ -23,104 +23,104 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class ContainerQuiver extends Container {
-
-  private ItemStackHandler quiverHandler;
-  private QuiverHandler handler;
-  private EntityPlayer player;
-  private ItemStack quiver;
-
-  public ContainerQuiver(EntityPlayer player) {
-    this.player = player;
-    ItemStack main = player.getHeldItemMainhand();
-    ItemStack off = player.getHeldItemOffhand();
-    ItemStack first = QuiverInventoryUtil.getQuiver(player);
-
-    ItemStack use = ItemStack.EMPTY;
-    if (main.getItem() instanceof ItemQuiver) {
-      use = main;
-    } else if (off.getItem() instanceof ItemQuiver) {
-      use = off;
-    } else if (first.getItem() instanceof ItemQuiver) {
-      use = first;
-    }
-
-    handler = QuiverHandler.getHandler(use);
-    quiverHandler = handler.getInventory();
-
-    this.quiver = use;
-
-    createPlayerInventory(player.inventory);
-    createComponentPouchSlots();
-  }
-
-  private void createComponentPouchSlots() {
-    int xOffset = 47;
-    int yOffset = -15;
-    for (int i = 0; i < quiverHandler.getSlots(); i++) {
-      addSlotToContainer(new SlotItemHandler(quiverHandler, i, xOffset + 11 + (((i >= 3) ? i - 3 : i) * 21), yOffset + 23 + ((i >= 3) ? 21 : 0)) {
-        @Override
-        public boolean isItemValid(@Nonnull ItemStack stack) {
-          return stack.getItem() instanceof ItemArrow;
-        }
-      });
-    }
-  }
-
-  private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
-    int xOffset = 8;
-    int yOffset = 67;
-
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, xOffset + j * 18, yOffset + i * 18));
-      }
-    }
-    for (int i = 0; i < 9; i++) {
-      addSlotToContainer(new Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
-    }
-  }
-
-  @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
-    return true;
-  }
-
-  @Override
-  @Nonnull
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-    ItemStack slotStack = ItemStack.EMPTY;
-
-    Slot slot = inventorySlots.get(index);
-
-    if (slot != null && slot.getHasStack()) {
-      ItemStack stack = slot.getStack();
-
-      boolean isArrow = stack.getItem() instanceof ItemArrow;
-
-      if (isArrow && index < 36 && !mergeItemStack(stack, 36, 42, false)) {
-        slot.onSlotChanged();
-        handler.saveToStack();
-        return ItemStack.EMPTY;
-      } else {
-        handler.saveToStack();
-        return ItemStack.EMPTY;
-      }
-    }
-
-    handler.saveToStack();
-    return slotStack;
-  }
-
-  @Override
-  @Nonnull
-  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-    if (slotId >= 0) {
-      ItemStack stack = getSlot(slotId).getStack();
-      if (stack.getItem() instanceof ItemQuiver) {
-        return ItemStack.EMPTY;
-      }
-    }
-
-    return super.slotClick(slotId, dragType, clickTypeIn, player);
-  }
+	
+	private ItemStackHandler quiverHandler;
+	private QuiverHandler handler;
+	private EntityPlayer player;
+	private ItemStack quiver;
+	
+	public ContainerQuiver(EntityPlayer player) {
+		this.player = player;
+		ItemStack main = player.getHeldItemMainhand();
+		ItemStack off = player.getHeldItemOffhand();
+		ItemStack first = QuiverInventoryUtil.getQuiver(player);
+		
+		ItemStack use = ItemStack.EMPTY;
+		if (main.getItem() instanceof ItemQuiver) {
+			use = main;
+		} else if (off.getItem() instanceof ItemQuiver) {
+			use = off;
+		} else if (first.getItem() instanceof ItemQuiver) {
+			use = first;
+		}
+		
+		handler = QuiverHandler.getHandler(use);
+		quiverHandler = handler.getInventory();
+		
+		this.quiver = use;
+		
+		createPlayerInventory(player.inventory);
+		createComponentPouchSlots();
+	}
+	
+	private void createComponentPouchSlots() {
+		int xOffset = 47;
+		int yOffset = -15;
+		for (int i = 0; i < quiverHandler.getSlots(); i++) {
+			addSlotToContainer(new SlotItemHandler(quiverHandler, i, xOffset + 11 + (((i >= 3) ? i - 3 : i) * 21), yOffset + 23 + ((i >= 3) ? 21 : 0)) {
+				@Override
+				public boolean isItemValid(@Nonnull ItemStack stack) {
+					return stack.getItem() instanceof ItemArrow;
+				}
+			});
+		}
+	}
+	
+	private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
+		int xOffset = 8;
+		int yOffset = 67;
+		
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 9; j++) {
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, xOffset + j * 18, yOffset + i * 18));
+			}
+		}
+		for (int i = 0; i < 9; i++) {
+			addSlotToContainer(new Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
+		}
+	}
+	
+	@Override
+	public boolean canInteractWith(@Nonnull EntityPlayer player) {
+		return true;
+	}
+	
+	@Override
+	@Nonnull
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+		ItemStack slotStack = ItemStack.EMPTY;
+		
+		Slot slot = inventorySlots.get(index);
+		
+		if (slot != null && slot.getHasStack()) {
+			ItemStack stack = slot.getStack();
+			
+			boolean isArrow = stack.getItem() instanceof ItemArrow;
+			
+			if (isArrow && index < 36 && !mergeItemStack(stack, 36, 42, false)) {
+				slot.onSlotChanged();
+				handler.saveToStack();
+				return ItemStack.EMPTY;
+			} else {
+				handler.saveToStack();
+				return ItemStack.EMPTY;
+			}
+		}
+		
+		handler.saveToStack();
+		return slotStack;
+	}
+	
+	@Override
+	@Nonnull
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+		if (slotId >= 0) {
+			ItemStack stack = getSlot(slotId).getStack();
+			if (stack.getItem() instanceof ItemQuiver) {
+				return ItemStack.EMPTY;
+			}
+		}
+		
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
+	}
 }

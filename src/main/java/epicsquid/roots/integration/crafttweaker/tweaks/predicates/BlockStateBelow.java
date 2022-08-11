@@ -14,26 +14,26 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods." + Roots.MODID + ".predicates.BlockStateBelow")
 @ZenRegister
 public class BlockStateBelow implements Predicates.IWorldPredicate {
-  private Predicates.IPredicate predicate;
-
-  public BlockStateBelow(Predicates.IPredicate predicate) {
-    this.predicate = predicate;
-  }
-
-  @ZenMethod
-  @ZenDocMethod(
-      order = 1,
-      args = {
-          @ZenDocArg(arg = "predicate", info = "a defined predicate that describes (potentially) multiple blockstates")
-      },
-      description = "Creates an IWorldCondition which tests the state below a block using the provided IPredicate."
-  )
-  public static BlockStateBelow create(Predicates.IPredicate predicate) {
-    return new BlockStateBelow(predicate);
-  }
-
-  @Override
-  public epicsquid.roots.recipe.transmutation.BlockStateBelow get() {
-    return new epicsquid.roots.recipe.transmutation.BlockStateBelow(this.predicate.get());
-  }
+	private Predicates.IPredicate predicate;
+	
+	public BlockStateBelow(Predicates.IPredicate predicate) {
+		this.predicate = predicate;
+	}
+	
+	@ZenMethod
+	@ZenDocMethod(
+			order = 1,
+			args = {
+					@ZenDocArg(arg = "predicate", info = "a defined predicate that describes (potentially) multiple blockstates")
+			},
+			description = "Creates an IWorldCondition which tests the state below a block using the provided IPredicate."
+	)
+	public static BlockStateBelow create(Predicates.IPredicate predicate) {
+		return new BlockStateBelow(predicate);
+	}
+	
+	@Override
+	public epicsquid.roots.recipe.transmutation.BlockStateBelow get() {
+		return new epicsquid.roots.recipe.transmutation.BlockStateBelow(this.predicate.get());
+	}
 }

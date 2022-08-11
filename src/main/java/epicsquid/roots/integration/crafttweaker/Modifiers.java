@@ -18,27 +18,27 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenDocAppend({"docs/include/modifiers.example.md"})
 @ZenDocClass("mods." + Roots.MODID + ".Modifiers")
 public class Modifiers {
-  @ZenMethod
-  @ZenDocMethod(
-      order = 1,
-      args = {
-          @ZenDocArg(arg = "modifierName", info = "the modifier name to be disabled (if not provided in the format of roots:modifier, a resource location will be created from the string)")
-      },
-      description = "This is used to disable specific modifiers."
-  )
-  public static void disableModifier(String modifierName) {
-    ResourceLocation rl;
-    if (!modifierName.contains(":")) {
-      rl = new ResourceLocation(Roots.MODID, modifierName);
-    } else {
-      rl = new ResourceLocation(modifierName);
-    }
-    Modifier modifier = ModifierRegistry.get(rl);
-    if (modifier == null) {
-      CraftTweakerAPI.logError("Invalid modifier: " + modifierName);
-      return;
-    }
-
-    ModifierRegistry.disable(modifier);
-  }
+	@ZenMethod
+	@ZenDocMethod(
+			order = 1,
+			args = {
+					@ZenDocArg(arg = "modifierName", info = "the modifier name to be disabled (if not provided in the format of roots:modifier, a resource location will be created from the string)")
+			},
+			description = "This is used to disable specific modifiers."
+	)
+	public static void disableModifier(String modifierName) {
+		ResourceLocation rl;
+		if (!modifierName.contains(":")) {
+			rl = new ResourceLocation(Roots.MODID, modifierName);
+		} else {
+			rl = new ResourceLocation(modifierName);
+		}
+		Modifier modifier = ModifierRegistry.get(rl);
+		if (modifier == null) {
+			CraftTweakerAPI.logError("Invalid modifier: " + modifierName);
+			return;
+		}
+		
+		ModifierRegistry.disable(modifier);
+	}
 }

@@ -4,11 +4,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
 /**
- * 
  * @author Azanor
- * 
+ * <p>
  * Equipped or held items that extend this class will make nodes or related objects visible in world.
- *
  */
 
 public interface IRevealer {
@@ -18,5 +16,5 @@ public interface IRevealer {
 	 */
 	public boolean showNodes(ItemStack itemstack, EntityLivingBase player);
 	
-
+	
 }

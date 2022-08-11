@@ -3,8 +3,8 @@ package thaumcraft.api.casters;
 import thaumcraft.api.aspects.Aspect;
 
 public abstract class FocusMod extends FocusNode {
-
-
+	
+	
 	@Override
 	public EnumUnitType getType() {
 		return EnumUnitType.MOD;
@@ -17,5 +17,5 @@ public abstract class FocusMod extends FocusNode {
 	public Aspect getAspect() {
 		return null;
 	}
-
+	
 }

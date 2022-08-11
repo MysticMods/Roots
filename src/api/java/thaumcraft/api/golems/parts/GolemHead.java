@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import thaumcraft.api.golems.EnumGolemTrait;
 
-public class GolemHead {		
+public class GolemHead {
 	
 	protected static GolemHead[] heads = new GolemHead[1];
 	
@@ -12,50 +12,51 @@ public class GolemHead {
 	public String key;
 	public String[] research;
 	/**
-	 * The icon used in the golem builder 
+	 * The icon used in the golem builder
 	 */
 	public ResourceLocation icon;
 	public Object[] components;
 	public EnumGolemTrait[] traits;
-	public IHeadFunction function; 
+	public IHeadFunction function;
 	public PartModel model;
 	
-	public GolemHead(String key,String[] research,ResourceLocation icon, PartModel model, Object[] comp, EnumGolemTrait[] tags) {
+	public GolemHead(String key, String[] research, ResourceLocation icon, PartModel model, Object[] comp, EnumGolemTrait[] tags) {
 		this.key = key;
-		this.research=research;
-		this.icon=icon;
+		this.research = research;
+		this.icon = icon;
 		this.components = comp;
 		this.traits = tags;
 		this.model = model;
-		this.function = null;		
+		this.function = null;
 	}
 	
-	public GolemHead(String key,String[] research,ResourceLocation icon, PartModel model, Object[] comp, IHeadFunction function, EnumGolemTrait[] tags) {
-		this(key,research,icon,model,comp,tags);
-		this.function=function;
+	public GolemHead(String key, String[] research, ResourceLocation icon, PartModel model, Object[] comp, IHeadFunction function, EnumGolemTrait[] tags) {
+		this(key, research, icon, model, comp, tags);
+		this.function = function;
 	}
 	
-	private static byte lastID = 0; 
-	public static void register(GolemHead thing)  {
-		thing.id = lastID;	
+	private static byte lastID = 0;
+	
+	public static void register(GolemHead thing) {
+		thing.id = lastID;
 		lastID++;
 		// allocate space
-		if (thing.id>=heads.length) {
-			GolemHead[] temp = new GolemHead[thing.id+1];
+		if (thing.id >= heads.length) {
+			GolemHead[] temp = new GolemHead[thing.id + 1];
 			System.arraycopy(heads, 0, temp, 0, heads.length);
 			heads = temp;
-		}			
+		}
 		heads[thing.id] = thing;
 	}
 	
 	public String getLocalizedName() {
-		return I18n.translateToLocal("golem.head."+this.key.toLowerCase());
+		return I18n.translateToLocal("golem.head." + this.key.toLowerCase());
 	}
 	
 	public String getLocalizedDescription() {
-		return I18n.translateToLocal("golem.head.text."+this.key.toLowerCase());
+		return I18n.translateToLocal("golem.head.text." + this.key.toLowerCase());
 	}
-
+	
 	public static GolemHead[] getHeads() {
 		return heads;
 	}

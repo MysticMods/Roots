@@ -9,21 +9,21 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class EntityPigZombieSlave extends EntityPigZombie {
-  public EntityPigZombieSlave(World worldIn) {
-    super(worldIn);
-  }
-
-  @Override
-  public String getName() {
-    if (hasCustomName()) {
-      return super.getName();
-    }
-
-    return I18n.translateToLocal("entity.PigZombie.name");
-  }
-
-  @Override
-  protected void applyEntityAI() {
-    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 10, false, false, o -> EntityUtil.isHostile(o) && !SlaveUtil.isSlave(o)));
-  }
+	public EntityPigZombieSlave(World worldIn) {
+		super(worldIn);
+	}
+	
+	@Override
+	public String getName() {
+		if (hasCustomName()) {
+			return super.getName();
+		}
+		
+		return I18n.translateToLocal("entity.PigZombie.name");
+	}
+	
+	@Override
+	protected void applyEntityAI() {
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 10, false, false, o -> EntityUtil.isHostile(o) && !SlaveUtil.isSlave(o)));
+	}
 }
