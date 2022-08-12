@@ -1,6 +1,7 @@
 package mysticmods.roots.api.spells;
 
 import mysticmods.roots.RootsTags;
+import mysticmods.roots.api.items.ICastingItem;
 import mysticmods.roots.api.modifier.Modifier;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -8,10 +9,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // NOTE: THIS IS 0 INDEXED
 public class SpellStorage {
@@ -76,7 +74,7 @@ public class SpellStorage {
     this.index = slot;
   }
 
-  public int add (Spell spell, List<Modifier> modifiers) {
+  public int add (Spell spell, Collection<Modifier> modifiers) {
     int slot = -1;
     for (int i = 0; i < spells.size(); i++) {
       if (get(i) == null) {
@@ -92,7 +90,7 @@ public class SpellStorage {
     return slot;
   }
 
-  public boolean set (int slot, Spell spell, List<Modifier> modifiers) {
+  public boolean set (int slot, Spell spell, Collection<Modifier> modifiers) {
     validateSlot(slot);
     this.setDirty(true);
     return this.spells.set(slot, new SpellInstance(spell, modifiers)) == null;
@@ -101,12 +99,20 @@ public class SpellStorage {
   @Nullable
   public SpellInstance get (int slot) {
     validateSlot(slot);
-    return new StorageInstance(this.spells.get(slot));
+    SpellInstance inSlot = this.spells.get(slot);
+    if (inSlot == null) {
+      return null;
+    }
+    return new StorageInstance(inSlot);
   }
 
   @Nullable
   public SpellInstance get () {
-    return new StorageInstance(this.spells.get(this.index));
+    SpellInstance inSlot = this.spells.get(index);
+    if (inSlot == null) {
+      return null;
+    }
+    return new StorageInstance(inSlot);
   }
 
   @Nullable
@@ -132,9 +138,12 @@ public class SpellStorage {
     tag.putInt("index", this.index);
     ListTag spells = new ListTag();
     for (int i = 0; i < this.spells.size(); i++) {
-      CompoundTag thisTag = new CompoundTag();
-      thisTag.putInt("index", i);
-      thisTag.put("spell", this.spells.get(i).toNBT());
+      SpellInstance spell = this.spells.get(i);
+      if (spell != null) {
+        CompoundTag thisTag = new CompoundTag();
+        thisTag.putInt("index", i);
+        thisTag.put("spell", spell.toNBT());
+      }
     }
     tag.put("spells", spells);
     tag.putInt("count", this.spells.size());
@@ -142,16 +151,25 @@ public class SpellStorage {
 
   @Nullable
   public static SpellStorage fromItem(ItemStack stack) {
+    return fromItem(stack, false);
+  }
+
+  @Nullable
+  public static SpellStorage fromItem(ItemStack stack, boolean create) {
     if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
       return null;
     }
 
     CompoundTag tag = stack.getTag();
     if (tag == null) {
-      return null;
-    }
+      if (!create || !(stack.getItem() instanceof ICastingItem castingItem)) {
+        return null;
+      }
 
-    // TODO: checking for stuff
+      SpellStorage result = new SpellStorage(castingItem.getSlots());
+      result.setDirty(true);
+      return result;
+    }
 
     int size = tag.getInt("count");
 
@@ -186,12 +204,12 @@ public class SpellStorage {
     }
 
     @Override
-    public long getCooldown() {
+    public int getCooldown() {
       return instance.getCooldown();
     }
 
     @Override
-    public void setCooldown(long cooldown) {
+    public void setCooldown(int cooldown) {
       SpellStorage.this.setDirty(true);
       instance.setCooldown(cooldown);
     }
@@ -201,6 +219,18 @@ public class SpellStorage {
     @Override
     public boolean hasModifier(Modifier modifier) {
       return instance.hasModifier(modifier);
+    }
+
+    @Override
+    public void addModifier(Modifier modifier) {
+      SpellStorage.this.setDirty(true);
+      super.addModifier(modifier);
+    }
+
+    @Override
+    public void removeModifier(Modifier modifier) {
+      SpellStorage.this.setDirty(true);
+      super.removeModifier(modifier);
     }
 
     @Override

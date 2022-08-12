@@ -6,13 +6,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.*;
 
 public class SpellInstance {
   private final Spell spell;
   private final Set<Modifier> enabledModifiers = new HashSet<>();
-  private long cooldown;
+  private int cooldown;
 
   public SpellInstance(Spell spell) {
     this.spell = spell;
@@ -33,7 +37,7 @@ public class SpellInstance {
     for (int i = 0; i < modifiers.size(); i++) {
       enabledModifiers.add(Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(modifiers.getString(i))));
     }
-    cooldown = tag.getLong("cooldown");
+    cooldown = tag.getInt("cooldown");
   }
 
   public Spell getSpell() {
@@ -44,12 +48,18 @@ public class SpellInstance {
     return enabledModifiers;
   }
 
-  public long getCooldown() {
+  public int getCooldown() {
     return cooldown;
   }
 
-  public void setCooldown(long cooldown) {
+  public void setCooldown(int cooldown) {
     this.cooldown = cooldown;
+  }
+
+  public void setCooldown (Player pPlayer) {
+    if (getMaxCooldown() > 0) {
+      setCooldown(pPlayer.tickCount + getMaxCooldown());
+    }
   }
 
   // TODO: add/remove modifiers
@@ -58,13 +68,55 @@ public class SpellInstance {
     return enabledModifiers.contains(modifier);
   }
 
+  public Spell.Type getType () {
+    return spell.getType();
+  }
+
+  // TODO: handle making sure modifiers are correct for this spell
+  public void addModifier (Modifier modifier) {
+    enabledModifiers.add(modifier);
+  }
+
+  public void removeModifier (Modifier modifier) {
+    enabledModifiers.remove(modifier);
+  }
+
+  public int getMaxCooldown () {
+    return spell.getCooldown();
+  }
+
+  public int getColor1 () {
+    return spell.getColor1();
+  }
+
+  public int getColor2 () {
+    return spell.getColor2();
+  }
+
+  // TODO:
+  // returns:
+  //   true - the spell can be cast
+  //   false - the spell cannot be cast
+  public boolean canCast (Player pCaster) {
+    if (getMaxCooldown() < 0) {
+      return true;
+    }
+
+    int diff = pCaster.tickCount - getCooldown();
+    return diff <= 0 || Math.abs(diff) > getMaxCooldown();
+  }
+
+  public void cast (Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
+    spell.cast(pPlayer, pStack, pHand, costs, this, ticks);
+  }
+
   public CompoundTag toNBT() {
     CompoundTag result = new CompoundTag();
     result.putString("spell", spell.getKey().toString());
     ListTag modifiers = new ListTag();
     enabledModifiers.forEach(o -> modifiers.add(StringTag.valueOf(o.getKey().toString())));
     result.put("modifiers", modifiers);
-    result.putLong("cooldown", cooldown);
+    result.putInt("cooldown", cooldown);
     return result;
   }
 
