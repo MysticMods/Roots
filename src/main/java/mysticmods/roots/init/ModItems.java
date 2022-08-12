@@ -6,6 +6,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.item.FireStarterItem;
 import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -299,7 +300,7 @@ public class ModItems {
       .model(subfolder("tools"))
       .register();
 
-  public static final ItemEntry<Item> STAFF = REGISTRATE.item("staff", Item::new)
+  public static final ItemEntry<CastingItem> STAFF = REGISTRATE.item("staff", CastingItem::new)
       // TODO: CUSTOM MODEL
       .model(subfolder("tools"))
       .tag(RootsTags.Items.CASTING_TOOLS)
