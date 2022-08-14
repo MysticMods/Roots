@@ -15,7 +15,7 @@ public class ModHerbs {
   public static final RegistryEntry<Herb> STALICRIPE = REGISTRATE.simple("stalicripe", Herb.class, () -> new Herb(ModItems.Herbs.STALICRIPE, RootsTags.Herbs.STALICRIPE));
   public static final RegistryEntry<Herb> MOONGLOW = REGISTRATE.simple("moonglow", Herb.class, () -> new Herb(ModItems.Herbs.MOONGLOW, RootsTags.Herbs.MOONGLOW));
   public static final RegistryEntry<Herb> PERESKIA = REGISTRATE.simple("pereskia", Herb.class, () -> new Herb(ModItems.Herbs.PERESKIA, RootsTags.Herbs.PERESKIA));
-  public static final RegistryEntry<Herb> SPIRIT_LEAF = REGISTRATE.simple("spirit_leaf", Herb.class, () -> new Herb(ModItems.Herbs.SPIRIT_LEAF, RootsTags.Herbs.SPIRIT_LEAF));
+  public static final RegistryEntry<Herb> SPROUTNIP = REGISTRATE.simple("sproutnip", Herb.class, () -> new Herb(ModItems.Herbs.SPROUTNIP, RootsTags.Herbs.SPROUTNIP));
   public static final RegistryEntry<Herb> WILDEWHEET = REGISTRATE.simple("wildewheet", Herb.class, () -> new Herb(ModItems.Herbs.WILDEWHEET, RootsTags.Herbs.WILDEWHEET));
 
   public static void load() {

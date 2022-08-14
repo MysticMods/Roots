@@ -34,7 +34,7 @@ public class RootsTags {
     // Specific crops (filled in by ModBlocks)
     public static TagKey<Block> CLOUD_BERRY_CROP = modTag("crops/cloud_berry");
     public static TagKey<Block> DEWGONIA_CROP = modTag("crops/dewgonia");
-    public static TagKey<Block> SPIRIT_LEAF_CROP = modTag("crops/spirit_leaf");
+    public static TagKey<Block> SPROUTNIP_CROP = modTag("crops/sproutnip");
     public static TagKey<Block> STALICRIPE_CROP = modTag("crops/stalicripe");
     public static TagKey<Block> WILDEWHEET_CROP = modTag("crops/wildewheet");
     public static TagKey<Block> WILDROOT_CROP = modTag("crops/wildroot");
@@ -107,7 +107,7 @@ public class RootsTags {
     public static TagKey<Item> INFERNAL_BULB_SEEDS = modTag("seeds/infernal_bulb");
     public static TagKey<Item> MOONGLOW_SEEDS = modTag("seeds/moonglow");
     public static TagKey<Item> PERESKIA_SEEDS = modTag("seeds/pereskia");
-    public static TagKey<Item> SPIRIT_LEAF_SEEDS = modTag("seeds/spirit_leaf");
+    public static TagKey<Item> SPROUTNIP_SEEDS = modTag("seeds/sproutnip");
     public static TagKey<Item> STALICRIPE_SEEDS = modTag("seeds/stalicripe");
     public static TagKey<Item> WILDEWHEET_SEEDS = modTag("seeds/wildewheet");
     public static TagKey<Item> WILDROOT_SEEDS = modTag("seeds/wildroot");
@@ -124,7 +124,7 @@ public class RootsTags {
     public static TagKey<Item> FIRE_CROPS = modTag("crops/elemental/fire");
     public static TagKey<Item> CLOUD_BERRY_CROP = modTag("crops/cloud_berry");
     public static TagKey<Item> DEWGONIA_CROP = modTag("crops/dewgonia");
-    public static TagKey<Item> SPIRIT_LEAF_CROP = modTag("crops/spirit_leaf");
+    public static TagKey<Item> SPROUTNIP_CROP = modTag("crops/sproutnip");
     public static TagKey<Item> STALICRIPE_CROP = modTag("crops/stalicripe");
     public static TagKey<Item> WILDEWHEET_CROP = modTag("crops/wildewheet");
     public static TagKey<Item> WILDROOT_CROP = modTag("crops/wildroot");
@@ -202,7 +202,7 @@ public class RootsTags {
     public static TagKey<Item> INFERNAL_BULB = modTag("herbs/infernal_bulb");
     public static TagKey<Item> MOONGLOW = modTag("herbs/moonglow");
     public static TagKey<Item> PERESKIA = modTag("herbs/pereskia");
-    public static TagKey<Item> SPIRIT_LEAF = modTag("herbs/spirit_leaf");
+    public static TagKey<Item> SPROUTNIP = modTag("herbs/sproutnip");
     public static TagKey<Item> STALICRIPE = modTag("herbs/stalicripe");
     public static TagKey<Item> WILDEWHEET = modTag("herbs/wildewheet");
     public static TagKey<Item> WILDROOT = modTag("herbs/wildroot");

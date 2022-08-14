@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "roots:item/herbs/spirit_leaf"
+    "layer0": "roots:item/herbs/sproutnip_seeds"
   }
 }
