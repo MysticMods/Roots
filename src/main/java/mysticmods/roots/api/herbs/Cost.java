@@ -29,7 +29,8 @@ public class Cost {
 
   protected Cost(FriendlyByteBuf buf) {
     this.type = CostType.values()[buf.readVarInt()];
-    this.herb = () -> Registries.HERB_REGISTRY.get().getValue(buf.readResourceLocation());
+    final ResourceLocation res = buf.readResourceLocation();
+    this.herb = () -> Registries.HERB_REGISTRY.get().getValue(res);
     this.value = buf.readDouble();
   }
 

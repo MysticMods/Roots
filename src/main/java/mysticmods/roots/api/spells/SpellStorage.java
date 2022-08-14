@@ -143,6 +143,7 @@ public class SpellStorage {
         CompoundTag thisTag = new CompoundTag();
         thisTag.putInt("index", i);
         thisTag.put("spell", spell.toNBT());
+        spells.add(thisTag);
       }
     }
     tag.put("spells", spells);

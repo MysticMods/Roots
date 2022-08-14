@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "mysticmods.roots.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "roots.refmap.json",
   "mixins": [
   ],
