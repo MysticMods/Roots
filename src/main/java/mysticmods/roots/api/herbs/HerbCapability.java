@@ -2,6 +2,7 @@ package mysticmods.roots.api.herbs;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.Capabilities;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -24,21 +25,28 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
   // Returns how much is left over
   public double drain (Herb herb, double value, boolean simulate) {
     double current = HERB_MAP.getDouble(herb);
+    double remainder;
     if (current < value) {
+      remainder = value - current;
       if (!simulate) {
         HERB_MAP.put(herb, 0.0d);
+        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to 0, with a remainder of {} still required.", herb, value, current, remainder);
       }
-      return value - current;
+      return remainder;
     } else {
       if (!simulate) {
         HERB_MAP.put(herb, current - value);
+        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to {}", herb, value, current, current - value);
       }
       return 0.0d;
     }
   }
 
   public void fill (Herb herb, double value) {
-    HERB_MAP.put(herb, HERB_MAP.getDouble(herb) + value);
+    double oldValue = HERB_MAP.getDouble(herb);
+    double newValue = oldValue + value;
+    HERB_MAP.put(herb, newValue);
+    RootsAPI.LOG.info("Filled herb {} x{}, bringing it from {} to {}.", herb, value, oldValue, newValue);
   }
 
   @NotNull

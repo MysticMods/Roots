@@ -15,6 +15,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -138,7 +139,7 @@ public class Costing {
           for (int i = 0; i < playerInventory.getContainerSize(); i++) {
             ItemStack stack = playerInventory.getItem(i);
             if (stack.is(entry.getKey().getTag())) {
-              count += stack.getCount() * 100;
+              count += stack.getCount();
             }
             // TODO: Item capabilities, shulker boxes, pouches
           }
@@ -164,7 +165,43 @@ public class Costing {
   }
 
   public boolean charge (Player player) {
-    return false;
+    calculateCosts(true);
+
+    Inventory playerInventory = player.getInventory();
+    LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);
+
+    //Map<Herb, List<HerbEntry>> herbMap = herbMap(player);
+
+    if (oCap.isPresent()) {
+      HerbCapability cap = oCap.orElseThrow(() -> new IllegalStateException("herb capability is present but is null"));
+      for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
+        double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), false);
+        if (remainder != 0) {
+          int toConsume = Mth.ceil(remainder);
+          for (int i = 0; i < playerInventory.getContainerSize(); i++) {
+            ItemStack stack = playerInventory.getItem(i);
+            if (stack.is(entry.getKey().getTag())) {
+              if (stack.getCount() >= toConsume) {
+                stack.shrink(stack.getCount() - toConsume);
+                break;
+              } else {
+                toConsume -= stack.getCount();
+                stack.setCount(0);
+              }
+              if (toConsume == 0) {
+                break;
+              }
+            }
+          }
+          if (toConsume > 0) {
+            // HOUSTON WE HAVE A PROBLEM
+          }
+          cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
+        }
+      }
+    }
+
+    return true;
   }
 
   private void calculateCosts(boolean checkModifiers) {
