@@ -977,10 +977,10 @@ public class ModBlocks {
         .blockstate(BlockstateGenerator::crossBlockstate)
         .tag(RootsTags.Blocks.PERESKIA_CROP)
         .register();
-    public static BlockEntry<ThreeStageCropBlock> SPROUTNIP_CROP = REGISTRATE.block("sproutnip_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Seeds.SPROUTNIP_SEEDS))
+    public static BlockEntry<ThreeStageCropBlock> SPIRIT_LEAF_CROP = REGISTRATE.block("spirit_leaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Seeds.SPIRIT_LEAF_SEEDS))
         .properties(o -> BlockBehaviour.Properties.copy(Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
-        .tag(RootsTags.Blocks.SPROUTNIP_CROP)
+        .tag(RootsTags.Blocks.SPIRIT_LEAF_CROP)
         .register();
     public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.WILDEWHEET_SEEDS))
         .properties(o -> BlockBehaviour.Properties.copy(Blocks.WHEAT))

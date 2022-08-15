@@ -31,7 +31,7 @@ public class ClientSetup {
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.MOONGLOW_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.PERESKIA_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.SPROUTNIP_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.SPIRIT_LEAF_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.STALICRIPE_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDEWHEET_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDROOT_CROP.get(), cutout);

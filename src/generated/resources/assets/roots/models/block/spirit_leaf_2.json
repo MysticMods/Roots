@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/crop",
   "textures": {
-    "crop": "roots:block/crops/sproutnip_3"
+    "crop": "roots:block/crops/spirit_leaf_2"
   }
 }

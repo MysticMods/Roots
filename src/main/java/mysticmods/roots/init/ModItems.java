@@ -56,9 +56,9 @@ public class ModItems {
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.PERESKIA_CROP)
         .register();
-    public static final ItemEntry<Item> SPROUTNIP = REGISTRATE.item("sproutnip", Item::new)
+    public static final ItemEntry<Item> SPIRIT_LEAF = REGISTRATE.item("spirit_leaf", Item::new)
         .model(subfolder("herbs"))
-        .tag(RootsTags.Items.SPROUTNIP_CROP)
+        .tag(RootsTags.Items.SPIRIT_LEAF_CROP)
         .register();
     public static final ItemEntry<Item> WILDEWHEET = REGISTRATE.item("wildewheet", Item::new)
         .model(subfolder("herbs"))
@@ -80,9 +80,9 @@ public class ModItems {
         .model(subfolder("herbs"))
         .tag(RootsTags.Items.PERESKIA_SEEDS)
         .register();
-    public static final ItemEntry<ItemNameBlockItem> SPROUTNIP_SEEDS = REGISTRATE.item("sproutnip_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.SPROUTNIP_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> SPIRIT_LEAF_SEEDS = REGISTRATE.item("spirit_leaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.SPIRIT_LEAF_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsTags.Items.SPROUTNIP_SEEDS)
+        .tag(RootsTags.Items.SPIRIT_LEAF_SEEDS)
         .register();
     public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDEWHEET_CROP.get(), p))
         .model(subfolder("herbs"))

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "roots:block/spirit_leaf_0"
+    },
+    "age=1": {
+      "model": "roots:block/spirit_leaf_1"
+    },
+    "age=2": {
+      "model": "roots:block/spirit_leaf_2"
+    },
+    "age=3": {
+      "model": "roots:block/spirit_leaf_3"
+    }
+  }
+}
