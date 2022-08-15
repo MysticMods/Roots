@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.Capabilities;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.herbs.HerbCapability;
@@ -182,21 +183,26 @@ public class Costing {
             ItemStack stack = playerInventory.getItem(i);
             if (stack.is(entry.getKey().getTag())) {
               if (stack.getCount() >= toConsume) {
-                stack.shrink(stack.getCount() - toConsume);
+                RootsAPI.LOG.info("Shrunk stack of {} by {}", stack, toConsume);
+                stack.shrink(toConsume);
+                toConsume = 0;
                 break;
               } else {
+                RootsAPI.LOG.info("Shrunk stack of {} by {} to 0", stack, stack.getCount());
                 toConsume -= stack.getCount();
                 stack.setCount(0);
               }
-              if (toConsume == 0) {
+              if (toConsume <= 0) {
                 break;
               }
             }
           }
           if (toConsume > 0) {
             // HOUSTON WE HAVE A PROBLEM
+            RootsAPI.LOG.info("Remainder left over! OH NO! {}", toConsume);
           }
           cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
+          playerInventory.setChanged();
         }
       }
     }
