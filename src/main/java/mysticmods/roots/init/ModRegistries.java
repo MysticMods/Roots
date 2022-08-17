@@ -11,8 +11,9 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.RitualCondition;
 import mysticmods.roots.api.spells.Spell;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryBuilder;
+import net.minecraftforge.registries.*;
+
+import java.util.function.Supplier;
 
 public class ModRegistries {
   private static final DeferredRegister<Herb> DEFERRED_HERB_REGISTRY = DeferredRegister.create(RootsAPI.HERB_REGISTRY, RootsAPI.MODID);
@@ -25,14 +26,14 @@ public class ModRegistries {
   private static final DeferredRegister<RitualCondition> DEFERRED_RITUAL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_CONDITION_REGISTRY, RootsAPI.MODID);
 
   static {
-    Registries.HERB_REGISTRY = DEFERRED_HERB_REGISTRY.makeRegistry(Herb.class, () -> new RegistryBuilder<Herb>().disableSaving().disableSync());
-    Registries.RITUAL_REGISTRY = DEFERRED_RITUAL_REGISTRY.makeRegistry(Ritual.class, () -> new RegistryBuilder<Ritual>().disableSync().disableSaving());
-    Registries.SPELL_REGISTRY = DEFERRED_SPELL_REGISTRY.makeRegistry(Spell.class, () -> new RegistryBuilder<Spell>().disableSaving().disableSync());
-    Registries.MODIFIER_REGISTRY = DEFERRED_MODIFIER_REGISTRY.makeRegistry(Modifier.class, () -> new RegistryBuilder<Modifier>().disableSaving().disableSync());
-    Registries.RITUAL_PROPERTY_REGISTRY = DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry(c(RitualProperty.class), () -> new RegistryBuilder<RitualProperty<?>>().disableSync().disableSaving());
-    Registries.SPELL_PROPERTY_REGISTRY = DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(SpellProperty.class), () -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving());
-    Registries.MODIFIER_PROPERTY_REGISTRY = DEFERRED_MODIFIER_PROPERTY_REGISTRY.makeRegistry(c(ModifierProperty.class), () -> new RegistryBuilder<ModifierProperty<?>>().disableSync().disableSaving());
-    Registries.RITUAL_CONDITION_REGISTRY = DEFERRED_RITUAL_CONDITION_REGISTRY.makeRegistry(RitualCondition.class, () -> new RegistryBuilder<RitualCondition>().disableSync().disableSaving());
+    Registries.HERB_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_HERB_REGISTRY.makeRegistry(Herb.class, () -> new RegistryBuilder<Herb>().disableSaving().disableSync()));
+    Registries.RITUAL_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_REGISTRY.makeRegistry(Ritual.class, () -> new RegistryBuilder<Ritual>().disableSync().disableSaving()));
+    Registries.SPELL_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_REGISTRY.makeRegistry(Spell.class, () -> new RegistryBuilder<Spell>().disableSaving().disableSync()));
+    Registries.MODIFIER_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_MODIFIER_REGISTRY.makeRegistry(Modifier.class, () -> new RegistryBuilder<Modifier>().disableSaving().disableSync()));
+    Registries.RITUAL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry(c(RitualProperty.class), () -> new RegistryBuilder<RitualProperty<?>>().disableSync().disableSaving()));
+    Registries.SPELL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(SpellProperty.class), () -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving()));
+    Registries.MODIFIER_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_MODIFIER_PROPERTY_REGISTRY.makeRegistry(c(ModifierProperty.class), () -> new RegistryBuilder<ModifierProperty<?>>().disableSync().disableSaving()));
+    Registries.RITUAL_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_CONDITION_REGISTRY.makeRegistry(RitualCondition.class, () -> new RegistryBuilder<RitualCondition>().disableSync().disableSaving()));
   }
 
   private static <T> Class<T> c(Class<?> cls) {
@@ -51,6 +52,28 @@ public class ModRegistries {
   }
 
   public static void load() {
+  }
+
+  public static class ForgeRegistryWrapper<T extends IForgeRegistryEntry<T>> implements Supplier<ForgeRegistry<T>> {
+    private final Supplier<IForgeRegistry<T>> registrySupplier;
+
+    private ForgeRegistry<T> registry = null;
+
+    protected ForgeRegistryWrapper(Supplier<IForgeRegistry<T>> registrySupplier) {
+      this.registrySupplier = registrySupplier;
+    }
+
+    @Override
+    public ForgeRegistry<T> get() {
+      if (registry == null) {
+        registry = (ForgeRegistry<T>) registrySupplier.get();
+      }
+      return registry;
+    }
+
+    public static <T extends IForgeRegistryEntry<T>> ForgeRegistryWrapper<T> of(Supplier<IForgeRegistry<T>> registrySupplier) {
+      return new ForgeRegistryWrapper<>(registrySupplier);
+    }
   }
 }
 
