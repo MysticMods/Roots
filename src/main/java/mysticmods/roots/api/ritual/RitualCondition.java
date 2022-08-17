@@ -6,12 +6,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public class RitualCondition extends DescribedRegistryEntry<RitualCondition> {
-  protected String descriptionId;
-
   @Override
   protected String getDescriptor() {
     return "ritual_condition";
   }
+
+
 
   @Override
   public ResourceLocation getKey() {

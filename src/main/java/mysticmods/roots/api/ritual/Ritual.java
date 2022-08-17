@@ -8,7 +8,6 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
 public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
-  protected String descriptionId;
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected int duration;

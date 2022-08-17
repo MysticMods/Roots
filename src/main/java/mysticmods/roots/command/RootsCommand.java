@@ -1,44 +1,23 @@
 package mysticmods.roots.command;
 
-import com.google.common.collect.Lists;
-import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import mysticmods.roots.RootsTags;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.api.spells.SpellStorage;
 import mysticmods.roots.init.ModItems;
-import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
-import net.minecraft.commands.arguments.coordinates.Vec3Argument;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraftforge.server.ServerLifecycleHooks;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -75,7 +54,7 @@ public class RootsCommand {
       ServerPlayer player = c.getSource().getPlayerOrException();
       boolean newStaff = false;
       ItemStack staff;
-      if (player.getItemInHand(InteractionHand.MAIN_HAND).is(RootsTags.Items.CASTING_TOOLS)) {
+      if (player.getItemInHand(InteractionHand.MAIN_HAND).is(RootsAPI.Tags.Items.CASTING_TOOLS)) {
         staff = player.getItemInHand(InteractionHand.MAIN_HAND);
       } else {
         newStaff = true;

@@ -1,6 +1,6 @@
 package mysticmods.roots.ritual;
 
-import mysticmods.roots.RootsTags;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -32,7 +32,7 @@ public class AnimalHarvestRitual extends Ritual {
   @Override
   public void functionalTick(PyreBlockEntity blockEntity, int duration) {
     if (duration % getInterval() == 0) {
-      ITag<EntityType<?>> harvestTag = ForgeRegistries.ENTITIES.tags().getTag(RootsTags.Entities.ANIMAL_HARVEST);
+      ITag<EntityType<?>> harvestTag = ForgeRegistries.ENTITIES.tags().getTag(RootsAPI.Tags.Entities.ANIMAL_HARVEST);
       List<LivingEntity> entities = blockEntity.getLevel().getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and((o) -> harvestTag.contains(o.getType())));
       if (entities.isEmpty()) {
         return;

@@ -1,6 +1,6 @@
 package mysticmods.roots.item;
 
-import mysticmods.roots.RootsTags;
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -54,7 +54,7 @@ public class FireStarterItem extends Item {
             level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.setBlock(blockpos, Blocks.FIRE.defaultBlockState(), 11);
             used = true;
-          } else if (stateAt.is(RootsTags.Blocks.PYRES)) {
+          } else if (stateAt.is(RootsAPI.Tags.Blocks.PYRES)) {
             // TODO: Light the Pyre
           }
         }

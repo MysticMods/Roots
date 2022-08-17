@@ -4,7 +4,6 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
-import mysticmods.roots.RootsTags;
 import mysticmods.roots.api.Capabilities;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herbs.Cost;
@@ -56,7 +55,7 @@ public class Costing {
   @Nullable
   // TODO: this should go somewhere else
   private Herb getHerb(ItemStack stack) {
-    if (!stack.is(RootsTags.Herbs.HERBS)) {
+    if (!stack.is(RootsAPI.Tags.Items.Herbs.HERBS)) {
       return null;
     }
     Herb potential = herbCache.get(stack.getItem());
