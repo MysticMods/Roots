@@ -8,6 +8,7 @@ import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.RitualCondition;
 import mysticmods.roots.api.spells.Spell;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +22,7 @@ public class ModRegistries {
   private static final DeferredRegister<RitualProperty<?>> DEFERRED_RITUAL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_PROPERTY_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<SpellProperty<?>> DEFERRED_SPELL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_PROPERTY_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<ModifierProperty<?>> DEFERRED_MODIFIER_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.MODIFIER_PROPERTY_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<RitualCondition> DEFERRED_RITUAL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_CONDITION_REGISTRY, RootsAPI.MODID);
 
   static {
     Registries.HERB_REGISTRY = DEFERRED_HERB_REGISTRY.makeRegistry(Herb.class, () -> new RegistryBuilder<Herb>().disableSaving().disableSync());
@@ -30,6 +32,7 @@ public class ModRegistries {
     Registries.RITUAL_PROPERTY_REGISTRY = DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry(c(RitualProperty.class), () -> new RegistryBuilder<RitualProperty<?>>().disableSync().disableSaving());
     Registries.SPELL_PROPERTY_REGISTRY = DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(SpellProperty.class), () -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving());
     Registries.MODIFIER_PROPERTY_REGISTRY = DEFERRED_MODIFIER_PROPERTY_REGISTRY.makeRegistry(c(ModifierProperty.class), () -> new RegistryBuilder<ModifierProperty<?>>().disableSync().disableSaving());
+    Registries.RITUAL_CONDITION_REGISTRY = DEFERRED_RITUAL_CONDITION_REGISTRY.makeRegistry(RitualCondition.class, () -> new RegistryBuilder<RitualCondition>().disableSync().disableSaving());
   }
 
   private static <T> Class<T> c(Class<?> cls) {
@@ -44,6 +47,7 @@ public class ModRegistries {
     DEFERRED_RITUAL_PROPERTY_REGISTRY.register(bus);
     DEFERRED_SPELL_PROPERTY_REGISTRY.register(bus);
     DEFERRED_MODIFIER_PROPERTY_REGISTRY.register(bus);
+    DEFERRED_RITUAL_CONDITION_REGISTRY.register(bus);
   }
 
   public static void load() {
