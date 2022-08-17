@@ -30,13 +30,13 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
       remainder = value - current;
       if (!simulate) {
         HERB_MAP.put(herb, 0.0d);
-        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to 0, with a remainder of {} still required.", herb, value, current, remainder);
+/*        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to 0, with a remainder of {} still required.", herb, value, current, remainder);*/
       }
       return remainder;
     } else {
       if (!simulate) {
         HERB_MAP.put(herb, current - value);
-        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to {}", herb, value, current, current - value);
+/*        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to {}", herb, value, current, current - value);*/
       }
       return 0.0d;
     }

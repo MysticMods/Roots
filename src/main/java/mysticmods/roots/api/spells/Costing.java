@@ -55,7 +55,7 @@ public class Costing {
 
   @Nullable
   // TODO: this should go somewhere else
-  private Herb getHerb (ItemStack stack) {
+  private Herb getHerb(ItemStack stack) {
     if (!stack.is(RootsTags.Herbs.HERBS)) {
       return null;
     }
@@ -73,7 +73,7 @@ public class Costing {
     return null;
   }
 
-  private Map<Herb, List<HerbEntry>> herbMap (Player player) {
+  private Map<Herb, List<HerbEntry>> herbMap(Player player) {
     Inventory playerInventory = player.getInventory();
     // TODO: make this a function?
     Map<Herb, List<HerbEntry>> herbMap = new HashMap<>();
@@ -158,14 +158,15 @@ public class Costing {
   // herbs can be in an item capability in the inventory
   // herbs can be in a shulker box in the inventory
   // herbs can be in a pouch in the inventory
-  private record HerbEntry (HerbEntryType type, Herb herb, int slot, int count, int subindex) {
+  private record HerbEntry(HerbEntryType type, Herb herb, int slot, int count, int subindex) {
   }
 
   private enum HerbEntryType {
     POUCH, SHULKER, CAPABILITY, INVENTORY;
   }
 
-  public boolean charge (Player player) {
+  // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
+  public void charge(Player player) {
     calculateCosts(true);
 
     Inventory playerInventory = player.getInventory();
@@ -183,12 +184,12 @@ public class Costing {
             ItemStack stack = playerInventory.getItem(i);
             if (stack.is(entry.getKey().getTag())) {
               if (stack.getCount() >= toConsume) {
-                RootsAPI.LOG.info("Shrunk stack of {} by {}", stack, toConsume);
+                /*                RootsAPI.LOG.info("Shrunk stack of {} by {}", stack, toConsume);*/
                 stack.shrink(toConsume);
                 toConsume = 0;
                 break;
               } else {
-                RootsAPI.LOG.info("Shrunk stack of {} by {} to 0", stack, stack.getCount());
+                /*                RootsAPI.LOG.info("Shrunk stack of {} by {} to 0", stack, stack.getCount());*/
                 toConsume -= stack.getCount();
                 stack.setCount(0);
               }
@@ -207,7 +208,6 @@ public class Costing {
       }
     }
 
-    return true;
   }
 
   private void calculateCosts(boolean checkModifiers) {
