@@ -29,8 +29,8 @@ public class Cost {
 
   protected Cost(FriendlyByteBuf buf) {
     this.type = CostType.values()[buf.readVarInt()];
-    final ResourceLocation res = buf.readResourceLocation();
-    this.herb = () -> Registries.HERB_REGISTRY.get().getValue(res);
+    final int id = buf.readVarInt();
+    this.herb = () -> Registries.HERB_REGISTRY.get().getValue(id);
     this.value = buf.readDouble();
   }
 
@@ -55,7 +55,7 @@ public class Cost {
 
   public void toNetwork(FriendlyByteBuf buf) {
     buf.writeVarInt(this.type.ordinal());
-    buf.writeResourceLocation(Registries.HERB_REGISTRY.get().getKey(this.herb.get()));
+    buf.writeVarInt(Registries.HERB_REGISTRY.get().getID(this.herb.get()));
     buf.writeDouble(this.value);
   }
 

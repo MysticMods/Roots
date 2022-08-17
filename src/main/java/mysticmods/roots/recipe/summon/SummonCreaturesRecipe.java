@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.recipe.IBoundlessRecipe;
+import mysticmods.roots.api.registry.VanillaRegistries;
 import mysticmods.roots.init.ModRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -109,8 +110,8 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
         ingredients.set(i, Ingredient.fromNetwork(pBuffer));
       }
 
-      ResourceLocation rl = pBuffer.readResourceLocation();
-      EntityType<?> result = ForgeRegistries.ENTITIES.getValue(rl);
+      int resultId = pBuffer.readVarInt();
+      EntityType<?> result = VanillaRegistries.ENTITIES.get().getValue(resultId);
 
       return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
     }
@@ -121,7 +122,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
       for (Ingredient ingredient : recipe.getIngredients()) {
         ingredient.toNetwork(pBuffer);
       }
-      pBuffer.writeResourceLocation(ForgeRegistries.ENTITIES.getKey(recipe.getResultEntity()));
+      pBuffer.writeVarInt(VanillaRegistries.ENTITIES.get().getID(recipe.getResultEntity()));
     }
   }
 

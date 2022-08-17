@@ -15,8 +15,8 @@ public class ClientBoundRitualPropertyPacket {
   public ClientBoundRitualPropertyPacket(FriendlyByteBuf buffer) {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
-      ResourceLocation rl = buffer.readResourceLocation();
-      RitualProperty<?> prop = Registries.RITUAL_PROPERTY_REGISTRY.get().getValue(rl);
+      int id = buffer.readVarInt();
+      RitualProperty<?> prop = Registries.RITUAL_PROPERTY_REGISTRY.get().getValue(id);
       if (prop != null) {
         prop.updateFromNetwork(buffer);
       } else {
@@ -32,10 +32,11 @@ public class ClientBoundRitualPropertyPacket {
     Collection<RitualProperty<?>> props = Registries.RITUAL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
     buffer.writeVarInt(props.size());
     for (RitualProperty<?> prop : props) {
-      ResourceLocation rl = Registries.RITUAL_PROPERTY_REGISTRY.get().getKey(prop);
-      if (rl == null) {
+      int id = Registries.RITUAL_PROPERTY_REGISTRY.get().getID(prop);
+      if (id == -1) {
+        throw new IllegalStateException("tried to serialize a ritual property that doesn't exist: " + prop);
       } else {
-        buffer.writeResourceLocation(rl);
+        buffer.writeVarInt(id);
         prop.serializeNetwork(buffer);
       }
     }

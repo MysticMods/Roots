@@ -15,8 +15,8 @@ public class ClientBoundModifierPropertyPacket {
   public ClientBoundModifierPropertyPacket(FriendlyByteBuf buffer) {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
-      ResourceLocation rl = buffer.readResourceLocation();
-      ModifierProperty<?> prop = Registries.MODIFIER_PROPERTY_REGISTRY.get().getValue(rl);
+      int id = buffer.readVarInt();
+      ModifierProperty<?> prop = Registries.MODIFIER_PROPERTY_REGISTRY.get().getValue(id);
       if (prop != null) {
         prop.updateFromNetwork(buffer);
       } else {
@@ -32,10 +32,11 @@ public class ClientBoundModifierPropertyPacket {
     Collection<ModifierProperty<?>> props = Registries.MODIFIER_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
     buffer.writeVarInt(props.size());
     for (ModifierProperty<?> prop : props) {
-      ResourceLocation rl = Registries.MODIFIER_PROPERTY_REGISTRY.get().getKey(prop);
-      if (rl == null) {
+      int id = Registries.MODIFIER_PROPERTY_REGISTRY.get().getID(prop);
+      if (id == -1) {
+        throw new IllegalStateException("tried to serialize a property that doesn't exist: " + prop);
       } else {
-        buffer.writeResourceLocation(rl);
+        buffer.writeVarInt(id);
         prop.serializeNetwork(buffer);
       }
     }

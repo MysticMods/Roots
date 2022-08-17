@@ -7,6 +7,7 @@ import mysticmods.roots.api.property.ModifierProperty;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.VanillaRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.RitualCondition;
 import mysticmods.roots.api.spells.Spell;
@@ -34,6 +35,7 @@ public class ModRegistries {
     Registries.SPELL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(SpellProperty.class), () -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving()));
     Registries.MODIFIER_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_MODIFIER_PROPERTY_REGISTRY.makeRegistry(c(ModifierProperty.class), () -> new RegistryBuilder<ModifierProperty<?>>().disableSync().disableSaving()));
     Registries.RITUAL_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_CONDITION_REGISTRY.makeRegistry(RitualCondition.class, () -> new RegistryBuilder<RitualCondition>().disableSync().disableSaving()));
+    VanillaRegistries.ENTITIES = ForgeRegistryWrapper.of(() -> ForgeRegistries.ENTITIES);
   }
 
   private static <T> Class<T> c(Class<?> cls) {

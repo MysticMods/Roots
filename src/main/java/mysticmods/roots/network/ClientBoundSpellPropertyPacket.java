@@ -15,8 +15,8 @@ public class ClientBoundSpellPropertyPacket {
   public ClientBoundSpellPropertyPacket(FriendlyByteBuf buffer) {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
-      ResourceLocation rl = buffer.readResourceLocation();
-      SpellProperty<?> prop = Registries.SPELL_PROPERTY_REGISTRY.get().getValue(rl);
+      int id = buffer.readVarInt();
+      SpellProperty<?> prop = Registries.SPELL_PROPERTY_REGISTRY.get().getValue(id);
       if (prop != null) {
         prop.updateFromNetwork(buffer);
       } else {
@@ -32,10 +32,11 @@ public class ClientBoundSpellPropertyPacket {
     Collection<SpellProperty<?>> props = Registries.SPELL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
     buffer.writeVarInt(props.size());
     for (SpellProperty<?> prop : props) {
-      ResourceLocation rl = Registries.SPELL_PROPERTY_REGISTRY.get().getKey(prop);
-      if (rl == null) {
+      int id = Registries.SPELL_PROPERTY_REGISTRY.get().getID(prop);
+      if (id == -1) {
+        throw new IllegalStateException("tried to serialize a spell property that doesn't exist: " + prop);
       } else {
-        buffer.writeResourceLocation(rl);
+        buffer.writeVarInt(id);
         prop.serializeNetwork(buffer);
       }
     }

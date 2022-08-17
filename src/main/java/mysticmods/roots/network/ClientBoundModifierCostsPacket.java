@@ -14,8 +14,8 @@ public class ClientBoundModifierCostsPacket {
   public ClientBoundModifierCostsPacket(FriendlyByteBuf buffer) {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
-      ResourceLocation rl = buffer.readResourceLocation();
-      Modifier prop = Registries.MODIFIER_REGISTRY.get().getValue(rl);
+      int id = buffer.readVarInt();
+      Modifier prop = Registries.MODIFIER_REGISTRY.get().getValue(id);
       if (prop != null) {
         prop.setCosts(Cost.fromNetworkArray(buffer));
       } else {
@@ -31,10 +31,11 @@ public class ClientBoundModifierCostsPacket {
     Collection<Modifier> props = Registries.MODIFIER_REGISTRY.get().getValues();
     buffer.writeVarInt(props.size());
     for (Modifier spell : props) {
-      ResourceLocation rl = Registries.MODIFIER_REGISTRY.get().getKey(spell);
-      if (rl == null) {
+      int id = Registries.MODIFIER_REGISTRY.get().getID(spell);
+      if (id == -1) {
+        throw new IllegalStateException("tried to serialize a modifier that doesn't exist: " + spell);
       } else {
-        buffer.writeResourceLocation(rl);
+        buffer.writeVarInt(id);
         buffer.writeVarInt(spell.getCosts().size());
         for (Cost cost : spell.getCosts()) {
           cost.toNetwork(buffer);
