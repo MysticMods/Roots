@@ -5,6 +5,7 @@ import mysticmods.mysticalworld.MWTags;
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -33,6 +34,9 @@ public class ModTags {
       // Logs that burn
       b.tag(RootsAPI.Tags.Blocks.MINECRAFT_LOGS_THAT_BURN).addTags(RootsAPI.Tags.Blocks.WILDWOOD_LOGS);
       b.tag(RootsAPI.Tags.Blocks.MINECRAFT_LOGS).addTags(RootsAPI.Tags.Blocks.WILDWOOD_LOGS);
+
+      b.tag(RootsAPI.Tags.Blocks.LOG_CAPSTONES).addTag(RootsAPI.Tags.Blocks.RUNED_LOGS);
+      b.tag(RootsAPI.Tags.Blocks.LOG_PILLARS).add(Blocks.OAK_LOG, Blocks.SPRUCE_LOG, Blocks.BIRCH_LOG, Blocks.JUNGLE_LOG, Blocks.ACACIA_LOG, Blocks.DARK_OAK_LOG, Blocks.CRIMSON_STEM, Blocks.WARPED_STEM, ModBlocks.WILDWOOD_LOG.get());
     });
 
     REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, b -> {

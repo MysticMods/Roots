@@ -975,6 +975,8 @@ ac1efdbd29d7aefde352fc90001c226f8a52e428 data/roots/recipes/wildwood_gate.json
 3f3a7d283a3a3f18ffe154197bd491b31050b0d5 data/roots/recipes/wildwood_wall.json
 46c5d2984b9ae8f9c213f6ca715f89494e92354a data/roots/recipes/wildwood_wall_from_wildwood_planks_stonecutting.json
 e633a61e4a5f2ec99418d1e4f6ad3f8b86ee78ec data/roots/recipes/wildwood_wide_post.json
+1e4e83f7ea1b2adf73ef5e512550ce4edd83895e data/roots/tags/blocks/capstones/log.json
+016cfe3ba1f1c08f807bf498ea923fc51531b901 data/roots/tags/blocks/capstones/rune.json
 ae09d4792ca79960ffa464f3bbd52b42abfca374 data/roots/tags/blocks/crafters.json
 a1d608fb24420cd09f13362601ec324ef9002bfe data/roots/tags/blocks/crops.json
 4c78a8234670d0cca25859e665d3fa9919002e8e data/roots/tags/blocks/crops/cloud_berry.json
@@ -1007,6 +1009,8 @@ d3f31134d833ab32914d12bc8d9ed4df0a03afeb data/roots/tags/blocks/logs/wildwood.js
 faf860912682748231d5da88de7f32869fdd866b data/roots/tags/blocks/pedestals.json
 1af6ab60f4c7bf1e01b35638d0c90987de9ca492 data/roots/tags/blocks/pedestals/grove.json
 8f898dcabd6ae5550d333e67cc011adf4a8ebc94 data/roots/tags/blocks/pedestals/ritual.json
+c433ef819e22aeaead38b3482e2bd0d9cef48733 data/roots/tags/blocks/pillars/log.json
+c7b35a50bc7b53be5af88d44c208c0a3d688d307 data/roots/tags/blocks/pillars/rune.json
 70d8cdcbebab77a1eb2208326a69eb6aca41c043 data/roots/tags/blocks/pyres.json
 2e317ad6ec906d1e05c3eb1046bf313b7289cbec data/roots/tags/blocks/runed_obsidian.json
 7935f6287ed8b1f05629c5d70a9f8b650343fa27 data/roots/tags/blocks/soils.json

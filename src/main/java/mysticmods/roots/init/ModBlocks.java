@@ -41,7 +41,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
       .register();
   public static BlockEntry<Block> CHISELED_RUNED_OBSIDIAN = REGISTRATE.block("chiseled_runed_obsidian", Block::new)
       .properties(RUNED_PROPERTIES)
@@ -49,7 +49,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_CAPSTONES)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -160,7 +160,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = REGISTRATE.block("runed_brick_button", RunedObsidianBlocks.Button::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -272,7 +272,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_ALT_BUTTON = REGISTRATE.block("runed_brick_alt_button", RunedObsidianBlocks.Button::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -384,7 +384,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN)
+      .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
       .register();
   public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
       .properties(RUNESTONE_PROPERTIES)
@@ -392,7 +392,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN)
+      .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_CAPSTONES)
       .register();
   public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BUTTON = REGISTRATE.block("runestone_button", BaseBlocks.StoneButtonBlock::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -503,7 +503,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN)
+      .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_CAPSTONES)
       .register();
   public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_BUTTON = REGISTRATE.block("runestone_brick_button", BaseBlocks.StoneButtonBlock::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -614,7 +614,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN)
+      .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
       .register();
   public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_ALT_BUTTON = REGISTRATE.block("runestone_brick_alt_button", BaseBlocks.StoneButtonBlock::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))

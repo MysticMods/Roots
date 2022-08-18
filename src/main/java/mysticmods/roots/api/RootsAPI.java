@@ -140,6 +140,13 @@ public abstract class RootsAPI {
       // Mortars
       public static TagKey<Block> MORTARS = modTag("mortars");
 
+      // Valid capstones for runed/runestone pillars
+      public static TagKey<Block> RUNE_CAPSTONES = modTag("capstones/rune");
+      public static TagKey<Block> RUNE_PILLARS = modTag("pillars/rune");
+
+      public static TagKey<Block> LOG_CAPSTONES = modTag("capstones/log");
+      public static TagKey<Block> LOG_PILLARS = modTag("pillars/log");
+
       private static TagKey<Block> modTag(String name) {
         return BlockTags.create(new ResourceLocation(MODID, name));
       }
