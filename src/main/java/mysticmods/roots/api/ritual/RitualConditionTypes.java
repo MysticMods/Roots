@@ -1,5 +1,6 @@
 package mysticmods.roots.api.ritual;
 
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -16,8 +17,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class RitualConditionTypes {
-
-
   @FunctionalInterface
   public interface ConditionType {
     Set<BlockPos> test (BlockPos pos, Level level, @Nullable Player player, Ritual ritual, BlockEntity pyre);
@@ -66,5 +65,13 @@ public class RitualConditionTypes {
 
       return result;
     }
+  }
+
+  public static PillarCondition runePillar (int height) {
+    return new PillarCondition(RootsAPI.Tags.Blocks.RUNE_CAPSTONES, RootsAPI.Tags.Blocks.RUNE_PILLARS, height);
+  }
+
+  public static PillarCondition logPillar (int height) {
+    return new PillarCondition(RootsAPI.Tags.Blocks.LOG_CAPSTONES, RootsAPI.Tags.Blocks.LOG_PILLARS, height);
   }
 }
