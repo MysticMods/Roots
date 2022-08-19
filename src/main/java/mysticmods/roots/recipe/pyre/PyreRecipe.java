@@ -135,9 +135,6 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
           PlayerCondition condition = Registries.RITUAL_PLAYER_CONDITION.get().getValue(pBuffer.readVarInt());
           recipe.getPlayerConditions().add(condition);
         }
-        if (ritual == null) {
-          // TODO: something here?
-        }
         recipe.setRitual(ritual);
       }
     }
