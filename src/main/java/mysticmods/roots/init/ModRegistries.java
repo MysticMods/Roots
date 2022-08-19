@@ -8,7 +8,8 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.registry.VanillaRegistries;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.ritual.RitualCondition;
+import mysticmods.roots.api.ritual.condition.LevelCondition;
+import mysticmods.roots.api.ritual.condition.PlayerCondition;
 import mysticmods.roots.api.spells.Spell;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.*;
@@ -22,7 +23,8 @@ public class ModRegistries {
   private static final DeferredRegister<Modifier> DEFERRED_MODIFIER_REGISTRY = DeferredRegister.create(RootsAPI.MODIFIER_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<RitualProperty<?>> DEFERRED_RITUAL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_PROPERTY_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<SpellProperty<?>> DEFERRED_SPELL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_PROPERTY_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<RitualCondition> DEFERRED_RITUAL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_CONDITION_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<LevelCondition> DEFERRED_RITUAL_LEVEL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_LEVEL_CONDITION_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<PlayerCondition> DEFERRED_RITUAL_PLAYER_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_PLAYER_CONDITION_REGISTRY, RootsAPI.MODID);
 
   static {
     Registries.HERB_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_HERB_REGISTRY.makeRegistry(Herb.class, () -> new RegistryBuilder<Herb>().disableSaving().disableSync()));
@@ -31,7 +33,8 @@ public class ModRegistries {
     Registries.MODIFIER_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_MODIFIER_REGISTRY.makeRegistry(Modifier.class, () -> new RegistryBuilder<Modifier>().disableSaving().disableSync()));
     Registries.RITUAL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry(c(RitualProperty.class), () -> new RegistryBuilder<RitualProperty<?>>().disableSync().disableSaving()));
     Registries.SPELL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(SpellProperty.class), () -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving()));
-    Registries.RITUAL_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_CONDITION_REGISTRY.makeRegistry(RitualCondition.class, () -> new RegistryBuilder<RitualCondition>().disableSync().disableSaving()));
+    Registries.RITUAL_LEVEL_CONDITION = ForgeRegistryWrapper.of(DEFERRED_RITUAL_LEVEL_CONDITION_REGISTRY.makeRegistry(LevelCondition.class, () -> new RegistryBuilder<LevelCondition>().disableSync().disableSaving()));
+    Registries.RITUAL_PLAYER_CONDITION = ForgeRegistryWrapper.of(DEFERRED_RITUAL_PLAYER_CONDITION_REGISTRY.makeRegistry(PlayerCondition.class, () -> new RegistryBuilder<PlayerCondition>().disableSync().disableSaving()));
     VanillaRegistries.ENTITIES = ForgeRegistryWrapper.of(() -> ForgeRegistries.ENTITIES);
   }
 
@@ -46,7 +49,8 @@ public class ModRegistries {
     DEFERRED_MODIFIER_REGISTRY.register(bus);
     DEFERRED_RITUAL_PROPERTY_REGISTRY.register(bus);
     DEFERRED_SPELL_PROPERTY_REGISTRY.register(bus);
-    DEFERRED_RITUAL_CONDITION_REGISTRY.register(bus);
+    DEFERRED_RITUAL_LEVEL_CONDITION_REGISTRY.register(bus);
+    DEFERRED_RITUAL_PLAYER_CONDITION_REGISTRY.register(bus);
   }
 
   public static void load() {
