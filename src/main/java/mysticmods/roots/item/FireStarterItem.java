@@ -27,8 +27,7 @@ public class FireStarterItem extends Item {
 
   @Override
   public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
-    if (level.isClientSide() && entity instanceof Player) {
-      Player player = (Player) entity;
+    if (level.isClientSide() && entity instanceof Player player) {
       BlockHitResult ray = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
       if (ray.getType() == HitResult.Type.BLOCK && count % 3 == 0) {
         int runs = player.getRandom().nextInt(3) + 2;
@@ -42,8 +41,7 @@ public class FireStarterItem extends Item {
 
   @Override
   public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-    if (!level.isClientSide() && entity instanceof Player) {
-      Player player = (Player) entity;
+    if (!level.isClientSide() && entity instanceof Player player) {
       BlockHitResult ray = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
       boolean used = false;
       if (ray.getType() == HitResult.Type.BLOCK) {

@@ -1,7 +1,6 @@
 package mysticmods.roots.api.spells;
 
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.spells.Spell;
 
 import java.util.Set;
 

@@ -9,9 +9,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fml.common.Mod;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SpellInstance {
   private final Spell spell;
@@ -26,7 +28,7 @@ public class SpellInstance {
     this(spell, Arrays.asList(modifiers));
   }
 
-  public SpellInstance (Spell spell, Collection<Modifier> modifiers) {
+  public SpellInstance(Spell spell, Collection<Modifier> modifiers) {
     this(spell);
     enabledModifiers.addAll(modifiers);
   }
@@ -56,7 +58,7 @@ public class SpellInstance {
     this.cooldown = cooldown;
   }
 
-  public void setCooldown (Player pPlayer) {
+  public void setCooldown(Player pPlayer) {
     if (getMaxCooldown() > 0) {
       setCooldown(pPlayer.tickCount + getMaxCooldown());
     }
@@ -68,28 +70,28 @@ public class SpellInstance {
     return enabledModifiers.contains(modifier);
   }
 
-  public Spell.Type getType () {
+  public Spell.Type getType() {
     return spell.getType();
   }
 
   // TODO: handle making sure modifiers are correct for this spell
-  public void addModifier (Modifier modifier) {
+  public void addModifier(Modifier modifier) {
     enabledModifiers.add(modifier);
   }
 
-  public void removeModifier (Modifier modifier) {
+  public void removeModifier(Modifier modifier) {
     enabledModifiers.remove(modifier);
   }
 
-  public int getMaxCooldown () {
+  public int getMaxCooldown() {
     return spell.getCooldown();
   }
 
-  public int getColor1 () {
+  public int getColor1() {
     return spell.getColor1();
   }
 
-  public int getColor2 () {
+  public int getColor2() {
     return spell.getColor2();
   }
 
@@ -97,7 +99,7 @@ public class SpellInstance {
   // returns:
   //   true - the spell can be cast
   //   false - the spell cannot be cast
-  public boolean canCast (Player pCaster) {
+  public boolean canCast(Player pCaster) {
     if (getMaxCooldown() < 0) {
       return true;
     }
@@ -106,7 +108,7 @@ public class SpellInstance {
     return diff <= 0 || Math.abs(diff) > getMaxCooldown();
   }
 
-  public void cast (Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
+  public void cast(Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
     spell.cast(pPlayer, pStack, pHand, costs, this, ticks);
   }
 
@@ -140,7 +142,7 @@ public class SpellInstance {
   public int hashCode() {
     int result = spell.hashCode();
     result = 31 * result + enabledModifiers.hashCode();
-    result = 31 * result + (int) (cooldown ^ (cooldown >>> 32));
+    result = 31 * result + (cooldown ^ (cooldown >>> 32));
     return result;
   }
 }

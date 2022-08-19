@@ -5,10 +5,10 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.reference.SpellProperties;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.reference.SpellProperties;
 import mysticmods.roots.api.reference.Spells;
+import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.spell.GrowthInfusionSpell;
 import net.minecraft.resources.ResourceKey;
 

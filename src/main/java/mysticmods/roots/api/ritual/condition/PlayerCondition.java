@@ -32,6 +32,6 @@ public class PlayerCondition extends DescribedRegistryEntry<PlayerCondition> {
 
   @FunctionalInterface
   public interface Type {
-    boolean test (Level level, @Nullable Player player, Ritual ritual, BoundedBlockEntity pyre);
+    boolean test(Level level, @Nullable Player player, Ritual ritual, BoundedBlockEntity pyre);
   }
 }

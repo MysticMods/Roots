@@ -162,8 +162,8 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
   public static class Builder extends RootsRecipe.Builder {
     private Ritual ritual;
-    private List<LevelCondition> levelConditions = new ArrayList<>();
-    private List<PlayerCondition> playerConditions = new ArrayList<>();
+    private final List<LevelCondition> levelConditions = new ArrayList<>();
+    private final List<PlayerCondition> playerConditions = new ArrayList<>();
 
     protected Builder(ItemStack result) {
       super(result);

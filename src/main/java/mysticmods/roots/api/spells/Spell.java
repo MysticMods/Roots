@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Handler;
 
 public abstract class Spell extends DescribedRegistryEntry<Spell> implements IHasCost {
   protected final Type type;
@@ -70,9 +69,9 @@ public abstract class Spell extends DescribedRegistryEntry<Spell> implements IHa
   public void initialize() {
   }
 
-  public abstract void cast (Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);
+  public abstract void cast(Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);
 
-                             @Override
+  @Override
   protected String getDescriptor() {
     return "spell";
   }

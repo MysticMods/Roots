@@ -26,7 +26,10 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Costing {
   private final SpellInstance spell;
@@ -161,7 +164,7 @@ public class Costing {
   }
 
   private enum HerbEntryType {
-    POUCH, SHULKER, CAPABILITY, INVENTORY;
+    POUCH, SHULKER, CAPABILITY, INVENTORY
   }
 
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES

@@ -201,36 +201,42 @@ public class RenderResizableCuboid {
     float alpha = RootsRenderer.getAlpha(argb);
     // add quads
     switch (face) {
-      case DOWN -> drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
-          x1, y1, z2,
-          x1, y1, z1,
-          x2, y1, z1,
-          x2, y1, z2);
-      case UP -> drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
-          x1, y2, z1,
-          x1, y2, z2,
-          x2, y2, z2,
-          x2, y2, z1);
-      case NORTH -> drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
-          x1, y1, z1,
-          x1, y2, z1,
-          x2, y2, z1,
-          x2, y1, z1);
-      case SOUTH -> drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
-          x2, y1, z2,
-          x2, y2, z2,
-          x1, y2, z2,
-          x1, y1, z2);
-      case WEST -> drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
-          x1, y1, z2,
-          x1, y2, z2,
-          x1, y2, z1,
-          x1, y1, z1);
-      case EAST -> drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
-          x2, y1, z1,
-          x2, y2, z1,
-          x2, y2, z2,
-          x2, y1, z2);
+      case DOWN ->
+          drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
+              x1, y1, z2,
+              x1, y1, z1,
+              x2, y1, z1,
+              x2, y1, z2);
+      case UP ->
+          drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
+              x1, y2, z1,
+              x1, y2, z2,
+              x2, y2, z2,
+              x2, y2, z1);
+      case NORTH ->
+          drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
+              x1, y1, z1,
+              x1, y2, z1,
+              x2, y2, z1,
+              x2, y1, z1);
+      case SOUTH ->
+          drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
+              x2, y1, z2,
+              x2, y2, z2,
+              x1, y2, z2,
+              x1, y1, z2);
+      case WEST ->
+          drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
+              x1, y1, z2,
+              x1, y2, z2,
+              x1, y2, z1,
+              x1, y1, z1);
+      case EAST ->
+          drawFace(buffer, matrix, normalMatrix, red, green, blue, alpha, minU, maxU, minV, maxV, light, overlay, faceDisplay, normal,
+              x2, y1, z1,
+              x2, y2, z1,
+              x2, y2, z2,
+              x2, y1, z2);
     }
   }
 

@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface IHasCost {
   List<Cost> getCosts();
-  void setCosts (List<Cost> costs);
+
+  void setCosts(List<Cost> costs);
 }

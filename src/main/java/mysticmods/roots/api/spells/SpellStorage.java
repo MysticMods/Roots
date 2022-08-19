@@ -9,7 +9,10 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 // NOTE: THIS IS 0 INDEXED
 public class SpellStorage {
@@ -22,17 +25,17 @@ public class SpellStorage {
   }
 
   // adjust modifiers
-  protected void validateSlot (int index) {
+  protected void validateSlot(int index) {
     if (index < 0 || index >= spells.size()) {
       throw new IndexOutOfBoundsException("Index " + index + " is out of bounds for SpellStorage of size " + spells.size());
     }
   }
 
-  public int size () {
+  public int size() {
     return spells.size();
   }
 
-  public void next () {
+  public void next() {
     int lastIndex = index;
     for (int i = index; i < spells.size(); i++) {
       if (spells.get(i) != null) {
@@ -50,7 +53,7 @@ public class SpellStorage {
     }
   }
 
-  public void previous () {
+  public void previous() {
     int lastIndex = index;
     for (int i = index; i >= 0; i--) {
       if (spells.get(i) != null) {
@@ -68,13 +71,13 @@ public class SpellStorage {
     }
   }
 
-  public void set (int slot) {
+  public void set(int slot) {
     validateSlot(slot);
     this.setDirty(true);
     this.index = slot;
   }
 
-  public int add (Spell spell, Collection<Modifier> modifiers) {
+  public int add(Spell spell, Collection<Modifier> modifiers) {
     int slot = -1;
     for (int i = 0; i < spells.size(); i++) {
       if (get(i) == null) {
@@ -90,14 +93,14 @@ public class SpellStorage {
     return slot;
   }
 
-  public boolean set (int slot, Spell spell, Collection<Modifier> modifiers) {
+  public boolean set(int slot, Spell spell, Collection<Modifier> modifiers) {
     validateSlot(slot);
     this.setDirty(true);
     return this.spells.set(slot, new SpellInstance(spell, modifiers)) == null;
   }
 
   @Nullable
-  public SpellInstance get (int slot) {
+  public SpellInstance get(int slot) {
     validateSlot(slot);
     SpellInstance inSlot = this.spells.get(slot);
     if (inSlot == null) {
@@ -107,7 +110,7 @@ public class SpellStorage {
   }
 
   @Nullable
-  public SpellInstance get () {
+  public SpellInstance get() {
     SpellInstance inSlot = this.spells.get(index);
     if (inSlot == null) {
       return null;
@@ -116,7 +119,7 @@ public class SpellStorage {
   }
 
   @Nullable
-  public SpellInstance remove (int slot) {
+  public SpellInstance remove(int slot) {
     validateSlot(slot);
     SpellInstance result = this.spells.remove(slot);
     if (result != null) {

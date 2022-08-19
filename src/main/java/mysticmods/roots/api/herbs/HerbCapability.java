@@ -23,26 +23,26 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
   }
 
   // Returns how much is left over
-  public double drain (Herb herb, double value, boolean simulate) {
+  public double drain(Herb herb, double value, boolean simulate) {
     double current = HERB_MAP.getDouble(herb);
     double remainder;
     if (current < value) {
       remainder = value - current;
       if (!simulate) {
         HERB_MAP.put(herb, 0.0d);
-/*        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to 0, with a remainder of {} still required.", herb, value, current, remainder);*/
+        /*        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to 0, with a remainder of {} still required.", herb, value, current, remainder);*/
       }
       return remainder;
     } else {
       if (!simulate) {
         HERB_MAP.put(herb, current - value);
-/*        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to {}", herb, value, current, current - value);*/
+        /*        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to {}", herb, value, current, current - value);*/
       }
       return 0.0d;
     }
   }
 
-  public void fill (Herb herb, double value) {
+  public void fill(Herb herb, double value) {
     double oldValue = HERB_MAP.getDouble(herb);
     double newValue = oldValue + value;
     HERB_MAP.put(herb, newValue);
