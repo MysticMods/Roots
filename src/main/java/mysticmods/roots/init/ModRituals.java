@@ -7,6 +7,7 @@ import mysticmods.roots.api.reference.RitualProperties;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.reference.Rituals;
+import mysticmods.roots.api.ritual.condition.LevelCondition;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.ritual.AnimalHarvestRitual;
 import mysticmods.roots.ritual.CraftingRitual;
@@ -15,6 +16,9 @@ import net.minecraft.resources.ResourceKey;
 import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModRituals {
+  public static final RegistryEntry<LevelCondition> RUNE_PILLAR_4_HIGH = REGISTRATE.simple("rune_pillar_4_high", LevelCondition.class, () -> new LevelCondition(LevelCondition.runePillar(4)));
+  public static final RegistryEntry<LevelCondition> RUNE_PILLAR_3_HIGH = REGISTRATE.simple("rune_pillar_3_high", LevelCondition.class, () -> new LevelCondition(LevelCondition.runePillar(3)));
+
   public static final RegistryEntry<Ritual> TRANSMUTATION = ritual(Rituals.TRANSMUTATION, () -> new Ritual() {
     @Override
     protected void functionalTick(PyreBlockEntity blockEntity, int duration) {

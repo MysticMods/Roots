@@ -109,6 +109,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     return new LevelCondition.PillarCondition(RootsAPI.Tags.Blocks.RUNE_CAPSTONES, RootsAPI.Tags.Blocks.RUNE_PILLARS, height);
   }
 
+  // TODO: better implementation of this
   public static LevelCondition.PillarCondition logPillar (int height) {
     return new LevelCondition.PillarCondition(RootsAPI.Tags.Blocks.LOG_CAPSTONES, RootsAPI.Tags.Blocks.LOG_PILLARS, height);
   }
