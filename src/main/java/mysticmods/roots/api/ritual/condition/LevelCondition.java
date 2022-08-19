@@ -67,8 +67,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     public PillarCondition(TagKey<Block> capstone, TagKey<Block> pillar, int height) {
       this.capstone = capstone;
       this.pillar = pillar;
-      // A 4-high pillar has 3 pillar blocks and 1 capstone
-      this.heightExcluding = height - 1;
+      this.heightExcluding = height;
     }
 
     @Override
@@ -85,7 +84,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
       mutableBlockPos.set(pos.getX(), pos.getY() - 1, pos.getZ());
 
       // Move downward for each of the height (excluding the capstone)
-      for (int i = 0; i <= heightExcluding; i++) {
+      for (int i = 0; i < heightExcluding; i++) {
         if (!level.getBlockState(mutableBlockPos).is(pillar)) {
           // If it isn't a pillar type, just return empty as this isn't valid OR it's a shorter pillar
           return Collections.emptySet();
