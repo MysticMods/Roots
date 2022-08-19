@@ -1,28 +1,32 @@
 package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.blockentity.BoundedBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class RitualConditionTypes {
   @FunctionalInterface
-  public interface ConditionType {
-    Set<BlockPos> test (BlockPos pos, Level level, @Nullable Player player, Ritual ritual, BlockEntity pyre);
+  public interface LevelConditionType {
+    Set<BlockPos> test (BlockPos pos, Level level, @Nullable Player player, Ritual ritual, BoundedBlockEntity pyre);
   }
 
-  public static class PillarCondition implements ConditionType {
+  @FunctionalInterface
+  public interface PlayerConditionType {
+    boolean test (Level level, @Nullable Player player, Ritual ritual, BoundedBlockEntity pyre);
+  }
+
+  public static class PillarCondition implements LevelConditionType {
     private final TagKey<Block> capstone;
     private final TagKey<Block> pillar;
     private final int heightExcluding;
@@ -35,7 +39,7 @@ public class RitualConditionTypes {
     }
 
     @Override
-    public Set<BlockPos> test(BlockPos pos, Level level, @Nullable Player player, Ritual ritual, BlockEntity pyre) {
+    public Set<BlockPos> test(BlockPos pos, Level level, @Nullable Player player, Ritual ritual, BoundedBlockEntity pyre) {
       BlockState initial = level.getBlockState(pos);
       // If the initial position isn't the capstone, we don't care
       if (!initial.is(capstone)) {

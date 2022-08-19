@@ -2,7 +2,6 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.property.ModifierProperty;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
@@ -36,7 +35,6 @@ public abstract class RootsAPI {
 
   public static ResourceKey<Registry<RitualProperty<?>>> RITUAL_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "ritual_properties"));
   public static ResourceKey<Registry<SpellProperty<?>>> SPELL_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "spell_properties"));
-  public static ResourceKey<Registry<ModifierProperty<?>>> MODIFIER_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "modifier_properties"));
 
   public static ResourceKey<Registry<RitualCondition>> RITUAL_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "ritual_conditions"));
 

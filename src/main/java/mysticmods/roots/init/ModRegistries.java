@@ -3,7 +3,6 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.property.ModifierProperty;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
@@ -23,7 +22,6 @@ public class ModRegistries {
   private static final DeferredRegister<Modifier> DEFERRED_MODIFIER_REGISTRY = DeferredRegister.create(RootsAPI.MODIFIER_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<RitualProperty<?>> DEFERRED_RITUAL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_PROPERTY_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<SpellProperty<?>> DEFERRED_SPELL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_PROPERTY_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<ModifierProperty<?>> DEFERRED_MODIFIER_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.MODIFIER_PROPERTY_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<RitualCondition> DEFERRED_RITUAL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_CONDITION_REGISTRY, RootsAPI.MODID);
 
   static {
@@ -33,7 +31,6 @@ public class ModRegistries {
     Registries.MODIFIER_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_MODIFIER_REGISTRY.makeRegistry(Modifier.class, () -> new RegistryBuilder<Modifier>().disableSaving().disableSync()));
     Registries.RITUAL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry(c(RitualProperty.class), () -> new RegistryBuilder<RitualProperty<?>>().disableSync().disableSaving()));
     Registries.SPELL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(SpellProperty.class), () -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving()));
-    Registries.MODIFIER_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_MODIFIER_PROPERTY_REGISTRY.makeRegistry(c(ModifierProperty.class), () -> new RegistryBuilder<ModifierProperty<?>>().disableSync().disableSaving()));
     Registries.RITUAL_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_CONDITION_REGISTRY.makeRegistry(RitualCondition.class, () -> new RegistryBuilder<RitualCondition>().disableSync().disableSaving()));
     VanillaRegistries.ENTITIES = ForgeRegistryWrapper.of(() -> ForgeRegistries.ENTITIES);
   }
@@ -49,7 +46,6 @@ public class ModRegistries {
     DEFERRED_MODIFIER_REGISTRY.register(bus);
     DEFERRED_RITUAL_PROPERTY_REGISTRY.register(bus);
     DEFERRED_SPELL_PROPERTY_REGISTRY.register(bus);
-    DEFERRED_MODIFIER_PROPERTY_REGISTRY.register(bus);
     DEFERRED_RITUAL_CONDITION_REGISTRY.register(bus);
   }
 

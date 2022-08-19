@@ -14,8 +14,6 @@ public class Data {
     event.getGenerator().addProvider(properties);
     SpellPropertyProvider spell_properties = new SpellPropertyProvider(event.getGenerator());
     event.getGenerator().addProvider(spell_properties);
-    ModifierPropertyProvider modifier_properties = new ModifierPropertyProvider(event.getGenerator());
-    event.getGenerator().addProvider(modifier_properties);
     SpellCostProvider spell_costs = new SpellCostProvider(event.getGenerator());
     event.getGenerator().addProvider(spell_costs);
     ModifierCostProvider modifier_costs = new ModifierCostProvider(event.getGenerator());

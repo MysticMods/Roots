@@ -16,7 +16,6 @@ public class Networking extends PacketHandler {
   public void registerMessages() {
     registerMessage(ClientBoundRitualPropertyPacket.class, ClientBoundRitualPropertyPacket::encode, ClientBoundRitualPropertyPacket::new, ClientBoundRitualPropertyPacket::handle);
     registerMessage(ClientBoundSpellPropertyPacket.class, ClientBoundSpellPropertyPacket::encode, ClientBoundSpellPropertyPacket::new, ClientBoundSpellPropertyPacket::handle);
-    registerMessage(ClientBoundModifierPropertyPacket.class, ClientBoundModifierPropertyPacket::encode, ClientBoundModifierPropertyPacket::new, ClientBoundModifierPropertyPacket::handle);
     registerMessage(ClientBoundSpellCostsPacket.class, ClientBoundSpellCostsPacket::encode, ClientBoundSpellCostsPacket::new, ClientBoundSpellCostsPacket::handle);
     registerMessage(ClientBoundModifierCostsPacket.class, ClientBoundModifierCostsPacket::encode, ClientBoundModifierCostsPacket::new, ClientBoundModifierCostsPacket::handle);
   }

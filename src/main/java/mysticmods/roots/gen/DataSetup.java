@@ -14,7 +14,6 @@ public class DataSetup {
   public static void onReloadListeners(AddReloadListenerEvent event) {
     event.addListener(RitualPropertyReloadListener.getInstance());
     event.addListener(SpellPropertyReloadListener.getInstance());
-    event.addListener(ModifierPropertyReloadListener.getInstance());
     event.addListener(SpellCostReloadListener.getInstance());
     event.addListener(ModifierCostReloadListener.getInstance());
   }
@@ -24,12 +23,10 @@ public class DataSetup {
     if (event.getPlayer() != null) {
       Networking.sendTo(new ClientBoundRitualPropertyPacket(), event.getPlayer());
       Networking.sendTo(new ClientBoundSpellPropertyPacket(), event.getPlayer());
-      Networking.sendTo(new ClientBoundModifierPropertyPacket(), event.getPlayer());
       Networking.sendTo(new ClientBoundSpellCostsPacket(), event.getPlayer());
     } else {
       Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundRitualPropertyPacket());
       Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundSpellPropertyPacket());
-      Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundModifierPropertyPacket());
       Networking.send(PacketDistributor.ALL.noArg(), new ClientBoundSpellCostsPacket());
     }
   }
