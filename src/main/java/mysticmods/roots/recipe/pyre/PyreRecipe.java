@@ -174,19 +174,23 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       this.ritual = ritual;
     }
 
-    public void setRitual(Ritual ritual) {
+    public Builder setRitual(Ritual ritual) {
       if (!this.conditionalOutputs.isEmpty() || (this.result != null && !this.result.isEmpty())) {
         throw new IllegalStateException("can't set a ritual for a recipe that has an output");
       }
       this.ritual = ritual;
+      return this;
     }
 
-    public void addLevelCondition(LevelCondition condition) {
+    public Builder addLevelCondition(LevelCondition condition) {
       this.levelConditions.add(condition);
+      return this;
+
     }
 
-    public void addPlayerCondition(PlayerCondition condition) {
+    public Builder addPlayerCondition(PlayerCondition condition) {
       this.playerConditions.add(condition);
+      return this;
     }
 
     @Override

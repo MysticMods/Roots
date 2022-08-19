@@ -12,6 +12,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import org.jetbrains.annotations.Nullable;
@@ -38,26 +39,24 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
   }
 
   // TODO: Mutation of completedPositions but also return value
-  public Set<BlockPos> test(Level level, @Nullable Player player, Ritual ritual, BoundedBlockEntity pyre) {
-    BoundingBox bounds = pyre.getBoundingBox();
+  public Set<BlockPos> test(Level level, @Nullable Player player, Ritual ritual, BlockEntity pyre, BoundingBox bounds) {
     Set<BlockPos> newCompletedPositions = new HashSet<>();
-    if (bounds != null) {
-      BlockPos.betweenClosedStream(bounds).forEach(mPos -> {
-        BlockPos pos = mPos.immutable();
-        if (newCompletedPositions.contains(pos)) {
-          return;
-        }
+    bounds = bounds.move(pyre.getBlockPos());
+    BlockPos.betweenClosedStream(bounds).forEach(mPos -> {
+      BlockPos pos = mPos.immutable();
+      if (newCompletedPositions.contains(pos)) {
+        return;
+      }
 
-        newCompletedPositions.addAll(condition.test(pos, level, player, ritual, pyre));
-        newCompletedPositions.add(pos);
-      });
-    }
+      newCompletedPositions.addAll(condition.test(pos, level, player, ritual, pyre));
+      newCompletedPositions.add(pos);
+    });
     return newCompletedPositions;
   }
 
   @FunctionalInterface
   public interface Type {
-    Set<BlockPos> test (BlockPos pos, Level level, @javax.annotation.Nullable Player player, Ritual ritual, BoundedBlockEntity pyre);
+    Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player, Ritual ritual, BlockEntity pyre);
   }
 
   public static class PillarCondition implements Type {
@@ -73,7 +72,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     }
 
     @Override
-    public Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player, Ritual ritual, BoundedBlockEntity pyre) {
+    public Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player, Ritual ritual, BlockEntity pyre) {
       BlockState initial = level.getBlockState(pos);
       // If the initial position isn't the capstone, we don't care
       if (!initial.is(capstone)) {
@@ -86,7 +85,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
       mutableBlockPos.set(pos.getX(), pos.getY() - 1, pos.getZ());
 
       // Move downward for each of the height (excluding the capstone)
-      for (int i = 0; i < heightExcluding; i++) {
+      for (int i = 0; i <= heightExcluding; i++) {
         if (!level.getBlockState(mutableBlockPos).is(pillar)) {
           // If it isn't a pillar type, just return empty as this isn't valid OR it's a shorter pillar
           return Collections.emptySet();
@@ -105,12 +104,12 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     }
   }
 
-   public static LevelCondition.PillarCondition runePillar (int height) {
+  public static LevelCondition.PillarCondition runePillar(int height) {
     return new LevelCondition.PillarCondition(RootsAPI.Tags.Blocks.RUNE_CAPSTONES, RootsAPI.Tags.Blocks.RUNE_PILLARS, height);
   }
 
   // TODO: better implementation of this
-  public static LevelCondition.PillarCondition logPillar (int height) {
+  public static LevelCondition.PillarCondition logPillar(int height) {
     return new LevelCondition.PillarCondition(RootsAPI.Tags.Blocks.LOG_CAPSTONES, RootsAPI.Tags.Blocks.LOG_PILLARS, height);
   }
 }

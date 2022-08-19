@@ -7,6 +7,8 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.condition.LevelCondition;
+import mysticmods.roots.api.ritual.condition.PlayerCondition;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -29,6 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.items.ItemStackHandler;
 import noobanidus.libs.noobutil.util.ItemUtil;
@@ -36,9 +39,7 @@ import noobanidus.libs.particleslib.client.particle.Particles;
 import noobanidus.libs.particleslib.init.ModParticles;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 // This controls the LIT state
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {
@@ -51,6 +52,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     }
   };
+
+  // TODO: UNHARDCODE THIS
+  private final static BoundingBox PYRE_BOUNDS = new BoundingBox(-10, -10, -10, 11, 11, 11);
+
   private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
   private final List<ItemStack> previousRecipeItems = new ArrayList<>();
   private PyreRecipe lastRecipe = null;
@@ -88,6 +93,27 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           currentRitual = ModRituals.CRAFTING.get();
         } else {
           currentRitual = newRitual;
+        }
+        List<PlayerCondition> failedPlayer = new ArrayList<>();
+        // TODO: test conditions here
+        for (PlayerCondition condition : cachedRecipe.getPlayerConditions()) {
+          if (!condition.test(level, player, newRitual, this)) {
+            failedPlayer.add(condition);
+          }
+        }
+        List<LevelCondition> failedLevel = new ArrayList<>();
+        Set<BlockPos> testedPositions = new HashSet<>();
+        for (LevelCondition condition : cachedRecipe.getLevelConditions()) {
+          Set<BlockPos> newPositions = condition.test(level, player, newRitual, this, PYRE_BOUNDS);
+          if (newPositions.isEmpty() || !Collections.disjoint(testedPositions, newPositions)) {
+            failedLevel.add(condition);
+          } else {
+            testedPositions.addAll(newPositions);
+          }
+        }
+
+        if (!failedLevel.isEmpty() || !failedPlayer.isEmpty()) {
+          return InteractionResult.FAIL;
         }
         PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
         lastRecipe = cachedRecipe;
