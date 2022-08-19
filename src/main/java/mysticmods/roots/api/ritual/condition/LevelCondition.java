@@ -42,7 +42,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     BoundingBox bounds = pyre.getBoundingBox();
     Set<BlockPos> newCompletedPositions = new HashSet<>();
     if (bounds != null) {
-      BlockPos.betweenClosedStream(pyre.getBoundingBox()).forEach(mPos -> {
+      BlockPos.betweenClosedStream(bounds).forEach(mPos -> {
         BlockPos pos = mPos.immutable();
         if (newCompletedPositions.contains(pos)) {
           return;
