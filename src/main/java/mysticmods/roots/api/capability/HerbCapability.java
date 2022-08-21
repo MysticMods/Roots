@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class HerbCapability implements ICapabilityProvider, ICapabilitySerializable<ListTag>, INetworkedCapability {
+  private boolean dirty = true;
   private final Object2DoubleOpenHashMap<Herb> HERB_MAP = new Object2DoubleOpenHashMap<>();
 
   public HerbCapability() {
@@ -33,11 +34,13 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
       remainder = value - current;
       if (!simulate) {
         HERB_MAP.put(herb, 0.0d);
+        setDirty(true);
         /*        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to 0, with a remainder of {} still required.", herb, value, current, remainder);*/
       }
       return remainder;
     } else {
       if (!simulate) {
+        setDirty(true);
         HERB_MAP.put(herb, current - value);
         /*        RootsAPI.LOG.info("Drained herb {} x{}, bringing it from {} to {}", herb, value, current, current - value);*/
       }
@@ -50,6 +53,7 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
     double newValue = oldValue + value;
     HERB_MAP.put(herb, newValue);
     RootsAPI.LOG.info("Filled herb {} x{}, bringing it from {} to {}.", herb, value, oldValue, newValue);
+    setDirty(true);
   }
 
   @NotNull
@@ -77,6 +81,7 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
       CompoundTag tag = nbt.getCompound(i);
       HERB_MAP.put(Registries.HERB_REGISTRY.get().getValue(new ResourceLocation(tag.getString("herb"))), tag.getDouble("value"));
     }
+    setDirty(true);
   }
 
   @Override
@@ -95,5 +100,16 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
     for (int i = 0; i < mapSize; i++) {
       HERB_MAP.put(Registries.HERB_REGISTRY.get().getValue(buf.readVarInt()), buf.readDouble());
     }
+    setDirty(true);
+  }
+
+  @Override
+  public void setDirty(boolean dirty) {
+    this.dirty = dirty;
+  }
+
+  @Override
+  public boolean isDirty() {
+    return dirty;
   }
 }

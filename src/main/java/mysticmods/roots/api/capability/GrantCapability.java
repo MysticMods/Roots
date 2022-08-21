@@ -22,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
 public class GrantCapability implements ICapabilityProvider, ICapabilitySerializable<CompoundTag>, INetworkedCapability {
+  private boolean dirty = true;
   private final Set<Spell> GRANTED_SPELLS = new ObjectLinkedOpenHashSet<>();
   private final Set<Modifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
   private ImmutableSet<Spell> IMMUTABLE_GRANTED_SPELLS = null;
@@ -41,24 +42,28 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
   public void grantSpell(Spell spell) {
     if (GRANTED_SPELLS.add(spell)) {
       IMMUTABLE_GRANTED_SPELLS = null;
+      setDirty(true);
     }
   }
 
   public void grantModifier(Modifier modifier) {
     if (GRANTED_MODIFIERS.add(modifier)) {
       IMMUTABLE_GRANTED_MODIFIERS = null;
+      setDirty(true);
     }
   }
 
   public void removeSpell(Spell spell) {
     if (GRANTED_SPELLS.remove(spell)) {
       IMMUTABLE_GRANTED_SPELLS = null;
+      setDirty(true);
     }
   }
 
   public void removeModifier(Modifier modifier) {
     if (GRANTED_MODIFIERS.remove(modifier)) {
       IMMUTABLE_GRANTED_MODIFIERS = null;
+      setDirty(true);
     }
   }
 
@@ -100,6 +105,17 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
     for (int i = 0; i < modifierCount; i++) {
       GRANTED_MODIFIERS.add(Registries.MODIFIER_REGISTRY.get().getValue(buf.readVarInt()));
     }
+    setDirty(true);
+  }
+
+  @Override
+  public void setDirty(boolean dirty) {
+    this.dirty = dirty;
+  }
+
+  @Override
+  public boolean isDirty() {
+    return dirty;
   }
 
   @Override
@@ -138,6 +154,7 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
         GRANTED_MODIFIERS.add(modifier);
       }
     }
+    setDirty(true);
   }
 
   @NotNull
