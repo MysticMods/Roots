@@ -1,5 +1,6 @@
 package mysticmods.roots.api.recipe;
 
+import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

@@ -1,5 +1,6 @@
 package mysticmods.roots.api.recipe;
 
+import mysticmods.roots.api.recipe.crafting.IRootsTileCrafting;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;

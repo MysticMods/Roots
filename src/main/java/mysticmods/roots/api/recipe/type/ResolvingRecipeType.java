@@ -1,4 +1,4 @@
-package mysticmods.roots.api.recipe;
+package mysticmods.roots.api.recipe.type;
 
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.world.Container;

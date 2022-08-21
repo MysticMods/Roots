@@ -1,6 +1,6 @@
 package mysticmods.roots.recipe.grove;
 
-import mysticmods.roots.api.recipe.RootsTileCrafting;
+import mysticmods.roots.api.recipe.crafting.RootsTileCrafting;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import net.minecraft.world.entity.player.Player;

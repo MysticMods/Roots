@@ -1,4 +1,4 @@
-package mysticmods.roots.api.recipe;
+package mysticmods.roots.api.recipe.output;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

@@ -1,7 +1,7 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.items.ICastingItem;
+import mysticmods.roots.api.item.ICastingItem;
 import mysticmods.roots.api.spells.Costing;
 import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.api.spells.SpellInstance;

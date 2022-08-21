@@ -1,4 +1,4 @@
-package mysticmods.roots.api.items;
+package mysticmods.roots.api.item;
 
 public interface ICastingItem {
   int getSlots();

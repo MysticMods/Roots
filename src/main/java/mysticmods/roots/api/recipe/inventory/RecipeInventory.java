@@ -1,4 +1,4 @@
-package mysticmods.roots.api.recipe;
+package mysticmods.roots.api.recipe.inventory;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;

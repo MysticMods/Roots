@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.capability.Grant;
+import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
+import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;

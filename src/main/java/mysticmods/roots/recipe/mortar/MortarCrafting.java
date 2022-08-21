@@ -1,6 +1,6 @@
 package mysticmods.roots.recipe.mortar;
 
-import mysticmods.roots.api.recipe.RootsTileCrafting;
+import mysticmods.roots.api.recipe.crafting.RootsTileCrafting;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import net.minecraft.world.entity.player.Player;
 

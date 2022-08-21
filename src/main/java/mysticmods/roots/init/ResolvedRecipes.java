@@ -1,8 +1,8 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.recipe.PlayerOffhandInventoryHandler;
-import mysticmods.roots.api.recipe.ResolvingRecipeType;
+import mysticmods.roots.api.recipe.inventory.PlayerOffhandInventoryHandler;
+import mysticmods.roots.api.recipe.type.ResolvingRecipeType;
 import mysticmods.roots.recipe.chrysopoeia.ChrysopoeiaRecipe;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;

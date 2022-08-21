@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.api.recipe.PlayerOffhandInventoryHandler;
+import mysticmods.roots.api.recipe.inventory.PlayerOffhandInventoryHandler;
 import mysticmods.roots.init.ModRecipes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;

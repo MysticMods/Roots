@@ -1,7 +1,7 @@
 package mysticmods.roots.api.spells;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.items.ICastingItem;
+import mysticmods.roots.api.item.ICastingItem;
 import mysticmods.roots.api.modifier.Modifier;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

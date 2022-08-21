@@ -1,4 +1,4 @@
-package mysticmods.roots.api.recipe;
+package mysticmods.roots.api.recipe.crafting;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;

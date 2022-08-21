@@ -2,7 +2,7 @@ package mysticmods.roots.recipe.mortar;
 
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.capability.Grant;
-import mysticmods.roots.api.recipe.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.blockentity.MortarBlockEntity;
