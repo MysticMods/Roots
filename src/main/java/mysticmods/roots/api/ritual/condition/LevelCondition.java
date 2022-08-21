@@ -107,7 +107,54 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
   }
 
   // TODO: better implementation of this
-  public static LevelCondition.PillarCondition logPillar(int height) {
-    return new LevelCondition.PillarCondition(RootsAPI.Tags.Blocks.LOG_CAPSTONES, RootsAPI.Tags.Blocks.LOG_PILLARS, height);
+  public static LevelCondition.PillarCondition logPillar(PillarType type, int height) {
+    TagKey<Block> capstone;
+    TagKey<Block> pillar;
+    switch (type) {
+      case ACACIA -> {
+        capstone = RootsAPI.Tags.Blocks.ACACIA_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.ACACIA_PILLARS;
+      }
+      case BIRCH -> {
+        capstone = RootsAPI.Tags.Blocks.BIRCH_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.BIRCH_PILLARS;
+      }
+      case DARK_OAK -> {
+        capstone = RootsAPI.Tags.Blocks.DARK_OAK_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.DARK_OAK_PILLARS;
+      }
+      case JUNGLE -> {
+        capstone = RootsAPI.Tags.Blocks.JUNGLE_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.JUNGLE_PILLARS;
+      }
+      case OAK -> {
+        capstone = RootsAPI.Tags.Blocks.OAK_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.OAK_PILLARS;
+      }
+      case SPRUCE -> {
+        capstone = RootsAPI.Tags.Blocks.SPRUCE_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.SPRUCE_PILLARS;
+      }
+      case CRIMSON -> {
+        capstone = RootsAPI.Tags.Blocks.CRIMSON_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.CRIMSON_PILLARS;
+      }
+      case WARPED -> {
+        capstone = RootsAPI.Tags.Blocks.WARPED_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.WARPED_PILLARS;
+      }
+      case WILDWOOD -> {
+        capstone = RootsAPI.Tags.Blocks.WILDWOOD_CAPSTONES;
+        pillar = RootsAPI.Tags.Blocks.WILDWOOD_PILLARS;
+      }
+      default -> {
+        throw new IllegalStateException("Unexpected value for PillarCondition: '" + type + "' is not a valid PillarType");
+      }
+    }
+    return new PillarCondition(capstone, pillar, height);
+  }
+
+  public enum PillarType {
+    ACACIA, DARK_OAK, JUNGLE, OAK, SPRUCE, BIRCH, CRIMSON, WARPED, WILDWOOD
   }
 }

@@ -35,8 +35,24 @@ public class ModTags {
       b.tag(RootsAPI.Tags.Blocks.MINECRAFT_LOGS_THAT_BURN).addTags(RootsAPI.Tags.Blocks.WILDWOOD_LOGS);
       b.tag(RootsAPI.Tags.Blocks.MINECRAFT_LOGS).addTags(RootsAPI.Tags.Blocks.WILDWOOD_LOGS);
 
-      b.tag(RootsAPI.Tags.Blocks.LOG_CAPSTONES).addTag(RootsAPI.Tags.Blocks.RUNED_LOGS);
-      b.tag(RootsAPI.Tags.Blocks.LOG_PILLARS).add(Blocks.OAK_LOG, Blocks.SPRUCE_LOG, Blocks.BIRCH_LOG, Blocks.JUNGLE_LOG, Blocks.ACACIA_LOG, Blocks.DARK_OAK_LOG, Blocks.CRIMSON_STEM, Blocks.WARPED_STEM, ModBlocks.WILDWOOD_LOG.get());
+      b.tag(RootsAPI.Tags.Blocks.ACACIA_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_ACACIA_LOG);
+      b.tag(RootsAPI.Tags.Blocks.ACACIA_PILLARS).add(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG, Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD);
+      b.tag(RootsAPI.Tags.Blocks.BIRCH_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_BIRCH_LOG);
+      b.tag(RootsAPI.Tags.Blocks.BIRCH_PILLARS).add(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG, Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD);
+      b.tag(RootsAPI.Tags.Blocks.DARK_OAK_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_DARK_OAK_LOG);
+      b.tag(RootsAPI.Tags.Blocks.DARK_OAK_PILLARS).add(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG, Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD);
+      b.tag(RootsAPI.Tags.Blocks.JUNGLE_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_JUNGLE_LOG);
+      b.tag(RootsAPI.Tags.Blocks.JUNGLE_PILLARS).add(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG, Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD);
+      b.tag(RootsAPI.Tags.Blocks.OAK_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_OAK_LOG);
+      b.tag(RootsAPI.Tags.Blocks.OAK_PILLARS).add(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG, Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD);
+      b.tag(RootsAPI.Tags.Blocks.SPRUCE_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_SPRUCE_LOG);
+      b.tag(RootsAPI.Tags.Blocks.SPRUCE_PILLARS).add(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG, Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD);
+      b.tag(RootsAPI.Tags.Blocks.WARPED_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_WARPED_STEM);
+      b.tag(RootsAPI.Tags.Blocks.WARPED_PILLARS).add(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM, Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE);
+      b.tag(RootsAPI.Tags.Blocks.CRIMSON_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_CRIMSON_STEM);
+      b.tag(RootsAPI.Tags.Blocks.CRIMSON_PILLARS).add(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM, Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE);
+      b.tag(RootsAPI.Tags.Blocks.WILDWOOD_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_WILDWOOD_LOG);
+      b.tag(RootsAPI.Tags.Blocks.WILDWOOD_PILLARS).add(ModBlocks.WILDWOOD_LOG.get(), ModBlocks.STRIPPED_WILDWOOD_LOG.get(), ModBlocks.WILDWOOD_WOOD.get(), ModBlocks.STRIPPED_WILDWOOD_WOOD.get());
     });
 
     REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, b -> {

@@ -144,8 +144,25 @@ public abstract class RootsAPI {
       public static TagKey<Block> RUNE_CAPSTONES = modTag("capstones/rune");
       public static TagKey<Block> RUNE_PILLARS = modTag("pillars/rune");
 
-      public static TagKey<Block> LOG_CAPSTONES = modTag("capstones/log");
-      public static TagKey<Block> LOG_PILLARS = modTag("pillars/log");
+      public static TagKey<Block> ACACIA_CAPSTONES = modTag("capstones/log/acacia");
+      public static TagKey<Block> DARK_OAK_CAPSTONES = modTag("capstones/log/dark_oak");
+      public static TagKey<Block> OAK_CAPSTONES = modTag("capstones/log/oak");
+      public static TagKey<Block> BIRCH_CAPSTONES = modTag("capstones/log/birch");
+      public static TagKey<Block> JUNGLE_CAPSTONES = modTag("capstones/log/jungle");
+      public static TagKey<Block> SPRUCE_CAPSTONES = modTag("capstones/log/spruce");
+      public static TagKey<Block> WILDWOOD_CAPSTONES = modTag("capstones/log/wildwood");
+      public static TagKey<Block> CRIMSON_CAPSTONES = modTag("capstones/log/crimson");
+      public static TagKey<Block> WARPED_CAPSTONES = modTag("capstones/log/warped");
+
+      public static TagKey<Block> ACACIA_PILLARS = modTag("pillars/log/acacia");
+      public static TagKey<Block> DARK_OAK_PILLARS = modTag("pillars/log/dark_oak");
+      public static TagKey<Block> OAK_PILLARS = modTag("pillars/log/oak");
+      public static TagKey<Block> BIRCH_PILLARS = modTag("pillars/log/birch");
+      public static TagKey<Block> JUNGLE_PILLARS = modTag("pillars/log/jungle");
+      public static TagKey<Block> SPRUCE_PILLARS = modTag("pillars/log/spruce");
+      public static TagKey<Block> WILDWOOD_PILLARS = modTag("pillars/log/wildwood");
+      public static TagKey<Block> CRIMSON_PILLARS = modTag("pillars/log/crimson");
+      public static TagKey<Block> WARPED_PILLARS = modTag("pillars/log/warped");
 
       private static TagKey<Block> modTag(String name) {
         return BlockTags.create(new ResourceLocation(MODID, name));
