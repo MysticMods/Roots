@@ -1,4 +1,4 @@
-package mysticmods.roots.api.recipe;
+package mysticmods.roots.api.access;
 
 import net.minecraft.world.item.crafting.RecipeManager;
 

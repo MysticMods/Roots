@@ -1,11 +1,11 @@
 package mysticmods.roots;
 
-import mysticmods.roots.api.IPlayerAccessor;
+import mysticmods.roots.api.access.IPlayerAccessor;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
+import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.client.impl.ClientPlayerAccessor;

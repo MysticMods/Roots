@@ -1,6 +1,6 @@
 package mysticmods.roots.client.impl;
 
-import mysticmods.roots.api.IPlayerAccessor;
+import mysticmods.roots.api.access.IPlayerAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;

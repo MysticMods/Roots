@@ -1,6 +1,6 @@
 package mysticmods.roots.impl;
 
-import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
+import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraftforge.server.ServerLifecycleHooks;

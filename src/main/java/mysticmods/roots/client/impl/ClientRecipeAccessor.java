@@ -1,6 +1,6 @@
 package mysticmods.roots.client.impl;
 
-import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
+import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.server.MinecraftServer;
