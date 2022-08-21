@@ -2,15 +2,15 @@
   "replace": false,
   "values": [
     "#roots:herbs/moonglow",
-    "#roots:herbs/spirit_leaf",
+    "#roots:herbs/spiritleaf",
     "#roots:herbs/cloud_berry",
     "#roots:herbs/dewgonia",
     "#roots:herbs/pereskia",
     "#roots:herbs/stalicripe",
-    "#roots:herbs/infernal_bulb",
+    "#roots:herbs/inferno_bulb",
     "#roots:herbs/wildroot",
     "#roots:herbs/wildewheet",
-    "#roots:herbs/spirit_leaf",
-    "#roots:herbs/sacred_moss"
+    "#roots:herbs/spiritleaf",
+    "#roots:herbs/grove_moss"
   ]
 }

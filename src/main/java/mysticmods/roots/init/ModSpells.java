@@ -17,9 +17,9 @@ import java.util.List;
 import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModSpells {
-  public static final RegistryEntry<Spell> GROWTH_INFUSION = spell(Spells.GROWTH_INFUSION, () -> new GrowthInfusionSpell(List.of(Cost.add(ModHerbs.SACRED_MOSS, 0.325))));
+  public static final RegistryEntry<Spell> GROWTH_INFUSION = spell(Spells.GROWTH_INFUSION, () -> new GrowthInfusionSpell(List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.325))));
 
-  public static final RegistryEntry<Modifier> GROWTH_INFUSION_AREA = modifier(Spells.GROWTH_INFUSION, "area", () -> new Modifier(GROWTH_INFUSION, List.of(Cost.add(ModHerbs.SACRED_MOSS, 0.325))));
+  public static final RegistryEntry<Modifier> GROWTH_INFUSION_AREA = modifier(Spells.GROWTH_INFUSION, "area", () -> new Modifier(GROWTH_INFUSION, List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.325))));
 
   public static final RegistryEntry<SpellProperty<Integer>> GROWTH_INFUSION_INTERVAL = property(Spells.GROWTH_INFUSION, "interval", () -> new SpellProperty<>(GROWTH_INFUSION, 110, Property.INTEGER_SERIALIZER, SpellProperties.INTERVAL));
 

@@ -27,15 +27,15 @@ public class ClientSetup {
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEY_LIGHT.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.DEWGONIA_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.INFERNAL_BULB_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.INFERNO_BULB_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.MOONGLOW_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.PERESKIA_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.SPIRIT_LEAF_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.SPIRITLEAF_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.STALICRIPE_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDEWHEET_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDROOT_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.SACRED_MOSS.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.GROVE_MOSS.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_ROOTS.get(), cutout);
   }
 

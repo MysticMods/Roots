@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "roots:item/herbs/sacred_moss"
+    "layer0": "roots:item/herbs/inferno_bulb"
   }
 }

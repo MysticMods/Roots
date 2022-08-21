@@ -26,9 +26,9 @@ public class ModItems {
         .tag(RootsAPI.Tags.Items.WILDROOT_SEEDS, RootsAPI.Tags.Items.WILDROOT_CROP)
         .defaultLang()
         .register();
-    public static final ItemEntry<Item> SACRED_MOSS = REGISTRATE.item("sacred_moss", Item::new)
+    public static final ItemEntry<Item> GROVE_MOSS = REGISTRATE.item("grove_moss", Item::new)
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.SACRED_MOSS_CROP)
+        .tag(RootsAPI.Tags.Items.GROVE_MOSS_CROP)
         .register();
     public static final ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
         .model(subfolder("herbs"))
@@ -38,9 +38,9 @@ public class ModItems {
         .model(subfolder("herbs"))
         .tag(RootsAPI.Tags.Items.DEWGONIA_SEEDS, RootsAPI.Tags.Items.DEWGONIA_CROP)
         .register();
-    public static final ItemEntry<ItemNameBlockItem> INFERNAL_BULB = REGISTRATE.item("infernal_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.INFERNAL_BULB_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> INFERNO_BULB = REGISTRATE.item("inferno_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.INFERNO_BULB_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.INFERNAL_BULB_SEEDS, RootsAPI.Tags.Items.INFERNAL_BULB_CROP)
+        .tag(RootsAPI.Tags.Items.INFERNO_BULB_SEEDS, RootsAPI.Tags.Items.INFERNO_BULB_CROP)
         .register();
     public static final ItemEntry<ItemNameBlockItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new ItemNameBlockItem(ModBlocks.Crops.STALICRIPE_CROP.get(), p))
         .model(subfolder("herbs"))
@@ -54,9 +54,9 @@ public class ModItems {
         .model(subfolder("herbs"))
         .tag(RootsAPI.Tags.Items.PERESKIA_CROP)
         .register();
-    public static final ItemEntry<Item> SPIRIT_LEAF = REGISTRATE.item("spirit_leaf", Item::new)
+    public static final ItemEntry<Item> SPIRITLEAF = REGISTRATE.item("spiritleaf", Item::new)
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.SPIRIT_LEAF_CROP)
+        .tag(RootsAPI.Tags.Items.SPIRITLEAF_CROP)
         .register();
     public static final ItemEntry<Item> WILDEWHEET = REGISTRATE.item("wildewheet", Item::new)
         .model(subfolder("herbs"))
@@ -78,9 +78,9 @@ public class ModItems {
         .model(subfolder("herbs"))
         .tag(RootsAPI.Tags.Items.PERESKIA_SEEDS)
         .register();
-    public static final ItemEntry<ItemNameBlockItem> SPIRIT_LEAF_SEEDS = REGISTRATE.item("spirit_leaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.SPIRIT_LEAF_CROP.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> SPIRITLEAF_SEEDS = REGISTRATE.item("spiritleaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.SPIRITLEAF_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.SPIRIT_LEAF_SEEDS)
+        .tag(RootsAPI.Tags.Items.SPIRITLEAF_SEEDS)
         .register();
     public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDEWHEET_CROP.get(), p))
         .model(subfolder("herbs"))

@@ -1,7 +1,7 @@
 {
   "costs": [
     {
-      "herb": "roots:sacred_moss",
+      "herb": "roots:grove_moss",
       "value": 0.325,
       "type": "additive"
     }

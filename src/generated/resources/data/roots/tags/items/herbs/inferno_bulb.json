@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "roots:spirit_leaf_crop"
+    "#roots:crops/inferno_bulb"
   ]
 }

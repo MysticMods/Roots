@@ -953,10 +953,10 @@ public class ModBlocks {
         .tag(RootsAPI.Tags.Blocks.DEWGONIA_CROP)
         .register();
 
-    public static BlockEntry<ElementalCropBlock> INFERNAL_BULB_CROP = REGISTRATE.block("infernal_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.INFERNAL_BULB))
+    public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.INFERNO_BULB))
         .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
         .blockstate(BlockstateGenerator::crossBlockstate)
-        .tag(RootsAPI.Tags.Blocks.INFERNAL_BULB_CROP)
+        .tag(RootsAPI.Tags.Blocks.INFERNO_BULB_CROP)
         .register();
 
     public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.STALICRIPE))
@@ -975,10 +975,10 @@ public class ModBlocks {
         .blockstate(BlockstateGenerator::crossBlockstate)
         .tag(RootsAPI.Tags.Blocks.PERESKIA_CROP)
         .register();
-    public static BlockEntry<ThreeStageCropBlock> SPIRIT_LEAF_CROP = REGISTRATE.block("spirit_leaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Seeds.SPIRIT_LEAF_SEEDS))
+    public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Seeds.SPIRITLEAF_SEEDS))
         .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
-        .tag(RootsAPI.Tags.Blocks.SPIRIT_LEAF_CROP)
+        .tag(RootsAPI.Tags.Blocks.SPIRITLEAF_CROP)
         .register();
     public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.WILDEWHEET_SEEDS))
         .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
@@ -1102,7 +1102,7 @@ public class ModBlocks {
 
       .register();
 
-  public static BlockEntry<Block> SACRED_MOSS = REGISTRATE.block("creeping_sacred_moss", Material.GRASS, Block::new)
+  public static BlockEntry<Block> GROVE_MOSS = REGISTRATE.block("creeping_grove_moss", Material.GRASS, Block::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/moss"))
 

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "roots:item/herbs/infernal_bulb"
+    "layer0": "roots:item/herbs/spiritleaf_seeds"
   }
 }

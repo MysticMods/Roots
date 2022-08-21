@@ -22,11 +22,11 @@ public class ModTags {
       b.tag(RootsAPI.Tags.Blocks.SOILS).addTags(RootsAPI.Tags.Blocks.EARTH_SOIL, RootsAPI.Tags.Blocks.AIR_SOIL, RootsAPI.Tags.Blocks.FIRE_SOIL, RootsAPI.Tags.Blocks.WATER_SOIL, RootsAPI.Tags.Blocks.ELEMENTAL_SOIL);
       b.tag(RootsAPI.Tags.Blocks.RUNED_LOGS).addTags(RootsAPI.Tags.Blocks.RUNED_ACACIA_LOG, RootsAPI.Tags.Blocks.RUNED_BIRCH_LOG, RootsAPI.Tags.Blocks.RUNED_OAK_LOG, RootsAPI.Tags.Blocks.RUNED_DARK_OAK_LOG, RootsAPI.Tags.Blocks.RUNED_CRIMSON_STEM, RootsAPI.Tags.Blocks.RUNED_JUNGLE_LOG, RootsAPI.Tags.Blocks.RUNED_SPRUCE_LOG, RootsAPI.Tags.Blocks.RUNED_WARPED_STEM, RootsAPI.Tags.Blocks.RUNED_WILDWOOD_LOG);
       b.tag(RootsAPI.Tags.Blocks.AIR_CROPS).addTags(RootsAPI.Tags.Blocks.CLOUD_BERRY_CROP);
-      b.tag(RootsAPI.Tags.Blocks.FIRE_CROPS).addTags(RootsAPI.Tags.Blocks.INFERNAL_BULB_CROP);
+      b.tag(RootsAPI.Tags.Blocks.FIRE_CROPS).addTags(RootsAPI.Tags.Blocks.INFERNO_BULB_CROP);
       b.tag(RootsAPI.Tags.Blocks.WATER_CROPS).addTags(RootsAPI.Tags.Blocks.DEWGONIA_CROP);
       b.tag(RootsAPI.Tags.Blocks.EARTH_CROPS).addTags(RootsAPI.Tags.Blocks.STALICRIPE_CROP);
       b.tag(RootsAPI.Tags.Blocks.ELEMENTAL_CROPS).addTags(RootsAPI.Tags.Blocks.WATER_CROPS, RootsAPI.Tags.Blocks.AIR_CROPS, RootsAPI.Tags.Blocks.EARTH_CROPS, RootsAPI.Tags.Blocks.FIRE_CROPS);
-      b.tag(RootsAPI.Tags.Blocks.CROPS).addTags(RootsAPI.Tags.Blocks.WILDEWHEET_CROP, RootsAPI.Tags.Blocks.WILDROOT_CROP, RootsAPI.Tags.Blocks.SPIRIT_LEAF_CROP, RootsAPI.Tags.Blocks.PERESKIA_CROP, RootsAPI.Tags.Blocks.MOONGLOW_CROP, RootsAPI.Tags.Blocks.ELEMENTAL_CROPS);
+      b.tag(RootsAPI.Tags.Blocks.CROPS).addTags(RootsAPI.Tags.Blocks.WILDEWHEET_CROP, RootsAPI.Tags.Blocks.WILDROOT_CROP, RootsAPI.Tags.Blocks.SPIRITLEAF_CROP, RootsAPI.Tags.Blocks.PERESKIA_CROP, RootsAPI.Tags.Blocks.MOONGLOW_CROP, RootsAPI.Tags.Blocks.ELEMENTAL_CROPS);
 
       // Forge compat tags
       b.tag(RootsAPI.Tags.Blocks.FORGE_CROPS).addTag(RootsAPI.Tags.Blocks.CROPS);
@@ -65,9 +65,9 @@ public class ModTags {
       b.tag(RootsAPI.Tags.Items.AIR_CROPS).addTags(RootsAPI.Tags.Items.CLOUD_BERRY_CROP);
       b.tag(RootsAPI.Tags.Items.WATER_CROPS).addTags(RootsAPI.Tags.Items.DEWGONIA_CROP);
       b.tag(RootsAPI.Tags.Items.EARTH_CROPS).addTags(RootsAPI.Tags.Items.STALICRIPE_CROP);
-      b.tag(RootsAPI.Tags.Items.FIRE_CROPS).addTags(RootsAPI.Tags.Items.INFERNAL_BULB_CROP);
+      b.tag(RootsAPI.Tags.Items.FIRE_CROPS).addTags(RootsAPI.Tags.Items.INFERNO_BULB_CROP);
 
-      b.tag(RootsAPI.Tags.Items.CROPS).addTags(RootsAPI.Tags.Items.AIR_CROPS, RootsAPI.Tags.Items.FIRE_CROPS, RootsAPI.Tags.Items.EARTH_CROPS, RootsAPI.Tags.Items.WATER_CROPS, RootsAPI.Tags.Items.WILDEWHEET_CROP, RootsAPI.Tags.Items.SPIRIT_LEAF_CROP, RootsAPI.Tags.Items.PERESKIA_CROP, RootsAPI.Tags.Items.WILDROOT_CROP, RootsAPI.Tags.Items.MOONGLOW_CROP);
+      b.tag(RootsAPI.Tags.Items.CROPS).addTags(RootsAPI.Tags.Items.AIR_CROPS, RootsAPI.Tags.Items.FIRE_CROPS, RootsAPI.Tags.Items.EARTH_CROPS, RootsAPI.Tags.Items.WATER_CROPS, RootsAPI.Tags.Items.WILDEWHEET_CROP, RootsAPI.Tags.Items.SPIRITLEAF_CROP, RootsAPI.Tags.Items.PERESKIA_CROP, RootsAPI.Tags.Items.WILDROOT_CROP, RootsAPI.Tags.Items.MOONGLOW_CROP);
 
       b.tag(RootsAPI.Tags.Items.BARKS).addTags(RootsAPI.Tags.Items.BIRCH_BARK, RootsAPI.Tags.Items.ACACIA_BARK, RootsAPI.Tags.Items.DARK_OAK_BARK, RootsAPI.Tags.Items.OAK_BARK, RootsAPI.Tags.Items.JUNGLE_BARK, RootsAPI.Tags.Items.SPRUCE_BARK, RootsAPI.Tags.Items.WILDWOOD_BARK, RootsAPI.Tags.Items.CRIMSON_BARK, RootsAPI.Tags.Items.WARPED_BARK, RootsAPI.Tags.Items.MIXED_BARK);
 
@@ -76,18 +76,18 @@ public class ModTags {
       b.tag(RootsAPI.Tags.Items.PYRE_ACTIVATION).add(Items.FLINT_AND_STEEL);
 
       b.tag(RootsAPI.Tags.Items.Herbs.MOONGLOW).addTag(RootsAPI.Tags.Items.MOONGLOW_CROP);
-      b.tag(RootsAPI.Tags.Items.Herbs.SPIRIT_LEAF).addTag(RootsAPI.Tags.Items.SPIRIT_LEAF_CROP);
+      b.tag(RootsAPI.Tags.Items.Herbs.SPIRITLEAF).addTag(RootsAPI.Tags.Items.SPIRITLEAF_CROP);
       b.tag(RootsAPI.Tags.Items.Herbs.CLOUD_BERRY).addTag(RootsAPI.Tags.Items.CLOUD_BERRY_CROP);
       b.tag(RootsAPI.Tags.Items.Herbs.DEWGONIA).addTag(RootsAPI.Tags.Items.DEWGONIA_CROP);
       b.tag(RootsAPI.Tags.Items.Herbs.PERESKIA).addTag(RootsAPI.Tags.Items.PERESKIA_CROP);
       b.tag(RootsAPI.Tags.Items.Herbs.STALICRIPE).addTag(RootsAPI.Tags.Items.STALICRIPE_CROP);
-      b.tag(RootsAPI.Tags.Items.Herbs.INFERNAL_BULB).addTag(RootsAPI.Tags.Items.INFERNAL_BULB_CROP);
+      b.tag(RootsAPI.Tags.Items.Herbs.INFERNO_BULB).addTag(RootsAPI.Tags.Items.INFERNO_BULB_CROP);
       b.tag(RootsAPI.Tags.Items.Herbs.WILDROOT).addTag(RootsAPI.Tags.Items.WILDROOT_CROP);
       b.tag(RootsAPI.Tags.Items.Herbs.WILDEWHEET).addTag(RootsAPI.Tags.Items.WILDEWHEET_CROP);
-      b.tag(RootsAPI.Tags.Items.Herbs.SPIRIT_LEAF).addTag(RootsAPI.Tags.Items.SPIRIT_LEAF_CROP);
-      b.tag(RootsAPI.Tags.Items.Herbs.SACRED_MOSS).addTag(RootsAPI.Tags.Items.SACRED_MOSS_CROP);
+      b.tag(RootsAPI.Tags.Items.Herbs.SPIRITLEAF).addTag(RootsAPI.Tags.Items.SPIRITLEAF_CROP);
+      b.tag(RootsAPI.Tags.Items.Herbs.GROVE_MOSS).addTag(RootsAPI.Tags.Items.GROVE_MOSS_CROP);
 
-      b.tag(RootsAPI.Tags.Items.Herbs.HERBS).addTags(RootsAPI.Tags.Items.Herbs.MOONGLOW, RootsAPI.Tags.Items.Herbs.SPIRIT_LEAF, RootsAPI.Tags.Items.Herbs.CLOUD_BERRY, RootsAPI.Tags.Items.Herbs.DEWGONIA, RootsAPI.Tags.Items.Herbs.PERESKIA, RootsAPI.Tags.Items.Herbs.STALICRIPE, RootsAPI.Tags.Items.Herbs.INFERNAL_BULB, RootsAPI.Tags.Items.Herbs.WILDROOT, RootsAPI.Tags.Items.Herbs.WILDEWHEET, RootsAPI.Tags.Items.Herbs.SPIRIT_LEAF, RootsAPI.Tags.Items.Herbs.SACRED_MOSS);
+      b.tag(RootsAPI.Tags.Items.Herbs.HERBS).addTags(RootsAPI.Tags.Items.Herbs.MOONGLOW, RootsAPI.Tags.Items.Herbs.SPIRITLEAF, RootsAPI.Tags.Items.Herbs.CLOUD_BERRY, RootsAPI.Tags.Items.Herbs.DEWGONIA, RootsAPI.Tags.Items.Herbs.PERESKIA, RootsAPI.Tags.Items.Herbs.STALICRIPE, RootsAPI.Tags.Items.Herbs.INFERNO_BULB, RootsAPI.Tags.Items.Herbs.WILDROOT, RootsAPI.Tags.Items.Herbs.WILDEWHEET, RootsAPI.Tags.Items.Herbs.SPIRITLEAF, RootsAPI.Tags.Items.Herbs.GROVE_MOSS);
 
       // TODO: Copying crops to the actual item tag?
     });

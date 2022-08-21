@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "roots:block/crops/infernal_bulb_1"
+    "cross": "roots:block/crops/inferno_bulb_0"
   }
 }
