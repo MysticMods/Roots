@@ -18,6 +18,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -57,6 +58,8 @@ public abstract class RootsAPI {
   public abstract IRecipeManagerAccessor getRecipeAccessor();
 
   public abstract void grant(ServerPlayer player, Grant grant);
+
+  public abstract Player getPlayer ();
 
   public RecipeManager getRecipeManager() {
     return getRecipeAccessor().getManager();

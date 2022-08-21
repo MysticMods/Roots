@@ -1,5 +1,6 @@
 package mysticmods.roots;
 
+import mysticmods.roots.api.IPlayerAccessor;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
@@ -7,10 +8,13 @@ import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.recipe.IRecipeManagerAccessor;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.client.impl.ClientPlayerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
+import mysticmods.roots.impl.ServerPlayerAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,6 +28,8 @@ import noobanidus.libs.noobutil.data.generator.RecipeGenerator;
 import noobanidus.libs.noobutil.reference.ModData;
 import noobanidus.libs.noobutil.registrate.CustomRegistrate;
 import noobanidus.libs.particleslib.config.ConfigManager;
+
+import javax.annotation.Nullable;
 
 @Mod(RootsAPI.MODID)
 public class Roots {
@@ -48,10 +54,17 @@ public class Roots {
 
     RootsAPI.INSTANCE = new RootsAPI() {
       private final IRecipeManagerAccessor accessor = DistExecutor.safeRunForDist(() -> ClientRecipeAccessor::new, () -> ServerRecipeAccessor::new);
+      private final IPlayerAccessor playerAccessor = DistExecutor.safeRunForDist(() -> ClientPlayerAccessor::new, () -> ServerPlayerAccessor::new);
 
       @Override
       public IRecipeManagerAccessor getRecipeAccessor() {
         return accessor;
+      }
+
+      @Nullable
+      @Override
+      public Player getPlayer () {
+        return playerAccessor.getPlayer();
       }
 
       // TODO:
