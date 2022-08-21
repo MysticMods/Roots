@@ -212,7 +212,7 @@ public class Costing {
           }
           cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
           if (cap.isDirty()) {
-            Networking.sendTo(new ClientBoundCapabilitySynchronization(player, RootsAPI.HERB_CAPABILITY_ID), (ServerPlayer) player);
+            RootsAPI.getInstance().synchronizeCapability((ServerPlayer) player, RootsAPI.HERB_CAPABILITY_ID);
           }
           playerInventory.setChanged();
         }

@@ -15,6 +15,7 @@ import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
 import mysticmods.roots.network.client.ClientBoundCapabilitySynchronization;
 import mysticmods.roots.network.Networking;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -85,10 +86,14 @@ public class Roots {
             }
           }
           if (cap.isDirty()) {
-            Networking.sendTo(new ClientBoundCapabilitySynchronization(player, RootsAPI.GRANT_CAPABILITY_ID), player);
+            synchronizeCapability(player, RootsAPI.GRANT_CAPABILITY_ID);
           }
         });
-        // TODO: Synchronize this
+      }
+
+      @Override
+      public void synchronizeCapability(ServerPlayer player, ResourceLocation capability) {
+        Networking.sendTo(new ClientBoundCapabilitySynchronization(player, capability), player);
       }
     };
 

@@ -84,7 +84,7 @@ public class TokenItem extends Item {
       }
       if (result != null) {
         if (cap.isDirty()) {
-          Networking.sendTo(new ClientBoundCapabilitySynchronization(pPlayer, RootsAPI.GRANT_CAPABILITY_ID), (ServerPlayer) pPlayer);
+          RootsAPI.getInstance().synchronizeCapability((ServerPlayer) pPlayer, RootsAPI.GRANT_CAPABILITY_ID);
         }
         return result;
       }
