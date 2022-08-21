@@ -11,7 +11,7 @@ import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.network.ClientBoundCapabilitySynchronization;
+import mysticmods.roots.network.client.ClientBoundCapabilitySynchronization;
 import mysticmods.roots.network.Networking;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;

@@ -13,7 +13,7 @@ import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.impl.ServerPlayerAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
-import mysticmods.roots.network.ClientBoundCapabilitySynchronization;
+import mysticmods.roots.network.client.ClientBoundCapabilitySynchronization;
 import mysticmods.roots.network.Networking;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

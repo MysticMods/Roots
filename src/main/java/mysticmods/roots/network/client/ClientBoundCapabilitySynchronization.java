@@ -1,19 +1,15 @@
-package mysticmods.roots.network;
+package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.capability.HerbCapability;
-import mysticmods.roots.api.herbs.Cost;
-import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.registry.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.Collection;
 import java.util.function.Supplier;
 
 public class ClientBoundCapabilitySynchronization {
