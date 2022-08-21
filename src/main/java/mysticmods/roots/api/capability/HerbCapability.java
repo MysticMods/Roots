@@ -2,7 +2,6 @@ package mysticmods.roots.api.capability;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
-import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.registry.Registries;

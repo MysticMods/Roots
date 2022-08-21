@@ -1,10 +1,10 @@
 package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.network.Networking;
 import mysticmods.roots.network.client.ClientBoundRitualPropertyPacket;
 import mysticmods.roots.network.client.ClientBoundSpellCostsPacket;
 import mysticmods.roots.network.client.ClientBoundSpellPropertyPacket;
-import mysticmods.roots.network.Networking;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

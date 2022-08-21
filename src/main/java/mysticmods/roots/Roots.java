@@ -1,11 +1,11 @@
 package mysticmods.roots;
 
-import mysticmods.roots.api.access.IPlayerAccessor;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.access.IPlayerAccessor;
+import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.client.impl.ClientPlayerAccessor;
@@ -13,8 +13,8 @@ import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.impl.ServerPlayerAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
-import mysticmods.roots.network.client.ClientBoundCapabilitySynchronization;
 import mysticmods.roots.network.Networking;
+import mysticmods.roots.network.client.ClientBoundCapabilitySynchronization;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -66,7 +66,7 @@ public class Roots {
 
       @Nullable
       @Override
-      public Player getPlayer () {
+      public Player getPlayer() {
         return playerAccessor.getPlayer();
       }
 

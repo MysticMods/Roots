@@ -2,8 +2,8 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.recipe.chrysopoeia.ChrysopoeiaRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;

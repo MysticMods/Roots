@@ -4,9 +4,10 @@ import net.minecraft.network.FriendlyByteBuf;
 
 public interface INetworkedCapability {
   void toNetwork(FriendlyByteBuf buf);
+
   void fromNetwork(FriendlyByteBuf buf);
 
-  void setDirty (boolean dirty);
+  void setDirty(boolean dirty);
 
-  boolean isDirty ();
+  boolean isDirty();
 }
