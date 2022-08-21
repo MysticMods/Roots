@@ -11,10 +11,13 @@ import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.network.ClientBoundCapabilitySynchronization;
+import mysticmods.roots.network.Networking;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
@@ -169,6 +172,9 @@ public class Costing {
 
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
   public void charge(Player player) {
+    if (player.getLevel().isClientSide()) {
+      throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
+    }
     calculateCosts(true);
 
     Inventory playerInventory = player.getInventory();
@@ -205,6 +211,9 @@ public class Costing {
             RootsAPI.LOG.info("Remainder left over! OH NO! {}", toConsume);
           }
           cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
+          if (cap.isDirty()) {
+            Networking.sendTo(new ClientBoundCapabilitySynchronization(player, RootsAPI.HERB_CAPABILITY_ID), (ServerPlayer) player);
+          }
           playerInventory.setChanged();
         }
       }

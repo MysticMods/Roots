@@ -13,6 +13,8 @@ import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.impl.ServerPlayerAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
+import mysticmods.roots.network.ClientBoundCapabilitySynchronization;
+import mysticmods.roots.network.Networking;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -81,6 +83,9 @@ public class Roots {
             if (modifier != null) {
               cap.grantModifier(modifier);
             }
+          }
+          if (cap.isDirty()) {
+            Networking.sendTo(new ClientBoundCapabilitySynchronization(player, RootsAPI.GRANT_CAPABILITY_ID), player);
           }
         });
         // TODO: Synchronize this

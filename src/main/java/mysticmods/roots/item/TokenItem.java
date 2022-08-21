@@ -1,16 +1,20 @@
 package mysticmods.roots.item;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.network.ClientBoundCapabilitySynchronization;
+import mysticmods.roots.network.Networking;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -61,22 +65,30 @@ public class TokenItem extends Item {
         return InteractionResultHolder.fail(stack);
       }
       GrantCapability cap = oCap.orElseThrow(() -> new IllegalStateException("Grant capability is not present even though it said it was present for '" + pPlayer.getName().getString() + "'"));
+      InteractionResultHolder<ItemStack> result = null;
       switch (tag.getString("type").toLowerCase(Locale.ROOT)) {
         case "spell" -> {
           Spell spell = Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("id")));
           if (spell != null) {
             cap.grantSpell(spell);
-            return InteractionResultHolder.success(stack);
+            result = InteractionResultHolder.success(stack);
           }
         }
         case "modifier" -> {
           Modifier modifier = Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(tag.getString("id")));
           if (modifier != null) {
             cap.grantModifier(modifier);
-            return InteractionResultHolder.success(stack);
+            result = InteractionResultHolder.success(stack);
           }
         }
       }
+      if (result != null) {
+        if (cap.isDirty()) {
+          Networking.sendTo(new ClientBoundCapabilitySynchronization(pPlayer, RootsAPI.GRANT_CAPABILITY_ID), (ServerPlayer) pPlayer);
+        }
+        return result;
+      }
+      return InteractionResultHolder.fail(stack);
     }
 
     return InteractionResultHolder.fail(stack);
