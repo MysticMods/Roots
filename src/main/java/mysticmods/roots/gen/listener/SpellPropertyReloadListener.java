@@ -1,4 +1,4 @@
-package mysticmods.roots.gen;
+package mysticmods.roots.gen.listener;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

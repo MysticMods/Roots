@@ -1,10 +1,10 @@
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.gen.ModifierCostProvider;
-import mysticmods.roots.gen.RitualPropertyProvider;
-import mysticmods.roots.gen.SpellCostProvider;
-import mysticmods.roots.gen.SpellPropertyProvider;
+import mysticmods.roots.gen.provider.ModifierCostProvider;
+import mysticmods.roots.gen.provider.RitualPropertyProvider;
+import mysticmods.roots.gen.provider.SpellCostProvider;
+import mysticmods.roots.gen.provider.SpellPropertyProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
