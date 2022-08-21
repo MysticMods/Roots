@@ -2,7 +2,7 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import mysticmods.roots.api.Grant;
+import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.recipe.chrysopoeia.ChrysopoeiaRecipe;
@@ -27,7 +27,7 @@ public class ModRecipes {
       PyreRecipe.builder(ModRituals.TRANSMUTATION.get()).addLevelCondition(ModRituals.RUNE_PILLAR_3_HIGH.get()).addLevelCondition(ModRituals.RUNE_PILLAR_3_HIGH.get()).addIngredient(net.minecraftforge.common.Tags.Items.COBBLESTONE).addIngredient(net.minecraftforge.common.Tags.Items.COBBLESTONE).addIngredient(net.minecraftforge.common.Tags.Items.COBBLESTONE).addIngredient(net.minecraftforge.common.Tags.Items.COBBLESTONE).addIngredient(net.minecraftforge.common.Tags.Items.COBBLESTONE).build(p, new ResourceLocation(RootsAPI.MODID, "ritual/transmutation"));
       PyreRecipe.builder(ModItems.Herbs.MOONGLOW.get(), 1).addIngredient(ItemTags.LEAVES).addIngredient(net.minecraftforge.common.Tags.Items.GLASS).addIngredient(net.minecraftforge.common.Tags.Items.GEMS_QUARTZ).addIngredient(RootsAPI.Tags.Items.BIRCH_BARK).addIngredient(RootsAPI.Tags.Items.BIRCH_BARK).build(p, new ResourceLocation(RootsAPI.MODID, "moonglow"));
       PyreRecipe.builder(ModRituals.ANIMAL_HARVEST.get()).addIngredient(RootsAPI.Tags.Items.WILDEWHEET_CROP).addIngredient(ItemTags.WOOL).addIngredient(net.minecraftforge.common.Tags.Items.CROPS_CARROT).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsAPI.Tags.Items.WILDROOT_CROP).build(p, new ResourceLocation(RootsAPI.MODID, "ritual/animal_harvest"));
-      MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsAPI.Tags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.GrantType.SPELL, Spells.GROWTH_INFUSION.location())).build(p, new ResourceLocation(RootsAPI.MODID, "spell/growth_infusion"));
+      MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsAPI.Tags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.Type.SPELL, Spells.GROWTH_INFUSION.location())).build(p, new ResourceLocation(RootsAPI.MODID, "spell/growth_infusion"));
     });
   }
 

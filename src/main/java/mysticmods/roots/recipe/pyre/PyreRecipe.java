@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.api.Grant;
+import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.recipe.ConditionalOutput;
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;

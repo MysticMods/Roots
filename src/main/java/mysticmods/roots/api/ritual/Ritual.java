@@ -1,6 +1,6 @@
 package mysticmods.roots.api.ritual;
 
-import mysticmods.roots.api.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.resources.ResourceLocation;

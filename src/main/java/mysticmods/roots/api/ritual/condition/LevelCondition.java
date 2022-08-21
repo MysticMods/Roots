@@ -1,6 +1,6 @@
 package mysticmods.roots.api.ritual.condition;
 
-import mysticmods.roots.api.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;

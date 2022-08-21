@@ -1,6 +1,6 @@
 package mysticmods.roots.api.herbs;
 
-import mysticmods.roots.api.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

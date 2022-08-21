@@ -1,5 +1,6 @@
 package mysticmods.roots.api;
 
+import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
@@ -41,6 +42,7 @@ public abstract class RootsAPI {
   public static ResourceKey<Registry<PlayerCondition>> RITUAL_PLAYER_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "ritual_player_conditions"));
 
   public static final ResourceLocation HERB_CAPABILITY_ID = new ResourceLocation(MODID, "herb_capability");
+  public static final ResourceLocation GRANT_CAPABILITY_ID = new ResourceLocation(MODID, "grant_capability");
 
   public static RootsAPI INSTANCE;
 

@@ -1,6 +1,6 @@
 package mysticmods.roots.api.property;
 
-import mysticmods.roots.api.IDescribedRegistryEntry;
+import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.Util;

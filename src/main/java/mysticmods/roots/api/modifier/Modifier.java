@@ -1,7 +1,7 @@
 package mysticmods.roots.api.modifier;
 
-import mysticmods.roots.api.DescribedRegistryEntry;
-import mysticmods.roots.api.IHasCost;
+import mysticmods.roots.api.registry.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.IHasCost;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spells.Spell;

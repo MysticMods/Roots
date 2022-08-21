@@ -1,4 +1,4 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.registry;
 
 import net.minecraft.Util;
 import net.minecraftforge.registries.ForgeRegistryEntry;

@@ -1,8 +1,9 @@
-package mysticmods.roots.api;
+package mysticmods.roots.api.capability;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,15 +14,15 @@ import java.util.Locale;
 import java.util.function.Consumer;
 
 public class Grant implements Consumer<ServerPlayer> {
-  private final GrantType type;
+  private final Type type;
   private final ResourceLocation id;
 
-  public Grant(GrantType type, ResourceLocation id) {
+  public Grant(Type type, ResourceLocation id) {
     this.type = type;
     this.id = id;
   }
 
-  public GrantType getType() {
+  public Type getType() {
     return type;
   }
 
@@ -59,16 +60,16 @@ public class Grant implements Consumer<ServerPlayer> {
       if (pJsonObject.get("id").isJsonNull()) {
         throw new JsonSyntaxException("Grant must have an id");
       }
-      GrantType type = EnumUtil.fromString(GrantType.class, GsonHelper.getAsString(pJsonObject, "type"));
+      Type type = EnumUtil.fromString(Type.class, GsonHelper.getAsString(pJsonObject, "type"));
       return new Grant(type, new ResourceLocation(GsonHelper.getAsString(pJsonObject, "id")));
     }
   }
 
   public static Grant fromNetwork(FriendlyByteBuf pBuffer) {
-    return new Grant(EnumUtil.fromOrdinal(GrantType.class, pBuffer.readVarInt()), pBuffer.readResourceLocation());
+    return new Grant(EnumUtil.fromOrdinal(Type.class, pBuffer.readVarInt()), pBuffer.readResourceLocation());
   }
 
-  public enum GrantType {
+  public enum Type {
     SPELL,
     MODIFIER
   }
