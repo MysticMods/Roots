@@ -6,7 +6,6 @@ import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.registry.VanillaRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.condition.LevelCondition;
 import mysticmods.roots.api.ritual.condition.PlayerCondition;
@@ -35,7 +34,7 @@ public class ModRegistries {
     Registries.SPELL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(c(SpellProperty.class), () -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving()));
     Registries.RITUAL_LEVEL_CONDITION = ForgeRegistryWrapper.of(DEFERRED_RITUAL_LEVEL_CONDITION_REGISTRY.makeRegistry(LevelCondition.class, () -> new RegistryBuilder<LevelCondition>().disableSync().disableSaving()));
     Registries.RITUAL_PLAYER_CONDITION = ForgeRegistryWrapper.of(DEFERRED_RITUAL_PLAYER_CONDITION_REGISTRY.makeRegistry(PlayerCondition.class, () -> new RegistryBuilder<PlayerCondition>().disableSync().disableSaving()));
-    VanillaRegistries.ENTITIES = ForgeRegistryWrapper.of(() -> ForgeRegistries.ENTITIES);
+    Registries.ENTITIES = ForgeRegistryWrapper.of(() -> ForgeRegistries.ENTITIES);
   }
 
   private static <T> Class<T> c(Class<?> cls) {
