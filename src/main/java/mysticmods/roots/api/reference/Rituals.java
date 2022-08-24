@@ -11,9 +11,9 @@ public interface Rituals {
 
   // ACTUAL RITUALS, NOT ALL CONFIRMED
   ResourceKey<Ritual> ANIMAL_HARVEST = ritual("animal_harvest");
-  ResourceKey<Ritual> DIVINE_PROTECTION = ritual("divine_protection");
+  ResourceKey<Ritual> PROTECTION = ritual("protection");
   ResourceKey<Ritual> FIRE_STORM = ritual("fire_storm");
-  ResourceKey<Ritual> FLOWER_GROWTH = ritual("flower_growth");
+  ResourceKey<Ritual> BLOOMING = ritual("blooming");
   ResourceKey<Ritual> FROST_LANDS = ritual("frost_lands");
   ResourceKey<Ritual> GATHERING = ritual("gathering");
   ResourceKey<Ritual> GERMINATION = ritual("germination");
@@ -24,7 +24,7 @@ public interface Rituals {
   ResourceKey<Ritual> SPREADING_FOREST = ritual("spreading_forest");
   ResourceKey<Ritual> SUMMON_CREATURES = ritual("summon_creatures");
   ResourceKey<Ritual> TRANSMUTATION = ritual("transmutation");
-  ResourceKey<Ritual> WARDING_PROTECTION = ritual("warding_protection");
+  ResourceKey<Ritual> WARDING = ritual("warding");
   ResourceKey<Ritual> WILDROOT_GROWTH = ritual("wildroot_growth");
   ResourceKey<Ritual> WINDWALL = ritual("windwall");
 
