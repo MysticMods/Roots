@@ -1,0 +1,6 @@
+{
+  "ritual": "roots:heavy_storms",
+  "value": 110,
+  "default_value": 110,
+  "_comment": "How often the ritual is executed (must be shorter than duration)"
+}

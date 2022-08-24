@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -26,7 +27,25 @@ public class CraftingRitual extends Ritual {
 
   @Override
   public void initialize() {
-    this.duration = ModRituals.CRAFTING_DURATION.get().getValue();
-    this.interval = ModRituals.CRAFTING_INTERVAL.get().getValue();
+  }
+
+  @Override
+  protected RitualProperty<Integer> getDurationProperty() {
+    return ModRituals.CRAFTING_DURATION.get();
+  }
+
+  @Override
+  protected RitualProperty<Integer> getRadiusXZProperty() {
+    return null;
+  }
+
+  @Override
+  protected RitualProperty<Integer> getRadiusYProperty() {
+    return null;
+  }
+
+  @Override
+  protected RitualProperty<Integer> getIntervalProperty() {
+    return ModRituals.CRAFTING_INTERVAL.get();
   }
 }

@@ -1,6 +1,7 @@
 package mysticmods.roots.ritual;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -69,13 +70,29 @@ public class AnimalHarvestRitual extends Ritual {
 
   @Override
   public void initialize() {
-    duration = ModRituals.ANIMAL_HARVEST_DURATION.get().getValue();
-    interval = ModRituals.ANIMAL_HARVEST_INTERVAL.get().getValue();
     count = ModRituals.ANIMAL_HARVEST_COUNT.get().getValue();
-    radiusXZ = ModRituals.ANIMAL_HARVEST_RADIUS_XZ.get().getValue();
-    radiusY = ModRituals.ANIMAL_HARVEST_RADIUS_Y.get().getValue();
     glowDuration = ModRituals.ANIMAL_HARVEST_GLOW_DURATION.get().getValue();
     lootingValue = ModRituals.ANIMAL_HARVEST_LOOTING_VALUE.get().getValue();
     lootingChance = ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE.get().getValue();
+  }
+
+  @Override
+  protected RitualProperty<Integer> getDurationProperty() {
+    return ModRituals.ANIMAL_HARVEST_DURATION.get();
+  }
+
+  @Override
+  protected RitualProperty<Integer> getRadiusXZProperty() {
+    return ModRituals.ANIMAL_HARVEST_RADIUS_XZ.get();
+  }
+
+  @Override
+  protected RitualProperty<Integer> getRadiusYProperty() {
+    return ModRituals.ANIMAL_HARVEST_RADIUS_Y.get();
+  }
+
+  @Override
+  protected RitualProperty<Integer> getIntervalProperty() {
+    return ModRituals.ANIMAL_HARVEST_INTERVAL.get();
   }
 }

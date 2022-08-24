@@ -1,0 +1,6 @@
+{
+  "ritual": "roots:transmutation",
+  "value": 3200,
+  "default_value": 3200,
+  "_comment": "The length of the ritual"
+}

@@ -1,5 +1,6 @@
 package mysticmods.roots.api.ritual;
 
+import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -10,10 +11,10 @@ import net.minecraft.world.phys.AABB;
 public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   protected BoundingBox boundingBox;
   protected AABB aabb;
-  protected int duration;
-  protected int radiusXZ;
-  protected int radiusY;
-  protected int interval;
+  protected int duration = 0;
+  protected int radiusXZ = 0;
+  protected int radiusY = 0;
+  protected int interval = 0;
 
   public void tick(PyreBlockEntity blockEntity) {
     int dur = getDuration() - blockEntity.getLifetime();
@@ -31,9 +32,30 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
     aabb = AABB.of(getBoundingBox());
   }
 
+  private void initProperties () {
+    RitualProperty<Integer> prop;
+    prop = getDurationProperty();
+    if (prop != null) {
+      duration = prop.getValue();
+    }
+    prop = getRadiusYProperty();
+    if (prop != null) {
+      radiusY = prop.getValue();
+    }
+    prop = getRadiusXZProperty();
+    if (prop != null) {
+      radiusXZ = prop.getValue();
+    }
+    prop = getIntervalProperty();
+    if (prop != null) {
+      interval = prop.getValue();
+    }
+  }
+
   protected abstract void initialize();
 
   public void init() {
+    initProperties();
     initialize();
     rebuildBounds();
   }
@@ -71,4 +93,10 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   public ResourceLocation getKey() {
     return Registries.RITUAL_REGISTRY.get().getKey(this);
   }
+
+  protected abstract RitualProperty<Integer> getDurationProperty();
+
+  protected abstract RitualProperty<Integer> getRadiusXZProperty();
+  protected abstract RitualProperty<Integer> getRadiusYProperty();
+  protected abstract RitualProperty<Integer> getIntervalProperty();
 }
