@@ -87,14 +87,6 @@ public class SpellInstance {
     return spell.getCooldown();
   }
 
-  public int getColor1() {
-    return spell.getColor1();
-  }
-
-  public int getColor2() {
-    return spell.getColor2();
-  }
-
   // TODO:
   // returns:
   //   true - the spell can be cast

@@ -17,6 +17,7 @@ public class ModHerbs {
   public static final RegistryEntry<Herb> PERESKIA = REGISTRATE.simple("pereskia", Herb.class, () -> new Herb(ModItems.Herbs.PERESKIA, RootsAPI.Tags.Items.Herbs.PERESKIA));
   public static final RegistryEntry<Herb> SPIRITLEAF = REGISTRATE.simple("spiritleaf", Herb.class, () -> new Herb(ModItems.Herbs.SPIRITLEAF, RootsAPI.Tags.Items.Herbs.SPIRITLEAF));
   public static final RegistryEntry<Herb> WILDEWHEET = REGISTRATE.simple("wildewheet", Herb.class, () -> new Herb(ModItems.Herbs.WILDEWHEET, RootsAPI.Tags.Items.Herbs.WILDEWHEET));
+  public static final RegistryEntry<Herb> BAFFLECAP = REGISTRATE.simple("bafflecap", Herb.class, () -> new Herb(ModItems.Herbs.BAFFLECAP, RootsAPI.Tags.Items.Herbs.BAFFLECAP));
 
   public static void load() {
   }

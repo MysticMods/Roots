@@ -1,0 +1,6 @@
+{
+  "spell": "roots:harvest",
+  "value": 25,
+  "default_value": 25,
+  "_comment": "How long before the player can cast the spell again"
+}

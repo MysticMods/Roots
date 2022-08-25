@@ -1099,13 +1099,15 @@ public class ModBlocks {
   public static BlockEntry<Block> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, Block::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/wild_roots"))
-
       .register();
 
   public static BlockEntry<Block> GROVE_MOSS = REGISTRATE.block("creeping_grove_moss", Material.GRASS, Block::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate(BlockstateGenerator.existingNoRotation("block/moss"))
+      .register();
 
+  public static BlockEntry<Block> BAFFLECAP_BLOCK = REGISTRATE.block("bafflecap_block", Material.WOOD, Block::new)
+      .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK))
       .register();
 
   public static BlockEntry<RunicCrafterBlock> RUNIC_CRAFTER = REGISTRATE.block("runic_crafter", Material.STONE, RunicCrafterBlock::new)

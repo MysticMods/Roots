@@ -217,6 +217,8 @@ public abstract class RootsAPI {
       public static TagKey<Item> MOONGLOW_CROP = modTag("crops/moonglow");
       public static TagKey<Item> PERESKIA_CROP = modTag("crops/pereskia");
 
+      public static TagKey<Item> BAFFLECAP_CROP = modTag("crops/bafflecap");
+
       public static TagKey<Item> BARKS = modTag("barks");
       public static TagKey<Item> ACACIA_BARK = modTag("barks/acacia");
       public static TagKey<Item> BIRCH_BARK = modTag("barks/birch");
@@ -291,6 +293,8 @@ public abstract class RootsAPI {
         public static TagKey<Item> WILDROOT = modTag("herbs/wildroot");
         public static TagKey<Item> CLOUD_BERRY = modTag("herbs/cloud_berry");
         public static TagKey<Item> DEWGONIA = modTag("herbs/dewgonia");
+
+        public static TagKey<Item> BAFFLECAP = modTag("herbs/bafflecap");
         public static TagKey<Item> HERBS = modTag("herbs");
       }
     }

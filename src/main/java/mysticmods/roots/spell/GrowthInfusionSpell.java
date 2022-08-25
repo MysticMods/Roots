@@ -1,18 +1,31 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herbs.Cost;
+import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.spells.Costing;
 import mysticmods.roots.api.spells.Spell;
 import mysticmods.roots.api.spells.SpellInstance;
+import mysticmods.roots.init.ModSpells;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class GrowthInfusionSpell extends Spell {
   public GrowthInfusionSpell(List<Cost> costs) {
-    super(Type.CONTINUOUS, costs, -1, 0xFF00FF, 0xFF00FF);
+    super(Type.CONTINUOUS, costs);
+  }
+
+  @Override
+  public SpellProperty<Integer> getCooldownProperty() {
+    return ModSpells.GROWTH_INFUSION_COOLDOWN.get();
+  }
+
+  @Override
+  public void initialize() {
+
   }
 
   @Override

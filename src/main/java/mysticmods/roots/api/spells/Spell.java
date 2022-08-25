@@ -2,6 +2,7 @@ package mysticmods.roots.api.spells;
 
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.IHasCost;
 import mysticmods.roots.api.registry.Registries;
@@ -19,16 +20,11 @@ public abstract class Spell extends DescribedRegistryEntry<Spell> implements IHa
   protected final Type type;
   protected final List<Cost> costs = new ArrayList<>();
   protected final Set<Modifier> modifiers = new HashSet<>();
-  protected final int cooldown;
-  protected final int color1;
-  protected final int color2;
+  protected int cooldown = 0;
 
-  public Spell(Type type, List<Cost> costs, int cooldown, int color1, int color2) {
+  public Spell(Type type, List<Cost> costs) {
     this.type = type;
     setCosts(costs);
-    this.cooldown = cooldown;
-    this.color1 = color1;
-    this.color2 = color2;
   }
 
   @Override
@@ -46,16 +42,10 @@ public abstract class Spell extends DescribedRegistryEntry<Spell> implements IHa
     return modifiers;
   }
 
+  public abstract SpellProperty<Integer> getCooldownProperty ();
+
   public int getCooldown() {
     return cooldown;
-  }
-
-  public int getColor1() {
-    return color1;
-  }
-
-  public int getColor2() {
-    return color2;
   }
 
   public Type getType() {
@@ -66,7 +56,16 @@ public abstract class Spell extends DescribedRegistryEntry<Spell> implements IHa
     modifiers.add(modifier);
   }
 
-  public void initialize() {
+  protected void initializeProperties () {
+    SpellProperty<Integer> cooldownProperty = getCooldownProperty ();
+    if (cooldownProperty != null) {
+      this.cooldown = cooldownProperty.getValue();
+    }
+  }
+
+  public abstract void initialize();
+
+  public void init () {
   }
 
   public abstract void cast(Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);

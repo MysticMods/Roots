@@ -35,6 +35,7 @@ public class ClientSetup {
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.STALICRIPE_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDEWHEET_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDROOT_CROP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.BAFFLECAP_BLOCK.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.GROVE_MOSS.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_ROOTS.get(), cutout);
   }

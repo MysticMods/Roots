@@ -1,8 +1,8 @@
 {
   "costs": [
     {
-      "herb": "roots:grove_moss",
-      "value": 0.325,
+      "herb": "roots:wildewheet",
+      "value": 0.25,
       "type": "additive"
     }
   ]

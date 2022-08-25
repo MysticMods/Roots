@@ -1,8 +1,8 @@
 {
   "costs": [
     {
-      "herb": "roots:grove_moss",
-      "value": 0.325,
+      "herb": "roots:pereskia",
+      "value": 0.25,
       "type": "additive"
     }
   ]
