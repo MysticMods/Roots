@@ -1110,6 +1110,7 @@ public class ModBlocks {
       .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK))
       .lang("Bafflecap")
       .blockstate((ctx, p) -> {
+        // TODO: this really shouldn't be like this
         ModelFile crop = p.models().getExistingFile(new ResourceLocation("minecraft", "block/cross"));
         p.getVariantBuilder(ctx.getEntry())
             .forAllStates(state -> {
