@@ -234,8 +234,6 @@
   "ritual_property.roots.crafting.interval": "Crafting: Interval",
   "ritual_property.roots.fire_storm.duration": "Fire Storm: Duration",
   "ritual_property.roots.fire_storm.interval": "Fire Storm: Interval",
-  "ritual_property.roots.fire_storm.radius_xz": "Fire Storm: Radius Xz",
-  "ritual_property.roots.fire_storm.radius_y": "Fire Storm: Radius Y",
   "ritual_property.roots.frost_lands.duration": "Frost Lands: Duration",
   "ritual_property.roots.frost_lands.interval": "Frost Lands: Interval",
   "ritual_property.roots.frost_lands.radius_xz": "Frost Lands: Radius Xz",

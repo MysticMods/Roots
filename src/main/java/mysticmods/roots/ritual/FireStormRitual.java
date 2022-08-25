@@ -28,12 +28,12 @@ public class FireStormRitual extends Ritual {
 
   @Override
   protected RitualProperty<Integer> getRadiusXZProperty() {
-    return ModRituals.FIRE_STORM_RADIUS_XZ.get();
+    return null;
   }
 
   @Override
   protected RitualProperty<Integer> getRadiusYProperty() {
-    return ModRituals.FIRE_STORM_RADIUS_Y.get();
+    return null;
   }
 
   @Override

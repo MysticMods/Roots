@@ -1,6 +1,0 @@
-{
-  "ritual": "roots:fire_storm",
-  "value": 10,
-  "default_value": 10,
-  "_comment": "The vertical radius of the ritual in blocks."
-}

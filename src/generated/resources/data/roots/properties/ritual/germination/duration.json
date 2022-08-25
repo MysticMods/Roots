@@ -1,6 +1,6 @@
 {
   "ritual": "roots:germination",
-  "value": 3200,
-  "default_value": 3200,
+  "value": 6400,
+  "default_value": 6400,
   "_comment": "The length of the ritual"
 }

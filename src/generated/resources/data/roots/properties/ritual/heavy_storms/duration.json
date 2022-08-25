@@ -1,6 +1,6 @@
 {
   "ritual": "roots:heavy_storms",
-  "value": 3200,
-  "default_value": 3200,
+  "value": 2400,
+  "default_value": 2400,
   "_comment": "The length of the ritual"
 }

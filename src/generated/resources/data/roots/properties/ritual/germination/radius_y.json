@@ -1,6 +1,6 @@
 {
   "ritual": "roots:germination",
-  "value": 10,
-  "default_value": 10,
+  "value": 19,
+  "default_value": 19,
   "_comment": "The vertical radius of the ritual in blocks."
 }

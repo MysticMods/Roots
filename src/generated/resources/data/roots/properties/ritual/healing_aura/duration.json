@@ -1,6 +1,6 @@
 {
   "ritual": "roots:healing_aura",
-  "value": 3200,
-  "default_value": 3200,
+  "value": 800,
+  "default_value": 800,
   "_comment": "The length of the ritual"
 }

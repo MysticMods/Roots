@@ -1,6 +1,6 @@
 {
   "ritual": "roots:wildroot_growth",
-  "value": 3200,
-  "default_value": 3200,
+  "value": 300,
+  "default_value": 300,
   "_comment": "The length of the ritual"
 }

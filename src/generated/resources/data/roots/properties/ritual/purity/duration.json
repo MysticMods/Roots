@@ -1,6 +1,6 @@
 {
   "ritual": "roots:purity",
-  "value": 3200,
-  "default_value": 3200,
+  "value": 1200,
+  "default_value": 1200,
   "_comment": "The length of the ritual"
 }

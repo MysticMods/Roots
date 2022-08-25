@@ -1,6 +1,6 @@
 {
   "ritual": "roots:gathering",
-  "value": 3200,
-  "default_value": 3200,
+  "value": 6000,
+  "default_value": 6000,
   "_comment": "The length of the ritual"
 }

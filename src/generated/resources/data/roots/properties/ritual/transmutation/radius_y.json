@@ -1,6 +1,6 @@
 {
   "ritual": "roots:transmutation",
-  "value": 10,
-  "default_value": 10,
+  "value": 4,
+  "default_value": 4,
   "_comment": "The vertical radius of the ritual in blocks."
 }

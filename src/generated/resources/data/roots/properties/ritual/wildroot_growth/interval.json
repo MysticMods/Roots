@@ -1,6 +1,6 @@
 {
   "ritual": "roots:wildroot_growth",
-  "value": 110,
-  "default_value": 110,
+  "value": 250,
+  "default_value": 250,
   "_comment": "How often the ritual is executed (must be shorter than duration)"
 }
