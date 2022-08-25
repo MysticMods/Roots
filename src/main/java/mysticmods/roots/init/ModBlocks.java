@@ -1108,6 +1108,17 @@ public class ModBlocks {
 
   public static BlockEntry<Block> BAFFLECAP_BLOCK = REGISTRATE.block("bafflecap_block", Material.WOOD, Block::new)
       .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK))
+      .lang("Bafflecap")
+      .blockstate((ctx, p) -> {
+        ModelFile crop = p.models().getExistingFile(new ResourceLocation("minecraft", "block/cross"));
+        p.getVariantBuilder(ctx.getEntry())
+            .forAllStates(state -> {
+              ModelFile stage = p.models().getBuilder("block/bafflecap_block")
+                  .parent(crop)
+                  .texture("cross", p.modLoc("block/bafflecap_block"));
+              return ConfiguredModel.builder().modelFile(stage).build();
+            });
+      })
       .register();
 
   public static BlockEntry<RunicCrafterBlock> RUNIC_CRAFTER = REGISTRATE.block("runic_crafter", Material.STONE, RunicCrafterBlock::new)
