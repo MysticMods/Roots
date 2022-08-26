@@ -41,7 +41,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<Block> CHISELED_RUNED_OBSIDIAN = REGISTRATE.block("chiseled_runed_obsidian", Block::new)
       .properties(RUNED_PROPERTIES)
@@ -49,7 +49,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_CAPSTONES)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -62,7 +62,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::inventoryModel)
       .tag(ItemTags.BUTTONS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
       .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
@@ -78,7 +78,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_SLAB = REGISTRATE.block("runed_slab", RunedObsidianBlocks.Slab::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
@@ -88,7 +88,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::itemModel)
       .tag(ItemTags.SLABS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
       .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
       .register();
   public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_STAIRS = REGISTRATE.block("runed_stairs", RunedObsidianBlocks.Stairs::new)
@@ -99,7 +99,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::itemModel)
       .tag(ItemTags.STAIRS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_WALL = REGISTRATE.block("runed_wall", RunedObsidianBlocks.Wall::new)
       .properties(RUNED_PROPERTIES)
@@ -109,7 +109,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::inventoryModel)
       .tag(ItemTags.WALLS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_NARROW_POST = REGISTRATE.block("runed_narrow_post", RunedObsidianBlocks.NarrowPost::new)
       .properties(RUNED_PROPERTIES)
@@ -118,7 +118,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.WidePost> RUNED_WIDE_POST = REGISTRATE.block("runed_wide_post", RunedObsidianBlocks.WidePost::new)
       .properties(RUNED_PROPERTIES)
@@ -127,7 +127,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_FENCE = REGISTRATE.block("runed_fence", RunedObsidianBlocks.Fence::new)
       .properties(RUNED_PROPERTIES)
@@ -140,7 +140,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::inventoryModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_GATE = REGISTRATE.block("runed_gate", RunedObsidianBlocks.Gate::new)
       .properties(RUNED_PROPERTIES)
@@ -152,7 +152,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick", Block::new)
       .properties(RUNED_PROPERTIES)
@@ -160,7 +160,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = REGISTRATE.block("runed_brick_button", RunedObsidianBlocks.Button::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -174,7 +174,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::inventoryModel)
       .tag(ItemTags.BUTTONS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_BRICK_PRESSURE_PLATE = REGISTRATE.block("runed_brick_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
       .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
@@ -190,7 +190,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_BRICK_SLAB = REGISTRATE.block("runed_brick_slab", RunedObsidianBlocks.Slab::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
@@ -200,7 +200,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::itemModel)
       .tag(ItemTags.SLABS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
       .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
       .register();
   public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_BRICK_STAIRS = REGISTRATE.block("runed_brick_stairs", RunedObsidianBlocks.Stairs::new)
@@ -211,7 +211,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::itemModel)
       .tag(ItemTags.STAIRS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_BRICK_WALL = REGISTRATE.block("runed_brick_wall", RunedObsidianBlocks.Wall::new)
       .properties(RUNED_PROPERTIES)
@@ -221,7 +221,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::inventoryModel)
       .tag(ItemTags.WALLS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_BRICK_NARROW_POST = REGISTRATE.block("runed_brick_narrow_post", RunedObsidianBlocks.NarrowPost::new)
       .properties(RUNED_PROPERTIES)
@@ -230,7 +230,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.WidePost> RUNED_BRICK_WIDE_POST = REGISTRATE.block("runed_brick_wide_post", RunedObsidianBlocks.WidePost::new)
       .properties(RUNED_PROPERTIES)
@@ -239,7 +239,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_BRICK_FENCE = REGISTRATE.block("runed_brick_fence", RunedObsidianBlocks.Fence::new)
       .properties(RUNED_PROPERTIES)
@@ -252,7 +252,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::inventoryModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_BRICK_GATE = REGISTRATE.block("runed_brick_gate", RunedObsidianBlocks.Gate::new)
       .properties(RUNED_PROPERTIES)
@@ -264,7 +264,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<Block> RUNED_OBSIDIAN_BRICK_ALT = REGISTRATE.block("runed_obsidian_brick_alt", Block::new)
       .properties(RUNED_PROPERTIES)
@@ -272,7 +272,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_ALT_BUTTON = REGISTRATE.block("runed_brick_alt_button", RunedObsidianBlocks.Button::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -285,7 +285,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::inventoryModel)
       .tag(ItemTags.BUTTONS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_BRICK_ALT_PRESSURE_PLATE = REGISTRATE.block("runed_brick_alt_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
       .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
@@ -301,7 +301,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_BRICK_ALT_SLAB = REGISTRATE.block("runed_brick_alt_slab", RunedObsidianBlocks.Slab::new)
       .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
@@ -311,7 +311,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::itemModel)
       .tag(ItemTags.SLABS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
       .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
       .register();
   public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_BRICK_ALT_STAIRS = REGISTRATE.block("runed_brick_alt_stairs", RunedObsidianBlocks.Stairs::new)
@@ -322,7 +322,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::itemModel)
       .tag(ItemTags.STAIRS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_BRICK_ALT_WALL = REGISTRATE.block("runed_brick_alt_wall", RunedObsidianBlocks.Wall::new)
       .properties(RUNED_PROPERTIES)
@@ -332,7 +332,7 @@ public class ModBlocks {
       .model(ItemModelGenerator::inventoryModel)
       .tag(ItemTags.WALLS)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.NarrowPost> RUNED_BRICK_ALT_NARROW_POST = REGISTRATE.block("runed_brick_alt_narrow_post", RunedObsidianBlocks.NarrowPost::new)
       .properties(RUNED_PROPERTIES)
@@ -341,7 +341,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.WidePost> RUNED_BRICK_ALT_WIDE_POST = REGISTRATE.block("runed_brick_alt_wide_post", RunedObsidianBlocks.WidePost::new)
       .properties(RUNED_PROPERTIES)
@@ -350,7 +350,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_BRICK_ALT_FENCE = REGISTRATE.block("runed_brick_alt_fence", RunedObsidianBlocks.Fence::new)
       .properties(RUNED_PROPERTIES)
@@ -363,7 +363,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::inventoryModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_BRICK_ALT_GATE = REGISTRATE.block("runed_brick_alt_gate", RunedObsidianBlocks.Gate::new)
       .properties(RUNED_PROPERTIES)
@@ -375,7 +375,7 @@ public class ModBlocks {
       .item()
       .model(ItemModelGenerator::itemModel)
       .build()
-      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER)
+      .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
       .register();
   public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNESTONE_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE);
   public static BlockEntry<Block> RUNESTONE = REGISTRATE.block("runestone", Block::new)
