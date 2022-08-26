@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "roots:aqueous_soil",
+    "roots:caelic_soil",
+    "roots:elemental_soil",
+    "roots:magmatic_soil",
+    "roots:terran_soil"
+  ]
+}

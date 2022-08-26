@@ -571,6 +571,10 @@ ac8a57eab5a24f1e8e579c85b3bb4dfa6c41f7d3 data/minecraft/tags/blocks/jungle_logs.
 72415ff4ccf592c90824fe9d96afe748d2eeffc0 data/minecraft/tags/blocks/leaves.json
 bbed28188747fccc756ff44823ce8e9a099b1230 data/minecraft/tags/blocks/logs.json
 bbed28188747fccc756ff44823ce8e9a099b1230 data/minecraft/tags/blocks/logs_that_burn.json
+b1630cb96e325ce80e79d84b6f468d76e7b0dc58 data/minecraft/tags/blocks/mineable/axe.json
+08f1f48e3661ed8f08fdd7f65938d35140e26bf9 data/minecraft/tags/blocks/mineable/hoe.json
+d23fa107ee4d64c5e5e09e8d41a49aa944b7cf7b data/minecraft/tags/blocks/mineable/pickaxe.json
+c3321bb6f5ab23666a8dba5380528ae8b902affd data/minecraft/tags/blocks/mineable/shovel.json
 88733c0dc1ccbb20c9c31ab3f62b995835bd8053 data/minecraft/tags/blocks/oak_logs.json
 209cd8afef123ef697a387f1683111f279ebf176 data/minecraft/tags/blocks/planks.json
 f4c851fa3bd57835761d9fc82032acd2eabaaabe data/minecraft/tags/blocks/slabs.json

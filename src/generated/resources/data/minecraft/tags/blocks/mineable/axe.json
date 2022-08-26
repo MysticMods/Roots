@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "roots:runed_wildwood_log",
+    "roots:runed_spruce_log",
+    "roots:runed_jungle_log",
+    "roots:runed_birch_log",
+    "roots:runed_oak_log",
+    "roots:runed_dark_oak_log",
+    "roots:runed_acacia_log",
+    "roots:runed_warped_stem",
+    "roots:runed_crimson_stem",
+    "roots:wildwood_planks",
+    "roots:wildwood_pressure_plate",
+    "roots:stripped_wildwood_wood",
+    "roots:wildwood_wood",
+    "roots:stripped_wildwood_log",
+    "roots:wildwood_log",
+    "roots:wildwood_button",
+    "roots:wildwood_slab",
+    "roots:wildwood_stairs",
+    "roots:wildwood_wall",
+    "roots:wildwood_narrow_post",
+    "roots:wildwood_wide_post",
+    "roots:wildwood_fence",
+    "roots:wildwood_gate",
+    "roots:fey_light",
+    "roots:grove_crafter",
+    "roots:pyre",
+    "roots:decorative_pyre"
+  ]
+}
