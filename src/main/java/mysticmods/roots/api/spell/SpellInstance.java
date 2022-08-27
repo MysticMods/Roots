@@ -1,4 +1,4 @@
-package mysticmods.roots.api.spells;
+package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
@@ -106,6 +106,10 @@ public class SpellInstance {
 
   public CompoundTag toNBT() {
     CompoundTag result = new CompoundTag();
+    return toNBT(result);
+  }
+
+  public CompoundTag toNBT (CompoundTag result) {
     result.putString("spell", spell.getKey().toString());
     ListTag modifiers = new ListTag();
     enabledModifiers.forEach(o -> modifiers.add(StringTag.valueOf(o.getKey().toString())));

@@ -7,7 +7,7 @@ import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.impl.ClientPlayerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.impl.ServerPlayerAccessor;

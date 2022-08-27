@@ -1,4 +1,4 @@
-package mysticmods.roots.api.spells;
+package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.modifier.Modifier;
 

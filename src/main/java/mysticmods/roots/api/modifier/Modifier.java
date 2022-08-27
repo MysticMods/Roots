@@ -2,9 +2,9 @@ package mysticmods.roots.api.modifier;
 
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
-import mysticmods.roots.api.registry.IHasCost;
+import mysticmods.roots.api.registry.CostedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.spell.Spell;
 import net.minecraft.resources.ResourceLocation;
 import noobanidus.libs.noobutil.type.LazySupplier;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class Modifier extends DescribedRegistryEntry<Modifier> implements IHasCost {
+public class Modifier extends DescribedRegistryEntry<Modifier> implements CostedRegistryEntry {
   protected final Supplier<Spell> spell;
   protected final List<Cost> costs = new ArrayList<>();
 

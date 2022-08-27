@@ -9,7 +9,7 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.condition.LevelCondition;
 import mysticmods.roots.api.ritual.condition.PlayerCondition;
-import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.spell.Spell;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.*;
 

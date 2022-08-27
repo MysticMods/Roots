@@ -7,7 +7,7 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.ritual.condition.LevelCondition;
 import mysticmods.roots.api.ritual.condition.PlayerCondition;
-import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.spell.Spell;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistry;
 

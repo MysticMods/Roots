@@ -1,4 +1,4 @@
-package mysticmods.roots.api.spells;
+package mysticmods.roots.api.spell;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;

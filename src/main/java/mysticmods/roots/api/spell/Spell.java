@@ -1,11 +1,12 @@
-package mysticmods.roots.api.spells;
+package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.registry.DescribedRegistryEntry;
-import mysticmods.roots.api.registry.IHasCost;
+import mysticmods.roots.api.registry.CostedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.StyledRegistryEntry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -16,14 +17,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class Spell extends DescribedRegistryEntry<Spell> implements IHasCost {
+public abstract class Spell extends StyledRegistryEntry<Spell> implements CostedRegistryEntry {
   protected final Type type;
   protected final List<Cost> costs = new ArrayList<>();
   protected final Set<Modifier> modifiers = new HashSet<>();
   protected int cooldown = 0;
 
-  public Spell(Type type, List<Cost> costs) {
+  public Spell(Type type, ChatFormatting color, List<Cost> costs) {
     this.type = type;
+    this.color = color;
     setCosts(costs);
   }
 
@@ -78,6 +80,11 @@ public abstract class Spell extends DescribedRegistryEntry<Spell> implements IHa
   @Override
   public ResourceLocation getKey() {
     return Registries.SPELL_REGISTRY.get().getKey(this);
+  }
+
+  @Override
+  public boolean isBold() {
+    return true;
   }
 
   public enum Type {

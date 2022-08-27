@@ -8,7 +8,7 @@ import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.spell.Spell;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -16,8 +16,18 @@ import static mysticmods.roots.Roots.REGISTRATE;
 public class ModLang {
   static {
     REGISTRATE.addDataGenerator(ProviderType.LANG, b -> {
-      b.add("roots.tooltip.token.spell", "Unlocks the spell: %s");
-      b.add("roots.tooltip.token.modifier", "Unlocks the modifier: %s");
+      b.add("itemGroup.roots", "Roots");
+
+      b.add("roots.tooltip.token.spell", "Spell: %s");
+      b.add("roots.tooltip.token.modifier", "Modifier: %s");
+      b.add("roots.tooltip.token.unlock", "Right-Click to unlock.");
+      b.add("roots.tooltip.token.unlocked", "You've already unlocked this.");
+      b.add("roots.tooltip.token.available_modifiers", "Available modifiers:");
+      b.add("roots.tooltip.token.enabled_modifiers", "Enabled modifiers:");
+
+      b.add("roots.tooltip.cost.herb_cost", "%s %s");
+      b.add("roots.tooltip.cost.cost_amount", "x%s");
+      b.add("roots.tooltip.cost.cost_multiplier", "+%s");
 
       for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
         b.add(spell.getDescriptionId(), RegistrateLangProvider.toEnglishName(spell.getKey().getPath()));

@@ -2,10 +2,11 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.spells.Costing;
-import mysticmods.roots.api.spells.Spell;
-import mysticmods.roots.api.spells.SpellInstance;
+import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -13,8 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class GeasSpell extends Spell {
-  public GeasSpell(List<Cost> costs) {
-    super(Type.INSTANT, costs);
+  public GeasSpell(ChatFormatting color, List<Cost> costs) {
+    super(Type.INSTANT, color, costs);
   }
 
   @Override

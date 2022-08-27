@@ -1,7 +1,7 @@
 package mysticmods.roots.api.reference;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.spell.Spell;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 

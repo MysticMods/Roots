@@ -2,10 +2,10 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.item.ICastingItem;
-import mysticmods.roots.api.spells.Costing;
-import mysticmods.roots.api.spells.Spell;
-import mysticmods.roots.api.spells.SpellInstance;
-import mysticmods.roots.api.spells.SpellStorage;
+import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellInstance;
+import mysticmods.roots.api.spell.SpellStorage;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;

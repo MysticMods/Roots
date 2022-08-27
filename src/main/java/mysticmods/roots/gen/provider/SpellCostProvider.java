@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.spells.Spell;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.gen.BaseProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
