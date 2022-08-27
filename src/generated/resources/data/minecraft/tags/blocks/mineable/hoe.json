@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "roots:wildwood_leaves",
+    "roots:wild_roots",
+    "roots:creeping_grove_moss",
+    "roots:bafflecap_block",
+    "roots:wildroot_crop",
+    "roots:cloud_berry_crop",
+    "roots:dewgonia_crop",
+    "roots:inferno_bulb_crop",
+    "roots:stalicripe_crop",
+    "roots:moonglow_crop",
+    "roots:pereskia_crop",
+    "roots:spiritleaf_crop",
+    "roots:wildewheet_crop"
+  ]
+}
