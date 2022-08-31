@@ -27,6 +27,7 @@ public class ModSpells {
   public static final RegistryEntry<AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.DEWGONIA, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> AQUA_BUBBLE_COOLDOWN = property(Spells.AQUA_BUBBLE, "cooldown", () -> new SpellProperty<>(AQUA_BUBBLE::get, 1200, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
+  // TODO: What does this actually do?
   // Augment (350 cooldown)
   public static final RegistryEntry<AugmentSpell> AUGMENT = spell(Spells.AUGMENT, AugmentSpell::new, ChatFormatting.DARK_GREEN, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.250), Cost.add(ModHerbs.INFERNO_BULB, 0.125)));
   public static final RegistryEntry<SpellProperty<Integer>> AUGMENT_COOLDOWN = property(Spells.AUGMENT, "cooldown", () -> new SpellProperty<>(AUGMENT::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
@@ -38,10 +39,6 @@ public class ModSpells {
   // Magnetism (350 cooldown)
   public static final RegistryEntry<MagnetismSpell> MAGNETISM = spell(Spells.MAGNETISM, MagnetismSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> MAGNETISM_COOLDOWN = property(Spells.MAGNETISM, "cooldown", () -> new SpellProperty<>(MAGNETISM::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-
-  // Chrysopoeia (20 cooldown)
-  public static final RegistryEntry<ChrysopoeiaSpell> CHRYSOPOEIA = spell(Spells.CHRYSOPOEIA, ChrysopoeiaSpell::new, ChatFormatting.GOLD, () -> List.of(Cost.add(ModHerbs.INFERNO_BULB, 0.250), Cost.add(ModHerbs.DEWGONIA, 0.250)));
-  public static final RegistryEntry<SpellProperty<Integer>> CHRYSOPOEIA_COOLDOWN = property(Spells.CHRYSOPOEIA, "cooldown", () -> new SpellProperty<>(CHRYSOPOEIA::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
   // Dandelion Winds (20 cooldown)
   public static final RegistryEntry<DandelionWindsSpell> DANDELION_WINDS = spell(Spells.DANDELION_WINDS, DandelionWindsSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.CLOUD_BERRY, 0.250), Cost.add(ModHerbs.GROVE_MOSS, 0.125)));
@@ -55,6 +52,7 @@ public class ModSpells {
   public static final RegistryEntry<DisarmSpell> DISARM = spell(Spells.DISARM, DisarmSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, 0.250), Cost.add(ModHerbs.BAFFLECAP, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> DISARM_COOLDOWN = property(Spells.DISARM, "cooldown", () -> new SpellProperty<>(DISARM::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
+  // TODO: What does this actually do?
   // Extension spell (350 cooldown)
   public static final RegistryEntry<ExtensionSpell> EXTENSION = spell(Spells.EXTENSION, ExtensionSpell::new, ChatFormatting.BLUE, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.250), Cost.add(ModHerbs.WILDROOT, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> EXTENSION_COOLDOWN = property(Spells.EXTENSION, "cooldown", () -> new SpellProperty<>(EXTENSION::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));

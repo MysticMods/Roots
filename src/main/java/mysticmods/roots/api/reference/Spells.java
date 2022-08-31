@@ -11,7 +11,6 @@ public interface Spells {
   ResourceKey<Spell> AUGMENT = spell("augment");
   ResourceKey<Spell> LIGHT_DRIFTER = spell("light_drifter");
   ResourceKey<Spell> MAGNETISM = spell("magnetism");
-  ResourceKey<Spell> CHRYSOPOEIA = spell("chrysopoeia");
   ResourceKey<Spell> DANDELION_WINDS = spell("dandelion_winds");
   ResourceKey<Spell> DESATURATE = spell("desaturate");
   ResourceKey<Spell> DISARM = spell("disarm");

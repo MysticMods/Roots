@@ -5,6 +5,7 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
+import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +20,7 @@ public class NondetectionSpell extends Spell {
 
   @Override
   public SpellProperty<Integer> getCooldownProperty() {
-    return null;
+    return ModSpells.NONDETECTION_COOLDOWN.get();
   }
 
   @Override
