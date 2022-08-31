@@ -1,0 +1,9 @@
+{
+  "costs": [
+    {
+      "herb": "roots:wildewheet",
+      "value": 0.25,
+      "type": "additive"
+    }
+  ]
+}
