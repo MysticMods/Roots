@@ -114,8 +114,8 @@ a5c36ec64ac2c2abcbe96a426561480dc298160a assets/roots/blockstates/wildwood_plank
 a6d6ea901876671011ce386898b01a41b562190c assets/roots/blockstates/wildwood_wall.json
 5140883c9a9c3d3547209c731df369aa6af8bbe5 assets/roots/blockstates/wildwood_wide_post.json
 ff4eb19a48799d4735163b470aa5ada8e60adef9 assets/roots/blockstates/wildwood_wood.json
-5b3ebe8466a506e4572612be704f7ccce5acb1af assets/roots/lang/en_ud.json
-a14ec01968b03490ead325a3059d8279dd4e27ed assets/roots/lang/en_us.json
+13ca458d4ce164547fa71d8963f02d80bc667999 assets/roots/lang/en_ud.json
+46a6ad8444864bacbb328a8b2bb4eacb95e79eb9 assets/roots/lang/en_us.json
 fc3d8e3568e4eab4235ec9f7af8369da99798a29 assets/roots/models/block/aqueous_soil.json
 ae4ba3038bb8c1e782e93a27fc75ee6bb348ae33 assets/roots/models/block/bafflecap_block.json
 250aa6676dc5313fda19ee559fd8e00a29760653 assets/roots/models/block/caelic_soil.json
@@ -723,7 +723,6 @@ fd3ae89daa8ea14066122d618e430d87afb0966f data/roots/advancements/recipes/roots/w
 e93c36094d61fbe8572b554187e95569b77bdd70 data/roots/costs/spell/acid_cloud.json
 0d7108392d900501f2d0857cdfb3473132927eca data/roots/costs/spell/aqua_bubble.json
 03d4c8d6736da6bd53c99b8a0d3a75cf4e01862b data/roots/costs/spell/augment.json
-a98811f995b9f026d5d4783af5dce34e748908cb data/roots/costs/spell/chrysopoeia.json
 5ff4f156cf6a4b31b3adb6f5ca330d15c141f821 data/roots/costs/spell/control_undead.json
 a2d45c8994cc4bf8a6084b54d417479d5b5e660a data/roots/costs/spell/dandelion_winds.json
 b2f2d9ef2e0605bf8b28858acf3fac198d380f0c data/roots/costs/spell/desaturate.json
@@ -731,7 +730,7 @@ b2f2d9ef2e0605bf8b28858acf3fac198d380f0c data/roots/costs/spell/desaturate.json
 e903fd7390db2d117d5b63f7dc947df0d323858a data/roots/costs/spell/extension.json
 84ad598a62e6d15291a7c2d1941dc728f2fa1ae7 data/roots/costs/spell/fey_light.json
 e73afbe5d7102abd44bb32433253d1aba59c1055 data/roots/costs/spell/geas.json
-785b95e96e77a73dd73da7abdfbf733e7528457a data/roots/costs/spell/growth_infusion.json
+1f3f0d764202655da17a9a9316b153faa9075563 data/roots/costs/spell/growth_infusion.json
 6789b57522c743a040f5207cd7c05d63cf3729e0 data/roots/costs/spell/harvest.json
 22cc5ba5aee4591f170d9012b6906ff2df0f18cd data/roots/costs/spell/jaunt.json
 6789b57522c743a040f5207cd7c05d63cf3729e0 data/roots/costs/spell/life_drain.json
@@ -740,6 +739,7 @@ e73afbe5d7102abd44bb32433253d1aba59c1055 data/roots/costs/spell/geas.json
 72cab83c2cf407156dea0562e931e20083f53ef3 data/roots/costs/spell/nondetection.json
 52d9bbbe2965f4d1aff0d52b32b06b903c244e5e data/roots/costs/spell/petal_shell.json
 12cdc29e76794f3a51391c812691de37170f6146 data/roots/costs/spell/radiance.json
+785b95e96e77a73dd73da7abdfbf733e7528457a data/roots/costs/spell/rampant_growth.json
 dd690533374680dfe6e4fbd1def7839252fc8f20 data/roots/costs/spell/rose_thorns.json
 6e0009aea0c69a92d519543643e965fbc00b807c data/roots/costs/spell/sanctuary.json
 b2f6441c7b3ac1261aa6cee51b3d78ae1bfe8bf7 data/roots/costs/spell/shatter.json
@@ -936,7 +936,6 @@ a053c5cc2c2ca495e18cff86386c96c5a423d063 data/roots/properties/ritual/wildroot_g
 901bf1ba10ea0f25e65729d6d94ba24b23533479 data/roots/properties/spell/acid_cloud/cooldown.json
 b2024e5268fe243784b3710179cf98cdb9c7a930 data/roots/properties/spell/aqua_bubble/cooldown.json
 12bc0346e27e4f153733bc602f94387aebee3ae9 data/roots/properties/spell/augment/cooldown.json
-731888ad528dcbf18a2955e945ffeaa4da03a9ae data/roots/properties/spell/chrysopoeia/cooldown.json
 00f8da976e68fd750ee5f95184be8085cbd585c3 data/roots/properties/spell/control_undead/cooldown.json
 8e6a5706057ec95255ae56e7c975e9689d0f6262 data/roots/properties/spell/dandelion_winds/cooldown.json
 534cf2705e7692c0189d60cebb7132e9bdb59603 data/roots/properties/spell/desaturate/cooldown.json
@@ -953,6 +952,7 @@ c116a68f3b707dfd3dc8dd8f147f67a215b2235b data/roots/properties/spell/light_drift
 e2c522f71ad3b34110ae7bb90a7e097963de7204 data/roots/properties/spell/nondetection/cooldown.json
 c4c17f6e8fbf181dfecc422dc3ae572cf2ed5e33 data/roots/properties/spell/petal_shell/cooldown.json
 5b4e873b6c2fbc5c3e44b2c2c4db73814a60d9b9 data/roots/properties/spell/radiance/cooldown.json
+bf4bca1ea093387bc2ca43281a5e78eb5484ee2a data/roots/properties/spell/rampant_growth/cooldown.json
 9853b0730b0e33107e0c19a863a10b9c2f4ba968 data/roots/properties/spell/rose_thorns/cooldown.json
 c883fe11c8da31029f247026fa304c9b1f77f100 data/roots/properties/spell/sanctuary/cooldown.json
 6726cef3ea7eda0ee72e51e590530091b8fa44bb data/roots/properties/spell/shatter/cooldown.json

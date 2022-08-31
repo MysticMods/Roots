@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "roots:block/wild_roots"
+      },
+      {
+        "model": "roots:block/wild_roots",
+        "y": 90
+      },
+      {
+        "model": "roots:block/wild_roots",
+        "y": 180
+      },
+      {
+        "model": "roots:block/wild_roots",
+        "y": 270
+      }
+    ]
+  }
+}

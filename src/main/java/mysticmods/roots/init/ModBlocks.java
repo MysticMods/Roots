@@ -1099,7 +1099,7 @@ public class ModBlocks {
 
   public static BlockEntry<Block> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, Block::new)
       .properties(BASE_WOODEN_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/wild_roots"))
+      .blockstate((ctx, p) -> {})
       .tag(BlockTags.MINEABLE_WITH_HOE)
       .register();
 
