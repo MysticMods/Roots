@@ -21,6 +21,7 @@ public interface Spells {
   ResourceKey<Spell> GEAS = spell("geas");
   ResourceKey<Spell> CONTROL_UNDEAD = spell("control_undead");
   ResourceKey<Spell> GROWTH_INFUSION = spell("growth_infusion");
+  ResourceKey<Spell> RAMPANT_GROWTH = spell("rampant_growth");
   ResourceKey<Spell> HARVEST = spell("harvest");
   ResourceKey<Spell> LIFE_DRAIN = spell("life_drain");
   ResourceKey<Spell> PETAL_SHELL = spell("petal_shell");

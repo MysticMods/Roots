@@ -76,8 +76,12 @@ public class ModSpells {
   public static final RegistryEntry<SpellProperty<Integer>> CONTROL_UNDEAD_COOLDOWN = property(Spells.CONTROL_UNDEAD, "cooldown", () -> new SpellProperty<>(CONTROL_UNDEAD::get, 320, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
   // Growth Infusion (20 cooldown)
-  public static final RegistryEntry<GrowthInfusionSpell> GROWTH_INFUSION = spell(Spells.GROWTH_INFUSION, GrowthInfusionSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250)));
+  public static final RegistryEntry<GrowthInfusionSpell> GROWTH_INFUSION = spell(Spells.GROWTH_INFUSION, GrowthInfusionSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> GROWTH_INFUSION_COOLDOWN = property(Spells.GROWTH_INFUSION, "cooldown", () -> new SpellProperty<>(GROWTH_INFUSION::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+
+  // Rampant Growth (20 cooldown)
+  public static final RegistryEntry<RampantGrowthSpell> RAMPANT_GROWTH = spell(Spells.RAMPANT_GROWTH, RampantGrowthSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250)));
+  public static final RegistryEntry<SpellProperty<Integer>> RAMPANT_GROWTH_COOLDOWN = property(Spells.RAMPANT_GROWTH, "cooldown", () -> new SpellProperty<>(RAMPANT_GROWTH::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
   // Harvest (25 cooldown)
   public static final RegistryEntry<HarvestSpell> HARVEST = spell(Spells.HARVEST, HarvestSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250), Cost.add(ModHerbs.STALICRIPE, 0.250)));

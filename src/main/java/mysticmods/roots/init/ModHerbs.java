@@ -18,7 +18,6 @@ public class ModHerbs {
   public static final RegistryEntry<Herb> MOONGLOW = REGISTRATE.simple("moonglow", Herb.class, () -> new Herb(ModItems.Herbs.MOONGLOW, RootsAPI.Tags.Items.Herbs.MOONGLOW, ChatFormatting.DARK_PURPLE));
   public static final RegistryEntry<Herb> PERESKIA = REGISTRATE.simple("pereskia", Herb.class, () -> new Herb(ModItems.Herbs.PERESKIA, RootsAPI.Tags.Items.Herbs.PERESKIA, ChatFormatting.LIGHT_PURPLE));
   public static final RegistryEntry<Herb> SPIRITLEAF = REGISTRATE.simple("spiritleaf", Herb.class, () -> new Herb(ModItems.Herbs.SPIRITLEAF, RootsAPI.Tags.Items.Herbs.SPIRITLEAF, ChatFormatting.DARK_AQUA));
-
   public static final RegistryEntry<Herb> WILDEWHEET = REGISTRATE.simple("wildewheet", Herb.class, () -> new Herb(ModItems.Herbs.WILDEWHEET, RootsAPI.Tags.Items.Herbs.WILDEWHEET, ChatFormatting.GOLD));
   public static final RegistryEntry<Herb> BAFFLECAP = REGISTRATE.simple("bafflecap", Herb.class, () -> new Herb(ModItems.Herbs.BAFFLECAP, RootsAPI.Tags.Items.Herbs.BAFFLECAP, ChatFormatting.DARK_GREEN));
 
