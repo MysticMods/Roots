@@ -16,6 +16,7 @@ import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.util.SetUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -104,8 +105,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         List<LevelCondition> failedLevel = new ArrayList<>();
         Set<BlockPos> testedPositions = new HashSet<>();
         for (LevelCondition condition : cachedRecipe.getLevelConditions()) {
-          Set<BlockPos> newPositions = condition.test(level, player, newRitual, this, PYRE_BOUNDS);
-          if (newPositions.isEmpty() || !Collections.disjoint(testedPositions, newPositions)) {
+          Set<BlockPos> newPositions = condition.test(level, player, newRitual, this, PYRE_BOUNDS, testedPositions);
+          if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
             failedLevel.add(condition);
           } else {
             testedPositions.addAll(newPositions);

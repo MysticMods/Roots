@@ -38,19 +38,28 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
   }
 
   // TODO: Mutation of completedPositions but also return value
-  public Set<BlockPos> test(Level level, @Nullable Player player, Ritual ritual, BlockEntity pyre, BoundingBox bounds) {
-    Set<BlockPos> newCompletedPositions = new HashSet<>();
-    bounds = bounds.move(pyre.getBlockPos());
-    BlockPos.betweenClosedStream(bounds).forEach(mPos -> {
-      BlockPos pos = mPos.immutable();
-      if (newCompletedPositions.contains(pos)) {
-        return;
+  public Set<BlockPos> test(Level level, @Nullable Player player, Ritual ritual, BlockEntity pyre, BoundingBox bounds, Set<BlockPos> exclusions) {
+    BlockPos pyrePos = pyre.getBlockPos();
+    BoundingBox newBounds = bounds.moved(pyrePos.getX(), pyrePos.getY(), pyrePos.getZ());
+    BlockPos pos;
+    // TODO; This will fail because it only returns the first match
+    // needs to be passed the set of positions to ignore.
+    for (int x = newBounds.minX(); x < newBounds.maxX(); x++) {
+      for (int y = newBounds.minY(); y < newBounds.maxY(); y++) {
+        for (int z = newBounds.minZ(); z < newBounds.maxZ(); z++) {
+          pos = new BlockPos(x, y, z);
+          if (exclusions.contains(pos)) {
+            continue;
+          }
+          Set<BlockPos> result = condition.test(pos, level, player, ritual, pyre);
+          if (!result.isEmpty()) {
+            return result;
+          }
+        }
       }
+    }
 
-      newCompletedPositions.addAll(condition.test(pos, level, player, ritual, pyre));
-      newCompletedPositions.add(pos);
-    });
-    return newCompletedPositions;
+    return Collections.emptySet();
   }
 
   @FunctionalInterface
@@ -79,21 +88,21 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
 
       // Keep a note of which blockpositions are part of this pillar
       Set<BlockPos> result = new HashSet<>();
-      BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
-      mutableBlockPos.set(pos.getX(), pos.getY() - 1, pos.getZ());
+      result.add(pos.immutable());
+      BlockPos pPos = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
 
       // Move downward for each of the height (excluding the capstone)
       for (int i = 0; i < heightExcluding; i++) {
-        if (!level.getBlockState(mutableBlockPos).is(pillar)) {
+        if (!level.getBlockState(pPos).is(pillar)) {
           // If it isn't a pillar type, just return empty as this isn't valid OR it's a shorter pillar
           return Collections.emptySet();
         }
-        result.add(mutableBlockPos.immutable());
-        mutableBlockPos.move(Direction.DOWN);
+        result.add(pPos);
+        pPos = pPos.below();
       }
 
       // Check the final underneath block, if it's a pillar or a capstone it's too tall OR it isn't valid
-      initial = level.getBlockState(mutableBlockPos);
+      initial = level.getBlockState(pPos);
       if (initial.is(capstone) || initial.is(pillar)) {
         return Collections.emptySet();
       }
