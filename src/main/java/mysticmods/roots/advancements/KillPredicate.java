@@ -1,17 +1,19 @@
 package mysticmods.roots.advancements;
 
 import com.google.gson.JsonElement;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.registry.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import noobanidus.libs.noobutil.advancement.IGenericPredicate;
 
 import javax.annotation.Nullable;
 
-// TODO
+// TODO: Actually implement this and test that it works
 public class KillPredicate implements IGenericPredicate<LivingDeathEvent> {
   @Override
   public boolean test(ServerPlayer player, LivingDeathEvent event) {
-    return true; // Actual logic for this handled in DeathEventHandler
+    return Registries.ENTITY_REGISTRY.get().tags().getTag(RootsAPI.Tags.Entities.PACIFIST).contains(event.getEntity().getType());
   }
 
   @Override
