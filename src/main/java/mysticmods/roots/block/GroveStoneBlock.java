@@ -25,6 +25,7 @@ import noobanidus.libs.noobutil.util.VoxelUtil;
 
 import javax.annotation.Nullable;
 
+// TODO: Activation with right-click wildroot? (or just right-click)
 public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
   public static final DirectionProperty FACING = BaseBlocks.HorizontalBlock.FACING;
   public static final EnumProperty<Part> PART = EnumProperty.create("part", Part.class);
