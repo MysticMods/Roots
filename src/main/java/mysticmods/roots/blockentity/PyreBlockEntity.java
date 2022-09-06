@@ -7,8 +7,8 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.ritual.condition.LevelCondition;
-import mysticmods.roots.api.ritual.condition.PlayerCondition;
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -105,7 +105,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         List<LevelCondition> failedLevel = new ArrayList<>();
         Set<BlockPos> testedPositions = new HashSet<>();
         for (LevelCondition condition : cachedRecipe.getLevelConditions()) {
-          Set<BlockPos> newPositions = condition.test(level, player, newRitual, this, PYRE_BOUNDS, testedPositions);
+          Set<BlockPos> newPositions = condition.test(level, player, PYRE_BOUNDS, getBlockPos(), testedPositions);
           if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
             failedLevel.add(condition);
           } else {

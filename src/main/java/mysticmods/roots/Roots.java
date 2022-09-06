@@ -104,12 +104,11 @@ public class Roots {
     ModRegistries.load();
     ModTags.load();
     ModRecipes.load();
+    ModConditions.load();
     ModRituals.load();
     ModSpells.load();
     ModLang.load();
     ModRegistries.register(bus);
     ModRecipes.Types.register(bus);
   }
-
-
 }

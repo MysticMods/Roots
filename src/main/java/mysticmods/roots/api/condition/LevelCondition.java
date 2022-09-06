@@ -1,17 +1,14 @@
-package mysticmods.roots.api.ritual.condition;
+package mysticmods.roots.api.condition;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import org.jetbrains.annotations.Nullable;
@@ -34,14 +31,11 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.RITUAL_LEVEL_CONDITION.get().getKey(this);
+    return Registries.LEVEL_CONDITION_REGISTRY.get().getKey(this);
   }
 
-  // TODO: Mutation of completedPositions but also return value
-  public Set<BlockPos> test(Level level, @Nullable Player player, Ritual ritual, BlockEntity pyre, BoundingBox bounds, Set<BlockPos> exclusions) {
-    BlockPos pyrePos = pyre.getBlockPos();
-    BoundingBox newBounds = bounds.moved(pyrePos.getX(), pyrePos.getY(), pyrePos.getZ());
-    BlockPos pos;
+  public Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {
+    BoundingBox newBounds = bounds.moved(pos.getX(), pos.getY(), pos.getZ());
     // TODO; This will fail because it only returns the first match
     // needs to be passed the set of positions to ignore.
     for (int x = newBounds.minX(); x < newBounds.maxX(); x++) {
@@ -51,7 +45,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
           if (exclusions.contains(pos)) {
             continue;
           }
-          Set<BlockPos> result = condition.test(pos, level, player, ritual, pyre);
+          Set<BlockPos> result = condition.test(pos, level, player);
           if (!result.isEmpty()) {
             return result;
           }
@@ -64,7 +58,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
 
   @FunctionalInterface
   public interface Type {
-    Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player, Ritual ritual, BlockEntity pyre);
+    Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player);
   }
 
   public static class PillarCondition implements Type {
@@ -79,7 +73,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     }
 
     @Override
-    public Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player, Ritual ritual, BlockEntity pyre) {
+    public Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player) {
       BlockState initial = level.getBlockState(pos);
       // If the initial position isn't the capstone, we don't care
       if (!initial.is(capstone)) {

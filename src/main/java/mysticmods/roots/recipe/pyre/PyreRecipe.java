@@ -10,8 +10,8 @@ import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.ritual.condition.LevelCondition;
-import mysticmods.roots.api.ritual.condition.PlayerCondition;
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -98,7 +98,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
         if (GsonHelper.isArrayNode(pJson, "level_conditions")) {
           for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "level_conditions")) {
             ResourceLocation condName = new ResourceLocation(element.getAsString());
-            LevelCondition condition = Registries.RITUAL_LEVEL_CONDITION.get().getValue(condName);
+            LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(condName);
             if (condition == null) {
               throw new JsonSyntaxException("Level condition '" + condName + "' does not exist!");
             }
@@ -108,7 +108,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
         if (GsonHelper.isArrayNode(pJson, "player_conditions")) {
           for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "player_conditions")) {
             ResourceLocation condName = new ResourceLocation(element.getAsString());
-            PlayerCondition condition = Registries.RITUAL_PLAYER_CONDITION.get().getValue(condName);
+            PlayerCondition condition = Registries.PLAYER_CONDITION_REGISTRY.get().getValue(condName);
             if (condition == null) {
               throw new JsonSyntaxException("Player condition '" + condName + "' does not exist!");
             }
@@ -127,12 +127,12 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
         Ritual ritual = Registries.RITUAL_REGISTRY.get().getValue(pBuffer.readVarInt());
         int levelConditionsSize = pBuffer.readVarInt();
         for (int i = 0; i < levelConditionsSize; i++) {
-          LevelCondition condition = Registries.RITUAL_LEVEL_CONDITION.get().getValue(pBuffer.readVarInt());
+          LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
           recipe.getLevelConditions().add(condition);
         }
         int playerConditionsSize = pBuffer.readVarInt();
         for (int i = 0; i < playerConditionsSize; i++) {
-          PlayerCondition condition = Registries.RITUAL_PLAYER_CONDITION.get().getValue(pBuffer.readVarInt());
+          PlayerCondition condition = Registries.PLAYER_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
           recipe.getPlayerConditions().add(condition);
         }
         recipe.setRitual(ritual);
@@ -148,11 +148,11 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       }
       pBuffer.writeVarInt(recipe.getLevelConditions().size());
       for (LevelCondition condition : recipe.getLevelConditions()) {
-        pBuffer.writeVarInt(Registries.RITUAL_LEVEL_CONDITION.get().getID(condition));
+        pBuffer.writeVarInt(Registries.LEVEL_CONDITION_REGISTRY.get().getID(condition));
       }
       pBuffer.writeVarInt(recipe.getPlayerConditions().size());
       for (PlayerCondition condition : recipe.getPlayerConditions()) {
-        pBuffer.writeVarInt(Registries.RITUAL_PLAYER_CONDITION.get().getID(condition));
+        pBuffer.writeVarInt(Registries.PLAYER_CONDITION_REGISTRY.get().getID(condition));
       }
     }
   }
@@ -255,14 +255,14 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
         if (!levelConditions.isEmpty()) {
           JsonArray levelConditionsArray = new JsonArray();
           for (LevelCondition condition : levelConditions) {
-            levelConditionsArray.add(Registries.RITUAL_LEVEL_CONDITION.get().getKey(condition).toString());
+            levelConditionsArray.add(Registries.LEVEL_CONDITION_REGISTRY.get().getKey(condition).toString());
           }
           json.add("level_conditions", levelConditionsArray);
         }
         if (!playerConditions.isEmpty()) {
           JsonArray playerConditionsArray = new JsonArray();
           for (PlayerCondition condition : playerConditions) {
-            playerConditionsArray.add(Registries.RITUAL_PLAYER_CONDITION.get().getKey(condition).toString());
+            playerConditionsArray.add(Registries.PLAYER_CONDITION_REGISTRY.get().getKey(condition).toString());
           }
           json.add("player_conditions", playerConditionsArray);
         }

@@ -7,8 +7,8 @@ import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.ritual.condition.LevelCondition;
-import mysticmods.roots.api.ritual.condition.PlayerCondition;
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -39,8 +39,8 @@ public abstract class RootsAPI {
   public static ResourceKey<Registry<RitualProperty<?>>> RITUAL_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "ritual_properties"));
   public static ResourceKey<Registry<SpellProperty<?>>> SPELL_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "spell_properties"));
 
-  public static ResourceKey<Registry<LevelCondition>> RITUAL_LEVEL_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "ritual_level_conditions"));
-  public static ResourceKey<Registry<PlayerCondition>> RITUAL_PLAYER_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "ritual_player_conditions"));
+  public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "level_conditions"));
+  public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "player_conditions"));
 
   public static final ResourceLocation HERB_CAPABILITY_ID = new ResourceLocation(MODID, "herb_capability");
   public static final ResourceLocation GRANT_CAPABILITY_ID = new ResourceLocation(MODID, "grant_capability");

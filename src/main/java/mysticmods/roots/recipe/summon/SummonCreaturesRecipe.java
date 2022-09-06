@@ -111,7 +111,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
       }
 
       int resultId = pBuffer.readVarInt();
-      EntityType<?> result = Registries.ENTITIES.get().getValue(resultId);
+      EntityType<?> result = Registries.ENTITY_REGISTRY.get().getValue(resultId);
 
       return new SummonCreaturesRecipe(ingredients, result, pRecipeId);
     }
@@ -122,7 +122,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
       for (Ingredient ingredient : recipe.getIngredients()) {
         ingredient.toNetwork(pBuffer);
       }
-      pBuffer.writeVarInt(Registries.ENTITIES.get().getID(recipe.getResultEntity()));
+      pBuffer.writeVarInt(Registries.ENTITY_REGISTRY.get().getID(recipe.getResultEntity()));
     }
   }
 
