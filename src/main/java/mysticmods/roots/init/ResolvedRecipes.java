@@ -1,9 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.recipe.inventory.PlayerOffhandInventoryHandler;
 import mysticmods.roots.api.recipe.type.ResolvingRecipeType;
-import mysticmods.roots.recipe.chrysopoeia.ChrysopoeiaRecipe;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
@@ -21,7 +19,6 @@ import java.util.Comparator;
 
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class ResolvedRecipes {
-  public static final ResolvingRecipeType<PlayerOffhandInventoryHandler, ChrysopoeiaRecipe> CHRYSOPOEIA = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.CHRYSOPOEIA), Comparator.comparing(o -> o.getId().getPath()));
   public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.GROVE), Comparator.comparing(o -> o.getId().getPath()));
   public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.MORTAR), Comparator.comparing(o -> o.getId().getPath()));
   public static final ResolvingRecipeType<PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.Types.PYRE), Comparator.comparing(o -> o.getId().getPath()));
@@ -29,7 +26,6 @@ public class ResolvedRecipes {
 
   @SubscribeEvent
   public static void onReloadListeners(AddReloadListenerEvent event) {
-    event.addListener(CHRYSOPOEIA);
     event.addListener(GROVE);
     event.addListener(MORTAR);
     event.addListener(PYRE);

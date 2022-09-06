@@ -98,12 +98,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         List<PlayerCondition> failedPlayer = new ArrayList<>();
         // TODO: test conditions here
         for (PlayerCondition condition : cachedRecipe.getPlayerConditions()) {
-          if (!condition.test(level, player, newRitual, this)) {
+          if (!condition.test(level, player)) {
             failedPlayer.add(condition);
           }
         }
         List<LevelCondition> failedLevel = new ArrayList<>();
         Set<BlockPos> testedPositions = new HashSet<>();
+        // TODO: Abstract this back out into a record and embed it in the "recipe"
         for (LevelCondition condition : cachedRecipe.getLevelConditions()) {
           Set<BlockPos> newPositions = condition.test(level, player, PYRE_BOUNDS, getBlockPos(), testedPositions);
           if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
