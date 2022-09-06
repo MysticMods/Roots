@@ -249,7 +249,6 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       public void serializeRecipeData(JsonObject json) {
         super.serializeRecipeData(json);
         if (ritual != null) {
-          // TODO: 1.19 has no more getRegistryName
           json.addProperty("ritual", Registries.RITUAL_REGISTRY.get().getKey(ritual).toString());
         }
         if (!levelConditions.isEmpty()) {
