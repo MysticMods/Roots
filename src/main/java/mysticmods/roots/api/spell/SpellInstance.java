@@ -64,8 +64,6 @@ public class SpellInstance {
     }
   }
 
-  // TODO: add/remove modifiers
-
   public boolean hasModifier(Modifier modifier) {
     return enabledModifiers.contains(modifier);
   }
@@ -76,6 +74,9 @@ public class SpellInstance {
 
   // TODO: handle making sure modifiers are correct for this spell
   public void addModifier(Modifier modifier) {
+    if (modifier.getSpell() != this.getSpell()) {
+      throw new IllegalStateException("Tried to add a modifier to SpellInstance for '" + this.getSpell() + "' but the modifier '" + modifier + "' is for '" + modifier.getSpell() + "'");
+    }
     enabledModifiers.add(modifier);
   }
 
