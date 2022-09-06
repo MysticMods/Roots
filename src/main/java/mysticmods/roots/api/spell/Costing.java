@@ -53,7 +53,6 @@ public class Costing {
     modifierMap.put(modifier, true);
   }
 
-  // TODO: when should this be cleared, if ever?
   private final Map<Item, Herb> herbCache = new HashMap<>();
 
   @Nullable
