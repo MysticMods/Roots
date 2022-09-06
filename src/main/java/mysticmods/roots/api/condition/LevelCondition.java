@@ -36,8 +36,6 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
 
   public Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {
     BoundingBox newBounds = bounds.moved(pos.getX(), pos.getY(), pos.getZ());
-    // TODO; This will fail because it only returns the first match
-    // needs to be passed the set of positions to ignore.
     for (int x = newBounds.minX(); x < newBounds.maxX(); x++) {
       for (int y = newBounds.minY(); y < newBounds.maxY(); y++) {
         for (int z = newBounds.minZ(); z < newBounds.maxZ(); z++) {
