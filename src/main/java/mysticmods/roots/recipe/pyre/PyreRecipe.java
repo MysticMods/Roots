@@ -29,9 +29,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
-// TODO: RITUAL CONDITIONS
 public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
   private Ritual ritual;
+  // TODO: Move these conditions to RootsTileRecipe? or RootsTileConditionRecipe
   private List<LevelCondition> levelConditions = new ArrayList<>();
   private List<PlayerCondition> playerConditions = new ArrayList<>();
 
