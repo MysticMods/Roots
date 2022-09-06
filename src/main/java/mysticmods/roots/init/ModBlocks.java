@@ -1178,7 +1178,6 @@ public class ModBlocks {
     });
   }
 
-  // TODO: Multipart grove stone, rotation
   public static BlockEntry<GroveStoneBlock> PRIMAL_GROVE_STONE = REGISTRATE.block("primal_grove_stone", Material.STONE, GroveStoneBlock::new)
       .properties(BASE_PROPERTIES)
       .blockstate(groveStone("primal"))
