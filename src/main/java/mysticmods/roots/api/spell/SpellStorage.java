@@ -218,7 +218,7 @@ public class SpellStorage {
       instance.setCooldown(cooldown);
     }
 
-    // TODO: add/remove modifiers
+    // TODO: add/remove modifiers; this should just pass on to the spell instance
 
     @Override
     public boolean hasModifier(Modifier modifier) {
