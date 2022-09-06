@@ -107,55 +107,35 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     return new LevelCondition.PillarCondition(RootsAPI.Tags.Blocks.RUNE_CAPSTONES, RootsAPI.Tags.Blocks.RUNE_PILLARS, height);
   }
 
-  // TODO: better implementation of this
   public static LevelCondition.PillarCondition logPillar(PillarType type, int height) {
-    TagKey<Block> capstone;
-    TagKey<Block> pillar;
-    switch (type) {
-      case ACACIA -> {
-        capstone = RootsAPI.Tags.Blocks.ACACIA_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.ACACIA_PILLARS;
-      }
-      case BIRCH -> {
-        capstone = RootsAPI.Tags.Blocks.BIRCH_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.BIRCH_PILLARS;
-      }
-      case DARK_OAK -> {
-        capstone = RootsAPI.Tags.Blocks.DARK_OAK_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.DARK_OAK_PILLARS;
-      }
-      case JUNGLE -> {
-        capstone = RootsAPI.Tags.Blocks.JUNGLE_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.JUNGLE_PILLARS;
-      }
-      case OAK -> {
-        capstone = RootsAPI.Tags.Blocks.OAK_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.OAK_PILLARS;
-      }
-      case SPRUCE -> {
-        capstone = RootsAPI.Tags.Blocks.SPRUCE_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.SPRUCE_PILLARS;
-      }
-      case CRIMSON -> {
-        capstone = RootsAPI.Tags.Blocks.CRIMSON_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.CRIMSON_PILLARS;
-      }
-      case WARPED -> {
-        capstone = RootsAPI.Tags.Blocks.WARPED_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.WARPED_PILLARS;
-      }
-      case WILDWOOD -> {
-        capstone = RootsAPI.Tags.Blocks.WILDWOOD_CAPSTONES;
-        pillar = RootsAPI.Tags.Blocks.WILDWOOD_PILLARS;
-      }
-      default -> {
-        throw new IllegalStateException("Unexpected value for PillarCondition: '" + type + "' is not a valid PillarType");
-      }
-    }
-    return new PillarCondition(capstone, pillar, height);
+    return new PillarCondition(type.getCapstoneTag(), type.getPillarTag(), height);
   }
 
   public enum PillarType {
-    ACACIA, DARK_OAK, JUNGLE, OAK, SPRUCE, BIRCH, CRIMSON, WARPED, WILDWOOD
+    ACACIA(RootsAPI.Tags.Blocks.ACACIA_PILLARS, RootsAPI.Tags.Blocks.ACACIA_CAPSTONES),
+    BIRCH(RootsAPI.Tags.Blocks.BIRCH_PILLARS, RootsAPI.Tags.Blocks.BIRCH_CAPSTONES),
+    DARK_OAK(RootsAPI.Tags.Blocks.DARK_OAK_PILLARS, RootsAPI.Tags.Blocks.DARK_OAK_CAPSTONES),
+    JUNGLE(RootsAPI.Tags.Blocks.JUNGLE_PILLARS, RootsAPI.Tags.Blocks.JUNGLE_CAPSTONES),
+    OAK(RootsAPI.Tags.Blocks.OAK_PILLARS, RootsAPI.Tags.Blocks.OAK_CAPSTONES),
+    SPRUCE(RootsAPI.Tags.Blocks.SPRUCE_PILLARS, RootsAPI.Tags.Blocks.SPRUCE_CAPSTONES),
+    CRIMSON(RootsAPI.Tags.Blocks.CRIMSON_PILLARS, RootsAPI.Tags.Blocks.CRIMSON_CAPSTONES),
+    WARPED(RootsAPI.Tags.Blocks.WARPED_PILLARS, RootsAPI.Tags.Blocks.WARPED_CAPSTONES),
+    WILDWOOD(RootsAPI.Tags.Blocks.WILDWOOD_PILLARS, RootsAPI.Tags.Blocks.WILDWOOD_CAPSTONES);
+
+    private final TagKey<Block> pillarTag;
+    private final TagKey<Block> capstoneTag;
+
+    PillarType(TagKey<Block> pillarTag, TagKey<Block> capstoneTag) {
+      this.pillarTag = pillarTag;
+      this.capstoneTag = capstoneTag;
+    }
+
+    public TagKey<Block> getPillarTag() {
+      return pillarTag;
+    }
+
+    public TagKey<Block> getCapstoneTag() {
+      return capstoneTag;
+    }
   }
 }
