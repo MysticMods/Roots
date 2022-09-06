@@ -70,7 +70,6 @@ public class Roots {
         return playerAccessor.getPlayer();
       }
 
-      // TODO:
       @Override
       public void grant(ServerPlayer player, Grant grant) {
         player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(cap -> {
