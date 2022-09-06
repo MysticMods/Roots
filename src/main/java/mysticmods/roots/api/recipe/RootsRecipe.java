@@ -267,9 +267,8 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
 
-  // TODO: NBT SUPPORT???
+  // TODO: Check if the ItemStack means that NBT is supported
   public abstract static class Builder {
-    // TODO: Not final?
     protected ItemStack result;
     protected final List<Ingredient> ingredients = new ArrayList<>();
     protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
