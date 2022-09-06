@@ -10,8 +10,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Pedestal access
-
 public class GroveCrafting extends RootsTileCrafting<GroveInventoryWrapper, GroveCrafterBlockEntity> {
   public GroveCrafting(GroveInventoryWrapper handler, GroveCrafterBlockEntity blockEntity, @Nullable Player player) {
     super(handler, blockEntity, player);
