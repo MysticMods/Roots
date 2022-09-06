@@ -1,5 +1,6 @@
 package mysticmods.roots.block.crop;
 
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ItemLike;
@@ -10,21 +11,18 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class ElementalCropBlock extends ThreeStageCropBlock {
+  public static final int BASE_TICK = 9;
+  public static final int ELEMENTAL_TICK = 3;
+
   public ElementalCropBlock(Properties builder, Supplier<Supplier<? extends ItemLike>> seedProvider) {
     super(builder, seedProvider);
   }
 
-  // TODO: Check for elemental soil
   @Override
   public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-    if (pRandom.nextInt(9) != 0) {
+    BlockState stateBelow = pLevel.getBlockState(pPos.below());
+    if (pRandom.nextInt(stateBelow.is(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL) ? ELEMENTAL_TICK : BASE_TICK) != 0) {
       super.randomTick(pState, pLevel, pPos, pRandom);
     }
-  }
-
-  @Override
-  // TODO: Check for elemental soil
-  protected int getBonemealAgeIncrease(Level pLevel) {
-    return super.getBonemealAgeIncrease(pLevel) / 9;
   }
 }
