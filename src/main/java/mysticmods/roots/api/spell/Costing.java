@@ -10,7 +10,6 @@ import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.registry.Registries;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -20,13 +19,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,35 +50,13 @@ public class Costing {
     modifierMap.put(modifier, true);
   }
 
-  private final Map<Item, Herb> herbCache = new HashMap<>();
-
-  @Nullable
-  // TODO: this should go somewhere else
-  private Herb getHerb(ItemStack stack) {
-    if (!stack.is(RootsAPI.Tags.Items.Herbs.HERBS)) {
-      return null;
-    }
-    Herb potential = herbCache.get(stack.getItem());
-    if (potential != null) {
-      return potential;
-    }
-    for (Herb herb : Registries.HERB_REGISTRY.get().getValues()) {
-      if (stack.is(herb.getTag())) {
-        herbCache.put(stack.getItem(), herb);
-        return herb;
-      }
-    }
-
-    return null;
-  }
-
   private Map<Herb, List<HerbEntry>> herbMap(Player player) {
     Inventory playerInventory = player.getInventory();
     // TODO: make this a function?
     Map<Herb, List<HerbEntry>> herbMap = new HashMap<>();
     for (int i = 0; i < playerInventory.getContainerSize(); i++) {
       ItemStack inSlot = playerInventory.getItem(i);
-      Herb herb = getHerb(inSlot);
+      Herb herb = Herb.getHerb(inSlot);
       if (herb != null) {
         herbMap.computeIfAbsent(herb, k -> new ArrayList<>()).add(new HerbEntry(HerbEntryType.INVENTORY, herb, i, inSlot.getCount(), -1));
         // TODO: Pouches are just a cap?
@@ -93,7 +68,7 @@ public class Costing {
           IItemHandler cap = itemCap.orElseThrow(() -> new IllegalStateException("item cap is present but is null"));
           for (int j = 0; j < cap.getSlots(); j++) {
             ItemStack inSlot2 = cap.getStackInSlot(j);
-            Herb herb2 = getHerb(inSlot2);
+            Herb herb2 = Herb.getHerb(inSlot2);
             if (herb2 != null) {
               herbMap.computeIfAbsent(herb2, k -> new ArrayList<>()).add(new HerbEntry(HerbEntryType.POUCH, herb2, i, inSlot2.getCount(), j));
             }
@@ -113,7 +88,7 @@ public class Costing {
             ContainerHelper.loadAllItems(tag, items);
             for (int j = 0; j < items.size(); j++) {
               ItemStack inSlot2 = items.get(j);
-              Herb herb2 = getHerb(inSlot2);
+              Herb herb2 = Herb.getHerb(inSlot2);
               if (herb2 != null) {
                 herbMap.computeIfAbsent(herb2, k -> new ArrayList<>()).add(new HerbEntry(HerbEntryType.POUCH, herb2, i, inSlot2.getCount(), j));
               }
