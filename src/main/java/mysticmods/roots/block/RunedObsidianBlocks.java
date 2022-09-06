@@ -58,7 +58,6 @@ public class RunedObsidianBlocks {
 
   public static class Stairs extends StairBlock {
     public Stairs(Properties properties) {
-      // TODO
       super(() -> ModBlocks.RUNED_OBSIDIAN.getDefaultState(), properties);
     }
 
