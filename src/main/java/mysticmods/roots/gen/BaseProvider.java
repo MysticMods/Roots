@@ -16,7 +16,6 @@ import java.util.Objects;
 public abstract class BaseProvider implements DataProvider {
   protected static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
 
-  // TODO: abstract this up a level
   protected static void saveRecipe(HashCache pCache, JsonObject pRecipeJson, Path pPath) {
     try {
       String s = GSON.toJson(pRecipeJson);
