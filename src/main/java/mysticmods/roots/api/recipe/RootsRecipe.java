@@ -1,11 +1,17 @@
 package mysticmods.roots.api.recipe;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.capability.Grant;
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.util.SetUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +27,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.items.IItemHandler;
@@ -28,9 +35,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<H, W> {
@@ -38,6 +43,9 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   protected final ResourceLocation recipeId;
   protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
   protected final List<Grant> grants = new ArrayList<>();
+
+  protected final List<LevelCondition> levelConditions = new ArrayList<>();
+  protected final List<PlayerCondition> playerConditions = new ArrayList<>();
   protected ItemStack result;
 
   @FunctionalInterface
@@ -52,6 +60,24 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   public void setIngredients(NonNullList<Ingredient> ingredients) {
     this.ingredients.clear();
     this.ingredients.addAll(ingredients);
+  }
+
+  public void setLevelConditions(List<LevelCondition> levelConditions) {
+    this.levelConditions.clear();
+    this.levelConditions.addAll(levelConditions);
+  }
+
+  public void setPlayerConditions(List<PlayerCondition> playerConditions) {
+    this.playerConditions.clear();
+    this.playerConditions.addAll(playerConditions);
+  }
+
+  public List<LevelCondition> getLevelConditions() {
+    return levelConditions;
+  }
+
+  public List<PlayerCondition> getPlayerConditions() {
+    return playerConditions;
   }
 
   public void setResultItem(ItemStack result) {
@@ -105,6 +131,34 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     return grants;
   }
 
+  public ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
+    List<PlayerCondition> failedPlayer = new ArrayList<>();
+    for (PlayerCondition condition : this.getPlayerConditions()) {
+      if (!condition.test(level, player)) {
+        failedPlayer.add(condition);
+      }
+    }
+    List<LevelCondition> failedLevel = new ArrayList<>();
+    Set<BlockPos> testedPositions = new HashSet<>();
+    // TODO: Abstract this back out into a record and embed it in the "recipe"
+    for (LevelCondition condition : this.getLevelConditions()) {
+      Set<BlockPos> newPositions = condition.test(level, player, bounds, center, testedPositions);
+      if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
+        failedLevel.add(condition);
+      } else {
+        testedPositions.addAll(newPositions);
+      }
+    }
+
+    return new ConditionResult(failedLevel, failedPlayer);
+  }
+
+  public record ConditionResult(List<LevelCondition> failedLevelConditions,
+                                List<PlayerCondition> failedPlayerConditions) {
+    public boolean anyFailed () {
+      return !failedLevelConditions.isEmpty() || failedPlayerConditions.isEmpty();
+    }
+  }
 
   @Override
   public ResourceLocation getId() {
@@ -180,6 +234,26 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         }
         recipe.addGrants(grants);
       }
+      if (GsonHelper.isArrayNode(pJson, "level_conditions")) {
+        for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "level_conditions")) {
+          ResourceLocation condName = new ResourceLocation(element.getAsString());
+          LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(condName);
+          if (condition == null) {
+            throw new JsonSyntaxException("Level condition '" + condName + "' does not exist!");
+          }
+          recipe.getLevelConditions().add(condition);
+        }
+      }
+      if (GsonHelper.isArrayNode(pJson, "player_conditions")) {
+        for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "player_conditions")) {
+          ResourceLocation condName = new ResourceLocation(element.getAsString());
+          PlayerCondition condition = Registries.PLAYER_CONDITION_REGISTRY.get().getValue(condName);
+          if (condition == null) {
+            throw new JsonSyntaxException("Player condition '" + condName + "' does not exist!");
+          }
+          recipe.getPlayerConditions().add(condition);
+        }
+      }
 
       fromJsonAdditional(recipe, pRecipeId, pJson);
       return recipe;
@@ -219,6 +293,18 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
           recipe.addGrant(Grant.fromNetwork(pBuffer));
         }
       }
+      int levelConditionsSize = pBuffer.readVarInt();
+      for (int i = 0; i < levelConditionsSize; i++) {
+        LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
+        recipe.getLevelConditions().add(condition);
+      }
+      int playerConditionsSize = pBuffer.readVarInt();
+      for (int i = 0; i < playerConditionsSize; i++) {
+        PlayerCondition condition = Registries.PLAYER_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
+        recipe.getPlayerConditions().add(condition);
+      }
+
+
       fromNetworkAdditional(recipe, pRecipeId, pBuffer);
       return recipe;
     }
@@ -250,6 +336,15 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         grant.toNetwork(pBuffer);
       }
 
+      pBuffer.writeVarInt(recipe.getLevelConditions().size());
+      for (LevelCondition condition : recipe.getLevelConditions()) {
+        pBuffer.writeVarInt(Registries.LEVEL_CONDITION_REGISTRY.get().getID(condition));
+      }
+      pBuffer.writeVarInt(recipe.getPlayerConditions().size());
+      for (PlayerCondition condition : recipe.getPlayerConditions()) {
+        pBuffer.writeVarInt(Registries.PLAYER_CONDITION_REGISTRY.get().getID(condition));
+      }
+
       toNetworkAdditional(recipe, pBuffer);
     }
   }
@@ -273,6 +368,8 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     protected final List<Ingredient> ingredients = new ArrayList<>();
     protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
     protected final List<Grant> grants = new ArrayList<>();
+    protected final List<LevelCondition> levelConditions = new ArrayList<>();
+    protected final List<PlayerCondition> playerConditions = new ArrayList<>();
 
     protected Builder() {
     }
@@ -322,8 +419,19 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return this;
     }
 
+    public Builder addLevelCondition(LevelCondition condition) {
+      this.levelConditions.add(condition);
+      return this;
+
+    }
+
+    public Builder addPlayerCondition(PlayerCondition condition) {
+      this.playerConditions.add(condition);
+      return this;
+    }
+
     public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, getSerializer()));
+      consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer()));
     }
 
     public static class Result implements FinishedRecipe {
@@ -333,14 +441,18 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       private final RecipeSerializer<?> serializer;
       private final List<ConditionalOutput> conditionalOutputs;
       private final List<Grant> grants;
+      private final List<LevelCondition> levelConditions;
+      private final List<PlayerCondition> playerConditions;
 
-      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, RecipeSerializer<?> serializer) {
+      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer) {
         this.id = id;
         this.result = result;
         this.ingredients = ingredients;
         this.serializer = serializer;
         this.conditionalOutputs = conditionalOutputs;
         this.grants = grants;
+        this.levelConditions = levelConditions;
+        this.playerConditions = playerConditions;
       }
 
       @Override
@@ -382,6 +494,20 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
             grants.add(grant.toJson());
           }
           json.add("grants", grants);
+        }
+        if (!levelConditions.isEmpty()) {
+          JsonArray levelConditionsArray = new JsonArray();
+          for (LevelCondition condition : levelConditions) {
+            levelConditionsArray.add(Registries.LEVEL_CONDITION_REGISTRY.get().getKey(condition).toString());
+          }
+          json.add("level_conditions", levelConditionsArray);
+        }
+        if (!playerConditions.isEmpty()) {
+          JsonArray playerConditionsArray = new JsonArray();
+          for (PlayerCondition condition : playerConditions) {
+            playerConditionsArray.add(Registries.PLAYER_CONDITION_REGISTRY.get().getKey(condition).toString());
+          }
+          json.add("player_conditions", playerConditionsArray);
         }
       }
 

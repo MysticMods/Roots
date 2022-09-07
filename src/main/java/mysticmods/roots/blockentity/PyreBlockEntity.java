@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -95,28 +96,16 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         } else {
           currentRitual = newRitual;
         }
-        List<PlayerCondition> failedPlayer = new ArrayList<>();
-        // TODO: test conditions here
-        for (PlayerCondition condition : cachedRecipe.getPlayerConditions()) {
-          if (!condition.test(level, player)) {
-            failedPlayer.add(condition);
-          }
-        }
-        List<LevelCondition> failedLevel = new ArrayList<>();
-        Set<BlockPos> testedPositions = new HashSet<>();
-        // TODO: Abstract this back out into a record and embed it in the "recipe"
-        for (LevelCondition condition : cachedRecipe.getLevelConditions()) {
-          Set<BlockPos> newPositions = condition.test(level, player, PYRE_BOUNDS, getBlockPos(), testedPositions);
-          if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
-            failedLevel.add(condition);
-          } else {
-            testedPositions.addAll(newPositions);
-          }
+
+        RootsRecipe.ConditionResult result = cachedRecipe.checkConditions(level, player, PYRE_BOUNDS, pos);
+        if (result.anyFailed()) {
+          RootsAPI.LOG.info("Conditions failed.");
+          result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o));
+          result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o));
+          // Needs to be a success or it sets things on fire
+          return InteractionResult.SUCCESS;
         }
 
-        if (!failedLevel.isEmpty() || !failedPlayer.isEmpty()) {
-          return InteractionResult.FAIL;
-        }
         PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
         lastRecipe = cachedRecipe;
         previousRecipeItems.clear();
