@@ -203,38 +203,6 @@ public class ModItems {
       .model(subfolder("food"))
       .register();
 
-  public static final ItemEntry<Item> SYLVAN_BOOTS = REGISTRATE.item("sylvan_boots", Item::new)
-      .model(subfolder("armor"))
-      .register();
-
-  public static final ItemEntry<Item> SYLVAN_CHESTPLATE = REGISTRATE.item("sylvan_chestplate", Item::new)
-      .model(subfolder("armor"))
-      .register();
-
-  public static final ItemEntry<Item> SYLVAN_HELMET = REGISTRATE.item("sylvan_helmet", Item::new)
-      .model(subfolder("armor"))
-      .register();
-
-  public static final ItemEntry<Item> SYLVAN_LEGGINGS = REGISTRATE.item("sylvan_leggings", Item::new)
-      .model(subfolder("armor"))
-      .register();
-
-  public static final ItemEntry<Item> WILDWOOD_BOOTS = REGISTRATE.item("wildwood_boots", Item::new)
-      .model(subfolder("armor"))
-      .register();
-
-  public static final ItemEntry<Item> WILDWOOD_CHESTPLATE = REGISTRATE.item("wildwood_chestplate", Item::new)
-      .model(subfolder("armor"))
-      .register();
-
-  public static final ItemEntry<Item> WILDWOOD_HELMET = REGISTRATE.item("wildwood_helmet", Item::new)
-      .model(subfolder("armor"))
-      .register();
-
-  public static final ItemEntry<Item> WILDWOOD_LEGGINGS = REGISTRATE.item("wildwood_leggings", Item::new)
-      .model(subfolder("armor"))
-      .register();
-
   public static final ItemEntry<FireStarterItem> FIRE_STARTER = REGISTRATE.item("fire_starter", FireStarterItem::new)
       .properties(o -> o.stacksTo(1))
       .model(subfolder("tools"))
