@@ -8,8 +8,6 @@ import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -17,7 +15,6 @@ import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
-import mysticmods.roots.util.SetUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -41,7 +38,9 @@ import noobanidus.libs.particleslib.client.particle.Particles;
 import noobanidus.libs.particleslib.init.ModParticles;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 // This controls the LIT state
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {

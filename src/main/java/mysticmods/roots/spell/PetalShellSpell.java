@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PetalShellSpell extends Spell {
   public PetalShellSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT,color , costs);
+    super(Type.INSTANT, color, costs);
   }
 
   @Override

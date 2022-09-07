@@ -1,12 +1,12 @@
 package mysticmods.roots.api.registry;
 
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistry;

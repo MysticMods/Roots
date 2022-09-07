@@ -44,7 +44,7 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements Costed
     return modifiers;
   }
 
-  public abstract SpellProperty<Integer> getCooldownProperty ();
+  public abstract SpellProperty<Integer> getCooldownProperty();
 
   public int getCooldown() {
     return cooldown;
@@ -58,8 +58,8 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements Costed
     modifiers.add(modifier);
   }
 
-  protected void initializeProperties () {
-    SpellProperty<Integer> cooldownProperty = getCooldownProperty ();
+  protected void initializeProperties() {
+    SpellProperty<Integer> cooldownProperty = getCooldownProperty();
     if (cooldownProperty != null) {
       this.cooldown = cooldownProperty.getValue();
     }
@@ -67,7 +67,7 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements Costed
 
   public abstract void initialize();
 
-  public void init () {
+  public void init() {
   }
 
   public abstract void cast(Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);

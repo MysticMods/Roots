@@ -133,11 +133,12 @@ public class ModSpells {
     return REGISTRATE.simple(key.location().getPath(), Spell.class, spellBuilder(consturctor, color, costs));
   }
 
-  private static <T extends Spell> NonNullSupplier<T> spellBuilder (SpellConstructor<T> constructor, ChatFormatting color, Supplier<List<Cost>> costs) {
+  private static <T extends Spell> NonNullSupplier<T> spellBuilder(SpellConstructor<T> constructor, ChatFormatting color, Supplier<List<Cost>> costs) {
     return () -> constructor.create(color, costs.get());
   }
+
   private interface SpellConstructor<T extends Spell> {
-    T create (ChatFormatting color, List<Cost> costs);
+    T create(ChatFormatting color, List<Cost> costs);
   }
 
   private static RegistryEntry<Modifier> modifier(ResourceKey<Spell> key, String name, NonNullSupplier<Modifier> builder) {

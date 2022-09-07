@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AcidCloudSpell extends Spell {
   public AcidCloudSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.CONTINUOUS, color ,costs);
+    super(Type.CONTINUOUS, color, costs);
   }
 
   @Override

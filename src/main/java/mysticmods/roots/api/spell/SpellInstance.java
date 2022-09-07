@@ -110,7 +110,7 @@ public class SpellInstance {
     return toNBT(result);
   }
 
-  public CompoundTag toNBT (CompoundTag result) {
+  public CompoundTag toNBT(CompoundTag result) {
     result.putString("spell", spell.getKey().toString());
     ListTag modifiers = new ListTag();
     enabledModifiers.forEach(o -> modifiers.add(StringTag.valueOf(o.getKey().toString())));

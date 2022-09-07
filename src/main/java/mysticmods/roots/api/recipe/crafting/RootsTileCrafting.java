@@ -1,7 +1,5 @@
 package mysticmods.roots.api.recipe.crafting;
 
-import mysticmods.roots.api.recipe.crafting.IRootsTileCrafting;
-import mysticmods.roots.api.recipe.crafting.RootsCrafting;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

@@ -1,7 +1,6 @@
 package mysticmods.roots.api.herbs;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;

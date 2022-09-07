@@ -7,5 +7,6 @@ import java.util.List;
 // TODO: Format costs as a list of components
 public interface CostedRegistryEntry {
   List<Cost> getCosts();
+
   void setCosts(List<Cost> costs);
 }

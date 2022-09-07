@@ -8,7 +8,7 @@ import mysticmods.roots.init.ModRituals;
 public class GerminationRitual extends Ritual {
   @Override
   protected void functionalTick(PyreBlockEntity blockEntity, int duration) {
-    
+
   }
 
   @Override

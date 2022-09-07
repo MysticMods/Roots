@@ -27,6 +27,6 @@ public class ModConditions {
   public static final RegistryEntry<LevelCondition> WILDWOOD_PILLAR_4_HIGH = REGISTRATE.simple("wildwood_pillar_4_high", LevelCondition.class, () -> new LevelCondition(LevelCondition.logPillar(LevelCondition.PillarType.WILDWOOD, 4)));
   public static final RegistryEntry<LevelCondition> WILDWOOD_PILLAR_3_HIGH = REGISTRATE.simple("wildwood_pillar_3_high", LevelCondition.class, () -> new LevelCondition(LevelCondition.logPillar(LevelCondition.PillarType.WILDWOOD, 3)));
 
-  public static void load () {
+  public static void load() {
   }
 }

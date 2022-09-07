@@ -155,7 +155,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
   public record ConditionResult(List<LevelCondition> failedLevelConditions,
                                 List<PlayerCondition> failedPlayerConditions) {
-    public boolean anyFailed () {
+    public boolean anyFailed() {
       return !failedLevelConditions.isEmpty() || failedPlayerConditions.isEmpty();
     }
   }

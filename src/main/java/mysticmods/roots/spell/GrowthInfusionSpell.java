@@ -15,7 +15,7 @@ import java.util.List;
 
 public class GrowthInfusionSpell extends Spell {
   public GrowthInfusionSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.CONTINUOUS,color, costs);
+    super(Type.CONTINUOUS, color, costs);
   }
 
   @Override

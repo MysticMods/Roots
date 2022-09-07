@@ -1,7 +1,8 @@
 package mysticmods.roots.api.registry;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public interface IDescribedRegistryEntry {
@@ -18,7 +19,7 @@ public interface IDescribedRegistryEntry {
     return new TranslatableComponent(this.getDescriptionId());
   }
 
-  default MutableComponent getName (Style style) {
+  default MutableComponent getName(Style style) {
     return getName().setStyle(style);
   }
 }

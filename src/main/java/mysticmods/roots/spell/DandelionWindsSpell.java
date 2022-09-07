@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DandelionWindsSpell extends Spell {
   public DandelionWindsSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT,color, costs);
+    super(Type.INSTANT, color, costs);
   }
 
   @Override

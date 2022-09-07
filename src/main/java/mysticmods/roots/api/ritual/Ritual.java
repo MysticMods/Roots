@@ -32,7 +32,7 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
     aabb = AABB.of(getBoundingBox());
   }
 
-  private void initProperties () {
+  private void initProperties() {
     RitualProperty<Integer> prop;
     prop = getDurationProperty();
     if (prop != null) {
@@ -97,6 +97,8 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   protected abstract RitualProperty<Integer> getDurationProperty();
 
   protected abstract RitualProperty<Integer> getRadiusXZProperty();
+
   protected abstract RitualProperty<Integer> getRadiusYProperty();
+
   protected abstract RitualProperty<Integer> getIntervalProperty();
 }

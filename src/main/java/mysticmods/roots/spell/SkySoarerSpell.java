@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 public class SkySoarerSpell extends Spell {
-  public SkySoarerSpell(ChatFormatting color ,List<Cost> costs) {
+  public SkySoarerSpell(ChatFormatting color, List<Cost> costs) {
     super(Type.INSTANT, color, costs);
   }
 

@@ -2,13 +2,13 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.capability.Grant;
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.herbs.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
