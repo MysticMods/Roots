@@ -5,6 +5,7 @@ import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import net.minecraft.core.NonNullList;
@@ -75,6 +76,12 @@ public class TokenItem extends Item {
           SpellInstance spellInstance = getSpellInstance(pStack);
           if (spellInstance != null) {
             return spellInstance.getSpell().getDescriptionId();
+          }
+        }
+        case RITUAL -> {
+          Ritual ritual = getRitual(pStack);
+          if (ritual != null) {
+            return ritual.getDescriptionId();
           }
         }
         default -> {
@@ -185,9 +192,15 @@ public class TokenItem extends Item {
       }
       case LIBRARY -> {
       }
+      case RITUAL -> {
+        Ritual ritual = getRitual(pStack);
+        if (ritual != null) {
+          pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.ritual", ritual.getName()));
+        }
+      }
     }
 
-    if (type != null && type.isGrantable()) {
+    if (type.isGrantable()) {
       pTooltipComponents.add(new TextComponent(""));
       if (unlocked) {
         pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.unlocked"));
@@ -208,6 +221,11 @@ public class TokenItem extends Item {
       for (Modifier modifier : Registries.MODIFIER_REGISTRY.get().getValues()) {
         ItemStack thisStack = new ItemStack(this);
         setModifier(thisStack, modifier);
+        pItems.add(thisStack);
+      }
+      for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {
+        ItemStack thisStack = new ItemStack(this);
+        setRitual(thisStack, ritual);
         pItems.add(thisStack);
       }
     }
@@ -322,12 +340,29 @@ public class TokenItem extends Item {
     tag.putBoolean("enabled", enabled);
   }
 
+  public void setRitual(ItemStack stack, Ritual ritual) {
+    CompoundTag tag = stack.getOrCreateTag();
+    tag.putString("type", Type.RITUAL.name().toLowerCase(Locale.ROOT));
+    tag.putString("ritual", Registries.RITUAL_REGISTRY.get().getKey(ritual).toString());
+  }
+
+  @Nullable
+  public Ritual getRitual(ItemStack stack) {
+    CompoundTag tag = stack.getTag();
+    if (tag == null) {
+      return null;
+    }
+
+    return Registries.RITUAL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("ritual")));
+  }
+
   public enum Type {
     SPELL(true), // Spell
     MODIFIER(true), // Modifier
     LIBRARY(false), // Spell + all available modifiers
     STAFF(false), // SpellInstance
-    STAFF_MODIFIER(false); // Spell + Modifier and a boolean
+    STAFF_MODIFIER(false),
+    RITUAL(false); // Spell + Modifier and a boolean
 
     private final boolean grantable;
 

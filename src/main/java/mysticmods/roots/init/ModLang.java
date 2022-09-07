@@ -24,6 +24,7 @@ public class ModLang {
       b.add("roots.tooltip.token.unlocked", "You've already unlocked this.");
       b.add("roots.tooltip.token.available_modifiers", "Available modifiers:");
       b.add("roots.tooltip.token.enabled_modifiers", "Enabled modifiers:");
+      b.add("roots.tooltip.token.ritual", "Ritual: %s");
 
       b.add("roots.tooltip.cost.herb_cost", "%s %s");
       b.add("roots.tooltip.cost.cost_amount", "x%s");
