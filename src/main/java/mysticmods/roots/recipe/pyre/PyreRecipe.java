@@ -28,7 +28,6 @@ import java.util.function.Consumer;
 
 public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
   private Ritual ritual;
-  // TODO: Move these conditions to RootsTileRecipe? or RootsTileConditionRecipe
 
   public PyreRecipe(ResourceLocation recipeId) {
     super(recipeId);

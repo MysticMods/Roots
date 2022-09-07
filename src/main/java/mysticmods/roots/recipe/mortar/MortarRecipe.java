@@ -2,6 +2,8 @@ package mysticmods.roots.recipe.mortar;
 
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.capability.Grant;
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
@@ -85,7 +87,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
     @Override
     public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, getSerializer(), times));
+      consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), times));
     }
 
     @Override
@@ -96,8 +98,8 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     public static class Result extends RootsRecipe.Builder.Result {
       private final int times;
 
-      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, RecipeSerializer<?> serializer, int times) {
-        super(id, result, ingredients, conditionalOutputs, grants, serializer);
+      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, int times) {
+        super(id, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, serializer);
         this.times = times;
       }
 

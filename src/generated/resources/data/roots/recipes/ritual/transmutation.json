@@ -17,9 +17,9 @@
       "tag": "forge:cobblestone"
     }
   ],
-  "ritual": "roots:transmutation",
   "level_conditions": [
     "roots:rune_pillar_3_high",
     "roots:rune_pillar_3_high"
-  ]
+  ],
+  "ritual": "roots:transmutation"
 }
