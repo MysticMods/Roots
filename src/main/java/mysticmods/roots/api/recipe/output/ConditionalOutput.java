@@ -4,8 +4,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ public class ConditionalOutput {
   }
 
   @Nonnull
-  public ItemStack getResult(Random random) {
+  public ItemStack getResult(RandomSource random) {
     if (random.nextFloat() < this.chance) {
       return this.output.copy();
     }
@@ -45,7 +47,7 @@ public class ConditionalOutput {
     JsonObject result = new JsonObject();
     result.addProperty("chance", this.chance);
     JsonObject item = new JsonObject();
-    item.addProperty("item", this.output.getItem().getRegistryName().toString());
+    item.addProperty("item", ForgeRegistries.ITEMS.getKey(this.output.getItem()).toString());
     item.addProperty("count", this.output.getCount());
     if (this.output.hasTag()) {
       item.addProperty("nbt", this.output.getTag().toString());
@@ -82,7 +84,7 @@ public class ConditionalOutput {
     return new ConditionalOutput(pBuffer.readItem(), pBuffer.readFloat());
   }
 
-  public static List<ItemStack> getOutputs(List<ConditionalOutput> conditionalOutputs, Random random) {
+  public static List<ItemStack> getOutputs(List<ConditionalOutput> conditionalOutputs, RandomSource random) {
     List<ItemStack> result = new ArrayList<>();
     for (ConditionalOutput output : conditionalOutputs) {
       ItemStack thisResult = output.getResult(random);

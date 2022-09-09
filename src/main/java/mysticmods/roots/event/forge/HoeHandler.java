@@ -1,25 +1,11 @@
 package mysticmods.roots.event.forge;
 
 import mysticmods.roots.api.RootsAPI;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class HoeHandler {
-  @SubscribeEvent
+/*  @SubscribeEvent
   public static void onHoeUse(UseHoeEvent event) {
     Level world = event.getPlayer().level;
     UseOnContext pContext = event.getContext();
@@ -36,5 +22,5 @@ public class HoeHandler {
         event.setResult(Event.Result.ALLOW);
       }
     }
-  }
+  }*/
 }

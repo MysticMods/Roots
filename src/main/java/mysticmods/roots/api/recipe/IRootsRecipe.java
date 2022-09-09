@@ -11,8 +11,8 @@ public interface IRootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H
   default NonNullList<ItemStack> process(List<ItemStack> ingredients) {
     NonNullList<ItemStack> result = NonNullList.create();
     for (ItemStack stack : ingredients) {
-      if (stack.hasContainerItem()) {
-        result.add(stack.getContainerItem());
+      if (stack.hasCraftingRemainingItem()) {
+        result.add(stack.getCraftingRemainingItem());
       }
     }
     return result;

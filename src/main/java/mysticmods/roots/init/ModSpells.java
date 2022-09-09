@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.Property;
@@ -130,7 +131,7 @@ public class ModSpells {
   public static final RegistryEntry<SpellProperty<Integer>> WILDFIRE_COOLDOWN = property(Spells.WILDFIRE, "cooldown", () -> new SpellProperty<>(WILDFIRE::get, 24, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
   private static <T extends Spell> RegistryEntry<T> spell(ResourceKey<Spell> key, SpellConstructor<T> consturctor, ChatFormatting color, Supplier<List<Cost>> costs) {
-    return REGISTRATE.simple(key.location().getPath(), Spell.class, spellBuilder(consturctor, color, costs));
+    return REGISTRATE.simple(key.location().getPath(), RootsAPI.SPELL_REGISTRY, spellBuilder(consturctor, color, costs));
   }
 
   private static <T extends Spell> NonNullSupplier<T> spellBuilder(SpellConstructor<T> constructor, ChatFormatting color, Supplier<List<Cost>> costs) {
@@ -142,11 +143,12 @@ public class ModSpells {
   }
 
   private static RegistryEntry<Modifier> modifier(ResourceKey<Spell> key, String name, NonNullSupplier<Modifier> builder) {
-    return REGISTRATE.simple(key.location().getPath() + "/" + name, Modifier.class, builder);
+    return REGISTRATE.simple(key.location().getPath() + "/" + name, RootsAPI.MODIFIER_REGISTRY, builder);
   }
 
+  // TODO: Use this for Ritual Properties too
   private static <T> RegistryEntry<SpellProperty<T>> property(ResourceKey<Spell> key, String name, NonNullSupplier<SpellProperty<T>> builder) {
-    return REGISTRATE.simple(key.location().getPath() + "/" + name, SpellProperty.class, builder);
+    return REGISTRATE.simple(key.location().getPath() + "/" + name, RootsAPI.SPELL_PROPERTY_REGISTRY, builder);
   }
 
   public static void load() {

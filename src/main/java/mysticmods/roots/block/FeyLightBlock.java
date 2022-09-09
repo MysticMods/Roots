@@ -2,6 +2,7 @@ package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -48,7 +49,7 @@ public class FeyLightBlock extends Block {
   }
 
   @Override
-  public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRand) {
+  public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRand) {
     super.animateTick(pState, pLevel, pPos, pRand);
 
     DyeColor color = null;

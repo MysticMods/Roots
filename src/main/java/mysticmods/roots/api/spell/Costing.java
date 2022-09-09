@@ -20,8 +20,8 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class Costing {
         // TODO: Pouches are just a cap?
         /*      } else if (inSlot.is(RootsTags.Items.POUCHES)) {*/
       } else {
-        LazyOptional<IItemHandler> itemCap = inSlot.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+        LazyOptional<IItemHandler> itemCap = inSlot.getCapability(ForgeCapabilities.ITEM_HANDLER);
         if (itemCap.isPresent()) {
           // TODO: check the item cap
           IItemHandler cap = itemCap.orElseThrow(() -> new IllegalStateException("item cap is present but is null"));

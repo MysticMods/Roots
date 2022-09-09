@@ -7,6 +7,7 @@ import mysticmods.roots.api.herbs.Cost;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.gen.BaseProvider;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -23,7 +24,7 @@ public class SpellCostProvider extends BaseProvider implements DataProvider {
   }
 
   @Override
-  public void run(HashCache pCache) {
+  public void run(CachedOutput pCache) {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
     for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {

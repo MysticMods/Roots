@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.gen.BaseProvider;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +21,7 @@ public class SpellPropertyProvider extends BaseProvider {
   }
 
   @Override
-  public void run(HashCache pCache) {
+  public void run(CachedOutput pCache) {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
     for (SpellProperty<?> prop : Registries.SPELL_PROPERTY_REGISTRY.get().getValues()) {

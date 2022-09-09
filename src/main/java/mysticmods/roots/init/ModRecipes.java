@@ -32,10 +32,10 @@ public class ModRecipes {
 
   public static class Serializers {
 
-    public static final RegistryEntry<GroveRecipe.Serializer> GROVE_CRAFTING = REGISTRATE.simple("grove", RecipeSerializer.class, GroveRecipe.Serializer::new);
-    public static final RegistryEntry<MortarRecipe.Serializer> MORTAR = REGISTRATE.simple("mortar", RecipeSerializer.class, MortarRecipe.Serializer::new);
-    public static final RegistryEntry<SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = REGISTRATE.simple("summon_creatures", RecipeSerializer.class, SummonCreaturesRecipe.Serializer::new);
-    public static final RegistryEntry<PyreRecipe.Serializer> PYRE = REGISTRATE.simple("pyre", RecipeSerializer.class, PyreRecipe.Serializer::new);
+    public static final RegistryEntry<GroveRecipe.Serializer> GROVE_CRAFTING = REGISTRATE.simple("grove", Registry.RECIPE_SERIALIZER_REGISTRY, GroveRecipe.Serializer::new);
+    public static final RegistryEntry<MortarRecipe.Serializer> MORTAR = REGISTRATE.simple("mortar", Registry.RECIPE_SERIALIZER_REGISTRY, MortarRecipe.Serializer::new);
+    public static final RegistryEntry<SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = REGISTRATE.simple("summon_creatures", Registry.RECIPE_SERIALIZER_REGISTRY, SummonCreaturesRecipe.Serializer::new);
+    public static final RegistryEntry<PyreRecipe.Serializer> PYRE = REGISTRATE.simple("pyre", Registry.RECIPE_SERIALIZER_REGISTRY, PyreRecipe.Serializer::new);
 
     public static void load() {
     }

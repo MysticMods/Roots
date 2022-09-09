@@ -23,6 +23,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -258,7 +259,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return inventory;
   }
 
-  public Random getRandom() {
+  public RandomSource getRandom() {
     return getLevel().getRandom();
   }
 
@@ -280,7 +281,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
-    Random pRandom = pLevel.getRandom();
+    RandomSource pRandom = pLevel.getRandom();
     if (pState.is(RootsAPI.Tags.Blocks.PYRES) && pState.getValue(PyreBlock.LIT)) {
       Particles.create(ModParticles.FIERY_PARTICLE.get())
           .addVelocity(0.00525f * (pRandom.nextFloat() - 0.5f), 0, 0.00525f * (pRandom.nextFloat() - 0.5f))
