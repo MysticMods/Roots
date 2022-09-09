@@ -1,7 +1,6 @@
 package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
-import mysticmods.mysticalworld.MWTags;
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
@@ -87,8 +86,7 @@ public class ModTags {
 
       b.tag(RootsAPI.Tags.Items.BARKS).addTags(RootsAPI.Tags.Items.BIRCH_BARK, RootsAPI.Tags.Items.ACACIA_BARK, RootsAPI.Tags.Items.DARK_OAK_BARK, RootsAPI.Tags.Items.OAK_BARK, RootsAPI.Tags.Items.JUNGLE_BARK, RootsAPI.Tags.Items.SPRUCE_BARK, RootsAPI.Tags.Items.WILDWOOD_BARK, RootsAPI.Tags.Items.CRIMSON_BARK, RootsAPI.Tags.Items.WARPED_BARK, RootsAPI.Tags.Items.MIXED_BARK);
 
-      b.tag(MWTags.Items.FORGE_KNIVES);
-      b.tag(RootsAPI.Tags.Items.GROVE_CRAFTER_ACTIVATION).addTag(MWTags.Items.FORGE_KNIVES);
+      b.tag(RootsAPI.Tags.Items.GROVE_CRAFTER_ACTIVATION).add(Items.STICK);
       b.tag(RootsAPI.Tags.Items.PYRE_ACTIVATION).add(Items.FLINT_AND_STEEL);
 
       b.tag(RootsAPI.Tags.Items.Herbs.MOONGLOW).addTag(RootsAPI.Tags.Items.MOONGLOW_CROP);
