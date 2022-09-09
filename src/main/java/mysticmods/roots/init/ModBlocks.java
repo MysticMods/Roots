@@ -1097,9 +1097,10 @@ public class ModBlocks {
       .build()
       .register();
 
-  public static BlockEntry<Block> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, Block::new)
+  public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate((ctx, p) -> {
+        p.directionalBlock(ctx.getEntry(), p.models().getExistingFile(new ResourceLocation(RootsAPI.MODID, "block/complex/wild_roots")));
       })
       .tag(BlockTags.MINEABLE_WITH_HOE)
       .register();

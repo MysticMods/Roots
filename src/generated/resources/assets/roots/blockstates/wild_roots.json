@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "roots:block/complex/wild_roots",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "roots:block/complex/wild_roots",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "roots:block/complex/wild_roots",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "roots:block/complex/wild_roots",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "roots:block/complex/wild_roots"
+    },
+    "facing=west": {
+      "model": "roots:block/complex/wild_roots",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
