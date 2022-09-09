@@ -23,21 +23,11 @@ public class ClientSetup {
   @SubscribeEvent
   public static void clientSetup(FMLClientSetupEvent event) {
     RenderType cutout = RenderType.cutoutMipped();
+    // TODO: Set these up properly with generated render_types.
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_LEAVES.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEY_LIGHT.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.DEWGONIA_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.INFERNO_BULB_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.MOONGLOW_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.PERESKIA_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.SPIRITLEAF_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.STALICRIPE_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDEWHEET_CROP.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.Crops.WILDROOT_CROP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.BAFFLECAP_BLOCK.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.GROVE_MOSS.get(), cutout);
-    ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_ROOTS.get(), cutout);
   }
 
   @SubscribeEvent
