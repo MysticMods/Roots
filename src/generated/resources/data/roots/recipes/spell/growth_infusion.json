@@ -1,17 +1,17 @@
 {
   "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:growth_infusion"
+    }
+  ],
   "ingredients": [
     {
       "tag": "forge:slimeballs"
     },
     {
       "tag": "roots:crops/wildroot"
-    }
-  ],
-  "grants": [
-    {
-      "id": "roots:growth_infusion",
-      "type": "spell"
     }
   ],
   "times": 4

@@ -1,14 +1,14 @@
 {
   "costs": [
     {
+      "type": "additive",
       "herb": "roots:bafflecap",
-      "value": 0.25,
-      "type": "additive"
+      "value": 0.25
     },
     {
+      "type": "additive",
       "herb": "roots:moonglow",
-      "value": 0.25,
-      "type": "additive"
+      "value": 0.25
     }
   ]
 }

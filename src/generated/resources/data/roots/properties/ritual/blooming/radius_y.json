@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:blooming",
-  "value": 10,
+  "_comment": "The vertical radius of the ritual in blocks.",
   "default_value": 10,
-  "_comment": "The vertical radius of the ritual in blocks."
+  "ritual": "roots:blooming",
+  "value": 10
 }

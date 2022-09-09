@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:summon_creatures",
-  "value": 150,
+  "_comment": "How often the ritual is executed (must be shorter than duration)",
   "default_value": 150,
-  "_comment": "How often the ritual is executed (must be shorter than duration)"
+  "ritual": "roots:summon_creatures",
+  "value": 150
 }

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "side": "roots:block/air_soil_side",
-    "end": "roots:block/air_soil_top"
+    "end": "roots:block/air_soil_top",
+    "side": "roots:block/air_soil_side"
   }
 }

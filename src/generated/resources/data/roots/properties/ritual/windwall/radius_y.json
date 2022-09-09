@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:windwall",
-  "value": 31,
+  "_comment": "The vertical radius of the ritual in blocks.",
   "default_value": 31,
-  "_comment": "The vertical radius of the ritual in blocks."
+  "ritual": "roots:windwall",
+  "value": 31
 }

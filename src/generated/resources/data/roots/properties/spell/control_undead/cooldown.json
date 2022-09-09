@@ -1,6 +1,6 @@
 {
-  "spell": "roots:control_undead",
-  "value": 320,
+  "_comment": "How long before the player can cast the spell again",
   "default_value": 320,
-  "_comment": "How long before the player can cast the spell again"
+  "spell": "roots:control_undead",
+  "value": 320
 }

@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/outer_stairs",
   "textures": {
-    "side": "roots:block/runed_obsidian_brick",
     "bottom": "roots:block/runed_obsidian_brick",
+    "side": "roots:block/runed_obsidian_brick",
     "top": "roots:block/runed_obsidian_brick"
   }
 }

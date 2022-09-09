@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/outer_stairs",
   "textures": {
-    "side": "roots:block/wildwood_planks",
     "bottom": "roots:block/wildwood_planks",
+    "side": "roots:block/wildwood_planks",
     "top": "roots:block/wildwood_planks"
   }
 }

@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "W": {
+      "item": "roots:runed_obsidian_brick"
+    }
+  },
   "pattern": [
     "W#W",
     "W#W"
   ],
-  "key": {
-    "W": {
-      "item": "roots:runed_obsidian_brick"
-    },
-    "#": {
-      "tag": "forge:rods/wooden"
-    }
-  },
   "result": {
-    "item": "roots:runed_brick_fence",
-    "count": 3
+    "count": 3,
+    "item": "roots:runed_brick_fence"
   }
 }

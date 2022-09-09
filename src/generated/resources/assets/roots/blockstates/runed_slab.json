@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "roots:block/runed_slab_top"
-    },
     "type=bottom": {
       "model": "roots:block/runed_slab"
     },
     "type=double": {
       "model": "roots:block/runed_obsidian"
+    },
+    "type=top": {
+      "model": "roots:block/runed_slab_top"
     }
   }
 }

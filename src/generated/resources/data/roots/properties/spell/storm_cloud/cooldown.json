@@ -1,6 +1,6 @@
 {
-  "spell": "roots:storm_cloud",
-  "value": 100,
+  "_comment": "How long before the player can cast the spell again",
   "default_value": 100,
-  "_comment": "How long before the player can cast the spell again"
+  "spell": "roots:storm_cloud",
+  "value": 100
 }

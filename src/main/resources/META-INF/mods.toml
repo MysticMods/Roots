@@ -1,5 +1,5 @@
 modLoader="javafml" 
-loaderVersion="[36,)"
+loaderVersion="[43,)"
 issueTrackerURL="https://github.com/MysticMods/Roots/issues"
 license="https://github.com/MysticMods/Roots/blob/master/LICENSE"
 [[mods]] 
@@ -15,18 +15,12 @@ A nature-themed magical mod!
 [[dependencies.roots]]
     modId="forge"
     mandatory=true
-    versionRange="[36,)"
+    versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.roots]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.4,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.roots]]
-    modId="mysticalworld"
-    mandatory=true
-    versionRange="[0.3.3.19,)"
+    versionRange="[1.19.2,)"
     ordering="NONE"
     side="BOTH"

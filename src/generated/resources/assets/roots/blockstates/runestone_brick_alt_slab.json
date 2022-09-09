@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "roots:block/runestone_brick_alt_slab_top"
-    },
     "type=bottom": {
       "model": "roots:block/runestone_brick_alt_slab"
     },
     "type=double": {
       "model": "roots:block/runestone_brick_alt"
+    },
+    "type=top": {
+      "model": "roots:block/runestone_brick_alt_slab_top"
     }
   }
 }

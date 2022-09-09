@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:overgrowth",
-  "value": 3000,
+  "_comment": "The length of the ritual",
   "default_value": 3000,
-  "_comment": "The length of the ritual"
+  "ritual": "roots:overgrowth",
+  "value": 3000
 }

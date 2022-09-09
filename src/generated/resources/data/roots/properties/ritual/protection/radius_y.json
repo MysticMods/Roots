@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:protection",
-  "value": 15,
+  "_comment": "The vertical radius of the ritual in blocks.",
   "default_value": 15,
-  "_comment": "The vertical radius of the ritual in blocks."
+  "ritual": "roots:protection",
+  "value": 15
 }

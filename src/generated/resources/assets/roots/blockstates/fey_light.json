@@ -1,2115 +1,2115 @@
 {
   "variants": {
-    "color=white,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
     "color=black,colored=false,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=0,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=1,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=2,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=3,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=4,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=5,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=6,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=7,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=8,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=9,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=10,decaying=false": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=0,decaying=true": {
       "model": "roots:block/fey_light"
     },
     "color=black,colored=false,decay=0,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=white,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=0,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=1,decaying=true": {
+    "color=black,colored=false,decay=1,decaying=false": {
       "model": "roots:block/fey_light"
     },
     "color=black,colored=false,decay=1,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=white,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=1,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=2,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=3,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=4,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=5,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=6,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=7,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=8,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=false,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=black,colored=true,decay=9,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=white,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=orange,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=magenta,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_blue,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=yellow,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=lime,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=pink,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=gray,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=light_gray,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=cyan,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=purple,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=blue,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=brown,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=green,colored=false,decay=10,decaying=true": {
-      "model": "roots:block/fey_light"
-    },
-    "color=red,colored=false,decay=10,decaying=true": {
+    "color=black,colored=false,decay=10,decaying=false": {
       "model": "roots:block/fey_light"
     },
     "color=black,colored=false,decay=10,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=white,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=2,decaying=false": {
       "model": "roots:block/fey_light"
     },
-    "color=orange,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=2,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=magenta,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=3,decaying=false": {
       "model": "roots:block/fey_light"
     },
-    "color=light_blue,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=3,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=yellow,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=4,decaying=false": {
       "model": "roots:block/fey_light"
     },
-    "color=lime,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=4,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=pink,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=5,decaying=false": {
       "model": "roots:block/fey_light"
     },
-    "color=gray,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=5,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=light_gray,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=6,decaying=false": {
       "model": "roots:block/fey_light"
     },
-    "color=cyan,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=6,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=purple,colored=true,decay=10,decaying=true": {
+    "color=black,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=black,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=10,decaying=false": {
       "model": "roots:block/fey_light"
     },
     "color=blue,colored=true,decay=10,decaying=true": {
       "model": "roots:block/fey_light"
     },
+    "color=blue,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=blue,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
     "color=brown,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=brown,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=cyan,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=gray,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=10,decaying=false": {
       "model": "roots:block/fey_light"
     },
     "color=green,colored=true,decay=10,decaying=true": {
       "model": "roots:block/fey_light"
     },
+    "color=green,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=green,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_blue,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=light_gray,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=lime,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=magenta,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=orange,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=pink,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=purple,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
     "color=red,colored=true,decay=10,decaying=true": {
       "model": "roots:block/fey_light"
     },
-    "color=black,colored=true,decay=10,decaying=true": {
+    "color=red,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=red,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=white,colored=true,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=false,decay=9,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=0,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=0,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=1,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=1,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=10,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=10,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=2,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=2,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=3,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=3,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=4,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=4,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=5,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=5,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=6,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=6,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=7,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=7,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=8,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=8,decaying=true": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=9,decaying=false": {
+      "model": "roots:block/fey_light"
+    },
+    "color=yellow,colored=true,decay=9,decaying=true": {
       "model": "roots:block/fey_light"
     }
   }

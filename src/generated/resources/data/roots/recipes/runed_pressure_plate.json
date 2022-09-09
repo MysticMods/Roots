@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "XX"
-  ],
   "key": {
     "X": {
       "item": "roots:runed_obsidian"
     }
   },
+  "pattern": [
+    "XX"
+  ],
   "result": {
     "item": "roots:runed_pressure_plate"
   }

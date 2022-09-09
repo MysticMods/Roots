@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "W": {
+      "item": "roots:runed_obsidian"
+    }
+  },
   "pattern": [
     "#W#",
     "#W#"
   ],
-  "key": {
-    "W": {
-      "item": "roots:runed_obsidian"
-    },
-    "#": {
-      "tag": "forge:rods/wooden"
-    }
-  },
   "result": {
     "item": "roots:runed_gate"
   }

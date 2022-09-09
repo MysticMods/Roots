@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "side": "roots:block/runed_obsidian_brick_alt",
     "bottom": "roots:block/runed_obsidian_brick_alt",
+    "side": "roots:block/runed_obsidian_brick_alt",
     "top": "roots:block/runed_obsidian_brick_alt"
   }
 }

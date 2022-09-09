@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "W": {
+      "item": "roots:wildwood_planks"
+    }
+  },
   "pattern": [
     "W#W",
     "W#W"
   ],
-  "key": {
-    "W": {
-      "item": "roots:wildwood_planks"
-    },
-    "#": {
-      "tag": "forge:rods/wooden"
-    }
-  },
   "result": {
-    "item": "roots:wildwood_fence",
-    "count": 3
+    "count": 3,
+    "item": "roots:wildwood_fence"
   }
 }

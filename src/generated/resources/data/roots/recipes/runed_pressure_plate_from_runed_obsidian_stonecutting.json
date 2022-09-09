@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
+  "count": 1,
   "ingredient": {
     "item": "roots:runed_obsidian"
   },
-  "result": "roots:runed_pressure_plate",
-  "count": 1
+  "result": "roots:runed_pressure_plate"
 }

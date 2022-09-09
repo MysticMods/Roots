@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "XXX"
-  ],
   "key": {
     "X": {
       "item": "roots:runed_obsidian_brick_alt"
     }
   },
+  "pattern": [
+    "XXX"
+  ],
   "result": {
-    "item": "roots:runed_brick_alt_slab",
-    "count": 6
+    "count": 6,
+    "item": "roots:runed_brick_alt_slab"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "spell": "roots:growth_infusion",
-  "value": 20,
+  "_comment": "How long before the player can cast the spell again",
   "default_value": 20,
-  "_comment": "How long before the player can cast the spell again"
+  "spell": "roots:growth_infusion",
+  "value": 20
 }

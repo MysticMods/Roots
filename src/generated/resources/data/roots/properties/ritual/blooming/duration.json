@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:blooming",
-  "value": 3200,
+  "_comment": "The length of the ritual",
   "default_value": 3200,
-  "_comment": "The length of the ritual"
+  "ritual": "roots:blooming",
+  "value": 3200
 }

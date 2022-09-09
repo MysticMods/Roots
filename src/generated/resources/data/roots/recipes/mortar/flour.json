@@ -18,8 +18,8 @@
     }
   ],
   "result": {
-    "item": "roots:flour",
-    "count": 5
+    "count": 5,
+    "item": "roots:flour"
   },
   "times": 4
 }

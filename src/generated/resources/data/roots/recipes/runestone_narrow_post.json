@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "X",
-    "X"
-  ],
   "key": {
     "X": {
       "item": "roots:runestone"
     }
   },
+  "pattern": [
+    "X",
+    "X"
+  ],
   "result": {
-    "item": "roots:runestone_narrow_post",
-    "count": 4
+    "count": 4,
+    "item": "roots:runestone_narrow_post"
   }
 }

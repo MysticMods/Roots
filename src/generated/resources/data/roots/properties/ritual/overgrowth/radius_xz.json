@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:overgrowth",
-  "value": 10,
+  "_comment": "The horizontal radius of the ritual in blocks.",
   "default_value": 10,
-  "_comment": "The horizontal radius of the ritual in blocks."
+  "ritual": "roots:overgrowth",
+  "value": 10
 }

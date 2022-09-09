@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "XX"
-  ],
   "key": {
     "X": {
       "item": "roots:runestone"
     }
   },
+  "pattern": [
+    "XX"
+  ],
   "result": {
     "item": "roots:runestone_pressure_plate"
   }

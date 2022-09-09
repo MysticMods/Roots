@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "side": "roots:block/runed_wildwood",
-    "end": "roots:block/wildwood_log_top"
+    "end": "roots:block/wildwood_log_top",
+    "side": "roots:block/runed_wildwood"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "spell": "roots:aqua_bubble",
-  "value": 1200,
+  "_comment": "How long before the player can cast the spell again",
   "default_value": 1200,
-  "_comment": "How long before the player can cast the spell again"
+  "spell": "roots:aqua_bubble",
+  "value": 1200
 }

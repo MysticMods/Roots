@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "X",
-    "X",
-    "X"
-  ],
   "key": {
     "X": {
       "item": "roots:wildwood_planks"
     }
   },
+  "pattern": [
+    "X",
+    "X",
+    "X"
+  ],
   "result": {
-    "item": "roots:wildwood_wide_post",
-    "count": 6
+    "count": 6,
+    "item": "roots:wildwood_wide_post"
   }
 }

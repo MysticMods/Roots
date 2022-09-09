@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:spreading_forest",
-  "value": 2400,
+  "_comment": "The length of the ritual",
   "default_value": 2400,
-  "_comment": "The length of the ritual"
+  "ritual": "roots:spreading_forest",
+  "value": 2400
 }

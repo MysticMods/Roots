@@ -1,6 +1,6 @@
 {
-  "spell": "roots:wildfire",
-  "value": 24,
+  "_comment": "How long before the player can cast the spell again",
   "default_value": 24,
-  "_comment": "How long before the player can cast the spell again"
+  "spell": "roots:wildfire",
+  "value": 24
 }

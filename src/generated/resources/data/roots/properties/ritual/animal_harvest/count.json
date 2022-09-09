@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:animal_harvest",
-  "value": 5,
+  "_comment": "The number of times a mechanism is executed per ritual interval.",
   "default_value": 5,
-  "_comment": "The number of times a mechanism is executed per ritual interval."
+  "ritual": "roots:animal_harvest",
+  "value": 5
 }

@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:gathering",
-  "value": 80,
+  "_comment": "How often the ritual is executed (must be shorter than duration)",
   "default_value": 80,
-  "_comment": "How often the ritual is executed (must be shorter than duration)"
+  "ritual": "roots:gathering",
+  "value": 80
 }

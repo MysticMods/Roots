@@ -1,9 +1,9 @@
 {
   "costs": [
     {
+      "type": "additive",
       "herb": "roots:inferno_bulb",
-      "value": 0.25,
-      "type": "additive"
+      "value": 0.25
     }
   ]
 }

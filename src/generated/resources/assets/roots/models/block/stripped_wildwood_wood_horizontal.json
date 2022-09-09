@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column_horizontal",
   "textures": {
-    "side": "roots:block/stripped_wildwood_log",
-    "end": "roots:block/stripped_wildwood_log"
+    "end": "roots:block/stripped_wildwood_log",
+    "side": "roots:block/stripped_wildwood_log"
   }
 }

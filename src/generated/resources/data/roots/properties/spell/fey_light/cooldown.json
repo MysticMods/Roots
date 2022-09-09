@@ -1,6 +1,6 @@
 {
-  "spell": "roots:fey_light",
-  "value": 20,
+  "_comment": "How long before the player can cast the spell again",
   "default_value": 20,
-  "_comment": "How long before the player can cast the spell again"
+  "spell": "roots:fey_light",
+  "value": 20
 }

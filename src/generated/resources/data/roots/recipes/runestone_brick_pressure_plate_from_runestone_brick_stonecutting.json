@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
+  "count": 1,
   "ingredient": {
     "item": "roots:runestone_brick"
   },
-  "result": "roots:runestone_brick_pressure_plate",
-  "count": 1
+  "result": "roots:runestone_brick_pressure_plate"
 }

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "side": "roots:block/runed_jungle",
-    "end": "minecraft:block/jungle_log_top"
+    "end": "minecraft:block/jungle_log_top",
+    "side": "roots:block/runed_jungle"
   }
 }

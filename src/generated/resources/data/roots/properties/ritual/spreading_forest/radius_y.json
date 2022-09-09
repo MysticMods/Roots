@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:spreading_forest",
-  "value": 30,
+  "_comment": "The vertical radius of the ritual in blocks.",
   "default_value": 30,
-  "_comment": "The vertical radius of the ritual in blocks."
+  "ritual": "roots:spreading_forest",
+  "value": 30
 }

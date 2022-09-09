@@ -1,6 +1,6 @@
 {
-  "spell": "roots:petal_shell",
-  "value": 120,
+  "_comment": "How long before the player can cast the spell again",
   "default_value": 120,
-  "_comment": "How long before the player can cast the spell again"
+  "spell": "roots:petal_shell",
+  "value": 120
 }

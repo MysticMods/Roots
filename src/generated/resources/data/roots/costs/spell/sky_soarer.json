@@ -1,9 +1,9 @@
 {
   "costs": [
     {
+      "type": "additive",
       "herb": "roots:cloud_berry",
-      "value": 0.25,
-      "type": "additive"
+      "value": 0.25
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:windwall",
-  "value": 10,
+  "_comment": "How often the ritual is executed (must be shorter than duration)",
   "default_value": 10,
-  "_comment": "How often the ritual is executed (must be shorter than duration)"
+  "ritual": "roots:windwall",
+  "value": 10
 }

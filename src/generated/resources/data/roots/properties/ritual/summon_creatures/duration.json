@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:summon_creatures",
-  "value": 200,
+  "_comment": "The length of the ritual",
   "default_value": 200,
-  "_comment": "The length of the ritual"
+  "ritual": "roots:summon_creatures",
+  "value": 200
 }

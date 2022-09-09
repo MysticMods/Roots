@@ -1,6 +1,6 @@
 {
-  "ritual": "roots:crafting",
-  "value": 160,
+  "_comment": "The length of the ritual",
   "default_value": 160,
-  "_comment": "The length of the ritual"
+  "ritual": "roots:crafting",
+  "value": 160
 }

@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "W": {
+      "item": "roots:wildwood_planks"
+    }
+  },
   "pattern": [
     "#W#",
     "#W#"
   ],
-  "key": {
-    "W": {
-      "item": "roots:wildwood_planks"
-    },
-    "#": {
-      "tag": "forge:rods/wooden"
-    }
-  },
   "result": {
     "item": "roots:wildwood_gate"
   }
