@@ -1,10 +1,8 @@
 package mysticmods.roots.api.registry;
 
 import net.minecraft.Util;
-import net.minecraftforge.registries.ForgeRegistryEntry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public abstract class DescribedRegistryEntry<T extends IForgeRegistryEntry<T>> extends ForgeRegistryEntry<T> implements IDescribedRegistryEntry {
+public abstract class DescribedRegistryEntry<T> implements IDescribedRegistryEntry {
   protected String descriptionId;
 
   protected abstract String getDescriptor();

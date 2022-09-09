@@ -32,7 +32,6 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -165,7 +164,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     return recipeId;
   }
 
-  public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<R> {
+  public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> implements RecipeSerializer<R> {
 
     private final RootsRecipeBuilder<R> builder;
 

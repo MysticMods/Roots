@@ -2,10 +2,9 @@ package mysticmods.roots.api.registry;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Style;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class StyledRegistryEntry<T extends IForgeRegistryEntry<T>> extends DescribedRegistryEntry<T> implements IStyledRegistryEntry {
+public abstract class StyledRegistryEntry<T> extends DescribedRegistryEntry<T> implements IStyledRegistryEntry {
   protected Style style;
   protected ChatFormatting color;
 

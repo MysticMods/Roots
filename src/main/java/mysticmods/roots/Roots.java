@@ -10,6 +10,7 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.impl.ClientPlayerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.impl.ServerPlayerAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.init.*;
@@ -30,7 +31,6 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import noobanidus.libs.noobutil.data.generator.RecipeGenerator;
 import noobanidus.libs.noobutil.reference.ModData;
 import noobanidus.libs.noobutil.registrate.CustomRegistrate;
-import noobanidus.libs.particleslib.config.ConfigManager;
 
 import javax.annotation.Nullable;
 

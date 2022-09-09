@@ -21,7 +21,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import noobanidus.libs.noobutil.ingredient.IngredientStack;
 
 import javax.annotation.Nullable;
@@ -76,7 +75,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
     return ModRecipes.Types.SUMMON_CREATURES.get();
   }
 
-  public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<SummonCreaturesRecipe> {
+  public static class Serializer implements RecipeSerializer<SummonCreaturesRecipe> {
 
     @Override
     public SummonCreaturesRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
@@ -90,7 +89,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
       }
       EntityType<?> result;
       if (pJson.has("result")) {
-        result = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(GsonHelper.getAsString(pJson, "result")));
+        result = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(GsonHelper.getAsString(pJson, "result")));
         if (result == null) {
           throw new JsonSyntaxException("Entity Type '" + GsonHelper.getAsString(pJson, "result") + "' does not exist");
         }
@@ -180,7 +179,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
 
       public Result(ResourceLocation id, EntityType<?> result, List<IngredientStack> ingredients) {
         this.id = id;
-        this.result = ForgeRegistries.ENTITIES.getKey(result);
+        this.result = ForgeRegistries.ENTITY_TYPES.getKey(result);
         this.ingredients = ingredients;
         if (this.ingredients.isEmpty()) {
           throw new IllegalArgumentException("ingredients for recipe " + id + " cannot be empty");

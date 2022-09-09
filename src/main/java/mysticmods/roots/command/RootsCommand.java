@@ -12,7 +12,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -38,17 +38,17 @@ public class RootsCommand {
 
   public static LiteralArgumentBuilder<CommandSourceStack> builder(LiteralArgumentBuilder<CommandSourceStack> builder) {
     builder.executes(c -> {
-      c.getSource().sendSuccess(new TranslatableComponent("roots.commands.usage"), false);
+      c.getSource().sendSuccess(Component.translatable("roots.commands.usage"), false);
       return 1;
     });
     builder.then(Commands.literal("staff").executes(c -> {
-      c.getSource().sendSuccess(new TranslatableComponent("roots.commands.staff.usage"), false);
+      c.getSource().sendSuccess(Component.translatable("roots.commands.staff.usage"), false);
       return 1;
     }).then(suggestSpells().executes(c -> {
       ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
       Spell spell = Registries.SPELL_REGISTRY.get().getValue(spellID);
       if (spell == null) {
-        c.getSource().sendFailure(new TranslatableComponent("roots.commands.staff.spell_not_found", spellID.toString()));
+        c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
         return 1;
       }
       ServerPlayer player = c.getSource().getPlayerOrException();
@@ -63,7 +63,7 @@ public class RootsCommand {
 
       SpellStorage storage = SpellStorage.fromItem(staff, true);
       if (storage == null) {
-        c.getSource().sendFailure(new TranslatableComponent("roots.commands.staff.no_spell_storage"));
+        c.getSource().sendFailure(Component.translatable("roots.commands.staff.no_spell_storage"));
         return 1;
       }
       storage.add(spell, spell.getModifiers());

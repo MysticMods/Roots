@@ -12,8 +12,8 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -49,12 +49,12 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onColorHandlerBlock(ColorHandlerEvent.Block event) {
+  public static void onColorHandlerBlock(RegisterColorHandlersEvent.Block event) {
     event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null && pPos != null ? BiomeColors.getAverageWaterColor(pLevel, pPos) : -1, ModBlocks.UNENDING_BOWL.get());
   }
 
   @SubscribeEvent
-  public static void onColorHandlerItem(ColorHandlerEvent.Item event) {
+  public static void onColorHandlerItem(RegisterColorHandlersEvent.Item event) {
     event.getItemColors().register((stack, index) -> index == 1 ? OverworldBiomes.NORMAL_WATER_COLOR : -1, ModBlocks.UNENDING_BOWL.get());
   }
 }

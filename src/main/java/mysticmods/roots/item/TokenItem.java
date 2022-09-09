@@ -14,8 +14,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -166,7 +164,7 @@ public class TokenItem extends Item {
       case SPELL -> {
         Spell spell = getSpell(pStack);
         if (spell != null) {
-          pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.spell", spell.getStyledName()));
+          pTooltipComponents.add(Component.translatable("roots.tooltip.token.spell", spell.getStyledName()));
           if (cap != null && cap.hasSpell(spell)) {
             unlocked = true;
           }
@@ -175,8 +173,8 @@ public class TokenItem extends Item {
       case MODIFIER -> {
         Modifier modifier = getModifier(pStack);
         if (modifier != null) {
-          pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.modifier", modifier.getName()));
-          pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.spell", modifier.getSpell().getStyledName()));
+          pTooltipComponents.add(Component.translatable("roots.tooltip.token.modifier", modifier.getName()));
+          pTooltipComponents.add(Component.translatable("roots.tooltip.token.spell", modifier.getSpell().getStyledName()));
           if (cap != null && cap.hasModifier(modifier)) {
             unlocked = true;
           }
@@ -185,7 +183,7 @@ public class TokenItem extends Item {
       case STAFF -> {
         SpellInstance spell = getSpellInstance(pStack);
         if (spell != null) {
-          //pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.staff", spell.getName()));
+          //pTooltipComponents.add(Component.translatable("roots.tooltip.token.staff", spell.getName()));
         }
       }
       case STAFF_MODIFIER -> {
@@ -195,24 +193,24 @@ public class TokenItem extends Item {
       case RITUAL -> {
         Ritual ritual = getRitual(pStack);
         if (ritual != null) {
-          pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.ritual", ritual.getName()));
+          pTooltipComponents.add(Component.translatable("roots.tooltip.token.ritual", ritual.getName()));
         }
       }
     }
 
     if (type.isGrantable()) {
-      pTooltipComponents.add(new TextComponent(""));
+      pTooltipComponents.add(Component.literal(""));
       if (unlocked) {
-        pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.unlocked"));
+        pTooltipComponents.add(Component.translatable("roots.tooltip.token.unlocked"));
       } else {
-        pTooltipComponents.add(new TranslatableComponent("roots.tooltip.token.unlock"));
+        pTooltipComponents.add(Component.translatable("roots.tooltip.token.unlock"));
       }
     }
   }
 
   @Override
   public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
-    if (this.allowdedIn(pCategory)) {
+    if (this.allowedIn(pCategory)) {
       for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
         ItemStack thisStack = new ItemStack(this);
         setSpell(thisStack, spell);

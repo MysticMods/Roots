@@ -1,8 +1,8 @@
 package mysticmods.roots.api.registry;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public interface IDescribedRegistryEntry {
@@ -16,7 +16,7 @@ public interface IDescribedRegistryEntry {
 
   // Stack sensitive?
   default MutableComponent getName() {
-    return new TranslatableComponent(this.getDescriptionId());
+    return Component.translatable(this.getDescriptionId());
   }
 
   default MutableComponent getName(Style style) {
