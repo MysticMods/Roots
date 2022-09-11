@@ -21,6 +21,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
@@ -1100,7 +1101,17 @@ public class ModBlocks {
   public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate((ctx, p) -> {
-        p.directionalBlock(ctx.getEntry(), p.models().getExistingFile(new ResourceLocation(RootsAPI.MODID, "block/complex/wild_roots")));
+        // TODO: Rotated variations (y for up/down, z for everything else?)
+        ModelFile model = p.models().getExistingFile(new ResourceLocation(RootsAPI.MODID, "block/complex/wild_roots"));
+        p.getVariantBuilder(ctx.getEntry())
+            .forAllStates(state -> {
+              Direction dir = state.getValue(BlockStateProperties.FACING);
+              return ConfiguredModel.builder()
+                  .modelFile(model)
+                  .rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
+                  .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360)
+                  .build();
+            });
       })
       .tag(BlockTags.MINEABLE_WITH_HOE)
       .register();
