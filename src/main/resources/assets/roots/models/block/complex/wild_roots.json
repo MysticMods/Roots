@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "roots:block/wild_roots",
 		"particle": "roots:block/wild_roots"
