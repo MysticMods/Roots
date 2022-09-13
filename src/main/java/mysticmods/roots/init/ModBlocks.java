@@ -1098,6 +1098,7 @@ public class ModBlocks {
       .build()
       .register();
 
+  // TODO: Silk touch vs dropping wild roots
   public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)
       .properties(BASE_WOODEN_PROPERTIES)
       .blockstate((ctx, p) -> {
