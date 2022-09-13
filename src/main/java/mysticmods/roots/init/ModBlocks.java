@@ -1114,7 +1114,7 @@ public class ModBlocks {
             });
       })
       .item()
-      .model(ItemModelGenerator::itemModel)
+      .model(ItemModelGenerator::complexItemModel)
       .build()
       .tag(BlockTags.MINEABLE_WITH_HOE)
       .register();
