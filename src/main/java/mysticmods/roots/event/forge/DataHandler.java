@@ -1,4 +1,4 @@
-package mysticmods.roots.gen;
+package mysticmods.roots.event.forge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.gen.listener.ModifierCostReloadListener;
@@ -6,11 +6,9 @@ import mysticmods.roots.gen.listener.RitualPropertyReloadListener;
 import mysticmods.roots.gen.listener.SpellCostReloadListener;
 import mysticmods.roots.gen.listener.SpellPropertyReloadListener;
 import mysticmods.roots.network.Networking;
-import mysticmods.roots.network.client.ClientBoundCapabilitySynchronization;
 import mysticmods.roots.network.client.ClientBoundRitualPropertyPacket;
 import mysticmods.roots.network.client.ClientBoundSpellCostsPacket;
 import mysticmods.roots.network.client.ClientBoundSpellPropertyPacket;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID)
-public class DataSetup {
+public class DataHandler {
   @SubscribeEvent
   public static void onReloadListeners(AddReloadListenerEvent event) {
     event.addListener(RitualPropertyReloadListener.getInstance());
