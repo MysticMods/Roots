@@ -99,6 +99,7 @@ public class Roots {
     ModBlocks.load();
     ModBlockEntities.load();
     ModItems.load();
+    ModEntities.load();
     ModHerbs.load();
     ModRegistries.load();
     ModTags.load();
