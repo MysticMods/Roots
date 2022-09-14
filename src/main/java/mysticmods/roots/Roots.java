@@ -92,6 +92,7 @@ public class Roots {
     ModBlockEntities.load();
     ModItems.load();
     ModEntities.load();
+    ModFeatures.load();
     ModHerbs.load();
     ModRegistries.load();
     ModTags.load();
