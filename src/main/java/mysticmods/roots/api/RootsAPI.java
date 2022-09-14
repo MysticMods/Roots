@@ -59,8 +59,6 @@ public abstract class RootsAPI {
 
   public abstract void grant(ServerPlayer player, Grant grant);
 
-  public abstract void synchronizeCapability(ServerPlayer player, ResourceLocation capability);
-
   public abstract Player getPlayer();
 
   public RecipeManager getRecipeManager() {

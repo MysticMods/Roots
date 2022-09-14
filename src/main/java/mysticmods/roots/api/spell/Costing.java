@@ -183,9 +183,6 @@ public class Costing {
             RootsAPI.LOG.info("Remainder left over! OH NO! {}", toConsume);
           }
           cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
-          if (cap.isDirty()) {
-            RootsAPI.getInstance().synchronizeCapability((ServerPlayer) player, RootsAPI.HERB_CAPABILITY_ID);
-          }
           playerInventory.setChanged();
         }
       }

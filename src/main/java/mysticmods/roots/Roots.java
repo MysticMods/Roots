@@ -84,15 +84,7 @@ public class Roots {
               cap.grantModifier(modifier);
             }
           }
-          if (cap.isDirty()) {
-            synchronizeCapability(player, RootsAPI.GRANT_CAPABILITY_ID);
-          }
         });
-      }
-
-      @Override
-      public void synchronizeCapability(ServerPlayer player, ResourceLocation capability) {
-        Networking.sendTo(new ClientBoundCapabilitySynchronization(player, capability), player);
       }
     };
 
