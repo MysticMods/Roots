@@ -1,0 +1,6 @@
+{
+  "_comment": "How much additional reach will be added to the default entity reach",
+  "default_value": 0.0,
+  "spell": "roots:growth_infusion",
+  "value": 0.0
+}
