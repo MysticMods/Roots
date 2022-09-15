@@ -133,9 +133,6 @@ public class TokenItem extends Item {
       }
     }
     if (result != null) {
-      if (cap.isDirty()) {
-        RootsAPI.getInstance().synchronizeCapability((ServerPlayer) pPlayer, RootsAPI.GRANT_CAPABILITY_ID);
-      }
       return result;
     }
     return InteractionResultHolder.fail(stack);

@@ -44,10 +44,6 @@ public class ClientBoundModifierCostsPacket {
   }
 
   public void handle(Supplier<NetworkEvent.Context> context) {
-    context.get().enqueueWork(() -> handle(this, context));
-  }
-
-  private static void handle(ClientBoundModifierCostsPacket message, Supplier<NetworkEvent.Context> context) {
     context.get().setPacketHandled(true);
   }
 }

@@ -7,10 +7,7 @@ import mysticmods.roots.gen.listener.RitualPropertyReloadListener;
 import mysticmods.roots.gen.listener.SpellCostReloadListener;
 import mysticmods.roots.gen.listener.SpellPropertyReloadListener;
 import mysticmods.roots.network.Networking;
-import mysticmods.roots.network.client.ClientBoundCapabilitySynchronization;
-import mysticmods.roots.network.client.ClientBoundRitualPropertyPacket;
-import mysticmods.roots.network.client.ClientBoundSpellCostsPacket;
-import mysticmods.roots.network.client.ClientBoundSpellPropertyPacket;
+import mysticmods.roots.network.client.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
@@ -48,13 +45,13 @@ public class DataHandler {
       for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
         player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(grant -> {
           if (grant.isDirty()) {
-            Networking.sendTo(new ClientBoundCapabilitySynchronization(player, RootsAPI.GRANT_CAPABILITY_ID), player);
+            Networking.sendTo(new ClientBoundGrantSyncPacket(grant.toRecord()), player);
             grant.setDirty(false);
           }
         });
         player.getCapability(Capabilities.HERB_CAPABILITY).ifPresent(herb -> {
           if (herb.isDirty()) {
-            Networking.sendTo(new ClientBoundCapabilitySynchronization(player, RootsAPI.HERB_CAPABILITY_ID), player);
+            Networking.sendTo(new ClientBoundHerbSyncPacket(herb.toRecord()), player);
             herb.setDirty(false);
           }
         });

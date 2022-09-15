@@ -88,4 +88,6 @@ public abstract class Property<T> {
   public static Serializer<Float> FLOAT_SERIALIZER = new Serializer<>(FriendlyByteBuf::readFloat, GsonHelper::getAsFloat, JsonPrimitive::new, FriendlyByteBuf::writeFloat);
   public static Serializer<String> STRING_SERIALIZER = new Serializer<>(FriendlyByteBuf::readUtf, GsonHelper::getAsString, JsonPrimitive::new, FriendlyByteBuf::writeUtf);
 
+  public static Serializer<Double> DOUBLE_SERIALIZER = new Serializer<>(FriendlyByteBuf::readDouble, GsonHelper::getAsDouble, JsonPrimitive::new, FriendlyByteBuf::writeDouble);
+
 }

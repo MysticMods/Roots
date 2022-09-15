@@ -43,12 +43,12 @@ public class ClientBoundRitualPropertyPacket {
 
   public void handle(Supplier<NetworkEvent.Context> context) {
     context.get().enqueueWork(() -> handle(this, context));
+    context.get().setPacketHandled(true);
   }
 
   private static void handle(ClientBoundRitualPropertyPacket message, Supplier<NetworkEvent.Context> context) {
     for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {
       ritual.init();
     }
-    context.get().setPacketHandled(true);
   }
 }

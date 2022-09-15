@@ -43,12 +43,13 @@ public class ClientBoundSpellPropertyPacket {
 
   public void handle(Supplier<NetworkEvent.Context> context) {
     context.get().enqueueWork(() -> handle(this, context));
+    context.get().setPacketHandled(true);
+
   }
 
   private static void handle(ClientBoundSpellPropertyPacket message, Supplier<NetworkEvent.Context> context) {
     for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
-      spell.initialize();
+      spell.init();
     }
-    context.get().setPacketHandled(true);
   }
 }

@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-09T14:12:17.6948424	Spell properties
+// 1.19.2	2022-09-14T15:48:55.7408309	Spell properties
 8844f1c40708dd1992206793e7d9be5be8d83ba5 data/roots/properties/spell/acid_cloud/cooldown.json
 33b16724324655a4c9aaf2eb77a87aa220546488 data/roots/properties/spell/aqua_bubble/cooldown.json
 6bbbd0cb5df07d25b93c6ca2134704bcd5c20b63 data/roots/properties/spell/augment/cooldown.json
@@ -9,6 +9,7 @@
 754e33ec8b58f7f44b1c1b8a7662c901532fb311 data/roots/properties/spell/extension/cooldown.json
 7e9efe9c0e6735589e0994ad8959761c48b9e863 data/roots/properties/spell/fey_light/cooldown.json
 7a9685a61697434023877299a101362755b57d40 data/roots/properties/spell/geas/cooldown.json
+ce0b7e1fd0b7964a1d517f73206f6ed10e189282 data/roots/properties/spell/growth_infusion/added_reach.json
 fd55228ea8603413c702ec24bb8ad1dece1081b8 data/roots/properties/spell/growth_infusion/cooldown.json
 da8bb6fbcdbaa808bd92a1503a431c1336c10547 data/roots/properties/spell/harvest/cooldown.json
 231e61aa921a5cc1d70b5fcd187ea12bfbc0d46c data/roots/properties/spell/jaunt/cooldown.json

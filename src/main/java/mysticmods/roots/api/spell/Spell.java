@@ -11,6 +11,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.common.ForgeMod;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,6 +25,7 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements Costed
   protected final List<Cost> costs = new ArrayList<>();
   protected final Set<Modifier> modifiers = new HashSet<>();
   protected int cooldown = 0;
+  protected double reach = 0.0;
 
   public Spell(Type type, ChatFormatting color, List<Cost> costs) {
     this.type = type;
@@ -46,6 +50,10 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements Costed
 
   public abstract SpellProperty<Integer> getCooldownProperty();
 
+  public SpellProperty<Double> getReachProperty () {
+    return null;
+  }
+
   public int getCooldown() {
     return cooldown;
   }
@@ -63,14 +71,32 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements Costed
     if (cooldownProperty != null) {
       this.cooldown = cooldownProperty.getValue();
     }
+    SpellProperty<Double> reachProperty = getReachProperty();
+    if (reachProperty != null) {
+      this.reach = reachProperty.getValue();
+    }
   }
 
   public abstract void initialize();
 
   public void init() {
+    initializeProperties();
+    initialize();
   }
 
   public abstract void cast(Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);
+
+  protected double getRange (Player pPlayer) {
+    return pPlayer.getReachDistance() + reach;
+  }
+
+  protected BlockHitResult pick (Player pPlayer) {
+    return pick(pPlayer, false);
+  }
+
+  protected BlockHitResult pick (Player pPlayer, boolean fluids) {
+    return (BlockHitResult) pPlayer.pick(getRange(pPlayer), 1f, fluids);
+  }
 
   @Override
   protected String getDescriptor() {

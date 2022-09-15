@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-public class GrantCapability implements ICapabilityProvider, ICapabilitySerializable<CompoundTag>, INetworkedCapability {
+public class GrantCapability implements ICapabilityProvider, ICapabilitySerializable<CompoundTag>, INetworkedCapability<GrantCapability.SerializedGrantRecord> {
   private boolean dirty = true;
   private final Set<Spell> GRANTED_SPELLS = new ObjectLinkedOpenHashSet<>();
   private final Set<Modifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
@@ -82,30 +82,19 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
   }
 
   @Override
-  public void toNetwork(FriendlyByteBuf buf) {
-    buf.writeVarInt(GRANTED_SPELLS.size());
-    for (Spell spell : GRANTED_SPELLS) {
-      buf.writeVarInt(Registries.SPELL_REGISTRY.get().getID(spell));
-    }
-    buf.writeVarInt(GRANTED_MODIFIERS.size());
-    for (Modifier modifier : GRANTED_MODIFIERS) {
-      buf.writeVarInt(Registries.MODIFIER_REGISTRY.get().getID(modifier));
-    }
+  public void fromRecord(SerializedGrantRecord record) {
+    this.GRANTED_MODIFIERS.clear();
+    this.GRANTED_SPELLS.clear();
+    this.GRANTED_MODIFIERS.addAll(record.getGrantedModifiers());
+    this.GRANTED_SPELLS.addAll(record.getGrantedSpells());
+    IMMUTABLE_GRANTED_MODIFIERS = null;
+    IMMUTABLE_GRANTED_SPELLS = null;
+    setDirty(true);
   }
 
   @Override
-  public void fromNetwork(FriendlyByteBuf buf) {
-    GRANTED_SPELLS.clear();
-    GRANTED_MODIFIERS.clear();
-    int spellCount = buf.readVarInt();
-    for (int i = 0; i < spellCount; i++) {
-      GRANTED_SPELLS.add(Registries.SPELL_REGISTRY.get().getValue(buf.readVarInt()));
-    }
-    int modifierCount = buf.readVarInt();
-    for (int i = 0; i < modifierCount; i++) {
-      GRANTED_MODIFIERS.add(Registries.MODIFIER_REGISTRY.get().getValue(buf.readVarInt()));
-    }
-    setDirty(true);
+  public SerializedGrantRecord toRecord() {
+    return new SerializedGrantRecord(GRANTED_SPELLS, GRANTED_MODIFIERS);
   }
 
   @Override
@@ -161,5 +150,58 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
   @Override
   public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
     return Capabilities.GRANT_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this));
+  }
+
+  public static SerializedGrantRecord fromNetwork(FriendlyByteBuf buf) {
+    SerializedGrantRecord result = new SerializedGrantRecord();
+    result.fromNetwork(buf);
+    return result;
+  }
+
+  public static class SerializedGrantRecord implements SerializedCapability {
+    private final Set<Spell> GRANTED_SPELLS = new ObjectLinkedOpenHashSet<>();
+    private final Set<Modifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
+
+    public SerializedGrantRecord() {
+    }
+
+    public SerializedGrantRecord (Set<Spell> spells, Set<Modifier> modifiers) {
+      this.GRANTED_SPELLS.addAll(spells);
+      this.GRANTED_MODIFIERS.addAll(modifiers);
+    }
+
+    @Override
+    public void fromNetwork(FriendlyByteBuf buf) {
+      GRANTED_SPELLS.clear();
+      GRANTED_MODIFIERS.clear();
+      int spellCount = buf.readVarInt();
+      for (int i = 0; i < spellCount; i++) {
+        GRANTED_SPELLS.add(Registries.SPELL_REGISTRY.get().getValue(buf.readVarInt()));
+      }
+      int modifierCount = buf.readVarInt();
+      for (int i = 0; i < modifierCount; i++) {
+        GRANTED_MODIFIERS.add(Registries.MODIFIER_REGISTRY.get().getValue(buf.readVarInt()));
+      }
+    }
+
+    @Override
+    public void toNetwork(FriendlyByteBuf buf) {
+      buf.writeVarInt(GRANTED_SPELLS.size());
+      for (Spell spell : GRANTED_SPELLS) {
+        buf.writeVarInt(Registries.SPELL_REGISTRY.get().getID(spell));
+      }
+      buf.writeVarInt(GRANTED_MODIFIERS.size());
+      for (Modifier modifier : GRANTED_MODIFIERS) {
+        buf.writeVarInt(Registries.MODIFIER_REGISTRY.get().getID(modifier));
+      }
+    }
+
+    public Set<Spell> getGrantedSpells() {
+      return GRANTED_SPELLS;
+    }
+
+    public Set<Modifier> getGrantedModifiers() {
+      return GRANTED_MODIFIERS;
+    }
   }
 }
