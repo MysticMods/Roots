@@ -80,6 +80,8 @@ public class ModSpells {
 
   public static final RegistryEntry<SpellProperty<Double>> GROWTH_INFUSION_ADDED_REACH = property(Spells.GROWTH_INFUSION, "added_reach", () -> new SpellProperty<>(GROWTH_INFUSION::get, 0.0, Property.DOUBLE_SERIALIZER, SpellProperties.ADDED_REACH));
 
+  public static final RegistryEntry<SpellProperty<Integer>> GROWTH_INFUSION_BASE_TICKS = property(Spells.GROWTH_INFUSION, "base_ticks", () -> new SpellProperty<>(GROWTH_INFUSION::get, 2, Property.INTEGER_SERIALIZER, "The default number of growth ticks applied by base growth infusion"));
+
   // Rampant Growth (20 cooldown)
   public static final RegistryEntry<RampantGrowthSpell> RAMPANT_GROWTH = spell(Spells.RAMPANT_GROWTH, RampantGrowthSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> RAMPANT_GROWTH_COOLDOWN = property(Spells.RAMPANT_GROWTH, "cooldown", () -> new SpellProperty<>(RAMPANT_GROWTH::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));

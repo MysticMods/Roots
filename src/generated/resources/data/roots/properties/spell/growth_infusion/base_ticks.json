@@ -1,0 +1,6 @@
+{
+  "_comment": "The default number of growth ticks applied by base growth infusion",
+  "default_value": 2,
+  "spell": "roots:growth_infusion",
+  "value": 2
+}
