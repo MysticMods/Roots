@@ -45,8 +45,6 @@ public class GrowthInfusionSpell extends Spell {
 
     BlockHitResult result = pick(pPlayer);
     BlockState at = level.getBlockState(result.getBlockPos());
-    BlockState offset = level.getBlockState(result.getBlockPos().relative(result.getDirection()));
     RootsAPI.LOG.info("State at {} at pos {}", at, result.getBlockPos());
-    RootsAPI.LOG.info("State offset {} at pos {}", offset, result.getBlockPos().relative(result.getDirection()));
   }
 }

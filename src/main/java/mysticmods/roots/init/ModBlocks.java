@@ -966,22 +966,22 @@ public class ModBlocks {
         .tag(RootsAPI.Tags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
         .register();
 
-    public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.MOONGLOW_SEEDS))
+    public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.MOONGLOW_SEEDS))
         .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsAPI.Tags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
         .register();
-    public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.PERESKIA_BULB))
+    public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.PERESKIA_BULB))
         .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
         .blockstate(BlockstateGenerator::crossBlockstate)
         .tag(RootsAPI.Tags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
         .register();
-    public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Seeds.SPIRITLEAF_SEEDS))
+    public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Herbs.SPIRITLEAF_SEEDS))
         .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsAPI.Tags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
         .register();
-    public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Seeds.WILDEWHEET_SEEDS))
+    public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.WILDEWHEET_SEEDS))
         .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
         .blockstate(BlockstateGenerator::cropBlockstate)
         .tag(RootsAPI.Tags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)

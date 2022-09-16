@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-14T15:48:55.7278618	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2022-09-16T11:59:49.5030202	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 866018aa29cd01eaaad597b1d321ac9a292cb387 assets/roots/blockstates/bafflecap_block.json
 06b46983519d31e1b0a1bb9107064c093cb46d6a assets/roots/blockstates/caelic_soil.json
@@ -990,6 +990,9 @@ ac79c9fee49d61de4d35103b3c501dcd9f00f5ff data/roots/tags/blocks/crops/stalicripe
 124deb91b6f2a320d3d065cdb42694d1905e1500 data/roots/tags/blocks/crops/wildewheet.json
 ecda61a71eb355925053fb56bfc8838b38a30dd2 data/roots/tags/blocks/crops/wildroot.json
 9ce47e233dd6af731b5f5a7562ccb7fa94f97db5 data/roots/tags/blocks/grove_stones/primal.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/blocks/growth/blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/blocks/growth/force.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/blocks/growth/reduce.json
 c35e9878477c1bc0f25e7fd5cabe4ee0bd3d05a9 data/roots/tags/blocks/logs/runed.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/blocks/logs/runed/acacia.json
 4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/roots/tags/blocks/logs/runed/birch.json
@@ -1055,6 +1058,7 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/items/crops/pereskia.js
 9572b957ea3e17cd5ad572e6ceabd95ba9a86fae data/roots/tags/items/crops/wildewheet.json
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/items/crops/wildroot.json
 1ad920aa65e2706dabb6265f3b12546ab33e8936 data/roots/tags/items/grove_crafter_activation.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/items/grove_stones.json
 9ce47e233dd6af731b5f5a7562ccb7fa94f97db5 data/roots/tags/items/grove_stones/primal.json
 f1e0595e6e860acc2a47a21b8ee2e74d7b1a46e5 data/roots/tags/items/herbs.json
 e4c7774a71c33e82d562f08c73d3ee806325fd74 data/roots/tags/items/herbs/cloud_berry.json
@@ -1087,6 +1091,7 @@ ed46858b1e3dbcb8d2daf9c7fb12cf978701c1b1 data/roots/tags/items/pedestals.json
 ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/items/pyre_activation.json
 22ac60564201a8a04418e063ffdb1ed59f15b65b data/roots/tags/items/runed_obsidian.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/items/runestone.json
+dc6cdb9353edffbe22396c088759ef5ad019bd9b data/roots/tags/items/seeds.json
 98545c13dddf6574110e137626bb2822902a778d data/roots/tags/items/seeds/cloud_berry.json
 d018ba9ff0fd1ee26b58650998fe440e8fc1925d data/roots/tags/items/seeds/dewgonia.json
 ae4b947df62ce05faf6338b5cdf30aa99509bfef data/roots/tags/items/seeds/inferno_bulb.json

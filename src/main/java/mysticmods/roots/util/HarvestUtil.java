@@ -1,2 +1,4 @@
-package mysticmods.roots.util;public class HarvestUtil {
+package mysticmods.roots.util;
+
+public class HarvestUtil {
 }

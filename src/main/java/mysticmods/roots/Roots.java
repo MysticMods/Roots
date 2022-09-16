@@ -46,7 +46,7 @@ public class Roots {
   public Roots() {
     REGISTRATE = CustomRegistrate.create(RootsAPI.MODID);
     REGISTRATE.creativeModeTab(() -> ITEM_GROUP);
-    ModData.setIdAndIdentifier(RootsAPI.MODID, RootsAPI.MOD_IDENTIFIERS);
+    ModData.setIdAndIdentifier(RootsAPI.MODID, RootsAPI.MOD_IDENTIFIER);
 
     ConfigManager.loadConfig(ConfigManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(RootsAPI.MODID + "-common.toml"));
     ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);

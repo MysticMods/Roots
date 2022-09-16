@@ -1,2 +1,4 @@
-package mysticmods.roots.util;public class GrowthUtil {
+package mysticmods.roots.util;
+
+public class GrowthUtil {
 }

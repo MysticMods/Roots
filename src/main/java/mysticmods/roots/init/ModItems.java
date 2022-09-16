@@ -23,7 +23,7 @@ public class ModItems {
   public static class Herbs {
     public static final ItemEntry<ItemNameBlockItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDROOT_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.WILDROOT_SEEDS, RootsAPI.Tags.Items.WILDROOT_CROP)
+        .tag(RootsAPI.Tags.Items.WILDROOT_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.WILDROOT_CROP)
         .defaultLang()
         .register();
     public static final ItemEntry<Item> GROVE_MOSS = REGISTRATE.item("grove_moss", Item::new)
@@ -32,19 +32,19 @@ public class ModItems {
         .register();
     public static final ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.Crops.CLOUD_BERRY_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.CLOUD_BERRY_SEEDS, RootsAPI.Tags.Items.CLOUD_BERRY_CROP)
+        .tag(RootsAPI.Tags.Items.CLOUD_BERRY_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.CLOUD_BERRY_CROP)
         .register();
     public static final ItemEntry<ItemNameBlockItem> DEWGONIA = REGISTRATE.item("dewgonia", (p) -> new ItemNameBlockItem(ModBlocks.Crops.DEWGONIA_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.DEWGONIA_SEEDS, RootsAPI.Tags.Items.DEWGONIA_CROP)
+        .tag(RootsAPI.Tags.Items.DEWGONIA_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.DEWGONIA_CROP)
         .register();
     public static final ItemEntry<ItemNameBlockItem> INFERNO_BULB = REGISTRATE.item("inferno_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.INFERNO_BULB_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.INFERNO_BULB_SEEDS, RootsAPI.Tags.Items.INFERNO_BULB_CROP)
+        .tag(RootsAPI.Tags.Items.INFERNO_BULB_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.INFERNO_BULB_CROP)
         .register();
     public static final ItemEntry<ItemNameBlockItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new ItemNameBlockItem(ModBlocks.Crops.STALICRIPE_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.STALICRIPE_SEEDS, RootsAPI.Tags.Items.STALICRIPE_CROP)
+        .tag(RootsAPI.Tags.Items.STALICRIPE_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.STALICRIPE_CROP)
         .register();
     public static final ItemEntry<Item> MOONGLOW = REGISTRATE.item("moonglow", Item::new)
         .model(subfolder("herbs"))
@@ -67,29 +67,21 @@ public class ModItems {
         .model(subfolder("herbs"))
         .tag(RootsAPI.Tags.Items.BAFFLECAP_CROP)
         .register();
-
-    public static void load() {
-
-    }
-  }
-
-  public static class Seeds {
-
     public static final ItemEntry<ItemNameBlockItem> MOONGLOW_SEEDS = REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.MOONGLOW_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.MOONGLOW_SEEDS)
+        .tag(RootsAPI.Tags.Items.MOONGLOW_SEEDS, RootsAPI.Tags.Items.SEEDS)
         .register();
     public static final ItemEntry<ItemNameBlockItem> PERESKIA_BULB = REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.Crops.PERESKIA_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.PERESKIA_SEEDS)
+        .tag(RootsAPI.Tags.Items.PERESKIA_SEEDS, RootsAPI.Tags.Items.SEEDS)
         .register();
     public static final ItemEntry<ItemNameBlockItem> SPIRITLEAF_SEEDS = REGISTRATE.item("spiritleaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.SPIRITLEAF_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.SPIRITLEAF_SEEDS)
+        .tag(RootsAPI.Tags.Items.SPIRITLEAF_SEEDS, RootsAPI.Tags.Items.SEEDS)
         .register();
     public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.Crops.WILDEWHEET_CROP.get(), p))
         .model(subfolder("herbs"))
-        .tag(RootsAPI.Tags.Items.WILDEWHEET_SEEDS)
+        .tag(RootsAPI.Tags.Items.WILDEWHEET_SEEDS, RootsAPI.Tags.Items.SEEDS)
         .register();
 
     public static void load() {
@@ -357,7 +349,6 @@ public class ModItems {
 
   public static void load() {
     Herbs.load();
-    Seeds.load();
     Bark.load();
     Pouches.load();
   }

@@ -52,6 +52,10 @@ public class ModTags {
       b.tag(RootsAPI.Tags.Blocks.CRIMSON_PILLARS).add(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM, Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE);
       b.tag(RootsAPI.Tags.Blocks.WILDWOOD_CAPSTONES).addTags(RootsAPI.Tags.Blocks.RUNED_WILDWOOD_LOG);
       b.tag(RootsAPI.Tags.Blocks.WILDWOOD_PILLARS).add(ModBlocks.WILDWOOD_LOG.get(), ModBlocks.STRIPPED_WILDWOOD_LOG.get(), ModBlocks.WILDWOOD_WOOD.get(), ModBlocks.STRIPPED_WILDWOOD_WOOD.get());
+
+      b.tag(RootsAPI.Tags.Blocks.GROWTH_FORCE);
+      b.tag(RootsAPI.Tags.Blocks.GROWTH_BLACKLIST);
+      b.tag(RootsAPI.Tags.Blocks.GROWTH_REDUCE);
     });
 
     REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, b -> {
@@ -76,6 +80,7 @@ public class ModTags {
       b.copy(RootsAPI.Tags.Blocks.RUNED_WILDWOOD_LOG, RootsAPI.Tags.Items.Blocks.RUNED_WILDWOOD_LOG);
       b.copy(RootsAPI.Tags.Blocks.RUNED_CRIMSON_STEM, RootsAPI.Tags.Items.Blocks.RUNED_CRIMSON_STEM);
       b.copy(RootsAPI.Tags.Blocks.RUNED_WARPED_STEM, RootsAPI.Tags.Items.Blocks.RUNED_WARPED_STEM);
+      b.copy(RootsAPI.Tags.Blocks.GROVE_STONES, RootsAPI.Tags.Items.Blocks.GROVE_STONES);
 
       b.tag(RootsAPI.Tags.Items.AIR_CROPS).addTags(RootsAPI.Tags.Items.CLOUD_BERRY_CROP);
       b.tag(RootsAPI.Tags.Items.WATER_CROPS).addTags(RootsAPI.Tags.Items.DEWGONIA_CROP);
