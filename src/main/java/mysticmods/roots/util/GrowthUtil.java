@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class GrowthUtil {
-  public boolean canGrow(Level level, BlockPos pos, @Nullable BlockState state, @Nullable Player player) {
+  public static boolean canGrow(Level level, BlockPos pos, @Nullable BlockState state, @Nullable Player player) {
     if (state == null) {
       state = level.getBlockState(pos);
     }
