@@ -115,6 +115,15 @@ public class CastingItem extends Item implements ICastingItem {
   }
 
   @Override
+  public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
+    super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
+    if (!pLevel.isClientSide()) {
+      int dur = getUseDuration(pStack) - pTimeCharged;
+      RootsAPI.LOG.info("Finished using after {} ticks {} seconds", dur, dur / 20);
+    }
+  }
+
+  @Override
   public int getSlots() {
     return 5;
   }

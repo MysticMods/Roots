@@ -48,14 +48,14 @@ public class GrowthInfusionSpell extends Spell {
 
     BlockHitResult result = pick(pPlayer);
     BlockState at = level.getBlockState(result.getBlockPos());
-    if (GrowthUtil.canGrow(level, result.getBlockPos(), at, pPlayer)) {
-      RootsAPI.LOG.info("CAN GROW! State at {} at pos {}", at, result.getBlockPos());
 
-      for (int i = 0; i <= this.base_ticks; i++) {
-        at.randomTick(level, result.getBlockPos(), level.random);
-      }
+    int doTicks = GrowthUtil.growthTicks(level, result.getBlockPos(), at, pPlayer);
+    if (doTicks > 0 && level.random.nextInt(doTicks) == 0) {
+      RootsAPI.LOG.info("RANDOM TICK: {}", ticks);
+
+      at.randomTick(level, result.getBlockPos(), level.random);
     } else {
-      RootsAPI.LOG.info("NO GROW! State at {} at pos {}", at, result.getBlockPos());
+      RootsAPI.LOG.info("NO GROW! {}", ticks);
     }
   }
 }
