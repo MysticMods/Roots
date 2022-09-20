@@ -1,8 +1,10 @@
 package mysticmods.roots.api.modifier;
 
-import mysticmods.roots.api.herbs.Cost;
-import mysticmods.roots.api.registry.CostedRegistryEntry;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.IParentChild;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.resources.ResourceLocation;
@@ -10,15 +12,25 @@ import noobanidus.libs.noobutil.type.LazySupplier;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
-public class Modifier extends DescribedRegistryEntry<Modifier> implements CostedRegistryEntry {
+public class Modifier extends DescribedRegistryEntry<Modifier> implements ICostedRegistryEntry, IParentChild<Modifier> {
+  protected final Supplier<Modifier> parent;
+  protected final Set<Modifier> children = new ObjectLinkedOpenHashSet<>();
   protected final Supplier<Spell> spell;
   protected final List<Cost> costs = new ArrayList<>();
 
-  public Modifier(Supplier<Spell> spell, List<Cost> costs) {
-    this.spell = new LazySupplier<>(spell);
+  // Modifier with parent
+  public Modifier(Supplier<Modifier> parent, Supplier<Spell> spell, List<Cost> costs) {
+    this.spell = LazySupplier.of(spell);
+    this.parent = LazySupplier.of(parent);
     setCosts(costs);
+  }
+
+  // Modifier with no parent
+  public Modifier (Supplier<Spell> spell, List<Cost> costs) {
+    this(IParentChild.NO_PARENT, spell, costs);
   }
 
   @Override
@@ -38,6 +50,7 @@ public class Modifier extends DescribedRegistryEntry<Modifier> implements Costed
 
   public void initialize() {
     getSpell().addModifier(this);
+    resolve();
   }
 
   @Override
@@ -48,5 +61,20 @@ public class Modifier extends DescribedRegistryEntry<Modifier> implements Costed
   @Override
   protected String getDescriptor() {
     return "modifier";
+  }
+
+  @Override
+  public Modifier getParent() {
+    return parent.get();
+  }
+
+  @Override
+  public Set<Modifier> getChildren() {
+    return children;
+  }
+
+  @Override
+  public void addChild(Modifier child) {
+    children.add(child);
   }
 }

@@ -9,4 +9,6 @@ public class Capabilities {
   });
   public static final Capability<GrantCapability> GRANT_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
   });
+  public static final Capability<SnapshotCapability> SNAPSHOT_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+  });
 }

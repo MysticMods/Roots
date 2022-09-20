@@ -3,12 +3,13 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.herbs.Herb;
+import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -27,6 +28,7 @@ public class ModRegistries {
   private static final DeferredRegister<SpellProperty<?>> DEFERRED_SPELL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_PROPERTY_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<LevelCondition> DEFERRED_LEVEL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.LEVEL_CONDITION_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<PlayerCondition> DEFERRED_PLAYER_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.PLAYER_CONDITION_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<SnapshotSerializer<?>> DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY = DeferredRegister.create(RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, RootsAPI.MODID);
 
   static {
     Registries.HERB_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_HERB_REGISTRY.makeRegistry(() -> new RegistryBuilder<Herb>().disableSaving().disableSync()));
@@ -37,6 +39,7 @@ public class ModRegistries {
     Registries.SPELL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(() -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving()));
     Registries.LEVEL_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_LEVEL_CONDITION_REGISTRY.makeRegistry(() -> new RegistryBuilder<LevelCondition>().disableSync().disableSaving()));
     Registries.PLAYER_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_PLAYER_CONDITION_REGISTRY.makeRegistry(() -> new RegistryBuilder<PlayerCondition>().disableSync().disableSaving()));
+    Registries.SNAPSHOT_SERIALIZER_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY.makeRegistry(() -> new RegistryBuilder<SnapshotSerializer<?>>().disableSync().disableSaving()));
     Registries.ENTITY_REGISTRY = ForgeRegistryWrapper.of(() -> ForgeRegistries.ENTITY_TYPES);
   }
 
@@ -49,6 +52,7 @@ public class ModRegistries {
     DEFERRED_SPELL_PROPERTY_REGISTRY.register(bus);
     DEFERRED_LEVEL_CONDITION_REGISTRY.register(bus);
     DEFERRED_PLAYER_CONDITION_REGISTRY.register(bus);
+    DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY.register(bus);
   }
 
   public static void load() {

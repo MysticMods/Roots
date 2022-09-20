@@ -100,6 +100,6 @@ public class Roots {
     ModSpells.load();
     ModLang.load();
     ModRegistries.register(bus);
-    ModRecipes.Types.register(bus);
+    ModRecipes.register(bus);
   }
 }

@@ -1,4 +1,4 @@
-package mysticmods.roots.api.herbs;
+package mysticmods.roots.api.herb;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.Registries;

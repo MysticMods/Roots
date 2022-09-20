@@ -5,8 +5,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 
-public interface IDescribedRegistryEntry {
-  ResourceLocation getKey();
+public interface IDescribedRegistryEntry extends IKeyedRegistryEntry {
 
   String getOrCreateDescriptionId();
 

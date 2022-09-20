@@ -3,7 +3,7 @@ package mysticmods.roots.api.capability;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.herbs.Herb;
+import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

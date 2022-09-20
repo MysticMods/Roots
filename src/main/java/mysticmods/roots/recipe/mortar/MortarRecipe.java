@@ -9,6 +9,7 @@ import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModRecipes;
+import mysticmods.roots.init.ModSerializers;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -38,12 +39,12 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModRecipes.Serializers.MORTAR.get();
+    return ModSerializers.MORTAR.get();
   }
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.MORTAR.get();
+    return ModRecipes.MORTAR.get();
   }
 
   public static class Serializer extends RootsRecipe.Serializer<MortarInventory, MortarCrafting, MortarRecipe> {
@@ -92,7 +93,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-      return ModRecipes.Serializers.MORTAR.get();
+      return ModSerializers.MORTAR.get();
     }
 
     public static class Result extends RootsRecipe.Builder.Result {

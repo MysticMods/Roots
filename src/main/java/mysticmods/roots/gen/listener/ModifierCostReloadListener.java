@@ -3,7 +3,7 @@ package mysticmods.roots.gen.listener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import mysticmods.roots.api.herbs.Cost;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.resources.ResourceLocation;

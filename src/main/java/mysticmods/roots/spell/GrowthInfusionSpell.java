@@ -1,7 +1,7 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.herbs.Cost;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;

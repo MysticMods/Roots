@@ -12,6 +12,7 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
+import mysticmods.roots.init.ModSerializers;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -48,12 +49,12 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModRecipes.Serializers.PYRE.get();
+    return ModSerializers.PYRE.get();
   }
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.PYRE.get();
+    return ModRecipes.PYRE.get();
   }
 
   public static class Serializer extends RootsRecipe.Serializer<PyreInventory, PyreCrafting, PyreRecipe> {
@@ -152,7 +153,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-      return ModRecipes.Serializers.PYRE.get();
+      return ModSerializers.PYRE.get();
     }
 
     @Override

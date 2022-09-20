@@ -1,9 +1,9 @@
 package mysticmods.roots.api.spell;
 
-import mysticmods.roots.api.herbs.Cost;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.registry.CostedRegistryEntry;
+import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
@@ -12,15 +12,13 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.common.ForgeMod;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class Spell extends StyledRegistryEntry<Spell> implements CostedRegistryEntry {
+public abstract class Spell extends StyledRegistryEntry<Spell> implements ICostedRegistryEntry {
   protected final Type type;
   protected final List<Cost> costs = new ArrayList<>();
   protected final Set<Modifier> modifiers = new HashSet<>();

@@ -2,7 +2,7 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.herbs.Herb;
+import mysticmods.roots.api.herb.Herb;
 import net.minecraft.ChatFormatting;
 
 import static mysticmods.roots.Roots.REGISTRATE;

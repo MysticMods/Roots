@@ -1,4 +1,4 @@
-package mysticmods.roots.api.herbs;
+package mysticmods.roots.api.herb;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

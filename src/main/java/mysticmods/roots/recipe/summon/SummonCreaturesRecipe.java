@@ -6,6 +6,7 @@ import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.recipe.IBoundlessRecipe;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.init.ModRecipes;
+import mysticmods.roots.init.ModSerializers;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
@@ -67,12 +68,12 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModRecipes.Serializers.SUMMON_CREATURES.get();
+    return ModSerializers.SUMMON_CREATURES.get();
   }
 
   @Override
   public RecipeType<?> getType() {
-    return ModRecipes.Types.SUMMON_CREATURES.get();
+    return ModRecipes.SUMMON_CREATURES.get();
   }
 
   public static class Serializer implements RecipeSerializer<SummonCreaturesRecipe> {
@@ -205,7 +206,7 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
 
       @Override
       public RecipeSerializer<?> getType() {
-        return ModRecipes.Serializers.SUMMON_CREATURES.get();
+        return ModSerializers.SUMMON_CREATURES.get();
       }
 
       @Nullable

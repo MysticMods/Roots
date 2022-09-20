@@ -1,6 +1,6 @@
 package mysticmods.roots.network.client;
 
-import mysticmods.roots.api.herbs.Cost;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.FriendlyByteBuf;

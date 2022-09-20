@@ -3,7 +3,7 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.herbs.Cost;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.SpellProperty;

@@ -4,11 +4,12 @@ import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.herbs.Herb;
+import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -48,6 +49,9 @@ public abstract class RootsAPI {
   public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "level_conditions"));
   public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "player_conditions"));
 
+  public static ResourceKey<Registry<SnapshotSerializer<?>>>
+    SNAPSHOT_SERIALIZER_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "snapshot_serializers"));
+
   private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
     return ResourceKey.createRegistryKey(name);
   }
@@ -55,6 +59,7 @@ public abstract class RootsAPI {
   // Capability IDs
   public static final ResourceLocation HERB_CAPABILITY_ID = new ResourceLocation(MODID, "herb_capability");
   public static final ResourceLocation GRANT_CAPABILITY_ID = new ResourceLocation(MODID, "grant_capability");
+  public static final ResourceLocation SNAPSHOT_CAPABILITY_ID = new ResourceLocation(MODID, "snapshot_capability");
 
   // Actual API methods
   public abstract IRecipeManagerAccessor getRecipeAccessor();
