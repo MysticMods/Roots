@@ -55,6 +55,7 @@ public class DataHandler {
             herb.setDirty(false);
           }
         });
+        player.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> snapshot.tick(player));
       }
     }
   }
