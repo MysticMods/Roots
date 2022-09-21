@@ -52,7 +52,7 @@ public class CastingItem extends Item implements ICastingItem {
 
     Costing costs = new Costing(spell);
 
-    // Cost is triggered every second
+    // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
     if (ticks % 20 == 0) {
       if (!costs.canAfford(pPlayer, true)) {
         RootsAPI.LOG.info("Not enough herbs to continue casting: " + spell.getSpell().getName());

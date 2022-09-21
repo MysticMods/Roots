@@ -35,10 +35,16 @@ public class Costing {
 
   private final Object2BooleanMap<Modifier> modifierMap = new Object2BooleanLinkedOpenHashMap<>();
 
+  private boolean noCharge = false;
+
   public Costing(SpellInstance spell) {
     this.spell = spell;
     // base cost is always a cost
     modifierMap.defaultReturnValue(false);
+  }
+
+  public void noCharge() {
+    this.noCharge = true;
   }
 
   public void charge(Modifier modifier) {
@@ -46,6 +52,7 @@ public class Costing {
       throw new IllegalStateException("tried to charge for a modifier (" + modifier + ") in the spell " + this.spell.getSpell() + " when that spell doesn't have that modifier enabled");
     }
 
+    this.noCharge = false;
     modifierMap.put(modifier, true);
   }
 
@@ -102,6 +109,7 @@ public class Costing {
   public boolean canAfford(Player player, boolean checkModifiers) {
     calculateCosts(checkModifiers);
 
+
     Inventory playerInventory = player.getInventory();
     LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);
 
@@ -147,6 +155,11 @@ public class Costing {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
     }
     calculateCosts(true);
+
+    // TODO: ???
+    if (noCharge) {
+      return;
+    }
 
     Inventory playerInventory = player.getInventory();
     LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);

@@ -55,6 +55,7 @@ public class GrowthInfusionSpell extends Spell {
 
       at.randomTick(level, result.getBlockPos(), level.random);
     } else {
+      costs.noCharge();
       RootsAPI.LOG.info("NO GROW! {}", ticks);
     }
   }
