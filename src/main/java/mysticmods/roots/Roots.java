@@ -86,6 +86,7 @@ public class Roots {
     };
 
     ModBlocks.load();
+    ModSerializers.load();
     ModBlockEntities.load();
     ModItems.load();
     ModEntities.load();
