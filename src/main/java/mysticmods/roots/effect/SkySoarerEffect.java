@@ -1,7 +1,6 @@
 package mysticmods.roots.effect;
 
 import mysticmods.roots.api.capability.Capabilities;
-import mysticmods.roots.event.forge.ServerTickHandler;
 import mysticmods.roots.init.ModSerializers;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -21,12 +20,11 @@ public class SkySoarerEffect extends MobEffect {
     super.applyEffectTick(pLivingEntity, pAmplifier);
     if (pLivingEntity instanceof Player player) {
       player.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> snapshot.ifPresent(player, ModSerializers.SKY_SOARER.get(), (sky) -> {
-        ServerTickHandler.nextTick(() -> {
-          player.hasImpulse = true;
-          Vec3 vec31 = player.getLookAngle();
-          Vec3 vec32 = player.getDeltaMovement();
-          player.setDeltaMovement(vec31);
-        });
+        player.hasImpulse = true;
+        player.hurtMarked = true;
+        Vec3 vec31 = player.getLookAngle();
+        Vec3 vec32 = player.getDeltaMovement();
+        player.setDeltaMovement(vec31);
       }));
     }
   }
