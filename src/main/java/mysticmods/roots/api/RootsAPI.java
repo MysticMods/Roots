@@ -322,6 +322,8 @@ public abstract class RootsAPI {
       public static final TagKey<EntityType<?>> ANIMAL_HARVEST = modTag("animal_harvest_entities");
       public static final TagKey<EntityType<?>> PACIFIST = modTag("pacifist");
 
+      public static final TagKey<EntityType<?>> BOATS = modTag("boats");
+
       static TagKey<EntityType<?>> modTag(String name) {
         return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(MODID, name));
       }

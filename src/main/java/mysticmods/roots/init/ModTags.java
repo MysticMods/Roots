@@ -14,6 +14,7 @@ public class ModTags {
     REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, b -> {
       b.tag(RootsAPI.Tags.Entities.PACIFIST).add(EntityType.AXOLOTL, EntityType.CAT, EntityType.CHICKEN, EntityType.COD, EntityType.COW, EntityType.DOLPHIN, EntityType.DONKEY, EntityType.FOX, EntityType.GLOW_SQUID, EntityType.HORSE, EntityType.IRON_GOLEM, EntityType.LLAMA, EntityType.MULE, EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PARROT, EntityType.POLAR_BEAR, EntityType.RABBIT, EntityType.SALMON, EntityType.SHEEP, EntityType.SNOW_GOLEM, EntityType.SQUID, EntityType.TRADER_LLAMA, EntityType.TROPICAL_FISH, EntityType.TURTLE, EntityType.VILLAGER, EntityType.WOLF);
       b.tag(RootsAPI.Tags.Entities.ANIMAL_HARVEST).addTag(RootsAPI.Tags.Entities.PACIFIST);
+      b.tag(RootsAPI.Tags.Entities.BOATS).add(EntityType.BOAT, EntityType.CHEST_BOAT);
     });
 
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
