@@ -19,10 +19,10 @@ import java.util.Comparator;
 
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class ResolvedRecipes {
-  public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.GROVE), Comparator.comparing(o -> o.getId().getPath()));
-  public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.MORTAR), Comparator.comparing(o -> o.getId().getPath()));
-  public static final ResolvingRecipeType<PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.PYRE), Comparator.comparing(o -> o.getId().getPath()));
-  public static final ResolvingRecipeType<SummonCreaturesCrafting, SummonCreaturesRecipe> SUMMON_CREATURES = new ResolvingRecipeType<>(new LazySupplier<>(ModRecipes.SUMMON_CREATURES), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.GROVE), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.MORTAR), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.PYRE), Comparator.comparing(o -> o.getId().getPath()));
+  public static final ResolvingRecipeType<SummonCreaturesCrafting, SummonCreaturesRecipe> SUMMON_CREATURES = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.SUMMON_CREATURES), Comparator.comparing(o -> o.getId().getPath()));
 
   @SubscribeEvent
   public static void onReloadListeners(AddReloadListenerEvent event) {
