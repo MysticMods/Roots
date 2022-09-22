@@ -96,6 +96,8 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
     return (BlockHitResult) pPlayer.pick(getRange(pPlayer), 1f, fluids);
   }
 
+  // TODO: Pick entity
+
   @Override
   protected String getDescriptor() {
     return "spell";
