@@ -40,6 +40,10 @@ public class SnapshotCapability implements ICapabilityProvider, ICapabilitySeria
     return serializer.cast(result);
   }
 
+  public <T extends Snapshot> void addSnapshot (Player player, SnapshotSerializer<T> serializer, T snapshot) {
+    snapshots.put(serializer, snapshot);
+  }
+
   @Override
   public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
     return Capabilities.SNAPSHOT_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this));

@@ -1,0 +1,6 @@
+{
+  "_comment": "How long the spell will last",
+  "default_value": 28,
+  "spell": "roots:sky_soarer",
+  "value": 28
+}

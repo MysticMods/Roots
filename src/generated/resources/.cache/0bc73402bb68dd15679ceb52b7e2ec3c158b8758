@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-16T12:07:42.0452991	Spell properties
+// 1.19.2	2022-09-22T12:23:08.3550725	Spell properties
 8844f1c40708dd1992206793e7d9be5be8d83ba5 data/roots/properties/spell/acid_cloud/cooldown.json
 33b16724324655a4c9aaf2eb77a87aa220546488 data/roots/properties/spell/aqua_bubble/cooldown.json
 6bbbd0cb5df07d25b93c6ca2134704bcd5c20b63 data/roots/properties/spell/augment/cooldown.json
@@ -24,7 +24,11 @@ d4b1cfbaed79c2468dcd5c930949c0fd5f9eb292 data/roots/properties/spell/radiance/co
 ad14b5743a0d80462d5796ef603cf8fd723bb640 data/roots/properties/spell/rose_thorns/cooldown.json
 89c44fc1964b2340407d16a3d416897f39f14252 data/roots/properties/spell/sanctuary/cooldown.json
 1bbc44591faefa2c40eb40637c8f25ef28bc534c data/roots/properties/spell/shatter/cooldown.json
+cbbf85277fe529355485d3abc49460589de889c0 data/roots/properties/spell/sky_soarer/amplifier.json
+25b02a637fbb63be829dd98b7e0de89b81c83a97 data/roots/properties/spell/sky_soarer/boosted_amplifier.json
+97924e225bd3c93413f28b28d01e0a54cc9e734b data/roots/properties/spell/sky_soarer/boosted_duration.json
 836d9b0e6c1b79d4c3568682da085184b165168d data/roots/properties/spell/sky_soarer/cooldown.json
+d07582e17eec2aa01a70cfb2ec117fb2ef74bead data/roots/properties/spell/sky_soarer/duration.json
 f17525a23537c11e632a3c16ec0d753f1a23a8c9 data/roots/properties/spell/storm_cloud/cooldown.json
 80c771523de4cbb49aec78480aaf5e64ad02a435 data/roots/properties/spell/time_stop/cooldown.json
 6f99575e5e4eff3f5b142fee97165f3c87b2303d data/roots/properties/spell/wildfire/cooldown.json

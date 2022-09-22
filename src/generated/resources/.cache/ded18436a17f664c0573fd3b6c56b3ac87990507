@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-22T12:06:35.545539	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2022-09-22T12:23:08.3590606	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 866018aa29cd01eaaad597b1d321ac9a292cb387 assets/roots/blockstates/bafflecap_block.json
 06b46983519d31e1b0a1bb9107064c093cb46d6a assets/roots/blockstates/caelic_soil.json
@@ -115,8 +115,8 @@ e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.
 9f65d74b70a0be61f9a3729e0649f66a3d29e5c1 assets/roots/blockstates/wildwood_wide_post.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 8e9ac5aa5ad7efbdf1e5a24a7cd11185f74290c5 assets/roots/blockstates/wild_roots.json
-f30cc5e1a96d7d1ad5b90f044959f4d1c5421418 assets/roots/lang/en_ud.json
-ad1dcbede26c420227a3e515fbe1f3749890a095 assets/roots/lang/en_us.json
+626942f7e4cfb4a174b3df024951be9ad5942ff2 assets/roots/lang/en_ud.json
+bc755a5a9aa53bf541fa6585b0acbdda32e0647e assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 59b6966cf270e466809edb1f1f926cb64d8bffbd assets/roots/models/block/bafflecap_block.json
 dfa82fb95a1f994653222dbb765cf53a1051ff37 assets/roots/models/block/caelic_soil.json
@@ -517,11 +517,6 @@ b48da5338d6df199a05029fe52defa82b3042c55 assets/roots/models/item/strange_ooze.j
 0a0edad27f33509be58c3387f932c7ea33f12fd2 assets/roots/models/item/stripped_wildwood_log.json
 94154ab2fc29a76b2075c14847710e02785413e4 assets/roots/models/item/stripped_wildwood_wood.json
 ab91c5fb468f89dc5c9d4f93ab4e86592126e160 assets/roots/models/item/terran_soil.json
-b5bc4269638046a7cf8b9898ec69cf2c04919775 assets/roots/models/item/terrastone_axe.json
-c331f5a80bcd6c4ca6474c34580b10aa58917620 assets/roots/models/item/terrastone_hoe.json
-d97de440dc94732858442408f96e9b05fbb4da8e assets/roots/models/item/terrastone_pickaxe.json
-52e05de8c9bab4c74ed81d996e5a18869abf6d32 assets/roots/models/item/terrastone_shovel.json
-6ea997434f33195cbffbb098049540b70f94e7c6 assets/roots/models/item/terrastone_sword.json
 dad122fab6ca1e804cc2d165f1b348d7650dcbf9 assets/roots/models/item/unending_bowl.json
 9f5d7d59437ffa13c4f4f69808e464b1fe0dc7c5 assets/roots/models/item/warped_bark.json
 32bd12fe6572b61ab2746f51f83792f8c79a45f9 assets/roots/models/item/wildewheet.json

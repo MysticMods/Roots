@@ -1,0 +1,6 @@
+{
+  "_comment": "How much time will be added to the standard duration when boosted",
+  "default_value": 28,
+  "spell": "roots:sky_soarer",
+  "value": 28
+}
