@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class SnapshotCapability implements ICapabilityProvider, ICapabilitySerializable<ListTag> {
   private final Map<SnapshotSerializer<?>, Snapshot> snapshots = new HashMap<>();
@@ -38,6 +39,13 @@ public class SnapshotCapability implements ICapabilityProvider, ICapabilitySeria
     }
 
     return serializer.cast(result);
+  }
+
+  public <T extends Snapshot> void ifPresent(Player player, SnapshotSerializer<T> serializer, Consumer<T> consumer) {
+    T result = getSnapshot(player, serializer);
+    if (result != null) {
+      consumer.accept(result);
+    }
   }
 
   public <T extends Snapshot> void addSnapshot (Player player, SnapshotSerializer<T> serializer, T snapshot) {
