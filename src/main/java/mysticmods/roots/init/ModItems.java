@@ -269,26 +269,6 @@ public class ModItems {
       .tag(RootsAPI.Tags.Items.CASTING_TOOLS)
       .register();
 
-  public static final ItemEntry<Item> TERRASTONE_AXE = REGISTRATE.item("terrastone_axe", Item::new)
-      .model(subfolder("tools"))
-      .register();
-
-  public static final ItemEntry<Item> TERRASTONE_HOE = REGISTRATE.item("terrastone_hoe", Item::new)
-      .model(subfolder("tools"))
-      .register();
-
-  public static final ItemEntry<Item> TERRASTONE_PICKAXE = REGISTRATE.item("terrastone_pickaxe", Item::new)
-      .model(subfolder("tools"))
-      .register();
-
-  public static final ItemEntry<Item> TERRASTONE_SHOVEL = REGISTRATE.item("terrastone_shovel", Item::new)
-      .model(subfolder("tools"))
-      .register();
-
-  public static final ItemEntry<Item> TERRASTONE_SWORD = REGISTRATE.item("terrastone_sword", Item::new)
-      .model(subfolder("tools"))
-      .register();
-
   public static final ItemEntry<Item> WILDWOOD_BOW = REGISTRATE.item("wildwood_bow", Item::new)
       // TODO: MODEL, ETC
       .model(subfolder("tools"))
