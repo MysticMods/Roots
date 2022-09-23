@@ -22,9 +22,7 @@ public class SkySoarerEffect extends MobEffect {
       player.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> snapshot.ifPresent(player, ModSerializers.SKY_SOARER.get(), (sky) -> {
         player.hasImpulse = true;
         player.hurtMarked = true;
-        Vec3 vec31 = player.getLookAngle();
-        Vec3 vec32 = player.getDeltaMovement();
-        player.setDeltaMovement(vec31);
+        player.setDeltaMovement(player.getLookAngle().multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
       }));
     }
   }
@@ -37,5 +35,12 @@ public class SkySoarerEffect extends MobEffect {
   @Override
   public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
     super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
+     if (pLivingEntity instanceof Player player) {
+      player.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> snapshot.ifPresent(player, ModSerializers.SKY_SOARER.get(), (sky) -> {
+        player.hasImpulse = true;
+        player.hurtMarked = true;
+        player.setDeltaMovement(sky.getOriginalMovement());
+      }));
+    }
   }
 }
