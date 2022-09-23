@@ -42,6 +42,15 @@ public class SpellInstance {
     cooldown = tag.getInt("cooldown");
   }
 
+  public boolean tick() {
+    if (cooldown > 0) {
+      cooldown--;
+      return true;
+    }
+
+    return false;
+  }
+
   public Spell getSpell() {
     return spell;
   }
@@ -58,9 +67,10 @@ public class SpellInstance {
     this.cooldown = cooldown;
   }
 
+
   public void setCooldown(Player pPlayer) {
     if (getMaxCooldown() > 0) {
-      setCooldown(pPlayer.tickCount + getMaxCooldown());
+      setCooldown(getMaxCooldown());
     }
   }
 
@@ -89,7 +99,7 @@ public class SpellInstance {
   }
 
   // TODO:
-  // returns:
+
   //   true - the spell can be cast
   //   false - the spell cannot be cast
   public boolean canCast(Player pCaster) {
@@ -97,8 +107,7 @@ public class SpellInstance {
       return true;
     }
 
-    int diff = pCaster.tickCount - getCooldown();
-    return diff <= 0 || Math.abs(diff) > getMaxCooldown();
+    return getCooldown() <= 0;
   }
 
   public void cast(Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {

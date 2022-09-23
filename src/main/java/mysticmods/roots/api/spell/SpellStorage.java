@@ -35,6 +35,35 @@ public class SpellStorage {
     return spells.size();
   }
 
+  public int getCooldown() {
+    SpellInstance spell = get();
+    if (spell != null) {
+      return spell.getCooldown();
+    }
+
+    return 0;
+  }
+
+  public int getMaxCooldown () {
+    SpellInstance spell = get();
+    if (spell != null) {
+      return spell.getMaxCooldown();
+    }
+
+    return 0;
+  }
+
+  public boolean tick () {
+    for (SpellInstance spell : spells) {
+      if (spell != null) {
+        if (spell.tick()) {
+          setDirty(true);
+        }
+      }
+    }
+    return isDirty();
+  }
+
   public void next() {
     int lastIndex = index;
     for (int i = index; i < spells.size(); i++) {

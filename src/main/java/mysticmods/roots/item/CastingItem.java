@@ -8,6 +8,7 @@ import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -48,6 +49,7 @@ public class CastingItem extends Item implements ICastingItem {
       pPlayer.stopUsingItem();
       return;
     }
+
     int ticks = pStack.getUseDuration() - pRemainingUseDuration;
 
     Costing costs = new Costing(spell);
@@ -124,7 +126,45 @@ public class CastingItem extends Item implements ICastingItem {
   }
 
   @Override
+  // TODO: Replace with tag???
   public int getSlots() {
     return 5;
+  }
+
+  @Override
+  public boolean isBarVisible(ItemStack pStack) {
+    SpellStorage storage = SpellStorage.fromItem(pStack);
+    if (storage == null) {
+      return false;
+    }
+
+    return storage.getCooldown() > 0;
+  }
+
+  @Override
+  public int getBarWidth(ItemStack pStack) {
+    SpellStorage storage = SpellStorage.fromItem(pStack);
+    if (storage == null) {
+      return 0;
+    }
+
+    return Math.round(13.0F - (float)storage.getCooldown() * 13.0F / (float)storage.getMaxCooldown());
+  }
+
+  // TODO: This means spell cooldowns won't tick outside inventories
+  @Override
+  public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+    super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+
+    SpellStorage storage = SpellStorage.fromItem(pStack);
+    if (storage != null && storage.tick()) {
+      storage.save(pStack);
+    }
+  }
+
+  // TODO: This is probably over-simplified
+  @Override
+  public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+    return slotChanged || oldStack.getItem() != newStack.getItem();
   }
 }
