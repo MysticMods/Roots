@@ -35,8 +35,12 @@ public class SpellStorage {
     return spells.size();
   }
 
+  public int getSlot () {
+    return index;
+  }
+
   public int getCooldown() {
-    SpellInstance spell = get();
+    SpellInstance spell = getSpell();
     if (spell != null) {
       return spell.getCooldown();
     }
@@ -45,7 +49,7 @@ public class SpellStorage {
   }
 
   public int getMaxCooldown () {
-    SpellInstance spell = get();
+    SpellInstance spell = getSpell();
     if (spell != null) {
       return spell.getMaxCooldown();
     }
@@ -64,13 +68,15 @@ public class SpellStorage {
     return isDirty();
   }
 
-  public void next() {
+  public void nextSpell() {
     int lastIndex = index;
-    for (int i = index; i < spells.size(); i++) {
-      if (spells.get(i) != null) {
-        index = i;
-        setDirty(true);
-        return;
+    if (index + 1 < spells.size()) {
+      for (int i = index + 1; i < spells.size(); i++) {
+        if (spells.get(i) != null) {
+          index = i;
+          setDirty(true);
+          return;
+        }
       }
     }
     for (int i = 0; i < lastIndex; i++) {
@@ -82,7 +88,7 @@ public class SpellStorage {
     }
   }
 
-  public void previous() {
+  public void previousSpell() {
     int lastIndex = index;
     for (int i = index; i >= 0; i--) {
       if (spells.get(i) != null) {
@@ -100,16 +106,16 @@ public class SpellStorage {
     }
   }
 
-  public void set(int slot) {
+  public void setSlot(int slot) {
     validateSlot(slot);
     this.setDirty(true);
     this.index = slot;
   }
 
-  public int add(Spell spell, Collection<Modifier> modifiers) {
+  public int addSpell(Spell spell, Collection<Modifier> modifiers) {
     int slot = -1;
     for (int i = 0; i < spells.size(); i++) {
-      if (get(i) == null) {
+      if (getSpell(i) == null) {
         slot = i;
         break;
       }
@@ -118,18 +124,18 @@ public class SpellStorage {
       return -1;
     }
     setDirty(true);
-    set(slot, spell, modifiers);
+    setSpell(slot, spell, modifiers);
     return slot;
   }
 
-  public boolean set(int slot, Spell spell, Collection<Modifier> modifiers) {
+  public boolean setSpell(int slot, Spell spell, Collection<Modifier> modifiers) {
     validateSlot(slot);
     this.setDirty(true);
     return this.spells.set(slot, new SpellInstance(spell, modifiers)) == null;
   }
 
   @Nullable
-  public SpellInstance get(int slot) {
+  public SpellInstance getSpell(int slot) {
     validateSlot(slot);
     SpellInstance inSlot = this.spells.get(slot);
     if (inSlot == null) {
@@ -139,7 +145,7 @@ public class SpellStorage {
   }
 
   @Nullable
-  public SpellInstance get() {
+  public SpellInstance getSpell() {
     SpellInstance inSlot = this.spells.get(index);
     if (inSlot == null) {
       return null;

@@ -30,6 +30,11 @@ public class ModLang {
       b.add("roots.tooltip.cost.cost_amount", "x%s");
       b.add("roots.tooltip.cost.cost_multiplier", "+%s");
 
+      b.add("roots.tooltip.staff.selected", "Selected Slot: %s");
+      b.add("roots.tooltip.staff.no_spell", "No spell selected.");
+
+      b.add("roots.item.staff.with_spell", "Staff (%s)");
+
       for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
         b.add(spell.getDescriptionId(), RegistrateLangProvider.toEnglishName(spell.getKey().getPath()));
       }

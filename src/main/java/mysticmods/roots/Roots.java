@@ -3,6 +3,7 @@ package mysticmods.roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.access.IPlayerAccessor;
 import mysticmods.roots.api.access.IRecipeManagerAccessor;
+import mysticmods.roots.api.access.IShiftAccessor;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.modifier.Modifier;
@@ -10,9 +11,11 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.impl.ClientPlayerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
+import mysticmods.roots.client.impl.ClientShiftAccessor;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.impl.ServerPlayerAccessor;
 import mysticmods.roots.impl.ServerRecipeAccessor;
+import mysticmods.roots.impl.ServerShiftAccessor;
 import mysticmods.roots.init.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -55,6 +58,7 @@ public class Roots {
     RootsAPI.INSTANCE = new RootsAPI() {
       private final IRecipeManagerAccessor accessor = DistExecutor.safeRunForDist(() -> ClientRecipeAccessor::new, () -> ServerRecipeAccessor::new);
       private final IPlayerAccessor playerAccessor = DistExecutor.safeRunForDist(() -> ClientPlayerAccessor::new, () -> ServerPlayerAccessor::new);
+      private final IShiftAccessor shiftAccessor = DistExecutor.safeRunForDist(() -> ClientShiftAccessor::new, () -> ServerShiftAccessor::new);
 
       @Override
       public IRecipeManagerAccessor getRecipeAccessor() {
@@ -65,6 +69,11 @@ public class Roots {
       @Override
       public Player getPlayer() {
         return playerAccessor.getPlayer();
+      }
+
+      @Override
+      public boolean isShiftKeyDown() {
+        return shiftAccessor.isShiftKeyDown();
       }
 
       @Override

@@ -68,6 +68,8 @@ public abstract class RootsAPI {
 
   public abstract Player getPlayer();
 
+  public abstract boolean isShiftKeyDown ();
+
   public RecipeManager getRecipeManager() {
     return getRecipeAccessor().getManager();
   }

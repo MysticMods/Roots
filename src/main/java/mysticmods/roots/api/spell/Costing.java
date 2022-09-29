@@ -1,5 +1,6 @@
 package mysticmods.roots.api.spell;
 
+import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
@@ -107,7 +108,7 @@ public class Costing {
   }
 
   public boolean canAfford(Player player, boolean checkModifiers) {
-    calculateCosts(checkModifiers);
+    calculateCosts(checkModifiers, false);
 
 
     Inventory playerInventory = player.getInventory();
@@ -154,7 +155,7 @@ public class Costing {
     if (player.getLevel().isClientSide()) {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
     }
-    calculateCosts(true);
+    calculateCosts(true, false);
 
     // TODO: ???
     if (noCharge) {
@@ -202,16 +203,19 @@ public class Costing {
 
   }
 
-  private void calculateCosts(boolean checkModifiers) {
+  // TODO: Really need to come up with a cleaner way of doing this
+  private void calculateCosts(boolean checkModifiers, boolean skipModifiers) {
     totalCosts.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
     for (Cost cost : spell.getSpell().getCosts()) {
       herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>()).add(cost);
     }
-    for (Modifier modifier : spell.getEnabledModifiers()) {
-      if (!checkModifiers || modifierMap.getBoolean(modifier)) {
-        for (Cost cost : modifier.getCosts()) {
-          herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>()).add(cost);
+    if (!skipModifiers) {
+      for (Modifier modifier : spell.getEnabledModifiers()) {
+        if (!checkModifiers || modifierMap.getBoolean(modifier)) {
+          for (Cost cost : modifier.getCosts()) {
+            herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>()).add(cost);
+          }
         }
       }
     }
@@ -238,5 +242,15 @@ public class Costing {
 
       totalCosts.put(entry.getKey(), total);
     }
+  }
+
+  public Object2DoubleMap<Herb> getMinimumCost () {
+    calculateCosts(false, true);
+    return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
+  }
+
+  public Object2DoubleMap<Herb> getMaximumCost () {
+    calculateCosts(false, false);
+    return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 }

@@ -66,7 +66,7 @@ public class RootsCommand {
         c.getSource().sendFailure(Component.translatable("roots.commands.staff.no_spell_storage"));
         return 1;
       }
-      storage.add(spell, spell.getModifiers());
+      storage.addSpell(spell, spell.getModifiers());
       storage.save(staff);
       if (newStaff) {
         player.addItem(staff);
