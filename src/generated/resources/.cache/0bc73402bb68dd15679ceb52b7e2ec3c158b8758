@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-22T12:23:08.3550725	Spell properties
+// 1.19.2	2022-10-06T13:26:30.5007471	Spell properties
 8844f1c40708dd1992206793e7d9be5be8d83ba5 data/roots/properties/spell/acid_cloud/cooldown.json
 33b16724324655a4c9aaf2eb77a87aa220546488 data/roots/properties/spell/aqua_bubble/cooldown.json
 6bbbd0cb5df07d25b93c6ca2134704bcd5c20b63 data/roots/properties/spell/augment/cooldown.json
@@ -19,6 +19,8 @@ c1c6a29f4ad088f22c5d33f12682660a763cb543 data/roots/properties/spell/light_drift
 21b17d7334b6a0d82ae1fa4e1f648e4971d6b01f data/roots/properties/spell/magnetism/cooldown.json
 a6855d721e79d68bde04cbee8b102c09d9eb51d5 data/roots/properties/spell/nondetection/cooldown.json
 8027c2a141263656b270bb9081ede8edd43b3ab4 data/roots/properties/spell/petal_shell/cooldown.json
+b01b72820cc80ab57c1d0e6aaa7acda717bba31b data/roots/properties/spell/petal_shell/count.json
+c2e978e242ab3568dfeaaf2a9b6f8fe7d360827a data/roots/properties/spell/petal_shell/duration.json
 d4b1cfbaed79c2468dcd5c930949c0fd5f9eb292 data/roots/properties/spell/radiance/cooldown.json
 4f6ee87d5f476c33c4e02bb0db4cc741b4970009 data/roots/properties/spell/rampant_growth/cooldown.json
 ad14b5743a0d80462d5796ef603cf8fd723bb640 data/roots/properties/spell/rose_thorns/cooldown.json

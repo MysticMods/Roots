@@ -1,0 +1,6 @@
+{
+  "_comment": "How long the spell will last",
+  "default_value": 100,
+  "spell": "roots:petal_shell",
+  "value": 100
+}
