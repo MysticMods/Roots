@@ -97,6 +97,8 @@ public class ModSpells {
   // Petal Shell (120 cooldown)
   public static final RegistryEntry<PetalShellSpell> PETAL_SHELL = spell(Spells.PETAL_SHELL, PetalShellSpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> PETAL_SHELL_COOLDOWN = property(Spells.PETAL_SHELL, "cooldown", () -> new SpellProperty<>(PETAL_SHELL::get, 120, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final RegistryEntry<SpellProperty<Integer>> PETAL_SHELL_DURATION = property(Spells.PETAL_SHELL, "duration", () -> new SpellProperty<>(PETAL_SHELL::get, 30, Property.INTEGER_SERIALIZER, SpellProperties.DURATION));
+  public static final RegistryEntry<SpellProperty<Integer>> PETAL_SHELL_COUNT = property(Spells.PETAL_SHELL, "count", () -> new SpellProperty<>(PETAL_SHELL::get, 3, Property.INTEGER_SERIALIZER, "The number of petal shells."));
 
   // Radiance (20 cooldown)
   public static final RegistryEntry<RadianceSpell> RADIANCE = spell(Spells.RADIANCE, RadianceSpell::new, ChatFormatting.GOLD, () -> List.of(Cost.add(ModHerbs.INFERNO_BULB, 0.250), Cost.add(ModHerbs.CLOUD_BERRY, 0.250)));

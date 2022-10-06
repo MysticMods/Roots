@@ -6,6 +6,7 @@ import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
+import mysticmods.roots.snapshot.PetalShellSnapshot;
 import mysticmods.roots.snapshot.SkySoarerSnapshot;
 import net.minecraft.core.Registry;
 
@@ -20,6 +21,7 @@ public class ModSerializers {
 
   // Snapshot Serializers
   public static final RegistryEntry<SkySoarerSnapshot.Serializer> SKY_SOARER = REGISTRATE.simple("sky_soarer", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new SkySoarerSnapshot.Serializer(SkySoarerSnapshot::new));
+  public static final RegistryEntry<PetalShellSnapshot.Serializer> PETAL_SHELL = REGISTRATE.simple("petal_shell", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new PetalShellSnapshot.Serializer(PetalShellSnapshot::new));
 
   public static void load() {
   }
