@@ -8,6 +8,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
+import mysticmods.roots.init.ModLang;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -209,9 +210,14 @@ public class CastingItem extends Item implements ICastingItem {
       } else {
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
       }
+      pTooltipComponents.add(Component.literal(""));
       if (RootsAPI.getInstance().isShiftKeyDown()) {
-        pTooltipComponents.add(Component.literal(""));
-        pTooltipComponents.add(Component.translatable("roots.tooltip.staff.shift"));
+        for (SpellStorage.Entry entry : storage.entryList()) {
+          pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", entry.getSlot() + 1, entry.getSpell() == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.getSpell().getStyledName(), entry.getSlot() == storage.getSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("")));
+        }
+        // TODO: list the other spells in the staff
+      } else {
+        pTooltipComponents.add(ModLang.holdShift());
       }
     }
   }

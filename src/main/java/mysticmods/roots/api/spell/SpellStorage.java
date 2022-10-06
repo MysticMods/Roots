@@ -1,5 +1,6 @@
 package mysticmods.roots.api.spell;
 
+import com.google.common.collect.ImmutableList;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.item.ICastingItem;
 import mysticmods.roots.api.modifier.Modifier;
@@ -9,16 +10,14 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // NOTE: THIS IS 0 INDEXED
 public class SpellStorage {
   private final List<SpellInstance> spells;
   private int index = 0;
-  boolean dirty = false;
+  private boolean dirty = false;
+  private List<Entry> entryList = null;
 
   protected SpellStorage(int size) {
     spells = Arrays.asList(new SpellInstance[size]);
@@ -168,6 +167,9 @@ public class SpellStorage {
   }
 
   public void setDirty(boolean dirty) {
+    if (dirty) {
+      this.entryList = null;
+    }
     this.dirty = dirty;
   }
 
@@ -222,6 +224,17 @@ public class SpellStorage {
 
     result.index = tag.getInt("index");
     return result;
+  }
+
+  public List<Entry> entryList () {
+    if (entryList == null) {
+      List<Entry> entryList = new ArrayList<>();
+      for (int i = 0; i < size(); i++) {
+        entryList.add(new Entry(i, getSpell(i)));
+      }
+      this.entryList = ImmutableList.copyOf(entryList);
+    }
+    return entryList;
   }
 
   protected class StorageInstance extends SpellInstance {
@@ -285,6 +298,24 @@ public class SpellStorage {
     @Override
     public int hashCode() {
       return instance.hashCode();
+    }
+  }
+
+  public static class Entry {
+    private final int slot;
+    private final SpellInstance spell;
+
+    public Entry(int slot, SpellInstance spell) {
+      this.slot = slot;
+      this.spell = spell;
+    }
+
+    public int getSlot() {
+      return slot;
+    }
+
+    public SpellInstance getSpell() {
+      return spell;
     }
   }
 }

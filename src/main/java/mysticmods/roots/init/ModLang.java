@@ -9,6 +9,10 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -31,7 +35,12 @@ public class ModLang {
       b.add("roots.tooltip.cost.cost_multiplier", "+%s");
 
       b.add("roots.tooltip.staff.selected", "Selected Slot: %s");
-      b.add("roots.tooltip.staff.no_spell", "No spell selected.");
+      b.add("roots.tooltip.staff.no_spell", "No spell.");
+      b.add("roots.tooltip.staff.spell_in_slot", "%s: %s%s");
+      b.add("roots.tooltip.staff.is_selected", " (Selected)");
+
+      b.add("roots.tooltip.hold_shift", "[Hold %s for more information.]");
+      b.add("roots.tooltip.shift", "Shift");
 
       b.add("roots.item.staff.with_spell", "Staff (%s)");
 
@@ -62,5 +71,9 @@ public class ModLang {
   }
 
   public static void load() {
+  }
+
+  public static MutableComponent holdShift () {
+    return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift").setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
   }
 }
