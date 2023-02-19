@@ -68,7 +68,6 @@ minecraft {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
     
-    
     implementation fg.deobf('curse.maven:MysticalWorld-282940:3460961')
     implementation fg.deobf('curse.maven:MysticalLib-277064:3483816')
     compileOnly fg.deobf('curse.maven:JustEnoughResources-240630:2728585') {
@@ -96,15 +95,18 @@ dependencies {
         exclude group: "mezz.jei"
     }
     compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${top_version}")
-    
 }
+
+project.configurations.all {
+    exclude(group: 'net.minecraftforge', module: 'mergetool')
+}
+
 
 repositories {
     mavenLocal()
     maven {
         name = 'CurseMaven'
         url = "https://cursemaven.com/"
-        
     }
     maven {
         name = 'Patchouli'
@@ -148,8 +150,6 @@ processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft_version
     
-    
-    
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     
     // replace stuff in mcmod.info, nothing else
@@ -165,8 +165,9 @@ processResources {
         exclude 'mcmod.info'
     }
     
-    rename '(.+_at.cfg)', 'META-INF/$1'
+    rename '(.+_at.cfg)', '../$1' // it keeps putting it in /META-INF/META-INF/roots_at.cfg fsr?????
 }
+
 
 idea {
     module {
