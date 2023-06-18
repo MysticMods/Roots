@@ -10,7 +10,6 @@ import net.minecraft.world.phys.Vec3;
 
 public class PetalShellSnapshot extends Snapshot {
   private int count;
-
   public PetalShellSnapshot(Player player, int count) {
     super(player);
     this.count = count;

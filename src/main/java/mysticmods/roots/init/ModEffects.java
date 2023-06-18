@@ -11,8 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModEffects {
-  public static final RegistryEntry<FriendlyEarthEffect> FRIENDLY_EARTH = REGISTRATE.effect("friendly_earth", FriendlyEarthEffect::new).register();
-
+  public static final RegistryEntry<SimpleEffect> FRIENDLY_EARTH = REGISTRATE.effect("friendly_earth", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0x946434)).register();
   public static final RegistryEntry<SkySoarerEffect> SKY_SOARER = REGISTRATE.effect("sky_soarer", SkySoarerEffect::new).register();
 
   public static final RegistryEntry<SimpleEffect> PETAL_SHELL = REGISTRATE.effect("petal_shell", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0xcc5ec8)).register();

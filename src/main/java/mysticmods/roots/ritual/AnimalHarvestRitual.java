@@ -33,8 +33,7 @@ public class AnimalHarvestRitual extends Ritual {
   @Override
   public void functionalTick(PyreBlockEntity blockEntity, int duration) {
     if (duration % getInterval() == 0) {
-      ITag<EntityType<?>> harvestTag = ForgeRegistries.ENTITY_TYPES.tags().getTag(RootsAPI.Tags.Entities.ANIMAL_HARVEST);
-      List<LivingEntity> entities = blockEntity.getLevel().getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and((o) -> harvestTag.contains(o.getType())));
+      List<LivingEntity> entities = blockEntity.getLevel().getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and((o) -> o.getType().is(RootsAPI.Tags.Entities.ANIMAL_HARVEST)));
       if (entities.isEmpty()) {
         return;
       }
