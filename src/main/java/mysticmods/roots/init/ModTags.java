@@ -19,7 +19,8 @@ public class ModTags {
 
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
       // Internal mod tags
-      b.tag(RootsAPI.Tags.Blocks.SOILS).addTags(RootsAPI.Tags.Blocks.EARTH_SOIL, RootsAPI.Tags.Blocks.AIR_SOIL, RootsAPI.Tags.Blocks.FIRE_SOIL, RootsAPI.Tags.Blocks.WATER_SOIL, RootsAPI.Tags.Blocks.ELEMENTAL_SOIL);
+      b.tag(RootsAPI.Tags.Blocks.SOILS).addTag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL);
+      b.tag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL).addTags(RootsAPI.Tags.Blocks.EARTH_SOIL, RootsAPI.Tags.Blocks.AIR_SOIL, RootsAPI.Tags.Blocks.FIRE_SOIL, RootsAPI.Tags.Blocks.WATER_SOIL);
       b.tag(RootsAPI.Tags.Blocks.RUNED_LOGS).addTags(RootsAPI.Tags.Blocks.RUNED_ACACIA_LOG, RootsAPI.Tags.Blocks.RUNED_BIRCH_LOG, RootsAPI.Tags.Blocks.RUNED_OAK_LOG, RootsAPI.Tags.Blocks.RUNED_DARK_OAK_LOG, RootsAPI.Tags.Blocks.RUNED_CRIMSON_STEM, RootsAPI.Tags.Blocks.RUNED_JUNGLE_LOG, RootsAPI.Tags.Blocks.RUNED_SPRUCE_LOG, RootsAPI.Tags.Blocks.RUNED_WARPED_STEM, RootsAPI.Tags.Blocks.RUNED_WILDWOOD_LOG);
       b.tag(RootsAPI.Tags.Blocks.AIR_CROPS).addTags(RootsAPI.Tags.Blocks.CLOUD_BERRY_CROP);
       b.tag(RootsAPI.Tags.Blocks.FIRE_CROPS).addTags(RootsAPI.Tags.Blocks.INFERNO_BULB_CROP);

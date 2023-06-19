@@ -1,4 +1,4 @@
-// 1.19.2	2022-10-06T13:26:30.5037396	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-06-19T20:28:43.9439208	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 866018aa29cd01eaaad597b1d321ac9a292cb387 assets/roots/blockstates/bafflecap_block.json
 06b46983519d31e1b0a1bb9107064c093cb46d6a assets/roots/blockstates/caelic_soil.json
@@ -7,7 +7,7 @@ fce10ab987a1de2a71d40710e9c45670096a3d7e assets/roots/blockstates/chiseled_runes
 f08139a216ffdfe345633af2ad5e89c053d9591d assets/roots/blockstates/cloud_berry_crop.json
 065c9e7560d6451ea3d8dcf19029e252fa584e7c assets/roots/blockstates/creeping_grove_moss.json
 cd3eae6e2d26c3fedee2abe4fc04c33de3fc8323 assets/roots/blockstates/decorative_pyre.json
-ca31420c707eea7d3abd51c273d6ea9c55839ca2 assets/roots/blockstates/dewgonia_crop.json
+e2bd42755bccf308505d278b77a27da69e41de91 assets/roots/blockstates/dewgonia_crop.json
 d256cf7816bc89f7c5f024790771665e58ad52e2 assets/roots/blockstates/elemental_soil.json
 a987f8f48c4e6fef5ef2d03d90b702809f68a894 assets/roots/blockstates/fey_light.json
 aec65122d71917e120aa40b878d5f0ee8b4d8615 assets/roots/blockstates/grove_crafter.json
@@ -1015,10 +1015,10 @@ a31411258dff25185ee194f9aaa19923794df728 data/roots/tags/blocks/pillars/log/spru
 d33d48a7d085fd0b31d3f4a8460ee120df1c73ab data/roots/tags/blocks/pillars/rune.json
 2c0158a5c83124684d96ea4033acd20aafb3061c data/roots/tags/blocks/pyres.json
 22ac60564201a8a04418e063ffdb1ed59f15b65b data/roots/tags/blocks/runed_obsidian.json
-08518154bd7b9d9917e9ab002c1047982b58a96c data/roots/tags/blocks/soils.json
+0e0d53445f0b4eae177c5541e63c5f8e165ebd7b data/roots/tags/blocks/soils.json
 4425285b1f5c8c681722ad2e252862e4ef08107b data/roots/tags/blocks/soils/air.json
 35c6e38ebf4bff86f3ce23c782011bd517475465 data/roots/tags/blocks/soils/earth.json
-029758e23f40cafe7ad14026e097a11645841307 data/roots/tags/blocks/soils/elemental.json
+b8bbfb9e64e0d21258e154bcf3d7684f92d05ed1 data/roots/tags/blocks/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/blocks/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/blocks/soils/water.json
 a7a1a3c0580987c69ed181e6bc8ec8328b093107 data/roots/tags/entity_types/animal_harvest_entities.json
@@ -1097,9 +1097,9 @@ a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/items/seeds/pereskia.js
 314ec0136f8dbb967b704dda383c03d9e2057910 data/roots/tags/items/seeds/stalicripe.json
 5d4ab94abd2241ca52663eb6d537310224a00348 data/roots/tags/items/seeds/wildewheet.json
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/items/seeds/wildroot.json
-08518154bd7b9d9917e9ab002c1047982b58a96c data/roots/tags/items/soils.json
+0e0d53445f0b4eae177c5541e63c5f8e165ebd7b data/roots/tags/items/soils.json
 4425285b1f5c8c681722ad2e252862e4ef08107b data/roots/tags/items/soils/air.json
 35c6e38ebf4bff86f3ce23c782011bd517475465 data/roots/tags/items/soils/earth.json
-029758e23f40cafe7ad14026e097a11645841307 data/roots/tags/items/soils/elemental.json
+b8bbfb9e64e0d21258e154bcf3d7684f92d05ed1 data/roots/tags/items/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/items/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/items/soils/water.json

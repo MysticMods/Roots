@@ -994,7 +994,7 @@ public class ModBlocks {
   public static class Soils {
     public static NonNullUnaryOperator<BlockBehaviour.Properties> SOIL_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DIRT);
 
-    public static BlockEntry<Block> AQUEOUS_SOIL = REGISTRATE.block("aqueous_soil", Block::new)
+    public static BlockEntry<ElementalSoilBlock> AQUEOUS_SOIL = REGISTRATE.block("aqueous_soil", ElementalSoilBlock::new)
         .properties(SOIL_PROPERTIES)
         .blockstate(BlockstateGenerator.pillar("block/water_soil_side", "block/water_soil_top"))
         .item()
@@ -1003,7 +1003,7 @@ public class ModBlocks {
         .tag(RootsAPI.Tags.Blocks.WATER_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
         .register();
 
-    public static BlockEntry<Block> CAELIC_SOIL = REGISTRATE.block("caelic_soil", Block::new)
+    public static BlockEntry<ElementalSoilBlock> CAELIC_SOIL = REGISTRATE.block("caelic_soil", ElementalSoilBlock::new)
         .properties(SOIL_PROPERTIES)
         .blockstate(BlockstateGenerator.pillar("block/air_soil_side", "block/air_soil_top"))
         .item()
@@ -1012,7 +1012,7 @@ public class ModBlocks {
         .tag(RootsAPI.Tags.Blocks.AIR_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
         .register();
 
-    public static BlockEntry<Block> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", Block::new)
+    public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new)
         .properties(SOIL_PROPERTIES)
         .item()
         .model(ItemModelGenerator::itemModel)
@@ -1020,7 +1020,7 @@ public class ModBlocks {
         .tag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
         .register();
 
-    public static BlockEntry<Block> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", Block::new)
+    public static BlockEntry<ElementalSoilBlock> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", ElementalSoilBlock::new)
         .properties(SOIL_PROPERTIES)
         .blockstate(BlockstateGenerator.pillar("block/fire_soil_side", "block/fire_soil_top"))
         .item()
@@ -1029,7 +1029,7 @@ public class ModBlocks {
         .tag(RootsAPI.Tags.Blocks.FIRE_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
         .register();
 
-    public static BlockEntry<Block> TERRAN_SOIL = REGISTRATE.block("terran_soil", Block::new)
+    public static BlockEntry<ElementalSoilBlock> TERRAN_SOIL = REGISTRATE.block("terran_soil", ElementalSoilBlock::new)
         .properties(SOIL_PROPERTIES)
         .blockstate(BlockstateGenerator.pillar("block/earth_soil_side", "block/earth_soil_top"))
         .item()
