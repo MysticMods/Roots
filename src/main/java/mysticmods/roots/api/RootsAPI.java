@@ -182,6 +182,8 @@ public abstract class RootsAPI {
       // Crops that should receive a reduced number of growth ticks
       public static final TagKey<Block> GROWTH_REDUCE = modTag("growth/reduce");
 
+      public static final TagKey<Block> NYI = modTag("nyi");
+
       private static TagKey<Block> modTag(String name) {
         return BlockTags.create(new ResourceLocation(MODID, name));
       }
@@ -247,6 +249,8 @@ public abstract class RootsAPI {
       public static final TagKey<Item> PYRE_ACTIVATION = modTag("pyre_activation");
 
       public static final TagKey<Item> CASTING_TOOLS = modTag("casting_tools");
+
+      public static final TagKey<Item> NYI = modTag("nyi");
 
       // These are all filled in by ModTags
       public static class Blocks {
