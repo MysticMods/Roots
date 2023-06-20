@@ -28,6 +28,7 @@ public class ClientSetup {
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEY_LIGHT.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.BAFFLECAP_BLOCK.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.CREEPING_GROVE_MOSS.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.BAFFLECAP_BLOCK.get(), cutout);
   }
 
   @SubscribeEvent
@@ -40,11 +41,11 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void onColorHandlerBlock(RegisterColorHandlersEvent.Block event) {
-    event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null && pPos != null ? BiomeColors.getAverageWaterColor(pLevel, pPos) : -1, ModBlocks.UNENDING_BOWL.get());
+    event.register((pState, pLevel, pPos, pTintIndex) -> pLevel != null && pPos != null ? BiomeColors.getAverageWaterColor(pLevel, pPos) : -1, ModBlocks.UNENDING_BOWL.get());
   }
 
   @SubscribeEvent
   public static void onColorHandlerItem(RegisterColorHandlersEvent.Item event) {
-    event.getItemColors().register((stack, index) -> index == 1 ? OverworldBiomes.NORMAL_WATER_COLOR : -1, ModBlocks.UNENDING_BOWL.get());
+    event.register((stack, index) -> index == 1 ? OverworldBiomes.NORMAL_WATER_COLOR : -1, ModBlocks.UNENDING_BOWL.get());
   }
 }
