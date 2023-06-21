@@ -1,12 +1,17 @@
 package mysticmods.roots.api.ritual;
 
+import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
+
+import java.util.function.Predicate;
 
 public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   protected BoundingBox boundingBox;
@@ -88,6 +93,23 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   protected String getDescriptor() {
     return "ritual";
   }
+
+  public boolean is(ResourceLocation key) {
+    return Registries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+  }
+
+  public boolean is(ResourceKey<Ritual> key) {
+    return Registries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+  }
+
+  public boolean is(Predicate<ResourceKey<Ritual>> key) {
+    return Registries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+  }
+
+  public boolean is(TagKey<Ritual> key) {
+    return Registries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+  }
+
 
   @Override
   public ResourceLocation getKey() {

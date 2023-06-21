@@ -6,8 +6,11 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
+import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public abstract class Spell extends StyledRegistryEntry<Spell> implements ICostedRegistryEntry {
   protected final Type type;
@@ -101,6 +105,22 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
   @Override
   protected String getDescriptor() {
     return "spell";
+  }
+
+  public boolean is(ResourceLocation key) {
+    return Registries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+  }
+
+  public boolean is(ResourceKey<Spell> key) {
+    return Registries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+  }
+
+  public boolean is(Predicate<ResourceKey<Spell>> key) {
+    return Registries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+  }
+
+  public boolean is(TagKey<Spell> key) {
+    return Registries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   @Override

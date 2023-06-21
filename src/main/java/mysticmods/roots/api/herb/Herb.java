@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.ItemLike;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Herb extends StyledRegistryEntry<Herb> {
@@ -52,6 +54,22 @@ public class Herb extends StyledRegistryEntry<Herb> {
 
   public TagKey<Item> getTag() {
     return tag;
+  }
+
+  public boolean is(ResourceLocation location) {
+    return Registries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(location)).orElse(false);
+  }
+
+  public boolean is(ResourceKey<Herb> key) {
+    return Registries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+  }
+
+  public boolean is(Predicate<ResourceKey<Herb>> predicate) {
+    return Registries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(predicate)).orElse(false);
+  }
+
+  public boolean is(TagKey<Herb> tag) {
+    return Registries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(tag)).orElse(false);
   }
 
   @Override

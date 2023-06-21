@@ -338,5 +338,53 @@ public abstract class RootsAPI {
         return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation("forge", name));
       }
     }
+
+    public static class Rituals extends Tags {
+      public static final TagKey<Ritual> NYI = modTag("nyi");
+
+      static TagKey<Ritual> modTag(String name) {
+        return TagKey.create(RootsAPI.RITUAL_REGISTRY, new ResourceLocation(MODID, name));
+      }
+
+      static TagKey<Ritual> compatTag(String name) {
+        return TagKey.create(RootsAPI.RITUAL_REGISTRY, new ResourceLocation("forge", name));
+      }
+    }
+
+    public static class Spells extends Tags {
+      public static final TagKey<Spell> NYI = modTag("nyi");
+
+      static TagKey<Spell> modTag(String name) {
+        return TagKey.create(RootsAPI.SPELL_REGISTRY, new ResourceLocation(MODID, name));
+      }
+
+      static TagKey<Spell> compatTag(String name) {
+        return TagKey.create(RootsAPI.SPELL_REGISTRY, new ResourceLocation("forge", name));
+      }
+    }
+
+    public static class Modifiers extends Tags {
+      public static final TagKey<Modifier> NYI = modTag("nyi");
+
+      static TagKey<Modifier> modTag(String name) {
+        return TagKey.create(RootsAPI.MODIFIER_REGISTRY, new ResourceLocation(MODID, name));
+      }
+
+      static TagKey<Modifier> compatTag(String name) {
+        return TagKey.create(RootsAPI.MODIFIER_REGISTRY, new ResourceLocation("forge", name));
+      }
+    }
+
+    public static class Herbs extends Tags {
+      public static final TagKey<Herb> NYI = modTag("nyi");
+
+      static TagKey<Herb> modTag(String name) {
+        return TagKey.create(RootsAPI.HERB_REGISTRY, new ResourceLocation(MODID, name));
+      }
+
+      static TagKey<Herb> compatTag(String name) {
+        return TagKey.create(RootsAPI.HERB_REGISTRY, new ResourceLocation("forge", name));
+      }
+    }
   }
 }
