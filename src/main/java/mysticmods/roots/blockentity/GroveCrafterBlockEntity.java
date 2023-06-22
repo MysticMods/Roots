@@ -75,7 +75,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     List<PedestalBlockEntity> pedestals = new ArrayList<>();
     for (BlockPos pedestal : pedestalPositions()) {
       if (getLevel().getBlockEntity(pedestal) instanceof PedestalBlockEntity pedestalBlockEntity) {
-        pedestals.add(pedestalBlockEntity);
+        // Ignore empty pedestals?
+        if (!pedestalBlockEntity.getHeldItem().isEmpty()) {
+          pedestals.add(pedestalBlockEntity);
+        }
       }
     }
     return pedestals;
