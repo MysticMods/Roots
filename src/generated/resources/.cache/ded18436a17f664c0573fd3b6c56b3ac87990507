@@ -1,4 +1,4 @@
-// 1.19.2	2023-06-19T20:28:43.9439208	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-06-21T22:38:22.0143676	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 866018aa29cd01eaaad597b1d321ac9a292cb387 assets/roots/blockstates/bafflecap_block.json
 06b46983519d31e1b0a1bb9107064c093cb46d6a assets/roots/blockstates/caelic_soil.json
@@ -92,7 +92,6 @@ fe52a7ece064b87b8131c22b0a459d53ec78f2d7 assets/roots/blockstates/runestone_slab
 4b644d6621e2d4439713f47c8e53639277bb26c6 assets/roots/blockstates/runestone_stairs.json
 c050542bb4d706c8eb11b15bcf09ecc5ba39f5df assets/roots/blockstates/runestone_wall.json
 4091e2f532fee8bd0e15418f821aae84677c69a3 assets/roots/blockstates/runestone_wide_post.json
-744dbf516cec2932632aa226a021800b3a4aeb5d assets/roots/blockstates/runic_crafter.json
 63c05c0a9394e96d76fbbca6c7cc7c211a972871 assets/roots/blockstates/spiritleaf_crop.json
 7a7666b3bde270d4ae07ce78e11f4c5a784566b2 assets/roots/blockstates/stalicripe_crop.json
 6e658893da53e714ef4ce69ab984b9f9c9d5c46b assets/roots/blockstates/stripped_wildwood_log.json
@@ -115,8 +114,8 @@ e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.
 9f65d74b70a0be61f9a3729e0649f66a3d29e5c1 assets/roots/blockstates/wildwood_wide_post.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 8e9ac5aa5ad7efbdf1e5a24a7cd11185f74290c5 assets/roots/blockstates/wild_roots.json
-44a006d0c3652054f8af9b72153c65e73ec7b2cf assets/roots/lang/en_ud.json
-509f5d3034089a9666fbf97ba18ec7c7ce4e41d4 assets/roots/lang/en_us.json
+b89e6b20a28b01fa3c4462df609989402a353f53 assets/roots/lang/en_ud.json
+975a619b9a82308a03e930bdf6c47d41c83b3fde assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 59b6966cf270e466809edb1f1f926cb64d8bffbd assets/roots/models/block/bafflecap_block.json
 dfa82fb95a1f994653222dbb765cf53a1051ff37 assets/roots/models/block/caelic_soil.json
@@ -504,7 +503,6 @@ a578d943f6258e46e7e4b16ff5059b9861131b22 assets/roots/models/item/runestone_pres
 e3faa02085615a4eb9318df43e05699b644368dc assets/roots/models/item/runestone_stairs.json
 c4aa3f7d07f968745cfe639c730f62f558650ffd assets/roots/models/item/runestone_wall.json
 e6310f7dc37cdd3b46afe34d45a35f0cfe82a483 assets/roots/models/item/runestone_wide_post.json
-8071f541613111306a5ed5e08fb065f15ac602f8 assets/roots/models/item/runic_crafter.json
 046b7ac3c277dff28aa2b23060980ae829c19183 assets/roots/models/item/runic_dust.json
 979f81433097c238ee318f10db5211c7fefa499a assets/roots/models/item/runic_shears.json
 52ae965e43ad94ecd7b43af4b84f893f1dd6fe0c assets/roots/models/item/spiritleaf.json
@@ -561,7 +559,7 @@ c8c9effde3095b4259a1f5f50e211433fe38adfb data/minecraft/tags/blocks/fences.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs_that_burn.json
 51240293d6571bda1e1fb2cd23dbf15c5f9f3b00 data/minecraft/tags/blocks/mineable/axe.json
 07fe6468c06229520b96c35f8c5dc838edbe647e data/minecraft/tags/blocks/mineable/hoe.json
-c353ef3f8c34b807ba0e92b80616229e823ce544 data/minecraft/tags/blocks/mineable/pickaxe.json
+412bce25809a4f6c85011c4c605fddb0cee6e13c data/minecraft/tags/blocks/mineable/pickaxe.json
 109aabd0da35c83112cbb018087f54da1877ac94 data/minecraft/tags/blocks/mineable/shovel.json
 8d06670b1c8720ccda4f9106b9514fb1a6910fbb data/minecraft/tags/blocks/needs_iron_tool.json
 0ac25de6437faa2cb2f6995d75aaf74b415934a6 data/minecraft/tags/blocks/oak_logs.json
@@ -802,7 +800,6 @@ aab5abe4b098d75ba359fa8c4942e3c91020c04e data/roots/loot_tables/blocks/runestone
 b21b7a8da6b7a5655cde98fdcbf95be12195aa26 data/roots/loot_tables/blocks/runestone_stairs.json
 cd66453896a44fc78ca0bcb3f453f7d775e388e9 data/roots/loot_tables/blocks/runestone_wall.json
 f2ca3e3e0f9565dffabc7d43549b95120efacb21 data/roots/loot_tables/blocks/runestone_wide_post.json
-3079cf98692fbee1b524a5090f8b657fc4af1678 data/roots/loot_tables/blocks/runic_crafter.json
 1b4ea128e72bb913fff5fd2fb5480b0e68c5ba47 data/roots/loot_tables/blocks/spiritleaf_crop.json
 7635f10debb04ef971ccde279b0ba2c6667b4ec3 data/roots/loot_tables/blocks/stalicripe_crop.json
 1b20fe3af4f3c48443eddfc1b0948295e815eff7 data/roots/loot_tables/blocks/stripped_wildwood_log.json
@@ -968,7 +965,7 @@ cad4f9a40c8ffa88903296a46a0a029ecde28abf data/roots/tags/blocks/capstones/log/sp
 8441aee9b426751866898951327ea3473f1fa9ba data/roots/tags/blocks/capstones/log/warped.json
 3081cd089bcce07d5d7d0fac24d646a1c78219b1 data/roots/tags/blocks/capstones/log/wildwood.json
 fe27d3a2f7475ae8661dc76d19cf1526d1244192 data/roots/tags/blocks/capstones/rune.json
-babb0646065abeb542b7e26ab4dffddeddb70c6c data/roots/tags/blocks/crafters.json
+1d43ddccd38a55edc2befc1531297e628c79e0f1 data/roots/tags/blocks/crafters.json
 bb377285da0a06e9c145a9ca82752040d2932c17 data/roots/tags/blocks/crops.json
 eac1c12ccc5eff3fd48c81e90ef41aa076438faa data/roots/tags/blocks/crops/cloud_berry.json
 fcf4c04cd4e0cebb15a740303272a33e5ea0a935 data/roots/tags/blocks/crops/dewgonia.json
@@ -1000,7 +997,8 @@ cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/roots/tags/blocks/logs/runed/crims
 cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/blocks/logs/runed/wildwood.json
 c2aad42f3019235dcccb09cf46f812e0a76ce374 data/roots/tags/blocks/logs/wildwood.json
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/blocks/mortars.json
-ed46858b1e3dbcb8d2daf9c7fb12cf978701c1b1 data/roots/tags/blocks/pedestals.json
+2cf4a3b211d9c7d6507507f7aac80347e551ce6b data/roots/tags/blocks/nyi.json
+5e6e5261a1ac6d1fa050110c71d819fc2c6cea68 data/roots/tags/blocks/pedestals.json
 14326daf6732942db93fd4385cfdb4a0c0f308fc data/roots/tags/blocks/pedestals/grove.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/blocks/pedestals/ritual.json
 6ece1eb38537a05ebb521d9f2cd7c3ac8e7b6769 data/roots/tags/blocks/pillars/log/acacia.json
@@ -1036,7 +1034,7 @@ a1a905fc0c40dbeb097d5eab709a2633e8e6756d data/roots/tags/items/barks/mixed.json
 8473498616c937e7a388109a090efa57399841ab data/roots/tags/items/barks/warped.json
 76ab64b1af0fd463675cc19a388b583f04d4df91 data/roots/tags/items/barks/wildwood.json
 ae71dd3be1e53de12945743c7e5062e8c2460abb data/roots/tags/items/casting_tools.json
-babb0646065abeb542b7e26ab4dffddeddb70c6c data/roots/tags/items/crafters.json
+1d43ddccd38a55edc2befc1531297e628c79e0f1 data/roots/tags/items/crafters.json
 a41f33f9564e8e1f7a303540c77c361468d98eb6 data/roots/tags/items/crops.json
 6b697bb4dbf2ca2d772c999476fb33f75dfd714a data/roots/tags/items/crops/bafflecap.json
 98545c13dddf6574110e137626bb2822902a778d data/roots/tags/items/crops/cloud_berry.json
@@ -1080,7 +1078,7 @@ cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/items/logs/runed/wildwo
 c2aad42f3019235dcccb09cf46f812e0a76ce374 data/roots/tags/items/logs/wildwood.json
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/items/mortars.json
 33c51847dc0e01980184ec1a4eb8d222662d792f data/roots/tags/items/mortar_activation.json
-ed46858b1e3dbcb8d2daf9c7fb12cf978701c1b1 data/roots/tags/items/pedestals.json
+2cf4a3b211d9c7d6507507f7aac80347e551ce6b data/roots/tags/items/nyi.json
 14326daf6732942db93fd4385cfdb4a0c0f308fc data/roots/tags/items/pedestals/grove.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/items/pedestals/ritual.json
 2c0158a5c83124684d96ea4033acd20aafb3061c data/roots/tags/items/pyres.json

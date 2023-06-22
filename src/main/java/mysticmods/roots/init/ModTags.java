@@ -19,6 +19,7 @@ public class ModTags {
 
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
       // Internal mod tags
+      b.tag(RootsAPI.Tags.Blocks.PEDESTALS).addTags(RootsAPI.Tags.Blocks.RITUAL_PEDESTALS, RootsAPI.Tags.Blocks.GROVE_PEDESTALS);
       b.tag(RootsAPI.Tags.Blocks.SOILS).addTag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL);
       b.tag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL).addTags(RootsAPI.Tags.Blocks.EARTH_SOIL, RootsAPI.Tags.Blocks.AIR_SOIL, RootsAPI.Tags.Blocks.FIRE_SOIL, RootsAPI.Tags.Blocks.WATER_SOIL);
       b.tag(RootsAPI.Tags.Blocks.RUNED_LOGS).addTags(RootsAPI.Tags.Blocks.RUNED_ACACIA_LOG, RootsAPI.Tags.Blocks.RUNED_BIRCH_LOG, RootsAPI.Tags.Blocks.RUNED_OAK_LOG, RootsAPI.Tags.Blocks.RUNED_DARK_OAK_LOG, RootsAPI.Tags.Blocks.RUNED_CRIMSON_STEM, RootsAPI.Tags.Blocks.RUNED_JUNGLE_LOG, RootsAPI.Tags.Blocks.RUNED_SPRUCE_LOG, RootsAPI.Tags.Blocks.RUNED_WARPED_STEM, RootsAPI.Tags.Blocks.RUNED_WILDWOOD_LOG);
@@ -83,6 +84,13 @@ public class ModTags {
       b.copy(RootsAPI.Tags.Blocks.RUNED_CRIMSON_STEM, RootsAPI.Tags.Items.Blocks.RUNED_CRIMSON_STEM);
       b.copy(RootsAPI.Tags.Blocks.RUNED_WARPED_STEM, RootsAPI.Tags.Items.Blocks.RUNED_WARPED_STEM);
       b.copy(RootsAPI.Tags.Blocks.GROVE_STONES, RootsAPI.Tags.Items.Blocks.GROVE_STONES);
+      b.copy(RootsAPI.Tags.Blocks.PYRES, RootsAPI.Tags.Items.Blocks.PYRES);
+      b.copy(RootsAPI.Tags.Blocks.RITUAL_PEDESTALS, RootsAPI.Tags.Items.Blocks.RITUAL_PEDESTALS);
+      b.copy(RootsAPI.Tags.Blocks.GROVE_PEDESTALS, RootsAPI.Tags.Items.Blocks.GROVE_PEDESTALS);
+      b.copy(RootsAPI.Tags.Blocks.GROVE_STONE_PRIMAL, RootsAPI.Tags.Items.Blocks.GROVE_STONE_PRIMAL);
+      b.copy(RootsAPI.Tags.Blocks.MORTARS, RootsAPI.Tags.Items.Blocks.MORTARS);
+      b.copy(RootsAPI.Tags.Blocks.CRAFTERS, RootsAPI.Tags.Items.Blocks.CRAFTERS);
+      b.copy(RootsAPI.Tags.Blocks.NYI, RootsAPI.Tags.Items.NYI);
 
       b.tag(RootsAPI.Tags.Items.AIR_CROPS).addTags(RootsAPI.Tags.Items.CLOUD_BERRY_CROP);
       b.tag(RootsAPI.Tags.Items.WATER_CROPS).addTags(RootsAPI.Tags.Items.DEWGONIA_CROP);
