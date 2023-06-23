@@ -1157,6 +1157,7 @@ public class ModBlocks {
       p.getMultipartBuilder(ctx.getEntry()).part().modelFile(modelOutside).uvLock(true).rotationX(90).addModel().condition(HugeMushroomBlock.DOWN, true).end();
     })
     .tag(BlockTags.MINEABLE_WITH_HOE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createMushroomBlockDrop(t, ModBlocks.BAFFLECAP.get())))
     .register();
 
   // TODO: Do we end up needing this given the new system?
