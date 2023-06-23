@@ -63,7 +63,7 @@ public class ModItems {
         .tag(RootsAPI.Tags.Items.WILDEWHEET_CROP)
         .register();
 
-    public static final ItemEntry<ItemNameBlockItem> BAFFLECAP = REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP_BLOCK.get(), p))
+    public static final ItemEntry<ItemNameBlockItem> BAFFLECAP = REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), p))
         .model(subfolder("herbs"))
         .tag(RootsAPI.Tags.Items.BAFFLECAP_CROP)
         .register();

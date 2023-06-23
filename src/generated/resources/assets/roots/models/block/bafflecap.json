@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "roots:block/bafflecap_block"
+    "cross": "roots:block/bafflecap"
   }
 }

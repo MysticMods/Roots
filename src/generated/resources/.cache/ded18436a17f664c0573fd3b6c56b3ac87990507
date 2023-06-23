@@ -1,6 +1,7 @@
-// 1.19.2	2023-06-21T22:38:22.0143676	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-06-23T21:14:41.1652247	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
-866018aa29cd01eaaad597b1d321ac9a292cb387 assets/roots/blockstates/bafflecap_block.json
+07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
+e307408db6c939a6c528b090c6861e4c8303b1db assets/roots/blockstates/bafflecap_block.json
 06b46983519d31e1b0a1bb9107064c093cb46d6a assets/roots/blockstates/caelic_soil.json
 ff7982311d5f80fc0e7352ce5cb527fce9d0c2c7 assets/roots/blockstates/chiseled_runed_obsidian.json
 fce10ab987a1de2a71d40710e9c45670096a3d7e assets/roots/blockstates/chiseled_runestone.json
@@ -114,10 +115,12 @@ e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.
 9f65d74b70a0be61f9a3729e0649f66a3d29e5c1 assets/roots/blockstates/wildwood_wide_post.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 8e9ac5aa5ad7efbdf1e5a24a7cd11185f74290c5 assets/roots/blockstates/wild_roots.json
-b89e6b20a28b01fa3c4462df609989402a353f53 assets/roots/lang/en_ud.json
-975a619b9a82308a03e930bdf6c47d41c83b3fde assets/roots/lang/en_us.json
+cc0fd5b736aa520165bb147488d700539fd6e2dd assets/roots/lang/en_ud.json
+2f7e3ad8632235b5756ba1be23a3cbba75bfad65 assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
-59b6966cf270e466809edb1f1f926cb64d8bffbd assets/roots/models/block/bafflecap_block.json
+aaaf3d858c57f54f4930ef6d9a6de9db2bbf88a7 assets/roots/models/block/bafflecap.json
+a076c58c5f09aa86b069ca3477a91954cc5302b0 assets/roots/models/block/bafflecap_block_inside.json
+23f77332e9563cdfa13f1d2dae935c889e9b641d assets/roots/models/block/bafflecap_block_outside.json
 dfa82fb95a1f994653222dbb765cf53a1051ff37 assets/roots/models/block/caelic_soil.json
 2dd35e917f221aeb92eebd3c2d080c608270e237 assets/roots/models/block/chiseled_runed_obsidian.json
 f131f71ef09b71287fc8eb266030ab5ffe109d21 assets/roots/models/block/chiseled_runestone.json
@@ -558,7 +561,7 @@ c8c9effde3095b4259a1f5f50e211433fe38adfb data/minecraft/tags/blocks/fences.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs_that_burn.json
 51240293d6571bda1e1fb2cd23dbf15c5f9f3b00 data/minecraft/tags/blocks/mineable/axe.json
-07fe6468c06229520b96c35f8c5dc838edbe647e data/minecraft/tags/blocks/mineable/hoe.json
+ba1c75822b369de8656ea3aa3a4270961a7bc5ce data/minecraft/tags/blocks/mineable/hoe.json
 412bce25809a4f6c85011c4c605fddb0cee6e13c data/minecraft/tags/blocks/mineable/pickaxe.json
 109aabd0da35c83112cbb018087f54da1877ac94 data/minecraft/tags/blocks/mineable/shovel.json
 8d06670b1c8720ccda4f9106b9514fb1a6910fbb data/minecraft/tags/blocks/needs_iron_tool.json
@@ -708,7 +711,8 @@ db3849e28df99a539b40093eea69e0986f82a4fe data/roots/advancements/recipes/roots/w
 caf54b286ced856fb953835cfaff3a3adfdae03d data/roots/advancements/recipes/roots/wildwood_wall_from_wildwood_planks_stonecutting.json
 541d5196de5fe89dec1021a72dcddcd2d5082103 data/roots/advancements/recipes/roots/wildwood_wide_post.json
 e9c951cad9f3e92a5b0f7df6ecf155443fac7a74 data/roots/loot_tables/blocks/aqueous_soil.json
-d6f2cd8334f32aef57905fd0612e7a6d5f598a85 data/roots/loot_tables/blocks/bafflecap_block.json
+d6f2cd8334f32aef57905fd0612e7a6d5f598a85 data/roots/loot_tables/blocks/bafflecap.json
+2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/roots/loot_tables/blocks/bafflecap_block.json
 da91063a1cc7cbaa5aeb017bab9ecc90211c6fa7 data/roots/loot_tables/blocks/caelic_soil.json
 9a45fb4fa887026fed56ab21ffc8a1b302d67c94 data/roots/loot_tables/blocks/chiseled_runed_obsidian.json
 5dd993b2273fff7774b3cbc6ef258e4ab1cf9c9e data/roots/loot_tables/blocks/chiseled_runestone.json

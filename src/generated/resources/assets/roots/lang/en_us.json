@@ -1,6 +1,7 @@
 {
   "block.roots.aqueous_soil": "Aqueous Soil",
-  "block.roots.bafflecap_block": "Bafflecap",
+  "block.roots.bafflecap": "Bafflecap",
+  "block.roots.bafflecap_block": "Bafflecap Block",
   "block.roots.caelic_soil": "Caelic Soil",
   "block.roots.chiseled_runed_obsidian": "Chiseled Runed Obsidian",
   "block.roots.chiseled_runestone": "Chiseled Runestone",

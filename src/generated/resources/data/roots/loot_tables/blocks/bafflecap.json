@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "roots:bafflecap"
         }
       ],
       "rolls": 1.0

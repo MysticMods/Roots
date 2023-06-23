@@ -111,5 +111,6 @@ public class Roots {
     ModLang.load();
     ModRegistries.register(bus);
     ModRecipes.register(bus);
+    ModFeatures.register(bus);
   }
 }
