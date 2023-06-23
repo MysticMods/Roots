@@ -1121,7 +1121,7 @@ public class ModBlocks {
     .tag(BlockTags.MINEABLE_WITH_HOE)
     .register();
 
-  public static BlockEntry<Block> BAFFLECAP = REGISTRATE.block("bafflecap", Material.WOOD, Block::new)
+  public static BlockEntry<MushroomBlock> BAFFLECAP = REGISTRATE.block("bafflecap", Material.WOOD, (o) -> new MushroomBlock(o, ModFeatures.HUGE_BAFFLECAP.getHolder()::get))
     .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM))
     .lang("Bafflecap")
     .blockstate((ctx, p) -> {
