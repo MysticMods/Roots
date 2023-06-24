@@ -1,4 +1,4 @@
-// 1.19.2	2023-06-24T15:14:57.0749815	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-06-24T15:35:13.505765	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
 e307408db6c939a6c528b090c6861e4c8303b1db assets/roots/blockstates/bafflecap_block.json
@@ -828,6 +828,7 @@ e398b07dec4676bad347611baa0dcb80798cb001 data/roots/loot_tables/blocks/wildwood_
 342cf36b8005cd1ccb9e2f09c52bdcc853d31bf6 data/roots/loot_tables/blocks/wild_roots.json
 75f6bfc26a2180f207fc46e700ecd21a8cd7785f data/roots/recipes/chiseled_runed_obsidian.json
 e69e61c513b20c4b423f155db80c57c9794f9a35 data/roots/recipes/chiseled_runestone.json
+a3f23c87baadc5a93d3b3f12d8b3fc5e27f2f390 data/roots/recipes/grove/glass_eye.json
 fb993aab963f568106bcd6937921a0cccf6d5b12 data/roots/recipes/living_pickaxe.json
 2a0129ddfa160553b06d90cd2b48b375b3074ea3 data/roots/recipes/moonglow.json
 e7f0e9a1ea09a73075c4be9e50899e6f67a9de60 data/roots/recipes/mortar/flour.json

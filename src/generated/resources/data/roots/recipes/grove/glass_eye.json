@@ -1,0 +1,20 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "tag": "forge:glass"
+    },
+    {
+      "tag": "forge:glass"
+    },
+    {
+      "tag": "forge:glass"
+    },
+    {
+      "tag": "forge:dusts/glowstone"
+    }
+  ],
+  "result": {
+    "item": "roots:glass_eye"
+  }
+}
