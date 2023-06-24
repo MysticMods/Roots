@@ -28,10 +28,6 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
         Level level = PedestalBlockEntity.this.getLevel();
         BlockPos pos = PedestalBlockEntity.this.getBlockPos();
         BlockState state = PedestalBlockEntity.this.getBlockState();
-/*        if (state.getValue(PedestalBlock.VALID)) {
-          state = state.setValue(PedestalBlock.VALID, false);
-          level.setBlock(pos, state, 1 | 2 | 8);
-        }*/
         level.sendBlockUpdated(pos, state, state, 8);
       }
     }
@@ -46,6 +42,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
+    // TODO: Swap instead
     ItemStack inHand = player.getItemInHand(hand);
     ItemStack inSlot = inventory.getStackInSlot(0);
     if (inHand.isEmpty()) {
