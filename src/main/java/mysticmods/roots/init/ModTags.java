@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.gen.RootsDataProviderTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -11,6 +12,25 @@ import static mysticmods.roots.Roots.REGISTRATE;
 @SuppressWarnings("unchecked")
 public class ModTags {
   static {
+    REGISTRATE.addDataGenerator(RootsDataProviderTypes.RITUAL_TAGS, b -> {
+      b.tag(RootsAPI.Tags.Rituals.NYI).add(ModRituals.BLOOMING.get(), ModRituals.FIRE_STORM.get(), ModRituals.FROST_LANDS.get(), ModRituals.GATHERING.get(), ModRituals.GERMINATION.get(), ModRituals.HEALING_AURA.get(), ModRituals.HEAVY_STORMS.get(), ModRituals.OVERGROWTH.get(), ModRituals.PROTECTION.get(), ModRituals.PURITY.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.TRANSMUTATION.get(), ModRituals.WARDING.get(), ModRituals.WILDROOT_GROWTH.get(), ModRituals.WINDWALL.get());
+    });
+
+    REGISTRATE.addDataGenerator(RootsDataProviderTypes.SPELL_TAGS, b -> {
+      b.tag(RootsAPI.Tags.Spells.NYI).add(ModSpells.ACID_CLOUD.get(), ModSpells.AQUA_BUBBLE.get(), ModSpells.AUGMENT.get(), ModSpells.LIGHT_DRIFTER.get(), ModSpells.MAGNETISM.get(), ModSpells.DANDELION_WINDS.get(), ModSpells.DESATURATE.get(), ModSpells.DISARM.get(), ModSpells.EXTENSION.get(), ModSpells.NONDETECTION.get(), ModSpells.GEAS.get(), ModSpells.CONTROL_UNDEAD.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get(), ModSpells.LIFE_DRAIN.get(), ModSpells.RADIANCE.get(), ModSpells.ROSE_THORNS.get(), ModSpells.SANCTUARY.get(), ModSpells.SHATTER.get(), ModSpells.JAUNT.get(), ModSpells.STORM_CLOUD.get(), ModSpells.TIME_STOP.get(), ModSpells.WILDFIRE.get());
+    });
+
+    REGISTRATE.addDataGenerator(RootsDataProviderTypes.HERB_TAGS, b -> {
+      b.tag(RootsAPI.Tags.Herbs.FIRE).add(ModHerbs.INFERNO_BULB.get());
+      b.tag(RootsAPI.Tags.Herbs.AIR).add(ModHerbs.CLOUD_BERRY.get());
+      b.tag(RootsAPI.Tags.Herbs.WATER).add(ModHerbs.DEWGONIA.get());
+      b.tag(RootsAPI.Tags.Herbs.EARTH).add(ModHerbs.STALICRIPE.get());
+      b.tag(RootsAPI.Tags.Herbs.ELEMENTAL).addTags(RootsAPI.Tags.Herbs.AIR, RootsAPI.Tags.Herbs.EARTH, RootsAPI.Tags.Herbs.FIRE, RootsAPI.Tags.Herbs.WATER);
+    });
+
+    REGISTRATE.addDataGenerator(RootsDataProviderTypes.MODIFIER_TAGS, b -> {
+    });
+
     REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, b -> {
       b.tag(RootsAPI.Tags.Entities.PACIFIST).add(EntityType.AXOLOTL, EntityType.CAT, EntityType.CHICKEN, EntityType.COD, EntityType.COW, EntityType.DOLPHIN, EntityType.DONKEY, EntityType.FOX, EntityType.GLOW_SQUID, EntityType.HORSE, EntityType.IRON_GOLEM, EntityType.LLAMA, EntityType.MULE, EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PARROT, EntityType.POLAR_BEAR, EntityType.RABBIT, EntityType.SALMON, EntityType.SHEEP, EntityType.SNOW_GOLEM, EntityType.SQUID, EntityType.TRADER_LLAMA, EntityType.TROPICAL_FISH, EntityType.TURTLE, EntityType.VILLAGER, EntityType.WOLF);
       b.tag(RootsAPI.Tags.Entities.ANIMAL_HARVEST).addTag(RootsAPI.Tags.Entities.PACIFIST);

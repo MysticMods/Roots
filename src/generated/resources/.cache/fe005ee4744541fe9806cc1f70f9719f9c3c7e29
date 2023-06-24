@@ -1,4 +1,4 @@
-// 1.19.2	2023-06-23T22:12:12.2564027	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-06-24T15:14:57.0749815	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
 e307408db6c939a6c528b090c6861e4c8303b1db assets/roots/blockstates/bafflecap_block.json
@@ -1105,3 +1105,10 @@ a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/items/seeds/pereskia.js
 b8bbfb9e64e0d21258e154bcf3d7684f92d05ed1 data/roots/tags/items/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/items/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/items/soils/water.json
+4cc96509e1fb05cf67723e56c711377b5cf8d2c3 data/roots/tags/roots/herbs/elemental.json
+98545c13dddf6574110e137626bb2822902a778d data/roots/tags/roots/herbs/elemental/air.json
+314ec0136f8dbb967b704dda383c03d9e2057910 data/roots/tags/roots/herbs/elemental/earth.json
+ae4b947df62ce05faf6338b5cdf30aa99509bfef data/roots/tags/roots/herbs/elemental/fire.json
+d018ba9ff0fd1ee26b58650998fe440e8fc1925d data/roots/tags/roots/herbs/elemental/water.json
+118c4c0fed0a6391268c181bdaa43dbf4d474873 data/roots/tags/roots/rituals/nyi.json
+e28a09a63226623463cc748e388569812bc39ee6 data/roots/tags/roots/spells/nyi.json

@@ -376,7 +376,11 @@ public abstract class RootsAPI {
     }
 
     public static class Herbs extends Tags {
-      public static final TagKey<Herb> NYI = modTag("nyi");
+      public static final TagKey<Herb> ELEMENTAL = modTag("elemental");
+      public static final TagKey<Herb> FIRE = modTag("elemental/fire");
+      public static final TagKey<Herb> WATER = modTag("elemental/water");
+      public static final TagKey<Herb> EARTH = modTag("elemental/earth");
+      public static final TagKey<Herb> AIR = modTag("elemental/air");
 
       static TagKey<Herb> modTag(String name) {
         return TagKey.create(RootsAPI.HERB_REGISTRY, new ResourceLocation(MODID, name));

@@ -1160,16 +1160,6 @@ public class ModBlocks {
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createMushroomBlockDrop(t, ModBlocks.BAFFLECAP.get())))
     .register();
 
-  // TODO: Do we end up needing this given the new system?
-/*  public static BlockEntry<RunicCrafterBlock> RUNIC_CRAFTER = REGISTRATE.block("runic_crafter", Material.STONE, RunicCrafterBlock::new)
-      .properties(BASE_PROPERTIES)
-      .blockstate(BlockstateGenerator.existingNoRotation("block/complex/runic_crafter"))
-      .tag(RootsAPI.Tags.Blocks.CRAFTERS, BlockTags.MINEABLE_WITH_PICKAXE)
-      .item()
-      .model(ItemModelGenerator::complexItemModel)
-      .build()
-      .register();*/
-
   public static <T extends Block> NonNullBiConsumer<DataGenContext<Block, T>, RegistrateBlockstateProvider> groveStone(String type) {
     return (ctx, p) -> p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> {
       BlockModelBuilder model;
