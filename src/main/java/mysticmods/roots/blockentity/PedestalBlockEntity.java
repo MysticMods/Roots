@@ -49,12 +49,16 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       // extract
       if (!inSlot.isEmpty()) {
         inventory.setStackInSlot(0, ItemStack.EMPTY);
-        ItemUtil.Spawn.spawnItem(level, getBlockPos(), inSlot);
+        player.setItemInHand(hand, inSlot);
       }
     } else if (inSlot.isEmpty()) {
       // insert
       inventory.setStackInSlot(0, inHand);
       player.setItemInHand(hand, ItemStack.EMPTY);
+    } else {
+      // swapsies!
+      inventory.setStackInSlot(0, inHand);
+      player.setItemInHand(hand, inSlot);
     }
 
     return InteractionResult.SUCCESS;
