@@ -10,6 +10,7 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
@@ -74,6 +75,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
     RootsAPI.LOG.info(cachedRecipe);
     ItemStack inHand = player.getItemInHand(hand);
+    // This is a very specific hack.
+    if (inHand.is(ModItems.FIRE_STARTER.get())) {
+      return InteractionResult.PASS;
+    }
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
@@ -85,55 +90,65 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
       // TODO: starting a ritual while one is already active
     } else if (inHand.is(RootsAPI.Tags.Items.PYRE_ACTIVATION)) {
-      if (cachedRecipe == null) {
-        // should this revalidate?
-        revalidateRecipe();
-      }
-      if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
-        Ritual newRitual = cachedRecipe.getRitual();
-        if (newRitual == null) {
-          currentRitual = ModRituals.CRAFTING.get();
-        } else {
-          currentRitual = newRitual;
-        }
-
-        RootsRecipe.ConditionResult result = cachedRecipe.checkConditions(level, player, PYRE_BOUNDS, pos);
-        if (result.anyFailed()) {
-          RootsAPI.LOG.info("Conditions failed.");
-          result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o));
-          result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o));
-          // Needs to be a success or it sets things on fire
-          return InteractionResult.SUCCESS;
-        }
-
-        PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
-        lastRecipe = cachedRecipe;
-        previousRecipeItems.clear();
-        previousRecipeItems.addAll(inventory.getItemsCopy());
-        storedItems.clear();
-        if (currentRitual == ModRituals.CRAFTING.get()) {
-          storedItems.add(cachedRecipe.assemble(playerCrafting));
-          // TODO: conditional outputs
-          for (ConditionalOutput conditionalOutput : cachedRecipe.getConditionalOutputs()) {
-            ItemStack output = conditionalOutput.getResult(level.getRandom());
-            if (!output.isEmpty()) {
-              storedItems.add(output);
-            }
-          }
-        }
-        // process
-        NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
-        for (ItemStack stack : processed) {
-          ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
-        }
-        cachedRecipe = null;
-        startRitual(player);
-        setChanged();
-        updateViaState();
-      }
+      return light(player, pos);
     } else {
       // insert
-      player.setItemInHand(hand, inventory.insert(inHand));
+      ItemStack result = inventory.insert(inHand);
+      if (inHand.equals(result, false)) {
+        return InteractionResult.PASS;
+      }
+      player.setItemInHand(hand, result);
+    }
+
+    return InteractionResult.SUCCESS;
+  }
+
+  public InteractionResult light (Player player, BlockPos pos) {
+    if (cachedRecipe == null) {
+      // should this revalidate?
+      revalidateRecipe();
+    }
+    if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
+      Ritual newRitual = cachedRecipe.getRitual();
+      if (newRitual == null) {
+        currentRitual = ModRituals.CRAFTING.get();
+      } else {
+        currentRitual = newRitual;
+      }
+
+      RootsRecipe.ConditionResult result = cachedRecipe.checkConditions(level, player, PYRE_BOUNDS, pos);
+      if (result.anyFailed()) {
+        RootsAPI.LOG.info("Conditions failed.");
+        result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o));
+        result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o));
+        // Needs to be a success or it sets things on fire
+        return InteractionResult.SUCCESS;
+      }
+
+      PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
+      lastRecipe = cachedRecipe;
+      previousRecipeItems.clear();
+      previousRecipeItems.addAll(inventory.getItemsCopy());
+      storedItems.clear();
+      if (currentRitual == ModRituals.CRAFTING.get()) {
+        storedItems.add(cachedRecipe.assemble(playerCrafting));
+        // TODO: conditional outputs
+        for (ConditionalOutput conditionalOutput : cachedRecipe.getConditionalOutputs()) {
+          ItemStack output = conditionalOutput.getResult(level.getRandom());
+          if (!output.isEmpty()) {
+            storedItems.add(output);
+          }
+        }
+      }
+      // process
+      NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
+      for (ItemStack stack : processed) {
+        ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+      }
+      cachedRecipe = null;
+      startRitual(player);
+      setChanged();
+      updateViaState();
     }
 
     return InteractionResult.SUCCESS;

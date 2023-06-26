@@ -1,6 +1,7 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -48,12 +49,18 @@ public class FireStarterItem extends Item {
         BlockPos blockpos = ray.getBlockPos().relative(ray.getDirection());
         if (level.mayInteract(player, blockpos) && player.mayUseItemAt(blockpos, ray.getDirection(), stack)) {
           BlockState stateAt = level.getBlockState(blockpos);
-          if (stateAt.isAir()) {
+          BlockPos below = blockpos.below();
+          BlockState stateBelow = level.getBlockState(below);
+          if (stateBelow.is(RootsAPI.Tags.Blocks.PYRES)) {
+            if (level.getBlockEntity(below) instanceof PyreBlockEntity pyreBlockEntity) {
+              level.playSound(player, below, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+              pyreBlockEntity.light(player, below);
+              used = true;
+            }
+          } else if (stateAt.isAir()) {
             level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.setBlock(blockpos, Blocks.FIRE.defaultBlockState(), 11);
             used = true;
-          } else if (stateAt.is(RootsAPI.Tags.Blocks.PYRES)) {
-            // TODO: Light the Pyre
           }
         }
       }
