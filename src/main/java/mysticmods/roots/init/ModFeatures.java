@@ -52,7 +52,7 @@ public class ModFeatures {
           new HeightmapYRange(ConstantHeight.of(VerticalAnchor.absolute(6)), Heightmap.Types.WORLD_SURFACE_WG) // Pick spot between y = 6 and heightmap of terrain above
   )));
   public static RegistryObject<PlacedFeature> WILD_ROOTS_TREE_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_trees", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(
-          CountPlacement.of(20), // How many attempts per chunk
+          CountPlacement.of(30), // How many attempts per chunk
           InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
           HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
           RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
