@@ -31,7 +31,7 @@ public class SupportingDirectionalBlockFeature extends Feature<SimpleBlockConfig
 
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
         for(Direction direction : Direction.values()) {
-            mutableBlockPos = mutableBlockPos.set(rootPos).move(direction);
+            mutableBlockPos = mutableBlockPos.set(rootPos).move(direction.getOpposite());
 
             rootState = rootState.setValue(WildRootsBlock.FACING, direction);
             worldState = level.getBlockState(mutableBlockPos);
