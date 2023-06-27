@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#roots:wild_roots_underground_biomes",
+  "features": "roots:wild_roots_underground",
+  "step": "local_modifications"
+}

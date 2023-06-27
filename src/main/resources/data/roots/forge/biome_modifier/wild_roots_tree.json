@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#roots:wild_roots_tree_biomes",
+  "features": "roots:wild_roots_trees",
+  "step": "top_layer_modification"
+}
