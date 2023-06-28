@@ -1,13 +1,13 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:is_forest",
+    "#minecraft:is_overworld",
     {
-      "id": "#forge:is_forest",
+      "id": "#forge:is_overworld",
       "required": false
     },
     {
-      "id": "#c:forest",
+      "id": "#c:overworld",
       "required": false
     }
   ]
