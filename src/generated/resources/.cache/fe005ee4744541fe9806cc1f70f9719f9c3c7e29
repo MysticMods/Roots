@@ -1,4 +1,4 @@
-// 1.19.2	2023-06-24T15:35:13.505765	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-06-28T21:59:40.8003052	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
 e307408db6c939a6c528b090c6861e4c8303b1db assets/roots/blockstates/bafflecap_block.json
@@ -1024,6 +1024,7 @@ d33d48a7d085fd0b31d3f4a8460ee120df1c73ab data/roots/tags/blocks/pillars/rune.jso
 b8bbfb9e64e0d21258e154bcf3d7684f92d05ed1 data/roots/tags/blocks/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/blocks/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/blocks/soils/water.json
+1ef432798cd55f68af6b59237abaf7b40bedff27 data/roots/tags/blocks/supports_wild_roots.json
 a7a1a3c0580987c69ed181e6bc8ec8328b093107 data/roots/tags/entity_types/animal_harvest_entities.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_types/boats.json
 421f65dbde29eee08e0c8027d304d6ca9635aa9a data/roots/tags/entity_types/pacifist.json

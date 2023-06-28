@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:dirt",
+    "#minecraft:moss_replaceable",
+    "minecraft:moss_block",
+    "minecraft:snow_block"
+  ]
+}
