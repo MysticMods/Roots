@@ -7,7 +7,7 @@
       "required": false
     },
     {
-      "id": "#c:overworld",
+      "id": "#c:in_overworld",
       "required": false
     }
   ]

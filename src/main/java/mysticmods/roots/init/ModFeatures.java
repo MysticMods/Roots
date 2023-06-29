@@ -47,17 +47,17 @@ public class ModFeatures {
   public static RegistryObject<SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
   public static RegistryObject<ConfiguredFeature<SimpleBlockConfiguration, ?>> WILD_ROOTS_CONFIGURED_FEATURE = CONFIGURED_FEATURES.register("wild_roots", () -> new ConfiguredFeature<>(SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.getDefaultState()))));
   public static RegistryObject<PlacedFeature> WILD_ROOTS_UNDERGROUND_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_underground", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(
-          CountPlacement.of(60), // How many attempts per chunk
+          CountPlacement.of(40), // How many attempts per chunk
           InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
           new HeightmapYRange(ConstantHeight.of(VerticalAnchor.absolute(6)), Heightmap.Types.WORLD_SURFACE_WG) // Pick spot between y = 6 and heightmap of terrain above
   )));
 
   public static RegistryObject<PlacedFeature> WILD_ROOTS_TREE_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_trees", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(
-          CountPlacement.of(30), // How many attempts per chunk
+          CountPlacement.of(10), // How many attempts per chunk
           InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
           HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
           RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
-          BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log. Will have false positives with structures made of logs
+          BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
           CountPlacement.of(5), // make 5 new attempts for each position at the log
           RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
   )));

@@ -1,0 +1,40 @@
+{
+  "variants": {
+     "facing=up": [
+        {"model": "roots:block/complex/wild_roots"},
+        {"model": "roots:block/complex/wild_roots", "y": 90},
+        {"model": "roots:block/complex/wild_roots", "y": 180},
+        {"model": "roots:block/complex/wild_roots", "y": 270}
+    ],
+    "facing=down": [
+        {"model": "roots:block/complex/wild_roots", "x": 180, "y": 180},
+        {"model": "roots:block/complex/wild_roots", "x": 180, "y": 90},
+        {"model": "roots:block/complex/wild_roots", "x": 180, "y": 0},
+        {"model": "roots:block/complex/wild_roots", "x": 180, "y": 270}
+    ],
+     "facing=south": [
+        {"model": "roots:block/complex/wild_roots", "x": 270, "y": 0},
+        {"model": "roots:block/complex/wild_roots_alt", "x": 180, "y": 270},
+        {"model": "roots:block/complex/wild_roots", "x": 90, "y": 180},
+        {"model": "roots:block/complex/wild_roots_alt", "x": 0, "y": 270}
+    ],  
+    "facing=north": [
+        {"model": "roots:block/complex/wild_roots", "x": 270, "y": 180},
+        {"model": "roots:block/complex/wild_roots_alt", "x": 180, "y": 90},
+        {"model": "roots:block/complex/wild_roots", "x": 90, "y": 0},
+        {"model": "roots:block/complex/wild_roots_alt", "x": 0, "y": 90}
+    ],
+    "facing=east": [
+        {"model": "roots:block/complex/wild_roots", "x": 270, "y": 270},
+        {"model": "roots:block/complex/wild_roots_alt", "x": 180, "y": 180},
+        {"model": "roots:block/complex/wild_roots", "x": 90, "y": 90},        
+        {"model": "roots:block/complex/wild_roots_alt", "x": 0, "y": 180}
+    ],
+    "facing=west": [
+        {"model": "roots:block/complex/wild_roots", "x": 270, "y": 90},
+        {"model": "roots:block/complex/wild_roots_alt", "x": 180, "y": 0},
+        {"model": "roots:block/complex/wild_roots", "x": 90, "y": 270},
+        {"model": "roots:block/complex/wild_roots_alt", "x": 0, "y": 0}
+    ]
+  }
+}

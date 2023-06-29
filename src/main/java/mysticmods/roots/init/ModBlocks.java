@@ -1,5 +1,6 @@
 package mysticmods.roots.init;
 
+import com.mojang.math.OctahedralGroup;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
@@ -23,6 +24,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -1095,8 +1102,9 @@ public class ModBlocks {
 
   // TODO: Silk touch vs dropping wild roots
   public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)
-    .properties(BASE_WOODEN_PROPERTIES)
-    .blockstate((ctx, p) -> {
+    .properties(o -> BASE_WOODEN_PROPERTIES.apply(o).strength(0.2f))
+    .blockstate(NonNullBiConsumer.noop())
+  /*(ctx, p) -> {
       // TODO: Rotated variations (y for up/down, z for everything else?)
       ModelFile model = p.models().getExistingFile(new ResourceLocation(RootsAPI.MODID, "block/complex/wild_roots"));
       p.getVariantBuilder(ctx.getEntry())
@@ -1108,6 +1116,10 @@ public class ModBlocks {
             .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360)
             .build();
         });
+      OctahedralGroup
+    })*/
+    .loot((ctx, p) -> {
+      ctx.add(p, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.Herbs.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f)))))));
     })
     .item()
     .model(ItemModelGenerator::complexItemModel)
