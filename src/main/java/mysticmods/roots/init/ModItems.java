@@ -84,6 +84,11 @@ public class ModItems {
         .tag(RootsAPI.Tags.Items.WILDEWHEET_SEEDS, RootsAPI.Tags.Items.SEEDS)
         .register();
 
+    public static final ItemEntry<Item> GROVE_SPORES = REGISTRATE.item("grove_spores", Item::new)
+      .model(subfolder("herbs"))
+      .tag(RootsAPI.Tags.Items.SEEDS)
+      .register();
+
     public static void load() {
 
     }

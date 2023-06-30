@@ -40,7 +40,7 @@ public class ModTags {
 
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
       // Internal mod tags
-      b.tag(RootsAPI.Tags.Blocks.SUPPORTS_WILD_ROOTS).addTags(BlockTags.BASE_STONE_OVERWORLD, BlockTags.DIRT, BlockTags.MOSS_REPLACEABLE).add(Blocks.MOSS_BLOCK, Blocks.SNOW_BLOCK);
+      b.tag(RootsAPI.Tags.Blocks.SUPPORTS_WILD_ROOTS).addTags(BlockTags.BASE_STONE_OVERWORLD, BlockTags.DIRT, BlockTags.MOSS_REPLACEABLE).add(Blocks.MOSS_BLOCK, Blocks.SNOW_BLOCK, Blocks.GRAVEL, Blocks.CLAY);
       b.tag(RootsAPI.Tags.Blocks.PEDESTALS).addTags(RootsAPI.Tags.Blocks.RITUAL_PEDESTALS, RootsAPI.Tags.Blocks.GROVE_PEDESTALS);
       b.tag(RootsAPI.Tags.Blocks.SOILS).addTag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL);
       b.tag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL).addTags(RootsAPI.Tags.Blocks.EARTH_SOIL, RootsAPI.Tags.Blocks.AIR_SOIL, RootsAPI.Tags.Blocks.FIRE_SOIL, RootsAPI.Tags.Blocks.WATER_SOIL);

@@ -1,5 +1,6 @@
 package mysticmods.roots.blockentity;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlocks;
@@ -42,6 +43,8 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
+    boolean limited = state.is(RootsAPI.Tags.Blocks.LIMITED_PEDESTALS);
+
     // TODO: Swap instead
     ItemStack inHand = player.getItemInHand(hand);
     ItemStack inSlot = inventory.getStackInSlot(0);
@@ -53,12 +56,31 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       }
     } else if (inSlot.isEmpty()) {
       // insert
-      inventory.setStackInSlot(0, inHand);
-      player.setItemInHand(hand, ItemStack.EMPTY);
+      if (limited && inHand.getCount() > 1) {
+          ItemStack copy = inHand.copy();
+          copy.setCount(1);
+          inHand.shrink(1);
+          inventory.setStackInSlot(0, copy);
+          player.setItemInHand(hand, inHand);
+      } else {
+        inventory.setStackInSlot(0, inHand);
+        player.setItemInHand(hand, ItemStack.EMPTY);
+      }
     } else {
       // swapsies!
-      inventory.setStackInSlot(0, inHand);
-      player.setItemInHand(hand, inSlot);
+      if (limited) {
+        ItemStack copy = inHand.copy();
+        copy.setCount(1);
+        inHand.shrink(1);
+        inventory.setStackInSlot(0, copy);
+        player.setItemInHand(hand, inHand);
+        if (!player.addItem(inSlot)) {
+          ItemUtil.Spawn.spawnItem(level, getBlockPos(), inSlot);
+        }
+      } else {
+        inventory.setStackInSlot(0, inHand);
+        player.setItemInHand(hand, inSlot);
+      }
     }
 
     return InteractionResult.SUCCESS;
@@ -100,9 +122,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   public double offset() {
     if (offset == -1) {
-      if (this.getBlockState().is(ModBlocks.RITUAL_PEDESTAL.get())) {
+      if (this.getBlockState().is(RootsAPI.Tags.Blocks.RITUAL_PEDESTALS)) {
         offset = 1.4;
-      } else /* if (this.getBlockState().is(ModBlocks.GROVE_PEDESTAL.get())) */ {
+      } else if (this.getBlockState().is(RootsAPI.Tags.Blocks.GROVE_PEDESTALS)) {
         offset = 0.95;
       }
     }

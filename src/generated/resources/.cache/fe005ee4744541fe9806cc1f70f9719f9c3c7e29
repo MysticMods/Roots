@@ -1,4 +1,4 @@
-// 1.19.2	2023-06-29T12:57:58.9675903	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-06-29T21:11:05.9773055	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
 e307408db6c939a6c528b090c6861e4c8303b1db assets/roots/blockstates/bafflecap_block.json
@@ -107,6 +107,7 @@ ec4d99296e2a1041fbaebe56bf7bec3140231376 assets/roots/blockstates/wildwood_gate.
 e18a3ce823524a6419147a1ce21b1f744c2e811e assets/roots/blockstates/wildwood_leaves.json
 c6aaee73fcd9343352cd1c3a18e80107058a66c6 assets/roots/blockstates/wildwood_log.json
 17192f115dbd74d7f548e75e36c1729f4bd758a7 assets/roots/blockstates/wildwood_narrow_post.json
+4184fc100ea9838ccbcfdb50cefe815baf01d4a8 assets/roots/blockstates/wildwood_pedestal.json
 8dcc27ec38d74c519babddb6232dc695c5293643 assets/roots/blockstates/wildwood_planks.json
 13773c194732b5d2254ae00bc254f0196a870898 assets/roots/blockstates/wildwood_pressure_plate.json
 360f183266844d651f07ebd132e755e365969c74 assets/roots/blockstates/wildwood_slab.json
@@ -114,8 +115,8 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 9f65d74b70a0be61f9a3729e0649f66a3d29e5c1 assets/roots/blockstates/wildwood_wide_post.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
-cc0fd5b736aa520165bb147488d700539fd6e2dd assets/roots/lang/en_ud.json
-2f7e3ad8632235b5756ba1be23a3cbba75bfad65 assets/roots/lang/en_us.json
+b5bb664eb0a69e80234a8712089eef444639ac0b assets/roots/lang/en_ud.json
+0348ca3e308ac27236fe1c1d13eddd84c9b753a5 assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 aaaf3d858c57f54f4930ef6d9a6de9db2bbf88a7 assets/roots/models/block/bafflecap.json
 a076c58c5f09aa86b069ca3477a91954cc5302b0 assets/roots/models/block/bafflecap_block_inside.json
@@ -403,6 +404,7 @@ a9f24fd326a6cb57c1ac50440d5849502ab332cf assets/roots/models/item/flour.json
 920b08299dc3c05b6ca2bb4004faf8b730d1974e assets/roots/models/item/grove_crafter.json
 2f13055795ba9015e6c0dbfc42f5574ccc04dd42 assets/roots/models/item/grove_moss.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/grove_pedestal.json
+97deb2b89129d391d5fdd1bb246a72b35fc3a06a assets/roots/models/item/grove_spores.json
 fec1bc6fedb7d1c3a6c4489df40737cc19eb4c4e assets/roots/models/item/herb_pouch.json
 820e46af052e2581572f598ff045090cbed78466 assets/roots/models/item/incense_burner.json
 f49e298ede83512d9c74474554aa89982e07f3ea assets/roots/models/item/inferno_bulb.json
@@ -532,6 +534,7 @@ d5ed6f96a2f1a56ea2ebfb24783b7cf75765ed87 assets/roots/models/item/wildwood_fence
 83698323ac6240700aff9f2142b61928180139ce assets/roots/models/item/wildwood_leaves.json
 e28f71b2a88513442878ff85042b44bea4dafe45 assets/roots/models/item/wildwood_log.json
 1445c587b0b271ccc73efca6033c7aed2e647185 assets/roots/models/item/wildwood_narrow_post.json
+b6e135dff14f84b24ac0d0f3c3cb6b9cf7aaaf11 assets/roots/models/item/wildwood_pedestal.json
 efda3a632d9f194a1677af3339324db2452356a0 assets/roots/models/item/wildwood_planks.json
 b8dbbc65146d111ba1d9516fe01a330d5808fdba assets/roots/models/item/wildwood_pressure_plate.json
 b150b7d7a5ad97b3e5c712c7b794b89ffda61ee4 assets/roots/models/item/wildwood_quiver.json
@@ -559,7 +562,7 @@ c8c9effde3095b4259a1f5f50e211433fe38adfb data/minecraft/tags/blocks/fences.json
 6db798aeb484900357d59a86c7644270d92bbf07 data/minecraft/tags/blocks/leaves.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs_that_burn.json
-51240293d6571bda1e1fb2cd23dbf15c5f9f3b00 data/minecraft/tags/blocks/mineable/axe.json
+99ca2e0d24e9723725cf9eb831be6d13349fa3e2 data/minecraft/tags/blocks/mineable/axe.json
 ba1c75822b369de8656ea3aa3a4270961a7bc5ce data/minecraft/tags/blocks/mineable/hoe.json
 412bce25809a4f6c85011c4c605fddb0cee6e13c data/minecraft/tags/blocks/mineable/pickaxe.json
 109aabd0da35c83112cbb018087f54da1877ac94 data/minecraft/tags/blocks/mineable/shovel.json
@@ -817,6 +820,7 @@ c7fb1375a3266ee72d842a76e1f0941a83613775 data/roots/loot_tables/blocks/wildwood_
 80c9b1932a82d492d8a29ee652c03c2ad674b499 data/roots/loot_tables/blocks/wildwood_leaves.json
 38448ca64bd0d61e31eba4a2e8b2272aa2aa7246 data/roots/loot_tables/blocks/wildwood_log.json
 75fe405bbb0afa49b866078a3145b265e58ede43 data/roots/loot_tables/blocks/wildwood_narrow_post.json
+93d91e9b9038bb663bf15fe5392b67351e03672f data/roots/loot_tables/blocks/wildwood_pedestal.json
 6848412e682b06f7cca2ae762ea091cbfac3fc4c data/roots/loot_tables/blocks/wildwood_planks.json
 f167acdfbc926fc74729d306c4bebc06deda9559 data/roots/loot_tables/blocks/wildwood_pressure_plate.json
 d50ac96a036212c322e16d37e83e1b504172a5ad data/roots/loot_tables/blocks/wildwood_slab.json
@@ -1002,8 +1006,9 @@ cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/blocks/logs/runed/wildw
 c2aad42f3019235dcccb09cf46f812e0a76ce374 data/roots/tags/blocks/logs/wildwood.json
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/blocks/mortars.json
 2cf4a3b211d9c7d6507507f7aac80347e551ce6b data/roots/tags/blocks/nyi.json
-5e6e5261a1ac6d1fa050110c71d819fc2c6cea68 data/roots/tags/blocks/pedestals.json
-14326daf6732942db93fd4385cfdb4a0c0f308fc data/roots/tags/blocks/pedestals/grove.json
+c9f95f102e75f935fc4b4943d5f6200812093166 data/roots/tags/blocks/pedestals.json
+88fd0a1654b67c31246481e2b7b84f6eb589acbe data/roots/tags/blocks/pedestals/grove.json
+14326daf6732942db93fd4385cfdb4a0c0f308fc data/roots/tags/blocks/pedestals/limited.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/blocks/pedestals/ritual.json
 6ece1eb38537a05ebb521d9f2cd7c3ac8e7b6769 data/roots/tags/blocks/pillars/log/acacia.json
 f61527640eb5a28f11b62ae129e73ce15642d16e data/roots/tags/blocks/pillars/log/birch.json
@@ -1023,7 +1028,7 @@ d33d48a7d085fd0b31d3f4a8460ee120df1c73ab data/roots/tags/blocks/pillars/rune.jso
 b8bbfb9e64e0d21258e154bcf3d7684f92d05ed1 data/roots/tags/blocks/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/blocks/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/blocks/soils/water.json
-1ef432798cd55f68af6b59237abaf7b40bedff27 data/roots/tags/blocks/supports_wild_roots.json
+8e754dfb87a88a938678560a373f5788d297921f data/roots/tags/blocks/supports_wild_roots.json
 a7a1a3c0580987c69ed181e6bc8ec8328b093107 data/roots/tags/entity_types/animal_harvest_entities.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_types/boats.json
 421f65dbde29eee08e0c8027d304d6ca9635aa9a data/roots/tags/entity_types/pacifist.json
@@ -1084,13 +1089,13 @@ c2aad42f3019235dcccb09cf46f812e0a76ce374 data/roots/tags/items/logs/wildwood.jso
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/items/mortars.json
 33c51847dc0e01980184ec1a4eb8d222662d792f data/roots/tags/items/mortar_activation.json
 2cf4a3b211d9c7d6507507f7aac80347e551ce6b data/roots/tags/items/nyi.json
-14326daf6732942db93fd4385cfdb4a0c0f308fc data/roots/tags/items/pedestals/grove.json
+88fd0a1654b67c31246481e2b7b84f6eb589acbe data/roots/tags/items/pedestals/grove.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/items/pedestals/ritual.json
 2c0158a5c83124684d96ea4033acd20aafb3061c data/roots/tags/items/pyres.json
 ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/items/pyre_activation.json
 22ac60564201a8a04418e063ffdb1ed59f15b65b data/roots/tags/items/runed_obsidian.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/items/runestone.json
-dc6cdb9353edffbe22396c088759ef5ad019bd9b data/roots/tags/items/seeds.json
+8ac46bb1bc8333971781ccb761735ce9df7366a5 data/roots/tags/items/seeds.json
 98545c13dddf6574110e137626bb2822902a778d data/roots/tags/items/seeds/cloud_berry.json
 d018ba9ff0fd1ee26b58650998fe440e8fc1925d data/roots/tags/items/seeds/dewgonia.json
 ae4b947df62ce05faf6338b5cdf30aa99509bfef data/roots/tags/items/seeds/inferno_bulb.json

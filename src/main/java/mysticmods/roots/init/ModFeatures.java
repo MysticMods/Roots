@@ -49,7 +49,7 @@ public class ModFeatures {
   public static RegistryObject<PlacedFeature> WILD_ROOTS_UNDERGROUND_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_underground", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(
           CountPlacement.of(40), // How many attempts per chunk
           InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
-          new HeightmapYRange(ConstantHeight.of(VerticalAnchor.absolute(6)), Heightmap.Types.WORLD_SURFACE_WG) // Pick spot between y = 6 and heightmap of terrain above
+          new HeightmapYRange(ConstantHeight.of(VerticalAnchor.absolute(-32)), Heightmap.Types.WORLD_SURFACE_WG) // Pick spot between y = 6 and heightmap of terrain above
   )));
 
   public static RegistryObject<PlacedFeature> WILD_ROOTS_TREE_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_trees", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(

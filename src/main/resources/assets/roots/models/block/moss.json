@@ -2,13 +2,13 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "roots:block/sacred_moss",
-		"vine": "roots:block/sacred_moss"
+		"particle": "roots:block/creeping_grove_moss",
+		"vine": "roots:block/creeping_grove_moss"
 	},
 	"elements": [
 		{
-			"from": [0, 0.8, 0],
-			"to": [16, 0.8, 16],
+			"from": [0, 0.4, 0],
+			"to": [16, 0.4, 16],
 			"shade": false,
 			"faces": {
 				"north": {"uv": [16, 0, 0, 16], "texture": "#vine", "tintindex": 0},

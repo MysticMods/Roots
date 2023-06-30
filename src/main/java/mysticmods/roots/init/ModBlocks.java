@@ -1,6 +1,5 @@
 package mysticmods.roots.init;
 
-import com.mojang.math.OctahedralGroup;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
@@ -21,7 +20,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -1091,16 +1089,24 @@ public class ModBlocks {
     .build()
     .register();
 
-  public static BlockEntry<GrovePedestalBlock> GROVE_PEDESTAL = REGISTRATE.block("grove_pedestal", Material.WOOD, GrovePedestalBlock::new)
+  public static BlockEntry<GrovePedestalBlock> WILDWOOD_PEDESTAL = REGISTRATE.block("wildwood_pedestal", Material.WOOD, GrovePedestalBlock::new)
     .properties(BASE_WOODEN_PROPERTIES)
-    .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_pedestal"))
+    .blockstate(BlockstateGenerator.existingNoRotation("block/complex/wildwood_pedestal"))
     .tag(RootsAPI.Tags.Blocks.PEDESTALS, RootsAPI.Tags.Blocks.GROVE_PEDESTALS, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
     .register();
 
-  // TODO: Silk touch vs dropping wild roots
+  public static BlockEntry<GrovePedestalBlock> GROVE_PEDESTAL = REGISTRATE.block("grove_pedestal", Material.WOOD, GrovePedestalBlock::new)
+    .properties(BASE_WOODEN_PROPERTIES)
+    .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_pedestal"))
+    .tag(RootsAPI.Tags.Blocks.PEDESTALS, RootsAPI.Tags.Blocks.GROVE_PEDESTALS, RootsAPI.Tags.Blocks.LIMITED_PEDESTALS, BlockTags.MINEABLE_WITH_AXE)
+    .item()
+    .model(ItemModelGenerator::complexItemModel)
+    .build()
+    .register();
+
   public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)
     .properties(o -> BASE_WOODEN_PROPERTIES.apply(o).strength(0.2f))
     .blockstate(NonNullBiConsumer.noop())

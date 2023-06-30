@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "valid=false": {
+      "model": "roots:block/complex/wildwood_pedestal"
+    },
+    "valid=true": {
+      "model": "roots:block/complex/wildwood_pedestal"
+    }
+  }
+}
