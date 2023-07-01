@@ -1133,9 +1133,11 @@ public class ModBlocks {
     .tag(BlockTags.MINEABLE_WITH_HOE)
     .register();
 
-  public static BlockEntry<Block> CREEPING_GROVE_MOSS = REGISTRATE.block("creeping_grove_moss", Material.GRASS, Block::new)
-    .properties(BASE_WOODEN_PROPERTIES)
-    .blockstate(BlockstateGenerator.existingNoRotation("block/moss"))
+  public static BlockEntry<CreepingGroveMossBlock> CREEPING_GROVE_MOSS = REGISTRATE.block("creeping_grove_moss", Material.GRASS, CreepingGroveMossBlock::new)
+    .properties(o -> BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET))
+    .blockstate((ctx, p) -> {
+      p.simpleBlock(ctx.getEntry(), p.models().singleTexture(ctx.getName(), new ResourceLocation("minecraft", "block/carpet"), "wool", p.modLoc("block/creeping_grove_moss")));
+    })
     .tag(BlockTags.MINEABLE_WITH_HOE)
     .register();
 

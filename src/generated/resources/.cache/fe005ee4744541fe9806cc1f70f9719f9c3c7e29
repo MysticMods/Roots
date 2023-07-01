@@ -1,4 +1,4 @@
-// 1.19.2	2023-06-29T21:11:05.9773055	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-01T11:39:54.6410044	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
 e307408db6c939a6c528b090c6861e4c8303b1db assets/roots/blockstates/bafflecap_block.json
@@ -6,7 +6,7 @@ e307408db6c939a6c528b090c6861e4c8303b1db assets/roots/blockstates/bafflecap_bloc
 ff7982311d5f80fc0e7352ce5cb527fce9d0c2c7 assets/roots/blockstates/chiseled_runed_obsidian.json
 fce10ab987a1de2a71d40710e9c45670096a3d7e assets/roots/blockstates/chiseled_runestone.json
 f08139a216ffdfe345633af2ad5e89c053d9591d assets/roots/blockstates/cloud_berry_crop.json
-065c9e7560d6451ea3d8dcf19029e252fa584e7c assets/roots/blockstates/creeping_grove_moss.json
+d5943131417c3ff22ea899f023d2f4999e9ddafa assets/roots/blockstates/creeping_grove_moss.json
 cd3eae6e2d26c3fedee2abe4fc04c33de3fc8323 assets/roots/blockstates/decorative_pyre.json
 e2bd42755bccf308505d278b77a27da69e41de91 assets/roots/blockstates/dewgonia_crop.json
 d256cf7816bc89f7c5f024790771665e58ad52e2 assets/roots/blockstates/elemental_soil.json
@@ -128,6 +128,7 @@ f131f71ef09b71287fc8eb266030ab5ffe109d21 assets/roots/models/block/chiseled_rune
 5d2ef38a53597cb899bb19fe7dd8dee7d93dbe6e assets/roots/models/block/cloud_berry_1.json
 55076d5ef4d7ecef9b1145d538cb804a8ebe9efa assets/roots/models/block/cloud_berry_2.json
 c57dfe6fa38184daf069be06b53598bc3653cef1 assets/roots/models/block/cloud_berry_3.json
+54dbb9d8ca5c5a85546bd1728ef3a1ca1c220cc2 assets/roots/models/block/creeping_grove_moss.json
 570d9f7666ee06c12384892c253c6fb8014829be assets/roots/models/block/dewgonia_0.json
 986938fb83f59d117176ce2facc391b785f38562 assets/roots/models/block/dewgonia_1.json
 9be65648eb3fce668cb3bc66d40bb012275140c1 assets/roots/models/block/dewgonia_2.json
@@ -1004,6 +1005,7 @@ cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/roots/tags/blocks/logs/runed/crims
 441a3240108cd2a8be4b02e0a0d23d5f878e4f09 data/roots/tags/blocks/logs/runed/warped.json
 cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/blocks/logs/runed/wildwood.json
 c2aad42f3019235dcccb09cf46f812e0a76ce374 data/roots/tags/blocks/logs/wildwood.json
+009a20b411350fcd4797dacb6d2f2e017a05632e data/roots/tags/blocks/moist.json
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/blocks/mortars.json
 2cf4a3b211d9c7d6507507f7aac80347e551ce6b data/roots/tags/blocks/nyi.json
 c9f95f102e75f935fc4b4943d5f6200812093166 data/roots/tags/blocks/pedestals.json

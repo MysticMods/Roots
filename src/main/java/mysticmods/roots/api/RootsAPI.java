@@ -143,6 +143,8 @@ public abstract class RootsAPI {
       public static final TagKey<Block> GROVE_PEDESTALS = modTag("pedestals/grove");
       public static final TagKey<Block> LIMITED_PEDESTALS = modTag("pedestals/limited");
 
+      public static final TagKey<Block> MOIST = modTag("moist");
+
       // Pyres (does not include decorative)
       public static final TagKey<Block> PYRES = modTag("pyres");
 

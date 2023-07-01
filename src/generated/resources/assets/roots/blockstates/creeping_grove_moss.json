@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "roots:block/moss"
+      "model": "roots:block/creeping_grove_moss"
     }
   }
 }

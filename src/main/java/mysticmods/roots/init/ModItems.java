@@ -7,6 +7,7 @@ import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.item.FireStarterItem;
+import mysticmods.roots.item.GroveSporesItem;
 import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -84,7 +85,7 @@ public class ModItems {
         .tag(RootsAPI.Tags.Items.WILDEWHEET_SEEDS, RootsAPI.Tags.Items.SEEDS)
         .register();
 
-    public static final ItemEntry<Item> GROVE_SPORES = REGISTRATE.item("grove_spores", Item::new)
+    public static final ItemEntry<GroveSporesItem> GROVE_SPORES = REGISTRATE.item("grove_spores", GroveSporesItem::new)
       .model(subfolder("herbs"))
       .tag(RootsAPI.Tags.Items.SEEDS)
       .register();
