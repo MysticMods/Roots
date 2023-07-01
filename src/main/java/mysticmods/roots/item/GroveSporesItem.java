@@ -4,9 +4,11 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModBlocks;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
 import javax.annotation.Nullable;
@@ -34,12 +37,31 @@ public class GroveSporesItem extends Item {
       return InteractionResult.FAIL;
     } else {
       BlockPos pPos = pContext.getClickedPos();
+
+      if (pContext.getLevel().getFluidState(pPos).is(FluidTags.WATER)) {
+        return InteractionResult.FAIL;
+      }
+
       boolean canPlace = false;
-      for(BlockPos blockpos : BlockPos.betweenClosed(pPos.offset(-4, 0, -4), pPos.offset(4, 1, 4))) {
-        BlockState atPos = pContext.getLevel().getBlockState(blockpos);
-        if (atPos.is(RootsAPI.Tags.Blocks.MOIST) || (atPos.hasProperty(FarmBlock.MOISTURE) && atPos.getValue(FarmBlock.MOISTURE) > 0)) {
+      for (Direction dir : Direction.values()) {
+        if (dir.getAxis().isVertical()) {
+          continue;
+        }
+
+        if (pContext.getLevel().getBlockState(pPos.relative(dir)).is(ModBlocks.CREEPING_GROVE_MOSS.get())) {
           canPlace = true;
           break;
+        }
+      }
+
+      if (!canPlace) {
+        BlockPos pPos2 = pPos.relative(pContext.getClickedFace().getOpposite());
+        for (Direction dir : Direction.values()) {
+          FluidState stateAt = pContext.getLevel().getFluidState(pPos2.relative(dir));
+          if (stateAt.is(FluidTags.WATER)) {
+            canPlace = true;
+            break;
+          }
         }
       }
 

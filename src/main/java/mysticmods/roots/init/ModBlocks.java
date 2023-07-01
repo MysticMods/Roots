@@ -3,7 +3,6 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
-import com.tterrag.registrate.providers.loot.RegistrateLootTableProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
@@ -31,6 +30,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
@@ -957,41 +958,48 @@ public class ModBlocks {
       };
     }
 
-  public static NonNullUnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = r -> BlockBehaviour.Properties.copy(Blocks.WHEAT);
+    private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> seedlessCropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier) {
+      return (p, t) -> {
+        LootItemCondition.Builder grown = new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, Collections.max(property.getPossibleValues())));
+        p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(seedSupplier.get()).when(grown).otherwise(LootItem.lootTableItem(seedSupplier.get())))).withPool(LootPool.lootPool().when(grown).add(LootItem.lootTableItem(seedSupplier.get())))));
+      };
+    }
+
+    public static NonNullUnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = r -> BlockBehaviour.Properties.copy(Blocks.WHEAT);
 
     public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Herbs.WILDROOT))
       .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.WILDROOT, ModItems.Herbs.WILDROOT))
+      .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.WILDROOT))
       .register();
 
     public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.CLOUD_BERRY))
       .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.CLOUD_BERRY, ModItems.Herbs.CLOUD_BERRY))
+      .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.CLOUD_BERRY))
       .register();
 
     public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.Herbs.DEWGONIA))
       .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.DEWGONIA, ModItems.Herbs.DEWGONIA))
+      .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.DEWGONIA))
       .register();
 
     public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.INFERNO_BULB))
       .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::crossBlockstate)
       .tag(RootsAPI.Tags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(ElementalCropBlock.AGE, ModItems.Herbs.INFERNO_BULB, ModItems.Herbs.INFERNO_BULB))
+      .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.Herbs.INFERNO_BULB))
       .register();
 
     public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.STALICRIPE))
       .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(ElementalCropBlock.AGE, ModItems.Herbs.STALICRIPE, ModItems.Herbs.STALICRIPE))
+      .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.Herbs.STALICRIPE))
       .register();
 
     public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.MOONGLOW_SEEDS))
@@ -1145,20 +1153,20 @@ public class ModBlocks {
   public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)
     .properties(o -> BASE_WOODEN_PROPERTIES.apply(o).strength(0.2f))
     .blockstate(NonNullBiConsumer.noop())
-  /*(ctx, p) -> {
-      // TODO: Rotated variations (y for up/down, z for everything else?)
-      ModelFile model = p.models().getExistingFile(new ResourceLocation(RootsAPI.MODID, "block/complex/wild_roots"));
-      p.getVariantBuilder(ctx.getEntry())
-        .forAllStates(state -> {
-          Direction dir = state.getValue(BlockStateProperties.FACING);
-          return ConfiguredModel.builder()
-            .modelFile(model)
-            .rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
-            .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360)
-            .build();
-        });
-      OctahedralGroup
-    })*/
+    /*(ctx, p) -> {
+        // TODO: Rotated variations (y for up/down, z for everything else?)
+        ModelFile model = p.models().getExistingFile(new ResourceLocation(RootsAPI.MODID, "block/complex/wild_roots"));
+        p.getVariantBuilder(ctx.getEntry())
+          .forAllStates(state -> {
+            Direction dir = state.getValue(BlockStateProperties.FACING);
+            return ConfiguredModel.builder()
+              .modelFile(model)
+              .rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
+              .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360)
+              .build();
+          });
+        OctahedralGroup
+      })*/
     .loot((ctx, p) -> {
       ctx.add(p, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.Herbs.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f)))))));
     })
@@ -1170,6 +1178,9 @@ public class ModBlocks {
 
   public static BlockEntry<CreepingGroveMossBlock> CREEPING_GROVE_MOSS = REGISTRATE.block("creeping_grove_moss", Material.GRASS, CreepingGroveMossBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET))
+    .loot((p, t) -> {
+      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.Herbs.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.Herbs.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.Herbs.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f)))))));
+    })
     .blockstate((ctx, p) -> {
       p.simpleBlock(ctx.getEntry(), p.models().singleTexture(ctx.getName(), new ResourceLocation("minecraft", "block/carpet"), "wool", p.modLoc("block/creeping_grove_moss")));
     })
