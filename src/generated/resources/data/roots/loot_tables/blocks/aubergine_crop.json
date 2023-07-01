@@ -16,18 +16,18 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "block": "roots:cloud_berry_crop",
+                  "block": "roots:aubergine_crop",
                   "condition": "minecraft:block_state_property",
                   "properties": {
-                    "age": "3"
+                    "age": "7"
                   }
                 }
               ],
-              "name": "roots:cloud_berry"
+              "name": "roots:aubergine_seeds"
             },
             {
               "type": "minecraft:item",
-              "name": "roots:cloud_berry"
+              "name": "roots:aubergine"
             }
           ]
         }
@@ -38,10 +38,10 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "roots:cloud_berry_crop",
+          "block": "roots:aubergine_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "3"
+            "age": "7"
           }
         }
       ],
@@ -59,7 +59,7 @@
               }
             }
           ],
-          "name": "roots:cloud_berry"
+          "name": "roots:aubergine"
         }
       ],
       "rolls": 1.0

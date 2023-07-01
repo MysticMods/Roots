@@ -3,7 +3,9 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.item.FireStarterItem;
@@ -13,6 +15,10 @@ import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
+import noobanidus.libs.noobutil.data.generator.ItemGenerator;
+
+import java.util.function.Supplier;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -88,6 +94,20 @@ public class ModItems {
     public static final ItemEntry<GroveSporesItem> GROVE_SPORES = REGISTRATE.item("grove_spores", GroveSporesItem::new)
       .model(subfolder("herbs"))
       .tag(RootsAPI.Tags.Items.SEEDS)
+      .register();
+
+    public static RegistryEntry<Item> AUBERGINE = REGISTRATE.item("aubergine", Item::new)
+      .properties(o -> o.food(ModFoods.AUBERGINE))
+/*      .tag(MWTags.Items.AUBERGINE, MWTags.Items.VEGETABLES)*/
+      .register();
+
+    public static <T extends Block> NonNullFunction<Item.Properties, ItemNameBlockItem> blockNamedItem(Supplier<Supplier<T>> block) {
+      return (b) -> new ItemNameBlockItem(block.get().get(), b);
+    }
+
+    public static final ItemEntry<ItemNameBlockItem> AUBERGINE_SEEDS = REGISTRATE.item("aubergine_seeds", blockNamedItem(() -> ModBlocks.Crops.AUBERGINE_CROP))
+/*      .recipe((ctx, p) -> MysticalWorld.RECIPES.singleItem(ModItems.AUBERGINE, ModItems.AUBERGINE_SEEDS, 1, 1, p))*/
+/*      .tag(MWTags.Items.SEEDS)*/
       .register();
 
     public static void load() {

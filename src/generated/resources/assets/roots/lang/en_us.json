@@ -1,5 +1,6 @@
 {
   "block.roots.aqueous_soil": "Aqueous Soil",
+  "block.roots.aubergine_crop": "Aubergine Crop",
   "block.roots.bafflecap": "Bafflecap",
   "block.roots.bafflecap_block": "Bafflecap Block",
   "block.roots.caelic_soil": "Caelic Soil",
@@ -132,6 +133,8 @@
   "herb.roots.wildroot": "Wildroot",
   "item.roots.acacia_bark": "Acacia Bark",
   "item.roots.apothecary_pouch": "Apothecary Pouch",
+  "item.roots.aubergine": "Aubergine",
+  "item.roots.aubergine_seeds": "Aubergine Seeds",
   "item.roots.bafflecap": "Bafflecap",
   "item.roots.birch_bark": "Birch Bark",
   "item.roots.cloud_berry": "Cloud Berry",

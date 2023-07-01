@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
+import com.tterrag.registrate.providers.loot.RegistrateLootTableProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
@@ -13,19 +14,23 @@ import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.block.crop.WaterElementalCropBlock;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
@@ -35,6 +40,9 @@ import noobanidus.libs.noobutil.block.BaseBlocks;
 import noobanidus.libs.noobutil.block.BaseBlocks.SeededCropsBlock;
 import noobanidus.libs.noobutil.data.generator.BlockstateGenerator;
 import noobanidus.libs.noobutil.data.generator.ItemModelGenerator;
+
+import java.util.Collections;
+import java.util.function.Supplier;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -940,55 +948,82 @@ public class ModBlocks {
     .register();
 
   public static class Crops {
+    private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> cropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier, Supplier<? extends Item> productSupplier) {
+      return (p, t) -> {
+        int maxValue = Collections.max(property.getPossibleValues());
+        p.add(t, RegistrateBlockLootTables.
+          createCropDrops(t, productSupplier.get(), seedSupplier.get(),
+            new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, maxValue))));
+      };
+    }
+
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = r -> BlockBehaviour.Properties.copy(Blocks.WHEAT);
+
     public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Herbs.WILDROOT))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.WILDROOT, ModItems.Herbs.WILDROOT))
       .register();
 
     public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.CLOUD_BERRY))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.CLOUD_BERRY, ModItems.Herbs.CLOUD_BERRY))
       .register();
 
     public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.Herbs.DEWGONIA))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.DEWGONIA, ModItems.Herbs.DEWGONIA))
       .register();
 
     public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.INFERNO_BULB))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::crossBlockstate)
       .tag(RootsAPI.Tags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(ElementalCropBlock.AGE, ModItems.Herbs.INFERNO_BULB, ModItems.Herbs.INFERNO_BULB))
       .register();
 
     public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.STALICRIPE))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(ElementalCropBlock.AGE, ModItems.Herbs.STALICRIPE, ModItems.Herbs.STALICRIPE))
       .register();
 
     public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.MOONGLOW_SEEDS))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(SeededCropsBlock.AGE, ModItems.Herbs.MOONGLOW_SEEDS, ModItems.Herbs.MOONGLOW))
       .register();
     public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.PERESKIA_BULB))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::crossBlockstate)
       .tag(RootsAPI.Tags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(SeededCropsBlock.AGE, ModItems.Herbs.PERESKIA_BULB, ModItems.Herbs.PERESKIA))
       .register();
     public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Herbs.SPIRITLEAF_SEEDS))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.SPIRITLEAF, ModItems.Herbs.SPIRITLEAF_SEEDS))
       .register();
     public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.WILDEWHEET_SEEDS))
-      .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.WHEAT))
+      .properties(CROP_PROPERTIES)
       .blockstate(BlockstateGenerator::cropBlockstate)
       .tag(RootsAPI.Tags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
+      .loot(cropLoot(SeededCropsBlock.AGE, ModItems.Herbs.WILDEWHEET, ModItems.Herbs.WILDEWHEET_SEEDS))
+      .register();
+
+    public static BlockEntry<SeededCropsBlock> AUBERGINE_CROP = REGISTRATE.block("aubergine_crop", (b) -> new SeededCropsBlock(b, () -> ModItems.Herbs.AUBERGINE_SEEDS.get()::asItem))
+      .properties(CROP_PROPERTIES)
+      .loot(cropLoot(SeededCropsBlock.AGE, ModItems.Herbs.AUBERGINE, ModItems.Herbs.AUBERGINE_SEEDS))
+      .blockstate(BlockstateGenerator::cropBlockstate)
+      .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
       .register();
 
     public static void load() {

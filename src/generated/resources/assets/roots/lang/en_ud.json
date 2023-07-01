@@ -1,5 +1,6 @@
 {
   "block.roots.aqueous_soil": "ןıoS snoǝnbⱯ",
+  "block.roots.aubergine_crop": "doɹƆ ǝuıbɹǝqnⱯ",
   "block.roots.bafflecap": "dɐɔǝןɟɟɐᗺ",
   "block.roots.bafflecap_block": "ʞɔoןᗺ dɐɔǝןɟɟɐᗺ",
   "block.roots.caelic_soil": "ןıoS ɔıןǝɐƆ",
@@ -132,6 +133,8 @@
   "herb.roots.wildroot": "ʇooɹpןıM",
   "item.roots.acacia_bark": "ʞɹɐᗺ ɐıɔɐɔⱯ",
   "item.roots.apothecary_pouch": "ɥɔnoԀ ʎɹɐɔǝɥʇodⱯ",
+  "item.roots.aubergine": "ǝuıbɹǝqnⱯ",
+  "item.roots.aubergine_seeds": "spǝǝS ǝuıbɹǝqnⱯ",
   "item.roots.bafflecap": "dɐɔǝןɟɟɐᗺ",
   "item.roots.birch_bark": "ʞɹɐᗺ ɥɔɹıᗺ",
   "item.roots.cloud_berry": "ʎɹɹǝᗺ pnoןƆ",
