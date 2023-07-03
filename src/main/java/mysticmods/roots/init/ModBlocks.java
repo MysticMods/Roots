@@ -948,146 +948,147 @@ public class ModBlocks {
     .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, net.minecraftforge.common.Tags.Blocks.FENCE_GATES_WOODEN, BlockTags.MINEABLE_WITH_AXE)
     .register();
 
-  public static class Crops {
-    private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> cropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier, Supplier<? extends Item> productSupplier) {
-      return (p, t) -> {
-        int maxValue = Collections.max(property.getPossibleValues());
-        p.add(t, RegistrateBlockLootTables.
-          createCropDrops(t, productSupplier.get(), seedSupplier.get(),
-            new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, maxValue))));
-      };
-    }
-
-    private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> seedlessCropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier) {
-      return (p, t) -> {
-        LootItemCondition.Builder grown = new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, Collections.max(property.getPossibleValues())));
-        p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(seedSupplier.get()).when(grown).otherwise(LootItem.lootTableItem(seedSupplier.get())))).withPool(LootPool.lootPool().when(grown).add(LootItem.lootTableItem(seedSupplier.get())))));
-      };
-    }
-
-    public static NonNullUnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = r -> BlockBehaviour.Properties.copy(Blocks.WHEAT);
-
-    public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Herbs.WILDROOT))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::cropBlockstate)
-      .tag(RootsAPI.Tags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.WILDROOT))
-      .register();
-
-    public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.CLOUD_BERRY))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::cropBlockstate)
-      .tag(RootsAPI.Tags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.CLOUD_BERRY))
-      .register();
-
-    public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.Herbs.DEWGONIA))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::cropBlockstate)
-      .tag(RootsAPI.Tags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.DEWGONIA))
-      .register();
-
-    public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.INFERNO_BULB))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::crossBlockstate)
-      .tag(RootsAPI.Tags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.Herbs.INFERNO_BULB))
-      .register();
-
-    public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.Herbs.STALICRIPE))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::cropBlockstate)
-      .tag(RootsAPI.Tags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.Herbs.STALICRIPE))
-      .register();
-
-    public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.MOONGLOW_SEEDS))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::cropBlockstate)
-      .tag(RootsAPI.Tags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(SeededCropsBlock.AGE, ModItems.Herbs.MOONGLOW_SEEDS, ModItems.Herbs.MOONGLOW))
-      .register();
-    public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.PERESKIA_BULB))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::crossBlockstate)
-      .tag(RootsAPI.Tags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(SeededCropsBlock.AGE, ModItems.Herbs.PERESKIA_BULB, ModItems.Herbs.PERESKIA))
-      .register();
-    public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.Herbs.SPIRITLEAF_SEEDS))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::cropBlockstate)
-      .tag(RootsAPI.Tags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.Herbs.SPIRITLEAF, ModItems.Herbs.SPIRITLEAF_SEEDS))
-      .register();
-    public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.Herbs.WILDEWHEET_SEEDS))
-      .properties(CROP_PROPERTIES)
-      .blockstate(BlockstateGenerator::cropBlockstate)
-      .tag(RootsAPI.Tags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
-      .loot(cropLoot(SeededCropsBlock.AGE, ModItems.Herbs.WILDEWHEET, ModItems.Herbs.WILDEWHEET_SEEDS))
-      .register();
-
-    public static BlockEntry<SeededCropsBlock> AUBERGINE_CROP = REGISTRATE.block("aubergine_crop", (b) -> new SeededCropsBlock(b, () -> ModItems.Herbs.AUBERGINE_SEEDS.get()::asItem))
-      .properties(CROP_PROPERTIES)
-      .loot(cropLoot(SeededCropsBlock.AGE, ModItems.Herbs.AUBERGINE, ModItems.Herbs.AUBERGINE_SEEDS))
-      .blockstate(BlockstateGenerator::cropBlockstate)
-      .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
-      .register();
-
-    public static void load() {
-    }
+  private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> cropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier, Supplier<? extends Item> productSupplier) {
+    return (p, t) -> {
+      int maxValue = Collections.max(property.getPossibleValues());
+      p.add(t, RegistrateBlockLootTables.
+        createCropDrops(t, productSupplier.get(), seedSupplier.get(),
+          new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, maxValue))));
+    };
   }
 
-  public static class Soils {
-    public static NonNullUnaryOperator<BlockBehaviour.Properties> SOIL_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DIRT);
-
-    public static BlockEntry<ElementalSoilBlock> AQUEOUS_SOIL = REGISTRATE.block("aqueous_soil", ElementalSoilBlock::new)
-      .properties(SOIL_PROPERTIES)
-      .blockstate(BlockstateGenerator.pillar("block/water_soil_side", "block/water_soil_top"))
-      .item()
-      .model(ItemModelGenerator::itemModel)
-      .build()
-      .tag(RootsAPI.Tags.Blocks.WATER_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
-      .register();
-
-    public static BlockEntry<ElementalSoilBlock> CAELIC_SOIL = REGISTRATE.block("caelic_soil", ElementalSoilBlock::new)
-      .properties(SOIL_PROPERTIES)
-      .blockstate(BlockstateGenerator.pillar("block/air_soil_side", "block/air_soil_top"))
-      .item()
-      .model(ItemModelGenerator::itemModel)
-      .build()
-      .tag(RootsAPI.Tags.Blocks.AIR_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
-      .register();
-
-    public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new)
-      .properties(SOIL_PROPERTIES)
-      .item()
-      .model(ItemModelGenerator::itemModel)
-      .build()
-      .tag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
-      .register();
-
-    public static BlockEntry<ElementalSoilBlock> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", ElementalSoilBlock::new)
-      .properties(SOIL_PROPERTIES)
-      .blockstate(BlockstateGenerator.pillar("block/fire_soil_side", "block/fire_soil_top"))
-      .item()
-      .model(ItemModelGenerator::itemModel)
-      .build()
-      .tag(RootsAPI.Tags.Blocks.FIRE_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
-      .register();
-
-    public static BlockEntry<ElementalSoilBlock> TERRAN_SOIL = REGISTRATE.block("terran_soil", ElementalSoilBlock::new)
-      .properties(SOIL_PROPERTIES)
-      .blockstate(BlockstateGenerator.pillar("block/earth_soil_side", "block/earth_soil_top"))
-      .item()
-      .model(ItemModelGenerator::itemModel)
-      .build()
-      .tag(RootsAPI.Tags.Blocks.EARTH_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
-      .register();
-
-    public static void load() {
-    }
+  private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> seedlessCropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier) {
+    return (p, t) -> {
+      LootItemCondition.Builder grown = new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, Collections.max(property.getPossibleValues())));
+      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(seedSupplier.get()).when(grown).otherwise(LootItem.lootTableItem(seedSupplier.get())))).withPool(LootPool.lootPool().when(grown).add(LootItem.lootTableItem(seedSupplier.get())))));
+    };
   }
+
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = r -> BlockBehaviour.Properties.copy(Blocks.WHEAT);
+
+  public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.WILDROOT))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsAPI.Tags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.WILDROOT))
+    .register();
+
+  public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.CLOUD_BERRY))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsAPI.Tags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.CLOUD_BERRY))
+    .register();
+
+  public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.DEWGONIA))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsAPI.Tags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.DEWGONIA))
+    .register();
+
+  public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.INFERNO_BULB))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::crossBlockstate)
+    .tag(RootsAPI.Tags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.INFERNO_BULB))
+    .register();
+
+  public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.STALICRIPE))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsAPI.Tags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.STALICRIPE))
+    .register();
+
+  public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.MOONGLOW_SEEDS))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsAPI.Tags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.MOONGLOW_SEEDS, ModItems.MOONGLOW))
+    .register();
+  public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.PERESKIA_BULB))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::crossBlockstate)
+    .tag(RootsAPI.Tags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.PERESKIA_BULB, ModItems.PERESKIA))
+    .register();
+  public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.SPIRITLEAF_SEEDS))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsAPI.Tags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.SPIRITLEAF, ModItems.SPIRITLEAF_SEEDS))
+    .register();
+  public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.WILDEWHEET_SEEDS))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsAPI.Tags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.WILDEWHEET, ModItems.WILDEWHEET_SEEDS))
+    .register();
+
+  public static BlockEntry<SeededCropsBlock> AUBERGINE_CROP = REGISTRATE.block("aubergine_crop", (b) -> new SeededCropsBlock(b, () -> ModItems.AUBERGINE_SEEDS.get()::asItem))
+    .properties(CROP_PROPERTIES)
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.AUBERGINE, ModItems.AUBERGINE_SEEDS))
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
+    .register();
+
+  public static BlockEntry<BaseBlocks.WildCropBlock> WILD_AUBERGINE = REGISTRATE.block("wild_aubergine", (b) -> new BaseBlocks.WildCropBlock(b, RootsAPI.Tags.Blocks.SUPPORTS_WILD_AUBERGINE))
+    .properties(o -> Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.CROP).randomTicks())
+    .loot((p, t) -> p.add(t, LootTable.lootTable().withPool(RegistrateBlockLootTables.applyExplosionCondition(ModItems.AUBERGINE.get(), LootPool.lootPool().setRolls(UniformGenerator.between(1, 3)).add(LootItem.lootTableItem(ModItems.AUBERGINE.get())))).withPool(RegistrateBlockLootTables.applyExplosionCondition(ModItems.AUBERGINE_SEEDS.get(), LootPool.lootPool().setRolls(UniformGenerator.between(1, 2)).add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()))))))
+    .blockstate((ctx, p) ->
+      p.getVariantBuilder(ctx.getEntry())
+        .partialState()
+        .addModels(new ConfiguredModel(p.models().crop(ctx.getName(), p.blockTexture(ctx.getEntry()))))
+    )
+    .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
+    .register();
+
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> SOIL_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DIRT);
+
+  public static BlockEntry<ElementalSoilBlock> AQUEOUS_SOIL = REGISTRATE.block("aqueous_soil", ElementalSoilBlock::new)
+    .properties(SOIL_PROPERTIES)
+    .blockstate(BlockstateGenerator.pillar("block/water_soil_side", "block/water_soil_top"))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsAPI.Tags.Blocks.WATER_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
+    .register();
+
+  public static BlockEntry<ElementalSoilBlock> CAELIC_SOIL = REGISTRATE.block("caelic_soil", ElementalSoilBlock::new)
+    .properties(SOIL_PROPERTIES)
+    .blockstate(BlockstateGenerator.pillar("block/air_soil_side", "block/air_soil_top"))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsAPI.Tags.Blocks.AIR_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
+    .register();
+
+  public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new)
+    .properties(SOIL_PROPERTIES)
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
+    .register();
+
+  public static BlockEntry<ElementalSoilBlock> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", ElementalSoilBlock::new)
+    .properties(SOIL_PROPERTIES)
+    .blockstate(BlockstateGenerator.pillar("block/fire_soil_side", "block/fire_soil_top"))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsAPI.Tags.Blocks.FIRE_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
+    .register();
+
+  public static BlockEntry<ElementalSoilBlock> TERRAN_SOIL = REGISTRATE.block("terran_soil", ElementalSoilBlock::new)
+    .properties(SOIL_PROPERTIES)
+    .blockstate(BlockstateGenerator.pillar("block/earth_soil_side", "block/earth_soil_top"))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsAPI.Tags.Blocks.EARTH_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
+    .register();
 
   public static final NonNullUnaryOperator<BlockBehaviour.Properties> BASE_PROPERTIES = r -> r.dynamicShape().noOcclusion().strength(1.5f).sound(SoundType.STONE);
   public static final NonNullUnaryOperator<BlockBehaviour.Properties> BASE_WOODEN_PROPERTIES = r -> BASE_PROPERTIES.apply(r).sound(SoundType.WOOD);
@@ -1168,7 +1169,7 @@ public class ModBlocks {
         OctahedralGroup
       })*/
     .loot((ctx, p) -> {
-      ctx.add(p, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.Herbs.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f)))))));
+      ctx.add(p, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f)))))));
     })
     .item()
     .model(ItemModelGenerator::complexItemModel)
@@ -1179,7 +1180,7 @@ public class ModBlocks {
   public static BlockEntry<CreepingGroveMossBlock> CREEPING_GROVE_MOSS = REGISTRATE.block("creeping_grove_moss", Material.GRASS, CreepingGroveMossBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET))
     .loot((p, t) -> {
-      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.Herbs.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.Herbs.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.Herbs.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f)))))));
+      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f)))))));
     })
     .blockstate((ctx, p) -> {
       p.simpleBlock(ctx.getEntry(), p.models().singleTexture(ctx.getName(), new ResourceLocation("minecraft", "block/carpet"), "wool", p.modLoc("block/creeping_grove_moss")));
@@ -1328,7 +1329,5 @@ public class ModBlocks {
     .register();
 
   public static void load() {
-    Soils.load();
-    Crops.load();
   }
 }

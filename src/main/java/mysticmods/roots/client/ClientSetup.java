@@ -20,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
+  @SuppressWarnings("removal")
   @SubscribeEvent
   public static void clientSetup(FMLClientSetupEvent event) {
     RenderType cutout = RenderType.cutoutMipped();
@@ -27,6 +28,7 @@ public class ClientSetup {
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEY_LIGHT.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.CREEPING_GROVE_MOSS.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.BAFFLECAP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_AUBERGINE.get(), cutout);
   }
 
   @SubscribeEvent

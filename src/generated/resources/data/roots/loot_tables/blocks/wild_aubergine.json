@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "roots:aubergine"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "roots:aubergine_seeds"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    }
+  ]
+}

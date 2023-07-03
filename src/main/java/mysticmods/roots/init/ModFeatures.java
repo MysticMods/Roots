@@ -2,35 +2,36 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.worldgen.features.SupportingDirectionalBlockFeature;
+import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
-import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
-import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
+import java.util.Set;
 
 public class ModFeatures {
   private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registry.FEATURE_REGISTRY, RootsAPI.MODID);
@@ -41,11 +42,21 @@ public class ModFeatures {
 
   public static RegistryObject<BlockPredicateType<MatchingTreePredicate>> MATCHING_TREE_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreePredicate.CODEC);
   public static RegistryObject<PlacementModifierType<HeightmapYRange>> HEIGHTMAP_Y_RANGE = PLACEMENT_MODIFIER.register("heightmap_y_range", () -> () -> HeightmapYRange.CODEC);
+  public static RegistryObject<PlacementModifierType<DimensionPlacement>> DIMENSION_PLACEMENT = PLACEMENT_MODIFIER.register("dimension_placement", () -> () -> DimensionPlacement.CODEC);
 
+  // Features
+  public static RegistryObject<SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
+
+  // Configured Features
   public static RegistryObject<ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> HUGE_BAFFLECAP = CONFIGURED_FEATURES.register("huge_bafflecap", () -> new ConfiguredFeature<>(Feature.HUGE_RED_MUSHROOM, new HugeMushroomFeatureConfiguration(BlockStateProvider.simple(ModBlocks.BAFFLECAP_BLOCK.getDefaultState().setValue(HugeMushroomBlock.DOWN, false)), BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
 
-  public static RegistryObject<SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
   public static RegistryObject<ConfiguredFeature<SimpleBlockConfiguration, ?>> WILD_ROOTS_CONFIGURED_FEATURE = CONFIGURED_FEATURES.register("wild_roots", () -> new ConfiguredFeature<>(SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.getDefaultState()))));
+
+  private static final RegistryObject<ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE = CONFIGURED_FEATURES.register("wild_aubergine", () -> new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_AUBERGINE.getDefaultState()))));
+
+  private static final RegistryObject<ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE_PATCH = CONFIGURED_FEATURES.register("wild_aubergine_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(20, 3, 2, ModFeatures.WILD_AUBERGINE.getHolder().get())));
+
+  // Place features
   public static RegistryObject<PlacedFeature> WILD_ROOTS_UNDERGROUND_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_underground", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(
           CountPlacement.of(40), // How many attempts per chunk
           InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
@@ -58,8 +69,20 @@ public class ModFeatures {
           HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
           RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
           BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
-          CountPlacement.of(5), // make 5 new attempts for each position at the log
+          CountPlacement.of(4), // make 5 new attempts for each position at the log
           RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
+  )));
+
+  private static final RegistryObject<PlacedFeature> WILD_AUBERGINE = PLACED_FEATURES.register("wild_aubergine", () -> new PlacedFeature(ModFeatures.CONFIGURED_WILD_AUBERGINE.getHolder().get(), List.of(
+    BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.wouldSurvive(ModBlocks.WILD_AUBERGINE.getDefaultState(), BlockPos.ZERO)))
+  )));
+
+  public static final RegistryObject<PlacedFeature> WILD_AUBERGINE_PATCH = PLACED_FEATURES.register("wild_aubergine_patch", () -> new PlacedFeature(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH.getHolder().get(), List.of(
+    CountPlacement.of(1),
+    InSquarePlacement.spread(),
+    HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
+    RarityFilter.onAverageOnceEvery(30),
+    DimensionPlacement.of(Set.of(Level.OVERWORLD))
   )));
 
   public static void register (IEventBus bus) {

@@ -1,10 +1,6 @@
 {
   "values": [
     "roots:wildwood_leaves",
-    "roots:wild_roots",
-    "roots:creeping_grove_moss",
-    "roots:bafflecap",
-    "roots:bafflecap_block",
     "roots:wildroot_crop",
     "roots:cloud_berry_crop",
     "roots:dewgonia_crop",
@@ -14,6 +10,11 @@
     "roots:pereskia_crop",
     "roots:spiritleaf_crop",
     "roots:wildewheet_crop",
-    "roots:aubergine_crop"
+    "roots:aubergine_crop",
+    "roots:wild_aubergine",
+    "roots:wild_roots",
+    "roots:creeping_grove_moss",
+    "roots:bafflecap",
+    "roots:bafflecap_block"
   ]
 }

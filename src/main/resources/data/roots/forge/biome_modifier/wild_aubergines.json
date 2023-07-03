@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#roots:wild_aubergine_biomes",
+  "features": "roots:wild_aubergine_patch",
+  "step": "top_layer_modification"
+}

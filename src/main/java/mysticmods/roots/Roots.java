@@ -42,7 +42,7 @@ public class Roots {
   public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(RootsAPI.MODID) {
     @Override
     public ItemStack makeIcon() {
-      return new ItemStack(ModItems.Herbs.WILDROOT.get());
+      return new ItemStack(ModItems.WILDROOT.get());
     }
   };
 

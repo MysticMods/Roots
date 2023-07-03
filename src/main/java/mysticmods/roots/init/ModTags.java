@@ -40,7 +40,8 @@ public class ModTags {
 
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
       // Internal mod tags
-      b.tag(RootsAPI.Tags.Blocks.MOIST).add(Blocks.PACKED_ICE, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.MUD, Blocks.POWDER_SNOW, Blocks.PUMPKIN, Blocks.MELON, Blocks.SNOW_BLOCK, Blocks.ICE, Blocks.WATER, Blocks.WET_SPONGE, Blocks.CLAY, Blocks.HONEYCOMB_BLOCK, Blocks.HONEY_BLOCK, Blocks.MOSS_BLOCK, Blocks.BLUE_ICE).add(ModBlocks.Soils.ELEMENTAL_SOIL.get());
+      b.tag(RootsAPI.Tags.Blocks.MOIST).add(Blocks.PACKED_ICE, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.MUD, Blocks.POWDER_SNOW, Blocks.PUMPKIN, Blocks.MELON, Blocks.SNOW_BLOCK, Blocks.ICE, Blocks.WATER, Blocks.WET_SPONGE, Blocks.CLAY, Blocks.HONEYCOMB_BLOCK, Blocks.HONEY_BLOCK, Blocks.MOSS_BLOCK, Blocks.BLUE_ICE).add(ModBlocks.ELEMENTAL_SOIL.get());
+      b.tag(RootsAPI.Tags.Blocks.SUPPORTS_WILD_AUBERGINE).addTag(BlockTags.DIRT);
       b.tag(RootsAPI.Tags.Blocks.SUPPORTS_WILD_ROOTS).addTags(BlockTags.BASE_STONE_OVERWORLD, BlockTags.DIRT, BlockTags.MOSS_REPLACEABLE).add(Blocks.MOSS_BLOCK, Blocks.SNOW_BLOCK, Blocks.GRAVEL, Blocks.CLAY);
       b.tag(RootsAPI.Tags.Blocks.PEDESTALS).addTags(RootsAPI.Tags.Blocks.RITUAL_PEDESTALS, RootsAPI.Tags.Blocks.GROVE_PEDESTALS);
       b.tag(RootsAPI.Tags.Blocks.SOILS).addTag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL);

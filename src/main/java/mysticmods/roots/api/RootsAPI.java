@@ -187,6 +187,8 @@ public abstract class RootsAPI {
 
       public static final TagKey<Block> SUPPORTS_WILD_ROOTS = modTag("supports_wild_roots");
 
+      public static final TagKey<Block> SUPPORTS_WILD_AUBERGINE = modTag("supports_wild_aubergine");
+
       public static final TagKey<Block> NYI = modTag("nyi");
 
       private static TagKey<Block> modTag(String name) {
