@@ -16,10 +16,12 @@ import mysticmods.roots.block.crop.WaterElementalCropBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -1042,6 +1044,25 @@ public class ModBlocks {
         .addModels(new ConfiguredModel(p.models().crop(ctx.getName(), p.blockTexture(ctx.getEntry()))))
     )
     .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
+    .register();
+
+  public static BlockEntry<PetrifiedFlowerBlock> STONEPETAL = REGISTRATE.block("stonepetal", Material.PLANT, PetrifiedFlowerBlock::new)
+    .properties(o -> o.noCollission().instabreak().sound(SoundType.GRASS))
+    .blockstate((ctx, p) -> p.getVariantBuilder(ctx.getEntry()).partialState().setModels(new ConfiguredModel(p.models().cross(ctx.getName(), p.blockTexture(ctx.getEntry())))))
+    .item()
+    .model(ItemModelGenerator::generated)
+    .build()
+    .tag(RootsAPI.Tags.Blocks.STONEPETAL, BlockTags.MINEABLE_WITH_HOE)
+    .recipe((ctx, p) -> {
+      DataIngredient a = DataIngredient.items(ModBlocks.STONEPETAL.get());
+      ShapelessRecipeBuilder.shapeless(Items.GRAY_DYE, 4).requires(ctx.getEntry()).unlockedBy("has_stonepetal", a.getCritereon(p)).save(p, new ResourceLocation(RootsAPI.MODID, "gray_dye_from_stonepetal"));
+    })
+    .register();
+
+  public static BlockEntry<FlowerPotBlock> POTTED_STONEPETAL = REGISTRATE.block("potted_stonepetal", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.STONEPETAL, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
+    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/stonepetal"))))
+    .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.STONEPETAL.get())))
+    .tag(BlockTags.FLOWER_POTS)
     .register();
 
   public static NonNullUnaryOperator<BlockBehaviour.Properties> SOIL_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DIRT);

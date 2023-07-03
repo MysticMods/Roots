@@ -1,0 +1,23 @@
+{
+  "type": "roots:add_grass_drops",
+  "conditions": [
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.1
+    },
+    {
+      "condition": "minecraft:inverted",
+      "term": {
+        "condition": "minecraft:match_tool",
+        "predicate": {
+          "tag": "forge:shears"
+        }
+      }
+    },
+    {
+      "condition": "roots:block_tag",
+      "block": "roots:grass"
+    }
+  ],
+  "item": "roots:aubergine_seeds"
+}

@@ -189,6 +189,12 @@ public abstract class RootsAPI {
 
       public static final TagKey<Block> SUPPORTS_WILD_AUBERGINE = modTag("supports_wild_aubergine");
 
+      public static final TagKey<Block> SUPPORTS_STONEPETAL = modTag("supports_stonepetal");
+
+      public static final TagKey<Block> STONEPETAL = modTag("stonepetal");
+
+      public static final TagKey<Block> GRASS = modTag("grass");
+
       public static final TagKey<Block> NYI = modTag("nyi");
 
       private static TagKey<Block> modTag(String name) {
