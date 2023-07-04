@@ -1,6 +1,6 @@
 package mysticmods.roots.block;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
@@ -25,7 +25,7 @@ public class PetrifiedFlowerBlock extends FlowerBlock {
 
   @Override
   protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-    return state.is(RootsAPI.Tags.Blocks.SUPPORTS_STONEPETAL);
+    return state.is(RootsTags.Blocks.SUPPORTS_STONEPETAL);
   }
 
   @Override

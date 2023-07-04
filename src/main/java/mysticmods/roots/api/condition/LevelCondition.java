@@ -1,6 +1,6 @@
 package mysticmods.roots.api.condition;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.core.BlockPos;
@@ -104,7 +104,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
   }
 
   public static LevelCondition.PillarCondition runePillar(int height) {
-    return new LevelCondition.PillarCondition(RootsAPI.Tags.Blocks.RUNE_CAPSTONES, RootsAPI.Tags.Blocks.RUNE_PILLARS, height);
+    return new LevelCondition.PillarCondition(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Blocks.RUNE_PILLARS, height);
   }
 
   public static LevelCondition.PillarCondition logPillar(PillarType type, int height) {
@@ -112,15 +112,15 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
   }
 
   public enum PillarType {
-    ACACIA(RootsAPI.Tags.Blocks.ACACIA_PILLARS, RootsAPI.Tags.Blocks.ACACIA_CAPSTONES),
-    BIRCH(RootsAPI.Tags.Blocks.BIRCH_PILLARS, RootsAPI.Tags.Blocks.BIRCH_CAPSTONES),
-    DARK_OAK(RootsAPI.Tags.Blocks.DARK_OAK_PILLARS, RootsAPI.Tags.Blocks.DARK_OAK_CAPSTONES),
-    JUNGLE(RootsAPI.Tags.Blocks.JUNGLE_PILLARS, RootsAPI.Tags.Blocks.JUNGLE_CAPSTONES),
-    OAK(RootsAPI.Tags.Blocks.OAK_PILLARS, RootsAPI.Tags.Blocks.OAK_CAPSTONES),
-    SPRUCE(RootsAPI.Tags.Blocks.SPRUCE_PILLARS, RootsAPI.Tags.Blocks.SPRUCE_CAPSTONES),
-    CRIMSON(RootsAPI.Tags.Blocks.CRIMSON_PILLARS, RootsAPI.Tags.Blocks.CRIMSON_CAPSTONES),
-    WARPED(RootsAPI.Tags.Blocks.WARPED_PILLARS, RootsAPI.Tags.Blocks.WARPED_CAPSTONES),
-    WILDWOOD(RootsAPI.Tags.Blocks.WILDWOOD_PILLARS, RootsAPI.Tags.Blocks.WILDWOOD_CAPSTONES);
+    ACACIA(RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Blocks.ACACIA_CAPSTONES),
+    BIRCH(RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Blocks.BIRCH_CAPSTONES),
+    DARK_OAK(RootsTags.Blocks.DARK_OAK_PILLARS, RootsTags.Blocks.DARK_OAK_CAPSTONES),
+    JUNGLE(RootsTags.Blocks.JUNGLE_PILLARS, RootsTags.Blocks.JUNGLE_CAPSTONES),
+    OAK(RootsTags.Blocks.OAK_PILLARS, RootsTags.Blocks.OAK_CAPSTONES),
+    SPRUCE(RootsTags.Blocks.SPRUCE_PILLARS, RootsTags.Blocks.SPRUCE_CAPSTONES),
+    CRIMSON(RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Blocks.CRIMSON_CAPSTONES),
+    WARPED(RootsTags.Blocks.WARPED_PILLARS, RootsTags.Blocks.WARPED_CAPSTONES),
+    WILDWOOD(RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.WILDWOOD_CAPSTONES);
 
     private final TagKey<Block> pillarTag;
     private final TagKey<Block> capstoneTag;

@@ -1,6 +1,6 @@
 package mysticmods.roots.api.herb;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
@@ -31,7 +31,7 @@ public class Herb extends StyledRegistryEntry<Herb> {
   @Nullable
   // TODO: this should go somewhere else
   public static Herb getHerb(ItemStack stack) {
-    if (!stack.is(RootsAPI.Tags.Items.Herbs.HERBS)) {
+    if (!stack.is(RootsTags.Items.Herbs.HERBS)) {
       return null;
     }
     Herb potential = herbCache.get(stack.getItem());

@@ -1,7 +1,7 @@
 package mysticmods.roots.api.spell;
 
 import com.google.common.collect.ImmutableList;
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.item.ICastingItem;
 import mysticmods.roots.api.modifier.Modifier;
 import net.minecraft.nbt.CompoundTag;
@@ -197,7 +197,7 @@ public class SpellStorage {
 
   @Nullable
   public static SpellStorage fromItem(ItemStack stack, boolean create) {
-    if (!stack.is(RootsAPI.Tags.Items.CASTING_TOOLS)) {
+    if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
       return null;
     }
 

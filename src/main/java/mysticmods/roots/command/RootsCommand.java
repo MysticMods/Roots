@@ -3,7 +3,7 @@ package mysticmods.roots.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellStorage;
@@ -54,7 +54,7 @@ public class RootsCommand {
       ServerPlayer player = c.getSource().getPlayerOrException();
       boolean newStaff = false;
       ItemStack staff;
-      if (player.getItemInHand(InteractionHand.MAIN_HAND).is(RootsAPI.Tags.Items.CASTING_TOOLS)) {
+      if (player.getItemInHand(InteractionHand.MAIN_HAND).is(RootsTags.Items.CASTING_TOOLS)) {
         staff = player.getItemInHand(InteractionHand.MAIN_HAND);
       } else {
         newStaff = true;

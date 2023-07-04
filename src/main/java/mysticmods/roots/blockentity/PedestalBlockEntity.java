@@ -1,9 +1,8 @@
 package mysticmods.roots.blockentity;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
-import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -43,7 +42,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
-    boolean limited = state.is(RootsAPI.Tags.Blocks.LIMITED_PEDESTALS);
+    boolean limited = state.is(RootsTags.Blocks.LIMITED_PEDESTALS);
 
     // TODO: Swap instead
     ItemStack inHand = player.getItemInHand(hand);
@@ -122,9 +121,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   public double offset() {
     if (offset == -1) {
-      if (this.getBlockState().is(RootsAPI.Tags.Blocks.RITUAL_PEDESTALS)) {
+      if (this.getBlockState().is(RootsTags.Blocks.RITUAL_PEDESTALS)) {
         offset = 1.4;
-      } else if (this.getBlockState().is(RootsAPI.Tags.Blocks.GROVE_PEDESTALS)) {
+      } else if (this.getBlockState().is(RootsTags.Blocks.GROVE_PEDESTALS)) {
         offset = 0.95;
       }
     }

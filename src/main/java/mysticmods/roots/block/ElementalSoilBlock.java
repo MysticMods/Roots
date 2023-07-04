@@ -1,6 +1,6 @@
 package mysticmods.roots.block;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -17,6 +17,6 @@ public class ElementalSoilBlock extends Block {
     @Override
     public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
         PlantType type = plantable.getPlantType(world, pos);
-        return type != PlantType.WATER || state.is(RootsAPI.Tags.Blocks.WATER_SOIL);
+        return type != PlantType.WATER || state.is(RootsTags.Blocks.WATER_SOIL);
     }
 }

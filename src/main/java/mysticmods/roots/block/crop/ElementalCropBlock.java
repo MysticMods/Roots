@@ -1,6 +1,6 @@
 package mysticmods.roots.block.crop;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -23,7 +23,7 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
   public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
     // TODO: Properly implement
     BlockState stateBelow = pLevel.getBlockState(pPos.below());
-    if (pRandom.nextInt(stateBelow.is(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL) ? ELEMENTAL_TICK : BASE_TICK) != 0) {
+    if (pRandom.nextInt(stateBelow.is(RootsTags.Blocks.ELEMENTAL_SOIL) ? ELEMENTAL_TICK : BASE_TICK) != 0) {
       if (!pLevel.isAreaLoaded(pPos, 1))
         return; // Forge: prevent loading unloaded chunks when checking neighbor's light
       if (pLevel.getRawBrightness(pPos, 0) >= 9) {

@@ -1,6 +1,6 @@
 package mysticmods.roots.item;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -51,7 +51,7 @@ public class FireStarterItem extends Item {
           BlockState stateAt = level.getBlockState(blockpos);
           BlockPos below = blockpos.below();
           BlockState stateBelow = level.getBlockState(below);
-          if (stateBelow.is(RootsAPI.Tags.Blocks.PYRES)) {
+          if (stateBelow.is(RootsTags.Blocks.PYRES)) {
             if (level.getBlockEntity(below) instanceof PyreBlockEntity pyreBlockEntity) {
               level.playSound(player, below, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
               pyreBlockEntity.light(player, below);

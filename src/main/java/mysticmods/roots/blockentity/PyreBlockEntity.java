@@ -1,6 +1,7 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
@@ -42,7 +43,6 @@ import noobanidus.libs.particleslib.init.ModParticles;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 // This controls the LIT state
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {
@@ -89,7 +89,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
       // TODO: starting a ritual while one is already active
-    } else if (inHand.is(RootsAPI.Tags.Items.PYRE_ACTIVATION)) {
+    } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
       return light(player, pos);
     } else {
       // insert
@@ -297,7 +297,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     RandomSource pRandom = pLevel.getRandom();
-    if (pState.is(RootsAPI.Tags.Blocks.PYRES) && pState.getValue(PyreBlock.LIT)) {
+    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.LIT)) {
       Particles.create(ModParticles.FIERY_PARTICLE.get())
           .addVelocity(0.00525f * (pRandom.nextFloat() - 0.5f), 0, 0.00525f * (pRandom.nextFloat() - 0.5f))
           .setAlpha(0.5f, 0.2f)
@@ -318,14 +318,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       setChanged();
       if (lifetime <= 0) {
         currentRitual = null;
-        if (pState.is(RootsAPI.Tags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT)) {
+        if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT)) {
           pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, false), 3);
         } else {
           updateViaState();
         }
       } else {
         currentRitual.tick(this);
-        if (pState.is(RootsAPI.Tags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
+        if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
           pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, true), 3);
         }
       }

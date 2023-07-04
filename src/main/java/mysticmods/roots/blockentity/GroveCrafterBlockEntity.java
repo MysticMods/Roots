@@ -1,6 +1,6 @@
 package mysticmods.roots.blockentity;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -45,7 +45,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     ItemStack inHand = player.getItemInHand(hand);
-    if (inHand.is(RootsAPI.Tags.Items.GROVE_CRAFTER_ACTIVATION)) {
+    if (inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
       GroveCrafting playerCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals()), this, player);
       if (cachedRecipe == null) {
         cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
@@ -126,7 +126,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     if (getBoundingBox() != null) {
       BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
         BlockState state = getLevel().getBlockState(pos);
-        if (state.is(RootsAPI.Tags.Blocks.GROVE_PEDESTALS)) {
+        if (state.is(RootsTags.Blocks.GROVE_PEDESTALS)) {
           if (getLevel().getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
             // Already checks for empty
             if (!pedestal.getHeldItem().isEmpty()) {

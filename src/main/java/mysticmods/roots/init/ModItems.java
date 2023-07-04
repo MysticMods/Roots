@@ -7,6 +7,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.item.FireStarterItem;
 import mysticmods.roots.item.GroveSporesItem;
@@ -28,70 +29,70 @@ public class ModItems {
 
   public static final ItemEntry<ItemNameBlockItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.WILDROOT_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.WILDROOT_CROP)
+    .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.WILDROOT_CROP)
     .defaultLang()
     .register();
   public static final ItemEntry<Item> GROVE_MOSS = REGISTRATE.item("grove_moss", Item::new)
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.GROVE_MOSS_CROP)
+    .tag(RootsTags.Items.GROVE_MOSS_CROP)
     .register();
   public static final ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.CLOUD_BERRY_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.CLOUD_BERRY_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.CLOUD_BERRY_CROP)
+    .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
     .register();
   public static final ItemEntry<ItemNameBlockItem> DEWGONIA = REGISTRATE.item("dewgonia", (p) -> new ItemNameBlockItem(ModBlocks.DEWGONIA_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.DEWGONIA_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.DEWGONIA_CROP)
+    .tag(RootsTags.Items.DEWGONIA_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.DEWGONIA_CROP)
     .register();
   public static final ItemEntry<ItemNameBlockItem> INFERNO_BULB = REGISTRATE.item("inferno_bulb", (p) -> new ItemNameBlockItem(ModBlocks.INFERNO_BULB_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.INFERNO_BULB_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.INFERNO_BULB_CROP)
+    .tag(RootsTags.Items.INFERNO_BULB_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.INFERNO_BULB_CROP)
     .register();
   public static final ItemEntry<ItemNameBlockItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new ItemNameBlockItem(ModBlocks.STALICRIPE_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.STALICRIPE_SEEDS, RootsAPI.Tags.Items.SEEDS, RootsAPI.Tags.Items.STALICRIPE_CROP)
+    .tag(RootsTags.Items.STALICRIPE_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.STALICRIPE_CROP)
     .register();
   public static final ItemEntry<Item> MOONGLOW = REGISTRATE.item("moonglow", Item::new)
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.MOONGLOW_CROP)
+    .tag(RootsTags.Items.MOONGLOW_CROP)
     .register();
   public static final ItemEntry<Item> PERESKIA = REGISTRATE.item("pereskia", Item::new)
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.PERESKIA_CROP)
+    .tag(RootsTags.Items.PERESKIA_CROP)
     .register();
   public static final ItemEntry<Item> SPIRITLEAF = REGISTRATE.item("spiritleaf", Item::new)
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.SPIRITLEAF_CROP)
+    .tag(RootsTags.Items.SPIRITLEAF_CROP)
     .register();
   public static final ItemEntry<Item> WILDEWHEET = REGISTRATE.item("wildewheet", Item::new)
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.WILDEWHEET_CROP)
+    .tag(RootsTags.Items.WILDEWHEET_CROP)
     .register();
 
   public static final ItemEntry<ItemNameBlockItem> BAFFLECAP = REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.BAFFLECAP_CROP)
+    .tag(RootsTags.Items.BAFFLECAP_CROP)
     .register();
   public static final ItemEntry<ItemNameBlockItem> MOONGLOW_SEEDS = REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.MOONGLOW_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.MOONGLOW_SEEDS, RootsAPI.Tags.Items.SEEDS)
+    .tag(RootsTags.Items.MOONGLOW_SEEDS, RootsTags.Items.SEEDS)
     .register();
   public static final ItemEntry<ItemNameBlockItem> PERESKIA_BULB = REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.PERESKIA_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.PERESKIA_SEEDS, RootsAPI.Tags.Items.SEEDS)
+    .tag(RootsTags.Items.PERESKIA_SEEDS, RootsTags.Items.SEEDS)
     .register();
   public static final ItemEntry<ItemNameBlockItem> SPIRITLEAF_SEEDS = REGISTRATE.item("spiritleaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.SPIRITLEAF_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.SPIRITLEAF_SEEDS, RootsAPI.Tags.Items.SEEDS)
+    .tag(RootsTags.Items.SPIRITLEAF_SEEDS, RootsTags.Items.SEEDS)
     .register();
   public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.WILDEWHEET_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.WILDEWHEET_SEEDS, RootsAPI.Tags.Items.SEEDS)
+    .tag(RootsTags.Items.WILDEWHEET_SEEDS, RootsTags.Items.SEEDS)
     .register();
 
   public static final ItemEntry<GroveSporesItem> GROVE_SPORES = REGISTRATE.item("grove_spores", GroveSporesItem::new)
     .model(subfolder("herbs"))
-    .tag(RootsAPI.Tags.Items.SEEDS)
+    .tag(RootsTags.Items.SEEDS)
     .register();
 
   public static RegistryEntry<Item> AUBERGINE = REGISTRATE.item("aubergine", Item::new)
@@ -109,52 +110,52 @@ public class ModItems {
     .register();
 
   public static final ItemEntry<Item> ACACIA_BARK = REGISTRATE.item("acacia_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.ACACIA_BARK)
+    .tag(RootsTags.Items.ACACIA_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> BIRCH_BARK = REGISTRATE.item("birch_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.BIRCH_BARK)
+    .tag(RootsTags.Items.BIRCH_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> DARK_OAK_BARK = REGISTRATE.item("dark_oak_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.DARK_OAK_BARK)
+    .tag(RootsTags.Items.DARK_OAK_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> JUNGLE_BARK = REGISTRATE.item("jungle_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.JUNGLE_BARK)
+    .tag(RootsTags.Items.JUNGLE_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> OAK_BARK = REGISTRATE.item("oak_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.OAK_BARK)
+    .tag(RootsTags.Items.OAK_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> SPRUCE_BARK = REGISTRATE.item("spruce_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.SPRUCE_BARK)
+    .tag(RootsTags.Items.SPRUCE_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> WILDWOOD_BARK = REGISTRATE.item("wildwood_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.WILDWOOD_BARK)
+    .tag(RootsTags.Items.WILDWOOD_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> CRIMSON_BARK = REGISTRATE.item("crimson_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.CRIMSON_BARK)
+    .tag(RootsTags.Items.CRIMSON_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> WARPED_BARK = REGISTRATE.item("warped_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.WARPED_BARK)
+    .tag(RootsTags.Items.WARPED_BARK)
     .model(subfolder("bark"))
     .register();
 
   public static final ItemEntry<Item> MIXED_BARK = REGISTRATE.item("mixed_bark", Item::new)
-    .tag(RootsAPI.Tags.Items.MIXED_BARK)
+    .tag(RootsTags.Items.MIXED_BARK)
     .model(subfolder("bark"))
     .register();
 
@@ -229,7 +230,7 @@ public class ModItems {
     .recipe((ctx, p) -> GroveRecipe.builder(new ItemStack(ctx.getEntry()))
       .addIngredient(Items.WOODEN_PICKAXE)
       .addIngredient(net.minecraftforge.common.Tags.Items.INGOTS_GOLD)
-      .addIngredient(RootsAPI.Tags.Items.WILDROOT_CROP)
+      .addIngredient(RootsTags.Items.WILDROOT_CROP)
       .build(p, new ResourceLocation(RootsAPI.MODID, "living_pickaxe")))
 
     .register();
@@ -244,7 +245,7 @@ public class ModItems {
 
   public static final ItemEntry<Item> PESTLE = REGISTRATE.item("pestle", Item::new)
     .model(subfolder("tools"))
-    .tag(RootsAPI.Tags.Items.MORTAR_ACTIVATION)
+    .tag(RootsTags.Items.MORTAR_ACTIVATION)
     .register();
 
   public static final ItemEntry<Item> RUNED_AXE = REGISTRATE.item("runed_axe", Item::new)
@@ -274,7 +275,7 @@ public class ModItems {
   public static final ItemEntry<CastingItem> STAFF = REGISTRATE.item("staff", CastingItem::new)
     // TODO: CUSTOM MODEL
     .model(subfolder("tools"))
-    .tag(RootsAPI.Tags.Items.CASTING_TOOLS)
+    .tag(RootsTags.Items.CASTING_TOOLS)
     .register();
 
   public static final ItemEntry<Item> WILDWOOD_BOW = REGISTRATE.item("wildwood_bow", Item::new)
@@ -322,7 +323,7 @@ public class ModItems {
   public static final ItemEntry<Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
     .model(subfolder("resources"))
     .recipe((ctx, p) -> MortarRecipe.builder(ctx.getEntry(), 1, 1)
-      .addIngredient(RootsAPI.Tags.Items.Blocks.RUNESTONE)
+      .addIngredient(RootsTags.Items.Blocks.RUNESTONE)
       .build(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
     .register();
 

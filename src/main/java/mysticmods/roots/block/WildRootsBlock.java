@@ -1,6 +1,6 @@
 package mysticmods.roots.block;
 
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -94,7 +94,7 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
     Direction facing = pState.getValue(FACING);
     BlockPos relativePos = pPos.relative(facing.getOpposite());
     BlockState target = pLevel.getBlockState(relativePos);
-    return target.isFaceSturdy(pLevel, relativePos, facing) && target.is(RootsAPI.Tags.Blocks.SUPPORTS_WILD_ROOTS);
+    return target.isFaceSturdy(pLevel, relativePos, facing) && target.is(RootsTags.Blocks.SUPPORTS_WILD_ROOTS);
   }
 
   @Override

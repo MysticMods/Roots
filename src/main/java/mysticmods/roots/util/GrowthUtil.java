@@ -2,7 +2,7 @@ package mysticmods.roots.util;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -28,7 +28,7 @@ public class GrowthUtil {
       state = level.getBlockState(pos);
     }
 
-    if (state.is(RootsAPI.Tags.Blocks.GROWTH_BLACKLIST)) {
+    if (state.is(RootsTags.Blocks.GROWTH_BLACKLIST)) {
       return 0;
     }
 

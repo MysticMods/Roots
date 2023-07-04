@@ -9,6 +9,7 @@ import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
@@ -24,7 +25,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -59,7 +59,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .register();
   public static BlockEntry<Block> CHISELED_RUNED_OBSIDIAN = REGISTRATE.block("chiseled_runed_obsidian", Block::new)
     .properties(RUNED_PROPERTIES)
@@ -67,7 +67,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
     .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -178,7 +178,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = REGISTRATE.block("runed_brick_button", RunedObsidianBlocks.Button::new)
     .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -290,7 +290,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .register();
   public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_ALT_BUTTON = REGISTRATE.block("runed_brick_alt_button", RunedObsidianBlocks.Button::new)
     .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -402,7 +402,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
   public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
     .properties(RUNESTONE_PROPERTIES)
@@ -410,7 +410,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
   public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BUTTON = REGISTRATE.block("runestone_button", BaseBlocks.StoneButtonBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -521,7 +521,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
   public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_BUTTON = REGISTRATE.block("runestone_brick_button", BaseBlocks.StoneButtonBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -632,7 +632,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.RUNED_OBSIDIAN, RootsAPI.Tags.Blocks.RUNE_PILLARS)
+    .tag(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS)
     .register();
   public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_ALT_BUTTON = REGISTRATE.block("runestone_brick_alt_button", BaseBlocks.StoneButtonBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -741,7 +741,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_WILDWOOD_LOG = REGISTRATE.block("runed_wildwood_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_wildwood"), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log_top")))
-    .tag(RootsAPI.Tags.Blocks.WILDWOOD_LOGS, RootsAPI.Tags.Blocks.RUNED_WILDWOOD_LOG, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Blocks.RUNED_WILDWOOD_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -749,7 +749,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_SPRUCE_LOG = REGISTRATE.block("runed_spruce_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_spruce"), new ResourceLocation("minecraft", "block/spruce_log_top")))
-    .tag(BlockTags.SPRUCE_LOGS, RootsAPI.Tags.Blocks.RUNED_SPRUCE_LOG, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.SPRUCE_LOGS, RootsTags.Blocks.RUNED_SPRUCE_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -757,7 +757,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_JUNGLE_LOG = REGISTRATE.block("runed_jungle_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_jungle"), new ResourceLocation("minecraft", "block/jungle_log_top")))
-    .tag(BlockTags.JUNGLE_LOGS, RootsAPI.Tags.Blocks.RUNED_JUNGLE_LOG, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.JUNGLE_LOGS, RootsTags.Blocks.RUNED_JUNGLE_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -765,7 +765,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_BIRCH_LOG = REGISTRATE.block("runed_birch_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_birch"), new ResourceLocation("minecraft", "block/birch_log_top")))
-    .tag(BlockTags.BIRCH_LOGS, RootsAPI.Tags.Blocks.RUNED_BIRCH_LOG, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.BIRCH_LOGS, RootsTags.Blocks.RUNED_BIRCH_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -773,7 +773,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_OAK_LOG = REGISTRATE.block("runed_oak_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_oak"), new ResourceLocation("minecraft", "block/oak_log_top")))
-    .tag(BlockTags.OAK_LOGS, RootsAPI.Tags.Blocks.RUNED_OAK_LOG, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.OAK_LOGS, RootsTags.Blocks.RUNED_OAK_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -781,7 +781,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_DARK_OAK_LOG = REGISTRATE.block("runed_dark_oak_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_dark_oak"), new ResourceLocation("minecraft", "block/dark_oak_log_top")))
-    .tag(BlockTags.DARK_OAK_LOGS, RootsAPI.Tags.Blocks.RUNED_DARK_OAK_LOG, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.DARK_OAK_LOGS, RootsTags.Blocks.RUNED_DARK_OAK_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -789,7 +789,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_ACACIA_LOG = REGISTRATE.block("runed_acacia_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_acacia"), new ResourceLocation("minecraft", "block/acacia_log_top")))
-    .tag(BlockTags.ACACIA_LOGS, RootsAPI.Tags.Blocks.RUNED_ACACIA_LOG, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.ACACIA_LOGS, RootsTags.Blocks.RUNED_ACACIA_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -798,7 +798,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped_stem", RotatedPillarBlock::new)
     .properties(RUNED_STEM_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_warped"), new ResourceLocation("minecraft", "block/warped_stem_top")))
-    .tag(BlockTags.WARPED_STEMS, RootsAPI.Tags.Blocks.RUNED_WARPED_STEM, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.WARPED_STEMS, RootsTags.Blocks.RUNED_WARPED_STEM, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -806,7 +806,7 @@ public class ModBlocks {
   public static BlockEntry<RotatedPillarBlock> RUNED_CRIMSON_STEM = REGISTRATE.block("runed_crimson_stem", RotatedPillarBlock::new)
     .properties(RUNED_STEM_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_crimson"), new ResourceLocation("minecraft", "block/crimson_stem_top")))
-    .tag(BlockTags.CRIMSON_STEMS, RootsAPI.Tags.Blocks.RUNED_CRIMSON_STEM, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.CRIMSON_STEMS, RootsTags.Blocks.RUNED_CRIMSON_STEM, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -839,7 +839,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
     .register();
   public static BlockEntry<RotatedPillarBlock> WILDWOOD_WOOD = REGISTRATE.block("wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
     .properties(WILDWOOD_LOG_PROPERTIES)
@@ -847,7 +847,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
     .register();
   public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_LOG = REGISTRATE.block("stripped_wildwood_log", Material.WOOD, RotatedPillarBlock::new)
     .properties(WILDWOOD_LOG_PROPERTIES)
@@ -855,7 +855,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
     .register();
   public static BlockEntry<RotatedPillarBlock> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Material.WOOD, RotatedPillarBlock::new)
     .properties(WILDWOOD_LOG_PROPERTIES)
@@ -863,7 +863,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
     .register();
   public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LEAVES);
   public static BlockEntry<Block> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", Block::new)
@@ -973,60 +973,60 @@ public class ModBlocks {
   public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.WILDROOT))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsAPI.Tags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.WILDROOT))
     .register();
 
   public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.CLOUD_BERRY))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsAPI.Tags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.CLOUD_BERRY))
     .register();
 
   public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.DEWGONIA))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsAPI.Tags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.DEWGONIA))
     .register();
 
   public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.INFERNO_BULB))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::crossBlockstate)
-    .tag(RootsAPI.Tags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.INFERNO_BULB))
     .register();
 
   public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.STALICRIPE))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsAPI.Tags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.STALICRIPE))
     .register();
 
   public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.MOONGLOW_SEEDS))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsAPI.Tags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(cropLoot(SeededCropsBlock.AGE, ModItems.MOONGLOW_SEEDS, ModItems.MOONGLOW))
     .register();
   public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.PERESKIA_BULB))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::crossBlockstate)
-    .tag(RootsAPI.Tags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(cropLoot(SeededCropsBlock.AGE, ModItems.PERESKIA_BULB, ModItems.PERESKIA))
     .register();
   public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.SPIRITLEAF_SEEDS))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsAPI.Tags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.SPIRITLEAF, ModItems.SPIRITLEAF_SEEDS))
     .register();
   public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.WILDEWHEET_SEEDS))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsAPI.Tags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(cropLoot(SeededCropsBlock.AGE, ModItems.WILDEWHEET, ModItems.WILDEWHEET_SEEDS))
     .register();
 
@@ -1037,7 +1037,7 @@ public class ModBlocks {
     .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
     .register();
 
-  public static BlockEntry<BaseBlocks.WildCropBlock> WILD_AUBERGINE = REGISTRATE.block("wild_aubergine", (b) -> new BaseBlocks.WildCropBlock(b, RootsAPI.Tags.Blocks.SUPPORTS_WILD_AUBERGINE))
+  public static BlockEntry<BaseBlocks.WildCropBlock> WILD_AUBERGINE = REGISTRATE.block("wild_aubergine", (b) -> new BaseBlocks.WildCropBlock(b, RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE))
     .properties(o -> Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.CROP).randomTicks())
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
         .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
@@ -1056,7 +1056,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::generated)
     .build()
-    .tag(RootsAPI.Tags.Blocks.STONEPETAL, BlockTags.MINEABLE_WITH_HOE)
+    .tag(RootsTags.Blocks.STONEPETAL, BlockTags.MINEABLE_WITH_HOE)
     .recipe((ctx, p) -> {
       DataIngredient a = DataIngredient.items(ModBlocks.STONEPETAL.get());
       ShapelessRecipeBuilder.shapeless(Items.GRAY_DYE, 4).requires(ctx.getEntry()).unlockedBy("has_stonepetal", a.getCritereon(p)).save(p, new ResourceLocation(RootsAPI.MODID, "gray_dye_from_stonepetal"));
@@ -1077,7 +1077,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.WATER_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
+    .tag(RootsTags.Blocks.WATER_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsTags.Blocks.NYI)
     .register();
 
   public static BlockEntry<ElementalSoilBlock> CAELIC_SOIL = REGISTRATE.block("caelic_soil", ElementalSoilBlock::new)
@@ -1086,7 +1086,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.AIR_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
+    .tag(RootsTags.Blocks.AIR_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsTags.Blocks.NYI)
     .register();
 
   public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new)
@@ -1094,7 +1094,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.ELEMENTAL_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
+    .tag(RootsTags.Blocks.ELEMENTAL_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
     .register();
 
   public static BlockEntry<ElementalSoilBlock> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", ElementalSoilBlock::new)
@@ -1103,7 +1103,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.FIRE_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
+    .tag(RootsTags.Blocks.FIRE_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsTags.Blocks.NYI)
     .register();
 
   public static BlockEntry<ElementalSoilBlock> TERRAN_SOIL = REGISTRATE.block("terran_soil", ElementalSoilBlock::new)
@@ -1112,7 +1112,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsAPI.Tags.Blocks.EARTH_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsAPI.Tags.Blocks.NYI)
+    .tag(RootsTags.Blocks.EARTH_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsTags.Blocks.NYI)
     .register();
 
   public static final NonNullUnaryOperator<BlockBehaviour.Properties> BASE_PROPERTIES = r -> r.dynamicShape().noOcclusion().strength(1.5f).sound(SoundType.STONE);
@@ -1134,7 +1134,7 @@ public class ModBlocks {
   public static BlockEntry<RitualPedestalBlock> RITUAL_PEDESTAL = REGISTRATE.block("ritual_pedestal", Material.STONE, RitualPedestalBlock::new)
     .properties(BASE_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/ritual_pedestal"))
-    .tag(RootsAPI.Tags.Blocks.PEDESTALS, RootsAPI.Tags.Blocks.RITUAL_PEDESTALS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(RootsTags.Blocks.PEDESTALS, RootsTags.Blocks.RITUAL_PEDESTALS, BlockTags.MINEABLE_WITH_PICKAXE)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1143,7 +1143,7 @@ public class ModBlocks {
   public static BlockEntry<RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = REGISTRATE.block("reinforced_ritual_pedestal", Material.STONE, RitualPedestalBlock::new)
     .properties(BASE_REINFORCED_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_ritual_pedestal"))
-    .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsAPI.Tags.Blocks.PEDESTALS, RootsAPI.Tags.Blocks.RITUAL_PEDESTALS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PEDESTALS, RootsTags.Blocks.RITUAL_PEDESTALS, BlockTags.MINEABLE_WITH_PICKAXE)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1152,7 +1152,7 @@ public class ModBlocks {
   public static BlockEntry<GroveCrafterBlock> GROVE_CRAFTER = REGISTRATE.block("grove_crafter", Material.WOOD, GroveCrafterBlock::new)
     .properties(BASE_WOODEN_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_crafter"))
-    .tag(RootsAPI.Tags.Blocks.CRAFTERS, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.CRAFTERS, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1161,7 +1161,7 @@ public class ModBlocks {
   public static BlockEntry<GrovePedestalBlock> WILDWOOD_PEDESTAL = REGISTRATE.block("wildwood_pedestal", Material.WOOD, GrovePedestalBlock::new)
     .properties(BASE_WOODEN_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/wildwood_pedestal"))
-    .tag(RootsAPI.Tags.Blocks.PEDESTALS, RootsAPI.Tags.Blocks.GROVE_PEDESTALS, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.PEDESTALS, RootsTags.Blocks.GROVE_PEDESTALS, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1170,7 +1170,7 @@ public class ModBlocks {
   public static BlockEntry<GrovePedestalBlock> GROVE_PEDESTAL = REGISTRATE.block("grove_pedestal", Material.WOOD, GrovePedestalBlock::new)
     .properties(BASE_WOODEN_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_pedestal"))
-    .tag(RootsAPI.Tags.Blocks.PEDESTALS, RootsAPI.Tags.Blocks.GROVE_PEDESTALS, RootsAPI.Tags.Blocks.LIMITED_PEDESTALS, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.PEDESTALS, RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.LIMITED_PEDESTALS, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1282,7 +1282,7 @@ public class ModBlocks {
   public static BlockEntry<GroveStoneBlock> PRIMAL_GROVE_STONE = REGISTRATE.block("primal_grove_stone", Material.STONE, GroveStoneBlock::new)
     .properties(BASE_PROPERTIES)
     .blockstate(groveStone("primal"))
-    .tag(RootsAPI.Tags.Blocks.GROVE_STONE_PRIMAL, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(RootsTags.Blocks.GROVE_STONE_PRIMAL, BlockTags.MINEABLE_WITH_PICKAXE)
     .item()
     .model((ctx, p) -> p.blockWithInventoryModel(ctx::getEntry))
     .build()
@@ -1291,7 +1291,7 @@ public class ModBlocks {
   public static BlockEntry<IncenseBurnerBlock> INCENSE_BURNER = REGISTRATE.block("incense_burner", Material.STONE, IncenseBurnerBlock::new)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/incense_burner"))
     .properties(BASE_PROPERTIES)
-    .tag(RootsAPI.Tags.Blocks.PEDESTALS, BlockTags.MINEABLE_WITH_PICKAXE, RootsAPI.Tags.Blocks.NYI)
+    .tag(RootsTags.Blocks.PEDESTALS, BlockTags.MINEABLE_WITH_PICKAXE, RootsTags.Blocks.NYI)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1300,7 +1300,7 @@ public class ModBlocks {
   public static BlockEntry<MortarBlock> MORTAR = REGISTRATE.block("mortar", Material.STONE, MortarBlock::new)
     .properties(BASE_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/mortar"))
-    .tag(RootsAPI.Tags.Blocks.MORTARS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(RootsTags.Blocks.MORTARS, BlockTags.MINEABLE_WITH_PICKAXE)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1309,7 +1309,7 @@ public class ModBlocks {
   public static BlockEntry<PyreBlock> PYRE = REGISTRATE.block("pyre", Material.WOOD, PyreBlock::new)
     .properties(BASE_WOODEN_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/pyre"))
-    .tag(RootsAPI.Tags.Blocks.PYRES, BlockTags.MINEABLE_WITH_AXE)
+    .tag(RootsTags.Blocks.PYRES, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1318,7 +1318,7 @@ public class ModBlocks {
   public static BlockEntry<PyreBlock> REINFORCED_PYRE = REGISTRATE.block("reinforced_pyre", Material.STONE, PyreBlock::new)
     .properties(BASE_REINFORCED_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/reinforced_pyre"))
-    .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsAPI.Tags.Blocks.PYRES, BlockTags.MINEABLE_WITH_PICKAXE, RootsAPI.Tags.Blocks.NYI)
+    .tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, RootsTags.Blocks.PYRES, BlockTags.MINEABLE_WITH_PICKAXE, RootsTags.Blocks.NYI)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
@@ -1327,7 +1327,7 @@ public class ModBlocks {
   public static BlockEntry<DecorativePyreBlock> DECORATIVE_PYRE = REGISTRATE.block("decorative_pyre", Material.WOOD, DecorativePyreBlock::new)
     .properties(BASE_WOODEN_PROPERTIES.andThen(o -> o.lightLevel((state) -> 15)))
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/pyre"))
-    .tag(RootsAPI.Tags.Blocks.PYRES, BlockTags.MINEABLE_WITH_AXE, RootsAPI.Tags.Blocks.NYI)
+    .tag(RootsTags.Blocks.PYRES, BlockTags.MINEABLE_WITH_AXE, RootsTags.Blocks.NYI)
     .item()
     .model((ctx, p) -> p.withExistingParent(p.name(ctx::getEntry), new ResourceLocation(RootsAPI.MODID, "block/complex/pyre")))
     .build()
@@ -1336,7 +1336,7 @@ public class ModBlocks {
   public static BlockEntry<UnendingBowlBlock> UNENDING_BOWL = REGISTRATE.block("unending_bowl", Material.STONE, UnendingBowlBlock::new)
     .properties(BASE_PROPERTIES)
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/unending_bowl"))
-    .tag(BlockTags.MINEABLE_WITH_PICKAXE, RootsAPI.Tags.Blocks.NYI)
+    .tag(BlockTags.MINEABLE_WITH_PICKAXE, RootsTags.Blocks.NYI)
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()

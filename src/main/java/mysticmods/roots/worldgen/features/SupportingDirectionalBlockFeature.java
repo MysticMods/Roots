@@ -1,7 +1,7 @@
 package mysticmods.roots.worldgen.features;
 
 import com.mojang.serialization.Codec;
-import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.WildRootsBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,7 +43,7 @@ public class SupportingDirectionalBlockFeature extends Feature<SimpleBlockConfig
                 rootState = rootState.setValue(WildRootsBlock.FACING, direction);
                 worldState = level.getBlockState(mutableBlockPos);
 
-                if (!worldState.is(RootsAPI.Tags.Blocks.SUPPORTS_WILD_ROOTS)) {
+                if (!worldState.is(RootsTags.Blocks.SUPPORTS_WILD_ROOTS)) {
                     continue;
                 }
 
