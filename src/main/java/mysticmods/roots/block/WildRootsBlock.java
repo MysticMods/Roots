@@ -21,6 +21,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class WildRootsBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
   public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  public static BooleanProperty MOSSY = BooleanProperty.create("mossy");
+  private static final int mossyChance = 30;
 
   //private static final VoxelShape UP_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
   //private static final VoxelShape DOWN_AABB = Block.box(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -35,7 +37,7 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
 
   public WildRootsBlock(Properties properties) {
     super(properties);
-    this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
+    this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false).setValue(MOSSY, false));
   }
 
   @Override
@@ -47,6 +49,10 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
     BlockState blockstate = this.defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
     if (fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8) {
       return blockstate.setValue(WATERLOGGED, true);
+    }
+
+    if (pContext.getLevel().getRandom().nextInt(mossyChance) == 0) {
+      return blockstate.setValue(MOSSY, true);
     }
 
     return blockstate;
@@ -80,7 +86,7 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
   }
 
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-    pBuilder.add(FACING, WATERLOGGED);
+    pBuilder.add(FACING, WATERLOGGED, MOSSY);
   }
 
   @Override

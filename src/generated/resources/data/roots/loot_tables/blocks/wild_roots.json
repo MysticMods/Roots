@@ -24,6 +24,39 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "roots:wild_roots",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "mossy": "true"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:binomial",
+                "n": 2.0,
+                "p": 0.8
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "roots:grove_spores"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

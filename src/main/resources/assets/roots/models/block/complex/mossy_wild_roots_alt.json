@@ -2,6 +2,6 @@
 	"credit": "Made with Blockbench",
 	"parent": "roots:block/complex/template_wild_roots_alt",
 	"textures": {
-		"roots": "roots:block/wild_roots"
+		"roots": "roots:block/mossy_wild_roots"
 	}
 }

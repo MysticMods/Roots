@@ -24,6 +24,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -50,6 +51,7 @@ import java.util.function.Supplier;
 import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModBlocks {
+  private static final Direction[] HORIZONTALS = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
   public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNED_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN);
   public static BlockEntry<Block> RUNED_OBSIDIAN = REGISTRATE.block("runed_obsidian", Block::new)
     .properties(RUNED_PROPERTIES)
@@ -1037,7 +1039,9 @@ public class ModBlocks {
 
   public static BlockEntry<BaseBlocks.WildCropBlock> WILD_AUBERGINE = REGISTRATE.block("wild_aubergine", (b) -> new BaseBlocks.WildCropBlock(b, RootsAPI.Tags.Blocks.SUPPORTS_WILD_AUBERGINE))
     .properties(o -> Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.CROP).randomTicks())
-    .loot((p, t) -> p.add(t, LootTable.lootTable().withPool(RegistrateBlockLootTables.applyExplosionCondition(ModItems.AUBERGINE.get(), LootPool.lootPool().setRolls(UniformGenerator.between(1, 3)).add(LootItem.lootTableItem(ModItems.AUBERGINE.get())))).withPool(RegistrateBlockLootTables.applyExplosionCondition(ModItems.AUBERGINE_SEEDS.get(), LootPool.lootPool().setRolls(UniformGenerator.between(1, 2)).add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()))))))
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
+        .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
+        .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.3f))))))))
     .blockstate((ctx, p) ->
       p.getVariantBuilder(ctx.getEntry())
         .partialState()
@@ -1175,22 +1179,11 @@ public class ModBlocks {
   public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)
     .properties(o -> BASE_WOODEN_PROPERTIES.apply(o).strength(0.2f))
     .blockstate(NonNullBiConsumer.noop())
-    /*(ctx, p) -> {
-        // TODO: Rotated variations (y for up/down, z for everything else?)
-        ModelFile model = p.models().getExistingFile(new ResourceLocation(RootsAPI.MODID, "block/complex/wild_roots"));
-        p.getVariantBuilder(ctx.getEntry())
-          .forAllStates(state -> {
-            Direction dir = state.getValue(BlockStateProperties.FACING);
-            return ConfiguredModel.builder()
-              .modelFile(model)
-              .rotationX(dir == Direction.DOWN ? 180 : dir.getAxis().isHorizontal() ? 90 : 0)
-              .rotationY(dir.getAxis().isVertical() ? 0 : (((int) dir.toYRot()) + 180) % 360)
-              .build();
-          });
-        OctahedralGroup
-      })*/
     .loot((ctx, p) -> {
-      ctx.add(p, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f)))))));
+      ctx.add(p, LootTable.lootTable()
+        .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))))
+          .withPool(LootPool.lootPool().add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.8f))).when(new LootItemBlockStatePropertyCondition.Builder(p).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildRootsBlock.MOSSY, true))))))
+        );
     })
     .item()
     .model(ItemModelGenerator::complexItemModel)
@@ -1201,7 +1194,7 @@ public class ModBlocks {
   public static BlockEntry<CreepingGroveMossBlock> CREEPING_GROVE_MOSS = REGISTRATE.block("creeping_grove_moss", Material.GRASS, CreepingGroveMossBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET))
     .loot((p, t) -> {
-      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f)))))));
+      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))))));
     })
     .blockstate((ctx, p) -> {
       p.simpleBlock(ctx.getEntry(), p.models().singleTexture(ctx.getName(), new ResourceLocation("minecraft", "block/carpet"), "wool", p.modLoc("block/creeping_grove_moss")));

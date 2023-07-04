@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-03T21:52:08.9221756	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-04T15:17:33.6103738	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -742,7 +742,7 @@ da91063a1cc7cbaa5aeb017bab9ecc90211c6fa7 data/roots/loot_tables/blocks/caelic_so
 9a45fb4fa887026fed56ab21ffc8a1b302d67c94 data/roots/loot_tables/blocks/chiseled_runed_obsidian.json
 5dd993b2273fff7774b3cbc6ef258e4ab1cf9c9e data/roots/loot_tables/blocks/chiseled_runestone.json
 7cbcaba40b9d45319d175c8549b04170f6251a7f data/roots/loot_tables/blocks/cloud_berry_crop.json
-acea98051b0baecddf9276511228dc5d5c1ee274 data/roots/loot_tables/blocks/creeping_grove_moss.json
+ba91152691ce4143a32a5af5edcc18c06cda6da1 data/roots/loot_tables/blocks/creeping_grove_moss.json
 1e2f18f8b581ffcafa03b3ed855495cdb91de362 data/roots/loot_tables/blocks/decorative_pyre.json
 397b23266f79709bd367169c82ffe81b7fdf2c0d data/roots/loot_tables/blocks/dewgonia_crop.json
 e69dbce711707b0ac2d036c55a4a7774e63902e6 data/roots/loot_tables/blocks/elemental_soil.json
@@ -853,8 +853,8 @@ d50ac96a036212c322e16d37e83e1b504172a5ad data/roots/loot_tables/blocks/wildwood_
 7c5cd16ca066d75e8dbd28e3d669a197aec5df42 data/roots/loot_tables/blocks/wildwood_wall.json
 e398b07dec4676bad347611baa0dcb80798cb001 data/roots/loot_tables/blocks/wildwood_wide_post.json
 5ca40f604ebb3b9f6c8a39b58740da45d3baa32c data/roots/loot_tables/blocks/wildwood_wood.json
-db8a336d94138e702a6a9df22ab62667f268291a data/roots/loot_tables/blocks/wild_aubergine.json
-d8624f4551d9bd9486cb62c427541c748ffa4ff4 data/roots/loot_tables/blocks/wild_roots.json
+ad3057db2bc1b73eb0cdb9c7ef9b0f766b45089f data/roots/loot_tables/blocks/wild_aubergine.json
+212c065570f312eb041b0ccb9e5d46d958ce0fe5 data/roots/loot_tables/blocks/wild_roots.json
 75f6bfc26a2180f207fc46e700ecd21a8cd7785f data/roots/recipes/chiseled_runed_obsidian.json
 e69e61c513b20c4b423f155db80c57c9794f9a35 data/roots/recipes/chiseled_runestone.json
 5aa2e812b6f12831735219900b9bdb5bdce1ebb0 data/roots/recipes/gray_dye_from_stonepetal.json
