@@ -11,4 +11,6 @@ public class Capabilities {
   });
   public static final Capability<SnapshotCapability> SNAPSHOT_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
   });
+/*  public static final Capability<ReputationCapability> REPUTATION_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+  });*/
 }
