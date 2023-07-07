@@ -184,7 +184,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     @Override
     protected String getFolderName (ResourceLocation recipeName) {
       if (ritual != null) {
-        return "roots";
+        return Registries.RITUAL_REGISTRY.get().getKey(ritual).getNamespace();
       }
       return super.getFolderName(recipeName);
     }
