@@ -1,11 +1,11 @@
 {
   "values": [
-    "roots:runed_gate",
-    "roots:runed_brick_gate",
-    "roots:runed_brick_alt_gate",
     "roots:runestone_gate",
     "roots:runestone_brick_gate",
     "roots:runestone_brick_alt_gate",
+    "roots:runed_gate",
+    "roots:runed_brick_gate",
+    "roots:runed_brick_alt_gate",
     "roots:wildwood_gate"
   ]
 }

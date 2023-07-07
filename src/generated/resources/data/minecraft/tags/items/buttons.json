@@ -1,11 +1,11 @@
 {
   "values": [
-    "roots:runed_button",
-    "roots:runed_brick_button",
-    "roots:runed_brick_alt_button",
     "roots:runestone_button",
     "roots:runestone_brick_button",
     "roots:runestone_brick_alt_button",
+    "roots:runed_button",
+    "roots:runed_brick_button",
+    "roots:runed_brick_alt_button",
     "roots:wildwood_button"
   ]
 }

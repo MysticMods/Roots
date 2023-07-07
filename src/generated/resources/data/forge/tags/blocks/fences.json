@@ -1,10 +1,10 @@
 {
   "values": [
-    "roots:runed_fence",
-    "roots:runed_brick_fence",
-    "roots:runed_brick_alt_fence",
     "roots:runestone_fence",
     "roots:runestone_brick_fence",
-    "roots:runestone_brick_alt_fence"
+    "roots:runestone_brick_alt_fence",
+    "roots:runed_fence",
+    "roots:runed_brick_fence",
+    "roots:runed_brick_alt_fence"
   ]
 }

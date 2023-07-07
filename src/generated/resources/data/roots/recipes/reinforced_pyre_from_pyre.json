@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": {
+      "item": "roots:pyre"
+    },
+    "R": {
+      "tag": "roots:runed_obsidian"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RPR",
+    "RRR"
+  ],
+  "result": {
+    "item": "roots:reinforced_pyre"
+  }
+}

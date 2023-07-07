@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "R": {
+      "tag": "roots:runestone"
+    }
+  },
+  "pattern": [
+    "R R",
+    "R R",
+    "RRR"
+  ],
+  "result": {
+    "item": "roots:mortar"
+  }
+}

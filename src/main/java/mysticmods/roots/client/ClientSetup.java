@@ -29,6 +29,9 @@ public class ClientSetup {
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.CREEPING_GROVE_MOSS.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.BAFFLECAP.get(), cutout);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_AUBERGINE.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_BAFFLECAP.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_STONEPETAL.get(), cutout);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.STONEPETAL.get(), cutout);
   }
 
   @SubscribeEvent

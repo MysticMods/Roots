@@ -14,9 +14,13 @@ import mysticmods.roots.item.GroveSporesItem;
 import mysticmods.roots.item.TokenItem;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 
 import java.util.function.Supplier;
 
@@ -207,6 +211,18 @@ public class ModItems {
   public static final ItemEntry<FireStarterItem> FIRE_STARTER = REGISTRATE.item("fire_starter", FireStarterItem::new)
     .properties(o -> o.stacksTo(1))
     .model(subfolder("tools"))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 4)
+        .pattern("SFS")
+        .pattern(" L ")
+        .pattern("S S")
+        .define('S', Ingredient.of(Tags.Items.RODS_WOODEN))
+        .define('F', Ingredient.of(RootsTags.Items.FLINT))
+        .define('L', Ingredient.of(ItemTags.LOGS))
+        .unlockedBy("has_stick", p.has(Tags.Items.RODS_WOODEN))
+        .unlockedBy("has_flint", p.has(RootsTags.Items.FLINT))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "fire_starter"));
+    })
     .register();
 
   public static final ItemEntry<Item> GRAMARY = REGISTRATE.item("gramary", Item::new)
@@ -246,6 +262,15 @@ public class ModItems {
   public static final ItemEntry<Item> PESTLE = REGISTRATE.item("pestle", Item::new)
     .model(subfolder("tools"))
     .tag(RootsTags.Items.MORTAR_ACTIVATION)
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry())
+        .pattern("  S")
+        .pattern("SS ")
+        .pattern("SS ")
+        .define('S', Ingredient.of(RootsTags.Items.STONELIKE))
+        .unlockedBy("has_stone", p.has(RootsTags.Items.STONELIKE))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "pestle"));
+    })
     .register();
 
   public static final ItemEntry<Item> RUNED_AXE = REGISTRATE.item("runed_axe", Item::new)
@@ -290,6 +315,15 @@ public class ModItems {
   public static final ItemEntry<ShearsItem> WOODEN_SHEARS = REGISTRATE.item("wooden_shears", ShearsItem::new)
     .properties(o -> o.durability(120))
     .model(subfolder("tools"))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry())
+        .pattern(" LL")
+        .pattern("L  ")
+        .pattern(" LL")
+        .define('L', Ingredient.of(ItemTags.LOGS))
+        .unlockedBy("has_log", p.has(ItemTags.LOGS))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "wooden_shears"));
+    })
     .register();
 
   public static final ItemEntry<Item> RELIQUARY = REGISTRATE.item("reliquary", Item::new)
@@ -323,7 +357,7 @@ public class ModItems {
   public static final ItemEntry<Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
     .model(subfolder("resources"))
     .recipe((ctx, p) -> MortarRecipe.builder(ctx.getEntry(), 1, 1)
-      .addIngredient(RootsTags.Items.Blocks.RUNESTONE)
+      .addIngredient(RootsTags.Items.RUNESTONE)
       .build(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
     .register();
 

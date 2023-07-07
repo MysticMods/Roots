@@ -1,6 +1,0 @@
-{
-  "parent": "roots:block/wide_post",
-  "textures": {
-    "wall": "roots:block/runestone_brick"
-  }
-}

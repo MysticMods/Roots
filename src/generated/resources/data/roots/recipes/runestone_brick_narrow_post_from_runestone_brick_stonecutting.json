@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "roots:runestone_brick"
-  },
-  "result": "roots:runestone_brick_narrow_post"
-}

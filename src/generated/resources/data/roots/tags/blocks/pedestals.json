@@ -2,8 +2,8 @@
   "values": [
     "roots:ritual_pedestal",
     "roots:reinforced_ritual_pedestal",
-    "roots:wildwood_pedestal",
     "roots:grove_pedestal",
+    "roots:wildwood_pedestal",
     "roots:incense_burner",
     "#roots:pedestals/ritual",
     "#roots:pedestals/grove"

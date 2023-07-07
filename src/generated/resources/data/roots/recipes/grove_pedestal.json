@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "LLL",
+    " L ",
+    "LLL"
+  ],
+  "result": {
+    "count": 4,
+    "item": "roots:grove_pedestal"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "values": [
-    "roots:chiseled_runed_obsidian",
     "roots:chiseled_runestone",
-    "roots:runestone_brick"
+    "roots:runestone_brick",
+    "roots:chiseled_runed_obsidian"
   ]
 }

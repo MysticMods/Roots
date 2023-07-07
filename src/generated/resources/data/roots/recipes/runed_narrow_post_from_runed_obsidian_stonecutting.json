@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "roots:runed_obsidian"
-  },
-  "result": "roots:runed_narrow_post"
-}

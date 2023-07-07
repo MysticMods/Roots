@@ -11,6 +11,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 
@@ -201,44 +202,40 @@ public class RootsTags {
     public static final TagKey<Item> MORTAR_ACTIVATION = modTag("mortar_activation");
     public static final TagKey<Item> PYRE_ACTIVATION = modTag("pyre_activation");
 
+    public static final TagKey<Item> FLINT = modTag("flint");
+    public static final TagKey<Item> STONELIKE = modTag("stonelike");
     public static final TagKey<Item> CASTING_TOOLS = modTag("casting_tools");
 
     public static final TagKey<Item> NYI = modTag("nyi");
+    public static final TagKey<Item> SOILS = modTag("soils");
+    public static final TagKey<Item> WATER_SOIL = modTag("soils/water");
+    public static final TagKey<Item> AIR_SOIL = modTag("soils/air");
+    public static final TagKey<Item> EARTH_SOIL = modTag("soils/earth");
+    public static final TagKey<Item> FIRE_SOIL = modTag("soils/fire");
+    public static final TagKey<Item> ELEMENTAL_SOIL = modTag("soils/elemental");
+    public static final TagKey<Item> RUNED_OBSIDIAN = modTag("runed_obsidian");
+    public static final TagKey<Item> RUNESTONE = modTag("runestone");
+    public static final TagKey<Item> WILDWOOD_LOGS = modTag("logs/wildwood");
+    public static final TagKey<Item> RUNED_LOGS = modTag("logs/runed");
+    public static final TagKey<Item> RUNED_ACACIA_LOG = modTag("logs/runed/acacia");
+    public static final TagKey<Item> RUNED_DARK_OAK_LOG = modTag("logs/runed/dark_oak");
+    public static final TagKey<Item> RUNED_OAK_LOG = modTag("logs/runed/oak");
+    public static final TagKey<Item> RUNED_BIRCH_LOG = modTag("logs/runed/birch");
+    public static final TagKey<Item> RUNED_JUNGLE_LOG = modTag("logs/runed/jungle");
+    public static final TagKey<Item> RUNED_SPRUCE_LOG = modTag("logs/runed/spruce");
+    public static final TagKey<Item> RUNED_WILDWOOD_LOG = modTag("logs/runed/wildwood");
+    public static final TagKey<Item> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
+    public static final TagKey<Item> RUNED_WARPED_STEM = modTag("logs/runed/warped");
+    public static final TagKey<Item> GROVE_STONES = modTag("grove_stones");
+    public static final TagKey<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
+    public static final TagKey<Item> PEDESTALS = modTag("pedestals");
+    public static final TagKey<Item> RITUAL_PEDESTALS = modTag("pedestals/ritual");
+    public static final TagKey<Item> GROVE_PEDESTALS = modTag("pedestals/grove");
+    public static final TagKey<Item> PYRES = modTag("pyres");
+    public static final TagKey<Item> CRAFTERS = modTag("crafters");
+    public static final TagKey<Item> MORTARS = modTag("mortars");
 
     // These are all filled in by ModTags
-    public static class Blocks {
-      public static final TagKey<Item> SOILS = modTag("soils");
-      public static final TagKey<Item> WATER_SOIL = modTag("soils/water");
-      public static final TagKey<Item> AIR_SOIL = modTag("soils/air");
-      public static final TagKey<Item> EARTH_SOIL = modTag("soils/earth");
-      public static final TagKey<Item> FIRE_SOIL = modTag("soils/fire");
-      public static final TagKey<Item> ELEMENTAL_SOIL = modTag("soils/elemental");
-
-      public static final TagKey<Item> RUNED_OBSIDIAN = modTag("runed_obsidian");
-      public static final TagKey<Item> RUNESTONE = modTag("runestone");
-      public static final TagKey<Item> WILDWOOD_LOGS = modTag("logs/wildwood");
-
-      public static final TagKey<Item> RUNED_LOGS = modTag("logs/runed");
-      public static final TagKey<Item> RUNED_ACACIA_LOG = modTag("logs/runed/acacia");
-      public static final TagKey<Item> RUNED_DARK_OAK_LOG = modTag("logs/runed/dark_oak");
-      public static final TagKey<Item> RUNED_OAK_LOG = modTag("logs/runed/oak");
-      public static final TagKey<Item> RUNED_BIRCH_LOG = modTag("logs/runed/birch");
-      public static final TagKey<Item> RUNED_JUNGLE_LOG = modTag("logs/runed/jungle");
-      public static final TagKey<Item> RUNED_SPRUCE_LOG = modTag("logs/runed/spruce");
-      public static final TagKey<Item> RUNED_WILDWOOD_LOG = modTag("logs/runed/wildwood");
-      public static final TagKey<Item> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
-      public static final TagKey<Item> RUNED_WARPED_STEM = modTag("logs/runed/warped");
-
-      public static final TagKey<Item> GROVE_STONES = modTag("grove_stones");
-      public static final TagKey<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
-
-      public static final TagKey<Item> PEDESTALS = modTag("pedestals");
-      public static final TagKey<Item> RITUAL_PEDESTALS = modTag("pedestals/ritual");
-      public static final TagKey<Item> GROVE_PEDESTALS = modTag("pedestals/grove");
-      public static final TagKey<Item> PYRES = modTag("pyres");
-      public static final TagKey<Item> CRAFTERS = modTag("crafters");
-      public static final TagKey<Item> MORTARS = modTag("mortars");
-    }
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(new ResourceLocation(RootsAPI.MODID, name));

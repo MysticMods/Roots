@@ -4,9 +4,11 @@ import com.tterrag.registrate.providers.ProviderType;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.gen.RootsDataProviderTypes;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -90,33 +92,36 @@ public class ModTags {
     REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, b -> {
       // Block copies
 
-      b.copy(RootsTags.Blocks.SOILS, RootsTags.Items.Blocks.SOILS);
-      b.copy(RootsTags.Blocks.WATER_SOIL, RootsTags.Items.Blocks.WATER_SOIL);
-      b.copy(RootsTags.Blocks.AIR_SOIL, RootsTags.Items.Blocks.AIR_SOIL);
-      b.copy(RootsTags.Blocks.EARTH_SOIL, RootsTags.Items.Blocks.EARTH_SOIL);
-      b.copy(RootsTags.Blocks.FIRE_SOIL, RootsTags.Items.Blocks.FIRE_SOIL);
-      b.copy(RootsTags.Blocks.ELEMENTAL_SOIL, RootsTags.Items.Blocks.ELEMENTAL_SOIL);
-      b.copy(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Items.Blocks.RUNED_OBSIDIAN);
-      b.copy(RootsTags.Blocks.RUNESTONE, RootsTags.Items.Blocks.RUNESTONE);
-      b.copy(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Items.Blocks.WILDWOOD_LOGS);
-      b.copy(RootsTags.Blocks.RUNED_LOGS, RootsTags.Items.Blocks.RUNED_LOGS);
-      b.copy(RootsTags.Blocks.RUNED_ACACIA_LOG, RootsTags.Items.Blocks.RUNED_ACACIA_LOG);
-      b.copy(RootsTags.Blocks.RUNED_DARK_OAK_LOG, RootsTags.Items.Blocks.RUNED_DARK_OAK_LOG);
-      b.copy(RootsTags.Blocks.RUNED_OAK_LOG, RootsTags.Items.Blocks.RUNED_OAK_LOG);
-      b.copy(RootsTags.Blocks.RUNED_BIRCH_LOG, RootsTags.Items.Blocks.RUNED_BIRCH_LOG);
-      b.copy(RootsTags.Blocks.RUNED_JUNGLE_LOG, RootsTags.Items.Blocks.RUNED_JUNGLE_LOG);
-      b.copy(RootsTags.Blocks.RUNED_SPRUCE_LOG, RootsTags.Items.Blocks.RUNED_SPRUCE_LOG);
-      b.copy(RootsTags.Blocks.RUNED_WILDWOOD_LOG, RootsTags.Items.Blocks.RUNED_WILDWOOD_LOG);
-      b.copy(RootsTags.Blocks.RUNED_CRIMSON_STEM, RootsTags.Items.Blocks.RUNED_CRIMSON_STEM);
-      b.copy(RootsTags.Blocks.RUNED_WARPED_STEM, RootsTags.Items.Blocks.RUNED_WARPED_STEM);
-      b.copy(RootsTags.Blocks.GROVE_STONES, RootsTags.Items.Blocks.GROVE_STONES);
-      b.copy(RootsTags.Blocks.PYRES, RootsTags.Items.Blocks.PYRES);
-      b.copy(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Items.Blocks.RITUAL_PEDESTALS);
-      b.copy(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Items.Blocks.GROVE_PEDESTALS);
-      b.copy(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Items.Blocks.GROVE_STONE_PRIMAL);
-      b.copy(RootsTags.Blocks.MORTARS, RootsTags.Items.Blocks.MORTARS);
-      b.copy(RootsTags.Blocks.CRAFTERS, RootsTags.Items.Blocks.CRAFTERS);
+      b.copy(RootsTags.Blocks.SOILS, RootsTags.Items.SOILS);
+      b.copy(RootsTags.Blocks.WATER_SOIL, RootsTags.Items.WATER_SOIL);
+      b.copy(RootsTags.Blocks.AIR_SOIL, RootsTags.Items.AIR_SOIL);
+      b.copy(RootsTags.Blocks.EARTH_SOIL, RootsTags.Items.EARTH_SOIL);
+      b.copy(RootsTags.Blocks.FIRE_SOIL, RootsTags.Items.FIRE_SOIL);
+      b.copy(RootsTags.Blocks.ELEMENTAL_SOIL, RootsTags.Items.ELEMENTAL_SOIL);
+      b.copy(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Items.RUNED_OBSIDIAN);
+      b.copy(RootsTags.Blocks.RUNESTONE, RootsTags.Items.RUNESTONE);
+      b.copy(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Items.WILDWOOD_LOGS);
+      b.copy(RootsTags.Blocks.RUNED_LOGS, RootsTags.Items.RUNED_LOGS);
+      b.copy(RootsTags.Blocks.RUNED_ACACIA_LOG, RootsTags.Items.RUNED_ACACIA_LOG);
+      b.copy(RootsTags.Blocks.RUNED_DARK_OAK_LOG, RootsTags.Items.RUNED_DARK_OAK_LOG);
+      b.copy(RootsTags.Blocks.RUNED_OAK_LOG, RootsTags.Items.RUNED_OAK_LOG);
+      b.copy(RootsTags.Blocks.RUNED_BIRCH_LOG, RootsTags.Items.RUNED_BIRCH_LOG);
+      b.copy(RootsTags.Blocks.RUNED_JUNGLE_LOG, RootsTags.Items.RUNED_JUNGLE_LOG);
+      b.copy(RootsTags.Blocks.RUNED_SPRUCE_LOG, RootsTags.Items.RUNED_SPRUCE_LOG);
+      b.copy(RootsTags.Blocks.RUNED_WILDWOOD_LOG, RootsTags.Items.RUNED_WILDWOOD_LOG);
+      b.copy(RootsTags.Blocks.RUNED_CRIMSON_STEM, RootsTags.Items.RUNED_CRIMSON_STEM);
+      b.copy(RootsTags.Blocks.RUNED_WARPED_STEM, RootsTags.Items.RUNED_WARPED_STEM);
+      b.copy(RootsTags.Blocks.GROVE_STONES, RootsTags.Items.GROVE_STONES);
+      b.copy(RootsTags.Blocks.PYRES, RootsTags.Items.PYRES);
+      b.copy(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Items.RITUAL_PEDESTALS);
+      b.copy(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Items.GROVE_PEDESTALS);
+      b.copy(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_PRIMAL);
+      b.copy(RootsTags.Blocks.MORTARS, RootsTags.Items.MORTARS);
+      b.copy(RootsTags.Blocks.CRAFTERS, RootsTags.Items.CRAFTERS);
       b.copy(RootsTags.Blocks.NYI, RootsTags.Items.NYI);
+
+      b.tag(RootsTags.Items.FLINT).add(Items.FLINT);
+      b.tag(RootsTags.Items.STONELIKE).addTags(Tags.Items.STONE, ItemTags.STONE_BRICKS, ItemTags.STONE_CRAFTING_MATERIALS, ItemTags.STONE_TOOL_MATERIALS).add(Items.DIORITE, Items.GRANITE, Items.CALCITE, Items.TUFF, Items.POLISHED_DIORITE, Items.POLISHED_GRANITE, Items.POLISHED_ANDESITE, Items.ANDESITE, Items.POLISHED_DEEPSLATE, Items.POLISHED_BLACKSTONE);
 
       b.tag(RootsTags.Items.AIR_CROPS).addTags(RootsTags.Items.CLOUD_BERRY_CROP);
       b.tag(RootsTags.Items.WATER_CROPS).addTags(RootsTags.Items.DEWGONIA_CROP);

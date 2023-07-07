@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "tag": "roots:stonelike"
+    }
+  },
+  "pattern": [
+    "  S",
+    "SS ",
+    "SS "
+  ],
+  "result": {
+    "item": "roots:pestle"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "tag": "minecraft:coals"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "R": {
+      "tag": "roots:runestone"
+    }
+  },
+  "pattern": [
+    "LCL",
+    "RRR"
+  ],
+  "result": {
+    "item": "roots:pyre"
+  }
+}

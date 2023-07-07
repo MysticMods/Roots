@@ -22,6 +22,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.List;
 import java.util.function.Consumer;
 
+// TODO: Mixed Mortar Recipe?
 public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEntity, MortarCrafting> {
   private int times;
 

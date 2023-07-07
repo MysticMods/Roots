@@ -1,11 +1,11 @@
 {
   "values": [
-    "roots:runed_slab",
-    "roots:runed_brick_slab",
-    "roots:runed_brick_alt_slab",
     "roots:runestone_slab",
     "roots:runestone_brick_slab",
     "roots:runestone_brick_alt_slab",
+    "roots:runed_slab",
+    "roots:runed_brick_slab",
+    "roots:runed_brick_alt_slab",
     "roots:wildwood_slab"
   ]
 }

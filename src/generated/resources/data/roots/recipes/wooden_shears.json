@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    " LL",
+    "L  ",
+    " LL"
+  ],
+  "result": {
+    "item": "roots:wooden_shears"
+  }
+}
