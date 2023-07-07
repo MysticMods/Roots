@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-07T21:53:47.2382404	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-07T22:10:01.7616125	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -566,7 +566,6 @@ e58a5c90a75de69cd751e69b578b9a35cb1e3d6c data/minecraft/tags/items/buttons.json
 01e14230dbba7917c0ca55a835d71eed633034bc data/minecraft/tags/items/slabs.json
 92fa69cdded48932e262aea8775b231083ca5325 data/minecraft/tags/items/stairs.json
 aedbd4bbe4f64215c99169367f93c46fe483e2f5 data/minecraft/tags/items/walls.json
-74afe9fc6b28e393bfbe05698c54d2b159ad8368 data/roots/advancements/recipes/growth_infusion/spell/growth_infusion.json
 abe44e4c9ba3d917f542246b07d09530f92fd4f2 data/roots/advancements/recipes/misc/gray_dye_from_stonepetal.json
 358a42d3dcaefc8444b4c094543f3e162879ae28 data/roots/advancements/recipes/roots/chiseled_runed_obsidian.json
 0054b81f2f96d3e90cd9c1d47d1b38c95c45cae8 data/roots/advancements/recipes/roots/chiseled_runestone.json
@@ -586,6 +585,7 @@ fb178ebbf4e53e4a39f9250c328dda1ed872ef95 data/roots/advancements/recipes/roots/p
 ad16b2801ee9f2cb762499a74c6312e70239c783 data/roots/advancements/recipes/roots/pyre.json
 a054c92f43b683e542e8fb9a57504fcf6ff15983 data/roots/advancements/recipes/roots/reinforced_pyre.json
 a09da0a38599ab86df82d22017d04cc78dd17d3d data/roots/advancements/recipes/roots/reinforced_pyre_from_pyre.json
+b88e3607c0c638cf80a33dba18dd743dd11e4d49 data/roots/advancements/recipes/roots/ritual/animal_harvest.json
 d318db629e6833f224c0c1dfdd8a1c73f76c4ff4 data/roots/advancements/recipes/roots/runed_brick_alt_button.json
 134b0b017c437d3e3d4a975fbc6152ff6451e9e9 data/roots/advancements/recipes/roots/runed_brick_alt_button_from_runed_obsidian_brick_alt_stonecutting.json
 822db8dd048ab8587374eae92f99e91b92f41cac data/roots/advancements/recipes/roots/runed_brick_alt_fence.json
@@ -676,7 +676,8 @@ fd2ec6e5fe2d5515c89586d1c71b874f90732d00 data/roots/advancements/recipes/roots/r
 8e4689d2edd0735b9951d5780d7e7154ce77646b data/roots/advancements/recipes/roots/runestone_stairs_from_runestone_stonecutting.json
 6f8a45c3bef2e5ed3ef251ecd816411680aa1cb5 data/roots/advancements/recipes/roots/runestone_wall.json
 13b7fc9c386fee61f4cd8eb2291ffd67e4b38b16 data/roots/advancements/recipes/roots/runestone_wall_from_runestone_stonecutting.json
-b54051d7266bb46e95218d15bae2205c302f153e data/roots/advancements/recipes/roots/runic_dust.json
+d8daf8e4fb32a69c7411a487fc6beae3f2fb69a4 data/roots/advancements/recipes/roots/runic_dust.json
+43771128deb5a9685ca86cdbd1212af03024ae3a data/roots/advancements/recipes/roots/spell/growth_infusion.json
 ac469934d938e93c0d82cdfbfb4229d87cd7b1a0 data/roots/advancements/recipes/roots/wildwood_button.json
 08d31160690b877dc06fb8b9c4ba07399288fc1f data/roots/advancements/recipes/roots/wildwood_fence.json
 3968517692b339891572e00e50dbe64400067791 data/roots/advancements/recipes/roots/wildwood_gate.json
@@ -686,7 +687,6 @@ db3849e28df99a539b40093eea69e0986f82a4fe data/roots/advancements/recipes/roots/w
 9c6d0bcca17b470cdcfd5f68ae97591b6aaf9b99 data/roots/advancements/recipes/roots/wildwood_wall.json
 caf54b286ced856fb953835cfaff3a3adfdae03d data/roots/advancements/recipes/roots/wildwood_wall_from_wildwood_planks_stonecutting.json
 c3a595318903df9a14ff136a97fe514b8fa936fc data/roots/advancements/recipes/roots/wooden_shears.json
-b88e3607c0c638cf80a33dba18dd743dd11e4d49 data/roots/advancements/recipes/root/ritual/ritual/animal_harvest.json
 e9c951cad9f3e92a5b0f7df6ecf155443fac7a74 data/roots/loot_tables/blocks/aqueous_soil.json
 4db772f249ceae72ce09c99a9c729d0f72306ec9 data/roots/loot_tables/blocks/aubergine_crop.json
 d6f2cd8334f32aef57905fd0612e7a6d5f598a85 data/roots/loot_tables/blocks/bafflecap.json

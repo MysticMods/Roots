@@ -1,32 +1,32 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_runestone": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:spell/growth_infusion"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wildroot": {
       "conditions": {
         "items": [
           {
-            "tag": "roots:runestone"
+            "tag": "roots:crops/wildroot"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "roots:runic_dust"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_runestone",
+      "has_wildroot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:runic_dust"
+      "roots:spell/growth_infusion"
     ]
   }
 }

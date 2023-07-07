@@ -471,9 +471,9 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       } else if (!conditionalOutputs.isEmpty()) {
         return conditionalOutputs.get(0).getOutput().getItem().getItemCategory().getRecipeFolderName();
       } else if (!grants.isEmpty()) {
-        return grants.get(0).getId().getPath();
+        return grants.get(0).getId().getNamespace();
       } else {
-        return recipeName.getPath();
+        return recipeName.getNamespace();
       }
     }
 
