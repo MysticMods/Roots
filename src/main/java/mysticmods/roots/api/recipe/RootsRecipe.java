@@ -12,7 +12,10 @@ import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.util.SetUtils;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
+import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -38,6 +41,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
+
+import static net.minecraft.data.recipes.RecipeBuilder.ROOT_RECIPE_ADVANCEMENT;
 
 public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<H, W> {
   protected final NonNullList<Ingredient> ingredients = NonNullList.create();
@@ -376,6 +381,14 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     protected Builder() {
     }
 
+    protected boolean allowEmptyOutput () {
+      return false;
+    }
+
+    protected boolean requireIngredients () {
+      return true;
+    }
+
     protected Builder(ItemStack result) {
       this.result = result;
     }
@@ -424,7 +437,6 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     public Builder addLevelCondition(LevelCondition condition) {
       this.levelConditions.add(condition);
       return this;
-
     }
 
     public Builder addPlayerCondition(PlayerCondition condition) {
@@ -437,11 +449,31 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return this;
     }
 
+    protected boolean hasOutput () {
+      return (result != null && !result.isEmpty()) || !conditionalOutputs.isEmpty();
+    }
+
+    protected void validate (ResourceLocation recipeName) {
+      if (!hasOutput() && !allowEmptyOutput()) {
+        throw new IllegalStateException("No output or conditional output defined for recipe " + recipeName);
+      }
+      if (ingredients.isEmpty() && requireIngredients()) {
+        throw new IllegalStateException("No ingredients defined for recipe " + recipeName);
+      }
+      if (advancement.getCriteria().isEmpty()) {
+        throw new IllegalStateException("No way of obtaining recipe " + recipeName);
+      }
+    }
+
     protected ResourceLocation getAdvancementId (ResourceLocation recipeName) {
       return new ResourceLocation(recipeName.getNamespace(), "recipes/" + result.getItem().getItemCategory().getRecipeFolderName() + "/" + recipeName.getPath());
     }
 
+
+
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
+      validate(recipeName);
+      advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR);
       consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
     }
 

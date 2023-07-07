@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "has_wheat": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crops/wheat"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wheat"
+    ]
+  ]
+}

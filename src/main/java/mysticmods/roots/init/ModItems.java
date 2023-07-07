@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
+import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
@@ -19,6 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 
@@ -190,12 +192,10 @@ public class ModItems {
   public static final ItemEntry<Item> FLOUR = REGISTRATE.item("flour", Item::new)
     .model(subfolder("food"))
     .recipe((ctx, p) -> {
-      MortarRecipe.builder(ctx.getEntry(), 5, 4)
-        .addIngredient(Items.WHEAT)
-        .addIngredient(Items.WHEAT)
-        .addIngredient(Items.WHEAT)
-        .addIngredient(Items.WHEAT)
-        .addIngredient(Items.WHEAT)
+      Ingredient WHEAT = Ingredient.of(Tags.Items.CROPS_WHEAT);
+      MortarRecipe.builder(ctx.getEntry(), 1, 4)
+        .addIngredient(WHEAT)
+        .unlockedBy("has_wheat", RegistrateRecipeProvider.has(Tags.Items.CROPS_WHEAT))
         .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/flour"));
     })
     .register();
@@ -247,6 +247,8 @@ public class ModItems {
       .addIngredient(Items.WOODEN_PICKAXE)
       .addIngredient(net.minecraftforge.common.Tags.Items.INGOTS_GOLD)
       .addIngredient(RootsTags.Items.WILDROOT_CROP)
+      .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
+      .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
       .save(p, new ResourceLocation(RootsAPI.MODID, "living_pickaxe")))
 
     .register();
@@ -358,6 +360,7 @@ public class ModItems {
     .model(subfolder("resources"))
     .recipe((ctx, p) -> MortarRecipe.builder(ctx.getEntry(), 1, 1)
       .addIngredient(RootsTags.Items.RUNESTONE)
+      .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
       .save(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
     .register();
 

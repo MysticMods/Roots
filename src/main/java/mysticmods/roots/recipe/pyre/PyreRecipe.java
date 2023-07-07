@@ -15,6 +15,9 @@ import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -28,6 +31,8 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
+
+import static net.minecraft.data.recipes.RecipeBuilder.ROOT_RECIPE_ADVANCEMENT;
 
 public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
   private Ritual ritual;
@@ -160,6 +165,8 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
     @Override
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
+      validate(recipeName);
+      advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR);
       consumer.accept(new PyreRecipe.Builder.Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), ritual));
     }
 

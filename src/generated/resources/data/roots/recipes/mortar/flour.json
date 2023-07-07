@@ -2,23 +2,10 @@
   "type": "roots:mortar",
   "ingredients": [
     {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:wheat"
+      "tag": "forge:crops/wheat"
     }
   ],
   "result": {
-    "count": 5,
     "item": "roots:flour"
   },
   "times": 4
