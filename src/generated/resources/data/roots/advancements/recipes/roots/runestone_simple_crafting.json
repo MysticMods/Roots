@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_runestone_brick_alt": {
+    "has_item": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "roots:runestone_brick_alt"
-            ]
+            "tag": "roots:runestone_herbs"
           }
         ]
       },
@@ -15,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:runestone"
+        "recipe": "roots:runestone_simple_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_runestone_brick_alt",
+      "has_item",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:runestone"
+      "roots:runestone_simple_crafting"
     ]
   }
 }

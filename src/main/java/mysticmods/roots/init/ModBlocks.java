@@ -15,6 +15,8 @@ import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.block.crop.WaterElementalCropBlock;
+import mysticmods.roots.recipe.grove.GroveCrafting;
+import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -23,6 +25,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.*;
@@ -64,6 +67,16 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .tag(RootsTags.Blocks.RUNESTONE, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 3)
+        .pattern("SSS")
+        .pattern("SHS")
+        .pattern("SSS")
+        .define('S', Ingredient.of(RootsTags.Items.STONELIKE))
+        .define('H', Ingredient.of(RootsTags.Items.RUNESTONE_HERBS))
+        .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE_HERBS))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "runestone_simple_crafting"));
+    })
     .register();
   public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
     .properties(RUNESTONE_PROPERTIES)

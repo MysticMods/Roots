@@ -206,6 +206,8 @@ public class RootsTags {
     public static final TagKey<Item> STONELIKE = modTag("stonelike");
     public static final TagKey<Item> CASTING_TOOLS = modTag("casting_tools");
 
+    public static final TagKey<Item> RUNESTONE_HERBS = modTag("runestone_herbs");
+
     public static final TagKey<Item> NYI = modTag("nyi");
     public static final TagKey<Item> SOILS = modTag("soils");
     public static final TagKey<Item> WATER_SOIL = modTag("soils/water");

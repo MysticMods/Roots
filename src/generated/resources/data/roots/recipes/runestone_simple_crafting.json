@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "H": {
+      "tag": "roots:runestone_herbs"
+    },
+    "S": {
+      "tag": "roots:stonelike"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SHS",
+    "SSS"
+  ],
+  "result": {
+    "count": 3,
+    "item": "roots:runestone"
+  }
+}
