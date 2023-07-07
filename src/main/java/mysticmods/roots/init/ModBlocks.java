@@ -80,6 +80,7 @@ public class ModBlocks {
     })
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
     .build()
     .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -105,6 +106,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_SLAB, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
     .build()
     .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
@@ -115,6 +117,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_STAIRS, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
     .build()
     .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -124,6 +127,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_WALL))
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
     .build()
     .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -169,6 +173,7 @@ public class ModBlocks {
     })
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
     .build()
     .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -194,6 +199,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_SLAB, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
     .build()
     .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
@@ -204,6 +210,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_STAIRS, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
     .build()
     .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -213,6 +220,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_WALL))
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
     .build()
     .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -247,7 +255,7 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS)
+    .tag(RootsTags.Blocks.RUNESTONE, RootsTags.Blocks.RUNE_PILLARS)
     .register();
   public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_ALT_BUTTON = REGISTRATE.block("runestone_brick_alt_button", BaseBlocks.StoneButtonBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
@@ -258,6 +266,7 @@ public class ModBlocks {
     })
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
     .build()
     .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -283,6 +292,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_SLAB, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
     .build()
     .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
@@ -293,6 +303,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_STAIRS, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
     .build()
     .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -302,6 +313,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_WALL))
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
     .build()
     .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -355,6 +367,7 @@ public class ModBlocks {
     })
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -380,6 +393,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_SLAB, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
@@ -390,6 +404,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_STAIRS, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -399,6 +414,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_WALL))
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -445,6 +461,7 @@ public class ModBlocks {
     .item()
 
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -470,6 +487,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_SLAB, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
@@ -480,6 +498,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_STAIRS, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -489,6 +508,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_WALL))
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -534,6 +554,7 @@ public class ModBlocks {
     })
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -559,6 +580,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_SLAB, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
@@ -569,6 +591,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_STAIRS, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -578,6 +601,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_WALL))
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
@@ -748,6 +772,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.singleItem(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_BUTTON, 1, 1))
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
     .build()
     .tag(BlockTags.WOODEN_BUTTONS, BlockTags.MINEABLE_WITH_AXE)
     .register();
@@ -757,6 +782,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_SLAB, null, false))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
     .build()
     .tag(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE)
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
@@ -767,6 +793,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_STAIRS, null, false))
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
     .build()
     .tag(BlockTags.WOODEN_STAIRS, BlockTags.MINEABLE_WITH_AXE)
     .register();
@@ -776,6 +803,7 @@ public class ModBlocks {
     .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_WALL))
     .item()
     .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
     .build()
     .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_AXE)
     .register();
