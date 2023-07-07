@@ -13,6 +13,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
@@ -158,7 +159,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
 
     @Override
-    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
+    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new PyreRecipe.Builder.Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), ritual));
     }
 
@@ -187,5 +188,9 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
   public static Builder builder(Ritual ritual) {
     return new Builder(ritual);
+  }
+
+  public static Builder builder (ItemLike item) {
+    return builder(item, 1);
   }
 }

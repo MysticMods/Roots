@@ -196,7 +196,7 @@ public class ModItems {
         .addIngredient(Items.WHEAT)
         .addIngredient(Items.WHEAT)
         .addIngredient(Items.WHEAT)
-        .build(p, new ResourceLocation(RootsAPI.MODID, "mortar/flour"));
+        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/flour"));
     })
     .register();
 
@@ -247,7 +247,7 @@ public class ModItems {
       .addIngredient(Items.WOODEN_PICKAXE)
       .addIngredient(net.minecraftforge.common.Tags.Items.INGOTS_GOLD)
       .addIngredient(RootsTags.Items.WILDROOT_CROP)
-      .build(p, new ResourceLocation(RootsAPI.MODID, "living_pickaxe")))
+      .save(p, new ResourceLocation(RootsAPI.MODID, "living_pickaxe")))
 
     .register();
 
@@ -358,7 +358,7 @@ public class ModItems {
     .model(subfolder("resources"))
     .recipe((ctx, p) -> MortarRecipe.builder(ctx.getEntry(), 1, 1)
       .addIngredient(RootsTags.Items.RUNESTONE)
-      .build(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
+      .save(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
     .register();
 
   public static final ItemEntry<Item> STRANGE_OOZE = REGISTRATE.item("strange_ooze", Item::new)

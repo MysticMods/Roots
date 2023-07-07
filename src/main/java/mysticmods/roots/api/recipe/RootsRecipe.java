@@ -441,7 +441,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return new ResourceLocation(recipeName.getNamespace(), "recipes/" + result.getItem().getItemCategory().getRecipeFolderName() + "/" + recipeName.getPath());
     }
 
-    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
+    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
     }
 

@@ -89,7 +89,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     }
 
     @Override
-    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
+    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), times));
     }
 

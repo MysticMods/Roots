@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.ItemLike;
 
 public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCrafterBlockEntity, GroveCrafting> {
   public GroveRecipe(ResourceLocation recipeId) {
@@ -50,5 +51,13 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
 
   public static Builder builder(ItemStack stack) {
     return new Builder(stack);
+  }
+
+  public static Builder builder(ItemLike item, int count) {
+    return new Builder(new ItemStack(item, count));
+  }
+
+  public static Builder builder (ItemLike item) {
+    return builder(item, 1);
   }
 }
