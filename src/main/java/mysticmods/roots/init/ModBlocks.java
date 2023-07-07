@@ -30,9 +30,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.LimitCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -1133,7 +1135,7 @@ public class ModBlocks {
       p.getMultipartBuilder(ctx.getEntry()).part().modelFile(modelOutside).uvLock(true).rotationX(90).addModel().condition(HugeMushroomBlock.DOWN, true).end();
     })
     .tag(BlockTags.MINEABLE_WITH_HOE)
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createMushroomBlockDrop(t, ModBlocks.BAFFLECAP.get())))
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSilkTouchDispatchTable(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootItem.lootTableItem(ModItems.BAFFLECAP.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.05f)))))))
     .register();
 
   public static <T extends Block> NonNullBiConsumer<DataGenContext<Block, T>, RegistrateBlockstateProvider> groveStone(String type) {

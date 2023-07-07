@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-07T13:51:52.8736374	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-07T15:39:33.3516633	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -680,7 +680,7 @@ c3a595318903df9a14ff136a97fe514b8fa936fc data/roots/advancements/recipes/roots/w
 e9c951cad9f3e92a5b0f7df6ecf155443fac7a74 data/roots/loot_tables/blocks/aqueous_soil.json
 4db772f249ceae72ce09c99a9c729d0f72306ec9 data/roots/loot_tables/blocks/aubergine_crop.json
 d6f2cd8334f32aef57905fd0612e7a6d5f598a85 data/roots/loot_tables/blocks/bafflecap.json
-876ef74058d7faadacf04709299b25f5867e1446 data/roots/loot_tables/blocks/bafflecap_block.json
+94f950b44fb26e72077307a300af1708cfea98d3 data/roots/loot_tables/blocks/bafflecap_block.json
 da91063a1cc7cbaa5aeb017bab9ecc90211c6fa7 data/roots/loot_tables/blocks/caelic_soil.json
 9a45fb4fa887026fed56ab21ffc8a1b302d67c94 data/roots/loot_tables/blocks/chiseled_runed_obsidian.json
 5dd993b2273fff7774b3cbc6ef258e4ab1cf9c9e data/roots/loot_tables/blocks/chiseled_runestone.json
@@ -913,7 +913,7 @@ d05aaf77298d9d10350f14eb3f99643123351f19 data/roots/tags/blocks/capstones/log/da
 cad4f9a40c8ffa88903296a46a0a029ecde28abf data/roots/tags/blocks/capstones/log/spruce.json
 8441aee9b426751866898951327ea3473f1fa9ba data/roots/tags/blocks/capstones/log/warped.json
 3081cd089bcce07d5d7d0fac24d646a1c78219b1 data/roots/tags/blocks/capstones/log/wildwood.json
-4cb01f6e6cefae8aed7fbb7acfc1361d92c86a88 data/roots/tags/blocks/capstones/rune.json
+8a4447e1d1ed4a65be1097e8c1a12aed3a32b134 data/roots/tags/blocks/capstones/rune.json
 1d43ddccd38a55edc2befc1531297e628c79e0f1 data/roots/tags/blocks/crafters.json
 bb377285da0a06e9c145a9ca82752040d2932c17 data/roots/tags/blocks/crops.json
 eac1c12ccc5eff3fd48c81e90ef41aa076438faa data/roots/tags/blocks/crops/cloud_berry.json
@@ -963,7 +963,8 @@ a31411258dff25185ee194f9aaa19923794df728 data/roots/tags/blocks/pillars/log/spru
 8fd97c0cac12e2cf99d2dde654f3123810a646f5 data/roots/tags/blocks/pillars/log/wildwood.json
 e3a00283e4bf9791c9f707667bd5ae2bc0f27e23 data/roots/tags/blocks/pillars/rune.json
 2c0158a5c83124684d96ea4033acd20aafb3061c data/roots/tags/blocks/pyres.json
-9d85560e4ef3fcd7f71d3f232b120f506b42889e data/roots/tags/blocks/runed_obsidian.json
+8d06670b1c8720ccda4f9106b9514fb1a6910fbb data/roots/tags/blocks/runed_obsidian.json
+5e8d174a22c9bf1dd7d1019a40071769c7d50cfa data/roots/tags/blocks/runestone.json
 0e0d53445f0b4eae177c5541e63c5f8e165ebd7b data/roots/tags/blocks/soils.json
 4425285b1f5c8c681722ad2e252862e4ef08107b data/roots/tags/blocks/soils/air.json
 35c6e38ebf4bff86f3ce23c782011bd517475465 data/roots/tags/blocks/soils/earth.json
@@ -1039,8 +1040,8 @@ a0f512d942a5e0f1365b3fcea384de8dffce2a51 data/roots/tags/items/pedestals/grove.j
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/items/pedestals/ritual.json
 2c0158a5c83124684d96ea4033acd20aafb3061c data/roots/tags/items/pyres.json
 ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/items/pyre_activation.json
-9d85560e4ef3fcd7f71d3f232b120f506b42889e data/roots/tags/items/runed_obsidian.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/items/runestone.json
+8d06670b1c8720ccda4f9106b9514fb1a6910fbb data/roots/tags/items/runed_obsidian.json
+5e8d174a22c9bf1dd7d1019a40071769c7d50cfa data/roots/tags/items/runestone.json
 8ac46bb1bc8333971781ccb761735ce9df7366a5 data/roots/tags/items/seeds.json
 98545c13dddf6574110e137626bb2822902a778d data/roots/tags/items/seeds/cloud_berry.json
 d018ba9ff0fd1ee26b58650998fe440e8fc1925d data/roots/tags/items/seeds/dewgonia.json
