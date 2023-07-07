@@ -1,0 +1,12 @@
+{
+  "type": "roots:mortar",
+  "ingredients": [
+    {
+      "tag": "forge:crops/wheat"
+    }
+  ],
+  "result": {
+    "item": "roots:flour"
+  },
+  "times": 2
+}

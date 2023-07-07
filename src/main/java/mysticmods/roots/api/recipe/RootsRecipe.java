@@ -454,8 +454,8 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     }
 
     protected void validate (ResourceLocation recipeName) {
-      if (!hasOutput() && !allowEmptyOutput()) {
-        throw new IllegalStateException("No output or conditional output defined for recipe " + recipeName);
+      if (!hasOutput() && !allowEmptyOutput() && grants.isEmpty()) {
+        throw new IllegalStateException("No output, conditional output or grants defined for recipe " + recipeName);
       }
       if (ingredients.isEmpty() && requireIngredients()) {
         throw new IllegalStateException("No ingredients defined for recipe " + recipeName);
@@ -465,8 +465,20 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       }
     }
 
+    protected String getFolderName (ResourceLocation recipeName) {
+      if (result != null) {
+        return result.getItem().getItemCategory().getRecipeFolderName();
+      } else if (!conditionalOutputs.isEmpty()) {
+        return conditionalOutputs.get(0).getOutput().getItem().getItemCategory().getRecipeFolderName();
+      } else if (!grants.isEmpty()) {
+        return grants.get(0).getId().getPath();
+      } else {
+        return recipeName.getPath();
+      }
+    }
+
     protected ResourceLocation getAdvancementId (ResourceLocation recipeName) {
-      return new ResourceLocation(recipeName.getNamespace(), "recipes/" + result.getItem().getItemCategory().getRecipeFolderName() + "/" + recipeName.getPath());
+      return new ResourceLocation(recipeName.getNamespace(), "recipes/" + getFolderName(recipeName) + "/" + recipeName.getPath());
     }
 
 

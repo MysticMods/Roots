@@ -1,27 +1,17 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_gold": {
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:ingots/gold"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:living_pickaxe"
+        "recipe": "roots:mortar/flour_from_wheat_5"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_wildroot": {
+    "has_wheat": {
       "conditions": {
         "items": [
           {
-            "tag": "roots:crops/wildroot"
+            "tag": "forge:crops/wheat"
           }
         ]
       },
@@ -30,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_gold",
-      "has_wildroot",
+      "has_wheat",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:living_pickaxe"
+      "roots:mortar/flour_from_wheat_5"
     ]
   }
 }

@@ -10,7 +10,12 @@ import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -20,8 +25,12 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+
+import static net.minecraft.data.recipes.RecipeBuilder.ROOT_RECIPE_ADVANCEMENT;
 
 // TODO: Mixed Mortar Recipe?
 public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEntity, MortarCrafting> {
@@ -76,7 +85,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
   }
 
   public static class Builder extends RootsRecipe.Builder {
-    private final int times;
+    protected final int times;
 
     protected Builder(int times) {
       super();
@@ -115,11 +124,66 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     }
   }
 
+  public static class MultiBuilder extends Builder {
+    protected final int count;
+
+    protected MultiBuilder(ItemStack result, int times, int count) {
+      super(result, times);
+      if (count <= 1) {
+        throw new IllegalArgumentException("Multi-recipe builder count must be greater than 1");
+      }
+      this.count = count;
+    }
+
+    @Override
+    protected void validate(ResourceLocation recipeName) {
+      if (ingredients.size() != 1) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' must have exactly one ingredient");
+      }
+      if (!conditionalOutputs.isEmpty()) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have conditional outputs");
+      }
+      if (!grants.isEmpty()) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have grants");
+      }
+      super.validate(recipeName);
+    }
+
+    @Override
+    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
+      validate(recipeName);
+      Ingredient ingredient = ingredients.get(0);
+      for (int i = 1; i < count + 1; i++) {
+        ResourceLocation thisRecipeName = new ResourceLocation(recipeName.getNamespace(), recipeName.getPath() + "_" + i);
+        ItemStack thisResult = result.copy();
+        thisResult.setCount(i);
+        List<Ingredient> thisIngredients = new ArrayList<>();
+        for (int j = 0; j < i; j++) {
+          thisIngredients.add(ingredient);
+        }
+        Advancement.Builder thisAdvancement = Advancement.Builder.advancement();
+        for (Map.Entry<String, Criterion> entry : advancement.getCriteria().entrySet()) {
+          thisAdvancement.addCriterion(entry.getKey(), entry.getValue());
+        }
+        thisAdvancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(thisRecipeName)).rewards(AdvancementRewards.Builder.recipe(thisRecipeName)).requirements(RequirementsStrategy.OR);
+        consumer.accept(new MortarRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName), times * i));
+      }
+    }
+  }
+
   public static Builder builder(ItemLike item, int count, int times) {
     return new Builder(new ItemStack(item, count), times);
   }
 
   public static Builder builder(int times) {
     return new Builder(times);
+  }
+
+  public static MultiBuilder multiBuilder(ItemLike item, int count, int times) {
+    return new MultiBuilder(new ItemStack(item, count), times, count);
+  }
+
+  public static MultiBuilder multiBuilder(ItemLike item, int times) {
+    return multiBuilder(item, 5, times);
   }
 }

@@ -3,9 +3,13 @@
   "ingredients": [
     {
       "tag": "forge:crops/wheat"
+    },
+    {
+      "tag": "forge:crops/wheat"
     }
   ],
   "result": {
+    "count": 2,
     "item": "roots:flour"
   },
   "times": 4

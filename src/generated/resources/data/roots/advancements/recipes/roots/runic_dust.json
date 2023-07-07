@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "has_runestone": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "roots:runestone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_runestone"
+    ]
+  ]
+}

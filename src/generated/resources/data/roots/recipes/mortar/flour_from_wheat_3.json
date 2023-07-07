@@ -1,0 +1,19 @@
+{
+  "type": "roots:mortar",
+  "ingredients": [
+    {
+      "tag": "forge:crops/wheat"
+    },
+    {
+      "tag": "forge:crops/wheat"
+    },
+    {
+      "tag": "forge:crops/wheat"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "roots:flour"
+  },
+  "times": 6
+}

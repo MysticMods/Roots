@@ -16,6 +16,7 @@ import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -28,8 +29,10 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import static net.minecraft.data.recipes.RecipeBuilder.ROOT_RECIPE_ADVANCEMENT;
@@ -106,7 +109,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
   }
 
   public static class Builder extends RootsRecipe.Builder {
-    private Ritual ritual;
+    protected Ritual ritual;
 
     protected Builder(ItemStack result) {
       super(result);
@@ -164,6 +167,27 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
 
     @Override
+    protected boolean allowEmptyOutput() {
+      return true;
+    }
+
+    @Override
+    protected void validate(ResourceLocation recipeName) {
+      super.validate(recipeName);
+      if (!hasOutput() && ritual == null) {
+        throw new IllegalStateException("Recipe '" + recipeName + "' must have either an output or a ritual");
+      }
+    }
+
+    @Override
+    protected ResourceLocation getAdvancementId(ResourceLocation recipeName) {
+      if (ritual != null) {
+        return new ResourceLocation(recipeName.getNamespace(), "recipes/root/ritual/" + recipeName.getPath());
+      }
+      return super.getAdvancementId(recipeName);
+    }
+
+    @Override
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       validate(recipeName);
       advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR);
@@ -189,6 +213,56 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
   }
 
+  public static class MultiBuilder extends Builder {
+    protected final int count;
+
+    protected MultiBuilder(ItemStack result, int count) {
+      super(result);
+      if (count <= 1) {
+        throw new IllegalArgumentException("Multi-recipe builder count must be greater than 1");
+      }
+      this.count = count;
+    }
+
+    @Override
+    protected void validate(ResourceLocation recipeName) {
+      if (ingredients.size() != 1) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' must have exactly one ingredient");
+      }
+      if (ritual != null) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have an associated ritual");
+      }
+      if (!conditionalOutputs.isEmpty()) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have conditional outputs");
+      }
+      if (!grants.isEmpty()) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have grants");
+      }
+      super.validate(recipeName);
+    }
+
+    @Override
+    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
+      validate(recipeName);
+      Ingredient ingredient = ingredients.get(0);
+      for (int i = 1; i < count + 1; i++) {
+        ResourceLocation thisRecipeName = new ResourceLocation(recipeName.getNamespace(), recipeName.getPath() + "_" + i);
+        ItemStack thisResult = result.copy();
+        thisResult.setCount(i);
+        List<Ingredient> thisIngredients = new ArrayList<>();
+        for (int j = 0; j < i; j++) {
+          thisIngredients.add(ingredient);
+        }
+        Advancement.Builder thisAdvancement = Advancement.Builder.advancement();
+        for (Map.Entry<String, Criterion> entry : advancement.getCriteria().entrySet()) {
+          thisAdvancement.addCriterion(entry.getKey(), entry.getValue());
+        }
+        thisAdvancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(thisRecipeName)).rewards(AdvancementRewards.Builder.recipe(thisRecipeName)).requirements(RequirementsStrategy.OR);
+        consumer.accept(new PyreRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName), ritual));
+      }
+    }
+  }
+
   public static Builder builder(ItemLike item, int count) {
     return new Builder(new ItemStack(item, count));
   }
@@ -199,5 +273,9 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
   public static Builder builder (ItemLike item) {
     return builder(item, 1);
+  }
+
+  public static MultiBuilder multiBuilder (ItemLike item, int count) {
+    return new MultiBuilder(new ItemStack(item), count);
   }
 }

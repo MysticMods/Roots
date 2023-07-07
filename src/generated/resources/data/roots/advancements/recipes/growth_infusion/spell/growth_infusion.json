@@ -1,10 +1,10 @@
 {
   "criteria": {
-    "has_wheat": {
+    "has_wildroot": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:crops/wheat"
+            "tag": "roots:crops/wildroot"
           }
         ]
       },
@@ -13,7 +13,7 @@
   },
   "requirements": [
     [
-      "has_wheat"
+      "has_wildroot"
     ]
   ]
 }

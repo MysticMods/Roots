@@ -191,13 +191,6 @@ public class ModItems {
 
   public static final ItemEntry<Item> FLOUR = REGISTRATE.item("flour", Item::new)
     .model(subfolder("food"))
-    .recipe((ctx, p) -> {
-      Ingredient WHEAT = Ingredient.of(Tags.Items.CROPS_WHEAT);
-      MortarRecipe.builder(ctx.getEntry(), 1, 4)
-        .addIngredient(WHEAT)
-        .unlockedBy("has_wheat", RegistrateRecipeProvider.has(Tags.Items.CROPS_WHEAT))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/flour"));
-    })
     .register();
 
   public static final ItemEntry<Item> WILDEWHEET_BREAD = REGISTRATE.item("wildewheet_bread", Item::new)

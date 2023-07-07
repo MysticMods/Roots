@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_gold": {
+    "has_glowstone": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/gold"
+            "tag": "forge:dusts/glowstone"
           }
         ]
       },
@@ -13,31 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:living_pickaxe"
+        "recipe": "roots:grove/glass_eye"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_wildroot": {
-      "conditions": {
-        "items": [
-          {
-            "tag": "roots:crops/wildroot"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
-      "has_gold",
-      "has_wildroot",
+      "has_glowstone",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:living_pickaxe"
+      "roots:grove/glass_eye"
     ]
   }
 }

@@ -1,19 +1,9 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_gold": {
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:ingots/gold"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:living_pickaxe"
+        "recipe": "roots:ritual/animal_harvest"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -30,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_gold",
       "has_wildroot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:living_pickaxe"
+      "roots:ritual/animal_harvest"
     ]
   }
 }
