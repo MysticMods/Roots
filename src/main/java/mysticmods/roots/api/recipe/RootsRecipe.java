@@ -11,6 +11,8 @@ import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.util.SetUtils;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -363,6 +365,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
   // TODO: Check if the ItemStack means that NBT is supported
   public abstract static class Builder {
+    protected final Advancement.Builder advancement = Advancement.Builder.advancement();
     protected ItemStack result;
     protected final List<Ingredient> ingredients = new ArrayList<>();
     protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
@@ -429,8 +432,17 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return this;
     }
 
+    public Builder unlockedBy(String criterionName, CriterionTriggerInstance pCriterionTrigger) {
+      this.advancement.addCriterion(criterionName, pCriterionTrigger);
+      return this;
+    }
+
+    protected ResourceLocation getAdvancementId (ResourceLocation recipeName) {
+      return new ResourceLocation(recipeName.getNamespace(), "recipes/" + result.getItem().getItemCategory().getRecipeFolderName() + "/" + recipeName.getPath());
+    }
+
     public void build(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer()));
+      consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
     }
 
     public static class Result implements FinishedRecipe {
@@ -442,8 +454,10 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       private final List<Grant> grants;
       private final List<LevelCondition> levelConditions;
       private final List<PlayerCondition> playerConditions;
+      private final Advancement.Builder advancementBuilder;
+      private final ResourceLocation advancementId;
 
-      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer) {
+      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
         this.id = id;
         this.result = result;
         this.ingredients = ingredients;
@@ -452,6 +466,8 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         this.grants = grants;
         this.levelConditions = levelConditions;
         this.playerConditions = playerConditions;
+        this.advancementBuilder = advancementBuilder;
+        this.advancementId = advancementId;
       }
 
       @Override
@@ -523,13 +539,13 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       @Nullable
       @Override
       public JsonObject serializeAdvancement() {
-        return null;
+        return advancementBuilder == null ? null : advancementBuilder.serializeToJson();
       }
 
       @Nullable
       @Override
       public ResourceLocation getAdvancementId() {
-        return null;
+        return advancementId;
       }
     }
   }
