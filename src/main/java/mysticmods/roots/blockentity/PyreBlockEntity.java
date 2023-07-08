@@ -114,6 +114,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       } else {
         currentRitual = newRitual;
       }
+      boundingBox = null;
 
       // TODO: Provider better feedback to the player
       RootsRecipe.ConditionResult result = cachedRecipe.checkConditions(level, player, PYRE_BOUNDS, pos);
@@ -294,6 +295,36 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Override
+  public int getRadiusX() {
+    Ritual ritual = getCurrentRitual();
+    if (ritual == null) {
+      return super.getRadiusX();
+    }
+
+    return ritual.getRadiusXZ();
+  }
+
+  @Override
+  public int getRadiusY() {
+    Ritual ritual = getCurrentRitual();
+    if (ritual == null) {
+      return super.getRadiusY();
+    }
+
+    return ritual.getRadiusY();
+  }
+
+  @Override
+  public int getRadiusZ() {
+    Ritual ritual = getCurrentRitual();
+    if (ritual == null) {
+      return super.getRadiusZ();
+    }
+
+    return ritual.getRadiusXZ();
+  }
+
+  @Override
   // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     RandomSource pRandom = pLevel.getRandom();
@@ -318,6 +349,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       setChanged();
       if (lifetime <= 0) {
         currentRitual = null;
+        boundingBox = null;
         if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT)) {
           pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, false), 3);
         } else {

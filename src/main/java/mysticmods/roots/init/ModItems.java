@@ -359,6 +359,7 @@ public class ModItems {
 
   public static final ItemEntry<Item> PETALS = REGISTRATE.item("petals", Item::new)
     .model(subfolder("resources"))
+    .tag(RootsTags.Items.PETALS)
     .register();
 
   public static final ItemEntry<Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
@@ -367,6 +368,7 @@ public class ModItems {
       .addIngredient(RootsTags.Items.RUNESTONE)
       .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
       .save(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
+    .tag(RootsTags.Items.RUNIC_DUST)
     .register();
 
   public static final ItemEntry<Item> STRANGE_OOZE = REGISTRATE.item("strange_ooze", Item::new)

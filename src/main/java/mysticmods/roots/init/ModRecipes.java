@@ -13,6 +13,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -61,7 +62,14 @@ public class ModRecipes {
         .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
         .save(p, new ResourceLocation(RootsAPI.MODID, "ritual/animal_harvest"));
       PyreRecipe
-        .builder(ModRituals.GROVE_SUPPLICATION.get());
+        .builder(ModRituals.GROVE_SUPPLICATION.get())
+        .addIngredient(ItemTags.DOORS)
+        .addIngredient(Items.BOWL)
+        .addIngredient(ItemTags.SAPLINGS)
+        .addIngredient(RootsTags.Items.PETALS)
+        .addIngredient(Items.BREAD)
+        .unlockedBy("has_door", p.has(ItemTags.DOORS))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "ritual/grove_supplication"));
       MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsTags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.Type.SPELL, Spells.GROWTH_INFUSION.location())).unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP)).save(p, new ResourceLocation(RootsAPI.MODID, "spell/growth_infusion"));
       MortarRecipe
         .multiBuilder(ModItems.FLOUR.get(), 2)

@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-09T14:12:17.7078071	Ritual properties
+// 1.19.2	2023-07-08T14:31:08.181444	Ritual properties
 6b6b9ab2b8b506320be813313b912bdca1b5d003 data/roots/properties/ritual/animal_harvest/count.json
 03ee6e0853f91b82586938222d3f534de106d777 data/roots/properties/ritual/animal_harvest/duration.json
 30cdc902a51267a4567478340dd0ea907bbc0d38 data/roots/properties/ritual/animal_harvest/glow_duration.json
@@ -27,6 +27,10 @@ b76edbbe0c916fae2befb9fcb8a2e0af7b4cd76e data/roots/properties/ritual/gathering/
 ac1340e1770ea98699c3db1220c2fc5c18b5c410 data/roots/properties/ritual/germination/interval.json
 12ae027bba7766b0f8eed7c131d63ca4e0dac7a0 data/roots/properties/ritual/germination/radius_xz.json
 32d17fb62af8fab1d40970ce476abc0e76927628 data/roots/properties/ritual/germination/radius_y.json
+b20fafc5caeeac0cabe350d0c9e87c3aa3912edd data/roots/properties/ritual/grove_supplication/duration.json
+7b9d4115a4958035ddb9471d437ca563e2c13dc2 data/roots/properties/ritual/grove_supplication/interval.json
+46c290c77e1067657b2283d4fe1357e5a52ff92a data/roots/properties/ritual/grove_supplication/radius_xz.json
+cb3957c1463871f7b4d8a5a7fb14186bb9365a4b data/roots/properties/ritual/grove_supplication/radius_y.json
 0b84f032e8492653f30ed2457d033dce33dadfae data/roots/properties/ritual/healing_aura/duration.json
 25c693995754e02bb41da309552edb178b8fc0ad data/roots/properties/ritual/healing_aura/interval.json
 94f3653782961bbb1ccee4609aa1c16518ff57a2 data/roots/properties/ritual/healing_aura/radius_xz.json

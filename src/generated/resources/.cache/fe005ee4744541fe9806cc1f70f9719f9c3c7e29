@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-08T12:40:52.313835	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-08T15:50:58.0193026	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -106,8 +106,8 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-883c91422117bce977aed12ee5f1742d3e176624 assets/roots/lang/en_ud.json
-1aa639a1cb32b069099c86a1296288d3a710c991 assets/roots/lang/en_us.json
+7d087c746ba074b0499a1aa45954d4e8537e5bd4 assets/roots/lang/en_ud.json
+669e9a8946a624546c828e541b8bd8bfa1dff189 assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
@@ -606,6 +606,7 @@ ad16b2801ee9f2cb762499a74c6312e70239c783 data/roots/advancements/recipes/roots/p
 a054c92f43b683e542e8fb9a57504fcf6ff15983 data/roots/advancements/recipes/roots/reinforced_pyre.json
 a09da0a38599ab86df82d22017d04cc78dd17d3d data/roots/advancements/recipes/roots/reinforced_pyre_from_pyre.json
 b88e3607c0c638cf80a33dba18dd743dd11e4d49 data/roots/advancements/recipes/roots/ritual/animal_harvest.json
+aa259a622fc8e7cb3055baf100fe9d9370dd57f9 data/roots/advancements/recipes/roots/ritual/grove_supplication.json
 d318db629e6833f224c0c1dfdd8a1c73f76c4ff4 data/roots/advancements/recipes/roots/runed_brick_alt_button.json
 134b0b017c437d3e3d4a975fbc6152ff6451e9e9 data/roots/advancements/recipes/roots/runed_brick_alt_button_from_runed_obsidian_brick_alt_stonecutting.json
 822db8dd048ab8587374eae92f99e91b92f41cac data/roots/advancements/recipes/roots/runed_brick_alt_fence.json
@@ -855,6 +856,7 @@ ff150ea662b00b38522da1055e32265e74787ca5 data/roots/recipes/primal_grove_stone.j
 65e888f28cb13b3b8735af37d2ff636c79edb896 data/roots/recipes/reinforced_pyre.json
 7a51e8290b07e2bd44b9c67f55d46cc1b97dbf55 data/roots/recipes/reinforced_pyre_from_pyre.json
 dfd1c08fb753a5e0fc6a460504c1b2e2854593f0 data/roots/recipes/ritual/animal_harvest.json
+032e130eb0b217e9ee828f44d181fc86dc3d9e69 data/roots/recipes/ritual/grove_supplication.json
 2fad0bd71a21380353d6eaac3f41f479c4871310 data/roots/recipes/runed_brick_alt_button.json
 25f784ae152aa29c7cd296bbc3ad1ab65f340327 data/roots/recipes/runed_brick_alt_button_from_runed_obsidian_brick_alt_stonecutting.json
 b84a1dbe42749bc8b7df762fe444bd4adeff7607 data/roots/recipes/runed_brick_alt_fence.json
@@ -1059,6 +1061,7 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/items/crops/pereskia.js
 314ec0136f8dbb967b704dda383c03d9e2057910 data/roots/tags/items/crops/stalicripe.json
 9572b957ea3e17cd5ad572e6ceabd95ba9a86fae data/roots/tags/items/crops/wildewheet.json
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/items/crops/wildroot.json
+1b81ce702cc93595adbcfc8dd9dcb1a5e932c8c6 data/roots/tags/items/dusts/runic.json
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/items/flint.json
 1ad920aa65e2706dabb6265f3b12546ab33e8936 data/roots/tags/items/grove_crafter_activation.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/items/grove_stones.json
@@ -1090,6 +1093,7 @@ f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/items/mortars.json
 a86be5b0621d186b9a511c74ca8aa7b0437cd35f data/roots/tags/items/nyi.json
 a0f512d942a5e0f1365b3fcea384de8dffce2a51 data/roots/tags/items/pedestals/grove.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/items/pedestals/ritual.json
+4636f349d6690dfab85139e6012a804c930f7288 data/roots/tags/items/petals.json
 2c0158a5c83124684d96ea4033acd20aafb3061c data/roots/tags/items/pyres.json
 ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/items/pyre_activation.json
 8d06670b1c8720ccda4f9106b9514fb1a6910fbb data/roots/tags/items/runed_obsidian.json
