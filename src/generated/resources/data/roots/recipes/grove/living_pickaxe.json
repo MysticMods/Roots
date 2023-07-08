@@ -1,0 +1,24 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_pickaxe"
+    },
+    {
+      "tag": "forge:ingots/gold"
+    },
+    {
+      "tag": "roots:crops/wildroot"
+    },
+    {
+      "tag": "roots:barks"
+    },
+    {
+      "tag": "roots:barks"
+    }
+  ],
+  "result": {
+    "item": "roots:living_pickaxe",
+    "nbt": "{Damage:0}"
+  }
+}

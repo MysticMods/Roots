@@ -1,0 +1,25 @@
+{
+  "type": "roots:mortar",
+  "ingredients": [
+    {
+      "tag": "minecraft:tall_flowers"
+    },
+    {
+      "tag": "minecraft:tall_flowers"
+    },
+    {
+      "tag": "minecraft:tall_flowers"
+    },
+    {
+      "tag": "minecraft:tall_flowers"
+    },
+    {
+      "tag": "minecraft:tall_flowers"
+    }
+  ],
+  "result": {
+    "count": 10,
+    "item": "roots:petals"
+  },
+  "times": 10
+}

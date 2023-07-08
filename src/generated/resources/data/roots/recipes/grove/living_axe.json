@@ -1,0 +1,24 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_axe"
+    },
+    {
+      "tag": "forge:ingots/gold"
+    },
+    {
+      "tag": "roots:crops/wildroot"
+    },
+    {
+      "tag": "roots:barks"
+    },
+    {
+      "tag": "roots:barks"
+    }
+  ],
+  "result": {
+    "item": "roots:living_axe",
+    "nbt": "{Damage:0}"
+  }
+}

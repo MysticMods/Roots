@@ -154,10 +154,11 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       validate(recipeName);
       Ingredient ingredient = ingredients.get(0);
+      int baseCount = result.getCount();
       for (int i = 1; i < count + 1; i++) {
         ResourceLocation thisRecipeName = new ResourceLocation(recipeName.getNamespace(), recipeName.getPath() + "_" + i);
         ItemStack thisResult = result.copy();
-        thisResult.setCount(i);
+        thisResult.setCount(i * baseCount);
         List<Ingredient> thisIngredients = new ArrayList<>();
         for (int j = 0; j < i; j++) {
           thisIngredients.add(ingredient);
@@ -181,7 +182,15 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
   }
 
   public static MultiBuilder multiBuilder(ItemLike item, int count, int times) {
-    return new MultiBuilder(new ItemStack(item, count), times, count);
+    return new MultiBuilder(new ItemStack(item), times, count);
+  }
+
+  public static MultiBuilder multiBuilder(ItemStack item, int times) {
+    return new MultiBuilder(item, times, 5);
+  }
+
+  public static MultiBuilder multiBuilder (ItemStack item, int times, int counts) {
+    return new MultiBuilder(item, times, counts);
   }
 
   public static MultiBuilder multiBuilder(ItemLike item, int times) {

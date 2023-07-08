@@ -1,0 +1,24 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_sword"
+    },
+    {
+      "tag": "forge:ingots/gold"
+    },
+    {
+      "tag": "roots:crops/wildroot"
+    },
+    {
+      "tag": "roots:barks"
+    },
+    {
+      "tag": "roots:barks"
+    }
+  ],
+  "result": {
+    "item": "roots:living_sword",
+    "nbt": "{Damage:0}"
+  }
+}

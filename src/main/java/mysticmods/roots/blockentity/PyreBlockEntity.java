@@ -328,13 +328,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     RandomSource pRandom = pLevel.getRandom();
-    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.LIT)) {
+    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.LIT) && pRandom.nextInt(10) == 0) {
       Particles.create(ModParticles.FIERY_PARTICLE.get())
           .addVelocity(0.00525f * (pRandom.nextFloat() - 0.5f), 0, 0.00525f * (pRandom.nextFloat() - 0.5f))
-          .setAlpha(0.5f, 0.2f)
-          .setScale(0.8f + 0.5f * pRandom.nextFloat())
+          .setAlpha(1f, 0.6f)
+          .setScale(1f + 0.2f * pRandom.nextFloat())
           .setColor(230 / 255.0f, 55 / 255.0f, 16 / 255.0f, 230 / 255.0f, 83 / 255.0f, 16 / 255.0f)
-          .setLifetime(80)
+          .setLifetime(50)
           .disableGravity()
           .setSpin(0)
           .spawn(pLevel, pPos.getX() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f), pPos.getY() + 0.625f + 0.125f * pRandom.nextFloat(), pPos.getZ() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f));

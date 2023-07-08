@@ -13,7 +13,6 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
@@ -180,7 +179,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
 
     @Override
-    protected String getFolderName (ResourceLocation recipeName) {
+    protected String getFolderName(ResourceLocation recipeName) {
       if (ritual != null) {
         return Registries.RITUAL_REGISTRY.get().getKey(ritual).getNamespace();
       }
@@ -245,10 +244,11 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       validate(recipeName);
       Ingredient ingredient = ingredients.get(0);
+      int baseCount = result.getCount();
       for (int i = 1; i < count + 1; i++) {
         ResourceLocation thisRecipeName = new ResourceLocation(recipeName.getNamespace(), recipeName.getPath() + "_" + i);
         ItemStack thisResult = result.copy();
-        thisResult.setCount(i);
+        thisResult.setCount(i * baseCount);
         List<Ingredient> thisIngredients = new ArrayList<>();
         for (int j = 0; j < i; j++) {
           thisIngredients.add(ingredient);
@@ -271,11 +271,19 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     return new Builder(ritual);
   }
 
-  public static Builder builder (ItemLike item) {
+  public static Builder builder(ItemLike item) {
     return builder(item, 1);
   }
 
-  public static MultiBuilder multiBuilder (ItemLike item, int count) {
+  public static MultiBuilder multiBuilder(ItemLike item, int count) {
     return new MultiBuilder(new ItemStack(item), count);
+  }
+
+  public static MultiBuilder multiBuilder(ItemStack item) {
+    return new MultiBuilder(item, 5);
+  }
+
+  public static MultiBuilder multiBuilder(ItemStack item, int counts) {
+    return new MultiBuilder(item, counts);
   }
 }
