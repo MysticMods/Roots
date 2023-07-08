@@ -141,6 +141,17 @@ public class ModRituals {
   public static final RegistryEntry<RitualProperty<Integer>> WINDWALL_RADIUS_XZ = REGISTRATE.simple("windwall/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WINDWALL::get, 51, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
   public static final RegistryEntry<RitualProperty<Integer>> WINDWALL_RADIUS_Y = REGISTRATE.simple("windwall/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WINDWALL::get, 31, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
+  // Grove Supplication ritual
+  public static final RegistryEntry<GroveSupplicationRitual> GROVE_SUPPLICATION = ritual(Rituals.GROVE_SUPPLICATION, GroveSupplicationRitual::new);
+
+  public static final RegistryEntry<RitualProperty<Integer>> GROVE_SUPPLICATION_DURATION = REGISTRATE.simple("grove_supplication/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GROVE_SUPPLICATION::get, 250, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
+
+  public static final RegistryEntry<RitualProperty<Integer>> GROVE_SUPPLICATION_INTERVAL = REGISTRATE.simple("grove_supplication/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GROVE_SUPPLICATION::get, 210, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
+
+  public static final RegistryEntry<RitualProperty<Integer>> GROVE_SUPPLICATION_RADIUS_XZ = REGISTRATE.simple("grove_supplication/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GROVE_SUPPLICATION::get, 10, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+
+  public static final RegistryEntry<RitualProperty<Integer>> GROVE_SUPPLICATION_RADIUS_Y = REGISTRATE.simple("grove_supplication/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GROVE_SUPPLICATION::get, 10, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
+
   private static <T extends Ritual> RegistryEntry<T> ritual(ResourceKey<Ritual> key, NonNullSupplier<T> builder) {
     return REGISTRATE.simple(key.location().getPath(), RootsAPI.RITUAL_REGISTRY, builder);
   }

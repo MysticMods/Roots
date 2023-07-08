@@ -27,6 +27,7 @@ public interface Rituals {
   ResourceKey<Ritual> WARDING = ritual("warding");
   ResourceKey<Ritual> WILDROOT_GROWTH = ritual("wildroot_growth");
   ResourceKey<Ritual> WINDWALL = ritual("windwall");
+  ResourceKey<Ritual> GROVE_SUPPLICATION = ritual("grove_supplication");
 
   static ResourceKey<Ritual> ritual(String name) {
     return ResourceKey.create(RootsAPI.RITUAL_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));

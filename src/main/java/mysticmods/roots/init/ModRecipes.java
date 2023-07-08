@@ -60,6 +60,8 @@ public class ModRecipes {
         .addIngredient(RootsTags.Items.WILDROOT_CROP)
         .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
         .save(p, new ResourceLocation(RootsAPI.MODID, "ritual/animal_harvest"));
+      PyreRecipe
+        .builder(ModRituals.GROVE_SUPPLICATION.get());
       MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsTags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.Type.SPELL, Spells.GROWTH_INFUSION.location())).unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP)).save(p, new ResourceLocation(RootsAPI.MODID, "spell/growth_infusion"));
       MortarRecipe
         .multiBuilder(ModItems.FLOUR.get(), 2)
