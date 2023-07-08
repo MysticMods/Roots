@@ -1,6 +1,8 @@
 package mysticmods.roots.api.condition;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.faction.GroveType;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.core.BlockPos;
@@ -81,7 +83,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
       // Keep a note of which blockpositions are part of this pillar
       Set<BlockPos> result = new HashSet<>();
       result.add(pos.immutable());
-      BlockPos pPos = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
+      BlockPos pPos = pos.below();
 
       // Move downward for each of the height (excluding the capstone)
       for (int i = 0; i < heightExcluding; i++) {
@@ -103,12 +105,91 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     }
   }
 
+  public static class GroveStoneCondition implements Type {
+    private final TagKey<Block> groveType;
+    private final boolean requireValid;
+
+    public GroveStoneCondition(TagKey<Block> groveType, boolean requireValid) {
+      this.groveType = groveType;
+      this.requireValid = requireValid;
+    }
+
+    @Nullable
+    protected StateProperties.Part getPart (BlockState state) {
+      if (!state.hasProperty(StateProperties.GroveStone.PART)) {
+        return null;
+      } else {
+        return state.getValue(StateProperties.GroveStone.PART);
+      }
+    }
+
+    protected boolean getValid (BlockState state) {
+      if (!state.hasProperty(StateProperties.GroveStone.VALID)) {
+        return false;
+      } else {
+        return state.getValue(StateProperties.GroveStone.VALID);
+      }
+    }
+
+    @Override
+    public Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player) {
+      BlockState initial = level.getBlockState(pos);
+      // If the initial position isn't the capstone, we don't care
+      if (!initial.is(groveType) && getPart(initial) != StateProperties.Part.TOP) {
+        return Collections.emptySet();
+      }
+
+      int validCount = 0;
+      if (getValid(initial)) {
+        validCount++;
+      }
+
+      // Keep a note of which blockpositions are part of this pillar
+      Set<BlockPos> result = new HashSet<>();
+      result.add(pos.immutable());
+      BlockPos pPos = pos.below();
+
+      initial = level.getBlockState(pPos);
+      if (!initial.is(groveType) && getPart(initial) != StateProperties.Part.MIDDLE) {
+        return Collections.emptySet();
+      }
+
+      result.add(pPos.immutable());
+
+      if (getValid(initial)) {
+        validCount++;
+      }
+
+      pPos = pPos.below();
+      initial = level.getBlockState(pPos);
+      if (!initial.is(groveType) && getPart(initial) != StateProperties.Part.BOTTOM) {
+        return Collections.emptySet();
+      }
+
+      result.add(pPos.immutable());
+
+      if (getValid(initial)) {
+        validCount++;
+      }
+
+      if (requireValid && validCount != 3) {
+        return Collections.emptySet();
+      }
+
+      return result;
+    }
+  }
+
   public static LevelCondition.PillarCondition runePillar(int height) {
     return new LevelCondition.PillarCondition(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Blocks.RUNE_PILLARS, height);
   }
 
   public static LevelCondition.PillarCondition logPillar(PillarType type, int height) {
     return new PillarCondition(type.getCapstoneTag(), type.getPillarTag(), height);
+  }
+
+  public static LevelCondition.GroveStoneCondition groveStone (GroveType grove, boolean requireValid) {
+    return new GroveStoneCondition(grove.getTag(), requireValid);
   }
 
   public enum PillarType {

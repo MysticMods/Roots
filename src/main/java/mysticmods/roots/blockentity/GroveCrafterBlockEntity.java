@@ -53,6 +53,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       if (cachedRecipe == null) {
         return InteractionResult.FAIL;
       }
+      // TODO: Check level conditions & player conditions
 
       lastRecipe = cachedRecipe;
       ItemStack result = cachedRecipe.assemble(playerCrafting);

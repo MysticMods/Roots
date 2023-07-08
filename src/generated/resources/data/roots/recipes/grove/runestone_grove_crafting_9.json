@@ -1,0 +1,39 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "tag": "roots:stonelike"
+    },
+    {
+      "tag": "roots:stonelike"
+    },
+    {
+      "tag": "roots:stonelike"
+    },
+    {
+      "tag": "roots:stonelike"
+    },
+    {
+      "tag": "roots:stonelike"
+    },
+    {
+      "tag": "roots:stonelike"
+    },
+    {
+      "tag": "roots:stonelike"
+    },
+    {
+      "tag": "roots:stonelike"
+    },
+    {
+      "tag": "roots:stonelike"
+    }
+  ],
+  "level_conditions": [
+    "roots:primal_grove_stone_any"
+  ],
+  "result": {
+    "count": 9,
+    "item": "roots:runestone"
+  }
+}

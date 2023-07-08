@@ -44,7 +44,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-// This controls the LIT state
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {
   private final PyreInventory inventory = new PyreInventory() {
     @Override
@@ -116,6 +115,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         currentRitual = newRitual;
       }
 
+      // TODO: Copy this to both the Mortar and Grove Crafter
       RootsRecipe.ConditionResult result = cachedRecipe.checkConditions(level, player, PYRE_BOUNDS, pos);
       if (result.anyFailed()) {
         RootsAPI.LOG.info("Conditions failed.");

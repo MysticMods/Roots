@@ -33,6 +33,7 @@ public class ModItems {
     return (ctx, p) -> p.generated(ctx::getEntry, new ResourceLocation(RootsAPI.MODID, "item/" + subfolder + "/" + ctx.getName()));
   }
 
+  // GATHERED CROPS
   public static final ItemEntry<ItemNameBlockItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), p))
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.WILDROOT_CROP)
@@ -42,6 +43,8 @@ public class ModItems {
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.GROVE_MOSS_CROP)
     .register();
+
+  // PYRE-CRAFTED CROPS
   public static final ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.CLOUD_BERRY_CROP.get(), p))
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
@@ -58,6 +61,11 @@ public class ModItems {
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.STALICRIPE_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.STALICRIPE_CROP)
     .register();
+  // OTHER SOURCE CROPS
+  public static final ItemEntry<ItemNameBlockItem> BAFFLECAP = REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), p))
+    .model(subfolder("herbs"))
+    .tag(RootsTags.Items.BAFFLECAP_CROP)
+    .register();
   public static final ItemEntry<Item> MOONGLOW = REGISTRATE.item("moonglow", Item::new)
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.MOONGLOW_CROP)
@@ -66,19 +74,19 @@ public class ModItems {
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.PERESKIA_CROP)
     .register();
+
+  // RUNIC SHEARS -> BEETROOT
   public static final ItemEntry<Item> SPIRITLEAF = REGISTRATE.item("spiritleaf", Item::new)
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.SPIRITLEAF_CROP)
     .register();
+
+  // RUNIC SHEARS -> WHEAT
   public static final ItemEntry<Item> WILDEWHEET = REGISTRATE.item("wildewheet", Item::new)
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.WILDEWHEET_CROP)
     .register();
 
-  public static final ItemEntry<ItemNameBlockItem> BAFFLECAP = REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.BAFFLECAP_CROP)
-    .register();
   public static final ItemEntry<ItemNameBlockItem> MOONGLOW_SEEDS = REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.MOONGLOW_CROP.get(), p))
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.MOONGLOW_SEEDS, RootsTags.Items.SEEDS)

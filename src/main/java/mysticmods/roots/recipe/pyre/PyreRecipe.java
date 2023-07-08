@@ -179,8 +179,6 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       }
     }
 
-
-
     @Override
     protected String getFolderName (ResourceLocation recipeName) {
       if (ritual != null) {

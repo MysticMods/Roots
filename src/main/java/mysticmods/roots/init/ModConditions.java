@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.faction.GroveType;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -27,6 +28,8 @@ public class ModConditions {
   public static final RegistryEntry<LevelCondition> WARPED_PILLAR_3_HIGH = REGISTRATE.simple("warped_pillar_3_high", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.logPillar(LevelCondition.PillarType.WARPED, 3)));
   public static final RegistryEntry<LevelCondition> WILDWOOD_PILLAR_4_HIGH = REGISTRATE.simple("wildwood_pillar_4_high", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.logPillar(LevelCondition.PillarType.WILDWOOD, 4)));
   public static final RegistryEntry<LevelCondition> WILDWOOD_PILLAR_3_HIGH = REGISTRATE.simple("wildwood_pillar_3_high", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.logPillar(LevelCondition.PillarType.WILDWOOD, 3)));
+  public static final RegistryEntry<LevelCondition> PRIMAL_GROVE_STONE_ANY = REGISTRATE.simple("primal_grove_stone_any", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.groveStone(GroveType.PRIMAL, false)));
+  public static final RegistryEntry<LevelCondition> PRIMAL_GROVE_STONE_VALID = REGISTRATE.simple("primal_grove_stone_valid", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.groveStone(GroveType.PRIMAL, true)));
 
   public static void load() {
   }

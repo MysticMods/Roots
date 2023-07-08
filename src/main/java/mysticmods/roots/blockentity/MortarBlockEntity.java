@@ -156,6 +156,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
         // should this revalidate?
         revalidateRecipe();
       }
+      // TODO: Check player conditions & level conditions
+
       if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
         uses++;
 

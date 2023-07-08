@@ -1,9 +1,9 @@
 package mysticmods.roots.block;
 
+import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.reference.Shapes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -27,16 +27,16 @@ import javax.annotation.Nullable;
 
 // TODO: Activation with right-click wildroot? (or just right-click)
 public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
-  public static final DirectionProperty FACING = BaseBlocks.HorizontalBlock.FACING;
-  public static final EnumProperty<Part> PART = EnumProperty.create("part", Part.class);
-  public static final BooleanProperty VALID = BooleanProperty.create("valid");
+  public static final DirectionProperty FACING = StateProperties.GroveStone.FACING;
+  public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
+  public static final BooleanProperty VALID = StateProperties.GroveStone.VALID;
 
   public static final VoxelShape[] EAST_WEST = {VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_TOP, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_MIDDLE, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_BOTTOM, Direction.EAST)};
   public static final VoxelShape[] NORTH_SOUTH = {Shapes.GROVE_STONE_TOP, Shapes.GROVE_STONE_MIDDLE, Shapes.GROVE_STONE_BOTTOM};
 
   public GroveStoneBlock(Properties builder) {
     super(builder);
-    this.registerDefaultState(defaultBlockState().setValue(VALID, false).setValue(PART, Part.BOTTOM));
+    this.registerDefaultState(defaultBlockState().setValue(VALID, false).setValue(PART, StateProperties.Part.BOTTOM));
   }
 
   @Override
@@ -72,8 +72,8 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
 
   @Override
   public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
-    pLevel.setBlock(pPos.above(), this.defaultBlockState().setValue(PART, Part.MIDDLE).setValue(FACING, pState.getValue(FACING)), 3);
-    pLevel.setBlock(pPos.above().above(), this.defaultBlockState().setValue(PART, Part.TOP).setValue(FACING, pState.getValue(FACING)), 3);
+    pLevel.setBlock(pPos.above(), this.defaultBlockState().setValue(PART, StateProperties.Part.MIDDLE).setValue(FACING, pState.getValue(FACING)), 3);
+    pLevel.setBlock(pPos.above().above(), this.defaultBlockState().setValue(PART, StateProperties.Part.TOP).setValue(FACING, pState.getValue(FACING)), 3);
   }
 
   @Override
@@ -94,57 +94,41 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
   }
 
   protected static void preventDrops(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-    Part part = pState.getValue(PART);
-    if (part == Part.TOP) {
+    StateProperties.Part part = pState.getValue(PART);
+    if (part == StateProperties.Part.TOP) {
       BlockPos blockpos = pPos.below();
       BlockState blockstate = pLevel.getBlockState(blockpos);
-      if (blockstate.getBlock() == pState.getBlock() && blockstate.getValue(PART) == Part.MIDDLE) {
+      if (blockstate.getBlock() == pState.getBlock() && blockstate.getValue(PART) == StateProperties.Part.MIDDLE) {
         pLevel.destroyBlock(blockpos, false);
       }
       blockpos = blockpos.below();
       blockstate = pLevel.getBlockState(blockpos);
-      if (blockstate.getBlock() == pState.getBlock() && blockstate.getValue(PART) == Part.BOTTOM) {
+      if (blockstate.getBlock() == pState.getBlock() && blockstate.getValue(PART) == StateProperties.Part.BOTTOM) {
         pLevel.destroyBlock(blockpos, false);
       }
-    } else if (part == Part.MIDDLE) {
+    } else if (part == StateProperties.Part.MIDDLE) {
       BlockPos blockPos = pPos.above();
       BlockState blockState = pLevel.getBlockState(blockPos);
-      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == Part.TOP) {
+      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == StateProperties.Part.TOP) {
         pLevel.destroyBlock(blockPos, false);
       }
       blockPos = pPos.below();
       blockState = pLevel.getBlockState(blockPos);
-      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == Part.BOTTOM) {
+      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == StateProperties.Part.BOTTOM) {
         pLevel.destroyBlock(blockPos, false);
       }
-    } else if (part == Part.BOTTOM) {
+    } else if (part == StateProperties.Part.BOTTOM) {
       BlockPos blockPos = pPos.above();
       BlockState blockState = pLevel.getBlockState(blockPos);
-      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == Part.MIDDLE) {
+      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == StateProperties.Part.MIDDLE) {
         pLevel.destroyBlock(blockPos, false);
       }
       blockPos = blockPos.above();
       blockState = pLevel.getBlockState(blockPos);
-      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == Part.TOP) {
+      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == StateProperties.Part.TOP) {
         pLevel.destroyBlock(blockPos, false);
       }
     }
   }
 
-  public enum Part implements StringRepresentable {
-    TOP("top"),
-    MIDDLE("middle"),
-    BOTTOM("bottom");
-
-    private final String partName;
-
-    Part(String partName) {
-      this.partName = partName;
-    }
-
-    @Override
-    public String getSerializedName() {
-      return this.partName;
-    }
-  }
 }

@@ -11,11 +11,11 @@ import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.block.crop.WaterElementalCropBlock;
-import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
@@ -25,7 +25,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.*;
@@ -33,11 +32,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.world.level.storage.loot.IntRange;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.LimitCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -76,6 +73,12 @@ public class ModBlocks {
         .define('H', Ingredient.of(RootsTags.Items.RUNESTONE_HERBS))
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE_HERBS))
         .save(p, new ResourceLocation(RootsAPI.MODID, "runestone_simple_crafting"));
+      // TODO: Grove Stone condition
+      GroveRecipe.multiBuilder(ctx.getEntry(), 20)
+        .addIngredient(Ingredient.of(RootsTags.Items.STONELIKE))
+        .addLevelCondition(ModConditions.PRIMAL_GROVE_STONE_ANY.get())
+        .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.STONELIKE))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runestone_grove_crafting"));
     })
     .register();
   public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
@@ -842,6 +845,8 @@ public class ModBlocks {
     .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, net.minecraftforge.common.Tags.Blocks.FENCE_GATES_WOODEN, BlockTags.MINEABLE_WITH_AXE)
     .register();
 
+  // FUNCTIONAL BLOCKS BEGIN HERE
+
   private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> cropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier, Supplier<? extends Item> productSupplier) {
     return (p, t) -> {
       int maxValue = Collections.max(property.getPossibleValues());
@@ -1154,7 +1159,7 @@ public class ModBlocks {
   public static <T extends Block> NonNullBiConsumer<DataGenContext<Block, T>, RegistrateBlockstateProvider> groveStone(String type) {
     return (ctx, p) -> p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> {
       BlockModelBuilder model;
-      boolean valid = state.getValue(GroveStoneBlock.VALID);
+      boolean valid = state.getValue(StateProperties.GroveStone.VALID);
 
       model = switch (state.getValue(GroveStoneBlock.PART)) {
         case MIDDLE ->
