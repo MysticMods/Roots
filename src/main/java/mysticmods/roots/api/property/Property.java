@@ -67,7 +67,7 @@ public abstract class Property<T> {
   }
 
   public boolean shouldSerialize() {
-    return this.value == null || !this.value.equals(defaultValue);
+    return this.value != null && !this.value.equals(defaultValue);
   }
 
   public void updateFromJson(JsonObject object) {
