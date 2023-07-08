@@ -1,0 +1,6 @@
+{
+  "_comment": "How often the ritual is executed (must be shorter than duration)",
+  "default_value": 210,
+  "ritual": "roots:grove_supplication",
+  "value": 210
+}

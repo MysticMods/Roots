@@ -1,0 +1,6 @@
+{
+  "_comment": "The vertical radius of the ritual in blocks.",
+  "default_value": 10,
+  "ritual": "roots:grove_supplication",
+  "value": 10
+}
