@@ -121,7 +121,8 @@ public class ModTags {
       b.copy(RootsTags.Blocks.NYI, RootsTags.Items.NYI);
 
       b.tag(RootsTags.Items.FLINT).add(Items.FLINT);
-      b.tag(RootsTags.Items.STONELIKE).addTags(Tags.Items.STONE, ItemTags.STONE_BRICKS, ItemTags.STONE_CRAFTING_MATERIALS, ItemTags.STONE_TOOL_MATERIALS).add(Items.DIORITE, Items.GRANITE, Items.CALCITE, Items.TUFF, Items.POLISHED_DIORITE, Items.POLISHED_GRANITE, Items.POLISHED_ANDESITE, Items.ANDESITE, Items.POLISHED_DEEPSLATE, Items.POLISHED_BLACKSTONE);
+      b.tag(RootsTags.Items.STONELIKE).addTags(Tags.Items.SANDSTONE, Tags.Items.STONE, ItemTags.STONE_BRICKS, ItemTags.STONE_CRAFTING_MATERIALS, ItemTags.STONE_TOOL_MATERIALS).add(Items.DIORITE, Items.GRANITE, Items.CALCITE, Items.TUFF, Items.POLISHED_DIORITE, Items.POLISHED_GRANITE, Items.POLISHED_ANDESITE, Items.ANDESITE, Items.POLISHED_DEEPSLATE, Items.POLISHED_BLACKSTONE);
+
       b.tag(RootsTags.Items.RUNESTONE_HERBS).addTags(RootsTags.Items.WILDROOT_CROP, RootsTags.Items.GROVE_MOSS_CROP);
 
       b.tag(RootsTags.Items.AIR_CROPS).addTags(RootsTags.Items.CLOUD_BERRY_CROP);

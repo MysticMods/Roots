@@ -1,7 +1,9 @@
 package mysticmods.roots.blockentity;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.grove.GroveCrafting;
@@ -37,7 +39,6 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     super(pType, pWorldPosition, pBlockState);
   }
 
-  // TODO: SUPPORT EMPTY PEDESTALS
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
     if (level.isClientSide()) {
@@ -53,8 +54,14 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       if (cachedRecipe == null) {
         return InteractionResult.FAIL;
       }
-      // TODO: Check level conditions & player conditions
-
+      // TODO: Provider better feedback to the player
+      RootsRecipe.ConditionResult conditionResult = cachedRecipe.checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
+      if (conditionResult.anyFailed()) {
+        RootsAPI.LOG.info("Conditions failed.");
+        conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        return InteractionResult.FAIL;
+      }
       lastRecipe = cachedRecipe;
       ItemStack result = cachedRecipe.assemble(playerCrafting);
       NonNullList<ItemStack> processed = cachedRecipe.process(playerCrafting.popItems());

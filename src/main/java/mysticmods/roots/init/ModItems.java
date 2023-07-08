@@ -62,6 +62,8 @@ public class ModItems {
     .tag(RootsTags.Items.STALICRIPE_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.STALICRIPE_CROP)
     .register();
   // OTHER SOURCE CROPS
+
+  // RUNIC SHEARS -> MUSHROOM
   public static final ItemEntry<ItemNameBlockItem> BAFFLECAP = REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), p))
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.BAFFLECAP_CROP)
@@ -70,18 +72,20 @@ public class ModItems {
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.MOONGLOW_CROP)
     .register();
+
+  // RUNIC SHEARS -> FLOWER -> BULB
   public static final ItemEntry<Item> PERESKIA = REGISTRATE.item("pereskia", Item::new)
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.PERESKIA_CROP)
     .register();
 
-  // RUNIC SHEARS -> BEETROOT
+  // RUNIC SHEARS -> BEETROOT -> SPIRITLEAF SEEDS
   public static final ItemEntry<Item> SPIRITLEAF = REGISTRATE.item("spiritleaf", Item::new)
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.SPIRITLEAF_CROP)
     .register();
 
-  // RUNIC SHEARS -> WHEAT
+  // RUNIC SHEARS -> WHEAT -> WILDEWHEET SEEDS
   public static final ItemEntry<Item> WILDEWHEET = REGISTRATE.item("wildewheet", Item::new)
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.WILDEWHEET_CROP)

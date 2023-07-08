@@ -56,7 +56,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   };
 
   // TODO: UNHARDCODE THIS
-  private final static BoundingBox PYRE_BOUNDS = new BoundingBox(-10, -10, -10, 11, 11, 11);
+  public final static BoundingBox PYRE_BOUNDS = new BoundingBox(-10, -10, -10, 11, 11, 11);
 
   private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
   private final List<ItemStack> previousRecipeItems = new ArrayList<>();
@@ -115,12 +115,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         currentRitual = newRitual;
       }
 
-      // TODO: Copy this to both the Mortar and Grove Crafter
+      // TODO: Provider better feedback to the player
       RootsRecipe.ConditionResult result = cachedRecipe.checkConditions(level, player, PYRE_BOUNDS, pos);
       if (result.anyFailed()) {
         RootsAPI.LOG.info("Conditions failed.");
-        result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o));
-        result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o));
+        result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
         // Needs to be a success or it sets things on fire
         return InteractionResult.SUCCESS;
       }
