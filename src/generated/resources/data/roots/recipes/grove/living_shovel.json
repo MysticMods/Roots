@@ -17,6 +17,9 @@
       "tag": "roots:barks"
     }
   ],
+  "level_conditions": [
+    "roots:grove_stone_valid"
+  ],
   "result": {
     "item": "roots:living_shovel",
     "nbt": "{Damage:0}"

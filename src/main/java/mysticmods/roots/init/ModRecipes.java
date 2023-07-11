@@ -76,6 +76,16 @@ public class ModRecipes {
         .addIngredient(Tags.Items.CROPS_WHEAT)
         .unlockedBy("has_wheat", p.has(Tags.Items.CROPS_WHEAT))
         .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/flour_from_wheat"));
+      MortarRecipe
+        .multiBuilder(Items.STRING, 6)
+        .addIngredient(ItemTags.WOOL)
+        .unlockedBy("has_wool", p.has(ItemTags.WOOL))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/string_from_wool"));
+      MortarRecipe
+        .multiBuilder(Items.FLINT, 6)
+        .addIngredient(Tags.Items.GRAVEL)
+        .unlockedBy("has_gravel", p.has(Tags.Items.GRAVEL))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/flint_from_gravel"));
 
       GroveRecipe.builder(new ItemStack(ModItems.GLASS_EYE.get())).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.DUSTS_GLOWSTONE).unlockedBy("has_glowstone", p.has(Tags.Items.DUSTS_GLOWSTONE)).save(p, new ResourceLocation(RootsAPI.MODID, "grove/glass_eye"));
     });

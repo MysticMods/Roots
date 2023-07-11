@@ -23,11 +23,11 @@
                   }
                 }
               ],
-              "name": "roots:wildewheet_seeds"
+              "name": "roots:wildewheet"
             },
             {
               "type": "minecraft:item",
-              "name": "roots:wildewheet"
+              "name": "roots:wildewheet_seeds"
             }
           ]
         }
@@ -59,7 +59,7 @@
               }
             }
           ],
-          "name": "roots:wildewheet"
+          "name": "roots:wildewheet_seeds"
         }
       ],
       "rolls": 1.0

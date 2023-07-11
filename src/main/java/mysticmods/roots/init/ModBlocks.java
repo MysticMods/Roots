@@ -47,6 +47,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 import noobanidus.libs.noobutil.block.BaseBlocks.SeededCropsBlock;
+import noobanidus.libs.noobutil.block.WaterloggedBlock;
 import noobanidus.libs.noobutil.data.generator.BlockstateGenerator;
 import noobanidus.libs.noobutil.data.generator.ItemModelGenerator;
 
@@ -58,6 +59,22 @@ import static mysticmods.roots.Roots.REGISTRATE;
 public class ModBlocks {
   public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNED_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN);
   public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNESTONE_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE);
+
+  public static BlockEntry<WaterloggedBlock> THATCH = REGISTRATE.block("thatch", Material.WOOD, WaterloggedBlock::new)
+    .item()
+    .model((ctx, p) -> p.blockItem(ModBlocks.THATCH))
+    .build()
+    .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ModBlocks.THATCH.get(), 32)
+      .pattern("XY")
+      .pattern("YX")
+      .define('X', Blocks.HAY_BLOCK)
+      .define('Y', Tags.Items.CROPS_WHEAT)
+      .unlockedBy("has_hay", RegistrateRecipeProvider.has(Blocks.HAY_BLOCK))
+      .unlockedBy("has_wheat", RegistrateRecipeProvider.has(Items.WHEAT))
+      .save(p)
+    )
+    .tag(BlockTags.MINEABLE_WITH_AXE)
+    .register();
   public static BlockEntry<Block> RUNESTONE = REGISTRATE.block("runestone", Block::new)
     .properties(RUNESTONE_PROPERTIES)
     .recipe((ctx, p) -> Roots.RECIPES.twoByTwo(ModBlocks.RUNESTONE_BRICK_ALT, ModBlocks.RUNESTONE, null, 4, p))
@@ -376,8 +393,8 @@ public class ModBlocks {
         .addIngredient(RUNESTONE)
         .addIngredient(Tags.Items.OBSIDIAN)
         .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
-        .unlockedBy("has_item", p.has(RootsTags.Items.RUNESTONE))
-        .unlockedBy("has_item", p.has(Tags.Items.OBSIDIAN))
+        .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
+        .unlockedBy("has_obsidian", p.has(Tags.Items.OBSIDIAN))
         .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runed_obsidian_4"));
       GroveRecipe.builder(ctx.getEntry(), 8)
         .addIngredient(RUNESTONE)
@@ -390,8 +407,8 @@ public class ModBlocks {
         .addIngredient(RUNESTONE)
         .addIngredient(Tags.Items.OBSIDIAN)
         .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
-        .unlockedBy("has_item", p.has(RootsTags.Items.RUNESTONE))
-        .unlockedBy("has_item", p.has(Tags.Items.OBSIDIAN))
+        .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
+        .unlockedBy("has_obsidian", p.has(Tags.Items.OBSIDIAN))
         .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runed_obsidian_8"));
     })
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
@@ -945,18 +962,18 @@ public class ModBlocks {
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.SPIRITLEAF, ModItems.SPIRITLEAF_SEEDS))
+    .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.SPIRITLEAF_SEEDS, ModItems.SPIRITLEAF))
     .register();
   public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.WILDEWHEET_SEEDS))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.WILDEWHEET, ModItems.WILDEWHEET_SEEDS))
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.WILDEWHEET_SEEDS, ModItems.WILDEWHEET))
     .register();
 
   public static BlockEntry<SeededCropsBlock> AUBERGINE_CROP = REGISTRATE.block("aubergine_crop", (b) -> new SeededCropsBlock(b, () -> ModItems.AUBERGINE_SEEDS.get()::asItem))
     .properties(CROP_PROPERTIES)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.AUBERGINE, ModItems.AUBERGINE_SEEDS))
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.AUBERGINE_SEEDS, ModItems.AUBERGINE))
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
     .register();

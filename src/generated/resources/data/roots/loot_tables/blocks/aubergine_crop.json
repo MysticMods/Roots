@@ -23,11 +23,11 @@
                   }
                 }
               ],
-              "name": "roots:aubergine_seeds"
+              "name": "roots:aubergine"
             },
             {
               "type": "minecraft:item",
-              "name": "roots:aubergine"
+              "name": "roots:aubergine_seeds"
             }
           ]
         }
@@ -59,7 +59,7 @@
               }
             }
           ],
-          "name": "roots:aubergine"
+          "name": "roots:aubergine_seeds"
         }
       ],
       "rolls": 1.0

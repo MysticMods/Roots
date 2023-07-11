@@ -51,10 +51,6 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
       return blockstate.setValue(WATERLOGGED, true);
     }
 
-    if (pContext.getLevel().getRandom().nextInt(mossyChance) == 0) {
-      return blockstate.setValue(MOSSY, true);
-    }
-
     return blockstate;
   }
 

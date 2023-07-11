@@ -23,11 +23,11 @@
                   }
                 }
               ],
-              "name": "roots:spiritleaf_seeds"
+              "name": "roots:spiritleaf"
             },
             {
               "type": "minecraft:item",
-              "name": "roots:spiritleaf"
+              "name": "roots:spiritleaf_seeds"
             }
           ]
         }
@@ -59,7 +59,7 @@
               }
             }
           ],
-          "name": "roots:spiritleaf"
+          "name": "roots:spiritleaf_seeds"
         }
       ],
       "rolls": 1.0

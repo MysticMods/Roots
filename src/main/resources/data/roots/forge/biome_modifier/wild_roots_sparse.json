@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#roots:wild_roots_sparse_biomes",
+  "features": "roots:wild_roots_sparse",
+  "step": "top_layer_modification"
+}

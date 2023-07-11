@@ -181,6 +181,7 @@ public class RootsTags {
     public static final TagKey<Item> MOONGLOW_CROP = modTag("crops/moonglow");
     public static final TagKey<Item> PERESKIA_CROP = modTag("crops/pereskia");
 
+    public static final TagKey<Item> AUBERGINE_CROP = modTag("crops/aubergine");
     public static final TagKey<Item> BAFFLECAP_CROP = modTag("crops/bafflecap");
 
     public static final TagKey<Item> BARKS = modTag("barks");
@@ -238,6 +239,11 @@ public class RootsTags {
     public static final TagKey<Item> MORTARS = modTag("mortars");
     public static final TagKey<Item> PETALS = modTag("petals");
     public static final TagKey<Item> RUNIC_DUST = modTag("dusts/runic");
+    public static final TagKey<Item> VEGETABLES = modTag("vegetables");
+    public static final TagKey<Item> COOKED_VEGETABLES = modTag("cooked_vegetables");
+    public static final TagKey<Item> PROTEINS = modTag("proteins");
+    public static final TagKey<Item> COOKED_SEAFOOD = modTag("cooked_seafood");
+    public static final TagKey<Item> KNIVES = modTag("knives");
 
     // These are all filled in by ModTags
 
