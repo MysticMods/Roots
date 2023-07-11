@@ -940,6 +940,7 @@ public class ModBlocks {
     .tag(RootsTags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
     .loot(cropLoot(SeededCropsBlock.AGE, ModItems.PERESKIA_BULB, ModItems.PERESKIA))
     .register();
+  // TODO: Pottable pereskia?
   public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.SPIRITLEAF_SEEDS))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
