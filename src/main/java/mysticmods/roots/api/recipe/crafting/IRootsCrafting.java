@@ -9,30 +9,7 @@ import noobanidus.libs.noobutil.inventory.IIInvWrapper;
 
 import javax.annotation.Nullable;
 
-public interface IRootsCrafting<H extends IItemHandler> extends Container, IIInvWrapper<H> {
-  @Nullable
-  default Level getLevel() {
-    Player player = getPlayer();
-    if (player == null) {
-      return null;
-    }
-
-    return player.level;
-  }
-
-  @Nullable
-  Player getPlayer();
-
-  @Nullable
-  default Inventory getPlayerInventory() {
-    Player player = getPlayer();
-    if (player == null) {
-      return null;
-    }
-
-    return player.getInventory();
-  }
-
+public interface IRootsCrafting<H extends IItemHandler> extends IRootsCraftingBase, IIInvWrapper<H> {
   @Override
   H getHandler();
 }

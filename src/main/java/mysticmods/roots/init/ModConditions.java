@@ -30,6 +30,8 @@ public class ModConditions {
   public static final RegistryEntry<LevelCondition> WILDWOOD_PILLAR_3_HIGH = REGISTRATE.simple("wildwood_pillar_3_high", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.logPillar(LevelCondition.PillarType.WILDWOOD, 3)));
   public static final RegistryEntry<LevelCondition> PRIMAL_GROVE_STONE_ANY = REGISTRATE.simple("primal_grove_stone_any", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.groveStone(GroveType.PRIMAL, false)));
   public static final RegistryEntry<LevelCondition> PRIMAL_GROVE_STONE_VALID = REGISTRATE.simple("primal_grove_stone_valid", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.groveStone(GroveType.PRIMAL, true)));
+  public static final RegistryEntry<LevelCondition> GROVE_STONE_ANY = REGISTRATE.simple("grove_stone_any", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.anyGroveStone(false)));
+  public static final RegistryEntry<LevelCondition> GROVE_STONE_VALID = REGISTRATE.simple("grove_stone_valid", RootsAPI.LEVEL_CONDITION_REGISTRY, () -> new LevelCondition(LevelCondition.anyGroveStone(true)));
 
   public static void load() {
   }

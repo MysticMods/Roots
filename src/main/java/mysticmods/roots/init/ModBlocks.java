@@ -44,6 +44,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 import noobanidus.libs.noobutil.block.BaseBlocks.SeededCropsBlock;
 import noobanidus.libs.noobutil.data.generator.BlockstateGenerator;
@@ -366,6 +367,33 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
+    .recipe((ctx, p) -> {
+      Ingredient RUNESTONE = Ingredient.of(RootsTags.Items.RUNESTONE);
+      GroveRecipe.builder(ctx.getEntry(), 4)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(Tags.Items.OBSIDIAN)
+        .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
+        .unlockedBy("has_item", p.has(RootsTags.Items.RUNESTONE))
+        .unlockedBy("has_item", p.has(Tags.Items.OBSIDIAN))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runed_obsidian_4"));
+      GroveRecipe.builder(ctx.getEntry(), 8)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(RUNESTONE)
+        .addIngredient(Tags.Items.OBSIDIAN)
+        .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
+        .unlockedBy("has_item", p.has(RootsTags.Items.RUNESTONE))
+        .unlockedBy("has_item", p.has(Tags.Items.OBSIDIAN))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runed_obsidian_8"));
+    })
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .register();
   public static BlockEntry<Block> CHISELED_RUNED_OBSIDIAN = REGISTRATE.block("chiseled_runed_obsidian", Block::new)
@@ -1088,6 +1116,18 @@ public class ModBlocks {
     .item()
     .model(ItemModelGenerator::complexItemModel)
     .build()
+    .recipe((ctx, p) -> {
+      Ingredient WILDWOOD_LOG = Ingredient.of(RootsTags.Items.WILDWOOD_LOGS);
+      GroveRecipe.builder(ctx.getEntry(), 5)
+        .addIngredient(WILDWOOD_LOG)
+        .addIngredient(WILDWOOD_LOG)
+        .addIngredient(WILDWOOD_LOG)
+        .addIngredient(WILDWOOD_LOG)
+        .addIngredient(WILDWOOD_LOG)
+        .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
+        .unlockedBy("has_wildwood", p.has(RootsTags.Items.WILDWOOD_LOGS))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/wildwood_pedestal"));
+    })
     .register();
 
   public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)

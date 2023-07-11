@@ -21,14 +21,30 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.ForgeTier;
+import net.minecraftforge.common.ToolAction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Set;
+
 public abstract class RootsAPI {
   public static RootsAPI INSTANCE;
+  public static Tier LIVING_TOOL_TIER = new ForgeTier(2, 250, 6.0f, 2.0f, 19, BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(RootsTags.Items.BARKS));
+
+  // Tool Actions (Forge-specific)
+  public static ToolAction RUNIC_SHEARS_HARVEST = ToolAction.get("runic_shears_harvest");
+  public static ToolAction RUNIC_SHEARS_DIG = ToolAction.get("runic_shears_dig");
+  public static ToolAction KNIFE_STRIP = ToolAction.get("knife_strip");
+  public static ToolAction KNIFE_DIG = ToolAction.get("knife_dig");
+
+  public static Set<ToolAction> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
+  public static Set<ToolAction> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG);
 
   public static RootsAPI getInstance() {
     return INSTANCE;
@@ -36,6 +52,7 @@ public abstract class RootsAPI {
 
   // Identifiers & Logs
   public static final String MODID = "roots";
+  public static ResourceLocation LIVING_TOOL_TIER_ID = new ResourceLocation(MODID, "living_tool");
   public static final String MOD_IDENTIFIER = "Roots";
   public static Logger LOG = LogManager.getLogger();
 
@@ -48,7 +65,6 @@ public abstract class RootsAPI {
   public static ResourceKey<Registry<SpellProperty<?>>> SPELL_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "spell_properties"));
   public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "level_conditions"));
   public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "player_conditions"));
-
   public static ResourceKey<Registry<SnapshotSerializer<?>>>
     SNAPSHOT_SERIALIZER_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "snapshot_serializers"));
 

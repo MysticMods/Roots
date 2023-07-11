@@ -2,12 +2,10 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
-import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
-import mysticmods.roots.api.Materials;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.item.CastingItem;
@@ -22,7 +20,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 
@@ -240,7 +237,7 @@ public class ModItems {
     .model(subfolder("tools"))
     .register();
 
-  public static final ItemEntry<LivingAxeItem> LIVING_AXE = REGISTRATE.item("living_axe", (p) -> new LivingAxeItem(Materials.LIVING, 7.0F, -3.2F, p))
+  public static final ItemEntry<LivingAxeItem> LIVING_AXE = REGISTRATE.item("living_axe", (p) -> new LivingAxeItem(RootsAPI.LIVING_TOOL_TIER, 7.0F, -3.2F, p))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> GroveRecipe.builder(ctx.getEntry())
       .addIngredient(Items.WOODEN_AXE)
@@ -248,12 +245,13 @@ public class ModItems {
       .addIngredient(RootsTags.Items.WILDROOT_CROP)
       .addIngredient(RootsTags.Items.BARKS)
       .addIngredient(RootsTags.Items.BARKS)
+      .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
       .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_axe")))
     .register();
 
-  public static final ItemEntry<LivingHoeItem> LIVING_HOE = REGISTRATE.item("living_hoe", (p) -> new LivingHoeItem(Materials.LIVING, -1, -2.0f, p))
+  public static final ItemEntry<LivingHoeItem> LIVING_HOE = REGISTRATE.item("living_hoe", (p) -> new LivingHoeItem(RootsAPI.LIVING_TOOL_TIER, -1, -2.0f, p))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> GroveRecipe.builder(ctx.getEntry())
       .addIngredient(Items.WOODEN_HOE)
@@ -261,12 +259,13 @@ public class ModItems {
       .addIngredient(RootsTags.Items.WILDROOT_CROP)
       .addIngredient(RootsTags.Items.BARKS)
       .addIngredient(RootsTags.Items.BARKS)
+      .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
       .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_hoe")))
     .register();
 
-  public static final ItemEntry<LivingPickaxeItem> LIVING_PICKAXE = REGISTRATE.item("living_pickaxe", (p) -> new LivingPickaxeItem(Materials.LIVING, 1, -2.8f, p))
+  public static final ItemEntry<LivingPickaxeItem> LIVING_PICKAXE = REGISTRATE.item("living_pickaxe", (p) -> new LivingPickaxeItem(RootsAPI.LIVING_TOOL_TIER, 1, -2.8f, p))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> GroveRecipe.builder(ctx.getEntry())
       .addIngredient(Items.WOODEN_PICKAXE)
@@ -274,12 +273,13 @@ public class ModItems {
       .addIngredient(RootsTags.Items.WILDROOT_CROP)
       .addIngredient(RootsTags.Items.BARKS)
       .addIngredient(RootsTags.Items.BARKS)
+      .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
       .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_pickaxe")))
     .register();
 
-  public static final ItemEntry<LivingShovelItem> LIVING_SHOVEL = REGISTRATE.item("living_shovel", (p) -> new LivingShovelItem(Materials.LIVING, 1.5F, -3.0F, p))
+  public static final ItemEntry<LivingShovelItem> LIVING_SHOVEL = REGISTRATE.item("living_shovel", (p) -> new LivingShovelItem(RootsAPI.LIVING_TOOL_TIER, 1.5F, -3.0F, p))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> GroveRecipe.builder(ctx.getEntry())
       .addIngredient(Items.WOODEN_SHOVEL)
@@ -287,12 +287,13 @@ public class ModItems {
       .addIngredient(RootsTags.Items.WILDROOT_CROP)
       .addIngredient(RootsTags.Items.BARKS)
       .addIngredient(RootsTags.Items.BARKS)
+      .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
       .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_shovel")))
     .register();
 
-  public static final ItemEntry<LivingSwordItem> LIVING_SWORD = REGISTRATE.item("living_sword", (p) -> new LivingSwordItem(Materials.LIVING, 3, -2.4f, p))
+  public static final ItemEntry<LivingSwordItem> LIVING_SWORD = REGISTRATE.item("living_sword", (p) -> new LivingSwordItem(RootsAPI.LIVING_TOOL_TIER, 3, -2.4f, p))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> GroveRecipe.builder(ctx.getEntry())
       .addIngredient(Items.WOODEN_SWORD)
@@ -300,6 +301,7 @@ public class ModItems {
       .addIngredient(RootsTags.Items.WILDROOT_CROP)
       .addIngredient(RootsTags.Items.BARKS)
       .addIngredient(RootsTags.Items.BARKS)
+      .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
       .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_sword")))
@@ -341,6 +343,19 @@ public class ModItems {
 
   public static final ItemEntry<Item> RUNIC_SHEARS = REGISTRATE.item("runic_shears", Item::new)
     .model(subfolder("tools"))
+    .recipe((ctx, p) -> {
+      GroveRecipe.builder(ctx.getEntry())
+        .addIngredient(Ingredient.of(RootsTags.Items.RUNESTONE))
+        .addIngredient(Ingredient.of(RootsTags.Items.RUNESTONE))
+        .addIngredient(Ingredient.of(RootsTags.Items.PETALS))
+        .addIngredient(Ingredient.of(RootsTags.Items.GROVE_MOSS_CROP))
+        .addIngredient(Ingredient.of(ModItems.WOODEN_SHEARS.get()))
+        .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
+        .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
+        .unlockedBy("has_grove_moss", p.has(RootsTags.Items.GROVE_MOSS_CROP))
+        .unlockedBy("has_shears", p.has(ModItems.WOODEN_SHEARS.get()))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runic_shears"));
+    })
     .register();
 
   public static final ItemEntry<CastingItem> STAFF = REGISTRATE.item("staff", CastingItem::new)
@@ -400,7 +415,7 @@ public class ModItems {
     .model(subfolder("resources"))
     .tag(RootsTags.Items.PETALS)
     .recipe((ctx, p) -> {
-      MortarRecipe.multiBuilder(ctx.getEntry(), 2)
+      MortarRecipe.multiBuilder(ctx.getEntry(), 1)
         .addIngredient(ItemTags.SMALL_FLOWERS)
         .unlockedBy("has_flower", p.has(ItemTags.SMALL_FLOWERS))
         .save(p, new ResourceLocation(RootsAPI.MODID, "petals_from_small_flowers"));

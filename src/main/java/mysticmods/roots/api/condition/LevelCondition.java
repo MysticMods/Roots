@@ -192,6 +192,10 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     return new GroveStoneCondition(grove.getTag(), requireValid);
   }
 
+  public static LevelCondition.GroveStoneCondition anyGroveStone (boolean requireValid) {
+    return new GroveStoneCondition(RootsTags.Blocks.GROVE_STONES, requireValid);
+  }
+
   public enum PillarType {
     ACACIA(RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Blocks.ACACIA_CAPSTONES),
     BIRCH(RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Blocks.BIRCH_CAPSTONES),
