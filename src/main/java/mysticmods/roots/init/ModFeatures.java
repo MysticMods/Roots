@@ -81,7 +81,7 @@ public class ModFeatures {
     CountPlacement.of(1),
     InSquarePlacement.spread(),
     HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
-    RarityFilter.onAverageOnceEvery(40),
+    RarityFilter.onAverageOnceEvery(60),
     DimensionPlacement.of(Set.of(Level.OVERWORLD))
   )));
 
