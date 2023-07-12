@@ -4,7 +4,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import mysticmods.roots.api.RootsAPI;
@@ -115,7 +115,7 @@ public class ModItems {
     .tag(RootsTags.Items.SEEDS)
     .register();
 
-  public static RegistryEntry<Item> VENISON = REGISTRATE.item("venison", Item::new)
+  public static ItemEntry<Item> VENISON = REGISTRATE.item("venison", Item::new)
     .properties(o -> o.food(ModFoods.VENISON))
     .tag(RootsTags.Items.PROTEINS)
     .recipe((ctx, p) -> {
@@ -129,55 +129,55 @@ public class ModItems {
     .register();
 
 
-  public static RegistryEntry<Item> COOKED_VENISON = REGISTRATE.item("cooked_venison", Item::new)
+  public static ItemEntry<Item> COOKED_VENISON = REGISTRATE.item("cooked_venison", Item::new)
     .tag(RootsTags.Items.PROTEINS)
     .properties(o -> o.food(ModFoods.COOKED_VENISON))
     .register();
 
-  public static RegistryEntry<Item> RAW_SQUID = REGISTRATE.item("raw_squid", Item::new)
+  public static ItemEntry<Item> RAW_SQUID = REGISTRATE.item("raw_squid", Item::new)
     .tag(RootsTags.Items.PROTEINS)
     .properties(o -> o.food(ModFoods.RAW_SQUID))
     .register();
 
-  public static RegistryEntry<Item> COOKED_SQUID = REGISTRATE.item("cooked_squid", Item::new)
+  public static ItemEntry<Item> COOKED_SQUID = REGISTRATE.item("cooked_squid", Item::new)
     .tag(RootsTags.Items.PROTEINS, RootsTags.Items.COOKED_SEAFOOD)
     .properties(o -> o.food(ModFoods.COOKED_SQUID))
     .register();
 
-  public static RegistryEntry<Item> ASSORTED_SEEDS = REGISTRATE.item("assorted_seeds", Item::new)
+  public static ItemEntry<Item> ASSORTED_SEEDS = REGISTRATE.item("assorted_seeds", Item::new)
     .register();
 
-  public static RegistryEntry<BaseItems.FastFoodItem> COOKED_SEEDS = REGISTRATE.item("cooked_seeds", BaseItems.FastFoodItem::new)
+  public static ItemEntry<BaseItems.FastFoodItem> COOKED_SEEDS = REGISTRATE.item("cooked_seeds", BaseItems.FastFoodItem::new)
     .properties(o -> o.food(ModFoods.COOKED_SEEDS))
     .register();
 
-  public static RegistryEntry<Item> COOKED_BEETROOT = REGISTRATE.item("cooked_beetroot", Item::new)
+  public static ItemEntry<Item> COOKED_BEETROOT = REGISTRATE.item("cooked_beetroot", Item::new)
     .tag(RootsTags.Items.COOKED_VEGETABLES)
     .properties(o -> o.food(ModFoods.COOKED_BEETROOT))
     .register();
 
-  public static RegistryEntry<Item> COOKED_CARROT = REGISTRATE.item("cooked_carrot", Item::new)
+  public static ItemEntry<Item> COOKED_CARROT = REGISTRATE.item("cooked_carrot", Item::new)
     .tag(RootsTags.Items.COOKED_VEGETABLES)
     .properties(o -> o.food(ModFoods.COOKED_CARROT))
     .register();
 
-  public static RegistryEntry<Item> AUBERGINE = REGISTRATE.item("aubergine", Item::new)
+  public static ItemEntry<Item> AUBERGINE = REGISTRATE.item("aubergine", Item::new)
     .properties(o -> o.food(ModFoods.AUBERGINE))
     .tag(RootsTags.Items.AUBERGINE_CROP, RootsTags.Items.VEGETABLES)
     .register();
 
-  public static RegistryEntry<Item> COOKED_AUBERGINE = REGISTRATE.item("cooked_aubergine", Item::new)
+  public static ItemEntry<Item> COOKED_AUBERGINE = REGISTRATE.item("cooked_aubergine", Item::new)
     .tag(RootsTags.Items.COOKED_VEGETABLES)
     .properties(o -> o.food(ModFoods.COOKED_AUBERGINE))
     .register();
 
-  public static RegistryEntry<Item> STUFFED_AUBERGINE = REGISTRATE.item("stuffed_aubergine", Item::new)
+  public static ItemEntry<Item> STUFFED_AUBERGINE = REGISTRATE.item("stuffed_aubergine", Item::new)
     .properties(o -> o.food(ModFoods.STUFFED_AUBERGINE))
     .recipe((ctx, p) -> ShapelessRecipeBuilder.shapeless(ModItems.STUFFED_AUBERGINE.get(), 1).requires(ModItems.COOKED_AUBERGINE.get()).requires(ExcludingIngredient.create(RootsTags.Items.VEGETABLES, ModItems.AUBERGINE.get())).requires(ExcludingIngredient.create(RootsTags.Items.VEGETABLES, ModItems.AUBERGINE.get())).requires(ExcludingIngredient.create(RootsTags.Items.COOKED_VEGETABLES, ModItems.COOKED_AUBERGINE.get())).unlockedBy("has_cooked_aubergine", RegistrateRecipeProvider.has(ModItems.COOKED_AUBERGINE.get())).save(p))
     .register();
 
   // Salads
-  public static RegistryEntry<BaseItems.BowlItem> AUBERGINE_SALAD = REGISTRATE.item("aubergine_salad", BaseItems.BowlItem::new)
+  public static ItemEntry<BaseItems.BowlItem> AUBERGINE_SALAD = REGISTRATE.item("aubergine_salad", BaseItems.BowlItem::new)
     .properties(o -> o.food(ModFoods.AUBERGINE_SALAD).craftRemainder(Items.BOWL))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ModItems.AUBERGINE_SALAD.get(), 3)
       .pattern("AAA")
@@ -191,7 +191,7 @@ public class ModItems {
       .save(p))
     .register();
 
-  public static RegistryEntry<BaseItems.BowlItem> BEETROOT_SALAD = REGISTRATE.item("beetroot_salad", BaseItems.BowlItem::new)
+  public static ItemEntry<BaseItems.BowlItem> BEETROOT_SALAD = REGISTRATE.item("beetroot_salad", BaseItems.BowlItem::new)
     .properties(o -> o.food(ModFoods.BEETROOT_SALAD).craftRemainder(Items.BOWL))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ModItems.BEETROOT_SALAD.get(), 3)
       .pattern("AAA")
@@ -205,7 +205,7 @@ public class ModItems {
       .save(p))
     .register();
 
-  public static RegistryEntry<BaseItems.BowlItem> CACTUS_DANDELION_SALAD = REGISTRATE.item("cactus_dandelion_salad", BaseItems.BowlItem::new)
+  public static ItemEntry<BaseItems.BowlItem> CACTUS_DANDELION_SALAD = REGISTRATE.item("cactus_dandelion_salad", BaseItems.BowlItem::new)
     .properties(o -> o.food(ModFoods.CACTUS_DANDELION_SALAD).craftRemainder(Items.BOWL))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ModItems.CACTUS_DANDELION_SALAD.get(), 3)
       .pattern("DCD")
@@ -219,7 +219,7 @@ public class ModItems {
       .save(p))
     .register();
 
-  public static RegistryEntry<BaseItems.BowlItem> DANDELION_CORNFLOWER_SALAD = REGISTRATE.item("dandelion_cornflower_salad", BaseItems.BowlItem::new)
+  public static ItemEntry<BaseItems.BowlItem> DANDELION_CORNFLOWER_SALAD = REGISTRATE.item("dandelion_cornflower_salad", BaseItems.BowlItem::new)
     .properties(o -> o.food(ModFoods.DANDELION_CORNFLOWER_SALAD).craftRemainder(Items.BOWL))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ModItems.DANDELION_CORNFLOWER_SALAD.get(), 3)
       .pattern("CDC")
@@ -233,7 +233,7 @@ public class ModItems {
       .save(p))
     .register();
 
-  public static RegistryEntry<BaseItems.BowlItem> STEWED_EGGPLANT = REGISTRATE.item("stewed_eggplant", BaseItems.BowlItem::new)
+  public static ItemEntry<BaseItems.BowlItem> STEWED_EGGPLANT = REGISTRATE.item("stewed_eggplant", BaseItems.BowlItem::new)
     .properties(o -> o.food(ModFoods.STEWED_EGGPLANT).craftRemainder(Items.BOWL))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ModItems.STEWED_EGGPLANT.get(), 3)
       .pattern("AAA")
@@ -252,37 +252,37 @@ public class ModItems {
   }
 
   // Drinkies
-  public static RegistryEntry<TooltipDrinkItem> APPLE_CORDIAL = REGISTRATE.item("apple_cordial", tooltipDrink("mysticalworld.drinks.slow_regen"))
+  public static ItemEntry<TooltipDrinkItem> APPLE_CORDIAL = REGISTRATE.item("apple_cordial", tooltipDrink("mysticalworld.drinks.slow_regen"))
     .properties(o -> o.food(ModFoods.APPLE_CORDIAL).craftRemainder(Items.GLASS_BOTTLE))
     .recipe(RECIPES.cordial(() -> ModItems.APPLE_CORDIAL, Items.APPLE))
     .register();
 
-  public static RegistryEntry<TooltipDrinkItem> CACTUS_SYRUP = REGISTRATE.item("cactus_syrup", tooltipDrink("mysticalworld.drinks.slow_regen"))
+  public static ItemEntry<TooltipDrinkItem> CACTUS_SYRUP = REGISTRATE.item("cactus_syrup", tooltipDrink("mysticalworld.drinks.slow_regen"))
     .properties(o -> o.food(ModFoods.CACTUS_SYRUP).craftRemainder(Items.GLASS_BOTTLE))
     .recipe(RECIPES.cordial(() -> ModItems.CACTUS_SYRUP, Items.CACTUS))
     .register();
 
-  public static RegistryEntry<TooltipDrinkItem> DANDELION_CORDIAL = REGISTRATE.item("dandelion_cordial", tooltipDrink("mysticalworld.drinks.wakefulness"))
+  public static ItemEntry<TooltipDrinkItem> DANDELION_CORDIAL = REGISTRATE.item("dandelion_cordial", tooltipDrink("mysticalworld.drinks.wakefulness"))
     .properties(o -> o.food(ModFoods.DANDELION_CORDIAL).craftRemainder(Items.GLASS_BOTTLE))
     .recipe(RECIPES.cordial(() -> ModItems.DANDELION_CORDIAL, Items.DANDELION))
     .register();
 
-  public static RegistryEntry<TooltipDrinkItem> LILAC_CORDIAL = REGISTRATE.item("lilac_cordial", tooltipDrink("mysticalworld.drinks.slow_regen"))
+  public static ItemEntry<TooltipDrinkItem> LILAC_CORDIAL = REGISTRATE.item("lilac_cordial", tooltipDrink("mysticalworld.drinks.slow_regen"))
     .properties(o -> o.food(ModFoods.LILAC_CORDIAL).craftRemainder(Items.GLASS_BOTTLE))
     .recipe(RECIPES.cordial(() -> ModItems.LILAC_CORDIAL, Items.LILAC))
     .register();
 
-  public static RegistryEntry<TooltipDrinkItem> PEONY_CORDIAL = REGISTRATE.item("peony_cordial", tooltipDrink("mysticalworld.drinks.slow_regen"))
+  public static ItemEntry<TooltipDrinkItem> PEONY_CORDIAL = REGISTRATE.item("peony_cordial", tooltipDrink("mysticalworld.drinks.slow_regen"))
     .properties(o -> o.food(ModFoods.PEONY_CORDIAL).craftRemainder(Items.GLASS_BOTTLE))
     .recipe(RECIPES.cordial(() -> ModItems.PEONY_CORDIAL, Items.PEONY))
     .register();
 
-  public static RegistryEntry<TooltipDrinkItem> ROSE_CORDIAL = REGISTRATE.item("rose_cordial", tooltipDrink("mysticalworld.drinks.slow_regen"))
+  public static ItemEntry<TooltipDrinkItem> ROSE_CORDIAL = REGISTRATE.item("rose_cordial", tooltipDrink("mysticalworld.drinks.slow_regen"))
     .properties(o -> o.food(ModFoods.ROSE_CORDIAL).craftRemainder(Items.GLASS_BOTTLE))
     .recipe(RECIPES.cordial(() -> ModItems.ROSE_CORDIAL, Items.ROSE_BUSH))
     .register();
 
-  public static RegistryEntry<TooltipDrinkItem> VINEGAR = REGISTRATE.item("vinegar", tooltipDrink("mysticalworld.drinks.sour"))
+  public static ItemEntry<TooltipDrinkItem> VINEGAR = REGISTRATE.item("vinegar", tooltipDrink("mysticalworld.drinks.sour"))
     .properties(o -> o.food(ModFoods.VINEGAR).craftRemainder(Items.GLASS_BOTTLE))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ModItems.VINEGAR.get(), 6)
       .pattern("BBB")
@@ -294,7 +294,7 @@ public class ModItems {
       .save(p))
     .register();
 
-  public static RegistryEntry<TooltipDrinkItem> VEGETABLE_JUICE = REGISTRATE.item("vegetable_juice", tooltipDrink("mysticalworld.drinks.slow_regen"))
+  public static ItemEntry<TooltipDrinkItem> VEGETABLE_JUICE = REGISTRATE.item("vegetable_juice", tooltipDrink("mysticalworld.drinks.slow_regen"))
     .properties(o -> o.food(ModFoods.VEGETABLE_JUICE).craftRemainder(Items.GLASS_BOTTLE))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ModItems.VEGETABLE_JUICE.get(), 4)
       .pattern("ARC")
@@ -313,7 +313,7 @@ public class ModItems {
       .save(p))
     .register();
 
-  public static RegistryEntry<Item> INK_BOTTLE = REGISTRATE.item("ink_bottle", Item::new)
+  public static ItemEntry<Item> INK_BOTTLE = REGISTRATE.item("ink_bottle", Item::new)
     .properties(o -> o.craftRemainder(Items.GLASS_BOTTLE))
     .recipe((ctx, p) -> RECIPES.dye(ModItems.INK_BOTTLE, () -> Items.BLACK_DYE, 1, 2, p))
     .register();
@@ -596,32 +596,32 @@ public class ModItems {
     })
     .register();
 
-  public static RegistryEntry<BaseItems.KnifeItem> STONE_KNIFE = REGISTRATE.item("stone_knife", (p) -> new BaseItems.KnifeItem(Tiers.STONE, 0f, -1.0f, p))
+  public static ItemEntry<BaseItems.KnifeItem> STONE_KNIFE = REGISTRATE.item("stone_knife", (p) -> new BaseItems.KnifeItem(Tiers.STONE, 0f, -1.0f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.STONE_KNIFE))
     .recipe((ctx, p) -> {
       RECIPES.knife(Tags.Items.STONE, ModItems.STONE_KNIFE, null, p);
       RECIPES.knife(Tags.Items.COBBLESTONE, ModItems.STONE_KNIFE, null, p);
     }).register();
-  public static RegistryEntry<BaseItems.KnifeItem> WOODEN_KNIFE = REGISTRATE.item("wood_knife", (p) -> new BaseItems.KnifeItem(Tiers.WOOD, 0f, -1.5f, p))
+  public static ItemEntry<BaseItems.KnifeItem> WOODEN_KNIFE = REGISTRATE.item("wood_knife", (p) -> new BaseItems.KnifeItem(Tiers.WOOD, 0f, -1.5f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.WOODEN_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(ItemTags.PLANKS, ModItems.WOODEN_KNIFE, null, p)).register();
-  public static RegistryEntry<BaseItems.KnifeItem> IRON_KNIFE = REGISTRATE.item("iron_knife", (p) -> new BaseItems.KnifeItem(Tiers.IRON, 0, -1.5f, p))
+  public static ItemEntry<BaseItems.KnifeItem> IRON_KNIFE = REGISTRATE.item("iron_knife", (p) -> new BaseItems.KnifeItem(Tiers.IRON, 0, -1.5f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.IRON_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_IRON, ModItems.IRON_KNIFE, null, p)).register();
-  public static RegistryEntry<BaseItems.KnifeItem> GOLD_KNIFE = REGISTRATE.item("gold_knife", (p) -> new BaseItems.KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
+  public static ItemEntry<BaseItems.KnifeItem> GOLD_KNIFE = REGISTRATE.item("gold_knife", (p) -> new BaseItems.KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.GOLD_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_GOLD, ModItems.GOLD_KNIFE, null, p))
     .tag(ItemTags.PIGLIN_LOVED)
     .register();
-  public static RegistryEntry<BaseItems.KnifeItem> DIAMOND_KNIFE = REGISTRATE.item("diamond_knife", (p) -> new BaseItems.KnifeItem(Tiers.DIAMOND, 0.5f, -1.2f, p))
+  public static ItemEntry<BaseItems.KnifeItem> DIAMOND_KNIFE = REGISTRATE.item("diamond_knife", (p) -> new BaseItems.KnifeItem(Tiers.DIAMOND, 0.5f, -1.2f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.DIAMOND_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.GEMS_DIAMOND, ModItems.DIAMOND_KNIFE, null, p)).register();
-  public static RegistryEntry<BaseItems.KnifeItem> NETHERITE_KNIFE = REGISTRATE.item("netherite_knife", (p) -> new BaseItems.KnifeItem(Tiers.NETHERITE, 0.5f, -1.2f, p))
+  public static ItemEntry<BaseItems.KnifeItem> NETHERITE_KNIFE = REGISTRATE.item("netherite_knife", (p) -> new BaseItems.KnifeItem(Tiers.NETHERITE, 0.5f, -1.2f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.NETHERITE_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_NETHERITE, ModItems.NETHERITE_KNIFE, null, p)).register();

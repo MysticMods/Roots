@@ -5,7 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -117,7 +117,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       boundingBox = null;
 
       // TODO: Provider better feedback to the player
-      RootsRecipe.ConditionResult result = cachedRecipe.checkConditions(level, player, PYRE_BOUNDS, pos);
+      ConditionResult result = cachedRecipe.checkConditions(level, player, PYRE_BOUNDS, pos);
       if (result.anyFailed()) {
         RootsAPI.LOG.info("Conditions failed.");
         result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));

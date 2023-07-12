@@ -10,13 +10,11 @@ import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.util.SetUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
@@ -32,7 +30,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.items.IItemHandler;
@@ -44,50 +41,17 @@ import java.util.function.Consumer;
 
 import static net.minecraft.data.recipes.RecipeBuilder.ROOT_RECIPE_ADVANCEMENT;
 
-public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<H, W> {
+public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> extends RootsRecipeBase implements IRootsRecipe<H, W>, IRootsRecipeBase {
   protected final NonNullList<Ingredient> ingredients = NonNullList.create();
-  protected final ResourceLocation recipeId;
-  protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
-  protected final List<Grant> grants = new ArrayList<>();
-
-  protected final List<LevelCondition> levelConditions = new ArrayList<>();
-  protected final List<PlayerCondition> playerConditions = new ArrayList<>();
-  protected ItemStack result;
-
-  @FunctionalInterface
-  public interface RootsRecipeBuilder<R extends RootsRecipe<?, ?>> {
-    R create(ResourceLocation recipeId);
-  }
 
   public RootsRecipe(ResourceLocation recipeId) {
-    this.recipeId = recipeId;
+    super(recipeId);
   }
 
+  @Override
   public void setIngredients(NonNullList<Ingredient> ingredients) {
     this.ingredients.clear();
     this.ingredients.addAll(ingredients);
-  }
-
-  public void setLevelConditions(List<LevelCondition> levelConditions) {
-    this.levelConditions.clear();
-    this.levelConditions.addAll(levelConditions);
-  }
-
-  public void setPlayerConditions(List<PlayerCondition> playerConditions) {
-    this.playerConditions.clear();
-    this.playerConditions.addAll(playerConditions);
-  }
-
-  public List<LevelCondition> getLevelConditions() {
-    return levelConditions;
-  }
-
-  public List<PlayerCondition> getPlayerConditions() {
-    return playerConditions;
-  }
-
-  public void setResultItem(ItemStack result) {
-    this.result = result;
   }
 
   // TODO: Ensure that not copying this item won't cause problems
@@ -113,62 +77,21 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     return RecipeMatcher.findMatches(inputs, ingredients) != null;
   }
 
-  public void addConditionalOutput(ConditionalOutput output) {
-    conditionalOutputs.add(output);
-  }
-
-  public void addConditionalOutputs(Collection<ConditionalOutput> outputs) {
-    conditionalOutputs.addAll(outputs);
-  }
-
-  public void addGrant(Grant grant) {
-    grants.add(grant);
-  }
-
-  public void addGrants(Collection<Grant> grants) {
-    this.grants.addAll(grants);
-  }
-
-  public List<ConditionalOutput> getConditionalOutputs() {
-    return conditionalOutputs;
-  }
-
-  public List<Grant> getGrants() {
-    return grants;
-  }
-
-  public ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
-    List<PlayerCondition> failedPlayer = new ArrayList<>();
-    for (PlayerCondition condition : this.getPlayerConditions()) {
-      if (!condition.test(level, player)) {
-        failedPlayer.add(condition);
-      }
-    }
-    List<LevelCondition> failedLevel = new ArrayList<>();
-    Set<BlockPos> testedPositions = new HashSet<>();
-    // TODO: Abstract this back out into a record and embed it in the "recipe"
-    for (LevelCondition condition : this.getLevelConditions()) {
-      Set<BlockPos> newPositions = condition.test(level, player, bounds, center, testedPositions);
-      if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
-        failedLevel.add(condition);
-      } else {
-        testedPositions.addAll(newPositions);
-      }
-    }
-
-    return new ConditionResult(failedLevel, failedPlayer);
-  }
-
-  public record ConditionResult(List<LevelCondition> failedLevelConditions,
-                                List<PlayerCondition> failedPlayerConditions) {
-    public boolean anyFailed() {
-      return !failedLevelConditions.isEmpty() || !failedPlayerConditions.isEmpty();
-    }
-  }
-
   @Override
   public ResourceLocation getId() {
     return recipeId;
+  }
+
+  @Override
+  public ItemStack assemble(W pInv) {
+    Player player = pInv.getPlayer();
+    if (player != null && player.level.isClientSide()) {
+      for (Grant grant : getGrants()) {
+        grant.accept((ServerPlayer) player);
+      }
+    }
+
+    return getResultItem().copy();
   }
 
   public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> implements RecipeSerializer<R> {
@@ -355,19 +278,6 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     }
   }
 
-  @Override
-  public ItemStack assemble(W pInv) {
-    Player player = pInv.getPlayer();
-    if (player != null && player.level.isClientSide()) {
-      for (Grant grant : getGrants()) {
-        grant.accept((ServerPlayer) player);
-      }
-    }
-
-    return getResultItem().copy();
-  }
-
-
   // TODO: Check if the ItemStack means that NBT is supported
   public abstract static class Builder {
     protected final Advancement.Builder advancement = Advancement.Builder.advancement();
@@ -481,8 +391,6 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return new ResourceLocation(recipeName.getNamespace(), "recipes/" + getFolderName(recipeName) + "/" + recipeName.getPath());
     }
 
-
-
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       validate(recipeName);
       advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR);
@@ -592,5 +500,10 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         return advancementId;
       }
     }
+  }
+
+  @FunctionalInterface
+  public interface RootsRecipeBuilder<R extends RootsRecipe<?, ?>> {
+    R create(ResourceLocation recipeId);
   }
 }

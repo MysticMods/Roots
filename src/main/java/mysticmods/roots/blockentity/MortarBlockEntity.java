@@ -3,7 +3,7 @@ package mysticmods.roots.blockentity;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
-import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
@@ -159,7 +159,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
       }
       // TODO: Provider better feedback to the player
       if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
-        RootsRecipe.ConditionResult conditionResult = cachedRecipe.checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
+        ConditionResult conditionResult = cachedRecipe.checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
         if (conditionResult.anyFailed()) {
           RootsAPI.LOG.info("Conditions failed.");
           conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));

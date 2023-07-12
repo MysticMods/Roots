@@ -44,37 +44,20 @@ import java.util.function.Consumer;
 
 import static net.minecraft.data.recipes.RecipeBuilder.ROOT_RECIPE_ADVANCEMENT;
 
-public abstract class WorldRecipe<W extends IWorldCrafting> implements IWorldRecipe<W> {
+public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeBase implements IWorldRecipe<W> {
   protected BlockState outputState;
-  protected final List<String> copyProperties = new ArrayList<>();
   protected BlockPredicate matcher;
-  protected final ResourceLocation recipeId;
-  protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
-  protected final List<Grant> grants = new ArrayList<>();
-
-  protected final List<LevelCondition> levelConditions = new ArrayList<>();
-  protected final List<PlayerCondition> playerConditions = new ArrayList<>();
-  protected ItemStack result;
-
-  @FunctionalInterface
-  public interface WorldRecipeBuilder<R extends WorldRecipe<?>> {
-    R create(ResourceLocation recipeId);
-  }
 
   public WorldRecipe(ResourceLocation recipeId) {
-    this.recipeId = recipeId;
+    super(recipeId);
   }
 
   public void setOutputState (BlockState outputState) {
     this.outputState = outputState;
   }
 
-  public void setCopyProperties (List<String> copyProperties) {
-    this.copyProperties.clear();
-    this.copyProperties.addAll(copyProperties);
-  }
-
-  public void assembleState (BlockState input, BlockPos position, ServerLevel level) {
+  public BlockState getOutputState () {
+    return this.outputState;
   }
 
   public BlockPredicate getMatcher() {
@@ -83,28 +66,6 @@ public abstract class WorldRecipe<W extends IWorldCrafting> implements IWorldRec
 
   public void setMatcher(BlockPredicate matcher) {
     this.matcher = matcher;
-  }
-
-  public void setLevelConditions(List<LevelCondition> levelConditions) {
-    this.levelConditions.clear();
-    this.levelConditions.addAll(levelConditions);
-  }
-
-  public void setPlayerConditions(List<PlayerCondition> playerConditions) {
-    this.playerConditions.clear();
-    this.playerConditions.addAll(playerConditions);
-  }
-
-  public List<LevelCondition> getLevelConditions() {
-    return levelConditions;
-  }
-
-  public List<PlayerCondition> getPlayerConditions() {
-    return playerConditions;
-  }
-
-  public void setResultItem(ItemStack result) {
-    this.result = result;
   }
 
   // TODO: Ensure that not copying this item won't cause problems
@@ -119,59 +80,6 @@ public abstract class WorldRecipe<W extends IWorldCrafting> implements IWorldRec
   @Override
   public boolean matches(W pContainer, Level pLevel) {
     return false;
-  }
-
-  public void addConditionalOutput(ConditionalOutput output) {
-    conditionalOutputs.add(output);
-  }
-
-  public void addConditionalOutputs(Collection<ConditionalOutput> outputs) {
-    conditionalOutputs.addAll(outputs);
-  }
-
-  public void addGrant(Grant grant) {
-    grants.add(grant);
-  }
-
-  public void addGrants(Collection<Grant> grants) {
-    this.grants.addAll(grants);
-  }
-
-  public List<ConditionalOutput> getConditionalOutputs() {
-    return conditionalOutputs;
-  }
-
-  public List<Grant> getGrants() {
-    return grants;
-  }
-
-  public WorldRecipe.ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
-    List<PlayerCondition> failedPlayer = new ArrayList<>();
-    for (PlayerCondition condition : this.getPlayerConditions()) {
-      if (!condition.test(level, player)) {
-        failedPlayer.add(condition);
-      }
-    }
-    List<LevelCondition> failedLevel = new ArrayList<>();
-    Set<BlockPos> testedPositions = new HashSet<>();
-    // TODO: Abstract this back out into a record and embed it in the "recipe"
-    for (LevelCondition condition : this.getLevelConditions()) {
-      Set<BlockPos> newPositions = condition.test(level, player, bounds, center, testedPositions);
-      if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
-        failedLevel.add(condition);
-      } else {
-        testedPositions.addAll(newPositions);
-      }
-    }
-
-    return new WorldRecipe.ConditionResult(failedLevel, failedPlayer);
-  }
-
-  public record ConditionResult(List<LevelCondition> failedLevelConditions,
-                                List<PlayerCondition> failedPlayerConditions) {
-    public boolean anyFailed() {
-      return !failedLevelConditions.isEmpty() || !failedPlayerConditions.isEmpty();
-    }
   }
 
   @Override
@@ -236,7 +144,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> implements IWorldRec
         }
         recipe.addGrants(grants);
       }
-/*      if (GsonHelper.isArrayNode(pJson, "level_conditions")) {
+      if (GsonHelper.isArrayNode(pJson, "level_conditions")) {
         for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "level_conditions")) {
           ResourceLocation condName = new ResourceLocation(element.getAsString());
           LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(condName);
@@ -245,7 +153,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> implements IWorldRec
           }
           recipe.getLevelConditions().add(condition);
         }
-      }*/
+      }
       if (GsonHelper.isArrayNode(pJson, "player_conditions")) {
         for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "player_conditions")) {
           ResourceLocation condName = new ResourceLocation(element.getAsString());
@@ -353,7 +261,6 @@ public abstract class WorldRecipe<W extends IWorldCrafting> implements IWorldRec
 
     return getResultItem().copy();
   }
-
 
   public abstract static class Builder {
     protected final Advancement.Builder advancement = Advancement.Builder.advancement();
@@ -543,5 +450,10 @@ public abstract class WorldRecipe<W extends IWorldCrafting> implements IWorldRec
         return advancementId;
       }
     }
+  }
+
+  @FunctionalInterface
+  public interface WorldRecipeBuilder<R extends WorldRecipe<?>> {
+    R create(ResourceLocation recipeId);
   }
 }
