@@ -26,7 +26,7 @@ import java.util.function.Consumer;
 import static net.minecraft.data.recipes.RecipeBuilder.ROOT_RECIPE_ADVANCEMENT;
 
 // TODO: Check if the ItemStack means that NBT is supported
-public abstract class RootsRecipeBuilder {
+public abstract class RootsRecipeBuilderBase {
   protected final Advancement.Builder advancement = Advancement.Builder.advancement();
   protected ItemStack result;
   protected final List<Ingredient> ingredients = new ArrayList<>();
@@ -35,73 +35,69 @@ public abstract class RootsRecipeBuilder {
   protected final List<LevelCondition> levelConditions = new ArrayList<>();
   protected final List<PlayerCondition> playerConditions = new ArrayList<>();
 
-  protected RootsRecipeBuilder() {
+  protected RootsRecipeBuilderBase() {
   }
 
-  protected boolean allowEmptyOutput() {
-    return false;
-  }
+  protected abstract boolean allowEmptyOutput();
 
-  protected boolean requireIngredients() {
-    return true;
-  }
+  protected abstract boolean requireIngredients();
 
-  protected RootsRecipeBuilder(ItemStack result) {
+  protected RootsRecipeBuilderBase(ItemStack result) {
     this.result = result;
   }
 
   public abstract RecipeSerializer<?> getSerializer();
 
-  public RootsRecipeBuilder setOutput(ItemStack output) {
+  public RootsRecipeBuilderBase setOutput(ItemStack output) {
     this.result = output;
     return this;
   }
 
-  public RootsRecipeBuilder addConditionalOutput(ConditionalOutput output) {
+  public RootsRecipeBuilderBase addConditionalOutput(ConditionalOutput output) {
     this.conditionalOutputs.add(output);
     return this;
   }
 
-  public RootsRecipeBuilder addConditionalOutputs(Collection<ConditionalOutput> output) {
+  public RootsRecipeBuilderBase addConditionalOutputs(Collection<ConditionalOutput> output) {
     this.conditionalOutputs.addAll(output);
     return this;
   }
 
-  public RootsRecipeBuilder addConditionalOutput(ItemStack output, float chance) {
+  public RootsRecipeBuilderBase addConditionalOutput(ItemStack output, float chance) {
     return addConditionalOutput(new ConditionalOutput(output, chance));
   }
 
-  public RootsRecipeBuilder addIngredient(TagKey<Item> ingredient) {
+  public RootsRecipeBuilderBase addIngredient(TagKey<Item> ingredient) {
     addIngredient(Ingredient.of(ingredient));
     return this;
   }
 
-  public RootsRecipeBuilder addIngredient(ItemLike item) {
+  public RootsRecipeBuilderBase addIngredient(ItemLike item) {
     addIngredient(Ingredient.of(item));
     return this;
   }
 
-  public RootsRecipeBuilder addIngredient(Ingredient ingredient) {
+  public RootsRecipeBuilderBase addIngredient(Ingredient ingredient) {
     this.ingredients.add(ingredient);
     return this;
   }
 
-  public RootsRecipeBuilder addGrant(Grant grant) {
+  public RootsRecipeBuilderBase addGrant(Grant grant) {
     this.grants.add(grant);
     return this;
   }
 
-  public RootsRecipeBuilder addLevelCondition(LevelCondition condition) {
+  public RootsRecipeBuilderBase addLevelCondition(LevelCondition condition) {
     this.levelConditions.add(condition);
     return this;
   }
 
-  public RootsRecipeBuilder addPlayerCondition(PlayerCondition condition) {
+  public RootsRecipeBuilderBase addPlayerCondition(PlayerCondition condition) {
     this.playerConditions.add(condition);
     return this;
   }
 
-  public RootsRecipeBuilder unlockedBy(String criterionName, CriterionTriggerInstance pCriterionTrigger) {
+  public RootsRecipeBuilderBase unlockedBy(String criterionName, CriterionTriggerInstance pCriterionTrigger) {
     this.advancement.addCriterion(criterionName, pCriterionTrigger);
     return this;
   }

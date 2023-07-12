@@ -1,6 +1,7 @@
 package mysticmods.roots.recipe.grove;
 
 import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
@@ -52,7 +53,17 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
     }
   }
 
-  public static class Builder extends mysticmods.roots.api.recipe.RootsRecipeBuilder {
+  public static class Builder extends RootsRecipeBuilderBase {
+
+    @Override
+    protected boolean allowEmptyOutput() {
+      return false;
+    }
+
+    @Override
+    protected boolean requireIngredients() {
+      return true;
+    }
 
     protected Builder(ItemStack result) {
       super(result);
@@ -79,9 +90,6 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
     protected void validate(ResourceLocation recipeName) {
       if (ingredients.size() != 1) {
         throw new IllegalStateException("Multi-recipe '" + recipeName + "' must have exactly one ingredient");
-      }
-      if (!conditionalOutputs.isEmpty()) {
-        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have conditional outputs");
       }
       if (!grants.isEmpty()) {
         throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have grants");

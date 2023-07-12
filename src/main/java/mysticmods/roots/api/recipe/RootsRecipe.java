@@ -53,6 +53,21 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     this.ingredients.addAll(ingredients);
   }
 
+  @Override
+  public NonNullList<Ingredient> getIngredients() {
+    return this.ingredients;
+  }
+
+  @Override
+  public ItemStack getBaseResultItem() {
+    return getResultItem();
+  }
+
+  @Override
+  public NonNullList<Ingredient> getBaseIngredients() {
+    return getIngredients();
+  }
+
   // TODO: Ensure that not copying this item won't cause problems
   @Override
   public ItemStack getResultItem() {
@@ -93,9 +108,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     return getResultItem().copy();
   }
 
-  // TODO: Abstract more of this out
-
-  public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> implements RecipeSerializer<R> {
+  public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> extends RootsSerializerBase implements RecipeSerializer<R> {
 
     private final RootsRecipeBuilder<R> builder;
 
@@ -109,82 +122,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     @Override
     public R fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
       R recipe = builder.create(pRecipeId);
-
-      if (GsonHelper.isArrayNode(pJson, "ingredients")) {
-        JsonArray incoming = GsonHelper.getAsJsonArray(pJson, "ingredients");
-        NonNullList<Ingredient> ingredients = NonNullList.create();
-        for (int i = 0; i < incoming.size(); i++) {
-          Ingredient ingredient = Ingredient.fromJson(incoming.get(i));
-          if (!ingredient.isEmpty()) {
-            ingredients.add(ingredient);
-          }
-        }
-        recipe.setIngredients(ingredients);
-      }
-
-      if (GsonHelper.isObjectNode(pJson, "result")) {
-        ItemStack result = CraftingHelper.getItemStack(pJson.getAsJsonObject("result"), true, false);
-        recipe.setResultItem(result);
-      } else if (GsonHelper.isStringValue(pJson, "result")) {
-        ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(pJson, "result"));
-        Item item = ForgeRegistries.ITEMS.getValue(id);
-        if (item == null) {
-          throw new JsonSyntaxException("Unknown item '" + id + "'");
-        }
-        int count;
-        if (!pJson.has("count")) {
-          count = 1;
-        } else {
-          count = GsonHelper.getAsInt(pJson, "count");
-        }
-        recipe.setResultItem(new ItemStack(item, count));
-      }
-
-      if (GsonHelper.isArrayNode(pJson, "conditional_outputs")) {
-        List<ConditionalOutput> outputs = new ArrayList<>();
-        JsonArray conditionalOutputs = GsonHelper.getAsJsonArray(pJson, "conditional_outputs");
-        for (int i = 0; i < conditionalOutputs.size(); i++) {
-          if (conditionalOutputs.get(i).isJsonObject()) {
-            outputs.add(ConditionalOutput.fromJson(conditionalOutputs.get(i)));
-          } else {
-            throw new JsonSyntaxException("Invalid conditional output: " + conditionalOutputs.get(i));
-          }
-        }
-        recipe.addConditionalOutputs(outputs);
-      }
-      if (GsonHelper.isArrayNode(pJson, "grants")) {
-        List<Grant> grants = new ArrayList<>();
-        JsonArray thisGrants = GsonHelper.getAsJsonArray(pJson, "grants");
-        for (int i = 0; i < thisGrants.size(); i++) {
-          if (thisGrants.get(i).isJsonObject()) {
-            grants.add(Grant.fromJson(thisGrants.get(i)));
-          } else {
-            throw new JsonSyntaxException("Invalid grant: " + thisGrants.get(i));
-          }
-        }
-        recipe.addGrants(grants);
-      }
-      if (GsonHelper.isArrayNode(pJson, "level_conditions")) {
-        for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "level_conditions")) {
-          ResourceLocation condName = new ResourceLocation(element.getAsString());
-          LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(condName);
-          if (condition == null) {
-            throw new JsonSyntaxException("Level condition '" + condName + "' does not exist!");
-          }
-          recipe.getLevelConditions().add(condition);
-        }
-      }
-      if (GsonHelper.isArrayNode(pJson, "player_conditions")) {
-        for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "player_conditions")) {
-          ResourceLocation condName = new ResourceLocation(element.getAsString());
-          PlayerCondition condition = Registries.PLAYER_CONDITION_REGISTRY.get().getValue(condName);
-          if (condition == null) {
-            throw new JsonSyntaxException("Player condition '" + condName + "' does not exist!");
-          }
-          recipe.getPlayerConditions().add(condition);
-        }
-      }
-
+      baseFromJson(recipe, pRecipeId, pJson);
       fromJsonAdditional(recipe, pRecipeId, pJson);
       return recipe;
     }
@@ -196,45 +134,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     @Override
     public R fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
       R recipe = builder.create(pRecipeId);
-
-      int ingCount = pBuffer.readVarInt();
-      if (ingCount > 0) {
-        NonNullList<Ingredient> ingredients = NonNullList.withSize(ingCount, Ingredient.EMPTY);
-        for (int i = 0; i < ingCount; i++) {
-          ingredients.set(i, Ingredient.fromNetwork(pBuffer));
-        }
-        recipe.setIngredients(ingredients);
-      }
-
-      if (pBuffer.readBoolean()) {
-        ItemStack result = pBuffer.readItem();
-        recipe.setResultItem(result);
-      }
-
-      int count = pBuffer.readVarInt();
-      if (count > 0) {
-        for (int i = 0; i < count; i++) {
-          recipe.addConditionalOutput(ConditionalOutput.fromNetwork(pBuffer));
-        }
-      }
-      count = pBuffer.readVarInt();
-      if (count > 0) {
-        for (int i = 0; i < count; i++) {
-          recipe.addGrant(Grant.fromNetwork(pBuffer));
-        }
-      }
-      int levelConditionsSize = pBuffer.readVarInt();
-      for (int i = 0; i < levelConditionsSize; i++) {
-        LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
-        recipe.getLevelConditions().add(condition);
-      }
-      int playerConditionsSize = pBuffer.readVarInt();
-      for (int i = 0; i < playerConditionsSize; i++) {
-        PlayerCondition condition = Registries.PLAYER_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
-        recipe.getPlayerConditions().add(condition);
-      }
-
-
+      baseFromNetwork(recipe, pRecipeId, pBuffer);
       fromNetworkAdditional(recipe, pRecipeId, pBuffer);
       return recipe;
     }
@@ -244,37 +144,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
     @Override
     public void toNetwork(FriendlyByteBuf pBuffer, R recipe) {
-      pBuffer.writeVarInt(recipe.getIngredients().size());
-      for (Ingredient ingredient : recipe.getIngredients()) {
-        ingredient.toNetwork(pBuffer);
-      }
-
-      pBuffer.writeBoolean(recipe.getResultItem() != null);
-      if (recipe.getResultItem() != null) {
-        pBuffer.writeItem(recipe.getResultItem());
-      }
-
-      List<ConditionalOutput> conditionalOutputs = recipe.getConditionalOutputs();
-      pBuffer.writeVarInt(conditionalOutputs.size());
-      for (ConditionalOutput output : conditionalOutputs) {
-        output.toNetwork(pBuffer);
-      }
-
-      List<Grant> grants = recipe.getGrants();
-      pBuffer.writeVarInt(grants.size());
-      for (Grant grant : grants) {
-        grant.toNetwork(pBuffer);
-      }
-
-      pBuffer.writeVarInt(recipe.getLevelConditions().size());
-      for (LevelCondition condition : recipe.getLevelConditions()) {
-        pBuffer.writeVarInt(Registries.LEVEL_CONDITION_REGISTRY.get().getID(condition));
-      }
-      pBuffer.writeVarInt(recipe.getPlayerConditions().size());
-      for (PlayerCondition condition : recipe.getPlayerConditions()) {
-        pBuffer.writeVarInt(Registries.PLAYER_CONDITION_REGISTRY.get().getID(condition));
-      }
-
+      baseToNetwork(pBuffer, recipe);
       toNetworkAdditional(recipe, pBuffer);
     }
   }

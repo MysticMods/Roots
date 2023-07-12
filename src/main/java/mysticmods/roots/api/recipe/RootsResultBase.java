@@ -20,16 +20,16 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class RootsResultBase implements FinishedRecipe {
-  private final ResourceLocation id;
-  private final ItemStack result;
-  private final List<Ingredient> ingredients;
-  private final RecipeSerializer<?> serializer;
-  private final List<ConditionalOutput> conditionalOutputs;
-  private final List<Grant> grants;
-  private final List<LevelCondition> levelConditions;
-  private final List<PlayerCondition> playerConditions;
-  private final Advancement.Builder advancementBuilder;
-  private final ResourceLocation advancementId;
+  protected final ResourceLocation id;
+  protected final ItemStack result;
+  protected final List<Ingredient> ingredients;
+  protected final RecipeSerializer<?> serializer;
+  protected final List<ConditionalOutput> conditionalOutputs;
+  protected final List<Grant> grants;
+  protected final List<LevelCondition> levelConditions;
+  protected final List<PlayerCondition> playerConditions;
+  protected final Advancement.Builder advancementBuilder;
+  protected final ResourceLocation advancementId;
 
   public RootsResultBase(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
     this.id = id;

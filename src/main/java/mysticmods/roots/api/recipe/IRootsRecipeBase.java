@@ -18,6 +18,10 @@ import net.minecraftforge.items.IItemHandler;
 import java.util.*;
 
 public interface IRootsRecipeBase {
+  ItemStack getBaseResultItem ();
+
+  NonNullList<Ingredient> getBaseIngredients ();
+
   void setIngredients(NonNullList<Ingredient> ingredients);
 
   void setLevelConditions(List<LevelCondition> levelConditions);

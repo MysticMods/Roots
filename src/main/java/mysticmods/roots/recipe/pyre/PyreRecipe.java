@@ -6,6 +6,7 @@ import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
@@ -108,7 +109,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
   }
 
-  public static class Builder extends mysticmods.roots.api.recipe.RootsRecipeBuilder {
+  public static class Builder extends RootsRecipeBuilderBase {
     protected Ritual ritual;
 
     protected Builder(ItemStack result) {
@@ -130,35 +131,35 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
 
     @Override
-    public mysticmods.roots.api.recipe.RootsRecipeBuilder setOutput(ItemStack output) {
+    public Builder setOutput(ItemStack output) {
       if (this.ritual != null) {
         throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
       }
-      return super.setOutput(output);
+      return (Builder) super.setOutput(output);
     }
 
     @Override
-    public mysticmods.roots.api.recipe.RootsRecipeBuilder addConditionalOutput(ConditionalOutput output) {
+    public Builder addConditionalOutput(ConditionalOutput output) {
       if (this.ritual != null) {
         throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
       }
-      return super.addConditionalOutput(output);
+      return (Builder) super.addConditionalOutput(output);
     }
 
     @Override
-    public mysticmods.roots.api.recipe.RootsRecipeBuilder addConditionalOutputs(Collection<ConditionalOutput> output) {
+    public Builder addConditionalOutputs(Collection<ConditionalOutput> output) {
       if (this.ritual != null) {
         throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
       }
-      return super.addConditionalOutputs(output);
+      return (Builder) super.addConditionalOutputs(output);
     }
 
     @Override
-    public mysticmods.roots.api.recipe.RootsRecipeBuilder addConditionalOutput(ItemStack output, float chance) {
+    public Builder addConditionalOutput(ItemStack output, float chance) {
       if (this.ritual != null) {
         throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
       }
-      return super.addConditionalOutput(output, chance);
+      return (Builder) super.addConditionalOutput(output, chance);
     }
 
     @Override
@@ -168,6 +169,11 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
     @Override
     protected boolean allowEmptyOutput() {
+      return true;
+    }
+
+    @Override
+    protected boolean requireIngredients() {
       return true;
     }
 
@@ -188,9 +194,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
 
     @Override
-    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      validate(recipeName);
-      advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR);
+    public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new PyreRecipe.Builder.Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), ritual));
     }
 

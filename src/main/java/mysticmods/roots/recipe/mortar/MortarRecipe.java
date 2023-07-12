@@ -5,6 +5,7 @@ import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
@@ -84,7 +85,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     }
   }
 
-  public static class Builder extends mysticmods.roots.api.recipe.RootsRecipeBuilder {
+  public static class Builder extends RootsRecipeBuilderBase {
     protected final int times;
 
     protected Builder(int times) {
@@ -102,6 +103,16 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
       validate(recipeName);
       advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR);
       consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), times));
+    }
+
+    @Override
+    protected boolean allowEmptyOutput() {
+      return true;
+    }
+
+    @Override
+    protected boolean requireIngredients() {
+      return true;
     }
 
     @Override
