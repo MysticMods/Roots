@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "C": {
+      "item": "minecraft:cactus"
+    },
+    "D": {
+      "item": "minecraft:dandelion"
+    }
+  },
+  "pattern": [
+    "DCD",
+    "CDC",
+    "BBB"
+  ],
+  "result": {
+    "count": 3,
+    "item": "roots:cactus_dandelion_salad"
+  }
+}

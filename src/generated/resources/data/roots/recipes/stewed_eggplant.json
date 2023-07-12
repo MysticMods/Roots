@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "roots:cooked_aubergine"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "L": {
+      "item": "minecraft:allium"
+    },
+    "M": [
+      {
+        "item": "minecraft:red_mushroom"
+      },
+      {
+        "item": "minecraft:brown_mushroom"
+      }
+    ]
+  },
+  "pattern": [
+    "AAA",
+    "MLM",
+    "BBB"
+  ],
+  "result": {
+    "count": 3,
+    "item": "roots:stewed_eggplant"
+  }
+}

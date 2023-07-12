@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "tag": "roots:crops/aubergine"
+    },
+    "B": {
+      "item": "minecraft:glass_bottle"
+    },
+    "C": {
+      "item": "minecraft:carrot"
+    },
+    "P": {
+      "item": "minecraft:apple"
+    },
+    "R": {
+      "item": "minecraft:beetroot"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "ARC",
+    "BPB",
+    "BWB"
+  ],
+  "result": {
+    "count": 4,
+    "item": "roots:vegetable_juice"
+  }
+}

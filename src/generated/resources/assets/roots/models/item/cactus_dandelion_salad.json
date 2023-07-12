@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "roots:item/cactus_dandelion_salad"
+  }
+}

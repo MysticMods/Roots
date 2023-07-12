@@ -1,0 +1,27 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "tag": "roots:runestone"
+    },
+    {
+      "tag": "roots:runestone"
+    },
+    {
+      "tag": "roots:runestone"
+    },
+    {
+      "tag": "roots:runestone"
+    },
+    {
+      "tag": "forge:obsidian"
+    }
+  ],
+  "level_conditions": [
+    "roots:grove_stone_valid"
+  ],
+  "result": {
+    "count": 4,
+    "item": "roots:runed_obsidian"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 600,
+  "experience": 0.15,
+  "ingredient": {
+    "tag": "forge:crops/carrot"
+  },
+  "result": "roots:cooked_carrot"
+}

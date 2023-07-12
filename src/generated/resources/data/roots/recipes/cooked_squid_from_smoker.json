@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "cookingtime": 100,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "roots:raw_squid"
+  },
+  "result": "roots:cooked_squid"
+}

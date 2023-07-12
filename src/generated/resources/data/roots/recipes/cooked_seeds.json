@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.05,
+  "ingredient": {
+    "item": "roots:assorted_seeds"
+  },
+  "result": "roots:cooked_seeds"
+}

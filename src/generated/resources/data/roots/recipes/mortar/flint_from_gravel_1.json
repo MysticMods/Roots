@@ -1,0 +1,12 @@
+{
+  "type": "roots:mortar",
+  "ingredients": [
+    {
+      "tag": "forge:gravel"
+    }
+  ],
+  "result": {
+    "item": "minecraft:flint"
+  },
+  "times": 6
+}

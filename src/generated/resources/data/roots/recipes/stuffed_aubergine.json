@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:cooked_aubergine"
+    },
+    {
+      "type": "roots:excluding_ingredient",
+      "base": {
+        "tag": "roots:vegetables"
+      },
+      "without": {
+        "item": "roots:aubergine"
+      }
+    },
+    {
+      "type": "roots:excluding_ingredient",
+      "base": {
+        "tag": "roots:vegetables"
+      },
+      "without": {
+        "item": "roots:aubergine"
+      }
+    },
+    {
+      "type": "roots:excluding_ingredient",
+      "base": {
+        "tag": "roots:cooked_vegetables"
+      },
+      "without": {
+        "item": "roots:cooked_aubergine"
+      }
+    }
+  ],
+  "result": {
+    "item": "roots:stuffed_aubergine"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 600,
+  "experience": 0.05,
+  "ingredient": {
+    "item": "roots:assorted_seeds"
+  },
+  "result": "roots:cooked_seeds"
+}

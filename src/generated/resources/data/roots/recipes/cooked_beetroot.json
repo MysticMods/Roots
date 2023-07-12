@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": {
+    "tag": "forge:crops/beetroot"
+  },
+  "result": "roots:cooked_beetroot"
+}

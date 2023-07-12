@@ -1,0 +1,26 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "tag": "roots:runestone"
+    },
+    {
+      "tag": "roots:runestone"
+    },
+    {
+      "tag": "roots:petals"
+    },
+    {
+      "tag": "roots:crops/grove_moss"
+    },
+    {
+      "item": "roots:wooden_shears"
+    }
+  ],
+  "level_conditions": [
+    "roots:grove_stone_valid"
+  ],
+  "result": {
+    "item": "roots:runic_shears"
+  }
+}

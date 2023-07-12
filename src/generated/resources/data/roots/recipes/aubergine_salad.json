@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "tag": "roots:crops/aubergine"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "K": {
+      "item": "minecraft:kelp"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "KKK",
+    "BBB"
+  ],
+  "result": {
+    "count": 3,
+    "item": "roots:aubergine_salad"
+  }
+}

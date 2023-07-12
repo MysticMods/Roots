@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": {
+    "tag": "roots:crops/aubergine"
+  },
+  "result": "roots:cooked_aubergine"
+}

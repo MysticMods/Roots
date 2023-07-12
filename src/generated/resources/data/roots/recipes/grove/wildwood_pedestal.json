@@ -1,0 +1,27 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "tag": "roots:logs/wildwood"
+    },
+    {
+      "tag": "roots:logs/wildwood"
+    },
+    {
+      "tag": "roots:logs/wildwood"
+    },
+    {
+      "tag": "roots:logs/wildwood"
+    },
+    {
+      "tag": "roots:logs/wildwood"
+    }
+  ],
+  "level_conditions": [
+    "roots:grove_stone_valid"
+  ],
+  "result": {
+    "count": 5,
+    "item": "roots:wildwood_pedestal"
+  }
+}
