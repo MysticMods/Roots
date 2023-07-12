@@ -5,12 +5,12 @@ import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
@@ -84,7 +84,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     }
   }
 
-  public static class Builder extends RootsRecipe.Builder {
+  public static class Builder extends mysticmods.roots.api.recipe.RootsRecipeBuilder {
     protected final int times;
 
     protected Builder(int times) {
@@ -109,7 +109,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
       return ModSerializers.MORTAR.get();
     }
 
-    public static class Result extends RootsRecipe.Builder.Result {
+    public static class Result extends RootsResultBase {
       private final int times;
 
       public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId, int times) {

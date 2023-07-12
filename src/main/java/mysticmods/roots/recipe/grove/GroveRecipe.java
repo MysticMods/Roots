@@ -1,11 +1,11 @@
 package mysticmods.roots.recipe.grove;
 
 import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
@@ -52,7 +52,7 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
     }
   }
 
-  public static class Builder extends RootsRecipe.Builder {
+  public static class Builder extends mysticmods.roots.api.recipe.RootsRecipeBuilder {
 
     protected Builder(ItemStack result) {
       super(result);
@@ -106,7 +106,7 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
           thisAdvancement.addCriterion(entry.getKey(), entry.getValue());
         }
         thisAdvancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(thisRecipeName)).rewards(AdvancementRewards.Builder.recipe(thisRecipeName)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new GroveRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName)));
+        consumer.accept(new RootsResultBase(thisRecipeName, thisResult, thisIngredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName)));
       }
     }
   }
