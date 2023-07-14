@@ -70,4 +70,8 @@ public interface IRootsRecipeBase {
   default int getPriority () {
     return 0;
   }
+
+  default boolean isDynamic () {
+    return false;
+  }
 }

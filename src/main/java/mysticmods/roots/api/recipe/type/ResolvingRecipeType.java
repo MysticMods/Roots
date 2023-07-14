@@ -1,6 +1,7 @@
 package mysticmods.roots.api.recipe.type;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.recipe.IRootsRecipeBase;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 // TODO: Move recipe caching into NoobUtil
-public class ResolvingRecipeType<C extends Container, T extends Recipe<C>> extends noobanidus.libs.noobutil.recipe.ResolvingRecipeType<C, T> {
+public class ResolvingRecipeType<C extends Container, T extends Recipe<C> & IRootsRecipeBase> extends noobanidus.libs.noobutil.recipe.ResolvingRecipeType<C, T> {
   private T lastRecipe = null;
 
   public ResolvingRecipeType(Supplier<RecipeType<T>> type, Comparator<? super T> comparator) {
@@ -33,7 +34,7 @@ public class ResolvingRecipeType<C extends Container, T extends Recipe<C>> exten
 
   @Nullable
   public T findRecipe(C inventory, Level level) {
-    if (lastRecipe != null && lastRecipe.matches(inventory, level)) {
+    if (lastRecipe != null && !lastRecipe.isDynamic() && lastRecipe.matches(inventory, level)) {
       return lastRecipe;
     }
     for (T recipe : getRecipes()) {

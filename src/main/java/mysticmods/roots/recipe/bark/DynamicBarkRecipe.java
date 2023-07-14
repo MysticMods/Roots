@@ -13,9 +13,11 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.common.ToolActions;
@@ -55,18 +57,37 @@ public class DynamicBarkRecipe extends BarkRecipe {
   }
 
   @Override
+  public boolean matches(BarkCrafting pContainer, Level pLevel) {
+    return super.matches(pContainer, pLevel) && getStrippedState(pContainer, pContainer.getBlockState()) != null;
+  }
+
+  @Override
   public int getPriority() {
     return -1000;
   }
 
+  @Nullable
+  protected static BlockState getStrippedState (BarkCrafting pContainer, BlockState state) {
+    BlockState outputState = state.getToolModifiedState(pContainer.getContext(), ToolActions.AXE_STRIP, false);
+    if (outputState == null) {
+      outputState = AxeItem.getAxeStrippingState(state);
+    }
+    return outputState;
+  }
+
   @Override
   public BlockState modifyState(BarkCrafting pContainer, BlockState currentState) {
-    BlockState outputState = currentState.getToolModifiedState(pContainer.getContext(), ToolActions.AXE_STRIP, false);
-    if (outputState != null) {
-      return outputState;
-    } else {
-      return super.modifyState(pContainer, currentState);
+    BlockState outputState = getStrippedState(pContainer, currentState);
+    if (outputState == null) {
+      return currentState;
     }
+
+    return outputState;
+  }
+
+  @Override
+  public boolean isDynamic() {
+    return true;
   }
 
   public static class Serializer extends WorldRecipe.Serializer<BarkCrafting, BarkRecipe> {

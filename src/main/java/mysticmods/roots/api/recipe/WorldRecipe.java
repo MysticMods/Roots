@@ -96,7 +96,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     }
     if (!level.isClientSide()) {
       BlockPos pos = pInv.getBlockPos();
-      BlockState newState = modifyState(pInv, outputState);
+      BlockState newState = modifyState(pInv, level.getBlockState(pos));
       level.setBlock(pos, newState, 11);
       Player player = pInv.getPlayer();
       if (player != null) {
