@@ -1,6 +1,5 @@
 package mysticmods.roots.item;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.bark.BarkCrafting;
 import mysticmods.roots.recipe.bark.BarkRecipe;
@@ -16,14 +15,11 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.common.ToolActions;
 import noobanidus.libs.noobutil.item.BaseItems;
 import noobanidus.libs.noobutil.util.ItemUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class KnifeItem extends BaseItems.KnifeItem {
   public KnifeItem(Tier tier, float attackDamage, float attackSpeed, Properties props) {
@@ -42,7 +38,7 @@ public class KnifeItem extends BaseItems.KnifeItem {
       level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
 
       if (player instanceof ServerPlayer) {
-        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockpos, itemstack);
+        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockpos, itemstack);
       }
 
       if (player != null) {
@@ -53,6 +49,7 @@ public class KnifeItem extends BaseItems.KnifeItem {
 
       if (!level.isClientSide()) {
         List<ItemStack> results = new ArrayList<>();
+        // TODO: Item could be empty with only chance outputs
         results.add(recipe.assemble(crafting));
         results.addAll(recipe.assembleChanceOutputs(level.getRandom()));
         for (ItemStack stack : results) {

@@ -10,7 +10,6 @@ import mysticmods.roots.recipe.mortar.MortarCrafting;
 import mysticmods.roots.recipe.mortar.MortarInventory;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -176,6 +175,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           previousRecipeItems.clear();
           previousRecipeItems.addAll(inventory.getItemsCopy());
           List<ItemStack> results = new ArrayList<>();
+          // TODO: Item could be empty with only chance outputs
           results.add(cachedRecipe.assemble(playerCrafting));
           results.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
           results.addAll(cachedRecipe.process(inventory.getItemsAndClear()));

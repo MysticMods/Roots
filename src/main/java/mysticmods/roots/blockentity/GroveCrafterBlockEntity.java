@@ -64,6 +64,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       }
       lastRecipe = cachedRecipe;
       List<ItemStack> results = new ArrayList<>();
+      // TODO: Item could be empty with only chance outputs
       results.add(cachedRecipe.assemble(playerCrafting));
       results.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
       results.addAll(cachedRecipe.process(playerCrafting.popItems()));
