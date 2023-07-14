@@ -4,13 +4,14 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
+import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -20,8 +21,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraftforge.common.Tags;
-import noobanidus.libs.noobutil.data.generator.ItemGenerator;
 import noobanidus.libs.noobutil.ingredient.ExcludingIngredient;
 import noobanidus.libs.noobutil.item.BaseItems;
 
@@ -359,6 +361,18 @@ public class ModItems {
   public static final ItemEntry<Item> WILDWOOD_BARK = REGISTRATE.item("wildwood_bark", Item::new)
     .tag(RootsTags.Items.WILDWOOD_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(ModBlocks.STRIPPED_WILDWOOD_LOG.getDefaultState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(ModBlocks.WILDWOOD_LOG.get())))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/wildwood_log_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(ModBlocks.STRIPPED_WILDWOOD_WOOD.getDefaultState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(ModBlocks.WILDWOOD_WOOD.get())))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/wildwood_wood_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> CRIMSON_BARK = REGISTRATE.item("crimson_bark", Item::new)

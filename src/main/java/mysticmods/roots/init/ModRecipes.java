@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.reference.Spells;
+import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
@@ -23,30 +24,36 @@ import net.minecraftforge.registries.RegistryObject;
 import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModRecipes {
-  private static final DeferredRegister<RecipeType<?>> SERIALIZER = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, RootsAPI.MODID);
-  public static RegistryObject<RecipeType<PyreRecipe>> PYRE = SERIALIZER.register("pyre", () -> new RecipeType<>() {
+  private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, RootsAPI.MODID);
+  public static RegistryObject<RecipeType<PyreRecipe>> PYRE = TYPES.register("pyre", () -> new RecipeType<>() {
     @Override
     public String toString() {
       return "roots:pyre";
     }
   });
-  public static RegistryObject<RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = SERIALIZER.register("summon_creatures", () -> new RecipeType<>() {
+  public static RegistryObject<RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = TYPES.register("summon_creatures", () -> new RecipeType<>() {
     @Override
     public String toString() {
       return "roots:summon_creatures";
     }
   });
-  public static RegistryObject<RecipeType<MortarRecipe>> MORTAR = SERIALIZER.register("mortar", () -> new RecipeType<>() {
+  public static RegistryObject<RecipeType<MortarRecipe>> MORTAR = TYPES.register("mortar", () -> new RecipeType<>() {
     @Override
     public String toString() {
       return "roots:mortar";
     }
   });
   // TODO: Inline these strings into Reference
-  public static RegistryObject<RecipeType<GroveRecipe>> GROVE = SERIALIZER.register("grove", () -> new RecipeType<>() {
+  public static RegistryObject<RecipeType<GroveRecipe>> GROVE = TYPES.register("grove", () -> new RecipeType<>() {
     @Override
     public String toString() {
       return "roots:grove";
+    }
+  });
+  public static RegistryObject<RecipeType<BarkRecipe>> BARK = TYPES.register("bark", () -> new RecipeType<>() {
+    @Override
+    public String toString() {
+      return "roots:bark";
     }
   });
 
@@ -92,7 +99,7 @@ public class ModRecipes {
   }
 
   public static void register(IEventBus bus) {
-    SERIALIZER.register(bus);
+    TYPES.register(bus);
   }
 
   public static void load() {

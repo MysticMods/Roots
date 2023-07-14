@@ -1,19 +1,24 @@
 package mysticmods.roots.api.recipe;
 
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
-import mysticmods.roots.api.RootsAPI;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import mysticmods.roots.api.recipe.output.ConditionalOutput;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -21,14 +26,19 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeBase implements IWorldRecipe<W> {
   protected BlockState outputState;
-  protected BlockPredicate matcher;
+  protected Condition condition;
 
   public WorldRecipe(ResourceLocation recipeId) {
     super(recipeId);
@@ -39,20 +49,20 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     return NonNullList.create();
   }
 
-  public void setOutputState (BlockState outputState) {
+  public void setOutputState(BlockState outputState) {
     this.outputState = outputState;
   }
 
-  public BlockState getOutputState () {
+  public BlockState getOutputState() {
     return this.outputState;
   }
 
-  public BlockPredicate getMatcher() {
-    return matcher;
+  public Condition getMatcher() {
+    return condition;
   }
 
-  public void setMatcher(BlockPredicate matcher) {
-    this.matcher = matcher;
+  public void setCondition(Condition condition) {
+    this.condition = condition;
   }
 
   // TODO: Ensure that not copying this item won't cause problems
@@ -66,12 +76,40 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
 
   @Override
   public boolean matches(W pContainer, Level pLevel) {
-    return false;
+    return condition.test(pContainer.getBlockPos(), pLevel);
   }
+
 
   @Override
   public ResourceLocation getId() {
     return recipeId;
+  }
+
+  public BlockState modifyState(W pContainer, BlockState state) {
+    return state;
+  }
+
+  @Override
+  public ItemStack assemble(W pInv) {
+    Level level = pInv.getLevel();
+    if (level == null) {
+      throw new IllegalStateException("Cannot assemble recipe `" + getId() + "` without a world!");
+    }
+    BlockPos pos = pInv.getBlockPos();
+    // TODO: Handle setting this up
+    if (pInv.getBlockState() == null) {
+      pInv.setBlockState(level.getBlockState(pos));
+    }
+    BlockState newState = modifyState(pInv, outputState);
+    level.setBlock(pos, newState, 3);
+    Player player = pInv.getPlayer();
+    if (player != null && player.level.isClientSide()) {
+      for (Grant grant : getGrants()) {
+        grant.accept((ServerPlayer) player);
+      }
+    }
+
+    return getResultItem().copy();
   }
 
   public abstract static class Serializer<W extends IWorldCrafting, R extends WorldRecipe<W>> extends RootsSerializerBase implements RecipeSerializer<R> {
@@ -91,7 +129,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
       baseFromJson(recipe, pRecipeId, pJson);
       // Matcher, state
       recipe.outputState = BlockState.CODEC.parse(JsonOps.INSTANCE, pJson.get("outputState")).result().orElseThrow(() -> new IllegalStateException("Could not parse output state for recipe " + pRecipeId));
-      recipe.matcher = BlockPredicate.CODEC.parse(JsonOps.INSTANCE, pJson.get("matcher")).result().orElseThrow(() -> new IllegalStateException("Could not parse matcher for recipe " + pRecipeId));
+      recipe.condition = Condition.CODEC.parse(JsonOps.INSTANCE, pJson.get("condition")).result().orElseThrow(() -> new IllegalStateException("Could not parse condition for recipe " + pRecipeId));
       fromJsonAdditional(recipe, pRecipeId, pJson);
       return recipe;
     }
@@ -104,9 +142,8 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     public R fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
       R recipe = builder.create(pRecipeId);
       baseFromNetwork(recipe, pRecipeId, pBuffer);
-      // block state, matcher
       recipe.outputState = pBuffer.readWithCodec(BlockState.CODEC);
-      recipe.matcher = pBuffer.readWithCodec(BlockPredicate.CODEC);
+      recipe.condition = pBuffer.readWithCodec(Condition.CODEC);
       fromNetworkAdditional(recipe, pRecipeId, pBuffer);
       return recipe;
     }
@@ -118,27 +155,15 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     public void toNetwork(FriendlyByteBuf pBuffer, R recipe) {
       baseToNetwork(pBuffer, recipe);
       pBuffer.writeWithCodec(BlockState.CODEC, recipe.outputState);
-      pBuffer.writeWithCodec(BlockPredicate.CODEC, recipe.matcher);
+      pBuffer.writeWithCodec(Condition.CODEC, recipe.condition);
       // TODO: etc
       toNetworkAdditional(recipe, pBuffer);
     }
   }
 
-  @Override
-  public ItemStack assemble(W pInv) {
-    Player player = pInv.getPlayer();
-    if (player != null && player.level.isClientSide()) {
-      for (Grant grant : getGrants()) {
-        grant.accept((ServerPlayer) player);
-      }
-    }
-
-    return getResultItem().copy();
-  }
-
   public abstract static class Builder extends RootsRecipeBuilderBase {
     protected BlockState outputState;
-    protected BlockPredicate matcher;
+    protected Condition condition;
 
     protected Builder() {
     }
@@ -151,41 +176,42 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
       super(result);
     }
 
-    public Builder setOutputState (BlockState outputState) {
+    public Builder setOutputState(BlockState outputState) {
       this.outputState = outputState;
       return this;
     }
 
-    public Builder setMatcher (BlockPredicate matcher) {
-      this.matcher = matcher;
+    public Builder setCondition(Condition condition) {
+      this.condition = condition;
       return this;
     }
 
     public abstract RecipeSerializer<?> getSerializer();
 
-    public void doSave (Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new WorldRecipe.Builder.Result(recipeName, result, outputState, matcher, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
+    public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
+      consumer.accept(new WorldRecipe.Builder.Result(recipeName, result, outputState, condition, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
     }
 
     public static class Result extends RootsResultBase {
       protected final BlockState outputState;
-      protected final BlockPredicate matcher;
+      protected final Condition condition;
 
-      public Result(ResourceLocation id, ItemStack result, BlockState outputState, BlockPredicate matcher, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
+      public Result(ResourceLocation id, ItemStack result, BlockState outputState, Condition condition, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
         super(id, result, Collections.emptyList(), conditionalOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
         this.outputState = outputState;
-        this.matcher = matcher;
+        this.condition = condition;
       }
 
       @Override
       public void serializeRecipeData(JsonObject json) {
         super.serializeRecipeData(json);
-        BlockState.CODEC.encodeStart(JsonOps.INSTANCE, outputState).resultOrPartial(RootsAPI.LOG::error).ifPresent((p_218610_1_) -> {
-          json.add("outputState", p_218610_1_);
-        });
-        BlockPredicate.CODEC.encodeStart(JsonOps.INSTANCE, matcher).resultOrPartial(RootsAPI.LOG::error).ifPresent((p_218610_1_) -> {
-          json.add("matcher", p_218610_1_);
-        });
+
+        json.add("outputState", BlockState.CODEC.encodeStart(JsonOps.INSTANCE, outputState).getOrThrow(false, s -> {
+          throw new IllegalStateException(s);
+        }));
+        json.add("condition", Condition.CODEC.encodeStart(JsonOps.INSTANCE, condition).getOrThrow(false, s -> {
+          throw new IllegalStateException(s);
+        }));
       }
     }
   }
@@ -193,5 +219,56 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
   @FunctionalInterface
   public interface WorldRecipeBuilder<R extends WorldRecipe<?>> {
     R create(ResourceLocation recipeId);
+  }
+
+  public enum Shift implements Function<BlockPos, BlockPos>, StringRepresentable {
+    NONE(null),
+    ABOVE(Direction.UP),
+    BELOW(Direction.DOWN),
+    NORTH(Direction.NORTH),
+    SOUTH(Direction.SOUTH),
+    EAST(Direction.EAST),
+    WEST(Direction.WEST);
+
+    public static final Codec<Shift> CODEC = StringRepresentable.fromEnum(Shift::values);
+
+    private final Direction offset;
+
+    Shift(Direction offset) {
+      this.offset = offset;
+    }
+
+    @Override
+    public BlockPos apply(BlockPos blockPos) {
+      return offset == null ? blockPos : blockPos.relative(offset);
+    }
+
+    @Override
+    public String getSerializedName() {
+      return this.name().toLowerCase(Locale.ROOT);
+    }
+  }
+
+  public static class Condition implements BiPredicate<BlockPos, Level> {
+    private final Shift shift;
+    private final RuleTest test;
+
+    public static final Codec<Condition> CODEC = RecordCodecBuilder.create((codec) -> codec.group(Shift.CODEC.fieldOf("shift").forGetter((condition) -> condition.shift), RuleTest.CODEC.fieldOf("test").forGetter((condition) -> condition.test)).apply(codec, Condition::new));
+
+    public Condition(Shift shift, RuleTest test) {
+      this.shift = shift;
+      this.test = test;
+    }
+
+    public Condition(RuleTest test) {
+      this(Shift.NONE, test);
+    }
+
+    @Override
+    public boolean test(BlockPos blockPos, Level level) {
+      BlockPos pos = shift.apply(blockPos);
+      BlockState stateAt = level.getBlockState(pos);
+      return test.test(stateAt, level.getRandom());
+    }
   }
 }

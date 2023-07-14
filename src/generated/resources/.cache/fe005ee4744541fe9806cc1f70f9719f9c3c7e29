@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-11T21:47:31.3750361	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-14T14:13:19.16009	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -614,6 +614,8 @@ beb21d7c26a069bfc10b5f1425df0f4bc91a792e data/roots/advancements/recipes/misc/mo
 0533a0ebbd429f232f4f04e29ac7ea78667de950 data/roots/advancements/recipes/misc/mortar/string_from_wool_5.json
 63be07fb51760103af2e9350b87edab66a3af11a data/roots/advancements/recipes/roots/apple_cordial.json
 18d50023b1ddc0d47057524508a7e71405aa3f66 data/roots/advancements/recipes/roots/aubergine_salad.json
+a0fb000ab93df0067ea5c0c8f4b2e67b5b3d1631 data/roots/advancements/recipes/roots/bark/wildwood_log_stripping.json
+81dbf25d471109964728f0db8ba6abd04e3c02b1 data/roots/advancements/recipes/roots/bark/wildwood_wood_stripping.json
 e7588a3a9f9b10597e37f864ef60f39d9014d99d data/roots/advancements/recipes/roots/beetroot_salad.json
 7bc5bf15434514ca75788a5b433dac8a708f25ae data/roots/advancements/recipes/roots/cactus_dandelion_salad.json
 f14f31431c1abe242e2ddfe9dd6ed13c5a15dd02 data/roots/advancements/recipes/roots/cactus_syrup.json
@@ -926,6 +928,8 @@ ad3057db2bc1b73eb0cdb9c7ef9b0f766b45089f data/roots/loot_tables/blocks/wild_aube
 212c065570f312eb041b0ccb9e5d46d958ce0fe5 data/roots/loot_tables/blocks/wild_roots.json
 f3637c07025623a691a08150735bc5797fc5de17 data/roots/recipes/apple_cordial.json
 750e7f91340df84b47a0058dce3af2430ebf5032 data/roots/recipes/aubergine_salad.json
+358c5e88986695e405c6245c39caebf513d6d194 data/roots/recipes/bark/wildwood_log_stripping.json
+181cfeea432c70579d9e72965ebb718d862d9756 data/roots/recipes/bark/wildwood_wood_stripping.json
 1a4ad6ef801022b313e54e50207db82cfe2e1ff1 data/roots/recipes/beetroot_salad.json
 1a4e5ef66856d78f5716468c77f76d9a96c50eb7 data/roots/recipes/black_dye.json
 1503eb4195a514982227aa80e76e314c0e65cbe7 data/roots/recipes/cactus_dandelion_salad.json

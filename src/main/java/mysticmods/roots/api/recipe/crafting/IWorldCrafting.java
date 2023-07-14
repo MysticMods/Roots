@@ -1,13 +1,20 @@
 package mysticmods.roots.api.recipe.crafting;
 
-import net.minecraft.world.Container;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 import java.util.function.Predicate;
 
 public interface IWorldCrafting extends IRootsCraftingBase {
+  void setBlockState(BlockState state);
+
+  BlockState getBlockState();
+
+  BlockPos getBlockPos();
+
   default int getContainerSize() {
     return 0;
   }
