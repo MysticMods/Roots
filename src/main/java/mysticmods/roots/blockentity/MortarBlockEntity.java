@@ -175,11 +175,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           lastRecipe = cachedRecipe;
           previousRecipeItems.clear();
           previousRecipeItems.addAll(inventory.getItemsCopy());
-          ItemStack result = cachedRecipe.assemble(playerCrafting);
-          // process
-          NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
-          ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);
-          for (ItemStack stack : processed) {
+          List<ItemStack> results = new ArrayList<>();
+          results.add(cachedRecipe.assemble(playerCrafting));
+          results.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
+          results.addAll(cachedRecipe.process(inventory.getItemsAndClear()));
+          for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
           }
           uses = -1;

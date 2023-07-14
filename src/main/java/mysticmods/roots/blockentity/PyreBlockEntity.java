@@ -133,13 +133,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       storedItems.clear();
       if (currentRitual == ModRituals.CRAFTING.get()) {
         storedItems.add(cachedRecipe.assemble(playerCrafting));
-        // TODO: conditional outputs
-        for (ChanceOutput chanceOutput : cachedRecipe.getChanceOutputs()) {
-          ItemStack output = chanceOutput.getResult(level.getRandom());
-          if (!output.isEmpty()) {
-            storedItems.add(output);
-          }
-        }
+        storedItems.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
       }
       // process
       NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());

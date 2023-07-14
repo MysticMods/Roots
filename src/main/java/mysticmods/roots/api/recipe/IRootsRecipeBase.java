@@ -7,6 +7,7 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.util.SetUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -71,5 +72,9 @@ public interface IRootsRecipeBase {
 
   default boolean isDynamic () {
     return false;
+  }
+
+  default List<ItemStack> assembleChanceOutputs (RandomSource source) {
+    return ChanceOutput.getOutputs(getChanceOutputs(), source);
   }
 }

@@ -63,10 +63,12 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         return InteractionResult.FAIL;
       }
       lastRecipe = cachedRecipe;
-      ItemStack result = cachedRecipe.assemble(playerCrafting);
-      NonNullList<ItemStack> processed = cachedRecipe.process(playerCrafting.popItems());
-      ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);
-      for (ItemStack stack : processed) {
+      List<ItemStack> results = new ArrayList<>();
+      results.add(cachedRecipe.assemble(playerCrafting));
+      results.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
+      results.addAll(cachedRecipe.process(playerCrafting.popItems()));
+
+      for (ItemStack stack : results) {
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
       }
       cachedRecipe = null;

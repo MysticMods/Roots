@@ -21,6 +21,8 @@ import net.minecraftforge.common.ToolActions;
 import noobanidus.libs.noobutil.item.BaseItems;
 import noobanidus.libs.noobutil.util.ItemUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class KnifeItem extends BaseItems.KnifeItem {
@@ -50,8 +52,12 @@ public class KnifeItem extends BaseItems.KnifeItem {
       }
 
       if (!level.isClientSide()) {
-        ItemStack result = recipe.assemble(crafting);
-        ItemUtil.Spawn.spawnItem(level, player == null ? blockpos : player.blockPosition(), result);
+        List<ItemStack> results = new ArrayList<>();
+        results.add(recipe.assemble(crafting));
+        results.addAll(recipe.assembleChanceOutputs(level.getRandom()));
+        for (ItemStack stack : results) {
+          ItemUtil.Spawn.spawnItem(level, player == null ? blockpos : player.blockPosition(), stack);
+        }
       }
 
       return InteractionResult.sidedSuccess(level.isClientSide);
