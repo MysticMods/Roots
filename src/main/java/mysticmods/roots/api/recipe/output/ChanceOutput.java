@@ -12,17 +12,16 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class ConditionalOutput {
+public class ChanceOutput {
   private final ItemStack output;
   private final float chance;
 
-  public ConditionalOutput(ItemStack output, float chance) {
+  public ChanceOutput(ItemStack output, float chance) {
     this.output = output;
     this.chance = chance;
     if (this.chance > 1) {
-      throw new IllegalArgumentException("Invalid chance for a conditional output: " + this.chance);
+      throw new IllegalArgumentException("Invalid chance for a chance output: " + this.chance);
     }
   }
 
@@ -61,32 +60,32 @@ public class ConditionalOutput {
     pBuffer.writeFloat(getChance());
   }
 
-  public static ConditionalOutput fromJson(JsonElement pJson) {
+  public static ChanceOutput fromJson(JsonElement pJson) {
     if (pJson != null && !pJson.isJsonNull()) {
       if (pJson.isJsonObject()) {
         JsonObject pJsonObject = pJson.getAsJsonObject();
         if (!pJsonObject.get("item").isJsonObject()) {
-          throw new JsonSyntaxException("Conditional output item must be an object");
+          throw new JsonSyntaxException("Chance output item must be an object");
         }
         if (pJsonObject.get("chance").isJsonNull()) {
-          throw new JsonSyntaxException("Conditional output must have a chance");
+          throw new JsonSyntaxException("Chance output must have a chance");
         }
-        return new ConditionalOutput(CraftingHelper.getItemStack(pJsonObject.getAsJsonObject("item"), true, true), pJsonObject.get("chance").getAsFloat());
+        return new ChanceOutput(CraftingHelper.getItemStack(pJsonObject.getAsJsonObject("item"), true, true), pJsonObject.get("chance").getAsFloat());
       } else {
-        throw new JsonSyntaxException("Expected conditional output to be object");
+        throw new JsonSyntaxException("Expected chance output to be object");
       }
     } else {
-      throw new JsonSyntaxException("Conditional output cannot be null");
+      throw new JsonSyntaxException("Chance output cannot be null");
     }
   }
 
-  public static ConditionalOutput fromNetwork(FriendlyByteBuf pBuffer) {
-    return new ConditionalOutput(pBuffer.readItem(), pBuffer.readFloat());
+  public static ChanceOutput fromNetwork(FriendlyByteBuf pBuffer) {
+    return new ChanceOutput(pBuffer.readItem(), pBuffer.readFloat());
   }
 
-  public static List<ItemStack> getOutputs(List<ConditionalOutput> conditionalOutputs, RandomSource random) {
+  public static List<ItemStack> getOutputs(List<ChanceOutput> chanceOptions, RandomSource random) {
     List<ItemStack> result = new ArrayList<>();
-    for (ConditionalOutput output : conditionalOutputs) {
+    for (ChanceOutput output : chanceOptions) {
       ItemStack thisResult = output.getResult(random);
       if (thisResult != null) {
         result.add(thisResult);

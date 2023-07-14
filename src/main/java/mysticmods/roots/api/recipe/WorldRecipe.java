@@ -8,7 +8,7 @@ import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
-import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -187,15 +187,15 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     public abstract RecipeSerializer<?> getSerializer();
 
     public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new WorldRecipe.Builder.Result(recipeName, result, outputState, condition, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
+      consumer.accept(new WorldRecipe.Builder.Result(recipeName, result, outputState, condition, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
     }
 
     public static class Result extends RootsResultBase {
       protected final BlockState outputState;
       protected final Condition condition;
 
-      public Result(ResourceLocation id, ItemStack result, BlockState outputState, Condition condition, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
-        super(id, result, Collections.emptyList(), conditionalOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
+      public Result(ResourceLocation id, ItemStack result, BlockState outputState, Condition condition, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
+        super(id, result, Collections.emptyList(), chanceOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
         this.outputState = outputState;
         this.condition = condition;
       }

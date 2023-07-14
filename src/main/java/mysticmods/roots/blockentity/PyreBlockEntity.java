@@ -6,7 +6,7 @@ import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
-import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
@@ -134,8 +134,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       if (currentRitual == ModRituals.CRAFTING.get()) {
         storedItems.add(cachedRecipe.assemble(playerCrafting));
         // TODO: conditional outputs
-        for (ConditionalOutput conditionalOutput : cachedRecipe.getConditionalOutputs()) {
-          ItemStack output = conditionalOutput.getResult(level.getRandom());
+        for (ChanceOutput chanceOutput : cachedRecipe.getChanceOutputs()) {
+          ItemStack output = chanceOutput.getResult(level.getRandom());
           if (!output.isEmpty()) {
             storedItems.add(output);
           }

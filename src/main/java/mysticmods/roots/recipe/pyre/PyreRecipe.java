@@ -9,7 +9,7 @@ import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
-import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -50,7 +50,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
   }
 
   public boolean hasOutput() {
-    return (result != null && result.isEmpty()) || !conditionalOutputs.isEmpty();
+    return (result != null && result.isEmpty()) || !chanceOutputs.isEmpty();
   }
 
   public void setRitual(Ritual ritual) {
@@ -122,7 +122,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
 
     public Builder setRitual(Ritual ritual) {
-      if (!this.conditionalOutputs.isEmpty() || (this.result != null && !this.result.isEmpty())) {
+      if (!this.chanceOutputs.isEmpty() || (this.result != null && !this.result.isEmpty())) {
         throw new IllegalStateException("can't set a ritual for a recipe that has an output");
       }
       this.ritual = ritual;
@@ -139,27 +139,27 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     }
 
     @Override
-    public Builder addConditionalOutput(ConditionalOutput output) {
+    public Builder addChanceOutput(ChanceOutput output) {
       if (this.ritual != null) {
         throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
       }
-      return (Builder) super.addConditionalOutput(output);
+      return (Builder) super.addChanceOutput(output);
     }
 
     @Override
-    public Builder addConditionalOutputs(Collection<ConditionalOutput> output) {
+    public Builder addChanceOutputs(Collection<ChanceOutput> output) {
       if (this.ritual != null) {
         throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
       }
-      return (Builder) super.addConditionalOutputs(output);
+      return (Builder) super.addChanceOutputs(output);
     }
 
     @Override
-    public Builder addConditionalOutput(ItemStack output, float chance) {
+    public Builder addChanceOutput(ItemStack output, float chance) {
       if (this.ritual != null) {
         throw new IllegalStateException("can't add outputs for a recipe that has an associated ritual");
       }
-      return (Builder) super.addConditionalOutput(output, chance);
+      return (Builder) super.addChanceOutput(output, chance);
     }
 
     @Override
@@ -195,15 +195,15 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
     @Override
     public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new PyreRecipe.Builder.Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), ritual));
+      consumer.accept(new PyreRecipe.Builder.Result(recipeName, result, ingredients, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), ritual));
     }
 
 
     public static class Result extends RootsResultBase {
       private final Ritual ritual;
 
-      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder builder, ResourceLocation advancementId, Ritual ritual) {
-        super(id, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, serializer, builder, advancementId);
+      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder builder, ResourceLocation advancementId, Ritual ritual) {
+        super(id, result, ingredients, chanceOutputs, grants, levelConditions, playerConditions, serializer, builder, advancementId);
         this.ritual = ritual;
       }
 
@@ -236,8 +236,8 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       if (ritual != null) {
         throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have an associated ritual");
       }
-      if (!conditionalOutputs.isEmpty()) {
-        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have conditional outputs");
+      if (!chanceOutputs.isEmpty()) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have chance outputs");
       }
       if (!grants.isEmpty()) {
         throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have grants");
@@ -263,7 +263,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
           thisAdvancement.addCriterion(entry.getKey(), entry.getValue());
         }
         thisAdvancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(thisRecipeName)).rewards(AdvancementRewards.Builder.recipe(thisRecipeName)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new PyreRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName), ritual));
+        consumer.accept(new PyreRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName), ritual));
       }
     }
   }

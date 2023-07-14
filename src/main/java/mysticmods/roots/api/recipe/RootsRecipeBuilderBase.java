@@ -3,7 +3,7 @@ package mysticmods.roots.api.recipe;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -30,7 +30,7 @@ public abstract class RootsRecipeBuilderBase {
   protected final Advancement.Builder advancement = Advancement.Builder.advancement();
   protected ItemStack result;
   protected final List<Ingredient> ingredients = new ArrayList<>();
-  protected final List<ConditionalOutput> conditionalOutputs = new ArrayList<>();
+  protected final List<ChanceOutput> chanceOutputs = new ArrayList<>();
   protected final List<Grant> grants = new ArrayList<>();
   protected final List<LevelCondition> levelConditions = new ArrayList<>();
   protected final List<PlayerCondition> playerConditions = new ArrayList<>();
@@ -53,18 +53,18 @@ public abstract class RootsRecipeBuilderBase {
     return this;
   }
 
-  public RootsRecipeBuilderBase addConditionalOutput(ConditionalOutput output) {
-    this.conditionalOutputs.add(output);
+  public RootsRecipeBuilderBase addChanceOutput(ChanceOutput output) {
+    this.chanceOutputs.add(output);
     return this;
   }
 
-  public RootsRecipeBuilderBase addConditionalOutputs(Collection<ConditionalOutput> output) {
-    this.conditionalOutputs.addAll(output);
+  public RootsRecipeBuilderBase addChanceOutputs(Collection<ChanceOutput> output) {
+    this.chanceOutputs.addAll(output);
     return this;
   }
 
-  public RootsRecipeBuilderBase addConditionalOutput(ItemStack output, float chance) {
-    return addConditionalOutput(new ConditionalOutput(output, chance));
+  public RootsRecipeBuilderBase addChanceOutput(ItemStack output, float chance) {
+    return addChanceOutput(new ChanceOutput(output, chance));
   }
 
   public RootsRecipeBuilderBase addIngredient(TagKey<Item> ingredient) {
@@ -103,12 +103,12 @@ public abstract class RootsRecipeBuilderBase {
   }
 
   protected boolean hasOutput() {
-    return (result != null && !result.isEmpty()) || !conditionalOutputs.isEmpty();
+    return (result != null && !result.isEmpty()) || !chanceOutputs.isEmpty();
   }
 
   protected void validate(ResourceLocation recipeName) {
     if (!hasOutput() && !allowEmptyOutput() && grants.isEmpty()) {
-      throw new IllegalStateException("No output, conditional output or grants defined for recipe " + recipeName);
+      throw new IllegalStateException("No output, chance output or grants defined for recipe " + recipeName);
     }
     if (ingredients.isEmpty() && requireIngredients()) {
       throw new IllegalStateException("No ingredients defined for recipe " + recipeName);
@@ -121,8 +121,8 @@ public abstract class RootsRecipeBuilderBase {
   protected String getFolderName(ResourceLocation recipeName) {
     if (result != null) {
       return result.getItem().getItemCategory().getRecipeFolderName();
-    } else if (!conditionalOutputs.isEmpty()) {
-      return conditionalOutputs.get(0).getOutput().getItem().getItemCategory().getRecipeFolderName();
+    } else if (!chanceOutputs.isEmpty()) {
+      return chanceOutputs.get(0).getOutput().getItem().getItemCategory().getRecipeFolderName();
     } else if (!grants.isEmpty()) {
       return grants.get(0).getId().getNamespace();
     } else {
@@ -141,6 +141,6 @@ public abstract class RootsRecipeBuilderBase {
   }
 
   public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-    consumer.accept(new RootsResultBase(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
+    consumer.accept(new RootsResultBase(recipeName, result, ingredients, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
   }
 }

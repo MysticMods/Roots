@@ -3,8 +3,7 @@ package mysticmods.roots.api.recipe;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
-import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.util.SetUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -13,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraftforge.items.IItemHandler;
 
 import java.util.*;
 
@@ -34,15 +32,15 @@ public interface IRootsRecipeBase {
 
   void setResultItem(ItemStack result);
 
-  void addConditionalOutput(ConditionalOutput output);
+  void addChanceOutput(ChanceOutput output);
 
-  void addConditionalOutputs(Collection<ConditionalOutput> outputs);
+  void addChanceOutputs(Collection<ChanceOutput> outputs);
 
   void addGrant(Grant grant);
 
   void addGrants(Collection<Grant> grants);
 
-  List<ConditionalOutput> getConditionalOutputs();
+  List<ChanceOutput> getChanceOutputs();
 
   List<Grant> getGrants();
 

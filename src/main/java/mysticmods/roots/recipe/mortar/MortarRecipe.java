@@ -8,7 +8,7 @@ import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
-import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
@@ -102,7 +102,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       validate(recipeName);
       advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR);
-      consumer.accept(new Result(recipeName, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), times));
+      consumer.accept(new Result(recipeName, result, ingredients, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), times));
     }
 
     @Override
@@ -123,8 +123,8 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     public static class Result extends RootsResultBase {
       private final int times;
 
-      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId, int times) {
-        super(id, result, ingredients, conditionalOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
+      public Result(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId, int times) {
+        super(id, result, ingredients, chanceOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
         this.times = times;
       }
 
@@ -152,8 +152,8 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
       if (ingredients.size() != 1) {
         throw new IllegalStateException("Multi-recipe '" + recipeName + "' must have exactly one ingredient");
       }
-      if (!conditionalOutputs.isEmpty()) {
-        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have conditional outputs");
+      if (!chanceOutputs.isEmpty()) {
+        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have chance outputs");
       }
       if (!grants.isEmpty()) {
         throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have grants");
@@ -179,7 +179,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
           thisAdvancement.addCriterion(entry.getKey(), entry.getValue());
         }
         thisAdvancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(thisRecipeName)).rewards(AdvancementRewards.Builder.recipe(thisRecipeName)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new MortarRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, conditionalOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName), times * i));
+        consumer.accept(new MortarRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName), times * i));
       }
     }
   }

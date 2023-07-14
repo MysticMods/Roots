@@ -7,7 +7,7 @@ import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -19,7 +19,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,17 +54,17 @@ public abstract class RootsSerializerBase {
       recipeBase.setResultItem(new ItemStack(item, count));
     }
 
-    if (GsonHelper.isArrayNode(pJson, "conditional_outputs")) {
-      List<ConditionalOutput> outputs = new ArrayList<>();
-      JsonArray conditionalOutputs = GsonHelper.getAsJsonArray(pJson, "conditional_outputs");
-      for (int i = 0; i < conditionalOutputs.size(); i++) {
-        if (conditionalOutputs.get(i).isJsonObject()) {
-          outputs.add(ConditionalOutput.fromJson(conditionalOutputs.get(i)));
+    if (GsonHelper.isArrayNode(pJson, "chance_outputs")) {
+      List<ChanceOutput> outputs = new ArrayList<>();
+      JsonArray chanceOutputs = GsonHelper.getAsJsonArray(pJson, "chance_outputs");
+      for (int i = 0; i < chanceOutputs.size(); i++) {
+        if (chanceOutputs.get(i).isJsonObject()) {
+          outputs.add(ChanceOutput.fromJson(chanceOutputs.get(i)));
         } else {
-          throw new JsonSyntaxException("Invalid conditional output: " + conditionalOutputs.get(i));
+          throw new JsonSyntaxException("Invalid chance output: " + chanceOutputs.get(i));
         }
       }
-      recipeBase.addConditionalOutputs(outputs);
+      recipeBase.addChanceOutputs(outputs);
     }
     if (GsonHelper.isArrayNode(pJson, "grants")) {
       List<Grant> grants = new ArrayList<>();
@@ -119,7 +118,7 @@ public abstract class RootsSerializerBase {
     int count = pBuffer.readVarInt();
     if (count > 0) {
       for (int i = 0; i < count; i++) {
-        recipeBase.addConditionalOutput(ConditionalOutput.fromNetwork(pBuffer));
+        recipeBase.addChanceOutput(ChanceOutput.fromNetwork(pBuffer));
       }
     }
     count = pBuffer.readVarInt();
@@ -151,9 +150,9 @@ public abstract class RootsSerializerBase {
       pBuffer.writeItem(recipe.getBaseResultItem());
     }
 
-    List<ConditionalOutput> conditionalOutputs = recipe.getConditionalOutputs();
-    pBuffer.writeVarInt(conditionalOutputs.size());
-    for (ConditionalOutput output : conditionalOutputs) {
+    List<ChanceOutput> chanceOutputs = recipe.getChanceOutputs();
+    pBuffer.writeVarInt(chanceOutputs.size());
+    for (ChanceOutput output : chanceOutputs) {
       output.toNetwork(pBuffer);
     }
 

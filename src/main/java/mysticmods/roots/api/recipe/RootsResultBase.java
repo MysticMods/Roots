@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.recipe.output.ConditionalOutput;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -24,19 +24,19 @@ public class RootsResultBase implements FinishedRecipe {
   protected final ItemStack result;
   protected final List<Ingredient> ingredients;
   protected final RecipeSerializer<?> serializer;
-  protected final List<ConditionalOutput> conditionalOutputs;
+  protected final List<ChanceOutput> chanceOutputs;
   protected final List<Grant> grants;
   protected final List<LevelCondition> levelConditions;
   protected final List<PlayerCondition> playerConditions;
   protected final Advancement.Builder advancementBuilder;
   protected final ResourceLocation advancementId;
 
-  public RootsResultBase(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ConditionalOutput> conditionalOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
+  public RootsResultBase(ResourceLocation id, ItemStack result, List<Ingredient> ingredients, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
     this.id = id;
     this.result = result;
     this.ingredients = ingredients;
     this.serializer = serializer;
-    this.conditionalOutputs = conditionalOutputs;
+    this.chanceOutputs = chanceOutputs;
     this.grants = grants;
     this.levelConditions = levelConditions;
     this.playerConditions = playerConditions;
@@ -70,12 +70,12 @@ public class RootsResultBase implements FinishedRecipe {
       json.add("result", item);
     }
 
-    if (!conditionalOutputs.isEmpty()) {
+    if (!chanceOutputs.isEmpty()) {
       JsonArray outputs = new JsonArray();
-      for (ConditionalOutput output : conditionalOutputs) {
+      for (ChanceOutput output : chanceOutputs) {
         outputs.add(output.toJson());
       }
-      json.add("conditional_outputs", outputs);
+      json.add("chance_outputs", outputs);
     }
     if (!grants.isEmpty()) {
       JsonArray grants = new JsonArray();
