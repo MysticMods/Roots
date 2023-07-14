@@ -1,0 +1,20 @@
+{
+  "type": "roots:bark",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "block": "roots:wildwood_wood",
+      "predicate_type": "minecraft:block_match"
+    }
+  },
+  "outputState": {
+    "Name": "roots:stripped_wildwood_wood",
+    "Properties": {
+      "axis": "y"
+    }
+  },
+  "result": {
+    "count": 2,
+    "item": "roots:wildwood_bark"
+  }
+}
