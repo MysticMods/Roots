@@ -17,12 +17,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
+import noobanidus.libs.noobutil.ingredient.ExcludingIngredient;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
+@Mod.EventBusSubscriber(modid=RootsAPI.MODID, bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModRecipes {
   private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, RootsAPI.MODID);
   public static RegistryObject<RecipeType<PyreRecipe>> PYRE = TYPES.register("pyre", () -> new RecipeType<>() {
@@ -100,6 +107,13 @@ public class ModRecipes {
 
   public static void register(IEventBus bus) {
     TYPES.register(bus);
+  }
+
+  @SubscribeEvent
+  public void registerRecipeSerializers(RegisterEvent event) {
+    if (event.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS)) {
+      CraftingHelper.register(new ResourceLocation(RootsAPI.MODID, "excluding_ingredient"), ExcludingIngredient.Serializer.INSTANCE);
+    }
   }
 
   public static void load() {
