@@ -3,18 +3,18 @@
   "condition": {
     "shift": "none",
     "test": {
-      "block": "roots:wildwood_wood",
+      "block": "minecraft:crimson_hyphae",
       "predicate_type": "minecraft:block_match"
     }
   },
   "outputState": {
-    "Name": "roots:stripped_wildwood_wood",
+    "Name": "minecraft:stripped_crimson_hyphae",
     "Properties": {
       "axis": "y"
     }
   },
   "result": {
     "count": 3,
-    "item": "roots:wildwood_bark"
+    "item": "roots:crimson_bark"
   }
 }

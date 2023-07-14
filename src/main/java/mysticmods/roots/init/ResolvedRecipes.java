@@ -2,6 +2,8 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.type.ResolvingRecipeType;
+import mysticmods.roots.recipe.bark.BarkCrafting;
+import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
@@ -23,6 +25,8 @@ public class ResolvedRecipes {
   public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.MORTAR), Comparator.comparing(o -> o.getId().getPath()));
   public static final ResolvingRecipeType<PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.PYRE), Comparator.comparing(o -> o.getId().getPath()));
   public static final ResolvingRecipeType<SummonCreaturesCrafting, SummonCreaturesRecipe> SUMMON_CREATURES = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.SUMMON_CREATURES), Comparator.comparing(o -> o.getId().getPath()));
+
+  public static final ResolvingRecipeType<BarkCrafting, BarkRecipe> BARK = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.BARK), (o1, o2) -> Integer.compare(o1.getId().getNamespace().compareTo(o2.getId().getNamespace()), Integer.compare(o1.getPriority(), o2.getPriority())));
 
   @SubscribeEvent
   public static void onReloadListeners(AddReloadListenerEvent event) {

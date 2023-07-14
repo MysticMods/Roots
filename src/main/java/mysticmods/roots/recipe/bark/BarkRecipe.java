@@ -24,12 +24,7 @@ public class BarkRecipe extends WorldRecipe<BarkCrafting> {
   }
 
   @Override
-  public BlockState modifyState(BarkCrafting pContainer, BlockState state) {
-    BlockState currentState = pContainer.getBlockState();
-    if (currentState == null) {
-      throw new IllegalStateException("how did it come to this");
-    }
-
+  public BlockState modifyState(BarkCrafting pContainer, BlockState currentState) {
     BlockState newState = outputState;
 
     if (currentState.getBlock() instanceof RotatedPillarBlock && outputState.getBlock() instanceof RotatedPillarBlock) {

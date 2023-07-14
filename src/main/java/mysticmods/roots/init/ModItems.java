@@ -12,6 +12,7 @@ import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
 import mysticmods.roots.recipe.bark.BarkRecipe;
+import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -21,6 +22,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraftforge.common.Tags;
@@ -331,31 +333,103 @@ public class ModItems {
   public static final ItemEntry<Item> ACACIA_BARK = REGISTRATE.item("acacia_bark", Item::new)
     .tag(RootsTags.Items.ACACIA_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_ACACIA_LOG.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.ACACIA_LOG)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/acacia_log_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_ACACIA_WOOD.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.ACACIA_WOOD)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/acacia_wood_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> BIRCH_BARK = REGISTRATE.item("birch_bark", Item::new)
     .tag(RootsTags.Items.BIRCH_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_BIRCH_LOG.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.BIRCH_LOG)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/birch_log_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_BIRCH_WOOD.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.BIRCH_WOOD)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/birch_wood_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> DARK_OAK_BARK = REGISTRATE.item("dark_oak_bark", Item::new)
     .tag(RootsTags.Items.DARK_OAK_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_DARK_OAK_LOG.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.DARK_OAK_LOG)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/dark_oak_log_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.DARK_OAK_WOOD)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/dark_oak_wood_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> JUNGLE_BARK = REGISTRATE.item("jungle_bark", Item::new)
     .tag(RootsTags.Items.JUNGLE_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_JUNGLE_LOG.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.JUNGLE_LOG)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/jungle_log_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_JUNGLE_WOOD.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.JUNGLE_WOOD)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/jungle_wood_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> OAK_BARK = REGISTRATE.item("oak_bark", Item::new)
     .tag(RootsTags.Items.OAK_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_OAK_LOG.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.OAK_LOG)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/oak_log_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_OAK_WOOD.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.OAK_WOOD)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/oak_wood_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> SPRUCE_BARK = REGISTRATE.item("spruce_bark", Item::new)
     .tag(RootsTags.Items.SPRUCE_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_SPRUCE_LOG.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.SPRUCE_LOG)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/spruce_log_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_SPRUCE_WOOD.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.SPRUCE_WOOD)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/spruce_wood_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> WILDWOOD_BARK = REGISTRATE.item("wildwood_bark", Item::new)
@@ -367,7 +441,7 @@ public class ModItems {
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(ModBlocks.WILDWOOD_LOG.get())))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
         .save(p, new ResourceLocation(RootsAPI.MODID, "bark/wildwood_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 2)
+      BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(ModBlocks.STRIPPED_WILDWOOD_WOOD.getDefaultState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(ModBlocks.WILDWOOD_WOOD.get())))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
@@ -378,16 +452,43 @@ public class ModItems {
   public static final ItemEntry<Item> CRIMSON_BARK = REGISTRATE.item("crimson_bark", Item::new)
     .tag(RootsTags.Items.CRIMSON_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_CRIMSON_STEM.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.CRIMSON_STEM)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/crimson_stem_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_CRIMSON_HYPHAE.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.CRIMSON_HYPHAE)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/crimson_hyphae_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> WARPED_BARK = REGISTRATE.item("warped_bark", Item::new)
     .tag(RootsTags.Items.WARPED_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_WARPED_STEM.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.WARPED_STEM)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/warped_stem_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_WARPED_HYPHAE.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.WARPED_HYPHAE)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/warped_hyphae_stripping"));
+    })
     .register();
 
   public static final ItemEntry<Item> MIXED_BARK = REGISTRATE.item("mixed_bark", Item::new)
     .tag(RootsTags.Items.MIXED_BARK)
     .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      p.accept(new DynamicBarkRecipe.Result());
+    })
     .register();
 
   public static final ItemEntry<Item> APOTHECARY_POUCH = REGISTRATE.item("apothecary_pouch", Item::new)
@@ -610,32 +711,32 @@ public class ModItems {
     })
     .register();
 
-  public static ItemEntry<BaseItems.KnifeItem> STONE_KNIFE = REGISTRATE.item("stone_knife", (p) -> new BaseItems.KnifeItem(Tiers.STONE, 0f, -1.0f, p))
+  public static ItemEntry<KnifeItem> STONE_KNIFE = REGISTRATE.item("stone_knife", (p) -> new KnifeItem(Tiers.STONE, 0f, -1.0f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.STONE_KNIFE))
     .recipe((ctx, p) -> {
       RECIPES.knife(Tags.Items.STONE, ModItems.STONE_KNIFE, null, p);
       RECIPES.knife(Tags.Items.COBBLESTONE, ModItems.STONE_KNIFE, null, p);
     }).register();
-  public static ItemEntry<BaseItems.KnifeItem> WOODEN_KNIFE = REGISTRATE.item("wood_knife", (p) -> new BaseItems.KnifeItem(Tiers.WOOD, 0f, -1.5f, p))
+  public static ItemEntry<KnifeItem> WOODEN_KNIFE = REGISTRATE.item("wood_knife", (p) -> new KnifeItem(Tiers.WOOD, 0f, -1.5f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.WOODEN_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(ItemTags.PLANKS, ModItems.WOODEN_KNIFE, null, p)).register();
-  public static ItemEntry<BaseItems.KnifeItem> IRON_KNIFE = REGISTRATE.item("iron_knife", (p) -> new BaseItems.KnifeItem(Tiers.IRON, 0, -1.5f, p))
+  public static ItemEntry<KnifeItem> IRON_KNIFE = REGISTRATE.item("iron_knife", (p) -> new KnifeItem(Tiers.IRON, 0, -1.5f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.IRON_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_IRON, ModItems.IRON_KNIFE, null, p)).register();
-  public static ItemEntry<BaseItems.KnifeItem> GOLD_KNIFE = REGISTRATE.item("gold_knife", (p) -> new BaseItems.KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
+  public static ItemEntry<KnifeItem> GOLD_KNIFE = REGISTRATE.item("gold_knife", (p) -> new KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.GOLD_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_GOLD, ModItems.GOLD_KNIFE, null, p))
     .tag(ItemTags.PIGLIN_LOVED)
     .register();
-  public static ItemEntry<BaseItems.KnifeItem> DIAMOND_KNIFE = REGISTRATE.item("diamond_knife", (p) -> new BaseItems.KnifeItem(Tiers.DIAMOND, 0.5f, -1.2f, p))
+  public static ItemEntry<KnifeItem> DIAMOND_KNIFE = REGISTRATE.item("diamond_knife", (p) -> new KnifeItem(Tiers.DIAMOND, 0.5f, -1.2f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.DIAMOND_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.GEMS_DIAMOND, ModItems.DIAMOND_KNIFE, null, p)).register();
-  public static ItemEntry<BaseItems.KnifeItem> NETHERITE_KNIFE = REGISTRATE.item("netherite_knife", (p) -> new BaseItems.KnifeItem(Tiers.NETHERITE, 0.5f, -1.2f, p))
+  public static ItemEntry<KnifeItem> NETHERITE_KNIFE = REGISTRATE.item("netherite_knife", (p) -> new KnifeItem(Tiers.NETHERITE, 0.5f, -1.2f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.NETHERITE_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_NETHERITE, ModItems.NETHERITE_KNIFE, null, p)).register();

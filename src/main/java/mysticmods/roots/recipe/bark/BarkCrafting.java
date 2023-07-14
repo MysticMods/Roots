@@ -2,23 +2,25 @@ package mysticmods.roots.recipe.bark;
 
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class BarkCrafting implements IWorldCrafting {
   private final Player player;
-  private final ServerLevel level;
+  private final Level level;
   private final BlockPos pos;
-  private BlockState state;
+  private final BlockState state;
+  private final UseOnContext context;
 
-  public BarkCrafting(Player player, ServerLevel level, BlockPos pos) {
+  public BarkCrafting(Player player, Level level, BlockPos pos, BlockState blockstate, UseOnContext context) {
     this.player = player;
     this.level = level;
     this.pos = pos;
+    this.state = blockstate;
+    this.context = context;
   }
 
   @Nullable
@@ -31,11 +33,6 @@ public class BarkCrafting implements IWorldCrafting {
   @Override
   public Level getLevel() {
     return level;
-  }
-
-  @Override
-  public void setBlockState(BlockState state) {
-    this.state = state;
   }
 
   @Override
@@ -61,5 +58,9 @@ public class BarkCrafting implements IWorldCrafting {
   @Override
   public void clearContent() {
 
+  }
+
+  public UseOnContext getContext() {
+    return context;
   }
 }

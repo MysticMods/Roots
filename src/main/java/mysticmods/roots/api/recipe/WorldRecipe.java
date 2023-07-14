@@ -14,7 +14,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,7 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 
 import javax.annotation.Nullable;
@@ -57,7 +56,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     return this.outputState;
   }
 
-  public Condition getMatcher() {
+  public Condition getCondition() {
     return condition;
   }
 
@@ -76,7 +75,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
 
   @Override
   public boolean matches(W pContainer, Level pLevel) {
-    return condition.test(pContainer.getBlockPos(), pLevel);
+    return getCondition().test(pContainer.getBlockPos(), pLevel);
   }
 
 
@@ -95,17 +94,16 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     if (level == null) {
       throw new IllegalStateException("Cannot assemble recipe `" + getId() + "` without a world!");
     }
-    BlockPos pos = pInv.getBlockPos();
-    // TODO: Handle setting this up
-    if (pInv.getBlockState() == null) {
-      pInv.setBlockState(level.getBlockState(pos));
-    }
-    BlockState newState = modifyState(pInv, outputState);
-    level.setBlock(pos, newState, 3);
-    Player player = pInv.getPlayer();
-    if (player != null && player.level.isClientSide()) {
-      for (Grant grant : getGrants()) {
-        grant.accept((ServerPlayer) player);
+    if (!level.isClientSide()) {
+      BlockPos pos = pInv.getBlockPos();
+      BlockState newState = modifyState(pInv, outputState);
+      level.setBlock(pos, newState, 11);
+      Player player = pInv.getPlayer();
+      if (player != null) {
+        level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(pInv.getPlayer(), newState));
+        for (Grant grant : getGrants()) {
+          grant.accept((ServerPlayer) player);
+        }
       }
     }
 

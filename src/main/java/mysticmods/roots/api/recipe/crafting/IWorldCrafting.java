@@ -9,8 +9,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 public interface IWorldCrafting extends IRootsCraftingBase {
-  void setBlockState(BlockState state);
-
   BlockState getBlockState();
 
   BlockPos getBlockPos();

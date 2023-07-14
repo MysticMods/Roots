@@ -66,4 +66,8 @@ public interface IRootsRecipeBase {
 
     return new ConditionResult(failedLevel, failedPlayer);
   }
+
+  default int getPriority () {
+    return 0;
+  }
 }
