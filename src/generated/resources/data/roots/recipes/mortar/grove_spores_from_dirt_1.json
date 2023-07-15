@@ -1,0 +1,18 @@
+{
+  "type": "roots:mortar",
+  "chance_outputs": [
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "item": "roots:grove_spores"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "minecraft:dirt"
+    }
+  ],
+  "times": 10
+}

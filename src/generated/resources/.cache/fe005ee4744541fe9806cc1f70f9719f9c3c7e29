@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-14T19:51:07.9504945	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-15T11:56:37.2133567	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -700,6 +700,11 @@ f69ec4af8ec0dba61a930aa153fd7ac49407fe9d data/roots/advancements/recipes/roots/m
 d943f6151e71ce9fabb0458648bfae237e341213 data/roots/advancements/recipes/roots/mortar/flour_from_wheat_3.json
 cf6dca6fe79ddb0b7e1026f2c532e35e14765669 data/roots/advancements/recipes/roots/mortar/flour_from_wheat_4.json
 61f68bf4319404a3014d3918460a42f02e96c38a data/roots/advancements/recipes/roots/mortar/flour_from_wheat_5.json
+971b3891188680b5c22a42e678d82c3856d807f7 data/roots/advancements/recipes/roots/mortar/grove_spores_from_dirt_1.json
+132793efb99ba8ef22f724ff03d3c31d698f54b4 data/roots/advancements/recipes/roots/mortar/grove_spores_from_dirt_2.json
+102233a5a183d0ede5cdbf406b623bab86490940 data/roots/advancements/recipes/roots/mortar/grove_spores_from_dirt_3.json
+bbc1d2df017a9be9bf6d4215b241c51b5810be0c data/roots/advancements/recipes/roots/mortar/grove_spores_from_dirt_4.json
+ecaf6910a8b1e673c887bc387d5e554532392221 data/roots/advancements/recipes/roots/mortar/grove_spores_from_dirt_5.json
 016b3a07fcc7cd0e34a93a02e20a8ee5e06ce6b6 data/roots/advancements/recipes/roots/netherite_knife_from_ingots_netherite.json
 eb3a8465f8088791ce92d7e749a8ed51babdf131 data/roots/advancements/recipes/roots/peony_cordial.json
 36e893a08fb33fcfc557d7ccaf32d0527f31f666 data/roots/advancements/recipes/roots/pestle.json
@@ -1038,6 +1043,11 @@ ef978eecc622cc5c6d7a76af923115df488731a1 data/roots/recipes/mortar/flint_from_gr
 eb506c74d5e3ce9e58593cf18c1731441e575cab data/roots/recipes/mortar/flour_from_wheat_3.json
 5e311b71ffd7f7811686e74436950bd2df88b5a0 data/roots/recipes/mortar/flour_from_wheat_4.json
 f94b1916ad8a4e25ebea7d3b2c12fa19b1f3007b data/roots/recipes/mortar/flour_from_wheat_5.json
+2f4d91fbe4d1ba9fee0e0275f73a2db05d40c2ae data/roots/recipes/mortar/grove_spores_from_dirt_1.json
+6ee831032c60def0ebe90574fe73e99326d2e459 data/roots/recipes/mortar/grove_spores_from_dirt_2.json
+84ef1feecccd45c88127d098bbc0049a882568b5 data/roots/recipes/mortar/grove_spores_from_dirt_3.json
+efb54709685a5ca24e814b50735aa4a07414fed5 data/roots/recipes/mortar/grove_spores_from_dirt_4.json
+f839a5d9794e1e562822884a795806ca79ba1d0d data/roots/recipes/mortar/grove_spores_from_dirt_5.json
 cab3e9456dc623625259dc2eb7a716c9ece20840 data/roots/recipes/mortar/string_from_wool_1.json
 01354cd40372209a64693cc1369884ca62212fef data/roots/recipes/mortar/string_from_wool_2.json
 dd47eaf4331abc383e5d2f62a03fbcf31143c56d data/roots/recipes/mortar/string_from_wool_3.json

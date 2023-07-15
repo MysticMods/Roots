@@ -147,13 +147,18 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
       this.count = count;
     }
 
+    protected MultiBuilder (int times, int count) {
+      super(times);
+      if (count <= 1) {
+        throw new IllegalArgumentException("Multi-recipe builder count must be greater than 1");
+      }
+      this.count = count;
+    }
+
     @Override
     protected void validate(ResourceLocation recipeName) {
       if (ingredients.size() != 1) {
         throw new IllegalStateException("Multi-recipe '" + recipeName + "' must have exactly one ingredient");
-      }
-      if (!chanceOutputs.isEmpty()) {
-        throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have chance outputs");
       }
       if (!grants.isEmpty()) {
         throw new IllegalStateException("Multi-recipe '" + recipeName + "' can't have grants");
@@ -165,21 +170,29 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       validate(recipeName);
       Ingredient ingredient = ingredients.get(0);
-      int baseCount = result.getCount();
+      int baseCount = result == null || result.isEmpty() ? 0 : result.getCount();
       for (int i = 1; i < count + 1; i++) {
         ResourceLocation thisRecipeName = new ResourceLocation(recipeName.getNamespace(), recipeName.getPath() + "_" + i);
-        ItemStack thisResult = result.copy();
-        thisResult.setCount(i * baseCount);
+        ItemStack thisResult = null;
+        if (baseCount != 0) {
+          thisResult = result.copy();
+          thisResult.setCount(i * baseCount);
+        }
         List<Ingredient> thisIngredients = new ArrayList<>();
+        List<ChanceOutput> thisChanceOutputs = new ArrayList<>();
         for (int j = 0; j < i; j++) {
           thisIngredients.add(ingredient);
+          if (!chanceOutputs.isEmpty()) {
+            thisChanceOutputs.addAll(chanceOutputs);
+          }
         }
+
         Advancement.Builder thisAdvancement = Advancement.Builder.advancement();
         for (Map.Entry<String, Criterion> entry : advancement.getCriteria().entrySet()) {
           thisAdvancement.addCriterion(entry.getKey(), entry.getValue());
         }
         thisAdvancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(thisRecipeName)).rewards(AdvancementRewards.Builder.recipe(thisRecipeName)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new MortarRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName), times * i));
+        consumer.accept(new MortarRecipe.Builder.Result(thisRecipeName, thisResult, thisIngredients, thisChanceOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName), times * i));
       }
     }
   }
@@ -198,6 +211,10 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   public static MultiBuilder multiBuilder(ItemStack item, int times) {
     return new MultiBuilder(item, times, 5);
+  }
+
+  public static MultiBuilder multiBuilder (int times) {
+    return new MultiBuilder(times, 5);
   }
 
   public static MultiBuilder multiBuilder (ItemStack item, int times, int counts) {

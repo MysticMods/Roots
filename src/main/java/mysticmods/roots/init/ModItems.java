@@ -117,6 +117,13 @@ public class ModItems {
   public static final ItemEntry<GroveSporesItem> GROVE_SPORES = REGISTRATE.item("grove_spores", GroveSporesItem::new)
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.SEEDS)
+    .recipe((ctx, p) -> {
+      MortarRecipe.multiBuilder(10)
+        .addIngredient(ItemTags.DIRT)
+        .addChanceOutput(new ItemStack(ctx.getEntry(), 1), 0.1f)
+        .unlockedBy("has_item", p.has(ItemTags.DIRT))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/grove_spores_from_dirt"));
+    })
     .register();
 
   public static ItemEntry<Item> VENISON = REGISTRATE.item("venison", Item::new)
