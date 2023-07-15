@@ -73,7 +73,7 @@ public class ModBlocks {
       .unlockedBy("has_wheat", RegistrateRecipeProvider.has(Items.WHEAT))
       .save(p)
     )
-    .tag(BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.MINEABLE_WITH_HOE)
     .register();
   public static BlockEntry<Block> RUNESTONE = REGISTRATE.block("runestone", Block::new)
     .properties(RUNESTONE_PROPERTIES)

@@ -167,6 +167,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
         }
 
         uses++;
+        setChanged();
 
         if (uses >= cachedRecipe.getTimes()) {
           // CRAFTING HAPPENS HERE
@@ -184,8 +185,9 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           }
           uses = -1;
           cachedRecipe = null;
-          setChanged();
         }
+
+        updateViaState();
       }
     } else {
       // insert

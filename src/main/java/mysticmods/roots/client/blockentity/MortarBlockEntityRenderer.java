@@ -22,7 +22,7 @@ public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBloc
   public void render(MortarBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     for (ItemStack item : pBlockEntity.getNonEmptyItems()) {
       pPoseStack.pushPose();
-      random.setSeed(item.hashCode());
+      random.setSeed(item.hashCode() ^ pBlockEntity.getUses());
       pPoseStack.translate(0.475 + random.nextFloat() / 20.0, 0.25 + random.nextFloat() / 20.0, 0.475 + random.nextFloat() / 20);
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
       pPoseStack.mulPose(Vector3f.YP.rotationDegrees(random.nextInt(360)));
