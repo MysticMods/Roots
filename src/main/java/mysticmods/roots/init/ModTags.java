@@ -35,7 +35,45 @@ public class ModTags {
     });
 
     REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, b -> {
-      b.tag(RootsTags.Entities.PACIFIST).add(EntityType.AXOLOTL, EntityType.CAT, EntityType.CHICKEN, EntityType.COD, EntityType.COW, EntityType.DOLPHIN, EntityType.DONKEY, EntityType.FOX, EntityType.GLOW_SQUID, EntityType.HORSE, EntityType.IRON_GOLEM, EntityType.LLAMA, EntityType.MULE, EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PARROT, EntityType.POLAR_BEAR, EntityType.RABBIT, EntityType.SALMON, EntityType.SHEEP, EntityType.SNOW_GOLEM, EntityType.SQUID, EntityType.TRADER_LLAMA, EntityType.TROPICAL_FISH, EntityType.TURTLE, EntityType.VILLAGER, EntityType.WOLF);
+      b.tag(RootsTags.Entities.PACIFIST)
+        .add(
+          EntityType.ALLAY,
+          EntityType.AXOLOTL,
+          EntityType.BEE,
+          EntityType.CAT,
+          EntityType.CHICKEN,
+          EntityType.COD,
+          EntityType.COW,
+          EntityType.DOLPHIN,
+          EntityType.DONKEY,
+          EntityType.FOX,
+          EntityType.FROG,
+          EntityType.GLOW_SQUID,
+          EntityType.GOAT,
+          EntityType.HORSE,
+          EntityType.IRON_GOLEM,
+          EntityType.LLAMA,
+          EntityType.MULE,
+          EntityType.MOOSHROOM,
+          EntityType.OCELOT,
+          EntityType.PANDA,
+          EntityType.PARROT,
+          EntityType.PIG,
+          EntityType.POLAR_BEAR,
+          EntityType.PUFFERFISH,
+          EntityType.RABBIT, // Specific exclusion for killer bunnies
+          EntityType.SALMON,
+          EntityType.SHEEP,
+          EntityType.SNOW_GOLEM,
+          EntityType.SQUID,
+          EntityType.STRIDER,
+          EntityType.TADPOLE,
+          EntityType.TRADER_LLAMA,
+          EntityType.TROPICAL_FISH,
+          EntityType.TURTLE,
+          EntityType.VILLAGER,
+          EntityType.WANDERING_TRADER,
+          EntityType.WOLF);
       b.tag(RootsTags.Entities.ANIMAL_HARVEST).addTag(RootsTags.Entities.PACIFIST);
       b.tag(RootsTags.Entities.BOATS).add(EntityType.BOAT, EntityType.CHEST_BOAT);
     });

@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cooked_beef"
+    },
+    "title": {
+      "translate": "advancement.roots.pacifist"
+    },
+    "description": {
+      "translate": "advancement.roots.pacifist.desc"
+    }
+  },
+  "parent": "roots:root",
+  "criteria": {
+    "book": {
+      "trigger": "roots:pacifist"
+    }
+  }
+}

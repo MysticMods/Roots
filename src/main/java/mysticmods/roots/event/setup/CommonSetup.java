@@ -1,5 +1,6 @@
 package mysticmods.roots.event.setup;
 
+import mysticmods.roots.advancements.Advancements;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.network.Networking;
@@ -23,6 +24,7 @@ public class CommonSetup {
       FLOWER_POT.addPlant(ModBlocks.STONEPETAL.getId(), ModBlocks.POTTED_STONEPETAL);
       FLOWER_POT.addPlant(ModBlocks.BAFFLECAP.getId(), ModBlocks.POTTED_BAFFLECAP);
       TierSortingRegistry.registerTier(RootsAPI.LIVING_TOOL_TIER, RootsAPI.LIVING_TOOL_TIER_ID, List.of(), List.of(Tiers.STONE));
+      Advancements.init();
     });
   }
 }
