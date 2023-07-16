@@ -9,6 +9,7 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IEntityCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.test.entity.EntityTest;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -35,6 +36,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecipeBase implements IEntityRecipe<W> {
+  protected EntityTest test;
 
   public EntityRecipe(ResourceLocation recipeId) {
     super(recipeId);
@@ -43,6 +45,16 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
   @Override
   public NonNullList<Ingredient> getBaseIngredients() {
     return NonNullList.create();
+  }
+
+  @Override
+  public void setEntityTest(EntityTest test) {
+    this.test = test;
+  }
+
+  @Override
+  public EntityTest getEntityTest() {
+    return test;
   }
 
   // TODO: Ensure that not copying this item won't cause problems
@@ -56,6 +68,7 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
 
   @Override
   public boolean matches(W pContainer, Level pLevel) {
+    return test.test(pContainer.getEntity());
   }
 
 
@@ -64,8 +77,7 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
     return recipeId;
   }
 
-  public BlockState modifyState(W pContainer, BlockState state) {
-    return state;
+  public void modifyEntity (W pContainer) {
   }
 
   @Override
@@ -75,12 +87,9 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
       throw new IllegalStateException("Cannot assemble recipe `" + getId() + "` without a world!");
     }
     if (!level.isClientSide()) {
-      BlockPos pos = pInv.getBlockPos();
-      BlockState newState = modifyState(pInv, level.getBlockState(pos));
-      level.setBlock(pos, newState, 11);
+      modifyEntity(pInv);
       Player player = pInv.getPlayer();
       if (player != null) {
-        level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(pInv.getPlayer(), newState));
         for (Grant grant : getGrants()) {
           grant.accept((ServerPlayer) player);
         }
@@ -105,7 +114,7 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
     public R fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
       R recipe = builder.create(pRecipeId);
       baseFromJson(recipe, pRecipeId, pJson);
-
+      recipe.test = EntityTest.CODEC.get().parse(JsonOps.INSTANCE, pJson.get("test")).result().orElseThrow(() -> new IllegalStateException("Could not parse entity test for recipe " + pRecipeId));
       fromJsonAdditional(recipe, pRecipeId, pJson);
       return recipe;
     }
@@ -118,6 +127,7 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
     public R fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
       R recipe = builder.create(pRecipeId);
       baseFromNetwork(recipe, pRecipeId, pBuffer);
+      recipe.test = pBuffer.readWithCodec(EntityTest.CODEC.get());
       fromNetworkAdditional(recipe, pRecipeId, pBuffer);
       return recipe;
     }
@@ -128,13 +138,14 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
     @Override
     public void toNetwork(FriendlyByteBuf pBuffer, R recipe) {
       baseToNetwork(pBuffer, recipe);
+      pBuffer.writeWithCodec(EntityTest.CODEC.get(), recipe.test);
       // TODO: etc
       toNetworkAdditional(recipe, pBuffer);
     }
   }
 
   public abstract static class Builder extends RootsRecipeBuilderBase {
-
+    protected EntityTest test;
 
     protected Builder() {
     }
@@ -149,24 +160,27 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
 
     public abstract RecipeSerializer<?> getSerializer();
 
+    public void setTest(EntityTest test) {
+      this.test = test;
+    }
+
     public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new EntityRecipe.Builder.Result(recipeName, result, entityMatcher, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
+      consumer.accept(new EntityRecipe.Builder.Result(recipeName, result, test, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
     }
 
     public static class Result extends RootsResultBase {
+      private final EntityTest test;
 
-      public Result(ResourceLocation id, ItemStack result, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
+      public Result(ResourceLocation id, ItemStack result, EntityTest test, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
         super(id, result, Collections.emptyList(), chanceOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
+        this.test = test;
       }
 
       @Override
       public void serializeRecipeData(JsonObject json) {
         super.serializeRecipeData(json);
 
-        json.add("outputState", BlockState.CODEC.encodeStart(JsonOps.INSTANCE, outputState).getOrThrow(false, s -> {
-          throw new IllegalStateException(s);
-        }));
-        json.add("condition", Condition.CODEC.encodeStart(JsonOps.INSTANCE, condition).getOrThrow(false, s -> {
+        json.add("test", EntityTest.CODEC.get().encodeStart(JsonOps.INSTANCE, test).getOrThrow(false, s -> {
           throw new IllegalStateException(s);
         }));
       }
@@ -177,5 +191,4 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
   public interface EntityRecipeBuilder<R extends EntityRecipe<?>> {
     R create(ResourceLocation recipeId);
   }
-
 }
