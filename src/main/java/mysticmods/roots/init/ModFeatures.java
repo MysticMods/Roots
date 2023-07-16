@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.block.WildRootsBlock;
+import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import mysticmods.roots.worldgen.features.SupportingDirectionalBlockFeature;
 import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConf
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -40,6 +42,9 @@ public class ModFeatures {
   private static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_MODIFIER = DeferredRegister.create(Registry.PLACEMENT_MODIFIER_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<BlockPredicateType<?>> BLOCK_PREDICATES = DeferredRegister.create(Registry.BLOCK_PREDICATE_TYPE_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<RuleTestType<?>> RULE_TEST_TYPES = DeferredRegister.create(Registry.RULE_TEST_REGISTRY, RootsAPI.MODID);
+
+  public static RegistryObject<RuleTestType<BlockPropertyMatchTest>> BLOCK_PROPERTY_MATCH_TEST = RULE_TEST_TYPES.register("block_property_match_test", () -> () -> BlockPropertyMatchTest.CODEC);
 
   public static RegistryObject<BlockPredicateType<MatchingTreePredicate>> MATCHING_TREE_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreePredicate.CODEC);
   public static RegistryObject<PlacementModifierType<HeightmapYRange>> HEIGHTMAP_Y_RANGE = PLACEMENT_MODIFIER.register("heightmap_y_range", () -> () -> HeightmapYRange.CODEC);
@@ -104,6 +109,7 @@ public class ModFeatures {
     PLACED_FEATURES.register(bus);
     PLACEMENT_MODIFIER.register(bus);
     BLOCK_PREDICATES.register(bus);
+    RULE_TEST_TYPES.register(bus);
   }
 
 
