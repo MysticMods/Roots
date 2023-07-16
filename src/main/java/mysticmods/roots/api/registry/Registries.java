@@ -2,6 +2,7 @@ package mysticmods.roots.api.registry;
 
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
@@ -26,4 +27,5 @@ public class Registries {
 
   public static Supplier<ForgeRegistry<SnapshotSerializer<?>>> SNAPSHOT_SERIALIZER_REGISTRY;
   public static Supplier<ForgeRegistry<EntityType<?>>> ENTITY_REGISTRY;
+  public static Supplier<ForgeRegistry<EntityTestType<?>>> ENTITY_TEST_TYPE;
 }

@@ -11,6 +11,7 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.test.entity.EntityTestType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.*;
@@ -29,6 +30,7 @@ public class ModRegistries {
   private static final DeferredRegister<LevelCondition> DEFERRED_LEVEL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.LEVEL_CONDITION_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<PlayerCondition> DEFERRED_PLAYER_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.PLAYER_CONDITION_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<SnapshotSerializer<?>> DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY = DeferredRegister.create(RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<EntityTestType<?>> DEFERRED_ENTITY_TEST_TYPE_REGISTRY = DeferredRegister.create(RootsAPI.ENTITY_TEST_TYPE_REGISTRY, RootsAPI.MODID);
 
   static {
     Registries.HERB_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_HERB_REGISTRY.makeRegistry(() -> new RegistryBuilder<Herb>().disableSaving().disableSync()));
@@ -41,6 +43,7 @@ public class ModRegistries {
     Registries.PLAYER_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_PLAYER_CONDITION_REGISTRY.makeRegistry(() -> new RegistryBuilder<PlayerCondition>().disableSync().disableSaving()));
     Registries.SNAPSHOT_SERIALIZER_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY.makeRegistry(() -> new RegistryBuilder<SnapshotSerializer<?>>().disableSync().disableSaving()));
     Registries.ENTITY_REGISTRY = ForgeRegistryWrapper.of(() -> ForgeRegistries.ENTITY_TYPES);
+    Registries.ENTITY_TEST_TYPE = ForgeRegistryWrapper.of(DEFERRED_ENTITY_TEST_TYPE_REGISTRY.makeRegistry(() -> new RegistryBuilder<EntityTestType<?>>().disableSync().disableSaving()));
   }
 
   public static void register(IEventBus bus) {
@@ -53,6 +56,7 @@ public class ModRegistries {
     DEFERRED_LEVEL_CONDITION_REGISTRY.register(bus);
     DEFERRED_PLAYER_CONDITION_REGISTRY.register(bus);
     DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY.register(bus);
+    DEFERRED_ENTITY_TEST_TYPE_REGISTRY.register(bus);
   }
 
   public static void load() {

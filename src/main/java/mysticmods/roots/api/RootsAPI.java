@@ -11,6 +11,7 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.test.entity.EntityTestType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -67,6 +68,8 @@ public abstract class RootsAPI {
   public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "player_conditions"));
   public static ResourceKey<Registry<SnapshotSerializer<?>>>
     SNAPSHOT_SERIALIZER_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "snapshot_serializers"));
+
+  public static ResourceKey<Registry<EntityTestType<?>>> ENTITY_TEST_TYPE_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "entity_test_types"));
 
   private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
     return ResourceKey.createRegistryKey(name);

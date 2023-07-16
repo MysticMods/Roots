@@ -109,6 +109,7 @@ public class Roots {
     ModRituals.load();
     ModSpells.load();
     ModLang.load();
+    ModTests.load();
     ModRegistries.register(bus);
     ModRecipes.register(bus);
     ModFeatures.register(bus);
