@@ -1,4 +1,4 @@
-package mysticmods.roots.recipe.bark;
+package mysticmods.roots.recipe;
 
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import net.minecraft.core.BlockPos;
@@ -8,14 +8,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class BarkCrafting implements IWorldCrafting {
+public class SimpleWorldCrafting implements IWorldCrafting {
   private final Player player;
   private final Level level;
   private final BlockPos pos;
   private final BlockState state;
   private final UseOnContext context;
 
-  public BarkCrafting(Player player, Level level, BlockPos pos, BlockState blockstate, UseOnContext context) {
+  public SimpleWorldCrafting(Player player, Level level, BlockPos pos, BlockState blockstate, UseOnContext context) {
     this.player = player;
     this.level = level;
     this.pos = pos;

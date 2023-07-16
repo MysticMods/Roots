@@ -9,6 +9,7 @@ import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -61,6 +62,13 @@ public class ModRecipes {
     @Override
     public String toString() {
       return "roots:bark";
+    }
+  });
+
+  public static RegistryObject<RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> new RecipeType<>() {
+    @Override
+    public String toString() {
+      return "roots:runic_block";
     }
   });
 

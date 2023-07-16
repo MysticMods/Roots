@@ -1,7 +1,7 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.init.ResolvedRecipes;
-import mysticmods.roots.recipe.bark.BarkCrafting;
+import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ public class KnifeItem extends BaseItems.KnifeItem {
     BlockPos blockpos = pContext.getClickedPos();
     Player player = pContext.getPlayer();
     BlockState blockstate = level.getBlockState(blockpos);
-    BarkCrafting crafting = new BarkCrafting(player, level, blockpos, blockstate, pContext);
+    SimpleWorldCrafting crafting = new SimpleWorldCrafting(player, level, blockpos, blockstate, pContext);
     BarkRecipe recipe = ResolvedRecipes.BARK.findRecipe(crafting, level);
     ItemStack itemstack = pContext.getItemInHand();
     if (recipe != null) {

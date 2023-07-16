@@ -1,14 +1,11 @@
 package mysticmods.roots.recipe.bark;
 
 import com.google.gson.JsonObject;
-import com.mojang.serialization.JsonOps;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.recipe.RootsSerializerBase;
 import mysticmods.roots.api.recipe.WorldRecipe;
-import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.recipe.SimpleWorldCrafting;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +14,6 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.common.ToolActions;
@@ -57,7 +53,7 @@ public class DynamicBarkRecipe extends BarkRecipe {
   }
 
   @Override
-  public boolean matches(BarkCrafting pContainer, Level pLevel) {
+  public boolean matches(SimpleWorldCrafting pContainer, Level pLevel) {
     return super.matches(pContainer, pLevel) && getStrippedState(pContainer, pContainer.getBlockState()) != null;
   }
 
@@ -67,7 +63,7 @@ public class DynamicBarkRecipe extends BarkRecipe {
   }
 
   @Nullable
-  protected static BlockState getStrippedState (BarkCrafting pContainer, BlockState state) {
+  protected static BlockState getStrippedState (SimpleWorldCrafting pContainer, BlockState state) {
     BlockState outputState = state.getToolModifiedState(pContainer.getContext(), ToolActions.AXE_STRIP, false);
     if (outputState == null) {
       outputState = AxeItem.getAxeStrippingState(state);
@@ -76,7 +72,7 @@ public class DynamicBarkRecipe extends BarkRecipe {
   }
 
   @Override
-  public BlockState modifyState(BarkCrafting pContainer, BlockState currentState) {
+  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState) {
     BlockState outputState = getStrippedState(pContainer, currentState);
     if (outputState == null) {
       return currentState;
@@ -90,7 +86,7 @@ public class DynamicBarkRecipe extends BarkRecipe {
     return true;
   }
 
-  public static class Serializer extends WorldRecipe.Serializer<BarkCrafting, BarkRecipe> {
+  public static class Serializer extends WorldRecipe.Serializer<SimpleWorldCrafting, BarkRecipe> {
 
     public Serializer() {
       super(BarkRecipe::new);

@@ -3,6 +3,7 @@ package mysticmods.roots.recipe.bark;
 import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.recipe.SimpleWorldCrafting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BarkRecipe extends WorldRecipe<BarkCrafting> {
+public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public BarkRecipe(ResourceLocation recipeId) {
     super(recipeId);
   }
@@ -24,7 +25,7 @@ public class BarkRecipe extends WorldRecipe<BarkCrafting> {
   }
 
   @Override
-  public BlockState modifyState(BarkCrafting pContainer, BlockState currentState) {
+  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState) {
     BlockState newState = outputState;
 
     if (currentState.getBlock() instanceof RotatedPillarBlock && outputState.getBlock() instanceof RotatedPillarBlock) {
@@ -48,7 +49,7 @@ public class BarkRecipe extends WorldRecipe<BarkCrafting> {
     return ModRecipes.BARK.get();
   }
 
-  public static class Serializer extends WorldRecipe.Serializer<BarkCrafting, BarkRecipe> {
+  public static class Serializer extends WorldRecipe.Serializer<SimpleWorldCrafting, BarkRecipe> {
     public Serializer() {
       super(BarkRecipe::new);
     }
