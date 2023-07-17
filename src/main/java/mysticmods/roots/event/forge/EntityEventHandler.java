@@ -34,14 +34,12 @@ public class EntityEventHandler {
     }
     if (heldItem.is(RootsTags.Items.BOTTLES) && entity.getType().is(RootsTags.Entities.SQUID)) {
       event.setCanceled(true);
+      event.setCancellationResult(InteractionResult.SUCCESS);
       MinecraftServer server = level.getServer();
       if (server == null) {
         return;
       }
-      if (level.isClientSide()) {
-        event.setCancellationResult(InteractionResult.CONSUME);
-      } else {
-        event.setCancellationResult(InteractionResult.SUCCESS);
+      if (!level.isClientSide()) {
         entity.getCapability(Capabilities.SQUID_MILKING_CAPABILITY).ifPresent(cap -> {
           if (cap.hasExpired(server)) {
             cap.setExpiresAt(server, 20 * 15);
