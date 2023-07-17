@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:wildwood_door"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wildwood_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "roots:wildwood_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wildwood_planks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:wildwood_door"
+    ]
+  }
+}

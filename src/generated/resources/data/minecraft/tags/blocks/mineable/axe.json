@@ -22,6 +22,8 @@
     "roots:wildwood_wall",
     "roots:wildwood_fence",
     "roots:wildwood_gate",
+    "roots:wildwood_door",
+    "roots:wildwood_trapdoor",
     "roots:fey_light",
     "roots:grove_crafter",
     "roots:grove_pedestal",

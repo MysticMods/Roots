@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-17T16:44:42.4685444	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-17T17:41:14.7921534	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -96,6 +96,7 @@ f528f067470dd67b55f0954546a3f9a8d91d769c assets/roots/blockstates/thatch.json
 92cb194c2deaac322d922dad9a33ffcddc00e1d9 assets/roots/blockstates/wildewheet_crop.json
 ff1fe41b9e48812cd022a1c7e34cae2b3adcd775 assets/roots/blockstates/wildroot_crop.json
 da181e0fe6fe42b2ae0df293cee6d9d8fdbe2dcb assets/roots/blockstates/wildwood_button.json
+ac701e59b6f99b6b050428b04933efc3e60f9555 assets/roots/blockstates/wildwood_door.json
 1dca1aaadcbd583dd7dcbc1b41027fb0cb05038b assets/roots/blockstates/wildwood_fence.json
 ec4d99296e2a1041fbaebe56bf7bec3140231376 assets/roots/blockstates/wildwood_gate.json
 e18a3ce823524a6419147a1ce21b1f744c2e811e assets/roots/blockstates/wildwood_leaves.json
@@ -105,11 +106,12 @@ c6aaee73fcd9343352cd1c3a18e80107058a66c6 assets/roots/blockstates/wildwood_log.j
 13773c194732b5d2254ae00bc254f0196a870898 assets/roots/blockstates/wildwood_pressure_plate.json
 360f183266844d651f07ebd132e755e365969c74 assets/roots/blockstates/wildwood_slab.json
 c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stairs.json
+787c98e5254d7a054a86689dbe8870e13d7220b7 assets/roots/blockstates/wildwood_trapdoor.json
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-a4e1953c5855b678d5d7901d4761e8a84cfbea5b assets/roots/lang/en_ud.json
-1b100de13d60fcea647428ef8e62bc4c4a7ab755 assets/roots/lang/en_us.json
+c62912cc856980d68f80b55c4ecfe703a7ca78b5 assets/roots/lang/en_ud.json
+41573f0279c8c997c0396c8e4f0bbbd3665797ac assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
@@ -348,6 +350,14 @@ bb26a3f5091dea2c2727592f08cafc12590b8383 assets/roots/models/block/wildroot_0.js
 7b83677bbee0419441e0c27eb54cebf52e59d4e3 assets/roots/models/block/wildwood_button.json
 13a84f6fc16812dbf58e4396b18ac69c85de5aa2 assets/roots/models/block/wildwood_button_inventory.json
 8bbb1af30b8f044a6bf65b1af4075d7ccf3fdf81 assets/roots/models/block/wildwood_button_pressed.json
+a11960f0a81f84275718d7c8cd8fdf8db88b4b47 assets/roots/models/block/wildwood_door_bottom_left.json
+5bfecab46a60884bae5457a7626a9b510293c70a assets/roots/models/block/wildwood_door_bottom_left_open.json
+6418503880b1d967cf12501052d50aa82c6bb8e5 assets/roots/models/block/wildwood_door_bottom_right.json
+9b4476590a2a18925e5cc4edac2c6e97cbdc196a assets/roots/models/block/wildwood_door_bottom_right_open.json
+f227884ce337048b3ed3b345b2bbe218bb19a548 assets/roots/models/block/wildwood_door_top_left.json
+73f6096cb0fec2de8d35cbdd66df7523561f2cd8 assets/roots/models/block/wildwood_door_top_left_open.json
+416d8c420858975bd1e14eca99fa0947fd895f15 assets/roots/models/block/wildwood_door_top_right.json
+711d54f2599948b5a2f2e076435c924fae6b29f0 assets/roots/models/block/wildwood_door_top_right_open.json
 2887bfb35ab4bfb96a4a52f979414a52678ce5fa assets/roots/models/block/wildwood_fence_inventory.json
 c57806cea777b919bf546ce2215eb766d1fa94b2 assets/roots/models/block/wildwood_fence_post.json
 d38bcd05abc9e372601ca67365d97211a9e5f5e7 assets/roots/models/block/wildwood_fence_side.json
@@ -366,6 +376,9 @@ f6446826bbc247c9424aad55703360e8bfc7ccf3 assets/roots/models/block/wildwood_slab
 d5a6583a5d3e19614a585fe07f89519959199c47 assets/roots/models/block/wildwood_stairs.json
 2a11a720829b58bc4443b34b9ae332b63e5ad488 assets/roots/models/block/wildwood_stairs_inner.json
 81d25f1dd0423bf20b5c0c58a0026491e5821f1d assets/roots/models/block/wildwood_stairs_outer.json
+18440cd21e75a4e252db5445697dc0bba1d6e894 assets/roots/models/block/wildwood_trapdoor_bottom.json
+c0b7051062570d5900c6215cf7f6faa1c5dee2ff assets/roots/models/block/wildwood_trapdoor_open.json
+1a0e20d276c8cccaf9ba3e4925fa69d2bce91433 assets/roots/models/block/wildwood_trapdoor_top.json
 aae7415636448191817cfe2b34ec10b8eaf8a359 assets/roots/models/block/wildwood_wall_inventory.json
 953f84a412c16064e6b5e88fedfedc9439188570 assets/roots/models/block/wildwood_wall_post.json
 e0808b372246e056137c372c1a3fba8abdd4cf06 assets/roots/models/block/wildwood_wall_side.json
@@ -547,6 +560,7 @@ e653f3cb55435ece057c0564581de96be847fb27 assets/roots/models/item/wildroot_stew.
 39ec0419a06137a3f52e386be94e325fa010517e assets/roots/models/item/wildwood_bark.json
 1236428801346b6e2b7fa4131d20d4a32364d4da assets/roots/models/item/wildwood_bow.json
 186278e07beb2e4fbacb1b08e04f0a3d4c5ffa3e assets/roots/models/item/wildwood_button.json
+e757dbc347e4d6ecf6d357b8b27378e6db5be13f assets/roots/models/item/wildwood_door.json
 d5ed6f96a2f1a56ea2ebfb24783b7cf75765ed87 assets/roots/models/item/wildwood_fence.json
 8887e17db04e6f256fb47d67477a760cfaefb89e assets/roots/models/item/wildwood_gate.json
 83698323ac6240700aff9f2142b61928180139ce assets/roots/models/item/wildwood_leaves.json
@@ -557,6 +571,7 @@ b8dbbc65146d111ba1d9516fe01a330d5808fdba assets/roots/models/item/wildwood_press
 b150b7d7a5ad97b3e5c712c7b794b89ffda61ee4 assets/roots/models/item/wildwood_quiver.json
 c03c56153fc81b6519e197410c3198f6f87823f1 assets/roots/models/item/wildwood_slab.json
 c950515847d88396f3cbbbd15c386b2d0a57acc3 assets/roots/models/item/wildwood_stairs.json
+a4fc636e9eb923dd1b950f25fd21b111b111cb36 assets/roots/models/item/wildwood_trapdoor.json
 99d156e026ff9de5f4b37ddebfe0c66976497ed5 assets/roots/models/item/wildwood_wall.json
 ab86137beca3474198e292a5f4693ec26e405481 assets/roots/models/item/wildwood_wood.json
 6a1bbe309afe0348326ada7af851a525399cbbc2 assets/roots/models/item/wooden_shears.json
@@ -572,6 +587,7 @@ ea4abd3c8163bf5074bcd6e318ae3839e70d493a data/forge/tags/blocks/fence_gates.json
 cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/minecraft/tags/blocks/crimson_stems.json
 71d9396d3fd2aaea8d6f1b5def4a92aca703f622 data/minecraft/tags/blocks/crops.json
 9aa6f447519134a5bfbbb1090fb68fbbf0acfba5 data/minecraft/tags/blocks/dark_oak_logs.json
+6695603b4dc4eca4fbf4fcb5bc32b5eac97e0e50 data/minecraft/tags/blocks/doors.json
 02fac9a953004ef0958e43868daba2b3b85c7dc1 data/minecraft/tags/blocks/dragon_immune.json
 bb7741b2dcf891f1f1c997e9f04251ca84b5e927 data/minecraft/tags/blocks/fences.json
 ea4abd3c8163bf5074bcd6e318ae3839e70d493a data/minecraft/tags/blocks/fence_gates.json
@@ -581,7 +597,7 @@ ea4abd3c8163bf5074bcd6e318ae3839e70d493a data/minecraft/tags/blocks/fence_gates.
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs_that_burn.json
 0f00bbe4d05fc501713c5cea0fec1e6702a8dc53 data/minecraft/tags/blocks/mangrove_logs.json
-b224e0cc5c74980ebdd6b6d7ee58d91cb955f084 data/minecraft/tags/blocks/mineable/axe.json
+cd3a0530f95c031ec1f48128d623665c5adcf3aa data/minecraft/tags/blocks/mineable/axe.json
 4deb3c64831c792f186ccfbd43df615665511fc3 data/minecraft/tags/blocks/mineable/hoe.json
 ba1a229d3b099230b571de842512a0842193ad3c data/minecraft/tags/blocks/mineable/pickaxe.json
 109aabd0da35c83112cbb018087f54da1877ac94 data/minecraft/tags/blocks/mineable/shovel.json
@@ -592,15 +608,18 @@ a5f5d0b1cdea71550fc3b23b2e422d6104ad8a24 data/minecraft/tags/blocks/slabs.json
 36bfb819f350d3eb47ea68b0827dc8806efd8a37 data/minecraft/tags/blocks/spruce_logs.json
 770334a7960f036a9939a06a9d77d1eb3e611743 data/minecraft/tags/blocks/stairs.json
 ca2ee0455732a06b4d9ef36a972883af5b0b3c54 data/minecraft/tags/blocks/stone_pressure_plates.json
+a9b05c4d5ff23f4f21119cd72f81f051ed1f8b98 data/minecraft/tags/blocks/trapdoors.json
 ea4abd3c8163bf5074bcd6e318ae3839e70d493a data/minecraft/tags/blocks/unstable_bottom_center.json
 aedbd4bbe4f64215c99169367f93c46fe483e2f5 data/minecraft/tags/blocks/walls.json
 441a3240108cd2a8be4b02e0a0d23d5f878e4f09 data/minecraft/tags/blocks/warped_stems.json
 02fac9a953004ef0958e43868daba2b3b85c7dc1 data/minecraft/tags/blocks/wither_immune.json
 dc5d63f2117b03d7755904ca98daddd9df1e982d data/minecraft/tags/blocks/wooden_buttons.json
+6695603b4dc4eca4fbf4fcb5bc32b5eac97e0e50 data/minecraft/tags/blocks/wooden_doors.json
 eed7a7d567816010ffe4270c406795ccb198102b data/minecraft/tags/blocks/wooden_fences.json
 5cf48c9a9a7b8901eb127129aecb53520d8dd815 data/minecraft/tags/blocks/wooden_pressure_plates.json
 d7025d5bb3e26753998649f9c96e3deb8a17f8d9 data/minecraft/tags/blocks/wooden_slabs.json
 9f7584e18a231792346e711184e6129f728ce0a0 data/minecraft/tags/blocks/wooden_stairs.json
+a9b05c4d5ff23f4f21119cd72f81f051ed1f8b98 data/minecraft/tags/blocks/wooden_trapdoors.json
 e58a5c90a75de69cd751e69b578b9a35cb1e3d6c data/minecraft/tags/items/buttons.json
 929e0c0552be912741cc13914e851ac1e71e1060 data/minecraft/tags/items/piglin_loved.json
 01e14230dbba7917c0ca55a835d71eed633034bc data/minecraft/tags/items/slabs.json
@@ -839,11 +858,13 @@ bc1afc62e2998e6e07feb7e46267f2c2c746bde1 data/roots/advancements/recipes/roots/s
 03304bf1611979cea015ec4af94b99635bd3dda0 data/roots/advancements/recipes/roots/vinegar.json
 00f7cac90ff44d36adddc0a187d7f4128dccbc38 data/roots/advancements/recipes/roots/wildroot_stew.json
 ac469934d938e93c0d82cdfbfb4229d87cd7b1a0 data/roots/advancements/recipes/roots/wildwood_button.json
+88e60f4ee71f4bb00a4fdd9dbeb6930d6ad549e0 data/roots/advancements/recipes/roots/wildwood_door.json
 08d31160690b877dc06fb8b9c4ba07399288fc1f data/roots/advancements/recipes/roots/wildwood_fence.json
 3968517692b339891572e00e50dbe64400067791 data/roots/advancements/recipes/roots/wildwood_gate.json
 db3849e28df99a539b40093eea69e0986f82a4fe data/roots/advancements/recipes/roots/wildwood_pressure_plate.json
 1568fa631d5623f9baa4dc9e75d30c97ea77aa2e data/roots/advancements/recipes/roots/wildwood_slab.json
 5d7fe409bb9581a9ab38f0ebdb368946650536c1 data/roots/advancements/recipes/roots/wildwood_stairs.json
+d1e1d99aa699b2c9e56b6bb2f4a7902ef06f1dcc data/roots/advancements/recipes/roots/wildwood_trapdoor.json
 9c6d0bcca17b470cdcfd5f68ae97591b6aaf9b99 data/roots/advancements/recipes/roots/wildwood_wall.json
 caf54b286ced856fb953835cfaff3a3adfdae03d data/roots/advancements/recipes/roots/wildwood_wall_from_wildwood_planks_stonecutting.json
 c3a595318903df9a14ff136a97fe514b8fa936fc data/roots/advancements/recipes/roots/wooden_shears.json
@@ -945,6 +966,7 @@ f68bb5c26aace0906b813e01f5f62458f65ad3e8 data/roots/loot_tables/blocks/terran_so
 8dcc684425362c6ccfa51717cfc97b1f0be6d39f data/roots/loot_tables/blocks/wildewheet_crop.json
 fe53e40283f517be6e94c770277c46f89efb2750 data/roots/loot_tables/blocks/wildroot_crop.json
 4eb9d9b2efecdf68f038d89649ce44e74df6e4c7 data/roots/loot_tables/blocks/wildwood_button.json
+cb6b3f0e61298748899528fb236bbfe22e069555 data/roots/loot_tables/blocks/wildwood_door.json
 c7fb1375a3266ee72d842a76e1f0941a83613775 data/roots/loot_tables/blocks/wildwood_fence.json
 3c15599162e9572ba351e4c29afbf532979fd7fd data/roots/loot_tables/blocks/wildwood_gate.json
 80c9b1932a82d492d8a29ee652c03c2ad674b499 data/roots/loot_tables/blocks/wildwood_leaves.json
@@ -954,6 +976,7 @@ c7fb1375a3266ee72d842a76e1f0941a83613775 data/roots/loot_tables/blocks/wildwood_
 f167acdfbc926fc74729d306c4bebc06deda9559 data/roots/loot_tables/blocks/wildwood_pressure_plate.json
 d50ac96a036212c322e16d37e83e1b504172a5ad data/roots/loot_tables/blocks/wildwood_slab.json
 2e6cd614c3268595925d16869c0372711dabe850 data/roots/loot_tables/blocks/wildwood_stairs.json
+00806b43d1cbff9a1916c6a92d9d047cabb082cc data/roots/loot_tables/blocks/wildwood_trapdoor.json
 7c5cd16ca066d75e8dbd28e3d669a197aec5df42 data/roots/loot_tables/blocks/wildwood_wall.json
 5ca40f604ebb3b9f6c8a39b58740da45d3baa32c data/roots/loot_tables/blocks/wildwood_wood.json
 ad3057db2bc1b73eb0cdb9c7ef9b0f766b45089f data/roots/loot_tables/blocks/wild_aubergine.json
@@ -1192,11 +1215,13 @@ def46e5ab99c16e419e86a56139411951d6a3e2e data/roots/recipes/stone_knife_from_sto
 90fb0055b2d2237a54f005719ca374ecdb4e7dba data/roots/recipes/vinegar.json
 f68db71da79b1eb7098839968b896b88b04d27fc data/roots/recipes/wildroot_stew.json
 17db5c672330f57f1121cf864f1290137f312a35 data/roots/recipes/wildwood_button.json
+93195dc1f29fd71f101d3c609155355051d801d7 data/roots/recipes/wildwood_door.json
 7d1bb34e9584e4ad81b505492391c6da29354aff data/roots/recipes/wildwood_fence.json
 cd7d077fc9eebb935d6c1390e07845dea4a875a9 data/roots/recipes/wildwood_gate.json
 8d706ef07b7a0d11a586c35153af93f51a0a30a3 data/roots/recipes/wildwood_pressure_plate.json
 2888760e4f1530239848fa05815c2e1835f830d1 data/roots/recipes/wildwood_slab.json
 9d3c56b0b828bbe80f694f0ee27274b49b5d94b4 data/roots/recipes/wildwood_stairs.json
+b02dcbf755c0f8f179e55e0f8cad50b76325b985 data/roots/recipes/wildwood_trapdoor.json
 ee72317f90d16f886ca2b558570a4c161d98bea6 data/roots/recipes/wildwood_wall.json
 662fd13e29d2e0ead7df5b4e69087d4dfb126cfa data/roots/recipes/wildwood_wall_from_wildwood_planks_stonecutting.json
 01f2ff00b1a41a4492e5ca25d8ab6f6e9a5931c5 data/roots/recipes/wooden_shears.json

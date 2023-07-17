@@ -897,6 +897,25 @@ public class ModBlocks {
     .build()
     .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, net.minecraftforge.common.Tags.Blocks.FENCE_GATES_WOODEN, BlockTags.MINEABLE_WITH_AXE)
     .register();
+  public static BlockEntry<BaseBlocks.DoorBlock> WILDWOOD_DOOR = REGISTRATE.block("wildwood_door", BaseBlocks.DoorBlock::new)
+    .properties(WILDWOOD_PLANKS_PROPERTIES)
+    .recipe((ctx, p) -> p.door(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_DOOR, null))
+    .blockstate((ctx, p) -> p.doorBlock(ctx.getEntry(), "wildwood", p.modLoc("block/wildwood_door_bottom"), p.modLoc("block/wildwood_door_top")))
+    .item()
+    .model((ctx, p) -> p.generated(ctx::getEntry, p.modLoc("item/" + p.name(ctx::getEntry))))
+    .build()
+    .tag(BlockTags.DOORS, BlockTags.WOODEN_DOORS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+
+  public static BlockEntry<BaseBlocks.TrapDoorBlock> WILDWOOD_TRAPDOOR = REGISTRATE.block("wildwood_trapdoor", BaseBlocks.TrapDoorBlock::new)
+    .properties(WILDWOOD_PLANKS_PROPERTIES.andThen(o -> o.noOcclusion()))
+    .recipe((ctx, p) -> p.trapDoor(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_TRAPDOOR, null))
+    .blockstate((ctx, p) -> p.trapdoorBlock(ctx.getEntry(), p.modLoc("block/wildwood_trapdoor"), true))
+    .item()
+    .model(ItemModelGenerator::generated)
+    .build()
+    .tag(BlockTags.TRAPDOORS, BlockTags.WOODEN_TRAPDOORS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
 
   // FUNCTIONAL BLOCKS BEGIN HERE
 
@@ -989,8 +1008,8 @@ public class ModBlocks {
   public static BlockEntry<BaseBlocks.WildCropBlock> WILD_AUBERGINE = REGISTRATE.block("wild_aubergine", (b) -> new BaseBlocks.WildCropBlock(b, RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE))
     .properties(o -> Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.CROP).randomTicks())
     .loot((p, t) -> p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
-        .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
-        .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.3f))))))))
+      .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
+      .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.3f))))))))
     .blockstate((ctx, p) ->
       p.getVariantBuilder(ctx.getEntry())
         .partialState()
@@ -1162,8 +1181,8 @@ public class ModBlocks {
     .loot((ctx, p) -> {
       ctx.add(p, LootTable.lootTable()
         .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))))
-          .withPool(LootPool.lootPool().add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.8f))).when(new LootItemBlockStatePropertyCondition.Builder(p).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildRootsBlock.MOSSY, true))))))
-        );
+        .withPool(LootPool.lootPool().add(RegistrateBlockLootTables.applyExplosionDecay(p, LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.8f))).when(new LootItemBlockStatePropertyCondition.Builder(p).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildRootsBlock.MOSSY, true))))))
+      );
     })
     .tag(BlockTags.MINEABLE_WITH_HOE)
     .register();
@@ -1295,13 +1314,13 @@ public class ModBlocks {
     .model(ItemModelGenerator::complexItemModel)
     .build()
     .recipe((ctx, p) -> {
-        ShapedRecipeBuilder.shaped(ctx.getEntry())
-          .pattern("R R")
-          .pattern("R R")
-          .pattern("RRR")
-          .define('R', Ingredient.of(RootsTags.Items.RUNESTONE))
-          .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE))
-          .save(p, new ResourceLocation(RootsAPI.MODID, "mortar"));
+      ShapedRecipeBuilder.shaped(ctx.getEntry())
+        .pattern("R R")
+        .pattern("R R")
+        .pattern("RRR")
+        .define('R', Ingredient.of(RootsTags.Items.RUNESTONE))
+        .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar"));
     })
     .register();
 

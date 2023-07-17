@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right_open",
+  "textures": {
+    "bottom": "roots:block/wildwood_door_bottom",
+    "top": "roots:block/wildwood_door_top"
+  }
+}
