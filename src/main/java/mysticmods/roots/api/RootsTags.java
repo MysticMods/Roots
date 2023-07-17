@@ -196,6 +196,8 @@ public class RootsTags {
     public static final TagKey<Item> WARPED_BARK = modTag("barks/warped");
     public static final TagKey<Item> MIXED_BARK = modTag("barks/mixed");
 
+    public static final TagKey<Item> BOTTLES = modTag("bottles");
+
     // TODO: Unused
     public static final TagKey<Item> POUCHES = modTag("pouches");
 

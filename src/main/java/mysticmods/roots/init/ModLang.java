@@ -44,6 +44,28 @@ public class ModLang {
 
       b.add("roots.item.staff.with_spell", "Staff (%s)");
 
+      b.add("roots.drinks.slow_regen", "Gives a burst of revitalizing energy.");
+      b.add("roots.drinks.wakefulness", "Perks you up, night or day; shoos those scary phantoms away!");
+      b.add("roots.drinks.sour", "Sour and awful to drink! Leaves you hungry.");
+      b.add("message.dandelion_cordial", "You feel well-rested!");
+
+      // Squid-related stuff
+      b.add("roots.message.squid.cooldown", "Give it time to produce more ink!");
+      b.add("roots.subtitles.entity.squid.milk", "Squid milked");
+
+      b.add("roots.subtitles.entity.fennec.aggro", "Fennec yips");
+      b.add("roots.subtitles.entity.fennec.bark", "Fennec barks");
+      b.add("roots.subtitles.entity.fennec.bite", "Fennec bites");
+      b.add("roots.subtitles.entity.fennec.death", "Fennec dies");
+      b.add("roots.subtitles.entity.fennec.eat", "Fennec eats");
+      b.add("roots.subtitles.entity.fennec.idle", "Fennec yips");
+      b.add("roots.subtitles.entity.fennec.sleep", "Fennec sleeps");
+      b.add("roots.subtitles.entity.fennec.sniff", "Fennec sniffs");
+      b.add("roots.subtitles.entity.fennec.spit", "Fennec spits");
+      b.add("roots.subtitles.entity.sprout.ambient", "Sprout wanders");
+      b.add("roots.subtitles.entity.duck.quack", "Duck quacks");
+      b.add("roots.subtitles.entity.deer.ambient", "Deer squeals");
+
       for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
         b.add(spell.getDescriptionId(), RegistrateLangProvider.toEnglishName(spell.getKey().getPath()));
       }

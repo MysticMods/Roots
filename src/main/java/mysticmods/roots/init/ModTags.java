@@ -35,6 +35,7 @@ public class ModTags {
     });
 
     REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, b -> {
+      b.tag(RootsTags.Entities.SQUID).add(EntityType.SQUID, EntityType.GLOW_SQUID);
       b.tag(RootsTags.Entities.PACIFIST)
         .add(
           EntityType.ALLAY,
@@ -188,6 +189,8 @@ public class ModTags {
       b.tag(RootsTags.Items.Herbs.GROVE_MOSS).addTag(RootsTags.Items.GROVE_MOSS_CROP);
 
       b.tag(RootsTags.Items.Herbs.HERBS).addTags(RootsTags.Items.Herbs.MOONGLOW, RootsTags.Items.Herbs.SPIRITLEAF, RootsTags.Items.Herbs.CLOUD_BERRY, RootsTags.Items.Herbs.DEWGONIA, RootsTags.Items.Herbs.PERESKIA, RootsTags.Items.Herbs.STALICRIPE, RootsTags.Items.Herbs.INFERNO_BULB, RootsTags.Items.Herbs.WILDROOT, RootsTags.Items.Herbs.WILDEWHEET, RootsTags.Items.Herbs.SPIRITLEAF, RootsTags.Items.Herbs.GROVE_MOSS);
+
+      b.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
 
       // TODO: Copying crops to the actual item tag?
     });

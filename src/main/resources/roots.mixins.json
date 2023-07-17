@@ -4,9 +4,11 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "roots.refmap.json",
   "mixins": [
+    "MixinPrimaryLevelData"
   ],
   "client": [
-    "MixinLocalPlayer"
+    "MixinLocalPlayer",
+    "MixinWorldSelectionList$WorldListEntry"
   ],
   "injectors": {
     "defaultRequire": 1
