@@ -21,6 +21,7 @@
     "roots:grove_stone_valid"
   ],
   "result": {
-    "item": "roots:runic_shears"
+    "item": "roots:runic_shears",
+    "nbt": "{Damage:0}"
   }
 }

@@ -15,6 +15,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -29,6 +30,7 @@ import java.util.function.Consumer;
 
 public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   protected final List<String> skipProperties = new ArrayList<>();
+  protected int durabilityCost = 1;
 
   public RunicBlockRecipe(ResourceLocation recipeId) {
     super(recipeId);
@@ -41,6 +43,14 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   @Override
   public void setIngredients(NonNullList<Ingredient> ingredients) {
+  }
+
+  public int getDurabilityCost() {
+    return durabilityCost;
+  }
+
+  public void setDurabilityCost(int cost) {
+    this.durabilityCost = cost;
   }
 
   public List<String> getSkipProperties() {
@@ -57,6 +67,10 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     BlockState newState = outputState;
     for (Property<?> prop : newState.getProperties()) {
       if (!state.hasProperty(prop)) {
+        continue;
+      }
+
+      if (skipProperties.contains(prop.getName())) {
         continue;
       }
 
@@ -94,6 +108,9 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
         array.forEach(o -> skipProps.add(o.getAsString()));
         recipe.setSkipProperties(skipProps);
       }
+      if (pJson.has("durability_cost")) {
+        recipe.setDurabilityCost(GsonHelper.getAsInt(pJson, "durability_cost"));
+      }
     }
 
     @Override
@@ -103,6 +120,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
       for (int i = 0; i < size; i++) {
         recipe.skipProperties.add(pBuffer.readUtf());
       }
+      recipe.setDurabilityCost(pBuffer.readVarInt());
     }
 
     @Override
@@ -112,11 +130,14 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
       for (String property : recipe.skipProperties) {
         pBuffer.writeUtf(property);
       }
+      pBuffer.writeVarInt(recipe.durabilityCost);
     }
   }
 
   public static class Builder extends WorldRecipe.Builder {
     protected List<String> skipProperties = new ArrayList<>();
+    protected int durability_cost;
+
     public Builder() {
     }
 
@@ -134,6 +155,11 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
       return this;
     }
 
+    public Builder durabilityCost (int cost) {
+      this.durability_cost = cost;
+      return this;
+    }
+
     @Override
     public RecipeSerializer<?> getSerializer() {
       return ModSerializers.RUNIC_BLOCK.get();
@@ -146,15 +172,17 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
     @Override
     public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new Result(recipeName, result, outputState, condition, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), skipProperties));
+      consumer.accept(new Result(recipeName, result, outputState, condition, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), skipProperties, durability_cost));
     }
 
     public static class Result extends WorldRecipe.Builder.Result {
       private final List<String> skipProperties;
+      private final int durability_cost;
 
-      public Result(ResourceLocation id, ItemStack result, BlockState outputState, Condition condition, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId, List<String> skipProperties) {
+      public Result(ResourceLocation id, ItemStack result, BlockState outputState, Condition condition, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId, List<String> skipProperties, int durabilityCost) {
         super(id, result, outputState, condition, chanceOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
         this.skipProperties = skipProperties;
+        this.durability_cost = durabilityCost;
       }
 
       @Override
@@ -167,6 +195,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
           }
           json.add("skip_properties", skipPropertiesArray);
         }
+        json.addProperty("durability_cost", durability_cost);
       }
     }
   }

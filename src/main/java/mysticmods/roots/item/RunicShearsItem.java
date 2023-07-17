@@ -81,7 +81,7 @@ public class RunicShearsItem extends ShearsItem {
       }
 
       if (player != null) {
-        itemstack.hurtAndBreak(1, player, (p_150686_) -> {
+        itemstack.hurtAndBreak(recipe.getDurabilityCost(), player, (p_150686_) -> {
           p_150686_.broadcastBreakEvent(pContext.getHand());
         });
       }

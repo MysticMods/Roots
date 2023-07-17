@@ -290,6 +290,7 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> PACIFIST = modTag("pacifist");
 
     public static final TagKey<EntityType<?>> BOATS = modTag("boats");
+    public static final TagKey<EntityType<?>> SQUID = modTag("squid");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));

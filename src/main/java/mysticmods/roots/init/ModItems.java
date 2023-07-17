@@ -113,6 +113,7 @@ public class ModItems {
     .tag(RootsTags.Items.SPIRITLEAF_SEEDS, RootsTags.Items.SEEDS)
     .recipe((ctx, p) -> {
       RunicBlockRecipe.builder(ctx.getEntry())
+        .durabilityCost(15)
         .skipProperty(BeetrootBlock.AGE)
         .setCondition(new WorldRecipe.Condition(new BlockPropertyMatchTest(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, BeetrootBlock.MAX_AGE), BeetrootBlock.AGE)))
         .setOutputState(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, 0))
@@ -684,6 +685,7 @@ public class ModItems {
     .register();
 
   public static final ItemEntry<RunicShearsItem> RUNIC_SHEARS = REGISTRATE.item("runic_shears", RunicShearsItem::new)
+    .properties(o -> o.durability(313))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> {
       GroveRecipe.builder(ctx.getEntry())

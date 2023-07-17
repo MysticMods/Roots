@@ -11,6 +11,10 @@ public class Capabilities {
   });
   public static final Capability<SnapshotCapability> SNAPSHOT_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
   });
-/*  public static final Capability<ReputationCapability> REPUTATION_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
-  });*/
+  public static final Capability<EntityCooldownCapability> RUNIC_SHEARS_ENTITY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+  });
+  public static final Capability<EntityCooldownCapability> RUNIC_SHEARS_TOKEN_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+  });
+  public static final Capability<EntityCooldownCapability> SQUID_MILKING_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+  });
 }
