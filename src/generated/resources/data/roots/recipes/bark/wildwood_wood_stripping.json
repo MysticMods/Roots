@@ -7,7 +7,7 @@
       "predicate_type": "minecraft:block_match"
     }
   },
-  "outputState": {
+  "output_state": {
     "Name": "roots:stripped_wildwood_wood",
     "Properties": {
       "axis": "y"

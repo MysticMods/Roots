@@ -7,7 +7,7 @@
       "predicate_type": "minecraft:block_match"
     }
   },
-  "outputState": {
+  "output_state": {
     "Name": "minecraft:stripped_spruce_log",
     "Properties": {
       "axis": "y"

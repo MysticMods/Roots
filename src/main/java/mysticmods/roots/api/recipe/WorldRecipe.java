@@ -204,7 +204,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
       public void serializeRecipeData(JsonObject json) {
         super.serializeRecipeData(json);
 
-        json.add("outputState", BlockState.CODEC.encodeStart(JsonOps.INSTANCE, outputState).getOrThrow(false, s -> {
+        json.add("output_state", BlockState.CODEC.encodeStart(JsonOps.INSTANCE, outputState).getOrThrow(false, s -> {
           throw new IllegalStateException(s);
         }));
         json.add("condition", Condition.CODEC.encodeStart(JsonOps.INSTANCE, condition).getOrThrow(false, s -> {
