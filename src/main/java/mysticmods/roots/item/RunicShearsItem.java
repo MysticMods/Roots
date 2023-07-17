@@ -1,11 +1,20 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.capability.Capabilities;
+import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
+import mysticmods.roots.recipe.runic.RunicEntityCrafting;
+import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -20,11 +29,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
-import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraftforge.common.IForgeShearable;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
@@ -40,19 +45,53 @@ public class RunicShearsItem extends ShearsItem {
   }
 
   @Override
-  public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity entity, InteractionHand hand) {
+  public InteractionResult interactLivingEntity(ItemStack heldItem, Player player, LivingEntity entity, InteractionHand hand) {
+    if (!player.isShiftKeyDown()) {
+      RunicEntityCrafting crafting = new RunicEntityCrafting(entity, player, player.getLevel(), hand, heldItem);
+      RunicEntityRecipe recipe = ResolvedRecipes.RUNIC_ENTITY.findRecipe(crafting, player.getLevel());
+      if (recipe != null) {
+        if (entity.level.isClientSide()) {
+          return InteractionResult.CONSUME;
+        }
+
+        MinecraftServer server = entity.level.getServer();
+        if (server == null) {
+          return InteractionResult.FAIL;
+        }
+        Level level = entity.level;
+        entity.getCapability(Capabilities.RUNIC_SHEARS_ENTITY_CAPABILITY).ifPresent(cap -> {
+          if (cap.hasExpired(server)) {
+            cap.setExpiresAt(server, recipe.getCooldown());
+            level.playSound(null, player.blockPosition(), ModSounds.SQUID_MILK.get(), SoundSource.PLAYERS, 0.5f, level.getRandom().nextFloat() * 0.25f + 0.6f);
+            heldItem.hurtAndBreak(recipe.getDurabilityCost(), player, (p_150686_) -> {
+              p_150686_.broadcastBreakEvent(hand);
+            });
+            List<ItemStack> results = new ArrayList<>();
+            // TODO: Item could be empty with only chance outputs
+            results.add(recipe.assemble(crafting));
+            results.addAll(recipe.assembleChanceOutputs(level.getRandom()));
+            for (ItemStack stack : results) {
+              ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+            }
+          } else {
+            player.displayClientMessage(Component.translatable("roots.message.runic_shears.cooldown").setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.BLUE)).withBold(true)), true);
+          }
+        });
+        return InteractionResult.SUCCESS;
+      }
+    }
     if (entity instanceof IForgeShearable target) {
       if (entity.level.isClientSide) return InteractionResult.CONSUME;
       BlockPos pos = new BlockPos(entity.getX(), entity.getY(), entity.getZ());
-      if (target.isShearable(stack, entity.level, pos)) {
-        List<ItemStack> drops = target.onSheared(playerIn, stack, entity.level, pos,
-          EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack));
+      if (target.isShearable(heldItem, entity.level, pos)) {
+        List<ItemStack> drops = target.onSheared(player, heldItem, entity.level, pos,
+          EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, heldItem));
         Random rand = new java.util.Random();
         drops.forEach(d -> {
           ItemEntity ent = entity.spawnAtLocation(d, 1.0F);
-          ent.setDeltaMovement(ent.getDeltaMovement().add((double)((rand.nextFloat() - rand.nextFloat()) * 0.1F), (double)(rand.nextFloat() * 0.05F), (double)((rand.nextFloat() - rand.nextFloat()) * 0.1F)));
+          ent.setDeltaMovement(ent.getDeltaMovement().add((double) ((rand.nextFloat() - rand.nextFloat()) * 0.1F), (double) (rand.nextFloat() * 0.05F), (double) ((rand.nextFloat() - rand.nextFloat()) * 0.1F)));
         });
-        stack.hurtAndBreak(1, playerIn, e -> e.broadcastBreakEvent(hand));
+        heldItem.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
       }
       return InteractionResult.SUCCESS;
     }
@@ -87,7 +126,7 @@ public class RunicShearsItem extends ShearsItem {
       }
 
       if (!level.isClientSide()) {
-        List<ItemStack> results = new ArrayList<>();
+       List<ItemStack> results = new ArrayList<>();
         // TODO: Item could be empty with only chance outputs
         results.add(recipe.assemble(crafting));
         results.addAll(recipe.assembleChanceOutputs(level.getRandom()));

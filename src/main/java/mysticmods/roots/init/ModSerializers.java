@@ -8,6 +8,7 @@ import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
+import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import mysticmods.roots.snapshot.PetalShellSnapshot;
 import mysticmods.roots.snapshot.SkySoarerSnapshot;
@@ -26,6 +27,8 @@ public class ModSerializers {
   public static final RegistryEntry<DynamicBarkRecipe.Serializer> DYNAMIC_BARK = REGISTRATE.simple("dynamic_bark", Registry.RECIPE_SERIALIZER_REGISTRY, DynamicBarkRecipe.Serializer::new);
 
   public static final RegistryEntry<RunicBlockRecipe.Serializer> RUNIC_BLOCK = REGISTRATE.simple("runic_block", Registry.RECIPE_SERIALIZER_REGISTRY, RunicBlockRecipe.Serializer::new);
+
+  public static final RegistryEntry<RunicEntityRecipe.Serializer> RUNIC_ENTITY = REGISTRATE.simple("runic_entity", Registry.RECIPE_SERIALIZER_REGISTRY, RunicEntityRecipe.Serializer::new);
 
   // Snapshot Serializers
   public static final RegistryEntry<SkySoarerSnapshot.Serializer> SKY_SOARER = REGISTRATE.simple("sky_soarer", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new SkySoarerSnapshot.Serializer(SkySoarerSnapshot::new));

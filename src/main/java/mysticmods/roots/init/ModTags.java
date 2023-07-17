@@ -75,10 +75,18 @@ public class ModTags {
           EntityType.VILLAGER,
           EntityType.WANDERING_TRADER,
           EntityType.WOLF);
-      b.tag(RootsTags.Entities.ANIMAL_HARVEST).addTag(RootsTags.Entities.PACIFIST);
+      b.tag(RootsTags.Entities.ANIMAL_HARVEST).addTag(RootsTags.Entities.PACIFIST).add(EntityType.BAT);
       b.tag(RootsTags.Entities.BOATS).add(EntityType.BOAT, EntityType.CHEST_BOAT);
+      b.tag(RootsTags.Entities.FEY_LEATHER)
+        .add(
+          EntityType.DONKEY,
+          EntityType.HORSE,
+          EntityType.LLAMA,
+          EntityType.MULE,
+          EntityType.MOOSHROOM,
+          EntityType.TRADER_LLAMA
+        );
     });
-
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
       // Internal mod tags
       b.tag(RootsTags.Blocks.GRASS).add(Blocks.GRASS, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN);

@@ -501,7 +501,7 @@
       "minecraft:mob/fox/aggro6",
       "minecraft:mob/fox/aggro7"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.aggro"
+    "subtitle": "roots.subtitles.entity.fennec.aggro"
   },
   "mob.fennec.bark": {
     "sounds": [
@@ -510,7 +510,7 @@
       "minecraft:mob/fox/hurt3",
       "minecraft:mob/fox/hurt4"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.bark"
+    "subtitle": "roots.subtitles.entity.fennec.bark"
   },
   "mob.fennec.bite": {
     "sounds": [
@@ -518,14 +518,14 @@
       "minecraft:mob/fox/bite2",
       "minecraft:mob/fox/bite3"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.bite"
+    "subtitle": "roots.subtitles.entity.fennec.bite"
   },
   "mob.fennec.death": {
     "sounds": [
       "minecraft:mob/fox/death1",
       "minecraft:mob/fox/death2"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.death"
+    "subtitle": "roots.subtitles.entity.fennec.death"
   },
   "mob.fennec.eat": {
     "sounds": [
@@ -533,7 +533,7 @@
       "minecraft:mob/fox/eat2",
       "minecraft:mob/fox/eat3"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.eat"
+    "subtitle": "roots.subtitles.entity.fennec.eat"
   },
   "mob.fennec.idle": {
     "sounds": [
@@ -544,7 +544,7 @@
       "minecraft:mob/fox/idle5",
       "minecraft:mob/fox/idle6"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.idle"
+    "subtitle": "roots.subtitles.entity.fennec.idle"
   },
   "mob.fennec.sleep": {
     "sounds": [
@@ -554,7 +554,7 @@
       "minecraft:mob/fox/sleep4",
       "minecraft:mob/fox/sleep5"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.sleep"
+    "subtitle": "roots.subtitles.entity.fennec.sleep"
   },
   "mob.fennec.sniff": {
     "sounds": [
@@ -563,7 +563,7 @@
       "minecraft:mob/fox/sniff3",
       "minecraft:mob/fox/sniff4"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.sniff"
+    "subtitle": "roots.subtitles.entity.fennec.sniff"
   },
   "mob.fennec.spit": {
     "sounds": [
@@ -571,64 +571,64 @@
       "minecraft:mob/fox/spit2",
       "minecraft:mob/fox/spit3"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.fennec.spit"
+    "subtitle": "roots.subtitles.entity.fennec.spit"
   },
   "mob.sprout.ambient": {
     "sounds": [
-      "mysticalworld:sprout/sprout1",
-      "mysticalworld:sprout/sprout2",
-      "mysticalworld:sprout/sprout3",
-      "mysticalworld:sprout/sprout4",
-      "mysticalworld:sprout/sprout5"
+      "roots:sprout/sprout1",
+      "roots:sprout/sprout2",
+      "roots:sprout/sprout3",
+      "roots:sprout/sprout4",
+      "roots:sprout/sprout5"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.sprout.ambient"
+    "subtitle": "roots.subtitles.entity.sprout.ambient"
   },
   "mob.endermini.death": {
     "sounds": [
-      "mysticalworld:endermini/death"
+      "roots:endermini/death"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.endermini.death"
+    "subtitle": "roots.subtitles.entity.endermini.death"
   },
   "mob.endermini.hit": {
     "sounds": [
-      "mysticalworld:endermini/hit1",
-      "mysticalworld:endermini/hit2",
-      "mysticalworld:endermini/hit3",
-      "mysticalworld:endermini/hit4"
+      "roots:endermini/hit1",
+      "roots:endermini/hit2",
+      "roots:endermini/hit3",
+      "roots:endermini/hit4"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.endermini.hit"
+    "subtitle": "roots.subtitles.entity.endermini.hit"
   },
   "mob.endermini.idle": {
     "sounds": [
-      "mysticalworld:endermini/idle1",
-      "mysticalworld:endermini/idle2",
-      "mysticalworld:endermini/idle3",
-      "mysticalworld:endermini/idle4",
-      "mysticalworld:endermini/idle5"
+      "roots:endermini/idle1",
+      "roots:endermini/idle2",
+      "roots:endermini/idle3",
+      "roots:endermini/idle4",
+      "roots:endermini/idle5"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.endermini.idle"
+    "subtitle": "roots.subtitles.entity.endermini.idle"
   },
   "mob.endermini.portal": {
     "sounds": [
-      "mysticalworld:endermini/portal1",
-      "mysticalworld:endermini/portal2"
+      "roots:endermini/portal1",
+      "roots:endermini/portal2"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.endermini.portal"
+    "subtitle": "roots.subtitles.entity.endermini.portal"
   },
   "mob.endermini.scream": {
     "sounds": [
-      "mysticalworld:endermini/scream1",
-      "mysticalworld:endermini/scream2",
-      "mysticalworld:endermini/scream3",
-      "mysticalworld:endermini/scream4"
+      "roots:endermini/scream1",
+      "roots:endermini/scream2",
+      "roots:endermini/scream3",
+      "roots:endermini/scream4"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.endermini.scream"
+    "subtitle": "roots.subtitles.entity.endermini.scream"
   },
   "mob.endermini.stare": {
     "sounds": [
-      "mysticalworld:endermini/stare"
+      "roots:endermini/stare"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.endermini.stare"
+    "subtitle": "roots.subtitles.entity.endermini.stare"
   },
   "mob.silkworm.egg.use": {
     "sounds": [
@@ -636,13 +636,13 @@
       "random/glass2",
       "random/glass3"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.silkworm.egg.use"
+    "subtitle": "roots.subtitles.entity.silkworm.egg.use"
   },
   "mob.lava_cat.sizzle": {
     "sounds": [
       "random/fizz"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.lava_cat.sizzle"
+    "subtitle": "roots.subtitles.entity.lava_cat.sizzle"
   },
   "mob.lava_cat.ambient": {
     "sounds": [
@@ -651,7 +651,7 @@
       "mob/cat/meow3",
       "mob/cat/meow4"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.lava_cat.ambient"
+    "subtitle": "roots.subtitles.entity.lava_cat.ambient"
   },
   "mob.lava_cat.death": {
     "sounds": [
@@ -671,7 +671,7 @@
         "pitch": 0.9
       }
     ],
-    "subtitle": "mysticalworld.subtitles.entity.lava_cat.death"
+    "subtitle": "roots.subtitles.entity.lava_cat.death"
   },
   "mob.lava_cat.hurt": {
     "sounds": [
@@ -688,7 +688,7 @@
         "volume": 0.65
       }
     ],
-    "subtitle": "mysticalworld.subtitles.entity.lava_cat.hurt"
+    "subtitle": "roots.subtitles.entity.lava_cat.hurt"
   },
   "mob.lava_cat.purr": {
     "sounds": [
@@ -705,7 +705,7 @@
         "volume": 0.7
       }
     ],
-    "subtitle": "mysticalworld.subtitles.entity.lava_cat.purr"
+    "subtitle": "roots.subtitles.entity.lava_cat.purr"
   },
   "mob.lava_cat.purreow": {
     "sounds": [
@@ -718,13 +718,13 @@
         "volume": 0.5
       }
     ],
-    "subtitle": "mysticalworld.subtitles.entity.lava_cat.purreow"
+    "subtitle": "roots.subtitles.entity.lava_cat.purreow"
   },
   "mob.silkworm.plop": {
     "sounds": [
       "mob/chicken/plop"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.silkworm.plop"
+    "subtitle": "roots.subtitles.entity.silkworm.plop"
   },
   "mob.squid.milk": {
     "sounds": [
@@ -732,14 +732,14 @@
       "entity/cow/milk2",
       "entity/cow/milk3"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.squid.milk"
+    "subtitle": "roots.subtitles.entity.squid.milk"
   },
   "item.unripe_pearl.use": {
     "sounds": [
       "mob/endermen/portal",
       "mob/endermen/portal2"
     ],
-    "subtitle": "mysticalworld.subtitles.item.unripe_pearl.use"
+    "subtitle": "roots.subtitles.item.unripe_pearl.use"
   },
   "item.pearleporter.use": {
     "sounds": [
@@ -748,7 +748,7 @@
         "pitch": 0.5
       }
     ],
-    "subtitle": "mysticalworld.subtitles.item.pearleporter.use"
+    "subtitle": "roots.subtitles.item.pearleporter.use"
   },
   "mob.silkworm.ambient": {
     "sounds": [
@@ -757,13 +757,13 @@
       "mob/silverfish/say3",
       "mob/silverfish/say4"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.silkworm.ambient"
+    "subtitle": "roots.subtitles.entity.silkworm.ambient"
   },
   "mob.silkworm.death": {
     "sounds": [
       "mob/silverfish/kill"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.silkworm.death"
+    "subtitle": "roots.subtitles.entity.silkworm.death"
   },
   "mob.silkworm.hurt": {
     "sounds": [
@@ -771,7 +771,7 @@
       "mob/silverfish/hit2",
       "mob/silverfish/hit3"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.silkworm.hurt"
+    "subtitle": "roots.subtitles.entity.silkworm.hurt"
   },
   "mob.silkworm.step": {
     "sounds": [
@@ -780,7 +780,7 @@
       "mob/silverfish/step3",
       "mob/silverfish/step4"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.silkworm.step"
+    "subtitle": "roots.subtitles.entity.silkworm.step"
   },
   "mob.silkworm.eat": {
     "sounds": [
@@ -788,12 +788,12 @@
       "mob/llama/eat2",
       "mob/llama/eat3"
     ],
-    "subtitle": "mysticalworld.subtitles.entity.silkworm.eat"
+    "subtitle": "roots.subtitles.entity.silkworm.eat"
   },
   "mob.duck.swim": {
     "category": "neutral",
     "sounds": [
-      "mysticalworld:duck/swim"
+      "roots:duck/swim"
     ]
   }
 }

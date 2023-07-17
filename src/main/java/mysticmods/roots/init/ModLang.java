@@ -51,6 +51,7 @@ public class ModLang {
 
       // Squid-related stuff
       b.add("roots.message.squid.cooldown", "Give it time to produce more ink!");
+      b.add("roots.message.runic_shears.cooldown", "More time must pass before this entity can be sheared again.");
       b.add("roots.subtitles.entity.squid.milk", "Squid milked");
 
       b.add("roots.subtitles.entity.fennec.aggro", "Fennec yips");

@@ -160,8 +160,9 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
 
     public abstract RecipeSerializer<?> getSerializer();
 
-    public void setTest(EntityTest test) {
+    public Builder setTest(EntityTest test) {
       this.test = test;
+      return this;
     }
 
     public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {

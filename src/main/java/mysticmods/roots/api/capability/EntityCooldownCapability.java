@@ -27,7 +27,7 @@ public abstract class EntityCooldownCapability implements ICapabilityProvider, I
   }
 
   public boolean hasExpired(MinecraftServer server) {
-    return server.getTickCount() <= expiresAt;
+    return expiresAt == -1 || server.getTickCount() >= expiresAt;
   }
 
   @NotNull

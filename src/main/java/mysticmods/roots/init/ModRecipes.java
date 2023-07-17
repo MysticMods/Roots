@@ -10,6 +10,7 @@ import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
+import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -71,6 +72,9 @@ public class ModRecipes {
       return "roots:runic_block";
     }
   });
+
+  // TODO: Update everything to use RecipeType.simple
+  public static RegistryObject<RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(new ResourceLocation(RootsAPI.MODID, "runic_entity")));
 
   static {
     REGISTRATE.addDataGenerator(ProviderType.RECIPE, (p) -> {
