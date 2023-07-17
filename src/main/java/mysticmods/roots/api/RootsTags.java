@@ -4,6 +4,8 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -142,6 +144,10 @@ public class RootsTags {
     public static final TagKey<Block> NYI = modTag("nyi");
     public static final TagKey<Block> LEVERS = compatTag("levers");
 
+    // TODO: Fill these tags
+    public static final TagKey<Block> SUPPORTS_HELL_SPROUT_SPAWN = modTag("supports_hell_sprout_spawn");
+    public static final TagKey<Block> BAFFLECAP_CONVERSION = modTag("converts_to_bafflecap");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(new ResourceLocation(RootsAPI.MODID, name));
     }
@@ -267,6 +273,10 @@ public class RootsTags {
     public static final TagKey<Item> DEWGONIA = modTag("herbs/dewgonia");
     public static final TagKey<Item> BAFFLECAP = modTag("herbs/bafflecap");
     public static final TagKey<Item> HERBS = modTag("herbs");
+
+    // TODO: POPULATE THIS
+    public static final TagKey<Item> OWL_FOOD = modTag("owl_food");
+    public static final TagKey<Item> CARAPACE = modTag("carapace");
     // These are all filled in by ModTags
 
     protected static TagKey<Item> modTag(String name) {

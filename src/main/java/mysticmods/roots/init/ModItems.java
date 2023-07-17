@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import mysticmods.roots.api.RootsAPI;
@@ -30,6 +31,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.ingredient.ExcludingIngredient;
 import noobanidus.libs.noobutil.item.BaseItems;
@@ -78,6 +80,14 @@ public class ModItems {
   public static final ItemEntry<ItemNameBlockItem> BAFFLECAP = REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), p))
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.BAFFLECAP_CROP)
+    .recipe((ctx, p) -> {
+      RunicBlockRecipe.builder(ctx.getEntry())
+        .durabilityCost(15)
+        .setCondition(new WorldRecipe.Condition(new TagMatchTest(RootsTags.Blocks.BAFFLECAP_CONVERSION)))
+        .setOutputState(Blocks.AIR.defaultBlockState())
+        .unlockedBy("has_runic_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "runic/block/bafflecap_from_mushroom"));
+    })
     .register();
   public static final ItemEntry<Item> MOONGLOW = REGISTRATE.item("moonglow", Item::new)
     .model(subfolder("herbs"))
@@ -138,6 +148,19 @@ public class ModItems {
         .unlockedBy("has_item", p.has(ItemTags.DIRT))
         .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/grove_spores_from_dirt"));
     })
+    .register();
+
+  public static RegistryEntry<Item> CARAPACE = REGISTRATE.item("carapace", Item::new)
+    .recipe((ctx, p) -> RECIPES.dye(ModItems.CARAPACE, () -> Items.BLUE_DYE, 1, 2, p))
+    .tag(RootsTags.Items.CARAPACE)
+    .register();
+
+  public static RegistryEntry<Item> PELT = REGISTRATE.item("pelt", Item::new)
+    .recipe((ctx, p) -> RECIPES.singleItemUnfinished(ModItems.PELT, () -> Items.LEATHER, 1, 1).save(p, new ResourceLocation(RootsAPI.MODID, "pelt_to_leather")))
+    .register();
+
+  public static RegistryEntry<Item> ANTLERS = REGISTRATE.item("antlers", Item::new)
+    .recipe((ctx, p) -> RECIPES.singleItemUnfinished(ModItems.ANTLERS, () -> Items.BONE_MEAL, 1, 9).save(p, new ResourceLocation(RootsAPI.MODID, "antlers_to_bonemeal")))
     .register();
 
   public static ItemEntry<Item> VENISON = REGISTRATE.item("venison", Item::new)

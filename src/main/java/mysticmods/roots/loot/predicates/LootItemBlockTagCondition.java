@@ -1,5 +1,6 @@
 package mysticmods.roots.loot.predicates;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -14,17 +15,25 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.Tags;
 
+import java.util.Set;
+
 public class LootItemBlockTagCondition implements LootItemCondition {
   private final TagKey<Block> tag;
 
   protected LootItemBlockTagCondition(TagKey<Block> tag) {
     this.tag = tag;
+  }
+
+  @Override
+  public Set<LootContextParam<?>> getReferencedContextParams() {
+    return ImmutableSet.of(LootContextParams.BLOCK_STATE);
   }
 
   @Override
