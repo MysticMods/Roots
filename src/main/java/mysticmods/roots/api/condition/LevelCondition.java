@@ -205,7 +205,8 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     SPRUCE(RootsTags.Blocks.SPRUCE_PILLARS, RootsTags.Blocks.SPRUCE_CAPSTONES),
     CRIMSON(RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Blocks.CRIMSON_CAPSTONES),
     WARPED(RootsTags.Blocks.WARPED_PILLARS, RootsTags.Blocks.WARPED_CAPSTONES),
-    WILDWOOD(RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.WILDWOOD_CAPSTONES);
+    WILDWOOD(RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.WILDWOOD_CAPSTONES),
+    MANGROVE(RootsTags.Blocks.MANGROVE_PILLARS, RootsTags.Blocks.MANGROVE_CAPSTONES);
 
     private final TagKey<Block> pillarTag;
     private final TagKey<Block> capstoneTag;

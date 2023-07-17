@@ -1,0 +1,20 @@
+{
+  "type": "roots:bark",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "block": "minecraft:mangrove_log",
+      "predicate_type": "minecraft:block_match"
+    }
+  },
+  "output_state": {
+    "Name": "minecraft:stripped_mangrove_log",
+    "Properties": {
+      "axis": "y"
+    }
+  },
+  "result": {
+    "count": 2,
+    "item": "roots:mangrove_bark"
+  }
+}

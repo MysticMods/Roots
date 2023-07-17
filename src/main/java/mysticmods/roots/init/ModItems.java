@@ -504,6 +504,23 @@ public class ModItems {
     })
     .register();
 
+  public static final ItemEntry<Item> MANGROVE_BARK = REGISTRATE.item("mangrove_bark", Item::new)
+    .tag(RootsTags.Items.MANGROVE_BARK)
+    .model(subfolder("bark"))
+    .recipe((ctx, p) -> {
+      BarkRecipe.builder(ctx.getEntry(), 2)
+        .setOutputState(Blocks.STRIPPED_MANGROVE_LOG.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.MANGROVE_LOG)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/mangrove_log_stripping"));
+      BarkRecipe.builder(ctx.getEntry(), 3)
+        .setOutputState(Blocks.STRIPPED_MANGROVE_WOOD.defaultBlockState())
+        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.MANGROVE_WOOD)))
+        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/mangrove_wood_stripping"));
+    })
+    .register();
+
   public static final ItemEntry<Item> MIXED_BARK = REGISTRATE.item("mixed_bark", Item::new)
     .tag(RootsTags.Items.MIXED_BARK)
     .model(subfolder("bark"))

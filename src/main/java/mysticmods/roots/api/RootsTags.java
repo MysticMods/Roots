@@ -69,6 +69,8 @@ public class RootsTags {
     public static final TagKey<Block> RUNED_BIRCH_LOG = modTag("logs/runed/birch");
     public static final TagKey<Block> RUNED_JUNGLE_LOG = modTag("logs/runed/jungle");
     public static final TagKey<Block> RUNED_SPRUCE_LOG = modTag("logs/runed/spruce");
+
+    public static final TagKey<Block> RUNED_MANGROVE_LOG = modTag("logs/runed/mangrove");
     public static final TagKey<Block> RUNED_WILDWOOD_LOG = modTag("logs/runed/wildwood");
     public static final TagKey<Block> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
     public static final TagKey<Block> RUNED_WARPED_STEM = modTag("logs/runed/warped");
@@ -106,6 +108,7 @@ public class RootsTags {
     public static final TagKey<Block> JUNGLE_CAPSTONES = modTag("capstones/log/jungle");
     public static final TagKey<Block> SPRUCE_CAPSTONES = modTag("capstones/log/spruce");
     public static final TagKey<Block> WILDWOOD_CAPSTONES = modTag("capstones/log/wildwood");
+    public static final TagKey<Block> MANGROVE_CAPSTONES = modTag("capstones/log/mangrove");
     public static final TagKey<Block> CRIMSON_CAPSTONES = modTag("capstones/log/crimson");
     public static final TagKey<Block> WARPED_CAPSTONES = modTag("capstones/log/warped");
 
@@ -116,6 +119,7 @@ public class RootsTags {
     public static final TagKey<Block> JUNGLE_PILLARS = modTag("pillars/log/jungle");
     public static final TagKey<Block> SPRUCE_PILLARS = modTag("pillars/log/spruce");
     public static final TagKey<Block> WILDWOOD_PILLARS = modTag("pillars/log/wildwood");
+    public static final TagKey<Block> MANGROVE_PILLARS = modTag("pillars/log/mangrove");
     public static final TagKey<Block> CRIMSON_PILLARS = modTag("pillars/log/crimson");
     public static final TagKey<Block> WARPED_PILLARS = modTag("pillars/log/warped");
 
@@ -192,6 +196,7 @@ public class RootsTags {
     public static final TagKey<Item> OAK_BARK = modTag("barks/oak");
     public static final TagKey<Item> SPRUCE_BARK = modTag("barks/spruce");
     public static final TagKey<Item> WILDWOOD_BARK = modTag("barks/wildwood");
+    public static final TagKey<Item> MANGROVE_BARK = modTag("barks/mangrove");
     public static final TagKey<Item> CRIMSON_BARK = modTag("barks/crimson");
     public static final TagKey<Item> WARPED_BARK = modTag("barks/warped");
     public static final TagKey<Item> MIXED_BARK = modTag("barks/mixed");

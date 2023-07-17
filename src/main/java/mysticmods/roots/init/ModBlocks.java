@@ -750,6 +750,14 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .register();
+  public static BlockEntry<RotatedPillarBlock> RUNED_MANGROVE_LOG = REGISTRATE.block("runed_mangro_log", RotatedPillarBlock::new)
+    .properties(RUNED_LOG_PROPERTIES)
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_mangrove"), new ResourceLocation("minecraft", "block/mangrove_log_top")))
+    .tag(BlockTags.MANGROVE_LOGS, RootsTags.Blocks.RUNED_MANGROVE_LOG, BlockTags.MINEABLE_WITH_AXE)
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .register();
   public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNED_STEM_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.CRIMSON_STEM);
   public static BlockEntry<RotatedPillarBlock> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped_stem", RotatedPillarBlock::new)
     .properties(RUNED_STEM_PROPERTIES)

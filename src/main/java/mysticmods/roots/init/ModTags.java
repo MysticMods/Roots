@@ -129,7 +129,9 @@ public class ModTags {
       b.tag(RootsTags.Blocks.CRIMSON_CAPSTONES).addTags(RootsTags.Blocks.RUNED_CRIMSON_STEM);
       b.tag(RootsTags.Blocks.CRIMSON_PILLARS).add(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM, Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE);
       b.tag(RootsTags.Blocks.WILDWOOD_CAPSTONES).addTags(RootsTags.Blocks.RUNED_WILDWOOD_LOG);
+      b.tag(RootsTags.Blocks.MANGROVE_CAPSTONES).addTags(RootsTags.Blocks.RUNED_MANGROVE_LOG);
       b.tag(RootsTags.Blocks.WILDWOOD_PILLARS).add(ModBlocks.WILDWOOD_LOG.get(), ModBlocks.STRIPPED_WILDWOOD_LOG.get(), ModBlocks.WILDWOOD_WOOD.get(), ModBlocks.STRIPPED_WILDWOOD_WOOD.get());
+      b.tag(RootsTags.Blocks.MANGROVE_PILLARS).add(Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD, Blocks.STRIPPED_MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_WOOD);
 
       b.tag(RootsTags.Blocks.GROWTH_FORCE);
       b.tag(RootsTags.Blocks.GROWTH_BLACKLIST);

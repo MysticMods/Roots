@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-17T15:56:52.7934551	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-17T16:44:42.4685444	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -49,6 +49,7 @@ ef94520a3bacc1919b31ac4403099a31460af25c assets/roots/blockstates/runed_brick_sl
 d313bcc05e5f3519ca901137245315fceaadd8f6 assets/roots/blockstates/runed_fence.json
 5d3cdaf178b6bbfd615c42bdc7490b27c93a0681 assets/roots/blockstates/runed_gate.json
 13cd1cd4f4f1e4adbc73233208dd9051468ecdaf assets/roots/blockstates/runed_jungle_log.json
+6e8d286aa3d55e563755a99c46389357480a083e assets/roots/blockstates/runed_mangro_log.json
 f61fa52198f768e7dcf3d12a29bb80714ce8a45e assets/roots/blockstates/runed_oak_log.json
 d03f954022c76666f1bdc0a2360e4503e1efd29e assets/roots/blockstates/runed_obsidian.json
 27b7ea79e89c4d097a0ab5227d59b7503b97d445 assets/roots/blockstates/runed_obsidian_brick.json
@@ -107,8 +108,8 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-6b68b6d017d04ebab3c8048ece6f531328175bb8 assets/roots/lang/en_ud.json
-22808143cc696ead991b13c92e1d938ee483f164 assets/roots/lang/en_us.json
+a4e1953c5855b678d5d7901d4761e8a84cfbea5b assets/roots/lang/en_ud.json
+1b100de13d60fcea647428ef8e62bc4c4a7ab755 assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
@@ -227,6 +228,8 @@ f0337e5b63db478403f27f07a43ad17aacab41bb assets/roots/models/block/runed_gate.js
 6ca40797f52248f73f4b0b46a5abad9f16d90055 assets/roots/models/block/runed_gate_wall_open.json
 6bcaf5826ae55ae4779ea5751da1f9f1bd8ca8d1 assets/roots/models/block/runed_jungle_log.json
 55dfb96b6d340898421517dd8497b4370bafdda3 assets/roots/models/block/runed_jungle_log_horizontal.json
+cc82f331f99c64c5cae37d408a99f927cedb893b assets/roots/models/block/runed_mangro_log.json
+5aa0de45d3bcaf6cc9779fddcf45930ef25b1628 assets/roots/models/block/runed_mangro_log_horizontal.json
 1291834a76ff74d1d6caa205e74cc292153299ea assets/roots/models/block/runed_oak_log.json
 7f456787fb34a0792e21bdade53ed97f7d1a701c assets/roots/models/block/runed_oak_log_horizontal.json
 82bf902487070421bacd333191ca513fe72b803c assets/roots/models/block/runed_obsidian.json
@@ -430,6 +433,7 @@ e28948ede91b3892afbfadec42b5ee823064bfda assets/roots/models/item/living_pickaxe
 fa6ba53ffe537e405e09905a8f72b76a847f2c22 assets/roots/models/item/living_shovel.json
 5e9b753d1bad5e21e7715b265c5fef86699ad7f0 assets/roots/models/item/living_sword.json
 705bcaee0dc9fff3acd43613739aa49bf19fb6ab assets/roots/models/item/magmatic_soil.json
+b7d348bfc345b6f5c042d545a7cc1b3e86bc8800 assets/roots/models/item/mangrove_bark.json
 ecf0fb0b807eadf02730884b26ca34b67129b954 assets/roots/models/item/mixed_bark.json
 39c7e264c6891ac87bcea01113f73d93eb9e5744 assets/roots/models/item/moonglow.json
 f75bbe6c5b1bb7da95b3b4f5bb5bcf45aeb91f82 assets/roots/models/item/moonglow_seeds.json
@@ -475,6 +479,7 @@ dd3649e205f03544573dc50a9fd87de52f3f8215 assets/roots/models/item/runed_fence.js
 ff4f74b69556814b4072892cb17e6946f7663fd8 assets/roots/models/item/runed_gate.json
 46e325820a5b0623cc699b4e2b6d6d21512a0435 assets/roots/models/item/runed_hoe.json
 c1c46c2b56e252f1f37879c3cd82d3bd6d9ad1be assets/roots/models/item/runed_jungle_log.json
+a0d63b4a6b162278b354b52e58996945f4043015 assets/roots/models/item/runed_mangro_log.json
 4715a8cdd16e3525aa378d2a4500515380469cfe assets/roots/models/item/runed_oak_log.json
 88caea085d06236282dc960d7e58a4db19800177 assets/roots/models/item/runed_obsidian.json
 1af0141d3e5da2413654b560dce9394260c21dd7 assets/roots/models/item/runed_obsidian_brick.json
@@ -575,7 +580,8 @@ ea4abd3c8163bf5074bcd6e318ae3839e70d493a data/minecraft/tags/blocks/fence_gates.
 6db798aeb484900357d59a86c7644270d92bbf07 data/minecraft/tags/blocks/leaves.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs.json
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/blocks/logs_that_burn.json
-30b630cd1e435375bac14a11aaf692fd96b1f74e data/minecraft/tags/blocks/mineable/axe.json
+0f00bbe4d05fc501713c5cea0fec1e6702a8dc53 data/minecraft/tags/blocks/mangrove_logs.json
+b224e0cc5c74980ebdd6b6d7ee58d91cb955f084 data/minecraft/tags/blocks/mineable/axe.json
 4deb3c64831c792f186ccfbd43df615665511fc3 data/minecraft/tags/blocks/mineable/hoe.json
 ba1a229d3b099230b571de842512a0842193ad3c data/minecraft/tags/blocks/mineable/pickaxe.json
 109aabd0da35c83112cbb018087f54da1877ac94 data/minecraft/tags/blocks/mineable/shovel.json
@@ -624,6 +630,8 @@ cf0c0d17ab0c3a76d6a23a93987d47db93b309ef data/roots/advancements/recipes/roots/b
 8adbb5f328ff895670abf86c4decff2e5d1e373e data/roots/advancements/recipes/roots/bark/dark_oak_wood_stripping.json
 909c21b1cd27cae901f31f3e6ea7e20c08ff1d84 data/roots/advancements/recipes/roots/bark/jungle_log_stripping.json
 405cefb5bb613c3769f2f90058106397154b074a data/roots/advancements/recipes/roots/bark/jungle_wood_stripping.json
+aba14e5318daf1ffc82c3cb4602eb2a834eb8eb4 data/roots/advancements/recipes/roots/bark/mangrove_log_stripping.json
+2d72324a8c51a61299ad05d0f713570be6aa4f32 data/roots/advancements/recipes/roots/bark/mangrove_wood_stripping.json
 2df816e7afcaee589f966f514e3573f6eb4f5101 data/roots/advancements/recipes/roots/bark/oak_log_stripping.json
 1d6eaa4039acbd48ed909764723fe872a280bbe3 data/roots/advancements/recipes/roots/bark/oak_wood_stripping.json
 94c15183fddb5b3f57886c5ca1d92132c06665dd data/roots/advancements/recipes/roots/bark/spruce_log_stripping.json
@@ -890,6 +898,7 @@ c3d13c1e151a4c1141c9227756ec9cbe40d25169 data/roots/loot_tables/blocks/runed_bri
 523e38a852be56354d940938fa4efe869735cc44 data/roots/loot_tables/blocks/runed_fence.json
 ee5572a75b82a0210a1d95a2f447667677aa96a3 data/roots/loot_tables/blocks/runed_gate.json
 9ace772a62ad777dc434df65221464c2aed52b93 data/roots/loot_tables/blocks/runed_jungle_log.json
+7d120dd23c85ba4204ddcd459d07dde56e680e2a data/roots/loot_tables/blocks/runed_mangro_log.json
 a8e89e04e80dd000968c99fdad83ddb0320c41e1 data/roots/loot_tables/blocks/runed_oak_log.json
 6e7b82c6ed6f55b86f0ee2385fd7e3ab6af45b7d data/roots/loot_tables/blocks/runed_obsidian.json
 7b9fc2f3f17ddb44425cdb99d44a778b32005580 data/roots/loot_tables/blocks/runed_obsidian_brick.json
@@ -962,6 +971,8 @@ fd393f2deb984ad43ef49b00500f3e2fbaa93e55 data/roots/recipes/bark/crimson_stem_st
 4985d9c6ed65fe61c551f6b605bf1af6204e77f1 data/roots/recipes/bark/dynamic_modded_wood_bark.json
 8b8c9a92f0c7eb68d3966c188559ef6852c11b97 data/roots/recipes/bark/jungle_log_stripping.json
 dd1ca9a8554b909727c966168f4fd5a1f3e71602 data/roots/recipes/bark/jungle_wood_stripping.json
+c12403640ddb58693e4ce9d259d4938c2bdbb0e1 data/roots/recipes/bark/mangrove_log_stripping.json
+9b380f4d4957df3373bf34004f67f1e62a870efa data/roots/recipes/bark/mangrove_wood_stripping.json
 43d2892e6f441b783c1d1449d9a17d1a12f6755b data/roots/recipes/bark/oak_log_stripping.json
 84030d8edd993ace88e2128dccff564bf23ee8ab data/roots/recipes/bark/oak_wood_stripping.json
 062b9ce42f4b567f8f8947776b48725e20858e79 data/roots/recipes/bark/spruce_log_stripping.json
@@ -1195,6 +1206,7 @@ d74fcf96e62418a4fee51ecc8be5dcc306af14c2 data/roots/tags/blocks/capstones/log/bi
 90f8d0a1c277c9ebb9a6b6994fd984bb3eaee81c data/roots/tags/blocks/capstones/log/crimson.json
 d05aaf77298d9d10350f14eb3f99643123351f19 data/roots/tags/blocks/capstones/log/dark_oak.json
 4f2a01421d433743041f8742a3f00377f1e6ee60 data/roots/tags/blocks/capstones/log/jungle.json
+bc299e18314b5e4e1e6828ee10ec481eaccf3f52 data/roots/tags/blocks/capstones/log/mangrove.json
 995194eeffae7e5fe31f7d09f08748df341e5466 data/roots/tags/blocks/capstones/log/oak.json
 cad4f9a40c8ffa88903296a46a0a029ecde28abf data/roots/tags/blocks/capstones/log/spruce.json
 8441aee9b426751866898951327ea3473f1fa9ba data/roots/tags/blocks/capstones/log/warped.json
@@ -1227,6 +1239,7 @@ c35e9878477c1bc0f25e7fd5cabe4ee0bd3d05a9 data/roots/tags/blocks/logs/runed.json
 cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/roots/tags/blocks/logs/runed/crimson.json
 9aa6f447519134a5bfbbb1090fb68fbbf0acfba5 data/roots/tags/blocks/logs/runed/dark_oak.json
 9e1e35863e6c3ff5fc8d62b51de09635288b2a51 data/roots/tags/blocks/logs/runed/jungle.json
+0f00bbe4d05fc501713c5cea0fec1e6702a8dc53 data/roots/tags/blocks/logs/runed/mangrove.json
 0ac25de6437faa2cb2f6995d75aaf74b415934a6 data/roots/tags/blocks/logs/runed/oak.json
 36bfb819f350d3eb47ea68b0827dc8806efd8a37 data/roots/tags/blocks/logs/runed/spruce.json
 441a3240108cd2a8be4b02e0a0d23d5f878e4f09 data/roots/tags/blocks/logs/runed/warped.json
@@ -1243,6 +1256,7 @@ f61527640eb5a28f11b62ae129e73ce15642d16e data/roots/tags/blocks/pillars/log/birc
 90fe11a09b39af8310bdb1fe3937f3fa32798af7 data/roots/tags/blocks/pillars/log/crimson.json
 e4c7b1890988211b48ac1065e808457c98c587b3 data/roots/tags/blocks/pillars/log/dark_oak.json
 849a54615c9729a58086920987c9b73bf1260d32 data/roots/tags/blocks/pillars/log/jungle.json
+19f48b0aa7f4f0432b1625d6afe2e73994b2e6ca data/roots/tags/blocks/pillars/log/mangrove.json
 1f976952d1df98ee164efc2afacd39acf84f1bfd data/roots/tags/blocks/pillars/log/oak.json
 a31411258dff25185ee194f9aaa19923794df728 data/roots/tags/blocks/pillars/log/spruce.json
 4b41342be611564da2a2009e3322c8fd08f20cdd data/roots/tags/blocks/pillars/log/warped.json
@@ -1272,6 +1286,7 @@ bcad6160f09c7188906ce6d9a107dda512c3237a data/roots/tags/items/barks/birch.json
 b67fb7a6bd6864aa28b34e43e426c416dd9c9986 data/roots/tags/items/barks/crimson.json
 891074e986b786bc521981dec09ab0c70548624e data/roots/tags/items/barks/dark_oak.json
 23007902cc935efc3fa5242e3b1eb32545b46fdf data/roots/tags/items/barks/jungle.json
+f2f9e752512d7c519be02cbf3225335500a6443b data/roots/tags/items/barks/mangrove.json
 a1a905fc0c40dbeb097d5eab709a2633e8e6756d data/roots/tags/items/barks/mixed.json
 0fa3ee1018f186d6ae034d12f31102f38b03f3e7 data/roots/tags/items/barks/oak.json
 0c26a98ba7c57280bd9e86241acebe3b15efde75 data/roots/tags/items/barks/spruce.json
