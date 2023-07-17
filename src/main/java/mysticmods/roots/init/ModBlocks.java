@@ -1175,6 +1175,22 @@ public class ModBlocks {
     })
     .register();
 
+  public static BlockEntry<GrovePedestalBlock> DISPLAY_PEDESTAL = REGISTRATE.block("display_pedestal", Material.WOOD, GrovePedestalBlock::new)
+    .properties(BASE_WOODEN_PROPERTIES)
+    .blockstate(BlockstateGenerator.existingNoRotation("block/complex/grove_pedestal"))
+    .tag(RootsTags.Blocks.PEDESTALS, RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.LIMITED_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS, BlockTags.MINEABLE_WITH_AXE)
+    .item()
+    .model((ctx, p) -> p.withExistingParent(p.name(ctx::getEntry), new ResourceLocation(p.modid(ctx::getEntry), "block/complex/grove_pedestal")))
+    .build()
+    .recipe((ctx, p) -> {
+      ShapelessRecipeBuilder.shapeless(ctx.getEntry())
+        .requires(Ingredient.of(ModBlocks.GROVE_PEDESTAL.get()))
+        .requires(Ingredient.of(RootsTags.Items.LEVERS))
+        .unlockedBy("has_pedestal", RegistrateRecipeProvider.has(ModBlocks.GROVE_PEDESTAL.get()))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "display_pedestal"));
+    })
+    .register();
+
   public static BlockEntry<WildRootsBlock> WILD_ROOTS = REGISTRATE.block("wild_roots", Material.GRASS, WildRootsBlock::new)
     .properties(o -> BASE_WOODEN_PROPERTIES.apply(o).strength(0.2f))
     .blockstate(NonNullBiConsumer.noop())

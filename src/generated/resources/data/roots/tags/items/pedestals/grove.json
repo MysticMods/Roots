@@ -1,6 +1,7 @@
 {
   "values": [
     "roots:grove_pedestal",
-    "roots:wildwood_pedestal"
+    "roots:wildwood_pedestal",
+    "roots:display_pedestal"
   ]
 }

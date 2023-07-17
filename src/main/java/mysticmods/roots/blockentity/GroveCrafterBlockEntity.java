@@ -137,7 +137,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     if (getBoundingBox() != null) {
       BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
         BlockState state = getLevel().getBlockState(pos);
-        if (state.is(RootsTags.Blocks.GROVE_PEDESTALS)) {
+        if (state.is(RootsTags.Blocks.GROVE_PEDESTALS) && !state.is(RootsTags.Blocks.DISPLAY_PEDESTALS)) {
           if (getLevel().getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
             // Already checks for empty
             if (!pedestal.getHeldItem().isEmpty()) {

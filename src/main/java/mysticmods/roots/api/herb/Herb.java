@@ -31,7 +31,7 @@ public class Herb extends StyledRegistryEntry<Herb> {
   @Nullable
   // TODO: this should go somewhere else
   public static Herb getHerb(ItemStack stack) {
-    if (!stack.is(RootsTags.Items.Herbs.HERBS)) {
+    if (!stack.is(RootsTags.Items.HERBS)) {
       return null;
     }
     Herb potential = herbCache.get(stack.getItem());

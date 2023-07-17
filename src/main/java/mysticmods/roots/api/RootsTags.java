@@ -11,7 +11,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 
@@ -86,7 +85,7 @@ public class RootsTags {
     public static final TagKey<Block> GROVE_PEDESTALS = modTag("pedestals/grove");
     public static final TagKey<Block> LIMITED_PEDESTALS = modTag("pedestals/limited");
 
-    public static final TagKey<Block> MOIST = modTag("moist");
+    public static final TagKey<Block> DISPLAY_PEDESTALS = modTag("pedestals/display");
 
     // Pyres (does not include decorative)
     public static final TagKey<Block> PYRES = modTag("pyres");
@@ -141,6 +140,7 @@ public class RootsTags {
     public static final TagKey<Block> GRASS = modTag("grass");
 
     public static final TagKey<Block> NYI = modTag("nyi");
+    public static final TagKey<Block> LEVERS = compatTag("levers");
 
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(new ResourceLocation(RootsAPI.MODID, name));
@@ -253,6 +253,20 @@ public class RootsTags {
     public static final TagKey<Item> COOKED_SEAFOOD = modTag("cooked_seafood");
     public static final TagKey<Item> KNIVES = modTag("knives");
 
+    public static final TagKey<Item> LEVERS = compatTag("levers");
+
+    public static final TagKey<Item> GROVE_MOSS = modTag("herbs/grove_moss");
+    public static final TagKey<Item> INFERNO_BULB = modTag("herbs/inferno_bulb");
+    public static final TagKey<Item> MOONGLOW = modTag("herbs/moonglow");
+    public static final TagKey<Item> PERESKIA = modTag("herbs/pereskia");
+    public static final TagKey<Item> SPIRITLEAF = modTag("herbs/spiritleaf");
+    public static final TagKey<Item> STALICRIPE = modTag("herbs/stalicripe");
+    public static final TagKey<Item> WILDEWHEET = modTag("herbs/wildewheet");
+    public static final TagKey<Item> WILDROOT = modTag("herbs/wildroot");
+    public static final TagKey<Item> CLOUD_BERRY = modTag("herbs/cloud_berry");
+    public static final TagKey<Item> DEWGONIA = modTag("herbs/dewgonia");
+    public static final TagKey<Item> BAFFLECAP = modTag("herbs/bafflecap");
+    public static final TagKey<Item> HERBS = modTag("herbs");
     // These are all filled in by ModTags
 
     protected static TagKey<Item> modTag(String name) {
@@ -261,22 +275,6 @@ public class RootsTags {
 
     protected static TagKey<Item> compatTag(String name) {
       return ItemTags.create(new ResourceLocation("forge", name));
-    }
-
-    public static class Herbs extends RootsTags {
-      public static final TagKey<Item> GROVE_MOSS = modTag("herbs/grove_moss");
-      public static final TagKey<Item> INFERNO_BULB = modTag("herbs/inferno_bulb");
-      public static final TagKey<Item> MOONGLOW = modTag("herbs/moonglow");
-      public static final TagKey<Item> PERESKIA = modTag("herbs/pereskia");
-      public static final TagKey<Item> SPIRITLEAF = modTag("herbs/spiritleaf");
-      public static final TagKey<Item> STALICRIPE = modTag("herbs/stalicripe");
-      public static final TagKey<Item> WILDEWHEET = modTag("herbs/wildewheet");
-      public static final TagKey<Item> WILDROOT = modTag("herbs/wildroot");
-      public static final TagKey<Item> CLOUD_BERRY = modTag("herbs/cloud_berry");
-      public static final TagKey<Item> DEWGONIA = modTag("herbs/dewgonia");
-
-      public static final TagKey<Item> BAFFLECAP = modTag("herbs/bafflecap");
-      public static final TagKey<Item> HERBS = modTag("herbs");
     }
   }
 

@@ -90,6 +90,7 @@ public class ModTags {
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
       // Internal mod tags
       b.tag(RootsTags.Blocks.GRASS).add(Blocks.GRASS, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
+      b.tag(RootsTags.Blocks.LEVERS).add(Blocks.LEVER);
       // TODO: CHECK
       b.tag(RootsTags.Blocks.SUPPORTS_STONEPETAL).addTag(BlockTags.STONE_ORE_REPLACEABLES);
       b.tag(RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE).addTag(BlockTags.DIRT);
@@ -141,6 +142,7 @@ public class ModTags {
     REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, b -> {
       // Block copies
 
+      b.copy(RootsTags.Blocks.LEVERS, RootsTags.Items.LEVERS);
       b.copy(RootsTags.Blocks.SOILS, RootsTags.Items.SOILS);
       b.copy(RootsTags.Blocks.WATER_SOIL, RootsTags.Items.WATER_SOIL);
       b.copy(RootsTags.Blocks.AIR_SOIL, RootsTags.Items.AIR_SOIL);
@@ -186,19 +188,19 @@ public class ModTags {
       b.tag(RootsTags.Items.GROVE_CRAFTER_ACTIVATION).add(Items.STICK);
       b.tag(RootsTags.Items.PYRE_ACTIVATION).add(Items.FLINT_AND_STEEL);
 
-      b.tag(RootsTags.Items.Herbs.MOONGLOW).addTag(RootsTags.Items.MOONGLOW_CROP);
-      b.tag(RootsTags.Items.Herbs.SPIRITLEAF).addTag(RootsTags.Items.SPIRITLEAF_CROP);
-      b.tag(RootsTags.Items.Herbs.CLOUD_BERRY).addTag(RootsTags.Items.CLOUD_BERRY_CROP);
-      b.tag(RootsTags.Items.Herbs.DEWGONIA).addTag(RootsTags.Items.DEWGONIA_CROP);
-      b.tag(RootsTags.Items.Herbs.PERESKIA).addTag(RootsTags.Items.PERESKIA_CROP);
-      b.tag(RootsTags.Items.Herbs.STALICRIPE).addTag(RootsTags.Items.STALICRIPE_CROP);
-      b.tag(RootsTags.Items.Herbs.INFERNO_BULB).addTag(RootsTags.Items.INFERNO_BULB_CROP);
-      b.tag(RootsTags.Items.Herbs.WILDROOT).addTag(RootsTags.Items.WILDROOT_CROP);
-      b.tag(RootsTags.Items.Herbs.WILDEWHEET).addTag(RootsTags.Items.WILDEWHEET_CROP);
-      b.tag(RootsTags.Items.Herbs.SPIRITLEAF).addTag(RootsTags.Items.SPIRITLEAF_CROP);
-      b.tag(RootsTags.Items.Herbs.GROVE_MOSS).addTag(RootsTags.Items.GROVE_MOSS_CROP);
+      b.tag(RootsTags.Items.MOONGLOW).addTag(RootsTags.Items.MOONGLOW_CROP);
+      b.tag(RootsTags.Items.SPIRITLEAF).addTag(RootsTags.Items.SPIRITLEAF_CROP);
+      b.tag(RootsTags.Items.CLOUD_BERRY).addTag(RootsTags.Items.CLOUD_BERRY_CROP);
+      b.tag(RootsTags.Items.DEWGONIA).addTag(RootsTags.Items.DEWGONIA_CROP);
+      b.tag(RootsTags.Items.PERESKIA).addTag(RootsTags.Items.PERESKIA_CROP);
+      b.tag(RootsTags.Items.STALICRIPE).addTag(RootsTags.Items.STALICRIPE_CROP);
+      b.tag(RootsTags.Items.INFERNO_BULB).addTag(RootsTags.Items.INFERNO_BULB_CROP);
+      b.tag(RootsTags.Items.WILDROOT).addTag(RootsTags.Items.WILDROOT_CROP);
+      b.tag(RootsTags.Items.WILDEWHEET).addTag(RootsTags.Items.WILDEWHEET_CROP);
+      b.tag(RootsTags.Items.SPIRITLEAF).addTag(RootsTags.Items.SPIRITLEAF_CROP);
+      b.tag(RootsTags.Items.GROVE_MOSS).addTag(RootsTags.Items.GROVE_MOSS_CROP);
 
-      b.tag(RootsTags.Items.Herbs.HERBS).addTags(RootsTags.Items.Herbs.MOONGLOW, RootsTags.Items.Herbs.SPIRITLEAF, RootsTags.Items.Herbs.CLOUD_BERRY, RootsTags.Items.Herbs.DEWGONIA, RootsTags.Items.Herbs.PERESKIA, RootsTags.Items.Herbs.STALICRIPE, RootsTags.Items.Herbs.INFERNO_BULB, RootsTags.Items.Herbs.WILDROOT, RootsTags.Items.Herbs.WILDEWHEET, RootsTags.Items.Herbs.SPIRITLEAF, RootsTags.Items.Herbs.GROVE_MOSS);
+      b.tag(RootsTags.Items.HERBS).addTags(RootsTags.Items.MOONGLOW, RootsTags.Items.SPIRITLEAF, RootsTags.Items.CLOUD_BERRY, RootsTags.Items.DEWGONIA, RootsTags.Items.PERESKIA, RootsTags.Items.STALICRIPE, RootsTags.Items.INFERNO_BULB, RootsTags.Items.WILDROOT, RootsTags.Items.WILDEWHEET, RootsTags.Items.SPIRITLEAF, RootsTags.Items.GROVE_MOSS);
 
       b.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
 
