@@ -15,12 +15,15 @@ import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
+import mysticmods.roots.recipe.runic.RunicBlockRecipe;
+import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -108,6 +111,14 @@ public class ModItems {
   public static final ItemEntry<ItemNameBlockItem> SPIRITLEAF_SEEDS = REGISTRATE.item("spiritleaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.SPIRITLEAF_CROP.get(), p))
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.SPIRITLEAF_SEEDS, RootsTags.Items.SEEDS)
+    .recipe((ctx, p) -> {
+      RunicBlockRecipe.builder(ctx.getEntry())
+        .skipProperty(BeetrootBlock.AGE)
+        .setCondition(new WorldRecipe.Condition(new BlockPropertyMatchTest(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, BeetrootBlock.MAX_AGE), BeetrootBlock.AGE)))
+        .setOutputState(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, 0))
+        .unlockedBy("has_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "runic/block/spiritleaf_seeds"));
+    })
     .register();
   public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.WILDEWHEET_CROP.get(), p))
     .model(subfolder("herbs"))
@@ -672,7 +683,7 @@ public class ModItems {
     .model(subfolder("tools"))
     .register();
 
-  public static final ItemEntry<Item> RUNIC_SHEARS = REGISTRATE.item("runic_shears", Item::new)
+  public static final ItemEntry<RunicShearsItem> RUNIC_SHEARS = REGISTRATE.item("runic_shears", RunicShearsItem::new)
     .model(subfolder("tools"))
     .recipe((ctx, p) -> {
       GroveRecipe.builder(ctx.getEntry())
@@ -687,6 +698,7 @@ public class ModItems {
         .unlockedBy("has_shears", p.has(ModItems.WOODEN_SHEARS.get()))
         .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runic_shears"));
     })
+    .tag(RootsTags.Items.RUNIC_SHEARS)
     .register();
 
   public static final ItemEntry<CastingItem> STAFF = REGISTRATE.item("staff", CastingItem::new)

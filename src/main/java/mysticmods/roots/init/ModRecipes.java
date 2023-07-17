@@ -118,7 +118,7 @@ public class ModRecipes {
   }
 
   @SubscribeEvent
-  public void registerRecipeSerializers(RegisterEvent event) {
+  public static void registerRecipeSerializers(RegisterEvent event) {
     if (event.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS)) {
       CraftingHelper.register(new ResourceLocation(RootsAPI.MODID, "excluding_ingredient"), ExcludingIngredient.Serializer.INSTANCE);
     }

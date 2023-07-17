@@ -126,7 +126,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
       R recipe = builder.create(pRecipeId);
       baseFromJson(recipe, pRecipeId, pJson);
       // Matcher, state
-      recipe.outputState = BlockState.CODEC.parse(JsonOps.INSTANCE, pJson.get("outputState")).result().orElseThrow(() -> new IllegalStateException("Could not parse output state for recipe " + pRecipeId));
+      recipe.outputState = BlockState.CODEC.parse(JsonOps.INSTANCE, pJson.get("output_state")).result().orElseThrow(() -> new IllegalStateException("Could not parse output state for recipe " + pRecipeId));
       recipe.condition = Condition.CODEC.parse(JsonOps.INSTANCE, pJson.get("condition")).result().orElseThrow(() -> new IllegalStateException("Could not parse condition for recipe " + pRecipeId));
       fromJsonAdditional(recipe, pRecipeId, pJson);
       return recipe;

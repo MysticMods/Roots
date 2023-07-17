@@ -161,11 +161,11 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
       public void serializeRecipeData(JsonObject json) {
         super.serializeRecipeData(json);
         if (!skipProperties.isEmpty()) {
-          JsonArray copyPropertiesArray = new JsonArray();
+          JsonArray skipPropertiesArray = new JsonArray();
           for (String property : skipProperties) {
-            copyPropertiesArray.add(property);
+            skipPropertiesArray.add(property);
           }
-          json.add("copy_properties", copyPropertiesArray);
+          json.add("skip_properties", skipPropertiesArray);
         }
       }
     }

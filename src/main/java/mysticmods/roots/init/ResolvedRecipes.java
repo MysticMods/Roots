@@ -10,6 +10,7 @@ import mysticmods.roots.recipe.mortar.MortarCrafting;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,7 +23,7 @@ public class ResolvedRecipes {
   public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.GROVE), Comparator.comparing(o -> o.getId().getPath()));
   public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.MORTAR), Comparator.comparing(o -> o.getId().getPath()));
   public static final ResolvingRecipeType<PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.PYRE), Comparator.comparing(o -> o.getId().getPath()));
-/*  public static final ResolvingRecipeType<SummonCreaturesCrafting, SummonCreaturesRecipe> SUMMON_CREATURES = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.SUMMON_CREATURES), Comparator.comparing(o -> o.getId().getPath()));*/
+  public static final ResolvingRecipeType<SimpleWorldCrafting, RunicBlockRecipe> RUNIC_BLOCK = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.RUNIC_BLOCK), Comparator.comparing(o -> o.getId().getPath()));
 
   public static final ResolvingRecipeType<SimpleWorldCrafting, BarkRecipe> BARK = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.BARK), (o1, o2) -> Integer.compare(o1.getId().getNamespace().compareTo(o2.getId().getNamespace()), Integer.compare(o1.getPriority(), o2.getPriority())));
 

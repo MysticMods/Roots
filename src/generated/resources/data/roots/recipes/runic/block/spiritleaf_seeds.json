@@ -1,0 +1,28 @@
+{
+  "type": "roots:runic_block",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "predicate_type": "roots:block_property_match_test",
+      "property": "age",
+      "state": {
+        "Name": "minecraft:beetroots",
+        "Properties": {
+          "age": "3"
+        }
+      }
+    }
+  },
+  "outputState": {
+    "Name": "minecraft:beetroots",
+    "Properties": {
+      "age": "0"
+    }
+  },
+  "result": {
+    "item": "roots:spiritleaf_seeds"
+  },
+  "skip_properties": [
+    "age"
+  ]
+}

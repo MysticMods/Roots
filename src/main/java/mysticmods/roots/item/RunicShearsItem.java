@@ -1,6 +1,9 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.recipe.SimpleWorldCrafting;
+import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,7 +28,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraftforge.common.IForgeShearable;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
+import noobanidus.libs.noobutil.util.ItemUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -63,28 +68,37 @@ public class RunicShearsItem extends ShearsItem {
   public InteractionResult useOn(UseOnContext pContext) {
     Level level = pContext.getLevel();
     BlockPos blockpos = pContext.getClickedPos();
+    Player player = pContext.getPlayer();
     BlockState blockstate = level.getBlockState(blockpos);
-    Block block = blockstate.getBlock();
-    if (block instanceof GrowingPlantHeadBlock growingplantheadblock) {
-      if (!growingplantheadblock.isMaxAge(blockstate)) {
-        Player player = pContext.getPlayer();
-        ItemStack itemstack = pContext.getItemInHand();
-        if (player instanceof ServerPlayer) {
-          CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockpos, itemstack);
-        }
+    SimpleWorldCrafting crafting = new SimpleWorldCrafting(player, level, blockpos, blockstate, pContext);
+    RunicBlockRecipe recipe = ResolvedRecipes.RUNIC_BLOCK.findRecipe(crafting, level);
+    ItemStack itemstack = pContext.getItemInHand();
+    if (recipe != null) {
+      level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-        level.playSound(player, blockpos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1.0F, 1.0F);
-        level.setBlockAndUpdate(blockpos, growingplantheadblock.getMaxAgeState(blockstate));
-        if (player != null) {
-          itemstack.hurtAndBreak(1, player, (p_186374_) -> {
-            p_186374_.broadcastBreakEvent(pContext.getHand());
-          });
-        }
-
-        return InteractionResult.sidedSuccess(level.isClientSide);
+      if (player instanceof ServerPlayer) {
+        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, blockpos, itemstack);
       }
-    }
 
-    return super.useOn(pContext);
+      if (player != null) {
+        itemstack.hurtAndBreak(1, player, (p_150686_) -> {
+          p_150686_.broadcastBreakEvent(pContext.getHand());
+        });
+      }
+
+      if (!level.isClientSide()) {
+        List<ItemStack> results = new ArrayList<>();
+        // TODO: Item could be empty with only chance outputs
+        results.add(recipe.assemble(crafting));
+        results.addAll(recipe.assembleChanceOutputs(level.getRandom()));
+        for (ItemStack stack : results) {
+          ItemUtil.Spawn.spawnItem(level, player == null ? blockpos : player.blockPosition(), stack);
+        }
+      }
+
+      return InteractionResult.sidedSuccess(level.isClientSide);
+    } else {
+      return InteractionResult.PASS;
+    }
   }
 }
