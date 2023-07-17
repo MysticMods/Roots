@@ -24,6 +24,7 @@ import noobanidus.libs.noobutil.util.ItemUtil;
 
 @Mod.EventBusSubscriber(modid= RootsAPI.MODID)
 public class EntityEventHandler {
+  @SubscribeEvent
   public static void onSquidMilked (PlayerInteractEvent.EntityInteract event) {
     Player player = event.getEntity();
     ItemStack heldItem = player.getItemInHand(event.getHand());
