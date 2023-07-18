@@ -31,6 +31,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeTier;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolAction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,6 +41,7 @@ import java.util.Set;
 public abstract class RootsAPI {
   public static RootsAPI INSTANCE;
   public static Tier LIVING_TOOL_TIER = new ForgeTier(2, 250, 6.0f, 2.0f, 19, BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(RootsTags.Items.BARKS));
+  public static Tier COPPER_TIER = new ForgeTier(2, 250, 4.0f, 2.0f, 2, BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Tags.Items.INGOTS_COPPER));
 
   // Tool Actions (Forge-specific)
   public static ToolAction RUNIC_SHEARS_HARVEST = ToolAction.get("runic_shears_harvest");

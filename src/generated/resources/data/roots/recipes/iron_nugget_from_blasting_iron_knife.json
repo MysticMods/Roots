@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "roots:iron_knife"
+  },
+  "result": "minecraft:iron_nugget"
+}

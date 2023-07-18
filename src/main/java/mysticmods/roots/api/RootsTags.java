@@ -277,6 +277,8 @@ public class RootsTags {
     // TODO: POPULATE THIS
     public static final TagKey<Item> OWL_FOOD = modTag("owl_food");
     public static final TagKey<Item> CARAPACE = modTag("carapace");
+    public static final TagKey<Item> COPPER_ITEMS = modTag("copper_items");
+    public static final TagKey<Item> COPPER_NUGGET = compatTag("nuggets/copper");
     // These are all filled in by ModTags
 
     protected static TagKey<Item> modTag(String name) {

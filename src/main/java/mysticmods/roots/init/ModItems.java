@@ -7,10 +7,12 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
+import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.item.*;
+import mysticmods.roots.item.copper.CopperArmorItem;
 import mysticmods.roots.item.living.*;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
@@ -27,6 +29,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -36,6 +39,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.Tags;
+import noobanidus.libs.noobutil.data.generator.ItemGenerator;
 import noobanidus.libs.noobutil.ingredient.ExcludingIngredient;
 import noobanidus.libs.noobutil.item.BaseItems;
 
@@ -777,6 +781,10 @@ public class ModItems {
     })
     .register();
 
+  public static ItemEntry<KnifeItem> WOODEN_KNIFE = REGISTRATE.item("wood_knife", (p) -> new KnifeItem(Tiers.WOOD, 0f, -1.5f, p))
+    .tag(RootsTags.Items.KNIVES)
+    .model((ctx, p) -> p.handheld(ModItems.WOODEN_KNIFE))
+    .recipe((ctx, p) -> RECIPES.knife(ItemTags.PLANKS, ModItems.WOODEN_KNIFE, null, p)).register();
   public static ItemEntry<KnifeItem> STONE_KNIFE = REGISTRATE.item("stone_knife", (p) -> new KnifeItem(Tiers.STONE, 0f, -1.0f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.STONE_KNIFE))
@@ -784,10 +792,10 @@ public class ModItems {
       RECIPES.knife(Tags.Items.STONE, ModItems.STONE_KNIFE, null, p);
       RECIPES.knife(Tags.Items.COBBLESTONE, ModItems.STONE_KNIFE, null, p);
     }).register();
-  public static ItemEntry<KnifeItem> WOODEN_KNIFE = REGISTRATE.item("wood_knife", (p) -> new KnifeItem(Tiers.WOOD, 0f, -1.5f, p))
-    .tag(RootsTags.Items.KNIVES)
-    .model((ctx, p) -> p.handheld(ModItems.WOODEN_KNIFE))
-    .recipe((ctx, p) -> RECIPES.knife(ItemTags.PLANKS, ModItems.WOODEN_KNIFE, null, p)).register();
+  public static RegistryEntry<KnifeItem> COPPER_KNIFE = REGISTRATE.item("copper_knife", (p) -> new KnifeItem(RootsAPI.COPPER_TIER, 0f, -1.5f, p))
+    .tag(RootsTags.Items.COPPER_ITEMS, RootsTags.Items.KNIVES)
+    .model((ctx, p) -> p.handheld(ModItems.COPPER_KNIFE))
+    .recipe((ctx, p) -> RECIPES.knife(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_KNIFE, null, p)).register();
   public static ItemEntry<KnifeItem> IRON_KNIFE = REGISTRATE.item("iron_knife", (p) -> new KnifeItem(Tiers.IRON, 0, -1.5f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.IRON_KNIFE))
@@ -922,6 +930,67 @@ public class ModItems {
       .define('C', RootsTags.Items.CARAPACE)
       .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
       .save(p))
+    .register();
+
+  public static RegistryEntry<Item> COPPER_NUGGET = REGISTRATE.item("copper_nugget", Item::new)
+    .tag(RootsTags.Items.COPPER_NUGGET)
+    .recipe((ctx, p) -> {
+      RECIPES.recycle(RootsTags.Items.COPPER_ITEMS, () -> Items.COPPER_INGOT, 0.15f, p);
+      RECIPES.recycle(ModItems.GOLD_KNIFE, () -> Items.GOLD_NUGGET, 0.15f, RootsAPI.MODID, p);
+      RECIPES.recycle(ModItems.IRON_KNIFE, () -> Items.IRON_NUGGET, 0.15f, RootsAPI.MODID, p);
+      // TODO: Nugget change?
+      ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 9)
+        .requires(Tags.Items.INGOTS_COPPER)
+        .unlockedBy("has_copper_ingot", RegistrateRecipeProvider.has(Tags.Items.INGOTS_COPPER))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "copper_nugget_from_ingot"));
+      ShapedRecipeBuilder.shaped(Items.COPPER_INGOT)
+        .pattern("***")
+        .pattern("*X*")
+        .pattern("***")
+        .define('*', RootsTags.Items.COPPER_NUGGET)
+        .define('X', ctx.getEntry())
+        .unlockedBy("has_copper_nugget", p.has(RootsTags.Items.COPPER_NUGGET))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "copper_ingot_from_nuggets"));
+    })
+    .register();
+
+  // TODO: Check damage values
+  public static RegistryEntry<AxeItem> COPPER_AXE = REGISTRATE.item("copper_axe", (p) -> new AxeItem(RootsAPI.COPPER_TIER, 5.0f, -3.1f, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.COPPER_AXE))
+    .recipe((ctx, p) -> RECIPES.axe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_AXE, null, p)).register();
+  public static RegistryEntry<HoeItem> COPPER_HOE = REGISTRATE.item("copper_hoe", (p) -> new HoeItem(RootsAPI.COPPER_TIER, 1, -1f, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.COPPER_HOE))
+    .recipe((ctx, p) -> RECIPES.hoe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_HOE, null, p)).register();
+  public static RegistryEntry<PickaxeItem> COPPER_PICKAXE = REGISTRATE.item("copper_pickaxe", (p) -> new PickaxeItem(RootsAPI.COPPER_TIER, 1, -1f, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.COPPER_PICKAXE))
+    .recipe((ctx, p) -> RECIPES.pickaxe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_PICKAXE, null, p)).register();
+  public static RegistryEntry<ShovelItem> COPPER_SHOVEL = REGISTRATE.item("copper_shovel", (p) -> new ShovelItem(RootsAPI.COPPER_TIER, 1, -1f, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.COPPER_SHOVEL))
+    .recipe((ctx, p) -> RECIPES.shovel(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_SHOVEL, null, p)).register();
+  public static RegistryEntry<SwordItem> COPPER_SWORD = REGISTRATE.item("copper_sword", (p) -> new SwordItem(RootsAPI.COPPER_TIER, 1, -1f, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.COPPER_SWORD))
+    .recipe((ctx, p) -> RECIPES.sword(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_SWORD, null, p)).register();
+
+  public static RegistryEntry<CopperArmorItem> COPPER_HELMET = REGISTRATE.item("copper_helmet", (p) -> new CopperArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.HEAD, p))
+    .recipe((ctx, p) -> RECIPES.helmet(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_HELMET, null, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
+    .register();
+  public static RegistryEntry<CopperArmorItem> COPPER_CHESTPLATE = REGISTRATE.item("copper_chestplate", (p) -> new CopperArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.CHEST, p))
+    .recipe((ctx, p) -> RECIPES.chest(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_CHESTPLATE, null, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
+    .register();
+  public static RegistryEntry<CopperArmorItem> COPPER_LEGGINGS = REGISTRATE.item("copper_leggings", (p) -> new CopperArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.LEGS, p))
+    .recipe((ctx, p) -> RECIPES.legs(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_LEGGINGS, null, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
+    .register();
+  public static RegistryEntry<CopperArmorItem> COPPER_BOOTS = REGISTRATE.item("copper_boots", (p) -> new CopperArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.FEET, p))
+    .recipe((ctx, p) -> RECIPES.boots(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_BOOTS, null, p))
+    .tag(RootsTags.Items.COPPER_ITEMS)
     .register();
 
   private static <T extends Item> ItemModelBuilder spawnEggModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {

@@ -1,7 +1,8 @@
 {
   "values": [
-    "roots:stone_knife",
     "roots:wood_knife",
+    "roots:stone_knife",
+    "roots:copper_knife",
     "roots:iron_knife",
     "roots:gold_knife",
     "roots:diamond_knife",

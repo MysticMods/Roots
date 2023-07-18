@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "tag": "forge:storage_blocks/copper"
+    }
+  },
+  "pattern": [
+    "XX ",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "item": "roots:copper_hoe"
+  }
+}

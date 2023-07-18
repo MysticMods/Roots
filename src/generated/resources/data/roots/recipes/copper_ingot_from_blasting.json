@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.15,
+  "ingredient": {
+    "tag": "roots:copper_items"
+  },
+  "result": "minecraft:copper_ingot"
+}
