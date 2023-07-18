@@ -73,7 +73,6 @@ public class ClientSetup {
     event.registerEntityRenderer(ModEntities.BEETLE.get(), BeetleRenderer::new);
     event.registerEntityRenderer(ModEntities.DEER.get(), DeerRenderer::new);
     event.registerEntityRenderer(ModEntities.DUCK.get(), DuckRenderer::new);
-    event.registerEntityRenderer(ModEntities.HELL_SPROUT.get(), HellSproutRenderer::new);
     event.registerEntityRenderer(ModEntities.OWL.get(), OwlRenderer::new);
     event.registerEntityRenderer(ModEntities.FENNEC.get(), FennecRenderer::new);
     event.registerEntityRenderer(ModEntities.GREEN_SPROUT.get(), SproutRenderer::new);
@@ -87,7 +86,6 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.BEETLE, BeetleModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.DEER, DeerModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.DUCK, DuckModel::createBodyLayer);
-    event.registerLayerDefinition(ModelHolder.HELL_SPROUT, HellSproutModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.OWL, OwlModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.FENNEC, FennecModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.SPROUT, SproutModel::createBodyLayer);

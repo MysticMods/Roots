@@ -10,7 +10,6 @@ import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.Level;
@@ -66,19 +65,19 @@ public class ModFeatures {
 
   // Place features
   public static RegistryObject<PlacedFeature> WILD_ROOTS_UNDERGROUND_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_underground", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(
-          CountPlacement.of(40), // How many attempts per chunk
-          InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
-          new HeightmapYRange(ConstantHeight.of(VerticalAnchor.absolute(-32)), Heightmap.Types.WORLD_SURFACE_WG) // Pick spot between y = 6 and heightmap of terrain above
+    CountPlacement.of(40), // How many attempts per chunk
+    InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
+    new HeightmapYRange(ConstantHeight.of(VerticalAnchor.absolute(-32)), Heightmap.Types.WORLD_SURFACE_WG) // Pick spot between y = 6 and heightmap of terrain above
   )));
 
   public static RegistryObject<PlacedFeature> WILD_ROOTS_FOREST_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_forest", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(
-          CountPlacement.of(3), // How many attempts per chunk
-          InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
-          HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
-          RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
-          BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
-          CountPlacement.of(2), // make 5 new attempts for each position at the log
-          RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
+    CountPlacement.of(3), // How many attempts per chunk
+    InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
+    HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
+    RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
+    BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
+    CountPlacement.of(2), // make 5 new attempts for each position at the log
+    RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
   )));
 
   public static RegistryObject<PlacedFeature> WILD_ROOTS_SPARSE_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_sparse", () -> new PlacedFeature(WILD_ROOTS_PLAINS_CONFIGURED_FEATURE.getHolder().get(), List.of(
@@ -103,7 +102,7 @@ public class ModFeatures {
     DimensionPlacement.of(Set.of(Level.OVERWORLD))
   )));
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     FEATURES.register(bus);
     CONFIGURED_FEATURES.register(bus);
     PLACED_FEATURES.register(bus);
@@ -113,7 +112,6 @@ public class ModFeatures {
   }
 
 
-
-  public static void load () {
+  public static void load() {
   }
 }

@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_badlands",
+    "#minecraft:has_structure/desert_pyramid",
+    "#minecraft:is_savanna",
+    { "id": "#forge:is_desert", "required": false },
+    { "id": "#forge:is_sandy", "required": false },
+    { "id": "#forge:is_dry/overworld", "required": false },
+    { "id": "#c:mesa", "required": false },
+    { "id": "#c:desert", "required": false },
+    { "id": "#c:savanna", "required": false }
+  ]
+}

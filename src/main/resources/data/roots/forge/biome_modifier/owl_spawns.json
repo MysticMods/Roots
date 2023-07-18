@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#roots:has_owl_spawns",
+  "spawners": {
+    "type": "roots:owl",
+    "weight": 9,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}

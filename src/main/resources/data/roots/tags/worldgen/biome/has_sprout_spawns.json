@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_forest",
+    "#minecraft:is_river",
+    "#minecraft:is_beach",
+    "#minecraft:has_structure/ruined_portal_swamp",
+    "#minecraft:has_structure/jungle_temple",
+    "#minecraft:is_jungle",
+    { "id": "#forge:is_dense/overworld", "required": false },
+    { "id": "#forge:is_wet/overworld", "required": false },
+    { "id": "#c:forest", "required": false },
+    { "id": "#c:river", "required": false },
+    { "id": "#c:beach", "required": false }
+  ]
+}

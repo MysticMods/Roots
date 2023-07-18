@@ -81,7 +81,6 @@ public class ModTags {
           ModEntities.BEETLE.get(),
           ModEntities.FENNEC.get(),
           ModEntities.GREEN_SPROUT.get(),
-          ModEntities.HELL_SPROUT.get(),
           ModEntities.PURPLE_SPROUT.get(),
           ModEntities.RED_SPROUT.get(),
           ModEntities.TAN_SPROUT.get()

@@ -20,9 +20,13 @@ public class ConfigManager {
   public static List<AbstractConfig> CONFIGS = new ArrayList<>();
 
   public static HatConfig HAT_CONFIG = new HatConfig();
+
+  public static ForgeConfigSpec.IntValue HELL_SPROUT_GROWTH_CHANCE;
   public static ForgeConfigSpec COMMON_CONFIG;
 
   static {
+    COMMON_BUILDER.comment("Entity-related configurations").push("entity_config");
+    HELL_SPROUT_GROWTH_CHANCE = COMMON_BUILDER.comment("-1 to disable").defineInRange("hell_sprout_growth_chance", 100, -1, Integer.MAX_VALUE);
     COMMON_BUILDER.comment("Hat configuration").push("hat_config");
     HAT_CONFIG.apply(COMMON_BUILDER);
     COMMON_BUILDER.pop();

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#roots:has_beetle_spawns",
+  "spawners": {
+    "type": "roots:beetle",
+    "weight": 5,
+    "minCount": 2,
+    "maxCount": 4
+  }
+}

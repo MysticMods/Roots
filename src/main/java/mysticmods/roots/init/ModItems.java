@@ -33,6 +33,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.ingredient.ExcludingIngredient;
 import noobanidus.libs.noobutil.item.BaseItems;
@@ -922,6 +924,54 @@ public class ModItems {
       .save(p))
     .register();
 
+  private static <T extends Item> ItemModelBuilder spawnEggModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
+    return p.withExistingParent(ctx.getName(), new ResourceLocation("item/template_spawn_egg"));
+  }
+
+  public static RegistryEntry<ForgeSpawnEggItem> BEETLE_SPAWN_EGG = REGISTRATE.item("beetle_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.BEETLE, 0x418594, 0x211D15, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
+
+  public static RegistryEntry<ForgeSpawnEggItem> DEER_SPAWN_EGG = REGISTRATE.item("deer_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.DEER, 0xa18458, 0x5e4d33, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
+
+  public static RegistryEntry<ForgeSpawnEggItem> FENNEC_SPAWN_EGG = REGISTRATE.item("fennec_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.FENNEC, 0xe9dcc2, 0xb1855c, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
+
+  public static RegistryEntry<ForgeSpawnEggItem> GREEN_SPROUT_SPAWN_EGG = REGISTRATE.item("green_sprout_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.GREEN_SPROUT, 0x9adb58, 0x2c9425, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
+
+  public static RegistryEntry<ForgeSpawnEggItem> TAN_SPROUT_SPAWN_EGG = REGISTRATE.item("tan_sprout_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.TAN_SPROUT, 0xeeca5f, 0xbb6c20, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
+
+  public static RegistryEntry<ForgeSpawnEggItem> RED_SPROUT_SPAWN_EGG = REGISTRATE.item("red_sprout_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.RED_SPROUT, 0xe6754c, 0xbd2637, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
+
+  public static RegistryEntry<ForgeSpawnEggItem> PURPLE_SPROUT_SPAWN_EGG = REGISTRATE.item("purple_sprout_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.PURPLE_SPROUT, 0xdd45e6, 0x6825ba, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
+
+  public static RegistryEntry<ForgeSpawnEggItem> OWL_SPAWN_EGG = REGISTRATE.item("owl_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.OWL, 0x8c654a, 0xdec9ba, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
+
+  public static RegistryEntry<ForgeSpawnEggItem> DUCK_SPAWN_EGG = REGISTRATE.item("duck_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.DUCK, 0xe4d6a5, 0xe9ad36, p))
+    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+    .model(ModItems::spawnEggModel)
+    .register();
 
   public static void load() {
   }

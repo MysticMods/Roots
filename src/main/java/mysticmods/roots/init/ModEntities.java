@@ -104,20 +104,6 @@ public class ModEntities {
       .properties(o -> o.sized(0.75f, 0.75f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
       .register();
 
-  public static RegistryEntry<EntityType<HellSproutEntity>> HELL_SPROUT = REGISTRATE.entity("hell_sprout", HellSproutEntity::new, MobCategory.CREATURE)
-      .loot((p, e) -> p.add(e, LootTable.lootTable()
-              .withPool(LootPool.lootPool()
-                  .add(LootItem.lootTableItem(Items.NETHER_WART)
-                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
-                      .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1, 3)))
-                  )
-                  .setRolls(ConstantValue.exactly(1))
-              )
-          )
-      )
-      .properties(o -> o.sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).fireImmune())
-      .register();
-
   public static RegistryEntry<EntityType<SproutEntity>> TAN_SPROUT = REGISTRATE.entity("tan_sprout", SproutEntity::new, MobCategory.CREATURE)
       .loot((p, e) -> p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
@@ -208,21 +194,6 @@ public class ModEntities {
       .properties(o -> o.sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
       .register();
 
-/*  public static BiMap<RegistryEntry<? extends EntityType<?>>, MobConfig> configMap = HashBiMap.create();
-
-  static {
-    configMap.put(ModEntities.BEETLE, ConfigManager.BEETLE_CONFIG);
-    configMap.put(ModEntities.DEER, ConfigManager.DEER_CONFIG);
-    configMap.put(ModEntities.FENNEC, ConfigManager.FENNEC_CONFIG);
-    configMap.put(ModEntities.GREEN_SPROUT, ConfigManager.GREEN_SPROUT_CONFIG);
-    configMap.put(ModEntities.PURPLE_SPROUT, ConfigManager.PURPLE_SPROUT_CONFIG);
-    configMap.put(ModEntities.TAN_SPROUT, ConfigManager.TAN_SPROUT_CONFIG);
-    configMap.put(ModEntities.RED_SPROUT, ConfigManager.RED_SPROUT_CONFIG);
-    configMap.put(ModEntities.OWL, ConfigManager.OWL_CONFIG);
-    configMap.put(ModEntities.HELL_SPROUT, ConfigManager.HELL_SPROUT_CONFIG);
-    configMap.put(ModEntities.DUCK, ConfigManager.DUCK_CONFIG);
-  }*/
-
   public static void registerEntities() {
     SpawnPlacements.register(DEER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
     SpawnPlacements.register(GREEN_SPROUT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
@@ -232,7 +203,6 @@ public class ModEntities {
     SpawnPlacements.register(FENNEC.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
     SpawnPlacements.register(BEETLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
     SpawnPlacements.register(OWL.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, OwlEntity::placement);
-    SpawnPlacements.register(HELL_SPROUT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, HellSproutEntity::placement);
     SpawnPlacements.register(DUCK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
   }
 
@@ -246,7 +216,6 @@ public class ModEntities {
     event.put(ModEntities.RED_SPROUT.get(), SproutEntity.attributes().build());
     event.put(ModEntities.PURPLE_SPROUT.get(), SproutEntity.attributes().build());
     event.put(ModEntities.OWL.get(), OwlEntity.attributes().build());
-    event.put(ModEntities.HELL_SPROUT.get(), HellSproutEntity.attributes().build());
     event.put(ModEntities.DUCK.get(), DuckEntity.attributes().build());
   }
 

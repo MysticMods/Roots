@@ -1,0 +1,30 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#roots:has_sprout_spawns",
+  "spawners": [
+    {
+      "type": "roots:green_sprout",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 4
+    },
+    {
+      "type": "roots:purple_sprout",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 4
+    },
+    {
+      "type": "roots:red_sprout",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 4
+    },
+    {
+      "type": "roots:tan_sprout",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 4
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_forest",
+    "#minecraft:is_mountain",
+    "#minecraft:is_taiga",
+    "#minecraft:has_structure/village_snowy",
+    { "id": "#forge:is_cold/overworld", "required": false },
+    { "id": "#forge:is_forest", "required": false },
+    { "id": "#forge:is_plains", "required": false },
+    { "id": "#forge:is_coniferous", "required": false },
+    { "id": "#c:forest", "required": false },
+    { "id": "#c:taiga", "required": false },
+    { "id": "#c:climate_cold", "required": false },
+    { "id": "#c:mountain", "required": false }
+  ]
+}

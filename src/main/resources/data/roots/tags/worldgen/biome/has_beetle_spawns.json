@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_jungle",
+    "#minecraft:has_structure/jungle_temple",
+    "#minecraft:is_forest",
+    "#minecraft:has_structure/village_plains",
+    "#minecraft:has_structure/ruined_portal_swamp",
+    { "id": "#forge:is_swamp", "required": false },
+    { "id": "#forge:is_dense/overworld", "required": false },
+    { "id": "#forge:is_plains", "required": false },
+    { "id": "#c:forest", "required": false },
+    { "id": "#c:jungle", "required": false },
+    { "id": "#c:swamp", "required": false },
+    { "id": "#c:plains", "required": false }
+  ]
+}

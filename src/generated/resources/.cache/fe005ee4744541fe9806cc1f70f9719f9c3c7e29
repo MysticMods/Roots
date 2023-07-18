@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-18T14:13:22.8515599	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-18T20:10:26.1651534	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -111,8 +111,8 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-dc4be23c589aab7fb331fc2e2e2273ba19ae0906 assets/roots/lang/en_ud.json
-e7fec77eeb60155782ca86719ace976ef57e9f31 assets/roots/lang/en_us.json
+9ae7248302e65491d1300cec0e46847493e611eb assets/roots/lang/en_ud.json
+404c3efed748671a351df25d0d9a1a817ff7bcc2 assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
@@ -402,6 +402,7 @@ a32d5f917810e8302d75979fc7784f7d141bf590 assets/roots/models/item/aubergine_sala
 f42677fb882a85b92f783ccf865e146136baec5e assets/roots/models/item/beetle_chestplate.json
 4fa86a023aa610796e7acf4f2c7421e46eaae605 assets/roots/models/item/beetle_helmet.json
 17e53dae59bb9b1fbd95862f45a29d9d6ae2bf84 assets/roots/models/item/beetle_leggings.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/beetle_spawn_egg.json
 45cab8f8d03c1a97148da1e55a8c6e9c3f4bff93 assets/roots/models/item/beetroot_salad.json
 5bee27a76eaab7d24cd6ff96cf33cfebede9500d assets/roots/models/item/birch_bark.json
 0eb853fdae829e14012b0e7b76e6faa4919067c6 assets/roots/models/item/cactus_dandelion_salad.json
@@ -425,10 +426,13 @@ cb16030fdccc48ab4cd2f4242671ed2d91a7e6df assets/roots/models/item/dandelion_cord
 c6614c65abaf87fc0c9711bc9954114d068c0adb assets/roots/models/item/dandelion_cornflower_salad.json
 1d69b78c715766ac4ee6d247b6c8007913b29cdd assets/roots/models/item/dark_oak_bark.json
 99a5c462ed550577784c0cc69b8c5add28caadd8 assets/roots/models/item/decorative_pyre.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/deer_spawn_egg.json
 22d09370c1bd204ca3e68224fba891c55f5de34a assets/roots/models/item/dewgonia.json
 35e42c2ea3b366ba0d8ddaef2f8b036b7475a1b1 assets/roots/models/item/diamond_knife.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/display_pedestal.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/duck_spawn_egg.json
 80bd3330615a9c7632d0f241f0ed9576caccfe5a assets/roots/models/item/elemental_soil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/fennec_spawn_egg.json
 5b7ecfad827acdf6b56386fe184beba2553f4f27 assets/roots/models/item/fey_leather.json
 9f26dada3953d97ff0d875094cb9b9859ecaa96a assets/roots/models/item/fey_pouch.json
 a1d37ce2fb2fa339ff79ec991648a83ebf41eb77 assets/roots/models/item/fire_starter.json
@@ -436,6 +440,7 @@ a9f24fd326a6cb57c1ac50440d5849502ab332cf assets/roots/models/item/flour.json
 733417364febd98d98daf39450a5755322e7261d assets/roots/models/item/glass_eye.json
 95918c8a5389f3be8c67dea890b97c16f26b0186 assets/roots/models/item/gold_knife.json
 5435be8db38522314eefe77149313635473e45a3 assets/roots/models/item/gramary.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/green_sprout_spawn_egg.json
 920b08299dc3c05b6ca2bb4004faf8b730d1974e assets/roots/models/item/grove_crafter.json
 2f13055795ba9015e6c0dbfc42f5574ccc04dd42 assets/roots/models/item/grove_moss.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/grove_pedestal.json
@@ -463,6 +468,7 @@ d8a80270d76ef9f7c4497a5ebd5fe2bd6f98bfbb assets/roots/models/item/mortar.json
 ac602506c37d0b22017338ee187d0d4185e18825 assets/roots/models/item/mystic_feather.json
 1c37fc0c9675461d938e9e00da8ab2b374a3688c assets/roots/models/item/netherite_knife.json
 bb082cec1ce31e7bcd200abe6e0eef69ade972bb assets/roots/models/item/oak_bark.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/owl_spawn_egg.json
 984d4e24e66b86fe25c5680f4209e24bebb1b8df assets/roots/models/item/pelt.json
 0a0823eebd55217ab4635daf2b9165285509a802 assets/roots/models/item/peony_cordial.json
 19b6878a79f3eea445e3994e51e665050a66fa10 assets/roots/models/item/pereskia.json
@@ -470,8 +476,10 @@ bb082cec1ce31e7bcd200abe6e0eef69ade972bb assets/roots/models/item/oak_bark.json
 23d5f54db897a21477eb86920bf8a61dc20f2d46 assets/roots/models/item/pestle.json
 dde16f862d56b92c0e5d8e61445d10cee1bfe590 assets/roots/models/item/petals.json
 f8ce532274205437bee1ca636d8d9835d90f5708 assets/roots/models/item/primal_grove_stone.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/purple_sprout_spawn_egg.json
 99a5c462ed550577784c0cc69b8c5add28caadd8 assets/roots/models/item/pyre.json
 f92e3f5b1e866eb0dc8a2a79d91886db283219da assets/roots/models/item/raw_squid.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/red_sprout_spawn_egg.json
 f91bf59a1f480187017ff7126547e54010a3a244 assets/roots/models/item/reinforced_pyre.json
 926cd17b439769ba78ef46f2287ed81b42e3baef assets/roots/models/item/reinforced_ritual_pedestal.json
 536d1166266a152ea4b2ea37fe3c499f143efd99 assets/roots/models/item/reliquary.json
@@ -555,6 +563,7 @@ b48da5338d6df199a05029fe52defa82b3042c55 assets/roots/models/item/strange_ooze.j
 0a0edad27f33509be58c3387f932c7ea33f12fd2 assets/roots/models/item/stripped_wildwood_log.json
 94154ab2fc29a76b2075c14847710e02785413e4 assets/roots/models/item/stripped_wildwood_wood.json
 75a4376dc4f58209c6914ef28676354a24e92d32 assets/roots/models/item/stuffed_aubergine.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/tan_sprout_spawn_egg.json
 ab91c5fb468f89dc5c9d4f93ab4e86592126e160 assets/roots/models/item/terran_soil.json
 9ac737c965f9e6f55e4479561c55b6dd74eaa3c8 assets/roots/models/item/thatch.json
 dad122fab6ca1e804cc2d165f1b348d7650dcbf9 assets/roots/models/item/unending_bowl.json
@@ -1009,7 +1018,6 @@ ad3057db2bc1b73eb0cdb9c7ef9b0f766b45089f data/roots/loot_tables/blocks/wild_aube
 239ce284b2d9977676d4de3413a16cd5b236dbed data/roots/loot_tables/entities/duck.json
 6e77bc44c9a2d9f8c909a9b469aae25b0080585b data/roots/loot_tables/entities/fennec.json
 4471941ab8e5aa0f0e3fbd0a1c55c7e49b94d8c6 data/roots/loot_tables/entities/green_sprout.json
-d179b5660b60196c5df1cffdbd97d09bed924bfe data/roots/loot_tables/entities/hell_sprout.json
 239ce284b2d9977676d4de3413a16cd5b236dbed data/roots/loot_tables/entities/owl.json
 3e791f11972b42b242ba275d1d7eb9112eba9b09 data/roots/loot_tables/entities/purple_sprout.json
 19444923a8efa7ef44d0c53a197be92eccc8fdf7 data/roots/loot_tables/entities/red_sprout.json
@@ -1347,7 +1355,7 @@ a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/blocks/soils/water.json
 4b5fde4f337ce73662f973a66dcd6405771086dd data/roots/tags/entity_types/animal_harvest_entities.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_types/boats.json
 6cc0520c5898cec0793d54035c90266cad94c48a data/roots/tags/entity_types/fey_leather.json
-e875ac41fdcf9c5f2d59f74795df755a538bf245 data/roots/tags/entity_types/pacifist.json
+f1ecbd233820d9259a855e392e4a8e9de84cce46 data/roots/tags/entity_types/pacifist.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_types/squid.json
 0191b679517ad37f83f5f0171f2945bb7ad90df4 data/roots/tags/items/barks.json
 f84f7ba61349a204c6cce987fd1a6ff40bdb79a6 data/roots/tags/items/barks/acacia.json

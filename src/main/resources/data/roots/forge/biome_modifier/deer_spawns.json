@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#roots:has_deer_spawns",
+  "spawners": {
+    "type": "roots:deer",
+    "weight": 6,
+    "minCount": 2,
+    "maxCount": 4
+  }
+}
