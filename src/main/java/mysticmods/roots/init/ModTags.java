@@ -74,7 +74,18 @@ public class ModTags {
           EntityType.TURTLE,
           EntityType.VILLAGER,
           EntityType.WANDERING_TRADER,
-          EntityType.WOLF);
+          EntityType.WOLF,
+          ModEntities.DUCK.get(),
+          ModEntities.OWL.get(),
+          ModEntities.DEER.get(),
+          ModEntities.BEETLE.get(),
+          ModEntities.FENNEC.get(),
+          ModEntities.GREEN_SPROUT.get(),
+          ModEntities.HELL_SPROUT.get(),
+          ModEntities.PURPLE_SPROUT.get(),
+          ModEntities.RED_SPROUT.get(),
+          ModEntities.TAN_SPROUT.get()
+        );
       b.tag(RootsTags.Entities.ANIMAL_HARVEST).addTag(RootsTags.Entities.PACIFIST).add(EntityType.BAT);
       b.tag(RootsTags.Entities.BOATS).add(EntityType.BOAT, EntityType.CHEST_BOAT);
       b.tag(RootsTags.Entities.FEY_LEATHER)
