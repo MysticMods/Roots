@@ -22,7 +22,7 @@ public class BeetleArmorItem extends ModifiedArmorItem {
   @Nullable
   @Override
   public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-    return RootsAPI.MODID + ":textures/models/armor/beetle_armor.png";
+    return RootsAPI.MODID + ":textures/model/armor/beetle_armor.png";
   }
 
   // TODO: Abstract this into a parent class
