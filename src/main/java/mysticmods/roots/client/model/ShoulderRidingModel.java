@@ -1,4 +1,4 @@
-package mysticmods.mysticalworld.client.model;
+package mysticmods.roots.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -26,10 +26,12 @@ public abstract class ShoulderRidingModel<T extends Entity> extends AgeableListM
   public ShoulderRidingModel() {
   }
 
+  @Override
   public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
     this.setupAnim(getStateFor(pEntity), pEntity.tickCount, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
   }
 
+  @Override
   public void prepareMobModel(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick) {
     this.prepare(getStateFor(pEntity));
   }

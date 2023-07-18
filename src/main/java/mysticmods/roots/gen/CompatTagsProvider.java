@@ -60,6 +60,7 @@ public class CompatTagsProvider<T> implements DataProvider, RegistrateProvider {
     return this.pathProvider.json(id);
   }
 
+  @Override
   public void run(CachedOutput pOutput) {
     this.builders.clear();
     this.addTags();
@@ -105,6 +106,7 @@ public class CompatTagsProvider<T> implements DataProvider, RegistrateProvider {
     });
   }
 
+  @Override
   public String getName() {
     return "Tags (" + name + ")";
   }

@@ -1,7 +1,8 @@
-package mysticmods.mysticalworld.items.modified;
+package mysticmods.roots.item;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
+import mysticmods.roots.api.item.IModifiable;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

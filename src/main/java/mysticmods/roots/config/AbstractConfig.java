@@ -1,4 +1,4 @@
-package mysticmods.mysticalworld.config;
+package mysticmods.roots.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import noobanidus.libs.noobutil.config.IBaseConfig;

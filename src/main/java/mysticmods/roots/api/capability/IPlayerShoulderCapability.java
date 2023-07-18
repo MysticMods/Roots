@@ -1,4 +1,4 @@
-package mysticmods.roots.capability;
+package mysticmods.roots.api.capability;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;

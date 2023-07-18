@@ -1,12 +1,12 @@
-package mysticmods.mysticalworld.client.render;
+package mysticmods.roots.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mysticmods.mysticalworld.MysticalWorld;
-import mysticmods.mysticalworld.client.model.BeetleModel;
-import mysticmods.mysticalworld.client.model.ModelHolder;
-import mysticmods.mysticalworld.client.model.armor.ArmorModel;
-import mysticmods.mysticalworld.client.player.layer.ShoulderRenderLayer;
-import mysticmods.mysticalworld.entity.BeetleEntity;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.model.BeetleModel;
+import mysticmods.roots.client.model.ModelHolder;
+import mysticmods.roots.client.model.armor.ArmorModel;
+import mysticmods.roots.client.player.ShoulderRenderLayer;
+import mysticmods.roots.entity.BeetleEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +29,6 @@ public class BeetleRenderer extends MobRenderer<BeetleEntity, BeetleModel> {
   @Override
   @Nonnull
   public ResourceLocation getTextureLocation(@Nonnull BeetleEntity entity) {
-    return new ResourceLocation(MysticalWorld.MODID + ":textures/entity/beetle_blue.png");
+    return new ResourceLocation(RootsAPI.MODID, "textures/entity/beetle_blue.png");
   }
 }

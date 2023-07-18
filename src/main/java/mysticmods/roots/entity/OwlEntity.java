@@ -201,6 +201,7 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     }
   }
 
+  @Override
   public boolean isFlying() {
     return !this.onGround;
   }

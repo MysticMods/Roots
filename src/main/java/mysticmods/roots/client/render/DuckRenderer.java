@@ -1,10 +1,10 @@
-package mysticmods.mysticalworld.client.render;
+package mysticmods.roots.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mysticmods.mysticalworld.MysticalWorld;
-import mysticmods.mysticalworld.client.model.DuckModel;
-import mysticmods.mysticalworld.client.model.ModelHolder;
-import mysticmods.mysticalworld.entity.DuckEntity;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.model.DuckModel;
+import mysticmods.roots.client.model.ModelHolder;
+import mysticmods.roots.entity.DuckEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +24,7 @@ public class DuckRenderer extends MobRenderer<DuckEntity, DuckModel> {
   @Override
   @Nonnull
   public ResourceLocation getTextureLocation(@Nonnull DuckEntity entity) {
-    return new ResourceLocation(MysticalWorld.MODID + ":textures/entity/duck.png");
+    return new ResourceLocation(RootsAPI.MODID, "textures/entity/duck.png");
   }
 
   @Override

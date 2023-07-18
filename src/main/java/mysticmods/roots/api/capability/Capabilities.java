@@ -1,6 +1,5 @@
 package mysticmods.roots.api.capability;
 
-import mysticmods.roots.capability.PlayerShoulderCapability;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -18,6 +17,6 @@ public class Capabilities {
   });
   public static final Capability<EntityCooldownCapability> SQUID_MILKING_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
   });
-  public static final Capability<PlayerShoulderCapability> PLAYER_SHOULDER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+  public static final Capability<IPlayerShoulderCapability> PLAYER_SHOULDER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
   });
 }

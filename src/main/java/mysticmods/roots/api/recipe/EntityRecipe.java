@@ -150,6 +150,7 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
     protected Builder() {
     }
 
+    @Override
     protected boolean allowEmptyOutput() {
       return true;
     }
@@ -158,6 +159,7 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
       super(result);
     }
 
+    @Override
     public abstract RecipeSerializer<?> getSerializer();
 
     public Builder setTest(EntityTest test) {
@@ -165,6 +167,7 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
       return this;
     }
 
+    @Override
     public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new EntityRecipe.Builder.Result(recipeName, result, test, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
     }

@@ -1,4 +1,4 @@
-package mysticmods.mysticalworld.client.model;
+package mysticmods.roots.client.model;
 
 public enum ModelState {
   NORMAL,

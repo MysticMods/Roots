@@ -1,10 +1,10 @@
-package mysticmods.mysticalworld.client.player.event;
+package mysticmods.roots.client.player;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.mysticalworld.MysticalWorld;
-import mysticmods.mysticalworld.client.model.ModelHolder;
-import mysticmods.mysticalworld.client.model.armor.BeetleArmorModel;
-import mysticmods.mysticalworld.init.ModItems;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.model.ModelHolder;
+import mysticmods.roots.client.model.armor.BeetleArmorModel;
+import mysticmods.roots.init.ModItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.RenderType;
@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Objects;
 
-@Mod.EventBusSubscriber(modid = MysticalWorld.MODID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class RenderArmEventHandler {
   public static BeetleArmorModel chestModel;
 
@@ -72,15 +72,11 @@ public class RenderArmEventHandler {
     BOTH;
 
     public boolean shouldRender(HumanoidArm hand) {
-      switch (this) {
-        default:
-        case BOTH:
-          return true;
-        case LEFT:
-          return hand == HumanoidArm.LEFT;
-        case RIGHT:
-          return hand == HumanoidArm.RIGHT;
-      }
+      return switch (this) {
+        default -> true;
+        case LEFT -> hand == HumanoidArm.LEFT;
+        case RIGHT -> hand == HumanoidArm.RIGHT;
+      };
     }
   }
 }

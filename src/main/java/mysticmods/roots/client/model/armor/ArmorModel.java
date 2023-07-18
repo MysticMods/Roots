@@ -1,10 +1,10 @@
-package mysticmods.mysticalworld.client.model.armor;
+package mysticmods.roots.client.model.armor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.mysticalworld.client.model.ModelHolder;
-import mysticmods.mysticalworld.client.player.event.RenderArmEventHandler;
-import mysticmods.mysticalworld.init.ModItems;
+import mysticmods.roots.client.model.ModelHolder;
+import mysticmods.roots.client.player.RenderArmEventHandler;
+import mysticmods.roots.init.ModItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -33,6 +33,7 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
   public static ArmorModel getModel(ItemStack stack) {
     if (stack.is(ModItems.ANTLER_HAT.get())) {
       return antlerModel;
+      // TODO: Turn this into a tag
     } else if (stack.is(ModItems.BEETLE_BOOTS.get()) || stack.is(ModItems.BEETLE_HELMET.get()) || stack.is(ModItems.BEETLE_CHESTPLATE.get()) || stack.is(ModItems.BEETLE_LEGGINGS.get())) {
       return beetleModels.get(stack.getEquipmentSlot());
     }

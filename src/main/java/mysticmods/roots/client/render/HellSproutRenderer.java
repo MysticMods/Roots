@@ -1,9 +1,9 @@
-package mysticmods.mysticalworld.client.render;
+package mysticmods.roots.client.render;
 
-import mysticmods.mysticalworld.MysticalWorld;
-import mysticmods.mysticalworld.client.model.HellSproutModel;
-import mysticmods.mysticalworld.client.model.ModelHolder;
-import mysticmods.mysticalworld.entity.HellSproutEntity;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.model.HellSproutModel;
+import mysticmods.roots.client.model.ModelHolder;
+import mysticmods.roots.entity.HellSproutEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ public class HellSproutRenderer extends MobRenderer<HellSproutEntity, HellSprout
     super(context, new HellSproutModel(context.bakeLayer(ModelHolder.HELL_SPROUT)), 0.15f);
   }
 
-  public static ResourceLocation TEXTURE = new ResourceLocation(MysticalWorld.MODID, "textures/entity/sprout_hell.png");
+  public static ResourceLocation TEXTURE = new ResourceLocation(RootsAPI.MODID, "textures/entity/sprout_hell.png");
 
   @Override
   public ResourceLocation getTextureLocation(HellSproutEntity entity) {

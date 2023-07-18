@@ -1,8 +1,8 @@
-package mysticmods.mysticalworld.client.model;
+package mysticmods.roots.client.model;
 
 import com.google.common.collect.ImmutableSet;
-import mysticmods.mysticalworld.MysticalWorld;
-import mysticmods.mysticalworld.entity.BeetleEntity;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.entity.BeetleEntity;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -13,10 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-/**
- * BeetleModel - Elucent
- * Created using Tabula 5.1.0
- */
 public class BeetleModel extends ShoulderRidingModel<BeetleEntity> {
   private final ModelPart body;
   private final ModelPart head;
@@ -161,7 +157,7 @@ public class BeetleModel extends ShoulderRidingModel<BeetleEntity> {
 
   @Override
   public ResourceLocation getTexture(ModelState state) {
-    return new ResourceLocation(MysticalWorld.MODID + ":textures/entity/beetle_blue.png");
+    return new ResourceLocation(RootsAPI.MODID + ":textures/entity/beetle_blue.png");
   }
 
   private void setRotateAngle(@Nonnull ModelPart modelRenderer, float x, float y, float z) {

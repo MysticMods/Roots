@@ -1,4 +1,4 @@
-package mysticmods.roots.item;
+package mysticmods.roots.api.item;
 
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

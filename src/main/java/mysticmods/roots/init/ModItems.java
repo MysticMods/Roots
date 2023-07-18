@@ -24,6 +24,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.BeetrootBlock;
@@ -49,7 +50,7 @@ public class ModItems {
   // GATHERED CROPS
   public static final ItemEntry<ItemNameBlockItem> WILDROOT = REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.WILDROOT_CROP)
+    .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.WILDROOT_CROP)
     .defaultLang()
     .register();
   public static final ItemEntry<Item> GROVE_MOSS = REGISTRATE.item("grove_moss", Item::new)
@@ -60,19 +61,19 @@ public class ModItems {
   // PYRE-CRAFTED CROPS
   public static final ItemEntry<ItemNameBlockItem> CLOUD_BERRY = REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.CLOUD_BERRY_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
+    .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
     .register();
   public static final ItemEntry<ItemNameBlockItem> DEWGONIA = REGISTRATE.item("dewgonia", (p) -> new ItemNameBlockItem(ModBlocks.DEWGONIA_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.DEWGONIA_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.DEWGONIA_CROP)
+    .tag(RootsTags.Items.DEWGONIA_SEEDS, RootsTags.Items.DEWGONIA_CROP)
     .register();
   public static final ItemEntry<ItemNameBlockItem> INFERNO_BULB = REGISTRATE.item("inferno_bulb", (p) -> new ItemNameBlockItem(ModBlocks.INFERNO_BULB_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.INFERNO_BULB_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.INFERNO_BULB_CROP)
+    .tag(RootsTags.Items.INFERNO_BULB_SEEDS, RootsTags.Items.INFERNO_BULB_CROP)
     .register();
   public static final ItemEntry<ItemNameBlockItem> STALICRIPE = REGISTRATE.item("stalicripe", (p) -> new ItemNameBlockItem(ModBlocks.STALICRIPE_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.STALICRIPE_SEEDS, RootsTags.Items.SEEDS, RootsTags.Items.STALICRIPE_CROP)
+    .tag(RootsTags.Items.STALICRIPE_SEEDS, RootsTags.Items.STALICRIPE_CROP)
     .register();
   // OTHER SOURCE CROPS
 
@@ -114,15 +115,15 @@ public class ModItems {
 
   public static final ItemEntry<ItemNameBlockItem> MOONGLOW_SEEDS = REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.MOONGLOW_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.MOONGLOW_SEEDS, RootsTags.Items.SEEDS)
+    .tag(RootsTags.Items.MOONGLOW_SEEDS)
     .register();
   public static final ItemEntry<ItemNameBlockItem> PERESKIA_BULB = REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.PERESKIA_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.PERESKIA_SEEDS, RootsTags.Items.SEEDS)
+    .tag(RootsTags.Items.PERESKIA_SEEDS)
     .register();
   public static final ItemEntry<ItemNameBlockItem> SPIRITLEAF_SEEDS = REGISTRATE.item("spiritleaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.SPIRITLEAF_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.SPIRITLEAF_SEEDS, RootsTags.Items.SEEDS)
+    .tag(RootsTags.Items.SPIRITLEAF_SEEDS)
     .recipe((ctx, p) -> {
       RunicBlockRecipe.builder(ctx.getEntry())
         .durabilityCost(15)
@@ -135,7 +136,7 @@ public class ModItems {
     .register();
   public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.WILDEWHEET_CROP.get(), p))
     .model(subfolder("herbs"))
-    .tag(RootsTags.Items.WILDEWHEET_SEEDS, RootsTags.Items.SEEDS)
+    .tag(RootsTags.Items.WILDEWHEET_SEEDS)
     .register();
 
   public static final ItemEntry<GroveSporesItem> GROVE_SPORES = REGISTRATE.item("grove_spores", GroveSporesItem::new)
@@ -867,6 +868,60 @@ public class ModItems {
     .model((ctx, p) -> {
     })
     .register();
+
+  public static RegistryEntry<AntlerHatItem> ANTLER_HAT = REGISTRATE.item("antler_hat", AntlerHatItem::new)
+    .properties(o -> o.durability(399).rarity(Rarity.RARE))
+    .recipe((o, p) -> ShapedRecipeBuilder.shaped(o.getEntry(), 1)
+      .pattern("AWA")
+      .pattern("WWW")
+      .pattern("S S")
+      .define('A', ModItems.ANTLERS.get())
+      .define('W', ItemTags.WOOL)
+      .define('S', Tags.Items.STRING)
+      .unlockedBy("has_antlers", RegistrateRecipeProvider.has(ModItems.ANTLERS.get()))
+      .save(p))
+    .register();
+
+  public static RegistryEntry<BeetleArmorItem> BEETLE_HELMET = REGISTRATE.item("beetle_helmet", (b) -> new BeetleArmorItem(b, EquipmentSlot.HEAD))
+    .properties(o -> o.rarity(Rarity.RARE))
+    .recipe((o, p) -> ShapedRecipeBuilder.shaped(o.getEntry(), 1)
+      .pattern("CCC")
+      .pattern("C C")
+      .define('C', RootsTags.Items.CARAPACE)
+      .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
+      .save(p))
+    .register();
+
+  public static RegistryEntry<BeetleArmorItem> BEETLE_CHESTPLATE = REGISTRATE.item("beetle_chestplate", (b) -> new BeetleArmorItem(b, EquipmentSlot.CHEST))
+    .properties(o -> o.rarity(Rarity.RARE))
+    .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+      .pattern("C C")
+      .pattern("CCC")
+      .pattern("CCC")
+      .define('C', RootsTags.Items.CARAPACE)
+      .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
+      .save(p))
+    .register();
+
+  public static RegistryEntry<BeetleArmorItem> BEETLE_LEGGINGS = REGISTRATE.item("beetle_leggings", (b) -> new BeetleArmorItem(b, EquipmentSlot.LEGS))
+    .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+      .pattern("CCC")
+      .pattern("C C")
+      .pattern("C C")
+      .define('C', RootsTags.Items.CARAPACE)
+      .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
+      .save(p))
+    .register();
+
+  public static RegistryEntry<BeetleArmorItem> BEETLE_BOOTS = REGISTRATE.item("beetle_boots", (b) -> new BeetleArmorItem(b, EquipmentSlot.FEET))
+    .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+      .pattern("C C")
+      .pattern("C C")
+      .define('C', RootsTags.Items.CARAPACE)
+      .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
+      .save(p))
+    .register();
+
 
   public static void load() {
   }

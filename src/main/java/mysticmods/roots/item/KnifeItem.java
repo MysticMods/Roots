@@ -26,6 +26,7 @@ public class KnifeItem extends BaseItems.KnifeItem {
     super(tier, attackDamage, attackSpeed, props);
   }
 
+  @Override
   public InteractionResult useOn(UseOnContext pContext) {
     Level level = pContext.getLevel();
     BlockPos blockpos = pContext.getClickedPos();

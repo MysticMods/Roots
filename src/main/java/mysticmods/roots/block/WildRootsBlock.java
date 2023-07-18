@@ -81,6 +81,7 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
     return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
   }
 
+  @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     pBuilder.add(FACING, WATERLOGGED, MOSSY);
   }

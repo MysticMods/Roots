@@ -1,7 +1,7 @@
-package mysticmods.mysticalworld.client.model;
+package mysticmods.roots.client.model;
 
 import com.google.common.collect.ImmutableSet;
-import mysticmods.mysticalworld.entity.OwlEntity;
+import mysticmods.roots.entity.OwlEntity;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

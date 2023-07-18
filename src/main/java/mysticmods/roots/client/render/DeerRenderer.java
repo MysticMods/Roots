@@ -1,8 +1,9 @@
-package mysticmods.mysticalworld.client.render;
+package mysticmods.roots.client.render;
 
-import mysticmods.mysticalworld.client.model.DeerModel;
-import mysticmods.mysticalworld.client.model.ModelHolder;
-import mysticmods.mysticalworld.entity.DeerEntity;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.model.DeerModel;
+import mysticmods.roots.client.model.ModelHolder;
+import mysticmods.roots.entity.DeerEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -19,8 +20,8 @@ public class DeerRenderer extends MobRenderer<DeerEntity, DeerModel> {
   @Nonnull
   public ResourceLocation getTextureLocation(@Nonnull DeerEntity entity) {
     if (entity.getId() % 20 == 0) {
-      return new ResourceLocation("mysticalworld:textures/entity/rudolph.png");
+      return new ResourceLocation(RootsAPI.MODID, "textures/entity/rudolph.png");
     }
-    return new ResourceLocation("mysticalworld:textures/entity/deer.png");
+    return new ResourceLocation(RootsAPI.MODID, "textures/entity/deer.png");
   }
 }

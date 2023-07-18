@@ -166,6 +166,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     protected Builder() {
     }
 
+    @Override
     protected boolean allowEmptyOutput() {
       return true;
     }
@@ -184,8 +185,10 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
       return this;
     }
 
+    @Override
     public abstract RecipeSerializer<?> getSerializer();
 
+    @Override
     public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
       consumer.accept(new WorldRecipe.Builder.Result(recipeName, result, outputState, condition, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName)));
     }

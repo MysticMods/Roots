@@ -1,7 +1,7 @@
-package mysticmods.mysticalworld.client.model;
+package mysticmods.roots.client.model;
 
 import com.google.common.collect.ImmutableSet;
-import mysticmods.mysticalworld.entity.FennecEntity;
+import mysticmods.roots.entity.FennecEntity;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

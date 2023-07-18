@@ -6,6 +6,7 @@ import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.access.IShiftAccessor;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
+import mysticmods.roots.api.item.RootsArmorMaterial;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spell.Spell;
@@ -18,9 +19,12 @@ import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.impl.ServerShiftAccessor;
 import mysticmods.roots.init.*;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -37,6 +41,9 @@ import javax.annotation.Nullable;
 @Mod(RootsAPI.MODID)
 public class Roots {
   public static CustomRegistrate REGISTRATE;
+
+  public static RootsArmorMaterial ANTLER_MATERIAL = new RootsArmorMaterial("antlers", 7, new int[]{3, 0, 0, 0}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 1f, 0f, () -> Ingredient.of(ModItems.ANTLERS.get()));
+  public static RootsArmorMaterial CARAPACE_MATERIAL = new RootsArmorMaterial("carapace", 25, new int[]{2, 5, 6, 2}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(ModItems.CARAPACE.get()));
   public static final RecipeGenerator RECIPES = new RecipeGenerator(RootsAPI.MODID);
 
   public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(RootsAPI.MODID) {

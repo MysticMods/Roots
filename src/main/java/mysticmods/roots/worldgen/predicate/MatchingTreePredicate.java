@@ -18,10 +18,12 @@ public class MatchingTreePredicate extends StateTestingPredicate {
         super(offset);
     }
 
+    @Override
     protected boolean test(BlockState pState) {
         return pState.is(BlockTags.LOGS_THAT_BURN) && pState.hasProperty(RotatedPillarBlock.AXIS) && pState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y;
     }
 
+    @Override
     public BlockPredicateType<?> type() {
         return ModFeatures.MATCHING_TREE_PREDICATE.get();
     }

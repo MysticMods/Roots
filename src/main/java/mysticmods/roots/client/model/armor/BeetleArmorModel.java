@@ -1,4 +1,4 @@
-package mysticmods.mysticalworld.client.model.armor;
+package mysticmods.roots.client.model.armor;
 
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -42,6 +42,7 @@ public class BeetleArmorModel extends ArmorModel {
     hat.visible = false;
   }
 
+  @Override
   protected void setPartVisibility(EquipmentSlot slot) {
   }
 

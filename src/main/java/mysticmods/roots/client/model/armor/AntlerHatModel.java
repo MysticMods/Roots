@@ -1,4 +1,4 @@
-package mysticmods.mysticalworld.client.model.armor;
+package mysticmods.roots.client.model.armor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

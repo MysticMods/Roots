@@ -171,6 +171,8 @@ public class ModTags {
       b.copy(RootsTags.Blocks.CRAFTERS, RootsTags.Items.CRAFTERS);
       b.copy(RootsTags.Blocks.NYI, RootsTags.Items.NYI);
 
+      b.tag(RootsTags.Items.SEEDS).addTags(RootsTags.Items.MOONGLOW_SEEDS, RootsTags.Items.SPIRITLEAF_SEEDS, RootsTags.Items.WILDEWHEET_SEEDS);
+
       b.tag(RootsTags.Items.FLINT).add(Items.FLINT);
       b.tag(RootsTags.Items.STONELIKE).addTags(Tags.Items.SANDSTONE, Tags.Items.STONE, ItemTags.STONE_BRICKS, ItemTags.STONE_CRAFTING_MATERIALS, ItemTags.STONE_TOOL_MATERIALS).add(Items.DIORITE, Items.GRANITE, Items.CALCITE, Items.TUFF, Items.POLISHED_DIORITE, Items.POLISHED_GRANITE, Items.POLISHED_ANDESITE, Items.ANDESITE, Items.POLISHED_DEEPSLATE, Items.POLISHED_BLACKSTONE);
 

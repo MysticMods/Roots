@@ -1,7 +1,7 @@
-package mysticmods.mysticalworld.client.model;
+package mysticmods.roots.client.model;
 
 import com.google.common.collect.ImmutableList;
-import mysticmods.mysticalworld.entity.HellSproutEntity;
+import mysticmods.roots.entity.HellSproutEntity;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

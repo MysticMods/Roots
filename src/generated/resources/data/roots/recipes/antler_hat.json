@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "roots:antlers"
+    },
+    "S": {
+      "tag": "forge:string"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "AWA",
+    "WWW",
+    "S S"
+  ],
+  "result": {
+    "item": "roots:antler_hat"
+  }
+}

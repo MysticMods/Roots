@@ -124,6 +124,7 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
       this.HERB_MAP.putAll(herbMap);
     }
 
+    @Override
     public void fromNetwork(FriendlyByteBuf buf) {
       HERB_MAP.clear();
       int mapSize = buf.readVarInt();

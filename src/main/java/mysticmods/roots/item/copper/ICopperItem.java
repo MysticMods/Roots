@@ -1,4 +1,4 @@
-package mysticmods.mysticalworld.items.copper;
+package mysticmods.roots.item.copper;
 
 public interface ICopperItem {
 }

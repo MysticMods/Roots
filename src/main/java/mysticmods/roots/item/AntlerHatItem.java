@@ -1,11 +1,10 @@
-package mysticmods.mysticalworld.items;
+package mysticmods.roots.item;
 
 import com.google.common.collect.Multimap;
-import mysticmods.mysticalworld.MysticalWorld;
-import mysticmods.mysticalworld.client.model.armor.ArmorModel;
-import mysticmods.mysticalworld.config.ConfigManager;
-import mysticmods.mysticalworld.init.ModMaterials;
-import mysticmods.mysticalworld.items.modified.ModifiedArmorItem;
+import mysticmods.roots.Roots;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.model.armor.ArmorModel;
+import mysticmods.roots.config.ConfigManager;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,8 +17,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import noobanidus.libs.noobutil.material.MaterialType;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 
 public class AntlerHatItem extends ModifiedArmorItem {
   public AntlerHatItem(Properties builder) {
-    super(ModMaterials.ANTLER.getArmorMaterial(), EquipmentSlot.HEAD, builder);
+    super(Roots.ANTLER_MATERIAL, EquipmentSlot.HEAD, builder);
   }
 
   @Override
@@ -69,16 +69,20 @@ public class AntlerHatItem extends ModifiedArmorItem {
   @Nullable
   @Override
   public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-    return MysticalWorld.MODID + ":textures/models/armor/antler_hat.png";
+    return RootsAPI.MODID + ":textures/model/armor/antler_hat.png";
   }
 
   @Override
-  public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-    consumer.accept(new IItemRenderProperties() {
-      @Nullable
+  public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+    consumer.accept(new IClientItemExtensions() {
       @Override
-      public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
-        return ArmorModel.getModel(itemStack);
+      public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+        HumanoidModel<?> result = ArmorModel.getModel(itemStack);
+        if (result == null) {
+          return original;
+        }
+
+        return result;
       }
     });
   }

@@ -58,16 +58,19 @@ public class LootItemBlockTagCondition implements LootItemCondition {
       this.block = pBlock;
     }
 
+    @Override
     public LootItemCondition build() {
       return new LootItemBlockTagCondition(this.block);
     }
   }
 
   public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<LootItemBlockTagCondition> {
+    @Override
     public void serialize(JsonObject json, LootItemBlockTagCondition condition, JsonSerializationContext context) {
       json.addProperty("block", condition.tag.toString());
     }
 
+    @Override
     public LootItemBlockTagCondition deserialize(JsonObject json, JsonDeserializationContext context) {
       ResourceLocation resourcelocation = new ResourceLocation(GsonHelper.getAsString(json, "block"));
       TagKey<Block> tag = BlockTags.create(resourcelocation);

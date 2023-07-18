@@ -3,7 +3,7 @@ package mysticmods.roots.entity;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
-import mysticmods.roots.capability.IPlayerShoulderCapability;
+import mysticmods.roots.api.capability.IPlayerShoulderCapability;
 import mysticmods.roots.capability.PlayerShoulderCapability;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.network.Networking;
@@ -70,7 +70,7 @@ public class BeetleEntity extends TamableAnimal {
     } else {
       if (this.isTame()) {
         if (this.isOwnedBy(player) && itemstack.isEmpty() && player.isCrouching()) {
-          LazyOptional<PlayerShoulderCapability> laycap = player.getCapability(Capabilities.PLAYER_SHOULDER_CAPABILITY);
+          LazyOptional<IPlayerShoulderCapability> laycap = player.getCapability(Capabilities.PLAYER_SHOULDER_CAPABILITY);
           if (laycap.isPresent()) {
             IPlayerShoulderCapability cap = laycap.orElseThrow(IllegalStateException::new);
             if (!cap.isShouldered() && player.getShoulderEntityRight().isEmpty()) {

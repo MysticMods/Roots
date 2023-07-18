@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-17T22:16:51.8827995	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-18T13:12:53.3381608	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -111,8 +111,8 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-85c0966e4579f52812b80f11a2eb00a30b3196ba assets/roots/lang/en_ud.json
-693ec59a50f3bab97086a25c78942e79d73f017d assets/roots/lang/en_us.json
+dc4be23c589aab7fb331fc2e2e2273ba19ae0906 assets/roots/lang/en_ud.json
+e7fec77eeb60155782ca86719ace976ef57e9f31 assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
@@ -389,6 +389,7 @@ da59366cbc23d190312266d1e2d2dd7ccbdff579 assets/roots/models/block/wildwood_wall
 94e3f02233a966069d58b1b04141989f101e51c7 assets/roots/models/block/wild_aubergine.json
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
+7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
 dfb1282e7837305d24af5f6310f21733fdac68ef assets/roots/models/item/apothecary_pouch.json
 404486842e7642b537cd496376dfb91232d711bd assets/roots/models/item/apple_cordial.json
 458fe829501acba9fb72bf7b89d53539f795e0cc assets/roots/models/item/aqueous_soil.json
@@ -397,6 +398,10 @@ ba1cf7e541aeb106b51d4140c59919c0dc7a3a1f assets/roots/models/item/aubergine.json
 a32d5f917810e8302d75979fc7784f7d141bf590 assets/roots/models/item/aubergine_salad.json
 5bb34210e8a21f4505497b9733e3e4715e97295b assets/roots/models/item/aubergine_seeds.json
 85a4d5c650c8e4715ead4d109c698be38c630711 assets/roots/models/item/bafflecap.json
+6f30c4f56eb8a47a878af762bafbffeb5d5c236f assets/roots/models/item/beetle_boots.json
+f42677fb882a85b92f783ccf865e146136baec5e assets/roots/models/item/beetle_chestplate.json
+4fa86a023aa610796e7acf4f2c7421e46eaae605 assets/roots/models/item/beetle_helmet.json
+17e53dae59bb9b1fbd95862f45a29d9d6ae2bf84 assets/roots/models/item/beetle_leggings.json
 45cab8f8d03c1a97148da1e55a8c6e9c3f4bff93 assets/roots/models/item/beetroot_salad.json
 5bee27a76eaab7d24cd6ff96cf33cfebede9500d assets/roots/models/item/birch_bark.json
 0eb853fdae829e14012b0e7b76e6faa4919067c6 assets/roots/models/item/cactus_dandelion_salad.json
@@ -647,6 +652,7 @@ d77dbd1c8e96a563295d6b7d09534aae105036c3 data/roots/advancements/recipes/misc/mo
 beb21d7c26a069bfc10b5f1425df0f4bc91a792e data/roots/advancements/recipes/misc/mortar/string_from_wool_4.json
 0533a0ebbd429f232f4f04e29ac7ea78667de950 data/roots/advancements/recipes/misc/mortar/string_from_wool_5.json
 4919f5b598bf7933d9579d92279cb757fa570d0c data/roots/advancements/recipes/misc/pelt_to_leather.json
+8cab10cf4c2b9f339dac61ca90f7b1f98c115ad5 data/roots/advancements/recipes/roots/antler_hat.json
 63be07fb51760103af2e9350b87edab66a3af11a data/roots/advancements/recipes/roots/apple_cordial.json
 18d50023b1ddc0d47057524508a7e71405aa3f66 data/roots/advancements/recipes/roots/aubergine_salad.json
 c4af91fca3634487aaa6f692df48bebb32d4e521 data/roots/advancements/recipes/roots/bark/acacia_log_stripping.json
@@ -669,6 +675,10 @@ aba14e5318daf1ffc82c3cb4602eb2a834eb8eb4 data/roots/advancements/recipes/roots/b
 4a61869850c751569547a40bd2d5f1f02428da8f data/roots/advancements/recipes/roots/bark/warped_stem_stripping.json
 a0fb000ab93df0067ea5c0c8f4b2e67b5b3d1631 data/roots/advancements/recipes/roots/bark/wildwood_log_stripping.json
 81dbf25d471109964728f0db8ba6abd04e3c02b1 data/roots/advancements/recipes/roots/bark/wildwood_wood_stripping.json
+cc499a1cb964ae423a63d42910b482d3bd1c1e95 data/roots/advancements/recipes/roots/beetle_boots.json
+59f9691c28b867e95e43f5d63dfbd493ba7d9d08 data/roots/advancements/recipes/roots/beetle_chestplate.json
+20c8cfb3f5459d71ab551677c271f53489273881 data/roots/advancements/recipes/roots/beetle_helmet.json
+5999a29e34aec5aafff5c8a165453249354b8ba0 data/roots/advancements/recipes/roots/beetle_leggings.json
 e7588a3a9f9b10597e37f864ef60f39d9014d99d data/roots/advancements/recipes/roots/beetroot_salad.json
 7bc5bf15434514ca75788a5b433dac8a708f25ae data/roots/advancements/recipes/roots/cactus_dandelion_salad.json
 f14f31431c1abe242e2ddfe9dd6ed13c5a15dd02 data/roots/advancements/recipes/roots/cactus_syrup.json
@@ -1005,6 +1015,7 @@ d179b5660b60196c5df1cffdbd97d09bed924bfe data/roots/loot_tables/entities/hell_sp
 19444923a8efa7ef44d0c53a197be92eccc8fdf7 data/roots/loot_tables/entities/red_sprout.json
 dc1031d4cbbd718a315c5c846ed2f641a2f3b2b2 data/roots/loot_tables/entities/tan_sprout.json
 9433cc677324ed76adca9c870e67a779a91717ef data/roots/recipes/antlers_to_bonemeal.json
+109aa7f4bf4674d62604a362b5da9d06d16e69f8 data/roots/recipes/antler_hat.json
 f3637c07025623a691a08150735bc5797fc5de17 data/roots/recipes/apple_cordial.json
 750e7f91340df84b47a0058dce3af2430ebf5032 data/roots/recipes/aubergine_salad.json
 aedd25682678ea5334faa8008bb96c1425cd40d6 data/roots/recipes/bark/acacia_log_stripping.json
@@ -1028,6 +1039,10 @@ cda33668633280930cebe15f1255a78aeebc25b0 data/roots/recipes/bark/warped_hyphae_s
 f98b93c7a856b97715ad0f01cf27e343fd961e99 data/roots/recipes/bark/warped_stem_stripping.json
 0292397e347af6b21770175f9f035a4b95ba03b4 data/roots/recipes/bark/wildwood_log_stripping.json
 bd778ea210a0d3bd7539e54dd61d6cf382b8318d data/roots/recipes/bark/wildwood_wood_stripping.json
+c8adb0c34d17fd537c4849ecc1e18612e0a58b0a data/roots/recipes/beetle_boots.json
+d7712679e1b9cf1aa6a045798501898bdc16a333 data/roots/recipes/beetle_chestplate.json
+9130a160084f371f25faaea2e412ab1c32c5f764 data/roots/recipes/beetle_helmet.json
+72f833df89da20264161c655b4c835f2dff3b11c data/roots/recipes/beetle_leggings.json
 1a4ad6ef801022b313e54e50207db82cfe2e1ff1 data/roots/recipes/beetroot_salad.json
 1a4e5ef66856d78f5716468c77f76d9a96c50eb7 data/roots/recipes/black_dye.json
 a7ae27c9a6d497dcab1124ce0f11350c4ea40ffa data/roots/recipes/blue_dye.json
@@ -1410,7 +1425,7 @@ ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/items/pyre_activation.j
 5e8d174a22c9bf1dd7d1019a40071769c7d50cfa data/roots/tags/items/runestone.json
 2fe8872727a472c144211297c79b1ccf369ca4bc data/roots/tags/items/runestone_herbs.json
 2d28353c96bcda78cf7c3a7781fdc6ee6ac8767f data/roots/tags/items/runic_shears.json
-796eb73b5978625ddc2b2cd8cb0a452d79c3743d data/roots/tags/items/seeds.json
+0fbe8b990b89cee1fa304141b2ab6fb47e3aab93 data/roots/tags/items/seeds.json
 98545c13dddf6574110e137626bb2822902a778d data/roots/tags/items/seeds/cloud_berry.json
 d018ba9ff0fd1ee26b58650998fe440e8fc1925d data/roots/tags/items/seeds/dewgonia.json
 ae4b947df62ce05faf6338b5cdf30aa99509bfef data/roots/tags/items/seeds/inferno_bulb.json

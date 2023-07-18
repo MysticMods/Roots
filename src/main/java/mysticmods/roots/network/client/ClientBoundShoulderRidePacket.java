@@ -3,7 +3,7 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
-import mysticmods.roots.capability.IPlayerShoulderCapability;
+import mysticmods.roots.api.capability.IPlayerShoulderCapability;
 import mysticmods.roots.capability.PlayerShoulderCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;

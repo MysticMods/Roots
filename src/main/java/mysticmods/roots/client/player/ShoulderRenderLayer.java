@@ -1,13 +1,13 @@
-package mysticmods.mysticalworld.client.player.layer;
+package mysticmods.roots.client.player;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.mysticalworld.api.Capabilities;
-import mysticmods.mysticalworld.api.IPlayerShoulderCapability;
-import mysticmods.mysticalworld.client.model.BeetleModel;
-import mysticmods.mysticalworld.client.model.ModelState;
-import mysticmods.mysticalworld.client.model.ShoulderRidingModel;
-import mysticmods.mysticalworld.init.ModEntities;
+import mysticmods.roots.api.capability.Capabilities;
+import mysticmods.roots.api.capability.IPlayerShoulderCapability;
+import mysticmods.roots.client.model.BeetleModel;
+import mysticmods.roots.client.model.ModelState;
+import mysticmods.roots.client.model.ShoulderRidingModel;
+import mysticmods.roots.init.ModEntities;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -35,8 +35,9 @@ public class ShoulderRenderLayer<T extends Player> extends RenderLayer<T, Player
     return null;
   }
 
+  @Override
   public void render(PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-    LazyOptional<IPlayerShoulderCapability> lazyCap = pLivingEntity.getCapability(Capabilities.PLAYER_SHOULDER);
+    LazyOptional<IPlayerShoulderCapability> lazyCap = pLivingEntity.getCapability(Capabilities.PLAYER_SHOULDER_CAPABILITY);
     if (!lazyCap.isPresent()) {
       return;
     }
