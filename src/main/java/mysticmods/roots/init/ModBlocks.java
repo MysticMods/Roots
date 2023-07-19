@@ -834,6 +834,7 @@ public class ModBlocks {
     .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
     .register();
   public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LEAVES);
+  // TODO: AT this?
   private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
   // TODO: Leaves additionally drop wildroot
   public static BlockEntry<Block> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", Block::new)
@@ -907,6 +908,7 @@ public class ModBlocks {
   public static BlockEntry<BaseBlocks.DoorBlock> WILDWOOD_DOOR = REGISTRATE.block("wildwood_door", BaseBlocks.DoorBlock::new)
     .properties(WILDWOOD_PLANKS_PROPERTIES)
     .recipe((ctx, p) -> p.door(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_DOOR, null))
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createDoorTable(t)))
     .blockstate((ctx, p) -> p.doorBlock(ctx.getEntry(), "wildwood", p.modLoc("block/wildwood_door_bottom"), p.modLoc("block/wildwood_door_top")))
     .item()
     .model((ctx, p) -> p.generated(ctx::getEntry, p.modLoc("item/" + p.name(ctx::getEntry))))

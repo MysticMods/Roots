@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-19T13:52:54.2230934	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-19T13:59:52.7419754	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1036,7 +1036,7 @@ f68bb5c26aace0906b813e01f5f62458f65ad3e8 data/roots/loot_tables/blocks/terran_so
 92396efe95dabd4c5881387b0630d2bfe734c3e2 data/roots/loot_tables/blocks/wildewheet_crop.json
 fe53e40283f517be6e94c770277c46f89efb2750 data/roots/loot_tables/blocks/wildroot_crop.json
 4eb9d9b2efecdf68f038d89649ce44e74df6e4c7 data/roots/loot_tables/blocks/wildwood_button.json
-cb6b3f0e61298748899528fb236bbfe22e069555 data/roots/loot_tables/blocks/wildwood_door.json
+2c9c36f42240509b708a329f805a2bf0f85c93d3 data/roots/loot_tables/blocks/wildwood_door.json
 c7fb1375a3266ee72d842a76e1f0941a83613775 data/roots/loot_tables/blocks/wildwood_fence.json
 3c15599162e9572ba351e4c29afbf532979fd7fd data/roots/loot_tables/blocks/wildwood_gate.json
 18af4499c2e1838ffc9c389ba3954af278882c7e data/roots/loot_tables/blocks/wildwood_leaves.json
