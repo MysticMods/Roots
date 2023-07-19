@@ -24,7 +24,12 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
@@ -33,6 +38,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.Set;
 
 public class ModFeatures {
@@ -62,6 +68,14 @@ public class ModFeatures {
   private static final RegistryObject<ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE = CONFIGURED_FEATURES.register("wild_aubergine", () -> new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_AUBERGINE.getDefaultState()))));
 
   private static final RegistryObject<ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE_PATCH = CONFIGURED_FEATURES.register("wild_aubergine_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(20, 3, 2, ModFeatures.WILD_AUBERGINE.getHolder().get())));
+
+   private static TreeConfiguration.TreeConfigurationBuilder createWildwood() {
+      return (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(ModBlocks.WILDWOOD_LOG.get()), new FancyTrunkPlacer(6, 11, 0), BlockStateProvider.simple(ModBlocks.WILDWOOD_LEAVES.get()), new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines();
+   }
+
+  public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WILDWOOD_TREE = CONFIGURED_FEATURES.register("wildwood_tree", () -> new ConfiguredFeature<>(Feature.TREE, createWildwood().build()));
+
+   public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WILDWOOD_TREE_BEES = CONFIGURED_FEATURES.register("wildwood_tree_bees", () -> new ConfiguredFeature<>(Feature.TREE, createWildwood().decorators(List.of(new BeehiveDecorator(1.0F))).build()));
 
   // Place features
   public static RegistryObject<PlacedFeature> WILD_ROOTS_UNDERGROUND_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_underground", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(

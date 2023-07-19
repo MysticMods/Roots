@@ -43,7 +43,9 @@ public class ClientSetup {
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_AUBERGINE.get(), cutout);
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_BAFFLECAP.get(), cutout);
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_STONEPETAL.get(), cutout);
+      ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), cutout);
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.STONEPETAL.get(), cutout);
+      ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_SAPLING.get(), cutout);
       RenderType translucent = RenderType.translucent();
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_DOOR.get(), translucent);
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_TRAPDOOR.get(), translucent);

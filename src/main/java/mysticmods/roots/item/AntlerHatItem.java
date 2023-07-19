@@ -69,21 +69,6 @@ public class AntlerHatItem extends ModifiedArmorItem {
   @Nullable
   @Override
   public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-    return RootsAPI.MODID + ":textures/model/armor/antler_hat.png";
-  }
-
-  @Override
-  public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-    consumer.accept(new IClientItemExtensions() {
-      @Override
-      public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-        HumanoidModel<?> result = ArmorModel.getModel(itemStack);
-        if (result == null) {
-          return original;
-        }
-
-        return result;
-      }
-    });
+    return RootsAPI.MODID + ":textures/models/armor/antler_hat.png";
   }
 }

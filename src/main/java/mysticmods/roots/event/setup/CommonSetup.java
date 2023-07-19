@@ -37,6 +37,7 @@ public class CommonSetup {
       FlowerPotBlock FLOWER_POT = (FlowerPotBlock) Blocks.FLOWER_POT;
       FLOWER_POT.addPlant(ModBlocks.STONEPETAL.getId(), ModBlocks.POTTED_STONEPETAL);
       FLOWER_POT.addPlant(ModBlocks.BAFFLECAP.getId(), ModBlocks.POTTED_BAFFLECAP);
+      FLOWER_POT.addPlant(ModBlocks.WILDWOOD_SAPLING.getId(), ModBlocks.POTTED_WILDWOOD_SAPLING);
 
       // TODO: Flammability
       Advancements.init();

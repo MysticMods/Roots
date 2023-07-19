@@ -17,6 +17,7 @@ import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.block.crop.WaterElementalCropBlock;
 import mysticmods.roots.recipe.grove.GroveRecipe;
+import mysticmods.roots.worldgen.trees.WildwoodTreeGrower;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -38,6 +39,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
@@ -832,8 +834,10 @@ public class ModBlocks {
     .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
     .register();
   public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LEAVES);
+  private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
   public static BlockEntry<Block> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", Block::new)
     .properties(WILDWOOD_LEAVES_PROPERTIES)
+    .loot((p, ctx) -> p.add(ctx, p.createLeavesDrops(ctx, ModBlocks.WILDWOOD_SAPLING.get(),  NORMAL_LEAVES_SAPLING_CHANCES)))
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -917,6 +921,25 @@ public class ModBlocks {
     .model(ItemModelGenerator::generated)
     .build()
     .tag(BlockTags.TRAPDOORS, BlockTags.WOODEN_TRAPDOORS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+
+  public static BlockEntry<SaplingBlock> WILDWOOD_SAPLING = REGISTRATE.block("wildwood_sapling", (p) -> new SaplingBlock(new WildwoodTreeGrower(), p))
+    .properties(o -> BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING))
+    .blockstate((ctx, p) -> {
+      ModelFile crop = p.models().getExistingFile(new ResourceLocation("minecraft", "block/cross"));
+      p.getVariantBuilder(ctx.getEntry())
+        .forAllStates(state -> {
+          ModelFile stage = p.models().getBuilder("block/wildwood_sapling")
+            .parent(crop)
+            .texture("cross", p.modLoc("block/wildwood_sapling"));
+          return ConfiguredModel.builder().modelFile(stage).build();
+        });
+    })
+    .item()
+    .tag(ItemTags.SAPLINGS)
+    .model(ItemModelGenerator::generated)
+    .build()
+    .tag(BlockTags.SAPLINGS)
     .register();
 
   // FUNCTIONAL BLOCKS BEGIN HERE
@@ -1036,6 +1059,12 @@ public class ModBlocks {
   public static BlockEntry<FlowerPotBlock> POTTED_STONEPETAL = REGISTRATE.block("potted_stonepetal", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.STONEPETAL, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
     .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/stonepetal"))))
     .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.STONEPETAL.get())))
+    .tag(BlockTags.FLOWER_POTS)
+    .register();
+
+  public static BlockEntry<FlowerPotBlock> POTTED_WILDWOOD_SAPLING = REGISTRATE.block("potted_wildwood_spaling", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.WILDWOOD_SAPLING, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
+    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/wildwood_sapling"))))
+    .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get())))
     .tag(BlockTags.FLOWER_POTS)
     .register();
 

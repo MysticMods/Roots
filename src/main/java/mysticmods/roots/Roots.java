@@ -43,9 +43,9 @@ import javax.annotation.Nullable;
 public class Roots {
   public static CustomRegistrate REGISTRATE;
 
-  public static RootsArmorMaterial ANTLER_MATERIAL = new RootsArmorMaterial("antlers", 7, new int[]{3, 0, 0, 0}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 1f, 0f, () -> Ingredient.of(ModItems.ANTLERS.get()));
-  public static RootsArmorMaterial CARAPACE_MATERIAL = new RootsArmorMaterial("carapace", 25, new int[]{2, 5, 6, 2}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(ModItems.CARAPACE.get()));
-  public static RootsArmorMaterial COPPER_MATERIAL = new RootsArmorMaterial("copper", 15, new int[]{2, 5, 6, 2}, 7, SoundEvents.ARMOR_EQUIP_IRON, 0.0f, 0.0f, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
+  public static RootsArmorMaterial ANTLER_MATERIAL = new RootsArmorMaterial("roots:antlers", 7, new int[]{3, 0, 0, 0}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 1f, 0f, () -> Ingredient.of(ModItems.ANTLERS.get()));
+  public static RootsArmorMaterial CARAPACE_MATERIAL = new RootsArmorMaterial("roots:carapace", 25, new int[]{2, 5, 6, 2}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(ModItems.CARAPACE.get()));
+  public static RootsArmorMaterial COPPER_MATERIAL = new RootsArmorMaterial("roots:copper", 15, new int[]{2, 5, 6, 2}, 7, SoundEvents.ARMOR_EQUIP_IRON, 0.0f, 0.0f, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
   public static final RecipeGenerator RECIPES = new RecipeGenerator(RootsAPI.MODID);
 
   public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(RootsAPI.MODID) {
