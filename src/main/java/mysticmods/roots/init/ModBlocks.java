@@ -835,6 +835,7 @@ public class ModBlocks {
     .register();
   public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LEAVES);
   private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
+  // TODO: Leaves additionally drop wildroot
   public static BlockEntry<Block> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", Block::new)
     .properties(WILDWOOD_LEAVES_PROPERTIES)
     .loot((p, ctx) -> p.add(ctx, p.createLeavesDrops(ctx, ModBlocks.WILDWOOD_SAPLING.get(),  NORMAL_LEAVES_SAPLING_CHANCES)))
