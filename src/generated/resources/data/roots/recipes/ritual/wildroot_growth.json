@@ -1,0 +1,24 @@
+{
+  "type": "roots:pyre",
+  "ingredients": [
+    {
+      "tag": "roots:crops/wildroot"
+    },
+    {
+      "tag": "roots:barks"
+    },
+    {
+      "tag": "roots:barks"
+    },
+    {
+      "tag": "roots:crops/spiritleaf"
+    },
+    {
+      "tag": "minecraft:saplings"
+    }
+  ],
+  "level_conditions": [
+    "roots:mature_wildroot_crop"
+  ],
+  "ritual": "roots:wildroot_growth"
+}

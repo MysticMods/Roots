@@ -35,5 +35,7 @@ public class ResolvedRecipes {
     event.addListener(MORTAR);
     event.addListener(PYRE);
     event.addListener(BARK);
+    event.addListener(RUNIC_BLOCK);
+    event.addListener(RUNIC_ENTITY);
   }
 }

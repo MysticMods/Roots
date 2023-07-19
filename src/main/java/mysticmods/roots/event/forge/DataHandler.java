@@ -1,10 +1,10 @@
 package mysticmods.roots.event.forge;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.gen.listener.ModifierCostReloadListener;
-import mysticmods.roots.gen.listener.RitualPropertyReloadListener;
-import mysticmods.roots.gen.listener.SpellCostReloadListener;
-import mysticmods.roots.gen.listener.SpellPropertyReloadListener;
+import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.gen.listener.*;
 import mysticmods.roots.network.Networking;
 import mysticmods.roots.network.client.*;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -21,10 +21,20 @@ public class DataHandler {
     event.addListener(SpellPropertyReloadListener.getInstance());
     event.addListener(SpellCostReloadListener.getInstance());
     event.addListener(ModifierCostReloadListener.getInstance());
+    event.addListener(new InitializeReloadListener());
+  }
+  public static void init () {
+    for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {
+      ritual.init();
+    }
+    for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
+      spell.init();
+    }
   }
 
   @SubscribeEvent
   public static void onDataReloaded(OnDatapackSyncEvent event) {
+    init();
     if (event.getPlayer() != null) {
       Networking.sendTo(new ClientBoundRitualPropertyPacket(), event.getPlayer());
       Networking.sendTo(new ClientBoundSpellPropertyPacket(), event.getPlayer());

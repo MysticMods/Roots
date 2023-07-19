@@ -31,7 +31,7 @@ import noobanidus.libs.noobutil.ingredient.ExcludingIngredient;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
-@Mod.EventBusSubscriber(modid=RootsAPI.MODID, bus=Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModRecipes {
   private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, RootsAPI.MODID);
   public static RegistryObject<RecipeType<PyreRecipe>> PYRE = TYPES.register("pyre", () -> new RecipeType<>() {
@@ -96,6 +96,16 @@ public class ModRecipes {
         .addIngredient(Items.BREAD)
         .unlockedBy("has_door", p.has(ItemTags.DOORS))
         .save(p, new ResourceLocation(RootsAPI.MODID, "ritual/grove_supplication"));
+      PyreRecipe
+        .builder(ModRituals.WILDROOT_GROWTH.get())
+        .addIngredient(RootsTags.Items.WILDROOT_CROP)
+        .addIngredient(RootsTags.Items.BARKS)
+        .addIngredient(RootsTags.Items.BARKS)
+        .addIngredient(RootsTags.Items.SPIRITLEAF_CROP)
+        .addIngredient(ItemTags.SAPLINGS)
+        .unlockedBy("has_spiritleaf", p.has(RootsTags.Items.SPIRITLEAF))
+        .addLevelCondition(ModConditions.MATURE_WILDROOT_CROP.get())
+        .save(p, new ResourceLocation(RootsAPI.MODID, "ritual/wildroot_growth"));
       MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsTags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.Type.SPELL, Spells.GROWTH_INFUSION.location())).unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP)).save(p, new ResourceLocation(RootsAPI.MODID, "spell/growth_infusion"));
       MortarRecipe
         .multiBuilder(ModItems.FLOUR.get(), 2)

@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-19T13:59:52.7419754	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-07-19T14:57:48.6645528	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -818,6 +818,7 @@ a054c92f43b683e542e8fb9a57504fcf6ff15983 data/roots/advancements/recipes/roots/r
 a09da0a38599ab86df82d22017d04cc78dd17d3d data/roots/advancements/recipes/roots/reinforced_pyre_from_pyre.json
 b88e3607c0c638cf80a33dba18dd743dd11e4d49 data/roots/advancements/recipes/roots/ritual/animal_harvest.json
 aa259a622fc8e7cb3055baf100fe9d9370dd57f9 data/roots/advancements/recipes/roots/ritual/grove_supplication.json
+d50dce1f6212112ee13cd5643cf76089771f0e31 data/roots/advancements/recipes/roots/ritual/wildroot_growth.json
 b30acd3440c80f7e8f8e1b01a561994cbc819386 data/roots/advancements/recipes/roots/rose_cordial.json
 d318db629e6833f224c0c1dfdd8a1c73f76c4ff4 data/roots/advancements/recipes/roots/runed_brick_alt_button.json
 134b0b017c437d3e3d4a975fbc6152ff6451e9e9 data/roots/advancements/recipes/roots/runed_brick_alt_button_from_runed_obsidian_brick_alt_stonecutting.json
@@ -1215,6 +1216,7 @@ ff150ea662b00b38522da1055e32265e74787ca5 data/roots/recipes/primal_grove_stone.j
 7a51e8290b07e2bd44b9c67f55d46cc1b97dbf55 data/roots/recipes/reinforced_pyre_from_pyre.json
 dfd1c08fb753a5e0fc6a460504c1b2e2854593f0 data/roots/recipes/ritual/animal_harvest.json
 032e130eb0b217e9ee828f44d181fc86dc3d9e69 data/roots/recipes/ritual/grove_supplication.json
+8052f6a925dadd4dae829b37bf59d6bb9b49d2fc data/roots/recipes/ritual/wildroot_growth.json
 b5f498b6c752e550082f9e7ef63ffb5ad6e82e95 data/roots/recipes/rose_cordial.json
 2fad0bd71a21380353d6eaac3f41f479c4871310 data/roots/recipes/runed_brick_alt_button.json
 25f784ae152aa29c7cd296bbc3ad1ab65f340327 data/roots/recipes/runed_brick_alt_button_from_runed_obsidian_brick_alt_stonecutting.json

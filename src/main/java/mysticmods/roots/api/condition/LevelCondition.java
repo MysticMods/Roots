@@ -5,6 +5,7 @@ import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -59,6 +60,23 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
   @FunctionalInterface
   public interface Type {
     Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player);
+  }
+
+  public static class BlockStatePropertyCondition implements Type {
+    private final BlockPropertyMatchTest test;
+
+    public BlockStatePropertyCondition(BlockPropertyMatchTest test) {
+      this.test = test;
+    }
+
+    @Override
+    public Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player) {
+      if (test.test(level.getBlockState(pos), level.getRandom())) {
+        return Collections.singleton(pos.immutable());
+      }
+
+      return Collections.emptySet();
+    }
   }
 
   public static class PillarCondition implements Type {
