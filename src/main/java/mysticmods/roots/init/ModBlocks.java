@@ -837,7 +837,7 @@ public class ModBlocks {
   // TODO: AT this?
   private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
   // TODO: Leaves additionally drop wildroot
-  public static BlockEntry<Block> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", Block::new)
+  public static BlockEntry<LeavesBlock> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", LeavesBlock::new)
     .properties(WILDWOOD_LEAVES_PROPERTIES)
     .loot((p, ctx) -> p.add(ctx, p.createLeavesDrops(ctx, ModBlocks.WILDWOOD_SAPLING.get(),  NORMAL_LEAVES_SAPLING_CHANCES)))
     .item()
