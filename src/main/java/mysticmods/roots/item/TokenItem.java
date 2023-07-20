@@ -8,14 +8,12 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
+import mysticmods.roots.init.ModItems;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +26,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import noobanidus.libs.noobutil.util.EnumUtil;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -64,7 +62,7 @@ public class TokenItem extends Item {
       switch (type) {
         case MODIFIER -> {
           // Spell modifier
-          Modifier modifier = getModifier(pStack);
+          Modifier modifier = getSingleModifier(pStack);
           if (modifier != null) {
             return modifier.getDescriptionId();
           }
@@ -125,7 +123,7 @@ public class TokenItem extends Item {
         }
       }
       case MODIFIER -> {
-        Modifier modifier = getModifier(stack);
+        Modifier modifier = getSingleModifier(stack);
         if (modifier != null) {
           cap.grantModifier(modifier);
           result = InteractionResultHolder.success(stack);
@@ -168,7 +166,7 @@ public class TokenItem extends Item {
         }
       }
       case MODIFIER -> {
-        Modifier modifier = getModifier(pStack);
+        Modifier modifier = getSingleModifier(pStack);
         if (modifier != null) {
           pTooltipComponents.add(Component.translatable("roots.tooltip.token.modifier", modifier.getName()));
           pTooltipComponents.add(Component.translatable("roots.tooltip.token.spell", modifier.getSpell().getStyledName()));
@@ -182,10 +180,6 @@ public class TokenItem extends Item {
         if (spell != null) {
           //pTooltipComponents.add(Component.translatable("roots.tooltip.token.staff", spell.getName()));
         }
-      }
-      case STAFF_MODIFIER -> {
-      }
-      case LIBRARY -> {
       }
       case RITUAL -> {
         Ritual ritual = getRitual(pStack);
@@ -205,29 +199,21 @@ public class TokenItem extends Item {
     }
   }
 
+  protected ItemStack t () {
+    return new ItemStack(this);
+  }
+
   @Override
   public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
     if (this.allowedIn(pCategory)) {
-      for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
-        ItemStack thisStack = new ItemStack(this);
-        setSpell(thisStack, spell);
-        pItems.add(thisStack);
-      }
-      for (Modifier modifier : Registries.MODIFIER_REGISTRY.get().getValues()) {
-        ItemStack thisStack = new ItemStack(this);
-        setModifier(thisStack, modifier);
-        pItems.add(thisStack);
-      }
-      for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {
-        ItemStack thisStack = new ItemStack(this);
-        setRitual(thisStack, ritual);
-        pItems.add(thisStack);
-      }
+      Registries.SPELL_REGISTRY.get().forEach(o -> pItems.add(setSpell(t(), o)));
+      Registries.MODIFIER_REGISTRY.get().forEach(o -> pItems.add(setSingleModifier(t(), o)));
+      Registries.RITUAL_REGISTRY.get().forEach(o -> pItems.add(setRitual(t(), o)));
     }
   }
 
   @Nullable
-  public Type getType(ItemStack stack) {
+  public static Type getType(ItemStack stack) {
     CompoundTag tag = stack.getTag();
     if (tag == null) {
       return null;
@@ -237,7 +223,7 @@ public class TokenItem extends Item {
   }
 
   @Nullable
-  public Spell getSpell(ItemStack stack) {
+  public static Spell getSpell(ItemStack stack) {
     CompoundTag tag = stack.getTag();
     if (tag == null) {
       return null;
@@ -246,14 +232,15 @@ public class TokenItem extends Item {
     return Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell")));
   }
 
-  public void setSpell(ItemStack stack, Spell spell) {
+  public static ItemStack setSpell(ItemStack stack, Spell spell) {
     CompoundTag tag = stack.getOrCreateTag();
     tag.putString("type", Type.SPELL.name().toLowerCase(Locale.ROOT));
     tag.putString("spell", Registries.SPELL_REGISTRY.get().getKey(spell).toString());
+    return stack;
   }
 
   @Nullable
-  public Modifier getModifier(ItemStack stack) {
+  public static Modifier getSingleModifier(ItemStack stack) {
     CompoundTag tag = stack.getTag();
     if (tag == null) {
       return null;
@@ -262,41 +249,55 @@ public class TokenItem extends Item {
     return Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(tag.getString("modifier")));
   }
 
-  public void setModifier(ItemStack stack, Modifier modifier) {
-    CompoundTag tag = stack.getOrCreateTag();
-    tag.putString("type", Type.MODIFIER.name().toLowerCase(Locale.ROOT));
-    tag.putString("modifier", Registries.MODIFIER_REGISTRY.get().getKey(modifier).toString());
-  }
-
   @Nullable
-  public LibraryInfo getLibraryInfo(ItemStack stack) {
-    CompoundTag tag = stack.getTag();
-    if (tag == null) {
+  public static Set<Modifier> getModifiers (ItemStack stack) {
+    SpellInstance spellInstance = getSpellInstance(stack);
+    if (spellInstance == null) {
       return null;
     }
 
-    Spell spell = Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell")));
-    Set<Modifier> modifiers = new HashSet<>();
-    for (Tag iTag : tag.getList("modifiers", Tag.TAG_STRING)) {
-      modifiers.add(Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(iTag.getAsString())));
-    }
-
-    return new LibraryInfo(spell, modifiers);
+    return spellInstance.getEnabledModifiers();
   }
 
-  public void setLibraryInfo(ItemStack stack, Spell spell, Set<Modifier> modifiers) {
+  public static ItemStack setSingleModifier(ItemStack stack, Modifier modifier) {
     CompoundTag tag = stack.getOrCreateTag();
-    tag.putString("type", Type.LIBRARY.name().toLowerCase(Locale.ROOT));
-    tag.putString("spell", Registries.SPELL_REGISTRY.get().getKey(spell).toString());
-    ListTag modifiersTag = new ListTag();
-    for (Modifier modifier : modifiers) {
-      modifiersTag.add(StringTag.valueOf(Registries.MODIFIER_REGISTRY.get().getKey(modifier).toString()));
-    }
-    tag.put("modifiers", modifiersTag);
+    tag.putString("type", Type.MODIFIER.name().toLowerCase(Locale.ROOT));
+    tag.putString("modifier", Registries.MODIFIER_REGISTRY.get().getKey(modifier).toString());
+    return stack;
   }
+
+  public static boolean enableModifier (ItemStack stack, Modifier modifier) {
+    SpellInstance spellInstance = getSpellInstance(stack);
+    if (spellInstance == null) {
+      return false;
+    }
+    Spell spell = spellInstance.getSpell();
+    if (modifier.getSpell() != spell) {
+      return false;
+    }
+    spellInstance.addModifier(modifier);
+    setSpellInstance(stack, spellInstance);
+    return true;
+  }
+
+  public static boolean disableModifier (ItemStack stack, Modifier modifier) {
+    SpellInstance spellInstance = getSpellInstance(stack);
+    if (spellInstance == null) {
+      return false;
+    }
+    Spell spell = spellInstance.getSpell();
+    if (modifier.getSpell() != spell) {
+      return false;
+    }
+    spellInstance.removeModifier(modifier);
+    setSpellInstance(stack, spellInstance);
+    return true;
+  }
+
+
 
   @Nullable
-  public SpellInstance getSpellInstance(ItemStack stack) {
+  public static SpellInstance getSpellInstance(ItemStack stack) {
     CompoundTag tag = stack.getTag();
     if (tag == null) {
       return null;
@@ -305,44 +306,21 @@ public class TokenItem extends Item {
     return SpellInstance.fromNBT(tag);
   }
 
-  public void setSpellInstance(ItemStack stack, SpellInstance instance) {
+  public static void setSpellInstance(ItemStack stack, SpellInstance instance) {
     CompoundTag tag = stack.getOrCreateTag();
     instance.toNBT(tag);
     tag.putString("type", Type.STAFF.name().toLowerCase(Locale.ROOT));
   }
 
-  @Nullable
-  public StaffModifier getStaffModifier(ItemStack stack) {
-    CompoundTag tag = stack.getTag();
-    if (tag == null) {
-      return null;
-    }
-
-    Spell spell = getSpell(stack);
-    Modifier modifier = getModifier(stack);
-    if (spell == null || modifier == null) {
-      return null;
-    }
-
-    return new StaffModifier(spell, modifier, tag.getBoolean("enabled"));
-  }
-
-  public void setStaffModifier(ItemStack stack, Spell spell, Modifier modifier, boolean enabled) {
-    CompoundTag tag = stack.getOrCreateTag();
-    tag.putString("type", Type.STAFF_MODIFIER.name().toLowerCase(Locale.ROOT));
-    tag.putString("spell", Registries.SPELL_REGISTRY.get().getKey(spell).toString());
-    tag.putString("modifier", Registries.MODIFIER_REGISTRY.get().getKey(modifier).toString());
-    tag.putBoolean("enabled", enabled);
-  }
-
-  public void setRitual(ItemStack stack, Ritual ritual) {
+  public static ItemStack setRitual(ItemStack stack, Ritual ritual) {
     CompoundTag tag = stack.getOrCreateTag();
     tag.putString("type", Type.RITUAL.name().toLowerCase(Locale.ROOT));
     tag.putString("ritual", Registries.RITUAL_REGISTRY.get().getKey(ritual).toString());
+    return stack;
   }
 
   @Nullable
-  public Ritual getRitual(ItemStack stack) {
+  public static Ritual getRitual(ItemStack stack) {
     CompoundTag tag = stack.getTag();
     if (tag == null) {
       return null;
@@ -354,9 +332,7 @@ public class TokenItem extends Item {
   public enum Type {
     SPELL(true), // Spell
     MODIFIER(true), // Modifier
-    LIBRARY(false), // Spell + all available modifiers
     STAFF(false), // SpellInstance
-    STAFF_MODIFIER(false),
     RITUAL(false); // Spell + Modifier and a boolean
 
     private final boolean grantable;
@@ -370,9 +346,57 @@ public class TokenItem extends Item {
     }
   }
 
-  public record StaffModifier(Spell spell, Modifier modifier, boolean enabled) {
+  public static boolean isGranted (Player player, ItemStack stack) {
+    CompoundTag tag = stack.getTag();
+    if (tag == null || !tag.contains("type", Tag.TAG_STRING)) {
+      return false;
+    }
+    Type type = EnumUtil.fromString(Type.class, tag.getString("type"));
+    if (type.isGrantable()) {
+      return false;
+    }
+    GrantCapability cap = player.getCapability(Capabilities.GRANT_CAPABILITY).orElseThrow(NullPointerException::new);
+    if (type == Type.SPELL) {
+      return cap.hasSpell(Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell"))));
+    } else if (type == Type.MODIFIER) {
+      return cap.hasModifier(Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(tag.getString("modifier"))));
+    } else {
+      // TODO: Throw here?
+      return false;
+    }
   }
 
-  public record LibraryInfo(Spell spell, Set<Modifier> modifiers) {
+  protected static ItemStack T () {
+    return new ItemStack(ModItems.TOKEN.get());
+  }
+
+  public static ItemStack getSpellToken (Spell spell) {
+    return setSpell(T(), spell);
+  }
+
+  public static ItemStack getModifierToken (Modifier modifier) {
+    return setSingleModifier(T(), modifier);
+  }
+
+  public static ItemStack getRitualToken (Ritual ritual) {
+    return setRitual(T(), ritual);
+  }
+
+  public static List<ItemStack> getSpells () {
+    List<ItemStack> stack = new ArrayList<>();
+    for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
+      stack.add(getSpellToken(spell));
+    }
+    return stack;
+  }
+
+  public static List<ItemStack> getModifiers (Spell spell) {
+    List<ItemStack> stack = new ArrayList<>();
+    for (Modifier modifier : Registries.MODIFIER_REGISTRY.get().getValues()) {
+      if (modifier.getSpell() == spell) {
+        stack.add(getModifierToken(modifier));
+      }
+    }
+    return stack;
   }
 }
