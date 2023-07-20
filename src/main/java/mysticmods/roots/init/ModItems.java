@@ -11,6 +11,8 @@ import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.recipe.WorldRecipe;
+import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.copper.CopperArmorItem;
 import mysticmods.roots.item.living.*;
@@ -37,6 +39,7 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.data.generator.ItemGenerator;
@@ -874,11 +877,6 @@ public class ModItems {
     .model(subfolder("resources"))
     .register();
 
-  public static final ItemEntry<TokenItem> TOKEN = REGISTRATE.item("token", TokenItem::new)
-    .model((ctx, p) -> {
-    })
-    .register();
-
   public static RegistryEntry<AntlerHatItem> ANTLER_HAT = REGISTRATE.item("antler_hat", AntlerHatItem::new)
     .properties(o -> o.durability(399).rarity(Rarity.RARE))
     .recipe((o, p) -> ShapedRecipeBuilder.shaped(o.getEntry(), 1)
@@ -1041,6 +1039,19 @@ public class ModItems {
     .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
     .model(ModItems::spawnEggModel)
     .register();
+
+  public static final ItemEntry<TokenItem> TOKEN = REGISTRATE.item("token", TokenItem::new)
+    .model((ctx, p) -> {
+      ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
+      for (ResourceLocation ritual : Registries.RITUAL_REGISTRY.get().getKeys()) {
+        p.getBuilder("ritual_" + ritual.getPath()).parent(generated).texture("layer0", p.modLoc("item/rituals/" + ritual.getPath()));
+      }
+      for (ResourceLocation spell : Registries.SPELL_REGISTRY.get().getKeys()) {
+        p.getBuilder("spell_" + spell.getPath()).parent(generated).texture("layer0", p.modLoc("item/spells/" + spell.getPath()));
+      }
+    })
+    .register();
+
 
   public static void load() {
   }

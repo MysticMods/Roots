@@ -199,7 +199,7 @@ public class TokenItem extends Item {
     }
   }
 
-  protected ItemStack t () {
+  protected ItemStack t() {
     return new ItemStack(this);
   }
 
@@ -250,7 +250,7 @@ public class TokenItem extends Item {
   }
 
   @Nullable
-  public static Set<Modifier> getModifiers (ItemStack stack) {
+  public static Set<Modifier> getModifiers(ItemStack stack) {
     SpellInstance spellInstance = getSpellInstance(stack);
     if (spellInstance == null) {
       return null;
@@ -266,7 +266,7 @@ public class TokenItem extends Item {
     return stack;
   }
 
-  public static boolean enableModifier (ItemStack stack, Modifier modifier) {
+  public static boolean enableModifier(ItemStack stack, Modifier modifier) {
     SpellInstance spellInstance = getSpellInstance(stack);
     if (spellInstance == null) {
       return false;
@@ -280,7 +280,7 @@ public class TokenItem extends Item {
     return true;
   }
 
-  public static boolean disableModifier (ItemStack stack, Modifier modifier) {
+  public static boolean disableModifier(ItemStack stack, Modifier modifier) {
     SpellInstance spellInstance = getSpellInstance(stack);
     if (spellInstance == null) {
       return false;
@@ -293,7 +293,6 @@ public class TokenItem extends Item {
     setSpellInstance(stack, spellInstance);
     return true;
   }
-
 
 
   @Nullable
@@ -346,7 +345,7 @@ public class TokenItem extends Item {
     }
   }
 
-  public static boolean isGranted (Player player, ItemStack stack) {
+  public static boolean isGranted(Player player, ItemStack stack) {
     CompoundTag tag = stack.getTag();
     if (tag == null || !tag.contains("type", Tag.TAG_STRING)) {
       return false;
@@ -366,23 +365,51 @@ public class TokenItem extends Item {
     }
   }
 
-  protected static ItemStack T () {
+  public static final ResourceLocation INVALID_MODEL = new ResourceLocation(RootsAPI.MODID, "invalid");
+
+  public static ResourceLocation getModelLocation(ItemStack stack) {
+    CompoundTag tag = stack.getOrCreateTag();
+    Type type = EnumUtil.fromString(Type.class, tag.getString("type"));
+    if (type == null) {
+      return INVALID_MODEL;
+    }
+
+    switch (type) {
+      case RITUAL -> {
+        ResourceLocation ritual = new ResourceLocation(tag.getString("ritual"));
+        return new ResourceLocation(ritual.getNamespace(), "item/ritual_" + ritual.getPath());
+      }
+      case SPELL -> {
+        ResourceLocation spell = new ResourceLocation(tag.getString("spell"));
+        return new ResourceLocation(spell.getNamespace(), "item/spell_" + spell.getPath());
+      }
+      case MODIFIER -> {
+        ResourceLocation modifier = new ResourceLocation(tag.getString("modifier"));
+        return new ResourceLocation(modifier.getNamespace(), "item/modifier_" + modifier.getPath());
+      }
+      default -> {
+        return INVALID_MODEL;
+      }
+    }
+  }
+
+  protected static ItemStack T() {
     return new ItemStack(ModItems.TOKEN.get());
   }
 
-  public static ItemStack getSpellToken (Spell spell) {
+  public static ItemStack getSpellToken(Spell spell) {
     return setSpell(T(), spell);
   }
 
-  public static ItemStack getModifierToken (Modifier modifier) {
+  public static ItemStack getModifierToken(Modifier modifier) {
     return setSingleModifier(T(), modifier);
   }
 
-  public static ItemStack getRitualToken (Ritual ritual) {
+  public static ItemStack getRitualToken(Ritual ritual) {
     return setRitual(T(), ritual);
   }
 
-  public static List<ItemStack> getSpells () {
+  public static List<ItemStack> getSpells() {
     List<ItemStack> stack = new ArrayList<>();
     for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
       stack.add(getSpellToken(spell));
@@ -390,7 +417,7 @@ public class TokenItem extends Item {
     return stack;
   }
 
-  public static List<ItemStack> getModifiers (Spell spell) {
+  public static List<ItemStack> getModifiers(Spell spell) {
     List<ItemStack> stack = new ArrayList<>();
     for (Modifier modifier : Registries.MODIFIER_REGISTRY.get().getValues()) {
       if (modifier.getSpell() == spell) {
