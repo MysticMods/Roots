@@ -1,4 +1,4 @@
-package mysticmods.roots.gen.listener;
+package mysticmods.roots.data.listener;
 
 import mysticmods.roots.event.forge.DataHandler;
 import net.minecraft.server.packs.resources.ResourceManager;
