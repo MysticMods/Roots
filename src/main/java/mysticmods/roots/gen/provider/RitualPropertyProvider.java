@@ -7,7 +7,6 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.gen.BaseProvider;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 
 import java.nio.file.Path;

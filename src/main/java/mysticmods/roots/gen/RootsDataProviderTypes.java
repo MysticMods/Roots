@@ -1,8 +1,6 @@
 package mysticmods.roots.gen;
 
 import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.RegistrateTagsProvider;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;

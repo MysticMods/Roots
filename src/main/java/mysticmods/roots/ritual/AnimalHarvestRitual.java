@@ -2,7 +2,6 @@ package mysticmods.roots.ritual;
 
 import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.ritual.Ritual;

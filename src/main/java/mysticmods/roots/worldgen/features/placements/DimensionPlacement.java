@@ -14,7 +14,6 @@ import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementFilter;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 

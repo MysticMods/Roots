@@ -3,8 +3,6 @@ package mysticmods.roots.api.capability;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;

@@ -1,6 +1,5 @@
 package mysticmods.roots.api.ritual;
 
-import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;

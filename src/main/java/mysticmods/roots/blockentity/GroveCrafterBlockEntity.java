@@ -10,7 +10,6 @@ import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;

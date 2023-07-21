@@ -1,26 +1,5 @@
 package mysticmods.roots.api.capability;
 
-import com.google.common.collect.ImmutableSet;
-import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.spell.Spell;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
-
 /*public class ReputationCapability implements ICapabilityProvider, ICapabilitySerializable<CompoundTag>, INetworkedCapability<ReputationCapability.SerializedReputationRecord> {
   private boolean dirty = false;
 

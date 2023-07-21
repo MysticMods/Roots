@@ -25,8 +25,7 @@ public class ModFoods {
   public static final FoodProperties LILAC_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).build();
   public static final FoodProperties PEONY_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).build();
   public static final FoodProperties ROSE_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).build();
-  public static final FoodProperties VINEGAR = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).alwaysEat().effect(
-    () -> new MobEffectInstance(MobEffects.HUNGER, 300, 0, false, false), 1.0f).build();
+  public static final FoodProperties VINEGAR = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).alwaysEat().effect(() -> new MobEffectInstance(MobEffects.HUNGER, 300, 0, false, false), 1.0f).build();
   public static final FoodProperties VEGETABLE_JUICE = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).build();
 
   // Salads

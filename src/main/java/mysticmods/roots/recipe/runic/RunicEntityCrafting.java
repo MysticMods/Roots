@@ -1,7 +1,6 @@
 package mysticmods.roots.recipe.runic;
 
 import mysticmods.roots.api.recipe.crafting.IEntityCrafting;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

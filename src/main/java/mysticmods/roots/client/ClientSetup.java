@@ -1,9 +1,6 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.MortarBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;

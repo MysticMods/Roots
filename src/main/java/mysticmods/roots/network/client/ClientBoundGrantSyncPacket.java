@@ -1,7 +1,6 @@
 package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.capability.GrantCapability;
-import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.client.ClientTicker;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;

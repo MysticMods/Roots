@@ -6,7 +6,6 @@ import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
 
 public class PetalShellSnapshot extends Snapshot {
   private int count;

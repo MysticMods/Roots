@@ -6,7 +6,6 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
-import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

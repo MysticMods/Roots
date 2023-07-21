@@ -1,13 +1,10 @@
 package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import mysticmods.roots.effect.FriendlyEarthEffect;
 import mysticmods.roots.effect.SimpleEffect;
 import mysticmods.roots.effect.SkySoarerEffect;
 import mysticmods.roots.effect.WakefulEffect;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraftforge.registries.RegistryObject;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 

@@ -4,8 +4,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.capability.HerbCapability;
-import mysticmods.roots.api.capability.INetworkedCapability;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;

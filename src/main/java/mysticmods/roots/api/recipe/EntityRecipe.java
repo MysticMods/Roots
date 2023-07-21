@@ -1,9 +1,7 @@
 package mysticmods.roots.api.recipe;
 
 import com.google.gson.JsonObject;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
@@ -11,29 +9,21 @@ import mysticmods.roots.api.recipe.crafting.IEntityCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.test.entity.EntityTest;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecipeBase implements IEntityRecipe<W> {
   protected EntityTest test;

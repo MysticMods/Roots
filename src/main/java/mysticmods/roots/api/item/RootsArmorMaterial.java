@@ -2,11 +2,9 @@ package mysticmods.roots.api.item;
 
 import com.google.common.base.Suppliers;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
-import noobanidus.libs.noobutil.type.LazySupplier;
 
 import java.util.function.Supplier;
 

@@ -15,7 +15,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import noobanidus.libs.noobutil.block.BaseBlocks;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class ThreeStageCropBlock extends BaseBlocks.SeededCropsBlock {

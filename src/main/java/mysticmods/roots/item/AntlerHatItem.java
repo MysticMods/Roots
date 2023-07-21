@@ -3,27 +3,21 @@ package mysticmods.roots.item;
 import com.google.common.collect.Multimap;
 import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.config.ConfigManager;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import noobanidus.libs.noobutil.material.MaterialType;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class AntlerHatItem extends ModifiedArmorItem {
   public AntlerHatItem(Properties builder) {

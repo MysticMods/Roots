@@ -1,21 +1,13 @@
 package mysticmods.roots.client;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsAPI;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RootsRenderer {

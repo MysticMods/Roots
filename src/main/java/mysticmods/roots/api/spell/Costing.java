@@ -1,6 +1,5 @@
 package mysticmods.roots.api.spell;
 
-import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;

@@ -5,7 +5,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
-import net.minecraftforge.eventbus.api.IEventBus;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 

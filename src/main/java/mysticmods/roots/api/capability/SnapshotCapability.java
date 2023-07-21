@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class SnapshotCapability implements ICapabilityProvider, ICapabilitySerializable<ListTag> {
   private final Map<SnapshotSerializer<?>, Snapshot> snapshots = new HashMap<>();
