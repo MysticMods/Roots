@@ -21,8 +21,7 @@ public class ModFoods {
 
   public static final FoodProperties APPLE_CORDIAL = (new FoodProperties.Builder().nutrition(1).saturationMod(7.5f)).build();
   public static final FoodProperties CACTUS_SYRUP = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).build();
-  public static final FoodProperties DANDELION_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).alwaysEat()./*effect(
-      () -> new MobEffectInstance(ModEffects.WAKEFUL.get()), 1f)*/build();
+  public static final FoodProperties DANDELION_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).alwaysEat().effect(() -> new MobEffectInstance(ModEffects.WAKEFUL.get()), 1f).build();
   public static final FoodProperties LILAC_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).build();
   public static final FoodProperties PEONY_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).build();
   public static final FoodProperties ROSE_CORDIAL = new FoodProperties.Builder().nutrition(1).saturationMod(7.5f).build();
