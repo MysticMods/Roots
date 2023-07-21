@@ -59,10 +59,42 @@ import java.util.function.Supplier;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
+// STAIRS
+// SLABS
+// FENCES
+// BUTTONS
+// PRESSURE PLATES
+// DOORS
+// TRAPDOORS
+// FENCE GATES
+
 public class ModBlocks {
   public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNED_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN);
   public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNESTONE_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE);
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNED_LOG_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LOG);
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNED_STEM_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.CRIMSON_STEM);
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_PLANKS_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_PLANKS);
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LOG_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LOG);
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LEAVES);
+  public static NonNullUnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = r -> BlockBehaviour.Properties.copy(Blocks.WHEAT);
+  private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> cropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier, Supplier<? extends Item> productSupplier) {
+    return (p, t) -> {
+      int maxValue = Collections.max(property.getPossibleValues());
+      LootItemBlockStatePropertyCondition.Builder condition = new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, maxValue));
+      p.add(t,
+        RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(productSupplier.get()).when(condition).otherwise(LootItem.lootTableItem(seedSupplier.get())))).withPool(LootPool.lootPool().when(condition).add(LootItem.lootTableItem(seedSupplier.get()).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.2714286F, 3))))));
+    };
+  }
 
+  private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> seedlessCropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier) {
+    return (p, t) -> {
+      LootItemCondition.Builder grown = new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, Collections.max(property.getPossibleValues())));
+      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(seedSupplier.get()).when(grown).otherwise(LootItem.lootTableItem(seedSupplier.get())))).withPool(LootPool.lootPool().when(grown).add(LootItem.lootTableItem(seedSupplier.get())))));
+    };
+  }
+
+  // TODO: AT this?
+  private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
   public static BlockEntry<WaterloggedBlock> THATCH = REGISTRATE.block("thatch", Material.WOOD, WaterloggedBlock::new)
     .item()
     .model((ctx, p) -> p.blockItem(ModBlocks.THATCH))
@@ -110,91 +142,6 @@ public class ModBlocks {
     .build()
     .tag(RootsTags.Blocks.RUNESTONE, RootsTags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
-  public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BUTTON = REGISTRATE.block("runestone_button", BaseBlocks.StoneButtonBlock::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
-    .blockstate(BlockstateGenerator.button(RUNESTONE))
-    .recipe((ctx, p) -> {
-      p.singleItem(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_BUTTON, 1, 1);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_BUTTON);
-    })
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.BUTTONS)
-    .build()
-    .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_PRESSURE_PLATE = REGISTRATE.block("runestone_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
-    .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE))
-    .recipe((ctx, p) -> {
-      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
-        .pattern("XX")
-        .define('X', DataIngredient.items(ModBlocks.RUNESTONE))
-        .unlockedBy("has_runestone", DataIngredient.items(ModBlocks.RUNESTONE).getCritereon(p))
-        .save(p, p.safeId(ctx.getEntry()));
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_PRESSURE_PLATE);
-    })
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<SlabBlock> RUNESTONE_SLAB = REGISTRATE.block("runestone_slab", SlabBlock::new)
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
-    .blockstate(BlockstateGenerator.slab(RUNESTONE))
-    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_SLAB, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.SLABS)
-    .build()
-    .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
-    .register();
-  public static BlockEntry<StairBlock> RUNESTONE_STAIRS = REGISTRATE.block("runestone_stairs", (p) -> new StairBlock(ModBlocks.RUNESTONE::getDefaultState, p))
-    .properties(RUNESTONE_PROPERTIES)
-    .blockstate(BlockstateGenerator.stairs(RUNESTONE))
-    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_STAIRS, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.STAIRS)
-    .build()
-    .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<WallBlock> RUNESTONE_WALL = REGISTRATE.block("runestone_wall", WallBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .blockstate(BlockstateGenerator.wall(RUNESTONE))
-    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_WALL))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.WALLS)
-    .build()
-    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<FenceBlock> RUNESTONE_FENCE = REGISTRATE.block("runestone_fence", FenceBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .recipe((ctx, p) -> {
-        p.fence(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_FENCE, null);
-        p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_FENCE, 2);
-      }
-    )
-    .blockstate(BlockstateGenerator.fence(RUNESTONE))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .build()
-    .tag(BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<FenceGateBlock> RUNESTONE_GATE = REGISTRATE.block("runestone_gate", FenceGateBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .recipe((ctx, p) -> {
-      p.fenceGate(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_GATE, null);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_GATE, 2);
-    })
-    .blockstate(BlockstateGenerator.gate(RUNESTONE))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
   public static BlockEntry<Block> RUNESTONE_BRICK = REGISTRATE.block("runestone_brick", Block::new)
     .properties(RUNESTONE_PROPERTIES)
     .recipe((ctx, p) -> Roots.RECIPES.twoByTwo(ModBlocks.RUNESTONE, ModBlocks.RUNESTONE_BRICK, null, 4, p))
@@ -203,91 +150,8 @@ public class ModBlocks {
     .build()
     .tag(RootsTags.Blocks.RUNESTONE, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
-  public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_BUTTON = REGISTRATE.block("runestone_brick_button", BaseBlocks.StoneButtonBlock::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
-    .blockstate(BlockstateGenerator.button(RUNESTONE_BRICK))
-    .recipe((ctx, p) -> {
-      p.singleItem(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_BUTTON, 1, 1);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_BUTTON);
-    })
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.BUTTONS)
-    .build()
-    .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_BRICK_PRESSURE_PLATE = REGISTRATE.block("runestone_brick_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
-    .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE_BRICK))
-    .recipe((ctx, p) -> {
-      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
-        .pattern("XX")
-        .define('X', DataIngredient.items(ModBlocks.RUNESTONE_BRICK))
-        .unlockedBy("has_runestone_brick", DataIngredient.items(ModBlocks.RUNESTONE_BRICK).getCritereon(p))
-        .save(p, p.safeId(ctx.getEntry()));
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE);
-    })
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<SlabBlock> RUNESTONE_BRICK_SLAB = REGISTRATE.block("runestone_brick_slab", SlabBlock::new)
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
-    .blockstate(BlockstateGenerator.slab(RUNESTONE_BRICK))
-    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_SLAB, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.SLABS)
-    .build()
-    .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
-    .register();
-  public static BlockEntry<StairBlock> RUNESTONE_BRICK_STAIRS = REGISTRATE.block("runestone_brick_stairs", (p) -> new StairBlock(ModBlocks.RUNESTONE_BRICK::getDefaultState, p))
-    .properties(RUNESTONE_PROPERTIES)
-    .blockstate(BlockstateGenerator.stairs(RUNESTONE_BRICK))
-    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_STAIRS, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.STAIRS)
-    .build()
-    .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<WallBlock> RUNESTONE_BRICK_WALL = REGISTRATE.block("runestone_brick_wall", WallBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .blockstate(BlockstateGenerator.wall(RUNESTONE_BRICK))
-    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_WALL))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.WALLS)
-    .build()
-    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<FenceBlock> RUNESTONE_BRICK_FENCE = REGISTRATE.block("runestone_brick_fence", FenceBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .recipe((ctx, p) -> {
-        p.fence(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_FENCE, null);
-        p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_FENCE, 2);
-      }
-    )
-    .blockstate(BlockstateGenerator.fence(RUNESTONE_BRICK))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .build()
-    .tag(BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<FenceGateBlock> RUNESTONE_BRICK_GATE = REGISTRATE.block("runestone_brick_gate", FenceGateBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .recipe((ctx, p) -> {
-      p.fenceGate(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_GATE, null);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_GATE, 2);
-    })
-    .blockstate(BlockstateGenerator.gate(RUNESTONE_BRICK))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
+
+
   public static BlockEntry<Block> RUNESTONE_BRICK_ALT = REGISTRATE.block("runestone_brick_alt", Block::new)
     .properties(RUNESTONE_PROPERTIES)
     .recipe((ctx, p) -> Roots.RECIPES.twoByTwo(ModBlocks.CHISELED_RUNESTONE, ModBlocks.RUNESTONE_BRICK_ALT, null, 4, p))
@@ -296,91 +160,7 @@ public class ModBlocks {
     .build()
     .tag(RootsTags.Blocks.RUNESTONE, RootsTags.Blocks.RUNE_PILLARS)
     .register();
-  public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_ALT_BUTTON = REGISTRATE.block("runestone_brick_alt_button", BaseBlocks.StoneButtonBlock::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
-    .blockstate(BlockstateGenerator.button(RUNESTONE_BRICK_ALT))
-    .recipe((ctx, p) -> {
-      p.singleItem(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_BUTTON, 1, 1);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_BUTTON);
-    })
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.BUTTONS)
-    .build()
-    .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_BRICK_ALT_PRESSURE_PLATE = REGISTRATE.block("runestone_brick_alt_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
-    .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE_BRICK_ALT))
-    .recipe((ctx, p) -> {
-      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
-        .pattern("XX")
-        .define('X', DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT))
-        .unlockedBy("has_runestone_brick_alt", DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT).getCritereon(p))
-        .save(p, p.safeId(ctx.getEntry()));
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_PRESSURE_PLATE);
-    })
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<SlabBlock> RUNESTONE_BRICK_ALT_SLAB = REGISTRATE.block("runestone_brick_alt_slab", SlabBlock::new)
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
-    .blockstate(BlockstateGenerator.slab(RUNESTONE_BRICK_ALT))
-    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_SLAB, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.SLABS)
-    .build()
-    .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
-    .register();
-  public static BlockEntry<StairBlock> RUNESTONE_BRICK_ALT_STAIRS = REGISTRATE.block("runestone_brick_alt_stairs", (p) -> new StairBlock(ModBlocks.RUNESTONE_BRICK_ALT::getDefaultState, p))
-    .properties(RUNESTONE_PROPERTIES)
-    .blockstate(BlockstateGenerator.stairs(RUNESTONE_BRICK_ALT))
-    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_STAIRS, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.STAIRS)
-    .build()
-    .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<WallBlock> RUNESTONE_BRICK_ALT_WALL = REGISTRATE.block("runestone_brick_alt_wall", WallBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .blockstate(BlockstateGenerator.wall(RUNESTONE_BRICK_ALT))
-    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_WALL))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.WALLS)
-    .build()
-    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<FenceBlock> RUNESTONE_BRICK_ALT_FENCE = REGISTRATE.block("runestone_brick_alt_fence", FenceBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .recipe((ctx, p) -> {
-        p.fence(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_FENCE, null);
-        p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_FENCE, 2);
-      }
-    )
-    .blockstate(BlockstateGenerator.fence(RUNESTONE_BRICK_ALT))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .build()
-    .tag(BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<FenceGateBlock> RUNESTONE_BRICK_ALT_GATE = REGISTRATE.block("runestone_brick_alt_gate", FenceGateBlock::new)
-    .properties(RUNESTONE_PROPERTIES)
-    .recipe((ctx, p) -> {
-      p.fenceGate(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_GATE, null);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_GATE, 2);
-    })
-    .blockstate(BlockstateGenerator.gate(RUNESTONE_BRICK_ALT))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
+
   public static BlockEntry<Block> RUNED_OBSIDIAN = REGISTRATE.block("runed_obsidian", Block::new)
     .properties(RUNED_PROPERTIES)
     .recipe((ctx, p) -> Roots.RECIPES.twoByTwo(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT, ModBlocks.RUNED_OBSIDIAN, null, 4, p))
@@ -424,91 +204,7 @@ public class ModBlocks {
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_CAPSTONES, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .register();
-  public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
-    .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN))
-    .recipe((ctx, p) -> {
-      p.singleItem(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_BUTTON, 1, 1);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_BUTTON);
-    })
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.BUTTONS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
-    .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN))
-    .recipe((ctx, p) -> {
-      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
-        .pattern("XX")
-        .define('X', DataIngredient.items(ModBlocks.RUNED_OBSIDIAN))
-        .unlockedBy("has_runed_obsidian", DataIngredient.items(ModBlocks.RUNED_OBSIDIAN).getCritereon(p))
-        .save(p, p.safeId(ctx.getEntry()));
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_PRESSURE_PLATE);
-    })
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_SLAB = REGISTRATE.block("runed_slab", RunedObsidianBlocks.Slab::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
-    .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN))
-    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_SLAB, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.SLABS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_STAIRS = REGISTRATE.block("runed_stairs", RunedObsidianBlocks.Stairs::new)
-    .properties(RUNED_PROPERTIES)
-    .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN))
-    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_STAIRS, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.STAIRS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_WALL = REGISTRATE.block("runed_wall", RunedObsidianBlocks.Wall::new)
-    .properties(RUNED_PROPERTIES)
-    .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN))
-    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_WALL))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.WALLS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_FENCE = REGISTRATE.block("runed_fence", RunedObsidianBlocks.Fence::new)
-    .properties(RUNED_PROPERTIES)
-    .recipe((ctx, p) -> {
-        p.fence(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_FENCE, null);
-        p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_FENCE, 2);
-      }
-    )
-    .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_GATE = REGISTRATE.block("runed_gate", RunedObsidianBlocks.Gate::new)
-    .properties(RUNED_PROPERTIES)
-    .recipe((ctx, p) -> {
-      p.fenceGate(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_GATE, null);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_GATE, 2);
-    })
-    .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
+
   public static BlockEntry<Block> RUNED_OBSIDIAN_BRICK = REGISTRATE.block("runed_obsidian_brick", Block::new)
     .properties(RUNED_PROPERTIES)
     .recipe((ctx, p) -> Roots.RECIPES.twoByTwo(RUNED_OBSIDIAN, ModBlocks.RUNED_OBSIDIAN_BRICK, null, 4, p))
@@ -516,92 +212,6 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = REGISTRATE.block("runed_brick_button", RunedObsidianBlocks.Button::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
-    .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN_BRICK))
-    .recipe((ctx, p) -> {
-      p.singleItem(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_BUTTON, 1, 1);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_BUTTON);
-    })
-    .item()
-
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.BUTTONS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_BRICK_PRESSURE_PLATE = REGISTRATE.block("runed_brick_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
-    .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN_BRICK))
-    .recipe((ctx, p) -> {
-      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
-        .pattern("XX")
-        .define('X', DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK))
-        .unlockedBy("has_runed_obsidian_brick", DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK).getCritereon(p))
-        .save(p, p.safeId(ctx.getEntry()));
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_PRESSURE_PLATE);
-    })
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_BRICK_SLAB = REGISTRATE.block("runed_brick_slab", RunedObsidianBlocks.Slab::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
-    .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN_BRICK))
-    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_SLAB, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.SLABS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_BRICK_STAIRS = REGISTRATE.block("runed_brick_stairs", RunedObsidianBlocks.Stairs::new)
-    .properties(RUNED_PROPERTIES)
-    .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN_BRICK))
-    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_STAIRS, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.STAIRS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_BRICK_WALL = REGISTRATE.block("runed_brick_wall", RunedObsidianBlocks.Wall::new)
-    .properties(RUNED_PROPERTIES)
-    .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN_BRICK))
-    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_WALL))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.WALLS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_BRICK_FENCE = REGISTRATE.block("runed_brick_fence", RunedObsidianBlocks.Fence::new)
-    .properties(RUNED_PROPERTIES)
-    .recipe((ctx, p) -> {
-        p.fence(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_FENCE, null);
-        p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_FENCE, 2);
-      }
-    )
-    .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN_BRICK))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_BRICK_GATE = REGISTRATE.block("runed_brick_gate", RunedObsidianBlocks.Gate::new)
-    .properties(RUNED_PROPERTIES)
-    .recipe((ctx, p) -> {
-      p.fenceGate(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_GATE, null);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_GATE, 2);
-    })
-    .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN_BRICK))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
   public static BlockEntry<Block> RUNED_OBSIDIAN_BRICK_ALT = REGISTRATE.block("runed_obsidian_brick_alt", Block::new)
     .properties(RUNED_PROPERTIES)
@@ -611,92 +221,90 @@ public class ModBlocks {
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .register();
-  public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_ALT_BUTTON = REGISTRATE.block("runed_brick_alt_button", RunedObsidianBlocks.Button::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
-    .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN_BRICK_ALT))
-    .recipe((ctx, p) -> {
-      p.singleItem(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_BUTTON, 1, 1);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_BUTTON);
+
+  public static BlockEntry<RotatedPillarBlock> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Material.WOOD, RotatedPillarBlock::new)
+    .properties(WILDWOOD_LOG_PROPERTIES)
+    .blockstate((ctx, p) -> p.logBlock(ctx.getEntry()))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+  public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_LOG = REGISTRATE.block("stripped_wildwood_log", Material.WOOD, RotatedPillarBlock::new)
+    .properties(WILDWOOD_LOG_PROPERTIES)
+    .blockstate((ctx, p) -> p.logBlock(ctx.getEntry()))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+  public static BlockEntry<RotatedPillarBlock> WILDWOOD_WOOD = REGISTRATE.block("wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
+    .properties(WILDWOOD_LOG_PROPERTIES)
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log"), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log")))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+  public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_WOOD = REGISTRATE.block("stripped_wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
+    .properties(WILDWOOD_LOG_PROPERTIES)
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/stripped_wildwood_log"), new ResourceLocation(RootsAPI.MODID, "block/stripped_wildwood_log")))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+
+  public static BlockEntry<Block> WILDWOOD_PLANKS = REGISTRATE.block("wildwood_planks", Block::new)
+    .properties(WILDWOOD_PLANKS_PROPERTIES)
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.PLANKS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+
+  public static BlockEntry<SaplingBlock> WILDWOOD_SAPLING = REGISTRATE.block("wildwood_sapling", (p) -> new SaplingBlock(new WildwoodTreeGrower(), p))
+    .properties(o -> BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING))
+    .blockstate((ctx, p) -> {
+      ModelFile crop = p.models().getExistingFile(new ResourceLocation("minecraft", "block/cross"));
+      p.getVariantBuilder(ctx.getEntry())
+        .forAllStates(state -> {
+          ModelFile stage = p.models().getBuilder("block/wildwood_sapling")
+            .parent(crop)
+            .texture("cross", p.modLoc("block/wildwood_sapling"));
+          return ConfiguredModel.builder().modelFile(stage).build();
+        });
     })
     .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.BUTTONS)
+    .tag(ItemTags.SAPLINGS)
+    .model(ItemModelGenerator::generated)
     .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(BlockTags.SAPLINGS)
     .register();
-  public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_BRICK_ALT_PRESSURE_PLATE = REGISTRATE.block("runed_brick_alt_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
-    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
-    .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN_BRICK_ALT))
+
+  public static BlockEntry<PetrifiedFlowerBlock> STONEPETAL = REGISTRATE.block("stonepetal", Material.PLANT, PetrifiedFlowerBlock::new)
+    .properties(o -> o.noCollission().instabreak().sound(SoundType.GRASS))
+    .blockstate((ctx, p) -> p.getVariantBuilder(ctx.getEntry()).partialState().setModels(new ConfiguredModel(p.models().cross(ctx.getName(), p.blockTexture(ctx.getEntry())))))
+    .item()
+    .model(ItemModelGenerator::generated)
+    .build()
+    .tag(RootsTags.Blocks.STONEPETAL, BlockTags.MINEABLE_WITH_HOE)
     .recipe((ctx, p) -> {
-      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
-        .pattern("XX")
-        .define('X', DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT))
-        .unlockedBy("has_runed_obsidian_brick_alt", DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT).getCritereon(p))
-        .save(p, p.safeId(ctx.getEntry()));
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_PRESSURE_PLATE);
+      DataIngredient a = DataIngredient.items(ModBlocks.STONEPETAL.get());
+      ShapelessRecipeBuilder.shapeless(Items.GRAY_DYE, 4).requires(ctx.getEntry()).unlockedBy("has_stonepetal", a.getCritereon(p)).save(p, new ResourceLocation(RootsAPI.MODID, "gray_dye_from_stonepetal"));
     })
+    .register();
+
+  // TODO: Leaves additionally drop wildroot
+  public static BlockEntry<LeavesBlock> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", LeavesBlock::new)
+    .properties(WILDWOOD_LEAVES_PROPERTIES)
+    .loot((p, ctx) -> p.add(ctx, p.createLeavesDrops(ctx, ModBlocks.WILDWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES)))
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .tag(BlockTags.LEAVES, BlockTags.MINEABLE_WITH_HOE)
     .register();
-  public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_BRICK_ALT_SLAB = REGISTRATE.block("runed_brick_alt_slab", RunedObsidianBlocks.Slab::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
-    .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN_BRICK_ALT))
-    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_SLAB, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.SLABS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_BRICK_ALT_STAIRS = REGISTRATE.block("runed_brick_alt_stairs", RunedObsidianBlocks.Stairs::new)
-    .properties(RUNED_PROPERTIES)
-    .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN_BRICK_ALT))
-    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_STAIRS, null, true))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.STAIRS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_BRICK_ALT_WALL = REGISTRATE.block("runed_brick_alt_wall", RunedObsidianBlocks.Wall::new)
-    .properties(RUNED_PROPERTIES)
-    .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN_BRICK_ALT))
-    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_WALL))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.WALLS)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_BRICK_ALT_FENCE = REGISTRATE.block("runed_brick_alt_fence", RunedObsidianBlocks.Fence::new)
-    .properties(RUNED_PROPERTIES)
-    .recipe((ctx, p) -> {
-        p.fence(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_FENCE, null);
-        p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_FENCE, 2);
-      }
-    )
-    .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN_BRICK_ALT))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_BRICK_ALT_GATE = REGISTRATE.block("runed_brick_alt_gate", RunedObsidianBlocks.Gate::new)
-    .properties(RUNED_PROPERTIES)
-    .recipe((ctx, p) -> {
-      p.fenceGate(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_GATE, null);
-      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_GATE, 2);
-    })
-    .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN_BRICK_ALT))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
-    .register();
-  public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNED_LOG_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LOG);
+
   public static BlockEntry<RotatedPillarBlock> RUNED_WILDWOOD_LOG = REGISTRATE.block("runed_wildwood_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_wildwood"), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log_top")))
@@ -761,7 +369,7 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .register();
-  public static NonNullUnaryOperator<BlockBehaviour.Properties> RUNED_STEM_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.CRIMSON_STEM);
+
   public static BlockEntry<RotatedPillarBlock> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped_stem", RotatedPillarBlock::new)
     .properties(RUNED_STEM_PROPERTIES)
     .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_warped"), new ResourceLocation("minecraft", "block/warped_stem_top")))
@@ -778,14 +386,456 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .register();
-  public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_PLANKS_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_PLANKS);
-  public static BlockEntry<Block> WILDWOOD_PLANKS = REGISTRATE.block("wildwood_planks", Block::new)
+
+
+  // 1st STAIRS
+
+  public static BlockEntry<StairBlock> RUNESTONE_STAIRS = REGISTRATE.block("runestone_stairs", (p) -> new StairBlock(ModBlocks.RUNESTONE::getDefaultState, p))
+    .properties(RUNESTONE_PROPERTIES)
+    .blockstate(BlockstateGenerator.stairs(RUNESTONE))
+    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_STAIRS, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
+    .build()
+    .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<StairBlock> RUNESTONE_BRICK_STAIRS = REGISTRATE.block("runestone_brick_stairs", (p) -> new StairBlock(ModBlocks.RUNESTONE_BRICK::getDefaultState, p))
+    .properties(RUNESTONE_PROPERTIES)
+    .blockstate(BlockstateGenerator.stairs(RUNESTONE_BRICK))
+    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_STAIRS, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
+    .build()
+    .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<StairBlock> RUNESTONE_BRICK_ALT_STAIRS = REGISTRATE.block("runestone_brick_alt_stairs", (p) -> new StairBlock(ModBlocks.RUNESTONE_BRICK_ALT::getDefaultState, p))
+    .properties(RUNESTONE_PROPERTIES)
+    .blockstate(BlockstateGenerator.stairs(RUNESTONE_BRICK_ALT))
+    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_STAIRS, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
+    .build()
+    .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_STAIRS = REGISTRATE.block("runed_stairs", RunedObsidianBlocks.Stairs::new)
+    .properties(RUNED_PROPERTIES)
+    .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN))
+    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_STAIRS, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_BRICK_STAIRS = REGISTRATE.block("runed_brick_stairs", RunedObsidianBlocks.Stairs::new)
+    .properties(RUNED_PROPERTIES)
+    .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN_BRICK))
+    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_STAIRS, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Stairs> RUNED_BRICK_ALT_STAIRS = REGISTRATE.block("runed_brick_alt_stairs", RunedObsidianBlocks.Stairs::new)
+    .properties(RUNED_PROPERTIES)
+    .blockstate(BlockstateGenerator.stairs(RUNED_OBSIDIAN_BRICK_ALT))
+    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_STAIRS, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<StairBlock> WILDWOOD_STAIRS = REGISTRATE.block("wildwood_stairs", (p) -> new StairBlock(ModBlocks.WILDWOOD_PLANKS::getDefaultState, p))
     .properties(WILDWOOD_PLANKS_PROPERTIES)
+    .blockstate(BlockstateGenerator.stairs(WILDWOOD_PLANKS))
+    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_STAIRS, null, false))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
+    .build()
+    .tag(BlockTags.WOODEN_STAIRS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+
+  // SLaBS
+  public static BlockEntry<SlabBlock> RUNESTONE_SLAB = REGISTRATE.block("runestone_slab", SlabBlock::new)
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
+    .blockstate(BlockstateGenerator.slab(RUNESTONE))
+    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_SLAB, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
+    .build()
+    .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
+    .register();
+  public static BlockEntry<SlabBlock> RUNESTONE_BRICK_SLAB = REGISTRATE.block("runestone_brick_slab", SlabBlock::new)
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
+    .blockstate(BlockstateGenerator.slab(RUNESTONE_BRICK))
+    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_SLAB, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
+    .build()
+    .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
+    .register();
+  public static BlockEntry<SlabBlock> RUNESTONE_BRICK_ALT_SLAB = REGISTRATE.block("runestone_brick_alt_slab", SlabBlock::new)
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
+    .blockstate(BlockstateGenerator.slab(RUNESTONE_BRICK_ALT))
+    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_SLAB, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
+    .build()
+    .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
+    .register();
+
+  public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_SLAB = REGISTRATE.block("runed_slab", RunedObsidianBlocks.Slab::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
+    .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN))
+    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_SLAB, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
+    .register();
+
+
+  public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_BRICK_SLAB = REGISTRATE.block("runed_brick_slab", RunedObsidianBlocks.Slab::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
+    .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN_BRICK))
+    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_SLAB, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
+    .register();
+
+
+  public static BlockEntry<RunedObsidianBlocks.Slab> RUNED_BRICK_ALT_SLAB = REGISTRATE.block("runed_brick_alt_slab", RunedObsidianBlocks.Slab::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OBSIDIAN).requiresCorrectToolForDrops())
+    .blockstate(BlockstateGenerator.slab(RUNED_OBSIDIAN_BRICK_ALT))
+    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_SLAB, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
+    .register();
+
+  public static BlockEntry<SlabBlock> WILDWOOD_SLAB = REGISTRATE.block("wildwood_slab", SlabBlock::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_PLANKS).requiresCorrectToolForDrops())
+    .blockstate(BlockstateGenerator.slab(WILDWOOD_PLANKS))
+    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_SLAB, null, false))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
+    .build()
+    .tag(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
+    .register();
+
+  // FENCES
+
+  public static BlockEntry<FenceBlock> RUNESTONE_FENCE = REGISTRATE.block("runestone_fence", FenceBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+        p.fence(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_FENCE, null);
+        p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_FENCE, 2);
+      }
+    )
+    .blockstate(BlockstateGenerator.fence(RUNESTONE))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .build()
+    .tag(BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<FenceBlock> RUNESTONE_BRICK_FENCE = REGISTRATE.block("runestone_brick_fence", FenceBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+        p.fence(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_FENCE, null);
+        p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_FENCE, 2);
+      }
+    )
+    .blockstate(BlockstateGenerator.fence(RUNESTONE_BRICK))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .build()
+    .tag(BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<FenceBlock> RUNESTONE_BRICK_ALT_FENCE = REGISTRATE.block("runestone_brick_alt_fence", FenceBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+        p.fence(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_FENCE, null);
+        p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_FENCE, 2);
+      }
+    )
+    .blockstate(BlockstateGenerator.fence(RUNESTONE_BRICK_ALT))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .build()
+    .tag(BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_FENCE = REGISTRATE.block("runed_fence", RunedObsidianBlocks.Fence::new)
+    .properties(RUNED_PROPERTIES)
+    .recipe((ctx, p) -> {
+        p.fence(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_FENCE, null);
+        p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_FENCE, 2);
+      }
+    )
+    .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_BRICK_FENCE = REGISTRATE.block("runed_brick_fence", RunedObsidianBlocks.Fence::new)
+    .properties(RUNED_PROPERTIES)
+    .recipe((ctx, p) -> {
+        p.fence(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_FENCE, null);
+        p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_FENCE, 2);
+      }
+    )
+    .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN_BRICK))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Fence> RUNED_BRICK_ALT_FENCE = REGISTRATE.block("runed_brick_alt_fence", RunedObsidianBlocks.Fence::new)
+    .properties(RUNED_PROPERTIES)
+    .recipe((ctx, p) -> {
+        p.fence(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_FENCE, null);
+        p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_FENCE, 2);
+      }
+    )
+    .blockstate(BlockstateGenerator.fence(RUNED_OBSIDIAN_BRICK_ALT))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<FenceBlock> WILDWOOD_FENCE = REGISTRATE.block("wildwood_fence", FenceBlock::new)
+    .properties(WILDWOOD_PLANKS_PROPERTIES)
+    .recipe((ctx, p) -> p.fence(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_FENCE, null)
+    )
+    .blockstate(BlockstateGenerator.fence(WILDWOOD_PLANKS))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .build()
+    .tag(BlockTags.WOODEN_FENCES, net.minecraftforge.common.Tags.Blocks.FENCES_WOODEN, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+
+
+  // BUTTONS
+  public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BUTTON = REGISTRATE.block("runestone_button", BaseBlocks.StoneButtonBlock::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
+    .blockstate(BlockstateGenerator.button(RUNESTONE))
+    .recipe((ctx, p) -> {
+      p.singleItem(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_BUTTON, 1, 1);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_BUTTON);
+    })
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
+    .build()
+    .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_BUTTON = REGISTRATE.block("runestone_brick_button", BaseBlocks.StoneButtonBlock::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
+    .blockstate(BlockstateGenerator.button(RUNESTONE_BRICK))
+    .recipe((ctx, p) -> {
+      p.singleItem(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_BUTTON, 1, 1);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_BUTTON);
+    })
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
+    .build()
+    .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<BaseBlocks.StoneButtonBlock> RUNESTONE_BRICK_ALT_BUTTON = REGISTRATE.block("runestone_brick_alt_button", BaseBlocks.StoneButtonBlock::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
+    .blockstate(BlockstateGenerator.button(RUNESTONE_BRICK_ALT))
+    .recipe((ctx, p) -> {
+      p.singleItem(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_BUTTON, 1, 1);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_BUTTON);
+    })
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
+    .build()
+    .tag(BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BUTTON = REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
+    .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN))
+    .recipe((ctx, p) -> {
+      p.singleItem(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_BUTTON, 1, 1);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_BUTTON);
+    })
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = REGISTRATE.block("runed_brick_button", RunedObsidianBlocks.Button::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
+    .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN_BRICK))
+    .recipe((ctx, p) -> {
+      p.singleItem(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_BUTTON, 1, 1);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_BUTTON);
+    })
+    .item()
+
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Button> RUNED_BRICK_ALT_BUTTON = REGISTRATE.block("runed_brick_alt_button", RunedObsidianBlocks.Button::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE_BUTTON))
+    .blockstate(BlockstateGenerator.button(RUNED_OBSIDIAN_BRICK_ALT))
+    .recipe((ctx, p) -> {
+      p.singleItem(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_BUTTON, 1, 1);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_BUTTON);
+    })
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.BUTTONS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<BaseBlocks.WoodButtonBlock> WILDWOOD_BUTTON = REGISTRATE.block("wildwood_button", BaseBlocks.WoodButtonBlock::new)
+    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_BUTTON))
+    .blockstate(BlockstateGenerator.button(WILDWOOD_PLANKS))
+    .recipe((ctx, p) -> p.singleItem(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_BUTTON, 1, 1))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.BUTTONS)
+    .build()
+    .tag(BlockTags.WOODEN_BUTTONS, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+
+  // PRESSURE PLATES
+
+  public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_PRESSURE_PLATE = REGISTRATE.block("runestone_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
+    .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+        .pattern("XX")
+        .define('X', DataIngredient.items(ModBlocks.RUNESTONE))
+        .unlockedBy("has_runestone", DataIngredient.items(ModBlocks.RUNESTONE).getCritereon(p))
+        .save(p, p.safeId(ctx.getEntry()));
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_PRESSURE_PLATE);
+    })
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(BlockTags.PLANKS, BlockTags.MINEABLE_WITH_AXE)
+    .tag(BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
+  public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_BRICK_PRESSURE_PLATE = REGISTRATE.block("runestone_brick_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
+    .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE_BRICK))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+        .pattern("XX")
+        .define('X', DataIngredient.items(ModBlocks.RUNESTONE_BRICK))
+        .unlockedBy("has_runestone_brick", DataIngredient.items(ModBlocks.RUNESTONE_BRICK).getCritereon(p))
+        .save(p, p.safeId(ctx.getEntry()));
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE);
+    })
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+
+  public static BlockEntry<BaseBlocks.PressurePlateBlock> RUNESTONE_BRICK_ALT_PRESSURE_PLATE = REGISTRATE.block("runestone_brick_alt_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
+    .blockstate(BlockstateGenerator.pressurePlate(RUNESTONE_BRICK_ALT))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+        .pattern("XX")
+        .define('X', DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT))
+        .unlockedBy("has_runestone_brick_alt", DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT).getCritereon(p))
+        .save(p, p.safeId(ctx.getEntry()));
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_PRESSURE_PLATE);
+    })
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+
+  public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = REGISTRATE.block("runed_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
+    .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+        .pattern("XX")
+        .define('X', DataIngredient.items(ModBlocks.RUNED_OBSIDIAN))
+        .unlockedBy("has_runed_obsidian", DataIngredient.items(ModBlocks.RUNED_OBSIDIAN).getCritereon(p))
+        .save(p, p.safeId(ctx.getEntry()));
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_PRESSURE_PLATE);
+    })
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+
+  public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_BRICK_PRESSURE_PLATE = REGISTRATE.block("runed_brick_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
+    .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN_BRICK))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+        .pattern("XX")
+        .define('X', DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK))
+        .unlockedBy("has_runed_obsidian_brick", DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK).getCritereon(p))
+        .save(p, p.safeId(ctx.getEntry()));
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_PRESSURE_PLATE);
+    })
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+
+  public static BlockEntry<RunedObsidianBlocks.PressurePlate> RUNED_BRICK_ALT_PRESSURE_PLATE = REGISTRATE.block("runed_brick_alt_pressure_plate", (p) -> new RunedObsidianBlocks.PressurePlate(PressurePlateBlock.Sensitivity.MOBS, p))
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
+    .blockstate(BlockstateGenerator.pressurePlate(RUNED_OBSIDIAN_BRICK_ALT))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
+        .pattern("XX")
+        .define('X', DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT))
+        .unlockedBy("has_runed_obsidian_brick_alt", DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT).getCritereon(p))
+        .save(p, p.safeId(ctx.getEntry()));
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_PRESSURE_PLATE);
+    })
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.STONE_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
   public static BlockEntry<BaseBlocks.PressurePlateBlock> WILDWOOD_PRESSURE_PLATE = REGISTRATE.block("wildwood_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, p))
     .properties(o -> BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE).noCollission().strength(0.5f).sound(SoundType.WOOD))
     .blockstate(BlockstateGenerator.pressurePlate(WILDWOOD_PLANKS))
@@ -799,111 +849,9 @@ public class ModBlocks {
     .build()
     .tag(BlockTags.WOODEN_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_AXE)
     .register();
-  public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LOG_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LOG);
-  public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_WOOD = REGISTRATE.block("stripped_wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
-    .properties(WILDWOOD_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/stripped_wildwood_log"), new ResourceLocation(RootsAPI.MODID, "block/stripped_wildwood_log")))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
-    .register();
-  public static BlockEntry<RotatedPillarBlock> WILDWOOD_WOOD = REGISTRATE.block("wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
-    .properties(WILDWOOD_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log"), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log")))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
-    .register();
-  public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_LOG = REGISTRATE.block("stripped_wildwood_log", Material.WOOD, RotatedPillarBlock::new)
-    .properties(WILDWOOD_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.logBlock(ctx.getEntry()))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
-    .register();
-  public static BlockEntry<RotatedPillarBlock> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Material.WOOD, RotatedPillarBlock::new)
-    .properties(WILDWOOD_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.logBlock(ctx.getEntry()))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
-    .register();
-  public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LEAVES);
-  // TODO: AT this?
-  private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
-  // TODO: Leaves additionally drop wildroot
-  public static BlockEntry<LeavesBlock> WILDWOOD_LEAVES = REGISTRATE.block("wildwood_leaves", LeavesBlock::new)
-    .properties(WILDWOOD_LEAVES_PROPERTIES)
-    .loot((p, ctx) -> p.add(ctx, p.createLeavesDrops(ctx, ModBlocks.WILDWOOD_SAPLING.get(),  NORMAL_LEAVES_SAPLING_CHANCES)))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.LEAVES, BlockTags.MINEABLE_WITH_HOE)
-    .register();
-  public static BlockEntry<BaseBlocks.WoodButtonBlock> WILDWOOD_BUTTON = REGISTRATE.block("wildwood_button", BaseBlocks.WoodButtonBlock::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_BUTTON))
-    .blockstate(BlockstateGenerator.button(WILDWOOD_PLANKS))
-    .recipe((ctx, p) -> p.singleItem(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_BUTTON, 1, 1))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.BUTTONS)
-    .build()
-    .tag(BlockTags.WOODEN_BUTTONS, BlockTags.MINEABLE_WITH_AXE)
-    .register();
-  public static BlockEntry<SlabBlock> WILDWOOD_SLAB = REGISTRATE.block("wildwood_slab", SlabBlock::new)
-    .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_PLANKS).requiresCorrectToolForDrops())
-    .blockstate(BlockstateGenerator.slab(WILDWOOD_PLANKS))
-    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_SLAB, null, false))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.SLABS)
-    .build()
-    .tag(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE)
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
-    .register();
-  public static BlockEntry<StairBlock> WILDWOOD_STAIRS = REGISTRATE.block("wildwood_stairs", (p) -> new StairBlock(ModBlocks.WILDWOOD_PLANKS::getDefaultState, p))
-    .properties(WILDWOOD_PLANKS_PROPERTIES)
-    .blockstate(BlockstateGenerator.stairs(WILDWOOD_PLANKS))
-    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_STAIRS, null, false))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .tag(ItemTags.STAIRS)
-    .build()
-    .tag(BlockTags.WOODEN_STAIRS, BlockTags.MINEABLE_WITH_AXE)
-    .register();
-  public static BlockEntry<WallBlock> WILDWOOD_WALL = REGISTRATE.block("wildwood_wall", WallBlock::new)
-    .properties(WILDWOOD_PLANKS_PROPERTIES)
-    .blockstate(BlockstateGenerator.wall(WILDWOOD_PLANKS))
-    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_WALL))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .tag(ItemTags.WALLS)
-    .build()
-    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_AXE)
-    .register();
-  public static BlockEntry<FenceBlock> WILDWOOD_FENCE = REGISTRATE.block("wildwood_fence", FenceBlock::new)
-    .properties(WILDWOOD_PLANKS_PROPERTIES)
-    .recipe((ctx, p) -> p.fence(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_FENCE, null)
-    )
-    .blockstate(BlockstateGenerator.fence(WILDWOOD_PLANKS))
-    .item()
-    .model(ItemModelGenerator::inventoryModel)
-    .build()
-    .tag(BlockTags.WOODEN_FENCES, net.minecraftforge.common.Tags.Blocks.FENCES_WOODEN, BlockTags.MINEABLE_WITH_AXE)
-    .register();
-  public static BlockEntry<FenceGateBlock> WILDWOOD_GATE = REGISTRATE.block("wildwood_gate", FenceGateBlock::new)
-    .properties(WILDWOOD_PLANKS_PROPERTIES)
-    .recipe((ctx, p) -> p.fenceGate(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_GATE, null))
-    .blockstate(BlockstateGenerator.gate(WILDWOOD_PLANKS))
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, net.minecraftforge.common.Tags.Blocks.FENCE_GATES_WOODEN, BlockTags.MINEABLE_WITH_AXE)
-    .register();
+
+  // DOORS
+
   public static BlockEntry<BaseBlocks.DoorBlock> WILDWOOD_DOOR = REGISTRATE.block("wildwood_door", BaseBlocks.DoorBlock::new)
     .properties(WILDWOOD_PLANKS_PROPERTIES)
     .recipe((ctx, p) -> p.door(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_DOOR, null))
@@ -915,6 +863,8 @@ public class ModBlocks {
     .tag(BlockTags.DOORS, BlockTags.WOODEN_DOORS, BlockTags.MINEABLE_WITH_AXE)
     .register();
 
+  // TRAPDOORS
+
   public static BlockEntry<BaseBlocks.TrapDoorBlock> WILDWOOD_TRAPDOOR = REGISTRATE.block("wildwood_trapdoor", BaseBlocks.TrapDoorBlock::new)
     .properties(WILDWOOD_PLANKS_PROPERTIES.andThen(o -> o.noOcclusion()))
     .recipe((ctx, p) -> p.trapDoor(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_TRAPDOOR, null))
@@ -925,150 +875,177 @@ public class ModBlocks {
     .tag(BlockTags.TRAPDOORS, BlockTags.WOODEN_TRAPDOORS, BlockTags.MINEABLE_WITH_AXE)
     .register();
 
-  public static BlockEntry<SaplingBlock> WILDWOOD_SAPLING = REGISTRATE.block("wildwood_sapling", (p) -> new SaplingBlock(new WildwoodTreeGrower(), p))
-    .properties(o -> BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING))
-    .blockstate((ctx, p) -> {
-      ModelFile crop = p.models().getExistingFile(new ResourceLocation("minecraft", "block/cross"));
-      p.getVariantBuilder(ctx.getEntry())
-        .forAllStates(state -> {
-          ModelFile stage = p.models().getBuilder("block/wildwood_sapling")
-            .parent(crop)
-            .texture("cross", p.modLoc("block/wildwood_sapling"));
-          return ConfiguredModel.builder().modelFile(stage).build();
-        });
+  // GATES
+
+  public static BlockEntry<FenceGateBlock> RUNESTONE_GATE = REGISTRATE.block("runestone_gate", FenceGateBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+      p.fenceGate(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_GATE, null);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_GATE, 2);
     })
+    .blockstate(BlockstateGenerator.gate(RUNESTONE))
     .item()
-    .tag(ItemTags.SAPLINGS)
-    .model(ItemModelGenerator::generated)
+    .model(ItemModelGenerator::itemModel)
     .build()
-    .tag(BlockTags.SAPLINGS)
+    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<FenceGateBlock> RUNESTONE_BRICK_GATE = REGISTRATE.block("runestone_brick_gate", FenceGateBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+      p.fenceGate(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_GATE, null);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_GATE, 2);
+    })
+    .blockstate(BlockstateGenerator.gate(RUNESTONE_BRICK))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<FenceGateBlock> RUNESTONE_BRICK_ALT_GATE = REGISTRATE.block("runestone_brick_alt_gate", FenceGateBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+      p.fenceGate(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_GATE, null);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_GATE, 2);
+    })
+    .blockstate(BlockstateGenerator.gate(RUNESTONE_BRICK_ALT))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_GATE = REGISTRATE.block("runed_gate", RunedObsidianBlocks.Gate::new)
+    .properties(RUNED_PROPERTIES)
+    .recipe((ctx, p) -> {
+      p.fenceGate(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_GATE, null);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_GATE, 2);
+    })
+    .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_BRICK_GATE = REGISTRATE.block("runed_brick_gate", RunedObsidianBlocks.Gate::new)
+    .properties(RUNED_PROPERTIES)
+    .recipe((ctx, p) -> {
+      p.fenceGate(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_GATE, null);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_GATE, 2);
+    })
+    .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN_BRICK))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+  public static BlockEntry<RunedObsidianBlocks.Gate> RUNED_BRICK_ALT_GATE = REGISTRATE.block("runed_brick_alt_gate", RunedObsidianBlocks.Gate::new)
+    .properties(RUNED_PROPERTIES)
+    .recipe((ctx, p) -> {
+      p.fenceGate(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_GATE, null);
+      p.stonecutting(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_GATE, 2);
+    })
+    .blockstate(BlockstateGenerator.gate(RUNED_OBSIDIAN_BRICK_ALT))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<FenceGateBlock> WILDWOOD_GATE = REGISTRATE.block("wildwood_gate", FenceGateBlock::new)
+    .properties(WILDWOOD_PLANKS_PROPERTIES)
+    .recipe((ctx, p) -> p.fenceGate(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_GATE, null))
+    .blockstate(BlockstateGenerator.gate(WILDWOOD_PLANKS))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, net.minecraftforge.common.Tags.Blocks.FENCE_GATES_WOODEN, BlockTags.MINEABLE_WITH_AXE)
+    .register();
+
+  // WALLS
+
+  public static BlockEntry<WallBlock> RUNESTONE_WALL = REGISTRATE.block("runestone_wall", WallBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .blockstate(BlockstateGenerator.wall(RUNESTONE))
+    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_WALL))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
+    .build()
+    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+  public static BlockEntry<WallBlock> RUNESTONE_BRICK_WALL = REGISTRATE.block("runestone_brick_wall", WallBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .blockstate(BlockstateGenerator.wall(RUNESTONE_BRICK))
+    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE_BRICK), ModBlocks.RUNESTONE_BRICK_WALL))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
+    .build()
+    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+
+  public static BlockEntry<WallBlock> RUNESTONE_BRICK_ALT_WALL = REGISTRATE.block("runestone_brick_alt_wall", WallBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .blockstate(BlockstateGenerator.wall(RUNESTONE_BRICK_ALT))
+    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE_BRICK_ALT), ModBlocks.RUNESTONE_BRICK_ALT_WALL))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
+    .build()
+    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+
+  public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_WALL = REGISTRATE.block("runed_wall", RunedObsidianBlocks.Wall::new)
+    .properties(RUNED_PROPERTIES)
+    .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN))
+    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN), ModBlocks.RUNED_WALL))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+  public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_BRICK_WALL = REGISTRATE.block("runed_brick_wall", RunedObsidianBlocks.Wall::new)
+    .properties(RUNED_PROPERTIES)
+    .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN_BRICK))
+    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK), ModBlocks.RUNED_BRICK_WALL))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+
+  public static BlockEntry<RunedObsidianBlocks.Wall> RUNED_BRICK_ALT_WALL = REGISTRATE.block("runed_brick_alt_wall", RunedObsidianBlocks.Wall::new)
+    .properties(RUNED_PROPERTIES)
+    .blockstate(BlockstateGenerator.wall(RUNED_OBSIDIAN_BRICK_ALT))
+    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNED_OBSIDIAN_BRICK_ALT), ModBlocks.RUNED_BRICK_ALT_WALL))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
+    .build()
+    .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+  public static BlockEntry<WallBlock> WILDWOOD_WALL = REGISTRATE.block("wildwood_wall", WallBlock::new)
+    .properties(WILDWOOD_PLANKS_PROPERTIES)
+    .blockstate(BlockstateGenerator.wall(WILDWOOD_PLANKS))
+    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.WILDWOOD_PLANKS), ModBlocks.WILDWOOD_WALL))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
+    .build()
+    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_AXE)
     .register();
 
   // FUNCTIONAL BLOCKS BEGIN HERE
 
-  private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> cropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier, Supplier<? extends Item> productSupplier) {
-    return (p, t) -> {
-      int maxValue = Collections.max(property.getPossibleValues());
-      LootItemBlockStatePropertyCondition.Builder condition = new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, maxValue));
-      p.add(t,
-        RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(productSupplier.get()).when(condition).otherwise(LootItem.lootTableItem(seedSupplier.get())))).withPool(LootPool.lootPool().when(condition).add(LootItem.lootTableItem(seedSupplier.get()).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.2714286F, 3))))));
-    };
-  }
 
-  private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> seedlessCropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier) {
-    return (p, t) -> {
-      LootItemCondition.Builder grown = new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(property, Collections.max(property.getPossibleValues())));
-      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(seedSupplier.get()).when(grown).otherwise(LootItem.lootTableItem(seedSupplier.get())))).withPool(LootPool.lootPool().when(grown).add(LootItem.lootTableItem(seedSupplier.get())))));
-    };
-  }
 
-  public static NonNullUnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = r -> BlockBehaviour.Properties.copy(Blocks.WHEAT);
-
-  public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.WILDROOT))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsTags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.WILDROOT))
-    .register();
-
-  public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.CLOUD_BERRY))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsTags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.CLOUD_BERRY))
-    .register();
-
-  public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.DEWGONIA))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsTags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.DEWGONIA))
-    .register();
-
-  public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.INFERNO_BULB))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::crossBlockstate)
-    .tag(RootsTags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.INFERNO_BULB))
-    .register();
-
-  public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.STALICRIPE))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsTags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.STALICRIPE))
-    .register();
-
-  public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.MOONGLOW_SEEDS))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsTags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.MOONGLOW_SEEDS, ModItems.MOONGLOW))
-    .register();
-  public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.PERESKIA_BULB))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::crossBlockstate)
-    .tag(RootsTags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.PERESKIA_BULB, ModItems.PERESKIA))
-    .register();
-  // TODO: Pottable pereskia?
-  public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.SPIRITLEAF_SEEDS))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsTags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.SPIRITLEAF_SEEDS, ModItems.SPIRITLEAF))
-    .register();
-  public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.WILDEWHEET_SEEDS))
-    .properties(CROP_PROPERTIES)
-    .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(RootsTags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.WILDEWHEET_SEEDS, ModItems.WILDEWHEET))
-    .register();
-
-  public static BlockEntry<SeededCropsBlock> AUBERGINE_CROP = REGISTRATE.block("aubergine_crop", (b) -> new SeededCropsBlock(b, () -> ModItems.AUBERGINE_SEEDS.get()::asItem))
-    .properties(CROP_PROPERTIES)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.AUBERGINE_SEEDS, ModItems.AUBERGINE))
-    .blockstate(BlockstateGenerator::cropBlockstate)
-    .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
-    .register();
-
-  public static BlockEntry<BaseBlocks.WildCropBlock> WILD_AUBERGINE = REGISTRATE.block("wild_aubergine", (b) -> new BaseBlocks.WildCropBlock(b, RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE))
-    .properties(o -> Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.CROP).randomTicks())
-    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
-      .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
-      .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.3f))))))))
-    .blockstate((ctx, p) ->
-      p.getVariantBuilder(ctx.getEntry())
-        .partialState()
-        .addModels(new ConfiguredModel(p.models().crop(ctx.getName(), p.blockTexture(ctx.getEntry()))))
-    )
-    .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
-    .register();
-
-  public static BlockEntry<PetrifiedFlowerBlock> STONEPETAL = REGISTRATE.block("stonepetal", Material.PLANT, PetrifiedFlowerBlock::new)
-    .properties(o -> o.noCollission().instabreak().sound(SoundType.GRASS))
-    .blockstate((ctx, p) -> p.getVariantBuilder(ctx.getEntry()).partialState().setModels(new ConfiguredModel(p.models().cross(ctx.getName(), p.blockTexture(ctx.getEntry())))))
-    .item()
-    .model(ItemModelGenerator::generated)
-    .build()
-    .tag(RootsTags.Blocks.STONEPETAL, BlockTags.MINEABLE_WITH_HOE)
-    .recipe((ctx, p) -> {
-      DataIngredient a = DataIngredient.items(ModBlocks.STONEPETAL.get());
-      ShapelessRecipeBuilder.shapeless(Items.GRAY_DYE, 4).requires(ctx.getEntry()).unlockedBy("has_stonepetal", a.getCritereon(p)).save(p, new ResourceLocation(RootsAPI.MODID, "gray_dye_from_stonepetal"));
-    })
-    .register();
-
-  public static BlockEntry<FlowerPotBlock> POTTED_STONEPETAL = REGISTRATE.block("potted_stonepetal", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.STONEPETAL, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
-    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/stonepetal"))))
-    .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.STONEPETAL.get())))
-    .tag(BlockTags.FLOWER_POTS)
-    .register();
-
-  public static BlockEntry<FlowerPotBlock> POTTED_WILDWOOD_SAPLING = REGISTRATE.block("potted_wildwood_spaling", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.WILDWOOD_SAPLING, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
-    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/wildwood_sapling"))))
-    .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get())))
-    .tag(BlockTags.FLOWER_POTS)
-    .register();
 
   public static NonNullUnaryOperator<BlockBehaviour.Properties> SOIL_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DIRT);
 
@@ -1246,28 +1223,6 @@ public class ModBlocks {
     })
     .tag(BlockTags.MINEABLE_WITH_HOE)
     .register();
-
-  public static BlockEntry<MushroomBlock> BAFFLECAP = REGISTRATE.block("bafflecap", Material.WOOD, (o) -> new MushroomBlock(o, ModFeatures.HUGE_BAFFLECAP.getHolder()::get))
-    .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM))
-    .lang("Bafflecap")
-    .blockstate((ctx, p) -> {
-      // TODO: this really shouldn't be like this
-      ModelFile crop = p.models().getExistingFile(new ResourceLocation("minecraft", "block/cross"));
-      p.getVariantBuilder(ctx.getEntry())
-        .forAllStates(state -> {
-          ModelFile stage = p.models().getBuilder("block/bafflecap")
-            .parent(crop)
-            .texture("cross", p.modLoc("block/bafflecap"));
-          return ConfiguredModel.builder().modelFile(stage).build();
-        });
-    })
-    .tag(BlockTags.MINEABLE_WITH_HOE)
-    .register();
-  public static BlockEntry<FlowerPotBlock> POTTED_BAFFLECAP = REGISTRATE.block("potted_bafflecap", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.BAFFLECAP, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
-    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/bafflecap"))))
-    .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.BAFFLECAP.get())))
-    .tag(BlockTags.FLOWER_POTS)
-    .register();
   public static BlockEntry<HugeMushroomBlock> BAFFLECAP_BLOCK = REGISTRATE.block("bafflecap_block", Material.WOOD, HugeMushroomBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK))
     .blockstate((ctx, p) -> {
@@ -1437,6 +1392,124 @@ public class ModBlocks {
     .model(ItemModelGenerator::complexItemModel)
     .build()
     .register();
+
+  // CROPS
+  public static BlockEntry<MushroomBlock> BAFFLECAP = REGISTRATE.block("bafflecap", Material.WOOD, (o) -> new MushroomBlock(o, ModFeatures.HUGE_BAFFLECAP.getHolder()::get))
+    .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM))
+    .lang("Bafflecap")
+    .blockstate((ctx, p) -> {
+      // TODO: this really shouldn't be like this
+      ModelFile crop = p.models().getExistingFile(new ResourceLocation("minecraft", "block/cross"));
+      p.getVariantBuilder(ctx.getEntry())
+        .forAllStates(state -> {
+          ModelFile stage = p.models().getBuilder("block/bafflecap")
+            .parent(crop)
+            .texture("cross", p.modLoc("block/bafflecap"));
+          return ConfiguredModel.builder().modelFile(stage).build();
+        });
+    })
+    .tag(BlockTags.MINEABLE_WITH_HOE)
+    .register();
+  public static BlockEntry<ThreeStageCropBlock> WILDROOT_CROP = REGISTRATE.block("wildroot_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.WILDROOT))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsTags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.WILDROOT))
+    .register();
+
+  public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.CLOUD_BERRY))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsTags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.CLOUD_BERRY))
+    .register();
+
+  public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.DEWGONIA))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsTags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.DEWGONIA))
+    .register();
+
+  public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.INFERNO_BULB))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::crossBlockstate)
+    .tag(RootsTags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.INFERNO_BULB))
+    .register();
+
+  public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.STALICRIPE))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsTags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.STALICRIPE))
+    .register();
+
+  public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.MOONGLOW_SEEDS))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsTags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.MOONGLOW_SEEDS, ModItems.MOONGLOW))
+    .register();
+  public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.PERESKIA_BULB))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::crossBlockstate)
+    .tag(RootsTags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.PERESKIA_BULB, ModItems.PERESKIA))
+    .register();
+  // TODO: Pottable pereskia?
+  public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.SPIRITLEAF_SEEDS))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsTags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.SPIRITLEAF_SEEDS, ModItems.SPIRITLEAF))
+    .register();
+  public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.WILDEWHEET_SEEDS))
+    .properties(CROP_PROPERTIES)
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(RootsTags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.WILDEWHEET_SEEDS, ModItems.WILDEWHEET))
+    .register();
+
+  public static BlockEntry<SeededCropsBlock> AUBERGINE_CROP = REGISTRATE.block("aubergine_crop", (b) -> new SeededCropsBlock(b, () -> ModItems.AUBERGINE_SEEDS.get()::asItem))
+    .properties(CROP_PROPERTIES)
+    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.AUBERGINE_SEEDS, ModItems.AUBERGINE))
+    .blockstate(BlockstateGenerator::cropBlockstate)
+    .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
+    .register();
+
+  public static BlockEntry<BaseBlocks.WildCropBlock> WILD_AUBERGINE = REGISTRATE.block("wild_aubergine", (b) -> new BaseBlocks.WildCropBlock(b, RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE))
+    .properties(o -> Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.CROP).randomTicks())
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
+      .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
+      .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.3f))))))))
+    .blockstate((ctx, p) ->
+      p.getVariantBuilder(ctx.getEntry())
+        .partialState()
+        .addModels(new ConfiguredModel(p.models().crop(ctx.getName(), p.blockTexture(ctx.getEntry()))))
+    )
+    .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
+    .register();
+
+  // POTS
+
+  public static BlockEntry<FlowerPotBlock> POTTED_BAFFLECAP = REGISTRATE.block("potted_bafflecap", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.BAFFLECAP, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
+    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/bafflecap"))))
+    .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.BAFFLECAP.get())))
+    .tag(BlockTags.FLOWER_POTS)
+    .register();
+  public static BlockEntry<FlowerPotBlock> POTTED_STONEPETAL = REGISTRATE.block("potted_stonepetal", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.STONEPETAL, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
+    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/stonepetal"))))
+    .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.STONEPETAL.get())))
+    .tag(BlockTags.FLOWER_POTS)
+    .register();
+
+  public static BlockEntry<FlowerPotBlock> POTTED_WILDWOOD_SAPLING = REGISTRATE.block("potted_wildwood_spaling", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.WILDWOOD_SAPLING, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
+    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/wildwood_sapling"))))
+    .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get())))
+    .tag(BlockTags.FLOWER_POTS)
+    .register();
+
 
   public static void load() {
   }
