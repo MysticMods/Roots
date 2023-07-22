@@ -75,6 +75,7 @@ public abstract class RootsAPI {
   public static final ResourceLocation HERB_CAPABILITY_ID = new ResourceLocation(MODID, "herb_capability");
   public static final ResourceLocation GRANT_CAPABILITY_ID = new ResourceLocation(MODID, "grant_capability");
   public static final ResourceLocation SNAPSHOT_CAPABILITY_ID = new ResourceLocation(MODID, "snapshot_capability");
+  public static final ResourceLocation SHOULDER_CAPABILITY_ID = new ResourceLocation(MODID, "shoulder_capability");
 
   public static final ResourceLocation RUNIC_SHEARS_ENTITY_CAPABILITY_ID = new ResourceLocation(MODID, "runic_shears_entity_capability");
   public static final ResourceLocation RUNIC_SHEARS_TOKEN_CAPABILITY = new ResourceLocation(MODID, "runic_shears_token_capability");

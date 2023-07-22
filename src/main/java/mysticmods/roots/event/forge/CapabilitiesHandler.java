@@ -6,6 +6,7 @@ import mysticmods.roots.api.capability.EntityCooldownCapability;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.api.capability.SnapshotCapability;
+import mysticmods.roots.capability.PlayerShoulderCapability;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -20,6 +21,7 @@ public class CapabilitiesHandler {
       event.addCapability(RootsAPI.HERB_CAPABILITY_ID, new HerbCapability());
       event.addCapability(RootsAPI.GRANT_CAPABILITY_ID, new GrantCapability());
       event.addCapability(RootsAPI.SNAPSHOT_CAPABILITY_ID, new SnapshotCapability());
+      event.addCapability(RootsAPI.SHOULDER_CAPABILITY_ID, new PlayerShoulderCapability());
     } else {
       if (event.getObject().getType().is(RootsTags.Entities.SQUID)) {
         event.addCapability(RootsAPI.SQUID_MILKING_CAPABILITY, new EntityCooldownCapability.SquidMilkingCapability());
