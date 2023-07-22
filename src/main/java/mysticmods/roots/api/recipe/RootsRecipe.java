@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: RegisterRecipeBookCategoriesEvent
 public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> extends RootsRecipeBase implements IRootsRecipe<H, W>, IRootsRecipeBase {
   protected final NonNullList<Ingredient> ingredients = NonNullList.create();
 

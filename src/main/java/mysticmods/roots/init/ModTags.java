@@ -152,6 +152,9 @@ public class ModTags {
     REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, b -> {
       // Block copies
 
+      b.copy(RootsTags.Blocks.SILVER_STORAGE, RootsTags.Items.SILVER_STORAGE);
+      b.copy(RootsTags.Blocks.RAW_SILVER_STORAGE, RootsTags.Items.RAW_SILVER_STORAGE);
+      b.copy(RootsTags.Blocks.SILVER_ORE, RootsTags.Items.SILVER_ORE);
       b.copy(RootsTags.Blocks.LEVERS, RootsTags.Items.LEVERS);
       b.copy(RootsTags.Blocks.SOILS, RootsTags.Items.SOILS);
       b.copy(RootsTags.Blocks.WATER_SOIL, RootsTags.Items.WATER_SOIL);

@@ -25,6 +25,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -77,6 +78,13 @@ public class ModBlocks {
   public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LOG_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LOG);
   public static NonNullUnaryOperator<BlockBehaviour.Properties> WILDWOOD_LEAVES_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.OAK_LEAVES);
   public static NonNullUnaryOperator<BlockBehaviour.Properties> CROP_PROPERTIES = r -> BlockBehaviour.Properties.copy(Blocks.WHEAT);
+  private static final NonNullUnaryOperator<Block.Properties> ORE_PROPERTIES = o -> BlockBehaviour.Properties.copy(Blocks.IRON_ORE);
+  private static final NonNullUnaryOperator<Block.Properties> DEEPSLATE_ORE_PROPERTIES = o -> BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE);
+
+  private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> oreLoot(Supplier<Item> drops) {
+    return (ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createOreDrop(p, drops.get()));
+  }
+
   private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> cropLoot(IntegerProperty property, Supplier<? extends Item> seedSupplier, Supplier<? extends Item> productSupplier) {
     return (p, t) -> {
       int maxValue = Collections.max(property.getPossibleValues());
@@ -95,6 +103,8 @@ public class ModBlocks {
 
   // TODO: AT this?
   private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
+
+
   public static BlockEntry<WaterloggedBlock> THATCH = REGISTRATE.block("thatch", Material.WOOD, WaterloggedBlock::new)
     .item()
     .model((ctx, p) -> p.blockItem(ModBlocks.THATCH))
@@ -220,6 +230,63 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+    .register();
+
+  public static BlockEntry<DropExperienceBlock> SILVER_ORE = REGISTRATE.block("silver_ore", DropExperienceBlock::new)
+    .properties(ORE_PROPERTIES)
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.SILVER_ORE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+    .blockstate(BlockstateGenerator::simpleBlockstate)
+    .loot(oreLoot(ModItems.RAW_SILVER))
+    .register();
+
+  public static BlockEntry<DropExperienceBlock> DEEPSLATE_SILVER_ORE = REGISTRATE.block("deepslate_silver_ore", DropExperienceBlock::new)
+    .properties(DEEPSLATE_ORE_PROPERTIES)
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.SILVER_ORE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+    .blockstate(BlockstateGenerator::simpleBlockstate)
+    .loot(oreLoot(ModItems.RAW_SILVER))
+    .register();
+
+  public static BlockEntry<DropExperienceBlock> GRANITE_QUARTZ_ORE = REGISTRATE.block("granite_quartz_ore", (p) -> new DropExperienceBlock(p, UniformInt.of(2, 5)))
+    .properties(ORE_PROPERTIES)
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.QUARTZ_ORE, BlockTags.MINEABLE_WITH_PICKAXE)
+    .blockstate(BlockstateGenerator::simpleBlockstate)
+    .loot(oreLoot(() -> Items.QUARTZ))
+    .register();
+
+  public static BlockEntry<Block> RAW_SILVER_BLOCK = REGISTRATE.block("raw_silver_block", Material.METAL, Block::new)
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.RAW_SILVER_STORAGE, BlockTags.MINEABLE_WITH_PICKAXE)
+    .blockstate(BlockstateGenerator::simpleBlockstate)
+    .recipe((ctx, p) ->
+      ShapedRecipeBuilder.shaped(ctx.getEntry())
+        .pattern("###")
+        .pattern("#I#")
+        .pattern("###")
+        .define('#', RootsTags.Items.RAW_SILVER)
+        .define('I', ModItems.RAW_SILVER.get())
+        .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
+        .save(p)
+    )
+    .register();
+
+  public static BlockEntry<Block> SILVER_BLOCK = REGISTRATE.block("silver_block", Material.METAL, Block::new)
+    .properties(o -> o.strength(5.0f, 6.0f).sound(SoundType.METAL))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.SILVER_STORAGE, BlockTags.BEACON_BASE_BLOCKS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
+    .blockstate(BlockstateGenerator::simpleBlockstate)
     .register();
 
   public static BlockEntry<RotatedPillarBlock> WILDWOOD_LOG = REGISTRATE.block("wildwood_log", Material.WOOD, RotatedPillarBlock::new)

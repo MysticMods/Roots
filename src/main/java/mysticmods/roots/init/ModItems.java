@@ -25,6 +25,7 @@ import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import mysticmods.roots.test.entity.EntityTagTest;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -39,6 +40,7 @@ import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.Tags;
+import noobanidus.libs.noobutil.data.generator.ItemGenerator;
 import noobanidus.libs.noobutil.ingredient.ExcludingIngredient;
 import noobanidus.libs.noobutil.item.BaseItems;
 
@@ -805,6 +807,11 @@ public class ModItems {
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_GOLD, ModItems.GOLD_KNIFE, null, p))
     .tag(ItemTags.PIGLIN_LOVED)
     .register();
+  public static ItemEntry<KnifeItem> SILVER_KNIFE = REGISTRATE.item("silver_knife", (p) -> new KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
+    .tag(RootsTags.Items.KNIVES, RootsTags.Items.SILVER_ITEMS)
+    .model((ctx, p) -> p.handheld(ctx::getEntry))
+    .recipe((ctx, p) -> RECIPES.knife(RootsTags.Items.SILVER_INGOT, ctx::getEntry, null, p))
+    .register();
   public static ItemEntry<KnifeItem> DIAMOND_KNIFE = REGISTRATE.item("diamond_knife", (p) -> new KnifeItem(Tiers.DIAMOND, 0.5f, -1.2f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.DIAMOND_KNIFE))
@@ -926,6 +933,33 @@ public class ModItems {
       .save(p))
     .register();
 
+  public static RegistryEntry<Item> RAW_SILVER = REGISTRATE.item("raw_silver", Item::new)
+    .tag(RootsTags.Items.RAW_SILVER)
+    .recipe((ctx, p) -> {
+      SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.RAW_SILVER), ModItems.SILVER_INGOT.get(), 0.7f, 200)
+        .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "silver_ingot_from_raw_silver_smelting"));
+      SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.RAW_SILVER), ModItems.SILVER_INGOT.get(), 0.7f, 100)
+        .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
+        .save(p, new ResourceLocation(RootsAPI.MODID, "silver_ingot_from_raw_silver_blasting"));
+      ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 9)
+        .requires(RootsTags.Items.RAW_SILVER_STORAGE)
+        .unlockedBy("has_raw_silver_storage", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER_STORAGE))
+        .save(p);
+    })
+    .register();
+  public static RegistryEntry<Item> SILVER_INGOT = REGISTRATE.item("silver_ingot", Item::new)
+    .tag(RootsTags.Items.SILVER_INGOT, ItemTags.BEACON_PAYMENT_ITEMS)
+    .recipe(RECIPES.storage(() -> ModBlocks.SILVER_BLOCK, () -> ModItems.SILVER_INGOT, RootsTags.Items.SILVER_STORAGE, RootsTags.Items.SILVER_INGOT, RootsTags.Items.SILVER_ORE, () -> ModItems.SILVER_NUGGET, RootsTags.Items.SILVER_NUGGET, null))
+    .register();
+
+  public static RegistryEntry<Item> SILVER_NUGGET = REGISTRATE.item("silver_nugget'", Item::new)
+    .tag(RootsTags.Items.SILVER_NUGGET)
+    .recipe((ctx, p) -> {
+      RECIPES.recycle(RootsTags.Items.SILVER_ITEMS, ModItems.SILVER_NUGGET, 0.15f, p);
+    })
+    .register();
+
   public static RegistryEntry<Item> COPPER_NUGGET = REGISTRATE.item("copper_nugget", Item::new)
     .tag(RootsTags.Items.COPPER_NUGGET)
     .recipe((ctx, p) -> {
@@ -947,6 +981,8 @@ public class ModItems {
         .save(p, new ResourceLocation(RootsAPI.MODID, "copper_ingot_from_nuggets"));
     })
     .register();
+
+
 
   // TODO: Check damage values
   public static RegistryEntry<AxeItem> COPPER_AXE = REGISTRATE.item("copper_axe", (p) -> new AxeItem(RootsAPI.COPPER_TIER, 5.0f, -3.1f, p))
@@ -986,6 +1022,48 @@ public class ModItems {
     .recipe((ctx, p) -> RECIPES.boots(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_BOOTS, null, p))
     .tag(RootsTags.Items.COPPER_ITEMS)
     .register();
+
+/*  public static RegistryEntry<SilverAxeItem> SILVER_AXE = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_axe", ItemGenerator.axe(SilverAxeItem::new, ModMaterials.SILVER))
+    .tag(RootsTags.Items.SILVER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.SILVER_AXE))
+    .recipe((ctx, p) -> RECIPES.axe(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_AXE, null, p)).register();
+  public static RegistryEntry<SilverHoeItem> SILVER_HOE = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_hoe", ItemGenerator.hoe(SilverHoeItem::new, ModMaterials.SILVER))
+    .tag(RootsTags.Items.SILVER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.SILVER_HOE))
+    .recipe((ctx, p) -> RECIPES.hoe(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_HOE, null, p)).register();
+  public static RegistryEntry<SilverKnifeItem> SILVER_KNIFE = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_knife", ItemGenerator.knife(SilverKnifeItem::new, ModMaterials.SILVER))
+    .tag(RootsTags.Items.SILVER_ITEMS, RootsTags.Items.KNIVES)
+    .model((ctx, p) -> p.handheld(ModItems.SILVER_KNIFE))
+    .recipe((ctx, p) -> RECIPES.knife(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_KNIFE, null, p)).register();
+  public static RegistryEntry<SilverPickaxeItem> SILVER_PICKAXE = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_pickaxe", ItemGenerator.pickaxe(SilverPickaxeItem::new, ModMaterials.SILVER))
+    .tag(RootsTags.Items.SILVER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.SILVER_PICKAXE))
+    .recipe((ctx, p) -> RECIPES.pickaxe(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_PICKAXE, null, p)).register();
+  public static RegistryEntry<SilverShovelItem> SILVER_SHOVEL = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_shovel", ItemGenerator.shovel(SilverShovelItem::new, ModMaterials.SILVER))
+    .tag(RootsTags.Items.SILVER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.SILVER_SHOVEL))
+    .recipe((ctx, p) -> RECIPES.shovel(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_SHOVEL, null, p)).register();
+  public static RegistryEntry<SilverSwordItem> SILVER_SWORD = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_sword", ItemGenerator.sword(SilverSwordItem::new, ModMaterials.SILVER))
+    .tag(RootsTags.Items.SILVER_ITEMS)
+    .model((ctx, p) -> p.handheld(ModItems.SILVER_SWORD))
+    .recipe((ctx, p) -> RECIPES.sword(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_SWORD, null, p)).register(); */
+
+/*  public static RegistryEntry<SilverArmorItem> SILVER_HELMET = MysticalWorld.REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_helmet", ItemGenerator.armor(SilverArmorItem::new, ModMaterials.SILVER, EquipmentSlot.HEAD))
+    .recipe((ctx, p) -> MysticalWorld.RECIPES.helmet(MWTags.Items.SILVER_INGOT, ModItems.SILVER_HELMET, null, p))
+    .tag(MWTags.Items.SILVER_ITEMS)
+    .register();
+  public static RegistryEntry<SilverArmorItem> SILVER_CHESTPLATE = MysticalWorld.REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_chestplate", ItemGenerator.armor(SilverArmorItem::new, ModMaterials.SILVER, EquipmentSlot.CHEST))
+    .recipe((ctx, p) -> MysticalWorld.RECIPES.chest(MWTags.Items.SILVER_INGOT, ModItems.SILVER_CHESTPLATE, null, p))
+    .tag(MWTags.Items.SILVER_ITEMS)
+    .register();
+  public static RegistryEntry<SilverArmorItem> SILVER_LEGGINGS = MysticalWorld.REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_leggings", ItemGenerator.armor(SilverArmorItem::new, ModMaterials.SILVER, EquipmentSlot.LEGS))
+    .recipe((ctx, p) -> MysticalWorld.RECIPES.legs(MWTags.Items.SILVER_INGOT, ModItems.SILVER_LEGGINGS, null, p))
+    .tag(MWTags.Items.SILVER_ITEMS)
+    .register();
+  public static RegistryEntry<SilverArmorItem> SILVER_BOOTS = MysticalWorld.REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_boots", ItemGenerator.armor(SilverArmorItem::new, ModMaterials.SILVER, EquipmentSlot.FEET))
+    .recipe((ctx, p) -> MysticalWorld.RECIPES.boots(MWTags.Items.SILVER_INGOT, ModItems.SILVER_BOOTS, null, p))
+    .tag(MWTags.Items.SILVER_ITEMS)
+    .register();*/
 
   private static <T extends Item> ItemModelBuilder spawnEggModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
     return p.withExistingParent(ctx.getName(), new ResourceLocation("item/template_spawn_egg"));

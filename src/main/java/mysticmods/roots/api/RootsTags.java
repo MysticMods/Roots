@@ -1,5 +1,7 @@
 package mysticmods.roots.api;
 
+import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.ritual.Ritual;
@@ -12,7 +14,11 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
+
+import java.util.function.Supplier;
 
 // Tags
 public class RootsTags {
@@ -145,6 +151,10 @@ public class RootsTags {
     // TODO: Fill these tags
     public static final TagKey<Block> SUPPORTS_HELL_SPROUT_SPAWN = modTag("supports_hell_sprout_spawn");
     public static final TagKey<Block> BAFFLECAP_CONVERSION = modTag("converts_to_bafflecap");
+    public static final TagKey<Block> SILVER_ORE = compatTag("ores/silver");
+    public static final TagKey<Block> QUARTZ_ORE = compatTag("ores/quartz");
+    public static final TagKey<Block> SILVER_STORAGE = compatTag("storage_blocks/silver");
+    public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
 
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(new ResourceLocation(RootsAPI.MODID, name));
@@ -277,7 +287,16 @@ public class RootsTags {
     public static final TagKey<Item> CARAPACE = modTag("carapace");
     public static final TagKey<Item> COPPER_ITEMS = modTag("copper_items");
     public static final TagKey<Item> COPPER_NUGGET = compatTag("nuggets/copper");
+    public static final TagKey<Item> RAW_SILVER = compatTag("raw_materials/silver");
+    public static final TagKey<Item> SILVER_INGOT = compatTag("ingots/silver");
     // These are all filled in by ModTags
+
+    public static final TagKey<Item> SILVER_ORE = compatTag("ores/silver");
+    public static final TagKey<Item> QUARTZ_ORE = compatTag("ores/quartz");
+    public static final TagKey<Item> SILVER_STORAGE = compatTag("storage_blocks/silver");
+    public static final TagKey<Item> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
+    public static final TagKey<Item> SILVER_NUGGET = compatTag("nuggets/silver");
+    public static final TagKey<Item> SILVER_ITEMS = modTag("silver_items");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(new ResourceLocation(RootsAPI.MODID, name));
