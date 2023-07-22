@@ -239,7 +239,7 @@ public class ModBlocks {
     .build()
     .tag(RootsTags.Blocks.SILVER_ORE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .blockstate(BlockstateGenerator::simpleBlockstate)
-    .loot(oreLoot(ModItems.RAW_SILVER))
+    .loot(oreLoot(() -> ModItems.RAW_SILVER.get()))
     .register();
 
   public static BlockEntry<DropExperienceBlock> DEEPSLATE_SILVER_ORE = REGISTRATE.block("deepslate_silver_ore", DropExperienceBlock::new)
@@ -249,7 +249,7 @@ public class ModBlocks {
     .build()
     .tag(RootsTags.Blocks.SILVER_ORE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .blockstate(BlockstateGenerator::simpleBlockstate)
-    .loot(oreLoot(ModItems.RAW_SILVER))
+    .loot(oreLoot(() -> ModItems.RAW_SILVER.get()))
     .register();
 
   public static BlockEntry<DropExperienceBlock> GRANITE_QUARTZ_ORE = REGISTRATE.block("granite_quartz_ore", (p) -> new DropExperienceBlock(p, UniformInt.of(2, 5)))
@@ -1481,66 +1481,66 @@ public class ModBlocks {
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.WILDROOT_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.WILDROOT))
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, () -> ModItems.WILDROOT.get()))
     .register();
 
   public static BlockEntry<ElementalCropBlock> CLOUD_BERRY_CROP = REGISTRATE.block("cloud_berry_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.CLOUD_BERRY))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.CLOUD_BERRY_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.CLOUD_BERRY))
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, () -> ModItems.CLOUD_BERRY.get()))
     .register();
 
   public static BlockEntry<WaterElementalCropBlock> DEWGONIA_CROP = REGISTRATE.block("dewgonia_crop", (p) -> new WaterElementalCropBlock(p, () -> ModItems.DEWGONIA))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.DEWGONIA_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, ModItems.DEWGONIA))
+    .loot(seedlessCropLoot(ThreeStageCropBlock.AGE, () -> ModItems.DEWGONIA.get()))
     .register();
 
   public static BlockEntry<ElementalCropBlock> INFERNO_BULB_CROP = REGISTRATE.block("inferno_bulb_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.INFERNO_BULB))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::crossBlockstate)
     .tag(RootsTags.Blocks.INFERNO_BULB_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.INFERNO_BULB))
+    .loot(seedlessCropLoot(ElementalCropBlock.AGE, () -> ModItems.INFERNO_BULB.get()))
     .register();
 
   public static BlockEntry<ElementalCropBlock> STALICRIPE_CROP = REGISTRATE.block("stalicripe_crop", (p) -> new ElementalCropBlock(p, () -> ModItems.STALICRIPE))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.STALICRIPE_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(seedlessCropLoot(ElementalCropBlock.AGE, ModItems.STALICRIPE))
+    .loot(seedlessCropLoot(ElementalCropBlock.AGE, () -> ModItems.STALICRIPE.get()))
     .register();
 
   public static BlockEntry<SeededCropsBlock> MOONGLOW_CROP = REGISTRATE.block("moonglow_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.MOONGLOW_SEEDS))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.MOONGLOW_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.MOONGLOW_SEEDS, ModItems.MOONGLOW))
+    .loot(cropLoot(SeededCropsBlock.AGE, () -> ModItems.MOONGLOW_SEEDS.get(), () -> ModItems.MOONGLOW.get()))
     .register();
   public static BlockEntry<SeededCropsBlock> PERESKIA_CROP = REGISTRATE.block("pereskia_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.PERESKIA_BULB))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::crossBlockstate)
     .tag(RootsTags.Blocks.PERESKIA_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.PERESKIA_BULB, ModItems.PERESKIA))
+    .loot(cropLoot(SeededCropsBlock.AGE, () -> ModItems.PERESKIA_BULB.get(), () -> ModItems.PERESKIA.get()))
     .register();
   // TODO: Pottable pereskia?
   public static BlockEntry<ThreeStageCropBlock> SPIRITLEAF_CROP = REGISTRATE.block("spiritleaf_crop", (p) -> new ThreeStageCropBlock(p, () -> ModItems.SPIRITLEAF_SEEDS))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.SPIRITLEAF_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(ThreeStageCropBlock.AGE, ModItems.SPIRITLEAF_SEEDS, ModItems.SPIRITLEAF))
+    .loot(cropLoot(ThreeStageCropBlock.AGE, () -> ModItems.SPIRITLEAF_SEEDS.get(), () -> ModItems.SPIRITLEAF.get()))
     .register();
   public static BlockEntry<SeededCropsBlock> WILDEWHEET_CROP = REGISTRATE.block("wildewheet_crop", (p) -> new SeededCropsBlock(p, () -> ModItems.WILDEWHEET_SEEDS))
     .properties(CROP_PROPERTIES)
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(RootsTags.Blocks.WILDEWHEET_CROP, BlockTags.MINEABLE_WITH_HOE)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.WILDEWHEET_SEEDS, ModItems.WILDEWHEET))
+    .loot(cropLoot(SeededCropsBlock.AGE, () -> ModItems.WILDEWHEET_SEEDS.get(), () -> ModItems.WILDEWHEET.get()))
     .register();
 
   public static BlockEntry<SeededCropsBlock> AUBERGINE_CROP = REGISTRATE.block("aubergine_crop", (b) -> new SeededCropsBlock(b, () -> ModItems.AUBERGINE_SEEDS.get()::asItem))
     .properties(CROP_PROPERTIES)
-    .loot(cropLoot(SeededCropsBlock.AGE, ModItems.AUBERGINE_SEEDS, ModItems.AUBERGINE))
+    .loot(cropLoot(SeededCropsBlock.AGE, () -> ModItems.AUBERGINE_SEEDS.get(),() ->  ModItems.AUBERGINE.get()))
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
     .register();

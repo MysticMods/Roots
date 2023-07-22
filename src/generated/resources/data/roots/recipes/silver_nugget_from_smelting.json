@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": {
+    "tag": "roots:silver_items"
+  },
+  "result": "roots:silver_nugget"
+}

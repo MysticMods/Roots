@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "X": {
+      "tag": "forge:ingots/silver"
+    }
+  },
+  "pattern": [
+    " X",
+    "S "
+  ],
+  "result": {
+    "item": "roots:silver_knife"
+  }
+}

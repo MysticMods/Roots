@@ -3,6 +3,9 @@
     "roots:runed_obsidian",
     "roots:chiseled_runed_obsidian",
     "roots:runed_obsidian_brick",
-    "roots:runed_obsidian_brick_alt"
+    "roots:runed_obsidian_brick_alt",
+    "roots:silver_ore",
+    "roots:deepslate_silver_ore",
+    "roots:silver_block"
   ]
 }
