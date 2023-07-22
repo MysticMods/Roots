@@ -953,7 +953,7 @@ public class ModItems {
     .recipe(RECIPES.storage(() -> ModBlocks.SILVER_BLOCK, () -> ModItems.SILVER_INGOT, RootsTags.Items.SILVER_STORAGE, RootsTags.Items.SILVER_INGOT, RootsTags.Items.SILVER_ORE, () -> ModItems.SILVER_NUGGET, RootsTags.Items.SILVER_NUGGET, null))
     .register();
 
-  public static RegistryEntry<Item> SILVER_NUGGET = REGISTRATE.item("silver_nugget'", Item::new)
+  public static RegistryEntry<Item> SILVER_NUGGET = REGISTRATE.item("silver_nugget", Item::new)
     .tag(RootsTags.Items.SILVER_NUGGET)
     .recipe((ctx, p) -> {
       RECIPES.recycle(RootsTags.Items.SILVER_ITEMS, ModItems.SILVER_NUGGET, 0.15f, p);
