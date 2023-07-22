@@ -70,6 +70,8 @@ public class RootsCommand {
       storage.save(staff);
       if (newStaff) {
         player.addItem(staff);
+      } else {
+        player.setItemInHand(InteractionHand.MAIN_HAND, staff);
       }
       return 1;
     })));
