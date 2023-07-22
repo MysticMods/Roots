@@ -178,7 +178,10 @@ public class TokenItem extends Item {
       case STAFF -> {
         SpellInstance spell = getSpellInstance(pStack);
         if (spell != null) {
-          //pTooltipComponents.add(Component.translatable("roots.tooltip.token.staff", spell.getName()));
+          pTooltipComponents.add(Component.translatable("roots.tooltip.token.spell", spell.getStyledName()));
+          for (Modifier enabled : spell.getEnabledModifiers()) {
+            pTooltipComponents.add(Component.translatable("roots.tooltip.token.modifier", enabled.getName()));
+          }
         }
       }
       case RITUAL -> {
@@ -305,10 +308,11 @@ public class TokenItem extends Item {
     return SpellInstance.fromNBT(tag);
   }
 
-  public static void setSpellInstance(ItemStack stack, SpellInstance instance) {
+  public static ItemStack setSpellInstance(ItemStack stack, SpellInstance instance) {
     CompoundTag tag = stack.getOrCreateTag();
     instance.toNBT(tag);
     tag.putString("type", Type.STAFF.name().toLowerCase(Locale.ROOT));
+    return stack;
   }
 
   public static ItemStack setRitual(ItemStack stack, Ritual ritual) {
@@ -407,6 +411,10 @@ public class TokenItem extends Item {
 
   public static ItemStack getRitualToken(Ritual ritual) {
     return setRitual(T(), ritual);
+  }
+
+  public static ItemStack getSpellInstanceToken (SpellInstance spell) {
+    return setSpellInstance(T(), spell);
   }
 
   public static List<ItemStack> getSpells() {

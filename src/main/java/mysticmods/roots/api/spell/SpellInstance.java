@@ -1,5 +1,6 @@
 package mysticmods.roots.api.spell;
 
+import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +17,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SpellInstance {
+public class SpellInstance implements SpellLike {
   private final Spell spell;
   private final Set<Modifier> enabledModifiers = new HashSet<>();
   private int cooldown;
@@ -155,5 +156,10 @@ public class SpellInstance {
     result = 31 * result + enabledModifiers.hashCode();
     result = 31 * result + (cooldown ^ (cooldown >>> 32));
     return result;
+  }
+
+  @Override
+  public Spell getAsSpell() {
+    return getSpell();
   }
 }

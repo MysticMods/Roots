@@ -8,9 +8,14 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
+import mysticmods.roots.client.ClientHooks;
 import mysticmods.roots.init.ModLang;
+import mysticmods.roots.network.Networking;
+import mysticmods.roots.network.client.ClientBoundOpenLibraryPacket;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -91,7 +96,11 @@ public class CastingItem extends Item implements ICastingItem {
     }
 
     if (pPlayer.isShiftKeyDown()) {
-      storage.nextSpell();
+      // TODO: Show spell library
+      ClientBoundOpenLibraryPacket packet = new ClientBoundOpenLibraryPacket(pUsedHand);
+      Networking.sendTo(packet, (ServerPlayer) pPlayer);
+      return InteractionResultHolder.success(stack);
+/*      storage.nextSpell();*/
     } else {
       SpellInstance spell = storage.getSpell();
       if (spell == null || !spell.canCast(pPlayer)) {

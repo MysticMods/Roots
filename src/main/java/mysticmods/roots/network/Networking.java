@@ -22,6 +22,7 @@ public class Networking extends PacketHandler {
     registerMessage(ClientBoundHerbSyncPacket.class, ClientBoundHerbSyncPacket::encode, ClientBoundHerbSyncPacket::new, ClientBoundHerbSyncPacket::handle);
     registerMessage(ClientBoundGrantSyncPacket.class, ClientBoundGrantSyncPacket::encode, ClientBoundGrantSyncPacket::new, ClientBoundGrantSyncPacket::handle);
     registerMessage(ClientBoundShoulderRidePacket.class, ClientBoundShoulderRidePacket::encode, ClientBoundShoulderRidePacket::new, ClientBoundShoulderRidePacket::handle);
+    registerMessage(ClientBoundOpenLibraryPacket.class, ClientBoundOpenLibraryPacket::encode, ClientBoundOpenLibraryPacket::new, ClientBoundOpenLibraryPacket::handle);
   }
 
   public static void sendTo(Object msg, ServerPlayer player) {

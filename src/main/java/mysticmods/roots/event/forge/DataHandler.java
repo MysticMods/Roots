@@ -5,7 +5,6 @@ import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.data.listener.*;
-import mysticmods.roots.gen.listener.*;
 import mysticmods.roots.network.Networking;
 import mysticmods.roots.network.client.ClientBoundRitualPropertyPacket;
 import mysticmods.roots.network.client.ClientBoundSpellCostsPacket;
@@ -25,6 +24,7 @@ public class DataHandler {
     event.addListener(SpellCostReloadListener.getInstance());
     event.addListener(ModifierCostReloadListener.getInstance());
     event.addListener(new InitializeReloadListener());
+    // TODO: Add resets for various things???
   }
   public static void init () {
     for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {

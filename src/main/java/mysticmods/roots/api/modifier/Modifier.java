@@ -96,4 +96,6 @@ public class Modifier extends DescribedRegistryEntry<Modifier> implements ICoste
   public void addChild(Modifier child) {
     children.add(child);
   }
+
+
 }

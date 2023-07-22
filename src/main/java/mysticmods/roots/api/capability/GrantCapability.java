@@ -1,9 +1,13 @@
 package mysticmods.roots.api.capability;
 
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.spell.LibraryModifier;
+import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -19,7 +23,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
+import java.util.*;
 
 public class GrantCapability implements ICapabilityProvider, ICapabilitySerializable<CompoundTag>, INetworkedCapability<GrantCapability.SerializedGrantRecord> {
   private boolean dirty = true;
@@ -27,6 +31,17 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
   private final Set<Modifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
   private ImmutableSet<Spell> IMMUTABLE_GRANTED_SPELLS = null;
   private ImmutableSet<Modifier> IMMUTABLE_GRANTED_MODIFIERS = null;
+
+  private List<LibrarySpell> LIBRARY_SPELLS = null;
+
+  private Map<Spell, List<LibraryModifier>> LIBRARY_MODIFIERS = null;
+
+  private void reset() {
+    IMMUTABLE_GRANTED_MODIFIERS = null;
+    IMMUTABLE_GRANTED_SPELLS = null;
+    LIBRARY_SPELLS = null;
+    LIBRARY_MODIFIERS = null;
+  }
 
   public GrantCapability() {
   }
@@ -41,28 +56,28 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
 
   public void grantSpell(Spell spell) {
     if (GRANTED_SPELLS.add(spell)) {
-      IMMUTABLE_GRANTED_SPELLS = null;
+      reset();
       setDirty(true);
     }
   }
 
   public void grantModifier(Modifier modifier) {
     if (GRANTED_MODIFIERS.add(modifier)) {
-      IMMUTABLE_GRANTED_MODIFIERS = null;
+      reset();
       setDirty(true);
     }
   }
 
   public void removeSpell(Spell spell) {
     if (GRANTED_SPELLS.remove(spell)) {
-      IMMUTABLE_GRANTED_SPELLS = null;
+      reset();
       setDirty(true);
     }
   }
 
   public void removeModifier(Modifier modifier) {
     if (GRANTED_MODIFIERS.remove(modifier)) {
-      IMMUTABLE_GRANTED_MODIFIERS = null;
+      reset();
       setDirty(true);
     }
   }
@@ -81,14 +96,36 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
     return IMMUTABLE_GRANTED_MODIFIERS;
   }
 
+  public List<LibrarySpell> getLibrarySpells() {
+    if (LIBRARY_SPELLS == null) {
+      LIBRARY_SPELLS = new ArrayList<>();
+      GRANTED_SPELLS.stream().sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, true)));
+      Registries.SPELL_REGISTRY.get().getValues().stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, false)));
+    }
+    return LIBRARY_SPELLS;
+  }
+
+  public List<LibraryModifier> getLibraryModifiers(Spell checkSpell) {
+    if (LIBRARY_MODIFIERS == null) {
+      LIBRARY_MODIFIERS = new Object2ObjectLinkedOpenHashMap<>();
+    }
+    return LIBRARY_MODIFIERS.computeIfAbsent(checkSpell, spell -> {
+      List<LibraryModifier> result = new ArrayList<>();
+      for (Modifier mod : spell.getModifiers()) {
+        result.add(new LibraryModifier(mod, GRANTED_MODIFIERS.contains(mod)));
+      }
+      result.sort(Comparator.comparing(LibraryModifier::enabled));
+      return result;
+    });
+  }
+
   @Override
   public void fromRecord(SerializedGrantRecord record) {
     this.GRANTED_MODIFIERS.clear();
     this.GRANTED_SPELLS.clear();
     this.GRANTED_MODIFIERS.addAll(record.getGrantedModifiers());
     this.GRANTED_SPELLS.addAll(record.getGrantedSpells());
-    IMMUTABLE_GRANTED_MODIFIERS = null;
-    IMMUTABLE_GRANTED_SPELLS = null;
+    reset();
     setDirty(true);
   }
 
@@ -112,12 +149,12 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
     CompoundTag result = new CompoundTag();
     ListTag spells = new ListTag();
     GRANTED_SPELLS.forEach(o ->
-        spells.add(StringTag.valueOf(o.getKey().toString()))
+      spells.add(StringTag.valueOf(o.getKey().toString()))
     );
     result.put("spells", spells);
     ListTag modifiers = new ListTag();
     GRANTED_MODIFIERS.forEach(o ->
-        modifiers.add(StringTag.valueOf(o.getKey().toString()))
+      modifiers.add(StringTag.valueOf(o.getKey().toString()))
     );
     result.put("modifiers", modifiers);
     return result;
@@ -165,7 +202,7 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
     public SerializedGrantRecord() {
     }
 
-    public SerializedGrantRecord (Set<Spell> spells, Set<Modifier> modifiers) {
+    public SerializedGrantRecord(Set<Spell> spells, Set<Modifier> modifiers) {
       this.GRANTED_SPELLS.addAll(spells);
       this.GRANTED_MODIFIERS.addAll(modifiers);
     }

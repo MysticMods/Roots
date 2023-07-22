@@ -1,5 +1,6 @@
 package mysticmods.roots.api.spell;
 
+import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.SpellProperty;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public abstract class Spell extends StyledRegistryEntry<Spell> implements ICostedRegistryEntry {
+public abstract class Spell extends StyledRegistryEntry<Spell> implements ICostedRegistryEntry, SpellLike {
   protected final Type type;
   protected final List<Cost> costs = new ArrayList<>();
   protected final Set<Modifier> modifiers = new HashSet<>();
@@ -130,6 +131,11 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
   @Override
   public boolean isBold() {
     return true;
+  }
+
+  @Override
+  public Spell getAsSpell() {
+    return this;
   }
 
   public enum Type {

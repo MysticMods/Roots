@@ -15,6 +15,7 @@ public class RootsRenderer {
 
   @SubscribeEvent
   public static void onStitchPre(TextureStitchEvent.Pre event) {
+    // TODO: This shouldn't be done like this; also is it needed any more?
     if (!event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
       return;
     }
