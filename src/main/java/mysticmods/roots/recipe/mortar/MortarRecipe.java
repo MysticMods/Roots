@@ -9,6 +9,7 @@ import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
@@ -57,6 +58,11 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.MORTAR.get();
+  }
+
+  @Override
+  public String getGroup() {
+    return Identifiers.MORTAR_RECIPE_GROUP;
   }
 
   public static class Serializer extends RootsRecipe.Serializer<MortarInventory, MortarCrafting, MortarRecipe> {

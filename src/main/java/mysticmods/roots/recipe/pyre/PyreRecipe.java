@@ -10,6 +10,7 @@ import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -66,6 +67,11 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.PYRE.get();
+  }
+
+  @Override
+  public String getGroup() {
+    return Identifiers.PYRE_RECIPE_GROUP;
   }
 
   public static class Serializer extends RootsRecipe.Serializer<PyreInventory, PyreCrafting, PyreRecipe> {

@@ -4,6 +4,7 @@ import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
+import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
@@ -45,6 +46,11 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.GROVE.get();
+  }
+
+  @Override
+  public String getGroup() {
+    return Identifiers.GROVE_RECIPE_GROUP;
   }
 
   public static class Serializer extends RootsRecipe.Serializer<GroveInventoryWrapper, GroveCrafting, GroveRecipe> {

@@ -7,6 +7,7 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -92,6 +93,11 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.RUNIC_BLOCK.get();
+  }
+
+  @Override
+  public String getGroup() {
+    return Identifiers.RUNIC_BLOCK_RECIPE_GROUP;
   }
 
   public static class Serializer extends WorldRecipe.Serializer<SimpleWorldCrafting, RunicBlockRecipe> {

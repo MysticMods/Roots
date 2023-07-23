@@ -6,6 +6,7 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.EntityRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.api.test.entity.EntityTest;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
@@ -65,6 +66,11 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.RUNIC_ENTITY.get();
+  }
+
+  @Override
+  public String getGroup() {
+    return Identifiers.RUNIC_ENTITY_RECIPE_GROUP;
   }
 
   public static class Serializer extends EntityRecipe.Serializer<RunicEntityCrafting, RunicEntityRecipe> {

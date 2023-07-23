@@ -1,6 +1,7 @@
 package mysticmods.roots.recipe.bark;
 
 import mysticmods.roots.api.recipe.WorldRecipe;
+import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.intellij.lang.annotations.Identifier;
 
 public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public BarkRecipe(ResourceLocation recipeId) {
@@ -47,6 +49,11 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.BARK.get();
+  }
+
+  @Override
+  public String getGroup() {
+    return Identifiers.BARK_RECIPE_GROUP;
   }
 
   public static class Serializer extends WorldRecipe.Serializer<SimpleWorldCrafting, BarkRecipe> {
