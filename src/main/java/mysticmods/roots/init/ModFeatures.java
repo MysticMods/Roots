@@ -85,6 +85,7 @@ public class ModFeatures {
   )));
 
   public static RegistryObject<PlacedFeature> WILD_ROOTS_FOREST_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_forest", () -> new PlacedFeature(Holder.direct(WILD_ROOTS_CONFIGURED_FEATURE.get()), List.of(
+    BiomeFilter.biome(),
     CountPlacement.of(3), // How many attempts per chunk
     InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
     HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
@@ -95,12 +96,13 @@ public class ModFeatures {
   )));
 
   public static RegistryObject<PlacedFeature> WILD_ROOTS_SPARSE_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_sparse", () -> new PlacedFeature(WILD_ROOTS_PLAINS_CONFIGURED_FEATURE.getHolder().get(), List.of(
+    BiomeFilter.biome(),
     CountPlacement.of(30), // How many attempts per chunk
     InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
     HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
     RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
     BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
-    CountPlacement.of(5), // make 5 new attempts for each position at the log
+    CountPlacement.of(3), // make 5 new attempts for each position at the log
     RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
   )));
 
