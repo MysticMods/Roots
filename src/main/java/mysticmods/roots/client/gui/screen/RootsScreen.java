@@ -48,15 +48,16 @@ public abstract class RootsScreen extends Screen {
     return false;
   }
 
-  public static void drawFromTexture (ResourceLocation resourceLocation, int x, int y, int uOffset, int vOffset, int width, int height, int fileWidth, int fileHeight, PoseStack stack) {
+  public static void drawFromTexture(ResourceLocation resourceLocation, int x, int y, int uOffset, int vOffset, int width, int height, int fileWidth, int fileHeight, PoseStack stack) {
     RenderSystem.setShaderTexture(0, resourceLocation);
     blit(stack, x, y, uOffset, vOffset, width, height, fileWidth, fileHeight);
   }
 
-  public abstract ResourceLocation getBackground ();
+  public abstract ResourceLocation getBackground();
 
-  public abstract int getBackgroundWidth ();
-  public abstract int getBackgroundHeight ();
+  public abstract int getBackgroundWidth();
+
+  public abstract int getBackgroundHeight();
 
   @Override
   public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
@@ -71,7 +72,7 @@ public abstract class RootsScreen extends Screen {
     pPoseStack.popPose();
   }
 
-  public void drawScreenAfterScale (PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+  public void drawScreenAfterScale(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
     resetTooltip();
     renderBackground(stack, 0);
     stack.pushPose();
@@ -84,10 +85,10 @@ public abstract class RootsScreen extends Screen {
     drawTooltip(stack, mouseX, mouseY);
   }
 
-  public void drawBackground (PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+  public void drawBackground(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
     drawFromTexture(getBackground(), 0, 0, 0, 0, getBackgroundWidth(), getBackgroundHeight(), getBackgroundWidth(), getBackgroundHeight(), stack);
   }
 
-  public void drawForeground (PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+  public void drawForeground(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
   }
 }

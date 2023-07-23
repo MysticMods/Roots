@@ -10,13 +10,19 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 
 public class TypedButton<S extends SpellLike, T extends SpellSupplier<S>, V extends RootsScreen> extends Button {
+  protected final int id;
   protected final V parentScreen;
   protected final T spellSupplier;
 
-  public TypedButton(V parentScreen, T spellSupplier, int pX, int pY, int pWidth, int pHeight, Component pMessage, OnPress pOnPress) {
-    super(pX, pY, pWidth, pHeight, pMessage, pOnPress);
+  public TypedButton(V parentScreen, T spellSupplier, int id, int pX, int pY, int pWidth, int pHeight, OnPress pOnPress) {
+    super(pX, pY, pWidth, pHeight, Component.empty(), pOnPress);
     this.parentScreen = parentScreen;
     this.spellSupplier = spellSupplier;
+    this.id = id;
+  }
+
+  public int getId() {
+    return id;
   }
 
   @Override

@@ -190,6 +190,10 @@ public class SpellStorage {
     tag.putInt("count", this.spells.size());
   }
 
+  public static SpellStorage getOrCreate (ItemStack stack) {
+    return fromItem(stack, true);
+  }
+
   @Nullable
   public static SpellStorage fromItem(ItemStack stack) {
     return fromItem(stack, false);

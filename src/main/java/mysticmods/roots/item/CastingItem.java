@@ -90,7 +90,7 @@ public class CastingItem extends Item implements ICastingItem {
     if (pLevel.isClientSide()) {
       return InteractionResultHolder.consume(stack);
     }
-    SpellStorage storage = SpellStorage.fromItem(stack);
+    SpellStorage storage = SpellStorage.getOrCreate(stack);
     if (storage == null) {
       return InteractionResultHolder.fail(stack);
     }
