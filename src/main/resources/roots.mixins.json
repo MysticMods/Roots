@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "roots.refmap.json",
   "mixins": [
+    "MixinPlayer",
     "MixinPrimaryLevelData"
   ],
   "client": [
