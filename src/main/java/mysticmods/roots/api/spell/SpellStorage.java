@@ -133,6 +133,20 @@ public class SpellStorage {
     return this.spells.set(slot, new SpellInstance(spell, modifiers)) == null;
   }
 
+  public boolean setSpell(int slot, SpellInstance spell) {
+    validateSlot(slot);
+    this.setDirty(true);
+    return this.spells.set(slot, spell) == null;
+  }
+
+  public boolean setSpell (int slot, Spell spell) {
+    return setSpell(slot, spell, Collections.emptyList());
+  }
+
+  public boolean clearSpell (int slot) {
+    return setSpell(slot, (SpellInstance)null);
+  }
+
   @Nullable
   public SpellInstance getSpell(int slot) {
     validateSlot(slot);

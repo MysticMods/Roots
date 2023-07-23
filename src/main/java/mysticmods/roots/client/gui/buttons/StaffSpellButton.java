@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 public class StaffSpellButton extends TypedButton<SpellInstance, SpellSupplier<SpellInstance>, StaffScreen> {
 
   public StaffSpellButton(StaffScreen parentScreen, SpellSupplier<SpellInstance> spellGetter, int id, int pX, int pY) {
-    super(parentScreen, spellGetter, id, pX, pY, 16, 16, parentScreen::onStaffSpellClick);
+    super(parentScreen, spellGetter, id, pX, pY, 16, 16, parentScreen::buttonClicked);
   }
 
   private static final ResourceLocation background = new ResourceLocation(RootsAPI.MODID, "textures/gui/staff_spell_slot.png");

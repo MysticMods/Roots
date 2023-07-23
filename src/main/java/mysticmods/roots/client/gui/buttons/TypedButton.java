@@ -2,7 +2,6 @@ package mysticmods.roots.client.gui.buttons;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.SpellLike;
-import mysticmods.roots.client.ItemCache;
 import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.client.gui.SpellSupplier;
 import mysticmods.roots.client.gui.screen.RootsScreen;
@@ -30,11 +29,15 @@ public class TypedButton<S extends SpellLike, T extends SpellSupplier<S>, V exte
     if (visible) {
       // Draw the actual spell
 
-      RenderUtil.renderItemAsIcon(spellSupplier.getAsItemStack(), pPoseStack, x, y, 16, false);
+      RenderUtil.renderItemAsIcon(spellSupplier.getAsItemStack(), pPoseStack, x, y, 16, isTransparent());
 
       if (parentScreen.isMouseInRelativeRange(pMouseX, pMouseY, x, y, width, height)) {
         // Draw the tooltip
       }
     }
+  }
+
+  public boolean isTransparent() {
+    return false;
   }
 }

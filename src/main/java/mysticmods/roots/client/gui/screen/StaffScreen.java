@@ -4,9 +4,13 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.spell.LibrarySpell;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
+import mysticmods.roots.network.Networking;
+import mysticmods.roots.network.server.ServerBoundLibraryToStaffPacket;
+import mysticmods.roots.network.server.ServerBoundSwapStaffSlotsPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
@@ -21,12 +25,15 @@ public class StaffScreen extends RootsScreen {
   private final InteractionHand hand;
   private ItemStack stack;
   private final List<StaffSpellButton> staffSpellButtons = new ArrayList<>();
+  private final List<LibrarySpellButton> librarySpellButtons = new ArrayList<>();
   private int selectedStaff = -1;
   private int selectedLibrary = -1;
 
   protected StaffScreen(InteractionHand hand) {
     super(Component.literal(""));
     this.hand = hand;
+    this.width = 256;
+    this.height = 192;
     // TODO: Alternately suppress null possibility/constant conditions
   }
 
@@ -58,28 +65,80 @@ public class StaffScreen extends RootsScreen {
     });
   }
 
-  private void createLibraryButtons (GrantCapability grants) {
-  }
+  private void createLibraryButtons(GrantCapability grants) {
+    int index = 0;
+    int offsetX = 98;
+    int offsetY = 15;
 
-  public void onLibrarySpellClick(Button pButton) {
-    LibrarySpellButton button = (LibrarySpellButton) pButton;
-    if (selectedLibrary == button.getId()) {
-      selectedLibrary = -1;
-    } else {
-      selectedLibrary = button.getId();
+    List<LibrarySpell> spellInfo = grants.getLibrarySpells();
+
+    for (int y = 0; y < 5; y++) {
+      for (int x = 0; x < 8; x++) {
+        if (index < spellInfo.size()) {
+          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, spellInfo.get(index)::spell, index++, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, !spellInfo.get(index).granted())));
+        }
+      }
     }
   }
 
-  public void onStaffSpellClick(Button pButton) {
-    StaffSpellButton button = (StaffSpellButton) pButton;
-    if (selectedStaff == button.getId()) {
-      selectedStaff = -1;
-    } else {
-      selectedStaff = button.getId();
+  private LibrarySpellButton getSpellButton(int index) {
+    if (index < 0 || index >= librarySpellButtons.size()) {
+      return null;
+    }
+    return librarySpellButtons.get(index);
+  }
+
+  public void buttonClicked(Button pButton) {
+    if (pButton instanceof LibrarySpellButton lButton) {
+      if (lButton.isTransparent()) {
+        return;
+      }
+
+      if (selectedStaff == -1) {
+        if (selectedLibrary == lButton.getId()) {
+          selectedLibrary = -1;
+        } else {
+          selectedLibrary = lButton.getId();
+        }
+        RootsAPI.LOG.info("Selected library spell " + selectedLibrary);
+      } else {
+        // Adding a new spell from the library
+        // Code duplication?
+        RootsAPI.LOG.info("Tried to insert library spell " + selectedLibrary + " into spell slot " + selectedStaff);
+        ServerBoundLibraryToStaffPacket packet = new ServerBoundLibraryToStaffPacket(hand, selectedStaff, lButton.getSpell());
+        Networking.sendToServer(packet);
+        selectedLibrary = -1;
+        selectedStaff = -1;
+      }
+    } else if (pButton instanceof StaffSpellButton sButton) {
+      if (selectedStaff == sButton.getId()) {
+        selectedStaff = -1;
+        RootsAPI.LOG.info("Unselected staff spell " + selectedStaff);
+      } else if (selectedStaff != -1) {
+        // Swapping slots
+        RootsAPI.LOG.info("Swapped staff slots " + selectedStaff + " and " + sButton.getId());
+        ServerBoundSwapStaffSlotsPacket packet = new ServerBoundSwapStaffSlotsPacket(hand, selectedStaff, sButton.getId());
+        Networking.sendToServer(packet);
+        selectedStaff = -1;
+      } else if (selectedLibrary != -1) {
+        // Adding a new spell from the library
+        // Code duplication?
+        RootsAPI.LOG.info("Tried to insert library spell " + selectedLibrary + " into spell slot " + sButton.getId());
+        LibrarySpellButton lButton = getSpellButton(selectedLibrary);
+        if (lButton == null) {
+          return;
+        }
+        ServerBoundLibraryToStaffPacket packet = new ServerBoundLibraryToStaffPacket(hand, sButton.getId(), lButton.getSpell());
+        Networking.sendToServer(packet);
+        selectedLibrary = -1;
+        selectedStaff = -1;
+      } else {
+        selectedStaff = sButton.getId();
+      }
     }
   }
 
-  public boolean isSelected (Button pButton) {
+  public boolean isSelected(Button pButton) {
     if (pButton instanceof LibrarySpellButton lButton) {
       return lButton.getId() == selectedLibrary;
     } else if (pButton instanceof StaffSpellButton sButton) {
@@ -109,7 +168,7 @@ public class StaffScreen extends RootsScreen {
 
   @Override
   public int getBackgroundHeight() {
-    return 256;
+    return 192;
   }
 
   public ItemStack getStack() {
@@ -119,5 +178,6 @@ public class StaffScreen extends RootsScreen {
   public void setStack(ItemStack stack) {
     this.stack = stack;
     cachedStorage = null;
+    RootsAPI.LOG.info("Updated stack");
   }
 }
