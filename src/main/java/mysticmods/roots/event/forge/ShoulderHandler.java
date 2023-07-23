@@ -22,7 +22,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 
-// TODO: Handle jump-dismounting of shoulder entities
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID)
 public class ShoulderHandler {
   @SubscribeEvent

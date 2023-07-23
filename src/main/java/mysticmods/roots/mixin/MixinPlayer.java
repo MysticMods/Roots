@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+// TODO: Make this so much better
 @Mixin(Player.class)
 public class MixinPlayer {
   @Inject(method = "removeEntitiesOnShoulder", at = @At("HEAD"), cancellable = true)
