@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WorldSelectionList.WorldListEntry.class)
 public class MixinWorldSelectionList$WorldListEntry {
   @Inject(method = "renderExperimentalWarning", at = @At("HEAD"), cancellable = true, remap = false)
-  private void ignoreExperimentalWarningIcon(PoseStack stack, int mouseX, int mouseY, int top, int left, CallbackInfo ci)
+  private void RootsIgnoreExperimentalWarningIcon(PoseStack stack, int mouseX, int mouseY, int top, int left, CallbackInfo ci)
   {
     ci.cancel();
   }

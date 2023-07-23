@@ -12,7 +12,7 @@ public class MixinPrimaryLevelData {
    * Prevents Forge from showing the experimental warning screen ever, rather than showing it once per world.
    */
   @Inject(method = "hasConfirmedExperimentalWarning", at = @At("HEAD"), cancellable = true, remap = false)
-  private void ignoreExperimentalSettingsScreen(CallbackInfoReturnable<Boolean> cir)
+  private void RootsIgnoreExperimentalSettingsScreen(CallbackInfoReturnable<Boolean> cir)
   {
     cir.setReturnValue(true);
   }

@@ -9,6 +9,7 @@
   ],
   "client": [
     "MixinLocalPlayer",
+    "MixinWorldOpenFlows",
     "MixinWorldSelectionList$WorldListEntry"
   ],
   "injectors": {
