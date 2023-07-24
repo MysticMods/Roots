@@ -25,7 +25,7 @@ public class StaffSpellButton extends TypedButton<SpellInstance, SpellSupplier<S
   public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
     StaffScreen.drawFromTexture(background, x - 2, y - 2, 0, 0, 20, 20, 20, 20, pPoseStack);
     super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-    if (parentScreen.isSelected(this)) {
+    if (parentScreen.isSelected(this) && visible) {
       StaffScreen.drawFromTexture(highlight, x - 1, y - 1, 0, 0, 18, 18, 18, 18, pPoseStack);
     }
   }
