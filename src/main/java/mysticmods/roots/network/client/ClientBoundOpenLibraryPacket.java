@@ -1,8 +1,6 @@
 package mysticmods.roots.network.client;
 
-import mysticmods.roots.api.capability.GrantCapability;
-import mysticmods.roots.client.ClientHooks;
-import mysticmods.roots.client.ClientTicker;
+import mysticmods.roots.hooks.SafeClientHooks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
 import net.minecraftforge.network.NetworkEvent;
@@ -30,6 +28,6 @@ public class ClientBoundOpenLibraryPacket {
   }
 
   private static void handle(ClientBoundOpenLibraryPacket packet, Supplier<NetworkEvent.Context> context) {
-    ClientHooks.openGui(packet.hand);
+    SafeClientHooks.openGui(packet.hand);
   }
 }

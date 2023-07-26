@@ -33,8 +33,14 @@ public class TypedButton<S extends SpellLike, T extends SpellSupplier<S>, V exte
 
       if (parentScreen.isMouseInRelativeRange(pMouseX, pMouseY, x, y, width, height)) {
         // Draw the tooltip
+        renderToolTip(pPoseStack, pMouseX, pMouseY);
       }
     }
+  }
+
+  @Override
+  public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+    parentScreen.fillTooltip(spellSupplier.getAsItemStack());
   }
 
   public boolean isTransparent() {

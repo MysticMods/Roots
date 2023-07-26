@@ -6,5 +6,7 @@ import javax.annotation.Nullable;
 
 public interface IPlayerAccessor {
   @Nullable
-  Player getPlayer();
+  default Player getPlayer() {
+    return null;
+  }
 }

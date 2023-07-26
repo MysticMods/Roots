@@ -1,4 +1,4 @@
-package mysticmods.roots.client;
+package mysticmods.roots.hooks;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.client.gui.screen.StaffScreen;
@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
-public class ClientHooks {
+public class SafeClientHooks {
   public static void openGui (InteractionHand hand) {
     StaffScreen.open(hand);
   }

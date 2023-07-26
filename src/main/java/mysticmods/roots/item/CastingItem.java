@@ -8,14 +8,13 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
-import mysticmods.roots.client.ClientHooks;
 import mysticmods.roots.init.ModLang;
 import mysticmods.roots.network.Networking;
 import mysticmods.roots.network.client.ClientBoundOpenLibraryPacket;
+import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -202,32 +201,6 @@ public class CastingItem extends Item implements ICastingItem {
   public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
     super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
-    SpellStorage storage = SpellStorage.fromItem(pStack);
-    if (storage != null) {
-      pTooltipComponents.add(Component.translatable("roots.tooltip.staff.selected", storage.getSlot() + 1));
-      SpellInstance spell = storage.getSpell();
-      pTooltipComponents.add(Component.literal(""));
-      if (spell != null) {
-        Costing cost = new Costing(spell);
-        pTooltipComponents.add(spell.getSpell().getStyledName());
-        // TODO: Put this in a better place
-        for (Object2DoubleMap.Entry<Herb> entry : cost.getMinimumCost().object2DoubleEntrySet()) {
-          Herb herb = entry.getKey();
-          String herbCost = String.format("%.4f", entry.getDoubleValue());
-          pTooltipComponents.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
-        }
-      } else {
-        pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
-      }
-      pTooltipComponents.add(Component.literal(""));
-      if (RootsAPI.getInstance().isShiftKeyDown()) {
-        for (SpellStorage.Entry entry : storage.entryList()) {
-          pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", entry.getSlot() + 1, entry.getSpell() == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.getSpell().getStyledName(), entry.getSlot() == storage.getSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("")));
-        }
-        // TODO: list the other spells in the staff
-      } else {
-        pTooltipComponents.add(ModLang.holdShift());
-      }
-    }
+    TooltipUtil.spellStaffTooltip(pTooltipComponents, pStack, pIsAdvanced);
   }
 }

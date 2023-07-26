@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public abstract class RootsScreen extends Screen {
   protected int maxScale;
   protected float scaleFactor;
   protected List<Component> tooltip;
+  protected ItemStack tooltipItem = ItemStack.EMPTY;
   protected int guiLeft, guiTop, guiRight, guiBottom;
 
   protected RootsScreen(Component pTitle) {
@@ -36,11 +38,18 @@ public abstract class RootsScreen extends Screen {
   public void drawTooltip(PoseStack stack, int mouseX, int mouseY) {
     if (tooltip != null && !tooltip.isEmpty()) {
       this.renderComponentTooltip(stack, tooltip, mouseX, mouseY, font);
+    } else if (!tooltipItem.isEmpty()) {
+      this.renderComponentTooltip(stack, getTooltipFromItem(tooltipItem), mouseX, mouseY, font);
     }
   }
 
   public void resetTooltip() {
     tooltip = null;
+    tooltipItem = ItemStack.EMPTY;
+  }
+
+  public void fillTooltip (ItemStack stack) {
+    tooltipItem = stack;
   }
 
   @Override

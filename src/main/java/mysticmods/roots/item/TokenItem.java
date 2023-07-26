@@ -49,7 +49,6 @@ import java.util.Set;
 // 5. Staff modifier info
 // - Provides cost and tooltip information for the modifier.
 // - Allows you to click to enable/disable a modifier.
-// 6. TODO: RITUALS!
 public class TokenItem extends Item {
   public TokenItem(Properties pProperties) {
     super(pProperties);

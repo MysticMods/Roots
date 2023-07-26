@@ -1,5 +1,7 @@
 package mysticmods.roots.api.access;
 
 public interface IShiftAccessor {
-  boolean isShiftKeyDown ();
+  default boolean isShiftKeyDown () {
+    return false;
+  }
 }
