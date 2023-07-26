@@ -1,6 +1,6 @@
 package mysticmods.roots.network.client;
 
-import mysticmods.roots.hooks.SafeClientHooks;
+import mysticmods.roots.client.ClientHooks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
@@ -28,6 +28,6 @@ public class ClientBoundUpdateStaffStackPacket {
   }
 
   private static void handle(ClientBoundUpdateStaffStackPacket packet, Supplier<NetworkEvent.Context> context) {
-    SafeClientHooks.updateGui(packet.stack);
+    ClientHooks.updateGui(packet.stack);
   }
 }

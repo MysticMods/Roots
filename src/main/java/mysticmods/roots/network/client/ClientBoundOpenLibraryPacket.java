@@ -1,6 +1,6 @@
 package mysticmods.roots.network.client;
 
-import mysticmods.roots.hooks.SafeClientHooks;
+import mysticmods.roots.client.ClientHooks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
 import net.minecraftforge.network.NetworkEvent;
@@ -28,6 +28,6 @@ public class ClientBoundOpenLibraryPacket {
   }
 
   private static void handle(ClientBoundOpenLibraryPacket packet, Supplier<NetworkEvent.Context> context) {
-    SafeClientHooks.openGui(packet.hand);
+    ClientHooks.openGui(packet.hand);
   }
 }
