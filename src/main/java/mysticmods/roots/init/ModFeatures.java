@@ -7,9 +7,12 @@ import mysticmods.roots.worldgen.features.SupportingDirectionalBlockFeature;
 import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
+import mysticmods.roots.worldgen.structure.StandingStonePiece;
+import mysticmods.roots.worldgen.structure.StandingStonesStructure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.Level;
@@ -32,6 +35,11 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorato
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -48,6 +56,8 @@ public class ModFeatures {
   private static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_MODIFIER = DeferredRegister.create(Registry.PLACEMENT_MODIFIER_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<BlockPredicateType<?>> BLOCK_PREDICATES = DeferredRegister.create(Registry.BLOCK_PREDICATE_TYPE_REGISTRY, RootsAPI.MODID);
   private static final DeferredRegister<RuleTestType<?>> RULE_TEST_TYPES = DeferredRegister.create(Registry.RULE_TEST_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<StructurePieceType> STRUCTURE_PIECE_TYPES = DeferredRegister.create(Registry.STRUCTURE_PIECE_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(Registry.STRUCTURE_TYPE_REGISTRY, RootsAPI.MODID);
 
   public static RegistryObject<RuleTestType<BlockPropertyMatchTest>> BLOCK_PROPERTY_MATCH_TEST = RULE_TEST_TYPES.register("block_property_match_test", () -> () -> BlockPropertyMatchTest.CODEC);
 
@@ -110,6 +120,10 @@ public class ModFeatures {
     BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.wouldSurvive(ModBlocks.WILD_AUBERGINE.getDefaultState(), BlockPos.ZERO)))
   )));
 
+  public static final RegistryObject<StructurePieceType> STANDING_STONES_PIECE = STRUCTURE_PIECE_TYPES.register("standing_stones_piece", () -> (pContext, pTag) -> new StandingStonePiece(pTag));
+
+  public static final RegistryObject<StructureType<StandingStonesStructure>> STANDING_STONES = STRUCTURES.register("standing_stones", () -> () -> StandingStonesStructure.CODEC);
+
   public static final RegistryObject<PlacedFeature> WILD_AUBERGINE_PATCH = PLACED_FEATURES.register("wild_aubergine_patch", () -> new PlacedFeature(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH.getHolder().get(), List.of(
     CountPlacement.of(1),
     InSquarePlacement.spread(),
@@ -125,6 +139,8 @@ public class ModFeatures {
     PLACEMENT_MODIFIER.register(bus);
     BLOCK_PREDICATES.register(bus);
     RULE_TEST_TYPES.register(bus);
+    STRUCTURES.register(bus);
+    STRUCTURE_PIECE_TYPES.register(bus);
   }
 
 

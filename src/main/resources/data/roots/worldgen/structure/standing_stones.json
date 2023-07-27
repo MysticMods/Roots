@@ -1,0 +1,7 @@
+{
+  "type": "roots:standing_stones",
+  "biomes": "#roots:has_standing_stones",
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {}
+}

@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "roots:standing_stones",
+      "weight": 100
+    }
+    ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 14987612,
+    "spacing": 20,
+    "separation": 5
+  }
+}
