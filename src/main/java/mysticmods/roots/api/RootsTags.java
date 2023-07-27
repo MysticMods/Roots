@@ -136,6 +136,7 @@ public class RootsTags {
     public static final TagKey<Block> GROWTH_REDUCE = modTag("growth/reduce");
 
     public static final TagKey<Block> SUPPORTS_WILD_ROOTS = modTag("supports_wild_roots");
+    public static final TagKey<Block> SUPPORTS_HANGING_MOSS = modTag("supports_manging_moss");
 
     public static final TagKey<Block> SUPPORTS_WILD_AUBERGINE = modTag("supports_wild_aubergine");
 

@@ -48,6 +48,8 @@ public class ClientSetup {
       RenderType translucent = RenderType.translucent();
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_DOOR.get(), translucent);
       ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_TRAPDOOR.get(), translucent);
+      RenderType cutout2 = RenderType.cutout();
+      ItemBlockRenderTypes.setRenderLayer(ModBlocks.HANGING_GROVE_MOSS.get(), cutout2);
     });
   }
 

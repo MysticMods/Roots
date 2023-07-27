@@ -11,10 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
 import net.minecraft.world.level.levelgen.blockpredicates.StateTestingPredicate;
 
-public class MatchingTreePredicate extends StateTestingPredicate {
-    public static final Codec<MatchingTreePredicate> CODEC = RecordCodecBuilder.create((p_204688_) -> stateTestingCodec(p_204688_).apply(p_204688_, MatchingTreePredicate::new));
+public class MatchingTreeTrunkPredicate extends StateTestingPredicate {
+    public static final Codec<MatchingTreeTrunkPredicate> CODEC = RecordCodecBuilder.create((p_204688_) -> stateTestingCodec(p_204688_).apply(p_204688_, MatchingTreeTrunkPredicate::new));
 
-    protected MatchingTreePredicate(Vec3i offset) {
+    protected MatchingTreeTrunkPredicate(Vec3i offset) {
         super(offset);
     }
 
@@ -25,14 +25,14 @@ public class MatchingTreePredicate extends StateTestingPredicate {
 
     @Override
     public BlockPredicateType<?> type() {
-        return ModFeatures.MATCHING_TREE_PREDICATE.get();
+        return ModFeatures.MATCHING_TREE_TRUNK_PREDICATE.get();
     }
 
-    public static MatchingTreePredicate create() {
-        return new MatchingTreePredicate(Vec3i.ZERO);
+    public static MatchingTreeTrunkPredicate create() {
+        return new MatchingTreeTrunkPredicate(Vec3i.ZERO);
     }
 
-    public static MatchingTreePredicate create(Vec3i offset) {
-        return new MatchingTreePredicate(offset);
+    public static MatchingTreeTrunkPredicate create(Vec3i offset) {
+        return new MatchingTreeTrunkPredicate(offset);
     }
 }

@@ -1290,6 +1290,17 @@ public class ModBlocks {
     })
     .tag(BlockTags.MINEABLE_WITH_HOE)
     .register();
+
+  public static BlockEntry<HangingRootsBlock> HANGING_GROVE_MOSS = REGISTRATE.block("hanging_grove_moss", Material.REPLACEABLE_PLANT, HangingRootsBlock::new)
+    .properties(o -> BlockBehaviour.Properties.copy(Blocks.HANGING_ROOTS))
+    .loot((p, t) -> {
+      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))))));
+    })
+    .blockstate((ctx, p) -> {
+      p.simpleBlock(ctx.getEntry(), p.models().cross(ctx.getName(), p.modLoc("block/hanging_grove_moss")));
+    })
+    .tag(BlockTags.MINEABLE_WITH_AXE)
+    .register();
   public static BlockEntry<HugeMushroomBlock> BAFFLECAP_BLOCK = REGISTRATE.block("bafflecap_block", Material.WOOD, HugeMushroomBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM_BLOCK))
     .blockstate((ctx, p) -> {

@@ -6,13 +6,13 @@ import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import mysticmods.roots.worldgen.features.SupportingDirectionalBlockFeature;
 import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
-import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
+import mysticmods.roots.worldgen.predicate.MatchingTreeBranchPredicate;
+import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
 import mysticmods.roots.worldgen.structure.StandingStonePiece;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.Level;
@@ -35,10 +35,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorato
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructureType;
-import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -61,7 +58,9 @@ public class ModFeatures {
 
   public static RegistryObject<RuleTestType<BlockPropertyMatchTest>> BLOCK_PROPERTY_MATCH_TEST = RULE_TEST_TYPES.register("block_property_match_test", () -> () -> BlockPropertyMatchTest.CODEC);
 
-  public static RegistryObject<BlockPredicateType<MatchingTreePredicate>> MATCHING_TREE_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreePredicate.CODEC);
+  public static RegistryObject<BlockPredicateType<MatchingTreeTrunkPredicate>> MATCHING_TREE_TRUNK_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreeTrunkPredicate.CODEC);
+
+  public static RegistryObject<BlockPredicateType<MatchingTreeBranchPredicate>> MATCHING_TREE_BRANCH_PREDICATE = BLOCK_PREDICATES.register("matching_tree_branch", () -> () -> MatchingTreeBranchPredicate.CODEC);
   public static RegistryObject<PlacementModifierType<HeightmapYRange>> HEIGHTMAP_Y_RANGE = PLACEMENT_MODIFIER.register("heightmap_y_range", () -> () -> HeightmapYRange.CODEC);
   public static RegistryObject<PlacementModifierType<DimensionPlacement>> DIMENSION_PLACEMENT = PLACEMENT_MODIFIER.register("dimension_placement", () -> () -> DimensionPlacement.CODEC);
 
@@ -100,7 +99,7 @@ public class ModFeatures {
     InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
     HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
     RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
-    BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
+    BlockPredicateFilter.forPredicate(MatchingTreeTrunkPredicate.create()), // Check if we are at a tree's log.
     CountPlacement.of(2), // make 5 new attempts for each position at the log
     RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
   )));
@@ -111,7 +110,7 @@ public class ModFeatures {
     InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
     HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
     RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
-    BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
+    BlockPredicateFilter.forPredicate(MatchingTreeTrunkPredicate.create()), // Check if we are at a tree's log.
     CountPlacement.of(3), // make 5 new attempts for each position at the log
     RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
   )));
