@@ -29,6 +29,6 @@ public class BeetleRenderer extends MobRenderer<BeetleEntity, BeetleModel> {
   @Override
   @Nonnull
   public ResourceLocation getTextureLocation(@Nonnull BeetleEntity entity) {
-    return new ResourceLocation(RootsAPI.MODID, "textures/entity/beetle_blue.png");
+    return RootsAPI.rl("textures/entity/beetle_blue.png");
   }
 }

@@ -158,7 +158,7 @@ public class RootsTags {
     public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
 
     private static TagKey<Block> modTag(String name) {
-      return BlockTags.create(new ResourceLocation(RootsAPI.MODID, name));
+      return BlockTags.create(RootsAPI.rl(name));
     }
 
     private static TagKey<Block> compatTag(String name) {
@@ -300,7 +300,7 @@ public class RootsTags {
     public static final TagKey<Item> SILVER_ITEMS = modTag("silver_items");
 
     protected static TagKey<Item> modTag(String name) {
-      return ItemTags.create(new ResourceLocation(RootsAPI.MODID, name));
+      return ItemTags.create(RootsAPI.rl(name));
     }
 
     protected static TagKey<Item> compatTag(String name) {
@@ -312,7 +312,7 @@ public class RootsTags {
     public static final TagKey<Potion> RANDOM_BLACKLIST = compatTag("random_potion_blacklist");
 
     static TagKey<Potion> modTag(String name) {
-      return TagKey.create(Registry.POTION_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+      return TagKey.create(Registry.POTION_REGISTRY, RootsAPI.rl(name));
     }
 
     static TagKey<Potion> compatTag(String name) {
@@ -330,7 +330,7 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> FEY_LEATHER = modTag("fey_leather");
 
     static TagKey<EntityType<?>> modTag(String name) {
-      return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+      return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, RootsAPI.rl(name));
     }
 
     static TagKey<EntityType<?>> compatTag(String name) {
@@ -342,7 +342,7 @@ public class RootsTags {
     public static final TagKey<Ritual> NYI = modTag("nyi");
 
     static TagKey<Ritual> modTag(String name) {
-      return TagKey.create(RootsAPI.RITUAL_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+      return TagKey.create(RootsAPI.RITUAL_REGISTRY, RootsAPI.rl(name));
     }
 
     static TagKey<Ritual> compatTag(String name) {
@@ -354,7 +354,7 @@ public class RootsTags {
     public static final TagKey<Spell> NYI = modTag("nyi");
 
     static TagKey<Spell> modTag(String name) {
-      return TagKey.create(RootsAPI.SPELL_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+      return TagKey.create(RootsAPI.SPELL_REGISTRY, RootsAPI.rl(name));
     }
 
     static TagKey<Spell> compatTag(String name) {
@@ -366,7 +366,7 @@ public class RootsTags {
     public static final TagKey<Modifier> NYI = modTag("nyi");
 
     static TagKey<Modifier> modTag(String name) {
-      return TagKey.create(RootsAPI.MODIFIER_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+      return TagKey.create(RootsAPI.MODIFIER_REGISTRY, RootsAPI.rl(name));
     }
 
     static TagKey<Modifier> compatTag(String name) {
@@ -382,7 +382,7 @@ public class RootsTags {
     public static final TagKey<Herb> AIR = modTag("elemental/air");
 
     static TagKey<Herb> modTag(String name) {
-      return TagKey.create(RootsAPI.HERB_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+      return TagKey.create(RootsAPI.HERB_REGISTRY, RootsAPI.rl(name));
     }
 
     static TagKey<Herb> compatTag(String name) {

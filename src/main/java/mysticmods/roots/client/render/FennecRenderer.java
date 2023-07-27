@@ -19,6 +19,6 @@ public class FennecRenderer extends MobRenderer<FennecEntity, FennecModel> {
   @Override
   @Nonnull
   public ResourceLocation getTextureLocation(@Nonnull FennecEntity entity) {
-    return new ResourceLocation(RootsAPI.MODID, "textures/entity/fennec.png");
+    return RootsAPI.rl("textures/entity/fennec.png");
   }
 }

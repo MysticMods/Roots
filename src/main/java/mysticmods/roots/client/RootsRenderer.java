@@ -20,7 +20,7 @@ public class RootsRenderer {
       return;
     }
 
-    event.addSprite(new ResourceLocation(RootsAPI.MODID, "block/overlay/overlay_white"));
+    event.addSprite(RootsAPI.rl("block/overlay/overlay_white"));
   }
 
   @SubscribeEvent
@@ -29,7 +29,7 @@ public class RootsRenderer {
     if (!map.location().equals(TextureAtlas.LOCATION_BLOCKS)) {
       return;
     }
-    whiteIcon = map.getSprite(new ResourceLocation(RootsAPI.MODID, "block/overlay/overlay_white"));
+    whiteIcon = map.getSprite(RootsAPI.rl("block/overlay/overlay_white"));
   }
 
   public static int getColorARGB(int red, int green, int blue, float alpha) {

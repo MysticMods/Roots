@@ -30,6 +30,6 @@ public interface Rituals {
   ResourceKey<Ritual> GROVE_SUPPLICATION = ritual("grove_supplication");
 
   static ResourceKey<Ritual> ritual(String name) {
-    return ResourceKey.create(RootsAPI.RITUAL_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+    return ResourceKey.create(RootsAPI.RITUAL_REGISTRY, RootsAPI.rl(name));
   }
 }

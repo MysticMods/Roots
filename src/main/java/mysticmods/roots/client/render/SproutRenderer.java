@@ -24,10 +24,10 @@ public class SproutRenderer extends MobRenderer<SproutEntity, SproutModel> {
   public ResourceLocation getTextureLocation(SproutEntity entity) {
     if (textures == null) {
       textures = new HashMap<>();
-      textures.put(ModEntities.GREEN_SPROUT.get(), new ResourceLocation(RootsAPI.MODID, "textures/entity/sprout_green.png"));
-      textures.put(ModEntities.TAN_SPROUT.get(), new ResourceLocation(RootsAPI.MODID, "textures/entity/sprout_tan.png"));
-      textures.put(ModEntities.PURPLE_SPROUT.get(), new ResourceLocation(RootsAPI.MODID, "textures/entity/sprout_purple.png"));
-      textures.put(ModEntities.RED_SPROUT.get(), new ResourceLocation(RootsAPI.MODID, "textures/entity/sprout_red.png"));
+      textures.put(ModEntities.GREEN_SPROUT.get(), RootsAPI.rl("textures/entity/sprout_green.png"));
+      textures.put(ModEntities.TAN_SPROUT.get(), RootsAPI.rl("textures/entity/sprout_tan.png"));
+      textures.put(ModEntities.PURPLE_SPROUT.get(), RootsAPI.rl("textures/entity/sprout_purple.png"));
+      textures.put(ModEntities.RED_SPROUT.get(), RootsAPI.rl("textures/entity/sprout_red.png"));
     }
     ResourceLocation result = textures.get(entity.getType());
     if (result == null) {

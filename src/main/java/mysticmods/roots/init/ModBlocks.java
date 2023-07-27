@@ -135,13 +135,13 @@ public class ModBlocks {
         .define('S', Ingredient.of(RootsTags.Items.STONELIKE))
         .define('H', Ingredient.of(RootsTags.Items.RUNESTONE_HERBS))
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE_HERBS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "runestone_simple_crafting"));
+        .save(p, RootsAPI.rl("runestone_simple_crafting"));
       // TODO: Grove Stone condition
       GroveRecipe.multiBuilder(ctx.getEntry(), 20)
         .addIngredient(Ingredient.of(RootsTags.Items.STONELIKE))
         .addLevelCondition(ModConditions.PRIMAL_GROVE_STONE_ANY.get())
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.STONELIKE))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runestone_grove_crafting"));
+        .save(p, RootsAPI.rl("grove/runestone_grove_crafting"));
     })
     .register();
   public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
@@ -188,7 +188,7 @@ public class ModBlocks {
         .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
         .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
         .unlockedBy("has_obsidian", p.has(Tags.Items.OBSIDIAN))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runed_obsidian_4"));
+        .save(p, RootsAPI.rl("grove/runed_obsidian_4"));
       GroveRecipe.builder(ctx.getEntry(), 8)
         .addIngredient(RUNESTONE)
         .addIngredient(RUNESTONE)
@@ -202,7 +202,7 @@ public class ModBlocks {
         .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
         .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
         .unlockedBy("has_obsidian", p.has(Tags.Items.OBSIDIAN))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runed_obsidian_8"));
+        .save(p, RootsAPI.rl("grove/runed_obsidian_8"));
     })
     .tag(BlockTags.DRAGON_IMMUNE, BlockTags.WITHER_IMMUNE, RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL)
     .register();
@@ -307,7 +307,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> WILDWOOD_WOOD = REGISTRATE.block("wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
     .properties(WILDWOOD_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log"), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/wildwood_log"), RootsAPI.rl("block/wildwood_log")))
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -315,7 +315,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_WOOD = REGISTRATE.block("stripped_wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
     .properties(WILDWOOD_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/stripped_wildwood_log"), new ResourceLocation(RootsAPI.MODID, "block/stripped_wildwood_log")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/stripped_wildwood_log"), RootsAPI.rl("block/stripped_wildwood_log")))
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -358,7 +358,7 @@ public class ModBlocks {
     .tag(RootsTags.Blocks.STONEPETAL, BlockTags.MINEABLE_WITH_HOE)
     .recipe((ctx, p) -> {
       DataIngredient a = DataIngredient.items(ModBlocks.STONEPETAL.get());
-      ShapelessRecipeBuilder.shapeless(Items.GRAY_DYE, 4).requires(ctx.getEntry()).unlockedBy("has_stonepetal", a.getCritereon(p)).save(p, new ResourceLocation(RootsAPI.MODID, "gray_dye_from_stonepetal"));
+      ShapelessRecipeBuilder.shapeless(Items.GRAY_DYE, 4).requires(ctx.getEntry()).unlockedBy("has_stonepetal", a.getCritereon(p)).save(p, RootsAPI.rl("gray_dye_from_stonepetal"));
     })
     .register();
 
@@ -374,7 +374,7 @@ public class ModBlocks {
 
   public static BlockEntry<RotatedPillarBlock> RUNED_WILDWOOD_LOG = REGISTRATE.block("runed_wildwood_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_wildwood"), new ResourceLocation(RootsAPI.MODID, "block/wildwood_log_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_wildwood"), RootsAPI.rl("block/wildwood_log_top")))
     .tag(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Blocks.RUNED_WILDWOOD_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -382,7 +382,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> RUNED_SPRUCE_LOG = REGISTRATE.block("runed_spruce_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_spruce"), new ResourceLocation("minecraft", "block/spruce_log_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_spruce"), new ResourceLocation("minecraft", "block/spruce_log_top")))
     .tag(BlockTags.SPRUCE_LOGS, RootsTags.Blocks.RUNED_SPRUCE_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -390,7 +390,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> RUNED_JUNGLE_LOG = REGISTRATE.block("runed_jungle_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_jungle"), new ResourceLocation("minecraft", "block/jungle_log_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_jungle"), new ResourceLocation("minecraft", "block/jungle_log_top")))
     .tag(BlockTags.JUNGLE_LOGS, RootsTags.Blocks.RUNED_JUNGLE_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -398,7 +398,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> RUNED_BIRCH_LOG = REGISTRATE.block("runed_birch_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_birch"), new ResourceLocation("minecraft", "block/birch_log_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_birch"), new ResourceLocation("minecraft", "block/birch_log_top")))
     .tag(BlockTags.BIRCH_LOGS, RootsTags.Blocks.RUNED_BIRCH_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -406,7 +406,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> RUNED_OAK_LOG = REGISTRATE.block("runed_oak_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_oak"), new ResourceLocation("minecraft", "block/oak_log_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_oak"), new ResourceLocation("minecraft", "block/oak_log_top")))
     .tag(BlockTags.OAK_LOGS, RootsTags.Blocks.RUNED_OAK_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -414,7 +414,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> RUNED_DARK_OAK_LOG = REGISTRATE.block("runed_dark_oak_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_dark_oak"), new ResourceLocation("minecraft", "block/dark_oak_log_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_dark_oak"), new ResourceLocation("minecraft", "block/dark_oak_log_top")))
     .tag(BlockTags.DARK_OAK_LOGS, RootsTags.Blocks.RUNED_DARK_OAK_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -422,7 +422,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> RUNED_ACACIA_LOG = REGISTRATE.block("runed_acacia_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_acacia"), new ResourceLocation("minecraft", "block/acacia_log_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_acacia"), new ResourceLocation("minecraft", "block/acacia_log_top")))
     .tag(BlockTags.ACACIA_LOGS, RootsTags.Blocks.RUNED_ACACIA_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -430,7 +430,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> RUNED_MANGROVE_LOG = REGISTRATE.block("runed_mangro_log", RotatedPillarBlock::new)
     .properties(RUNED_LOG_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_mangrove"), new ResourceLocation("minecraft", "block/mangrove_log_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_mangrove"), new ResourceLocation("minecraft", "block/mangrove_log_top")))
     .tag(BlockTags.MANGROVE_LOGS, RootsTags.Blocks.RUNED_MANGROVE_LOG, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -439,7 +439,7 @@ public class ModBlocks {
 
   public static BlockEntry<RotatedPillarBlock> RUNED_WARPED_STEM = REGISTRATE.block("runed_warped_stem", RotatedPillarBlock::new)
     .properties(RUNED_STEM_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_warped"), new ResourceLocation("minecraft", "block/warped_stem_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_warped"), new ResourceLocation("minecraft", "block/warped_stem_top")))
     .tag(BlockTags.WARPED_STEMS, RootsTags.Blocks.RUNED_WARPED_STEM, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -447,7 +447,7 @@ public class ModBlocks {
     .register();
   public static BlockEntry<RotatedPillarBlock> RUNED_CRIMSON_STEM = REGISTRATE.block("runed_crimson_stem", RotatedPillarBlock::new)
     .properties(RUNED_STEM_PROPERTIES)
-    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), new ResourceLocation(RootsAPI.MODID, "block/runed_crimson"), new ResourceLocation("minecraft", "block/crimson_stem_top")))
+    .blockstate((ctx, p) -> p.axisBlock(ctx.getEntry(), RootsAPI.rl("block/runed_crimson"), new ResourceLocation("minecraft", "block/crimson_stem_top")))
     .tag(BlockTags.CRIMSON_STEMS, RootsTags.Blocks.RUNED_CRIMSON_STEM, BlockTags.MINEABLE_WITH_AXE)
     .item()
     .model(ItemModelGenerator::itemModel)
@@ -1170,7 +1170,7 @@ public class ModBlocks {
   public static BlockEntry<FeyLightBlock> FEY_LIGHT = REGISTRATE.block("fey_light", FeyLightBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.TORCH).lightLevel(l -> 15).sound(SoundType.WOOL))
     .blockstate((ctx, p) -> {
-      ModelFile model = p.models().cubeAll(ctx.getName(), new ResourceLocation(RootsAPI.MODID, "block/grove_padding"));
+      ModelFile model = p.models().cubeAll(ctx.getName(), RootsAPI.rl("block/grove_padding"));
       p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> ConfiguredModel.builder().modelFile(model).build());
     })
     .tag(BlockTags.MINEABLE_WITH_AXE)
@@ -1209,7 +1209,7 @@ public class ModBlocks {
         .define('L', Ingredient.of(ItemTags.LOGS))
         .define('R', Ingredient.of(RootsTags.Items.RUNESTONE))
         .unlockedBy("has_runestone", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "grove_crafter"));
+        .save(p, RootsAPI.rl("grove_crafter"));
     })
     .register();
 
@@ -1227,7 +1227,7 @@ public class ModBlocks {
         .pattern("LLL")
         .define('L', Ingredient.of(ItemTags.LOGS))
         .unlockedBy("has_log", RegistrateRecipeProvider.has(ItemTags.LOGS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "grove_pedestal"));
+        .save(p, RootsAPI.rl("grove_pedestal"));
     })
     .register();
 
@@ -1248,7 +1248,7 @@ public class ModBlocks {
         .addIngredient(WILDWOOD_LOG)
         .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
         .unlockedBy("has_wildwood", p.has(RootsTags.Items.WILDWOOD_LOGS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/wildwood_pedestal"));
+        .save(p, RootsAPI.rl("grove/wildwood_pedestal"));
     })
     .register();
 
@@ -1264,7 +1264,7 @@ public class ModBlocks {
         .requires(Ingredient.of(ModBlocks.GROVE_PEDESTAL.get()))
         .requires(Ingredient.of(RootsTags.Items.LEVERS))
         .unlockedBy("has_pedestal", RegistrateRecipeProvider.has(ModBlocks.GROVE_PEDESTAL.get()))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "display_pedestal"));
+        .save(p, RootsAPI.rl("display_pedestal"));
     })
     .register();
 
@@ -1330,14 +1330,14 @@ public class ModBlocks {
 
       model = switch (state.getValue(GroveStoneBlock.PART)) {
         case MIDDLE ->
-          p.models().withExistingParent(type + "_grove_stone_middle" + (valid ? "_valid" : ""), new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_middle"));
+          p.models().withExistingParent(type + "_grove_stone_middle" + (valid ? "_valid" : ""), RootsAPI.rl("block/complex/grove_stone_middle"));
         case BOTTOM ->
-          p.models().withExistingParent(type + "_grove_stone_bottom" + (valid ? "_valid" : ""), new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_bottom"));
+          p.models().withExistingParent(type + "_grove_stone_bottom" + (valid ? "_valid" : ""), RootsAPI.rl("block/complex/grove_stone_bottom"));
         default ->
-          p.models().withExistingParent(type + "_grove_stone_top" + (valid ? "_valid" : ""), new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_top"));
+          p.models().withExistingParent(type + "_grove_stone_top" + (valid ? "_valid" : ""), RootsAPI.rl("block/complex/grove_stone_top"));
       };
 
-      ResourceLocation active = new ResourceLocation(RootsAPI.MODID, type.equals("primal") ? "block/ob_stone_active" : "block/ob_stone_active_" + type);
+      ResourceLocation active = RootsAPI.rl(type.equals("primal") ? "block/ob_stone_active" : "block/ob_stone_active_" + type);
 
       if (valid) {
         model.texture("monolith", active);
@@ -1345,9 +1345,9 @@ public class ModBlocks {
       }
 
       if (type.equals("primal")) {
-        p.models().withExistingParent(type + "_grove_stone_inventory", new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_full"));
+        p.models().withExistingParent(type + "_grove_stone_inventory", RootsAPI.rl("block/complex/grove_stone_full"));
       } else {
-        p.models().withExistingParent(type + "_grove_stone_inventory", new ResourceLocation(RootsAPI.MODID, "block/complex/grove_stone_full")).texture("monolith", active).texture("particle", active);
+        p.models().withExistingParent(type + "_grove_stone_inventory", RootsAPI.rl("block/complex/grove_stone_full")).texture("monolith", active).texture("particle", active);
       }
 
       Direction dir = state.getValue(GroveStoneBlock.FACING);
@@ -1375,7 +1375,7 @@ public class ModBlocks {
         .pattern("RR")
         .define('R', Ingredient.of(RootsTags.Items.RUNESTONE))
         .unlockedBy("has_runestone", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "primal_grove_stone"));
+        .save(p, RootsAPI.rl("primal_grove_stone"));
     })
     .register();
 
@@ -1402,7 +1402,7 @@ public class ModBlocks {
         .pattern("RRR")
         .define('R', Ingredient.of(RootsTags.Items.RUNESTONE))
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar"));
+        .save(p, RootsAPI.rl("mortar"));
     })
     .register();
 
@@ -1421,7 +1421,7 @@ public class ModBlocks {
         .define('C', Ingredient.of(ItemTags.COALS))
         .define('R', Ingredient.of(RootsTags.Items.RUNESTONE))
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "pyre"));
+        .save(p, RootsAPI.rl("pyre"));
     })
     .register();
 
@@ -1440,7 +1440,7 @@ public class ModBlocks {
         .define('C', Ingredient.of(ItemTags.COALS))
         .define('R', Ingredient.of(RootsTags.Items.RUNED_OBSIDIAN))
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "reinforced_pyre"));
+        .save(p, RootsAPI.rl("reinforced_pyre"));
       ShapedRecipeBuilder.shaped(ctx.getEntry())
         .pattern("RRR")
         .pattern("RPR")
@@ -1449,7 +1449,7 @@ public class ModBlocks {
         .define('P', Ingredient.of(ModBlocks.PYRE.get()))
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNED_OBSIDIAN))
         .unlockedBy("has_item2", RegistrateRecipeProvider.has(ModBlocks.PYRE.get()))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "reinforced_pyre_from_pyre"));
+        .save(p, RootsAPI.rl("reinforced_pyre_from_pyre"));
     })
     .register();
 
@@ -1458,7 +1458,7 @@ public class ModBlocks {
     .blockstate(BlockstateGenerator.existingNoRotation("block/complex/pyre"))
     .tag(RootsTags.Blocks.PYRES, BlockTags.MINEABLE_WITH_AXE, RootsTags.Blocks.NYI)
     .item()
-    .model((ctx, p) -> p.withExistingParent(p.name(ctx::getEntry), new ResourceLocation(RootsAPI.MODID, "block/complex/pyre")))
+    .model((ctx, p) -> p.withExistingParent(p.name(ctx::getEntry), RootsAPI.rl("block/complex/pyre")))
     .build()
     .register();
 
@@ -1572,18 +1572,18 @@ public class ModBlocks {
   // POTS
 
   public static BlockEntry<FlowerPotBlock> POTTED_BAFFLECAP = REGISTRATE.block("potted_bafflecap", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.BAFFLECAP, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
-    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/bafflecap"))))
+    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", RootsAPI.rl("block/bafflecap"))))
     .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.BAFFLECAP.get())))
     .tag(BlockTags.FLOWER_POTS)
     .register();
   public static BlockEntry<FlowerPotBlock> POTTED_STONEPETAL = REGISTRATE.block("potted_stonepetal", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.STONEPETAL, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
-    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/stonepetal"))))
+    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", RootsAPI.rl("block/stonepetal"))))
     .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.STONEPETAL.get())))
     .tag(BlockTags.FLOWER_POTS)
     .register();
 
   public static BlockEntry<FlowerPotBlock> POTTED_WILDWOOD_SAPLING = REGISTRATE.block("potted_wildwood_spaling", Material.DECORATION, (p) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.WILDWOOD_SAPLING, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
-    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", new ResourceLocation(RootsAPI.MODID, "block/wildwood_sapling"))))
+    .blockstate((ctx, p) -> p.simpleBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), "minecraft:block/flower_pot_cross").texture("plant", RootsAPI.rl("block/wildwood_sapling"))))
     .loot((ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get())))
     .tag(BlockTags.FLOWER_POTS)
     .register();

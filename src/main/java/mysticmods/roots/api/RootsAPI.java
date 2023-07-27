@@ -49,37 +49,41 @@ public abstract class RootsAPI {
 
   // Identifiers & Logs
   public static final String MODID = "roots";
-  public static ResourceLocation LIVING_TOOL_TIER_ID = new ResourceLocation(MODID, "living_tool");
+
+  public static ResourceLocation rl (String path) {
+    return new ResourceLocation(MODID, path);
+  }
+  public static ResourceLocation LIVING_TOOL_TIER_ID = rl("living_tool");
   public static final String MOD_IDENTIFIER = "Roots";
   public static Logger LOG = LogManager.getLogger();
 
   // Registry keys
-  public static ResourceKey<Registry<Herb>> HERB_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "herbs"));
-  public static ResourceKey<Registry<Ritual>> RITUAL_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "rituals"));
-  public static ResourceKey<Registry<Spell>> SPELL_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "spells"));
-  public static ResourceKey<Registry<Modifier>> MODIFIER_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "modifiers"));
-  public static ResourceKey<Registry<RitualProperty<?>>> RITUAL_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "ritual_properties"));
-  public static ResourceKey<Registry<SpellProperty<?>>> SPELL_PROPERTY_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "spell_properties"));
-  public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "level_conditions"));
-  public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITION_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "player_conditions"));
+  public static ResourceKey<Registry<Herb>> HERB_REGISTRY = key(RootsAPI.rl("herbs"));
+  public static ResourceKey<Registry<Ritual>> RITUAL_REGISTRY = key(RootsAPI.rl("rituals"));
+  public static ResourceKey<Registry<Spell>> SPELL_REGISTRY = key(RootsAPI.rl("spells"));
+  public static ResourceKey<Registry<Modifier>> MODIFIER_REGISTRY = key(RootsAPI.rl("modifiers"));
+  public static ResourceKey<Registry<RitualProperty<?>>> RITUAL_PROPERTY_REGISTRY = key(RootsAPI.rl("ritual_properties"));
+  public static ResourceKey<Registry<SpellProperty<?>>> SPELL_PROPERTY_REGISTRY = key(RootsAPI.rl("spell_properties"));
+  public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITION_REGISTRY = key(RootsAPI.rl("level_conditions"));
+  public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITION_REGISTRY = key(RootsAPI.rl("player_conditions"));
   public static ResourceKey<Registry<SnapshotSerializer<?>>>
-    SNAPSHOT_SERIALIZER_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "snapshot_serializers"));
+    SNAPSHOT_SERIALIZER_REGISTRY = key(RootsAPI.rl("snapshot_serializers"));
 
-  public static ResourceKey<Registry<EntityTestType<?>>> ENTITY_TEST_TYPE_REGISTRY = key(new ResourceLocation(RootsAPI.MODID, "entity_test_types"));
+  public static ResourceKey<Registry<EntityTestType<?>>> ENTITY_TEST_TYPE_REGISTRY = key(RootsAPI.rl("entity_test_types"));
 
   private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
     return ResourceKey.createRegistryKey(name);
   }
 
   // Capability IDs
-  public static final ResourceLocation HERB_CAPABILITY_ID = new ResourceLocation(MODID, "herb_capability");
-  public static final ResourceLocation GRANT_CAPABILITY_ID = new ResourceLocation(MODID, "grant_capability");
-  public static final ResourceLocation SNAPSHOT_CAPABILITY_ID = new ResourceLocation(MODID, "snapshot_capability");
-  public static final ResourceLocation SHOULDER_CAPABILITY_ID = new ResourceLocation(MODID, "shoulder_capability");
+  public static final ResourceLocation HERB_CAPABILITY_ID = rl("herb_capability");
+  public static final ResourceLocation GRANT_CAPABILITY_ID = rl("grant_capability");
+  public static final ResourceLocation SNAPSHOT_CAPABILITY_ID = rl("snapshot_capability");
+  public static final ResourceLocation SHOULDER_CAPABILITY_ID = rl("shoulder_capability");
 
-  public static final ResourceLocation RUNIC_SHEARS_ENTITY_CAPABILITY_ID = new ResourceLocation(MODID, "runic_shears_entity_capability");
-  public static final ResourceLocation RUNIC_SHEARS_TOKEN_CAPABILITY = new ResourceLocation(MODID, "runic_shears_token_capability");
-  public static final ResourceLocation SQUID_MILKING_CAPABILITY = new ResourceLocation(MODID, "squid_milking_capability");
+  public static final ResourceLocation RUNIC_SHEARS_ENTITY_CAPABILITY_ID = rl("runic_shears_entity_capability");
+  public static final ResourceLocation RUNIC_SHEARS_TOKEN_CAPABILITY = rl("runic_shears_token_capability");
+  public static final ResourceLocation SQUID_MILKING_CAPABILITY = rl("squid_milking_capability");
 
   // Actual API methods
   public abstract IRecipeManagerAccessor getRecipeAccessor();

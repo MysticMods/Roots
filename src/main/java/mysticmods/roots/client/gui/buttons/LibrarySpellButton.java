@@ -24,7 +24,7 @@ public class LibrarySpellButton extends TypedButton<Spell, SpellSupplier<Spell>,
     return spellSupplier.get();
   }
 
-  private static final ResourceLocation highlight = new ResourceLocation(RootsAPI.MODID, "textures/gui/library_spell_slot_highlight.png");
+  private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/library_spell_slot_highlight.png");
 
   @Override
   public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {

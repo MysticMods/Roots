@@ -24,7 +24,7 @@ public class DuckRenderer extends MobRenderer<DuckEntity, DuckModel> {
   @Override
   @Nonnull
   public ResourceLocation getTextureLocation(@Nonnull DuckEntity entity) {
-    return new ResourceLocation(RootsAPI.MODID, "textures/entity/duck.png");
+    return RootsAPI.rl("textures/entity/duck.png");
   }
 
   @Override

@@ -74,7 +74,7 @@ public class ModRecipes {
   });
 
   // TODO: Update everything to use RecipeType.simple
-  public static RegistryObject<RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(new ResourceLocation(RootsAPI.MODID, "runic_entity")));
+  public static RegistryObject<RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));
 
   static {
     REGISTRATE.addDataGenerator(ProviderType.RECIPE, (p) -> {
@@ -86,7 +86,7 @@ public class ModRecipes {
         .addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS)
         .addIngredient(RootsTags.Items.WILDROOT_CROP)
         .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "ritual/animal_harvest"));
+        .save(p, RootsAPI.rl("ritual/animal_harvest"));
       PyreRecipe
         .builder(ModRituals.GROVE_SUPPLICATION.get())
         .addIngredient(ItemTags.DOORS)
@@ -95,7 +95,7 @@ public class ModRecipes {
         .addIngredient(RootsTags.Items.PETALS)
         .addIngredient(Items.BREAD)
         .unlockedBy("has_door", p.has(ItemTags.DOORS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "ritual/grove_supplication"));
+        .save(p, RootsAPI.rl("ritual/grove_supplication"));
       PyreRecipe
         .builder(ModRituals.WILDROOT_GROWTH.get())
         .addIngredient(RootsTags.Items.WILDROOT_CROP)
@@ -105,25 +105,25 @@ public class ModRecipes {
         .addIngredient(ItemTags.SAPLINGS)
         .unlockedBy("has_spiritleaf", p.has(RootsTags.Items.SPIRITLEAF))
         .addLevelCondition(ModConditions.MATURE_WILDROOT_CROP.get())
-        .save(p, new ResourceLocation(RootsAPI.MODID, "ritual/wildroot_growth"));
-      MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsTags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.Type.SPELL, Spells.GROWTH_INFUSION.location())).unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP)).save(p, new ResourceLocation(RootsAPI.MODID, "spell/growth_infusion"));
+        .save(p, RootsAPI.rl("ritual/wildroot_growth"));
+      MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsTags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.Type.SPELL, Spells.GROWTH_INFUSION.location())).unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP)).save(p, RootsAPI.rl("spell/growth_infusion"));
       MortarRecipe
         .multiBuilder(ModItems.FLOUR.get(), 2)
         .addIngredient(Tags.Items.CROPS_WHEAT)
         .unlockedBy("has_wheat", p.has(Tags.Items.CROPS_WHEAT))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/flour_from_wheat"));
+        .save(p, RootsAPI.rl("mortar/flour_from_wheat"));
       MortarRecipe
         .multiBuilder(Items.STRING, 6)
         .addIngredient(ItemTags.WOOL)
         .unlockedBy("has_wool", p.has(ItemTags.WOOL))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/string_from_wool"));
+        .save(p, RootsAPI.rl("mortar/string_from_wool"));
       MortarRecipe
         .multiBuilder(Items.FLINT, 6)
         .addIngredient(Tags.Items.GRAVEL)
         .unlockedBy("has_gravel", p.has(Tags.Items.GRAVEL))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/flint_from_gravel"));
+        .save(p, RootsAPI.rl("mortar/flint_from_gravel"));
 
-      GroveRecipe.builder(new ItemStack(ModItems.GLASS_EYE.get())).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.DUSTS_GLOWSTONE).unlockedBy("has_glowstone", p.has(Tags.Items.DUSTS_GLOWSTONE)).save(p, new ResourceLocation(RootsAPI.MODID, "grove/glass_eye"));
+      GroveRecipe.builder(new ItemStack(ModItems.GLASS_EYE.get())).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.DUSTS_GLOWSTONE).unlockedBy("has_glowstone", p.has(Tags.Items.DUSTS_GLOWSTONE)).save(p, RootsAPI.rl("grove/glass_eye"));
     });
   }
 
@@ -134,7 +134,7 @@ public class ModRecipes {
   @SubscribeEvent
   public static void registerRecipeSerializers(RegisterEvent event) {
     if (event.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS)) {
-      CraftingHelper.register(new ResourceLocation(RootsAPI.MODID, "excluding_ingredient"), ExcludingIngredient.Serializer.INSTANCE);
+      CraftingHelper.register(RootsAPI.rl("excluding_ingredient"), ExcludingIngredient.Serializer.INSTANCE);
     }
   }
 

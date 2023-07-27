@@ -35,6 +35,6 @@ public interface Spells {
   ResourceKey<Spell> WILDFIRE = spell("wildfire");
 
   static ResourceKey<Spell> spell(String name) {
-    return ResourceKey.create(RootsAPI.SPELL_REGISTRY, new ResourceLocation(RootsAPI.MODID, name));
+    return ResourceKey.create(RootsAPI.SPELL_REGISTRY, RootsAPI.rl(name));
   }
 }

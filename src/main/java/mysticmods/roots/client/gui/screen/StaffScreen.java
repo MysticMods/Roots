@@ -154,7 +154,7 @@ public class StaffScreen extends RootsScreen {
     Minecraft.getInstance().setScreen(newScreen);
   }
 
-  private static final ResourceLocation background = new ResourceLocation(RootsAPI.MODID, "textures/gui/staff_gui_new.png");
+  private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_gui_new.png");
 
   @Override
   public ResourceLocation getBackground() {

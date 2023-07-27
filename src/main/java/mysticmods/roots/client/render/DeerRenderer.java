@@ -20,8 +20,8 @@ public class DeerRenderer extends MobRenderer<DeerEntity, DeerModel> {
   @Nonnull
   public ResourceLocation getTextureLocation(@Nonnull DeerEntity entity) {
     if (entity.getId() % 20 == 0) {
-      return new ResourceLocation(RootsAPI.MODID, "textures/entity/rudolph.png");
+      return RootsAPI.rl("textures/entity/rudolph.png");
     }
-    return new ResourceLocation(RootsAPI.MODID, "textures/entity/deer.png");
+    return RootsAPI.rl("textures/entity/deer.png");
   }
 }

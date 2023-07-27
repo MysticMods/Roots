@@ -18,8 +18,8 @@ public class StaffSpellButton extends TypedButton<SpellInstance, SpellSupplier<S
     super(parentScreen, spellGetter, id, pX, pY, 16, 16, parentScreen::buttonClicked);
   }
 
-  private static final ResourceLocation background = new ResourceLocation(RootsAPI.MODID, "textures/gui/staff_spell_slot.png");
-  private static final ResourceLocation highlight = new ResourceLocation(RootsAPI.MODID, "textures/gui/staff_spell_slot_highlight.png");
+  private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_spell_slot.png");
+  private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/staff_spell_slot_highlight.png");
 
   @Override
   public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {

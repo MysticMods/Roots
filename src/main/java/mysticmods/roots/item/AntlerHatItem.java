@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.config.ConfigManager;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -60,9 +61,11 @@ public class AntlerHatItem extends ModifiedArmorItem {
     }
   }
 
+  private static final String texture = RootsAPI.rl("textures/models/armor/antler_hat.png").toString();
+
   @Nullable
   @Override
   public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-    return RootsAPI.MODID + ":textures/models/armor/antler_hat.png";
+    return texture;
   }
 }

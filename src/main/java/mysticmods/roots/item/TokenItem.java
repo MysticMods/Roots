@@ -368,7 +368,7 @@ public class TokenItem extends Item {
     }
   }
 
-  public static final ResourceLocation INVALID_MODEL = new ResourceLocation(RootsAPI.MODID, "invalid");
+  public static final ResourceLocation INVALID_MODEL = RootsAPI.rl("invalid");
 
   public static ResourceLocation getModelLocation(ItemStack stack) {
     CompoundTag tag = stack.getOrCreateTag();

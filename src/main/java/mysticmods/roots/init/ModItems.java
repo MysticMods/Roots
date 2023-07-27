@@ -51,7 +51,7 @@ import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModItems {
   private static <T extends Item> NonNullBiConsumer<DataGenContext<Item, T>, RegistrateItemModelProvider> subfolder(String subfolder) {
-    return (ctx, p) -> p.generated(ctx::getEntry, new ResourceLocation(RootsAPI.MODID, "item/" + subfolder + "/" + ctx.getName()));
+    return (ctx, p) -> p.generated(ctx::getEntry, RootsAPI.rl("item/" + subfolder + "/" + ctx.getName()));
   }
 
   // GATHERED CROPS
@@ -94,7 +94,7 @@ public class ModItems {
         .setCondition(new WorldRecipe.Condition(new TagMatchTest(RootsTags.Blocks.BAFFLECAP_CONVERSION)))
         .setOutputState(Blocks.AIR.defaultBlockState())
         .unlockedBy("has_runic_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "runic/block/bafflecap_from_mushroom"));
+        .save(p, RootsAPI.rl("runic/block/bafflecap_from_mushroom"));
     })
     .register();
   public static final ItemEntry<Item> MOONGLOW = REGISTRATE.item("moonglow", Item::new)
@@ -138,7 +138,7 @@ public class ModItems {
         .setCondition(new WorldRecipe.Condition(new BlockPropertyMatchTest(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, BeetrootBlock.MAX_AGE), BeetrootBlock.AGE)))
         .setOutputState(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, 0))
         .unlockedBy("has_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "runic/block/spiritleaf_seeds"));
+        .save(p, RootsAPI.rl("runic/block/spiritleaf_seeds"));
     })
     .register();
   public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.WILDEWHEET_CROP.get(), p))
@@ -154,7 +154,7 @@ public class ModItems {
         .addIngredient(ItemTags.DIRT)
         .addChanceOutput(new ItemStack(ctx.getEntry(), 1), 0.1f)
         .unlockedBy("has_item", p.has(ItemTags.DIRT))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "mortar/grove_spores_from_dirt"));
+        .save(p, RootsAPI.rl("mortar/grove_spores_from_dirt"));
     })
     .register();
 
@@ -164,11 +164,11 @@ public class ModItems {
     .register();
 
   public static RegistryEntry<Item> PELT = REGISTRATE.item("pelt", Item::new)
-    .recipe((ctx, p) -> RECIPES.singleItemUnfinished(ModItems.PELT, () -> Items.LEATHER, 1, 1).save(p, new ResourceLocation(RootsAPI.MODID, "pelt_to_leather")))
+    .recipe((ctx, p) -> RECIPES.singleItemUnfinished(ModItems.PELT, () -> Items.LEATHER, 1, 1).save(p, RootsAPI.rl("pelt_to_leather")))
     .register();
 
   public static RegistryEntry<Item> ANTLERS = REGISTRATE.item("antlers", Item::new)
-    .recipe((ctx, p) -> RECIPES.singleItemUnfinished(ModItems.ANTLERS, () -> Items.BONE_MEAL, 1, 9).save(p, new ResourceLocation(RootsAPI.MODID, "antlers_to_bonemeal")))
+    .recipe((ctx, p) -> RECIPES.singleItemUnfinished(ModItems.ANTLERS, () -> Items.BONE_MEAL, 1, 9).save(p, RootsAPI.rl("antlers_to_bonemeal")))
     .register();
 
   public static ItemEntry<Item> VENISON = REGISTRATE.item("venison", Item::new)
@@ -390,12 +390,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_ACACIA_LOG.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.ACACIA_LOG)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/acacia_log_stripping"));
+        .save(p, RootsAPI.rl("bark/acacia_log_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_ACACIA_WOOD.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.ACACIA_WOOD)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/acacia_wood_stripping"));
+        .save(p, RootsAPI.rl("bark/acacia_wood_stripping"));
     })
     .register();
 
@@ -407,12 +407,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_BIRCH_LOG.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.BIRCH_LOG)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/birch_log_stripping"));
+        .save(p, RootsAPI.rl("bark/birch_log_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_BIRCH_WOOD.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.BIRCH_WOOD)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/birch_wood_stripping"));
+        .save(p, RootsAPI.rl("bark/birch_wood_stripping"));
     })
     .register();
 
@@ -424,12 +424,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_DARK_OAK_LOG.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.DARK_OAK_LOG)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/dark_oak_log_stripping"));
+        .save(p, RootsAPI.rl("bark/dark_oak_log_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.DARK_OAK_WOOD)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/dark_oak_wood_stripping"));
+        .save(p, RootsAPI.rl("bark/dark_oak_wood_stripping"));
     })
     .register();
 
@@ -441,12 +441,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_JUNGLE_LOG.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.JUNGLE_LOG)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/jungle_log_stripping"));
+        .save(p, RootsAPI.rl("bark/jungle_log_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_JUNGLE_WOOD.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.JUNGLE_WOOD)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/jungle_wood_stripping"));
+        .save(p, RootsAPI.rl("bark/jungle_wood_stripping"));
     })
     .register();
 
@@ -458,12 +458,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_OAK_LOG.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.OAK_LOG)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/oak_log_stripping"));
+        .save(p, RootsAPI.rl("bark/oak_log_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_OAK_WOOD.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.OAK_WOOD)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/oak_wood_stripping"));
+        .save(p, RootsAPI.rl("bark/oak_wood_stripping"));
     })
     .register();
 
@@ -475,12 +475,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_SPRUCE_LOG.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.SPRUCE_LOG)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/spruce_log_stripping"));
+        .save(p, RootsAPI.rl("bark/spruce_log_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_SPRUCE_WOOD.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.SPRUCE_WOOD)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/spruce_wood_stripping"));
+        .save(p, RootsAPI.rl("bark/spruce_wood_stripping"));
     })
     .register();
 
@@ -492,12 +492,12 @@ public class ModItems {
         .setOutputState(ModBlocks.STRIPPED_WILDWOOD_LOG.getDefaultState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(ModBlocks.WILDWOOD_LOG.get())))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/wildwood_log_stripping"));
+        .save(p, RootsAPI.rl("bark/wildwood_log_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(ModBlocks.STRIPPED_WILDWOOD_WOOD.getDefaultState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(ModBlocks.WILDWOOD_WOOD.get())))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/wildwood_wood_stripping"));
+        .save(p, RootsAPI.rl("bark/wildwood_wood_stripping"));
     })
     .register();
 
@@ -509,12 +509,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_CRIMSON_STEM.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.CRIMSON_STEM)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/crimson_stem_stripping"));
+        .save(p, RootsAPI.rl("bark/crimson_stem_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_CRIMSON_HYPHAE.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.CRIMSON_HYPHAE)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/crimson_hyphae_stripping"));
+        .save(p, RootsAPI.rl("bark/crimson_hyphae_stripping"));
     })
     .register();
 
@@ -526,12 +526,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_WARPED_STEM.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.WARPED_STEM)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/warped_stem_stripping"));
+        .save(p, RootsAPI.rl("bark/warped_stem_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_WARPED_HYPHAE.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.WARPED_HYPHAE)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/warped_hyphae_stripping"));
+        .save(p, RootsAPI.rl("bark/warped_hyphae_stripping"));
     })
     .register();
 
@@ -543,12 +543,12 @@ public class ModItems {
         .setOutputState(Blocks.STRIPPED_MANGROVE_LOG.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.MANGROVE_LOG)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/mangrove_log_stripping"));
+        .save(p, RootsAPI.rl("bark/mangrove_log_stripping"));
       BarkRecipe.builder(ctx.getEntry(), 3)
         .setOutputState(Blocks.STRIPPED_MANGROVE_WOOD.defaultBlockState())
         .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.MANGROVE_WOOD)))
         .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "bark/mangrove_wood_stripping"));
+        .save(p, RootsAPI.rl("bark/mangrove_wood_stripping"));
     })
     .register();
 
@@ -601,7 +601,7 @@ public class ModItems {
         .define('W', Ingredient.of(RootsTags.Items.WILDROOT_CROP))
         .define('B', Ingredient.of(Items.BOWL))
         .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "wildroot_stew"));
+        .save(p, RootsAPI.rl("wildroot_stew"));
     })
     .register();
 
@@ -618,7 +618,7 @@ public class ModItems {
         .define('L', Ingredient.of(ItemTags.LOGS))
         .unlockedBy("has_stick", p.has(Tags.Items.RODS_WOODEN))
         .unlockedBy("has_flint", p.has(RootsTags.Items.FLINT))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "fire_starter"));
+        .save(p, RootsAPI.rl("fire_starter"));
     })
     .register();
 
@@ -641,7 +641,7 @@ public class ModItems {
       .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
-      .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_axe")))
+      .save(p, RootsAPI.rl("grove/living_axe")))
     .register();
 
   public static final ItemEntry<LivingHoeItem> LIVING_HOE = REGISTRATE.item("living_hoe", (p) -> new LivingHoeItem(RootsAPI.LIVING_TOOL_TIER, -1, -2.0f, p))
@@ -655,7 +655,7 @@ public class ModItems {
       .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
-      .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_hoe")))
+      .save(p, RootsAPI.rl("grove/living_hoe")))
     .register();
 
   public static final ItemEntry<LivingPickaxeItem> LIVING_PICKAXE = REGISTRATE.item("living_pickaxe", (p) -> new LivingPickaxeItem(RootsAPI.LIVING_TOOL_TIER, 1, -2.8f, p))
@@ -669,7 +669,7 @@ public class ModItems {
       .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
-      .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_pickaxe")))
+      .save(p, RootsAPI.rl("grove/living_pickaxe")))
     .register();
 
   public static final ItemEntry<LivingShovelItem> LIVING_SHOVEL = REGISTRATE.item("living_shovel", (p) -> new LivingShovelItem(RootsAPI.LIVING_TOOL_TIER, 1.5F, -3.0F, p))
@@ -683,7 +683,7 @@ public class ModItems {
       .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
-      .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_shovel")))
+      .save(p, RootsAPI.rl("grove/living_shovel")))
     .register();
 
   public static final ItemEntry<LivingSwordItem> LIVING_SWORD = REGISTRATE.item("living_sword", (p) -> new LivingSwordItem(RootsAPI.LIVING_TOOL_TIER, 3, -2.4f, p))
@@ -697,7 +697,7 @@ public class ModItems {
       .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
       .unlockedBy("has_gold", p.has(Tags.Items.INGOTS_GOLD))
       .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
-      .save(p, new ResourceLocation(RootsAPI.MODID, "grove/living_sword")))
+      .save(p, RootsAPI.rl("grove/living_sword")))
     .register();
 
   public static final ItemEntry<Item> PESTLE = REGISTRATE.item("pestle", Item::new)
@@ -710,7 +710,7 @@ public class ModItems {
         .pattern("SS ")
         .define('S', Ingredient.of(RootsTags.Items.STONELIKE))
         .unlockedBy("has_stone", p.has(RootsTags.Items.STONELIKE))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "pestle"));
+        .save(p, RootsAPI.rl("pestle"));
     })
     .register();
 
@@ -748,7 +748,7 @@ public class ModItems {
         .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
         .unlockedBy("has_grove_moss", p.has(RootsTags.Items.GROVE_MOSS_CROP))
         .unlockedBy("has_shears", p.has(ModItems.WOODEN_SHEARS.get()))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "grove/runic_shears"));
+        .save(p, RootsAPI.rl("grove/runic_shears"));
     })
     .tag(RootsTags.Items.RUNIC_SHEARS)
     .register();
@@ -778,7 +778,7 @@ public class ModItems {
         .pattern(" LL")
         .define('L', Ingredient.of(ItemTags.LOGS))
         .unlockedBy("has_log", p.has(ItemTags.LOGS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "wooden_shears"));
+        .save(p, RootsAPI.rl("wooden_shears"));
     })
     .register();
 
@@ -836,7 +836,7 @@ public class ModItems {
         .setCooldown(2 * 60 * 20)
         .setTest(new EntityTagTest(RootsTags.Entities.FEY_LEATHER))
         .unlockedBy("has_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "runic/entity/fey_leather"));
+        .save(p, RootsAPI.rl("runic/entity/fey_leather"));
     })
     .register();
 
@@ -859,11 +859,11 @@ public class ModItems {
       MortarRecipe.multiBuilder(ctx.getEntry(), 1)
         .addIngredient(ItemTags.SMALL_FLOWERS)
         .unlockedBy("has_flower", p.has(ItemTags.SMALL_FLOWERS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "petals_from_small_flowers"));
+        .save(p, RootsAPI.rl("petals_from_small_flowers"));
       MortarRecipe.multiBuilder(new ItemStack(ctx.getEntry(), 2), 2)
         .addIngredient(ItemTags.TALL_FLOWERS)
         .unlockedBy("has_flower", p.has(ItemTags.TALL_FLOWERS))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "petals_from_tall_flowers"));
+        .save(p, RootsAPI.rl("petals_from_tall_flowers"));
     })
     .register();
 
@@ -872,7 +872,7 @@ public class ModItems {
     .recipe((ctx, p) -> MortarRecipe.multiBuilder(ctx.getEntry(), 1)
       .addIngredient(RootsTags.Items.RUNESTONE)
       .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
-      .save(p, new ResourceLocation(RootsAPI.MODID, "runic_dust")))
+      .save(p, RootsAPI.rl("runic_dust")))
     .tag(RootsTags.Items.RUNIC_DUST)
     .register();
 
@@ -938,10 +938,10 @@ public class ModItems {
     .recipe((ctx, p) -> {
       SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.RAW_SILVER), ModItems.SILVER_INGOT.get(), 0.7f, 200)
         .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "silver_ingot_from_raw_silver_smelting"));
+        .save(p, RootsAPI.rl("silver_ingot_from_raw_silver_smelting"));
       SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.RAW_SILVER), ModItems.SILVER_INGOT.get(), 0.7f, 100)
         .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "silver_ingot_from_raw_silver_blasting"));
+        .save(p, RootsAPI.rl("silver_ingot_from_raw_silver_blasting"));
       ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 9)
         .requires(RootsTags.Items.RAW_SILVER_STORAGE)
         .unlockedBy("has_raw_silver_storage", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER_STORAGE))
@@ -970,7 +970,7 @@ public class ModItems {
       ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 9)
         .requires(Tags.Items.INGOTS_COPPER)
         .unlockedBy("has_copper_ingot", RegistrateRecipeProvider.has(Tags.Items.INGOTS_COPPER))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "copper_nugget_from_ingot"));
+        .save(p, RootsAPI.rl("copper_nugget_from_ingot"));
       ShapedRecipeBuilder.shaped(Items.COPPER_INGOT)
         .pattern("***")
         .pattern("*X*")
@@ -978,7 +978,7 @@ public class ModItems {
         .define('*', RootsTags.Items.COPPER_NUGGET)
         .define('X', ctx.getEntry())
         .unlockedBy("has_copper_nugget", p.has(RootsTags.Items.COPPER_NUGGET))
-        .save(p, new ResourceLocation(RootsAPI.MODID, "copper_ingot_from_nuggets"));
+        .save(p, RootsAPI.rl("copper_ingot_from_nuggets"));
     })
     .register();
 

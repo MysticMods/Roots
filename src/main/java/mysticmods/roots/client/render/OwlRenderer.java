@@ -19,6 +19,6 @@ public class OwlRenderer extends MobRenderer<OwlEntity, OwlModel> {
   @Override
   @Nonnull
   public ResourceLocation getTextureLocation(@Nonnull OwlEntity entity) {
-    return new ResourceLocation(RootsAPI.MODID, "textures/entity/owl.png");
+    return RootsAPI.rl("textures/entity/owl.png");
   }
 }

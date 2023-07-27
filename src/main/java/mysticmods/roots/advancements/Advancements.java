@@ -8,9 +8,9 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import noobanidus.libs.noobutil.advancement.GenericTrigger;
 
 public class Advancements {
-  public static final ResourceLocation PACIFIST_ID = new ResourceLocation(RootsAPI.MODID, "pacifist");
-  public static final ResourceLocation ACTIVATE_ID = new ResourceLocation(RootsAPI.MODID, "grove_activation");
-  public static final ResourceLocation CRAFTING_ID = new ResourceLocation(RootsAPI.MODID, "grove_crafting");
+  public static final ResourceLocation PACIFIST_ID = RootsAPI.rl("pacifist");
+  public static final ResourceLocation ACTIVATE_ID = RootsAPI.rl("grove_activation");
+  public static final ResourceLocation CRAFTING_ID = RootsAPI.rl("grove_crafting");
   public static GenericTrigger<GroveRecipe> CRAFTING_TRIGGER;
   public static GenericTrigger<LivingDeathEvent> PACIFIST_TRIGGER;
   public static GenericTrigger<Void> ACTIVATE_TRIGGER;

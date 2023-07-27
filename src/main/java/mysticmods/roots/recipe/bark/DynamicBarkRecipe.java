@@ -21,7 +21,7 @@ import net.minecraftforge.common.ToolActions;
 import javax.annotation.Nullable;
 
 public class DynamicBarkRecipe extends BarkRecipe {
-  public static DynamicBarkRecipe INSTANCE = new DynamicBarkRecipe(new ResourceLocation(RootsAPI.MODID, "bark/dynamic_modded_wood_bark"));
+  public static DynamicBarkRecipe INSTANCE = new DynamicBarkRecipe(RootsAPI.rl("bark/dynamic_modded_wood_bark"));
 
   public DynamicBarkRecipe(ResourceLocation recipeId) {
     super(recipeId);
