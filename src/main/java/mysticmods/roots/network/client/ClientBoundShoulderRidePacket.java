@@ -49,6 +49,7 @@ public class ClientBoundShoulderRidePacket {
 
   public void handle(Supplier<NetworkEvent.Context> context) {
     context.get().enqueueWork(() -> handle(this, context));
+    context.get().setPacketHandled(true);
   }
 
   @OnlyIn(Dist.CLIENT)

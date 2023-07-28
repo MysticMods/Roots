@@ -13,7 +13,6 @@ import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -106,6 +105,39 @@ public class ModRecipes {
         .unlockedBy("has_spiritleaf", p.has(RootsTags.Items.SPIRITLEAF))
         .addLevelCondition(ModConditions.MATURE_WILDROOT_CROP.get())
         .save(p, RootsAPI.rl("ritual/wildroot_growth"));
+      PyreRecipe
+        .builder(ModItems.CLOUD_BERRY.get(), 2)
+        .addIngredient(Items.LIGHTNING_ROD)
+        .addIngredient(Items.SUGAR) // TOOD: Make this a tag?
+        .addIngredient(ItemTags.LEAVES)
+        .addIngredient(ItemTags.WOOL)
+        .addIngredient(RootsTags.Items.ACACIA_BARK)
+        .unlockedBy("has_lightning_rod", p.has(Items.LIGHTNING_ROD))
+        .save(p, RootsAPI.rl("pyre/cloud_berry"));
+      PyreRecipe.builder(ModItems.DEWGONIA.get(), 2)
+        .addIngredient(Items.WATER_BUCKET)
+        .addIngredient(Items.CLAY_BALL)
+        .addIngredient(Items.PUMPKIN)
+        .addIngredient(Items.SUGAR_CANE)
+        .addIngredient(Items.KELP)
+        .unlockedBy("has_kelp", p.has(Items.KELP))
+        .save(p, RootsAPI.rl("pyre/dewgonie"));
+      PyreRecipe.builder(ModItems.INFERNO_BULB.get(), 2)
+        .addIngredient(Items.MAGMA_CREAM)
+        .addIngredient(Items.NETHERRACK)
+        .addIngredient(ItemTags.COALS)
+        .addIngredient(ModItems.FIRE_STARTER.get())
+        .addIngredient(Items.BRICK)
+        .unlockedBy("has_netherrack", p.has(Items.NETHERRACK))
+        .save(p, RootsAPI.rl("pyre/inferno_bulb"));
+      PyreRecipe.builder(ModItems.STALICRIPE.get(), 2)
+        .addIngredient(Items.TUFF)
+        .addIngredient(Items.COBBLED_DEEPSLATE)
+        .addIngredient(RootsTags.Items.FLINT)
+        .addIngredient(Tags.Items.RAW_MATERIALS_IRON) // TODO: Tag silver???
+        .addIngredient(Items.GLOW_LICHEN)
+        .unlockedBy("has_glow_lichen", p.has(Items.GLOW_LICHEN))
+        .save(p, RootsAPI.rl("pyre/stalicripe"));
       MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsTags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.Type.SPELL, Spells.GROWTH_INFUSION.location())).unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP)).save(p, RootsAPI.rl("spell/growth_infusion"));
       MortarRecipe
         .multiBuilder(ModItems.FLOUR.get(), 2)
@@ -122,6 +154,11 @@ public class ModRecipes {
         .addIngredient(Tags.Items.GRAVEL)
         .unlockedBy("has_gravel", p.has(Tags.Items.GRAVEL))
         .save(p, RootsAPI.rl("mortar/flint_from_gravel"));
+      MortarRecipe
+        .multiBuilder(Items.MAGMA_CREAM, 5, 3)
+        .addIngredient(Items.MAGMA_BLOCK)
+        .unlockedBy("has_magma_block", p.has(Items.MAGMA_BLOCK))
+        .save(p, RootsAPI.rl("mortar/magma_cream_from_magma_block"));
 
       GroveRecipe.builder(new ItemStack(ModItems.GLASS_EYE.get())).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.DUSTS_GLOWSTONE).unlockedBy("has_glowstone", p.has(Tags.Items.DUSTS_GLOWSTONE)).save(p, RootsAPI.rl("grove/glass_eye"));
     });

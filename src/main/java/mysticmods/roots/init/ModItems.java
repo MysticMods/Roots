@@ -97,6 +97,7 @@ public class ModItems {
         .save(p, RootsAPI.rl("runic/block/bafflecap_from_mushroom"));
     })
     .register();
+  // TODO: Determine which tags have been referenced but are empty
   public static final ItemEntry<Item> MOONGLOW = REGISTRATE.item("moonglow", Item::new)
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.MOONGLOW_CROP)

@@ -97,8 +97,10 @@ public class ModTags {
           EntityType.TRADER_LLAMA
         );
     });
+    // TODO: Determine which tags have been referenced but are empty
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {
       // Internal mod tags
+      b.tag(RootsTags.Blocks.BAFFLECAP_CONVERSION).add(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, Blocks.WARPED_FUNGUS, Blocks.CRIMSON_FUNGUS);
       b.tag(RootsTags.Blocks.GRASS).add(Blocks.GRASS, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
       b.tag(RootsTags.Blocks.LEVERS).add(Blocks.LEVER);
       // TODO: CHECK
