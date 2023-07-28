@@ -41,7 +41,7 @@ public class StaffScreen extends RootsScreen {
 
   private SpellStorage getStorage() {
     if (cachedStorage == null) {
-      cachedStorage = SpellStorage.fromItem(stack);
+      cachedStorage = SpellStorage.getOrCreate(stack);
     }
     return cachedStorage;
   }
