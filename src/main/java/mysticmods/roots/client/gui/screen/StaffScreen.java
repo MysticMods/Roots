@@ -30,11 +30,10 @@ public class StaffScreen extends RootsScreen {
   private int selectedLibrary = -1;
 
   protected StaffScreen(InteractionHand hand) {
-    super(Component.literal(""));
+    super(Component.translatable("roots.gui.spell_library"));
     this.hand = hand;
     this.width = 256;
     this.height = 192;
-    // TODO: Alternately suppress null possibility/constant conditions
   }
 
   private SpellStorage cachedStorage = null;

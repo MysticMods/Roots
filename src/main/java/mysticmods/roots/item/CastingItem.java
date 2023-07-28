@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+// TODO: Handle item colors
 public class CastingItem extends Item implements ICastingItem {
   public CastingItem(Properties pProperties) {
     super(pProperties);
