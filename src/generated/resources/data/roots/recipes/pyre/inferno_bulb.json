@@ -1,0 +1,24 @@
+{
+  "type": "roots:pyre",
+  "ingredients": [
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "minecraft:netherrack"
+    },
+    {
+      "tag": "minecraft:coals"
+    },
+    {
+      "item": "roots:fire_starter"
+    },
+    {
+      "item": "minecraft:brick"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "roots:inferno_bulb"
+  }
+}
