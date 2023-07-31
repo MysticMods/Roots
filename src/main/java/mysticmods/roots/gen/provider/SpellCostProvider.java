@@ -28,6 +28,9 @@ public class SpellCostProvider extends BaseProvider implements DataProvider {
     Set<ResourceLocation> set = Sets.newHashSet();
     for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
       ResourceLocation id = Registries.SPELL_REGISTRY.get().getKey(spell);
+      if (id == null) {
+        throw new NullPointerException("Null id for spell " + spell + "; how is this possible???");
+      }
       if (!set.add(id)) {
         throw new IllegalStateException("Duplicate recipe " + id);
       } else {

@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -116,8 +117,8 @@ public class SpellInstance implements SpellLike {
     return getCooldown() <= 0;
   }
 
-  public void cast(Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
-    spell.cast(pPlayer, pStack, pHand, costs, this, ticks);
+  public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
+    spell.cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
   }
 
   public CompoundTag toNBT() {

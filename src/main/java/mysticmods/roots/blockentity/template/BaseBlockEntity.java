@@ -115,7 +115,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
     if (clientBounds == null) {
       BoundingBox box = getBoundingBox();
       if (box != null) {
-        clientBounds = AABB.of(box.inflatedBy(getRadiusX() + getRadiusY() + getRadiusZ()));
+        clientBounds = AABB.of(box); //.inflatedBy(getRadiusX() + getRadiusY() + getRadiusZ()));
       }
     }
 

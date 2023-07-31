@@ -14,6 +14,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.ArrayList;
@@ -72,6 +73,8 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
     SpellProperty<Integer> cooldownProperty = getCooldownProperty();
     if (cooldownProperty != null) {
       this.cooldown = cooldownProperty.getValue();
+    } else {
+      throw new IllegalStateException("Spell " + this + " has no cooldown property!");
     }
     SpellProperty<Double> reachProperty = getReachProperty();
     if (reachProperty != null) {
@@ -86,7 +89,7 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
     initialize();
   }
 
-  public abstract void cast(Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);
+  public abstract void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);
 
   protected double getRange (Player pPlayer) {
     return pPlayer.getReachDistance() + reach;

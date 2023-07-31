@@ -24,6 +24,10 @@ public class ModSpells {
   public static final RegistryEntry<AcidCloudSpell> ACID_CLOUD = spell(Spells.ACID_CLOUD, AcidCloudSpell::new, ChatFormatting.GREEN, () -> List.of(Cost.add(ModHerbs.BAFFLECAP, 0.250), Cost.add(ModHerbs.CLOUD_BERRY, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> ACID_CLOUD_COOLDOWN = property(Spells.ACID_CLOUD, "cooldown", () -> new SpellProperty<>(ACID_CLOUD::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
+  public static final RegistryEntry<SpellProperty<Integer>> ACID_CLOUD_RADIUS_ZX = property(Spells.ACID_CLOUD, "radius_zx", () -> new SpellProperty<>(ACID_CLOUD::get, 4, Property.INTEGER_SERIALIZER, "Radius"));
+  public static final RegistryEntry<SpellProperty<Integer>> ACID_CLOUD_RADIUS_Y = property(Spells.ACID_CLOUD, "radius_y", () -> new SpellProperty<>(ACID_CLOUD::get, 2, Property.INTEGER_SERIALIZER, "Radius"));
+  public static final RegistryEntry<SpellProperty<Float>> ACID_CLOUD_DAMAGE = property(Spells.ACID_CLOUD, "damage", () -> new SpellProperty<>(ACID_CLOUD::get, 2.0f, Property.FLOAT_SERIALIZER, SpellProperties.DAMAGE));
+
   // Aqua Bubble (1200 cooldown)
   public static final RegistryEntry<AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.DEWGONIA, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> AQUA_BUBBLE_COOLDOWN = property(Spells.AQUA_BUBBLE, "cooldown", () -> new SpellProperty<>(AQUA_BUBBLE::get, 1200, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));

@@ -54,7 +54,7 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
         pLevel.setBlock(chestPos, Blocks.CHEST.defaultBlockState(), 2);
         if (pLevel.getBlockEntity(chestPos) instanceof RandomizableContainerBlockEntity lootChest) {
           // TODO: Generate loot table
-          lootChest.setLootTable(BuiltInLootTables.BURIED_TREASURE, pRandom.nextLong());
+          lootChest.setLootTable(RootsAPI.rl("standing_stones"), pRandom.nextLong());
         }
       }
       ForgeRegistries.BLOCKS.tags().getTag(BlockTags.SMALL_FLOWERS).getRandomElement(pRandom).ifPresent(block -> {

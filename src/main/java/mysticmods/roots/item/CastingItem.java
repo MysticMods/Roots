@@ -1,14 +1,11 @@
 package mysticmods.roots.item;
 
-import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.item.ICastingItem;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
-import mysticmods.roots.init.ModLang;
 import mysticmods.roots.network.Networking;
 import mysticmods.roots.network.client.ClientBoundOpenLibraryPacket;
 import mysticmods.roots.util.TooltipUtil;
@@ -76,7 +73,7 @@ public class CastingItem extends Item implements ICastingItem {
       }
     }
 
-    spell.cast(pPlayer, pStack, pPlayer.getUsedItemHand(), costs, ticks);
+    spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costs, ticks);
 
     if (ticks % 20 == 0) {
       costs.charge(pPlayer);
@@ -118,7 +115,7 @@ public class CastingItem extends Item implements ICastingItem {
       spell.setCooldown(pPlayer);
 
       if (spell.getType() == Spell.Type.INSTANT) {
-        spell.cast(pPlayer, stack, pUsedHand, costing, -1);
+        spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
         costing.charge(pPlayer);
       } else {
         pPlayer.startUsingItem(pUsedHand);
