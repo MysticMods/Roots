@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:wildwood_ladder"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wildwood": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "roots:planks/wildwood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wildwood",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:wildwood_ladder"
+    ]
+  }
+}

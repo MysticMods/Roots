@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "roots:mossy_runestone"
+  },
+  "result": "roots:mossy_runestone_wall"
+}

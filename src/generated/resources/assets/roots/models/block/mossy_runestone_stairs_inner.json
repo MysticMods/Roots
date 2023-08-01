@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "roots:block/mossy_runestone",
+    "side": "roots:block/mossy_runestone",
+    "top": "roots:block/mossy_runestone"
+  }
+}

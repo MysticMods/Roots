@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "roots:block/mossy_runestone_slab"
+    },
+    "type=double": {
+      "model": "roots:block/mossy_runestone"
+    },
+    "type=top": {
+      "model": "roots:block/mossy_runestone_slab_top"
+    }
+  }
+}

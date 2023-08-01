@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/ladder",
+  "textures": {
+    "particle": "roots:block/wildwood_ladder",
+    "texture": "roots:block/wildwood_ladder"
+  }
+}

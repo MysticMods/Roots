@@ -144,6 +144,20 @@ public class ModBlocks {
         .save(p, RootsAPI.rl("grove/runestone_grove_crafting"));
     })
     .register();
+  public static BlockEntry<Block> MOSSY_RUNESTONE = REGISTRATE.block("mossy_runestone", Block::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+      ShapelessRecipeBuilder.shapeless(ctx.getEntry())
+        .requires(RootsTags.Items.RUNESTONE)
+        .requires(RootsTags.Items.GROVE_MOSS_CROP)
+        .unlockedBy("has_grove_moss", RegistrateRecipeProvider.has(RootsTags.Items.GROVE_MOSS_CROP))
+        .save(p, RootsAPI.rl("mossy_runestone_from_runestone"));
+    })
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(RootsTags.Blocks.RUNESTONE, RootsTags.Blocks.RUNE_PILLARS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
   public static BlockEntry<Block> CHISELED_RUNESTONE = REGISTRATE.block("chiseled_runestone", Block::new)
     .properties(RUNESTONE_PROPERTIES)
     .recipe((ctx, p) -> Roots.RECIPES.twoByTwo(ModBlocks.RUNESTONE_BRICK, ModBlocks.CHISELED_RUNESTONE, null, 4, p))
@@ -326,6 +340,7 @@ public class ModBlocks {
     .properties(WILDWOOD_PLANKS_PROPERTIES)
     .item()
     .model(ItemModelGenerator::itemModel)
+    .tag(RootsTags.Items.WILDWOOD_PLANKS)
     .build()
     .tag(BlockTags.PLANKS, BlockTags.MINEABLE_WITH_AXE)
     .register();
@@ -467,6 +482,16 @@ public class ModBlocks {
     .build()
     .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
     .register();
+  public static BlockEntry<StairBlock> MOSSY_RUNESTONE_STAIRS = REGISTRATE.block("mossy_runestone_stairs", (p) -> new StairBlock(ModBlocks.MOSSY_RUNESTONE::getDefaultState, p))
+    .properties(RUNESTONE_PROPERTIES)
+    .blockstate(BlockstateGenerator.stairs(MOSSY_RUNESTONE))
+    .recipe((ctx, p) -> p.stairs(DataIngredient.items(ModBlocks.MOSSY_RUNESTONE), ModBlocks.MOSSY_RUNESTONE_STAIRS, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.STAIRS)
+    .build()
+    .tag(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
   public static BlockEntry<StairBlock> RUNESTONE_BRICK_STAIRS = REGISTRATE.block("runestone_brick_stairs", (p) -> new StairBlock(ModBlocks.RUNESTONE_BRICK::getDefaultState, p))
     .properties(RUNESTONE_PROPERTIES)
     .blockstate(BlockstateGenerator.stairs(RUNESTONE_BRICK))
@@ -533,6 +558,17 @@ public class ModBlocks {
     .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
     .blockstate(BlockstateGenerator.slab(RUNESTONE))
     .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_SLAB, null, true))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .tag(ItemTags.SLABS)
+    .build()
+    .tag(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .loot((p, t) -> p.add(t, RegistrateBlockLootTables.createSlabItemTable(t)))
+    .register();
+  public static BlockEntry<SlabBlock> MOSSY_RUNESTONE_SLAB = REGISTRATE.block("mossy_runestone_slab", SlabBlock::new)
+    .properties(o -> BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.5f, 6.0f))
+    .blockstate(BlockstateGenerator.slab(MOSSY_RUNESTONE))
+    .recipe((ctx, p) -> p.slab(DataIngredient.items(ModBlocks.MOSSY_RUNESTONE), ModBlocks.MOSSY_RUNESTONE_SLAB, null, true))
     .item()
     .model(ItemModelGenerator::itemModel)
     .tag(ItemTags.SLABS)
@@ -623,6 +659,19 @@ public class ModBlocks {
       }
     )
     .blockstate(BlockstateGenerator.fence(RUNESTONE))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .build()
+    .tag(BlockTags.FENCES, net.minecraftforge.common.Tags.Blocks.FENCES, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<FenceBlock> MOSSY_RUNESTONE_FENCE = REGISTRATE.block("mossy_runestone_fence", FenceBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+        p.fence(DataIngredient.items(ModBlocks.MOSSY_RUNESTONE), ModBlocks.MOSSY_RUNESTONE_FENCE, null);
+        p.stonecutting(DataIngredient.items(ModBlocks.MOSSY_RUNESTONE), ModBlocks.MOSSY_RUNESTONE_FENCE, 2);
+      }
+    )
+    .blockstate(BlockstateGenerator.fence(MOSSY_RUNESTONE))
     .item()
     .model(ItemModelGenerator::inventoryModel)
     .build()
@@ -942,6 +991,29 @@ public class ModBlocks {
     .tag(BlockTags.TRAPDOORS, BlockTags.WOODEN_TRAPDOORS, BlockTags.MINEABLE_WITH_AXE)
     .register();
 
+  // LADDERS
+
+  public static BlockEntry<LadderBlock> WILDWOOD_LADDER = REGISTRATE.block("wildwood_ladder", LadderBlock::new)
+    .properties(o -> BlockBehaviour.Properties.copy(Blocks.LADDER))
+    .item()
+    .model((ctx, p) -> p.generated(ctx::getEntry, p.modLoc("block/wildwood_ladder")))
+    .build()
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 4)
+        .pattern("X X")
+        .pattern("XWX")
+        .pattern("X X")
+        .define('X', Ingredient.of(Tags.Items.RODS_WOODEN))
+        .define('W', Ingredient.of(RootsTags.Items.WILDWOOD_PLANKS))
+        .unlockedBy("has_wildwood", p.has(RootsTags.Items.WILDWOOD_PLANKS))
+        .save(p, RootsAPI.rl("wildwood_ladder"));
+      })
+    .blockstate((ctx, p) -> {
+      p.horizontalBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), new ResourceLocation("minecraft", "block/ladder")).texture("particle", p.modLoc("block/wildwood_ladder")).texture("texture", p.modLoc("block/wildwood_ladder")));
+    })
+    .tag(BlockTags.CLIMBABLE)
+    .register();
+
   // GATES
 
   public static BlockEntry<FenceGateBlock> RUNESTONE_GATE = REGISTRATE.block("runestone_gate", FenceGateBlock::new)
@@ -951,6 +1023,18 @@ public class ModBlocks {
       p.stonecutting(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_GATE, 2);
     })
     .blockstate(BlockstateGenerator.gate(RUNESTONE))
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .tag(BlockTags.FENCE_GATES, net.minecraftforge.common.Tags.Blocks.FENCE_GATES, BlockTags.UNSTABLE_BOTTOM_CENTER, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+  public static BlockEntry<FenceGateBlock> MOSSY_RUNESTONE_GATE = REGISTRATE.block("mossy_runestone_gate", FenceGateBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .recipe((ctx, p) -> {
+      p.fenceGate(DataIngredient.items(ModBlocks.MOSSY_RUNESTONE), ModBlocks.MOSSY_RUNESTONE_GATE, null);
+      p.stonecutting(DataIngredient.items(ModBlocks.MOSSY_RUNESTONE), ModBlocks.MOSSY_RUNESTONE_GATE, 2);
+    })
+    .blockstate(BlockstateGenerator.gate(MOSSY_RUNESTONE))
     .item()
     .model(ItemModelGenerator::itemModel)
     .build()
@@ -1033,6 +1117,17 @@ public class ModBlocks {
     .properties(RUNESTONE_PROPERTIES)
     .blockstate(BlockstateGenerator.wall(RUNESTONE))
     .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.RUNESTONE), ModBlocks.RUNESTONE_WALL))
+    .item()
+    .model(ItemModelGenerator::inventoryModel)
+    .tag(ItemTags.WALLS)
+    .build()
+    .tag(BlockTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE)
+    .register();
+
+  public static BlockEntry<WallBlock> MOSSY_RUNESTONE_WALL = REGISTRATE.block("mossy_runestone_wall", WallBlock::new)
+    .properties(RUNESTONE_PROPERTIES)
+    .blockstate(BlockstateGenerator.wall(MOSSY_RUNESTONE))
+    .recipe((ctx, p) -> p.wall(DataIngredient.items(ModBlocks.MOSSY_RUNESTONE), ModBlocks.MOSSY_RUNESTONE_WALL))
     .item()
     .model(ItemModelGenerator::inventoryModel)
     .tag(ItemTags.WALLS)
