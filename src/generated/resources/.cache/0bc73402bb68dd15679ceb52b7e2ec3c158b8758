@@ -1,5 +1,9 @@
-// 1.19.2	2023-07-17T12:10:25.5963543	Spell properties
+// 1.19.2	2023-08-01T12:12:55.5467634	Spell properties
 8844f1c40708dd1992206793e7d9be5be8d83ba5 data/roots/properties/spell/acid_cloud/cooldown.json
+c3a3cb26bf1c2fc234507699f251d408f590a61c data/roots/properties/spell/acid_cloud/count.json
+5f17dd45df38dbdc58352b6dcce4ec744fec9451 data/roots/properties/spell/acid_cloud/damage.json
+dcf2255ae2fbe93c4481f481226c769824345106 data/roots/properties/spell/acid_cloud/radius_y.json
+5d2838a2020b2138ea3c63b8f84dd4e11f70b7d2 data/roots/properties/spell/acid_cloud/radius_zx.json
 33b16724324655a4c9aaf2eb77a87aa220546488 data/roots/properties/spell/aqua_bubble/cooldown.json
 6bbbd0cb5df07d25b93c6ca2134704bcd5c20b63 data/roots/properties/spell/augment/cooldown.json
 4e4f7e9801531a6ed17df41c3fad55cec6747f82 data/roots/properties/spell/control_undead/cooldown.json

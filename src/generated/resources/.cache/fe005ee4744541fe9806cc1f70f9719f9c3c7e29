@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-28T20:13:15.3220623	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-08-01T12:12:55.5735152	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -119,8 +119,8 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-3e05117a8d768f317c2f97f2a9aeaa1d13ecef9e assets/roots/lang/en_ud.json
-4d51ce81e04411fc58bb2f567cbb462f80921013 assets/roots/lang/en_us.json
+4cd997b952b2ee8b801b6937aef1eb6a83b9001b assets/roots/lang/en_ud.json
+4bc2a9f18a3af821fb0e9521d47b4b0105f9edf8 assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
@@ -1589,6 +1589,7 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/items/crops/pereskia.js
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/items/grove_stones.json
 9ce47e233dd6af731b5f5a7562ccb7fa94f97db5 data/roots/tags/items/grove_stones/primal.json
 f1e0595e6e860acc2a47a21b8ee2e74d7b1a46e5 data/roots/tags/items/herbs.json
+d6ef38e38b2457620f02a7c7cd8c35b9915bded1 data/roots/tags/items/herbs/bafflecap.json
 e4c7774a71c33e82d562f08c73d3ee806325fd74 data/roots/tags/items/herbs/cloud_berry.json
 7c425734c6afaa67acb32cf4a8c1ed1d4ace8de8 data/roots/tags/items/herbs/dewgonia.json
 6248d10db82e3e59a69dc90d105c7276b0e7a4f9 data/roots/tags/items/herbs/grove_moss.json

@@ -217,6 +217,7 @@ public class ModTags {
       b.tag(RootsTags.Items.WILDEWHEET).addTag(RootsTags.Items.WILDEWHEET_CROP);
       b.tag(RootsTags.Items.SPIRITLEAF).addTag(RootsTags.Items.SPIRITLEAF_CROP);
       b.tag(RootsTags.Items.GROVE_MOSS).addTag(RootsTags.Items.GROVE_MOSS_CROP);
+      b.tag(RootsTags.Items.BAFFLECAP).addTag(RootsTags.Items.BAFFLECAP_CROP);
 
       b.tag(RootsTags.Items.HERBS).addTags(RootsTags.Items.MOONGLOW, RootsTags.Items.SPIRITLEAF, RootsTags.Items.CLOUD_BERRY, RootsTags.Items.DEWGONIA, RootsTags.Items.PERESKIA, RootsTags.Items.STALICRIPE, RootsTags.Items.INFERNO_BULB, RootsTags.Items.WILDROOT, RootsTags.Items.WILDEWHEET, RootsTags.Items.SPIRITLEAF, RootsTags.Items.GROVE_MOSS);
 

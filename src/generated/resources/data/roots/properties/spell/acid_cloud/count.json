@@ -1,0 +1,6 @@
+{
+  "_comment": "How many entities the spell will affect per interval",
+  "default_value": 1,
+  "spell": "roots:acid_cloud",
+  "value": 1
+}

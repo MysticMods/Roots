@@ -1,0 +1,6 @@
+{
+  "_comment": "Radius",
+  "default_value": 4,
+  "spell": "roots:acid_cloud",
+  "value": 4
+}

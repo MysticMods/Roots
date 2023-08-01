@@ -1,0 +1,6 @@
+{
+  "_comment": "How much damage the spell will cause",
+  "default_value": 2.0,
+  "spell": "roots:acid_cloud",
+  "value": 2.0
+}
