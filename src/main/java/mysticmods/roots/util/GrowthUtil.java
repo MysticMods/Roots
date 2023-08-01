@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,7 +35,7 @@ public class GrowthUtil {
 
     CropData crop = getCropData(state);
     if (!crop.isEmpty()) {
-      if (crop.isMaxAge(state)) {
+      if (!crop.isMaxAge(state)) {
         return crop.growthTicks();
       }
     } else {
@@ -46,9 +47,9 @@ public class GrowthUtil {
     return 0;
   }
 
-  private static final CropData NULL_CROP = new CropData(null, -1);
+  private static final CropData NULL_CROP = new CropData(Blocks.AIR, null, -1);
 
-  private record CropData(IntegerProperty ageProperty, int maxAge) {
+  private record CropData(Block block, IntegerProperty ageProperty, int maxAge) {
     public boolean isEmpty() {
       return this == NULL_CROP;
     }
@@ -83,7 +84,7 @@ public class GrowthUtil {
 
     Block block = state.getBlock();
     if (block instanceof CropBlock crop) {
-      result = new CropData(crop.getAgeProperty(), crop.getMaxAge());
+      result = new CropData(block, crop.getAgeProperty(), crop.getMaxAge());
       CROP_AGES.put(block, result);
       return result;
     } else {
@@ -91,7 +92,7 @@ public class GrowthUtil {
         if (AGE_PROPERTIES.contains(prop)) {
           IntegerProperty ageProp = (IntegerProperty) prop;
           int max = ageProp.getAllValues().mapToInt(Property.Value::value).max().orElseThrow(NoSuchElementException::new);
-          result = new CropData(ageProp, max);
+          result = new CropData(block, ageProp, max);
           CROP_AGES.put(block, result);
           return result;
         }
@@ -99,7 +100,7 @@ public class GrowthUtil {
       for (Property<?> prop : state.getProperties()) {
         if (prop instanceof IntegerProperty intProp && prop.getName().equals("age")) {
           int max = intProp.getAllValues().mapToInt(Property.Value::value).max().orElseThrow(NoSuchElementException::new);
-          result = new CropData(intProp, max);
+          result = new CropData(block, intProp, max);
           CROP_AGES.put(block, result);
           return result;
         }
