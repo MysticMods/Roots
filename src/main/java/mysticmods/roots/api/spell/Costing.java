@@ -151,7 +151,7 @@ public class Costing {
   }
 
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
-  public void charge(Player player) {
+  public boolean charge(Player player) {
     if (player.getLevel().isClientSide()) {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
     }
@@ -159,7 +159,7 @@ public class Costing {
 
     // TODO: ???
     if (noCharge) {
-      return;
+      return false;
     }
 
     Inventory playerInventory = player.getInventory();
@@ -201,6 +201,7 @@ public class Costing {
       }
     }
 
+    return true;
   }
 
   // TODO: Really need to come up with a cleaner way of doing this

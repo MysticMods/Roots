@@ -112,12 +112,13 @@ public class CastingItem extends Item implements ICastingItem {
         return InteractionResultHolder.fail(stack);
       }
 
-      spell.setCooldown(pPlayer);
-
       if (spell.getType() == Spell.Type.INSTANT) {
         spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
-        costing.charge(pPlayer);
+        if (costing.charge(pPlayer)) {
+          spell.setCooldown(pPlayer);
+        }
       } else {
+        spell.setCooldown(pPlayer);
         pPlayer.startUsingItem(pUsedHand);
       }
     }
