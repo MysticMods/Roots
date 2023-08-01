@@ -27,6 +27,7 @@ public class ModSpells {
   public static final RegistryEntry<SpellProperty<Integer>> ACID_CLOUD_RADIUS_ZX = property(Spells.ACID_CLOUD, "radius_zx", () -> new SpellProperty<>(ACID_CLOUD::get, 4, Property.INTEGER_SERIALIZER, "Radius"));
   public static final RegistryEntry<SpellProperty<Integer>> ACID_CLOUD_RADIUS_Y = property(Spells.ACID_CLOUD, "radius_y", () -> new SpellProperty<>(ACID_CLOUD::get, 2, Property.INTEGER_SERIALIZER, "Radius"));
   public static final RegistryEntry<SpellProperty<Float>> ACID_CLOUD_DAMAGE = property(Spells.ACID_CLOUD, "damage", () -> new SpellProperty<>(ACID_CLOUD::get, 2.0f, Property.FLOAT_SERIALIZER, SpellProperties.DAMAGE));
+  public static final RegistryEntry<SpellProperty<Integer>> ACID_CLOUD_COUNT = property(Spells.ACID_CLOUD, "count", () -> new SpellProperty<>(ACID_CLOUD::get, 1, Property.INTEGER_SERIALIZER, SpellProperties.COUNT));
 
   // Aqua Bubble (1200 cooldown)
   public static final RegistryEntry<AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.DEWGONIA, 0.250)));
