@@ -1,6 +1,7 @@
 package mysticmods.roots.worldgen.structure;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -33,8 +34,8 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
   @Override
   public void postProcess(WorldGenLevel pLevel, StructureManager pStructureManager, ChunkGenerator pGenerator, RandomSource pRandom, BoundingBox pBox, ChunkPos pChunkPos, BlockPos pPos) {
     if (this.updateAverageGroundHeight(pLevel, pBox, 0)) {
-      int x = pChunkPos.x * 16 + pRandom.nextInt(6);
-      int z = pChunkPos.z * 16 + pRandom.nextInt(6);
+      int x = pPos.getX(); //pChunkPos.x * 16 + pRandom.nextInt(6);
+      int z = pPos.getZ(); //pChunkPos.z * 16 + pRandom.nextInt(6);
       for (int i = 0; i < 360; i += 36) {
         if (pRandom.nextInt(3) != 0) {
           int height = pRandom.nextInt(3) + 4;
@@ -43,7 +44,7 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
           BlockPos pos = new BlockPos(tx, pLevel.getHeight(Heightmap.Types.WORLD_SURFACE_WG, tx, tz), tz);
           if (pLevel.getBlockState(pos.below()).is(BlockTags.DIRT)) {
             for (int j = 0; j < height; j++) {
-              pLevel.setBlock(pos.offset(0, j, 0), pRandom.nextFloat() < 0.4f ? Blocks.MOSSY_COBBLESTONE.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState(), 2);
+              pLevel.setBlock(pos.offset(0, j, 0), pRandom.nextFloat() < 0.4f ? ModBlocks.MOSSY_RUNESTONE.getDefaultState() : ModBlocks.RUNESTONE.getDefaultState(), 2);
             }
           }
         }
@@ -53,7 +54,6 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
         BlockPos chestPos = center.offset(0, -2, 0);
         pLevel.setBlock(chestPos, Blocks.CHEST.defaultBlockState(), 2);
         if (pLevel.getBlockEntity(chestPos) instanceof RandomizableContainerBlockEntity lootChest) {
-          // TODO: Generate loot table
           lootChest.setLootTable(RootsAPI.rl("standing_stones"), pRandom.nextLong());
         }
       }
