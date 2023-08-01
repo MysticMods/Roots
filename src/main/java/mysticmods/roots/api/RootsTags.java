@@ -1,7 +1,5 @@
 package mysticmods.roots.api;
 
-import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.ritual.Ritual;
@@ -14,11 +12,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
-
-import java.util.function.Supplier;
 
 // Tags
 public class RootsTags {
@@ -270,17 +264,17 @@ public class RootsTags {
 
     public static final TagKey<Item> LEVERS = compatTag("levers");
 
-    public static final TagKey<Item> GROVE_MOSS = modTag("herbs/grove_moss");
-    public static final TagKey<Item> INFERNO_BULB = modTag("herbs/inferno_bulb");
-    public static final TagKey<Item> MOONGLOW = modTag("herbs/moonglow");
-    public static final TagKey<Item> PERESKIA = modTag("herbs/pereskia");
-    public static final TagKey<Item> SPIRITLEAF = modTag("herbs/spiritleaf");
-    public static final TagKey<Item> STALICRIPE = modTag("herbs/stalicripe");
-    public static final TagKey<Item> WILDEWHEET = modTag("herbs/wildewheet");
-    public static final TagKey<Item> WILDROOT = modTag("herbs/wildroot");
-    public static final TagKey<Item> CLOUD_BERRY = modTag("herbs/cloud_berry");
-    public static final TagKey<Item> DEWGONIA = modTag("herbs/dewgonia");
-    public static final TagKey<Item> BAFFLECAP = modTag("herbs/bafflecap");
+    public static final TagKey<Item> GROVE_MOSS_HERB = modTag("herbs/grove_moss");
+    public static final TagKey<Item> INFERNO_BULB_HERB = modTag("herbs/inferno_bulb");
+    public static final TagKey<Item> MOONGLOW_HERB = modTag("herbs/moonglow");
+    public static final TagKey<Item> PERESKIA_HERB = modTag("herbs/pereskia");
+    public static final TagKey<Item> SPIRITLEAF_HERB = modTag("herbs/spiritleaf");
+    public static final TagKey<Item> STALICRIPE_HERB = modTag("herbs/stalicripe");
+    public static final TagKey<Item> WILDEWHEET_HERB = modTag("herbs/wildewheet");
+    public static final TagKey<Item> WILDROOT_HERB = modTag("herbs/wildroot");
+    public static final TagKey<Item> CLOUD_BERRY_HERB = modTag("herbs/cloud_berry");
+    public static final TagKey<Item> DEWGONIA_HERB = modTag("herbs/dewgonia");
+    public static final TagKey<Item> BAFFLECAP_HERB = modTag("herbs/bafflecap");
     public static final TagKey<Item> HERBS = modTag("herbs");
 
     // TODO: POPULATE THIS

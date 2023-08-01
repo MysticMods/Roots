@@ -102,7 +102,7 @@ public class ModRecipes {
         .addIngredient(RootsTags.Items.BARKS)
         .addIngredient(RootsTags.Items.SPIRITLEAF_CROP)
         .addIngredient(ItemTags.SAPLINGS)
-        .unlockedBy("has_spiritleaf", p.has(RootsTags.Items.SPIRITLEAF))
+        .unlockedBy("has_spiritleaf", p.has(RootsTags.Items.SPIRITLEAF_HERB))
         .addLevelCondition(ModConditions.MATURE_WILDROOT_CROP.get())
         .save(p, RootsAPI.rl("ritual/wildroot_growth"));
       PyreRecipe
