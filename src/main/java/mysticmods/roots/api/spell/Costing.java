@@ -43,6 +43,7 @@ public class Costing {
     modifierMap.defaultReturnValue(false);
   }
 
+  // TODO: IF you weren't charged should it trigger a cooldown?
   public void noCharge() {
     this.noCharge = true;
   }
