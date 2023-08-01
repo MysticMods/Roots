@@ -91,8 +91,17 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
 
   public abstract void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);
 
+  // TODO: How to handle reach
   protected double getRange (Player pPlayer) {
     return pPlayer.getReachDistance() + reach;
+  }
+
+  protected BlockHitResult pick (Player pPlayer, double range) {
+    return pick(pPlayer, range, false);
+  }
+
+  protected BlockHitResult pick (Player pPlayer, double range, boolean fluids) {
+    return (BlockHitResult) pPlayer.pick(range, 1f, fluids);
   }
 
   protected BlockHitResult pick (Player pPlayer) {

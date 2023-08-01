@@ -1,0 +1,6 @@
+{
+  "_comment": "The maximum distance a fey light can be placed from the caster",
+  "default_value": 10.0,
+  "spell": "roots:fey_light",
+  "value": 10.0
+}

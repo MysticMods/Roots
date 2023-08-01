@@ -42,10 +42,8 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
-  public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public void cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
     // TODO: This shouldn't ever be called client-side
-
-    ServerLevel level = (ServerLevel) pPlayer.level;
 
     BlockHitResult result = pick(pPlayer);
     BlockState at = level.getBlockState(result.getBlockPos());
@@ -54,7 +52,7 @@ public class GrowthInfusionSpell extends Spell {
     if (doTicks > 0 && level.random.nextInt(doTicks) == 0) {
       RootsAPI.LOG.info("RANDOM TICK: {}", ticks);
 
-      at.randomTick(level, result.getBlockPos(), level.random);
+      at.randomTick((ServerLevel) level, result.getBlockPos(), level.random);
     } else {
       costs.noCharge();
       RootsAPI.LOG.info("NO GROW! {}", ticks);
