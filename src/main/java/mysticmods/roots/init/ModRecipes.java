@@ -33,46 +33,15 @@ import static mysticmods.roots.Roots.REGISTRATE;
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModRecipes {
   private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, RootsAPI.MODID);
-  public static RegistryObject<RecipeType<PyreRecipe>> PYRE = TYPES.register("pyre", () -> new RecipeType<>() {
-    @Override
-    public String toString() {
-      return "roots:pyre";
-    }
-  });
-  public static RegistryObject<RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = TYPES.register("summon_creatures", () -> new RecipeType<>() {
-    @Override
-    public String toString() {
-      return "roots:summon_creatures";
-    }
-  });
-  public static RegistryObject<RecipeType<MortarRecipe>> MORTAR = TYPES.register("mortar", () -> new RecipeType<>() {
-    @Override
-    public String toString() {
-      return "roots:mortar";
-    }
-  });
-  // TODO: Inline these strings into Reference
-  public static RegistryObject<RecipeType<GroveRecipe>> GROVE = TYPES.register("grove", () -> new RecipeType<>() {
-    @Override
-    public String toString() {
-      return "roots:grove";
-    }
-  });
-  public static RegistryObject<RecipeType<BarkRecipe>> BARK = TYPES.register("bark", () -> new RecipeType<>() {
-    @Override
-    public String toString() {
-      return "roots:bark";
-    }
-  });
+  // TODO: Inline these ResourceLocations into Reference
+  public static RegistryObject<RecipeType<PyreRecipe>> PYRE = TYPES.register("pyre", () -> RecipeType.simple(RootsAPI.rl("pyre")));
+  public static RegistryObject<RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = TYPES.register("summon_creatures", () -> RecipeType.simple(RootsAPI.rl("summon_creatures")));
+  public static RegistryObject<RecipeType<MortarRecipe>> MORTAR = TYPES.register("mortar", () -> RecipeType.simple(RootsAPI.rl("mortar")));
+  public static RegistryObject<RecipeType<GroveRecipe>> GROVE = TYPES.register("grove", () -> RecipeType.simple(RootsAPI.rl("grove")));
+  public static RegistryObject<RecipeType<BarkRecipe>> BARK = TYPES.register("bark", () -> RecipeType.simple(RootsAPI.rl("bark")));
 
-  public static RegistryObject<RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> new RecipeType<>() {
-    @Override
-    public String toString() {
-      return "roots:runic_block";
-    }
-  });
+  public static RegistryObject<RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> RecipeType.simple(RootsAPI.rl("runic_block")));
 
-  // TODO: Update everything to use RecipeType.simple
   public static RegistryObject<RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));
 
   static {
