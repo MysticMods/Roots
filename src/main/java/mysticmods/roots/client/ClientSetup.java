@@ -23,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -73,7 +74,7 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onRegisterEntityRenders (EntityRenderersEvent.RegisterRenderers event) {
+  public static void onRegisterEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
     event.registerEntityRenderer(ModEntities.BEETLE.get(), BeetleRenderer::new);
     event.registerEntityRenderer(ModEntities.DEER.get(), DeerRenderer::new);
     event.registerEntityRenderer(ModEntities.DUCK.get(), DuckRenderer::new);

@@ -94,10 +94,10 @@ public class CastingItem extends Item implements ICastingItem {
 
     if (pPlayer.isShiftKeyDown()) {
       // TODO: Show spell library
-      ClientBoundOpenLibraryPacket packet = new ClientBoundOpenLibraryPacket(pUsedHand);
+/*      ClientBoundOpenLibraryPacket packet = new ClientBoundOpenLibraryPacket(pUsedHand);
       Networking.sendTo(packet, (ServerPlayer) pPlayer);
-      return InteractionResultHolder.success(stack);
-/*      storage.nextSpell();*/
+      return InteractionResultHolder.success(stack);*/
+      storage.nextSpell();
     } else {
       SpellInstance spell = storage.getSpell();
       if (spell == null || !spell.canCast(pPlayer)) {

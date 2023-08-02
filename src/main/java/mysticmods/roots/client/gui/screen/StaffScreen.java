@@ -74,7 +74,8 @@ public class StaffScreen extends RootsScreen {
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 8; x++) {
         if (index < spellInfo.size()) {
-          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, spellInfo.get(index)::spell, index++, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, !spellInfo.get(index).granted())));
+          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, spellInfo.get(index)::spell, index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, !spellInfo.get(index).granted())));
+          index++;
         }
       }
     }
