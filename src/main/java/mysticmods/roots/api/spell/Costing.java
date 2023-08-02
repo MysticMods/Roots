@@ -108,6 +108,9 @@ public class Costing {
   }
 
   public boolean canAfford(Player player, boolean checkModifiers) {
+    if (player.isCreative()) {
+      return true;
+    }
     calculateCosts(checkModifiers, false);
 
 
@@ -152,6 +155,9 @@ public class Costing {
 
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
   public boolean charge(Player player) {
+    if (player.isCreative()) {
+      return true;
+    }
     if (player.getLevel().isClientSide()) {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
     }
