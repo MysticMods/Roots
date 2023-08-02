@@ -55,6 +55,15 @@ public class ModRecipes {
         .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
         .save(p, RootsAPI.rl("ritual/animal_harvest"));
       PyreRecipe
+        .builder(ModRituals.OVERGROWTH.get())
+        .addIngredient(RootsTags.Items.BARKS)
+        .addIngredient(RootsTags.Items.BARKS)
+        .addIngredient(RootsTags.Items.GROVE_MOSS_CROP)
+        .addIngredient(Items.SUGAR_CANE)
+        .addIngredient(Items.GRASS)
+        .unlockedBy("has_sugar_cane", p.has(Items.SUGAR_CANE))
+        .save(p, RootsAPI.rl("ritual/overgrowth"));
+      PyreRecipe
         .builder(ModRituals.GROVE_SUPPLICATION.get())
         .addIngredient(ItemTags.DOORS)
         .addIngredient(Items.BOWL)

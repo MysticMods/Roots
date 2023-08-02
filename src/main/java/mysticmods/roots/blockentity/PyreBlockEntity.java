@@ -351,7 +351,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           updateViaState();
         }
       } else {
-        currentRitual.tick(this);
+        currentRitual.tick(pLevel, pPos, pState, this);
         if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
           pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, true), 3);
         }

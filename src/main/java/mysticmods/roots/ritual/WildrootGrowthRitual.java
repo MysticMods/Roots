@@ -12,15 +12,17 @@ import mysticmods.roots.worldgen.trees.WildwoodTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 public class WildrootGrowthRitual extends Ritual {
   private final AbstractTreeGrower treeGrower = new WildwoodTreeGrower();
 
   @Override
-  protected void functionalTick(PyreBlockEntity blockEntity, int duration) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
     if (duration == 0 || interval == 0) {
       RootsAPI.LOG.error("ugh");
     }
@@ -56,7 +58,7 @@ public class WildrootGrowthRitual extends Ritual {
   }
 
   @Override
-  protected void animationTick(PyreBlockEntity blockEntity, int duration) {
+  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
 
   }
 

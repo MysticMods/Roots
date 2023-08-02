@@ -4,6 +4,7 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -161,7 +162,7 @@ public class RootsTags {
     public static final TagKey<Block> QUARTZ_ORE = compatTag("ores/quartz");
     public static final TagKey<Block> SILVER_STORAGE = compatTag("storage_blocks/silver");
     public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
-
+    public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }

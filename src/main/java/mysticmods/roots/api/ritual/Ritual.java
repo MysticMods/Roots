@@ -4,9 +4,12 @@ import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
@@ -20,16 +23,20 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   protected int radiusY = 0;
   protected int interval = 0;
 
-  public void tick(PyreBlockEntity blockEntity) {
+  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity) {
     int dur = getDuration() - blockEntity.getLifetime();
-    functionalTick(blockEntity, dur);
-    animationTick(blockEntity, dur);
+    BoundingBox moved = getBoundingBox();
+    if (moved != null) {
+      moved = moved.move(pPos);
+    }
+    functionalTick(pLevel, pPos, pState, moved, blockEntity, dur);
+    animationTick(pLevel, pPos, pState, moved, blockEntity, dur);
   }
 
-  protected abstract void functionalTick(PyreBlockEntity blockEntity, int duration);
+  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration);
 
   // Still executed on the server
-  protected abstract void animationTick(PyreBlockEntity blockEntity, int duration);
+  protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration);
 
   protected void rebuildBounds() {
     boundingBox = new BoundingBox(-getRadiusXZ(), -getRadiusY(), -getRadiusXZ(), getRadiusXZ() + 1, getRadiusY() + 1, getRadiusXZ() + 1);

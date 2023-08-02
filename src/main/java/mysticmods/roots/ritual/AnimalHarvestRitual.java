@@ -8,6 +8,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.FakePlayerUtil;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,6 +18,9 @@ import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
@@ -37,14 +41,17 @@ public class AnimalHarvestRitual extends Ritual {
   private final Set<EntityType<?>> normalLoot = new ObjectLinkedOpenHashSet<>();
 
   @Override
-  public void functionalTick(PyreBlockEntity blockEntity, int duration) {
+  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel().getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !emptyLoot.contains(o.getType())));
       if (entities.isEmpty()) {
         return;
       }
       for (int i = 0; i < count; i++) {
-        LivingEntity entity = entities.get(blockEntity.getRandom().nextInt(entities.size()));
+        if (entities.isEmpty()) {
+          break;
+        }
+        LivingEntity entity = entities.remove(blockEntity.getRandom().nextInt(entities.size()));
         for (ItemStack stack : getDrops(entity)) {
           ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), entity.blockPosition(), stack);
         }
@@ -94,7 +101,7 @@ public class AnimalHarvestRitual extends Ritual {
   }
 
   @Override
-  public void animationTick(PyreBlockEntity blockEntity, int duration) {
+  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
 
   }
 

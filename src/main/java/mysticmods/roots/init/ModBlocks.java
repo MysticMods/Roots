@@ -1415,7 +1415,7 @@ public class ModBlocks {
     .blockstate((ctx, p) -> {
       p.simpleBlock(ctx.getEntry(), p.models().singleTexture(ctx.getName(), new ResourceLocation("minecraft", "block/carpet"), "wool", p.modLoc("block/creeping_grove_moss")));
     })
-    .tag(BlockTags.MINEABLE_WITH_HOE)
+    .tag(BlockTags.MINEABLE_WITH_HOE, RootsTags.Blocks.GROVE_MOSS)
     .register();
 
   public static BlockEntry<HangingRootsBlock> HANGING_GROVE_MOSS = REGISTRATE.block("hanging_grove_moss", Material.REPLACEABLE_PLANT, HangingRootsBlock::new)

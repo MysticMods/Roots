@@ -25,6 +25,40 @@ public class GroveSporesItem extends Item {
     super(pProperties);
   }
 
+  public static boolean canPlace (Level pLevel, BlockPos pPos, Direction pDirection) {
+    if (!pLevel.isEmptyBlock(pPos)) {
+      return false;
+    }
+
+    boolean canPlace = false;
+    if (pLevel.getFluidState(pPos).is(FluidTags.WATER)) {
+      return false;
+    }
+    for (Direction dir : Direction.values()) {
+      if (dir.getAxis().isVertical()) {
+        continue;
+      }
+
+      if (pLevel.getBlockState(pPos.relative(dir)).is(ModBlocks.CREEPING_GROVE_MOSS.get())) {
+        canPlace = true;
+        break;
+      }
+    }
+
+    if (!canPlace) {
+      BlockPos pPos2 = pPos.relative(pDirection.getOpposite());
+      for (Direction dir : Direction.values()) {
+        FluidState stateAt = pLevel.getFluidState(pPos2.relative(dir));
+        if (stateAt.is(FluidTags.WATER)) {
+          canPlace = true;
+          break;
+        }
+      }
+    }
+
+    return canPlace;
+  }
+
   @Override
   public InteractionResult useOn(UseOnContext context) {
     BlockPlaceContext pContext = new BlockPlaceContext(context);
@@ -32,65 +66,39 @@ public class GroveSporesItem extends Item {
       return InteractionResult.FAIL;
     } else {
       BlockPos pPos = pContext.getClickedPos();
+      Level pLevel = pContext.getLevel();
+      Direction pDirection = pContext.getClickedFace();
+      Player player = pContext.getPlayer();
 
-      if (pContext.getLevel().getFluidState(pPos).is(FluidTags.WATER)) {
-        return InteractionResult.FAIL;
-      }
-
-      boolean canPlace = false;
-      for (Direction dir : Direction.values()) {
-        if (dir.getAxis().isVertical()) {
-          continue;
-        }
-
-        if (pContext.getLevel().getBlockState(pPos.relative(dir)).is(ModBlocks.CREEPING_GROVE_MOSS.get())) {
-          canPlace = true;
-          break;
-        }
-      }
-
-      if (!canPlace) {
-        BlockPos pPos2 = pPos.relative(pContext.getClickedFace().getOpposite());
-        for (Direction dir : Direction.values()) {
-          FluidState stateAt = pContext.getLevel().getFluidState(pPos2.relative(dir));
-          if (stateAt.is(FluidTags.WATER)) {
-            canPlace = true;
-            break;
-          }
-        }
-      }
-
+      boolean canPlace = canPlace(pLevel, pPos, pDirection);
       if (!canPlace) {
         return InteractionResult.FAIL;
       }
 
       BlockState blockstate = ModBlocks.CREEPING_GROVE_MOSS.get().getStateForPlacement(pContext);
-      blockstate = (blockstate != null && (blockstate.canSurvive(pContext.getLevel(), pContext.getClickedPos()) && pContext.getLevel().isUnobstructed(blockstate, pContext.getClickedPos(), pContext.getPlayer() == null ? CollisionContext.empty() : CollisionContext.of(pContext.getPlayer())))) ? blockstate : null;
+      blockstate = (blockstate != null && (blockstate.canSurvive(pLevel, pPos) && pLevel.isUnobstructed(blockstate, pPos, player == null ? CollisionContext.empty() : CollisionContext.of(player)))) ? blockstate : null;
       if (blockstate == null) {
         return InteractionResult.FAIL;
-      } else if (!pContext.getLevel().setBlock(pContext.getClickedPos(), blockstate, 11)) {
+      } else if (!pLevel.setBlock(pPos, blockstate, 11)) {
         return InteractionResult.FAIL;
       } else {
-        BlockPos blockpos = pContext.getClickedPos();
-        Level level = pContext.getLevel();
-        Player player = pContext.getPlayer();
         ItemStack itemstack = pContext.getItemInHand();
-        BlockState blockstate1 = level.getBlockState(blockpos);
+        BlockState blockstate1 = pLevel.getBlockState(pPos);
         if (blockstate1.is(blockstate.getBlock())) {
-          blockstate1.getBlock().setPlacedBy(level, blockpos, blockstate1, player, itemstack);
+          blockstate1.getBlock().setPlacedBy(pLevel, pPos, blockstate1, player, itemstack);
           if (player instanceof ServerPlayer) {
-            CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, blockpos, itemstack);
+            CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pPos, itemstack);
           }
         }
 
-        level.gameEvent(GameEvent.BLOCK_PLACE, blockpos, GameEvent.Context.of(player, blockstate1));
-        SoundType soundtype = blockstate1.getSoundType(level, blockpos, pContext.getPlayer());
-        level.playSound(player, blockpos, blockstate1.getSoundType(level, blockpos, pContext.getPlayer()).getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+        pLevel.gameEvent(GameEvent.BLOCK_PLACE, pPos, GameEvent.Context.of(player, blockstate1));
+        SoundType soundtype = blockstate1.getSoundType(pLevel, pPos, pContext.getPlayer());
+        pLevel.playSound(player, pPos, blockstate1.getSoundType(pLevel, pPos, pContext.getPlayer()).getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
         if (player == null || !player.getAbilities().instabuild) {
           itemstack.shrink(1);
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return InteractionResult.sidedSuccess(pLevel.isClientSide);
       }
     }
   }

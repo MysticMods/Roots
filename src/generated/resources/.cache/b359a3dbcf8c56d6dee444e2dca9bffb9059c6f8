@@ -1,4 +1,4 @@
-// 1.19.2	2023-07-17T12:10:25.5534699	Ritual properties
+// 1.19.2	2023-08-02T22:41:39.8638055	Ritual properties
 6b6b9ab2b8b506320be813313b912bdca1b5d003 data/roots/properties/ritual/animal_harvest/count.json
 03ee6e0853f91b82586938222d3f534de106d777 data/roots/properties/ritual/animal_harvest/duration.json
 30cdc902a51267a4567478340dd0ea907bbc0d38 data/roots/properties/ritual/animal_harvest/glow_duration.json
@@ -42,7 +42,7 @@ ca56c6fe88f61c5391383cff38cc72320627c380 data/roots/properties/ritual/heavy_stor
 dd32a0d01ee5856435dde8b8442f8c71ecfed3d5 data/roots/properties/ritual/overgrowth/duration.json
 d49e3a1dcdb86d6755d4be17774e87984a8d65ca data/roots/properties/ritual/overgrowth/interval.json
 3c4028bbded1666fd69bcf5248f4eb7ec5cbd48e data/roots/properties/ritual/overgrowth/radius_xz.json
-204e729f82617fc401ce785538ba1cb20a9b9781 data/roots/properties/ritual/overgrowth/radius_y.json
+8ef4edc7a0b98bad1400dab896228618cef78178 data/roots/properties/ritual/overgrowth/radius_y.json
 aa47a226b68804e607646231def8bf2925d6fa30 data/roots/properties/ritual/protection/duration.json
 fff99f06f21c766509ce05838b2240af2d53924c data/roots/properties/ritual/protection/interval.json
 31527ab0ac68495e0b4fda68ce0cbe65498467d8 data/roots/properties/ritual/protection/radius_xz.json
