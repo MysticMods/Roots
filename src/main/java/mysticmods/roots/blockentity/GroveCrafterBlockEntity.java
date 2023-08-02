@@ -59,6 +59,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         RootsAPI.LOG.info("Conditions failed.");
         conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
         conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        conditionResult.report();
         return InteractionResult.FAIL;
       }
       lastRecipe = cachedRecipe;

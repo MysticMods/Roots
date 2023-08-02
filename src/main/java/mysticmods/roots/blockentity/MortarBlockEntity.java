@@ -163,6 +163,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           RootsAPI.LOG.info("Conditions failed.");
           conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
           conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+          conditionResult.report();
           return InteractionResult.FAIL;
         }
 

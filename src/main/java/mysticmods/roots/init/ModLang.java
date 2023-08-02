@@ -50,7 +50,8 @@ public class ModLang {
       b.add("roots.drinks.sour", "Sour and awful to drink! Leaves you hungry.");
       b.add("message.dandelion_cordial", "You feel well-rested!");
 
-      b.add("roots.message.ritual.requires", "Requires: %s");
+      b.add("roots.message.recipe.requires", "Requires: %s");
+      b.add("roots.message.recipe.failures", "A number of conditions were not met:");
 
       // Squid-related stuff
       b.add("roots.message.squid.cooldown", "Give it time to produce more ink!");

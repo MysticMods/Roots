@@ -121,6 +121,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         RootsAPI.LOG.info("Conditions failed.");
         result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
         result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        result.report();
         // Needs to be a success or it sets things on fire
         return InteractionResult.SUCCESS;
       }
