@@ -49,7 +49,7 @@ public class GrowthUtil {
 
   private static final CropData NULL_CROP = new CropData(Blocks.AIR, null, -1);
 
-  private record CropData(Block block, IntegerProperty ageProperty, int maxAge) {
+  public record CropData(Block block, IntegerProperty ageProperty, int maxAge) {
     public boolean isEmpty() {
       return this == NULL_CROP;
     }
@@ -76,7 +76,7 @@ public class GrowthUtil {
 
   private static final Set<Property<?>> AGE_PROPERTIES = new HashSet<>(Arrays.asList(BlockStateProperties.AGE_7, BlockStateProperties.AGE_5, BlockStateProperties.AGE_3, BlockStateProperties.AGE_2, BlockStateProperties.AGE_1, BlockStateProperties.AGE_25, BlockStateProperties.AGE_15));
 
-  private static CropData getCropData(BlockState state) {
+  public static CropData getCropData(BlockState state) {
     CropData result = CROP_AGES.get(state.getBlock());
     if (result != null) {
       return result;

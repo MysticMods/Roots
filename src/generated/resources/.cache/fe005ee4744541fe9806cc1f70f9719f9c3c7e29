@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-01T22:10:32.5032048	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-08-02T12:47:28.8440051	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1601,6 +1601,7 @@ bc8e753731cf33fde2d0929b45a0fde62ecc4bf6 data/roots/tags/blocks/runestone.json
 b8bbfb9e64e0d21258e154bcf3d7684f92d05ed1 data/roots/tags/blocks/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/blocks/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/blocks/soils/water.json
+3ee0cafeb04a823c766169e29b784308efcb8dee data/roots/tags/blocks/standing_stone_crops.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/blocks/stonepetal.json
 b147fcff5c0b4d72df1cb7809b063b2562180832 data/roots/tags/blocks/supports_manging_moss.json
 06e13efbb7b0d09ff7ecd1a7dc45a0760b91ad67 data/roots/tags/blocks/supports_stonepetal.json

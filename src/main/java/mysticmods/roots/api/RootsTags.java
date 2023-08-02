@@ -20,6 +20,8 @@ public class RootsTags {
   public static class Blocks {
     // Crops & Adjacent
     // Forge compat tag (filled by ModTags)
+
+    public static final TagKey<Block> STANDING_STONE_CROPS = modTag("standing_stone_crops");
     public static final TagKey<Block> FORGE_CROPS = compatTag("crops");
 
     // Minecraft compat tag (filled by ModTags)
