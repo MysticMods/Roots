@@ -365,7 +365,7 @@ public class ModBlocks {
     .register();
 
   public static BlockEntry<PetrifiedFlowerBlock> STONEPETAL = REGISTRATE.block("stonepetal", Material.PLANT, PetrifiedFlowerBlock::new)
-    .properties(o -> o.noCollission().instabreak().sound(SoundType.GRASS))
+    .properties(o -> o.noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ))
     .blockstate((ctx, p) -> p.getVariantBuilder(ctx.getEntry()).partialState().setModels(new ConfiguredModel(p.models().cross(ctx.getName(), p.blockTexture(ctx.getEntry())))))
     .item()
     .model(ItemModelGenerator::generated)
