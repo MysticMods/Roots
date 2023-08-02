@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
@@ -49,6 +50,8 @@ public class ModLang {
       b.add("roots.drinks.sour", "Sour and awful to drink! Leaves you hungry.");
       b.add("message.dandelion_cordial", "You feel well-rested!");
 
+      b.add("roots.message.ritual.requires", "Requires: %s");
+
       // Squid-related stuff
       b.add("roots.message.squid.cooldown", "Give it time to produce more ink!");
       b.add("roots.message.runic_shears.cooldown", "More time must pass before this entity can be sheared again.");
@@ -84,6 +87,9 @@ public class ModLang {
       }
       for (Modifier modifier : Registries.MODIFIER_REGISTRY.get().getValues()) {
         b.add(modifier.getDescriptionId(), RegistrateLangProvider.toEnglishName(modifier.getKey().getPath()));
+      }
+      for (LevelCondition condition : Registries.LEVEL_CONDITION_REGISTRY.get().getValues()) {
+        b.add(condition.getDescriptionId(), RegistrateLangProvider.toEnglishName(condition.getKey().getPath()));
       }
     });
   }

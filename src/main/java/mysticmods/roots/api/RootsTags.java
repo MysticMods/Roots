@@ -12,7 +12,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 // Tags
@@ -100,8 +99,15 @@ public class RootsTags {
     public static final TagKey<Block> MORTARS = modTag("mortars");
 
     // Valid capstones for runed/runestone pillars
-    public static final TagKey<Block> RUNE_CAPSTONES = modTag("capstones/rune");
-    public static final TagKey<Block> RUNE_PILLARS = modTag("pillars/rune");
+    public static final TagKey<Block> RUNE_CAPSTONES = modTag("capstones/runes/rune");
+    public static final TagKey<Block> RUNE_PILLARS = modTag("pillars/runes/rune");
+    public static final TagKey<Block> RUNED_CAPSTONES = modTag("capstones/runes/runed");
+    public static final TagKey<Block> RUNED_PILLARS = modTag("pillars/runes/runed");
+    public static final TagKey<Block> RUNES_CAPSTONES = modTag("capstones/runes/any");
+    public static final TagKey<Block> RUNES_PILLARS = modTag("pillars/runes/any");
+
+    public static final TagKey<Block> CAPSTONES = modTag("capstones/any");
+    public static final TagKey<Block> PILLARS = modTag("capstones/any");
 
     public static final TagKey<Block> ACACIA_CAPSTONES = modTag("capstones/log/acacia");
     public static final TagKey<Block> DARK_OAK_CAPSTONES = modTag("capstones/log/dark_oak");
@@ -114,6 +120,8 @@ public class RootsTags {
     public static final TagKey<Block> CRIMSON_CAPSTONES = modTag("capstones/log/crimson");
     public static final TagKey<Block> WARPED_CAPSTONES = modTag("capstones/log/warped");
 
+    public static final TagKey<Block> LOG_PILLARS = modTag("pillars/log/any");
+    public static final TagKey<Block> LOG_CAPSTONES = modTag("capstones/log/any");
     public static final TagKey<Block> ACACIA_PILLARS = modTag("pillars/log/acacia");
     public static final TagKey<Block> DARK_OAK_PILLARS = modTag("pillars/log/dark_oak");
     public static final TagKey<Block> OAK_PILLARS = modTag("pillars/log/oak");

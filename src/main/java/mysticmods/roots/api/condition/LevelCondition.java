@@ -1,5 +1,6 @@
 package mysticmods.roots.api.condition;
 
+import com.google.common.base.Suppliers;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
@@ -18,13 +19,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
   private final Type condition;
+  private final Supplier<List<BlockState>> canonicalStates;
 
-  public LevelCondition(Type condition) {
+  public LevelCondition(Type condition, Supplier<List<BlockState>> canonicalStates) {
     this.condition = condition;
+    this.canonicalStates = Suppliers.memoize(canonicalStates::get);
   }
 
   @Override
@@ -224,7 +229,12 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     CRIMSON(RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Blocks.CRIMSON_CAPSTONES),
     WARPED(RootsTags.Blocks.WARPED_PILLARS, RootsTags.Blocks.WARPED_CAPSTONES),
     WILDWOOD(RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.WILDWOOD_CAPSTONES),
-    MANGROVE(RootsTags.Blocks.MANGROVE_PILLARS, RootsTags.Blocks.MANGROVE_CAPSTONES);
+    MANGROVE(RootsTags.Blocks.MANGROVE_PILLARS, RootsTags.Blocks.MANGROVE_CAPSTONES),
+    ANY_LOG(RootsTags.Blocks.LOG_PILLARS, RootsTags.Blocks.LOG_CAPSTONES),
+    RUNE(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Blocks.RUNE_CAPSTONES),
+    RUNED(RootsTags.Blocks.RUNED_PILLARS, RootsTags.Blocks.RUNED_CAPSTONES),
+    ANY_RUNE(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Blocks.RUNES_CAPSTONES),
+    ANY(RootsTags.Blocks.PILLARS, RootsTags.Blocks.CAPSTONES);
 
     private final TagKey<Block> pillarTag;
     private final TagKey<Block> capstoneTag;

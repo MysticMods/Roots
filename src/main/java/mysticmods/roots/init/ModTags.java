@@ -147,6 +147,12 @@ public class ModTags {
       b.tag(RootsTags.Blocks.MANGROVE_CAPSTONES).addTags(RootsTags.Blocks.RUNED_MANGROVE_LOG);
       b.tag(RootsTags.Blocks.WILDWOOD_PILLARS).add(ModBlocks.WILDWOOD_LOG.get(), ModBlocks.STRIPPED_WILDWOOD_LOG.get(), ModBlocks.WILDWOOD_WOOD.get(), ModBlocks.STRIPPED_WILDWOOD_WOOD.get());
       b.tag(RootsTags.Blocks.MANGROVE_PILLARS).add(Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD, Blocks.STRIPPED_MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_WOOD);
+      b.tag(RootsTags.Blocks.LOG_PILLARS).addTags(RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Blocks.DARK_OAK_PILLARS, RootsTags.Blocks.JUNGLE_PILLARS, RootsTags.Blocks.OAK_PILLARS, RootsTags.Blocks.SPRUCE_PILLARS, RootsTags.Blocks.WARPED_PILLARS, RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.MANGROVE_PILLARS);
+      b.tag(RootsTags.Blocks.LOG_CAPSTONES).addTags(RootsTags.Blocks.ACACIA_CAPSTONES, RootsTags.Blocks.BIRCH_CAPSTONES, RootsTags.Blocks.DARK_OAK_CAPSTONES, RootsTags.Blocks.JUNGLE_CAPSTONES, RootsTags.Blocks.OAK_CAPSTONES, RootsTags.Blocks.SPRUCE_CAPSTONES, RootsTags.Blocks.WARPED_CAPSTONES, RootsTags.Blocks.CRIMSON_CAPSTONES, RootsTags.Blocks.WILDWOOD_CAPSTONES, RootsTags.Blocks.MANGROVE_CAPSTONES);
+      b.tag(RootsTags.Blocks.RUNES_CAPSTONES).addTags(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Blocks.RUNED_CAPSTONES);
+      b.tag(RootsTags.Blocks.CAPSTONES).addTags(RootsTags.Blocks.RUNES_CAPSTONES, RootsTags.Blocks.LOG_CAPSTONES);
+      b.tag(RootsTags.Blocks.RUNES_PILLARS).addTags(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Blocks.RUNED_PILLARS);
+      b.tag(RootsTags.Blocks.PILLARS).addTags(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Blocks.LOG_PILLARS);
 
       b.tag(RootsTags.Blocks.GROWTH_FORCE);
       b.tag(RootsTags.Blocks.GROWTH_BLACKLIST);

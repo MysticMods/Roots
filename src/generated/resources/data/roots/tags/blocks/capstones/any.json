@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#roots:capstones/runes/any",
+    "#roots:capstones/log/any",
+    "#roots:pillars/runes/any",
+    "#roots:pillars/log/any"
+  ]
+}

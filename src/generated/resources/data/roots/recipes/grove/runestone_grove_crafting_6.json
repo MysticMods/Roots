@@ -21,7 +21,7 @@
     }
   ],
   "level_conditions": [
-    "roots:primal_grove_stone_any"
+    "roots:any_primal_grove_stone"
   ],
   "result": {
     "count": 6,
