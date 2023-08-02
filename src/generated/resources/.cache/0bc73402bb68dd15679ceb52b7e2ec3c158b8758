@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-01T13:12:29.0447633	Spell properties
+// 1.19.2	2023-08-02T13:40:14.4925546	Spell properties
 8844f1c40708dd1992206793e7d9be5be8d83ba5 data/roots/properties/spell/acid_cloud/cooldown.json
 c3a3cb26bf1c2fc234507699f251d408f590a61c data/roots/properties/spell/acid_cloud/count.json
 5f17dd45df38dbdc58352b6dcce4ec744fec9451 data/roots/properties/spell/acid_cloud/damage.json
@@ -19,6 +19,7 @@ be1c925ac381f050ab3cbd1aa2bc059feef6e3e6 data/roots/properties/spell/growth_infu
 fd55228ea8603413c702ec24bb8ad1dece1081b8 data/roots/properties/spell/growth_infusion/cooldown.json
 da8bb6fbcdbaa808bd92a1503a431c1336c10547 data/roots/properties/spell/harvest/cooldown.json
 231e61aa921a5cc1d70b5fcd187ea12bfbc0d46c data/roots/properties/spell/jaunt/cooldown.json
+ee1f32de8f6cda11c5743905cc1a86467b74c784 data/roots/properties/spell/jaunt/distance.json
 112ad7da0684ce89ae13d6f02ac6b82204e4b6a0 data/roots/properties/spell/life_drain/cooldown.json
 c1c6a29f4ad088f22c5d33f12682660a763cb543 data/roots/properties/spell/light_drifter/cooldown.json
 21b17d7334b6a0d82ae1fa4e1f648e4971d6b01f data/roots/properties/spell/magnetism/cooldown.json

@@ -457,6 +457,7 @@
   "spell_property.roots.growth_infusion.cooldown": "Growth Infusion: Cooldown",
   "spell_property.roots.harvest.cooldown": "Harvest: Cooldown",
   "spell_property.roots.jaunt.cooldown": "Jaunt: Cooldown",
+  "spell_property.roots.jaunt.distance": "Jaunt: Distance",
   "spell_property.roots.life_drain.cooldown": "Life Drain: Cooldown",
   "spell_property.roots.light_drifter.cooldown": "Light Drifter: Cooldown",
   "spell_property.roots.magnetism.cooldown": "Magnetism: Cooldown",

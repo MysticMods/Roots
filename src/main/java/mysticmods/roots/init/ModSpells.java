@@ -127,6 +127,8 @@ public class ModSpells {
   public static final RegistryEntry<JauntSpell> JAUNT = spell(Spells.JAUNT, JauntSpell::new, ChatFormatting.DARK_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, 0.250), Cost.add(ModHerbs.SPIRITLEAF, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> JAUNT_COOLDOWN = property(Spells.JAUNT, "cooldown", () -> new SpellProperty<>(JAUNT::get, 80, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
+  public static final RegistryEntry<SpellProperty<Integer>> JAUNT_DISTANCE = property(Spells.JAUNT, "distance", () -> new SpellProperty<>(JAUNT::get, 8, Property.INTEGER_SERIALIZER, "The number of blocks that Jaunt travels forwards."));
+
   // Storm Cloud (100 cooldown)
   public static final RegistryEntry<StormCloudSpell> STORM_CLOUD = spell(Spells.STORM_CLOUD, StormCloudSpell::new, ChatFormatting.DARK_BLUE, () -> List.of(Cost.add(ModHerbs.DEWGONIA, 0.250), Cost.add(ModHerbs.CLOUD_BERRY, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> STORM_CLOUD_COOLDOWN = property(Spells.STORM_CLOUD, "cooldown", () -> new SpellProperty<>(STORM_CLOUD::get, 100, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));

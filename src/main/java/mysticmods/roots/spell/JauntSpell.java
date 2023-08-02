@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class JauntSpell extends Spell {
-  private int jauntDistance = 8;
+  private int jauntDistance;
 
   public JauntSpell(ChatFormatting color, List<Cost> costs) {
     super(Type.INSTANT, color, costs);
@@ -36,7 +36,7 @@ public class JauntSpell extends Spell {
 
   @Override
   public void initialize() {
-
+    this.jauntDistance = ModSpells.JAUNT_DISTANCE.get().getValue();
   }
 
   private boolean playerSafe (Level pLevel, Player player, BlockPos.MutableBlockPos position, Direction direction) {
