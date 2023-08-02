@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-02T17:25:08.3811441	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-08-02T21:58:43.8731709	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1420,7 +1420,7 @@ b29717d1276baebe1e135f4b382146a67470da63 data/roots/recipes/pyre/inferno_bulb.js
 21d56acf145d99db4cd12c7964dc66d599b7385e data/roots/recipes/raw_silver_block.json
 65e888f28cb13b3b8735af37d2ff636c79edb896 data/roots/recipes/reinforced_pyre.json
 7a51e8290b07e2bd44b9c67f55d46cc1b97dbf55 data/roots/recipes/reinforced_pyre_from_pyre.json
-0015f2266a632283344ee5d414585a1f5025a910 data/roots/recipes/ritual/animal_harvest.json
+98e7a61a1182169ae3b1ff17267e84c04cdcc9a5 data/roots/recipes/ritual/animal_harvest.json
 032e130eb0b217e9ee828f44d181fc86dc3d9e69 data/roots/recipes/ritual/grove_supplication.json
 8052f6a925dadd4dae829b37bf59d6bb9b49d2fc data/roots/recipes/ritual/wildroot_growth.json
 b5f498b6c752e550082f9e7ef63ffb5ad6e82e95 data/roots/recipes/rose_cordial.json

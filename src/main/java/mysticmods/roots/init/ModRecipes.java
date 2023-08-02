@@ -50,7 +50,7 @@ public class ModRecipes {
         .addIngredient(RootsTags.Items.WILDEWHEET_CROP)
         .addIngredient(ItemTags.WOOL)
         .addIngredient(Tags.Items.CROPS_CARROT)
-        .addIngredient(Tags.Items.STRING)
+        .addIngredient(Tags.Items.CROPS_POTATO)
         .addIngredient(RootsTags.Items.WILDROOT_CROP)
         .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
         .save(p, RootsAPI.rl("ritual/animal_harvest"));
