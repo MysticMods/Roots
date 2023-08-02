@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 600,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "roots:flour"
+  },
+  "result": "minecraft:bread"
+}

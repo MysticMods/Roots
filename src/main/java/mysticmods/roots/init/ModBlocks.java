@@ -326,6 +326,14 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 3)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.WILDWOOD_LOG.get())
+        .unlockedBy("has_wildwood_log", p.has(ModBlocks.WILDWOOD_LOG.get()))
+        .save(p, RootsAPI.rl("wildwood_wood_from_logs"));
+    })
     .register();
   public static BlockEntry<RotatedPillarBlock> STRIPPED_WILDWOOD_WOOD = REGISTRATE.block("stripped_wildwood_wood", Material.WOOD, RotatedPillarBlock::new)
     .properties(WILDWOOD_LOG_PROPERTIES)
@@ -334,6 +342,14 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .tag(RootsTags.Blocks.WILDWOOD_LOGS, BlockTags.MINEABLE_WITH_AXE)
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry(), 3)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.STRIPPED_WILDWOOD_LOG.get())
+        .unlockedBy("has_stripped_wildwood_log", p.has(ModBlocks.STRIPPED_WILDWOOD_LOG.get()))
+        .save(p, RootsAPI.rl("stripped_wildwood_wood_from_logs"));
+    })
     .register();
 
   public static BlockEntry<Block> WILDWOOD_PLANKS = REGISTRATE.block("wildwood_planks", Block::new)
@@ -343,6 +359,12 @@ public class ModBlocks {
     .tag(RootsTags.Items.WILDWOOD_PLANKS)
     .build()
     .tag(BlockTags.PLANKS, BlockTags.MINEABLE_WITH_AXE)
+    .recipe((ctx, p) -> {
+      ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 4)
+        .requires(RootsTags.Items.WILDWOOD_LOGS)
+        .unlockedBy("has_wildwood_logs", p.has(RootsTags.Items.WILDWOOD_LOGS))
+        .save(p, RootsAPI.rl("wildwood_planks_from_logs"));
+    })
     .register();
 
   public static BlockEntry<SaplingBlock> WILDWOOD_SAPLING = REGISTRATE.block("wildwood_sapling", (p) -> new SaplingBlock(new WildwoodTreeGrower(), p))
@@ -1211,6 +1233,24 @@ public class ModBlocks {
 
   public static NonNullUnaryOperator<BlockBehaviour.Properties> SOIL_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DIRT);
 
+  public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new)
+    .properties(SOIL_PROPERTIES)
+    .item()
+    .model(ItemModelGenerator::itemModel)
+    .build()
+    .recipe((ctx, p) -> {
+      GroveRecipe.builder(ctx.getEntry(), 4)
+        .addIngredient(Tags.Items.GRAVEL)
+        .addIngredient(ItemTags.DIRT)
+        .addIngredient(ItemTags.DIRT)
+        .addIngredient(ItemTags.DIRT)
+        .addIngredient(RootsTags.Items.RUNIC_DUST)
+        .unlockedBy("has_runic_dust", p.has(RootsTags.Items.RUNIC_DUST))
+        .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
+        .save(p, RootsAPI.rl("grove/elemental_soil"));
+    })
+    .tag(RootsTags.Blocks.ELEMENTAL_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
+    .register();
   public static BlockEntry<ElementalSoilBlock> AQUEOUS_SOIL = REGISTRATE.block("aqueous_soil", ElementalSoilBlock::new)
     .properties(SOIL_PROPERTIES)
     .blockstate(BlockstateGenerator.pillar("block/water_soil_side", "block/water_soil_top"))
@@ -1227,14 +1267,6 @@ public class ModBlocks {
     .model(ItemModelGenerator::itemModel)
     .build()
     .tag(RootsTags.Blocks.AIR_SOIL, BlockTags.MINEABLE_WITH_SHOVEL, RootsTags.Blocks.NYI)
-    .register();
-
-  public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new)
-    .properties(SOIL_PROPERTIES)
-    .item()
-    .model(ItemModelGenerator::itemModel)
-    .build()
-    .tag(RootsTags.Blocks.ELEMENTAL_SOIL, BlockTags.MINEABLE_WITH_SHOVEL)
     .register();
 
   public static BlockEntry<ElementalSoilBlock> MAGMATIC_SOIL = REGISTRATE.block("magmatic_soil", ElementalSoilBlock::new)

@@ -49,8 +49,8 @@ public class ModRecipes {
         .builder(ModRituals.ANIMAL_HARVEST.get())
         .addIngredient(RootsTags.Items.WILDEWHEET_CROP)
         .addIngredient(ItemTags.WOOL)
-        .addIngredient(net.minecraftforge.common.Tags.Items.CROPS_CARROT)
-        .addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS)
+        .addIngredient(Tags.Items.CROPS_CARROT)
+        .addIngredient(Tags.Items.STRING)
         .addIngredient(RootsTags.Items.WILDROOT_CROP)
         .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
         .save(p, RootsAPI.rl("ritual/animal_harvest"));

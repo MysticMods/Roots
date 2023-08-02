@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "W": {
+      "tag": "roots:crops/wildroot"
+    },
+    "X": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    " WX",
+    " XW",
+    "X  "
+  ],
+  "result": {
+    "item": "roots:staff"
+  }
+}

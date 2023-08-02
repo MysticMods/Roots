@@ -1,0 +1,27 @@
+{
+  "type": "roots:grove",
+  "ingredients": [
+    {
+      "tag": "forge:gravel"
+    },
+    {
+      "tag": "minecraft:dirt"
+    },
+    {
+      "tag": "minecraft:dirt"
+    },
+    {
+      "tag": "minecraft:dirt"
+    },
+    {
+      "tag": "roots:dusts/runic"
+    }
+  ],
+  "level_conditions": [
+    "roots:valid_grove_stone"
+  ],
+  "result": {
+    "count": 4,
+    "item": "roots:elemental_soil"
+  }
+}

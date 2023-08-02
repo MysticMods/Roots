@@ -182,6 +182,7 @@ public class ModItems {
       RECIPES.food(ModItems.ASSORTED_SEEDS, ModItems.COOKED_SEEDS, 0.05f, p);
       RECIPES.food(RootsTags.Items.AUBERGINE_CROP, ModItems.COOKED_AUBERGINE, 0.15f, p);
       RECIPES.food(ModItems.RAW_SQUID, ModItems.COOKED_SQUID, 0.15f, p);
+      RECIPES.food(ModItems.FLOUR, () -> Items.BREAD, 0.15f, p);
     })
     .register();
 
@@ -202,6 +203,15 @@ public class ModItems {
     .register();
 
   public static ItemEntry<Item> ASSORTED_SEEDS = REGISTRATE.item("assorted_seeds", Item::new)
+    .recipe((ctx, p) -> {
+      ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 4)
+        .requires(Tags.Items.SEEDS)
+        .requires(Tags.Items.SEEDS)
+        .requires(Tags.Items.SEEDS)
+        .requires(Tags.Items.SEEDS)
+        .unlockedBy("has_seeds", p.has(Tags.Items.SEEDS))
+        .save(p, RootsAPI.rl("assorted_seeds_from_seeds"));
+    })
     .register();
 
   public static ItemEntry<BaseItems.FastFoodItem> COOKED_SEEDS = REGISTRATE.item("cooked_seeds", BaseItems.FastFoodItem::new)
@@ -591,6 +601,13 @@ public class ModItems {
 
   public static final ItemEntry<Item> WILDEWHEET_BREAD = REGISTRATE.item("wildewheet_bread", Item::new)
     .model(subfolder("food"))
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry())
+        .pattern("XXX")
+        .define('X', RootsTags.Items.WILDEWHEET_CROP)
+        .unlockedBy("has_wildewheet", p.has(RootsTags.Items.WILDEWHEET_CROP))
+        .save(p, RootsAPI.rl("wildewheet_bread"));
+    })
     .register();
 
   public static final ItemEntry<Item> WILDROOT_STEW = REGISTRATE.item("wildroot_stew", Item::new)
@@ -758,6 +775,16 @@ public class ModItems {
     // TODO: CUSTOM MODEL
     .model(subfolder("tools"))
     .tag(RootsTags.Items.CASTING_TOOLS)
+    .recipe((ctx, p) -> {
+      ShapedRecipeBuilder.shaped(ctx.getEntry())
+        .pattern(" WX")
+        .pattern(" XW")
+        .pattern("X  ")
+        .define('X', ItemTags.LOGS)
+        .define('W', RootsTags.Items.WILDROOT_CROP)
+        .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
+        .save(p, RootsAPI.rl("staff"));
+    })
     .register();
 
   public static final ItemEntry<Item> WILDWOOD_BOW = REGISTRATE.item("wildwood_bow", Item::new)

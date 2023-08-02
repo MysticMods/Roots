@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "roots:logs/wildwood"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "roots:wildwood_planks"
+  }
+}
