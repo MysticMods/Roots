@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-02T13:40:14.4925546	Spell properties
+// 1.19.2	2023-08-02T13:53:01.0072081	Spell properties
 8844f1c40708dd1992206793e7d9be5be8d83ba5 data/roots/properties/spell/acid_cloud/cooldown.json
 c3a3cb26bf1c2fc234507699f251d408f590a61c data/roots/properties/spell/acid_cloud/count.json
 5f17dd45df38dbdc58352b6dcce4ec744fec9451 data/roots/properties/spell/acid_cloud/damage.json
@@ -8,6 +8,9 @@ dcf2255ae2fbe93c4481f481226c769824345106 data/roots/properties/spell/acid_cloud/
 6bbbd0cb5df07d25b93c6ca2134704bcd5c20b63 data/roots/properties/spell/augment/cooldown.json
 4e4f7e9801531a6ed17df41c3fad55cec6747f82 data/roots/properties/spell/control_undead/cooldown.json
 7d615543388f8ed55f53d1b711360de2779568b5 data/roots/properties/spell/dandelion_winds/cooldown.json
+757c60203e4e235e08a6f38a602b5c3c4c4dd032 data/roots/properties/spell/dandelion_winds/distance.json
+b037f1eda1e339af2c66dda9a9930ffc35547573 data/roots/properties/spell/dandelion_winds/range_1.json
+cff3eb694a1b6b809a94be47e49027ae1a15d3af data/roots/properties/spell/dandelion_winds/range_2.json
 82e4d4b77b5a9b5637707b4682e775fbd3c6b545 data/roots/properties/spell/desaturate/cooldown.json
 9a51027ba695dfaa8edb7fbaf37f4721614829d7 data/roots/properties/spell/disarm/cooldown.json
 754e33ec8b58f7f44b1c1b8a7662c901532fb311 data/roots/properties/spell/extension/cooldown.json

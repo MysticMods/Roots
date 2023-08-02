@@ -1,0 +1,6 @@
+{
+  "_comment": "The second range increment for calculating the bounding box from the player.",
+  "default_value": 5.0,
+  "spell": "roots:dandelion_winds",
+  "value": 5.0
+}

@@ -49,6 +49,9 @@ public class ModSpells {
   // Dandelion Winds (20 cooldown)
   public static final RegistryEntry<DandelionWindsSpell> DANDELION_WINDS = spell(Spells.DANDELION_WINDS, DandelionWindsSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.CLOUD_BERRY, 0.250), Cost.add(ModHerbs.GROVE_MOSS, 0.125)));
   public static final RegistryEntry<SpellProperty<Integer>> DANDELION_WINDS_COOLDOWN = property(Spells.DANDELION_WINDS, "cooldown", () -> new SpellProperty<>(DANDELION_WINDS::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final RegistryEntry<SpellProperty<Float>> DANDELION_WINDS_DISTANCE = property(Spells.DANDELION_WINDS, "distance", () -> new SpellProperty<>(DANDELION_WINDS::get, 0.75f, Property.FLOAT_SERIALIZER, "The vertical component of the vector used to move entities."));
+  public static final RegistryEntry<SpellProperty<Double>> DANDELION_WINDS_RANGE_1 = property(Spells.DANDELION_WINDS, "range_1", () -> new SpellProperty<>(DANDELION_WINDS::get, 4.0, Property.DOUBLE_SERIALIZER, "The first range increment for calculating the bounding box from the player."));
+  public static final RegistryEntry<SpellProperty<Double>> DANDELION_WINDS_RANGE_2 = property(Spells.DANDELION_WINDS, "range_2", () -> new SpellProperty<>(DANDELION_WINDS::get, 5.0, Property.DOUBLE_SERIALIZER, "The second range increment for calculating the bounding box from the player."));
 
   // Desaturate (500 cooldown)
   public static final RegistryEntry<DesaturateSpell> DESATURATE = spell(Spells.DESATURATE, DesaturateSpell::new, ChatFormatting.GREEN, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250), Cost.add(ModHerbs.GROVE_MOSS, 0.250)));

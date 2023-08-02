@@ -1,0 +1,6 @@
+{
+  "_comment": "The vertical component of the vector used to move entities.",
+  "default_value": 0.75,
+  "spell": "roots:dandelion_winds",
+  "value": 0.75
+}
