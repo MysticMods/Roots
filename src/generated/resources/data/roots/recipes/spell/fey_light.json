@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:fey_light"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "minecraft:wool"
+    },
+    {
+      "item": "minecraft:torch"
+    },
+    {
+      "item": "minecraft:jack_o_lantern"
+    },
+    {
+      "tag": "forge:nuggets/copper"
+    },
+    {
+      "tag": "roots:dusts/runic"
+    }
+  ],
+  "times": 5
+}

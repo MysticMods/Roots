@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:petal_shell"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "roots:petals"
+    },
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "tag": "forge:ingots/iron"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "tag": "forge:glass"
+    }
+  ],
+  "times": 5
+}

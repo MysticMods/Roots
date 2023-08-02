@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:acid_cloud"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:rotten_flesh"
+    },
+    {
+      "tag": "roots:crops/bafflecap"
+    },
+    {
+      "tag": "roots:dusts/runic"
+    },
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "tag": "minecraft:wool"
+    }
+  ],
+  "times": 5
+}

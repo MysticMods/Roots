@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_hoe": {
+    "has_shield": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:tools/hoes"
+            "items": [
+              "minecraft:shield"
+            ]
           }
         ]
       },
@@ -13,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:spell/growth_infusion"
+        "recipe": "roots:spell/petal_shell"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_hoe",
+      "has_shield",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:spell/growth_infusion"
+      "roots:spell/petal_shell"
     ]
   }
 }

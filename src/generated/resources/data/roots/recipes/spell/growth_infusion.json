@@ -8,11 +8,20 @@
   ],
   "ingredients": [
     {
-      "tag": "forge:slimeballs"
+      "tag": "forge:seeds"
     },
     {
-      "tag": "roots:crops/wildroot"
+      "item": "minecraft:composter"
+    },
+    {
+      "tag": "forge:tools/hoes"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "tag": "minecraft:small_flowers"
     }
   ],
-  "times": 4
+  "times": 5
 }

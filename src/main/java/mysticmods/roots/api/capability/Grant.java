@@ -4,6 +4,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -67,6 +70,14 @@ public class Grant implements Consumer<ServerPlayer> {
 
   public static Grant fromNetwork(FriendlyByteBuf pBuffer) {
     return new Grant(EnumUtil.fromOrdinal(Type.class, pBuffer.readVarInt()), pBuffer.readResourceLocation());
+  }
+
+  public static Grant spell (Spell spell) {
+    return new Grant(Type.SPELL, Registries.SPELL_REGISTRY.get().getKey(spell));
+  }
+
+  public static Grant modifier (Modifier modifier) {
+    return new Grant(Type.MODIFIER, Registries.MODIFIER_REGISTRY.get().getKey(modifier));
   }
 
   public enum Type {

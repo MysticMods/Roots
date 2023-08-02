@@ -4,7 +4,6 @@ import com.tterrag.registrate.providers.ProviderType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.capability.Grant;
-import mysticmods.roots.api.reference.Spells;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -107,7 +106,6 @@ public class ModRecipes {
         .addIngredient(Items.GLOW_LICHEN)
         .unlockedBy("has_glow_lichen", p.has(Items.GLOW_LICHEN))
         .save(p, RootsAPI.rl("pyre/stalicripe"));
-      MortarRecipe.builder(4).addIngredient(net.minecraftforge.common.Tags.Items.SLIMEBALLS).addIngredient(RootsTags.Items.WILDROOT_CROP).addGrant(new Grant(Grant.Type.SPELL, Spells.GROWTH_INFUSION.location())).unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP)).save(p, RootsAPI.rl("spell/growth_infusion"));
       MortarRecipe
         .multiBuilder(ModItems.FLOUR.get(), 2)
         .addIngredient(Tags.Items.CROPS_WHEAT)
@@ -128,8 +126,72 @@ public class ModRecipes {
         .addIngredient(Items.MAGMA_BLOCK)
         .unlockedBy("has_magma_block", p.has(Items.MAGMA_BLOCK))
         .save(p, RootsAPI.rl("mortar/magma_cream_from_magma_block"));
-
       GroveRecipe.builder(new ItemStack(ModItems.GLASS_EYE.get())).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.GLASS).addIngredient(Tags.Items.DUSTS_GLOWSTONE).unlockedBy("has_glowstone", p.has(Tags.Items.DUSTS_GLOWSTONE)).save(p, RootsAPI.rl("grove/glass_eye"));
+
+      // Spells
+      MortarRecipe.builder(5)
+        .addIngredient(Items.ROTTEN_FLESH)
+        .addIngredient(RootsTags.Items.BAFFLECAP_CROP)
+        .addIngredient(RootsTags.Items.RUNIC_DUST)
+        .addIngredient(Items.SPIDER_EYE)
+        .addIngredient(ItemTags.WOOL)
+        .unlockedBy("spider_eye", p.has(Items.SPIDER_EYE))
+        .addGrant(Grant.spell(ModSpells.ACID_CLOUD.get()))
+        .save(p, RootsAPI.rl("spell/acid_cloud"));
+      MortarRecipe.builder(5)
+        .addIngredient(Items.DANDELION)
+        .addIngredient(Tags.Items.CROPS_WHEAT)
+        .addIngredient(RootsTags.Items.PETALS)
+        .addIngredient(Tags.Items.DYES_YELLOW)
+        .addIngredient(Tags.Items.SEEDS)
+        .addGrant(Grant.spell(ModSpells.DANDELION_WINDS.get()))
+        .unlockedBy("has_dandelion", p.has(Items.DANDELION))
+        .save(p, RootsAPI.rl("spell/dandelion_winds"));
+      MortarRecipe.builder(5)
+        .addIngredient(ItemTags.WOOL)
+        .addIngredient(Items.TORCH)
+        .addIngredient(Items.JACK_O_LANTERN)
+        .addIngredient(RootsTags.Items.COPPER_NUGGET)
+        .addIngredient(RootsTags.Items.RUNIC_DUST)
+        .unlockedBy("has_torch", p.has(Items.TORCH))
+        .addGrant(Grant.spell(ModSpells.FEY_LIGHT.get()))
+        .save(p, RootsAPI.rl("spell/fey_light"));
+      MortarRecipe.builder(5)
+        .addIngredient(RootsTags.Items.PETALS)
+        .addIngredient(Items.SHIELD)
+        .addIngredient(Tags.Items.INGOTS_IRON)
+        .addIngredient(Items.EGG)
+        .addIngredient(Tags.Items.GLASS)
+        .unlockedBy("has_shield", p.has(Items.SHIELD))
+        .addGrant(Grant.spell(ModSpells.PETAL_SHELL.get()))
+        .save(p, RootsAPI.rl("spell/petal_shell"));
+      MortarRecipe.builder(5)
+        .addIngredient(RootsTags.Items.BIRCH_BARK)
+        .addIngredient(Items.REDSTONE_TORCH)
+        .addIngredient(ItemTags.BOATS)
+        .addIngredient(Tags.Items.TOOLS_BOWS)
+        .addIngredient(Tags.Items.GUNPOWDER)
+        .unlockedBy("has_gunpowder", p.has(Tags.Items.GUNPOWDER))
+        .addGrant(Grant.spell(ModSpells.JAUNT.get()))
+        .save(p, RootsAPI.rl("spell/jaunt"));
+      MortarRecipe.builder(5)
+        .addIngredient(Tags.Items.SEEDS)
+        .addIngredient(Items.COMPOSTER)
+        .addIngredient(Tags.Items.TOOLS_HOES)
+        .addIngredient(Items.BONE_MEAL)
+        .addIngredient(ItemTags.SMALL_FLOWERS)
+        .unlockedBy("has_hoe", p.has(Tags.Items.TOOLS_HOES))
+        .addGrant(Grant.spell(ModSpells.GROWTH_INFUSION.get()))
+        .save(p, RootsAPI.rl("spell/growth_infusion"));
+      MortarRecipe.builder(5)
+        .addIngredient(Tags.Items.TOOLS_BOWS)
+        .addIngredient(Items.PAPER)
+        .addIngredient(Items.LADDER)
+        .addIngredient(RootsTags.Items.CLOUD_BERRY_CROP)
+        .addIngredient(Items.GRASS)
+        .unlockedBy("has_bow", p.has(Tags.Items.TOOLS_BOWS))
+        .addGrant(Grant.spell(ModSpells.SKY_SOARER.get()))
+        .save(p, RootsAPI.rl("spell/sky_soarer"));
     });
   }
 

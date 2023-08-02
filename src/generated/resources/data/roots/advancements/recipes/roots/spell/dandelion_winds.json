@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_hoe": {
+    "has_dandelion": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:tools/hoes"
+            "items": [
+              "minecraft:dandelion"
+            ]
           }
         ]
       },
@@ -13,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:spell/growth_infusion"
+        "recipe": "roots:spell/dandelion_winds"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_hoe",
+      "has_dandelion",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:spell/growth_infusion"
+      "roots:spell/dandelion_winds"
     ]
   }
 }

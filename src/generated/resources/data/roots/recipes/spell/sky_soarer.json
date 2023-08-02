@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:sky_soarer"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:tools/bows"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:ladder"
+    },
+    {
+      "tag": "roots:crops/cloud_berry"
+    },
+    {
+      "item": "minecraft:grass"
+    }
+  ],
+  "times": 5
+}

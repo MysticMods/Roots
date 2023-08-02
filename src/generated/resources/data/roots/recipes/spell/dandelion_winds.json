@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:dandelion_winds"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:dandelion"
+    },
+    {
+      "tag": "forge:crops/wheat"
+    },
+    {
+      "tag": "roots:petals"
+    },
+    {
+      "tag": "forge:dyes/yellow"
+    },
+    {
+      "tag": "forge:seeds"
+    }
+  ],
+  "times": 5
+}

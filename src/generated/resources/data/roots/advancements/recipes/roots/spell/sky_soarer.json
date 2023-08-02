@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_hoe": {
+    "has_bow": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:tools/hoes"
+            "tag": "forge:tools/bows"
           }
         ]
       },
@@ -13,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:spell/growth_infusion"
+        "recipe": "roots:spell/sky_soarer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_hoe",
+      "has_bow",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:spell/growth_infusion"
+      "roots:spell/sky_soarer"
     ]
   }
 }

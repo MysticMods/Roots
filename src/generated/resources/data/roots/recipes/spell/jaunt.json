@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:jaunt"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "roots:barks/birch"
+    },
+    {
+      "item": "minecraft:redstone_torch"
+    },
+    {
+      "tag": "minecraft:boats"
+    },
+    {
+      "tag": "forge:tools/bows"
+    },
+    {
+      "tag": "forge:gunpowder"
+    }
+  ],
+  "times": 5
+}

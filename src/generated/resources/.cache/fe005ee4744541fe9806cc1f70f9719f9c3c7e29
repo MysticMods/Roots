@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-02T15:52:23.2097759	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-08-02T17:06:16.8799435	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1061,7 +1061,13 @@ f3f80eff8a3b3fb8a8243983f7f419afe63e811c data/roots/advancements/recipes/roots/s
 e5bf1e76f60936677a95687596ed3633f12418ae data/roots/advancements/recipes/roots/silver_knife_from_ingots_silver.json
 1cfa52923504e8d8315201e8c2a19a3feeade20d data/roots/advancements/recipes/roots/silver_nugget_from_blasting.json
 80eaa90915acc02bfe4ca09179ca3f81e987019b data/roots/advancements/recipes/roots/silver_nugget_from_smelting.json
-43771128deb5a9685ca86cdbd1212af03024ae3a data/roots/advancements/recipes/roots/spell/growth_infusion.json
+041678a326823eeadb5b1ddc00b3046dca510e28 data/roots/advancements/recipes/roots/spell/acid_cloud.json
+5187747cc9c80cd7d4ed6413424c131cdfc53857 data/roots/advancements/recipes/roots/spell/dandelion_winds.json
+9c5a90171e6d7ecab48e72b9292ccd87f16f6cee data/roots/advancements/recipes/roots/spell/fey_light.json
+cf4e014956a5607d71f62c7b4268b8e881f91759 data/roots/advancements/recipes/roots/spell/growth_infusion.json
+d08a2ff822308e7158328760c92459fbd7283d91 data/roots/advancements/recipes/roots/spell/jaunt.json
+62a328565d4232ef889ca9700e2339137270c0b0 data/roots/advancements/recipes/roots/spell/petal_shell.json
+d852e075c56f6461a0756f8fe1b04c053375db5f data/roots/advancements/recipes/roots/spell/sky_soarer.json
 dc88e454d5cb23a75e2af1b9c3d22f53bb8e8bfb data/roots/advancements/recipes/roots/stewed_eggplant.json
 1ddf9901fa8cf3cd0c6bf2eb70a5df8c4607e078 data/roots/advancements/recipes/roots/stone_knife_from_cobblestone.json
 bc1afc62e2998e6e07feb7e46267f2c2c746bde1 data/roots/advancements/recipes/roots/stone_knife_from_stone.json
@@ -1506,7 +1512,13 @@ c3d9dddfefd83cc6bb1365b3e79b4c3092a60e4f data/roots/recipes/silver_ingot_from_ra
 c7254c464984728e2a7741385b6eb2d7bbfe1f96 data/roots/recipes/silver_knife_from_ingots_silver.json
 4e68d1f01cf801923bf6e2a009a1b735025b7b4b data/roots/recipes/silver_nugget_from_blasting.json
 952e9b059d27f75ab3cd2f178596a761c5777584 data/roots/recipes/silver_nugget_from_smelting.json
-f0cb1de1ea5126645689e70aa6319aef894c0087 data/roots/recipes/spell/growth_infusion.json
+18c4e35b5d780f760132213a459adcf518ef49b6 data/roots/recipes/spell/acid_cloud.json
+c13cde7524477a940bf4229d9446f98385b38e89 data/roots/recipes/spell/dandelion_winds.json
+84c438b34b58d73bbbec1cd2885cb47bd2de85fe data/roots/recipes/spell/fey_light.json
+9172166e6e96215a4af64ff8a8e2e0d958c1ab83 data/roots/recipes/spell/growth_infusion.json
+6f813044dac36e4b867943c51eeb55e74f73a151 data/roots/recipes/spell/jaunt.json
+3fc774bbcc8358f63074c78c3fc90239c100b6ba data/roots/recipes/spell/petal_shell.json
+84778c05330e324ed283762d3c79b9993004ccde data/roots/recipes/spell/sky_soarer.json
 618fc6ecafb0858be6caaf4e444efef5346709e2 data/roots/recipes/stewed_eggplant.json
 08ca3b7353a7ca46b102cf7de1584376a2536265 data/roots/recipes/stone_knife_from_cobblestone.json
 def46e5ab99c16e419e86a56139411951d6a3e2e data/roots/recipes/stone_knife_from_stone.json
