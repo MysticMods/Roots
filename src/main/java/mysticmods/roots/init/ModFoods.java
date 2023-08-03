@@ -35,5 +35,5 @@ public class ModFoods {
   public static final FoodProperties DANDELION_CORNFLOWER_SALAD = new FoodProperties.Builder().nutrition(3).saturationMod(0.4F).build();
   public static final FoodProperties STEWED_EGGPLANT = new FoodProperties.Builder().nutrition(6).saturationMod(0.8F).build();
 
-  public static final FoodProperties WILDROOT_STEW = (new FoodProperties.Builder().nutrition(5).saturationMod(0.6f)).build();
+  public static final FoodProperties WILDROOT_STEW = (new FoodProperties.Builder().nutrition(2).saturationMod(0.8f)).build();
 }
