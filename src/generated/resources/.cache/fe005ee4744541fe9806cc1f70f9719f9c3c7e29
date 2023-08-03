@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-03T12:05:53.5208605	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-08-03T12:28:22.5977044	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -785,6 +785,7 @@ b1491a0aa80f6c27b410fee59c73671cdd0e109e data/roots/advancements/recipes/brewing
 7f3d51fa660a2e49a64054646a73531f171fc5cc data/roots/advancements/recipes/brewing/mortar/magma_cream_from_magma_block_3.json
 ba853eb0673142534c8ac8cd187b3d8dd741915d data/roots/advancements/recipes/brewing/mortar/magma_cream_from_magma_block_4.json
 b8c2699dbb0c37faf7965b4763c6b29309dfb97b data/roots/advancements/recipes/brewing/mortar/magma_cream_from_magma_block_5.json
+3f8056863bdac3bba959a3be0b02f6312ec3a3e1 data/roots/advancements/recipes/decorations/moss_block_from_grove_moss.json
 77130d012aa5941bf61954c0bffa48a6469afc28 data/roots/advancements/recipes/food/bread_from_campfire.json
 8780aa76a11d3e71888443d0ad3c63bc5c56e306 data/roots/advancements/recipes/food/bread_from_smoker.json
 e47907a64e35fa0138600c9fb531c841db6ff1c9 data/roots/advancements/recipes/misc/antlers_to_bonemeal.json
@@ -1396,6 +1397,7 @@ a58843c523b1a4d6e0e0905ac4aa4473f1f3f3bd data/roots/recipes/mossy_runestone_slab
 2e3a1d5d695da78b275983efab8021bf93815a03 data/roots/recipes/mossy_runestone_stairs_from_mossy_runestone_stonecutting.json
 db50a0e03fcbede0fb0a32f7f2bdfb3c733c101e data/roots/recipes/mossy_runestone_wall.json
 f65321fd98c97f971bd8ecdca3b68ecf00ef6517 data/roots/recipes/mossy_runestone_wall_from_mossy_runestone_stonecutting.json
+0220c9316fc709d31c019dfb7d8124609dd70ea6 data/roots/recipes/moss_block_from_grove_moss.json
 652f0c0c9978701fb6faea5d20990b0edfd0dd2c data/roots/recipes/netherite_knife_from_ingots_netherite.json
 76fba840fe0f177c45bf2f943b83b1db83eee42e data/roots/recipes/nuggets_silver_to_ingot.json
 5de977e7d962d55f6646f22dfb53a0a571855942 data/roots/recipes/pelt_to_leather.json

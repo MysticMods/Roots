@@ -12,10 +12,13 @@ import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import net.minecraft.core.Registry;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -201,6 +204,12 @@ public class ModRecipes {
         .unlockedBy("has_bow", p.has(Tags.Items.TOOLS_BOWS))
         .addGrant(Grant.spell(ModSpells.SKY_SOARER.get()))
         .save(p, RootsAPI.rl("spell/sky_soarer"));
+      ShapedRecipeBuilder.shaped(Blocks.MOSS_BLOCK)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', RootsTags.Items.GROVE_MOSS_CROP)
+        .unlockedBy("has_grove_moss", p.has(RootsTags.Items.GROVE_MOSS_CROP))
+        .save(p, RootsAPI.rl("moss_block_from_grove_moss"));
     });
   }
 
