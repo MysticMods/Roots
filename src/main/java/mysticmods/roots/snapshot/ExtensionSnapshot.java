@@ -40,7 +40,7 @@ public class ExtensionSnapshot extends Snapshot {
 
   @Override
   public SnapshotSerializer<?> getSerializer() {
-    return ModSerializers.SKY_SOARER.get();
+    return ModSerializers.EXTENSION.get();
   }
 
   public static class Serializer extends SnapshotSerializer<ExtensionSnapshot> {
