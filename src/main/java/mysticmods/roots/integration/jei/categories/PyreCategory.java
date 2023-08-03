@@ -14,12 +14,12 @@ import net.minecraft.network.chat.Component;
 
 public class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
   public PyreCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.PYRE_RECIPE_TYPE, helper, 90, 53, RootsAPI.rl("textures/gui/jei/ritual_crafting.png"), ModBlocks.PYRE::asStack, Component.translatable("roots.jei.pyre"));
+    super(RootsJEIPlugin.PYRE_RECIPE_TYPE, helper, 121, 76, RootsAPI.rl("textures/gui/jei/ritual_crafting.png"), ModBlocks.PYRE::asStack, Component.translatable("roots.jei.pyre"));
   }
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, PyreRecipe recipe, IFocusGroup iFocusGroup) {
-    builder.addSlot(RecipeIngredientRole.INPUT, 23, 3).addIngredients(recipe.getIngredients().get(0));
+    builder.addSlot(RecipeIngredientRole.INPUT, 27, 3).addIngredients(recipe.getIngredients().get(0));
     builder.addSlot(RecipeIngredientRole.INPUT, 1, 24).addIngredients(recipe.getIngredients().get(1));
     builder.addSlot(RecipeIngredientRole.INPUT, 53, 24).addIngredients(recipe.getIngredients().get(2));
     builder.addSlot(RecipeIngredientRole.INPUT, 8, 57).addIngredients(recipe.getIngredients().get(3));
