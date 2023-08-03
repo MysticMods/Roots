@@ -53,7 +53,8 @@ public class OvergrowthRitual extends Ritual {
       }
       if (!placed) {
         lastChanged = null;
-        List<BlockPos> positions = BlockPos.betweenClosedStream(pBoundingBox).map(BlockPos::immutable).toList();
+        List<BlockPos> positions = new ArrayList<>(BlockPos.betweenClosedStream(pBoundingBox).map(BlockPos::immutable).toList());
+        Collections.shuffle(positions);
         outer: for (BlockPos pos : positions) {
           if (pLevel.getFluidState(pos).is(FluidTags.WATER)) {
             for (Direction dir : horizontals()) {
