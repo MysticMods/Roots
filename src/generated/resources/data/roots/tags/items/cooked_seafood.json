@@ -1,5 +1,7 @@
 {
   "values": [
-    "roots:cooked_squid"
+    "roots:cooked_squid",
+    "minecraft:cooked_cod",
+    "minecraft:cooked_salmon"
   ]
 }

@@ -614,7 +614,7 @@ public class ModItems {
     .model(subfolder("food"))
     .recipe((ctx, p) -> {
       ShapedRecipeBuilder.shaped(ctx.getEntry(), 3)
-        .pattern("WW ")
+        .pattern(" W ")
         .pattern("BBB")
         .define('W', Ingredient.of(RootsTags.Items.WILDROOT_CROP))
         .define('B', Ingredient.of(Items.BOWL))

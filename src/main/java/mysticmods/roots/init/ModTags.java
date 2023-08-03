@@ -197,6 +197,10 @@ public class ModTags {
       b.tag(RootsTags.Items.SEEDS).addTags(RootsTags.Items.MOONGLOW_SEEDS, RootsTags.Items.SPIRITLEAF_SEEDS, RootsTags.Items.WILDEWHEET_SEEDS);
       b.tag(Tags.Items.SEEDS).addTag(RootsTags.Items.SEEDS);
 
+      b.tag(RootsTags.Items.VEGETABLES).add(Items.CARROT, Items.BEETROOT);
+      b.tag(RootsTags.Items.COOKED_VEGETABLES).add(Items.BAKED_POTATO);
+      b.tag(RootsTags.Items.COOKED_SEAFOOD).add(Items.COOKED_COD, Items.COOKED_SALMON);
+
       b.tag(RootsTags.Items.FLINT).add(Items.FLINT);
       b.tag(RootsTags.Items.STONELIKE).addTags(Tags.Items.SANDSTONE, Tags.Items.STONE, ItemTags.STONE_BRICKS, ItemTags.STONE_CRAFTING_MATERIALS, ItemTags.STONE_TOOL_MATERIALS).add(Items.DIORITE, Items.GRANITE, Items.CALCITE, Items.TUFF, Items.POLISHED_DIORITE, Items.POLISHED_GRANITE, Items.POLISHED_ANDESITE, Items.ANDESITE, Items.POLISHED_DEEPSLATE, Items.POLISHED_BLACKSTONE);
 

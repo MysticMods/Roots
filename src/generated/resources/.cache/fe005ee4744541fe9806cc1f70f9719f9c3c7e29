@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-03T12:28:22.5977044	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-08-03T13:04:18.7087309	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1550,7 +1550,7 @@ def46e5ab99c16e419e86a56139411951d6a3e2e data/roots/recipes/stone_knife_from_sto
 9d7a037382e699f1beb71b5cc57452a47f2ccdbd data/roots/recipes/vegetable_juice.json
 90fb0055b2d2237a54f005719ca374ecdb4e7dba data/roots/recipes/vinegar.json
 7b5673c621f32431f7bf2b545407c20d39968f30 data/roots/recipes/wildewheet_bread.json
-f68db71da79b1eb7098839968b896b88b04d27fc data/roots/recipes/wildroot_stew.json
+7abd0b6b26818e81b7c6e512ce68305612444479 data/roots/recipes/wildroot_stew.json
 17db5c672330f57f1121cf864f1290137f312a35 data/roots/recipes/wildwood_button.json
 93195dc1f29fd71f101d3c609155355051d801d7 data/roots/recipes/wildwood_door.json
 7d1bb34e9584e4ad81b505492391c6da29354aff data/roots/recipes/wildwood_fence.json
@@ -1672,8 +1672,8 @@ a1a905fc0c40dbeb097d5eab709a2633e8e6756d data/roots/tags/items/barks/mixed.json
 7f7d5f6cc9b5cfb39d240fc901c4ae2d2037ec14 data/roots/tags/items/bottles.json
 c3a2b3f26c12aec67aa597e52b49cc769f00b01c data/roots/tags/items/carapace.json
 ae71dd3be1e53de12945743c7e5062e8c2460abb data/roots/tags/items/casting_tools.json
-cace477cfdc30967ee346e8e32cceebfb5d27d95 data/roots/tags/items/cooked_seafood.json
-b492df8222e246d2581afe784570f48b8a1c98be data/roots/tags/items/cooked_vegetables.json
+e2ec602b0e665112fd74709c505fc9b9a0aad126 data/roots/tags/items/cooked_seafood.json
+a43ed5d21a66f51ad148a80108b92ee8a0a69312 data/roots/tags/items/cooked_vegetables.json
 80156b58964e4f5bd32dfd5fb10393ac5c85f829 data/roots/tags/items/copper_items.json
 1d43ddccd38a55edc2befc1531297e628c79e0f1 data/roots/tags/items/crafters.json
 9fc13786e6ecdc2ac5f318cb87f662c22323eb1e data/roots/tags/items/crops.json
@@ -1754,7 +1754,7 @@ b8bbfb9e64e0d21258e154bcf3d7684f92d05ed1 data/roots/tags/items/soils/elemental.j
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/items/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/items/soils/water.json
 296c69081ccdb9764372b0b709e1d9c9fada61a3 data/roots/tags/items/stonelike.json
-5bff826d5a121cc3d58de8147a40622c4eab5f06 data/roots/tags/items/vegetables.json
+de63ed9e3b03e443f31cbe2fc6660363c46675b3 data/roots/tags/items/vegetables.json
 4cc96509e1fb05cf67723e56c711377b5cf8d2c3 data/roots/tags/roots/herbs/elemental.json
 98545c13dddf6574110e137626bb2822902a778d data/roots/tags/roots/herbs/elemental/air.json
 314ec0136f8dbb967b704dda383c03d9e2057910 data/roots/tags/roots/herbs/elemental/earth.json

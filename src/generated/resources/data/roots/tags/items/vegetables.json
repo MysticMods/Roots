@@ -1,5 +1,7 @@
 {
   "values": [
-    "roots:aubergine"
+    "roots:aubergine",
+    "minecraft:carrot",
+    "minecraft:beetroot"
   ]
 }
