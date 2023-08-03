@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import com.tterrag.registrate.providers.ProviderType;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.gen.RootsDataProviderTypes;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
@@ -12,9 +13,13 @@ import net.minecraftforge.common.Tags;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
+// TODO: Biome tag generation
 @SuppressWarnings("unchecked")
 public class ModTags {
   static {
+    REGISTRATE.addDataGenerator(RootsDataProviderTypes.BIOME_TAGS, b -> {
+    });
+
     REGISTRATE.addDataGenerator(RootsDataProviderTypes.RITUAL_TAGS, b -> {
       b.tag(RootsTags.Rituals.NYI).add(ModRituals.BLOOMING.get(), ModRituals.FIRE_STORM.get(), ModRituals.FROST_LANDS.get(), ModRituals.GATHERING.get(), ModRituals.GERMINATION.get(), ModRituals.HEALING_AURA.get(), ModRituals.HEAVY_STORMS.get(), ModRituals.OVERGROWTH.get(), ModRituals.PROTECTION.get(), ModRituals.PURITY.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.TRANSMUTATION.get(), ModRituals.WARDING.get(), ModRituals.WILDROOT_GROWTH.get(), ModRituals.WINDWALL.get());
     });
