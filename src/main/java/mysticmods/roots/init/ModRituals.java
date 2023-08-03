@@ -25,8 +25,8 @@ public class ModRituals {
   public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_DURATION = REGISTRATE.simple("animal_harvest/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 3200, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_INTERVAL = REGISTRATE.simple("animal_harvest/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 110, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
   public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_COUNT = REGISTRATE.simple("animal_harvest/count", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 5, Property.INTEGER_SERIALIZER, RitualProperties.COUNT));
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_RADIUS_XZ = REGISTRATE.simple("animal_harvest/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
-  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_RADIUS_Y = REGISTRATE.simple("animal_harvest/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 10, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_RADIUS_XZ = REGISTRATE.simple("animal_harvest/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 8, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_RADIUS_Y = REGISTRATE.simple("animal_harvest/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 6, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
   public static final RegistryEntry<RitualProperty<Float>> ANIMAL_HARVEST_LOOTING_CHANCE = REGISTRATE.simple("animal_harvest/looting_chance", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 0.2f, Property.FLOAT_SERIALIZER, "Chance per operation that the loot level will be set to looting_value"));
   public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_LOOTING_VALUE = REGISTRATE.simple("animal_harvest/looting_value", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 2, Property.INTEGER_SERIALIZER, "The value passed to the loot function if looting_chance was successful."));
   public static final RegistryEntry<RitualProperty<Integer>> ANIMAL_HARVEST_GLOW_DURATION = REGISTRATE.simple("animal_harvest/glow_duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(ANIMAL_HARVEST::get, 10, Property.INTEGER_SERIALIZER, "The duration of the glow effect applied to entities that have been harvest."));
@@ -55,15 +55,15 @@ public class ModRituals {
   public static final RegistryEntry<GatheringRitual> GATHERING = ritual(Rituals.GATHERING, GatheringRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> GATHERING_DURATION = REGISTRATE.simple("gathering/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GATHERING::get, 6000, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> GATHERING_INTERVAL = REGISTRATE.simple("gathering/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GATHERING::get, 80, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
-  public static final RegistryEntry<RitualProperty<Integer>> GATHERING_RADIUS_XZ = REGISTRATE.simple("gathering/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GATHERING::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> GATHERING_RADIUS_XZ = REGISTRATE.simple("gathering/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GATHERING::get, 20, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
   public static final RegistryEntry<RitualProperty<Integer>> GATHERING_RADIUS_Y = REGISTRATE.simple("gathering/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GATHERING::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
   // Germination ritual
   public static final RegistryEntry<GerminationRitual> GERMINATION = ritual(Rituals.GERMINATION, GerminationRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> GERMINATION_DURATION = REGISTRATE.simple("germination/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GERMINATION::get, 6400, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> GERMINATION_INTERVAL = REGISTRATE.simple("germination/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GERMINATION::get, 64, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
-  public static final RegistryEntry<RitualProperty<Integer>> GERMINATION_RADIUS_XZ = REGISTRATE.simple("germination/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GERMINATION::get, 19, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
-  public static final RegistryEntry<RitualProperty<Integer>> GERMINATION_RADIUS_Y = REGISTRATE.simple("germination/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GERMINATION::get, 19, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
+  public static final RegistryEntry<RitualProperty<Integer>> GERMINATION_RADIUS_XZ = REGISTRATE.simple("germination/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GERMINATION::get, 20, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> GERMINATION_RADIUS_Y = REGISTRATE.simple("germination/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(GERMINATION::get, 20, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
   // Healing Aura ritual
   public static final RegistryEntry<HealingAuraRitual> HEALING_AURA = ritual(Rituals.HEALING_AURA, HealingAuraRitual::new);
@@ -84,22 +84,22 @@ public class ModRituals {
   public static final RegistryEntry<OvergrowthRitual> OVERGROWTH = ritual(Rituals.OVERGROWTH, OvergrowthRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_DURATION = REGISTRATE.simple("overgrowth/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 3000, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_INTERVAL = REGISTRATE.simple("overgrowth/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 100, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
-  public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_RADIUS_XZ = REGISTRATE.simple("overgrowth/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 10, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_RADIUS_XZ = REGISTRATE.simple("overgrowth/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 6, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
   public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_RADIUS_Y = REGISTRATE.simple("overgrowth/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 5, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
   // Protection Ritual
   public static final RegistryEntry<ProtectionRitual> PROTECTION = ritual(Rituals.PROTECTION, ProtectionRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> PROTECTION_DURATION = REGISTRATE.simple("protection/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PROTECTION::get, 1200, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> PROTECTION_INTERVAL = REGISTRATE.simple("protection/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PROTECTION::get, 20, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
-  public static final RegistryEntry<RitualProperty<Integer>> PROTECTION_RADIUS_XZ = REGISTRATE.simple("protection/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PROTECTION::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
-  public static final RegistryEntry<RitualProperty<Integer>> PROTECTION_RADIUS_Y = REGISTRATE.simple("protection/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PROTECTION::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
+  public static final RegistryEntry<RitualProperty<Integer>> PROTECTION_RADIUS_XZ = REGISTRATE.simple("protection/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PROTECTION::get, 8, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> PROTECTION_RADIUS_Y = REGISTRATE.simple("protection/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PROTECTION::get, 6, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
   // Purity ritual
   public static final RegistryEntry<PurityRitual> PURITY = ritual(Rituals.PURITY, PurityRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> PURITY_DURATION = REGISTRATE.simple("purity/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PURITY::get, 1200, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> PURITY_INTERVAL = REGISTRATE.simple("purity/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PURITY::get, 20, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
-  public static final RegistryEntry<RitualProperty<Integer>> PURITY_RADIUS_XZ = REGISTRATE.simple("purity/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PURITY::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
-  public static final RegistryEntry<RitualProperty<Integer>> PURITY_RADIUS_Y = REGISTRATE.simple("purity/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PURITY::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
+  public static final RegistryEntry<RitualProperty<Integer>> PURITY_RADIUS_XZ = REGISTRATE.simple("purity/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PURITY::get, 8, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> PURITY_RADIUS_Y = REGISTRATE.simple("purity/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(PURITY::get, 4, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
   // Spreading Forest ritual
   public static final RegistryEntry<SpreadingForestRitual> SPREADING_FOREST = ritual(Rituals.SPREADING_FOREST, SpreadingForestRitual::new);
@@ -117,22 +117,22 @@ public class ModRituals {
   public static final RegistryEntry<TransmutationRitual> TRANSMUTATION = ritual(Rituals.TRANSMUTATION, TransmutationRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> TRANSMUTATION_DURATION = REGISTRATE.simple("transmutation/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(TRANSMUTATION::get, 2400, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> TRANSMUTATION_INTERVAL = REGISTRATE.simple("transmutation/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(TRANSMUTATION::get, 100, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
-  public static final RegistryEntry<RitualProperty<Integer>> TRANSMUTATION_RADIUS_XZ = REGISTRATE.simple("transmutation/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(TRANSMUTATION::get, 4, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> TRANSMUTATION_RADIUS_XZ = REGISTRATE.simple("transmutation/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(TRANSMUTATION::get, 6, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
   public static final RegistryEntry<RitualProperty<Integer>> TRANSMUTATION_RADIUS_Y = REGISTRATE.simple("transmutation/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(TRANSMUTATION::get, 4, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
   // Warding ritual
   public static final RegistryEntry<WardingRitual> WARDING = ritual(Rituals.WARDING, WardingRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> WARDING_DURATION = REGISTRATE.simple("warding/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WARDING::get, 1200, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> WARDING_INTERVAL = REGISTRATE.simple("warding/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WARDING::get, 20, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
-  public static final RegistryEntry<RitualProperty<Integer>> WARDING_RADIUS_XZ = REGISTRATE.simple("warding/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WARDING::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
-  public static final RegistryEntry<RitualProperty<Integer>> WARDING_RADIUS_Y = REGISTRATE.simple("warding/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WARDING::get, 15, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
+  public static final RegistryEntry<RitualProperty<Integer>> WARDING_RADIUS_XZ = REGISTRATE.simple("warding/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WARDING::get, 8, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
+  public static final RegistryEntry<RitualProperty<Integer>> WARDING_RADIUS_Y = REGISTRATE.simple("warding/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WARDING::get, 6, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
   // Wildroot Growth ritual
   public static final RegistryEntry<WildrootGrowthRitual> WILDROOT_GROWTH = ritual(Rituals.WILDROOT_GROWTH, WildrootGrowthRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> WILDROOT_GROWTH_DURATION = REGISTRATE.simple("wildroot_growth/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WILDROOT_GROWTH::get, 300, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> WILDROOT_GROWTH_INTERVAL = REGISTRATE.simple("wildroot_growth/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WILDROOT_GROWTH::get, 250, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
   public static final RegistryEntry<RitualProperty<Integer>> WILDROOT_GROWTH_RADIUS_XZ = REGISTRATE.simple("wildroot_growth/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WILDROOT_GROWTH::get, 10, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
-  public static final RegistryEntry<RitualProperty<Integer>> WILDROOT_GROWTH_RADIUS_Y = REGISTRATE.simple("wildroot_growth/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WILDROOT_GROWTH::get, 20, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
+  public static final RegistryEntry<RitualProperty<Integer>> WILDROOT_GROWTH_RADIUS_Y = REGISTRATE.simple("wildroot_growth/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(WILDROOT_GROWTH::get, 4, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
   // Windwall ritual
   public static final RegistryEntry<WindwallRitual> WINDWALL = ritual(Rituals.WINDWALL, WindwallRitual::new);

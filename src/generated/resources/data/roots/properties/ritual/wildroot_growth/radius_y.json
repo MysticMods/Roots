@@ -1,6 +1,6 @@
 {
   "_comment": "The vertical radius of the ritual in blocks.",
-  "default_value": 20,
+  "default_value": 4,
   "ritual": "roots:wildroot_growth",
-  "value": 20
+  "value": 4
 }

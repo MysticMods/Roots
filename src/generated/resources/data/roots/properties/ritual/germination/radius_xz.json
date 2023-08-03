@@ -1,6 +1,6 @@
 {
   "_comment": "The horizontal radius of the ritual in blocks.",
-  "default_value": 19,
+  "default_value": 20,
   "ritual": "roots:germination",
-  "value": 19
+  "value": 20
 }
