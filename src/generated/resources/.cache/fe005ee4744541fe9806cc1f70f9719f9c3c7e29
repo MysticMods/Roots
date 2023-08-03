@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-02T22:27:32.0291215	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
+// 1.19.2	2023-08-03T12:05:53.5208605	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1111,7 +1111,7 @@ da91063a1cc7cbaa5aeb017bab9ecc90211c6fa7 data/roots/loot_tables/blocks/caelic_so
 9a45fb4fa887026fed56ab21ffc8a1b302d67c94 data/roots/loot_tables/blocks/chiseled_runed_obsidian.json
 5dd993b2273fff7774b3cbc6ef258e4ab1cf9c9e data/roots/loot_tables/blocks/chiseled_runestone.json
 7cbcaba40b9d45319d175c8549b04170f6251a7f data/roots/loot_tables/blocks/cloud_berry_crop.json
-ba91152691ce4143a32a5af5edcc18c06cda6da1 data/roots/loot_tables/blocks/creeping_grove_moss.json
+d90b5253d8e8a5c6f7228f8a00de1e67bfb3e5c6 data/roots/loot_tables/blocks/creeping_grove_moss.json
 1e2f18f8b581ffcafa03b3ed855495cdb91de362 data/roots/loot_tables/blocks/decorative_pyre.json
 dfe48edfeaf25df4069239a44892875bcf4157d2 data/roots/loot_tables/blocks/deepslate_silver_ore.json
 397b23266f79709bd367169c82ffe81b7fdf2c0d data/roots/loot_tables/blocks/dewgonia_crop.json

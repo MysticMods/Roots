@@ -1029,7 +1029,7 @@ public class ModBlocks {
         .define('W', Ingredient.of(RootsTags.Items.WILDWOOD_PLANKS))
         .unlockedBy("has_wildwood", p.has(RootsTags.Items.WILDWOOD_PLANKS))
         .save(p, RootsAPI.rl("wildwood_ladder"));
-      })
+    })
     .blockstate((ctx, p) -> {
       p.horizontalBlock(ctx.getEntry(), p.models().withExistingParent(ctx.getName(), new ResourceLocation("minecraft", "block/ladder")).texture("particle", p.modLoc("block/wildwood_ladder")).texture("texture", p.modLoc("block/wildwood_ladder")));
     })
@@ -1229,8 +1229,6 @@ public class ModBlocks {
   // FUNCTIONAL BLOCKS BEGIN HERE
 
 
-
-
   public static NonNullUnaryOperator<BlockBehaviour.Properties> SOIL_PROPERTIES = r -> BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DIRT);
 
   public static BlockEntry<ElementalSoilBlock> ELEMENTAL_SOIL = REGISTRATE.block("elemental_soil", ElementalSoilBlock::new)
@@ -1410,7 +1408,12 @@ public class ModBlocks {
   public static BlockEntry<CreepingGroveMossBlock> CREEPING_GROVE_MOSS = REGISTRATE.block("creeping_grove_moss", Material.GRASS, CreepingGroveMossBlock::new)
     .properties(o -> BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET))
     .loot((p, t) -> {
-      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))))));
+      p.add(t, RegistrateBlockLootTables.applyExplosionDecay(t, LootTable.lootTable()
+        .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
+        .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f)))).when(new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CreepingGroveMossBlock.RITUAL_PLACED, false)))
+        )
+        .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))).when(new LootItemBlockStatePropertyCondition.Builder(t).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CreepingGroveMossBlock.RITUAL_PLACED, false)))
+        )));
     })
     .blockstate((ctx, p) -> {
       p.simpleBlock(ctx.getEntry(), p.models().singleTexture(ctx.getName(), new ResourceLocation("minecraft", "block/carpet"), "wool", p.modLoc("block/creeping_grove_moss")));
@@ -1678,7 +1681,7 @@ public class ModBlocks {
 
   public static BlockEntry<SeededCropsBlock> AUBERGINE_CROP = REGISTRATE.block("aubergine_crop", (b) -> new SeededCropsBlock(b, () -> ModItems.AUBERGINE_SEEDS.get()::asItem))
     .properties(CROP_PROPERTIES)
-    .loot(cropLoot(SeededCropsBlock.AGE, () -> ModItems.AUBERGINE_SEEDS.get(),() ->  ModItems.AUBERGINE.get()))
+    .loot(cropLoot(SeededCropsBlock.AGE, () -> ModItems.AUBERGINE_SEEDS.get(), () -> ModItems.AUBERGINE.get()))
     .blockstate(BlockstateGenerator::cropBlockstate)
     .tag(BlockTags.CROPS, BlockTags.MINEABLE_WITH_HOE)
     .register();

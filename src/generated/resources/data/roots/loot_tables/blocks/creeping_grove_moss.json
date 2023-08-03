@@ -25,6 +25,15 @@
     },
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "roots:creeping_grove_moss",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "ritual_placed": "false"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
@@ -46,6 +55,15 @@
     },
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "roots:creeping_grove_moss",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "ritual_placed": "false"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
