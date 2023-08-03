@@ -27,7 +27,7 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
     int dur = getDuration() - blockEntity.getLifetime();
     BoundingBox moved = getBoundingBox();
     if (moved != null) {
-      moved = moved.move(pPos);
+      moved = moved.moved(pPos.getX(), pPos.getY(), pPos.getZ());
     }
     functionalTick(pLevel, pPos, pState, moved, blockEntity, dur);
     animationTick(pLevel, pPos, pState, moved, blockEntity, dur);

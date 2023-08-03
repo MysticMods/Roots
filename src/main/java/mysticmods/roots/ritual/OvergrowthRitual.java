@@ -20,6 +20,7 @@ public class OvergrowthRitual extends Ritual {
   private static final Direction[] HORIZONTALS = new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
   private BlockPos lastChanged;
 
+
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
     if (duration % interval == 0) {
@@ -33,7 +34,7 @@ public class OvergrowthRitual extends Ritual {
           for (Direction dir : HORIZONTALS) {
             BlockPos offset = lastChanged.relative(dir);
             if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
-              pLevel.setBlockAndUpdate(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState());
+              pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState(), 3);
               lastChanged = offset;
               placed = true;
               break;
@@ -49,7 +50,7 @@ public class OvergrowthRitual extends Ritual {
             for (Direction dir : HORIZONTALS) {
               BlockPos offset = pos.above().relative(dir);
               if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
-                pLevel.setBlockAndUpdate(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState());
+                pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState(), 2);
                 lastChanged = offset;
                 break outer;
               }
@@ -58,7 +59,7 @@ public class OvergrowthRitual extends Ritual {
             for (Direction dir : HORIZONTALS) {
               BlockPos offset = pos.relative(dir);
               if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
-                pLevel.setBlockAndUpdate(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState());
+                pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState(), 2);
                 lastChanged = offset;
                 break outer;
               }

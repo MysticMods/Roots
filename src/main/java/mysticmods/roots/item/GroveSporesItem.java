@@ -30,6 +30,11 @@ public class GroveSporesItem extends Item {
       return false;
     }
 
+    BlockState state = pLevel.getBlockState(pPos.below());
+    if (!state.isFaceSturdy(pLevel, pPos, pDirection)) {
+      return false;
+    }
+
     boolean canPlace = false;
     if (pLevel.getFluidState(pPos).is(FluidTags.WATER)) {
       return false;
