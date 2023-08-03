@@ -210,7 +210,17 @@ public class ModRecipes {
         .addIngredient(Items.FISHING_ROD)
         .addIngredient(RootsTags.Items.AUBERGINE_CROP)
         .unlockedBy("has_redstone", p.has(Tags.Items.DUSTS_REDSTONE))
+        .addGrant(Grant.spell(ModSpells.MAGNETISM.get()))
         .save(p, RootsAPI.rl("spell/magnetism"));
+      MortarRecipe.builder(5)
+        .addIngredient(Tags.Items.CROPS_CARROT)
+        .addIngredient(Tags.Items.NUGGETS_GOLD)
+        .addIngredient(RootsTags.Items.GROVE_MOSS_CROP)
+        .addIngredient(RootsTags.Items.BARKS)
+        .addIngredient(Items.TORCH)
+        .unlockedBy("has_carrots", p.has(Tags.Items.CROPS_CARROT))
+        .addGrant(Grant.spell(ModSpells.EXTENSION.get()))
+        .save(p, RootsAPI.rl("spell/extension"));
       ShapedRecipeBuilder.shaped(Blocks.MOSS_BLOCK)
         .pattern("XX")
         .pattern("XX")

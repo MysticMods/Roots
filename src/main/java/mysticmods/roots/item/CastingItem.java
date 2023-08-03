@@ -93,10 +93,6 @@ public class CastingItem extends Item implements ICastingItem {
     }
 
     if (pPlayer.isShiftKeyDown()) {
-      // TODO: Show spell library
-/*      ClientBoundOpenLibraryPacket packet = new ClientBoundOpenLibraryPacket(pUsedHand);
-      Networking.sendTo(packet, (ServerPlayer) pPlayer);
-      return InteractionResultHolder.success(stack);*/
       storage.nextSpell();
     } else {
       SpellInstance spell = storage.getSpell();
@@ -108,6 +104,7 @@ public class CastingItem extends Item implements ICastingItem {
       Costing costing = new Costing(spell);
       if (!costing.canAfford(pPlayer, true)) {
         // TODO: display a warning
+        pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
         RootsAPI.LOG.info("Not enough herbs to cast: " + spell.getSpell().getName());
         return InteractionResultHolder.fail(stack);
       }

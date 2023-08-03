@@ -1,0 +1,6 @@
+{
+  "_comment": "The duration of the night vision effect in ticks.",
+  "default_value": 350,
+  "spell": "roots:extension",
+  "value": 350
+}

@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:magnetism"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:nuggets/iron"
+    },
+    {
+      "tag": "forge:dusts/redstone"
+    },
+    {
+      "tag": "roots:crops/wildroot"
+    },
+    {
+      "item": "minecraft:fishing_rod"
+    },
+    {
+      "tag": "roots:crops/aubergine"
+    }
+  ],
+  "times": 5
+}

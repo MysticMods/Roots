@@ -1,0 +1,6 @@
+{
+  "_comment": "The size of the area that will be affected on the Y axis",
+  "default_value": 20,
+  "spell": "roots:extension",
+  "value": 20
+}

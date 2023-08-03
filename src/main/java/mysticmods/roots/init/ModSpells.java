@@ -68,6 +68,10 @@ public class ModSpells {
   // Extension spell (350 cooldown)
   public static final RegistryEntry<ExtensionSpell> EXTENSION = spell(Spells.EXTENSION, ExtensionSpell::new, ChatFormatting.BLUE, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.250), Cost.add(ModHerbs.WILDROOT, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> EXTENSION_COOLDOWN = property(Spells.EXTENSION, "cooldown", () -> new SpellProperty<>(EXTENSION::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final RegistryEntry<SpellProperty<Integer>> EXTENSION_NIGHT_VISION_DURATION = property(Spells.EXTENSION, "night_vision_duration", () -> new SpellProperty<>(EXTENSION::get, 350, Property.INTEGER_SERIALIZER, "The duration of the night vision effect in ticks."));
+  public static final RegistryEntry<SpellProperty<Integer>> EXTENSION_SENSE_DANGER_DURATION = property(Spells.EXTENSION, "sense_danger_duration", () -> new SpellProperty<>(EXTENSION::get, 350, Property.INTEGER_SERIALIZER, "The duration of the sense danger effect in ticks."));
+  public static final RegistryEntry<SpellProperty<Integer>> EXTENSION_RADIUS_ZX = property(Spells.EXTENSION, "radius_zx", () -> new SpellProperty<>(EXTENSION::get, 40, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_ZX));
+  public static final RegistryEntry<SpellProperty<Integer>> EXTENSION_RADIUS_Y = property(Spells.EXTENSION, "radius_y", () -> new SpellProperty<>(EXTENSION::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_Y));
 
   // Nondetection (350 cooldown)
   public static final RegistryEntry<NondetectionSpell> NONDETECTION = spell(Spells.NONDETECTION, NondetectionSpell::new, ChatFormatting.DARK_AQUA, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, 0.250), Cost.add(ModHerbs.DEWGONIA, 0.250)));

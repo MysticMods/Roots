@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "roots:extension"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "forge:crops/carrot"
+    },
+    {
+      "tag": "forge:nuggets/gold"
+    },
+    {
+      "tag": "roots:crops/grove_moss"
+    },
+    {
+      "tag": "roots:barks"
+    },
+    {
+      "item": "minecraft:torch"
+    }
+  ],
+  "times": 5
+}

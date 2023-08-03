@@ -10,6 +10,7 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
+import mysticmods.roots.snapshot.ExtensionSnapshot;
 import mysticmods.roots.snapshot.PetalShellSnapshot;
 import mysticmods.roots.snapshot.SkySoarerSnapshot;
 import net.minecraft.core.Registry;
@@ -33,6 +34,8 @@ public class ModSerializers {
   // Snapshot Serializers
   public static final RegistryEntry<SkySoarerSnapshot.Serializer> SKY_SOARER = REGISTRATE.simple("sky_soarer", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new SkySoarerSnapshot.Serializer(SkySoarerSnapshot::new));
   public static final RegistryEntry<PetalShellSnapshot.Serializer> PETAL_SHELL = REGISTRATE.simple("petal_shell", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new PetalShellSnapshot.Serializer(PetalShellSnapshot::new));
+
+  public static final RegistryEntry<ExtensionSnapshot.Serializer> EXTENSION = REGISTRATE.simple("extension", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new ExtensionSnapshot.Serializer(ExtensionSnapshot::new));
 
   public static void load() {
   }

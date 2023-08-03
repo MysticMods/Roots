@@ -52,6 +52,7 @@ public class ModLang {
 
       b.add("roots.message.recipe.requires", "Requires: %s");
       b.add("roots.message.recipe.failures", "A number of conditions were not met:");
+      b.add("roots.message.staff.missing_herbs", "Unable to cast %s, missing herbs.");
 
       // Squid-related stuff
       b.add("roots.message.squid.cooldown", "Give it time to produce more ink!");

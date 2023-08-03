@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-03T15:54:07.3101884	Spell properties
+// 1.19.2	2023-08-03T17:06:31.7494913	Spell properties
 8844f1c40708dd1992206793e7d9be5be8d83ba5 data/roots/properties/spell/acid_cloud/cooldown.json
 c3a3cb26bf1c2fc234507699f251d408f590a61c data/roots/properties/spell/acid_cloud/count.json
 5f17dd45df38dbdc58352b6dcce4ec744fec9451 data/roots/properties/spell/acid_cloud/damage.json
@@ -14,6 +14,10 @@ cff3eb694a1b6b809a94be47e49027ae1a15d3af data/roots/properties/spell/dandelion_w
 82e4d4b77b5a9b5637707b4682e775fbd3c6b545 data/roots/properties/spell/desaturate/cooldown.json
 9a51027ba695dfaa8edb7fbaf37f4721614829d7 data/roots/properties/spell/disarm/cooldown.json
 754e33ec8b58f7f44b1c1b8a7662c901532fb311 data/roots/properties/spell/extension/cooldown.json
+6cf6bae62651eb4ea17b9dbd3c3a5db630b22410 data/roots/properties/spell/extension/night_vision_duration.json
+618114d84a949162e4d16f6121b1f7cb17053730 data/roots/properties/spell/extension/radius_y.json
+c7ba8d64b88730b8b7be4670aa72eec35e6220cf data/roots/properties/spell/extension/radius_zx.json
+348fe1bb2f59ec5c97f7dd310e30edccd558204a data/roots/properties/spell/extension/sense_danger_duration.json
 7e9efe9c0e6735589e0994ad8959761c48b9e863 data/roots/properties/spell/fey_light/cooldown.json
 babbd9c0cc03a730cec17bf35eafb695fc70c2fc data/roots/properties/spell/fey_light/max_distance.json
 7a9685a61697434023877299a101362755b57d40 data/roots/properties/spell/geas/cooldown.json
