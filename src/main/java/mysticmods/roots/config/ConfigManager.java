@@ -21,12 +21,13 @@ public class ConfigManager {
 
   public static HatConfig HAT_CONFIG = new HatConfig();
 
-  public static ForgeConfigSpec.IntValue HELL_SPROUT_GROWTH_CHANCE;
+  public static ForgeConfigSpec.BooleanValue EXPERIENCE_ORBS;
   public static ForgeConfigSpec COMMON_CONFIG;
 
   static {
-    COMMON_BUILDER.comment("Entity-related configurations").push("entity_config");
-    HELL_SPROUT_GROWTH_CHANCE = COMMON_BUILDER.comment("-1 to disable").defineInRange("hell_sprout_growth_chance", 100, -1, Integer.MAX_VALUE);
+    COMMON_BUILDER.comment("magnetism-related configuration").push("magnetism");
+    EXPERIENCE_ORBS = COMMON_BUILDER.comment("whether or not experience orbs should be teleported when using magnetism").define("move_experience_orbs", true);
+    COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Hat configuration").push("hat_config");
     HAT_CONFIG.apply(COMMON_BUILDER);
     COMMON_BUILDER.pop();
