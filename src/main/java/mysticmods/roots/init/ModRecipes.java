@@ -17,7 +17,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -204,6 +203,14 @@ public class ModRecipes {
         .unlockedBy("has_bow", p.has(Tags.Items.TOOLS_BOWS))
         .addGrant(Grant.spell(ModSpells.SKY_SOARER.get()))
         .save(p, RootsAPI.rl("spell/sky_soarer"));
+      MortarRecipe.builder(5)
+        .addIngredient(Tags.Items.NUGGETS_IRON)
+        .addIngredient(Tags.Items.DUSTS_REDSTONE)
+        .addIngredient(RootsTags.Items.WILDROOT_CROP)
+        .addIngredient(Items.FISHING_ROD)
+        .addIngredient(RootsTags.Items.AUBERGINE_CROP)
+        .unlockedBy("has_redstone", p.has(Tags.Items.DUSTS_REDSTONE))
+        .save(p, RootsAPI.rl("spell/magnetism"));
       ShapedRecipeBuilder.shaped(Blocks.MOSS_BLOCK)
         .pattern("XX")
         .pattern("XX")

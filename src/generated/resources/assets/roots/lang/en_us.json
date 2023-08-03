@@ -493,6 +493,8 @@
   "spell_property.roots.life_drain.cooldown": "Life Drain: Cooldown",
   "spell_property.roots.light_drifter.cooldown": "Light Drifter: Cooldown",
   "spell_property.roots.magnetism.cooldown": "Magnetism: Cooldown",
+  "spell_property.roots.magnetism.radius_y": "Magnetism: Radius Y",
+  "spell_property.roots.magnetism.radius_zx": "Magnetism: Radius Zx",
   "spell_property.roots.nondetection.cooldown": "Nondetection: Cooldown",
   "spell_property.roots.petal_shell.cooldown": "Petal Shell: Cooldown",
   "spell_property.roots.petal_shell.count": "Petal Shell: Count",

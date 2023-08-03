@@ -46,6 +46,9 @@ public class ModSpells {
   public static final RegistryEntry<MagnetismSpell> MAGNETISM = spell(Spells.MAGNETISM, MagnetismSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> MAGNETISM_COOLDOWN = property(Spells.MAGNETISM, "cooldown", () -> new SpellProperty<>(MAGNETISM::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
+  public static final RegistryEntry<SpellProperty<Integer>> MAGNETISM_RADIUS_ZX = property(Spells.MAGNETISM, "radius_zx", () -> new SpellProperty<>(MAGNETISM::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_ZX));
+  public static final RegistryEntry<SpellProperty<Integer>> MAGNETISM_RADIUS_Y = property(Spells.MAGNETISM, "radius_y", () -> new SpellProperty<>(MAGNETISM::get, 10, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_Y));
+
   // Dandelion Winds (20 cooldown)
   public static final RegistryEntry<DandelionWindsSpell> DANDELION_WINDS = spell(Spells.DANDELION_WINDS, DandelionWindsSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.CLOUD_BERRY, 0.250), Cost.add(ModHerbs.GROVE_MOSS, 0.125)));
   public static final RegistryEntry<SpellProperty<Integer>> DANDELION_WINDS_COOLDOWN = property(Spells.DANDELION_WINDS, "cooldown", () -> new SpellProperty<>(DANDELION_WINDS::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
