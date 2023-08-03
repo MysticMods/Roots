@@ -1,0 +1,29 @@
+{
+  "type": "roots:runic_block",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "predicate_type": "roots:block_property_match_test",
+      "property": "age",
+      "state": {
+        "Name": "minecraft:wheat",
+        "Properties": {
+          "age": "7"
+        }
+      }
+    }
+  },
+  "durability_cost": 15,
+  "output_state": {
+    "Name": "minecraft:wheat",
+    "Properties": {
+      "age": "0"
+    }
+  },
+  "result": {
+    "item": "roots:wildewheet_seeds"
+  },
+  "skip_properties": [
+    "age"
+  ]
+}

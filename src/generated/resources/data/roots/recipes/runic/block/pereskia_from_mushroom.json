@@ -1,0 +1,17 @@
+{
+  "type": "roots:runic_block",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "predicate_type": "minecraft:tag_match",
+      "tag": "minecraft:small_flowers"
+    }
+  },
+  "durability_cost": 15,
+  "output_state": {
+    "Name": "minecraft:air"
+  },
+  "result": {
+    "item": "roots:pereskia_bulb"
+  }
+}

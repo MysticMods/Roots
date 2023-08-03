@@ -27,6 +27,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -34,6 +35,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -128,6 +130,14 @@ public class ModItems {
   public static final ItemEntry<ItemNameBlockItem> PERESKIA_BULB = REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.PERESKIA_CROP.get(), p))
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.PERESKIA_SEEDS)
+    .recipe((ctx, p) -> {
+      RunicBlockRecipe.builder(ctx.getEntry())
+        .durabilityCost(15)
+        .setCondition(new WorldRecipe.Condition(new TagMatchTest(BlockTags.SMALL_FLOWERS)))
+        .setOutputState(Blocks.AIR.defaultBlockState())
+        .unlockedBy("has_runic_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
+        .save(p, RootsAPI.rl("runic/block/pereskia_from_mushroom"));
+    })
     .register();
   public static final ItemEntry<ItemNameBlockItem> SPIRITLEAF_SEEDS = REGISTRATE.item("spiritleaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.SPIRITLEAF_CROP.get(), p))
     .model(subfolder("herbs"))
@@ -145,6 +155,15 @@ public class ModItems {
   public static final ItemEntry<ItemNameBlockItem> WILDEWHEET_SEEDS = REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.WILDEWHEET_CROP.get(), p))
     .model(subfolder("herbs"))
     .tag(RootsTags.Items.WILDEWHEET_SEEDS)
+    .recipe((ctx, p) -> {
+      RunicBlockRecipe.builder(ctx.getEntry())
+        .durabilityCost(15)
+        .skipProperty(CropBlock.AGE)
+        .setCondition(new WorldRecipe.Condition(new BlockPropertyMatchTest(Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, CropBlock.MAX_AGE), CropBlock.AGE)))
+        .setOutputState(Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, 0))
+        .unlockedBy("has_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
+        .save(p, RootsAPI.rl("runic/block/wildewheet_seeds"));
+    })
     .register();
 
   public static final ItemEntry<GroveSporesItem> GROVE_SPORES = REGISTRATE.item("grove_spores", GroveSporesItem::new)
@@ -183,6 +202,7 @@ public class ModItems {
       RECIPES.food(RootsTags.Items.AUBERGINE_CROP, ModItems.COOKED_AUBERGINE, 0.15f, p);
       RECIPES.food(ModItems.RAW_SQUID, ModItems.COOKED_SQUID, 0.15f, p);
       RECIPES.food(ModItems.FLOUR, () -> Items.BREAD, 0.15f, p);
+      RECIPES.food(ModItems.PERESKIA_BULB, ModItems.COOKED_PERESKIA, 0.14f, p);
     })
     .register();
 
@@ -592,6 +612,7 @@ public class ModItems {
     .register();
 
   public static final ItemEntry<Item> COOKED_PERESKIA = REGISTRATE.item("cooked_pereskia", Item::new)
+    .properties(o -> o.food(ModFoods.COOKED_AUBERGINE))
     .model(subfolder("food"))
     .register();
 
