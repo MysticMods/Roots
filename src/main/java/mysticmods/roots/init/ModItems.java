@@ -611,6 +611,7 @@ public class ModItems {
     .register();
 
   public static final ItemEntry<Item> WILDROOT_STEW = REGISTRATE.item("wildroot_stew", Item::new)
+    .properties(o -> o.food(ModFoods.WILDROOT_STEW))
     .model(subfolder("food"))
     .recipe((ctx, p) -> {
       ShapedRecipeBuilder.shaped(ctx.getEntry(), 3)

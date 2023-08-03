@@ -11,7 +11,6 @@ public class ModFoods {
   public static final FoodProperties AUBERGINE = (new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)).build();
   public static final FoodProperties COOKED_BEETROOT = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.8F).build();
   public static final FoodProperties COOKED_CARROT = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.6F).build();
-  public static final FoodProperties SLICED_CARROT = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.6F).fast().build();
   public static final FoodProperties COOKED_AUBERGINE = (new FoodProperties.Builder().nutrition(5).saturationMod(0.8f)).build();
   public static final FoodProperties STUFFED_AUBERGINE = (new FoodProperties.Builder().nutrition(10).saturationMod(0.8f)).build();
   public static final FoodProperties RAW_SQUID = (new FoodProperties.Builder().nutrition(1).saturationMod(0.3f)).meat().build();
