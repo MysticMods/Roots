@@ -2,6 +2,7 @@ package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.gen.LootTableGenerator;
+import mysticmods.roots.gen.McMetaGenerator;
 import mysticmods.roots.gen.provider.ModifierCostProvider;
 import mysticmods.roots.gen.provider.RitualPropertyProvider;
 import mysticmods.roots.gen.provider.SpellCostProvider;
@@ -23,5 +24,6 @@ public class Data {
     ModifierCostProvider modifier_costs = new ModifierCostProvider(event.getGenerator());
     event.getGenerator().addProvider(event.includeServer(), modifier_costs);
     event.getGenerator().addProvider(event.includeDev(), new LootTableGenerator(event.getGenerator()));
+    event.getGenerator().addProvider(true, new McMetaGenerator(event.getGenerator()));
   }
 }
