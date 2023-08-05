@@ -919,7 +919,7 @@ public class ModItems {
 
   public static final ItemEntry<Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
     .model(subfolder("resources"))
-    .recipe((ctx, p) -> MortarRecipe.multiBuilder(ctx.getEntry(), 1)
+    .recipe((ctx, p) -> MortarRecipe.multiBuilder(ctx.getEntry(), 5)
       .addIngredient(RootsTags.Items.RUNESTONE)
       .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
       .save(p, RootsAPI.rl("runic_dust")))

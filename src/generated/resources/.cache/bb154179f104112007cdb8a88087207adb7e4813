@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-03T22:25:45.1634011	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
+// 1.19.2	2023-08-03T22:27:16.9904988	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1532,11 +1532,11 @@ aaf0d0a1b464f198e542069fd28a29c44004d923 data/roots/recipes/runestone_stairs.jso
 16ddab9e879b56dc6f42baa32fbc18fe5cfef285 data/roots/recipes/runic/block/spiritleaf_seeds.json
 594417143e6388b9600103cdd001f89d6b938927 data/roots/recipes/runic/block/wildewheet_seeds.json
 657ba9de48ec2d3e8ba474b520aca9897a3b264b data/roots/recipes/runic/entity/fey_leather.json
-49745b07b3557653fd6af19d63c105da3dd12bd6 data/roots/recipes/runic_dust_1.json
-f156df92ff1df992614693c078e493646ad41ef2 data/roots/recipes/runic_dust_2.json
-6410791c02056b3aa7b95c8bcde1a7bedf43dfdb data/roots/recipes/runic_dust_3.json
-081b1a0dc886ff4045e12219bd9914383918104d data/roots/recipes/runic_dust_4.json
-b2e9b8637dae23e4ff517915cdea26686c182538 data/roots/recipes/runic_dust_5.json
+4ea6830d0560b9c1b38af1e2deaee7dbc654134f data/roots/recipes/runic_dust_1.json
+db660f8b2c13227b1d5779300ee26b76d1f789b4 data/roots/recipes/runic_dust_2.json
+22aff9f0dd16675b61502a95223a0aa45382d8d6 data/roots/recipes/runic_dust_3.json
+df30d47f7fc4552b7aa8771044fdc10c9f3a981a data/roots/recipes/runic_dust_4.json
+1e880d6fe10cf44549823d9468c54480b627eb9b data/roots/recipes/runic_dust_5.json
 0da7d720fb34b03bc5804cf17132d0ebc4e1970b data/roots/recipes/silver_ingot_from_blasting.json
 4b90a15d09303f110b0e0f2eee1e8a79322265a5 data/roots/recipes/silver_ingot_from_raw_silver_blasting.json
 c3d9dddfefd83cc6bb1365b3e79b4c3092a60e4f data/roots/recipes/silver_ingot_from_raw_silver_smelting.json
