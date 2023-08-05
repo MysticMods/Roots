@@ -167,6 +167,8 @@ public class ModTags {
     REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, b -> {
       // Block copies
 
+      b.tag(ItemTags.STONE_TOOL_MATERIALS).addTag(RootsTags.Items.RUNESTONE);
+
       b.copy(RootsTags.Blocks.SILVER_STORAGE, RootsTags.Items.SILVER_STORAGE);
       b.copy(RootsTags.Blocks.RAW_SILVER_STORAGE, RootsTags.Items.RAW_SILVER_STORAGE);
       b.copy(RootsTags.Blocks.SILVER_ORE, RootsTags.Items.SILVER_ORE);

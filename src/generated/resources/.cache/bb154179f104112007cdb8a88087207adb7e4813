@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-05T12:27:54.738187	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
+// 1.19.2	2023-08-05T12:32:13.1802144	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -779,6 +779,7 @@ e58a5c90a75de69cd751e69b578b9a35cb1e3d6c data/minecraft/tags/items/buttons.json
 7f66c715bd67dd942ee0fd5cc43eb64a253e31c4 data/minecraft/tags/items/saplings.json
 d647ba6c6239dc8ee5a1995fb37ed5c29faac4b5 data/minecraft/tags/items/slabs.json
 d02f928d44916cf9b587389844de85fc38719ea1 data/minecraft/tags/items/stairs.json
+cd0895d1e73ec46f8778326941cd32c412719501 data/minecraft/tags/items/stone_tool_materials.json
 71763de9f958a1fc1c3c14ca18f3c129657bb4ef data/minecraft/tags/items/walls.json
 3a76337b2e7c59d64f0534bb54bf612702109402 data/roots/advancements/recipes/brewing/mortar/magma_cream_from_magma_block_1.json
 b1491a0aa80f6c27b410fee59c73671cdd0e109e data/roots/advancements/recipes/brewing/mortar/magma_cream_from_magma_block_2.json
