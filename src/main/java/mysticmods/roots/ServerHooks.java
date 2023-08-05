@@ -15,7 +15,7 @@ public class ServerHooks {
     if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
       throw new IllegalStateException("not a casting tool " + stack);
     }
-    return SpellStorage.fromItem(stack);
+    return SpellStorage.getOrCreate(stack);
   }
 
   private static void validateSlot (SpellStorage storage, int slot) {
