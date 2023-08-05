@@ -7,16 +7,21 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellStorage;
+import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.init.ModItems;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,6 +80,18 @@ public class RootsCommand {
       }
       return 1;
     })));
+    builder.then(Commands.literal("activate").executes(c -> {
+      AABB bounds = new AABB(-15, -15, -15, 15, 15, 15).move(c.getSource().getPosition());
+      List<BlockPos> positions = BlockPos.betweenClosedStream(bounds).map(BlockPos::immutable).toList();
+      Level level = c.getSource().getLevel();
+      for (BlockPos pos : positions) {
+        BlockState stateAt = level.getBlockState(pos);
+        if (stateAt.is(RootsTags.Blocks.GROVE_STONES) && stateAt.hasProperty(GroveStoneBlock.VALID)) {
+          level.setBlock(pos, stateAt.setValue(GroveStoneBlock.VALID, true), 3);
+        }
+      }
+      return 1;
+    }));
     return builder;
   }
 
