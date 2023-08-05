@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-05T12:32:13.1802144	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
+// 1.19.2	2023-08-05T12:40:32.8026695	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1238,7 +1238,7 @@ d50ac96a036212c322e16d37e83e1b504172a5ad data/roots/loot_tables/blocks/wildwood_
 00806b43d1cbff9a1916c6a92d9d047cabb082cc data/roots/loot_tables/blocks/wildwood_trapdoor.json
 7c5cd16ca066d75e8dbd28e3d669a197aec5df42 data/roots/loot_tables/blocks/wildwood_wall.json
 5ca40f604ebb3b9f6c8a39b58740da45d3baa32c data/roots/loot_tables/blocks/wildwood_wood.json
-ad3057db2bc1b73eb0cdb9c7ef9b0f766b45089f data/roots/loot_tables/blocks/wild_aubergine.json
+6e475ce904f41a1cbb9ffc525c8edef4f5b56612 data/roots/loot_tables/blocks/wild_aubergine.json
 212c065570f312eb041b0ccb9e5d46d958ce0fe5 data/roots/loot_tables/blocks/wild_roots.json
 8b05ab22799318fbae9cc8e4dc244044bf41f915 data/roots/loot_tables/entities/beetle.json
 9da7e2d138d900a384e167d5daae0abf291e6be5 data/roots/loot_tables/entities/deer.json
