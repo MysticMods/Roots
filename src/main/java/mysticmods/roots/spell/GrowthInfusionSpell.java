@@ -50,12 +50,9 @@ public class GrowthInfusionSpell extends Spell {
 
     int doTicks = GrowthUtil.growthTicks(level, result.getBlockPos(), at, pPlayer);
     if (doTicks > 0 && level.random.nextInt(doTicks) == 0) {
-      RootsAPI.LOG.info("RANDOM TICK: {}", ticks);
-
       at.randomTick((ServerLevel) level, result.getBlockPos(), level.random);
     } else {
       costs.noCharge();
-      RootsAPI.LOG.info("NO GROW! {}", ticks);
     }
   }
 }

@@ -71,7 +71,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
-    RootsAPI.LOG.info(cachedRecipe);
     ItemStack inHand = player.getItemInHand(hand);
     // This is a very specific hack.
     if (inHand.is(ModItems.FIRE_STARTER.get())) {
