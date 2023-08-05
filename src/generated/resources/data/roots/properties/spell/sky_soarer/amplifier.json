@@ -1,6 +1,6 @@
 {
   "_comment": "The default movement speed amplifier for Sky Soarer.",
-  "default_value": 0.8,
+  "default_value": 0.9,
   "spell": "roots:sky_soarer",
-  "value": 0.8
+  "value": 0.9
 }

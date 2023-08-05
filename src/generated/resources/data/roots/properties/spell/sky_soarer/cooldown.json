@@ -1,6 +1,6 @@
 {
   "_comment": "How long before the player can cast the spell again",
-  "default_value": 39,
+  "default_value": 59,
   "spell": "roots:sky_soarer",
-  "value": 39
+  "value": 59
 }
