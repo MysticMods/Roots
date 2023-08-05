@@ -6,7 +6,7 @@
     }
   ],
   "level_conditions": [
-    "roots:any_primal_grove_stone"
+    "roots:valid_grove_stone"
   ],
   "result": {
     "item": "roots:runestone"

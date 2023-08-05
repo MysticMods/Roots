@@ -136,10 +136,9 @@ public class ModBlocks {
         .define('H', Ingredient.of(RootsTags.Items.RUNESTONE_HERBS))
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.RUNESTONE_HERBS))
         .save(p, RootsAPI.rl("runestone_simple_crafting"));
-      // TODO: Grove Stone condition
       GroveRecipe.multiBuilder(ctx.getEntry(), 20)
-        .addIngredient(Ingredient.of(RootsTags.Items.STONELIKE))
-        .addLevelCondition(ModConditions.PRIMAL_GROVE_STONE_ANY.get())
+        .addIngredient(RootsTags.Items.STONELIKE)
+        .addLevelCondition(ModConditions.GROVE_STONE_VALID.get())
         .unlockedBy("has_item", RegistrateRecipeProvider.has(RootsTags.Items.STONELIKE))
         .save(p, RootsAPI.rl("grove/runestone_grove_crafting"));
     })
