@@ -95,6 +95,9 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   protected void revalidateRecipe() {
     List<PedestalBlockEntity> pedestals = pedestals();
     if (pedestals.isEmpty()) {
+      cachedRecipe = null;
+      setChanged();
+      updateViaState();
       return;
     }
     GroveCrafting playerlessCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals), this, null);
