@@ -178,6 +178,10 @@ public class ModItems {
     })
     .register();
 
+  public static final ItemEntry<ItemNameBlockItem> AUBERGINE_SEEDS = REGISTRATE.item("aubergine_seeds", blockNamedItem(() -> ModBlocks.AUBERGINE_CROP))
+    .tag(RootsTags.Items.SEEDS)
+    .register();
+
   public static RegistryEntry<Item> CARAPACE = REGISTRATE.item("carapace", Item::new)
     .recipe((ctx, p) -> RECIPES.dye(ModItems.CARAPACE, () -> Items.BLUE_DYE, 1, 2, p))
     .tag(RootsTags.Items.CARAPACE)
@@ -408,10 +412,6 @@ public class ModItems {
   public static <T extends Block> NonNullFunction<Item.Properties, ItemNameBlockItem> blockNamedItem(Supplier<Supplier<T>> block) {
     return (b) -> new ItemNameBlockItem(block.get().get(), b);
   }
-
-  public static final ItemEntry<ItemNameBlockItem> AUBERGINE_SEEDS = REGISTRATE.item("aubergine_seeds", blockNamedItem(() -> ModBlocks.AUBERGINE_CROP))
-    .tag(RootsTags.Items.SEEDS)
-    .register();
 
   public static final ItemEntry<Item> ACACIA_BARK = REGISTRATE.item("acacia_bark", Item::new)
     .tag(RootsTags.Items.ACACIA_BARK)
