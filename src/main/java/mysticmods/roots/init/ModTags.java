@@ -222,7 +222,7 @@ public class ModTags {
 
       b.tag(RootsTags.Items.BARKS).addTags(RootsTags.Items.BIRCH_BARK, RootsTags.Items.ACACIA_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
 
-      b.tag(RootsTags.Items.GROVE_CRAFTER_ACTIVATION).add(Items.STICK);
+      b.tag(RootsTags.Items.GROVE_CRAFTER_ACTIVATION).add(Items.STICK).addTag(RootsTags.Items.KNIVES);
       b.tag(RootsTags.Items.PYRE_ACTIVATION).add(Items.FLINT_AND_STEEL);
 
       b.tag(RootsTags.Items.MOONGLOW_HERB).addTag(RootsTags.Items.MOONGLOW_CROP);
