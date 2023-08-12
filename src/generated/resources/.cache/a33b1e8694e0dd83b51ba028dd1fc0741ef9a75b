@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-12T13:04:16.1227438	Spell costs
+// 1.19.2	2023-08-12T13:15:04.0125127	Spell costs
 231486474b088a7b43af4a038134f2571a8dd354 data/roots/costs/spell/acid_cloud.json
 7778ff71235d7c2ac1aee22becda1289b4cd0ae7 data/roots/costs/spell/aqua_bubble.json
 2cba0302580734ea23ab66e9ba0d46e4833bd366 data/roots/costs/spell/augment.json
@@ -6,7 +6,7 @@ c3246b66f723d5f3134373e0007fa88c7c123d01 data/roots/costs/spell/control_undead.j
 c5a1c5c858f2c2cc3f9a308c479292fc4a1ab32c data/roots/costs/spell/dandelion_winds.json
 f06558138278a2f3a36361ad85256205f3c6f149 data/roots/costs/spell/desaturate.json
 a5d5ae5c024614c65065ecfbd84aee4e668fb76c data/roots/costs/spell/disarm.json
-a124ce3af58adff0c7cb1b218b129c9e18a68d08 data/roots/costs/spell/extension.json
+054f1e47d922ee30d51f1ed357f1a40ee3852579 data/roots/costs/spell/extension.json
 82a6a06e323448eed1a3483cecbeedda4a13ae42 data/roots/costs/spell/fey_light.json
 ba2aba3be52358c4c1ab4507db2a838e044164ef data/roots/costs/spell/geas.json
 309daa977759408eb9f4cbfe0410c2d161ba4663 data/roots/costs/spell/growth_infusion.json

@@ -1,6 +1,6 @@
 {
   "_comment": "The duration of the sense danger effect in ticks.",
-  "default_value": 350,
+  "default_value": 4800,
   "spell": "roots:extension",
-  "value": 350
+  "value": 4800
 }

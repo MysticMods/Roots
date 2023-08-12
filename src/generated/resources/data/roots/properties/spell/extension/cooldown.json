@@ -1,6 +1,6 @@
 {
   "_comment": "How long before the player can cast the spell again",
-  "default_value": 350,
+  "default_value": 20,
   "spell": "roots:extension",
-  "value": 350
+  "value": 20
 }
