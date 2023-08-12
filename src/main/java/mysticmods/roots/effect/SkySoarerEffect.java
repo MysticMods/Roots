@@ -21,6 +21,7 @@ public class SkySoarerEffect extends MobEffect {
             player.hurtMarked = true;
             player.fallDistance = 0f;
             player.setDeltaMovement(player.getLookAngle().multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
+            // TODO: Handle while riding entities
         });
     }
 
