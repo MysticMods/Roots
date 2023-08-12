@@ -3,7 +3,8 @@
   "grants": [
     {
       "type": "spell",
-      "id": "roots:extension"
+      "id": "roots:extension",
+      "repeatable": false
     }
   ],
   "ingredients": [

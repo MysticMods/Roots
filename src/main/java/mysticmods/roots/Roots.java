@@ -7,9 +7,6 @@ import mysticmods.roots.api.access.IShiftAccessor;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.item.RootsArmorMaterial;
-import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.registry.Registries;
-import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.impl.ClientPlayerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.client.impl.ClientShiftAccessor;
@@ -86,19 +83,12 @@ public class Roots {
 
       @Override
       public void grant(ServerPlayer player, Grant grant) {
-        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(cap -> {
-          if (grant.getType() == Grant.Type.SPELL) {
-            Spell spell = Registries.SPELL_REGISTRY.get().getValue(grant.getId());
-            if (spell != null) {
-              cap.grantSpell(spell);
-            }
-          } else if (grant.getType() == Grant.Type.MODIFIER) {
-            Modifier modifier = Registries.MODIFIER_REGISTRY.get().getValue(grant.getId());
-            if (modifier != null) {
-              cap.grantModifier(modifier);
-            }
-          }
-        });
+        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(cap -> cap.grant(player, grant));
+      }
+
+      @Override
+      public boolean canGrant(ServerPlayer player, Grant grant) {
+        return player.getCapability(Capabilities.GRANT_CAPABILITY).orElseThrow(IllegalStateException::new).canGrant(grant);
       }
     };
 

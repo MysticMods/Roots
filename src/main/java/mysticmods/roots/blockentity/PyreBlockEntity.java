@@ -6,6 +6,7 @@ import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
+import mysticmods.roots.api.recipe.GrantResult;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
@@ -24,6 +25,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -124,6 +126,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         // Needs to be a success or it sets things on fire
         return InteractionResult.SUCCESS;
       }
+      GrantResult failedGrants = cachedRecipe.checkGrants(level, (ServerPlayer) player);
+      if (failedGrants.failed() && !cachedRecipe.hasOutput()) {
+        RootsAPI.LOG.info("Grants failed and recipe has no output");
+        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.getType().name() + " with id " + o.getId()));
+        failedGrants.report();
+        return InteractionResult.SUCCESS;
+      }
 
       PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
       lastRecipe = cachedRecipe;
@@ -135,6 +144,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         storedItems.add(cachedRecipe.assemble(playerCrafting));
         storedItems.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
       }
+      storedItems.removeIf(ItemStack::isEmpty);
       // process
       NonNullList<ItemStack> processed = cachedRecipe.process(inventory.getItemsAndClear());
       for (ItemStack stack : processed) {

@@ -3,7 +3,8 @@
   "grants": [
     {
       "type": "spell",
-      "id": "roots:dandelion_winds"
+      "id": "roots:dandelion_winds",
+      "repeatable": false
     }
   ],
   "ingredients": [

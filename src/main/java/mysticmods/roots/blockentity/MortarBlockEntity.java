@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
+import mysticmods.roots.api.recipe.GrantResult;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
@@ -16,6 +17,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -166,6 +168,13 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           conditionResult.report();
           return InteractionResult.FAIL;
         }
+        GrantResult failedGrants = cachedRecipe.checkGrants(level, (ServerPlayer) player);
+        if (failedGrants.failed() && !cachedRecipe.hasOutput()) {
+          RootsAPI.LOG.info("Grants failed and recipe has no output");
+          failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.getType().name() + " with id " + o.getId()));
+          failedGrants.report();
+          return InteractionResult.FAIL;
+        }
 
         uses++;
         setChanged();
@@ -178,9 +187,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           previousRecipeItems.addAll(inventory.getItemsCopy());
           List<ItemStack> results = new ArrayList<>();
           // TODO: Item could be empty with only chance outputs
+          // TODO: MAJOR: Cull empty items out of the results
           results.add(cachedRecipe.assemble(playerCrafting));
           results.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
           results.addAll(cachedRecipe.process(inventory.getItemsAndClear()));
+          results.removeIf(ItemStack::isEmpty);
           for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
           }

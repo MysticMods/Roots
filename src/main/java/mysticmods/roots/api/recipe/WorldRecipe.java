@@ -102,7 +102,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
       if (player != null) {
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(pInv.getPlayer(), newState));
         for (Grant grant : getGrants()) {
-          grant.accept((ServerPlayer) player);
+          grant.grant((ServerPlayer) player);
         }
       }
     }

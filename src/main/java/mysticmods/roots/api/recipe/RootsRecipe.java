@@ -81,7 +81,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     Player player = pInv.getPlayer();
     if (player != null && !player.level.isClientSide()) {
       for (Grant grant : getGrants()) {
-        grant.accept((ServerPlayer) player);
+        grant.grant((ServerPlayer) player);
       }
     }
 

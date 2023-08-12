@@ -81,7 +81,7 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
       Player player = pInv.getPlayer();
       if (player != null) {
         for (Grant grant : getGrants()) {
-          grant.accept((ServerPlayer) player);
+          grant.grant((ServerPlayer) player);
         }
       }
     }

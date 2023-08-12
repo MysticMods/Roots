@@ -90,6 +90,8 @@ public abstract class RootsAPI {
 
   public abstract void grant(ServerPlayer player, Grant grant);
 
+  public abstract boolean canGrant (ServerPlayer player, Grant grant);
+
   public abstract Player getPlayer();
 
   public abstract boolean isShiftKeyDown ();

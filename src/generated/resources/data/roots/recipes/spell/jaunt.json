@@ -3,7 +3,8 @@
   "grants": [
     {
       "type": "spell",
-      "id": "roots:jaunt"
+      "id": "roots:jaunt",
+      "repeatable": false
     }
   ],
   "ingredients": [

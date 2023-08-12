@@ -54,6 +54,12 @@ public class ModLang {
       b.add("roots.message.recipe.failures", "A number of conditions were not met:");
       b.add("roots.message.staff.missing_herbs", "Unable to cast %s, missing herbs.");
 
+      b.add("roots.message.spell.learned", "Learned new spell: %s");
+      b.add("roots.message.spell.already_learned", "You already know the spell: %s");
+      b.add("roots.message.modifier.learned", "Learned new modifier: %s");
+      b.add("roots.message.modifier.already_learned", "You already know the modifier: %s");
+      b.add("roots.message.grants_failed", "You've already learned everything this recipe can teach you!");
+
       // Squid-related stuff
       b.add("roots.message.squid.cooldown", "Give it time to produce more ink!");
       b.add("roots.message.runic_shears.cooldown", "More time must pass before this entity can be sheared again.");

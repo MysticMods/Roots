@@ -15,6 +15,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -103,12 +104,7 @@ public class TokenItem extends Item {
       return InteractionResultHolder.fail(stack);
     }
 
-    if (!pPlayer.isCreative()) {
-      stack.shrink(1);
-      if (stack.isEmpty()) {
-        pPlayer.setItemInHand(pUsedHand, ItemStack.EMPTY);
-      }
-    }
+
     LazyOptional<GrantCapability> oCap = pPlayer.getCapability(Capabilities.GRANT_CAPABILITY);
     if (!oCap.isPresent()) {
       return InteractionResultHolder.fail(stack);
@@ -119,19 +115,40 @@ public class TokenItem extends Item {
       case SPELL -> {
         Spell spell = getSpell(stack);
         if (spell != null) {
-          cap.grantSpell(spell);
-          result = InteractionResultHolder.success(stack);
+          if (cap.hasSpell(spell)) {
+            pPlayer.displayClientMessage(Component.translatable("roots.message.spell.already_learned", spell.getStyledName()), true);
+            result = InteractionResultHolder.fail(stack);
+          } else {
+            pPlayer.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getStyledName()), true);
+            cap.grantSpell(spell);
+            result = InteractionResultHolder.success(stack);
+          }
+
         }
       }
       case MODIFIER -> {
         Modifier modifier = getSingleModifier(stack);
         if (modifier != null) {
-          cap.grantModifier(modifier);
-          result = InteractionResultHolder.success(stack);
+          if (cap.hasModifier(modifier)) {
+            pPlayer.displayClientMessage(Component.translatable("roots.message.modifier.already_learned", modifier.getName()), true);
+            result = InteractionResultHolder.fail(stack);
+          } else {
+            cap.grantModifier(modifier);
+            pPlayer.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
+            result = InteractionResultHolder.success(stack);
+          }
         }
       }
     }
     if (result != null) {
+      if (result.getResult() == InteractionResult.SUCCESS) {
+        if (!pPlayer.isCreative()) {
+          stack.shrink(1);
+          if (stack.isEmpty()) {
+            pPlayer.setItemInHand(pUsedHand, ItemStack.EMPTY);
+          }
+        }
+      }
       return result;
     }
     return InteractionResultHolder.fail(stack);

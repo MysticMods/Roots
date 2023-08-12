@@ -3,7 +3,8 @@
   "grants": [
     {
       "type": "spell",
-      "id": "roots:magnetism"
+      "id": "roots:magnetism",
+      "repeatable": false
     }
   ],
   "ingredients": [

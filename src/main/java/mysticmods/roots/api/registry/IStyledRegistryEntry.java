@@ -19,7 +19,7 @@ public interface IStyledRegistryEntry extends IDescribedRegistryEntry {
   }
 
   default MutableComponent getStyledName() {
-    return getStyledName(false);
+    return getStyledName(isBold());
   }
 
   default MutableComponent getStyledName(boolean bold) {

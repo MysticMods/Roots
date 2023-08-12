@@ -15,7 +15,9 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -52,6 +54,54 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
 
   public boolean hasModifier(Modifier modifier) {
     return GRANTED_MODIFIERS.contains(modifier);
+  }
+
+  public boolean canGrant (Grant grant) {
+    if (grant.getType() == Grant.Type.SPELL) {
+      Spell spell = Registries.SPELL_REGISTRY.get().getValue(grant.getId());
+      if (spell == null) {
+        throw new NullPointerException("Spell " + grant.getId() + " does not exist!");
+      }
+
+      return grant.isRepeatable() || !hasSpell(spell);
+    } else if (grant.getType() == Grant.Type.MODIFIER) {
+      Modifier modifier = Registries.MODIFIER_REGISTRY.get().getValue(grant.getId());
+      if (modifier == null) {
+        throw new NullPointerException("Modifier " + grant.getId() + " does not exist!");
+      }
+
+      return grant.isRepeatable() || !hasModifier(modifier);
+    }
+
+    return false;
+  }
+
+  public boolean grant (ServerPlayer player, Grant grant) {
+    if (grant.getType() == Grant.Type.SPELL) {
+      Spell spell = Registries.SPELL_REGISTRY.get().getValue(grant.getId());
+      if (spell == null) {
+        throw new NullPointerException("Spell " + grant.getId() + " does not exist!");
+      }
+
+      if (grant.isRepeatable() || !hasSpell(spell)) {
+        player.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getStyledName()), true);
+        grantSpell(spell);
+        return true;
+      }
+    } else if (grant.getType() == Grant.Type.MODIFIER) {
+      Modifier modifier = Registries.MODIFIER_REGISTRY.get().getValue(grant.getId());
+      if (modifier == null) {
+        throw new NullPointerException("Modifier " + grant.getId() + " does not exist!");
+      }
+
+      if (grant.isRepeatable() || !hasModifier(modifier)) {
+        player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
+        grantModifier(modifier);
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public void grantSpell(Spell spell) {

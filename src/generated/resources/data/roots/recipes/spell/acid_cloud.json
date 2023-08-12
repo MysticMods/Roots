@@ -3,7 +3,8 @@
   "grants": [
     {
       "type": "spell",
-      "id": "roots:acid_cloud"
+      "id": "roots:acid_cloud",
+      "repeatable": false
     }
   ],
   "ingredients": [

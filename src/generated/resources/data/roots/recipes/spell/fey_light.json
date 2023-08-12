@@ -3,7 +3,8 @@
   "grants": [
     {
       "type": "spell",
-      "id": "roots:fey_light"
+      "id": "roots:fey_light",
+      "repeatable": false
     }
   ],
   "ingredients": [

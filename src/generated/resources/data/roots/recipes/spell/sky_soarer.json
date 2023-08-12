@@ -3,7 +3,8 @@
   "grants": [
     {
       "type": "spell",
-      "id": "roots:sky_soarer"
+      "id": "roots:sky_soarer",
+      "repeatable": false
     }
   ],
   "ingredients": [

@@ -3,7 +3,8 @@
   "grants": [
     {
       "type": "spell",
-      "id": "roots:petal_shell"
+      "id": "roots:petal_shell",
+      "repeatable": false
     }
   ],
   "ingredients": [

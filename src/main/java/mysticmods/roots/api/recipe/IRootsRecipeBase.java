@@ -1,5 +1,6 @@
 package mysticmods.roots.api.recipe;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
@@ -7,6 +8,7 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.util.SetUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -66,6 +68,17 @@ public interface IRootsRecipeBase {
     return new ConditionResult(failedLevel, failedPlayer, player);
   }
 
+  default GrantResult checkGrants (Level level, ServerPlayer player) {
+    List<Grant> result = new ArrayList<>();
+    for (Grant grant : getGrants()) {
+      if (!RootsAPI.getInstance().canGrant(player, grant)) {
+        result.add(grant);
+      }
+    }
+
+    return new GrantResult(result, player);
+  }
+
   default int getPriority () {
     return 0;
   }
@@ -76,5 +89,10 @@ public interface IRootsRecipeBase {
 
   default List<ItemStack> assembleChanceOutputs (RandomSource source) {
     return ChanceOutput.getOutputs(getChanceOutputs(), source);
+  }
+
+  default boolean hasOutput () {
+    ItemStack result = getBaseResultItem();
+    return result != null && !result.isEmpty() && !getChanceOutputs().isEmpty();
   }
 }
