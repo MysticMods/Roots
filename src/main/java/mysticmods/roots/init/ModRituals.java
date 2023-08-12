@@ -82,8 +82,8 @@ public class ModRituals {
 
   // Overgrowth ritual
   public static final RegistryEntry<OvergrowthRitual> OVERGROWTH = ritual(Rituals.OVERGROWTH, OvergrowthRitual::new);
-  public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_DURATION = REGISTRATE.simple("overgrowth/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 3000, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
-  public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_INTERVAL = REGISTRATE.simple("overgrowth/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 100, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
+  public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_DURATION = REGISTRATE.simple("overgrowth/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 1950, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
+  public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_INTERVAL = REGISTRATE.simple("overgrowth/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 150, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
   public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_RADIUS_XZ = REGISTRATE.simple("overgrowth/radius_xz", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 6, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_XZ));
   public static final RegistryEntry<RitualProperty<Integer>> OVERGROWTH_RADIUS_Y = REGISTRATE.simple("overgrowth/radius_y", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(OVERGROWTH::get, 5, Property.INTEGER_SERIALIZER, RitualProperties.RADIUS_Y));
 
