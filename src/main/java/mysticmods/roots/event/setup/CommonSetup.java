@@ -4,6 +4,7 @@ import mysticmods.roots.advancements.Advancements;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModCompost;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.network.Networking;
 import net.minecraft.world.entity.animal.Chicken;
@@ -36,6 +37,8 @@ public class CommonSetup {
       FLOWER_POT.addPlant(ModBlocks.STONEPETAL.getId(), ModBlocks.POTTED_STONEPETAL);
       FLOWER_POT.addPlant(ModBlocks.BAFFLECAP.getId(), ModBlocks.POTTED_BAFFLECAP);
       FLOWER_POT.addPlant(ModBlocks.WILDWOOD_SAPLING.getId(), ModBlocks.POTTED_WILDWOOD_SAPLING);
+
+      ModCompost.init();
 
       // TODO: Flammability
       Advancements.init();
