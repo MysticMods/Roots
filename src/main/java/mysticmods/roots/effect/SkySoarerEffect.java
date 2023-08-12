@@ -19,6 +19,7 @@ public class SkySoarerEffect extends MobEffect {
         SnapshotHelper.applyPlayer(pLivingEntity, ModSerializers.SKY_SOARER.get(), (player, sky) -> {
             player.hasImpulse = true;
             player.hurtMarked = true;
+            player.fallDistance = 0f;
             player.setDeltaMovement(player.getLookAngle().multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
         });
     }
