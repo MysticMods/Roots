@@ -103,9 +103,11 @@ public class TokenItem extends Item {
       return InteractionResultHolder.fail(stack);
     }
 
-    stack.shrink(1);
-    if (stack.isEmpty()) {
-      pPlayer.setItemInHand(pUsedHand, ItemStack.EMPTY);
+    if (!pPlayer.isCreative()) {
+      stack.shrink(1);
+      if (stack.isEmpty()) {
+        pPlayer.setItemInHand(pUsedHand, ItemStack.EMPTY);
+      }
     }
     LazyOptional<GrantCapability> oCap = pPlayer.getCapability(Capabilities.GRANT_CAPABILITY);
     if (!oCap.isPresent()) {

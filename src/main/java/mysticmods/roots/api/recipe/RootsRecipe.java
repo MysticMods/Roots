@@ -79,7 +79,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   @Override
   public ItemStack assemble(W pInv) {
     Player player = pInv.getPlayer();
-    if (player != null && player.level.isClientSide()) {
+    if (player != null && !player.level.isClientSide()) {
       for (Grant grant : getGrants()) {
         grant.accept((ServerPlayer) player);
       }
