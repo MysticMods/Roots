@@ -78,7 +78,7 @@ public class ModSpells {
   public static final RegistryEntry<SpellProperty<Integer>> NONDETECTION_COOLDOWN = property(Spells.NONDETECTION, "cooldown", () -> new SpellProperty<>(NONDETECTION::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
   // Fey Light (20 cooldown)
-  public static final RegistryEntry<FeyLightSpell> FEY_LIGHT = spell(Spells.FEY_LIGHT, FeyLightSpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.250), Cost.add(ModHerbs.PERESKIA, 0.250)));
+  public static final RegistryEntry<FeyLightSpell> FEY_LIGHT = spell(Spells.FEY_LIGHT, FeyLightSpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.0625), Cost.add(ModHerbs.PERESKIA, 0.0625)));
   public static final RegistryEntry<SpellProperty<Integer>> FEY_LIGHT_COOLDOWN = property(Spells.FEY_LIGHT, "cooldown", () -> new SpellProperty<>(FEY_LIGHT::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
   public static final RegistryEntry<SpellProperty<Double>> FEY_LIGHT_MAX_DISTANCE = property(Spells.FEY_LIGHT, "max_distance", () -> new SpellProperty<>(FEY_LIGHT::get, 10.0, Property.DOUBLE_SERIALIZER, "The maximum distance a fey light can be placed from the caster"));

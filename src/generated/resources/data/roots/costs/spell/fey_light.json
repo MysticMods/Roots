@@ -3,12 +3,12 @@
     {
       "type": "additive",
       "herb": "roots:grove_moss",
-      "value": 0.25
+      "value": 0.0625
     },
     {
       "type": "additive",
       "herb": "roots:pereskia",
-      "value": 0.25
+      "value": 0.0625
     }
   ]
 }
