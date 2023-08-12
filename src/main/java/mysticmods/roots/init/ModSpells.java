@@ -144,8 +144,8 @@ public class ModSpells {
   public static final RegistryEntry<SpellProperty<Integer>> STORM_CLOUD_COOLDOWN = property(Spells.STORM_CLOUD, "cooldown", () -> new SpellProperty<>(STORM_CLOUD::get, 100, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
   // Sky Soarer (39 cooldown)
-  public static final RegistryEntry<SkySoarerSpell> SKY_SOARER = spell(Spells.SKY_SOARER, SkySoarerSpell::new, ChatFormatting.BLUE, () -> List.of(Cost.add(ModHerbs.CLOUD_BERRY, 0.125)));
-  public static final RegistryEntry<SpellProperty<Integer>> SKY_SOARER_COOLDOWN = property(Spells.SKY_SOARER, "cooldown", () -> new SpellProperty<>(SKY_SOARER::get, 59, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final RegistryEntry<SkySoarerSpell> SKY_SOARER = spell(Spells.SKY_SOARER, SkySoarerSpell::new, ChatFormatting.BLUE, () -> List.of(Cost.add(ModHerbs.CLOUD_BERRY, 0.1875)));
+  public static final RegistryEntry<SpellProperty<Integer>> SKY_SOARER_COOLDOWN = property(Spells.SKY_SOARER, "cooldown", () -> new SpellProperty<>(SKY_SOARER::get, 30, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
   public static final RegistryEntry<SpellProperty<Float>> SKY_SOARER_AMPLIFIER = property(Spells.SKY_SOARER, "amplifier", () -> new SpellProperty<>(SKY_SOARER::get,0.9f, Property.FLOAT_SERIALIZER, "The default movement speed amplifier for Sky Soarer."));
   public static final RegistryEntry<SpellProperty<Float>> SKY_SOARER_BOOSTED_AMPLIFIER = property(Spells.SKY_SOARER, "boosted_amplifier", () -> new SpellProperty<>(SKY_SOARER::get, 0.6f, Property.FLOAT_SERIALIZER, "The movement speed amplifier for Sky Soarer boosted."));
   public static final RegistryEntry<SpellProperty<Integer>> SKY_SOARER_DURATION = property(Spells.SKY_SOARER, "duration", () -> new SpellProperty<>(SKY_SOARER::get, 50, Property.INTEGER_SERIALIZER, SpellProperties.DURATION));
