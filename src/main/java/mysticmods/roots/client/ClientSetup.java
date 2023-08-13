@@ -83,7 +83,7 @@ public class ClientSetup {
         SpellStorage storage = SpellStorage.getOrCreate(stack);
         SpellInstance spell = storage.getSpell();
         if (spell == null) {
-          return -1;
+          return 0xbae38a; // Just a default bland colour
         }
         if (index == 1) {
           return spell.getSpell().getColor1();
