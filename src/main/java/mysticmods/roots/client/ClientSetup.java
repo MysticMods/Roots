@@ -85,6 +85,11 @@ public class ClientSetup {
         if (spell == null) {
           return -1;
         }
+        if (index == 1) {
+          return spell.getSpell().getColor1();
+        } else if (index == 2) {
+          return spell.getSpell().getColor2();
+        }
       }
       return -1;
     }, ModItems.STAFF.get());
