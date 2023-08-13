@@ -16,7 +16,7 @@ import java.util.List;
 
 public class NondetectionSpell extends Spell {
   public NondetectionSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0x8f32b8, 0x4c94ed);
   }
 
   @Override

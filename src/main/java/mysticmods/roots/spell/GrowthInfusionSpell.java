@@ -23,7 +23,7 @@ public class GrowthInfusionSpell extends Spell {
   private int base_ticks;
 
   public GrowthInfusionSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.CONTINUOUS, color, costs);
+    super(Type.CONTINUOUS, color, costs, 0x30ff30, 0xc0ffc0);
   }
 
   @Override

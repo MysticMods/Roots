@@ -16,7 +16,7 @@ import java.util.List;
 
 public class DesaturateSpell extends Spell {
   public DesaturateSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0xb8e82a, 0xbe20a8);
   }
 
   @Override

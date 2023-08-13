@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SanctuarySpell extends Spell {
   public SanctuarySpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0xd01050, 0xe02090);
   }
 
   @Override

@@ -27,6 +27,7 @@ public interface Spells {
   ResourceKey<Spell> RADIANCE = spell("radiance");
   ResourceKey<Spell> ROSE_THORNS = spell("rose_thorns");
   ResourceKey<Spell> SANCTUARY = spell("sanctuary");
+  ResourceKey<Spell> SATURATE = spell("saturate");
   ResourceKey<Spell> SHATTER = spell("shatter");
   ResourceKey<Spell> SKY_SOARER = spell("sky_soarer");
   ResourceKey<Spell> JAUNT = spell("jaunt");

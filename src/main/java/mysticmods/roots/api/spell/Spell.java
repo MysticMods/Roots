@@ -29,11 +29,22 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
   protected final Set<Modifier> modifiers = new HashSet<>();
   protected int cooldown = 0;
   protected double reach = 0.0;
+  protected final int color1, color2;
 
-  public Spell(Type type, ChatFormatting color, List<Cost> costs) {
+  public Spell(Type type, ChatFormatting color, List<Cost> costs, int color1, int color2) {
     this.type = type;
     this.color = color;
     setCosts(costs);
+    this.color1 = color1;
+    this.color2 = color2;
+  }
+
+  public int getColor1() {
+    return color1;
+  }
+
+  public int getColor2() {
+    return color2;
   }
 
   @Override

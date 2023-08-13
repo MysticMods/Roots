@@ -14,8 +14,8 @@ public abstract class TwoRadiusSpell extends Spell {
   protected BoundingBox boundingBox;
   protected AABB aabb;
 
-  public TwoRadiusSpell(Type type, ChatFormatting color, List<Cost> costs) {
-    super(type, color, costs);
+  public TwoRadiusSpell(Type type, ChatFormatting color, List<Cost> costs, int color1, int color2) {
+    super(type, color, costs, color1, color2);
   }
 
   @Override

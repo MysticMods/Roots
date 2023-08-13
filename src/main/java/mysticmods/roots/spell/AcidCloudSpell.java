@@ -30,7 +30,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   private int count;
 
   public AcidCloudSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.CONTINUOUS, color, costs);
+    super(Type.CONTINUOUS, color, costs, 0x50a028, 0x405f20);
   }
 
   @Override

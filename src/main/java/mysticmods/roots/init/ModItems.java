@@ -40,6 +40,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTes
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.loaders.ItemLayersModelBuilder;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.Tags;
 import noobanidus.libs.noobutil.data.generator.ItemGenerator;
@@ -795,7 +796,10 @@ public class ModItems {
 
   public static final ItemEntry<CastingItem> STAFF = REGISTRATE.item("staff", CastingItem::new)
     // TODO: CUSTOM MODEL
-    .model(subfolder("tools"))
+    .model((ctx, p) -> {
+      ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
+      p.getBuilder(ctx.getName()).parent(generated).texture("layer0", p.modLoc("item/tools/staff")).texture("layer1", p.modLoc("item/tools/staff_petal_1")).texture("layer2", p.modLoc("item/tools/staff_petal_2"));
+    })
     .tag(RootsTags.Items.CASTING_TOOLS)
     .recipe((ctx, p) -> {
       ShapedRecipeBuilder.shaped(ctx.getEntry())

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class RampantGrowthSpell extends Spell {
   public RampantGrowthSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.CONTINUOUS, color, costs);
+    super(Type.CONTINUOUS, color, costs, 0x157318, 0x13c3eb);
   }
 
   @Override

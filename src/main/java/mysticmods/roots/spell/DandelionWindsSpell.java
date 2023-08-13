@@ -22,7 +22,7 @@ public class DandelionWindsSpell extends Spell {
   private double r1, r2;
 
   public DandelionWindsSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0xffff20, 0xffb020);
   }
 
   @Override

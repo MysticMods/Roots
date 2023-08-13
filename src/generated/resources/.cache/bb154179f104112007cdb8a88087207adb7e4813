@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-12T12:42:53.7612765	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
+// 1.19.2	2023-08-13T17:32:59.2208056	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -126,8 +126,8 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-d070d01d4a978e95106f6f2a1685f4a341ce171d assets/roots/lang/en_ud.json
-d67753f6570acd2cc4f291a856cd2dabd968130b assets/roots/lang/en_us.json
+6059edf4c0f14beec2c3d3d26243bcdd6aa1319f assets/roots/lang/en_ud.json
+be1d9fe4c2567a3741de319c23dab03554309ffe assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
@@ -658,6 +658,7 @@ e0c31cea9f5100f55b14cc03916bce8570b24800 assets/roots/models/item/spell_radiance
 59adb70f02ea63d88af5260f848971624bf95871 assets/roots/models/item/spell_rampant_growth.json
 b89b08adb36c08b12ea61570336afeab5f0de8de assets/roots/models/item/spell_rose_thorns.json
 a2629c81bc1ba6189c60e7bd93672aff64144e89 assets/roots/models/item/spell_sanctuary.json
+74e314bf177c174479c4e614640c9d72ce09c7d4 assets/roots/models/item/spell_saturate.json
 8cf2b5fd71effb1e81b02727dc22e8f1d82b5e0b assets/roots/models/item/spell_shatter.json
 5238fe5210131ac9db072508b502c04cf8de00e5 assets/roots/models/item/spell_sky_soarer.json
 8e1fef22f813c4ad657e04bea3e68fd811404971 assets/roots/models/item/spell_storm_cloud.json
@@ -667,7 +668,7 @@ d5f15af95c736c49538888947373791719c0a5bf assets/roots/models/item/spell_wildfire
 32a9711cefcabebd0824e9eba60a1cbdcb158ee3 assets/roots/models/item/spiritleaf_seeds.json
 c68601e032263101e606ccc23c50554e7f1ff146 assets/roots/models/item/spirit_bag.json
 2b1b250ab42ad09248340b485b900c393c1b7836 assets/roots/models/item/spruce_bark.json
-2999157c9e691cf4c51f8345c45d1a4a2bd8e5b6 assets/roots/models/item/staff.json
+04553e21733f9df3e30e6f3c77ec66c593896bc2 assets/roots/models/item/staff.json
 5a929348fda9aa77e8f53beb544ea3f216bcebe9 assets/roots/models/item/stalicripe.json
 3c94bcaaf7009d4d301a6ba18645a6fbfa590f42 assets/roots/models/item/stewed_eggplant.json
 f60c8bcdccc4d1e61f4a9aadeeae7be98674d3f6 assets/roots/models/item/stonepetal.json

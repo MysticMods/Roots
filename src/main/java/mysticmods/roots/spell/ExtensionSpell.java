@@ -24,7 +24,7 @@ import java.util.List;
 public class ExtensionSpell extends TwoRadiusSpell {
   private int nightVisionDuration, senseDangerDuration;
   public ExtensionSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0xcde645, 0xb872b1);
   }
 
   @Override

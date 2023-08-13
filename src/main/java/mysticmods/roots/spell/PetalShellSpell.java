@@ -23,7 +23,7 @@ public class PetalShellSpell extends Spell {
   private int duration, count;
 
   public PetalShellSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0xffc0f0, 0xffffff);
   }
 
   @Override

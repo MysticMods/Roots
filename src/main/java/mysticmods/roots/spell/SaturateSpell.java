@@ -14,14 +14,14 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class RoseThornsSpell extends Spell {
-  public RoseThornsSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs, 0xff2040, 0x20ff60);
+public class SaturateSpell extends Spell {
+  public SaturateSpell(ChatFormatting color, List<Cost> costs) {
+    super(Type.INSTANT, color, costs, 0xe134f6, 0x05e82a);
   }
 
   @Override
   public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.ROSE_THORNS_COOLDOWN.get();
+    return ModSpells.SATURATE_COOLDOWN.get();
   }
 
   @Override
@@ -30,7 +30,7 @@ public class RoseThornsSpell extends Spell {
   }
 
   @Override
-  public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public void cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
 
   }
 }

@@ -1,6 +1,9 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellInstance;
+import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.MortarBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;
@@ -13,6 +16,8 @@ import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEntities;
+import mysticmods.roots.init.ModItems;
+import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -27,6 +32,8 @@ import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+
+import java.awt.*;
 
 @Mod.EventBusSubscriber(modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
@@ -71,6 +78,16 @@ public class ClientSetup {
   @SubscribeEvent
   public static void onColorHandlerItem(RegisterColorHandlersEvent.Item event) {
     event.register((stack, index) -> index == 1 ? OverworldBiomes.NORMAL_WATER_COLOR : -1, ModBlocks.UNENDING_BOWL.get());
+    event.register((stack, index) -> {
+      if (index != 0) {
+        SpellStorage storage = SpellStorage.getOrCreate(stack);
+        SpellInstance spell = storage.getSpell();
+        if (spell == null) {
+          return -1;
+        }
+      }
+      return -1;
+    }, ModItems.STAFF.get());
   }
 
   @SubscribeEvent

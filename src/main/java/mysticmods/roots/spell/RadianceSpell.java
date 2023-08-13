@@ -16,7 +16,7 @@ import java.util.List;
 
 public class RadianceSpell extends Spell {
   public RadianceSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0xffff40, 0xffffc0);
   }
 
   @Override

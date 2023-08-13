@@ -1,0 +1,6 @@
+{
+  "_comment": "How long before the player can cast the spell again",
+  "default_value": 500,
+  "spell": "roots:saturate",
+  "value": 500
+}

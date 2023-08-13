@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ControlUndeadSpell extends Spell {
   public ControlUndeadSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0xcc6d0e, 0x9e1827);
   }
 
   @Override

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class AugmentSpell extends Spell {
   public AugmentSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0x45d17f, 0x1c1c94);
   }
 
   @Override

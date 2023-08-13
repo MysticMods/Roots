@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-12T13:17:12.4518	Spell costs
+// 1.19.2	2023-08-13T17:32:59.2517236	Spell costs
 231486474b088a7b43af4a038134f2571a8dd354 data/roots/costs/spell/acid_cloud.json
 7778ff71235d7c2ac1aee22becda1289b4cd0ae7 data/roots/costs/spell/aqua_bubble.json
 2cba0302580734ea23ab66e9ba0d46e4833bd366 data/roots/costs/spell/augment.json
@@ -21,6 +21,7 @@ a2551db7f1cbcfe914b1633d6696a2fe2352b96f data/roots/costs/spell/petal_shell.json
 fdd61967ebce3a95cf142a1e9f9f426d50a87384 data/roots/costs/spell/rampant_growth.json
 97f7f4d4cc82778b42bea660bb5cadc329d3282b data/roots/costs/spell/rose_thorns.json
 a1f9951fade02168a97241b5d76e2ac1731d4fc6 data/roots/costs/spell/sanctuary.json
+95375ba6c8e2c65a1fbcdc894934ee83ff9d6f48 data/roots/costs/spell/saturate.json
 99e430bd124cae99962d734b903fe731768785e5 data/roots/costs/spell/shatter.json
 8eb04443ca11f4d34290e99518d20c9c0182c2bb data/roots/costs/spell/sky_soarer.json
 e4131731797cf62648430e25a2c9e7c8a0048073 data/roots/costs/spell/storm_cloud.json

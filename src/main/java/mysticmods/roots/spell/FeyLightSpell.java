@@ -25,7 +25,7 @@ public class FeyLightSpell extends Spell {
   protected double maxDistance = 0;
 
   public FeyLightSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0xf7f6d2, 0xe351f4);
   }
 
   @Override

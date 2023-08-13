@@ -60,6 +60,12 @@ public class ModSpells {
   public static final RegistryEntry<DesaturateSpell> DESATURATE = spell(Spells.DESATURATE, DesaturateSpell::new, ChatFormatting.GREEN, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250), Cost.add(ModHerbs.GROVE_MOSS, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> DESATURATE_COOLDOWN = property(Spells.DESATURATE, "cooldown", () -> new SpellProperty<>(DESATURATE::get, 500, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
+  // Saturate
+
+  public static final RegistryEntry<SaturateSpell> SATURATE = spell(Spells.SATURATE, SaturateSpell::new, ChatFormatting.DARK_GREEN, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250), Cost.add(ModHerbs.WILDROOT, 0.250)));
+
+  public static final RegistryEntry<SpellProperty<Integer>> SATURATE_COOLDOWN = property(Spells.SATURATE, "cooldown", () -> new SpellProperty<>(SATURATE::get, 500, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+
   // Disarm spell (350 cooldown)
   public static final RegistryEntry<DisarmSpell> DISARM = spell(Spells.DISARM, DisarmSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, 0.250), Cost.add(ModHerbs.BAFFLECAP, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> DISARM_COOLDOWN = property(Spells.DISARM, "cooldown", () -> new SpellProperty<>(DISARM::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));

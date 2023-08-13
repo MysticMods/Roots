@@ -24,7 +24,7 @@ public class SkySoarerSpell extends Spell {
   private int duration, boosted_duration;
 
   public SkySoarerSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs);
+    super(Type.INSTANT, color, costs, 0x20c8ff, 0x2040ff);
   }
 
   @Override
