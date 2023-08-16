@@ -120,6 +120,10 @@ public class ModSpells {
   // Life Drain (20 cooldown)
   public static final RegistryEntry<LifeDrainSpell> LIFE_DRAIN = spell(Spells.LIFE_DRAIN, LifeDrainSpell::new, ChatFormatting.DARK_PURPLE, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250), Cost.add(ModHerbs.STALICRIPE, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> LIFE_DRAIN_COOLDOWN = property(Spells.LIFE_DRAIN, "cooldown", () -> new SpellProperty<>(LIFE_DRAIN::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final RegistryEntry<SpellProperty<Double>> LIFE_DRAIN_DISTANCE = property(Spells.LIFE_DRAIN, "distance", () -> new SpellProperty<>(LIFE_DRAIN::get, 3.0, Property.DOUBLE_SERIALIZER, "The first value used when calculating the vector from the caster."));
+  public static final RegistryEntry<SpellProperty<Double>> LIFE_DRAIN_BOUNDS = property(Spells.LIFE_DRAIN, "bounds", () -> new SpellProperty<>(LIFE_DRAIN::get, 2.0, Property.DOUBLE_SERIALIZER, "The second value used when calculating the size of the bounding box from the caster's look vector."));
+  public static final RegistryEntry<SpellProperty<Float>> LIFE_DRAIN_DAMAGE = property(Spells.LIFE_DRAIN, "damage", () -> new SpellProperty<>(LIFE_DRAIN::get, 3.0F, Property.FLOAT_SERIALIZER, SpellProperties.DAMAGE));
+  public static final RegistryEntry<SpellProperty<Float>> LIFE_DRAIN_HEAL = property(Spells.LIFE_DRAIN, "heal", () -> new SpellProperty<>(LIFE_DRAIN::get, 0.5F, Property.FLOAT_SERIALIZER, "The amount a player should be healed for each entity damaged."));
 
   // Petal Shell (120 cooldown)
   public static final RegistryEntry<PetalShellSpell> PETAL_SHELL = spell(Spells.PETAL_SHELL, PetalShellSpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, 0.250)));
