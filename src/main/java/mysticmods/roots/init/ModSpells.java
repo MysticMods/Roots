@@ -59,6 +59,7 @@ public class ModSpells {
   // Desaturate (500 cooldown)
   public static final RegistryEntry<DesaturateSpell> DESATURATE = spell(Spells.DESATURATE, DesaturateSpell::new, ChatFormatting.GREEN, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, 0.250), Cost.add(ModHerbs.GROVE_MOSS, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> DESATURATE_COOLDOWN = property(Spells.DESATURATE, "cooldown", () -> new SpellProperty<>(DESATURATE::get, 500, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final RegistryEntry<SpellProperty<Float>> DESATURATE_MULTIPLIER = property(Spells.DESATURATE, "multiplier", () -> new SpellProperty<>(DESATURATE::get, 0.7f, Property.FLOAT_SERIALIZER, "Amount of health restored per point of food"));
 
   // Saturate
 
