@@ -1,0 +1,6 @@
+{
+  "_comment": "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed.",
+  "default_value": 0.35,
+  "spell": "roots:disarm",
+  "value": 0.35
+}

@@ -1,0 +1,6 @@
+{
+  "_comment": "The size of the area that will be affected on the Z and X axes",
+  "default_value": 5,
+  "spell": "roots:disarm",
+  "value": 5
+}

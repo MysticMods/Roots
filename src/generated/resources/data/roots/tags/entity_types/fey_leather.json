@@ -5,6 +5,7 @@
     "minecraft:llama",
     "minecraft:mule",
     "minecraft:mooshroom",
-    "minecraft:trader_llama"
+    "minecraft:trader_llama",
+    "roots:deer"
   ]
 }

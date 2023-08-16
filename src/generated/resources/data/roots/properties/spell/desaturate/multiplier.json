@@ -1,0 +1,6 @@
+{
+  "_comment": "Amount of health restored per point of food",
+  "default_value": 0.7,
+  "spell": "roots:desaturate",
+  "value": 0.7
+}

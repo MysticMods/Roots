@@ -336,6 +336,11 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> FEY_LEATHER = modTag("fey_leather");
 
+    public static final TagKey<EntityType<?>> FORCE_HOSTILE = modTag("force_hostile");
+    public static final TagKey<EntityType<?>> FORCE_FRIENDLY = modTag("force_friendly");
+
+    public static final TagKey<EntityType<?>> DISABLE_DISARM = modTag("disable_disarm");
+
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, RootsAPI.rl(name));
     }

@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-13T17:32:59.2557127	Spell properties
+// 1.19.2	2023-08-16T14:17:10.3013269	Spell properties
 8844f1c40708dd1992206793e7d9be5be8d83ba5 data/roots/properties/spell/acid_cloud/cooldown.json
 c3a3cb26bf1c2fc234507699f251d408f590a61c data/roots/properties/spell/acid_cloud/count.json
 5f17dd45df38dbdc58352b6dcce4ec744fec9451 data/roots/properties/spell/acid_cloud/damage.json
@@ -12,7 +12,11 @@ dcf2255ae2fbe93c4481f481226c769824345106 data/roots/properties/spell/acid_cloud/
 b037f1eda1e339af2c66dda9a9930ffc35547573 data/roots/properties/spell/dandelion_winds/range_1.json
 cff3eb694a1b6b809a94be47e49027ae1a15d3af data/roots/properties/spell/dandelion_winds/range_2.json
 82e4d4b77b5a9b5637707b4682e775fbd3c6b545 data/roots/properties/spell/desaturate/cooldown.json
+95e0d9cbf3b3f0c9f5af2e2eba2afb0a1af3ab2e data/roots/properties/spell/desaturate/multiplier.json
 9a51027ba695dfaa8edb7fbaf37f4721614829d7 data/roots/properties/spell/disarm/cooldown.json
+366174bcb88e3a9abe6d933b54f14c42ab4920bf data/roots/properties/spell/disarm/drop_chance.json
+df24b652b5f2d466fd6e76307810e5b0827bc5f1 data/roots/properties/spell/disarm/radius_y.json
+fabebd49b86b959cd54a32eddc43ece7175a044a data/roots/properties/spell/disarm/radius_zx.json
 0c9be4dd05d8d3202eb0fb973c2b259804db4a8b data/roots/properties/spell/extension/cooldown.json
 a48a71fc65994cebec93433be88a288097ffce24 data/roots/properties/spell/extension/night_vision_duration.json
 618114d84a949162e4d16f6121b1f7cb17053730 data/roots/properties/spell/extension/radius_y.json

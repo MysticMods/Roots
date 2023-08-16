@@ -1,4 +1,4 @@
-// 1.19.2	2023-08-14T15:50:14.6147293	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
+// 1.19.2	2023-08-16T14:17:10.310302	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (modifiers), Tags (biomes)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -126,8 +126,8 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 e3f9c87712ade9c5fb9ba6bd8896ee514d3d7149 assets/roots/blockstates/wildwood_wall.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-23a7d6f46740d17a87bafda2ef9e64194c0d9071 assets/roots/lang/en_ud.json
-9150ae27531cf220b4bfe638fab6523c3febe4ea assets/roots/lang/en_us.json
+224029c1a9b289ad18809f269c53331bfac4b460 assets/roots/lang/en_ud.json
+9167c7523b65e3204786bcb7594cd4f592dc7d55 assets/roots/lang/en_us.json
 033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
@@ -1670,7 +1670,10 @@ b147fcff5c0b4d72df1cb7809b063b2562180832 data/roots/tags/blocks/supports_manging
 8e754dfb87a88a938678560a373f5788d297921f data/roots/tags/blocks/supports_wild_roots.json
 4b5fde4f337ce73662f973a66dcd6405771086dd data/roots/tags/entity_types/animal_harvest_entities.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_types/boats.json
-6cc0520c5898cec0793d54035c90266cad94c48a data/roots/tags/entity_types/fey_leather.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_types/disable_disarm.json
+216de12f3a76be73ae5eb6122777791020ece1b9 data/roots/tags/entity_types/fey_leather.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_types/force_friendly.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_types/force_hostile.json
 f1ecbd233820d9259a855e392e4a8e9de84cce46 data/roots/tags/entity_types/pacifist.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_types/squid.json
 0191b679517ad37f83f5f0171f2945bb7ad90df4 data/roots/tags/items/barks.json

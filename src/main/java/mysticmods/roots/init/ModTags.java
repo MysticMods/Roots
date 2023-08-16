@@ -99,8 +99,12 @@ public class ModTags {
           EntityType.LLAMA,
           EntityType.MULE,
           EntityType.MOOSHROOM,
-          EntityType.TRADER_LLAMA
+          EntityType.TRADER_LLAMA,
+          ModEntities.DEER.get()
         );
+      b.tag(RootsTags.Entities.FORCE_HOSTILE);
+      b.tag(RootsTags.Entities.FORCE_FRIENDLY);
+      b.tag(RootsTags.Entities.DISABLE_DISARM);
     });
     // TODO: Determine which tags have been referenced but are empty
     REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, b -> {

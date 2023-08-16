@@ -70,8 +70,11 @@ public class ModSpells {
   // Disarm spell (350 cooldown)
   public static final RegistryEntry<DisarmSpell> DISARM = spell(Spells.DISARM, DisarmSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, 0.250), Cost.add(ModHerbs.BAFFLECAP, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> DISARM_COOLDOWN = property(Spells.DISARM, "cooldown", () -> new SpellProperty<>(DISARM::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final RegistryEntry<SpellProperty<Integer>> DISARM_RADIUS_ZX = property(Spells.DISARM, "radius_zx", () -> new SpellProperty<>(DISARM::get, 5, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_ZX));
+  public static final RegistryEntry<SpellProperty<Integer>> DISARM_RADIUS_Y = property(Spells.DISARM, "radius_y", () -> new SpellProperty<>(DISARM::get, 5, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_Y));
+  public static final RegistryEntry<SpellProperty<Float>> DISARM_DROP_CHANCE = property(Spells.DISARM, "drop_chance", () -> new SpellProperty<>(DISARM::get, 0.35f, Property.FLOAT_SERIALIZER, "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed."));
 
-  // TODO: What does this actually do?
+  // Long night vision & sense danger
   // Extension spell (350 cooldown)
   public static final RegistryEntry<ExtensionSpell> EXTENSION = spell(Spells.EXTENSION, ExtensionSpell::new, ChatFormatting.BLUE, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 1.75), Cost.add(ModHerbs.WILDROOT, 1.75)));
   public static final RegistryEntry<SpellProperty<Integer>> EXTENSION_COOLDOWN = property(Spells.EXTENSION, "cooldown", () -> new SpellProperty<>(EXTENSION::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
