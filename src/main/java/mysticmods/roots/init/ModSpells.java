@@ -142,6 +142,9 @@ public class ModSpells {
   // Sanctuary (20 cooldown)
   public static final RegistryEntry<SanctuarySpell> SANCTUARY = spell(Spells.SANCTUARY, SanctuarySpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, 0.250), Cost.add(ModHerbs.STALICRIPE, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> SANCTUARY_COOLDOWN = property(Spells.SANCTUARY, "cooldown", () -> new SpellProperty<>(SANCTUARY::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final RegistryEntry<SpellProperty<Integer>> SANCTUARY_RADIUS_Y = property(Spells.SANCTUARY, "radius_y", () -> new SpellProperty<>(SANCTUARY::get, 5, Property.INTEGER_SERIALIZER, "The radius of the sanctuary in the Y axis."));
+  public static final RegistryEntry<SpellProperty<Integer>> SANCTUARY_RADIUS_XZ = property(Spells.SANCTUARY, "radius_xz", () -> new SpellProperty<>(SANCTUARY::get, 4, Property.INTEGER_SERIALIZER, "The radius of the sanctuary in the X and Z axis."));
+  public static final RegistryEntry<SpellProperty<Float>> SANCTUARY_VELOCITY = property(Spells.SANCTUARY, "velocity", () -> new SpellProperty<>(SANCTUARY::get, 0.125f, Property.FLOAT_SERIALIZER, "The velocity modifier applied to entities inside the sanctuary."));
 
   // Shatter (20 cooldown)
   public static final RegistryEntry<ShatterSpell> SHATTER = spell(Spells.SHATTER, ShatterSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.STALICRIPE, 0.250)));

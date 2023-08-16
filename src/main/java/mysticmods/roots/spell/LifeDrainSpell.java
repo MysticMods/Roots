@@ -44,7 +44,7 @@ public class LifeDrainSpell extends Spell {
   @Override
   public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
     Vec3 look = pPlayer.getLookAngle();
-    Vec3 position = pPlayer.getPosition(1f);
+    Vec3 position = pPlayer.position();
     float eyeHeight = pPlayer.getEyeHeight(pPlayer.getPose());
     boolean foundTarget = false;
     for (int i = 0; i < 4 && !foundTarget; i++) {
