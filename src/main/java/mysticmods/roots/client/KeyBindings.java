@@ -9,11 +9,15 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.List;
+
 @Mod.EventBusSubscriber(modid= RootsAPI.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class KeyBindings {
-  private static final String CATEGORY = "key.category.roots.general";
+  public static final String CATEGORY = "key.category.roots.general";
 
   public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", GLFW.GLFW_KEY_K, CATEGORY);
+
+  public static final List<KeyMapping> MAPPINGS = List.of(OPEN_SPELL_LIBRARY);
 
   @SubscribeEvent
   public static void registerKeyMappings (RegisterKeyMappingsEvent event) {

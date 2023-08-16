@@ -282,6 +282,8 @@
   "item.roots.wood_knife": "Wood Knife",
   "item.roots.wooden_shears": "Wooden Shears",
   "itemGroup.roots": "Roots",
+  "key.category.roots.general": "Roots",
+  "key.roots.open_spell_library": "Open Spell Library",
   "level_condition.roots.3_high_acacia_pillar": "3 High Acacia Pillar",
   "level_condition.roots.3_high_birch_pillar": "3 High Birch Pillar",
   "level_condition.roots.3_high_crimson_pillar": "3 High Crimson Pillar",

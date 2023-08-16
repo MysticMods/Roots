@@ -10,7 +10,9 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.Registries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.KeyBindings;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -77,6 +79,17 @@ public class ModLang {
       b.add("roots.subtitles.entity.sprout.ambient", "Sprout wanders");
       b.add("roots.subtitles.entity.duck.quack", "Duck quacks");
       b.add("roots.subtitles.entity.deer.ambient", "Deer squeals");
+
+      b.add(KeyBindings.CATEGORY, "Roots");
+      for (KeyMapping bind : KeyBindings.MAPPINGS) {
+        String key = bind.getName();
+        String[] segments = key.split("\\.");
+        if (segments.length > 0) {
+          b.add(bind.getName(), RegistrateLangProvider.toEnglishName(segments[segments.length - 1]));
+        } else {
+          throw new IllegalStateException("Invalid keybind name: " + key);
+        }
+      }
 
       for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
         b.add(spell.getDescriptionId(), RegistrateLangProvider.toEnglishName(spell.getKey().getPath()));
