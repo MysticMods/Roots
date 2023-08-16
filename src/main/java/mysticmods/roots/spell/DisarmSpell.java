@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.spell.Costing;
@@ -48,9 +49,29 @@ public class DisarmSpell extends TwoRadiusSpell {
   @Override
   public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
     List<EquipmentSlot> slots = List.of(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
-    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer));
+    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer).and((o) -> !o.getType().is(RootsTags.Entities.DISABLE_DISARM)));
 
+    int count = 0;
+
+    for (LivingEntity entity : entities) {
+      for (EquipmentSlot slot : slots) {
+        ItemStack stack = entity.getItemBySlot(slot);
+        if (stack.isEmpty()) {
+          continue;
+        }
+
+        count++;
+
+        if (pLevel.random.nextFloat() < dropChance) {
+          entity.spawnAtLocation(stack);
+        }
+
+        entity.setItemSlot(slot, ItemStack.EMPTY);
+      }
+    }
+
+    if (count == 0) {
+      costs.noCharge();
+    }
   }
-
-
 }
