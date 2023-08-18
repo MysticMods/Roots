@@ -1,0 +1,6 @@
+{
+  "_comment": "The first value used when calculating the vector from the caster.",
+  "default_value": 3.0,
+  "spell": "roots:life_drain",
+  "value": 3.0
+}

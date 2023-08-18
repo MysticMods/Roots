@@ -1,0 +1,6 @@
+{
+  "_comment": "How much damage the spell will cause",
+  "default_value": 3.0,
+  "spell": "roots:life_drain",
+  "value": 3.0
+}

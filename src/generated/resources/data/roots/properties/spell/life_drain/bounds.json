@@ -1,0 +1,6 @@
+{
+  "_comment": "The second value used when calculating the size of the bounding box from the caster's look vector.",
+  "default_value": 2.0,
+  "spell": "roots:life_drain",
+  "value": 2.0
+}

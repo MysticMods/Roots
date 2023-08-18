@@ -23,7 +23,7 @@ public class SanctuarySpell extends TwoRadiusSpell {
   private float velocity;
 
   public SanctuarySpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs, 0xd01050, 0xe02090);
+    super(Type.CONTINUOUS, color, costs, 0xd01050, 0xe02090);
   }
 
   @Override

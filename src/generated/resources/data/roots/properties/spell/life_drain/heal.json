@@ -1,0 +1,6 @@
+{
+  "_comment": "The amount a player should be healed for each entity damaged.",
+  "default_value": 0.5,
+  "spell": "roots:life_drain",
+  "value": 0.5
+}

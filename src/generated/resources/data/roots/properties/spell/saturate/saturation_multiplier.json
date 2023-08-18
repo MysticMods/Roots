@@ -1,0 +1,6 @@
+{
+  "_comment": "Amount of saturation give per point of saturation.",
+  "default_value": 0.5,
+  "spell": "roots:saturate",
+  "value": 0.5
+}

@@ -1,0 +1,6 @@
+{
+  "_comment": "Amount of food restored per point of food.",
+  "default_value": 0.5,
+  "spell": "roots:saturate",
+  "value": 0.5
+}

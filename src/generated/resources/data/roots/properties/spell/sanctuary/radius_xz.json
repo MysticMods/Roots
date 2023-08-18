@@ -1,0 +1,6 @@
+{
+  "_comment": "The radius of the sanctuary in the X and Z axis.",
+  "default_value": 4,
+  "spell": "roots:sanctuary",
+  "value": 4
+}

@@ -1,0 +1,6 @@
+{
+  "_comment": "The velocity modifier applied to entities inside the sanctuary.",
+  "default_value": 0.125,
+  "spell": "roots:sanctuary",
+  "value": 0.125
+}

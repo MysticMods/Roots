@@ -67,6 +67,9 @@ public class ModSpells {
 
   public static final RegistryEntry<SpellProperty<Integer>> SATURATE_COOLDOWN = property(Spells.SATURATE, "cooldown", () -> new SpellProperty<>(SATURATE::get, 500, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
 
+  public static final RegistryEntry<SpellProperty<Float>> SATURATE_SATURATION_MULTIPLIER = property(Spells.SATURATE, "saturation_multiplier", () -> new SpellProperty<>(SATURATE::get, 0.5f, Property.FLOAT_SERIALIZER, "Amount of saturation give per point of saturation."));
+  public static final RegistryEntry<SpellProperty<Float>> SATURATE_FOOD_MULTIPLIER = property(Spells.SATURATE, "food_multiplier", () -> new SpellProperty<>(SATURATE::get, 0.5f, Property.FLOAT_SERIALIZER, "Amount of food restored per point of food."));
+
   // Disarm spell (350 cooldown)
   public static final RegistryEntry<DisarmSpell> DISARM = spell(Spells.DISARM, DisarmSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, 0.250), Cost.add(ModHerbs.BAFFLECAP, 0.250)));
   public static final RegistryEntry<SpellProperty<Integer>> DISARM_COOLDOWN = property(Spells.DISARM, "cooldown", () -> new SpellProperty<>(DISARM::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));

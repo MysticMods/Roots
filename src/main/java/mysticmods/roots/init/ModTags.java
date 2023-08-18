@@ -245,6 +245,8 @@ public class ModTags {
 
       b.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
 
+      b.tag(RootsTags.Items.SKIPPED_FOODS);
+
       // TODO: Copying crops to the actual item tag?
     });
   }
