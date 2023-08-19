@@ -116,7 +116,7 @@ public class SaturateSpell extends Spell {
       return;
     }
 
-    if (data.saturationLevel < newSat) {
+    if (data.getSaturationLevel() < newSat) {
       data.setSaturation(Math.min(20, newSat));
     }
     if (data.getFoodLevel() < newFood) {
@@ -130,7 +130,7 @@ public class SaturateSpell extends Spell {
       }
       if (result.hasCraftingRemainingItem()) {
         pPlayer.getInventory().placeItemBackInInventory(result.getCraftingRemainingItem());
-      } else {
+      } else if (!result.equals(stack, false)) {
         pPlayer.getInventory().placeItemBackInInventory(result);
       }
     }
