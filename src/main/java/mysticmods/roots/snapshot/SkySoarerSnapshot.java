@@ -11,11 +11,13 @@ import net.minecraft.world.phys.Vec3;
 public class SkySoarerSnapshot extends Snapshot {
   private float amplifier;
   private Vec3 originalMovement;
+  private Vec3 vehicleOriginalMovement;
 
-  public SkySoarerSnapshot(Player player, Vec3 originalMovement, float amplifier) {
+  public SkySoarerSnapshot(Player player, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
     super(player);
     this.originalMovement = originalMovement;
     this.amplifier = amplifier;
+    this.vehicleOriginalMovement = vehicleOriginalMovement;
   }
 
   public SkySoarerSnapshot(int timestamp) {
@@ -28,6 +30,10 @@ public class SkySoarerSnapshot extends Snapshot {
 
   public float getAmplifier() {
     return amplifier;
+  }
+
+  public Vec3 getVehicleOriginalMovement() {
+    return vehicleOriginalMovement;
   }
 
   @Override
@@ -44,6 +50,11 @@ public class SkySoarerSnapshot extends Snapshot {
     protected void updateFromTag(SkySoarerSnapshot snapshot, CompoundTag tag) {
       snapshot.originalMovement = new Vec3(tag.getDouble("x"), tag.getDouble("y"), tag.getDouble("z"));
       snapshot.amplifier = tag.getFloat("amplifier");
+      if (tag.contains("vX")) {
+        snapshot.vehicleOriginalMovement = new Vec3(tag.getDouble("vX"), tag.getDouble("vY"), tag.getDouble("vZ"));
+      } else {
+        snapshot.vehicleOriginalMovement = Vec3.ZERO;
+      }
     }
 
     @Override
@@ -51,6 +62,9 @@ public class SkySoarerSnapshot extends Snapshot {
       tag.putDouble("x", snapshot.originalMovement.x);
       tag.putDouble("y", snapshot.originalMovement.y);
       tag.putDouble("z", snapshot.originalMovement.z);
+      tag.putDouble("vX", snapshot.vehicleOriginalMovement.x);
+      tag.putDouble("vY", snapshot.vehicleOriginalMovement.y);
+      tag.putDouble("vZ", snapshot.vehicleOriginalMovement.z);
       tag.putFloat("amplifier", snapshot.amplifier);
     }
 
