@@ -113,7 +113,8 @@ public class RootsResultBase implements FinishedRecipe {
   @Nullable
   @Override
   public JsonObject serializeAdvancement() {
-    return advancementBuilder == null ? null : advancementBuilder.serializeToJson();
+    return null;
+    //return advancementBuilder == null ? null : advancementBuilder.serializeToJson();
   }
 
   @Nullable
