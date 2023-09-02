@@ -4,6 +4,7 @@ import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
@@ -70,6 +71,8 @@ public abstract class RootsAPI {
     SNAPSHOT_SERIALIZER_REGISTRY = key(RootsAPI.rl("snapshot_serializers"));
 
   public static ResourceKey<Registry<EntityTestType<?>>> ENTITY_TEST_TYPE_REGISTRY = key(RootsAPI.rl("entity_test_types"));
+
+  public static ResourceKey<Registry<Grove>> GROVE_REGISTRY = key(RootsAPI.rl("groves"));
 
   private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
     return ResourceKey.createRegistryKey(name);

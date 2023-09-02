@@ -22,10 +22,38 @@ public class ModTags {
 
     REGISTRATE.addDataGenerator(RootsDataProviderTypes.RITUAL_TAGS, b -> {
       b.tag(RootsTags.Rituals.NYI).add(ModRituals.BLOOMING.get(), ModRituals.FIRE_STORM.get(), ModRituals.FROST_LANDS.get(), ModRituals.GATHERING.get(), ModRituals.GERMINATION.get(), ModRituals.HEALING_AURA.get(), ModRituals.HEAVY_STORMS.get(), ModRituals.OVERGROWTH.get(), ModRituals.PROTECTION.get(), ModRituals.PURITY.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.TRANSMUTATION.get(), ModRituals.WARDING.get(), ModRituals.WILDROOT_GROWTH.get(), ModRituals.WINDWALL.get());
+      b.tag(RootsTags.Rituals.PRIMAL_OPPOSED);
+      b.tag(RootsTags.Rituals.PRIMAL_ALIGNED);
+      b.tag(RootsTags.Rituals.FAIRY_OPPOSED);
+      b.tag(RootsTags.Rituals.FAIRY_ALIGNED);
+      b.tag(RootsTags.Rituals.TWILIGHT_OPPOSED);
+      b.tag(RootsTags.Rituals.TWILIGHT_ALIGNED);
+      b.tag(RootsTags.Rituals.FUNGAL_OPPOSED);
+      b.tag(RootsTags.Rituals.FUNGAL_ALIGNED);
+      b.tag(RootsTags.Rituals.SPROUT_OPPOSED);
+      b.tag(RootsTags.Rituals.SPROUT_ALIGNED);
+      b.tag(RootsTags.Rituals.ELEMENTAL_OPPOSED);
+      b.tag(RootsTags.Rituals.ELEMENTAL_ALIGNED);
+      b.tag(RootsTags.Rituals.WILD_OPPOSED);
+      b.tag(RootsTags.Rituals.WILD_ALIGNED);
     });
 
     REGISTRATE.addDataGenerator(RootsDataProviderTypes.SPELL_TAGS, b -> {
       b.tag(RootsTags.Spells.NYI).add(ModSpells.ACID_CLOUD.get(), ModSpells.AQUA_BUBBLE.get(), ModSpells.AUGMENT.get(), ModSpells.LIGHT_DRIFTER.get(), ModSpells.MAGNETISM.get(), ModSpells.DANDELION_WINDS.get(), ModSpells.DESATURATE.get(), ModSpells.DISARM.get(), ModSpells.EXTENSION.get(), ModSpells.NONDETECTION.get(), ModSpells.GEAS.get(), ModSpells.CONTROL_UNDEAD.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get(), ModSpells.LIFE_DRAIN.get(), ModSpells.RADIANCE.get(), ModSpells.ROSE_THORNS.get(), ModSpells.SANCTUARY.get(), ModSpells.SHATTER.get(), ModSpells.JAUNT.get(), ModSpells.STORM_CLOUD.get(), ModSpells.TIME_STOP.get(), ModSpells.WILDFIRE.get());
+      b.tag(RootsTags.Spells.PRIMAL_OPPOSED);
+      b.tag(RootsTags.Spells.PRIMAL_ALIGNED);
+      b.tag(RootsTags.Spells.FAIRY_OPPOSED);
+      b.tag(RootsTags.Spells.FAIRY_ALIGNED);
+      b.tag(RootsTags.Spells.TWILIGHT_OPPOSED);
+      b.tag(RootsTags.Spells.TWILIGHT_ALIGNED);
+      b.tag(RootsTags.Spells.FUNGAL_OPPOSED);
+      b.tag(RootsTags.Spells.FUNGAL_ALIGNED);
+      b.tag(RootsTags.Spells.SPROUT_OPPOSED);
+      b.tag(RootsTags.Spells.SPROUT_ALIGNED);
+      b.tag(RootsTags.Spells.ELEMENTAL_OPPOSED);
+      b.tag(RootsTags.Spells.ELEMENTAL_ALIGNED);
+      b.tag(RootsTags.Spells.WILD_OPPOSED);
+      b.tag(RootsTags.Spells.WILD_ALIGNED);
     });
 
     REGISTRATE.addDataGenerator(RootsDataProviderTypes.HERB_TAGS, b -> {
@@ -34,9 +62,32 @@ public class ModTags {
       b.tag(RootsTags.Herbs.WATER).add(ModHerbs.DEWGONIA.get());
       b.tag(RootsTags.Herbs.EARTH).add(ModHerbs.STALICRIPE.get());
       b.tag(RootsTags.Herbs.ELEMENTAL).addTags(RootsTags.Herbs.AIR, RootsTags.Herbs.EARTH, RootsTags.Herbs.FIRE, RootsTags.Herbs.WATER);
+      b.tag(RootsTags.Herbs.PRIMAL).add(ModHerbs.GROVE_MOSS.get(), ModHerbs.WILDROOT.get());
+      b.tag(RootsTags.Herbs.FAIRY).add(ModHerbs.PERESKIA.get());
+      b.tag(RootsTags.Herbs.FUNGAL).add(ModHerbs.BAFFLECAP.get());
+      b.tag(RootsTags.Herbs.SPROUT).add(ModHerbs.WILDEWHEET.get());
+      b.tag(RootsTags.Herbs.TWILIGHT).add(ModHerbs.MOONGLOW.get());
+      b.tag(RootsTags.Herbs.WILD).add(ModHerbs.SPIRITLEAF.get());
     });
 
     REGISTRATE.addDataGenerator(RootsDataProviderTypes.MODIFIER_TAGS, b -> {
+    });
+
+    REGISTRATE.addDataGenerator(RootsDataProviderTypes.GROVE_TAGS, b -> {
+      b.tag(RootsTags.Groves.PRIMAL_ALIGNED).add(ModGroves.FUNGAL.get(), ModGroves.SPROUT.get(), ModGroves.FAIRY.get(), ModGroves.WILD.get(), ModGroves.TWILIGHT.get(), ModGroves.ELEMENTAL.get());
+      b.tag(RootsTags.Groves.PRIMAL_OPPOSED);
+      b.tag(RootsTags.Groves.FAIRY_ALIGNED).add(ModGroves.SPROUT.get());
+      b.tag(RootsTags.Groves.FAIRY_OPPOSED).add(ModGroves.TWILIGHT.get());
+      b.tag(RootsTags.Groves.TWILIGHT_ALIGNED).add(ModGroves.FUNGAL.get());
+      b.tag(RootsTags.Groves.TWILIGHT_OPPOSED).add(ModGroves.FAIRY.get());
+      b.tag(RootsTags.Groves.FUNGAL_ALIGNED).add(ModGroves.TWILIGHT.get());
+      b.tag(RootsTags.Groves.FUNGAL_OPPOSED);
+      b.tag(RootsTags.Groves.SPROUT_ALIGNED).add(ModGroves.FAIRY.get(), ModGroves.SPROUT.get());
+      b.tag(RootsTags.Groves.SPROUT_OPPOSED);
+      b.tag(RootsTags.Groves.ELEMENTAL_ALIGNED);
+      b.tag(RootsTags.Groves.ELEMENTAL_OPPOSED);
+      b.tag(RootsTags.Groves.WILD_ALIGNED).add(ModGroves.SPROUT.get());
+      b.tag(RootsTags.Groves.WILD_OPPOSED);
     });
 
     REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, b -> {

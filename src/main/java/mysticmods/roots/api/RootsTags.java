@@ -1,5 +1,6 @@
 package mysticmods.roots.api;
 
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.ritual.Ritual;
@@ -163,6 +164,7 @@ public class RootsTags {
     public static final TagKey<Block> SILVER_STORAGE = compatTag("storage_blocks/silver");
     public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
@@ -354,6 +356,22 @@ public class RootsTags {
   public static class Rituals extends RootsTags {
     public static final TagKey<Ritual> NYI = modTag("nyi");
 
+    public static final TagKey<Ritual> PRIMAL_ALIGNED = modTag("aligned/primal");
+    public static final TagKey<Ritual> FAIRY_ALIGNED = modTag("aligned/fairy");
+    public static final TagKey<Ritual> TWILIGHT_ALIGNED = modTag("aligned/twilight");
+    public static final TagKey<Ritual> FUNGAL_ALIGNED = modTag("aligned/fungal");
+    public static final TagKey<Ritual> SPROUT_ALIGNED = modTag("aligned/sprout");
+    public static final TagKey<Ritual> ELEMENTAL_ALIGNED = modTag("aligned/elemental");
+    public static final TagKey<Ritual> WILD_ALIGNED = modTag("aligned/wild");
+
+    public static final TagKey<Ritual> PRIMAL_OPPOSED = modTag("opposed/primal");
+    public static final TagKey<Ritual> FAIRY_OPPOSED = modTag("opposed/fairy");
+    public static final TagKey<Ritual> TWILIGHT_OPPOSED = modTag("opposed/twilight");
+    public static final TagKey<Ritual> FUNGAL_OPPOSED = modTag("opposed/fungal");
+    public static final TagKey<Ritual> SPROUT_OPPOSED = modTag("opposed/sprout");
+    public static final TagKey<Ritual> ELEMENTAL_OPPOSED = modTag("opposed/elemental");
+    public static final TagKey<Ritual> WILD_OPPOSED = modTag("opposed/wild");
+
     static TagKey<Ritual> modTag(String name) {
       return TagKey.create(RootsAPI.RITUAL_REGISTRY, RootsAPI.rl(name));
     }
@@ -365,6 +383,23 @@ public class RootsTags {
 
   public static class Spells extends RootsTags {
     public static final TagKey<Spell> NYI = modTag("nyi");
+
+    public static final TagKey<Spell> PRIMAL_ALIGNED = modTag("aligned/primal");
+    public static final TagKey<Spell> FAIRY_ALIGNED = modTag("aligned/fairy");
+    public static final TagKey<Spell> TWILIGHT_ALIGNED = modTag("aligned/twilight");
+    public static final TagKey<Spell> FUNGAL_ALIGNED = modTag("aligned/fungal");
+    public static final TagKey<Spell> SPROUT_ALIGNED = modTag("aligned/sprout");
+    public static final TagKey<Spell> ELEMENTAL_ALIGNED = modTag("aligned/elemental");
+    public static final TagKey<Spell> WILD_ALIGNED = modTag("aligned/wild");
+
+    public static final TagKey<Spell> PRIMAL_OPPOSED = modTag("opposed/primal");
+    public static final TagKey<Spell> FAIRY_OPPOSED = modTag("opposed/fairy");
+    public static final TagKey<Spell> TWILIGHT_OPPOSED = modTag("opposed/twilight");
+    public static final TagKey<Spell> FUNGAL_OPPOSED = modTag("opposed/fungal");
+    public static final TagKey<Spell> SPROUT_OPPOSED = modTag("opposed/sprout");
+    public static final TagKey<Spell> ELEMENTAL_OPPOSED = modTag("opposed/elemental");
+    public static final TagKey<Spell> WILD_OPPOSED = modTag("opposed/wild");
+
 
     static TagKey<Spell> modTag(String name) {
       return TagKey.create(RootsAPI.SPELL_REGISTRY, RootsAPI.rl(name));
@@ -394,12 +429,46 @@ public class RootsTags {
     public static final TagKey<Herb> EARTH = modTag("elemental/earth");
     public static final TagKey<Herb> AIR = modTag("elemental/air");
 
+    public static final TagKey<Herb> PRIMAL = modTag("primal");
+    public static final TagKey<Herb> FAIRY = modTag("fairy");
+    public static final TagKey<Herb> TWILIGHT = modTag("twilight");
+    public static final TagKey<Herb> FUNGAL = modTag("fungal");
+    public static final TagKey<Herb> SPROUT = modTag("sprout");
+    public static final TagKey<Herb> WILD = modTag("wild");
+
     static TagKey<Herb> modTag(String name) {
       return TagKey.create(RootsAPI.HERB_REGISTRY, RootsAPI.rl(name));
     }
 
     static TagKey<Herb> compatTag(String name) {
       return TagKey.create(RootsAPI.HERB_REGISTRY, new ResourceLocation("forge", name));
+    }
+  }
+
+  public static class Groves extends RootsTags {
+    public static final TagKey<Grove> PRIMAL_ALIGNED = modTag("aligned/primal");
+    public static final TagKey<Grove> FAIRY_ALIGNED = modTag("aligned/fairy");
+    public static final TagKey<Grove> TWILIGHT_ALIGNED = modTag("aligned/twilight");
+    public static final TagKey<Grove> FUNGAL_ALIGNED = modTag("aligned/fungal");
+    public static final TagKey<Grove> SPROUT_ALIGNED = modTag("aligned/sprout");
+    public static final TagKey<Grove> ELEMENTAL_ALIGNED = modTag("aligned/elemental");
+    public static final TagKey<Grove> WILD_ALIGNED = modTag("aligned/wild");
+
+    public static final TagKey<Grove> PRIMAL_OPPOSED = modTag("opposed/primal");
+    public static final TagKey<Grove> FAIRY_OPPOSED = modTag("opposed/fairy");
+    public static final TagKey<Grove> TWILIGHT_OPPOSED = modTag("opposed/twilight");
+    public static final TagKey<Grove> FUNGAL_OPPOSED = modTag("opposed/fungal");
+    public static final TagKey<Grove> SPROUT_OPPOSED = modTag("opposed/sprout");
+    public static final TagKey<Grove> ELEMENTAL_OPPOSED = modTag("opposed/elemental");
+    public static final TagKey<Grove> WILD_OPPOSED = modTag("opposed/wild");
+
+
+    static TagKey<Grove> modTag(String name) {
+      return TagKey.create(RootsAPI.GROVE_REGISTRY, RootsAPI.rl(name));
+    }
+
+    static TagKey<Grove> compatTag(String name) {
+      return TagKey.create(RootsAPI.GROVE_REGISTRY, new ResourceLocation("forge", name));
     }
   }
 }
