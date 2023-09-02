@@ -2,6 +2,7 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
+import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.Registries;
@@ -120,7 +121,7 @@ public class TokenItem extends Item {
             result = InteractionResultHolder.fail(stack);
           } else {
             pPlayer.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getStyledName()), true);
-            cap.grantSpell(spell);
+            cap.grant(pPlayer, Grant.spell(spell));
             result = InteractionResultHolder.success(stack);
           }
 
@@ -133,7 +134,7 @@ public class TokenItem extends Item {
             pPlayer.displayClientMessage(Component.translatable("roots.message.modifier.already_learned", modifier.getName()), true);
             result = InteractionResultHolder.fail(stack);
           } else {
-            cap.grantModifier(modifier);
+            cap.grant(pPlayer, Grant.modifier(modifier));
             pPlayer.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
             result = InteractionResultHolder.success(stack);
           }

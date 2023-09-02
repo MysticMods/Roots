@@ -2,6 +2,7 @@ package mysticmods.roots.advancements;
 
 import com.google.gson.JsonElement;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.config.ConfigManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,6 +20,10 @@ import javax.annotation.Nullable;
 public class KillPredicate implements IGenericPredicate<LivingDeathEvent> {
   @Override
   public boolean test(ServerPlayer player, LivingDeathEvent event) {
+    if (ConfigManager.PACIFIST_DISABLED.get()) {
+      return false;
+    }
+    // TODO: Grant or revoke reputation for kills
     LivingEntity entity = event.getEntity();
     if (entity.getType().is(RootsTags.Entities.PACIFIST)) {
       if (entity instanceof TamableAnimal tamable) {

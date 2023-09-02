@@ -104,14 +104,15 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
     return false;
   }
 
-  public void grantSpell(Spell spell) {
+  private void grantSpell(Spell spell) {
     if (GRANTED_SPELLS.add(spell)) {
       reset();
       setDirty(true);
+      // TODO: Handle reputation gains from learning new spells
     }
   }
 
-  public void grantModifier(Modifier modifier) {
+  private void grantModifier(Modifier modifier) {
     if (GRANTED_MODIFIERS.add(modifier)) {
       reset();
       setDirty(true);

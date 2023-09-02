@@ -1,4 +1,4 @@
-// 1.19.2	2023-09-02T12:08:28.5811467	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (groves), Tags (modifiers), Tags (biomes)]
+// 1.19.2	2023-09-02T12:42:45.4194106	Registrate Provider for roots [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (rituals), Tags (spells), Tags (herbs), Tags (groves), Tags (modifiers), Tags (biomes)]
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -1666,7 +1666,7 @@ de63ed9e3b03e443f31cbe2fc6660363c46675b3 data/roots/tags/items/vegetables.json
 fe49f2f92bb41848fa0d205cd416c22764049063 data/roots/tags/roots/groves/aligned/fairy.json
 38d730dd93138e03e9ad08a048d4b4573108e451 data/roots/tags/roots/groves/aligned/fungal.json
 7189c35bd8108bdfdba8e9b490263e3f453ed1ed data/roots/tags/roots/groves/aligned/primal.json
-f4ae53ea9dca743936f704729e52525701d6392a data/roots/tags/roots/groves/aligned/sprout.json
+a962048a8d0db951ed5f7685009830f760b10387 data/roots/tags/roots/groves/aligned/sprout.json
 081295c0be624da9e9c6e823d369ef0974fe3e3f data/roots/tags/roots/groves/aligned/twilight.json
 fe49f2f92bb41848fa0d205cd416c22764049063 data/roots/tags/roots/groves/aligned/wild.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/groves/opposed/elemental.json

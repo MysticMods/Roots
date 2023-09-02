@@ -83,6 +83,7 @@ public abstract class RootsAPI {
   public static final ResourceLocation GRANT_CAPABILITY_ID = rl("grant_capability");
   public static final ResourceLocation SNAPSHOT_CAPABILITY_ID = rl("snapshot_capability");
   public static final ResourceLocation SHOULDER_CAPABILITY_ID = rl("shoulder_capability");
+  public static final ResourceLocation REPUTATION_CAPABILITY_ID = rl("reputation_capability");
 
   public static final ResourceLocation RUNIC_SHEARS_ENTITY_CAPABILITY_ID = rl("runic_shears_entity_capability");
   public static final ResourceLocation RUNIC_SHEARS_TOKEN_CAPABILITY = rl("runic_shears_token_capability");

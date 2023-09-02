@@ -5,6 +5,7 @@ import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.network.Networking;
 import mysticmods.roots.network.client.ClientBoundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientBoundHerbSyncPacket;
+import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,6 +35,12 @@ public class ServerTickHandler {
           }
         });
         player.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> snapshot.tick(player));
+        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
+          if (reputation.isDirty()) {
+            Networking.sendTo(new ClientBoundReputationSyncPacket(reputation.toRecord()), player);
+            reputation.setDirty(false);
+          }
+        });
       }
     }
   }

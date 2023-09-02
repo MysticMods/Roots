@@ -19,4 +19,6 @@ public class Capabilities {
   });
   public static final Capability<IPlayerShoulderCapability> PLAYER_SHOULDER_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
   });
+  public static final Capability<ReputationCapability> REPUTATION_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+  });
 }

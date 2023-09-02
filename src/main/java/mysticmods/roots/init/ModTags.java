@@ -82,7 +82,7 @@ public class ModTags {
       b.tag(RootsTags.Groves.TWILIGHT_OPPOSED).add(ModGroves.FAIRY.get());
       b.tag(RootsTags.Groves.FUNGAL_ALIGNED).add(ModGroves.TWILIGHT.get());
       b.tag(RootsTags.Groves.FUNGAL_OPPOSED);
-      b.tag(RootsTags.Groves.SPROUT_ALIGNED).add(ModGroves.FAIRY.get(), ModGroves.SPROUT.get());
+      b.tag(RootsTags.Groves.SPROUT_ALIGNED).add(ModGroves.FAIRY.get(), ModGroves.WILD.get());
       b.tag(RootsTags.Groves.SPROUT_OPPOSED);
       b.tag(RootsTags.Groves.ELEMENTAL_ALIGNED);
       b.tag(RootsTags.Groves.ELEMENTAL_OPPOSED);

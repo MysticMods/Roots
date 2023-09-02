@@ -22,6 +22,8 @@ public class ConfigManager {
   public static HatConfig HAT_CONFIG = new HatConfig();
 
   public static ForgeConfigSpec.BooleanValue EXPERIENCE_ORBS;
+  public static ForgeConfigSpec.BooleanValue PACIFIST_DISABLED;
+  public static ForgeConfigSpec.IntValue REPUTATION_LOSS_PACIFIST;
   public static ForgeConfigSpec COMMON_CONFIG;
 
   static {
@@ -30,6 +32,10 @@ public class ConfigManager {
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Hat configuration").push("hat_config");
     HAT_CONFIG.apply(COMMON_BUILDER);
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.comment("Reputation-related configurations").push("reputation_config");
+    REPUTATION_LOSS_PACIFIST = COMMON_BUILDER.comment("how much reputation is lost when killing a pacifist mob [if 0, no reputation is lost]").defineInRange("reputation_loss_pacifist", 10, 0, Integer.MAX_VALUE);
+    PACIFIST_DISABLED = COMMON_BUILDER.comment("whether or not the Untrue Pacifist advancement is granted or utilized").define("pacifist_disabled", false);
     COMMON_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
   }
