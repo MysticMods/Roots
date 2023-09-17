@@ -28,6 +28,7 @@ public class Networking extends PacketHandler {
     registerMessage(ClientBoundUpdateStaffStackPacket.class, ClientBoundUpdateStaffStackPacket::encode, ClientBoundUpdateStaffStackPacket::new, ClientBoundUpdateStaffStackPacket::handle);
     registerMessage(ServerBoundSwapStaffSlotsPacket.class, ServerBoundSwapStaffSlotsPacket::encode, ServerBoundSwapStaffSlotsPacket::new, ServerBoundSwapStaffSlotsPacket::handle);
     registerMessage(ServerBoundLibraryToStaffPacket.class, ServerBoundLibraryToStaffPacket::encode, ServerBoundLibraryToStaffPacket::new, ServerBoundLibraryToStaffPacket::handle);
+    registerMessage(ClientBoundReputationSyncPacket.class, ClientBoundReputationSyncPacket::encode, ClientBoundReputationSyncPacket::new, ClientBoundReputationSyncPacket::handle);
   }
 
   public static void sendTo(Object msg, ServerPlayer player) {
