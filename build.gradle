@@ -143,7 +143,9 @@ jar {
                 'FMLAT': 'roots_at.cfg',
         )
     }
+    exclude("net/**")
 }
+
 
 processResources {
     // this will ensure that this task is redone when the versions change.

@@ -311,7 +311,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 							if (!player.capabilities.isCreativeMode) {
 								cap.drain(stack, true);
 								if (heldItem.getItem() instanceof ItemBucket) {
-									player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+									player.setHeldItem(hand, heldItem.getItem().getContainerItem(heldItem));
 									((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
 								}
 							}
