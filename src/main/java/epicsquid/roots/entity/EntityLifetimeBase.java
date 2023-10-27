@@ -109,7 +109,7 @@ public abstract class EntityLifetimeBase extends Entity {
 	
 	@Override
 	public void onUpdate() {
-		getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
+		getDataManager().set(lifetime, Integer.valueOf(getDataManager().get(lifetime) - 1));
 		getDataManager().setDirty(lifetime);
 		if (getDataManager().get(lifetime) < 0) {
 			setDead();
