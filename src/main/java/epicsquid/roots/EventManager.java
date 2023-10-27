@@ -33,7 +33,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
+import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -231,20 +233,29 @@ public class EventManager {
 			entity.removePotionEffect(ModPotions.time_stop);
 			event.setCanceled(true);
 		}
-		if (entity instanceof EntityPlayer && event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
+		if (entity instanceof EntityPlayer
+		    && event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG)
+		    && !event.getEntity().getEntityWorld().isRemote)
+		{
 			event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);
+			// When spell ends:
 			if (event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) <= 0) {
 				EntityPlayer player = ((EntityPlayer) event.getEntity());
 				player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 40, 10, false, false));
 				player.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
 				player.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
 				player.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);
-				PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)), player);
+				int currentDim = player.dimension; // Save dimension the player is currently in to check against
+				player.dimension = event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_DIMENSION_ID);
+				PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE), player.dimension), player);
 				player.capabilities.allowFlying = false;
 				player.capabilities.disableDamage = false;
 				player.noClip = false;
 				player.capabilities.isFlying = false;
-				player.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+				if (currentDim != player.dimension) // Change dimension only if it's different than where we left
+					player.changeDimension(player.dimension, (world, entity1, yaw) -> {});
+				else
+					player.setPositionAndUpdate(player.posX, player.posY, player.posZ); // Handled by changeDimension
 				player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
 				player.extinguish();
 				//PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
@@ -253,6 +264,7 @@ public class EventManager {
 				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);
 				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Z);
 				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_MODE);
+				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_DIMENSION_ID);
 				if (SpellAugment.instance.shouldPlaySound()) {
 					player.world.playSound(null, player.getPosition(), ModSounds.Spells.LIGHT_DRIFTER_EFFECT_END, SoundCategory.PLAYERS, SpellAugment.instance.getSoundVolume(), 1);
 				}

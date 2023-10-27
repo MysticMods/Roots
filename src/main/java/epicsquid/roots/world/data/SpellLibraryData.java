@@ -14,6 +14,7 @@ import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("NullableProblems")
@@ -109,7 +110,6 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
 		markDirty();
 	}
 	
-	@SuppressWarnings("NullableProblems")
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		NBTTagList list = nbt.getTagList("spells", Constants.NBT.TAG_COMPOUND);
@@ -141,9 +141,8 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
 	
 	public List<LibrarySpellInfo> asList() {
 		if (list == null) {
-			list = spells.values().stream().filter(o -> o.getSpell() != null).filter(LibrarySpellInfo::isObtained).collect(Collectors.toList());
+			list = spells.values().stream().filter(o -> o.getSpell() != null).filter(LibrarySpellInfo::isObtained).sorted(Comparator.comparing(a -> a.getSpell() == null ? "" : a.getSpell().getRegistryName().getPath())).collect(Collectors.toList());
 		}
-		list.sort(Comparator.comparing(a -> a.getSpell() == null ? "" : a.getSpell().getRegistryName().getPath()));
 		return list;
 	}
 	

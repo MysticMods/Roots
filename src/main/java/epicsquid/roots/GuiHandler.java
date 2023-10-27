@@ -24,6 +24,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
@@ -75,7 +77,7 @@ public class GuiHandler implements IGuiHandler {
 				if (te instanceof TileEntityFeyCrafter) {
 					return new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te);
 				} else {
-					return new FakeContainer();
+					return null;
 				}
 			case IMPOSER_ID:
 				te = world.getTileEntity(new BlockPos(x, y, z));
@@ -83,7 +85,7 @@ public class GuiHandler implements IGuiHandler {
 					((TileEntityImposer) te).updateInSlot(player);
 					return new ContainerImposer(player, (TileEntityImposer) te);
 				} else {
-					return new FakeContainer();
+					return null;
 				}
 			case LIBRARY_ID:
 				Supplier<ItemStack> staff = getStaff(player);
@@ -93,7 +95,7 @@ public class GuiHandler implements IGuiHandler {
 					return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
 				} else {
 					player.sendStatusMessage(new TextComponentTranslation("roots.message.hold_staff").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)), true);
-					return new FakeContainer();
+					return null;
 				}
 		}
 		return null;
@@ -122,7 +124,7 @@ public class GuiHandler implements IGuiHandler {
 			case LIBRARY_ID:
 				Supplier<ItemStack> staff = getStaff(player);
 				if (staff != null) {
-					return new GuiLibrary(new ContainerLibrary(player, staff, null));
+					return new GuiLibrary(new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player)));
 				}
 				break;
 		}

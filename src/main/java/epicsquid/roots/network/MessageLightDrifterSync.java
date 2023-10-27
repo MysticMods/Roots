@@ -18,13 +18,14 @@ public class MessageLightDrifterSync implements IMessage {
 	private UUID id = null;
 	private boolean enable = false;
 	private double x = 0, y = 0, z = 0;
+	private int dimension = 0;
 	private int mode = 0;
 	
 	public MessageLightDrifterSync() {
 		super();
 	}
 	
-	public MessageLightDrifterSync(UUID id, double x, double y, double z, boolean enable, int mode) {
+	public MessageLightDrifterSync(UUID id, double x, double y, double z, boolean enable, int mode, int dimension) {
 		super();
 		this.id = id;
 		this.enable = enable;
@@ -32,7 +33,11 @@ public class MessageLightDrifterSync implements IMessage {
 		this.y = y;
 		this.z = z;
 		this.mode = mode;
+		this.dimension = dimension;
 	}
+	
+	
+	
 	
 	@Override
 	public void fromBytes(ByteBuf buf) {
@@ -42,6 +47,7 @@ public class MessageLightDrifterSync implements IMessage {
 		enable = buf.readBoolean();
 		id = new UUID(buf.readLong(), buf.readLong());
 		mode = buf.readInt();
+		dimension = buf.readInt();
 	}
 	
 	@Override
@@ -53,6 +59,7 @@ public class MessageLightDrifterSync implements IMessage {
 		buf.writeLong(id.getMostSignificantBits());
 		buf.writeLong(id.getLeastSignificantBits());
 		buf.writeInt(mode);
+		buf.writeInt(dimension);
 	}
 	
 	public static float getColorCycle(float ticks) {
@@ -73,6 +80,7 @@ public class MessageLightDrifterSync implements IMessage {
 			if (player != null) {
 				if (!message.enable) {
 					player.setPositionAndUpdate(message.x, message.y, message.z);
+					player.changeDimension(message.dimension);
 					if (player == mc.player) {
 						SpectatorHandler.setReal();
 					}
@@ -80,6 +88,7 @@ public class MessageLightDrifterSync implements IMessage {
 				} else {
 					player.noClip = true;
 					player.setPositionAndUpdate(message.x, message.y, message.z);
+					player.changeDimension(message.dimension);
 				}
 				
 				player.capabilities.isFlying = message.enable;

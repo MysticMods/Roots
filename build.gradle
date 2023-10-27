@@ -8,13 +8,14 @@ buildscript {
         }
     }
     dependencies {
-        classpath("net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT") {
+        classpath("net.minecraftforge.gradle:ForgeGradle:3.+") {
             changing = true
         }
     }
 }
 
-apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "net.minecraftforge.gradle"
+apply plugin: 'idea'
 
 version = "${minecraft_version}-${mod_version}"
 group = "epicsquid.roots"
@@ -25,48 +26,81 @@ compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
-runClient {
-    args "--username=Dev"
+minecraft {
+    mappings channel: 'stable', version: '39-1.12'
+    
+    accessTransformer = file('src/main/resources/META-INF/roots_at.cfg')
+    runs {
+        client {
+            workingDirectory project.file('run')
+            
+            args '--username=Dev'
+            
+            property 'forge.logging.markers', 'REGISTRIES'
+            
+            property 'forge.logging.console.level', 'debug'
+            
+            
+            mods {
+                roots {
+                    source sourceSets.main
+                }
+            }
+        }
+        
+        server {
+            workingDirectory project.file('run')
+            
+            property 'forge.logging.markers', 'REGISTRIES'
+            
+            property 'forge.logging.console.level', 'debug'
+            
+            mods {
+                roots {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
 }
 
-minecraft {
-    version = "1.12.2-14.23.5.2847"
-    runDir = "run"
-    
-    mappings = "stable_39"
-    
-    replace "@VERSION@", project.version
-    replaceIn "Roots.java"
-    replace "after:maindependencies", project.depends
-    
-    
-    // Scala: not even once
-    replace 'scala.actors.threadpool.Arrays', 'java.util.Arrays'
-}
 
 dependencies {
-    deobfCompile 'curse.maven:MysticalWorld-282940:3460961'
-    deobfCompile 'curse.maven:MysticalLib-277064:3483816'
-    deobfCompile 'curse.maven:SimpleHarvest-240783:2897811'
-    deobfCompile "vazkii.patchouli:Patchouli:${patchouli_version}"
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
     
-    compile("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}") {
-        exclude group: 'mezz.jei'
+    implementation fg.deobf('curse.maven:MysticalWorld-282940:3460961')
+    implementation fg.deobf('curse.maven:MysticalLib-277064:3483816')
+    compileOnly fg.deobf('curse.maven:JustEnoughResources-240630:2728585') {
+        exclude group: "mezz.jei"
+    }
+    implementation fg.deobf('curse.maven:SimpleHarvest-240783:2897811')
+    
+    implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
+    compileOnly fg.deobf("curse.maven:Baubles-227083:2518667")
+    
+    compileOnly fg.deobf("mezz.jei:jei_${minecraft_version}:${jei_version}")
+    
+    compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}")
+    compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-API:4.+")
+    compileOnly "CraftTweaker2:ZenScript:4.0.+"
+    
+    
+    compileOnly(fg.deobf("vazkii.botania:Botania:${botania_version}")) {
+        exclude group: "mezz.jei"
     }
     
+    compileOnly fg.deobf("curse.maven:Thaumcraft6-223628:2629023")
     
-    deobfProvided('curse.maven:JustEnoughResources-240630:2728585') {
-        exclude group: 'mezz.jei'
+    compileOnly(fg.deobf("curse.maven:Hwyla-253449:2568751")) {
+        exclude group: "mezz.jei"
     }
-    deobfProvided "curse.maven:Baubles-227083:2518667"
-    deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfProvided("vazkii.botania:Botania:${botania_version}") {
-        exclude group: 'mezz.jei'
-    }
-    deobfProvided "curse.maven:Thaumcraft6-223628:2629023"
-    deobfProvided "curse.maven:Hwyla-253449:2568751"
-    deobfProvided  "mcjty.theoneprobe:TheOneProbe-${top_version}"
+    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${top_version}")
 }
+
+project.configurations.all {
+    exclude(group: 'net.minecraftforge', module: 'mergetool')
+}
+
 
 repositories {
     mavenLocal()
@@ -105,21 +139,27 @@ repositories {
 
 jar {
     manifest {
-        attributes 'FMLAT': 'roots_at.cfg'
+        attributes(
+                'FMLAT': 'roots_at.cfg',
+        )
     }
+    exclude("net/**")
 }
+
 
 processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    inputs.property "mcversion", project.minecraft_version
+    
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
         
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.version, 'mcversion':project.minecraft_version
     }
     
     // copy everything else except the mcmod.info
@@ -127,20 +167,19 @@ processResources {
         exclude 'mcmod.info'
     }
     
-    rename '(.+_at.cfg)', 'META-INF/$1'
+    rename '(.+_at.cfg)', '../$1' // it keeps putting it in /META-INF/META-INF/roots_at.cfg fsr?????
 }
+
 
 idea {
     module {
-        inheritOutputDirs = true
         downloadSources = false
         downloadJavadoc = true
     }
 }
-/*
 sourceSets {
     main.output.resourcesDir = main.java.outputDir
-}*/
+}
 
 task generateModpackZip(type: Exec, group: 'buildruns') {
     commandLine("python3", "./python/CustomRunClient.py")

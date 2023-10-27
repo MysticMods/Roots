@@ -31,7 +31,7 @@ public class Roots {
 	public static final String NAME = "Roots";
 	public static final String VERSION = "@VERSION@";
 	
-	public static final String DEPENDENCIES = "after:maindependencies";
+	public static final String DEPENDENCIES = "required-before:mysticallib@[1.12.2-1.13,);required-before:mysticalworld@[1.12.2-1.11,);before:harvest;before:chisel;before:endercore;required:patchouli";
 	
 	public static final GuiHandler GUI_HANDLER = new GuiHandler();
 	
@@ -64,13 +64,14 @@ public class Roots {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		logger = event.getModLog();
 		CONTAINER = Loader.instance().activeModContainer();
 		// We load before MysticalLib so we can't use an annotation or it will crash
 		MinecraftForge.EVENT_BUS.register(RegistryManager.class);
 		CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
 		CapabilityManager.INSTANCE.register(LifeEssenceCapability.class, new LifeEssenceCapabilityStorage(), LifeEssenceCapability::new);
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
-		logger = event.getModLog();
+		
 		ModDamage.init();
 		proxy.preInit(event);
 	}
