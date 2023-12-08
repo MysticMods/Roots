@@ -125,7 +125,7 @@ public class SpellAugment extends SpellBase {
 				player.noClip = true;
 				player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, drifter_duration);
 				player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
-				player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
+				player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY + 1);
 				player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
 				player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_DIMENSION_ID, player.dimension);
 				if (player.capabilities.isCreativeMode) {
@@ -135,7 +135,7 @@ public class SpellAugment extends SpellBase {
 				}
 				player.setGameType(GameType.SPECTATOR);
 				PacketHandler.sendToAllTracking(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID(), player.dimension), player);
-				PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ), player);
+				PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY, player.posZ), player);
 			} else {
 				SpectatorHandler.setFake();
 			}
