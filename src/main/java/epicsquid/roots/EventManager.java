@@ -236,9 +236,9 @@ public class EventManager {
 			event.setCanceled(true);
 		}
 		final NBTTagCompound entityData = event.getEntity().getEntityData();
-		if (entity instanceof EntityPlayer
-		    && entityData.hasKey(Constants.LIGHT_DRIFTER_TAG)
-		    && !event.getEntity().getEntityWorld().isRemote)
+		if (!event.getEntity().getEntityWorld().isRemote
+		    && entity instanceof EntityPlayer
+		    && entityData.hasKey(Constants.LIGHT_DRIFTER_TAG))
 		{
 			entityData.setInteger(Constants.LIGHT_DRIFTER_TAG, entityData.getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);
 			
@@ -265,7 +265,7 @@ public class EventManager {
 		int startingDimension = entityData.getInteger(Constants.LIGHT_DRIFTER_DIMENSION_ID);
 		if (player.dimension != startingDimension) // Change dimension only if it's different than where we left
 			player.changeDimension(startingDimension, (world, playerIn, yaw) -> playerIn.moveToBlockPosAndAngles(
-					new BlockPos(entityData.getDouble(Constants.LIGHT_DRIFTER_X), entityData.getDouble(Constants.LIGHT_DRIFTER_Y) + 0.1f, entityData.getDouble(Constants.LIGHT_DRIFTER_Z)),
+					new BlockPos(entityData.getDouble(Constants.LIGHT_DRIFTER_X), entityData.getDouble(Constants.LIGHT_DRIFTER_Y), entityData.getDouble(Constants.LIGHT_DRIFTER_Z)),
 					yaw, playerIn.rotationPitch));
 		else
 			player.setPositionAndUpdate(player.posX, player.posY, player.posZ); // Otherwise handled by changeDimension
@@ -274,7 +274,7 @@ public class EventManager {
 		player.extinguish();
 //				PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
 		
-		//TODO Is this necessary to sync, or do moveToBlockPosAndAngles and setPosition sync it to the client already?
+		//TODO Is this necessary to be able to sync, or do moveToBlockPosAndAngles and setPosition sync it to the client already?
 		// I guess there's no harm in leaving it...
 		PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, entityData.getInteger(Constants.LIGHT_DRIFTER_MODE), player.dimension), player);
 		
