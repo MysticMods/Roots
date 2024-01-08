@@ -4,17 +4,15 @@ buildscript {
         mavenCentral()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = 'https://maven.minecraftforge.net'
         }
     }
     dependencies {
-        classpath("net.minecraftforge.gradle:ForgeGradle:3.+") {
-            changing = true
-        }
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '2.3-SNAPSHOT', changing: true
     }
 }
 
-apply plugin: "net.minecraftforge.gradle"
+apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'idea'
 
 version = "${minecraft_version}-${mod_version}"
@@ -27,79 +25,53 @@ compileJava {
 }
 
 minecraft {
-    mappings channel: 'stable', version: '39-1.12'
+    version = "1.12.2-14.23.5.2847"
+    runDir = "run"
     
-    accessTransformer = file('src/main/resources/META-INF/roots_at.cfg')
-    runs {
-        client {
-            workingDirectory project.file('run')
-            
-            args '--username=Dev'
-            
-            property 'forge.logging.markers', 'REGISTRIES'
-            
-            property 'forge.logging.console.level', 'debug'
-            
-            
-            mods {
-                roots {
-                    source sourceSets.main
-                }
-            }
-        }
-        
-        server {
-            workingDirectory project.file('run')
-            
-            property 'forge.logging.markers', 'REGISTRIES'
-            
-            property 'forge.logging.console.level', 'debug'
-            
-            mods {
-                roots {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+    mappings = "stable_39"
+    
+    //noinspection GroovyAssignabilityCheck
+    replace "@VERSION@", project.version
+//		replaceIn "DJ2Addons.java"
 }
-
+runClient {
+    args "--username=Dev"//, "--mixin.config=mixins.dj2addons.init.json"
+    jvmArgs "-Dforge.logging.console.level=debug"
+}
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-    
-    implementation fg.deobf('curse.maven:MysticalWorld-282940:3460961')
-    implementation fg.deobf('curse.maven:MysticalLib-277064:3483816')
-    compileOnly fg.deobf('curse.maven:JustEnoughResources-240630:2728585') {
+    deobfCompile('curse.maven:MysticalWorld-282940:3460961')
+    deobfCompile('curse.maven:MysticalLib-277064:3483816')
+    deobfProvided('curse.maven:JustEnoughResources-240630:2728585') {
         exclude group: "mezz.jei"
     }
-    implementation fg.deobf('curse.maven:SimpleHarvest-240783:2897811')
+    deobfCompile('curse.maven:SimpleHarvest-240783:2897811')
     
     implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
-    compileOnly fg.deobf("curse.maven:Baubles-227083:2518667")
+    deobfProvided("curse.maven:Baubles-227083:2518667")
     
-    compileOnly fg.deobf("mezz.jei:jei_${minecraft_version}:${jei_version}")
+    deobfProvided("mezz.jei:jei_${minecraft_version}:${jei_version}")
     
-    compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}")
-    compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-API:4.+")
-    compileOnly "CraftTweaker2:ZenScript:4.0.+"
+    deobfProvided("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}")
+    deobfProvided("CraftTweaker2:CraftTweaker2-API:4.+")
+    provided "CraftTweaker2:ZenScript:4.0.+"
     
     
-    compileOnly(fg.deobf("vazkii.botania:Botania:${botania_version}")) {
+    deobfProvided("vazkii.botania:Botania:${botania_version}") {
         exclude group: "mezz.jei"
     }
     
-    compileOnly fg.deobf("curse.maven:Thaumcraft6-223628:2629023")
+    deobfProvided("curse.maven:Thaumcraft6-223628:2629023")
     
-    compileOnly(fg.deobf("curse.maven:Hwyla-253449:2568751")) {
+    deobfProvided("curse.maven:Hwyla-253449:2568751") {
         exclude group: "mezz.jei"
     }
-    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${top_version}")
+    deobfProvided("mcjty.theoneprobe:TheOneProbe-${top_version}")
 }
 
-project.configurations.configureEach {
-    exclude(group: 'net.minecraftforge', module: 'mergetool')
-}
+//project.configurations.configureEach {
+//    exclude(group: 'net.minecraftforge', module: 'mergetool')
+//}
 
 
 repositories {
@@ -137,15 +109,15 @@ repositories {
     }
 }
 
-jar {
+tasks.jar.configure {
     manifest {
         attributes(
                 'FMLAT': 'roots_at.cfg',
         )
     }
     exclude("net/minecraftforge/**")
+    finalizedBy('reobfJar')
 }
-
 
 processResources {
     // this will ensure that this task is redone when the versions change.
@@ -167,7 +139,7 @@ processResources {
         exclude 'mcmod.info'
     }
     
-    rename '(.+_at.cfg)', '../$1' // it keeps putting it in /META-INF/META-INF/roots_at.cfg fsr?????
+//    rename '(.+_at.cfg)', '../$1' // it keeps putting it in /META-INF/META-INF/roots_at.cfg fsr?????
 }
 
 
@@ -177,10 +149,11 @@ idea {
         downloadJavadoc = true
     }
 }
-sourceSets {
-    main.output.resourcesDir = main.java.outputDir
-}
+//sourceSets {
+//    main.output.resourcesDir = main.java.outputDir
+//}
 
 task copyTestZS(type: Copy) {
     from "./" include "Test.zs" into "./run/scripts"
 }
+
