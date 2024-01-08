@@ -34,8 +34,12 @@ minecraft {
     replace "@VERSION@", project.version
 //		replaceIn "DJ2Addons.java"
 }
+
 runClient {
     args "--username=Dev"//, "--mixin.config=mixins.dj2addons.init.json"
+    jvmArgs "-Dforge.logging.console.level=debug"
+}
+runServer {
     jvmArgs "-Dforge.logging.console.level=debug"
 }
 
