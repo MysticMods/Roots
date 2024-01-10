@@ -141,7 +141,12 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
 	
 	public List<LibrarySpellInfo> asList() {
 		if (list == null) {
-			list = spells.values().stream().filter(o -> o.getSpell() != null).filter(LibrarySpellInfo::isObtained).sorted(Comparator.comparing(a -> a.getSpell() == null ? "" : a.getSpell().getRegistryName().getPath())).collect(Collectors.toList());
+			list = spells.values()
+			             .stream()
+			             .filter(o -> o.getSpell() != null)
+			             .filter(LibrarySpellInfo::isObtained)
+			             .sorted(Comparator.comparing(a -> a.getSpell() == null ? "" : a.getSpell().getRegistryName().getPath()))
+			             .collect(Collectors.toList());
 		}
 		return list;
 	}

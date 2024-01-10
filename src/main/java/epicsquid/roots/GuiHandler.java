@@ -67,13 +67,14 @@ public class GuiHandler implements IGuiHandler {
 	@Nullable
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity te;
 		switch (id) {
 			case POUCH_ID:
 				return new ContainerPouch(player, true);
 			case QUIVER_ID:
 				return new ContainerQuiver(player);
 			case CRAFTER_ID:
-				TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
+				te = world.getTileEntity(new BlockPos(x, y, z));
 				if (te instanceof TileEntityFeyCrafter) {
 					return new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te);
 				} else {
@@ -124,7 +125,7 @@ public class GuiHandler implements IGuiHandler {
 			case LIBRARY_ID:
 				Supplier<ItemStack> staff = getStaff(player);
 				if (staff != null) {
-					return new GuiLibrary(new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player)));
+					return new GuiLibrary(new ContainerLibrary(player, staff, null));
 				}
 				break;
 		}

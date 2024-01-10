@@ -14,13 +14,11 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageGeasFX;
 import epicsquid.roots.network.fx.MessageGeasRingFX;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.spell.SpellAugment;
 import epicsquid.roots.spell.SpellPetalShell;
 import epicsquid.roots.spell.SpellStormCloud;
-import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -35,9 +33,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -238,12 +234,12 @@ public class EventManager {
 		final NBTTagCompound entityData = event.getEntity().getEntityData();
 		if (!event.getEntity().getEntityWorld().isRemote
 		    && entity instanceof EntityPlayer
-		    && entityData.hasKey(Constants.LIGHT_DRIFTER_TAG))
+		    && entityData.hasKey(SpellAugment.LIGHT_DRIFTER_TAG))
 		{
-			entityData.setInteger(Constants.LIGHT_DRIFTER_TAG, entityData.getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);
+			entityData.setInteger(SpellAugment.LIGHT_DRIFTER_TAG, entityData.getInteger(SpellAugment.LIGHT_DRIFTER_TAG) - 1);
 			
 			// When spell ends:
-			if (entityData.getInteger(Constants.LIGHT_DRIFTER_TAG) <= 0) {
+			if (entityData.getInteger(SpellAugment.LIGHT_DRIFTER_TAG) <= 0) {
 				onEndLightDrifter(event, entityData);
 			}
 		}
@@ -262,28 +258,30 @@ public class EventManager {
 		player.noClip = false;
 		player.capabilities.isFlying = false;
 		
-		int startingDimension = entityData.getInteger(Constants.LIGHT_DRIFTER_DIMENSION_ID);
+		int startingDimension = entityData.getInteger(SpellAugment.LIGHT_DRIFTER_DIMENSION_ID);
 		if (player.dimension != startingDimension) // Change dimension only if it's different than where we left
 			player.changeDimension(startingDimension, (world, playerIn, yaw) -> playerIn.moveToBlockPosAndAngles(
-					new BlockPos(entityData.getDouble(Constants.LIGHT_DRIFTER_X), entityData.getDouble(Constants.LIGHT_DRIFTER_Y), entityData.getDouble(Constants.LIGHT_DRIFTER_Z)),
+					new BlockPos(entityData.getDouble(SpellAugment.LIGHT_DRIFTER_X), entityData.getDouble(SpellAugment.LIGHT_DRIFTER_Y), entityData.getDouble(
+							SpellAugment.LIGHT_DRIFTER_Z)),
 					yaw, playerIn.rotationPitch));
 		else
 			player.setPositionAndUpdate(player.posX, player.posY, player.posZ); // Otherwise handled by changeDimension
 		
-		player.setGameType(GameType.getByID(entityData.getInteger(Constants.LIGHT_DRIFTER_MODE)));
+		player.setGameType(GameType.getByID(entityData.getInteger(SpellAugment.LIGHT_DRIFTER_MODE)));
 		player.extinguish();
 //				PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
 		
 		//TODO Is this necessary to be able to sync, or do moveToBlockPosAndAngles and setPosition sync it to the client already?
 		// I guess there's no harm in leaving it...
-		PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, entityData.getInteger(Constants.LIGHT_DRIFTER_MODE), player.dimension), player);
+		PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, entityData.getInteger(
+				SpellAugment.LIGHT_DRIFTER_MODE), player.dimension), player);
 		
-		entityData.removeTag(Constants.LIGHT_DRIFTER_TAG);
-		entityData.removeTag(Constants.LIGHT_DRIFTER_X);
-		entityData.removeTag(Constants.LIGHT_DRIFTER_Y);
-		entityData.removeTag(Constants.LIGHT_DRIFTER_Z);
-		entityData.removeTag(Constants.LIGHT_DRIFTER_MODE);
-		entityData.removeTag(Constants.LIGHT_DRIFTER_DIMENSION_ID);
+		entityData.removeTag(SpellAugment.LIGHT_DRIFTER_TAG);
+		entityData.removeTag(SpellAugment.LIGHT_DRIFTER_X);
+		entityData.removeTag(SpellAugment.LIGHT_DRIFTER_Y);
+		entityData.removeTag(SpellAugment.LIGHT_DRIFTER_Z);
+		entityData.removeTag(SpellAugment.LIGHT_DRIFTER_MODE);
+		entityData.removeTag(SpellAugment.LIGHT_DRIFTER_DIMENSION_ID);
 		
 		if (SpellAugment.instance.shouldPlaySound()) {
 			player.world.playSound(null, player.getPosition(), ModSounds.Spells.LIGHT_DRIFTER_EFFECT_END, SoundCategory.PLAYERS, SpellAugment.instance.getSoundVolume(), 1);
