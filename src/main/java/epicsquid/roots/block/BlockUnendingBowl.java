@@ -19,6 +19,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
+
+@SuppressWarnings("deprecation")
 public class BlockUnendingBowl extends BlockTEBase {
 	
 	public BlockUnendingBowl(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {

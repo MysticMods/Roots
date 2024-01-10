@@ -182,12 +182,7 @@ public class StateUtil {
 	}
 	
 	/**
-	 * Returns true if all of the state's values contained in stateWithValues are present and
-	 * are equal in the stateBeingChecked.
-	 *
-	 * @param stateBeingChecked
-	 * @param stateWithValues
-	 * @return
+	 * @return true if all of the state's values contained in stateWithValues are present and are equal in the stateBeingChecked, false otherwise.
 	 */
 	public static boolean stateContainsValues(IBlockState stateBeingChecked, IBlockState stateWithValues) {
 		// If they aren't the same block then they aren't the same state

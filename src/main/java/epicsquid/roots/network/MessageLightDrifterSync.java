@@ -80,7 +80,7 @@ public class MessageLightDrifterSync implements IMessage {
 			if (player != null) {
 				if (!message.enable) {
 					player.setPositionAndUpdate(message.x, message.y, message.z);
-					player.changeDimension(message.dimension);
+//					player.changeDimension(message.dimension);
 					if (player == mc.player) {
 						SpectatorHandler.setReal();
 					}
@@ -88,7 +88,7 @@ public class MessageLightDrifterSync implements IMessage {
 				} else {
 					player.noClip = true;
 					player.setPositionAndUpdate(message.x, message.y, message.z);
-					player.changeDimension(message.dimension);
+//					player.changeDimension(message.dimension);
 				}
 				
 				player.capabilities.isFlying = message.enable;

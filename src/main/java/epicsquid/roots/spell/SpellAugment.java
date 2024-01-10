@@ -12,7 +12,6 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.properties.Property;
-import epicsquid.roots.util.Constants;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -73,6 +72,13 @@ public class SpellAugment extends SpellBase {
 	public static Modifier HASTE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "haste"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.85)));
 	public static Modifier SECOND_WIND = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "second_wind"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.125)));
 	
+	public static final String LIGHT_DRIFTER_TAG = Roots.MODID + ":light_drifter";
+	public static final String LIGHT_DRIFTER_X = Roots.MODID + ":light_drifter_x";
+	public static final String LIGHT_DRIFTER_Y = Roots.MODID + ":light_drifter_y";
+	public static final String LIGHT_DRIFTER_Z = Roots.MODID + ":light_drifter_z";
+	public static final String LIGHT_DRIFTER_DIMENSION_ID = Roots.MODID + ":light_drifter_dim";
+	public static final String LIGHT_DRIFTER_MODE = Roots.MODID + ":light_drifter_mode";
+	
 	static {
 		LIGHT_DRIFTER.addConflicts(SLOW_FALL, MAGNETISM);
 	}
@@ -123,19 +129,19 @@ public class SpellAugment extends SpellBase {
 				player.capabilities.disableDamage = true;
 				player.capabilities.allowFlying = true;
 				player.noClip = true;
-				player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, drifter_duration);
-				player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
-				player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
-				player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
-				player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_DIMENSION_ID, player.dimension);
+				player.getEntityData().setInteger(LIGHT_DRIFTER_TAG, drifter_duration);
+				player.getEntityData().setDouble(LIGHT_DRIFTER_X, player.posX);
+				player.getEntityData().setDouble(LIGHT_DRIFTER_Y, player.posY + 0.5);
+				player.getEntityData().setDouble(LIGHT_DRIFTER_Z, player.posZ);
+				player.getEntityData().setInteger(LIGHT_DRIFTER_DIMENSION_ID, player.dimension);
 				if (player.capabilities.isCreativeMode) {
-					player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_MODE, GameType.CREATIVE.getID());
+					player.getEntityData().setInteger(LIGHT_DRIFTER_MODE, GameType.CREATIVE.getID());
 				} else {
-					player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
+					player.getEntityData().setInteger(LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
 				}
 				player.setGameType(GameType.SPECTATOR);
 				PacketHandler.sendToAllTracking(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID(), player.dimension), player);
-				PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ), player);
+				PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY, player.posZ), player);
 			} else {
 				SpectatorHandler.setFake();
 			}

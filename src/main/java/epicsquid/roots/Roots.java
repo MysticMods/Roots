@@ -24,12 +24,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = Roots.DEPENDENCIES)
+@Mod(modid = Roots.MODID, version = Tags.VERSION, name = Roots.NAME, dependencies = Roots.DEPENDENCIES)
 public class Roots {
 	public static final String MODID = "roots";
 	public static final String DOMAIN = "roots";
 	public static final String NAME = "Roots";
-	public static final String VERSION = "@VERSION@";
 	
 	public static final String DEPENDENCIES = "required-before:mysticallib@[1.12.2-1.13,);required-before:mysticalworld@[1.12.2-1.11,);before:harvest;before:chisel;before:endercore;required:patchouli";
 	
