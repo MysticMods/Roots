@@ -102,7 +102,7 @@ dependencies {
     
     compileOnly(rfg.deobf("mezz.jei:jei_${property("minecraft_version")}:${property("jei_version")}"))
     
-    compileOnly(rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${property("ct_version")}"))
+    implementation(rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${property("ct_version")}"))
     compileOnly(rfg.deobf("CraftTweaker2:CraftTweaker2-API:4.+"))
     compileOnly("CraftTweaker2:ZenScript:4.0.+")
     
