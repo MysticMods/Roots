@@ -30,10 +30,10 @@ minecraft {
     username.set("Developer")
     
 //    // Generate a field named VERSION with the mod version in the injected Tags class
-//    injectedTags.put("VERSION", project.version)
+    injectedTags.put("VERSION", project.version)
     
     // If you need the old replaceIn mechanism, prefer the injectTags task because it doesn't inject a javac plugin.
-    // tagReplacementFiles.add("RfgExampleMod.java")
+//     tagReplacementFiles.add("Roots.java")
     
     // Enable assertions in the mod's package when running the client or server
     extraRunJvmArguments.add("-ea:${project.group}")
@@ -42,7 +42,7 @@ minecraft {
     // extraTweakClasses.add("org.spongepowered.asm.launch.MixinTweaker")
     
     // Exclude some Maven dependency groups from being automatically included in the reobfuscated runs
-    groupsToExcludeFromAutoReobfMapping.addAll("com.diffplug", "com.diffplug.durian", "net.industrial-craft")
+//    groupsToExcludeFromAutoReobfMapping.addAll("com.diffplug", "com.diffplug.durian", "net.industrial-craft")
 }
 
 repositories {
@@ -77,6 +77,10 @@ repositories {
     maven {
         name = "Tterrag Maven"
         url = uri("https://maven.tterrag.com/")
+    }
+    maven {
+        name = "GTNH Maven"
+        url = uri("https://nexus.gtnewhorizons.com/repository/public/")
     }
 }
 
@@ -129,9 +133,9 @@ tasks.processResources.configure {
 }
 
 //// Generates a class named rfg.examplemod.Tags with the mod version in it, you can find it at
-//tasks.injectTags.configure {
-//    outputClassName.set("${project.group}.Tags")
-//}
+tasks.injectTags.configure {
+    outputClassName.set("${project.group}.Tags")
+}
 
 tasks.javadoc.configure {
     (options as CoreJavadocOptions).addStringOption("Xdoclint:none", "-quiet")
@@ -139,7 +143,9 @@ tasks.javadoc.configure {
 
 
 // Add an access tranformer
-tasks.deobfuscateMergedJarToSrg.configure {accessTransformerFiles.from("src/main/resources/META-INF/roots_at.cfg")}
+tasks.deobfuscateMergedJarToSrg.configure {
+    accessTransformerFiles.from("src/main/resources/META-INF/roots_at.cfg")
+}
 
 
 idea {
@@ -207,6 +213,6 @@ idea {
     }
 }
 
-//tasks.processIdeaSettings.configure {
-//    dependsOn(tasks.injectTags)
-//}
+tasks.processIdeaSettings.configure {
+    dependsOn(tasks.injectTags)
+}
