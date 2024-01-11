@@ -108,16 +108,8 @@ public class ItemBlockElementalSoil extends ItemBlock {
 				}
 				
 				//Terran Soil Crafting
+				// Requirements: Needs to be under a certain height
 				if (entityItem.posY <= ElementalSoilConfig.EarthSoilMaxY && entityItem.ticksExisted >= ElementalSoilConfig.EarthSoilDelay) {
-					BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(entityItem.getPosition());
-					boolean found_roof = false;
-					for (int i = pos.getY(); i < Math.min(ElementalSoilConfig.EarthSoilMaxY + 20, world.getChunk(pos).getHeight(pos)); i++) {
-						pos.setY(i);
-						if (world.isAirBlock(pos)) continue;
-						found_roof = true;
-					}
-					if (!found_roof) return super.onEntityItemUpdate(entityItem);
-					
 					world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
 							new ItemStack(ModBlocks.elemental_soil_earth, count)));
 					PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 3), entityItem);
@@ -126,11 +118,8 @@ public class ItemBlockElementalSoil extends ItemBlock {
 				}
 				
 				//Aeros Soil Crafting
+				// Requirements: Needs to be over a certain height
 				if (entityItem.posY >= ElementalSoilConfig.AirSoilMinY && entityItem.ticksExisted >= ElementalSoilConfig.AirSoilDelay) {
-					BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(entityItem.getPosition());
-					int height = world.getChunk(pos).getHeight(pos);
-					if (pos.getY() < height) return super.onEntityItemUpdate(entityItem);
-					
 					world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
 							new ItemStack(ModBlocks.elemental_soil_air, count)));
 					PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 2), entityItem);
