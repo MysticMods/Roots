@@ -87,9 +87,9 @@ repositories {
 
 
 dependencies {
+    // since this build env isn't portable as a multi-project repo, we're just gonna do this:
     implementation(rfg.deobf("curse.maven:MysticalWorld-282940:3460961"))
     implementation(rfg.deobf("curse.maven:MysticalLib-277064:3483816"))
-    compileOnly(rfg.deobf("curse.maven:JustEnoughResources-240630:2728585"))
     
     compileOnly(rfg.deobf("curse.maven:JustEnoughResources-240630:2728585") as String) {
         exclude("mezz.jei")
@@ -98,19 +98,21 @@ dependencies {
     implementation(rfg.deobf("curse.maven:SimpleHarvest-240783:2897811"))
     
     implementation("vazkii.patchouli:Patchouli:${property("patchouli_version")}")
+    
     compileOnly(rfg.deobf("curse.maven:Baubles-227083:2518667"))
     
     compileOnly(rfg.deobf("mezz.jei:jei_${property("minecraft_version")}:${property("jei_version")}"))
     
-    implementation(rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${property("ct_version")}"))
-    compileOnly(rfg.deobf("CraftTweaker2:CraftTweaker2-API:4.+"))
-    compileOnly("CraftTweaker2:ZenScript:4.0.+")
+    implementation("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${property("ct_version")}")
+    compileOnly("CraftTweaker2:CraftTweaker2-API:${property("ct_version")}")
+    compileOnly("CraftTweaker2:ZenScript:${property("ct_version")}")
     
     
     compileOnly(rfg.deobf("vazkii.botania:Botania:${property("botania_version")}") as String){
         exclude("mezz.jei")
     }
     
+    // compiling against thaumcraft directly because the weird API-module-thing workaround used previously wasn't working
     compileOnly(rfg.deobf("curse.maven:Thaumcraft6-223628:2629023"))
     
     compileOnly(rfg.deobf("curse.maven:Hwyla-253449:2568751") as String) {
@@ -145,6 +147,15 @@ tasks.javadoc.configure {
 // Add an access tranformer
 tasks.deobfuscateMergedJarToSrg.configure {
     accessTransformerFiles.from("src/main/resources/META-INF/roots_at.cfg")
+}
+tasks.jar {
+    manifest {
+        attributes(
+            mapOf(
+                "FMLAT" to "roots_at.cfg"
+            )
+        )
+    }
 }
 
 
@@ -212,6 +223,8 @@ idea {
         }
     }
 }
+
+
 
 tasks.processIdeaSettings.configure {
     dependsOn(tasks.injectTags)
