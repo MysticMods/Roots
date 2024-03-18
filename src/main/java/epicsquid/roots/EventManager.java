@@ -261,11 +261,11 @@ public class EventManager {
 		int startingDimension = entityData.getInteger(SpellAugment.LIGHT_DRIFTER_DIMENSION_ID);
 		if (player.dimension != startingDimension) // Change dimension only if it's different than where we left
 			player.changeDimension(startingDimension, (world, playerIn, yaw) -> playerIn.moveToBlockPosAndAngles(
-					new BlockPos(entityData.getDouble(SpellAugment.LIGHT_DRIFTER_X), entityData.getDouble(SpellAugment.LIGHT_DRIFTER_Y), entityData.getDouble(
-							SpellAugment.LIGHT_DRIFTER_Z)),
+					new BlockPos(entityData.getDouble(SpellAugment.LIGHT_DRIFTER_X), entityData.getDouble(SpellAugment.LIGHT_DRIFTER_Y), entityData.getDouble(SpellAugment.LIGHT_DRIFTER_Z)),
 					yaw, playerIn.rotationPitch));
-		else
-			player.setPositionAndUpdate(player.posX, player.posY, player.posZ); // Otherwise handled by changeDimension
+		else {// Otherwise handled by changeDimension
+			player.setPositionAndUpdate(entityData.getDouble(SpellAugment.LIGHT_DRIFTER_X), entityData.getDouble(SpellAugment.LIGHT_DRIFTER_Y), entityData.getDouble(SpellAugment.LIGHT_DRIFTER_Z));
+		}
 		
 		player.setGameType(GameType.getByID(entityData.getInteger(SpellAugment.LIGHT_DRIFTER_MODE)));
 		player.extinguish();

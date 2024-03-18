@@ -107,6 +107,10 @@ public class SpellAugment extends SpellBase {
 		setCastSound(ModSounds.Spells.AUGMENT);
 	}
 	
+	/**
+	 * @see epicsquid.roots.EventManager#onEndLightDrifter(net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent, net.minecraft.nbt.NBTTagCompound) EventManager#onEndLightDrifter
+	 * @see epicsquid.roots.network.MessageLightDrifterSync.MessageHolder#handleMessage(epicsquid.roots.network.MessageLightDrifterSync, net.minecraftforge.fml.common.network.simpleimpl.MessageContext) MessageLightDrifterSync$MessageHandler#handleMessage
+	 */
 	@Override
 	public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
 		// TODO: Particle
