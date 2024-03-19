@@ -38,14 +38,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.Loader;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -54,7 +50,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class CommandRoots extends CommandBase {
 	public CommandRoots() {
@@ -131,29 +126,13 @@ public class CommandRoots extends CommandBase {
 				if (prop.getType().equals(SpellBase.EnumCastType.class)) {
 					continue;
 				}
-				spells.add("    Property: " + prop.getName());
-				if (prop.hasDefaultValue()) {
-					spells.add("        Default: " + prop.getDefaultValue());
-				}
-				spells.add("        Description: " + prop.getDescription());
-				spells.add("        Type: " + prop.getType().getSimpleName());
-				spells.add("        Value: " + table.get(prop));
-				spells.add("");
+				formatProperty(spells, table.get(prop), prop);
 			}
 		}
 		
-		Path path = Paths.get("roots.log");
-		try {
-			Files.write(path,
-			            spells,
-			            StandardCharsets.UTF_8,
-			            StandardOpenOption.APPEND,
-			            StandardOpenOption.CREATE);
-		} catch (IOException e) {
-			player.sendMessage(new TextComponentString("Unable to write roots.log"));
-			return;
+		if (writeToRootsLog(player, spells)) {
+			player.sendMessage(new TextComponentString("Spells written to roots.log"));
 		}
-		player.sendMessage(new TextComponentString("Spells written to roots.log"));
 	}
 	
 	private static void performRitualsCommand(EntityPlayerMP player) {
@@ -163,30 +142,14 @@ public class CommandRoots extends CommandBase {
 			PropertyTable table = ritual.getProperties();
 			rituals.add("Ritual: " + ritual.getName() + (ritual.isDisabled() ? " (disabled)" : ""));
 			for (Property<?> prop : table.getProperties()) {
-				rituals.add("    Property: " + prop.getName());
-				if (prop.hasDefaultValue()) {
-					rituals.add("        Default: " + prop.getDefaultValue());
-				}
-				rituals.add("        Description: " + prop.getDescription());
-				rituals.add("        Type: " + prop.getType().getSimpleName());
-				rituals.add("        Value: " + table.get(prop));
-				rituals.add("");
+				formatProperty(rituals, table, prop);
 			}
 		}
 		
-		Path path = Paths.get("roots.log");
-		try {
-			Files.write(path,
-			            rituals,
-			            StandardCharsets.UTF_8,
-			            StandardOpenOption.APPEND,
-			            StandardOpenOption.CREATE);
-		} catch (IOException e) {
-			player.sendMessage(new TextComponentString("Unable to write roots.log"));
-			Roots.logger.error("Unable to write to roots.log: ", e);
-			return;
+		if (writeToRootsLog(player, rituals)) {
+			player.sendMessage(new TextComponentString("Rituals written to roots.log"));
 		}
-		player.sendMessage(new TextComponentString("Rituals written to roots.log"));
+		
 	}
 	
 	private static void performGrowablesCommand(EntityPlayerMP player) {
@@ -196,20 +159,13 @@ public class CommandRoots extends CommandBase {
 				growablesList.add(block.getRegistryName().toString());
 			}
 		}
-		Path path = Paths.get("roots.log");
-		try {
-			Files.write(path,
-			            growablesList,
-			            StandardCharsets.UTF_8,
-			            StandardOpenOption.APPEND,
-			            StandardOpenOption.CREATE);
-		} catch (IOException e) {
-			player.sendMessage(new TextComponentString("Unable to write roots.log"));
-			return;
-		}
+		if (writeToRootsLog(player, growablesList)) return;
 		player.sendMessage(new TextComponentString("Growables written to roots.log"));
 	}
 	
+	/**
+	 * Gives the caller a guidebook.
+	 */
 	private static void performBookCommand(WorldServer world, EntityPlayerMP player) {
 		AdvancementManager manager = world.getAdvancementManager();
 		PlayerAdvancements advancements = player.getAdvancements();
@@ -270,14 +226,12 @@ public class CommandRoots extends CommandBase {
 			SpellLibraryData data = SpellLibraryRegistry.getData(player);
 			for (LibrarySpellInfo info : data) {
 				if (info.isObtained()) {
-					player.sendMessage(new TextComponentString("Obtained: " + info.getNonNullSpell()
-					                                                              .getRegistryName()));
+					player.sendMessage(new TextComponentString("Obtained: " + info.getNonNullSpell().getRegistryName()));
 				}
 			}
 			for (LibrarySpellInfo info : data) {
 				if (!info.isObtained()) {
-					player.sendMessage(new TextComponentString("Unobtained: " + info.getNonNullSpell()
-					                                                                .getRegistryName()));
+					player.sendMessage(new TextComponentString("Unobtained: " + info.getNonNullSpell().getRegistryName()));
 				}
 			}
 		}
@@ -291,17 +245,7 @@ public class CommandRoots extends CommandBase {
 				modifierList.add(modifier.getTranslationKey() + ".desc");
 			}
 		}
-		Path path = Paths.get("roots.log");
-		try {
-			Files.write(path,
-			            modifierList,
-			            StandardCharsets.UTF_8,
-			            StandardOpenOption.APPEND,
-			            StandardOpenOption.CREATE);
-		} catch (IOException e) {
-			player.sendMessage(new TextComponentString("Unable to write roots.log"));
-			return;
-		}
+		if (writeToRootsLog(player, modifierList)) return;
 		player.sendMessage(new TextComponentString("Modifiers written to roots.log"));
 	}
 	
@@ -317,6 +261,32 @@ public class CommandRoots extends CommandBase {
 			parent.setDead();
 			slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
 		}
+	}
+	
+	private static void formatProperty(List<String> spells, Object value, Property<?> prop) {
+		spells.add("    Property: " + prop.getName());
+		if (prop.hasDefaultValue()) {
+			spells.add("        Default: " + prop.getDefaultValue());
+		}
+		spells.add("        Description: " + prop.getDescription());
+		spells.add("        Type: " + prop.getType().getSimpleName());
+		spells.add("        Value: " + value);
+		spells.add("");
+	}
+	
+	private static boolean writeToRootsLog(EntityPlayerMP player, List<String> stringsToWrite) {
+		Path path = Paths.get("roots.log");
+		try {
+			Files.write(path,
+			            stringsToWrite,
+			            StandardCharsets.UTF_8,
+			            StandardOpenOption.APPEND,
+			            StandardOpenOption.CREATE);
+		} catch (IOException e) {
+			player.sendMessage(new TextComponentString("Unable to write to roots.log"));
+			return true;
+		}
+		return false;
 	}
 	
 	private static boolean isModApplicable(String qualifiedClassName, String name) {

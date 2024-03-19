@@ -18,6 +18,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
+
 public class SpellUtil {
 	public static boolean isValidStaff(ItemStack stack) {
 		return stack.getItem() == ModItems.staff || stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.spell_icon;
@@ -26,6 +29,33 @@ public class SpellUtil {
 	public static boolean isStaff(ItemStack stack) {
 		return stack.getItem() == ModItems.staff;
 	}
+	
+	@Nullable
+	public static Supplier<ItemStack> getHeldStaff(EntityPlayer player) {
+		ItemStack staff = player.getHeldItemMainhand();
+		if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
+			return player::getHeldItemMainhand;
+		}
+		
+		staff = player.getHeldItemOffhand();
+		if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
+			return player::getHeldItemOffhand;
+		}
+
+/*    IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+    if (handler != null) {
+      for (int i = 0; i < handler.getSlots(); i++) {
+        staff = handler.getStackInSlot(i);
+        if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
+          final int x = i;
+          return () -> handler.getStackInSlot(x);
+        }
+      }
+    }*/
+		
+		return null;
+	}
+	
 	
 	public static boolean isValidDust(ItemStack stack) {
 		return stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.spell_icon;
