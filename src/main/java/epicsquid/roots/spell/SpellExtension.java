@@ -183,6 +183,9 @@ public class SpellExtension extends SpellBase {
 		return !setBlock.isEmpty();
 	}
 	
+	/**
+	 * @see epicsquid.roots.event.SneakHandler#onPlayerVisibility(net.minecraftforge.event.entity.player.PlayerEvent.Visibility) Nondetection: SneakHandler#onPlayerVisibility
+	 */
 	@Override
 	public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
 		caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, night_vision, 0, false, false));

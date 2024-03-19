@@ -273,8 +273,7 @@ public class EventManager {
 		
 		//TODO Is this necessary to be able to sync, or do moveToBlockPosAndAngles and setPosition sync it to the client already?
 		// I guess there's no harm in leaving it...
-		PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, entityData.getInteger(
-				SpellAugment.LIGHT_DRIFTER_MODE), player.dimension), player);
+		PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, entityData.getInteger(SpellAugment.LIGHT_DRIFTER_MODE), player.dimension), player);
 		
 		entityData.removeTag(SpellAugment.LIGHT_DRIFTER_TAG);
 		entityData.removeTag(SpellAugment.LIGHT_DRIFTER_X);

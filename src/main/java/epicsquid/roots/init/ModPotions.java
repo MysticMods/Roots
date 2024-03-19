@@ -9,6 +9,9 @@ public class ModPotions {
 	public static Potion storm_cloud;
 	public static Potion geas;
 	public static Potion time_stop;
+	/**
+	 * @see epicsquid.roots.event.SneakHandler#onPlayerVisibility(net.minecraftforge.event.entity.player.PlayerEvent.Visibility) SneakHandler#onPlayerVisibility
+	 */
 	public static Potion nondetection;
 	public static Potion petal_shell;
 	public static Potion danger_sense;

@@ -8,6 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * @see epicsquid.roots.event.SneakHandler#onPlayerVisibility(net.minecraftforge.event.entity.player.PlayerEvent.Visibility) SneakHandler#onPlayerVisibility
+ */
 public class PotionNondetection extends Potion {
 	private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 	
