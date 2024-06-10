@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.advancements;
 
 import com.google.gson.JsonElement;
@@ -61,4 +62,4 @@ public class KillPredicate implements IGenericPredicate<LivingDeathEvent> {
   public KillPredicate deserialize(@Nullable JsonElement element) {
     return new KillPredicate();
   }
-}
+}*/

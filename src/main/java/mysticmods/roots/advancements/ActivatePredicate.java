@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.advancements;
 
 import com.google.gson.JsonElement;
@@ -17,3 +18,4 @@ public class ActivatePredicate implements IGenericPredicate<Void> {
     return new ActivatePredicate();
   }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.advancements;
 
 import com.google.gson.JsonElement;
@@ -44,3 +45,4 @@ public class CraftingPredicate implements IGenericPredicate<GroveRecipe> {
     return new CraftingPredicate(null);
   }
 }
+*/

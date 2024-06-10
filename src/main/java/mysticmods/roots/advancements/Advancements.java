@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.advancements;
 
 import mysticmods.roots.api.RootsAPI;
@@ -21,3 +22,4 @@ public class Advancements {
     CRAFTING_TRIGGER = CriteriaTriggers.register(new GenericTrigger<>(CRAFTING_ID, new CraftingPredicate()));
   }
 }
+*/

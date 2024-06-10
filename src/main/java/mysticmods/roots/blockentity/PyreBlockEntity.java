@@ -36,10 +36,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.items.ItemStackHandler;
-import noobanidus.libs.noobutil.util.ItemUtil;
-import noobanidus.libs.particleslib.client.particle.Particles;
-import noobanidus.libs.particleslib.init.ModParticles;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

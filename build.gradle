@@ -1,11 +1,12 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply from: 'gradle/property_helper.gradle'
 apply from: 'gradle/property_loader.gradle'
+apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 // Load mod related properties
 ext.modName = getRequiredString('mod_name')
@@ -27,7 +28,7 @@ apply from: 'gradle/build_number.gradle'
 apply from: 'gradle/git_changelog.gradle'
 apply from: 'gradle/patreon.gradle'
 apply from: 'gradle/java.gradle'
-apply from: 'gradle/forge.gradle'
+apply from: 'gradle/neoforge.gradle'
 apply from: 'gradle/dependencies.gradle'
 apply from: 'gradle/aequivaleo.gradle'
 apply from: 'gradle/api.gradle'
@@ -38,18 +39,17 @@ apply from: 'gradle/dynamic_trees.gradle'
 apply from: 'gradle/geckolib.gradle'
 apply from: 'gradle/jade.gradle'
 apply from: 'gradle/jei.gradle'
+apply from: 'gradle/repurposed_structures.gradle'
 apply from: 'gradle/mana_and_artifice.gradle'
-apply from: 'gradle/commandstructures.gradle'
 apply from: 'gradle/mysticalworld.gradle'
 apply from: 'gradle/patchouli.gradle'
-apply from: 'gradle/particleslib.gradle'
 apply from: 'gradle/shadow.gradle'
 apply from: 'gradle/stables.gradle'
 apply from: 'gradle/top.gradle'
 apply from: 'gradle/minify_jsons.gradle'
 
 // Load publishing modules
-apply from: 'gradle/maven.gradle'
+apply from: 'gradle/maven2.gradle'
 apply from: 'gradle/signing.gradle'
 apply from: 'gradle/curseforge.gradle'
 apply from: 'gradle/version_checker.gradle'
