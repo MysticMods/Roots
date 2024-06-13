@@ -12,7 +12,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class DamageHandler {
   @SubscribeEvent
   public static void onDamageEvent(LivingHurtEvent event) {

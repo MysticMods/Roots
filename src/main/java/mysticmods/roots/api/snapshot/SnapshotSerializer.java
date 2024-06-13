@@ -1,7 +1,7 @@
 package mysticmods.roots.api.snapshot;
 
 import mysticmods.roots.api.registry.IKeyedRegistryEntry;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 
@@ -33,7 +33,7 @@ public abstract class SnapshotSerializer<T extends Snapshot> implements IKeyedRe
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.SNAPSHOT_SERIALIZER_REGISTRY.get().getKey(this);
+    return RootsRegistries.SNAPSHOT_SERIALIZER_REGISTRY.get().getKey(this);
   }
 
   public T cast (Snapshot snapshot) {

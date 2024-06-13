@@ -1,7 +1,7 @@
 package mysticmods.roots.api.property;
 
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
@@ -31,7 +31,7 @@ public class SpellProperty<V> extends Property<V> implements IDescribedRegistryE
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.SPELL_PROPERTY_REGISTRY.get().getKey(this);
+    return RootsRegistries.SPELL_PROPERTY_REGISTRY.get().getKey(this);
   }
 
   @Override

@@ -8,7 +8,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid= RootsAPI.MODID)
+@EventBusSubscriber(modid= RootsAPI.MODID)
 public class TooltipHandler {
   @SubscribeEvent
   public static void onItemTooltip (ItemTooltipEvent event) {

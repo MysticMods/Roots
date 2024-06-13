@@ -4,7 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -120,7 +120,7 @@ public class TokenLoader implements IGeometryLoader<TokenLoader.TokenGeometry> {
     }
   }
 
-  @Mod.EventBusSubscriber(modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+  @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
   public static class BakeEvents {
     @SubscribeEvent
     public static void onRegisterGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
@@ -129,10 +129,10 @@ public class TokenLoader implements IGeometryLoader<TokenLoader.TokenGeometry> {
 
     @SubscribeEvent
     public static void onModelRegister (ModelEvent.RegisterAdditional event) {
-      for (ResourceLocation ritual : Registries.RITUAL_REGISTRY.get().getKeys()) {
+      for (ResourceLocation ritual : RootsRegistries.RITUAL_REGISTRY.get().getKeys()) {
         event.register(new ResourceLocation(ritual.getNamespace(), "item/ritual_" + ritual.getPath()));
       }
-      for (ResourceLocation spell : Registries.SPELL_REGISTRY.get().getKeys()) {
+      for (ResourceLocation spell : RootsRegistries.SPELL_REGISTRY.get().getKeys()) {
         event.register(new ResourceLocation(spell.getNamespace(), "item/spell_" + spell.getPath()));
       }
     }

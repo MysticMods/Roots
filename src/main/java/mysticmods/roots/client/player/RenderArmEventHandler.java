@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Objects;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class RenderArmEventHandler {
   public static BeetleArmorModel chestModel;
 

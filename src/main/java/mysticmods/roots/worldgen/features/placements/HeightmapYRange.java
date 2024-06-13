@@ -1,6 +1,7 @@
 package mysticmods.roots.worldgen.features.placements;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.init.ModFeatures;
 import net.minecraft.core.BlockPos;
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
 
 public class HeightmapYRange extends PlacementModifier {
 
-    public static final Codec<HeightmapYRange> CODEC = RecordCodecBuilder.create((yRangeInstance) -> yRangeInstance.group(
+    public static final MapCodec<HeightmapYRange> CODEC = RecordCodecBuilder.mapCodec((yRangeInstance) -> yRangeInstance.group(
             HeightProvider.CODEC.fieldOf("height").forGetter((range) -> range.minHeightProvider),
             Heightmap.Types.CODEC.fieldOf("heightmapToUse").forGetter((range) -> range.heightmapToUse)
     ).apply(yRangeInstance, HeightmapYRange::new));

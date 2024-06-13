@@ -1,6 +1,5 @@
 package mysticmods.roots.init;
 
-import com.tterrag.registrate.providers.ProviderType;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.capability.Grant;
@@ -12,36 +11,28 @@ import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
-import net.minecraftforge.registries.RegistryObject;
-import noobanidus.libs.noobutil.ingredient.ExcludingIngredient;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-import static mysticmods.roots.Roots.REGISTRATE;
-
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ModRecipes {
-  private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, RootsAPI.MODID);
+  private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, RootsAPI.MODID);
   // TODO: Inline these ResourceLocations into Reference
-  public static RegistryObject<RecipeType<PyreRecipe>> PYRE = TYPES.register("pyre", () -> RecipeType.simple(RootsAPI.rl("pyre")));
-  public static RegistryObject<RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = TYPES.register("summon_creatures", () -> RecipeType.simple(RootsAPI.rl("summon_creatures")));
-  public static RegistryObject<RecipeType<MortarRecipe>> MORTAR = TYPES.register("mortar", () -> RecipeType.simple(RootsAPI.rl("mortar")));
-  public static RegistryObject<RecipeType<GroveRecipe>> GROVE = TYPES.register("grove", () -> RecipeType.simple(RootsAPI.rl("grove")));
-  public static RegistryObject<RecipeType<BarkRecipe>> BARK = TYPES.register("bark", () -> RecipeType.simple(RootsAPI.rl("bark")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<PyreRecipe>> PYRE = TYPES.register("pyre", () -> RecipeType.simple(RootsAPI.rl("pyre")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = TYPES.register("summon_creatures", () -> RecipeType.simple(RootsAPI.rl("summon_creatures")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<MortarRecipe>> MORTAR = TYPES.register("mortar", () -> RecipeType.simple(RootsAPI.rl("mortar")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<GroveRecipe>> GROVE = TYPES.register("grove", () -> RecipeType.simple(RootsAPI.rl("grove")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<BarkRecipe>> BARK = TYPES.register("bark", () -> RecipeType.simple(RootsAPI.rl("bark")));
 
-  public static RegistryObject<RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> RecipeType.simple(RootsAPI.rl("runic_block")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> RecipeType.simple(RootsAPI.rl("runic_block")));
 
   public static RegistryObject<RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));
 

@@ -1,14 +1,13 @@
 package mysticmods.roots.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import noobanidus.libs.noobutil.config.IBaseConfig;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
-public abstract class AbstractConfig implements IBaseConfig {
+public abstract class AbstractConfig {
   public AbstractConfig() {
     ConfigManager.CONFIGS.add(this);
   }
 
-  public abstract void apply(ForgeConfigSpec.Builder builder);
+  public abstract void apply(ModConfigSpec.Builder builder);
 
   public abstract void reset();
 }

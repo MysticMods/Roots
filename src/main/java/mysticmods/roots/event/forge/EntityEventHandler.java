@@ -21,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import noobanidus.libs.noobutil.util.ItemUtil;
 
-@Mod.EventBusSubscriber(modid= RootsAPI.MODID)
+@EventBusSubscriber(modid= RootsAPI.MODID)
 public class EntityEventHandler {
   @SubscribeEvent
   public static void onSquidMilked (PlayerInteractEvent.EntityInteract event) {

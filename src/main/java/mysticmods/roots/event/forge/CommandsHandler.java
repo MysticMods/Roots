@@ -6,7 +6,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class CommandsHandler {
   @SubscribeEvent
   public static void onCommands(RegisterCommandsEvent event) {

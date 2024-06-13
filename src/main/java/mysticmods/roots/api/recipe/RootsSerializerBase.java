@@ -8,7 +8,7 @@ import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -81,7 +81,7 @@ public abstract class RootsSerializerBase {
     if (GsonHelper.isArrayNode(pJson, "level_conditions")) {
       for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "level_conditions")) {
         ResourceLocation condName = new ResourceLocation(element.getAsString());
-        LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(condName);
+        LevelCondition condition = RootsRegistries.LEVEL_CONDITION_REGISTRY.get().getValue(condName);
         if (condition == null) {
           throw new JsonSyntaxException("Level condition '" + condName + "' does not exist!");
         }
@@ -91,7 +91,7 @@ public abstract class RootsSerializerBase {
     if (GsonHelper.isArrayNode(pJson, "player_conditions")) {
       for (JsonElement element : GsonHelper.getAsJsonArray(pJson, "player_conditions")) {
         ResourceLocation condName = new ResourceLocation(element.getAsString());
-        PlayerCondition condition = Registries.PLAYER_CONDITION_REGISTRY.get().getValue(condName);
+        PlayerCondition condition = RootsRegistries.PLAYER_CONDITION_REGISTRY.get().getValue(condName);
         if (condition == null) {
           throw new JsonSyntaxException("Player condition '" + condName + "' does not exist!");
         }
@@ -129,12 +129,12 @@ public abstract class RootsSerializerBase {
     }
     int levelConditionsSize = pBuffer.readVarInt();
     for (int i = 0; i < levelConditionsSize; i++) {
-      LevelCondition condition = Registries.LEVEL_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
+      LevelCondition condition = RootsRegistries.LEVEL_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
       recipeBase.getLevelConditions().add(condition);
     }
     int playerConditionsSize = pBuffer.readVarInt();
     for (int i = 0; i < playerConditionsSize; i++) {
-      PlayerCondition condition = Registries.PLAYER_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
+      PlayerCondition condition = RootsRegistries.PLAYER_CONDITION_REGISTRY.get().getValue(pBuffer.readVarInt());
       recipeBase.getPlayerConditions().add(condition);
     }
   }
@@ -164,11 +164,11 @@ public abstract class RootsSerializerBase {
 
     pBuffer.writeVarInt(recipe.getLevelConditions().size());
     for (LevelCondition condition : recipe.getLevelConditions()) {
-      pBuffer.writeVarInt(Registries.LEVEL_CONDITION_REGISTRY.get().getID(condition));
+      pBuffer.writeVarInt(RootsRegistries.LEVEL_CONDITION_REGISTRY.get().getID(condition));
     }
     pBuffer.writeVarInt(recipe.getPlayerConditions().size());
     for (PlayerCondition condition : recipe.getPlayerConditions()) {
-      pBuffer.writeVarInt(Registries.PLAYER_CONDITION_REGISTRY.get().getID(condition));
+      pBuffer.writeVarInt(RootsRegistries.PLAYER_CONDITION_REGISTRY.get().getID(condition));
     }
   }
 }

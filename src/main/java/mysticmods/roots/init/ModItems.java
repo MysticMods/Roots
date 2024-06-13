@@ -11,7 +11,7 @@ import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.recipe.WorldRecipe;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.copper.CopperArmorItem;
 import mysticmods.roots.item.living.*;
@@ -1171,10 +1171,10 @@ public class ModItems {
   public static final ItemEntry<TokenItem> TOKEN = REGISTRATE.item("token", TokenItem::new)
     .model((ctx, p) -> {
       ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
-      for (ResourceLocation ritual : Registries.RITUAL_REGISTRY.get().getKeys()) {
+      for (ResourceLocation ritual : RootsRegistries.RITUAL_REGISTRY.get().getKeys()) {
         p.getBuilder("ritual_" + ritual.getPath()).parent(generated).texture("layer0", p.modLoc("item/rituals/" + ritual.getPath()));
       }
-      for (ResourceLocation spell : Registries.SPELL_REGISTRY.get().getKeys()) {
+      for (ResourceLocation spell : RootsRegistries.SPELL_REGISTRY.get().getKeys()) {
         p.getBuilder("spell_" + spell.getPath()).parent(generated).texture("layer0", p.modLoc("item/spells/" + spell.getPath()));
       }
     })

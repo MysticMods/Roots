@@ -1,16 +1,17 @@
 package mysticmods.roots.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class HatConfig extends AbstractConfig {
-  protected ForgeConfigSpec.IntValue configAntlerFrequency;
-  protected ForgeConfigSpec.IntValue configAntlerThreshold;
-  protected ForgeConfigSpec.DoubleValue configAntlerHealing;
-  protected ForgeConfigSpec.IntValue configAntlerRegenDuration;
-  protected ForgeConfigSpec.IntValue configAntlerRegenAmplifier;
-  protected ForgeConfigSpec.DoubleValue configAntlerHealthBonus;
-  protected ForgeConfigSpec.IntValue configAntlerDamage;
-  protected ForgeConfigSpec.DoubleValue configMaskDamageBonus;
+  protected ModConfigSpec.IntValue configAntlerFrequency;
+  protected ModConfigSpec.IntValue configAntlerThreshold;
+  protected ModConfigSpec.DoubleValue configAntlerHealing;
+  protected ModConfigSpec.IntValue configAntlerRegenDuration;
+  protected ModConfigSpec.IntValue configAntlerRegenAmplifier;
+  protected ModConfigSpec.DoubleValue configAntlerHealthBonus;
+  protected ModConfigSpec.IntValue configAntlerDamage;
+  protected ModConfigSpec.DoubleValue configMaskDamageBonus;
 
   public int antlerFrequency = 50;
   public int antlerThreshold = -1;
@@ -26,7 +27,7 @@ public class HatConfig extends AbstractConfig {
   }
 
   @Override
-  public void apply(ForgeConfigSpec.Builder builder) {
+  public void apply(ModConfigSpec.Builder builder) {
     configAntlerFrequency = builder.comment("Spawn frequency (1 in X chances per tick while spawn conditions are met, -1 for not at all)").defineInRange("antler_frequency", antlerFrequency, 0, Integer.MAX_VALUE);
     configAntlerThreshold = builder.comment("How many hearts under maximum health the player needs to be for a deer to spawn (-1 for any value under maximum health").defineInRange("antler_threshold", antlerThreshold, -1, Integer.MAX_VALUE);
     configAntlerHealing = builder.comment("How much a Spirit Deer should heal for").defineInRange("antler_healing", antlerHealing, 0.5, Double.MAX_VALUE);

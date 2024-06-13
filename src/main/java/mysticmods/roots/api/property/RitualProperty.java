@@ -1,7 +1,7 @@
 package mysticmods.roots.api.property;
 
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +28,7 @@ public class RitualProperty<V> extends Property<V> implements IDescribedRegistry
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.RITUAL_PROPERTY_REGISTRY.get().getKey(this);
+    return RootsRegistries.RITUAL_PROPERTY_REGISTRY.get().getKey(this);
   }
 
   @Override

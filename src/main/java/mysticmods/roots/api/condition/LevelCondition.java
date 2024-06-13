@@ -5,7 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -39,7 +39,7 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.LEVEL_CONDITION_REGISTRY.get().getKey(this);
+    return RootsRegistries.LEVEL_CONDITION_REGISTRY.get().getKey(this);
   }
 
   public Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {

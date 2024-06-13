@@ -1,6 +1,7 @@
 package mysticmods.roots.test.block;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.init.ModFeatures;
 import net.minecraft.util.RandomSource;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 
 public class BlockPropertyMatchTest extends RuleTest {
-  public static final Codec<BlockPropertyMatchTest> CODEC = RecordCodecBuilder.create((codec) -> codec.group(BlockState.CODEC.fieldOf("state").forGetter((test) -> test.state), Codec.STRING.fieldOf("property").forGetter((test) -> test.property)).apply(codec, BlockPropertyMatchTest::new));
+  public static final MapCodec<BlockPropertyMatchTest> CODEC = RecordCodecBuilder.mapCodec((codec) -> codec.group(BlockState.CODEC.fieldOf("state").forGetter(test -> test.state), Codec.STRING.fieldOf("property").forGetter(test -> test.property)).apply(codec, BlockPropertyMatchTest::new));
 
   private final BlockState state;
   private final String property;

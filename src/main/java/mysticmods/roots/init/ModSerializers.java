@@ -1,7 +1,7 @@
 package mysticmods.roots.init;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -13,30 +13,33 @@ import mysticmods.roots.recipe.summon.SummonCreaturesRecipe;
 import mysticmods.roots.snapshot.ExtensionSnapshot;
 import mysticmods.roots.snapshot.PetalShellSnapshot;
 import mysticmods.roots.snapshot.SkySoarerSnapshot;
-import net.minecraft.core.Registry;
-
-import static mysticmods.roots.Roots.REGISTRATE;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModSerializers {
+  private static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, RootsAPI.MODID);
+  private static final DeferredRegister<SnapshotSerializer<?>> SNAPSHOT_SERIALIZERS = DeferredRegister.create(RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, RootsAPI.MODID);
+
   // Recipe Serializers
-  public static final RegistryEntry<GroveRecipe.Serializer> GROVE_CRAFTING = REGISTRATE.simple("grove", Registry.RECIPE_SERIALIZER_REGISTRY, GroveRecipe.Serializer::new);
-  public static final RegistryEntry<MortarRecipe.Serializer> MORTAR = REGISTRATE.simple("mortar", Registry.RECIPE_SERIALIZER_REGISTRY, MortarRecipe.Serializer::new);
-  public static final RegistryEntry<SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = REGISTRATE.simple("summon_creatures", Registry.RECIPE_SERIALIZER_REGISTRY, SummonCreaturesRecipe.Serializer::new);
-  public static final RegistryEntry<PyreRecipe.Serializer> PYRE = REGISTRATE.simple("pyre", Registry.RECIPE_SERIALIZER_REGISTRY, PyreRecipe.Serializer::new);
-  public static final RegistryEntry<BarkRecipe.Serializer> BARK = REGISTRATE.simple("bark", Registry.RECIPE_SERIALIZER_REGISTRY, BarkRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, GroveRecipe.Serializer> GROVE_CRAFTING = RECIPE_SERIALIZERS.register("grove", () -> new GroveRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, MortarRecipe.Serializer> MORTAR = RECIPE_SERIALIZERS.register("mortar", () -> new MortarRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = RECIPE_SERIALIZERS.register("summon_creatures", () -> new SummonCreaturesRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, PyreRecipe.Serializer> PYRE = RECIPE_SERIALIZERS.register("pyre", () -> new PyreRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, BarkRecipe.Serializer> BARK = RECIPE_SERIALIZERS.register("bark", () -> new BarkRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, DynamicBarkRecipe.Serializer> DYNAMIC_BARK = RECIPE_SERIALIZERS.register("dynamic_bark", () -> new DynamicBarkRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, RunicBlockRecipe.Serializer> RUNIC_BLOCK = RECIPE_SERIALIZERS.register("runic_block", () -> new RunicBlockRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", () -> new RunicEntityRecipe.Serializer());
 
-  public static final RegistryEntry<DynamicBarkRecipe.Serializer> DYNAMIC_BARK = REGISTRATE.simple("dynamic_bark", Registry.RECIPE_SERIALIZER_REGISTRY, DynamicBarkRecipe.Serializer::new);
+  public static final DeferredHolder<SnapshotSerializer<?>, SkySoarerSnapshot.Serializer> SKY_SOARER = SNAPSHOT_SERIALIZERS.register("sky_soarer", () -> new SkySoarerSnapshot.Serializer(SkySoarerSnapshot::new));
+  public static final DeferredHolder<SnapshotSerializer<?>, PetalShellSnapshot.Serializer> PETAL_SHELL = SNAPSHOT_SERIALIZERS.register("petal_shell", () -> new PetalShellSnapshot.Serializer(PetalShellSnapshot::new));
+  public static final DeferredHolder<SnapshotSerializer<?>, ExtensionSnapshot.Serializer> EXTENSION = SNAPSHOT_SERIALIZERS.register("extension", () -> new ExtensionSnapshot.Serializer(ExtensionSnapshot::new));
 
-  public static final RegistryEntry<RunicBlockRecipe.Serializer> RUNIC_BLOCK = REGISTRATE.simple("runic_block", Registry.RECIPE_SERIALIZER_REGISTRY, RunicBlockRecipe.Serializer::new);
 
-  public static final RegistryEntry<RunicEntityRecipe.Serializer> RUNIC_ENTITY = REGISTRATE.simple("runic_entity", Registry.RECIPE_SERIALIZER_REGISTRY, RunicEntityRecipe.Serializer::new);
-
-  // Snapshot Serializers
-  public static final RegistryEntry<SkySoarerSnapshot.Serializer> SKY_SOARER = REGISTRATE.simple("sky_soarer", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new SkySoarerSnapshot.Serializer(SkySoarerSnapshot::new));
-  public static final RegistryEntry<PetalShellSnapshot.Serializer> PETAL_SHELL = REGISTRATE.simple("petal_shell", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new PetalShellSnapshot.Serializer(PetalShellSnapshot::new));
-
-  public static final RegistryEntry<ExtensionSnapshot.Serializer> EXTENSION = REGISTRATE.simple("extension", RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, () -> new ExtensionSnapshot.Serializer(ExtensionSnapshot::new));
-
-  public static void load() {
+  public static void register (IEventBus bus) {
+    RECIPE_SERIALIZERS.register(bus);
+    SNAPSHOT_SERIALIZERS.register(bus);
   }
 }

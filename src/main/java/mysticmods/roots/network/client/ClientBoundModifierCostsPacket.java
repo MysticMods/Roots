@@ -2,7 +2,7 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -14,7 +14,7 @@ public class ClientBoundModifierCostsPacket {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
       int id = buffer.readVarInt();
-      Modifier prop = Registries.MODIFIER_REGISTRY.get().getValue(id);
+      Modifier prop = RootsRegistries.MODIFIER_REGISTRY.get().getValue(id);
       if (prop != null) {
         prop.setCosts(Cost.fromNetworkArray(buffer));
       } else {
@@ -27,10 +27,10 @@ public class ClientBoundModifierCostsPacket {
   }
 
   public void encode(FriendlyByteBuf buffer) {
-    Collection<Modifier> props = Registries.MODIFIER_REGISTRY.get().getValues();
+    Collection<Modifier> props = RootsRegistries.MODIFIER_REGISTRY.get().getValues();
     buffer.writeVarInt(props.size());
     for (Modifier spell : props) {
-      int id = Registries.MODIFIER_REGISTRY.get().getID(spell);
+      int id = RootsRegistries.MODIFIER_REGISTRY.get().getID(spell);
       if (id == -1) {
         throw new IllegalStateException("tried to serialize a modifier that doesn't exist: " + spell);
       } else {

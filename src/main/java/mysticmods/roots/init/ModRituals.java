@@ -1,7 +1,5 @@
 package mysticmods.roots.init;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.RitualProperty;
@@ -16,7 +14,7 @@ import static mysticmods.roots.Roots.REGISTRATE;
 public class ModRituals {
 
   // CRAFTING RITUAL
-  public static final RegistryEntry<CraftingRitual> CRAFTING = ritual(Rituals.CRAFTING, CraftingRitual::new);
+  public static final <CraftingRitual> CRAFTING = ritual(Rituals.CRAFTING, CraftingRitual::new);
   public static final RegistryEntry<RitualProperty<Integer>> CRAFTING_DURATION = REGISTRATE.simple("crafting/duration", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(CRAFTING::get, 160, Property.INTEGER_SERIALIZER, RitualProperties.DURATION));
   public static final RegistryEntry<RitualProperty<Integer>> CRAFTING_INTERVAL = REGISTRATE.simple("crafting/interval", RootsAPI.RITUAL_PROPERTY_REGISTRY, () -> new RitualProperty<>(CRAFTING::get, 120, Property.INTEGER_SERIALIZER, RitualProperties.INTERVAL));
 

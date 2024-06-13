@@ -14,7 +14,7 @@ public class SkySoarerEffect extends MobEffect {
   }
 
   @Override
-  public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+  public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
     super.applyEffectTick(pLivingEntity, pAmplifier);
     SnapshotHelper.applyPlayerVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
       if (vehicle == null) {
@@ -29,11 +29,17 @@ public class SkySoarerEffect extends MobEffect {
       vehicle.fallDistance = 0f;
       vehicle.setDeltaMovement(player.getLookAngle().multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
     });
+    return true;
   }
 
   @Override
-  public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+  public boolean shouldApplyEffectTickThisTick(int pDuration, int pAmplifier) {
     return true;
+  }
+
+  @Override
+  public void removeAttributeModifiers(AttributeMap pAttributeMap) {
+    super.removeAttributeModifiers(pAttributeMap);
   }
 
   @Override

@@ -8,45 +8,53 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.test.entity.EntityTestType;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
-@Mod.EventBusSubscriber(modid=RootsAPI.MODID, bus=Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid=RootsAPI.MODID, bus=EventBusSubscriber.Bus.MOD)
 public class ModRegistries {
   // Deferred registers
-  private static final DeferredRegister<Herb> DEFERRED_HERB_REGISTRY = DeferredRegister.create(RootsAPI.HERB_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<Ritual> DEFERRED_RITUAL_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<Spell> DEFERRED_SPELL_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<Modifier> DEFERRED_MODIFIER_REGISTRY = DeferredRegister.create(RootsAPI.MODIFIER_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<RitualProperty<?>> DEFERRED_RITUAL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_PROPERTY_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<SpellProperty<?>> DEFERRED_SPELL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_PROPERTY_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<LevelCondition> DEFERRED_LEVEL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.LEVEL_CONDITION_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<PlayerCondition> DEFERRED_PLAYER_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.PLAYER_CONDITION_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<SnapshotSerializer<?>> DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY = DeferredRegister.create(RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<EntityTestType<?>> DEFERRED_ENTITY_TEST_TYPE_REGISTRY = DeferredRegister.create(RootsAPI.ENTITY_TEST_TYPE_REGISTRY, RootsAPI.MODID);
-  private static final DeferredRegister<Grove> DEFERRED_GROVE_REGISTRY = DeferredRegister.create(RootsAPI.GROVE_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<Herb> DEFERRED_HERB_REGISTRY = DeferredRegister.create(RootsAPI.HERB_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<Ritual> DEFERRED_RITUAL_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<Spell> DEFERRED_SPELL_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<Modifier> DEFERRED_MODIFIER_REGISTRY = DeferredRegister.create(RootsAPI.MODIFIER_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<RitualProperty<?>> DEFERRED_RITUAL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.RITUAL_PROPERTY_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<SpellProperty<?>> DEFERRED_SPELL_PROPERTY_REGISTRY = DeferredRegister.create(RootsAPI.SPELL_PROPERTY_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<LevelCondition> DEFERRED_LEVEL_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.LEVEL_CONDITION_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<PlayerCondition> DEFERRED_PLAYER_CONDITION_REGISTRY = DeferredRegister.create(RootsAPI.PLAYER_CONDITION_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<SnapshotSerializer<?>> DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY = DeferredRegister.create(RootsAPI.SNAPSHOT_SERIALIZER_REGISTRY, RootsAPI.MODID);
+   static final DeferredRegister<EntityTestType<?>> DEFERRED_ENTITY_TEST_TYPE_REGISTRY = DeferredRegister.create(RootsAPI.ENTITY_TEST_TYPE_REGISTRY, RootsAPI.MODID);
+  static final DeferredRegister<Grove> DEFERRED_GROVE_REGISTRY = DeferredRegister.create(RootsAPI.GROVE_REGISTRY, RootsAPI.MODID);
 
   static {
-    Registries.HERB_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_HERB_REGISTRY.makeRegistry(() -> new RegistryBuilder<Herb>().disableSaving().disableSync()));
-    Registries.RITUAL_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_REGISTRY.makeRegistry(() -> new RegistryBuilder<Ritual>().disableSync().disableSaving()));
-    Registries.SPELL_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_REGISTRY.makeRegistry(() -> new RegistryBuilder<Spell>().disableSaving().disableSync()));
-    Registries.MODIFIER_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_MODIFIER_REGISTRY.makeRegistry(() -> new RegistryBuilder<Modifier>().disableSaving().disableSync()));
-    Registries.RITUAL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry(() -> new RegistryBuilder<RitualProperty<?>>().disableSync().disableSaving()));
-    Registries.SPELL_PROPERTY_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry(() -> new RegistryBuilder<SpellProperty<?>>().disableSync().disableSaving()));
-    Registries.LEVEL_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_LEVEL_CONDITION_REGISTRY.makeRegistry(() -> new RegistryBuilder<LevelCondition>().disableSync().disableSaving()));
-    Registries.PLAYER_CONDITION_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_PLAYER_CONDITION_REGISTRY.makeRegistry(() -> new RegistryBuilder<PlayerCondition>().disableSync().disableSaving()));
-    Registries.SNAPSHOT_SERIALIZER_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY.makeRegistry(() -> new RegistryBuilder<SnapshotSerializer<?>>().disableSync().disableSaving()));
-    Registries.ENTITY_REGISTRY = ForgeRegistryWrapper.of(() -> ForgeRegistries.ENTITY_TYPES);
-    Registries.ENTITY_TEST_TYPE = ForgeRegistryWrapper.of(DEFERRED_ENTITY_TEST_TYPE_REGISTRY.makeRegistry(() -> new RegistryBuilder<EntityTestType<?>>().disableSync().disableSaving()));
-    Registries.GROVE_REGISTRY = ForgeRegistryWrapper.of(DEFERRED_GROVE_REGISTRY.makeRegistry(() -> new RegistryBuilder<Grove>().disableSync().disableSaving()));
+    DEFERRED_HERB_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.HERB_REGISTRY = DEFERRED_HERB_REGISTRY.getRegistry();
+    DEFERRED_RITUAL_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.RITUAL_REGISTRY = DEFERRED_RITUAL_REGISTRY.getRegistry();
+    DEFERRED_SPELL_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.SPELL_REGISTRY = DEFERRED_SPELL_REGISTRY.getRegistry();
+    DEFERRED_MODIFIER_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.MODIFIER_REGISTRY = DEFERRED_MODIFIER_REGISTRY.getRegistry();
+    DEFERRED_RITUAL_PROPERTY_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.RITUAL_PROPERTY_REGISTRY = DEFERRED_RITUAL_PROPERTY_REGISTRY.getRegistry();
+    DEFERRED_SPELL_PROPERTY_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.SPELL_PROPERTY_REGISTRY = DEFERRED_SPELL_PROPERTY_REGISTRY.getRegistry();
+    DEFERRED_LEVEL_CONDITION_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.LEVEL_CONDITION_REGISTRY = DEFERRED_LEVEL_CONDITION_REGISTRY.getRegistry();
+    DEFERRED_PLAYER_CONDITION_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.PLAYER_CONDITION_REGISTRY = DEFERRED_PLAYER_CONDITION_REGISTRY.getRegistry();
+    DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.SNAPSHOT_SERIALIZER_REGISTRY = DEFERRED_SNAPSHOT_SERIALIZER_REGISTRY.getRegistry();
+    DEFERRED_ENTITY_TEST_TYPE_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.ENTITY_TEST_TYPE = DEFERRED_ENTITY_TEST_TYPE_REGISTRY.getRegistry();
+    DEFERRED_GROVE_REGISTRY.makeRegistry((o) -> {});
+    RootsRegistries.GROVE_REGISTRY = DEFERRED_GROVE_REGISTRY.getRegistry();
   }
 
   public static void register(IEventBus bus) {
@@ -64,28 +72,6 @@ public class ModRegistries {
   }
 
   public static void load() {
-  }
-
-  public static class ForgeRegistryWrapper<T> implements Supplier<ForgeRegistry<T>> {
-    private final Supplier<IForgeRegistry<T>> registrySupplier;
-
-    private ForgeRegistry<T> registry = null;
-
-    protected ForgeRegistryWrapper(Supplier<IForgeRegistry<T>> registrySupplier) {
-      this.registrySupplier = registrySupplier;
-    }
-
-    @Override
-    public ForgeRegistry<T> get() {
-      if (registry == null) {
-        registry = (ForgeRegistry<T>) registrySupplier.get();
-      }
-      return registry;
-    }
-
-    public static <T> ForgeRegistryWrapper<T> of(Supplier<IForgeRegistry<T>> registrySupplier) {
-      return new ForgeRegistryWrapper<>(registrySupplier);
-    }
   }
 }
 

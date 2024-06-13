@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -30,7 +30,7 @@ public class Cost {
   protected Cost(FriendlyByteBuf buf) {
     this.type = CostType.values()[buf.readVarInt()];
     final int id = buf.readVarInt();
-    this.herb = () -> Registries.HERB_REGISTRY.get().getValue(id);
+    this.herb = () -> RootsRegistries.HERB_REGISTRY.get().getValue(id);
     this.value = buf.readDouble();
   }
 
@@ -48,20 +48,20 @@ public class Cost {
         throw new JsonSyntaxException("Cost must have a herb");
       }
       this.type = EnumUtil.fromString(CostType.class, GsonHelper.getAsString(pJsonObject, "type"));
-      this.herb = () -> Registries.HERB_REGISTRY.get().getValue(new ResourceLocation(GsonHelper.getAsString(pJsonObject, "herb")));
+      this.herb = () -> RootsRegistries.HERB_REGISTRY.get().getValue(new ResourceLocation(GsonHelper.getAsString(pJsonObject, "herb")));
       this.value = GsonHelper.getAsDouble(pJsonObject, "value");
     }
   }
 
   public void toNetwork(FriendlyByteBuf buf) {
     buf.writeVarInt(this.type.ordinal());
-    buf.writeVarInt(Registries.HERB_REGISTRY.get().getID(this.herb.get()));
+    buf.writeVarInt(RootsRegistries.HERB_REGISTRY.get().getID(this.herb.get()));
     buf.writeDouble(this.value);
   }
 
   public JsonElement toJson() {
     JsonObject result = new JsonObject();
-    result.addProperty("herb", Registries.HERB_REGISTRY.get().getKey(this.herb.get()).toString());
+    result.addProperty("herb", RootsRegistries.HERB_REGISTRY.get().getKey(this.herb.get()).toString());
     result.addProperty("value", this.value);
     result.addProperty("type", this.type.toString().toLowerCase(Locale.ROOT));
     return result;

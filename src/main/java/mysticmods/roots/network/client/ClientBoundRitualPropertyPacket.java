@@ -2,7 +2,7 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.RitualProperty;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
@@ -15,7 +15,7 @@ public class ClientBoundRitualPropertyPacket {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
       int id = buffer.readVarInt();
-      RitualProperty<?> prop = Registries.RITUAL_PROPERTY_REGISTRY.get().getValue(id);
+      RitualProperty<?> prop = RootsRegistries.RITUAL_PROPERTY_REGISTRY.get().getValue(id);
       if (prop != null) {
         prop.updateFromNetwork(buffer);
       } else {
@@ -28,10 +28,10 @@ public class ClientBoundRitualPropertyPacket {
   }
 
   public void encode(FriendlyByteBuf buffer) {
-    Collection<RitualProperty<?>> props = Registries.RITUAL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
+    Collection<RitualProperty<?>> props = RootsRegistries.RITUAL_PROPERTY_REGISTRY.get().getValues().stream().filter(Property::shouldSerialize).toList();
     buffer.writeVarInt(props.size());
     for (RitualProperty<?> prop : props) {
-      int id = Registries.RITUAL_PROPERTY_REGISTRY.get().getID(prop);
+      int id = RootsRegistries.RITUAL_PROPERTY_REGISTRY.get().getID(prop);
       if (id == -1) {
         throw new IllegalStateException("tried to serialize a ritual property that doesn't exist: " + prop);
       } else {
@@ -47,7 +47,7 @@ public class ClientBoundRitualPropertyPacket {
   }
 
   private static void handle(ClientBoundRitualPropertyPacket message, Supplier<NetworkEvent.Context> context) {
-    for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {
+    for (Ritual ritual : RootsRegistries.RITUAL_REGISTRY.get().getValues()) {
       ritual.init();
     }
   }

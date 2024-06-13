@@ -10,12 +10,13 @@ public class FriendlyEarthEffect extends MobEffect {
   }
 
   @Override
-  public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+  public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
     pLivingEntity.fallDistance = 0;
+    return true;
   }
 
   @Override
-  public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+  public boolean shouldApplyEffectTickThisTick(int pDuration, int pAmplifier) {
     return true;
   }
 }

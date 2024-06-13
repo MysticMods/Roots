@@ -3,7 +3,7 @@ package mysticmods.roots.gen.provider;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.property.RitualProperty;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.gen.BaseProvider;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -23,8 +23,8 @@ public class RitualPropertyProvider extends BaseProvider {
   public void run(CachedOutput pCache) {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
-    for (RitualProperty<?> prop : Registries.RITUAL_PROPERTY_REGISTRY.get().getValues()) {
-      ResourceLocation id = Registries.RITUAL_PROPERTY_REGISTRY.get().getKey(prop);
+    for (RitualProperty<?> prop : RootsRegistries.RITUAL_PROPERTY_REGISTRY.get().getValues()) {
+      ResourceLocation id = RootsRegistries.RITUAL_PROPERTY_REGISTRY.get().getKey(prop);
       if (!set.add(id)) {
         throw new IllegalStateException("Duplicate recipe " + id);
       } else {

@@ -11,7 +11,7 @@ import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.reference.Identifiers;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
@@ -87,7 +87,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
           throw new JsonSyntaxException("Recipe '" + pRecipeId + "' cannot have both a ritual and an output");
         }
         ResourceLocation ritualName = new ResourceLocation(GsonHelper.getAsString(pJson, "ritual"));
-        Ritual ritual = Registries.RITUAL_REGISTRY.get().getValue(ritualName);
+        Ritual ritual = RootsRegistries.RITUAL_REGISTRY.get().getValue(ritualName);
         if (ritual == null) {
           throw new JsonSyntaxException("Ritual '" + ritualName + "' does not exist!");
         }
@@ -100,7 +100,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     protected void fromNetworkAdditional(PyreRecipe recipe, ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
       super.fromNetworkAdditional(recipe, pRecipeId, pBuffer);
       if (pBuffer.readBoolean()) {
-        Ritual ritual = Registries.RITUAL_REGISTRY.get().getValue(pBuffer.readVarInt());
+        Ritual ritual = RootsRegistries.RITUAL_REGISTRY.get().getValue(pBuffer.readVarInt());
         recipe.setRitual(ritual);
       }
     }
@@ -110,7 +110,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       super.toNetworkAdditional(recipe, pBuffer);
       pBuffer.writeBoolean(recipe.getRitual() != null);
       if (recipe.getRitual() != null) {
-        pBuffer.writeVarInt(Registries.RITUAL_REGISTRY.get().getID(recipe.getRitual()));
+        pBuffer.writeVarInt(RootsRegistries.RITUAL_REGISTRY.get().getID(recipe.getRitual()));
       }
     }
   }
@@ -194,7 +194,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     @Override
     protected String getFolderName(ResourceLocation recipeName) {
       if (ritual != null) {
-        return Registries.RITUAL_REGISTRY.get().getKey(ritual).getNamespace();
+        return RootsRegistries.RITUAL_REGISTRY.get().getKey(ritual).getNamespace();
       }
       return super.getFolderName(recipeName);
     }
@@ -217,7 +217,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       public void serializeRecipeData(JsonObject json) {
         super.serializeRecipeData(json);
         if (ritual != null) {
-          json.addProperty("ritual", Registries.RITUAL_REGISTRY.get().getKey(ritual).toString());
+          json.addProperty("ritual", RootsRegistries.RITUAL_REGISTRY.get().getKey(ritual).toString());
         }
       }
     }

@@ -7,7 +7,7 @@ import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.GrantResult;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
@@ -217,7 +217,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       pTag.putString("last_recipe", lastRecipe.getId().toString());
     }
     if (currentRitual != null) {
-      pTag.putString("current_ritual", Registries.RITUAL_REGISTRY.get().getKey(currentRitual).toString());
+      pTag.putString("current_ritual", RootsRegistries.RITUAL_REGISTRY.get().getKey(currentRitual).toString());
     }
 
     ListTag storedItems = new ListTag();
@@ -256,7 +256,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
     if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
       ResourceLocation ritualId = new ResourceLocation(pTag.getString("current_ritual"));
-      currentRitual = Registries.RITUAL_REGISTRY.get().getValue(ritualId);
+      currentRitual = RootsRegistries.RITUAL_REGISTRY.get().getValue(ritualId);
     }
     if (pTag.contains("lifetime", Tag.TAG_INT)) {
       lifetime = pTag.getInt("lifetime");

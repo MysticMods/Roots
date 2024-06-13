@@ -11,7 +11,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(value= Dist.CLIENT, modid= RootsAPI.MODID)
+@EventBusSubscriber(value= Dist.CLIENT, modid= RootsAPI.MODID)
 public class ClientTicker {
   private static HerbCapability.SerializedHerbRecord herbRecord = null;
   private static GrantCapability.SerializedGrantRecord grantRecord = null;

@@ -2,7 +2,7 @@ package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -101,25 +101,25 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   }
 
   public boolean is(ResourceLocation key) {
-    return Registries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(ResourceKey<Ritual> key) {
-    return Registries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(Predicate<ResourceKey<Ritual>> key) {
-    return Registries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(TagKey<Ritual> key) {
-    return Registries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.RITUAL_REGISTRY.get().getKey(this);
+    return RootsRegistries.RITUAL_REGISTRY.get().getKey(this);
   }
 
   protected abstract RitualProperty<Integer> getDurationProperty();

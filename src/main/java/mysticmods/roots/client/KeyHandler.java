@@ -11,7 +11,7 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class KeyHandler {
   @SubscribeEvent
   public static void keyEvent(InputEvent.Key event) {

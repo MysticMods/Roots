@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class ServerTickHandler {
   @SubscribeEvent
   public static void onServerTickEnd(TickEvent.ServerTickEvent event) {

@@ -22,7 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class ShoulderHandler {
   @SubscribeEvent
   public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {

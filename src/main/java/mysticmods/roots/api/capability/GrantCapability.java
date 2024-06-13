@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.LibraryModifier;
 import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.Spell;
@@ -58,14 +58,14 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
 
   public boolean canGrant (Grant grant) {
     if (grant.getType() == Grant.Type.SPELL) {
-      Spell spell = Registries.SPELL_REGISTRY.get().getValue(grant.getId());
+      Spell spell = RootsRegistries.SPELL_REGISTRY.get().getValue(grant.getId());
       if (spell == null) {
         throw new NullPointerException("Spell " + grant.getId() + " does not exist!");
       }
 
       return grant.isRepeatable() || !hasSpell(spell);
     } else if (grant.getType() == Grant.Type.MODIFIER) {
-      Modifier modifier = Registries.MODIFIER_REGISTRY.get().getValue(grant.getId());
+      Modifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().getValue(grant.getId());
       if (modifier == null) {
         throw new NullPointerException("Modifier " + grant.getId() + " does not exist!");
       }
@@ -78,7 +78,7 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
 
   public boolean grant (ServerPlayer player, Grant grant) {
     if (grant.getType() == Grant.Type.SPELL) {
-      Spell spell = Registries.SPELL_REGISTRY.get().getValue(grant.getId());
+      Spell spell = RootsRegistries.SPELL_REGISTRY.get().getValue(grant.getId());
       if (spell == null) {
         throw new NullPointerException("Spell " + grant.getId() + " does not exist!");
       }
@@ -89,7 +89,7 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
         return true;
       }
     } else if (grant.getType() == Grant.Type.MODIFIER) {
-      Modifier modifier = Registries.MODIFIER_REGISTRY.get().getValue(grant.getId());
+      Modifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().getValue(grant.getId());
       if (modifier == null) {
         throw new NullPointerException("Modifier " + grant.getId() + " does not exist!");
       }
@@ -151,7 +151,7 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
     if (LIBRARY_SPELLS == null) {
       LIBRARY_SPELLS = new ArrayList<>();
       GRANTED_SPELLS.stream().sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, true)));
-      Registries.SPELL_REGISTRY.get().getValues().stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, false)));
+      RootsRegistries.SPELL_REGISTRY.get().getValues().stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, false)));
     }
     return LIBRARY_SPELLS;
   }
@@ -219,14 +219,14 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
     ListTag modifiers = nbt.getList("modifiers", Tag.TAG_STRING);
     for (int i = 0; i < spells.size(); i++) {
       ResourceLocation key = new ResourceLocation(spells.getString(i));
-      Spell spell = Registries.SPELL_REGISTRY.get().getValue(key);
+      Spell spell = RootsRegistries.SPELL_REGISTRY.get().getValue(key);
       if (spell != null) {
         GRANTED_SPELLS.add(spell);
       }
     }
     for (int i = 0; i < modifiers.size(); i++) {
       ResourceLocation key = new ResourceLocation(modifiers.getString(i));
-      Modifier modifier = Registries.MODIFIER_REGISTRY.get().getValue(key);
+      Modifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().getValue(key);
       if (modifier != null) {
         GRANTED_MODIFIERS.add(modifier);
       }
@@ -264,11 +264,11 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
       GRANTED_MODIFIERS.clear();
       int spellCount = buf.readVarInt();
       for (int i = 0; i < spellCount; i++) {
-        GRANTED_SPELLS.add(Registries.SPELL_REGISTRY.get().getValue(buf.readVarInt()));
+        GRANTED_SPELLS.add(RootsRegistries.SPELL_REGISTRY.get().getValue(buf.readVarInt()));
       }
       int modifierCount = buf.readVarInt();
       for (int i = 0; i < modifierCount; i++) {
-        GRANTED_MODIFIERS.add(Registries.MODIFIER_REGISTRY.get().getValue(buf.readVarInt()));
+        GRANTED_MODIFIERS.add(RootsRegistries.MODIFIER_REGISTRY.get().getValue(buf.readVarInt()));
       }
     }
 
@@ -276,11 +276,11 @@ public class GrantCapability implements ICapabilityProvider, ICapabilitySerializ
     public void toNetwork(FriendlyByteBuf buf) {
       buf.writeVarInt(GRANTED_SPELLS.size());
       for (Spell spell : GRANTED_SPELLS) {
-        buf.writeVarInt(Registries.SPELL_REGISTRY.get().getID(spell));
+        buf.writeVarInt(RootsRegistries.SPELL_REGISTRY.get().getID(spell));
       }
       buf.writeVarInt(GRANTED_MODIFIERS.size());
       for (Modifier modifier : GRANTED_MODIFIERS) {
-        buf.writeVarInt(Registries.MODIFIER_REGISTRY.get().getID(modifier));
+        buf.writeVarInt(RootsRegistries.MODIFIER_REGISTRY.get().getID(modifier));
       }
     }
 

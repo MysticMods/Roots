@@ -9,7 +9,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class RootsRenderer {
   public static TextureAtlasSprite whiteIcon;
 

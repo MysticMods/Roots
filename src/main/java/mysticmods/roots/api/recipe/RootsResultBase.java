@@ -6,7 +6,7 @@ import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
@@ -87,14 +87,14 @@ public class RootsResultBase implements FinishedRecipe {
     if (!levelConditions.isEmpty()) {
       JsonArray levelConditionsArray = new JsonArray();
       for (LevelCondition condition : levelConditions) {
-        levelConditionsArray.add(Registries.LEVEL_CONDITION_REGISTRY.get().getKey(condition).toString());
+        levelConditionsArray.add(RootsRegistries.LEVEL_CONDITION_REGISTRY.get().getKey(condition).toString());
       }
       json.add("level_conditions", levelConditionsArray);
     }
     if (!playerConditions.isEmpty()) {
       JsonArray playerConditionsArray = new JsonArray();
       for (PlayerCondition condition : playerConditions) {
-        playerConditionsArray.add(Registries.PLAYER_CONDITION_REGISTRY.get().getKey(condition).toString());
+        playerConditionsArray.add(RootsRegistries.PLAYER_CONDITION_REGISTRY.get().getKey(condition).toString());
       }
       json.add("player_conditions", playerConditionsArray);
     }

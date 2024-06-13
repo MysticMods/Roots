@@ -1,6 +1,6 @@
 package mysticmods.roots.api.capability;
 
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.snapshot.Snapshot;
 import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import net.minecraft.core.Direction;
@@ -76,7 +76,7 @@ public class SnapshotCapability implements ICapabilityProvider, ICapabilitySeria
         continue;
       }
 
-      SnapshotSerializer<?> serializer = Registries.SNAPSHOT_SERIALIZER_REGISTRY.get().getValue(key);
+      SnapshotSerializer<?> serializer = RootsRegistries.SNAPSHOT_SERIALIZER_REGISTRY.get().getValue(key);
       if (serializer == null) {
         continue;
       }
@@ -89,7 +89,7 @@ public class SnapshotCapability implements ICapabilityProvider, ICapabilitySeria
     CompoundTag result = new CompoundTag();
     result.putString("type", key.toString());
     //noinspection unchecked
-    SnapshotSerializer<T> serializer = ((SnapshotSerializer<T>) Registries.SNAPSHOT_SERIALIZER_REGISTRY.get().getValue(key));
+    SnapshotSerializer<T> serializer = ((SnapshotSerializer<T>) RootsRegistries.SNAPSHOT_SERIALIZER_REGISTRY.get().getValue(key));
     if (serializer == null) {
       throw new NullPointerException("Serializer '" + key + "' not found!");
     }

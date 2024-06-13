@@ -1,7 +1,7 @@
 package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
@@ -14,7 +14,7 @@ public class ClientBoundSpellCostsPacket {
     int count = buffer.readVarInt();
     for (int i = 0; i < count; i++) {
       int id = buffer.readVarInt();
-      Spell prop = Registries.SPELL_REGISTRY.get().getValue(id);
+      Spell prop = RootsRegistries.SPELL_REGISTRY.get().getValue(id);
       if (prop != null) {
         prop.setCosts(Cost.fromNetworkArray(buffer));
       } else {
@@ -27,10 +27,10 @@ public class ClientBoundSpellCostsPacket {
   }
 
   public void encode(FriendlyByteBuf buffer) {
-    Collection<Spell> props = Registries.SPELL_REGISTRY.get().getValues();
+    Collection<Spell> props = RootsRegistries.SPELL_REGISTRY.get().getValues();
     buffer.writeVarInt(props.size());
     for (Spell spell : props) {
-      int id = Registries.SPELL_REGISTRY.get().getID(spell);
+      int id = RootsRegistries.SPELL_REGISTRY.get().getID(spell);
       if (id == -1) {
         throw new IllegalStateException("tried to serialize a spell cost that doesn't exist: " + spell);
       } else {

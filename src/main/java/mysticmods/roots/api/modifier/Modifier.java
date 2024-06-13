@@ -5,7 +5,7 @@ import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.IParentChild;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -57,24 +57,24 @@ public class Modifier extends DescribedRegistryEntry<Modifier> implements ICoste
   }
 
   public boolean is(ResourceLocation key) {
-    return Registries.MODIFIER_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.MODIFIER_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(ResourceKey<Modifier> key) {
-    return Registries.MODIFIER_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.MODIFIER_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(Predicate<ResourceKey<Modifier>> key) {
-    return Registries.MODIFIER_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.MODIFIER_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(TagKey<Modifier> key) {
-    return Registries.MODIFIER_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.MODIFIER_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.MODIFIER_REGISTRY.get().getKey(this);
+    return RootsRegistries.MODIFIER_REGISTRY.get().getKey(this);
   }
 
   @Override

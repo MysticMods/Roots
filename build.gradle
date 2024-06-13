@@ -53,3 +53,11 @@ apply from: 'gradle/maven2.gradle'
 apply from: 'gradle/signing.gradle'
 apply from: 'gradle/curseforge.gradle'
 apply from: 'gradle/version_checker.gradle'
+
+idea {
+    // Tell IDEA to always download sources/javadoc artifacts from maven.
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}

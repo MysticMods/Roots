@@ -1,7 +1,7 @@
 package mysticmods.roots.event.forge;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.data.listener.*;
@@ -15,7 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class DataHandler {
   @SubscribeEvent
   public static void onReloadListeners(AddReloadListenerEvent event) {
@@ -27,10 +27,10 @@ public class DataHandler {
     // TODO: Add resets for various things???
   }
   public static void init () {
-    for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {
+    for (Ritual ritual : RootsRegistries.RITUAL_REGISTRY.get().getValues()) {
       ritual.init();
     }
-    for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
+    for (Spell spell : RootsRegistries.SPELL_REGISTRY.get().getValues()) {
       spell.init();
     }
   }

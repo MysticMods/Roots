@@ -1,7 +1,7 @@
 package mysticmods.roots.api.herb;
 
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceKey;
@@ -38,7 +38,7 @@ public class Herb extends StyledRegistryEntry<Herb> {
     if (potential != null) {
       return potential;
     }
-    for (Herb herb : Registries.HERB_REGISTRY.get().getValues()) {
+    for (Herb herb : RootsRegistries.HERB_REGISTRY.get().getValues()) {
       if (stack.is(herb.getTag())) {
         herbCache.put(stack.getItem(), herb);
         return herb;
@@ -57,24 +57,24 @@ public class Herb extends StyledRegistryEntry<Herb> {
   }
 
   public boolean is(ResourceLocation location) {
-    return Registries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(location)).orElse(false);
+    return RootsRegistries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(location)).orElse(false);
   }
 
   public boolean is(ResourceKey<Herb> key) {
-    return Registries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(Predicate<ResourceKey<Herb>> predicate) {
-    return Registries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(predicate)).orElse(false);
+    return RootsRegistries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(predicate)).orElse(false);
   }
 
   public boolean is(TagKey<Herb> tag) {
-    return Registries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(tag)).orElse(false);
+    return RootsRegistries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(tag)).orElse(false);
   }
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.HERB_REGISTRY.get().getKey(this);
+    return RootsRegistries.HERB_REGISTRY.get().getKey(this);
   }
 
   @Override

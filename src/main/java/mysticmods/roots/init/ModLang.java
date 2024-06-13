@@ -7,7 +7,7 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.KeyBindings;
@@ -91,25 +91,25 @@ public class ModLang {
         }
       }
 
-      for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
+      for (Spell spell : RootsRegistries.SPELL_REGISTRY.get().getValues()) {
         b.add(spell.getDescriptionId(), RegistrateLangProvider.toEnglishName(spell.getKey().getPath()));
       }
-      for (Ritual ritual : Registries.RITUAL_REGISTRY.get().getValues()) {
+      for (Ritual ritual : RootsRegistries.RITUAL_REGISTRY.get().getValues()) {
         b.add(ritual.getDescriptionId(), RegistrateLangProvider.toEnglishName(ritual.getKey().getPath()));
       }
-      for (Herb herb : Registries.HERB_REGISTRY.get().getValues()) {
+      for (Herb herb : RootsRegistries.HERB_REGISTRY.get().getValues()) {
         b.add(herb.getDescriptionId(), RegistrateLangProvider.toEnglishName(herb.getKey().getPath()));
       }
-      for (RitualProperty<?> property : Registries.RITUAL_PROPERTY_REGISTRY.get().getValues()) {
+      for (RitualProperty<?> property : RootsRegistries.RITUAL_PROPERTY_REGISTRY.get().getValues()) {
         b.add(property.getDescriptionId(), getComplexDescription(property.getKey().getPath()));
       }
-      for (SpellProperty<?> property : Registries.SPELL_PROPERTY_REGISTRY.get().getValues()) {
+      for (SpellProperty<?> property : RootsRegistries.SPELL_PROPERTY_REGISTRY.get().getValues()) {
         b.add(property.getDescriptionId(), getComplexDescription(property.getKey().getPath()));
       }
-      for (Modifier modifier : Registries.MODIFIER_REGISTRY.get().getValues()) {
+      for (Modifier modifier : RootsRegistries.MODIFIER_REGISTRY.get().getValues()) {
         b.add(modifier.getDescriptionId(), RegistrateLangProvider.toEnglishName(modifier.getKey().getPath()));
       }
-      for (LevelCondition condition : Registries.LEVEL_CONDITION_REGISTRY.get().getValues()) {
+      for (LevelCondition condition : RootsRegistries.LEVEL_CONDITION_REGISTRY.get().getValues()) {
         b.add(condition.getDescriptionId(), RegistrateLangProvider.toEnglishName(condition.getKey().getPath()));
       }
     });

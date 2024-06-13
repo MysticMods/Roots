@@ -3,7 +3,7 @@ package mysticmods.roots.gen.provider;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.gen.BaseProvider;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -23,8 +23,8 @@ public class SpellPropertyProvider extends BaseProvider {
   public void run(CachedOutput pCache) {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
-    for (SpellProperty<?> prop : Registries.SPELL_PROPERTY_REGISTRY.get().getValues()) {
-      ResourceLocation id = Registries.SPELL_PROPERTY_REGISTRY.get().getKey(prop);
+    for (SpellProperty<?> prop : RootsRegistries.SPELL_PROPERTY_REGISTRY.get().getValues()) {
+      ResourceLocation id = RootsRegistries.SPELL_PROPERTY_REGISTRY.get().getKey(prop);
       if (!set.add(id)) {
         throw new IllegalStateException("Duplicate recipe " + id);
       } else {

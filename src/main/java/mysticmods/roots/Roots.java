@@ -21,28 +21,23 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
-import noobanidus.libs.noobutil.data.generator.RecipeGenerator;
-import noobanidus.libs.noobutil.reference.ModData;
-import noobanidus.libs.noobutil.registrate.CustomRegistrate;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.DistExecutor;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
 
 @Mod(RootsAPI.MODID)
 public class Roots {
-  public static CustomRegistrate REGISTRATE;
-
   public static RootsArmorMaterial ANTLER_MATERIAL = new RootsArmorMaterial("roots:antlers", 7, new int[]{3, 0, 0, 0}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 1f, 0f, () -> Ingredient.of(ModItems.ANTLERS.get()));
   public static RootsArmorMaterial CARAPACE_MATERIAL = new RootsArmorMaterial("roots:carapace", 25, new int[]{2, 5, 6, 2}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(ModItems.CARAPACE.get()));
-  public static RootsArmorMaterial COPPER_MATERIAL = new RootsArmorMaterial("roots:copper", 15, new int[]{2, 5, 6, 2}, 7, SoundEvents.ARMOR_EQUIP_IRON, 0.0f, 0.0f, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
-  public static final RecipeGenerator RECIPES = new RecipeGenerator(RootsAPI.MODID);
+  public static RootsArmorMaterial COPPER_MATERIAL = new RootsArmorMaterial("roots:copper", 15, new int[]{2, 5, 6, 2}, 7, SoundEvents.ARMOR_EQUIP_IRON.value(), 0.0f, 0.0f, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
 
   public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(RootsAPI.MODID) {
     @Override
@@ -51,14 +46,10 @@ public class Roots {
     }
   };
 
-  public Roots() {
-    REGISTRATE = CustomRegistrate.create(RootsAPI.MODID);
-    REGISTRATE.creativeModeTab(() -> ITEM_GROUP);
-    ModData.setIdAndIdentifier(RootsAPI.MODID, RootsAPI.MOD_IDENTIFIER);
-
+  public Roots(ModContainer container) {
     ConfigManager.loadConfig(ConfigManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(RootsAPI.MODID + "-common.toml"));
-    ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
-    IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+    container.registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
+    IEventBus bus = container.getEventBus();
 
     RootsAPI.INSTANCE = new RootsAPI() {
       private final IRecipeManagerAccessor accessor = DistExecutor.safeRunForDist(() -> ClientRecipeAccessor::new, () -> ServerRecipeAccessor::new);
@@ -83,17 +74,17 @@ public class Roots {
 
       @Override
       public void grant(ServerPlayer player, Grant grant) {
-        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(cap -> cap.grant(player, grant));
+/*        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(cap -> cap.grant(player, grant));*/
       }
 
       @Override
       public boolean canGrant(ServerPlayer player, Grant grant) {
-        return player.getCapability(Capabilities.GRANT_CAPABILITY).orElseThrow(IllegalStateException::new).canGrant(grant);
+/*        return player.getCapability(Capabilities.GRANT_CAPABILITY).orElseThrow(IllegalStateException::new).canGrant(grant);*/
+        return false;
       }
     };
 
     ModBlocks.load();
-    ModSerializers.load();
     ModBlockEntities.load();
     ModItems.load();
     ModEntities.load();
@@ -110,6 +101,7 @@ public class Roots {
     ModTests.load();
     ModSounds.load();
     ModGroves.load();
+    ModSerializers.register(bus);
     ModRegistries.register(bus);
     ModRecipes.register(bus);
     ModFeatures.register(bus);

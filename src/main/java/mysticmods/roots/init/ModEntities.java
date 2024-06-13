@@ -29,7 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import static mysticmods.roots.Roots.REGISTRATE;
 
 @SuppressWarnings({"WeakerAccess", "ConstantConditions", "unchecked", "deprecation"})
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEntities {
   public static RegistryEntry<EntityType<BeetleEntity>> BEETLE = REGISTRATE.entity("beetle", BeetleEntity::new, MobCategory.CREATURE)
       .properties(o -> o.sized(0.75f, 0.75f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))

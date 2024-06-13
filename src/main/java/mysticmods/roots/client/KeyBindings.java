@@ -11,7 +11,7 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid= RootsAPI.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid= RootsAPI.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class KeyBindings {
   public static final String CATEGORY = "key.category.roots.general";
 

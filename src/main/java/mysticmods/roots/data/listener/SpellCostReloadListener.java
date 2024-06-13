@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -25,7 +25,7 @@ public class SpellCostReloadListener extends SimpleJsonResourceReloadListener {
   @Override
   protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
     pObject.forEach((id, element) -> {
-      Spell prop = Registries.SPELL_REGISTRY.get().getValue(id);
+      Spell prop = RootsRegistries.SPELL_REGISTRY.get().getValue(id);
       if (prop == null) {
         // do something
       } else if (element.isJsonObject()) {

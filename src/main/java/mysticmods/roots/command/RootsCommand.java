@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.block.GroveStoneBlock;
@@ -35,7 +35,7 @@ public class RootsCommand {
 
   private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestSpells() {
     if (spellIds == null) {
-      spellIds = Registries.SPELL_REGISTRY.get().getValues().stream().map(Spell::getKey).map(ResourceLocation::toString).collect(Collectors.toList());
+      spellIds = RootsRegistries.SPELL_REGISTRY.get().getValues().stream().map(Spell::getKey).map(ResourceLocation::toString).collect(Collectors.toList());
     }
     return Commands.argument("spell", ResourceLocationArgument.id())
         .suggests((c, build) -> SharedSuggestionProvider.suggest(spellIds, build));
@@ -51,7 +51,7 @@ public class RootsCommand {
       return 1;
     }).then(suggestSpells().executes(c -> {
       ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
-      Spell spell = Registries.SPELL_REGISTRY.get().getValue(spellID);
+      Spell spell = RootsRegistries.SPELL_REGISTRY.get().getValue(spellID);
       if (spell == null) {
         c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
         return 1;

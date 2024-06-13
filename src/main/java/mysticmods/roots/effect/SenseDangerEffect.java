@@ -19,9 +19,9 @@ public class SenseDangerEffect extends MobEffect {
   }
 
   @Override
-  public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+  public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
     super.applyEffectTick(pLivingEntity, pAmplifier);
-    final Level pLevel = pLivingEntity.getLevel();
+    final Level pLevel = pLivingEntity.level();
     SnapshotHelper.applyPlayer(pLivingEntity, ModSerializers.EXTENSION.get(), (player, extension) -> {
         pLevel.getEntities(player, extension.getAABB().move(player.position())).forEach(entity -> {
           // TODO: Better utility for detecting hostiles, confer pacifist checks
@@ -31,10 +31,11 @@ public class SenseDangerEffect extends MobEffect {
           }
         });
     });
+    return true;
   }
 
   @Override
-  public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+  public boolean shouldApplyEffectTickThisTick(int pDuration, int pAmplifier) {
     return true;
   }
 }

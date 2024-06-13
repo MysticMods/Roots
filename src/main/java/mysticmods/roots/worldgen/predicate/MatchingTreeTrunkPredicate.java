@@ -1,6 +1,7 @@
 package mysticmods.roots.worldgen.predicate;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.init.ModFeatures;
 import net.minecraft.core.Direction;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
 import net.minecraft.world.level.levelgen.blockpredicates.StateTestingPredicate;
 
 public class MatchingTreeTrunkPredicate extends StateTestingPredicate {
-    public static final Codec<MatchingTreeTrunkPredicate> CODEC = RecordCodecBuilder.create((p_204688_) -> stateTestingCodec(p_204688_).apply(p_204688_, MatchingTreeTrunkPredicate::new));
+    public static final MapCodec<MatchingTreeTrunkPredicate> CODEC = RecordCodecBuilder.mapCodec((p_204688_) -> stateTestingCodec(p_204688_).apply(p_204688_, MatchingTreeTrunkPredicate::new));
 
     protected MatchingTreeTrunkPredicate(Vec3i offset) {
         super(offset);

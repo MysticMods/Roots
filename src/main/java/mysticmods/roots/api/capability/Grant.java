@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -33,9 +33,9 @@ public class Grant {
 
   public Component getFailed() {
     if (getType() == Type.SPELL) {
-      return Component.translatable("roots.message.spell.already_learned", Registries.SPELL_REGISTRY.get().getValue(getId()).getStyledName());
+      return Component.translatable("roots.message.spell.already_learned", RootsRegistries.SPELL_REGISTRY.get().getValue(getId()).getStyledName());
     } else if (getType() == Type.MODIFIER) {
-      return Component.translatable("roots.message.modifier.already_learned", Registries.MODIFIER_REGISTRY.get().getValue(getId()).getName());
+      return Component.translatable("roots.message.modifier.already_learned", RootsRegistries.MODIFIER_REGISTRY.get().getValue(getId()).getName());
     } else {
       throw new IllegalStateException("Unknown grant type: " + getType());
     }
@@ -94,11 +94,11 @@ public class Grant {
   }
 
   public static Grant spell(Spell spell) {
-    return new Grant(Type.SPELL, Registries.SPELL_REGISTRY.get().getKey(spell), false);
+    return new Grant(Type.SPELL, RootsRegistries.SPELL_REGISTRY.get().getKey(spell), false);
   }
 
   public static Grant modifier(Modifier modifier) {
-    return new Grant(Type.MODIFIER, Registries.MODIFIER_REGISTRY.get().getKey(modifier), false);
+    return new Grant(Type.MODIFIER, RootsRegistries.MODIFIER_REGISTRY.get().getKey(modifier), false);
   }
 
   public enum Type {

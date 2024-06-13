@@ -3,28 +3,28 @@ package mysticmods.roots.config;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import mysticmods.roots.api.RootsAPI;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid= RootsAPI.MODID, bus=Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid= RootsAPI.MODID, bus=EventBusSubscriber.Bus.MOD)
 public class ConfigManager {
 
-  private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+  private static final ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
 
   public static List<AbstractConfig> CONFIGS = new ArrayList<>();
 
   public static HatConfig HAT_CONFIG = new HatConfig();
 
-  public static ForgeConfigSpec.BooleanValue EXPERIENCE_ORBS;
-  public static ForgeConfigSpec.BooleanValue PACIFIST_DISABLED;
-  public static ForgeConfigSpec.IntValue REPUTATION_LOSS_PACIFIST;
-  public static ForgeConfigSpec COMMON_CONFIG;
+  public static ModConfigSpec.BooleanValue EXPERIENCE_ORBS;
+  public static ModConfigSpec.BooleanValue PACIFIST_DISABLED;
+  public static ModConfigSpec.IntValue REPUTATION_LOSS_PACIFIST;
+  public static ModConfigSpec COMMON_CONFIG;
 
   static {
     COMMON_BUILDER.comment("magnetism-related configuration").push("magnetism");
@@ -40,7 +40,7 @@ public class ConfigManager {
     COMMON_CONFIG = COMMON_BUILDER.build();
   }
 
-  public static void loadConfig(ForgeConfigSpec spec, Path path) {
+  public static void loadConfig(ModConfigSpec spec, Path path) {
     CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
     configData.load();
     spec.setConfig(configData);

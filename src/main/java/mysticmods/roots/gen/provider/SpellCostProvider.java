@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.gen.BaseProvider;
 import net.minecraft.data.CachedOutput;
@@ -26,8 +26,8 @@ public class SpellCostProvider extends BaseProvider implements DataProvider {
   public void run(CachedOutput pCache) {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
-    for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
-      ResourceLocation id = Registries.SPELL_REGISTRY.get().getKey(spell);
+    for (Spell spell : RootsRegistries.SPELL_REGISTRY.get().getValues()) {
+      ResourceLocation id = RootsRegistries.SPELL_REGISTRY.get().getKey(spell);
       if (id == null) {
         throw new NullPointerException("Null id for spell " + spell + "; how is this possible???");
       }

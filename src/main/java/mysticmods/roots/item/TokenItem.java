@@ -5,7 +5,7 @@ import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -228,9 +228,9 @@ public class TokenItem extends Item {
   @Override
   public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
     if (this.allowedIn(pCategory)) {
-      Registries.SPELL_REGISTRY.get().forEach(o -> pItems.add(setSpell(t(), o)));
-      Registries.MODIFIER_REGISTRY.get().forEach(o -> pItems.add(setSingleModifier(t(), o)));
-      Registries.RITUAL_REGISTRY.get().forEach(o -> pItems.add(setRitual(t(), o)));
+      RootsRegistries.SPELL_REGISTRY.get().forEach(o -> pItems.add(setSpell(t(), o)));
+      RootsRegistries.MODIFIER_REGISTRY.get().forEach(o -> pItems.add(setSingleModifier(t(), o)));
+      RootsRegistries.RITUAL_REGISTRY.get().forEach(o -> pItems.add(setRitual(t(), o)));
     }
   }
 
@@ -251,13 +251,13 @@ public class TokenItem extends Item {
       return null;
     }
 
-    return Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell")));
+    return RootsRegistries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell")));
   }
 
   public static ItemStack setSpell(ItemStack stack, Spell spell) {
     CompoundTag tag = stack.getOrCreateTag();
     tag.putString("type", Type.SPELL.name().toLowerCase(Locale.ROOT));
-    tag.putString("spell", Registries.SPELL_REGISTRY.get().getKey(spell).toString());
+    tag.putString("spell", RootsRegistries.SPELL_REGISTRY.get().getKey(spell).toString());
     return stack;
   }
 
@@ -268,7 +268,7 @@ public class TokenItem extends Item {
       return null;
     }
 
-    return Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(tag.getString("modifier")));
+    return RootsRegistries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(tag.getString("modifier")));
   }
 
   @Nullable
@@ -284,7 +284,7 @@ public class TokenItem extends Item {
   public static ItemStack setSingleModifier(ItemStack stack, Modifier modifier) {
     CompoundTag tag = stack.getOrCreateTag();
     tag.putString("type", Type.MODIFIER.name().toLowerCase(Locale.ROOT));
-    tag.putString("modifier", Registries.MODIFIER_REGISTRY.get().getKey(modifier).toString());
+    tag.putString("modifier", RootsRegistries.MODIFIER_REGISTRY.get().getKey(modifier).toString());
     return stack;
   }
 
@@ -337,7 +337,7 @@ public class TokenItem extends Item {
   public static ItemStack setRitual(ItemStack stack, Ritual ritual) {
     CompoundTag tag = stack.getOrCreateTag();
     tag.putString("type", Type.RITUAL.name().toLowerCase(Locale.ROOT));
-    tag.putString("ritual", Registries.RITUAL_REGISTRY.get().getKey(ritual).toString());
+    tag.putString("ritual", RootsRegistries.RITUAL_REGISTRY.get().getKey(ritual).toString());
     return stack;
   }
 
@@ -348,7 +348,7 @@ public class TokenItem extends Item {
       return null;
     }
 
-    return Registries.RITUAL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("ritual")));
+    return RootsRegistries.RITUAL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("ritual")));
   }
 
   public enum Type {
@@ -379,9 +379,9 @@ public class TokenItem extends Item {
     }
     GrantCapability cap = player.getCapability(Capabilities.GRANT_CAPABILITY).orElseThrow(NullPointerException::new);
     if (type == Type.SPELL) {
-      return cap.hasSpell(Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell"))));
+      return cap.hasSpell(RootsRegistries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell"))));
     } else if (type == Type.MODIFIER) {
-      return cap.hasModifier(Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(tag.getString("modifier"))));
+      return cap.hasModifier(RootsRegistries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(tag.getString("modifier"))));
     } else {
       // TODO: Throw here?
       return false;
@@ -438,7 +438,7 @@ public class TokenItem extends Item {
 
   public static List<ItemStack> getSpells() {
     List<ItemStack> stack = new ArrayList<>();
-    for (Spell spell : Registries.SPELL_REGISTRY.get().getValues()) {
+    for (Spell spell : RootsRegistries.SPELL_REGISTRY.get().getValues()) {
       stack.add(getSpellToken(spell));
     }
     return stack;
@@ -446,7 +446,7 @@ public class TokenItem extends Item {
 
   public static List<ItemStack> getModifiers(Spell spell) {
     List<ItemStack> stack = new ArrayList<>();
-    for (Modifier modifier : Registries.MODIFIER_REGISTRY.get().getValues()) {
+    for (Modifier modifier : RootsRegistries.MODIFIER_REGISTRY.get().getValues()) {
       if (modifier.getSpell() == spell) {
         stack.add(getModifierToken(modifier));
       }

@@ -5,7 +5,7 @@ import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceKey;
@@ -131,24 +131,24 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
   }
 
   public boolean is(ResourceLocation key) {
-    return Registries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(ResourceKey<Spell> key) {
-    return Registries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(Predicate<ResourceKey<Spell>> key) {
-    return Registries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   public boolean is(TagKey<Spell> key) {
-    return Registries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return RootsRegistries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
   }
 
   @Override
   public ResourceLocation getKey() {
-    return Registries.SPELL_REGISTRY.get().getKey(this);
+    return RootsRegistries.SPELL_REGISTRY.get().getKey(this);
   }
 
   @Override

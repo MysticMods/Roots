@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import noobanidus.libs.noobutil.type.LazySupplier;
 
-@Mod.EventBusSubscriber(modid = RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class ResolvedRecipes {
   public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.GROVE), (o1, o2) -> Integer.compare(o1.getId().getNamespace().compareTo(o2.getId().getNamespace()), Integer.compare(o1.getPriority(), o2.getPriority())));
   public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(LazySupplier.of(ModRecipes.MORTAR), (o1, o2) -> Integer.compare(o1.getId().getNamespace().compareTo(o2.getId().getNamespace()), Integer.compare(o1.getPriority(), o2.getPriority())));

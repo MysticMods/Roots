@@ -2,7 +2,7 @@ package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -37,10 +37,10 @@ public class SpellInstance implements SpellLike {
   }
 
   protected SpellInstance(CompoundTag tag) {
-    spell = Registries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell")));
+    spell = RootsRegistries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell")));
     ListTag modifiers = tag.getList("modifiers", 8);
     for (int i = 0; i < modifiers.size(); i++) {
-      enabledModifiers.add(Registries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(modifiers.getString(i))));
+      enabledModifiers.add(RootsRegistries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(modifiers.getString(i))));
     }
     cooldown = tag.getInt("cooldown");
   }

@@ -1,7 +1,7 @@
 package mysticmods.roots.network.server;
 
 import mysticmods.roots.ServerHooks;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
@@ -23,13 +23,13 @@ public class ServerBoundLibraryToStaffPacket {
   public ServerBoundLibraryToStaffPacket(FriendlyByteBuf buf) {
     this.hand = buf.readEnum(InteractionHand.class);
     this.slot = buf.readVarInt();
-    this.spell = Registries.SPELL_REGISTRY.get().getValue(buf.readVarInt());
+    this.spell = RootsRegistries.SPELL_REGISTRY.get().getValue(buf.readVarInt());
   }
 
   public void encode(FriendlyByteBuf buf) {
     buf.writeEnum(hand);
     buf.writeVarInt(slot);
-    buf.writeVarInt(Registries.SPELL_REGISTRY.get().getID(spell));
+    buf.writeVarInt(RootsRegistries.SPELL_REGISTRY.get().getID(spell));
   }
 
   public void handle(Supplier<NetworkEvent.Context> context) {

@@ -1,10 +1,13 @@
 package mysticmods.roots.worldgen.features.placements;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.init.ModFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -14,12 +17,13 @@ import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementFilter;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DimensionPlacement extends PlacementFilter {
-  public static final Codec<DimensionPlacement> CODEC = RecordCodecBuilder.create((codec) -> codec.group(
-      ResourceLocation.CODEC.listOf().fieldOf("dimensions").forGetter(o -> o.dimensions.stream().map(ResourceKey::location).collect(Collectors.toList()))).apply(codec, (r) -> new DimensionPlacement(r.stream().map(o -> ResourceKey.create(Registry.DIMENSION_REGISTRY, o)).collect(Collectors.toSet()))));
+  public static final MapCodec<DimensionPlacement> CODEC = RecordCodecBuilder.mapCodec((codec) -> codec.group(
+      ResourceLocation.CODEC.listOf().fieldOf("dimensions").forGetter(o -> o.dimensions.stream().map(ResourceKey::location).collect(Collectors.toList()))).apply(codec, (r) -> new DimensionPlacement(r.stream().map(o -> ResourceKey.create(Registries.DIMENSION, o)).collect(Collectors.toSet()))));
 
   private final Set<ResourceKey<Level>> dimensions;
 
@@ -44,7 +48,7 @@ public class DimensionPlacement extends PlacementFilter {
 
   public static class Type implements PlacementModifierType<DimensionPlacement> {
     @Override
-    public Codec<DimensionPlacement> codec() {
+    public MapCodec<DimensionPlacement> codec() {
       return DimensionPlacement.CODEC;
     }
   }

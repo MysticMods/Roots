@@ -3,7 +3,7 @@ package mysticmods.roots.api.capability;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.registry.Registries;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -96,7 +96,7 @@ public class ReputationCapability implements ICapabilityProvider, ICapabilitySer
     CompoundTag reputations = nbt.getCompound("reputations");
     reputations.getAllKeys().forEach(key -> {
       ResourceLocation groveKey = new ResourceLocation(key);
-      Grove grove = Registries.GROVE_REGISTRY.get().getValue(groveKey);
+      Grove grove = RootsRegistries.GROVE_REGISTRY.get().getValue(groveKey);
       if (grove != null) {
         REPUTATIONS.put(grove, reputations.getInt(key));
       }
@@ -144,7 +144,7 @@ public class ReputationCapability implements ICapabilityProvider, ICapabilitySer
       int size = buf.readVarInt();
       for (int i = 0; i < size; i++) {
         ResourceLocation groveKey = buf.readResourceLocation();
-        Grove grove = Registries.GROVE_REGISTRY.get().getValue(groveKey);
+        Grove grove = RootsRegistries.GROVE_REGISTRY.get().getValue(groveKey);
         int amount = buf.readVarInt();
         if (grove != null) {
           reputations.put(grove, amount);
