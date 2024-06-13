@@ -8,8 +8,8 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
 public class LivingSwordItem extends SwordItem implements ILivingRepair {
-  public LivingSwordItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
-    super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+  public LivingSwordItem(Tier pTier, Properties pProperties) {
+    super(pTier, pProperties);
   }
 
   @Override

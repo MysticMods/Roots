@@ -8,8 +8,8 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
 public class LivingHoeItem extends HoeItem implements ILivingRepair {
-  public LivingHoeItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
-    super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+  public LivingHoeItem(Tier pTier, Properties pProperties) {
+    super(pTier, pProperties);
   }
 
   @Override

@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
 public class ModFoods {
-  public static final FoodProperties FISH_AND_CHIPS = (new FoodProperties.Builder().nutrition(10).meat().saturationMod(0.8f)).build();
+  public static final FoodProperties FISH_AND_CHIPS = (new FoodProperties.Builder().nutrition(10).saturationMod(0.8f)).build();
   public static final FoodProperties VENISON = (new FoodProperties.Builder().nutrition(3).meat().saturationMod(0.3f)).build();
   public static final FoodProperties COOKED_VENISON = (new FoodProperties.Builder().nutrition(7).meat().saturationMod(0.8f)).build();
   public static final FoodProperties AUBERGINE = (new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)).build();

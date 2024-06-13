@@ -15,8 +15,8 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
   public static final int BASE_TICK = 9;
   public static final int ELEMENTAL_TICK = 3;
 
-  public ElementalCropBlock(Properties builder, Supplier<Supplier<? extends ItemLike>> seedProvider) {
-    super(builder, seedProvider);
+  public ElementalCropBlock(Supplier<? extends ItemLike> seedProvider, Properties builder) {
+    super(seedProvider, builder);
   }
 
   @Override
@@ -30,14 +30,14 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
         int i = this.getAge(pState);
         if (i < this.getMaxAge()) {
           float f = getGrowthSpeed(this, pLevel, pPos);
-          if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
-            BlockState newState = this.getStateForAge(i + 1);
-            if (pState.hasProperty(BlockStateProperties.WATERLOGGED)) {
-              newState = newState.setValue(BlockStateProperties.WATERLOGGED, pState.getValue(BlockStateProperties.WATERLOGGED));
-            }
-            pLevel.setBlock(pPos, newState, 2);
-            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
+        if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
+          BlockState pNewState = this.getStateForAge(i + 1);
+          if (pState.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            pNewState = pNewState.setValue(BlockStateProperties.WATERLOGGED, pState.getValue(BlockStateProperties.WATERLOGGED));
           }
+          pLevel.setBlock(pPos, pNewState, 2);
+          net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(pLevel, pPos, pState);
+        }
         }
       }
     }

@@ -12,48 +12,36 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public class BaseBlocks {
-  public static class CropsBlock extends net.minecraft.world.level.block.CropBlock {
-    public CropsBlock(Properties builder) {
-      super(builder);
-    }
+  public static class SeededCropsBlock extends CropBlock {
+    private final Supplier<? extends ItemLike> seedProvider;
 
-    @Override
-    @Nonnull
-    public VoxelShape getShape(BlockState state, BlockGetter blockReader, BlockPos pos, CollisionContext selectionContext) {
-      return Block.box(0, 0, 0, 16.0D, 2.0D * (state.getValue(AGE) + 1), 16.0D);
-    }
-  }
-
-  public static class SeededCropsBlock extends CropsBlock {
-    private final Supplier<Supplier<? extends ItemLike>> seedProvider;
-
-    public SeededCropsBlock(Properties builder, Supplier<Supplier<? extends ItemLike>> seedProvider) {
+    public SeededCropsBlock(Supplier<? extends ItemLike> seedProvider, Properties builder) {
       super(builder);
       this.seedProvider = seedProvider;
     }
 
     @Override
     protected ItemLike getBaseSeedId() {
-      return seedProvider.get().get();
+      return seedProvider.get();
     }
   }
 
   public static class WildCropBlock extends BushBlock {
-    public static final MapCodec<WildCropBlock> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(propertiesCodec(), TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(WildCropBlock::getSupporterTag)).apply(builder, WildCropBlock::new));
+    public static final MapCodec<WildCropBlock> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(propertiesCodec(), TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(WildCropBlock::getSupporterTag)).apply(builder, (builder1, tag) -> new WildCropBlock(tag, builder1)));
 
     private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     private final TagKey<Block> supporter;
 
-    public WildCropBlock(Properties builder, TagKey<Block> tag) {
+    public WildCropBlock(TagKey<Block> tag, Properties builder) {
       super(builder);
       this.supporter = tag;
     }

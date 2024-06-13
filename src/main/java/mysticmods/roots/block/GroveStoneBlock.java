@@ -1,7 +1,9 @@
 package mysticmods.roots.block;
 
+import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.reference.Shapes;
+import mysticmods.roots.util.VoxelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -20,13 +23,11 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import noobanidus.libs.noobutil.block.BaseBlocks;
-import noobanidus.libs.noobutil.util.VoxelUtil;
 
 import javax.annotation.Nullable;
 
 // TODO: Activation with right-click wildroot? (or just right-click)
-public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
+public class GroveStoneBlock extends HorizontalDirectionalBlock {
   public static final DirectionProperty FACING = StateProperties.GroveStone.FACING;
   public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
   public static final BooleanProperty VALID = StateProperties.GroveStone.VALID;
@@ -37,6 +38,11 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
   public GroveStoneBlock(Properties builder) {
     super(builder);
     this.registerDefaultState(defaultBlockState().setValue(VALID, false).setValue(PART, StateProperties.Part.BOTTOM));
+  }
+
+  @Override
+  protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+    return simpleCodec(GroveStoneBlock::new);
   }
 
   @Override
@@ -77,7 +83,7 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
   }
 
   @Override
-  public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+  public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
     if (!pLevel.isClientSide) {
       preventDrops(pLevel, pPos, pState, pPlayer);
       if (!pPlayer.isCreative()) {
@@ -85,7 +91,7 @@ public class GroveStoneBlock extends BaseBlocks.HorizontalBlock {
       }
     }
 
-    super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
+    return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
   }
 
   @Override

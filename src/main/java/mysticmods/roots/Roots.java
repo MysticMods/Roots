@@ -84,7 +84,7 @@ public class Roots {
       }
     };
 
-    ModBlocks.load();
+    ModBlocks.register(bus);
     ModBlockEntities.load();
     ModItems.load();
     ModEntities.load();

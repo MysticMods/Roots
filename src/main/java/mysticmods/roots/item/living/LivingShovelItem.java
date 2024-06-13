@@ -9,8 +9,8 @@ import net.minecraft.world.level.Level;
 
 public class LivingShovelItem extends ShovelItem implements ILivingRepair {
 
-  public LivingShovelItem(Tier pTier, float pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
-    super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+  public LivingShovelItem(Tier pTier, Properties pProperties) {
+    super(pTier, pProperties);
   }
 
   @Override

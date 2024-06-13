@@ -8,8 +8,8 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
 public class LivingAxeItem extends AxeItem implements ILivingRepair {
-  public LivingAxeItem(Tier pTier, float pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
-    super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+  public LivingAxeItem(Tier pTier, Properties pProperties) {
+    super(pTier, pProperties);
   }
 
   @Override

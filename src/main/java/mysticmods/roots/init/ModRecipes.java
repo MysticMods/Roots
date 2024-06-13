@@ -18,9 +18,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ModRecipes {
@@ -31,11 +34,10 @@ public class ModRecipes {
   public static DeferredHolder<RecipeType<?>, RecipeType<MortarRecipe>> MORTAR = TYPES.register("mortar", () -> RecipeType.simple(RootsAPI.rl("mortar")));
   public static DeferredHolder<RecipeType<?>, RecipeType<GroveRecipe>> GROVE = TYPES.register("grove", () -> RecipeType.simple(RootsAPI.rl("grove")));
   public static DeferredHolder<RecipeType<?>, RecipeType<BarkRecipe>> BARK = TYPES.register("bark", () -> RecipeType.simple(RootsAPI.rl("bark")));
-
   public static DeferredHolder<RecipeType<?>, RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> RecipeType.simple(RootsAPI.rl("runic_block")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));
 
-  public static RegistryObject<RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));
-
+/*
   static {
     REGISTRATE.addDataGenerator(ProviderType.RECIPE, (p) -> {
       PyreRecipe
@@ -220,6 +222,7 @@ public class ModRecipes {
         .save(p, RootsAPI.rl("moss_block_from_grove_moss"));
     });
   }
+*/
 
   public static void register(IEventBus bus) {
     TYPES.register(bus);
@@ -227,7 +230,8 @@ public class ModRecipes {
 
   @SubscribeEvent
   public static void registerRecipeSerializers(RegisterEvent event) {
-    if (event.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS)) {
+    if (event.getRegistryKey().equals(Registries.RECIPE_SERIALIZER)) {
+      // TODO:
       CraftingHelper.register(RootsAPI.rl("excluding_ingredient"), ExcludingIngredient.Serializer.INSTANCE);
     }
   }

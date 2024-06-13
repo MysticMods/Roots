@@ -22,8 +22,8 @@ import java.util.function.Supplier;
 public class WaterElementalCropBlock extends ElementalCropBlock implements SimpleWaterloggedBlock {
   public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-  public WaterElementalCropBlock(Properties builder, Supplier<Supplier<? extends ItemLike>> seedProvider) {
-    super(builder, seedProvider);
+  public WaterElementalCropBlock(Supplier<? extends ItemLike> seedProvider, Properties builder) {
+    super(seedProvider, builder);
     this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
   }
 
