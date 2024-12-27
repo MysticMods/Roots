@@ -23,7 +23,7 @@ architectury {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/lootr.accesswidener")
+    accessWidenerPath = file("src/main/resources/roots.accesswidener")
 }
 
 jar {
@@ -53,14 +53,14 @@ publishing {
             }
 
             pom {
-                name = 'Lootr'
+                name = 'Roots'
                 description = 'Friendly loot for everyone.'
-                url = 'https://github.com/LootrMinecraft/Lootr'
+                url = 'https://github.com/MysticMods/Roots'
 
                 scm {
-                    connection = 'git:https://github.com/LootrMinecraft/Lootr.git'
-                    developerConnection = 'git:https://github.com/LootrMinecraft/Lootr.git'
-                    url = 'https://github.com/LootrMinecraft/Lootr'
+                    connection = 'git:https://github.com/MysticMods/Roots.git'
+                    developerConnection = 'git:https://github.com/MysticMods/Roots.git'
+                    url = 'https://github.com/MysticMods/Roots'
                 }
 
                 licenses {

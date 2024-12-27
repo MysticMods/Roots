@@ -1,6 +1,6 @@
 modLoader="javafml" 
 loaderVersion="[2,)"
-issueTrackerURL="https://github.com/mysticmods/Lootr/issues"
+issueTrackerURL="https://github.com/mysticmods/Roots/issues"
 license="https://github.com/mysticmods/roots/arch-1.21/LICENSE"
 [[mods]]
     modId="roots"
