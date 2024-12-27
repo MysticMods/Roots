@@ -8,6 +8,7 @@ import mysticmods.roots.api.reference.Rituals;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.ritual.*;
 import net.minecraft.resources.ResourceKey;
+import net.neoforged.bus.api.IEventBus;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -152,6 +153,10 @@ public class ModRituals {
 
   private static <T extends Ritual> RegistryEntry<T> ritual(ResourceKey<Ritual> key, NonNullSupplier<T> builder) {
     return REGISTRATE.simple(key.location().getPath(), RootsAPI.RITUAL_REGISTRY, builder);
+  }
+
+  public static void register (IEventBus bus) {
+
   }
 
   public static void load() {

@@ -24,7 +24,7 @@ import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraftforge.registries.ForgeRegistries;
+
 
 import java.util.Set;
 

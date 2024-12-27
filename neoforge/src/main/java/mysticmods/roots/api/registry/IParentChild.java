@@ -1,7 +1,7 @@
 package mysticmods.roots.api.registry;
 
 import mysticmods.roots.api.modifier.Modifier;
-import noobanidus.libs.noobutil.type.LazySupplier;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;

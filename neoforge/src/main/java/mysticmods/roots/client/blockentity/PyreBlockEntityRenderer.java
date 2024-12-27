@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import noobanidus.libs.particleslib.client.events.RenderTickHandler;
+
 
 import java.util.List;
 import java.util.Random;

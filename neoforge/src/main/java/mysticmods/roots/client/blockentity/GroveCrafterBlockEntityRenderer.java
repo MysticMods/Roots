@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import noobanidus.libs.particleslib.client.events.RenderTickHandler;
+
 
 public class GroveCrafterBlockEntityRenderer extends BoundedBlockEntityRenderer<GroveCrafterBlockEntity> {
   public GroveCrafterBlockEntityRenderer(BlockEntityRendererProvider.Context context) {

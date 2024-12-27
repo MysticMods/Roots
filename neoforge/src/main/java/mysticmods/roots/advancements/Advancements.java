@@ -5,8 +5,8 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import noobanidus.libs.noobutil.advancement.GenericTrigger;
+
+
 
 public class Advancements {
   public static final ResourceLocation PACIFIST_ID = RootsAPI.rl("pacifist");

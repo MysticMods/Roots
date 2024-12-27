@@ -26,8 +26,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraftforge.common.util.FakePlayerFactory;
-import noobanidus.libs.noobutil.util.ItemUtil;
+
+
 
 import java.util.Collections;
 import java.util.List;

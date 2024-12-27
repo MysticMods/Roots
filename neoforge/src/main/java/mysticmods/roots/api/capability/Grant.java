@@ -7,12 +7,12 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.Modifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.util.EnumUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
-import noobanidus.libs.noobutil.util.EnumUtil;
 
 import java.util.Locale;
 
@@ -33,9 +33,9 @@ public class Grant {
 
   public Component getFailed() {
     if (getType() == Type.SPELL) {
-      return Component.translatable("roots.message.spell.already_learned", RootsRegistries.SPELL_REGISTRY.get().getValue(getId()).getStyledName());
+      return Component.translatable("roots.message.spell.already_learned", RootsRegistries.SPELL_REGISTRY.get().get(getId()).getStyledName());
     } else if (getType() == Type.MODIFIER) {
-      return Component.translatable("roots.message.modifier.already_learned", RootsRegistries.MODIFIER_REGISTRY.get().getValue(getId()).getName());
+      return Component.translatable("roots.message.modifier.already_learned", RootsRegistries.MODIFIER_REGISTRY.get().get(getId()).getName());
     } else {
       throw new IllegalStateException("Unknown grant type: " + getType());
     }
@@ -85,7 +85,7 @@ public class Grant {
         repeatable = GsonHelper.getAsBoolean(pJsonObject, "repeatable");
       }
       Type type = EnumUtil.fromString(Type.class, GsonHelper.getAsString(pJsonObject, "type"));
-      return new Grant(type, new ResourceLocation(GsonHelper.getAsString(pJsonObject, "id")), repeatable);
+      return new Grant(type, ResourceLocation.tryParse(GsonHelper.getAsString(pJsonObject, "id")), repeatable);
     }
   }
 

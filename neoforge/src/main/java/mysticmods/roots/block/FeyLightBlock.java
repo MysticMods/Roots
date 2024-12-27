@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import noobanidus.libs.particleslib.client.particle.Particles;
-import noobanidus.libs.particleslib.init.ModParticles;
+
+
 
 public class FeyLightBlock extends Block {
   public static BooleanProperty DECAYING = BooleanProperty.create("decaying");

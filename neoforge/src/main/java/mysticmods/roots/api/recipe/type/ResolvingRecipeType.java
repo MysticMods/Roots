@@ -1,29 +1,38 @@
 package mysticmods.roots.api.recipe.type;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.IRootsRecipeBase;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Supplier;
 
-// TODO: Move recipe caching into NoobUtil
-public class ResolvingRecipeType<C extends Container, T extends Recipe<C> & IRootsRecipeBase> extends noobanidus.libs.noobutil.recipe.ResolvingRecipeType<C, T> {
-  private T lastRecipe = null;
+public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IRootsRecipeBase> extends SimpleJsonResourceReloadListener {
+  protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+  protected final Supplier<RecipeType<T>> type;
+  protected List<RecipeHolder<T>> cache = null;
+  protected final Comparator<? super RecipeHolder<T>> comparator;
+  protected final Object2IntOpenHashMap<ResourceLocation> reverseLookup = new Object2IntOpenHashMap<>();
+  private RecipeHolder<T> lastRecipe = null;
 
-  public ResolvingRecipeType(Supplier<RecipeType<T>> type, Comparator<? super T> comparator) {
-    super(type, comparator);
+  public ResolvingRecipeType(Supplier<RecipeType<T>> type, Comparator<? super RecipeHolder<T>> comparator) {
+    super(GSON, "recipes");
+    this.type = type;
+    this.comparator = comparator;
   }
 
-  @Override
-  protected List<T> getRecipesList() {
+  protected List<RecipeHolder<T>> getRecipesList() {
     RecipeManager manager = RootsAPI.getInstance().getRecipeManager();
     if (manager == null) {
       // TODO:
@@ -32,13 +41,66 @@ public class ResolvingRecipeType<C extends Container, T extends Recipe<C> & IRoo
     return manager.getAllRecipesFor(type.get());
   }
 
+  public List<RecipeHolder<T>> getRecipes() {
+    if (cache == null) {
+      cache = getRecipesList();
+      try {
+        cache.sort(comparator);
+      } catch (UnsupportedOperationException exception) {
+        cache = new ArrayList<>(cache);
+        cache.sort(comparator);
+      }
+      reverseLookup.clear();
+      for (int i = 0; i < cache.size(); i++) {
+        reverseLookup.put(cache.get(i).id(), i);
+      }
+    }
+
+    return cache;
+  }
+
   @Nullable
-  public T findRecipe(C inventory, Level level) {
-    if (lastRecipe != null && !lastRecipe.isDynamic() && lastRecipe.matches(inventory, level)) {
+  public RecipeHolder<T> getRecipe(ResourceLocation location) {
+    int index = lookup(location);
+    if (index == -1) {
+      return null;
+    }
+    return getRecipe(index);
+  }
+
+  public int size() {
+    return getRecipes().size();
+  }
+
+  public RecipeHolder<T> getRecipe(int index) {
+    if (index < 0 || index >= getRecipes().size()) {
+      throw new RuntimeException("Index " + index + " not in valid range for recipe type " + type + " [0," + getRecipes().size() + ")");
+    }
+
+    return getRecipes().get(index);
+  }
+
+  public boolean hasRecipe(int index) {
+    return index < getRecipes().size();
+  }
+
+  @Override
+  protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
+    this.cache = null;
+  }
+
+  public int lookup(ResourceLocation recipeId) {
+    getRecipes();
+    return reverseLookup.getOrDefault(recipeId, -1);
+  }
+
+  @Nullable
+  public RecipeHolder<T> findRecipe(C inventory, Level level) {
+    if (lastRecipe != null && !lastRecipe.value().isDynamic() && lastRecipe.value().matches(inventory, level)) {
       return lastRecipe;
     }
-    for (T recipe : getRecipes()) {
-      if (recipe.matches(inventory, level)) {
+    for (RecipeHolder<T> recipe : getRecipes()) {
+      if (recipe.value().matches(inventory, level)) {
         lastRecipe = recipe;
         return recipe;
       }

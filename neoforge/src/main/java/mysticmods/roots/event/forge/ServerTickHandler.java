@@ -7,9 +7,9 @@ import mysticmods.roots.network.client.ClientBoundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientBoundHerbSyncPacket;
 import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+
+
+
 
 import java.util.ArrayList;
 import java.util.LinkedList;

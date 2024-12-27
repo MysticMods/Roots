@@ -4,6 +4,7 @@ import mysticmods.roots.api.blockentity.BoundedBlockEntity;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -14,12 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import noobanidus.libs.noobutil.block.entities.IReferentialBlockEntity;
-import noobanidus.libs.noobutil.util.BlockEntityUtil;
 
 import javax.annotation.Nullable;
 
-public abstract class BaseBlockEntity extends BlockEntity implements IReferentialBlockEntity, BoundedBlockEntity {
+public abstract class BaseBlockEntity extends BlockEntity implements /*IReferentialBlockEntity, */BoundedBlockEntity {
   private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
   protected AABB singleBlockBoundingBox;
   protected BoundingBox boundingBox;
@@ -30,7 +29,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
 
   public void updateViaState() {
     setChanged();
-    BlockEntityUtil.updateViaState(this);
+    // TODO: BlockEntityUtil.updateViaState(this);
   }
 
   @Nullable
@@ -40,22 +39,22 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
   }
 
   @Override
-  public CompoundTag getUpdateTag() {
+  public CompoundTag getUpdateTag(HolderLookup.Provider lookup) {
     CompoundTag pTag = new CompoundTag();
-    saveAdditional(pTag);
+    saveAdditional(pTag, lookup);
     return pTag;
   }
 
   @Override
-  protected void saveAdditional(CompoundTag pTag) {
-    super.saveAdditional(pTag);
+	protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
+    super.saveAdditional(pTag, lookup);
 /*    if (getBaseBounds() != null) {
       BoundingBox.CODEC.encodeStart(NbtOps.INSTANCE, getBaseBounds()).resultOrPartial(RootsAPI.LOG::error).ifPresent(nbt -> pTag.put("base_bounding_box", nbt));
     }*/
   }
 
   @Override
-  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookup) {
     if (pkt.getTag() != null) {
       CompoundTag pTag = pkt.getTag();
 /*      if (pTag.contains("base_bounding_box")) {
@@ -64,10 +63,12 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
     }
   }
 
+/*
   @Override
   public BlockEntity getBlockEntity() {
     return this;
   }
+*/
 
 /*  @Override
   public void onLoad() {
@@ -106,7 +107,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
 
   private AABB clientBounds;
 
-  @Override
+/*  @Override
   public AABB getRenderBoundingBox() {
     if (!isBounded()) {
       return super.getRenderBoundingBox();
@@ -120,7 +121,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements IReferentia
     }
 
     return clientBounds;
-  }
+  }*/
 
   public AABB getSingleBlockBoundingBox() {
     if (singleBlockBoundingBox == null) {

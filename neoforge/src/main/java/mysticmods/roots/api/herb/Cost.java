@@ -8,8 +8,8 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import noobanidus.libs.noobutil.type.LazySupplier;
-import noobanidus.libs.noobutil.util.EnumUtil;
+
+
 
 import java.util.ArrayList;
 import java.util.List;

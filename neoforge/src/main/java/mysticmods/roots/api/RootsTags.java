@@ -7,6 +7,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -170,11 +171,11 @@ public class RootsTags {
     }
 
     private static TagKey<Block> compatTag(String name) {
-      return BlockTags.create(new ResourceLocation("forge", name));
+      return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
 
     private static TagKey<Block> compatTag(String prefix, String name) {
-      return BlockTags.create(new ResourceLocation(prefix, name));
+      return BlockTags.create(ResourceLocation.fromNamespaceAndPath(prefix, name));
     }
   }
 
@@ -314,7 +315,7 @@ public class RootsTags {
     }
 
     protected static TagKey<Item> compatTag(String name) {
-      return ItemTags.create(new ResourceLocation("forge", name));
+      return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -322,11 +323,11 @@ public class RootsTags {
     public static final TagKey<Potion> RANDOM_BLACKLIST = compatTag("random_potion_blacklist");
 
     static TagKey<Potion> modTag(String name) {
-      return TagKey.create(Registry.POTION_REGISTRY, RootsAPI.rl(name));
+      return TagKey.create(Registries.POTION, RootsAPI.rl(name));
     }
 
     static TagKey<Potion> compatTag(String name) {
-      return TagKey.create(Registry.POTION_REGISTRY, new ResourceLocation("forge", name));
+      return TagKey.create(Registries.POTION, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -345,11 +346,11 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> DISABLE_DISARM = modTag("disable_disarm");
 
     static TagKey<EntityType<?>> modTag(String name) {
-      return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, RootsAPI.rl(name));
+      return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));
     }
 
     static TagKey<EntityType<?>> compatTag(String name) {
-      return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation("forge", name));
+      return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -377,7 +378,7 @@ public class RootsTags {
     }
 
     static TagKey<Ritual> compatTag(String name) {
-      return TagKey.create(RootsAPI.RITUAL_REGISTRY, new ResourceLocation("forge", name));
+      return TagKey.create(RootsAPI.RITUAL_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -406,7 +407,7 @@ public class RootsTags {
     }
 
     static TagKey<Spell> compatTag(String name) {
-      return TagKey.create(RootsAPI.SPELL_REGISTRY, new ResourceLocation("forge", name));
+      return TagKey.create(RootsAPI.SPELL_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -418,7 +419,7 @@ public class RootsTags {
     }
 
     static TagKey<Modifier> compatTag(String name) {
-      return TagKey.create(RootsAPI.MODIFIER_REGISTRY, new ResourceLocation("forge", name));
+      return TagKey.create(RootsAPI.MODIFIER_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -441,7 +442,7 @@ public class RootsTags {
     }
 
     static TagKey<Herb> compatTag(String name) {
-      return TagKey.create(RootsAPI.HERB_REGISTRY, new ResourceLocation("forge", name));
+      return TagKey.create(RootsAPI.HERB_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -468,7 +469,7 @@ public class RootsTags {
     }
 
     static TagKey<Grove> compatTag(String name) {
-      return TagKey.create(RootsAPI.GROVE_REGISTRY, new ResourceLocation("forge", name));
+      return TagKey.create(RootsAPI.GROVE_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 }

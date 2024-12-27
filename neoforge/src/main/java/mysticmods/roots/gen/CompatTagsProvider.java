@@ -13,9 +13,9 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.*;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.registries.ForgeRegistry;
+
+
+
 import org.slf4j.Logger;
 
 import java.io.IOException;

@@ -3,6 +3,7 @@ package mysticmods.roots.blockentity;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -16,8 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.items.ItemStackHandler;
-import noobanidus.libs.noobutil.util.ItemUtil;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
   private final ItemStackHandler inventory = new ItemStackHandler(1) {
@@ -86,7 +86,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   @Override
-  protected void saveAdditional(CompoundTag pTag) {
+  protected void saveAdditional(CompoundTag pTag, ) {
     super.saveAdditional(pTag);
     pTag.put("inventory", inventory.serializeNBT());
   }

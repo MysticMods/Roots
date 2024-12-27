@@ -6,10 +6,10 @@ import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.api.capability.ReputationCapability;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+
+
+
+
 
 @EventBusSubscriber(value= Dist.CLIENT, modid= RootsAPI.MODID)
 public class ClientTicker {

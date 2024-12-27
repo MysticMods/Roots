@@ -3,7 +3,7 @@ package mysticmods.roots.advancements;
 
 import com.google.gson.JsonElement;
 import net.minecraft.server.level.ServerPlayer;
-import noobanidus.libs.noobutil.advancement.IGenericPredicate;
+
 
 import javax.annotation.Nullable;
 

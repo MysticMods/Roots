@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import noobanidus.libs.particleslib.client.events.RenderTickHandler;
+
 
 import java.util.Random;
 

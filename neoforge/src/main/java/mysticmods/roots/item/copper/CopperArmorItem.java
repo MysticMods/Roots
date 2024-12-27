@@ -7,7 +7,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorMaterial;
-import noobanidus.libs.noobutil.material.MaterialType;
+
 
 public class CopperArmorItem extends ModifiedArmorItem implements ICopperItem {
   public CopperArmorItem(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {

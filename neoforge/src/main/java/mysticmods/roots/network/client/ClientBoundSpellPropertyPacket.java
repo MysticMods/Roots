@@ -5,7 +5,7 @@ import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+
 
 import java.util.Collection;
 import java.util.function.Supplier;

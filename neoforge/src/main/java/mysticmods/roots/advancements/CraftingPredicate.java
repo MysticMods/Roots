@@ -9,7 +9,7 @@ import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
-import noobanidus.libs.noobutil.advancement.IGenericPredicate;
+
 
 import javax.annotation.Nullable;
 

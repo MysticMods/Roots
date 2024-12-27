@@ -12,6 +12,7 @@ import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
@@ -27,7 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import noobanidus.libs.noobutil.util.ItemUtil;
+
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -190,8 +191,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }*/
 
   @Override
-  protected void saveAdditional(CompoundTag pTag) {
-    super.saveAdditional(pTag);
+  protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
+    super.saveAdditional(pTag, lookup);
     if (cachedRecipe != null) {
       pTag.putString("cached_recipe", cachedRecipe.getId().toString());
     }
@@ -201,16 +202,16 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   @Override
-  public void load(CompoundTag pTag) {
-    super.load(pTag);
+  public void loadAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
+    super.loadAdditional(pTag, lookup);
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
-      ResourceLocation cachedId = new ResourceLocation(pTag.getString("cached_recipe"));
+      ResourceLocation cachedId = RootsAPI.rl(pTag.getString("cached_recipe"));
       cachedRecipe = ResolvedRecipes.GROVE.getRecipe(cachedId);
     } else {
       cachedRecipe = null;
     }
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
-      ResourceLocation lastId = new ResourceLocation(pTag.getString("last_recipe"));
+      ResourceLocation lastId = RootsAPI.rl(pTag.getString("last_recipe"));
       lastRecipe = ResolvedRecipes.GROVE.getRecipe(lastId);
     } else {
       lastRecipe = null;
@@ -231,11 +232,11 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   @Override
-  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookup) {
+    super.onDataPacket(net, pkt, lookup);
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
-      load(tag);
+      loadAdditional(tag, lookup);
     } else {
       lastRecipe = null;
       cachedRecipe = null;

@@ -6,9 +6,9 @@ import mysticmods.roots.api.capability.*;
 import mysticmods.roots.capability.PlayerShoulderCapability;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+
+
+
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class CapabilitiesHandler {

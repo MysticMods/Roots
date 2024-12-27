@@ -30,10 +30,10 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.IForgeShearable;
-import net.minecraftforge.common.ToolAction;
-import net.minecraftforge.common.ToolActions;
-import noobanidus.libs.noobutil.util.ItemUtil;
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;

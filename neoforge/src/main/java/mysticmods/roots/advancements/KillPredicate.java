@@ -12,8 +12,8 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import noobanidus.libs.noobutil.advancement.IGenericPredicate;
+
+
 
 import javax.annotation.Nullable;
 

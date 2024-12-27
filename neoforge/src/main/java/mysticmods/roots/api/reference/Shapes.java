@@ -2,7 +2,7 @@ package mysticmods.roots.api.reference;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import noobanidus.libs.noobutil.util.VoxelUtil;
+
 
 public interface Shapes {
   VoxelShape FEY_LIGHT = Block.box(6, 6, 6, 10, 10, 10);

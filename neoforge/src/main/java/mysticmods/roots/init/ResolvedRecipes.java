@@ -13,10 +13,9 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityCrafting;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import noobanidus.libs.noobutil.type.LazySupplier;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ResolvedRecipes {

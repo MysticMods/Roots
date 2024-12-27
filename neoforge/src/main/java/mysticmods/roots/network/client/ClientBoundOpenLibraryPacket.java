@@ -3,7 +3,7 @@ package mysticmods.roots.network.client;
 import mysticmods.roots.client.ClientHooks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
-import net.minecraftforge.network.NetworkEvent;
+
 
 import java.util.function.Supplier;
 
