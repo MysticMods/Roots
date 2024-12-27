@@ -1,0 +1,27 @@
+modLoader="javafml" 
+loaderVersion="[2,)"
+issueTrackerURL="https://github.com/mysticmods/Lootr/issues"
+license="https://github.com/mysticmods/roots/arch-1.21/LICENSE"
+[[mods]]
+    modId="roots"
+    version="${version}"
+    displayName="Roots"
+    displayURL="https://minecraft.curseforge.com/projects/roots"
+    authors="Noobanidus"
+    description="Natural magic."
+
+[[mixins]]
+    config="roots-common.mixins.json"
+
+[[mixins]]
+    config="roots-neoforge.mixins.json"
+
+[[dependencies.roots]]
+    modId="minecraft"
+    type="required"
+    versionRange="${versionRange}"
+
+ [[dependencies.roots]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21,)"

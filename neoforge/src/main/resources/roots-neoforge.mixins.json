@@ -1,8 +1,7 @@
 {
   "required": true,
-  "package": "mysticmods.roots.mixin",
+  "package": "mysticmods.roots.neoforge.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "roots.refmap.json",
   "mixins": [
     "MixinPlayer",
     "MixinPrimaryLevelData"

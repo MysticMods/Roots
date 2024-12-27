@@ -1,0 +1,94 @@
+def generatedResources = file("src/generated")
+
+sourceSets {
+    generated {
+        resources.srcDir generatedResources
+    }
+}
+
+dependencies {
+    // REQUIRED
+    // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
+    // Do NOT use other classes from fabric loader
+    modImplementation("net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}")
+
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixin_extras}"))
+
+    // COMPAT
+    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config}")
+}
+
+architectury {
+    common("fabric", "neoforge")
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/lootr.accesswidener")
+}
+
+jar {
+    exclude "architectury.common.json"
+
+    manifest {
+        attributes 'Fabric-Loom-Remap': true
+    }
+}
+
+sourcesJar {
+    exclude "architectury.common.json"
+}
+
+def ENV = System.getenv()
+
+publishing {
+    tasks.publish.dependsOn build
+
+    publications {
+        mavenJava(MavenPublication) {
+
+            artifactId project.archivesBaseName
+            artifact remapJar
+            artifact project.sourcesJar {
+                archiveClassifier.set('sources')
+            }
+
+            pom {
+                name = 'Lootr'
+                description = 'Friendly loot for everyone.'
+                url = 'https://github.com/LootrMinecraft/Lootr'
+
+                scm {
+                    connection = 'git:https://github.com/LootrMinecraft/Lootr.git'
+                    developerConnection = 'git:https://github.com/LootrMinecraft/Lootr.git'
+                    url = 'https://github.com/LootrMinecraft/Lootr'
+                }
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'noobanidus'
+                        name = 'Noobanidus'
+                        email = 'noobanidus+spam@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url "file:///" + System.getenv("local_maven")
+        }
+    }
+}
+
+task buildAndRelease{}
+tasks.build.mustRunAfter tasks.clean
+tasks.publish.mustRunAfter tasks.build
+tasks.buildAndRelease.dependsOn(tasks.clean, tasks.build, tasks.publish)
