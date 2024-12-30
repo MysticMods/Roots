@@ -4,14 +4,14 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
-import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
@@ -21,7 +21,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -33,22 +34,18 @@ public class LootTableGenerator extends LootTableProvider {
 
   private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> tables = ImmutableList.of(Pair.of(ChestLootTables::new, LootContextParamSets.CHEST));
 
-  public LootTableGenerator(DataGenerator dataGeneratorIn) {
-    super(dataGeneratorIn);
+  public LootTableGenerator(PackOutput arg, Set<ResourceKey<LootTable>> set, List<SubProviderEntry> list, CompletableFuture<HolderLookup.Provider> completableFuture) {
+    super(arg, set, list, completableFuture);
   }
 
   @Override
-  protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-    return tables;
+  public List<SubProviderEntry> getTables() {
+    return List.of(new ChestLootTables());
   }
 
-  @Override
-  protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
-    map.forEach((id, table) -> LootTables.validate(validationtracker, id, table));
-  }
 
   @SuppressWarnings("Duplicates")
-  public static class ChestLootTables implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
+  public static class ChestLootTables extends SubProviderEntry {
     @Override
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
 
@@ -59,7 +56,7 @@ public class LootTableGenerator extends LootTableProvider {
           LootPool.lootPool()
             .setRolls(UniformGenerator.between(5, 7))
               .setBonusRolls(UniformGenerator.between(1, 3))
-            .add(LootItem.lootTableItem(Items.GRASS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 15.0f))))
+            .add(LootItem.lootTableItem(Blocks.GRASS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 15.0f))))
             .add(LootItem.lootTableItem(Items.FERN).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 15.0F))))
             .add(LootItem.lootTableItem(Items.PUMPKIN).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F))))
             .add(LootItem.lootTableItem(Items.HAY_BLOCK).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))

@@ -2,7 +2,7 @@ package mysticmods.roots.api.reference;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.resources.ResourceKey;
 
 public interface Groves {
@@ -15,6 +15,6 @@ public interface Groves {
   ResourceKey<Grove> WILD = grove("wild");
 
   static ResourceKey<Grove> grove(String name) {
-    return ResourceKey.create(RootsAPI.GROVE_REGISTRY, RootsAPI.rl(name));
+    return ResourceKey.create(RootsRegistries.GROVE_REGISTRY, RootsAPI.rl(name));
   }
 }

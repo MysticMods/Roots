@@ -1,10 +1,11 @@
 package mysticmods.roots.item;
 
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
+
+import java.util.List;
 
 public class BaseItems {
   public static class BowlItem extends MultiReturnItem {
@@ -58,16 +59,16 @@ public class BaseItems {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity entity) {
       FoodProperties foodproperties = pStack.getFoodProperties(null);
       return foodproperties != null ? 6 : 0;
     }
   }
 
-/*  public static class KnifeItem extends DiggerItem {
+  public static class KnifeItem extends DiggerItem {
     // TODO rework knives to strip logs of bark with right click, or drop bark by mining it
-    public KnifeItem(Tier tier, float attackDamage, float attackSpeed, Properties props) {
-      super(attackDamage, attackSpeed, tier, BlockTags.LOGS, props);
+    public KnifeItem(Tier tier, Properties props) {
+      super(tier, BlockTags.MINEABLE_WITH_AXE, props);
     }
-  }*/
+  }
 }

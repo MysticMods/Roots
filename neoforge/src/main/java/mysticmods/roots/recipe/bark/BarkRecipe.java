@@ -17,8 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.intellij.lang.annotations.Identifier;
 
 public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
-  public BarkRecipe(ResourceLocation recipeId) {
-    super(recipeId);
+  public BarkRecipe() {
+    super();
   }
 
   @Override
@@ -49,6 +49,11 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.BARK.get();
+  }
+
+  @Override
+  public boolean canCraftInDimensions(int i, int j) {
+    return true;
   }
 
   @Override

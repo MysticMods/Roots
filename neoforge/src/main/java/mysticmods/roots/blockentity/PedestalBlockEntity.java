@@ -3,8 +3,10 @@ package mysticmods.roots.blockentity;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
@@ -35,6 +37,10 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
 
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+  }
+
+  public PedestalBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+    super(ModBlockEntities.PEDESTAL.get(), pWorldPosition, pBlockState);
   }
 
   @Override
@@ -86,25 +92,25 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   @Override
-  protected void saveAdditional(CompoundTag pTag, ) {
-    super.saveAdditional(pTag);
-    pTag.put("inventory", inventory.serializeNBT());
+  protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pProvider) {
+    super.saveAdditional(pTag, pProvider);
+    pTag.put("inventory", inventory.serializeNBT(pProvider));
   }
 
   @Override
-  public void load(CompoundTag pTag) {
-    super.load(pTag);
+  public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
+    super.loadAdditional(pTag, provider);
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
-      inventory.deserializeNBT(pTag.getCompound("inventory"));
+      inventory.deserializeNBT(provider, pTag.getCompound("inventory"));
     }
   }
 
   @Override
-  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider provider) {
+    super.onDataPacket(net, pkt, provider);
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
-      load(tag);
+      loadAdditional(tag, provider);
     }
   }
 

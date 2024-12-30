@@ -1,24 +1,21 @@
 package mysticmods.roots.loot.modifiers;
 
-import com.google.common.base.Suppliers;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-
-
-
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Supplier;
-
 public class AddGrassDropsModifier extends LootModifier {
-  private final Item dropItem;
+  private final Holder<Item> dropItem;
 
-  protected AddGrassDropsModifier(LootItemCondition[] conditionsIn, Item item) {
+  protected AddGrassDropsModifier(LootItemCondition[] conditionsIn, Holder<Item> item) {
     super(conditionsIn);
     this.dropItem = item;
   }
@@ -31,11 +28,17 @@ public class AddGrassDropsModifier extends LootModifier {
     return generatedLoot;
   }
 
-  @Override
-  public Codec<? extends IGlobalLootModifier> codec() {
-    return CODEC.get();
+  public Holder<Item> getDropItem() {
+    return dropItem;
   }
 
-  public static final Supplier<Codec<AddGrassDropsModifier>> CODEC = Suppliers.memoize(() -> RecordCodecBuilder.create(inst -> codecStart(inst).and(ForgeRegistries.ITEMS.getCodec().fieldOf("item").forGetter(m -> m.dropItem)).apply(inst, AddGrassDropsModifier::new)));
+  @Override
+  public MapCodec<? extends IGlobalLootModifier> codec() {
+    return CODEC;
+  }
+
+  public static final MapCodec<AddGrassDropsModifier> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+      IGlobalLootModifier.LOOT_CONDITIONS_CODEC.fieldOf("conditions").forGetter(glm -> glm.conditions),
+      ItemStack.ITEM_NON_AIR_CODEC.fieldOf("item").forGetter(AddGrassDropsModifier::getDropItem)).apply(instance, AddGrassDropsModifier::new));
 }
 

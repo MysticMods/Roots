@@ -5,6 +5,7 @@ import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -22,6 +23,12 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   protected int radiusXZ = 0;
   protected int radiusY = 0;
   protected int interval = 0;
+
+  private final Holder.Reference<Ritual> builtinRegistryHolder = RootsRegistries.RITUALS.createIntrusiveHolder(this);
+
+  public Holder.Reference<Ritual> getBuiltinRegistryHolder() {
+    return builtinRegistryHolder;
+  }
 
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity) {
     int dur = getDuration() - blockEntity.getLifetime();
@@ -101,25 +108,25 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   }
 
   public boolean is(ResourceLocation key) {
-    return RootsRegistries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
   public boolean is(ResourceKey<Ritual> key) {
-    return RootsRegistries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
   public boolean is(Predicate<ResourceKey<Ritual>> key) {
-    return RootsRegistries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
   public boolean is(TagKey<Ritual> key) {
-    return RootsRegistries.RITUAL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
 
   @Override
   public ResourceLocation getKey() {
-    return RootsRegistries.RITUAL_REGISTRY.get().getKey(this);
+    return getBuiltinRegistryHolder().getKey().location();
   }
 
   protected abstract RitualProperty<Integer> getDurationProperty();

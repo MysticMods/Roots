@@ -1,9 +1,11 @@
 package mysticmods.roots.api.property;
 
+import com.google.common.base.Suppliers;
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.Util;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Supplier;
@@ -12,15 +14,20 @@ public class SpellProperty<V> extends Property<V> implements IDescribedRegistryE
   private String descriptionId;
   protected Supplier<Spell> spell;
 
+  private final Holder.Reference<SpellProperty<?>> builtinRegistryHolder = RootsRegistries.SPELL_PROPERTIES.createIntrusiveHolder(this);
+
   public SpellProperty(Supplier<Spell> spell, V defaultValue, Serializer<V> serializer, String comment) {
     super(defaultValue, serializer, comment);
-    this.spell = spell;
+    this.spell = Suppliers.memoize(spell::get);
   }
 
   public Spell getSpell() {
     return spell.get();
   }
 
+  public Holder.Reference<SpellProperty<?>> getBuiltinRegistryHolder() {
+    return builtinRegistryHolder;
+  }
 
 /*
   @Override
@@ -31,7 +38,7 @@ public class SpellProperty<V> extends Property<V> implements IDescribedRegistryE
 
   @Override
   public ResourceLocation getKey() {
-    return RootsRegistries.SPELL_PROPERTY_REGISTRY.get().getKey(this);
+    return getBuiltinRegistryHolder().getKey().location();
   }
 
   @Override

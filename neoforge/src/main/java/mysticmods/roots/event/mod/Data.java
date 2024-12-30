@@ -2,7 +2,6 @@ package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.gen.LootTableGenerator;
-import mysticmods.roots.gen.McMetaGenerator;
 import mysticmods.roots.gen.provider.ModifierCostProvider;
 import mysticmods.roots.gen.provider.RitualPropertyProvider;
 import mysticmods.roots.gen.provider.SpellCostProvider;

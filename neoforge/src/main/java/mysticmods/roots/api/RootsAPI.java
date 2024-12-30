@@ -2,17 +2,6 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.capability.Grant;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.modifier.Modifier;
-import mysticmods.roots.api.property.RitualProperty;
-import mysticmods.roots.api.property.SpellProperty;
-import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.snapshot.SnapshotSerializer;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.test.entity.EntityTestType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +11,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.common.SimpleTier;
+import net.neoforged.neoforge.common.Tags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,21 +22,22 @@ import java.util.Set;
 
 public abstract class RootsAPI {
   public static RootsAPI INSTANCE;
-/*  public static Tier LIVING_TOOL_TIER = new ForgeTier(2, 250, 6.0f, 2.0f, 19, BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(RootsTags.Items.BARKS));
-  public static Tier COPPER_TIER = new ForgeTier(2, 250, 4.0f, 2.0f, 2, BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Tags.Items.INGOTS_COPPER));*/
+  public static Tier LIVING_TOOL_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_STONE_TOOL, 300, 6.0f, 2.0f, 19, () -> Ingredient.of(RootsTags.Items.BARKS));
+  public static Tier COPPER_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 150, 4.0f, 2.0f, 2, () -> Ingredient.of(Tags.Items.INGOTS_COPPER));
+  public static Tier RUNED_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 9.0f, 4.0f, 15, () -> Ingredient.of(RootsTags.Items.RUNED_OBSIDIAN));
 
   public static ResourceLocation rl(String path) {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);
   }
 
   // Tool Actions (Forge-specific)
-/*  public static ToolAction RUNIC_SHEARS_HARVEST = ToolAction.get("runic_shears_harvest");
-  public static ToolAction RUNIC_SHEARS_DIG = ToolAction.get("runic_shears_dig");
-  public static ToolAction KNIFE_STRIP = ToolAction.get("knife_strip");
-  public static ToolAction KNIFE_DIG = ToolAction.get("knife_dig");
+  public static ItemAbility RUNIC_SHEARS_HARVEST = ItemAbility.get("runic_shears_harvest");
+  public static ItemAbility RUNIC_SHEARS_DIG = ItemAbility.get("runic_shears_dig");
+  public static ItemAbility KNIFE_STRIP = ItemAbility.get("knife_strip");
+  public static ItemAbility KNIFE_DIG = ItemAbility.get("knife_dig");
 
-  public static Set<ToolAction> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
-  public static Set<ToolAction> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG);*/
+  public static Set<ItemAbility> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
+  public static Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG);
 
   public static RootsAPI getInstance() {
     return INSTANCE;
@@ -55,26 +49,6 @@ public abstract class RootsAPI {
   public static ResourceLocation LIVING_TOOL_TIER_ID = rl("living_tool");
   public static final String MOD_IDENTIFIER = "Roots";
   public static Logger LOG = LogManager.getLogger();
-
-  // Registry keys
-  public static ResourceKey<Registry<Herb>> HERB_REGISTRY = key(RootsAPI.rl("herbs"));
-  public static ResourceKey<Registry<Ritual>> RITUAL_REGISTRY = key(RootsAPI.rl("rituals"));
-  public static ResourceKey<Registry<Spell>> SPELL_REGISTRY = key(RootsAPI.rl("spells"));
-  public static ResourceKey<Registry<Modifier>> MODIFIER_REGISTRY = key(RootsAPI.rl("modifiers"));
-  public static ResourceKey<Registry<RitualProperty<?>>> RITUAL_PROPERTY_REGISTRY = key(RootsAPI.rl("ritual_properties"));
-  public static ResourceKey<Registry<SpellProperty<?>>> SPELL_PROPERTY_REGISTRY = key(RootsAPI.rl("spell_properties"));
-  public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITION_REGISTRY = key(RootsAPI.rl("level_conditions"));
-  public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITION_REGISTRY = key(RootsAPI.rl("player_conditions"));
-  public static ResourceKey<Registry<SnapshotSerializer<?>>>
-      SNAPSHOT_SERIALIZER_REGISTRY = key(RootsAPI.rl("snapshot_serializers"));
-
-  public static ResourceKey<Registry<EntityTestType<?>>> ENTITY_TEST_TYPE_REGISTRY = key(RootsAPI.rl("entity_test_types"));
-
-  public static ResourceKey<Registry<Grove>> GROVE_REGISTRY = key(RootsAPI.rl("groves"));
-
-  private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
-    return ResourceKey.createRegistryKey(name);
-  }
 
   // Capability IDs
   public static final ResourceLocation HERB_CAPABILITY_ID = rl("herb_capability");

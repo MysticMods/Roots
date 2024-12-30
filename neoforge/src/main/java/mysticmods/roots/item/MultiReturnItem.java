@@ -26,7 +26,6 @@ public abstract class MultiReturnItem extends Item {
       return returned;
     } else if (entity instanceof Player) {
       Player player = (Player) entity;
-      player.addItem(
       if (!player.addItem(returned)) {
         ItemUtil.Spawn.spawnItem(world, player.blockPosition(), returned);
       }

@@ -1,7 +1,7 @@
 package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.SpellLike;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -20,27 +20,27 @@ import java.util.Set;
 
 public class SpellInstance implements SpellLike {
   private final Spell spell;
-  private final Set<Modifier> enabledModifiers = new HashSet<>();
+  private final Set<SpellModifier> enabledModifiers = new HashSet<>();
   private int cooldown;
 
   public SpellInstance(Spell spell) {
     this.spell = spell;
   }
 
-  public SpellInstance(Spell spell, Modifier... modifiers) {
+  public SpellInstance(Spell spell, SpellModifier... modifiers) {
     this(spell, Arrays.asList(modifiers));
   }
 
-  public SpellInstance(Spell spell, Collection<Modifier> modifiers) {
+  public SpellInstance(Spell spell, Collection<SpellModifier> modifiers) {
     this(spell);
     enabledModifiers.addAll(modifiers);
   }
 
   protected SpellInstance(CompoundTag tag) {
-    spell = RootsRegistries.SPELL_REGISTRY.get().getValue(new ResourceLocation(tag.getString("spell")));
+    spell = RootsRegistries.SPELLS.get(ResourceLocation.parse(tag.getString("spell")));
     ListTag modifiers = tag.getList("modifiers", 8);
     for (int i = 0; i < modifiers.size(); i++) {
-      enabledModifiers.add(RootsRegistries.MODIFIER_REGISTRY.get().getValue(new ResourceLocation(modifiers.getString(i))));
+      enabledModifiers.add(RootsRegistries.SPELL_MODIFIERS.get(ResourceLocation.parse(modifiers.getString(i))));
     }
     cooldown = tag.getInt("cooldown");
   }
@@ -62,7 +62,7 @@ public class SpellInstance implements SpellLike {
     return spell.getStyledName();
   }
 
-  public Set<Modifier> getEnabledModifiers() {
+  public Set<SpellModifier> getEnabledModifiers() {
     return enabledModifiers;
   }
 
@@ -81,7 +81,7 @@ public class SpellInstance implements SpellLike {
     }
   }
 
-  public boolean hasModifier(Modifier modifier) {
+  public boolean hasModifier(SpellModifier modifier) {
     return enabledModifiers.contains(modifier);
   }
 
@@ -90,14 +90,14 @@ public class SpellInstance implements SpellLike {
   }
 
   // TODO: handle making sure modifiers are correct for this spell
-  public void addModifier(Modifier modifier) {
+  public void addModifier(SpellModifier modifier) {
     if (modifier.getSpell() != this.getSpell()) {
       throw new IllegalStateException("Tried to add a modifier to SpellInstance for '" + this.getSpell() + "' but the modifier '" + modifier + "' is for '" + modifier.getSpell() + "'");
     }
     enabledModifiers.add(modifier);
   }
 
-  public void removeModifier(Modifier modifier) {
+  public void removeModifier(SpellModifier modifier) {
     enabledModifiers.remove(modifier);
   }
 

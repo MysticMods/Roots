@@ -1,13 +1,14 @@
 package mysticmods.roots.recipe.bark;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.AxeItem;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-
+import net.neoforged.neoforge.common.ItemAbilities;
 
 import javax.annotation.Nullable;
 
@@ -30,7 +31,7 @@ public class DynamicBarkRecipe extends BarkRecipe {
   private ItemStack newResult = null;
 
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(HolderLookup.Provider provider) {
     if (newResult == null) {
       newResult = new ItemStack(ModItems.MIXED_BARK.get(), 2);
     }
@@ -63,8 +64,8 @@ public class DynamicBarkRecipe extends BarkRecipe {
   }
 
   @Nullable
-  protected static BlockState getStrippedState (SimpleWorldCrafting pContainer, BlockState state) {
-    BlockState outputState = state.getToolModifiedState(pContainer.getContext(), ToolActions.AXE_STRIP, false);
+  protected static BlockState getStrippedState(SimpleWorldCrafting pContainer, BlockState state) {
+    BlockState outputState = state.getToolModifiedState(pContainer.getContext(), ItemAbilities.AXE_STRIP, false);
     if (outputState == null) {
       outputState = AxeItem.getAxeStrippingState(state);
     }
@@ -86,53 +87,15 @@ public class DynamicBarkRecipe extends BarkRecipe {
     return true;
   }
 
-  public static class Serializer extends WorldRecipe.Serializer<SimpleWorldCrafting, BarkRecipe> {
-
-    public Serializer() {
-      super(BarkRecipe::new);
+  public static class Serializer implements RecipeSerializer<DynamicBarkRecipe> {
+    @Override
+    public MapCodec<DynamicBarkRecipe> codec() {
+      return MapCodec.unit(INSTANCE);
     }
 
     @Override
-    public BarkRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
-      return INSTANCE;
-    }
-
-    @Nullable
-    @Override
-    public BarkRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-      return INSTANCE;
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf pBuffer, BarkRecipe recipe) {
-    }
-  }
-
-  public static class Result implements FinishedRecipe {
-    @Override
-    public void serializeRecipeData(JsonObject pJson) {
-    }
-
-    @Override
-    public ResourceLocation getId() {
-      return INSTANCE.getId();
-    }
-
-    @Override
-    public RecipeSerializer<?> getType() {
-      return ModSerializers.DYNAMIC_BARK.get();
-    }
-
-    @org.jetbrains.annotations.Nullable
-    @Override
-    public JsonObject serializeAdvancement() {
-      return null;
-    }
-
-    @org.jetbrains.annotations.Nullable
-    @Override
-    public ResourceLocation getAdvancementId() {
-      return null;
+    public StreamCodec<RegistryFriendlyByteBuf, DynamicBarkRecipe> streamCodec() {
+      return StreamCodec.unit(INSTANCE);
     }
   }
 }

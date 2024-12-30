@@ -15,20 +15,4 @@ public class ModeledArmorItem extends ModifiedArmorItem {
   public ModeledArmorItem(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
     super(materialIn, slot, builder);
   }
-
-  // TODO: Abstract this into a parent class
-  @Override
-  public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-    consumer.accept(new IClientItemExtensions() {
-      @Override
-      public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-        HumanoidModel<?> result = ArmorModel.getModel(itemStack);
-        if (result == null) {
-          return original;
-        }
-
-        return result;
-      }
-    });
-  }
 }

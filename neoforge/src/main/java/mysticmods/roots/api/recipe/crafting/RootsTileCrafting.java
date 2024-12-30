@@ -3,12 +3,12 @@ package mysticmods.roots.api.recipe.crafting;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-
+import net.neoforged.neoforge.items.IItemHandler;
 
 
 import javax.annotation.Nullable;
 
-public abstract class RootsTileCrafting<H extends IItemHandler, T extends BlockEntity & IReferentialBlockEntity> extends RootsCrafting<H> implements IRootsTileCrafting<H, T> {
+public abstract class RootsTileCrafting<H extends IItemHandler, T extends BlockEntity> extends RootsCrafting<H> implements IRootsBlockEntityCrafting<H, T> {
   protected T blockEntity;
 
   public RootsTileCrafting(H handler, T blockEntity, @Nullable Player player) {

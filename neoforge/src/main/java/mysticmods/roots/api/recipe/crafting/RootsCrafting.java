@@ -1,16 +1,18 @@
 package mysticmods.roots.api.recipe.crafting;
 
 import net.minecraft.world.entity.player.Player;
-
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
 
 import javax.annotation.Nullable;
 
-public abstract class RootsCrafting<H extends IItemHandler> extends IInvWrapper<H> implements IRootsCrafting<H> {
+public abstract class RootsCrafting<H extends IItemHandler> implements IRootsCrafting<H> {
   protected Player player;
+  protected H handler;
 
   public RootsCrafting(H handler, @Nullable Player player) {
-    super(handler);
+    this.handler = handler;
     this.player = player;
   }
 
@@ -22,6 +24,6 @@ public abstract class RootsCrafting<H extends IItemHandler> extends IInvWrapper<
 
   @Override
   public H getHandler() {
-    return super.getHandler();
+    return this.handler;
   }
 }

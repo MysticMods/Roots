@@ -2,20 +2,16 @@ package mysticmods.roots.init;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.reference.Groves;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
-
-import java.util.List;
-import java.util.function.Supplier;
 
 import static mysticmods.roots.Roots.REGISTRATE;
 
@@ -35,7 +31,7 @@ public class ModGroves {
   public static final RegistryEntry<Grove> WILD = grove(Groves.WILD, Grove::new, ChatFormatting.YELLOW, RootsTags.Herbs.WILD, RootsTags.Groves.WILD_ALIGNED, RootsTags.Groves.WILD_OPPOSED, RootsTags.Spells.WILD_ALIGNED, RootsTags.Spells.WILD_OPPOSED, RootsTags.Rituals.WILD_ALIGNED, RootsTags.Rituals.WILD_OPPOSED);
 
   private static <T extends Grove> RegistryEntry<T> grove(ResourceKey<Grove> key, GroveConstructor<T> constructor, ChatFormatting color, TagKey<Herb> herbs, TagKey<Grove> alignedGroves, TagKey<Grove> opposedGroves, TagKey<Spell> alignedSpells, TagKey<Spell> opposedSpells, TagKey<Ritual> alignedRituals, TagKey<Ritual> opposedRituals) {
-    return REGISTRATE.simple(key.location().getPath(), RootsAPI.GROVE_REGISTRY, groveBuilder(constructor, color, herbs, alignedGroves, opposedGroves, alignedSpells, opposedSpells, alignedRituals, opposedRituals));
+    return REGISTRATE.simple(key.location().getPath(), RootsRegistries.GROVE_REGISTRY, groveBuilder(constructor, color, herbs, alignedGroves, opposedGroves, alignedSpells, opposedSpells, alignedRituals, opposedRituals));
   }
 
   private static <T extends Grove> NonNullSupplier<T> groveBuilder(GroveConstructor<T> constructor, ChatFormatting color, TagKey<Herb> herbs, TagKey<Grove> alignedGroves, TagKey<Grove> opposedGroves, TagKey<Spell> alignedSpells, TagKey<Spell> opposedSpells, TagKey<Ritual> alignedRituals, TagKey<Ritual> opposedRituals) {

@@ -1,30 +1,9 @@
 package mysticmods.roots.init;
 
-import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.recipe.WorldRecipe;
-import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.item.*;
-import mysticmods.roots.item.copper.CopperArmorItem;
 import mysticmods.roots.item.living.*;
-import mysticmods.roots.recipe.bark.BarkRecipe;
-import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
-import mysticmods.roots.recipe.grove.GroveRecipe;
-import mysticmods.roots.recipe.mortar.MortarRecipe;
-import mysticmods.roots.recipe.runic.RunicEntityRecipe;
-import mysticmods.roots.test.entity.EntityTagTest;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -40,11 +19,11 @@ public class ModItems {
 
   // GATHERED CROPS
   public static final DeferredHolder<Item, ItemNameBlockItem> WILDROOT = ITEMS.register("wildroot", () -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), DEFAULT));
-/*      REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.WILDROOT_CROP)
-    .defaultLang()
-    .register();*/
+  /*      REGISTRATE.item("wildroot", (p) -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), p))
+      .model(subfolder("herbs"))
+      .tag(RootsTags.Items.WILDROOT_SEEDS, RootsTags.Items.WILDROOT_CROP)
+      .defaultLang()
+      .register();*/
   public static final DeferredHolder<Item, Item> GROVE_MOSS = ITEMS.register("grove_moss", () -> new Item(DEFAULT));
 /*    REGISTRATE.item("grove_moss", Item::new)
     .model(subfolder("herbs"))
@@ -53,20 +32,20 @@ public class ModItems {
 
   // PYRE-CRAFTED CROPS
   public static final DeferredHolder<Item, ItemNameBlockItem> CLOUD_BERRY = ITEMS.register("cloud_berry", () -> new ItemNameBlockItem(ModBlocks.CLOUD_BERRY_CROP.get(), DEFAULT));
-/*      REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.CLOUD_BERRY_CROP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
-    .register();*/
+  /*      REGISTRATE.item("cloud_berry", (p) -> new ItemNameBlockItem(ModBlocks.CLOUD_BERRY_CROP.get(), p))
+      .model(subfolder("herbs"))
+      .tag(RootsTags.Items.CLOUD_BERRY_SEEDS, RootsTags.Items.CLOUD_BERRY_CROP)
+      .register();*/
   public static final DeferredHolder<Item, ItemNameBlockItem> DEWGONIA = ITEMS.register("dewgonia", () -> new ItemNameBlockItem(ModBlocks.DEWGONIA_CROP.get(), DEFAULT));
-/*    REGISTRATE.item("dewgonia", (p) -> new ItemNameBlockItem(ModBlocks.DEWGONIA_CROP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.DEWGONIA_SEEDS, RootsTags.Items.DEWGONIA_CROP)
-    .register();*/
+  /*    REGISTRATE.item("dewgonia", (p) -> new ItemNameBlockItem(ModBlocks.DEWGONIA_CROP.get(), p))
+      .model(subfolder("herbs"))
+      .tag(RootsTags.Items.DEWGONIA_SEEDS, RootsTags.Items.DEWGONIA_CROP)
+      .register();*/
   public static final DeferredHolder<Item, ItemNameBlockItem> INFERNO_BULB = ITEMS.register("inferno_bulb", () -> new ItemNameBlockItem(ModBlocks.INFERNO_BULB_CROP.get(), DEFAULT));
-/*    REGISTRATE.item("inferno_bulb", (p) -> new ItemNameBlockItem(ModBlocks.INFERNO_BULB_CROP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.INFERNO_BULB_SEEDS, RootsTags.Items.INFERNO_BULB_CROP)
-    .register();*/
+  /*    REGISTRATE.item("inferno_bulb", (p) -> new ItemNameBlockItem(ModBlocks.INFERNO_BULB_CROP.get(), p))
+      .model(subfolder("herbs"))
+      .tag(RootsTags.Items.INFERNO_BULB_SEEDS, RootsTags.Items.INFERNO_BULB_CROP)
+      .register();*/
   public static final DeferredHolder<Item, ItemNameBlockItem> STALICRIPE = ITEMS.register("stalicripe", () -> new ItemNameBlockItem(ModBlocks.STALICRIPE_CROP.get(), DEFAULT));
 /*    REGISTRATE.item("stalicripe", (p) -> new ItemNameBlockItem(ModBlocks.STALICRIPE_CROP.get(), p))
     .model(subfolder("herbs"))
@@ -76,18 +55,18 @@ public class ModItems {
 
   // RUNIC SHEARS -> MUSHROOM
   public static final DeferredHolder<Item, ItemNameBlockItem> BAFFLECAP = ITEMS.register("bafflecap", () -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), DEFAULT));
-/*      REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.BAFFLECAP_CROP)
-    .recipe((ctx, p) -> {
-      RunicBlockRecipe.builder(ctx.getEntry())
-        .durabilityCost(15)
-        .setCondition(new WorldRecipe.Condition(new TagMatchTest(RootsTags.Blocks.BAFFLECAP_CONVERSION)))
-        .setOutputState(Blocks.AIR.defaultBlockState())
-        .unlockedBy("has_runic_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
-        .save(p, RootsAPI.rl("runic/block/bafflecap_from_mushroom"));
-    })
-    .register();*/
+  /*      REGISTRATE.item("bafflecap", (p) -> new ItemNameBlockItem(ModBlocks.BAFFLECAP.get(), p))
+      .model(subfolder("herbs"))
+      .tag(RootsTags.Items.BAFFLECAP_CROP)
+      .recipe((ctx, p) -> {
+        RunicBlockRecipe.builder(ctx.getEntry())
+          .durabilityCost(15)
+          .setCondition(new WorldRecipe.Condition(new TagMatchTest(RootsTags.Blocks.BAFFLECAP_CONVERSION)))
+          .setOutputState(Blocks.AIR.defaultBlockState())
+          .unlockedBy("has_runic_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
+          .save(p, RootsAPI.rl("runic/block/bafflecap_from_mushroom"));
+      })
+      .register();*/
   // TODO: Determine which tags have been referenced but are empty
   public static final DeferredHolder<Item, Item> MOONGLOW = ITEMS.register("moonglow", () -> new Item(DEFAULT));
 /*    REGISTRATE.item("moonglow", Item::new)
@@ -117,37 +96,37 @@ public class ModItems {
     .register();*/
 
   public static final DeferredHolder<Item, ItemNameBlockItem> MOONGLOW_SEEDS = ITEMS.register("moonglow_seeds", () -> new ItemNameBlockItem(ModBlocks.MOONGLOW_CROP.get(), DEFAULT));
-/*      REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.MOONGLOW_CROP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.MOONGLOW_SEEDS)
-    .register();*/
+  /*      REGISTRATE.item("moonglow_seeds", (p) -> new ItemNameBlockItem(ModBlocks.MOONGLOW_CROP.get(), p))
+      .model(subfolder("herbs"))
+      .tag(RootsTags.Items.MOONGLOW_SEEDS)
+      .register();*/
   public static final DeferredHolder<Item, ItemNameBlockItem> PERESKIA_BULB = ITEMS.register("pereskia_bulb", () -> new ItemNameBlockItem(ModBlocks.PERESKIA_CROP.get(), DEFAULT));
-/*    REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.PERESKIA_CROP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.PERESKIA_SEEDS)
-    .recipe((ctx, p) -> {
-      RunicBlockRecipe.builder(ctx.getEntry())
-        .durabilityCost(15)
-        .setCondition(new WorldRecipe.Condition(new TagMatchTest(BlockTags.SMALL_FLOWERS)))
-        .setOutputState(Blocks.AIR.defaultBlockState())
-        .unlockedBy("has_runic_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
-        .save(p, RootsAPI.rl("runic/block/pereskia_from_mushroom"));
-    })
-    .register();*/
+  /*    REGISTRATE.item("pereskia_bulb", (p) -> new ItemNameBlockItem(ModBlocks.PERESKIA_CROP.get(), p))
+      .model(subfolder("herbs"))
+      .tag(RootsTags.Items.PERESKIA_SEEDS)
+      .recipe((ctx, p) -> {
+        RunicBlockRecipe.builder(ctx.getEntry())
+          .durabilityCost(15)
+          .setCondition(new WorldRecipe.Condition(new TagMatchTest(BlockTags.SMALL_FLOWERS)))
+          .setOutputState(Blocks.AIR.defaultBlockState())
+          .unlockedBy("has_runic_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
+          .save(p, RootsAPI.rl("runic/block/pereskia_from_mushroom"));
+      })
+      .register();*/
   public static final DeferredHolder<Item, ItemNameBlockItem> SPIRITLEAF_SEEDS = ITEMS.register("spiritleaf_seeds", () -> new ItemNameBlockItem(ModBlocks.SPIRITLEAF_CROP.get(), DEFAULT));
-/*    REGISTRATE.item("spiritleaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.SPIRITLEAF_CROP.get(), p))
-    .model(subfolder("herbs"))
-    .tag(RootsTags.Items.SPIRITLEAF_SEEDS)
-    .recipe((ctx, p) -> {
-      RunicBlockRecipe.builder(ctx.getEntry())
-        .durabilityCost(15)
-        .skipProperty(BeetrootBlock.AGE)
-        .setCondition(new WorldRecipe.Condition(new BlockPropertyMatchTest(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, BeetrootBlock.MAX_AGE), BeetrootBlock.AGE)))
-        .setOutputState(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, 0))
-        .unlockedBy("has_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
-        .save(p, RootsAPI.rl("runic/block/spiritleaf_seeds"));
-    })
-    .register();*/
+  /*    REGISTRATE.item("spiritleaf_seeds", (p) -> new ItemNameBlockItem(ModBlocks.SPIRITLEAF_CROP.get(), p))
+      .model(subfolder("herbs"))
+      .tag(RootsTags.Items.SPIRITLEAF_SEEDS)
+      .recipe((ctx, p) -> {
+        RunicBlockRecipe.builder(ctx.getEntry())
+          .durabilityCost(15)
+          .skipProperty(BeetrootBlock.AGE)
+          .setCondition(new WorldRecipe.Condition(new BlockPropertyMatchTest(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, BeetrootBlock.MAX_AGE), BeetrootBlock.AGE)))
+          .setOutputState(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, 0))
+          .unlockedBy("has_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
+          .save(p, RootsAPI.rl("runic/block/spiritleaf_seeds"));
+      })
+      .register();*/
   public static final DeferredHolder<Item, ItemNameBlockItem> WILDEWHEET_SEEDS = ITEMS.register("wildewheet_seeds", () -> new ItemNameBlockItem(ModBlocks.WILDEWHEET_CROP.get(), DEFAULT));
 /*    REGISTRATE.item("wildewheet_seeds", (p) -> new ItemNameBlockItem(ModBlocks.WILDEWHEET_CROP.get(), p))
     .model(subfolder("herbs"))
@@ -358,7 +337,7 @@ public class ModItems {
     .register();*/
 
   public static Supplier<Item> tooltipDrink(Item.Properties properties, String translationKey) {
-    return () ->  new TooltipDrinkItem(translationKey, properties);
+    return () -> new TooltipDrinkItem(translationKey, properties);
   }
 
   // Drinkies
@@ -720,7 +699,7 @@ public class ModItems {
     .register();*/
 
   public static final DeferredHolder<Item, LivingAxeItem> LIVING_AXE = ITEMS.register("living_axe", () -> new LivingAxeItem(RootsAPI.LIVING_TOOL_TIER, DEFAULT));
-/*  7.0F, -3.2F));*/
+  /*  7.0F, -3.2F));*/
 /*      REGISTRATE.item("living_axe", (p) -> new LivingAxeItem(RootsAPI.LIVING_TOOL_TIER, 7.0F, -3.2F, p))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> GroveRecipe.builder(ctx.getEntry())
@@ -811,27 +790,34 @@ public class ModItems {
     })
     .register();*/
 
-  public static final DeferredHolder<Item, Item> RUNED_AXE = REGISTRATE.item("runed_axe", Item::new)
+  public static final DeferredHolder<Item, AxeItem> RUNED_AXE = ITEMS.register("runed_axe", () -> new AxeItem(RootsAPI.RUNED_TIER, DEFAULT));
+/*  REGISTRATE.item("runed_axe", Item::new)
     .model(subfolder("tools"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> RUNED_DAGGER = REGISTRATE.item("runed_dagger", Item::new)
+/*  public static final DeferredHolder<Item, Item> RUNED_DAGGER =
+      REGISTRATE.item("runed_dagger", Item::new)
     .model(subfolder("tools"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> RUNED_HOE = REGISTRATE.item("runed_hoe", Item::new)
+  public static final DeferredHolder<Item, HoeItem> RUNED_HOE = ITEMS.register("runed_hoe", () -> new HoeItem(RootsAPI.RUNED_TIER, DEFAULT));
+
+/*      REGISTRATE.item("runed_hoe", Item::new)
     .model(subfolder("tools"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> RUNED_SHOVEL = REGISTRATE.item("runed_shovel", Item::new)
+  public static final DeferredHolder<Item, ShovelItem> RUNED_SHOVEL = ITEMS.register("runed_shovel", () -> new ShovelItem(RootsAPI.RUNED_TIER, DEFAULT));
+/*      REGISTRATE.item("runed_shovel", Item::new)
     .model(subfolder("tools"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> RUNED_SWORD = REGISTRATE.item("runed_sword", Item::new)
+  public static final DeferredHolder<Item, SwordItem> RUNED_SWORD = ITEMS.register("runed_sword", () -> new SwordItem(RootsAPI.RUNED_TIER, DEFAULT));
+/*      REGISTRATE.item("runed_sword", Item::new)
     .model(subfolder("tools"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = REGISTRATE.item("runic_shears", RunicShearsItem::new)
+  public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = ITEMS.register("runic_shears", () -> new RunicShearsItem(new Item.Properties().durability(313)));
+/*      REGISTRATE.item("runic_shears", RunicShearsItem::new)
     .properties(o -> o.durability(313))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> {
@@ -848,9 +834,10 @@ public class ModItems {
         .save(p, RootsAPI.rl("grove/runic_shears"));
     })
     .tag(RootsTags.Items.RUNIC_SHEARS)
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, CastingItem> STAFF = REGISTRATE.item("staff", CastingItem::new)
+  public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(DEFAULT));
+/*      REGISTRATE.item("staff", CastingItem::new)
     // TODO: CUSTOM MODEL
     .model((ctx, p) -> {
       ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
@@ -867,18 +854,19 @@ public class ModItems {
         .unlockedBy("has_wildroot", p.has(RootsTags.Items.WILDROOT_CROP))
         .save(p, RootsAPI.rl("staff"));
     })
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> WILDWOOD_BOW = REGISTRATE.item("wildwood_bow", Item::new)
+/*  public static final DeferredHolder<Item, Item> WILDWOOD_BOW = REGISTRATE.item("wildwood_bow", Item::new)
     // TODO: MODEL, ETC
     .model(subfolder("tools"))
     .register();
 
   public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = REGISTRATE.item("wildwood_quiver", Item::new)
     .model(subfolder("tools"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = REGISTRATE.item("wooden_shears", ShearsItem::new)
+  public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new ShearsItem(new Item.Properties().durability(120)));
+/*  REGISTRATE.item("wooden_shears", ShearsItem::new)
     .properties(o -> o.durability(120))
     .model(subfolder("tools"))
     .recipe((ctx, p) -> {
@@ -890,56 +878,69 @@ public class ModItems {
         .unlockedBy("has_log", p.has(ItemTags.LOGS))
         .save(p, RootsAPI.rl("wooden_shears"));
     })
-    .register();
+    .register();*/
 
-  public static DeferredHolder<Item, KnifeItem> WOODEN_KNIFE = REGISTRATE.item("wood_knife", (p) -> new KnifeItem(Tiers.WOOD, 0f, -1.5f, p))
-    .tag(RootsTags.Items.KNIVES)
-    .model((ctx, p) -> p.handheld(ModItems.WOODEN_KNIFE))
-    .recipe((ctx, p) -> RECIPES.knife(ItemTags.PLANKS, ModItems.WOODEN_KNIFE, null, p)).register();
-  public static DeferredHolder<Item, KnifeItem> STONE_KNIFE = REGISTRATE.item("stone_knife", (p) -> new KnifeItem(Tiers.STONE, 0f, -1.0f, p))
-    .tag(RootsTags.Items.KNIVES)
-    .model((ctx, p) -> p.handheld(ModItems.STONE_KNIFE))
-    .recipe((ctx, p) -> {
-      RECIPES.knife(Tags.Items.STONE, ModItems.STONE_KNIFE, null, p);
-      RECIPES.knife(Tags.Items.COBBLESTONE, ModItems.STONE_KNIFE, null, p);
-    }).register();
-  public static DeferredHolder<Item, KnifeItem> COPPER_KNIFE = REGISTRATE.item("copper_knife", (p) -> new KnifeItem(RootsAPI.COPPER_TIER, 0f, -1.5f, p))
-    .tag(RootsTags.Items.COPPER_ITEMS, RootsTags.Items.KNIVES)
-    .model((ctx, p) -> p.handheld(ModItems.COPPER_KNIFE))
-    .recipe((ctx, p) -> RECIPES.knife(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_KNIFE, null, p)).register();
-  public static DeferredHolder<Item, KnifeItem> IRON_KNIFE = REGISTRATE.item("iron_knife", (p) -> new KnifeItem(Tiers.IRON, 0, -1.5f, p))
-    .tag(RootsTags.Items.KNIVES)
-    .model((ctx, p) -> p.handheld(ModItems.IRON_KNIFE))
-    .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_IRON, ModItems.IRON_KNIFE, null, p)).register();
-  public static DeferredHolder<Item, KnifeItem> GOLD_KNIFE = REGISTRATE.item("gold_knife", (p) -> new KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
-    .tag(RootsTags.Items.KNIVES)
-    .model((ctx, p) -> p.handheld(ModItems.GOLD_KNIFE))
-    .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_GOLD, ModItems.GOLD_KNIFE, null, p))
-    .tag(ItemTags.PIGLIN_LOVED)
-    .register();
-  public static DeferredHolder<Item, KnifeItem> SILVER_KNIFE = REGISTRATE.item("silver_knife", (p) -> new KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
-    .tag(RootsTags.Items.KNIVES, RootsTags.Items.SILVER_ITEMS)
-    .model((ctx, p) -> p.handheld(ctx::getEntry))
-    .recipe((ctx, p) -> RECIPES.knife(RootsTags.Items.SILVER_INGOT, ctx::getEntry, null, p))
-    .register();
-  public static DeferredHolder<Item, KnifeItem> DIAMOND_KNIFE = REGISTRATE.item("diamond_knife", (p) -> new KnifeItem(Tiers.DIAMOND, 0.5f, -1.2f, p))
-    .tag(RootsTags.Items.KNIVES)
-    .model((ctx, p) -> p.handheld(ModItems.DIAMOND_KNIFE))
-    .recipe((ctx, p) -> RECIPES.knife(Tags.Items.GEMS_DIAMOND, ModItems.DIAMOND_KNIFE, null, p)).register();
-  public static DeferredHolder<Item, KnifeItem> NETHERITE_KNIFE = REGISTRATE.item("netherite_knife", (p) -> new KnifeItem(Tiers.NETHERITE, 0.5f, -1.2f, p))
+  public static DeferredHolder<Item, KnifeItem> WOODEN_KNIFE = ITEMS.register("wooden_knife", () -> new KnifeItem(Tiers.WOOD, DEFAULT));
+  /*      REGISTRATE.item("wood_knife", (p) -> new KnifeItem(Tiers.WOOD, 0f, -1.5f, p))
+      .tag(RootsTags.Items.KNIVES)
+      .model((ctx, p) -> p.handheld(ModItems.WOODEN_KNIFE))
+      .recipe((ctx, p) -> RECIPES.knife(ItemTags.PLANKS, ModItems.WOODEN_KNIFE, null, p)).register();*/
+  public static DeferredHolder<Item, KnifeItem> STONE_KNIFE = ITEMS.register("stone_knife", () -> new KnifeItem(Tiers.STONE, DEFAULT));
+  /*REGISTRATE.item("stone_knife", (p) -> new KnifeItem(Tiers.STONE, 0f, -1.0f, p))
+  .tag(RootsTags.Items.KNIVES)
+  .model((ctx, p) -> p.handheld(ModItems.STONE_KNIFE))
+  .recipe((ctx, p) -> {
+    RECIPES.knife(Tags.Items.STONE, ModItems.STONE_KNIFE, null, p);
+    RECIPES.knife(Tags.Items.COBBLESTONE, ModItems.STONE_KNIFE, null, p);
+  }).register();*/
+  public static DeferredHolder<Item, KnifeItem> COPPER_KNIFE = ITEMS.register("copper_knife", () -> new KnifeItem(RootsAPI.COPPER_TIER, DEFAULT));
+  /*  REGISTRATE.item("copper_knife", (p) -> new KnifeItem(RootsAPI.COPPER_TIER, 0f, -1.5f, p))
+      .tag(RootsTags.Items.COPPER_ITEMS, RootsTags.Items.KNIVES)
+      .model((ctx, p) -> p.handheld(ModItems.COPPER_KNIFE))
+      .recipe((ctx, p) -> RECIPES.knife(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_KNIFE, null, p)).register();*/
+  public static DeferredHolder<Item, KnifeItem> IRON_KNIFE = ITEMS.register("iron_knife", () -> new KnifeItem(Tiers.IRON, DEFAULT));
+  /*    REGISTRATE.item("iron_knife", (p) -> new KnifeItem(Tiers.IRON, 0, -1.5f, p))
+      .tag(RootsTags.Items.KNIVES)
+      .model((ctx, p) -> p.handheld(ModItems.IRON_KNIFE))
+      .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_IRON, ModItems.IRON_KNIFE, null, p)).register();*/
+  public static DeferredHolder<Item, KnifeItem> GOLD_KNIFE = ITEMS.register("gold_knife", () -> new KnifeItem(Tiers.GOLD, DEFAULT));
+  /*    REGISTRATE.item("gold_knife", (p) -> new KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
+      .tag(RootsTags.Items.KNIVES)
+      .model((ctx, p) -> p.handheld(ModItems.GOLD_KNIFE))
+      .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_GOLD, ModItems.GOLD_KNIFE, null, p))
+      .tag(ItemTags.PIGLIN_LOVED)
+      .register();*/
+  public static DeferredHolder<Item, KnifeItem> SILVER_KNIFE = ITEMS.register("silver_knife", () -> new KnifeItem(Tiers.GOLD, DEFAULT));
+  /*    REGISTRATE.item("silver_knife", (p) -> new KnifeItem(Tiers.GOLD, 0f, -1.0f, p))
+      .tag(RootsTags.Items.KNIVES, RootsTags.Items.SILVER_ITEMS)
+      .model((ctx, p) -> p.handheld(ctx::getEntry))
+      .recipe((ctx, p) -> RECIPES.knife(RootsTags.Items.SILVER_INGOT, ctx::getEntry, null, p))
+      .register();*/
+  public static DeferredHolder<Item, KnifeItem> DIAMOND_KNIFE = ITEMS.register("diamond_knife", () -> new KnifeItem(Tiers.DIAMOND, DEFAULT));
+  /*    REGISTRATE.item("diamond_knife", (p) -> new KnifeItem(Tiers.DIAMOND, 0.5f, -1.2f, p))
+      .tag(RootsTags.Items.KNIVES)
+      .model((ctx, p) -> p.handheld(ModItems.DIAMOND_KNIFE))
+      .recipe((ctx, p) -> RECIPES.knife(Tags.Items.GEMS_DIAMOND, ModItems.DIAMOND_KNIFE, null, p)).register();*/
+  public static DeferredHolder<Item, KnifeItem> NETHERITE_KNIFE = ITEMS.register("netherite_knife", () -> new KnifeItem(Tiers.NETHERITE, DEFAULT));
+/*
+    REGISTRATE.item("netherite_knife", (p) -> new KnifeItem(Tiers.NETHERITE, 0.5f, -1.2f, p))
     .tag(RootsTags.Items.KNIVES)
     .model((ctx, p) -> p.handheld(ModItems.NETHERITE_KNIFE))
     .recipe((ctx, p) -> RECIPES.knife(Tags.Items.INGOTS_NETHERITE, ModItems.NETHERITE_KNIFE, null, p)).register();
+*/
 
-  public static final DeferredHolder<Item, Item> RELIQUARY = REGISTRATE.item("reliquary", Item::new)
+  public static final DeferredHolder<Item, Item> RELIQUARY = ITEMS.register("reliquary", () -> new Item(DEFAULT));
+/*      REGISTRATE.item("reliquary", Item::new)
     .model(subfolder("containers"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> SPIRIT_BAG = REGISTRATE.item("spirit_bag", Item::new)
+  public static final DeferredHolder<Item, Item> SPIRIT_BAG = ITEMS.register("spirit_bag", () -> new Item(DEFAULT));
+/*      REGISTRATE.item("spirit_bag", Item::new)
     .model(subfolder("containers"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> FEY_LEATHER = REGISTRATE.item("fey_leather", Item::new)
+  public static final DeferredHolder<Item, Item> FEY_LEATHER = ITEMS.register("fey_leather", () -> new Item(DEFAULT));
+/*      REGISTRATE.item("fey_leather", Item::new)
     .model(subfolder("resources"))
     .recipe((ctx, p) -> {
       RunicEntityRecipe.builder(ctx.getEntry())
@@ -948,21 +949,27 @@ public class ModItems {
         .unlockedBy("has_shears", p.has(RootsTags.Items.RUNIC_SHEARS))
         .save(p, RootsAPI.rl("runic/entity/fey_leather"));
     })
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> GLASS_EYE = REGISTRATE.item("glass_eye", Item::new)
+  public static final DeferredHolder<Item, Item> GLASS_EYE = ITEMS.register("glass_eye", () -> new Item(DEFAULT));
+/*      REGISTRATE.item("glass_eye", Item::new)
+    .model(subfolder("resources"))
+    .register();*/
+
+  public static final DeferredHolder<Item, Item> LIFE_ESSENCE = ITEMS.register("life_essence", () -> new Item(DEFAULT));
+/*
+      "REGISTRATE.item("life_essence", Item::new)
     .model(subfolder("resources"))
     .register();
+*/
 
-  public static final DeferredHolder<Item, Item> LIFE_ESSENCE = REGISTRATE.item("life_essence", Item::new)
+  public static final DeferredHolder<Item, Item> MYSTIC_FEATHER = ITEMS.register("mystic_feather", () -> new Item(DEFAULT));/* +
+      "REGISTRATE.item("mystic_feather", Item::new)
     .model(subfolder("resources"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> MYSTIC_FEATHER = REGISTRATE.item("mystic_feather", Item::new)
-    .model(subfolder("resources"))
-    .register();
-
-  public static final DeferredHolder<Item, Item> PETALS = REGISTRATE.item("petals", Item::new)
+  public static final DeferredHolder<Item, Item> PETALS = ITEMS.register("petals", () -> new Item(DEFAULT));
+/*      REGISTRATE.item("petals", Item::new)
     .model(subfolder("resources"))
     .tag(RootsTags.Items.PETALS)
     .recipe((ctx, p) -> {
@@ -975,22 +982,25 @@ public class ModItems {
         .unlockedBy("has_flower", p.has(ItemTags.TALL_FLOWERS))
         .save(p, RootsAPI.rl("petals_from_tall_flowers"));
     })
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> RUNIC_DUST = REGISTRATE.item("runic_dust", Item::new)
+  public static final DeferredHolder<Item, Item> RUNIC_DUST = ITEMS.register("runic_dust", () -> new Item(DEFAULT));
+
+/*      REGISTRATE.item("runic_dust", Item::new)
     .model(subfolder("resources"))
     .recipe((ctx, p) -> MortarRecipe.multiBuilder(ctx.getEntry(), 5)
       .addIngredient(RootsTags.Items.RUNESTONE)
       .unlockedBy("has_runestone", p.has(RootsTags.Items.RUNESTONE))
       .save(p, RootsAPI.rl("runic_dust")))
     .tag(RootsTags.Items.RUNIC_DUST)
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> STRANGE_OOZE = REGISTRATE.item("strange_ooze", Item::new)
+  public static final DeferredHolder<Item, Item> STRANGE_OOZE = ITEMS.register("strange_ooze", () -> new Item(DEFAULT));/*REGISTRATE.item("strange_ooze", Item::new)
     .model(subfolder("resources"))
-    .register();
+    .register();*/
 
-  public static DeferredHolder<Item, AntlerHatItem> ANTLER_HAT = REGISTRATE.item("antler_hat", AntlerHatItem::new)
+  public static DeferredHolder<Item, AntlerHatItem> ANTLER_HAT = ITEMS.register("antler_hat", () -> new AntlerHatItem(DEFAULT));
+    /* REGISTRATE.item("antler_hat", AntlerHatItem::new)
     .properties(o -> o.durability(399).rarity(Rarity.RARE))
     .recipe((o, p) -> ShapedRecipeBuilder.shaped(o.getEntry(), 1)
       .pattern("AWA")
@@ -1001,9 +1011,10 @@ public class ModItems {
       .define('S', Tags.Items.STRING)
       .unlockedBy("has_antlers", RegistrateRecipeProvider.has(ModItems.ANTLERS.get()))
       .save(p))
-    .register();
+    .register();*/
 
-  public static DeferredHolder<Item, BeetleArmorItem> BEETLE_HELMET = REGISTRATE.item("beetle_helmet", (b) -> new BeetleArmorItem(b, EquipmentSlot.HEAD))
+  public static DeferredHolder<Item, ArmorItem> BEETLE_HELMET = ITEMS.register("beetle_helmet", () -> new ArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.HELMET, DEFAULT));
+    /*REGISTRATE.item("beetle_helmet", (b) -> new BeetleArmorItem(b, EquipmentSlot.HEAD))
     .properties(o -> o.rarity(Rarity.RARE))
     .recipe((o, p) -> ShapedRecipeBuilder.shaped(o.getEntry(), 1)
       .pattern("CCC")
@@ -1011,9 +1022,10 @@ public class ModItems {
       .define('C', RootsTags.Items.CARAPACE)
       .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
       .save(p))
-    .register();
+    .register();*/
 
-  public static DeferredHolder<Item, BeetleArmorItem> BEETLE_CHESTPLATE = REGISTRATE.item("beetle_chestplate", (b) -> new BeetleArmorItem(b, EquipmentSlot.CHEST))
+  public static DeferredHolder<Item, ArmorItem> BEETLE_CHESTPLATE = ITEMS.register("beetle_chestplate", () -> new ArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.CHESTPLATE, DEFAULT));
+/*      REGISTRATE.item("beetle_chestplate", (b) -> new BeetleArmorItem(b, EquipmentSlot.CHEST))
     .properties(o -> o.rarity(Rarity.RARE))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
       .pattern("C C")
@@ -1022,9 +1034,10 @@ public class ModItems {
       .define('C', RootsTags.Items.CARAPACE)
       .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
       .save(p))
-    .register();
+    .register();*/
 
-  public static DeferredHolder<Item, BeetleArmorItem> BEETLE_LEGGINGS = REGISTRATE.item("beetle_leggings", (b) -> new BeetleArmorItem(b, EquipmentSlot.LEGS))
+  public static DeferredHolder<Item, ArmorItem> BEETLE_LEGGINGS = ITEMS.register("beetle_leggings", () -> new ArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.LEGGINGS, DEFAULT));
+/*      REGISTRATE.item("beetle_leggings", (b) -> new BeetleArmorItem(b, EquipmentSlot.LEGS))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
       .pattern("CCC")
       .pattern("C C")
@@ -1032,45 +1045,55 @@ public class ModItems {
       .define('C', RootsTags.Items.CARAPACE)
       .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
       .save(p))
-    .register();
+    .register();*/
 
-  public static DeferredHolder<Item, BeetleArmorItem> BEETLE_BOOTS = REGISTRATE.item("beetle_boots", (b) -> new BeetleArmorItem(b, EquipmentSlot.FEET))
+  public static DeferredHolder<Item, ArmorItem> BEETLE_BOOTS = ITEMS.register("beetle_boots", () -> new ArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.BOOTS, DEFAULT));
+/*      REGISTRATE.item("beetle_boots", (b) -> new BeetleArmorItem(b, EquipmentSlot.FEET))
     .recipe((ctx, p) -> ShapedRecipeBuilder.shaped(ctx.getEntry(), 1)
       .pattern("C C")
       .pattern("C C")
       .define('C', RootsTags.Items.CARAPACE)
       .unlockedBy("has_carapace", RegistrateRecipeProvider.has(RootsTags.Items.CARAPACE))
       .save(p))
-    .register();
+    .register();*/
 
-  public static DeferredHolder<Item, Item> RAW_SILVER = REGISTRATE.item("raw_silver", Item::new)
-    .tag(RootsTags.Items.RAW_SILVER)
-    .recipe((ctx, p) -> {
-      SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.RAW_SILVER), ModItems.SILVER_INGOT.get(), 0.7f, 200)
-        .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
-        .save(p, RootsAPI.rl("silver_ingot_from_raw_silver_smelting"));
-      SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.RAW_SILVER), ModItems.SILVER_INGOT.get(), 0.7f, 100)
-        .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
-        .save(p, RootsAPI.rl("silver_ingot_from_raw_silver_blasting"));
-      ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 9)
-        .requires(RootsTags.Items.RAW_SILVER_STORAGE)
-        .unlockedBy("has_raw_silver_storage", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER_STORAGE))
-        .save(p);
-    })
-    .register();
-  public static DeferredHolder<Item, Item> SILVER_INGOT = REGISTRATE.item("silver_ingot", Item::new)
+  public static DeferredHolder<Item, Item> RAW_SILVER = ITEMS.register("raw_silver", () -> new Item(DEFAULT));
+  /*      REGISTRATE.item("raw_silver", Item::new)
+      .tag(RootsTags.Items.RAW_SILVER)
+      .recipe((ctx, p) -> {
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.RAW_SILVER), ModItems.SILVER_INGOT.get(), 0.7f, 200)
+          .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
+          .save(p, RootsAPI.rl("silver_ingot_from_raw_silver_smelting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.RAW_SILVER), ModItems.SILVER_INGOT.get(), 0.7f, 100)
+          .unlockedBy("has_raw_silver", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER))
+          .save(p, RootsAPI.rl("silver_ingot_from_raw_silver_blasting"));
+        ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 9)
+          .requires(RootsTags.Items.RAW_SILVER_STORAGE)
+          .unlockedBy("has_raw_silver_storage", RegistrateRecipeProvider.has(RootsTags.Items.RAW_SILVER_STORAGE))
+          .save(p);
+      })
+      .register();*/
+  public static DeferredHolder<Item, Item> SILVER_INGOT = ITEMS.register("silver_ingot", () -> new Item(DEFAULT));
+/*    REGISTRATE.item("silver_ingot", Item::new)
     .tag(RootsTags.Items.SILVER_INGOT, ItemTags.BEACON_PAYMENT_ITEMS)
     .recipe(RECIPES.storage(() -> ModBlocks.SILVER_BLOCK, () -> ModItems.SILVER_INGOT, RootsTags.Items.SILVER_STORAGE, RootsTags.Items.SILVER_INGOT, RootsTags.Items.SILVER_ORE, () -> ModItems.SILVER_NUGGET, RootsTags.Items.SILVER_NUGGET, null))
-    .register();
+    .register();*/
 
-  public static DeferredHolder<Item, Item> SILVER_NUGGET = REGISTRATE.item("silver_nugget", Item::new)
+  public static DeferredHolder<Item, Item> SILVER_NUGGET = ITEMS.register("silver_nugget", () -> new Item(DEFAULT));
+/*
+
+      REGISTRATE.item("silver_nugget", Item::new)
     .tag(RootsTags.Items.SILVER_NUGGET)
     .recipe((ctx, p) -> {
       RECIPES.recycle(RootsTags.Items.SILVER_ITEMS, ModItems.SILVER_NUGGET, 0.15f, p);
     })
     .register();
+*/
 
-  public static DeferredHolder<Item, Item> COPPER_NUGGET = REGISTRATE.item("copper_nugget", Item::new)
+  public static DeferredHolder<Item, Item> COPPER_NUGGET = ITEMS.register("copper_nugget", () -> new Item(DEFAULT));
+
+/*
+      REGISTRATE.item("copper_nugget", Item::new)
     .tag(RootsTags.Items.COPPER_NUGGET)
     .recipe((ctx, p) -> {
       RECIPES.recycle(RootsTags.Items.COPPER_ITEMS, () -> Items.COPPER_INGOT, 0.15f, p);
@@ -1092,149 +1115,120 @@ public class ModItems {
     })
     .register();
 
-
+*/
 
   // TODO: Check damage values
-  public static DeferredHolder<Item, AxeItem> COPPER_AXE = REGISTRATE.item("copper_axe", (p) -> new AxeItem(RootsAPI.COPPER_TIER, 5.0f, -3.1f, p))
-    .tag(RootsTags.Items.COPPER_ITEMS)
-    .model((ctx, p) -> p.handheld(ModItems.COPPER_AXE))
-    .recipe((ctx, p) -> RECIPES.axe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_AXE, null, p)).register();
-  public static DeferredHolder<Item, HoeItem> COPPER_HOE = REGISTRATE.item("copper_hoe", (p) -> new HoeItem(RootsAPI.COPPER_TIER, 1, -1f, p))
+  public static DeferredHolder<Item, AxeItem> COPPER_AXE = ITEMS.register("copper_axe", () -> new AxeItem(RootsAPI.COPPER_TIER, DEFAULT));
+
+  /*      REGISTRATE.item("copper_axe", (p) -> new AxeItem(RootsAPI.COPPER_TIER, 5.0f, -3.1f, p))
+      .tag(RootsTags.Items.COPPER_ITEMS)
+      .model((ctx, p) -> p.handheld(ModItems.COPPER_AXE))
+      .recipe((ctx, p) -> RECIPES.axe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_AXE, null, p)).register();*/
+  public static DeferredHolder<Item, HoeItem> COPPER_HOE = ITEMS.register("copper_hoe", () -> new HoeItem(RootsAPI.COPPER_TIER, DEFAULT));
+  /*REGISTRATE.item("copper_hoe", (p) -> new HoeItem(RootsAPI.COPPER_TIER, 1, -1f, p))
     .tag(RootsTags.Items.COPPER_ITEMS)
     .model((ctx, p) -> p.handheld(ModItems.COPPER_HOE))
-    .recipe((ctx, p) -> RECIPES.hoe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_HOE, null, p)).register();
-  public static DeferredHolder<Item, PickaxeItem> COPPER_PICKAXE = REGISTRATE.item("copper_pickaxe", (p) -> new PickaxeItem(RootsAPI.COPPER_TIER, 1, -1f, p))
+    .recipe((ctx, p) -> RECIPES.hoe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_HOE, null, p)).register();*/
+  public static DeferredHolder<Item, PickaxeItem> COPPER_PICKAXE = ITEMS.register("copper_pickaxe", () -> new PickaxeItem(RootsAPI.COPPER_TIER, DEFAULT));
+
+  /*REGISTRATE.item("copper_pickaxe", (p) -> new PickaxeItem(RootsAPI.COPPER_TIER, 1, -1f, p))
     .tag(RootsTags.Items.COPPER_ITEMS)
     .model((ctx, p) -> p.handheld(ModItems.COPPER_PICKAXE))
-    .recipe((ctx, p) -> RECIPES.pickaxe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_PICKAXE, null, p)).register();
-  public static DeferredHolder<Item, ShovelItem> COPPER_SHOVEL = REGISTRATE.item("copper_shovel", (p) -> new ShovelItem(RootsAPI.COPPER_TIER, 1, -1f, p))
+    .recipe((ctx, p) -> RECIPES.pickaxe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_PICKAXE, null, p)).register();*/
+  public static DeferredHolder<Item, ShovelItem> COPPER_SHOVEL = ITEMS.register("copper_shovel", () -> new ShovelItem(RootsAPI.COPPER_TIER, DEFAULT));
+
+  /*REGISTRATE.item("copper_shovel", (p) -> new ShovelItem(RootsAPI.COPPER_TIER, 1, -1f, p))
     .tag(RootsTags.Items.COPPER_ITEMS)
     .model((ctx, p) -> p.handheld(ModItems.COPPER_SHOVEL))
-    .recipe((ctx, p) -> RECIPES.shovel(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_SHOVEL, null, p)).register();
-  public static DeferredHolder<Item, SwordItem> COPPER_SWORD = REGISTRATE.item("copper_sword", (p) -> new SwordItem(RootsAPI.COPPER_TIER, 1, -1f, p))
+    .recipe((ctx, p) -> RECIPES.shovel(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_SHOVEL, null, p)).register();*/
+  public static DeferredHolder<Item, SwordItem> COPPER_SWORD = ITEMS.register("copper_sword", () -> new SwordItem(RootsAPI.COPPER_TIER, DEFAULT));
+
+    /*REGISTRATE.item("copper_sword", (p) -> new SwordItem(RootsAPI.COPPER_TIER, 1, -1f, p))
     .tag(RootsTags.Items.COPPER_ITEMS)
     .model((ctx, p) -> p.handheld(ModItems.COPPER_SWORD))
-    .recipe((ctx, p) -> RECIPES.sword(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_SWORD, null, p)).register();
+    .recipe((ctx, p) -> RECIPES.sword(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_SWORD, null, p)).register();*/
 
-  public static DeferredHolder<Item, CopperArmorItem> COPPER_HELMET = REGISTRATE.item("copper_helmet", (p) -> new CopperArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.HEAD, p))
-    .recipe((ctx, p) -> RECIPES.helmet(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_HELMET, null, p))
-    .tag(RootsTags.Items.COPPER_ITEMS)
-    .register();
-  public static DeferredHolder<Item, CopperArmorItem> COPPER_CHESTPLATE = REGISTRATE.item("copper_chestplate", (p) -> new CopperArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.CHEST, p))
-    .recipe((ctx, p) -> RECIPES.chest(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_CHESTPLATE, null, p))
-    .tag(RootsTags.Items.COPPER_ITEMS)
-    .register();
-  public static DeferredHolder<Item, CopperArmorItem> COPPER_LEGGINGS = REGISTRATE.item("copper_leggings", (p) -> new CopperArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.LEGS, p))
-    .recipe((ctx, p) -> RECIPES.legs(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_LEGGINGS, null, p))
-    .tag(RootsTags.Items.COPPER_ITEMS)
-    .register();
-  public static DeferredHolder<Item, CopperArmorItem> COPPER_BOOTS = REGISTRATE.item("copper_boots", (p) -> new CopperArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.FEET, p))
-    .recipe((ctx, p) -> RECIPES.boots(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_BOOTS, null, p))
-    .tag(RootsTags.Items.COPPER_ITEMS)
-    .register();
+  public static DeferredHolder<Item, ArmorItem> COPPER_HELMET = ITEMS.register("copper_helmet", () -> new ArmorItem(ArmorMaterials.GOLD, ArmorItem.Type.HELMET, DEFAULT));
+  /*      REGISTRATE.item("copper_helmet", (p) -> new ArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.HEAD, p))
+      .recipe((ctx, p) -> RECIPES.helmet(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_HELMET, null, p))
+      .tag(RootsTags.Items.COPPER_ITEMS)
+      .register();*/
+  public static DeferredHolder<Item, ArmorItem> COPPER_CHESTPLATE = ITEMS.register("copper_chestplate", () -> new ArmorItem(ArmorMaterials.GOLD, ArmorItem.Type.CHESTPLATE, DEFAULT));
 
-/*  public static DeferredHolder<Item, SilverAxeItem> SILVER_AXE = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_axe", ItemGenerator.axe(SilverAxeItem::new, ModMaterials.SILVER))
-    .tag(RootsTags.Items.SILVER_ITEMS)
-    .model((ctx, p) -> p.handheld(ModItems.SILVER_AXE))
-    .recipe((ctx, p) -> RECIPES.axe(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_AXE, null, p)).register();
-  public static DeferredHolder<Item, SilverHoeItem> SILVER_HOE = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_hoe", ItemGenerator.hoe(SilverHoeItem::new, ModMaterials.SILVER))
-    .tag(RootsTags.Items.SILVER_ITEMS)
-    .model((ctx, p) -> p.handheld(ModItems.SILVER_HOE))
-    .recipe((ctx, p) -> RECIPES.hoe(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_HOE, null, p)).register();
-  public static DeferredHolder<Item, SilverKnifeItem> SILVER_KNIFE = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_knife", ItemGenerator.knife(SilverKnifeItem::new, ModMaterials.SILVER))
-    .tag(RootsTags.Items.SILVER_ITEMS, RootsTags.Items.KNIVES)
-    .model((ctx, p) -> p.handheld(ModItems.SILVER_KNIFE))
-    .recipe((ctx, p) -> RECIPES.knife(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_KNIFE, null, p)).register();
-  public static DeferredHolder<Item, SilverPickaxeItem> SILVER_PICKAXE = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_pickaxe", ItemGenerator.pickaxe(SilverPickaxeItem::new, ModMaterials.SILVER))
-    .tag(RootsTags.Items.SILVER_ITEMS)
-    .model((ctx, p) -> p.handheld(ModItems.SILVER_PICKAXE))
-    .recipe((ctx, p) -> RECIPES.pickaxe(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_PICKAXE, null, p)).register();
-  public static DeferredHolder<Item, SilverShovelItem> SILVER_SHOVEL = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_shovel", ItemGenerator.shovel(SilverShovelItem::new, ModMaterials.SILVER))
-    .tag(RootsTags.Items.SILVER_ITEMS)
-    .model((ctx, p) -> p.handheld(ModItems.SILVER_SHOVEL))
-    .recipe((ctx, p) -> RECIPES.shovel(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_SHOVEL, null, p)).register();
-  public static DeferredHolder<Item, SilverSwordItem> SILVER_SWORD = REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_sword", ItemGenerator.sword(SilverSwordItem::new, ModMaterials.SILVER))
-    .tag(RootsTags.Items.SILVER_ITEMS)
-    .model((ctx, p) -> p.handheld(ModItems.SILVER_SWORD))
-    .recipe((ctx, p) -> RECIPES.sword(RootsTags.Items.SILVER_INGOT, ModItems.SILVER_SWORD, null, p)).register(); */
+  /*REGISTRATE.item("copper_chestplate", (p) -> new ArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.CHEST, p))
+      .recipe((ctx, p) -> RECIPES.chest(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_CHESTPLATE, null, p))
+      .tag(RootsTags.Items.COPPER_ITEMS)
+      .register();*/
+  public static DeferredHolder<Item, ArmorItem> COPPER_LEGGINGS = ITEMS.register("copper_leggings", () -> new ArmorItem(ArmorMaterials.GOLD, ArmorItem.Type.LEGGINGS, DEFAULT));
+  /*      REGISTRATE.item("copper_leggings", (p) -> new ArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.LEGS, p))
+        .recipe((ctx, p) -> RECIPES.legs(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_LEGGINGS, null, p))
+        .tag(RootsTags.Items.COPPER_ITEMS)
+        .register();*/
+  public static DeferredHolder<Item, ArmorItem> COPPER_BOOTS = ITEMS.register("copper_boots", () -> new ArmorItem(ArmorMaterials.GOLD, ArmorItem.Type.BOOTS, DEFAULT));
+    /*REGISTRATE.item("copper_boots", (p) -> new ArmorItem(Roots.COPPER_MATERIAL, EquipmentSlot.FEET, p))
+      .recipe((ctx, p) -> RECIPES.boots(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_BOOTS, null, p))
+      .tag(RootsTags.Items.COPPER_ITEMS)
+      .register();*/
 
-/*  public static DeferredHolder<Item, SilverArmorItem> SILVER_HELMET = MysticalWorld.REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_helmet", ItemGenerator.armor(SilverArmorItem::new, ModMaterials.SILVER, EquipmentSlot.HEAD))
-    .recipe((ctx, p) -> MysticalWorld.RECIPES.helmet(MWTags.Items.SILVER_INGOT, ModItems.SILVER_HELMET, null, p))
-    .tag(MWTags.Items.SILVER_ITEMS)
-    .register();
-  public static DeferredHolder<Item, SilverArmorItem> SILVER_CHESTPLATE = MysticalWorld.REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_chestplate", ItemGenerator.armor(SilverArmorItem::new, ModMaterials.SILVER, EquipmentSlot.CHEST))
-    .recipe((ctx, p) -> MysticalWorld.RECIPES.chest(MWTags.Items.SILVER_INGOT, ModItems.SILVER_CHESTPLATE, null, p))
-    .tag(MWTags.Items.SILVER_ITEMS)
-    .register();
-  public static DeferredHolder<Item, SilverArmorItem> SILVER_LEGGINGS = MysticalWorld.REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_leggings", ItemGenerator.armor(SilverArmorItem::new, ModMaterials.SILVER, EquipmentSlot.LEGS))
-    .recipe((ctx, p) -> MysticalWorld.RECIPES.legs(MWTags.Items.SILVER_INGOT, ModItems.SILVER_LEGGINGS, null, p))
-    .tag(MWTags.Items.SILVER_ITEMS)
-    .register();
-  public static DeferredHolder<Item, SilverArmorItem> SILVER_BOOTS = MysticalWorld.REGISTRATE.item(ModMaterials.SILVER.getInternalName() + "_boots", ItemGenerator.armor(SilverArmorItem::new, ModMaterials.SILVER, EquipmentSlot.FEET))
-    .recipe((ctx, p) -> MysticalWorld.RECIPES.boots(MWTags.Items.SILVER_INGOT, ModItems.SILVER_BOOTS, null, p))
-    .tag(MWTags.Items.SILVER_ITEMS)
-    .register();*/
-
-  private static <T extends Item> ItemModelBuilder spawnEggModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider p) {
-    return p.withExistingParent(ctx.getName(), new ResourceLocation("item/template_spawn_egg"));
-  }
-
-  public static DeferredHolder<Item, ForgeSpawnEggItem> BEETLE_SPAWN_EGG = REGISTRATE.item("beetle_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.BEETLE, 0x418594, 0x211D15, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+/*
+  public static DeferredHolder<Item, SpawnEggItem> BEETLE_SPAWN_EGG =
+      REGISTRATE.item("beetle_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.BEETLE, 0x418594, 0x211D15, p))
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static DeferredHolder<Item, ForgeSpawnEggItem> DEER_SPAWN_EGG = REGISTRATE.item("deer_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.DEER, 0xa18458, 0x5e4d33, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static DeferredHolder<Item, ForgeSpawnEggItem> FENNEC_SPAWN_EGG = REGISTRATE.item("fennec_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.FENNEC, 0xe9dcc2, 0xb1855c, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static DeferredHolder<Item, ForgeSpawnEggItem> GREEN_SPROUT_SPAWN_EGG = REGISTRATE.item("green_sprout_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.GREEN_SPROUT, 0x9adb58, 0x2c9425, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static DeferredHolder<Item, ForgeSpawnEggItem> TAN_SPROUT_SPAWN_EGG = REGISTRATE.item("tan_sprout_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.TAN_SPROUT, 0xeeca5f, 0xbb6c20, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static DeferredHolder<Item, ForgeSpawnEggItem> RED_SPROUT_SPAWN_EGG = REGISTRATE.item("red_sprout_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.RED_SPROUT, 0xe6754c, 0xbd2637, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static DeferredHolder<Item, ForgeSpawnEggItem> PURPLE_SPROUT_SPAWN_EGG = REGISTRATE.item("purple_sprout_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.PURPLE_SPROUT, 0xdd45e6, 0x6825ba, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static DeferredHolder<Item, ForgeSpawnEggItem> OWL_SPAWN_EGG = REGISTRATE.item("owl_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.OWL, 0x8c654a, 0xdec9ba, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static DeferredHolder<Item, ForgeSpawnEggItem> DUCK_SPAWN_EGG = REGISTRATE.item("duck_spawn_egg", (p) -> new ForgeSpawnEggItem(ModEntities.DUCK, 0xe4d6a5, 0xe9ad36, p))
-    .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
-    .model(ModItems::spawnEggModel)
-    .register();
+      .properties(o -> o.tab(CreativeModeTab.TAB_MISC))
+      .model(ModItems::spawnEggModel)
+      .register();
 
   public static final DeferredHolder<Item, TokenItem> TOKEN = REGISTRATE.item("token", TokenItem::new)
-    .model((ctx, p) -> {
-      ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
-      for (ResourceLocation ritual : RootsRegistries.RITUAL_REGISTRY.get().getKeys()) {
-        p.getBuilder("ritual_" + ritual.getPath()).parent(generated).texture("layer0", p.modLoc("item/rituals/" + ritual.getPath()));
-      }
-      for (ResourceLocation spell : RootsRegistries.SPELL_REGISTRY.get().getKeys()) {
-        p.getBuilder("spell_" + spell.getPath()).parent(generated).texture("layer0", p.modLoc("item/spells/" + spell.getPath()));
-      }
-    })
-    .register();
+      .model((ctx, p) -> {
+        ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
+        for (ResourceLocation ritual : RootsRegistries.RITUAL_REGISTRY.get().getKeys()) {
+          p.getBuilder("ritual_" + ritual.getPath()).parent(generated).texture("layer0", p.modLoc("item/rituals/" + ritual.getPath()));
+        }
+        for (ResourceLocation spell : RootsRegistries.SPELL_REGISTRY.get().getKeys()) {
+          p.getBuilder("spell_" + spell.getPath()).parent(generated).texture("layer0", p.modLoc("item/spells/" + spell.getPath()));
+        }
+      })
+      .register();
+*/
 
 
   public static void load() {

@@ -11,6 +11,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -65,6 +66,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+  }
+
+  public PyreBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+    super(ModBlockEntities.PYRE.get(), pWorldPosition, pBlockState);
   }
 
   @Override

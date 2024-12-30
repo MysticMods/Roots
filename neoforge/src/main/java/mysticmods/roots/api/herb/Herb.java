@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -22,13 +23,20 @@ public class Herb extends StyledRegistryEntry<Herb> {
   private final Supplier<? extends ItemLike> item;
   private final TagKey<Item> tag;
 
+  private final Holder.Reference<Herb> builtInRegistryHolder = RootsRegistries.HERBS.createIntrusiveHolder(this);
+
+  @Deprecated
+  public Holder.Reference<Herb> builtInRegistryHolder() {
+    return this.builtInRegistryHolder;
+  }
+
   public Herb(Supplier<? extends ItemLike> item, TagKey<Item> tag, ChatFormatting color) {
     this.item = item;
     this.tag = tag;
     this.color = color;
   }
 
-  @Nullable
+  /*@Nullable
   // TODO: this should go somewhere else
   public static Herb getHerb(ItemStack stack) {
     if (!stack.is(RootsTags.Items.HERBS)) {
@@ -38,7 +46,7 @@ public class Herb extends StyledRegistryEntry<Herb> {
     if (potential != null) {
       return potential;
     }
-    for (Herb herb : RootsRegistries.HERB_REGISTRY.get().getValues()) {
+    for (Herb herb : RootsRegistries.HERBS.get().getValues()) {
       if (stack.is(herb.getTag())) {
         herbCache.put(stack.getItem(), herb);
         return herb;
@@ -46,7 +54,7 @@ public class Herb extends StyledRegistryEntry<Herb> {
     }
 
     return null;
-  }
+  }*/
 
   public ItemLike getItem() {
     return item.get();
@@ -57,24 +65,24 @@ public class Herb extends StyledRegistryEntry<Herb> {
   }
 
   public boolean is(ResourceLocation location) {
-    return RootsRegistries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(location)).orElse(false);
+    return builtInRegistryHolder().is(location);
   }
 
   public boolean is(ResourceKey<Herb> key) {
-    return RootsRegistries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(Predicate<ResourceKey<Herb>> predicate) {
-    return RootsRegistries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(predicate)).orElse(false);
+    return builtInRegistryHolder().is(predicate);
   }
 
   public boolean is(TagKey<Herb> tag) {
-    return RootsRegistries.HERB_REGISTRY.get().getHolder(this).map(o -> o.is(tag)).orElse(false);
+    return builtInRegistryHolder().is(tag);
   }
 
   @Override
   public ResourceLocation getKey() {
-    return RootsRegistries.HERB_REGISTRY.get().getKey(this);
+    return builtInRegistryHolder.getKey().location();
   }
 
   @Override

@@ -1,9 +1,9 @@
 package mysticmods.roots.api.reference;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 
 public interface Spells {
   ResourceKey<Spell> ACID_CLOUD = spell("acid_cloud");
@@ -36,6 +36,6 @@ public interface Spells {
   ResourceKey<Spell> WILDFIRE = spell("wildfire");
 
   static ResourceKey<Spell> spell(String name) {
-    return ResourceKey.create(RootsAPI.SPELL_REGISTRY, RootsAPI.rl(name));
+    return ResourceKey.create(RootsRegistries.Keys.SPELLS, RootsAPI.rl(name));
   }
 }

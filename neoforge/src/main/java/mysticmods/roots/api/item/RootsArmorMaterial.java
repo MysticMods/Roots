@@ -1,6 +1,7 @@
 package mysticmods.roots.api.item;
 
 import com.google.common.base.Suppliers;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
@@ -14,12 +15,12 @@ public class RootsArmorMaterial implements ArmorMaterial {
   private final int durabilityMultiplier;
   private final int[] slotProtections;
   private final int enchantmentValue;
-  private final SoundEvent sound;
+  private final Holder<SoundEvent> sound;
   private final float toughness;
   private final float knockbackResistance;
   private final Supplier<Ingredient> repairIngredient;
 
-  public RootsArmorMaterial(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue, SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+  public RootsArmorMaterial(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue, Holder<SoundEvent> sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
     this.name = name;
     this.durabilityMultiplier = durabilityMultiplier;
     this.slotProtections = slotProtections;

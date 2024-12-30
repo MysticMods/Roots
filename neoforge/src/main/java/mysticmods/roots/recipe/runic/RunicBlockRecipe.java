@@ -38,11 +38,6 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   }
 
   @Override
-  public ItemStack getBaseResultItem() {
-    return getResultItem();
-  }
-
-  @Override
   public void setIngredients(NonNullList<Ingredient> ingredients) {
   }
 

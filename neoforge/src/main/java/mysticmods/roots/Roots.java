@@ -4,9 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.access.IPlayerAccessor;
 import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import mysticmods.roots.api.access.IShiftAccessor;
-import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
-import mysticmods.roots.api.item.RootsArmorMaterial;
 import mysticmods.roots.client.impl.ClientPlayerAccessor;
 import mysticmods.roots.client.impl.ClientRecipeAccessor;
 import mysticmods.roots.client.impl.ClientShiftAccessor;
@@ -16,45 +14,33 @@ import mysticmods.roots.impl.ServerRecipeAccessor;
 import mysticmods.roots.impl.ServerShiftAccessor;
 import mysticmods.roots.init.*;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.DistExecutor;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
 
 @Mod(RootsAPI.MODID)
 public class Roots {
-  public static RootsArmorMaterial ANTLER_MATERIAL = new RootsArmorMaterial("roots:antlers", 7, new int[]{3, 0, 0, 0}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 1f, 0f, () -> Ingredient.of(ModItems.ANTLERS.get()));
+/*  public static RootsArmorMaterial ANTLER_MATERIAL = new RootsArmorMaterial("roots:antlers", 7, new int[]{3, 0, 0, 0}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 1f, 0f, () -> Ingredient.of(ModItems.ANTLERS.get()));
   public static RootsArmorMaterial CARAPACE_MATERIAL = new RootsArmorMaterial("roots:carapace", 25, new int[]{2, 5, 6, 2}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(ModItems.CARAPACE.get()));
-  public static RootsArmorMaterial COPPER_MATERIAL = new RootsArmorMaterial("roots:copper", 15, new int[]{2, 5, 6, 2}, 7, SoundEvents.ARMOR_EQUIP_IRON.value(), 0.0f, 0.0f, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
+  public static RootsArmorMaterial COPPER_MATERIAL = new RootsArmorMaterial("roots:copper", 15, new int[]{2, 5, 6, 2}, 7, SoundEvents.ARMOR_EQUIP_IRON.value(), 0.0f, 0.0f, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));*/
 
-  public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(RootsAPI.MODID) {
-    @Override
-    public ItemStack makeIcon() {
-      return new ItemStack(ModItems.WILDROOT.get());
-    }
-  };
+  public static final CreativeModeTab ITEM_GROUP = CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.WILDROOT.get())).build();
 
-  public Roots(ModContainer container) {
+  public Roots(ModContainer container, IEventBus bus) {
     ConfigManager.loadConfig(ConfigManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(RootsAPI.MODID + "-common.toml"));
     container.registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
-    IEventBus bus = container.getEventBus();
 
     RootsAPI.INSTANCE = new RootsAPI() {
-      private final IRecipeManagerAccessor accessor = DistExecutor.safeRunForDist(() -> ClientRecipeAccessor::new, () -> ServerRecipeAccessor::new);
-      private final IPlayerAccessor playerAccessor = DistExecutor.safeRunForDist(() -> ClientPlayerAccessor::new, () -> ServerPlayerAccessor::new);
-      private final IShiftAccessor shiftAccessor = DistExecutor.safeRunForDist(() -> ClientShiftAccessor::new, () -> ServerShiftAccessor::new);
+      private final IRecipeManagerAccessor accessor = null; //DistExecutor.safeRunForDist(() -> ClientRecipeAccessor::new, () -> ServerRecipeAccessor::new);
+      private final IPlayerAccessor playerAccessor = null; //DistExecutor.safeRunForDist(() -> ClientPlayerAccessor::new, () -> ServerPlayerAccessor::new);
+      private final IShiftAccessor shiftAccessor = null; // DistExecutor.safeRunForDist(() -> ClientShiftAccessor::new, () -> ServerShiftAccessor::new);
 
       @Override
       public IRecipeManagerAccessor getRecipeAccessor() {
@@ -85,24 +71,22 @@ public class Roots {
     };
 
     ModBlocks.register(bus);
-    ModBlockEntities.load();
+    ModBlockEntities.register(bus);
     ModItems.load();
     ModEntities.load();
-    ModEffects.load();
+    ModEffects.register(bus);
     ModFeatures.load();
     ModHerbs.load();
-    ModRegistries.load();
     ModTags.load();
     ModRecipes.load();
-    ModConditions.load();
-    ModRituals.load();
+    ModConditions.register(bus);
+    ModRituals.register(bus);
     ModSpells.load();
     ModLang.load();
     ModTests.load();
     ModSounds.load();
     ModGroves.load();
     ModSerializers.register(bus);
-    ModRegistries.register(bus);
     ModRecipes.register(bus);
     ModFeatures.register(bus);
     ModLoot.register(bus);

@@ -3,7 +3,7 @@ package mysticmods.roots.client;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Grant;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -15,7 +15,7 @@ import java.util.Map;
 // TODO: Reset when reloading
 public class ItemCache {
   private static final Map<Spell, ItemStack> SPELL_CACHE = new Object2ObjectLinkedOpenHashMap<>();
-  private static final Map<Modifier, ItemStack> MODIFIER_CACHE = new Object2ObjectLinkedOpenHashMap<>();
+  private static final Map<SpellModifier, ItemStack> MODIFIER_CACHE = new Object2ObjectLinkedOpenHashMap<>();
   private static final Map<Ritual, ItemStack> RITUAL_CACHE = new Object2ObjectLinkedOpenHashMap<>();
 
   public static ItemStack getCachedSpell (Spell spell) {
@@ -26,7 +26,7 @@ public class ItemCache {
     return RITUAL_CACHE.computeIfAbsent(ritual, TokenItem::getRitualToken);
   }
 
-  public static ItemStack getCachedModifier (Modifier modifier) {
+  public static ItemStack getCachedModifier (SpellModifier modifier) {
     return MODIFIER_CACHE.computeIfAbsent(modifier, TokenItem::getModifierToken);
   }
 
@@ -39,7 +39,7 @@ public class ItemCache {
       }
       return getCachedSpell(spell);
     } else if (grant.getType() == Grant.Type.MODIFIER) {
-      Modifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().getValue(grant.getId());
+      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().getValue(grant.getId());
       if (modifier == null) {
         RootsAPI.LOG.error("Grant {} references non-existent modifier {}", grant, grant.getId());
         return ItemStack.EMPTY;

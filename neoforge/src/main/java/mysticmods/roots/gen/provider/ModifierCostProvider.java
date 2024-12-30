@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.gen.BaseProvider;
 import net.minecraft.data.CachedOutput;
@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.nio.file.Path;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 public class ModifierCostProvider extends BaseProvider implements DataProvider {
   protected final DataGenerator generator;
@@ -23,10 +24,10 @@ public class ModifierCostProvider extends BaseProvider implements DataProvider {
   }
 
   @Override
-  public void run(CachedOutput pCache) {
+  public CompletableFuture run(CachedOutput pCache) {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
-    for (Modifier spell : RootsRegistries.MODIFIER_REGISTRY.get().getValues()) {
+    for (SpellModifier spell : RootsRegistries.SPELL_MODIFIERS.entrySet()) {
       ResourceLocation id = RootsRegistries.MODIFIER_REGISTRY.get().getKey(spell);
       if (!set.add(id)) {
         throw new IllegalStateException("Duplicate recipe " + id);

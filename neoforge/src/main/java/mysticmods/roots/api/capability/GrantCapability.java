@@ -3,13 +3,12 @@ package mysticmods.roots.api.capability;
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.LibraryModifier;
 import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.Spell;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -20,25 +19,24 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 
-
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.*;
 
 public class GrantCapability implements INetworkedCapability<GrantCapability.SerializedGrantRecord> {
   private boolean dirty = true;
   private final Set<Spell> GRANTED_SPELLS = new ObjectLinkedOpenHashSet<>();
-  private final Set<Modifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
+  private final Set<SpellModifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
   private ImmutableSet<Spell> IMMUTABLE_GRANTED_SPELLS = null;
-  private ImmutableSet<Modifier> IMMUTABLE_GRANTED_MODIFIERS = null;
+  private ImmutableSet<SpellModifier> IMMUTABLE_GRANTED_MODIFIERS = null;
 
   private List<LibrarySpell> LIBRARY_SPELLS = null;
 
   private Map<Spell, List<LibraryModifier>> LIBRARY_MODIFIERS = null;
 
   private void reset() {
+        NeoForgeRegistries
+
     IMMUTABLE_GRANTED_MODIFIERS = null;
     IMMUTABLE_GRANTED_SPELLS = null;
     LIBRARY_SPELLS = null;
@@ -52,7 +50,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     return GRANTED_SPELLS.contains(spell);
   }
 
-  public boolean hasModifier(Modifier modifier) {
+  public boolean hasModifier(SpellModifier modifier) {
     return GRANTED_MODIFIERS.contains(modifier);
   }
 
@@ -65,7 +63,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
 
       return grant.isRepeatable() || !hasSpell(spell);
     } else if (grant.getType() == Grant.Type.MODIFIER) {
-      Modifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.getId());
+      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.getId());
       if (modifier == null) {
         throw new NullPointerException("Modifier " + grant.getId() + " does not exist!");
       }
@@ -89,7 +87,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
         return true;
       }
     } else if (grant.getType() == Grant.Type.MODIFIER) {
-      Modifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.getId());
+      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.getId());
       if (modifier == null) {
         throw new NullPointerException("Modifier " + grant.getId() + " does not exist!");
       }
@@ -112,7 +110,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     }
   }
 
-  private void grantModifier(Modifier modifier) {
+  private void grantModifier(SpellModifier modifier) {
     if (GRANTED_MODIFIERS.add(modifier)) {
       reset();
       setDirty(true);
@@ -126,7 +124,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     }
   }
 
-  public void removeModifier(Modifier modifier) {
+  public void removeModifier(SpellModifier modifier) {
     if (GRANTED_MODIFIERS.remove(modifier)) {
       reset();
       setDirty(true);
@@ -140,7 +138,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     return IMMUTABLE_GRANTED_SPELLS;
   }
 
-  public Set<Modifier> getModifiers() {
+  public Set<SpellModifier> getModifiers() {
     if (IMMUTABLE_GRANTED_MODIFIERS == null) {
       IMMUTABLE_GRANTED_MODIFIERS = ImmutableSet.copyOf(GRANTED_MODIFIERS);
     }
@@ -162,7 +160,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     }
     return LIBRARY_MODIFIERS.computeIfAbsent(checkSpell, spell -> {
       List<LibraryModifier> result = new ArrayList<>();
-      for (Modifier mod : spell.getModifiers()) {
+      for (SpellModifier mod : spell.getModifiers()) {
         result.add(new LibraryModifier(mod, GRANTED_MODIFIERS.contains(mod)));
       }
       result.sort(Comparator.comparing(LibraryModifier::enabled));
@@ -224,7 +222,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     }
     for (int i = 0; i < modifiers.size(); i++) {
       ResourceLocation key = ResourceLocation.tryParse(modifiers.getString(i));
-      Modifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(key);
+      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(key);
       if (modifier != null) {
         GRANTED_MODIFIERS.add(modifier);
       }
@@ -246,12 +244,12 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
 
   public static class SerializedGrantRecord implements SerializedCapability {
     private final Set<Spell> GRANTED_SPELLS = new ObjectLinkedOpenHashSet<>();
-    private final Set<Modifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
+    private final Set<SpellModifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
 
     public SerializedGrantRecord() {
     }
 
-    public SerializedGrantRecord(Set<Spell> spells, Set<Modifier> modifiers) {
+    public SerializedGrantRecord(Set<Spell> spells, Set<SpellModifier> modifiers) {
       this.GRANTED_SPELLS.addAll(spells);
       this.GRANTED_MODIFIERS.addAll(modifiers);
     }
@@ -277,7 +275,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
         buf.writeVarInt(RootsRegistries.SPELL_REGISTRY.get().getId(spell));
       }
       buf.writeVarInt(GRANTED_MODIFIERS.size());
-      for (Modifier modifier : GRANTED_MODIFIERS) {
+      for (SpellModifier modifier : GRANTED_MODIFIERS) {
         buf.writeVarInt(RootsRegistries.MODIFIER_REGISTRY.get().getId(modifier));
       }
     }
@@ -286,7 +284,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
       return GRANTED_SPELLS;
     }
 
-    public Set<Modifier> getGrantedModifiers() {
+    public Set<SpellModifier> getGrantedModifiers() {
       return GRANTED_MODIFIERS;
     }
   }

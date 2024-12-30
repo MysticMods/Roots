@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KnifeItem extends BaseItems.KnifeItem {
-  public KnifeItem(Tier tier, float attackDamage, float attackSpeed, Properties props) {
+  public KnifeItem(Tier tier, Properties props) {
     super(tier, attackDamage, attackSpeed, props);
   }
 

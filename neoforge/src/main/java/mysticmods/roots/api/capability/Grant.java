@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.util.EnumUtil;
@@ -97,7 +97,7 @@ public class Grant {
     return new Grant(Type.SPELL, RootsRegistries.SPELL_REGISTRY.get().getKey(spell), false);
   }
 
-  public static Grant modifier(Modifier modifier) {
+  public static Grant modifier(SpellModifier modifier) {
     return new Grant(Type.MODIFIER, RootsRegistries.MODIFIER_REGISTRY.get().getKey(modifier), false);
   }
 

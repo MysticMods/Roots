@@ -25,7 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecipeBase implements IEntityRecipe<W> {
+public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecipe<H, W> implements IEntityRecipe<W> {
   protected EntityTest test;
 
   public EntityRecipe(ResourceLocation recipeId) {

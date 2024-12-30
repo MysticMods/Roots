@@ -25,11 +25,9 @@ import java.util.function.Supplier;
 
 public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
   private final Type condition;
-  private final Supplier<List<BlockState>> canonicalStates;
 
-  public LevelCondition(Type condition, Supplier<List<BlockState>> canonicalStates) {
+  public LevelCondition(Type condition) {
     this.condition = condition;
-    this.canonicalStates = Suppliers.memoize(canonicalStates::get);
   }
 
   @Override

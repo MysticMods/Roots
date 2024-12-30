@@ -55,12 +55,6 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
     setDirty(true);
   }
 
-  @NotNull
-  @Override
-  public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-    return Capabilities.HERB_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this));
-  }
-
   @Override
   public ListTag serializeNBT() {
     ListTag result = new ListTag();

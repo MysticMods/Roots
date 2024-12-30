@@ -1,6 +1,6 @@
 package mysticmods.roots.api.registry;
 
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -56,5 +56,5 @@ public interface IParentChild<T extends IParentChild<T>> {
     }
   }
 
-  Supplier<Modifier> NO_PARENT = LazySupplier.of(() -> null);
+  Supplier<SpellModifier> NO_PARENT = LazySupplier.of(() -> null);
 }

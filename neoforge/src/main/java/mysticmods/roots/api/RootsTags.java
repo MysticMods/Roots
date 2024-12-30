@@ -2,11 +2,10 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -374,11 +373,11 @@ public class RootsTags {
     public static final TagKey<Ritual> WILD_OPPOSED = modTag("opposed/wild");
 
     static TagKey<Ritual> modTag(String name) {
-      return TagKey.create(RootsAPI.RITUAL_REGISTRY, RootsAPI.rl(name));
+      return TagKey.create(RootsRegistries.Keys.RITUALS, RootsAPI.rl(name));
     }
 
     static TagKey<Ritual> compatTag(String name) {
-      return TagKey.create(RootsAPI.RITUAL_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
+      return TagKey.create(RootsRegistries.Keys.RITUALS, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -403,23 +402,23 @@ public class RootsTags {
 
 
     static TagKey<Spell> modTag(String name) {
-      return TagKey.create(RootsAPI.SPELL_REGISTRY, RootsAPI.rl(name));
+      return TagKey.create(RootsRegistries.Keys.SPELLS, RootsAPI.rl(name));
     }
 
     static TagKey<Spell> compatTag(String name) {
-      return TagKey.create(RootsAPI.SPELL_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
+      return TagKey.create(RootsRegistries.Keys.SPELLS, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
   public static class Modifiers extends RootsTags {
-    public static final TagKey<Modifier> NYI = modTag("nyi");
+    public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
-    static TagKey<Modifier> modTag(String name) {
-      return TagKey.create(RootsAPI.MODIFIER_REGISTRY, RootsAPI.rl(name));
+    static TagKey<SpellModifier> modTag(String name) {
+      return TagKey.create(RootsRegistries.Keys.SPELL_MODIFIERS, RootsAPI.rl(name));
     }
 
-    static TagKey<Modifier> compatTag(String name) {
-      return TagKey.create(RootsAPI.MODIFIER_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
+    static TagKey<SpellModifier> compatTag(String name) {
+      return TagKey.create(RootsRegistries.Keys.SPELL_MODIFIERS, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -438,11 +437,11 @@ public class RootsTags {
     public static final TagKey<Herb> WILD = modTag("wild");
 
     static TagKey<Herb> modTag(String name) {
-      return TagKey.create(RootsAPI.HERB_REGISTRY, RootsAPI.rl(name));
+      return TagKey.create(RootsRegistries.Keys.HERBS, RootsAPI.rl(name));
     }
 
     static TagKey<Herb> compatTag(String name) {
-      return TagKey.create(RootsAPI.HERB_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
+      return TagKey.create(RootsRegistries.Keys.HERBS, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
@@ -465,11 +464,11 @@ public class RootsTags {
 
 
     static TagKey<Grove> modTag(String name) {
-      return TagKey.create(RootsAPI.GROVE_REGISTRY, RootsAPI.rl(name));
+      return TagKey.create(RootsRegistries.Keys.GROVES, RootsAPI.rl(name));
     }
 
     static TagKey<Grove> compatTag(String name) {
-      return TagKey.create(RootsAPI.GROVE_REGISTRY, ResourceLocation.fromNamespaceAndPath("c", name));
+      return TagKey.create(RootsRegistries.Keys.GROVES, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 }

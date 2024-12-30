@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -79,7 +80,7 @@ public class Cost {
     return value;
   }
 
-  public static Cost add(Supplier<Herb> herb, double value) {
+  public static Cost add(Holder<Herb> herb, double value) {
     return new Cost(CostType.ADDITIVE, herb, value);
   }
 

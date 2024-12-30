@@ -4,7 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.capability.GrantCapability;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -63,7 +63,7 @@ public class TokenItem extends Item {
       switch (type) {
         case MODIFIER -> {
           // Spell modifier
-          Modifier modifier = getSingleModifier(pStack);
+          SpellModifier modifier = getSingleModifier(pStack);
           if (modifier != null) {
             return modifier.getDescriptionId();
           }
@@ -128,7 +128,7 @@ public class TokenItem extends Item {
         }
       }
       case MODIFIER -> {
-        Modifier modifier = getSingleModifier(stack);
+        SpellModifier modifier = getSingleModifier(stack);
         if (modifier != null) {
           if (cap.hasModifier(modifier)) {
             pPlayer.displayClientMessage(Component.translatable("roots.message.modifier.already_learned", modifier.getName()), true);
@@ -185,7 +185,7 @@ public class TokenItem extends Item {
         }
       }
       case MODIFIER -> {
-        Modifier modifier = getSingleModifier(pStack);
+        SpellModifier modifier = getSingleModifier(pStack);
         if (modifier != null) {
           pTooltipComponents.add(Component.translatable("roots.tooltip.token.modifier", modifier.getName()));
           pTooltipComponents.add(Component.translatable("roots.tooltip.token.spell", modifier.getSpell().getStyledName()));
@@ -198,7 +198,7 @@ public class TokenItem extends Item {
         SpellInstance spell = getSpellInstance(pStack);
         if (spell != null) {
           pTooltipComponents.add(Component.translatable("roots.tooltip.token.spell", spell.getStyledName()));
-          for (Modifier enabled : spell.getEnabledModifiers()) {
+          for (SpellModifier enabled : spell.getEnabledModifiers()) {
             pTooltipComponents.add(Component.translatable("roots.tooltip.token.modifier", enabled.getName()));
           }
         }
@@ -262,7 +262,7 @@ public class TokenItem extends Item {
   }
 
   @Nullable
-  public static Modifier getSingleModifier(ItemStack stack) {
+  public static SpellModifier getSingleModifier(ItemStack stack) {
     CompoundTag tag = stack.getTag();
     if (tag == null) {
       return null;
@@ -272,7 +272,7 @@ public class TokenItem extends Item {
   }
 
   @Nullable
-  public static Set<Modifier> getModifiers(ItemStack stack) {
+  public static Set<SpellModifier> getModifiers(ItemStack stack) {
     SpellInstance spellInstance = getSpellInstance(stack);
     if (spellInstance == null) {
       return null;
@@ -281,14 +281,14 @@ public class TokenItem extends Item {
     return spellInstance.getEnabledModifiers();
   }
 
-  public static ItemStack setSingleModifier(ItemStack stack, Modifier modifier) {
+  public static ItemStack setSingleModifier(ItemStack stack, SpellModifier modifier) {
     CompoundTag tag = stack.getOrCreateTag();
     tag.putString("type", Type.MODIFIER.name().toLowerCase(Locale.ROOT));
     tag.putString("modifier", RootsRegistries.MODIFIER_REGISTRY.get().getKey(modifier).toString());
     return stack;
   }
 
-  public static boolean enableModifier(ItemStack stack, Modifier modifier) {
+  public static boolean enableModifier(ItemStack stack, SpellModifier modifier) {
     SpellInstance spellInstance = getSpellInstance(stack);
     if (spellInstance == null) {
       return false;
@@ -302,7 +302,7 @@ public class TokenItem extends Item {
     return true;
   }
 
-  public static boolean disableModifier(ItemStack stack, Modifier modifier) {
+  public static boolean disableModifier(ItemStack stack, SpellModifier modifier) {
     SpellInstance spellInstance = getSpellInstance(stack);
     if (spellInstance == null) {
       return false;
@@ -424,7 +424,7 @@ public class TokenItem extends Item {
     return setSpell(T(), spell);
   }
 
-  public static ItemStack getModifierToken(Modifier modifier) {
+  public static ItemStack getModifierToken(SpellModifier modifier) {
     return setSingleModifier(T(), modifier);
   }
 
@@ -446,7 +446,7 @@ public class TokenItem extends Item {
 
   public static List<ItemStack> getModifiers(Spell spell) {
     List<ItemStack> stack = new ArrayList<>();
-    for (Modifier modifier : RootsRegistries.MODIFIER_REGISTRY.get().getValues()) {
+    for (SpellModifier modifier : RootsRegistries.MODIFIER_REGISTRY.get().getValues()) {
       if (modifier.getSpell() == spell) {
         stack.add(getModifierToken(modifier));
       }

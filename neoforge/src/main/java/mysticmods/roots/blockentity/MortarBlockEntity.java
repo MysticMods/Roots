@@ -6,6 +6,7 @@ import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.GrantResult;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
 import mysticmods.roots.recipe.mortar.MortarInventory;
@@ -50,6 +51,10 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
 
   public MortarBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+  }
+
+  public MortarBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+    super(ModBlockEntities.MORTAR.get(), pWorldPosition, pBlockState);
   }
 
   protected void revalidateRecipe() {

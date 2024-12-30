@@ -4,7 +4,11 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.init.ModLoot;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -22,6 +26,8 @@ import java.util.Set;
 public class LootItemBlockTagCondition implements LootItemCondition {
   private final TagKey<Block> tag;
 
+  public static final MapCodec<LootItemBlockTagCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(LootItemBlockTagCondition::getTag)).apply(instance, LootItemBlockTagCondition::new));
+
   protected LootItemBlockTagCondition(TagKey<Block> tag) {
     this.tag = tag;
   }
@@ -29,6 +35,10 @@ public class LootItemBlockTagCondition implements LootItemCondition {
   @Override
   public Set<LootContextParam<?>> getReferencedContextParams() {
     return ImmutableSet.of(LootContextParams.BLOCK_STATE);
+  }
+
+  public TagKey<Block> getTag() {
+    return tag;
   }
 
   @Override
@@ -42,7 +52,7 @@ public class LootItemBlockTagCondition implements LootItemCondition {
     return blockstate != null && blockstate.is(this.tag);
   }
 
-  public static LootItemBlockTagCondition tag (TagKey<Block> tag) {
+  public static LootItemBlockTagCondition tag(TagKey<Block> tag) {
     return new LootItemBlockTagCondition(tag);
   }
 
@@ -56,20 +66,6 @@ public class LootItemBlockTagCondition implements LootItemCondition {
     @Override
     public LootItemCondition build() {
       return new LootItemBlockTagCondition(this.block);
-    }
-  }
-
-  public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<LootItemBlockTagCondition> {
-    @Override
-    public void serialize(JsonObject json, LootItemBlockTagCondition condition, JsonSerializationContext context) {
-      json.addProperty("block", condition.tag.toString());
-    }
-
-    @Override
-    public LootItemBlockTagCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-      ResourceLocation resourcelocation = new ResourceLocation(GsonHelper.getAsString(json, "block"));
-      TagKey<Block> tag = BlockTags.create(resourcelocation);
-      return LootItemBlockTagCondition.tag(tag);
     }
   }
 }

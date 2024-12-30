@@ -12,8 +12,8 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -39,8 +39,8 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
   protected BlockState outputState;
   protected Condition condition;
 
-  public WorldRecipe(ResourceLocation recipeId) {
-    super(recipeId);
+  public WorldRecipe() {
+    super();
   }
 
   @Override
@@ -66,7 +66,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
 
   // TODO: Ensure that not copying this item won't cause problems
   @Override
-  public ItemStack getResultItem() {
+  public ItemStack getResultItem(HolderLookup.Provider provider) {
     if (result == null) {
       return ItemStack.EMPTY;
     }
@@ -78,21 +78,15 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     return getCondition().test(pContainer.getBlockPos(), pLevel);
   }
 
-
-  @Override
-  public ResourceLocation getId() {
-    return recipeId;
-  }
-
   public BlockState modifyState(W pContainer, BlockState state) {
     return state;
   }
 
   @Override
-  public ItemStack assemble(W pInv) {
+  public ItemStack assemble(W pInv, HolderLookup.Provider provider) {
     Level level = pInv.getLevel();
     if (level == null) {
-      throw new IllegalStateException("Cannot assemble recipe `" + getId() + "` without a world!");
+      throw new IllegalStateException("Cannot assemble recipe without a world!");
     }
     if (!level.isClientSide()) {
       BlockPos pos = pInv.getBlockPos();
@@ -107,7 +101,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
       }
     }
 
-    return getResultItem().copy();
+    return getResultItem(provider).copy();
   }
 
   public abstract static class Serializer<W extends IWorldCrafting, R extends WorldRecipe<W>> extends RootsSerializerBase implements RecipeSerializer<R> {
@@ -121,8 +115,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
     protected void fromJsonAdditional(R recipe, ResourceLocation pRecipeId, JsonObject pJson) {
     }
 
-    @Override
-    public R fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
+/*    public R fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
       R recipe = builder.create(pRecipeId);
       baseFromJson(recipe, pRecipeId, pJson);
       // Matcher, state
@@ -130,36 +123,34 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
       recipe.condition = Condition.CODEC.parse(JsonOps.INSTANCE, pJson.get("condition")).result().orElseThrow(() -> new IllegalStateException("Could not parse condition for recipe " + pRecipeId));
       fromJsonAdditional(recipe, pRecipeId, pJson);
       return recipe;
-    }
+    }*/
 
     protected void fromNetworkAdditional(R recipe, ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
     }
 
     @Nullable
-    @Override
-    public R fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+/*    public R fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
       R recipe = builder.create(pRecipeId);
       baseFromNetwork(recipe, pRecipeId, pBuffer);
       recipe.outputState = pBuffer.readWithCodec(BlockState.CODEC);
       recipe.condition = pBuffer.readWithCodec(Condition.CODEC);
       fromNetworkAdditional(recipe, pRecipeId, pBuffer);
       return recipe;
-    }
+    }*/
 
     protected void toNetworkAdditional(R recipe, FriendlyByteBuf pBuffer) {
     }
 
-    @Override
-    public void toNetwork(FriendlyByteBuf pBuffer, R recipe) {
+/*    public void toNetwork(FriendlyByteBuf pBuffer, R recipe) {
       baseToNetwork(pBuffer, recipe);
       pBuffer.writeWithCodec(BlockState.CODEC, recipe.outputState);
       pBuffer.writeWithCodec(Condition.CODEC, recipe.condition);
       // TODO: etc
       toNetworkAdditional(recipe, pBuffer);
-    }
+    }*/
   }
 
-  public abstract static class Builder extends RootsRecipeBuilderBase {
+/*  public abstract static class Builder extends RootsRecipeBuilderBase {
     protected BlockState outputState;
     protected Condition condition;
 
@@ -215,7 +206,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipeB
         }));
       }
     }
-  }
+  }*/
 
   @FunctionalInterface
   public interface WorldRecipeBuilder<R extends WorldRecipe<?>> {

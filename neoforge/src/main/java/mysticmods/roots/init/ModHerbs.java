@@ -1,26 +1,28 @@
 package mysticmods.roots.init;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
-
-import static mysticmods.roots.Roots.REGISTRATE;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModHerbs {
-  public static final RegistryEntry<Herb> GROVE_MOSS = REGISTRATE.simple("grove_moss", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.GROVE_MOSS, RootsTags.Items.GROVE_MOSS_HERB, ChatFormatting.GREEN));
-  public static final RegistryEntry<Herb> WILDROOT = REGISTRATE.simple("wildroot", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.WILDROOT, RootsTags.Items.WILDROOT_HERB, ChatFormatting.YELLOW));
-  public static final RegistryEntry<Herb> CLOUD_BERRY = REGISTRATE.simple("cloud_berry", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.CLOUD_BERRY, RootsTags.Items.CLOUD_BERRY_HERB, ChatFormatting.AQUA));
+  private static final DeferredRegister<Herb> REGISTER = DeferredRegister.create(RootsRegistries.Keys.HERBS, RootsAPI.MODID);
 
-  public static final RegistryEntry<Herb> DEWGONIA = REGISTRATE.simple("dewgonia", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.DEWGONIA, RootsTags.Items.DEWGONIA_HERB, ChatFormatting.BLUE));
-  public static final RegistryEntry<Herb> INFERNO_BULB = REGISTRATE.simple("inferno_bulb", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.INFERNO_BULB, RootsTags.Items.INFERNO_BULB_HERB, ChatFormatting.RED));
-  public static final RegistryEntry<Herb> STALICRIPE = REGISTRATE.simple("stalicripe", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.STALICRIPE, RootsTags.Items.STALICRIPE_HERB, ChatFormatting.DARK_RED));
-  public static final RegistryEntry<Herb> MOONGLOW = REGISTRATE.simple("moonglow", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.MOONGLOW, RootsTags.Items.MOONGLOW_HERB, ChatFormatting.DARK_PURPLE));
-  public static final RegistryEntry<Herb> PERESKIA = REGISTRATE.simple("pereskia", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.PERESKIA, RootsTags.Items.PERESKIA_HERB, ChatFormatting.LIGHT_PURPLE));
-  public static final RegistryEntry<Herb> SPIRITLEAF = REGISTRATE.simple("spiritleaf", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.SPIRITLEAF, RootsTags.Items.SPIRITLEAF_HERB, ChatFormatting.DARK_AQUA));
-  public static final RegistryEntry<Herb> WILDEWHEET = REGISTRATE.simple("wildewheet", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.WILDEWHEET, RootsTags.Items.WILDEWHEET_HERB, ChatFormatting.GOLD));
-  public static final RegistryEntry<Herb> BAFFLECAP = REGISTRATE.simple("bafflecap", RootsAPI.HERB_REGISTRY, () -> new Herb(ModItems.BAFFLECAP, RootsTags.Items.BAFFLECAP_HERB, ChatFormatting.DARK_GREEN));
+  public static final DeferredHolder<Herb, Herb> GROVE_MOSS = REGISTER.register("grove_moss", () -> new Herb(ModItems.GROVE_MOSS, RootsTags.Items.GROVE_MOSS_HERB, ChatFormatting.GREEN));
+  public static final DeferredHolder<Herb, Herb> WILDROOT = REGISTER.register("wildroot", () -> new Herb(ModItems.WILDROOT, RootsTags.Items.WILDROOT_HERB, ChatFormatting.YELLOW));
+  public static final DeferredHolder<Herb, Herb> CLOUD_BERRY = REGISTER.register("cloud_berry", () -> new Herb(ModItems.CLOUD_BERRY, RootsTags.Items.CLOUD_BERRY_HERB, ChatFormatting.AQUA));
+
+  public static final DeferredHolder<Herb, Herb> DEWGONIA = REGISTER.register("dewgonia", () -> new Herb(ModItems.DEWGONIA, RootsTags.Items.DEWGONIA_HERB, ChatFormatting.BLUE));
+  public static final DeferredHolder<Herb, Herb> INFERNO_BULB = REGISTER.register("inferno_bulb", () -> new Herb(ModItems.INFERNO_BULB, RootsTags.Items.INFERNO_BULB_HERB, ChatFormatting.RED));
+  public static final DeferredHolder<Herb, Herb> STALICRIPE = REGISTER.register("stalicripe", () -> new Herb(ModItems.STALICRIPE, RootsTags.Items.STALICRIPE_HERB, ChatFormatting.DARK_RED));
+  public static final DeferredHolder<Herb, Herb> MOONGLOW = REGISTER.register("moonglow", () -> new Herb(ModItems.MOONGLOW, RootsTags.Items.MOONGLOW_HERB, ChatFormatting.DARK_PURPLE));
+  public static final DeferredHolder<Herb, Herb> PERESKIA = REGISTER.register("pereskia", () -> new Herb(ModItems.PERESKIA, RootsTags.Items.PERESKIA_HERB, ChatFormatting.LIGHT_PURPLE));
+  public static final DeferredHolder<Herb, Herb> SPIRITLEAF = REGISTER.register("spiritleaf", () -> new Herb(ModItems.SPIRITLEAF, RootsTags.Items.SPIRITLEAF_HERB, ChatFormatting.DARK_AQUA));
+  public static final DeferredHolder<Herb, Herb> WILDEWHEET = REGISTER.register("wildewheet", () -> new Herb(ModItems.WILDEWHEET, RootsTags.Items.WILDEWHEET_HERB, ChatFormatting.GOLD));
+  public static final DeferredHolder<Herb, Herb> BAFFLECAP = REGISTER.register("bafflecap", () -> new Herb(ModItems.BAFFLECAP, RootsTags.Items.BAFFLECAP_HERB, ChatFormatting.DARK_GREEN));
 
   public static void load() {
   }

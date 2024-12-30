@@ -2,12 +2,13 @@ package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -26,10 +27,12 @@ import java.util.function.Predicate;
 public abstract class Spell extends StyledRegistryEntry<Spell> implements ICostedRegistryEntry, SpellLike {
   protected final Type type;
   protected final List<Cost> costs = new ArrayList<>();
-  protected final Set<Modifier> modifiers = new HashSet<>();
+  protected final Set<SpellModifier> modifiers = new HashSet<>();
   protected int cooldown = 0;
   protected double reach = 0.0;
   protected final int color1, color2;
+
+  private final Holder.Reference<Spell> builtinRegistryHolder = RootsRegistries.SPELLS.createIntrusiveHolder(this);
 
   public Spell(Type type, ChatFormatting color, List<Cost> costs, int color1, int color2) {
     this.type = type;
@@ -37,6 +40,10 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
     setCosts(costs);
     this.color1 = color1;
     this.color2 = color2;
+  }
+
+  public Holder.Reference<Spell> getBuiltinRegistryHolder() {
+    return builtinRegistryHolder;
   }
 
   public int getColor1() {
@@ -58,7 +65,7 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
     this.costs.addAll(costs);
   }
 
-  public Set<Modifier> getModifiers() {
+  public Set<SpellModifier> getModifiers() {
     return modifiers;
   }
 
@@ -76,7 +83,7 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
     return type;
   }
 
-  public void addModifier(Modifier modifier) {
+  public void addModifier(SpellModifier modifier) {
     modifiers.add(modifier);
   }
 
@@ -104,7 +111,7 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
 
   // TODO: How to handle reach
   protected double getRange (Player pPlayer) {
-    return pPlayer.getReachDistance() + reach;
+    return 0.0; //pPlayer.getReachDistance() + reach;
   }
 
   protected BlockHitResult pick (Player pPlayer, double range) {
@@ -131,24 +138,24 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
   }
 
   public boolean is(ResourceLocation key) {
-    return RootsRegistries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
   public boolean is(ResourceKey<Spell> key) {
-    return RootsRegistries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
   public boolean is(Predicate<ResourceKey<Spell>> key) {
-    return RootsRegistries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
   public boolean is(TagKey<Spell> key) {
-    return RootsRegistries.SPELL_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
   @Override
   public ResourceLocation getKey() {
-    return RootsRegistries.SPELL_REGISTRY.get().getKey(this);
+    return getBuiltinRegistryHolder().getKey().location();
   }
 
   @Override

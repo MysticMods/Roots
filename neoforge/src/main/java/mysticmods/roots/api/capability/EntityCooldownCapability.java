@@ -10,7 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class EntityCooldownCapability implements ICapabilityProvider, ICapabilitySerializable<IntTag> {
+public abstract class EntityCooldownCapability {
   private int expiresAt = -1;
 
   public EntityCooldownCapability() {

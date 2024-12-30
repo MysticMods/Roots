@@ -1,8 +1,6 @@
 package mysticmods.roots.recipe.grove;
 
-import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
-import mysticmods.roots.api.recipe.RootsResultBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;

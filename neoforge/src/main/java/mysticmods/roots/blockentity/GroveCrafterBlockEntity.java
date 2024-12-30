@@ -7,6 +7,7 @@ import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.GrantResult;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
@@ -40,6 +41,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
 
   public GroveCrafterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+  }
+
+  public GroveCrafterBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+    super(ModBlockEntities.GROVE_CRAFTER.get(), pWorldPosition, pBlockState);
   }
 
   @Override

@@ -1,18 +1,25 @@
 package mysticmods.roots.init;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.effect.*;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-import static mysticmods.roots.Roots.REGISTRATE;
 
 public class ModEffects {
-  public static final RegistryEntry<WakefulEffect> WAKEFUL = REGISTRATE.effect("wakeful", WakefulEffect::new).register();
-  public static final RegistryEntry<FriendlyEarthEffect> FRIENDLY_EARTH = REGISTRATE.effect("friendly_earth", FriendlyEarthEffect::new).register();
-  public static final RegistryEntry<SkySoarerEffect> SKY_SOARER = REGISTRATE.effect("sky_soarer", SkySoarerEffect::new).register();
-  public static final RegistryEntry<SimpleEffect> PETAL_SHELL = REGISTRATE.effect("petal_shell", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0xcc5ec8)).register();
-  public static final RegistryEntry<SenseDangerEffect> SENSE_DANGER = REGISTRATE.effect("sense_danger", SenseDangerEffect::new).register();
+  private static final DeferredRegister<MobEffect> REGISTER = DeferredRegister.create(Registries.MOB_EFFECT, RootsAPI.MODID);
 
-  public static void load() {
+  public static final DeferredHolder<MobEffect, WakefulEffect> WAKEFUL = REGISTER.register("wakeful", WakefulEffect::new);
+  public static final DeferredHolder<MobEffect, FriendlyEarthEffect> FRIENDLY_EARTH = REGISTER.register("friendly_earth", FriendlyEarthEffect::new);
+  public static final DeferredHolder<MobEffect, SkySoarerEffect> SKY_SOARER = REGISTER.register("sky_soarer", SkySoarerEffect::new);
+  public static final DeferredHolder<MobEffect, SimpleEffect> PETAL_SHELL = REGISTER.register("petal_shell", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0xcc5ec8));
+  public static final DeferredHolder<MobEffect, SenseDangerEffect> SENSE_DANGER = REGISTER.register("sense_danger", SenseDangerEffect::new);
+
+  public static void register (IEventBus bus) {
+    REGISTER.register(bus);
   }
 }

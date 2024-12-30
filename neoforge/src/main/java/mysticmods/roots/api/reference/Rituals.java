@@ -1,9 +1,9 @@
 package mysticmods.roots.api.reference;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 
 public interface Rituals {
   // PLACEHOLDER
@@ -30,6 +30,6 @@ public interface Rituals {
   ResourceKey<Ritual> GROVE_SUPPLICATION = ritual("grove_supplication");
 
   static ResourceKey<Ritual> ritual(String name) {
-    return ResourceKey.create(RootsAPI.RITUAL_REGISTRY, RootsAPI.rl(name));
+    return ResourceKey.create(RootsRegistries.Keys.RITUALS, RootsAPI.rl(name));
   }
 }

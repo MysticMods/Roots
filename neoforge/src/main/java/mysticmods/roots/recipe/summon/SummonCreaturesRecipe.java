@@ -3,7 +3,6 @@ package mysticmods.roots.recipe.summon;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.api.recipe.IBoundlessRecipe;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;

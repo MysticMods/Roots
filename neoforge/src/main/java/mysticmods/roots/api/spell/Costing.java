@@ -9,7 +9,7 @@ import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -33,7 +33,7 @@ public class Costing {
 
   private final Object2DoubleMap<Herb> totalCosts = new Object2DoubleLinkedOpenHashMap<>();
 
-  private final Object2BooleanMap<Modifier> modifierMap = new Object2BooleanLinkedOpenHashMap<>();
+  private final Object2BooleanMap<SpellModifier> modifierMap = new Object2BooleanLinkedOpenHashMap<>();
 
   private boolean noCharge = false;
 
@@ -48,7 +48,7 @@ public class Costing {
     this.noCharge = true;
   }
 
-  public void charge(Modifier modifier) {
+  public void charge(SpellModifier modifier) {
     if (!this.spell.hasModifier(modifier)) {
       throw new IllegalStateException("tried to charge for a modifier (" + modifier + ") in the spell " + this.spell.getSpell() + " when that spell doesn't have that modifier enabled");
     }
@@ -218,7 +218,7 @@ public class Costing {
       herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>()).add(cost);
     }
     if (!skipModifiers) {
-      for (Modifier modifier : spell.getEnabledModifiers()) {
+      for (SpellModifier modifier : spell.getEnabledModifiers()) {
         if (!checkModifiers || modifierMap.getBoolean(modifier)) {
           for (Cost cost : modifier.getCosts()) {
             herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>()).add(cost);

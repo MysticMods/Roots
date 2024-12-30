@@ -1,6 +1,6 @@
 package mysticmods.roots.api.spell;
 
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 
-public record LibraryModifier(Modifier modifier, boolean enabled) {
+public record LibraryModifier(SpellModifier modifier, boolean enabled) {
 }

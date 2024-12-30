@@ -1,136 +1,99 @@
 package mysticmods.roots.api.recipe;
 
-import com.google.gson.JsonObject;
 import mysticmods.roots.api.capability.Grant;
-import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.recipe.crafting.RootsCrafting;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.items.IItemHandler;
 
-
-
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: RegisterRecipeBookCategoriesEvent
-public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> extends RootsRecipeBase implements IRootsRecipe<H, W>, IRootsRecipeBase {
-  protected final NonNullList<Ingredient> ingredients = NonNullList.create();
-
-  public RootsRecipe(ResourceLocation recipeId) {
-    super(recipeId);
-  }
+public abstract class RootsRecipe<H extends IItemHandler, W extends RootsCrafting<H>> implements IRootsRecipe<W> {
+  protected NonNullList<Ingredient> ingredients = NonNullList.create();
+  protected List<LevelCondition> levelConditions = new ArrayList<>();
+  protected List<PlayerCondition> playerConditions = new ArrayList<>();
+  protected ItemStack result;
+  protected List<ChanceOutput> chanceOutputs = new ArrayList<>();
+  protected List<Grant> grants = new ArrayList<>();
 
   @Override
   public void setIngredients(NonNullList<Ingredient> ingredients) {
-    this.ingredients.clear();
-    this.ingredients.addAll(ingredients);
+    this.ingredients = ingredients;
   }
 
   @Override
-  public NonNullList<Ingredient> getIngredients() {
-    return this.ingredients;
+  public void setLevelConditions(List<LevelCondition> levelConditions) {
+    this.levelConditions = levelConditions;
   }
 
   @Override
-  public ItemStack getBaseResultItem() {
-    return getResultItem();
+  public void setPlayerConditions(List<PlayerCondition> playerConditions) {
+    this.playerConditions = playerConditions;
   }
 
   @Override
-  public NonNullList<Ingredient> getBaseIngredients() {
-    return getIngredients();
-  }
-
-  // TODO: Ensure that not copying this item won't cause problems
-  @Override
-  public ItemStack getResultItem() {
-    if (result == null) {
-      return ItemStack.EMPTY;
-    }
-    return result;
+  public List<LevelCondition> getLevelConditions() {
+    return this.levelConditions;
   }
 
   @Override
-  public boolean matches(W pContainer, Level pLevel) {
-    List<ItemStack> inputs = new ArrayList<>();
-    H inv = pContainer.getHandler();
-    for (int i = 0; i < inv.getSlots(); i++) {
-      ItemStack stack = inv.getStackInSlot(i);
-      if (!stack.isEmpty()) {
-        inputs.add(stack);
-      }
-    }
-
-    return RecipeMatcher.findMatches(inputs, ingredients) != null;
+  public List<PlayerCondition> getPlayerConditions() {
+    return this.playerConditions;
   }
 
   @Override
-  public ResourceLocation getId() {
-    return recipeId;
+  public void setResultItem(ItemStack result) {
+    this.result = result;
   }
 
   @Override
-  public ItemStack assemble(W pInv) {
-    Player player = pInv.getPlayer();
-    if (player != null && !player.level.isClientSide()) {
-      for (Grant grant : getGrants()) {
-        grant.grant((ServerPlayer) player);
-      }
-    }
-
-    return getResultItem().copy();
+  public void setChanceOutputs(List<ChanceOutput> chanceOutputs) {
+    this.chanceOutputs = chanceOutputs;
   }
 
-  public abstract static class Serializer<H extends IItemHandler, W extends IRootsCrafting<H>, R extends RootsRecipe<H, W>> extends RootsSerializerBase implements RecipeSerializer<R> {
-
-    private final RootsRecipeBuilder<R> builder;
-
-    public Serializer(RootsRecipeBuilder<R> builder) {
-      this.builder = builder;
-    }
-
-    protected void fromJsonAdditional(R recipe, ResourceLocation pRecipeId, JsonObject pJson) {
-    }
-
-    @Override
-    public R fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
-      R recipe = builder.create(pRecipeId);
-      baseFromJson(recipe, pRecipeId, pJson);
-      fromJsonAdditional(recipe, pRecipeId, pJson);
-      return recipe;
-    }
-
-    protected void fromNetworkAdditional(R recipe, ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-    }
-
-    @Nullable
-    @Override
-    public R fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-      R recipe = builder.create(pRecipeId);
-      baseFromNetwork(recipe, pRecipeId, pBuffer);
-      fromNetworkAdditional(recipe, pRecipeId, pBuffer);
-      return recipe;
-    }
-
-    protected void toNetworkAdditional(R recipe, FriendlyByteBuf pBuffer) {
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf pBuffer, R recipe) {
-      baseToNetwork(pBuffer, recipe);
-      toNetworkAdditional(recipe, pBuffer);
-    }
+  @Override
+  public List<ChanceOutput> getChanceOutputs() {
+    return this.chanceOutputs;
   }
 
-  @FunctionalInterface
-  public interface RootsRecipeBuilder<R extends RootsRecipe<?, ?>> {
-    R create(ResourceLocation recipeId);
+  @Override
+  public void setGrants(List<Grant> grants) {
+    this.grants = grants;
+  }
+
+  @Override
+  public List<Grant> getGrants() {
+    return this.grants;
+  }
+
+  @Override
+  public boolean matches(W arg, Level arg2) {
+    return false;
+  }
+
+  @Override
+  public ItemStack assemble(W arg, HolderLookup.Provider arg2) {
+
+
+    return null;
+  }
+
+  @Override
+  public boolean canCraftInDimensions(int i, int j) {
+    return false;
+  }
+
+  @Override
+  public ItemStack getResultItem(HolderLookup.Provider arg) {
+    return null;
   }
 }

@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.init;
 
 import com.tterrag.registrate.providers.ProviderType;
@@ -305,3 +306,4 @@ public class ModTags {
   public static void load() {
   }
 }
+*/

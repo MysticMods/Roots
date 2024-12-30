@@ -3,7 +3,7 @@ package mysticmods.roots.api.spell;
 import com.google.common.collect.ImmutableList;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.item.ICastingItem;
-import mysticmods.roots.api.modifier.Modifier;
+import mysticmods.roots.api.modifier.SpellModifier;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -111,7 +111,7 @@ public class SpellStorage {
     this.index = slot;
   }
 
-  public int addSpell(Spell spell, Collection<Modifier> modifiers) {
+  public int addSpell(Spell spell, Collection<SpellModifier> modifiers) {
     int slot = -1;
     for (int i = 0; i < spells.size(); i++) {
       if (getSpell(i) == null) {
@@ -127,7 +127,7 @@ public class SpellStorage {
     return slot;
   }
 
-  public boolean setSpell(int slot, Spell spell, Collection<Modifier> modifiers) {
+  public boolean setSpell(int slot, Spell spell, Collection<SpellModifier> modifiers) {
     validateSlot(slot);
     this.setDirty(true);
     return this.spells.set(slot, new SpellInstance(spell, modifiers)) == null;
@@ -269,7 +269,7 @@ public class SpellStorage {
     }
 
     @Override
-    public Set<Modifier> getEnabledModifiers() {
+    public Set<SpellModifier> getEnabledModifiers() {
       return instance.getEnabledModifiers();
     }
 
@@ -287,18 +287,18 @@ public class SpellStorage {
     // TODO: add/remove modifiers; this should just pass on to the spell instance
 
     @Override
-    public boolean hasModifier(Modifier modifier) {
+    public boolean hasModifier(SpellModifier modifier) {
       return instance.hasModifier(modifier);
     }
 
     @Override
-    public void addModifier(Modifier modifier) {
+    public void addModifier(SpellModifier modifier) {
       SpellStorage.this.setDirty(true);
       super.addModifier(modifier);
     }
 
     @Override
-    public void removeModifier(Modifier modifier) {
+    public void removeModifier(SpellModifier modifier) {
       SpellStorage.this.setDirty(true);
       super.removeModifier(modifier);
     }

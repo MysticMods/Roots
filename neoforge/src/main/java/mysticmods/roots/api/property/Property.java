@@ -3,6 +3,7 @@ package mysticmods.roots.api.property;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import net.minecraft.core.Holder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 
@@ -11,14 +12,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public abstract class Property<T> {
-  @SuppressWarnings("unchecked")
-  protected static <T> Class<T> c(Class<?> cls) {
-    return (Class<T>) cls;
-  }
-
   protected final T defaultValue;
   protected final Serializer<T> serializer;
-  protected T value;
   protected String comment;
 
   public Property(T defaultValue, Serializer<T> serializer, String comment) {
@@ -27,55 +22,12 @@ public abstract class Property<T> {
     this.comment = comment;
   }
 
-  public void setValue(T value) {
-    this.value = value;
-  }
-
-  public T getValue() {
-    if (value == null) {
-      return defaultValue;
-    }
-
-    return value;
-  }
-
   public String getComment() {
     return comment;
   }
 
   public Serializer<T> getSerializer() {
     return serializer;
-  }
-
-  public JsonElement serializeValueJson() {
-    return serializer.jsonWriter.apply(value == null ? defaultValue : value);
-  }
-
-  public JsonElement serializeDefaultValueJson() {
-    return serializer.jsonWriter.apply(defaultValue);
-  }
-
-  public void serializeNetwork(FriendlyByteBuf buf) {
-    if (this.value == null) {
-      throw new IllegalStateException("Cannot serialize null value: " + this);
-    }
-    this.serializer.networkWriter.accept(buf, this.value);
-  }
-
-  public void reset() {
-    this.value = null;
-  }
-
-  public boolean shouldSerialize() {
-    return this.value != null && !this.value.equals(defaultValue);
-  }
-
-  public void updateFromJson(JsonObject object) {
-    this.value = this.serializer.jsonReader.apply(object, "value");
-  }
-
-  public void updateFromNetwork(FriendlyByteBuf buffer) {
-    this.value = this.serializer.networkReader.apply(buffer);
   }
 
   public record Serializer<T>(Function<FriendlyByteBuf, T> networkReader,

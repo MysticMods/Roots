@@ -14,7 +14,7 @@ public record ConditionResult(List<LevelCondition> failedLevelConditions, List<P
   }
 
   public void report () {
-    if (player.level.isClientSide() || !anyFailed()) {
+    if (player.level().isClientSide() || !anyFailed()) {
       return;
     }
 

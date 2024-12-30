@@ -1,6 +1,6 @@
 package mysticmods.roots.init;
 
-import com.tterrag.registrate.providers.ProviderType;
+/*import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.herb.Herb;
@@ -126,4 +126,4 @@ public class ModLang {
   public static MutableComponent holdShift () {
     return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift").setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
   }
-}
+}*/

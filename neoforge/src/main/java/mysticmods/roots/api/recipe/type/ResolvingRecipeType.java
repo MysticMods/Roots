@@ -5,12 +5,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.recipe.IRootsRecipeBase;
+import mysticmods.roots.api.recipe.IRootsRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
@@ -18,7 +17,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IRootsRecipeBase> extends SimpleJsonResourceReloadListener {
+public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IRootsRecipe> extends SimpleJsonResourceReloadListener {
   protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
   protected final Supplier<RecipeType<T>> type;
   protected List<RecipeHolder<T>> cache = null;

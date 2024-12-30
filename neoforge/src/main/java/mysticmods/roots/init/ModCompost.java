@@ -1,5 +1,6 @@
 package mysticmods.roots.init;
 
+import net.minecraft.client.particle.SuspendedTownParticle;
 import net.minecraft.world.level.block.ComposterBlock;
 
 public class ModCompost {
