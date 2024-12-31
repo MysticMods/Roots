@@ -18,6 +18,7 @@ import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -37,6 +38,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -142,8 +144,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       storedItems.clear();
       if (currentRitual == ModRituals.CRAFTING.get()) {
         // TODO: Item could be empty with only chance outputs
-        storedItems.add(cachedRecipe.assemble(playerCrafting));
-        storedItems.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
+        storedItems.addAll(cachedRecipe.assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
       }
       storedItems.removeIf(ItemStack::isEmpty);
       // process
@@ -249,18 +250,18 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     }
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
-      ResourceLocation cachedId = new ResourceLocation(pTag.getString("cached_recipe"));
+      ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("cached_recipe"));
       cachedRecipe = ResolvedRecipes.PYRE.getRecipe(cachedId);
     }
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
-      ResourceLocation lastId = new ResourceLocation(pTag.getString("last_recipe"));
+      ResourceLocation lastId = ResourceLocation.parse(pTag.getString("last_recipe"));
       lastRecipe = ResolvedRecipes.PYRE.getRecipe(lastId);
     }
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(pTag.getCompound("inventory"));
     }
     if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
-      ResourceLocation ritualId = new ResourceLocation(pTag.getString("current_ritual"));
+      ResourceLocation ritualId = ResourceLocation.parse(pTag.getString("current_ritual"));
       currentRitual = RootsRegistries.RITUAL_REGISTRY.get().getValue(ritualId);
     }
     if (pTag.contains("lifetime", Tag.TAG_INT)) {

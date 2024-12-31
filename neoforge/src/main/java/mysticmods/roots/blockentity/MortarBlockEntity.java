@@ -11,7 +11,9 @@ import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
 import mysticmods.roots.recipe.mortar.MortarInventory;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
+import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -23,11 +25,12 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 
 import java.util.ArrayList;
@@ -45,8 +48,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
   };
   private final MortarCrafting playerlessCrafting = new MortarCrafting(inventory, this, null);
   private final List<ItemStack> previousRecipeItems = new ArrayList<>();
-  private MortarRecipe lastRecipe = null;
-  private MortarRecipe cachedRecipe = null;
+  private RecipeHolder<MortarRecipe> lastRecipe = null;
+  private RecipeHolder<MortarRecipe> cachedRecipe = null;
   private int uses = -1;
 
   public MortarBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -61,7 +64,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     boolean matched = false;
     if (cachedRecipe == null) {
       uses = -1;
-      if (lastRecipe != null && lastRecipe.matches(playerlessCrafting, getLevel())) {
+      if (lastRecipe != null && lastRecipe.value().matches(playerlessCrafting, getLevel())) {
         cachedRecipe = lastRecipe;
         matched = true;
       } else {
@@ -71,7 +74,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
 
     if (cachedRecipe != null) {
       // only test once
-      if (matched || cachedRecipe.matches(playerlessCrafting, getLevel())) {
+      if (matched || cachedRecipe.value().matches(playerlessCrafting, getLevel())) {
         if (uses == -1) {
           uses = 0;
         }
@@ -83,8 +86,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
   }
 
   @Override
-  protected void saveAdditional(CompoundTag pTag) {
-    super.saveAdditional(pTag);
+  protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
+    super.saveAdditional(pTag, provider);
     // TODO: reference this
     pTag.putInt("uses", uses);
     boolean previous = false;
@@ -92,7 +95,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     for (ItemStack stack : previousRecipeItems) {
       if (!stack.isEmpty()) {
         previous = true;
-        previousItems.add(stack.save(new CompoundTag()));
+        // Does it need the new compound tag?
+        previousItems.add(stack.save(provider, new CompoundTag()));
       }
     }
 
@@ -101,17 +105,17 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     }
 
     if (cachedRecipe != null) {
-      pTag.putString("cached_recipe", cachedRecipe.getId().toString());
+      pTag.putString("cached_recipe", cachedRecipe.id().toString());
     }
     if (lastRecipe != null) {
-      pTag.putString("last_recipe", lastRecipe.getId().toString());
+      pTag.putString("last_recipe", lastRecipe.id().toString());
     }
-    pTag.put("inventory", inventory.serializeNBT());
+    pTag.put("inventory", inventory.serializeNBT(provider));
   }
 
   @Override
-  public void load(CompoundTag pTag) {
-    super.load(pTag);
+  public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
+    super.loadAdditional(pTag, provider);
     // TODO: reference this
     if (pTag.contains("uses", Tag.TAG_INT)) {
       this.uses = pTag.getInt("uses");
@@ -120,28 +124,28 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
       previousRecipeItems.clear();
       ListTag previousItems = pTag.getList("previous_items", Tag.TAG_COMPOUND);
       for (int i = 0; i < previousItems.size(); i++) {
-        previousRecipeItems.add(ItemStack.of(previousItems.getCompound(i)));
+        ItemStack.parse(provider, previousItems.getCompound(i)).ifPresent(previousRecipeItems::add);
       }
     }
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
-      ResourceLocation cachedId = new ResourceLocation(pTag.getString("cached_recipe"));
+      ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("cached_recipe"));
       cachedRecipe = ResolvedRecipes.MORTAR.getRecipe(cachedId);
     }
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
-      ResourceLocation lastId = new ResourceLocation(pTag.getString("last_recipe"));
+      ResourceLocation lastId = ResourceLocation.parse(pTag.getString("last_recipe"));
       lastRecipe = ResolvedRecipes.MORTAR.getRecipe(lastId);
     }
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
-      inventory.deserializeNBT(pTag.getCompound("inventory"));
+      inventory.deserializeNBT(provider, pTag.getCompound("inventory"));
     }
   }
 
   @Override
-  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider provider) {
+    super.onDataPacket(net, pkt, provider);
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
-      load(tag);
+      loadAdditional(tag, provider);
     }
   }
 
@@ -164,8 +168,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
         revalidateRecipe();
       }
       // TODO: Provider better feedback to the player
-      if (cachedRecipe != null && cachedRecipe.matches(playerlessCrafting, level)) {
-        ConditionResult conditionResult = cachedRecipe.checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
+      if (cachedRecipe != null && cachedRecipe.value().matches(playerlessCrafting, level)) {
+        ConditionResult conditionResult = cachedRecipe.value().checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
         if (conditionResult.anyFailed()) {
           RootsAPI.LOG.info("Conditions failed.");
           conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
@@ -173,8 +177,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           conditionResult.report();
           return InteractionResult.FAIL;
         }
-        GrantResult failedGrants = cachedRecipe.checkGrants(level, (ServerPlayer) player);
-        if (failedGrants.failed() && !cachedRecipe.hasOutput()) {
+        GrantResult failedGrants = cachedRecipe.value().checkGrants(level, (ServerPlayer) player);
+        if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
           RootsAPI.LOG.info("Grants failed and recipe has no output");
           failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.getType().name() + " with id " + o.getId()));
           failedGrants.report();
@@ -184,19 +188,13 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
         uses++;
         setChanged();
 
-        if (uses >= cachedRecipe.getTimes()) {
+        if (uses >= cachedRecipe.value().getTimes()) {
           // CRAFTING HAPPENS HERE
           MortarCrafting playerCrafting = new MortarCrafting(inventory, this, player);
           lastRecipe = cachedRecipe;
           previousRecipeItems.clear();
           previousRecipeItems.addAll(inventory.getItemsCopy());
-          List<ItemStack> results = new ArrayList<>();
-          // TODO: Item could be empty with only chance outputs
-          // TODO: MAJOR: Cull empty items out of the results
-          results.add(cachedRecipe.assemble(playerCrafting));
-          results.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
-          results.addAll(cachedRecipe.process(inventory.getItemsAndClear()));
-          results.removeIf(ItemStack::isEmpty);
+          List<ItemStack> results = new ArrayList<>(cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear));
           for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
           }

@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.recipe.WorldCondition;
 import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.reference.Identifiers;
@@ -180,7 +181,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
       private final List<String> skipProperties;
       private final int durability_cost;
 
-      public Result(ResourceLocation id, ItemStack result, BlockState outputState, Condition condition, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId, List<String> skipProperties, int durabilityCost) {
+      public Result(ResourceLocation id, ItemStack result, BlockState outputState, WorldCondition condition, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId, List<String> skipProperties, int durabilityCost) {
         super(id, result, outputState, condition, chanceOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
         this.skipProperties = skipProperties;
         this.durability_cost = durabilityCost;

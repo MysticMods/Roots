@@ -12,6 +12,7 @@ import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
 import mysticmods.roots.recipe.grove.GroveRecipe;
+import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -72,20 +73,14 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         return InteractionResult.FAIL;
       }
       GrantResult failedGrants = cachedRecipe.checkGrants(level, (ServerPlayer) player);
-      if (failedGrants.failed() && !cachedRecipe.hasOutput()) {
+      if (failedGrants.failed() && !cachedRecipe.hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
         failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.getType().name() + " with id " + o.getId()));
         failedGrants.report();
         return InteractionResult.FAIL;
       }
       lastRecipe = cachedRecipe;
-      List<ItemStack> results = new ArrayList<>();
-      // TODO: Item could be empty with only chance outputs
-      results.add(cachedRecipe.assemble(playerCrafting));
-      results.addAll(cachedRecipe.assembleChanceOutputs(level.getRandom()));
-      results.addAll(cachedRecipe.process(playerCrafting.popItems()));
-      results.removeIf(ItemStack::isEmpty);
-
+      List<ItemStack> results = cachedRecipe.assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
       for (ItemStack stack : results) {
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
       }

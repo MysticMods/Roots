@@ -4,7 +4,6 @@ import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
-import mysticmods.roots.api.recipe.crafting.RootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -12,8 +11,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -96,7 +93,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     Player player = arg.getPlayer();
     if (player != null) {
       for (Grant grant : getGrants()) {
-          grant.grant((ServerPlayer) player);
+        grant.grant((ServerPlayer) player);
       }
     }
 

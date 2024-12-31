@@ -19,7 +19,9 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Supplier;
 
 public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   default NonNullList<ItemStack> process(List<ItemStack> ingredients) {
@@ -92,12 +94,40 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return false;
   }
 
-  default List<ItemStack> assembleChanceOutputs (RandomSource source) {
-    return ChanceOutput.getOutputs(getChanceOutputs(), source);
+  default boolean hasItemOutput (HolderLookup.Provider provider) {
+    ItemStack item = getResultItem(provider);
+    //noinspection ConstantValue
+    return item != null && !item.isEmpty();
+  }
+
+  default boolean hasChanceOutputs (HolderLookup.Provider provider) {
+    return !getChanceOutputs().isEmpty();
+  }
+
+  default boolean hasOtherOutput (HolderLookup.Provider provider) {
+    return false;
   }
 
   default boolean hasOutput (HolderLookup.Provider provider) {
-    ItemStack result = getResultItem(provider);
-    return result != null && !result.isEmpty() && !getChanceOutputs().isEmpty();
+    return hasItemOutput(provider) || hasChanceOutputs(provider) || hasOtherOutput(provider);
+  }
+
+  default List<ItemStack> assembleChanceOutputs (W inventory, RandomSource source, HolderLookup.Provider provider) {
+    return ChanceOutput.getOutputs(getChanceOutputs(), source);
+  }
+
+  default List<ItemStack> assembleOutputs (W inventory, RandomSource random, HolderLookup.Provider provider, @Nullable Supplier<List<ItemStack>> inputProvider) {
+    List<ItemStack> results = new ArrayList<>();
+    if (hasItemOutput(provider)) {
+      results.add(assemble(inventory, provider));
+    }
+    if (hasChanceOutputs(provider)) {
+      results.addAll(assembleChanceOutputs(inventory, random, provider));
+    }
+    if (inputProvider != null) {
+      results.addAll(process(inputProvider.get()));
+    }
+    results.removeIf(ItemStack::isEmpty);
+    return results;
   }
 }

@@ -2,7 +2,7 @@ package mysticmods.roots.recipe.bark;
 
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.recipe.WorldRecipe;
+import mysticmods.roots.api.recipe.WorldCondition;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -38,12 +38,12 @@ public class DynamicBarkRecipe extends BarkRecipe {
     return newResult;
   }
 
-  private WorldRecipe.Condition barkCondition = null;
+  private WorldCondition barkCondition = null;
 
   @Override
-  public Condition getCondition() {
+  public WorldCondition getCondition() {
     if (barkCondition == null) {
-      barkCondition = new WorldRecipe.Condition(new TagMatchTest(BlockTags.LOGS));
+      barkCondition = new WorldCondition(new TagMatchTest(BlockTags.LOGS));
     }
     return barkCondition;
   }
