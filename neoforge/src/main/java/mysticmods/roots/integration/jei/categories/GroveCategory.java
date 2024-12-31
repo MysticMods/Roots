@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -39,3 +40,4 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
     }
   }
 }
+*/

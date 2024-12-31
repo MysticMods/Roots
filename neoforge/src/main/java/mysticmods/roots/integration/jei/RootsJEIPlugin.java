@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.integration.jei;
 
 import mezz.jei.api.IModPlugin;
@@ -83,3 +84,4 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModBlocks.PYRE.asStack(), PYRE_RECIPE_TYPE);
   }
 }
+*/

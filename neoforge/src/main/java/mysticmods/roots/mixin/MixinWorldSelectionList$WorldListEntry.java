@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -15,3 +16,4 @@ public class MixinWorldSelectionList$WorldListEntry {
     ci.cancel();
   }
 }
+*/

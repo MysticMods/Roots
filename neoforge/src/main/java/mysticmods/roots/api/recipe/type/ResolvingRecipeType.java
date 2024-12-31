@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IRootsRecipe> extends SimpleJsonResourceReloadListener {
+public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IRootsRecipe<C>> extends SimpleJsonResourceReloadListener {
   protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
   protected final Supplier<RecipeType<T>> type;
   protected List<RecipeHolder<T>> cache = null;

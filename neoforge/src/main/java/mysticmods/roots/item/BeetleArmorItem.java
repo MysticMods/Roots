@@ -1,15 +1,9 @@
 package mysticmods.roots.item;
 
-import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
 
-import javax.annotation.Nullable;
-
-public class BeetleArmorItem extends ModeledArmorItem {
+public class BeetleArmorItem extends ModifiedArmorItem {
 
   public BeetleArmorItem(Properties builder, EquipmentSlot slot) {
     super(RootsAPI.CARAPACE_MATERIAL, slot, builder);

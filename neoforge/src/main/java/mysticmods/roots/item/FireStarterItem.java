@@ -80,7 +80,7 @@ public class FireStarterItem extends Item {
   }
 
   @Override
-  public int getUseDuration(ItemStack p_77626_1_) {
+  public int getUseDuration(ItemStack p_77626_1_, LivingEntity entity) {
     return 60;
   }
 

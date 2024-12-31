@@ -1,6 +1,5 @@
 package mysticmods.roots.recipe.grove;
 
-import mysticmods.roots.api.recipe.RootsRecipeBuilderBase;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
@@ -27,13 +26,8 @@ import java.util.function.Consumer;
 import static net.minecraft.data.recipes.RecipeBuilder.ROOT_RECIPE_ADVANCEMENT;
 
 public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCrafterBlockEntity, GroveCrafting> {
-  public GroveRecipe(ResourceLocation recipeId) {
-    super(recipeId);
-  }
-
-  @Override
-  public ItemStack assemble(GroveCrafting pContainer) {
-    return super.assemble(pContainer);
+  public GroveRecipe() {
+    super();
   }
 
   @Override
@@ -51,35 +45,7 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
     return Identifiers.GROVE_RECIPE_GROUP;
   }
 
-  public static class Serializer extends RootsRecipe.Serializer<GroveInventoryWrapper, GroveCrafting, GroveRecipe> {
-    public Serializer() {
-      super(GroveRecipe::new);
-    }
-  }
-
-  public static class Builder extends RootsRecipeBuilderBase {
-
-    @Override
-    protected boolean allowEmptyOutput() {
-      return false;
-    }
-
-    @Override
-    protected boolean requireIngredients() {
-      return true;
-    }
-
-    protected Builder(ItemStack result) {
-      super(result);
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-      return ModSerializers.GROVE_CRAFTING.get();
-    }
-  }
-
-  public static class MultiBuilder extends Builder {
+/*  public static class MultiBuilder extends Builder {
     protected final int count;
 
     protected MultiBuilder(ItemStack result, int count) {
@@ -121,9 +87,9 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
         consumer.accept(new RootsResultBase(thisRecipeName, thisResult, thisIngredients, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), thisAdvancement, getAdvancementId(thisRecipeName)));
       }
     }
-  }
+  }*/
 
-  public static Builder builder(ItemStack stack) {
+/*  public static Builder builder(ItemStack stack) {
     return new Builder(stack);
   }
 
@@ -137,5 +103,5 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
 
   public static MultiBuilder multiBuilder (ItemLike item, int count) {
     return new MultiBuilder(new ItemStack(item), count);
-  }
+  }*/
 }

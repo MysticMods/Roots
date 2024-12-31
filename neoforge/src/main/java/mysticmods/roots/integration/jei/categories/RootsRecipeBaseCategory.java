@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.constants.VanillaTypes;
@@ -52,3 +53,4 @@ public abstract class RootsRecipeBaseCategory<T extends RootsRecipeBase> impleme
     return icon;
   }
 }
+*/

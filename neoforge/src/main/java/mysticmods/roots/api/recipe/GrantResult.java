@@ -13,7 +13,7 @@ public record GrantResult(List<Grant> failedGrants, Player player) {
   }
 
   public void report () {
-    if (player.level.isClientSide() || !failed()) {
+    if (player.level().isClientSide() || !failed()) {
       return;
     }
 

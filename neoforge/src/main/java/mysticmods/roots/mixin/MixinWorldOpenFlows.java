@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.mixin;
 
 import com.mojang.serialization.Lifecycle;
@@ -17,3 +18,4 @@ public class MixinWorldOpenFlows {
     info.cancel();
   }
 }
+*/
