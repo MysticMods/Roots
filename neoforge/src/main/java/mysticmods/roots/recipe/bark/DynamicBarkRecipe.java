@@ -22,10 +22,12 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import javax.annotation.Nullable;
 
 public class DynamicBarkRecipe extends BarkRecipe {
-  public static DynamicBarkRecipe INSTANCE = new DynamicBarkRecipe(RootsAPI.rl("bark/dynamic_modded_wood_bark"));
+  public static DynamicBarkRecipe INSTANCE = new DynamicBarkRecipe();
 
-  public DynamicBarkRecipe(ResourceLocation recipeId) {
-    super(recipeId);
+  public static ResourceLocation IDENTIFIER = RootsAPI.rl("bark/dynamic_modded_wood_bark");
+
+  public DynamicBarkRecipe() {
+    super();
   }
 
   private ItemStack newResult = null;
@@ -73,7 +75,7 @@ public class DynamicBarkRecipe extends BarkRecipe {
   }
 
   @Override
-  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState) {
+  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState, HolderLookup.Provider provider) {
     BlockState outputState = getStrippedState(pContainer, currentState);
     if (outputState == null) {
       return currentState;

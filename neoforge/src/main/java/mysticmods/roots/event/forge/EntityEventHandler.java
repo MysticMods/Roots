@@ -3,8 +3,11 @@ package mysticmods.roots.event.forge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.capability.Capabilities;
+import mysticmods.roots.api.capability.EntityCooldowns;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSounds;
+import mysticmods.roots.util.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -16,9 +19,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-
-
-
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 
 @EventBusSubscriber(modid= RootsAPI.MODID)
@@ -39,9 +42,9 @@ public class EntityEventHandler {
         return;
       }
       if (!level.isClientSide()) {
-        entity.getCapability(Capabilities.SQUID_MILKING_CAPABILITY).ifPresent(cap -> {
-          if (cap.hasExpired(server)) {
-            cap.setExpiresAt(server, 20 * 15);
+        if (entity.getType().is(RootsTags.Entities.SQUID)) {
+          if (EntityCooldowns.hasExpired(entity, ModAttachments.SQUID_MILKING_COOLDOWN)) {
+            EntityCooldowns.setExpiresAt(entity, ModAttachments.SQUID_MILKING_COOLDOWN, server.getTickCount() + (20 * 15));
             level.playSound(null, player.blockPosition(), ModSounds.SQUID_MILK.get(), SoundSource.PLAYERS, 0.5f, level.getRandom().nextFloat() * 0.25f + 0.6f);
             if (!player.isCreative()) {
               heldItem.shrink(1);
@@ -53,7 +56,7 @@ public class EntityEventHandler {
           } else {
             player.displayClientMessage(Component.translatable("roots.message.squid.cooldown").setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.BLUE)).withBold(true)), true);
           }
-        });
+        }
       }
     }
   }

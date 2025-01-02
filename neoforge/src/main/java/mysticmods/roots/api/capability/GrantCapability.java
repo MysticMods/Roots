@@ -55,44 +55,44 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
   }
 
   public boolean canGrant (Grant grant) {
-    if (grant.getType() == Grant.Type.SPELL) {
-      Spell spell = RootsRegistries.SPELL_REGISTRY.get().get(grant.getId());
+    if (grant.type() == Grant.Type.SPELL) {
+      Spell spell = RootsRegistries.SPELL_REGISTRY.get().get(grant.id());
       if (spell == null) {
-        throw new NullPointerException("Spell " + grant.getId() + " does not exist!");
+        throw new NullPointerException("Spell " + grant.id() + " does not exist!");
       }
 
-      return grant.isRepeatable() || !hasSpell(spell);
-    } else if (grant.getType() == Grant.Type.MODIFIER) {
-      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.getId());
+      return grant.repeatable() || !hasSpell(spell);
+    } else if (grant.type() == Grant.Type.MODIFIER) {
+      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.id());
       if (modifier == null) {
-        throw new NullPointerException("Modifier " + grant.getId() + " does not exist!");
+        throw new NullPointerException("Modifier " + grant.id() + " does not exist!");
       }
 
-      return grant.isRepeatable() || !hasModifier(modifier);
+      return grant.repeatable() || !hasModifier(modifier);
     }
 
     return false;
   }
 
   public boolean grant (ServerPlayer player, Grant grant) {
-    if (grant.getType() == Grant.Type.SPELL) {
-      Spell spell = RootsRegistries.SPELL_REGISTRY.get().get(grant.getId());
+    if (grant.type() == Grant.Type.SPELL) {
+      Spell spell = RootsRegistries.SPELL_REGISTRY.get().get(grant.id());
       if (spell == null) {
-        throw new NullPointerException("Spell " + grant.getId() + " does not exist!");
+        throw new NullPointerException("Spell " + grant.id() + " does not exist!");
       }
 
-      if (grant.isRepeatable() || !hasSpell(spell)) {
+      if (grant.repeatable() || !hasSpell(spell)) {
         player.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getStyledName()), true);
         grantSpell(spell);
         return true;
       }
-    } else if (grant.getType() == Grant.Type.MODIFIER) {
-      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.getId());
+    } else if (grant.type() == Grant.Type.MODIFIER) {
+      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.id());
       if (modifier == null) {
-        throw new NullPointerException("Modifier " + grant.getId() + " does not exist!");
+        throw new NullPointerException("Modifier " + grant.id() + " does not exist!");
       }
 
-      if (grant.isRepeatable() || !hasModifier(modifier)) {
+      if (grant.repeatable() || !hasModifier(modifier)) {
         player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
         grantModifier(modifier);
         return true;

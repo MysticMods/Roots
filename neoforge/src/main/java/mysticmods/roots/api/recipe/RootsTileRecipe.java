@@ -7,11 +7,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 
 
 public abstract class RootsTileRecipe<H extends IItemHandler, T extends BlockEntity, W extends IRootsBlockEntityCrafting<H, T>> extends RootsRecipe<H, W> {
-  protected T blockEntity;
-
   public RootsTileRecipe() {
-    super();
+    super(null);
   }
-
-
 }

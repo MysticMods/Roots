@@ -26,7 +26,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 public class ModRecipes {
-/*  private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, RootsAPI.MODID);
+  private static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, RootsAPI.MODID);
   // TODO: Inline these ResourceLocations into Reference
   public static DeferredHolder<RecipeType<?>, RecipeType<PyreRecipe>> PYRE = TYPES.register("pyre", () -> RecipeType.simple(RootsAPI.rl("pyre")));
   public static DeferredHolder<RecipeType<?>, RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = TYPES.register("summon_creatures", () -> RecipeType.simple(RootsAPI.rl("summon_creatures")));
@@ -34,7 +34,7 @@ public class ModRecipes {
   public static DeferredHolder<RecipeType<?>, RecipeType<GroveRecipe>> GROVE = TYPES.register("grove", () -> RecipeType.simple(RootsAPI.rl("grove")));
   public static DeferredHolder<RecipeType<?>, RecipeType<BarkRecipe>> BARK = TYPES.register("bark", () -> RecipeType.simple(RootsAPI.rl("bark")));
   public static DeferredHolder<RecipeType<?>, RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> RecipeType.simple(RootsAPI.rl("runic_block")));
-  public static DeferredHolder<RecipeType<?>, RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));*/
+  public static DeferredHolder<RecipeType<?>, RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));
 
 /*
   static {
@@ -223,11 +223,7 @@ public class ModRecipes {
   }
 */
 
-/*  public static void register(IEventBus bus) {
+  public static void register(IEventBus bus) {
     TYPES.register(bus);
   }
-
-
-  public static void load() {
-  }*/
 }

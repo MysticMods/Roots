@@ -3,7 +3,6 @@ package mysticmods.roots.blockentity;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.GrantResult;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
@@ -75,7 +74,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       GrantResult failedGrants = cachedRecipe.checkGrants(level, (ServerPlayer) player);
       if (failedGrants.failed() && !cachedRecipe.hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
-        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.getType().name() + " with id " + o.getId()));
+        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));
         failedGrants.report();
         return InteractionResult.FAIL;
       }

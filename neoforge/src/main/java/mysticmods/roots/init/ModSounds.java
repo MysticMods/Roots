@@ -1,35 +1,40 @@
 package mysticmods.roots.init;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import mysticmods.roots.api.RootsAPI;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
-
-import static mysticmods.roots.Roots.REGISTRATE;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModSounds {
+  private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, RootsAPI.MODID);
+
   // Sprout
-  public static final RegistryEntry<SoundEvent> SPROUT_AMBIENT = REGISTRATE.soundEvent("mob.sprout.ambient").register();
+  public static final DeferredHolder<SoundEvent, SoundEvent> SPROUT_AMBIENT = SOUNDS.register("mob.sprout.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.sprout.ambient")));
 
   // Fennec
-  public static final RegistryEntry<SoundEvent> FENNEC_AGGRO = REGISTRATE.soundEvent("mob.fennec.aggro").register();
-  public static final RegistryEntry<SoundEvent> FENNEC_BARK = REGISTRATE.soundEvent("mob.fennec.bark").register();
-  public static final RegistryEntry<SoundEvent> FENNEC_BITE = REGISTRATE.soundEvent("mob.fennec.bite").register();
-  public static final RegistryEntry<SoundEvent> FENNEC_DEATH = REGISTRATE.soundEvent("mob.fennec.death").register();
-  public static final RegistryEntry<SoundEvent> FENNEC_EAT = REGISTRATE.soundEvent("mob.fennec.eat").register();
-  public static final RegistryEntry<SoundEvent> FENNEC_IDLE = REGISTRATE.soundEvent("mob.fennec.idle").register();
-  public static final RegistryEntry<SoundEvent> FENNEC_SLEEP = REGISTRATE.soundEvent("mob.fennec.sleep").register();
-  public static final RegistryEntry<SoundEvent> FENNEC_SNIFF = REGISTRATE.soundEvent("mob.fennec.sniff").register();
-  public static final RegistryEntry<SoundEvent> FENNEC_SPIT = REGISTRATE.soundEvent("mob.fennec.spit").register();
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_AGGRO = SOUNDS.register("mob.fennec.aggro", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.aggro")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_BARK = SOUNDS.register("mob.fennec.bark", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.bark")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_BITE = SOUNDS.register("mob.fennec.bite", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.bite")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_DEATH = SOUNDS.register("mob.fennec.death", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.death")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_EAT = SOUNDS.register("mob.fennec.eat", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.eat")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_IDLE = SOUNDS.register("mob.fennec.idle", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.idle")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_SLEEP = SOUNDS.register("mob.fennec.sleep", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.sleep")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_SNIFF = SOUNDS.register("mob.fennec.sniff", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.sniff")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> FENNEC_SPIT = SOUNDS.register("mob.fennec.spit", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.fennec.spit")));
 
   // Squid
-  public static final RegistryEntry<SoundEvent> SQUID_MILK = REGISTRATE.soundEvent("mob.squid.milk").register();
+  public static final DeferredHolder<SoundEvent, SoundEvent> SQUID_MILK = SOUNDS.register("mob.squid.milk", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.squid.milk")));
 
   // Duck
-/*  public static final RegistryEntry<SoundEvent> DUCK_AMBIENT = REGISTRATE.soundEvent("mob.duck.quack").register();*/
-  public static final RegistryEntry<SoundEvent> DUCK_SWIM = REGISTRATE.soundEvent("mob.duck.swim").register();
+  public static final DeferredHolder<SoundEvent, SoundEvent> DUCK_AMBIENT = SOUNDS.register("mob.duck.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.duck.ambient")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> DUCK_SWIM = SOUNDS.register("mob.duck.swim", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.duck.swim")));
 
   // Deer
-/*  public static final RegistryEntry<SoundEvent> DEER_AMBIENT = REGISTRATE.soundEvent("mob.deer.ambient").register();*/
+  public static final DeferredHolder<SoundEvent, SoundEvent> DEER_AMBIENT = SOUNDS.register("mob.deer.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.deer.ambient")));
 
-  public static void load() {
+  public static void register (IEventBus bus) {
+    SOUNDS.register(bus);
   }
 }

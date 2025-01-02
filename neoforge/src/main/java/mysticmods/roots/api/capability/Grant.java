@@ -3,51 +3,42 @@ package mysticmods.roots.api.capability;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.util.EnumUtil;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
-public class Grant {
-  private final Type type;
-  private final ResourceLocation id;
-  private final boolean repeatable;
+public record Grant(Type type, ResourceLocation id, boolean repeatable) {
+  public static final Codec<Grant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+      Type.CODEC.fieldOf("type").forGetter(Grant::type),
+      ResourceLocation.CODEC.fieldOf("id").forGetter(Grant::id),
+      Codec.BOOL.fieldOf("repeatable").forGetter(Grant::repeatable)
+  ).apply(instance, Grant::new));
 
-  public Grant(Type type, ResourceLocation id, boolean repeatable) {
-    this.type = type;
-    this.id = id;
-    this.repeatable = repeatable;
-  }
-
-  public boolean isRepeatable() {
-    return repeatable;
-  }
-
-  public Component getFailed() {
-    if (getType() == Type.SPELL) {
-      return Component.translatable("roots.message.spell.already_learned", RootsRegistries.SPELL_REGISTRY.get().get(getId()).getStyledName());
-    } else if (getType() == Type.MODIFIER) {
-      return Component.translatable("roots.message.modifier.already_learned", RootsRegistries.MODIFIER_REGISTRY.get().get(getId()).getName());
+  public Component getFailed(HolderLookup.Provider provider) {
+    if (type() == Type.SPELL) {
+      return Component.translatable("roots.message.spell.already_learned", id());
+    } else if (type() == Type.MODIFIER) {
+      return Component.translatable("roots.message.modifier.already_learned", id());
     } else {
-      throw new IllegalStateException("Unknown grant type: " + getType());
+      throw new IllegalStateException("Unknown grant type: " + type());
     }
   }
 
-  public Type getType() {
-    return type;
-  }
 
-  public ResourceLocation getId() {
-    return id;
-  }
 
   public JsonElement toJson() {
     JsonObject result = new JsonObject();
@@ -101,8 +92,15 @@ public class Grant {
     return new Grant(Type.MODIFIER, RootsRegistries.MODIFIER_REGISTRY.get().getKey(modifier), false);
   }
 
-  public enum Type {
+  public enum Type implements StringRepresentable {
     SPELL,
-    MODIFIER
+    MODIFIER;
+
+    public static final Codec<Type> CODEC = StringRepresentable.fromEnum(Type::values);
+
+    @Override
+    public String getSerializedName() {
+      return name().toLowerCase(Locale.ROOT);
+    }
   }
 }

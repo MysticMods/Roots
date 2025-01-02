@@ -1,14 +1,20 @@
 package mysticmods.roots.api.condition;
 
+import com.mojang.serialization.Codec;
 import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public class PlayerCondition extends DescribedRegistryEntry<PlayerCondition> {
+  public static Codec<PlayerCondition> CODEC = RootsRegistries.PLAYER_CONDITIONS.byNameCodec();
+
   private final Type condition;
+
+  private final Holder.Reference<PlayerCondition> builtinRegistryHolder =  RootsRegistries.PLAYER_CONDITIONS.createIntrusiveHolder(this);
 
   public PlayerCondition(Type condition) {
     this.condition = condition;
@@ -19,9 +25,17 @@ public class PlayerCondition extends DescribedRegistryEntry<PlayerCondition> {
     return "player_condition";
   }
 
+  public Holder.Reference<PlayerCondition> getBuiltinRegistryHolder() {
+    return builtinRegistryHolder;
+  }
+
+  public Type getCondition() {
+    return condition;
+  }
+
   @Override
   public ResourceLocation getKey() {
-    return RootsRegistries.PLAYER_CONDITION_REGISTRY.get().getKey(this);
+    return getBuiltinRegistryHolder().getKey().location();
   }
 
   public boolean test(Level level, @Nullable Player player) {

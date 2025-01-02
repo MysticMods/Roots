@@ -17,7 +17,6 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   protected WorldCondition condition;
 
   public WorldRecipe() {
-    super();
   }
 
   @Override

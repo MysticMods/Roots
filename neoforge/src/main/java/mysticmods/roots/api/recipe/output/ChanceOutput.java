@@ -3,6 +3,8 @@ package mysticmods.roots.api.recipe.output;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
@@ -14,6 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChanceOutput {
+  public static Codec<ChanceOutput> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    ItemStack.STRICT_CODEC.fieldOf("output").forGetter(ChanceOutput::getOutput),
+    Codec.FLOAT.fieldOf("chance").forGetter(ChanceOutput::getChance)
+  ).apply(instance, ChanceOutput::new));
+
   private final ItemStack output;
   private final float chance;
 

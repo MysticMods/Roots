@@ -75,16 +75,13 @@ public class Roots {
     ModItems.load();
     ModEntities.load();
     ModEffects.register(bus);
-    ModFeatures.load();
     ModHerbs.load();
-    ModTags.load();
     ModRecipes.load();
     ModConditions.register(bus);
     ModRituals.register(bus);
-    ModSpells.load();
-    ModLang.load();
+    ModSpells.register(bus);
     ModTests.load();
-    ModSounds.load();
+    ModSounds.register(bus);
     ModGroves.load();
     ModSerializers.register(bus);
     ModRecipes.register(bus);

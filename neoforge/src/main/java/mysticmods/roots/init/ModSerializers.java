@@ -25,7 +25,7 @@ public class ModSerializers {
   private static final DeferredRegister<SnapshotSerializer<?>> SNAPSHOT_SERIALIZERS = DeferredRegister.create(RootsRegistries.Keys.SNAPSHOT_SERIALIZERS, RootsAPI.MODID);
 
   // Recipe Serializers
-  public static final DeferredHolder<RecipeSerializer<?>, DynamicBarkRecipe.Serializer> DYNAMIC_BARK = RECIPE_SERIALIZERS.register("dynamic_bark", () -> new DynamicBarkRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, DynamicBarkRecipe.Serializer> DYNAMIC_BARK = RECIPE_SERIALIZERS.register("dynamic_bark", DynamicBarkRecipe.Serializer::new);
 /*  public static final DeferredHolder<RecipeSerializer<?>, GroveRecipe.Serializer> GROVE_CRAFTING = RECIPE_SERIALIZERS.register("grove", () -> new GroveRecipe.Serializer());*/
   /*public static final DeferredHolder<RecipeSerializer<?>, MortarRecipe.Serializer> MORTAR = RECIPE_SERIALIZERS.register("mortar", () -> new MortarRecipe.Serializer());
   public static final DeferredHolder<RecipeSerializer<?>, SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = RECIPE_SERIALIZERS.register("summon_creatures", () -> new SummonCreaturesRecipe.Serializer());

@@ -5,6 +5,7 @@ import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -21,24 +22,19 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     super();
   }
 
-  @Override
-  public ItemStack getBaseResultItem() {
-    return getResultItem();
+  protected BarkRecipe(BaseRecipeHolder holder) {
+
   }
 
   @Override
-  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState) {
+  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState, HolderLookup.Provider provider) {
     BlockState newState = outputState;
 
     if (currentState.getBlock() instanceof RotatedPillarBlock && outputState.getBlock() instanceof RotatedPillarBlock) {
       newState = outputState.setValue(RotatedPillarBlock.AXIS, currentState.getValue(RotatedPillarBlock.AXIS));
     }
 
-    return super.modifyState(pContainer, newState);
-  }
-
-  @Override
-  public void setIngredients(NonNullList<Ingredient> ingredients) {
+    return super.modifyState(pContainer, newState, provider);
   }
 
   @Override
@@ -52,22 +48,11 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   }
 
   @Override
-  public boolean canCraftInDimensions(int i, int j) {
-    return true;
-  }
-
-  @Override
   public String getGroup() {
     return Identifiers.BARK_RECIPE_GROUP;
   }
 
-  public static class Serializer extends WorldRecipe.Serializer<SimpleWorldCrafting, BarkRecipe> {
-    public Serializer() {
-      super(BarkRecipe::new);
-    }
-  }
-
-  public static class Builder extends WorldRecipe.Builder {
+/*  public static class Builder extends WorldRecipe.Builder {
     public Builder() {
     }
 
@@ -96,5 +81,5 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   public static Builder builder(ItemLike item) {
     return builder(item, 1);
-  }
+  }*/
 }

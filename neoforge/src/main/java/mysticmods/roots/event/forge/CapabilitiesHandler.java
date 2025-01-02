@@ -22,10 +22,10 @@ public class CapabilitiesHandler {
       event.addCapability(RootsAPI.REPUTATION_CAPABILITY_ID, new ReputationCapability());
     } else {
       if (event.getObject().getType().is(RootsTags.Entities.SQUID)) {
-        event.addCapability(RootsAPI.SQUID_MILKING_CAPABILITY, new EntityCooldownCapability.SquidMilkingCapability());
+        event.addCapability(RootsAPI.SQUID_MILKING_CAPABILITY, new EntityCooldowns.SquidMilkingCapability());
       }
-      event.addCapability(RootsAPI.RUNIC_SHEARS_TOKEN_CAPABILITY, new EntityCooldownCapability.RunicShearsTokenCooldown());
-      event.addCapability(RootsAPI.RUNIC_SHEARS_ENTITY_CAPABILITY_ID, new EntityCooldownCapability.RunicShearsEntityCooldown());
+      event.addCapability(RootsAPI.RUNIC_SHEARS_TOKEN_CAPABILITY, new EntityCooldowns.RunicShearsTokenCooldown());
+      event.addCapability(RootsAPI.RUNIC_SHEARS_ENTITY_CAPABILITY_ID, new EntityCooldowns.RunicShearsEntityCooldown());
     }
   }
 }

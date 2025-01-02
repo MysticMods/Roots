@@ -31,22 +31,22 @@ public class ItemCache {
   }
 
   public static ItemStack getGrantStack (Grant grant) {
-    if (grant.getType() == Grant.Type.SPELL) {
-      Spell spell = RootsRegistries.SPELL_REGISTRY.get().getValue(grant.getId());
+    if (grant.type() == Grant.Type.SPELL) {
+      Spell spell = RootsRegistries.SPELL_REGISTRY.get().getValue(grant.id());
       if (spell == null) {
-        RootsAPI.LOG.error("Grant {} references non-existent spell {}", grant, grant.getId());
+        RootsAPI.LOG.error("Grant {} references non-existent spell {}", grant, grant.id());
         return ItemStack.EMPTY;
       }
       return getCachedSpell(spell);
-    } else if (grant.getType() == Grant.Type.MODIFIER) {
-      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().getValue(grant.getId());
+    } else if (grant.type() == Grant.Type.MODIFIER) {
+      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().getValue(grant.id());
       if (modifier == null) {
-        RootsAPI.LOG.error("Grant {} references non-existent modifier {}", grant, grant.getId());
+        RootsAPI.LOG.error("Grant {} references non-existent modifier {}", grant, grant.id());
         return ItemStack.EMPTY;
       }
       return getCachedModifier(modifier);
     } else {
-      RootsAPI.LOG.error("Grant {} references unknown type {}", grant, grant.getType());
+      RootsAPI.LOG.error("Grant {} references unknown type {}", grant, grant.type());
       return ItemStack.EMPTY;
     }
   }

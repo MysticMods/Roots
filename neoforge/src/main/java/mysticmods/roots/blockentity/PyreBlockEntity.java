@@ -134,7 +134,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       GrantResult failedGrants = cachedRecipe.value().checkGrants(level, (ServerPlayer) player);
       if (failedGrants.failed() && !cachedRecipe.value().hasOutput()) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
-        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.getType().name() + " with id " + o.getId()));
+        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));
         failedGrants.report();
         return InteractionResult.SUCCESS;
       }

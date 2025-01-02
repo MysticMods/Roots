@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class SnapshotCapability implements ICapabilityProvider, ICapabilitySerializable<ListTag> {
+public class SnapshotCapability {
   private final Map<SnapshotSerializer<?>, Snapshot> snapshots = new HashMap<>();
 
   public void tick(Player player) {
@@ -52,12 +52,6 @@ public class SnapshotCapability implements ICapabilityProvider, ICapabilitySeria
     snapshots.put(serializer, snapshot);
   }
 
-  @Override
-  public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-    return Capabilities.SNAPSHOT_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this));
-  }
-
-  @Override
   public ListTag serializeNBT() {
     ListTag result = new ListTag();
     for (Map.Entry<SnapshotSerializer<?>, Snapshot> entry : snapshots.entrySet()) {
@@ -66,7 +60,6 @@ public class SnapshotCapability implements ICapabilityProvider, ICapabilitySeria
     return result;
   }
 
-  @Override
   public void deserializeNBT(ListTag nbt) {
     for (int i = 0; i < nbt.size(); i++) {
       CompoundTag tag = nbt.getCompound(i);
@@ -76,7 +69,7 @@ public class SnapshotCapability implements ICapabilityProvider, ICapabilitySeria
         continue;
       }
 
-      SnapshotSerializer<?> serializer = RootsRegistries.SNAPSHOT_SERIALIZER_REGISTRY.get().getValue(key);
+      SnapshotSerializer<?> serializer = RootsRegistries.SNAPSHOT_SERIALIZERS.get(key);
       if (serializer == null) {
         continue;
       }
@@ -89,7 +82,7 @@ public class SnapshotCapability implements ICapabilityProvider, ICapabilitySeria
     CompoundTag result = new CompoundTag();
     result.putString("type", key.toString());
     //noinspection unchecked
-    SnapshotSerializer<T> serializer = ((SnapshotSerializer<T>) RootsRegistries.SNAPSHOT_SERIALIZER_REGISTRY.get().getValue(key));
+    SnapshotSerializer<T> serializer = ((SnapshotSerializer<T>) RootsRegistries.SNAPSHOT_SERIALIZERS.get(key));
     if (serializer == null) {
       throw new NullPointerException("Serializer '" + key + "' not found!");
     }

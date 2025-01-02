@@ -1,6 +1,7 @@
 package mysticmods.roots.api.condition;
 
 import com.google.common.base.Suppliers;
+import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
@@ -8,6 +9,7 @@ import mysticmods.roots.api.registry.DescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +26,11 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
+  public static final Codec<LevelCondition> CODEC = RootsRegistries.LEVEL_CONDITIONS.byNameCodec();
+
   private final Type condition;
+
+  private final Holder.Reference<LevelCondition> builtinRegistryHolder =  RootsRegistries.LEVEL_CONDITIONS.createIntrusiveHolder(this);
 
   public LevelCondition(Type condition) {
     this.condition = condition;
@@ -35,9 +41,17 @@ public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
     return "level_condition";
   }
 
+  public Type getCondition() {
+    return condition;
+  }
+
+  public Holder.Reference<LevelCondition> getBuiltinRegistryHolder() {
+    return builtinRegistryHolder;
+  }
+
   @Override
   public ResourceLocation getKey() {
-    return RootsRegistries.LEVEL_CONDITION_REGISTRY.get().getKey(this);
+    return getBuiltinRegistryHolder().getKey().location();
   }
 
   public Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {

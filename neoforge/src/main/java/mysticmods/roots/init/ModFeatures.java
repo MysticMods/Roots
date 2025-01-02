@@ -47,6 +47,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.List;
 import java.util.OptionalInt;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class ModFeatures {
   private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, RootsAPI.MODID);
@@ -70,15 +71,15 @@ public class ModFeatures {
   public static DeferredHolder<Feature<?>, SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
 
   // Configured Features
-  public static DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> HUGE_BAFFLECAP = CONFIGURED_FEATURES.register("huge_bafflecap", () -> new ConfiguredFeature<>(Feature.HUGE_RED_MUSHROOM, new HugeMushroomFeatureConfiguration(BlockStateProvider.simple(ModBlocks.BAFFLECAP_BLOCK.getDefaultState().setValue(HugeMushroomBlock.DOWN, false)), BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
+  public static DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<HugeMushroomFeatureConfiguration, ?>> HUGE_BAFFLECAP = CONFIGURED_FEATURES.register("huge_bafflecap", () -> new ConfiguredFeature<>(Feature.HUGE_RED_MUSHROOM, new HugeMushroomFeatureConfiguration(BlockStateProvider.simple(ModBlocks.BAFFLECAP_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.DOWN, false)), BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
 
-  public static DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> WILD_ROOTS_CONFIGURED_FEATURE = CONFIGURED_FEATURES.register("wild_roots", () -> new ConfiguredFeature<>(SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.getDefaultState()))));
+  public static DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> WILD_ROOTS_CONFIGURED_FEATURE = CONFIGURED_FEATURES.register("wild_roots", () -> new ConfiguredFeature<>(SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get().defaultBlockState()))));
 
-  public static DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> WILD_ROOTS_PLAINS_CONFIGURED_FEATURE = CONFIGURED_FEATURES.register("wild_roots_mossy", () -> new ConfiguredFeature<>(SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.getDefaultState().setValue(WildRootsBlock.MOSSY, true)))));
+  public static DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> WILD_ROOTS_PLAINS_CONFIGURED_FEATURE = CONFIGURED_FEATURES.register("wild_roots_mossy", () -> new ConfiguredFeature<>(SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get().defaultBlockState().setValue(WildRootsBlock.MOSSY, true)))));
 
-  private static final DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE = CONFIGURED_FEATURES.register("wild_aubergine", () -> new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_AUBERGINE.getDefaultState()))));
+  private static final DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE = CONFIGURED_FEATURES.register("wild_aubergine", () -> new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_AUBERGINE.get().defaultBlockState()))));
 
-  private static final DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE_PATCH = CONFIGURED_FEATURES.register("wild_aubergine_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(20, 2, 2, ModFeatures.WILD_AUBERGINE.getHolder().get())));
+  private static final DeferredHolder<ConfiguredFeature<?, ?>, ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE_PATCH = CONFIGURED_FEATURES.register("wild_aubergine_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(20, 2, 2, ModFeatures.WILD_AUBERGINE)));
 
    private static TreeConfiguration.TreeConfigurationBuilder createWildwood() {
       return (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(ModBlocks.WILDWOOD_LOG.get()), new FancyTrunkPlacer(12, 1, 1), BlockStateProvider.simple(ModBlocks.WILDWOOD_LEAVES.get()), new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines();
@@ -106,7 +107,7 @@ public class ModFeatures {
     RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
   )));
 
-  public static DeferredHolder<PlacedFeature, PlacedFeature> WILD_ROOTS_SPARSE_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_sparse", () -> new PlacedFeature(WILD_ROOTS_PLAINS_CONFIGURED_FEATURE.getHolder().get(), List.of(
+  public static DeferredHolder<PlacedFeature, PlacedFeature> WILD_ROOTS_SPARSE_PLACED_FEATURE = PLACED_FEATURES.register("wild_roots_sparse", () -> new PlacedFeature(WILD_ROOTS_PLAINS_CONFIGURED_FEATURE, List.of(
     BiomeFilter.biome(),
     CountPlacement.of(30), // How many attempts per chunk
     InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
@@ -117,15 +118,15 @@ public class ModFeatures {
     RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y value.
   )));
 
-  private static final DeferredHolder<PlacedFeature, PlacedFeature> WILD_AUBERGINE = PLACED_FEATURES.register("wild_aubergine", () -> new PlacedFeature(ModFeatures.CONFIGURED_WILD_AUBERGINE.getHolder().get(), List.of(
-    BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.wouldSurvive(ModBlocks.WILD_AUBERGINE.getDefaultState(), BlockPos.ZERO)))
+  private static final DeferredHolder<PlacedFeature, PlacedFeature> WILD_AUBERGINE = PLACED_FEATURES.register("wild_aubergine", () -> new PlacedFeature(ModFeatures.CONFIGURED_WILD_AUBERGINE, List.of(
+    BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.wouldSurvive(ModBlocks.WILD_AUBERGINE.get().defaultBlockState(), BlockPos.ZERO)))
   )));
 
-  public static final DeferredHolder<StructurePieceType> STANDING_STONES_PIECE = STRUCTURE_PIECE_TYPES.register("standing_stones_piece", () -> (pContext, pTag) -> new StandingStonePiece(pTag));
+  public static final DeferredHolder<StructurePieceType, StructurePieceType> STANDING_STONES_PIECE = STRUCTURE_PIECE_TYPES.register("standing_stones_piece", () -> (pContext, pTag) -> new StandingStonePiece(pTag));
 
-  public static final DeferredHolder<StructureType<StandingStonesStructure>> STANDING_STONES = STRUCTURES.register("standing_stones", () -> () -> StandingStonesStructure.CODEC);
+  public static final DeferredHolder<StructureType<?>, StructureType<StandingStonesStructure>> STANDING_STONES = STRUCTURES.register("standing_stones", () -> () -> StandingStonesStructure.CODEC);
 
-  public static final DeferredHolder<PlacedFeature> WILD_AUBERGINE_PATCH = PLACED_FEATURES.register("wild_aubergine_patch", () -> new PlacedFeature(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH.getHolder().get(), List.of(
+  public static final DeferredHolder<PlacedFeature, PlacedFeature> WILD_AUBERGINE_PATCH = PLACED_FEATURES.register("wild_aubergine_patch", () -> new PlacedFeature(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH, List.of(
     CountPlacement.of(1),
     InSquarePlacement.spread(),
     HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
@@ -142,9 +143,5 @@ public class ModFeatures {
     RULE_TEST_TYPES.register(bus);
     STRUCTURES.register(bus);
     STRUCTURE_PIECE_TYPES.register(bus);
-  }
-
-
-  public static void load() {
   }
 }
