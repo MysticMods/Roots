@@ -4,8 +4,6 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
-import mysticmods.roots.network.Networking;
-import mysticmods.roots.network.client.ClientBoundUpdateStaffStackPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -73,7 +71,7 @@ public class ServerHooks {
   private static void updateStack (ServerPlayer player, ItemStack stack, InteractionHand hand, SpellStorage storage) {
     storage.save(stack);
     player.setItemInHand(hand, stack);
-    ClientBoundUpdateStaffStackPacket packet = new ClientBoundUpdateStaffStackPacket(stack);
-    Networking.sendTo(packet, player);
+/*    ClientBoundUpdateStaffStackPacket packet = new ClientBoundUpdateStaffStackPacket(stack);
+    Networking.sendTo(packet, player);*/
   }
 }

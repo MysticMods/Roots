@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.network.server;
 
 import mysticmods.roots.ServerHooks;
@@ -38,3 +39,4 @@ public class ServerBoundSwapStaffSlotsPacket {
     ServerHooks.swapSlots(context.get().getSender(), packet.hand, packet.slot1, packet.slot2);
   }
 }
+*/

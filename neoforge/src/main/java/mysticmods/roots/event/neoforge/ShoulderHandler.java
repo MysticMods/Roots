@@ -1,27 +1,5 @@
 package mysticmods.roots.event.neoforge;
 
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Capabilities;
-import mysticmods.roots.api.capability.IPlayerShoulderCapability;
-import mysticmods.roots.capability.PlayerShoulderCapability;
-import mysticmods.roots.network.Networking;
-import mysticmods.roots.network.client.ClientBoundShoulderRidePacket;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-
-
-
-
-
-
-
 /*@EventBusSubscriber(modid = RootsAPI.MODID)
 public class ShoulderHandler {
   @SubscribeEvent

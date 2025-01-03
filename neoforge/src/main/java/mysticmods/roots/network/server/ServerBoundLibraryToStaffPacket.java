@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.network.server;
 
 import mysticmods.roots.ServerHooks;
@@ -41,3 +42,4 @@ public class ServerBoundLibraryToStaffPacket {
     ServerHooks.insertSpell(context.get().getSender(), packet.hand, packet.slot, packet.spell);
   }
 }
+*/

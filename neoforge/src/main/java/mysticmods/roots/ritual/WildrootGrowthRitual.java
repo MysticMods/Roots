@@ -14,12 +14,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 public class WildrootGrowthRitual extends Ritual {
-  private final AbstractTreeGrower treeGrower = new RootsTreeGrowers();
+/*  private final AbstractTreeGrower treeGrower = new RootsTreeGrowers();*/
 
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
@@ -48,11 +47,12 @@ public class WildrootGrowthRitual extends Ritual {
         if (!belowState.isFaceSturdy(level, below, Direction.UP)) {
           level.setBlock(below, Blocks.DIRT.defaultBlockState(), 4);
         }
-        if (!treeGrower.growTree(level, level.getChunkSource().getGenerator(), pos, Blocks.AIR.defaultBlockState(), level.getRandom())) {
+        // TODO:
+/*        if (!treeGrower.growTree(level, level.getChunkSource().getGenerator(), pos, Blocks.AIR.defaultBlockState(), level.getRandom())) {
           // If we fail, set it back to how it was
           level.setBlock(below, belowState, 4);
           level.setBlock(treePos, currentState, 4);
-        }
+        }*/
       });
     }
   }

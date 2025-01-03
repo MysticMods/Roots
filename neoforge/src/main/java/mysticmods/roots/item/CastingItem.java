@@ -6,8 +6,6 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
-import mysticmods.roots.network.Networking;
-import mysticmods.roots.network.client.ClientBoundOpenLibraryPacket;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,7 +36,7 @@ public class CastingItem extends Item implements ICastingItem {
   }
 
   @Override
-  public int getUseDuration(ItemStack pStack) {
+  public int getUseDuration(ItemStack pStack, LivingEntity entity) {
     return 72000;
   }
 
@@ -60,7 +58,7 @@ public class CastingItem extends Item implements ICastingItem {
       return;
     }
 
-    int ticks = pStack.getUseDuration() - pRemainingUseDuration;
+    int ticks = pStack.getUseDuration(pLivingEntity) - pRemainingUseDuration;
 
     Costing costs = new Costing(spell);
 
@@ -132,7 +130,7 @@ public class CastingItem extends Item implements ICastingItem {
   public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
     super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
     if (!pLevel.isClientSide()) {
-      int dur = getUseDuration(pStack) - pTimeCharged;
+      int dur = getUseDuration(pStack, pLivingEntity) - pTimeCharged;
       RootsAPI.LOG.info("Finished using after {} ticks {} seconds", dur, dur / 20);
     }
   }
@@ -193,10 +191,10 @@ public class CastingItem extends Item implements ICastingItem {
     return super.getName(pStack);
   }
 
-  @Override
+/*  @Override
   public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
     super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
     TooltipUtil.spellStaffTooltip(pTooltipComponents, pStack, pIsAdvanced);
-  }
+  }*/
 }

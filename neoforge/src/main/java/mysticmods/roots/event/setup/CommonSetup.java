@@ -3,7 +3,6 @@ package mysticmods.roots.event.setup;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModCompost;
-import mysticmods.roots.network.Networking;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,7 +14,7 @@ public class CommonSetup {
   @SubscribeEvent
   public static void init(FMLCommonSetupEvent event) {
     // TODO: Should this be enqueued?
-    Networking.INSTANCE.registerMessages();
+    // Networking.INSTANCE.registerMessages();
 
     // TODO: Stone plant -- was that even used???
 

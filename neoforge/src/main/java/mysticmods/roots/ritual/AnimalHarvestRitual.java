@@ -8,7 +8,9 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.FakePlayerUtil;
+import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,7 +25,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
@@ -74,30 +75,31 @@ public class AnimalHarvestRitual extends Ritual {
       return false;
     }
 
-    JsonObject pool = LootTables.serialize(table).getAsJsonObject();
+    // TODO:
+/*    JsonObject pool = LootTables.serialize(table).getAsJsonObject();
     if (pool.get("pools") == null) {
       emptyLoot.add(entity.getType());
       return false;
     } else {
       normalLoot.add(entity.getType());
       return true;
-    }
+    }*/
   }
 
   protected List<ItemStack> getDrops(LivingEntity entity) {
-    ResourceLocation resourcelocation = entity.getLootTable();
-    LootTable loottable = entity.getLevel().getServer().getLootTables().get(resourcelocation);
+/*    ResourceKey<LootTable> resourcelocation = entity.getLootTable();
+    LootTable loottable = entity.level().getServer().reloadableRegistries().getLootTable(resourcelocation);
     if (!checkEntity(loottable, entity)) {
       return Collections.emptyList();
     }
-    DamageSource pDamageSource = DamageSource.GENERIC;
-    LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel) entity.level)).withRandom(entity.getRandom()).withParameter(LootContextParams.THIS_ENTITY, entity).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.DAMAGE_SOURCE, pDamageSource).withOptionalParameter(LootContextParams.KILLER_ENTITY, pDamageSource.getEntity()).withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, pDamageSource.getDirectEntity());
+    DamageSource pDamageSource = DamageSource;
+    LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel) entity.level())).withRandom(entity.getRandom()).withParameter(LootContextParams.THIS_ENTITY, entity).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.DAMAGE_SOURCE, pDamageSource).withOptionalParameter(LootContextParams.KILLER_ENTITY, pDamageSource.getEntity()).withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, pDamageSource.getDirectEntity());
     lootcontext$builder = lootcontext$builder.withParameter(LootContextParams.LAST_DAMAGE_PLAYER, FakePlayerFactory.get((ServerLevel) entity.level, FakePlayerUtil.ROOTS));
     if (entity.getRandom().nextFloat() < lootingChance) {
       lootcontext$builder = lootcontext$builder.withLuck(lootingValue);
     }
     LootContext ctx = lootcontext$builder.create(LootContextParamSets.ENTITY);
-    return loottable.getRandomItems(ctx);
+    return loottable.getRandomItems(ctx);*/
   }
 
   @Override
@@ -107,10 +109,10 @@ public class AnimalHarvestRitual extends Ritual {
 
   @Override
   public void initialize() {
-    count = ModRituals.ANIMAL_HARVEST_COUNT.get().getValue();
+/*    count = ModRituals.ANIMAL_HARVEST_COUNT.get().getValue();
     glowDuration = ModRituals.ANIMAL_HARVEST_GLOW_DURATION.get().getValue();
     lootingValue = ModRituals.ANIMAL_HARVEST_LOOTING_VALUE.get().getValue();
-    lootingChance = ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE.get().getValue();
+    lootingChance = ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE.get().getValue();*/
   }
 
   @Override

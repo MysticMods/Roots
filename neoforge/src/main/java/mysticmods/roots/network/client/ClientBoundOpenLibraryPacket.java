@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.network.client;
 
 import mysticmods.roots.client.ClientHooks;
@@ -31,3 +32,4 @@ public class ClientBoundOpenLibraryPacket {
     ClientHooks.openGui(packet.hand);
   }
 }
+*/

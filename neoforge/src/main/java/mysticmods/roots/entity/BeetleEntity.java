@@ -6,8 +6,6 @@ import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.IPlayerShoulderCapability;
 import mysticmods.roots.capability.PlayerShoulderCapability;
 import mysticmods.roots.init.ModEntities;
-import mysticmods.roots.network.Networking;
-import mysticmods.roots.network.client.ClientBoundShoulderRidePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -65,13 +63,13 @@ public class BeetleEntity extends TamableAnimal {
   public InteractionResult mobInteract(Player player, InteractionHand hand) {
     ItemStack itemstack = player.getItemInHand(hand);
     Item item = itemstack.getItem();
-    if (this.level.isClientSide) {
+    if (this.level().isClientSide) {
       boolean flag = this.isOwnedBy(player) || this.isTame() || item == Items.MELON_SEEDS && !this.isTame();
       return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
     } else {
       if (this.isTame()) {
         if (this.isOwnedBy(player) && itemstack.isEmpty() && player.isCrouching()) {
-          LazyOptional<IPlayerShoulderCapability> laycap = player.getCapability(Capabilities.PLAYER_SHOULDER_CAPABILITY);
+/*          LazyOptional<IPlayerShoulderCapability> laycap = player.getCapability(Capabilities.PLAYER_SHOULDER_CAPABILITY);
           if (laycap.isPresent()) {
             IPlayerShoulderCapability cap = laycap.orElseThrow(IllegalStateException::new);
             if (!cap.isShouldered() && player.getShoulderEntityRight().isEmpty()) {
@@ -92,17 +90,19 @@ public class BeetleEntity extends TamableAnimal {
             } else {
               player.displayClientMessage(Component.translatable("message.shoulder.occupied").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN).withBold(true)), true);
             }
-          }
+          }*/
         } else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
           if (!player.isCreative()) {
             itemstack.shrink(1);
           }
 
-          FoodProperties food = item.getFoodProperties();
+          // TODO:
+/*          FoodProperties food = item.getFoodProperties();
           if (food != null) {
             this.heal((float) food.getNutrition());
             return InteractionResult.SUCCESS;
-          }
+          }*/
+          return InteractionResult.SUCCESS;
         }
 
         InteractionResult actionresulttype = super.mobInteract(player, hand);
@@ -121,15 +121,16 @@ public class BeetleEntity extends TamableAnimal {
           itemstack.shrink(1);
         }
 
-        if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+        // TODO: Taming event
+/*        if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
           this.tame(player);
           this.navigation.stop();
           this.setTarget(null);
           this.setOrderedToSit(true);
-          this.level.broadcastEntityEvent(this, (byte) 7);
+          this.level().broadcastEntityEvent(this, (byte) 7);
         } else {
-          this.level.broadcastEntityEvent(this, (byte) 6);
-        }
+          this.level().broadcastEntityEvent(this, (byte) 6);
+        }*/
 
         return InteractionResult.SUCCESS;
       }
@@ -145,6 +146,6 @@ public class BeetleEntity extends TamableAnimal {
   @Nullable
   @Override
   public AgeableMob getBreedOffspring(ServerLevel p_146743_, AgeableMob p_146744_) {
-    return ModEntities.BEETLE.get().create(level);
+    return ModEntities.BEETLE.get().create(p_146743_);
   }
 }

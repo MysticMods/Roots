@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.network;
 
 import mysticmods.roots.api.RootsAPI;
@@ -43,3 +44,4 @@ public class Networking extends PacketHandler {
     INSTANCE.sendInternal(target, message);
   }
 }
+*/
