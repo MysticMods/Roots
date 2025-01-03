@@ -1,11 +1,10 @@
 package mysticmods.roots.api.condition;
 
-import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
-import mysticmods.roots.api.registry.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.DescribedEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.minecraft.core.BlockPos;
@@ -21,11 +20,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.function.Supplier;
 
-public class LevelCondition extends DescribedRegistryEntry<LevelCondition> {
+public class LevelCondition extends DescribedEntry {
   public static final Codec<LevelCondition> CODEC = RootsRegistries.LEVEL_CONDITIONS.byNameCodec();
 
   private final Type condition;

@@ -6,9 +6,10 @@ import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.api.capability.ReputationCapability;
 import net.minecraft.world.entity.player.Player;
-
-
-
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 
 
 @EventBusSubscriber(value= Dist.CLIENT, modid= RootsAPI.MODID)
@@ -18,9 +19,8 @@ public class ClientTicker {
   private static ReputationCapability.SerializedReputationRecord reputationRecord = null;
 
   @SubscribeEvent
-  public static void onClientTick (TickEvent.ClientTickEvent event) {
-    if (event.phase == TickEvent.Phase.END) {
-      if (herbRecord != null || grantRecord != null || reputationRecord != null) {
+  public static void onClientTick (ClientTickEvent.Post event) {
+/*      if (herbRecord != null || grantRecord != null || reputationRecord != null) {
         Player player = RootsAPI.getInstance().getPlayer();
         if (grantRecord != null) {
           player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(grant -> {
@@ -40,8 +40,7 @@ public class ClientTicker {
             reputationRecord = null;
           });
         }
-      }
-    }
+      }*/
   }
 
   public static void setHerbRecord(HerbCapability.SerializedHerbRecord herbRecord) {

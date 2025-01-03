@@ -85,11 +85,11 @@ public record Grant(Type type, ResourceLocation id, boolean repeatable) {
   }
 
   public static Grant spell(Spell spell) {
-    return new Grant(Type.SPELL, RootsRegistries.SPELL_REGISTRY.get().getKey(spell), false);
+    return new Grant(Type.SPELL, RootsRegistries.SPELLS.getKey(spell), false);
   }
 
   public static Grant modifier(SpellModifier modifier) {
-    return new Grant(Type.MODIFIER, RootsRegistries.MODIFIER_REGISTRY.get().getKey(modifier), false);
+    return new Grant(Type.MODIFIER, RootsRegistries.SPELL_MODIFIERS.getKey(modifier), false);
   }
 
   public enum Type implements StringRepresentable {

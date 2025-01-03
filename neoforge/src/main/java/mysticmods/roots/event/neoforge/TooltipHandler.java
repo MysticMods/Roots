@@ -1,11 +1,12 @@
-package mysticmods.roots.event.forge;
+package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-
-
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 
 @EventBusSubscriber(modid= RootsAPI.MODID)

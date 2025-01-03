@@ -4,18 +4,11 @@ import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-
-
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-public class ReputationCapability implements ICapabilityProvider, ICapabilitySerializable<CompoundTag>, INetworkedCapability<ReputationCapability.SerializedReputationRecord> {
+public class ReputationCapability {
   private boolean untruePacifist = false;
 
   private final Object2IntMap<Grove> REPUTATIONS = new Object2IntLinkedOpenHashMap<>();
@@ -55,29 +48,24 @@ public class ReputationCapability implements ICapabilityProvider, ICapabilitySer
     return untruePacifist;
   }
 
-  @Override
   public SerializedReputationRecord toRecord() {
     return new SerializedReputationRecord(untruePacifist, REPUTATIONS);
   }
 
-  @Override
   public void fromRecord (SerializedReputationRecord record) {
     this.untruePacifist = record.getUntruePacifist();
     this.REPUTATIONS.clear();
     this.REPUTATIONS.putAll(record.getReputations());
   }
 
-  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
 
-  @Override
   public boolean isDirty() {
     return dirty;
   }
 
-  @Override
   public CompoundTag serializeNBT() {
     CompoundTag result = new CompoundTag();
     result.putBoolean("untrue_pacifist", untruePacifist);
@@ -89,25 +77,18 @@ public class ReputationCapability implements ICapabilityProvider, ICapabilitySer
     return result;
   }
 
-  @Override
   public void deserializeNBT(CompoundTag nbt) {
     REPUTATIONS.clear();
     this.untruePacifist = nbt.getBoolean("untrue_pacifist");
     CompoundTag reputations = nbt.getCompound("reputations");
     reputations.getAllKeys().forEach(key -> {
-      ResourceLocation groveKey = new ResourceLocation(key);
-      Grove grove = RootsRegistries.GROVE_REGISTRY.get().getValue(groveKey);
+      ResourceLocation groveKey = ResourceLocation.parse(key);
+      Grove grove = RootsRegistries.GROVES.get(groveKey);
       if (grove != null) {
         REPUTATIONS.put(grove, reputations.getInt(key));
       }
     });
     setDirty(true);
-  }
-
-  @NotNull
-  @Override
-  public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-    return Capabilities.REPUTATION_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this));
   }
 
   public static SerializedReputationRecord fromNetwork(FriendlyByteBuf buf) {
@@ -116,7 +97,7 @@ public class ReputationCapability implements ICapabilityProvider, ICapabilitySer
     return result;
   }
 
-  public static class SerializedReputationRecord implements SerializedCapability {
+  public static class SerializedReputationRecord {
     private boolean untruePacifist = false;
     private final Object2IntMap<Grove> reputations = new Object2IntLinkedOpenHashMap<>();
 
@@ -137,14 +118,13 @@ public class ReputationCapability implements ICapabilityProvider, ICapabilitySer
       return reputations;
     }
 
-    @Override
     public void fromNetwork(FriendlyByteBuf buf) {
       this.untruePacifist = buf.readBoolean();
       this.reputations.clear();
       int size = buf.readVarInt();
       for (int i = 0; i < size; i++) {
         ResourceLocation groveKey = buf.readResourceLocation();
-        Grove grove = RootsRegistries.GROVE_REGISTRY.get().getValue(groveKey);
+        Grove grove = RootsRegistries.GROVES.get(groveKey);
         int amount = buf.readVarInt();
         if (grove != null) {
           reputations.put(grove, amount);
@@ -152,7 +132,6 @@ public class ReputationCapability implements ICapabilityProvider, ICapabilitySer
       }
     }
 
-    @Override
     public void toNetwork(FriendlyByteBuf buf) {
       buf.writeBoolean(this.untruePacifist);
       buf.writeVarInt(this.reputations.size());

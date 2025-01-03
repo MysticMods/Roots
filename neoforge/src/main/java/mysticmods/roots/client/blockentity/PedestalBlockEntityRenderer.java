@@ -1,7 +1,7 @@
 package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 
@@ -86,8 +87,8 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(inSlot, pBlockEntity.getLevel(), null, inSlot.hashCode());
       boolean flag = bakedmodel.isGui3d();
       int j = this.getRenderAmount(inSlot);
-      pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
-      pPoseStack.mulPose(Vector3f.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
+      pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + /*RenderTickHandler.getClientTicks() + */pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
+      pPoseStack.mulPose(Axis.YP.rotationDegrees((loc +/* RenderTickHandler.getClientTicks() + */pPartialTick) * 0.5f));
       if (!flag) {
         float f7 = -0.0F * (float) (j - 1) * 0.5F;
         float f8 = -0.0F * (float) (j - 1) * 0.5F;
@@ -110,7 +111,7 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
           }
         }
 
-        Minecraft.getInstance().getItemRenderer().render(inSlot, ItemTransforms.TransformType.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+        Minecraft.getInstance().getItemRenderer().render(inSlot, ItemDisplayContext.FIXED, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
         pPoseStack.popPose();
         if (!flag) {
           pPoseStack.translate(0.0, 0.0, 0.09375F);

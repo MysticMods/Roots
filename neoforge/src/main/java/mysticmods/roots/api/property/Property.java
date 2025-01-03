@@ -1,15 +1,9 @@
 package mysticmods.roots.api.property;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import net.minecraft.core.Holder;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
-
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.Function;
+import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public abstract class Property<T> {
   protected final T defaultValue;
@@ -30,16 +24,15 @@ public abstract class Property<T> {
     return serializer;
   }
 
-  public record Serializer<T>(Function<FriendlyByteBuf, T> networkReader,
-                              BiFunction<JsonObject, String, T> jsonReader, Function<T, JsonElement> jsonWriter,
-                              BiConsumer<FriendlyByteBuf, T> networkWriter) {
+  public record Serializer<T>(Codec<T> codec,
+                              StreamCodec<? extends ByteBuf, T> streamCodec) {
   }
 
-  public static Serializer<Integer> INTEGER_SERIALIZER = new Serializer<>(FriendlyByteBuf::readVarInt, GsonHelper::getAsInt, JsonPrimitive::new, FriendlyByteBuf::writeVarInt);
-  public static Serializer<Boolean> BOOLEAN_SERIALIZER = new Serializer<>(FriendlyByteBuf::readBoolean, GsonHelper::getAsBoolean, JsonPrimitive::new, FriendlyByteBuf::writeBoolean);
-  public static Serializer<Float> FLOAT_SERIALIZER = new Serializer<>(FriendlyByteBuf::readFloat, GsonHelper::getAsFloat, JsonPrimitive::new, FriendlyByteBuf::writeFloat);
-  public static Serializer<String> STRING_SERIALIZER = new Serializer<>(FriendlyByteBuf::readUtf, GsonHelper::getAsString, JsonPrimitive::new, FriendlyByteBuf::writeUtf);
+  public static Serializer<Integer> INTEGER_SERIALIZER = new Serializer<>(Codec.INT, ByteBufCodecs.VAR_INT);
+  public static Serializer<Boolean> BOOLEAN_SERIALIZER = new Serializer<>(Codec.BOOL, ByteBufCodecs.BOOL);
+  public static Serializer<Float> FLOAT_SERIALIZER = new Serializer<>(Codec.FLOAT, ByteBufCodecs.FLOAT);
+  public static Serializer<String> STRING_SERIALIZER = new Serializer<>(Codec.STRING, ByteBufCodecs.STRING_UTF8);
 
-  public static Serializer<Double> DOUBLE_SERIALIZER = new Serializer<>(FriendlyByteBuf::readDouble, GsonHelper::getAsDouble, JsonPrimitive::new, FriendlyByteBuf::writeDouble);
+  public static Serializer<Double> DOUBLE_SERIALIZER = new Serializer<>(Codec.DOUBLE, ByteBufCodecs.DOUBLE);
 
 }

@@ -2,7 +2,7 @@ package mysticmods.roots.api.registry;
 
 import net.minecraft.Util;
 
-public abstract class DescribedRegistryEntry<T> implements IDescribedRegistryEntry {
+public abstract class DescribedEntry implements IDescribedRegistryEntry {
   protected String descriptionId;
 
   protected abstract String getDescriptor();

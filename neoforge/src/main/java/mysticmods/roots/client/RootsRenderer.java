@@ -4,16 +4,17 @@ import mysticmods.roots.api.RootsAPI;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-
-
-
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class RootsRenderer {
   public static TextureAtlasSprite whiteIcon;
 
-  @SubscribeEvent
+  // TODO: Generate atlas sprites
+/*  @SubscribeEvent
   public static void onStitchPre(TextureStitchEvent.Pre event) {
     // TODO: This shouldn't be done like this; also is it needed any more?
     if (!event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
@@ -30,7 +31,7 @@ public class RootsRenderer {
       return;
     }
     whiteIcon = map.getSprite(RootsAPI.rl("block/overlay/overlay_white"));
-  }
+  }*/
 
   public static int getColorARGB(int red, int green, int blue, float alpha) {
     if (alpha < 0) {

@@ -1,4 +1,4 @@
-package mysticmods.roots.event.forge;
+package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
@@ -22,7 +22,7 @@ import net.minecraft.world.phys.Vec3;
 
 
 
-@EventBusSubscriber(modid = RootsAPI.MODID)
+/*@EventBusSubscriber(modid = RootsAPI.MODID)
 public class ShoulderHandler {
   @SubscribeEvent
   public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
@@ -93,4 +93,4 @@ public class ShoulderHandler {
       }
     }
   }
-}
+}*/

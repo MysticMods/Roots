@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.gen;
 
 import com.google.common.collect.ImmutableList;
@@ -241,3 +242,4 @@ public class LootTableGenerator extends LootTableProvider {
     }
   }
 }
+*/

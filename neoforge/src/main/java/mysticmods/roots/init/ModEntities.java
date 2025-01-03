@@ -8,6 +8,7 @@ import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.Items;
@@ -21,7 +22,12 @@ import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 
@@ -29,7 +35,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModEntities {
   private static DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(Registries.ENTITY_TYPE, RootsAPI.MODID);
 
-  public static RegistryEntry<EntityType<BeetleEntity>> BEETLE = REGISTRATE.entity("beetle", BeetleEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<BeetleEntity>> BEETLE = REGISTER.register("beetle", () -> EntityType.Builder.of(BeetleEntity::new, MobCategory.CREATURE).sized(0.75f, 0.75f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<BeetleEntity>> BEETLE = REGISTRATE.entity("beetle", BeetleEntity::new, MobCategory.CREATURE)
       .properties(o -> o.sized(0.75f, 0.75f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
       .loot((p, e) -> p.add(e, LootTable.lootTable()
           .withPool(LootPool.lootPool()
@@ -44,9 +52,11 @@ public class ModEntities {
               .setRolls(ConstantValue.exactly(1))
           )
       ))
-      .register();
+      .register();*/
 
-  public static RegistryEntry<EntityType<DeerEntity>> DEER = REGISTRATE.entity("deer", DeerEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<DeerEntity>> DEER = REGISTER.register("deer", () -> EntityType.Builder.of(DeerEntity::new, MobCategory.CREATURE).sized(1.0f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<DeerEntity>> DEER = REGISTRATE.entity("deer", DeerEntity::new, MobCategory.CREATURE)
       .loot((p, e) ->
           p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
@@ -75,9 +85,11 @@ public class ModEntities {
           )
       )
       .properties(o -> o.sized(1.0f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
-      .register();
+      .register();*/
 
-  public static RegistryEntry<EntityType<FennecEntity>> FENNEC = REGISTRATE.entity("fennec", FennecEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<FennecEntity>> FENNEC = REGISTER.register("fennec", () -> EntityType.Builder.of(FennecEntity::new, MobCategory.CREATURE).sized(0.75f, 0.75f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<FennecEntity>> FENNEC = REGISTRATE.entity("fennec", FennecEntity::new, MobCategory.CREATURE)
       .loot((p, e) -> p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(ModItems.PELT.get())
@@ -89,9 +101,11 @@ public class ModEntities {
           )
       )
       .properties(o -> o.sized(0.75f, 0.75f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
-      .register();
+      .register();*/
 
-  public static RegistryEntry<EntityType<SproutEntity>> TAN_SPROUT = REGISTRATE.entity("tan_sprout", SproutEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<SproutEntity>> TAN_SPROUT = REGISTER.register("tan_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE).sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<SproutEntity>> TAN_SPROUT = REGISTRATE.entity("tan_sprout", SproutEntity::new, MobCategory.CREATURE)
       .loot((p, e) -> p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(Items.POTATO)
@@ -105,9 +119,11 @@ public class ModEntities {
           )
       )
       .properties(o -> o.sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
-      .register();
+      .register();*/
 
-  public static RegistryEntry<EntityType<SproutEntity>> GREEN_SPROUT = REGISTRATE.entity("green_sprout", SproutEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<SproutEntity>> GREEN_SPROUT = REGISTER.register("green_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE).sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<SproutEntity>> GREEN_SPROUT = REGISTRATE.entity("green_sprout", SproutEntity::new, MobCategory.CREATURE)
       .loot((p, e) -> p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(Items.MELON_SLICE)
@@ -119,9 +135,11 @@ public class ModEntities {
           )
       )
       .properties(o -> o.sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
-      .register();
+      .register();*/
 
-  public static RegistryEntry<EntityType<SproutEntity>> RED_SPROUT = REGISTRATE.entity("red_sprout", SproutEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<SproutEntity>> RED_SPROUT = REGISTER.register("red_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE).sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<SproutEntity>> RED_SPROUT = REGISTRATE.entity("red_sprout", SproutEntity::new, MobCategory.CREATURE)
       .loot((p, e) -> p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(Items.BEETROOT)
@@ -135,9 +153,11 @@ public class ModEntities {
           )
       )
       .properties(o -> o.sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
-      .register();
+      .register();*/
 
-  public static RegistryEntry<EntityType<SproutEntity>> PURPLE_SPROUT = REGISTRATE.entity("purple_sprout", SproutEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<SproutEntity>> PURPLE_SPROUT = REGISTER.register("purple_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE).sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<SproutEntity>> PURPLE_SPROUT = REGISTRATE.entity("purple_sprout", SproutEntity::new, MobCategory.CREATURE)
       .loot((p, e) -> p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(ModItems.AUBERGINE.get())
@@ -151,9 +171,11 @@ public class ModEntities {
           )
       )
       .properties(o -> o.sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
-      .register();
+      .register();*/
 
-  public static RegistryEntry<EntityType<OwlEntity>> OWL = REGISTRATE.entity("owl", OwlEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<OwlEntity>> OWL = REGISTER.register("owl", () -> EntityType.Builder.of(OwlEntity::new, MobCategory.CREATURE).sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<OwlEntity>> OWL = REGISTRATE.entity("owl", OwlEntity::new, MobCategory.CREATURE)
       .loot((p, e) -> p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(Items.FEATHER)
@@ -165,9 +187,11 @@ public class ModEntities {
           )
       )
       .properties(o -> o.sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
-      .register();
+      .register();*/
 
-  public static RegistryEntry<EntityType<DuckEntity>> DUCK = REGISTRATE.entity("duck", DuckEntity::new, MobCategory.CREATURE)
+  public static DeferredHolder<EntityType<?>, EntityType<DuckEntity>> DUCK = REGISTER.register("duck", () -> EntityType.Builder.of(DuckEntity::new, MobCategory.CREATURE).sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build(null));
+
+/*  public static RegistryEntry<EntityType<DuckEntity>> DUCK = REGISTRATE.entity("duck", DuckEntity::new, MobCategory.CREATURE)
       .loot((p, e) -> p.add(e, LootTable.lootTable()
               .withPool(LootPool.lootPool()
                   .add(LootItem.lootTableItem(Items.FEATHER)
@@ -179,18 +203,19 @@ public class ModEntities {
           )
       )
       .properties(o -> o.sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3))
-      .register();
+      .register();*/
 
-  public static void registerEntities() {
-    SpawnPlacements.register(DEER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-    SpawnPlacements.register(GREEN_SPROUT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-    SpawnPlacements.register(TAN_SPROUT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-    SpawnPlacements.register(RED_SPROUT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-    SpawnPlacements.register(PURPLE_SPROUT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-    SpawnPlacements.register(FENNEC.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-    SpawnPlacements.register(BEETLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-    SpawnPlacements.register(OWL.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, OwlEntity::placement);
-    SpawnPlacements.register(DUCK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+  @SubscribeEvent
+  public static void registerEntitySpawns(RegisterSpawnPlacementsEvent event) {
+    event.register(DEER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(GREEN_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(TAN_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(RED_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(PURPLE_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(FENNEC.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(BEETLE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(OWL.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, OwlEntity::placement, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(DUCK.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
   }
 
   @SubscribeEvent
@@ -206,6 +231,7 @@ public class ModEntities {
     event.put(ModEntities.DUCK.get(), DuckEntity.attributes().build());
   }
 
-  public static void load() {
+  public static void register(IEventBus bus) {
+    REGISTER.register(bus);
   }
 }

@@ -56,5 +56,5 @@ public interface IParentChild<T extends IParentChild<T>> {
     }
   }
 
-  Supplier<SpellModifier> NO_PARENT = LazySupplier.of(() -> null);
+  Supplier<SpellModifier> NO_PARENT = () -> null;
 }

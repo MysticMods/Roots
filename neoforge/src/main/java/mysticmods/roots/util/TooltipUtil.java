@@ -6,7 +6,6 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
-import mysticmods.roots.init.ModLang;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -31,7 +30,8 @@ public class TooltipUtil {
           pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", entry.getSlot() + 1, entry.getSpell() == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.getSpell().getStyledName(), entry.getSlot() == storage.getSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("")));
         }
       } else {
-        pTooltipComponents.add(ModLang.holdShift());
+        // TODO:
+        //pTooltipComponents.add(ModLang.holdShift());
       }
     }
   }

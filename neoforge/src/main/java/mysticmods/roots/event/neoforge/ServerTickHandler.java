@@ -1,27 +1,20 @@
-package mysticmods.roots.event.forge;
+package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Capabilities;
-import mysticmods.roots.network.Networking;
-import mysticmods.roots.network.client.ClientBoundGrantSyncPacket;
-import mysticmods.roots.network.client.ClientBoundHerbSyncPacket;
-import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
-import net.minecraft.server.level.ServerPlayer;
-
-
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ServerTickHandler {
   @SubscribeEvent
-  public static void onServerTickEnd(TickEvent.ServerTickEvent event) {
-    if (event.phase == TickEvent.Phase.END) {
-      for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
+  public static void onServerTickEnd(ServerTickEvent.Post event) {
+/*      for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
         player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(grant -> {
           if (grant.isDirty()) {
             Networking.sendTo(new ClientBoundGrantSyncPacket(grant.toRecord()), player);
@@ -41,8 +34,7 @@ public class ServerTickHandler {
             reputation.setDirty(false);
           }
         });
-      }
-    }
+      }*/
   }
 
 
@@ -56,26 +48,24 @@ public class ServerTickHandler {
   private static boolean tickingList = false;
 
   @SubscribeEvent
-  public static void onServerTickStart(TickEvent.ServerTickEvent event) {
-    if (event.phase == TickEvent.Phase.START) {
-      List<Runnable> copy;
-      synchronized (listLock) {
-        tickingList = true;
-        copy = new ArrayList<>(runnableList);
-        tickingList = false;
+  public static void onServerTickStart(ServerTickEvent.Pre event) {
+    List<Runnable> copy;
+    synchronized (listLock) {
+      tickingList = true;
+      copy = new ArrayList<>(runnableList);
+      tickingList = false;
+    }
+    synchronized (worldLock) {
+      for (Runnable runnable : copy) {
+        runnable.run();
       }
-      synchronized (worldLock) {
-        for (Runnable runnable : copy) {
-          runnable.run();
-        }
-      }
-      synchronized (listLock) {
-        tickingList = true;
-        runnableList.clear();
-        runnableList.addAll(pendingRunnables);
-        tickingList = false;
-        pendingRunnables.clear();
-      }
+    }
+    synchronized (listLock) {
+      tickingList = true;
+      runnableList.clear();
+      runnableList.addAll(pendingRunnables);
+      tickingList = false;
+      pendingRunnables.clear();
     }
   }
 

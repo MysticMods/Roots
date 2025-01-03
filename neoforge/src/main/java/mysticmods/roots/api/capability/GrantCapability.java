@@ -23,7 +23,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.*;
 
-public class GrantCapability implements INetworkedCapability<GrantCapability.SerializedGrantRecord> {
+public class GrantCapability {
   private boolean dirty = true;
   private final Set<Spell> GRANTED_SPELLS = new ObjectLinkedOpenHashSet<>();
   private final Set<SpellModifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
@@ -35,9 +35,9 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
   private Map<Spell, List<LibraryModifier>> LIBRARY_MODIFIERS = null;
 
   private void reset() {
-        NeoForgeRegistries
+    NeoForgeRegistries
 
-    IMMUTABLE_GRANTED_MODIFIERS = null;
+        IMMUTABLE_GRANTED_MODIFIERS = null;
     IMMUTABLE_GRANTED_SPELLS = null;
     LIBRARY_SPELLS = null;
     LIBRARY_MODIFIERS = null;
@@ -54,16 +54,16 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     return GRANTED_MODIFIERS.contains(modifier);
   }
 
-  public boolean canGrant (Grant grant) {
+  public boolean canGrant(Grant grant) {
     if (grant.type() == Grant.Type.SPELL) {
-      Spell spell = RootsRegistries.SPELL_REGISTRY.get().get(grant.id());
+      Spell spell = RootsRegistries.SPELLS.get(grant.id());
       if (spell == null) {
         throw new NullPointerException("Spell " + grant.id() + " does not exist!");
       }
 
       return grant.repeatable() || !hasSpell(spell);
     } else if (grant.type() == Grant.Type.MODIFIER) {
-      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.id());
+      SpellModifier modifier = RootsRegistries.SPELL_MODIFIERS.get(grant.id());
       if (modifier == null) {
         throw new NullPointerException("Modifier " + grant.id() + " does not exist!");
       }
@@ -74,9 +74,9 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     return false;
   }
 
-  public boolean grant (ServerPlayer player, Grant grant) {
+  public boolean grant(ServerPlayer player, Grant grant) {
     if (grant.type() == Grant.Type.SPELL) {
-      Spell spell = RootsRegistries.SPELL_REGISTRY.get().get(grant.id());
+      Spell spell = RootsRegistries.SPELLS.get(grant.id());
       if (spell == null) {
         throw new NullPointerException("Spell " + grant.id() + " does not exist!");
       }
@@ -87,7 +87,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
         return true;
       }
     } else if (grant.type() == Grant.Type.MODIFIER) {
-      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(grant.id());
+      SpellModifier modifier = RootsRegistries.SPELL_MODIFIERS.get(grant.id());
       if (modifier == null) {
         throw new NullPointerException("Modifier " + grant.id() + " does not exist!");
       }
@@ -149,7 +149,7 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     if (LIBRARY_SPELLS == null) {
       LIBRARY_SPELLS = new ArrayList<>();
       GRANTED_SPELLS.stream().sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, true)));
-      RootsRegistries.SPELL_REGISTRY.get().stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, false)));
+      RootsRegistries.SPELLS.stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, false)));
     }
     return LIBRARY_SPELLS;
   }
@@ -168,7 +168,6 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     });
   }
 
-  @Override
   public void fromRecord(SerializedGrantRecord record) {
     this.GRANTED_MODIFIERS.clear();
     this.GRANTED_SPELLS.clear();
@@ -178,17 +177,14 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     setDirty(true);
   }
 
-  @Override
   public SerializedGrantRecord toRecord() {
     return new SerializedGrantRecord(GRANTED_SPELLS, GRANTED_MODIFIERS);
   }
 
-  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
 
-  @Override
   public boolean isDirty() {
     return dirty;
   }
@@ -197,12 +193,12 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     CompoundTag result = new CompoundTag();
     ListTag spells = new ListTag();
     GRANTED_SPELLS.forEach(o ->
-      spells.add(StringTag.valueOf(o.getKey().toString()))
+        spells.add(StringTag.valueOf(o.getKey().toString()))
     );
     result.put("spells", spells);
     ListTag modifiers = new ListTag();
     GRANTED_MODIFIERS.forEach(o ->
-      modifiers.add(StringTag.valueOf(o.getKey().toString()))
+        modifiers.add(StringTag.valueOf(o.getKey().toString()))
     );
     result.put("modifiers", modifiers);
     return result;
@@ -215,14 +211,14 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     ListTag modifiers = nbt.getList("modifiers", Tag.TAG_STRING);
     for (int i = 0; i < spells.size(); i++) {
       ResourceLocation key = ResourceLocation.tryParse(spells.getString(i));
-      Spell spell = RootsRegistries.SPELL_REGISTRY.get().get(key);
+      Spell spell = RootsRegistries.SPELLS.get(key);
       if (spell != null) {
         GRANTED_SPELLS.add(spell);
       }
     }
     for (int i = 0; i < modifiers.size(); i++) {
       ResourceLocation key = ResourceLocation.tryParse(modifiers.getString(i));
-      SpellModifier modifier = RootsRegistries.MODIFIER_REGISTRY.get().get(key);
+      SpellModifier modifier = RootsRegistries.SPELL_MODIFIERS.get(key);
       if (modifier != null) {
         GRANTED_MODIFIERS.add(modifier);
       }
@@ -230,19 +226,13 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
     setDirty(true);
   }
 
-/*  @NotNull
-  @Override
-  public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-    return Capabilities.GRANT_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this));
-  }*/
-
   public static SerializedGrantRecord fromNetwork(FriendlyByteBuf buf) {
     SerializedGrantRecord result = new SerializedGrantRecord();
     result.fromNetwork(buf);
     return result;
   }
 
-  public static class SerializedGrantRecord implements SerializedCapability {
+  public static class SerializedGrantRecord {
     private final Set<Spell> GRANTED_SPELLS = new ObjectLinkedOpenHashSet<>();
     private final Set<SpellModifier> GRANTED_MODIFIERS = new ObjectLinkedOpenHashSet<>();
 
@@ -254,29 +244,27 @@ public class GrantCapability implements INetworkedCapability<GrantCapability.Ser
       this.GRANTED_MODIFIERS.addAll(modifiers);
     }
 
-    @Override
     public void fromNetwork(FriendlyByteBuf buf) {
       GRANTED_SPELLS.clear();
       GRANTED_MODIFIERS.clear();
       int spellCount = buf.readVarInt();
       for (int i = 0; i < spellCount; i++) {
-        GRANTED_SPELLS.add(RootsRegistries.SPELL_REGISTRY.get().byIdOrThrow(buf.readVarInt()));
+        GRANTED_SPELLS.add(RootsRegistries.SPELLS.byIdOrThrow(buf.readVarInt()));
       }
       int modifierCount = buf.readVarInt();
       for (int i = 0; i < modifierCount; i++) {
-        GRANTED_MODIFIERS.add(RootsRegistries.MODIFIER_REGISTRY.get().byIdOrThrow(buf.readVarInt()));
+        GRANTED_MODIFIERS.add(RootsRegistries.SPELL_MODIFIERS.byIdOrThrow(buf.readVarInt()));
       }
     }
 
-    @Override
     public void toNetwork(FriendlyByteBuf buf) {
       buf.writeVarInt(GRANTED_SPELLS.size());
       for (Spell spell : GRANTED_SPELLS) {
-        buf.writeVarInt(RootsRegistries.SPELL_REGISTRY.get().getId(spell));
+        buf.writeVarInt(RootsRegistries.SPELLS.getId(spell));
       }
       buf.writeVarInt(GRANTED_MODIFIERS.size());
       for (SpellModifier modifier : GRANTED_MODIFIERS) {
-        buf.writeVarInt(RootsRegistries.MODIFIER_REGISTRY.get().getId(modifier));
+        buf.writeVarInt(RootsRegistries.SPELL_MODIFIERS.getId(modifier));
       }
     }
 

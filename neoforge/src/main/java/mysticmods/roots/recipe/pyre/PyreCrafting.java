@@ -3,11 +3,23 @@ package mysticmods.roots.recipe.pyre;
 import mysticmods.roots.api.recipe.crafting.RootsTileCrafting;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
+// TODO:
 public class PyreCrafting extends RootsTileCrafting<PyreInventory, PyreBlockEntity> {
   public PyreCrafting(PyreInventory handler, PyreBlockEntity blockEntity, @Nullable Player player) {
     super(handler, blockEntity, player);
+  }
+
+  @Override
+  public ItemStack getItem(int i) {
+    return null;
+  }
+
+  @Override
+  public int size() {
+    return 0;
   }
 }

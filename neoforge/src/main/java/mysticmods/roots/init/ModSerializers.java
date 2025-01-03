@@ -33,15 +33,14 @@ public class ModSerializers {
   public static final DeferredHolder<RecipeSerializer<?>, BarkRecipe.Serializer> BARK = RECIPE_SERIALIZERS.register("bark", () -> new BarkRecipe.Serializer());
   public static final DeferredHolder<RecipeSerializer<?>, DynamicBarkRecipe.Serializer> DYNAMIC_BARK = RECIPE_SERIALIZERS.register("dynamic_bark", () -> new DynamicBarkRecipe.Serializer());
   public static final DeferredHolder<RecipeSerializer<?>, RunicBlockRecipe.Serializer> RUNIC_BLOCK = RECIPE_SERIALIZERS.register("runic_block", () -> new RunicBlockRecipe.Serializer());
-  public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", () -> new RunicEntityRecipe.Serializer());
+  public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", () -> new RunicEntityRecipe.Serializer());*/
 
   public static final DeferredHolder<SnapshotSerializer<?>, SkySoarerSnapshot.Serializer> SKY_SOARER = SNAPSHOT_SERIALIZERS.register("sky_soarer", () -> new SkySoarerSnapshot.Serializer(SkySoarerSnapshot::new));
   public static final DeferredHolder<SnapshotSerializer<?>, PetalShellSnapshot.Serializer> PETAL_SHELL = SNAPSHOT_SERIALIZERS.register("petal_shell", () -> new PetalShellSnapshot.Serializer(PetalShellSnapshot::new));
   public static final DeferredHolder<SnapshotSerializer<?>, ExtensionSnapshot.Serializer> EXTENSION = SNAPSHOT_SERIALIZERS.register("extension", () -> new ExtensionSnapshot.Serializer(ExtensionSnapshot::new));
 
-
   public static void register (IEventBus bus) {
     RECIPE_SERIALIZERS.register(bus);
     SNAPSHOT_SERIALIZERS.register(bus);
-  }*/
+  }
 }

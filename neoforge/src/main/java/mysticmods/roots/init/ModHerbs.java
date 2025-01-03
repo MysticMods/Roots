@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -24,6 +25,7 @@ public class ModHerbs {
   public static final DeferredHolder<Herb, Herb> WILDEWHEET = REGISTER.register("wildewheet", () -> new Herb(ModItems.WILDEWHEET, RootsTags.Items.WILDEWHEET_HERB, ChatFormatting.GOLD));
   public static final DeferredHolder<Herb, Herb> BAFFLECAP = REGISTER.register("bafflecap", () -> new Herb(ModItems.BAFFLECAP, RootsTags.Items.BAFFLECAP_HERB, ChatFormatting.DARK_GREEN));
 
-  public static void load() {
+  public static void register (IEventBus bus) {
+    REGISTER.register(bus);
   }
 }

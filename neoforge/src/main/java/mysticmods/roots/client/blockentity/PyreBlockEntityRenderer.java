@@ -2,7 +2,7 @@ package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -47,8 +48,8 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
         f /= f3;
         f1 /= f3;
         f2 /= f3;
-        pConsumer.vertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ)).color(1f, 0.5f, 0.25f, 1f).normal(pose.normal(), f, f1, f2).endVertex();
-        pConsumer.vertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ)).color(1f, 0.5f, 0.25f, 1f).normal(pose.normal(), f, f1, f2).endVertex();
+        pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ)).setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
+        pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ)).setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
       });
       pPoseStack.popPose();
     }
@@ -59,13 +60,13 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       ItemStack item = items.get(i);
       pPoseStack.pushPose();
       random.setSeed(item.hashCode());
-      float shifted = (float) (RenderTickHandler.getClientTicks() + pPartialTick + i * (360.0 / items.size()));
+      float shifted = (float) (/*RenderTickHandler.getClientTicks() + */pPartialTick + i * (360.0 / items.size()));
       pPoseStack.translate(0.5, 0.5 + 0.05 * ((double) Mth.sin((float) Math.toRadians((double) shifted * 4))), 0.5);
-      pPoseStack.mulPose(Vector3f.YP.rotationDegrees(shifted));
+      pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.translate(-0.5, 0, 0);
-      pPoseStack.mulPose(Vector3f.YP.rotationDegrees(shifted));
+      pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
-      Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemTransforms.TransformType.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, 0);
+      Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
   }

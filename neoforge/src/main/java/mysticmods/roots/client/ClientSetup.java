@@ -25,12 +25,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.world.entity.player.Player;
-
-
-
-
-
-
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 
 import java.awt.*;
@@ -77,7 +77,8 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void onColorHandlerItem(RegisterColorHandlersEvent.Item event) {
-    event.register((stack, index) -> index == 1 ? OverworldBiomes.NORMAL_WATER_COLOR : -1, ModBlocks.UNENDING_BOWL.get());
+    // OVerworldBiome.NORMAL_WATER_COLOR
+    event.register((stack, index) -> index == 1 ? 4159204 : -1, ModBlocks.UNENDING_BOWL.get());
     event.register((stack, index) -> {
       if (index != 0) {
         SpellStorage storage = SpellStorage.getOrCreate(stack);
@@ -97,15 +98,15 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void onRegisterEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
-    event.registerEntityRenderer(ModEntities.BEETLE.get(), BeetleRenderer::new);
-    event.registerEntityRenderer(ModEntities.DEER.get(), DeerRenderer::new);
-    event.registerEntityRenderer(ModEntities.DUCK.get(), DuckRenderer::new);
-    event.registerEntityRenderer(ModEntities.OWL.get(), OwlRenderer::new);
-    event.registerEntityRenderer(ModEntities.FENNEC.get(), FennecRenderer::new);
-    event.registerEntityRenderer(ModEntities.GREEN_SPROUT.get(), SproutRenderer::new);
-    event.registerEntityRenderer(ModEntities.TAN_SPROUT.get(), SproutRenderer::new);
-    event.registerEntityRenderer(ModEntities.RED_SPROUT.get(), SproutRenderer::new);
-    event.registerEntityRenderer(ModEntities.PURPLE_SPROUT.get(), SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.BEETLE, BeetleRenderer::new);
+    event.registerEntityRenderer(ModEntities.DEER, DeerRenderer::new);
+    event.registerEntityRenderer(ModEntities.DUCK, DuckRenderer::new);
+    event.registerEntityRenderer(ModEntities.OWL, OwlRenderer::new);
+    event.registerEntityRenderer(ModEntities.FENNEC, FennecRenderer::new);
+    event.registerEntityRenderer(ModEntities.GREEN_SPROUT, SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.TAN_SPROUT, SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.RED_SPROUT, SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.PURPLE_SPROUT, SproutRenderer::new);
   }
 
   @SubscribeEvent
@@ -122,11 +123,11 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void registerLayers(EntityRenderersEvent.AddLayers event) {
-    for (String skin : event.getSkins()) {
+/*    for (String skin : event.getSkins()) {
       LivingEntityRenderer<Player, PlayerModel<Player>> skinRenderer = event.getSkin(skin);
       if (skinRenderer != null) {
         skinRenderer.addLayer(new ShoulderRenderLayer<>(skinRenderer));
       }
-    }
+    }*/
   }
 }

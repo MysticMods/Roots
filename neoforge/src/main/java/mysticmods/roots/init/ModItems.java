@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
 import net.minecraft.world.item.*;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -1230,7 +1231,7 @@ public class ModItems {
       .register();
 */
 
-
-  public static void load() {
+  public static void register (IEventBus bus) {
+    ITEMS.register(bus);
   }
 }

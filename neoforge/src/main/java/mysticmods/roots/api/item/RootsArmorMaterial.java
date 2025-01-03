@@ -9,7 +9,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public class RootsArmorMaterial implements ArmorMaterial {
+/*public class RootsArmorMaterial implements ArmorMaterial {
   private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
   private final String name;
   private final int durabilityMultiplier;
@@ -70,4 +70,4 @@ public class RootsArmorMaterial implements ArmorMaterial {
   public float getKnockbackResistance() {
     return this.knockbackResistance;
   }
-}
+}*/

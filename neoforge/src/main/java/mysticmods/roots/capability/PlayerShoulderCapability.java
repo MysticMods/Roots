@@ -4,17 +4,13 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.IPlayerShoulderCapability;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-
-
-
-
-
-
+import net.neoforged.fml.util.ObfuscationReflectionHelper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -22,7 +18,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
 
-public class PlayerShoulderCapability implements IPlayerShoulderCapability, ICapabilitySerializable<CompoundTag>, ICapabilityProvider {
+public class PlayerShoulderCapability implements IPlayerShoulderCapability {
   public static MethodHandle setRightShoulder = null;
   public static MethodHandle setLeftShoulder = null;
 
@@ -65,7 +61,7 @@ public class PlayerShoulderCapability implements IPlayerShoulderCapability, ICap
   @Override
   @Nullable
   public EntityType<?> getEntityType(ResourceLocation registryName) {
-    return ForgeRegistries.ENTITY_TYPES.getValue(registryName);
+    return BuiltInRegistries.ENTITY_TYPE.get(registryName);
   }
 
   @Override
@@ -86,7 +82,7 @@ public class PlayerShoulderCapability implements IPlayerShoulderCapability, ICap
     this.animalSerialized = new CompoundTag();
     entity.save(this.animalSerialized);
     this.shouldered = true;
-    this.registryName = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
+    this.registryName = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
   }
 
   @Override
@@ -97,13 +93,6 @@ public class PlayerShoulderCapability implements IPlayerShoulderCapability, ICap
     return result;
   }
 
-  @NotNull
-  @Override
-  public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @org.jetbrains.annotations.Nullable Direction side) {
-    return Capabilities.PLAYER_SHOULDER_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this));
-  }
-
-  @Override
   public CompoundTag serializeNBT() {
     CompoundTag result = new CompoundTag();
     result.put("animalSerialized", animalSerialized);
@@ -112,7 +101,6 @@ public class PlayerShoulderCapability implements IPlayerShoulderCapability, ICap
     return result;
   }
 
-  @Override
   public void deserializeNBT(CompoundTag incoming) {
     if (incoming.contains("animalSerialized")) {
       this.animalSerialized = incoming.getCompound("animalSerialized");
@@ -121,7 +109,7 @@ public class PlayerShoulderCapability implements IPlayerShoulderCapability, ICap
       this.shouldered = incoming.getBoolean("shouldered");
     }
     if (incoming.contains("registryName")) {
-      this.registryName = incoming.getString("registryName").isEmpty() ? null : new ResourceLocation(incoming.getString("registryName"));
+      this.registryName = incoming.getString("registryName").isEmpty() ? null : ResourceLocation.parse(incoming.getString("registryName"));
     }
   }
 }

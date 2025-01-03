@@ -1,4 +1,4 @@
-package mysticmods.roots.event.forge;
+package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.BlockPos;
@@ -9,23 +9,25 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-
-
-
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class HoeHandler {
   @SubscribeEvent
   public static void onHoeUse(BlockEvent.BlockToolModificationEvent event) {
-    if (event.getToolAction() == ToolActions.HOE_TILL) {
+    if (event.getItemAbility() == ItemAbilities.HOE_TILL) {
       LevelAccessor world = event.getLevel();
       UseOnContext pContext = event.getContext();
       BlockPos blockpos = pContext.getClickedPos();
       FluidState fluidstate = world.getFluidState(blockpos.above());
       if (pContext.getClickedFace() != Direction.DOWN && fluidstate.is(FluidTags.WATER)) {
         BlockState blockstate = world.getBlockState(blockpos);
-        if (blockstate.is(Blocks.GRASS) || blockstate.is(Blocks.DIRT_PATH) || blockstate.is(Blocks.DIRT)) {
+        // TODO: Tag
+        if (blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(Blocks.DIRT_PATH) || blockstate.is(Blocks.DIRT)) {
           event.setFinalState(Blocks.FARMLAND.defaultBlockState());
         }
       }

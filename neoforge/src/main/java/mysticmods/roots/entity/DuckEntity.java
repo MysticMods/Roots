@@ -20,8 +20,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.Tags;
 
 
 import javax.annotation.Nullable;
@@ -37,7 +38,7 @@ public class DuckEntity extends Animal {
 
   public DuckEntity(EntityType<? extends Animal> entityType, Level level) {
     super(entityType, level);
-    this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
+    this.setPathfindingMalus(PathType.WATER, 0.0f);
   }
 
   public static AttributeSupplier.Builder attributes() {
@@ -77,7 +78,7 @@ public class DuckEntity extends Animal {
   @org.jetbrains.annotations.Nullable
   @Override
   public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pEntity) {
-    return ModEntities.DUCK.get().create(pLevel);
+    return ModEntities.DUCK.create(pLevel);
   }
 
   @Override
@@ -85,15 +86,15 @@ public class DuckEntity extends Animal {
     super.aiStep();
     this.oFlap = this.flap;
     this.oFlapSpeed = this.flapSpeed;
-    this.flapSpeed = (float) ((double) this.flapSpeed + (double) (this.onGround ? -1 : 4) * 0.3D);
+    this.flapSpeed = (float) ((double) this.flapSpeed + (double) (this.onGround() ? -1 : 4) * 0.3D);
     this.flapSpeed = Mth.clamp(this.flapSpeed, 0.0F, 1.0F);
-    if (!this.isInWater() && !this.onGround && this.flapping < 1.0F) {
+    if (!this.isInWater() && !this.onGround() && this.flapping < 1.0F) {
       this.flapping = 1.0F;
     }
 
     this.flapping = (float) ((double) this.flapping * 0.9D);
     Vec3 vector3d = this.getDeltaMovement();
-    if (!this.onGround && vector3d.y < 0.0D) {
+    if (!this.onGround() && vector3d.y < 0.0D) {
       this.setDeltaMovement(vector3d.multiply(1.0D, 0.6D, 1.0D));
     }
 

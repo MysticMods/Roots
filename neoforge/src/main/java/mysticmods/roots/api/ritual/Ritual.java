@@ -1,7 +1,7 @@
 package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.property.RitualProperty;
-import mysticmods.roots.api.registry.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.DescribedEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -16,7 +16,7 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.function.Predicate;
 
-public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
+public abstract class Ritual extends DescribedEntry {
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected int duration = 0;
@@ -51,7 +51,8 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
   }
 
   private void initProperties() {
-    RitualProperty<Integer> prop;
+    // Data map todo!
+/*    RitualProperty<Integer> prop;
     prop = getDurationProperty();
     if (prop != null) {
       duration = prop.getValue();
@@ -67,7 +68,7 @@ public abstract class Ritual extends DescribedRegistryEntry<Ritual> {
     prop = getIntervalProperty();
     if (prop != null) {
       interval = prop.getValue();
-    }
+    }*/
   }
 
   protected abstract void initialize();

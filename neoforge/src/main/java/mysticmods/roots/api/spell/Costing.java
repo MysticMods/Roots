@@ -19,8 +19,7 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-
-
+import net.neoforged.neoforge.items.IItemHandler;
 
 
 import java.util.ArrayList;
@@ -69,10 +68,9 @@ public class Costing {
         // TODO: Pouches are just a cap?
         /*      } else if (inSlot.is(RootsTags.Items.POUCHES)) {*/
       } else {
-        LazyOptional<IItemHandler> itemCap = inSlot.getCapability(ForgeCapabilities.ITEM_HANDLER);
-        if (itemCap.isPresent()) {
+        IItemHandler cap = inSlot.getCapability(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.ITEM, null);
+        if (cap != null) {
           // TODO: check the item cap
-          IItemHandler cap = itemCap.orElseThrow(() -> new IllegalStateException("item cap is present but is null"));
           for (int j = 0; j < cap.getSlots(); j++) {
             ItemStack inSlot2 = cap.getStackInSlot(j);
             Herb herb2 = Herb.getHerb(inSlot2);
@@ -81,7 +79,7 @@ public class Costing {
             }
           }
         } else {
-          CompoundTag tag = inSlot.getTag();
+/*          CompoundTag tag = inSlot.getTag();
           // PROBLEMATIC ASSUMPTIONS HERE
           if (tag != null && tag.contains("Items", Tag.TAG_LIST)) {
             // TODO: try to read it like a shulker box
@@ -100,7 +98,7 @@ public class Costing {
                 herbMap.computeIfAbsent(herb2, k -> new ArrayList<>()).add(new HerbEntry(HerbEntryType.POUCH, herb2, i, inSlot2.getCount(), j));
               }
             }
-          }
+          }*/
         }
       }
     }
@@ -115,7 +113,7 @@ public class Costing {
 
 
     Inventory playerInventory = player.getInventory();
-    LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);
+/*    LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);
 
     //Map<Herb, List<HerbEntry>> herbMap = herbMap(player);
 
@@ -136,8 +134,8 @@ public class Costing {
             return false;
           }
         }
-      }
-    }
+      }*/
+    //}
 
     return true;
   }
@@ -158,7 +156,7 @@ public class Costing {
     if (player.isCreative()) {
       return false;
     }
-    if (player.getLevel().isClientSide()) {
+    if (player.level().isClientSide()) {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
     }
     calculateCosts(true, false);
@@ -169,7 +167,7 @@ public class Costing {
     }
 
     Inventory playerInventory = player.getInventory();
-    LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);
+/*    LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);
 
     //Map<Herb, List<HerbEntry>> herbMap = herbMap(player);
 
@@ -183,12 +181,12 @@ public class Costing {
             ItemStack stack = playerInventory.getItem(i);
             if (stack.is(entry.getKey().getTag())) {
               if (stack.getCount() >= toConsume) {
-                /*                RootsAPI.LOG.info("Shrunk stack of {} by {}", stack, toConsume);*/
+                *//*                RootsAPI.LOG.info("Shrunk stack of {} by {}", stack, toConsume);*//*
                 stack.shrink(toConsume);
                 toConsume = 0;
                 break;
               } else {
-                /*                RootsAPI.LOG.info("Shrunk stack of {} by {} to 0", stack, stack.getCount());*/
+                *//*                RootsAPI.LOG.info("Shrunk stack of {} by {} to 0", stack, stack.getCount());*//*
                 toConsume -= stack.getCount();
                 stack.setCount(0);
               }
@@ -205,7 +203,7 @@ public class Costing {
           playerInventory.setChanged();
         }
       }
-    }
+    }*/
 
     return true;
   }

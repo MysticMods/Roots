@@ -88,7 +88,8 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
   }
 
   protected void initializeProperties() {
-    SpellProperty<Integer> cooldownProperty = getCooldownProperty();
+    // TODO: Data maps!
+/*    SpellProperty<Integer> cooldownProperty = getCooldownProperty();
     if (cooldownProperty != null) {
       this.cooldown = cooldownProperty.getValue();
     } else {
@@ -97,7 +98,7 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
     SpellProperty<Double> reachProperty = getReachProperty();
     if (reachProperty != null) {
       this.reach = reachProperty.getValue();
-    }
+    }*/
   }
 
   public abstract void initialize();

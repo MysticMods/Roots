@@ -1,10 +1,9 @@
+/*
 package mysticmods.roots.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+
 import mysticmods.roots.util.EnumUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -14,16 +13,20 @@ import java.util.Arrays;
 
 import static mysticmods.roots.client.Model3D.SpriteInfo;
 
+*/
 /**
  * Adapted from Mekanism's RenderResizableCuboid
  * Adapted from Mantle's FluidRenderer and Tinker's SmelteryTankRenderer
- */
+ *//*
+
 public class RenderResizableCuboid {
 
-  /**
+  */
+/**
    * Used to not need to create multiple arrays when we just want to fill it differently at times, and given rendering TERs is not multithreaded it is perfectly safe to
    * just use one backing "temporary" array.
-   */
+   *//*
+
   private static final int[] combinedARGB = new int[EnumUtils.DIRECTIONS.length];
   private static final Vector3f NORMAL = new Vector3f(1, 1, 1);
 
@@ -39,9 +42,11 @@ public class RenderResizableCuboid {
     renderCube(cube, matrix, buffer, combinedARGB, light, overlay, faceDisplay, fakeDisableDiffuse);
   }
 
-  /**
+  */
+/**
    * @implNote Based off of Tinker's
-   */
+   *//*
+
   public static void renderCube(Model3D cube, PoseStack matrix, VertexConsumer buffer, int[] colors, int light, int overlay, FaceDisplay faceDisplay, boolean fakeDisableDiffuse) {
     //TODO: Further attempt to fix z-fighting at larger distances if we make it not render the sides when it is in a solid block
     // that may improve performance some, but definitely would reduce/remove the majority of remaining z-fighting that is going on
@@ -99,9 +104,11 @@ public class RenderResizableCuboid {
     matrix.popPose();
   }
 
-  /**
+  */
+/**
    * @implNote From Tinker's
-   */
+   *//*
+
   private static float[] getBlockBounds(int delta, float start, float end) {
     float[] bounds = new float[2 + delta];
     bounds[0] = start;
@@ -113,9 +120,11 @@ public class RenderResizableCuboid {
     return bounds;
   }
 
-  /**
+  */
+/**
    * @implNote From Tinker's
-   */
+   *//*
+
   private static int calculateDelta(float min, float max) {
     //The texture can stretch over more blocks than the subtracted height is if min's decimal is bigger than max's decimal (causing UV over 1)
     // ignoring the decimals prevents this, as yd then equals exactly how many ints are between the two
@@ -129,9 +138,11 @@ public class RenderResizableCuboid {
     return delta;
   }
 
-  /**
+  */
+/**
    * @implNote From Mantle with some adjustments
-   */
+   *//*
+
   private static void putTexturedQuad(VertexConsumer buffer, Matrix4f matrix, Matrix3f normalMatrix, @Nullable SpriteInfo spriteInfo, Vector3f from, Vector3f to, Direction face, int[] colors, int light, int overlay, FaceDisplay faceDisplay, Vector3f normal) {
     if (spriteInfo == null) {
       return;
@@ -274,3 +285,4 @@ public class RenderResizableCuboid {
     }
   }
 }
+*/

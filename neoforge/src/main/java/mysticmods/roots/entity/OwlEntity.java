@@ -27,7 +27,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nonnull;
@@ -69,10 +68,12 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     return pathnavigateflying;
   }
 
+/*
   @Override
   public float getEyeHeight(Pose pose) {
     return this.getBbHeight() * 0.6F;
   }
+*/
 
   @Override
   public void tick() {
@@ -83,10 +84,10 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   private void calculateFlapping() {
     this.oFlap = this.flap;
     this.oFlapSpeed = this.flapSpeed;
-    this.flapSpeed = (float) ((double) this.flapSpeed + (double) (this.onGround ? -1 : 4) * 0.3D);
+    this.flapSpeed = (float) ((double) this.flapSpeed + (double) (this.onGround() ? -1 : 4) * 0.3D);
     this.flapSpeed = Mth.clamp(this.flapSpeed, 0.0F, 1.0F);
 
-    if (!this.onGround && this.flapping < 1.0F) {
+    if (!this.onGround() && this.flapping < 1.0F) {
       this.flapping = 1.0F;
     }
 
@@ -94,7 +95,7 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
 
     Vec3 motion = this.getDeltaMovement();
 
-    if (!this.onGround && motion.y < 0.0D) {
+    if (!this.onGround() && motion.y < 0.0D) {
       this.setDeltaMovement(motion.x, motion.y * 0.6D, motion.z);
     }
 
@@ -109,7 +110,8 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   public static <T extends OwlEntity> boolean placement(EntityType<T> pAnimal, LevelAccessor worldIn, MobSpawnType reason, BlockPos blockpos, RandomSource pRandom) {
     BlockState down = worldIn.getBlockState(blockpos.below());
     Block block = down.getBlock();
-    return block instanceof LeavesBlock || block == Blocks.GRASS || (block instanceof RotatedPillarBlock && down.getMaterial() == Material.WOOD) || block == Blocks.AIR && worldIn.getMaxLocalRawBrightness(blockpos) > 8;
+    // TODO: Tag for logs
+    return block instanceof LeavesBlock || block == Blocks.GRASS_BLOCK || (block instanceof RotatedPillarBlock) || block == Blocks.AIR && worldIn.getMaxLocalRawBrightness(blockpos) > 8;
   }
 
   @Override
@@ -118,7 +120,7 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   }
 
   @Override
-  protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+  protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
   }
 
   @Override
@@ -127,10 +129,11 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     return ModEntities.OWL.get().create(world);
   }
 
-  @Override
+/*  @Override
   public boolean doHurtTarget(Entity entityIn) {
+    super.doHurtTarget()
     return entityIn.hurt(DamageSource.mobAttack(this), 3.0F);
-  }
+  }*/
 
   @Override
   @Nullable
@@ -201,6 +204,6 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
 
   @Override
   public boolean isFlying() {
-    return !this.onGround;
+    return !this.onGround();
   }
 }

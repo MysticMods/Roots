@@ -1,6 +1,6 @@
 package mysticmods.roots.data.listener;
 
-import mysticmods.roots.event.forge.DataHandler;
+import mysticmods.roots.event.neoforge.DataHandler;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;

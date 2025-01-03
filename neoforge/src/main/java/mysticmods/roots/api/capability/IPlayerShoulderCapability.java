@@ -8,7 +8,7 @@ import net.minecraft.world.entity.EntityType;
 
 import javax.annotation.Nullable;
 
-public interface IPlayerShoulderCapability extends ICapabilitySerializable<CompoundTag> {
+public interface IPlayerShoulderCapability {
   CompoundTag getAnimalSerialized();
 
   boolean isShouldered();

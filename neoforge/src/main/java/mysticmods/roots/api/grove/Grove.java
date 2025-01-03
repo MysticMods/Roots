@@ -6,6 +6,7 @@ import mysticmods.roots.api.registry.StyledRegistryEntry;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -24,6 +25,8 @@ public class Grove extends StyledRegistryEntry<Grove> {
   private final TagKey<Ritual> alignedRituals;
   private final TagKey<Ritual> opposedRituals;
 
+  private final Holder.Reference<Grove> builtinRegistryHolder = RootsRegistries.GROVES.createIntrusiveHolder(this);
+
   public Grove(ChatFormatting color, TagKey<Herb> herbs, TagKey<Grove> alignedGroves, TagKey<Grove> opposedGroves, TagKey<Spell> alignedSpells, TagKey<Spell> opposedSpells, TagKey<Ritual> alignedRituals, TagKey<Ritual> opposedRituals) {
     this.color = color;
     this.herbs = herbs;
@@ -33,6 +36,10 @@ public class Grove extends StyledRegistryEntry<Grove> {
     this.opposedSpells = opposedSpells;
     this.alignedRituals = alignedRituals;
     this.opposedRituals = opposedRituals;
+  }
+
+  public Holder.Reference<Grove> getBuiltinRegistryHolder() {
+    return builtinRegistryHolder;
   }
 
   public boolean aligned (Herb herb) {
@@ -64,24 +71,24 @@ public class Grove extends StyledRegistryEntry<Grove> {
   }
 
   public boolean is(ResourceLocation location) {
-    return RootsRegistries.GROVE_REGISTRY.get().getHolder(this).map(o -> o.is(location)).orElse(false);
+    return getBuiltinRegistryHolder().is(location);
   }
 
   public boolean is(ResourceKey<Grove> key) {
-    return RootsRegistries.GROVE_REGISTRY.get().getHolder(this).map(o -> o.is(key)).orElse(false);
+    return getBuiltinRegistryHolder().is(key);
   }
 
   public boolean is(Predicate<ResourceKey<Grove>> predicate) {
-    return RootsRegistries.GROVE_REGISTRY.get().getHolder(this).map(o -> o.is(predicate)).orElse(false);
+    return getBuiltinRegistryHolder().is(predicate);
   }
 
   public boolean is(TagKey<Grove> tag) {
-    return RootsRegistries.GROVE_REGISTRY.get().getHolder(this).map(o -> o.is(tag)).orElse(false);
+    return getBuiltinRegistryHolder().is(tag);
   }
 
   @Override
   public ResourceLocation getKey() {
-    return RootsRegistries.GROVE_REGISTRY.get().getKey(this);
+    return getBuiltinRegistryHolder().getKey().location();
   }
 
   @Override

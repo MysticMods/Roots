@@ -1,14 +1,14 @@
 package mysticmods.roots.client.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 
@@ -23,13 +23,13 @@ public class GroveCrafterBlockEntityRenderer extends BoundedBlockEntityRenderer<
 
     GroveRecipe recipe = pBlockEntity.getRecipe();
     if (recipe != null) {
-      ItemStack inSlot = recipe.getResultItem();
+      ItemStack inSlot = recipe.getResultItem(Minecraft.getInstance().getConnection().registryAccess());
       int loc = pBlockEntity.getBlockPos().hashCode();
       pPoseStack.pushPose();
-      pPoseStack.translate(0.5, 1.8 + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
+      pPoseStack.translate(0.5, 1.8 + Mth.cos((loc + /*RenderTickHandler.getClientTicks()*/ +pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
       pPoseStack.scale(0.5f, 0.5f, 0.5f);
-      pPoseStack.mulPose(Vector3f.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
-      Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemTransforms.TransformType.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, 0);
+      pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + /*RenderTickHandler.getClientTicks() +*/ pPartialTick) * 0.5f));
+      Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
   }

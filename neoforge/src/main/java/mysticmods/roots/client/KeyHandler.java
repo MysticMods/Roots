@@ -6,9 +6,10 @@ import mysticmods.roots.api.RootsTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-
-
-
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.InputEvent;
 
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)

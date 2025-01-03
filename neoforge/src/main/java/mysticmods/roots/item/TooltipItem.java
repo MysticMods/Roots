@@ -7,11 +7,8 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
 
-
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class TooltipItem extends Item {
@@ -24,9 +21,8 @@ public class TooltipItem extends Item {
   }
 
   @Override
-  @OnlyIn(Dist.CLIENT)
-  public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-    super.appendHoverText(stack, worldIn, tooltip, flagIn);
+  public void appendHoverText(ItemStack arg, TooltipContext arg2, List<Component> tooltip, TooltipFlag arg3) {
+    super.appendHoverText(arg, arg2, tooltip, arg3);
 
     tooltip.add(Component.literal(""));
     tooltip.add(Component.translatable(translationKey).setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))));

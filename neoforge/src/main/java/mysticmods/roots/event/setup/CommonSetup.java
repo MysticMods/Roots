@@ -1,24 +1,14 @@
 package mysticmods.roots.event.setup;
 
-import mysticmods.roots.advancements.Advancements;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModCompost;
-import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.network.Networking;
-import net.minecraft.world.entity.animal.Chicken;
-import net.minecraft.world.item.Tiers;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-
-
-
-
-
-
-import java.util.List;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class CommonSetup {
@@ -27,12 +17,10 @@ public class CommonSetup {
     // TODO: Should this be enqueued?
     Networking.INSTANCE.registerMessages();
 
-    TierSortingRegistry.registerTier(RootsAPI.LIVING_TOOL_TIER, RootsAPI.LIVING_TOOL_TIER_ID, List.of(), List.of(Tiers.STONE));
     // TODO: Stone plant -- was that even used???
 
     event.enqueueWork(() -> {
-      ModEntities.registerEntities();
-      Chicken.FOOD_ITEMS = CompoundIngredient.of(Chicken.FOOD_ITEMS, Ingredient.of(RootsTags.Items.SEEDS));
+      /*      Chicken.FOOD_ITEMS = CompoundIngredient.of(Chicken.FOOD_ITEMS, Ingredient.of(RootsTags.Items.SEEDS));*/
       FlowerPotBlock FLOWER_POT = (FlowerPotBlock) Blocks.FLOWER_POT;
       FLOWER_POT.addPlant(ModBlocks.STONEPETAL.getId(), ModBlocks.POTTED_STONEPETAL);
       FLOWER_POT.addPlant(ModBlocks.BAFFLECAP.getId(), ModBlocks.POTTED_BAFFLECAP);
@@ -41,7 +29,7 @@ public class CommonSetup {
       ModCompost.init();
 
       // TODO: Flammability
-      Advancements.init();
+      /*      Advancements.init();*/
 
 
     });

@@ -98,7 +98,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     } else {
       // insert
       ItemStack result = inventory.insert(inHand);
-      if (inHand.equals(result, false)) {
+      // ??? TODO
+      // it was result, false
+      if (inHand.equals(result)) {
         return InteractionResult.PASS;
       }
       player.setItemInHand(hand, result);
@@ -337,7 +339,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     RandomSource pRandom = pLevel.getRandom();
     if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.LIT) && pRandom.nextInt(10) == 0) {
-      Particles.create(ModParticles.FIERY_PARTICLE.get())
+/*      Particles.create(ModParticles.FIERY_PARTICLE.get())
         .addVelocity(0.00525f * (pRandom.nextFloat() - 0.5f), 0, 0.00525f * (pRandom.nextFloat() - 0.5f))
         .setAlpha(1f, 0.6f)
         .setScale(1f + 0.2f * pRandom.nextFloat())
@@ -345,7 +347,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         .setLifetime(50)
         .disableGravity()
         .setSpin(0)
-        .spawn(pLevel, pPos.getX() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f), pPos.getY() + 0.625f + 0.125f * pRandom.nextFloat(), pPos.getZ() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f));
+        .spawn(pLevel, pPos.getX() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f), pPos.getY() + 0.625f + 0.125f * pRandom.nextFloat(), pPos.getZ() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f));*/
     }
     // ritual animation tick still happens ON THE SERVER
   }

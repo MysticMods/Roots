@@ -5,19 +5,12 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-
-
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-public class HerbCapability implements ICapabilityProvider, ICapabilitySerializable<ListTag>, INetworkedCapability<HerbCapability.SerializedHerbRecord> {
+public class HerbCapability {
   private boolean dirty = true;
   private final Object2DoubleOpenHashMap<Herb> HERB_MAP = new Object2DoubleOpenHashMap<>();
 
@@ -55,83 +48,64 @@ public class HerbCapability implements ICapabilityProvider, ICapabilitySerializa
     setDirty(true);
   }
 
-  @Override
   public ListTag serializeNBT() {
     ListTag result = new ListTag();
     HERB_MAP.forEach((herb, value) -> {
       CompoundTag tag = new CompoundTag();
-      tag.putString("herb", RootsRegistries.HERB_REGISTRY.get().getKey(herb).toString());
+      tag.putString("herb", RootsRegistries.HERBS.getKey(herb).toString());
       tag.putDouble("value", value);
       result.add(tag);
     });
     return result;
   }
 
-  @Override
   public void deserializeNBT(ListTag nbt) {
     HERB_MAP.clear();
     for (int i = 0; i < nbt.size(); i++) {
       CompoundTag tag = nbt.getCompound(i);
-      HERB_MAP.put(RootsRegistries.HERB_REGISTRY.get().getValue(new ResourceLocation(tag.getString("herb"))), tag.getDouble("value"));
+      HERB_MAP.put(RootsRegistries.HERBS.get(ResourceLocation.parse(tag.getString("herb"))), tag.getDouble("value"));
     }
     setDirty(true);
   }
 
-
-  @Override
-  public void fromRecord(SerializedHerbRecord record) {
-    HERB_MAP.clear();
-    HERB_MAP.putAll(record.getHerbMap());
-    setDirty(true);
-  }
-
-  @Override
-  public SerializedHerbRecord toRecord() {
-    return new SerializedHerbRecord(HERB_MAP);
-  }
-
-  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
 
-  @Override
   public boolean isDirty() {
     return dirty;
   }
 
-  public static SerializedHerbRecord fromNetwork (FriendlyByteBuf buf) {
+  public static SerializedHerbRecord fromNetwork(FriendlyByteBuf buf) {
     SerializedHerbRecord result = new SerializedHerbRecord();
     result.fromNetwork(buf);
     return result;
   }
 
-  public static class SerializedHerbRecord implements SerializedCapability {
+  public static class SerializedHerbRecord {
     private final Object2DoubleOpenHashMap<Herb> HERB_MAP = new Object2DoubleOpenHashMap<>();
 
     public SerializedHerbRecord() {
       HERB_MAP.defaultReturnValue(0.0d);
     }
 
-    public SerializedHerbRecord (Object2DoubleOpenHashMap<Herb> herbMap) {
+    public SerializedHerbRecord(Object2DoubleOpenHashMap<Herb> herbMap) {
       this();
       this.HERB_MAP.putAll(herbMap);
     }
 
-    @Override
     public void fromNetwork(FriendlyByteBuf buf) {
       HERB_MAP.clear();
       int mapSize = buf.readVarInt();
       for (int i = 0; i < mapSize; i++) {
-        HERB_MAP.put(RootsRegistries.HERB_REGISTRY.get().getValue(buf.readVarInt()), buf.readDouble());
+        HERB_MAP.put(RootsRegistries.HERBS.byId(buf.readVarInt()), buf.readDouble());
       }
     }
 
-    @Override
     public void toNetwork(FriendlyByteBuf buf) {
       buf.writeVarInt(HERB_MAP.size());
       for (Object2DoubleMap.Entry<Herb> entry : HERB_MAP.object2DoubleEntrySet()) {
-        buf.writeVarInt(RootsRegistries.HERB_REGISTRY.get().getID(entry.getKey()));
+        buf.writeVarInt(RootsRegistries.HERBS.getId(entry.getKey()));
         buf.writeDouble(entry.getDoubleValue());
       }
     }

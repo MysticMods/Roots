@@ -1,13 +1,13 @@
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.gen.LootTableGenerator;
 import mysticmods.roots.gen.provider.ModifierCostProvider;
 import mysticmods.roots.gen.provider.RitualPropertyProvider;
 import mysticmods.roots.gen.provider.SpellCostProvider;
 import mysticmods.roots.gen.provider.SpellPropertyProvider;
-
-
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -22,7 +22,6 @@ public class Data {
     event.getGenerator().addProvider(event.includeServer(), spell_costs);
     ModifierCostProvider modifier_costs = new ModifierCostProvider(event.getGenerator());
     event.getGenerator().addProvider(event.includeServer(), modifier_costs);
-    event.getGenerator().addProvider(event.includeDev(), new LootTableGenerator(event.getGenerator()));
-    event.getGenerator().addProvider(true, new McMetaGenerator(event.getGenerator()));
+/*    event.getGenerator().addProvider(event.includeDev(), new LootTableGenerator(event.getGenerator()));*/
   }
 }

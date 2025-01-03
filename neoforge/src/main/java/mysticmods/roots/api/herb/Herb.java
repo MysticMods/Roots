@@ -1,6 +1,5 @@
 package mysticmods.roots.api.herb;
 
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
@@ -12,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -25,7 +23,6 @@ public class Herb extends StyledRegistryEntry<Herb> {
 
   private final Holder.Reference<Herb> builtInRegistryHolder = RootsRegistries.HERBS.createIntrusiveHolder(this);
 
-  @Deprecated
   public Holder.Reference<Herb> builtInRegistryHolder() {
     return this.builtInRegistryHolder;
   }
@@ -34,6 +31,11 @@ public class Herb extends StyledRegistryEntry<Herb> {
     this.item = item;
     this.tag = tag;
     this.color = color;
+  }
+
+  // TODO: ItemStack data map
+  public static Herb getHerb (ItemStack stack) {
+    return null;
   }
 
   /*@Nullable

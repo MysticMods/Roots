@@ -16,9 +16,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-
-
-
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderArmEvent;
 
 
 import java.util.Objects;
@@ -50,7 +51,8 @@ public class RenderArmEventHandler {
         renderHand = RenderHand.LEFT;
       }
 
-      VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(new ResourceLocation(Objects.requireNonNull(chestStack.getItem().getArmorTexture(chestStack, player, EquipmentSlot.CHEST, null)))), false, chestStack.hasFoil());
+      // TODO
+      VertexConsumer ivertexbuilder; // = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(chestStack.getItem().getArmorTexture(chestStack, player, EquipmentSlot.CHEST, null, false))), false, chestStack.hasFoil());
       if (event.getArm() == HumanoidArm.RIGHT) {
         chestModel.rightArmPose = HumanoidModel.ArmPose.EMPTY;
       } else {

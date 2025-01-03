@@ -29,7 +29,6 @@ public class PetrifiedFlowerBlock extends FlowerBlock {
   }
 
   @Override
-  @OnlyIn(Dist.CLIENT)
   public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
     VoxelShape voxelshape = this.getShape(stateIn, worldIn, pos, CollisionContext.empty());
     Vec3 vector3d = voxelshape.bounds().getCenter();

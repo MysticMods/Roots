@@ -98,10 +98,11 @@ public class RunicShearsItem extends ShearsItem {
     return InteractionResult.PASS;
   }
 
-  @Override
+  // TODO: Item abilities
+/*  @Override
   public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
     return ToolActions.DEFAULT_SHEARS_ACTIONS.contains(toolAction) || RootsAPI.RUNIC_SHEARS_DEFAULTS.contains(toolAction);
-  }
+  }*/
 
   @Override
   public InteractionResult useOn(UseOnContext pContext) {

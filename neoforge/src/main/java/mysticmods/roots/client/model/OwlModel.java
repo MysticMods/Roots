@@ -158,7 +158,6 @@ public class OwlModel extends AgeableListModel<OwlEntity> {
     modelRenderer.zRot = z;
   }
 
-  @OnlyIn(Dist.CLIENT)
   public enum State {
     FLYING,
     STANDING,

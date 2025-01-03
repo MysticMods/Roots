@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
-public class TokenLoader implements IGeometryLoader<TokenLoader.TokenGeometry> {
+/*public class TokenLoader implements IGeometryLoader<TokenLoader.TokenGeometry> {
   private static TokenGeometry instance = null;
 
   @Override
@@ -137,4 +137,4 @@ public class TokenLoader implements IGeometryLoader<TokenLoader.TokenGeometry> {
       }
     }
   }
-}
+}*/

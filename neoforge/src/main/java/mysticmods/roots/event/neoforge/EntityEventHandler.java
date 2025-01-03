@@ -1,8 +1,7 @@
-package mysticmods.roots.event.forge;
+package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.EntityCooldowns;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;

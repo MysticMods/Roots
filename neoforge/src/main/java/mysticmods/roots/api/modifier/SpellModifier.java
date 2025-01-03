@@ -3,7 +3,7 @@ package mysticmods.roots.api.modifier;
 import com.google.common.base.Suppliers;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.registry.DescribedRegistryEntry;
+import mysticmods.roots.api.registry.DescribedEntry;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.IParentChild;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class SpellModifier extends DescribedRegistryEntry<SpellModifier> implements ICostedRegistryEntry, IParentChild<SpellModifier> {
+public class SpellModifier extends DescribedEntry implements ICostedRegistryEntry, IParentChild<SpellModifier> {
   protected final Supplier<SpellModifier> parent;
   protected final Set<SpellModifier> children = new ObjectLinkedOpenHashSet<>();
   protected final Supplier<Spell> spell;
