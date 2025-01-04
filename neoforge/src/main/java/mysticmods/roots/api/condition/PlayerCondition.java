@@ -14,7 +14,7 @@ public class PlayerCondition extends DescribedEntry {
 
   private final Type condition;
 
-  private final Holder.Reference<PlayerCondition> builtinRegistryHolder =  RootsRegistries.PLAYER_CONDITIONS.createIntrusiveHolder(this);
+  private final Holder.Reference<PlayerCondition> builtInRegistryHolder =  RootsRegistries.PLAYER_CONDITIONS.createIntrusiveHolder(this);
 
   public PlayerCondition(Type condition) {
     this.condition = condition;
@@ -25,8 +25,8 @@ public class PlayerCondition extends DescribedEntry {
     return "player_condition";
   }
 
-  public Holder.Reference<PlayerCondition> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public Holder.Reference<PlayerCondition> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
 
   public Type getCondition() {
@@ -35,7 +35,7 @@ public class PlayerCondition extends DescribedEntry {
 
   @Override
   public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().getKey().location();
   }
 
   public boolean test(Level level, @Nullable Player player) {

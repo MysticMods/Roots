@@ -10,7 +10,7 @@ public class RitualProperty<V> extends Property<V> {
   protected String descriptionId;
   protected Holder<Ritual> ritual;
 
-  private final Holder.Reference<RitualProperty<?>> builtinRegistryHolder = RootsRegistries.RITUAL_PROPERTIES.createIntrusiveHolder(this);
+  private final Holder.Reference<RitualProperty<?>> builtInRegistryHolder = RootsRegistries.RITUAL_PROPERTIES.createIntrusiveHolder(this);
 
   public RitualProperty(Holder<Ritual> ritual, V defaultValue, Serializer<V> serializer, String comment) {
     super(defaultValue, serializer, comment);
@@ -21,12 +21,12 @@ public class RitualProperty<V> extends Property<V> {
     return ritual;
   }
 
-  public Holder.Reference<RitualProperty<?>> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public Holder.Reference<RitualProperty<?>> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
 
   public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().getKey().location();
   }
 
   public String getOrCreateDescriptionId() {

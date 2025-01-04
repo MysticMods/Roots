@@ -14,7 +14,7 @@ public class SpellProperty<V> extends Property<V> implements IDescribedRegistryE
   private String descriptionId;
   protected Supplier<Spell> spell;
 
-  private final Holder.Reference<SpellProperty<?>> builtinRegistryHolder = RootsRegistries.SPELL_PROPERTIES.createIntrusiveHolder(this);
+  private final Holder.Reference<SpellProperty<?>> builtInRegistryHolder = RootsRegistries.SPELL_PROPERTIES.createIntrusiveHolder(this);
 
   public SpellProperty(Supplier<Spell> spell, V defaultValue, Serializer<V> serializer, String comment) {
     super(defaultValue, serializer, comment);
@@ -25,20 +25,13 @@ public class SpellProperty<V> extends Property<V> implements IDescribedRegistryE
     return spell.get();
   }
 
-  public Holder.Reference<SpellProperty<?>> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public Holder.Reference<SpellProperty<?>> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
-
-/*
-  @Override
-  public Class<SpellProperty<?>> getRegistryType() {
-    return c(SpellProperty.class);
-  }
-*/
 
   @Override
   public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().getKey().location();
   }
 
   @Override

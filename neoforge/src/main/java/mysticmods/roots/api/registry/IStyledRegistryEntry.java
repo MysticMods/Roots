@@ -8,9 +8,9 @@ import javax.annotation.Nullable;
 
 public interface IStyledRegistryEntry extends IDescribedRegistryEntry {
   @Nullable
-  ChatFormatting getColor();
+  ChatFormatting getTextColor();
 
-  void setColor(ChatFormatting color);
+  void setTextColor(ChatFormatting color);
 
   Style getOrCreateStyle();
 

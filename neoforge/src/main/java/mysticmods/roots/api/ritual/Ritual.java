@@ -1,9 +1,11 @@
 package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.property.RitualProperty;
-import mysticmods.roots.api.registry.DescribedEntry;
+import mysticmods.roots.api.registry.IDescribedRegistryEntry;
+import mysticmods.roots.api.registry.IHasHolder;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -16,7 +18,9 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.function.Predicate;
 
-public abstract class Ritual extends DescribedEntry {
+public abstract class Ritual implements IDescribedRegistryEntry {
+  protected String descriptionId;
+
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected int duration = 0;
@@ -24,10 +28,18 @@ public abstract class Ritual extends DescribedEntry {
   protected int radiusY = 0;
   protected int interval = 0;
 
-  private final Holder.Reference<Ritual> builtinRegistryHolder = RootsRegistries.RITUALS.createIntrusiveHolder(this);
+  private final Holder.Reference<Ritual> builtInRegistryHolder = RootsRegistries.RITUALS.createIntrusiveHolder(this);
 
-  public Holder.Reference<Ritual> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public String getOrCreateDescriptionId() {
+    if (this.descriptionId == null) {
+      this.descriptionId = Util.makeDescriptionId("ritual", builtInRegistryHolder().getKey().location());
+    }
+
+    return this.descriptionId;
+  }
+
+  public Holder.Reference<Ritual> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
 
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity) {
@@ -103,31 +115,20 @@ public abstract class Ritual extends DescribedEntry {
     return aabb;
   }
 
-  @Override
-  protected String getDescriptor() {
-    return "ritual";
-  }
-
   public boolean is(ResourceLocation key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(ResourceKey<Ritual> key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(Predicate<ResourceKey<Ritual>> key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(TagKey<Ritual> key) {
-    return getBuiltinRegistryHolder().is(key);
-  }
-
-
-  @Override
-  public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().is(key);
   }
 
   protected abstract RitualProperty<Integer> getDurationProperty();

@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 
-public interface IDescribedRegistryEntry extends IKeyedRegistryEntry {
+public interface IDescribedRegistryEntry {
 
   String getOrCreateDescriptionId();
 

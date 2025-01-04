@@ -25,7 +25,7 @@ public class Grove extends StyledRegistryEntry<Grove> {
   private final TagKey<Ritual> alignedRituals;
   private final TagKey<Ritual> opposedRituals;
 
-  private final Holder.Reference<Grove> builtinRegistryHolder = RootsRegistries.GROVES.createIntrusiveHolder(this);
+  private final Holder.Reference<Grove> builtInRegistryHolder = RootsRegistries.GROVES.createIntrusiveHolder(this);
 
   public Grove(ChatFormatting color, TagKey<Herb> herbs, TagKey<Grove> alignedGroves, TagKey<Grove> opposedGroves, TagKey<Spell> alignedSpells, TagKey<Spell> opposedSpells, TagKey<Ritual> alignedRituals, TagKey<Ritual> opposedRituals) {
     this.color = color;
@@ -38,57 +38,52 @@ public class Grove extends StyledRegistryEntry<Grove> {
     this.opposedRituals = opposedRituals;
   }
 
-  public Holder.Reference<Grove> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public Holder.Reference<Grove> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
 
-  public boolean aligned (Herb herb) {
+  public boolean aligned(Herb herb) {
     return herb.is(herbs);
   }
 
-  public boolean aligned (Spell spell) {
+  public boolean aligned(Spell spell) {
     return spell.is(alignedSpells);
   }
 
-  public boolean aligned (Grove grove) {
+  public boolean aligned(Grove grove) {
     return grove.is(alignedGroves);
   }
 
-  public boolean aligned (Ritual ritual) {
+  public boolean aligned(Ritual ritual) {
     return ritual.is(alignedRituals);
   }
 
-  public boolean opposed (Spell spell) {
+  public boolean opposed(Spell spell) {
     return spell.is(opposedSpells);
   }
 
-  public boolean opposed (Grove grove) {
+  public boolean opposed(Grove grove) {
     return grove.is(opposedGroves);
   }
 
-  public boolean opposed (Ritual ritual) {
+  public boolean opposed(Ritual ritual) {
     return ritual.is(opposedRituals);
   }
 
   public boolean is(ResourceLocation location) {
-    return getBuiltinRegistryHolder().is(location);
+    return builtInRegistryHolder().is(location);
   }
 
   public boolean is(ResourceKey<Grove> key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(Predicate<ResourceKey<Grove>> predicate) {
-    return getBuiltinRegistryHolder().is(predicate);
+    return builtInRegistryHolder().is(predicate);
   }
 
   public boolean is(TagKey<Grove> tag) {
-    return getBuiltinRegistryHolder().is(tag);
-  }
-
-  @Override
-  public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().is(tag);
   }
 
   @Override

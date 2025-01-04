@@ -27,7 +27,7 @@ public class LevelCondition extends DescribedEntry {
 
   private final Type condition;
 
-  private final Holder.Reference<LevelCondition> builtinRegistryHolder =  RootsRegistries.LEVEL_CONDITIONS.createIntrusiveHolder(this);
+  private final Holder.Reference<LevelCondition> builtInRegistryHolder =  RootsRegistries.LEVEL_CONDITIONS.createIntrusiveHolder(this);
 
   public LevelCondition(Type condition) {
     this.condition = condition;
@@ -42,13 +42,13 @@ public class LevelCondition extends DescribedEntry {
     return condition;
   }
 
-  public Holder.Reference<LevelCondition> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public Holder.Reference<LevelCondition> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
 
   @Override
   public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().getKey().location();
   }
 
   public Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {

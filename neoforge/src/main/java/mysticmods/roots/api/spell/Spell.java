@@ -5,10 +5,12 @@ import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.SpellProperty;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
+import mysticmods.roots.api.registry.IStyledRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -17,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public abstract class Spell extends StyledRegistryEntry<Spell> implements ICostedRegistryEntry, SpellLike {
+public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntry, SpellLike {
   protected final Type type;
   protected final List<Cost> costs = new ArrayList<>();
   protected final Set<SpellModifier> modifiers = new HashSet<>();
@@ -32,19 +35,57 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
   protected double reach = 0.0;
   protected final int color1, color2;
 
-  private final Holder.Reference<Spell> builtinRegistryHolder = RootsRegistries.SPELLS.createIntrusiveHolder(this);
+  protected Style style;
+  protected ChatFormatting textColor;
+  protected String descriptionId;
+
+  private final Holder.Reference<Spell> builtInRegistryHolder = RootsRegistries.SPELLS.createIntrusiveHolder(this);
 
   public Spell(Type type, ChatFormatting color, List<Cost> costs, int color1, int color2) {
     this.type = type;
-    this.color = color;
+    this.textColor = color;
     setCosts(costs);
     this.color1 = color1;
     this.color2 = color2;
   }
 
-  public Holder.Reference<Spell> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public Holder.Reference<Spell> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
+
+  @Override
+  @Nullable
+  public ChatFormatting getTextColor() {
+    return textColor;
+  }
+
+  @Override
+  public void setTextColor(ChatFormatting color) {
+    this.textColor = color;
+  }
+
+  @Override
+  public Style getOrCreateStyle() {
+    if (style == null) {
+      ChatFormatting color = getTextColor();
+      if (color != null) {
+        style = Style.EMPTY.withColor(color).withBold(isBold());
+      } else {
+        style = Style.EMPTY.withBold(isBold());
+      }
+    }
+    return style;
+  }
+
+  @Override
+  public String getOrCreateDescriptionId() {
+    if (this.descriptionId == null) {
+      this.descriptionId = Util.makeDescriptionId("spell", builtInRegistryHolder.getKey().location());
+    }
+
+    return this.descriptionId;
+  }
+
 
   public int getColor1() {
     return color1;
@@ -132,31 +173,20 @@ public abstract class Spell extends StyledRegistryEntry<Spell> implements ICoste
   }
 
   // TODO: Pick entity
-
-  @Override
-  protected String getDescriptor() {
-    return "spell";
-  }
-
   public boolean is(ResourceLocation key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(ResourceKey<Spell> key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(Predicate<ResourceKey<Spell>> key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(TagKey<Spell> key) {
-    return getBuiltinRegistryHolder().is(key);
-  }
-
-  @Override
-  public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().is(key);
   }
 
   @Override

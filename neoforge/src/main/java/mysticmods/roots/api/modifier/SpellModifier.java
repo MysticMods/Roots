@@ -26,7 +26,7 @@ public class SpellModifier extends DescribedEntry implements ICostedRegistryEntr
   protected final Supplier<Spell> spell;
   protected final List<Cost> costs = new ArrayList<>();
 
-  private final Holder.Reference<SpellModifier> builtinRegistryHolder = RootsRegistries.SPELL_MODIFIERS.createIntrusiveHolder(this);
+  private final Holder.Reference<SpellModifier> builtInRegistryHolder = RootsRegistries.SPELL_MODIFIERS.createIntrusiveHolder(this);
 
   // Modifier with parent
   public SpellModifier(Supplier<SpellModifier> parent, Supplier<Spell> spell, List<Cost> costs) {
@@ -60,29 +60,29 @@ public class SpellModifier extends DescribedEntry implements ICostedRegistryEntr
     resolve();
   }
 
-  public Holder.Reference<SpellModifier> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public Holder.Reference<SpellModifier> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
 
   public boolean is(ResourceLocation key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(ResourceKey<SpellModifier> key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(Predicate<ResourceKey<SpellModifier>> key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   public boolean is(TagKey<SpellModifier> key) {
-    return getBuiltinRegistryHolder().is(key);
+    return builtInRegistryHolder().is(key);
   }
 
   @Override
   public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().getKey().location();
   }
 
   @Override

@@ -188,7 +188,7 @@ public class SpellStorage {
   }
 
   public void save(ItemStack toSave) {
-    CompoundTag tag = toSave.getOrCreateTag();
+/*    CompoundTag tag = toSave.getOrCreateTag();
     tag.putInt("index", this.index);
     ListTag spells = new ListTag();
     for (int i = 0; i < this.spells.size(); i++) {
@@ -201,7 +201,7 @@ public class SpellStorage {
       }
     }
     tag.put("spells", spells);
-    tag.putInt("count", this.spells.size());
+    tag.putInt("count", this.spells.size());*/
   }
 
   public static SpellStorage getOrCreate (ItemStack stack) {
@@ -219,7 +219,7 @@ public class SpellStorage {
       return null;
     }
 
-    CompoundTag tag = stack.getTag();
+/*    CompoundTag tag = stack.getTag();
     if (tag == null) {
       if (!create || !(stack.getItem() instanceof ICastingItem castingItem)) {
         return null;
@@ -240,8 +240,9 @@ public class SpellStorage {
       result.spells.set(thisTag.getInt("index"), SpellInstance.fromNBT(thisTag.getCompound("spell")));
     }
 
-    result.index = tag.getInt("index");
-    return result;
+    result.index = tag.getInt("index");*/
+/*    return result;*/
+    return null;
   }
 
   public List<Entry> entryList () {

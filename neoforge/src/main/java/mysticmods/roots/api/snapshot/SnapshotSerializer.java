@@ -1,6 +1,5 @@
 package mysticmods.roots.api.snapshot;
 
-import mysticmods.roots.api.registry.IKeyedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -9,14 +8,14 @@ import net.minecraft.resources.ResourceLocation;
 public abstract class SnapshotSerializer<T extends Snapshot> implements IKeyedRegistryEntry {
   protected Builder<T> builder;
 
-  private final Holder.Reference<SnapshotSerializer<?>> builtinRegistryHolder = RootsRegistries.SNAPSHOT_SERIALIZERS.createIntrusiveHolder(this);
+  private final Holder.Reference<SnapshotSerializer<?>> builtInRegistryHolder = RootsRegistries.SNAPSHOT_SERIALIZERS.createIntrusiveHolder(this);
 
   public SnapshotSerializer(Builder<T> builder) {
     this.builder = builder;
   }
 
-  public Holder.Reference<SnapshotSerializer<?>> getBuiltinRegistryHolder() {
-    return builtinRegistryHolder;
+  public Holder.Reference<SnapshotSerializer<?>> builtInRegistryHolder() {
+    return builtInRegistryHolder;
   }
 
   public T fromTag(CompoundTag tag) {
@@ -40,7 +39,7 @@ public abstract class SnapshotSerializer<T extends Snapshot> implements IKeyedRe
 
   @Override
   public ResourceLocation getKey() {
-    return getBuiltinRegistryHolder().getKey().location();
+    return builtInRegistryHolder().getKey().location();
   }
 
   public T cast (Snapshot snapshot) {

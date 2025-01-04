@@ -28,6 +28,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 
 
+import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -97,11 +98,12 @@ public class BeetleEntity extends TamableAnimal {
           }
 
           // TODO:
-/*          FoodProperties food = item.getFoodProperties();
+
+          FoodProperties food = itemstack.getFoodProperties(this);
           if (food != null) {
-            this.heal((float) food.getNutrition());
+            this.heal((float) food.nutrition());
             return InteractionResult.SUCCESS;
-          }*/
+          }
           return InteractionResult.SUCCESS;
         }
 
@@ -121,16 +123,16 @@ public class BeetleEntity extends TamableAnimal {
           itemstack.shrink(1);
         }
 
-        // TODO: Taming event
-/*        if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+        if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
           this.tame(player);
           this.navigation.stop();
           this.setTarget(null);
           this.setOrderedToSit(true);
+          // TODO: Actually handle these events
           this.level().broadcastEntityEvent(this, (byte) 7);
         } else {
           this.level().broadcastEntityEvent(this, (byte) 6);
-        }*/
+        }
 
         return InteractionResult.SUCCESS;
       }
