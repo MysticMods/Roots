@@ -36,8 +36,8 @@ public class Grove extends StyledRegistryEntry<Grove> {
     this.opposedRituals = opposedRituals;
   }
 
-  public Holder.Reference<Grove> builtInRegistryHolder() {
-    return RootsRegistries.GROVES.getHolderOrThrow(RootsRegistries.GROVES.getResourceKey(this).orElseThrow());
+  public Holder<Grove> builtInRegistryHolder() {
+    return RootsRegistries.GROVES.wrapAsHolder(this);
   }
 
   public boolean aligned(Herb herb) {

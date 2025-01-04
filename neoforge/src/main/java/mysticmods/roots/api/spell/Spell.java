@@ -47,8 +47,8 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
     this.color2 = color2;
   }
 
-  public Holder.Reference<Spell> builtInRegistryHolder() {
-    return RootsRegistries.SPELLS.getHolderOrThrow(RootsRegistries.SPELLS.getResourceKey(this).orElseThrow());
+  public Holder<Spell> builtInRegistryHolder() {
+    return RootsRegistries.SPELLS.wrapAsHolder(this);
   }
 
   @Override

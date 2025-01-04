@@ -23,8 +23,8 @@ public class SpellProperty<V> extends Property<V> implements IDescribedRegistryE
     return spell.get();
   }
 
-  public Holder.Reference<SpellProperty<?>> builtInRegistryHolder() {
-    return RootsRegistries.SPELL_PROPERTIES.getHolderOrThrow(RootsRegistries.SPELL_PROPERTIES.getResourceKey(this).orElseThrow());
+  public Holder<SpellProperty<?>> builtInRegistryHolder() {
+    return RootsRegistries.SPELL_PROPERTIES.wrapAsHolder(this);
   }
 
   @Override

@@ -191,7 +191,7 @@ public class GrantCapability {
     CompoundTag result = new CompoundTag();
     ListTag spells = new ListTag();
     GRANTED_SPELLS.forEach(o ->
-        spells.add(StringTag.valueOf(o.builtInRegistryHolder().key().location().toString()))
+        spells.add(StringTag.valueOf(o.builtInRegistryHolder().getKey().location().toString()))
     );
     result.put("spells", spells);
     ListTag modifiers = new ListTag();

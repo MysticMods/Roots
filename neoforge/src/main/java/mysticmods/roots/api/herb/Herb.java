@@ -21,8 +21,8 @@ public class Herb extends StyledRegistryEntry<Herb> {
   private final Holder<Item> item;
   private final TagKey<Item> tag;
 
-  public Holder.Reference<Herb> builtInRegistryHolder() {
-    return RootsRegistries.HERBS.getHolderOrThrow(RootsRegistries.HERBS.getResourceKey(this).orElseThrow());
+  public Holder<Herb> builtInRegistryHolder() {
+    return RootsRegistries.HERBS.wrapAsHolder(this);
   }
 
   public Herb(Holder<Item> item, TagKey<Item> tag, ChatFormatting color) {

@@ -2,7 +2,6 @@ package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
-import mysticmods.roots.api.registry.IHasHolder;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.Util;
@@ -36,8 +35,8 @@ public abstract class Ritual implements IDescribedRegistryEntry {
     return this.descriptionId;
   }
 
-  public Holder.Reference<Ritual> builtInRegistryHolder() {
-    return RootsRegistries.RITUALS.getHolderOrThrow(RootsRegistries.RITUALS.getResourceKey(this).orElseThrow());
+  public Holder<Ritual> builtInRegistryHolder() {
+    return RootsRegistries.RITUALS.wrapAsHolder(this);
   }
 
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity) {

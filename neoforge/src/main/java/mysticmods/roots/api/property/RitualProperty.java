@@ -19,17 +19,13 @@ public class RitualProperty<V> extends Property<V> {
     return ritual;
   }
 
-  public Holder.Reference<RitualProperty<?>> builtInRegistryHolder() {
-    return RootsRegistries.RITUAL_PROPERTIES.getHolderOrThrow(RootsRegistries.RITUAL_PROPERTIES.getResourceKey(this).orElseThrow());
-  }
-
-  public ResourceLocation getKey() {
-    return builtInRegistryHolder().getKey().location();
+  public Holder<RitualProperty<?>> builtInRegistryHolder() {
+    return RootsRegistries.RITUAL_PROPERTIES.wrapAsHolder(this);
   }
 
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("ritual_property", getKey());
+      this.descriptionId = Util.makeDescriptionId("ritual_property", builtInRegistryHolder().getKey().location());
     }
 
     return this.descriptionId;

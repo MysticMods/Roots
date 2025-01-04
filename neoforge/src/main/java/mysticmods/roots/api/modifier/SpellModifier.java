@@ -58,8 +58,8 @@ public class SpellModifier extends DescribedEntry implements ICostedRegistryEntr
     resolve();
   }
 
-  public Holder.Reference<SpellModifier> builtInRegistryHolder() {
-    return RootsRegistries.SPELL_MODIFIERS.getHolderOrThrow(RootsRegistries.SPELL_MODIFIERS.getResourceKey(this).orElseThrow());
+  public Holder<SpellModifier> builtInRegistryHolder() {
+    return RootsRegistries.SPELL_MODIFIERS.wrapAsHolder(this);
   }
 
   public boolean is(ResourceLocation key) {
