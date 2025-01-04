@@ -6,12 +6,13 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.client.gui.SpellSupplier;
 import mysticmods.roots.client.gui.screen.StaffScreen;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
 public class LibrarySpellButton extends TypedButton<Spell, SpellSupplier<Spell>, StaffScreen> {
   private final boolean transparent;
-  public LibrarySpellButton(StaffScreen parentScreen, SpellSupplier<Spell> spellSupplier, int id, int pX, int pY, boolean transparent) {
-    super(parentScreen, spellSupplier, id, pX, pY, 16, 16, parentScreen::buttonClicked);
+  public LibrarySpellButton(StaffScreen parentScreen, SpellSupplier<Spell> spellSupplier, int id, int pX, int pY, boolean transparent, CreateNarration narration) {
+    super(parentScreen, spellSupplier, id, pX, pY, 16, 16, parentScreen::buttonClicked, narration);
     this.transparent = transparent;
   }
 
@@ -27,10 +28,10 @@ public class LibrarySpellButton extends TypedButton<Spell, SpellSupplier<Spell>,
   private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/library_spell_slot_highlight.png");
 
   @Override
-  public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-    super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+  public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+    super.renderWidget(graphics, pMouseX, pMouseY, pPartialTick);
     if (parentScreen.isSelected(this) && visible) {
-      StaffScreen.drawFromTexture(highlight, x - 1, y - 1, 0, 0, 18, 18, 18, 18, pPoseStack);
+      StaffScreen.drawFromTexture(graphics, highlight, getX() - 1, getY() - 1, 0, 0, 18, 18, 18, 18, graphics.pose()); // TODO: is htis the correct use of pose?
     }
   }
 }

@@ -21,10 +21,8 @@ public class Herb extends StyledRegistryEntry<Herb> {
   private final Supplier<? extends ItemLike> item;
   private final TagKey<Item> tag;
 
-  private final Holder.Reference<Herb> builtInRegistryHolder = RootsRegistries.HERBS.createIntrusiveHolder(this);
-
   public Holder.Reference<Herb> builtInRegistryHolder() {
-    return this.builtInRegistryHolder;
+    return RootsRegistries.HERBS.getHolderOrThrow(RootsRegistries.HERBS.getResourceKey(this).orElseThrow());
   }
 
   public Herb(Supplier<? extends ItemLike> item, TagKey<Item> tag, ChatFormatting color) {
@@ -80,11 +78,6 @@ public class Herb extends StyledRegistryEntry<Herb> {
 
   public boolean is(TagKey<Herb> tag) {
     return builtInRegistryHolder().is(tag);
-  }
-
-  @Override
-  public ResourceLocation getKey() {
-    return builtInRegistryHolder.getKey().location();
   }
 
   @Override

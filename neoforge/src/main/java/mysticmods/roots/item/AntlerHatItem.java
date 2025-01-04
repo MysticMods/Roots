@@ -20,6 +20,7 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.Map;
 
+/*
 public class AntlerHatItem extends ModifiedArmorItem {
   public AntlerHatItem(Properties builder) {
     super(Roots.ANTLER_MATERIAL, EquipmentSlot.HEAD, builder);
@@ -69,3 +70,4 @@ public class AntlerHatItem extends ModifiedArmorItem {
     return texture;
   }
 }
+*/

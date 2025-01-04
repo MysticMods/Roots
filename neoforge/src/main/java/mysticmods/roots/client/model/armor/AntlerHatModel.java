@@ -36,10 +36,13 @@ public class AntlerHatModel extends ArmorModel {
     this.horn8_1 = this.horn6_1.getChild("horn8_1");
   }
 
+  // TODO:
+/*
   @Override
   public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
     super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
   }
+*/
 
   public static LayerDefinition createBodyLayer() {
     MeshDefinition meshdefinition = new MeshDefinition();

@@ -3,6 +3,7 @@ package mysticmods.roots.client.model;
 import com.google.common.collect.ImmutableSet;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.entity.BeetleEntity;
+import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -13,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class BeetleModel extends ShoulderRidingModel<BeetleEntity> {
+public class BeetleModel extends AgeableListModel<BeetleEntity> {
   private final ModelPart body;
   private final ModelPart head;
   private final ModelPart antennaR1;
@@ -116,7 +117,8 @@ public class BeetleModel extends ShoulderRidingModel<BeetleEntity> {
   }
 
   @Override
-  protected void setupAnim(ModelState state, int ticks, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+  public void setupAnim(BeetleEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    // where did ticks go
     this.head.xRot = headPitch * 0.017453292F;
     this.head.yRot = netHeadYaw * 0.017453292F;
     this.antennaR1.xRot = 0.1308996938995747F + getBobble(30, ageInTicks) * 0.2617993877991494F;
@@ -124,17 +126,17 @@ public class BeetleModel extends ShoulderRidingModel<BeetleEntity> {
     this.wingL.yRot = 0.17453292519943295F + 0.0872664626F * getBobble(45, ageInTicks);
     this.wingR.yRot = -0.17453292519943295F - 0.0872664626F * getBobble(160, ageInTicks);
 
-    if (state == ModelState.NORMAL) {
+/*    if (state == ModelState.NORMAL) {*/
       this.legL1.zRot = limbSwingAmount * getSwing(0, ageInTicks) - 0.2617993877991494F;
       this.legL2.zRot = limbSwingAmount * getSwing(120, ageInTicks) - 0.2617993877991494F;
       this.legL3.zRot = limbSwingAmount * getSwing(240, ageInTicks) - 0.2617993877991494F;
       this.legR1.zRot = limbSwingAmount * getSwing(180, ageInTicks) + 0.2617993877991494F;
       this.legR2.zRot = limbSwingAmount * getSwing(300, ageInTicks) + 0.2617993877991494F;
       this.legR3.zRot = limbSwingAmount * getSwing(60, ageInTicks) + 0.2617993877991494F;
-    }
+/*    }*/
   }
 
-  @Override
+/*  @Override
   protected void prepare(ModelState state) {
     if (state == ModelState.SITTING) {
       this.body.setPos(0.0F, 20.0F, -4.0F);
@@ -153,14 +155,14 @@ public class BeetleModel extends ShoulderRidingModel<BeetleEntity> {
       this.setRotateAngle(legL2, 0.0F, 0.0F, -0.2617993877991494F);
       this.setRotateAngle(legL3, 0.2617993877991494F, 0.0F, -0.2617993877991494F);
     }
-  }
+  }*/
 
   private static final ResourceLocation texture = RootsAPI.rl("textures/entity/beetle_blue.png");
-
+  /*
   @Override
-  public ResourceLocation getTexture(ModelState state) {
+  public ResourceLocation getTexture() {
     return texture;
-  }
+  }*/
 
   private void setRotateAngle(@Nonnull ModelPart modelRenderer, float x, float y, float z) {
     modelRenderer.xRot = x;

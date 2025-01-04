@@ -35,10 +35,10 @@ public class LifeDrainSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.vectorDistance = ModSpells.LIFE_DRAIN_DISTANCE.get().getValue();
+/*    this.vectorDistance = ModSpells.LIFE_DRAIN_DISTANCE.get().getValue();
     this.boundingBoxDistance = ModSpells.LIFE_DRAIN_BOUNDS.get().getValue();
     this.damage = ModSpells.LIFE_DRAIN_DAMAGE.get().getValue();
-    this.heal = ModSpells.LIFE_DRAIN_HEAL.get().getValue();
+    this.heal = ModSpells.LIFE_DRAIN_HEAL.get().getValue();*/
   }
 
   @Override
@@ -54,9 +54,10 @@ public class LifeDrainSpell extends Spell {
       List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), new AABB(x - boundingBoxDistance, y - boundingBoxDistance, z - boundingBoxDistance, x + boundingBoxDistance, y + boundingBoxDistance, z + boundingBoxDistance), EntityUtils.isHostileTo(pPlayer));
       for (LivingEntity entity : entities) {
         foundTarget = true;
-        if (entity.hurt(DamageSource.playerAttack(pPlayer).bypassArmor(), damage)) {
+        // TODO:
+/*        if (entity.hurt(DamageSource.playerAttack(pPlayer).bypassArmor(), damage)) {
           pPlayer.heal(heal);
-        }
+        }*/
       }
     }
   }

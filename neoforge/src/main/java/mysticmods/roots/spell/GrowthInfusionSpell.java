@@ -38,7 +38,7 @@ public class GrowthInfusionSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.base_ticks = ModSpells.GROWTH_INFUSION_BASE_TICKS.get().getValue();
+/*    this.base_ticks = ModSpells.GROWTH_INFUSION_BASE_TICKS.get().getValue();*/
   }
 
   @Override

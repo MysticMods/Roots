@@ -33,15 +33,15 @@ public class PetalShellSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.count = ModSpells.PETAL_SHELL_COUNT.get().getValue();
-    this.duration = ModSpells.PETAL_SHELL_DURATION.get().getValue();
+/*    this.count = ModSpells.PETAL_SHELL_COUNT.get().getValue();
+    this.duration = ModSpells.PETAL_SHELL_DURATION.get().getValue();*/
   }
 
   @Override
   public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
-    pPlayer.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> {
+/*    pPlayer.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> {
      pPlayer.addEffect(new MobEffectInstance(ModEffects.PETAL_SHELL.get(), duration, count));
      snapshot.addSnapshot(pPlayer, ModSerializers.PETAL_SHELL.get(), new PetalShellSnapshot(pPlayer, count));
-    });
+    });*/
   }
 }

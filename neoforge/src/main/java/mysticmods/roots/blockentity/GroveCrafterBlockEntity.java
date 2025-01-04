@@ -13,6 +13,7 @@ import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -25,6 +26,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,8 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity {
-  private GroveRecipe lastRecipe = null;
-  private GroveRecipe cachedRecipe = null;
+  private RecipeHolder<GroveRecipe> lastRecipe = null;
+  private RecipeHolder<GroveRecipe> cachedRecipe = null;
 
   public GroveCrafterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -48,7 +50,9 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   @Override
-  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
+  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
+    // TODO:
+    InteractionHand hand = InteractionHand.MAIN_HAND;
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
@@ -63,7 +67,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         return InteractionResult.FAIL;
       }
       // TODO: Provider better feedback to the player
-      ConditionResult conditionResult = cachedRecipe.checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
+      ConditionResult conditionResult = cachedRecipe.value().checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
       if (conditionResult.anyFailed()) {
         RootsAPI.LOG.info("Conditions failed.");
         conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
@@ -71,15 +75,16 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         conditionResult.report();
         return InteractionResult.FAIL;
       }
-      UnlockResult failedGrants = cachedRecipe.checkGrants(level, (ServerPlayer) player);
-      if (failedGrants.failed() && !cachedRecipe.hasOutput(level.registryAccess())) {
+      UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
+      if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
-        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));
+        // TODO:
+/*        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
         failedGrants.report();
         return InteractionResult.FAIL;
       }
       lastRecipe = cachedRecipe;
-      List<ItemStack> results = cachedRecipe.assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
+      List<ItemStack> results = cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
       for (ItemStack stack : results) {
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
       }
@@ -119,7 +124,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         changed = true;
       }
     } else {
-      if (!cachedRecipe.matches(playerlessCrafting, getLevel())) {
+      if (!cachedRecipe.value().matches(playerlessCrafting, getLevel())) {
         cachedRecipe = null;
         changed = true;
       }
@@ -193,10 +198,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.saveAdditional(pTag, lookup);
     if (cachedRecipe != null) {
-      pTag.putString("cached_recipe", cachedRecipe.getId().toString());
+      pTag.putString("cached_recipe", cachedRecipe.id().toString());
     }
     if (lastRecipe != null) {
-      pTag.putString("last_recipe", lastRecipe.getId().toString());
+      pTag.putString("last_recipe", lastRecipe.id().toString());
     }
   }
 
@@ -218,7 +223,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   @Nullable
-  public GroveRecipe getRecipe() {
+  public RecipeHolder<GroveRecipe> getRecipe() {
     return cachedRecipe;
   }
 

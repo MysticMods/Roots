@@ -21,7 +21,7 @@ public abstract class TwoRadiusSpell extends Spell {
   @Override
   protected void initializeProperties() {
     super.initializeProperties();
-    SpellProperty<Integer> prop = getRadiusYProperty();
+/*    SpellProperty<Integer> prop = getRadiusYProperty();
     if (prop != null) {
       this.radiusY = prop.getValue();
     } else {
@@ -32,7 +32,7 @@ public abstract class TwoRadiusSpell extends Spell {
       this.radiusZX = prop.getValue();
     } else {
       throw new IllegalStateException("Spell " + this + " has no radiusZX property!");
-    }
+    }*/
   }
 
   @Override

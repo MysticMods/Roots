@@ -31,12 +31,12 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
 
   @Nullable
   public static ArmorModel getModel(ItemStack stack) {
-    if (stack.is(ModItems.ANTLER_HAT.get())) {
+/*    if (stack.is(ModItems.ANTLER_HAT.get())) {
       return antlerModel;
       // TODO: Turn this into a tag
     } else if (stack.is(ModItems.BEETLE_BOOTS.get()) || stack.is(ModItems.BEETLE_HELMET.get()) || stack.is(ModItems.BEETLE_CHESTPLATE.get()) || stack.is(ModItems.BEETLE_LEGGINGS.get())) {
       return beetleModels.get(stack.getEquipmentSlot());
-    }
+    }*/
 
     return null;
   }
@@ -81,11 +81,12 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
     this.hat.copyFrom(this.head);
   }
 
-  @Override
-  public void renderToBuffer(PoseStack ms, VertexConsumer buffer, int light, int overlay, float r, float g, float b, float a) {
+  // TODO: How is this
+/*  @Override
+  public void renderToBuffer(PoseStack ms, VertexConsumer buffer, int light, int overlay*//*, float r, float g, float b, float a*//*) {
     setPartVisibility(slot);
-    super.renderToBuffer(ms, buffer, light, overlay, r, g, b, a);
-  }
+    super.renderToBuffer(ms, buffer, light, overlay*//*, r, g, b, a*//*);
+  }*/
 
   protected void setPartVisibility(EquipmentSlot slot) {
     setAllVisible(false);

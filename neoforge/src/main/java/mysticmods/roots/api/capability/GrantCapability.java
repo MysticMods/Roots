@@ -17,8 +17,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-
-
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.*;
@@ -148,8 +146,8 @@ public class GrantCapability {
   public List<LibrarySpell> getLibrarySpells() {
     if (LIBRARY_SPELLS == null) {
       LIBRARY_SPELLS = new ArrayList<>();
-      GRANTED_SPELLS.stream().sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, true)));
-      RootsRegistries.SPELLS.stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o, false)));
+      GRANTED_SPELLS.stream().sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o.builtInRegistryHolder(), true)));
+      RootsRegistries.SPELLS.stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o.builtInRegistryHolder(), false)));
     }
     return LIBRARY_SPELLS;
   }
@@ -161,7 +159,7 @@ public class GrantCapability {
     return LIBRARY_MODIFIERS.computeIfAbsent(checkSpell, spell -> {
       List<LibraryModifier> result = new ArrayList<>();
       for (SpellModifier mod : spell.getModifiers()) {
-        result.add(new LibraryModifier(mod, GRANTED_MODIFIERS.contains(mod)));
+        result.add(new LibraryModifier(mod.builtInRegistryHolder(), GRANTED_MODIFIERS.contains(mod)));
       }
       result.sort(Comparator.comparing(LibraryModifier::enabled));
       return result;
@@ -193,12 +191,12 @@ public class GrantCapability {
     CompoundTag result = new CompoundTag();
     ListTag spells = new ListTag();
     GRANTED_SPELLS.forEach(o ->
-        spells.add(StringTag.valueOf(o.getKey().toString()))
+        spells.add(StringTag.valueOf(o.builtInRegistryHolder().key().location().toString()))
     );
     result.put("spells", spells);
     ListTag modifiers = new ListTag();
     GRANTED_MODIFIERS.forEach(o ->
-        modifiers.add(StringTag.valueOf(o.getKey().toString()))
+        modifiers.add(StringTag.valueOf(o.builtInRegistryHolder().getKey().location().toString()))
     );
     result.put("modifiers", modifiers);
     return result;

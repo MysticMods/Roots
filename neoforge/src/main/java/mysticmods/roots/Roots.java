@@ -34,7 +34,6 @@ public class Roots {
   public static final CreativeModeTab ITEM_GROUP = CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.WILDROOT.get())).build();
 
   public Roots(ModContainer container, IEventBus bus) {
-    ConfigManager.loadConfig(ConfigManager.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(RootsAPI.MODID + "-common.toml"));
     container.registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
 
     RootsAPI.INSTANCE = new RootsAPI() {
@@ -79,11 +78,11 @@ public class Roots {
     ModConditions.register(bus);
     ModRituals.register(bus);
     ModSpells.register(bus);
-    ModTests.load();
     ModSounds.register(bus);
     ModSerializers.register(bus);
     ModRecipes.register(bus);
     ModFeatures.register(bus);
     ModLoot.register(bus);
+    ModTests.register(bus);
   }
 }

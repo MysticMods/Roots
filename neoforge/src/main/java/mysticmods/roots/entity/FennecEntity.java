@@ -33,6 +33,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.event.EventHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -43,7 +44,8 @@ public class FennecEntity extends TamableAnimal {
 
   public FennecEntity(EntityType<? extends FennecEntity> type, Level worldIn) {
     super(type, worldIn);
-    setTame(false);
+    // TODO: ???
+/*    setTame(false);*/
     this.xpReward = 5;
   }
 
@@ -72,7 +74,7 @@ public class FennecEntity extends TamableAnimal {
     goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.CHICKEN), false));
     goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
     goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-    goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+    goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
     goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
     goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
     goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -103,11 +105,11 @@ public class FennecEntity extends TamableAnimal {
     this.entityData.set(DATA_HEALTH_ID, this.getHealth());
   }
 
-  @Override
+/*  @Override
   protected void defineSynchedData() {
     super.defineSynchedData();
     this.entityData.define(DATA_HEALTH_ID, this.getHealth());
-  }
+  }*/
 
   @Override
   protected float getSoundVolume() {
@@ -142,7 +144,7 @@ public class FennecEntity extends TamableAnimal {
       this.setInSittingPose(false);
     }
 
-    if (!this.level.isClientSide && this.getTarget() == null && this.isAngry()) {
+    if (!this.level().isClientSide && this.getTarget() == null && this.isAngry()) {
       this.setAngry(false);
     }
   }
@@ -170,19 +172,21 @@ public class FennecEntity extends TamableAnimal {
 
   @Override
   public boolean doHurtTarget(Entity entityIn) {
-    boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float) ((int) getAttributeValue(Attributes.ATTACK_DAMAGE)));
+    return super.doHurtTarget(entityIn);
+    // TODO: sound effect
+/*    boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float) ((int) getAttributeValue(Attributes.ATTACK_DAMAGE)));
 
     if (flag) {
       doEnchantDamageEffects(this, entityIn);
       playSound(ModSounds.FENNEC_BITE.get(), 1.0f, 1.0f);
     }
 
-    return flag;
+    return flag;*/
   }
 
   @Override
-  public void setTame(boolean tamed) {
-    super.setTame(tamed);
+  public void setTame(boolean tamed, boolean unknown) {
+    super.setTame(tamed, unknown);
     if (tamed) {
       this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20.0D);
       this.setHealth(20.0F);
@@ -198,7 +202,7 @@ public class FennecEntity extends TamableAnimal {
   public InteractionResult mobInteract(Player player, InteractionHand hand) {
     ItemStack itemstack = player.getItemInHand(hand);
     Item item = itemstack.getItem();
-    if (this.level.isClientSide) {
+    if (this.level().isClientSide) {
       boolean flag = this.isOwnedBy(player) || this.isTame() || item == Items.APPLE && !this.isTame();
       return flag ? InteractionResult.CONSUME : InteractionResult.PASS;
     } else {
@@ -208,9 +212,9 @@ public class FennecEntity extends TamableAnimal {
             itemstack.shrink(1);
           }
 
-          FoodProperties food = item.getFoodProperties();
+          FoodProperties food = itemstack.getFoodProperties(this);
           if (food != null) {
-            this.heal((float) food.getNutrition());
+            this.heal((float) food.nutrition());
             return InteractionResult.SUCCESS;
           }
         }
@@ -230,14 +234,14 @@ public class FennecEntity extends TamableAnimal {
           itemstack.shrink(1);
         }
 
-        if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+        if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
           this.tame(player);
           this.navigation.stop();
           this.setTarget(null);
           this.setOrderedToSit(true);
-          this.level.broadcastEntityEvent(this, (byte) 7);
+          this.level().broadcastEntityEvent(this, (byte) 7);
         } else {
-          this.level.broadcastEntityEvent(this, (byte) 6);
+          this.level().broadcastEntityEvent(this, (byte) 6);
         }
 
         return InteractionResult.SUCCESS;
@@ -282,8 +286,9 @@ public class FennecEntity extends TamableAnimal {
   }
 
   @Override
-  public boolean canBeLeashed(Player player) {
-    return !this.isAngry() && super.canBeLeashed(player);
+  public boolean canBeLeashed() {
+    return !this.isAngry() && super.canBeLeashed();
+    /*    return !this.isAngry() && super.canBeLeashed(player);*/
   }
 
 

@@ -26,8 +26,6 @@ public class SpellModifier extends DescribedEntry implements ICostedRegistryEntr
   protected final Supplier<Spell> spell;
   protected final List<Cost> costs = new ArrayList<>();
 
-  private final Holder.Reference<SpellModifier> builtInRegistryHolder = RootsRegistries.SPELL_MODIFIERS.createIntrusiveHolder(this);
-
   // Modifier with parent
   public SpellModifier(Supplier<SpellModifier> parent, Supplier<Spell> spell, List<Cost> costs) {
     this.spell = Suppliers.memoize(spell::get);
@@ -61,7 +59,7 @@ public class SpellModifier extends DescribedEntry implements ICostedRegistryEntr
   }
 
   public Holder.Reference<SpellModifier> builtInRegistryHolder() {
-    return builtInRegistryHolder;
+    return RootsRegistries.SPELL_MODIFIERS.getHolderOrThrow(RootsRegistries.SPELL_MODIFIERS.getResourceKey(this).orElseThrow());
   }
 
   public boolean is(ResourceLocation key) {
@@ -78,11 +76,6 @@ public class SpellModifier extends DescribedEntry implements ICostedRegistryEntr
 
   public boolean is(TagKey<SpellModifier> key) {
     return builtInRegistryHolder().is(key);
-  }
-
-  @Override
-  public ResourceLocation getKey() {
-    return builtInRegistryHolder().getKey().location();
   }
 
   @Override

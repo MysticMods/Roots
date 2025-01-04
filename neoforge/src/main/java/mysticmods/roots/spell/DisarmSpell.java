@@ -43,7 +43,7 @@ public class DisarmSpell extends TwoRadiusSpell {
 
   @Override
   public void initialize() {
-    this.dropChance = ModSpells.DISARM_DROP_CHANCE.get().getValue();
+/*    this.dropChance = ModSpells.DISARM_DROP_CHANCE.get().getValue();*/
   }
 
   @Override

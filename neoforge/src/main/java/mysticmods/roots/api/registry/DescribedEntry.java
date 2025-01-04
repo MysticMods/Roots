@@ -11,7 +11,8 @@ public abstract class DescribedEntry implements IDescribedRegistryEntry {
   @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId(getDescriptor(), getKey());
+      // TODO:
+/*      this.descriptionId = Util.makeDescriptionId(getDescriptor(), getKey());*/
     }
 
     return this.descriptionId;

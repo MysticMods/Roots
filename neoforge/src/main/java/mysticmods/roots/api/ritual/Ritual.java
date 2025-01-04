@@ -28,8 +28,6 @@ public abstract class Ritual implements IDescribedRegistryEntry {
   protected int radiusY = 0;
   protected int interval = 0;
 
-  private final Holder.Reference<Ritual> builtInRegistryHolder = RootsRegistries.RITUALS.createIntrusiveHolder(this);
-
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
       this.descriptionId = Util.makeDescriptionId("ritual", builtInRegistryHolder().getKey().location());
@@ -39,7 +37,7 @@ public abstract class Ritual implements IDescribedRegistryEntry {
   }
 
   public Holder.Reference<Ritual> builtInRegistryHolder() {
-    return builtInRegistryHolder;
+    return RootsRegistries.RITUALS.getHolderOrThrow(RootsRegistries.RITUALS.getResourceKey(this).orElseThrow());
   }
 
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity) {

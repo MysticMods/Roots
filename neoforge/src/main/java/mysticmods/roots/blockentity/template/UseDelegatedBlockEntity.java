@@ -1,7 +1,6 @@
 package mysticmods.roots.blockentity.template;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -14,5 +13,5 @@ public abstract class UseDelegatedBlockEntity extends BaseBlockEntity {
     super(pType, pWorldPosition, pBlockState);
   }
 
-  public abstract InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray);
+  public abstract InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray);
 }

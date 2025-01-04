@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -41,6 +42,8 @@ public abstract class ShoulderRidingModel<T extends Entity> extends AgeableListM
     this.setupAnim(ModelState.SHOULDER, ticks, pLimbSwing, pLimbSwingAmount, 0.0F, pNetHeadYaw, pHeadPitch);
     if (this.young) {
       pMatrixStack.pushPose();
+*/
+/*
       if (this.scaleHead) {
         float f = 1.5F / this.babyHeadScale;
         pMatrixStack.scale(f, f, f);
@@ -78,3 +81,5 @@ public abstract class ShoulderRidingModel<T extends Entity> extends AgeableListM
 
   public abstract ResourceLocation getTexture(ModelState state);
 }
+*/
+

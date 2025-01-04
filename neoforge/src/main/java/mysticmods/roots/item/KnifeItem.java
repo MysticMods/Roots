@@ -53,7 +53,7 @@ public class KnifeItem extends BaseItems.KnifeItem {
         List<ItemStack> results = new ArrayList<>();
         // TODO: Item could be empty with only chance outputs
         results.add(recipe.value().assemble(crafting, level.registryAccess()));
-        results.addAll(recipe.assembleChanceOutputs(level.getRandom()));
+        results.addAll(recipe.value().assembleChanceOutputs(crafting, level.getRandom(), level.registryAccess()));
         for (ItemStack stack : results) {
           ItemUtil.Spawn.spawnItem(level, player == null ? blockpos : player.blockPosition(), stack);
         }

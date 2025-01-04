@@ -45,7 +45,7 @@ public class SimpleWorldCrafting implements IWorldCrafting {
     return pos;
   }
 
-  @Override
+/*  @Override
   public void setChanged() {
 
   }
@@ -58,7 +58,7 @@ public class SimpleWorldCrafting implements IWorldCrafting {
   @Override
   public void clearContent() {
 
-  }
+  }*/
 
   public UseOnContext getContext() {
     return context;

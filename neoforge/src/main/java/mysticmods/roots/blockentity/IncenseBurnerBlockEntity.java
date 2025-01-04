@@ -2,6 +2,7 @@ package mysticmods.roots.blockentity;
 
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -16,8 +17,8 @@ public class IncenseBurnerBlockEntity extends BaseBlockEntity {
 
 
   @Override
-  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-    super.onDataPacket(net, pkt);
+  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider provider) {
+    super.onDataPacket(net, pkt, provider);
 
   }
 

@@ -42,7 +42,9 @@ public class SkySoarerEffect extends MobEffect {
     super.removeAttributeModifiers(pAttributeMap);
   }
 
-  @Override
+  // TODO: Move on effect end from GSU
+
+/*  @Override
   public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
     super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
     SnapshotHelper.applyPlayerVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
@@ -57,5 +59,5 @@ public class SkySoarerEffect extends MobEffect {
       player.fallDistance = 0f;
       player.setDeltaMovement(sky.getOriginalMovement());
     });
-  }
+  }*/
 }

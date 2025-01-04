@@ -8,14 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 public abstract class SnapshotSerializer<T extends Snapshot> {
   protected Builder<T> builder;
 
-  private final Holder.Reference<SnapshotSerializer<?>> builtInRegistryHolder = RootsRegistries.SNAPSHOT_SERIALIZERS.createIntrusiveHolder(this);
-
   public SnapshotSerializer(Builder<T> builder) {
     this.builder = builder;
-  }
-
-  public Holder.Reference<SnapshotSerializer<?>> builtInRegistryHolder() {
-    return builtInRegistryHolder;
   }
 
   public T fromTag(CompoundTag tag) {

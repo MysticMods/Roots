@@ -1000,7 +1000,7 @@ public class ModItems {
     .model(subfolder("resources"))
     .register();*/
 
-  public static DeferredHolder<Item, AntlerHatItem> ANTLER_HAT = ITEMS.register("antler_hat", () -> new AntlerHatItem(DEFAULT));
+/*  public static DeferredHolder<Item, AntlerHatItem> ANTLER_HAT = ITEMS.register("antler_hat", () -> new AntlerHatItem(DEFAULT));*/
     /* REGISTRATE.item("antler_hat", AntlerHatItem::new)
     .properties(o -> o.durability(399).rarity(Rarity.RARE))
     .recipe((o, p) -> ShapedRecipeBuilder.shaped(o.getEntry(), 1)

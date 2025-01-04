@@ -71,7 +71,7 @@ public class ReputationCapability {
     result.putBoolean("untrue_pacifist", untruePacifist);
     CompoundTag reputations = new CompoundTag();
     REPUTATIONS.forEach((grove, reputation) -> {
-      reputations.putInt(String.valueOf(grove.getKey()), reputation);
+/*      reputations.putInt(String.valueOf(grove.getKey()), reputation);*/
     });
     result.put("reputations", reputations);
     return result;
@@ -136,7 +136,7 @@ public class ReputationCapability {
       buf.writeBoolean(this.untruePacifist);
       buf.writeVarInt(this.reputations.size());
       for (Object2IntMap.Entry<Grove> entry : this.reputations.object2IntEntrySet()) {
-        buf.writeResourceLocation(entry.getKey().getKey());
+/*        buf.writeResourceLocation(entry.getKey().getKey());*/
         buf.writeVarInt(entry.getIntValue());
       }
     }

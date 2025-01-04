@@ -35,13 +35,13 @@ public class FeyLightSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.maxDistance = ModSpells.FEY_LIGHT_MAX_DISTANCE.get().getValue();
+/*    this.maxDistance = ModSpells.FEY_LIGHT_MAX_DISTANCE.get().getValue();*/
   }
 
   @Override
   public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
     Vec3 look = pPlayer.getLookAngle().scale(1.5);
-    BlockPos potentialPos = new BlockPos(pPlayer.position().add(look.x, 1, look.z));
+    BlockPos potentialPos = null; // TODO: BlockPos.pPlayer.position().add(look.x, 1, look.z);
     boolean doPlace = pLevel.isEmptyBlock(potentialPos);
     if (!doPlace) {
       BlockPlaceContext context = new BlockPlaceContext(pLevel, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY, new BlockHitResult(Vec3.ZERO, Direction.UP, potentialPos, false));
@@ -52,7 +52,7 @@ public class FeyLightSpell extends Spell {
     }
 
     if (doPlace) {
-      pLevel.setBlock(potentialPos, ModBlocks.FEY_LIGHT.getDefaultState(), 3);
+      pLevel.setBlock(potentialPos, ModBlocks.FEY_LIGHT.get().defaultBlockState(), 3);
     } else {
       costs.noCharge();
     }

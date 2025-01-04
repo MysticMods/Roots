@@ -1,7 +1,6 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
@@ -11,29 +10,20 @@ import mysticmods.roots.client.blockentity.PyreBlockEntityRenderer;
 import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
-import mysticmods.roots.client.player.ShoulderRenderLayer;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModItems;
-import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.data.worldgen.biome.OverworldBiomes;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-
-
-import java.awt.*;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
@@ -98,15 +88,15 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void onRegisterEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
-    event.registerEntityRenderer(ModEntities.BEETLE, BeetleRenderer::new);
-    event.registerEntityRenderer(ModEntities.DEER, DeerRenderer::new);
-    event.registerEntityRenderer(ModEntities.DUCK, DuckRenderer::new);
-    event.registerEntityRenderer(ModEntities.OWL, OwlRenderer::new);
-    event.registerEntityRenderer(ModEntities.FENNEC, FennecRenderer::new);
-    event.registerEntityRenderer(ModEntities.GREEN_SPROUT, SproutRenderer::new);
-    event.registerEntityRenderer(ModEntities.TAN_SPROUT, SproutRenderer::new);
-    event.registerEntityRenderer(ModEntities.RED_SPROUT, SproutRenderer::new);
-    event.registerEntityRenderer(ModEntities.PURPLE_SPROUT, SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.BEETLE.value(), BeetleRenderer::new);
+    event.registerEntityRenderer(ModEntities.DEER.value(), DeerRenderer::new);
+    event.registerEntityRenderer(ModEntities.DUCK.value(), DuckRenderer::new);
+    event.registerEntityRenderer(ModEntities.OWL.value(), OwlRenderer::new);
+    event.registerEntityRenderer(ModEntities.FENNEC.value(), FennecRenderer::new);
+    event.registerEntityRenderer(ModEntities.GREEN_SPROUT.value(), SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.TAN_SPROUT.value(), SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.RED_SPROUT.value(), SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.PURPLE_SPROUT.value(), SproutRenderer::new);
   }
 
   @SubscribeEvent

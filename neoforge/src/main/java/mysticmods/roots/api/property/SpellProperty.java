@@ -14,8 +14,6 @@ public class SpellProperty<V> extends Property<V> implements IDescribedRegistryE
   private String descriptionId;
   protected Supplier<Spell> spell;
 
-  private final Holder.Reference<SpellProperty<?>> builtInRegistryHolder = RootsRegistries.SPELL_PROPERTIES.createIntrusiveHolder(this);
-
   public SpellProperty(Supplier<Spell> spell, V defaultValue, Serializer<V> serializer, String comment) {
     super(defaultValue, serializer, comment);
     this.spell = Suppliers.memoize(spell::get);
@@ -26,18 +24,13 @@ public class SpellProperty<V> extends Property<V> implements IDescribedRegistryE
   }
 
   public Holder.Reference<SpellProperty<?>> builtInRegistryHolder() {
-    return builtInRegistryHolder;
-  }
-
-  @Override
-  public ResourceLocation getKey() {
-    return builtInRegistryHolder().getKey().location();
+    return RootsRegistries.SPELL_PROPERTIES.getHolderOrThrow(RootsRegistries.SPELL_PROPERTIES.getResourceKey(this).orElseThrow());
   }
 
   @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("spell_property", getKey());
+      this.descriptionId = Util.makeDescriptionId("spell_property", builtInRegistryHolder().getKey().location());
     }
 
     return this.descriptionId;

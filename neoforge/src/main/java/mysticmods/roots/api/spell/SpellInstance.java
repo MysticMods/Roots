@@ -127,11 +127,12 @@ public class SpellInstance implements SpellLike {
   }
 
   public CompoundTag toNBT(CompoundTag result) {
-    result.putString("spell", spell.getKey().toString());
+/*    result.putString("spell", spell.getKey().toString());
     ListTag modifiers = new ListTag();
     enabledModifiers.forEach(o -> modifiers.add(StringTag.valueOf(o.getKey().toString())));
     result.put("modifiers", modifiers);
     result.putInt("cooldown", cooldown);
+    return result;*/
     return result;
   }
 

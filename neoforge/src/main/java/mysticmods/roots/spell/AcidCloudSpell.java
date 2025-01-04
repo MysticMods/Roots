@@ -45,8 +45,8 @@ public class AcidCloudSpell extends TwoRadiusSpell {
 
   @Override
   public void initialize() {
-    this.damage = ModSpells.ACID_CLOUD_DAMAGE.get().getValue();
-    this.count = ModSpells.ACID_CLOUD_COUNT.get().getValue();
+/*    this.damage = ModSpells.ACID_CLOUD_DAMAGE.get().getValue();
+    this.count = ModSpells.ACID_CLOUD_COUNT.get().getValue();*/
   }
 
   @Override
@@ -58,7 +58,8 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       }
 
       LivingEntity entity = entities.remove(pLevel.getRandom().nextInt(entities.size()));
-      entity.hurt(DamageSource.playerAttack(pPlayer), damage);
+      // TODO:
+/*      entity.hurt(DamageSource.playerAttack(pPlayer), damage);*/
     }
   }
 

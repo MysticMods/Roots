@@ -40,7 +40,7 @@ public class RunicEntityCrafting implements IEntityCrafting {
     return level;
   }
 
-  @Override
+/*  @Override
   public void setChanged() {
 
   }
@@ -53,7 +53,7 @@ public class RunicEntityCrafting implements IEntityCrafting {
   @Override
   public void clearContent() {
 
-  }
+  }*/
 
   public ItemStack getStack() {
     return stack;

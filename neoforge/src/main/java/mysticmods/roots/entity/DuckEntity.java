@@ -78,7 +78,7 @@ public class DuckEntity extends Animal {
   @org.jetbrains.annotations.Nullable
   @Override
   public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pEntity) {
-    return ModEntities.DUCK.create(pLevel);
+    return ModEntities.DUCK.get().create(pLevel);
   }
 
   @Override

@@ -8,9 +8,6 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
-import mysticmods.roots.network.Networking;
-import mysticmods.roots.network.server.ServerBoundLibraryToStaffPacket;
-import mysticmods.roots.network.server.ServerBoundSwapStaffSlotsPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
@@ -53,15 +50,17 @@ public class StaffScreen extends RootsScreen {
       throw new IllegalStateException("Staff screen opened with empty item in hand " + hand);
     }
     int index = 0;
+    super.init();
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(0), index++, guiLeft + 2, guiTop + 33)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(1), index++, guiLeft + 7, guiTop + 9)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(2), index++, guiLeft + 31, guiTop + 4)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(3), index++, guiLeft + 55, guiTop + 9)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(4), index++, guiLeft + 60, guiTop + 33)));
 
-    getMinecraft().player.getCapability(Capabilities.GRANT_CAPABILITY).resolve().ifPresentOrElse(this::createLibraryButtons, () -> {
+    // TODO: Le attachement
+/*    getMinecraft().player.getCapability(Capabilities.GRANT_CAPABILITY).resolve().ifPresentOrElse(this::createLibraryButtons, () -> {
       RootsAPI.LOG.error("Grant capability isn't present!");
-    });
+    });*/
   }
 
   private void createLibraryButtons(GrantCapability grants) {
@@ -74,7 +73,7 @@ public class StaffScreen extends RootsScreen {
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 8; x++) {
         if (index < spellInfo.size()) {
-          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, spellInfo.get(index)::spell, index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, !spellInfo.get(index).granted())));
+          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, spellInfo.get(index).spell()::value, index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, !spellInfo.get(index).granted(), null))); // TODO: null
           index++;
         }
       }
@@ -105,8 +104,8 @@ public class StaffScreen extends RootsScreen {
         // Adding a new spell from the library
         // Code duplication?
         RootsAPI.LOG.info("Tried to insert library spell " + selectedLibrary + " into spell slot " + selectedStaff);
-        ServerBoundLibraryToStaffPacket packet = new ServerBoundLibraryToStaffPacket(hand, selectedStaff, lButton.getSpell());
-        Networking.sendToServer(packet);
+/*        ServerBoundLibraryToStaffPacket packet = new ServerBoundLibraryToStaffPacket(hand, selectedStaff, lButton.getSpell());
+        Networking.sendToServer(packet);*/
         selectedLibrary = -1;
         selectedStaff = -1;
       }
@@ -117,8 +116,8 @@ public class StaffScreen extends RootsScreen {
       } else if (selectedStaff != -1) {
         // Swapping slots
         RootsAPI.LOG.info("Swapped staff slots " + selectedStaff + " and " + sButton.getId());
-        ServerBoundSwapStaffSlotsPacket packet = new ServerBoundSwapStaffSlotsPacket(hand, selectedStaff, sButton.getId());
-        Networking.sendToServer(packet);
+/*        ServerBoundSwapStaffSlotsPacket packet = new ServerBoundSwapStaffSlotsPacket(hand, selectedStaff, sButton.getId());
+        Networking.sendToServer(packet);*/
         selectedStaff = -1;
       } else if (selectedLibrary != -1) {
         // Adding a new spell from the library
@@ -128,8 +127,8 @@ public class StaffScreen extends RootsScreen {
         if (lButton == null) {
           return;
         }
-        ServerBoundLibraryToStaffPacket packet = new ServerBoundLibraryToStaffPacket(hand, sButton.getId(), lButton.getSpell());
-        Networking.sendToServer(packet);
+/*        ServerBoundLibraryToStaffPacket packet = new ServerBoundLibraryToStaffPacket(hand, sButton.getId(), lButton.getSpell());
+        Networking.sendToServer(packet);*/
         selectedLibrary = -1;
         selectedStaff = -1;
       } else {

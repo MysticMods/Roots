@@ -7,7 +7,10 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModFeatures;
 import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
@@ -15,6 +18,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,7 +55,7 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
           BlockPos pos = new BlockPos(tx, pLevel.getHeight(Heightmap.Types.WORLD_SURFACE_WG, tx, tz), tz);
           if (pLevel.getBlockState(pos.below()).is(BlockTags.DIRT)) {
             for (int j = 0; j < height; j++) {
-              pLevel.setBlock(pos.offset(0, j, 0), j == height - 1 ? ModBlocks.CHISELED_RUNESTONE.getDefaultState() : pRandom.nextFloat() < 0.4f ? ModBlocks.MOSSY_RUNESTONE.getDefaultState() : ModBlocks.RUNESTONE.getDefaultState(), 2);
+              pLevel.setBlock(pos.offset(0, j, 0), j == height - 1 ? ModBlocks.CHISELED_RUNESTONE.value().defaultBlockState() : pRandom.nextFloat() < 0.4f ? ModBlocks.MOSSY_RUNESTONE.value().defaultBlockState() : ModBlocks.RUNESTONE.value().defaultBlockState(), 2);
             }
             pillarSpots.add(new PillarSpot(tx, tz));
           }
@@ -62,7 +66,7 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
         BlockPos chestPos = center.offset(0, -2, 0);
         pLevel.setBlock(chestPos, Blocks.CHEST.defaultBlockState(), 2);
         if (pLevel.getBlockEntity(chestPos) instanceof RandomizableContainerBlockEntity lootChest) {
-          lootChest.setLootTable(RootsAPI.rl("standing_stones"), pRandom.nextLong());
+          lootChest.setLootTable(ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("standing_stones")), pRandom.nextLong());
         }
       }
       for (int i = 0; i < 5; i++) {
@@ -72,26 +76,30 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
         }
         BlockPos pillarSpot = new BlockPos(offset.getX(), pLevel.getHeight(Heightmap.Types.WORLD_SURFACE_WG, offset.getX(), offset.getZ()), offset.getZ());
         if (pLevel.getBlockState(pillarSpot.below()).is(BlockTags.DIRT)) {
-          ForgeRegistries.BLOCKS.tags().getTag(RootsTags.Blocks.STANDING_STONE_CROPS).getRandomElement(pRandom).ifPresent(block -> {
-            pLevel.setBlock(pillarSpot.below(), Blocks.FARMLAND.defaultBlockState(), 2);
-            BlockState newState = block.defaultBlockState();
-            GrowthUtil.CropData cropData = GrowthUtil.getCropData(newState);
-            if (cropData.isEmpty()) {
-              pLevel.setBlock(pillarSpot, newState, 2);
-            } else {
-              pLevel.setBlock(pillarSpot, newState.setValue(cropData.ageProperty(), cropData.maxAge()), 2);
-            }
+          BuiltInRegistries.BLOCK.getTag(RootsTags.Blocks.STANDING_STONE_CROPS).ifPresent(tag -> {
+            tag.getRandomElement(pLevel.getRandom()).ifPresent(holder -> {
+              Block block = holder.value();
+              /*          ForgeRegistries.BLOCKS.tags().getTag(RootsTags.Blocks.STANDING_STONE_CROPS).getRandomElement(pRandom).ifPresent(block -> {*/
+              pLevel.setBlock(pillarSpot.below(), Blocks.FARMLAND.defaultBlockState(), 2);
+              BlockState newState = block.defaultBlockState();
+              GrowthUtil.CropData cropData = GrowthUtil.getCropData(newState);
+              if (cropData.isEmpty()) {
+                pLevel.setBlock(pillarSpot, newState, 2);
+              } else {
+                pLevel.setBlock(pillarSpot, newState.setValue(cropData.ageProperty(), cropData.maxAge()), 2);
+              }
+            });
           });
         }
       }
 
-      ForgeRegistries.BLOCKS.tags().getTag(BlockTags.SMALL_FLOWERS).getRandomElement(pRandom).ifPresent(block -> {
-        pLevel.setBlock(center.above(), block.defaultBlockState(), 2);
-      });
+      BuiltInRegistries.BLOCK.getTag(BlockTags.SMALL_FLOWERS).ifPresent(o -> o.getRandomElement(pRandom).ifPresent(block ->
+          pLevel.setBlock(center.above(), block.value().defaultBlockState(), 2)
+      ));
     }
   }
 
-  private record PillarSpot (int x, int z) {
+  private record PillarSpot(int x, int z) {
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
@@ -109,5 +117,5 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
       result = 31 * result + z;
       return result;
     }
-  };
+  }
 }

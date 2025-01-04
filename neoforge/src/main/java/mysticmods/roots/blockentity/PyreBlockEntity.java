@@ -77,7 +77,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Override
-  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
+  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
+    // TODO:
+    InteractionHand hand = InteractionHand.MAIN_HAND;
     ItemStack inHand = player.getItemInHand(hand);
     // This is a very specific hack.
     if (inHand.is(ModItems.FIRE_STARTER.get())) {
@@ -133,10 +135,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         // Needs to be a success or it sets things on fire
         return InteractionResult.SUCCESS;
       }
-      UnlockResult failedGrants = cachedRecipe.value().checkGrants(level, (ServerPlayer) player);
-      if (failedGrants.failed() && !cachedRecipe.value().hasOutput()) {
+      UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
+      if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
-        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));
+/*        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
         failedGrants.report();
         return InteractionResult.SUCCESS;
       }

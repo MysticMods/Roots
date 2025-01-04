@@ -32,8 +32,6 @@ public abstract class LevelCondition extends DescribedEntry {
   public static final StreamCodec<RegistryFriendlyByteBuf, LevelCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.LEVEL_CONDITIONS);
   public static final StreamCodec<RegistryFriendlyByteBuf, List<LevelCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
-  private final Holder.Reference<LevelCondition> builtInRegistryHolder =  RootsRegistries.LEVEL_CONDITIONS.createIntrusiveHolder(this);
-
   public LevelCondition() {
   }
 
@@ -42,10 +40,6 @@ public abstract class LevelCondition extends DescribedEntry {
   @Override
   protected String getDescriptor() {
     return "level_condition";
-  }
-
-  public Holder.Reference<LevelCondition> builtInRegistryHolder() {
-    return builtInRegistryHolder;
   }
 
   public Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {

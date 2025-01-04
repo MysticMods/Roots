@@ -36,7 +36,7 @@ public class JauntSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.jauntDistance = ModSpells.JAUNT_DISTANCE.get().getValue();
+/*    this.jauntDistance = ModSpells.JAUNT_DISTANCE.get().getValue();*/
   }
 
   private boolean playerSafe (Level pLevel, Player player, BlockPos.MutableBlockPos position, Direction direction) {
@@ -48,12 +48,14 @@ public class JauntSpell extends Spell {
     }
 
     position.setY(startY);
-    if (pLevel.getBlockState(position).isPathfindable(pLevel, position, PathComputationType.LAND)) {
+    if (pLevel.getBlockState(position).isPathfindable(/*pLevel, position,*/ PathComputationType.LAND)) {
       safeCount++;
     }
 
+    // TODO: Where is the level/position sensitive version?
+
     position.move(direction);
-    if (pLevel.getBlockState(position).isPathfindable(pLevel, position, PathComputationType.LAND)) {
+    if (pLevel.getBlockState(position).isPathfindable(/*pLevel, position,*/ PathComputationType.LAND)) {
       safeCount++;
     }
 
@@ -63,7 +65,7 @@ public class JauntSpell extends Spell {
   @Nullable
   private Vec3 findSafePosition (Level pLevel, Player player) {
     Vec3 realPos = player.position().add(Vec3.directionFromRotation(0, player.getYRot()).scale(jauntDistance));
-    BlockPos real = new BlockPos(realPos);
+    BlockPos real = new BlockPos(0, 0, 0); // TODO: realPos);
     BlockPos.MutableBlockPos dest = real.mutable();
     int maxHeight = pLevel.dimensionType().logicalHeight() - 1;
     int safeY = pLevel.dimensionType().minY();

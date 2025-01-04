@@ -44,7 +44,7 @@ public class PetalShellSnapshot extends Snapshot {
 
     @Override
     public int getDecay() {
-      return ModSpells.PETAL_SHELL_COOLDOWN.get().getValue() * 3;
+      return 10; // ModSpells.PETAL_SHELL_COOLDOWN.get().getValue() * 3;
     }
   }
 }

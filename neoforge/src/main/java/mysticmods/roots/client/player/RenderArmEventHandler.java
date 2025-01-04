@@ -52,7 +52,7 @@ public class RenderArmEventHandler {
       }
 
       // TODO
-      VertexConsumer ivertexbuilder; // = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(chestStack.getItem().getArmorTexture(chestStack, player, EquipmentSlot.CHEST, null, false))), false, chestStack.hasFoil());
+      VertexConsumer ivertexbuilder = null; // = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(chestStack.getItem().getArmorTexture(chestStack, player, EquipmentSlot.CHEST, null, false))), false, chestStack.hasFoil());
       if (event.getArm() == HumanoidArm.RIGHT) {
         chestModel.rightArmPose = HumanoidModel.ArmPose.EMPTY;
       } else {

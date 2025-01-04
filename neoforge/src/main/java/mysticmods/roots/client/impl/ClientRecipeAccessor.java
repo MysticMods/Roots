@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 
 import javax.annotation.Nullable;

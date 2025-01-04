@@ -150,8 +150,10 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
   }
 
   @Override
-  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
+  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
     RootsAPI.LOG.info(cachedRecipe);
+    // TODO:
+    InteractionHand hand = InteractionHand.MAIN_HAND;
     ItemStack inHand = player.getItemInHand(hand);
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
@@ -177,10 +179,10 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           conditionResult.report();
           return InteractionResult.FAIL;
         }
-        UnlockResult failedGrants = cachedRecipe.value().checkGrants(level, (ServerPlayer) player);
+        UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
         if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
           RootsAPI.LOG.info("Grants failed and recipe has no output");
-          failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));
+/*          failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
           failedGrants.report();
           return InteractionResult.FAIL;
         }

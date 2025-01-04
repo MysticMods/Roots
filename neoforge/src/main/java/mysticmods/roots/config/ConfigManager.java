@@ -40,12 +40,6 @@ public class ConfigManager {
     COMMON_CONFIG = COMMON_BUILDER.build();
   }
 
-  public static void loadConfig(ModConfigSpec spec, Path path) {
-    CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
-    configData.load();
-    spec.setConfig(configData);
-  }
-
   @SubscribeEvent
   public static void onConfigReload (ModConfigEvent.Reloading event) {
     configReload(event);

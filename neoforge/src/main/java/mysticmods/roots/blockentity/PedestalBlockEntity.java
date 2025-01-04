@@ -44,7 +44,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   @Override
-  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
+  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
+    // TODO::
+    InteractionHand hand = InteractionHand.MAIN_HAND;
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }

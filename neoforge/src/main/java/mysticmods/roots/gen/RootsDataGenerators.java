@@ -30,7 +30,6 @@ public class RootsDataGenerators {
     generator.addProvider(true, RootsLootTableProvider.create(output, provider));
     generator.addProvider(event.includeServer(), new RootsEntityTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsBlockEntityTagsProvider(output, provider, helper));
-    generator.addProvider(event.includeServer(), new RootsStructureTagsProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsLangProvider(output));
     generator.addProvider(event.includeServer(), new AdvancementProvider(output, provider, helper, List.of(new RootsAdvancementGenerator())));
   }

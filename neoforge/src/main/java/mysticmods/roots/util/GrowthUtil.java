@@ -3,6 +3,7 @@ package mysticmods.roots.util;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.mixin.AccessorMixinCropBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -84,7 +85,7 @@ public class GrowthUtil {
 
     Block block = state.getBlock();
     if (block instanceof CropBlock crop) {
-      result = new CropData(block, crop.getAgeProperty(), crop.getMaxAge());
+      result = new CropData(block, ((AccessorMixinCropBlock)crop).callGetAgeProperty(), crop.getMaxAge());
       CROP_AGES.put(block, result);
       return result;
     } else {

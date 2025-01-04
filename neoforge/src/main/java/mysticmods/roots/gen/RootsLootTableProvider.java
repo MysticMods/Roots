@@ -1,5 +1,6 @@
 package mysticmods.roots.gen;
 
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -33,7 +34,7 @@ import java.util.function.BiConsumer;
 
 public class RootsLootTableProvider {
   public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-    return new LootTableProvider(output, Set.of(RootsAPI.ELYTRA_CHEST), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK)), provider);
+    return new LootTableProvider(output, Set.of(/*RootsAPI.ELYTRA_CHEST*/), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK)), provider);
   }
 
   public static class RootsBlockLootTables extends BlockLootSubProvider {
@@ -47,19 +48,19 @@ public class RootsLootTableProvider {
 
     @Override
     protected void generate() {
-      this.add(ModBlocks.CHEST.get(), lootrBlockDrop(Blocks.CHEST));
+/*      this.add(ModBlocks.CHEST.get(), lootrBlockDrop(Blocks.CHEST));
       this.add(ModBlocks.BARREL.get(), lootrBlockDrop(Blocks.BARREL));
       this.add(ModBlocks.INVENTORY.get(), lootrBlockDrop(Blocks.CHEST));
       this.add(ModBlocks.TRAPPED_CHEST.get(), lootrBlockDrop(Blocks.TRAPPED_CHEST));
       this.add(ModBlocks.SHULKER.get(), lootrBlockDrop(Blocks.SHULKER_BOX));
-      this.dropSelf(ModBlocks.TROPHY.get());
+      this.dropSelf(ModBlocks.TROPHY.get());*/
     }
 
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
       this.generate();
       HashSet<ResourceKey<LootTable>> set = new HashSet<>();
-      for (Block block : List.of(ModBlocks.CHEST.get(), ModBlocks.BARREL.get(), ModBlocks.INVENTORY.get(), ModBlocks.TRAPPED_CHEST.get(), ModBlocks.SHULKER.get(), ModBlocks.TROPHY.get())) {
+/*      for (Block block : List.of(ModBlocks.CHEST.get(), ModBlocks.BARREL.get(), ModBlocks.INVENTORY.get(), ModBlocks.TRAPPED_CHEST.get(), ModBlocks.SHULKER.get(), ModBlocks.TROPHY.get())) {
         ResourceKey<LootTable> resourceKey = block.getLootTable();
         if (resourceKey == BuiltInLootTables.EMPTY || !set.add(resourceKey)) {
           continue;
@@ -72,7 +73,7 @@ public class RootsLootTableProvider {
       }
       if (!this.map.isEmpty()) {
         throw new IllegalStateException("Created block loot tables for non-blocks: " + this.map.keySet());
-      }
+      }*/
     }
   }
 
@@ -82,7 +83,7 @@ public class RootsLootTableProvider {
 
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
-      consumer.accept(
+/*      consumer.accept(
           RootsAPI.ELYTRA_CHEST,
           LootTable.lootTable()
               .withPool(
@@ -95,7 +96,7 @@ public class RootsLootTableProvider {
               .withPool(
                   LootPool.lootPool()
                       .setRolls(ConstantValue.exactly(1))
-                      .add(LootItem.lootTableItem(RootsRegistry.getTrophyBlock()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))));
+                      .add(LootItem.lootTableItem(RootsRegistry.getTrophyBlock()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))));*/
     }
   }
 }

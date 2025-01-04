@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
@@ -106,11 +107,13 @@ public class TokenItem extends Item {
     }
 
 
-    LazyOptional<GrantCapability> oCap = pPlayer.getCapability(Capabilities.GRANT_CAPABILITY);
+*/
+/*    LazyOptional<GrantCapability> oCap = pPlayer.getCapability(Capabilities.GRANT_CAPABILITY);
     if (!oCap.isPresent()) {
       return InteractionResultHolder.fail(stack);
-    }
-    GrantCapability cap = oCap.orElseThrow(() -> new IllegalStateException("Grant capability is not present even though it said it was present for '" + pPlayer.getName().getString() + "'"));
+    }*//*
+
+    GrantCapability cap = null; //.orElseThrow(() -> new IllegalStateException("Grant capability is not present even though it said it was present for '" + pPlayer.getName().getString() + "'"));
     InteractionResultHolder<ItemStack> result = null;
     switch (type) {
       case SPELL -> {
@@ -454,3 +457,4 @@ public class TokenItem extends Item {
     return stack;
   }
 }
+*/

@@ -44,17 +44,17 @@ public class ExtensionSpell extends TwoRadiusSpell {
 
   @Override
   public void initialize() {
-    this.nightVisionDuration = ModSpells.EXTENSION_NIGHT_VISION_DURATION.get().getValue();
-    this.senseDangerDuration = ModSpells.EXTENSION_SENSE_DANGER_DURATION.get().getValue();
+/*    this.nightVisionDuration = ModSpells.EXTENSION_NIGHT_VISION_DURATION.get().getValue();
+    this.senseDangerDuration = ModSpells.EXTENSION_SENSE_DANGER_DURATION.get().getValue();*/
   }
 
   @Override
   public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
-    pPlayer.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> {
+/*    pPlayer.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> {
       pPlayer.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, nightVisionDuration, 0, false, false));
       pPlayer.addEffect(new MobEffectInstance(ModEffects.SENSE_DANGER.get(), senseDangerDuration, 0, false, false));
       snapshot.addSnapshot(pPlayer, ModSerializers.EXTENSION.get(), new ExtensionSnapshot(pPlayer, radiusZX, radiusY));
-    });
+    });*/
 
 
   }

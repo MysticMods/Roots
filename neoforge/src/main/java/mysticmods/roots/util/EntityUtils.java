@@ -24,7 +24,7 @@ public class EntityUtils {
   }
   public static Predicate<LivingEntity> isHostileTo(Player pPlayer, boolean skipSelf) {
     return entity -> {
-      Level pLevel = pPlayer.getLevel();
+      Level pLevel = pPlayer.level();
 
       if ((entity == pPlayer && skipSelf) || entity.isDeadOrDying() || entity.hurtTime > 0) {
         return false;

@@ -72,7 +72,7 @@ public class SkySoarerSnapshot extends Snapshot {
     public int getDecay() {
       // TODO: max duration of the spell???
       // duration can vary, waah
-      return ModSpells.SKY_SOARER_DURATION.get().getValue() * 3;
+      return 10; //ModSpells.SKY_SOARER_DURATION.get().getValue() * 3;
     }
   }
 }

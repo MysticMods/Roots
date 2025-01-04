@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 
 public class GroveCrafterBlockEntityRenderer extends BoundedBlockEntityRenderer<GroveCrafterBlockEntity> {
@@ -21,9 +22,9 @@ public class GroveCrafterBlockEntityRenderer extends BoundedBlockEntityRenderer<
   public void render(GroveCrafterBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
 
-    GroveRecipe recipe = pBlockEntity.getRecipe();
+    RecipeHolder<GroveRecipe> recipe = pBlockEntity.getRecipe();
     if (recipe != null) {
-      ItemStack inSlot = recipe.getResultItem(Minecraft.getInstance().getConnection().registryAccess());
+      ItemStack inSlot = recipe.value().getResultItem(Minecraft.getInstance().getConnection().registryAccess());
       int loc = pBlockEntity.getBlockPos().hashCode();
       pPoseStack.pushPose();
       pPoseStack.translate(0.5, 1.8 + Mth.cos((loc + /*RenderTickHandler.getClientTicks()*/ +pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -35,11 +36,12 @@ public class DeerEntity extends Animal {
     return ModEntities.DEER.get().create(pLevel);
   }
 
-  @Override
+  // TODO:
+/*  @Override
   protected void defineSynchedData() {
     super.defineSynchedData();
     getEntityData().define(hasHorns, random.nextBoolean());
-  }
+  }*/
 
   @Override
   protected void registerGoals() {
@@ -63,10 +65,10 @@ public class DeerEntity extends Animal {
     return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0d).add(Attributes.MOVEMENT_SPEED, 0.2d);
   }
 
-  @Override
+/*  @Override
   public float getStandingEyeHeight(Pose pose, EntityDimensions size) {
     return this.isBaby() ? this.getBbHeight() : 1.3F;
-  }
+  }*/
 
   @Nullable
   @Override
@@ -81,6 +83,12 @@ public class DeerEntity extends Animal {
   public void readAdditionalSaveData(@Nonnull CompoundTag compound) {
     super.readAdditionalSaveData(compound);
     getEntityData().set(hasHorns, compound.getBoolean("hasHorns"));
+  }
+
+  @Override
+  public boolean isFood(ItemStack arg) {
+    // TODO:
+    return false;
   }
 
   @Override

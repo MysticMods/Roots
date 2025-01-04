@@ -35,7 +35,8 @@ public class SupportingDirectionalBlockFeature extends Feature<SimpleBlockConfig
     BlockState rootState = context.config().toPlace().getState(context.random(), rootPos);
     BlockState worldState = level.getBlockState(rootPos);
 
-    if (worldState.isAir() || worldState.is(BlockTags.REPLACEABLE_PLANTS) || worldState.is(Blocks.SNOW)) {
+    // TODO: Is this new replaceable eligible?
+    if (worldState.isAir() || worldState.is(BlockTags.REPLACEABLE) || worldState.is(Blocks.SNOW)) {
       BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
       for (Direction direction : directions) {
         mutableBlockPos = mutableBlockPos.set(rootPos).move(direction.getOpposite());

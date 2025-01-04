@@ -22,7 +22,8 @@ public class HangingMossBlockFeature extends Feature<SimpleBlockConfiguration> {
     BlockState rootState = context.config().toPlace().getState(context.random(), rootPos);
     BlockState worldState = level.getBlockState(rootPos);
 
-    if (worldState.isAir() || worldState.is(BlockTags.REPLACEABLE_PLANTS)) {
+    // TODO: Compare replaceable, replaceable_by_trees
+    if (worldState.isAir() || worldState.is(BlockTags.REPLACEABLE_BY_TREES)) {
       BlockPos mPos = rootPos.above();
       BlockState mState = level.getBlockState(mPos);
       if (mState.is(RootsTags.Blocks.SUPPORTS_HANGING_MOSS) && rootState.canSurvive(level, rootPos)) {

@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.client.player;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -55,3 +56,4 @@ public class ShoulderRenderLayer<T extends Player> extends RenderLayer<T, Player
     }
   }
 }
+*/

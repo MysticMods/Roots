@@ -62,7 +62,7 @@ public class ExtensionSnapshot extends Snapshot {
 
     @Override
     public int getDecay() {
-      return ModSpells.EXTENSION_SENSE_DANGER_DURATION.get().getValue() * 3;
+      return 10; // ModSpells.EXTENSION_SENSE_DANGER_DURATION.get().getValue() * 3;
     }
   }
 }

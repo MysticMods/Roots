@@ -66,10 +66,13 @@ public class SproutEntity extends Animal {
   }
 
 
+  // TODO:
+/*
   @Override
   public float getStandingEyeHeight(Pose pose, EntityDimensions size) {
     return isBaby() ? getBbHeight() : 1.3F;
   }
+*/
 
   @org.jetbrains.annotations.Nullable
   @Override
@@ -77,8 +80,9 @@ public class SproutEntity extends Animal {
     return (AgeableMob) getType().create(p_146743_);
   }
 
+  // TODO: Whatever happened to the compound tag here
   @Override
-  public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @org.jetbrains.annotations.Nullable SpawnGroupData pSpawnData, @org.jetbrains.annotations.Nullable CompoundTag pDataTag) {
-    return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+  public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @org.jetbrains.annotations.Nullable SpawnGroupData pSpawnData) {
+    return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData);
   }
 }

@@ -16,10 +16,11 @@ public class WakefulEffect extends InstantenousMobEffect {
   }
 
   @Override
-  public void applyEffectTick(LivingEntity entity, int amplifier) {
+  public boolean applyEffectTick(LivingEntity entity, int amplifier) {
     if (entity instanceof Player player) {
       player.resetStat(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
       player.sendSystemMessage(Component.translatable("message.dandelion_cordial").setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))));
     }
+    return true;
   }
 }

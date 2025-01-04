@@ -29,7 +29,8 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
       if (pLevel.getRawBrightness(pPos, 0) >= 9) {
         int i = this.getAge(pState);
         if (i < this.getMaxAge()) {
-          float f = getGrowthSpeed(this, pLevel, pPos);
+          // TODO: This changed from block to blockstate
+          float f = getGrowthSpeed(pState, pLevel, pPos);
         if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
           BlockState pNewState = this.getStateForAge(i + 1);
           if (pState.hasProperty(BlockStateProperties.WATERLOGGED)) {

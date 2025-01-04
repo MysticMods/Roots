@@ -1,19 +1,13 @@
 package mysticmods.roots.ritual;
 
-import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.RitualProperty;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySelector;
@@ -23,12 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-
-
 
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +52,7 @@ public class AnimalHarvestRitual extends Ritual {
     }
   }
 
-  private boolean checkEntity (LootTable table, LivingEntity entity) {
+  private boolean checkEntity(LootTable table, LivingEntity entity) {
     if (normalLoot.contains(entity.getType())) {
       return true;
     } else if (emptyLoot.contains(entity.getType())) {
@@ -84,6 +73,7 @@ public class AnimalHarvestRitual extends Ritual {
       normalLoot.add(entity.getType());
       return true;
     }*/
+    return false;
   }
 
   protected List<ItemStack> getDrops(LivingEntity entity) {
@@ -100,6 +90,7 @@ public class AnimalHarvestRitual extends Ritual {
     }
     LootContext ctx = lootcontext$builder.create(LootContextParamSets.ENTITY);
     return loottable.getRandomItems(ctx);*/
+    return Collections.emptyList();
   }
 
   @Override

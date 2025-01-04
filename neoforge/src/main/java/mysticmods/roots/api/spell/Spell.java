@@ -39,8 +39,6 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
   protected ChatFormatting textColor;
   protected String descriptionId;
 
-  private final Holder.Reference<Spell> builtInRegistryHolder = RootsRegistries.SPELLS.createIntrusiveHolder(this);
-
   public Spell(Type type, ChatFormatting color, List<Cost> costs, int color1, int color2) {
     this.type = type;
     this.textColor = color;
@@ -50,7 +48,7 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
   }
 
   public Holder.Reference<Spell> builtInRegistryHolder() {
-    return builtInRegistryHolder;
+    return RootsRegistries.SPELLS.getHolderOrThrow(RootsRegistries.SPELLS.getResourceKey(this).orElseThrow());
   }
 
   @Override
@@ -80,7 +78,7 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
   @Override
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("spell", builtInRegistryHolder.getKey().location());
+      this.descriptionId = Util.makeDescriptionId("spell", builtInRegistryHolder().getKey().location());
     }
 
     return this.descriptionId;

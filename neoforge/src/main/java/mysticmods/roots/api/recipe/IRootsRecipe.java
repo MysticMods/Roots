@@ -1,6 +1,5 @@
 package mysticmods.roots.api.recipe;
 
-import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
@@ -78,8 +77,8 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return new ConditionResult(failedLevel, failedPlayer, player);
   }
 
-  default UnlockResult checkGrants(Level level, ServerPlayer player) {
-    List<Grant> result = new ArrayList<>();
+  default UnlockResult checkUnlocks(Level level, ServerPlayer player) {
+    List<Unlock<?>> result = new ArrayList<>();
     for (Unlock<?> unlock : getUnlocks()) {
       // TODO:
 /*      if (!RootsAPI.getInstance().canGrant(player, grant)) {

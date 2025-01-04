@@ -1,5 +1,6 @@
 package mysticmods.roots.api.reference;
 
+import mysticmods.roots.util.VoxelUtil;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.VoxelShape;
 

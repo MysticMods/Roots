@@ -21,11 +21,13 @@ public class ItemUtil {
   public static boolean equalWithoutSize(ItemStack item1, ItemStack item2) {
     if (item1.getItem() != item2.getItem()) {
       return false;
-    } else if (item1.getTag() == null && item2.getTag() != null) {
+/*    } else if (item1.getTag() == null && item2.getTag() != null) {
       return false;
     } else {
-      return (item1.getTag() == null || item1.getTag().equals(item2.getTag())) && item1.areCapsCompatible(item2);
+      return (item1.getTag() == null || item1.getTag().equals(item2.getTag())) && item1.areCapsCompatible(item2);*/
     }
+
+    return false;
   }
 
   public static NonNullList<ItemStack> copyItemList(NonNullList<ItemStack> reference) {
@@ -37,7 +39,9 @@ public class ItemUtil {
   }
 
   public static boolean equalWithoutDamage(ItemStack stack1, ItemStack stack2) {
-    return ItemStack.isSameItemSameTags(stack1, stack2);
+    // TODO:
+    return false;
+/*    return ItemStack.isSameItemSameTags(stack1, stack2);*/
   }
 
   public static class Spawn {

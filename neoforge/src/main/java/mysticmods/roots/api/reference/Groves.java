@@ -15,6 +15,6 @@ public interface Groves {
   ResourceKey<Grove> WILD = grove("wild");
 
   static ResourceKey<Grove> grove(String name) {
-    return ResourceKey.create(RootsRegistries.GROVE_REGISTRY, RootsAPI.rl(name));
+    return ResourceKey.create(RootsRegistries.Keys.GROVES, RootsAPI.rl(name));
   }
 }

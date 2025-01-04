@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public abstract class ModifiedArmorItem extends ArmorItem implements IModifiable {
   protected Map<Attribute, AttributeModifier> modifiers = new HashMap<>();
 
@@ -44,3 +45,4 @@ public abstract class ModifiedArmorItem extends ArmorItem implements IModifiable
     }
   }
 }
+*/

@@ -55,7 +55,7 @@ public class SnapshotCapability {
   public ListTag serializeNBT() {
     ListTag result = new ListTag();
     for (Map.Entry<SnapshotSerializer<?>, Snapshot> entry : snapshots.entrySet()) {
-      result.add(serializeSnapshot(entry.getKey().getKey(), entry.getValue()));
+/*      result.add(serializeSnapshot(entry.getKey().getKey(), entry.getValue()));*/
     }
     return result;
   }

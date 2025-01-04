@@ -20,18 +20,12 @@ public abstract class PlayerCondition extends DescribedEntry {
   public static final StreamCodec<RegistryFriendlyByteBuf, PlayerCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PLAYER_CONDITIONS);
   public static final StreamCodec<RegistryFriendlyByteBuf, List<PlayerCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
-  private final Holder.Reference<PlayerCondition> builtInRegistryHolder =  RootsRegistries.PLAYER_CONDITIONS.createIntrusiveHolder(this);
-
   public PlayerCondition() {
   }
 
   @Override
   protected String getDescriptor() {
     return "player_condition";
-  }
-
-  public Holder.Reference<PlayerCondition> builtInRegistryHolder() {
-    return builtInRegistryHolder;
   }
 
   public abstract boolean test(Level level, @Nullable Player player);

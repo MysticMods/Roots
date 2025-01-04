@@ -35,18 +35,18 @@ public class SkySoarerSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.amplifier = ModSpells.SKY_SOARER_AMPLIFIER.get().getValue();
+/*    this.amplifier = ModSpells.SKY_SOARER_AMPLIFIER.get().getValue();
     this.boosted_amplifier = ModSpells.SKY_SOARER_BOOSTED_AMPLIFIER.get().getValue();
     this.duration = ModSpells.SKY_SOARER_DURATION.get().getValue();
-    this.boosted_duration = ModSpells.SKY_SOARER_BOOSTED_DURATION.get().getValue();
+    this.boosted_duration = ModSpells.SKY_SOARER_BOOSTED_DURATION.get().getValue();*/
   }
 
   @Override
   public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
-    pPlayer.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> {
+/*    pPlayer.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> {
      pPlayer.addEffect(new MobEffectInstance(ModEffects.SKY_SOARER.get(), duration, 0));
      Vec3 vehicleMovement = pPlayer.getVehicle() != null ? pPlayer.getVehicle().getDeltaMovement() : Vec3.ZERO;
      snapshot.addSnapshot(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, pPlayer.getDeltaMovement(), vehicleMovement, amplifier));
-    });
+    });*/
   }
 }

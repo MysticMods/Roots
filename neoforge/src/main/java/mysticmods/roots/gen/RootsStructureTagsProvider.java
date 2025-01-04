@@ -1,3 +1,4 @@
+/*
 package mysticmods.roots.gen;
 
 import net.minecraft.core.HolderLookup;
@@ -29,4 +30,4 @@ public class RootsStructureTagsProvider extends IntrinsicHolderTagsProvider<Stru
   public String getName() {
     return "Roots Structure Tags";
   }
-}
+}*/

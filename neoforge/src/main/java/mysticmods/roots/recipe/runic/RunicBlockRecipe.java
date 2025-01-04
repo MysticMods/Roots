@@ -13,8 +13,8 @@ import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -60,7 +60,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   }
 
   @Override
-  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState state) {
+  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState state, HolderLookup.Provider provider) {
     BlockState newState = outputState;
     for (Property<?> prop : newState.getProperties()) {
       if (!state.hasProperty(prop)) {
@@ -83,7 +83,8 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModSerializers.RUNIC_BLOCK.get();
+    return null;
+/*    return ModSerializers.RUNIC_BLOCK.get();*/
   }
 
   @Override
@@ -94,123 +95,5 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   public String getGroup() {
     return Identifiers.RUNIC_BLOCK_RECIPE_GROUP;
-  }
-
-  public static class Serializer extends WorldRecipe.Serializer<SimpleWorldCrafting, RunicBlockRecipe> {
-    public Serializer() {
-      super(RunicBlockRecipe::new);
-    }
-
-    @Override
-    protected void fromJsonAdditional(RunicBlockRecipe recipe, ResourceLocation pRecipeId, JsonObject pJson) {
-      super.fromJsonAdditional(recipe, pRecipeId, pJson);
-      if (pJson.has("skip_properties")) {
-        JsonArray array = pJson.getAsJsonArray("skip_properties");
-        List<String> skipProps = new ArrayList<>();
-        array.forEach(o -> skipProps.add(o.getAsString()));
-        recipe.setSkipProperties(skipProps);
-      }
-      if (pJson.has("durability_cost")) {
-        recipe.setDurabilityCost(GsonHelper.getAsInt(pJson, "durability_cost"));
-      }
-    }
-
-    @Override
-    protected void fromNetworkAdditional(RunicBlockRecipe recipe, ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-      super.fromNetworkAdditional(recipe, pRecipeId, pBuffer);
-      int size = pBuffer.readVarInt();
-      for (int i = 0; i < size; i++) {
-        recipe.skipProperties.add(pBuffer.readUtf());
-      }
-      recipe.setDurabilityCost(pBuffer.readVarInt());
-    }
-
-    @Override
-    protected void toNetworkAdditional(RunicBlockRecipe recipe, FriendlyByteBuf pBuffer) {
-      super.toNetworkAdditional(recipe, pBuffer);
-      pBuffer.writeVarInt(recipe.skipProperties.size());
-      for (String property : recipe.skipProperties) {
-        pBuffer.writeUtf(property);
-      }
-      pBuffer.writeVarInt(recipe.durabilityCost);
-    }
-  }
-
-  public static class Builder extends WorldRecipe.Builder {
-    protected List<String> skipProperties = new ArrayList<>();
-    protected int durability_cost;
-
-    public Builder() {
-    }
-
-    public Builder(ItemStack result) {
-      super(result);
-    }
-
-    public Builder skipProperty (String property) {
-      this.skipProperties.add(property);
-      return this;
-    }
-
-    public Builder skipProperty (Property<?> property) {
-      this.skipProperties.add(property.getName());
-      return this;
-    }
-
-    public Builder durabilityCost (int cost) {
-      this.durability_cost = cost;
-      return this;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-      return ModSerializers.RUNIC_BLOCK.get();
-    }
-
-    @Override
-    protected boolean requireIngredients() {
-      return false;
-    }
-
-    @Override
-    public void doSave(Consumer<FinishedRecipe> consumer, ResourceLocation recipeName) {
-      consumer.accept(new Result(recipeName, result, outputState, condition, chanceOutputs, grants, levelConditions, playerConditions, getSerializer(), advancement, getAdvancementId(recipeName), skipProperties, durability_cost));
-    }
-
-    public static class Result extends WorldRecipe.Builder.Result {
-      private final List<String> skipProperties;
-      private final int durability_cost;
-
-      public Result(ResourceLocation id, ItemStack result, BlockState outputState, WorldCondition condition, List<ChanceOutput> chanceOutputs, List<Grant> grants, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, RecipeSerializer<?> serializer, Advancement.Builder advancementBuilder, ResourceLocation advancementId, List<String> skipProperties, int durabilityCost) {
-        super(id, result, outputState, condition, chanceOutputs, grants, levelConditions, playerConditions, serializer, advancementBuilder, advancementId);
-        this.skipProperties = skipProperties;
-        this.durability_cost = durabilityCost;
-      }
-
-      @Override
-      public void serializeRecipeData(JsonObject json) {
-        super.serializeRecipeData(json);
-        if (!skipProperties.isEmpty()) {
-          JsonArray skipPropertiesArray = new JsonArray();
-          for (String property : skipProperties) {
-            skipPropertiesArray.add(property);
-          }
-          json.add("skip_properties", skipPropertiesArray);
-        }
-        json.addProperty("durability_cost", durability_cost);
-      }
-    }
-  }
-
-  public static Builder builder(ItemStack stack) {
-    return new Builder(stack);
-  }
-
-  public static Builder builder(ItemLike item, int count) {
-    return new Builder(new ItemStack(item, count));
-  }
-
-  public static Builder builder(ItemLike item) {
-    return builder(item, 1);
   }
 }

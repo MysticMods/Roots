@@ -29,7 +29,7 @@ public class DesaturateSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.multiplier = ModSpells.DESATURATE_MULTIPLIER.get().getValue();
+/*    this.multiplier = ModSpells.DESATURATE_MULTIPLIER.get().getValue();*/
   }
 
   @Override
@@ -66,6 +66,6 @@ public class DesaturateSpell extends Spell {
 
     pPlayer.heal(healed);
     stats.setFoodLevel(food);
-    stats.setSaturation(Math.min(stats.saturationLevel, food));
+    stats.setSaturation(Math.min(stats.getExhaustionLevel(), food));
   }
 }

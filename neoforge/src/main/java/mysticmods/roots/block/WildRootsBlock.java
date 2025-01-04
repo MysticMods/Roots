@@ -1,5 +1,6 @@
 package mysticmods.roots.block;
 
+import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,6 +39,12 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
   public WildRootsBlock(Properties properties) {
     super(properties);
     this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false).setValue(MOSSY, false));
+  }
+
+  @Override
+  protected MapCodec<? extends DirectionalBlock> codec() {
+    // TODO:
+    return null;
   }
 
   @Override

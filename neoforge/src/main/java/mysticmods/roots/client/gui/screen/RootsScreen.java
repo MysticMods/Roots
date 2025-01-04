@@ -2,6 +2,7 @@ package mysticmods.roots.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -36,11 +37,12 @@ public abstract class RootsScreen extends Screen {
   }
 
   public void drawTooltip(PoseStack stack, int mouseX, int mouseY) {
-    if (tooltip != null && !tooltip.isEmpty()) {
+    // TODO: render tooltip?
+/*    if (tooltip != null && !tooltip.isEmpty()) {
       this.renderComponentTooltip(stack, tooltip, mouseX, mouseY, font);
     } else if (!tooltipItem.isEmpty()) {
       this.renderComponentTooltip(stack, getTooltipFromItem(tooltipItem), mouseX, mouseY, font);
-    }
+    }*/
   }
 
   public void resetTooltip() {
@@ -57,9 +59,9 @@ public abstract class RootsScreen extends Screen {
     return false;
   }
 
-  public static void drawFromTexture(ResourceLocation resourceLocation, int x, int y, int uOffset, int vOffset, int width, int height, int fileWidth, int fileHeight, PoseStack stack) {
-    RenderSystem.setShaderTexture(0, resourceLocation);
-    blit(stack, x, y, uOffset, vOffset, width, height, fileWidth, fileHeight);
+  public static void drawFromTexture(GuiGraphics graphics, ResourceLocation resourceLocation, int x, int y, int uOffset, int vOffset, int width, int height, int fileWidth, int fileHeight, PoseStack stack) {
+/*    RenderSystem.setShaderTexture(0, resourceLocation);*/
+    graphics.blit(resourceLocation, x, y, uOffset, vOffset, width, height, fileWidth, fileHeight);
   }
 
   public abstract ResourceLocation getBackground();
@@ -69,33 +71,36 @@ public abstract class RootsScreen extends Screen {
   public abstract int getBackgroundHeight();
 
   @Override
-  public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-    super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-    pPoseStack.pushPose();
+  public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+    super.render(graphics, pMouseX, pMouseY, pPartialTick);
+    graphics.pose().pushPose();
     if (scaleFactor != 1) {
-      pPoseStack.scale(scaleFactor, scaleFactor, scaleFactor);
+      graphics.pose().scale(scaleFactor, scaleFactor, scaleFactor);
       pMouseX /= scaleFactor;
       pMouseY /= scaleFactor;
     }
-    drawScreenAfterScale(pPoseStack, pMouseX, pMouseY, pPartialTick);
-    pPoseStack.popPose();
+    drawScreenAfterScale(graphics, pMouseX, pMouseY, pPartialTick);
+    graphics.pose().popPose();
   }
 
-  public void drawScreenAfterScale(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+  public void drawScreenAfterScale(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
     resetTooltip();
-    renderBackground(stack, 0);
+    PoseStack stack = graphics.pose();
+    // TODO: check integers
+    renderBackground(graphics, 0, 0, 0);
     stack.pushPose();
     stack.translate(guiLeft, guiTop, 0);
     RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-    drawBackground(stack, mouseX, mouseY, partialTicks);
+    drawBackground(graphics, mouseX, mouseY, partialTicks);
     drawForeground(stack, mouseX, mouseY, partialTicks);
     stack.popPose();
-    super.render(stack, mouseX, mouseY, partialTicks);
+    // TODO: ???
+    super.render(graphics, mouseX, mouseY, partialTicks);
     drawTooltip(stack, mouseX, mouseY);
   }
 
-  public void drawBackground(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
-    drawFromTexture(getBackground(), 0, 0, 0, 0, getBackgroundWidth(), getBackgroundHeight(), getBackgroundWidth(), getBackgroundHeight(), stack);
+  public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+    drawFromTexture(graphics, getBackground(), 0, 0, 0, 0, getBackgroundWidth(), getBackgroundHeight(), getBackgroundWidth(), getBackgroundHeight(), graphics.pose());
   }
 
   public void drawForeground(PoseStack stack, int mouseX, int mouseY, float partialTicks) {

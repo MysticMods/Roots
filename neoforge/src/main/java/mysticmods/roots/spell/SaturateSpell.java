@@ -35,8 +35,8 @@ public class SaturateSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.saturationMultiplier = ModSpells.SATURATE_SATURATION_MULTIPLIER.get().getValue();
-    this.foodMultiplier = ModSpells.SATURATE_FOOD_MULTIPLIER.get().getValue();
+/*    this.saturationMultiplier = ModSpells.SATURATE_SATURATION_MULTIPLIER.get().getValue();
+    this.foodMultiplier = ModSpells.SATURATE_FOOD_MULTIPLIER.get().getValue();*/
   }
 
   @Override
@@ -54,7 +54,7 @@ public class SaturateSpell extends Spell {
 
     Object2IntLinkedOpenHashMap<ItemStack> foodsToSlots = new Object2IntLinkedOpenHashMap<>();
     Object2IntLinkedOpenHashMap<ItemStack> usedAmounts = new Object2IntLinkedOpenHashMap<>();
-    pPlayer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
+/*    pPlayer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
       for (int i = 0; i < cap.getSlots(); i++) {
         ItemStack stack = cap.getStackInSlot(i);
         if (stack.isEdible() && !stack.is(RootsTags.Items.SKIPPED_FOODS)) {
@@ -65,7 +65,7 @@ public class SaturateSpell extends Spell {
           foodsToSlots.put(stack, i);
         }
       }
-    });
+    });*/
 
     if (foodsToSlots.isEmpty()) {
       costs.noCharge();
@@ -100,7 +100,7 @@ public class SaturateSpell extends Spell {
     }
 
     List<ItemStack> consumedItems = new ArrayList<>();
-    pPlayer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
+/*    pPlayer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
       for (Object2IntMap.Entry<ItemStack> entry : usedAmounts.object2IntEntrySet()) {
         int usedAmount = entry.getIntValue();
         int index = foodsToSlots.getInt(entry.getKey());
@@ -109,7 +109,7 @@ public class SaturateSpell extends Spell {
           consumedItems.add(result);
         }
       }
-    });
+    });*/
 
     if (consumedItems.isEmpty()) {
       costs.noCharge();
@@ -130,35 +130,38 @@ public class SaturateSpell extends Spell {
       }
       if (result.hasCraftingRemainingItem()) {
         pPlayer.getInventory().placeItemBackInInventory(result.getCraftingRemainingItem());
-      } else if (!result.equals(stack, false)) {
+        // TODO:
+      } else if (!result.equals(stack)) {
         pPlayer.getInventory().placeItemBackInInventory(result);
       }
     }
   }
 
   private float saturation(ItemStack stack, Player pPlayer, SpellInstance spell) {
-    if (!stack.isEdible()) {
+    // TODO: what is edible now
+/*    if (!stack.isEdible()) {
       return 0;
-    }
+    }*/
 
     FoodProperties props = stack.getFoodProperties(pPlayer);
     if (props == null) {
       return 0;
     }
 
-    return (props.getSaturationModifier() * props.getNutrition() * 2) * saturationMultiplier;
+    return (props.saturation() * props.nutrition() * 2) * saturationMultiplier;
   }
 
   private float food(ItemStack stack, Player pPlayer, SpellInstance spell) {
-    if (!stack.isEdible()) {
+    // TODO:
+/*    if (!stack.isEdible()) {
       return 0;
-    }
+    }*/
 
     FoodProperties props = stack.getFoodProperties(pPlayer);
     if (props == null) {
       return 0;
     }
 
-    return props.getNutrition() * foodMultiplier;
+    return props.nutrition() * foodMultiplier;
   }
 }

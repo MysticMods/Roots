@@ -35,7 +35,7 @@ public class RootsCommand {
 
   private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestSpells() {
     if (spellIds == null) {
-      spellIds = RootsRegistries.SPELL_REGISTRY.get().getValues().stream().map(Spell::getKey).map(ResourceLocation::toString).collect(Collectors.toList());
+      spellIds = RootsRegistries.SPELLS.keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList());
     }
     return Commands.argument("spell", ResourceLocationArgument.id())
         .suggests((c, build) -> SharedSuggestionProvider.suggest(spellIds, build));
@@ -43,15 +43,15 @@ public class RootsCommand {
 
   public static LiteralArgumentBuilder<CommandSourceStack> builder(LiteralArgumentBuilder<CommandSourceStack> builder) {
     builder.executes(c -> {
-      c.getSource().sendSuccess(Component.translatable("roots.commands.usage"), false);
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.usage"), false);
       return 1;
     });
     builder.then(Commands.literal("staff").executes(c -> {
-      c.getSource().sendSuccess(Component.translatable("roots.commands.staff.usage"), false);
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.staff.usage"), false);
       return 1;
     }).then(suggestSpells().executes(c -> {
       ResourceLocation spellID = ResourceLocationArgument.getId(c, "spell");
-      Spell spell = RootsRegistries.SPELL_REGISTRY.get().getValue(spellID);
+      Spell spell = RootsRegistries.SPELLS.get(spellID);
       if (spell == null) {
         c.getSource().sendFailure(Component.translatable("roots.commands.staff.spell_not_found", spellID.toString()));
         return 1;

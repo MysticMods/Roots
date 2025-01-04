@@ -14,16 +14,16 @@ import java.util.function.BiConsumer;
 public class SnapshotHelper {
     public static <T extends Snapshot> void applyPlayerVehicle (LivingEntity entity, SnapshotSerializer<T> serializer, TriConsumer<Entity, Player, T> consumer) {
         if (entity instanceof Player player) {
-            player.getRootVehicle().getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(cap -> cap.ifPresent(player, serializer, snap -> consumer.accept(player.getRootVehicle(), player, snap)));
+/*            player.getRootVehicle().getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(cap -> cap.ifPresent(player, serializer, snap -> consumer.accept(player.getRootVehicle(), player, snap)));*/
         }
     }
     public static <T extends Snapshot> void applyPlayer(LivingEntity entity, SnapshotSerializer<T> serializer, BiConsumer<Player, T> consumer) {
         if (entity instanceof Player player) {
-            player.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(cap -> cap.ifPresent(player, serializer, snap -> consumer.accept(player, snap)));
+/*            player.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(cap -> cap.ifPresent(player, serializer, snap -> consumer.accept(player, snap)));*/
         }
     }
 
     public static void apply(LivingEntity entity, BiConsumer<LivingEntity, SnapshotCapability> consumer) {
-        entity.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(cap -> consumer.accept(entity, cap));
+/*        entity.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(cap -> consumer.accept(entity, cap));*/
     }
 }

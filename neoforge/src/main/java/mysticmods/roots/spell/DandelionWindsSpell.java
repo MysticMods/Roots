@@ -32,9 +32,9 @@ public class DandelionWindsSpell extends Spell {
 
   @Override
   public void initialize() {
-    this.distance = ModSpells.DANDELION_WINDS_DISTANCE.get().getValue();
+/*    this.distance = ModSpells.DANDELION_WINDS_DISTANCE.get().getValue();
     this.r1 = ModSpells.DANDELION_WINDS_RANGE_1.get().getValue();
-    this.r2 = ModSpells.DANDELION_WINDS_RANGE_2.get().getValue();
+    this.r2 = ModSpells.DANDELION_WINDS_RANGE_2.get().getValue();*/
   }
 
   @Override

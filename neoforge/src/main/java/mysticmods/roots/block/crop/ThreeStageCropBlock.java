@@ -25,7 +25,8 @@ public class ThreeStageCropBlock extends BeetrootBlock {
     if (pLevel.getRawBrightness(pPos, 0) >= 9) {
       int i = this.getAge(pState);
       if (i < this.getMaxAge()) {
-        float f = getGrowthSpeed(this, pLevel, pPos);
+        // TODO: This changed from block to BlockState
+        float f = getGrowthSpeed(pState, pLevel, pPos);
         if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
           pLevel.setBlock(pPos, this.getStateForAge(i + 1), 2);
           net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(pLevel, pPos, pState);

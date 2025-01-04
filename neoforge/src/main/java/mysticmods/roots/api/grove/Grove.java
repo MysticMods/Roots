@@ -25,8 +25,6 @@ public class Grove extends StyledRegistryEntry<Grove> {
   private final TagKey<Ritual> alignedRituals;
   private final TagKey<Ritual> opposedRituals;
 
-  private final Holder.Reference<Grove> builtInRegistryHolder = RootsRegistries.GROVES.createIntrusiveHolder(this);
-
   public Grove(ChatFormatting color, TagKey<Herb> herbs, TagKey<Grove> alignedGroves, TagKey<Grove> opposedGroves, TagKey<Spell> alignedSpells, TagKey<Spell> opposedSpells, TagKey<Ritual> alignedRituals, TagKey<Ritual> opposedRituals) {
     this.color = color;
     this.herbs = herbs;
@@ -39,7 +37,7 @@ public class Grove extends StyledRegistryEntry<Grove> {
   }
 
   public Holder.Reference<Grove> builtInRegistryHolder() {
-    return builtInRegistryHolder;
+    return RootsRegistries.GROVES.getHolderOrThrow(RootsRegistries.GROVES.getResourceKey(this).orElseThrow());
   }
 
   public boolean aligned(Herb herb) {
