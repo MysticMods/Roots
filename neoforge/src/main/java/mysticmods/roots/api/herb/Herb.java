@@ -18,14 +18,14 @@ import java.util.function.Supplier;
 
 public class Herb extends StyledRegistryEntry<Herb> {
   private static final Map<Item, Herb> herbCache = new HashMap<>();
-  private final Supplier<? extends ItemLike> item;
+  private final Holder<Item> item;
   private final TagKey<Item> tag;
 
   public Holder.Reference<Herb> builtInRegistryHolder() {
     return RootsRegistries.HERBS.getHolderOrThrow(RootsRegistries.HERBS.getResourceKey(this).orElseThrow());
   }
 
-  public Herb(Supplier<? extends ItemLike> item, TagKey<Item> tag, ChatFormatting color) {
+  public Herb(Holder<Item> item, TagKey<Item> tag, ChatFormatting color) {
     this.item = item;
     this.tag = tag;
     this.color = color;
@@ -56,8 +56,8 @@ public class Herb extends StyledRegistryEntry<Herb> {
     return null;
   }*/
 
-  public ItemLike getItem() {
-    return item.get();
+  public Holder<Item> getItem() {
+    return item;
   }
 
   public TagKey<Item> getTag() {

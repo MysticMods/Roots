@@ -1,24 +1,26 @@
 package mysticmods.roots.api.herb;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.util.EnumUtil;
 import net.minecraft.core.Holder;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ByIdMap;
+import net.minecraft.util.StringRepresentable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
+import java.util.function.IntFunction;
 
 public class Cost {
   private final CostType type;
   private final Holder<Herb> herb;
   private final double value;
+
+  public static final Codec<Cost> CODEC = RecordCodecBuilder.create(instance -> instance.group(CostType.CODEC.fieldOf("type").forGetter(Cost::getType), RootsRegistries.HERBS.holderByNameCodec().fieldOf("herb").forGetter(Cost::getHolder), Codec.DOUBLE.fieldOf("value").forGetter(Cost::getValue)).apply(instance, Cost::new));
+  public static final StreamCodec<RegistryFriendlyByteBuf, Cost> STREAM_CODEC = StreamCodec.composite(CostType.STREAM_CODEC, Cost::getType, ByteBufCodecs.holderRegistry(RootsRegistries.Keys.HERBS), Cost::getHolder, ByteBufCodecs.DOUBLE, Cost::getValue, Cost::new);
 
   protected Cost(CostType type, Holder<Herb> herb, double value) {
     this.type = type;
@@ -26,48 +28,13 @@ public class Cost {
     this.value = value;
   }
 
-  protected Cost(FriendlyByteBuf buf) {
-    this.type = CostType.values()[buf.readVarInt()];
-    final int id = buf.readVarInt();
-    this.herb = RootsRegistries.HERBS.byIdOrThrow(id).builtInRegistryHolder();
-    this.value = buf.readDouble();
-  }
-
-  protected Cost(JsonElement pJson) {
-    if (pJson == null || pJson.isJsonNull()) {
-      throw new JsonSyntaxException("Cost cannot be null");
-    } else if (!pJson.isJsonObject()) {
-      throw new JsonSyntaxException("Cost must be an object");
-    } else {
-      JsonObject pJsonObject = pJson.getAsJsonObject();
-      if (pJsonObject.get("type").isJsonNull()) {
-        throw new JsonSyntaxException("Cost must have a type");
-      }
-      if (pJsonObject.get("herb").isJsonNull()) {
-        throw new JsonSyntaxException("Cost must have a herb");
-      }
-      this.type = EnumUtil.fromString(CostType.class, GsonHelper.getAsString(pJsonObject, "type"));
-      this.herb = RootsRegistries.HERBS.get(ResourceLocation.parse(GsonHelper.getAsString(pJsonObject, "herb"))).builtInRegistryHolder();
-      this.value = GsonHelper.getAsDouble(pJsonObject, "value");
-    }
-  }
-
-  public void toNetwork(FriendlyByteBuf buf) {
-    buf.writeVarInt(this.type.ordinal());
-    buf.writeVarInt(RootsRegistries.HERBS.getId(this.herb.value()));
-    buf.writeDouble(this.value);
-  }
-
-  public JsonElement toJson() {
-    JsonObject result = new JsonObject();
-    result.addProperty("herb", herb.getKey().toString());
-    result.addProperty("value", this.value);
-    result.addProperty("type", this.type.toString().toLowerCase(Locale.ROOT));
-    return result;
-  }
 
   public CostType getType() {
     return type;
+  }
+
+  protected Holder<Herb> getHolder() {
+    return herb;
   }
 
   public Herb getHerb() {
@@ -86,42 +53,17 @@ public class Cost {
     return new Cost(CostType.MULTIPLICATIVE, herb, value);
   }
 
-  public static Cost fromNetwork(FriendlyByteBuf buf) {
-    return new Cost(buf);
-  }
-
-  public static Cost fromJson(JsonElement pJson) {
-    return new Cost(pJson);
-  }
-
-  public static List<Cost> fromNetworkArray(FriendlyByteBuf buf) {
-    List<Cost> costs = new ArrayList<>();
-    int count = buf.readVarInt();
-    for (int i = 0; i < count; i++) {
-      costs.add(Cost.fromNetwork(buf));
-    }
-    return costs;
-  }
-
-  public static List<Cost> fromJsonArray(JsonElement pJson) {
-    if (pJson.isJsonNull() || !pJson.isJsonArray() && !pJson.isJsonObject()) {
-      throw new JsonSyntaxException("Costs must be an array or object");
-    }
-    List<Cost> result = new ArrayList<>();
-    JsonArray costs;
-    if (pJson.isJsonObject()) {
-      costs = GsonHelper.getAsJsonArray(pJson.getAsJsonObject(), "costs");
-    } else {
-      costs = pJson.getAsJsonArray();
-    }
-    for (JsonElement element : costs) {
-      result.add(Cost.fromJson(element));
-    }
-    return result;
-  }
-
-  public enum CostType {
+  public enum CostType implements StringRepresentable {
     ADDITIVE,
-    MULTIPLICATIVE
+    MULTIPLICATIVE;
+
+    public static final Codec<CostType> CODEC = StringRepresentable.fromEnum(CostType::values);
+    public static final IntFunction<CostType> BY_ID = ByIdMap.continuous(CostType::ordinal, CostType.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+    public static final StreamCodec<ByteBuf, CostType> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, CostType::ordinal);
+
+    @Override
+    public String getSerializedName() {
+      return this.toString().toLowerCase(Locale.ROOT);
+    }
   }
 }
