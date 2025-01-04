@@ -4,20 +4,25 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.registry.DescribedEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayerCondition extends DescribedEntry {
-  public static Codec<PlayerCondition> CODEC = RootsRegistries.PLAYER_CONDITIONS.byNameCodec();
+import java.util.List;
 
-  private final Type condition;
+public abstract class PlayerCondition extends DescribedEntry {
+  public static Codec<PlayerCondition> CODEC = RootsRegistries.PLAYER_CONDITIONS.byNameCodec();
+  public static Codec<List<PlayerCondition>> LIST_CODEC = CODEC.listOf();
+  public static StreamCodec<RegistryFriendlyByteBuf, PlayerCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PLAYER_CONDITIONS);
+  StreamCodec<RegistryFriendlyByteBuf, List<PlayerCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   private final Holder.Reference<PlayerCondition> builtInRegistryHolder =  RootsRegistries.PLAYER_CONDITIONS.createIntrusiveHolder(this);
 
-  public PlayerCondition(Type condition) {
-    this.condition = condition;
+  public PlayerCondition() {
   }
 
   @Override
@@ -29,21 +34,5 @@ public class PlayerCondition extends DescribedEntry {
     return builtInRegistryHolder;
   }
 
-  public Type getCondition() {
-    return condition;
-  }
-
-  @Override
-  public ResourceLocation getKey() {
-    return builtInRegistryHolder().getKey().location();
-  }
-
-  public boolean test(Level level, @Nullable Player player) {
-    return condition.test(level, player);
-  }
-
-  @FunctionalInterface
-  public interface Type {
-    boolean test(Level level, @Nullable Player player);
-  }
+  public abstract boolean test(Level level, @Nullable Player player);
 }

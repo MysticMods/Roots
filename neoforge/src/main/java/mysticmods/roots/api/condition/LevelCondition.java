@@ -9,6 +9,9 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
@@ -20,35 +23,29 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class LevelCondition extends DescribedEntry {
+public abstract class LevelCondition extends DescribedEntry {
   public static final Codec<LevelCondition> CODEC = RootsRegistries.LEVEL_CONDITIONS.byNameCodec();
-
-  private final Type condition;
+  public static Codec<List<LevelCondition>> LIST_CODEC = CODEC.listOf();
+  public static StreamCodec<RegistryFriendlyByteBuf, LevelCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.LEVEL_CONDITIONS);
+  StreamCodec<RegistryFriendlyByteBuf, List<LevelCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   private final Holder.Reference<LevelCondition> builtInRegistryHolder =  RootsRegistries.LEVEL_CONDITIONS.createIntrusiveHolder(this);
 
-  public LevelCondition(Type condition) {
-    this.condition = condition;
+  public LevelCondition() {
   }
+
+  public abstract Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player);
 
   @Override
   protected String getDescriptor() {
     return "level_condition";
   }
 
-  public Type getCondition() {
-    return condition;
-  }
-
   public Holder.Reference<LevelCondition> builtInRegistryHolder() {
     return builtInRegistryHolder;
-  }
-
-  @Override
-  public ResourceLocation getKey() {
-    return builtInRegistryHolder().getKey().location();
   }
 
   public Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {
@@ -60,7 +57,7 @@ public class LevelCondition extends DescribedEntry {
           if (exclusions.contains(pos)) {
             continue;
           }
-          Set<BlockPos> result = condition.test(pos, level, player);
+          Set<BlockPos> result = test(pos, level, player);
           if (!result.isEmpty()) {
             return result;
           }
@@ -71,12 +68,7 @@ public class LevelCondition extends DescribedEntry {
     return Collections.emptySet();
   }
 
-  @FunctionalInterface
-  public interface Type {
-    Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player);
-  }
-
-  public static class BlockStatePropertyCondition implements Type {
+  public static class BlockStatePropertyCondition extends LevelCondition {
     private final BlockPropertyMatchTest test;
 
     public BlockStatePropertyCondition(BlockPropertyMatchTest test) {
@@ -93,7 +85,7 @@ public class LevelCondition extends DescribedEntry {
     }
   }
 
-  public static class PillarCondition implements Type {
+  public static class PillarCondition extends LevelCondition{
     private final TagKey<Block> capstone;
     private final TagKey<Block> pillar;
     private final int heightExcluding;
@@ -137,7 +129,7 @@ public class LevelCondition extends DescribedEntry {
     }
   }
 
-  public static class GroveStoneCondition implements Type {
+  public static class GroveStoneCondition extends LevelCondition {
     private final TagKey<Block> groveType;
     private final boolean requireValid;
 
