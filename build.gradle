@@ -21,6 +21,8 @@ def getExecOutput(commands) {
     return out.toString().trim();
 }
 
+
+
 subprojects {
     apply plugin: "dev.architectury.loom"
     apply plugin: "me.modmuss50.mod-publish-plugin"

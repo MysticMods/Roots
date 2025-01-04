@@ -1,8 +1,5 @@
 package mysticmods.roots.api.recipe;
 
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
@@ -14,9 +11,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -80,12 +74,12 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
   @Override
   public void setGrants(List<Grant> grants) {
-    this.data.grants = grants;
+    this.data.unlocks = grants;
   }
 
   @Override
   public List<Grant> getGrants() {
-    return this.data.grants;
+    return this.data.unlocks;
   }
 
   @Override

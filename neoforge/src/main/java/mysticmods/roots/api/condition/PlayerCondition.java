@@ -15,10 +15,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class PlayerCondition extends DescribedEntry {
-  public static Codec<PlayerCondition> CODEC = RootsRegistries.PLAYER_CONDITIONS.byNameCodec();
-  public static Codec<List<PlayerCondition>> LIST_CODEC = CODEC.listOf();
-  public static StreamCodec<RegistryFriendlyByteBuf, PlayerCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PLAYER_CONDITIONS);
-  StreamCodec<RegistryFriendlyByteBuf, List<PlayerCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+  public static final Codec<PlayerCondition> CODEC = RootsRegistries.PLAYER_CONDITIONS.byNameCodec();
+  public static final Codec<List<PlayerCondition>> LIST_CODEC = CODEC.listOf();
+  public static final StreamCodec<RegistryFriendlyByteBuf, PlayerCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PLAYER_CONDITIONS);
+  public static final StreamCodec<RegistryFriendlyByteBuf, List<PlayerCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   private final Holder.Reference<PlayerCondition> builtInRegistryHolder =  RootsRegistries.PLAYER_CONDITIONS.createIntrusiveHolder(this);
 

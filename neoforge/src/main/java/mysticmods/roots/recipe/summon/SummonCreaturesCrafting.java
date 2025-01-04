@@ -6,8 +6,8 @@ import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
 
-public class SummonCreaturesCrafting extends RootsTileCrafting<SummonCreaturesInventory, PyreBlockEntity> {
+/*public class SummonCreaturesCrafting extends RootsTileCrafting<SummonCreaturesInventory, PyreBlockEntity> {
   public SummonCreaturesCrafting(SummonCreaturesInventory handler, PyreBlockEntity blockEntity, @Nullable Player player) {
     super(handler, blockEntity, player);
   }
-}
+}*/

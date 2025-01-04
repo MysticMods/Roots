@@ -1,25 +1,29 @@
 package mysticmods.roots.api.recipe.output;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
-
-
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChanceOutput {
-  public static Codec<ChanceOutput> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-    ItemStack.STRICT_CODEC.fieldOf("output").forGetter(ChanceOutput::getOutput),
-    Codec.FLOAT.fieldOf("chance").forGetter(ChanceOutput::getChance)
+  public static final Codec<ChanceOutput> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+      ItemStack.STRICT_CODEC.fieldOf("output").forGetter(ChanceOutput::getOutput),
+      Codec.FLOAT.fieldOf("chance").forGetter(ChanceOutput::getChance)
   ).apply(instance, ChanceOutput::new));
+  public static final Codec<List<ChanceOutput>> LIST_CODEC = CODEC.listOf();
+  public static final StreamCodec<RegistryFriendlyByteBuf, ChanceOutput> STREAM_CODEC = StreamCodec.composite(
+      ItemStack.STREAM_CODEC, ChanceOutput::getOutput,
+      ByteBufCodecs.FLOAT, ChanceOutput::getChance,
+      ChanceOutput::new
+  );
+  public static final StreamCodec<RegistryFriendlyByteBuf, List<ChanceOutput>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   private final ItemStack output;
   private final float chance;
@@ -47,47 +51,6 @@ public class ChanceOutput {
 
   public float getChance() {
     return chance;
-  }
-
-  public JsonElement toJson() {
-    JsonObject result = new JsonObject();
-    result.addProperty("chance", this.chance);
-    JsonObject item = new JsonObject();
-    item.addProperty("item", ForgeRegistries.ITEMS.getKey(this.output.getItem()).toString());
-    item.addProperty("count", this.output.getCount());
-    if (this.output.hasTag()) {
-      item.addProperty("nbt", this.output.getTag().toString());
-    }
-    result.add("item", item);
-    return result;
-  }
-
-  public void toNetwork(FriendlyByteBuf pBuffer) {
-    pBuffer.writeItem(getOutput());
-    pBuffer.writeFloat(getChance());
-  }
-
-  public static ChanceOutput fromJson(JsonElement pJson) {
-    if (pJson != null && !pJson.isJsonNull()) {
-      if (pJson.isJsonObject()) {
-        JsonObject pJsonObject = pJson.getAsJsonObject();
-        if (!pJsonObject.get("item").isJsonObject()) {
-          throw new JsonSyntaxException("Chance output item must be an object");
-        }
-        if (pJsonObject.get("chance").isJsonNull()) {
-          throw new JsonSyntaxException("Chance output must have a chance");
-        }
-        return new ChanceOutput(CraftingHelper.getItemStack(pJsonObject.getAsJsonObject("item"), true, true), pJsonObject.get("chance").getAsFloat());
-      } else {
-        throw new JsonSyntaxException("Expected chance output to be object");
-      }
-    } else {
-      throw new JsonSyntaxException("Chance output cannot be null");
-    }
-  }
-
-  public static ChanceOutput fromNetwork(FriendlyByteBuf pBuffer) {
-    return new ChanceOutput(pBuffer.readItem(), pBuffer.readFloat());
   }
 
   public static List<ItemStack> getOutputs(List<ChanceOutput> chanceOptions, RandomSource random) {

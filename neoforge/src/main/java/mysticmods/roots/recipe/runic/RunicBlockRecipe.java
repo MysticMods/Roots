@@ -34,8 +34,8 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   protected final List<String> skipProperties = new ArrayList<>();
   protected int durabilityCost = 1;
 
-  public RunicBlockRecipe(ResourceLocation recipeId) {
-    super(recipeId);
+  public RunicBlockRecipe() {
+    super();
   }
 
   @Override

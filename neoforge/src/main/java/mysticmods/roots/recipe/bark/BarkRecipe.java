@@ -22,10 +22,6 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     super();
   }
 
-  protected BarkRecipe(BaseRecipeHolder holder) {
-
-  }
-
   @Override
   public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState, HolderLookup.Provider provider) {
     BlockState newState = outputState;
@@ -39,7 +35,8 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModSerializers.BARK.get();
+    return null;
+    //return ModSerializers.BARK.get();
   }
 
   @Override
@@ -51,35 +48,4 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public String getGroup() {
     return Identifiers.BARK_RECIPE_GROUP;
   }
-
-/*  public static class Builder extends WorldRecipe.Builder {
-    public Builder() {
-    }
-
-    public Builder(ItemStack result) {
-      super(result);
-    }
-
-    @Override
-    protected boolean requireIngredients() {
-      return false;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-      return ModSerializers.BARK.get();
-    }
-  }
-
-  public static Builder builder(ItemStack stack) {
-    return new Builder(stack);
-  }
-
-  public static Builder builder(ItemLike item, int count) {
-    return new Builder(new ItemStack(item, count));
-  }
-
-  public static Builder builder(ItemLike item) {
-    return builder(item, 1);
-  }*/
 }

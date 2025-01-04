@@ -28,9 +28,9 @@ import java.util.Set;
 
 public abstract class LevelCondition extends DescribedEntry {
   public static final Codec<LevelCondition> CODEC = RootsRegistries.LEVEL_CONDITIONS.byNameCodec();
-  public static Codec<List<LevelCondition>> LIST_CODEC = CODEC.listOf();
-  public static StreamCodec<RegistryFriendlyByteBuf, LevelCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.LEVEL_CONDITIONS);
-  StreamCodec<RegistryFriendlyByteBuf, List<LevelCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+  public static final Codec<List<LevelCondition>> LIST_CODEC = CODEC.listOf();
+  public static final StreamCodec<RegistryFriendlyByteBuf, LevelCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.LEVEL_CONDITIONS);
+  public static final StreamCodec<RegistryFriendlyByteBuf, List<LevelCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   private final Holder.Reference<LevelCondition> builtInRegistryHolder =  RootsRegistries.LEVEL_CONDITIONS.createIntrusiveHolder(this);
 
