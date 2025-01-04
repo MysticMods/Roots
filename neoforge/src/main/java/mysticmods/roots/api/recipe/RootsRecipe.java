@@ -1,13 +1,12 @@
 package mysticmods.roots.api.recipe;
 
-import mysticmods.roots.api.capability.Grant;
+import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -28,7 +27,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     this.data.updateFrom(data);
   }
 
-  protected BaseRecipeData getData () {
+  protected BaseRecipeData getData() {
     return data;
   }
 
@@ -72,13 +71,12 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     return this.data.chanceOutputs;
   }
 
-  @Override
-  public void setGrants(List<Grant> grants) {
+  public void setUnlocks(List<Unlock<?>> grants) {
     this.data.unlocks = grants;
   }
 
   @Override
-  public List<Grant> getGrants() {
+  public List<Unlock<?>> getUnlocks() {
     return this.data.unlocks;
   }
 
@@ -98,8 +96,8 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   public ItemStack assemble(W arg, HolderLookup.Provider arg2) {
     Player player = arg.getPlayer();
     if (player != null) {
-      for (Grant grant : getGrants()) {
-        grant.grant((ServerPlayer) player);
+      for (Unlock<?> unlock : getUnlocks()) {
+        // TODO: Do unlocks
       }
     }
 

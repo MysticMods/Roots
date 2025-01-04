@@ -6,7 +6,7 @@ import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
-import mysticmods.roots.api.recipe.GrantResult;
+import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
@@ -133,7 +133,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         // Needs to be a success or it sets things on fire
         return InteractionResult.SUCCESS;
       }
-      GrantResult failedGrants = cachedRecipe.value().checkGrants(level, (ServerPlayer) player);
+      UnlockResult failedGrants = cachedRecipe.value().checkGrants(level, (ServerPlayer) player);
       if (failedGrants.failed() && !cachedRecipe.value().hasOutput()) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
         failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));

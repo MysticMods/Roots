@@ -5,7 +5,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 
-public abstract class SnapshotSerializer<T extends Snapshot> implements IKeyedRegistryEntry {
+public abstract class SnapshotSerializer<T extends Snapshot> {
   protected Builder<T> builder;
 
   private final Holder.Reference<SnapshotSerializer<?>> builtInRegistryHolder = RootsRegistries.SNAPSHOT_SERIALIZERS.createIntrusiveHolder(this);
@@ -36,11 +36,6 @@ public abstract class SnapshotSerializer<T extends Snapshot> implements IKeyedRe
   protected abstract void updateToTag (T snapshot, CompoundTag tag);
 
   public abstract int getDecay ();
-
-  @Override
-  public ResourceLocation getKey() {
-    return builtInRegistryHolder().getKey().location();
-  }
 
   public T cast (Snapshot snapshot) {
     if (snapshot.getSerializer() == this) {

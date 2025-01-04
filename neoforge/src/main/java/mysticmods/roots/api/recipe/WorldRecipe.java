@@ -1,10 +1,10 @@
 package mysticmods.roots.api.recipe;
 
-import mysticmods.roots.api.capability.Grant;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -17,6 +17,12 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   protected WorldCondition condition;
 
   public WorldRecipe() {
+  }
+
+  public WorldRecipe(BaseRecipeData data, BlockState outputState, WorldCondition condition) {
+    super(data);
+    this.outputState = outputState;
+    this.condition = condition;
   }
 
   @Override
@@ -62,13 +68,15 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
       Player player = pInv.getPlayer();
       if (player != null) {
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(pInv.getPlayer(), newState));
-        for (Grant grant : getGrants()) {
+        // TODO: Unlocks
+/*        for (Grant grant : getUnlocks()) {
           grant.grant((ServerPlayer) player);
-        }
+        }*/
       }
     }
 
-    if (hasItemOutput()) {
+    // TODO: List results
+    if (hasItemOutput(provider)) {
       return getResultItem(provider).copy();
     } else {
       return ItemStack.EMPTY;

@@ -4,7 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
-import mysticmods.roots.api.recipe.GrantResult;
+import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -177,7 +177,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           conditionResult.report();
           return InteractionResult.FAIL;
         }
-        GrantResult failedGrants = cachedRecipe.value().checkGrants(level, (ServerPlayer) player);
+        UnlockResult failedGrants = cachedRecipe.value().checkGrants(level, (ServerPlayer) player);
         if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
           RootsAPI.LOG.info("Grants failed and recipe has no output");
           failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));

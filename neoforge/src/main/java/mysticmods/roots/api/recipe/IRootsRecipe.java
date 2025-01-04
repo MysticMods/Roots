@@ -1,7 +1,7 @@
 package mysticmods.roots.api.recipe;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Grant;
+import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
@@ -20,7 +20,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
@@ -50,9 +53,9 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
 
   List<ChanceOutput> getChanceOutputs();
 
-  void setGrants(List<Grant> grants);
+  void setUnlocks(List<Unlock<?>> grants);
 
-  List<Grant> getGrants();
+  List<Unlock<?>> getUnlocks();
 
   default ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
     List<PlayerCondition> failedPlayer = new ArrayList<>();
@@ -75,48 +78,49 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return new ConditionResult(failedLevel, failedPlayer, player);
   }
 
-  default GrantResult checkGrants (Level level, ServerPlayer player) {
+  default UnlockResult checkGrants(Level level, ServerPlayer player) {
     List<Grant> result = new ArrayList<>();
-    for (Grant grant : getGrants()) {
-      if (!RootsAPI.getInstance().canGrant(player, grant)) {
+    for (Unlock<?> unlock : getUnlocks()) {
+      // TODO:
+/*      if (!RootsAPI.getInstance().canGrant(player, grant)) {
         result.add(grant);
-      }
+      }*/
     }
 
-    return new GrantResult(result, player);
+    return new UnlockResult(result, player);
   }
 
-  default int getPriority () {
+  default int getPriority() {
     return 0;
   }
 
-  default boolean isDynamic () {
+  default boolean isDynamic() {
     return false;
   }
 
-  default boolean hasItemOutput (HolderLookup.Provider provider) {
+  default boolean hasItemOutput(HolderLookup.Provider provider) {
     ItemStack item = getResultItem(provider);
     //noinspection ConstantValue
     return item != null && !item.isEmpty();
   }
 
-  default boolean hasChanceOutputs (HolderLookup.Provider provider) {
+  default boolean hasChanceOutputs(HolderLookup.Provider provider) {
     return !getChanceOutputs().isEmpty();
   }
 
-  default boolean hasOtherOutput (HolderLookup.Provider provider) {
+  default boolean hasOtherOutput(HolderLookup.Provider provider) {
     return false;
   }
 
-  default boolean hasOutput (HolderLookup.Provider provider) {
+  default boolean hasOutput(HolderLookup.Provider provider) {
     return hasItemOutput(provider) || hasChanceOutputs(provider) || hasOtherOutput(provider);
   }
 
-  default List<ItemStack> assembleChanceOutputs (W inventory, RandomSource source, HolderLookup.Provider provider) {
+  default List<ItemStack> assembleChanceOutputs(W inventory, RandomSource source, HolderLookup.Provider provider) {
     return ChanceOutput.getOutputs(getChanceOutputs(), source);
   }
 
-  default List<ItemStack> assembleOutputs (W inventory, RandomSource random, HolderLookup.Provider provider, @Nullable Supplier<List<ItemStack>> inputProvider) {
+  default List<ItemStack> assembleOutputs(W inventory, RandomSource random, HolderLookup.Provider provider, @Nullable Supplier<List<ItemStack>> inputProvider) {
     List<ItemStack> results = new ArrayList<>();
     if (hasItemOutput(provider)) {
       results.add(assemble(inventory, provider));
