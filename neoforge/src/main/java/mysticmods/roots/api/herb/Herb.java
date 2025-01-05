@@ -68,6 +68,10 @@ public class Herb extends StyledRegistryEntry<Herb> {
     return builtInRegistryHolder().is(location);
   }
 
+  public boolean is (Herb herb) {
+    return herb == this;
+  }
+
   public boolean is(ResourceKey<Herb> key) {
     return builtInRegistryHolder().is(key);
   }

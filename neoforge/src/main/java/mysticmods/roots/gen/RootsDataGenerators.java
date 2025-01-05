@@ -1,6 +1,7 @@
 package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.data.RootsDataMapProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -32,5 +33,6 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsBlockEntityTagsProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsLangProvider(output));
     generator.addProvider(event.includeServer(), new AdvancementProvider(output, provider, helper, List.of(new RootsAdvancementGenerator())));
+    generator.addProvider(event.includeServer(), new RootsDataMapProvider(output, provider));
   }
 }
