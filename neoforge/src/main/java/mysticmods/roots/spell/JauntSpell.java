@@ -1,7 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -9,13 +10,11 @@ import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SupportType;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -30,13 +29,13 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.JAUNT_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.JAUNT_COOLDOWN;
   }
 
   @Override
   public void initialize() {
-/*    this.jauntDistance = ModSpells.JAUNT_DISTANCE.get().getValue();*/
+/*    this.jauntDistance = ModSpells.JAUNT_DISTANCE.getValue();*/
   }
 
   private boolean playerSafe (Level pLevel, Player player, BlockPos.MutableBlockPos position, Direction direction) {

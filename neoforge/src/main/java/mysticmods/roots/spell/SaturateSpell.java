@@ -1,10 +1,9 @@
 package mysticmods.roots.spell;
 
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -29,14 +28,14 @@ public class SaturateSpell extends Spell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.SATURATE_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.SATURATE_COOLDOWN;
   }
 
   @Override
   public void initialize() {
-/*    this.saturationMultiplier = ModSpells.SATURATE_SATURATION_MULTIPLIER.get().getValue();
-    this.foodMultiplier = ModSpells.SATURATE_FOOD_MULTIPLIER.get().getValue();*/
+/*    this.saturationMultiplier = ModSpells.SATURATE_SATURATION_MULTIPLIER.getValue();
+    this.foodMultiplier = ModSpells.SATURATE_FOOD_MULTIPLIER.getValue();*/
   }
 
   @Override

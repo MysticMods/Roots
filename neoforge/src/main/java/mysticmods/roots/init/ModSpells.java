@@ -3,7 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.reference.SpellCosts;
 import mysticmods.roots.api.reference.SpellProperties;
 import mysticmods.roots.api.reference.Spells;
@@ -16,172 +16,188 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 
 public class ModSpells {
+  private static final Set<PropertyHolder<Property.IntegerProperty>> INT_PROPERTIES = new HashSet<>();
+  private static final Set<PropertyHolder<Property.FloatProperty>> FLOAT_PROPERTIES = new HashSet<>();
+  private static final Set<PropertyHolder<Property.DoubleProperty>> DOUBLE_PROPERTIES = new HashSet<>();
+
+  private static PropertyHolder<Property.IntegerProperty> recordProperty(String name, Property.IntegerProperty property) {
+    PropertyHolder<Property.IntegerProperty> holder = new PropertyHolder<>(RootsAPI.rl(name), property);
+    INT_PROPERTIES.add(holder);
+    return holder;
+  }
+
+  private static PropertyHolder<Property.FloatProperty> recordProperty(String name, Property.FloatProperty property) {
+    PropertyHolder<Property.FloatProperty> holder = new PropertyHolder<>(RootsAPI.rl(name), property);
+    FLOAT_PROPERTIES.add(holder);
+    return holder;
+  }
+
+  private static PropertyHolder<Property.DoubleProperty> recordProperty(String name, Property.DoubleProperty property) {
+    PropertyHolder<Property.DoubleProperty> holder = new PropertyHolder<>(RootsAPI.rl(name), property);
+    DOUBLE_PROPERTIES.add(holder);
+    return holder;
+  }
+
   private static final DeferredRegister<Spell> REGISTER = DeferredRegister.create(RootsRegistries.Keys.SPELLS, RootsAPI.MODID);
-  private static final DeferredRegister<SpellProperty<?>> REGISTER_PROPERTY = DeferredRegister.create(RootsRegistries.Keys.SPELL_PROPERTIES, RootsAPI.MODID);
 
   // Acid Cloud (20 cooldown)
   public static final DeferredHolder<Spell, AcidCloudSpell> ACID_CLOUD = spell(Spells.ACID_CLOUD, AcidCloudSpell::new, ChatFormatting.GREEN, () -> List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> ACID_CLOUD_COOLDOWN = property(Spells.ACID_CLOUD, "cooldown", () -> new SpellProperty<>(ACID_CLOUD::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> ACID_CLOUD_RADIUS_ZX = property(Spells.ACID_CLOUD, "radius_zx", () -> new SpellProperty<>(ACID_CLOUD::get, 4, Property.INTEGER_SERIALIZER, "Radius"));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> ACID_CLOUD_RADIUS_Y = property(Spells.ACID_CLOUD, "radius_y", () -> new SpellProperty<>(ACID_CLOUD::get, 2, Property.INTEGER_SERIALIZER, "Radius"));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> ACID_CLOUD_DAMAGE = property(Spells.ACID_CLOUD, "damage", () -> new SpellProperty<>(ACID_CLOUD::get, 2.0f, Property.FLOAT_SERIALIZER, SpellProperties.DAMAGE));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> ACID_CLOUD_COUNT = property(Spells.ACID_CLOUD, "count", () -> new SpellProperty<>(ACID_CLOUD::get, 1, Property.INTEGER_SERIALIZER, SpellProperties.COUNT));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COOLDOWN = recordProperty("acid_cloud/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_ZX = recordProperty("acid_cloud/radius_zx", Property.ofInt(4, "Radius"));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_RADIUS_Y = recordProperty("acid_cloud/radius_y", Property.ofInt(2, "Radius"));
+  public static final PropertyHolder<Property.FloatProperty> ACID_CLOUD_DAMAGE = recordProperty("acid_cloud/damage", Property.ofFloat(2.0f, SpellProperties.DAMAGE));
+  public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COUNT = recordProperty("acid_cloud/count", Property.ofInt(1, SpellProperties.COUNT));
 
   // Aqua Bubble (1200 cooldown)
   public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> AQUA_BUBBLE_COOLDOWN = property(Spells.AQUA_BUBBLE, "cooldown", () -> new SpellProperty<>(AQUA_BUBBLE::get, 1200, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_COOLDOWN = recordProperty("aqua_bubble/cooldown", Property.ofInt(1200, SpellProperties.COOLDOWN));
 
   // TODO: What does this actually do?
   // Augment (350 cooldown)
   public static final DeferredHolder<Spell, AugmentSpell> AUGMENT = spell(Spells.AUGMENT, AugmentSpell::new, ChatFormatting.DARK_GREEN, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250), Cost.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0125)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> AUGMENT_COOLDOWN = property(Spells.AUGMENT, "cooldown", () -> new SpellProperty<>(AUGMENT::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> AUGMENT_COOLDOWN = recordProperty("augment/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
 
   // Light Drifter (600 cooldown)
   public static final DeferredHolder<Spell, LightDrifterSpell> LIGHT_DRIFTER = spell(Spells.LIGHT_DRIFTER, LightDrifterSpell::new, ChatFormatting.DARK_PURPLE, () -> List.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> LIGHT_DRIFTER_COOLDOWN = property(Spells.LIGHT_DRIFTER, "cooldown", () -> new SpellProperty<>(LIGHT_DRIFTER::get, 600, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_COOLDOWN = recordProperty("light_drifter/cooldown", Property.ofInt(600, SpellProperties.COOLDOWN));
 
   // Magnetism (350 cooldown)
   public static final DeferredHolder<Spell, MagnetismSpell> MAGNETISM = spell(Spells.MAGNETISM, MagnetismSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> MAGNETISM_COOLDOWN = property(Spells.MAGNETISM, "cooldown", () -> new SpellProperty<>(MAGNETISM::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> MAGNETISM_RADIUS_ZX = property(Spells.MAGNETISM, "radius_zx", () -> new SpellProperty<>(MAGNETISM::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_ZX));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> MAGNETISM_RADIUS_Y = property(Spells.MAGNETISM, "radius_y", () -> new SpellProperty<>(MAGNETISM::get, 10, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_COOLDOWN = recordProperty("magnetism/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_ZX = recordProperty("magnetism/radius_zx", Property.ofInt(20, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_Y = recordProperty("magnetism/radius_y", Property.ofInt(10, SpellProperties.RADIUS_Y));
 
   // Dandelion Winds (20 cooldown)
   public static final DeferredHolder<Spell, DandelionWindsSpell> DANDELION_WINDS = spell(Spells.DANDELION_WINDS, DandelionWindsSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0125)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> DANDELION_WINDS_COOLDOWN = property(Spells.DANDELION_WINDS, "cooldown", () -> new SpellProperty<>(DANDELION_WINDS::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> DANDELION_WINDS_DISTANCE = property(Spells.DANDELION_WINDS, "distance", () -> new SpellProperty<>(DANDELION_WINDS::get, 0.75f, Property.FLOAT_SERIALIZER, "The vertical component of the vector used to move entities."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Double>> DANDELION_WINDS_RANGE_1 = property(Spells.DANDELION_WINDS, "range_1", () -> new SpellProperty<>(DANDELION_WINDS::get, 4.0, Property.DOUBLE_SERIALIZER, "The first range increment for calculating the bounding box from the player."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Double>> DANDELION_WINDS_RANGE_2 = property(Spells.DANDELION_WINDS, "range_2", () -> new SpellProperty<>(DANDELION_WINDS::get, 5.0, Property.DOUBLE_SERIALIZER, "The second range increment for calculating the bounding box from the player."));
+  public static final PropertyHolder<Property.IntegerProperty> DANDELION_WINDS_COOLDOWN = recordProperty("dandelion_winds/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_DISTANCE = recordProperty("dandelion_winds/distance", Property.ofFloat(0.75f, "The vertical component of the vector used to move entities."));
+  public static final PropertyHolder<Property.DoubleProperty> DANDELION_WINDS_RANGE_1 = recordProperty("dandelion_winds/range_1", Property.ofDouble(4.0, "The first range increment for calculating the bounding box from the player."));
+  public static final PropertyHolder<Property.DoubleProperty> DANDELION_WINDS_RANGE_2 = recordProperty("dandelion_winds/range_2", Property.ofDouble(5.0, "The second range increment for calculating the bounding box from the player."));
 
   // Desaturate (500 cooldown)
   public static final DeferredHolder<Spell, DesaturateSpell> DESATURATE = spell(Spells.DESATURATE, DesaturateSpell::new, ChatFormatting.GREEN, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> DESATURATE_COOLDOWN = property(Spells.DESATURATE, "cooldown", () -> new SpellProperty<>(DESATURATE::get, 500, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> DESATURATE_MULTIPLIER = property(Spells.DESATURATE, "multiplier", () -> new SpellProperty<>(DESATURATE::get, 0.7f, Property.FLOAT_SERIALIZER, "Amount of health restored per point of food"));
+  public static final PropertyHolder<Property.IntegerProperty> DESATURATE_COOLDOWN = recordProperty("desaturate/cooldown", Property.ofInt(500, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.FloatProperty> DESATURATE_MULTIPLIER = recordProperty("desaturate/multiplier", Property.ofFloat(0.7f, "Amount of health restored per point of food"));
 
   // Saturate
 
   public static final DeferredHolder<Spell, SaturateSpell> SATURATE = spell(Spells.SATURATE, SaturateSpell::new, ChatFormatting.DARK_GREEN, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)));
-
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> SATURATE_COOLDOWN = property(Spells.SATURATE, "cooldown", () -> new SpellProperty<>(SATURATE::get, 500, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> SATURATE_SATURATION_MULTIPLIER = property(Spells.SATURATE, "saturation_multiplier", () -> new SpellProperty<>(SATURATE::get, 0.5f, Property.FLOAT_SERIALIZER, "Amount of saturation give per point of saturation."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> SATURATE_FOOD_MULTIPLIER = property(Spells.SATURATE, "food_multiplier", () -> new SpellProperty<>(SATURATE::get, 0.5f, Property.FLOAT_SERIALIZER, "Amount of food restored per point of food."));
+  public static final PropertyHolder<Property.IntegerProperty> SATURATE_COOLDOWN = recordProperty("saturate/cooldown", Property.ofInt(500, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.FloatProperty> SATURATE_SATURATION_MULTIPLIER = recordProperty("saturate/saturation_multiplier", Property.ofFloat(0.5f, "Amount of saturation give per point of saturation."));
+  public static final PropertyHolder<Property.FloatProperty> SATURATE_FOOD_MULTIPLIER = recordProperty("saturate/food_multiplier", Property.ofFloat(0.5f, "Amount of food restored per point of food."));
 
   // Disarm spell (350 cooldown)
   public static final DeferredHolder<Spell, DisarmSpell> DISARM = spell(Spells.DISARM, DisarmSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> DISARM_COOLDOWN = property(Spells.DISARM, "cooldown", () -> new SpellProperty<>(DISARM::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> DISARM_RADIUS_ZX = property(Spells.DISARM, "radius_zx", () -> new SpellProperty<>(DISARM::get, 5, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_ZX));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> DISARM_RADIUS_Y = property(Spells.DISARM, "radius_y", () -> new SpellProperty<>(DISARM::get, 5, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_Y));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> DISARM_DROP_CHANCE = property(Spells.DISARM, "drop_chance", () -> new SpellProperty<>(DISARM::get, 0.35f, Property.FLOAT_SERIALIZER, "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed."));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_COOLDOWN = recordProperty("disarm/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_ZX = recordProperty("disarm/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_Y = recordProperty("disarm/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.FloatProperty> DISARM_DROP_CHANCE = recordProperty("disarm/drop_chance", Property.ofFloat(0.35f, "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed."));
 
   // Long night vision & sense danger
   // Extension spell (350 cooldown)
   public static final DeferredHolder<Spell, ExtensionSpell> EXTENSION = spell(Spells.EXTENSION, ExtensionSpell::new, ChatFormatting.BLUE, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.COMPLEX_1750), Cost.add(ModHerbs.WILDROOT, SpellCosts.COMPLEX_1750)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> EXTENSION_COOLDOWN = property(Spells.EXTENSION, "cooldown", () -> new SpellProperty<>(EXTENSION::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> EXTENSION_NIGHT_VISION_DURATION = property(Spells.EXTENSION, "night_vision_duration", () -> new SpellProperty<>(EXTENSION::get, 4 * 60 * 20, Property.INTEGER_SERIALIZER, "The duration of the night vision effect in ticks."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> EXTENSION_SENSE_DANGER_DURATION = property(Spells.EXTENSION, "sense_danger_duration", () -> new SpellProperty<>(EXTENSION::get, 4 * 60 * 20, Property.INTEGER_SERIALIZER, "The duration of the sense danger effect in ticks."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> EXTENSION_RADIUS_ZX = property(Spells.EXTENSION, "radius_zx", () -> new SpellProperty<>(EXTENSION::get, 40, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_ZX));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> EXTENSION_RADIUS_Y = property(Spells.EXTENSION, "radius_y", () -> new SpellProperty<>(EXTENSION::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_COOLDOWN = recordProperty("extension/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_NIGHT_VISION_DURATION = recordProperty("extension/night_vision_duration", Property.ofInt(4 * 60 * 20, "The duration of the night vision effect in ticks."));
+  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_SENSE_DANGER_DURATION = recordProperty("extension/sense_danger_duration", Property.ofInt(4 * 60 * 20, "The duration of the sense danger effect in ticks."));
+  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_ZX = recordProperty("extension/radius_zx", Property.ofInt(40, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> EXTENSION_RADIUS_Y = recordProperty("extension/radius_y", Property.ofInt(20, SpellProperties.RADIUS_Y));
 
   // Nondetection (350 cooldown)
   public static final DeferredHolder<Spell, NondetectionSpell> NONDETECTION = spell(Spells.NONDETECTION, NondetectionSpell::new, ChatFormatting.DARK_AQUA, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> NONDETECTION_COOLDOWN = property(Spells.NONDETECTION, "cooldown", () -> new SpellProperty<>(NONDETECTION::get, 350, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_COOLDOWN = recordProperty("nondetection/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
 
   // Fey Light (20 cooldown)
   public static final DeferredHolder<Spell, FeyLightSpell> FEY_LIGHT = spell(Spells.FEY_LIGHT, FeyLightSpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.0625), Cost.add(ModHerbs.PERESKIA, 0.0625)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> FEY_LIGHT_COOLDOWN = property(Spells.FEY_LIGHT, "cooldown", () -> new SpellProperty<>(FEY_LIGHT::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Double>> FEY_LIGHT_MAX_DISTANCE = property(Spells.FEY_LIGHT, "max_distance", () -> new SpellProperty<>(FEY_LIGHT::get, 10.0, Property.DOUBLE_SERIALIZER, "The maximum distance a fey light can be placed from the caster"));
+  public static final PropertyHolder<Property.IntegerProperty> FEY_LIGHT_COOLDOWN = recordProperty("fey_light/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.DoubleProperty> FEY_LIGHT_MAX_DISTANCE = recordProperty("fey_light/max_distance", Property.ofDouble(10.0, "The maximum distance a fey light can be placed from the caster"));
 
   // Geas (80 cooldown)
   public static final DeferredHolder<Spell, GeasSpell> GEAS = spell(Spells.GEAS, GeasSpell::new, ChatFormatting.RED, () -> List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> GEAS_COOLDOWN = property(Spells.GEAS, "cooldown", () -> new SpellProperty<>(GEAS::get, 80, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> GEAS_COOLDOWN = recordProperty("geas/cooldown", Property.ofInt(80, SpellProperties.COOLDOWN));
 
   // Control Undead (320 cooldown)
   public static final DeferredHolder<Spell, ControlUndeadSpell> CONTROL_UNDEAD = spell(Spells.CONTROL_UNDEAD, ControlUndeadSpell::new, ChatFormatting.DARK_GREEN, () -> List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> CONTROL_UNDEAD_COOLDOWN = property(Spells.CONTROL_UNDEAD, "cooldown", () -> new SpellProperty<>(CONTROL_UNDEAD::get, 320, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> CONTROL_UNDEAD_COOLDOWN = recordProperty("control_undead/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
+
 
   // Growth Infusion (20 cooldown)
   public static final DeferredHolder<Spell, GrowthInfusionSpell> GROWTH_INFUSION = spell(Spells.GROWTH_INFUSION, GrowthInfusionSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> GROWTH_INFUSION_COOLDOWN = property(Spells.GROWTH_INFUSION, "cooldown", () -> new SpellProperty<>(GROWTH_INFUSION::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Double>> GROWTH_INFUSION_ADDED_REACH = property(Spells.GROWTH_INFUSION, "added_reach", () -> new SpellProperty<>(GROWTH_INFUSION::get, 0.0, Property.DOUBLE_SERIALIZER, SpellProperties.ADDED_REACH));
-
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> GROWTH_INFUSION_BASE_TICKS = property(Spells.GROWTH_INFUSION, "base_ticks", () -> new SpellProperty<>(GROWTH_INFUSION::get, 2, Property.INTEGER_SERIALIZER, "The default number of growth ticks applied by base growth infusion"));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_COOLDOWN = recordProperty("growth_infusion/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.DoubleProperty> GROWTH_INFUSION_ADDED_REACH = recordProperty("growth_infusion/added_reach", Property.ofDouble(0.0, SpellProperties.ADDED_REACH));
+  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_BASE_TICKS = recordProperty("growth_infusion/base_ticks", Property.ofInt(2, "The default number of growth ticks applied by base growth infusion"));
 
   // Rampant Growth (20 cooldown)
   public static final DeferredHolder<Spell, RampantGrowthSpell> RAMPANT_GROWTH = spell(Spells.RAMPANT_GROWTH, RampantGrowthSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> RAMPANT_GROWTH_COOLDOWN = property(Spells.RAMPANT_GROWTH, "cooldown", () -> new SpellProperty<>(RAMPANT_GROWTH::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN = recordProperty("rampant_growth/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
 
   // Harvest (25 cooldown)
   public static final DeferredHolder<Spell, HarvestSpell> HARVEST = spell(Spells.HARVEST, HarvestSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> HARVEST_COOLDOWN = property(Spells.HARVEST, "cooldown", () -> new SpellProperty<>(HARVEST::get, 25, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> HARVEST_COOLDOWN = recordProperty("harvest/cooldown", Property.ofInt(25, SpellProperties.COOLDOWN));
 
   // Life Drain (20 cooldown)
   public static final DeferredHolder<Spell, LifeDrainSpell> LIFE_DRAIN = spell(Spells.LIFE_DRAIN, LifeDrainSpell::new, ChatFormatting.DARK_PURPLE, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> LIFE_DRAIN_COOLDOWN = property(Spells.LIFE_DRAIN, "cooldown", () -> new SpellProperty<>(LIFE_DRAIN::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Double>> LIFE_DRAIN_DISTANCE = property(Spells.LIFE_DRAIN, "distance", () -> new SpellProperty<>(LIFE_DRAIN::get, 3.0, Property.DOUBLE_SERIALIZER, "The first value used when calculating the vector from the caster."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Double>> LIFE_DRAIN_BOUNDS = property(Spells.LIFE_DRAIN, "bounds", () -> new SpellProperty<>(LIFE_DRAIN::get, 2.0, Property.DOUBLE_SERIALIZER, "The second value used when calculating the size of the bounding box from the caster's look vector."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> LIFE_DRAIN_DAMAGE = property(Spells.LIFE_DRAIN, "damage", () -> new SpellProperty<>(LIFE_DRAIN::get, 3.0F, Property.FLOAT_SERIALIZER, SpellProperties.DAMAGE));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> LIFE_DRAIN_HEAL = property(Spells.LIFE_DRAIN, "heal", () -> new SpellProperty<>(LIFE_DRAIN::get, 0.5F, Property.FLOAT_SERIALIZER, "The amount a player should be healed for each entity damaged."));
+  public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = recordProperty("life_drain/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_DISTANCE = recordProperty("life_drain/distance", Property.ofDouble(3.0, "The first value used when calculating the vector from the caster."));
+  public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_BOUNDS = recordProperty("life_drain/bounds", Property.ofDouble(2.0, "The second value used when calculating the size of the bounding box from the caster's look vector."));
+  public static final PropertyHolder<Property.FloatProperty> LIFE_DRAIN_DAMAGE = recordProperty("life_drain/damage", Property.ofFloat(3.0f, SpellProperties.DAMAGE));
+  public static final PropertyHolder<Property.FloatProperty> LIFE_DRAIN_HEAL = recordProperty("life_drain/heal", Property.ofFloat(0.5f, "The amount a player should be healed for each entity damaged."));
 
   // Petal Shell (120 cooldown)
   public static final DeferredHolder<Spell, PetalShellSpell> PETAL_SHELL = spell(Spells.PETAL_SHELL, PetalShellSpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> PETAL_SHELL_COOLDOWN = property(Spells.PETAL_SHELL, "cooldown", () -> new SpellProperty<>(PETAL_SHELL::get, 120, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> PETAL_SHELL_DURATION = property(Spells.PETAL_SHELL, "duration", () -> new SpellProperty<>(PETAL_SHELL::get, 100, Property.INTEGER_SERIALIZER, SpellProperties.DURATION));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> PETAL_SHELL_COUNT = property(Spells.PETAL_SHELL, "count", () -> new SpellProperty<>(PETAL_SHELL::get, 3, Property.INTEGER_SERIALIZER, "The number of petal shells."));
+  public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_COOLDOWN = recordProperty("petal_shell/cooldown", Property.ofInt(120, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_DURATION = recordProperty("petal_shell/duration", Property.ofInt(100, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_COUNT = recordProperty("petal_shell/count", Property.ofInt(3, "The number of petal shells."));
 
   // Radiance (20 cooldown)
   public static final DeferredHolder<Spell, RadianceSpell> RADIANCE = spell(Spells.RADIANCE, RadianceSpell::new, ChatFormatting.GOLD, () -> List.of(Cost.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> RADIANCE_COOLDOWN = property(Spells.RADIANCE, "cooldown", () -> new SpellProperty<>(RADIANCE::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> RADIANCE_COOLDOWN = recordProperty("radiance/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
 
   // Rose Thorns (24 cooldown)
   public static final DeferredHolder<Spell, RoseThornsSpell> ROSE_THORNS = spell(Spells.ROSE_THORNS, RoseThornsSpell::new, ChatFormatting.RED, () -> List.of(Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> ROSE_THORNS_COOLDOWN = property(Spells.ROSE_THORNS, "cooldown", () -> new SpellProperty<>(ROSE_THORNS::get, 24, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> ROSE_THORNS_COOLDOWN = recordProperty("rose_thorns/cooldown", Property.ofInt(24, SpellProperties.COOLDOWN));
 
   // Sanctuary (20 cooldown)
   public static final DeferredHolder<Spell, SanctuarySpell> SANCTUARY = spell(Spells.SANCTUARY, SanctuarySpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> SANCTUARY_COOLDOWN = property(Spells.SANCTUARY, "cooldown", () -> new SpellProperty<>(SANCTUARY::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> SANCTUARY_RADIUS_Y = property(Spells.SANCTUARY, "radius_y", () -> new SpellProperty<>(SANCTUARY::get, 5, Property.INTEGER_SERIALIZER, "The radius of the sanctuary in the Y axis."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> SANCTUARY_RADIUS_XZ = property(Spells.SANCTUARY, "radius_xz", () -> new SpellProperty<>(SANCTUARY::get, 4, Property.INTEGER_SERIALIZER, "The radius of the sanctuary in the X and Z axis."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> SANCTUARY_VELOCITY = property(Spells.SANCTUARY, "velocity", () -> new SpellProperty<>(SANCTUARY::get, 0.125f, Property.FLOAT_SERIALIZER, "The velocity modifier applied to entities inside the sanctuary."));
+  public static final PropertyHolder<Property.IntegerProperty> SANCTUARY_COOLDOWN = recordProperty("sanctuary/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> SANCTUARY_RADIUS_Y = recordProperty("sanctuary/radius_y", Property.ofInt(5, "The radius of the sanctuary in the Y axis."));
+  public static final PropertyHolder<Property.IntegerProperty> SANCTUARY_RADIUS_XZ = recordProperty("sanctuary/radius_xz", Property.ofInt(4, "The radius of the sanctuary in the X and Z axis."));
+  public static final PropertyHolder<Property.FloatProperty> SANCTUARY_VELOCITY = recordProperty("sanctuary/velocity", Property.ofFloat(0.125f, "The velocity modifier applied to entities inside the sanctuary."));
 
   // Shatter (20 cooldown)
   public static final DeferredHolder<Spell, ShatterSpell> SHATTER = spell(Spells.SHATTER, ShatterSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> SHATTER_COOLDOWN = property(Spells.SHATTER, "cooldown", () -> new SpellProperty<>(SHATTER::get, 20, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> SHATTER_COOLDOWN = recordProperty("shatter/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
 
   // Jaunt (80 cooldown)
   public static final DeferredHolder<Spell, JauntSpell> JAUNT = spell(Spells.JAUNT, JauntSpell::new, ChatFormatting.DARK_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250), Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> JAUNT_COOLDOWN = property(Spells.JAUNT, "cooldown", () -> new SpellProperty<>(JAUNT::get, 80, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> JAUNT_DISTANCE = property(Spells.JAUNT, "distance", () -> new SpellProperty<>(JAUNT::get, 8, Property.INTEGER_SERIALIZER, "The number of blocks that Jaunt travels forwards."));
+  public static final PropertyHolder<Property.IntegerProperty> JAUNT_COOLDOWN = recordProperty("jaunt/cooldown", Property.ofInt(80, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> JAUNT_DISTANCE = recordProperty("jaunt/distance", Property.ofInt(8, "The number of blocks that Jaunt travels forwards."));
 
   // Storm Cloud (100 cooldown)
   public static final DeferredHolder<Spell, StormCloudSpell> STORM_CLOUD = spell(Spells.STORM_CLOUD, StormCloudSpell::new, ChatFormatting.DARK_BLUE, () -> List.of(Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> STORM_CLOUD_COOLDOWN = property(Spells.STORM_CLOUD, "cooldown", () -> new SpellProperty<>(STORM_CLOUD::get, 100, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> STORM_CLOUD_COOLDOWN = recordProperty("storm_cloud/cooldown", Property.ofInt(100, SpellProperties.COOLDOWN));
 
   // Sky Soarer (39 cooldown)
   public static final DeferredHolder<Spell, SkySoarerSpell> SKY_SOARER = spell(Spells.SKY_SOARER, SkySoarerSpell::new, ChatFormatting.BLUE, () -> List.of(Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.COMPLEX_1875)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> SKY_SOARER_COOLDOWN = property(Spells.SKY_SOARER, "cooldown", () -> new SpellProperty<>(SKY_SOARER::get, 30, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> SKY_SOARER_AMPLIFIER = property(Spells.SKY_SOARER, "amplifier", () -> new SpellProperty<>(SKY_SOARER::get, 0.9f, Property.FLOAT_SERIALIZER, "The default movement speed amplifier for Sky Soarer."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Float>> SKY_SOARER_BOOSTED_AMPLIFIER = property(Spells.SKY_SOARER, "boosted_amplifier", () -> new SpellProperty<>(SKY_SOARER::get, 0.6f, Property.FLOAT_SERIALIZER, "The movement speed amplifier for Sky Soarer boosted."));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> SKY_SOARER_DURATION = property(Spells.SKY_SOARER, "duration", () -> new SpellProperty<>(SKY_SOARER::get, 50, Property.INTEGER_SERIALIZER, SpellProperties.DURATION));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> SKY_SOARER_BOOSTED_DURATION = property(Spells.SKY_SOARER, "boosted_duration", () -> new SpellProperty<>(SKY_SOARER::get, 28, Property.INTEGER_SERIALIZER, SpellProperties.EXTENDED_DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_COOLDOWN = recordProperty("sky_soarer/cooldown", Property.ofInt(39, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_AMPLIFIER = recordProperty("sky_soarer/amplifier", Property.ofFloat(0.9f, "The default movement speed amplifier for Sky Soarer."));
+  public static final PropertyHolder<Property.FloatProperty> SKY_SOARER_BOOSTED_AMPLIFIER = recordProperty("sky_soarer/boosted_amplifier", Property.ofFloat(0.6f, "The movement speed amplifier for Sky Soarer boosted."));
+  public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_DURATION = recordProperty("sky_soarer/duration", Property.ofInt(50, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_BOOSTED_DURATION = recordProperty("sky_soarer/boosted_duration", Property.ofInt(28, SpellProperties.EXTENDED_DURATION));
 
   // Time Stop (320 cooldown)
   public static final DeferredHolder<Spell, TimeStopSpell> TIME_STOP = spell(Spells.TIME_STOP, TimeStopSpell::new, ChatFormatting.DARK_BLUE, () -> List.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> TIME_STOP_COOLDOWN = property(Spells.TIME_STOP, "cooldown", () -> new SpellProperty<>(TIME_STOP::get, 320, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> TIME_STOP_COOLDOWN = recordProperty("time_stop/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
 
   // Wildfire (24 cooldown)
   public static final DeferredHolder<Spell, WildfireSpell> WILDFIRE = spell(Spells.WILDFIRE, WildfireSpell::new, ChatFormatting.DARK_RED, () -> List.of(Cost.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250)));
-  public static final DeferredHolder<SpellProperty<?>, SpellProperty<Integer>> WILDFIRE_COOLDOWN = property(Spells.WILDFIRE, "cooldown", () -> new SpellProperty<>(WILDFIRE::get, 24, Property.INTEGER_SERIALIZER, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> WILDFIRE_COOLDOWN = recordProperty("wildfire/cooldown", Property.ofInt(24, SpellProperties.COOLDOWN));
 
   private static <T extends Spell> DeferredHolder<Spell, T> spell(ResourceKey<Spell> key, SpellConstructor<T> consturctor, ChatFormatting color, Supplier<List<Cost>> costs) {
     return REGISTER.register(key.location().getPath(), spellBuilder(consturctor, color, costs));
@@ -195,13 +211,7 @@ public class ModSpells {
     T create(ChatFormatting color, List<Cost> costs);
   }
 
-  // TODO: Use this for Ritual Properties too
-  private static <T> DeferredHolder<SpellProperty<?>, SpellProperty<T>> property(ResourceKey<Spell> key, String name, Supplier<SpellProperty<T>> builder) {
-    return REGISTER_PROPERTY.register(key.location().getPath() + "/" + name, builder);
-  }
-
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     REGISTER.register(bus);
-    REGISTER_PROPERTY.register(bus);
   }
 }

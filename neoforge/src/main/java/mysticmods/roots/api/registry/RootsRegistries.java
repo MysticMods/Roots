@@ -6,8 +6,8 @@ import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.RitualProperty;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.PropertySerializer;
+import mysticmods.roots.api.property.PropertyType;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import mysticmods.roots.api.spell.Spell;
@@ -22,8 +22,8 @@ public class RootsRegistries {
   public static final Registry<Spell> SPELLS = new RegistryBuilder<>(Keys.SPELLS).sync(true).create();
   public static final Registry<Herb> HERBS = new RegistryBuilder<>(Keys.HERBS).sync(true).create();
   public static final Registry<SpellModifier> SPELL_MODIFIERS = new RegistryBuilder<>(Keys.SPELL_MODIFIERS).sync(true).create();
-  public static final Registry<RitualProperty<?>> RITUAL_PROPERTIES = new RegistryBuilder<>(Keys.RITUAL_PROPERTIES).sync(true).create();
-  public static final Registry<SpellProperty<?>> SPELL_PROPERTIES = new RegistryBuilder<>(Keys.SPELL_PROPERTIES).sync(true).create();
+  public static final Registry<PropertyType<?>> PROPERTY_TYPES = new RegistryBuilder<>(Keys.PROPERTY_TYPES).sync(true).create();
+  public static final Registry<PropertySerializer<?>> PROPERTY_SERIALIZERS = new RegistryBuilder<>(Keys.PROPERTY_SERIALIZERS).sync(true).create();
   public static final Registry<LevelCondition> LEVEL_CONDITIONS = new RegistryBuilder<>(Keys.LEVEL_CONDITIONS).sync(true).create();
   public static final Registry<PlayerCondition> PLAYER_CONDITIONS = new RegistryBuilder<>(Keys.PLAYER_CONDITIONS).sync(true).create();
   public static final Registry<SnapshotSerializer<?>> SNAPSHOT_SERIALIZERS = new RegistryBuilder<>(Keys.SNAPSHOT_SERIALIZERS).sync(true).create();
@@ -36,8 +36,8 @@ public class RootsRegistries {
     public static ResourceKey<Registry<Ritual>> RITUALS = key(RootsAPI.rl("rituals"));
     public static ResourceKey<Registry<Spell>> SPELLS = key(RootsAPI.rl("spells"));
     public static ResourceKey<Registry<SpellModifier>> SPELL_MODIFIERS = key(RootsAPI.rl("spell_modifiers"));
-    public static ResourceKey<Registry<RitualProperty<?>>> RITUAL_PROPERTIES = key(RootsAPI.rl("ritual_properties"));
-    public static ResourceKey<Registry<SpellProperty<?>>> SPELL_PROPERTIES = key(RootsAPI.rl("spell_properties"));
+    public static ResourceKey<Registry<PropertyType<?>>> PROPERTY_TYPES = key(RootsAPI.rl("property_types"));
+    public static ResourceKey<Registry<PropertySerializer<?>>> PROPERTY_SERIALIZERS = key(RootsAPI.rl("property_serializers"));
     public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITIONS = key(RootsAPI.rl("level_conditions"));
     public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITIONS = key(RootsAPI.rl("player_conditions"));
     public static ResourceKey<Registry<SnapshotSerializer<?>>>

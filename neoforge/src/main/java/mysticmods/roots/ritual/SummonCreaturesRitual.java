@@ -1,6 +1,7 @@
 package mysticmods.roots.ritual;
 
-import mysticmods.roots.api.property.RitualProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -26,22 +27,22 @@ public class SummonCreaturesRitual extends Ritual {
   }
 
   @Override
-  protected RitualProperty<Integer> getDurationProperty() {
-    return ModRituals.SUMMON_CREATURES_DURATION.get();
+  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
+    return ModRituals.SUMMON_CREATURES_DURATION;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusXZProperty() {
+  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
     return null;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusYProperty() {
+  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
     return null;
   }
 
   @Override
-  protected RitualProperty<Integer> getIntervalProperty() {
-    return ModRituals.SUMMON_CREATURES_INTERVAL.get();
+  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
+    return ModRituals.SUMMON_CREATURES_INTERVAL;
   }
 }

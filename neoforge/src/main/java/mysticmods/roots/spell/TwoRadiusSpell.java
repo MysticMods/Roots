@@ -1,7 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -21,7 +22,7 @@ public abstract class TwoRadiusSpell extends Spell {
   @Override
   protected void initializeProperties() {
     super.initializeProperties();
-/*    SpellProperty<Integer> prop = getRadiusYProperty();
+/*    PropertyHolder<Property.IntegerProperty> prop = getRadiusYProperty();
     if (prop != null) {
       this.radiusY = prop.getValue();
     } else {
@@ -36,11 +37,11 @@ public abstract class TwoRadiusSpell extends Spell {
   }
 
   @Override
-  public abstract SpellProperty<Integer> getCooldownProperty();
+  public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
 
-  public abstract SpellProperty<Integer> getRadiusYProperty ();
+  public abstract PropertyHolder<Property.IntegerProperty> getRadiusYProperty ();
 
-  public abstract SpellProperty<Integer> getRadiusZXProperty ();
+  public abstract PropertyHolder<Property.IntegerProperty> getRadiusZXProperty ();
 
   public int getRadiusX () {
     return radiusZX;

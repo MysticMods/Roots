@@ -2,13 +2,13 @@ package mysticmods.roots.ritual;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.property.RitualProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.worldgen.trees.RootsTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -30,7 +30,7 @@ public class WildrootGrowthRitual extends Ritual {
       BlockPos.betweenClosedStream(getAABB().move(blockEntity.getBlockPos())).filter(o -> {
         BlockState state = level.getBlockState(o);
         if (state.is(RootsTags.Blocks.WILDROOT_CROP)) {
-          if (state.hasProperty(ThreeStageCropBlock.AGE) && state.getValue(ThreeStageCropBlock.AGE) == ModBlocks.WILDROOT_CROP.get().getMaxAge()) {
+          if (state.hasProperty(ThreeStageCropBlock.AGE) && state.getValue(ThreeStageCropBlock.AGE) == ModBlocks.WILDROOT_CROP.value().getMaxAge()) {
             return true;
           }
         }
@@ -68,22 +68,22 @@ public class WildrootGrowthRitual extends Ritual {
   }
 
   @Override
-  protected RitualProperty<Integer> getDurationProperty() {
-    return ModRituals.WILDROOT_GROWTH_DURATION.get();
+  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
+    return ModRituals.WILDROOT_GROWTH_DURATION;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusXZProperty() {
-    return ModRituals.WILDROOT_GROWTH_RADIUS_XZ.get();
+  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
+    return ModRituals.WILDROOT_GROWTH_RADIUS_XZ;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusYProperty() {
-    return ModRituals.WILDROOT_GROWTH_RADIUS_Y.get();
+  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModRituals.WILDROOT_GROWTH_RADIUS_Y;
   }
 
   @Override
-  protected RitualProperty<Integer> getIntervalProperty() {
-    return ModRituals.WILDROOT_GROWTH_INTERVAL.get();
+  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
+    return ModRituals.WILDROOT_GROWTH_INTERVAL;
   }
 }

@@ -3,7 +3,8 @@ package mysticmods.roots.api.spell;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.IStyledRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -108,9 +109,9 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
     return modifiers;
   }
 
-  public abstract SpellProperty<Integer> getCooldownProperty();
+  public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
 
-  public SpellProperty<Double> getReachProperty () {
+  public PropertyHolder<Property.DoubleProperty> getReachProperty () {
     return null;
   }
 
@@ -128,13 +129,13 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
 
   protected void initializeProperties() {
     // TODO: Data maps!
-/*    SpellProperty<Integer> cooldownProperty = getCooldownProperty();
+/*    PropertyHolder<Property.IntegerProperty> cooldownProperty = getCooldownProperty();
     if (cooldownProperty != null) {
       this.cooldown = cooldownProperty.getValue();
     } else {
       throw new IllegalStateException("Spell " + this + " has no cooldown property!");
     }
-    SpellProperty<Double> reachProperty = getReachProperty();
+    PropertyHolder<Property.DoubleProperty> reachProperty = getReachProperty();
     if (reachProperty != null) {
       this.reach = reachProperty.getValue();
     }*/

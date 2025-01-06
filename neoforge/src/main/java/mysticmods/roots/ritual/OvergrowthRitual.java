@@ -1,7 +1,8 @@
 package mysticmods.roots.ritual;
 
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.property.RitualProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.CreepingGroveMossBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OvergrowthRitual extends Ritual {
   private static final List<Direction> HORIZONTALS = new ArrayList<>(Arrays.stream(Direction.values()).filter(dir -> dir.getAxis().isHorizontal()).toList());
@@ -91,22 +91,22 @@ public class OvergrowthRitual extends Ritual {
   }
 
   @Override
-  protected RitualProperty<Integer> getDurationProperty() {
-    return ModRituals.OVERGROWTH_DURATION.get();
+  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
+    return ModRituals.OVERGROWTH_DURATION;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusXZProperty() {
-    return ModRituals.OVERGROWTH_RADIUS_XZ.get();
+  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
+    return ModRituals.OVERGROWTH_RADIUS_XZ;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusYProperty() {
-    return ModRituals.OVERGROWTH_RADIUS_Y.get();
+  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModRituals.OVERGROWTH_RADIUS_Y;
   }
 
   @Override
-  protected RitualProperty<Integer> getIntervalProperty() {
-    return ModRituals.OVERGROWTH_INTERVAL.get();
+  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
+    return ModRituals.OVERGROWTH_INTERVAL;
   }
 }

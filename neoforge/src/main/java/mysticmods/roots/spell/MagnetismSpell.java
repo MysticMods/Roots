@@ -1,7 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
@@ -20,18 +21,18 @@ public class MagnetismSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.MAGNETISM_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.MAGNETISM_COOLDOWN;
   }
 
   @Override
-  public SpellProperty<Integer> getRadiusYProperty() {
-    return ModSpells.MAGNETISM_RADIUS_Y.get();
+  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModSpells.MAGNETISM_RADIUS_Y;
   }
 
   @Override
-  public SpellProperty<Integer> getRadiusZXProperty() {
-    return ModSpells.MAGNETISM_RADIUS_ZX.get();
+  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
+    return ModSpells.MAGNETISM_RADIUS_ZX;
   }
 
   @Override

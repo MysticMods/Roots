@@ -1,6 +1,8 @@
 package mysticmods.roots.api.ritual;
 
-import mysticmods.roots.api.property.RitualProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.reference.RitualProperties;
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -61,7 +63,7 @@ public abstract class Ritual implements IDescribedRegistryEntry {
 
   private void initProperties() {
     // Data map todo!
-/*    RitualProperty<Integer> prop;
+/*    PropertyHolder<Property.IntegerProperty> prop;
     prop = getDurationProperty();
     if (prop != null) {
       duration = prop.getValue();
@@ -128,11 +130,11 @@ public abstract class Ritual implements IDescribedRegistryEntry {
     return builtInRegistryHolder().is(key);
   }
 
-  protected abstract RitualProperty<Integer> getDurationProperty();
+  protected abstract PropertyHolder<Property.IntegerProperty> getDurationProperty();
 
-  protected abstract RitualProperty<Integer> getRadiusXZProperty();
+  protected abstract PropertyHolder<Property.IntegerProperty> getRadiusXZProperty();
 
-  protected abstract RitualProperty<Integer> getRadiusYProperty();
+  protected abstract PropertyHolder<Property.IntegerProperty> getRadiusYProperty();
 
-  protected abstract RitualProperty<Integer> getIntervalProperty();
+  protected abstract PropertyHolder<Property.IntegerProperty> getIntervalProperty();
 }

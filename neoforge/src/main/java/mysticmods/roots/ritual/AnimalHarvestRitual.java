@@ -2,7 +2,8 @@ package mysticmods.roots.ritual;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.property.RitualProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -100,29 +101,29 @@ public class AnimalHarvestRitual extends Ritual {
 
   @Override
   public void initialize() {
-/*    count = ModRituals.ANIMAL_HARVEST_COUNT.get().getValue();
-    glowDuration = ModRituals.ANIMAL_HARVEST_GLOW_DURATION.get().getValue();
-    lootingValue = ModRituals.ANIMAL_HARVEST_LOOTING_VALUE.get().getValue();
-    lootingChance = ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE.get().getValue();*/
+/*    count = ModRituals.ANIMAL_HARVEST_COUNT.getValue();
+    glowDuration = ModRituals.ANIMAL_HARVEST_GLOW_DURATION.getValue();
+    lootingValue = ModRituals.ANIMAL_HARVEST_LOOTING_VALUE.getValue();
+    lootingChance = ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE.getValue();*/
   }
 
   @Override
-  protected RitualProperty<Integer> getDurationProperty() {
-    return ModRituals.ANIMAL_HARVEST_DURATION.get();
+  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
+    return ModRituals.ANIMAL_HARVEST_DURATION;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusXZProperty() {
-    return ModRituals.ANIMAL_HARVEST_RADIUS_XZ.get();
+  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
+    return ModRituals.ANIMAL_HARVEST_RADIUS_XZ;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusYProperty() {
-    return ModRituals.ANIMAL_HARVEST_RADIUS_Y.get();
+  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModRituals.ANIMAL_HARVEST_RADIUS_Y;
   }
 
   @Override
-  protected RitualProperty<Integer> getIntervalProperty() {
-    return ModRituals.ANIMAL_HARVEST_INTERVAL.get();
+  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
+    return ModRituals.ANIMAL_HARVEST_INTERVAL;
   }
 }

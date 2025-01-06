@@ -1,6 +1,7 @@
 package mysticmods.roots.ritual;
 
-import mysticmods.roots.api.property.RitualProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
@@ -26,22 +27,22 @@ public class WindwallRitual extends Ritual {
   }
 
   @Override
-  protected RitualProperty<Integer> getDurationProperty() {
-    return ModRituals.WINDWALL_DURATION.get();
+  protected PropertyHolder<Property.IntegerProperty> getDurationProperty() {
+    return ModRituals.WINDWALL_DURATION;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusXZProperty() {
-    return ModRituals.WINDWALL_RADIUS_XZ.get();
+  protected PropertyHolder<Property.IntegerProperty> getRadiusXZProperty() {
+    return ModRituals.WINDWALL_RADIUS_XZ;
   }
 
   @Override
-  protected RitualProperty<Integer> getRadiusYProperty() {
-    return ModRituals.WINDWALL_RADIUS_Y.get();
+  protected PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModRituals.WINDWALL_RADIUS_Y;
   }
 
   @Override
-  protected RitualProperty<Integer> getIntervalProperty() {
-    return ModRituals.WINDWALL_INTERVAL.get();
+  protected PropertyHolder<Property.IntegerProperty> getIntervalProperty() {
+    return ModRituals.WINDWALL_INTERVAL;
   }
 }

@@ -1,16 +1,15 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
-import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,23 +26,23 @@ public class SanctuarySpell extends TwoRadiusSpell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.SANCTUARY_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.SANCTUARY_COOLDOWN;
   }
 
   @Override
-  public SpellProperty<Integer> getRadiusYProperty() {
-    return ModSpells.SANCTUARY_RADIUS_Y.get();
+  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModSpells.SANCTUARY_RADIUS_Y;
   }
 
   @Override
-  public SpellProperty<Integer> getRadiusZXProperty() {
-    return ModSpells.SANCTUARY_RADIUS_XZ.get();
+  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
+    return ModSpells.SANCTUARY_RADIUS_XZ;
   }
 
   @Override
   public void initialize() {
-/*    this.velocity = ModSpells.SANCTUARY_VELOCITY.get().getValue();*/
+/*    this.velocity = ModSpells.SANCTUARY_VELOCITY.getValue();*/
   }
 
   @Override

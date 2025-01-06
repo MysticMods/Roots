@@ -1,8 +1,8 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -27,18 +27,18 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.GROWTH_INFUSION_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.GROWTH_INFUSION_COOLDOWN;
   }
 
   @Override
-  public SpellProperty<Double> getReachProperty() {
-    return ModSpells.GROWTH_INFUSION_ADDED_REACH.get();
+  public PropertyHolder<Property.DoubleProperty> getReachProperty() {
+    return ModSpells.GROWTH_INFUSION_ADDED_REACH;
   }
 
   @Override
   public void initialize() {
-/*    this.base_ticks = ModSpells.GROWTH_INFUSION_BASE_TICKS.get().getValue();*/
+/*    this.base_ticks = ModSpells.GROWTH_INFUSION_BASE_TICKS.getValue();*/
   }
 
   @Override

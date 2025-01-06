@@ -1,7 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -29,13 +30,13 @@ public class FeyLightSpell extends Spell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.FEY_LIGHT_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.FEY_LIGHT_COOLDOWN;
   }
 
   @Override
   public void initialize() {
-/*    this.maxDistance = ModSpells.FEY_LIGHT_MAX_DISTANCE.get().getValue();*/
+/*    this.maxDistance = ModSpells.FEY_LIGHT_MAX_DISTANCE.getValue();*/
   }
 
   @Override

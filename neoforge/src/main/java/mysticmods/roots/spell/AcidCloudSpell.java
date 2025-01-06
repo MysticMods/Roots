@@ -1,24 +1,21 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.NeutralMob;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class AcidCloudSpell extends TwoRadiusSpell {
   private float damage;
@@ -29,24 +26,24 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.ACID_CLOUD_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.ACID_CLOUD_COOLDOWN;
   }
 
   @Override
-  public SpellProperty<Integer> getRadiusYProperty() {
-    return ModSpells.ACID_CLOUD_RADIUS_Y.get();
+  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModSpells.ACID_CLOUD_RADIUS_Y;
   }
 
   @Override
-  public SpellProperty<Integer> getRadiusZXProperty() {
-    return ModSpells.ACID_CLOUD_RADIUS_ZX.get();
+  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
+    return ModSpells.ACID_CLOUD_RADIUS_ZX;
   }
 
   @Override
   public void initialize() {
-/*    this.damage = ModSpells.ACID_CLOUD_DAMAGE.get().getValue();
-    this.count = ModSpells.ACID_CLOUD_COUNT.get().getValue();*/
+/*    this.damage = ModSpells.ACID_CLOUD_DAMAGE.getValue();
+    this.count = ModSpells.ACID_CLOUD_COUNT.getValue();*/
   }
 
   @Override

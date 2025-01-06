@@ -1,7 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -20,8 +21,8 @@ public class AquaBubbleSpell extends Spell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.AQUA_BUBBLE_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.AQUA_BUBBLE_COOLDOWN;
   }
 
   @Override

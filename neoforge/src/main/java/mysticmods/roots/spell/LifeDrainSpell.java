@@ -1,7 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -9,7 +10,6 @@ import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,16 +29,16 @@ public class LifeDrainSpell extends Spell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.LIFE_DRAIN_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.LIFE_DRAIN_COOLDOWN;
   }
 
   @Override
   public void initialize() {
-/*    this.vectorDistance = ModSpells.LIFE_DRAIN_DISTANCE.get().getValue();
-    this.boundingBoxDistance = ModSpells.LIFE_DRAIN_BOUNDS.get().getValue();
-    this.damage = ModSpells.LIFE_DRAIN_DAMAGE.get().getValue();
-    this.heal = ModSpells.LIFE_DRAIN_HEAL.get().getValue();*/
+/*    this.vectorDistance = ModSpells.LIFE_DRAIN_DISTANCE.getValue();
+    this.boundingBoxDistance = ModSpells.LIFE_DRAIN_BOUNDS.getValue();
+    this.damage = ModSpells.LIFE_DRAIN_DAMAGE.getValue();
+    this.heal = ModSpells.LIFE_DRAIN_HEAL.getValue();*/
   }
 
   @Override

@@ -2,9 +2,9 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
-import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
@@ -27,23 +27,23 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.DISARM_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.DISARM_COOLDOWN;
   }
 
   @Override
-  public SpellProperty<Integer> getRadiusYProperty() {
-    return ModSpells.DISARM_RADIUS_Y.get();
+  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModSpells.DISARM_RADIUS_Y;
   }
 
   @Override
-  public SpellProperty<Integer> getRadiusZXProperty() {
-    return ModSpells.DISARM_RADIUS_ZX.get();
+  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
+    return ModSpells.DISARM_RADIUS_ZX;
   }
 
   @Override
   public void initialize() {
-/*    this.dropChance = ModSpells.DISARM_DROP_CHANCE.get().getValue();*/
+/*    this.dropChance = ModSpells.DISARM_DROP_CHANCE.getValue();*/
   }
 
   @Override

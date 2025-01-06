@@ -1,7 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -23,13 +24,13 @@ public class DesaturateSpell extends Spell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.DESATURATE_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.DESATURATE_COOLDOWN;
   }
 
   @Override
   public void initialize() {
-/*    this.multiplier = ModSpells.DESATURATE_MULTIPLIER.get().getValue();*/
+/*    this.multiplier = ModSpells.DESATURATE_MULTIPLIER.getValue();*/
   }
 
   @Override

@@ -1,7 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.property.SpellProperty;
+import mysticmods.roots.api.property.Property;
+import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
@@ -26,15 +27,15 @@ public class DandelionWindsSpell extends Spell {
   }
 
   @Override
-  public SpellProperty<Integer> getCooldownProperty() {
-    return ModSpells.DANDELION_WINDS_COOLDOWN.get();
+  public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
+    return ModSpells.DANDELION_WINDS_COOLDOWN;
   }
 
   @Override
   public void initialize() {
-/*    this.distance = ModSpells.DANDELION_WINDS_DISTANCE.get().getValue();
-    this.r1 = ModSpells.DANDELION_WINDS_RANGE_1.get().getValue();
-    this.r2 = ModSpells.DANDELION_WINDS_RANGE_2.get().getValue();*/
+/*    this.distance = ModSpells.DANDELION_WINDS_DISTANCE.getValue();
+    this.r1 = ModSpells.DANDELION_WINDS_RANGE_1.getValue();
+    this.r2 = ModSpells.DANDELION_WINDS_RANGE_2.getValue();*/
   }
 
   @Override

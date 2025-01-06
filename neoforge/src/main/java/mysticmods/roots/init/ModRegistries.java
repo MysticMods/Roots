@@ -14,8 +14,8 @@ public class ModRegistries {
     event.register(RootsRegistries.RITUALS);
     event.register(RootsRegistries.SPELLS);
     event.register(RootsRegistries.SPELL_MODIFIERS);
-    event.register(RootsRegistries.RITUAL_PROPERTIES);
-    event.register(RootsRegistries.SPELL_PROPERTIES);
+    event.register(RootsRegistries.PROPERTY_SERIALIZERS);
+    event.register(RootsRegistries.PROPERTY_TYPES);
     event.register(RootsRegistries.LEVEL_CONDITIONS);
     event.register(RootsRegistries.PLAYER_CONDITIONS);
     event.register(RootsRegistries.SNAPSHOT_SERIALIZERS);
