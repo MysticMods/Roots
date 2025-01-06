@@ -34,6 +34,16 @@ public class LifeDrainSpell extends Spell {
   }
 
   @Override
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> properties = super.getProperties();
+    properties.add(ModSpells.LIFE_DRAIN_DISTANCE);
+    properties.add(ModSpells.LIFE_DRAIN_BOUNDS);
+    properties.add(ModSpells.LIFE_DRAIN_DAMAGE);
+    properties.add(ModSpells.LIFE_DRAIN_HEAL);
+    return properties;
+  }
+
+  @Override
   public void initialize() {
 /*    this.vectorDistance = ModSpells.LIFE_DRAIN_DISTANCE.getValue();
     this.boundingBoxDistance = ModSpells.LIFE_DRAIN_BOUNDS.getValue();

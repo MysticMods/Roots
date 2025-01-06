@@ -37,6 +37,13 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> result = super.getProperties();
+    result.add(ModSpells.GROWTH_INFUSION_BASE_TICKS);
+    return result;
+  }
+
+  @Override
   public void initialize() {
 /*    this.base_ticks = ModSpells.GROWTH_INFUSION_BASE_TICKS.getValue();*/
   }

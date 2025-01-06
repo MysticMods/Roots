@@ -34,6 +34,13 @@ public class JauntSpell extends Spell {
   }
 
   @Override
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> properties = super.getProperties();
+    properties.add(ModSpells.JAUNT_DISTANCE);
+    return properties;
+  }
+
+  @Override
   public void initialize() {
 /*    this.jauntDistance = ModSpells.JAUNT_DISTANCE.getValue();*/
   }

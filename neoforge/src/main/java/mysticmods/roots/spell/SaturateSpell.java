@@ -33,6 +33,14 @@ public class SaturateSpell extends Spell {
   }
 
   @Override
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> result = super.getProperties();
+    result.add(ModSpells.SATURATE_FOOD_MULTIPLIER);
+    result.add(ModSpells.SATURATE_SATURATION_MULTIPLIER);
+    return result;
+  }
+
+  @Override
   public void initialize() {
 /*    this.saturationMultiplier = ModSpells.SATURATE_SATURATION_MULTIPLIER.getValue();
     this.foodMultiplier = ModSpells.SATURATE_FOOD_MULTIPLIER.getValue();*/

@@ -17,6 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class Ritual implements IDescribedRegistryEntry {
@@ -59,6 +61,23 @@ public abstract class Ritual implements IDescribedRegistryEntry {
   protected void rebuildBounds() {
     boundingBox = new BoundingBox(-getRadiusXZ(), -getRadiusY(), -getRadiusXZ(), getRadiusXZ() + 1, getRadiusY() + 1, getRadiusXZ() + 1);
     aabb = AABB.of(getBoundingBox());
+  }
+
+  public List<PropertyHolder<?>> getProperties () {
+    List<PropertyHolder<?>> properties = new ArrayList<>();
+    if (getDurationProperty() != null) {
+      properties.add(getDurationProperty());
+    }
+    if (getRadiusXZProperty() != null) {
+      properties.add(getRadiusXZProperty());
+    }
+    if (getRadiusYProperty() != null) {
+      properties.add(getRadiusYProperty());
+    }
+    if (getIntervalProperty() != null) {
+      properties.add(getIntervalProperty());
+    }
+    return properties;
   }
 
   private void initProperties() {

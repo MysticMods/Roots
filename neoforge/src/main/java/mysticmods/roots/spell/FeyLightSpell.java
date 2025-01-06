@@ -35,6 +35,13 @@ public class FeyLightSpell extends Spell {
   }
 
   @Override
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> result = super.getProperties();
+    result.add(ModSpells.FEY_LIGHT_MAX_DISTANCE);
+    return result;
+  }
+
+  @Override
   public void initialize() {
 /*    this.maxDistance = ModSpells.FEY_LIGHT_MAX_DISTANCE.getValue();*/
   }

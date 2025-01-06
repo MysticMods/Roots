@@ -36,6 +36,14 @@ public class ExtensionSpell extends TwoRadiusSpell {
   }
 
   @Override
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> result = super.getProperties();
+    result.add(ModSpells.EXTENSION_NIGHT_VISION_DURATION);
+    result.add(ModSpells.EXTENSION_SENSE_DANGER_DURATION);
+    return result;
+  }
+
+  @Override
   public void initialize() {
 /*    this.nightVisionDuration = ModSpells.EXTENSION_NIGHT_VISION_DURATION.getValue();
     this.senseDangerDuration = ModSpells.EXTENSION_SENSE_DANGER_DURATION.getValue();*/

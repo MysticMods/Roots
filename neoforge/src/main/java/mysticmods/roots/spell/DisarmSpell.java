@@ -42,6 +42,13 @@ public class DisarmSpell extends TwoRadiusSpell {
   }
 
   @Override
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> result = super.getProperties();
+    result.add(ModSpells.DISARM_DROP_CHANCE);
+    return result;
+  }
+
+  @Override
   public void initialize() {
 /*    this.dropChance = ModSpells.DISARM_DROP_CHANCE.getValue();*/
   }

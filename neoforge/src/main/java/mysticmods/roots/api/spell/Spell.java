@@ -8,6 +8,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.IStyledRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.init.P;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -125,6 +126,17 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
 
   public void addModifier(SpellModifier modifier) {
     modifiers.add(modifier);
+  }
+
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> properties = new ArrayList<>();
+    if (getCooldownProperty() != null) {
+      properties.add(getCooldownProperty());
+    }
+    if (getReachProperty() != null) {
+      properties.add(getReachProperty());
+    }
+    return properties;
   }
 
   protected void initializeProperties() {
