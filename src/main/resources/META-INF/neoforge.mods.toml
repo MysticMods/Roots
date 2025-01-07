@@ -4,14 +4,11 @@ issueTrackerURL="https://github.com/mysticmods/Roots/issues"
 license="https://github.com/mysticmods/roots/arch-1.21/LICENSE"
 [[mods]]
     modId="roots"
-    version="${version}"
+    version="4.0.0.0"
     displayName="Roots"
     displayURL="https://minecraft.curseforge.com/projects/roots"
     authors="Noobanidus"
     description="Natural magic."
-
-[[mixins]]
-    config="roots-common.mixins.json"
 
 [[mixins]]
     config="roots-neoforge.mixins.json"
@@ -19,7 +16,7 @@ license="https://github.com/mysticmods/roots/arch-1.21/LICENSE"
 [[dependencies.roots]]
     modId="minecraft"
     type="required"
-    versionRange="${versionRange}"
+    versionRange="1.21.1"
 
  [[dependencies.roots]]
     modId="neoforge"
