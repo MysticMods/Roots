@@ -1,0 +1,669 @@
+package mysticmods.roots.gen;
+
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModItems;
+import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
+import net.neoforged.neoforge.common.crafting.ICustomIngredient;
+
+import java.awt.*;
+import java.util.concurrent.CompletableFuture;
+
+public class RootsRecipeProvider extends RecipeProvider {
+  public RootsRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    super(output, registries);
+  }
+
+  @Override
+  protected void buildRecipes(RecipeOutput c, HolderLookup.Provider p) {
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.THATCH.get(), 32)
+        .pattern("XY")
+        .pattern("YX")
+        .define('X', Blocks.HAY_BLOCK)
+        .define('Y', Tags.Items.CROPS_WHEAT)
+        .unlockedBy("has_hay", has(Blocks.HAY_BLOCK))
+        .unlockedBy("has_wheat", has(Items.WHEAT))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE.get(), 3)
+        .pattern("SSS")
+        .pattern("SHS")
+        .pattern("SSS")
+        .define('S', RootsTags.Items.STONELIKE)
+        .define('H', RootsTags.Items.RUNESTONE_HERBS)
+        .unlockedBy("has_herb", has(RootsTags.Items.RUNESTONE_HERBS))
+        .save(c, RootsAPI.rl("runestone_simple_crafting"));
+
+    // Grove Recipe builder
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE.get())
+        .requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.GROVE_MOSS_CROP)
+        .unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_CROP))
+        .save(c, RootsAPI.rl("mossy_runestone_from_runestone_grove_moss"));
+
+/*    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE.get())
+        .pattern("VVV")
+        .pattern("VSV")
+        .pattern("VVV")
+        .define('S', RootsTags.Items.RUNESTONE)
+        // TODO: Tag-ify
+        .define('V', Ingredient.of(Items.VINE))
+        .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
+        .save(c, RootsAPI.rl("mossy_runestone_from_runestone_vine"));*/
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNESTONE.get(), 4)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.RUNESTONE_TILE.get())
+        .unlockedBy("has_runestone_tile", has(ModBlocks.RUNESTONE_TILE.get()))
+        .save(c, RootsAPI.rl("chiseled_runestone_from_runestone_tile"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE.get(), 4)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.RUNESTONE_BRICK.get())
+        .unlockedBy("has_runestone", has(ModBlocks.RUNESTONE_BRICK.get()))
+        .save(c, RootsAPI.rl("runestone_tile_from_runestone_brick"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK.get(), 4)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.RUNESTONE.get())
+        .unlockedBy("has_runestone", has(ModBlocks.RUNESTONE.get()))
+        .save(c, RootsAPI.rl("runestone_brick_from_runestone"));
+
+    // Grove recipe for runed obsidian
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNED_OBSIDIAN.get(), 4)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.RUNED_TILE.get())
+        .unlockedBy("has_runed_obsidian_tile", has(ModBlocks.RUNED_TILE.get()))
+        .save(c, RootsAPI.rl("chiseled_runed_obsidian_from_runed_tile"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE.get(), 4)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.RUNED_BRICK.get())
+        .unlockedBy("has_runed_obsidian_brick", has(ModBlocks.RUNED_BRICK.get()))
+        .save(c, RootsAPI.rl("runed_tile_from_runed_brick"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK.get(), 4)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.RUNED_OBSIDIAN.get())
+        .unlockedBy("has_runed_obsidian", has(ModBlocks.RUNED_OBSIDIAN.get()))
+        .save(c, RootsAPI.rl("runed_brick_from_runed_obsidian"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_SILVER_BLOCK.get(), 1)
+        .pattern("XXX")
+        .pattern("XIX")
+        .pattern("XXX")
+        .define('X', RootsTags.Items.RAW_SILVER)
+        .define('I', ModItems.RAW_SILVER.get())
+        .unlockedBy("has_raw_silver", has(RootsTags.Items.RAW_SILVER))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILVER_BLOCK.get(), 1)
+        .pattern("XXX")
+        .pattern("XIX")
+        .pattern("XXX")
+        .define('X', RootsTags.Items.SILVER_INGOT)
+        .define('I', ModItems.SILVER_INGOT.get())
+        .unlockedBy("has_silver_ingot", has(RootsTags.Items.SILVER_INGOT))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 1)
+        .pattern("XXX")
+        .pattern("XIX")
+        .pattern("XXX")
+        .define('X', RootsTags.Items.SILVER_NUGGET)
+        .define('I', ModItems.SILVER_NUGGET.get())
+        .unlockedBy("has_silver_nugget", has(RootsTags.Items.SILVER_NUGGET))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.COPPER_INGOT, 1)
+        .pattern("XXX")
+        .pattern("XIX")
+        .pattern("XXX")
+        .define('X', RootsTags.Items.COPPER_NUGGET)
+        .define('I', ModItems.COPPER_NUGGET.get())
+        .unlockedBy("has_copper_nugget", has(RootsTags.Items.COPPER_NUGGET))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WILDWOOD_WOOD.get(), 3)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.WILDWOOD_LOG.get())
+        .unlockedBy("has_wildwood_log", has(ModBlocks.WILDWOOD_LOG.get()))
+        .save(c, RootsAPI.rl("wildwood_wood_from_logs"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_WILDWOOD_WOOD.get(), 3)
+        .pattern("XX")
+        .pattern("XX")
+        .define('X', ModBlocks.STRIPPED_WILDWOOD_LOG.get())
+        .unlockedBy("has_stripped_wildwood_log", has(ModBlocks.STRIPPED_WILDWOOD_LOG.get()))
+        .save(c, RootsAPI.rl("stripped_wildwood_wood_from_logs"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WILDWOOD_PLANKS.get(), 4)
+        .requires(RootsTags.Items.WILDWOOD_LOGS)
+        .unlockedBy("has_wildwood_logs", has(RootsTags.Items.WILDWOOD_LOGS))
+        .save(c, RootsAPI.rl("wildwood_planks_from_logs"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GRAY_DYE, 4)
+        .requires(RootsTags.Items.STONEPETAL)
+        .unlockedBy("has_stonepetal", has(RootsTags.Items.STONEPETAL))
+        .save(c, RootsAPI.rl("gray_dye_from_stonepetal"));
+
+    stairBuilder(ModBlocks.RUNESTONE_STAIRS.get(), Ingredient.of(ModBlocks.RUNESTONE.get()))
+        .unlockedBy("has_runestone", has(ModBlocks.RUNESTONE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_STAIRS.get(), ModBlocks.RUNESTONE.get());
+
+    stairBuilder(ModBlocks.MOSSY_RUNESTONE_STAIRS.get(), Ingredient.of(ModBlocks.MOSSY_RUNESTONE.get()))
+        .unlockedBy("has_mossy_runestone", has(ModBlocks.MOSSY_RUNESTONE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE_STAIRS.get(), ModBlocks.MOSSY_RUNESTONE.get());
+
+    stairBuilder(ModBlocks.RUNESTONE_BRICK_STAIRS.get(), Ingredient.of(ModBlocks.RUNESTONE_BRICK.get()))
+        .unlockedBy("has_runestone_brick", has(ModBlocks.RUNESTONE_BRICK.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK_STAIRS.get(), ModBlocks.RUNESTONE_BRICK.get());
+
+    stairBuilder(ModBlocks.RUNESTONE_TILE_STAIRS.get(), Ingredient.of(ModBlocks.RUNESTONE_TILE.get()))
+        .unlockedBy("has_runestone_tile", has(ModBlocks.RUNESTONE_TILE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE_STAIRS.get(), ModBlocks.RUNESTONE_TILE.get());
+
+    stairBuilder(ModBlocks.RUNED_STAIRS.get(), Ingredient.of(ModBlocks.RUNED_OBSIDIAN.get()))
+        .unlockedBy("has_runed_obsidian", has(ModBlocks.RUNED_OBSIDIAN.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_STAIRS.get(), ModBlocks.RUNED_OBSIDIAN.get());
+
+    stairBuilder(ModBlocks.RUNED_BRICK_STAIRS.get(), Ingredient.of(ModBlocks.RUNED_BRICK.get()))
+        .unlockedBy("has_runed_brick", has(ModBlocks.RUNED_BRICK.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK_STAIRS.get(), ModBlocks.RUNED_BRICK.get());
+
+    stairBuilder(ModBlocks.RUNED_TILE_STAIRS.get(), Ingredient.of(ModBlocks.RUNED_TILE.get()))
+        .unlockedBy("has_runed_tile", has(ModBlocks.RUNED_TILE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE_STAIRS.get(), ModBlocks.RUNED_TILE.get());
+
+    stairBuilder(ModBlocks.WILDWOOD_STAIRS.get(), Ingredient.of(ModBlocks.WILDWOOD_PLANKS.get()))
+        .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
+        .save(c);
+
+    slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_SLAB.get(), Ingredient.of(ModBlocks.RUNESTONE.get()))
+        .unlockedBy("has_runestone", has(ModBlocks.RUNESTONE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_SLAB.get(), ModBlocks.RUNESTONE.get());
+
+    slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE_SLAB.get(), Ingredient.of(ModBlocks.MOSSY_RUNESTONE.get()))
+        .unlockedBy("has_mossy_runestone", has(ModBlocks.MOSSY_RUNESTONE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE_SLAB.get(), ModBlocks.MOSSY_RUNESTONE.get());
+
+    slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK_SLAB.get(), Ingredient.of(ModBlocks.RUNESTONE_BRICK.get()))
+        .unlockedBy("has_runestone_brick", has(ModBlocks.RUNESTONE_BRICK.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK_SLAB.get(), ModBlocks.RUNESTONE_BRICK.get());
+
+    slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE_SLAB.get(), Ingredient.of(ModBlocks.RUNESTONE_TILE.get()))
+        .unlockedBy("has_runestone_tile", has(ModBlocks.RUNESTONE_TILE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE_SLAB.get(), ModBlocks.RUNESTONE_TILE.get());
+
+    slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_SLAB.get(), Ingredient.of(ModBlocks.RUNED_OBSIDIAN.get()))
+        .unlockedBy("has_runed_obsidian", has(ModBlocks.RUNED_OBSIDIAN.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_SLAB.get(), ModBlocks.RUNED_OBSIDIAN.get());
+
+    slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK_SLAB.get(), Ingredient.of(ModBlocks.RUNED_BRICK.get()))
+        .unlockedBy("has_runed_brick", has(ModBlocks.RUNED_BRICK.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK_SLAB.get(), ModBlocks.RUNED_BRICK.get());
+
+    slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE_SLAB.get(), Ingredient.of(ModBlocks.RUNED_TILE.get()))
+        .unlockedBy("has_runed_tile", has(ModBlocks.RUNED_TILE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE_SLAB.get(), ModBlocks.RUNED_TILE.get());
+
+    slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WILDWOOD_SLAB.get(), Ingredient.of(ModBlocks.WILDWOOD_PLANKS.get()))
+        .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
+        .save(c);
+
+    fenceBuilder(ModBlocks.WILDWOOD_FENCE.get(), Ingredient.of(ModBlocks.WILDWOOD_PLANKS.get()))
+        .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
+        .save(c);
+
+    fenceGateBuilder(ModBlocks.WILDWOOD_GATE.get(), Ingredient.of(ModBlocks.WILDWOOD_PLANKS.get()))
+        .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
+        .save(c);
+
+    buttonBuilder(ModBlocks.RUNESTONE_BUTTON.get(), Ingredient.of(ModBlocks.RUNESTONE.get()))
+        .unlockedBy("has_runestone", has(ModBlocks.RUNESTONE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BUTTON.get(), ModBlocks.RUNESTONE.get());
+
+    buttonBuilder(ModBlocks.RUNESTONE_BRICK_BUTTON.get(), Ingredient.of(ModBlocks.RUNESTONE_BRICK.get()))
+        .unlockedBy("has_runestone_brick", has(ModBlocks.RUNESTONE_BRICK.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK_BUTTON.get(), ModBlocks.RUNESTONE_BRICK.get());
+
+    buttonBuilder(ModBlocks.RUNESTONE_TILE_BUTTON.get(), Ingredient.of(ModBlocks.RUNESTONE_TILE.get()))
+        .unlockedBy("has_runestone_tile", has(ModBlocks.RUNESTONE_TILE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE_BUTTON.get(), ModBlocks.RUNESTONE_TILE.get());
+
+    buttonBuilder(ModBlocks.MOSSY_RUNESTONE_BUTTON.get(), Ingredient.of(ModBlocks.MOSSY_RUNESTONE.get()))
+        .unlockedBy("has_mossy_runestone", has(ModBlocks.MOSSY_RUNESTONE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE_BUTTON.get(), ModBlocks.MOSSY_RUNESTONE.get());
+
+    buttonBuilder(ModBlocks.RUNED_BUTTON.get(), Ingredient.of(ModBlocks.RUNED_OBSIDIAN.get()))
+        .unlockedBy("has_runed_obsidian", has(ModBlocks.RUNED_OBSIDIAN.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BUTTON.get(), ModBlocks.RUNED_OBSIDIAN.get());
+
+    buttonBuilder(ModBlocks.RUNED_BRICK_BUTTON.get(), Ingredient.of(ModBlocks.RUNED_BRICK.get()))
+        .unlockedBy("has_runed_brick", has(ModBlocks.RUNED_BRICK.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK_BUTTON.get(), ModBlocks.RUNED_BRICK.get());
+
+    buttonBuilder(ModBlocks.RUNED_TILE_BUTTON.get(), Ingredient.of(ModBlocks.RUNED_TILE.get()))
+        .unlockedBy("has_runed_tile", has(ModBlocks.RUNED_TILE.get()))
+        .save(c);
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE_BUTTON.get(), ModBlocks.RUNED_TILE.get());
+
+    buttonBuilder(ModBlocks.WILDWOOD_BUTTON.get(), Ingredient.of(ModBlocks.WILDWOOD_PLANKS.get()))
+        .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
+        .save(c);
+
+    pressurePlate(c, ModBlocks.RUNESTONE_PRESSURE_PLATE.get(), ModBlocks.RUNESTONE.get());
+    pressurePlate(c, ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE.get(), ModBlocks.RUNESTONE_BRICK.get());
+    pressurePlate(c, ModBlocks.RUNESTONE_TILE_PRESSURE_PLATE.get(), ModBlocks.RUNESTONE_TILE.get());
+    pressurePlate(c, ModBlocks.MOSSY_RUNESTONE_PRESSURE_PLATE.get(), ModBlocks.MOSSY_RUNESTONE.get());
+    pressurePlate(c, ModBlocks.RUNED_PRESSURE_PLATE.get(), ModBlocks.RUNED_OBSIDIAN.get());
+    pressurePlate(c, ModBlocks.RUNED_BRICK_PRESSURE_PLATE.get(), ModBlocks.RUNED_BRICK.get());
+    pressurePlate(c, ModBlocks.RUNED_TILE_PRESSURE_PLATE.get(), ModBlocks.RUNED_TILE.get());
+    pressurePlate(c, ModBlocks.WILDWOOD_PRESSURE_PLATE.get(), ModBlocks.WILDWOOD_PLANKS.get());
+
+    doorBuilder(ModBlocks.WILDWOOD_DOOR.get(), Ingredient.of(ModBlocks.WILDWOOD_PLANKS.get()))
+        .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
+        .save(c);
+
+    trapdoorBuilder(ModBlocks.WILDWOOD_TRAPDOOR.get(), Ingredient.of(ModBlocks.WILDWOOD_PLANKS.get()))
+        .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WILDWOOD_LADDER.get(), 3)
+        .pattern("X X")
+        .pattern("XWX")
+        .pattern("X X")
+        .define('X', Tags.Items.RODS_WOODEN)
+        .define('W', RootsTags.Items.WILDWOOD_PLANKS)
+        .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
+        .save(c);
+
+    wall(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_WALL.get(), ModBlocks.RUNESTONE.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_WALL.get(), ModBlocks.RUNESTONE.get());
+
+    wall(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK_WALL.get(), ModBlocks.RUNESTONE_BRICK.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK_WALL.get(), ModBlocks.RUNESTONE_BRICK.get());
+
+    wall(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE_WALL.get(), ModBlocks.RUNESTONE_TILE.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE_WALL.get(), ModBlocks.RUNESTONE_TILE.get());
+
+    wall(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE_WALL.get(), ModBlocks.MOSSY_RUNESTONE.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE_WALL.get(), ModBlocks.MOSSY_RUNESTONE.get());
+
+    wall(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_WALL.get(), ModBlocks.RUNED_OBSIDIAN.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_WALL.get(), ModBlocks.RUNED_OBSIDIAN.get());
+
+    wall(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK_WALL.get(), ModBlocks.RUNED_BRICK.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK_WALL.get(), ModBlocks.RUNED_BRICK.get());
+
+    wall(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE_WALL.get(), ModBlocks.RUNED_TILE.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE_WALL.get(), ModBlocks.RUNED_TILE.get());
+
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROVE_CRAFTER.get())
+        .pattern("LLL")
+        .pattern(" L ")
+        .pattern("RRR")
+        .define('L', ItemTags.LOGS)
+        .define('R', RootsTags.Items.RUNESTONE)
+        .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROVE_PEDESTAL.get(), 4)
+        .pattern("LLL")
+        .pattern(" L ")
+        .pattern("LLL")
+        .define('L', ItemTags.LOGS)
+        .unlockedBy("has_logs", has(ItemTags.LOGS))
+        .save(c);
+
+    // TODO: Grove crafter
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WILDWOOD_PEDESTAL.get(), 4)
+        .pattern("LLLL")
+        .pattern(" L ")
+        .pattern("LLL")
+        .define('L', RootsTags.Items.WILDWOOD_LOGS)
+        .unlockedBy("has_wildwood_logs", has(RootsTags.Items.WILDWOOD_LOGS))
+        .save(c);
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DISPLAY_PEDESTAL.get())
+        .requires(ModBlocks.GROVE_PEDESTAL.get())
+        .requires(RootsTags.Items.LEVERS)
+        .unlockedBy("has_grove_pedestal", has(ModBlocks.GROVE_PEDESTAL.get()))
+        .unlockedBy("has_lever", has(RootsTags.Items.LEVERS))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.PRIMAL_GROVE_STONE.get())
+        .pattern("RR")
+        .pattern("RR")
+        .pattern("RR")
+        .define('R', RootsTags.Items.RUNESTONE)
+        .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
+        .save(c, RootsAPI.rl("primal_grove_stone"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MORTAR.get())
+        .pattern("R R")
+        .pattern("R R")
+        .pattern("RRR")
+        .define('R', RootsTags.Items.RUNESTONE)
+        .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.PYRE.get())
+        .pattern("LCL")
+        .pattern("RRR")
+        .define('L', ItemTags.LOGS)
+        .define('C', ItemTags.COALS)
+        .define('R', RootsTags.Items.RUNESTONE)
+        .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_PYRE.get())
+        .pattern("LCL")
+        .pattern("RRR")
+        .define('L', ItemTags.LOGS)
+        .define('C', ItemTags.COALS)
+        .define('R', RootsTags.Items.RUNED_OBSIDIAN)
+        .unlockedBy("has_runestone", has(RootsTags.Items.RUNED_OBSIDIAN))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_PYRE.get())
+        .pattern("XXX")
+        .pattern("XCX")
+        .pattern("XXX")
+        .define('X', RootsTags.Items.RUNED_OBSIDIAN)
+        .define('C', ModBlocks.PYRE.get())
+        .unlockedBy("has_runed_obsidian", has(RootsTags.Items.RUNED_OBSIDIAN))
+        .save(c, RootsAPI.rl("reinforced_pyre_from_pyre"));
+
+    // Grove spores
+
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BLUE_DYE, 2)
+        .requires(RootsTags.Items.CARAPACE)
+        .unlockedBy("has_carapace", has(RootsTags.Items.CARAPACE))
+        .save(c, RootsAPI.rl("blue_dye_from_carapace"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LEATHER, 1)
+        .requires(RootsTags.Items.PELT)
+        .unlockedBy("has_pelt", has(RootsTags.Items.PELT))
+        .save(c, RootsAPI.rl("leather_from_pelt"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BONE_MEAL, 9)
+        .requires(RootsTags.Items.ANTLERS)
+        .unlockedBy("has_antlers", has(RootsTags.Items.ANTLERS))
+        .save(c, RootsAPI.rl("bone_meal_from_antlers"));
+
+    cookRecipes(c, "roots_smoking", RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new, 100);
+    cookRecipes(c, "roots_campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new, 600);
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.VENISON.get()), RecipeCategory.FOOD, ModItems.COOKED_VENISON.get(), 0.35F, 200)
+        .unlockedBy("has_venison", has(ModItems.VENISON.get()))
+        .save(c);
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(Items.CARROT), RecipeCategory.FOOD, ModItems.COOKED_CARROT.get(), 0.35F, 200)
+        .unlockedBy("has_carrot", has(Items.CARROT))
+        .save(c);
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(Items.BEETROOT), RecipeCategory.FOOD, ModItems.COOKED_BEETROOT.get(), 0.35F, 200)
+        .unlockedBy("has_beetroot", has(Items.BEETROOT))
+        .save(c);
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.ASSORTED_SEEDS.get()), RecipeCategory.FOOD, ModItems.COOKED_SEEDS.get(), 0.35F, 200)
+        .unlockedBy("has_seeds", has(ModItems.ASSORTED_SEEDS.get()))
+        .save(c);
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.AUBERGINE.get()), RecipeCategory.FOOD, ModItems.COOKED_AUBERGINE.get(), 0.35F, 200)
+        .unlockedBy("has_aubergine", has(ModItems.AUBERGINE.get()))
+        .save(c);
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.RAW_SQUID.get()), RecipeCategory.FOOD, ModItems.COOKED_SQUID.get(), 0.35F, 200)
+        .unlockedBy("has_raw_squid", has(ModItems.RAW_SQUID.get()))
+        .save(c);
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.FLOUR.get()), RecipeCategory.FOOD, Items.BREAD, 0.35F, 200)
+        .unlockedBy("has_flour", has(ModItems.FLOUR.get()))
+        .save(c);
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.PERESKIA_BULB.get()), RecipeCategory.FOOD, ModItems.COOKED_PERESKIA.get(), 0.35F, 200)
+        .unlockedBy("has_pereskia_bulb", has(ModItems.PERESKIA_BULB.get()))
+        .save(c);
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.ASSORTED_SEEDS.get(), 4)
+        .requires(Tags.Items.SEEDS)
+        .requires(Tags.Items.SEEDS)
+        .requires(Tags.Items.SEEDS)
+        .requires(Tags.Items.SEEDS)
+        .unlockedBy("has_seeds", has(Tags.Items.SEEDS))
+        .save(c, RootsAPI.rl("assorted_seeds_from_seeds"));
+
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.STUFFED_AUBERGINE.get())
+        .requires(ModItems.COOKED_AUBERGINE.get())
+        .requires(DifferenceIngredient.of(Ingredient.of(RootsTags.Items.VEGETABLES), Ingredient.of(ModItems.AUBERGINE.get())))
+        .requires(DifferenceIngredient.of(Ingredient.of(RootsTags.Items.VEGETABLES), Ingredient.of(ModItems.AUBERGINE.get())))
+        .requires(DifferenceIngredient.of(Ingredient.of(RootsTags.Items.COOKED_VEGETABLES), Ingredient.of(ModItems.COOKED_AUBERGINE.get())))
+        .unlockedBy("has_cooked_aubergine", has(ModItems.COOKED_AUBERGINE.get()))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.AUBERGINE_SALAD.get(), 3)
+        .pattern("AAA")
+        .pattern("KKK")
+        .pattern("BBB")
+        .define('A', RootsTags.Items.AUBERGINE_CROP)
+        .define('B', Items.BOWL)
+        .define('K', Items.KELP)
+        .unlockedBy("has_aubergine", has(RootsTags.Items.AUBERGINE_CROP))
+        .unlockedBy("has_kelp", has(Items.KELP))
+        .save(c);
+
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.BEETROOT_SALAD.get(), 3)
+        .pattern("AAA")
+        .pattern("KKK")
+        .pattern("BBB")
+        .define('A', Items.BEETROOT)
+        .define('B', Items.BOWL)
+        .define('K', Items.KELP)
+        .unlockedBy("has_beetroot", has(Items.BEETROOT))
+        .unlockedBy("has_kelp", has(Items.KELP))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.STEWED_EGGPLANT.get(), 3)
+        .pattern("AAA")
+        .pattern("MLM")
+        .pattern("BBB")
+        .define('A', ModItems.COOKED_AUBERGINE.get())
+        .define('B', Items.BOWL)
+        .define('L', Items.ALLIUM)
+        .define('M', Ingredient.of(Items.RED_MUSHROOM, Items.BROWN_MUSHROOM))
+        .unlockedBy("has_cooked_aubergine", has(ModItems.COOKED_AUBERGINE.get()))
+        .save(c);
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.VINEGAR.get(), 6)
+        .pattern("BBB")
+        .pattern("PPP")
+        .pattern("BBB")
+        .define('P', Items.SEA_PICKLE)
+        .define('B', Items.GLASS_BOTTLE)
+        .unlockedBy("has_sea_pickle", has(Items.SEA_PICKLE))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.VEGETABLE_JUICE.get(), 4)
+        .pattern("ARC")
+        .pattern("BPB")
+        .pattern("BWB")
+        .define('A', RootsTags.Items.AUBERGINE_CROP)
+        .define('R', Items.BEETROOT)
+        .define('C', Items.CARROT)
+        .define('P', Items.APPLE)
+        .define('B', Items.GLASS_BOTTLE)
+        .define('W', Items.WATER_BUCKET)
+        .unlockedBy("has_aubergine", has(RootsTags.Items.AUBERGINE_CROP))
+        .unlockedBy("has_beetroot", has(Items.BEETROOT))
+        .unlockedBy("has_carrot", has(Items.CARROT))
+        .unlockedBy("has_apple", has(Items.APPLE))
+        .save(c);
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BLACK_DYE, 2)
+        .requires(ModItems.INK_BOTTLE.get())
+        .unlockedBy("has_ink_bottle", has(ModItems.INK_BOTTLE.get()))
+        .save(c, RootsAPI.rl("black_dye_from_ink_bottle"));
+
+    // TODO?
+    c.accept(DynamicBarkRecipe.IDENTIFIER, DynamicBarkRecipe.INSTANCE, null);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.WILDEWHEET_BREAD.get())
+        .pattern("XXX")
+        .define('X', RootsTags.Items.WILDEWHEET_CROP)
+        .unlockedBy("has_wildewheet", has(RootsTags.Items.WILDEWHEET_CROP))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.WILDROOT_STEW.get(), 3)
+        .pattern(" W ")
+        .pattern("BBB")
+        .define('W', RootsTags.Items.WILDROOT_CROP)
+        .define('B', Ingredient.of(Items.BOWL))
+        .unlockedBy("has_wildroot", has(RootsTags.Items.WILDROOT_CROP))
+        .save(c, RootsAPI.rl("wildroot_stew"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.FIRE_STARTER.get(), 4)
+        .pattern("SFS")
+        .pattern(" L ")
+        .pattern("S S")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('F', RootsTags.Items.FLINT)
+        .define('L', ItemTags.LOGS)
+        .unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+        .unlockedBy("has_flint", has(RootsTags.Items.FLINT))
+        .save(c, RootsAPI.rl("fire_starter"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.PESTLE.get())
+        .pattern("  S")
+        .pattern("SS ")
+        .pattern("SS ")
+        .define('S', RootsTags.Items.STONELIKE)
+        .unlockedBy("has_stone", has(RootsTags.Items.STONELIKE))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STAFF.get())
+        .pattern(" WX")
+        .pattern(" XW")
+        .pattern("X  ")
+        .define('X', ItemTags.LOGS)
+        .define('W', RootsTags.Items.RUNESTONE_HERBS)
+        .unlockedBy("has_runestone_herbs", has(RootsTags.Items.RUNESTONE_HERBS))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.WOODEN_SHEARS.get())
+        .pattern(" LL")
+        .pattern("L  ")
+        .pattern(" LL")
+        .define('L', ItemTags.LOGS)
+        .unlockedBy("has_logs", has(ItemTags.LOGS))
+        .save(c);
+
+    // KNIFE RECIPES
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.RAW_SILVER), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 200)
+        .unlockedBy("has_raw_silver", has(RootsTags.Items.RAW_SILVER))
+        .save(c);
+    SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.RAW_SILVER), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 100)
+        .unlockedBy("has_raw_silver", has(RootsTags.Items.RAW_SILVER))
+        .save(c);
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_SILVER.get(), 9)
+        .requires(RootsTags.Items.RAW_SILVER_STORAGE)
+        .unlockedBy("has_raw_silver_storage", has(RootsTags.Items.RAW_SILVER_STORAGE))
+        .save(c);
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 9)
+        .requires(RootsTags.Items.SILVER_STORAGE)
+        .unlockedBy("has_silver_storage", has(RootsTags.Items.SILVER_STORAGE))
+        .save(c);
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SILVER_NUGGET.get(), 9)
+        .requires(RootsTags.Items.SILVER_INGOT)
+        .unlockedBy("has_silver_ingot", has(RootsTags.Items.SILVER_INGOT))
+        .save(c);
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.COPPER_NUGGET.get(), 9)
+        .requires(Tags.Items.INGOTS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c);
+
+    // recycling recipes
+  }
+
+  protected static <T extends AbstractCookingRecipe> void cookRecipes(RecipeOutput recipeOutput, String cookingMethod, RecipeSerializer<T> cookingSerializer, AbstractCookingRecipe.Factory<T> recipeFactory, int cookingTime) {
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.VENISON.get(), ModItems.COOKED_VENISON.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, Items.CARROT, ModItems.COOKED_CARROT.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, Items.BEETROOT, ModItems.COOKED_BEETROOT.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.ASSORTED_SEEDS.get(), ModItems.COOKED_SEEDS.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.AUBERGINE.get(), ModItems.COOKED_AUBERGINE.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.RAW_SQUID.get(), ModItems.COOKED_SQUID.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.FLOUR.get(), Items.BREAD, 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.PERESKIA_BULB.get(), ModItems.COOKED_PERESKIA.get(), 0.35F);
+  }
+}
