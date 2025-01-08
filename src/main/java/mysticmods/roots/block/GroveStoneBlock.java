@@ -48,7 +48,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PART, VALID);
+    pBuilder.add(PART, VALID, FACING);
   }
 
   @Override

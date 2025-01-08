@@ -110,7 +110,7 @@
         "main",
         "emissive"
     ],
-    "loader": "forge:composite",
+    "loader": "neoforge:composite",
     "textures": {
         "particle": "block/oak_log"
     }

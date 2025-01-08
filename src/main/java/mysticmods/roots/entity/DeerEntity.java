@@ -1,5 +1,6 @@
 package mysticmods.roots.entity;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModEntities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -36,19 +37,18 @@ public class DeerEntity extends Animal {
     return ModEntities.DEER.get().create(pLevel);
   }
 
-  // TODO:
-/*  @Override
-  protected void defineSynchedData() {
-    super.defineSynchedData();
-    getEntityData().define(hasHorns, random.nextBoolean());
-  }*/
+  @Override
+  protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    super.defineSynchedData(builder);
+    builder.define(hasHorns, random.nextBoolean());
+  }
 
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FloatGoal(this));
     goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
     goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-    goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
+    goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(RootsTags.Items.TEMPT_DEER), false));
     goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
     goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
     goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));

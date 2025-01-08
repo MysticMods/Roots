@@ -35,5 +35,6 @@ public class Roots {
     ModFeatures.register(bus);
     ModLoot.register(bus);
     ModTests.register(bus);
+    ModTabs.register(bus);
   }
 }

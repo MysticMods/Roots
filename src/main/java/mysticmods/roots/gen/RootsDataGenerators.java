@@ -41,6 +41,12 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeClient(), new RootsLangProvider(output));
     generator.addProvider(event.includeServer(), new AdvancementProvider(output, provider, helper, List.of(new RootsAdvancementGenerator())));
     generator.addProvider(event.includeServer(), new RootsDataMapProvider(output, provider));
+    generator.addProvider(event.includeServer(), new RootsRitualTagsProvider(output, provider, RootsAPI.MODID, helper));
+    generator.addProvider(event.includeServer(), new RootsHerbTagsProvider(output, provider, RootsAPI.MODID, helper));
+    generator.addProvider(event.includeServer(), new RootsGroveTagsProvider(output, provider, RootsAPI.MODID, helper));
+    generator.addProvider(event.includeServer(), new RootsSpellTagsProvider(output, provider, RootsAPI.MODID, helper));
+    generator.addProvider(event.includeServer(), new RootsGroveTagsProvider(output, provider, RootsAPI.MODID, helper));
+    generator.addProvider(event.includeServer(), new RootsRitualTagsProvider(output, provider, RootsAPI.MODID, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
   }
 }

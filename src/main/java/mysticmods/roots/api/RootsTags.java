@@ -13,6 +13,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 
@@ -256,6 +257,7 @@ public class RootsTags {
     public static final TagKey<Item> RUNED_BIRCH_LOG = modTag("logs/runed/birch");
     public static final TagKey<Item> RUNED_JUNGLE_LOG = modTag("logs/runed/jungle");
     public static final TagKey<Item> RUNED_SPRUCE_LOG = modTag("logs/runed/spruce");
+    public static final TagKey<Item> RUNED_MANGROVE_LOG = modTag("logs/runed/mangrove");
     public static final TagKey<Item> RUNED_WILDWOOD_LOG = modTag("logs/runed/wildwood");
     public static final TagKey<Item> RUNED_CRIMSON_STEM = modTag("logs/runed/crimson");
     public static final TagKey<Item> RUNED_WARPED_STEM = modTag("logs/runed/warped");
@@ -294,10 +296,14 @@ public class RootsTags {
     // TODO: POPULATE THIS
     public static final TagKey<Item> OWL_FOOD = modTag("owl_food");
     public static final TagKey<Item> CARAPACE = modTag("carapace");
+    public static final TagKey<Item> PELT = modTag("pelt");
+    public static final TagKey<Item> ANTLERS = modTag("atlers");
     public static final TagKey<Item> COPPER_ITEMS = modTag("copper_items");
     public static final TagKey<Item> COPPER_NUGGET = compatTag("nuggets/copper");
     public static final TagKey<Item> RAW_SILVER = compatTag("raw_materials/silver");
     public static final TagKey<Item> SILVER_INGOT = compatTag("ingots/silver");
+    public static final TagKey<Item> STONEPETAL = modTag("stonepetal");
+
     // These are all filled in by ModTags
 
     public static final TagKey<Item> SILVER_ORE = compatTag("ores/silver");
@@ -308,6 +314,7 @@ public class RootsTags {
     public static final TagKey<Item> SILVER_ITEMS = modTag("silver_items");
     public static final TagKey<Item> WILDWOOD_PLANKS = modTag("planks/wildwood");
     public static final TagKey<Item> SKIPPED_FOODS = modTag("skipped_foods");
+    public static final TagKey<Item> TEMPT_DEER = modTag("tempt/deer");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));

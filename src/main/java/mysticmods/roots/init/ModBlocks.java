@@ -9,6 +9,8 @@ import mysticmods.roots.block.crop.WaterElementalCropBlock;
 import mysticmods.roots.worldgen.trees.RootsTreeGrowers;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
@@ -16,7 +18,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModBlocks {
-  private static final DeferredRegister<Block> BLOCKS = DeferredRegister.createBlocks(RootsAPI.MODID);
+  private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(RootsAPI.MODID);
+  private static final DeferredRegister.Items BLOCK_ITEMS = DeferredRegister.createItems(RootsAPI.MODID);
 
 /*  private static <T extends Block> NonNullBiConsumer<RegistrateBlockLootTables, T> oreLoot(Supplier<Item> drops) {
     return (ctx, p) -> ctx.add(p, RegistrateBlockLootTables.createOreDrop(p, drops.get()));

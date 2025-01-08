@@ -5,6 +5,7 @@ import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -17,6 +18,180 @@ public class ModItems {
   }*/
 
   private static final Item.Properties DEFAULT = new Item.Properties();
+
+
+  // Block items
+  public static DeferredHolder<Item, BlockItem> THATCH = ITEMS.register("thatch", () -> new BlockItem(ModBlocks.THATCH.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> RUNESTONE = ITEMS.register("runestone", () -> new BlockItem(ModBlocks.RUNESTONE.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> MOSSY_RUNESTONE = ITEMS.register("mossy_runestone", () -> new BlockItem(ModBlocks.MOSSY_RUNESTONE.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> CHISELED_RUNESTONE = ITEMS.register("chiseled_runestone", () -> new BlockItem(ModBlocks.CHISELED_RUNESTONE.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_BRICK = ITEMS.register("runestone_brick", () -> new BlockItem(ModBlocks.RUNESTONE_BRICK.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_TILE = ITEMS.register("runestone_tile", () -> new BlockItem(ModBlocks.RUNESTONE_TILE.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> RUNED_OBSIDIAN = ITEMS.register("runed_obsidian", () -> new BlockItem(ModBlocks.RUNED_OBSIDIAN.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> CHISELED_RUNED_OBSIDIAN = ITEMS.register("chiseled_runed_obsidian", () -> new BlockItem(ModBlocks.CHISELED_RUNED_OBSIDIAN.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> RUNED_BRICK = ITEMS.register("runed_brick", () -> new BlockItem(ModBlocks.RUNED_BRICK.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> RUNED_TILE = ITEMS.register("runed_tile", () -> new BlockItem(ModBlocks.RUNED_TILE.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> SILVER_ORE = ITEMS.register("silver_ore", () -> new BlockItem(ModBlocks.SILVER_ORE.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> DEEPSLATE_SILVER_ORE = ITEMS.register("deepslate_silver_ore", () -> new BlockItem(ModBlocks.DEEPSLATE_SILVER_ORE.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> GRANITE_QUARTZ_ORE = ITEMS.register("granite_quartz_ore", () -> new BlockItem(ModBlocks.GRANITE_QUARTZ_ORE.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> RAW_SILVER_BLOCK = ITEMS.register("raw_silver_block", () -> new BlockItem(ModBlocks.RAW_SILVER_BLOCK.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> SILVER_BLOCK = ITEMS.register("silver_block", () -> new BlockItem(ModBlocks.SILVER_BLOCK.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_LOG = ITEMS.register("wildwood_log", () -> new BlockItem(ModBlocks.WILDWOOD_LOG.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> STRIPPED_WILDWOOD_LOG = ITEMS.register("stripped_wildwood_log", () -> new BlockItem(ModBlocks.STRIPPED_WILDWOOD_LOG.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_WOOD = ITEMS.register("wildwood_wood", () -> new BlockItem(ModBlocks.WILDWOOD_WOOD.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> STRIPPED_WILDWOOD_WOOD = ITEMS.register("stripped_wildwood_wood", () -> new BlockItem(ModBlocks.STRIPPED_WILDWOOD_WOOD.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_PLANKS = ITEMS.register("wildwood_planks", () -> new BlockItem(ModBlocks.WILDWOOD_PLANKS.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_SAPLING = ITEMS.register("wildwood_sapling", () -> new BlockItem(ModBlocks.WILDWOOD_SAPLING.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> STONEPETAL = ITEMS.register("stonepetal", () -> new BlockItem(ModBlocks.STONEPETAL.get(), DEFAULT));
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_LEAVES = ITEMS.register("wildwood_leaves", () -> new BlockItem(ModBlocks.WILDWOOD_LEAVES.get(), DEFAULT));
+  // Runed wildwood log
+  public static DeferredHolder<Item, BlockItem> RUNED_WILDWOOD_LOG = ITEMS.register("runed_wildwood_log", () -> new BlockItem(ModBlocks.RUNED_WILDWOOD_LOG.get(), DEFAULT));
+  // Runed spruce log
+  public static DeferredHolder<Item, BlockItem> RUNED_SPRUCE_LOG = ITEMS.register("runed_spruce_log", () -> new BlockItem(ModBlocks.RUNED_SPRUCE_LOG.get(), DEFAULT));
+  // Runed jungle log
+  public static DeferredHolder<Item, BlockItem> RUNED_JUNGLE_LOG = ITEMS.register("runed_jungle_log", () -> new BlockItem(ModBlocks.RUNED_JUNGLE_LOG.get(), DEFAULT));
+  // Runed birch log
+  public static DeferredHolder<Item, BlockItem> RUNED_BIRCH_LOG = ITEMS.register("runed_birch_log", () -> new BlockItem(ModBlocks.RUNED_BIRCH_LOG.get(), DEFAULT));
+  // Runed oak log
+  public static DeferredHolder<Item, BlockItem> RUNED_OAK_LOG = ITEMS.register("runed_oak_log", () -> new BlockItem(ModBlocks.RUNED_OAK_LOG.get(), DEFAULT));
+  // Runed dark oak log
+  public static DeferredHolder<Item, BlockItem> RUNED_DARK_OAK_LOG = ITEMS.register("runed_dark_oak_log", () -> new BlockItem(ModBlocks.RUNED_DARK_OAK_LOG.get(), DEFAULT));
+  // Runed acacia log
+  public static DeferredHolder<Item, BlockItem> RUNED_ACACIA_LOG = ITEMS.register("runed_acacia_log", () -> new BlockItem(ModBlocks.RUNED_ACACIA_LOG.get(), DEFAULT));
+  // Runed mangrove log
+  public static DeferredHolder<Item, BlockItem> RUNED_MANGROVE_LOG = ITEMS.register("runed_mangrove_log", () -> new BlockItem(ModBlocks.RUNED_MANGROVE_LOG.get(), DEFAULT));
+  // Runed warped stem
+  public static DeferredHolder<Item, BlockItem> RUNED_WARPED_STEM = ITEMS.register("runed_warped_stem", () -> new BlockItem(ModBlocks.RUNED_WARPED_STEM.get(), DEFAULT));
+  // Runed crimson stem
+  public static DeferredHolder<Item, BlockItem> RUNED_CRIMSON_STEM = ITEMS.register("runed_crimson_stem", () -> new BlockItem(ModBlocks.RUNED_CRIMSON_STEM.get(), DEFAULT));
+  // Runestone stairs
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_STAIRS = ITEMS.register("runestone_stairs", () -> new BlockItem(ModBlocks.RUNESTONE_STAIRS.get(), DEFAULT));
+  // Mossy runestone stairs
+  public static DeferredHolder<Item, BlockItem> MOSSY_RUNESTONE_STAIRS = ITEMS.register("mossy_runestone_stairs", () -> new BlockItem(ModBlocks.MOSSY_RUNESTONE_STAIRS.get(), DEFAULT));
+  // Runestone brick stairs
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_BRICK_STAIRS = ITEMS.register("runestone_brick_stairs", () -> new BlockItem(ModBlocks.RUNESTONE_BRICK_STAIRS.get(), DEFAULT));
+  // Runestone tile stairs
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_TILE_STAIRS = ITEMS.register("runestone_tile_stairs", () -> new BlockItem(ModBlocks.RUNESTONE_TILE_STAIRS.get(), DEFAULT));
+  // Runed stairs
+  public static DeferredHolder<Item, BlockItem> RUNED_STAIRS = ITEMS.register("runed_stairs", () -> new BlockItem(ModBlocks.RUNED_STAIRS.get(), DEFAULT));
+  // Runed brick stairs
+  public static DeferredHolder<Item, BlockItem> RUNED_BRICK_STAIRS = ITEMS.register("runed_brick_stairs", () -> new BlockItem(ModBlocks.RUNED_BRICK_STAIRS.get(), DEFAULT));
+  // Runed tile stairs
+  public static DeferredHolder<Item, BlockItem> RUNED_TILE_STAIRS = ITEMS.register("runed_tile_stairs", () -> new BlockItem(ModBlocks.RUNED_TILE_STAIRS.get(), DEFAULT));
+  // Wildwood stairs
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_STAIRS = ITEMS.register("wildwood_stairs", () -> new BlockItem(ModBlocks.WILDWOOD_STAIRS.get(), DEFAULT));
+  // Runestone slab
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_SLAB = ITEMS.register("runestone_slab", () -> new BlockItem(ModBlocks.RUNESTONE_SLAB.get(), DEFAULT));
+  // Mossy runestone slab
+  public static DeferredHolder<Item, BlockItem> MOSSY_RUNESTONE_SLAB = ITEMS.register("mossy_runestone_slab", () -> new BlockItem(ModBlocks.MOSSY_RUNESTONE_SLAB.get(), DEFAULT));
+  // Runestone brick slab
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_BRICK_SLAB = ITEMS.register("runestone_brick_slab", () -> new BlockItem(ModBlocks.RUNESTONE_BRICK_SLAB.get(), DEFAULT));
+  // Runestone tile slab
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_TILE_SLAB = ITEMS.register("runestone_tile_slab", () -> new BlockItem(ModBlocks.RUNESTONE_TILE_SLAB.get(), DEFAULT));
+  // Runed slab
+  public static DeferredHolder<Item, BlockItem> RUNED_SLAB = ITEMS.register("runed_slab", () -> new BlockItem(ModBlocks.RUNED_SLAB.get(), DEFAULT));
+  // Runed brick slab
+  public static DeferredHolder<Item, BlockItem> RUNED_BRICK_SLAB = ITEMS.register("runed_brick_slab", () -> new BlockItem(ModBlocks.RUNED_BRICK_SLAB.get(), DEFAULT));
+  // Runed tile slab
+  public static DeferredHolder<Item, BlockItem> RUNED_TILE_SLAB = ITEMS.register("runed_tile_slab", () -> new BlockItem(ModBlocks.RUNED_TILE_SLAB.get(), DEFAULT));
+  // Wildwood slab
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_SLAB = ITEMS.register("wildwood_slab", () -> new BlockItem(ModBlocks.WILDWOOD_SLAB.get(), DEFAULT));
+  // Wildwood fence
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_FENCE = ITEMS.register("wildwood_fence", () -> new BlockItem(ModBlocks.WILDWOOD_FENCE.get(), DEFAULT));
+  // Runestone button
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_BUTTON = ITEMS.register("runestone_button", () -> new BlockItem(ModBlocks.RUNESTONE_BUTTON.get(), DEFAULT));
+  // Runestone brick button
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_BRICK_BUTTON = ITEMS.register("runestone_brick_button", () -> new BlockItem(ModBlocks.RUNESTONE_BRICK_BUTTON.get(), DEFAULT));
+  // Runestone tile button
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_TILE_BUTTON = ITEMS.register("runestone_tile_button", () -> new BlockItem(ModBlocks.RUNESTONE_TILE_BUTTON.get(), DEFAULT));
+  // Runed button
+  public static DeferredHolder<Item, BlockItem> RUNED_BUTTON = ITEMS.register("runed_button", () -> new BlockItem(ModBlocks.RUNED_BUTTON.get(), DEFAULT));
+  // Runed brick button
+  public static DeferredHolder<Item, BlockItem> RUNED_BRICK_BUTTON = ITEMS.register("runed_brick_button", () -> new BlockItem(ModBlocks.RUNED_BRICK_BUTTON.get(), DEFAULT));
+  // Runed tile button
+  public static DeferredHolder<Item, BlockItem> RUNED_TILE_BUTTON = ITEMS.register("runed_tile_button", () -> new BlockItem(ModBlocks.RUNED_TILE_BUTTON.get(), DEFAULT));
+  // Wildwood button
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_BUTTON = ITEMS.register("wildwood_button", () -> new BlockItem(ModBlocks.WILDWOOD_BUTTON.get(), DEFAULT));
+  // Runestone pressure plate
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_PRESSURE_PLATE = ITEMS.register("runestone_pressure_plate", () -> new BlockItem(ModBlocks.RUNESTONE_PRESSURE_PLATE.get(), DEFAULT));
+  // Runestone brick pressure plate
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_BRICK_PRESSURE_PLATE = ITEMS.register("runestone_brick_pressure_plate", () -> new BlockItem(ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE.get(), DEFAULT));
+  // Runestone tile pressure plate
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_TILE_PRESSURE_PLATE = ITEMS.register("runestone_tile_pressure_plate", () -> new BlockItem(ModBlocks.RUNESTONE_TILE_PRESSURE_PLATE.get(), DEFAULT));
+  // Runed pressure plate
+  public static DeferredHolder<Item, BlockItem> RUNED_PRESSURE_PLATE = ITEMS.register("runed_pressure_plate", () -> new BlockItem(ModBlocks.RUNED_PRESSURE_PLATE.get(), DEFAULT));
+  // Runed brick pressure plate
+  public static DeferredHolder<Item, BlockItem> RUNED_BRICK_PRESSURE_PLATE = ITEMS.register("runed_brick_pressure_plate", () -> new BlockItem(ModBlocks.RUNED_BRICK_PRESSURE_PLATE.get(), DEFAULT));
+  // Runed tile pressure plate
+  public static DeferredHolder<Item, BlockItem> RUNED_TILE_PRESSURE_PLATE = ITEMS.register("runed_tile_pressure_plate", () -> new BlockItem(ModBlocks.RUNED_TILE_PRESSURE_PLATE.get(), DEFAULT));
+  // Wildwood pressure plate
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_PRESSURE_PLATE = ITEMS.register("wildwood_pressure_plate", () -> new BlockItem(ModBlocks.WILDWOOD_PRESSURE_PLATE.get(), DEFAULT));
+  // Wildwood door
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_DOOR = ITEMS.register("wildwood_door", () -> new BlockItem(ModBlocks.WILDWOOD_DOOR.get(), DEFAULT));
+  // Wildwood trapdoor
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_TRAPDOOR = ITEMS.register("wildwood_trapdoor", () -> new BlockItem(ModBlocks.WILDWOOD_TRAPDOOR.get(), DEFAULT));
+  // Wildwood ladder
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_LADDER = ITEMS.register("wildwood_ladder", () -> new BlockItem(ModBlocks.WILDWOOD_LADDER.get(), DEFAULT));
+  // Wildwood gate
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_GATE = ITEMS.register("wildwood_gate", () -> new BlockItem(ModBlocks.WILDWOOD_GATE.get(), DEFAULT));
+  // Runestone wall
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_WALL = ITEMS.register("runestone_wall", () -> new BlockItem(ModBlocks.RUNESTONE_WALL.get(), DEFAULT));
+  // Mossy runestone wall
+  public static DeferredHolder<Item, BlockItem> MOSSY_RUNESTONE_WALL = ITEMS.register("mossy_runestone_wall", () -> new BlockItem(ModBlocks.MOSSY_RUNESTONE_WALL.get(), DEFAULT));
+  // Runestone brick wall
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_BRICK_WALL = ITEMS.register("runestone_brick_wall", () -> new BlockItem(ModBlocks.RUNESTONE_BRICK_WALL.get(), DEFAULT));
+  // Runestone tile wall
+  public static DeferredHolder<Item, BlockItem> RUNESTONE_TILE_WALL = ITEMS.register("runestone_tile_wall", () -> new BlockItem(ModBlocks.RUNESTONE_TILE_WALL.get(), DEFAULT));
+  // Runed wall
+  public static DeferredHolder<Item, BlockItem> RUNED_WALL = ITEMS.register("runed_wall", () -> new BlockItem(ModBlocks.RUNED_WALL.get(), DEFAULT));
+  // Runed brick wall
+  public static DeferredHolder<Item, BlockItem> RUNED_BRICK_WALL = ITEMS.register("runed_brick_wall", () -> new BlockItem(ModBlocks.RUNED_BRICK_WALL.get(), DEFAULT));
+  // Runed tile wall
+  public static DeferredHolder<Item, BlockItem> RUNED_TILE_WALL = ITEMS.register("runed_tile_wall", () -> new BlockItem(ModBlocks.RUNED_TILE_WALL.get(), DEFAULT));
+  // Elemental soil
+  public static DeferredHolder<Item, BlockItem> ELEMENTAL_SOIL = ITEMS.register("elemental_soil", () -> new BlockItem(ModBlocks.ELEMENTAL_SOIL.get(), DEFAULT));
+  // Aqueous soil
+  public static DeferredHolder<Item, BlockItem> AQUEOUS_SOIL = ITEMS.register("aqueous_soil", () -> new BlockItem(ModBlocks.AQUEOUS_SOIL.get(), DEFAULT));
+  // Caelic soil
+  public static DeferredHolder<Item, BlockItem> CAELIC_SOIL = ITEMS.register("caelic_soil", () -> new BlockItem(ModBlocks.CAELIC_SOIL.get(), DEFAULT));
+  // Magmatic soil
+  public static DeferredHolder<Item, BlockItem> MAGMATIC_SOIL = ITEMS.register("magmatic_soil", () -> new BlockItem(ModBlocks.MAGMATIC_SOIL.get(), DEFAULT));
+  // Terran soil
+  public static DeferredHolder<Item, BlockItem> TERRAN_SOIL = ITEMS.register("terran_soil", () -> new BlockItem(ModBlocks.TERRAN_SOIL.get(), DEFAULT));
+  // Ritual pedestal
+  public static DeferredHolder<Item, BlockItem> RITUAL_PEDESTAL = ITEMS.register("ritual_pedestal", () -> new BlockItem(ModBlocks.RITUAL_PEDESTAL.get(), DEFAULT));
+  // Reinforced ritual pedestal
+  public static DeferredHolder<Item, BlockItem> REINFORCED_RITUAL_PEDESTAL = ITEMS.register("reinforced_ritual_pedestal", () -> new BlockItem(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get(), DEFAULT));
+  // Grove crafter
+  public static DeferredHolder<Item, BlockItem> GROVE_CRAFTER = ITEMS.register("grove_crafter", () -> new BlockItem(ModBlocks.GROVE_CRAFTER.get(), DEFAULT));
+  // Grove pedestal
+  public static DeferredHolder<Item, BlockItem> GROVE_PEDESTAL = ITEMS.register("grove_pedestal", () -> new BlockItem(ModBlocks.GROVE_PEDESTAL.get(), DEFAULT));
+  // Wildwood pedestal
+  public static DeferredHolder<Item, BlockItem> WILDWOOD_PEDESTAL = ITEMS.register("wildwood_pedestal", () -> new BlockItem(ModBlocks.WILDWOOD_PEDESTAL.get(), DEFAULT));
+  // Display pedestal
+  public static DeferredHolder<Item, BlockItem> DISPLAY_PEDESTAL = ITEMS.register("display_pedestal", () -> new BlockItem(ModBlocks.DISPLAY_PEDESTAL.get(), DEFAULT));
+  // Bafflecap block
+  public static DeferredHolder<Item, BlockItem> BAFFLECAP_BLOCK = ITEMS.register("bafflecap_block", () -> new BlockItem(ModBlocks.BAFFLECAP_BLOCK.get(), DEFAULT));
+  // Primal grove stone
+  public static DeferredHolder<Item, BlockItem> PRIMAL_GROVE_STONE = ITEMS.register("primal_grove_stone", () -> new BlockItem(ModBlocks.PRIMAL_GROVE_STONE.get(), DEFAULT));
+  // Incense burner
+  public static DeferredHolder<Item, BlockItem> INCENSE_BURNER = ITEMS.register("incense_burner", () -> new BlockItem(ModBlocks.INCENSE_BURNER.get(), DEFAULT));
+  // Mortar
+  public static DeferredHolder<Item, BlockItem> MORTAR = ITEMS.register("mortar", () -> new BlockItem(ModBlocks.MORTAR.get(), DEFAULT));
+  // Pyre
+  public static DeferredHolder<Item, BlockItem> PYRE = ITEMS.register("pyre", () -> new BlockItem(ModBlocks.PYRE.get(), DEFAULT));
+  // Reinforced pyre
+  public static DeferredHolder<Item, BlockItem> REINFORCED_PYRE = ITEMS.register("reinforced_pyre", () -> new BlockItem(ModBlocks.REINFORCED_PYRE.get(), DEFAULT));
+  // Decorative pyre
+  public static DeferredHolder<Item, BlockItem> DECORATIVE_PYRE = ITEMS.register("decorative_pyre", () -> new BlockItem(ModBlocks.DECORATIVE_PYRE.get(), DEFAULT));
+  // Unending bowl
+  public static DeferredHolder<Item, BlockItem> UNENDING_BOWL = ITEMS.register("unending_bowl", () -> new BlockItem(ModBlocks.UNENDING_BOWL.get(), DEFAULT));
+  // Potted bafflecap
+  public static DeferredHolder<Item, BlockItem> POTTED_BAFFLECAP = ITEMS.register("potted_bafflecap", () -> new BlockItem(ModBlocks.POTTED_BAFFLECAP.get(), DEFAULT));
+  // Potted stonepetal
+  public static DeferredHolder<Item, BlockItem> POTTED_STONEPETAL = ITEMS.register("potted_stonepetal", () -> new BlockItem(ModBlocks.POTTED_STONEPETAL.get(), DEFAULT));
+  // Potted wildwood sapling
+  public static DeferredHolder<Item, BlockItem> POTTED_WILDWOOD_SAPLING = ITEMS.register("potted_wildwood_sapling", () -> new BlockItem(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), DEFAULT));
 
   // GATHERED CROPS
   public static final DeferredHolder<Item, ItemNameBlockItem> WILDROOT = ITEMS.register("wildroot", () -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), DEFAULT));
@@ -857,12 +1032,14 @@ public class ModItems {
     })
     .register();*/
 
+  public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(DEFAULT));
 /*  public static final DeferredHolder<Item, Item> WILDWOOD_BOW = REGISTRATE.item("wildwood_bow", Item::new)
     // TODO: MODEL, ETC
     .model(subfolder("tools"))
-    .register();
+    .register();*/
 
-  public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = REGISTRATE.item("wildwood_quiver", Item::new)
+  public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new Item(DEFAULT));
+/*  public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = REGISTRATE.item("wildwood_quiver", Item::new)
     .model(subfolder("tools"))
     .register();*/
 
@@ -1170,6 +1347,26 @@ public class ModItems {
       .recipe((ctx, p) -> RECIPES.boots(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.COPPER_BOOTS, null, p))
       .tag(RootsTags.Items.COPPER_ITEMS)
       .register();*/
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> BEETLE_SPAWN_EGG = ITEMS.register("beetle_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.BEETLE, 0x418594, 0x211D15, DEFAULT));
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> DEER_SPAWN_EGG = ITEMS.register("deer_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.DEER, 0xa18458, 0x5e4d33, DEFAULT));
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> FENNEC_SPAWN_EGG = ITEMS.register("fennec_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.FENNEC, 0xe9dcc2, 0xb1855c, DEFAULT));
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> GREEN_SPROUT_SPAWN_EGG = ITEMS.register("green_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.GREEN_SPROUT, 0x9adb58, 0x2c9425, DEFAULT));
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> TAN_SPROUT_SPAWN_EGG = ITEMS.register("tan_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.TAN_SPROUT, 0xeeca5f, 0xbb6c20, DEFAULT));
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> RED_SPROUT_SPAWN_EGG = ITEMS.register("red_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.RED_SPROUT, 0xe6754c, 0xbd2637, DEFAULT));
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> PURPLE_SPROUT_SPAWN_EGG = ITEMS.register("purple_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.PURPLE_SPROUT, 0xdd45e6, 0x6825ba, DEFAULT));
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> OWL_SPAWN_EGG = ITEMS.register("owl_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.OWL, 0x8c654a, 0xdec9ba, DEFAULT));
+
+  public static DeferredHolder<Item, DeferredSpawnEggItem> DUCK_SPAWN_EGG = ITEMS.register("duck_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.DUCK, 0xe4d6a5, 0xe9ad36, DEFAULT));
+
+  public static DeferredHolder<Item, Item> TOKEN = ITEMS.register("token", () -> new Item(DEFAULT));
 
 /*
   public static DeferredHolder<Item, SpawnEggItem> BEETLE_SPAWN_EGG =

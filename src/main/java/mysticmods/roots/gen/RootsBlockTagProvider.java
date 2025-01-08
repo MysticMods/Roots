@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -188,6 +189,48 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     //noinspection unchecked
     this.tag(RootsTags.Blocks.RUNED_LOGS).addTags(RootsTags.Blocks.RUNED_ACACIA_LOG, RootsTags.Blocks.RUNED_BIRCH_LOG, RootsTags.Blocks.RUNED_JUNGLE_LOG, RootsTags.Blocks.RUNED_OAK_LOG, RootsTags.Blocks.RUNED_DARK_OAK_LOG, RootsTags.Blocks.RUNED_CRIMSON_STEM, RootsTags.Blocks.RUNED_WARPED_STEM, RootsTags.Blocks.RUNED_MANGROVE_LOG, RootsTags.Blocks.RUNED_SPRUCE_LOG);
+
+    // From the old ModTags
+    this.tag(RootsTags.Blocks.STANDING_STONE_CROPS).add(Blocks.WHEAT, Blocks.BEETROOTS, Blocks.POTATOES, Blocks.CARROTS);
+    this.tag(RootsTags.Blocks.BAFFLECAP_CONVERSION).add(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, Blocks.WARPED_FUNGUS, Blocks.CRIMSON_FUNGUS);
+    // TODO: What is this even for?
+    this.tag(RootsTags.Blocks.GRASS).add(Blocks.GRASS_BLOCK, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
+    this.tag(RootsTags.Blocks.LEVERS).add(Blocks.LEVER);
+    // TODO: CHECK
+    this.tag(RootsTags.Blocks.SUPPORTS_STONEPETAL).addTag(BlockTags.STONE_ORE_REPLACEABLES);
+    this.tag(RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE).addTag(BlockTags.DIRT);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.SUPPORTS_WILD_ROOTS).addTags(BlockTags.BASE_STONE_OVERWORLD, BlockTags.DIRT, BlockTags.MOSS_REPLACEABLE).add(Blocks.MOSS_BLOCK, Blocks.SNOW_BLOCK, Blocks.GRAVEL, Blocks.CLAY);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.SUPPORTS_HANGING_MOSS).addTags(BlockTags.LOGS);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.PEDESTALS).addTags(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.GROVE_PEDESTALS);
+
+    // Forge compat tags
+    this.tag(RootsTags.Blocks.FORGE_CROPS).addTag(RootsTags.Blocks.CROPS);
+
+    // Logs that burn
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.MINECRAFT_LOGS_THAT_BURN).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.MINECRAFT_LOGS).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
+
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.LOG_PILLARS).addTags(RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Blocks.DARK_OAK_PILLARS, RootsTags.Blocks.JUNGLE_PILLARS, RootsTags.Blocks.OAK_PILLARS, RootsTags.Blocks.SPRUCE_PILLARS, RootsTags.Blocks.WARPED_PILLARS, RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.MANGROVE_PILLARS);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.LOG_CAPSTONES).addTags(RootsTags.Blocks.ACACIA_CAPSTONES, RootsTags.Blocks.BIRCH_CAPSTONES, RootsTags.Blocks.DARK_OAK_CAPSTONES, RootsTags.Blocks.JUNGLE_CAPSTONES, RootsTags.Blocks.OAK_CAPSTONES, RootsTags.Blocks.SPRUCE_CAPSTONES, RootsTags.Blocks.WARPED_CAPSTONES, RootsTags.Blocks.CRIMSON_CAPSTONES, RootsTags.Blocks.WILDWOOD_CAPSTONES, RootsTags.Blocks.MANGROVE_CAPSTONES);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.RUNES_CAPSTONES).addTags(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Blocks.RUNED_CAPSTONES);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.CAPSTONES).addTags(RootsTags.Blocks.RUNES_CAPSTONES, RootsTags.Blocks.LOG_CAPSTONES);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.RUNES_PILLARS).addTags(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Blocks.RUNED_PILLARS);
+    //noinspection unchecked
+    this.tag(RootsTags.Blocks.PILLARS).addTags(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Blocks.LOG_PILLARS);
+
+    this.tag(RootsTags.Blocks.GROWTH_FORCE);
+    this.tag(RootsTags.Blocks.GROWTH_BLACKLIST);
+    this.tag(RootsTags.Blocks.GROWTH_REDUCE);
 
   }
 

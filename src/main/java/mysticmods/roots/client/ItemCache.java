@@ -31,7 +31,7 @@ public class ItemCache {
 /*    return MODIFIER_CACHE.computeIfAbsent(modifier, TokenItem::getModifierToken);*/
   }
 
-  public static ItemStack getGrantStack(Grant grant) {
+/*  public static ItemStack getGrantStack(Grant grant) {
     if (grant.type() == Grant.Type.SPELL) {
       Spell spell = RootsRegistries.SPELLS.get(grant.id());
       if (spell == null) {
@@ -50,5 +50,5 @@ public class ItemCache {
       RootsAPI.LOG.error("Grant {} references unknown type {}", grant, grant.type());
       return ItemStack.EMPTY;
     }
-  }
+  }*/
 }
