@@ -52,7 +52,8 @@ public class GrantCapability {
     return GRANTED_MODIFIERS.contains(modifier);
   }
 
-  public boolean canGrant(Grant grant) {
+  public boolean canGrant(Unlock<?> grant) {
+/*
     if (grant.type() == Grant.Type.SPELL) {
       Spell spell = RootsRegistries.SPELLS.get(grant.id());
       if (spell == null) {
@@ -68,11 +69,13 @@ public class GrantCapability {
 
       return grant.repeatable() || !hasModifier(modifier);
     }
+*/
 
     return false;
   }
 
-  public boolean grant(ServerPlayer player, Grant grant) {
+  public boolean unlock(ServerPlayer player, Unlock<?> grant) {
+/*
     if (grant.type() == Grant.Type.SPELL) {
       Spell spell = RootsRegistries.SPELLS.get(grant.id());
       if (spell == null) {
@@ -96,6 +99,7 @@ public class GrantCapability {
         return true;
       }
     }
+*/
 
     return false;
   }

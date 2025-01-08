@@ -1,6 +1,5 @@
 package mysticmods.roots.impl;
 
-import mysticmods.roots.api.access.IRecipeManagerAccessor;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
@@ -8,12 +7,11 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import javax.annotation.Nullable;
 
-public class ServerRecipeAccessor implements IRecipeManagerAccessor {
-  private RecipeManager manager = null;
+public class ServerAccessor {
+  private static RecipeManager manager = null;
 
   @Nullable
-  @Override
-  public RecipeManager getManager() {
+  public static RecipeManager getManager() {
     if (manager != null) {
       return manager;
     }

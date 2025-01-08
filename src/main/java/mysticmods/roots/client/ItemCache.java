@@ -2,7 +2,6 @@ package mysticmods.roots.client;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Grant;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;

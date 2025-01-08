@@ -1,29 +1,13 @@
 package mysticmods.roots;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.access.IPlayerAccessor;
-import mysticmods.roots.api.access.IRecipeManagerAccessor;
-import mysticmods.roots.api.access.IShiftAccessor;
-import mysticmods.roots.api.capability.Grant;
-import mysticmods.roots.client.impl.ClientPlayerAccessor;
-import mysticmods.roots.client.impl.ClientRecipeAccessor;
-import mysticmods.roots.client.impl.ClientShiftAccessor;
 import mysticmods.roots.config.ConfigManager;
-import mysticmods.roots.impl.ServerPlayerAccessor;
-import mysticmods.roots.impl.ServerRecipeAccessor;
-import mysticmods.roots.impl.ServerShiftAccessor;
+import mysticmods.roots.impl.RootsAPIImpl;
 import mysticmods.roots.init.*;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.loading.FMLPaths;
-
-import javax.annotation.Nullable;
 
 @Mod(RootsAPI.MODID)
 public class Roots {
@@ -31,43 +15,10 @@ public class Roots {
   public static RootsArmorMaterial CARAPACE_MATERIAL = new RootsArmorMaterial("roots:carapace", 25, new int[]{2, 5, 6, 2}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(ModItems.CARAPACE.get()));
   public static RootsArmorMaterial COPPER_MATERIAL = new RootsArmorMaterial("roots:copper", 15, new int[]{2, 5, 6, 2}, 7, SoundEvents.ARMOR_EQUIP_IRON.defaultValue(), 0.0f, 0.0f, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));*/
 
-  public static final CreativeModeTab ITEM_GROUP = CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.WILDROOT.get())).build();
-
   public Roots(ModContainer container, IEventBus bus) {
     container.registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
 
-    RootsAPI.INSTANCE = new RootsAPI() {
-      private final IRecipeManagerAccessor accessor = null; //DistExecutor.safeRunForDist(() -> ClientRecipeAccessor::new, () -> ServerRecipeAccessor::new);
-      private final IPlayerAccessor playerAccessor = null; //DistExecutor.safeRunForDist(() -> ClientPlayerAccessor::new, () -> ServerPlayerAccessor::new);
-      private final IShiftAccessor shiftAccessor = null; // DistExecutor.safeRunForDist(() -> ClientShiftAccessor::new, () -> ServerShiftAccessor::new);
-
-      @Override
-      public IRecipeManagerAccessor getRecipeAccessor() {
-        return accessor;
-      }
-
-      @Nullable
-      @Override
-      public Player getPlayer() {
-        return playerAccessor.getPlayer();
-      }
-
-      @Override
-      public boolean isShiftKeyDown() {
-        return shiftAccessor.isShiftKeyDown();
-      }
-
-      @Override
-      public void grant(ServerPlayer player, Grant grant) {
-/*        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(cap -> cap.grant(player, grant));*/
-      }
-
-      @Override
-      public boolean canGrant(ServerPlayer player, Grant grant) {
-/*        return player.getCapability(Capabilities.GRANT_CAPABILITY).orElseThrow(IllegalStateException::new).canGrant(grant);*/
-        return false;
-      }
-    };
+    RootsAPI.INSTANCE = new RootsAPIImpl();
 
     ModBlocks.register(bus);
     ModBlockEntities.register(bus);

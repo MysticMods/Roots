@@ -5,12 +5,9 @@ import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -55,92 +52,88 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(BlockTags.WOODEN_DOORS).add(WILDWOOD_DOOR.get());
     this.tag(BlockTags.WOODEN_TRAPDOORS).add(WILDWOOD_TRAPDOOR.get());
-
-    this.tag(RootsTags.Blocks.STONEPETAL).add(STONEPETAL.get());
-
-    this.tag(RootsTags.Blocks.RAW_SILVER_STORAGE).add(RAW_SILVER_BLOCK.get());
-    this.tag(RootsTags.Blocks.SILVER_STORAGE).add(SILVER_BLOCK.get());
-
     this.tag(BlockTags.BEACON_BASE_BLOCKS).add(SILVER_BLOCK.get());
-
-    this.tag(RootsTags.Blocks.SILVER_ORE).add(SILVER_ORE.get(), DEEPSLATE_SILVER_ORE.get());
-
     this.tag(BlockTags.NEEDS_IRON_TOOL).add(RUNED_OBSIDIAN.get(), CHISELED_RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get(), SILVER_ORE.get(), DEEPSLATE_SILVER_ORE.get(), SILVER_BLOCK.get());
-
-    this.tag(RootsTags.Blocks.WILDWOOD_LOGS).add(WILDWOOD_LOG.get(), STRIPPED_WILDWOOD_LOG.get(), STRIPPED_WILDWOOD_WOOD.get(), WILDWOOD_WOOD.get(), RUNED_WILDWOOD_LOG.get());
-    this.tag(RootsTags.Blocks.RUNED_WILDWOOD_LOG).add(RUNED_WILDWOOD_LOG.get());
-
-    this.tag(RootsTags.Blocks.QUARTZ_ORE).add(GRANITE_QUARTZ_ORE.get());
-
     this.tag(BlockTags.DRAGON_IMMUNE).add(RUNED_OBSIDIAN.get(), CHISELED_RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get(), RUNED_STAIRS.get(), RUNED_TILE_STAIRS.get(), RUNED_BRICK_STAIRS.get(), RUNED_SLAB.get(), RUNED_BRICK_SLAB.get(), RUNED_TILE_SLAB.get(), RUNED_BUTTON.get(), RUNED_TILE_BUTTON.get(), RUNED_BRICK_BUTTON.get(), RUNED_PRESSURE_PLATE.get(), RUNED_TILE_PRESSURE_PLATE.get(), RUNED_BRICK_PRESSURE_PLATE.get(), RUNED_WALL.get(), RUNED_BRICK_WALL.get(), RUNED_TILE_WALL.get(), REINFORCED_RITUAL_PEDESTAL.get(), REINFORCED_PYRE.get());
     this.tag(BlockTags.WITHER_IMMUNE).add(RUNED_OBSIDIAN.get(), CHISELED_RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get(), RUNED_STAIRS.get(), RUNED_TILE_STAIRS.get(), RUNED_BRICK_STAIRS.get(), RUNED_SLAB.get(), RUNED_BRICK_SLAB.get(), RUNED_TILE_SLAB.get(), RUNED_BUTTON.get(), RUNED_TILE_BUTTON.get(), RUNED_BRICK_BUTTON.get(), RUNED_PRESSURE_PLATE.get(), RUNED_TILE_PRESSURE_PLATE.get(), RUNED_BRICK_PRESSURE_PLATE.get(), RUNED_WALL.get(), RUNED_BRICK_WALL.get(), RUNED_TILE_WALL.get(), REINFORCED_RITUAL_PEDESTAL.get(), REINFORCED_PYRE.get());
-
     this.tag(BlockTags.PLANKS).add(WILDWOOD_PLANKS.get());
-
     this.tag(BlockTags.SAPLINGS).add(WILDWOOD_SAPLING.get());
+    this.tag(BlockTags.ACACIA_LOGS).add(RUNED_ACACIA_LOG.get());
+    this.tag(BlockTags.BIRCH_LOGS).add(RUNED_BIRCH_LOG.get());
+    this.tag(BlockTags.JUNGLE_LOGS).add(RUNED_JUNGLE_LOG.get());
+    this.tag(BlockTags.OAK_LOGS).add(RUNED_OAK_LOG.get());
+    this.tag(BlockTags.DARK_OAK_LOGS).add(RUNED_DARK_OAK_LOG.get());
+    this.tag(BlockTags.CRIMSON_STEMS).add(RUNED_CRIMSON_STEM.get());
+    this.tag(BlockTags.WARPED_STEMS).add(RUNED_WARPED_STEM.get());
+    this.tag(BlockTags.LEAVES).add(WILDWOOD_LEAVES.get());
+    this.tag(BlockTags.MANGROVE_LOGS).add(RUNED_MANGROVE_LOG.get());
 
+    this.tag(BlockTags.SPRUCE_LOGS).add(RUNED_SPRUCE_LOG.get());
+    this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(RootsTags.Blocks.RITUAL_PEDESTALS);
+    //noinspection unchecked
+    this.tag(BlockTags.MINEABLE_WITH_AXE).addTags(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS).add(GROVE_CRAFTER.get());
+
+
+    this.tag(RootsTags.Blocks.STONEPETAL).add(STONEPETAL.get());
+    this.tag(RootsTags.Blocks.RAW_SILVER_STORAGE).add(RAW_SILVER_BLOCK.get());
+    this.tag(RootsTags.Blocks.SILVER_STORAGE).add(SILVER_BLOCK.get());
+    this.tag(RootsTags.Blocks.SILVER_ORE).add(SILVER_ORE.get(), DEEPSLATE_SILVER_ORE.get());
+    this.tag(RootsTags.Blocks.WILDWOOD_LOGS).add(WILDWOOD_LOG.get(), STRIPPED_WILDWOOD_LOG.get(), STRIPPED_WILDWOOD_WOOD.get(), WILDWOOD_WOOD.get(), RUNED_WILDWOOD_LOG.get());
+    this.tag(RootsTags.Blocks.RUNED_WILDWOOD_LOG).add(RUNED_WILDWOOD_LOG.get());
+    this.tag(RootsTags.Blocks.QUARTZ_ORE).add(GRANITE_QUARTZ_ORE.get());
     this.tag(RootsTags.Blocks.RUNED_OBSIDIAN).add(RUNED_OBSIDIAN.get(), CHISELED_RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get());
-
     this.tag(RootsTags.Blocks.RUNED_CAPSTONES).add(CHISELED_RUNED_OBSIDIAN.get());
     this.tag(RootsTags.Blocks.RUNED_PILLARS).add(RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get());
-
     this.tag(RootsTags.Blocks.RUNESTONE).add(RUNESTONE.get(), RUNESTONE_BRICK.get(), CHISELED_RUNESTONE.get(), MOSSY_RUNESTONE.get());
-
     this.tag(RootsTags.Blocks.RUNE_CAPSTONES).add(CHISELED_RUNESTONE.get());
     this.tag(RootsTags.Blocks.RUNE_PILLARS).add(RUNESTONE.get(), RUNESTONE_BRICK.get(), MOSSY_RUNESTONE.get(), RUNESTONE_TILE.get());
-
     this.tag(RootsTags.Blocks.ACACIA_CAPSTONES).add(RUNED_ACACIA_LOG.get());
-    this.tag(BlockTags.ACACIA_LOGS).add(RUNED_ACACIA_LOG.get());
     this.tag(RootsTags.Blocks.RUNED_ACACIA_LOG).add(RUNED_ACACIA_LOG.get());
 
     // Birch
     this.tag(RootsTags.Blocks.BIRCH_CAPSTONES).add(RUNED_BIRCH_LOG.get());
-    this.tag(BlockTags.BIRCH_LOGS).add(RUNED_BIRCH_LOG.get());
+
     // Runed birch log
     this.tag(RootsTags.Blocks.RUNED_BIRCH_LOG).add(RUNED_BIRCH_LOG.get());
 
     // Jungle
     this.tag(RootsTags.Blocks.JUNGLE_CAPSTONES).add(RUNED_JUNGLE_LOG.get());
-    this.tag(BlockTags.JUNGLE_LOGS).add(RUNED_JUNGLE_LOG.get());
+
     // Runed jungle log
     this.tag(RootsTags.Blocks.RUNED_JUNGLE_LOG).add(RUNED_JUNGLE_LOG.get());
 
     // Oak
     this.tag(RootsTags.Blocks.OAK_CAPSTONES).add(RUNED_OAK_LOG.get());
-    this.tag(BlockTags.OAK_LOGS).add(RUNED_OAK_LOG.get());
+
     // Runed oak log
     this.tag(RootsTags.Blocks.RUNED_OAK_LOG).add(RUNED_OAK_LOG.get());
 
     // Dark oak
     this.tag(RootsTags.Blocks.DARK_OAK_CAPSTONES).add(RUNED_DARK_OAK_LOG.get());
-    this.tag(BlockTags.DARK_OAK_LOGS).add(RUNED_DARK_OAK_LOG.get());
+
     // Runed dark oak log
     this.tag(RootsTags.Blocks.RUNED_DARK_OAK_LOG).add(RUNED_DARK_OAK_LOG.get());
 
     // Crimson
     this.tag(RootsTags.Blocks.CRIMSON_CAPSTONES).add(RUNED_CRIMSON_STEM.get());
-    this.tag(BlockTags.CRIMSON_STEMS).add(RUNED_CRIMSON_STEM.get());
+
     // Runed crimson stem
     this.tag(RootsTags.Blocks.RUNED_CRIMSON_STEM).add(RUNED_CRIMSON_STEM.get());
 
     // Warped
     this.tag(RootsTags.Blocks.WARPED_CAPSTONES).add(RUNED_WARPED_STEM.get());
-    this.tag(BlockTags.WARPED_STEMS).add(RUNED_WARPED_STEM.get());
+
     // Runed warped stem
     this.tag(RootsTags.Blocks.RUNED_WARPED_STEM).add(RUNED_WARPED_STEM.get());
 
-    // Leaves
-    this.tag(BlockTags.LEAVES).add(WILDWOOD_LEAVES.get());
-
     // Mangrove
     this.tag(RootsTags.Blocks.MANGROVE_CAPSTONES).add(RUNED_MANGROVE_LOG.get());
-    this.tag(BlockTags.MANGROVE_LOGS).add(RUNED_MANGROVE_LOG.get());
     // Runed mangrove log
     this.tag(RootsTags.Blocks.RUNED_MANGROVE_LOG).add(RUNED_MANGROVE_LOG.get());
 
     // Spruce
     this.tag(RootsTags.Blocks.SPRUCE_CAPSTONES).add(RUNED_SPRUCE_LOG.get());
-    this.tag(BlockTags.SPRUCE_LOGS).add(RUNED_SPRUCE_LOG.get());
+
     // Runed spruce log
     this.tag(RootsTags.Blocks.RUNED_SPRUCE_LOG).add(RUNED_SPRUCE_LOG.get());
 
@@ -152,15 +145,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Blocks.ELEMENTAL_SOIL).addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL);
     this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
-
     this.tag(RootsTags.Blocks.NYI).addTag(RootsTags.Blocks.SOILS).add(INCENSE_BURNER.get(), REINFORCED_PYRE.get(), UNENDING_BOWL.get());
-
-    this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(RootsTags.Blocks.RITUAL_PEDESTALS);
-    //noinspection unchecked
-    this.tag(BlockTags.MINEABLE_WITH_AXE).addTags(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS).add(GROVE_CRAFTER.get());
-
     this.tag(RootsTags.Blocks.DISPLAY_PEDESTALS).add(DISPLAY_PEDESTAL.get());
-
     this.tag(RootsTags.Blocks.RITUAL_PEDESTALS).add(RITUAL_PEDESTAL.get(), REINFORCED_RITUAL_PEDESTAL.get());
     this.tag(RootsTags.Blocks.GROVE_PEDESTALS).add(GROVE_PEDESTAL.get(), WILDWOOD_PEDESTAL.get());
     //noinspection unchecked

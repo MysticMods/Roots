@@ -1,9 +1,6 @@
 package mysticmods.roots.api;
 
-import mysticmods.roots.api.access.IRecipeManagerAccessor;
-import mysticmods.roots.api.capability.Grant;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
+import mysticmods.roots.api.capability.Unlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -11,7 +8,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.common.Tags;
@@ -61,19 +57,13 @@ public abstract class RootsAPI {
   public static final ResourceLocation RUNIC_SHEARS_TOKEN_CAPABILITY = rl("runic_shears_token_capability");
   public static final ResourceLocation SQUID_MILKING_CAPABILITY = rl("squid_milking_capability");
 
-  // Actual API methods
-  public abstract IRecipeManagerAccessor getRecipeAccessor();
+  public abstract void unlock(ServerPlayer player, Unlock<?> unlock);
 
-  public abstract void grant(ServerPlayer player, Grant grant);
-
-  public abstract boolean canGrant(ServerPlayer player, Grant grant);
+  public abstract boolean canUnlock(ServerPlayer player, Unlock<?> unlock);
 
   public abstract Player getPlayer();
 
   public abstract boolean isShiftKeyDown();
 
-  public RecipeManager getRecipeManager() {
-    return getRecipeAccessor().getManager();
-  }
-
+  public abstract RecipeManager getRecipeManager();
 }
