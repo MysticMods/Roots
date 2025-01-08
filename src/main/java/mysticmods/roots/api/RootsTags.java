@@ -13,8 +13,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 // Tags
@@ -476,6 +476,48 @@ public class RootsTags {
 
     static TagKey<Grove> compatTag(String name) {
       return TagKey.create(RootsRegistries.Keys.GROVES, ResourceLocation.fromNamespaceAndPath("c", name));
+    }
+  }
+
+  public static class Biomes {
+    // TODO: ??? has_barrow_structureS?
+    public static TagKey<Biome> HAS_BARROW_STRUCTURE = modTag("has_barrow_structure");
+    public static TagKey<Biome> HAS_BEETLE_SPAWNS =  modTag("has_beetle_spawns");
+    public static TagKey<Biome> HAS_DEER_SPAWNS = modTag("has_deer_spawns");
+    public static TagKey<Biome> HAS_DUCK_SPAWNS = modTag("has_duck_spawns");
+    public static TagKey<Biome> HAS_FENNEC_SPAWNS = modTag("has_fennec_spawns");
+    public static TagKey<Biome> HAS_HUT_STRUCTURES = modTag("has_hut_structures");
+    public static TagKey<Biome> HAS_OWL_SPAWNS = modTag("has_owl_spawns");
+    public static TagKey<Biome> HAS_SPROUT_SPAWNS = modTag("has_sprout_spawns");
+    public static TagKey<Biome> HAS_STANDING_STONES = modTag("has_standing_stones");
+    public static TagKey<Biome> WILD_AUBERGINE_BIOMES = modTag("wild_aubergine_biomes");
+    public static TagKey<Biome> WILD_ROOTS_FOREST_BIOMES = modTag("wild_roots_forest_biomes");
+    public static TagKey<Biome> WILD_ROOTS_SPARSE_BIOMES = modTag("wild_roots_sparse_biomes");
+    public static TagKey<Biome> WILD_ROOTS_UNDERGROUND_BIOMES = modTag("wild_roots_underground_biomes");
+
+    public static TagKey<Biome> PLAINS = compatTag("plains");
+    public static TagKey<Biome> FOREST = compatTag("forest");
+    public static TagKey<Biome> JUNGLE = compatTag("jungle");
+    public static TagKey<Biome> SWAMP = compatTag("swamp");
+    public static TagKey<Biome> TAIGA = compatTag("taiga");
+    public static TagKey<Biome> CLIMATE_COLD = compatTag("climate-cold");
+    public static TagKey<Biome> BEACH = compatTag("beach");
+    public static TagKey<Biome> RIVER = compatTag("river");
+    public static TagKey<Biome> DESERT = compatTag("desert");
+    public static TagKey<Biome> MESA = compatTag("mesa");
+    public static TagKey<Biome> SAVANNA = compatTag("savanna");
+    public static TagKey<Biome> MOUNTAIN = compatTag("mountain");
+    public static TagKey<Biome> TREE_DECIDUOUS = compatTag("tree_deciduous");
+    public static TagKey<Biome> TREE_JUNGLE = compatTag("tree_jungle");
+    public static TagKey<Biome> TREE_CONIFEROUS = compatTag("tree_coniferous");
+    public static TagKey<Biome> IN_OVERWORLD = compatTag("in_overworld");
+
+    static TagKey<Biome> modTag(String name) {
+      return TagKey.create(Registries.BIOME, RootsAPI.rl(name));
+    }
+
+    static TagKey<Biome> compatTag (String name) {
+      return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 }

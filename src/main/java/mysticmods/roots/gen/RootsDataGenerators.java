@@ -47,6 +47,8 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsSpellTagsProvider(output, provider, RootsAPI.MODID, helper));
     generator.addProvider(event.includeServer(), new RootsGroveTagsProvider(output, provider, RootsAPI.MODID, helper));
     generator.addProvider(event.includeServer(), new RootsRitualTagsProvider(output, provider, RootsAPI.MODID, helper));
+    generator.addProvider(event.includeServer(), new RootsStructureTagsProvider(output, provider, helper));
+    generator.addProvider(event.includeServer(), new RootsBiomeTagsProvider(output, provider, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
   }
 }
