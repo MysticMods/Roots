@@ -976,6 +976,8 @@ public class ModItems {
     .model(subfolder("tools"))
     .register();*/
 
+  public static final DeferredHolder<Item, PickaxeItem> RUNED_PICKAXE = ITEMS.register("runed_pickaxe", () -> new PickaxeItem(RootsAPI.RUNED_TIER, DEFAULT));
+
   public static final DeferredHolder<Item, HoeItem> RUNED_HOE = ITEMS.register("runed_hoe", () -> new HoeItem(RootsAPI.RUNED_TIER, DEFAULT));
 
 /*      REGISTRATE.item("runed_hoe", Item::new)
