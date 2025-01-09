@@ -1,7 +1,6 @@
 package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.data.RootsDataMapProvider;
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;

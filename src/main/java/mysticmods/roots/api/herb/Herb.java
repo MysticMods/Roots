@@ -1,5 +1,6 @@
 package mysticmods.roots.api.herb;
 
+import mysticmods.roots.api.data.DataMaps;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
@@ -11,6 +12,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +20,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Herb extends StyledRegistryEntry<Herb> {
-  private static final Map<Item, Herb> herbCache = new HashMap<>();
   private final Holder<Item> item;
   private final TagKey<Item> tag;
   private String descriptionId;
@@ -42,29 +43,10 @@ public class Herb extends StyledRegistryEntry<Herb> {
   }
 
   // TODO: ItemStack data map
+  @Nullable
   public static Herb getHerb (ItemStack stack) {
-    return null;
+    return stack.getItemHolder().getData(DataMaps.HERB_ITEM_DATA);
   }
-
-  /*@Nullable
-  // TODO: this should go somewhere else
-  public static Herb getHerb(ItemStack stack) {
-    if (!stack.is(RootsTags.Items.HERBS)) {
-      return null;
-    }
-    Herb potential = herbCache.get(stack.getItem());
-    if (potential != null) {
-      return potential;
-    }
-    for (Herb herb : RootsRegistries.HERBS.get().getValues()) {
-      if (stack.is(herb.getTag())) {
-        herbCache.put(stack.getItem(), herb);
-        return herb;
-      }
-    }
-
-    return null;
-  }*/
 
   public Holder<Item> getItem() {
     return item;
