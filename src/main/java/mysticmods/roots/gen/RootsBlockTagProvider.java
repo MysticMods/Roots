@@ -155,7 +155,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(RootsTags.Blocks.LIMITED_PEDESTALS).addTag(RootsTags.Blocks.GROVE_PEDESTALS);
 
-    this.tag(RootsTags.Blocks.CRAFTERS).add(GROVE_CRAFTER.get());
+    this.tag(RootsTags.Blocks.GROVE_CRAFTERS).add(GROVE_CRAFTER.get());
 
     this.tag(RootsTags.Blocks.GROVE_MOSS).add(CREEPING_GROVE_MOSS.get(), HANGING_GROVE_MOSS.get());
 

@@ -96,7 +96,7 @@ public class RootsTags {
     public static final TagKey<Block> PYRES = modTag("pyres");
 
     // Fey and runic crafters
-    public static final TagKey<Block> CRAFTERS = modTag("crafters");
+    public static final TagKey<Block> GROVE_CRAFTERS = modTag("crafters");
 
     // Mortars
     public static final TagKey<Block> MORTARS = modTag("mortars");
@@ -267,7 +267,7 @@ public class RootsTags {
     public static final TagKey<Item> RITUAL_PEDESTALS = modTag("pedestals/ritual");
     public static final TagKey<Item> GROVE_PEDESTALS = modTag("pedestals/grove");
     public static final TagKey<Item> PYRES = modTag("pyres");
-    public static final TagKey<Item> CRAFTERS = modTag("crafters");
+    public static final TagKey<Item> GROVE_CRAFTERS = modTag("crafters");
     public static final TagKey<Item> MORTARS = modTag("mortars");
     public static final TagKey<Item> PETALS = modTag("petals");
     public static final TagKey<Item> RUNIC_DUST = modTag("dusts/runic");
@@ -294,10 +294,15 @@ public class RootsTags {
     public static final TagKey<Item> HERBS = modTag("herbs");
 
     // TODO: POPULATE THIS
-    public static final TagKey<Item> OWL_FOOD = modTag("owl_food");
+    public static final TagKey<Item> OWL_FOOD = modTag("tempt/owl");
+    public static final TagKey<Item> BEETLE_FOOD = modTag("tempt/beetle");
+    public static final TagKey<Item> DUCK_FOOD = modTag("tempt/duck");
+    public static final TagKey<Item> FENNEC_FOOD = modTag("tempt/fennec");
+    public static final TagKey<Item> SPROUT_FOOD = modTag("tempt/sprout");
+    public static final TagKey<Item> DEER_FOOD = modTag("tempt/deer");
     public static final TagKey<Item> CARAPACE = modTag("carapace");
     public static final TagKey<Item> PELT = modTag("pelt");
-    public static final TagKey<Item> ANTLERS = modTag("atlers");
+    public static final TagKey<Item> ANTLERS = modTag("antlers");
     public static final TagKey<Item> COPPER_ITEMS = modTag("copper_items");
     public static final TagKey<Item> COPPER_NUGGET = compatTag("nuggets/copper");
     public static final TagKey<Item> RAW_SILVER = compatTag("raw_materials/silver");
@@ -314,7 +319,6 @@ public class RootsTags {
     public static final TagKey<Item> SILVER_ITEMS = modTag("silver_items");
     public static final TagKey<Item> WILDWOOD_PLANKS = modTag("planks/wildwood");
     public static final TagKey<Item> SKIPPED_FOODS = modTag("skipped_foods");
-    public static final TagKey<Item> TEMPT_DEER = modTag("tempt/deer");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));

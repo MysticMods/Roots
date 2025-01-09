@@ -39,7 +39,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Items.BARKS).addTags(RootsTags.Items.ACACIA_BARK, RootsTags.Items.BIRCH_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.MANGROVE_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
 
-    this.tag(RootsTags.Items.TEMPT_DEER).add(Items.WHEAT).add(ModItems.WILDEWHEET.get());
+    this.tag(RootsTags.Items.DEER_FOOD).add(Items.WHEAT).add(ModItems.WILDEWHEET.get());
 
     this.tag(RootsTags.Items.GROVE_MOSS_CROP).add(ModItems.GROVE_MOSS.get());
     this.tag(RootsTags.Items.MOONGLOW_CROP).add(ModItems.MOONGLOW.get());
@@ -124,7 +124,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
 /*    this.copy(RootsTags.Blocks.LIMITED_PEDESTALS, RootsTags.Items.LIMITED_PEDESTALS);
     this.copy(RootsTags.Blocks.DISPLAY_PEDESTALS, RootsTags.Items.DISPLAY_PEDESTALS);*/
     this.copy(RootsTags.Blocks.PYRES, RootsTags.Items.PYRES);
-    this.copy(RootsTags.Blocks.CRAFTERS, RootsTags.Items.CRAFTERS);
+    this.copy(RootsTags.Blocks.GROVE_CRAFTERS, RootsTags.Items.GROVE_CRAFTERS);
     this.copy(RootsTags.Blocks.MORTARS, RootsTags.Items.MORTARS);
 /*    this.copy(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Items.RUNE_CAPSTONES);*/
 /*    this.copy(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Items.RUNE_PILLARS);*/
