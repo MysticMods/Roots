@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -42,9 +44,10 @@ public class DandelionWindsSpell extends Spell {
 
   @Override
   public void initialize() {
-/*    this.distance = ModSpells.DANDELION_WINDS_DISTANCE.getValue();
-    this.r1 = ModSpells.DANDELION_WINDS_RANGE_1.getValue();
-    this.r2 = ModSpells.DANDELION_WINDS_RANGE_2.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.distance = properties.get(ModSpells.DANDELION_WINDS_DISTANCE);
+    this.r1 = properties.get(ModSpells.DANDELION_WINDS_RANGE_1);
+    this.r2 = properties.get(ModSpells.DANDELION_WINDS_RANGE_2);
   }
 
   @Override

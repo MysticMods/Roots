@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -22,51 +24,42 @@ public abstract class TwoRadiusSpell extends Spell {
   @Override
   protected void initializeProperties() {
     super.initializeProperties();
-/*    PropertyHolder<Property.IntegerProperty> prop = getRadiusYProperty();
-    if (prop != null) {
-      this.radiusY = prop.getValue();
-    } else {
-      throw new IllegalStateException("Spell " + this + " has no radiusY property!");
-    }
-    prop = getRadiusZXProperty();
-    if (prop != null) {
-      this.radiusZX = prop.getValue();
-    } else {
-      throw new IllegalStateException("Spell " + this + " has no radiusZX property!");
-    }*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.radiusY = properties.get(getRadiusYProperty());
+    this.radiusZX = properties.get(getRadiusZXProperty());
   }
 
   @Override
   public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
 
-  public abstract PropertyHolder<Property.IntegerProperty> getRadiusYProperty ();
+  public abstract PropertyHolder<Property.IntegerProperty> getRadiusYProperty();
 
-  public abstract PropertyHolder<Property.IntegerProperty> getRadiusZXProperty ();
+  public abstract PropertyHolder<Property.IntegerProperty> getRadiusZXProperty();
 
-  public int getRadiusX () {
+  public int getRadiusX() {
     return radiusZX;
   }
 
-  public int getRadiusZ () {
+  public int getRadiusZ() {
     return radiusZX;
   }
 
-  public int getRadiusY () {
+  public int getRadiusY() {
     return radiusY;
   }
 
-  public int getRadiusZX () {
+  public int getRadiusZX() {
     return radiusZX;
   }
 
-  public BoundingBox getBoundingBox () {
+  public BoundingBox getBoundingBox() {
     if (boundingBox == null) {
       boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX(), getRadiusY(), getRadiusZ());
     }
     return boundingBox;
   }
 
-  public AABB getAABB () {
+  public AABB getAABB() {
     if (aabb == null) {
       aabb = AABB.of(getBoundingBox());
     }

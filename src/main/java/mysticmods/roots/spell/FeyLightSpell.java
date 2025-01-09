@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -43,7 +45,8 @@ public class FeyLightSpell extends Spell {
 
   @Override
   public void initialize() {
-/*    this.maxDistance = ModSpells.FEY_LIGHT_MAX_DISTANCE.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.maxDistance = properties.get(ModSpells.FEY_LIGHT_MAX_DISTANCE);
   }
 
   @Override

@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -30,7 +32,8 @@ public class DesaturateSpell extends Spell {
 
   @Override
   public void initialize() {
-/*    this.multiplier = ModSpells.DESATURATE_MULTIPLIER.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.multiplier = properties.get(ModSpells.DESATURATE_MULTIPLIER);
   }
 
   @Override

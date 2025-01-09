@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -42,7 +44,8 @@ public class JauntSpell extends Spell {
 
   @Override
   public void initialize() {
-/*    this.jauntDistance = ModSpells.JAUNT_DISTANCE.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.jauntDistance = properties.get(ModSpells.JAUNT_DISTANCE);
   }
 
   private boolean playerSafe (Level pLevel, Player player, BlockPos.MutableBlockPos position, Direction direction) {

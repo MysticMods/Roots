@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -45,7 +47,8 @@ public class GrowthInfusionSpell extends Spell {
 
   @Override
   public void initialize() {
-/*    this.base_ticks = ModSpells.GROWTH_INFUSION_BASE_TICKS.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.base_ticks = properties.get(ModSpells.GROWTH_INFUSION_BASE_TICKS);
   }
 
   @Override

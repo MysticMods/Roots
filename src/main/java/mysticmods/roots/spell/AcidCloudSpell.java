@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -50,8 +52,9 @@ public class AcidCloudSpell extends TwoRadiusSpell {
 
   @Override
   public void initialize() {
-/*    this.damage = ModSpells.ACID_CLOUD_DAMAGE.getValue();
-    this.count = ModSpells.ACID_CLOUD_COUNT.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.damage = properties.get(ModSpells.ACID_CLOUD_DAMAGE);
+    this.count = properties.get(ModSpells.ACID_CLOUD_COUNT);
   }
 
   @Override

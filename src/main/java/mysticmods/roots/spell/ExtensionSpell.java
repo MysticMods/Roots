@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -45,8 +47,9 @@ public class ExtensionSpell extends TwoRadiusSpell {
 
   @Override
   public void initialize() {
-/*    this.nightVisionDuration = ModSpells.EXTENSION_NIGHT_VISION_DURATION.getValue();
-    this.senseDangerDuration = ModSpells.EXTENSION_SENSE_DANGER_DURATION.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.nightVisionDuration = properties.get(ModSpells.EXTENSION_NIGHT_VISION_DURATION);
+    this.senseDangerDuration = properties.get(ModSpells.EXTENSION_SENSE_DANGER_DURATION);
   }
 
   @Override

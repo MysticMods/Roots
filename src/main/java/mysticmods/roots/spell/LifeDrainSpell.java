@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -45,10 +47,11 @@ public class LifeDrainSpell extends Spell {
 
   @Override
   public void initialize() {
-/*    this.vectorDistance = ModSpells.LIFE_DRAIN_DISTANCE.getValue();
-    this.boundingBoxDistance = ModSpells.LIFE_DRAIN_BOUNDS.getValue();
-    this.damage = ModSpells.LIFE_DRAIN_DAMAGE.getValue();
-    this.heal = ModSpells.LIFE_DRAIN_HEAL.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.vectorDistance = properties.get(ModSpells.LIFE_DRAIN_DISTANCE);
+    this.boundingBoxDistance = properties.get(ModSpells.LIFE_DRAIN_BOUNDS);
+    this.damage = properties.get(ModSpells.LIFE_DRAIN_DAMAGE);
+    this.heal = properties.get(ModSpells.LIFE_DRAIN_HEAL);
   }
 
   @Override

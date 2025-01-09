@@ -1,5 +1,7 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -40,10 +42,11 @@ public class SkySoarerSpell extends Spell {
 
   @Override
   public void initialize() {
-/*    this.amplifier = ModSpells.SKY_SOARER_AMPLIFIER.get().getValue();
-    this.boosted_amplifier = ModSpells.SKY_SOARER_BOOSTED_AMPLIFIER.get().getValue();
-    this.duration = ModSpells.SKY_SOARER_DURATION.get().getValue();
-    this.boosted_duration = ModSpells.SKY_SOARER_BOOSTED_DURATION.get().getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.amplifier = properties.get(ModSpells.SKY_SOARER_AMPLIFIER);
+    this.boosted_amplifier = properties.get(ModSpells.SKY_SOARER_BOOSTED_AMPLIFIER);
+    this.duration = properties.get(ModSpells.SKY_SOARER_DURATION);
+    this.boosted_duration = properties.get(ModSpells.SKY_SOARER_BOOSTED_DURATION);
   }
 
   @Override

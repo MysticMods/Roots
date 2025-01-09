@@ -1,6 +1,8 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -50,7 +52,8 @@ public class DisarmSpell extends TwoRadiusSpell {
 
   @Override
   public void initialize() {
-/*    this.dropChance = ModSpells.DISARM_DROP_CHANCE.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.dropChance = properties.get(ModSpells.DISARM_DROP_CHANCE);
   }
 
   @Override

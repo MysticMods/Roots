@@ -2,6 +2,8 @@ package mysticmods.roots.ritual;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
@@ -111,10 +113,11 @@ public class AnimalHarvestRitual extends Ritual {
 
   @Override
   public void initialize() {
-/*    count = ModRituals.ANIMAL_HARVEST_COUNT.getValue();
-    glowDuration = ModRituals.ANIMAL_HARVEST_GLOW_DURATION.getValue();
-    lootingValue = ModRituals.ANIMAL_HARVEST_LOOTING_VALUE.getValue();
-    lootingChance = ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE.getValue();*/
+    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA);
+    count = properties.get(ModRituals.ANIMAL_HARVEST_COUNT);
+    glowDuration = properties.get(ModRituals.ANIMAL_HARVEST_GLOW_DURATION);
+    lootingValue = properties.get(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE);
+    lootingChance = properties.get(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE);
   }
 
   @Override
