@@ -1,6 +1,10 @@
 package mysticmods.roots.api;
 
 import mysticmods.roots.api.capability.Unlock;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -56,6 +60,10 @@ public abstract class RootsAPI {
   public static final ResourceLocation RUNIC_SHEARS_ENTITY_CAPABILITY_ID = rl("runic_shears_entity_capability");
   public static final ResourceLocation RUNIC_SHEARS_TOKEN_CAPABILITY = rl("runic_shears_token_capability");
   public static final ResourceLocation SQUID_MILKING_CAPABILITY = rl("squid_milking_capability");
+
+  public static MutableComponent holdShift() {
+    return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift").setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
+  }
 
   public abstract void unlock(ServerPlayer player, Unlock<?> unlock);
 

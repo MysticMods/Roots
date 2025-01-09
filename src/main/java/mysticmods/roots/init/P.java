@@ -4,12 +4,14 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.RootsRegistries;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@ApiStatus.Internal
 public class P {
   private static final Set<PropertyHolder<Property.IntegerProperty>> INT_PROPERTIES = new HashSet<>();
   private static final Set<PropertyHolder<Property.FloatProperty>> FLOAT_PROPERTIES = new HashSet<>();

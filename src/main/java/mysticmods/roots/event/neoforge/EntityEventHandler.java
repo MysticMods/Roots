@@ -41,7 +41,7 @@ public class EntityEventHandler {
         return;
       }
       if (!level.isClientSide()) {
-        if (entity.getType().is(RootsTags.Entities.SQUID)) {
+        if (entity.getType().is(RootsTags.Entities.SQUID) && entity.hasData(ModAttachments.SQUID_MILKING_COOLDOWN)) {
           if (EntityCooldowns.hasExpired(entity, ModAttachments.SQUID_MILKING_COOLDOWN)) {
             EntityCooldowns.setExpiresAt(entity, ModAttachments.SQUID_MILKING_COOLDOWN, server.getTickCount() + (20 * 15));
             level.playSound(null, player.blockPosition(), ModSounds.SQUID_MILK.get(), SoundSource.PLAYERS, 0.5f, level.getRandom().nextFloat() * 0.25f + 0.6f);

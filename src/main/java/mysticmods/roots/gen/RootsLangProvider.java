@@ -517,8 +517,4 @@ public class RootsLangProvider extends LanguageProvider {
     String[] split = defaultValue.split("/");
     return String.format("%s: %s", toEnglishName(split[0]), toEnglishName(split[1]));
   }
-
-  public static MutableComponent holdShift() {
-    return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift").setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
-  }
 }
