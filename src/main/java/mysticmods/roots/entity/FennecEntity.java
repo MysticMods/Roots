@@ -171,6 +171,12 @@ public class FennecEntity extends TamableAnimal {
   }
 
   @Override
+  protected void playAttackSound() {
+    super.playAttackSound();
+    playSound(ModSounds.FENNEC_BITE.get(), 1.0f, 1.0f);
+  }
+
+  @Override
   public boolean doHurtTarget(Entity entityIn) {
     return super.doHurtTarget(entityIn);
     // TODO: sound effect

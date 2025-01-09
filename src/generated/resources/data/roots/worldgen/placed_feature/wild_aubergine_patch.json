@@ -1,0 +1,26 @@
+{
+  "feature": "roots:wild_aubergine_patch",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 1
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 80
+    },
+    {
+      "type": "roots:dimension_placement",
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    }
+  ]
+}

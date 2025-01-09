@@ -1,0 +1,37 @@
+{
+  "type": "roots:standing_stones",
+  "biomes": "#roots:has_standing_stones",
+  "spawn_overrides": {
+    "creature": {
+      "bounding_box": "full",
+      "spawns": [
+        {
+          "type": "roots:green_sprout",
+          "maxCount": 4,
+          "minCount": 3,
+          "weight": 1
+        },
+        {
+          "type": "roots:purple_sprout",
+          "maxCount": 4,
+          "minCount": 3,
+          "weight": 1
+        },
+        {
+          "type": "roots:red_sprout",
+          "maxCount": 4,
+          "minCount": 3,
+          "weight": 1
+        },
+        {
+          "type": "roots:tan_sprout",
+          "maxCount": 4,
+          "minCount": 3,
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#roots:wild_roots_forest_biomes",
+  "features": "roots:wild_roots_forest",
+  "step": "vegetal_decoration"
+}

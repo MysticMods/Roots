@@ -1,0 +1,16 @@
+{
+  "type": "roots:supporting_directional_block_feature",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "roots:wild_roots",
+        "Properties": {
+          "facing": "north",
+          "mossy": "false",
+          "waterlogged": "false"
+        }
+      }
+    }
+  }
+}

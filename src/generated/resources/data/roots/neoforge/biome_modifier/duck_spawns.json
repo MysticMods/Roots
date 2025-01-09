@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#roots:has_duck_spawns",
+  "spawners": {
+    "type": "roots:duck",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 5
+  }
+}

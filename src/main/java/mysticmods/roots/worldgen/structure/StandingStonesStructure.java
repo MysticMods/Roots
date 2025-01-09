@@ -8,7 +8,7 @@ import net.minecraft.world.level.levelgen.structure.StructureType;
 public class StandingStonesStructure extends SinglePieceStructure {
   public static MapCodec<StandingStonesStructure> CODEC = simpleCodec(StandingStonesStructure::new);
 
-  protected StandingStonesStructure(StructureSettings pSettings) {
+  public StandingStonesStructure(StructureSettings pSettings) {
     super(StandingStonePiece::new, 12, 12, pSettings);
   }
 

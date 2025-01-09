@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#roots:has_deer_spawns",
+  "spawners": {
+    "type": "roots:deer",
+    "maxCount": 4,
+    "minCount": 2,
+    "weight": 6
+  }
+}

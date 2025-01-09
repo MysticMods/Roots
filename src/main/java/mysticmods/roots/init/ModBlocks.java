@@ -1434,7 +1434,7 @@ public class ModBlocks {
     .register();*/
 
   // CROPS
-  public static DeferredHolder<Block, MushroomBlock> BAFFLECAP = BLOCKS.register("bafflecap", () -> new MushroomBlock(ModFeatures.HUGE_BAFFLECAP.getKey(), BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
+  public static DeferredHolder<Block, MushroomBlock> BAFFLECAP = BLOCKS.register("bafflecap", () -> new MushroomBlock(ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
 /*      REGISTRATE.block("bafflecap", Material.WOOD, (o) -> new MushroomBlock(o, ModFeatures.HUGE_BAFFLECAP.getHolder()::get))
     .properties(o -> BlockBehaviour.Properties.copy(Blocks.BROWN_MUSHROOM))
     .lang("Bafflecap")

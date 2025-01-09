@@ -1,0 +1,30 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#roots:has_sprout_spawns",
+  "spawners": [
+    {
+      "type": "roots:green_sprout",
+      "maxCount": 6,
+      "minCount": 3,
+      "weight": 2
+    },
+    {
+      "type": "roots:red_sprout",
+      "maxCount": 6,
+      "minCount": 3,
+      "weight": 2
+    },
+    {
+      "type": "roots:tan_sprout",
+      "maxCount": 6,
+      "minCount": 3,
+      "weight": 2
+    },
+    {
+      "type": "roots:purple_sprout",
+      "maxCount": 6,
+      "minCount": 3,
+      "weight": 2
+    }
+  ]
+}

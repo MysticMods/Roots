@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#roots:wild_aubergine_biomes",
+  "features": "roots:wild_aubergine",
+  "step": "top_layer_modification"
+}
