@@ -34,12 +34,12 @@ public class RootsDataGenerators {
     RootsBlockTagProvider blocks;
     generator.addProvider(event.includeServer(), blocks = new RootsBlockTagProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsItemTagsProvider(output, provider, blocks.contentsGetter(), helper));
-    generator.addProvider(event.includeClient(), new RootsAtlasGenerator(output, provider, helper));
+    generator.addProvider(event.includeClient(), new RootsAtlasProvider(output, provider, helper));
     generator.addProvider(true, RootsLootTableProvider.create(output, provider));
     generator.addProvider(event.includeServer(), new RootsEntityTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsBlockEntityTagsProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsLangProvider(output));
-    generator.addProvider(event.includeServer(), new AdvancementProvider(output, provider, helper, List.of(new RootsAdvancementGenerator())));
+    generator.addProvider(event.includeServer(), new AdvancementProvider(output, provider, helper, List.of(new RootsAdvancementProvider())));
     generator.addProvider(event.includeServer(), new RootsDataMapProvider(output, provider));
     generator.addProvider(event.includeServer(), new RootsRitualTagsProvider(output, provider, RootsAPI.MODID, helper));
     generator.addProvider(event.includeServer(), new RootsHerbTagsProvider(output, provider, RootsAPI.MODID, helper));
@@ -49,6 +49,9 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsRitualTagsProvider(output, provider, RootsAPI.MODID, helper));
     generator.addProvider(event.includeServer(), new RootsStructureTagsProvider(output, provider, helper));
     generator.addProvider(event.includeServer(), new RootsBiomeTagsProvider(output, provider, helper));
+    generator.addProvider(event.includeClient(), new RootsBlockStateProvider(output, helper));
+    generator.addProvider(event.includeClient(), new RootsItemModelProvider(output, helper));
+    generator.addProvider(event.includeClient(), new RootsBlockModelProvider(output, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
   }
 }
