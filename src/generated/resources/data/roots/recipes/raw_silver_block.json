@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "forge:raw_materials/silver"
+      "tag": "neoforge:raw_materials/silver"
     },
     "I": {
       "item": "roots:raw_silver"

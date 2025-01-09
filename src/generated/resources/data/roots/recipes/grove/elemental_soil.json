@@ -2,7 +2,7 @@
   "type": "roots:grove",
   "ingredients": [
     {
-      "tag": "forge:gravel"
+      "tag": "neoforge:gravel"
     },
     {
       "tag": "minecraft:dirt"

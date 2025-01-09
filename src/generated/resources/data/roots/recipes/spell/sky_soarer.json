@@ -9,7 +9,7 @@
   ],
   "ingredients": [
     {
-      "tag": "forge:tools/bows"
+      "tag": "neoforge:tools/bows"
     },
     {
       "item": "minecraft:paper"

@@ -9,13 +9,13 @@
   ],
   "ingredients": [
     {
-      "tag": "forge:seeds"
+      "tag": "neoforge:seeds"
     },
     {
       "item": "minecraft:composter"
     },
     {
-      "tag": "forge:tools/hoes"
+      "tag": "neoforge:tools/hoes"
     },
     {
       "item": "minecraft:bone_meal"

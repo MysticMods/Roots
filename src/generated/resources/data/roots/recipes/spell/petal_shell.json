@@ -15,13 +15,13 @@
       "item": "minecraft:shield"
     },
     {
-      "tag": "forge:ingots/iron"
+      "tag": "neoforge:ingots/iron"
     },
     {
       "item": "minecraft:egg"
     },
     {
-      "tag": "forge:glass"
+      "tag": "neoforge:glass"
     }
   ],
   "times": 5

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "S": {
-      "tag": "forge:rods/wooden"
+      "tag": "neoforge:rods/wooden"
     },
     "X": {
       "tag": "minecraft:planks"

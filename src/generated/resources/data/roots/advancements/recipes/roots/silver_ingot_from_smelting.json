@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ores/silver"
+            "tag": "neoforge:ores/silver"
           }
         ]
       },

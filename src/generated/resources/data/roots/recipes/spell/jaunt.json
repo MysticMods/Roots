@@ -18,10 +18,10 @@
       "tag": "minecraft:boats"
     },
     {
-      "tag": "forge:tools/bows"
+      "tag": "neoforge:tools/bows"
     },
     {
-      "tag": "forge:gunpowder"
+      "tag": "neoforge:gunpowder"
     }
   ],
   "times": 5

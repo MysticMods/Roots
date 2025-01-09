@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "forge:rods/wooden"
+      "tag": "neoforge:rods/wooden"
     },
     "W": {
       "item": "roots:mossy_runestone"

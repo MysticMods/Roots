@@ -11,7 +11,7 @@
       "tag": "roots:flint"
     },
     {
-      "tag": "forge:raw_materials/iron"
+      "tag": "neoforge:raw_materials/iron"
     },
     {
       "item": "minecraft:glow_lichen"

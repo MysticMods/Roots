@@ -8,10 +8,10 @@
       "tag": "minecraft:wool"
     },
     {
-      "tag": "forge:crops/carrot"
+      "tag": "neoforge:crops/carrot"
     },
     {
-      "tag": "forge:crops/potato"
+      "tag": "neoforge:crops/potato"
     },
     {
       "tag": "roots:crops/wildroot"

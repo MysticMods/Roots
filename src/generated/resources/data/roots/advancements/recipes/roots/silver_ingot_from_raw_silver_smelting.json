@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:raw_materials/silver"
+            "tag": "neoforge:raw_materials/silver"
           }
         ]
       },

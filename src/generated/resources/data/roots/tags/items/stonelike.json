@@ -1,7 +1,7 @@
 {
   "values": [
-    "#forge:sandstone",
-    "#forge:stone",
+    "#neoforge:sandstone",
+    "#neoforge:stone",
     "#minecraft:stone_bricks",
     "#minecraft:stone_crafting_materials",
     "#minecraft:stone_tool_materials",

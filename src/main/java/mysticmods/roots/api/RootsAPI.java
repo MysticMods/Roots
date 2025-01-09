@@ -1,10 +1,13 @@
 package mysticmods.roots.api;
 
 import mysticmods.roots.api.capability.Unlock;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -12,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.common.Tags;
@@ -25,6 +29,10 @@ public abstract class RootsAPI {
   public static Tier LIVING_TOOL_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_STONE_TOOL, 300, 6.0f, 2.0f, 19, () -> Ingredient.of(RootsTags.Items.BARKS));
   public static Tier COPPER_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 150, 4.0f, 2.0f, 2, () -> Ingredient.of(Tags.Items.INGOTS_COPPER));
   public static Tier RUNED_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 9.0f, 4.0f, 15, () -> Ingredient.of(RootsTags.Items.RUNED_OBSIDIAN));
+
+  public static final ResourceKey<LootTable> HUT = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("hut"));
+  public static final ResourceKey<LootTable> BARROW = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("barrow"));
+  public static final ResourceKey<LootTable> STANDING_STONES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("standing_stones"));
 
   public static ResourceLocation rl(String path) {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);

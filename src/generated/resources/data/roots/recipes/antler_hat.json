@@ -5,7 +5,7 @@
       "item": "roots:antlers"
     },
     "S": {
-      "tag": "forge:string"
+      "tag": "neoforge:string"
     },
     "W": {
       "tag": "minecraft:wool"

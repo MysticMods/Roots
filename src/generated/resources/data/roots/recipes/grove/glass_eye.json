@@ -2,16 +2,16 @@
   "type": "roots:grove",
   "ingredients": [
     {
-      "tag": "forge:glass"
+      "tag": "neoforge:glass"
     },
     {
-      "tag": "forge:glass"
+      "tag": "neoforge:glass"
     },
     {
-      "tag": "forge:glass"
+      "tag": "neoforge:glass"
     },
     {
-      "tag": "forge:dusts/glowstone"
+      "tag": "neoforge:dusts/glowstone"
     }
   ],
   "result": {

@@ -5,7 +5,7 @@
       "item": "minecraft:hay_block"
     },
     "Y": {
-      "tag": "forge:crops/wheat"
+      "tag": "neoforge:crops/wheat"
     }
   },
   "pattern": [

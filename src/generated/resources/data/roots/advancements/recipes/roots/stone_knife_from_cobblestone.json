@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:cobblestone"
+            "tag": "neoforge:cobblestone"
           }
         ]
       },

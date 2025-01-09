@@ -9,10 +9,10 @@
   ],
   "ingredients": [
     {
-      "tag": "forge:nuggets/iron"
+      "tag": "neoforge:nuggets/iron"
     },
     {
-      "tag": "forge:dusts/redstone"
+      "tag": "neoforge:dusts/redstone"
     },
     {
       "tag": "roots:crops/wildroot"

@@ -7,8 +7,8 @@
     "#minecraft:has_structure/ruined_portal_swamp",
     "#minecraft:has_structure/jungle_temple",
     "#minecraft:is_jungle",
-    { "id": "#forge:is_dense/overworld", "required": false },
-    { "id": "#forge:is_wet/overworld", "required": false },
+    { "id": "#neoforge:is_dense/overworld", "required": false },
+    { "id": "#neoforge:is_wet/overworld", "required": false },
     { "id": "#c:forest", "required": false },
     { "id": "#c:river", "required": false },
     { "id": "#c:beach", "required": false }

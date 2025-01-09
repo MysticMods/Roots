@@ -8,7 +8,7 @@
       "tag": "minecraft:logs"
     },
     "S": {
-      "tag": "forge:rods/wooden"
+      "tag": "neoforge:rods/wooden"
     }
   },
   "pattern": [

@@ -3,7 +3,7 @@
   "cookingtime": 100,
   "experience": 0.125,
   "ingredient": {
-    "tag": "forge:ores/silver"
+    "tag": "neoforge:ores/silver"
   },
   "result": "roots:silver_ingot"
 }

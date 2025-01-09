@@ -9,10 +9,10 @@
   ],
   "ingredients": [
     {
-      "tag": "forge:crops/carrot"
+      "tag": "neoforge:crops/carrot"
     },
     {
-      "tag": "forge:nuggets/gold"
+      "tag": "neoforge:nuggets/gold"
     },
     {
       "tag": "roots:crops/grove_moss"

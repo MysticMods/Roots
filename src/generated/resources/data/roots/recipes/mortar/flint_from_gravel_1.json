@@ -2,7 +2,7 @@
   "type": "roots:mortar",
   "ingredients": [
     {
-      "tag": "forge:gravel"
+      "tag": "neoforge:gravel"
     }
   ],
   "result": {

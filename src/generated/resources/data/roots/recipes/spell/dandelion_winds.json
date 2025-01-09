@@ -12,16 +12,16 @@
       "item": "minecraft:dandelion"
     },
     {
-      "tag": "forge:crops/wheat"
+      "tag": "neoforge:crops/wheat"
     },
     {
       "tag": "roots:petals"
     },
     {
-      "tag": "forge:dyes/yellow"
+      "tag": "neoforge:dyes/yellow"
     },
     {
-      "tag": "forge:seeds"
+      "tag": "neoforge:seeds"
     }
   ],
   "times": 5

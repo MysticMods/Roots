@@ -2,10 +2,10 @@
   "type": "roots:mortar",
   "ingredients": [
     {
-      "tag": "forge:crops/wheat"
+      "tag": "neoforge:crops/wheat"
     },
     {
-      "tag": "forge:crops/wheat"
+      "tag": "neoforge:crops/wheat"
     }
   ],
   "result": {

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "forge:nuggets/silver"
+      "tag": "neoforge:nuggets/silver"
     }
   },
   "pattern": [

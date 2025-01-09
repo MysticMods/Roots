@@ -1,40 +1,62 @@
 package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.block.BaseBlocks;
+import mysticmods.roots.block.CreepingGroveMossBlock;
+import mysticmods.roots.block.WildRootsBlock;
+import mysticmods.roots.block.crop.ElementalCropBlock;
+import mysticmods.roots.block.crop.ThreeStageCropBlock;
+import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModItems;
+import mysticmods.roots.mixin.AccessorMixinBlockLootSubProvider;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 
-
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class RootsLootTableProvider {
+
+
   public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-    return new LootTableProvider(output, Set.of(/*RootsAPI.ELYTRA_CHEST*/), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK)), provider);
+    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK)), provider);
   }
 
   public static class RootsBlockLootTables extends BlockLootSubProvider {
@@ -42,61 +64,406 @@ public class RootsLootTableProvider {
       super(Set.of(), FeatureFlags.REGISTRY.allFlags(), arg2);
     }
 
-    protected LootTable.Builder lootrBlockDrop (Block block) {
-      return LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0f)).add(LootItem.lootTableItem(block).apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(DataComponents.CUSTOM_NAME)))));
-    }
-
     @Override
     protected void generate() {
-/*      this.add(ModBlocks.CHEST.get(), lootrBlockDrop(Blocks.CHEST));
-      this.add(ModBlocks.BARREL.get(), lootrBlockDrop(Blocks.BARREL));
-      this.add(ModBlocks.INVENTORY.get(), lootrBlockDrop(Blocks.CHEST));
-      this.add(ModBlocks.TRAPPED_CHEST.get(), lootrBlockDrop(Blocks.TRAPPED_CHEST));
-      this.add(ModBlocks.SHULKER.get(), lootrBlockDrop(Blocks.SHULKER_BOX));
-      this.dropSelf(ModBlocks.TROPHY.get());*/
+      dropSelf(ModBlocks.THATCH.get());
+      dropSelf(ModBlocks.RUNESTONE.get());
+      dropSelf(ModBlocks.MOSSY_RUNESTONE.get());
+      dropSelf(ModBlocks.CHISELED_RUNESTONE.get());
+      dropSelf(ModBlocks.RUNESTONE_BRICK.get());
+      dropSelf(ModBlocks.RUNESTONE_TILE.get());
+      dropSelf(ModBlocks.RUNED_OBSIDIAN.get());
+      dropSelf(ModBlocks.CHISELED_RUNED_OBSIDIAN.get());
+      dropSelf(ModBlocks.RUNED_BRICK.get());
+      dropSelf(ModBlocks.RUNED_TILE.get());
+      add(ModBlocks.SILVER_ORE.get(), createOreDrop(ModBlocks.SILVER_ORE.get(), ModItems.RAW_SILVER.get()));
+      add(ModBlocks.DEEPSLATE_SILVER_ORE.get(), createOreDrop(ModBlocks.DEEPSLATE_SILVER_ORE.get(), ModItems.RAW_SILVER.get()));
+      add(ModBlocks.GRANITE_QUARTZ_ORE.get(), createOreDrop(ModBlocks.GRANITE_QUARTZ_ORE.get(), Items.QUARTZ));
+      dropSelf(ModBlocks.RAW_SILVER_BLOCK.get());
+      dropSelf(ModBlocks.SILVER_BLOCK.get());
+      dropSelf(ModBlocks.WILDWOOD_LOG.get());
+      dropSelf(ModBlocks.STRIPPED_WILDWOOD_LOG.get());
+      dropSelf(ModBlocks.WILDWOOD_WOOD.get());
+      dropSelf(ModBlocks.STRIPPED_WILDWOOD_WOOD.get());
+      dropSelf(ModBlocks.WILDWOOD_PLANKS.get());
+      dropSelf(ModBlocks.WILDWOOD_SAPLING.get());
+      dropSelf(ModBlocks.STONEPETAL.get());
+      add(ModBlocks.WILDWOOD_LEAVES.get(), createWildwoodLeaves(ModBlocks.WILDWOOD_LEAVES.get()));
+      dropSelf(ModBlocks.RUNED_WILDWOOD_LOG.get());
+      dropSelf(ModBlocks.RUNED_SPRUCE_LOG.get());
+      dropSelf(ModBlocks.RUNED_JUNGLE_LOG.get());
+      dropSelf(ModBlocks.RUNED_BIRCH_LOG.get());
+      dropSelf(ModBlocks.RUNED_OAK_LOG.get());
+      dropSelf(ModBlocks.RUNED_DARK_OAK_LOG.get());
+      dropSelf(ModBlocks.RUNED_ACACIA_LOG.get());
+      dropSelf(ModBlocks.RUNED_MANGROVE_LOG.get());
+      dropSelf(ModBlocks.RUNED_WARPED_STEM.get());
+      dropSelf(ModBlocks.RUNED_CRIMSON_STEM.get());
+      dropSelf(ModBlocks.RUNESTONE_STAIRS.get());
+      dropSelf(ModBlocks.MOSSY_RUNESTONE_STAIRS.get());
+      dropSelf(ModBlocks.RUNESTONE_BRICK_STAIRS.get());
+      dropSelf(ModBlocks.RUNESTONE_TILE_STAIRS.get());
+      dropSelf(ModBlocks.RUNED_STAIRS.get());
+      dropSelf(ModBlocks.RUNED_BRICK_STAIRS.get());
+      dropSelf(ModBlocks.RUNED_TILE_STAIRS.get());
+      dropSelf(ModBlocks.WILDWOOD_STAIRS.get());
+      dropSelf(ModBlocks.RUNESTONE_SLAB.get());
+      dropSelf(ModBlocks.MOSSY_RUNESTONE_SLAB.get());
+      dropSelf(ModBlocks.RUNESTONE_BRICK_SLAB.get());
+      dropSelf(ModBlocks.RUNESTONE_TILE_SLAB.get());
+      dropSelf(ModBlocks.RUNED_SLAB.get());
+      dropSelf(ModBlocks.RUNED_BRICK_SLAB.get());
+      dropSelf(ModBlocks.RUNED_TILE_SLAB.get());
+      dropSelf(ModBlocks.WILDWOOD_SLAB.get());
+      dropSelf(ModBlocks.WILDWOOD_FENCE.get());
+      dropSelf(ModBlocks.RUNESTONE_BUTTON.get());
+      dropSelf(ModBlocks.RUNESTONE_BRICK_BUTTON.get());
+      dropSelf(ModBlocks.RUNESTONE_TILE_BUTTON.get());
+      dropSelf(ModBlocks.MOSSY_RUNESTONE_BUTTON.get());
+      dropSelf(ModBlocks.RUNED_BUTTON.get());
+      dropSelf(ModBlocks.RUNED_BRICK_BUTTON.get());
+      dropSelf(ModBlocks.RUNED_TILE_BUTTON.get());
+      dropSelf(ModBlocks.WILDWOOD_BUTTON.get());
+      dropSelf(ModBlocks.RUNESTONE_PRESSURE_PLATE.get());
+      dropSelf(ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE.get());
+      dropSelf(ModBlocks.RUNESTONE_TILE_PRESSURE_PLATE.get());
+      dropSelf(ModBlocks.MOSSY_RUNESTONE_PRESSURE_PLATE.get());
+      dropSelf(ModBlocks.RUNED_PRESSURE_PLATE.get());
+      dropSelf(ModBlocks.RUNED_BRICK_PRESSURE_PLATE.get());
+      dropSelf(ModBlocks.RUNED_TILE_PRESSURE_PLATE.get());
+      dropSelf(ModBlocks.WILDWOOD_PRESSURE_PLATE.get());
+      add(ModBlocks.WILDWOOD_DOOR.get(), createDoorTable(ModBlocks.WILDWOOD_DOOR.get()));
+      dropSelf(ModBlocks.WILDWOOD_TRAPDOOR.get());
+      dropSelf(ModBlocks.WILDWOOD_LADDER.get());
+      dropSelf(ModBlocks.WILDWOOD_GATE.get());
+      dropSelf(ModBlocks.RUNESTONE_WALL.get());
+      dropSelf(ModBlocks.MOSSY_RUNESTONE_WALL.get());
+      dropSelf(ModBlocks.RUNESTONE_BRICK_WALL.get());
+      dropSelf(ModBlocks.RUNESTONE_TILE_WALL.get());
+      dropSelf(ModBlocks.RUNED_WALL.get());
+      dropSelf(ModBlocks.RUNED_BRICK_WALL.get());
+      dropSelf(ModBlocks.RUNED_TILE_WALL.get());
+      dropSelf(ModBlocks.ELEMENTAL_SOIL.get());
+      dropSelf(ModBlocks.AQUEOUS_SOIL.get());
+      dropSelf(ModBlocks.CAELIC_SOIL.get());
+      dropSelf(ModBlocks.MAGMATIC_SOIL.get());
+      dropSelf(ModBlocks.TERRAN_SOIL.get());
+      dropSelf(ModBlocks.RITUAL_PEDESTAL.get());
+      dropSelf(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get());
+      dropSelf(ModBlocks.GROVE_CRAFTER.get());
+      dropSelf(ModBlocks.GROVE_PEDESTAL.get());
+      dropSelf(ModBlocks.WILDWOOD_PEDESTAL.get());
+      dropSelf(ModBlocks.DISPLAY_PEDESTAL.get());
+      //dropSelf(ModBlocks.WILD_ROOTS.get());
+      add(ModBlocks.WILD_ROOTS.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(applyExplosionDecay(ModBlocks.WILD_ROOTS.get(), LootItem.lootTableItem(ModItems.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))))
+          .withPool(LootPool.lootPool().add(applyExplosionDecay(ModBlocks.WILD_ROOTS.get(), LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.8f))).when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.WILD_ROOTS.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildRootsBlock.MOSSY, true))))))
+      );
+      //dropSelf(ModBlocks.CREEPING_GROVE_MOSS.get());
+      add(ModBlocks.CREEPING_GROVE_MOSS.get(), applyExplosionDecay(ModBlocks.CREEPING_GROVE_MOSS.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
+          .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f)))).when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.CREEPING_GROVE_MOSS.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CreepingGroveMossBlock.RITUAL_PLACED, false)))
+          )
+          .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))).when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.CREEPING_GROVE_MOSS.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CreepingGroveMossBlock.RITUAL_PLACED, false)))
+          )));
+      //dropSelf(ModBlocks.HANGING_GROVE_MOSS.get());
+      add(ModBlocks.HANGING_GROVE_MOSS.get(), applyExplosionDecay(ModBlocks.HANGING_GROVE_MOSS.get(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))))));
+      //dropSelf(ModBlocks.BAFFLECAP_BLOCK.get());
+      add(ModBlocks.BAFFLECAP_BLOCK.get(), createSilkTouchDispatchTable(ModBlocks.BAFFLECAP_BLOCK.get(), applyExplosionDecay(ModBlocks.BAFFLECAP_BLOCK.get(), LootItem.lootTableItem(ModItems.BAFFLECAP.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.05f))))));
+      //dropSelf(ModBlocks.PRIMAL_GROVE_STONE.get());
+      dropSelf(ModBlocks.INCENSE_BURNER.get());
+      dropSelf(ModBlocks.MORTAR.get());
+      dropSelf(ModBlocks.PYRE.get());
+      dropSelf(ModBlocks.REINFORCED_PYRE.get());
+      dropSelf(ModBlocks.DECORATIVE_PYRE.get());
+      dropSelf(ModBlocks.UNENDING_BOWL.get());
+      dropSelf(ModBlocks.BAFFLECAP.get());
+      addCropDrops(ModBlocks.WILDROOT_CROP.get(), ModItems.WILDROOT.get(), BeetrootBlock.AGE);
+      addCropDrops(ModBlocks.CLOUD_BERRY_CROP.get(), ModItems.CLOUD_BERRY.get(), BeetrootBlock.AGE);
+      //dropSelf(ModBlocks.DEWGONIA_CROP.get());
+      addCropDrops(ModBlocks.DEWGONIA_CROP.get(), ModItems.DEWGONIA.get(), BeetrootBlock.AGE);
+      //dropSelf(ModBlocks.INFERNO_BULB_CROP.get());
+      addCropDrops(ModBlocks.INFERNO_BULB_CROP.get(), ModItems.INFERNO_BULB.get(), BeetrootBlock.AGE);
+      //dropSelf(ModBlocks.STALICRIPE_CROP.get());
+      addCropDrops(ModBlocks.STALICRIPE_CROP.get(), ModItems.STALICRIPE.get(), BeetrootBlock.AGE);
+      //dropSelf(ModBlocks.MOONGLOW_CROP.get());
+      addCropDrops(ModBlocks.MOONGLOW_CROP.get(), ModItems.MOONGLOW.get(), ModItems.MOONGLOW_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
+      //dropSelf(ModBlocks.PERESKIA_CROP.get());
+      addCropDrops(ModBlocks.PERESKIA_CROP.get(), ModItems.PERESKIA.get(), ModItems.PERESKIA_BULB.get(), BaseBlocks.SeededCropsBlock.AGE);
+      //dropSelf(ModBlocks.SPIRITLEAF_CROP.get());
+      addCropDrops(ModBlocks.SPIRITLEAF_CROP.get(), ModItems.SPIRITLEAF.get(), ModItems.SPIRITLEAF_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
+      //dropSelf(ModBlocks.WILDEWHEET_CROP.get());
+      addCropDrops(ModBlocks.WILDEWHEET_CROP.get(), ModItems.WILDEWHEET.get(), ModItems.WILDEWHEET_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
+      //dropSelf(ModBlocks.AUBERGINE_CROP.get());
+      addCropDrops(ModBlocks.AUBERGINE_CROP.get(), ModItems.AUBERGINE.get(), ModItems.AUBERGINE_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
+      //dropSelf(ModBlocks.WILD_AUBERGINE.get());
+      add(ModBlocks.WILD_AUBERGINE.get(), this.applyExplosionDecay(ModBlocks.WILD_AUBERGINE.get(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))))));
+      add(ModBlocks.POTTED_BAFFLECAP.get(), createPotFlowerItemTable(ModBlocks.BAFFLECAP.get()));
+      add(ModBlocks.POTTED_STONEPETAL.get(), createPotFlowerItemTable(ModBlocks.STONEPETAL.get()));
+      add(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get()));
+    }
+
+    protected void addCropDrops(Block cropBlock, Item grownCropItem, Item seedsItem, IntegerProperty ageProperty) {
+      // TODO: Fortune affects non-seeds
+      HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+      LootItemCondition.Builder dropGrownCropCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ageProperty, Collections.max(ageProperty.getPossibleValues())));
+      add(cropBlock, this.applyExplosionDecay(
+          cropBlock,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool().add(LootItem.lootTableItem(grownCropItem).when(dropGrownCropCondition).otherwise(LootItem.lootTableItem(seedsItem))))
+              .withPool(
+                  LootPool.lootPool()
+                      .when(dropGrownCropCondition)
+                      .add(
+                          LootItem.lootTableItem(seedsItem)
+                              .apply(ApplyBonusCount.addBonusBinomialDistributionCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3))
+                      )
+              )));
+    }
+
+    protected void addCropDrops(Block cropBlock, Item grownCropItem, IntegerProperty ageProperty) {
+      // TODO: Fortune affects non-seeds
+      HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+      LootItemCondition.Builder dropGrownCropCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ageProperty, Collections.max(ageProperty.getPossibleValues())));
+      add(cropBlock, this.applyExplosionDecay(
+          cropBlock,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool().add(LootItem.lootTableItem(grownCropItem).when(dropGrownCropCondition).otherwise(LootItem.lootTableItem(grownCropItem))))
+              .withPool(
+                  LootPool.lootPool()
+                      .when(dropGrownCropCondition)
+                      .add(
+                          LootItem.lootTableItem(grownCropItem)
+                              .apply(ApplyBonusCount.addBonusBinomialDistributionCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.2714286F, 3))
+                      )
+              )));
     }
 
     @Override
-    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
-      this.generate();
-      HashSet<ResourceKey<LootTable>> set = new HashSet<>();
-/*      for (Block block : List.of(ModBlocks.CHEST.get(), ModBlocks.BARREL.get(), ModBlocks.INVENTORY.get(), ModBlocks.TRAPPED_CHEST.get(), ModBlocks.SHULKER.get(), ModBlocks.TROPHY.get())) {
-        ResourceKey<LootTable> resourceKey = block.getLootTable();
-        if (resourceKey == BuiltInLootTables.EMPTY || !set.add(resourceKey)) {
-          continue;
-        }
-        LootTable.Builder builder = this.map.remove(resourceKey);
-        if (builder == null) {
-          throw new IllegalStateException(String.format(Locale.ROOT, "Missing loottable '%s' for '%s'", resourceKey.location(), BuiltInRegistries.BLOCK.getKey(block)));
-        }
-        biConsumer.accept(resourceKey, builder);
-      }
-      if (!this.map.isEmpty()) {
-        throw new IllegalStateException("Created block loot tables for non-blocks: " + this.map.keySet());
-      }*/
+    protected Iterable<Block> getKnownBlocks() {
+      return List.of(ModBlocks.THATCH.get(), ModBlocks.RUNESTONE.get(), ModBlocks.MOSSY_RUNESTONE.get(), ModBlocks.CHISELED_RUNESTONE.get(), ModBlocks.RUNESTONE_BRICK.get(), ModBlocks.RUNESTONE_TILE.get(), ModBlocks.RUNED_OBSIDIAN.get(), ModBlocks.CHISELED_RUNED_OBSIDIAN.get(), ModBlocks.RUNED_BRICK.get(), ModBlocks.RUNED_TILE.get(), ModBlocks.SILVER_ORE.get(), ModBlocks.DEEPSLATE_SILVER_ORE.get(), ModBlocks.GRANITE_QUARTZ_ORE.get(), ModBlocks.RAW_SILVER_BLOCK.get(), ModBlocks.SILVER_BLOCK.get(), ModBlocks.WILDWOOD_LOG.get(), ModBlocks.STRIPPED_WILDWOOD_LOG.get(), ModBlocks.WILDWOOD_WOOD.get(), ModBlocks.STRIPPED_WILDWOOD_WOOD.get(), ModBlocks.WILDWOOD_PLANKS.get(), ModBlocks.WILDWOOD_SAPLING.get(), ModBlocks.STONEPETAL.get(), ModBlocks.WILDWOOD_LEAVES.get(), ModBlocks.RUNED_WILDWOOD_LOG.get(), ModBlocks.RUNED_SPRUCE_LOG.get(), ModBlocks.RUNED_JUNGLE_LOG.get(), ModBlocks.RUNED_BIRCH_LOG.get(), ModBlocks.RUNED_OAK_LOG.get(), ModBlocks.RUNED_DARK_OAK_LOG.get(), ModBlocks.RUNED_ACACIA_LOG.get(), ModBlocks.RUNED_MANGROVE_LOG.get(), ModBlocks.RUNED_WARPED_STEM.get(), ModBlocks.RUNED_CRIMSON_STEM.get(), ModBlocks.RUNESTONE_STAIRS.get(), ModBlocks.MOSSY_RUNESTONE_STAIRS.get(), ModBlocks.RUNESTONE_BRICK_STAIRS.get(), ModBlocks.RUNESTONE_TILE_STAIRS.get(), ModBlocks.RUNED_STAIRS.get(), ModBlocks.RUNED_BRICK_STAIRS.get(), ModBlocks.RUNED_TILE_STAIRS.get(), ModBlocks.WILDWOOD_STAIRS.get(), ModBlocks.RUNESTONE_SLAB.get(), ModBlocks.MOSSY_RUNESTONE_SLAB.get(), ModBlocks.RUNESTONE_BRICK_SLAB.get(), ModBlocks.RUNESTONE_TILE_SLAB.get(), ModBlocks.RUNED_SLAB.get(), ModBlocks.RUNED_BRICK_SLAB.get(), ModBlocks.RUNED_TILE_SLAB.get(), ModBlocks.WILDWOOD_SLAB.get(), ModBlocks.WILDWOOD_FENCE.get(), ModBlocks.RUNESTONE_BUTTON.get(), ModBlocks.RUNESTONE_BRICK_BUTTON.get(), ModBlocks.RUNESTONE_TILE_BUTTON.get(), ModBlocks.MOSSY_RUNESTONE_BUTTON.get(), ModBlocks.RUNED_BUTTON.get(), ModBlocks.RUNED_BRICK_BUTTON.get(), ModBlocks.RUNED_TILE_BUTTON.get(), ModBlocks.WILDWOOD_BUTTON.get(), ModBlocks.RUNESTONE_PRESSURE_PLATE.get(), ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE.get(), ModBlocks.RUNESTONE_TILE_PRESSURE_PLATE.get(), ModBlocks.MOSSY_RUNESTONE_PRESSURE_PLATE.get(), ModBlocks.RUNED_PRESSURE_PLATE.get(), ModBlocks.RUNED_BRICK_PRESSURE_PLATE.get(), ModBlocks.RUNED_TILE_PRESSURE_PLATE.get(), ModBlocks.WILDWOOD_PRESSURE_PLATE.get(), ModBlocks.WILDWOOD_DOOR.get(), ModBlocks.WILDWOOD_TRAPDOOR.get(), ModBlocks.WILDWOOD_LADDER.get(), ModBlocks.WILDWOOD_GATE.get(), ModBlocks.RUNESTONE_WALL.get(), ModBlocks.MOSSY_RUNESTONE_WALL.get(), ModBlocks.RUNESTONE_BRICK_WALL.get(), ModBlocks.RUNESTONE_TILE_WALL.get(), ModBlocks.RUNED_WALL.get(), ModBlocks.RUNED_BRICK_WALL.get(), ModBlocks.RUNED_TILE_WALL.get(), ModBlocks.ELEMENTAL_SOIL.get(), ModBlocks.AQUEOUS_SOIL.get(), ModBlocks.CAELIC_SOIL.get(), ModBlocks.MAGMATIC_SOIL.get(), ModBlocks.TERRAN_SOIL.get(), ModBlocks.FEY_LIGHT.get(), ModBlocks.RITUAL_PEDESTAL.get(), ModBlocks.REINFORCED_RITUAL_PEDESTAL.get(), ModBlocks.GROVE_CRAFTER.get(), ModBlocks.GROVE_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get(), ModBlocks.DISPLAY_PEDESTAL.get(), ModBlocks.WILD_ROOTS.get(), ModBlocks.CREEPING_GROVE_MOSS.get(), ModBlocks.HANGING_GROVE_MOSS.get(), ModBlocks.BAFFLECAP_BLOCK.get(), ModBlocks.PRIMAL_GROVE_STONE.get(), ModBlocks.INCENSE_BURNER.get(), ModBlocks.MORTAR.get(), ModBlocks.PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.DECORATIVE_PYRE.get(), ModBlocks.UNENDING_BOWL.get(), ModBlocks.BAFFLECAP.get(), ModBlocks.WILDROOT_CROP.get(), ModBlocks.CLOUD_BERRY_CROP.get(), ModBlocks.DEWGONIA_CROP.get(), ModBlocks.INFERNO_BULB_CROP.get(), ModBlocks.STALICRIPE_CROP.get(), ModBlocks.MOONGLOW_CROP.get(), ModBlocks.PERESKIA_CROP.get(), ModBlocks.SPIRITLEAF_CROP.get(), ModBlocks.WILDEWHEET_CROP.get(), ModBlocks.AUBERGINE_CROP.get(), ModBlocks.WILD_AUBERGINE.get(), ModBlocks.POTTED_BAFFLECAP.get(), ModBlocks.POTTED_STONEPETAL.get(), ModBlocks.POTTED_WILDWOOD_SAPLING.get());
+    }
+
+    protected LootTable.Builder createWildwoodLeaves(Block block) {
+      HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+      return this.createSilkTouchOrShearsDispatchTable(
+          block,
+          ((LootPoolSingletonContainer.Builder<?>) this.applyExplosionDecay(
+              ModBlocks.WILDWOOD_LEAVES.get(), LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+          ))
+              .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), ((AccessorMixinBlockLootSubProvider) this).getNORMAL_LEAVES_STICK_CHANCES()))
+      ).withPool(
+          LootPool.lootPool()
+              .setRolls(ConstantValue.exactly(1.0F))
+              .when(((AccessorMixinBlockLootSubProvider) this).callDoesNotHaveShearsOrSilkTouch())
+              .add(
+                  ((LootPoolSingletonContainer.Builder<?>) this.applyExplosionCondition(ModBlocks.WILDWOOD_LEAVES.get(), LootItem.lootTableItem(ModItems.WILDROOT.get())))
+                      .when(
+                          BonusLevelTableCondition.bonusLevelFlatChance(
+                              registrylookup.getOrThrow(Enchantments.FORTUNE), 0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F
+                          )
+                      )
+              )
+      );
     }
   }
 
   public static class ChestLootTables implements LootTableSubProvider {
+    private final HolderLookup.Provider provider;
+
     public ChestLootTables(HolderLookup.Provider provider) {
+      this.provider = provider;
     }
 
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
-/*      consumer.accept(
-          RootsAPI.ELYTRA_CHEST,
-          LootTable.lootTable()
-              .withPool(
-                  LootPool.lootPool()
-                      .setRolls(ConstantValue.exactly(1))
-                      .add(LootItem.lootTableItem(Items.ELYTRA).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))));
       consumer.accept(
-          RootsAPI.TROPHY_REWARD,
+          RootsAPI.STANDING_STONES,
           LootTable.lootTable()
               .withPool(
                   LootPool.lootPool()
-                      .setRolls(ConstantValue.exactly(1))
-                      .add(LootItem.lootTableItem(RootsRegistry.getTrophyBlock()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))));*/
+                      .setRolls(UniformGenerator.between(5, 7))
+                      .setBonusRolls(UniformGenerator.between(1, 3))
+                      .add(LootItem.lootTableItem(Blocks.SHORT_GRASS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 15.0f))))
+                      .add(LootItem.lootTableItem(Items.FERN).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.PUMPKIN).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F))))
+                      .add(LootItem.lootTableItem(Items.HAY_BLOCK).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.DRIED_KELP_BLOCK).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.PACKED_ICE).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.COBWEB).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 8.0F))))
+                      .add(LootItem.lootTableItem(Items.RED_MUSHROOM).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.BROWN_MUSHROOM).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.SWEET_BERRIES).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(5.0F, 16.0F))))
+                      .add(LootItem.lootTableItem(Items.POPPY).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F))))
+                      .add(LootItem.lootTableItem(Items.DANDELION).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 10.0F))))
+                      .add(LootItem.lootTableItem(Items.OXEYE_DAISY).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+                      .add(LootItem.lootTableItem(Items.AZURE_BLUET).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.VINE).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 8.0F))))
+                      .add(LootItem.lootTableItem(Items.CACTUS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 8.0F))))
+                      .add(LootItem.lootTableItem(Items.TALL_GRASS).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.LARGE_FERN).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.BLUE_ORCHID).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.DEAD_BUSH).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 6.0f))))
+                      .add(LootItem.lootTableItem(Items.STRING).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(Items.WHEAT_SEEDS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(Items.BEETROOT_SEEDS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(Items.PUMPKIN_SEEDS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(Items.LILY_PAD).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(ModItems.WILDROOT.get()).setWeight(15).apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 17))))
+                      .add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 8))))));
+
+      // Hut/Ruined Hut chest
+      consumer.accept(
+          RootsAPI.HUT,
+          LootTable.lootTable()
+              .withPool(
+                  LootPool.lootPool()
+                      .setRolls(UniformGenerator.between(3, 6))
+                      .setBonusRolls(UniformGenerator.between(2, 4))
+                      .add(LootItem.lootTableItem(Items.SHORT_GRASS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 15.0f))))
+                      .add(LootItem.lootTableItem(Items.FERN).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.PUMPKIN).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F))))
+                      .add(LootItem.lootTableItem(Items.HAY_BLOCK).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.DRIED_KELP_BLOCK).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.PACKED_ICE).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.COBWEB).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 8.0F))))
+                      .add(LootItem.lootTableItem(Items.RED_MUSHROOM).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.BROWN_MUSHROOM).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.SWEET_BERRIES).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(5.0F, 16.0F))))
+                      .add(LootItem.lootTableItem(Items.POPPY).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F))))
+                      .add(LootItem.lootTableItem(Items.DANDELION).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 10.0F))))
+                      .add(LootItem.lootTableItem(Items.OXEYE_DAISY).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+                      .add(LootItem.lootTableItem(Items.AZURE_BLUET).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.VINE).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 8.0F))))
+                      .add(LootItem.lootTableItem(Items.CACTUS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 8.0F))))
+                      .add(LootItem.lootTableItem(Items.SHORT_GRASS).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.LARGE_FERN).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.BLUE_ORCHID).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.DEAD_BUSH).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 6.0f))))
+                      .add(LootItem.lootTableItem(Items.STRING).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(Items.WHEAT_SEEDS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(Items.BEETROOT_SEEDS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(Items.PUMPKIN_SEEDS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+                      .add(LootItem.lootTableItem(Items.LILY_PAD).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(10, 20))))
+              )
+              .withPool(
+                  LootPool.lootPool()
+                      .setRolls(UniformGenerator.between(1, 3))
+                      .setBonusRolls(UniformGenerator.between(2, 3))
+                      .add(LootItem.lootTableItem(Items.RED_TULIP).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.ORANGE_TULIP).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.PINK_TULIP).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.LILY_OF_THE_VALLEY).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.ALLIUM).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.CORNFLOWER).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.SUNFLOWER).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.LILAC).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.ROSE_BUSH).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.BAMBOO).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.SEAGRASS).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.SEA_PICKLE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.BREAD).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.WHEAT).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.COOKED_AUBERGINE.get()).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.APPLE).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.CARROT).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.POTATO).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.BEETROOT).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.SPIDER_EYE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(ModItems.AUBERGINE_SALAD.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.BEETROOT_SALAD.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.STEWED_EGGPLANT.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.VINEGAR.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.PEONY_CORDIAL.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.ROSE_CORDIAL.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.LILAC_CORDIAL.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.CACTUS_SYRUP.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.APPLE_CORDIAL.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(ModItems.DANDELION_CORDIAL.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+              )
+              .withPool(
+                  LootPool.lootPool()
+                      .setRolls(UniformGenerator.between(0, 2))
+                      .setBonusRolls(UniformGenerator.between(1, 2))
+                      .add(LootItem.lootTableItem(Items.WITHER_ROSE).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(ModItems.CARAPACE.get()).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 7.0f))))
+                      .add(LootItem.lootTableItem(ModItems.ANTLERS.get()).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 7.0f))))
+                      .add(LootItem.lootTableItem(Items.FEATHER).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 7.0f))))
+                      .add(LootItem.lootTableItem(Items.FLOWER_POT).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))))
+                      .add(LootItem.lootTableItem(Items.LAPIS_LAZULI).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0f, 18.0f))))
+                      .add(LootItem.lootTableItem(Items.TROPICAL_FISH).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 7.0f))))
+                      .add(LootItem.lootTableItem(Items.PUFFERFISH).setWeight(6).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))))
+                      .add(LootItem.lootTableItem(Items.SALMON).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 7.0f))))
+                      .add(LootItem.lootTableItem(Items.COD).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 7.0f))))
+                      .add(LootItem.lootTableItem(Items.CAKE).setWeight(3))
+                      .add(LootItem.lootTableItem(Items.COOKIE).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0f, 18.0f))))
+                      .add(LootItem.lootTableItem(Items.COCOA_BEANS).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 7.0f))))
+                      .add(LootItem.lootTableItem(Items.PUMPKIN_PIE).setWeight(9).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0f, 12.0f))))
+                      .add(LootItem.lootTableItem(Items.EXPERIENCE_BOTTLE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 5.0f))))
+                      .add(LootItem.lootTableItem(Items.NAME_TAG).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f))))
+                      .add(LootItem.lootTableItem(Items.HONEY_BOTTLE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f))))
+                      .add(LootItem.lootTableItem(Items.NAUTILUS_SHELL).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f))))
+                      .add(EmptyLootItem.emptyItem().setWeight(8))
+              )
+      );
+
+
+      // BARROW
+
+      consumer.accept(
+          RootsAPI.BARROW,
+          LootTable.lootTable()
+              .withPool(
+                  LootPool.lootPool()
+                      .setRolls(UniformGenerator.between(2, 5))
+                      .setBonusRolls(UniformGenerator.between(1f, 5f))
+                      .add(LootItem.lootTableItem(Items.WATER_BUCKET).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f))))
+                      .add(LootItem.lootTableItem(Items.CLAY_BALL).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.LAPIS_LAZULI).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F))))
+                      .add(LootItem.lootTableItem(Items.COAL).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.BOOK).setWeight(22).apply(SetItemCountFunction.setCount(UniformGenerator.between(9.0F, 21.0F))))
+                      .add(LootItem.lootTableItem(Items.BONE).setWeight(16).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.SHEARS).apply(EnchantRandomlyFunction.randomApplicableEnchantment(provider)))
+                      .add(LootItem.lootTableItem(Items.CHAIN).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.ARROW).setWeight(20).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 15.0F))))
+                      .add(LootItem.lootTableItem(Items.SADDLE))
+              )
+              .withPool(
+                  LootPool.lootPool()
+                      .setRolls(UniformGenerator.between(1, 2))
+                      .setBonusRolls(UniformGenerator.between(1, 2))
+                      .add(LootItem.lootTableItem(Items.LAVA_BUCKET).setWeight(12).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                      .add(LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.QUARTZ).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 7.0F))))
+                      .add(LootItem.lootTableItem(Items.GOLD_INGOT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F))))
+                      .add(LootItem.lootTableItem(Items.REDSTONE).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 9.0F))))
+                      .add(LootItem.lootTableItem(Items.GUNPOWDER).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 12.0F))))
+                      .add(LootItem.lootTableItem(Items.GLOWSTONE_DUST).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+                      .add(LootItem.lootTableItem(Items.SPONGE).setWeight(1))
+                      .add(LootItem.lootTableItem(Items.MAGMA_CREAM).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 9.0F))))
+              )
+              .withPool(
+                  LootPool.lootPool()
+                      .setRolls(UniformGenerator.between(0, 2))
+                      .setBonusRolls(UniformGenerator.between(1, 2))
+                      .add(LootItem.lootTableItem(Items.ENDER_PEARL).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 5.0F))))
+                      .add(LootItem.lootTableItem(Items.FIREWORK_ROCKET).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f))))
+/*                      .add(LootItem.lootTableItem(ModItems.ANTLER_HAT.get()).setWeight(3).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))*/
+                      .add(LootItem.lootTableItem(ModItems.BEETLE_HELMET.get()).setWeight(6).apply(EnchantRandomlyFunction.randomApplicableEnchantment(provider)))
+                      .add(LootItem.lootTableItem(ModItems.BEETLE_CHESTPLATE.get()).setWeight(1).apply(EnchantRandomlyFunction.randomApplicableEnchantment(provider)))
+                      .add(LootItem.lootTableItem(ModItems.BEETLE_BOOTS.get()).setWeight(6).apply(EnchantRandomlyFunction.randomApplicableEnchantment(provider)))
+                      .add(LootItem.lootTableItem(ModItems.BEETLE_LEGGINGS.get()).setWeight(3).apply(EnchantRandomlyFunction.randomApplicableEnchantment(provider)))
+                      .add(LootItem.lootTableItem(Items.OBSIDIAN).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 7.0f))))
+                      .add(LootItem.lootTableItem(Items.NETHER_WART_BLOCK).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 4.0f))))
+                      .add(LootItem.lootTableItem(Items.PHANTOM_MEMBRANE).setWeight(2))
+                      .add(LootItem.lootTableItem(ModItems.COPPER_HELMET.get()).setWeight(8).apply(EnchantRandomlyFunction.randomApplicableEnchantment(provider)))
+                      .add(LootItem.lootTableItem(ModItems.COPPER_CHESTPLATE.get()).setWeight(12).apply(EnchantRandomlyFunction.randomApplicableEnchantment(provider)))
+                      .add(LootItem.lootTableItem(Items.CROSSBOW).setWeight(3).apply(EnchantRandomlyFunction.randomApplicableEnchantment(provider)))
+                      .add(EmptyLootItem.emptyItem().setWeight(4))
+              )
+      );
     }
   }
 }

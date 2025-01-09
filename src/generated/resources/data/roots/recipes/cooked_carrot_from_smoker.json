@@ -3,7 +3,7 @@
   "cookingtime": 100,
   "experience": 0.15,
   "ingredient": {
-    "tag": "forge:crops/carrot"
+    "tag": "neoforge:crops/carrot"
   },
   "result": "roots:cooked_carrot"
 }

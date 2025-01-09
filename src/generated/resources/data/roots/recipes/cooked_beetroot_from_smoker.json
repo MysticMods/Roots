@@ -3,7 +3,7 @@
   "cookingtime": 100,
   "experience": 0.15,
   "ingredient": {
-    "tag": "forge:crops/beetroot"
+    "tag": "neoforge:crops/beetroot"
   },
   "result": "roots:cooked_beetroot"
 }

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:nuggets/copper"
+            "tag": "neoforge:nuggets/copper"
           }
         ]
       },

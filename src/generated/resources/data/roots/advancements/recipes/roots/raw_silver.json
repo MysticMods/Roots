@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:storage_blocks/raw_silver"
+            "tag": "neoforge:storage_blocks/raw_silver"
           }
         ]
       },
