@@ -735,8 +735,6 @@ public class ModBlocks {
     .tag(ItemTags.BUTTONS)
     .build()
     .register();*/
-  // TODO:
-  @Deprecated
   public static DeferredHolder<Block, ButtonBlock> MOSSY_RUNESTONE_BUTTON = BLOCKS.register("mossy_runestone_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.Button> RUNED_BUTTON = BLOCKS.register("runed_button", () -> new RunedObsidianBlocks.Button(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
 /*    REGISTRATE.block("runed_button", RunedObsidianBlocks.Button::new)
@@ -827,8 +825,6 @@ public class ModBlocks {
 
   public static DeferredHolder<Block, PressurePlateBlock> RUNESTONE_TILE_PRESSURE_PLATE = BLOCKS.register("runestone_tile_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNESTONE_SET, RUNESTONE_PROPERTIES));
 
-  // TODO:
-  @Deprecated
   public static DeferredHolder<Block, PressurePlateBlock> MOSSY_RUNESTONE_PRESSURE_PLATE = BLOCKS.register("mossy_runestone_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNESTONE_SET, RUNESTONE_PROPERTIES));
 
 /*      REGISTRATE.block("runestone_tile_pressure_plate", (p) -> new BaseBlocks.PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, p))
