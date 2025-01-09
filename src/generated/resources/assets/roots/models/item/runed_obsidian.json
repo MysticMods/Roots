@@ -1,3 +1,6 @@
 {
-  "parent": "roots:block/runed_obsidian"
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "roots:block/runed_obsidian"
+  }
 }

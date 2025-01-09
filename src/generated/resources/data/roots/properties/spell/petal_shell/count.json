@@ -1,6 +1,0 @@
-{
-  "_comment": "The number of petal shells.",
-  "default_value": 3,
-  "spell": "roots:petal_shell",
-  "value": 3
-}

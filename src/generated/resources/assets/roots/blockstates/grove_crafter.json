@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "roots:block/complex/grove_crafter"
+      "model": "roots:block/grove_crafter"
     }
   }
 }

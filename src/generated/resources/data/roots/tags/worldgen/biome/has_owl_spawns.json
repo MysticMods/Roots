@@ -1,0 +1,24 @@
+{
+  "values": [
+    "#minecraft:is_forest",
+    "#minecraft:is_mountain",
+    "#minecraft:is_taiga",
+    "#minecraft:has_structure/village_snowy",
+    {
+      "id": "#c:forest",
+      "required": false
+    },
+    {
+      "id": "#c:taiga",
+      "required": false
+    },
+    {
+      "id": "#c:climate-cold",
+      "required": false
+    },
+    {
+      "id": "#c:mountain",
+      "required": false
+    }
+  ]
+}

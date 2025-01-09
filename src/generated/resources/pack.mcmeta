@@ -1,8 +1,10 @@
 {
   "pack": {
-    "description": {
-      "text": "Resources for Roots 4"
-    },
-    "pack_format": 9
+    "description": "Roots resources",
+    "pack_format": 48,
+    "supported_formats": [
+      0,
+      2147483647
+    ]
   }
 }

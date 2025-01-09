@@ -7,6 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -89,7 +90,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.WILDWOOD_PRESSURE_PLATE.get());
     // TODO: Does htis work?
     basicItem(ModItems.WILDWOOD_DOOR.get());
-    basicItem(ModItems.WILDWOOD_TRAPDOOR.get());
+    withExistingParent(ModBlocks.WILDWOOD_TRAPDOOR.getKey().location().toString(), modLoc("block/wildwood_trapdoor_bottom"));
     basicItem(ModItems.WILDWOOD_LADDER.get());
     wallInventory(ModBlocks.RUNESTONE_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE.getKey().location().getPath()));
     wallInventory(ModBlocks.RUNESTONE_BRICK_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_BRICK.getKey().location().getPath()));
@@ -113,7 +114,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
     // TODO: is this correct?
-    simpleBlockItem(ModBlocks.BAFFLECAP_BLOCK.get());
+
+    withExistingParent("bafflecap_block", modLoc("block/bafflecap_block_inventory"));
     // Is THIS correct? TODO
     withExistingParent(ModBlocks.PRIMAL_GROVE_STONE.getKey().location().getPath(), modLoc("block/primal_grove_stone_inventory"));
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
@@ -143,7 +145,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.SPIRITLEAF_SEEDS, "herbs");
     subfolder(ModItems.WILDEWHEET_SEEDS, "herbs");
     subfolder(ModItems.GROVE_SPORES, "herbs");
-    subfolder(ModItems.AUBERGINE_SEEDS, "herbs");
+    basicItem(ModItems.AUBERGINE_SEEDS.get());
 
     basicItem(ModItems.CARAPACE.get());
     basicItem(ModItems.PELT.get());
@@ -213,7 +215,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.RUNIC_SHEARS, "tools");
 
     ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
-    getBuilder(ModItems.STAFF.getKey().location().toString()).parent(generated).texture("layer0", modLoc("item/staff/staff")).texture("layer1", modLoc("item/tools/staff_petal_1")).texture("layer2", modLoc("item/tools/staff_petal_2"));
+    getBuilder(ModItems.STAFF.getKey().location().toString()).parent(generated).texture("layer0", modLoc("item/tools/staff")).texture("layer1", modLoc("item/tools/staff_petal_1")).texture("layer2", modLoc("item/tools/staff_petal_2"));
 
     subfolder(ModItems.WILDWOOD_BOW, "tools");
     subfolder(ModItems.WILDWOOD_QUIVER, "tools");

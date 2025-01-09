@@ -2,6 +2,7 @@ package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -72,7 +73,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(BlockTags.SPRUCE_LOGS).add(RUNED_SPRUCE_LOG.get());
     this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(RootsTags.Blocks.RITUAL_PEDESTALS);
     //noinspection unchecked
-    this.tag(BlockTags.MINEABLE_WITH_AXE).addTags(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS).add(GROVE_CRAFTER.get());
+
 
 
     this.tag(RootsTags.Blocks.STONEPETAL).add(STONEPETAL.get());
@@ -196,6 +197,10 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     // TODO: What is this even for?
     this.tag(RootsTags.Blocks.GRASS).add(Blocks.GRASS_BLOCK, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
     this.tag(RootsTags.Blocks.LEVERS).add(Blocks.LEVER);
+    this.tag(RootsTags.Blocks.GROWTH_FORCE);
+    this.tag(RootsTags.Blocks.GROWTH_BLACKLIST);
+    this.tag(RootsTags.Blocks.GROWTH_REDUCE);
+
     // TODO: CHECK
     this.tag(RootsTags.Blocks.SUPPORTS_STONEPETAL).addTag(BlockTags.STONE_ORE_REPLACEABLES);
     this.tag(RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE).addTag(BlockTags.DIRT);
@@ -215,6 +220,27 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Blocks.MINECRAFT_LOGS).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
 
+    this.tag(RootsTags.Blocks.ACACIA_PILLARS).add(Blocks.ACACIA_LOG, Blocks.ACACIA_WOOD);
+    this.tag(RootsTags.Blocks.ACACIA_CAPSTONES).add(RUNED_ACACIA_LOG.get());
+    this.tag(RootsTags.Blocks.BIRCH_PILLARS).add(Blocks.BIRCH_LOG, Blocks.BIRCH_WOOD);
+    this.tag(RootsTags.Blocks.BIRCH_CAPSTONES).add(RUNED_BIRCH_LOG.get());
+    this.tag(RootsTags.Blocks.DARK_OAK_PILLARS).add(Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_WOOD);
+    this.tag(RootsTags.Blocks.DARK_OAK_CAPSTONES).add(RUNED_DARK_OAK_LOG.get());
+    this.tag(RootsTags.Blocks.JUNGLE_PILLARS).add(Blocks.JUNGLE_LOG, Blocks.JUNGLE_WOOD);
+    this.tag(RootsTags.Blocks.JUNGLE_CAPSTONES).add(RUNED_JUNGLE_LOG.get());
+    this.tag(RootsTags.Blocks.OAK_PILLARS).add(Blocks.OAK_LOG, Blocks.OAK_WOOD);
+    this.tag(RootsTags.Blocks.OAK_CAPSTONES).add(RUNED_OAK_LOG.get());
+    this.tag(RootsTags.Blocks.SPRUCE_PILLARS).add(Blocks.SPRUCE_LOG, Blocks.SPRUCE_WOOD);
+    this.tag(RootsTags.Blocks.SPRUCE_CAPSTONES).add(RUNED_SPRUCE_LOG.get());
+    this.tag(RootsTags.Blocks.WARPED_PILLARS).add(Blocks.WARPED_STEM, Blocks.WARPED_HYPHAE);
+    this.tag(RootsTags.Blocks.WARPED_CAPSTONES).add(RUNED_WARPED_STEM.get());
+    this.tag(RootsTags.Blocks.CRIMSON_PILLARS).add(Blocks.CRIMSON_STEM, Blocks.CRIMSON_HYPHAE);
+    this.tag(RootsTags.Blocks.CRIMSON_CAPSTONES).add(RUNED_CRIMSON_STEM.get());
+    this.tag(RootsTags.Blocks.WILDWOOD_PILLARS).add(WILDWOOD_LOG.get(), WILDWOOD_WOOD.get());
+    this.tag(RootsTags.Blocks.WILDWOOD_CAPSTONES).add(RUNED_WILDWOOD_LOG.get());
+    this.tag(RootsTags.Blocks.MANGROVE_PILLARS).add(Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD);
+    this.tag(RootsTags.Blocks.MANGROVE_CAPSTONES).add(RUNED_MANGROVE_LOG.get());
+
     //noinspection unchecked
     this.tag(RootsTags.Blocks.LOG_PILLARS).addTags(RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Blocks.DARK_OAK_PILLARS, RootsTags.Blocks.JUNGLE_PILLARS, RootsTags.Blocks.OAK_PILLARS, RootsTags.Blocks.SPRUCE_PILLARS, RootsTags.Blocks.WARPED_PILLARS, RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.MANGROVE_PILLARS);
     //noinspection unchecked
@@ -228,10 +254,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Blocks.PILLARS).addTags(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Blocks.LOG_PILLARS);
 
-    this.tag(RootsTags.Blocks.GROWTH_FORCE);
-    this.tag(RootsTags.Blocks.GROWTH_BLACKLIST);
-    this.tag(RootsTags.Blocks.GROWTH_REDUCE);
-
+    this.tag(BlockTags.MINEABLE_WITH_AXE).addTags(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS).add(GROVE_CRAFTER.get());
   }
 
   @Override

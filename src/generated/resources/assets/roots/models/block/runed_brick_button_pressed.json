@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/button_pressed",
   "textures": {
-    "texture": "roots:block/runed_obsidian_brick"
+    "texture": "roots:block/runed_brick"
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "roots:block/complex/incense_burner"
+      "model": "roots:block/incense_burner"
     }
   }
 }

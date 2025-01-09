@@ -1,10 +1,10 @@
 {
   "variants": {
     "lit=false": {
-      "model": "roots:block/complex/reinforced_pyre"
+      "model": "roots:block/reinforced_pyre"
     },
     "lit=true": {
-      "model": "roots:block/complex/reinforced_pyre"
+      "model": "roots:block/reinforced_pyre"
     }
   }
 }

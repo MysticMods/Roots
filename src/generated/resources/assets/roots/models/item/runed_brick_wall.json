@@ -1,3 +1,6 @@
 {
-  "parent": "roots:block/runed_brick_wall_inventory"
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "roots:block/runed_brick"
+  }
 }

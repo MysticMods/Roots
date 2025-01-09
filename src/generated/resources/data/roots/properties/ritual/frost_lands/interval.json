@@ -1,6 +1,0 @@
-{
-  "_comment": "How often the ritual is executed (must be shorter than duration)",
-  "default_value": 30,
-  "ritual": "roots:frost_lands",
-  "value": 30
-}

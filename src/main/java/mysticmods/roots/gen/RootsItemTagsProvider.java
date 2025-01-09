@@ -47,17 +47,18 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.SPIRITLEAF_CROP).add(ModItems.SPIRITLEAF.get());
     this.tag(RootsTags.Items.WILDEWHEET_CROP).add(ModItems.WILDEWHEET.get());
     this.tag(RootsTags.Items.AUBERGINE_CROP).add(ModItems.AUBERGINE.get());
+    this.tag(RootsTags.Items.BAFFLECAP_CROP).add(ModItems.BAFFLECAP.get());
+    this.tag(RootsTags.Items.CLOUD_BERRY_CROP).add(ModItems.CLOUD_BERRY.get());
+    this.tag(RootsTags.Items.DEWGONIA_CROP).add(ModItems.DEWGONIA.get());
+    this.tag(RootsTags.Items.STALICRIPE_CROP).add(ModItems.STALICRIPE.get());
+    this.tag(RootsTags.Items.WILDROOT_CROP).add(ModItems.WILDROOT.get());
+    this.tag(RootsTags.Items.INFERNO_BULB_CROP).add(ModItems.INFERNO_BULB.get());
 
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
     this.copy(RootsTags.Blocks.WATER_CROPS, RootsTags.Items.WATER_CROPS);
     this.copy(RootsTags.Blocks.EARTH_CROPS, RootsTags.Items.EARTH_CROPS);
     this.copy(RootsTags.Blocks.AIR_CROPS, RootsTags.Items.AIR_CROPS);
     this.copy(RootsTags.Blocks.FIRE_CROPS, RootsTags.Items.FIRE_CROPS);
-    this.copy(RootsTags.Blocks.CLOUD_BERRY_CROP, RootsTags.Items.CLOUD_BERRY_CROP);
-    this.copy(RootsTags.Blocks.DEWGONIA_CROP, RootsTags.Items.DEWGONIA_CROP);
-    this.copy(RootsTags.Blocks.STALICRIPE_CROP, RootsTags.Items.STALICRIPE_CROP);
-    this.copy(RootsTags.Blocks.WILDROOT_CROP, RootsTags.Items.WILDROOT_CROP);
-    this.copy(RootsTags.Blocks.INFERNO_BULB_CROP, RootsTags.Items.INFERNO_BULB_CROP);
 
     this.tag(RootsTags.Items.MOONGLOW_SEEDS).add(ModItems.MOONGLOW_SEEDS.get());
     this.tag(RootsTags.Items.PERESKIA_SEEDS).add(ModItems.PERESKIA_BULB.get());
@@ -121,8 +122,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.PEDESTALS, RootsTags.Items.PEDESTALS);
     this.copy(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Items.RITUAL_PEDESTALS);
     this.copy(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Items.GROVE_PEDESTALS);
-/*    this.copy(RootsTags.Blocks.LIMITED_PEDESTALS, RootsTags.Items.LIMITED_PEDESTALS);
-    this.copy(RootsTags.Blocks.DISPLAY_PEDESTALS, RootsTags.Items.DISPLAY_PEDESTALS);*/
+    this.copy(RootsTags.Blocks.LIMITED_PEDESTALS, RootsTags.Items.LIMITED_PEDESTALS);
+    this.copy(RootsTags.Blocks.DISPLAY_PEDESTALS, RootsTags.Items.DISPLAY_PEDESTALS);
     this.copy(RootsTags.Blocks.PYRES, RootsTags.Items.PYRES);
     this.copy(RootsTags.Blocks.GROVE_CRAFTERS, RootsTags.Items.GROVE_CRAFTERS);
     this.copy(RootsTags.Blocks.MORTARS, RootsTags.Items.MORTARS);

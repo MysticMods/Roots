@@ -1,9 +1,0 @@
-{
-  "costs": [
-    {
-      "type": "additive",
-      "herb": "roots:moonglow",
-      "value": 0.25
-    }
-  ]
-}

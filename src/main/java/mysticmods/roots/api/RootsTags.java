@@ -266,6 +266,8 @@ public class RootsTags {
     public static final TagKey<Item> PEDESTALS = modTag("pedestals");
     public static final TagKey<Item> RITUAL_PEDESTALS = modTag("pedestals/ritual");
     public static final TagKey<Item> GROVE_PEDESTALS = modTag("pedestals/grove");
+    public static final TagKey<Item> LIMITED_PEDESTALS = modTag("pedestals/limited");
+    public static final TagKey<Item> DISPLAY_PEDESTALS = modTag("pedestals/display");
     public static final TagKey<Item> PYRES = modTag("pyres");
     public static final TagKey<Item> GROVE_CRAFTERS = modTag("crafters");
     public static final TagKey<Item> MORTARS = modTag("mortars");

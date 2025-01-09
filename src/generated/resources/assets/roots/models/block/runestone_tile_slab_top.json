@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "roots:block/runestone_tile",
+    "side": "roots:block/runestone_tile",
+    "top": "roots:block/runestone_tile"
+  }
+}

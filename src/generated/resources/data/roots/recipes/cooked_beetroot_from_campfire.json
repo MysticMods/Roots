@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:campfire_cooking",
-  "cookingtime": 600,
-  "experience": 0.15,
-  "ingredient": {
-    "tag": "neoforge:crops/beetroot"
-  },
-  "result": "roots:cooked_beetroot"
-}

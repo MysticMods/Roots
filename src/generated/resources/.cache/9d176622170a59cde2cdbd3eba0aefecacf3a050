@@ -1,0 +1,9 @@
+// 1.21.1	2025-01-09T18:32:45.6264807	Roots Entity Type Tags
+4b5fde4f337ce73662f973a66dcd6405771086dd data/roots/tags/entity_type/animal_harvest_entities.json
+28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_type/boats.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/disable_disarm.json
+216de12f3a76be73ae5eb6122777791020ece1b9 data/roots/tags/entity_type/fey_leather.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_friendly.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_hostile.json
+f1ecbd233820d9259a855e392e4a8e9de84cce46 data/roots/tags/entity_type/pacifist.json
+a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/squid.json

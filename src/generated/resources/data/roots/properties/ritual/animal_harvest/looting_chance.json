@@ -1,6 +1,0 @@
-{
-  "_comment": "Chance per operation that the loot level will be set to looting_value",
-  "default_value": 0.2,
-  "ritual": "roots:animal_harvest",
-  "value": 0.2
-}

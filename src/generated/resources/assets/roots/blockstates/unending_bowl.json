@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "roots:block/complex/unending_bowl"
+      "model": "roots:block/unending_bowl"
     }
   }
 }

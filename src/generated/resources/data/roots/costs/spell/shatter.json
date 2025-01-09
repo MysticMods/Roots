@@ -1,9 +1,0 @@
-{
-  "costs": [
-    {
-      "type": "additive",
-      "herb": "roots:stalicripe",
-      "value": 0.25
-    }
-  ]
-}

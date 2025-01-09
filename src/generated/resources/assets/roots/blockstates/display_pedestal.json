@@ -1,10 +1,10 @@
 {
   "variants": {
     "valid=false": {
-      "model": "roots:block/complex/grove_pedestal"
+      "model": "roots:block/display_pedestal"
     },
     "valid=true": {
-      "model": "roots:block/complex/grove_pedestal"
+      "model": "roots:block/display_pedestal"
     }
   }
 }

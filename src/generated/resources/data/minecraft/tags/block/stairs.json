@@ -1,0 +1,11 @@
+{
+  "values": [
+    "roots:runestone_stairs",
+    "roots:runestone_brick_stairs",
+    "roots:runestone_tile_stairs",
+    "roots:mossy_runestone_stairs",
+    "roots:runed_stairs",
+    "roots:runed_tile_stairs",
+    "roots:runed_brick_stairs"
+  ]
+}

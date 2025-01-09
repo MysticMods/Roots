@@ -70,39 +70,47 @@
     },
     "face=wall,facing=east,powered=false": {
       "model": "roots:block/wildwood_button",
+      "uvlock": true,
       "x": 90,
       "y": 90
     },
     "face=wall,facing=east,powered=true": {
       "model": "roots:block/wildwood_button_pressed",
+      "uvlock": true,
       "x": 90,
       "y": 90
     },
     "face=wall,facing=north,powered=false": {
       "model": "roots:block/wildwood_button",
+      "uvlock": true,
       "x": 90
     },
     "face=wall,facing=north,powered=true": {
       "model": "roots:block/wildwood_button_pressed",
+      "uvlock": true,
       "x": 90
     },
     "face=wall,facing=south,powered=false": {
       "model": "roots:block/wildwood_button",
+      "uvlock": true,
       "x": 90,
       "y": 180
     },
     "face=wall,facing=south,powered=true": {
       "model": "roots:block/wildwood_button_pressed",
+      "uvlock": true,
       "x": 90,
       "y": 180
     },
     "face=wall,facing=west,powered=false": {
       "model": "roots:block/wildwood_button",
+      "uvlock": true,
       "x": 90,
       "y": 270
     },
     "face=wall,facing=west,powered=true": {
       "model": "roots:block/wildwood_button_pressed",
+      "uvlock": true,
       "x": 90,
       "y": 270
     }

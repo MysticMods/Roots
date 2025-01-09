@@ -1,6 +1,0 @@
-{
-  "_comment": "The length of the ritual",
-  "default_value": 250,
-  "ritual": "roots:grove_supplication",
-  "value": 250
-}

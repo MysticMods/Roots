@@ -1,3 +1,6 @@
 {
-  "parent": "roots:block/runestone_brick"
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "roots:block/runestone_brick"
+  }
 }

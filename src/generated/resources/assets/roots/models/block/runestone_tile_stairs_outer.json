@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "roots:block/runestone_tile",
+    "side": "roots:block/runestone_tile",
+    "top": "roots:block/runestone_tile"
+  }
+}

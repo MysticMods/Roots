@@ -1,9 +1,0 @@
-{
-  "costs": [
-    {
-      "type": "additive",
-      "herb": "roots:dewgonia",
-      "value": 0.25
-    }
-  ]
-}

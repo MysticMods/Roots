@@ -1,9 +1,0 @@
-{
-  "costs": [
-    {
-      "type": "additive",
-      "herb": "roots:pereskia",
-      "value": 0.25
-    }
-  ]
-}

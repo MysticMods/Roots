@@ -1,6 +1,0 @@
-{
-  "_comment": "The duration of the glow effect applied to entities that have been harvest.",
-  "default_value": 10,
-  "ritual": "roots:animal_harvest",
-  "value": 10
-}

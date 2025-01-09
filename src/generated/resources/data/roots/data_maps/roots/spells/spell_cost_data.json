@@ -1,0 +1,346 @@
+{
+  "values": {
+    "roots:acid_cloud": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:bafflecap"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:cloud_berry"
+        }
+      ]
+    },
+    "roots:aqua_bubble": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:dewgonia"
+        }
+      ]
+    },
+    "roots:augment": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:grove_moss"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:inferno_bulb"
+        }
+      ]
+    },
+    "roots:control_undead": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:bafflecap"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:dandelion_winds": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:cloud_berry"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.125,
+          "herb": "roots:grove_moss"
+        }
+      ]
+    },
+    "roots:desaturate": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:wildewheet"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:grove_moss"
+        }
+      ]
+    },
+    "roots:disarm": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:spiritleaf"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:bafflecap"
+        }
+      ]
+    },
+    "roots:extension": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 1.75,
+          "herb": "roots:grove_moss"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 1.75,
+          "herb": "roots:wildroot"
+        }
+      ]
+    },
+    "roots:fey_light": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.0625,
+          "herb": "roots:grove_moss"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.0625,
+          "herb": "roots:pereskia"
+        }
+      ]
+    },
+    "roots:geas": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:bafflecap"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:grove_moss"
+        }
+      ]
+    },
+    "roots:growth_infusion": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:grove_moss"
+        }
+      ]
+    },
+    "roots:harvest": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:wildewheet"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:stalicripe"
+        }
+      ]
+    },
+    "roots:jaunt": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:pereskia"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:spiritleaf"
+        }
+      ]
+    },
+    "roots:life_drain": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:wildewheet"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:stalicripe"
+        }
+      ]
+    },
+    "roots:light_drifter": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:magnetism": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:spiritleaf"
+        }
+      ]
+    },
+    "roots:nondetection": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:spiritleaf"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:dewgonia"
+        }
+      ]
+    },
+    "roots:petal_shell": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:pereskia"
+        }
+      ]
+    },
+    "roots:radiance": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:inferno_bulb"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:cloud_berry"
+        }
+      ]
+    },
+    "roots:rampant_growth": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:wildewheet"
+        }
+      ]
+    },
+    "roots:rose_thorns": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:wildroot"
+        }
+      ]
+    },
+    "roots:sanctuary": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:pereskia"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:stalicripe"
+        }
+      ]
+    },
+    "roots:saturate": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:wildewheet"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:wildroot"
+        }
+      ]
+    },
+    "roots:shatter": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:stalicripe"
+        }
+      ]
+    },
+    "roots:sky_soarer": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 1.875,
+          "herb": "roots:cloud_berry"
+        }
+      ]
+    },
+    "roots:storm_cloud": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:dewgonia"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:cloud_berry"
+        }
+      ]
+    },
+    "roots:time_stop": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:moonglow"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:stalicripe"
+        }
+      ]
+    },
+    "roots:wildfire": {
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:inferno_bulb"
+        }
+      ]
+    }
+  }
+}

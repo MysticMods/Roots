@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "cookingtime": 100,
-  "experience": 0.7,
-  "ingredient": {
-    "tag": "neoforge:raw_materials/silver"
-  },
-  "result": "roots:silver_ingot"
-}

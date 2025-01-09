@@ -1,6 +1,0 @@
-{
-  "_comment": "The length of the ritual",
-  "default_value": 600,
-  "ritual": "roots:fire_storm",
-  "value": 600
-}

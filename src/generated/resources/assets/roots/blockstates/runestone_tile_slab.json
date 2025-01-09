@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "roots:block/runestone_tile_slab"
+    },
+    "type=double": {
+      "model": "roots:block/runestone_tile"
+    },
+    "type=top": {
+      "model": "roots:block/runestone_tile_slab_top"
+    }
+  }
+}

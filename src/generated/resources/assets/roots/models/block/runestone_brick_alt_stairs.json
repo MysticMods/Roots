@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "roots:block/runestone_brick_alt",
-    "side": "roots:block/runestone_brick_alt",
-    "top": "roots:block/runestone_brick_alt"
-  }
-}

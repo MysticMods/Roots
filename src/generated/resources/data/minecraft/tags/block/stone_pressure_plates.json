@@ -1,0 +1,11 @@
+{
+  "values": [
+    "roots:runed_pressure_plate",
+    "roots:runed_tile_pressure_plate",
+    "roots:runed_brick_pressure_plate",
+    "roots:mossy_runestone_pressure_plate",
+    "roots:runestone_pressure_plate",
+    "roots:runestone_brick_pressure_plate",
+    "roots:runestone_tile_pressure_plate"
+  ]
+}

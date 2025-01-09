@@ -104,8 +104,12 @@ public class RootsLangProvider extends LanguageProvider {
     RootsRegistries.RITUALS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
-    RootsRegistries.HERBS.entrySet().forEach(o ->
-        add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
+    RootsRegistries.HERBS.entrySet().forEach(o -> {
+          if (o == null || o.getValue() == null || o.getValue().getDescriptionId() == null) {
+            System.out.println("Null herb");
+          }
+          add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
+        }
     );
     RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))

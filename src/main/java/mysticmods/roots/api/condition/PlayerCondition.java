@@ -3,6 +3,7 @@ package mysticmods.roots.api.condition;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.registry.DescribedEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -21,6 +22,18 @@ public abstract class PlayerCondition extends DescribedEntry {
   public static final StreamCodec<RegistryFriendlyByteBuf, List<PlayerCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   public PlayerCondition() {
+  }
+
+  public Holder<PlayerCondition> builtInRegistryHolder() {
+    return RootsRegistries.PLAYER_CONDITIONS.wrapAsHolder(this);
+  }
+
+  public String getOrCreateDescriptionId() {
+    if (this.descriptionId == null) {
+      this.descriptionId = Util.makeDescriptionId("ritual", builtInRegistryHolder().getKey().location());
+    }
+
+    return this.descriptionId;
   }
 
   @Override

@@ -1,6 +1,0 @@
-{
-  "_comment": "The value passed to the loot function if looting_chance was successful.",
-  "default_value": 2,
-  "ritual": "roots:animal_harvest",
-  "value": 2
-}

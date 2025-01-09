@@ -1,0 +1,537 @@
+{
+  "values": {
+    "roots:acid_cloud": [
+      {
+        "id": "roots:acid_cloud/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
+        "id": "roots:acid_cloud/damage",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "How much damage the spell will cause",
+          "default_value": 2.0,
+          "value": 2.0
+        }
+      },
+      {
+        "id": "roots:acid_cloud/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How many entities the spell will affect per interval",
+          "default_value": 1,
+          "value": 1
+        }
+      }
+    ],
+    "roots:aqua_bubble": [
+      {
+        "id": "roots:aqua_bubble/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 1200,
+          "value": 1200
+        }
+      }
+    ],
+    "roots:augment": [
+      {
+        "id": "roots:augment/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 350,
+          "value": 350
+        }
+      }
+    ],
+    "roots:control_undead": [
+      {
+        "id": "roots:control_undead/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 320,
+          "value": 320
+        }
+      }
+    ],
+    "roots:dandelion_winds": [
+      {
+        "id": "roots:dandelion_winds/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
+        "id": "roots:dandelion_winds/distance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The vertical component of the vector used to move entities.",
+          "default_value": 0.75,
+          "value": 0.75
+        }
+      },
+      {
+        "id": "roots:dandelion_winds/range_1",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The first range increment for calculating the bounding box from the player.",
+          "default_value": 4.0,
+          "value": 4.0
+        }
+      },
+      {
+        "id": "roots:dandelion_winds/range_2",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The second range increment for calculating the bounding box from the player.",
+          "default_value": 5.0,
+          "value": 5.0
+        }
+      }
+    ],
+    "roots:desaturate": [
+      {
+        "id": "roots:desaturate/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 500,
+          "value": 500
+        }
+      }
+    ],
+    "roots:disarm": [
+      {
+        "id": "roots:disarm/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 350,
+          "value": 350
+        }
+      },
+      {
+        "id": "roots:disarm/drop_chance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed.",
+          "default_value": 0.35,
+          "value": 0.35
+        }
+      }
+    ],
+    "roots:extension": [
+      {
+        "id": "roots:extension/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 350,
+          "value": 350
+        }
+      },
+      {
+        "id": "roots:extension/night_vision_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The duration of the night vision effect in ticks.",
+          "default_value": 4800,
+          "value": 4800
+        }
+      },
+      {
+        "id": "roots:extension/sense_danger_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The duration of the sense danger effect in ticks.",
+          "default_value": 4800,
+          "value": 4800
+        }
+      }
+    ],
+    "roots:fey_light": [
+      {
+        "id": "roots:fey_light/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
+        "id": "roots:fey_light/max_distance",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The maximum distance a fey light can be placed from the caster",
+          "default_value": 10.0,
+          "value": 10.0
+        }
+      }
+    ],
+    "roots:geas": [
+      {
+        "id": "roots:geas/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 80,
+          "value": 80
+        }
+      }
+    ],
+    "roots:growth_infusion": [
+      {
+        "id": "roots:growth_infusion/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
+        "id": "roots:growth_infusion/added_reach",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "How much additional reach will be added to the default entity reach",
+          "default_value": 0.0,
+          "value": 0.0
+        }
+      },
+      {
+        "id": "roots:growth_infusion/base_ticks",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The default number of growth ticks applied by base growth infusion",
+          "default_value": 2,
+          "value": 2
+        }
+      }
+    ],
+    "roots:harvest": [
+      {
+        "id": "roots:harvest/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 25,
+          "value": 25
+        }
+      }
+    ],
+    "roots:jaunt": [
+      {
+        "id": "roots:jaunt/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 80,
+          "value": 80
+        }
+      },
+      {
+        "id": "roots:jaunt/distance",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of blocks that Jaunt travels forwards.",
+          "default_value": 8,
+          "value": 8
+        }
+      }
+    ],
+    "roots:life_drain": [
+      {
+        "id": "roots:life_drain/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
+        "id": "roots:life_drain/distance",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The first defaultValue used when calculating the vector from the caster.",
+          "default_value": 3.0,
+          "value": 3.0
+        }
+      },
+      {
+        "id": "roots:life_drain/bounds",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The second defaultValue used when calculating the size of the bounding box from the caster's look vector.",
+          "default_value": 2.0,
+          "value": 2.0
+        }
+      },
+      {
+        "id": "roots:life_drain/damage",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "How much damage the spell will cause",
+          "default_value": 3.0,
+          "value": 3.0
+        }
+      },
+      {
+        "id": "roots:life_drain/heal",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The amount a player should be healed for each entity damaged.",
+          "default_value": 0.5,
+          "value": 0.5
+        }
+      }
+    ],
+    "roots:light_drifter": [
+      {
+        "id": "roots:light_drifter/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 600,
+          "value": 600
+        }
+      }
+    ],
+    "roots:magnetism": [
+      {
+        "id": "roots:magnetism/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 350,
+          "value": 350
+        }
+      }
+    ],
+    "roots:nondetection": [
+      {
+        "id": "roots:nondetection/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 350,
+          "value": 350
+        }
+      }
+    ],
+    "roots:petal_shell": [
+      {
+        "id": "roots:petal_shell/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 120,
+          "value": 120
+        }
+      },
+      {
+        "id": "roots:petal_shell/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of petal shells.",
+          "default_value": 3,
+          "value": 3
+        }
+      },
+      {
+        "id": "roots:petal_shell/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 100,
+          "value": 100
+        }
+      }
+    ],
+    "roots:radiance": [
+      {
+        "id": "roots:radiance/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      }
+    ],
+    "roots:rampant_growth": [
+      {
+        "id": "roots:rampant_growth/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      }
+    ],
+    "roots:rose_thorns": [
+      {
+        "id": "roots:rose_thorns/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 24,
+          "value": 24
+        }
+      }
+    ],
+    "roots:sanctuary": [
+      {
+        "id": "roots:sanctuary/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
+        "id": "roots:sanctuary/velocity",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The velocity modifier applied to entities inside the sanctuary.",
+          "default_value": 0.125,
+          "value": 0.125
+        }
+      }
+    ],
+    "roots:saturate": [
+      {
+        "id": "roots:saturate/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 500,
+          "value": 500
+        }
+      },
+      {
+        "id": "roots:saturate/food_multiplier",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "Amount of food restored per point of food.",
+          "default_value": 0.5,
+          "value": 0.5
+        }
+      },
+      {
+        "id": "roots:saturate/saturation_multiplier",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "Amount of saturation give per point of saturation.",
+          "default_value": 0.5,
+          "value": 0.5
+        }
+      }
+    ],
+    "roots:shatter": [
+      {
+        "id": "roots:shatter/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      }
+    ],
+    "roots:sky_soarer": [
+      {
+        "id": "roots:sky_soarer/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 39,
+          "value": 39
+        }
+      },
+      {
+        "id": "roots:sky_soarer/amplifier",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The default movement speed amplifier for Sky Soarer.",
+          "default_value": 0.9,
+          "value": 0.9
+        }
+      },
+      {
+        "id": "roots:sky_soarer/boosted_amplifier",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The movement speed amplifier for Sky Soarer boosted.",
+          "default_value": 0.6,
+          "value": 0.6
+        }
+      },
+      {
+        "id": "roots:sky_soarer/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 50,
+          "value": 50
+        }
+      },
+      {
+        "id": "roots:sky_soarer/boosted_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How much time will be added to the standard duration when boosted",
+          "default_value": 28,
+          "value": 28
+        }
+      }
+    ],
+    "roots:storm_cloud": [
+      {
+        "id": "roots:storm_cloud/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 100,
+          "value": 100
+        }
+      }
+    ],
+    "roots:time_stop": [
+      {
+        "id": "roots:time_stop/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 320,
+          "value": 320
+        }
+      }
+    ],
+    "roots:wildfire": [
+      {
+        "id": "roots:wildfire/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 24,
+          "value": 24
+        }
+      }
+    ]
+  }
+}

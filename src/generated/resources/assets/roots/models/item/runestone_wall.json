@@ -1,3 +1,6 @@
 {
-  "parent": "roots:block/runestone_wall_inventory"
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "roots:block/runestone"
+  }
 }

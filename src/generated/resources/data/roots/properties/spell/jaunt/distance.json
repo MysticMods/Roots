@@ -1,6 +1,0 @@
-{
-  "_comment": "The number of blocks that Jaunt travels forwards.",
-  "default_value": 8,
-  "spell": "roots:jaunt",
-  "value": 8
-}

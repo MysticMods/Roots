@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#minecraft:has_structure/village_plains",
-    { "id": "#neoforge:is_plains", "required": false },
-    { "id": "#c:plains", "required": false }
-  ]
-}

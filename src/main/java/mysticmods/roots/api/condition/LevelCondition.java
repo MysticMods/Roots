@@ -4,9 +4,11 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
+import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.DescribedEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -31,8 +33,21 @@ public abstract class LevelCondition extends DescribedEntry {
   public static final Codec<List<LevelCondition>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, LevelCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.LEVEL_CONDITIONS);
   public static final StreamCodec<RegistryFriendlyByteBuf, List<LevelCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+  private String descriptionId;
 
   public LevelCondition() {
+  }
+
+  public Holder<LevelCondition> builtInRegistryHolder() {
+    return RootsRegistries.LEVEL_CONDITIONS.wrapAsHolder(this);
+  }
+
+  public String getOrCreateDescriptionId() {
+    if (this.descriptionId == null) {
+      this.descriptionId = Util.makeDescriptionId("ritual", builtInRegistryHolder().getKey().location());
+    }
+
+    return this.descriptionId;
   }
 
   public abstract Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player);

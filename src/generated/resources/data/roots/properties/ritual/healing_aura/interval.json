@@ -1,6 +1,0 @@
-{
-  "_comment": "How often the ritual is executed (must be shorter than duration)",
-  "default_value": 60,
-  "ritual": "roots:healing_aura",
-  "value": 60
-}

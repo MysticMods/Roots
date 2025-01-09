@@ -3,6 +3,7 @@ package mysticmods.roots.api.herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -20,9 +21,18 @@ public class Herb extends StyledRegistryEntry<Herb> {
   private static final Map<Item, Herb> herbCache = new HashMap<>();
   private final Holder<Item> item;
   private final TagKey<Item> tag;
+  private String descriptionId;
 
   public Holder<Herb> builtInRegistryHolder() {
     return RootsRegistries.HERBS.wrapAsHolder(this);
+  }
+
+  public String getOrCreateDescriptionId() {
+    if (this.descriptionId == null) {
+      this.descriptionId = Util.makeDescriptionId("herb", builtInRegistryHolder().getKey().location());
+    }
+
+    return this.descriptionId;
   }
 
   public Herb(Holder<Item> item, TagKey<Item> tag, ChatFormatting color) {

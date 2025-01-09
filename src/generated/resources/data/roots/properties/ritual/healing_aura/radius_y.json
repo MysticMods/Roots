@@ -1,6 +1,0 @@
-{
-  "_comment": "The vertical radius of the ritual in blocks.",
-  "default_value": 15,
-  "ritual": "roots:healing_aura",
-  "value": 15
-}

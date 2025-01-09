@@ -1,5 +1,6 @@
 {
-  "parent": "minecraft:block/crop",
+  "parent": "roots:block/wild_aubergine",
+  "render_type": "minecraft:cutout",
   "textures": {
     "crop": "roots:block/wild_aubergine"
   }

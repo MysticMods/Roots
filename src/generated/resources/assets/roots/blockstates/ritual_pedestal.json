@@ -1,10 +1,10 @@
 {
   "variants": {
     "valid=false": {
-      "model": "roots:block/complex/ritual_pedestal"
+      "model": "roots:block/ritual_pedestal"
     },
     "valid=true": {
-      "model": "roots:block/complex/ritual_pedestal"
+      "model": "roots:block/ritual_pedestal"
     }
   }
 }
