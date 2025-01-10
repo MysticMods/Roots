@@ -50,6 +50,7 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeClient(), new RootsBlockStateProvider(output, helper));
     generator.addProvider(event.includeClient(), new RootsItemModelProvider(output, helper));
     generator.addProvider(event.includeClient(), new RootsBlockModelProvider(output, helper));
+    generator.addProvider(event.includeServer(), new RootsGlobalLootModifierProvider(output, provider));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
   }
 }

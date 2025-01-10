@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class AddGrassDropsModifier extends LootModifier {
   private final Holder<Item> dropItem;
 
-  protected AddGrassDropsModifier(LootItemCondition[] conditionsIn, Holder<Item> item) {
+  public AddGrassDropsModifier(LootItemCondition[] conditionsIn, Holder<Item> item) {
     super(conditionsIn);
     this.dropItem = item;
   }

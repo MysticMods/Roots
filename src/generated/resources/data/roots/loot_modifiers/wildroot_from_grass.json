@@ -2,22 +2,22 @@
   "type": "roots:add_grass_drops",
   "conditions": [
     {
-      "condition": "minecraft:random_chance",
-      "chance": 0.01
+      "chance": 0.004,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "condition": "roots:block_tag",
+      "tag": "roots:grass"
     },
     {
       "condition": "minecraft:inverted",
       "term": {
         "condition": "minecraft:match_tool",
         "predicate": {
-          "tag": "neoforge:shears"
+          "items": "#c:tools/shear"
         }
       }
-    },
-    {
-      "condition": "roots:block_tag",
-      "block": "roots:grass"
     }
   ],
-  "item": "roots:aubergine_seeds"
+  "item": "roots:wildroot"
 }
