@@ -72,6 +72,10 @@ public class ClientSetup {
     event.register((stack, index) -> {
       if (index != 0) {
         SpellStorage storage = SpellStorage.getOrCreate(stack);
+        // TODO: Shouldn't be null but yeah
+        if (storage == null) {
+          return 0xbae38a; // Just a default bland colour
+        }
         SpellInstance spell = storage.getSpell();
         if (spell == null) {
           return 0xbae38a; // Just a default bland colour
