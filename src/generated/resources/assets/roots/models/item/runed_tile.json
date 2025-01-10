@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:block/button_inventory",
-  "textures": {
-    "texture": "roots:block/runed_tile"
-  }
+  "parent": "roots:block/runed_tile"
 }

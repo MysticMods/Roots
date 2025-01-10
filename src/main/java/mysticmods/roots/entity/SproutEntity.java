@@ -23,8 +23,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import javax.annotation.Nullable;
 
 public class SproutEntity extends Animal {
-  public static final EntityDataAccessor<Integer> variant = SynchedEntityData.defineId(SproutEntity.class, EntityDataSerializers.INT);
-
   public SproutEntity(EntityType<? extends SproutEntity> type, Level world) {
     super(type, world);
     this.xpReward = 3;
@@ -73,6 +71,11 @@ public class SproutEntity extends Animal {
     return isBaby() ? getBbHeight() : 1.3F;
   }
 */
+
+  @Override
+  protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    super.defineSynchedData(builder);
+  }
 
   @org.jetbrains.annotations.Nullable
   @Override

@@ -54,6 +54,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.RUNED_CRIMSON_STEM.get());
     simpleBlockItem(ModBlocks.RUNED_WARPED_STEM.get());
     simpleBlockItem(ModBlocks.RUNED_MANGROVE_LOG.get());
+    simpleBlockItem(ModBlocks.RUNED_OAK_LOG.get());
     simpleBlockItem(ModBlocks.RUNESTONE_STAIRS.get());
     simpleBlockItem(ModBlocks.RUNESTONE_BRICK_STAIRS.get());
     simpleBlockItem(ModBlocks.RUNESTONE_TILE_STAIRS.get());
@@ -72,13 +73,13 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.WILDWOOD_SLAB.get());
     fenceInventory(ModBlocks.WILDWOOD_FENCE.getKey().location().getPath(), modLoc("block/" + ModBlocks.WILDWOOD_PLANKS.getKey().location().getPath()));
     simpleBlockItem(ModBlocks.WILDWOOD_GATE.get());
-    buttonInventory(ModBlocks.RUNESTONE.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNESTONE_BRICK.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_BRICK.getKey().location().getPath()));
-    buttonInventory(ModBlocks.MOSSY_RUNESTONE.getKey().location().getPath(), modLoc("block/" + ModBlocks.MOSSY_RUNESTONE.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNESTONE_TILE.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_TILE.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNED_OBSIDIAN.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_OBSIDIAN.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNED_BRICK.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_BRICK.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNED_TILE.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_TILE.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNESTONE_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNESTONE_BRICK_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_BRICK.getKey().location().getPath()));
+    buttonInventory(ModBlocks.MOSSY_RUNESTONE_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.MOSSY_RUNESTONE.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNESTONE_TILE_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_TILE.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNED_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_OBSIDIAN.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNED_BRICK_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_BRICK.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNED_TILE_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_TILE.getKey().location().getPath()));
     buttonInventory(ModBlocks.WILDWOOD_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.WILDWOOD_PLANKS.getKey().location().getPath()));
     simpleBlockItem(ModBlocks.RUNESTONE_PRESSURE_PLATE.get());
     simpleBlockItem(ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE.get());
@@ -270,7 +271,6 @@ public class RootsItemModelProvider extends ItemModelProvider {
     spawnEggItem(ModItems.PURPLE_SPROUT_SPAWN_EGG.get());
     spawnEggItem(ModItems.OWL_SPAWN_EGG.get());
     spawnEggItem(ModItems.DUCK_SPAWN_EGG.get());
-
     // TODO: Ritual/spell tokens
   }
 

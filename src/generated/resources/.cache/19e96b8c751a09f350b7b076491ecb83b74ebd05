@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-09T18:32:45.6224779	Block States: roots
+// 1.21.1	2025-01-10T13:44:05.5459373	Block States: roots
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -52,6 +52,7 @@ d124b873e23128413bd910e71b10109baea9b098 assets/roots/blockstates/runed_button.j
 7b5ac8ab0f034e0b6b57959b7f786338ccea1715 assets/roots/blockstates/runed_dark_oak_log.json
 13cd1cd4f4f1e4adbc73233208dd9051468ecdaf assets/roots/blockstates/runed_jungle_log.json
 ba7aac3adf34b3a57b0a55574e69205c57b4e375 assets/roots/blockstates/runed_mangrove_log.json
+f61fa52198f768e7dcf3d12a29bb80714ce8a45e assets/roots/blockstates/runed_oak_log.json
 d03f954022c76666f1bdc0a2360e4503e1efd29e assets/roots/blockstates/runed_obsidian.json
 2f096ce50c69dc1a282db944622020879be312de assets/roots/blockstates/runed_pressure_plate.json
 5af92d44f17d16406d7000a4d3dcc2c5eaf6f263 assets/roots/blockstates/runed_slab.json
@@ -224,6 +225,8 @@ a019140b9d1655e8731b59d59e43aa15edd99217 assets/roots/models/block/runed_dark_oa
 55dfb96b6d340898421517dd8497b4370bafdda3 assets/roots/models/block/runed_jungle_log_horizontal.json
 cc82f331f99c64c5cae37d408a99f927cedb893b assets/roots/models/block/runed_mangrove_log.json
 5aa0de45d3bcaf6cc9779fddcf45930ef25b1628 assets/roots/models/block/runed_mangrove_log_horizontal.json
+1291834a76ff74d1d6caa205e74cc292153299ea assets/roots/models/block/runed_oak_log.json
+7f456787fb34a0792e21bdade53ed97f7d1a701c assets/roots/models/block/runed_oak_log_horizontal.json
 82bf902487070421bacd333191ca513fe72b803c assets/roots/models/block/runed_obsidian.json
 b82cbadf444019d2daf33e070348a05105759731 assets/roots/models/block/runed_pressure_plate.json
 83124cff966e392dab67f3952d6d8aaa5b309437 assets/roots/models/block/runed_pressure_plate_down.json
@@ -358,4 +361,4 @@ c0b7051062570d5900c6215cf7f6faa1c5dee2ff assets/roots/models/block/wildwood_trap
 1a0e20d276c8cccaf9ba3e4925fa69d2bce91433 assets/roots/models/block/wildwood_trapdoor_top.json
 251b4649f794082d07907186d73abbc5e213ce90 assets/roots/models/block/wildwood_wood.json
 3decfc2ceb4b2b5ca5fdf580e0bd16e3e537e064 assets/roots/models/block/wildwood_wood_horizontal.json
-51b5b8188008b5bcdf411ab7b551e04d130bb00b assets/roots/models/block/wild_aubergine.json
+ac4be8bea599f627e309021602d8f901209eead4 assets/roots/models/block/wild_aubergine.json

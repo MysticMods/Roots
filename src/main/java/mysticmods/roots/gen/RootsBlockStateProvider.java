@@ -65,6 +65,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     axisBlock(ModBlocks.RUNED_CRIMSON_STEM.get(), modLoc("block/runed_crimson"), mcLoc("block/crimson_stem_top"));
     axisBlock(ModBlocks.RUNED_WARPED_STEM.get(), modLoc("block/runed_warped"), mcLoc("block/warped_stem_top"));
     axisBlock(ModBlocks.RUNED_MANGROVE_LOG.get(), modLoc("block/runed_mangrove"), mcLoc("block/mangrove_log_top"));
+    axisBlock(ModBlocks.RUNED_OAK_LOG.get(), modLoc("block/runed_oak"), mcLoc("block/oak_log_top"));
     stairsBlock(ModBlocks.RUNESTONE_STAIRS.get(), blockTexture(ModBlocks.RUNESTONE.get()));
     stairsBlock(ModBlocks.RUNESTONE_BRICK_STAIRS.get(), blockTexture(ModBlocks.RUNESTONE_BRICK.get()));
     stairsBlock(ModBlocks.MOSSY_RUNESTONE_STAIRS.get(), blockTexture(ModBlocks.MOSSY_RUNESTONE.get()));
@@ -189,7 +190,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile mortar = models().withExistingParent("mortar", modLoc("block/complex/mortar"));
     getVariantBuilder(ModBlocks.MORTAR.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(mortar).build());
 
-    ModelFile pyre = models().withExistingParent("pyre",modLoc("block/complex/pyre"));
+    ModelFile pyre = models().withExistingParent("pyre", modLoc("block/complex/pyre"));
     getVariantBuilder(ModBlocks.PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(pyre).build());
 
     ModelFile reinforcedPyre = models().withExistingParent("reinforced_pyre", modLoc("block/complex/reinforced_pyre"));
@@ -215,19 +216,16 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     crop(ModBlocks.AUBERGINE_CROP, false);
 
 
-    ModelFile cropcrop = models().withExistingParent("wild_aubergine", ResourceLocation.withDefaultNamespace("block/crop"));
+    ModelFile cropcrop = models().withExistingParent("wild_aubergine", ResourceLocation.withDefaultNamespace("block/crop")).renderType("cutout").texture("crop", modLoc("block/wild_aubergine"));
     getVariantBuilder(ModBlocks.WILD_AUBERGINE.get())
         .forAllStates(state ->
-          ConfiguredModel.builder().modelFile(models().getBuilder("wild_aubergine")
-              .parent(cropcrop)
-              .renderType("cutout")
-              .texture("crop", modLoc("block/wild_aubergine"))).build()      );
+            ConfiguredModel.builder().modelFile(cropcrop).build());
     simpleBlock(ModBlocks.POTTED_BAFFLECAP.get(), models().withExistingParent("potted_bafflecap", mcLoc("block/flower_pot_cross")).texture("plant", modLoc("block/bafflecap")));
     simpleBlock(ModBlocks.POTTED_STONEPETAL.get(), models().withExistingParent("potted_stonepetal", mcLoc("block/flower_pot_cross")).texture("plant", modLoc("block/stonepetal")));
     simpleBlock(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), models().withExistingParent("potted_wildwood_sapling", mcLoc("block/flower_pot_cross")).texture("plant", modLoc("block/wildwood_sapling")));
   }
 
-  private void crop (Holder<Block> holder, boolean cross) {
+  private void crop(Holder<Block> holder, boolean cross) {
     ModelFile crop = models().getExistingFile(ResourceLocation.withDefaultNamespace(cross ? "block/cross" : "block/crop"));
     String prefix = holder.getKey().location().getPath().replace("crop", "");
     getVariantBuilder(holder.value())

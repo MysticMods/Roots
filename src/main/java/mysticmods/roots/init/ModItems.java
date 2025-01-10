@@ -186,12 +186,6 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> DECORATIVE_PYRE = ITEMS.register("decorative_pyre", () -> new BlockItem(ModBlocks.DECORATIVE_PYRE.get(), DEFAULT));
   // Unending bowl
   public static DeferredHolder<Item, BlockItem> UNENDING_BOWL = ITEMS.register("unending_bowl", () -> new BlockItem(ModBlocks.UNENDING_BOWL.get(), DEFAULT));
-  // Potted bafflecap
-  public static DeferredHolder<Item, BlockItem> POTTED_BAFFLECAP = ITEMS.register("potted_bafflecap", () -> new BlockItem(ModBlocks.POTTED_BAFFLECAP.get(), DEFAULT));
-  // Potted stonepetal
-  public static DeferredHolder<Item, BlockItem> POTTED_STONEPETAL = ITEMS.register("potted_stonepetal", () -> new BlockItem(ModBlocks.POTTED_STONEPETAL.get(), DEFAULT));
-  // Potted wildwood sapling
-  public static DeferredHolder<Item, BlockItem> POTTED_WILDWOOD_SAPLING = ITEMS.register("potted_wildwood_sapling", () -> new BlockItem(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), DEFAULT));
 
   // GATHERED CROPS
   public static final DeferredHolder<Item, ItemNameBlockItem> WILDROOT = ITEMS.register("wildroot", () -> new ItemNameBlockItem(ModBlocks.WILDROOT_CROP.get(), DEFAULT));

@@ -106,9 +106,6 @@ public class CreativeTabEvents {
       event.accept(ModItems.REINFORCED_PYRE.get());
       event.accept(ModItems.DECORATIVE_PYRE.get());
       event.accept(ModItems.UNENDING_BOWL.get());
-      event.accept(ModItems.POTTED_BAFFLECAP.get());
-      event.accept(ModItems.POTTED_STONEPETAL.get());
-      event.accept(ModItems.POTTED_WILDWOOD_SAPLING.get());
       event.accept(ModItems.WILDROOT.get());
       event.accept(ModItems.GROVE_MOSS.get());
       event.accept(ModItems.CLOUD_BERRY.get());
