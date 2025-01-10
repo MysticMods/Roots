@@ -13,6 +13,7 @@ import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -44,8 +45,8 @@ public class FeyLightSpell extends Spell {
   }
 
   @Override
-  public void initialize() {
-    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+  public void initialize(Holder<Spell> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.maxDistance = properties.get(ModSpells.FEY_LIGHT_MAX_DISTANCE);
   }
 

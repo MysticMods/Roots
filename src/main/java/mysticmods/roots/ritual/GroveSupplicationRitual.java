@@ -8,6 +8,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -37,7 +38,7 @@ public class GroveSupplicationRitual extends Ritual {
   }
 
   @Override
-  public void initialize() {
+  public void initialize(Holder<Ritual> holder) {
   }
 
   @Override

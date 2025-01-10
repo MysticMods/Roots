@@ -10,6 +10,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -43,8 +44,8 @@ public class DandelionWindsSpell extends Spell {
   }
 
   @Override
-  public void initialize() {
-    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+  public void initialize(Holder<Spell> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.distance = properties.get(ModSpells.DANDELION_WINDS_DISTANCE);
     this.r1 = properties.get(ModSpells.DANDELION_WINDS_RANGE_1);
     this.r2 = properties.get(ModSpells.DANDELION_WINDS_RANGE_2);

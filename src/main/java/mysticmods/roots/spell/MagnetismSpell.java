@@ -4,10 +4,12 @@ import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.MagnetismUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +38,7 @@ public class MagnetismSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public void initialize() {
+  public void initialize(Holder<Spell> holder) {
 
   }
 

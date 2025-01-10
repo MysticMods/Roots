@@ -1,9 +1,9 @@
 package mysticmods.roots.api.ritual;
 
 import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.reference.RitualProperties;
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -81,27 +81,28 @@ public abstract class Ritual implements IDescribedRegistryEntry {
     return properties;
   }
 
-  private void initProperties() {
+  private void initProperties(Holder<Ritual> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     if (getDurationProperty() != null) {
       // if it's not null it should throw an error
-      duration = builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA).get(getDurationProperty());
+      duration = properties.get(getDurationProperty());
     }
     if (getRadiusXZProperty() != null) {
-      radiusXZ = builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA).get(getRadiusXZProperty());
+      radiusXZ = properties.get(getRadiusXZProperty());
     }
     if (getRadiusYProperty() != null) {
-      radiusY = builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA).get(getRadiusYProperty());
+      radiusY = properties.get(getRadiusYProperty());
     }
     if (getIntervalProperty() != null) {
-      interval = builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA).get(getIntervalProperty());
+      interval = properties.get(getIntervalProperty());
     }
   }
 
-  protected abstract void initialize();
+  protected abstract void initialize(Holder<Ritual> holder);
 
-  public void init() {
-    initProperties();
-    initialize();
+  public void init(Holder<Ritual> holder) {
+    initProperties(holder);
+    initialize(holder);
     rebuildBounds();
   }
 

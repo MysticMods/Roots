@@ -11,6 +11,24 @@
         }
       },
       {
+        "id": "roots:acid_cloud/radius_zx",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "Radius",
+          "default_value": 4,
+          "value": 4
+        }
+      },
+      {
+        "id": "roots:acid_cloud/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "Radius",
+          "default_value": 2,
+          "value": 2
+        }
+      },
+      {
         "id": "roots:acid_cloud/damage",
         "value": {
           "type": "roots:float_property",
@@ -109,6 +127,15 @@
           "default_value": 500,
           "value": 500
         }
+      },
+      {
+        "id": "roots:desaturate/multiplier",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "Amount of health restored per point of food",
+          "default_value": 0.7,
+          "value": 0.7
+        }
       }
     ],
     "roots:disarm": [
@@ -119,6 +146,24 @@
           "comment": "How long before the player can cast the spell again",
           "default_value": 350,
           "value": 350
+        }
+      },
+      {
+        "id": "roots:disarm/radius_zx",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Z and X axes",
+          "default_value": 5,
+          "value": 5
+        }
+      },
+      {
+        "id": "roots:disarm/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Y axis",
+          "default_value": 5,
+          "value": 5
         }
       },
       {
@@ -139,6 +184,24 @@
           "comment": "How long before the player can cast the spell again",
           "default_value": 350,
           "value": 350
+        }
+      },
+      {
+        "id": "roots:extension/radius_zx",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Z and X axes",
+          "default_value": 40,
+          "value": 40
+        }
+      },
+      {
+        "id": "roots:extension/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Y axis",
+          "default_value": 20,
+          "value": 20
         }
       },
       {
@@ -318,6 +381,24 @@
           "default_value": 350,
           "value": 350
         }
+      },
+      {
+        "id": "roots:magnetism/radius_zx",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Z and X axes",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
+        "id": "roots:magnetism/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Y axis",
+          "default_value": 10,
+          "value": 10
+        }
       }
     ],
     "roots:nondetection": [
@@ -401,6 +482,24 @@
           "comment": "How long before the player can cast the spell again",
           "default_value": 20,
           "value": 20
+        }
+      },
+      {
+        "id": "roots:sanctuary/radius_xz",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The radius of the sanctuary in the X and Z axis.",
+          "default_value": 4,
+          "value": 4
+        }
+      },
+      {
+        "id": "roots:sanctuary/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The radius of the sanctuary in the Y axis.",
+          "default_value": 5,
+          "value": 5
         }
       },
       {

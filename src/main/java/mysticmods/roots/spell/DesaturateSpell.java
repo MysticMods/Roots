@@ -10,6 +10,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -31,8 +32,15 @@ public class DesaturateSpell extends Spell {
   }
 
   @Override
-  public void initialize() {
-    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> properties = super.getProperties();
+    properties.add(ModSpells.DESATURATE_MULTIPLIER);
+    return properties;
+  }
+
+  @Override
+  public void initialize(Holder<Spell> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.multiplier = properties.get(ModSpells.DESATURATE_MULTIPLIER);
   }
 

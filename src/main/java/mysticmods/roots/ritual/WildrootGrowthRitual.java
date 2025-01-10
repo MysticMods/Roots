@@ -11,6 +11,7 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModRituals;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -63,7 +64,7 @@ public class WildrootGrowthRitual extends Ritual {
   }
 
   @Override
-  protected void initialize() {
+  protected void initialize(Holder<Ritual> holder) {
 
   }
 

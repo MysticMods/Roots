@@ -6,9 +6,11 @@ import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -46,8 +48,8 @@ public class ExtensionSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public void initialize() {
-    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+  public void initialize(Holder<Spell> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.nightVisionDuration = properties.get(ModSpells.EXTENSION_NIGHT_VISION_DURATION);
     this.senseDangerDuration = properties.get(ModSpells.EXTENSION_SENSE_DANGER_DURATION);
   }

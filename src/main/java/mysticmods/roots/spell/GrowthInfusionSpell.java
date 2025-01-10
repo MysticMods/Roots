@@ -11,6 +11,7 @@ import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -46,8 +47,8 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
-  public void initialize() {
-    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+  public void initialize(Holder<Spell> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.base_ticks = properties.get(ModSpells.GROWTH_INFUSION_BASE_TICKS);
   }
 

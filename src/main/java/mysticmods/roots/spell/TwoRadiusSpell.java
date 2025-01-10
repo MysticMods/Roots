@@ -7,6 +7,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
@@ -22,9 +23,17 @@ public abstract class TwoRadiusSpell extends Spell {
   }
 
   @Override
-  protected void initializeProperties() {
-    super.initializeProperties();
-    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> properties = super.getProperties();
+    properties.add(getRadiusZXProperty());
+    properties.add(getRadiusYProperty());
+    return properties;
+  }
+
+  @Override
+  protected void initializeProperties(Holder<Spell> holder) {
+    super.initializeProperties(holder);
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.radiusY = properties.get(getRadiusYProperty());
     this.radiusZX = properties.get(getRadiusZXProperty());
   }

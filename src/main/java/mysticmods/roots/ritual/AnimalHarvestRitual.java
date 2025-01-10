@@ -11,6 +11,7 @@ import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySelector;
@@ -112,8 +113,8 @@ public class AnimalHarvestRitual extends Ritual {
   }
 
   @Override
-  public void initialize() {
-    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.RITUAL_PROPERTY_DATA);
+  public void initialize(Holder<Ritual> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     count = properties.get(ModRituals.ANIMAL_HARVEST_COUNT);
     glowDuration = properties.get(ModRituals.ANIMAL_HARVEST_GLOW_DURATION);
     lootingValue = properties.get(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE);

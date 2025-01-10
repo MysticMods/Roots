@@ -1,6 +1,8 @@
 package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.SpellLike;
+import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
@@ -8,7 +10,6 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
 import mysticmods.roots.api.registry.IStyledRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.init.P;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -112,7 +113,7 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
 
   public abstract PropertyHolder<Property.IntegerProperty> getCooldownProperty();
 
-  public PropertyHolder<Property.DoubleProperty> getReachProperty () {
+  public PropertyHolder<Property.DoubleProperty> getReachProperty() {
     return null;
   }
 
@@ -139,47 +140,41 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
     return properties;
   }
 
-  protected void initializeProperties() {
-    // TODO: Data maps!
-/*    PropertyHolder<Property.IntegerProperty> cooldownProperty = getCooldownProperty();
-    if (cooldownProperty != null) {
-      this.cooldown = cooldownProperty.getValue();
-    } else {
-      throw new IllegalStateException("Spell " + this + " has no cooldown property!");
+  protected void initializeProperties(Holder<Spell> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.cooldown = properties.get(getCooldownProperty());
+    if (getReachProperty() != null) {
+      this.reach = properties.get(getReachProperty());
     }
-    PropertyHolder<Property.DoubleProperty> reachProperty = getReachProperty();
-    if (reachProperty != null) {
-      this.reach = reachProperty.getValue();
-    }*/
   }
 
-  public abstract void initialize();
+  public abstract void initialize(Holder<Spell> holder);
 
-  public void init() {
-    initializeProperties();
-    initialize();
+  public void init(Holder<Spell> holder) {
+    initializeProperties(holder);
+    initialize(holder);
   }
 
   public abstract void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);
 
   // TODO: How to handle reach
-  protected double getRange (Player pPlayer) {
+  protected double getRange(Player pPlayer) {
     return 0.0; //pPlayer.getReachDistance() + reach;
   }
 
-  protected BlockHitResult pick (Player pPlayer, double range) {
+  protected BlockHitResult pick(Player pPlayer, double range) {
     return pick(pPlayer, range, false);
   }
 
-  protected BlockHitResult pick (Player pPlayer, double range, boolean fluids) {
+  protected BlockHitResult pick(Player pPlayer, double range, boolean fluids) {
     return (BlockHitResult) pPlayer.pick(range, 1f, fluids);
   }
 
-  protected BlockHitResult pick (Player pPlayer) {
+  protected BlockHitResult pick(Player pPlayer) {
     return pick(pPlayer, false);
   }
 
-  protected BlockHitResult pick (Player pPlayer, boolean fluids) {
+  protected BlockHitResult pick(Player pPlayer, boolean fluids) {
     return (BlockHitResult) pPlayer.pick(getRange(pPlayer), 1f, fluids);
   }
 

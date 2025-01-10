@@ -11,6 +11,7 @@ import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -46,8 +47,8 @@ public class LifeDrainSpell extends Spell {
   }
 
   @Override
-  public void initialize() {
-    PropertyDataMap properties = builtInRegistryHolder().getData(DataMaps.SPELL_PROPERTY_DATA);
+  public void initialize(Holder<Spell> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.vectorDistance = properties.get(ModSpells.LIFE_DRAIN_DISTANCE);
     this.boundingBoxDistance = properties.get(ModSpells.LIFE_DRAIN_BOUNDS);
     this.damage = properties.get(ModSpells.LIFE_DRAIN_DAMAGE);
