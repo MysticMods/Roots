@@ -11,6 +11,6 @@
   },
   "start_pool": "roots:barrow_pool/start_pool",
   "step": "surface_structures",
-  "terrain_adaptation": "beard_thin",
+  "terrain_adaptation": "encapsulate",
   "use_expansion_hack": false
 }

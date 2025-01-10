@@ -6,7 +6,7 @@
     },
     {
       "type": "minecraft:count",
-      "count": 3
+      "count": 254
     },
     {
       "type": "minecraft:in_square"
@@ -28,7 +28,7 @@
     },
     {
       "type": "minecraft:count",
-      "count": 2
+      "count": 254
     },
     {
       "type": "minecraft:random_offset",

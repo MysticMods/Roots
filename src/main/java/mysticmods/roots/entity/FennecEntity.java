@@ -40,8 +40,6 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 public class FennecEntity extends TamableAnimal {
-  private static final EntityDataAccessor<Float> DATA_HEALTH_ID = SynchedEntityData.defineId(FennecEntity.class, EntityDataSerializers.FLOAT);
-
   public FennecEntity(EntityType<? extends FennecEntity> type, Level worldIn) {
     super(type, worldIn);
     // TODO: ???
@@ -99,17 +97,6 @@ public class FennecEntity extends TamableAnimal {
       this.setAngry(true);
     }
   }
-
-  @Override
-  protected void customServerAiStep() {
-    this.entityData.set(DATA_HEALTH_ID, this.getHealth());
-  }
-
-/*  @Override
-  protected void defineSynchedData() {
-    super.defineSynchedData();
-    this.entityData.define(DATA_HEALTH_ID, this.getHealth());
-  }*/
 
   @Override
   protected float getSoundVolume() {

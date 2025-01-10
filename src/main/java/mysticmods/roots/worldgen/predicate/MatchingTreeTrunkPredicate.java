@@ -1,6 +1,5 @@
 package mysticmods.roots.worldgen.predicate;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.init.ModFeatures;
@@ -13,27 +12,27 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
 import net.minecraft.world.level.levelgen.blockpredicates.StateTestingPredicate;
 
 public class MatchingTreeTrunkPredicate extends StateTestingPredicate {
-    public static final MapCodec<MatchingTreeTrunkPredicate> CODEC = RecordCodecBuilder.mapCodec((p_204688_) -> stateTestingCodec(p_204688_).apply(p_204688_, MatchingTreeTrunkPredicate::new));
+  public static final MapCodec<MatchingTreeTrunkPredicate> CODEC = RecordCodecBuilder.mapCodec((p_204688_) -> stateTestingCodec(p_204688_).apply(p_204688_, MatchingTreeTrunkPredicate::new));
 
-    protected MatchingTreeTrunkPredicate(Vec3i offset) {
-        super(offset);
-    }
+  protected MatchingTreeTrunkPredicate(Vec3i offset) {
+    super(offset);
+  }
 
-    @Override
-    protected boolean test(BlockState pState) {
-        return pState.is(BlockTags.LOGS_THAT_BURN) && pState.hasProperty(RotatedPillarBlock.AXIS) && pState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y;
-    }
+  @Override
+  protected boolean test(BlockState pState) {
+    return pState.is(BlockTags.LOGS_THAT_BURN) && pState.hasProperty(RotatedPillarBlock.AXIS) && pState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y;
+  }
 
-    @Override
-    public BlockPredicateType<?> type() {
-        return ModFeatures.MATCHING_TREE_TRUNK_PREDICATE.get();
-    }
+  @Override
+  public BlockPredicateType<?> type() {
+    return ModFeatures.MATCHING_TREE_TRUNK_PREDICATE.get();
+  }
 
-    public static MatchingTreeTrunkPredicate create() {
-        return new MatchingTreeTrunkPredicate(Vec3i.ZERO);
-    }
+  public static MatchingTreeTrunkPredicate create() {
+    return new MatchingTreeTrunkPredicate(Vec3i.ZERO);
+  }
 
-    public static MatchingTreeTrunkPredicate create(Vec3i offset) {
-        return new MatchingTreeTrunkPredicate(offset);
-    }
+  public static MatchingTreeTrunkPredicate create(Vec3i offset) {
+    return new MatchingTreeTrunkPredicate(offset);
+  }
 }

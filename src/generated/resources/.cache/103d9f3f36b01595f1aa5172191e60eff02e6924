@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-10T12:10:17.6551032	Registries
+// 1.21.1	2025-01-10T14:14:57.1118882	Registries
 c20cd59d5be5009c2378c51f50cfd030b05c4362 data/roots/neoforge/biome_modifier/beetle_spawns.json
 8c32577e2e5ad5a5b84223a681039eecfeb91a83 data/roots/neoforge/biome_modifier/deer_spawns.json
 7c331c3d575f4a5546e774a1b844c9db71bc496e data/roots/neoforge/biome_modifier/duck_spawns.json
@@ -6,7 +6,7 @@ c20cd59d5be5009c2378c51f50cfd030b05c4362 data/roots/neoforge/biome_modifier/beet
 d19a4cefa934267376dd73dcb277e9ad9bf6bb51 data/roots/neoforge/biome_modifier/owl_spawns.json
 d1c2dec9b586bea7a27058db4b15c555d3805ca1 data/roots/neoforge/biome_modifier/sprout_spawns.json
 947a7a47bab298b538000677f3719a6d1555c581 data/roots/neoforge/biome_modifier/wild_aubergines.json
-89497f48c77f93a4d5270923c5f49992a23351cd data/roots/neoforge/biome_modifier/wild_roots_forest.json
+831f6551d32a2c002dd7135048d26a723c92cd50 data/roots/neoforge/biome_modifier/wild_roots_forest.json
 2eb4375566446b3ddcaf7634d26d4bcef09b753c data/roots/neoforge/biome_modifier/wild_roots_underground.json
 8822bf9738f60368db7a9f8ddb757b5b1d6dd578 data/roots/worldgen/configured_feature/huge_bafflecap.json
 642b7083411c294173435e05b26144d9521fce3c data/roots/worldgen/configured_feature/wildwood_tree.json
@@ -17,10 +17,10 @@ abd381bf324524dbf2cbd185692fe37aa7a7d1fe data/roots/worldgen/configured_feature/
 07a5b74b57eb8de75c270f17b98ebfe9db590323 data/roots/worldgen/configured_feature/wild_roots_mossy.json
 dd440d8fe5b5736829a600401b9d51f74691a113 data/roots/worldgen/placed_feature/wild_aubergine.json
 63d242c35c3af1cec90b60e5f0071ee1ccdc4253 data/roots/worldgen/placed_feature/wild_aubergine_patch.json
-c74da9de52f679ecc48ac81f5131aefb1f93fff3 data/roots/worldgen/placed_feature/wild_roots_forest.json
+e34ee59c6010d33014053da3d16751fa28d6c6e6 data/roots/worldgen/placed_feature/wild_roots_forest.json
 ef9144ad33ff5d347abc5c044a79d298434fabe8 data/roots/worldgen/placed_feature/wild_roots_sparse.json
 4c9a9af81323ce4b8a8766e3c7072d6a969f624b data/roots/worldgen/placed_feature/wild_roots_underground.json
-fe278c85f1e4aed659ff05d2506fb11e3426759e data/roots/worldgen/structure/barrow.json
+332fd80e1b03b72f3eecd05c83a61657a7c9b58e data/roots/worldgen/structure/barrow.json
 0f232c2d5e2e5485f4cadd03dfd0a43b553aef1c data/roots/worldgen/structure/hut.json
 e04b12dcf7c2a014184ef3b5bb259b88cae2a074 data/roots/worldgen/structure/ruined_hut.json
 ef2cf544c2846dc8f80cf8261c38a31d2b35d15f data/roots/worldgen/structure/standing_stones.json
