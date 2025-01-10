@@ -1,17 +1,21 @@
 package mysticmods.roots.test.entity;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.test.entity.EntityTest;
 import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.init.ModTests;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 
 public class EntityTagTest extends EntityTest {
-  public static final Codec<EntityTagTest> CODEC = TagKey.codec(Registries.ENTITY_TYPE).fieldOf("tag").xmap(EntityTagTest::new, (p_205065_) -> p_205065_.tag).codec();
+  public static final MapCodec<EntityTagTest> CODEC = TagKey.codec(Registries.ENTITY_TYPE).fieldOf("tag").xmap(EntityTagTest::new, (p_205065_) -> p_205065_.tag);
+  public static final StreamCodec<ByteBuf, EntityTagTest> STREAM_CODEC = ResourceLocation.STREAM_CODEC.map(o -> new EntityTagTest(TagKey.create(Registries.ENTITY_TYPE, o)), test -> test.tag.location());
 
   protected final TagKey<EntityType<?>> tag;
 
@@ -27,5 +31,17 @@ public class EntityTagTest extends EntityTest {
   @Override
   protected EntityTestType<?> getType() {
     return ModTests.ENTITY_TAG_TEST.get();
+  }
+
+  public static class Type implements EntityTestType<EntityTagTest> {
+    @Override
+    public MapCodec<EntityTagTest> codec() {
+      return CODEC;
+    }
+
+    @Override
+    public StreamCodec<RegistryFriendlyByteBuf, EntityTagTest> streamCodec() {
+      return STREAM_CODEC.cast();
+    }
   }
 }

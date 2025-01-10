@@ -12,6 +12,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.snapshot.SnapshotSerializer;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.test.entity.EntityTestType;
+import mysticmods.roots.api.world.WorldTestType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -28,6 +29,7 @@ public class RootsRegistries {
   public static final Registry<PlayerCondition> PLAYER_CONDITIONS = new RegistryBuilder<>(Keys.PLAYER_CONDITIONS).sync(true).create();
   public static final Registry<SnapshotSerializer<?>> SNAPSHOT_SERIALIZERS = new RegistryBuilder<>(Keys.SNAPSHOT_SERIALIZERS).sync(true).create();
   public static final Registry<EntityTestType<?>> ENTITY_TEST_TYPES = new RegistryBuilder<>(Keys.ENTITY_TEST_TYPES).sync(true).create();
+  public static final Registry<WorldTestType<?>> WORLD_TEST_TYPES = new RegistryBuilder<>(Keys.WORLD_TEST_TYPES).sync(true).create();
   public static final Registry<Grove> GROVES = new RegistryBuilder<>(Keys.GROVES).sync(true).create();
 
   public static class Keys {
@@ -43,6 +45,7 @@ public class RootsRegistries {
     public static ResourceKey<Registry<SnapshotSerializer<?>>>
         SNAPSHOT_SERIALIZERS = key(RootsAPI.rl("snapshot_serializers"));
     public static ResourceKey<Registry<EntityTestType<?>>> ENTITY_TEST_TYPES = key(RootsAPI.rl("entity_test_types"));
+    public static ResourceKey<Registry<WorldTestType<?>>> WORLD_TEST_TYPES = key(RootsAPI.rl("world_test_types"));
     public static ResourceKey<Registry<Grove>> GROVES = key(RootsAPI.rl("groves"));
 
     private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {

@@ -6,7 +6,13 @@ import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.snapshot.SnapshotSerializer;
+import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
+import mysticmods.roots.recipe.grove.GroveRecipe;
+import mysticmods.roots.recipe.mortar.MortarRecipe;
+import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.recipe.runic.RunicBlockRecipe;
+import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.snapshot.ExtensionSnapshot;
 import mysticmods.roots.snapshot.PetalShellSnapshot;
 import mysticmods.roots.snapshot.SkySoarerSnapshot;
@@ -24,14 +30,13 @@ public class ModSerializers {
 
   // Recipe Serializers
   public static final DeferredHolder<RecipeSerializer<?>, DynamicBarkRecipe.Serializer> DYNAMIC_BARK = RECIPE_SERIALIZERS.register("dynamic_bark", DynamicBarkRecipe.Serializer::new);
-  /*  public static final DeferredHolder<RecipeSerializer<?>, GroveRecipe.Serializer> GROVE_CRAFTING = RECIPE_SERIALIZERS.register("grove", () -> new GroveRecipe.Serializer());*/
-  /*public static final DeferredHolder<RecipeSerializer<?>, MortarRecipe.Serializer> MORTAR = RECIPE_SERIALIZERS.register("mortar", () -> new MortarRecipe.Serializer());
-  public static final DeferredHolder<RecipeSerializer<?>, SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = RECIPE_SERIALIZERS.register("summon_creatures", () -> new SummonCreaturesRecipe.Serializer());
-  public static final DeferredHolder<RecipeSerializer<?>, PyreRecipe.Serializer> PYRE = RECIPE_SERIALIZERS.register("pyre", () -> new PyreRecipe.Serializer());
-  public static final DeferredHolder<RecipeSerializer<?>, BarkRecipe.Serializer> BARK = RECIPE_SERIALIZERS.register("bark", () -> new BarkRecipe.Serializer());
-  public static final DeferredHolder<RecipeSerializer<?>, DynamicBarkRecipe.Serializer> DYNAMIC_BARK = RECIPE_SERIALIZERS.register("dynamic_bark", () -> new DynamicBarkRecipe.Serializer());
-  public static final DeferredHolder<RecipeSerializer<?>, RunicBlockRecipe.Serializer> RUNIC_BLOCK = RECIPE_SERIALIZERS.register("runic_block", () -> new RunicBlockRecipe.Serializer());
-  public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", () -> new RunicEntityRecipe.Serializer());*/
+   public static final DeferredHolder<RecipeSerializer<?>, GroveRecipe.Serializer> GROVE_CRAFTING = RECIPE_SERIALIZERS.register("grove", GroveRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, MortarRecipe.Serializer> MORTAR = RECIPE_SERIALIZERS.register("mortar", MortarRecipe.Serializer::new);
+  /*public static final DeferredHolder<RecipeSerializer<?>, SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = RECIPE_SERIALIZERS.register("summon_creatures", () -> new SummonCreaturesRecipe.Serializer());*/
+  public static final DeferredHolder<RecipeSerializer<?>, PyreRecipe.Serializer> PYRE = RECIPE_SERIALIZERS.register("pyre", PyreRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, BarkRecipe.Serializer> BARK = RECIPE_SERIALIZERS.register("bark", BarkRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, RunicBlockRecipe.Serializer> RUNIC_BLOCK = RECIPE_SERIALIZERS.register("runic_block", RunicBlockRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", RunicEntityRecipe.Serializer::new);
 
   public static final DeferredHolder<SnapshotSerializer<?>, SkySoarerSnapshot.Serializer> SKY_SOARER = SNAPSHOT_SERIALIZERS.register("sky_soarer", () -> new SkySoarerSnapshot.Serializer(SkySoarerSnapshot::new));
   public static final DeferredHolder<SnapshotSerializer<?>, PetalShellSnapshot.Serializer> PETAL_SHELL = SNAPSHOT_SERIALIZERS.register("petal_shell", () -> new PetalShellSnapshot.Serializer(PetalShellSnapshot::new));

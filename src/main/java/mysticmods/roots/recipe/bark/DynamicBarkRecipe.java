@@ -3,6 +3,7 @@ package mysticmods.roots.recipe.bark;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.WorldCondition;
+import mysticmods.roots.api.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -45,7 +46,7 @@ public class DynamicBarkRecipe extends BarkRecipe {
   @Override
   public WorldCondition getCondition() {
     if (barkCondition == null) {
-      barkCondition = new WorldCondition(new TagMatchTest(BlockTags.LOGS));
+      barkCondition = new WorldCondition(new TagMatchWorldTest(BlockTags.LOGS));
     }
     return barkCondition;
   }

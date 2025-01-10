@@ -3,35 +3,37 @@ package mysticmods.roots.api.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
+import mysticmods.roots.api.world.PartialBlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<ItemStackHandler, W> implements IWorldRecipe<W> {
-  protected BlockState outputState;
+  protected PartialBlockState outputState;
   protected WorldCondition condition;
 
   public WorldRecipe() {
   }
 
-  public WorldRecipe(BaseRecipeData data, BlockState outputState, WorldCondition condition) {
+  public WorldRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition) {
     super(data);
     this.outputState = outputState;
     this.condition = condition;
   }
 
   @Override
-  public void setOutputState(BlockState outputState) {
+  public void setOutputState(PartialBlockState outputState) {
     this.outputState = outputState;
   }
 
   @Override
-  public BlockState getOutputState() {
+  public PartialBlockState getOutputState() {
     return this.outputState;
   }
 
@@ -47,7 +49,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
 
   @Override
   public boolean matches(W pContainer, Level pLevel) {
-    return getCondition().test(pContainer.getBlockPos(), pLevel);
+    return getCondition().test(pContainer.getBlockPos(), pLevel, pLevel.getRandom());
   }
 
   @Override
@@ -64,6 +66,9 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
     if (!level.isClientSide()) {
       BlockPos pos = pInv.getBlockPos();
       BlockState newState = modifyState(pInv, level.getBlockState(pos), provider);
+      if (newState == null) {
+        newState = Blocks.AIR.defaultBlockState();
+      }
       level.setBlock(pos, newState, 11);
       Player player = pInv.getPlayer();
       if (player != null) {
