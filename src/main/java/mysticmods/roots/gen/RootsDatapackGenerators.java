@@ -66,6 +66,11 @@ import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = "roots", bus = EventBusSubscriber.Bus.MOD)
 public class RootsDatapackGenerators {
+  // Salts used for the randomization of structure placements
+  public static final int HUT_SALT = 8266497;
+  public static final int BARROW_SALT = 314159223;
+  public static final int STANDING_STONES_SALT = 14987612;
+
   @SubscribeEvent
   public static void onGatherData(GatherDataEvent event) {
     CompletableFuture<HolderLookup.Provider> lookupProvider = event.getGenerator().addProvider(
@@ -151,9 +156,9 @@ public class RootsDatapackGenerators {
                 })
                 .add(Registries.STRUCTURE_SET, bootstrap -> {
                   HolderGetter<Structure> structureGetter = bootstrap.lookup(Registries.STRUCTURE);
-                  bootstrap.register(ModFeatures.BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.BARROW_KEY), new RandomSpreadStructurePlacement(150, 65, RandomSpreadType.LINEAR, 314159223)));
-                  bootstrap.register(ModFeatures.STANDING_STONES_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.STANDING_STONES_KEY), new RandomSpreadStructurePlacement(80, 35, RandomSpreadType.LINEAR, 14987612)));
-                  // TODO: HUT
+                  bootstrap.register(ModFeatures.BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.BARROW_KEY), new RandomSpreadStructurePlacement(150, 65, RandomSpreadType.LINEAR, BARROW_SALT)));
+                  bootstrap.register(ModFeatures.STANDING_STONES_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.STANDING_STONES_KEY), new RandomSpreadStructurePlacement(80, 35, RandomSpreadType.LINEAR, STANDING_STONES_SALT)));
+                  bootstrap.register(ModFeatures.HUT_SET_KEY, new StructureSet(List.of(new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.HUT_KEY), 1), new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.RUINED_HUT_KEY), 1)), new RandomSpreadStructurePlacement(70, 35, RandomSpreadType.LINEAR, HUT_SALT)));
 
                 }),
             Set.of(RootsAPI.MODID)

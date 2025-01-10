@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-09T22:40:16.8569924	Registries
+// 1.21.1	2025-01-10T12:10:17.6551032	Registries
 c20cd59d5be5009c2378c51f50cfd030b05c4362 data/roots/neoforge/biome_modifier/beetle_spawns.json
 8c32577e2e5ad5a5b84223a681039eecfeb91a83 data/roots/neoforge/biome_modifier/deer_spawns.json
 7c331c3d575f4a5546e774a1b844c9db71bc496e data/roots/neoforge/biome_modifier/duck_spawns.json
@@ -24,6 +24,9 @@ fe278c85f1e4aed659ff05d2506fb11e3426759e data/roots/worldgen/structure/barrow.js
 0f232c2d5e2e5485f4cadd03dfd0a43b553aef1c data/roots/worldgen/structure/hut.json
 e04b12dcf7c2a014184ef3b5bb259b88cae2a074 data/roots/worldgen/structure/ruined_hut.json
 ef2cf544c2846dc8f80cf8261c38a31d2b35d15f data/roots/worldgen/structure/standing_stones.json
+521c5c2e14bbe5d735eb106501a61a37243d9223 data/roots/worldgen/structure_set/barrow.json
+d4818cd803325af5f299d0730d65b441c9ed9ae9 data/roots/worldgen/structure_set/hut.json
+6f143fe565ee067e1ae52c5c853214459fc9de8a data/roots/worldgen/structure_set/standing_stones.json
 055605b83af86949c27eba8af7da3b13f6d50b3e data/roots/worldgen/template_pool/barrow_pool/down_pool.json
 9d6af09c974557fae530f5c34a0da21766088eb0 data/roots/worldgen/template_pool/barrow_pool/start_pool.json
 d437243959a46591630cc18321a5562798c0bd00 data/roots/worldgen/template_pool/hut_pool/down_pool.json

@@ -1,0 +1,18 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 8266497,
+    "separation": 35,
+    "spacing": 70
+  },
+  "structures": [
+    {
+      "structure": "roots:hut",
+      "weight": 1
+    },
+    {
+      "structure": "roots:ruined_hut",
+      "weight": 1
+    }
+  ]
+}
