@@ -92,11 +92,13 @@ public class RootsDatapackGenerators {
                 .add(Registries.PLACED_FEATURE, bootstrap -> {
                   HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = bootstrap.lookup(Registries.CONFIGURED_FEATURE);
                   bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_KEY), List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.wouldSurvive(ModBlocks.WILD_AUBERGINE.get().defaultBlockState(), BlockPos.ZERO))))));
+                  // THESE DO!
                   bootstrap.register(ModFeatures.PLACED_WILD_ROOTS_UNDERGROUND_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_ROOTS_KEY), List.of(
                       CountPlacement.of(40), // How many attempts per chunk
                       InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
                       new HeightmapYRange(ConstantHeight.of(VerticalAnchor.absolute(-32)), Heightmap.Types.WORLD_SURFACE_WG) // Pick spot between y = 6 and heightmap of terrain above
                   )));
+                  // TODO: These do not
                   bootstrap.register(ModFeatures.PLACED_WILD_ROOTS_FOREST_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_ROOTS_KEY), List.of(
                       BiomeFilter.biome(),
                       CountPlacement.of(254), // How many attempts per chunk
