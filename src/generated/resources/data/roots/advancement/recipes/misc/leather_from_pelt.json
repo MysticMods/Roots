@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pelt": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:pelt"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:leather_from_pelt"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pelt"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:leather_from_pelt"
+    ]
+  }
+}

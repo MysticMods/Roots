@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "tag": "roots:runestone"
+    },
+    {
+      "tag": "roots:crops/grove_moss"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:mossy_runestone"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "tag": "roots:flint"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "SFS",
+    " L ",
+    "S S"
+  ],
+  "result": {
+    "count": 4,
+    "id": "roots:fire_starter"
+  }
+}

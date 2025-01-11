@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "roots:runestone_brick"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:runestone_brick_button"
+  }
+}

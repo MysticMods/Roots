@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "roots:runed_tile"
+  },
+  "result": {
+    "count": 1,
+    "id": "roots:runed_tile_button"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "roots:stonepetal"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:gray_dye"
+  }
+}

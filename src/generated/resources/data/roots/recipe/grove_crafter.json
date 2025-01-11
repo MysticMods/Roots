@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "R": {
+      "tag": "roots:runestone"
+    }
+  },
+  "pattern": [
+    "LLL",
+    " L ",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:grove_crafter"
+  }
+}

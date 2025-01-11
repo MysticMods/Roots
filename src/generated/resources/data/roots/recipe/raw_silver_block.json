@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "roots:raw_silver"
+    },
+    "X": {
+      "tag": "c:raw_materials/silver"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XIX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:raw_silver_block"
+  }
+}

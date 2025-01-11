@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "roots:runed_tile"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:runed_tile_button"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "roots:mossy_runestone"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:mossy_runestone_button"
+  }
+}

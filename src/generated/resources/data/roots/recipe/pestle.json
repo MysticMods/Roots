@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": {
+      "tag": "roots:stonelike"
+    }
+  },
+  "pattern": [
+    "  S",
+    "SS ",
+    "SS "
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:pestle"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    " LL",
+    "L  ",
+    " LL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:wooden_shears"
+  }
+}

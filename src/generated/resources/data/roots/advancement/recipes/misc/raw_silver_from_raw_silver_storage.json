@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_silver_storage": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:storage_blocks/raw_silver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:raw_silver_from_raw_silver_storage"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_silver_storage"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:raw_silver_from_raw_silver_storage"
+    ]
+  }
+}

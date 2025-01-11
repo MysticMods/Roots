@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "W": {
+      "tag": "roots:planks/wildwood"
+    },
+    "X": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "X X",
+    "XWX",
+    "X X"
+  ],
+  "result": {
+    "count": 3,
+    "id": "roots:wildwood_ladder"
+  }
+}

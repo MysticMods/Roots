@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "roots:runestone_tile"
+  },
+  "result": {
+    "count": 1,
+    "id": "roots:runestone_tile_wall"
+  }
+}

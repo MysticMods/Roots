@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_runestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:runed_obsidian"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:reinforced_pyre"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_runestone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:reinforced_pyre"
+    ]
+  }
+}

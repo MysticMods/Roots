@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:glass_bottle"
+    },
+    "P": {
+      "item": "minecraft:sea_pickle"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "PPP",
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "roots:vinegar"
+  }
+}

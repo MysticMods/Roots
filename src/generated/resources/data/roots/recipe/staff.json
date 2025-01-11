@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "W": {
+      "tag": "roots:runestone_herbs"
+    },
+    "X": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    " WX",
+    " XW",
+    "X  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:staff"
+  }
+}

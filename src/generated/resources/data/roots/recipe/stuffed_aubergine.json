@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "roots:cooked_aubergine"
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "roots:vegetables"
+      },
+      "subtracted": {
+        "item": "roots:aubergine"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "roots:vegetables"
+      },
+      "subtracted": {
+        "item": "roots:aubergine"
+      }
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "roots:cooked_vegetables"
+      },
+      "subtracted": {
+        "item": "roots:cooked_aubergine"
+      }
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:stuffed_aubergine"
+  }
+}

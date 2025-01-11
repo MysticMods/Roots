@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_grove_pedestal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "roots:grove_pedestal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lever": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:levers"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:display_pedestal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_grove_pedestal",
+      "has_lever"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:display_pedestal"
+    ]
+  }
+}

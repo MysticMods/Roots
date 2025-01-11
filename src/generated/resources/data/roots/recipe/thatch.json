@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "X": {
+      "item": "minecraft:hay_block"
+    },
+    "Y": {
+      "tag": "c:crops/wheat"
+    }
+  },
+  "pattern": [
+    "XY",
+    "YX"
+  ],
+  "result": {
+    "count": 32,
+    "id": "roots:thatch"
+  }
+}

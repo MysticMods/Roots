@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:beetroot"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "K": {
+      "item": "minecraft:kelp"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "KKK",
+    "BBB"
+  ],
+  "result": {
+    "count": 3,
+    "id": "roots:beetroot_salad"
+  }
+}

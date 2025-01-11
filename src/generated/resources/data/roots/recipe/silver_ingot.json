@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "roots:silver_nugget"
+    },
+    "X": {
+      "tag": "c:nuggets/silver"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XIX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:silver_ingot"
+  }
+}
