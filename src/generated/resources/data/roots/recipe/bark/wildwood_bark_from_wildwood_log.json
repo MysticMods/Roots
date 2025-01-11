@@ -1,0 +1,22 @@
+{
+  "type": "roots:bark",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "type": "roots:tag_match_test",
+      "tag": "roots:bark_logs/wildwood"
+    }
+  },
+  "data": {
+    "result": {
+      "count": 3,
+      "id": "roots:wildwood_bark"
+    }
+  },
+  "stateMapper": {
+    "mapBlock": {
+      "roots:wildwood_log": "roots:stripped_wildwood_log",
+      "roots:wildwood_wood": "roots:stripped_wildwood_wood"
+    }
+  }
+}

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flour": {
+    "has_assorted_seeds": {
       "conditions": {
         "items": [
           {
-            "items": "roots:flour"
+            "items": "roots:assorted_seeds"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:bread_from_roots_campfire_cooking"
+        "recipe": "roots:cooked_seeds_from_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_flour"
+      "has_assorted_seeds"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:bread_from_roots_campfire_cooking"
+      "roots:cooked_seeds_from_smoking"
     ]
   }
 }

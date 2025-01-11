@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:bark/mangrove_bark_from_mangrove_log"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_knife": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:knives"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_knife"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:bark/mangrove_bark_from_mangrove_log"
+    ]
+  }
+}

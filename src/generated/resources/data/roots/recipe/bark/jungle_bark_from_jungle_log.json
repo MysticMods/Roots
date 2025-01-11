@@ -1,0 +1,22 @@
+{
+  "type": "roots:bark",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "type": "roots:tag_match_test",
+      "tag": "roots:bark_logs/jungle"
+    }
+  },
+  "data": {
+    "result": {
+      "count": 3,
+      "id": "roots:jungle_bark"
+    }
+  },
+  "stateMapper": {
+    "mapBlock": {
+      "minecraft:jungle_log": "minecraft:stripped_jungle_log",
+      "minecraft:jungle_wood": "minecraft:stripped_jungle_wood"
+    }
+  }
+}

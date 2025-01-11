@@ -33,21 +33,33 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
   @Override
   public List<LevelCondition> getLevelConditions() {
+    if (this.data.levelConditions == null) {
+      return List.of();
+    }
     return this.data.levelConditions;
   }
 
   @Override
   public List<PlayerCondition> getPlayerConditions() {
+    if (this.data.playerConditions == null) {
+      return List.of();
+    }
     return this.data.playerConditions;
   }
 
   @Override
   public List<ChanceOutput> getChanceOutputs() {
+    if (this.data.chanceOutputs == null) {
+      return List.of();
+    }
     return this.data.chanceOutputs;
   }
 
   @Override
   public List<Unlock<?>> getUnlocks() {
+    if (this.data.unlocks == null) {
+      return List.of();
+    }
     return this.data.unlocks;
   }
 

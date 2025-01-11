@@ -30,9 +30,9 @@ import java.util.Optional;
 public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static MapCodec<BarkRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
-      PartialBlockState.CODEC.optionalFieldOf("outputState", null).forGetter((o) -> o.outputState),
+      PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
       WorldCondition.CODEC.fieldOf("condition").forGetter(o -> o.condition),
-      OutputStateMapper.CODEC.optionalFieldOf("stateMapper", null).forGetter(o -> o.stateMapper)
+      OutputStateMapper.CODEC.optionalFieldOf("stateMapper").forGetter(o -> Optional.ofNullable(o.stateMapper))
   ).apply(instance, BarkRecipe::new));
   public static StreamCodec<RegistryFriendlyByteBuf, BarkRecipe> STREAM_CODEC = StreamCodec.composite(
       BaseRecipeData.STREAM_CODEC, o -> o.data,
@@ -87,7 +87,7 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
       }
     }
 
-    if (currentState.getBlock() instanceof RotatedPillarBlock && outputState.getBlock() instanceof RotatedPillarBlock) {
+    if (currentState.getBlock() instanceof RotatedPillarBlock && newState.getBlock() instanceof RotatedPillarBlock) {
       newState = newState.setValue(RotatedPillarBlock.AXIS, currentState.getValue(RotatedPillarBlock.AXIS));
     }
 

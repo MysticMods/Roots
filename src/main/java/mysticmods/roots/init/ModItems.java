@@ -585,199 +585,17 @@ public class ModItems {
     .register();*/
 
   public static DeferredHolder<Item, Item> INK_BOTTLE = ITEMS.register("ink_bottle", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("ink_bottle", Item::new)
-    .properties(o -> o.craftRemainder(Items.GLASS_BOTTLE))
-    .recipe((ctx, p) -> RECIPES.dye(ModItems.INK_BOTTLE, () -> Items.BLACK_DYE, 1, 2, p))
-    .register();*/
-
   public static final DeferredHolder<Item, Item> ACACIA_BARK = ITEMS.register("acacia_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("acacia_bark", Item::new)
-    .tag(RootsTags.Items.ACACIA_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_ACACIA_LOG.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.ACACIA_LOG)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/acacia_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_ACACIA_WOOD.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.ACACIA_WOOD)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/acacia_wood_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> BIRCH_BARK = ITEMS.register("birch_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("birch_bark", Item::new)
-    .tag(RootsTags.Items.BIRCH_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_BIRCH_LOG.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.BIRCH_LOG)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/birch_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_BIRCH_WOOD.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.BIRCH_WOOD)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/birch_wood_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> DARK_OAK_BARK = ITEMS.register("dark_oak_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("dark_oak_bark", Item::new)
-    .tag(RootsTags.Items.DARK_OAK_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_DARK_OAK_LOG.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.DARK_OAK_LOG)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/dark_oak_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.DARK_OAK_WOOD)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/dark_oak_wood_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> JUNGLE_BARK = ITEMS.register("jungle_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("jungle_bark", Item::new)
-    .tag(RootsTags.Items.JUNGLE_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_JUNGLE_LOG.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.JUNGLE_LOG)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/jungle_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_JUNGLE_WOOD.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.JUNGLE_WOOD)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/jungle_wood_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> OAK_BARK = ITEMS.register("oak_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("oak_bark", Item::new)
-    .tag(RootsTags.Items.OAK_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_OAK_LOG.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.OAK_LOG)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/oak_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_OAK_WOOD.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.OAK_WOOD)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/oak_wood_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> SPRUCE_BARK = ITEMS.register("spruce_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("spruce_bark", Item::new)
-    .tag(RootsTags.Items.SPRUCE_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_SPRUCE_LOG.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.SPRUCE_LOG)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/spruce_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_SPRUCE_WOOD.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.SPRUCE_WOOD)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/spruce_wood_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> WILDWOOD_BARK = ITEMS.register("wildwood_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("wildwood_bark", Item::new)
-    .tag(RootsTags.Items.WILDWOOD_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(ModBlocks.STRIPPED_WILDWOOD_LOG.getDefaultState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(ModBlocks.WILDWOOD_LOG.get())))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/wildwood_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(ModBlocks.STRIPPED_WILDWOOD_WOOD.getDefaultState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(ModBlocks.WILDWOOD_WOOD.get())))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/wildwood_wood_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> CRIMSON_BARK = ITEMS.register("crimson_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("crimson_bark", Item::new)
-    .tag(RootsTags.Items.CRIMSON_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_CRIMSON_STEM.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.CRIMSON_STEM)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/crimson_stem_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_CRIMSON_HYPHAE.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.CRIMSON_HYPHAE)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/crimson_hyphae_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> WARPED_BARK = ITEMS.register("warped_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("warped_bark", Item::new)
-    .tag(RootsTags.Items.WARPED_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_WARPED_STEM.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.WARPED_STEM)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/warped_stem_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_WARPED_HYPHAE.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.WARPED_HYPHAE)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/warped_hyphae_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> MANGROVE_BARK = ITEMS.register("mangrove_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("mangrove_bark", Item::new)
-    .tag(RootsTags.Items.MANGROVE_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      BarkRecipe.builder(ctx.getEntry(), 2)
-        .setOutputState(Blocks.STRIPPED_MANGROVE_LOG.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.MANGROVE_LOG)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/mangrove_log_stripping"));
-      BarkRecipe.builder(ctx.getEntry(), 3)
-        .setOutputState(Blocks.STRIPPED_MANGROVE_WOOD.defaultBlockState())
-        .setCondition(new WorldRecipe.Condition(new BlockMatchTest(Blocks.MANGROVE_WOOD)))
-        .unlockedBy("has_knife", p.has(RootsTags.Items.KNIVES))
-        .save(p, RootsAPI.rl("bark/mangrove_wood_stripping"));
-    })
-    .register();*/
-
   public static final DeferredHolder<Item, Item> MIXED_BARK = ITEMS.register("mixed_bark", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("mixed_bark", Item::new)
-    .tag(RootsTags.Items.MIXED_BARK)
-    .model(subfolder("bark"))
-    .recipe((ctx, p) -> {
-      p.accept(new DynamicBarkRecipe.Result());
-    })
-    .register();*/
 
   public static final DeferredHolder<Item, Item> APOTHECARY_POUCH = ITEMS.register("apothecary_pouch", () -> new Item(DEFAULT_SINGLE.get()));
 /*      REGISTRATE.item("apothecary_pouch", Item::new)
@@ -818,16 +636,6 @@ public class ModItems {
 */
 
   public static final DeferredHolder<Item, Item> WILDEWHEET_BREAD = ITEMS.register("wildewheet_bread", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("wildewheet_bread", Item::new)
-    .model(subfolder("food"))
-    .recipe((ctx, p) -> {
-      ShapedRecipeBuilder.shaped(ctx.getEntry())
-        .pattern("XXX")
-        .define('X', RootsTags.Items.WILDEWHEET_CROP)
-        .unlockedBy("has_wildewheet", p.has(RootsTags.Items.WILDEWHEET_CROP))
-        .save(p, RootsAPI.rl("wildewheet_bread"));
-    })
-    .register();*/
 
   public static final DeferredHolder<Item, Item> WILDROOT_STEW = ITEMS.register("wildroot_stew", () -> new Item(new Item.Properties().food(ModFoods.WILDROOT_STEW).stacksTo(64)));
 /*      REGISTRATE.item("wildroot_stew", Item::new)
@@ -863,14 +671,7 @@ public class ModItems {
     .register();*/
 
   public static final DeferredHolder<Item, Item> GRAMARY = ITEMS.register("gramary", () -> new Item(DEFAULT_SINGLE.get()));
-/*      REGISTRATE.item("gramary", Item::new)
-    .model(subfolder("tools"))
-    .register();*/
-
   public static final DeferredHolder<Item, Item> LIVING_ARROW = ITEMS.register("living_arrow", () -> new Item(DEFAULT_64.get()));
-/*      REGISTRATE.item("living_arrow", Item::new)
-    .model(subfolder("tools"))
-    .register();*/
 
   public static final DeferredHolder<Item, LivingAxeItem> LIVING_AXE = ITEMS.register("living_axe", () -> new LivingAxeItem(RootsAPI.LIVING_TOOL_TIER, new Item.Properties()));
   /*  7.0F, -3.2F));*/

@@ -1,32 +1,32 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flour": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:cooked_venison_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_venison": {
       "conditions": {
         "items": [
           {
-            "items": "roots:flour"
+            "items": "roots:venison"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "roots:bread_from_roots_smoking"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_flour"
+      "has_venison"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:bread_from_roots_smoking"
+      "roots:cooked_venison_from_smoking"
     ]
   }
 }

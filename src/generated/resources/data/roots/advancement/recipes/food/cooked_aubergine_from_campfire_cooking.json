@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_carrot": {
+    "has_aubergine": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:carrot"
+            "items": "roots:aubergine"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:cooked_carrot_from_roots_smoking"
+        "recipe": "roots:cooked_aubergine_from_campfire_cooking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_carrot"
+      "has_aubergine"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:cooked_carrot_from_roots_smoking"
+      "roots:cooked_aubergine_from_campfire_cooking"
     ]
   }
 }

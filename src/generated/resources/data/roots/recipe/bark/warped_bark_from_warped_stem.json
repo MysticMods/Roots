@@ -1,0 +1,22 @@
+{
+  "type": "roots:bark",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "type": "roots:tag_match_test",
+      "tag": "roots:bark_logs/warped"
+    }
+  },
+  "data": {
+    "result": {
+      "count": 3,
+      "id": "roots:warped_bark"
+    }
+  },
+  "stateMapper": {
+    "mapBlock": {
+      "minecraft:warped_hyphae": "minecraft:stripped_warped_hyphae",
+      "minecraft:warped_stem": "minecraft:stripped_warped_stem"
+    }
+  }
+}

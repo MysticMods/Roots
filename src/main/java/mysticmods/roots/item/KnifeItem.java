@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -46,14 +47,12 @@ public class KnifeItem extends BaseItems.KnifeItem {
       }
 
       if (player != null) {
-        itemstack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+        itemstack.hurtAndBreak(1, player, pContext.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
       }
 
       if (!level.isClientSide()) {
-        List<ItemStack> results = new ArrayList<>();
+        List<ItemStack> results = recipe.value().assembleOutputs(crafting, level.getRandom(), level.registryAccess(), null);
         // TODO: Item could be empty with only chance outputs
-        results.add(recipe.value().assemble(crafting, level.registryAccess()));
-        results.addAll(recipe.value().assembleChanceOutputs(crafting, level.getRandom(), level.registryAccess()));
         for (ItemStack stack : results) {
           ItemUtil.Spawn.spawnItem(level, player == null ? blockpos : player.blockPosition(), stack);
         }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:cooked_pereskia_from_roots_smoking"
+        "recipe": "roots:cooked_pereskia_from_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:cooked_pereskia_from_roots_smoking"
+      "roots:cooked_pereskia_from_smoking"
     ]
   }
 }

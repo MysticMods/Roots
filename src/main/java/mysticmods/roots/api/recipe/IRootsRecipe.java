@@ -36,13 +36,21 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return result;
   }
 
-  List<LevelCondition> getLevelConditions();
+  default List<LevelCondition> getLevelConditions() {
+    return List.of();
+  }
 
-  List<PlayerCondition> getPlayerConditions();
+  default List<PlayerCondition> getPlayerConditions() {
+    return List.of();
+  }
 
-  List<ChanceOutput> getChanceOutputs();
+  default List<ChanceOutput> getChanceOutputs() {
+    return List.of();
+  }
 
-  List<Unlock<?>> getUnlocks();
+  default List<Unlock<?>> getUnlocks() {
+    return List.of();
+  }
 
   default ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
     List<PlayerCondition> failedPlayer = new ArrayList<>();

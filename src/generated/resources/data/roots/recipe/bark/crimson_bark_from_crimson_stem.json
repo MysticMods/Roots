@@ -1,0 +1,22 @@
+{
+  "type": "roots:bark",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "type": "roots:tag_match_test",
+      "tag": "roots:bark_logs/crimson"
+    }
+  },
+  "data": {
+    "result": {
+      "count": 3,
+      "id": "roots:crimson_bark"
+    }
+  },
+  "stateMapper": {
+    "mapBlock": {
+      "minecraft:crimson_hyphae": "minecraft:stripped_crimson_hyphae",
+      "minecraft:crimson_stem": "minecraft:stripped_crimson_stem"
+    }
+  }
+}

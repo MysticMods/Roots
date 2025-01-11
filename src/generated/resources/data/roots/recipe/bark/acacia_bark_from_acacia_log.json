@@ -1,0 +1,22 @@
+{
+  "type": "roots:bark",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "type": "roots:tag_match_test",
+      "tag": "roots:bark_logs/acacia"
+    }
+  },
+  "data": {
+    "result": {
+      "count": 3,
+      "id": "roots:acacia_bark"
+    }
+  },
+  "stateMapper": {
+    "mapBlock": {
+      "minecraft:acacia_log": "minecraft:stripped_acacia_log",
+      "minecraft:acacia_wood": "minecraft:stripped_acacia_wood"
+    }
+  }
+}

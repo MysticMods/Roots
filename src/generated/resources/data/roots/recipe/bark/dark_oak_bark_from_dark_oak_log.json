@@ -1,0 +1,22 @@
+{
+  "type": "roots:bark",
+  "condition": {
+    "shift": "none",
+    "test": {
+      "type": "roots:tag_match_test",
+      "tag": "roots:bark_logs/dark_oak"
+    }
+  },
+  "data": {
+    "result": {
+      "count": 3,
+      "id": "roots:dark_oak_bark"
+    }
+  },
+  "stateMapper": {
+    "mapBlock": {
+      "minecraft:dark_oak_log": "minecraft:stripped_dark_oak_log",
+      "minecraft:dark_oak_wood": "minecraft:stripped_dark_oak_wood"
+    }
+  }
+}

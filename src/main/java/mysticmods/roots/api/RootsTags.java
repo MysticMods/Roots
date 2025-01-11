@@ -167,15 +167,16 @@ public class RootsTags {
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
 
     // Bark recipes
-    public static final TagKey<Block> OAK_LOGS = modTag("logs/oak");
-    public static final TagKey<Block> BIRCH_LOGS = modTag("logs/birch");
-    public static final TagKey<Block> SPRUCE_LOGS = modTag("logs/spruce");
-    public static final TagKey<Block> JUNGLE_LOGS = modTag("logs/jungle");
-    public static final TagKey<Block> ACACIA_LOGS = modTag("logs/acacia");
-    public static final TagKey<Block> DARK_OAK_LOGS = modTag("logs/dark_oak");
-    public static final TagKey<Block> MANGROVE_LOGS = modTag("logs/mangrove");
-    public static final TagKey<Block> CRIMSON_STEMS = modTag("logs/crimson");
-    public static final TagKey<Block> WARPED_STEMS = modTag("logs/warped");
+    public static final TagKey<Block> OAK_LOGS_TO_STRIP = modTag("bark_logs/oak");
+    public static final TagKey<Block> BIRCH_LOGS_TO_STRIP = modTag("bark_logs/birch");
+    public static final TagKey<Block> SPRUCE_LOGS_TO_STRIP = modTag("bark_logs/spruce");
+    public static final TagKey<Block> JUNGLE_LOGS_TO_STRIP = modTag("bark_logs/jungle");
+    public static final TagKey<Block> ACACIA_LOGS_TO_STRIP = modTag("bark_logs/acacia");
+    public static final TagKey<Block> DARK_OAK_LOGS_TO_STRIP = modTag("bark_logs/dark_oak");
+    public static final TagKey<Block> MANGROVE_LOGS_TO_STRIP = modTag("bark_logs/mangrove");
+    public static final TagKey<Block> CRIMSON_STEMS_TO_STRIP = modTag("bark_logs/crimson");
+    public static final TagKey<Block> WARPED_STEMS_TO_STRIP = modTag("bark_logs/warped");
+    public static final TagKey<Block> WILDWOOD_LOGS_TO_STRIP = modTag("bark_logs/wildwood");
 
 
     private static TagKey<Block> modTag(String name) {

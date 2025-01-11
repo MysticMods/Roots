@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_carrot": {
+    "has_flour": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:carrot"
+            "items": "roots:flour"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:cooked_carrot_from_roots_campfire_cooking"
+        "recipe": "roots:bread_from_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_carrot"
+      "has_flour"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:cooked_carrot_from_roots_campfire_cooking"
+      "roots:bread_from_smoking"
     ]
   }
 }

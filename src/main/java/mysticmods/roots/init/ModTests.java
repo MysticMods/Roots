@@ -3,10 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.test.entity.EntityTestType;
-import mysticmods.roots.api.world.AlwaysTrueWorldTest;
-import mysticmods.roots.api.world.BlockMatchWorldTest;
-import mysticmods.roots.api.world.TagMatchWorldTest;
-import mysticmods.roots.api.world.WorldTestType;
+import mysticmods.roots.api.world.*;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
 import net.neoforged.bus.api.IEventBus;
@@ -23,8 +20,10 @@ public class ModTests {
   public static final DeferredHolder<WorldTestType<?>, WorldTestType<AlwaysTrueWorldTest>> ALWAYS_TRUE_TEST = WORLD_TESTS.register(AlwaysTrueWorldTest.ALWAYS_TRUE_TEST_KEY.location().getPath(), AlwaysTrueWorldTest.Type::new);
   public static final DeferredHolder<WorldTestType<?>, WorldTestType<BlockMatchWorldTest>> BLOCK_MATCH_TEST = WORLD_TESTS.register(BlockMatchWorldTest.BLOCK_MATCH_TEST_KEY.location().getPath(), BlockMatchWorldTest.Type::new);
   public static final DeferredHolder<WorldTestType<?>, WorldTestType<TagMatchWorldTest>> TAG_MATCH_TEST = WORLD_TESTS.register(TagMatchWorldTest.TAG_MATCH_TEST_KEY.location().getPath(), TagMatchWorldTest.Type::new);
+  public static final DeferredHolder<WorldTestType<?>, WorldTestType<PartialBlockStateMatchWorldTest>> PARTIAL_BLOCK_STATE_MATCH_TEST = WORLD_TESTS.register(PartialBlockStateMatchWorldTest.PARTIAL_BLOCK_STATE_MATCH_TEST_KEY.location().getPath(), PartialBlockStateMatchWorldTest.Type::new);
 
   public static void register(IEventBus bus) {
     ENTITY_TESTS.register(bus);
+    WORLD_TESTS.register(bus);
   }
 }
