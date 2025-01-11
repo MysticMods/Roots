@@ -11,6 +11,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
@@ -137,7 +138,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .define('X', RootsTags.Items.COPPER_NUGGET)
         .define('I', ModItems.COPPER_NUGGET.get())
         .unlockedBy("has_copper_nugget", has(RootsTags.Items.COPPER_NUGGET))
-        .save(c);
+        .save(c, RootsAPI.rl("copper_ingot_from_nuggets"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WILDWOOD_WOOD.get(), 3)
         .pattern("XX")

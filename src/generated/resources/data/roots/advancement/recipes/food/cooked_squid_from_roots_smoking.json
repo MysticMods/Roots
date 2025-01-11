@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_squid": {
+      "conditions": {
+        "items": [
+          {
+            "items": "roots:raw_squid"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:cooked_squid_from_roots_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_squid"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:cooked_squid_from_roots_smoking"
+    ]
+  }
+}
