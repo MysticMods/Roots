@@ -65,6 +65,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.RUNESTONE_BUTTON.get());
       event.accept(ModItems.RUNESTONE_BRICK_BUTTON.get());
       event.accept(ModItems.RUNESTONE_TILE_BUTTON.get());
+      event.accept(ModItems.MOSSY_RUNESTONE_BUTTON.get());
       event.accept(ModItems.RUNED_BUTTON.get());
       event.accept(ModItems.RUNED_BRICK_BUTTON.get());
       event.accept(ModItems.RUNED_TILE_BUTTON.get());
@@ -72,6 +73,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.RUNESTONE_PRESSURE_PLATE.get());
       event.accept(ModItems.RUNESTONE_BRICK_PRESSURE_PLATE.get());
       event.accept(ModItems.RUNESTONE_TILE_PRESSURE_PLATE.get());
+      event.accept(ModItems.MOSSY_RUNESTONE_PRESSURE_PLATE.get());
       event.accept(ModItems.RUNED_PRESSURE_PLATE.get());
       event.accept(ModItems.RUNED_BRICK_PRESSURE_PLATE.get());
       event.accept(ModItems.RUNED_TILE_PRESSURE_PLATE.get());

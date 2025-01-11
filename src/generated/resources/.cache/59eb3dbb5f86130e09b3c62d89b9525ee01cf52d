@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-09T18:32:45.6194827	Loot Tables
+// 1.21.1	2025-01-11T13:42:42.1463461	Loot Tables
 e8472c417eb64cb3ad295f65ece125190c4620e0 data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -24,8 +24,8 @@ a1ace70d28c4f526854daa5e5473f01b307abe29 data/roots/loot_table/blocks/incense_bu
 b7c0b6bd67d815f2799dae1e374f975f44368870 data/roots/loot_table/blocks/moonglow_crop.json
 fdd86adc88a3330b338aa69cd7dcf2d0d460019a data/roots/loot_table/blocks/mortar.json
 5db5e042860b2cf322326dbaea934b13e117831d data/roots/loot_table/blocks/mossy_runestone.json
-ae28dd7c12d662417d5bd37f31d4f2c479177841 data/roots/loot_table/blocks/mossy_runestone_button.json
-d2f30e2b662366e958735b43aaf9450f62c2523e data/roots/loot_table/blocks/mossy_runestone_pressure_plate.json
+42666c5c7f0aed4c586039c14b14f477597cd8b1 data/roots/loot_table/blocks/mossy_runestone_button.json
+0ec21d01ebadc4ed527cd1c3cb44ef63b11ac77b data/roots/loot_table/blocks/mossy_runestone_pressure_plate.json
 aa0c8a5207aaa043f93472a4ae0bef4079cb2ef0 data/roots/loot_table/blocks/mossy_runestone_slab.json
 e6898cf09bcafcd0e6d0448d13acbe51260b26c3 data/roots/loot_table/blocks/mossy_runestone_stairs.json
 a3311241fa20742c213e132ef4552bca87895db7 data/roots/loot_table/blocks/mossy_runestone_wall.json

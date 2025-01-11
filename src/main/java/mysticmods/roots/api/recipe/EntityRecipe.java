@@ -10,15 +10,11 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
   protected EntityTest test;
 
   public EntityRecipe() {
+    super();
   }
 
   public EntityRecipe(BaseRecipeData data, EntityTest test) {
     super(data);
-    this.test = test;
-  }
-
-  @Override
-  public void setEntityTest(EntityTest test) {
     this.test = test;
   }
 

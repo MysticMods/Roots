@@ -7,11 +7,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public interface IWorldRecipe<W extends IWorldCrafting> extends IRootsRecipe<W> {
-  void setOutputState (PartialBlockState state);
   PartialBlockState getOutputState ();
-
   WorldCondition getCondition ();
-  void setCondition(WorldCondition condition);
 
   @Nullable
   BlockState modifyState (W container, BlockState state, HolderLookup.Provider provider);

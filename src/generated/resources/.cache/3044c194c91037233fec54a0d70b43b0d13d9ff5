@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-09T18:32:45.6254796	Roots Block Tags
+// 1.21.1	2025-01-11T13:42:42.1508752	Roots Block Tags
 4dd1110a08f7c4386cffaa774af4841bc323c2f1 data/c/tags/block/crops.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -83,6 +83,13 @@ c0e5ac26bc57a1a6ba571b21d7fab9d6bbb6d318 data/roots/tags/block/grove_stones.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/force.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/reduce.json
+307dae19f196ef71116992f2c10a1d6367d71c5e data/roots/tags/block/logs/acacia.json
+e6a66df990a2e59f597879f3e0d9245712d32f88 data/roots/tags/block/logs/birch.json
+2ddd875c07a1d545574ca44984d769bb007a839e data/roots/tags/block/logs/crimson.json
+5f5643831865b48706a8ff8da2bf2bcd7d5e929d data/roots/tags/block/logs/dark_oak.json
+9f76ce32d2132a2dc0b2c123e4808332394251d9 data/roots/tags/block/logs/jungle.json
+ef69f74d96a0b9cd58f7e8f004b2c7a830741305 data/roots/tags/block/logs/mangrove.json
+6e496f1f3bd31bbed2abd5ec85bc028d3babe3d6 data/roots/tags/block/logs/oak.json
 047b7c7631a4b09bd9bbdf8c77cfe781370cd790 data/roots/tags/block/logs/runed.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/block/logs/runed/acacia.json
 4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/roots/tags/block/logs/runed/birch.json
@@ -94,6 +101,8 @@ e16c92e31940c0c62767ba46b55ac10f3e133b58 data/roots/tags/block/logs/runed/mangro
 36bfb819f350d3eb47ea68b0827dc8806efd8a37 data/roots/tags/block/logs/runed/spruce.json
 441a3240108cd2a8be4b02e0a0d23d5f878e4f09 data/roots/tags/block/logs/runed/warped.json
 cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/block/logs/runed/wildwood.json
+e025f5442dbf42cdb4e53084ad686f26138d8e97 data/roots/tags/block/logs/spruce.json
+c6d64392f19c3ab3c5d775941e0be342c11f81e7 data/roots/tags/block/logs/warped.json
 1b76b7887fbceab43d0a517275981c378378e349 data/roots/tags/block/logs/wildwood.json
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/block/mortars.json
 cb2e3c6e79dbddd59965ce0c2ca7dfda8ac64ea3 data/roots/tags/block/nyi.json

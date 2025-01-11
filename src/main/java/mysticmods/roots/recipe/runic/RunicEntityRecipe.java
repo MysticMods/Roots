@@ -61,18 +61,6 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
     return durabilityCost;
   }
 
-  public void setCooldown(int cooldown) {
-    this.cooldown = cooldown;
-  }
-
-  public void setDurabilityCost(int durabilityCost) {
-    this.durabilityCost = durabilityCost;
-  }
-
-  @Override
-  public void setIngredients(NonNullList<Ingredient> ingredients) {
-  }
-
   @Override
   public RecipeSerializer<?> getSerializer() {
     return ModSerializers.RUNIC_ENTITY.get();

@@ -1,7 +1,15 @@
 package mysticmods.roots.api;
 
 import com.mojang.datafixers.util.Function7;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.Block;
 
 import java.util.function.Function;
 
@@ -38,5 +46,12 @@ public class ExtraStreamCodecs {
         arg7.encode(object, function7.apply(object2));
       }
     };
+  }
+
+  public static final StreamCodec<ByteBuf, TagKey<Block>> BLOCK_TAG_STREAM_CODEC = tagStreamCodec(Registries.BLOCK);
+  public static final StreamCodec<ByteBuf, TagKey<EntityType<?>>> ENTITY_TAG_STREAM_CODEC = tagStreamCodec(Registries.ENTITY_TYPE);
+
+  public static <T> StreamCodec<ByteBuf, TagKey<T>> tagStreamCodec(ResourceKey<Registry<T>> registry) {
+    return ResourceLocation.STREAM_CODEC.map(o -> TagKey.create(registry, o), TagKey::location);
   }
 }

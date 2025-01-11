@@ -1,7 +1,5 @@
 package mysticmods.roots.api.recipe;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import mysticmods.roots.api.world.PartialBlockState;
 import net.minecraft.core.BlockPos;
@@ -28,11 +26,6 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   }
 
   @Override
-  public void setOutputState(PartialBlockState outputState) {
-    this.outputState = outputState;
-  }
-
-  @Override
   public PartialBlockState getOutputState() {
     return this.outputState;
   }
@@ -40,11 +33,6 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   @Override
   public WorldCondition getCondition() {
     return condition;
-  }
-
-  @Override
-  public void setCondition(WorldCondition condition) {
-    this.condition = condition;
   }
 
   @Override

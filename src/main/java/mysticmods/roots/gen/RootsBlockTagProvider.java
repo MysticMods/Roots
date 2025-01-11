@@ -254,7 +254,18 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Blocks.PILLARS).addTags(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Blocks.LOG_PILLARS);
 
+    //noinspection unchecked
     this.tag(BlockTags.MINEABLE_WITH_AXE).addTags(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS).add(GROVE_CRAFTER.get());
+
+    this.tag(RootsTags.Blocks.OAK_LOGS).add(Blocks.OAK_LOG, Blocks.OAK_WOOD);
+    this.tag(RootsTags.Blocks.SPRUCE_LOGS).add(Blocks.SPRUCE_LOG, Blocks.SPRUCE_WOOD);
+    this.tag(RootsTags.Blocks.BIRCH_LOGS).add(Blocks.BIRCH_LOG, Blocks.BIRCH_WOOD);
+    this.tag(RootsTags.Blocks.JUNGLE_LOGS).add(Blocks.JUNGLE_LOG, Blocks.JUNGLE_WOOD);
+    this.tag(RootsTags.Blocks.ACACIA_LOGS).add(Blocks.ACACIA_LOG, Blocks.ACACIA_WOOD);
+    this.tag(RootsTags.Blocks.DARK_OAK_LOGS).add(Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_WOOD);
+    this.tag(RootsTags.Blocks.CRIMSON_STEMS).add(Blocks.CRIMSON_STEM, Blocks.CRIMSON_HYPHAE);
+    this.tag(RootsTags.Blocks.WARPED_STEMS).add(Blocks.WARPED_STEM, Blocks.WARPED_HYPHAE);
+    this.tag(RootsTags.Blocks.MANGROVE_LOGS).add(Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD);
   }
 
   @Override

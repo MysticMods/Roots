@@ -32,21 +32,6 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
   @Override
-  public void setIngredients(NonNullList<Ingredient> ingredients) {
-    this.data.ingredients = ingredients;
-  }
-
-  @Override
-  public void setLevelConditions(List<LevelCondition> levelConditions) {
-    this.data.levelConditions = levelConditions;
-  }
-
-  @Override
-  public void setPlayerConditions(List<PlayerCondition> playerConditions) {
-    this.data.playerConditions = playerConditions;
-  }
-
-  @Override
   public List<LevelCondition> getLevelConditions() {
     return this.data.levelConditions;
   }
@@ -57,22 +42,8 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
   @Override
-  public void setResultItem(ItemStack result) {
-    this.data.result = result;
-  }
-
-  @Override
-  public void setChanceOutputs(List<ChanceOutput> chanceOutputs) {
-    this.data.chanceOutputs = chanceOutputs;
-  }
-
-  @Override
   public List<ChanceOutput> getChanceOutputs() {
     return this.data.chanceOutputs;
-  }
-
-  public void setUnlocks(List<Unlock<?>> grants) {
-    this.data.unlocks = grants;
   }
 
   @Override

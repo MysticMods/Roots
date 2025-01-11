@@ -86,11 +86,15 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
     return state;
   }
 
-  public BlockState copy (BlockState oldState) {
-    return copy(oldState, Collections.emptyList());
+  public PartialBlockState copy () {
+    return new PartialBlockState(block, new HashMap<>(propertyMap));
   }
 
-  public BlockState copy (BlockState oldState, List<String> toSkip) {
+  public BlockState copyState(BlockState oldState) {
+    return copyState(oldState, Collections.emptyList());
+  }
+
+  public BlockState copyState(BlockState oldState, List<String> toSkip) {
     BlockState state = block.defaultBlockState();
     Set<Property<?>> completed = new HashSet<>();
     for (Map.Entry<String, Property.Value<?>> entry : propertyMap.entrySet()) {

@@ -12,15 +12,12 @@ import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -59,16 +56,8 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     this.durabilityCost = durabilityCost;
   }
 
-  @Override
-  public void setIngredients(NonNullList<Ingredient> ingredients) {
-  }
-
   public int getDurabilityCost() {
     return durabilityCost;
-  }
-
-  public void setDurabilityCost(int cost) {
-    this.durabilityCost = cost;
   }
 
   public List<String> getSkipProperties() {
@@ -78,7 +67,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   @Nullable
   public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState state, HolderLookup.Provider provider) {
-    return outputState.copy(state, getSkipProperties());
+    return outputState.copyState(state, getSkipProperties());
   }
 
   @Override

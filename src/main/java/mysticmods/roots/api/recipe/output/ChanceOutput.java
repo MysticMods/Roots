@@ -53,6 +53,16 @@ public class ChanceOutput {
     return chance;
   }
 
+  public ChanceOutput copy () {
+    return new ChanceOutput(output.copy(), chance);
+  }
+
+  public ChanceOutput multiply (int value) {
+    ItemStack newStack = output.copy();
+    newStack.setCount(newStack.getCount() * value);
+    return new ChanceOutput(newStack, chance);
+  }
+
   public static List<ItemStack> getOutputs(List<ChanceOutput> chanceOptions, RandomSource random) {
     List<ItemStack> result = new ArrayList<>();
     for (ChanceOutput output : chanceOptions) {

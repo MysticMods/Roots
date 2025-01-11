@@ -2,6 +2,7 @@ package mysticmods.roots.test.entity;
 
 import com.mojang.serialization.MapCodec;
 import io.netty.buffer.ByteBuf;
+import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.test.entity.EntityTest;
 import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.init.ModTests;
@@ -15,7 +16,7 @@ import net.minecraft.world.entity.EntityType;
 
 public class EntityTagTest extends EntityTest {
   public static final MapCodec<EntityTagTest> CODEC = TagKey.codec(Registries.ENTITY_TYPE).fieldOf("tag").xmap(EntityTagTest::new, (p_205065_) -> p_205065_.tag);
-  public static final StreamCodec<ByteBuf, EntityTagTest> STREAM_CODEC = ResourceLocation.STREAM_CODEC.map(o -> new EntityTagTest(TagKey.create(Registries.ENTITY_TYPE, o)), test -> test.tag.location());
+  public static final StreamCodec<ByteBuf, EntityTagTest> STREAM_CODEC = ExtraStreamCodecs.ENTITY_TAG_STREAM_CODEC.map(EntityTagTest::new, test -> test.tag);
 
   protected final TagKey<EntityType<?>> tag;
 

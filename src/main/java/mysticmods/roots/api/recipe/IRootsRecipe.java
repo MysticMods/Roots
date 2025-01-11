@@ -36,23 +36,11 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return result;
   }
 
-  void setIngredients(NonNullList<Ingredient> ingredients);
-
-  void setLevelConditions(List<LevelCondition> levelConditions);
-
-  void setPlayerConditions(List<PlayerCondition> playerConditions);
-
   List<LevelCondition> getLevelConditions();
 
   List<PlayerCondition> getPlayerConditions();
 
-  void setResultItem(ItemStack result);
-
-  void setChanceOutputs(List<ChanceOutput> chanceOutputs);
-
   List<ChanceOutput> getChanceOutputs();
-
-  void setUnlocks(List<Unlock<?>> grants);
 
   List<Unlock<?>> getUnlocks();
 

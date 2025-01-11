@@ -12,12 +12,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
-import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 
-import java.awt.*;
 import java.util.concurrent.CompletableFuture;
 
 public class RootsRecipeProvider extends RecipeProvider {
@@ -386,7 +383,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     // TODO: Grove crafter
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WILDWOOD_PEDESTAL.get(), 4)
-        .pattern("LLLL")
+        .pattern("LLL")
         .pattern(" L ")
         .pattern("LLL")
         .define('L', RootsTags.Items.WILDWOOD_LOGS)
@@ -490,11 +487,11 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.FLOUR.get()), RecipeCategory.FOOD, Items.BREAD, 0.35F, 200)
         .unlockedBy("has_flour", has(ModItems.FLOUR.get()))
-        .save(c);
+        .save(c, RootsAPI.rl("bread_from_flour"));
 
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItems.PERESKIA_BULB.get()), RecipeCategory.FOOD, ModItems.COOKED_PERESKIA.get(), 0.35F, 200)
         .unlockedBy("has_pereskia_bulb", has(ModItems.PERESKIA_BULB.get()))
-        .save(c);
+        .save(c, RootsAPI.rl("cooked_pereskia_from_pereskia_bulb"));
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.ASSORTED_SEEDS.get(), 4)
         .requires(Tags.Items.SEEDS)
@@ -632,26 +629,26 @@ public class RootsRecipeProvider extends RecipeProvider {
     // KNIFE RECIPES
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.RAW_SILVER), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 200)
         .unlockedBy("has_raw_silver", has(RootsTags.Items.RAW_SILVER))
-        .save(c);
+        .save(c, RootsAPI.rl("silver_ingot_from_smelting_raw_silver"));
     SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.RAW_SILVER), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 100)
         .unlockedBy("has_raw_silver", has(RootsTags.Items.RAW_SILVER))
-        .save(c);
+        .save(c, RootsAPI.rl("silver_ingot_from_blasting_raw_silver"));
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_SILVER.get(), 9)
         .requires(RootsTags.Items.RAW_SILVER_STORAGE)
         .unlockedBy("has_raw_silver_storage", has(RootsTags.Items.RAW_SILVER_STORAGE))
-        .save(c);
+        .save(c, RootsAPI.rl("raw_silver_from_raw_silver_storage"));
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 9)
         .requires(RootsTags.Items.SILVER_STORAGE)
         .unlockedBy("has_silver_storage", has(RootsTags.Items.SILVER_STORAGE))
-        .save(c);
+        .save(c, RootsAPI.rl("silver_ingot_from_silver_storage"));
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SILVER_NUGGET.get(), 9)
         .requires(RootsTags.Items.SILVER_INGOT)
         .unlockedBy("has_silver_ingot", has(RootsTags.Items.SILVER_INGOT))
-        .save(c);
+        .save(c, RootsAPI.rl("silver_nugget_from_silver_ingot"));
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.COPPER_NUGGET.get(), 9)
         .requires(Tags.Items.INGOTS_COPPER)
         .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
-        .save(c);
+        .save(c, RootsAPI.rl("copper_nugget_from_copper_ingot"));
 
     // recycling recipes
   }

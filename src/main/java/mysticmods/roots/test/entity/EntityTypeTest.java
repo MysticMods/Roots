@@ -1,6 +1,6 @@
 package mysticmods.roots.test.entity;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.test.entity.EntityTest;
 import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.init.ModTests;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EntityTypeTest extends EntityTest {
-  public static final Codec<EntityTypeTest> CODEC = BuiltInRegistries.ENTITY_TYPE.byNameCodec().listOf().fieldOf("types").xmap(EntityTypeTest::new, (p_205065_) -> p_205065_.types).codec();
+  public static final MapCodec<EntityTypeTest> CODEC = BuiltInRegistries.ENTITY_TYPE.byNameCodec().listOf().fieldOf("types").xmap(EntityTypeTest::new, (p_205065_) -> p_205065_.types);
   public static final StreamCodec<RegistryFriendlyByteBuf, EntityTypeTest> STREAM_CODEC = ByteBufCodecs.registry(Registries.ENTITY_TYPE).apply(ByteBufCodecs.list()).map(EntityTypeTest::new, test -> test.types);
 
   private final List<EntityType<?>> types;
@@ -47,7 +47,7 @@ public class EntityTypeTest extends EntityTest {
 
   public static class Type implements EntityTestType<EntityTypeTest> {
     @Override
-    public Codec<EntityTypeTest> codec() {
+    public MapCodec<EntityTypeTest> codec() {
       return CODEC;
     }
 

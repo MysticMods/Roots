@@ -166,6 +166,18 @@ public class RootsTags {
     public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
 
+    // Bark recipes
+    public static final TagKey<Block> OAK_LOGS = modTag("logs/oak");
+    public static final TagKey<Block> BIRCH_LOGS = modTag("logs/birch");
+    public static final TagKey<Block> SPRUCE_LOGS = modTag("logs/spruce");
+    public static final TagKey<Block> JUNGLE_LOGS = modTag("logs/jungle");
+    public static final TagKey<Block> ACACIA_LOGS = modTag("logs/acacia");
+    public static final TagKey<Block> DARK_OAK_LOGS = modTag("logs/dark_oak");
+    public static final TagKey<Block> MANGROVE_LOGS = modTag("logs/mangrove");
+    public static final TagKey<Block> CRIMSON_STEMS = modTag("logs/crimson");
+    public static final TagKey<Block> WARPED_STEMS = modTag("logs/warped");
+
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
