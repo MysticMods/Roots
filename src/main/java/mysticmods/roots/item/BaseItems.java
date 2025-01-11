@@ -8,6 +8,7 @@ import net.minecraft.world.item.*;
 import java.util.List;
 
 public class BaseItems {
+  @Deprecated
   public static class BowlItem extends MultiReturnItem {
     public BowlItem(Properties properties) {
       super(properties);
@@ -24,6 +25,7 @@ public class BaseItems {
     }
   }
 
+  @Deprecated
   @SuppressWarnings("NullableProblems")
   public static class DrinkItem extends MultiReturnItem {
     public DrinkItem(Properties properties) {

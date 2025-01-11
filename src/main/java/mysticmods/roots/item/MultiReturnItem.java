@@ -8,6 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
+// TODO: There's a property for it now
+@Deprecated
 public abstract class MultiReturnItem extends Item {
   public MultiReturnItem(Properties properties) {
     super(properties);
