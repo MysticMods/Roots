@@ -1,5 +1,6 @@
 package mysticmods.roots.api.recipe;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -8,33 +9,23 @@ import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementRequirements;
-import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class BaseRecipeData {
-  // TODO: Should this be List.of() instead of new ArrayList<>()?
   public static final MapCodec<BaseRecipeData> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       Ingredient.CODEC_NONEMPTY.listOf().optionalFieldOf("ingredients", List.of()).flatXmap(
           list -> {
@@ -53,6 +44,7 @@ public class BaseRecipeData {
       ChanceOutput.LIST_CODEC.optionalFieldOf("chanceOutputs", List.of()).forGetter(o -> o.chanceOutputs),
       Unlock.LIST_CODEC.optionalFieldOf("unlocks", List.of()).forGetter(o -> o.unlocks)
   ).apply(instance, BaseRecipeData::new));
+  public static Codec<BaseRecipeData> OPTIONAL_CODEC = ExtraCodecs.optionalEmptyMap(CODEC.codec()).xmap(o -> o.orElse(new BaseRecipeData()), o -> o == null ? Optional.empty() : Optional.of(o));
   public static StreamCodec<RegistryFriendlyByteBuf, NonNullList<Ingredient>> INGREDIENT_LIST_STREAM = Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.collection(NonNullList::createWithCapacity));
   public static final StreamCodec<RegistryFriendlyByteBuf, BaseRecipeData> STREAM_CODEC = ExtraStreamCodecs.composite(
       ByteBufCodecs.optional(INGREDIENT_LIST_STREAM), o -> c(o.ingredients),
@@ -99,6 +91,10 @@ public class BaseRecipeData {
     this.results = data.results;
     this.chanceOutputs = data.chanceOutputs;
     this.unlocks = data.unlocks;
+  }
+
+  public boolean isEmpty () {
+    return ingredients.isEmpty() && levelConditions.isEmpty() && playerConditions.isEmpty() && result.isEmpty() && results.isEmpty() && chanceOutputs.isEmpty() && unlocks.isEmpty();
   }
 
   // TODO: Why does this exist

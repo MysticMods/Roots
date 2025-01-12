@@ -20,9 +20,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
+import java.util.Optional;
+
 public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
   public static final MapCodec<RunicEntityRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-      BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
+      BaseRecipeData.CODEC.codec().optionalFieldOf("data").forGetter((o) -> o.data.isEmpty() ? Optional.empty() : Optional.of(o.data)),
       EntityTest.CODEC.fieldOf("test").forGetter((o) -> o.test),
       Codec.INT.fieldOf("cooldown").forGetter((o) -> o.cooldown),
       Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost)
@@ -46,6 +48,11 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
     super(data, test);
     this.cooldown = cooldown;
     this.durabilityCost = durabilityCost;
+  }
+
+  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+  public RunicEntityRecipe(Optional<BaseRecipeData> baseRecipeData, EntityTest entityTest, int cooldown, int durabilityCost) {
+    this(baseRecipeData.orElseGet(BaseRecipeData::new), entityTest, cooldown, durabilityCost);
   }
 
   @Override

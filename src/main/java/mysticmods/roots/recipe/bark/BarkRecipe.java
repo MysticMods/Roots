@@ -34,7 +34,7 @@ import java.util.Optional;
 
 public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static MapCodec<BarkRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-      BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
+      BaseRecipeData.CODEC.codec().optionalFieldOf("data").forGetter(o -> o.data.isEmpty() ? Optional.empty() : Optional.of(o.data)),
       PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
       WorldCondition.CODEC.fieldOf("condition").forGetter(o -> o.condition),
       Codec.STRING.listOf().optionalFieldOf("skipProperties").forGetter((o) -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties)),
@@ -72,6 +72,11 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
   public BarkRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState, WorldCondition worldCondition, Optional<List<String>> skipProperties, int durabilityCost, Optional<OutputStateMapper> stateMapper) {
     this(baseRecipeData, partialBlockState.orElse(null), worldCondition, skipProperties.orElse(List.of()), durabilityCost, stateMapper.orElse(null));
+  }
+
+  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+  public BarkRecipe(Optional<BaseRecipeData> baseRecipeData, Optional<PartialBlockState> partialBlockState, WorldCondition worldCondition, Optional<List<String>> strings, Integer integer, Optional<OutputStateMapper> outputStateMapper) {
+    super(baseRecipeData.orElse(new BaseRecipeData()), partialBlockState.orElse(null), worldCondition, strings.orElse(List.of()));
   }
 
   @Nullable

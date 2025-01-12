@@ -19,6 +19,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.Property;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,6 +48,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   );
 
   protected int durabilityCost = 1;
+  @Nullable
   private OutputStateMapper stateMapper;
 
   public RunicBlockRecipe() {

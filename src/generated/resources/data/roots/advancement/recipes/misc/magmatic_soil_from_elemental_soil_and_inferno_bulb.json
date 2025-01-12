@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_elemental_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "roots:elemental_soil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_inferno_bulb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:herbs/inferno_bulb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:magmatic_soil_from_elemental_soil_and_inferno_bulb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_elemental_soil",
+      "has_inferno_bulb"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:magmatic_soil_from_elemental_soil_and_inferno_bulb"
+    ]
+  }
+}

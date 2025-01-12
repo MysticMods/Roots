@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-12T13:17:20.5499331	Roots Item Tags
+// 1.21.1	2025-01-12T15:16:52.1224678	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -8,6 +8,7 @@ d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 4c3bfce7b1456b68f71b17c9426d9e3008caa95c data/c/tags/item/seeds.json
 459c049b3972ac3906b4b224acfb2830965bf92c data/c/tags/item/storage_blocks/raw_silver.json
 cd950175fadc56e90dec5f776fb9160949dafcfe data/c/tags/item/storage_blocks/silver.json
+3c841c97e7e2fcbeb86c1ff92141c065010ffdae data/minecraft/tags/item/piglin_loved.json
 87f3beeddef89647fae4b5de6f8f86178e11f390 data/roots/tags/item/antlers.json
 609845b65c52a4ee325309afd5a5e66297d85bc0 data/roots/tags/item/barks.json
 f84f7ba61349a204c6cce987fd1a6ff40bdb79a6 data/roots/tags/item/barks/acacia.json

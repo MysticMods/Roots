@@ -1,0 +1,24 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "minecraft:small_flowers"
+      },
+      {
+        "tag": "minecraft:small_flowers"
+      },
+      {
+        "tag": "minecraft:small_flowers"
+      },
+      {
+        "tag": "minecraft:small_flowers"
+      }
+    ],
+    "result": {
+      "count": 4,
+      "id": "roots:petals"
+    }
+  },
+  "times": 4
+}

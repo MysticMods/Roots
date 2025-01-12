@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      }
+    ],
+    "result": {
+      "count": 5,
+      "id": "roots:runic_dust"
+    }
+  },
+  "times": 5
+}

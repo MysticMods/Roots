@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_elemental_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "roots:elemental_soil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stalicripe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:herbs/stalicripe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:terran_soil_from_elemental_soil_and_stalicripe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_elemental_soil",
+      "has_stalicripe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:terran_soil_from_elemental_soil_and_stalicripe"
+    ]
+  }
+}

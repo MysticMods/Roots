@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:grove/runestone_4"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:stonelike"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_stone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:grove/runestone_4"
+    ]
+  }
+}

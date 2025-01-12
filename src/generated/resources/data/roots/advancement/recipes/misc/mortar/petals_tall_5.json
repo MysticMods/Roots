@@ -1,17 +1,17 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
+    "has the recipe": {
       "conditions": {
-        "recipe": "roots:wildwood_pedestal"
+        "recipe": "roots:mortar/petals_tall_5"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_wildwood_logs": {
+    "has_tall_flowers": {
       "conditions": {
         "items": [
           {
-            "items": "#roots:logs/wildwood"
+            "items": "#minecraft:tall_flowers"
           }
         ]
       },
@@ -20,13 +20,13 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_wildwood_logs"
+      "has the recipe",
+      "has_tall_flowers"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:wildwood_pedestal"
+      "roots:mortar/petals_tall_5"
     ]
   }
 }

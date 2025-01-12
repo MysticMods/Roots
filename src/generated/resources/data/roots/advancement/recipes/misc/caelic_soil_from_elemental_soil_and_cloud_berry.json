@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cloud_berry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:herbs/cloud_berry"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_elemental_soil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "roots:elemental_soil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:caelic_soil_from_elemental_soil_and_cloud_berry"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_elemental_soil",
+      "has_cloud_berry"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:caelic_soil_from_elemental_soil_and_cloud_berry"
+    ]
+  }
+}

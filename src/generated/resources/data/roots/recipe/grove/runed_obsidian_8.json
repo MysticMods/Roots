@@ -1,0 +1,38 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "c:obsidians"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "roots:runestone"
+      },
+      {
+        "tag": "c:obsidians"
+      }
+    ],
+    "levelConditions": [
+      "roots:valid_grove_stone"
+    ],
+    "result": {
+      "count": 8,
+      "id": "roots:runed_obsidian"
+    }
+  }
+}

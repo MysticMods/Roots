@@ -1,9 +1,12 @@
 package mysticmods.roots.api.recipe;
 
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import mysticmods.roots.api.world.PartialBlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -11,11 +14,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<ItemStackHandler, W> implements IWorldRecipe<W> {
+  @Nullable
   protected PartialBlockState outputState;
   protected WorldCondition condition;
   protected List<String> skipProperties = new ArrayList<>();
@@ -31,6 +36,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   }
 
   @Override
+  @Nullable
   public PartialBlockState getOutputState() {
     return this.outputState;
   }
@@ -71,10 +77,9 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
       Player player = pInv.getPlayer();
       if (player != null) {
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(pInv.getPlayer(), newState));
-        // TODO: Unlocks
-/*        for (Grant grant : getUnlocks()) {
-          grant.grant((ServerPlayer) player);
-        }*/
+        for (Unlock<?> unlock : getUnlocks()) {
+          RootsAPI.getInstance().unlock((ServerPlayer)player, unlock);
+        }
       }
     }
 

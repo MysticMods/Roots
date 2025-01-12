@@ -1,0 +1,9 @@
+{
+  "type": "roots:runic_entity",
+  "cooldown": 2400,
+  "durabilityCost": 1,
+  "test": {
+    "type": "roots:entity_tag_test",
+    "tag": "roots:fey_leather"
+  }
+}

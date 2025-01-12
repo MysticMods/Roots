@@ -1,0 +1,17 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:stonelike"
+      }
+    ],
+    "levelConditions": [
+      "roots:valid_grove_stone"
+    ],
+    "result": {
+      "count": 1,
+      "id": "roots:runestone"
+    }
+  }
+}

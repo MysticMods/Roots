@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:grove/elemental_soil"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_runic_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:dusts/runic"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_runic_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:grove/elemental_soil"
+    ]
+  }
+}

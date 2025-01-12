@@ -1,5 +1,6 @@
 package mysticmods.roots.api.recipe;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
+// TODO: List of ItemStack results
 public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   default NonNullList<ItemStack> process(List<ItemStack> ingredients) {
     NonNullList<ItemStack> result = NonNullList.create();
@@ -76,10 +78,9 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   default UnlockResult checkUnlocks(Level level, ServerPlayer player) {
     List<Unlock<?>> result = new ArrayList<>();
     for (Unlock<?> unlock : getUnlocks()) {
-      // TODO:
-/*      if (!RootsAPI.getInstance().canGrant(player, grant)) {
-        result.add(grant);
-      }*/
+      if (RootsAPI.getInstance().canUnlock(player, unlock)) {
+        result.add(unlock);
+      }
     }
 
     return new UnlockResult(result, player);

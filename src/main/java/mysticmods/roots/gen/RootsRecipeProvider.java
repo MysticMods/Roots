@@ -1,5 +1,6 @@
 package mysticmods.roots.gen;
 
+import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.recipe.BaseRecipeData;
@@ -7,9 +8,14 @@ import mysticmods.roots.api.recipe.WorldCondition;
 import mysticmods.roots.api.world.BlockMatchWorldTest;
 import mysticmods.roots.api.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
+import mysticmods.roots.recipe.grove.GroveRecipe;
+import mysticmods.roots.recipe.mortar.MortarRecipe;
+import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import mysticmods.roots.test.entity.EntityTagTest;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -395,15 +401,6 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_logs", has(ItemTags.LOGS))
         .save(c);
 
-    // TODO: Grove crafter
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WILDWOOD_PEDESTAL.get(), 4)
-        .pattern("LLL")
-        .pattern(" L ")
-        .pattern("LLL")
-        .define('L', RootsTags.Items.WILDWOOD_LOGS)
-        .unlockedBy("has_wildwood_logs", has(RootsTags.Items.WILDWOOD_LOGS))
-        .save(c);
-
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DISPLAY_PEDESTAL.get())
         .requires(ModBlocks.GROVE_PEDESTAL.get())
         .requires(RootsTags.Items.LEVERS)
@@ -685,22 +682,103 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(BarkRecipe.Builder.create().condition(new WorldCondition(new TagMatchWorldTest(RootsTags.Blocks.WILDWOOD_LOGS_TO_STRIP))).stateMapper(ModBlocks.WILDWOOD_LOG.get(), ModBlocks.STRIPPED_WILDWOOD_LOG.get(), ModBlocks.WILDWOOD_WOOD.get(), ModBlocks.STRIPPED_WILDWOOD_WOOD.get()).build(BaseRecipeData.Builder.create().result(ModItems.WILDWOOD_BARK, 3)), c, RootsAPI.rl("bark/wildwood_bark_from_wildwood_log"));
 
+    BaseRecipeData.Builder groveRunestoneBuilder = BaseRecipeData.Builder.create()
+        .requires(RootsTags.Items.STONELIKE)
+        .condition(ModConditions.GROVE_STONE_VALID.get())
+        .result(ModBlocks.RUNESTONE, 1);
+
+    // TODO: Simplify this
+    RecipeSaver saver = RecipeSaver.saver().unlockedBy("has_stone", has(RootsTags.Items.STONELIKE));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder), c, RootsAPI.rl("grove/runestone_1"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(2)), c, RootsAPI.rl("grove/runestone_2"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(3)), c, RootsAPI.rl("grove/runestone_3"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(4)), c, RootsAPI.rl("grove/runestone_4"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(5)), c, RootsAPI.rl("grove/runestone_5"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(6)), c, RootsAPI.rl("grove/runestone_6"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(7)), c, RootsAPI.rl("grove/runestone_7"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(8)), c, RootsAPI.rl("grove/runestone_8"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(9)), c, RootsAPI.rl("grove/runestone_9"));
+    saver.save(GroveRecipe.Builder.create().build(groveRunestoneBuilder.multiplty(10)), c, RootsAPI.rl("grove/runestone_10"));
+
+    BaseRecipeData.Builder runedObsidianBuilder = BaseRecipeData.Builder.create()
+        .requires(RootsTags.Items.RUNESTONE)
+        .requires(RootsTags.Items.RUNESTONE)
+        .requires(RootsTags.Items.RUNESTONE)
+        .requires(Tags.Items.OBSIDIANS)
+        .condition(ModConditions.GROVE_STONE_VALID.get())
+        .result(ModBlocks.RUNED_OBSIDIAN, 4);
+
+    saver = RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE)).unlockedBy("has_obsidian", has(Tags.Items.OBSIDIANS));
+    saver.save(GroveRecipe.Builder.create().build(runedObsidianBuilder), c, RootsAPI.rl("grove/runed_obsidian_4"));
+    saver.save(GroveRecipe.Builder.create().build(runedObsidianBuilder.multiplty(2)), c, RootsAPI.rl("grove/runed_obsidian_8"));
+
+    RecipeSaver.saver().unlockedBy("has_runic_dust", has(RootsTags.Items.RUNIC_DUST)).save(GroveRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNIC_DUST).requires(Tags.Items.GRAVELS).requires(ItemTags.DIRT).requires(ItemTags.DIRT).requires(ItemTags.DIRT).result(ModItems.ELEMENTAL_SOIL, 4).condition(ModConditions.GROVE_STONE_VALID.get())), c, RootsAPI.rl("grove/elemental_soil"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.AQUEOUS_SOIL.get(), 1).requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.DEWGONIA_HERB).unlockedBy("has_elemental_soil", has(ModItems.ELEMENTAL_SOIL.get())).unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB)).save(c, RootsAPI.rl("aqueous_soil_from_elemental_soil_and_dewgonia"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MAGMATIC_SOIL.get(), 1).requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.INFERNO_BULB_HERB).unlockedBy("has_elemental_soil", has(ModItems.ELEMENTAL_SOIL.get())).unlockedBy("has_inferno_bulb", has(RootsTags.Items.INFERNO_BULB_HERB)).save(c, RootsAPI.rl("magmatic_soil_from_elemental_soil_and_inferno_bulb"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.TERRAN_SOIL.get(), 1).requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.STALICRIPE_HERB).unlockedBy("has_elemental_soil", has(ModItems.ELEMENTAL_SOIL.get())).unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB)).save(c, RootsAPI.rl("terran_soil_from_elemental_soil_and_stalicripe"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.CAELIC_SOIL.get(), 1).requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.CLOUD_BERRY_HERB).unlockedBy("has_elemental_soil", has(ModItems.ELEMENTAL_SOIL.get())).unlockedBy("has_cloud_berry", has(RootsTags.Items.CLOUD_BERRY_HERB)).save(c, RootsAPI.rl("caelic_soil_from_elemental_soil_and_cloud_berry"));
+
+    // TODO: Ritual pedestal
+    // TODO: Reinforced ritual pedestal
+    RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS)).save(GroveRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS).condition(ModConditions.GROVE_STONE_VALID.get()).result(ModBlocks.WILDWOOD_PEDESTAL, 5)), c, RootsAPI.rl("grove/wildwood_pedestal"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DECORATIVE_PYRE.get(), 1).requires(ModItems.PYRE.get()).requires(RootsTags.Items.LEVERS).unlockedBy("has_decorative_pyre", has(ModItems.DECORATIVE_PYRE.get())).unlockedBy("has_lever", has(RootsTags.Items.LEVERS)).save(c, RootsAPI.rl("decorative_pyre_from_decorative_pyre_and_lever"));
+
+    RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE)).save(GroveRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.PETALS).requires(RootsTags.Items.GROVE_MOSS_HERB).condition(ModConditions.GROVE_STONE_VALID.get()).requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))), c, RootsAPI.rl("grove/runic_shears"));
+
+    RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS)).save(RunicEntityRecipe.Builder.create().test(new EntityTagTest(RootsTags.Entities.FEY_LEATHER)).cooldown(2*60*20).build(BaseRecipeData.Builder.create()), c, RootsAPI.rl("runic_entity/fey_leather"));
+
+    BaseRecipeData.Builder basePetalsBuilder = BaseRecipeData.Builder.create().requires(ItemTags.SMALL_FLOWERS).result(ModItems.PETALS, 1);
+    MortarRecipe.Builder petalsBuilder = MortarRecipe.Builder.create().times(1);
+
+    saver = RecipeSaver.saver().unlockedBy("has_small_flowers", has(ItemTags.SMALL_FLOWERS));
+    saver.save(petalsBuilder.build(basePetalsBuilder), c, RootsAPI.rl("mortar/petals"));
+    saver.save(petalsBuilder.times(2).build(basePetalsBuilder.multiplty(2)), c, RootsAPI.rl("mortar/petals_2"));
+    saver.save(petalsBuilder.times(3).build(basePetalsBuilder.multiplty(3)), c, RootsAPI.rl("mortar/petals_3"));
+    saver.save(petalsBuilder.times(4).build(basePetalsBuilder.multiplty(4)), c, RootsAPI.rl("mortar/petals_4"));
+    saver.save(petalsBuilder.times(5).build(basePetalsBuilder.multiplty(5)), c, RootsAPI.rl("mortar/petals_5"));
+
+    basePetalsBuilder = BaseRecipeData.Builder.create().requires(ItemTags.TALL_FLOWERS).result(ModItems.PETALS, 2);
+    petalsBuilder = MortarRecipe.Builder.create().times(1);
+
+    saver = RecipeSaver.saver().unlockedBy("has_tall_flowers", has(ItemTags.TALL_FLOWERS));
+
+    saver.save(petalsBuilder.build(basePetalsBuilder), c, RootsAPI.rl("mortar/petals_tall"));
+    saver.save(petalsBuilder.times(2).build(basePetalsBuilder.multiplty(2)), c, RootsAPI.rl("mortar/petals_tall_2"));
+    saver.save(petalsBuilder.times(3).build(basePetalsBuilder.multiplty(3)), c, RootsAPI.rl("mortar/petals_tall_3"));
+    saver.save(petalsBuilder.times(4).build(basePetalsBuilder.multiplty(4)), c, RootsAPI.rl("mortar/petals_tall_4"));
+    saver.save(petalsBuilder.times(5).build(basePetalsBuilder.multiplty(5)), c, RootsAPI.rl("mortar/petals_tall_5"));
+
+    MortarRecipe.Builder runicDustBuilder = MortarRecipe.Builder.create().times(5);
+    BaseRecipeData.Builder runicDustData = BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE).result(ModItems.RUNIC_DUST, 1);
+    saver = RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE));
+
+    saver.save(runicDustBuilder.build(runicDustData), c, RootsAPI.rl("mortar/runic_dust"));
+    saver.save(runicDustBuilder.times(2).build(runicDustData.multiplty(2)), c, RootsAPI.rl("mortar/runic_dust_2"));
+    saver.save(runicDustBuilder.times(3).build(runicDustData.multiplty(3)), c, RootsAPI.rl("mortar/runic_dust_3"));
+    saver.save(runicDustBuilder.times(4).build(runicDustData.multiplty(4)), c, RootsAPI.rl("mortar/runic_dust_4"));
+    saver.save(runicDustBuilder.times(5).build(runicDustData.multiplty(5)), c, RootsAPI.rl("mortar/runic_dust_5"));
+
 
   }
 
   public static class RecipeSaver {
     private final Map<String, Criterion<?>> criteria = new HashMap<>();
 
-    public RecipeSaver unlockedBy (String name, Criterion<?> criterion) {
+    public RecipeSaver unlockedBy(String name, Criterion<?> criterion) {
       this.criteria.put(name, criterion);
       return this;
     }
 
-    public static RecipeSaver saver () {
+    public static RecipeSaver saver() {
       return new RecipeSaver();
     }
 
-    public void save (Recipe<?> recipe, RecipeOutput recipeOutput, ResourceLocation id) {
+    public void save(Recipe<?> recipe, RecipeOutput recipeOutput, ResourceLocation id) {
       Advancement.Builder advancements = recipeOutput.advancement()
           .addCriterion("has the recipe", RecipeUnlockedTrigger.unlocked(id))
           .rewards(AdvancementRewards.Builder.recipe(id))
