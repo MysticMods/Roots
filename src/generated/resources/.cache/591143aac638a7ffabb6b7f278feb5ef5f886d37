@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-11T21:12:07.5213829	Item Models: roots
+// 1.21.1	2025-01-12T12:19:52.5866721	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 dfb1282e7837305d24af5f6310f21733fdac68ef assets/roots/models/item/apothecary_pouch.json
@@ -128,6 +128,7 @@ dc7014b7c3f618ecb9ec6deddb464289ae575a6a assets/roots/models/item/runed_brick_st
 072044856069aa3bdfc11c53d73be153af351721 assets/roots/models/item/runed_brick_wall.json
 79bb0f75a35612e05be9e820b17b6cb9f428a46b assets/roots/models/item/runed_button.json
 ba2eb3344a0a5a5fae9d2b370b455e9f3ad34d07 assets/roots/models/item/runed_crimson_stem.json
+de31be53f0a9b94c99903a97259f79399262cc12 assets/roots/models/item/runed_dagger.json
 0a8c547df135abb1feb854beff808491c8bea8bf assets/roots/models/item/runed_dark_oak_log.json
 46e325820a5b0623cc699b4e2b6d6d21512a0435 assets/roots/models/item/runed_hoe.json
 c1c46c2b56e252f1f37879c3cd82d3bd6d9ad1be assets/roots/models/item/runed_jungle_log.json

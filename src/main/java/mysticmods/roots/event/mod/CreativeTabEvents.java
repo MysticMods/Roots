@@ -180,6 +180,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.LIVING_SHOVEL.get());
       event.accept(ModItems.LIVING_SWORD.get());
       event.accept(ModItems.PESTLE.get());
+      event.accept(ModItems.RUNED_DAGGER.get());
       event.accept(ModItems.RUNED_AXE.get());
       event.accept(ModItems.RUNED_HOE.get());
       event.accept(ModItems.RUNED_SHOVEL.get());

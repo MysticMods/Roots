@@ -4,12 +4,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class TooltipDrinkItem extends BaseItems.DrinkItem {
+public class TooltipDrinkItem extends Item {
   private final String translationKey;
 
   public TooltipDrinkItem(String translationKey, Properties properties) {

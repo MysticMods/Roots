@@ -8,41 +8,6 @@ import net.minecraft.world.item.*;
 import java.util.List;
 
 public class BaseItems {
-  @Deprecated
-  public static class BowlItem extends MultiReturnItem {
-    public BowlItem(Properties properties) {
-      super(properties);
-    }
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-      return UseAnim.EAT;
-    }
-
-    @Override
-    protected Item getReturnItem(ItemStack stack) {
-      return Items.BOWL;
-    }
-  }
-
-  @Deprecated
-  @SuppressWarnings("NullableProblems")
-  public static class DrinkItem extends MultiReturnItem {
-    public DrinkItem(Properties properties) {
-      super(properties);
-    }
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-      return UseAnim.DRINK;
-    }
-
-    @Override
-    protected Item getReturnItem(ItemStack stack) {
-      return Items.GLASS_BOTTLE;
-    }
-  }
-
   public static class EffectItem extends Item {
 
     public EffectItem(Properties properties) {
