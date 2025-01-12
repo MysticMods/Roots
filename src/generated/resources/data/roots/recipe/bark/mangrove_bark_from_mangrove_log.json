@@ -13,6 +13,7 @@
       "id": "roots:mangrove_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "minecraft:mangrove_log": "minecraft:stripped_mangrove_log",

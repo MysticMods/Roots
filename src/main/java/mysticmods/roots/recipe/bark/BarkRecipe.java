@@ -1,6 +1,7 @@
 package mysticmods.roots.recipe.bark;
 
 import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
@@ -12,6 +13,7 @@ import mysticmods.roots.api.world.PartialBlockState;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
+import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -22,8 +24,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,34 +37,41 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
       BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
       PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
       WorldCondition.CODEC.fieldOf("condition").forGetter(o -> o.condition),
+      Codec.STRING.listOf().optionalFieldOf("skipProperties").forGetter((o) -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties)),
+      Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost),
       OutputStateMapper.CODEC.optionalFieldOf("stateMapper").forGetter(o -> Optional.ofNullable(o.stateMapper))
   ).apply(instance, BarkRecipe::new));
   public static StreamCodec<RegistryFriendlyByteBuf, BarkRecipe> STREAM_CODEC = StreamCodec.composite(
       BaseRecipeData.STREAM_CODEC, o -> o.data,
       ByteBufCodecs.optional(PartialBlockState.STREAM_CODEC), o -> Optional.ofNullable(o.outputState),
       WorldCondition.STREAM_CODEC, o -> o.condition,
+      ByteBufCodecs.optional(ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list())), o -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties),
+      ByteBufCodecs.VAR_INT, o -> o.durabilityCost,
       ByteBufCodecs.optional(OutputStateMapper.STREAM_CODEC), o -> Optional.ofNullable(o.stateMapper),
       BarkRecipe::new
   );
 
+  private int durabilityCost = 1;
   private OutputStateMapper stateMapper;
 
   public BarkRecipe() {
     super();
   }
 
-  public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition) {
-    super(data, outputState, condition);
+  public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition, List<String> skipProperties, int durabilityCost) {
+    super(data, outputState, condition, skipProperties);
+    this.durabilityCost = durabilityCost;
   }
 
-  public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition, OutputStateMapper stateMapper) {
-    super(data, outputState, condition);
+  public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition, List<String> skipProperties, int durabilityCost, OutputStateMapper stateMapper) {
+    super(data, outputState, condition, skipProperties);
     this.stateMapper = stateMapper;
+    this.durabilityCost = durabilityCost;
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  public BarkRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState, WorldCondition worldCondition, Optional<OutputStateMapper> stateMapper) {
-    this(baseRecipeData, partialBlockState.orElse(null), worldCondition, stateMapper.orElse(null));
+  public BarkRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState, WorldCondition worldCondition, Optional<List<String>> skipProperties, int durabilityCost, Optional<OutputStateMapper> stateMapper) {
+    this(baseRecipeData, partialBlockState.orElse(null), worldCondition, skipProperties.orElse(List.of()), durabilityCost, stateMapper.orElse(null));
   }
 
   @Nullable
@@ -69,13 +81,15 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   @Override
   public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState, HolderLookup.Provider provider) {
+    List<String> propertiesToSkip = new ArrayList<>(skipProperties);
+    propertiesToSkip.add(RotatedPillarBlock.AXIS.getName());
     BlockState newState;
     if (stateMapper.isEmpty()) {
       if (outputState == null) {
         RootsAPI.LOG.error("Invalid recipe '{}': no output state or state mapper", this);
         newState = Blocks.AIR.defaultBlockState();
       } else {
-        newState = outputState.copyState(currentState, List.of(RotatedPillarBlock.AXIS.getName()));
+        newState = outputState.copyState(currentState, propertiesToSkip);
       }
     } else {
       Block block = currentState.getBlock();
@@ -89,6 +103,12 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
     if (currentState.getBlock() instanceof RotatedPillarBlock && newState.getBlock() instanceof RotatedPillarBlock) {
       newState = newState.setValue(RotatedPillarBlock.AXIS, currentState.getValue(RotatedPillarBlock.AXIS));
+    }
+
+    for (Property<?> property : currentState.getProperties()) {
+      if (!propertiesToSkip.contains(property.getName()) && newState.hasProperty(property)) {
+        newState = PartialBlockState.uncheckedSet(property, currentState.getValue(property), newState);
+      }
     }
 
     return super.modifyState(pContainer, newState, provider);
@@ -130,11 +150,13 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     private PartialBlockState outputState;
     private WorldCondition condition;
     private OutputStateMapper stateMapper;
+    private int durabilityCost = 1;
+    private final List<String> skipProperties = new ArrayList<>();
 
-    public Builder() {
+    protected Builder() {
     }
 
-    public Builder(PartialBlockState outputState, WorldCondition condition, OutputStateMapper stateMapper) {
+    protected Builder(PartialBlockState outputState, WorldCondition condition, OutputStateMapper stateMapper) {
       this.outputState = outputState;
       this.condition = condition;
       this.stateMapper = stateMapper;
@@ -160,11 +182,39 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
       return this;
     }
 
+    public Builder durabilityCost (int durabilityCost) {
+      this.durabilityCost = durabilityCost;
+      return this;
+    }
+
+
+    public Builder skipProperties(String... properties) {
+      Collections.addAll(skipProperties, properties);
+      return this;
+    }
+
+    public Builder skipProperty(String property) {
+      skipProperties.add(property);
+      return this;
+    }
+
+    public Builder skipProperties(Property<?>... properties) {
+      for (Property<?> property : properties) {
+        skipProperties.add(property.getName());
+      }
+      return this;
+    }
+
+    public Builder skipProperty(Property<?> property) {
+      skipProperties.add(property.getName());
+      return this;
+    }
+
     public BarkRecipe build(BaseRecipeData data) {
       if (outputState == null && stateMapper == null || stateMapper.isEmpty()) {
         throw new IllegalStateException("Cannot build a bark recipe without an output state or state mapper");
       }
-      return new BarkRecipe(data, outputState, condition, stateMapper);
+      return new BarkRecipe(data, outputState, condition, skipProperties, durabilityCost, stateMapper);
     }
 
     public BarkRecipe build(BaseRecipeData.Builder data) {

@@ -13,6 +13,7 @@
       "id": "roots:jungle_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "minecraft:jungle_log": "minecraft:stripped_jungle_log",

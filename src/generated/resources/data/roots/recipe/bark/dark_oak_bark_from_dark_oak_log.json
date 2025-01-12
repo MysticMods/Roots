@@ -13,6 +13,7 @@
       "id": "roots:dark_oak_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "minecraft:dark_oak_log": "minecraft:stripped_dark_oak_log",

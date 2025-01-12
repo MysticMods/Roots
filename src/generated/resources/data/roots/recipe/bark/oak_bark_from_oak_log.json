@@ -13,6 +13,7 @@
       "id": "roots:oak_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "minecraft:oak_log": "minecraft:stripped_oak_log",

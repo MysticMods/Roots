@@ -10,20 +10,25 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.recipe.grove.GroveRecipe;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
   public static MapCodec<PyreRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
-      RootsRegistries.RITUALS.byNameCodec().fieldOf("ritual").forGetter((o) -> o.ritual)
+      RootsRegistries.RITUALS.byNameCodec().optionalFieldOf("ritual").forGetter((o) -> Optional.ofNullable(o.ritual))
   ).apply(instance, PyreRecipe::new));
   public static StreamCodec<RegistryFriendlyByteBuf, PyreRecipe> STREAM_CODEC = StreamCodec.composite(
       BaseRecipeData.STREAM_CODEC, o -> o.data,
-      ByteBufCodecs.registry(RootsRegistries.Keys.RITUALS), o -> o.ritual,
+      ByteBufCodecs.optional(ByteBufCodecs.registry(RootsRegistries.Keys.RITUALS)), o -> Optional.ofNullable(o.ritual),
       PyreRecipe::new
   );
 
@@ -33,11 +38,13 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     super();
   }
 
-  public PyreRecipe(BaseRecipeData data, Ritual ritual) {
+  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+  public PyreRecipe(BaseRecipeData data, Optional<Ritual> ritual) {
     super(data);
-    this.ritual = ritual;
+    this.ritual = ritual.orElse(null);
   }
 
+  @Nullable
   public Ritual getRitual() {
     return ritual;
   }
@@ -66,6 +73,34 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     @Override
     public StreamCodec<RegistryFriendlyByteBuf, PyreRecipe> streamCodec() {
       return STREAM_CODEC;
+    }
+  }
+
+  public static class Builder {
+    private Ritual ritual = null;
+
+    protected Builder () {
+    }
+
+    public Builder ritual (Ritual ritual) {
+      this.ritual = ritual;
+      return this;
+    }
+
+    public Builder ritual (Holder<Ritual> ritual) {
+      return ritual(ritual.value());
+    }
+
+    public PyreRecipe build(BaseRecipeData data) {
+      return new PyreRecipe(data, Optional.ofNullable(this.ritual));
+    }
+
+    public PyreRecipe build(BaseRecipeData.Builder data) {
+      return build(data.build());
+    }
+
+    public static Builder create() {
+      return new Builder();
     }
   }
 }

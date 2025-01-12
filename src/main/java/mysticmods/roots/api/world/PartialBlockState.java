@@ -158,7 +158,7 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
   }
 
   @SuppressWarnings("unchecked")
-  static <T extends Comparable<T>, V extends T> BlockState uncheckedSet(Property<?> property, Comparable<?> value, BlockState state) {
+  public static <T extends Comparable<T>, V extends T> BlockState uncheckedSet(Property<?> property, Comparable<?> value, BlockState state) {
     return state.setValue((Property<T>) property, (V) value);
   }
 

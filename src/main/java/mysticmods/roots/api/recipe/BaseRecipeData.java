@@ -30,6 +30,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class BaseRecipeData {
@@ -107,10 +108,6 @@ public class BaseRecipeData {
 
   private static <V, T extends List<V>> Optional<T> c(T value) {
     return value.isEmpty() ? Optional.empty() : Optional.of(value);
-  }
-
-  public interface IBuilder<T extends Recipe<?>> {
-    T build (BaseRecipeData.Builder builder);
   }
 
   public static class Builder {
@@ -233,8 +230,6 @@ public class BaseRecipeData {
     public BaseRecipeData build() {
       return new BaseRecipeData(NonNullList.copyOf(ingredients), levelConditions, playerConditions, result, results, chanceOutputs, unlocks);
     }
-
-
 
     public static Builder create () {
       return new Builder();

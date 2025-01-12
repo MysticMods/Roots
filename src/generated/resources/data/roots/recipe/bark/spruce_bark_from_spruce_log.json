@@ -13,6 +13,7 @@
       "id": "roots:spruce_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "minecraft:spruce_log": "minecraft:stripped_spruce_log",

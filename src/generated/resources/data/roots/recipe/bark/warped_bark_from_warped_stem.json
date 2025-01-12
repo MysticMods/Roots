@@ -13,6 +13,7 @@
       "id": "roots:warped_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "minecraft:warped_hyphae": "minecraft:stripped_warped_hyphae",

@@ -13,6 +13,7 @@
       "id": "roots:birch_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "minecraft:birch_log": "minecraft:stripped_birch_log",

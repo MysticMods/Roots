@@ -88,4 +88,40 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
       return STREAM_CODEC;
     }
   }
+
+  public static class Builder {
+    private EntityTest test;
+    private int cooldown;
+    private int durabilityCost = 1;
+
+    protected Builder () {
+    }
+
+    public Builder cooldown (int cooldown) {
+      this.cooldown = cooldown;
+      return this;
+    }
+
+    public Builder durabilityCost (int durabilityCost) {
+      this.durabilityCost = durabilityCost;
+      return this;
+    }
+
+    public Builder test (EntityTest test) {
+      this.test = test;
+      return this;
+    }
+
+    public RunicEntityRecipe build(BaseRecipeData data) {
+      return new RunicEntityRecipe(data, test, cooldown, durabilityCost);
+    }
+
+    public RunicEntityRecipe build(BaseRecipeData.Builder data) {
+      return build(data.build());
+    }
+
+    public static Builder create () {
+      return new Builder();
+    }
+  }
 }

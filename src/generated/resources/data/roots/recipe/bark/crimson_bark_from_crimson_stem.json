@@ -13,6 +13,7 @@
       "id": "roots:crimson_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "minecraft:crimson_hyphae": "minecraft:stripped_crimson_hyphae",

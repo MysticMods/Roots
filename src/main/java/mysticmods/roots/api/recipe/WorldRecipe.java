@@ -12,17 +12,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<ItemStackHandler, W> implements IWorldRecipe<W> {
   protected PartialBlockState outputState;
   protected WorldCondition condition;
+  protected List<String> skipProperties = new ArrayList<>();
 
   public WorldRecipe() {
   }
 
-  public WorldRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition) {
+  public WorldRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition, List<String> skipProperties) {
     super(data);
     this.outputState = outputState;
     this.condition = condition;
+    this.skipProperties = skipProperties;
   }
 
   @Override
@@ -33,6 +38,11 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   @Override
   public WorldCondition getCondition() {
     return condition;
+  }
+
+  @Override
+  public List<String> getSkipProperties () {
+    return skipProperties;
   }
 
   @Override

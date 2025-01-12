@@ -13,6 +13,7 @@
       "id": "roots:wildwood_bark"
     }
   },
+  "durabilityCost": 1,
   "stateMapper": {
     "mapBlock": {
       "roots:wildwood_log": "roots:stripped_wildwood_log",
