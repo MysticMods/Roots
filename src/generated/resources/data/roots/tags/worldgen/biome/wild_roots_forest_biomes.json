@@ -3,6 +3,7 @@
     "#minecraft:is_taiga",
     "#minecraft:is_jungle",
     "#minecraft:is_savanna",
+    "#minecraft:is_forest",
     "#minecraft:has_structure/ruined_portal_swamp",
     {
       "id": "#c:tree_coniferous",

@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-12T13:17:20.5630801	Registries
+// 1.21.1	2025-01-12T16:11:06.8302791	Registries
 c20cd59d5be5009c2378c51f50cfd030b05c4362 data/roots/neoforge/biome_modifier/beetle_spawns.json
 8c32577e2e5ad5a5b84223a681039eecfeb91a83 data/roots/neoforge/biome_modifier/deer_spawns.json
 7c331c3d575f4a5546e774a1b844c9db71bc496e data/roots/neoforge/biome_modifier/duck_spawns.json
@@ -17,7 +17,7 @@ abd381bf324524dbf2cbd185692fe37aa7a7d1fe data/roots/worldgen/configured_feature/
 07a5b74b57eb8de75c270f17b98ebfe9db590323 data/roots/worldgen/configured_feature/wild_roots_mossy.json
 dd440d8fe5b5736829a600401b9d51f74691a113 data/roots/worldgen/placed_feature/wild_aubergine.json
 63d242c35c3af1cec90b60e5f0071ee1ccdc4253 data/roots/worldgen/placed_feature/wild_aubergine_patch.json
-e34ee59c6010d33014053da3d16751fa28d6c6e6 data/roots/worldgen/placed_feature/wild_roots_forest.json
+f183da7a634555eff065ab0e8b468bc514c32557 data/roots/worldgen/placed_feature/wild_roots_forest.json
 ef9144ad33ff5d347abc5c044a79d298434fabe8 data/roots/worldgen/placed_feature/wild_roots_sparse.json
 4c9a9af81323ce4b8a8766e3c7072d6a969f624b data/roots/worldgen/placed_feature/wild_roots_underground.json
 332fd80e1b03b72f3eecd05c83a61657a7c9b58e data/roots/worldgen/structure/barrow.json

@@ -101,12 +101,12 @@ public class RootsDatapackGenerators {
                   // TODO: These do not
                   bootstrap.register(ModFeatures.PLACED_WILD_ROOTS_FOREST_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_ROOTS_KEY), List.of(
                       BiomeFilter.biome(),
-                      CountPlacement.of(254), // How many attempts per chunk
+                      CountPlacement.of(4), // How many attempts per chunk
                       InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
                       HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
                       RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
                       BlockPredicateFilter.forPredicate(MatchingTreeTrunkPredicate.create()), // Check if we are at a tree's log.
-                      CountPlacement.of(254), // make 5 new attempts for each position at the log
+                      CountPlacement.of(5), // make 5 new attempts for each position at the log
                       RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y defaultValue.
                   )));
                   bootstrap.register(ModFeatures.PLACED_WILD_ROOTS_SPARSE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_ROOTS_KEY), List.of(

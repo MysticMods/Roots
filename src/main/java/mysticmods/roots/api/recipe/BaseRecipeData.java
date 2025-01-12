@@ -50,7 +50,7 @@ public class BaseRecipeData {
       ByteBufCodecs.optional(INGREDIENT_LIST_STREAM), o -> c(o.ingredients),
       ByteBufCodecs.optional(LevelCondition.LIST_STREAM_CODEC), o -> c(o.levelConditions),
       ByteBufCodecs.optional(PlayerCondition.LIST_STREAM_CODEC), o -> c(o.playerConditions),
-      ByteBufCodecs.optional(ItemStack.STREAM_CODEC), o -> o.result.isEmpty() ? Optional.empty() : Optional.of(o.result),
+      ByteBufCodecs.optional(ItemStack.STREAM_CODEC), o -> o.result == null || o.result.isEmpty() ? Optional.empty() : Optional.of(o.result),
       ByteBufCodecs.optional(ItemStack.LIST_STREAM_CODEC), o -> c(o.results),
       ByteBufCodecs.optional(ChanceOutput.LIST_STREAM_CODEC), o -> c(o.chanceOutputs),
       ByteBufCodecs.optional(Unlock.LIST_STREAM_CODEC), o -> c(o.unlocks),
@@ -103,7 +103,7 @@ public class BaseRecipeData {
   }
 
   private static <V, T extends List<V>> Optional<T> c(T value) {
-    return value.isEmpty() ? Optional.empty() : Optional.of(value);
+    return value == null || value.isEmpty() ? Optional.empty() : Optional.of(value);
   }
 
   public static class Builder {
