@@ -16,7 +16,7 @@ public class SkySoarerEffect extends MobEffect {
   @Override
   public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
     super.applyEffectTick(pLivingEntity, pAmplifier);
-    SnapshotHelper.applyPlayerVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
+    SnapshotHelper.applyPlayerOrVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
       if (vehicle == null) {
         vehicle = player;
       } else {

@@ -1,24 +1,20 @@
-package mysticmods.roots.api.world;
+package mysticmods.roots.api.test.world;
 
-import com.google.common.collect.Interners;
 import com.mojang.serialization.MapCodec;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class TagMatchWorldTest extends WorldTest{
+public class TagMatchWorldTest extends WorldTest {
   public static final MapCodec<TagMatchWorldTest> CODEC = TagKey.codec(Registries.BLOCK).fieldOf("tag").xmap(TagMatchWorldTest::new, test -> test.tag);
   public static final StreamCodec<ByteBuf, TagMatchWorldTest> STREAM_CODEC = ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC.map(TagMatchWorldTest::new, o -> o.tag);
   public static final ResourceKey<WorldTestType<?>> TAG_MATCH_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("tag_match_test"));

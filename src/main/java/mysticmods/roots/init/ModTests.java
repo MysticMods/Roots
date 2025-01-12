@@ -3,7 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.test.entity.EntityTestType;
-import mysticmods.roots.api.world.*;
+import mysticmods.roots.api.test.world.*;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
 import net.neoforged.bus.api.IEventBus;

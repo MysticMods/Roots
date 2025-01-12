@@ -1,6 +1,9 @@
 package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.capability.SnapshotStorage;
+import mysticmods.roots.init.ModAttachments;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -14,8 +17,8 @@ import java.util.List;
 public class ServerTickHandler {
   @SubscribeEvent
   public static void onServerTickEnd(ServerTickEvent.Post event) {
-/*      for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
-        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(grant -> {
+      for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
+/*        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(grant -> {
           if (grant.isDirty()) {
             Networking.sendTo(new ClientBoundGrantSyncPacket(grant.toRecord()), player);
             grant.setDirty(false);
@@ -26,15 +29,20 @@ public class ServerTickHandler {
             Networking.sendTo(new ClientBoundHerbSyncPacket(herb.toRecord()), player);
             herb.setDirty(false);
           }
-        });
-        player.getCapability(Capabilities.SNAPSHOT_CAPABILITY).ifPresent(snapshot -> snapshot.tick(player));
-        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
+        });*/
+        SnapshotStorage snapshotStorage = player.getData(ModAttachments.SNAPSHOT_STORAGE);
+        snapshotStorage.tick(player);
+        if (snapshotStorage.isDirty()) {
+          player.setData(ModAttachments.SNAPSHOT_STORAGE, snapshotStorage);
+          // TODO: Sync network here
+        }
+/*        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
           if (reputation.isDirty()) {
             Networking.sendTo(new ClientBoundReputationSyncPacket(reputation.toRecord()), player);
             reputation.setDirty(false);
           }
-        });
-      }*/
+        });*/
+      }
   }
 
 

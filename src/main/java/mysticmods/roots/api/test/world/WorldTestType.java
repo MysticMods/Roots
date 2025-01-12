@@ -1,4 +1,4 @@
-package mysticmods.roots.api.world;
+package mysticmods.roots.api.test.world;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.network.RegistryFriendlyByteBuf;

@@ -1,27 +1,55 @@
 package mysticmods.roots.snapshot;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
+import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.snapshot.Snapshot;
-import mysticmods.roots.api.snapshot.SnapshotSerializer;
+import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.init.ModSpells;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class SkySoarerSnapshot extends Snapshot {
-  private float amplifier;
-  private Vec3 originalMovement;
-  private Vec3 vehicleOriginalMovement;
+  public static MapCodec<SkySoarerSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
+      instance -> instance.group(
+          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
+          Vec3.CODEC.fieldOf("originalMovement").forGetter(SkySoarerSnapshot::getOriginalMovement),
+          Vec3.CODEC.fieldOf("vehicleOriginalMovement").forGetter(SkySoarerSnapshot::getVehicleOriginalMovement),
+          Codec.FLOAT.fieldOf("amplifier").forGetter(SkySoarerSnapshot::getAmplifier)
+      ).apply(instance, SkySoarerSnapshot::new)
+  );
+  public static Codec<SkySoarerSnapshot> CODEC = MAP_CODEC.codec();
+  public static StreamCodec<ByteBuf, SkySoarerSnapshot> STREAM_CODEC = StreamCodec.composite(
+      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_INT, o -> o.decay,
+      ExtraStreamCodecs.VEC3, o -> o.originalMovement,
+      ExtraStreamCodecs.VEC3, o -> o.vehicleOriginalMovement,
+      ByteBufCodecs.FLOAT, o -> o.amplifier,
+      SkySoarerSnapshot::new
+  );
 
-  public SkySoarerSnapshot(Player player, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
-    super(player);
+  private final float amplifier;
+  private final Vec3 originalMovement;
+  private final Vec3 vehicleOriginalMovement;
+
+  public SkySoarerSnapshot(Player player, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
+    super(player, decay);
     this.originalMovement = originalMovement;
     this.amplifier = amplifier;
     this.vehicleOriginalMovement = vehicleOriginalMovement;
   }
 
-  public SkySoarerSnapshot(int timestamp) {
-    super(timestamp);
+  public SkySoarerSnapshot(int timestamp, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
+    super(timestamp, decay);
+    this.originalMovement = originalMovement;
+    this.amplifier = amplifier;
+    this.vehicleOriginalMovement = vehicleOriginalMovement;
   }
 
   public Vec3 getOriginalMovement() {
@@ -37,42 +65,24 @@ public class SkySoarerSnapshot extends Snapshot {
   }
 
   @Override
-  public SnapshotSerializer<?> getSerializer() {
+  public SnapshotType<?> getType() {
     return ModSerializers.SKY_SOARER.get();
   }
 
-  public static class Serializer extends SnapshotSerializer<SkySoarerSnapshot> {
-    public Serializer(Builder<SkySoarerSnapshot> builder) {
-      super(builder);
+  public static class Type implements SnapshotType<SkySoarerSnapshot> {
+    @Override
+    public Codec<SkySoarerSnapshot> codec() {
+      return CODEC;
     }
 
     @Override
-    protected void updateFromTag(SkySoarerSnapshot snapshot, CompoundTag tag) {
-      snapshot.originalMovement = new Vec3(tag.getDouble("x"), tag.getDouble("y"), tag.getDouble("z"));
-      snapshot.amplifier = tag.getFloat("amplifier");
-      if (tag.contains("vX")) {
-        snapshot.vehicleOriginalMovement = new Vec3(tag.getDouble("vX"), tag.getDouble("vY"), tag.getDouble("vZ"));
-      } else {
-        snapshot.vehicleOriginalMovement = Vec3.ZERO;
-      }
+    public MapCodec<SkySoarerSnapshot> mapCodec() {
+      return MAP_CODEC;
     }
 
     @Override
-    protected void updateToTag(SkySoarerSnapshot snapshot, CompoundTag tag) {
-      tag.putDouble("x", snapshot.originalMovement.x);
-      tag.putDouble("y", snapshot.originalMovement.y);
-      tag.putDouble("z", snapshot.originalMovement.z);
-      tag.putDouble("vX", snapshot.vehicleOriginalMovement.x);
-      tag.putDouble("vY", snapshot.vehicleOriginalMovement.y);
-      tag.putDouble("vZ", snapshot.vehicleOriginalMovement.z);
-      tag.putFloat("amplifier", snapshot.amplifier);
-    }
-
-    @Override
-    public int getDecay() {
-      // TODO: max duration of the spell???
-      // duration can vary, waah
-      return 10; //ModSpells.SKY_SOARER_DURATION.get().getValue() * 3;
+    public StreamCodec<RegistryFriendlyByteBuf, SkySoarerSnapshot> streamCodec() {
+      return STREAM_CODEC.cast();
     }
   }
 }

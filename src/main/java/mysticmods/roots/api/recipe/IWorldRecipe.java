@@ -1,7 +1,7 @@
 package mysticmods.roots.api.recipe;
 
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
-import mysticmods.roots.api.world.PartialBlockState;
+import mysticmods.roots.api.test.world.PartialBlockState;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;

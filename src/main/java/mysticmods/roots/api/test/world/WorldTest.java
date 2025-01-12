@@ -1,9 +1,7 @@
-package mysticmods.roots.api.world;
+package mysticmods.roots.api.test.world;
 
 import com.mojang.serialization.Codec;
-import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.registry.RootsRegistries;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

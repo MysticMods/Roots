@@ -4,16 +4,24 @@ import com.mojang.datafixers.util.Function7;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Function;
 
 public class ExtraStreamCodecs {
+  public static final StreamCodec<ByteBuf, Vec3> VEC3 = StreamCodec.composite(
+      ByteBufCodecs.DOUBLE, Vec3::x,
+      ByteBufCodecs.DOUBLE, Vec3::y,
+      ByteBufCodecs.DOUBLE, Vec3::z,
+      Vec3::new);
+
   public static <B, C, T1, T2, T3, T4, T5, T6, T7> StreamCodec<B, C> composite(
       final StreamCodec<? super B, T1> arg, final Function<C, T1> function,
       final StreamCodec<? super B, T2> arg2, final Function<C, T2> function2,

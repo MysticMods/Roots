@@ -1,26 +1,52 @@
 package mysticmods.roots.snapshot;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.snapshot.Snapshot;
-import mysticmods.roots.api.snapshot.SnapshotSerializer;
+import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.init.ModSpells;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
 public class ExtensionSnapshot extends Snapshot {
-  private int radiusZX, radiusY;
+  public static final MapCodec<ExtensionSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
+      instance -> instance.group(
+          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
+          Codec.INT.fieldOf("radiusZX").forGetter(ExtensionSnapshot::getRadiusZX),
+          Codec.INT.fieldOf("radiusY").forGetter(ExtensionSnapshot::getRadiusY)
+      ).apply(instance, ExtensionSnapshot::new));
+  public static final Codec<ExtensionSnapshot> CODEC = MAP_CODEC.codec();
+  public static final StreamCodec<ByteBuf, ExtensionSnapshot> STREAM_CODEC = StreamCodec.composite(
+      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_INT, o -> o.decay,
+      ByteBufCodecs.VAR_INT, o -> o.radiusZX,
+      ByteBufCodecs.VAR_INT, o -> o.radiusY,
+      ExtensionSnapshot::new);
+
+  private final int radiusZX, radiusY;
   private AABB aabb;
 
-  public ExtensionSnapshot(Player player, int radiusZX, int radiusY) {
-    super(player);
+  public ExtensionSnapshot(Player player, int decay, int radiusZX, int radiusY) {
+    super(player, decay);
     this.radiusZX = radiusZX;
     this.radiusY = radiusY;
   }
 
-  public ExtensionSnapshot(int timestamp) {
-    super(timestamp);
+  public ExtensionSnapshot(int timestamp, int decay, int radiusZX, int radiusY) {
+    super(timestamp, decay);
+    this.radiusY = radiusY;
+    this.radiusZX = radiusZX;
+  }
+
+  @Override
+  public SnapshotType<?> getType() {
+    return ModSerializers.EXTENSION.get();
   }
 
   public int getRadiusZX() {
@@ -38,31 +64,20 @@ public class ExtensionSnapshot extends Snapshot {
     return aabb;
   }
 
-  @Override
-  public SnapshotSerializer<?> getSerializer() {
-    return ModSerializers.EXTENSION.get();
-  }
-
-  public static class Serializer extends SnapshotSerializer<ExtensionSnapshot> {
-    public Serializer(Builder<ExtensionSnapshot> builder) {
-      super(builder);
+  public static class Type implements SnapshotType<ExtensionSnapshot> {
+    @Override
+    public Codec<ExtensionSnapshot> codec() {
+      return CODEC;
     }
 
     @Override
-    protected void updateFromTag(ExtensionSnapshot snapshot, CompoundTag tag) {
-      snapshot.radiusY = tag.getInt("radiusY");
-      snapshot.radiusZX = tag.getInt("radiusZX");
+    public MapCodec<ExtensionSnapshot> mapCodec() {
+      return MAP_CODEC;
     }
 
     @Override
-    protected void updateToTag(ExtensionSnapshot snapshot, CompoundTag tag) {
-      tag.putInt("radiusY", snapshot.radiusY);
-      tag.putInt("radiusZX", snapshot.radiusZX);
-    }
-
-    @Override
-    public int getDecay() {
-      return 10; // ModSpells.EXTENSION_SENSE_DANGER_DURATION.get().getValue() * 3;
+    public StreamCodec<RegistryFriendlyByteBuf, ExtensionSnapshot> streamCodec() {
+      return STREAM_CODEC.cast();
     }
   }
 }

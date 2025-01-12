@@ -1,12 +1,10 @@
 package mysticmods.roots.gen;
 
-import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
-import mysticmods.roots.api.world.BlockMatchWorldTest;
-import mysticmods.roots.api.world.TagMatchWorldTest;
+import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.init.ModItems;
@@ -28,7 +26,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
@@ -730,7 +727,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE)).save(GroveRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.PETALS).requires(RootsTags.Items.GROVE_MOSS_HERB).condition(ModConditions.GROVE_STONE_VALID.get()).requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))), c, RootsAPI.rl("grove/runic_shears"));
 
-    RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS)).save(RunicEntityRecipe.Builder.create().test(new EntityTagTest(RootsTags.Entities.FEY_LEATHER)).cooldown(2*60*20).build(BaseRecipeData.Builder.create()), c, RootsAPI.rl("runic_entity/fey_leather"));
+    RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS)).save(RunicEntityRecipe.Builder.create().durabilityCost(10).test(new EntityTagTest(RootsTags.Entities.FEY_LEATHER)).cooldown(2*60*20).build(BaseRecipeData.Builder.create().result(ModItems.FEY_LEATHER, 1)), c, RootsAPI.rl("runic_entity/fey_leather"));
 
     BaseRecipeData.Builder basePetalsBuilder = BaseRecipeData.Builder.create().requires(ItemTags.SMALL_FLOWERS).result(ModItems.PETALS, 1);
     MortarRecipe.Builder petalsBuilder = MortarRecipe.Builder.create().times(1);

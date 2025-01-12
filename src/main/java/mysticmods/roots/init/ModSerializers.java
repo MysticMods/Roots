@@ -5,7 +5,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.snapshot.SnapshotSerializer;
+import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -24,13 +24,13 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModSerializers {
   private static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, RootsAPI.MODID);
-  private static final DeferredRegister<SnapshotSerializer<?>> SNAPSHOT_SERIALIZERS = DeferredRegister.create(RootsRegistries.Keys.SNAPSHOT_SERIALIZERS, RootsAPI.MODID);
+  private static final DeferredRegister<SnapshotType<?>> SNAPSHOT_TYPES = DeferredRegister.create(RootsRegistries.Keys.SNAPSHOT_TYPES, RootsAPI.MODID);
   private static final DeferredRegister<PropertySerializer<?>> PROPERTY_SERIALIZERS = DeferredRegister.create(RootsRegistries.Keys.PROPERTY_SERIALIZERS, RootsAPI.MODID);
   private static final DeferredRegister<PropertyType<?>> PROPERTY_TYPES = DeferredRegister.create(RootsRegistries.Keys.PROPERTY_TYPES, RootsAPI.MODID);
 
   // Recipe Serializers
   public static final DeferredHolder<RecipeSerializer<?>, DynamicBarkRecipe.Serializer> DYNAMIC_BARK = RECIPE_SERIALIZERS.register("dynamic_bark", DynamicBarkRecipe.Serializer::new);
-   public static final DeferredHolder<RecipeSerializer<?>, GroveRecipe.Serializer> GROVE_CRAFTING = RECIPE_SERIALIZERS.register("grove", GroveRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, GroveRecipe.Serializer> GROVE_CRAFTING = RECIPE_SERIALIZERS.register("grove", GroveRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, MortarRecipe.Serializer> MORTAR = RECIPE_SERIALIZERS.register("mortar", MortarRecipe.Serializer::new);
   /*public static final DeferredHolder<RecipeSerializer<?>, SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = RECIPE_SERIALIZERS.register("summon_creatures", () -> new SummonCreaturesRecipe.Serializer());*/
   public static final DeferredHolder<RecipeSerializer<?>, PyreRecipe.Serializer> PYRE = RECIPE_SERIALIZERS.register("pyre", PyreRecipe.Serializer::new);
@@ -38,9 +38,9 @@ public class ModSerializers {
   public static final DeferredHolder<RecipeSerializer<?>, RunicBlockRecipe.Serializer> RUNIC_BLOCK = RECIPE_SERIALIZERS.register("runic_block", RunicBlockRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", RunicEntityRecipe.Serializer::new);
 
-  public static final DeferredHolder<SnapshotSerializer<?>, SkySoarerSnapshot.Serializer> SKY_SOARER = SNAPSHOT_SERIALIZERS.register("sky_soarer", () -> new SkySoarerSnapshot.Serializer(SkySoarerSnapshot::new));
-  public static final DeferredHolder<SnapshotSerializer<?>, PetalShellSnapshot.Serializer> PETAL_SHELL = SNAPSHOT_SERIALIZERS.register("petal_shell", () -> new PetalShellSnapshot.Serializer(PetalShellSnapshot::new));
-  public static final DeferredHolder<SnapshotSerializer<?>, ExtensionSnapshot.Serializer> EXTENSION = SNAPSHOT_SERIALIZERS.register("extension", () -> new ExtensionSnapshot.Serializer(ExtensionSnapshot::new));
+  public static final DeferredHolder<SnapshotType<?>, SkySoarerSnapshot.Type> SKY_SOARER = SNAPSHOT_TYPES.register("sky_soarer", SkySoarerSnapshot.Type::new);
+  public static final DeferredHolder<SnapshotType<?>, PetalShellSnapshot.Type> PETAL_SHELL = SNAPSHOT_TYPES.register("petal_shell", PetalShellSnapshot.Type::new);
+  public static final DeferredHolder<SnapshotType<?>, ExtensionSnapshot.Type> EXTENSION = SNAPSHOT_TYPES.register("extension", ExtensionSnapshot.Type::new);
 
   // Integer
   public static final DeferredHolder<PropertySerializer<?>, PropertySerializer<Property.IntegerProperty>> INTEGER_PROPERTY_SERIALIZER = PROPERTY_SERIALIZERS.register("integer_property", Property.IntegerProperty.Serializer::new);
@@ -64,7 +64,7 @@ public class ModSerializers {
 
   public static void register(IEventBus bus) {
     RECIPE_SERIALIZERS.register(bus);
-    SNAPSHOT_SERIALIZERS.register(bus);
+    SNAPSHOT_TYPES.register(bus);
     PROPERTY_SERIALIZERS.register(bus);
     PROPERTY_TYPES.register(bus);
   }

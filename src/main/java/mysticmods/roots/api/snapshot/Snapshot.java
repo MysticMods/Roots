@@ -1,28 +1,41 @@
 package mysticmods.roots.api.snapshot;
 
+import com.mojang.serialization.Codec;
+import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
 
 public abstract class Snapshot {
-  protected int timestamp;
-  public Snapshot(Player player) {
-    this.timestamp = getExpiry(player);
+  public static Codec<Snapshot> CODEC = RootsRegistries.SNAPSHOT_TYPES.byNameCodec().dispatch(Snapshot::getType, SnapshotType::mapCodec);
+  public static StreamCodec<RegistryFriendlyByteBuf, Snapshot> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SNAPSHOT_TYPES).dispatch(Snapshot::getType, SnapshotType::streamCodec);
+
+  protected int startTime;
+  protected int decay;
+
+  public Snapshot(Player player, int decay) {
+    this.startTime = player.tickCount;
+    this.decay = decay;
+
   }
 
-  public Snapshot(int timestamp) {
-    this.timestamp = timestamp;
+  public Snapshot(int startTime, int decay) {
+    this.startTime = startTime;
+    this.decay = decay;
   }
 
-  public int getTimestamp() {
-    return timestamp;
+  public int getStartTime() {
+    return startTime;
   }
 
-  public abstract SnapshotSerializer<?> getSerializer();
-
-  public int getExpiry(Player player) {
-    return player.tickCount + getSerializer().getDecay();
+  public int getDecay() {
+    return decay;
   }
 
   public boolean isExpired(Player player) {
-    return player.tickCount >= timestamp;
+    return player.tickCount >= (startTime + decay) || player.tickCount < startTime;
   }
+
+  public abstract SnapshotType<?> getType();
 }

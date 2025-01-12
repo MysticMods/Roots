@@ -3,7 +3,7 @@ package mysticmods.roots.api.recipe;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
-import mysticmods.roots.api.world.PartialBlockState;
+import mysticmods.roots.api.test.world.PartialBlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.level.ServerPlayer;

@@ -18,9 +18,9 @@ public class ModRegistries {
     event.register(RootsRegistries.PROPERTY_TYPES);
     event.register(RootsRegistries.LEVEL_CONDITIONS);
     event.register(RootsRegistries.PLAYER_CONDITIONS);
-    event.register(RootsRegistries.SNAPSHOT_SERIALIZERS);
     event.register(RootsRegistries.ENTITY_TEST_TYPES);
     event.register(RootsRegistries.WORLD_TEST_TYPES);
+    event.register(RootsRegistries.SNAPSHOT_TYPES);
     event.register(RootsRegistries.GROVES);
   }
 }

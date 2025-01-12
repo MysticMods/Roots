@@ -3,7 +3,7 @@ package mysticmods.roots.recipe.bark;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.WorldCondition;
-import mysticmods.roots.api.world.TagMatchWorldTest;
+import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -17,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.neoforged.neoforge.common.ItemAbilities;
 
 import javax.annotation.Nullable;

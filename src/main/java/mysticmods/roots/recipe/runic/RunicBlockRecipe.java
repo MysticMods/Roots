@@ -7,7 +7,7 @@ import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
 import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.api.reference.Identifiers;
-import mysticmods.roots.api.world.PartialBlockState;
+import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;

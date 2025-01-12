@@ -75,6 +75,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.BOATS).add(EntityType.BOAT, EntityType.CHEST_BOAT);
     this.tag(RootsTags.Entities.FEY_LEATHER)
         .add(
+            EntityType.COW,
             EntityType.DONKEY,
             EntityType.HORSE,
             EntityType.LLAMA,
