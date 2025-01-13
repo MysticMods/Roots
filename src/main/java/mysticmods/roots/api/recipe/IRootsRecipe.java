@@ -1,6 +1,5 @@
 package mysticmods.roots.api.recipe;
 
-import com.google.common.collect.Sets;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
@@ -62,7 +61,6 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     Set<BlockPos> testedPositions = new HashSet<>();
     for (LevelCondition condition : this.getLevelConditions()) {
       Set<BlockPos> newPositions = condition.test(level, player, bounds, center, testedPositions);
-      Sets.intersection()
       if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
         failedLevel.add(condition);
       } else {
