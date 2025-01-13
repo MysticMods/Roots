@@ -31,11 +31,4 @@ public class BaseItems {
       return foodproperties != null ? 6 : 0;
     }
   }
-
-  public static class KnifeItem extends DiggerItem {
-    // TODO rework knives to strip logs of bark with right click, or drop bark by mining it
-    public KnifeItem(Tier tier, Properties props) {
-      super(tier, BlockTags.MINEABLE_WITH_AXE, props);
-    }
-  }
 }

@@ -45,6 +45,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+// TODO: HORSES, DONKEYS, ETC.
 public class RunicShearsItem extends ShearsItem {
   private AABB aoeBoundingBox;
 

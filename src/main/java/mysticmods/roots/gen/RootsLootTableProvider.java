@@ -61,7 +61,7 @@ public class RootsLootTableProvider {
 
   public static class RootsBlockLootTables extends BlockLootSubProvider {
     protected RootsBlockLootTables(HolderLookup.Provider arg2) {
-      super(Set.of(), FeatureFlags.REGISTRY.allFlags(), arg2);
+      super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags(), arg2);
     }
 
     @Override
