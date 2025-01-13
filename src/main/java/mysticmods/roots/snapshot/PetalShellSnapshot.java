@@ -27,6 +27,7 @@ public class PetalShellSnapshot extends Snapshot {
       PetalShellSnapshot::new);
 
   private final int count;
+
   public PetalShellSnapshot(Player player, int decay, int count) {
     super(player, decay);
     this.count = count;

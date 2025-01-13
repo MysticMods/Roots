@@ -13,7 +13,6 @@ import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -31,7 +30,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -79,7 +77,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
         // TODO:
-/*        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
+        /*        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
         failedGrants.report();
         return InteractionResult.FAIL;
       }

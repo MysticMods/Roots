@@ -3,9 +3,6 @@ package mysticmods.roots.entity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
@@ -43,7 +40,7 @@ public class FennecEntity extends TamableAnimal {
   public FennecEntity(EntityType<? extends FennecEntity> type, Level worldIn) {
     super(type, worldIn);
     // TODO: ???
-/*    setTame(false);*/
+    /*    setTame(false);*/
     this.xpReward = 5;
   }
 

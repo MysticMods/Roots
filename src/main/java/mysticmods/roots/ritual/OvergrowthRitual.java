@@ -26,7 +26,7 @@ public class OvergrowthRitual extends Ritual {
   private static final List<Direction> HORIZONTALS = new ArrayList<>(Arrays.stream(Direction.values()).filter(dir -> dir.getAxis().isHorizontal()).toList());
   private BlockPos lastChanged;
 
-  private static List<Direction> horizontals () {
+  private static List<Direction> horizontals() {
     Collections.shuffle(HORIZONTALS);
     return HORIZONTALS;
   }
@@ -56,7 +56,8 @@ public class OvergrowthRitual extends Ritual {
         lastChanged = null;
         List<BlockPos> positions = new ArrayList<>(BlockPos.betweenClosedStream(pBoundingBox).map(BlockPos::immutable).toList());
         Collections.shuffle(positions);
-        outer: for (BlockPos pos : positions) {
+        outer:
+        for (BlockPos pos : positions) {
           if (pLevel.getFluidState(pos).is(FluidTags.WATER)) {
             for (Direction dir : horizontals()) {
               BlockPos offset = pos.above().relative(dir);

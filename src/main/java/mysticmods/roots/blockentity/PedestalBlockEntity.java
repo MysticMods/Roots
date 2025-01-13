@@ -64,11 +64,11 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     } else if (inSlot.isEmpty()) {
       // insert
       if (limited && inHand.getCount() > 1) {
-          ItemStack copy = inHand.copy();
-          copy.setCount(1);
-          inHand.shrink(1);
-          inventory.setStackInSlot(0, copy);
-          player.setItemInHand(hand, inHand);
+        ItemStack copy = inHand.copy();
+        copy.setCount(1);
+        inHand.shrink(1);
+        inventory.setStackInSlot(0, copy);
+        player.setItemInHand(hand, inHand);
       } else {
         inventory.setStackInSlot(0, inHand);
         player.setItemInHand(hand, ItemStack.EMPTY);

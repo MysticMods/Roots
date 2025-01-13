@@ -41,7 +41,6 @@ public class DamageHandler {
     } else if (event.getSource().getDirectEntity() instanceof ServerPlayer player2) {
       player = player2;
     } else {
-      return;
     }
     // TODO:
     /*    Advancements.PACIFIST_TRIGGER.trigger(player, event);*/

@@ -32,7 +32,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -182,7 +181,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
         UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
         if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
           RootsAPI.LOG.info("Grants failed and recipe has no output");
-/*          failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
+          /*          failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
           failedGrants.report();
           return InteractionResult.FAIL;
         }

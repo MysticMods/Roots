@@ -8,7 +8,6 @@ import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.recipe.bark.BarkRecipe;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -60,7 +59,7 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
   }
 
   public static class Builder {
-    protected Builder () {
+    protected Builder() {
     }
 
     public GroveRecipe build(BaseRecipeData data) {

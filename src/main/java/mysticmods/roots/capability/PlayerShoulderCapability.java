@@ -1,9 +1,7 @@
 package mysticmods.roots.capability;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.IPlayerShoulderCapability;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +9,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.util.ObfuscationReflectionHelper;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.lang.invoke.MethodHandle;

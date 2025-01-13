@@ -4,7 +4,6 @@ import mysticmods.roots.api.capability.SnapshotStorage;
 import mysticmods.roots.api.snapshot.Snapshot;
 import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.init.ModAttachments;
-import net.minecraft.core.Holder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +32,7 @@ public class SnapshotHelper {
     }
   }
 
-  public static <T extends Snapshot> void addPlayer (LivingEntity entity, SnapshotType<T> serializer, T snapshot) {
+  public static <T extends Snapshot> void addPlayer(LivingEntity entity, SnapshotType<T> serializer, T snapshot) {
     if (entity instanceof Player player) {
       SnapshotStorage storage = player.getData(ModAttachments.SNAPSHOT_STORAGE);
       storage.addSnapshot(player, serializer, snapshot);
@@ -41,7 +40,7 @@ public class SnapshotHelper {
     }
   }
 
-  public static <T extends Snapshot> void addPlayerOrVehicle (LivingEntity entity, SnapshotType<T> serializer, T snapshot) {
+  public static <T extends Snapshot> void addPlayerOrVehicle(LivingEntity entity, SnapshotType<T> serializer, T snapshot) {
     if (entity instanceof Player player) {
       SnapshotStorage storage = player.getRootVehicle().getData(ModAttachments.SNAPSHOT_STORAGE);
       storage.addSnapshot(player, serializer, snapshot);

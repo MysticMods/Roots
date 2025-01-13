@@ -9,10 +9,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 
-@EventBusSubscriber(modid= RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class TooltipHandler {
   @SubscribeEvent
-  public static void onItemTooltip (ItemTooltipEvent event) {
+  public static void onItemTooltip(ItemTooltipEvent event) {
     ItemStack stack = event.getItemStack();
     if (stack.is(RootsTags.Items.NYI)) {
       event.getToolTip().add(Component.literal("Not Yet Implemented"));

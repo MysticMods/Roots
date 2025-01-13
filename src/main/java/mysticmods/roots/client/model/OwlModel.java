@@ -10,8 +10,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
-
-
 import javax.annotation.Nonnull;
 
 public class OwlModel extends AgeableListModel<OwlEntity> {

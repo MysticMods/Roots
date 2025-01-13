@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 
 public class ClientNetworkHandlers {
-  public static void setSnapshotStorage (SnapshotStorage storage) {
+  public static void setSnapshotStorage(SnapshotStorage storage) {
     if (Minecraft.getInstance() == null) {
       return;
     }

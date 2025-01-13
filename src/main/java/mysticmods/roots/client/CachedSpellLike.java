@@ -5,7 +5,7 @@ import mysticmods.roots.api.spell.Spell;
 import net.minecraft.world.item.ItemStack;
 
 public interface CachedSpellLike extends SpellLike {
-  default ItemStack getAsItemStack () {
+  default ItemStack getAsItemStack() {
     Spell result = getAsSpell();
     if (result == null) {
       return ItemStack.EMPTY;

@@ -76,7 +76,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     protected Builder() {
     }
 
-    public Builder times (int times) {
+    public Builder times(int times) {
       this.times = times;
       return this;
     }

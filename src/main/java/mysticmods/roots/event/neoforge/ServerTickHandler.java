@@ -8,7 +8,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
 public class ServerTickHandler {
   @SubscribeEvent
   public static void onServerTickEnd(ServerTickEvent.Post event) {
-      for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
+    for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
 /*        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(grant -> {
           if (grant.isDirty()) {
             Networking.sendTo(new ClientBoundGrantSyncPacket(grant.toRecord()), player);
@@ -30,19 +29,19 @@ public class ServerTickHandler {
             herb.setDirty(false);
           }
         });*/
-        SnapshotStorage snapshotStorage = player.getData(ModAttachments.SNAPSHOT_STORAGE);
-        snapshotStorage.tick(player);
-        if (snapshotStorage.isDirty()) {
-          player.setData(ModAttachments.SNAPSHOT_STORAGE, snapshotStorage);
-          // TODO: Sync network here
-        }
+      SnapshotStorage snapshotStorage = player.getData(ModAttachments.SNAPSHOT_STORAGE);
+      snapshotStorage.tick(player);
+      if (snapshotStorage.isDirty()) {
+        player.setData(ModAttachments.SNAPSHOT_STORAGE, snapshotStorage);
+        // TODO: Sync network here
+      }
 /*        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
           if (reputation.isDirty()) {
             Networking.sendTo(new ClientBoundReputationSyncPacket(reputation.toRecord()), player);
             reputation.setDirty(false);
           }
         });*/
-      }
+    }
   }
 
 

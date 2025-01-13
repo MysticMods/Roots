@@ -1,10 +1,8 @@
 package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.GrantCapability;
 import mysticmods.roots.api.spell.LibrarySpell;
-import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;

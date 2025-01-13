@@ -1,6 +1,5 @@
 package mysticmods.roots.recipe.bark;
 
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -182,7 +181,7 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
       return this;
     }
 
-    public Builder durabilityCost (int durabilityCost) {
+    public Builder durabilityCost(int durabilityCost) {
       this.durabilityCost = durabilityCost;
       return this;
     }

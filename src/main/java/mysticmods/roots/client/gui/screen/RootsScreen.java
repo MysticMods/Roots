@@ -50,7 +50,7 @@ public abstract class RootsScreen extends Screen {
     tooltipItem = ItemStack.EMPTY;
   }
 
-  public void fillTooltip (ItemStack stack) {
+  public void fillTooltip(ItemStack stack) {
     tooltipItem = stack;
   }
 
@@ -60,7 +60,7 @@ public abstract class RootsScreen extends Screen {
   }
 
   public static void drawFromTexture(GuiGraphics graphics, ResourceLocation resourceLocation, int x, int y, int uOffset, int vOffset, int width, int height, int fileWidth, int fileHeight, PoseStack stack) {
-/*    RenderSystem.setShaderTexture(0, resourceLocation);*/
+    /*    RenderSystem.setShaderTexture(0, resourceLocation);*/
     graphics.blit(resourceLocation, x, y, uOffset, vOffset, width, height, fileWidth, fileHeight);
   }
 

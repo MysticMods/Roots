@@ -10,7 +10,6 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -79,15 +78,15 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
   public static class Builder {
     private Ritual ritual = null;
 
-    protected Builder () {
+    protected Builder() {
     }
 
-    public Builder ritual (Ritual ritual) {
+    public Builder ritual(Ritual ritual) {
       this.ritual = ritual;
       return this;
     }
 
-    public Builder ritual (Holder<Ritual> ritual) {
+    public Builder ritual(Holder<Ritual> ritual) {
       return ritual(ritual.value());
     }
 

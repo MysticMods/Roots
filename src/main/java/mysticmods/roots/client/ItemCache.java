@@ -1,9 +1,7 @@
 package mysticmods.roots.client;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.modifier.SpellModifier;
-import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.world.item.ItemStack;
@@ -18,17 +16,17 @@ public class ItemCache {
 
   public static ItemStack getCachedSpell(Spell spell) {
     return ItemStack.EMPTY;
-/*    return SPELL_CACHE.computeIfAbsent(spell, TokenItem::getSpellToken);*/
+    /*    return SPELL_CACHE.computeIfAbsent(spell, TokenItem::getSpellToken);*/
   }
 
   public static ItemStack getCachedRitual(Ritual ritual) {
     return ItemStack.EMPTY;
-/*    return RITUAL_CACHE.computeIfAbsent(ritual, TokenItem::getRitualToken);*/
+    /*    return RITUAL_CACHE.computeIfAbsent(ritual, TokenItem::getRitualToken);*/
   }
 
   public static ItemStack getCachedModifier(SpellModifier modifier) {
     return ItemStack.EMPTY;
-/*    return MODIFIER_CACHE.computeIfAbsent(modifier, TokenItem::getModifierToken);*/
+    /*    return MODIFIER_CACHE.computeIfAbsent(modifier, TokenItem::getModifierToken);*/
   }
 
 /*  public static ItemStack getGrantStack(Grant grant) {

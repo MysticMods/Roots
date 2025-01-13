@@ -23,10 +23,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 
-@EventBusSubscriber(modid= RootsAPI.MODID)
+@EventBusSubscriber(modid = RootsAPI.MODID)
 public class EntityEventHandler {
   @SubscribeEvent
-  public static void onSquidMilked (PlayerInteractEvent.EntityInteract event) {
+  public static void onSquidMilked(PlayerInteractEvent.EntityInteract event) {
     Player player = event.getEntity();
     ItemStack heldItem = player.getItemInHand(event.getHand());
     Level level = event.getLevel();

@@ -2,7 +2,6 @@ package mysticmods.roots.client.model;
 
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.resources.ResourceLocation;
 
 public class ModelHolder {
   public static final ModelLayerLocation BEETLE = new ModelLayerLocation(RootsAPI.rl("beetle"), "main");

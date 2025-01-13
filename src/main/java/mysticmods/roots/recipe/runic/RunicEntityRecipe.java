@@ -6,17 +6,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.EntityRecipe;
 import mysticmods.roots.api.reference.Identifiers;
-import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.test.entity.EntityTest;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -101,20 +97,20 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
     private int cooldown;
     private int durabilityCost = 1;
 
-    protected Builder () {
+    protected Builder() {
     }
 
-    public Builder cooldown (int cooldown) {
+    public Builder cooldown(int cooldown) {
       this.cooldown = cooldown;
       return this;
     }
 
-    public Builder durabilityCost (int durabilityCost) {
+    public Builder durabilityCost(int durabilityCost) {
       this.durabilityCost = durabilityCost;
       return this;
     }
 
-    public Builder test (EntityTest test) {
+    public Builder test(EntityTest test) {
       this.test = test;
       return this;
     }
@@ -127,7 +123,7 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
       return build(data.build());
     }
 
-    public static Builder create () {
+    public static Builder create() {
       return new Builder();
     }
   }

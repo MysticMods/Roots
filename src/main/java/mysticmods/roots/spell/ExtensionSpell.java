@@ -26,6 +26,7 @@ import java.util.List;
 
 public class ExtensionSpell extends TwoRadiusSpell {
   private int nightVisionDuration, senseDangerDuration;
+
   public ExtensionSpell(ChatFormatting color, List<Cost> costs) {
     super(Type.INSTANT, color, costs, 0xcde645, 0xb872b1);
   }
@@ -60,14 +61,14 @@ public class ExtensionSpell extends TwoRadiusSpell {
     this.senseDangerDuration = properties.get(ModSpells.EXTENSION_SENSE_DANGER_DURATION);
   }
 
-  public int getMaxDuration () {
+  public int getMaxDuration() {
     return Math.max(nightVisionDuration, senseDangerDuration) + 40;
   }
 
   @Override
   public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
-      pPlayer.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, nightVisionDuration, 0, false, false));
-      pPlayer.addEffect(new MobEffectInstance(ModEffects.SENSE_DANGER, senseDangerDuration, 0, false, false));
+    pPlayer.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, nightVisionDuration, 0, false, false));
+    pPlayer.addEffect(new MobEffectInstance(ModEffects.SENSE_DANGER, senseDangerDuration, 0, false, false));
     SnapshotHelper.addPlayer(pPlayer, ModSerializers.EXTENSION.get(), new ExtensionSnapshot(pPlayer, getMaxDuration(), getRadiusZX(), getRadiusY()));
   }
 }

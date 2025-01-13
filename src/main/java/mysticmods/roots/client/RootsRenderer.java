@@ -1,12 +1,6 @@
 package mysticmods.roots.client;
 
-import mysticmods.roots.api.RootsAPI;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 
 
 /*@EventBusSubscriber(defaultValue = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)*/

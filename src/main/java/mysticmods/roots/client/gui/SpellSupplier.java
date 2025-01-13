@@ -21,7 +21,7 @@ public interface SpellSupplier<T extends SpellLike> extends Supplier<T>, CachedS
     return result.getAsSpell();
   }
 
-  default MutableComponent getStyledName () {
+  default MutableComponent getStyledName() {
     if (get() instanceof IStyledRegistryEntry styled) {
       return styled.getStyledName();
     }

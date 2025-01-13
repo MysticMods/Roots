@@ -49,11 +49,11 @@ public class JauntSpell extends Spell {
     this.jauntDistance = properties.get(ModSpells.JAUNT_DISTANCE);
   }
 
-  private boolean playerSafe (Level pLevel, Player player, BlockPos.MutableBlockPos position, Direction direction) {
+  private boolean playerSafe(Level pLevel, Player player, BlockPos.MutableBlockPos position, Direction direction) {
     int safeCount = 0;
     int startY = position.getY();
     position.setY(startY - (direction == Direction.DOWN ? 2 : 1));
-    if (!pLevel.getBlockState(position).isFaceSturdy(pLevel, position, Direction.UP, SupportType.RIGID )) {
+    if (!pLevel.getBlockState(position).isFaceSturdy(pLevel, position, Direction.UP, SupportType.RIGID)) {
       return false;
     }
 
@@ -73,7 +73,7 @@ public class JauntSpell extends Spell {
   }
 
   @Nullable
-  private Vec3 findSafePosition (Level pLevel, Player player) {
+  private Vec3 findSafePosition(Level pLevel, Player player) {
     Vec3 realPos = player.position().add(Vec3.directionFromRotation(0, player.getYRot()).scale(jauntDistance));
     BlockPos real = new BlockPos(0, 0, 0); // TODO: realPos);
     BlockPos.MutableBlockPos dest = real.mutable();

@@ -1,18 +1,15 @@
 package mysticmods.roots.config;
 
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-import com.electronwill.nightconfig.core.io.WritingMode;
 import mysticmods.roots.api.RootsAPI;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid= RootsAPI.MODID, bus=EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ConfigManager {
 
   private static final ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
@@ -48,16 +45,16 @@ public class ConfigManager {
   }
 
   @SubscribeEvent
-  public static void onConfigReload (ModConfigEvent.Reloading event) {
+  public static void onConfigReload(ModConfigEvent.Reloading event) {
     configReload(event);
   }
 
   @SubscribeEvent
-  public static void onConfigLoaded (ModConfigEvent.Loading event) {
+  public static void onConfigLoaded(ModConfigEvent.Loading event) {
     configReload(event);
   }
 
-  public static void configReload (ModConfigEvent event) {
+  public static void configReload(ModConfigEvent event) {
     CONFIGS.forEach(AbstractConfig::reset);
   }
 }

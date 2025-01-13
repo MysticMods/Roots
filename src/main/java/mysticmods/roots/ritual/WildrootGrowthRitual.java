@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 public class WildrootGrowthRitual extends Ritual {
-/*  private final AbstractTreeGrower treeGrower = new RootsTreeGrowers();*/
+  /*  private final AbstractTreeGrower treeGrower = new RootsTreeGrowers();*/
 
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
@@ -31,9 +31,7 @@ public class WildrootGrowthRitual extends Ritual {
       BlockPos.betweenClosedStream(getAABB().move(blockEntity.getBlockPos())).filter(o -> {
         BlockState state = level.getBlockState(o);
         if (state.is(RootsTags.Blocks.WILDROOT_CROP)) {
-          if (state.hasProperty(ThreeStageCropBlock.AGE) && state.getValue(ThreeStageCropBlock.AGE) == ModBlocks.WILDROOT_CROP.value().getMaxAge()) {
-            return true;
-          }
+          return state.hasProperty(ThreeStageCropBlock.AGE) && state.getValue(ThreeStageCropBlock.AGE) == ModBlocks.WILDROOT_CROP.value().getMaxAge();
         }
         return false;
       }).findFirst().ifPresent(pos -> {

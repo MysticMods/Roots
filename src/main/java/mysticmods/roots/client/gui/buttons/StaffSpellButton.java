@@ -1,17 +1,11 @@
 package mysticmods.roots.client.gui.buttons;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.SpellInstance;
-import mysticmods.roots.client.ItemCache;
-import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.client.gui.SpellSupplier;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.function.Supplier;
 
 public class StaffSpellButton extends TypedButton<SpellInstance, SpellSupplier<SpellInstance>, StaffScreen> {
 

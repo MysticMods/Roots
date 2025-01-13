@@ -23,9 +23,9 @@ public class RenderResizableCuboid {
 
   */
 /**
-   * Used to not need to create multiple arrays when we just want to fill it differently at times, and given rendering TERs is not multithreaded it is perfectly safe to
-   * just use one backing "temporary" array.
-   *//*
+ * Used to not need to create multiple arrays when we just want to fill it differently at times, and given rendering TERs is not multithreaded it is perfectly safe to
+ * just use one backing "temporary" array.
+ *//*
 
   private static final int[] combinedARGB = new int[EnumUtils.DIRECTIONS.length];
   private static final Vector3f NORMAL = new Vector3f(1, 1, 1);
@@ -44,8 +44,8 @@ public class RenderResizableCuboid {
 
   */
 /**
-   * @implNote Based off of Tinker's
-   *//*
+ * @implNote Based off of Tinker's
+ *//*
 
   public static void renderCube(Model3D cube, PoseStack matrix, VertexConsumer buffer, int[] colors, int light, int overlay, FaceDisplay faceDisplay, boolean fakeDisableDiffuse) {
     //TODO: Further attempt to fix z-fighting at larger distances if we make it not render the sides when it is in a solid block
@@ -106,8 +106,8 @@ public class RenderResizableCuboid {
 
   */
 /**
-   * @implNote From Tinker's
-   *//*
+ * @implNote From Tinker's
+ *//*
 
   private static float[] getBlockBounds(int delta, float start, float end) {
     float[] bounds = new float[2 + delta];
@@ -122,8 +122,8 @@ public class RenderResizableCuboid {
 
   */
 /**
-   * @implNote From Tinker's
-   *//*
+ * @implNote From Tinker's
+ *//*
 
   private static int calculateDelta(float min, float max) {
     //The texture can stretch over more blocks than the subtracted height is if min's decimal is bigger than max's decimal (causing UV over 1)
@@ -140,8 +140,8 @@ public class RenderResizableCuboid {
 
   */
 /**
-   * @implNote From Mantle with some adjustments
-   *//*
+ * @implNote From Mantle with some adjustments
+ *//*
 
   private static void putTexturedQuad(VertexConsumer buffer, Matrix4f matrix, Matrix3f normalMatrix, @Nullable SpriteInfo spriteInfo, Vector3f from, Vector3f to, Direction face, int[] colors, int light, int overlay, FaceDisplay faceDisplay, Vector3f normal) {
     if (spriteInfo == null) {

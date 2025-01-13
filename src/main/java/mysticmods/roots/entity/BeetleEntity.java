@@ -1,14 +1,7 @@
 package mysticmods.roots.entity;
 
 
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Capabilities;
-import mysticmods.roots.api.capability.IPlayerShoulderCapability;
-import mysticmods.roots.capability.PlayerShoulderCapability;
 import mysticmods.roots.init.ModEntities;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,8 +19,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-
-
 import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
 
