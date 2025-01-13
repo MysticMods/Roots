@@ -99,6 +99,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
     super.playerDestroy(pLevel, pPlayer, pPos, Blocks.AIR.defaultBlockState(), pTe, pStack);
   }
 
+  // TODO: Break everything but just have the loot only drop from one part
   protected static void preventDrops(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
     StateProperties.Part part = pState.getValue(PART);
     if (part == StateProperties.Part.TOP) {

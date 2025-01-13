@@ -273,22 +273,19 @@ public class RootsLootTableProvider {
       dropSelf(ModBlocks.GROVE_PEDESTAL.get());
       dropSelf(ModBlocks.WILDWOOD_PEDESTAL.get());
       dropSelf(ModBlocks.DISPLAY_PEDESTAL.get());
-      //dropSelf(ModBlocks.WILD_ROOTS.get());
       add(ModBlocks.WILD_ROOTS.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1f)).add(applyExplosionDecay(ModBlocks.WILD_ROOTS.get(), LootItem.lootTableItem(ModItems.WILDROOT.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))))
           .withPool(LootPool.lootPool().add(applyExplosionDecay(ModBlocks.WILD_ROOTS.get(), LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(2, 0.8f))).when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.WILD_ROOTS.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(WildRootsBlock.MOSSY, true))))))
       );
-      //dropSelf(ModBlocks.CREEPING_GROVE_MOSS.get());
       add(ModBlocks.CREEPING_GROVE_MOSS.get(), applyExplosionDecay(ModBlocks.CREEPING_GROVE_MOSS.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))
           .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f)))).when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.CREEPING_GROVE_MOSS.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CreepingGroveMossBlock.RITUAL_PLACED, false)))
           )
           .withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))).when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.CREEPING_GROVE_MOSS.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CreepingGroveMossBlock.RITUAL_PLACED, false)))
           )));
-      //dropSelf(ModBlocks.HANGING_GROVE_MOSS.get());
       add(ModBlocks.HANGING_GROVE_MOSS.get(), applyExplosionDecay(ModBlocks.HANGING_GROVE_MOSS.get(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_MOSS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.2f))))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.GROVE_SPORES.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))))));
-      //dropSelf(ModBlocks.BAFFLECAP_BLOCK.get());
       add(ModBlocks.BAFFLECAP_BLOCK.get(), createSilkTouchDispatchTable(ModBlocks.BAFFLECAP_BLOCK.get(), applyExplosionDecay(ModBlocks.BAFFLECAP_BLOCK.get(), LootItem.lootTableItem(ModItems.BAFFLECAP.get()).apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.05f))))));
+      // TODO: That thing here
       //dropSelf(ModBlocks.PRIMAL_GROVE_STONE.get());
       dropSelf(ModBlocks.INCENSE_BURNER.get());
       dropSelf(ModBlocks.MORTAR.get());
@@ -299,23 +296,14 @@ public class RootsLootTableProvider {
       dropSelf(ModBlocks.BAFFLECAP.get());
       addCropDrops(ModBlocks.WILDROOT_CROP.get(), ModItems.WILDROOT.get(), BeetrootBlock.AGE);
       addCropDrops(ModBlocks.CLOUD_BERRY_CROP.get(), ModItems.CLOUD_BERRY.get(), BeetrootBlock.AGE);
-      //dropSelf(ModBlocks.DEWGONIA_CROP.get());
       addCropDrops(ModBlocks.DEWGONIA_CROP.get(), ModItems.DEWGONIA.get(), BeetrootBlock.AGE);
-      //dropSelf(ModBlocks.INFERNO_BULB_CROP.get());
       addCropDrops(ModBlocks.INFERNO_BULB_CROP.get(), ModItems.INFERNO_BULB.get(), BeetrootBlock.AGE);
-      //dropSelf(ModBlocks.STALICRIPE_CROP.get());
       addCropDrops(ModBlocks.STALICRIPE_CROP.get(), ModItems.STALICRIPE.get(), BeetrootBlock.AGE);
-      //dropSelf(ModBlocks.MOONGLOW_CROP.get());
       addCropDrops(ModBlocks.MOONGLOW_CROP.get(), ModItems.MOONGLOW.get(), ModItems.MOONGLOW_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
-      //dropSelf(ModBlocks.PERESKIA_CROP.get());
       addCropDrops(ModBlocks.PERESKIA_CROP.get(), ModItems.PERESKIA.get(), ModItems.PERESKIA_BULB.get(), BaseBlocks.SeededCropsBlock.AGE);
-      //dropSelf(ModBlocks.SPIRITLEAF_CROP.get());
       addCropDrops(ModBlocks.SPIRITLEAF_CROP.get(), ModItems.SPIRITLEAF.get(), ModItems.SPIRITLEAF_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
-      //dropSelf(ModBlocks.WILDEWHEET_CROP.get());
       addCropDrops(ModBlocks.WILDEWHEET_CROP.get(), ModItems.WILDEWHEET.get(), ModItems.WILDEWHEET_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
-      //dropSelf(ModBlocks.AUBERGINE_CROP.get());
       addCropDrops(ModBlocks.AUBERGINE_CROP.get(), ModItems.AUBERGINE.get(), ModItems.AUBERGINE_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
-      //dropSelf(ModBlocks.WILD_AUBERGINE.get());
       add(ModBlocks.WILD_AUBERGINE.get(), this.applyExplosionDecay(ModBlocks.WILD_AUBERGINE.get(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE.get()))).withPool(LootPool.lootPool().add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))))));
       add(ModBlocks.POTTED_BAFFLECAP.get(), createPotFlowerItemTable(ModBlocks.BAFFLECAP.get()));
       add(ModBlocks.POTTED_STONEPETAL.get(), createPotFlowerItemTable(ModBlocks.STONEPETAL.get()));
