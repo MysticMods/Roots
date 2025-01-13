@@ -53,11 +53,11 @@ public class ChanceOutput {
     return chance;
   }
 
-  public ChanceOutput copy () {
+  public ChanceOutput copy() {
     return new ChanceOutput(output.copy(), chance);
   }
 
-  public ChanceOutput multiply (int value) {
+  public ChanceOutput multiply(int value) {
     ItemStack newStack = output.copy();
     newStack.setCount(newStack.getCount() * value);
     return new ChanceOutput(newStack, chance);

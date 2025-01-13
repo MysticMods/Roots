@@ -3,9 +3,7 @@ package mysticmods.roots.gen;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModHerbs;
-import mysticmods.roots.init.ModSpells;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
@@ -21,17 +19,17 @@ public class RootsHerbTagsProvider extends IntrinsicHolderTagsProvider<Herb> {
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
-      this.tag(RootsTags.Herbs.FIRE).add(ModHerbs.INFERNO_BULB.get());
-      this.tag(RootsTags.Herbs.AIR).add(ModHerbs.CLOUD_BERRY.get());
-      this.tag(RootsTags.Herbs.WATER).add(ModHerbs.DEWGONIA.get());
-      this.tag(RootsTags.Herbs.EARTH).add(ModHerbs.STALICRIPE.get());
-      this.tag(RootsTags.Herbs.ELEMENTAL).addTags(RootsTags.Herbs.AIR, RootsTags.Herbs.EARTH, RootsTags.Herbs.FIRE, RootsTags.Herbs.WATER);
-      this.tag(RootsTags.Herbs.PRIMAL).add(ModHerbs.GROVE_MOSS.get(), ModHerbs.WILDROOT.get());
-      this.tag(RootsTags.Herbs.FAIRY).add(ModHerbs.PERESKIA.get());
-      this.tag(RootsTags.Herbs.FUNGAL).add(ModHerbs.BAFFLECAP.get());
-      this.tag(RootsTags.Herbs.SPROUT).add(ModHerbs.WILDEWHEET.get());
-      this.tag(RootsTags.Herbs.TWILIGHT).add(ModHerbs.MOONGLOW.get());
-      this.tag(RootsTags.Herbs.WILD).add(ModHerbs.SPIRITLEAF.get());
+    this.tag(RootsTags.Herbs.FIRE).add(ModHerbs.INFERNO_BULB.get());
+    this.tag(RootsTags.Herbs.AIR).add(ModHerbs.CLOUD_BERRY.get());
+    this.tag(RootsTags.Herbs.WATER).add(ModHerbs.DEWGONIA.get());
+    this.tag(RootsTags.Herbs.EARTH).add(ModHerbs.STALICRIPE.get());
+    this.tag(RootsTags.Herbs.ELEMENTAL).addTags(RootsTags.Herbs.AIR, RootsTags.Herbs.EARTH, RootsTags.Herbs.FIRE, RootsTags.Herbs.WATER);
+    this.tag(RootsTags.Herbs.PRIMAL).add(ModHerbs.GROVE_MOSS.get(), ModHerbs.WILDROOT.get());
+    this.tag(RootsTags.Herbs.FAIRY).add(ModHerbs.PERESKIA.get());
+    this.tag(RootsTags.Herbs.FUNGAL).add(ModHerbs.BAFFLECAP.get());
+    this.tag(RootsTags.Herbs.SPROUT).add(ModHerbs.WILDEWHEET.get());
+    this.tag(RootsTags.Herbs.TWILIGHT).add(ModHerbs.MOONGLOW.get());
+    this.tag(RootsTags.Herbs.WILD).add(ModHerbs.SPIRITLEAF.get());
   }
 
   @Override

@@ -17,7 +17,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 
-
 public class PetrifiedFlowerBlock extends FlowerBlock {
   public PetrifiedFlowerBlock(Properties propertiesIn) {
     super(MobEffects.JUMP, 50, propertiesIn);

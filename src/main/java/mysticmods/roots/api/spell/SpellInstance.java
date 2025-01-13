@@ -5,7 +5,6 @@ import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -58,7 +57,7 @@ public class SpellInstance implements SpellLike {
     return spell;
   }
 
-  public MutableComponent getStyledName () {
+  public MutableComponent getStyledName() {
     return spell.getStyledName();
   }
 

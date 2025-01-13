@@ -49,7 +49,7 @@ public class P {
     return holder;
   }
 
-  public static List<PropertyHolder<?>> unclaimed () {
+  public static List<PropertyHolder<?>> unclaimed() {
     Set<PropertyHolder<?>> CLAIMED = new HashSet<>();
     RootsRegistries.SPELLS.stream().forEach(o -> CLAIMED.addAll(o.getProperties()));
     RootsRegistries.RITUALS.stream().forEach(o -> CLAIMED.addAll(o.getProperties()));

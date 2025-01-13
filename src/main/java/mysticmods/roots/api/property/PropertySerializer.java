@@ -15,7 +15,7 @@ public interface PropertySerializer<T extends Property<?>> {
 
   MapCodec<T> codec();
 
-  MapCodec<T> fullCodec ();
+  MapCodec<T> fullCodec();
 
   StreamCodec<ByteBuf, T> streamCodec();
 }

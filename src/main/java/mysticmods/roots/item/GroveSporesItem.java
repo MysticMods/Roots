@@ -25,7 +25,7 @@ public class GroveSporesItem extends Item {
     super(pProperties);
   }
 
-  public static boolean canPlace (Level pLevel, BlockPos pPos, Direction pDirection) {
+  public static boolean canPlace(Level pLevel, BlockPos pPos, Direction pDirection) {
     if (!pLevel.isEmptyBlock(pPos)) {
       return false;
     }

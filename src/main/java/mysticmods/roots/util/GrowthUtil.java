@@ -55,11 +55,11 @@ public class GrowthUtil {
       return this == NULL_CROP;
     }
 
-    public boolean isMaxAge (BlockState state) {
+    public boolean isMaxAge(BlockState state) {
       return state.getValue(ageProperty) == maxAge;
     }
 
-    public int growthTicks () {
+    public int growthTicks() {
       int ticks = 2;
 
       // TODO: configure these somewhere
@@ -85,7 +85,7 @@ public class GrowthUtil {
 
     Block block = state.getBlock();
     if (block instanceof CropBlock crop) {
-      result = new CropData(block, ((AccessorMixinCropBlock)crop).callGetAgeProperty(), crop.getMaxAge());
+      result = new CropData(block, ((AccessorMixinCropBlock) crop).callGetAgeProperty(), crop.getMaxAge());
       CROP_AGES.put(block, result);
       return result;
     } else {

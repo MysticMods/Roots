@@ -1,7 +1,5 @@
 package mysticmods.roots.api.registry;
 
-import net.minecraft.Util;
-
 @Deprecated
 public abstract class DescribedEntry implements IDescribedRegistryEntry {
   protected String descriptionId;
@@ -12,7 +10,7 @@ public abstract class DescribedEntry implements IDescribedRegistryEntry {
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
       // TODO:
-/*      this.descriptionId = Util.makeDescriptionId(getDescriptor(), getKey());*/
+      /*      this.descriptionId = Util.makeDescriptionId(getDescriptor(), getKey());*/
     }
 
     return this.descriptionId;

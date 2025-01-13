@@ -45,7 +45,7 @@ public class BaseBlocks {
       this.supporter = tag;
     }
 
-    public TagKey<Block> getSupporterTag () {
+    public TagKey<Block> getSupporterTag() {
       return supporter;
     }
 

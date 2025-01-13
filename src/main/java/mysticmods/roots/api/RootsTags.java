@@ -501,7 +501,7 @@ public class RootsTags {
   public static class Biomes {
     // TODO: ??? has_barrow_structureS?
     public static TagKey<Biome> HAS_BARROW_STRUCTURE = modTag("has_barrow_structure");
-    public static TagKey<Biome> HAS_BEETLE_SPAWNS =  modTag("has_beetle_spawns");
+    public static TagKey<Biome> HAS_BEETLE_SPAWNS = modTag("has_beetle_spawns");
     public static TagKey<Biome> HAS_DEER_SPAWNS = modTag("has_deer_spawns");
     public static TagKey<Biome> HAS_DUCK_SPAWNS = modTag("has_duck_spawns");
     public static TagKey<Biome> HAS_FENNEC_SPAWNS = modTag("has_fennec_spawns");
@@ -535,7 +535,7 @@ public class RootsTags {
       return TagKey.create(Registries.BIOME, RootsAPI.rl(name));
     }
 
-    static TagKey<Biome> compatTag (String name) {
+    static TagKey<Biome> compatTag(String name) {
       return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }

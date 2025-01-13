@@ -16,12 +16,14 @@ import java.util.function.Predicate;
 public class EntityUtils {
   public static Predicate<Entity> isProjectile = entity -> entity instanceof Projectile;
 
-  public static Predicate<Entity> isProjectileOrHostile (Player pPlayer) {
+  public static Predicate<Entity> isProjectileOrHostile(Player pPlayer) {
     return entity -> isProjectile.test(entity) || entity instanceof LivingEntity livingEntity && isHostileTo(pPlayer).test(livingEntity);
   }
+
   public static Predicate<LivingEntity> isHostileTo(Player pPlayer) {
     return isHostileTo(pPlayer, true);
   }
+
   public static Predicate<LivingEntity> isHostileTo(Player pPlayer, boolean skipSelf) {
     return entity -> {
       Level pLevel = pPlayer.level();
@@ -48,11 +50,7 @@ public class EntityUtils {
         }
       }
 
-      if (entity instanceof Enemy) {
-        return true;
-      }
-
-      return false;
+      return entity instanceof Enemy;
     };
   }
 }

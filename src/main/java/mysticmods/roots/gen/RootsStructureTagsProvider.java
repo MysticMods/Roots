@@ -2,15 +2,9 @@ package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.data.tags.StructureTagsProvider;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;

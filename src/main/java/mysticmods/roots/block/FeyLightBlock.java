@@ -16,7 +16,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 
-
 public class FeyLightBlock extends Block {
   public static BooleanProperty DECAYING = BooleanProperty.create("decaying");
   public static IntegerProperty DECAY = IntegerProperty.create("decay", 0, 10);

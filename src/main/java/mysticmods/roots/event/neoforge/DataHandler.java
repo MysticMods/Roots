@@ -2,8 +2,6 @@ package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.spell.Spell;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.datamaps.DataMapsUpdatedEvent;

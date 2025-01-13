@@ -29,74 +29,72 @@ import java.util.concurrent.CompletableFuture;
 
 // Source: https://github.com/BluSunrize/ImmersiveEngineering/blob/1.20.1/src/datagen/java/blusunrize/immersiveengineering/data/StructureUpdater.java
 public class StructureNbtUpdater implements DataProvider {
-    private final String basePath;
-    private final String modid;
-    private final PackOutput output;
-    private final MultiPackResourceManager resources;
+  private final String basePath;
+  private final String modid;
+  private final PackOutput output;
+  private final MultiPackResourceManager resources;
 
-    public StructureNbtUpdater(String basePath, String modid, ExistingFileHelper helper, PackOutput output) {
-        this.basePath = basePath;
-        this.modid = modid;
-        this.output = output;
+  public StructureNbtUpdater(String basePath, String modid, ExistingFileHelper helper, PackOutput output) {
+    this.basePath = basePath;
+    this.modid = modid;
+    this.output = output;
 
-        try {
-            Field serverData = ExistingFileHelper.class.getDeclaredField("serverData");
-            serverData.setAccessible(true);
-            resources = (MultiPackResourceManager)serverData.get(helper);
+    try {
+      Field serverData = ExistingFileHelper.class.getDeclaredField("serverData");
+      serverData.setAccessible(true);
+      resources = (MultiPackResourceManager) serverData.get(helper);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public @NotNull CompletableFuture<?> run(@Nonnull CachedOutput cache) {
+    try {
+      for (var entry : resources.listResources(basePath, $ -> true).entrySet()) {
+        if (entry.getKey().getNamespace().equals(modid)) {
+          process(entry.getKey(), entry.getValue(), cache);
         }
-        catch (NoSuchFieldException|IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+      }
+      return CompletableFuture.completedFuture(null);
+    } catch (IOException x) {
+      return CompletableFuture.failedFuture(x);
     }
+  }
 
-    @Override
-    public @NotNull CompletableFuture<?> run(@Nonnull CachedOutput cache) {
-        try {
-            for (var entry : resources.listResources(basePath, $ -> true).entrySet()) {
-                if (entry.getKey().getNamespace().equals(modid)) {
-                    process(entry.getKey(), entry.getValue(), cache);
-                }
-            }
-            return CompletableFuture.completedFuture(null);
-        }
-        catch (IOException x) {
-            return CompletableFuture.failedFuture(x);
-        }
+  private void process(ResourceLocation loc, Resource resource, CachedOutput cache) throws IOException {
+    CompoundTag inputNBT = NbtIo.readCompressed(resource.open(), NbtAccounter.unlimitedHeap());
+    CompoundTag converted = updateNBT(inputNBT);
+    if (!converted.equals(inputNBT)) {
+      RootsAPI.LOG.info("Found outdated NBT file: {}", loc);
+      Class<? extends DataFixer> fixerClass = DataFixers.getDataFixer().getClass();
+      if (!fixerClass.equals(DataFixerUpper.class)) {
+        throw new RuntimeException("Structures are not up to date, but unknown data fixer is in use: " + fixerClass.getName());
+      }
+      writeNBTTo(loc, converted, cache);
     }
+  }
 
-    private void process(ResourceLocation loc, Resource resource, CachedOutput cache) throws IOException {
-        CompoundTag inputNBT = NbtIo.readCompressed(resource.open(), NbtAccounter.unlimitedHeap());
-        CompoundTag converted = updateNBT(inputNBT);
-        if (!converted.equals(inputNBT)) {
-            RootsAPI.LOG.info("Found outdated NBT file: {}", loc);
-            Class<? extends DataFixer> fixerClass = DataFixers.getDataFixer().getClass();
-            if (!fixerClass.equals(DataFixerUpper.class)) {
-                throw new RuntimeException("Structures are not up to date, but unknown data fixer is in use: " + fixerClass.getName());
-            }
-            writeNBTTo(loc, converted, cache);
-        }
-    }
+  private void writeNBTTo(ResourceLocation loc, CompoundTag data, CachedOutput cache) throws IOException {
+    ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
+    NbtIo.writeCompressed(data, bytearrayoutputstream);
+    byte[] bytes = bytearrayoutputstream.toByteArray();
+    Path outputPath = output.getOutputFolder().resolve("data/" + loc.getNamespace() + "/" + loc.getPath());
+    cache.writeIfNeeded(outputPath, bytes, Hashing.sha256().hashBytes(bytes));
+  }
 
-    private void writeNBTTo(ResourceLocation loc, CompoundTag data, CachedOutput cache) throws IOException {
-        ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
-        NbtIo.writeCompressed(data, bytearrayoutputstream);
-        byte[] bytes = bytearrayoutputstream.toByteArray();
-        Path outputPath = output.getOutputFolder().resolve("data/" + loc.getNamespace() + "/" + loc.getPath());
-        cache.writeIfNeeded(outputPath, bytes, Hashing.sha256().hashBytes(bytes));
-    }
+  private static CompoundTag updateNBT(CompoundTag nbt) {
+    final CompoundTag updatedNBT = DataFixTypes.STRUCTURE.updateToCurrentVersion(
+        DataFixers.getDataFixer(), nbt, nbt.getInt("DataVersion")
+    );
+    StructureTemplate template = new StructureTemplate();
+    template.load(BuiltInRegistries.BLOCK.asLookup(), updatedNBT);
+    return template.save(new CompoundTag());
+  }
 
-    private static CompoundTag updateNBT(CompoundTag nbt) {
-        final CompoundTag updatedNBT = DataFixTypes.STRUCTURE.updateToCurrentVersion(
-            DataFixers.getDataFixer(), nbt, nbt.getInt("DataVersion")
-        );
-        StructureTemplate template = new StructureTemplate();
-        template.load(BuiltInRegistries.BLOCK.asLookup(), updatedNBT);
-        return template.save(new CompoundTag());
-    }
-
-    @Nonnull
-    @Override
-    public String getName() {
-        return "Update structure files in " + basePath;
-    }
+  @Nonnull
+  @Override
+  public String getName() {
+    return "Update structure files in " + basePath;
+  }
 }

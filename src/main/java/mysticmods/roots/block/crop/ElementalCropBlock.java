@@ -31,14 +31,14 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
         if (i < this.getMaxAge()) {
           // TODO: This changed from block to blockstate
           float f = getGrowthSpeed(pState, pLevel, pPos);
-        if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
-          BlockState pNewState = this.getStateForAge(i + 1);
-          if (pState.hasProperty(BlockStateProperties.WATERLOGGED)) {
-            pNewState = pNewState.setValue(BlockStateProperties.WATERLOGGED, pState.getValue(BlockStateProperties.WATERLOGGED));
+          if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
+            BlockState pNewState = this.getStateForAge(i + 1);
+            if (pState.hasProperty(BlockStateProperties.WATERLOGGED)) {
+              pNewState = pNewState.setValue(BlockStateProperties.WATERLOGGED, pState.getValue(BlockStateProperties.WATERLOGGED));
+            }
+            pLevel.setBlock(pPos, pNewState, 2);
+            net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(pLevel, pPos, pState);
           }
-          pLevel.setBlock(pPos, pNewState, 2);
-          net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(pLevel, pPos, pState);
-        }
         }
       }
     }

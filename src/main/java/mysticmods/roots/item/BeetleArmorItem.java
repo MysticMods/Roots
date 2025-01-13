@@ -1,8 +1,5 @@
 package mysticmods.roots.item;
 
-import mysticmods.roots.api.RootsAPI;
-import net.minecraft.world.entity.EquipmentSlot;
-
 /*
 public class BeetleArmorItem extends ModifiedArmorItem {
 

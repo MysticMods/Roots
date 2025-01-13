@@ -13,7 +13,7 @@ public record ConditionResult(List<LevelCondition> failedLevelConditions, List<P
     return !failedLevelConditions.isEmpty() || !failedPlayerConditions.isEmpty();
   }
 
-  public void report () {
+  public void report() {
     if (player.level().isClientSide() || !anyFailed()) {
       return;
     }

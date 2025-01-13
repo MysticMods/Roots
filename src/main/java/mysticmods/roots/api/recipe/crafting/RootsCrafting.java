@@ -2,8 +2,6 @@ package mysticmods.roots.api.recipe.crafting;
 
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
-
 
 import javax.annotation.Nullable;
 

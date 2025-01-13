@@ -1,23 +1,14 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.faction.GroveType;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.apache.commons.lang3.NotImplementedException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
 
 
 public class ModConditions {

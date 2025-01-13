@@ -7,5 +7,5 @@ import net.minecraft.core.HolderLookup;
 public interface IEntityRecipe<W extends IEntityCrafting> extends IRootsRecipe<W> {
   EntityTest getEntityTest();
 
-  void modifyEntity (W container, HolderLookup.Provider provider);
+  void modifyEntity(W container, HolderLookup.Provider provider);
 }

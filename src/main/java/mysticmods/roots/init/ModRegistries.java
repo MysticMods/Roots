@@ -6,10 +6,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 
-@EventBusSubscriber(modid=RootsAPI.MODID, bus=EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ModRegistries {
   @SubscribeEvent
-  public static void onNewRegistries (NewRegistryEvent event) {
+  public static void onNewRegistries(NewRegistryEvent event) {
     event.register(RootsRegistries.HERBS);
     event.register(RootsRegistries.RITUALS);
     event.register(RootsRegistries.SPELLS);

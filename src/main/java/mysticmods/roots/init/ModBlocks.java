@@ -9,8 +9,6 @@ import mysticmods.roots.block.crop.WaterElementalCropBlock;
 import mysticmods.roots.worldgen.trees.RootsTreeGrowers;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;

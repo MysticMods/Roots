@@ -1,10 +1,7 @@
 package mysticmods.roots.gen;
 
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.init.ModSpells;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;

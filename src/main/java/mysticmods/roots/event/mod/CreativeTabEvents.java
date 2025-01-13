@@ -10,7 +10,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class CreativeTabEvents {
   @SubscribeEvent
-  public static void creativeTabOrder (BuildCreativeModeTabContentsEvent event) {
+  public static void creativeTabOrder(BuildCreativeModeTabContentsEvent event) {
     if (event.getTab().equals(ModTabs.ROOT_TAB.get())) {
       event.accept(ModItems.THATCH.get());
       event.accept(ModItems.RUNESTONE.get());

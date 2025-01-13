@@ -1,6 +1,5 @@
 package mysticmods.roots.block;
 
-import it.unimi.dsi.fastutil.booleans.BooleanPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;

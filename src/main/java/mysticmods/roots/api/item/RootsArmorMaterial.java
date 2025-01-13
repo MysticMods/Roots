@@ -1,14 +1,5 @@
 package mysticmods.roots.api.item;
 
-import com.google.common.base.Suppliers;
-import net.minecraft.core.Holder;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.function.Supplier;
-
 /*public class RootsArmorMaterial implements ArmorMaterial {
   private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
   private final String name;

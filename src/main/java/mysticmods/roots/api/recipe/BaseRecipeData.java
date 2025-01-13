@@ -21,8 +21,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class BaseRecipeData {
@@ -93,12 +95,12 @@ public class BaseRecipeData {
     this.unlocks = data.unlocks;
   }
 
-  public boolean isEmpty () {
+  public boolean isEmpty() {
     return ingredients.isEmpty() && levelConditions.isEmpty() && playerConditions.isEmpty() && result.isEmpty() && results.isEmpty() && chanceOutputs.isEmpty() && unlocks.isEmpty();
   }
 
   // TODO: Why does this exist
-  public Builder builder () {
+  public Builder builder() {
     return new Builder(new ArrayList<>(ingredients), new ArrayList<>(levelConditions), new ArrayList<>(playerConditions), result.copy(), results.stream().map(ItemStack::copy).collect(Collectors.toList()), chanceOutputs.stream().map(ChanceOutput::copy).collect(Collectors.toList()), new ArrayList<>(unlocks));
   }
 
@@ -140,70 +142,70 @@ public class BaseRecipeData {
       return this;
     }
 
-    public Builder requires (Holder<? extends ItemLike> item) {
+    public Builder requires(Holder<? extends ItemLike> item) {
       return requires(item.value().asItem());
     }
 
-    public Builder requires (Item item) {
+    public Builder requires(Item item) {
       return requires(Ingredient.of(item));
     }
 
-    public Builder requires (TagKey<Item> tag) {
+    public Builder requires(TagKey<Item> tag) {
       return requires(Ingredient.of(tag));
     }
 
-    public Builder result (Holder<? extends ItemLike> item) {
+    public Builder result(Holder<? extends ItemLike> item) {
       return result(new ItemStack(item.value().asItem()));
     }
 
-    public Builder result (Holder<? extends ItemLike> item, int count) {
+    public Builder result(Holder<? extends ItemLike> item, int count) {
       return result(new ItemStack(item.value().asItem(), count));
     }
 
-    public Builder result (ItemStack result) {
+    public Builder result(ItemStack result) {
       this.result = result;
       return this;
     }
 
-    public Builder multiResult (ItemStack result) {
+    public Builder multiResult(ItemStack result) {
       this.results.add(result);
       return this;
     }
 
-    public Builder multiResult (Holder<? extends ItemLike> holder) {
+    public Builder multiResult(Holder<? extends ItemLike> holder) {
       return multiResult(new ItemStack(holder.value().asItem()));
     }
 
-    public Builder multiResult (Holder<? extends ItemLike> holder, int count) {
+    public Builder multiResult(Holder<? extends ItemLike> holder, int count) {
       return multiResult(new ItemStack(holder.value().asItem(), count));
     }
 
-    public Builder chanceOutput (ChanceOutput chanceOutput) {
+    public Builder chanceOutput(ChanceOutput chanceOutput) {
       this.chanceOutputs.add(chanceOutput);
       return this;
     }
 
-    public Builder chanceOutput (ItemStack itemStack, float chance) {
+    public Builder chanceOutput(ItemStack itemStack, float chance) {
       this.chanceOutputs.add(new ChanceOutput(itemStack, chance));
       return this;
     }
 
-    public Builder unlocks (Unlock<?> unlock) {
+    public Builder unlocks(Unlock<?> unlock) {
       this.unlocks.add(unlock);
       return this;
     }
 
-    public Builder condition (LevelCondition levelCondition) {
+    public Builder condition(LevelCondition levelCondition) {
       this.levelConditions.add(levelCondition);
       return this;
     }
 
-    public Builder condition (PlayerCondition playerCondition) {
+    public Builder condition(PlayerCondition playerCondition) {
       this.playerConditions.add(playerCondition);
       return this;
     }
 
-    public Builder multiplty (int value) {
+    public Builder multiplty(int value) {
       List<Ingredient> newIngredients = new ArrayList<>();
       List<ItemStack> newResults = new ArrayList<>();
       List<ChanceOutput> newChances = new ArrayList<>();
@@ -227,7 +229,7 @@ public class BaseRecipeData {
       return new BaseRecipeData(NonNullList.copyOf(ingredients), levelConditions, playerConditions, result, results, chanceOutputs, unlocks);
     }
 
-    public static Builder create () {
+    public static Builder create() {
       return new Builder();
     }
   }

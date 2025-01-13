@@ -5,7 +5,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 
-
 import javax.annotation.Nullable;
 
 public interface IPlayerShoulderCapability {

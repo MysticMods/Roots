@@ -727,7 +727,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE)).save(GroveRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.PETALS).requires(RootsTags.Items.GROVE_MOSS_HERB).condition(ModConditions.GROVE_STONE_VALID.get()).requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))), c, RootsAPI.rl("grove/runic_shears"));
 
-    RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS)).save(RunicEntityRecipe.Builder.create().durabilityCost(10).test(new EntityTagTest(RootsTags.Entities.FEY_LEATHER)).cooldown(2*60*20).build(BaseRecipeData.Builder.create().result(ModItems.FEY_LEATHER, 1)), c, RootsAPI.rl("runic_entity/fey_leather"));
+    RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS)).save(RunicEntityRecipe.Builder.create().durabilityCost(10).test(new EntityTagTest(RootsTags.Entities.FEY_LEATHER)).cooldown(2 * 60 * 20).build(BaseRecipeData.Builder.create().result(ModItems.FEY_LEATHER, 1)), c, RootsAPI.rl("runic_entity/fey_leather"));
 
     BaseRecipeData.Builder basePetalsBuilder = BaseRecipeData.Builder.create().requires(ItemTags.SMALL_FLOWERS).result(ModItems.PETALS, 1);
     MortarRecipe.Builder petalsBuilder = MortarRecipe.Builder.create().times(1);

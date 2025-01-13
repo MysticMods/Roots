@@ -22,9 +22,6 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class KnifeItem extends DiggerItem {

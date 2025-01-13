@@ -138,48 +138,48 @@ public class TreeNodePosition<T extends TreeNodeDisplayable<T>> {
   }
 
   private TreeNodePosition<T> apportion(TreeNodePosition<T> pNode) {
-     if (this.previousSibling != null) {
-        TreeNodePosition<T> treenodeposition = this;
-        TreeNodePosition<T> treenodeposition1 = this;
-        TreeNodePosition<T> treenodeposition2 = this.previousSibling;
-        TreeNodePosition<T> treenodeposition3 = this.parent.children.get(0);
-        float f = this.mod;
-        float f1 = this.mod;
-        float f2 = treenodeposition2.mod;
+    if (this.previousSibling != null) {
+      TreeNodePosition<T> treenodeposition = this;
+      TreeNodePosition<T> treenodeposition1 = this;
+      TreeNodePosition<T> treenodeposition2 = this.previousSibling;
+      TreeNodePosition<T> treenodeposition3 = this.parent.children.get(0);
+      float f = this.mod;
+      float f1 = this.mod;
+      float f2 = treenodeposition2.mod;
 
-        float f3;
-        for (f3 = treenodeposition3.mod; treenodeposition2.nextOrThread() != null && treenodeposition.previousOrThread() != null; f1 += treenodeposition1.mod) {
-           treenodeposition2 = treenodeposition2.nextOrThread();
-           treenodeposition = treenodeposition.previousOrThread();
-           treenodeposition3 = treenodeposition3.previousOrThread();
-           treenodeposition1 = treenodeposition1.nextOrThread();
-           treenodeposition1.ancestor = this;
-           float f4 = treenodeposition2.y + f2 - (treenodeposition.y + f) + 1.0F;
-           if (f4 > 0.0F) {
-              treenodeposition2.getAncestor(this, pNode).moveSubtree(this, f4);
-              f += f4;
-              f1 += f4;
-           }
-
-           f2 += treenodeposition2.mod;
-           f += treenodeposition.mod;
-           f3 += treenodeposition3.mod;
+      float f3;
+      for (f3 = treenodeposition3.mod; treenodeposition2.nextOrThread() != null && treenodeposition.previousOrThread() != null; f1 += treenodeposition1.mod) {
+        treenodeposition2 = treenodeposition2.nextOrThread();
+        treenodeposition = treenodeposition.previousOrThread();
+        treenodeposition3 = treenodeposition3.previousOrThread();
+        treenodeposition1 = treenodeposition1.nextOrThread();
+        treenodeposition1.ancestor = this;
+        float f4 = treenodeposition2.y + f2 - (treenodeposition.y + f) + 1.0F;
+        if (f4 > 0.0F) {
+          treenodeposition2.getAncestor(this, pNode).moveSubtree(this, f4);
+          f += f4;
+          f1 += f4;
         }
 
-        if (treenodeposition2.nextOrThread() != null && treenodeposition1.nextOrThread() == null) {
-           treenodeposition1.thread = treenodeposition2.nextOrThread();
-           treenodeposition1.mod += f2 - f1;
-        } else {
-           if (treenodeposition.previousOrThread() != null && treenodeposition3.previousOrThread() == null) {
-              treenodeposition3.thread = treenodeposition.previousOrThread();
-              treenodeposition3.mod += f - f3;
-           }
+        f2 += treenodeposition2.mod;
+        f += treenodeposition.mod;
+        f3 += treenodeposition3.mod;
+      }
 
-           pNode = this;
+      if (treenodeposition2.nextOrThread() != null && treenodeposition1.nextOrThread() == null) {
+        treenodeposition1.thread = treenodeposition2.nextOrThread();
+        treenodeposition1.mod += f2 - f1;
+      } else {
+        if (treenodeposition.previousOrThread() != null && treenodeposition3.previousOrThread() == null) {
+          treenodeposition3.thread = treenodeposition.previousOrThread();
+          treenodeposition3.mod += f - f3;
         }
 
-     }
-     return pNode;
+        pNode = this;
+      }
+
+    }
+    return pNode;
   }
 
   private void moveSubtree(TreeNodePosition<T> pNode, float pShift) {
@@ -199,7 +199,7 @@ public class TreeNodePosition<T extends TreeNodeDisplayable<T>> {
   }
 
   private void finalizePosition() {
-      this.node.setLocation((float) this.x, this.y);
+    this.node.setLocation((float) this.x, this.y);
 
     if (!this.children.isEmpty()) {
       for (TreeNodePosition<T> treenodeposition : this.children) {
@@ -213,7 +213,7 @@ public class TreeNodePosition<T extends TreeNodeDisplayable<T>> {
     if (!pRoot.isVisible()) {
       throw new IllegalArgumentException("Can't position children of an invisible root!");
     } else {
-      TreeNodePosition<T> treenodeposition = new TreeNodePosition<>(pRoot, null,  null, 1, 0);
+      TreeNodePosition<T> treenodeposition = new TreeNodePosition<>(pRoot, null, null, 1, 0);
       treenodeposition.firstWalk();
       float f = treenodeposition.secondWalk(0.0F, 0, treenodeposition.y);
       if (f < 0.0F) {

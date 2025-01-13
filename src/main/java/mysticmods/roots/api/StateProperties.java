@@ -6,7 +6,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-import java.util.Collection;
 import java.util.List;
 
 public class StateProperties {

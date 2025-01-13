@@ -11,7 +11,6 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
 public class MagnetismUtil {
   enum MagnetismContext {
     SPELL,
-    RITUAL;
+    RITUAL
   }
 
   public static List<Entity> collect(Level pLevel, BlockPos startPosition, int radiusX, int radiusY, int radiusZ, MagnetismContext context) {
@@ -72,21 +71,13 @@ public class MagnetismUtil {
     }
 
     if (entity instanceof ItemEntity item) {
-      if (item.getItem().isEmpty()) {
-        return true;
-      }
-
-      return false;
+      return item.getItem().isEmpty();
     } else if (entity instanceof ExperienceOrb orb) {
       if (context == MagnetismContext.RITUAL) {
         return true;
       }
 
-      if (!ConfigManager.EXPERIENCE_ORBS.get()) {
-        return true;
-      }
-
-      return false;
+      return !ConfigManager.EXPERIENCE_ORBS.get();
     }
 
     return true;

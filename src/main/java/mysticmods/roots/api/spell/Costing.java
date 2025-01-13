@@ -4,23 +4,13 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
-import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Capabilities;
-import mysticmods.roots.api.capability.HerbCapability;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.modifier.SpellModifier;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.util.Mth;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -249,12 +239,12 @@ public class Costing {
     }
   }
 
-  public Object2DoubleMap<Herb> getMinimumCost () {
+  public Object2DoubleMap<Herb> getMinimumCost() {
     calculateCosts(false, true);
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 
-  public Object2DoubleMap<Herb> getMaximumCost () {
+  public Object2DoubleMap<Herb> getMaximumCost() {
     calculateCosts(false, false);
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }

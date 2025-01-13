@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
-import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.DescribedEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
@@ -14,7 +13,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -94,7 +92,7 @@ public abstract class LevelCondition extends DescribedEntry {
     }
   }
 
-  public static class PillarCondition extends LevelCondition{
+  public static class PillarCondition extends LevelCondition {
     private final TagKey<Block> capstone;
     private final TagKey<Block> pillar;
     private final int heightExcluding;
@@ -148,7 +146,7 @@ public abstract class LevelCondition extends DescribedEntry {
     }
 
     @Nullable
-    protected StateProperties.Part getPart (BlockState state) {
+    protected StateProperties.Part getPart(BlockState state) {
       if (!state.hasProperty(StateProperties.GroveStone.PART)) {
         return null;
       } else {
@@ -156,7 +154,7 @@ public abstract class LevelCondition extends DescribedEntry {
       }
     }
 
-    protected boolean getValid (BlockState state) {
+    protected boolean getValid(BlockState state) {
       if (!state.hasProperty(StateProperties.GroveStone.VALID)) {
         return false;
       } else {
@@ -221,11 +219,11 @@ public abstract class LevelCondition extends DescribedEntry {
     return new PillarCondition(type.getCapstoneTag(), type.getPillarTag(), height);
   }
 
-  public static LevelCondition.GroveStoneCondition groveStone (GroveType grove, boolean requireValid) {
+  public static LevelCondition.GroveStoneCondition groveStone(GroveType grove, boolean requireValid) {
     return new GroveStoneCondition(grove.getTag(), requireValid);
   }
 
-  public static LevelCondition.GroveStoneCondition anyGroveStone (boolean requireValid) {
+  public static LevelCondition.GroveStoneCondition anyGroveStone(boolean requireValid) {
     return new GroveStoneCondition(RootsTags.Blocks.GROVE_STONES, requireValid);
   }
 

@@ -9,10 +9,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public interface IWorldRecipe<W extends IWorldCrafting> extends IRootsRecipe<W> {
-  PartialBlockState getOutputState ();
+  PartialBlockState getOutputState();
+
   List<WorldCondition> getConditions();
-  List<String> getSkipProperties ();
+
+  List<String> getSkipProperties();
 
   @Nullable
-  BlockState modifyState (W container, BlockState state, HolderLookup.Provider provider);
+  BlockState modifyState(W container, BlockState state, HolderLookup.Provider provider);
 }

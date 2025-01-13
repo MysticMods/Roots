@@ -18,31 +18,31 @@ public class ReputationCapability {
   public ReputationCapability() {
   }
 
-  public int getReputation (Grove grove) {
+  public int getReputation(Grove grove) {
     return REPUTATIONS.computeIfAbsent(grove, t -> 0);
   }
 
-  public int setReputation (Grove grove, int reputation) {
+  public int setReputation(Grove grove, int reputation) {
     int result = REPUTATIONS.put(grove, reputation);
     setDirty(true);
     return result;
   }
 
-  public int increaseReputation (Grove grove, int reputation) {
+  public int increaseReputation(Grove grove, int reputation) {
     int current = REPUTATIONS.computeIfAbsent(grove, t -> 0);
     int result = REPUTATIONS.put(grove, current + reputation);
     setDirty(true);
     return result;
   }
 
-  public int decreaseReputation (Grove grove, int reputation) {
+  public int decreaseReputation(Grove grove, int reputation) {
     int current = REPUTATIONS.computeIfAbsent(grove, t -> 0);
     int result = REPUTATIONS.put(grove, Math.max(0, current - reputation));
     setDirty(true);
     return result;
   }
 
-  public boolean markUntruePacifist (boolean value) {
+  public boolean markUntruePacifist(boolean value) {
     untruePacifist = value;
     setDirty(true);
     return untruePacifist;
@@ -52,7 +52,7 @@ public class ReputationCapability {
     return new SerializedReputationRecord(untruePacifist, REPUTATIONS);
   }
 
-  public void fromRecord (SerializedReputationRecord record) {
+  public void fromRecord(SerializedReputationRecord record) {
     this.untruePacifist = record.getUntruePacifist();
     this.REPUTATIONS.clear();
     this.REPUTATIONS.putAll(record.getReputations());
@@ -71,7 +71,7 @@ public class ReputationCapability {
     result.putBoolean("untrue_pacifist", untruePacifist);
     CompoundTag reputations = new CompoundTag();
     REPUTATIONS.forEach((grove, reputation) -> {
-/*      reputations.putInt(String.valueOf(grove.getKey()), reputation);*/
+      /*      reputations.putInt(String.valueOf(grove.getKey()), reputation);*/
     });
     result.put("reputations", reputations);
     return result;
@@ -136,7 +136,7 @@ public class ReputationCapability {
       buf.writeBoolean(this.untruePacifist);
       buf.writeVarInt(this.reputations.size());
       for (Object2IntMap.Entry<Grove> entry : this.reputations.object2IntEntrySet()) {
-/*        buf.writeResourceLocation(entry.getKey().getKey());*/
+        /*        buf.writeResourceLocation(entry.getKey().getKey());*/
         buf.writeVarInt(entry.getIntValue());
       }
     }

@@ -18,7 +18,8 @@ import java.util.*;
 import java.util.function.Predicate;
 
 // Derived from https://github.com/thiakil/MCCodecStuff/blob/main/src/main/java/com/thiakil/codecs/blockstate/PartialBlockState.java
-public record PartialBlockState (Block block, Map<String, Property.Value<?>> propertyMap) implements Predicate<BlockState> {
+public record PartialBlockState(Block block,
+                                Map<String, Property.Value<?>> propertyMap) implements Predicate<BlockState> {
   public static Codec<PartialBlockState> CODEC = BuiltInRegistries.BLOCK.byNameCodec()
       .dispatch("block",//dispatch based on the value of "block" (resource location)
           pred -> pred.block,//get if from the block field
@@ -32,11 +33,11 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
       );
   public static StreamCodec<RegistryFriendlyByteBuf, PartialBlockState> STREAM_CODEC = StreamCodec.of(PartialBlockState::toNetwork, PartialBlockState::fromNetwork);
 
-  public PartialBlockState (Block block, String ... properties) {
+  public PartialBlockState(Block block, String... properties) {
     this(block.defaultBlockState(), Arrays.asList(properties));
   }
 
-  public PartialBlockState (BlockState template, String ... properties) {
+  public PartialBlockState(BlockState template, String... properties) {
     this(template, Arrays.asList(properties));
   }
 
@@ -44,7 +45,7 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
     return block();
   }
 
-  public PartialBlockState (BlockState template, List<String> properties) {
+  public PartialBlockState(BlockState template, List<String> properties) {
     this(template.getBlock(), new HashMap<>());
     Map<String, Property<?>> propMap = new HashMap<>();
     for (Property<?> property : template.getProperties()) {
@@ -78,7 +79,7 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
     return true;
   }
 
-  public BlockState build () {
+  public BlockState build() {
     BlockState state = block.defaultBlockState();
     for (Map.Entry<String, Property.Value<?>> entry : propertyMap.entrySet()) {
       state = uncheckedSet(entry.getValue().property(), entry.getValue().value(), state);
@@ -86,7 +87,7 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
     return state;
   }
 
-  public PartialBlockState copy () {
+  public PartialBlockState copy() {
     return new PartialBlockState(block, new HashMap<>(propertyMap));
   }
 
@@ -122,7 +123,7 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
     return state;
   }
 
-  public static PartialBlockState fromNetwork (RegistryFriendlyByteBuf buffer) {
+  public static PartialBlockState fromNetwork(RegistryFriendlyByteBuf buffer) {
     Block incomingBlock = ByteBufCodecs.registry(Registries.BLOCK).decode(buffer);
     BlockState templateState = incomingBlock.defaultBlockState();
     Map<String, Property<?>> properties = new HashMap<>();
@@ -148,7 +149,7 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
     return new PartialBlockState(templateState, keys);
   }
 
-  public static void toNetwork (RegistryFriendlyByteBuf buffer, PartialBlockState state) {
+  public static void toNetwork(RegistryFriendlyByteBuf buffer, PartialBlockState state) {
     ByteBufCodecs.registry(Registries.BLOCK).encode(buffer, state.block);
     buffer.writeVarInt(state.propertyMap.size());
     for (Map.Entry<String, Property.Value<?>> entry : state.propertyMap.entrySet()) {
@@ -163,7 +164,7 @@ public record PartialBlockState (Block block, Map<String, Property.Value<?>> pro
   }
 
   @SuppressWarnings("unchecked")
-  static <T extends Comparable<T>, V extends T> String uncheckedValue (Property<?> property, Comparable<?> value) {
+  static <T extends Comparable<T>, V extends T> String uncheckedValue(Property<?> property, Comparable<?> value) {
     return ((Property<T>) property).getName((V) value);
   }
 

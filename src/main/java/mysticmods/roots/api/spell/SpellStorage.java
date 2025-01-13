@@ -2,11 +2,8 @@ package mysticmods.roots.api.spell;
 
 import com.google.common.collect.ImmutableList;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.item.ICastingItem;
 import mysticmods.roots.api.modifier.SpellModifier;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -34,7 +31,7 @@ public class SpellStorage {
     return spells.size();
   }
 
-  public int getSlot () {
+  public int getSlot() {
     return index;
   }
 
@@ -47,7 +44,7 @@ public class SpellStorage {
     return 0;
   }
 
-  public int getMaxCooldown () {
+  public int getMaxCooldown() {
     SpellInstance spell = getSpell();
     if (spell != null) {
       return spell.getMaxCooldown();
@@ -56,7 +53,7 @@ public class SpellStorage {
     return 0;
   }
 
-  public boolean tick () {
+  public boolean tick() {
     for (SpellInstance spell : spells) {
       if (spell != null) {
         if (spell.tick()) {
@@ -139,12 +136,12 @@ public class SpellStorage {
     return this.spells.set(slot, spell) == null;
   }
 
-  public boolean setSpell (int slot, Spell spell) {
+  public boolean setSpell(int slot, Spell spell) {
     return setSpell(slot, spell, Collections.emptyList());
   }
 
-  public boolean clearSpell (int slot) {
-    return setSpell(slot, (SpellInstance)null);
+  public boolean clearSpell(int slot) {
+    return setSpell(slot, (SpellInstance) null);
   }
 
   @Nullable
@@ -204,7 +201,7 @@ public class SpellStorage {
     tag.putInt("count", this.spells.size());*/
   }
 
-  public static SpellStorage getOrCreate (ItemStack stack) {
+  public static SpellStorage getOrCreate(ItemStack stack) {
     return fromItem(stack, true);
   }
 
@@ -241,11 +238,11 @@ public class SpellStorage {
     }
 
     result.index = tag.getInt("index");*/
-/*    return result;*/
+    /*    return result;*/
     return null;
   }
 
-  public List<Entry> entryList () {
+  public List<Entry> entryList() {
     if (entryList == null) {
       List<Entry> entryList = new ArrayList<>();
       for (int i = 0; i < size(); i++) {

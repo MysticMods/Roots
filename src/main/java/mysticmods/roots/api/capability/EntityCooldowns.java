@@ -1,6 +1,5 @@
 package mysticmods.roots.api.capability;
 
-import net.minecraft.core.Holder;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;

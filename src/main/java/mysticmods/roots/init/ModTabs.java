@@ -17,7 +17,7 @@ public class ModTabs {
       .icon(() -> new ItemStack(ModItems.WILDROOT.get()))
       .build());
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     CREATIVE_MODE_TABS.register(bus);
   }
 }

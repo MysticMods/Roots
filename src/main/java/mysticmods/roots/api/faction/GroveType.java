@@ -13,7 +13,7 @@ public enum GroveType {
   TWILIGHT,
   WILD;
 
-  protected final TagKey<Block> tag;
+  private final TagKey<Block> tag;
 
   GroveType(TagKey<Block> tag) {
     this.tag = tag;

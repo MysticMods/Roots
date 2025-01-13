@@ -47,7 +47,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   }
 
   @Override
-  public List<String> getSkipProperties () {
+  public List<String> getSkipProperties() {
     return skipProperties;
   }
 
@@ -83,7 +83,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
       if (player != null) {
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(pInv.getPlayer(), newState));
         for (Unlock<?> unlock : getUnlocks()) {
-          RootsAPI.getInstance().unlock((ServerPlayer)player, unlock);
+          RootsAPI.getInstance().unlock((ServerPlayer) player, unlock);
         }
       }
     }

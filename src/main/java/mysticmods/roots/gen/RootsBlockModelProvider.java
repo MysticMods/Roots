@@ -1,7 +1,6 @@
 package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.init.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;

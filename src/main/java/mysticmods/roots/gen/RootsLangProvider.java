@@ -8,17 +8,12 @@ import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModItems;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
@@ -37,15 +32,15 @@ public class RootsLangProvider extends LanguageProvider {
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 
-  public void addItem (Holder<Item> holder) {
+  public void addItem(Holder<Item> holder) {
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 
-  public void addEntity (Holder<EntityType<?>> holder) {
+  public void addEntity(Holder<EntityType<?>> holder) {
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 
-  public void addEffect (Holder<MobEffect> holder) {
+  public void addEffect(Holder<MobEffect> holder) {
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 

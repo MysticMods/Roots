@@ -11,13 +11,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public class Herb extends StyledRegistryEntry<Herb> {
   private final Holder<Item> item;
@@ -44,7 +40,7 @@ public class Herb extends StyledRegistryEntry<Herb> {
 
   // TODO: ItemStack data map
   @Nullable
-  public static Herb getHerb (ItemStack stack) {
+  public static Herb getHerb(ItemStack stack) {
     return stack.getItemHolder().getData(DataMaps.HERB_ITEM_DATA);
   }
 
@@ -60,7 +56,7 @@ public class Herb extends StyledRegistryEntry<Herb> {
     return builtInRegistryHolder().is(location);
   }
 
-  public boolean is (Herb herb) {
+  public boolean is(Herb herb) {
     return herb == this;
   }
 

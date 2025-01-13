@@ -6,7 +6,6 @@ import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SpriteSourceProvider;
 
-
 import java.util.concurrent.CompletableFuture;
 
 public class RootsAtlasProvider extends SpriteSourceProvider {

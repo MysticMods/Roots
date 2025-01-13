@@ -5,11 +5,6 @@ import net.minecraft.core.HolderLookup;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-
-
-
-
-
 import java.util.function.Consumer;
 
 public class RootsAdvancementProvider implements AdvancementProvider.AdvancementGenerator {

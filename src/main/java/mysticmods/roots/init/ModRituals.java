@@ -100,11 +100,11 @@ public class ModRituals {
   public static final DeferredHolder<Ritual, TransmutationRitual> TRANSMUTATION = RITUAL.register("transmutation", TransmutationRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> TRANSMUTATION_DURATION = P.recordProperty("transmutation/duration", Property.ofInt(2400, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> TRANSMUTATION_INTERVAL
-    = P.recordProperty("transmutation/interval", Property.ofInt(100, RitualProperties.INTERVAL));
+      = P.recordProperty("transmutation/interval", Property.ofInt(100, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> TRANSMUTATION_RADIUS_XZ
-    = P.recordProperty("transmutation/radius_xz", Property.ofInt(6, RitualProperties.RADIUS_XZ));
+      = P.recordProperty("transmutation/radius_xz", Property.ofInt(6, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> TRANSMUTATION_RADIUS_Y
-    = P.recordProperty("transmutation/radius_y", Property.ofInt(4, RitualProperties.RADIUS_Y));
+      = P.recordProperty("transmutation/radius_y", Property.ofInt(4, RitualProperties.RADIUS_Y));
 
   public static final DeferredHolder<Ritual, WardingRitual> WARDING = RITUAL.register("warding", WardingRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> WARDING_DURATION = P.recordProperty("warding/duration", Property.ofInt(1200, RitualProperties.DURATION));

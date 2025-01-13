@@ -28,7 +28,7 @@ public interface Property<T> {
   T getValue();
 
   @NotNull
-  default T get () {
+  default T get() {
     T val = getValue();
     if (val == null) {
       return getDefaultValue();
@@ -390,11 +390,11 @@ public interface Property<T> {
     public static final ResourceKey<PropertySerializer<?>> SERIALIZER = ResourceKey.create(RootsRegistries.Keys.PROPERTY_SERIALIZERS, RootsAPI.rl("string_property"));
     public static final ResourceKey<PropertyType<?>> TYPE = ResourceKey.create(RootsRegistries.Keys.PROPERTY_TYPES, RootsAPI.rl("string_property"));
 
-    public StringProperty (String defaultValue, String comment, @SuppressWarnings("OptionalUsedAsFieldOrParameterType") Optional<String> value) {
+    public StringProperty(String defaultValue, String comment, @SuppressWarnings("OptionalUsedAsFieldOrParameterType") Optional<String> value) {
       this(defaultValue, comment, value.orElse(null));
     }
 
-    public StringProperty (String defaultValue, String comment) {
+    public StringProperty(String defaultValue, String comment) {
       this(defaultValue, comment, (String) null);
     }
 
@@ -410,7 +410,7 @@ public interface Property<T> {
 
     @Override
     @Nullable
-    public String getValue () {
+    public String getValue() {
       return value();
     }
 

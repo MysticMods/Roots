@@ -1,9 +1,6 @@
 package mysticmods.roots.api.capability;
 
 
-
-
-
 public class Capabilities {
 /*  public static final Capability<HerbCapability> HERB_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
   });

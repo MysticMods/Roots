@@ -12,9 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-
-
-
 import java.util.concurrent.CompletableFuture;
 
 public class RootsItemTagsProvider extends ItemTagsProvider {
@@ -129,8 +126,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.PYRES, RootsTags.Items.PYRES);
     this.copy(RootsTags.Blocks.GROVE_CRAFTERS, RootsTags.Items.GROVE_CRAFTERS);
     this.copy(RootsTags.Blocks.MORTARS, RootsTags.Items.MORTARS);
-/*    this.copy(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Items.RUNE_CAPSTONES);*/
-/*    this.copy(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Items.RUNE_PILLARS);*/
+    /*    this.copy(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Items.RUNE_CAPSTONES);*/
+    /*    this.copy(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Items.RUNE_PILLARS);*/
 /*    this.copy(RootsTags.Blocks.RUNED_CAPSTONES, RootsTags.Items.RUNED_CAPSTONES);
     this.copy(RootsTags.Blocks.RUNED_PILLARS, RootsTags.Items.RUNED_PILLARS);
     this.copy(RootsTags.Blocks.RUNES_CAPSTONES, RootsTags.Items.RUNES_CAPSTONES);
@@ -160,7 +157,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Items.CRIMSON_PILLARS);
     this.copy(RootsTags.Blocks.WARPED_PILLARS, RootsTags.Items.WARPED_PILLARS);*/
     this.copy(RootsTags.Blocks.STONEPETAL, RootsTags.Items.STONEPETAL);
-/*    this.copy(RootsTags.Blocks.GRASS, RootsTags.Items.GRASS); ??????? */
+    /*    this.copy(RootsTags.Blocks.GRASS, RootsTags.Items.GRASS); ??????? */
     this.copy(RootsTags.Blocks.NYI, RootsTags.Items.NYI);
 /*    this.copy(RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN, RootsTags.Items.SUPPORTS_HELL_SPROUT_SPAWN);
     this.copy(RootsTags.Blocks.BAFFLECAP_CONVERSION, RootsTags.Items.BAFFLECAP_CONVERSION);

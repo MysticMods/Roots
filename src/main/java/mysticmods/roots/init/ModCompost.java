@@ -1,10 +1,9 @@
 package mysticmods.roots.init;
 
-import net.minecraft.client.particle.SuspendedTownParticle;
 import net.minecraft.world.level.block.ComposterBlock;
 
 public class ModCompost {
-  public static void init () {
+  public static void init() {
     // Leaves
     ComposterBlock.COMPOSTABLES.put(ModBlocks.WILDWOOD_LEAVES.get(), 0.3f);
 
@@ -60,9 +59,6 @@ public class ModCompost {
     // Flowers
     ComposterBlock.COMPOSTABLES.put(ModItems.PETALS.get(), 0.65f);
     ComposterBlock.COMPOSTABLES.put(ModBlocks.STONEPETAL.get(), 0.65f);
-
-
-
 
 
   }

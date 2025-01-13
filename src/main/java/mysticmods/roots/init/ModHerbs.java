@@ -25,7 +25,7 @@ public class ModHerbs {
   public static final DeferredHolder<Herb, Herb> WILDEWHEET = REGISTER.register("wildewheet", () -> new Herb(ModItems.WILDEWHEET, RootsTags.Items.WILDEWHEET_HERB, ChatFormatting.GOLD));
   public static final DeferredHolder<Herb, Herb> BAFFLECAP = REGISTER.register("bafflecap", () -> new Herb(ModItems.BAFFLECAP, RootsTags.Items.BAFFLECAP_HERB, ChatFormatting.DARK_GREEN));
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     REGISTER.register(bus);
   }
 }

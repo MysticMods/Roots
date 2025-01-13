@@ -5,7 +5,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.IItemHandler;
 
-
 import javax.annotation.Nullable;
 
 public abstract class RootsTileCrafting<H extends IItemHandler, T extends BlockEntity> extends RootsCrafting<H> implements IRootsBlockEntityCrafting<H, T> {

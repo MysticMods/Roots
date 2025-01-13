@@ -34,7 +34,7 @@ public class ModSounds {
   // Deer
   public static final DeferredHolder<SoundEvent, SoundEvent> DEER_AMBIENT = SOUNDS.register("mob.deer.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.deer.ambient")));
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     SOUNDS.register(bus);
   }
 }

@@ -1,7 +1,6 @@
 package mysticmods.roots.api;
 
 import mysticmods.roots.api.capability.Unlock;
-import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;

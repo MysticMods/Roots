@@ -19,7 +19,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -40,8 +39,6 @@ import net.neoforged.neoforge.common.IShearable;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -53,7 +50,7 @@ public class RunicShearsItem extends ShearsItem {
     super(pProperties);
   }
 
-  private AABB getBoundingBox () {
+  private AABB getBoundingBox() {
     if (aoeBoundingBox == null) {
       aoeBoundingBox = new AABB(-ConfigManager.AOE_BOUNDING_BOX_X.getAsInt(), -ConfigManager.AOE_BOUNDING_BOX_Y.getAsInt(), -ConfigManager.AOE_BOUNDING_BOX_Z.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_X.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_Y.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_Z.getAsInt());
     }
@@ -114,14 +111,14 @@ public class RunicShearsItem extends ShearsItem {
     return InteractionResult.PASS;
   }
 
-  protected boolean doShear (IShearable target, Player player, ItemStack heldItem, LivingEntity entity, BlockPos pos, InteractionHand hand) {
+  protected boolean doShear(IShearable target, Player player, ItemStack heldItem, LivingEntity entity, BlockPos pos, InteractionHand hand) {
     if (target.isShearable(player, heldItem, entity.level(), pos)) {
       // EnchantmentHelper.getItemEnchantmentLevel(entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FORTUNE), heldItem)
       List<ItemStack> drops = target.onSheared(player, heldItem, entity.level(), pos);
       Random rand = new java.util.Random();
       drops.forEach(d -> {
         ItemEntity ent = player.spawnAtLocation(d, 1.0F);
-        ent.setDeltaMovement(ent.getDeltaMovement().add((double) ((rand.nextFloat() - rand.nextFloat()) * 0.1F), (double) (rand.nextFloat() * 0.05F), (double) ((rand.nextFloat() - rand.nextFloat()) * 0.1F)));
+        ent.setDeltaMovement(ent.getDeltaMovement().add((rand.nextFloat() - rand.nextFloat()) * 0.1F, rand.nextFloat() * 0.05F, (rand.nextFloat() - rand.nextFloat()) * 0.1F));
       });
       entity.gameEvent(GameEvent.SHEAR, player);
       return true;
