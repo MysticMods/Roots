@@ -107,7 +107,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     private final List<String> skipProperties = new ArrayList<>();
     private int durabilityCost;
     private PartialBlockState outputState;
-    private List<WorldCondition> condition = new ArrayList<>();
+    private final List<WorldCondition> condition = new ArrayList<>();
     private OutputStateMapper stateMapper;
 
     protected Builder() {

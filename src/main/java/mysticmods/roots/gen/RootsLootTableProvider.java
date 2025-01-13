@@ -7,8 +7,12 @@ import mysticmods.roots.block.WildRootsBlock;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.loot.predicates.HasHornsCondition;
 import mysticmods.roots.mixin.AccessorMixinBlockLootSubProvider;
+import net.minecraft.advancements.critereon.EntityFlagsPredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -16,10 +20,13 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -30,19 +37,18 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
-import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -51,12 +57,133 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 
 public class RootsLootTableProvider {
 
 
   public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK)), provider);
+    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY)), provider);
+  }
+
+  public static class RootsEntityLootTables extends EntityLootSubProvider {
+
+    public RootsEntityLootTables(HolderLookup.Provider provider) {
+      super(FeatureFlags.REGISTRY.allFlags(), provider);
+    }
+
+    @Override
+    protected Stream<EntityType<?>> getKnownEntityTypes() {
+      List<EntityType<?>> types = List.of(ModEntities.BEETLE.get(), ModEntities.DEER.get(), ModEntities.FENNEC.get(), ModEntities.TAN_SPROUT.get(), ModEntities.GREEN_SPROUT.get(), ModEntities.RED_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.OWL.get(), ModEntities.DUCK.get());
+      return types.stream();
+    }
+
+    @Override
+    public void generate() {
+      add(ModEntities.BEETLE.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(ModItems.CARAPACE.get())
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(2, 4)))
+              )
+              .add(LootItem.lootTableItem(Items.SLIME_BALL)
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 2)))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          ));
+      add(ModEntities.DEER.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(Items.LEATHER)
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0, 3)))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          )
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(ModItems.VENISON.get())
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0, 1)))
+                  .apply(SmeltItemFunction.smelted()
+                      .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          )
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(ModItems.ANTLERS.get())
+                  .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                  .when(HasHornsCondition.builder())
+              )
+              .setRolls(ConstantValue.exactly(1))
+          ));
+      add(ModEntities.FENNEC.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(ModItems.PELT.get())
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 2)))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          )
+      );
+      add(ModEntities.TAN_SPROUT.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(Items.POTATO)
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 3)))
+                  .apply(SmeltItemFunction.smelted()
+                      .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          )
+      );
+      add(ModEntities.GREEN_SPROUT.get(),
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool()
+                  .add(LootItem.lootTableItem(Items.MELON_SLICE)
+                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                      .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 3)))
+                  )
+                  .setRolls(ConstantValue.exactly(1))
+              )
+      );
+      add(ModEntities.RED_SPROUT.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(Items.BEETROOT)
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 3)))
+                  .apply(SmeltItemFunction.smelted()
+                      .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          ));
+      add(ModEntities.PURPLE_SPROUT.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(ModItems.AUBERGINE.get())
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 3)))
+                  .apply(SmeltItemFunction.smelted()
+                      .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          ));
+      add(ModEntities.OWL.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(Items.FEATHER)
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 3)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 3)))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          ));
+      add(ModEntities.DUCK.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(Items.FEATHER)
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 3)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 3)))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          )
+      );
+    }
   }
 
   public static class RootsBlockLootTables extends BlockLootSubProvider {
