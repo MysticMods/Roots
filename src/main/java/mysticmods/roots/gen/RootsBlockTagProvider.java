@@ -72,8 +72,6 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(BlockTags.SPRUCE_LOGS).add(RUNED_SPRUCE_LOG.get());
     this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(RootsTags.Blocks.RITUAL_PEDESTALS);
-    //noinspection unchecked
-
 
 
     this.tag(RootsTags.Blocks.STONEPETAL).add(STONEPETAL.get());

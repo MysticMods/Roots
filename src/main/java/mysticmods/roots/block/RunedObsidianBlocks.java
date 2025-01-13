@@ -11,7 +11,6 @@ import net.minecraft.world.level.material.PushReaction;
  * These classes are specifically designed to be wither- and ender-dragon-proof
  * along with a high resistance to explosion damage.
  */
-@SuppressWarnings("deprecation")
 public class RunedObsidianBlocks {
   public static class Block extends net.minecraft.world.level.block.Block {
     public Block(Properties p_i48440_1_) {

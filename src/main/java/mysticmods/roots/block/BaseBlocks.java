@@ -19,7 +19,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public class BaseBlocks {
   public static class SeededCropsBlock extends CropBlock {
     private final Supplier<? extends ItemLike> seedProvider;
@@ -50,7 +49,6 @@ public class BaseBlocks {
       return supporter;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
       return SHAPE;

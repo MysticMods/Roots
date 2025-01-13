@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-@SuppressWarnings({"NullableProblems", "Duplicates", "ConstantConditions"})
+@SuppressWarnings({"NullableProblems", "Duplicates"})
 public class BeetleEntity extends TamableAnimal {
 
   public BeetleEntity(EntityType<? extends BeetleEntity> type, Level worldIn) {

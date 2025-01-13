@@ -20,7 +20,6 @@ public class AddGrassDropsModifier extends LootModifier {
     this.dropItem = item;
   }
 
-  @SuppressWarnings("deprecation")
   @NotNull
   @Override
   protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {

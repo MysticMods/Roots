@@ -15,7 +15,7 @@ import net.minecraft.world.level.material.Fluids;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings({"deprecation", "Duplicates"})
+@SuppressWarnings({"Duplicates"})
 public class WaterloggedBlock extends Block implements SimpleWaterloggedBlock {
   protected static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 

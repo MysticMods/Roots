@@ -34,7 +34,6 @@ public class FeyLightBlock extends Block {
     this.registerDefaultState(this.defaultBlockState().setValue(DECAYING, false).setValue(DECAY, 0).setValue(COLORED, false).setValue(COLOR, DyeColor.WHITE));
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
     return Shapes.FEY_LIGHT;
