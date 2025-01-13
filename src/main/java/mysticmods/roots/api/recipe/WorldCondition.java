@@ -16,13 +16,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.TriPredicate;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
 public record WorldCondition(Shift shift, WorldTest test) implements TriPredicate<BlockPos, Level, RandomSource> {
   public static final Codec<WorldCondition> CODEC = RecordCodecBuilder.create((codec) -> codec.group(Shift.CODEC.fieldOf("shift").forGetter((condition) -> condition.shift), WorldTest.CODEC.fieldOf("test").forGetter((condition) -> condition.test)).apply(codec, WorldCondition::new));
+  public static final Codec<List<WorldCondition>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, WorldCondition> STREAM_CODEC = StreamCodec.composite(Shift.STREAM_CODEC, o -> o.shift, WorldTest.STREAM_CODEC, o -> o.test, WorldCondition::new);
+  public static final StreamCodec<RegistryFriendlyByteBuf, List<WorldCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   public WorldCondition(WorldTest test) {
     this(Shift.NONE, test);

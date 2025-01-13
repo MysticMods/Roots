@@ -35,7 +35,7 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static MapCodec<BarkRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.codec().optionalFieldOf("data").forGetter(o -> o.data.isEmpty() ? Optional.empty() : Optional.of(o.data)),
       PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
-      WorldCondition.CODEC.fieldOf("condition").forGetter(o -> o.condition),
+      WorldCondition.LIST_CODEC.fieldOf("condition").forGetter(o -> o.conditions),
       Codec.STRING.listOf().optionalFieldOf("skipProperties").forGetter((o) -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties)),
       Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost),
       OutputStateMapper.CODEC.optionalFieldOf("stateMapper").forGetter(o -> Optional.ofNullable(o.stateMapper))
@@ -43,7 +43,7 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static StreamCodec<RegistryFriendlyByteBuf, BarkRecipe> STREAM_CODEC = StreamCodec.composite(
       BaseRecipeData.STREAM_CODEC, o -> o.data,
       ByteBufCodecs.optional(PartialBlockState.STREAM_CODEC), o -> Optional.ofNullable(o.outputState),
-      WorldCondition.STREAM_CODEC, o -> o.condition,
+      WorldCondition.LIST_STREAM_CODEC, o -> o.conditions,
       ByteBufCodecs.optional(ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list())), o -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties),
       ByteBufCodecs.VAR_INT, o -> o.durabilityCost,
       ByteBufCodecs.optional(OutputStateMapper.STREAM_CODEC), o -> Optional.ofNullable(o.stateMapper),
@@ -57,25 +57,25 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     super();
   }
 
-  public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition, List<String> skipProperties, int durabilityCost) {
+  public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost) {
     super(data, outputState, condition, skipProperties);
     this.durabilityCost = durabilityCost;
   }
 
-  public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition, List<String> skipProperties, int durabilityCost, OutputStateMapper stateMapper) {
+  public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost, OutputStateMapper stateMapper) {
     super(data, outputState, condition, skipProperties);
     this.stateMapper = stateMapper;
     this.durabilityCost = durabilityCost;
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  public BarkRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState, WorldCondition worldCondition, Optional<List<String>> skipProperties, int durabilityCost, Optional<OutputStateMapper> stateMapper) {
-    this(baseRecipeData, partialBlockState.orElse(null), worldCondition, skipProperties.orElse(List.of()), durabilityCost, stateMapper.orElse(null));
+  public BarkRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState, List<WorldCondition> worldCondition, Optional<List<String>> skipProperties, int durabilityCost, Optional<OutputStateMapper> stateMapper) {
+    this(baseRecipeData, partialBlockState.orElse(null), worldCondition, skipProperties.orElse(Collections.emptyList()), durabilityCost, stateMapper.orElse(null));
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  public BarkRecipe(Optional<BaseRecipeData> baseRecipeData, Optional<PartialBlockState> partialBlockState, WorldCondition worldCondition, Optional<List<String>> strings, Integer integer, Optional<OutputStateMapper> outputStateMapper) {
-    super(baseRecipeData.orElse(new BaseRecipeData()), partialBlockState.orElse(null), worldCondition, strings.orElse(List.of()));
+  public BarkRecipe(Optional<BaseRecipeData> baseRecipeData, Optional<PartialBlockState> partialBlockState, List<WorldCondition> worldCondition, Optional<List<String>> strings, Integer integer, Optional<OutputStateMapper> outputStateMapper) {
+    super(baseRecipeData.orElse(new BaseRecipeData()), partialBlockState.orElse(null), worldCondition, strings.orElse(Collections.emptyList()));
   }
 
   @Nullable
@@ -133,10 +133,6 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     return Identifiers.BARK_RECIPE_GROUP;
   }
 
-  public Pair<BaseRecipeData.Builder, Builder> builder() {
-    return Pair.of(data.builder(), new Builder(outputState.copy(), condition, stateMapper.copy()));
-  }
-
   public static class Serializer implements RecipeSerializer<BarkRecipe> {
 
     @Override
@@ -152,7 +148,7 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   public static class Builder {
     private PartialBlockState outputState;
-    private WorldCondition condition;
+    private List<WorldCondition> condition = new ArrayList<>();
     private OutputStateMapper stateMapper;
     private int durabilityCost = 1;
     private final List<String> skipProperties = new ArrayList<>();
@@ -160,7 +156,7 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     protected Builder() {
     }
 
-    protected Builder(PartialBlockState outputState, WorldCondition condition, OutputStateMapper stateMapper) {
+    protected Builder(PartialBlockState outputState, List<WorldCondition> condition, OutputStateMapper stateMapper) {
       this.outputState = outputState;
       this.condition = condition;
       this.stateMapper = stateMapper;
@@ -177,7 +173,7 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     }
 
     public Builder condition(WorldCondition condition) {
-      this.condition = condition;
+      this.condition.add(condition);
       return this;
     }
 

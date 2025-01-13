@@ -1,12 +1,14 @@
 {
   "type": "roots:bark",
-  "condition": {
-    "shift": "none",
-    "test": {
-      "type": "roots:tag_match_test",
-      "tag": "roots:bark_logs/wildwood"
+  "condition": [
+    {
+      "shift": "none",
+      "test": {
+        "type": "roots:tag_match_test",
+        "tag": "roots:bark_logs/wildwood"
+      }
     }
-  },
+  ],
   "data": {
     "result": {
       "count": 3,

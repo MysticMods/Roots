@@ -20,10 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 // TODO: List of ItemStack results
@@ -39,19 +36,19 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   }
 
   default List<LevelCondition> getLevelConditions() {
-    return List.of();
+    return Collections.emptyList();
   }
 
   default List<PlayerCondition> getPlayerConditions() {
-    return List.of();
+    return Collections.emptyList();
   }
 
   default List<ChanceOutput> getChanceOutputs() {
-    return List.of();
+    return Collections.emptyList();
   }
 
   default List<Unlock<?>> getUnlocks() {
-    return List.of();
+    return Collections.emptyList();
   }
 
   default ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {

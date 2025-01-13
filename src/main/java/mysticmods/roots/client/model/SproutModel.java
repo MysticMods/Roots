@@ -11,6 +11,8 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Collections;
+
 public class SproutModel extends AgeableListModel<SproutEntity> {
   private final ModelPart head;
   private final ModelPart legL;
@@ -56,7 +58,7 @@ public class SproutModel extends AgeableListModel<SproutEntity> {
 
   @Override
   protected Iterable<ModelPart> headParts() {
-    return ImmutableList.of();
+    return Collections.emptyList();
   }
 
   @Override

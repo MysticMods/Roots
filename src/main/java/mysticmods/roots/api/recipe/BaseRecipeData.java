@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 public class BaseRecipeData {
   public static final MapCodec<BaseRecipeData> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-      Ingredient.CODEC_NONEMPTY.listOf().optionalFieldOf("ingredients", List.of()).flatXmap(
+      Ingredient.CODEC_NONEMPTY.listOf().optionalFieldOf("ingredients", Collections.emptyList()).flatXmap(
           list -> {
             NonNullList<Ingredient> ingredients = NonNullList.withSize(list.size(), Ingredient.EMPTY);
             for (int i = 0; i < list.size(); i++) {
@@ -37,12 +37,12 @@ public class BaseRecipeData {
           },
           DataResult::success
       ).forGetter(o -> o.ingredients),
-      LevelCondition.CODEC.listOf().optionalFieldOf("levelConditions", List.of()).forGetter(o -> o.levelConditions),
-      PlayerCondition.CODEC.listOf().optionalFieldOf("playerConditions", List.of()).forGetter(o -> o.playerConditions),
+      LevelCondition.CODEC.listOf().optionalFieldOf("levelConditions", Collections.emptyList()).forGetter(o -> o.levelConditions),
+      PlayerCondition.CODEC.listOf().optionalFieldOf("playerConditions", Collections.emptyList()).forGetter(o -> o.playerConditions),
       ItemStack.CODEC.optionalFieldOf("result", ItemStack.EMPTY).forGetter(o -> o.result),
-      ItemStack.CODEC.listOf().optionalFieldOf("results", List.of()).forGetter(o -> o.results),
-      ChanceOutput.LIST_CODEC.optionalFieldOf("chanceOutputs", List.of()).forGetter(o -> o.chanceOutputs),
-      Unlock.LIST_CODEC.optionalFieldOf("unlocks", List.of()).forGetter(o -> o.unlocks)
+      ItemStack.CODEC.listOf().optionalFieldOf("results", Collections.emptyList()).forGetter(o -> o.results),
+      ChanceOutput.LIST_CODEC.optionalFieldOf("chanceOutputs", Collections.emptyList()).forGetter(o -> o.chanceOutputs),
+      Unlock.LIST_CODEC.optionalFieldOf("unlocks", Collections.emptyList()).forGetter(o -> o.unlocks)
   ).apply(instance, BaseRecipeData::new));
   public static Codec<BaseRecipeData> OPTIONAL_CODEC = ExtraCodecs.optionalEmptyMap(CODEC.codec()).xmap(o -> o.orElse(new BaseRecipeData()), o -> o == null ? Optional.empty() : Optional.of(o));
   public static StreamCodec<RegistryFriendlyByteBuf, NonNullList<Ingredient>> INGREDIENT_LIST_STREAM = Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.collection(NonNullList::createWithCapacity));

@@ -15,6 +15,7 @@ import net.neoforged.neoforge.common.util.RecipeMatcher;
 import net.neoforged.neoforge.items.IItemHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<W> {
@@ -34,7 +35,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   @Override
   public List<LevelCondition> getLevelConditions() {
     if (this.data.levelConditions == null) {
-      return List.of();
+      return Collections.emptyList();
     }
     return this.data.levelConditions;
   }
@@ -42,7 +43,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   @Override
   public List<PlayerCondition> getPlayerConditions() {
     if (this.data.playerConditions == null) {
-      return List.of();
+      return Collections.emptyList();
     }
     return this.data.playerConditions;
   }
@@ -50,7 +51,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   @Override
   public List<ChanceOutput> getChanceOutputs() {
     if (this.data.chanceOutputs == null) {
-      return List.of();
+      return Collections.emptyList();
     }
     return this.data.chanceOutputs;
   }
@@ -58,7 +59,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   @Override
   public List<Unlock<?>> getUnlocks() {
     if (this.data.unlocks == null) {
-      return List.of();
+      return Collections.emptyList();
     }
     return this.data.unlocks;
   }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IWorldRecipe<W extends IWorldCrafting> extends IRootsRecipe<W> {
   PartialBlockState getOutputState ();
-  WorldCondition getCondition ();
+  List<WorldCondition> getConditions();
   List<String> getSkipProperties ();
 
   @Nullable

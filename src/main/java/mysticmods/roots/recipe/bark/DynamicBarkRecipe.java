@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbilities;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class DynamicBarkRecipe extends BarkRecipe {
   public static DynamicBarkRecipe INSTANCE = new DynamicBarkRecipe();
@@ -43,11 +44,11 @@ public class DynamicBarkRecipe extends BarkRecipe {
   private WorldCondition barkCondition = null;
 
   @Override
-  public WorldCondition getCondition() {
+  public List<WorldCondition> getConditions() {
     if (barkCondition == null) {
       barkCondition = new WorldCondition(new TagMatchWorldTest(BlockTags.LOGS));
     }
-    return barkCondition;
+    return List.of(barkCondition);
   }
 
   @Override

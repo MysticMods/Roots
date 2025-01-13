@@ -1,8 +1,8 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Capabilities;
 import mysticmods.roots.api.capability.EntityCooldowns;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -14,12 +14,12 @@ import mysticmods.roots.util.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -32,22 +32,31 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.IShearable;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class RunicShearsItem extends ShearsItem {
+  private AABB aoeBoundingBox;
+
   public RunicShearsItem(Properties pProperties) {
     super(pProperties);
+  }
+
+  private AABB getBoundingBox () {
+    if (aoeBoundingBox == null) {
+      aoeBoundingBox = new AABB(-ConfigManager.AOE_BOUNDING_BOX_X.getAsInt(), -ConfigManager.AOE_BOUNDING_BOX_Y.getAsInt(), -ConfigManager.AOE_BOUNDING_BOX_Z.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_X.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_Y.getAsInt(), ConfigManager.AOE_BOUNDING_BOX_Z.getAsInt());
+    }
+    return aoeBoundingBox;
   }
 
   @Override
@@ -81,21 +90,43 @@ public class RunicShearsItem extends ShearsItem {
     }
     // TODO: AOE shearing
     if (entity instanceof IShearable target) {
-      if (entity.level().isClientSide) return InteractionResult.CONSUME;
-      BlockPos pos = entity.blockPosition();
-      if (target.isShearable(player, heldItem, entity.level(), pos)) {
-        // EnchantmentHelper.getItemEnchantmentLevel(entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FORTUNE), heldItem)
-        List<ItemStack> drops = target.onSheared(player, heldItem, entity.level(), pos);
-        Random rand = new java.util.Random();
-        drops.forEach(d -> {
-          ItemEntity ent = entity.spawnAtLocation(d, 1.0F);
-          ent.setDeltaMovement(ent.getDeltaMovement().add((double) ((rand.nextFloat() - rand.nextFloat()) * 0.1F), (double) (rand.nextFloat() * 0.05F), (double) ((rand.nextFloat() - rand.nextFloat()) * 0.1F)));
-        });
-        heldItem.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+      if (entity.level().isClientSide()) {
+        return InteractionResult.CONSUME;
       }
-      return InteractionResult.SUCCESS;
+      BlockPos pos = entity.blockPosition();
+      AABB aabb = getBoundingBox().move(pos);
+      boolean anySheared = false;
+      for (LivingEntity newTarget : entity.level().getEntitiesOfClass(LivingEntity.class, aabb)) {
+        if (newTarget instanceof IShearable) {
+          if (doShear((IShearable) newTarget, player, heldItem, newTarget, pos, hand)) {
+            anySheared = true;
+          }
+        }
+      }
+      if (anySheared) {
+        heldItem.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+        return InteractionResult.SUCCESS;
+      } else {
+        return InteractionResult.FAIL;
+      }
     }
     return InteractionResult.PASS;
+  }
+
+  protected boolean doShear (IShearable target, Player player, ItemStack heldItem, LivingEntity entity, BlockPos pos, InteractionHand hand) {
+    if (target.isShearable(player, heldItem, entity.level(), pos)) {
+      // EnchantmentHelper.getItemEnchantmentLevel(entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FORTUNE), heldItem)
+      List<ItemStack> drops = target.onSheared(player, heldItem, entity.level(), pos);
+      Random rand = new java.util.Random();
+      drops.forEach(d -> {
+        ItemEntity ent = player.spawnAtLocation(d, 1.0F);
+        ent.setDeltaMovement(ent.getDeltaMovement().add((double) ((rand.nextFloat() - rand.nextFloat()) * 0.1F), (double) (rand.nextFloat() * 0.05F), (double) ((rand.nextFloat() - rand.nextFloat()) * 0.1F)));
+      });
+      entity.gameEvent(GameEvent.SHEAR, player);
+      return true;
+    }
+
+    return false;
   }
 
   @Override

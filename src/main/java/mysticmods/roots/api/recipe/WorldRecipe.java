@@ -22,16 +22,16 @@ import java.util.List;
 public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<ItemStackHandler, W> implements IWorldRecipe<W> {
   @Nullable
   protected PartialBlockState outputState;
-  protected WorldCondition condition;
+  protected List<WorldCondition> conditions;
   protected List<String> skipProperties = new ArrayList<>();
 
   public WorldRecipe() {
   }
 
-  public WorldRecipe(BaseRecipeData data, PartialBlockState outputState, WorldCondition condition, List<String> skipProperties) {
+  public WorldRecipe(BaseRecipeData data, PartialBlockState outputState, List<WorldCondition> conditions, List<String> skipProperties) {
     super(data);
     this.outputState = outputState;
-    this.condition = condition;
+    this.conditions = conditions;
     this.skipProperties = skipProperties;
   }
 
@@ -42,8 +42,8 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   }
 
   @Override
-  public WorldCondition getCondition() {
-    return condition;
+  public List<WorldCondition> getConditions() {
+    return conditions;
   }
 
   @Override
@@ -53,7 +53,12 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
 
   @Override
   public boolean matches(W pContainer, Level pLevel) {
-    return getCondition().test(pContainer.getBlockPos(), pLevel, pLevel.getRandom());
+    for (WorldCondition condition : getConditions()) {
+      if (!condition.test(pContainer.getBlockPos(), pLevel, pLevel.getRandom())) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @Override

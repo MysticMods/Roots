@@ -7,7 +7,7 @@
       "id": "roots:fey_leather"
     }
   },
-  "durabilityCost": 1,
+  "durabilityCost": 10,
   "test": {
     "type": "roots:entity_tag_test",
     "tag": "roots:fey_leather"

@@ -31,7 +31,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
       (instance) -> instance.group(
           BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
           PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
-          WorldCondition.CODEC.fieldOf("condition").forGetter(o -> o.condition),
+          WorldCondition.LIST_CODEC.fieldOf("condition").forGetter(o -> o.conditions),
           OutputStateMapper.CODEC.optionalFieldOf("stateMapper").forGetter(o -> Optional.ofNullable(o.stateMapper)),
           Codec.STRING.listOf().optionalFieldOf("skipProperties").forGetter((o) -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties)),
           Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost)
@@ -40,7 +40,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static StreamCodec<RegistryFriendlyByteBuf, RunicBlockRecipe> STREAM_CODEC = StreamCodec.composite(
       BaseRecipeData.STREAM_CODEC, o -> o.data,
       ByteBufCodecs.optional(PartialBlockState.STREAM_CODEC), o -> Optional.ofNullable(o.outputState),
-      WorldCondition.STREAM_CODEC, o -> o.condition,
+      WorldCondition.LIST_STREAM_CODEC, o -> o.conditions,
       ByteBufCodecs.optional(OutputStateMapper.STREAM_CODEC), o -> Optional.ofNullable(o.stateMapper),
       ByteBufCodecs.optional(ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list())), o -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties),
       ByteBufCodecs.VAR_INT, o -> o.durabilityCost,
@@ -55,14 +55,14 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     super();
   }
 
-  public RunicBlockRecipe(BaseRecipeData baseRecipeData, PartialBlockState partialBlockState1, WorldCondition worldCondition, OutputStateMapper outputStateMapper, List<String> strings, int durabilityCost) {
+  public RunicBlockRecipe(BaseRecipeData baseRecipeData, PartialBlockState partialBlockState1, List<WorldCondition> worldCondition, OutputStateMapper outputStateMapper, List<String> strings, int durabilityCost) {
     super(baseRecipeData, partialBlockState1, worldCondition, strings);
     this.stateMapper = outputStateMapper;
     this.durabilityCost = durabilityCost;
   }
 
-  public RunicBlockRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState1, WorldCondition worldCondition, Optional<OutputStateMapper> outputStateMapper, Optional<List<String>> strings, int durabilityCost) {
-    super(baseRecipeData, partialBlockState1.orElse(null), worldCondition, strings.orElse(List.of()));
+  public RunicBlockRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState1, List<WorldCondition> worldCondition, Optional<OutputStateMapper> outputStateMapper, Optional<List<String>> strings, int durabilityCost) {
+    super(baseRecipeData, partialBlockState1.orElse(null), worldCondition, strings.orElse(Collections.emptyList()));
     this.stateMapper = outputStateMapper.orElse(null);
     this.durabilityCost = durabilityCost;
   }
@@ -107,7 +107,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     private final List<String> skipProperties = new ArrayList<>();
     private int durabilityCost;
     private PartialBlockState outputState;
-    private WorldCondition condition;
+    private List<WorldCondition> condition = new ArrayList<>();
     private OutputStateMapper stateMapper;
 
     protected Builder() {
@@ -151,7 +151,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     }
 
     public Builder condition(WorldCondition condition) {
-      this.condition = condition;
+      this.condition.add(condition);
       return this;
     }
 
