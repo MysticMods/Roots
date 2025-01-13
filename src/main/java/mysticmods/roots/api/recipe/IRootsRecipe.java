@@ -1,11 +1,12 @@
 package mysticmods.roots.api.recipe;
 
+import com.google.common.collect.Sets;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.capability.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
-import mysticmods.roots.util.SetUtils;
+import mysticmods.roots.api.util.SetUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -61,6 +62,7 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     Set<BlockPos> testedPositions = new HashSet<>();
     for (LevelCondition condition : this.getLevelConditions()) {
       Set<BlockPos> newPositions = condition.test(level, player, bounds, center, testedPositions);
+      Sets.intersection()
       if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
         failedLevel.add(condition);
       } else {
