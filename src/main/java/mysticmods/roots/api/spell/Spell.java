@@ -1,5 +1,6 @@
 package mysticmods.roots.api.spell;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.data.DataMaps;
 import mysticmods.roots.api.data.PropertyDataMap;
@@ -30,6 +31,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike {
   protected final Type type;
   protected final List<Cost> defaultCosts;
   protected final Set<SpellModifier> modifiers = new HashSet<>();
+  protected List<Cost> costs;
   protected int cooldown = 0;
   protected double reach = 0.0;
   protected final int color1, color2;
@@ -94,7 +96,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike {
 
   @Override
   public List<Cost> getCosts() {
-    return Collections.emptyList();
+    if (costs == null) {
+      RootsAPI.LOG.error("Data maps haven't been initialized for spell: {}", builtInRegistryHolder().getKey());
+    }
+    return costs;
   }
 
   public Set<SpellModifier> getModifiers() {
@@ -141,6 +146,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike {
   public abstract void initialize(Holder<Spell> holder);
 
   public void init(Holder<Spell> holder) {
+    costs = holder.getData(DataMaps.SPELL_COST_DATA);
     initializeProperties(holder);
     initialize(holder);
   }

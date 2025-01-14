@@ -14,7 +14,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Item data component for staff
 //   (simplify staff stuff)
 // - Item data component for "tokens"
-// - Rest of the recipes that haven't been converted
 // - JEI integration
 // - Ore world generation
 // - Missing data maps?
