@@ -3,10 +3,12 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.network.client.ClientBoundSnapshotSyncPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -33,7 +35,7 @@ public class ServerTickHandler {
       snapshotStorage.tick(player);
       if (snapshotStorage.isDirty()) {
         player.setData(ModAttachments.SNAPSHOT_STORAGE, snapshotStorage);
-        // TODO: Sync network here
+        PacketDistributor.sendToPlayer(player, new ClientBoundSnapshotSyncPacket(snapshotStorage));
       }
 /*        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
           if (reputation.isDirty()) {
