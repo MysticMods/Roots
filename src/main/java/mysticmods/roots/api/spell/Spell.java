@@ -6,8 +6,8 @@ import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.registry.ICostedRegistryEntry;
-import mysticmods.roots.api.registry.IStyledRegistryEntry;
+import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntry, SpellLike {
+public abstract class Spell implements IStyled, ICosted, SpellLike {
   protected final Type type;
   protected final List<Cost> defaultCosts;
   protected final Set<SpellModifier> modifiers = new HashSet<>();

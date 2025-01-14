@@ -1,6 +1,5 @@
 package mysticmods.roots.api.spell;
 
-import com.google.common.base.Suppliers;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.registry.*;
 import net.minecraft.Util;
@@ -10,14 +9,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
-public class SpellModifier implements IDescribedRegistryEntry, ICostedRegistryEntry, IParentChild<SpellModifier> {
+public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellModifier> {
   @Nullable
   protected Holder<SpellModifier> parent;
 /*  protected final Set<SpellModifier> children = new ObjectLinkedOpenHashSet<>();*/

@@ -1,7 +1,7 @@
 package mysticmods.roots.api.herb;
 
 import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.registry.IStyledRegistryEntry;
+import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-public class Herb implements IStyledRegistryEntry {
+public class Herb implements IStyled {
   private final Holder<Item> item;
   private final TagKey<Item> tag;
   private String descriptionId;

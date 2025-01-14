@@ -4,7 +4,7 @@ import mysticmods.roots.api.data.DataMaps;
 import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
-import mysticmods.roots.api.registry.IDescribedRegistryEntry;
+import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.Util;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class Ritual implements IDescribedRegistryEntry {
+public abstract class Ritual implements IDescribed {
   protected String descriptionId;
 
   protected BoundingBox boundingBox;

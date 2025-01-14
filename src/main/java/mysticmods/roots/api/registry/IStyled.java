@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Style;
 
 import javax.annotation.Nullable;
 
-public interface IStyledRegistryEntry extends IDescribedRegistryEntry {
+public interface IStyled extends IDescribed {
   @Nullable
   ChatFormatting getTextColor();
 

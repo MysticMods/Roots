@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
-import mysticmods.roots.api.registry.IDescribedRegistryEntry;
+import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.minecraft.Util;
@@ -26,7 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class LevelCondition implements IDescribedRegistryEntry {
+public abstract class LevelCondition implements IDescribed {
   public static final Codec<LevelCondition> CODEC = RootsRegistries.LEVEL_CONDITIONS.byNameCodec();
   public static final Codec<List<LevelCondition>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, LevelCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.LEVEL_CONDITIONS);

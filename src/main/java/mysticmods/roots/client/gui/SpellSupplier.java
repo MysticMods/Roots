@@ -1,7 +1,7 @@
 package mysticmods.roots.client.gui;
 
 import mysticmods.roots.api.SpellLike;
-import mysticmods.roots.api.registry.IStyledRegistryEntry;
+import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.CachedSpellLike;
 import net.minecraft.network.chat.Component;
@@ -22,7 +22,7 @@ public interface SpellSupplier<T extends SpellLike> extends Supplier<T>, CachedS
   }
 
   default MutableComponent getStyledName() {
-    if (get() instanceof IStyledRegistryEntry styled) {
+    if (get() instanceof IStyled styled) {
       return styled.getStyledName();
     }
 

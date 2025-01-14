@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.spell.SpellModifier;
-import mysticmods.roots.api.registry.IDescribedRegistryEntry;
+import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.LibraryModifier;
 import mysticmods.roots.api.spell.LibrarySpell;
@@ -149,8 +149,8 @@ public class GrantCapability {
   public List<LibrarySpell> getLibrarySpells() {
     if (LIBRARY_SPELLS == null) {
       LIBRARY_SPELLS = new ArrayList<>();
-      GRANTED_SPELLS.stream().sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o.builtInRegistryHolder(), true)));
-      RootsRegistries.SPELLS.stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribedRegistryEntry::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o.builtInRegistryHolder(), false)));
+      GRANTED_SPELLS.stream().sorted(Comparator.comparing(IDescribed::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o.builtInRegistryHolder(), true)));
+      RootsRegistries.SPELLS.stream().filter(o -> !GRANTED_SPELLS.contains(o)).sorted(Comparator.comparing(IDescribed::getDescriptionId)).forEach(o -> LIBRARY_SPELLS.add(new LibrarySpell(o.builtInRegistryHolder(), false)));
     }
     return LIBRARY_SPELLS;
   }

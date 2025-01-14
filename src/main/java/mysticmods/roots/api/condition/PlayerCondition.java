@@ -1,7 +1,7 @@
 package mysticmods.roots.api.condition;
 
 import com.mojang.serialization.Codec;
-import mysticmods.roots.api.registry.IDescribedRegistryEntry;
+import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class PlayerCondition implements IDescribedRegistryEntry {
+public abstract class PlayerCondition implements IDescribed {
   public static final Codec<PlayerCondition> CODEC = RootsRegistries.PLAYER_CONDITIONS.byNameCodec();
   public static final Codec<List<PlayerCondition>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, PlayerCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PLAYER_CONDITIONS);

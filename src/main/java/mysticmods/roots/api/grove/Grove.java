@@ -1,6 +1,6 @@
 package mysticmods.roots.api.grove;
 
-import mysticmods.roots.api.registry.IStyledRegistryEntry;
+import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-public class Grove implements IStyledRegistryEntry {
+public class Grove implements IStyled {
   private Style style;
   private ChatFormatting color;
   private String descriptionId;

@@ -5,7 +5,7 @@ import mysticmods.roots.api.herb.Cost;
 import java.util.List;
 
 // TODO: Format costs as a list of components
-public interface ICostedRegistryEntry {
+public interface ICosted {
   List<Cost> getDefaultCosts();
   List<Cost> getCosts();
 }
