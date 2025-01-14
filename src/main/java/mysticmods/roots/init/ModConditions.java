@@ -4,8 +4,9 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.faction.GroveType;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
-import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -40,22 +41,7 @@ public class ModConditions {
   public static final DeferredHolder<LevelCondition, LevelCondition> PRIMAL_GROVE_STONE_VALID = REGISTER.register("valid_primal_grove_stone", () -> LevelCondition.groveStone(GroveType.PRIMAL, true));
   public static final DeferredHolder<LevelCondition, LevelCondition> GROVE_STONE_ANY = REGISTER.register("any_grove_stone", () -> LevelCondition.anyGroveStone(false));
   public static final DeferredHolder<LevelCondition, LevelCondition> GROVE_STONE_VALID = REGISTER.register("valid_grove_stone", () -> LevelCondition.anyGroveStone(true));
-  public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = REGISTER.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new BlockPropertyMatchTest(ModBlocks.WILDROOT_CROP.get().defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE)));
-
-/*  private static Supplier<List<BlockState>> groveStone (GroveType type, boolean valid) {
-    return () -> {
-      List<BlockState> result = new ArrayList<>();
-      if (type == GroveType.PRIMAL) {
-        result.add(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState().setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM).setValue(GroveStoneBlock.FACING, Direction.NORTH).setValue(GroveStoneBlock.VALID, valid));
-        result.add(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState().setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE).setValue(GroveStoneBlock.FACING, Direction.NORTH).setValue(GroveStoneBlock.VALID, valid));
-        result.add(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState().setValue(GroveStoneBlock.PART, StateProperties.Part.TOP).setValue(GroveStoneBlock.FACING, Direction.NORTH).setValue(GroveStoneBlock.VALID, valid));
-      } else {
-        throw new NotImplementedException("groveStone not implemented for type " + type);
-      }
-
-      return result;
-    };
-  }*/
+  public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = REGISTER.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get().defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);

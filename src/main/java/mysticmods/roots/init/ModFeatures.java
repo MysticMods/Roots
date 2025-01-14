@@ -1,7 +1,6 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import mysticmods.roots.worldgen.features.SupportingDirectionalBlockFeature;
 import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
@@ -42,15 +41,12 @@ public class ModFeatures {
   private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, RootsAPI.MODID);
   private static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_MODIFIER = DeferredRegister.create(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE, RootsAPI.MODID);
   private static final DeferredRegister<BlockPredicateType<?>> BLOCK_PREDICATES = DeferredRegister.create(BuiltInRegistries.BLOCK_PREDICATE_TYPE, RootsAPI.MODID);
-  private static final DeferredRegister<RuleTestType<?>> RULE_TEST_TYPES = DeferredRegister.create(BuiltInRegistries.RULE_TEST, RootsAPI.MODID);
   private static final DeferredRegister<StructurePieceType> STRUCTURE_PIECE_TYPES = DeferredRegister.create(BuiltInRegistries.STRUCTURE_PIECE, RootsAPI.MODID);
   private static final DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(BuiltInRegistries.STRUCTURE_TYPE, RootsAPI.MODID);
 
   public static final DeferredHolder<StructurePieceType, StructurePieceType> STANDING_STONES_PIECE = STRUCTURE_PIECE_TYPES.register("standing_stones_piece", () -> (pContext, pTag) -> new StandingStonePiece(pTag));
 
   public static final DeferredHolder<StructureType<?>, StructureType<StandingStonesStructure>> STANDING_STONES = STRUCTURES.register("standing_stones", () -> () -> StandingStonesStructure.CODEC);
-
-  public static DeferredHolder<RuleTestType<?>, RuleTestType<BlockPropertyMatchTest>> BLOCK_PROPERTY_MATCH_TEST = RULE_TEST_TYPES.register("block_property_match_test", () -> () -> BlockPropertyMatchTest.CODEC);
 
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreeTrunkPredicate>> MATCHING_TREE_TRUNK_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreeTrunkPredicate.CODEC);
 
@@ -107,7 +103,6 @@ public class ModFeatures {
     FEATURES.register(bus);
     PLACEMENT_MODIFIER.register(bus);
     BLOCK_PREDICATES.register(bus);
-    RULE_TEST_TYPES.register(bus);
     STRUCTURES.register(bus);
     STRUCTURE_PIECE_TYPES.register(bus);
   }

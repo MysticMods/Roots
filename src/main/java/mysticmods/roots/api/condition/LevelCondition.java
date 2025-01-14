@@ -6,7 +6,7 @@ import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.test.block.BlockPropertyMatchTest;
+import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -71,9 +71,9 @@ public abstract class LevelCondition implements IDescribed {
   }
 
   public static class BlockStatePropertyCondition extends LevelCondition {
-    private final BlockPropertyMatchTest test;
+    private final PartialBlockStateMatchWorldTest test;
 
-    public BlockStatePropertyCondition(BlockPropertyMatchTest test) {
+    public BlockStatePropertyCondition(PartialBlockStateMatchWorldTest test) {
       this.test = test;
     }
 

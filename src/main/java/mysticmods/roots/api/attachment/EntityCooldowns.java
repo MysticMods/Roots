@@ -8,9 +8,6 @@ import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class EntityCooldowns {
-  public EntityCooldowns() {
-  }
-
   public static void setExpiresAt(@Nonnull Entity entity, Supplier<AttachmentType<Integer>> attachmentType, int tickCount) {
     entity.setData(attachmentType, tickCount);
   }
