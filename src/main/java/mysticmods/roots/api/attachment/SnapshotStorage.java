@@ -1,4 +1,4 @@
-package mysticmods.roots.api.capability;
+package mysticmods.roots.api.attachment;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.registry.RootsRegistries;

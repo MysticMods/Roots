@@ -1,7 +1,7 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.EntityCooldowns;
+import mysticmods.roots.api.attachment.EntityCooldowns;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModSounds;

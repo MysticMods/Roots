@@ -1,6 +1,6 @@
 package mysticmods.roots.api.recipe;
 
-import mysticmods.roots.api.capability.Unlock;
+import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;

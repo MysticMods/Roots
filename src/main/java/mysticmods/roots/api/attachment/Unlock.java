@@ -1,4 +1,4 @@
-package mysticmods.roots.api.capability;
+package mysticmods.roots.api.attachment;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;

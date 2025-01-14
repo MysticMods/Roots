@@ -1,4 +1,4 @@
-package mysticmods.roots.api.capability;
+package mysticmods.roots.api.attachment;
 
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;

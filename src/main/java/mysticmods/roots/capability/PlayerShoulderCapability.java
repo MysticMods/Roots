@@ -1,7 +1,7 @@
 package mysticmods.roots.capability;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.IPlayerShoulderCapability;
+import mysticmods.roots.api.attachment.IPlayerShoulderCapability;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;

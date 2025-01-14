@@ -1,7 +1,7 @@
 package mysticmods.roots.impl;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.Unlock;
+import mysticmods.roots.api.attachment.Unlock;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.RecipeManager;

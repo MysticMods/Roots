@@ -1,6 +1,6 @@
 package mysticmods.roots.snapshot;
 
-import mysticmods.roots.api.capability.SnapshotStorage;
+import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.api.snapshot.Snapshot;
 import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.init.ModAttachments;

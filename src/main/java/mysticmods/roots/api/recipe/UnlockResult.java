@@ -1,6 +1,6 @@
 package mysticmods.roots.api.recipe;
 
-import mysticmods.roots.api.capability.Unlock;
+import mysticmods.roots.api.attachment.Unlock;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 

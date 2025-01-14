@@ -1,6 +1,6 @@
 package mysticmods.roots.network.client;
 
-import mysticmods.roots.api.capability.SnapshotStorage;
+import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;

@@ -1,4 +1,4 @@
-package mysticmods.roots.api.capability;
+package mysticmods.roots.api.attachment;
 
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;

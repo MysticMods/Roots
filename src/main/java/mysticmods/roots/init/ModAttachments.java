@@ -2,7 +2,7 @@ package mysticmods.roots.init;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.SnapshotStorage;
+import mysticmods.roots.api.attachment.SnapshotStorage;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;

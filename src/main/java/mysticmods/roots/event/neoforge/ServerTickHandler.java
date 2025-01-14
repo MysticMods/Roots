@@ -1,7 +1,7 @@
 package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.capability.SnapshotStorage;
+import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
