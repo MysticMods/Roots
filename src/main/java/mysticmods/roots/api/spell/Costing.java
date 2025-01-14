@@ -4,8 +4,12 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.init.ModAttachments;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -102,29 +106,26 @@ public class Costing {
 
 
     Inventory playerInventory = player.getInventory();
-/*    LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);
+    HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
 
     //Map<Herb, List<HerbEntry>> herbMap = herbMap(player);
 
-    if (oCap.isPresent()) {
-      HerbCapability cap = oCap.orElseThrow(() -> new IllegalStateException("herb capability is present but is null"));
-      for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
-        double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), true);
-        if (remainder != 0) {
-          double count = 0;
-          for (int i = 0; i < playerInventory.getContainerSize(); i++) {
-            ItemStack stack = playerInventory.getItem(i);
-            if (stack.is(entry.getKey().getTag())) {
-              count += stack.getCount();
-            }
-            // TODO: Item capabilities, shulker boxes, pouches
+    for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
+      double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), true);
+      if (remainder != 0) {
+        double count = 0;
+        for (int i = 0; i < playerInventory.getContainerSize(); i++) {
+          ItemStack stack = playerInventory.getItem(i);
+          if (stack.is(entry.getKey().getTag())) {
+            count += stack.getCount();
           }
-          if (remainder > count) {
-            return false;
-          }
+          // TODO: Item capabilities, shulker boxes, pouches
         }
-      }*/
-    //}
+        if (remainder > count) {
+          return false;
+        }
+      }
+    }
 
     return true;
   }
@@ -156,43 +157,40 @@ public class Costing {
     }
 
     Inventory playerInventory = player.getInventory();
-/*    LazyOptional<HerbCapability> oCap = player.getCapability(Capabilities.HERB_CAPABILITY);
+    HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
 
     //Map<Herb, List<HerbEntry>> herbMap = herbMap(player);
 
-    if (oCap.isPresent()) {
-      HerbCapability cap = oCap.orElseThrow(() -> new IllegalStateException("herb capability is present but is null"));
-      for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
-        double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), false);
-        if (remainder != 0) {
-          int toConsume = Mth.ceil(remainder);
-          for (int i = 0; i < playerInventory.getContainerSize(); i++) {
-            ItemStack stack = playerInventory.getItem(i);
-            if (stack.is(entry.getKey().getTag())) {
-              if (stack.getCount() >= toConsume) {
-                *//*                RootsAPI.LOG.info("Shrunk stack of {} by {}", stack, toConsume);*//*
-                stack.shrink(toConsume);
-                toConsume = 0;
-                break;
-              } else {
-                *//*                RootsAPI.LOG.info("Shrunk stack of {} by {} to 0", stack, stack.getCount());*//*
-                toConsume -= stack.getCount();
-                stack.setCount(0);
-              }
-              if (toConsume <= 0) {
-                break;
-              }
+    for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
+      double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), false);
+      if (remainder != 0) {
+        int toConsume = Mth.ceil(remainder);
+        for (int i = 0; i < playerInventory.getContainerSize(); i++) {
+          ItemStack stack = playerInventory.getItem(i);
+          if (stack.is(entry.getKey().getTag())) {
+            if (stack.getCount() >= toConsume) {
+              /*RootsAPI.LOG.info("Shrunk stack of {} by {}", stack, toConsume);*/
+              stack.shrink(toConsume);
+              toConsume = 0;
+              break;
+            } else {
+              /*RootsAPI.LOG.info("Shrunk stack of {} by {} to 0", stack, stack.getCount());*/
+              toConsume -= stack.getCount();
+              stack.setCount(0);
+            }
+            if (toConsume <= 0) {
+              break;
             }
           }
-          if (toConsume > 0) {
-            // HOUSTON WE HAVE A PROBLEM
-            RootsAPI.LOG.info("Remainder left over! OH NO! {}", toConsume);
-          }
-          cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
-          playerInventory.setChanged();
         }
+        if (toConsume > 0) {
+          // HOUSTON WE HAVE A PROBLEM
+          RootsAPI.LOG.info("Remainder left over! OH NO! {}", toConsume);
+        }
+        cap.fill(entry.getKey(), (double) Mth.ceil(remainder) - remainder);
+        playerInventory.setChanged();
       }
-    }*/
+    }
 
     return true;
   }

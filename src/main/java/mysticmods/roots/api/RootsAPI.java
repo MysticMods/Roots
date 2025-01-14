@@ -57,17 +57,6 @@ public abstract class RootsAPI {
   public static final String MOD_IDENTIFIER = "Roots";
   public static Logger LOG = LogManager.getLogger();
 
-  // Capability IDs
-  public static final ResourceLocation HERB_CAPABILITY_ID = rl("herb_capability");
-  public static final ResourceLocation GRANT_CAPABILITY_ID = rl("grant_capability");
-  public static final ResourceLocation SNAPSHOT_CAPABILITY_ID = rl("snapshot_capability");
-  public static final ResourceLocation SHOULDER_CAPABILITY_ID = rl("shoulder_capability");
-  public static final ResourceLocation REPUTATION_CAPABILITY_ID = rl("reputation_capability");
-
-  public static final ResourceLocation RUNIC_SHEARS_ENTITY_CAPABILITY_ID = rl("runic_shears_entity_capability");
-  public static final ResourceLocation RUNIC_SHEARS_TOKEN_CAPABILITY = rl("runic_shears_token_capability");
-  public static final ResourceLocation SQUID_MILKING_CAPABILITY = rl("squid_milking_capability");
-
   public static MutableComponent holdShift() {
     return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift").setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
   }
