@@ -23,10 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 
 public abstract class Spell implements IStyled, ICosted, SpellLike {
@@ -93,6 +90,11 @@ public abstract class Spell implements IStyled, ICosted, SpellLike {
   @Override
   public List<Cost> getDefaultCosts() {
     return defaultCosts;
+  }
+
+  @Override
+  public List<Cost> getCosts() {
+    return Collections.emptyList();
   }
 
   public Set<SpellModifier> getModifiers() {

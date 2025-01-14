@@ -37,11 +37,6 @@ public class Grove implements IStyled {
   }
 
   @Override
-  public void setTextColor(ChatFormatting color) {
-    this.color = color;
-  }
-
-  @Override
   public Style getOrCreateStyle() {
     if (style == null) {
       ChatFormatting color = getTextColor();
