@@ -1,7 +1,7 @@
 package mysticmods.roots.api.condition;
 
 import com.mojang.serialization.Codec;
-import mysticmods.roots.api.registry.DescribedEntry;
+import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -14,11 +14,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class PlayerCondition extends DescribedEntry {
+public abstract class PlayerCondition implements IDescribedRegistryEntry {
   public static final Codec<PlayerCondition> CODEC = RootsRegistries.PLAYER_CONDITIONS.byNameCodec();
   public static final Codec<List<PlayerCondition>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, PlayerCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PLAYER_CONDITIONS);
   public static final StreamCodec<RegistryFriendlyByteBuf, List<PlayerCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+  private String descriptionId;
 
   public PlayerCondition() {
   }
@@ -29,15 +30,10 @@ public abstract class PlayerCondition extends DescribedEntry {
 
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("ritual", builtInRegistryHolder().getKey().location());
+      this.descriptionId = Util.makeDescriptionId("player_condition", builtInRegistryHolder().getKey().location());
     }
 
     return this.descriptionId;
-  }
-
-  @Override
-  protected String getDescriptor() {
-    return "player_condition";
   }
 
   public abstract boolean test(Level level, @Nullable Player player);

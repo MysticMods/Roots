@@ -4,7 +4,7 @@ import mysticmods.roots.api.data.DataMaps;
 import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -27,7 +27,7 @@ public class RootsDataMapProvider extends DataMapProvider {
         .replace(false);
 
     RootsRegistries.SPELLS.stream().forEach(spell -> {
-      builder.add(spell.builtInRegistryHolder(), spell.getCosts(), false);
+      builder.add(spell.builtInRegistryHolder(), spell.getDefaultCosts(), false);
     });
 
     Builder<Herb, Item> builder2 = builder(DataMaps.HERB_ITEM_DATA)
@@ -41,7 +41,7 @@ public class RootsDataMapProvider extends DataMapProvider {
         .replace(false);
 
     RootsRegistries.SPELL_MODIFIERS.stream().forEach(modifier -> {
-      builder3.add(modifier.builtInRegistryHolder(), modifier.getCosts(), false);
+      builder3.add(modifier.builtInRegistryHolder(), modifier.getDefaultCosts(), false);
     });
 
     Builder<PropertyDataMap, Spell> builder4 = builder(DataMaps.SPELL_PROPERTY_DATA)

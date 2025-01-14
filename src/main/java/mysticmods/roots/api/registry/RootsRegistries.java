@@ -5,7 +5,7 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;
 import mysticmods.roots.api.ritual.Ritual;

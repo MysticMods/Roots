@@ -1,46 +1,64 @@
 package mysticmods.roots.api.grove;
 
-import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.registry.IStyledRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.registry.StyledRegistryEntry;
-import mysticmods.roots.api.ritual.Ritual;
-import mysticmods.roots.api.spell.Spell;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-public class Grove extends StyledRegistryEntry<Grove> {
-  // This is really just a huge collection of tags.
-  private final TagKey<Herb> herbs;
-  private final TagKey<Grove> alignedGroves;
-  private final TagKey<Grove> opposedGroves;
+public class Grove implements IStyledRegistryEntry {
+  private Style style;
+  private ChatFormatting color;
+  private String descriptionId;
 
-  private final TagKey<Spell> alignedSpells;
-  private final TagKey<Spell> opposedSpells;
-
-  private final TagKey<Ritual> alignedRituals;
-  private final TagKey<Ritual> opposedRituals;
-
-  public Grove(ChatFormatting color, TagKey<Herb> herbs, TagKey<Grove> alignedGroves, TagKey<Grove> opposedGroves, TagKey<Spell> alignedSpells, TagKey<Spell> opposedSpells, TagKey<Ritual> alignedRituals, TagKey<Ritual> opposedRituals) {
+  public Grove(ChatFormatting color) {
     this.color = color;
-    this.herbs = herbs;
-    this.alignedGroves = alignedGroves;
-    this.opposedGroves = opposedGroves;
-    this.alignedSpells = alignedSpells;
-    this.opposedSpells = opposedSpells;
-    this.alignedRituals = alignedRituals;
-    this.opposedRituals = opposedRituals;
+  }
+
+  public String getOrCreateDescriptionId() {
+    if (this.descriptionId == null) {
+      this.descriptionId = Util.makeDescriptionId("herb", builtInRegistryHolder().getKey().location());
+    }
+
+    return this.descriptionId;
+  }
+
+  @Override
+  @Nullable
+  public ChatFormatting getTextColor() {
+    return color;
+  }
+
+  @Override
+  public void setTextColor(ChatFormatting color) {
+    this.color = color;
+  }
+
+  @Override
+  public Style getOrCreateStyle() {
+    if (style == null) {
+      ChatFormatting color = getTextColor();
+      if (color != null) {
+        style = Style.EMPTY.withColor(color).withBold(isBold());
+      } else {
+        style = Style.EMPTY.withBold(isBold());
+      }
+    }
+    return style;
   }
 
   public Holder<Grove> builtInRegistryHolder() {
     return RootsRegistries.GROVES.wrapAsHolder(this);
   }
 
-  public boolean aligned(Herb herb) {
+/*  public boolean aligned(Herb herb) {
     return herb.is(herbs);
   }
 
@@ -66,7 +84,7 @@ public class Grove extends StyledRegistryEntry<Grove> {
 
   public boolean opposed(Ritual ritual) {
     return ritual.is(opposedRituals);
-  }
+  }*/
 
   public boolean is(ResourceLocation location) {
     return builtInRegistryHolder().is(location);
@@ -82,10 +100,5 @@ public class Grove extends StyledRegistryEntry<Grove> {
 
   public boolean is(TagKey<Grove> tag) {
     return builtInRegistryHolder().is(tag);
-  }
-
-  @Override
-  protected String getDescriptor() {
-    return "grove";
   }
 }

@@ -1,7 +1,6 @@
 package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.SpellLike;
-import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

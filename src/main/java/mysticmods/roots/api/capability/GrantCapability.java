@@ -3,7 +3,7 @@ package mysticmods.roots.api.capability;
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.LibraryModifier;

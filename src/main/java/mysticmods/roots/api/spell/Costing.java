@@ -6,7 +6,6 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.modifier.SpellModifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -202,13 +201,13 @@ public class Costing {
   private void calculateCosts(boolean checkModifiers, boolean skipModifiers) {
     totalCosts.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
-    for (Cost cost : spell.getSpell().getCosts()) {
+    for (Cost cost : spell.getSpell().getDefaultCosts()) {
       herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>()).add(cost);
     }
     if (!skipModifiers) {
       for (SpellModifier modifier : spell.getEnabledModifiers()) {
         if (!checkModifiers || modifierMap.getBoolean(modifier)) {
-          for (Cost cost : modifier.getCosts()) {
+          for (Cost cost : modifier.getDefaultCosts()) {
             herbCosts.computeIfAbsent(cost.getHerb(), k -> new ArrayList<>()).add(cost);
           }
         }

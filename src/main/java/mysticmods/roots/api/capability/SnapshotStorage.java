@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class SnapshotStorage {
+public class SnapshotStorage implements ICleanable {
   public static final Codec<SnapshotStorage> CODEC = Codec.unboundedMap(RootsRegistries.SNAPSHOT_TYPES.byNameCodec(), Snapshot.CODEC).xmap(SnapshotStorage::new, SnapshotStorage::getSnapshots);
   public static final StreamCodec<RegistryFriendlyByteBuf, SnapshotStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.SNAPSHOT_TYPES), Snapshot.STREAM_CODEC), o -> o.snapshots, SnapshotStorage::new);
 

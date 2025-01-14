@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.faction.GroveType;
-import mysticmods.roots.api.registry.DescribedEntry;
+import mysticmods.roots.api.registry.IDescribedRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.test.block.BlockPropertyMatchTest;
 import net.minecraft.Util;
@@ -26,7 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class LevelCondition extends DescribedEntry {
+public abstract class LevelCondition implements IDescribedRegistryEntry {
   public static final Codec<LevelCondition> CODEC = RootsRegistries.LEVEL_CONDITIONS.byNameCodec();
   public static final Codec<List<LevelCondition>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, LevelCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.LEVEL_CONDITIONS);
@@ -42,18 +42,13 @@ public abstract class LevelCondition extends DescribedEntry {
 
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("ritual", builtInRegistryHolder().getKey().location());
+      this.descriptionId = Util.makeDescriptionId("level_condition", builtInRegistryHolder().getKey().location());
     }
 
     return this.descriptionId;
   }
 
   public abstract Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player);
-
-  @Override
-  protected String getDescriptor() {
-    return "level_condition";
-  }
 
   public Set<BlockPos> test(Level level, @Nullable Player player, BoundingBox bounds, BlockPos pos, Set<BlockPos> exclusions) {
     BoundingBox newBounds = bounds.moved(pos.getX(), pos.getY(), pos.getZ());

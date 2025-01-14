@@ -1,11 +1,12 @@
 package mysticmods.roots.api.herb;
 
 import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.registry.IStyledRegistryEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.registry.StyledRegistryEntry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -15,10 +16,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-public class Herb extends StyledRegistryEntry<Herb> {
+public class Herb implements IStyledRegistryEntry {
   private final Holder<Item> item;
   private final TagKey<Item> tag;
   private String descriptionId;
+  private Style style;
+  private ChatFormatting color;
+
+  public Herb(Holder<Item> item, TagKey<Item> tag, ChatFormatting color) {
+    this.item = item;
+    this.tag = tag;
+    this.color = color;
+  }
 
   public Holder<Herb> builtInRegistryHolder() {
     return RootsRegistries.HERBS.wrapAsHolder(this);
@@ -32,10 +41,28 @@ public class Herb extends StyledRegistryEntry<Herb> {
     return this.descriptionId;
   }
 
-  public Herb(Holder<Item> item, TagKey<Item> tag, ChatFormatting color) {
-    this.item = item;
-    this.tag = tag;
+  @Override
+  @Nullable
+  public ChatFormatting getTextColor() {
+    return color;
+  }
+
+  @Override
+  public void setTextColor(ChatFormatting color) {
     this.color = color;
+  }
+
+  @Override
+  public Style getOrCreateStyle() {
+    if (style == null) {
+      ChatFormatting color = getTextColor();
+      if (color != null) {
+        style = Style.EMPTY.withColor(color).withBold(isBold());
+      } else {
+        style = Style.EMPTY.withBold(isBold());
+      }
+    }
+    return style;
   }
 
   // TODO: ItemStack data map
@@ -70,10 +97,5 @@ public class Herb extends StyledRegistryEntry<Herb> {
 
   public boolean is(TagKey<Herb> tag) {
     return builtInRegistryHolder().is(tag);
-  }
-
-  @Override
-  protected String getDescriptor() {
-    return "herb";
   }
 }

@@ -1,7 +1,7 @@
 package mysticmods.roots.client;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import net.minecraft.world.item.ItemStack;

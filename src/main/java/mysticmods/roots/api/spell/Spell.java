@@ -4,7 +4,6 @@ import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.data.DataMaps;
 import mysticmods.roots.api.data.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
-import mysticmods.roots.api.modifier.SpellModifier;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICostedRegistryEntry;
@@ -32,7 +31,7 @@ import java.util.function.Predicate;
 
 public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntry, SpellLike {
   protected final Type type;
-  protected final List<Cost> costs = new ArrayList<>();
+  protected final List<Cost> defaultCosts;
   protected final Set<SpellModifier> modifiers = new HashSet<>();
   protected int cooldown = 0;
   protected double reach = 0.0;
@@ -42,10 +41,10 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
   protected ChatFormatting textColor;
   protected String descriptionId;
 
-  public Spell(Type type, ChatFormatting color, List<Cost> costs, int color1, int color2) {
+  public Spell(Type type, ChatFormatting color, List<Cost> defaultCosts, int color1, int color2) {
     this.type = type;
     this.textColor = color;
-    setCosts(costs);
+    this.defaultCosts = defaultCosts;
     this.color1 = color1;
     this.color2 = color2;
   }
@@ -58,11 +57,6 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
   @Nullable
   public ChatFormatting getTextColor() {
     return textColor;
-  }
-
-  @Override
-  public void setTextColor(ChatFormatting color) {
-    this.textColor = color;
   }
 
   @Override
@@ -97,14 +91,8 @@ public abstract class Spell implements IStyledRegistryEntry, ICostedRegistryEntr
   }
 
   @Override
-  public List<Cost> getCosts() {
-    return costs;
-  }
-
-  @Override
-  public void setCosts(List<Cost> costs) {
-    this.costs.clear();
-    this.costs.addAll(costs);
+  public List<Cost> getDefaultCosts() {
+    return defaultCosts;
   }
 
   public Set<SpellModifier> getModifiers() {

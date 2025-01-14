@@ -10,8 +10,6 @@ public interface IStyledRegistryEntry extends IDescribedRegistryEntry {
   @Nullable
   ChatFormatting getTextColor();
 
-  void setTextColor(ChatFormatting color);
-
   Style getOrCreateStyle();
 
   default boolean isBold() {

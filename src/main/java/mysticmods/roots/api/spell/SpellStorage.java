@@ -2,7 +2,6 @@ package mysticmods.roots.api.spell;
 
 import com.google.common.collect.ImmutableList;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.modifier.SpellModifier;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 

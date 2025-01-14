@@ -1,6 +1,6 @@
 package mysticmods.roots.api.registry;
 
-import mysticmods.roots.api.modifier.SpellModifier;
+import mysticmods.roots.api.spell.SpellModifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;

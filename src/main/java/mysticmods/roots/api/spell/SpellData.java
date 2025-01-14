@@ -1,6 +1,5 @@
 package mysticmods.roots.api.spell;
 
-import mysticmods.roots.api.modifier.SpellModifier;
 import net.minecraft.core.Holder;
 
 import java.util.Set;
