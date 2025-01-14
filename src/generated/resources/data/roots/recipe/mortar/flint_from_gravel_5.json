@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:flint"
+      },
+      {
+        "tag": "roots:flint"
+      },
+      {
+        "tag": "roots:flint"
+      },
+      {
+        "tag": "roots:flint"
+      },
+      {
+        "tag": "roots:flint"
+      }
+    ],
+    "result": {
+      "count": 5,
+      "id": "minecraft:flint"
+    }
+  },
+  "times": 5
+}

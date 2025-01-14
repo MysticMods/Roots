@@ -5,9 +5,9 @@ import com.google.common.collect.ImmutableBiMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -31,6 +31,14 @@ public interface Unlock<T> {
   }
 
   UnlockType unlockType();
+
+  static SpellUnlock spell(Holder<Spell> value) {
+    return new SpellUnlock(value);
+  }
+
+  static ModifierUnlock modifier(Holder<SpellModifier> value) {
+    return new ModifierUnlock(value);
+  }
 
   record SpellUnlock(Holder<Spell> value) implements Unlock<Spell> {
 

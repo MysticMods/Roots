@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:pyre/cloud_berry"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_lightning_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:lightning_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_lightning_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:pyre/cloud_berry"
+    ]
+  }
+}

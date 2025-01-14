@@ -1,0 +1,26 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:lightning_rod"
+      },
+      {
+        "item": "minecraft:sugar"
+      },
+      {
+        "tag": "minecraft:leaves"
+      },
+      {
+        "tag": "minecraft:wool"
+      },
+      {
+        "tag": "roots:barks/acacia"
+      }
+    ],
+    "result": {
+      "count": 2,
+      "id": "roots:cloud_berry"
+    }
+  }
+}

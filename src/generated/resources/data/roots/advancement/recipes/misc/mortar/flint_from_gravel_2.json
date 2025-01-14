@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:mortar/flint_from_gravel_2"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_flint": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:flint"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_flint"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:mortar/flint_from_gravel_2"
+    ]
+  }
+}

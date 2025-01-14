@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:petals"
+      },
+      {
+        "item": "minecraft:shield"
+      },
+      {
+        "tag": "c:ingots/iron"
+      },
+      {
+        "item": "minecraft:egg"
+      },
+      {
+        "tag": "c:glass_blocks"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:petal_shell"
+      }
+    ]
+  },
+  "times": 5
+}

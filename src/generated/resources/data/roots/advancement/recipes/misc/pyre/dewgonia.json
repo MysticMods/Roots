@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:pyre/dewgonia"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_kelp": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:kelp"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_kelp"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:pyre/dewgonia"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:tools/bow"
+      },
+      {
+        "item": "minecraft:paper"
+      },
+      {
+        "item": "minecraft:ladder"
+      },
+      {
+        "tag": "roots:crops/cloud_berry"
+      },
+      {
+        "item": "minecraft:short_grass"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:sky_soarer"
+      }
+    ]
+  },
+  "times": 5
+}

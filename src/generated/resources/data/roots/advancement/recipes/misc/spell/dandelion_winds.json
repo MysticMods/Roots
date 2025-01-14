@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:spell/dandelion_winds"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_dandelion": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:dandelion"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_dandelion"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:spell/dandelion_winds"
+    ]
+  }
+}

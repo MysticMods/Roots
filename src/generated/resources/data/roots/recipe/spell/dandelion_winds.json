@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:dandelion"
+      },
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "tag": "roots:petals"
+      },
+      {
+        "tag": "c:dyes/yellow"
+      },
+      {
+        "tag": "c:seeds"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:dandelion_winds"
+      }
+    ]
+  },
+  "times": 5
+}

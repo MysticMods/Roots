@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:pyre/animal_harvest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wildroot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:herbs/wildroot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_wildroot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:pyre/animal_harvest"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:magma_block"
+      },
+      {
+        "item": "minecraft:magma_block"
+      }
+    ],
+    "result": {
+      "count": 8,
+      "id": "minecraft:magma_cream"
+    }
+  },
+  "times": 2
+}

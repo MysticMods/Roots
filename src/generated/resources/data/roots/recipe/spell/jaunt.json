@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:barks/birch"
+      },
+      {
+        "item": "minecraft:redstone_torch"
+      },
+      {
+        "tag": "minecraft:boats"
+      },
+      {
+        "tag": "c:tools/bow"
+      },
+      {
+        "tag": "c:gunpowders"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:jaunt"
+      }
+    ]
+  },
+  "times": 5
+}

@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/wildewheet"
+      },
+      {
+        "tag": "minecraft:wool"
+      },
+      {
+        "tag": "c:crops/carrot"
+      },
+      {
+        "tag": "c:crops/potato"
+      },
+      {
+        "tag": "roots:herbs/wildroot"
+      }
+    ]
+  },
+  "ritual": "roots:animal_harvest"
+}

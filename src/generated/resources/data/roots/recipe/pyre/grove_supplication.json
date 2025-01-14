@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "minecraft:doors"
+      },
+      {
+        "item": "minecraft:bowl"
+      },
+      {
+        "tag": "minecraft:saplings"
+      },
+      {
+        "tag": "roots:petals"
+      },
+      {
+        "tag": "c:foods/bread"
+      }
+    ]
+  },
+  "ritual": "roots:grove_supplication"
+}

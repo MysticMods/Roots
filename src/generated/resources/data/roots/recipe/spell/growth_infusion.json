@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:seeds"
+      },
+      {
+        "item": "minecraft:composter"
+      },
+      {
+        "tag": "minecraft:hoes"
+      },
+      {
+        "item": "minecraft:bone_meal"
+      },
+      {
+        "tag": "minecraft:small_flowers"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:growth_infusion"
+      }
+    ]
+  },
+  "times": 5
+}

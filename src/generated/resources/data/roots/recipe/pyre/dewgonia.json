@@ -1,0 +1,26 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:water_bucket"
+      },
+      {
+        "item": "minecraft:clay_ball"
+      },
+      {
+        "item": "minecraft:pumpkin"
+      },
+      {
+        "tag": "c:crops/sugar_cane"
+      },
+      {
+        "item": "minecraft:kelp"
+      }
+    ],
+    "result": {
+      "count": 2,
+      "id": "roots:dewgonia"
+    }
+  }
+}

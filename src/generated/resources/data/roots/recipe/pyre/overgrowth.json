@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:barks"
+      },
+      {
+        "tag": "roots:barks"
+      },
+      {
+        "tag": "roots:herbs/grove_moss"
+      },
+      {
+        "tag": "c:crops/sugar_cane"
+      },
+      {
+        "item": "minecraft:short_grass"
+      }
+    ]
+  },
+  "ritual": "roots:overgrowth"
+}

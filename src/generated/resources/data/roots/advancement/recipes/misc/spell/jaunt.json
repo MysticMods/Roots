@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:spell/jaunt"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_birch_bark": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:barks/birch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_birch_bark"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:spell/jaunt"
+    ]
+  }
+}

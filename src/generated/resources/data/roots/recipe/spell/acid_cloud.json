@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:rotten_flesh"
+      },
+      {
+        "tag": "roots:herbs/bafflecap"
+      },
+      {
+        "tag": "roots:dusts/runic"
+      },
+      {
+        "item": "minecraft:spider_eye"
+      },
+      {
+        "tag": "minecraft:wool"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:acid_cloud"
+      }
+    ]
+  },
+  "times": 5
+}

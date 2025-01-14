@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "minecraft:wool"
+      },
+      {
+        "item": "minecraft:torch"
+      },
+      {
+        "item": "minecraft:jack_o_lantern"
+      },
+      {
+        "tag": "c:nuggets/copper"
+      },
+      {
+        "tag": "roots:dusts/runic"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:fey_light"
+      }
+    ]
+  },
+  "times": 5
+}

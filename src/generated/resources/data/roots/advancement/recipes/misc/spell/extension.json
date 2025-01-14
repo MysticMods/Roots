@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:spell/extension"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_carrots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:crops/carrot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_carrots"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:spell/extension"
+    ]
+  }
+}
