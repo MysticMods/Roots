@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -31,14 +30,11 @@ public class ServerTickHandler {
             herb.setDirty(false);
           }
         });*/
-      AttachmentUtil.monitorForChange(
+      AttachmentUtil.monitorAndSync(
           player,
           ModAttachments.SNAPSHOT_STORAGE,
           (player1, data) -> data.tick(player1),
-          (player1, data) ->
-          {
-            PacketDistributor.sendToPlayer(player1, new ClientBoundSnapshotSyncPacket(data));
-          }
+          ClientBoundSnapshotSyncPacket::new
       );
 /*        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
           if (reputation.isDirty()) {
