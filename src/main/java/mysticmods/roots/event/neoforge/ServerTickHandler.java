@@ -1,7 +1,7 @@
 package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.ClientBoundSnapshotSyncPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,12 +31,15 @@ public class ServerTickHandler {
             herb.setDirty(false);
           }
         });*/
-      SnapshotStorage snapshotStorage = player.getData(ModAttachments.SNAPSHOT_STORAGE);
-      snapshotStorage.tick(player);
-      if (snapshotStorage.isDirty()) {
-        player.setData(ModAttachments.SNAPSHOT_STORAGE, snapshotStorage);
-        PacketDistributor.sendToPlayer(player, new ClientBoundSnapshotSyncPacket(snapshotStorage));
-      }
+      AttachmentUtil.monitorForChange(
+          player,
+          ModAttachments.SNAPSHOT_STORAGE,
+          (player1, data) -> data.tick(player1),
+          (player1, data) ->
+          {
+            PacketDistributor.sendToPlayer(player1, new ClientBoundSnapshotSyncPacket(data));
+          }
+      );
 /*        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
           if (reputation.isDirty()) {
             Networking.sendTo(new ClientBoundReputationSyncPacket(reputation.toRecord()), player);
