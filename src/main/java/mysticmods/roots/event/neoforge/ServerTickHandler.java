@@ -3,6 +3,7 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.network.client.ClientBoundHerbSyncPacket;
 import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
 import mysticmods.roots.network.client.ClientBoundSnapshotSyncPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,12 +26,13 @@ public class ServerTickHandler {
             grant.setDirty(false);
           }
         });
-        player.getCapability(Capabilities.HERB_CAPABILITY).ifPresent(herb -> {
-          if (herb.isDirty()) {
-            Networking.sendTo(new ClientBoundHerbSyncPacket(herb.toRecord()), player);
-            herb.setDirty(false);
-          }
-        });*/
+
+ */
+      AttachmentUtil.monitorAndSync(
+          player,
+          ModAttachments.HERB_STORAGE,
+          ClientBoundHerbSyncPacket::new
+      );
       AttachmentUtil.monitorAndSync(
           player,
           ModAttachments.SNAPSHOT_STORAGE,
@@ -42,12 +44,6 @@ public class ServerTickHandler {
           ModAttachments.REPUTATION_STORAGE,
           ClientBoundReputationSyncPacket::new
       );
-/*        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
-          if (reputation.isDirty()) {
-            Networking.sendTo(new ClientBoundReputationSyncPacket(reputation.toRecord()), player);
-            reputation.setDirty(false);
-          }
-        });*/
     }
   }
 

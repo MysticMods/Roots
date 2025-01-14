@@ -1,9 +1,6 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.attachment.GrantCapability;
-import mysticmods.roots.api.attachment.HerbCapability;
-import mysticmods.roots.api.attachment.ReputationStorage;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
