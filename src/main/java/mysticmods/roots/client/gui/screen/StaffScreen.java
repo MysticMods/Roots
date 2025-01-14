@@ -1,7 +1,7 @@
 package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.attachment.GrantCapability;
+import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
@@ -61,7 +61,7 @@ public class StaffScreen extends RootsScreen {
     });*/
   }
 
-  private void createLibraryButtons(GrantCapability grants) {
+  private void createLibraryButtons(GrantStorage grants) {
     int index = 0;
     int offsetX = 98;
     int offsetY = 15;

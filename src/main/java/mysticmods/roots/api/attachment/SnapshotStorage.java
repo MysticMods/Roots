@@ -20,7 +20,7 @@ public class SnapshotStorage implements ICleanable {
   public static final StreamCodec<RegistryFriendlyByteBuf, SnapshotStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.SNAPSHOT_TYPES), Snapshot.STREAM_CODEC), o -> o.snapshots, SnapshotStorage::new);
 
   private final Map<SnapshotType<?>, Snapshot> snapshots;
-  boolean dirty = false;
+  private boolean dirty = true;
 
   public SnapshotStorage() {
     this.snapshots = new HashMap<>();

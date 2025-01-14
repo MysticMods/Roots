@@ -23,7 +23,7 @@ public class ReputationStorage implements ICleanable {
 
   private final Object2IntLinkedOpenHashMap<Grove> reputations;
 
-  private boolean dirty = false;
+  private boolean dirty = true;
 
   public ReputationStorage() {
     reputations = new Object2IntLinkedOpenHashMap<>();

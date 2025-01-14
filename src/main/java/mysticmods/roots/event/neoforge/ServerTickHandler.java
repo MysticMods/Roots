@@ -3,6 +3,7 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.network.client.ClientBoundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientBoundHerbSyncPacket;
 import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
 import mysticmods.roots.network.client.ClientBoundSnapshotSyncPacket;
@@ -20,14 +21,11 @@ public class ServerTickHandler {
   @SubscribeEvent
   public static void onServerTickEnd(ServerTickEvent.Post event) {
     for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
-/*        player.getCapability(Capabilities.GRANT_CAPABILITY).ifPresent(grant -> {
-          if (grant.isDirty()) {
-            Networking.sendTo(new ClientBoundGrantSyncPacket(grant.toRecord()), player);
-            grant.setDirty(false);
-          }
-        });
-
- */
+      AttachmentUtil.monitorAndSync(
+          player,
+          ModAttachments.GRANT_STORAGE,
+          ClientBoundGrantSyncPacket::new
+      );
       AttachmentUtil.monitorAndSync(
           player,
           ModAttachments.HERB_STORAGE,

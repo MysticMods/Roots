@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
@@ -14,6 +15,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class ModAttachments {
   private static final DeferredRegister<AttachmentType<?>> CAPABILITIES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, RootsAPI.MODID);
 
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<GrantStorage>> GRANT_STORAGE = CAPABILITIES.register("grant_storage", () -> AttachmentType.builder(GrantStorage::new).serialize(GrantStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<HerbStorage>> HERB_STORAGE = CAPABILITIES.register("herb_storage", () -> AttachmentType.builder(() -> new HerbStorage()).serialize(HerbStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<ReputationStorage>> REPUTATION_STORAGE = CAPABILITIES.register("reputation_storage", () -> AttachmentType.builder(ReputationStorage::new).serialize(ReputationStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<SnapshotStorage>> SNAPSHOT_STORAGE = CAPABILITIES.register("snapshot_storage", () -> AttachmentType.builder(() -> new SnapshotStorage()).serialize(SnapshotStorage.CODEC).copyOnDeath().build());
