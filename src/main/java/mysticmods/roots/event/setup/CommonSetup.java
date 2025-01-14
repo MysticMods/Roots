@@ -15,9 +15,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 public class CommonSetup {
   @SubscribeEvent
   public static void init(FMLCommonSetupEvent event) {
-    // TODO: Should this be enqueued?
-    // Networking.INSTANCE.registerMessages();
-
     // TODO: Stone plant -- was that even used???
     for (PropertyHolder<?> prop : P.unclaimed()) {
       RootsAPI.LOG.error("Unclaimed property: {}", prop.id());

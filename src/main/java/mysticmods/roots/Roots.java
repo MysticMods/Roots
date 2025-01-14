@@ -10,6 +10,24 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
+// TODO:
+// - Item data component for staff
+//   (simplify staff stuff)
+// - Item data component for "tokens"
+// - Rest of the recipes that haven't been converted
+// - JEI integration
+// - Ore world generation
+// - Missing data maps?
+//    - Spell modifier parents
+// - Armor material
+// - Runic tools
+// - Cache spell costs from holder
+// - Reach property?
+// - Common setup:
+//   - Flower pots
+//   - Chicken tempting?
+//   -
+
 @Mod(RootsAPI.MODID)
 public class Roots {
   /*  public static RootsArmorMaterial ANTLER_MATERIAL = new RootsArmorMaterial("roots:antlers", 7, new int[]{3, 0, 0, 0}, 18, SoundEvents.ARMOR_EQUIP_TURTLE, 1f, 0f, () -> Ingredient.of(ModItems.ANTLERS.get()));

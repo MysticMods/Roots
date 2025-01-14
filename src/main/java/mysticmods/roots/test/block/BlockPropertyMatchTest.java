@@ -11,6 +11,8 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 
+// Use PartialBlockStateMatchTest
+@Deprecated
 public class BlockPropertyMatchTest extends RuleTest {
   public static final MapCodec<BlockPropertyMatchTest> CODEC = RecordCodecBuilder.mapCodec((codec) -> codec.group(BlockState.CODEC.fieldOf("state").forGetter(test -> test.state), Codec.STRING.fieldOf("property").forGetter(test -> test.property)).apply(codec, BlockPropertyMatchTest::new));
 

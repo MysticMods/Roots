@@ -28,6 +28,7 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
   // TODO: dynamic bounds?
   private AABB bounds = null;
 
+  // TODO: Why is this
   private static final int[] colors = new int[EnumUtils.DIRECTIONS.length];
 
   static {
