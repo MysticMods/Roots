@@ -39,6 +39,7 @@ public class Roots {
     ModTests.register(bus);
     ModTabs.register(bus);
     ModAttachments.register(bus);
+    ModGroves.register(bus);
     packetHandler = new PacketHandler(bus);
   }
 }

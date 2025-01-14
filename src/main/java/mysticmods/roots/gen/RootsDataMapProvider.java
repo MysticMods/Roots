@@ -1,13 +1,16 @@
 package mysticmods.roots.gen;
 
 import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.data.GroveData;
 import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.init.ModGroves;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
@@ -55,6 +58,11 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     RootsRegistries.RITUALS.stream().forEach(ritual -> {
       builder5.add(ritual.builtInRegistryHolder(), new PropertyDataMap(ritual.getProperties()), false);
+    });
+
+    Builder<GroveData, Grove> builder6 = builder(DataMaps.GROVE_DATA).replace(false);
+    ModGroves.RECORDS.forEach(record -> {
+      builder6.add(RootsRegistries.GROVES.getHolderOrThrow(record.groveKey()), new GroveData(record), false);
     });
   }
 }

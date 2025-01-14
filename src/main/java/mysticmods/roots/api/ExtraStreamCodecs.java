@@ -2,6 +2,11 @@ package mysticmods.roots.api;
 
 import com.mojang.datafixers.util.Function7;
 import io.netty.buffer.ByteBuf;
+import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.spell.Spell;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -58,6 +63,11 @@ public class ExtraStreamCodecs {
 
   public static final StreamCodec<ByteBuf, TagKey<Block>> BLOCK_TAG_STREAM_CODEC = tagStreamCodec(Registries.BLOCK);
   public static final StreamCodec<ByteBuf, TagKey<EntityType<?>>> ENTITY_TAG_STREAM_CODEC = tagStreamCodec(Registries.ENTITY_TYPE);
+
+  public static final StreamCodec<ByteBuf, TagKey<Herb>> HERB_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.HERBS);
+  public static final StreamCodec<ByteBuf, TagKey<Spell>> SPELL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.SPELLS);
+  public static final StreamCodec<ByteBuf, TagKey<Grove>> GROVE_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.GROVES);
+  public static final StreamCodec<ByteBuf, TagKey<Ritual>> RITUAL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.RITUALS);
 
   public static <T> StreamCodec<ByteBuf, TagKey<T>> tagStreamCodec(ResourceKey<Registry<T>> registry) {
     return ResourceLocation.STREAM_CODEC.map(o -> TagKey.create(registry, o), TagKey::location);

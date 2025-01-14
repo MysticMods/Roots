@@ -1,6 +1,7 @@
 package mysticmods.roots.api.data;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.spell.SpellModifier;
@@ -20,6 +21,8 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataMaps {
+  public static final DataMapType<Grove, GroveData> GROVE_DATA = DataMapType.builder(RootsAPI.rl("grove_data"), RootsRegistries.Keys.GROVES, GroveData.CODEC)
+      .build();
   public static final AdvancedDataMapType<Spell, List<Cost>, CostRemover<Spell>> SPELL_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_cost_data"), RootsRegistries.Keys.SPELLS, CostRemover.CODEC)
       .merger(DataMapValueMerger.listMerger())
       .remover(CostRemover.codec())

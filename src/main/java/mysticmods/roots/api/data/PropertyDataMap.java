@@ -3,11 +3,19 @@ package mysticmods.roots.api.data;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 import java.util.List;
 
 public record PropertyDataMap(List<PropertyHolder<? extends Property<?>>> properties) {
   public static Codec<PropertyDataMap> CODEC = PropertyHolder.FULL_LIST_CODEC.xmap(PropertyDataMap::new, PropertyDataMap::properties);
+  public static StreamCodec<RegistryFriendlyByteBuf, PropertyDataMap> STREAM_CODEC = StreamCodec.composite(PropertyHolder.STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.properties, PropertyDataMap::new);
+
+  public PropertyDataMap(List<PropertyHolder<?>> properties) {
+    this.properties = properties;
+  }
 
   public <V, T extends Property<V>> V get(PropertyHolder<T> holder) {
     PropertyHolder<T> myHolder = null;

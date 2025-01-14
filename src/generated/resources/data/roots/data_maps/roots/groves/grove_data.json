@@ -1,0 +1,67 @@
+{
+  "values": {
+    "roots:elemental": {
+      "alignedGroves": "roots:aligned/elemental",
+      "alignedHerbs": "roots:elemental",
+      "alignedRituals": "roots:aligned/elemental",
+      "alignedSpells": "roots:aligned/elemental",
+      "opposedGroves": "roots:opposed/elemental",
+      "opposedRituals": "roots:opposed/elemental",
+      "opposedSpells": "roots:opposed/elemental"
+    },
+    "roots:fairy": {
+      "alignedGroves": "roots:aligned/fairy",
+      "alignedHerbs": "roots:fairy",
+      "alignedRituals": "roots:aligned/fairy",
+      "alignedSpells": "roots:aligned/fairy",
+      "opposedGroves": "roots:opposed/fairy",
+      "opposedRituals": "roots:opposed/fairy",
+      "opposedSpells": "roots:opposed/fairy"
+    },
+    "roots:fungal": {
+      "alignedGroves": "roots:aligned/fungal",
+      "alignedHerbs": "roots:fungal",
+      "alignedRituals": "roots:aligned/fungal",
+      "alignedSpells": "roots:aligned/fungal",
+      "opposedGroves": "roots:opposed/fungal",
+      "opposedRituals": "roots:opposed/fungal",
+      "opposedSpells": "roots:opposed/fungal"
+    },
+    "roots:primal": {
+      "alignedGroves": "roots:aligned/primal",
+      "alignedHerbs": "roots:primal",
+      "alignedRituals": "roots:aligned/primal",
+      "alignedSpells": "roots:aligned/primal",
+      "opposedGroves": "roots:opposed/primal",
+      "opposedRituals": "roots:opposed/primal",
+      "opposedSpells": "roots:opposed/primal"
+    },
+    "roots:sprout": {
+      "alignedGroves": "roots:aligned/sprout",
+      "alignedHerbs": "roots:sprout",
+      "alignedRituals": "roots:aligned/sprout",
+      "alignedSpells": "roots:aligned/sprout",
+      "opposedGroves": "roots:opposed/sprout",
+      "opposedRituals": "roots:opposed/sprout",
+      "opposedSpells": "roots:opposed/sprout"
+    },
+    "roots:twilight": {
+      "alignedGroves": "roots:aligned/twilight",
+      "alignedHerbs": "roots:twilight",
+      "alignedRituals": "roots:aligned/twilight",
+      "alignedSpells": "roots:aligned/twilight",
+      "opposedGroves": "roots:opposed/twilight",
+      "opposedRituals": "roots:opposed/twilight",
+      "opposedSpells": "roots:opposed/twilight"
+    },
+    "roots:wild": {
+      "alignedGroves": "roots:aligned/wild",
+      "alignedHerbs": "roots:wild",
+      "alignedRituals": "roots:aligned/wild",
+      "alignedSpells": "roots:aligned/wild",
+      "opposedGroves": "roots:opposed/wild",
+      "opposedRituals": "roots:opposed/wild",
+      "opposedSpells": "roots:opposed/wild"
+    }
+  }
+}
