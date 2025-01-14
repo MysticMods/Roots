@@ -1,5 +1,6 @@
 package mysticmods.roots.network.client;
 
+import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
@@ -17,5 +18,18 @@ public class ClientNetworkHandlers {
     }
 
     player.setData(ModAttachments.SNAPSHOT_STORAGE, storage);
+  }
+
+  public static void setReputationStorage(ReputationStorage storage) {
+    if (Minecraft.getInstance() == null) {
+      return;
+    }
+    Player player = Minecraft.getInstance().player;
+
+    if (player == null) {
+      return;
+    }
+
+    player.setData(ModAttachments.REPUTATION_STORAGE, storage);
   }
 }

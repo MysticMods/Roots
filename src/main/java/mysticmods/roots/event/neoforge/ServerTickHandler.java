@@ -3,6 +3,7 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
 import mysticmods.roots.network.client.ClientBoundSnapshotSyncPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,6 +36,11 @@ public class ServerTickHandler {
           ModAttachments.SNAPSHOT_STORAGE,
           (player1, data) -> data.tick(player1),
           ClientBoundSnapshotSyncPacket::new
+      );
+      AttachmentUtil.monitorAndSync(
+          player,
+          ModAttachments.REPUTATION_STORAGE,
+          ClientBoundReputationSyncPacket::new
       );
 /*        player.getCapability(Capabilities.REPUTATION_CAPABILITY).ifPresent(reputation -> {
           if (reputation.isDirty()) {

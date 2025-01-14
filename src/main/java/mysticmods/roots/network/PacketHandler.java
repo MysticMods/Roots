@@ -1,5 +1,6 @@
 package mysticmods.roots.network;
 
+import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
 import mysticmods.roots.network.client.ClientBoundSnapshotSyncPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -26,6 +27,7 @@ public class PacketHandler {
 
   protected void registerServerToClient(PacketRegistrar registrar) {
     registrar.play(ClientBoundSnapshotSyncPacket.TYPE, ClientBoundSnapshotSyncPacket.CODEC);
+    registrar.play(ClientBoundReputationSyncPacket.TYPE, ClientBoundReputationSyncPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {
