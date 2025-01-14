@@ -6,6 +6,7 @@ import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
+import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
@@ -55,10 +56,7 @@ public class StaffScreen extends RootsScreen {
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(3), index++, guiLeft + 55, guiTop + 9)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(4), index++, guiLeft + 60, guiTop + 33)));
 
-    // TODO: Le attachement
-/*    getMinecraft().player.getCapability(Capabilities.GRANT_CAPABILITY).resolve().ifPresentOrElse(this::createLibraryButtons, () -> {
-      RootsAPI.LOG.error("Grant capability isn't present!");
-    });*/
+    createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
   }
 
   private void createLibraryButtons(GrantStorage grants) {
