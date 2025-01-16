@@ -26,6 +26,7 @@ import net.neoforged.fml.config.ModConfig;
 //   - Flower pots
 //   - Chicken tempting?
 // - Item properties -> Data Components
+// - Block entity item capabilities
 
 @Mod(RootsAPI.MODID)
 public class Roots {

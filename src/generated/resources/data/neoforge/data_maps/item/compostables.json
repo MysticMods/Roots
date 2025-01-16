@@ -1,0 +1,154 @@
+{
+  "values": {
+    "roots:acacia_bark": {
+      "chance": 0.3
+    },
+    "roots:assorted_seeds": {
+      "chance": 0.3
+    },
+    "roots:aubergine": {
+      "can_villager_compost": true,
+      "chance": 0.65
+    },
+    "roots:aubergine_seeds": {
+      "can_villager_compost": true,
+      "chance": 0.3
+    },
+    "roots:bafflecap": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:birch_bark": {
+      "chance": 0.3
+    },
+    "roots:cloud_berry": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:cooked_aubergine": {
+      "can_villager_compost": true,
+      "chance": 0.95
+    },
+    "roots:cooked_beetroot": {
+      "can_villager_compost": true,
+      "chance": 0.65
+    },
+    "roots:cooked_carrot": {
+      "can_villager_compost": true,
+      "chance": 0.65
+    },
+    "roots:cooked_pereskia": {
+      "chance": 0.3
+    },
+    "roots:cooked_seeds": {
+      "chance": 0.3
+    },
+    "roots:crimson_bark": {
+      "chance": 0.3
+    },
+    "roots:dark_oak_bark": {
+      "chance": 0.3
+    },
+    "roots:dewgonia": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:flour": {
+      "can_villager_compost": true,
+      "chance": 0.65
+    },
+    "roots:grove_moss": {
+      "can_villager_compost": true,
+      "chance": 0.4
+    },
+    "roots:grove_spores": {
+      "can_villager_compost": true,
+      "chance": 0.3
+    },
+    "roots:inferno_bulb": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:jungle_bark": {
+      "chance": 0.3
+    },
+    "roots:mangrove_bark": {
+      "chance": 0.3
+    },
+    "roots:mixed_bark": {
+      "chance": 0.3
+    },
+    "roots:moonglow": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:moonglow_seeds": {
+      "can_villager_compost": true,
+      "chance": 0.3
+    },
+    "roots:oak_bark": {
+      "chance": 0.3
+    },
+    "roots:pereskia": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:pereskia_bulb": {
+      "can_villager_compost": true,
+      "chance": 0.3
+    },
+    "roots:petals": {
+      "can_villager_compost": true,
+      "chance": 0.65
+    },
+    "roots:spiritleaf": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:spiritleaf_seeds": {
+      "can_villager_compost": true,
+      "chance": 0.3
+    },
+    "roots:spruce_bark": {
+      "chance": 0.3
+    },
+    "roots:stalicripe": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:stonepetal": {
+      "chance": 0.65
+    },
+    "roots:stuffed_aubergine": {
+      "chance": 1.0
+    },
+    "roots:warped_bark": {
+      "chance": 0.3
+    },
+    "roots:wildewheet": {
+      "can_villager_compost": true,
+      "chance": 0.9
+    },
+    "roots:wildewheet_bread": {
+      "can_villager_compost": true,
+      "chance": 1.0
+    },
+    "roots:wildewheet_seeds": {
+      "can_villager_compost": true,
+      "chance": 0.3
+    },
+    "roots:wildroot": {
+      "can_villager_compost": true,
+      "chance": 0.4
+    },
+    "roots:wildwood_bark": {
+      "chance": 0.6
+    },
+    "roots:wildwood_leaves": {
+      "chance": 0.3
+    },
+    "roots:wildwood_sapling": {
+      "chance": 0.6
+    }
+  }
+}

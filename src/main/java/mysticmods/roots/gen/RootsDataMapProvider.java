@@ -11,10 +11,13 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.init.ModGroves;
+import mysticmods.roots.init.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.DataMapProvider;
+import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
+import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -76,5 +79,53 @@ public class RootsDataMapProvider extends DataMapProvider {
         builder8.add(modifier.builtInRegistryHolder(), modifier.getParent(), false);
       }
     });
+
+    Builder<Compostable, Item> builder9 = builder(NeoForgeDataMaps.COMPOSTABLES).replace(false);
+    builder9.add(ModItems.WILDWOOD_LEAVES, new Compostable(0.3f), false);
+    builder9.add(ModItems.WILDWOOD_SAPLING, new Compostable(0.6f), false);
+    builder9.add(ModItems.AUBERGINE_SEEDS, new Compostable(0.3f, true), false);
+    builder9.add(ModItems.PERESKIA_BULB, new Compostable(0.3f, true), false);
+    builder9.add(ModItems.SPIRITLEAF_SEEDS, new Compostable(0.3f, true), false);
+    builder9.add(ModItems.MOONGLOW_SEEDS, new Compostable(0.3f, true), false);
+    builder9.add(ModItems.WILDEWHEET_SEEDS, new Compostable(0.3f, true), false);
+    builder9.add(ModItems.GROVE_SPORES, new Compostable(0.3f, true), false);
+
+    builder9.add(ModItems.COOKED_PERESKIA, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.ASSORTED_SEEDS, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.COOKED_SEEDS, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.AUBERGINE, new Compostable(0.65f, true), false);
+    builder9.add(ModItems.STUFFED_AUBERGINE, new Compostable(1f, false), false);
+    builder9.add(ModItems.COOKED_AUBERGINE, new Compostable(0.95f, true), false);
+    builder9.add(ModItems.COOKED_BEETROOT, new Compostable(0.65f, true), false);
+    builder9.add(ModItems.COOKED_CARROT, new Compostable(0.65f, true), false);
+    builder9.add(ModItems.FLOUR, new Compostable(0.65f, true), false);
+    builder9.add(ModItems.WILDEWHEET_BREAD, new Compostable(1f, true), false);
+
+    builder9.add(ModItems.WILDROOT, new Compostable(0.4f, true), false);
+    builder9.add(ModItems.CLOUD_BERRY, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.INFERNO_BULB, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.STALICRIPE, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.DEWGONIA, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.GROVE_MOSS, new Compostable(0.4f, true), false);
+    builder9.add(ModItems.BAFFLECAP, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.SPIRITLEAF, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.MOONGLOW, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.WILDEWHEET, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.PERESKIA, new Compostable(0.9f, true), false);
+
+    builder9.add(ModItems.ACACIA_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.BIRCH_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.DARK_OAK_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.JUNGLE_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.OAK_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.SPRUCE_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.MANGROVE_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.MIXED_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.WILDWOOD_BARK, new Compostable(0.6f, false), false);
+    builder9.add(ModItems.CRIMSON_BARK, new Compostable(0.3f, false), false);
+    builder9.add(ModItems.WARPED_BARK, new Compostable(0.3f, false), false);
+
+    builder9.add(ModItems.PETALS, new Compostable(0.65f, true), false);
+    builder9.add(ModItems.STONEPETAL, new Compostable(0.65f, false), false);
   }
 }
