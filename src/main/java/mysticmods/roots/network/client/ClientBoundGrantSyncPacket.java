@@ -10,7 +10,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientBoundGrantSyncPacket(GrantStorage storage) implements ISyncPacket<GrantStorage> {
-  public static final Type<ClientBoundGrantSyncPacket> TYPE = new Type<>(RootsAPI.rl("client_bound_snapshot_sync"));
+  public static final Type<ClientBoundGrantSyncPacket> TYPE = new Type<>(RootsAPI.rl("client_bound_grant_sync"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ClientBoundGrantSyncPacket> CODEC = StreamCodec.composite(GrantStorage.STREAM_CODEC, ClientBoundGrantSyncPacket::storage, ClientBoundGrantSyncPacket::new);
 
   @Override

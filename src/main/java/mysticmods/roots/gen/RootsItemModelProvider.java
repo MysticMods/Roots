@@ -271,6 +271,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
     spawnEggItem(ModItems.PURPLE_SPROUT_SPAWN_EGG.get());
     spawnEggItem(ModItems.OWL_SPAWN_EGG.get());
     spawnEggItem(ModItems.DUCK_SPAWN_EGG.get());
+
+    spell(ModItems.SPELL_FEY_LIGHT);
     // TODO: Ritual/spell tokens
   }
 
@@ -279,5 +281,13 @@ public class RootsItemModelProvider extends ItemModelProvider {
     return getBuilder(item.toString())
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/" + subfolder + "/" + item.getPath()));
+  }
+
+  public ItemModelBuilder spell(Holder<Item> itemHolder) {
+    ResourceLocation item = itemHolder.getKey().location();
+    String spellLocation = "item/spells/" + item.getPath().replace("spell_", "");
+    return getBuilder(item.toString())
+        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), spellLocation));
   }
 }

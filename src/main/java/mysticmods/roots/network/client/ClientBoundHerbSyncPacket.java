@@ -10,7 +10,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientBoundHerbSyncPacket(HerbStorage storage) implements ISyncPacket<HerbStorage> {
-  public static final Type<ClientBoundHerbSyncPacket> TYPE = new Type<>(RootsAPI.rl("client_bound_snapshot_sync"));
+  public static final Type<ClientBoundHerbSyncPacket> TYPE = new Type<>(RootsAPI.rl("client_bound_herb_sync"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ClientBoundHerbSyncPacket> CODEC = StreamCodec.composite(HerbStorage.STREAM_CODEC, ClientBoundHerbSyncPacket::storage, ClientBoundHerbSyncPacket::new);
 
   @Override

@@ -1,5 +1,6 @@
 package mysticmods.roots.network;
 
+import mysticmods.roots.network.client.ClientBoundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientBoundHerbSyncPacket;
 import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
 import mysticmods.roots.network.client.ClientBoundSnapshotSyncPacket;
@@ -30,6 +31,7 @@ public class PacketHandler {
     registrar.play(ClientBoundSnapshotSyncPacket.TYPE, ClientBoundSnapshotSyncPacket.CODEC);
     registrar.play(ClientBoundReputationSyncPacket.TYPE, ClientBoundReputationSyncPacket.CODEC);
     registrar.play(ClientBoundHerbSyncPacket.TYPE, ClientBoundHerbSyncPacket.CODEC);
+    registrar.play(ClientBoundGrantSyncPacket.TYPE, ClientBoundGrantSyncPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

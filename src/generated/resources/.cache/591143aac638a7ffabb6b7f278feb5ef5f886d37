@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-12T13:17:20.5641268	Item Models: roots
+// 1.21.1	2025-01-16T15:26:44.2830985	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 dfb1282e7837305d24af5f6310f21733fdac68ef assets/roots/models/item/apothecary_pouch.json
@@ -176,6 +176,7 @@ f87e922ad38abf9fac16090d3134a0ff0dff2cc6 assets/roots/models/item/silver_block.j
 33ebd00c986c41ff3dbfd6fe703b5296f7777d8a assets/roots/models/item/silver_knife.json
 6ae2a7f0fceb1384425b93d3f92f5dcc35811ebc assets/roots/models/item/silver_nugget.json
 88f08e588fd91f3c25882cb63d21c76ddcb8fa15 assets/roots/models/item/silver_ore.json
+8788cac217881ed8066dea6074247d8d7d02e09c assets/roots/models/item/spell_fey_light.json
 52ae965e43ad94ecd7b43af4b84f893f1dd6fe0c assets/roots/models/item/spiritleaf.json
 32a9711cefcabebd0824e9eba60a1cbdcb158ee3 assets/roots/models/item/spiritleaf_seeds.json
 c68601e032263101e606ccc23c50554e7f1ff146 assets/roots/models/item/spirit_bag.json

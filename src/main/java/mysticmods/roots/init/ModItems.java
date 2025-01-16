@@ -1,8 +1,12 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -263,7 +267,20 @@ public class ModItems {
   public static DeferredHolder<Item, DeferredSpawnEggItem> PURPLE_SPROUT_SPAWN_EGG = ITEMS.register("purple_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.PURPLE_SPROUT, 0xdd45e6, 0x6825ba, DEFAULT_64.get()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> OWL_SPAWN_EGG = ITEMS.register("owl_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.OWL, 0x8c654a, 0xdec9ba, DEFAULT_64.get()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> DUCK_SPAWN_EGG = ITEMS.register("duck_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.DUCK, 0xe4d6a5, 0xe9ad36, DEFAULT_64.get()));
-  public static DeferredHolder<Item, Item> TOKEN = ITEMS.register("token", () -> new Item(DEFAULT_64.get()));
+
+  public static DeferredHolder<Item, TokenItem> SPELL_FEY_LIGHT = ITEMS.register("spell_fey_light", () -> spell(ModSpells.FEY_LIGHT));
+
+  private static TokenItem spell (Holder<Spell> spell) {
+    return new TokenItem(new Item.Properties().component(ModAttachments.TOKEN_TYPE, TokenItem.TokenType.SPELL).component(ModAttachments.TOKEN_LOCATION, spell.getKey().location()).stacksTo(1));
+  }
+
+  private static TokenItem ritual (Holder<Ritual> ritual) {
+    return new TokenItem(new Item.Properties().component(ModAttachments.TOKEN_TYPE, TokenItem.TokenType.RITUAL).component(ModAttachments.TOKEN_LOCATION, ritual.getKey().location()).stacksTo(1));
+  }
+
+  private static TokenItem spellModifier (Holder<SpellModifier> modifier) {
+    return new TokenItem(new Item.Properties().component(ModAttachments.TOKEN_TYPE, TokenItem.TokenType.MODIFIER).component(ModAttachments.TOKEN_LOCATION, modifier.getKey().location()).stacksTo(1));
+  }
 
   public static void register(IEventBus bus) {
     ITEMS.register(bus);

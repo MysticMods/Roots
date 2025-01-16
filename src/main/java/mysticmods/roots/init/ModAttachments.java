@@ -7,11 +7,16 @@ import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellModifier;
+import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -36,11 +41,15 @@ public class ModAttachments {
   public static DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MAX_SLOT = COMPONENTS.register("maximum_slot", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT).build());
   public static DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC).networkSynchronized(SpellStorage.STREAM_CODEC).build());
 
+  public static DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> TOKEN_LOCATION = COMPONENTS.register("token_location", () -> new DataComponentType.Builder<ResourceLocation>().persistent(ResourceLocation.CODEC).cacheEncoding().networkSynchronized(ResourceLocation.STREAM_CODEC).build());
+  public static DeferredHolder<DataComponentType<?>, DataComponentType<TokenItem.TokenType>> TOKEN_TYPE = COMPONENTS.register("token_type", () -> new DataComponentType.Builder<TokenItem.TokenType>().cacheEncoding().persistent(TokenItem.TokenType.CODEC).networkSynchronized(TokenItem.TokenType.STREAM_CODEC).build());
+
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();
   }
 
   public static void register(IEventBus bus) {
     ATTACHMENTS.register(bus);
+    COMPONENTS.register(bus);
   }
 }

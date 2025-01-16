@@ -15,7 +15,6 @@ import net.neoforged.fml.config.ModConfig;
 // - JEI integration
 // - Ore world generation
 // - Missing data maps?
-//    - any other inbuilt maps from neoforge
 // - Armor material
 // - Runic tools
 // - Cache spell costs from holder

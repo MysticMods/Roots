@@ -1,14 +1,20 @@
 package mysticmods.roots.api.spell;
 
+import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.registry.*;
+import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -17,7 +23,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellModifier> {
+public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellModifier>, TooltipComponent {
+  public static final Codec<SpellModifier> CODEC = RootsRegistries.SPELL_MODIFIERS.byNameCodec();
+  public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);
+
   @Nullable
   protected final Holder<SpellModifier> parent;
   protected final Set<SpellModifier> children = new HashSet<>();

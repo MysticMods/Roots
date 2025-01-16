@@ -233,7 +233,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.PURPLE_SPROUT_SPAWN_EGG.get());
       event.accept(ModItems.OWL_SPAWN_EGG.get());
       event.accept(ModItems.DUCK_SPAWN_EGG.get());
-      event.accept(ModItems.TOKEN.get());
+      event.accept(ModItems.SPELL_FEY_LIGHT.get());
     }
   }
 }

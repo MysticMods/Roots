@@ -1,5 +1,6 @@
 package mysticmods.roots.api.spell;
 
+import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -10,15 +11,20 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -27,7 +33,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-public abstract class Spell implements IStyled, ICosted, SpellLike {
+public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent {
+  public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
+  public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
+
   protected final Type type;
   protected final List<Cost> defaultCosts;
   protected final Set<SpellModifier> modifiers = new HashSet<>();

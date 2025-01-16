@@ -383,7 +383,6 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.PURPLE_SPROUT_SPAWN_EGG);
     addItem(ModItems.OWL_SPAWN_EGG);
     addItem(ModItems.DUCK_SPAWN_EGG);
-    addItem(ModItems.TOKEN);
 
     addEntity(ModEntities.BEETLE);
     addEntity(ModEntities.DEER);
@@ -526,6 +525,7 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.SPROUT_FOOD, "Food for Sprouts");
 
     // TODO: Block tags?
+    // TODO: Spell names
   }
 
   public static String toEnglishName(String internalName) {
