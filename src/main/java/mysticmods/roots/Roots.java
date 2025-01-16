@@ -25,6 +25,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Item properties -> Data Components
 // - Block entity item capabilities
 // - Reach -> block interaction range, entity interaction range
+// - Block entity renderers
 
 @Mod(RootsAPI.MODID)
 public class Roots {

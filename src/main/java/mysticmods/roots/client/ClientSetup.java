@@ -1,6 +1,8 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.MortarBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;
@@ -9,10 +11,7 @@ import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.render.*;
-import mysticmods.roots.init.ModBlockEntities;
-import mysticmods.roots.init.ModBlocks;
-import mysticmods.roots.init.ModEntities;
-import mysticmods.roots.init.ModItems;
+import mysticmods.roots.init.*;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -68,7 +67,20 @@ public class ClientSetup {
     event.register((stack, index) -> index == 1 ? 4159204 : -1, ModBlocks.UNENDING_BOWL.get());
     event.register((stack, index) -> {
       // TODO:
-      return -1;
+      SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
+      int slot = stack.get(ModAttachments.CURRENT_SLOT);
+      if (storage == null) {
+        return -1;
+      }
+      ISpellInstance spell = storage.getSpell(slot);
+      if (spell == null) {
+        return -1;
+      }
+      if (index == 1) {
+        return spell.getSpell().getColor1();
+      } else {
+        return spell.getSpell().getColor2();
+      }
     }, ModItems.STAFF.get());
   }
 
