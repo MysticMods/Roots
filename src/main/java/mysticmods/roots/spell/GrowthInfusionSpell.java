@@ -1,13 +1,13 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.ChatFormatting;
@@ -53,7 +53,7 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
-  public void cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public int cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     // TODO: This shouldn't ever be called client-side
 
     BlockHitResult result = pick(pPlayer);
@@ -64,6 +64,9 @@ public class GrowthInfusionSpell extends Spell {
       at.randomTick((ServerLevel) level, result.getBlockPos(), level.random);
     } else {
       costs.noCharge();
+      return 0;
     }
+
+    return cooldown;
   }
 }

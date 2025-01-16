@@ -1,13 +1,13 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -105,13 +105,16 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Vec3 dest = findSafePosition(pLevel, pPlayer);
     if (dest == null) {
       costs.noCharge();
+      return 0;
     } else {
       pPlayer.teleportTo(dest.x, dest.y, dest.z);
       pPlayer.fallDistance = 0f;
     }
+
+    return cooldown;
   }
 }

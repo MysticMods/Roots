@@ -1,13 +1,13 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
@@ -60,17 +60,25 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer));
+    int totalDamaged = 0;
     for (int damaged = 0; damaged < count; damaged++) {
       if (entities.isEmpty()) {
         break;
       }
 
       LivingEntity entity = entities.remove(pLevel.getRandom().nextInt(entities.size()));
+      totalDamaged++;
       // TODO:
       /*      entity.hurt(DamageSource.playerAttack(pPlayer), damage);*/
     }
+    if (totalDamaged == 0) {
+      costs.noCharge();
+      return 0;
+    }
+
+    return cooldown;
   }
 
 }

@@ -2,14 +2,9 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.item.ICastingItem;
-import mysticmods.roots.api.spell.Costing;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
-import mysticmods.roots.api.spell.SpellStorage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -36,17 +31,17 @@ public class CastingItem extends Item implements ICastingItem {
 
   @Override
   public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
-    if (!(pLivingEntity instanceof Player pPlayer) || pLevel.isClientSide()) {
+/*    if (!(pLivingEntity instanceof Player pPlayer) || pLevel.isClientSide()) {
       return;
     }
 
-    SpellStorage storage = SpellStorage.fromItem(pStack);
+    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
     if (storage == null) {
       pPlayer.stopUsingItem();
       return;
     }
 
-    SpellInstance spell = storage.getSpell();
+    ISpellInstance spell = storage.getSpell();
     if (spell == null) {
       pPlayer.stopUsingItem();
       return;
@@ -69,17 +64,17 @@ public class CastingItem extends Item implements ICastingItem {
 
     if (ticks % 20 == 0) {
       costs.charge(pPlayer);
-    }
+    }*/
   }
 
   @Override
   public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
     ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
-    if (pLevel.isClientSide()) {
+/*    if (pLevel.isClientSide()) {
       return InteractionResultHolder.consume(stack);
     }
-    SpellStorage storage = SpellStorage.getOrCreate(stack);
+    OldSpellStorage storage = OldSpellStorage.getOrCreate(stack);
     if (storage == null) {
       return InteractionResultHolder.fail(stack);
     }
@@ -87,7 +82,7 @@ public class CastingItem extends Item implements ICastingItem {
     if (pPlayer.isShiftKeyDown()) {
       storage.nextSpell();
     } else {
-      SpellInstance spell = storage.getSpell();
+      ISpellInstance spell = storage.getSpell();
       if (spell == null || !spell.canCast(pPlayer)) {
         return InteractionResultHolder.fail(stack);
       }
@@ -115,7 +110,7 @@ public class CastingItem extends Item implements ICastingItem {
     if (storage.isDirty()) {
       storage.save(stack);
       pPlayer.setItemInHand(pUsedHand, stack);
-    }
+    }*/
 
     return InteractionResultHolder.success(stack);
   }
@@ -137,17 +132,20 @@ public class CastingItem extends Item implements ICastingItem {
 
   @Override
   public boolean isBarVisible(ItemStack pStack) {
-    SpellStorage storage = SpellStorage.fromItem(pStack);
+    return false;
+  }
+/*    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
     if (storage == null) {
       return false;
     }
 
-    return storage.getCooldown() > 0;
-  }
+    return storage.getCooldown() > 0;*/
 
   @Override
   public int getBarWidth(ItemStack pStack) {
-    SpellStorage storage = SpellStorage.fromItem(pStack);
+    return 0;
+  }
+/*    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
     if (storage == null) {
       return 0;
     }
@@ -160,11 +158,11 @@ public class CastingItem extends Item implements ICastingItem {
   public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
     super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
 
-    SpellStorage storage = SpellStorage.fromItem(pStack);
+    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
     if (storage != null && storage.tick()) {
       storage.save(pStack);
     }
-  }
+  }*/
 
   // TODO: This is probably over-simplified
   @Override
@@ -174,13 +172,15 @@ public class CastingItem extends Item implements ICastingItem {
 
   @Override
   public Component getName(ItemStack pStack) {
-    SpellStorage storage = SpellStorage.fromItem(pStack);
+/*
+    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
     if (storage != null) {
-      SpellInstance spell = storage.getSpell();
+      ISpellInstance spell = storage.getSpell();
       if (spell != null) {
         return Component.translatable("roots.item.staff.with_spell", spell.getSpell().getStyledName());
       }
     }
+*/
 
     return super.getName(pStack);
   }

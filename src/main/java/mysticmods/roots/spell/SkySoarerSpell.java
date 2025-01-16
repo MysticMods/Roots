@@ -1,13 +1,13 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
@@ -57,9 +57,10 @@ public class SkySoarerSpell extends Spell {
   }
 
   @Override
-  public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.SKY_SOARER, duration, 0));
     Vec3 vehicleMovement = pPlayer.getVehicle() != null ? pPlayer.getVehicle().getDeltaMovement() : Vec3.ZERO;
     SnapshotHelper.addPlayerOrVehicle(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, duration + 40, pPlayer.getDeltaMovement(), vehicleMovement, amplifier));
+    return cooldown;
   }
 }

@@ -1,21 +1,18 @@
 package mysticmods.roots.api.spell;
 
 import com.google.common.collect.ImmutableList;
-import mysticmods.roots.api.RootsTags;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
 // NOTE: THIS IS 0 INDEXED
-public class SpellStorage {
+/*public class OldSpellStorage {
   private final List<SpellInstance> spells;
   private int index = 0;
   private boolean dirty = false;
   private List<Entry> entryList = null;
 
-  protected SpellStorage(int size) {
+  protected OldSpellStorage(int size) {
     spells = Arrays.asList(new SpellInstance[size]);
   }
 
@@ -183,64 +180,6 @@ public class SpellStorage {
     this.dirty = dirty;
   }
 
-  public void save(ItemStack toSave) {
-/*    CompoundTag tag = toSave.getOrCreateTag();
-    tag.putInt("index", this.index);
-    ListTag spells = new ListTag();
-    for (int i = 0; i < this.spells.size(); i++) {
-      SpellInstance spell = this.spells.get(i);
-      if (spell != null) {
-        CompoundTag thisTag = new CompoundTag();
-        thisTag.putInt("index", i);
-        thisTag.put("spell", spell.toNBT());
-        spells.add(thisTag);
-      }
-    }
-    tag.put("spells", spells);
-    tag.putInt("count", this.spells.size());*/
-  }
-
-  public static SpellStorage getOrCreate(ItemStack stack) {
-    return fromItem(stack, true);
-  }
-
-  @Nullable
-  public static SpellStorage fromItem(ItemStack stack) {
-    return fromItem(stack, false);
-  }
-
-  @Nullable
-  public static SpellStorage fromItem(ItemStack stack, boolean create) {
-    if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
-      return null;
-    }
-
-/*    CompoundTag tag = stack.getTag();
-    if (tag == null) {
-      if (!create || !(stack.getItem() instanceof ICastingItem castingItem)) {
-        return null;
-      }
-
-      SpellStorage result = new SpellStorage(castingItem.getSlots());
-      result.setDirty(true);
-      return result;
-    }
-
-    int size = tag.getInt("count");
-
-    SpellStorage result = new SpellStorage(size);
-
-    ListTag spells = tag.getList("spells", Tag.TAG_COMPOUND);
-    for (int i = 0; i < spells.size(); i++) {
-      CompoundTag thisTag = spells.getCompound(i);
-      result.spells.set(thisTag.getInt("index"), SpellInstance.fromNBT(thisTag.getCompound("spell")));
-    }
-
-    result.index = tag.getInt("index");*/
-    /*    return result;*/
-    return null;
-  }
-
   public List<Entry> entryList() {
     if (entryList == null) {
       List<Entry> entryList = new ArrayList<>();
@@ -277,7 +216,7 @@ public class SpellStorage {
 
     @Override
     public void setCooldown(int cooldown) {
-      SpellStorage.this.setDirty(true);
+      OldSpellStorage.this.setDirty(true);
       instance.setCooldown(cooldown);
     }
 
@@ -290,19 +229,14 @@ public class SpellStorage {
 
     @Override
     public void addModifier(SpellModifier modifier) {
-      SpellStorage.this.setDirty(true);
+      OldSpellStorage.this.setDirty(true);
       super.addModifier(modifier);
     }
 
     @Override
     public void removeModifier(SpellModifier modifier) {
-      SpellStorage.this.setDirty(true);
+      OldSpellStorage.this.setDirty(true);
       super.removeModifier(modifier);
-    }
-
-    @Override
-    public CompoundTag toNBT() {
-      return instance.toNBT();
     }
 
     @Override
@@ -316,21 +250,6 @@ public class SpellStorage {
     }
   }
 
-  public static class Entry {
-    private final int slot;
-    private final SpellInstance spell;
-
-    public Entry(int slot, SpellInstance spell) {
-      this.slot = slot;
-      this.spell = spell;
-    }
-
-    public int getSlot() {
-      return slot;
-    }
-
-    public SpellInstance getSpell() {
-      return spell;
-    }
+  public record Entry(int slot, SpellInstance spell) {
   }
-}
+}*/

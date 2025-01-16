@@ -1,6 +1,6 @@
 package mysticmods.roots.api.herb;
 
-import mysticmods.roots.api.data.DataMaps;
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;

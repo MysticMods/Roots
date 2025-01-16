@@ -2,7 +2,7 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.data.GroveData;
+import mysticmods.roots.api.datamap.GroveData;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.reference.Groves;
 import mysticmods.roots.api.registry.RootsRegistries;

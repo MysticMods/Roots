@@ -2,8 +2,8 @@ package mysticmods.roots.api.spell;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -151,7 +151,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike {
     initialize(holder);
   }
 
-  public abstract void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks);
+  public abstract int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);
 
   // TODO: How to handle reach
   protected double getRange(Player pPlayer) {
@@ -197,7 +197,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike {
   }
 
   @Override
-  public Spell getAsSpell() {
+  public Spell asSpell() {
     return this;
   }
 

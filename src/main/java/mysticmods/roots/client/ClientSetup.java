@@ -1,8 +1,6 @@
 package mysticmods.roots.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.spell.SpellInstance;
-import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.MortarBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;
@@ -69,22 +67,7 @@ public class ClientSetup {
     // OVerworldBiome.NORMAL_WATER_COLOR
     event.register((stack, index) -> index == 1 ? 4159204 : -1, ModBlocks.UNENDING_BOWL.get());
     event.register((stack, index) -> {
-      if (index != 0) {
-        SpellStorage storage = SpellStorage.getOrCreate(stack);
-        // TODO: Shouldn't be null but yeah
-        if (storage == null) {
-          return 0xbae38a; // Just a default bland colour
-        }
-        SpellInstance spell = storage.getSpell();
-        if (spell == null) {
-          return 0xbae38a; // Just a default bland colour
-        }
-        if (index == 1) {
-          return spell.getSpell().getColor1();
-        } else if (index == 2) {
-          return spell.getSpell().getColor2();
-        }
-      }
+      // TODO:
       return -1;
     }, ModItems.STAFF.get());
   }

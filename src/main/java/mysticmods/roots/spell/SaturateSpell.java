@@ -1,14 +1,14 @@
 package mysticmods.roots.spell;
 
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -50,13 +50,13 @@ public class SaturateSpell extends Spell {
   }
 
   @Override
-  public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     FoodData data = pPlayer.getFoodData();
     int currentFood = data.getFoodLevel();
     float currentSaturation = data.getSaturationLevel();
     if (currentFood >= 20 && currentSaturation >= 20) {
       costs.noCharge();
-      return;
+      return 0;
     }
 
     float newSat = currentSaturation;
@@ -79,7 +79,7 @@ public class SaturateSpell extends Spell {
 
     if (foodsToSlots.isEmpty()) {
       costs.noCharge();
-      return;
+      return 0;
     }
 
     List<ItemStack> sortedFoods = foodsToSlots.keySet().stream().sorted((o1, o2) -> Float.compare(saturation(o1, pPlayer, instance), saturation(o2, pPlayer, instance))).toList();
@@ -106,7 +106,7 @@ public class SaturateSpell extends Spell {
 
     if ((newSat <= currentSaturation && newFood <= currentFood) || usedAmounts.isEmpty()) {
       costs.noCharge();
-      return;
+      return 0;
     }
 
     List<ItemStack> consumedItems = new ArrayList<>();
@@ -123,7 +123,7 @@ public class SaturateSpell extends Spell {
 
     if (consumedItems.isEmpty()) {
       costs.noCharge();
-      return;
+      return 0;
     }
 
     if (data.getSaturationLevel() < newSat) {
@@ -145,9 +145,10 @@ public class SaturateSpell extends Spell {
         pPlayer.getInventory().placeItemBackInInventory(result);
       }
     }
+    return cooldown;
   }
 
-  private float saturation(ItemStack stack, Player pPlayer, SpellInstance spell) {
+  private float saturation(ItemStack stack, Player pPlayer, ISpellInstance spell) {
     // TODO: what is edible now
 /*    if (!stack.isEdible()) {
       return 0;
@@ -161,7 +162,7 @@ public class SaturateSpell extends Spell {
     return (props.saturation() * props.nutrition() * 2) * saturationMultiplier;
   }
 
-  private float food(ItemStack stack, Player pPlayer, SpellInstance spell) {
+  private float food(ItemStack stack, Player pPlayer, ISpellInstance spell) {
     // TODO:
 /*    if (!stack.isEdible()) {
       return 0;

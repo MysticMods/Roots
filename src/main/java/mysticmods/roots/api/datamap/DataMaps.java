@@ -1,4 +1,4 @@
-package mysticmods.roots.api.data;
+package mysticmods.roots.api.datamap;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.grove.Grove;

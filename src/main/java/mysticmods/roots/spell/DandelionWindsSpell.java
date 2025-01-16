@@ -1,13 +1,13 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -52,16 +52,23 @@ public class DandelionWindsSpell extends Spell {
   }
 
   @Override
-  public void cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Vec3 look = pPlayer.getLookAngle();
     float d = distance;
     float motion = d * d + d;
     Vec3 playVec = pPlayer.position();
 
     AABB box = new AABB(playVec.x + look.x * r1 - r1, playVec.y + look.y * r1 - r1, playVec.z + look.z * r1 - r2, playVec.x + look.x * r1 + r1, playVec.y + look.y * r1 + r1, playVec.z + look.z * r1 + r1);
-    pLevel.getEntities(pPlayer, box, entity -> true /* TODO: better testing */).forEach(o -> {
-      flingEntity(o, look, motion);
-    });
+    int moved = 0;
+    for (Entity entity : pLevel.getEntities(pPlayer, box, entity -> true /* TODO: better testing */)) {
+      flingEntity(entity, look, motion);
+      moved++;
+    }
+    if (moved == 0) {
+      costs.noCharge();
+      return 0;
+    }
+    return cooldown;
   }
 
   private void flingEntity(Entity entity, Vec3 look, float motion) {

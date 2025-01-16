@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 
 public interface CachedSpellLike extends SpellLike {
   default ItemStack getAsItemStack() {
-    Spell result = getAsSpell();
+    Spell result = asSpell();
     if (result == null) {
       return ItemStack.EMPTY;
     }

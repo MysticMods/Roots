@@ -1,8 +1,8 @@
 package mysticmods.roots.gen;
 
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.GroveData;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.GroveData;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;

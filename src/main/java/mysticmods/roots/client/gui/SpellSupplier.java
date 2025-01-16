@@ -12,13 +12,13 @@ import java.util.function.Supplier;
 @FunctionalInterface
 public interface SpellSupplier<T extends SpellLike> extends Supplier<T>, CachedSpellLike {
   @Override
-  default Spell getAsSpell() {
+  default Spell asSpell() {
     T result = get();
     if (result == null) {
       return null;
     }
 
-    return result.getAsSpell();
+    return result.asSpell();
   }
 
   default MutableComponent getStyledName() {

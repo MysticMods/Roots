@@ -1,35 +1,27 @@
 package mysticmods.roots;
 
-import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
-import mysticmods.roots.api.spell.SpellStorage;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.ItemStack;
-
-public class ServerHooks {
-  private static SpellStorage getSpellStorage(ItemStack stack) {
+/*public class ServerHooks {
+  private static OldSpellStorage getSpellStorage(ItemStack stack) {
     if (!stack.is(RootsTags.Items.CASTING_TOOLS)) {
       throw new IllegalStateException("not a casting tool " + stack);
     }
-    return SpellStorage.getOrCreate(stack);
+    return OldSpellStorage.getOrCreate(stack);
   }
 
-  private static void validateSlot(SpellStorage storage, int slot) {
+  private static void validateSlot(OldSpellStorage storage, int slot) {
     if (slot < 0 || slot >= storage.size()) {
       throw new IllegalStateException("out of range: " + slot + " for size " + storage.size());
     }
   }
 
-  private static void validateSlot(SpellStorage storage, int slot1, int slot2) {
+  private static void validateSlot(OldSpellStorage storage, int slot1, int slot2) {
     validateSlot(storage, slot1);
     validateSlot(storage, slot2);
   }
 
   public static void swapSlots(ServerPlayer player, InteractionHand hand, int slot1, int slot2) {
     ItemStack stack = player.getItemInHand(hand);
-    SpellStorage storage = getSpellStorage(stack);
+    OldSpellStorage storage = getSpellStorage(stack);
     if (storage == null) {
       return;
     }
@@ -57,7 +49,7 @@ public class ServerHooks {
 
   public static void insertSpell(ServerPlayer player, InteractionHand hand, int slot, Spell spell) {
     ItemStack stack = player.getItemInHand(hand);
-    SpellStorage storage = getSpellStorage(stack);
+    OldSpellStorage storage = getSpellStorage(stack);
     if (storage == null) {
       return;
     }
@@ -68,10 +60,10 @@ public class ServerHooks {
     updateStack(player, stack, hand, storage);
   }
 
-  private static void updateStack(ServerPlayer player, ItemStack stack, InteractionHand hand, SpellStorage storage) {
+  private static void updateStack(ServerPlayer player, ItemStack stack, InteractionHand hand, OldSpellStorage storage) {
     storage.save(stack);
     player.setItemInHand(hand, stack);
-/*    ClientBoundUpdateStaffStackPacket packet = new ClientBoundUpdateStaffStackPacket(stack);
-    Networking.sendTo(packet, player);*/
+*//*    ClientBoundUpdateStaffStackPacket packet = new ClientBoundUpdateStaffStackPacket(stack);
+    Networking.sendTo(packet, player);*//*
   }
-}
+}*/

@@ -1,15 +1,15 @@
 package mysticmods.roots.client.gui.buttons;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.spell.SpellInstance;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.SpellSupplier;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
-public class StaffSpellButton extends TypedButton<SpellInstance, SpellSupplier<SpellInstance>, StaffScreen> {
+public class StaffSpellButton extends TypedButton<ISpellInstance, SpellSupplier<ISpellInstance>, StaffScreen> {
 
-  public StaffSpellButton(StaffScreen parentScreen, SpellSupplier<SpellInstance> spellGetter, int id, int pX, int pY) {
+  public StaffSpellButton(StaffScreen parentScreen, SpellSupplier<ISpellInstance> spellGetter, int id, int pX, int pY) {
     super(parentScreen, spellGetter, id, pX, pY, 16, 16, parentScreen::buttonClicked, DEFAULT_NARRATION);
   }
 
@@ -24,7 +24,7 @@ public class StaffSpellButton extends TypedButton<SpellInstance, SpellSupplier<S
     }
   }
 
-  public SpellInstance getSpellInstance() {
+  public ISpellInstance getSpellInstance() {
     return spellSupplier.get();
   }
 }

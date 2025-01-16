@@ -1,4 +1,4 @@
-package mysticmods.roots.api.data;
+package mysticmods.roots.api.datamap;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

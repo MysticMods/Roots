@@ -6,7 +6,6 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.init.ModItems;
 import net.minecraft.commands.CommandSourceStack;
@@ -66,7 +65,8 @@ public class RootsCommand {
         staff = new ItemStack(ModItems.STAFF.get());
       }
 
-      SpellStorage storage = SpellStorage.fromItem(staff, true);
+      return 1;
+/*      SpellStorage storage = SpellStorage.fromItem(staff, true);
       if (storage == null) {
         c.getSource().sendFailure(Component.translatable("roots.commands.staff.no_spell_storage"));
         return 1;
@@ -78,7 +78,7 @@ public class RootsCommand {
       } else {
         player.setItemInHand(InteractionHand.MAIN_HAND, staff);
       }
-      return 1;
+      return 1;*/
     })));
     builder.then(Commands.literal("activate").executes(c -> {
       AABB bounds = new AABB(-15, -15, -15, 15, 15, 15).move(c.getSource().getPosition());

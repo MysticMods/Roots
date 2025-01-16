@@ -3,7 +3,6 @@ package mysticmods.roots.client.gui.screen;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.spell.LibrarySpell;
-import mysticmods.roots.api.spell.SpellStorage;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
 import mysticmods.roots.init.ModAttachments;
@@ -32,14 +31,10 @@ public class StaffScreen extends RootsScreen {
     this.height = 192;
   }
 
-  private SpellStorage cachedStorage = null;
-
-  private SpellStorage getStorage() {
-    if (cachedStorage == null) {
-      cachedStorage = SpellStorage.getOrCreate(stack);
-    }
-    return cachedStorage;
-  }
+/*  // TODO:
+  private OldSpellStorage getStorage() {
+    return null;
+  }*/
 
   @Override
   protected void init() {
@@ -50,11 +45,11 @@ public class StaffScreen extends RootsScreen {
     }
     int index = 0;
     super.init();
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(0), index++, guiLeft + 2, guiTop + 33)));
+/*    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(0), index++, guiLeft + 2, guiTop + 33)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(1), index++, guiLeft + 7, guiTop + 9)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(2), index++, guiLeft + 31, guiTop + 4)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(3), index++, guiLeft + 55, guiTop + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(4), index++, guiLeft + 60, guiTop + 33)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(4), index++, guiLeft + 60, guiTop + 33)));*/
 
     createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
   }
@@ -172,7 +167,7 @@ public class StaffScreen extends RootsScreen {
 
   public void setStack(ItemStack stack) {
     this.stack = stack;
-    cachedStorage = null;
+/*    cachedStorage = null;*/
     RootsAPI.LOG.info("Updated stack");
   }
 }

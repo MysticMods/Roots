@@ -1,13 +1,13 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.data.DataMaps;
-import mysticmods.roots.api.data.PropertyDataMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellInstance;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -45,17 +45,17 @@ public class DesaturateSpell extends Spell {
   }
 
   @Override
-  public void cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, SpellInstance instance, int ticks) {
+  public int cast(Level Plevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (!pPlayer.isHurt()) {
       costs.noCharge();
-      return;
+      return 0;
     }
 
     FoodData stats = pPlayer.getFoodData();
     int food = stats.getFoodLevel();
     if (food <= 1) {
       costs.noCharge();
-      return;
+      return 0;
     }
 
     float missing = pPlayer.getMaxHealth() - pPlayer.getHealth();
@@ -73,11 +73,12 @@ public class DesaturateSpell extends Spell {
 
     if (healed == 0) {
       costs.noCharge();
-      return;
+      return 0;
     }
 
     pPlayer.heal(healed);
     stats.setFoodLevel(food);
     stats.setSaturation(Math.min(stats.getExhaustionLevel(), food));
+    return cooldown;
   }
 }

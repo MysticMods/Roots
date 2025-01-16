@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Costing {
-  private final SpellInstance spell;
+  private final ISpellInstance spell;
 
   private final Object2DoubleMap<Herb> totalCosts = new Object2DoubleLinkedOpenHashMap<>();
 
@@ -29,7 +29,7 @@ public class Costing {
 
   private boolean noCharge = false;
 
-  public Costing(SpellInstance spell) {
+  public Costing(ISpellInstance spell) {
     this.spell = spell;
     // base cost is always a cost
     modifierMap.defaultReturnValue(false);
