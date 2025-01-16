@@ -12,12 +12,14 @@ import net.neoforged.fml.config.ModConfig;
 
 // TODO:
 // - Item data component for staff
-//   (simplify staff stuff)
 // - Item data component for "tokens"
 // - JEI integration
 // - Ore world generation
 // - Missing data maps?
 //    - Spell modifier parents
+//    - Compost
+//    - Burnign
+//    - any other inbuilt maps from neoforge
 // - Armor material
 // - Runic tools
 // - Cache spell costs from holder
