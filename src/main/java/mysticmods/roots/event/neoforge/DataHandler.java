@@ -21,5 +21,10 @@ public class DataHandler {
         o.value().init(o);
       });
     }
+    if (event.getRegistryKey() == RootsRegistries.Keys.SPELL_MODIFIERS) {
+      event.getRegistries().registryOrThrow(RootsRegistries.Keys.SPELL_MODIFIERS).holders().forEach(o -> {
+        o.value().init(o);
+      });
+    }
   }
 }

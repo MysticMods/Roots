@@ -11,7 +11,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
-// - Item data component for staff
 // - Item data component for "tokens"
 // - JEI integration
 // - Ore world generation
