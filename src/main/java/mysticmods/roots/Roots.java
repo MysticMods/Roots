@@ -16,7 +16,6 @@ import net.neoforged.fml.config.ModConfig;
 // - JEI integration
 // - Ore world generation
 // - Missing data maps?
-//    - Spell modifier parents
 //    - Compost
 //    - Burnign
 //    - any other inbuilt maps from neoforge

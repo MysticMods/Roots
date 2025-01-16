@@ -6,10 +6,10 @@ import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.init.ModGroves;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -63,6 +63,18 @@ public class RootsDataMapProvider extends DataMapProvider {
     Builder<GroveData, Grove> builder6 = builder(DataMaps.GROVE_DATA).replace(false);
     ModGroves.RECORDS.forEach(record -> {
       builder6.add(RootsRegistries.GROVES.getHolderOrThrow(record.groveKey()), new GroveData(record), false);
+    });
+
+    Builder<Spell, SpellModifier> builder7 = builder(DataMaps.SPELL_MODIFIER_SPELL).replace(false);
+    RootsRegistries.SPELL_MODIFIERS.stream().forEach(modifier -> {
+      builder7.add(modifier.builtInRegistryHolder(), modifier.getSpell().value(), false);
+    });
+
+    Builder<SpellModifier, SpellModifier> builder8 = builder(DataMaps.SPELL_MODIFIER_PARENT).replace(false);
+    RootsRegistries.SPELL_MODIFIERS.stream().forEach(modifier -> {
+      if (modifier.getParent() != null) {
+        builder8.add(modifier.builtInRegistryHolder(), modifier.getParent(), false);
+      }
     });
   }
 }
