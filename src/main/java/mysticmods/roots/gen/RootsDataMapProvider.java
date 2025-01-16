@@ -1,5 +1,6 @@
 package mysticmods.roots.gen;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.GroveData;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -17,6 +18,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
+import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
 import java.util.List;
@@ -113,19 +115,19 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder9.add(ModItems.WILDEWHEET, new Compostable(0.9f, true), false);
     builder9.add(ModItems.PERESKIA, new Compostable(0.9f, true), false);
 
-    builder9.add(ModItems.ACACIA_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.BIRCH_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.DARK_OAK_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.JUNGLE_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.OAK_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.SPRUCE_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.MANGROVE_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.MIXED_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.WILDWOOD_BARK, new Compostable(0.6f, false), false);
-    builder9.add(ModItems.CRIMSON_BARK, new Compostable(0.3f, false), false);
-    builder9.add(ModItems.WARPED_BARK, new Compostable(0.3f, false), false);
+    // TODO: Burnable barks, should exclude crimson/warped
+    builder9.add(RootsTags.Items.BARKS, new Compostable(0.3f, false), false);
 
     builder9.add(ModItems.PETALS, new Compostable(0.65f, true), false);
     builder9.add(ModItems.STONEPETAL, new Compostable(0.65f, false), false);
+
+    Builder<FurnaceFuel, Item> builder10 = builder(NeoForgeDataMaps.FURNACE_FUELS).replace(false);
+    builder10.add(ModItems.THATCH, new FurnaceFuel(300), false);
+    builder10.add(ModItems.WILDWOOD_PEDESTAL, new FurnaceFuel(300), false);
+    builder10.add(ModItems.GROVE_PEDESTAL, new FurnaceFuel(300), false);
+    builder10.add(ModItems.DISPLAY_PEDESTAL, new FurnaceFuel(300), false);
+    builder10.add(ModItems.INFERNO_BULB, new FurnaceFuel(600), false);
+    builder10.add(ModItems.MAGMATIC_SOIL, new FurnaceFuel(900), false);
+
   }
 }

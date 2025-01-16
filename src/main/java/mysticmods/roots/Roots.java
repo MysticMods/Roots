@@ -15,8 +15,6 @@ import net.neoforged.fml.config.ModConfig;
 // - JEI integration
 // - Ore world generation
 // - Missing data maps?
-//    - Compost
-//    - Burnign
 //    - any other inbuilt maps from neoforge
 // - Armor material
 // - Runic tools
@@ -27,6 +25,7 @@ import net.neoforged.fml.config.ModConfig;
 //   - Chicken tempting?
 // - Item properties -> Data Components
 // - Block entity item capabilities
+// - Reach -> block interaction range, entity interaction range
 
 @Mod(RootsAPI.MODID)
 public class Roots {

@@ -1,0 +1,22 @@
+{
+  "values": {
+    "roots:display_pedestal": {
+      "burn_time": 300
+    },
+    "roots:grove_pedestal": {
+      "burn_time": 300
+    },
+    "roots:inferno_bulb": {
+      "burn_time": 600
+    },
+    "roots:magmatic_soil": {
+      "burn_time": 900
+    },
+    "roots:thatch": {
+      "burn_time": 300
+    },
+    "roots:wildwood_pedestal": {
+      "burn_time": 300
+    }
+  }
+}
