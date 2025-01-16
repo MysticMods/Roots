@@ -38,7 +38,7 @@ public class ModAttachments {
   public static DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> SQUID_MILKING_COOLDOWN = ATTACHMENTS.register("squid_milking_cooldown", ModAttachments::createIntegerAttachmentType);
 
   public static DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> CURRENT_SLOT = COMPONENTS.register("current_slot", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT).build());
-  public static DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MAX_SLOT = COMPONENTS.register("maximum_slot", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT).build());
+/*  public static DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MAX_SLOT = COMPONENTS.register("maximum_slot", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT).build());*/
   public static DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC).networkSynchronized(SpellStorage.STREAM_CODEC).build());
 
   public static DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> TOKEN_LOCATION = COMPONENTS.register("token_location", () -> new DataComponentType.Builder<ResourceLocation>().persistent(ResourceLocation.CODEC).cacheEncoding().networkSynchronized(ResourceLocation.STREAM_CODEC).build());

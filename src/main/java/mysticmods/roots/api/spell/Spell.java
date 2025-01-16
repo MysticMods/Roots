@@ -1,5 +1,6 @@
 package mysticmods.roots.api.spell;
 
+import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
@@ -32,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
@@ -88,7 +90,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
     return this.descriptionId;
   }
-
 
   public int getColor1() {
     return color1;

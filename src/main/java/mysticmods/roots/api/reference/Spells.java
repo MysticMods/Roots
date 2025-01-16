@@ -6,6 +6,7 @@ import mysticmods.roots.api.spell.Spell;
 import net.minecraft.resources.ResourceKey;
 
 public interface Spells {
+  ResourceKey<Spell> NONE = spell("none");
   ResourceKey<Spell> ACID_CLOUD = spell("acid_cloud");
   ResourceKey<Spell> AQUA_BUBBLE = spell("aqua_bubble");
   ResourceKey<Spell> AUGMENT = spell("augment");

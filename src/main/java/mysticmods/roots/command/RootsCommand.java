@@ -4,9 +4,11 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.block.GroveStoneBlock;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -65,20 +67,28 @@ public class RootsCommand {
         staff = new ItemStack(ModItems.STAFF.get());
       }
 
-      return 1;
-/*      SpellStorage storage = SpellStorage.fromItem(staff, true);
+      SpellStorage storage = staff.get(ModAttachments.SPELL_STORAGE);
       if (storage == null) {
         c.getSource().sendFailure(Component.translatable("roots.commands.staff.no_spell_storage"));
         return 1;
       }
-      storage.addSpell(spell, spell.getModifiers());
-      storage.save(staff);
+      for (int i = 0; i < storage.maxSlot(); i++) {
+        if (storage.getSpell(i) == null) {
+          staff.set(ModAttachments.SPELL_STORAGE, storage.setSpell(i, spell, spell.getModifiers()));
+          if (newStaff) {
+            player.addItem(staff);
+          } else {
+            player.setItemInHand(InteractionHand.MAIN_HAND, staff);
+          }
+          return 1;
+        }
+      }
       if (newStaff) {
         player.addItem(staff);
       } else {
         player.setItemInHand(InteractionHand.MAIN_HAND, staff);
       }
-      return 1;*/
+      return 1;
     })));
     builder.then(Commands.literal("activate").executes(c -> {
       AABB bounds = new AABB(-15, -15, -15, 15, 15, 15).move(c.getSource().getPosition());
@@ -94,6 +104,4 @@ public class RootsCommand {
     }));
     return builder;
   }
-
-
 }

@@ -1,10 +1,16 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.item.ICastingItem;
+import mysticmods.roots.api.spell.Costing;
+import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.init.ModAttachments;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -31,17 +37,17 @@ public class CastingItem extends Item implements ICastingItem {
 
   @Override
   public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
-/*    if (!(pLivingEntity instanceof Player pPlayer) || pLevel.isClientSide()) {
+    if (!(pLivingEntity instanceof Player pPlayer) || pLevel.isClientSide()) {
       return;
     }
 
-    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
+    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
       pPlayer.stopUsingItem();
       return;
     }
 
-    ISpellInstance spell = storage.getSpell();
+    ISpellInstance spell = storage.getSpell(pStack.get(ModAttachments.CURRENT_SLOT));
     if (spell == null) {
       pPlayer.stopUsingItem();
       return;
@@ -54,63 +60,72 @@ public class CastingItem extends Item implements ICastingItem {
     // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
     if (ticks % 20 == 0) {
       if (!costs.canAfford(pPlayer, true)) {
-        RootsAPI.LOG.info("Not enough herbs to continue casting: " + spell.getSpell().getName());
+        RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getSpell().getName());
         pPlayer.stopUsingItem();
         return;
       }
     }
 
-    spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costs, ticks);
+    if (spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costs, ticks) != 0) {
+      RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());
+    }
 
     if (ticks % 20 == 0) {
       costs.charge(pPlayer);
-    }*/
+    }
   }
 
   @Override
   public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
     ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
-/*    if (pLevel.isClientSide()) {
+    if (pLevel.isClientSide()) {
       return InteractionResultHolder.consume(stack);
     }
-    OldSpellStorage storage = OldSpellStorage.getOrCreate(stack);
+
+    SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
       return InteractionResultHolder.fail(stack);
     }
 
+    int current = stack.get(ModAttachments.CURRENT_SLOT);
+    int max = storage.maxSlot() - 1;
+
     if (pPlayer.isShiftKeyDown()) {
-      storage.nextSpell();
-    } else {
-      ISpellInstance spell = storage.getSpell();
-      if (spell == null || !spell.canCast(pPlayer)) {
-        return InteractionResultHolder.fail(stack);
+      int newSlot = current + 1;
+      if (newSlot + 1 > max) {
+        newSlot = 0;
       }
 
-      // TODO: check costs
-      Costing costing = new Costing(spell);
-      if (!costing.canAfford(pPlayer, true)) {
-        // TODO: display a warning
-        pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
-        RootsAPI.LOG.info("Not enough herbs to cast: " + spell.getSpell().getName());
-        return InteractionResultHolder.fail(stack);
+      if (newSlot != current) {
+        stack.set(ModAttachments.CURRENT_SLOT, newSlot);
       }
 
-      if (spell.getType() == Spell.Type.INSTANT) {
-        spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
-        if (costing.charge(pPlayer)) {
-          spell.setCooldown(pPlayer);
-        }
-      } else {
-        spell.setCooldown(pPlayer);
-        pPlayer.startUsingItem(pUsedHand);
-      }
+      return InteractionResultHolder.success(stack);
     }
 
-    if (storage.isDirty()) {
-      storage.save(stack);
-      pPlayer.setItemInHand(pUsedHand, stack);
-    }*/
+    ISpellInstance spell = storage.getSpell(current);
+    if (spell == null || !spell.canCast(pPlayer)) {
+      return InteractionResultHolder.fail(stack);
+    }
+
+    // TODO: check costs
+    Costing costing = new Costing(spell);
+    if (!costing.canAfford(pPlayer, true)) {
+      // TODO: display a warning
+      pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
+      RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getSpell().getName());
+      return InteractionResultHolder.fail(stack);
+    }
+
+    if (spell.getType() == Spell.Type.INSTANT) {
+      int cooldown = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
+      if (costing.charge(pPlayer)) {
+        stack.set(ModAttachments.SPELL_STORAGE, storage.setCooldown(current, cooldown));
+      }
+    } else {
+      pPlayer.startUsingItem(pUsedHand);
+    }
 
     return InteractionResultHolder.success(stack);
   }
@@ -125,44 +140,33 @@ public class CastingItem extends Item implements ICastingItem {
   }
 
   @Override
-  // TODO: Replace with tag???
-  public int getSlots() {
-    return 5;
-  }
-
-  @Override
   public boolean isBarVisible(ItemStack pStack) {
-    return false;
+    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
+    int currentSlot = pStack.get(ModAttachments.CURRENT_SLOT);
+    return storage != null && storage.getCooldown(currentSlot) > 0;
   }
-/*    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
-    if (storage == null) {
-      return false;
-    }
-
-    return storage.getCooldown() > 0;*/
 
   @Override
   public int getBarWidth(ItemStack pStack) {
-    return 0;
-  }
-/*    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
+    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
       return 0;
     }
 
-    return Math.round(13.0F - (float) storage.getCooldown() * 13.0F / (float) storage.getMaxCooldown());
+    int currentSlot = pStack.get(ModAttachments.CURRENT_SLOT);
+
+    return Math.round(13.0F - (float) storage.getCooldown(currentSlot) * 13.0F / (float) storage.getMaxCooldown(currentSlot));
   }
 
-  // TODO: This means spell cooldowns won't tick outside inventories
   @Override
-  public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-    super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+  public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+    super.inventoryTick(stack, level, entity, slotId, isSelected);
 
-    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
-    if (storage != null && storage.tick()) {
-      storage.save(pStack);
+    SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
+    if (storage != null) {
+      stack.set(ModAttachments.SPELL_STORAGE, storage.tick());
     }
-  }*/
+  }
 
   // TODO: This is probably over-simplified
   @Override
@@ -172,15 +176,13 @@ public class CastingItem extends Item implements ICastingItem {
 
   @Override
   public Component getName(ItemStack pStack) {
-/*
-    OldSpellStorage storage = OldSpellStorage.fromItem(pStack);
+    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
     if (storage != null) {
-      ISpellInstance spell = storage.getSpell();
+      ISpellInstance spell = storage.getSpell(pStack.get(ModAttachments.CURRENT_SLOT));
       if (spell != null) {
         return Component.translatable("roots.item.staff.with_spell", spell.getSpell().getStyledName());
       }
     }
-*/
 
     return super.getName(pStack);
   }

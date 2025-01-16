@@ -1,8 +1,5 @@
 package mysticmods.roots.api.datacomponent;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -19,48 +16,49 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipComponent {
-  public static final SpellStorage EMPTY = new SpellStorage(ImmutableList.of());
+public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements TooltipComponent {
+  private static final SpellSlot[] EMPTY_SLOTS = new SpellSlot[]{null, null, null, null, null};
+  public static final SpellStorage EMPTY = new SpellStorage(5, Arrays.asList(EMPTY_SLOTS));
 
   public static MapCodec<SpellStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          SpellSlot.CODEC.listOf().xmap(ImmutableList::copyOf, ArrayList::new).fieldOf("slots").forGetter(SpellStorage::slots)
+          Codec.INT.fieldOf("maxSlots").forGetter(SpellStorage::maxSlot),
+          SpellSlot.CODEC.listOf().fieldOf("slots").forGetter(o -> o.slots.stream().filter(Objects::nonNull).toList())
       ).apply(instance, SpellStorage::new)
   );
   public static Codec<SpellStorage> CODEC = MAP_CODEC.codec();
   public static StreamCodec<RegistryFriendlyByteBuf, SpellStorage> STREAM_CODEC = StreamCodec.composite(
-      SpellSlot.STREAM_CODEC.apply(ByteBufCodecs.list()).map(ImmutableList::copyOf, ArrayList::new), SpellStorage::slots,
+      ByteBufCodecs.VAR_INT, SpellStorage::maxSlot,
+      SpellSlot.STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.slots.stream().filter(Objects::nonNull).toList(),
       SpellStorage::new
   );
 
-  public SpellStorage(int maxSlots, List<SpellSlot> slots) {
-    this(ImmutableList.copyOf(pad(maxSlots, slots)));
+  public SpellStorage(int maxSlot, List<SpellSlot> slots) {
+    this.maxSlot = maxSlot;
+    this.slots = pad(maxSlot, slots);
   }
 
-  public SpellStorage (int maxSlots) {
-    this(maxSlots, new ArrayList<>());
+  public SpellStorage(int maxSlots) {
+    this(maxSlots, pad(maxSlots, new ArrayList<>()));
   }
 
-  private static List<SpellSlot> pad (int maxSlots, List<SpellSlot> slots) {
+  private static List<SpellSlot> pad(int maxSlots, List<SpellSlot> slots) {
     if (slots.size() == maxSlots) {
       return slots;
     }
     if (slots.size() > maxSlots) {
       throw new IllegalStateException("Too many slots!");
     }
-    List<SpellSlot> padded;
-    if (slots instanceof ImmutableCollection) {
-      padded = new ArrayList<>(slots);
-    } else {
-      padded = slots;
+    List<SpellSlot> newSlots = Arrays.asList(EMPTY_SLOTS);
+    for (SpellSlot slot : slots) {
+      if (slot != null) {
+        newSlots.set(slot.slot(), slot);
+      }
     }
-    while (padded.size() < maxSlots) {
-      padded.add(null);
-    }
-    return padded;
+    return slots;
   }
 
-  private boolean validateSlot (int slot) {
+  private boolean validateSlot(int slot) {
     if (slot < 0 || slot >= slots.size()) {
       RootsAPI.LOG.error("Invalid slot: {}", slot);
       return false;
@@ -69,7 +67,7 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
   }
 
   @Nullable
-  public SpellSlot getSpell (int slot) {
+  public SpellSlot getSpell(int slot) {
     if (!validateSlot(slot)) {
       return null;
     }
@@ -77,7 +75,7 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
     return slots.get(slot);
   }
 
-  public boolean isEmpty () {
+  public boolean isEmpty() {
     if (this == EMPTY) {
       return true;
     }
@@ -89,32 +87,66 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
     return true;
   }
 
-  public int size () {
+  public int size() {
     return slots.size();
   }
 
-  public SpellStorage setSpell (int slot, Spell spell) {
+  public SpellStorage tick() {
+    if (this == EMPTY) {
+      return this;
+    }
+    boolean changed = false;
+    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    for (int i = 0; i < newSlots.size(); i++) {
+      SpellSlot slot = newSlots.get(i);
+      if (slot == null) {
+        continue;
+      }
+      if (slot.cooldown() > 0) {
+        newSlots.set(i, slot.withCooldown(slot.cooldown() - 1));
+        changed = true;
+      } else {
+        newSlots.set(i, slot.withCooldown(0));
+      }
+    }
+    if (!changed) {
+      return this;
+    }
+    return new SpellStorage(maxSlot, newSlots);
+  }
+
+  public SpellStorage setSpell(int slot, Spell spell, Set<SpellModifier> modifiers) {
+    if (!validateSlot(slot)) {
+      return this;
+    }
+
+    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    newSlots.set(slot, new SpellSlot(slot, spell, modifiers));
+    return new SpellStorage(maxSlot, newSlots);
+  }
+
+  public SpellStorage setSpell(int slot, Spell spell) {
     if (!validateSlot(slot)) {
       // TODO:
       return this;
     }
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
-    newSlots.set(slot, new SpellSlot(slot, spell, ImmutableSet.of()));
-    return new SpellStorage(ImmutableList.copyOf(newSlots));
+    newSlots.set(slot, new SpellSlot(slot, spell, Set.of()));
+    return new SpellStorage(maxSlot, newSlots);
   }
 
-  public SpellStorage clearSpell (int slot) {
+  public SpellStorage clearSpell(int slot) {
     if (!validateSlot(slot)) {
       return this;
     }
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
     newSlots.set(slot, null);
-    return new SpellStorage(ImmutableList.copyOf(newSlots));
+    return new SpellStorage(maxSlot, newSlots);
   }
 
-  public SpellStorage swapSlots (int slot1, int slot2) {
+  public SpellStorage swapSlots(int slot1, int slot2) {
     if (!validateSlot(slot1) || !validateSlot(slot2)) {
       return this;
     }
@@ -130,21 +162,45 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
     }
     newSlots.set(slot1, temp2);
     newSlots.set(slot2, temp1);
-    return new SpellStorage(ImmutableList.copyOf(newSlots));
+    return new SpellStorage(maxSlot, newSlots);
   }
 
-  public boolean setCooldown (int slot, long cooldown) {
+  public SpellStorage setCooldown(int slot, int cooldown) {
     if (!validateSlot(slot)) {
-      return false;
+      return this;
     }
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
     SpellSlot slotData = newSlots.get(slot);
     if (slotData == null) {
-      return false;
+      return this;
     }
     newSlots.set(slot, slotData.withCooldown(cooldown));
-    return true;
+    return new SpellStorage(maxSlot, newSlots);
+  }
+
+  public int getCooldown(int slot) {
+    if (!validateSlot(slot)) {
+      return 0;
+    }
+
+    SpellSlot slotData = slots.get(slot);
+    if (slotData == null) {
+      return 0;
+    }
+    return slotData.cooldown();
+  }
+
+  public int getMaxCooldown(int slot) {
+    if (!validateSlot(slot)) {
+      return 0;
+    }
+
+    SpellSlot slotData = slots.get(slot);
+    if (slotData == null) {
+      return 0;
+    }
+    return slotData.getSpell().getCooldown();
   }
 
   @Override
@@ -160,24 +216,24 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
     return slots.hashCode();
   }
 
-  public record SpellSlot(int slot, Spell spell, ImmutableSet<SpellModifier> enabledModifiers,
-                          long cooldown) implements ISpellInstance {
+  public record SpellSlot(int slot, Spell spell, Set<SpellModifier> enabledModifiers,
+                          int cooldown) implements ISpellInstance {
     public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),
         RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellSlot::spell),
-        RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().xmap(ImmutableSet::copyOf, ArrayList::new).fieldOf("enabledModifiers").forGetter(SpellSlot::enabledModifiers),
-        Codec.LONG.fieldOf("cooldown").forGetter(SpellSlot::cooldown)
+        RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().xmap(HashSet::new, ArrayList::new).fieldOf("enabledModifiers").forGetter(o -> new HashSet<>(o.enabledModifiers)),
+        Codec.INT.fieldOf("cooldown").forGetter(SpellSlot::cooldown)
     ).apply(instance, SpellSlot::new));
     public static StreamCodec<RegistryFriendlyByteBuf, SpellSlot> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.VAR_INT, SpellSlot::slot,
         ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), SpellSlot::spell,
-        ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS).apply(ByteBufCodecs.list()).map(ImmutableSet::copyOf, ArrayList::new), SpellSlot::enabledModifiers,
-        ByteBufCodecs.VAR_LONG, SpellSlot::cooldown,
+        ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS).apply(ByteBufCodecs.list()).map(HashSet::new, ArrayList::new), SpellSlot::enabledModifiers,
+        ByteBufCodecs.VAR_INT, SpellSlot::cooldown,
         SpellSlot::new
     );
     public static Codec<SpellSlot> CODEC = MAP_CODEC.codec();
 
-    public SpellSlot(int slot, Spell spell, ImmutableSet<SpellModifier> enabledModifiers) {
+    public SpellSlot(int slot, Spell spell, Set<SpellModifier> enabledModifiers) {
       this(slot, spell, enabledModifiers, 0);
     }
 
@@ -192,7 +248,7 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
     }
 
     @Override
-    public long getCooldown() {
+    public int getCooldown() {
       return cooldown();
     }
 
@@ -206,7 +262,7 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
       }
       Set<SpellModifier> modifiers = new HashSet<>(enabledModifiers);
       modifiers.remove(modifier);
-      return new SpellSlot(slot, spell, ImmutableSet.copyOf(modifiers), cooldown);
+      return new SpellSlot(slot, spell, modifiers, cooldown);
     }
 
     public SpellSlot withModifier(SpellModifier modifier) {
@@ -215,19 +271,19 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
       }
       Set<SpellModifier> modifiers = new HashSet<>(enabledModifiers);
       modifiers.add(modifier);
-      return new SpellSlot(slot, spell, ImmutableSet.copyOf(modifiers), cooldown);
+      return new SpellSlot(slot, spell, modifiers, cooldown);
     }
 
-    public SpellSlot withCooldown(long cooldown) {
-      return new SpellSlot(slot, spell, ImmutableSet.copyOf(enabledModifiers), cooldown);
+    public SpellSlot withCooldown(int cooldown) {
+      return new SpellSlot(slot, spell, enabledModifiers, cooldown);
     }
 
     public SpellSlot withSlot (int slot) {
-      return new SpellSlot(slot, spell, ImmutableSet.copyOf(enabledModifiers), cooldown);
+      return new SpellSlot(slot, spell, enabledModifiers, cooldown);
     }
 
     public SpellSlot copy() {
-      return new SpellSlot(slot, spell, ImmutableSet.copyOf(enabledModifiers), cooldown);
+      return new SpellSlot(slot, spell, enabledModifiers, cooldown);
     }
 
     @Override
@@ -243,7 +299,7 @@ public record SpellStorage(ImmutableList<SpellSlot> slots) implements TooltipCom
       int result = slot;
       result = 31 * result + Objects.hashCode(spell);
       result = 31 * result + Objects.hashCode(enabledModifiers);
-      result = 31 * result + Long.hashCode(cooldown);
+      result = 31 * result + cooldown;
       return result;
     }
   }

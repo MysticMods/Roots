@@ -11,10 +11,13 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.function.IntFunction;
 
 public class Cost {
+  public static final List<Cost> NO_COSTS = List.of();
+
   private final CostType type;
   private final Holder<Herb> herb;
   private final double value;
