@@ -17,46 +17,44 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements TooltipComponent {
+public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) implements TooltipComponent {
   private static final SpellSlot[] EMPTY_SLOTS = new SpellSlot[]{null, null, null, null, null};
-  public static final Supplier<SpellStorage> EMPTY = () -> new SpellStorage(5, Arrays.asList(EMPTY_SLOTS));
+  public static final Supplier<SpellStorage> EMPTY = () -> new SpellStorage(0, 5, Arrays.asList(EMPTY_SLOTS));
 
   public static MapCodec<SpellStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
+          Codec.INT.fieldOf("currentSlot").forGetter(SpellStorage::currentSlot),
           Codec.INT.fieldOf("maxSlots").forGetter(SpellStorage::maxSlot),
           SpellSlot.CODEC.listOf().fieldOf("slots").forGetter(o -> o.slots.stream().filter(Objects::nonNull).toList())
       ).apply(instance, SpellStorage::new)
   );
   public static Codec<SpellStorage> CODEC = MAP_CODEC.codec();
   public static StreamCodec<RegistryFriendlyByteBuf, SpellStorage> STREAM_CODEC = StreamCodec.composite(
+      ByteBufCodecs.VAR_INT, SpellStorage::currentSlot,
       ByteBufCodecs.VAR_INT, SpellStorage::maxSlot,
       SpellSlot.STREAM_CODEC.apply(ByteBufCodecs.list()), o -> o.slots.stream().filter(Objects::nonNull).toList(),
       SpellStorage::new
   );
 
-  public SpellStorage(int maxSlot, List<SpellSlot> slots) {
+  public SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) {
+    this.currentSlot = currentSlot;
     this.maxSlot = maxSlot;
-    this.slots = pad(maxSlot, slots);
-  }
-
-  public SpellStorage(int maxSlots) {
-    this(maxSlots, pad(maxSlots, new ArrayList<>()));
-  }
-
-  private static List<SpellSlot> pad(int maxSlots, List<SpellSlot> slots) {
-    if (slots.size() == maxSlots) {
-      return slots;
-    }
-    if (slots.size() > maxSlots) {
-      throw new IllegalStateException("Too many slots!");
-    }
-    List<SpellSlot> newSlots = Arrays.asList(EMPTY_SLOTS);
-    for (SpellSlot slot : slots) {
-      if (slot != null) {
-        newSlots.set(slot.slot(), slot);
+    List<SpellSlot> result;
+    if (slots.size() == maxSlot) {
+      result = slots;
+    } else {
+      if (slots.size() > maxSlot) {
+        throw new IllegalStateException("Too many slots!");
       }
+      List<SpellSlot> newSlots = Arrays.asList(EMPTY_SLOTS);
+      for (SpellSlot slot : slots) {
+        if (slot != null) {
+          newSlots.set(slot.slot(), slot);
+        }
+      }
+      result = newSlots;
     }
-    return newSlots;
+    this.slots = result;
   }
 
   private boolean validateSlot(int slot) {
@@ -65,6 +63,11 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
       return false;
     }
     return true;
+  }
+
+  @Nullable
+  public SpellSlot getCurrentSpell () {
+    return slots.get(currentSlot);
   }
 
   @Nullable
@@ -110,7 +113,7 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
     if (!changed) {
       return this;
     }
-    return new SpellStorage(maxSlot, newSlots);
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
   public SpellStorage setSpell(int slot, Spell spell, Set<SpellModifier> modifiers) {
@@ -120,7 +123,7 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
     newSlots.set(slot, new SpellSlot(slot, spell, modifiers));
-    return new SpellStorage(maxSlot, newSlots);
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
   public SpellStorage setSpell(int slot, Spell spell) {
@@ -131,7 +134,7 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
     newSlots.set(slot, new SpellSlot(slot, spell, Set.of()));
-    return new SpellStorage(maxSlot, newSlots);
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
   public SpellStorage clearSpell(int slot) {
@@ -141,7 +144,7 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
 
     List<SpellSlot> newSlots = new ArrayList<>(slots);
     newSlots.set(slot, null);
-    return new SpellStorage(maxSlot, newSlots);
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
   public SpellStorage swapSlots(int slot1, int slot2) {
@@ -160,7 +163,7 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
     }
     newSlots.set(slot1, temp2);
     newSlots.set(slot2, temp1);
-    return new SpellStorage(maxSlot, newSlots);
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
   public SpellStorage setCooldown(int slot, int cooldown) {
@@ -174,7 +177,22 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
       return this;
     }
     newSlots.set(slot, slotData.withCooldown(cooldown));
-    return new SpellStorage(maxSlot, newSlots);
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
+  }
+
+  public SpellStorage setCurrentSlot (int slot) {
+    if (slot < 0 || slot >= maxSlot || slot == currentSlot) {
+      return this;
+    }
+    return new SpellStorage(slot, maxSlot, slots);
+  }
+
+  public int getCurrentMaxCooldown () {
+    return getMaxCooldown(currentSlot);
+  }
+
+  public int getCurrentCooldown () {
+    return getCooldown(currentSlot);
   }
 
   public int getCooldown(int slot) {

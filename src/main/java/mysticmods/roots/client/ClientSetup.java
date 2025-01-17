@@ -70,11 +70,10 @@ public class ClientSetup {
       // TODO:
       if (index != 0) {
         SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
-        int slot = stack.get(ModAttachments.CURRENT_SLOT);
         if (storage == null) {
           return FastColor.ARGB32.opaque(0xbae38a);
         }
-        ISpellInstance spell = storage.getSpell(slot);
+        ISpellInstance spell = storage.getCurrentSpell();
         if (spell == null) {
           return FastColor.ARGB32.opaque(0xbae38a);
         }

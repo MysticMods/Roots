@@ -47,7 +47,7 @@ public class CastingItem extends Item implements ICastingItem {
       return;
     }
 
-    ISpellInstance spell = storage.getSpell(pStack.get(ModAttachments.CURRENT_SLOT));
+    ISpellInstance spell = storage.getCurrentSpell();
     if (spell == null) {
       pPlayer.stopUsingItem();
       return;
@@ -88,7 +88,7 @@ public class CastingItem extends Item implements ICastingItem {
       return InteractionResultHolder.fail(stack);
     }
 
-    int current = stack.get(ModAttachments.CURRENT_SLOT);
+    int current = storage.currentSlot();
     int max = storage.maxSlot();
 
     if (pPlayer.isShiftKeyDown()) {
@@ -109,7 +109,7 @@ public class CastingItem extends Item implements ICastingItem {
       }
 
       if (newSlot != current && storage.getSpell(newSlot) != null) {
-        stack.set(ModAttachments.CURRENT_SLOT, newSlot);
+        stack.set(ModAttachments.SPELL_STORAGE, storage.setCurrentSlot(newSlot));
         return InteractionResultHolder.success(stack);
       } else {
         return InteractionResultHolder.fail(stack);
@@ -159,8 +159,7 @@ public class CastingItem extends Item implements ICastingItem {
     if (storage == null) {
       return false;
     }
-    int currentSlot = pStack.get(ModAttachments.CURRENT_SLOT);
-    int cooldown = storage.getCooldown(currentSlot);
+    int cooldown = storage.getCurrentCooldown();
     if (cooldown > 0) {
       return true;
     }
@@ -174,9 +173,7 @@ public class CastingItem extends Item implements ICastingItem {
       return 0;
     }
 
-    int currentSlot = pStack.get(ModAttachments.CURRENT_SLOT);
-
-    return Math.round((float) storage.getCooldown(currentSlot) * 13.0F / (float) storage.getMaxCooldown(currentSlot));
+    return Math.round((float) storage.getCurrentCooldown() * 13.0F / (float) storage.getCurrentMaxCooldown());
 
   }
 
@@ -207,7 +204,7 @@ public class CastingItem extends Item implements ICastingItem {
   public Component getName(ItemStack pStack) {
     SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
     if (storage != null) {
-      ISpellInstance spell = storage.getSpell(pStack.get(ModAttachments.CURRENT_SLOT));
+      ISpellInstance spell = storage.getCurrentSpell();
       if (spell != null) {
         return Component.translatable("roots.item.staff.with_spell", spell.getSpell().getStyledName());
       }
