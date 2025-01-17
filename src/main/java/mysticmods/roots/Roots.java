@@ -17,8 +17,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Missing data maps?
 // - Armor material
 // - Runic tools
-// - Cache spell costs from holder
-// - Reach property?
 // - Common setup:
 //   - Flower pots
 //   - Chicken tempting?
