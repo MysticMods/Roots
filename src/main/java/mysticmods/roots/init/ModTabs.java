@@ -13,7 +13,7 @@ public class ModTabs {
   private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, RootsAPI.MODID);
 
   public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ROOT_TAB = CREATIVE_MODE_TABS.register("roots", () -> CreativeModeTab.builder()
-      .title(Component.translatable("itemGroups.roots"))
+      .title(Component.translatable("itemGroup.roots"))
       .icon(() -> new ItemStack(ModItems.WILDROOT.get()))
       .build());
 

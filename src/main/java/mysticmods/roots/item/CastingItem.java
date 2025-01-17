@@ -7,6 +7,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -15,8 +16,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
 
 // TODO: Handle item colors
 public class CastingItem extends Item implements ICastingItem {
@@ -109,7 +113,10 @@ public class CastingItem extends Item implements ICastingItem {
       }
 
       if (newSlot != current && storage.getSpell(newSlot) != null) {
-        stack.set(ModAttachments.SPELL_STORAGE, storage.setCurrentSlot(newSlot));
+        SpellStorage newStorage = storage.setCurrentSlot(newSlot);
+        if (newStorage != storage) {
+          stack.set(ModAttachments.SPELL_STORAGE, newStorage);
+        }
         return InteractionResultHolder.success(stack);
       } else {
         return InteractionResultHolder.fail(stack);
@@ -213,10 +220,10 @@ public class CastingItem extends Item implements ICastingItem {
     return super.getName(pStack);
   }
 
-/*  @Override
-  public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-    super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+  @Override
+  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-    TooltipUtil.spellStaffTooltip(pTooltipComponents, pStack, pIsAdvanced);
-  }*/
+    TooltipUtil.spellStaffTooltip(context, tooltipComponents, stack, tooltipFlag);
+  }
 }

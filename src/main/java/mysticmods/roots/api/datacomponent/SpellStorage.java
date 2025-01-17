@@ -11,13 +11,12 @@ import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Supplier;
 
-public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) implements TooltipComponent {
+public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) {
   private static final SpellSlot[] EMPTY_SLOTS = new SpellSlot[]{null, null, null, null, null};
   public static final Supplier<SpellStorage> EMPTY = () -> new SpellStorage(0, 5, Arrays.asList(EMPTY_SLOTS));
 
@@ -66,7 +65,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
   }
 
   @Nullable
-  public SpellSlot getCurrentSpell () {
+  public SpellSlot getCurrentSpell() {
     return slots.get(currentSlot);
   }
 
@@ -180,18 +179,18 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
-  public SpellStorage setCurrentSlot (int slot) {
+  public SpellStorage setCurrentSlot(int slot) {
     if (slot < 0 || slot >= maxSlot || slot == currentSlot) {
       return this;
     }
     return new SpellStorage(slot, maxSlot, slots);
   }
 
-  public int getCurrentMaxCooldown () {
+  public int getCurrentMaxCooldown() {
     return getMaxCooldown(currentSlot);
   }
 
-  public int getCurrentCooldown () {
+  public int getCurrentCooldown() {
     return getCooldown(currentSlot);
   }
 
@@ -224,22 +223,19 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     if (o == null || getClass() != o.getClass()) return false;
 
     SpellStorage that = (SpellStorage) o;
-    if (that.slots.size() != slots.size()) {
-      return false;
-    }
-
-    for (int i = 0; i < slots.size(); i++) {
-      if (!Objects.equals(slots.get(i), that.slots.get(i))) {
-        return false;
-      }
-    }
-
-    return true;
+    return maxSlot == that.maxSlot && currentSlot == that.currentSlot && slots.equals(that.slots);
   }
 
   @Override
   public int hashCode() {
-    return slots.hashCode();
+    int result = currentSlot;
+    result = 31 * result + maxSlot;
+    result = 31 * result + slots.hashCode();
+    return result;
+  }
+
+  public List<SpellSlot> getSpells() {
+    return slots;
   }
 
   public record SpellSlot(int slot, Spell spell, Set<SpellModifier> enabledModifiers,
@@ -304,7 +300,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return new SpellSlot(slot, spell, enabledModifiers, cooldown);
     }
 
-    public SpellSlot withSlot (int slot) {
+    public SpellSlot withSlot(int slot) {
       return new SpellSlot(slot, spell, enabledModifiers, cooldown);
     }
 
