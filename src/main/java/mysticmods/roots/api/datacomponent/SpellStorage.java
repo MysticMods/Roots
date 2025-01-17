@@ -15,10 +15,11 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements TooltipComponent {
   private static final SpellSlot[] EMPTY_SLOTS = new SpellSlot[]{null, null, null, null, null};
-  public static final SpellStorage EMPTY = new SpellStorage(5, Arrays.asList(EMPTY_SLOTS));
+  public static final Supplier<SpellStorage> EMPTY = () -> new SpellStorage(5, Arrays.asList(EMPTY_SLOTS));
 
   public static MapCodec<SpellStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
@@ -55,7 +56,7 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
         newSlots.set(slot.slot(), slot);
       }
     }
-    return slots;
+    return newSlots;
   }
 
   private boolean validateSlot(int slot) {
@@ -76,9 +77,6 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
   }
 
   public boolean isEmpty() {
-    if (this == EMPTY) {
-      return true;
-    }
     for (SpellSlot slot : slots) {
       if (slot != null) {
         return false;
@@ -92,7 +90,7 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
   }
 
   public SpellStorage tick() {
-    if (this == EMPTY) {
+    if (this.isEmpty()) {
       return this;
     }
     boolean changed = false;
@@ -208,7 +206,17 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
     if (o == null || getClass() != o.getClass()) return false;
 
     SpellStorage that = (SpellStorage) o;
-    return slots.equals(that.slots);
+    if (that.slots.size() != slots.size()) {
+      return false;
+    }
+
+    for (int i = 0; i < slots.size(); i++) {
+      if (!Objects.equals(slots.get(i), that.slots.get(i))) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   @Override
@@ -291,6 +299,9 @@ public record SpellStorage(int maxSlot, List<SpellSlot> slots) implements Toolti
       if (o == null || getClass() != o.getClass()) return false;
 
       SpellSlot spellSlot = (SpellSlot) o;
+      if (spellSlot.enabledModifiers.size() != enabledModifiers.size()) {
+        return false;
+      }
       return slot == spellSlot.slot && cooldown == spellSlot.cooldown && Objects.equals(spell, spellSlot.spell) && Objects.equals(enabledModifiers, spellSlot.enabledModifiers);
     }
 

@@ -23,8 +23,6 @@ import java.util.function.Supplier;
 public class ModSpells {
   private static final DeferredRegister<Spell> REGISTER = DeferredRegister.create(RootsRegistries.Keys.SPELLS, RootsAPI.MODID);
 
-  public static final DeferredHolder<Spell, NoSpell> NONE = spell(Spells.NONE, NoSpell::new, ChatFormatting.BLACK, () -> Cost.NO_COSTS);
-
   // Acid Cloud (20 cooldown)
   public static final DeferredHolder<Spell, AcidCloudSpell> ACID_CLOUD = spell(Spells.ACID_CLOUD, AcidCloudSpell::new, ChatFormatting.GREEN, () -> List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)));
   public static final PropertyHolder<Property.IntegerProperty> ACID_CLOUD_COOLDOWN = P.recordProperty("acid_cloud/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));

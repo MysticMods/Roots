@@ -89,19 +89,33 @@ public class CastingItem extends Item implements ICastingItem {
     }
 
     int current = stack.get(ModAttachments.CURRENT_SLOT);
-    int max = storage.maxSlot() - 1;
+    int max = storage.maxSlot();
 
     if (pPlayer.isShiftKeyDown()) {
+      if (storage.isEmpty()) {
+        return InteractionResultHolder.fail(stack);
+      }
+
       int newSlot = current + 1;
-      if (newSlot + 1 > max) {
+      if (newSlot >= max) {
         newSlot = 0;
       }
 
-      if (newSlot != current) {
-        stack.set(ModAttachments.CURRENT_SLOT, newSlot);
+      while (storage.getSpell(newSlot) == null) {
+        newSlot++;
+        if (newSlot >= max) {
+          newSlot = 0;
+        }
       }
 
-      return InteractionResultHolder.success(stack);
+      if (newSlot != current && storage.getSpell(newSlot) != null) {
+        stack.set(ModAttachments.CURRENT_SLOT, newSlot);
+        return InteractionResultHolder.success(stack);
+      } else {
+        return InteractionResultHolder.fail(stack);
+      }
+
+
     }
 
     ISpellInstance spell = storage.getSpell(current);
@@ -142,8 +156,15 @@ public class CastingItem extends Item implements ICastingItem {
   @Override
   public boolean isBarVisible(ItemStack pStack) {
     SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
+    if (storage == null) {
+      return false;
+    }
     int currentSlot = pStack.get(ModAttachments.CURRENT_SLOT);
-    return storage != null && storage.getCooldown(currentSlot) > 0;
+    int cooldown = storage.getCooldown(currentSlot);
+    if (cooldown > 0) {
+      return true;
+    }
+    return false;
   }
 
   @Override
@@ -155,16 +176,24 @@ public class CastingItem extends Item implements ICastingItem {
 
     int currentSlot = pStack.get(ModAttachments.CURRENT_SLOT);
 
-    return Math.round(13.0F - (float) storage.getCooldown(currentSlot) * 13.0F / (float) storage.getMaxCooldown(currentSlot));
+    return Math.round((float) storage.getCooldown(currentSlot) * 13.0F / (float) storage.getMaxCooldown(currentSlot));
+
   }
 
   @Override
   public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
     super.inventoryTick(stack, level, entity, slotId, isSelected);
 
+    if (level.isClientSide()) {
+      return;
+    }
+
     SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
     if (storage != null) {
-      stack.set(ModAttachments.SPELL_STORAGE, storage.tick());
+      SpellStorage newStorage = storage.tick();
+      if (storage != newStorage) {
+        stack.set(ModAttachments.SPELL_STORAGE, newStorage);
+      }
     }
   }
 

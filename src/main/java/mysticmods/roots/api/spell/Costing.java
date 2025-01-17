@@ -144,7 +144,7 @@ public class Costing {
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
   public boolean charge(Player player) {
     if (player.isCreative()) {
-      return false;
+      return true;
     }
     if (player.level().isClientSide()) {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");

@@ -15,6 +15,7 @@ import mysticmods.roots.init.*;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.util.FastColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -67,20 +68,23 @@ public class ClientSetup {
     event.register((stack, index) -> index == 1 ? 4159204 : -1, ModBlocks.UNENDING_BOWL.get());
     event.register((stack, index) -> {
       // TODO:
-      SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
-      int slot = stack.get(ModAttachments.CURRENT_SLOT);
-      if (storage == null) {
-        return -1;
+      if (index != 0) {
+        SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);
+        int slot = stack.get(ModAttachments.CURRENT_SLOT);
+        if (storage == null) {
+          return FastColor.ARGB32.opaque(0xbae38a);
+        }
+        ISpellInstance spell = storage.getSpell(slot);
+        if (spell == null) {
+          return FastColor.ARGB32.opaque(0xbae38a);
+        }
+        if (index == 1) {
+          return FastColor.ARGB32.opaque(spell.getSpell().getColor1());
+        } else if (index == 2) {
+          return FastColor.ARGB32.opaque(spell.getSpell().getColor2());
+        }
       }
-      ISpellInstance spell = storage.getSpell(slot);
-      if (spell == null) {
-        return -1;
-      }
-      if (index == 1) {
-        return spell.getSpell().getColor1();
-      } else {
-        return spell.getSpell().getColor2();
-      }
+      return -1;
     }, ModItems.STAFF.get());
   }
 

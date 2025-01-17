@@ -33,13 +33,7 @@ public interface ISpellInstance extends SpellLike {
   }
 
   default boolean canCast(Player pCaster) {
-    if (pCaster.level() == null) {
-      return false;
-    }
-    if (getMaxCooldown() == 0) {
-      return true;
-    }
-    return pCaster.level().getGameTime() >= getCooldown();
+    return getCooldown() == 0;
   }
 
   // Returns length of cooldown
