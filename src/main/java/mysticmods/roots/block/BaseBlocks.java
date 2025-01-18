@@ -61,8 +61,7 @@ public class BaseBlocks {
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-      return true;
-      // return state.is(this.supporter);
+      return state.is(this.supporter);
     }
 
     @Override

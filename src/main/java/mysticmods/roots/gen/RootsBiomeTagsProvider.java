@@ -46,7 +46,7 @@ public class RootsBiomeTagsProvider extends BiomeTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Biomes.HAS_STANDING_STONES).addTags(BiomeTags.IS_SAVANNA, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_PLAINS);
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.WILD_AUBERGINE_BIOMES).addTags(BiomeTags.IS_FOREST, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_FOREST, Tags.Biomes.IS_PLAINS);
+    this.tag(RootsTags.Biomes.WILD_AUBERGINE_BIOMES).addTags(BiomeTags.IS_FOREST, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_FOREST, Tags.Biomes.IS_PLAINS, BiomeTags.IS_SAVANNA, Tags.Biomes.IS_SAVANNA);
     //noinspection unchecked
     this.tag(RootsTags.Biomes.WILD_ROOTS_FOREST_BIOMES).addTags(BiomeTags.IS_TAIGA, BiomeTags.IS_JUNGLE, BiomeTags.IS_SAVANNA, BiomeTags.IS_FOREST, BiomeTags.HAS_RUINED_PORTAL_SWAMP, Tags.Biomes.IS_CONIFEROUS_TREE, Tags.Biomes.IS_JUNGLE_TREE, Tags.Biomes.IS_DECIDUOUS_TREE, Tags.Biomes.IS_SWAMP);
     //noinspection unchecked

@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
   "biomes": "#roots:has_stonepetal",
-  "features": "roots:stonepetal",
+  "features": "roots:stonepetal_patch",
   "step": "vegetal_decoration"
 }

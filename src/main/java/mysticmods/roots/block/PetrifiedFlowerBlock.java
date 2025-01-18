@@ -24,8 +24,7 @@ public class PetrifiedFlowerBlock extends FlowerBlock {
 
   @Override
   protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-    return true;
-    //return state.is(RootsTags.Blocks.SUPPORTS_STONEPETAL);
+    return state.is(RootsTags.Blocks.SUPPORTS_STONEPETAL);
   }
 
   @Override

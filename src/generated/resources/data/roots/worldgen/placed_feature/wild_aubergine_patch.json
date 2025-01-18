@@ -2,12 +2,12 @@
   "feature": "roots:wild_aubergine_patch",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 256
+      "type": "minecraft:rarity_filter",
+      "chance": 168
     },
     {
       "type": "minecraft:heightmap",
-      "heightmap": "MOTION_BLOCKING"
+      "heightmap": "WORLD_SURFACE_WG"
     },
     {
       "type": "minecraft:biome"
