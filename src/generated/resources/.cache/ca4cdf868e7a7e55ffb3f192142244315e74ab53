@@ -1,15 +1,16 @@
-// 1.21.1	2025-01-18T11:48:02.1076618	Roots Biome Tags
+// 1.21.1	2025-01-18T14:46:03.9732045	Roots Biome Tags
 925592c1ead4fb2c26b64a11317cb7f88f5d3356 data/roots/tags/worldgen/biome/has_barrow_structure.json
 d06f3747c607f63a0bc9f5931892c0d30093b386 data/roots/tags/worldgen/biome/has_beetle_spawns.json
 df4ed4b9b3bc0681a49bd1ad5c34faeb6323b2b7 data/roots/tags/worldgen/biome/has_deer_spawns.json
 dd8a0de8037c3c38d7643fb99fb2741c963ecfe4 data/roots/tags/worldgen/biome/has_duck_spawns.json
 895c1f2ebaf45e4673c10fbfa26e9c79e4ecfe1b data/roots/tags/worldgen/biome/has_fennec_spawns.json
-f72429df688b25dedf80749464051652919966a6 data/roots/tags/worldgen/biome/has_granite_quartz_ore.json
+5a2931ef953e5514fb6f73eedec6ae10a3fbeb2c data/roots/tags/worldgen/biome/has_granite_quartz_ore.json
 925592c1ead4fb2c26b64a11317cb7f88f5d3356 data/roots/tags/worldgen/biome/has_hut_structures.json
 2de3465c0bf03f321d78c27a07eeb8d752295b4a data/roots/tags/worldgen/biome/has_owl_spawns.json
+5a2931ef953e5514fb6f73eedec6ae10a3fbeb2c data/roots/tags/worldgen/biome/has_silver_ore.json
 3ec50ede509d4298dd9b80457da8379b39365454 data/roots/tags/worldgen/biome/has_sprout_spawns.json
 925592c1ead4fb2c26b64a11317cb7f88f5d3356 data/roots/tags/worldgen/biome/has_standing_stones.json
-9e76bc2da4bb8739a47c222866b1d7fcbe83f719 data/roots/tags/worldgen/biome/has_stonepetal.json
+5a2931ef953e5514fb6f73eedec6ae10a3fbeb2c data/roots/tags/worldgen/biome/has_stonepetal.json
 36cb1983b3b4ca5dc7033c10d7753d718345ec08 data/roots/tags/worldgen/biome/wild_aubergine_biomes.json
 1ff2ba802ae516fb610bcd4df741d29e95013256 data/roots/tags/worldgen/biome/wild_roots_forest_biomes.json
 58edb172cc0eba5bf109c20203bf0b1b0af8cf8d data/roots/tags/worldgen/biome/wild_roots_sparse_biomes.json

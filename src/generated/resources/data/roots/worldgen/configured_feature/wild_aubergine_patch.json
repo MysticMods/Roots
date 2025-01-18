@@ -2,7 +2,7 @@
   "type": "minecraft:random_patch",
   "config": {
     "feature": "roots:wild_aubergine",
-    "tries": 20,
+    "tries": 255,
     "xz_spread": 2,
     "y_spread": 2
   }

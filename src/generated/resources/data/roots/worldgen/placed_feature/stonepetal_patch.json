@@ -2,28 +2,18 @@
   "feature": "roots:stonepetal_patch",
   "placement": [
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:count",
-      "count": 100
+      "count": 256
     },
     {
       "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
-      "heightmap": "WORLD_SURFACE_WG"
+      "heightmap": "MOTION_BLOCKING"
     },
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 3
-    },
-    {
-      "type": "roots:dimension_placement",
-      "dimensions": [
-        "minecraft:overworld"
-      ]
+      "type": "minecraft:biome"
     }
   ]
 }

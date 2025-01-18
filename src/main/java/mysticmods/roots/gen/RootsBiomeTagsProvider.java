@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -56,9 +57,10 @@ public class RootsBiomeTagsProvider extends BiomeTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Biomes.HAS_GRANITE_QUARTZ_ORE).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.HAS_GRANITE_QUARTZ_ORE).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
+    this.tag(RootsTags.Biomes.HAS_SILVER_ORE).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
 
-    this.tag(RootsTags.Biomes.HAS_STONEPETAL).addTag(Tags.Biomes.IS_MOUNTAIN);
+    //noinspection unchecked
+    this.tag(RootsTags.Biomes.HAS_STONEPETAL).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
   }
 
   @Override

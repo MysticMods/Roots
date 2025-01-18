@@ -3,24 +3,14 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 1
-    },
-    {
-      "type": "minecraft:in_square"
+      "count": 256
     },
     {
       "type": "minecraft:heightmap",
-      "heightmap": "WORLD_SURFACE_WG"
+      "heightmap": "MOTION_BLOCKING"
     },
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 80
-    },
-    {
-      "type": "roots:dimension_placement",
-      "dimensions": [
-        "minecraft:overworld"
-      ]
+      "type": "minecraft:biome"
     }
   ]
 }

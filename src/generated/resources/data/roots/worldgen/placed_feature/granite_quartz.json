@@ -9,15 +9,6 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:biome"
-    },
-    {
-      "type": "roots:dimension_placement",
-      "dimensions": [
-        "minecraft:overworld"
-      ]
-    },
-    {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
@@ -28,6 +19,9 @@
           "absolute": -64
         }
       }
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }

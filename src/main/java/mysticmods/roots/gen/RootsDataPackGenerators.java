@@ -7,7 +7,6 @@ import mysticmods.roots.block.WildRootsBlock;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModFeatures;
-import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
@@ -20,7 +19,6 @@ import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Blocks;
@@ -31,7 +29,10 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
@@ -76,13 +77,25 @@ public class RootsDataPackGenerators {
             new RegistrySetBuilder()
                 .add(Registries.CONFIGURED_FEATURE, bootstrap -> {
                   HolderGetter<PlacedFeature> placedFeatures = bootstrap.lookup(Registries.PLACED_FEATURE);
-                  bootstrap.register(ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY, new ConfiguredFeature<>(Feature.HUGE_RED_MUSHROOM, new HugeMushroomFeatureConfiguration(BlockStateProvider.simple(ModBlocks.BAFFLECAP_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.DOWN, false)), BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
-                  bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_KEY, new ConfiguredFeature<>(ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get().defaultBlockState()))));
+
+                  bootstrap.register(
+                      ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY,
+                      new ConfiguredFeature<>(
+                          Feature.HUGE_RED_MUSHROOM,
+                          new HugeMushroomFeatureConfiguration(
+                              BlockStateProvider.simple(ModBlocks.BAFFLECAP_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.DOWN, false)),
+                              BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
+                  bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_KEY,
+                      new ConfiguredFeature<>(
+                          ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get().defaultBlockState()))));
+                  // TODO: Is this used?
                   bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_MOSSY_KEY, new ConfiguredFeature<>(ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get().defaultBlockState().setValue(WildRootsBlock.MOSSY, true)))));
                   bootstrap.register(ModFeatures.CONFIGURED_WILD_AUBERGINE_KEY, new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_AUBERGINE.get().defaultBlockState()))));
                   bootstrap.register(ModFeatures.CONFIGURED_WILDWOOD_TREE_KEY, new ConfiguredFeature<>(Feature.TREE, ModFeatures.createWildwood().build()));
                   bootstrap.register(ModFeatures.CONFIGURED_WILDWOOD_TREE_BEES_KEY, new ConfiguredFeature<>(Feature.TREE, ModFeatures.createWildwood().decorators(List.of(new BeehiveDecorator(1.0F))).build()));
-                  bootstrap.register(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(20, 2, 2, placedFeatures.getOrThrow(ModFeatures.PLACED_WILD_AUBERGINE_KEY))));
+
+                  bootstrap.register(
+                      ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(255, 2, 2, placedFeatures.getOrThrow(ModFeatures.PLACED_WILD_AUBERGINE_KEY))));
 
                   RuleTest stone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
                   RuleTest deepslate = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
@@ -91,21 +104,23 @@ public class RootsDataPackGenerators {
                       OreConfiguration.target(stone, ModBlocks.SILVER_ORE.get().defaultBlockState()),
                       OreConfiguration.target(deepslate, ModBlocks.DEEPSLATE_SILVER_ORE.get().defaultBlockState())
                   );
-                  bootstrap.register(ModFeatures.CONFIGURED_GRANITE_QUARTZ_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(granite, ModBlocks.GRANITE_QUARTZ_ORE.get().defaultBlockState())), 4)));
                   bootstrap.register(ModFeatures.CONFIGURED_SILVER_ORE_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(silverOre, 9)));
+                  bootstrap.register(ModFeatures.CONFIGURED_GRANITE_QUARTZ_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(granite, ModBlocks.GRANITE_QUARTZ_ORE.get().defaultBlockState())), 4)));
                   bootstrap.register(ModFeatures.CONFIGURED_STONEPETAL_KEY, new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.STONEPETAL.get().defaultBlockState()))));
-                  bootstrap.register(ModFeatures.CONFIGURED_STONEPETAL_PATCH_KEY, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(7, 3, 4, placedFeatures.getOrThrow(ModFeatures.PLACED_STONEPETAL_KEY))));
+                  bootstrap.register(ModFeatures.CONFIGURED_STONEPETAL_PATCH_KEY, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(255, 3, 4, placedFeatures.getOrThrow(ModFeatures.PLACED_STONEPETAL_KEY))));
                 })
                 .add(Registries.PLACED_FEATURE, bootstrap -> {
                   HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = bootstrap.lookup(Registries.CONFIGURED_FEATURE);
-                  bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_KEY), List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.wouldSurvive(ModBlocks.WILD_AUBERGINE.get().defaultBlockState(), BlockPos.ZERO))))));
+                  bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_KEY,
+                      new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_KEY),
+                          List.of(
+                              BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.wouldSurvive(ModBlocks.WILD_AUBERGINE.get().defaultBlockState(), BlockPos.ZERO))))));
                   // THESE DO!
                   bootstrap.register(ModFeatures.PLACED_WILD_ROOTS_UNDERGROUND_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_ROOTS_KEY), List.of(
                       CountPlacement.of(40), // How many attempts per chunk
                       InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
                       new HeightmapYRange(ConstantHeight.of(VerticalAnchor.absolute(-32)), Heightmap.Types.WORLD_SURFACE_WG) // Pick spot between y = 6 and heightmap of terrain above
                   )));
-                  // TODO: These do not
                   bootstrap.register(ModFeatures.PLACED_WILD_ROOTS_FOREST_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_ROOTS_KEY), List.of(
                       BiomeFilter.biome(),
                       CountPlacement.of(4), // How many attempts per chunk
@@ -126,15 +141,35 @@ public class RootsDataPackGenerators {
                       CountPlacement.of(3), // make 5 new attempts for each position at the log
                       RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y defaultValue.
                   )));
-                  bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY), List.of(CountPlacement.of(1), InSquarePlacement.spread(),
-                      HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
-                      RarityFilter.onAverageOnceEvery(80),
-                      DimensionPlacement.of(Set.of(Level.OVERWORLD))
+                  bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY), List.of(
+                      //RarityFilter.onAverageOnceEvery(3), //
+                      CountPlacement.of(256), // How many attempts per chunk
+                      HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING), // Find surface
+                      BiomeFilter.biome()
                   )));
-                  bootstrap.register(ModFeatures.PLACED_SILVER_ORE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_SILVER_ORE_KEY), List.of(CountPlacement.of(100), InSquarePlacement.spread(), BiomeFilter.biome(), DimensionPlacement.of(Set.of(Level.OVERWORLD)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64)))));
-                  bootstrap.register(ModFeatures.PLACED_GRANITE_QUARTZ_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_GRANITE_QUARTZ_KEY), List.of(CountPlacement.of(256), InSquarePlacement.spread(), BiomeFilter.biome(), DimensionPlacement.of(Set.of(Level.OVERWORLD)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(256)))));
-                  bootstrap.register(ModFeatures.PLACED_STONEPETAL_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_STONEPETAL_KEY), List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.STONE))))));
-                  bootstrap.register(ModFeatures.PLACED_STONEPETAL_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_STONEPETAL_PATCH_KEY), List.of(BiomeFilter.biome(), CountPlacement.of(100), InSquarePlacement.spread(), HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), RarityFilter.onAverageOnceEvery(3), DimensionPlacement.of(Set.of(Level.OVERWORLD)))));
+                  bootstrap.register(ModFeatures.PLACED_SILVER_ORE_KEY,
+                      new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_SILVER_ORE_KEY),
+                          List.of(
+                              CountPlacement.of(4),
+                              InSquarePlacement.spread(),
+                              HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32)),
+                              BiomeFilter.biome()
+                          )));
+                  bootstrap.register(ModFeatures.PLACED_GRANITE_QUARTZ_KEY,
+                      new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_GRANITE_QUARTZ_KEY),
+                          List.of(
+                              CountPlacement.of(256),
+                              InSquarePlacement.spread(),
+                              HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(256)),
+                              BiomeFilter.biome()
+                          )));
+                  bootstrap.register(ModFeatures.PLACED_STONEPETAL_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_STONEPETAL_KEY), List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlocks(Blocks.AIR), BlockPredicate.matchesTag(new BlockPos(0, -1, 0), RootsTags.Blocks.SUPPORTS_STONEPETAL))))));
+                  bootstrap.register(ModFeatures.PLACED_STONEPETAL_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_STONEPETAL_PATCH_KEY), List.of(
+                      CountPlacement.of(256),
+                      InSquarePlacement.spread(),
+                      HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                      BiomeFilter.biome()
+                      )));
                 })
                 .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, bootstrap -> {
                   HolderGetter<Biome> biomeGetter = bootstrap.lookup(Registries.BIOME);
@@ -145,12 +180,12 @@ public class RootsDataPackGenerators {
                   bootstrap.register(ModFeatures.FENNEC_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_FENNEC_SPAWNS), List.of(new MobSpawnSettings.SpawnerData(ModEntities.FENNEC.get(), 4, 1, 3))));
                   bootstrap.register(ModFeatures.OWL_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_OWL_SPAWNS), List.of(new MobSpawnSettings.SpawnerData(ModEntities.OWL.get(), 9, 1, 3))));
                   bootstrap.register(ModFeatures.SPROUT_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_SPROUT_SPAWNS), List.of(new MobSpawnSettings.SpawnerData(ModEntities.GREEN_SPROUT.get(), 2, 3, 6), new MobSpawnSettings.SpawnerData(ModEntities.RED_SPROUT.get(), 2, 3, 6), new MobSpawnSettings.SpawnerData(ModEntities.TAN_SPROUT.get(), 2, 3, 6), new MobSpawnSettings.SpawnerData(ModEntities.PURPLE_SPROUT.get(), 2, 3, 6))));
-                  bootstrap.register(ModFeatures.WILD_AUBERGINES_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.WILD_AUBERGINE_BIOMES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_AUBERGINE_KEY)), GenerationStep.Decoration.TOP_LAYER_MODIFICATION));
+                  bootstrap.register(ModFeatures.WILD_AUBERGINES_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.WILD_AUBERGINE_BIOMES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_AUBERGINE_KEY)), GenerationStep.Decoration.VEGETAL_DECORATION));
                   bootstrap.register(ModFeatures.WILD_ROOTS_FOREST_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.WILD_ROOTS_FOREST_BIOMES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_ROOTS_FOREST_KEY)), GenerationStep.Decoration.TOP_LAYER_MODIFICATION));
                   bootstrap.register(ModFeatures.WILD_ROOTS_UNDERGROUND_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.WILD_ROOTS_UNDERGROUND_BIOMES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_ROOTS_UNDERGROUND_KEY)), GenerationStep.Decoration.UNDERGROUND_DECORATION));
                   bootstrap.register(ModFeatures.GRANITE_QUARTZ_ORE_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_GRANITE_QUARTZ_ORE), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_GRANITE_QUARTZ_KEY)), GenerationStep.Decoration.UNDERGROUND_ORES));
                   bootstrap.register(ModFeatures.SILVER_ORE_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_SILVER_ORE), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_SILVER_ORE_KEY)), GenerationStep.Decoration.UNDERGROUND_ORES));
-                  bootstrap.register(ModFeatures.STONEPETAL_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_STONEPETAL), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_STONEPETAL_KEY)), GenerationStep.Decoration.TOP_LAYER_MODIFICATION));
+                  bootstrap.register(ModFeatures.STONEPETAL_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_STONEPETAL), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_STONEPETAL_KEY)), GenerationStep.Decoration.VEGETAL_DECORATION));
                 })
                 .add(Registries.TEMPLATE_POOL, bootstrap -> {
                   HolderGetter<StructureTemplatePool> getter = bootstrap.lookup(Registries.TEMPLATE_POOL);

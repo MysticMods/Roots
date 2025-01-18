@@ -13,6 +13,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
+import net.minecraft.world.level.levelgen.blockpredicates.MatchingBlockTagPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
@@ -49,6 +50,8 @@ public class ModFeatures {
   public static final DeferredHolder<StructureType<?>, StructureType<StandingStonesStructure>> STANDING_STONES = STRUCTURES.register("standing_stones", () -> () -> StandingStonesStructure.CODEC);
 
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreeTrunkPredicate>> MATCHING_TREE_TRUNK_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreeTrunkPredicate.CODEC);
+
+  public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingBlockTagPredicate>> MATCHING_BLOCK_TAG_PREDICATE = BLOCK_PREDICATES.register("matching_block_tag", () -> () -> MatchingBlockTagPredicate.CODEC);
 
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreeBranchPredicate>> MATCHING_TREE_BRANCH_PREDICATE = BLOCK_PREDICATES.register("matching_tree_branch", () -> () -> MatchingTreeBranchPredicate.CODEC);
   public static DeferredHolder<PlacementModifierType<?>, PlacementModifierType<HeightmapYRange>> HEIGHTMAP_Y_RANGE = PLACEMENT_MODIFIER.register("heightmap_y_range", () -> () -> HeightmapYRange.CODEC);

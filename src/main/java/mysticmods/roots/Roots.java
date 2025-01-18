@@ -23,6 +23,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Block entity item capabilities
 // - Reach -> block interaction range, entity interaction range
 // - Block entity renderers
+// - Block opacity/light block/movement block
 
 @Mod(RootsAPI.MODID)
 public class Roots {
