@@ -1,14 +1,16 @@
-// 1.21.1	2025-01-12T16:11:06.8322793	Roots Biome Tags
-a87b9d83854a26796dce262d8fb513cb268f0a77 data/roots/tags/worldgen/biome/has_barrow_structure.json
-d326e18699708521dc6dd2eb9ee148abdbd3a89d data/roots/tags/worldgen/biome/has_beetle_spawns.json
-785a2b4041dc34a85c1af423b15e33115fb66c47 data/roots/tags/worldgen/biome/has_deer_spawns.json
-5ce744a2ccb6ceca30d90ca754c96c16e42bfd4b data/roots/tags/worldgen/biome/has_duck_spawns.json
-2e30ce395e45dc39c1ccc89e881838fe87d7dace data/roots/tags/worldgen/biome/has_fennec_spawns.json
-a87b9d83854a26796dce262d8fb513cb268f0a77 data/roots/tags/worldgen/biome/has_hut_structures.json
-306f151a08dde877847f3ec0a2b13c29e71f4e2d data/roots/tags/worldgen/biome/has_owl_spawns.json
-17ba1391abde59c5490e3f54f1a9eb38f56fe049 data/roots/tags/worldgen/biome/has_sprout_spawns.json
-a87b9d83854a26796dce262d8fb513cb268f0a77 data/roots/tags/worldgen/biome/has_standing_stones.json
-f424342d0200a583734709d7633c31810c4d2a5d data/roots/tags/worldgen/biome/wild_aubergine_biomes.json
-326ae482d3ab04744edd351fb2377d19945eee63 data/roots/tags/worldgen/biome/wild_roots_forest_biomes.json
-dc2ced21eb338fd1676bc52fb51add004661fc81 data/roots/tags/worldgen/biome/wild_roots_sparse_biomes.json
-6755e43e0f57a6b5f961166875db6f0e723192e0 data/roots/tags/worldgen/biome/wild_roots_underground_biomes.json
+// 1.21.1	2025-01-18T11:48:02.1076618	Roots Biome Tags
+925592c1ead4fb2c26b64a11317cb7f88f5d3356 data/roots/tags/worldgen/biome/has_barrow_structure.json
+d06f3747c607f63a0bc9f5931892c0d30093b386 data/roots/tags/worldgen/biome/has_beetle_spawns.json
+df4ed4b9b3bc0681a49bd1ad5c34faeb6323b2b7 data/roots/tags/worldgen/biome/has_deer_spawns.json
+dd8a0de8037c3c38d7643fb99fb2741c963ecfe4 data/roots/tags/worldgen/biome/has_duck_spawns.json
+895c1f2ebaf45e4673c10fbfa26e9c79e4ecfe1b data/roots/tags/worldgen/biome/has_fennec_spawns.json
+f72429df688b25dedf80749464051652919966a6 data/roots/tags/worldgen/biome/has_granite_quartz_ore.json
+925592c1ead4fb2c26b64a11317cb7f88f5d3356 data/roots/tags/worldgen/biome/has_hut_structures.json
+2de3465c0bf03f321d78c27a07eeb8d752295b4a data/roots/tags/worldgen/biome/has_owl_spawns.json
+3ec50ede509d4298dd9b80457da8379b39365454 data/roots/tags/worldgen/biome/has_sprout_spawns.json
+925592c1ead4fb2c26b64a11317cb7f88f5d3356 data/roots/tags/worldgen/biome/has_standing_stones.json
+9e76bc2da4bb8739a47c222866b1d7fcbe83f719 data/roots/tags/worldgen/biome/has_stonepetal.json
+36cb1983b3b4ca5dc7033c10d7753d718345ec08 data/roots/tags/worldgen/biome/wild_aubergine_biomes.json
+1ff2ba802ae516fb610bcd4df741d29e95013256 data/roots/tags/worldgen/biome/wild_roots_forest_biomes.json
+58edb172cc0eba5bf109c20203bf0b1b0af8cf8d data/roots/tags/worldgen/biome/wild_roots_sparse_biomes.json
+5a2931ef953e5514fb6f73eedec6ae10a3fbeb2c data/roots/tags/worldgen/biome/wild_roots_underground_biomes.json

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#roots:has_granite_quartz_ore",
+  "features": "roots:granite_quartz",
+  "step": "underground_ores"
+}

@@ -18,7 +18,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Armor material
 // - Runic tools
 // - Common setup:
-//   - Flower pots
 //   - Chicken tempting?
 // - Item properties -> Data Components
 // - Block entity item capabilities

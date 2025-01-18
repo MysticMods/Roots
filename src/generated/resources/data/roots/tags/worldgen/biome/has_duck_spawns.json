@@ -3,17 +3,8 @@
     "#minecraft:is_river",
     "#minecraft:is_beach",
     "#minecraft:has_structure/ruined_portal_swamp",
-    {
-      "id": "#c:swamp",
-      "required": false
-    },
-    {
-      "id": "#c:river",
-      "required": false
-    },
-    {
-      "id": "#c:beach",
-      "required": false
-    }
+    "#c:is_swamp",
+    "#c:is_river",
+    "#c:is_beach"
   ]
 }

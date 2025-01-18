@@ -3,21 +3,8 @@
     "#minecraft:is_forest",
     "#minecraft:is_taiga",
     "#minecraft:has_structure/village_plains",
-    {
-      "id": "#c:forest",
-      "required": false
-    },
-    {
-      "id": "#c:taiga",
-      "required": false
-    },
-    {
-      "id": "#c:plains",
-      "required": false
-    },
-    {
-      "id": "#c:climate-cold",
-      "required": false
-    }
+    "#c:is_taiga",
+    "#c:is_plains",
+    "#c:is_cold/overworld"
   ]
 }

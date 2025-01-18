@@ -208,15 +208,13 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Blocks.PEDESTALS).addTags(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.GROVE_PEDESTALS);
 
-    // Forge compat tags
-    this.tag(RootsTags.Blocks.FORGE_CROPS).addTag(RootsTags.Blocks.CROPS);
+    this.tag(BlockTags.CROPS).addTag(RootsTags.Blocks.CROPS);
 
     // Logs that burn
     //noinspection unchecked
-    this.tag(RootsTags.Blocks.MINECRAFT_LOGS_THAT_BURN).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
+    this.tag(BlockTags.LOGS_THAT_BURN).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
     //noinspection unchecked
-    this.tag(RootsTags.Blocks.MINECRAFT_LOGS).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
-
+    this.tag(BlockTags.LOGS).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
     this.tag(RootsTags.Blocks.ACACIA_PILLARS).add(Blocks.ACACIA_LOG, Blocks.ACACIA_WOOD);
     this.tag(RootsTags.Blocks.ACACIA_CAPSTONES).add(RUNED_ACACIA_LOG.get());
     this.tag(RootsTags.Blocks.BIRCH_PILLARS).add(Blocks.BIRCH_LOG, Blocks.BIRCH_WOOD);
@@ -264,6 +262,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.WARPED_STEMS_TO_STRIP).add(Blocks.WARPED_STEM, Blocks.WARPED_HYPHAE);
     this.tag(RootsTags.Blocks.MANGROVE_LOGS_TO_STRIP).add(Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD);
     this.tag(RootsTags.Blocks.WILDWOOD_LOGS_TO_STRIP).add(WILDWOOD_LOG.get(), WILDWOOD_WOOD.get());
+    this.tag(RootsTags.Blocks.GRANITE_ORE_REPLACEABLES).add(Blocks.GRANITE);
   }
 
   @Override

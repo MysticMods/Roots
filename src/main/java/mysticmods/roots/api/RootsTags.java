@@ -24,11 +24,6 @@ public class RootsTags {
     // Forge compat tag (filled by ModTags)
 
     public static final TagKey<Block> STANDING_STONE_CROPS = modTag("standing_stone_crops");
-    public static final TagKey<Block> FORGE_CROPS = compatTag("crops");
-
-    // Minecraft compat tag (filled by ModTags)
-    public static final TagKey<Block> MINECRAFT_LOGS_THAT_BURN = compatTag("minecraft", "logs_that_burn");
-    public static final TagKey<Block> MINECRAFT_LOGS = compatTag("minecraft", "logs");
 
     // General crops (filled by ModTags)
     public static final TagKey<Block> CROPS = modTag("crops");
@@ -155,15 +150,23 @@ public class RootsTags {
     public static final TagKey<Block> GRASS = modTag("grass");
 
     public static final TagKey<Block> NYI = modTag("nyi");
-    public static final TagKey<Block> LEVERS = compatTag("levers");
+
+    // Doesn't exist so I have to make it
+    public static final TagKey<Block> LEVERS = compatTag("levers"); // SKIP
 
     // TODO: Fill these tags
     public static final TagKey<Block> SUPPORTS_HELL_SPROUT_SPAWN = modTag("supports_hell_sprout_spawn");
     public static final TagKey<Block> BAFFLECAP_CONVERSION = modTag("converts_to_bafflecap");
-    public static final TagKey<Block> SILVER_ORE = compatTag("ores/silver");
-    public static final TagKey<Block> QUARTZ_ORE = compatTag("ores/quartz");
-    public static final TagKey<Block> SILVER_STORAGE = compatTag("storage_blocks/silver");
-    public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
+
+
+    // Don't exist, have to make
+    public static final TagKey<Block> SILVER_ORE = compatTag("ores/silver"); // SKIP
+    public static final TagKey<Block> QUARTZ_ORE = compatTag("ores/quartz"); // SKIP
+    public static final TagKey<Block> SILVER_STORAGE = compatTag("storage_blocks/silver"); // SKIP
+    public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver"); // SKIP
+
+
+
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");
 
     // Bark recipes
@@ -177,6 +180,7 @@ public class RootsTags {
     public static final TagKey<Block> CRIMSON_STEMS_TO_STRIP = modTag("bark_logs/crimson");
     public static final TagKey<Block> WARPED_STEMS_TO_STRIP = modTag("bark_logs/warped");
     public static final TagKey<Block> WILDWOOD_LOGS_TO_STRIP = modTag("bark_logs/wildwood");
+    public static final TagKey<Block> GRANITE_ORE_REPLACEABLES = modTag("granite_ore_replaceables");
 
 
     private static TagKey<Block> modTag(String name) {
@@ -513,23 +517,9 @@ public class RootsTags {
     public static TagKey<Biome> WILD_ROOTS_FOREST_BIOMES = modTag("wild_roots_forest_biomes");
     public static TagKey<Biome> WILD_ROOTS_SPARSE_BIOMES = modTag("wild_roots_sparse_biomes");
     public static TagKey<Biome> WILD_ROOTS_UNDERGROUND_BIOMES = modTag("wild_roots_underground_biomes");
-
-    public static TagKey<Biome> PLAINS = compatTag("plains");
-    public static TagKey<Biome> FOREST = compatTag("forest");
-    public static TagKey<Biome> JUNGLE = compatTag("jungle");
-    public static TagKey<Biome> SWAMP = compatTag("swamp");
-    public static TagKey<Biome> TAIGA = compatTag("taiga");
-    public static TagKey<Biome> CLIMATE_COLD = compatTag("climate-cold");
-    public static TagKey<Biome> BEACH = compatTag("beach");
-    public static TagKey<Biome> RIVER = compatTag("river");
-    public static TagKey<Biome> DESERT = compatTag("desert");
-    public static TagKey<Biome> MESA = compatTag("mesa");
-    public static TagKey<Biome> SAVANNA = compatTag("savanna");
-    public static TagKey<Biome> MOUNTAIN = compatTag("mountain");
-    public static TagKey<Biome> TREE_DECIDUOUS = compatTag("tree_deciduous");
-    public static TagKey<Biome> TREE_JUNGLE = compatTag("tree_jungle");
-    public static TagKey<Biome> TREE_CONIFEROUS = compatTag("tree_coniferous");
-    public static TagKey<Biome> IN_OVERWORLD = compatTag("in_overworld");
+    public static TagKey<Biome> HAS_SILVER_ORE = modTag("has_silver_ore");
+    public static TagKey<Biome> HAS_GRANITE_QUARTZ_ORE = modTag("has_granite_quartz_ore");
+    public static TagKey<Biome> HAS_STONEPETAL = modTag("has_stonepetal");
 
     static TagKey<Biome> modTag(String name) {
       return TagKey.create(Registries.BIOME, RootsAPI.rl(name));

@@ -6,17 +6,8 @@
     "#minecraft:has_structure/ruined_portal_swamp",
     "#minecraft:has_structure/jungle_temple",
     "#minecraft:is_jungle",
-    {
-      "id": "#c:forest",
-      "required": false
-    },
-    {
-      "id": "#c:river",
-      "required": false
-    },
-    {
-      "id": "#c:beach",
-      "required": false
-    }
+    "#c:is_forest",
+    "#c:is_river",
+    "#c:is_beach"
   ]
 }

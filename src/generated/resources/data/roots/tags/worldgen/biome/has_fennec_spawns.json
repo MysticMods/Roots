@@ -3,17 +3,9 @@
     "#minecraft:is_badlands",
     "#minecraft:has_structure/desert_pyramid",
     "#minecraft:is_savanna",
-    {
-      "id": "#c:desert",
-      "required": false
-    },
-    {
-      "id": "#c:savanna",
-      "required": false
-    },
-    {
-      "id": "#c:mesa",
-      "required": false
-    }
+    "#c:is_desert",
+    "#c:is_savanna",
+    "#c:is_badlands",
+    "#c:is_sandy"
   ]
 }

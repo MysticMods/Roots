@@ -1,5 +1,4 @@
-// 1.21.1	2025-01-12T13:17:20.5605283	Roots Block Tags
-4dd1110a08f7c4386cffaa774af4841bc323c2f1 data/c/tags/block/crops.json
+// 1.21.1	2025-01-18T11:48:02.1024514	Roots Block Tags
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/block/levers.json
@@ -13,6 +12,7 @@ cd950175fadc56e90dec5f776fb9160949dafcfe data/minecraft/tags/block/beacon_base_b
 c6d13638c4a16cb628232a0b669ba8f156563075 data/minecraft/tags/block/buttons.json
 b6d0e662abeb2be7d10b28c25db6301f5bf0ba32 data/minecraft/tags/block/climbable.json
 cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/minecraft/tags/block/crimson_stems.json
+4dd1110a08f7c4386cffaa774af4841bc323c2f1 data/minecraft/tags/block/crops.json
 9aa6f447519134a5bfbbb1090fb68fbbf0acfba5 data/minecraft/tags/block/dark_oak_logs.json
 19b22bbd289743434aacd8205da132551dec0eb7 data/minecraft/tags/block/dragon_immune.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/minecraft/tags/block/fence_gates.json
@@ -86,6 +86,7 @@ c32082cb4a9a20e16cf30e8c55afd4219c657bd4 data/roots/tags/block/crops/moonglow.js
 ac79c9fee49d61de4d35103b3c501dcd9f00f5ff data/roots/tags/block/crops/stalicripe.json
 124deb91b6f2a320d3d065cdb42694d1905e1500 data/roots/tags/block/crops/wildewheet.json
 ecda61a71eb355925053fb56bfc8838b38a30dd2 data/roots/tags/block/crops/wildroot.json
+277febcb81e6cdedb2c430d51bcd1850d597779d data/roots/tags/block/granite_ore_replaceables.json
 19934ae999e8d120e627971e0e9bef829880b12a data/roots/tags/block/grass.json
 7a563616d4716d016ea50970baef809fc59d6dcf data/roots/tags/block/grove_moss.json
 c0e5ac26bc57a1a6ba571b21d7fab9d6bbb6d318 data/roots/tags/block/grove_stones.json

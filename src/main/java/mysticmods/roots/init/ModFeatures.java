@@ -57,6 +57,10 @@ public class ModFeatures {
   // Features
   public static DeferredHolder<Feature<?>, SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
 
+  public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_SILVER_ORE_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("silver_ore"));
+  public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_STONEPETAL_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("stonepetal"));
+  public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_STONEPETAL_PATCH_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("stonepetal_patch"));
+  public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_GRANITE_QUARTZ_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("granite_quartz"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_HUGE_BAFFLECAP_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("huge_bafflecap"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_WILD_ROOTS_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("wild_roots"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_WILD_ROOTS_MOSSY_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("wild_roots_mossy"));
@@ -69,6 +73,10 @@ public class ModFeatures {
   public static ResourceKey<PlacedFeature> PLACED_WILD_ROOTS_SPARSE_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_roots_sparse"));
   public static ResourceKey<PlacedFeature> PLACED_WILD_AUBERGINE_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_aubergine"));
   public static final ResourceKey<PlacedFeature> PLACED_WILD_AUBERGINE_PATCH_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_aubergine_patch"));
+  public static ResourceKey<PlacedFeature> PLACED_SILVER_ORE_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("silver_ore"));
+  public static ResourceKey<PlacedFeature> PLACED_STONEPETAL_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("stonepetal"));
+  public static ResourceKey<PlacedFeature> PLACED_STONEPETAL_PATCH_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("stonepetal_patch"));
+  public static ResourceKey<PlacedFeature> PLACED_GRANITE_QUARTZ_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("granite_quartz"));
 
   public static ResourceKey<BiomeModifier> BEETLE_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("beetle_spawns"));
   public static ResourceKey<BiomeModifier> DEER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("deer_spawns"));
@@ -79,6 +87,9 @@ public class ModFeatures {
   public static ResourceKey<BiomeModifier> WILD_AUBERGINES_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_aubergines"));
   public static ResourceKey<BiomeModifier> WILD_ROOTS_FOREST_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_roots_forest"));
   public static ResourceKey<BiomeModifier> WILD_ROOTS_UNDERGROUND_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_roots_underground"));
+  public static ResourceKey<BiomeModifier> SILVER_ORE_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("silver_ore"));
+  public static ResourceKey<BiomeModifier> GRANITE_QUARTZ_ORE_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("granite_quartz_ore"));
+  public static ResourceKey<BiomeModifier> STONEPETAL_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("stonepetal"));
 
   public static ResourceKey<Structure> BARROW_KEY = ResourceKey.create(Registries.STRUCTURE, RootsAPI.rl("barrow"));
   public static ResourceKey<StructureTemplatePool> BARROW_START_POOL_KEY = ResourceKey.create(Registries.TEMPLATE_POOL, RootsAPI.rl("barrow_pool/start_pool"));

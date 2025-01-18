@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": "roots:stonepetal",
+    "tries": 7,
+    "xz_spread": 3,
+    "y_spread": 4
+  }
+}

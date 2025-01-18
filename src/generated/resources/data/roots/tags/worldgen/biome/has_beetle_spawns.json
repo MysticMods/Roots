@@ -5,21 +5,9 @@
     "#minecraft:has_structure/village_plains",
     "#minecraft:is_forest",
     "#minecraft:has_structure/ruined_portal_swamp",
-    {
-      "id": "#c:forest",
-      "required": false
-    },
-    {
-      "id": "#c:jungle",
-      "required": false
-    },
-    {
-      "id": "#c:swamp",
-      "required": false
-    },
-    {
-      "id": "#c:plains",
-      "required": false
-    }
+    "#c:is_forest",
+    "#c:is_jungle",
+    "#c:is_swamp",
+    "#c:is_plains"
   ]
 }

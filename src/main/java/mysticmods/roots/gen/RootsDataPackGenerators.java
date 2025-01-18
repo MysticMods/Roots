@@ -15,6 +15,7 @@ import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.worldgen.Pools;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -30,9 +31,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
@@ -48,6 +47,8 @@ import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
@@ -82,6 +83,18 @@ public class RootsDataPackGenerators {
                   bootstrap.register(ModFeatures.CONFIGURED_WILDWOOD_TREE_KEY, new ConfiguredFeature<>(Feature.TREE, ModFeatures.createWildwood().build()));
                   bootstrap.register(ModFeatures.CONFIGURED_WILDWOOD_TREE_BEES_KEY, new ConfiguredFeature<>(Feature.TREE, ModFeatures.createWildwood().decorators(List.of(new BeehiveDecorator(1.0F))).build()));
                   bootstrap.register(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(20, 2, 2, placedFeatures.getOrThrow(ModFeatures.PLACED_WILD_AUBERGINE_KEY))));
+
+                  RuleTest stone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
+                  RuleTest deepslate = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
+                  RuleTest granite = new TagMatchTest(RootsTags.Blocks.GRANITE_ORE_REPLACEABLES);
+                  List<OreConfiguration.TargetBlockState> silverOre = List.of(
+                      OreConfiguration.target(stone, ModBlocks.SILVER_ORE.get().defaultBlockState()),
+                      OreConfiguration.target(deepslate, ModBlocks.DEEPSLATE_SILVER_ORE.get().defaultBlockState())
+                  );
+                  bootstrap.register(ModFeatures.CONFIGURED_GRANITE_QUARTZ_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(granite, ModBlocks.GRANITE_QUARTZ_ORE.get().defaultBlockState())), 4)));
+                  bootstrap.register(ModFeatures.CONFIGURED_SILVER_ORE_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(silverOre, 9)));
+                  bootstrap.register(ModFeatures.CONFIGURED_STONEPETAL_KEY, new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.STONEPETAL.get().defaultBlockState()))));
+                  bootstrap.register(ModFeatures.CONFIGURED_STONEPETAL_PATCH_KEY, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(7, 3, 4, placedFeatures.getOrThrow(ModFeatures.PLACED_STONEPETAL_KEY))));
                 })
                 .add(Registries.PLACED_FEATURE, bootstrap -> {
                   HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = bootstrap.lookup(Registries.CONFIGURED_FEATURE);
@@ -118,6 +131,10 @@ public class RootsDataPackGenerators {
                       RarityFilter.onAverageOnceEvery(80),
                       DimensionPlacement.of(Set.of(Level.OVERWORLD))
                   )));
+                  bootstrap.register(ModFeatures.PLACED_SILVER_ORE_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_SILVER_ORE_KEY), List.of(CountPlacement.of(100), InSquarePlacement.spread(), BiomeFilter.biome(), DimensionPlacement.of(Set.of(Level.OVERWORLD)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64)))));
+                  bootstrap.register(ModFeatures.PLACED_GRANITE_QUARTZ_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_GRANITE_QUARTZ_KEY), List.of(CountPlacement.of(256), InSquarePlacement.spread(), BiomeFilter.biome(), DimensionPlacement.of(Set.of(Level.OVERWORLD)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(256)))));
+                  bootstrap.register(ModFeatures.PLACED_STONEPETAL_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_STONEPETAL_KEY), List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.STONE))))));
+                  bootstrap.register(ModFeatures.PLACED_STONEPETAL_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_STONEPETAL_PATCH_KEY), List.of(BiomeFilter.biome(), CountPlacement.of(100), InSquarePlacement.spread(), HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), RarityFilter.onAverageOnceEvery(3), DimensionPlacement.of(Set.of(Level.OVERWORLD)))));
                 })
                 .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, bootstrap -> {
                   HolderGetter<Biome> biomeGetter = bootstrap.lookup(Registries.BIOME);
@@ -131,6 +148,9 @@ public class RootsDataPackGenerators {
                   bootstrap.register(ModFeatures.WILD_AUBERGINES_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.WILD_AUBERGINE_BIOMES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_AUBERGINE_KEY)), GenerationStep.Decoration.TOP_LAYER_MODIFICATION));
                   bootstrap.register(ModFeatures.WILD_ROOTS_FOREST_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.WILD_ROOTS_FOREST_BIOMES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_ROOTS_FOREST_KEY)), GenerationStep.Decoration.TOP_LAYER_MODIFICATION));
                   bootstrap.register(ModFeatures.WILD_ROOTS_UNDERGROUND_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.WILD_ROOTS_UNDERGROUND_BIOMES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_ROOTS_UNDERGROUND_KEY)), GenerationStep.Decoration.UNDERGROUND_DECORATION));
+                  bootstrap.register(ModFeatures.GRANITE_QUARTZ_ORE_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_GRANITE_QUARTZ_ORE), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_GRANITE_QUARTZ_KEY)), GenerationStep.Decoration.UNDERGROUND_ORES));
+                  bootstrap.register(ModFeatures.SILVER_ORE_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_SILVER_ORE), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_SILVER_ORE_KEY)), GenerationStep.Decoration.UNDERGROUND_ORES));
+                  bootstrap.register(ModFeatures.STONEPETAL_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_STONEPETAL), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_STONEPETAL_KEY)), GenerationStep.Decoration.TOP_LAYER_MODIFICATION));
                 })
                 .add(Registries.TEMPLATE_POOL, bootstrap -> {
                   HolderGetter<StructureTemplatePool> getter = bootstrap.lookup(Registries.TEMPLATE_POOL);

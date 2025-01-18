@@ -5,21 +5,9 @@
     "#minecraft:is_savanna",
     "#minecraft:is_forest",
     "#minecraft:has_structure/ruined_portal_swamp",
-    {
-      "id": "#c:tree_coniferous",
-      "required": false
-    },
-    {
-      "id": "#c:tree_jungle",
-      "required": false
-    },
-    {
-      "id": "#c:tree_deciduous",
-      "required": false
-    },
-    {
-      "id": "#c:swamp",
-      "required": false
-    }
+    "#c:is_tree/coniferous",
+    "#c:is_tree/jungle",
+    "#c:is_tree/deciduous",
+    "#c:is_swamp"
   ]
 }
