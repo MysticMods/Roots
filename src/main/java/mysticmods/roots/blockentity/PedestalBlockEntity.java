@@ -6,11 +6,13 @@ import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -19,28 +21,33 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
-  private final ItemStackHandler inventory = new ItemStackHandler(1) {
-    @Override
-    protected void onContentsChanged(int slot) {
-      if (PedestalBlockEntity.this.hasLevel() && !PedestalBlockEntity.this.getLevel().isClientSide()) {
-        PedestalBlockEntity.this.setChanged();
-        Level level = PedestalBlockEntity.this.getLevel();
-        BlockPos pos = PedestalBlockEntity.this.getBlockPos();
-        BlockState state = PedestalBlockEntity.this.getBlockState();
-        level.sendBlockUpdated(pos, state, state, 8);
-      }
-    }
-  };
+  // TODO: Actually limit limitable pedestals
+  protected ItemStackHandler inventory;
 
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+    inventory = new ItemStackHandler(1) {
+      @Override
+      protected void onContentsChanged(int slot) {
+        if (PedestalBlockEntity.this.hasLevel() && !PedestalBlockEntity.this.getLevel().isClientSide()) {
+          PedestalBlockEntity.this.setChanged();
+          Level level = PedestalBlockEntity.this.getLevel();
+          BlockPos pos = PedestalBlockEntity.this.getBlockPos();
+          BlockState state = PedestalBlockEntity.this.getBlockState();
+          level.sendBlockUpdated(pos, state, state, 8);
+        }
+      }
+    };
   }
 
   public PedestalBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-    super(ModBlockEntities.PEDESTAL.get(), pWorldPosition, pBlockState);
+    this(ModBlockEntities.PEDESTAL.get(), pWorldPosition, pBlockState);
   }
 
   @Override

@@ -5,6 +5,7 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.impl.RootsAPIImpl;
 import mysticmods.roots.init.*;
 import mysticmods.roots.network.PacketHandler;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -13,7 +14,6 @@ import net.neoforged.fml.config.ModConfig;
 // TODO:
 // - Item data component for "tokens"
 // - JEI integration
-// - Ore world generation
 // - Missing data maps?
 // - Armor material
 // - Runic tools
