@@ -138,7 +138,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     if (offset == -1) {
       if (this.getBlockState().is(RootsTags.Blocks.RITUAL_PEDESTALS)) {
         offset = 1.4;
-      } else if (this.getBlockState().is(RootsTags.Blocks.GROVE_PEDESTALS)) {
+      } else if (this.getBlockState().is(RootsTags.Blocks.GROVE_PEDESTALS) || this.getBlockState().is(RootsTags.Blocks.DISPLAY_PEDESTALS)) {
         offset = 0.95;
       }
     }

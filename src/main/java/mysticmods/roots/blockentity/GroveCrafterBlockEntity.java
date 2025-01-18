@@ -56,6 +56,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     ItemStack inHand = player.getItemInHand(hand);
+    // TODO: SOMEHOW IF THERE ARE NO INGREDIENTS THIS WILL MATCH RUNESTONE???
     if (inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
       GroveCrafting playerCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals()), this, player);
       if (cachedRecipe == null) {

@@ -6,8 +6,10 @@ import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -60,6 +62,14 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return Collections.emptyList();
     }
     return this.data.unlocks;
+  }
+
+  @Override
+  public NonNullList<Ingredient> getIngredients() {
+    if (this.data.ingredients == null) {
+      return NonNullList.create();
+    }
+    return this.data.ingredients;
   }
 
   @Override

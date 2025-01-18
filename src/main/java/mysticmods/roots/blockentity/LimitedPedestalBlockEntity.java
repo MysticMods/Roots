@@ -1,6 +1,7 @@
 package mysticmods.roots.blockentity;
 
 import mysticmods.roots.blockentity.inventory.LimitedItemStackHandler;
+import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -23,5 +24,9 @@ public class LimitedPedestalBlockEntity extends PedestalBlockEntity{
         }
       }
     };
+  }
+
+  public LimitedPedestalBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
+    this(ModBlockEntities.LIMITED_PEDESTAL.get(), pWorldPosition, pBlockState);
   }
 }

@@ -126,9 +126,9 @@ public class ModBlocks {
   public static DeferredHolder<Block, RitualPedestalBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal", () -> new RitualPedestalBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = BLOCKS.register("reinforced_ritual_pedestal", () -> new RitualPedestalBlock(BASE_REINFORCED_PROPERTIES));
   public static DeferredHolder<Block, GroveCrafterBlock> GROVE_CRAFTER = BLOCKS.register("grove_crafter", () -> new GroveCrafterBlock(BASE_WOODEN_PROPERTIES));
-  public static DeferredHolder<Block, GrovePedestalBlock> GROVE_PEDESTAL = BLOCKS.register("grove_pedestal", () -> new GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
-  public static DeferredHolder<Block, GrovePedestalBlock> WILDWOOD_PEDESTAL = BLOCKS.register("wildwood_pedestal", () -> new GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
-  public static DeferredHolder<Block, GrovePedestalBlock> DISPLAY_PEDESTAL = BLOCKS.register("display_pedestal", () -> new GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
+  public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> GROVE_PEDESTAL = BLOCKS.register("grove_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
+  public static DeferredHolder<Block, PedestalBlock.WildwoodPedestalBlock> WILDWOOD_PEDESTAL = BLOCKS.register("wildwood_pedestal", () -> new PedestalBlock.WildwoodPedestalBlock(BASE_WOODEN_PROPERTIES));
+  public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> DISPLAY_PEDESTAL = BLOCKS.register("display_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
   public static DeferredHolder<Block, WildRootsBlock> WILD_ROOTS = BLOCKS.register("wild_roots", () -> new WildRootsBlock(BASE_WOODEN_PROPERTIES.strength(0.2f)));
   public static DeferredHolder<Block, CreepingGroveMossBlock> CREEPING_GROVE_MOSS = BLOCKS.register("creeping_grove_moss", () -> new CreepingGroveMossBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_CARPET)));
   public static DeferredHolder<Block, HangingRootsBlock> HANGING_GROVE_MOSS = BLOCKS.register("hanging_grove_moss", () -> new HangingRootsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HANGING_ROOTS)));

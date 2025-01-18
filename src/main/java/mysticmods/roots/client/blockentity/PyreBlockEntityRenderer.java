@@ -64,7 +64,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       pPoseStack.translate(-0.5, 0, 0);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
-      Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
   }

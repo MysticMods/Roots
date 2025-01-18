@@ -1,10 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
-import mysticmods.roots.blockentity.MortarBlockEntity;
-import mysticmods.roots.blockentity.PedestalBlockEntity;
-import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.blockentity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
