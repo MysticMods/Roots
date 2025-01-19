@@ -77,6 +77,11 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     super(baseRecipeData.orElse(new BaseRecipeData()), partialBlockState.orElse(null), worldCondition, strings.orElse(Collections.emptyList()));
   }
 
+  @Override
+  public boolean hasOtherOutput(HolderLookup.Provider provider) {
+    return true;
+  }
+
   @Nullable
   public OutputStateMapper getStateMapper() {
     return stateMapper;

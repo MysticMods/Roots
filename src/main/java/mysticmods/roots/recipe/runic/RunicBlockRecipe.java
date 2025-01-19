@@ -12,6 +12,7 @@ import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.bark.OutputStateMapper;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -84,6 +85,11 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.RUNIC_BLOCK.get();
+  }
+
+  @Override
+  public boolean hasOtherOutput(HolderLookup.Provider provider) {
+    return outputState == null && (stateMapper == null || stateMapper.isEmpty());
   }
 
   @Override
