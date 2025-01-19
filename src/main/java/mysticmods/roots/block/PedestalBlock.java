@@ -1,8 +1,8 @@
 package mysticmods.roots.block;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.blockentity.LimitedPedestalBlockEntity;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -29,6 +29,9 @@ public abstract class PedestalBlock extends UseDelegatedBlock {
   @Nullable
   @Override
   public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+    if (pState.is(RootsTags.Blocks.LIMITED_PEDESTALS)) {
+      return new PedestalBlockEntity(ModBlockEntities.PEDESTAL.get(), pPos, pState, 1);
+    }
     return new PedestalBlockEntity(ModBlockEntities.PEDESTAL.get(), pPos, pState);
   }
 
@@ -58,7 +61,7 @@ public abstract class PedestalBlock extends UseDelegatedBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-      return new LimitedPedestalBlockEntity(pPos, pState);
+      return new PedestalBlockEntity(pPos, pState, 1);
     }
   }
 

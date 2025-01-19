@@ -2,6 +2,7 @@ package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -151,7 +152,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Blocks.PEDESTALS).addTags(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS, RootsTags.Blocks.LIMITED_PEDESTALS).add(INCENSE_BURNER.get());
 
-    this.tag(RootsTags.Blocks.LIMITED_PEDESTALS).addTag(RootsTags.Blocks.GROVE_PEDESTALS);
+    this.tag(RootsTags.Blocks.LIMITED_PEDESTALS).add(GROVE_PEDESTAL.get(), DISPLAY_PEDESTAL.get());
 
     this.tag(RootsTags.Blocks.GROVE_CRAFTERS).add(GROVE_CRAFTER.get());
 

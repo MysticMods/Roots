@@ -4,17 +4,19 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-public class LimitedItemStackHandler extends ItemStackHandler {
-    private final int maxStackLimit;
+import java.util.function.IntSupplier;
 
-    public LimitedItemStackHandler(int size, int maxStackLimit) {
+public class LimitedItemStackHandler extends ItemStackHandler {
+    private final IntSupplier maxStackLimit;
+
+    public LimitedItemStackHandler(int size, IntSupplier maxStackLimit) {
         super(size);
         this.maxStackLimit = maxStackLimit;
     }
 
     @Override
     protected int getStackLimit(int slot, ItemStack stack) {
-        return maxStackLimit;
+        return maxStackLimit.getAsInt();
     }
 
     @Override
@@ -62,8 +64,8 @@ public class LimitedItemStackHandler extends ItemStackHandler {
 
     @Override
     public void setStackInSlot(int slot, ItemStack stack) {
-        if (stack.getCount() > maxStackLimit) {
-            stack = stack.copyWithCount(maxStackLimit);
+        if (stack.getCount() > maxStackLimit.getAsInt()) {
+            stack = stack.copyWithCount(maxStackLimit.getAsInt());
         }
         super.setStackInSlot(slot, stack);
     }

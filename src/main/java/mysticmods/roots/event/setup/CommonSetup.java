@@ -10,12 +10,12 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.SpecialPlantable;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class CommonSetup {
   @SubscribeEvent
   public static void init(FMLCommonSetupEvent event) {
-    // TODO: Stone plant -- was that even used???
     for (PropertyHolder<?> prop : P.unclaimed()) {
       RootsAPI.LOG.error("Unclaimed property: {}", prop.id());
     }
