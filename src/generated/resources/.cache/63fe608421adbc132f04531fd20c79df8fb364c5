@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-12T15:16:52.1224678	Roots Item Tags
+// 1.21.1	2025-01-19T18:39:08.8185434	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -82,7 +82,7 @@ cb2e3c6e79dbddd59965ce0c2ca7dfda8ac64ea3 data/roots/tags/item/nyi.json
 c55106d54db2ac749ccc95747891b03f570d8fc3 data/roots/tags/item/pedestals.json
 45c768b93d7e13a13dd2a41a896005c7e3960523 data/roots/tags/item/pedestals/display.json
 a0f512d942a5e0f1365b3fcea384de8dffce2a51 data/roots/tags/item/pedestals/grove.json
-3d466459b3b3337a4464a21464fafa4ce82099f2 data/roots/tags/item/pedestals/limited.json
+c5d89cdbb8b3fe577eed9820640231ff10ee85d8 data/roots/tags/item/pedestals/limited.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/item/pedestals/ritual.json
 08f6581e2fabaae228e3ee44c68f32d91fedbf63 data/roots/tags/item/pelt.json
 4636f349d6690dfab85139e6012a804c930f7288 data/roots/tags/item/petals.json

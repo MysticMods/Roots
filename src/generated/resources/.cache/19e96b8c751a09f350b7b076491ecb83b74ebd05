@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-12T13:17:20.5565226	Block States: roots
+// 1.21.1	2025-01-19T18:39:08.8225428	Block States: roots
 e7c55eccab4b71f284e412115951e1a020f1fde6 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -34,7 +34,7 @@ a326bd69a0c580f62d551b0c5998c6036b674983 assets/roots/blockstates/mossy_runeston
 3debdcba82c11246ece47a26b4c904c08d99eb63 assets/roots/blockstates/potted_stonepetal.json
 b19c4a01cc7537660370cb226cf0008d846d1544 assets/roots/blockstates/potted_wildwood_sapling.json
 53feac7bdf41f545f5d04bc942f34c2a63dbc405 assets/roots/blockstates/primal_grove_stone.json
-ee17e2d9fdf1604e9083173bfb71c5823670cdb7 assets/roots/blockstates/pyre.json
+a53188b2efb0cc33f925ca1005d834ca6c6ebbf7 assets/roots/blockstates/pyre.json
 e04a88f7b36d66c2be3e1f00ff27e046ea9efbb8 assets/roots/blockstates/raw_silver_block.json
 905b1ac521c535d1a08e3246da7b2f09dd13412a assets/roots/blockstates/reinforced_pyre.json
 fe99163f48b15e182afa2f57dda8b605e05c44f3 assets/roots/blockstates/reinforced_ritual_pedestal.json
@@ -194,6 +194,7 @@ dc45f5848dbc30b327094ec657836993720803e0 assets/roots/models/block/primal_grove_
 5a539da008dad7d77b04fb3daadc9ebcbb7062b7 assets/roots/models/block/primal_grove_stone_top.json
 2ee05f2321617ee20ff2a2aab52bad6ef09cec90 assets/roots/models/block/primal_grove_stone_top_valid.json
 99a5c462ed550577784c0cc69b8c5add28caadd8 assets/roots/models/block/pyre.json
+1522863d5f30a6de3189eaa9e4e9e28abb13544f assets/roots/models/block/pyre_lit.json
 8952bc56e0ea1272854f1ce4075a5053ec5dc678 assets/roots/models/block/raw_silver_block.json
 f91bf59a1f480187017ff7126547e54010a3a244 assets/roots/models/block/reinforced_pyre.json
 926cd17b439769ba78ef46f2287ed81b42e3baef assets/roots/models/block/reinforced_ritual_pedestal.json

@@ -1,5 +1,6 @@
 {
   "values": [
-    "#roots:pedestals/grove"
+    "roots:grove_pedestal",
+    "roots:display_pedestal"
   ]
 }

@@ -3,6 +3,7 @@ package mysticmods.roots.gen;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.block.GroveStoneBlock;
+import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.mixin.AccessorMixinCropBlock;
 import net.minecraft.core.Direction;
@@ -190,7 +191,14 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     getVariantBuilder(ModBlocks.MORTAR.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(mortar).build());
 
     ModelFile pyre = models().withExistingParent("pyre", modLoc("block/complex/pyre"));
-    getVariantBuilder(ModBlocks.PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(pyre).build());
+    ModelFile pyreLit = models().withExistingParent("pyre_lit", modLoc("block/complex/pyre_lit"));
+    getVariantBuilder(ModBlocks.PYRE.get()).forAllStates(state -> {
+      if (state.getValue(PyreBlock.LIT)) {
+        return ConfiguredModel.builder().modelFile(pyreLit).build();
+      } else {
+        return ConfiguredModel.builder().modelFile(pyre).build();
+      }
+    });
 
     ModelFile reinforcedPyre = models().withExistingParent("reinforced_pyre", modLoc("block/complex/reinforced_pyre"));
     getVariantBuilder(ModBlocks.REINFORCED_PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(reinforcedPyre).build());
