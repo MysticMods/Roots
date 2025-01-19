@@ -81,6 +81,10 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         inputs.add(stack);
       }
     }
+    // TODO: Is this problematic at all? It shouldn't be.
+    if (getIngredients().isEmpty() || inputs.isEmpty()) {
+      return false;
+    }
     return RecipeMatcher.findMatches(inputs, getIngredients()) != null;
   }
 
