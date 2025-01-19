@@ -49,4 +49,26 @@ public interface ISpellInstance extends SpellLike {
   default boolean isEmpty () {
     return false;
   }
+
+  static SimpleSpell of (Spell spell) {
+    return new SimpleSpell(spell);
+  }
+
+  record SimpleSpell (Spell spell) implements ISpellInstance {
+
+    @Override
+    public Spell getSpell() {
+      return spell();
+    }
+
+    @Override
+    public Set<SpellModifier> getEnabledModifiers() {
+      return Set.of();
+    }
+
+    @Override
+    public int getCooldown() {
+      return 0;
+    }
+  }
 }
