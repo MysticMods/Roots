@@ -1,5 +1,6 @@
 package mysticmods.roots.gen;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.GroveData;
@@ -13,7 +14,9 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.init.ModGroves;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.DataMapProvider;
@@ -128,6 +131,19 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.DISPLAY_PEDESTAL, new FurnaceFuel(300), false);
     builder10.add(ModItems.INFERNO_BULB, new FurnaceFuel(600), false);
     builder10.add(ModItems.MAGMATIC_SOIL, new FurnaceFuel(900), false);
+
+    Builder<Item, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
+    Builder<Item, Spell> builder12 = builder(DataMaps.SPELL_DISPLAY_ITEM).replace(false);
+
+    BuiltInRegistries.ITEM.entrySet().forEach(o -> {
+      if (o.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
+        if (o.getKey().location().getPath().startsWith("ritual_") && o.getValue() instanceof TokenItem.RitualTokenItem ritual) {
+          builder11.add(ritual.getRitual().builtInRegistryHolder(), o.getValue(), false);
+        } else if (o.getKey().location().getPath().startsWith("spell_") && o.getValue() instanceof TokenItem.SpellTokenItem spell) {
+          builder12.add(spell.getSpell().builtInRegistryHolder(), o.getValue(), false);
+        }
+      }
+    });
 
   }
 }

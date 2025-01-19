@@ -46,8 +46,8 @@ public abstract class TokenItem extends Item {
       this.spell = spell;
     }
 
-    public Spell getSpell (HolderLookup.Provider provider) {
-      return provider.lookupOrThrow(RootsRegistries.Keys.SPELLS).getOrThrow(spell).value();
+    public Spell getSpell () {
+      return RootsRegistries.SPELLS.get(spell);
     }
 
     @Override
@@ -63,8 +63,8 @@ public abstract class TokenItem extends Item {
       this.ritual = ritual;
     }
 
-    public Ritual getRitual (HolderLookup.Provider provider) {
-      return provider.lookupOrThrow(RootsRegistries.Keys.RITUALS).getOrThrow(ritual).value();
+    public Ritual getRitual () {
+      return RootsRegistries.RITUALS.get(ritual);
     }
 
     @Override

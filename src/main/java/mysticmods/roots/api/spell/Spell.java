@@ -27,6 +27,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -51,6 +52,8 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected Style style;
   protected ChatFormatting textColor;
   protected String descriptionId;
+
+  protected Item icon;
 
   public Spell(Type type, ChatFormatting color, List<Cost> defaultCosts, int color1, int color2) {
     this.type = type;
@@ -158,6 +161,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public void init(Holder<Spell> holder) {
     costs = holder.getData(DataMaps.SPELL_COST_DATA);
+    icon = holder.getData(DataMaps.SPELL_DISPLAY_ITEM);
+    if (icon == null) {
+      RootsAPI.LOG.error("Icon is null for spell: {}", holder.getKey());
+    }
     initializeProperties(holder);
     initialize(holder);
   }

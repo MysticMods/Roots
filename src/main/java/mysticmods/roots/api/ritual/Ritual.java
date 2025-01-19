@@ -1,6 +1,7 @@
 package mysticmods.roots.api.ritual;
 
 import com.mojang.serialization.Codec;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
@@ -18,6 +19,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -39,6 +41,8 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
   protected int radiusXZ = 0;
   protected int radiusY = 0;
   protected int interval = 0;
+
+  protected Item icon;
 
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
@@ -109,6 +113,10 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
   protected abstract void initialize(Holder<Ritual> holder);
 
   public void init(Holder<Ritual> holder) {
+    icon = holder.getData(DataMaps.RITUAL_DISPLAY_ITEM);
+    if (icon == null) {
+      RootsAPI.LOG.error("Icon is null for ritual: {}", holder.getKey());
+    }
     initProperties(holder);
     initialize(holder);
     rebuildBounds();
