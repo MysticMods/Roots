@@ -269,18 +269,59 @@ public class ModItems {
   public static DeferredHolder<Item, DeferredSpawnEggItem> OWL_SPAWN_EGG = ITEMS.register("owl_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.OWL, 0x8c654a, 0xdec9ba, DEFAULT_64.get()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> DUCK_SPAWN_EGG = ITEMS.register("duck_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.DUCK, 0xe4d6a5, 0xe9ad36, DEFAULT_64.get()));
 
-  public static DeferredHolder<Item, TokenItem> SPELL_FEY_LIGHT = ITEMS.register("spell_fey_light", () -> spell(ModSpells.FEY_LIGHT));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_ACID_CLOUD = ITEMS.register("spell_acid_cloud", () -> spell(ModSpells.ACID_CLOUD));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_AQUA_BUBBLE = ITEMS.register("spell_aqua_bubble", () -> spell(ModSpells.AQUA_BUBBLE));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_CONTROL_UNDEAD = ITEMS.register("spell_control_undead", () -> spell(ModSpells.CONTROL_UNDEAD));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DANDELION_WINDS = ITEMS.register("spell_dandelion_winds", () -> spell(ModSpells.DANDELION_WINDS));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DESATURATE = ITEMS.register("spell_desaturate", () -> spell(ModSpells.DESATURATE));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DISARM = ITEMS.register("spell_disarm", () -> spell(ModSpells.DISARM));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_EXTENSION = ITEMS.register("spell_extension", () -> spell(ModSpells.EXTENSION));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_FEY_LIGHT = ITEMS.register("spell_fey_light", () -> spell(ModSpells.FEY_LIGHT));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_GEAS = ITEMS.register("spell_geas", () -> spell(ModSpells.GEAS));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_GROWTH_INFUSION = ITEMS.register("spell_growth_infusion", () -> spell(ModSpells.GROWTH_INFUSION));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_HARVEST = ITEMS.register("spell_harvest", () -> spell(ModSpells.HARVEST));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_JAUNT = ITEMS.register("spell_jaunt", () -> spell(ModSpells.JAUNT));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_LIFE_DRAIN = ITEMS.register("spell_life_drain", () -> spell(ModSpells.LIFE_DRAIN));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_MAGNETISM = ITEMS.register("spell_magnetism", () -> spell(ModSpells.MAGNETISM));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_NONDETECTION = ITEMS.register("spell_nondetection", () -> spell(ModSpells.NONDETECTION));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_PETAL_SHELL = ITEMS.register("spell_petal_shell", () -> spell(ModSpells.PETAL_SHELL));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RADIANCE = ITEMS.register("spell_radiance", () -> spell(ModSpells.RADIANCE));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_RAMPANT_GROWTH = ITEMS.register("spell_rampant_growth", () -> spell(ModSpells.RAMPANT_GROWTH));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_ROSE_THORNS = ITEMS.register("spell_rose_thorns", () -> spell(ModSpells.ROSE_THORNS));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SANCTUARY = ITEMS.register("spell_sanctuary", () -> spell(ModSpells.SANCTUARY));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SATURATE = ITEMS.register("spell_saturate", () -> spell(ModSpells.SATURATE));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SHATTER = ITEMS.register("spell_shatter", () -> spell(ModSpells.SHATTER));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SKY_SOARER = ITEMS.register("spell_sky_soarer", () -> spell(ModSpells.SKY_SOARER));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_STORM_CLOUD = ITEMS.register("spell_storm_cloud", () -> spell(ModSpells.STORM_CLOUD));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_TIME_STOP = ITEMS.register("spell_time_stop", () -> spell(ModSpells.TIME_STOP));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_WILDFIRE = ITEMS.register("spell_wildfire", () -> spell(ModSpells.WILDFIRE));
 
-  private static TokenItem spell (Holder<Spell> spell) {
-    return new TokenItem(new Item.Properties().component(ModAttachments.TOKEN_TYPE, TokenItem.TokenType.SPELL).component(ModAttachments.TOKEN_LOCATION, spell.getKey().location()).stacksTo(1));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_ANIMAL_HARVEST = ITEMS.register("ritual_animal_harvest", () -> ritual(ModRituals.ANIMAL_HARVEST));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_BLOOMING = ITEMS.register("ritual_blooming", () -> ritual(ModRituals.BLOOMING));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_CRAFTING = ITEMS.register("ritual_crafting", () -> ritual(ModRituals.CRAFTING));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_FIRE_STORM = ITEMS.register("ritual_fire_storm", () -> ritual(ModRituals.FIRE_STORM));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_FROST_LANDS = ITEMS.register("ritual_frost_lands", () -> ritual(ModRituals.FROST_LANDS));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_GATHERING = ITEMS.register("ritual_gathering", () -> ritual(ModRituals.GATHERING));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_GERMINATION = ITEMS.register("ritual_germination", () -> ritual(ModRituals.GERMINATION));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_GROVE_SUPPLICATION = ITEMS.register("ritual_grove_supplication", () -> ritual(ModRituals.GROVE_SUPPLICATION));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_HEALING_AURA = ITEMS.register("ritual_healing_aura", () -> ritual(ModRituals.HEALING_AURA));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_HEAVY_STORMS = ITEMS.register("ritual_heavy_storms", () -> ritual(ModRituals.HEAVY_STORMS));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_OVERGROWTH = ITEMS.register("ritual_overgrowth", () -> ritual(ModRituals.OVERGROWTH));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_PROTECTION = ITEMS.register("ritual_protection", () -> ritual(ModRituals.PROTECTION));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_PURITY = ITEMS.register("ritual_purity", () -> ritual(ModRituals.PURITY));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_SPREADING_FOREST = ITEMS.register("ritual_spreading_forest", () -> ritual(ModRituals.SPREADING_FOREST));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_SUMMON_CREATURES = ITEMS.register("ritual_summon_creatures", () -> ritual(ModRituals.SUMMON_CREATURES));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_TRANSMUTATION = ITEMS.register("ritual_transmutation", () -> ritual(ModRituals.TRANSMUTATION));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WARDING = ITEMS.register("ritual_warding", () -> ritual(ModRituals.WARDING));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WILDROOT_GROWTH = ITEMS.register("ritual_wildroot_growth", () -> ritual(ModRituals.WILDROOT_GROWTH));
+  public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WINDWALL = ITEMS.register("ritual_windwall", () -> ritual(ModRituals.WINDWALL));
+
+  private static TokenItem.SpellTokenItem spell (Holder<Spell> spell) {
+    return new TokenItem.SpellTokenItem(spell.getKey(), new Item.Properties().stacksTo(1));
   }
 
-  private static TokenItem ritual (Holder<Ritual> ritual) {
-    return new TokenItem(new Item.Properties().component(ModAttachments.TOKEN_TYPE, TokenItem.TokenType.RITUAL).component(ModAttachments.TOKEN_LOCATION, ritual.getKey().location()).stacksTo(1));
-  }
-
-  private static TokenItem spellModifier (Holder<SpellModifier> modifier) {
-    return new TokenItem(new Item.Properties().component(ModAttachments.TOKEN_TYPE, TokenItem.TokenType.MODIFIER).component(ModAttachments.TOKEN_LOCATION, modifier.getKey().location()).stacksTo(1));
+  private static TokenItem.RitualTokenItem ritual (Holder<Ritual> ritual) {
+    return new TokenItem.RitualTokenItem(ritual.getKey(), new Item.Properties().stacksTo(1));
   }
 
   public static void register(IEventBus bus) {

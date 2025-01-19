@@ -18,7 +18,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Armor material
 // - Runic tools
 // - Common setup:
-//   - Chicken tempting?
 // - Item properties -> Data Components
 // - Block entity item capabilities
 // - Reach -> block interaction range, entity interaction range

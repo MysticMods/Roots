@@ -11,7 +11,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 public class CreativeTabEvents {
   @SubscribeEvent
   public static void creativeTabOrder(BuildCreativeModeTabContentsEvent event) {
-    if (event.getTab().equals(ModTabs.ROOT_TAB.get())) {
+    if (event.getTab().equals(ModTabs.ROOTS_TAB.get())) {
       event.accept(ModItems.THATCH.get());
       event.accept(ModItems.RUNESTONE.get());
       event.accept(ModItems.MOSSY_RUNESTONE.get());
@@ -233,7 +233,55 @@ public class CreativeTabEvents {
       event.accept(ModItems.PURPLE_SPROUT_SPAWN_EGG.get());
       event.accept(ModItems.OWL_SPAWN_EGG.get());
       event.accept(ModItems.DUCK_SPAWN_EGG.get());
+    }
+    if (event.getTab().equals(ModTabs.SPELLS_TAB.get())) {
+      event.accept(ModItems.SPELL_ACID_CLOUD.get());
+      event.accept(ModItems.SPELL_AQUA_BUBBLE.get());
+      event.accept(ModItems.SPELL_CONTROL_UNDEAD.get());
+      event.accept(ModItems.SPELL_DANDELION_WINDS.get());
+      event.accept(ModItems.SPELL_DESATURATE.get());
+      event.accept(ModItems.SPELL_DISARM.get());
+      event.accept(ModItems.SPELL_EXTENSION.get());
       event.accept(ModItems.SPELL_FEY_LIGHT.get());
+      event.accept(ModItems.SPELL_GEAS.get());
+      event.accept(ModItems.SPELL_GROWTH_INFUSION.get());
+      event.accept(ModItems.SPELL_HARVEST.get());
+      event.accept(ModItems.SPELL_JAUNT.get());
+      event.accept(ModItems.SPELL_LIFE_DRAIN.get());
+      event.accept(ModItems.SPELL_MAGNETISM.get());
+      event.accept(ModItems.SPELL_NONDETECTION.get());
+      event.accept(ModItems.SPELL_PETAL_SHELL.get());
+      event.accept(ModItems.SPELL_RADIANCE.get());
+      event.accept(ModItems.SPELL_RAMPANT_GROWTH.get());
+      event.accept(ModItems.SPELL_ROSE_THORNS.get());
+      event.accept(ModItems.SPELL_SANCTUARY.get());
+      event.accept(ModItems.SPELL_SATURATE.get());
+      event.accept(ModItems.SPELL_SHATTER.get());
+      event.accept(ModItems.SPELL_SKY_SOARER.get());
+      event.accept(ModItems.SPELL_STORM_CLOUD.get());
+      event.accept(ModItems.SPELL_TIME_STOP.get());
+      event.accept(ModItems.SPELL_WILDFIRE.get());
+    }
+    if (event.getTab().equals(ModTabs.RITUALS_TAB.get())) {
+      event.accept(ModItems.RITUAL_ANIMAL_HARVEST.get());
+      event.accept(ModItems.RITUAL_BLOOMING.get());
+      event.accept(ModItems.RITUAL_CRAFTING.get());
+      event.accept(ModItems.RITUAL_FIRE_STORM.get());
+      event.accept(ModItems.RITUAL_FROST_LANDS.get());
+      event.accept(ModItems.RITUAL_GATHERING.get());
+      event.accept(ModItems.RITUAL_GERMINATION.get());
+      event.accept(ModItems.RITUAL_GROVE_SUPPLICATION.get());
+      event.accept(ModItems.RITUAL_HEALING_AURA.get());
+      event.accept(ModItems.RITUAL_HEAVY_STORMS.get());
+      event.accept(ModItems.RITUAL_OVERGROWTH.get());
+      event.accept(ModItems.RITUAL_PROTECTION.get());
+      event.accept(ModItems.RITUAL_PURITY.get());
+      event.accept(ModItems.RITUAL_SPREADING_FOREST.get());
+      event.accept(ModItems.RITUAL_SUMMON_CREATURES.get());
+      event.accept(ModItems.RITUAL_TRANSMUTATION.get());
+      event.accept(ModItems.RITUAL_WARDING.get());
+      event.accept(ModItems.RITUAL_WILDROOT_GROWTH.get());
+      event.accept(ModItems.RITUAL_WINDWALL.get());
     }
   }
 }

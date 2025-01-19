@@ -265,6 +265,8 @@
   "item.roots.wooden_knife": "Wooden Knife",
   "item.roots.wooden_shears": "Wooden Shears",
   "itemGroup.roots": "Roots",
+  "itemGroup.roots_rituals": "Roots Rituals",
+  "itemGroup.roots_spells": "Roots Spells",
   "key.category.roots.general": "Roots",
   "key.roots.open_spell_library": "Open Spell Library",
   "level_condition.roots.3_high_acacia_pillar": "3 High Acacia Pillar",

@@ -3,7 +3,9 @@ package mysticmods.roots.gen;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -272,6 +274,17 @@ public class RootsItemModelProvider extends ItemModelProvider {
     spawnEggItem(ModItems.OWL_SPAWN_EGG.get());
     spawnEggItem(ModItems.DUCK_SPAWN_EGG.get());
 
+    BuiltInRegistries.ITEM.entrySet().forEach(entry -> {
+      Item item = entry.getValue();
+      if (entry.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
+        if (entry.getKey().location().getPath().startsWith("spell_") && item instanceof TokenItem.SpellTokenItem) {
+          spell(item.builtInRegistryHolder());
+        } else if (entry.getKey().location().getPath().startsWith("ritual_") && item instanceof TokenItem.RitualTokenItem) {
+          ritual(item.builtInRegistryHolder());
+        }
+      }
+    });
+
     spell(ModItems.SPELL_FEY_LIGHT);
     // TODO: Ritual/spell tokens
   }
@@ -286,6 +299,14 @@ public class RootsItemModelProvider extends ItemModelProvider {
   public ItemModelBuilder spell(Holder<Item> itemHolder) {
     ResourceLocation item = itemHolder.getKey().location();
     String spellLocation = "item/spells/" + item.getPath().replace("spell_", "");
+    return getBuilder(item.toString())
+        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), spellLocation));
+  }
+
+  public ItemModelBuilder ritual(Holder<Item> itemHolder) {
+    ResourceLocation item = itemHolder.getKey().location();
+    String spellLocation = "item/rituals/" + item.getPath().replace("ritual_", "");
     return getBuilder(item.toString())
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), spellLocation));

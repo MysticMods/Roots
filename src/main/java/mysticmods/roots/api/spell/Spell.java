@@ -24,6 +24,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -165,7 +166,12 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   // TODO: How to handle reach
   protected double getRange(Player pPlayer) {
-    return 0.0; //pPlayer.getReachDistance() + reach;
+    var attr = pPlayer.getAttribute(Attributes.BLOCK_INTERACTION_RANGE);
+    if (attr == null) {
+      return 4.5;
+    }
+
+    return attr.getValue() + reach;
   }
 
   protected BlockHitResult pick(Player pPlayer, double range) {

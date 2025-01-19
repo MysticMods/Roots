@@ -48,6 +48,8 @@ public class RootsLangProvider extends LanguageProvider {
   protected void addTranslations() {
     // Tag translations
     add("itemGroup.roots", "Roots");
+    add("itemGroup.roots_spells", "Roots Spells");
+    add("itemGroup.roots_rituals", "Roots Rituals");
 
     add("roots.tooltip.token.spell", "Spell: %s");
     add("roots.tooltip.token.modifier", "Modifier: %s");
