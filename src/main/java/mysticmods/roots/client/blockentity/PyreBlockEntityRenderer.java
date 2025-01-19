@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.client.RenderTickHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -57,14 +58,13 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
     for (int i = 0; i < items.size(); i++) {
       ItemStack item = items.get(i);
       pPoseStack.pushPose();
-      random.setSeed(item.hashCode());
-      float shifted = (float) (/*RenderTickHandler.getClientTicks() + */pPartialTick + i * (360.0 / items.size()));
+      float shifted = (float) (RenderTickHandler.getClientTicks() + pPartialTick + i * (360.0 / items.size()));
       pPoseStack.translate(0.5, 0.5 + 0.05 * ((double) Mth.sin((float) Math.toRadians((double) shifted * 4))), 0.5);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.translate(-0.5, 0, 0);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
-      Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
   }

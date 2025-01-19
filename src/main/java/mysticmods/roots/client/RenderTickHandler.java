@@ -15,7 +15,7 @@ public class RenderTickHandler {
   @SubscribeEvent
   public static void onClientTick (RenderLevelStageEvent event) {
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-      clientTicks += event.getPartialTick().getRealtimeDeltaTicks();
+      clientTicks += event.getPartialTick().getGameTimeDeltaPartialTick(true);
     }
   }
 
