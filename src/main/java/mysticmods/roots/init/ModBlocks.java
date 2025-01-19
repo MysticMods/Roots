@@ -122,7 +122,7 @@ public class ModBlocks {
   public static DeferredHolder<Block, ElementalSoilBlock> MAGMATIC_SOIL = BLOCKS.register("magmatic_soil", () -> new ElementalSoilBlock(SOIL_PROPERTIES));
   public static DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(SOIL_PROPERTIES));
   // TODO all: voxel shapes & bounding boxes
-  public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BASE_PROPERTIES));
+  public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BlockBehaviour.Properties.of().instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL).noOcclusion()));
   public static DeferredHolder<Block, RitualPedestalBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal", () -> new RitualPedestalBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = BLOCKS.register("reinforced_ritual_pedestal", () -> new RitualPedestalBlock(BASE_REINFORCED_PROPERTIES));
   public static DeferredHolder<Block, GroveCrafterBlock> GROVE_CRAFTER = BLOCKS.register("grove_crafter", () -> new GroveCrafterBlock(BASE_WOODEN_PROPERTIES));
