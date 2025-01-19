@@ -1,6 +1,5 @@
 package mysticmods.roots.api.spell;
 
-import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
@@ -12,7 +11,6 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.ritual.Ritual;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -35,7 +33,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
@@ -53,7 +50,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected ChatFormatting textColor;
   protected String descriptionId;
 
-  protected Item icon;
+  protected ItemStack icon;
 
   public Spell(Type type, ChatFormatting color, List<Cost> defaultCosts, int color1, int color2) {
     this.type = type;
@@ -161,12 +158,19 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public void init(Holder<Spell> holder) {
     costs = holder.getData(DataMaps.SPELL_COST_DATA);
-    icon = holder.getData(DataMaps.SPELL_DISPLAY_ITEM);
-    if (icon == null) {
+    Item iconBase = holder.getData(DataMaps.SPELL_DISPLAY_ITEM);
+    if (iconBase == null) {
       RootsAPI.LOG.error("Icon is null for spell: {}", holder.getKey());
+      icon = ItemStack.EMPTY;
+    } else {
+      icon = new ItemStack(iconBase);
     }
     initializeProperties(holder);
     initialize(holder);
+  }
+
+  public ItemStack getIcon() {
+    return icon;
   }
 
   public abstract int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);

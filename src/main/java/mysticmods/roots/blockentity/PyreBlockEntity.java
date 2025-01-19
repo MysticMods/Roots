@@ -175,6 +175,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
   }
 
+  public RecipeHolder<PyreRecipe> getCachedRecipe () {
+    return cachedRecipe;
+  }
+
+  public RecipeHolder<PyreRecipe> getLastRecipe () {
+    return lastRecipe;
+  }
+
   @Override
   public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider provider) {
     super.onDataPacket(net, pkt, provider);

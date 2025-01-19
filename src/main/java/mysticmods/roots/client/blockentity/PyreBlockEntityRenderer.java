@@ -5,6 +5,8 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -13,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -65,6 +68,37 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
       Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      pPoseStack.popPose();
+    }
+
+    ItemStack inSlot;
+    RecipeHolder<PyreRecipe> recipe = pBlockEntity.getCachedRecipe();
+    if (pBlockEntity.getCurrentRitual() == ModRituals.CRAFTING.get()) {
+      if (recipe == null) {
+        inSlot = ItemStack.EMPTY;
+      } else {
+        inSlot = recipe.value().getResultItem(Minecraft.getInstance().getConnection().registryAccess());
+      }
+    } else if (pBlockEntity.getCurrentRitual() == null) {
+      if (recipe == null) {
+        inSlot = ItemStack.EMPTY;
+      } else if (recipe.value().getRitual() == null) {
+        inSlot = recipe.value().getResultItem(Minecraft.getInstance().getConnection().registryAccess());
+      } else {
+        inSlot = recipe.value().getRitual().getIcon();
+      }
+    } else {
+      inSlot = pBlockEntity.getCurrentRitual().getIcon();
+    }
+
+
+    if (!inSlot.isEmpty()) {
+      int loc = pBlockEntity.getBlockPos().hashCode();
+      pPoseStack.pushPose();
+      pPoseStack.translate(0.5, 1.35 + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
+      pPoseStack.scale(0.8f, 0.8f, 0.8f);
+      pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
+      Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
   }

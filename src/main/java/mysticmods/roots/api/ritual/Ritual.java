@@ -20,6 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -42,7 +43,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
   protected int radiusY = 0;
   protected int interval = 0;
 
-  protected Item icon;
+  protected ItemStack icon;
 
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
@@ -113,13 +114,20 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
   protected abstract void initialize(Holder<Ritual> holder);
 
   public void init(Holder<Ritual> holder) {
-    icon = holder.getData(DataMaps.RITUAL_DISPLAY_ITEM);
-    if (icon == null) {
+    Item iconBase = holder.getData(DataMaps.RITUAL_DISPLAY_ITEM);
+    if (iconBase == null) {
       RootsAPI.LOG.error("Icon is null for ritual: {}", holder.getKey());
+      icon = ItemStack.EMPTY;
+    } else {
+      icon = new ItemStack(iconBase);
     }
     initProperties(holder);
     initialize(holder);
     rebuildBounds();
+  }
+
+  public ItemStack getIcon() {
+    return icon;
   }
 
   public int getDuration() {
