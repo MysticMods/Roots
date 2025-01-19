@@ -5,11 +5,14 @@ import com.google.common.collect.ImmutableBiMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.registry.IDescribed;
+import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
@@ -32,6 +35,8 @@ public interface Unlock<T> {
 
   UnlockType unlockType();
 
+  Component getFailed ();
+
   static SpellUnlock spell(Holder<Spell> value) {
     return new SpellUnlock(value);
   }
@@ -50,6 +55,11 @@ public interface Unlock<T> {
     public UnlockType unlockType() {
       return TYPE;
     }
+
+    @Override
+    public Component getFailed() {
+      return Component.translatable("roots.message.spell.already_learned", value.value().getStyledName());
+    }
   }
 
   record ModifierUnlock(Holder<SpellModifier> value) implements Unlock<SpellModifier> {
@@ -62,10 +72,14 @@ public interface Unlock<T> {
     public UnlockType unlockType() {
       return TYPE;
     }
+
+    @Override
+    public Component getFailed() {
+      return Component.translatable("roots.message.spell_modifier.already_learned", value.value().getName());
+    }
   }
 
   record UnlockType(MapCodec<? extends Unlock<?>> codec,
                     StreamCodec<? super RegistryFriendlyByteBuf, ? extends Unlock<?>> streamCodec) {
-
   }
 }

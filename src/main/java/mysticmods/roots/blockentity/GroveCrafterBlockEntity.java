@@ -78,7 +78,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
         // TODO:
-        /*        failedGrants.failedGrants().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
+        /*        failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
         failedGrants.report();
         return InteractionResult.FAIL;
       }

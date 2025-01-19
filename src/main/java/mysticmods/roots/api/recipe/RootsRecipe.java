@@ -1,5 +1,6 @@
 package mysticmods.roots.api.recipe;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
@@ -7,6 +8,7 @@ import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -91,9 +93,11 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   @Override
   public ItemStack assemble(W arg, HolderLookup.Provider arg2) {
     Player player = arg.getPlayer();
-    if (player != null) {
+    if (player instanceof ServerPlayer sPlayer) {
       for (Unlock<?> unlock : getUnlocks()) {
-        // TODO: Do unlocks
+        if (RootsAPI.getInstance().canUnlock(sPlayer, unlock)) {
+          RootsAPI.getInstance().unlock(sPlayer, unlock);
+        }
       }
     }
 
