@@ -68,6 +68,11 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   }
 
   @Override
+  public CompoundTag getUpdateTag(HolderLookup.Provider lookup) {
+    return super.getUpdateTag(lookup);
+  }
+
+  @Override
   public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
     InteractionHand hand = InteractionHand.MAIN_HAND;
     if (level.isClientSide()) {

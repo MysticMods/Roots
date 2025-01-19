@@ -37,6 +37,10 @@ public abstract class RootsAPI {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);
   }
 
+  public static ResourceLocation parse (String path) {
+    return ResourceLocation.parse(path);
+  }
+
   // Tool Actions (Forge-specific)
   public static ItemAbility RUNIC_SHEARS_HARVEST = ItemAbility.get("runic_shears_harvest");
   public static ItemAbility RUNIC_SHEARS_DIG = ItemAbility.get("runic_shears_dig");

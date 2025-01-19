@@ -208,13 +208,13 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.loadAdditional(pTag, lookup);
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
-      ResourceLocation cachedId = RootsAPI.rl(pTag.getString("cached_recipe"));
+      ResourceLocation cachedId = RootsAPI.parse(pTag.getString("cached_recipe"));
       cachedRecipe = ResolvedRecipes.GROVE.getRecipe(cachedId);
     } else {
       cachedRecipe = null;
     }
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
-      ResourceLocation lastId = RootsAPI.rl(pTag.getString("last_recipe"));
+      ResourceLocation lastId = RootsAPI.parse(pTag.getString("last_recipe"));
       lastRecipe = ResolvedRecipes.GROVE.getRecipe(lastId);
     } else {
       lastRecipe = null;

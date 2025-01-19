@@ -28,10 +28,10 @@ public class GroveCrafterBlockEntityRenderer extends BoundedBlockEntityRenderer<
       ItemStack inSlot = recipe.value().getResultItem(Minecraft.getInstance().getConnection().registryAccess());
       int loc = pBlockEntity.getBlockPos().hashCode();
       pPoseStack.pushPose();
-      pPoseStack.translate(0.5, 1.8 + Mth.cos((loc + RenderTickHandler.getClientTicks() +pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
-      pPoseStack.scale(0.5f, 0.5f, 0.5f);
+      pPoseStack.translate(0.5, 1.35 + Mth.cos((loc + RenderTickHandler.getClientTicks() +pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
+      pPoseStack.scale(0.8f, 0.8f, 0.8f);
       pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
-      Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
   }

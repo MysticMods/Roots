@@ -85,7 +85,13 @@ public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IR
 
   @Override
   protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
-    this.cache = null;
+    reset();
+  }
+
+  public void reset () {
+    cache = null;
+    lastRecipe = null;
+    reverseLookup.clear();
   }
 
   public int lookup(ResourceLocation recipeId) {

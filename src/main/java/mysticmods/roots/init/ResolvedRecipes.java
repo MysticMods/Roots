@@ -17,6 +17,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 
+import java.util.Collection;
+import java.util.List;
+
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ResolvedRecipes {
   public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(ModRecipes.GROVE, (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())));
@@ -34,5 +37,14 @@ public class ResolvedRecipes {
     event.addListener(BARK);
     event.addListener(RUNIC_BLOCK);
     event.addListener(RUNIC_ENTITY);
+  }
+
+  public static void reset () {
+    GROVE.reset();
+    MORTAR.reset();
+    PYRE.reset();
+    BARK.reset();
+    RUNIC_BLOCK.reset();
+    RUNIC_ENTITY.reset();
   }
 }

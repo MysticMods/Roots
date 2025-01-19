@@ -8,6 +8,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
@@ -29,7 +33,14 @@ public abstract class BaseBlockEntity extends BlockEntity implements /*IReferent
 
   public void updateViaState() {
     setChanged();
-    // TODO: BlockEntityUtil.updateViaState(this);
+    ClientboundBlockEntityDataPacket packet = getUpdatePacket();
+    if (packet == null) {
+      return;
+    }
+    ChunkPos chunkPos = new ChunkPos(getBlockPos());
+    for (ServerPlayer player : ((ServerLevel)level).getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
+      player.connection.send(packet);
+    }
   }
 
   @Nullable
