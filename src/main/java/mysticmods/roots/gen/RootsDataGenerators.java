@@ -47,7 +47,6 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsBiomeTagsProvider(output, provider, helper));
     generator.addProvider(event.includeClient(), new RootsBlockStateProvider(output, helper));
     generator.addProvider(event.includeClient(), new RootsItemModelProvider(output, helper));
-    generator.addProvider(event.includeClient(), new RootsBlockModelProvider(output, helper));
     generator.addProvider(event.includeServer(), new RootsGlobalLootModifierProvider(output, provider));
     generator.addProvider(event.includeServer(), new StructureNbtUpdater("structures", RootsAPI.MODID, helper, output));
     generator.addProvider(event.includeServer(), new RootsRecipeProvider(output, provider));
