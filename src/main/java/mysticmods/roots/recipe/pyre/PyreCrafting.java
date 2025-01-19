@@ -12,14 +12,4 @@ public class PyreCrafting extends RootsTileCrafting<PyreInventory, PyreBlockEnti
   public PyreCrafting(PyreInventory handler, PyreBlockEntity blockEntity, @Nullable Player player) {
     super(handler, blockEntity, player);
   }
-
-  @Override
-  public ItemStack getItem(int i) {
-    return null;
-  }
-
-  @Override
-  public int size() {
-    return 0;
-  }
 }

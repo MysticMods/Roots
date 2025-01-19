@@ -136,7 +136,7 @@ public class ModBlocks {
   public static DeferredHolder<Block, GroveStoneBlock> PRIMAL_GROVE_STONE = BLOCKS.register("primal_grove_stone", () -> new GroveStoneBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, IncenseBurnerBlock> INCENSE_BURNER = BLOCKS.register("incense_burner", () -> new IncenseBurnerBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, MortarBlock> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BASE_PROPERTIES));
-  public static DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock(BASE_WOODEN_PROPERTIES));
+  public static DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock( BlockBehaviour.Properties.of().dynamicShape().noOcclusion().strength(1.5f).sound(SoundType.WOOD).lightLevel(o -> o.getValue(PyreBlock.LIT) ? 15 : 0)));
   public static DeferredHolder<Block, PyreBlock> REINFORCED_PYRE = BLOCKS.register("reinforced_pyre", () -> new PyreBlock(BASE_REINFORCED_PROPERTIES));
   public static DeferredHolder<Block, DecorativePyreBlock> DECORATIVE_PYRE = BLOCKS.register("decorative_pyre", () -> new DecorativePyreBlock(BASE_WOODEN_PROPERTIES.lightLevel((o) -> 15)));
   public static DeferredHolder<Block, UnendingBowlBlock> UNENDING_BOWL = BLOCKS.register("unending_bowl", () -> new UnendingBowlBlock(BASE_PROPERTIES));

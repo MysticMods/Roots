@@ -40,21 +40,6 @@ public class RunicEntityCrafting implements IEntityCrafting {
     return level;
   }
 
-/*  @Override
-  public void setChanged() {
-
-  }
-
-  @Override
-  public boolean stillValid(Player pPlayer) {
-    return true;
-  }
-
-  @Override
-  public void clearContent() {
-
-  }*/
-
   public ItemStack getStack() {
     return stack;
   }
