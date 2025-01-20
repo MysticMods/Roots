@@ -153,7 +153,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
       if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
-        /*        failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
+        failedGrants.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed unlock {}", o));
         failedGrants.report();
         return InteractionResult.SUCCESS;
       }
