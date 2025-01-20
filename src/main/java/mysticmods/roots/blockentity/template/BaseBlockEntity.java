@@ -1,8 +1,12 @@
 package mysticmods.roots.blockentity.template;
 
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import mysticmods.roots.api.blockentity.BoundedBlockEntity;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.recipe.RootsTileRecipe;
+import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -10,6 +14,9 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,11 +25,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public abstract class BaseBlockEntity extends BlockEntity implements /*IReferentialBlockEntity, */BoundedBlockEntity {
+public abstract class BaseBlockEntity extends BlockEntity implements BoundedBlockEntity {
   private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
   protected AABB singleBlockBoundingBox;
   protected BoundingBox boundingBox;
@@ -59,51 +67,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements /*IReferent
   @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.saveAdditional(pTag, lookup);
-/*    if (getBaseBounds() != null) {
-      BoundingBox.CODEC.encodeStart(NbtOps.INSTANCE, getBaseBounds()).resultOrPartial(RootsAPI.LOG::error).ifPresent(nbt -> pTag.put("base_bounding_box", nbt));
-    }*/
   }
-
-  @Override
-  public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookup) {
-    if (pkt.getTag() != null) {
-      CompoundTag pTag = pkt.getTag();
-/*      if (pTag.contains("base_bounding_box")) {
-        this.clientBaseBounds = BoundingBox.CODEC.parse(NbtOps.INSTANCE, pTag.get("base_bounding_box")).resultOrPartial(RootsAPI.LOG::error).orElse(null);
-      }*/
-    }
-  }
-
-/*
-  @Override
-  public BlockEntity getBlockEntity() {
-    return this;
-  }
-*/
-
-/*  @Override
-  public void onLoad() {
-    super.onLoad();
-    if (isBounded()) {
-      BlockHandler.register(level, getBoundingBox(), getBlockPos());
-    }
-  }
-
-  @Override
-  public void setRemoved() {
-    super.setRemoved();
-    if (isBounded()) {
-      BlockHandler.unregister(level, getBoundingBox());
-    }
-  }
-
-  @Override
-  public void clearRemoved() {
-    super.clearRemoved();
-    if (isBounded()) {
-      BlockHandler.register(level, getBoundingBox(), getBlockPos());
-    }
-  }*/
 
   @Override
   public BoundingBox getBoundingBox() {
@@ -118,21 +82,21 @@ public abstract class BaseBlockEntity extends BlockEntity implements /*IReferent
 
   private AABB clientBounds;
 
-/*  @Override
+  @Nullable
   public AABB getRenderBoundingBox() {
     if (!isBounded()) {
-      return super.getRenderBoundingBox();
+      return null;
     }
 
     if (clientBounds == null) {
       BoundingBox box = getBoundingBox();
       if (box != null) {
-        clientBounds = AABB.of(box); //.inflatedBy(getRadiusX() + getRadiusY() + getRadiusZ()));
+        clientBounds = AABB.of(box);
       }
     }
 
     return clientBounds;
-  }*/
+  }
 
   public AABB getSingleBlockBoundingBox() {
     if (singleBlockBoundingBox == null) {
@@ -140,6 +104,39 @@ public abstract class BaseBlockEntity extends BlockEntity implements /*IReferent
     }
 
     return singleBlockBoundingBox;
+  }
+
+  public void refillRecipe (ServerPlayer player, RecipeHolder<? extends RootsTileRecipe<?, ?, ?>> recipe, RecipeInventory inventory) {
+    PlayerMainInvWrapper inv = new PlayerMainInvWrapper(player.getInventory());
+    if (player.isCreative()) {
+      for (Ingredient ingredient : recipe.value().getIngredients()) {
+        inventory.insert(ingredient.getItems()[0]);
+      }
+    } else {
+      Int2IntOpenHashMap counts = new Int2IntOpenHashMap();
+      boolean foundOuter = true;
+      outer: for (Ingredient ingredient : recipe.value().getIngredients()) {
+        for (int i = 0; i < inv.getSlots(); i++) {
+          ItemStack stack = inv.getStackInSlot(i);
+          if (ingredient.test(stack)) {
+            counts.put(i, counts.get(i) + 1);
+            continue outer;
+          }
+        }
+        foundOuter = false;
+        break;
+      }
+      if (foundOuter) {
+        for (Int2IntMap.Entry entry : counts.int2IntEntrySet()) {
+          for (int i = 0; i < entry.getIntValue(); i++) {
+            ItemStack thisStack = inv.extractItem(entry.getIntKey(), 1, false);
+            if (!inventory.insert(thisStack).isEmpty()) {
+              inv.insertItem(entry.getIntKey(), thisStack, false);
+            }
+          }
+        }
+      }
+    }
   }
 
   public static <T extends BlockEntity> void clientTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {

@@ -129,10 +129,14 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
       ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("cached_recipe"));
       cachedRecipe = ResolvedRecipes.MORTAR.getRecipe(cachedId);
+    } else {
+      cachedRecipe = null;
     }
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
       ResourceLocation lastId = ResourceLocation.parse(pTag.getString("last_recipe"));
       lastRecipe = ResolvedRecipes.MORTAR.getRecipe(lastId);
+    } else {
+      cachedRecipe = null;
     }
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(provider, pTag.getCompound("inventory"));
@@ -153,15 +157,18 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
-    if (inHand.isEmpty()) {
+    if (inHand.isEmpty() && !player.isCrouching()) {
       // extract
       ItemStack popped = inventory.pop();
       if (!popped.isEmpty()) {
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
+    } else if (inHand.isEmpty() && player.isCrouching()) {
+      if (lastRecipe != null) {
+        refillRecipe((ServerPlayer) player, lastRecipe, inventory);
+      }
     } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION)) {
       if (cachedRecipe == null) {
-        // should this revalidate?
         revalidateRecipe();
       }
       // TODO: Provider better feedback to the player
@@ -174,11 +181,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           conditionResult.report();
           return InteractionResult.FAIL;
         }
-        UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
-        if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
+        UnlockResult failedUnlocks = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
+        if (failedUnlocks.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
           RootsAPI.LOG.info("Grants failed and recipe has no output");
-          /*          failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
-          failedGrants.report();
+          failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant {}", o));
+          failedUnlocks.report();
           return InteractionResult.FAIL;
         }
 
@@ -186,12 +193,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
         setChanged();
 
         if (uses >= cachedRecipe.value().getTimes()) {
-          // CRAFTING HAPPENS HERE
           MortarCrafting playerCrafting = new MortarCrafting(inventory, this, player);
           lastRecipe = cachedRecipe;
           previousRecipeItems.clear();
           previousRecipeItems.addAll(inventory.getItemsCopy());
-          List<ItemStack> results = new ArrayList<>(cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear));
+          List<ItemStack> results = cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear);
           for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
           }
@@ -207,6 +213,12 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     }
 
     return InteractionResult.SUCCESS;
+  }
+
+  @Override
+  public void onLoad() {
+    super.onLoad();
+    revalidateRecipe();
   }
 
   public int getUses() {

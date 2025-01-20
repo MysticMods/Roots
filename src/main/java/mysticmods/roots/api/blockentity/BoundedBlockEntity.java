@@ -1,6 +1,7 @@
 package mysticmods.roots.api.blockentity;
 
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
 
@@ -23,6 +24,11 @@ public interface BoundedBlockEntity {
 
   @Nullable
   default BoundingBox getBoundingBox() {
+    return null;
+  }
+
+  @Nullable
+  default AABB getRenderBoundingBox() {
     return null;
   }
 }
