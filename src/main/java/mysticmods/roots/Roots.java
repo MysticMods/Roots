@@ -17,10 +17,10 @@ import net.neoforged.fml.config.ModConfig;
 // - Missing data maps?
 // - Armor material
 // - Runic tools
-// - Common setup:
+// - Client setup:
+//    - Render layers
 // - Item properties -> Data Components
-// - Block entity item capabilities
-// - Reach -> block interaction range, entity interaction range
+// - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Block entity renderers
 // - Block opacity/light block/movement block
 // - Less crop results for elemental plants when not on elemental soil

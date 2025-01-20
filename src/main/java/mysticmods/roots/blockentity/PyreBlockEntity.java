@@ -114,6 +114,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   public InteractionResult light(Player player, BlockPos pos) {
+    // We shouldn't light if we shouldn't light
     if (cachedRecipe == null) {
       // should this revalidate?
       revalidateRecipe();
