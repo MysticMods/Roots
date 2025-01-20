@@ -2,9 +2,16 @@ package mysticmods.roots.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.attachment.AttachmentType;
+
+import java.util.function.Predicate;
 
 /**
  * Utility functions for interacting with items.
@@ -19,15 +26,7 @@ public class ItemUtil {
    * @return True if the items, tags, and capabilities between `item1` and `item2` match, disregarding size.
    */
   public static boolean equalWithoutSize(ItemStack item1, ItemStack item2) {
-    if (item1.getItem() != item2.getItem()) {
-      return false;
-/*    } else if (item1.getTag() == null && item2.getTag() != null) {
-      return false;
-    } else {
-      return (item1.getTag() == null || item1.getTag().equals(item2.getTag())) && item1.areCapsCompatible(item2);*/
-    }
-
-    return false;
+    return ItemStack.isSameItem(item1, item2);
   }
 
   public static NonNullList<ItemStack> copyItemList(NonNullList<ItemStack> reference) {
@@ -38,10 +37,18 @@ public class ItemUtil {
     return contents;
   }
 
+  public static Predicate<DataComponentType<?>> FORGETTER = o -> o.equals(DataComponents.DAMAGE) || o.equals(DataComponents.MAX_DAMAGE) || o.equals(DataComponents.UNBREAKABLE);
+
   public static boolean equalWithoutDamage(ItemStack stack1, ItemStack stack2) {
-    // TODO:
-    return false;
-    /*    return ItemStack.isSameItemSameTags(stack1, stack2);*/
+    if (ItemStack.isSameItemSameComponents(stack1, stack2)) {
+      return true;
+    }
+    if (!stack1.getComponents().has(DataComponents.DAMAGE) || !stack2.getComponents().has(DataComponents.DAMAGE)) {
+      return false;
+    }
+    DataComponentPatch map1 = stack1.getComponentsPatch().forget(FORGETTER);
+    DataComponentPatch map2 = stack2.getComponentsPatch().forget(FORGETTER);
+    return map1.equals(map2);
   }
 
   public static class Spawn {
@@ -75,9 +82,6 @@ public class ItemUtil {
       if (ticks != -1) {
         item.setPickUpDelay(ticks);
       }
-/*      if (hoverStart != -1) {
-        item.bobOffs = hoverStart;
-      }*/
       return spawnItem(world, item);
     }
 
