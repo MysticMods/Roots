@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-19T18:44:36.961823	Roots Item Tags
+// 1.21.1	2025-01-20T19:39:47.1880749	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -79,6 +79,7 @@ e16c92e31940c0c62767ba46b55ac10f3e133b58 data/roots/tags/item/logs/runed/mangrov
 cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/item/logs/runed/wildwood.json
 1b76b7887fbceab43d0a517275981c378378e349 data/roots/tags/item/logs/wildwood.json
 f59ff28ec7067311a011ea1fd9092feb1469bbd5 data/roots/tags/item/mortars.json
+33c51847dc0e01980184ec1a4eb8d222662d792f data/roots/tags/item/mortar_activation.json
 cb2e3c6e79dbddd59965ce0c2ca7dfda8ac64ea3 data/roots/tags/item/nyi.json
 c55106d54db2ac749ccc95747891b03f570d8fc3 data/roots/tags/item/pedestals.json
 45c768b93d7e13a13dd2a41a896005c7e3960523 data/roots/tags/item/pedestals/display.json

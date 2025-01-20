@@ -64,6 +64,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.SEEDS).add(ModItems.GROVE_SPORES.get());
     this.tag(ItemTags.CHICKEN_FOOD).addTag(RootsTags.Items.SEEDS);
 
+    this.tag(RootsTags.Items.MORTAR_ACTIVATION).add(ModItems.PESTLE.get());
+
     //noinspection unchecked
     this.tag(RootsTags.Items.SEEDS).add(ModItems.AUBERGINE_SEEDS.get()).addTags(RootsTags.Items.MOONGLOW_SEEDS, RootsTags.Items.PERESKIA_SEEDS, RootsTags.Items.WILDEWHEET_SEEDS, RootsTags.Items.SPIRITLEAF_SEEDS);
 
