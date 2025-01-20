@@ -266,10 +266,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
       ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("cached_recipe"));
       cachedRecipe = ResolvedRecipes.PYRE.getRecipe(cachedId);
+    } else {
+      cachedRecipe = null;
     }
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
       ResourceLocation lastId = ResourceLocation.parse(pTag.getString("last_recipe"));
       lastRecipe = ResolvedRecipes.PYRE.getRecipe(lastId);
+    } else {
+      lastRecipe = null;
     }
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(provider, pTag.getCompound("inventory"));
@@ -277,6 +281,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
       ResourceLocation ritualId = ResourceLocation.parse(pTag.getString("current_ritual"));
       currentRitual = RootsRegistries.RITUALS.get(ritualId);
+    } else {
+      currentRitual = null;
     }
     if (pTag.contains("lifetime", Tag.TAG_INT)) {
       lifetime = pTag.getInt("lifetime");
@@ -372,9 +378,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         boundingBox = null;
         if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT)) {
           pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, false), 3);
-        } else {
-          updateViaState();
         }
+        updateViaState();
       } else {
         currentRitual.tick(pLevel, pPos, pState, this);
         if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
