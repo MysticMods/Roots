@@ -28,8 +28,6 @@ import net.neoforged.neoforge.common.Tags;
 import javax.annotation.Nullable;
 
 public class DuckEntity extends Animal {
-  public static Ingredient BREEDING_INGREDIENT;
-
   public float flap;
   public float flapSpeed;
   public float oFlapSpeed;
