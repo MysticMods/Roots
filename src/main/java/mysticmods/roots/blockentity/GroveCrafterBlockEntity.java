@@ -48,15 +48,12 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   @Override
-  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
+  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
     // TODO:
-    InteractionHand hand = InteractionHand.MAIN_HAND;
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
 
-    ItemStack inHand = player.getItemInHand(hand);
-    // TODO: SOMEHOW IF THERE ARE NO INGREDIENTS THIS WILL MATCH RUNESTONE???
     if (inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
       GroveCrafting playerCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals()), this, player);
       if (cachedRecipe == null) {

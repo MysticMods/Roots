@@ -82,10 +82,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Override
-  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
+  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
     // TODO:
-    InteractionHand hand = InteractionHand.MAIN_HAND;
-    ItemStack inHand = player.getItemInHand(hand);
     // This is a very specific hack.
     if (inHand.is(ModItems.FIRE_STARTER.get())) {
       return InteractionResult.PASS;

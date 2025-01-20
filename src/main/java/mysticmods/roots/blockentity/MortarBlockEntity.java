@@ -149,11 +149,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
   }
 
   @Override
-  public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
-    RootsAPI.LOG.info(cachedRecipe);
-    // TODO:
-    InteractionHand hand = InteractionHand.MAIN_HAND;
-    ItemStack inHand = player.getItemInHand(hand);
+  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
