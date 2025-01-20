@@ -230,10 +230,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (tag != null) {
       loadAdditional(tag, provider);
     } else {
-      lastRecipe = null;
+/*      lastRecipe = null;
       cachedRecipe = null;
       currentRitual = null;
-      storedItems.clear();
+      storedItems.clear();*/
     }
   }
 
@@ -406,6 +406,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         .spawn(pLevel, pPos.getX() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f), pPos.getY() + 0.625f + 0.125f * pRandom.nextFloat(), pPos.getZ() + 0.5f + 0.3f * (pRandom.nextFloat() - 0.5f));*/
     }
     // ritual animation tick still happens ON THE SERVER
+  }
+
+  @Override
+  public void onLoad() {
+    super.onLoad();
+    this.revalidateRecipe();
   }
 
   @Override
