@@ -30,7 +30,6 @@ public class BeetleEntity extends TamableAnimal {
 
   public BeetleEntity(EntityType<? extends BeetleEntity> type, Level worldIn) {
     super(type, worldIn);
-    this.xpReward = 3;
     this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 

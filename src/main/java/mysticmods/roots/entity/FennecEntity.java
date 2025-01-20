@@ -40,9 +40,6 @@ import javax.annotation.Nullable;
 public class FennecEntity extends TamableAnimal {
   public FennecEntity(EntityType<? extends FennecEntity> type, Level worldIn) {
     super(type, worldIn);
-    // TODO: ???
-    /*    setTame(false);*/
-    this.xpReward = 5;
     this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 

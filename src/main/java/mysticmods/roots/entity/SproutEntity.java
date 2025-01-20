@@ -23,8 +23,6 @@ import javax.annotation.Nullable;
 public class SproutEntity extends Animal {
   public SproutEntity(EntityType<? extends SproutEntity> type, Level world) {
     super(type, world);
-    // TODO: ???
-    this.xpReward = 3;
     this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
