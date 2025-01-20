@@ -25,6 +25,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Block opacity/light block/movement block
 // - Less crop results for elemental plants when not on elemental soil
 // - More results when matching elemental soil
+// - What are these invalid recipe groups?
 
 @Mod(RootsAPI.MODID)
 public class Roots {
