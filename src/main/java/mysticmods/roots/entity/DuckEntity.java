@@ -5,6 +5,7 @@ import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -49,19 +50,12 @@ public class DuckEntity extends Animal {
     return false;
   }
 
-  protected Ingredient getBreedingIngredient() {
-    if (BREEDING_INGREDIENT == null) {
-      BREEDING_INGREDIENT = Ingredient.of(Tags.Items.SEEDS);
-    }
-    return BREEDING_INGREDIENT;
-  }
-
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new DuckSwimGoal(this));
     goalSelector.addGoal(1, new PanicGoal(this, 1.6d));
     goalSelector.addGoal(2, new BreedGoal(this, 1.0d));
-    goalSelector.addGoal(3, new TemptGoal(this, 1.0d, getBreedingIngredient(), false));
+    goalSelector.addGoal(3, new TemptGoal(this, 1.0d, Ingredient.of(ItemTags.CHICKEN_FOOD), false));
     goalSelector.addGoal(4, new FollowParentGoal(this, 1.0d));
     goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
     goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0d, 120));
@@ -71,7 +65,7 @@ public class DuckEntity extends Animal {
 
   @Override
   public boolean isFood(ItemStack pStack) {
-    return getBreedingIngredient().test(pStack);
+    return pStack.is(ItemTags.CHICKEN_FOOD);
   }
 
   @org.jetbrains.annotations.Nullable
