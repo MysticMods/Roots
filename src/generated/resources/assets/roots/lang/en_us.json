@@ -293,6 +293,7 @@
   "level_condition.roots.4_high_wildwood_pillar": "4 High Wildwood Pillar",
   "level_condition.roots.any_grove_stone": "Any Grove Stone",
   "level_condition.roots.any_primal_grove_stone": "Any Primal Grove Stone",
+  "level_condition.roots.invalid_primal_grove_stone": "Invalid Primal Grove Stone",
   "level_condition.roots.mature_wildroot_crop": "Mature Wildroot Crop",
   "level_condition.roots.valid_grove_stone": "Valid Grove Stone",
   "level_condition.roots.valid_primal_grove_stone": "Valid Primal Grove Stone",

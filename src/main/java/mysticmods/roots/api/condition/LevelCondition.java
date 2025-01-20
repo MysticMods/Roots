@@ -134,10 +134,19 @@ public abstract class LevelCondition implements IDescribed {
   public static class GroveStoneCondition extends LevelCondition {
     private final TagKey<Block> groveType;
     private final boolean requireValid;
+    private final boolean requireInvalid;
 
-    public GroveStoneCondition(TagKey<Block> groveType, boolean requireValid) {
+    public GroveStoneCondition(TagKey<Block> groveType, boolean requireValid, boolean requireInvalid) {
       this.groveType = groveType;
       this.requireValid = requireValid;
+      this.requireInvalid = requireInvalid;
+      if (requireValid && requireInvalid) {
+        throw new IllegalStateException("Cannot require both valid and invalid");
+      }
+    }
+
+    public GroveStoneCondition(TagKey<Block> groveType, boolean requireValid) {
+      this(groveType, requireValid, false);
     }
 
     @Nullable
@@ -166,8 +175,11 @@ public abstract class LevelCondition implements IDescribed {
       }
 
       int validCount = 0;
+      int invalidCount = 0;
       if (getValid(initial)) {
         validCount++;
+      } else {
+        invalidCount++;
       }
 
       // Keep a note of which blockpositions are part of this pillar
@@ -184,6 +196,8 @@ public abstract class LevelCondition implements IDescribed {
 
       if (getValid(initial)) {
         validCount++;
+      } else {
+        invalidCount++;
       }
 
       pPos = pPos.below();
@@ -196,9 +210,13 @@ public abstract class LevelCondition implements IDescribed {
 
       if (getValid(initial)) {
         validCount++;
+      } else {
+        invalidCount++;
       }
 
-      if (requireValid && validCount != 3) {
+      if (requireInvalid && invalidCount != 3) {
+        return Collections.emptySet();
+      } else if (!requireInvalid && requireValid && validCount != 3) {
         return Collections.emptySet();
       }
 
@@ -215,7 +233,11 @@ public abstract class LevelCondition implements IDescribed {
   }
 
   public static LevelCondition.GroveStoneCondition groveStone(GroveType grove, boolean requireValid) {
-    return new GroveStoneCondition(grove.getTag(), requireValid);
+    return groveStone(grove, requireValid, false);
+  }
+
+  public static LevelCondition.GroveStoneCondition groveStone (GroveType grove, boolean requireValid, boolean requireInvalid) {
+    return new GroveStoneCondition(grove.getTag(), requireValid, requireInvalid);
   }
 
   public static LevelCondition.GroveStoneCondition anyGroveStone(boolean requireValid) {

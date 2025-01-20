@@ -17,6 +17,9 @@
       {
         "tag": "c:foods/bread"
       }
+    ],
+    "levelConditions": [
+      "roots:invalid_primal_grove_stone"
     ]
   },
   "ritual": "roots:grove_supplication"

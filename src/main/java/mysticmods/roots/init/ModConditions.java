@@ -39,6 +39,7 @@ public class ModConditions {
   public static final DeferredHolder<LevelCondition, LevelCondition> WILDWOOD_PILLAR_3_HIGH = REGISTER.register("3_high_wildwood_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.WILDWOOD, 3));
   public static final DeferredHolder<LevelCondition, LevelCondition> PRIMAL_GROVE_STONE_ANY = REGISTER.register("any_primal_grove_stone", () -> LevelCondition.groveStone(GroveType.PRIMAL, false));
   public static final DeferredHolder<LevelCondition, LevelCondition> PRIMAL_GROVE_STONE_VALID = REGISTER.register("valid_primal_grove_stone", () -> LevelCondition.groveStone(GroveType.PRIMAL, true));
+  public static final DeferredHolder<LevelCondition, LevelCondition> PRIMAL_GROVE_STONE_INVALID = REGISTER.register("invalid_primal_grove_stone", () -> LevelCondition.groveStone(GroveType.PRIMAL, false, true));
   public static final DeferredHolder<LevelCondition, LevelCondition> GROVE_STONE_ANY = REGISTER.register("any_grove_stone", () -> LevelCondition.anyGroveStone(false));
   public static final DeferredHolder<LevelCondition, LevelCondition> GROVE_STONE_VALID = REGISTER.register("valid_grove_stone", () -> LevelCondition.anyGroveStone(true));
   public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = REGISTER.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get().defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));

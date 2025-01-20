@@ -794,7 +794,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_sugar_cane", has(Tags.Items.CROPS_SUGAR_CANE)).save(PyreRecipe.Builder.create().ritual(ModRituals.OVERGROWTH).build(BaseRecipeData.Builder.create().requires(RootsTags.Items.BARKS).requires(RootsTags.Items.BARKS).requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.CROPS_SUGAR_CANE).requires(Items.SHORT_GRASS)), c, RootsAPI.rl("pyre/overgrowth"));
 
-    RecipeSaver.saver().unlockedBy("has_door", has(ItemTags.DOORS)).save(PyreRecipe.Builder.create().ritual(ModRituals.GROVE_SUPPLICATION).build(BaseRecipeData.Builder.create().requires(ItemTags.DOORS).requires(Items.BOWL).requires(ItemTags.SAPLINGS).requires(RootsTags.Items.PETALS).requires(Tags.Items.FOODS_BREAD)), c, RootsAPI.rl("pyre/grove_supplication"));
+    RecipeSaver.saver().unlockedBy("has_door", has(ItemTags.DOORS)).save(PyreRecipe.Builder.create().ritual(ModRituals.GROVE_SUPPLICATION).build(BaseRecipeData.Builder.create().requires(ItemTags.DOORS).requires(Items.BOWL).requires(ItemTags.SAPLINGS).requires(RootsTags.Items.PETALS).requires(Tags.Items.FOODS_BREAD).condition(ModConditions.PRIMAL_GROVE_STONE_INVALID.get())), c, RootsAPI.rl("pyre/grove_supplication"));
 
     RecipeSaver.saver().unlockedBy("has_spiritleaf", has(RootsTags.Items.SPIRITLEAF_HERB)).save(PyreRecipe.Builder.create().ritual(ModRituals.WILDROOT_GROWTH).build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.BARKS).requires(RootsTags.Items.BARKS).requires(RootsTags.Items.SPIRITLEAF_HERB).requires(ItemTags.SAPLINGS).condition(ModConditions.MATURE_WILDROOT_CROP.get())), c, RootsAPI.rl("pyre/wildroot_growth"));
 

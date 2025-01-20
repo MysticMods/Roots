@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-20T12:47:43.9230471	Recipes
+// 1.21.1	2025-01-20T13:20:42.5613204	Recipes
 afb36943e341d957b4cc6aa8dfa1273afb91ba11 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_tile.json
 fa9a2f9d72f328a3b1d0922423e8d8d3f56bca81 data/roots/advancement/recipes/building_blocks/chiseled_runestone_from_runestone_tile.json
 f595b4351c25b84323636294eeee8a9dec1ecbe8 data/roots/advancement/recipes/building_blocks/mossy_runestone_button_from_mossy_runestone_stonecutting.json
@@ -338,7 +338,7 @@ ebd352284993326d9a16b6ef0b9bf745b87af9b5 data/roots/recipe/pyre.json
 7d4acf78ccc29de11d723a8f0a9ee9578d9489cc data/roots/recipe/pyre/animal_harvest.json
 d3bf646eec9b2107f85189399ba77092e817691c data/roots/recipe/pyre/cloud_berry.json
 2b88dd2c897f605f1f0d30ae06d4f52f41e8ba29 data/roots/recipe/pyre/dewgonia.json
-1d77f2fff67dfba802059ffefd4aff96de32803b data/roots/recipe/pyre/grove_supplication.json
+e7cae4fb0e3285ff32250b2aaeed66721b4af52a data/roots/recipe/pyre/grove_supplication.json
 61011fbf5a9aaf4124a365cea96dff3b50e11818 data/roots/recipe/pyre/inferno_bulb.json
 3faafec11595d6cadeb209bab30a1644507638dd data/roots/recipe/pyre/overgrowth.json
 63d9a4c4b213cfa2be48ec6120ba262490a288c8 data/roots/recipe/pyre/stalicripe.json
