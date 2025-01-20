@@ -60,5 +60,11 @@ public class DataMaps {
     event.register(HERB_ITEM_DATA);
     event.register(SPELL_PROPERTY_DATA);
     event.register(RITUAL_PROPERTY_DATA);
+    event.register(RITUAL_DISPLAY_ITEM);
+    event.register(SPELL_DISPLAY_ITEM);
+    event.register(SPELL_MODIFIER_PARENT);
+    event.register(SPELL_MODIFIER_SPELL);
+    event.register(GROVE_DATA);
+
   }
 }
