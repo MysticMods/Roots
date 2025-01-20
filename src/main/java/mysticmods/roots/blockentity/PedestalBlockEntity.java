@@ -90,17 +90,6 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       // insert
       ItemStack result = inventory.insertItem(0, inHand, false);
       player.setItemInHand(hand, result);
-/*
-      if (limited && inHand.getCount() > 1) {
-        ItemStack copy = inHand.copy();
-        copy.setCount(1);
-        inHand.shrink(1);
-        inventory.setStackInSlot(0, copy);
-        player.setItemInHand(hand, inHand);
-      } else {
-        inventory.setStackInSlot(0, inHand);
-        player.setItemInHand(hand, ItemStack.EMPTY);
-      }*/
     } else {
       // Are they the same item?
       if (ItemStack.isSameItemSameComponents(inSlot, inHand)) {
@@ -126,19 +115,6 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
           player.setItemInHand(hand, inSlot2);
         }
       }
-/*      if (limited) {
-        ItemStack copy = inHand.copy();
-        copy.setCount(1);
-        inHand.shrink(1);
-        inventory.setStackInSlot(0, copy);
-        player.setItemInHand(hand, inHand);
-        if (!player.addItem(inSlot)) {
-          ItemUtil.Spawn.spawnItem(level, getBlockPos(), inSlot);
-        }
-      } else {
-        inventory.setStackInSlot(0, inHand);
-        player.setItemInHand(hand, inSlot);
-      }*/
     }
 
     return InteractionResult.SUCCESS;
