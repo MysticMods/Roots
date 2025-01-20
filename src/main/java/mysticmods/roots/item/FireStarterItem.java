@@ -16,6 +16,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -51,12 +52,22 @@ public class FireStarterItem extends Item {
           BlockState stateAt = level.getBlockState(blockpos);
           BlockPos below = blockpos.below();
           BlockState stateBelow = level.getBlockState(below);
-          if (stateBelow.is(RootsTags.Blocks.PYRES)) {
-            if (level.getBlockEntity(below) instanceof PyreBlockEntity pyreBlockEntity) {
-              level.playSound(player, below, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-              pyreBlockEntity.light(player, below);
-              used = true;
+          PyreBlockEntity pyreBlockEntity = null;
+          if (stateAt.is(RootsTags.Blocks.PYRES)) {
+            BlockEntity be = level.getBlockEntity(blockpos);
+            if (be instanceof PyreBlockEntity pbe) {
+              pyreBlockEntity = pbe;
             }
+          } else if (stateBelow.is(RootsTags.Blocks.PYRES)) {
+            BlockEntity be = level.getBlockEntity(below);
+            if (be instanceof PyreBlockEntity pbe) {
+              pyreBlockEntity = pbe;
+            }
+          }
+          if (pyreBlockEntity != null) {
+            level.playSound(player, below, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            pyreBlockEntity.light(player, below);
+            used = true;
           } else if (stateAt.isAir()) {
             level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.setBlock(blockpos, Blocks.FIRE.defaultBlockState(), 11);
