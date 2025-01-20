@@ -237,6 +237,7 @@ public class CreativeTabEvents {
     if (event.getTab().equals(ModTabs.SPELLS_TAB.get())) {
       event.accept(ModItems.SPELL_ACID_CLOUD.get());
       event.accept(ModItems.SPELL_AQUA_BUBBLE.get());
+      event.accept(ModItems.SPELL_AUGMENT.get());
       event.accept(ModItems.SPELL_CONTROL_UNDEAD.get());
       event.accept(ModItems.SPELL_DANDELION_WINDS.get());
       event.accept(ModItems.SPELL_DESATURATE.get());
@@ -248,6 +249,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.SPELL_HARVEST.get());
       event.accept(ModItems.SPELL_JAUNT.get());
       event.accept(ModItems.SPELL_LIFE_DRAIN.get());
+      event.accept(ModItems.SPELL_LIGHT_DRIFTER.get());
       event.accept(ModItems.SPELL_MAGNETISM.get());
       event.accept(ModItems.SPELL_NONDETECTION.get());
       event.accept(ModItems.SPELL_PETAL_SHELL.get());

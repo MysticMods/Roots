@@ -8,6 +8,10 @@
       "count": 1,
       "id": "roots:spell_aqua_bubble"
     },
+    "roots:augment": {
+      "count": 1,
+      "id": "roots:spell_augment"
+    },
     "roots:control_undead": {
       "count": 1,
       "id": "roots:spell_control_undead"
@@ -51,6 +55,10 @@
     "roots:life_drain": {
       "count": 1,
       "id": "roots:spell_life_drain"
+    },
+    "roots:light_drifter": {
+      "count": 1,
+      "id": "roots:spell_light_drifter"
     },
     "roots:magnetism": {
       "count": 1,
