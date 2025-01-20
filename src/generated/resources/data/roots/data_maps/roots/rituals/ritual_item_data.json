@@ -1,23 +1,80 @@
 {
   "values": {
-    "roots:animal_harvest": "roots:ritual_animal_harvest",
-    "roots:blooming": "roots:ritual_blooming",
-    "roots:crafting": "roots:ritual_crafting",
-    "roots:fire_storm": "roots:ritual_fire_storm",
-    "roots:frost_lands": "roots:ritual_frost_lands",
-    "roots:gathering": "roots:ritual_gathering",
-    "roots:germination": "roots:ritual_germination",
-    "roots:grove_supplication": "roots:ritual_grove_supplication",
-    "roots:healing_aura": "roots:ritual_healing_aura",
-    "roots:heavy_storms": "roots:ritual_heavy_storms",
-    "roots:overgrowth": "roots:ritual_overgrowth",
-    "roots:protection": "roots:ritual_protection",
-    "roots:purity": "roots:ritual_purity",
-    "roots:spreading_forest": "roots:ritual_spreading_forest",
-    "roots:summon_creatures": "roots:ritual_summon_creatures",
-    "roots:transmutation": "roots:ritual_transmutation",
-    "roots:warding": "roots:ritual_warding",
-    "roots:wildroot_growth": "roots:ritual_wildroot_growth",
-    "roots:windwall": "roots:ritual_windwall"
+    "roots:animal_harvest": {
+      "count": 1,
+      "id": "roots:ritual_animal_harvest"
+    },
+    "roots:blooming": {
+      "count": 1,
+      "id": "roots:ritual_blooming"
+    },
+    "roots:crafting": {
+      "count": 1,
+      "id": "roots:ritual_crafting"
+    },
+    "roots:fire_storm": {
+      "count": 1,
+      "id": "roots:ritual_fire_storm"
+    },
+    "roots:frost_lands": {
+      "count": 1,
+      "id": "roots:ritual_frost_lands"
+    },
+    "roots:gathering": {
+      "count": 1,
+      "id": "roots:ritual_gathering"
+    },
+    "roots:germination": {
+      "count": 1,
+      "id": "roots:ritual_germination"
+    },
+    "roots:grove_supplication": {
+      "count": 1,
+      "id": "roots:ritual_grove_supplication"
+    },
+    "roots:healing_aura": {
+      "count": 1,
+      "id": "roots:ritual_healing_aura"
+    },
+    "roots:heavy_storms": {
+      "count": 1,
+      "id": "roots:ritual_heavy_storms"
+    },
+    "roots:overgrowth": {
+      "count": 1,
+      "id": "roots:ritual_overgrowth"
+    },
+    "roots:protection": {
+      "count": 1,
+      "id": "roots:ritual_protection"
+    },
+    "roots:purity": {
+      "count": 1,
+      "id": "roots:ritual_purity"
+    },
+    "roots:spreading_forest": {
+      "count": 1,
+      "id": "roots:ritual_spreading_forest"
+    },
+    "roots:summon_creatures": {
+      "count": 1,
+      "id": "roots:ritual_summon_creatures"
+    },
+    "roots:transmutation": {
+      "count": 1,
+      "id": "roots:ritual_transmutation"
+    },
+    "roots:warding": {
+      "count": 1,
+      "id": "roots:ritual_warding"
+    },
+    "roots:wildroot_growth": {
+      "count": 1,
+      "id": "roots:ritual_wildroot_growth"
+    },
+    "roots:windwall": {
+      "count": 1,
+      "id": "roots:ritual_windwall"
+    }
   }
 }

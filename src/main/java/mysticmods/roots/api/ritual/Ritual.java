@@ -114,12 +114,10 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
   protected abstract void initialize(Holder<Ritual> holder);
 
   public void init(Holder<Ritual> holder) {
-    Item iconBase = holder.getData(DataMaps.RITUAL_DISPLAY_ITEM);
-    if (iconBase == null) {
-      RootsAPI.LOG.error("Icon is null for ritual: {}", holder.getKey());
+    icon = holder.getData(DataMaps.RITUAL_DISPLAY_ITEM);
+    if (icon == null || icon.isEmpty()) {
+      RootsAPI.LOG.error("Icon is missing for ritual: {}", holder.getKey());
       icon = ItemStack.EMPTY;
-    } else {
-      icon = new ItemStack(iconBase);
     }
     initProperties(holder);
     initialize(holder);

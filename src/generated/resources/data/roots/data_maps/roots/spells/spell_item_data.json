@@ -1,30 +1,108 @@
 {
   "values": {
-    "roots:acid_cloud": "roots:spell_acid_cloud",
-    "roots:aqua_bubble": "roots:spell_aqua_bubble",
-    "roots:control_undead": "roots:spell_control_undead",
-    "roots:dandelion_winds": "roots:spell_dandelion_winds",
-    "roots:desaturate": "roots:spell_desaturate",
-    "roots:disarm": "roots:spell_disarm",
-    "roots:extension": "roots:spell_extension",
-    "roots:fey_light": "roots:spell_fey_light",
-    "roots:geas": "roots:spell_geas",
-    "roots:growth_infusion": "roots:spell_growth_infusion",
-    "roots:harvest": "roots:spell_harvest",
-    "roots:jaunt": "roots:spell_jaunt",
-    "roots:life_drain": "roots:spell_life_drain",
-    "roots:magnetism": "roots:spell_magnetism",
-    "roots:nondetection": "roots:spell_nondetection",
-    "roots:petal_shell": "roots:spell_petal_shell",
-    "roots:radiance": "roots:spell_radiance",
-    "roots:rampant_growth": "roots:spell_rampant_growth",
-    "roots:rose_thorns": "roots:spell_rose_thorns",
-    "roots:sanctuary": "roots:spell_sanctuary",
-    "roots:saturate": "roots:spell_saturate",
-    "roots:shatter": "roots:spell_shatter",
-    "roots:sky_soarer": "roots:spell_sky_soarer",
-    "roots:storm_cloud": "roots:spell_storm_cloud",
-    "roots:time_stop": "roots:spell_time_stop",
-    "roots:wildfire": "roots:spell_wildfire"
+    "roots:acid_cloud": {
+      "count": 1,
+      "id": "roots:spell_acid_cloud"
+    },
+    "roots:aqua_bubble": {
+      "count": 1,
+      "id": "roots:spell_aqua_bubble"
+    },
+    "roots:control_undead": {
+      "count": 1,
+      "id": "roots:spell_control_undead"
+    },
+    "roots:dandelion_winds": {
+      "count": 1,
+      "id": "roots:spell_dandelion_winds"
+    },
+    "roots:desaturate": {
+      "count": 1,
+      "id": "roots:spell_desaturate"
+    },
+    "roots:disarm": {
+      "count": 1,
+      "id": "roots:spell_disarm"
+    },
+    "roots:extension": {
+      "count": 1,
+      "id": "roots:spell_extension"
+    },
+    "roots:fey_light": {
+      "count": 1,
+      "id": "roots:spell_fey_light"
+    },
+    "roots:geas": {
+      "count": 1,
+      "id": "roots:spell_geas"
+    },
+    "roots:growth_infusion": {
+      "count": 1,
+      "id": "roots:spell_growth_infusion"
+    },
+    "roots:harvest": {
+      "count": 1,
+      "id": "roots:spell_harvest"
+    },
+    "roots:jaunt": {
+      "count": 1,
+      "id": "roots:spell_jaunt"
+    },
+    "roots:life_drain": {
+      "count": 1,
+      "id": "roots:spell_life_drain"
+    },
+    "roots:magnetism": {
+      "count": 1,
+      "id": "roots:spell_magnetism"
+    },
+    "roots:nondetection": {
+      "count": 1,
+      "id": "roots:spell_nondetection"
+    },
+    "roots:petal_shell": {
+      "count": 1,
+      "id": "roots:spell_petal_shell"
+    },
+    "roots:radiance": {
+      "count": 1,
+      "id": "roots:spell_radiance"
+    },
+    "roots:rampant_growth": {
+      "count": 1,
+      "id": "roots:spell_rampant_growth"
+    },
+    "roots:rose_thorns": {
+      "count": 1,
+      "id": "roots:spell_rose_thorns"
+    },
+    "roots:sanctuary": {
+      "count": 1,
+      "id": "roots:spell_sanctuary"
+    },
+    "roots:saturate": {
+      "count": 1,
+      "id": "roots:spell_saturate"
+    },
+    "roots:shatter": {
+      "count": 1,
+      "id": "roots:spell_shatter"
+    },
+    "roots:sky_soarer": {
+      "count": 1,
+      "id": "roots:spell_sky_soarer"
+    },
+    "roots:storm_cloud": {
+      "count": 1,
+      "id": "roots:spell_storm_cloud"
+    },
+    "roots:time_stop": {
+      "count": 1,
+      "id": "roots:spell_time_stop"
+    },
+    "roots:wildfire": {
+      "count": 1,
+      "id": "roots:spell_wildfire"
+    }
   }
 }

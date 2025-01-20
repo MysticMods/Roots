@@ -158,12 +158,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public void init(Holder<Spell> holder) {
     costs = holder.getData(DataMaps.SPELL_COST_DATA);
-    Item iconBase = holder.getData(DataMaps.SPELL_DISPLAY_ITEM);
-    if (iconBase == null) {
-      RootsAPI.LOG.error("Icon is null for spell: {}", holder.getKey());
+    icon = holder.getData(DataMaps.SPELL_DISPLAY_ITEM);
+    if (icon == null || icon.isEmpty()) {
+      RootsAPI.LOG.error("Icon is missing for spell: {}", holder.getKey());
       icon = ItemStack.EMPTY;
-    } else {
-      icon = new ItemStack(iconBase);
     }
     initializeProperties(holder);
     initialize(holder);

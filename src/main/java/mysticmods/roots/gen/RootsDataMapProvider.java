@@ -19,6 +19,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
@@ -132,15 +133,15 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.INFERNO_BULB, new FurnaceFuel(600), false);
     builder10.add(ModItems.MAGMATIC_SOIL, new FurnaceFuel(900), false);
 
-    Builder<Item, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
-    Builder<Item, Spell> builder12 = builder(DataMaps.SPELL_DISPLAY_ITEM).replace(false);
+    Builder<ItemStack, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
+    Builder<ItemStack, Spell> builder12 = builder(DataMaps.SPELL_DISPLAY_ITEM).replace(false);
 
     BuiltInRegistries.ITEM.entrySet().forEach(o -> {
       if (o.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
         if (o.getKey().location().getPath().startsWith("ritual_") && o.getValue() instanceof TokenItem.RitualTokenItem ritual) {
-          builder11.add(ritual.getRitual().builtInRegistryHolder(), o.getValue(), false);
+          builder11.add(ritual.getRitual().builtInRegistryHolder(), new ItemStack(o.getValue()), false);
         } else if (o.getKey().location().getPath().startsWith("spell_") && o.getValue() instanceof TokenItem.SpellTokenItem spell) {
-          builder12.add(spell.getSpell().builtInRegistryHolder(), o.getValue(), false);
+          builder12.add(spell.getSpell().builtInRegistryHolder(), new ItemStack(o.getValue()), false);
         }
       }
     });

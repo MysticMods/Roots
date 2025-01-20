@@ -88,13 +88,15 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
-    if (inHand.isEmpty()) {
+    if (inHand.isEmpty() && !player.isCrouching()) {
       // extract
       ItemStack popped = inventory.pop();
       if (!popped.isEmpty()) {
         ItemUtil.Spawn.spawnItem(level, getBlockPos(), popped);
       }
       // TODO: starting a ritual while one is already active
+    } else if (inHand.isEmpty() && player.isCrouching()) {
+
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
       return light(player, pos);
     } else {

@@ -23,6 +23,8 @@ import net.neoforged.fml.config.ModConfig;
 // - Reach -> block interaction range, entity interaction range
 // - Block entity renderers
 // - Block opacity/light block/movement block
+// - Less crop results for elemental plants when not on elemental soil
+// - More results when matching elemental soil
 
 @Mod(RootsAPI.MODID)
 public class Roots {
