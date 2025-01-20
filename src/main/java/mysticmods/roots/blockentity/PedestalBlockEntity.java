@@ -28,6 +28,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
 public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
   protected ItemStackHandler inventory;
@@ -88,7 +89,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
         if (!player.isCrouching()) {
           player.setItemInHand(hand, result);
         } else {
-          ItemStack leftover = ItemHandlerHelper.insertItemStacked(player.getCapability(Capabilities.ItemHandler.ENTITY), result, false);
+          ItemStack leftover = ItemUtil.insertPlayerInventoryStacked(player, result, false);
           if (!leftover.isEmpty()) {
             ItemUtil.Spawn.spawnItem(level, getBlockPos(), leftover);
           }
@@ -113,7 +114,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
       // Are they the same item?
       if (ItemStack.isSameItemSameComponents(inSlot, inHand)) {
         ItemStack inSlot2 = inventory.extractItem(0, inSlot.getCount(), false);
-        ItemStack leftover = ItemHandlerHelper.insertItemStacked(player.getCapability(Capabilities.ItemHandler.ENTITY), inSlot2, false);
+        ItemStack leftover = ItemUtil.insertPlayerInventoryStacked(player, inSlot2, false);
         if (!leftover.isEmpty()) {
           ItemUtil.Spawn.spawnItem(level, getBlockPos(), leftover);
         }
@@ -125,7 +126,7 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
           player.setItemInHand(hand, leftover);
           // Try to merge the rest
           if (!inSlot2.isEmpty()) {
-            ItemStack stackedResult = ItemHandlerHelper.insertItemStacked(player.getCapability(Capabilities.ItemHandler.ENTITY), inSlot2, false);
+            ItemStack stackedResult = ItemUtil.insertPlayerInventoryStacked(player, inSlot2, false);
             if (!stackedResult.isEmpty()) {
               ItemUtil.Spawn.spawnItem(level, getBlockPos(), stackedResult);
             }
