@@ -802,7 +802,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_kelp", has(Items.KELP)).save(PyreRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(Items.WATER_BUCKET).requires(Items.CLAY_BALL).requires(Items.PUMPKIN).requires(Tags.Items.CROPS_SUGAR_CANE).requires(Items.KELP).result(ModItems.DEWGONIA, 2)), c, RootsAPI.rl("pyre/dewgonia"));
 
-    RecipeSaver.saver().unlockedBy("has_netherrack", has(Tags.Items.NETHERRACKS)).save(PyreRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(Items.MAGMA_CREAM).requires(Tags.Items.NETHERRACKS).requires(ItemTags.COALS).requires(ModItems.FIRE_STARTER.get()).requires(Items.BRICK).result(ModItems.INFERNO_BULB, 2)), c, RootsAPI.rl("pyre/inferno_bulb"));
+    RecipeSaver.saver().unlockedBy("has_netherrack", has(Tags.Items.NETHERRACKS)).save(PyreRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(Items.MAGMA_CREAM).requires(Tags.Items.NETHERRACKS).requires(ItemTags.COALS).requires(Items.STICK).requires(Items.BRICK).result(ModItems.INFERNO_BULB, 2)), c, RootsAPI.rl("pyre/inferno_bulb"));
 
     RecipeSaver.saver().unlockedBy("has_glow_lichen", has(Items.GLOW_LICHEN)).save(PyreRecipe.Builder.create().build(BaseRecipeData.Builder.create().requires(Items.GLOW_LICHEN).requires(Items.TUFF).requires(Tags.Items.COBBLESTONES_DEEPSLATE).requires(RootsTags.Items.FLINT).requires(Tags.Items.RAW_MATERIALS_IRON).result(ModItems.STALICRIPE, 2)), c, RootsAPI.rl("pyre/stalicripe"));
 
