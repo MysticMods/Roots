@@ -164,7 +164,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       previousRecipeItems.addAll(inventory.getItemsCopy());
       storedItems.clear();
       if (currentRitual == ModRituals.CRAFTING.get()) {
-        // TODO: Item could be empty with only chance outputs
         storedItems.addAll(cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
       }
       storedItems.removeIf(ItemStack::isEmpty);
@@ -204,11 +203,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
       loadAdditional(tag, provider);
-    } else {
-/*      lastRecipe = null;
-      cachedRecipe = null;
-      currentRitual = null;
-      storedItems.clear();*/
     }
   }
 
