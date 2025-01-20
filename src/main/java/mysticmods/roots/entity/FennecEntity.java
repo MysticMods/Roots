@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.neoforged.neoforge.event.EventHooks;
 
 import javax.annotation.Nonnull;
@@ -42,6 +43,7 @@ public class FennecEntity extends TamableAnimal {
     // TODO: ???
     /*    setTame(false);*/
     this.xpReward = 5;
+    this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
   @Override

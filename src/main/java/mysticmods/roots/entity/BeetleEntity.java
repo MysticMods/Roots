@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,6 +31,7 @@ public class BeetleEntity extends TamableAnimal {
   public BeetleEntity(EntityType<? extends BeetleEntity> type, Level worldIn) {
     super(type, worldIn);
     this.xpReward = 3;
+    this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
   @Override

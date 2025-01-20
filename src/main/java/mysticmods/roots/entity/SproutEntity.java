@@ -16,13 +16,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.pathfinder.PathType;
 
 import javax.annotation.Nullable;
 
 public class SproutEntity extends Animal {
   public SproutEntity(EntityType<? extends SproutEntity> type, Level world) {
     super(type, world);
+    // TODO: ???
     this.xpReward = 3;
+    this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
   @Override

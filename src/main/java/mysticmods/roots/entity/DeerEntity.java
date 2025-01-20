@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.PathType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,7 +30,9 @@ public class DeerEntity extends Animal {
 
   public DeerEntity(EntityType<? extends DeerEntity> type, Level world) {
     super(type, world);
+    // TODO: ???
     this.xpReward = 3;
+    this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
   @Nullable

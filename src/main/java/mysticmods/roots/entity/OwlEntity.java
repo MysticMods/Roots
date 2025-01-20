@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nonnull;
@@ -44,6 +45,7 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   public OwlEntity(EntityType<? extends TamableAnimal> type, Level worldIn) {
     super(type, worldIn);
     this.moveControl = new FlyingMoveControl(this, 15, false);
+    this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
   @Override
