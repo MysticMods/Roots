@@ -23,8 +23,8 @@ public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBloc
     for (ItemStack item : pBlockEntity.getNonEmptyItems()) {
       pPoseStack.pushPose();
       random.setSeed(item.hashCode() ^ pBlockEntity.getUses());
-      pPoseStack.translate(0.475 + random.nextFloat() / 20.0, 0.25 + random.nextFloat() / 20.0, 0.475 + random.nextFloat() / 20);
-      pPoseStack.scale(0.4f, 0.4f, 0.4f);
+      pPoseStack.translate(0.475 + random.nextFloat() / 20.0, 0.15 + random.nextFloat() / 20.0, 0.475 + random.nextFloat() / 20);
+      pPoseStack.scale(0.8f, 0.8f, 0.8f);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(random.nextInt(360)));
       Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
