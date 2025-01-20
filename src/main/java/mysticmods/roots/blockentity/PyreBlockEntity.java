@@ -1,5 +1,7 @@
 package mysticmods.roots.blockentity;
 
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
@@ -34,6 +36,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -41,6 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -96,7 +100,39 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
       // TODO: starting a ritual while one is already active
     } else if (inHand.isEmpty() && player.isCrouching()) {
-
+      // Try to refill
+      if (lastRecipe != null) {
+        PlayerMainInvWrapper inv = new PlayerMainInvWrapper(player.getInventory());
+        if (player.isCreative()) {
+          for (Ingredient ingredient : lastRecipe.value().getIngredients()) {
+            inventory.insert(ingredient.getItems()[0]);
+          }
+        } else {
+          Int2IntOpenHashMap counts = new Int2IntOpenHashMap();
+          boolean foundOuter = true;
+          outer: for (Ingredient ingredient : lastRecipe.value().getIngredients()) {
+            for (int i = 0; i < inv.getSlots(); i++) {
+              ItemStack stack = inv.getStackInSlot(i);
+              if (ingredient.test(stack)) {
+                counts.put(i, counts.get(i) + 1);
+                continue outer;
+              }
+            }
+            foundOuter = false;
+            break;
+          }
+          if (foundOuter) {
+            for (Int2IntMap.Entry entry : counts.int2IntEntrySet()) {
+              for (int i = 0; i < entry.getIntValue(); i++) {
+                ItemStack thisStack = inv.extractItem(entry.getIntKey(), 1, false);
+                if (!inventory.insert(thisStack).isEmpty()) {
+                  inv.insertItem(entry.getIntKey(), thisStack, false);
+                }
+              }
+            }
+          }
+        }
+      }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
       return light(player, pos);
     } else {

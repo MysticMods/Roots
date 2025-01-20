@@ -101,4 +101,15 @@ public class RecipeInventory extends ItemStackHandler {
     onContentsChanged(slot);
     return result;
   }
+
+  public List<ItemStack> insertAll (List<ItemStack> stacks) {
+    List<ItemStack> result = new ArrayList<>();
+    for (ItemStack stack : stacks) {
+      ItemStack leftover = insert(stack);
+      if (!leftover.isEmpty()) {
+        result.add(leftover);
+      }
+    }
+    return result;
+  }
 }
