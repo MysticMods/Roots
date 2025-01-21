@@ -1,15 +1,303 @@
 {
   "variants": {
-    "age=0": {
+    "age=0,elemental_type=air,soil_type=air": {
       "model": "roots:block/inferno_bulb_0"
     },
-    "age=1": {
+    "age=0,elemental_type=air,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=air,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=air,soil_type=none": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=air,soil_type=water": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=earth,soil_type=air": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=earth,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=earth,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=earth,soil_type=none": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=earth,soil_type=water": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=fire,soil_type=air": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=fire,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=fire,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=fire,soil_type=none": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=fire,soil_type=water": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=none,soil_type=air": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=none,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=none,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=none,soil_type=none": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=none,soil_type=water": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=water,soil_type=air": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=water,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=water,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=water,soil_type=none": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=0,elemental_type=water,soil_type=water": {
+      "model": "roots:block/inferno_bulb_0"
+    },
+    "age=1,elemental_type=air,soil_type=air": {
       "model": "roots:block/inferno_bulb_1"
     },
-    "age=2": {
+    "age=1,elemental_type=air,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=air,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=air,soil_type=none": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=air,soil_type=water": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=earth,soil_type=air": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=earth,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=earth,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=earth,soil_type=none": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=earth,soil_type=water": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=fire,soil_type=air": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=fire,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=fire,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=fire,soil_type=none": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=fire,soil_type=water": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=none,soil_type=air": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=none,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=none,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=none,soil_type=none": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=none,soil_type=water": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=water,soil_type=air": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=water,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=water,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=water,soil_type=none": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=1,elemental_type=water,soil_type=water": {
+      "model": "roots:block/inferno_bulb_1"
+    },
+    "age=2,elemental_type=air,soil_type=air": {
       "model": "roots:block/inferno_bulb_2"
     },
-    "age=3": {
+    "age=2,elemental_type=air,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=air,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=air,soil_type=none": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=air,soil_type=water": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=earth,soil_type=air": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=earth,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=earth,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=earth,soil_type=none": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=earth,soil_type=water": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=fire,soil_type=air": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=fire,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=fire,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=fire,soil_type=none": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=fire,soil_type=water": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=none,soil_type=air": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=none,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=none,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=none,soil_type=none": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=none,soil_type=water": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=water,soil_type=air": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=water,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=water,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=water,soil_type=none": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=2,elemental_type=water,soil_type=water": {
+      "model": "roots:block/inferno_bulb_2"
+    },
+    "age=3,elemental_type=air,soil_type=air": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=air,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=air,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=air,soil_type=none": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=air,soil_type=water": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=earth,soil_type=air": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=earth,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=earth,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=earth,soil_type=none": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=earth,soil_type=water": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=fire,soil_type=air": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=fire,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=fire,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=fire,soil_type=none": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=fire,soil_type=water": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=none,soil_type=air": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=none,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=none,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=none,soil_type=none": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=none,soil_type=water": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=water,soil_type=air": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=water,soil_type=earth": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=water,soil_type=fire": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=water,soil_type=none": {
+      "model": "roots:block/inferno_bulb_3"
+    },
+    "age=3,elemental_type=water,soil_type=water": {
       "model": "roots:block/inferno_bulb_3"
     }
   }

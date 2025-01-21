@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
+import mysticmods.roots.block.crop.ElementalType;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.block.crop.WaterElementalCropBlock;
 import mysticmods.roots.worldgen.trees.RootsTreeGrowers;
@@ -116,11 +117,11 @@ public class ModBlocks {
   public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_WALL = BLOCKS.register("runed_wall", () -> new RunedObsidianBlocks.Wall(RUNED_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_BRICK_WALL = BLOCKS.register("runed_brick_wall", () -> new RunedObsidianBlocks.Wall(RUNED_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_TILE_WALL = BLOCKS.register("runed_tile_wall", () -> new RunedObsidianBlocks.Wall(RUNED_PROPERTIES));
-  public static DeferredHolder<Block, ElementalSoilBlock> ELEMENTAL_SOIL = BLOCKS.register("elemental_soil", () -> new ElementalSoilBlock(SOIL_PROPERTIES));
-  public static DeferredHolder<Block, ElementalSoilBlock> AQUEOUS_SOIL = BLOCKS.register("aqueous_soil", () -> new ElementalSoilBlock(SOIL_PROPERTIES));
-  public static DeferredHolder<Block, ElementalSoilBlock> CAELIC_SOIL = BLOCKS.register("caelic_soil", () -> new ElementalSoilBlock(SOIL_PROPERTIES));
-  public static DeferredHolder<Block, ElementalSoilBlock> MAGMATIC_SOIL = BLOCKS.register("magmatic_soil", () -> new ElementalSoilBlock(SOIL_PROPERTIES));
-  public static DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(SOIL_PROPERTIES));
+  public static DeferredHolder<Block, ElementalSoilBlock> ELEMENTAL_SOIL = BLOCKS.register("elemental_soil", () -> new ElementalSoilBlock(ElementalType.NONE, SOIL_PROPERTIES));
+  public static DeferredHolder<Block, ElementalSoilBlock> AQUEOUS_SOIL = BLOCKS.register("aqueous_soil", () -> new ElementalSoilBlock(ElementalType.WATER, SOIL_PROPERTIES));
+  public static DeferredHolder<Block, ElementalSoilBlock> CAELIC_SOIL = BLOCKS.register("caelic_soil", () -> new ElementalSoilBlock(ElementalType.AIR, SOIL_PROPERTIES));
+  public static DeferredHolder<Block, ElementalSoilBlock> MAGMATIC_SOIL = BLOCKS.register("magmatic_soil", () -> new ElementalSoilBlock(ElementalType.FIRE, SOIL_PROPERTIES));
+  public static DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(ElementalType.EARTH, SOIL_PROPERTIES));
   // TODO all: voxel shapes & bounding boxes
   public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BlockBehaviour.Properties.of().instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL).noOcclusion()));
   public static DeferredHolder<Block, RitualPedestalBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal", () -> new RitualPedestalBlock(BASE_PROPERTIES));
@@ -142,10 +143,10 @@ public class ModBlocks {
   public static DeferredHolder<Block, UnendingBowlBlock> UNENDING_BOWL = BLOCKS.register("unending_bowl", () -> new UnendingBowlBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, MushroomBlock> BAFFLECAP = BLOCKS.register("bafflecap", () -> new MushroomBlock(ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
   public static DeferredHolder<Block, ThreeStageCropBlock> WILDROOT_CROP = BLOCKS.register("wildroot_crop", () -> new ThreeStageCropBlock(ModItems.WILDROOT, CROP_PROPERTIES));
-  public static DeferredHolder<Block, ElementalCropBlock> CLOUD_BERRY_CROP = BLOCKS.register("cloud_berry_crop", () -> new ElementalCropBlock(ModItems.CLOUD_BERRY, CROP_PROPERTIES));
-  public static DeferredHolder<Block, WaterElementalCropBlock> DEWGONIA_CROP = BLOCKS.register("dewgonia_crop", () -> new WaterElementalCropBlock(ModItems.DEWGONIA, CROP_PROPERTIES));
-  public static DeferredHolder<Block, ElementalCropBlock> INFERNO_BULB_CROP = BLOCKS.register("inferno_bulb_crop", () -> new ElementalCropBlock(ModItems.INFERNO_BULB, CROP_PROPERTIES));
-  public static DeferredHolder<Block, ElementalCropBlock> STALICRIPE_CROP = BLOCKS.register("stalicripe_crop", () -> new ElementalCropBlock(ModItems.STALICRIPE, CROP_PROPERTIES));
+  public static DeferredHolder<Block, ElementalCropBlock> CLOUD_BERRY_CROP = BLOCKS.register("cloud_berry_crop", () -> new ElementalCropBlock(ModItems.CLOUD_BERRY, ElementalType.AIR, CROP_PROPERTIES));
+  public static DeferredHolder<Block, WaterElementalCropBlock> DEWGONIA_CROP = BLOCKS.register("dewgonia_crop", () -> new WaterElementalCropBlock(ModItems.DEWGONIA, ElementalType.WATER, CROP_PROPERTIES));
+  public static DeferredHolder<Block, ElementalCropBlock> INFERNO_BULB_CROP = BLOCKS.register("inferno_bulb_crop", () -> new ElementalCropBlock(ModItems.INFERNO_BULB, ElementalType.FIRE, CROP_PROPERTIES));
+  public static DeferredHolder<Block, ElementalCropBlock> STALICRIPE_CROP = BLOCKS.register("stalicripe_crop", () -> new ElementalCropBlock(ModItems.STALICRIPE, ElementalType.EARTH, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> MOONGLOW_CROP = BLOCKS.register("moonglow_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.MOONGLOW_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> PERESKIA_CROP = BLOCKS.register("pereskia_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.PERESKIA_BULB, CROP_PROPERTIES));
   // TODO: Pottable pereskia?

@@ -2,10 +2,12 @@ package mysticmods.roots.block.crop;
 
 import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -22,14 +24,25 @@ import java.util.function.Supplier;
 public class WaterElementalCropBlock extends ElementalCropBlock implements SimpleWaterloggedBlock {
   public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-  public WaterElementalCropBlock(Supplier<? extends ItemLike> seedProvider, Properties builder) {
-    super(seedProvider, builder);
-    this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
+  public WaterElementalCropBlock(Supplier<? extends ItemLike> seedProvider, ElementalType type, Properties builder) {
+    super(seedProvider, type, builder);
+    this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
+  }
+
+  @Override
+  protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+    return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
   }
 
   @Override
   public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-
+    BlockState newState = pLevel.getBlockState(pPos);
+    if (pLevel.getBlockState(pPos.below()).is(RootsTags.Blocks.ELEMENTAL_SOIL)) {
+      return true;
+    }
+    if (!newState.getValue(WATERLOGGED)) {
+      return false;
+    }
     return super.canSurvive(pState, pLevel, pPos);
   }
 

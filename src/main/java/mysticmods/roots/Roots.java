@@ -12,7 +12,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
-// - Item data component for "tokens"
+// - The pestle is held wrongly
 // - JEI integration
 // - Missing data maps?
 // - Armor material
@@ -26,7 +26,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Less crop results for elemental plants when not on elemental soil
 // - More results when matching elemental soil
 // - What are these invalid recipe groups?
-// - The pestle is held wrongly
 
 @Mod(RootsAPI.MODID)
 public class Roots {

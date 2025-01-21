@@ -1,5 +1,6 @@
 package mysticmods.roots.block.crop;
 
+import com.google.common.base.Suppliers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -16,23 +17,7 @@ public class ThreeStageCropBlock extends BeetrootBlock {
 
   public ThreeStageCropBlock(Supplier<? extends ItemLike> seedProvider, Properties builder) {
     super(builder);
-    this.seedProvider = seedProvider;
-  }
-
-  @Override
-  public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-    if (!pLevel.isAreaLoaded(pPos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-    if (pLevel.getRawBrightness(pPos, 0) >= 9) {
-      int i = this.getAge(pState);
-      if (i < this.getMaxAge()) {
-        // TODO: This changed from block to BlockState
-        float f = getGrowthSpeed(pState, pLevel, pPos);
-        if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
-          pLevel.setBlock(pPos, this.getStateForAge(i + 1), 2);
-          net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(pLevel, pPos, pState);
-        }
-      }
-    }
+    this.seedProvider = Suppliers.memoize(seedProvider::get);
   }
 
   @Override

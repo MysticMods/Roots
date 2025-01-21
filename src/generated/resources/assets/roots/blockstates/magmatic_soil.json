@@ -1,6 +1,18 @@
 {
   "variants": {
-    "": {
+    "soil_type=air": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "soil_type=earth": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "soil_type=fire": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "soil_type=none": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "soil_type=water": {
       "model": "roots:block/magmatic_soil"
     }
   }
