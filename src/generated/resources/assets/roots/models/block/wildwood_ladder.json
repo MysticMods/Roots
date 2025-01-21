@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/ladder",
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "roots:block/wildwood_ladder",
     "texture": "roots:block/wildwood_ladder"

@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/template_single_face",
+  "render_type": "minecraft:cutout",
   "textures": {
     "texture": "roots:block/bafflecap_block_outside"
   }

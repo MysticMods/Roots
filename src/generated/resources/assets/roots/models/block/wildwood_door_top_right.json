@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/door_top_right",
+  "render_type": "minecraft:translucent",
   "textures": {
     "bottom": "roots:block/wildwood_door_bottom",
     "top": "roots:block/wildwood_door_top"

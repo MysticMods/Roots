@@ -23,32 +23,13 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
+import net.minecraft.data.worldgen.biome.OverworldBiomes;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
   @SubscribeEvent
   public static void clientSetup(FMLClientSetupEvent event) {
     ModelHolder.init();
-
-    event.enqueueWork(() -> {
-      RenderType cutout = RenderType.cutoutMipped();
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.FEY_LIGHT.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.PYRE.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.CREEPING_GROVE_MOSS.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.BAFFLECAP.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_AUBERGINE.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_BAFFLECAP.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_STONEPETAL.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.STONEPETAL.get(), cutout);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_SAPLING.get(), cutout);
-      RenderType translucent = RenderType.translucent();
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_DOOR.get(), translucent);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_TRAPDOOR.get(), translucent);
-      RenderType cutout2 = RenderType.cutout();
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.HANGING_GROVE_MOSS.get(), cutout2);
-      ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILDWOOD_LADDER.get(), cutout2);
-    });
   }
 
   @SubscribeEvent

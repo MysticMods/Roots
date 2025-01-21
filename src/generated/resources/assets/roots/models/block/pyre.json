@@ -1,3 +1,4 @@
 {
-  "parent": "roots:block/complex/pyre"
+  "parent": "roots:block/complex/pyre",
+  "render_type": "minecraft:cutout"
 }
