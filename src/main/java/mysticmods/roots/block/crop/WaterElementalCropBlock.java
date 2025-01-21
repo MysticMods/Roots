@@ -30,11 +30,6 @@ public class WaterElementalCropBlock extends ElementalCropBlock implements Simpl
   }
 
   @Override
-  protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-    return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
-  }
-
-  @Override
   public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
     BlockState newState = pLevel.getBlockState(pPos);
     if (pLevel.getBlockState(pPos.below()).is(RootsTags.Blocks.ELEMENTAL_SOIL)) {
