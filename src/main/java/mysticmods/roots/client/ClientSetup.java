@@ -12,10 +12,9 @@ import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
+import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FastColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -67,8 +66,7 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void onColorHandlerItem(RegisterColorHandlersEvent.Item event) {
-    // OVerworldBiome.NORMAL_WATER_COLOR
-    event.register((stack, index) -> index == 1 ? 4159204 : -1, ModBlocks.UNENDING_BOWL.get());
+    event.register((stack, index) -> index == 1 ? AccessorMixinOverworldBiomes.getNormalWaterColor() : -1, ModBlocks.UNENDING_BOWL.get());
     event.register((stack, index) -> {
       // TODO:
       if (index != 0) {
@@ -126,7 +124,7 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onRecipeCategories (RegisterRecipeBookCategoriesEvent event) {
+  public static void onRecipeCategories(RegisterRecipeBookCategoriesEvent event) {
     event.registerRecipeCategoryFinder(ModRecipes.PYRE.get(), (o) -> RecipeBookCategories.UNKNOWN);
     event.registerRecipeCategoryFinder(ModRecipes.MORTAR.get(), (o) -> RecipeBookCategories.UNKNOWN);
     event.registerRecipeCategoryFinder(ModRecipes.GROVE.get(), (o) -> RecipeBookCategories.UNKNOWN);
