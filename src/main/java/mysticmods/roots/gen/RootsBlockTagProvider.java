@@ -137,13 +137,13 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     // Runed spruce log
     this.tag(RootsTags.Blocks.RUNED_SPRUCE_LOG).add(RUNED_SPRUCE_LOG.get());
 
-    this.tag(RootsTags.Blocks.ELEMENTAL_SOIL).add(ELEMENTAL_SOIL.get());
+    this.tag(RootsTags.Blocks.BASE_ELEMENTAL_SOIL).add(ELEMENTAL_SOIL.get());
     this.tag(RootsTags.Blocks.AIR_SOIL).add(CAELIC_SOIL.get());
     this.tag(RootsTags.Blocks.FIRE_SOIL).add(MAGMATIC_SOIL.get());
     this.tag(RootsTags.Blocks.WATER_SOIL).add(AQUEOUS_SOIL.get());
     this.tag(RootsTags.Blocks.EARTH_SOIL).add(TERRAN_SOIL.get());
     //noinspection unchecked
-    this.tag(RootsTags.Blocks.ELEMENTAL_SOIL).addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL);
+    this.tag(RootsTags.Blocks.ELEMENTAL_SOIL).addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL).addTag(RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.NYI).addTag(RootsTags.Blocks.SOILS).add(INCENSE_BURNER.get(), REINFORCED_PYRE.get(), UNENDING_BOWL.get());
     this.tag(RootsTags.Blocks.DISPLAY_PEDESTALS).add(DISPLAY_PEDESTAL.get());

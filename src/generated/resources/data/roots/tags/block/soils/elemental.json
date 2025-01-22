@@ -1,9 +1,9 @@
 {
   "values": [
-    "roots:elemental_soil",
     "#roots:soils/air",
     "#roots:soils/fire",
     "#roots:soils/water",
-    "#roots:soils/earth"
+    "#roots:soils/earth",
+    "#roots:soils/base"
   ]
 }

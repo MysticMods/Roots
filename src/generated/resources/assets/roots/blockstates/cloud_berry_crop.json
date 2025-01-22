@@ -3,6 +3,9 @@
     "age=0,elemental_type=air,soil_type=air": {
       "model": "roots:block/cloud_berry_0"
     },
+    "age=0,elemental_type=air,soil_type=default": {
+      "model": "roots:block/cloud_berry_0"
+    },
     "age=0,elemental_type=air,soil_type=earth": {
       "model": "roots:block/cloud_berry_0"
     },
@@ -15,7 +18,28 @@
     "age=0,elemental_type=air,soil_type=water": {
       "model": "roots:block/cloud_berry_0"
     },
+    "age=0,elemental_type=default,soil_type=air": {
+      "model": "roots:block/cloud_berry_0"
+    },
+    "age=0,elemental_type=default,soil_type=default": {
+      "model": "roots:block/cloud_berry_0"
+    },
+    "age=0,elemental_type=default,soil_type=earth": {
+      "model": "roots:block/cloud_berry_0"
+    },
+    "age=0,elemental_type=default,soil_type=fire": {
+      "model": "roots:block/cloud_berry_0"
+    },
+    "age=0,elemental_type=default,soil_type=none": {
+      "model": "roots:block/cloud_berry_0"
+    },
+    "age=0,elemental_type=default,soil_type=water": {
+      "model": "roots:block/cloud_berry_0"
+    },
     "age=0,elemental_type=earth,soil_type=air": {
+      "model": "roots:block/cloud_berry_0"
+    },
+    "age=0,elemental_type=earth,soil_type=default": {
       "model": "roots:block/cloud_berry_0"
     },
     "age=0,elemental_type=earth,soil_type=earth": {
@@ -33,6 +57,9 @@
     "age=0,elemental_type=fire,soil_type=air": {
       "model": "roots:block/cloud_berry_0"
     },
+    "age=0,elemental_type=fire,soil_type=default": {
+      "model": "roots:block/cloud_berry_0"
+    },
     "age=0,elemental_type=fire,soil_type=earth": {
       "model": "roots:block/cloud_berry_0"
     },
@@ -46,6 +73,9 @@
       "model": "roots:block/cloud_berry_0"
     },
     "age=0,elemental_type=none,soil_type=air": {
+      "model": "roots:block/cloud_berry_0"
+    },
+    "age=0,elemental_type=none,soil_type=default": {
       "model": "roots:block/cloud_berry_0"
     },
     "age=0,elemental_type=none,soil_type=earth": {
@@ -63,6 +93,9 @@
     "age=0,elemental_type=water,soil_type=air": {
       "model": "roots:block/cloud_berry_0"
     },
+    "age=0,elemental_type=water,soil_type=default": {
+      "model": "roots:block/cloud_berry_0"
+    },
     "age=0,elemental_type=water,soil_type=earth": {
       "model": "roots:block/cloud_berry_0"
     },
@@ -78,6 +111,9 @@
     "age=1,elemental_type=air,soil_type=air": {
       "model": "roots:block/cloud_berry_1"
     },
+    "age=1,elemental_type=air,soil_type=default": {
+      "model": "roots:block/cloud_berry_1"
+    },
     "age=1,elemental_type=air,soil_type=earth": {
       "model": "roots:block/cloud_berry_1"
     },
@@ -90,7 +126,28 @@
     "age=1,elemental_type=air,soil_type=water": {
       "model": "roots:block/cloud_berry_1"
     },
+    "age=1,elemental_type=default,soil_type=air": {
+      "model": "roots:block/cloud_berry_1"
+    },
+    "age=1,elemental_type=default,soil_type=default": {
+      "model": "roots:block/cloud_berry_1"
+    },
+    "age=1,elemental_type=default,soil_type=earth": {
+      "model": "roots:block/cloud_berry_1"
+    },
+    "age=1,elemental_type=default,soil_type=fire": {
+      "model": "roots:block/cloud_berry_1"
+    },
+    "age=1,elemental_type=default,soil_type=none": {
+      "model": "roots:block/cloud_berry_1"
+    },
+    "age=1,elemental_type=default,soil_type=water": {
+      "model": "roots:block/cloud_berry_1"
+    },
     "age=1,elemental_type=earth,soil_type=air": {
+      "model": "roots:block/cloud_berry_1"
+    },
+    "age=1,elemental_type=earth,soil_type=default": {
       "model": "roots:block/cloud_berry_1"
     },
     "age=1,elemental_type=earth,soil_type=earth": {
@@ -108,6 +165,9 @@
     "age=1,elemental_type=fire,soil_type=air": {
       "model": "roots:block/cloud_berry_1"
     },
+    "age=1,elemental_type=fire,soil_type=default": {
+      "model": "roots:block/cloud_berry_1"
+    },
     "age=1,elemental_type=fire,soil_type=earth": {
       "model": "roots:block/cloud_berry_1"
     },
@@ -121,6 +181,9 @@
       "model": "roots:block/cloud_berry_1"
     },
     "age=1,elemental_type=none,soil_type=air": {
+      "model": "roots:block/cloud_berry_1"
+    },
+    "age=1,elemental_type=none,soil_type=default": {
       "model": "roots:block/cloud_berry_1"
     },
     "age=1,elemental_type=none,soil_type=earth": {
@@ -138,6 +201,9 @@
     "age=1,elemental_type=water,soil_type=air": {
       "model": "roots:block/cloud_berry_1"
     },
+    "age=1,elemental_type=water,soil_type=default": {
+      "model": "roots:block/cloud_berry_1"
+    },
     "age=1,elemental_type=water,soil_type=earth": {
       "model": "roots:block/cloud_berry_1"
     },
@@ -153,6 +219,9 @@
     "age=2,elemental_type=air,soil_type=air": {
       "model": "roots:block/cloud_berry_2"
     },
+    "age=2,elemental_type=air,soil_type=default": {
+      "model": "roots:block/cloud_berry_2"
+    },
     "age=2,elemental_type=air,soil_type=earth": {
       "model": "roots:block/cloud_berry_2"
     },
@@ -165,7 +234,28 @@
     "age=2,elemental_type=air,soil_type=water": {
       "model": "roots:block/cloud_berry_2"
     },
+    "age=2,elemental_type=default,soil_type=air": {
+      "model": "roots:block/cloud_berry_2"
+    },
+    "age=2,elemental_type=default,soil_type=default": {
+      "model": "roots:block/cloud_berry_2"
+    },
+    "age=2,elemental_type=default,soil_type=earth": {
+      "model": "roots:block/cloud_berry_2"
+    },
+    "age=2,elemental_type=default,soil_type=fire": {
+      "model": "roots:block/cloud_berry_2"
+    },
+    "age=2,elemental_type=default,soil_type=none": {
+      "model": "roots:block/cloud_berry_2"
+    },
+    "age=2,elemental_type=default,soil_type=water": {
+      "model": "roots:block/cloud_berry_2"
+    },
     "age=2,elemental_type=earth,soil_type=air": {
+      "model": "roots:block/cloud_berry_2"
+    },
+    "age=2,elemental_type=earth,soil_type=default": {
       "model": "roots:block/cloud_berry_2"
     },
     "age=2,elemental_type=earth,soil_type=earth": {
@@ -183,6 +273,9 @@
     "age=2,elemental_type=fire,soil_type=air": {
       "model": "roots:block/cloud_berry_2"
     },
+    "age=2,elemental_type=fire,soil_type=default": {
+      "model": "roots:block/cloud_berry_2"
+    },
     "age=2,elemental_type=fire,soil_type=earth": {
       "model": "roots:block/cloud_berry_2"
     },
@@ -196,6 +289,9 @@
       "model": "roots:block/cloud_berry_2"
     },
     "age=2,elemental_type=none,soil_type=air": {
+      "model": "roots:block/cloud_berry_2"
+    },
+    "age=2,elemental_type=none,soil_type=default": {
       "model": "roots:block/cloud_berry_2"
     },
     "age=2,elemental_type=none,soil_type=earth": {
@@ -213,6 +309,9 @@
     "age=2,elemental_type=water,soil_type=air": {
       "model": "roots:block/cloud_berry_2"
     },
+    "age=2,elemental_type=water,soil_type=default": {
+      "model": "roots:block/cloud_berry_2"
+    },
     "age=2,elemental_type=water,soil_type=earth": {
       "model": "roots:block/cloud_berry_2"
     },
@@ -228,6 +327,9 @@
     "age=3,elemental_type=air,soil_type=air": {
       "model": "roots:block/cloud_berry_3"
     },
+    "age=3,elemental_type=air,soil_type=default": {
+      "model": "roots:block/cloud_berry_3"
+    },
     "age=3,elemental_type=air,soil_type=earth": {
       "model": "roots:block/cloud_berry_3"
     },
@@ -240,7 +342,28 @@
     "age=3,elemental_type=air,soil_type=water": {
       "model": "roots:block/cloud_berry_3"
     },
+    "age=3,elemental_type=default,soil_type=air": {
+      "model": "roots:block/cloud_berry_3"
+    },
+    "age=3,elemental_type=default,soil_type=default": {
+      "model": "roots:block/cloud_berry_3"
+    },
+    "age=3,elemental_type=default,soil_type=earth": {
+      "model": "roots:block/cloud_berry_3"
+    },
+    "age=3,elemental_type=default,soil_type=fire": {
+      "model": "roots:block/cloud_berry_3"
+    },
+    "age=3,elemental_type=default,soil_type=none": {
+      "model": "roots:block/cloud_berry_3"
+    },
+    "age=3,elemental_type=default,soil_type=water": {
+      "model": "roots:block/cloud_berry_3"
+    },
     "age=3,elemental_type=earth,soil_type=air": {
+      "model": "roots:block/cloud_berry_3"
+    },
+    "age=3,elemental_type=earth,soil_type=default": {
       "model": "roots:block/cloud_berry_3"
     },
     "age=3,elemental_type=earth,soil_type=earth": {
@@ -258,6 +381,9 @@
     "age=3,elemental_type=fire,soil_type=air": {
       "model": "roots:block/cloud_berry_3"
     },
+    "age=3,elemental_type=fire,soil_type=default": {
+      "model": "roots:block/cloud_berry_3"
+    },
     "age=3,elemental_type=fire,soil_type=earth": {
       "model": "roots:block/cloud_berry_3"
     },
@@ -273,6 +399,9 @@
     "age=3,elemental_type=none,soil_type=air": {
       "model": "roots:block/cloud_berry_3"
     },
+    "age=3,elemental_type=none,soil_type=default": {
+      "model": "roots:block/cloud_berry_3"
+    },
     "age=3,elemental_type=none,soil_type=earth": {
       "model": "roots:block/cloud_berry_3"
     },
@@ -286,6 +415,9 @@
       "model": "roots:block/cloud_berry_3"
     },
     "age=3,elemental_type=water,soil_type=air": {
+      "model": "roots:block/cloud_berry_3"
+    },
+    "age=3,elemental_type=water,soil_type=default": {
       "model": "roots:block/cloud_berry_3"
     },
     "age=3,elemental_type=water,soil_type=earth": {

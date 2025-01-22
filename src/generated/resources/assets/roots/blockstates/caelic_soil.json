@@ -3,6 +3,9 @@
     "soil_type=air": {
       "model": "roots:block/caelic_soil"
     },
+    "soil_type=default": {
+      "model": "roots:block/caelic_soil"
+    },
     "soil_type=earth": {
       "model": "roots:block/caelic_soil"
     },

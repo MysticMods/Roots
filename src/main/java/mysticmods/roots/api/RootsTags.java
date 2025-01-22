@@ -54,6 +54,7 @@ public class RootsTags {
     public static final TagKey<Block> AIR_SOIL = modTag("soils/air");
     public static final TagKey<Block> EARTH_SOIL = modTag("soils/earth");
     public static final TagKey<Block> FIRE_SOIL = modTag("soils/fire");
+    public static final TagKey<Block> BASE_ELEMENTAL_SOIL = modTag("soils/base");
     public static final TagKey<Block> ELEMENTAL_SOIL = modTag("soils/elemental");
 
     public static final TagKey<Block> RUNED_OBSIDIAN = modTag("runed_obsidian");
@@ -263,6 +264,7 @@ public class RootsTags {
     public static final TagKey<Item> AIR_SOIL = modTag("soils/air");
     public static final TagKey<Item> EARTH_SOIL = modTag("soils/earth");
     public static final TagKey<Item> FIRE_SOIL = modTag("soils/fire");
+    public static final TagKey<Item> BASE_ELEMENTAL_SOIL = modTag("soils/base");
     public static final TagKey<Item> ELEMENTAL_SOIL = modTag("soils/elemental");
     public static final TagKey<Item> RUNED_OBSIDIAN = modTag("runed_obsidian");
     public static final TagKey<Item> RUNESTONE = modTag("runestone");

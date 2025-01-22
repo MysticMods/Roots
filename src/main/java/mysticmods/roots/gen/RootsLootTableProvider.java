@@ -4,6 +4,8 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.block.BaseBlocks;
 import mysticmods.roots.block.CreepingGroveMossBlock;
 import mysticmods.roots.block.WildRootsBlock;
+import mysticmods.roots.block.crop.ElementalCropBlock;
+import mysticmods.roots.block.crop.ElementalType;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModItems;
@@ -20,6 +22,7 @@ import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -330,10 +333,10 @@ public class RootsLootTableProvider {
       dropSelf(ModBlocks.UNENDING_BOWL.get());
       dropSelf(ModBlocks.BAFFLECAP.get());
       addCropDrops(ModBlocks.WILDROOT_CROP.get(), ModItems.WILDROOT.get(), BeetrootBlock.AGE);
-      addCropDrops(ModBlocks.CLOUD_BERRY_CROP.get(), ModItems.CLOUD_BERRY.get(), BeetrootBlock.AGE);
-      addCropDrops(ModBlocks.DEWGONIA_CROP.get(), ModItems.DEWGONIA.get(), BeetrootBlock.AGE);
-      addCropDrops(ModBlocks.INFERNO_BULB_CROP.get(), ModItems.INFERNO_BULB.get(), BeetrootBlock.AGE);
-      addCropDrops(ModBlocks.STALICRIPE_CROP.get(), ModItems.STALICRIPE.get(), BeetrootBlock.AGE);
+      addElementalCropDrops(ModBlocks.CLOUD_BERRY_CROP.get(), ModItems.CLOUD_BERRY.get(), ElementalType.AIR);
+      addElementalCropDrops(ModBlocks.DEWGONIA_CROP.get(), ModItems.DEWGONIA.get(), ElementalType.WATER);
+      addElementalCropDrops(ModBlocks.INFERNO_BULB_CROP.get(), ModItems.INFERNO_BULB.get(), ElementalType.FIRE);
+      addElementalCropDrops(ModBlocks.STALICRIPE_CROP.get(), ModItems.STALICRIPE.get(), ElementalType.EARTH);
       addCropDrops(ModBlocks.MOONGLOW_CROP.get(), ModItems.MOONGLOW.get(), ModItems.MOONGLOW_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
       addCropDrops(ModBlocks.PERESKIA_CROP.get(), ModItems.PERESKIA.get(), ModItems.PERESKIA_BULB.get(), BaseBlocks.SeededCropsBlock.AGE);
       addCropDrops(ModBlocks.SPIRITLEAF_CROP.get(), ModItems.SPIRITLEAF.get(), ModItems.SPIRITLEAF_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
@@ -348,6 +351,50 @@ public class RootsLootTableProvider {
       add(ModBlocks.POTTED_BAFFLECAP.get(), createPotFlowerItemTable(ModBlocks.BAFFLECAP.get()));
       add(ModBlocks.POTTED_STONEPETAL.get(), createPotFlowerItemTable(ModBlocks.STONEPETAL.get()));
       add(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get()));
+    }
+
+    protected void addElementalCropDrops (Block cropBlock, Item cropItem, ElementalType matchingSoil) {
+      IntegerProperty ageProperty = ElementalCropBlock.AGE;
+
+      HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+
+
+      // Crop not grown
+      LootItemCondition.Builder cropIsGrownCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+          .setProperties(StatePropertiesPredicate.Builder.properties()
+              .hasProperty(ageProperty, Collections.max(ageProperty.getPossibleValues())));
+     LootItemCondition.Builder normalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+         .setProperties(StatePropertiesPredicate.Builder.properties()
+             .hasProperty(ElementalType.SOIL_TYPE, ElementalType.NONE));
+     LootItemCondition.Builder plainElementalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+         .setProperties(StatePropertiesPredicate.Builder.properties()
+             .hasProperty(ElementalType.SOIL_TYPE, ElementalType.DEFAULT));
+     LootItemCondition.Builder matchingElementalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+         .setProperties(StatePropertiesPredicate.Builder.properties()
+             .hasProperty(ElementalType.SOIL_TYPE, matchingSoil));
+
+      LootItemConditionalFunction.Builder<?> fortune = ApplyBonusCount.addBonusBinomialDistributionCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.2714286F, 3);
+
+      // No elemental soil: 1 normal drop with a 1/2 chance of a second
+      // Base elemental soil: 2 normal drop with a 1/2 chance of a second
+      // Matching elemental soil: 3 normal drop with a 1/2 chance of a second
+      add(cropBlock, this.applyExplosionDecay(
+          cropBlock,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool()
+                  .add(LootItem.lootTableItem(cropItem))) // Default 1
+              .withPool(
+                  LootPool.lootPool()
+                      .when(cropIsGrownCondition)
+                      .add(LootItem.lootTableItem(cropItem).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))).apply(fortune).when(matchingElementalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // Matching soil default 2
+                      .add(LootItem.lootTableItem(cropItem).apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune).when(matchingElementalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // Matching soil extra chance
+                      .add(LootItem.lootTableItem(cropItem).apply(fortune).when(plainElementalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // Base soil default 1
+                      .add(LootItem.lootTableItem(cropItem).apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune).when(plainElementalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // Base soil extra chance
+                      .add(LootItem.lootTableItem(cropItem).apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune).when(normalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // No soil default 2
+
+              )));
+
+
     }
 
     protected void addCropDrops(Block cropBlock, Item grownCropItem, Item seedsItem, IntegerProperty ageProperty) {
@@ -383,9 +430,7 @@ public class RootsLootTableProvider {
           cropBlock,
           LootTable.lootTable()
               .withPool(LootPool.lootPool()
-                  .add(LootItem.lootTableItem(grownCropItem)
-                      .when(dropGrownCropCondition)
-                      .otherwise(LootItem.lootTableItem(grownCropItem))))
+                  .add(LootItem.lootTableItem(grownCropItem)))
               .withPool(
                   LootPool.lootPool()
                       .when(dropGrownCropCondition)

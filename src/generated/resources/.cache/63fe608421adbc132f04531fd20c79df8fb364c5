@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-20T19:39:47.1880749	Roots Item Tags
+// 1.21.1	2025-01-22T16:16:31.9580634	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -104,8 +104,9 @@ a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/item/seeds/pereskia.jso
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/skipped_foods.json
 0e0d53445f0b4eae177c5541e63c5f8e165ebd7b data/roots/tags/item/soils.json
 4425285b1f5c8c681722ad2e252862e4ef08107b data/roots/tags/item/soils/air.json
+029758e23f40cafe7ad14026e097a11645841307 data/roots/tags/item/soils/base.json
 35c6e38ebf4bff86f3ce23c782011bd517475465 data/roots/tags/item/soils/earth.json
-5aad285ea0e7ca03c0672cba07d7cf84182b094e data/roots/tags/item/soils/elemental.json
+56557294f6a5c85d9b4eb4d23a781ed386a9f56c data/roots/tags/item/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/item/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/item/soils/water.json
 57b7b83328a785fad075c2c7377883654e583c09 data/roots/tags/item/stonelike.json

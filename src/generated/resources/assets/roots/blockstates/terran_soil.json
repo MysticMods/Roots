@@ -3,6 +3,9 @@
     "soil_type=air": {
       "model": "roots:block/terran_soil"
     },
+    "soil_type=default": {
+      "model": "roots:block/terran_soil"
+    },
     "soil_type=earth": {
       "model": "roots:block/terran_soil"
     },

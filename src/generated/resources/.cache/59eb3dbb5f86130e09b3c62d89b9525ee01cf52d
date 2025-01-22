@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-13T12:21:15.6408437	Loot Tables
+// 1.21.1	2025-01-22T16:16:31.9626529	Loot Tables
 e8472c417eb64cb3ad295f65ece125190c4620e0 data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -7,11 +7,11 @@ d53d055fadc939e4d850a6e995abee2b8d1e6705 data/roots/loot_table/blocks/bafflecap.
 f01e7c0ac3a5c06cf21bbd8832dc1ae15a7e879d data/roots/loot_table/blocks/caelic_soil.json
 1051b692eaf9acd79b5da32eedda56f941895122 data/roots/loot_table/blocks/chiseled_runed_obsidian.json
 3c5eecd523903a3c801ea4f7aaf0707ebb2dee65 data/roots/loot_table/blocks/chiseled_runestone.json
-5d9a109de5fc3b4f66e6beeca48d88454f8fee1b data/roots/loot_table/blocks/cloud_berry_crop.json
+1d78ecabdd192d4490bf83d7c3cb046137f0e109 data/roots/loot_table/blocks/cloud_berry_crop.json
 bf21b73e3fe3075ef156f385c1638e98453f9543 data/roots/loot_table/blocks/creeping_grove_moss.json
 82d05fc580137b4b8fefb00359f8cb1666e3d024 data/roots/loot_table/blocks/decorative_pyre.json
 bf78417bc47bdc04c69bbc23edaf51f08a6a5407 data/roots/loot_table/blocks/deepslate_silver_ore.json
-e8431d8e92bfce8bb7e8d23ac44cd0c75c9dc3f3 data/roots/loot_table/blocks/dewgonia_crop.json
+80fa559bde56c5672c25cda36e10a7d744d29307 data/roots/loot_table/blocks/dewgonia_crop.json
 5acba4c947b6adc59fc8e4ae62c527d6fdc4dceb data/roots/loot_table/blocks/display_pedestal.json
 9d3da56cba4852b5836167257a652a731e1f8622 data/roots/loot_table/blocks/elemental_soil.json
 5b8eee6c109061d6e2254ac8ced029a2b196f1d7 data/roots/loot_table/blocks/granite_quartz_ore.json
@@ -19,7 +19,7 @@ e8431d8e92bfce8bb7e8d23ac44cd0c75c9dc3f3 data/roots/loot_table/blocks/dewgonia_c
 aec326e13de43dbe71001ba65159a31aa94bdb56 data/roots/loot_table/blocks/grove_pedestal.json
 249598b59242ad37ae8c6ce4bd3b699aabe45627 data/roots/loot_table/blocks/hanging_grove_moss.json
 a1ace70d28c4f526854daa5e5473f01b307abe29 data/roots/loot_table/blocks/incense_burner.json
-736297929d00feba765b2c113355410c68621d6d data/roots/loot_table/blocks/inferno_bulb_crop.json
+6b2fddaba9192eb9e6ff14c2bc7fdaf45818aeaa data/roots/loot_table/blocks/inferno_bulb_crop.json
 2275b57388304fce478bb8705485e55b786ad25c data/roots/loot_table/blocks/magmatic_soil.json
 b7c0b6bd67d815f2799dae1e374f975f44368870 data/roots/loot_table/blocks/moonglow_crop.json
 fdd86adc88a3330b338aa69cd7dcf2d0d460019a data/roots/loot_table/blocks/mortar.json
@@ -87,7 +87,7 @@ f0915afde2f764629134925e34c0d86197cc9f3c data/roots/loot_table/blocks/runestone_
 7b24aadac281f8ca508f10f477b9c68e7968a750 data/roots/loot_table/blocks/silver_block.json
 eba1598aa129e6d70a946b4591784fef12c4fd08 data/roots/loot_table/blocks/silver_ore.json
 ba9adc4c9bb5d4af0583a28406319b0e6023d6f2 data/roots/loot_table/blocks/spiritleaf_crop.json
-edc2879438fb984454c823ba51a9cf2542d8ce92 data/roots/loot_table/blocks/stalicripe_crop.json
+acd6b94f3c006218213114e7f030034b7cc116f1 data/roots/loot_table/blocks/stalicripe_crop.json
 5a25c8dd9c9ffc5dd70ca7aeed6e3f20ede536c2 data/roots/loot_table/blocks/stonepetal.json
 11f0af141e00ecfe2120db3ac6009a32f30f1818 data/roots/loot_table/blocks/stripped_wildwood_log.json
 795303768f0584b22ed36e1a22f22059eb691edf data/roots/loot_table/blocks/stripped_wildwood_wood.json
@@ -95,7 +95,7 @@ a61a15020f054ac048ad0711fb575265698efd7b data/roots/loot_table/blocks/terran_soi
 bf1e65c8a2da41bc60327b96d24a202adb72dad0 data/roots/loot_table/blocks/thatch.json
 91d9bc6d7bc47222032e787cf046205037c81222 data/roots/loot_table/blocks/unending_bowl.json
 97015411597c4200676a563a530597d2a181b273 data/roots/loot_table/blocks/wildewheet_crop.json
-1ebd236aa4479ceed239cf703606b6ab558f6e93 data/roots/loot_table/blocks/wildroot_crop.json
+1992b45ad9921cb0704366ad6536e3e23d95680b data/roots/loot_table/blocks/wildroot_crop.json
 e5d9bb6e33c52a49cee489bb09839cc1aad150c6 data/roots/loot_table/blocks/wildwood_button.json
 496734585ddc13ef969cd9d0ed67dc79db0bc23e data/roots/loot_table/blocks/wildwood_door.json
 9ada6fddf5e7fba4297459b4f9f93d83e055d36a data/roots/loot_table/blocks/wildwood_fence.json

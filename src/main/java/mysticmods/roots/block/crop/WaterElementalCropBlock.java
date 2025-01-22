@@ -35,7 +35,7 @@ public class WaterElementalCropBlock extends ElementalCropBlock implements Simpl
     if (pLevel.getBlockState(pPos.below()).is(RootsTags.Blocks.ELEMENTAL_SOIL)) {
       return true;
     }
-    if (!newState.getValue(WATERLOGGED)) {
+    if (newState.hasProperty(WATERLOGGED) && !newState.getValue(WATERLOGGED)) {
       return false;
     }
     return super.canSurvive(pState, pLevel, pPos);

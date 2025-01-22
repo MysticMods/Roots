@@ -10,26 +10,8 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "roots:inferno_bulb_crop",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "age": "3"
-                  }
-                }
-              ],
-              "name": "roots:inferno_bulb"
-            },
-            {
-              "type": "minecraft:item",
-              "name": "roots:inferno_bulb"
-            }
-          ]
+          "type": "minecraft:item",
+          "name": "roots:inferno_bulb"
         }
       ],
       "rolls": 1.0
@@ -47,19 +29,196 @@
       ],
       "entries": [
         {
-          "type": "minecraft:item",
-          "functions": [
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "enchantment": "minecraft:fortune",
-              "formula": "minecraft:binomial_with_bonus_count",
-              "function": "minecraft:apply_bonus",
-              "parameters": {
-                "extra": 3,
-                "probability": 0.2714286
-              }
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "roots:inferno_bulb_crop",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "soil_type": "fire"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "add": false,
+                  "count": 2.0,
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "function": "minecraft:apply_bonus",
+                  "parameters": {
+                    "extra": 3,
+                    "probability": 0.2714286
+                  }
+                }
+              ],
+              "name": "roots:inferno_bulb"
+            },
+            {
+              "type": "minecraft:empty"
             }
-          ],
-          "name": "roots:inferno_bulb"
+          ]
+        },
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "roots:inferno_bulb_crop",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "soil_type": "fire"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 1.0,
+                    "min": 0.0
+                  },
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "function": "minecraft:apply_bonus",
+                  "parameters": {
+                    "extra": 3,
+                    "probability": 0.2714286
+                  }
+                }
+              ],
+              "name": "roots:inferno_bulb"
+            },
+            {
+              "type": "minecraft:empty"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "roots:inferno_bulb_crop",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "soil_type": "default"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "function": "minecraft:apply_bonus",
+                  "parameters": {
+                    "extra": 3,
+                    "probability": 0.2714286
+                  }
+                }
+              ],
+              "name": "roots:inferno_bulb"
+            },
+            {
+              "type": "minecraft:empty"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "roots:inferno_bulb_crop",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "soil_type": "default"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 1.0,
+                    "min": 0.0
+                  },
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "function": "minecraft:apply_bonus",
+                  "parameters": {
+                    "extra": 3,
+                    "probability": 0.2714286
+                  }
+                }
+              ],
+              "name": "roots:inferno_bulb"
+            },
+            {
+              "type": "minecraft:empty"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "roots:inferno_bulb_crop",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "soil_type": "none"
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 1.0,
+                    "min": 0.0
+                  },
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:binomial_with_bonus_count",
+                  "function": "minecraft:apply_bonus",
+                  "parameters": {
+                    "extra": 3,
+                    "probability": 0.2714286
+                  }
+                }
+              ],
+              "name": "roots:inferno_bulb"
+            },
+            {
+              "type": "minecraft:empty"
+            }
+          ]
         }
       ],
       "rolls": 1.0

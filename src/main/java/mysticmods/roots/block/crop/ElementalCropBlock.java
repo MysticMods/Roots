@@ -1,5 +1,6 @@
 package mysticmods.roots.block.crop;
 
+import mysticmods.roots.api.RootsTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -47,6 +48,10 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
     if (soilTag != null) {
       if (belowState.is(soilTag) && belowState.hasProperty(ElementalType.SOIL_TYPE)) {
         newState = newState.setValue(ElementalType.SOIL_TYPE, belowState.getValue(ElementalType.SOIL_TYPE));
+      } else if (belowState.is(RootsTags.Blocks.BASE_ELEMENTAL_SOIL)) {
+        newState = newState.setValue(ElementalType.SOIL_TYPE, ElementalType.DEFAULT);
+      } else {
+        newState = newState.setValue(ElementalType.SOIL_TYPE, ElementalType.NONE);
       }
     }
     return newState;

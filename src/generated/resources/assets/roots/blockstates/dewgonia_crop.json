@@ -6,6 +6,12 @@
     "age=0,elemental_type=air,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_0"
     },
+    "age=0,elemental_type=air,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=air,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
     "age=0,elemental_type=air,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_0"
     },
@@ -30,10 +36,52 @@
     "age=0,elemental_type=air,soil_type=water,waterlogged=true": {
       "model": "roots:block/dewgonia_0"
     },
+    "age=0,elemental_type=default,soil_type=air,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=earth,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=earth,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=fire,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=fire,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=none,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=none,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=water,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=default,soil_type=water,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
     "age=0,elemental_type=earth,soil_type=air,waterlogged=false": {
       "model": "roots:block/dewgonia_0"
     },
     "age=0,elemental_type=earth,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=earth,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=earth,soil_type=default,waterlogged=true": {
       "model": "roots:block/dewgonia_0"
     },
     "age=0,elemental_type=earth,soil_type=earth,waterlogged=false": {
@@ -66,6 +114,12 @@
     "age=0,elemental_type=fire,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_0"
     },
+    "age=0,elemental_type=fire,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=fire,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
     "age=0,elemental_type=fire,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_0"
     },
@@ -94,6 +148,12 @@
       "model": "roots:block/dewgonia_0"
     },
     "age=0,elemental_type=none,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=none,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=none,soil_type=default,waterlogged=true": {
       "model": "roots:block/dewgonia_0"
     },
     "age=0,elemental_type=none,soil_type=earth,waterlogged=false": {
@@ -126,6 +186,12 @@
     "age=0,elemental_type=water,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_0"
     },
+    "age=0,elemental_type=water,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_0"
+    },
+    "age=0,elemental_type=water,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_0"
+    },
     "age=0,elemental_type=water,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_0"
     },
@@ -156,6 +222,12 @@
     "age=1,elemental_type=air,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_1"
     },
+    "age=1,elemental_type=air,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=air,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
     "age=1,elemental_type=air,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_1"
     },
@@ -180,10 +252,52 @@
     "age=1,elemental_type=air,soil_type=water,waterlogged=true": {
       "model": "roots:block/dewgonia_1"
     },
+    "age=1,elemental_type=default,soil_type=air,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=earth,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=earth,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=fire,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=fire,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=none,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=none,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=water,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=default,soil_type=water,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
     "age=1,elemental_type=earth,soil_type=air,waterlogged=false": {
       "model": "roots:block/dewgonia_1"
     },
     "age=1,elemental_type=earth,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=earth,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=earth,soil_type=default,waterlogged=true": {
       "model": "roots:block/dewgonia_1"
     },
     "age=1,elemental_type=earth,soil_type=earth,waterlogged=false": {
@@ -216,6 +330,12 @@
     "age=1,elemental_type=fire,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_1"
     },
+    "age=1,elemental_type=fire,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=fire,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
     "age=1,elemental_type=fire,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_1"
     },
@@ -244,6 +364,12 @@
       "model": "roots:block/dewgonia_1"
     },
     "age=1,elemental_type=none,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=none,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=none,soil_type=default,waterlogged=true": {
       "model": "roots:block/dewgonia_1"
     },
     "age=1,elemental_type=none,soil_type=earth,waterlogged=false": {
@@ -276,6 +402,12 @@
     "age=1,elemental_type=water,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_1"
     },
+    "age=1,elemental_type=water,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_1"
+    },
+    "age=1,elemental_type=water,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_1"
+    },
     "age=1,elemental_type=water,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_1"
     },
@@ -306,6 +438,12 @@
     "age=2,elemental_type=air,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_2"
     },
+    "age=2,elemental_type=air,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=air,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
     "age=2,elemental_type=air,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_2"
     },
@@ -330,10 +468,52 @@
     "age=2,elemental_type=air,soil_type=water,waterlogged=true": {
       "model": "roots:block/dewgonia_2"
     },
+    "age=2,elemental_type=default,soil_type=air,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=earth,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=earth,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=fire,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=fire,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=none,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=none,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=water,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=default,soil_type=water,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
     "age=2,elemental_type=earth,soil_type=air,waterlogged=false": {
       "model": "roots:block/dewgonia_2"
     },
     "age=2,elemental_type=earth,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=earth,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=earth,soil_type=default,waterlogged=true": {
       "model": "roots:block/dewgonia_2"
     },
     "age=2,elemental_type=earth,soil_type=earth,waterlogged=false": {
@@ -366,6 +546,12 @@
     "age=2,elemental_type=fire,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_2"
     },
+    "age=2,elemental_type=fire,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=fire,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
     "age=2,elemental_type=fire,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_2"
     },
@@ -394,6 +580,12 @@
       "model": "roots:block/dewgonia_2"
     },
     "age=2,elemental_type=none,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=none,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=none,soil_type=default,waterlogged=true": {
       "model": "roots:block/dewgonia_2"
     },
     "age=2,elemental_type=none,soil_type=earth,waterlogged=false": {
@@ -426,6 +618,12 @@
     "age=2,elemental_type=water,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_2"
     },
+    "age=2,elemental_type=water,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_2"
+    },
+    "age=2,elemental_type=water,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_2"
+    },
     "age=2,elemental_type=water,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_2"
     },
@@ -456,6 +654,12 @@
     "age=3,elemental_type=air,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_3"
     },
+    "age=3,elemental_type=air,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=air,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
     "age=3,elemental_type=air,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_3"
     },
@@ -480,10 +684,52 @@
     "age=3,elemental_type=air,soil_type=water,waterlogged=true": {
       "model": "roots:block/dewgonia_3"
     },
+    "age=3,elemental_type=default,soil_type=air,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=earth,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=earth,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=fire,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=fire,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=none,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=none,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=water,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=default,soil_type=water,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
     "age=3,elemental_type=earth,soil_type=air,waterlogged=false": {
       "model": "roots:block/dewgonia_3"
     },
     "age=3,elemental_type=earth,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=earth,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=earth,soil_type=default,waterlogged=true": {
       "model": "roots:block/dewgonia_3"
     },
     "age=3,elemental_type=earth,soil_type=earth,waterlogged=false": {
@@ -516,6 +762,12 @@
     "age=3,elemental_type=fire,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_3"
     },
+    "age=3,elemental_type=fire,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=fire,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
     "age=3,elemental_type=fire,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_3"
     },
@@ -546,6 +798,12 @@
     "age=3,elemental_type=none,soil_type=air,waterlogged=true": {
       "model": "roots:block/dewgonia_3"
     },
+    "age=3,elemental_type=none,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=none,soil_type=default,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
     "age=3,elemental_type=none,soil_type=earth,waterlogged=false": {
       "model": "roots:block/dewgonia_3"
     },
@@ -574,6 +832,12 @@
       "model": "roots:block/dewgonia_3"
     },
     "age=3,elemental_type=water,soil_type=air,waterlogged=true": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=water,soil_type=default,waterlogged=false": {
+      "model": "roots:block/dewgonia_3"
+    },
+    "age=3,elemental_type=water,soil_type=default,waterlogged=true": {
       "model": "roots:block/dewgonia_3"
     },
     "age=3,elemental_type=water,soil_type=earth,waterlogged=false": {

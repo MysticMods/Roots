@@ -13,10 +13,11 @@ public enum ElementalType implements StringRepresentable {
   WATER(RootsTags.Blocks.WATER_SOIL),
   EARTH(RootsTags.Blocks.EARTH_SOIL),
   AIR(RootsTags.Blocks.AIR_SOIL),
+  DEFAULT(RootsTags.Blocks.BASE_ELEMENTAL_SOIL),
   NONE(null);
 
-  public static EnumProperty<ElementalType> ELEMENTAL_TYPE = EnumProperty.create("elemental_type", ElementalType.class);
-  public static EnumProperty<ElementalType> SOIL_TYPE = EnumProperty.create("soil_type", ElementalType.class);
+  public static final EnumProperty<ElementalType> ELEMENTAL_TYPE = EnumProperty.create("elemental_type", ElementalType.class);
+  public static final EnumProperty<ElementalType> SOIL_TYPE = EnumProperty.create("soil_type", ElementalType.class);
   private final TagKey<Block> tag;
   private final String name;
 
