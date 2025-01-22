@@ -6,6 +6,7 @@ import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 
 public class ClientNetworkHandlers {
@@ -59,5 +60,9 @@ public class ClientNetworkHandlers {
     }
 
     player.setData(ModAttachments.REPUTATION_STORAGE, storage);
+  }
+
+  public static void openLibrary (InteractionHand hand) {
+// TODO:
   }
 }

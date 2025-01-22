@@ -1,9 +1,6 @@
 package mysticmods.roots.network;
 
-import mysticmods.roots.network.client.ClientBoundGrantSyncPacket;
-import mysticmods.roots.network.client.ClientBoundHerbSyncPacket;
-import mysticmods.roots.network.client.ClientBoundReputationSyncPacket;
-import mysticmods.roots.network.client.ClientBoundSnapshotSyncPacket;
+import mysticmods.roots.network.client.*;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -28,10 +25,11 @@ public class PacketHandler {
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {
-    registrar.play(ClientBoundSnapshotSyncPacket.TYPE, ClientBoundSnapshotSyncPacket.CODEC);
-    registrar.play(ClientBoundReputationSyncPacket.TYPE, ClientBoundReputationSyncPacket.CODEC);
-    registrar.play(ClientBoundHerbSyncPacket.TYPE, ClientBoundHerbSyncPacket.CODEC);
-    registrar.play(ClientBoundGrantSyncPacket.TYPE, ClientBoundGrantSyncPacket.CODEC);
+    registrar.play(ClientboundSnapshotSyncPacket.TYPE, ClientboundSnapshotSyncPacket.CODEC);
+    registrar.play(ClientboundReputationSyncPacket.TYPE, ClientboundReputationSyncPacket.CODEC);
+    registrar.play(ClientboundHerbSyncPacket.TYPE, ClientboundHerbSyncPacket.CODEC);
+    registrar.play(ClientboundGrantSyncPacket.TYPE, ClientboundGrantSyncPacket.CODEC);
+    registrar.play(ClientboundOpenLibraryPacket.TYPE, ClientboundOpenLibraryPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {
