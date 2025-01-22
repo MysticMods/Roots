@@ -23,7 +23,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Block entity renderers
 // - Block opacity/light block/movement block
-// - What are these invalid recipe groups?
 
 @Mod(RootsAPI.MODID)
 public class Roots {
