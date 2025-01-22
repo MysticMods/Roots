@@ -17,8 +17,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Missing data maps?
 // - Armor material
 // - Runic tools
-// - Client setup:
-//    - Render layers
 // - Item properties -> Data Components
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Block entity renderers
