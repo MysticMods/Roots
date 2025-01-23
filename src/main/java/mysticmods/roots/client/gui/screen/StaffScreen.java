@@ -3,32 +3,41 @@ package mysticmods.roots.client.gui.screen;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.LibrarySpell;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.network.server.ServerboundSetSpellPacket;
+import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class StaffScreen extends RootsScreen {
   private final InteractionHand hand;
+  private final int inventorySlot;
   private ItemStack stack;
   private final List<StaffSpellButton> staffSpellButtons = new ArrayList<>();
   private final List<LibrarySpellButton> librarySpellButtons = new ArrayList<>();
   private int selectedStaff = -1;
   private int selectedLibrary = -1;
 
-  protected StaffScreen(InteractionHand hand) {
+  protected StaffScreen(InteractionHand hand, int inventorySlot) {
     super(Component.translatable("roots.gui.spell_library"));
     this.hand = hand;
+    this.inventorySlot = inventorySlot;
     this.width = 256;
     this.height = 192;
   }
@@ -41,28 +50,25 @@ public class StaffScreen extends RootsScreen {
     return this.stack.get(ModAttachments.SPELL_STORAGE);
   }
 
-  private void setStorage (SpellStorage newStorage) {
-    if (this.stack == null || this.stack.isEmpty()) {
-      return;
-    }
-
-    this.stack.set(ModAttachments.SPELL_STORAGE, newStorage);
+  private Supplier<ISpellInstance> staffSlot(final int index) {
+    return () -> getStorage() == null ? null : getStorage().getSpell(index);
   }
 
   @Override
   protected void init() {
     super.init();
-    this.stack = getMinecraft().player.getItemInHand(hand);
+    Player player = getMinecraft().player;
+    this.stack = hand == null ? player.getInventory().getItem(inventorySlot) : player.getItemInHand(hand);
     if (this.stack.isEmpty()) {
       throw new IllegalStateException("Staff screen opened with empty item in hand " + hand);
     }
     int index = 0;
     super.init();
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(0), index++, guiLeft + 2, guiTop + 33)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(1), index++, guiLeft + 7, guiTop + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(2), index++, guiLeft + 31, guiTop + 4)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(3), index++, guiLeft + 55, guiTop + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(4), index, guiLeft + 60, guiTop + 33)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(0), index++, guiLeft + 2, guiTop + 33)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(1), index++, guiLeft + 7, guiTop + 9)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(2), index++, guiLeft + 31, guiTop + 4)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(3), index++, guiLeft + 55, guiTop + 9)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(4), index, guiLeft + 60, guiTop + 33)));
 
     createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
   }
@@ -109,11 +115,9 @@ public class StaffScreen extends RootsScreen {
         }
         RootsAPI.LOG.info("Selected library spell {}", selectedLibrary);
       } else {
-        // Adding a new spell from the library
-        // Code duplication?
         RootsAPI.LOG.info("Tried to insert library spell {} into spell slot {}", selectedLibrary, selectedStaff);
         Spell newSpell = lButton.getSpell();
-        setStorage(getStorage().setSpell(selectedStaff, lButton.getSpell()));
+        PacketDistributor.sendToServer(new ServerboundSetSpellPacket(hand, inventorySlot, selectedStaff, newSpell));
         selectedLibrary = -1;
         selectedStaff = -1;
       }
@@ -124,17 +128,15 @@ public class StaffScreen extends RootsScreen {
       } else if (selectedStaff != -1) {
         // Swapping slots
         RootsAPI.LOG.info("Swapped staff slots {} and {}", selectedStaff, sButton.getId());
-        setStorage(getStorage().swapSlots(selectedStaff, sButton.getId()));
+        PacketDistributor.sendToServer(new ServerboundSwapSpellsPacket(hand, inventorySlot, selectedStaff, sButton.getId()));
         selectedStaff = -1;
       } else if (selectedLibrary != -1) {
-        // Adding a new spell from the library
-        // Code duplication?
         RootsAPI.LOG.info("Tried to insert library spell {} into spell slot {}", selectedLibrary, sButton.getId());
         LibrarySpellButton lButton = getSpellButton(selectedLibrary);
         if (lButton == null) {
           return;
         }
-        setStorage(getStorage().setSpell(sButton.getId(), lButton.getSpell()));
+        PacketDistributor.sendToServer(new ServerboundSetSpellPacket(hand, inventorySlot, sButton.getId(), lButton.getSpell()));
         selectedLibrary = -1;
         selectedStaff = -1;
       } else {
@@ -154,8 +156,8 @@ public class StaffScreen extends RootsScreen {
 
   // TODO: "Slot" changes
 
-  public static void open(InteractionHand hand) {
-    StaffScreen newScreen = new StaffScreen(hand);
+  public static void open(@Nullable InteractionHand hand, int inventorySlot) {
+    StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
     Minecraft.getInstance().setScreen(newScreen);
   }
 

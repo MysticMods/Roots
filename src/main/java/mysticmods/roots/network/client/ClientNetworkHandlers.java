@@ -4,11 +4,13 @@ import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
-import mysticmods.roots.client.ClientHooks;
+import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+
+import javax.annotation.Nullable;
 
 public class ClientNetworkHandlers {
   public static void setGrantStorage(GrantStorage storage) {
@@ -63,8 +65,7 @@ public class ClientNetworkHandlers {
     player.setData(ModAttachments.REPUTATION_STORAGE, storage);
   }
 
-  public static void openLibrary (InteractionHand hand) {
-    ClientHooks
-// TODO:
+  public static void openLibrary (@Nullable InteractionHand hand, int inventorySlot) {
+    StaffScreen.open(hand, inventorySlot);
   }
 }

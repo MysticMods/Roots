@@ -6,7 +6,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
-import mysticmods.roots.client.ItemCache;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
@@ -28,7 +27,7 @@ public class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
     builder.addSlot(RecipeIngredientRole.INPUT, 48, 57).addIngredients(recipe.getIngredients().get(4));
 
     if (recipe.getRitual() != null) {
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 100, 24).addItemStack(ItemCache.getCachedRitual(recipe.getRitual()));
+      builder.addSlot(RecipeIngredientRole.OUTPUT, 100, 24).addItemStack(recipe.getRitual().getIcon());
     } else {
       builder.addSlot(RecipeIngredientRole.OUTPUT, 100, 24).addItemStack(recipe.getResultItem(Minecraft.getInstance().getConnection().registryAccess()));
     }
