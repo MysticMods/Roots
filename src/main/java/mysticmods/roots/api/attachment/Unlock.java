@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -37,6 +38,10 @@ public interface Unlock<T> {
 
   Component getFailed ();
 
+  default ItemStack getIcon() {
+    return ItemStack.EMPTY;
+  }
+
   static SpellUnlock spell(Holder<Spell> value) {
     return new SpellUnlock(value);
   }
@@ -54,6 +59,11 @@ public interface Unlock<T> {
     @Override
     public UnlockType unlockType() {
       return TYPE;
+    }
+
+    @Override
+    public ItemStack getIcon() {
+      return value.value().getIcon();
     }
 
     @Override

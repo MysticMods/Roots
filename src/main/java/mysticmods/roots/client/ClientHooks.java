@@ -6,6 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
+// Todo: merge this into network hooks
+//       change to use an index of the item in the player's inventory
+//       or -1 for the off hand
 public class ClientHooks {
   public static void openGui(InteractionHand hand) {
     StaffScreen.open(hand);

@@ -3,6 +3,7 @@ package mysticmods.roots.client.gui.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +13,6 @@ import java.util.List;
 
 public abstract class RootsScreen extends Screen {
   protected int maxScale;
-  protected float scaleFactor;
   protected List<Component> tooltip;
   protected ItemStack tooltipItem = ItemStack.EMPTY;
   protected int guiLeft, guiTop, guiRight, guiBottom;
@@ -25,7 +25,6 @@ public abstract class RootsScreen extends Screen {
   protected void init() {
     super.init();
     maxScale = getMinecraft().getWindow().calculateScale(0, minecraft.isEnforceUnicode());
-    scaleFactor = 1;
     guiLeft = width / 2 - getBackgroundWidth() / 2;
     guiTop = height / 2 - getBackgroundHeight() / 2;
     guiRight = width / 2 + getBackgroundWidth() / 2;
@@ -59,11 +58,6 @@ public abstract class RootsScreen extends Screen {
     return false;
   }
 
-  public static void drawFromTexture(GuiGraphics graphics, ResourceLocation resourceLocation, int x, int y, int uOffset, int vOffset, int width, int height, int fileWidth, int fileHeight, PoseStack stack) {
-    /*    RenderSystem.setShaderTexture(0, resourceLocation);*/
-    graphics.blit(resourceLocation, x, y, uOffset, vOffset, width, height, fileWidth, fileHeight);
-  }
-
   public abstract ResourceLocation getBackground();
 
   public abstract int getBackgroundWidth();
@@ -72,35 +66,28 @@ public abstract class RootsScreen extends Screen {
 
   @Override
   public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
-    super.render(graphics, pMouseX, pMouseY, pPartialTick);
-    graphics.pose().pushPose();
-    if (scaleFactor != 1) {
-      graphics.pose().scale(scaleFactor, scaleFactor, scaleFactor);
-      pMouseX /= scaleFactor;
-      pMouseY /= scaleFactor;
-    }
-    drawScreenAfterScale(graphics, pMouseX, pMouseY, pPartialTick);
-    graphics.pose().popPose();
-  }
-
-  public void drawScreenAfterScale(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+    this.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     resetTooltip();
     PoseStack stack = graphics.pose();
-    // TODO: check integers
-    renderBackground(graphics, 0, 0, 0);
     stack.pushPose();
     stack.translate(guiLeft, guiTop, 0);
     RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-    drawBackground(graphics, mouseX, mouseY, partialTicks);
-    drawForeground(stack, mouseX, mouseY, partialTicks);
+    drawBackground(graphics, pMouseX, pMouseY, pPartialTick);
+    drawForeground(stack, pMouseX, pMouseY, pPartialTick);
     stack.popPose();
-    // TODO: ???
-    super.render(graphics, mouseX, mouseY, partialTicks);
-    drawTooltip(stack, mouseX, mouseY);
+    for (Renderable renderable : this.renderables) {
+      renderable.render(graphics, pMouseX, pMouseY, pPartialTick);
+    }
+    drawTooltip(stack, pMouseX, pMouseY);
   }
 
   public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-    drawFromTexture(graphics, getBackground(), 0, 0, 0, 0, getBackgroundWidth(), getBackgroundHeight(), getBackgroundWidth(), getBackgroundHeight(), graphics.pose());
+    ResourceLocation resourceLocation = getBackground();
+    int width1 = getBackgroundWidth();
+    int height1 = getBackgroundHeight();
+    int fileWidth = getBackgroundWidth();
+    int fileHeight = getBackgroundHeight();
+    graphics.blit(resourceLocation, 0, 0, 0, 0, width1, height1, fileWidth, fileHeight);
   }
 
   public void drawForeground(PoseStack stack, int mouseX, int mouseY, float partialTicks) {

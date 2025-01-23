@@ -13,7 +13,8 @@ import net.neoforged.fml.config.ModConfig;
 
 // TODO:
 // - The pestle is held wrongly
-// - JEI integration
+// - Extend JEI integration to different recipe types
+// - Level and player conditions for JEI
 // - Missing data maps?
 // - Armor material
 // - Runic tools
@@ -21,6 +22,9 @@ import net.neoforged.fml.config.ModConfig;
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Block entity renderers
 // - Block opacity/light block/movement block
+// - Juice recipes
+// - Blocks being washed away by water
+// - Adjust wild aubergine loot
 
 @Mod(RootsAPI.MODID)
 public class Roots {

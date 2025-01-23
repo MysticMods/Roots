@@ -1,21 +1,23 @@
-/*
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mysticmods.roots.api.recipe.RootsRecipe;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Supplier;
 
-public abstract class RootsRecipeBaseCategory<T extends RootsRecipeBase> implements IRecipeCategory<T> {
+public abstract class RootsRecipeBaseCategory<T extends RootsRecipe<?, ?>> implements IRecipeCategory<T> {
   private final int width;
   private final int height;
 
@@ -31,6 +33,11 @@ public abstract class RootsRecipeBaseCategory<T extends RootsRecipeBase> impleme
     this.background = helper.createDrawable(background, 0, 0, width, height);
     this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, icon.get());
     this.title = title;
+  }
+
+  @Override
+  public void draw(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
   }
 
   @Override
@@ -53,4 +60,3 @@ public abstract class RootsRecipeBaseCategory<T extends RootsRecipeBase> impleme
     return icon;
   }
 }
-*/

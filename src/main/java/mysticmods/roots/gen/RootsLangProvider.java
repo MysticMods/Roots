@@ -516,7 +516,6 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.RAW_SILVER_STORAGE, "Raw Silver Storage Blocks");
     add(RootsTags.Items.SILVER_NUGGET, "Silver Nuggets");
     add(RootsTags.Items.SILVER_ITEMS, "Silver Items");
-    add(RootsTags.Items.WILDWOOD_PLANKS, "Wildwood Planks");
     // TODO:
     add(RootsTags.Items.SKIPPED_FOODS, "Ignored foods");
     add(RootsTags.Items.DEER_FOOD, "Foor for Deer");

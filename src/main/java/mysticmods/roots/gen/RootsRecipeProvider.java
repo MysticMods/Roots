@@ -348,7 +348,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .pattern("XWX")
         .pattern("X X")
         .define('X', Tags.Items.RODS_WOODEN)
-        .define('W', RootsTags.Items.WILDWOOD_PLANKS)
+        .define('W', ModItems.WILDWOOD_PLANKS.get())
         .unlockedBy("has_wildwood_planks", has(ModBlocks.WILDWOOD_PLANKS.get()))
         .save(c);
 

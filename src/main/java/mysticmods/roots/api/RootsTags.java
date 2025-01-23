@@ -338,7 +338,6 @@ public class RootsTags {
     public static final TagKey<Item> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver");
     public static final TagKey<Item> SILVER_NUGGET = compatTag("nuggets/silver");
     public static final TagKey<Item> SILVER_ITEMS = modTag("silver_items");
-    public static final TagKey<Item> WILDWOOD_PLANKS = modTag("planks/wildwood");
     public static final TagKey<Item> SKIPPED_FOODS = modTag("skipped_foods");
 
     protected static TagKey<Item> modTag(String name) {

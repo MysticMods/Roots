@@ -2,7 +2,9 @@ package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.GrantStorage;
+import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.LibrarySpell;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.buttons.LibrarySpellButton;
 import mysticmods.roots.client.gui.buttons.StaffSpellButton;
 import mysticmods.roots.init.ModAttachments;
@@ -31,25 +33,36 @@ public class StaffScreen extends RootsScreen {
     this.height = 192;
   }
 
-/*  // TODO:
-  private OldSpellStorage getStorage() {
-    return null;
-  }*/
+  private SpellStorage getStorage () {
+    if (this.stack == null || this.stack.isEmpty() || !this.stack.has(ModAttachments.SPELL_STORAGE)) {
+      return null;
+    }
+
+    return this.stack.get(ModAttachments.SPELL_STORAGE);
+  }
+
+  private void setStorage (SpellStorage newStorage) {
+    if (this.stack == null || this.stack.isEmpty()) {
+      return;
+    }
+
+    this.stack.set(ModAttachments.SPELL_STORAGE, newStorage);
+  }
 
   @Override
   protected void init() {
     super.init();
-    this.stack = minecraft.player.getItemInHand(hand);
+    this.stack = getMinecraft().player.getItemInHand(hand);
     if (this.stack.isEmpty()) {
       throw new IllegalStateException("Staff screen opened with empty item in hand " + hand);
     }
     int index = 0;
     super.init();
-/*    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(0), index++, guiLeft + 2, guiTop + 33)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(1), index++, guiLeft + 7, guiTop + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(2), index++, guiLeft + 31, guiTop + 4)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(3), index++, guiLeft + 55, guiTop + 9)));
-    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage().getSpell(4), index++, guiLeft + 60, guiTop + 33)));*/
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(0), index++, guiLeft + 2, guiTop + 33)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(1), index++, guiLeft + 7, guiTop + 9)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(2), index++, guiLeft + 31, guiTop + 4)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(3), index++, guiLeft + 55, guiTop + 9)));
+    staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, () -> getStorage() == null ? null : getStorage().getSpell(4), index, guiLeft + 60, guiTop + 33)));
 
     createLibraryButtons(getMinecraft().player.getData(ModAttachments.GRANT_STORAGE));
   }
@@ -64,7 +77,7 @@ public class StaffScreen extends RootsScreen {
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 8; x++) {
         if (index < spellInfo.size()) {
-          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, spellInfo.get(index).spell()::value, index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, !spellInfo.get(index).granted(), null))); // TODO: null
+          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, spellInfo.get(index).spell()::value, index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, true)));
           index++;
         }
       }
@@ -79,6 +92,10 @@ public class StaffScreen extends RootsScreen {
   }
 
   public void buttonClicked(Button pButton) {
+    if (getStorage() == null) {
+      RootsAPI.LOG.error("Staff screen opened with empty item in hand {}", hand);
+      return;
+    }
     if (pButton instanceof LibrarySpellButton lButton) {
       if (lButton.isTransparent()) {
         return;
@@ -90,36 +107,34 @@ public class StaffScreen extends RootsScreen {
         } else {
           selectedLibrary = lButton.getId();
         }
-        RootsAPI.LOG.info("Selected library spell " + selectedLibrary);
+        RootsAPI.LOG.info("Selected library spell {}", selectedLibrary);
       } else {
         // Adding a new spell from the library
         // Code duplication?
-        RootsAPI.LOG.info("Tried to insert library spell " + selectedLibrary + " into spell slot " + selectedStaff);
-/*        ServerBoundLibraryToStaffPacket packet = new ServerBoundLibraryToStaffPacket(hand, selectedStaff, lButton.getSpell());
-        Networking.sendToServer(packet);*/
+        RootsAPI.LOG.info("Tried to insert library spell {} into spell slot {}", selectedLibrary, selectedStaff);
+        Spell newSpell = lButton.getSpell();
+        setStorage(getStorage().setSpell(selectedStaff, lButton.getSpell()));
         selectedLibrary = -1;
         selectedStaff = -1;
       }
     } else if (pButton instanceof StaffSpellButton sButton) {
       if (selectedStaff == sButton.getId()) {
         selectedStaff = -1;
-        RootsAPI.LOG.info("Unselected staff spell " + selectedStaff);
+        RootsAPI.LOG.info("Unselected staff spell {}", selectedStaff);
       } else if (selectedStaff != -1) {
         // Swapping slots
-        RootsAPI.LOG.info("Swapped staff slots " + selectedStaff + " and " + sButton.getId());
-/*        ServerBoundSwapStaffSlotsPacket packet = new ServerBoundSwapStaffSlotsPacket(hand, selectedStaff, sButton.getId());
-        Networking.sendToServer(packet);*/
+        RootsAPI.LOG.info("Swapped staff slots {} and {}", selectedStaff, sButton.getId());
+        setStorage(getStorage().swapSlots(selectedStaff, sButton.getId()));
         selectedStaff = -1;
       } else if (selectedLibrary != -1) {
         // Adding a new spell from the library
         // Code duplication?
-        RootsAPI.LOG.info("Tried to insert library spell " + selectedLibrary + " into spell slot " + sButton.getId());
+        RootsAPI.LOG.info("Tried to insert library spell {} into spell slot {}", selectedLibrary, sButton.getId());
         LibrarySpellButton lButton = getSpellButton(selectedLibrary);
         if (lButton == null) {
           return;
         }
-/*        ServerBoundLibraryToStaffPacket packet = new ServerBoundLibraryToStaffPacket(hand, sButton.getId(), lButton.getSpell());
-        Networking.sendToServer(packet);*/
+        setStorage(getStorage().setSpell(sButton.getId(), lButton.getSpell()));
         selectedLibrary = -1;
         selectedStaff = -1;
       } else {
@@ -167,7 +182,6 @@ public class StaffScreen extends RootsScreen {
 
   public void setStack(ItemStack stack) {
     this.stack = stack;
-/*    cachedStorage = null;*/
     RootsAPI.LOG.info("Updated stack");
   }
 }

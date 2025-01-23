@@ -3,14 +3,13 @@ package mysticmods.roots.client.gui;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.CachedSpellLike;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.function.Supplier;
 
 @FunctionalInterface
-public interface SpellSupplier<T extends SpellLike> extends Supplier<T>, CachedSpellLike {
+public interface SpellSupplier<T extends SpellLike> extends Supplier<T>, SpellLike {
   @Override
   default Spell asSpell() {
     T result = get();

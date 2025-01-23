@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import mysticmods.roots.api.RootsAPI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -20,6 +21,9 @@ public class RenderUtil {
   private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
 
   public static void renderItemAsIcon(ItemStack stack, PoseStack poseStack, int pX, int pY, int size, boolean transparent) {
+    if (stack.isEmpty()) {
+      RootsAPI.LOG.info("Attempted to render empty item stack {}", stack);
+    }
     Minecraft instance = Minecraft.getInstance();
     ItemRenderer itemRenderer = instance.getItemRenderer();
     BakedModel itemBakedModel = itemRenderer.getModel(stack, null, null, 0);
@@ -29,11 +33,11 @@ public class RenderUtil {
     RenderSystem.enableBlend();
     RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
     poseStack.pushPose();
-    poseStack.translate(pX, pY, 100.0F);
+    poseStack.translate(pX, pY, -1000.0F);
     poseStack.translate(8.0D, 8.0D, 0.0D);
     poseStack.scale(1.0F, -1.0F, 1.0F);
     poseStack.scale(size, size, size);
-    RenderSystem.applyModelViewMatrix();
+    //RenderSystem.applyModelViewMatrix();
     MultiBufferSource.BufferSource bufferSource = instance.renderBuffers().bufferSource();
     boolean flag = !itemBakedModel.usesBlockLight();
     if (flag) {

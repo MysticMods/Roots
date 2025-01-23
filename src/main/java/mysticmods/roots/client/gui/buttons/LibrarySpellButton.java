@@ -2,16 +2,17 @@ package mysticmods.roots.client.gui.buttons;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.gui.SpellSupplier;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
-public class LibrarySpellButton extends TypedButton<Spell, SpellSupplier<Spell>, StaffScreen> {
+import java.util.function.Supplier;
+
+public class LibrarySpellButton extends TypedButton<Spell, StaffScreen> {
   private final boolean transparent;
 
-  public LibrarySpellButton(StaffScreen parentScreen, SpellSupplier<Spell> spellSupplier, int id, int pX, int pY, boolean transparent, CreateNarration narration) {
-    super(parentScreen, spellSupplier, id, pX, pY, 16, 16, parentScreen::buttonClicked, narration);
+  public LibrarySpellButton(StaffScreen parentScreen, Supplier<Spell> spellSupplier, int id, int pX, int pY, boolean transparent) {
+    super(parentScreen, spellSupplier, id, pX, pY, 16, 16, parentScreen::buttonClicked);
     this.transparent = transparent;
   }
 
@@ -30,7 +31,10 @@ public class LibrarySpellButton extends TypedButton<Spell, SpellSupplier<Spell>,
   public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     super.renderWidget(graphics, pMouseX, pMouseY, pPartialTick);
     if (parentScreen.isSelected(this) && visible) {
-      StaffScreen.drawFromTexture(graphics, highlight, getX() - 1, getY() - 1, 0, 0, 18, 18, 18, 18, graphics.pose()); // TODO: is htis the correct use of pose?
+      // TODO: is htis the correct use of pose?
+      int x = getX() - 1;
+      int y = getY() - 1;
+      graphics.blit(highlight, x, y, 0, 0, 18, 18, 18, 18);
     }
   }
 }
