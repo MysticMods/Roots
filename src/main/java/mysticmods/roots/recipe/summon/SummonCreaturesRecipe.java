@@ -1,47 +1,45 @@
-/*
 package mysticmods.roots.recipe.summon;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import mysticmods.roots.api.registry.RootsRegistries;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.recipe.BaseRecipeData;
+import mysticmods.roots.api.recipe.RootsTileRecipe;
+import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
-import net.minecraft.core.NonNullList;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.util.GsonHelper;
+import mysticmods.roots.recipe.pyre.PyreRecipe;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 
-
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-
 // TODO: However this is going to work
-public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCrafting>, net.minecraft.world.item.crafting.Recipe<SummonCreaturesCrafting> {
-  protected final NonNullList<Ingredient> ingredients;
-  protected final EntityType<?> result;
-  protected final ResourceLocation recipeId;
+public class SummonCreaturesRecipe extends RootsTileRecipe<SummonCreaturesInventory, PyreBlockEntity, SummonCreaturesCrafting> {
+  public static MapCodec<SummonCreaturesRecipe> CODEC = RecordCodecBuilder.mapCodec(
+      instance -> instance.group(
+          BaseRecipeData.CODEC.forGetter(SummonCreaturesRecipe::getData),
+          BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("result").forGetter(SummonCreaturesRecipe::getEntity)
+      ).apply(instance, SummonCreaturesRecipe::new)
+  );
+  public static StreamCodec<RegistryFriendlyByteBuf, SummonCreaturesRecipe> STREAM_CODEC = StreamCodec.composite(
+      BaseRecipeData.STREAM_CODEC, SummonCreaturesRecipe::getData,
+      ByteBufCodecs.registry(Registries.ENTITY_TYPE), SummonCreaturesRecipe::getEntity,
+      SummonCreaturesRecipe::new
+  );
 
-  public SummonCreaturesRecipe(NonNullList<Ingredient> ingredients, EntityType<?> result, ResourceLocation recipeId) {
-    this.ingredients = ingredients;
+  private final EntityType<?> result;
+
+  public SummonCreaturesRecipe(BaseRecipeData data, EntityType<?> result) {
+    super(data);
     this.result = result;
-    this.recipeId = recipeId;
   }
 
-  public EntityType<?> getResultEntity() {
+  public EntityType<?> getEntity() {
     return result;
   }
 
@@ -49,21 +47,6 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
   @Override
   public boolean matches(SummonCreaturesCrafting pInv, Level pLevel) {
     return false;
-  }
-
-  @Override
-  public ItemStack assemble(SummonCreaturesCrafting pInv) {
-    return ItemStack.EMPTY;
-  }
-
-  @Override
-  public ItemStack getResultItem() {
-    return ItemStack.EMPTY;
-  }
-
-  @Override
-  public ResourceLocation getId() {
-    return recipeId;
   }
 
   @Override
@@ -75,4 +58,42 @@ public class SummonCreaturesRecipe implements IBoundlessRecipe<SummonCreaturesCr
   public RecipeType<?> getType() {
     return ModRecipes.SUMMON_CREATURES.get();
   }
-}*/
+
+  public static class Serializer implements RecipeSerializer<SummonCreaturesRecipe> {
+
+    @Override
+    public MapCodec<SummonCreaturesRecipe> codec() {
+      return CODEC;
+    }
+
+    @Override
+    public StreamCodec<RegistryFriendlyByteBuf, SummonCreaturesRecipe> streamCodec() {
+      return STREAM_CODEC;
+    }
+  }
+
+  public static class Builder {
+    private EntityType<?> entity;
+
+    protected Builder () {
+
+    }
+
+    public Builder entity(EntityType<?> entity) {
+      this.entity = entity;
+      return this;
+    }
+
+    public SummonCreaturesRecipe build (BaseRecipeData data) {
+      return new SummonCreaturesRecipe(data, entity);
+    }
+
+    public SummonCreaturesRecipe build (BaseRecipeData.Builder data) {
+      return build(data.build());
+    }
+
+    public static Builder create () {
+      return new Builder();
+    }
+  }
+}
