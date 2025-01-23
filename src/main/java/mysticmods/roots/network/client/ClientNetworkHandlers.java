@@ -4,6 +4,7 @@ import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.client.ClientHooks;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
@@ -63,6 +64,7 @@ public class ClientNetworkHandlers {
   }
 
   public static void openLibrary (InteractionHand hand) {
+    ClientHooks
 // TODO:
   }
 }

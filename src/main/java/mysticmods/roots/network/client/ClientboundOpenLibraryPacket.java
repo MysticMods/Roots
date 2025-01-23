@@ -10,9 +10,21 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.InteractionHand;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ClientboundOpenLibraryPacket(InteractionHand hand) implements IRootsPacket {
+import javax.annotation.Nullable;
+import java.util.Optional;
+
+public record ClientboundOpenLibraryPacket(@Nullable InteractionHand hand, int inventorySlot) implements IRootsPacket {
   public static final CustomPacketPayload.Type<ClientboundOpenLibraryPacket> TYPE = new Type<>(RootsAPI.rl("client_bound_open_library"));
-  public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundOpenLibraryPacket> CODEC = StreamCodec.composite(ExtraStreamCodecs.INTERACTION_HAND_CODEC, ClientboundOpenLibraryPacket::hand, ClientboundOpenLibraryPacket::new);
+  public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundOpenLibraryPacket> CODEC = StreamCodec.composite(ByteBufCodecs.optional(ExtraStreamCodecs.INTERACTION_HAND_CODEC), o -> Optional.ofNullable(o.hand), ByteBufCodecs.VAR_INT, o -> o.inventorySlot, ClientboundOpenLibraryPacket::new);
+
+  @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+  public ClientboundOpenLibraryPacket (Optional<InteractionHand> hand, int inventorySlot) {
+    this(hand.orElse(null), inventorySlot);
+  }
+
+  public ClientboundOpenLibraryPacket (InteractionHand hand) {
+    this(hand, -1);
+  }
 
   @Override
   public void handle(IPayloadContext context) {

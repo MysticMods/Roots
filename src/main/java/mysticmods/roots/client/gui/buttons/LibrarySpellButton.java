@@ -31,7 +31,6 @@ public class LibrarySpellButton extends TypedButton<Spell, StaffScreen> {
   public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     super.renderWidget(graphics, pMouseX, pMouseY, pPartialTick);
     if (parentScreen.isSelected(this) && visible) {
-      // TODO: is htis the correct use of pose?
       int x = getX() - 1;
       int y = getY() - 1;
       graphics.blit(highlight, x, y, 0, 0, 18, 18, 18, 18);

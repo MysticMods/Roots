@@ -227,6 +227,7 @@ public class ModItems {
   public static final DeferredHolder<Item, Item> PETALS = ITEMS.register("petals", () -> new Item(DEFAULT_64.get()));
   public static final DeferredHolder<Item, Item> RUNIC_DUST = ITEMS.register("runic_dust", () -> new Item(DEFAULT_64.get()));
   public static final DeferredHolder<Item, Item> STRANGE_OOZE = ITEMS.register("strange_ooze", () -> new Item(DEFAULT_64.get()));
+  //public static final DeferredHolder<Item, ArmorItem>
   /*  public static DeferredHolder<Item, AntlerHatItem> ANTLER_HAT = ITEMS.register("antler_hat", () -> new AntlerHatItem(DEFAULT));*/
     /* REGISTRATE.item("antler_hat", AntlerHatItem::new)
     .properties(o -> o.durability(399).rarity(Rarity.RARE))

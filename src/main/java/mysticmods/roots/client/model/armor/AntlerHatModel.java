@@ -1,5 +1,7 @@
 package mysticmods.roots.client.model.armor;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -34,7 +36,12 @@ public class AntlerHatModel extends ArmorModel {
     this.horn8_1 = this.horn6_1.getChild("horn8_1");
   }
 
-  // TODO:
+  @Override
+  public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+    super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
+  }
+
+// TODO:
 /*
   @Override
   public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {

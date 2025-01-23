@@ -3,6 +3,7 @@ package mysticmods.roots.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.network.client.ClientNetworkHandlers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -31,7 +32,7 @@ public class KeyHandler {
         }
       }
 
-      ClientHooks.openGui(hand);
+      ClientNetworkHandlers.openLibrary(hand);
     }
   }
 }

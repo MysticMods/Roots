@@ -7,7 +7,9 @@ import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.init.ModItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
@@ -17,6 +19,8 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderArmEvent;
+
+import java.util.Objects;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT)
 public class RenderArmEventHandler {
@@ -46,7 +50,7 @@ public class RenderArmEventHandler {
       }
 
       // TODO
-      VertexConsumer ivertexbuilder = null; // = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(chestStack.getItem().getArmorTexture(chestStack, player, EquipmentSlot.CHEST, null, false))), false, chestStack.hasFoil());
+      VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(chestStack.getItem().getArmorTexture(chestStack, player, EquipmentSlot.CHEST, null /* TODO */, false))), chestStack.hasFoil());
       if (event.getArm() == HumanoidArm.RIGHT) {
         chestModel.rightArmPose = HumanoidModel.ArmPose.EMPTY;
       } else {
