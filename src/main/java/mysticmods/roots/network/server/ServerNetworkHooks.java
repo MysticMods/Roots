@@ -1,4 +1,4 @@
-package mysticmods.roots.network;
+package mysticmods.roots.network.server;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
@@ -26,6 +26,7 @@ public class ServerNetworkHooks {
     if (existing == null) {
       return;
     }
+    // TODO: Validate that the player has the spell
     stack.set(ModAttachments.SPELL_STORAGE, existing.setSpell(staffSlot, spell));
   }
 
