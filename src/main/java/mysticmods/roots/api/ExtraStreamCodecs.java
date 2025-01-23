@@ -14,6 +14,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
@@ -68,6 +69,8 @@ public class ExtraStreamCodecs {
   public static final StreamCodec<ByteBuf, TagKey<Spell>> SPELL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.SPELLS);
   public static final StreamCodec<ByteBuf, TagKey<Grove>> GROVE_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.GROVES);
   public static final StreamCodec<ByteBuf, TagKey<Ritual>> RITUAL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.RITUALS);
+
+  public static final StreamCodec<ByteBuf, InteractionHand> INTERACTION_HAND_CODEC = ByteBufCodecs.VAR_INT.map(o -> o == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, Enum::ordinal);
 
   public static <T> StreamCodec<ByteBuf, TagKey<T>> tagStreamCodec(ResourceKey<Registry<T>> registry) {
     return ResourceLocation.STREAM_CODEC.map(o -> TagKey.create(registry, o), TagKey::location);
