@@ -8,6 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.HandlerThread;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 
@@ -17,7 +18,7 @@ public class PacketHandler {
   public PacketHandler(IEventBus modEventBus) {
     modEventBus.addListener(RegisterPayloadHandlersEvent.class,
         event -> {
-          PayloadRegistrar registrar = event.registrar(VERSION);
+          PayloadRegistrar registrar = event.registrar(VERSION).executesOn(HandlerThread.MAIN);
           registerClientToServer(new PacketRegistrar(registrar, true));
           registerServerToClient(new PacketRegistrar(registrar, false));
         });
