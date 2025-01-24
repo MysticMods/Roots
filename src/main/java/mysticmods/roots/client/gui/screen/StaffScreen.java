@@ -55,6 +55,17 @@ public class StaffScreen extends RootsScreen {
     return () -> getStorage() == null ? null : getStorage().getSpell(index);
   }
 
+  private Supplier<Spell> librarySlot(final int index) {
+    return () -> {
+      GrantStorage grants = getMinecraft().player.getData(ModAttachments.GRANT_STORAGE);
+      List<LibrarySpell> spellInfo = grants.getLibrarySpells();
+      if (index < 0 || index >= spellInfo.size()) {
+        return null;
+      }
+      return spellInfo.get(index).spell().value();
+    };
+  }
+
   @Override
   protected void init() {
     super.init();
@@ -79,7 +90,7 @@ public class StaffScreen extends RootsScreen {
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 8; x++) {
         if (index < spellInfo.size()) {
-          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, spellInfo.get(index).spell()::value, index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, true)));
+          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, librarySlot(index), index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, spellInfo.get(index).granted())));
           index++;
         }
       }
