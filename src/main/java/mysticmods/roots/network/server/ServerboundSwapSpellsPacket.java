@@ -39,7 +39,9 @@ public record ServerboundSwapSpellsPacket(@Nullable InteractionHand hand, int in
   @Override
 
   public void handle(IPayloadContext context) {
+    // TODO: We do actually need to resync the UI somehow
     ServerNetworkHooks.swapSpellSlots(context.player(), this.hand, this.inventorySlot, this.slot1, this.slot2);
+    context.player().inventoryMenu.sendAllDataToRemote();
   }
 
   @Override

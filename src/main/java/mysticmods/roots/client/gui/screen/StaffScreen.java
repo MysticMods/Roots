@@ -28,7 +28,6 @@ import java.util.function.Supplier;
 public class StaffScreen extends RootsScreen {
   private final InteractionHand hand;
   private final int inventorySlot;
-  private ItemStack stack;
   private final List<StaffSpellButton> staffSpellButtons = new ArrayList<>();
   private final List<LibrarySpellButton> librarySpellButtons = new ArrayList<>();
   private int selectedStaff = -1;
@@ -43,11 +42,13 @@ public class StaffScreen extends RootsScreen {
   }
 
   private SpellStorage getStorage () {
-    if (this.stack == null || this.stack.isEmpty() || !this.stack.has(ModAttachments.SPELL_STORAGE)) {
+    Player player = getMinecraft().player;
+    ItemStack stack = hand == null ? player.getInventory().getItem(inventorySlot) : player.getItemInHand(hand);
+    if (stack.isEmpty() || !stack.has(ModAttachments.SPELL_STORAGE)) {
       return null;
     }
 
-    return this.stack.get(ModAttachments.SPELL_STORAGE);
+    return stack.get(ModAttachments.SPELL_STORAGE);
   }
 
   private Supplier<ISpellInstance> staffSlot(final int index) {
@@ -57,13 +58,8 @@ public class StaffScreen extends RootsScreen {
   @Override
   protected void init() {
     super.init();
-    Player player = getMinecraft().player;
-    this.stack = hand == null ? player.getInventory().getItem(inventorySlot) : player.getItemInHand(hand);
-    if (this.stack.isEmpty()) {
-      throw new IllegalStateException("Staff screen opened with empty item in hand " + hand);
-    }
+
     int index = 0;
-    super.init();
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(0), index++, guiLeft + 2, guiTop + 33)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(1), index++, guiLeft + 7, guiTop + 9)));
     staffSpellButtons.add(addRenderableWidget(new StaffSpellButton(this, staffSlot(2), index++, guiLeft + 31, guiTop + 4)));
@@ -176,14 +172,5 @@ public class StaffScreen extends RootsScreen {
   @Override
   public int getBackgroundHeight() {
     return 192;
-  }
-
-  public ItemStack getStack() {
-    return stack;
-  }
-
-  public void setStack(ItemStack stack) {
-    this.stack = stack;
-    RootsAPI.LOG.info("Updated stack");
   }
 }

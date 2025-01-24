@@ -42,6 +42,7 @@ public record ServerboundSetSpellPacket(@Nullable InteractionHand hand, int inve
 
   public void handle(IPayloadContext context) {
     ServerNetworkHooks.setSpellSlot(context.player(), this.hand, this.inventorySlot, this.staffSlot, this.spell);
+    context.player().inventoryMenu.sendAllDataToRemote();
   }
 
   @Override
