@@ -9,14 +9,14 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.predicates.*;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
+import net.neoforged.neoforge.common.loot.CanItemPerformAbility;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -30,7 +30,7 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
         LootItemRandomChanceCondition.randomChance(chance).build(),
         LootItemBlockTagCondition.tag(RootsTags.Blocks.SHORT_GRASS),
         InvertedLootItemCondition.invert(
-            MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.TOOLS_SHEAR))
+            CanItemPerformAbility.canItemPerformAbility(ItemAbilities.SHEARS_DIG)
         ).build()
     };
   }
@@ -42,7 +42,7 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
         LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS)
             .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)).build(),
         InvertedLootItemCondition.invert(
-            MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.TOOLS_SHEAR))
+            CanItemPerformAbility.canItemPerformAbility(ItemAbilities.SHEARS_DIG)
         ).build()
     };
   }
