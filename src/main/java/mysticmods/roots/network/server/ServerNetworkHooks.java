@@ -44,6 +44,7 @@ public class ServerNetworkHooks {
     if (existing == null) {
       return;
     }
-    stack.set(ModAttachments.SPELL_STORAGE, existing.swapSlots(slot1, slot2));
+    SpellStorage newStorage = existing.swapSlots(slot1, slot2);
+    stack.set(ModAttachments.SPELL_STORAGE, newStorage);
   }
 }

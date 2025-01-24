@@ -17,8 +17,8 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) {
-  private static final SpellSlot[] EMPTY_SLOTS = new SpellSlot[]{null, null, null, null, null};
-  public static final Supplier<SpellStorage> EMPTY = () -> new SpellStorage(0, 5, Arrays.asList(EMPTY_SLOTS));
+  private static final List<SpellSlot> EMPTY_SLOTS = new ArrayList<>(Arrays.asList(new SpellSlot[]{null, null, null, null, null}));
+  public static final Supplier<SpellStorage> EMPTY = () -> new SpellStorage(0, 5, new ArrayList<>(EMPTY_SLOTS));
 
   public static MapCodec<SpellStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
@@ -45,7 +45,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       if (slots.size() > maxSlot) {
         throw new IllegalStateException("Too many slots!");
       }
-      List<SpellSlot> newSlots = Arrays.asList(EMPTY_SLOTS);
+      List<SpellSlot> newSlots = new ArrayList<>(EMPTY_SLOTS);
       for (SpellSlot slot : slots) {
         if (slot != null) {
           newSlots.set(slot.slot(), slot);
