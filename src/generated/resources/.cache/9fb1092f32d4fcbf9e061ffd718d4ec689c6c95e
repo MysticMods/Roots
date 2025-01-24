@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-22T16:16:31.9985641	Recipes
+// 1.21.1	2025-01-24T13:50:48.9923429	Recipes
 afb36943e341d957b4cc6aa8dfa1273afb91ba11 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_tile.json
 fa9a2f9d72f328a3b1d0922423e8d8d3f56bca81 data/roots/advancement/recipes/building_blocks/chiseled_runestone_from_runestone_tile.json
 f595b4351c25b84323636294eeee8a9dec1ecbe8 data/roots/advancement/recipes/building_blocks/mossy_runestone_button_from_mossy_runestone_stonecutting.json
@@ -436,7 +436,7 @@ eba3e9eaa640ffc5dad84dcbe7bdbbfd09cc180a data/roots/recipe/wildwood_button.json
 74f9f67623e6e642ab547010f48cf7bc9b8ac057 data/roots/recipe/wildwood_door.json
 0a71f23e8293174c55d223ba95ebac8eebc4d0c5 data/roots/recipe/wildwood_fence.json
 61b994e7e333ea5af2b1cb0ec73294ddfec037dd data/roots/recipe/wildwood_gate.json
-5d25908b614db4f82702a1949298b8d288dbf381 data/roots/recipe/wildwood_ladder.json
+45df707a44cfe68436ba4dc8951dc25a28727a83 data/roots/recipe/wildwood_ladder.json
 bb4d3d4fddeb7b270f04140fa0f5491914c51999 data/roots/recipe/wildwood_planks_from_logs.json
 9e0231ac6f1954e2f9a33dafff93c1e2bf76ed14 data/roots/recipe/wildwood_pressure_plate.json
 29bba3f73adffc89688a49e72fb2b2855c9ab5b7 data/roots/recipe/wildwood_slab.json

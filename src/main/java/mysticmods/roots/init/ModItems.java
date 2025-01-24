@@ -1,26 +1,74 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.EnumMap;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModItems {
   private static final DeferredRegister<Item> ITEMS = DeferredRegister.createItems(RootsAPI.MODID);
+  private static final DeferredRegister<ArmorMaterial> ARMOR = DeferredRegister.create(Registries.ARMOR_MATERIAL, RootsAPI.MODID);
 
   private static final Supplier<Item.Properties> DEFAULT_64 = () -> new Item.Properties().stacksTo(64);
   private static final Supplier<Item.Properties> DEFAULT_SINGLE = () -> new Item.Properties().stacksTo(1);
+
+  private static final DeferredHolder<ArmorMaterial, ArmorMaterial> ANTLER_MATERIAL = ARMOR.register("antlers", () -> new ArmorMaterial(
+      Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 0);
+        map.put(ArmorItem.Type.LEGGINGS, 0);
+        map.put(ArmorItem.Type.CHESTPLATE, 0);
+        map.put(ArmorItem.Type.HELMET, 3);
+        map.put(ArmorItem.Type.BODY, 0);
+      }),
+      18, SoundEvents.ARMOR_EQUIP_TURTLE, () -> Ingredient.of(RootsTags.Items.ANTLERS), List.of(new ArmorMaterial.Layer(RootsAPI.rl("antlers"))), 1f, 0f));
+  public static final DeferredHolder<ArmorMaterial, ArmorMaterial> CARAPACE_MATERIAL = ARMOR.register("carapace", () -> new ArmorMaterial(
+      Util.make(new EnumMap<>(ArmorItem.Type.class),
+          map -> {
+            map.put(ArmorItem.Type.BOOTS, 2);
+            map.put(ArmorItem.Type.LEGGINGS, 6);
+            map.put(ArmorItem.Type.CHESTPLATE, 5);
+            map.put(ArmorItem.Type.HELMET, 2);
+            map.put(ArmorItem.Type.BODY, 0);
+          }),
+      18,
+      SoundEvents.ARMOR_EQUIP_TURTLE,
+      () -> Ingredient.of(RootsTags.Items.CARAPACE),
+      List.of(new ArmorMaterial.Layer(RootsAPI.rl("carapace"))),
+      0f,
+      0f));
+  private static final DeferredHolder<ArmorMaterial, ArmorMaterial> COPPER_MATERIAL = ARMOR.register("copper", () -> new ArmorMaterial(
+      Util.make(new EnumMap<>(ArmorItem.Type.class),
+          map -> {
+            map.put(ArmorItem.Type.BOOTS, 2);
+            map.put(ArmorItem.Type.LEGGINGS, 6);
+            map.put(ArmorItem.Type.CHESTPLATE, 5);
+            map.put(ArmorItem.Type.HELMET, 2);
+            map.put(ArmorItem.Type.BODY, 0);
+          }),
+      7,
+      SoundEvents.ARMOR_EQUIP_IRON,
+      () -> Ingredient.of(Tags.Items.INGOTS_COPPER),
+      List.of(new ArmorMaterial.Layer(RootsAPI.rl("copper"))),
+      0.0f,
+      0.0f));
 
   // BLOCK ITEMS
   public static DeferredHolder<Item, BlockItem> THATCH = ITEMS.register("thatch", () -> new BlockItem(ModBlocks.THATCH.get(), DEFAULT_64.get()));
@@ -142,27 +190,45 @@ public class ModItems {
   public static DeferredHolder<Item, Item> PELT = ITEMS.register("pelt", () -> new Item(DEFAULT_64.get()));
   public static DeferredHolder<Item, Item> ANTLERS = ITEMS.register("antlers", () -> new Item(DEFAULT_64.get()));
   public static DeferredHolder<Item, Item> VENISON = ITEMS.register("venison", () -> new Item(new Item.Properties().food(ModFoods.VENISON)));
-  public static DeferredHolder<Item, Item> COOKED_VENISON = ITEMS.register("cooked_venison", () -> new Item(new Item.Properties().food(ModFoods.COOKED_VENISON).stacksTo(64)));
+  public static DeferredHolder<Item, Item> COOKED_VENISON = ITEMS.register("cooked_venison", () -> new Item(new Item.Properties().food(ModFoods.COOKED_VENISON)
+      .stacksTo(64)));
   public static DeferredHolder<Item, Item> RAW_SQUID = ITEMS.register("raw_squid", () -> new Item(new Item.Properties().food(ModFoods.RAW_SQUID)));
-  public static DeferredHolder<Item, Item> COOKED_SQUID = ITEMS.register("cooked_squid", () -> new Item(new Item.Properties().food(ModFoods.COOKED_SQUID).stacksTo(64)));
+  public static DeferredHolder<Item, Item> COOKED_SQUID = ITEMS.register("cooked_squid", () -> new Item(new Item.Properties().food(ModFoods.COOKED_SQUID)
+      .stacksTo(64)));
   public static DeferredHolder<Item, Item> ASSORTED_SEEDS = ITEMS.register("assorted_seeds", () -> new Item(DEFAULT_64.get()));
-  public static DeferredHolder<Item, BaseItems.FastFoodItem> COOKED_SEEDS = ITEMS.register("cooked_seeds", () -> new BaseItems.FastFoodItem(new Item.Properties().food(ModFoods.COOKED_SEEDS).stacksTo(64)));
-  public static DeferredHolder<Item, Item> COOKED_BEETROOT = ITEMS.register("cooked_beetroot", () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEETROOT).stacksTo(64)));
-  public static DeferredHolder<Item, Item> COOKED_CARROT = ITEMS.register("cooked_carrot", () -> new Item(new Item.Properties().food(ModFoods.COOKED_CARROT).stacksTo(64)));
-  public static DeferredHolder<Item, Item> AUBERGINE = ITEMS.register("aubergine", () -> new Item(new Item.Properties().food(ModFoods.AUBERGINE).stacksTo(64)));
-  public static DeferredHolder<Item, Item> COOKED_AUBERGINE = ITEMS.register("cooked_aubergine", () -> new Item(new Item.Properties().food(ModFoods.COOKED_AUBERGINE).stacksTo(64)));
+  public static DeferredHolder<Item, BaseItems.FastFoodItem> COOKED_SEEDS = ITEMS.register("cooked_seeds", () -> new BaseItems.FastFoodItem(new Item.Properties().food(ModFoods.COOKED_SEEDS)
+      .stacksTo(64)));
+  public static DeferredHolder<Item, Item> COOKED_BEETROOT = ITEMS.register("cooked_beetroot", () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEETROOT)
+      .stacksTo(64)));
+  public static DeferredHolder<Item, Item> COOKED_CARROT = ITEMS.register("cooked_carrot", () -> new Item(new Item.Properties().food(ModFoods.COOKED_CARROT)
+      .stacksTo(64)));
+  public static DeferredHolder<Item, Item> AUBERGINE = ITEMS.register("aubergine", () -> new Item(new Item.Properties().food(ModFoods.AUBERGINE)
+      .stacksTo(64)));
+  public static DeferredHolder<Item, Item> COOKED_AUBERGINE = ITEMS.register("cooked_aubergine", () -> new Item(new Item.Properties().food(ModFoods.COOKED_AUBERGINE)
+      .stacksTo(64)));
   public static DeferredHolder<Item, Item> STUFFED_AUBERGINE = ITEMS.register("stuffed_aubergine", () -> new Item(new Item.Properties().food(ModFoods.STUFFED_AUBERGINE)));
-  public static DeferredHolder<Item, Item> AUBERGINE_SALAD = ITEMS.register("aubergine_salad", () -> new Item(new Item.Properties().food(ModFoods.AUBERGINE_SALAD).craftRemainder(Items.BOWL).stacksTo(64)));
-  public static DeferredHolder<Item, Item> BEETROOT_SALAD = ITEMS.register("beetroot_salad", () -> new Item(new Item.Properties().food(ModFoods.BEETROOT_SALAD).craftRemainder(Items.BOWL).stacksTo(64)));
-  public static DeferredHolder<Item, Item> STEWED_EGGPLANT = ITEMS.register("stewed_eggplant", () -> new Item(new Item.Properties().food(ModFoods.STEWED_EGGPLANT).craftRemainder(Items.BOWL).stacksTo(64)));
-  public static DeferredHolder<Item, TooltipDrinkItem> APPLE_CORDIAL = ITEMS.register("apple_cordial", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.APPLE_CORDIAL).craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
-  public static DeferredHolder<Item, TooltipDrinkItem> CACTUS_SYRUP = ITEMS.register("cactus_syrup", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.CACTUS_SYRUP).craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
-  public static DeferredHolder<Item, TooltipDrinkItem> DANDELION_CORDIAL = ITEMS.register("dandelion_cordial", () -> new TooltipDrinkItem("roots.drinks.wakefulness", new Item.Properties().food(ModFoods.DANDELION_CORDIAL).craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
-  public static DeferredHolder<Item, TooltipDrinkItem> LILAC_CORDIAL = ITEMS.register("lilac_cordial", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.LILAC_CORDIAL).craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
-  public static DeferredHolder<Item, TooltipDrinkItem> PEONY_CORDIAL = ITEMS.register("peony_cordial", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.PEONY_CORDIAL).craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
-  public static DeferredHolder<Item, TooltipDrinkItem> ROSE_CORDIAL = ITEMS.register("rose_cordial", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.ROSE_CORDIAL).craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
-  public static DeferredHolder<Item, TooltipDrinkItem> VINEGAR = ITEMS.register("vinegar", () -> new TooltipDrinkItem("roots.drinks.sour", new Item.Properties().food(ModFoods.VINEGAR).craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
-  public static DeferredHolder<Item, TooltipDrinkItem> VEGETABLE_JUICE = ITEMS.register("vegetable_juice", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.VEGETABLE_JUICE).craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
+  public static DeferredHolder<Item, Item> AUBERGINE_SALAD = ITEMS.register("aubergine_salad", () -> new Item(new Item.Properties().food(ModFoods.AUBERGINE_SALAD)
+      .craftRemainder(Items.BOWL).stacksTo(64)));
+  public static DeferredHolder<Item, Item> BEETROOT_SALAD = ITEMS.register("beetroot_salad", () -> new Item(new Item.Properties().food(ModFoods.BEETROOT_SALAD)
+      .craftRemainder(Items.BOWL).stacksTo(64)));
+  public static DeferredHolder<Item, Item> STEWED_EGGPLANT = ITEMS.register("stewed_eggplant", () -> new Item(new Item.Properties().food(ModFoods.STEWED_EGGPLANT)
+      .craftRemainder(Items.BOWL).stacksTo(64)));
+  public static DeferredHolder<Item, TooltipDrinkItem> APPLE_CORDIAL = ITEMS.register("apple_cordial", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.APPLE_CORDIAL)
+      .craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
+  public static DeferredHolder<Item, TooltipDrinkItem> CACTUS_SYRUP = ITEMS.register("cactus_syrup", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.CACTUS_SYRUP)
+      .craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
+  public static DeferredHolder<Item, TooltipDrinkItem> DANDELION_CORDIAL = ITEMS.register("dandelion_cordial", () -> new TooltipDrinkItem("roots.drinks.wakefulness", new Item.Properties().food(ModFoods.DANDELION_CORDIAL)
+      .craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
+  public static DeferredHolder<Item, TooltipDrinkItem> LILAC_CORDIAL = ITEMS.register("lilac_cordial", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.LILAC_CORDIAL)
+      .craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
+  public static DeferredHolder<Item, TooltipDrinkItem> PEONY_CORDIAL = ITEMS.register("peony_cordial", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.PEONY_CORDIAL)
+      .craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
+  public static DeferredHolder<Item, TooltipDrinkItem> ROSE_CORDIAL = ITEMS.register("rose_cordial", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.ROSE_CORDIAL)
+      .craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
+  public static DeferredHolder<Item, TooltipDrinkItem> VINEGAR = ITEMS.register("vinegar", () -> new TooltipDrinkItem("roots.drinks.sour", new Item.Properties().food(ModFoods.VINEGAR)
+      .craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
+  public static DeferredHolder<Item, TooltipDrinkItem> VEGETABLE_JUICE = ITEMS.register("vegetable_juice", () -> new TooltipDrinkItem("roots.drinks.slow_regen", new Item.Properties().food(ModFoods.VEGETABLE_JUICE)
+      .craftRemainder(Items.GLASS_BOTTLE).stacksTo(64)));
   public static DeferredHolder<Item, Item> INK_BOTTLE = ITEMS.register("ink_bottle", () -> new Item(DEFAULT_64.get()));
   public static final DeferredHolder<Item, Item> ACACIA_BARK = ITEMS.register("acacia_bark", () -> new Item(DEFAULT_64.get()));
   public static final DeferredHolder<Item, Item> BIRCH_BARK = ITEMS.register("birch_bark", () -> new Item(DEFAULT_64.get()));
@@ -183,10 +249,12 @@ public class ModItems {
   public static final DeferredHolder<Item, Item> FEY_POUCH = ITEMS.register("fey_pouch", () -> new Item(DEFAULT_SINGLE.get()));
   public static final DeferredHolder<Item, Item> HERB_POUCH = ITEMS.register("herb_pouch", () -> new Item(DEFAULT_SINGLE.get()));
 
-  public static final DeferredHolder<Item, Item> COOKED_PERESKIA = ITEMS.register("cooked_pereskia", () -> new Item(new Item.Properties().food(ModFoods.COOKED_AUBERGINE).stacksTo(64)));
+  public static final DeferredHolder<Item, Item> COOKED_PERESKIA = ITEMS.register("cooked_pereskia", () -> new Item(new Item.Properties().food(ModFoods.COOKED_AUBERGINE)
+      .stacksTo(64)));
   public static final DeferredHolder<Item, Item> FLOUR = ITEMS.register("flour", () -> new Item(DEFAULT_64.get()));
   public static final DeferredHolder<Item, Item> WILDEWHEET_BREAD = ITEMS.register("wildewheet_bread", () -> new Item(DEFAULT_64.get()));
-  public static final DeferredHolder<Item, Item> WILDROOT_STEW = ITEMS.register("wildroot_stew", () -> new Item(new Item.Properties().food(ModFoods.WILDROOT_STEW).stacksTo(64).craftRemainder(Items.BOWL)));
+  public static final DeferredHolder<Item, Item> WILDROOT_STEW = ITEMS.register("wildroot_stew", () -> new Item(new Item.Properties().food(ModFoods.WILDROOT_STEW)
+      .stacksTo(64).craftRemainder(Items.BOWL)));
   public static final DeferredHolder<Item, FireStarterItem> FIRE_STARTER = ITEMS.register("fire_starter", () -> new FireStarterItem(DEFAULT_64.get()));
   // TODO: What are we doing with this
   public static final DeferredHolder<Item, Item> GRAMARY = ITEMS.register("gramary", () -> new Item(DEFAULT_SINGLE.get()));
@@ -204,7 +272,8 @@ public class ModItems {
   public static final DeferredHolder<Item, ShovelItem> RUNED_SHOVEL = ITEMS.register("runed_shovel", () -> new ShovelItem(RootsAPI.RUNED_TIER, new Item.Properties()));
   public static final DeferredHolder<Item, SwordItem> RUNED_SWORD = ITEMS.register("runed_sword", () -> new SwordItem(RootsAPI.RUNED_TIER, new Item.Properties()));
   public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = ITEMS.register("runic_shears", () -> new RunicShearsItem(new Item.Properties().durability(313)));
-  public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get()).stacksTo(1)));
+  public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
+      .stacksTo(1)));
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)));
   public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new Item(DEFAULT_SINGLE.get()));
@@ -227,7 +296,7 @@ public class ModItems {
   public static final DeferredHolder<Item, Item> PETALS = ITEMS.register("petals", () -> new Item(DEFAULT_64.get()));
   public static final DeferredHolder<Item, Item> RUNIC_DUST = ITEMS.register("runic_dust", () -> new Item(DEFAULT_64.get()));
   public static final DeferredHolder<Item, Item> STRANGE_OOZE = ITEMS.register("strange_ooze", () -> new Item(DEFAULT_64.get()));
-  //public static final DeferredHolder<Item, ArmorItem>
+  public static final DeferredHolder<Item, ArmorItem> ANTLER_HAT = ITEMS.register("antler_hat", () -> new ArmorItem(ANTLER_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().durability(399)));
   /*  public static DeferredHolder<Item, AntlerHatItem> ANTLER_HAT = ITEMS.register("antler_hat", () -> new AntlerHatItem(DEFAULT));*/
     /* REGISTRATE.item("antler_hat", AntlerHatItem::new)
     .properties(o -> o.durability(399).rarity(Rarity.RARE))
@@ -241,10 +310,10 @@ public class ModItems {
       .unlockedBy("has_antlers", RegistrateRecipeProvider.has(ModItems.ANTLERS.get()))
       .save(p))
     .register();*/
-  public static DeferredHolder<Item, ArmorItem> BEETLE_HELMET = ITEMS.register("beetle_helmet", () -> new ArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.HELMET, new Item.Properties()));
-  public static DeferredHolder<Item, ArmorItem> BEETLE_CHESTPLATE = ITEMS.register("beetle_chestplate", () -> new ArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-  public static DeferredHolder<Item, ArmorItem> BEETLE_LEGGINGS = ITEMS.register("beetle_leggings", () -> new ArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-  public static DeferredHolder<Item, ArmorItem> BEETLE_BOOTS = ITEMS.register("beetle_boots", () -> new ArmorItem(ArmorMaterials.TURTLE, ArmorItem.Type.BOOTS, new Item.Properties()));
+  public static DeferredHolder<Item, ArmorItem> BEETLE_HELMET = ITEMS.register("beetle_helmet", () -> new ArmorItem(CARAPACE_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(25))));
+  public static DeferredHolder<Item, ArmorItem> BEETLE_CHESTPLATE = ITEMS.register("beetle_chestplate", () -> new ArmorItem(CARAPACE_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(25))));
+  public static DeferredHolder<Item, ArmorItem> BEETLE_LEGGINGS = ITEMS.register("beetle_leggings", () -> new ArmorItem(CARAPACE_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(25))));
+  public static DeferredHolder<Item, ArmorItem> BEETLE_BOOTS = ITEMS.register("beetle_boots", () -> new ArmorItem(CARAPACE_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(25))));
   public static DeferredHolder<Item, Item> RAW_SILVER = ITEMS.register("raw_silver", () -> new Item(DEFAULT_64.get()));
   public static DeferredHolder<Item, Item> SILVER_INGOT = ITEMS.register("silver_ingot", () -> new Item(DEFAULT_64.get()));
   public static DeferredHolder<Item, Item> SILVER_NUGGET = ITEMS.register("silver_nugget", () -> new Item(DEFAULT_64.get()));
@@ -256,10 +325,10 @@ public class ModItems {
   public static DeferredHolder<Item, ShovelItem> COPPER_SHOVEL = ITEMS.register("copper_shovel", () -> new ShovelItem(RootsAPI.COPPER_TIER, new Item.Properties()));
   public static DeferredHolder<Item, SwordItem> COPPER_SWORD = ITEMS.register("copper_sword", () -> new SwordItem(RootsAPI.COPPER_TIER, new Item.Properties()));
   // TODO: Gold -> COPPER
-  public static DeferredHolder<Item, ArmorItem> COPPER_HELMET = ITEMS.register("copper_helmet", () -> new ArmorItem(ArmorMaterials.GOLD, ArmorItem.Type.HELMET, new Item.Properties()));
-  public static DeferredHolder<Item, ArmorItem> COPPER_CHESTPLATE = ITEMS.register("copper_chestplate", () -> new ArmorItem(ArmorMaterials.GOLD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-  public static DeferredHolder<Item, ArmorItem> COPPER_LEGGINGS = ITEMS.register("copper_leggings", () -> new ArmorItem(ArmorMaterials.GOLD, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-  public static DeferredHolder<Item, ArmorItem> COPPER_BOOTS = ITEMS.register("copper_boots", () -> new ArmorItem(ArmorMaterials.GOLD, ArmorItem.Type.BOOTS, new Item.Properties()));
+  public static DeferredHolder<Item, ArmorItem> COPPER_HELMET = ITEMS.register("copper_helmet", () -> new ArmorItem(COPPER_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))));
+  public static DeferredHolder<Item, ArmorItem> COPPER_CHESTPLATE = ITEMS.register("copper_chestplate", () -> new ArmorItem(COPPER_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
+  public static DeferredHolder<Item, ArmorItem> COPPER_LEGGINGS = ITEMS.register("copper_leggings", () -> new ArmorItem(COPPER_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
+  public static DeferredHolder<Item, ArmorItem> COPPER_BOOTS = ITEMS.register("copper_boots", () -> new ArmorItem(COPPER_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
   public static DeferredHolder<Item, DeferredSpawnEggItem> BEETLE_SPAWN_EGG = ITEMS.register("beetle_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.BEETLE, 0x418594, 0x211D15, DEFAULT_64.get()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> DEER_SPAWN_EGG = ITEMS.register("deer_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.DEER, 0xa18458, 0x5e4d33, DEFAULT_64.get()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> FENNEC_SPAWN_EGG = ITEMS.register("fennec_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.FENNEC, 0xe9dcc2, 0xb1855c, DEFAULT_64.get()));
@@ -320,15 +389,16 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WILDROOT_GROWTH = ITEMS.register("ritual_wildroot_growth", () -> ritual(ModRituals.WILDROOT_GROWTH));
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_WINDWALL = ITEMS.register("ritual_windwall", () -> ritual(ModRituals.WINDWALL));
 
-  private static TokenItem.SpellTokenItem spell (Holder<Spell> spell) {
+  private static TokenItem.SpellTokenItem spell(Holder<Spell> spell) {
     return new TokenItem.SpellTokenItem(spell.getKey(), new Item.Properties().stacksTo(1));
   }
 
-  private static TokenItem.RitualTokenItem ritual (Holder<Ritual> ritual) {
+  private static TokenItem.RitualTokenItem ritual(Holder<Ritual> ritual) {
     return new TokenItem.RitualTokenItem(ritual.getKey(), new Item.Properties().stacksTo(1));
   }
 
   public static void register(IEventBus bus) {
+    ARMOR.register(bus);
     ITEMS.register(bus);
   }
 }

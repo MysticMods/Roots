@@ -207,6 +207,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.PETALS.get());
       event.accept(ModItems.RUNIC_DUST.get());
       event.accept(ModItems.STRANGE_OOZE.get());
+      event.accept(ModItems.ANTLER_HAT.get());
       event.accept(ModItems.BEETLE_HELMET.get());
       event.accept(ModItems.BEETLE_CHESTPLATE.get());
       event.accept(ModItems.BEETLE_LEGGINGS.get());

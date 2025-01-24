@@ -2,7 +2,6 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
-import mysticmods.roots.api.item.ICastingItem;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -23,7 +22,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 // TODO: Handle item colors
-public class CastingItem extends Item implements ICastingItem {
+public class CastingItem extends Item {
   public CastingItem(Properties pProperties) {
     super(pProperties);
   }

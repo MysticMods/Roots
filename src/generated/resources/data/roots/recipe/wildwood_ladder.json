@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "W": {
-      "tag": "roots:planks/wildwood"
+      "item": "roots:wildwood_planks"
     },
     "X": {
       "tag": "c:rods/wooden"

@@ -18,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.RenderArmEvent;
 
 import java.util.Objects;
@@ -50,7 +51,7 @@ public class RenderArmEventHandler {
       }
 
       // TODO
-      VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(chestStack.getItem().getArmorTexture(chestStack, player, EquipmentSlot.CHEST, null /* TODO */, false))), chestStack.hasFoil());
+      VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(ClientHooks.getArmorTexture(player, chestStack, ModItems.CARAPACE_MATERIAL.get().layers().getFirst(), true, EquipmentSlot.CHEST))), chestStack.hasFoil());
       if (event.getArm() == HumanoidArm.RIGHT) {
         chestModel.rightArmPose = HumanoidModel.ArmPose.EMPTY;
       } else {

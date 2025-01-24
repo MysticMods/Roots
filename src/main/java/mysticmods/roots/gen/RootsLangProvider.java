@@ -359,6 +359,7 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.PETALS);
     addItem(ModItems.RUNIC_DUST);
     addItem(ModItems.STRANGE_OOZE);
+    addItem(ModItems.ANTLER_HAT);
     addItem(ModItems.BEETLE_HELMET);
     addItem(ModItems.BEETLE_CHESTPLATE);
     addItem(ModItems.BEETLE_LEGGINGS);

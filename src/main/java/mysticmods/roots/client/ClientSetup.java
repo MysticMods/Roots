@@ -9,13 +9,19 @@ import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PyreBlockEntityRenderer;
 import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
+import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -23,7 +29,8 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
-import net.minecraft.data.worldgen.biome.OverworldBiomes;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
@@ -102,6 +109,19 @@ public class ClientSetup {
         skinRenderer.addLayer(new ShoulderRenderLayer<>(skinRenderer));
       }
     }*/
+  }
+
+  @SubscribeEvent
+  public static void registerClientExtensions (RegisterClientExtensionsEvent event) {
+    IClientItemExtensions deferToArmorModel = new IClientItemExtensions() {
+      @Override
+      public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+        HumanoidModel<?> model = ArmorModel.getModel(itemStack);
+        return model != null ? model : original;
+      }
+    };
+
+    event.registerItem(deferToArmorModel, ModItems.BEETLE_HELMET, ModItems.BEETLE_BOOTS, ModItems.BEETLE_CHESTPLATE, ModItems.BEETLE_LEGGINGS, ModItems.ANTLER_HAT);
   }
 
   @SubscribeEvent

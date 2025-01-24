@@ -1,13 +1,17 @@
 package mysticmods.roots.client.model.armor;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.client.model.ModelHolder;
 import mysticmods.roots.client.player.RenderArmEventHandler;
+import mysticmods.roots.init.ModItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -28,12 +32,12 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
 
   @Nullable
   public static ArmorModel getModel(ItemStack stack) {
-/*    if (stack.is(ModItems.ANTLER_HAT.get())) {
+    if (stack.is(ModItems.ANTLER_HAT.get())) {
       return antlerModel;
       // TODO: Turn this into a tag
     } else if (stack.is(ModItems.BEETLE_BOOTS.get()) || stack.is(ModItems.BEETLE_HELMET.get()) || stack.is(ModItems.BEETLE_CHESTPLATE.get()) || stack.is(ModItems.BEETLE_LEGGINGS.get())) {
-      return beetleModels.get(stack.getEquipmentSlot());
-    }*/
+      return beetleModels.get(((ArmorItem) stack.getItem()).getType().getSlot());
+    }
 
     return null;
   }
@@ -78,12 +82,11 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
     this.hat.copyFrom(this.head);
   }
 
-  // TODO: How is this
-/*  @Override
-  public void renderToBuffer(PoseStack ms, VertexConsumer buffer, int light, int overlay*//*, float r, float g, float b, float a*//*) {
+  @Override
+  public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
     setPartVisibility(slot);
-    super.renderToBuffer(ms, buffer, light, overlay*//*, r, g, b, a*//*);
-  }*/
+    super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
+  }
 
   protected void setPartVisibility(EquipmentSlot slot) {
     setAllVisible(false);

@@ -244,6 +244,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.RUNIC_DUST, "resources");
     subfolder(ModItems.STRANGE_OOZE, "resources");
 
+    basicItem(ModItems.ANTLER_HAT.get());
     basicItem(ModItems.BEETLE_HELMET.get());
     basicItem(ModItems.BEETLE_CHESTPLATE.get());
     basicItem(ModItems.BEETLE_LEGGINGS.get());
