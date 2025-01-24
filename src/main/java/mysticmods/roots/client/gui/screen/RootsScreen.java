@@ -7,6 +7,7 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -35,17 +36,14 @@ public abstract class RootsScreen extends Screen {
     return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
   }
 
-  public void drawTooltip(PoseStack stack, int mouseX, int mouseY) {
-    // TODO: render tooltip?
-/*    if (tooltip != null && !tooltip.isEmpty()) {
-      this.renderComponentTooltip(stack, tooltip, mouseX, mouseY, font);
-    } else if (!tooltipItem.isEmpty()) {
-      this.renderComponentTooltip(stack, getTooltipFromItem(tooltipItem), mouseX, mouseY, font);
-    }*/
+  public void drawTooltip(GuiGraphics guiGraphics, int x, int y) {
+    if (tooltipItem != null && !tooltipItem.isEmpty()) {
+      ItemStack itemstack = this.tooltipItem;
+      guiGraphics.renderTooltip(this.font, getTooltipFromItem(minecraft, itemstack), itemstack.getTooltipImage(), itemstack, x, y);
+    }
   }
 
   public void resetTooltip() {
-    tooltip = null;
     tooltipItem = ItemStack.EMPTY;
   }
 
@@ -67,8 +65,8 @@ public abstract class RootsScreen extends Screen {
   @Override
   public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     this.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
-    resetTooltip();
     PoseStack stack = graphics.pose();
+    resetTooltip();
     stack.pushPose();
     stack.translate(guiLeft, guiTop, 0);
     RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
@@ -78,7 +76,7 @@ public abstract class RootsScreen extends Screen {
     for (Renderable renderable : this.renderables) {
       renderable.render(graphics, pMouseX, pMouseY, pPartialTick);
     }
-    drawTooltip(stack, pMouseX, pMouseY);
+    drawTooltip(graphics, pMouseX, pMouseY);
   }
 
   public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
