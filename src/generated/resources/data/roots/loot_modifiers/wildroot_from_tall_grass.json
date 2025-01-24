@@ -2,12 +2,19 @@
   "type": "roots:add_grass_drops",
   "conditions": [
     {
-      "chance": 0.01,
+      "chance": 0.004,
       "condition": "minecraft:random_chance"
     },
     {
       "condition": "roots:block_tag",
-      "tag": "roots:grass"
+      "tag": "roots:tall_grass"
+    },
+    {
+      "block": "minecraft:tall_grass",
+      "condition": "minecraft:block_state_property",
+      "properties": {
+        "half": "lower"
+      }
     },
     {
       "condition": "minecraft:inverted",
@@ -19,5 +26,5 @@
       }
     }
   ],
-  "item": "roots:aubergine_seeds"
+  "item": "roots:wildroot"
 }

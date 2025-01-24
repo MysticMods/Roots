@@ -1,8 +1,11 @@
 {
   "entries": [
-    "roots:grove_spores_from_grass",
-    "roots:wildroot_from_grass",
-    "roots:aubergine_from_grass"
+    "roots:wildroot_from_short_grass",
+    "roots:aubergine_from_tall_grass",
+    "roots:grove_spores_from_tall_grass",
+    "roots:wildroot_from_tall_grass",
+    "roots:grove_spores_from_short_grass",
+    "roots:aubergine_from_short_grass"
   ],
   "replace": false
 }

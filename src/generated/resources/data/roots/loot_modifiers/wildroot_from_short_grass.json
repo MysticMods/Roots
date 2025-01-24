@@ -1,0 +1,23 @@
+{
+  "type": "roots:add_grass_drops",
+  "conditions": [
+    {
+      "chance": 0.004,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "condition": "roots:block_tag",
+      "tag": "roots:short_grass"
+    },
+    {
+      "condition": "minecraft:inverted",
+      "term": {
+        "condition": "minecraft:match_tool",
+        "predicate": {
+          "items": "#c:tools/shear"
+        }
+      }
+    }
+  ],
+  "item": "roots:wildroot"
+}

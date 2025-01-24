@@ -1,5 +1,8 @@
-// 1.21.1	2025-01-22T16:16:31.9782819	Global Loot Modifiers : roots
-438e41f71a1ebfb5df9866fb6bce4544bf3e2fee data/neoforge/loot_modifiers/global_loot_modifiers.json
-2f19bb6027dcf1a119b35fb7b6d2f3ea6c671977 data/roots/loot_modifiers/aubergine_from_grass.json
-eb68990aef28dc43c641f86600152a56e0b610af data/roots/loot_modifiers/grove_spores_from_grass.json
-41715c31f666ac7f392b38379baf695723d82319 data/roots/loot_modifiers/wildroot_from_grass.json
+// 1.21.1	2025-01-24T15:08:56.8780806	Global Loot Modifiers : roots
+ff15b2dfd21facb87b8bb3cfcd49a07c34751299 data/neoforge/loot_modifiers/global_loot_modifiers.json
+bbb1aa1da404d3d2c8c2a9402e26b8b7a8e3266a data/roots/loot_modifiers/aubergine_from_short_grass.json
+7152a21e940fee2375a5e9d3207cc3c6601b2af0 data/roots/loot_modifiers/aubergine_from_tall_grass.json
+74ff0ea9b4fcd2837f57dc0d400aebb266153c61 data/roots/loot_modifiers/grove_spores_from_short_grass.json
+5e2d0ce9b71fdad86a5b1bce3842ff95e4f73a2a data/roots/loot_modifiers/grove_spores_from_tall_grass.json
+e525b3a7a654f4c931fc2a566e2d21beb748fb14 data/roots/loot_modifiers/wildroot_from_short_grass.json
+8524d7752da2668edd965aff65e3c522b23b4407 data/roots/loot_modifiers/wildroot_from_tall_grass.json

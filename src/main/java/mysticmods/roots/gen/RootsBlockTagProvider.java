@@ -2,7 +2,6 @@ package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -190,10 +189,11 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.RUNED_LOGS).addTags(RootsTags.Blocks.RUNED_ACACIA_LOG, RootsTags.Blocks.RUNED_BIRCH_LOG, RootsTags.Blocks.RUNED_JUNGLE_LOG, RootsTags.Blocks.RUNED_OAK_LOG, RootsTags.Blocks.RUNED_DARK_OAK_LOG, RootsTags.Blocks.RUNED_CRIMSON_STEM, RootsTags.Blocks.RUNED_WARPED_STEM, RootsTags.Blocks.RUNED_MANGROVE_LOG, RootsTags.Blocks.RUNED_SPRUCE_LOG);
 
     // From the old ModTags
-    this.tag(RootsTags.Blocks.STANDING_STONE_CROPS).add(Blocks.WHEAT, Blocks.BEETROOTS, Blocks.POTATOES, Blocks.CARROTS);
+    this.tag(RootsTags.Blocks.STANDING_STONE_CROPS).add(Blocks.BEETROOTS, Blocks.POTATOES, Blocks.CARROTS);
     this.tag(RootsTags.Blocks.BAFFLECAP_CONVERSION).add(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, Blocks.WARPED_FUNGUS, Blocks.CRIMSON_FUNGUS);
-    // TODO: What is this even for?
-    this.tag(RootsTags.Blocks.GRASS).add(Blocks.GRASS_BLOCK, Blocks.TALL_GRASS, Blocks.FERN, Blocks.LARGE_FERN);
+    // This is for loot modifiers
+    this.tag(RootsTags.Blocks.SHORT_GRASS).add(Blocks.SHORT_GRASS, Blocks.FERN);
+    this.tag(RootsTags.Blocks.TALL_GRASS).add(Blocks.TALL_GRASS, Blocks.LARGE_FERN);
     this.tag(RootsTags.Blocks.LEVERS).add(Blocks.LEVER);
     this.tag(RootsTags.Blocks.GROWTH_FORCE);
     this.tag(RootsTags.Blocks.GROWTH_BLACKLIST);

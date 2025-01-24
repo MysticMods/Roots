@@ -148,7 +148,8 @@ public class RootsTags {
 
     public static final TagKey<Block> STONEPETAL = modTag("stonepetal");
 
-    public static final TagKey<Block> GRASS = modTag("grass");
+    public static final TagKey<Block> SHORT_GRASS = modTag("short_grass");
+    public static final TagKey<Block> TALL_GRASS = modTag("tall_grass");
 
     public static final TagKey<Block> NYI = modTag("nyi");
 
