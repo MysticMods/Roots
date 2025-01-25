@@ -105,8 +105,8 @@ public class ModBlocks {
   public static DeferredHolder<Block, RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = BLOCKS.register("runed_pressure_plate", () -> new RunedObsidianBlocks.PressurePlate(ModTypes.RUNED_OBSIDIAN_SET, RUNED_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.PressurePlate> RUNED_BRICK_PRESSURE_PLATE = BLOCKS.register("runed_brick_pressure_plate", () -> new RunedObsidianBlocks.PressurePlate(ModTypes.RUNED_OBSIDIAN_SET, RUNED_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.PressurePlate> RUNED_TILE_PRESSURE_PLATE = BLOCKS.register("runed_tile_pressure_plate", () -> new RunedObsidianBlocks.PressurePlate(ModTypes.RUNED_OBSIDIAN_SET, RUNED_PROPERTIES));
-  public static DeferredHolder<Block, PressurePlateBlock> WILDWOOD_PRESSURE_PLATE = BLOCKS.register("wildwood_pressure_plate", () -> new PressurePlateBlock(ModTypes.WILDWOOD_SET, WILDWOOD_PLANKS_PROPERTIES));
-  public static DeferredHolder<Block, DoorBlock> WILDWOOD_DOOR = BLOCKS.register("wildwood_door", () -> new DoorBlock(ModTypes.WILDWOOD_SET, WILDWOOD_PLANKS_PROPERTIES));
+  public static DeferredHolder<Block, PressurePlateBlock> WILDWOOD_PRESSURE_PLATE = BLOCKS.register("wildwood_pressure_plate", () -> new PressurePlateBlock(ModTypes.WILDWOOD_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE)));
+  public static DeferredHolder<Block, DoorBlock> WILDWOOD_DOOR = BLOCKS.register("wildwood_door", () -> new DoorBlock(ModTypes.WILDWOOD_SET, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR)));
   public static DeferredHolder<Block, TrapDoorBlock> WILDWOOD_TRAPDOOR = BLOCKS.register("wildwood_trapdoor", () -> new TrapDoorBlock(ModTypes.WILDWOOD_SET, WILDWOOD_PLANKS_PROPERTIES));
   public static DeferredHolder<Block, LadderBlock> WILDWOOD_LADDER = BLOCKS.register("wildwood_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER)));
   public static DeferredHolder<Block, FenceGateBlock> WILDWOOD_GATE = BLOCKS.register("wildwood_gate", () -> new FenceGateBlock(ModTypes.WILDWOOD_WOOD_TYPE, WILDWOOD_PLANKS_PROPERTIES));

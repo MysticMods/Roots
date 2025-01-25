@@ -23,9 +23,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Block entity renderers
 // - Block opacity/light block/movement block
 // - Juice recipes
-// - Blocks being washed away by water
-//   - Pressure plates
-// - X-ray trapdoors
+// - Overhaul all block properties, stop using defaults.
 // - PArticles wrong: mortar
 // - Adjust wild aubergine loot
 
