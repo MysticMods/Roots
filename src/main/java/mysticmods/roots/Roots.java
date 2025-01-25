@@ -50,6 +50,7 @@ public class Roots {
     ModTabs.register(bus);
     ModAttachments.register(bus);
     ModGroves.register(bus);
+    ModDamage.register(bus);
     packetHandler = new PacketHandler(bus);
   }
 }
