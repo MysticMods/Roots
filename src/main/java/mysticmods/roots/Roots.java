@@ -16,7 +16,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI
 // - Missing data maps?
-// - Armor material
 // - Runic tools
 // - Item properties -> Data Components
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
@@ -24,7 +23,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Block opacity/light block/movement block
 // - Juice recipes
 // - Overhaul all block properties, stop using defaults.
-// - PArticles wrong: mortar
 // - Adjust wild aubergine loot
 
 @Mod(RootsAPI.MODID)
