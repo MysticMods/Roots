@@ -17,12 +17,12 @@ import net.neoforged.fml.config.ModConfig;
 // - Level and player conditions for JEI
 // - Missing data maps?
 // - Runic tools
-// - Item properties -> Data Components
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Block entity renderers
 // - Block opacity/light block/movement block
 // - Juice recipes
 // - Overhaul all block properties, stop using defaults.
+// - Overhaul all item properties
 // - Adjust wild aubergine loot
 
 @Mod(RootsAPI.MODID)
