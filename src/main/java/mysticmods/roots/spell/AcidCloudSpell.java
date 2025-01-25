@@ -14,6 +14,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -71,9 +72,11 @@ public class AcidCloudSpell extends TwoRadiusSpell {
 
       LivingEntity entity = entities.remove(pLevel.getRandom().nextInt(entities.size()));
       totalDamaged++;
-      entity.hurt(DamageSource)
       // TODO:
-      /*      entity.hurt(DamageSource.playerAttack(pPlayer), damage);*/
+      //  - Acid damage
+      //  - Acid damage effect
+      //  - Acid damage by player
+      entity.hurt(pPlayer.damageSources().playerAttack(pPlayer), damage);
     }
     if (totalDamaged == 0) {
       costs.noCharge();
