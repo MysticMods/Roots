@@ -24,6 +24,9 @@ import net.neoforged.fml.config.ModConfig;
 // - Block opacity/light block/movement block
 // - Juice recipes
 // - Blocks being washed away by water
+//   - Pressure plates
+// - X-ray trapdoors
+// - PArticles wrong: mortar
 // - Adjust wild aubergine loot
 
 @Mod(RootsAPI.MODID)

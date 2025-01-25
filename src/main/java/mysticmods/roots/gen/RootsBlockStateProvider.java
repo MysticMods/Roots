@@ -102,7 +102,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     pressurePlateBlock(ModBlocks.RUNED_TILE_PRESSURE_PLATE.get(), blockTexture(ModBlocks.RUNED_TILE.get()));
     pressurePlateBlock(ModBlocks.WILDWOOD_PRESSURE_PLATE.get(), blockTexture(ModBlocks.WILDWOOD_PLANKS.get()));
     doorBlockWithRenderType(ModBlocks.WILDWOOD_DOOR.get(), "wildwood", modLoc("block/wildwood_door_bottom"), modLoc("block/wildwood_door_top"), "translucent");
-    trapdoorBlockWithRenderType(ModBlocks.WILDWOOD_TRAPDOOR.get(), "wildwood", modLoc("block/wildwood_trapdoor"), true, "translucent");
+    trapdoorBlockWithRenderType(ModBlocks.WILDWOOD_TRAPDOOR.get(), "wildwood", modLoc("block/wildwood_trapdoor"), true, "cutout");
     horizontalBlock(ModBlocks.WILDWOOD_LADDER.get(), models().withExistingParent("wildwood_ladder", mcLoc("block/ladder"))
         .texture("texture", modLoc("block/wildwood_ladder")).texture("particle", modLoc("block/wildwood_ladder")).renderType("cutout"));
     wallBlock(ModBlocks.RUNESTONE_WALL.get(), blockTexture(ModBlocks.RUNESTONE.get()));
