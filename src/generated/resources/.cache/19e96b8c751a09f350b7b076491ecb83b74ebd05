@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-25T14:19:27.1342646	Block States: roots
+// 1.21.1	2025-01-25T14:33:04.3322124	Block States: roots
 d6d9d849b37d4c9bbae93caf5d0f1ab5feb69f1e assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -134,7 +134,7 @@ f131f71ef09b71287fc8eb266030ab5ffe109d21 assets/roots/models/block/chiseled_rune
 55076d5ef4d7ecef9b1145d538cb804a8ebe9efa assets/roots/models/block/cloud_berry_2.json
 c57dfe6fa38184daf069be06b53598bc3653cef1 assets/roots/models/block/cloud_berry_3.json
 d922e1e08f2feb67a166c95ec17b93974d7a9652 assets/roots/models/block/creeping_grove_moss.json
-1522863d5f30a6de3189eaa9e4e9e28abb13544f assets/roots/models/block/decorative_pyre.json
+4c740932d728a37ba90779bcacdff9b4d6c557ab assets/roots/models/block/decorative_pyre.json
 0b427437e6831e1ab560d2640133894931609198 assets/roots/models/block/deepslate_silver_ore.json
 570d9f7666ee06c12384892c253c6fb8014829be assets/roots/models/block/dewgonia_0.json
 986938fb83f59d117176ce2facc391b785f38562 assets/roots/models/block/dewgonia_1.json

@@ -205,7 +205,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile reinforcedPyre = models().withExistingParent("reinforced_pyre", modLoc("block/complex/reinforced_pyre"));
     getVariantBuilder(ModBlocks.REINFORCED_PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(reinforcedPyre).build());
 
-    ModelFile decorativePyre = models().withExistingParent("decorative_pyre", modLoc("block/complex/pyre_lit"));
+    ModelFile decorativePyre = models().withExistingParent("decorative_pyre", modLoc("block/complex/pyre_lit")).renderType("cutout");
     getVariantBuilder(ModBlocks.DECORATIVE_PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(decorativePyre).build());
 
     ModelFile unendingBowl = models().withExistingParent("unending_bowl", modLoc("block/complex/unending_bowl"));
