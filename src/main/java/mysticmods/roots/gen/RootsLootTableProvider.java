@@ -344,7 +344,7 @@ public class RootsLootTableProvider {
       addCropDrops(ModBlocks.AUBERGINE_CROP.get(), ModItems.AUBERGINE.get(), ModItems.AUBERGINE_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
       add(ModBlocks.WILD_AUBERGINE.get(), this.applyExplosionDecay(ModBlocks.WILD_AUBERGINE.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
-              .add(LootItem.lootTableItem(ModItems.AUBERGINE.get())))
+              .add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))))
           .withPool(LootPool.lootPool()
               .add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get())
                   .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))))));

@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-22T16:16:31.9626529	Loot Tables
+// 1.21.1	2025-01-25T14:39:12.2328093	Loot Tables
 e8472c417eb64cb3ad295f65ece125190c4620e0 data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -111,7 +111,7 @@ fd2dcd5837452c6cb07bb35348557804af9278d3 data/roots/loot_table/blocks/wildwood_s
 5c025c6930581cd03e554527e7cdc5769ff3e3f4 data/roots/loot_table/blocks/wildwood_stairs.json
 5e0fd044556ebb68ae3e2544f7a7695932005a94 data/roots/loot_table/blocks/wildwood_trapdoor.json
 9a88f6836f3c97f16ffc793e068d1d48ce123fc9 data/roots/loot_table/blocks/wildwood_wood.json
-ac618a1af07e7d3e92689e59396031bd2bc8eb3f data/roots/loot_table/blocks/wild_aubergine.json
+b02970a3a35249968b20475a378d50460e26221c data/roots/loot_table/blocks/wild_aubergine.json
 102605ac29385872c32daba376b015514e7cc6ee data/roots/loot_table/blocks/wild_roots.json
 31f888a4e9b2b82d20a513b12b3ceb62b14c6031 data/roots/loot_table/entities/beetle.json
 58eedfcc7cc9e608006b146789eaad99dcdef56f data/roots/loot_table/entities/deer.json
