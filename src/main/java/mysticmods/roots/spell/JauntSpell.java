@@ -28,7 +28,7 @@ public class JauntSpell extends Spell {
   private int jauntDistance;
 
   public JauntSpell(ChatFormatting color, List<Cost> costs) {
-    super(Type.INSTANT, color, costs, 0x538ad4, 0xede768);
+    super(Type.CHARGED, color, costs, 0x538ad4, 0xede768);
   }
 
   @Override
@@ -58,14 +58,14 @@ public class JauntSpell extends Spell {
     }
 
     position.setY(startY);
-    if (pLevel.getBlockState(position).isPathfindable(/*pLevel, position,*/ PathComputationType.LAND)) {
+    if (pLevel.getBlockState(position).isPathfindable(/*pLevel, position,*/ PathComputationType.AIR)) {
       safeCount++;
     }
 
     // TODO: Where is the level/position sensitive version?
 
     position.move(direction);
-    if (pLevel.getBlockState(position).isPathfindable(/*pLevel, position,*/ PathComputationType.LAND)) {
+    if (pLevel.getBlockState(position).isPathfindable(/*pLevel, position,*/ PathComputationType.AIR)) {
       safeCount++;
     }
 
@@ -73,8 +73,8 @@ public class JauntSpell extends Spell {
   }
 
   @Nullable
-  private Vec3 findSafePosition(Level pLevel, Player player) {
-    Vec3 realPos = player.position().add(Vec3.directionFromRotation(0, player.getYRot()).scale(jauntDistance));
+  private Vec3 findSafePosition(Level pLevel, Player player, int charge) {
+    Vec3 realPos = player.position().add(Vec3.directionFromRotation(0, player.getYRot()).scale(jauntDistance + charge));
     BlockPos real = new BlockPos((int) realPos.x, (int) realPos.y, (int) realPos.z); // TODO: realPos);
     BlockPos.MutableBlockPos dest = real.mutable();
     int maxHeight = pLevel.dimensionType().logicalHeight() - 1;
@@ -106,7 +106,7 @@ public class JauntSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    Vec3 dest = findSafePosition(pLevel, pPlayer);
+    Vec3 dest = findSafePosition(pLevel, pPlayer, ticks / 10);
     if (dest == null) {
       costs.noCharge();
       return 0;

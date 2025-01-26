@@ -38,6 +38,7 @@ public class CastingItem extends Item {
     return 72000;
   }
 
+
   @Override
   public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
     if (!(pLivingEntity instanceof Player pPlayer) || pLevel.isClientSide()) {
@@ -58,23 +59,25 @@ public class CastingItem extends Item {
 
     int ticks = pStack.getUseDuration(pLivingEntity) - pRemainingUseDuration;
 
-    Costing costs = new Costing(spell);
+    if (spell.getType() == Spell.Type.CONTINUOUS) {
+      Costing costs = new Costing(spell);
 
-    // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
-    if (ticks % 20 == 0) {
-      if (!costs.canAfford(pPlayer, true)) {
-        RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getSpell().getName());
-        pPlayer.stopUsingItem();
-        return;
+      // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
+      if (ticks % 20 == 0) {
+        if (!costs.canAfford(pPlayer, true)) {
+          RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getSpell().getName());
+          pPlayer.stopUsingItem();
+          return;
+        }
       }
-    }
 
-    if (spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costs, ticks) != 0) {
-      RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());
-    }
+      if (spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costs, ticks) != 0) {
+        RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());
+      }
 
-    if (ticks % 20 == 0) {
-      costs.charge(pPlayer);
+      if (ticks % 20 == 0) {
+        costs.charge(pPlayer);
+      }
     }
   }
 
@@ -156,6 +159,40 @@ public class CastingItem extends Item {
     if (!pLevel.isClientSide()) {
       int dur = getUseDuration(pStack, pLivingEntity) - pTimeCharged;
       RootsAPI.LOG.info("Finished using after {} ticks {} seconds", dur, dur / 20);
+    }
+
+    if (!(pLivingEntity instanceof Player pPlayer) || pLevel.isClientSide()) {
+      return;
+    }
+
+    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
+    if (storage == null) {
+      return;
+    }
+
+    ISpellInstance spell = storage.getCurrentSpell();
+    if (spell == null) {
+      return;
+    }
+
+    int ticks = pStack.getUseDuration(pLivingEntity) - pTimeCharged;
+    int current = storage.currentSlot();
+
+    if (spell.getType() == Spell.Type.CHARGED) {
+      Costing costing = new Costing(spell);
+
+      // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
+      if (ticks % 20 == 0) {
+        if (!costing.canAfford(pPlayer, true)) {
+          RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getSpell().getName());
+          return;
+        }
+      }
+
+      int cooldown = spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costing, ticks);
+      if (costing.charge(pPlayer)) {
+        pStack.set(ModAttachments.SPELL_STORAGE, storage.setCooldown(current, cooldown));
+      }
     }
   }
 
