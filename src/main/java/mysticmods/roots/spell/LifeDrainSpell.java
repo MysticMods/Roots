@@ -71,7 +71,7 @@ public class LifeDrainSpell extends Spell {
 
       for (LivingEntity entity : entities) {
         foundTarget = true;
-        // TODO:
+        // TODO: Damage types
         if (entity.hurt(damage.playerAttack(pPlayer), this.damage)) {
           pPlayer.heal(heal);
         }

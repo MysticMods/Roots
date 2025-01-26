@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+// TODO: Let's just reimplement this conceptually
 public class JauntSpell extends Spell {
   private int jauntDistance;
 

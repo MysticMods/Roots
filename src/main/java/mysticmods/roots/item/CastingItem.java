@@ -60,7 +60,7 @@ public class CastingItem extends Item {
     int ticks = pStack.getUseDuration(pLivingEntity) - pRemainingUseDuration;
 
     if (spell.getType() == Spell.Type.CONTINUOUS) {
-      Costing costs = new Costing(spell);
+      Costing costs = new Costing(spell, pPlayer);
 
       // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
       if (ticks % 20 == 0) {
@@ -132,8 +132,7 @@ public class CastingItem extends Item {
       return InteractionResultHolder.fail(stack);
     }
 
-    // TODO: check costs
-    Costing costing = new Costing(spell);
+    Costing costing = new Costing(spell, pPlayer);
     if (!costing.canAfford(pPlayer, true)) {
       // TODO: display a warning
       pPlayer.displayClientMessage(Component.translatable("roots.message.staff.missing_herbs", spell.getStyledName()), true);
@@ -179,14 +178,12 @@ public class CastingItem extends Item {
     int current = storage.currentSlot();
 
     if (spell.getType() == Spell.Type.CHARGED) {
-      Costing costing = new Costing(spell);
+      Costing costing = new Costing(spell, pPlayer);
 
       // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
-      if (ticks % 20 == 0) {
-        if (!costing.canAfford(pPlayer, true)) {
-          RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getSpell().getName());
-          return;
-        }
+      if (!costing.canAfford(pPlayer, true)) {
+        RootsAPI.LOG.info("Not enough herbs to cast: {}", spell.getSpell().getName());
+        return;
       }
 
       int cooldown = spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costing, ticks);
