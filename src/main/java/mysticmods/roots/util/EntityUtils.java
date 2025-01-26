@@ -17,15 +17,19 @@ public class EntityUtils {
   public static Predicate<Entity> isProjectile = entity -> entity instanceof Projectile;
 
   public static Predicate<Entity> isProjectileOrHostile(Player pPlayer) {
-    return entity -> isProjectile.test(entity) || entity instanceof LivingEntity livingEntity && isHostileTo(pPlayer).test(livingEntity);
+    return entity -> isProjectile.test(entity) || isHostileTo(pPlayer).test(entity);
   }
 
-  public static Predicate<LivingEntity> isHostileTo(Player pPlayer) {
+  public static Predicate<Entity> isHostileTo(Player pPlayer) {
     return isHostileTo(pPlayer, true);
   }
 
-  public static Predicate<LivingEntity> isHostileTo(Player pPlayer, boolean skipSelf) {
-    return entity -> {
+  public static Predicate<Entity> isHostileTo(Player pPlayer, boolean skipSelf) {
+    return inc -> {
+      if (!(inc instanceof LivingEntity entity)) {
+        return false;
+      }
+
       Level pLevel = pPlayer.level();
 
       if ((entity == pPlayer && skipSelf) || entity.isDeadOrDying() || entity.hurtTime > 0) {

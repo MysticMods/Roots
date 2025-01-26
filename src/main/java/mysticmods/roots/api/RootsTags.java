@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
@@ -352,8 +353,18 @@ public class RootsTags {
     }
   }
 
+  public static class MobEffects extends RootsTags {
+    public static final TagKey<MobEffect> SUPPRESS_PARTICLES = modTag("suppress_particles");
+
+    static TagKey<MobEffect> modTag(String name) {
+      return TagKey.create(Registries.MOB_EFFECT, RootsAPI.rl(name));
+    }
+  }
+
   public static class Potions extends RootsTags {
     public static final TagKey<Potion> RANDOM_BLACKLIST = compatTag("random_potion_blacklist");
+
+    public static final TagKey<Potion> SUPPRESS_PARTICLES = modTag("suppress_particles");
 
     static TagKey<Potion> modTag(String name) {
       return TagKey.create(Registries.POTION, RootsAPI.rl(name));

@@ -252,6 +252,24 @@
           "default_value": 80,
           "value": 80
         }
+      },
+      {
+        "id": "roots:geas/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How many entities the spell will affect per interval",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:geas/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 400,
+          "value": 400
+        }
       }
     ],
     "roots:growth_infusion": [

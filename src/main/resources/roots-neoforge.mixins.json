@@ -5,7 +5,9 @@
   "mixins": [
     "AccessorMixinBlockLootSubProvider",
     "AccessorMixinCropBlock",
+    "AccessorMixinMob",
     "AccessorMixinOverworldBiomes",
+    "MixinMobEffectInstance",
     "MixinRecipeBuilder"
   ],
   "client": [

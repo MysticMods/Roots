@@ -97,6 +97,8 @@ public class ModSpells {
   // Geas (80 cooldown)
   public static final DeferredHolder<Spell, GeasSpell> GEAS = spell(Spells.GEAS, GeasSpell::new, ChatFormatting.RED, () -> List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_COOLDOWN = P.recordProperty("geas/cooldown", Property.ofInt(80, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> GEAS_DURATION = P.recordProperty("geas/duration", Property.ofInt(400, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> GEAS_COUNT = P.recordProperty("geas/count", Property.ofInt(1, SpellProperties.COUNT));
 
   // Control Undead (320 cooldown)
   public static final DeferredHolder<Spell, ControlUndeadSpell> CONTROL_UNDEAD = spell(Spells.CONTROL_UNDEAD, ControlUndeadSpell::new, ChatFormatting.DARK_GREEN, () -> List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250)));

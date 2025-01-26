@@ -10,14 +10,21 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.mixin.AccessorMixinMob;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
 
@@ -63,18 +70,44 @@ public class DisarmSpell extends TwoRadiusSpell {
     List<EquipmentSlot> slots = List.of(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
     List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer).and((o) -> !o.getType().is(RootsTags.Entities.DISABLE_DISARM)));
 
+    DamageSources damage = pPlayer.damageSources();
+    DamageSource source = damage.playerAttack(pPlayer);
+
     int count = 0;
 
     for (LivingEntity entity : entities) {
+      Mob mob = null;
+      if (entity instanceof Mob mobEntity) {
+        mob = mobEntity;
+      }
+
       for (EquipmentSlot slot : slots) {
         ItemStack stack = entity.getItemBySlot(slot);
         if (stack.isEmpty()) {
           continue;
         }
 
+        float thisChance = dropChance;
+
+        // We never dropped if the item is tagged as un-droppable
+        if (stack.is(RootsTags.Items.DISABLE_DISARMING) || EnchantmentHelper.has(stack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
+          continue;
+        }
+
+        if (mob != null) {
+          float defaultChance = ((AccessorMixinMob) mob).invokeGetEquipmentDropChance(slot);
+          if (defaultChance == 0.0f) {
+            continue;
+          }
+          if (defaultChance < dropChance) {
+            defaultChance = dropChance;
+          }
+          thisChance = EnchantmentHelper.processEquipmentDropChance((ServerLevel)pLevel, entity, source, defaultChance);
+        }
+
         count++;
 
-        if (pLevel.random.nextFloat() < dropChance) {
+        if (pPlayer.getRandom().nextFloat() < thisChance) {
           entity.spawnAtLocation(stack);
         }
 

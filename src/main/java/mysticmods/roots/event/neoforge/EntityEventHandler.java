@@ -3,7 +3,9 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.EntityCooldowns;
+import mysticmods.roots.effect.SimpleEffect;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.util.ItemUtil;
@@ -20,6 +22,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 
@@ -58,6 +63,54 @@ public class EntityEventHandler {
           }
         }
       }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onPotionExpire (MobEffectEvent.Expired event) {
+    if (event.getEffectInstance() == null) {
+      return;
+    }
+    if (event.getEffectInstance().getEffect().value() instanceof SimpleEffect simpleEffect) {
+      if (simpleEffect.onEffectExpired(event.getEntity(), event.getEffectInstance().getAmplifier())) {
+        event.setCanceled(true);
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onPotionRemoved (MobEffectEvent.Remove event) {
+    if (event.getEffectInstance() == null) {
+      return;
+    }
+    if (event.getEffectInstance().getEffect().value() instanceof SimpleEffect simpleEffect) {
+      if (simpleEffect.onEffectRemoved(event.getEntity(), event.getEffectInstance().getAmplifier())) {
+        event.setCanceled(true);
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onEntityIncomingDamage (LivingIncomingDamageEvent event) {
+    if (event.getEntity() instanceof Player player) {
+      if (event.getSource().getEntity() instanceof LivingEntity living) {
+        if (living.hasEffect(ModEffects.GEAS)) {
+          event.setAmount(0);
+          event.setCanceled(true);
+        }
+      } else if (event.getSource().getDirectEntity() instanceof LivingEntity living) {
+        if (living.hasEffect(ModEffects.GEAS)) {
+          event.setAmount(0);
+          event.setCanceled(true);
+        }
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onEntityTarget (LivingChangeTargetEvent event) {
+    if (event.getEntity().hasEffect(ModEffects.GEAS)) {
+      event.setNewAboutToBeSetTarget(null);
     }
   }
 }
