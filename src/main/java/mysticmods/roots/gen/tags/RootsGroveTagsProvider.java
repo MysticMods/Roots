@@ -1,4 +1,4 @@
-package mysticmods.roots.gen;
+package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;

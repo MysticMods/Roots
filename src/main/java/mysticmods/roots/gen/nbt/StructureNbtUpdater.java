@@ -1,4 +1,4 @@
-package mysticmods.roots.gen;
+package mysticmods.roots.gen.nbt;
 
 import com.google.common.hash.Hashing;
 import com.mojang.datafixers.DataFixer;

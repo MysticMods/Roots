@@ -1,4 +1,4 @@
-package mysticmods.roots.gen;
+package mysticmods.roots.gen.lang;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;

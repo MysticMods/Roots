@@ -1,4 +1,4 @@
-package mysticmods.roots.gen;
+package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.core.HolderLookup;

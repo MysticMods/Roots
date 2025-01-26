@@ -1,4 +1,4 @@
-package mysticmods.roots.gen;
+package mysticmods.roots.gen.advancement;
 
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.HolderLookup;

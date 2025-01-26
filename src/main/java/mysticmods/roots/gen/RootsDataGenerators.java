@@ -1,6 +1,17 @@
 package mysticmods.roots.gen;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.gen.advancement.RootsAdvancementProvider;
+import mysticmods.roots.gen.client.RootsAtlasProvider;
+import mysticmods.roots.gen.client.RootsBlockStateProvider;
+import mysticmods.roots.gen.client.RootsItemModelProvider;
+import mysticmods.roots.gen.lang.RootsLangProvider;
+import mysticmods.roots.gen.loot.RootsLootTableProvider;
+import mysticmods.roots.gen.nbt.StructureNbtUpdater;
+import mysticmods.roots.gen.neoforge.RootsDataMapProvider;
+import mysticmods.roots.gen.neoforge.RootsGlobalLootModifierProvider;
+import mysticmods.roots.gen.recipe.RootsRecipeProvider;
+import mysticmods.roots.gen.tags.*;
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;

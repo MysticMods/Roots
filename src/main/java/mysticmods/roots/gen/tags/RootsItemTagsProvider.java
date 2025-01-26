@@ -1,4 +1,4 @@
-package mysticmods.roots.gen;
+package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
@@ -208,9 +208,11 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
 
-    // What's this for uwu
+    // For Desaturate/Saturate
     this.tag(RootsTags.Items.SKIPPED_FOODS);
 
+    // Items that cannot be disarmed using the disarm spell
+    this.tag(RootsTags.Items.DISABLE_DISARMING);
 
   }
 

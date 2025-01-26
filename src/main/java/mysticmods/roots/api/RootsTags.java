@@ -341,6 +341,8 @@ public class RootsTags {
     public static final TagKey<Item> SILVER_ITEMS = modTag("silver_items");
     public static final TagKey<Item> SKIPPED_FOODS = modTag("skipped_foods");
 
+    public static final TagKey<Item> DISABLE_DISARMING = modTag("disable_disarming");
+
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));
     }
@@ -368,6 +370,8 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> BOATS = modTag("boats");
     public static final TagKey<EntityType<?>> SQUID = modTag("squid");
+
+    public static final TagKey<EntityType<?>> RUNIC_SHEARS_OVERRIDE = modTag("runic_shears_override");
 
     public static final TagKey<EntityType<?>> FEY_LEATHER = modTag("fey_leather");
 
