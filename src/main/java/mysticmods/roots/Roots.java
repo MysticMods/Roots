@@ -24,6 +24,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Overhaul all block properties, stop using defaults.
 // - Overhaul all item properties
 // - Soul Pyre
+// - Display "ticks" of charged spells
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;

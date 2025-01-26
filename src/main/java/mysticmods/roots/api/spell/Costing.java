@@ -49,6 +49,8 @@ public class Costing {
     this.noCharge = true;
   }
 
+  // TODO: Multiply costs by "ticks"
+
   public void charge(SpellModifier modifier) {
     if (!this.spell.hasModifier(modifier)) {
       throw new IllegalStateException("tried to charge for a modifier (" + modifier + ") in the spell " + this.spell.getSpell() + " when that spell doesn't have that modifier enabled");
