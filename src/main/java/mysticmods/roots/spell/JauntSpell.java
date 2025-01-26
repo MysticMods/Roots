@@ -75,7 +75,7 @@ public class JauntSpell extends Spell {
   @Nullable
   private Vec3 findSafePosition(Level pLevel, Player player) {
     Vec3 realPos = player.position().add(Vec3.directionFromRotation(0, player.getYRot()).scale(jauntDistance));
-    BlockPos real = new BlockPos(0, 0, 0); // TODO: realPos);
+    BlockPos real = new BlockPos((int) realPos.x, (int) realPos.y, (int) realPos.z); // TODO: realPos);
     BlockPos.MutableBlockPos dest = real.mutable();
     int maxHeight = pLevel.dimensionType().logicalHeight() - 1;
     int safeY = pLevel.dimensionType().minY();

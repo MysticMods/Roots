@@ -175,12 +175,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   // TODO: How to handle reach
   protected double getRange(Player pPlayer) {
-    var attr = pPlayer.getAttribute(Attributes.BLOCK_INTERACTION_RANGE);
-    if (attr == null) {
-      return 4.5;
-    }
-
-    return attr.getValue() + reach;
+    return pPlayer.blockInteractionRange() + reach;
   }
 
   protected BlockHitResult pick(Player pPlayer, double range) {

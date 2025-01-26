@@ -54,8 +54,6 @@ public class GrowthInfusionSpell extends Spell {
 
   @Override
   public int cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    // TODO: This shouldn't ever be called client-side
-
     BlockHitResult result = pick(pPlayer);
     BlockState at = level.getBlockState(result.getBlockPos());
 

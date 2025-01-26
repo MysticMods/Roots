@@ -13,6 +13,7 @@ import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -54,9 +55,10 @@ public class LifeDrainSpell extends Spell {
     this.damage = properties.get(ModSpells.LIFE_DRAIN_DAMAGE);
     this.heal = properties.get(ModSpells.LIFE_DRAIN_HEAL);
   }
-
+  
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+    DamageSources damage = pPlayer.damageSources();
     Vec3 look = pPlayer.getLookAngle();
     Vec3 position = pPlayer.position();
     float eyeHeight = pPlayer.getEyeHeight(pPlayer.getPose());
@@ -66,12 +68,13 @@ public class LifeDrainSpell extends Spell {
       double y = position.y + eyeHeight + look.y * vectorDistance * (float) i;
       double z = position.z + look.z * vectorDistance * (float) i;
       List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), new AABB(x - boundingBoxDistance, y - boundingBoxDistance, z - boundingBoxDistance, x + boundingBoxDistance, y + boundingBoxDistance, z + boundingBoxDistance), EntityUtils.isHostileTo(pPlayer));
+
       for (LivingEntity entity : entities) {
         foundTarget = true;
         // TODO:
-/*        if (entity.hurt(DamageSource.playerAttack(pPlayer).bypassArmor(), damage)) {
+        if (entity.hurt(damage.playerAttack(pPlayer), this.damage)) {
           pPlayer.heal(heal);
-        }*/
+        }
       }
     }
     if (foundTarget) {

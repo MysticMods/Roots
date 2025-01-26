@@ -76,6 +76,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       //  - Acid damage
       //  - Acid damage effect
       //  - Acid damage by player
+      //  - Visuals
       entity.hurt(pPlayer.damageSources().playerAttack(pPlayer), damage);
     }
     if (totalDamaged == 0) {
