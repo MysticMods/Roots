@@ -223,6 +223,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public enum Type {
     INSTANT,
-    CONTINUOUS
+    CONTINUOUS,
+    CHARGED;
   }
 }
