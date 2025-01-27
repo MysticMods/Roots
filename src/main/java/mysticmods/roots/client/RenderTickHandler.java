@@ -1,7 +1,9 @@
 package mysticmods.roots.client;
 
-import com.mojang.brigadier.context.ContextChain;
 import mysticmods.roots.api.RootsAPI;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -13,9 +15,18 @@ public class RenderTickHandler {
   private static float clientTicks = 0;
 
   @SubscribeEvent
-  public static void onClientTick (RenderLevelStageEvent event) {
+  public static void onRenderStage(RenderLevelStageEvent event) {
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-      clientTicks += event.getPartialTick().getGameTimeDeltaPartialTick(true);
+      clientTicks += event.getPartialTick().getGameTimeDeltaPartialTick(false);
+    }
+  }
+
+  @SubscribeEvent
+  public static void onClientTick (ClientTickEvent.Post post) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Level level;
+    //noinspection ConstantValue
+    if (minecraft.player != null && ((level = minecraft.player.level()) != null) && minecraft.gameMode != null) {
     }
   }
 
