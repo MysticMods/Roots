@@ -18,6 +18,24 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 public class KeyHandler {
   @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post event) {
+    while (KeyBindings.SHIFT_DEEPER.consumeClick()) {
+      RootsAPI.LOG.info("Deeper");
+    }
+    while (KeyBindings.SHIFT_SHALLOWER.consumeClick()) {
+      RootsAPI.LOG.info("Shallower");
+    }
+    while (KeyBindings.SHIFT_SHORTER.consumeClick()) {
+      RootsAPI.LOG.info("Shorter");
+    }
+    while (KeyBindings.SHIFT_TALLER.consumeClick()) {
+      RootsAPI.LOG.info("Taller");
+    }
+    while (KeyBindings.SHIFT_NARROWER.consumeClick()) {
+      RootsAPI.LOG.info("Narrower");
+    }
+    while (KeyBindings.SHIFT_WIDER.consumeClick()) {
+      RootsAPI.LOG.info("Wider");
+    }
     while (KeyBindings.OPEN_SPELL_LIBRARY.consumeClick()) {
       Minecraft mc = Minecraft.getInstance();
       if (mc.player == null) {

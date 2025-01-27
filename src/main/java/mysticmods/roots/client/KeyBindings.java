@@ -18,6 +18,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.settings.IKeyConflictContext;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
+import net.neoforged.neoforge.client.settings.KeyModifier;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
@@ -27,15 +28,36 @@ import java.util.List;
 public class KeyBindings {
   public static final String CATEGORY = "key.category.roots.general";
 
-  public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, CATEGORY);
+  public static final CastingTaggedSpell WIDTH = CastingTaggedSpell.spell(RootsTags.Spells.ADJUSTABLE_WIDTH);
+  public static final CastingTaggedSpell HEIGHT = CastingTaggedSpell.spell(RootsTags.Spells.ADJUSTABLE_HEIGHT);
+  public static final CastingTaggedSpell DEPTH = CastingTaggedSpell.spell(RootsTags.Spells.ADJUSTABLE_DEPTH);
+
+  public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, CATEGORY);
+  public static final KeyMapping SHIFT_WIDER = new KeyMapping("key.roots.shift_width", WIDTH, KeyModifier.CONTROL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_MINUS, CATEGORY);
+  public static final KeyMapping SHIFT_NARROWER = new KeyMapping("key.roots.shift_narrow", WIDTH, KeyModifier.CONTROL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_EQUAL, CATEGORY);
+  public static final KeyMapping SHIFT_TALLER = new KeyMapping("key.roots.shift_tall", HEIGHT, KeyModifier.CONTROL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_BRACKET, CATEGORY);
+  public static final KeyMapping SHIFT_SHORTER = new KeyMapping("key.roots.shift_short", HEIGHT, KeyModifier.CONTROL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_BRACKET, CATEGORY);
+  public static final KeyMapping SHIFT_DEEPER = new KeyMapping("key.roots.shift_deep", DEPTH, KeyModifier.CONTROL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_SEMICOLON, CATEGORY);
+  public static final KeyMapping SHIFT_SHALLOWER = new KeyMapping("key.roots.shift_shallow", DEPTH, KeyModifier.CONTROL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_APOSTROPHE, CATEGORY);
 
   public static final List<KeyMapping> MAPPINGS = new ArrayList<>();
 
   @SubscribeEvent
   public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
     MAPPINGS.add(OPEN_SPELL_LIBRARY);
+    MAPPINGS.add(SHIFT_WIDER);
+    MAPPINGS.add(SHIFT_NARROWER);
+    MAPPINGS.add(SHIFT_TALLER);
+    MAPPINGS.add(SHIFT_SHORTER);
+    MAPPINGS.add(SHIFT_DEEPER);
+    MAPPINGS.add(SHIFT_SHALLOWER);
     event.register(OPEN_SPELL_LIBRARY);
-    OPEN_SPELL_LIBRARY.setKeyConflictContext(KeyConflictContext.IN_GAME);
+    event.register(SHIFT_WIDER);
+    event.register(SHIFT_NARROWER);
+    event.register(SHIFT_TALLER);
+    event.register(SHIFT_SHORTER);
+    event.register(SHIFT_DEEPER);
+    event.register(SHIFT_SHALLOWER);
   }
 
   public static class HoldingTaggedItem implements IKeyConflictContext {
