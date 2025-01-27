@@ -38,6 +38,11 @@ public class JauntSpell extends Spell {
   }
 
   @Override
+  public PropertyHolder<Property.IntegerProperty> getMaxUseProperty() {
+    return ModSpells.JAUNT_MAX_USE;
+  }
+
+  @Override
   public List<PropertyHolder<?>> getProperties() {
     List<PropertyHolder<?>> properties = super.getProperties();
     properties.add(ModSpells.JAUNT_DISTANCE);
@@ -105,7 +110,7 @@ public class JauntSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    Vec3 dest = findSafePosition(pLevel, pPlayer, ticks / 10);
+    Vec3 dest = findSafePosition(pLevel, pPlayer, ticks);
     if (dest == null) {
       costs.noCharge();
       return 0;

@@ -22,10 +22,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -45,6 +43,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected int cooldown = 0;
   protected double reach = 0.0;
   protected final int color1, color2;
+  protected int maxUse;
 
   protected Style style;
   protected ChatFormatting textColor;
@@ -100,6 +99,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return color2;
   }
 
+  public int getMaxUse () {
+    return maxUse;
+  }
+
   @Override
   public List<Cost> getDefaultCosts() {
     return defaultCosts;
@@ -123,6 +126,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return null;
   }
 
+  public PropertyHolder<Property.IntegerProperty> getMaxUseProperty() {
+    return null;
+  }
+
   public int getCooldown() {
     return cooldown;
   }
@@ -143,6 +150,9 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     if (getReachProperty() != null) {
       properties.add(getReachProperty());
     }
+    if (getMaxUseProperty() != null) {
+      properties.add(getMaxUseProperty());
+    }
     return properties;
   }
 
@@ -151,6 +161,9 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     this.cooldown = properties.get(getCooldownProperty());
     if (getReachProperty() != null) {
       this.reach = properties.get(getReachProperty());
+    }
+    if (getMaxUseProperty() != null) {
+      this.maxUse = properties.get(getMaxUseProperty());
     }
   }
 
@@ -173,24 +186,24 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   public abstract int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks);
 
-  // TODO: How to handle reach
   protected double getRange(Player pPlayer) {
     return pPlayer.blockInteractionRange() + reach;
   }
 
-  protected BlockHitResult pick(Player pPlayer, double range) {
-    return pick(pPlayer, range, false);
+  // TODO: Entity targets
+  protected BlockHitResult pickBlock(Player pPlayer, double range) {
+    return pickBlock(pPlayer, range, false);
   }
 
-  protected BlockHitResult pick(Player pPlayer, double range, boolean fluids) {
+  protected BlockHitResult pickBlock(Player pPlayer, double range, boolean fluids) {
     return (BlockHitResult) pPlayer.pick(range, 1f, fluids);
   }
 
-  protected BlockHitResult pick(Player pPlayer) {
-    return pick(pPlayer, false);
+  protected BlockHitResult pickBlock(Player pPlayer) {
+    return pickBlock(pPlayer, false);
   }
 
-  protected BlockHitResult pick(Player pPlayer, boolean fluids) {
+  protected BlockHitResult pickBlock(Player pPlayer, boolean fluids) {
     return (BlockHitResult) pPlayer.pick(getRange(pPlayer), 1f, fluids);
   }
 

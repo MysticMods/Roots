@@ -23,7 +23,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import java.util.List;
 
 public class GrowthInfusionSpell extends Spell {
-  private int base_ticks;
+  private int baseTicks;
 
   public GrowthInfusionSpell(ChatFormatting color, List<Cost> costs) {
     super(Type.CONTINUOUS, color, costs, 0x30ff30, 0xc0ffc0);
@@ -49,12 +49,12 @@ public class GrowthInfusionSpell extends Spell {
   @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    this.base_ticks = properties.get(ModSpells.GROWTH_INFUSION_BASE_TICKS);
+    this.baseTicks = properties.get(ModSpells.GROWTH_INFUSION_BASE_TICKS);
   }
 
   @Override
   public int cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    BlockHitResult result = pick(pPlayer);
+    BlockHitResult result = pickBlock(pPlayer);
     BlockState at = level.getBlockState(result.getBlockPos());
 
     int doTicks = GrowthUtil.growthTicks(level, result.getBlockPos(), at, pPlayer);

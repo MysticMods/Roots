@@ -35,7 +35,17 @@ public class CastingItem extends Item {
 
   @Override
   public int getUseDuration(ItemStack pStack, LivingEntity entity) {
-    return 72000;
+    SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
+    if (storage == null) {
+      return 0;
+    }
+
+    ISpellInstance spell = storage.getCurrentSpell();
+    if (spell == null) {
+      return 0;
+    }
+
+    return spell.getMaxUse();
   }
 
 
@@ -150,6 +160,12 @@ public class CastingItem extends Item {
     }
 
     return InteractionResultHolder.success(stack);
+  }
+
+  @Override
+  public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+    this.releaseUsing(stack, level, livingEntity, stack.getUseDuration(livingEntity));
+    return stack;
   }
 
   @Override

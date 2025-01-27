@@ -156,6 +156,7 @@ public class ModSpells {
   public static final DeferredHolder<Spell, JauntSpell> JAUNT = spell(Spells.JAUNT, JauntSpell::new, ChatFormatting.DARK_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250), Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250)));
   public static final PropertyHolder<Property.IntegerProperty> JAUNT_COOLDOWN = P.recordProperty("jaunt/cooldown", Property.ofInt(80, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> JAUNT_DISTANCE = P.recordProperty("jaunt/distance", Property.ofInt(8, "The number of blocks that Jaunt travels forwards."));
+  public static final PropertyHolder<Property.IntegerProperty> JAUNT_MAX_USE = P.recordProperty("jaunt/max_use", Property.ofInt(100, SpellProperties.MAX_USE));
 
   // Storm Cloud (100 cooldown)
   public static final DeferredHolder<Spell, StormCloudSpell> STORM_CLOUD = spell(Spells.STORM_CLOUD, StormCloudSpell::new, ChatFormatting.DARK_BLUE, () -> List.of(Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250), Cost.add(ModHerbs.CLOUD_BERRY, SpellCosts.BASE_0250)));

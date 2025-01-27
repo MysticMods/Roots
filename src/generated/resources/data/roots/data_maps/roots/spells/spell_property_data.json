@@ -323,6 +323,15 @@
         }
       },
       {
+        "id": "roots:jaunt/max_use",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell can be charged for",
+          "default_value": 100,
+          "value": 100
+        }
+      },
+      {
         "id": "roots:jaunt/distance",
         "value": {
           "type": "roots:integer_property",

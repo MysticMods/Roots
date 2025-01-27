@@ -4,6 +4,7 @@ public interface SpellProperties {
   String INTERVAL = "How often the spell is executed while channeling";
   String COOLDOWN = "How long before the player can cast the spell again";
 
+  String MAX_USE = "How long the spell can be charged for";
   String DAMAGE = "How much damage the spell will cause";
 
   String COUNT = "How many entities the spell will affect per interval";

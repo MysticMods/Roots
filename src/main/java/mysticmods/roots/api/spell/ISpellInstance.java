@@ -20,6 +20,10 @@ public interface ISpellInstance extends SpellLike {
 
   int getCooldown();
 
+  default int getMaxUse () {
+    return getSpell().getMaxUse();
+  }
+
   default boolean hasModifier(SpellModifier modifier) {
     return getEnabledModifiers().contains(modifier);
   }
