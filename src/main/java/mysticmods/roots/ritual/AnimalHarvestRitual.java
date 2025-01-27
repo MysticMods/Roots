@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -9,9 +10,15 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.mixin.AccessorMixinLootTable;
+import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySelector;
@@ -21,7 +28,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.common.util.FakePlayerFactory;
 
 import java.util.Collections;
 import java.util.List;
@@ -68,33 +83,33 @@ public class AnimalHarvestRitual extends Ritual {
       return false;
     }
 
-    // TODO:
-/*    JsonObject pool = LootTables.serialize(table).getAsJsonObject();
-    if (pool.get("pools") == null) {
+    List<LootPool> pools = ((AccessorMixinLootTable) table).getPools();
+    if (pools.isEmpty()) {
       emptyLoot.add(entity.getType());
       return false;
     } else {
       normalLoot.add(entity.getType());
       return true;
-    }*/
-    return false;
+    }
   }
 
   protected List<ItemStack> getDrops(LivingEntity entity) {
-/*    ResourceKey<LootTable> resourcelocation = entity.getLootTable();
+    ResourceKey<LootTable> resourcelocation = entity.getLootTable();
     LootTable loottable = entity.level().getServer().reloadableRegistries().getLootTable(resourcelocation);
     if (!checkEntity(loottable, entity)) {
       return Collections.emptyList();
     }
-    DamageSource pDamageSource = DamageSource;
-    LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel) entity.level())).withRandom(entity.getRandom()).withParameter(LootContextParams.THIS_ENTITY, entity).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.DAMAGE_SOURCE, pDamageSource).withOptionalParameter(LootContextParams.KILLER_ENTITY, pDamageSource.getEntity()).withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, pDamageSource.getDirectEntity());
-    lootcontext$builder = lootcontext$builder.withParameter(LootContextParams.LAST_DAMAGE_PLAYER, FakePlayerFactory.get((ServerLevel) entity.level, FakePlayerUtil.ROOTS));
+    DamageSources pDamageSources = entity.damageSources();
+    FakePlayer fakePlayer = FakePlayerFactory.get((ServerLevel) entity.level(), FakePlayerUtil.ROOTS);
+    DamageSource pDamageSource = pDamageSources.playerAttack(fakePlayer);
+    LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel)entity.level()).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.THIS_ENTITY, entity).withParameter(LootContextParams.DAMAGE_SOURCE, pDamageSource).withParameter(LootContextParams.ATTACKING_ENTITY, fakePlayer).withParameter(LootContextParams.DIRECT_ATTACKING_ENTITY, fakePlayer).withParameter(LootContextParams.LAST_DAMAGE_PLAYER, fakePlayer);
+
+
     if (entity.getRandom().nextFloat() < lootingChance) {
-      lootcontext$builder = lootcontext$builder.withLuck(lootingValue);
+      lootParamsBuilder.withLuck(lootingValue);
     }
-    LootContext ctx = lootcontext$builder.create(LootContextParamSets.ENTITY);
-    return loottable.getRandomItems(ctx);*/
-    return Collections.emptyList();
+
+    return loottable.getRandomItems(lootParamsBuilder.create(LootContextParamSets.ENTITY));
   }
 
   @Override

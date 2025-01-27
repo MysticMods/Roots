@@ -5,6 +5,7 @@
   "mixins": [
     "AccessorMixinBlockLootSubProvider",
     "AccessorMixinCropBlock",
+    "AccessorMixinLootTable",
     "AccessorMixinMob",
     "AccessorMixinOverworldBiomes",
     "MixinMobEffectInstance",

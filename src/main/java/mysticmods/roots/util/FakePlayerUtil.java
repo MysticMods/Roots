@@ -1,6 +1,7 @@
 package mysticmods.roots.util;
 
 import com.mojang.authlib.GameProfile;
+import net.neoforged.neoforge.common.util.FakePlayerFactory;
 
 import java.util.UUID;
 
