@@ -11,6 +11,7 @@
     "MixinRecipeBuilder"
   ],
   "client": [
+    "AccessorMixinLevelRenderer",
     "MixinLocalPlayer"
   ],
   "injectors": {
