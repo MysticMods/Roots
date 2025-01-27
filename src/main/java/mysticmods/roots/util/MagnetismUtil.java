@@ -1,5 +1,7 @@
 package mysticmods.roots.util;
 
+import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -16,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MagnetismUtil {
-  enum MagnetismContext {
+  public enum MagnetismContext {
     SPELL,
     RITUAL
   }
@@ -43,7 +45,7 @@ public class MagnetismUtil {
     return pulled;
   }
 
-  public static List<BlockPos> store(Level pLevel, BlockPos startPosition, IItemHandler handler, int radiusX, int radiusY, int radiusZ) {
+  public static List<BlockPos> store(Level pLevel, BlockPos startPosition, BaseBlockEntity pyre, int radiusX, int radiusY, int radiusZ) {
     if (pLevel.isClientSide()) {
       return Collections.emptyList();
     }
@@ -53,7 +55,7 @@ public class MagnetismUtil {
     for (Entity entity : entities) {
       if (entity instanceof ItemEntity entityItem) {
         ItemStack item = entityItem.getItem();
-        ItemStack result = ItemHandlerHelper.insertItemStacked(handler, item, false);
+        ItemStack result = pyre.outputAdjacent(item);
         positions.add(entityItem.blockPosition());
         if (result.isEmpty()) {
           entityItem.discard();

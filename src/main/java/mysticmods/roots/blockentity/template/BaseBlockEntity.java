@@ -8,6 +8,7 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -25,15 +26,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BaseBlockEntity extends BlockEntity implements BoundedBlockEntity {
   private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
   protected AABB singleBlockBoundingBox;
   protected BoundingBox boundingBox;
+  protected BlockPos lastOutputPos = null;
 
   public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -104,6 +112,79 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     }
 
     return singleBlockBoundingBox;
+  }
+
+  public ItemStack outputAdjacent (ItemStack stack) {
+    if (lastOutputPos != null) {
+      IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, lastOutputPos, (Direction) null);
+      ItemStack result = ItemHandlerHelper.insertItem(output, stack, false);
+      if (result.isEmpty()) {
+        return ItemStack.EMPTY;
+      }
+
+      stack = result;
+    }
+
+    for (Direction direction : Direction.values()) {
+      if (direction == Direction.DOWN) { // You can have any direction unless it's DOWN
+        continue;
+      }
+      BlockPos pos = getBlockPos().relative(direction);
+      if (lastOutputPos != null && lastOutputPos.equals(pos)) {
+        continue;
+      }
+      IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, pos, direction.getOpposite());
+      if (output != null) {
+        lastOutputPos = pos;
+        ItemStack result = ItemHandlerHelper.insertItem(output, stack, false);
+        if (result.isEmpty()) {
+          return ItemStack.EMPTY;
+        }
+        stack = result;
+      }
+    }
+
+    return stack;
+  }
+
+  public List<ItemStack> outputAdjacent (List<ItemStack> stacks) {
+    if (lastOutputPos != null) {
+      IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, lastOutputPos, (Direction) null);
+      if (output != null) {
+        return outputAdjacent(stacks, output);
+      }
+    }
+
+    for (Direction direction : Direction.values()) {
+      if (direction == Direction.DOWN) { // You can have any direction unless it's DOWN
+        continue;
+      }
+      if (stacks.isEmpty()) {
+        break;
+      }
+      BlockPos pos = getBlockPos().relative(direction);
+      if (lastOutputPos != null && lastOutputPos.equals(pos)) {
+        continue;
+      }
+      IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, pos, direction.getOpposite());
+      if (output != null) {
+        lastOutputPos = pos;
+        stacks = outputAdjacent(stacks, output);
+      }
+    }
+
+    return stacks;
+  }
+
+  public List<ItemStack> outputAdjacent (List<ItemStack> stacks, IItemHandler handler) {
+    List<ItemStack> result = new ArrayList<>();
+    for (ItemStack stack : stacks) {
+      ItemStack remainder = ItemHandlerHelper.insertItem(handler, stack, false);
+      if (!remainder.isEmpty()) {
+        result.add(remainder);
+      }
+    }
+    return result;
   }
 
   public void refillRecipe (ServerPlayer player, RecipeHolder<? extends RootsTileRecipe<?, ?, ?>> recipe, RecipeInventory inventory) {

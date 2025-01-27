@@ -16,13 +16,15 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import java.util.List;
 
 public class CraftingRitual extends Ritual {
-
-
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int dur) {
     if (dur == getInterval()) {
       List<ItemStack> output = blockEntity.popStoredItems();
-      for (ItemStack stack : output) {
+      if (output.isEmpty()) {
+        return;
+      }
+      output = blockEntity.outputAdjacent(output); // Try to output to adjacent inventories
+      for (ItemStack stack : output) { // Drop whatever's left over
         ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), blockEntity.getBlockPos().above(), stack);
       }
     }

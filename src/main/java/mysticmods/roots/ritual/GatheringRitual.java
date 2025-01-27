@@ -5,16 +5,23 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.util.MagnetismUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import java.util.List;
+
 public class GatheringRitual extends Ritual {
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
+    if (duration % getInterval() == 0) {
+      List<BlockPos> positions = MagnetismUtil.store(pLevel, pPos, blockEntity, getRadiusXZ(), getRadiusY(), getRadiusXZ());
 
+      // TODO: Visuals for the yoink
+    }
   }
 
   @Override
