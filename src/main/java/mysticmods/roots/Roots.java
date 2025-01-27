@@ -25,6 +25,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Overhaul all item properties
 // - Soul Pyre
 // - Display "ticks" of charged spells
+// - Entity eye height?
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;
