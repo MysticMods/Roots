@@ -47,7 +47,7 @@ public class ShatterSpell extends Spell {
     Direction playerFacing = Direction.fromYRot(yaw);
     Direction side = rayTraceResult.getDirection();
     Direction width = Direction.fromYRot(playerFacing.toYRot() + 90);
-    Direction height = side.getAxis() == Direction.Axis.Y ? playerFacing.getOpposite() : Direction.DOWN;
+    Direction height = side == Direction.DOWN ? playerFacing : side.getAxis() == Direction.Axis.Y ? playerFacing.getOpposite() : Direction.DOWN;
     Direction depth = side.getOpposite();
 
     BlockPos start = pos;

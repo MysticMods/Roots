@@ -49,6 +49,12 @@ public class GrowthUtil {
     return 0;
   }
 
+  // (keyed block)
+  // growth_chance: float
+  // age_property: string
+  // max_age: int
+  // can_grow: boolean
+
   private static final CropData NULL_CROP = new CropData(Blocks.AIR, null, -1);
 
   public record CropData(Block block, IntegerProperty ageProperty, int maxAge) {
