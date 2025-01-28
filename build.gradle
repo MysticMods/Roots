@@ -50,8 +50,8 @@ neoForge {
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
             jvmArguments.add("-Xmx4G")
             jvmArguments.add("-Xms2G")
-            jvmArguments.add("-XX:+CreateCoredumpOnCrash")
-            jvmArguments.add("-XX:+HeapDumpOnOutOfMemoryError")
+            //jvmArguments.add("-XX:+CreateCoredumpOnCrash")
+            //jvmArguments.add("-XX:+HeapDumpOnOutOfMemoryError")
         }
 
         server {
