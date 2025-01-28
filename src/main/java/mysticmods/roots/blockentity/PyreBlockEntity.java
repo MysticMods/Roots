@@ -68,12 +68,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public final static BoundingBox PYRE_BOUNDS = new BoundingBox(-10, -10, -10, 11, 11, 11);
 
   private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
-  private final List<ItemStack> previousRecipeItems = new ArrayList<>();
+  private final List<ItemStack> storedItems = new ArrayList<>();
   // TODO: Last recipe is not being saved properly
   private RecipeHolder<PyreRecipe> lastRecipe = null;
   private RecipeHolder<PyreRecipe> cachedRecipe = null;
   private Ritual currentRitual = null;
-  private final List<ItemStack> storedItems = new ArrayList<>();
   private int lifetime = -1;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -158,8 +157,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
       PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
       lastRecipe = cachedRecipe;
-      previousRecipeItems.clear();
-      previousRecipeItems.addAll(inventory.getItemsCopy());
       storedItems.clear();
       if (currentRitual == ModRituals.CRAFTING.get()) {
         storedItems.addAll(cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
@@ -227,17 +224,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
     super.saveAdditional(pTag, provider);
-    ListTag previousItems = new ListTag();
-    for (ItemStack stack : previousRecipeItems) {
-      if (!stack.isEmpty()) {
-        previousItems.add(stack.save(provider, new CompoundTag()));
-      }
-    }
-
-    if (!previousItems.isEmpty()) {
-      pTag.put("previous_items", previousItems);
-    }
-
     if (cachedRecipe != null) {
       pTag.putString("cached_recipe", cachedRecipe.id().toString());
     }
@@ -264,13 +250,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
     super.loadAdditional(pTag, provider);
-    previousRecipeItems.clear();
-    if (pTag.contains("previous_items", Tag.TAG_LIST)) {
-      ListTag previousItems = pTag.getList("previous_items", Tag.TAG_COMPOUND);
-      for (int i = 0; i < previousItems.size(); i++) {
-        ItemStack.parse(provider, previousItems.getCompound(i)).ifPresent(previousRecipeItems::add);
-      }
-    }
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
       ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("cached_recipe"));
       cachedRecipe = ResolvedRecipes.PYRE.getRecipe(cachedId);
