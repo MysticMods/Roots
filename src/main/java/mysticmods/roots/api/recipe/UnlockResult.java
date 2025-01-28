@@ -8,12 +8,12 @@ import java.util.List;
 
 // TODO: Handle when there are repeatables and non-repeatable grants
 public record UnlockResult(List<Unlock<?>> failedUnlocks, Player player) {
-  public boolean failed() {
+  public boolean anyFailed() {
     return !failedUnlocks.isEmpty();
   }
 
   public void report() {
-    if (player.level().isClientSide() || !failed()) {
+    if (player.level().isClientSide() || !anyFailed()) {
       return;
     }
 

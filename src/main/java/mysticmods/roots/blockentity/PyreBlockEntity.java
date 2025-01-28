@@ -1,17 +1,12 @@
 package mysticmods.roots.blockentity;
 
-import it.unimi.dsi.fastutil.ints.Int2IntMap;
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
-import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.UnlockResult;
-import mysticmods.roots.api.recipe.crafting.RootsTileCrafting;
-import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
@@ -26,7 +21,6 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -39,7 +33,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -47,7 +40,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -143,16 +135,16 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         RootsAPI.LOG.info("Conditions failed.");
         result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
         result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
-        result.report();
+        result.report(player);
         // Needs to be a success or it sets things on fire
-        return InteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS_NO_ITEM_USED;
       }
       UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
-      if (failedGrants.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
+      if (failedGrants.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
         failedGrants.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed unlock {}", o));
         failedGrants.report();
-        return InteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS_NO_ITEM_USED;
       }
 
       PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
@@ -172,9 +164,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       startRitual(player);
       setChanged();
       updateViaState();
+
+      return InteractionResult.SUCCESS;
     }
 
-    return InteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS_NO_ITEM_USED;
   }
 
   public void startRitual(Player player) {

@@ -178,11 +178,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
           RootsAPI.LOG.info("Conditions failed.");
           conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
           conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
-          conditionResult.report();
+          conditionResult.report(player);
           return InteractionResult.FAIL;
         }
         UnlockResult failedUnlocks = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
-        if (failedUnlocks.failed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
+        if (failedUnlocks.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
           RootsAPI.LOG.info("Grants failed and recipe has no output");
           failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant {}", o));
           failedUnlocks.report();

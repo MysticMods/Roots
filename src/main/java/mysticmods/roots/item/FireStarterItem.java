@@ -7,6 +7,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -66,8 +67,9 @@ public class FireStarterItem extends Item {
           }
           if (pyreBlockEntity != null) {
             level.playSound(player, below, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            pyreBlockEntity.light(player, below);
-            used = true;
+            if (pyreBlockEntity.light(player, below) != InteractionResult.SUCCESS_NO_ITEM_USED) {
+              used = true;
+            }
           } else if (stateAt.isAir()) {
             level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.setBlock(blockpos, Blocks.FIRE.defaultBlockState(), 11);

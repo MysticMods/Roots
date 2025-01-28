@@ -68,7 +68,7 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
       }
     }
 
-    return new ConditionResult(failedLevel, failedPlayer, player);
+    return new ConditionResult(failedLevel, failedPlayer);
   }
 
   default UnlockResult checkUnlocks(Level level, ServerPlayer player) {
