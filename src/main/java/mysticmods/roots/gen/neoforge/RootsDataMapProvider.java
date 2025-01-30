@@ -2,6 +2,8 @@ package mysticmods.roots.gen.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.condition.CanonicalRepresentation;
+import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.GroveData;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -12,6 +14,8 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
+import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.init.ModGroves;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.item.TokenItem;
@@ -20,6 +24,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
@@ -146,5 +151,33 @@ public class RootsDataMapProvider extends DataMapProvider {
       }
     });
 
+    Builder<CanonicalRepresentation, LevelCondition> builder13 = builder(DataMaps.LEVEL_CONDITION_CANONS).replace(false);
+    builder13.add(ModConditions.GROVE_STONE_ANY.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), false, false), false);
+    builder13.add(ModConditions.GROVE_STONE_VALID.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), true, false), false);
+    builder13.add(ModConditions.PRIMAL_GROVE_STONE_VALID.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), true, false), false);
+    builder13.add(ModConditions.PRIMAL_GROVE_STONE_INVALID.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), false, true), false);
+    builder13.add(ModConditions.PRIMAL_GROVE_STONE_ANY.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), false, false), false);
+    builder13.add(ModConditions.ACACIA_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_ACACIA_LOG.get().defaultBlockState(), Blocks.ACACIA_LOG.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.ACACIA_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_ACACIA_LOG.get().defaultBlockState(), Blocks.ACACIA_LOG.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.LOG_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_OAK_LOG.get().defaultBlockState(), Blocks.OAK_LOG.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.LOG_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_OAK_LOG.get().defaultBlockState(), Blocks.OAK_LOG.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.RUNE_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.CHISELED_RUNESTONE.get().defaultBlockState(), ModBlocks.RUNESTONE.get().defaultBlockState(), 3), false);
+    builder13.add(ModConditions.RUNE_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.CHISELED_RUNESTONE.get().defaultBlockState(), ModBlocks.RUNESTONE.get().defaultBlockState(), 4), false);
+    builder13.add(ModConditions.WILDWOOD_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_WILDWOOD_LOG.get().defaultBlockState(), ModBlocks.WILDWOOD_LOG.get().defaultBlockState(), 3), false);
+    builder13.add(ModConditions.WILDWOOD_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_WILDWOOD_LOG.get().defaultBlockState(), ModBlocks.WILDWOOD_LOG.get().defaultBlockState(), 4), false);
+    builder13.add(ModConditions.BIRCH_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_BIRCH_LOG.get().defaultBlockState(), Blocks.BIRCH_LOG.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.BIRCH_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_BIRCH_LOG.get().defaultBlockState(), Blocks.BIRCH_LOG.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.CRIMSON_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_CRIMSON_STEM.get().defaultBlockState(), Blocks.CRIMSON_STEM.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.CRIMSON_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_CRIMSON_STEM.get().defaultBlockState(), Blocks.CRIMSON_STEM.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.DARK_OAK_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_DARK_OAK_LOG.get().defaultBlockState(), Blocks.DARK_OAK_LOG.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.DARK_OAK_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_DARK_OAK_LOG.get().defaultBlockState(), Blocks.DARK_OAK_LOG.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.JUNGLE_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_JUNGLE_LOG.get().defaultBlockState(), Blocks.JUNGLE_LOG.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.JUNGLE_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_JUNGLE_LOG.get().defaultBlockState(), Blocks.JUNGLE_LOG.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.OAK_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_OAK_LOG.get().defaultBlockState(), Blocks.OAK_LOG.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.OAK_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_OAK_LOG.get().defaultBlockState(), Blocks.OAK_LOG.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.SPRUCE_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_SPRUCE_LOG.get().defaultBlockState(), Blocks.SPRUCE_LOG.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.SPRUCE_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_SPRUCE_LOG.get().defaultBlockState(), Blocks.SPRUCE_LOG.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.WARPED_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_WARPED_STEM.get().defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), 3), false);
+    builder13.add(ModConditions.WARPED_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_WARPED_STEM.get().defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), 4), false);
   }
 }

@@ -1,0 +1,685 @@
+{
+  "values": {
+    "roots:3_high_acacia_pillar": [
+      {
+        "block": "minecraft:acacia_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:acacia_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:acacia_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_acacia_log"
+      }
+    ],
+    "roots:3_high_birch_pillar": [
+      {
+        "block": "minecraft:birch_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:birch_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:birch_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_birch_log"
+      }
+    ],
+    "roots:3_high_crimson_pillar": [
+      {
+        "block": "minecraft:crimson_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:crimson_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:crimson_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_crimson_stem"
+      }
+    ],
+    "roots:3_high_dark_oak_pillar": [
+      {
+        "block": "minecraft:dark_oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:dark_oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:dark_oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_dark_oak_log"
+      }
+    ],
+    "roots:3_high_jungle_pillar": [
+      {
+        "block": "minecraft:jungle_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:jungle_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:jungle_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_jungle_log"
+      }
+    ],
+    "roots:3_high_log_pillar": [
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_oak_log"
+      }
+    ],
+    "roots:3_high_oak_pillar": [
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_oak_log"
+      }
+    ],
+    "roots:3_high_rune_pillar": [
+      {
+        "block": "roots:runestone"
+      },
+      {
+        "block": "roots:runestone"
+      },
+      {
+        "block": "roots:runestone"
+      },
+      {
+        "block": "roots:chiseled_runestone"
+      }
+    ],
+    "roots:3_high_spruce_pillar": [
+      {
+        "block": "minecraft:spruce_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:spruce_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:spruce_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_spruce_log"
+      }
+    ],
+    "roots:3_high_warped_pillar": [
+      {
+        "block": "minecraft:warped_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:warped_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:warped_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_warped_stem"
+      }
+    ],
+    "roots:3_high_wildwood_pillar": [
+      {
+        "block": "roots:wildwood_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:wildwood_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:wildwood_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_wildwood_log"
+      }
+    ],
+    "roots:4_high_acacia_pillar": [
+      {
+        "block": "minecraft:acacia_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:acacia_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:acacia_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:acacia_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_acacia_log"
+      }
+    ],
+    "roots:4_high_birch_pillar": [
+      {
+        "block": "minecraft:birch_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:birch_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:birch_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:birch_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_birch_log"
+      }
+    ],
+    "roots:4_high_crimson_pillar": [
+      {
+        "block": "minecraft:crimson_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:crimson_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:crimson_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:crimson_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_crimson_stem"
+      }
+    ],
+    "roots:4_high_dark_oak_pillar": [
+      {
+        "block": "minecraft:dark_oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:dark_oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:dark_oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:dark_oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_dark_oak_log"
+      }
+    ],
+    "roots:4_high_jungle_pillar": [
+      {
+        "block": "minecraft:jungle_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:jungle_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:jungle_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:jungle_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_jungle_log"
+      }
+    ],
+    "roots:4_high_log_pillar": [
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_oak_log"
+      }
+    ],
+    "roots:4_high_oak_pillar": [
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:oak_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_oak_log"
+      }
+    ],
+    "roots:4_high_rune_pillar": [
+      {
+        "block": "roots:runestone"
+      },
+      {
+        "block": "roots:runestone"
+      },
+      {
+        "block": "roots:runestone"
+      },
+      {
+        "block": "roots:runestone"
+      },
+      {
+        "block": "roots:chiseled_runestone"
+      }
+    ],
+    "roots:4_high_spruce_pillar": [
+      {
+        "block": "minecraft:spruce_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:spruce_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:spruce_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:spruce_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_spruce_log"
+      }
+    ],
+    "roots:4_high_warped_pillar": [
+      {
+        "block": "minecraft:warped_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:warped_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:warped_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "minecraft:warped_stem",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_warped_stem"
+      }
+    ],
+    "roots:4_high_wildwood_pillar": [
+      {
+        "block": "roots:wildwood_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:wildwood_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:wildwood_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:wildwood_log",
+        "properties": {
+          "axis": "y"
+        }
+      },
+      {
+        "block": "roots:runed_wildwood_log"
+      }
+    ],
+    "roots:any_grove_stone": [
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "bottom",
+          "valid": "true"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "middle",
+          "valid": "true"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "top",
+          "valid": "true"
+        }
+      }
+    ],
+    "roots:any_primal_grove_stone": [
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "bottom",
+          "valid": "true"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "middle",
+          "valid": "true"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "top",
+          "valid": "true"
+        }
+      }
+    ],
+    "roots:invalid_primal_grove_stone": [
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "bottom",
+          "valid": "false"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "middle",
+          "valid": "false"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "top",
+          "valid": "false"
+        }
+      }
+    ],
+    "roots:valid_grove_stone": [
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "bottom",
+          "valid": "true"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "middle",
+          "valid": "true"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "top",
+          "valid": "true"
+        }
+      }
+    ],
+    "roots:valid_primal_grove_stone": [
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "bottom",
+          "valid": "true"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "middle",
+          "valid": "true"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "facing": "north",
+          "part": "top",
+          "valid": "true"
+        }
+      }
+    ]
+  }
+}

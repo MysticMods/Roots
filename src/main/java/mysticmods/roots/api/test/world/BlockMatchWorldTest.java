@@ -24,6 +24,10 @@ public class BlockMatchWorldTest extends WorldTest {
     this.block = block;
   }
 
+  public Block getBlock() {
+    return block;
+  }
+
   @Override
   public boolean test(BlockState state, RandomSource random) {
     return state.is(this.block);

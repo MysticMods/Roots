@@ -1,6 +1,9 @@
 package mysticmods.roots.api.datamap;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.condition.CanonicalRepresentation;
+import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
@@ -52,6 +55,12 @@ public class DataMaps {
   public static final DataMapType<Ritual, PropertyDataMap> RITUAL_PROPERTY_DATA = DataMapType.builder(RootsAPI.rl("ritual_property_data"), RootsRegistries.Keys.RITUALS, PropertyDataMap.CODEC)
       .synced(PropertyDataMap.CODEC, false)
       .build();
+  public static final DataMapType<LevelCondition, CanonicalRepresentation> LEVEL_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("level_condition_canons"), RootsRegistries.Keys.LEVEL_CONDITIONS, CanonicalRepresentation.CODEC)
+      .synced(CanonicalRepresentation.CODEC, false)
+      .build();
+  public static final DataMapType<PlayerCondition, CanonicalRepresentation> PLAYER_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("player_condition_canons"), RootsRegistries.Keys.PLAYER_CONDITIONS, CanonicalRepresentation.CODEC)
+      .synced(CanonicalRepresentation.CODEC, false)
+      .build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -65,6 +74,8 @@ public class DataMaps {
     event.register(SPELL_MODIFIER_PARENT);
     event.register(SPELL_MODIFIER_SPELL);
     event.register(GROVE_DATA);
+    event.register(LEVEL_CONDITION_CANONS);
+    event.register(PLAYER_CONDITION_CANONS);
 
   }
 }

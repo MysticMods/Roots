@@ -3,34 +3,39 @@ package mysticmods.roots.api.condition;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.faction.GroveType;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
+import mysticmods.roots.block.GroveStoneBlock;
 import net.minecraft.Util;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.datafix.fixes.ChunkPalettedStorageFix;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class LevelCondition implements IDescribed {
   public static final Codec<LevelCondition> CODEC = RootsRegistries.LEVEL_CONDITIONS.byNameCodec();
   public static final Codec<List<LevelCondition>> LIST_CODEC = CODEC.listOf();
   public static final StreamCodec<RegistryFriendlyByteBuf, LevelCondition> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.LEVEL_CONDITIONS);
   public static final StreamCodec<RegistryFriendlyByteBuf, List<LevelCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+  protected CanonicalRepresentation representation;
   private String descriptionId;
 
   public LevelCondition() {
@@ -46,6 +51,21 @@ public abstract class LevelCondition implements IDescribed {
     }
 
     return this.descriptionId;
+  }
+
+  protected abstract CanonicalRepresentation getDefaultRepresentation();
+
+  public CanonicalRepresentation getRepresentation() {
+    if (representation == null) {
+      CanonicalRepresentation canon = builtInRegistryHolder().getData(DataMaps.LEVEL_CONDITION_CANONS);
+      if (canon != null) {
+        representation = canon;
+      } else {
+        representation = getDefaultRepresentation();
+      }
+    }
+
+    return representation;
   }
 
   public abstract Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player);
@@ -78,6 +98,11 @@ public abstract class LevelCondition implements IDescribed {
     }
 
     @Override
+    protected CanonicalRepresentation getDefaultRepresentation() {
+      return new CanonicalRepresentation(test.getPartialBlockState());
+    }
+
+    @Override
     public Set<BlockPos> test(BlockPos pos, Level level, @javax.annotation.Nullable Player player) {
       if (test.test(level.getBlockState(pos), level.getRandom())) {
         return Collections.singleton(pos.immutable());
@@ -96,6 +121,38 @@ public abstract class LevelCondition implements IDescribed {
       this.capstone = capstone;
       this.pillar = pillar;
       this.heightExcluding = height;
+    }
+
+    @Override
+    protected CanonicalRepresentation getDefaultRepresentation() {
+      var tag1 = BuiltInRegistries.BLOCK.getTag(capstone);
+      if (tag1.isEmpty()) {
+        throw new IllegalStateException("Cannot build a canonical representation of " + this + " as the capstone tag " + capstone + " is empty");
+      }
+      BlockState capstoneState = tag1.get().get(0).value().defaultBlockState();
+
+      var tag2 = BuiltInRegistries.BLOCK.getTag(pillar);
+      if (tag2.isEmpty()) {
+        throw new IllegalStateException("Cannot build a canonical representation of " + this + " as the pillar tag " + pillar + " is empty");
+      }
+      BlockState pillarState = tag2.get().get(0).value().defaultBlockState();
+      return fromStates(capstoneState, pillarState, heightExcluding);
+    }
+
+    public static CanonicalRepresentation fromStates (BlockState capstone, BlockState pillar, int height) {
+      if (capstone.hasProperty(RotatedPillarBlock.AXIS)) {
+        capstone = capstone.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
+      }
+      List<PartialBlockState> states = new ArrayList<>();
+      for (int i = 0; i < height; i++) {
+        if (capstone.hasProperty(RotatedPillarBlock.AXIS)) {
+          states.add(new PartialBlockState(pillar, "axis"));
+        } else {
+          states.add(new PartialBlockState(pillar));
+        }
+      }
+      states.add(new PartialBlockState(capstone));
+      return new CanonicalRepresentation(states.toArray());
     }
 
     @Override
@@ -164,6 +221,23 @@ public abstract class LevelCondition implements IDescribed {
       } else {
         return state.getValue(StateProperties.GroveStone.VALID);
       }
+    }
+
+    @Override
+    protected CanonicalRepresentation getDefaultRepresentation() {
+      var tag = BuiltInRegistries.BLOCK.getTag(groveType);
+      if (tag.isEmpty()) {
+        throw new IllegalStateException("Cannot build a canonical representation of " + this + " as the grove type tag " + groveType + " is empty");
+      }
+      BlockState state = tag.get().get(0).value().defaultBlockState();
+      return fromBlockState(state, requireValid, requireInvalid);
+    }
+
+    public static CanonicalRepresentation fromBlockState (BlockState state, boolean requireValid, boolean requireInvalid) {
+      BlockState bottom = state.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM).setValue(GroveStoneBlock.VALID, requireValid || !requireInvalid);
+      BlockState middle = state.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE).setValue(GroveStoneBlock.VALID, requireValid || !requireInvalid);
+      BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP).setValue(GroveStoneBlock.VALID, requireValid || !requireInvalid);
+      return new CanonicalRepresentation(new PartialBlockState(bottom, "valid", "part", "facing"), new PartialBlockState(middle, "valid", "part", "facing"), new PartialBlockState(top, "valid", "part", "facing"));
     }
 
     @Override

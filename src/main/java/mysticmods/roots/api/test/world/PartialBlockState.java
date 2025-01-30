@@ -45,6 +45,14 @@ public record PartialBlockState(Block block,
     return block();
   }
 
+  public BlockState getState () {
+    return build();
+  }
+
+  public PartialBlockState(BlockState template) {
+    this(template.getBlock(), new HashMap<>());
+  }
+
   public PartialBlockState(BlockState template, List<String> properties) {
     this(template.getBlock(), new HashMap<>());
     Map<String, Property<?>> propMap = new HashMap<>();

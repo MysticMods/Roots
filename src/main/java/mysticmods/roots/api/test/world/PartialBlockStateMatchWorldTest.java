@@ -20,6 +20,10 @@ public class PartialBlockStateMatchWorldTest extends WorldTest {
     this.partialBlockState = partialBlockState;
   }
 
+  public PartialBlockState getPartialBlockState() {
+    return partialBlockState;
+  }
+
   @Override
   public boolean test(BlockState state, RandomSource random) {
     return partialBlockState.test(state);

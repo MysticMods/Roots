@@ -24,6 +24,10 @@ public class TagMatchWorldTest extends WorldTest {
     this.tag = tag;
   }
 
+  public TagKey<Block> getTag() {
+    return tag;
+  }
+
   @Override
   public boolean test(BlockState state, RandomSource random) {
     return state.is(tag);
