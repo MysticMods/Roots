@@ -55,6 +55,7 @@ public class RenderTickHandler {
     }
   }
 
+  // This is stolen from Mekanism
   @SubscribeEvent
   public static void onBlockHighlight (RenderHighlightEvent.Block event) {
     Minecraft minecraft = Minecraft.getInstance();
@@ -70,7 +71,6 @@ public class RenderTickHandler {
       MultiBufferSource buffer = event.getMultiBufferSource();
       Camera info = event.getCamera();
       PoseStack matrix = event.getPoseStack();
-      ProfilerFiller profiler = level.getProfiler();
       BlockState blockState = level.getBlockState(pos);
       if (!outliningArea) {
         ItemStack stack = player.getMainHandItem();
