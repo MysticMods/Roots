@@ -38,12 +38,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {
   private final PyreInventory inventory = new PyreInventory() {
@@ -78,13 +85,29 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
     // TODO:
+    if (level.isClientSide()) {
+      return InteractionResult.CONSUME;
+    }
+
     // This is a very specific hack.
     if (inHand.is(ModItems.FIRE_STARTER.get())) {
       return InteractionResult.PASS;
     }
-    if (level.isClientSide()) {
-      return InteractionResult.CONSUME;
+
+    if (currentRitual != ModRituals.CRAFTING.get() && (lifetime > 0 || getBlockState().getValue(PyreBlock.LIT))) {
+      Optional<IFluidHandlerItem> optFluid = FluidUtil.getFluidHandler(inHand);
+      if (optFluid.isPresent()) {
+        IFluidHandlerItem fluidHandler = optFluid.get();
+        FluidStack toDrain = new FluidStack(Fluids.WATER, FluidType.BUCKET_VOLUME);
+        if (FluidStack.isSameFluidSameComponents(fluidHandler.drain(toDrain, IFluidHandler.FluidAction.SIMULATE), toDrain)) {
+          fluidHandler.drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
+          stopRitual();
+          player.setItemInHand(hand, fluidHandler.getContainer());
+          return InteractionResult.SUCCESS;
+        }
+      }
     }
+
     // If there's an ongoing ritual do nothing
     if (lifetime > 0) {
       return InteractionResult.PASS;
@@ -355,18 +378,27 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     this.revalidateRecipe();
   }
 
+  public void stopRitual () {
+    currentRitual = null;
+    lifetime = -1;
+    boundingBox = null;
+    setChanged();
+    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.LIT, false), 3);
+  }
+
   @Override
   public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
     if (currentRitual != null && lifetime > 0) {
       lifetime--;
       setChanged();
       if (lifetime <= 0) {
-        currentRitual = null;
+        stopRitual();
+/*        currentRitual = null;
         boundingBox = null;
         if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT)) {
           pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, false), 3);
         }
-        updateViaState();
+        updateViaState();*/
       } else {
         currentRitual.tick(pLevel, pPos, pState, this);
         if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
