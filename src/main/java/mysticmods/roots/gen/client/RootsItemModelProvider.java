@@ -9,6 +9,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -285,9 +287,6 @@ public class RootsItemModelProvider extends ItemModelProvider {
         }
       }
     });
-
-    spell(ModItems.SPELL_FEY_LIGHT);
-    // TODO: Ritual/spell tokens
   }
 
   public ItemModelBuilder subfolder(Holder<Item> itemHolder, String subfolder) {
