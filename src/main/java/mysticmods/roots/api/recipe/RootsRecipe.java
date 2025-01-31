@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -74,8 +75,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     return this.data.ingredients;
   }
 
-  @Override
-  public boolean matches(W arg, Level arg2) {
+  public boolean matchesIngredients (IRootsCrafting<?> arg, Level arg2) {
     List<ItemStack> inputs = new ArrayList<>();
     for (int i = 0; i < arg.size(); i++) {
       ItemStack stack = arg.getItem(i);
@@ -83,11 +83,15 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
         inputs.add(stack);
       }
     }
-    // TODO: Is this problematic at all? It shouldn't be.
-    if (getIngredients().isEmpty() || inputs.isEmpty()) {
+    if (inputs.isEmpty() || getIngredients().isEmpty()) {
       return false;
     }
     return RecipeMatcher.findMatches(inputs, getIngredients()) != null;
+  }
+
+  @Override
+  public boolean matches(W arg, Level arg2) {
+    return matchesIngredients(arg, arg2);
   }
 
   @Override
