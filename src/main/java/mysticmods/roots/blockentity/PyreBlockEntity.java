@@ -194,6 +194,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return InteractionResult.SUCCESS_NO_ITEM_USED;
   }
 
+  public void startRitual (Ritual ritual, Player player) {
+    currentRitual = ritual;
+    lifetime = ritual.getDuration();
+    boundingBox = null;
+    setChanged();
+/*    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.LIT, true), 3);*/
+  }
+
   public void startRitual(Player player) {
     if (currentRitual != null) {
       this.lifetime = currentRitual.getDuration();
