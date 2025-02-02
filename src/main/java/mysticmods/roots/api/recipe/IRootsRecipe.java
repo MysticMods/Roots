@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.util.SetUtils;
 import net.minecraft.core.BlockPos;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.neoforged.neoforge.common.util.RecipeMatcher;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -24,6 +26,20 @@ import java.util.function.Supplier;
 
 // TODO: List of ItemStack results
 public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
+  default boolean matchesIngredients (RecipeInput arg, Level arg2) {
+    List<ItemStack> inputs = new ArrayList<>();
+    for (int i = 0; i < arg.size(); i++) {
+      ItemStack stack = arg.getItem(i);
+      if (!stack.isEmpty()) {
+        inputs.add(stack);
+      }
+    }
+    if (inputs.isEmpty() || getIngredients().isEmpty()) {
+      return false;
+    }
+    return RecipeMatcher.findMatches(inputs, getIngredients()) != null;
+  }
+
   default NonNullList<ItemStack> process(List<ItemStack> ingredients) {
     NonNullList<ItemStack> result = NonNullList.create();
     for (ItemStack stack : ingredients) {

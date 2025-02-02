@@ -75,20 +75,6 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     return this.data.ingredients;
   }
 
-  public boolean matchesIngredients (IRootsCrafting<?> arg, Level arg2) {
-    List<ItemStack> inputs = new ArrayList<>();
-    for (int i = 0; i < arg.size(); i++) {
-      ItemStack stack = arg.getItem(i);
-      if (!stack.isEmpty()) {
-        inputs.add(stack);
-      }
-    }
-    if (inputs.isEmpty() || getIngredients().isEmpty()) {
-      return false;
-    }
-    return RecipeMatcher.findMatches(inputs, getIngredients()) != null;
-  }
-
   @Override
   public boolean matches(W arg, Level arg2) {
     return matchesIngredients(arg, arg2);

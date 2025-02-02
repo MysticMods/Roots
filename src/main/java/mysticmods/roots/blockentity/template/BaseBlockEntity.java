@@ -5,6 +5,8 @@ import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import mysticmods.roots.api.blockentity.BoundedBlockEntity;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.recipe.IRootsRecipe;
+import mysticmods.roots.api.recipe.RootsRecipe;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import net.minecraft.core.BlockPos;
@@ -17,6 +19,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -187,16 +190,16 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     return result;
   }
 
-  public void refillRecipe (ServerPlayer player, RecipeHolder<? extends RootsTileRecipe<?, ?, ?>> recipe, RecipeInventory inventory) {
+  public void refillRecipe (ServerPlayer player, Recipe<?> recipe, RecipeInventory inventory) {
     PlayerMainInvWrapper inv = new PlayerMainInvWrapper(player.getInventory());
     if (player.isCreative()) {
-      for (Ingredient ingredient : recipe.value().getIngredients()) {
+      for (Ingredient ingredient : recipe.getIngredients()) {
         inventory.insert(ingredient.getItems()[0]);
       }
     } else {
       Int2IntOpenHashMap counts = new Int2IntOpenHashMap();
       boolean foundOuter = true;
-      outer: for (Ingredient ingredient : recipe.value().getIngredients()) {
+      outer: for (Ingredient ingredient : recipe.getIngredients()) {
         for (int i = 0; i < inv.getSlots(); i++) {
           ItemStack stack = inv.getStackInSlot(i);
           if (ingredient.test(stack)) {

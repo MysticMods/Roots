@@ -165,7 +165,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
       }
     } else if (inHand.isEmpty() && player.isCrouching()) {
       if (lastRecipe != null) {
-        refillRecipe((ServerPlayer) player, lastRecipe, inventory);
+        refillRecipe((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION)) {
       if (cachedRecipe == null) {

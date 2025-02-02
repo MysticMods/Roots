@@ -1,8 +1,11 @@
 package mysticmods.roots.api.recipe;
 
+import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,6 +13,11 @@ import java.util.List;
 
 public interface IWorldRecipe<W extends IWorldCrafting> extends IRootsRecipe<W> {
   PartialBlockState getOutputState();
+
+  @Override
+  default boolean matchesIngredients(RecipeInput arg, Level arg2) {
+    return false;
+  }
 
   List<WorldCondition> getConditions();
 
