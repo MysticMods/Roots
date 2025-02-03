@@ -35,7 +35,7 @@ public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IR
     RecipeManager manager = RootsAPI.getInstance().getRecipeManager();
     if (manager == null) {
       // TODO:
-      return Collections.emptyList();
+      return null;
     }
     return manager.getAllRecipesFor(type.get());
   }
@@ -43,6 +43,8 @@ public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IR
   public List<RecipeHolder<T>> getRecipes() {
     if (cache == null) {
       cache = getRecipesList();
+    }
+    if (cache != null) {
       try {
         cache.sort(comparator);
       } catch (UnsupportedOperationException exception) {
@@ -53,9 +55,10 @@ public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IR
       for (int i = 0; i < cache.size(); i++) {
         reverseLookup.put(cache.get(i).id(), i);
       }
+      return cache;
+    } else {
+      return Collections.emptyList();
     }
-
-    return cache;
   }
 
   @Nullable

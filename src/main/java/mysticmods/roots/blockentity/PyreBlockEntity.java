@@ -383,6 +383,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   public void onLoad() {
     super.onLoad();
+    // WOULDN'T YOU KNOW, THIS BREAKS THE RECIPE CACHE!
     this.revalidateRecipe();
   }
 
