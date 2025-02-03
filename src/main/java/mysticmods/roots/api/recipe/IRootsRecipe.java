@@ -1,5 +1,6 @@
 package mysticmods.roots.api.recipe;
 
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
@@ -14,6 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
@@ -26,20 +28,6 @@ import java.util.function.Supplier;
 
 // TODO: List of ItemStack results
 public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
-  default boolean matchesIngredients (RecipeInput arg, Level arg2) {
-    List<ItemStack> inputs = new ArrayList<>();
-    for (int i = 0; i < arg.size(); i++) {
-      ItemStack stack = arg.getItem(i);
-      if (!stack.isEmpty()) {
-        inputs.add(stack);
-      }
-    }
-    if (inputs.isEmpty() || getIngredients().isEmpty()) {
-      return false;
-    }
-    return RecipeMatcher.findMatches(inputs, getIngredients()) != null;
-  }
-
   default NonNullList<ItemStack> process(List<ItemStack> ingredients) {
     NonNullList<ItemStack> result = NonNullList.create();
     for (ItemStack stack : ingredients) {

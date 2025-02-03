@@ -14,11 +14,6 @@ import java.util.List;
 public interface IWorldRecipe<W extends IWorldCrafting> extends IRootsRecipe<W> {
   PartialBlockState getOutputState();
 
-  @Override
-  default boolean matchesIngredients(RecipeInput arg, Level arg2) {
-    return false;
-  }
-
   List<WorldCondition> getConditions();
 
   List<String> getSkipProperties();

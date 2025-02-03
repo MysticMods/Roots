@@ -77,7 +77,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
 
   @Override
   public boolean matches(W arg, Level arg2) {
-    return matchesIngredients(arg, arg2);
+    return RecipeUtil.matchesIngredients(this, arg, arg2);
   }
 
   @Override

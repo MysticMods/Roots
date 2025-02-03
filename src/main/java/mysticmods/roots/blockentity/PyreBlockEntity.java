@@ -6,6 +6,7 @@ import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
+import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -121,7 +122,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     } else if (inHand.isEmpty() && player.isCrouching()) {
       // Try to refill
       if (lastRecipe != null) {
-        refillRecipe((ServerPlayer)player, lastRecipe.value(), inventory);
+        RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
       return light(player, pos);

@@ -190,39 +190,6 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     return result;
   }
 
-  public void refillRecipe (ServerPlayer player, Recipe<?> recipe, RecipeInventory inventory) {
-    PlayerMainInvWrapper inv = new PlayerMainInvWrapper(player.getInventory());
-    if (player.isCreative()) {
-      for (Ingredient ingredient : recipe.getIngredients()) {
-        inventory.insert(ingredient.getItems()[0]);
-      }
-    } else {
-      Int2IntOpenHashMap counts = new Int2IntOpenHashMap();
-      boolean foundOuter = true;
-      outer: for (Ingredient ingredient : recipe.getIngredients()) {
-        for (int i = 0; i < inv.getSlots(); i++) {
-          ItemStack stack = inv.getStackInSlot(i);
-          if (ingredient.test(stack)) {
-            counts.put(i, counts.get(i) + 1);
-            continue outer;
-          }
-        }
-        foundOuter = false;
-        break;
-      }
-      if (foundOuter) {
-        for (Int2IntMap.Entry entry : counts.int2IntEntrySet()) {
-          for (int i = 0; i < entry.getIntValue(); i++) {
-            ItemStack thisStack = inv.extractItem(entry.getIntKey(), 1, false);
-            if (!inventory.insert(thisStack).isEmpty()) {
-              inv.insertItem(entry.getIntKey(), thisStack, false);
-            }
-          }
-        }
-      }
-    }
-  }
-
   public static <T extends BlockEntity> void clientTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
     if (pBlockEntity instanceof ClientTickBlockEntity clientBlockEntity) {
       clientBlockEntity.clientTick(pLevel, pPos, pState);

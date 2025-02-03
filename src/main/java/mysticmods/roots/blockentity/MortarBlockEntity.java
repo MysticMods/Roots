@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
+import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
@@ -165,7 +166,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
       }
     } else if (inHand.isEmpty() && player.isCrouching()) {
       if (lastRecipe != null) {
-        refillRecipe((ServerPlayer) player, lastRecipe.value(), inventory);
+        RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION)) {
       if (cachedRecipe == null) {

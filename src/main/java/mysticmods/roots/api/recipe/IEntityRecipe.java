@@ -10,10 +10,5 @@ import net.minecraft.world.level.Level;
 public interface IEntityRecipe<W extends IEntityCrafting> extends IRootsRecipe<W> {
   EntityTest getEntityTest();
 
-  @Override
-  default boolean matchesIngredients(RecipeInput arg, Level arg2) {
-    return false;
-  }
-
   void modifyEntity(W container, HolderLookup.Provider provider);
 }

@@ -50,6 +50,7 @@ public abstract class RootsRecipeBaseCategory<T extends RootsRecipe<?, ?>> imple
     return title;
   }
 
+  @SuppressWarnings("removal")
   @Override
   public IDrawable getBackground() {
     return background;
