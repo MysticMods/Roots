@@ -19,9 +19,9 @@ import java.util.List;
 public class ServerTickHandler {
   @SubscribeEvent
   public static void onTickEntity(EntityTickEvent.Post event) {
-    if (event.getEntity() instanceof LivingEntity living && !living.level().isClientSide()) {
+    if (!event.getEntity().level().isClientSide()) {
       AttachmentUtil.monitorAndSyncEntity(
-          living,
+          event.getEntity(),
           ModAttachments.SNAPSHOT_STORAGE,
           (entity, storage) -> storage.tick(entity),
           ClientboundEntitySnapshotSyncPacket::new

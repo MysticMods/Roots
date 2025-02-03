@@ -4,7 +4,8 @@ import mysticmods.roots.network.ISyncPacket;
 import mysticmods.roots.network.client.ClientboundDiscardEntityAttachmentPacket;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -42,11 +43,11 @@ public class AttachmentUtil {
     }
   }
 
-  public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSyncEntity (LivingEntity player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<LivingEntity, T> consumer, BiFunction<T, Integer, V> packetSupplier) {
+  public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSyncEntity (Entity player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<Entity, T> consumer, BiFunction<T, Integer, V> packetSupplier) {
     monitorEntityForChange(player, attachment, consumer, (p, t) -> PacketDistributor.sendToPlayersTrackingEntity(p, packetSupplier.apply(t, p.getId())));
   }
 
-  public static <T extends ICleanable> void monitorEntityForChange (LivingEntity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer <LivingEntity, T> consumer, @Nullable BiConsumer<LivingEntity, T> whenDirty) {
+  public static <T extends ICleanable> void monitorEntityForChange (Entity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer <Entity, T> consumer, @Nullable BiConsumer<Entity, T> whenDirty) {
     if (!entity.hasData(attachment.value())) {
       return;
     }

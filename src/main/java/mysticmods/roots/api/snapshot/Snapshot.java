@@ -5,7 +5,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 
 public abstract class Snapshot {
   public static Codec<Snapshot> CODEC = RootsRegistries.SNAPSHOT_TYPES.byNameCodec().dispatch(Snapshot::getType, SnapshotType::mapCodec);
@@ -14,7 +14,7 @@ public abstract class Snapshot {
   protected int startTime;
   protected int decay;
 
-  public Snapshot(LivingEntity entity, int decay) {
+  public Snapshot(Entity entity, int decay) {
     this.startTime = entity.tickCount;
     this.decay = decay;
 
@@ -33,7 +33,7 @@ public abstract class Snapshot {
     return decay;
   }
 
-  public boolean isExpired(LivingEntity entity) {
+  public boolean isExpired(Entity entity) {
     return entity.tickCount >= (startTime + decay) || entity.tickCount < startTime;
   }
 

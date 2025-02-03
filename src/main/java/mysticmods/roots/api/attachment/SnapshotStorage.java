@@ -7,7 +7,7 @@ import mysticmods.roots.api.snapshot.SnapshotType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -34,11 +34,11 @@ public class SnapshotStorage implements ICleanable {
     return snapshots;
   }
 
-  public void tick(LivingEntity living) {
+  public void tick(Entity entity) {
     Iterator<Map.Entry<SnapshotType<?>, Snapshot>> iterator = snapshots.entrySet().iterator();
     while (iterator.hasNext()) {
       Map.Entry<SnapshotType<?>, Snapshot> entry = iterator.next();
-      if (entry == null || entry.getValue() == null || entry.getValue().isExpired(living)) {
+      if (entry == null || entry.getValue() == null || entry.getValue().isExpired(entity)) {
         iterator.remove();
         dirty = true;
       }
@@ -59,13 +59,13 @@ public class SnapshotStorage implements ICleanable {
   }
 
   @Nullable
-  public <T extends Snapshot> T getSnapshot(LivingEntity living, SnapshotType<T> type) {
+  public <T extends Snapshot> T getSnapshot(Entity entity, SnapshotType<T> type) {
     Snapshot result = snapshots.get(type);
     if (result == null) {
       return null;
     }
 
-    if (result.isExpired(living)) {
+    if (result.isExpired(entity)) {
       snapshots.remove(type);
       this.dirty = true;
       return null;
@@ -80,14 +80,14 @@ public class SnapshotStorage implements ICleanable {
     return type.cast(result);
   }
 
-  public <T extends Snapshot> void ifPresent(LivingEntity living, SnapshotType<T> serializer, Consumer<T> consumer) {
-    T result = getSnapshot(living, serializer);
+  public <T extends Snapshot> void ifPresent(Entity entity, SnapshotType<T> serializer, Consumer<T> consumer) {
+    T result = getSnapshot(entity, serializer);
     if (result != null) {
       consumer.accept(result);
     }
   }
 
-  public <T extends Snapshot> void addSnapshot(LivingEntity living, SnapshotType<T> type, T snapshot) {
+  public <T extends Snapshot> void addSnapshot(Entity entity, SnapshotType<T> type, T snapshot) {
     snapshots.put(type, snapshot);
     this.dirty = true;
   }
