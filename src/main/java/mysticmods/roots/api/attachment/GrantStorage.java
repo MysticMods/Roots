@@ -140,6 +140,11 @@ public class GrantStorage implements ICleanable {
   }
 
   @Override
+  public boolean isEmpty() {
+    return grantedSpells.isEmpty() && grantedModifiers.isEmpty();
+  }
+
+  @Override
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }

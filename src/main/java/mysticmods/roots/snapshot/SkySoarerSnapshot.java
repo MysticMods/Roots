@@ -11,7 +11,7 @@ import mysticmods.roots.init.ModSerializers;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
 public class SkySoarerSnapshot extends Snapshot {
@@ -38,8 +38,8 @@ public class SkySoarerSnapshot extends Snapshot {
   private final Vec3 originalMovement;
   private final Vec3 vehicleOriginalMovement;
 
-  public SkySoarerSnapshot(Player player, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
-    super(player, decay);
+  public SkySoarerSnapshot(LivingEntity entity, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
+    super(entity, decay);
     this.originalMovement = originalMovement;
     this.amplifier = amplifier;
     this.vehicleOriginalMovement = vehicleOriginalMovement;

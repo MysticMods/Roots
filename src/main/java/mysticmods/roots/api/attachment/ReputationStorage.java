@@ -68,6 +68,11 @@ public class ReputationStorage implements ICleanable {
     return untruePacifist;
   }
 
+  @Override
+  public boolean isEmpty() {
+    return false;
+  }
+
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }

@@ -3,13 +3,12 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.network.client.ClientboundGrantSyncPacket;
-import mysticmods.roots.network.client.ClientboundHerbSyncPacket;
-import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
-import mysticmods.roots.network.client.ClientboundSnapshotSyncPacket;
+import mysticmods.roots.network.client.*;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 import java.util.ArrayList;
@@ -18,6 +17,18 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ServerTickHandler {
+  @SubscribeEvent
+  public static void onTickEntity(EntityTickEvent.Post event) {
+    if (event.getEntity() instanceof LivingEntity living && !living.level().isClientSide()) {
+      AttachmentUtil.monitorAndSyncEntity(
+          living,
+          ModAttachments.SNAPSHOT_STORAGE,
+          (entity, storage) -> storage.tick(entity),
+          ClientboundEntitySnapshotSyncPacket::new
+      );
+    }
+  }
+
   @SubscribeEvent
   public static void onServerTickEnd(ServerTickEvent.Post event) {
     for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
@@ -35,7 +46,7 @@ public class ServerTickHandler {
           player,
           ModAttachments.SNAPSHOT_STORAGE,
           (player1, data) -> data.tick(player1),
-          ClientboundSnapshotSyncPacket::new
+          ClientboundPlayerSnapshotSyncPacket::new
       );
       AttachmentUtil.monitorAndSync(
           player,

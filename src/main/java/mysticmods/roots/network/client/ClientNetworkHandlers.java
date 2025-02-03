@@ -8,9 +8,11 @@ import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
+import javax.swing.plaf.ActionMapUIResource;
 
 public class ClientNetworkHandlers {
   public static void setGrantStorage(GrantStorage storage) {
@@ -67,5 +69,38 @@ public class ClientNetworkHandlers {
 
   public static void openLibrary (@Nullable InteractionHand hand, int inventorySlot) {
     StaffScreen.open(hand, inventorySlot);
+  }
+
+  public static void setEntitySnapshot(int entity, SnapshotStorage storage) {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft == null || minecraft.level == null) {
+      return;
+    }
+
+    Entity actualEntity = minecraft.level.getEntity(entity);
+    if (actualEntity != null) {
+      actualEntity.setData(ModAttachments.SNAPSHOT_STORAGE, storage);
+    }
+  }
+
+  public static void discardEntityAttachment(String attachmentType, int entity) {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft == null || minecraft.level == null) {
+      return;
+    }
+
+    Entity actualEntity = minecraft.level.getEntity(entity);
+    if (actualEntity == null) {
+      return;
+    }
+    if (attachmentType.equals(ModAttachments.SNAPSHOT_STORAGE.getKey().location().toString())) {
+      actualEntity.removeData(ModAttachments.SNAPSHOT_STORAGE);
+    } else if (attachmentType.equals(ModAttachments.GRANT_STORAGE.getKey().location().toString())) {
+      actualEntity.removeData(ModAttachments.GRANT_STORAGE);
+    } else if (attachmentType.equals(ModAttachments.HERB_STORAGE.getKey().location().toString())) {
+      actualEntity.removeData(ModAttachments.HERB_STORAGE);
+    } else if (attachmentType.equals(ModAttachments.REPUTATION_STORAGE.getKey().location().toString())) {
+      actualEntity.removeData(ModAttachments.REPUTATION_STORAGE);
+    }
   }
 }

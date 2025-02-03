@@ -64,7 +64,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         return InteractionResult.FAIL;
       }
       // TODO: Provider better feedback to the player
-      ConditionResult conditionResult = cachedRecipe.value().checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
+      ConditionResult conditionResult = cachedRecipe.value().checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
       if (conditionResult.anyFailed()) {
         RootsAPI.LOG.info("Conditions failed.");
         conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));

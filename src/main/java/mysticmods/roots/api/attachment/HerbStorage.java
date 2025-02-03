@@ -60,6 +60,11 @@ public class HerbStorage implements ICleanable {
     setDirty(true);
   }
 
+  @Override
+  public boolean isEmpty() {
+    return herbMap.isEmpty();
+  }
+
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }

@@ -7,7 +7,7 @@ import mysticmods.roots.api.snapshot.SnapshotType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -34,11 +34,11 @@ public class SnapshotStorage implements ICleanable {
     return snapshots;
   }
 
-  public void tick(Player player) {
+  public void tick(LivingEntity living) {
     Iterator<Map.Entry<SnapshotType<?>, Snapshot>> iterator = snapshots.entrySet().iterator();
     while (iterator.hasNext()) {
       Map.Entry<SnapshotType<?>, Snapshot> entry = iterator.next();
-      if (entry == null || entry.getValue() == null || entry.getValue().isExpired(player)) {
+      if (entry == null || entry.getValue() == null || entry.getValue().isExpired(living)) {
         iterator.remove();
         dirty = true;
       }
@@ -49,18 +49,23 @@ public class SnapshotStorage implements ICleanable {
     return dirty;
   }
 
+  @Override
+  public boolean isEmpty() {
+    return snapshots.isEmpty();
+  }
+
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
   }
 
   @Nullable
-  public <T extends Snapshot> T getSnapshot(Player player, SnapshotType<T> type) {
+  public <T extends Snapshot> T getSnapshot(LivingEntity living, SnapshotType<T> type) {
     Snapshot result = snapshots.get(type);
     if (result == null) {
       return null;
     }
 
-    if (result.isExpired(player)) {
+    if (result.isExpired(living)) {
       snapshots.remove(type);
       this.dirty = true;
       return null;
@@ -75,14 +80,14 @@ public class SnapshotStorage implements ICleanable {
     return type.cast(result);
   }
 
-  public <T extends Snapshot> void ifPresent(Player player, SnapshotType<T> serializer, Consumer<T> consumer) {
-    T result = getSnapshot(player, serializer);
+  public <T extends Snapshot> void ifPresent(LivingEntity living, SnapshotType<T> serializer, Consumer<T> consumer) {
+    T result = getSnapshot(living, serializer);
     if (result != null) {
       consumer.accept(result);
     }
   }
 
-  public <T extends Snapshot> void addSnapshot(Player player, SnapshotType<T> type, T snapshot) {
+  public <T extends Snapshot> void addSnapshot(LivingEntity living, SnapshotType<T> type, T snapshot) {
     snapshots.put(type, snapshot);
     this.dirty = true;
   }

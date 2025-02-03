@@ -21,7 +21,7 @@ public class SenseDangerEffect extends MobEffect {
   public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
     super.applyEffectTick(pLivingEntity, pAmplifier);
     final Level pLevel = pLivingEntity.level();
-    SnapshotHelper.applyPlayer(pLivingEntity, ModSerializers.EXTENSION.get(), (player, extension) -> {
+    SnapshotHelper.applyLiving(pLivingEntity, ModSerializers.EXTENSION.get(), (player, extension) -> {
       pLevel.getEntities(player, extension.getAABB().move(player.position())).forEach(entity -> {
         // TODO: Better utility for detecting hostiles, confer pacifist checks
         // TODO: Tags for auto-exclusion, auto-inclusion

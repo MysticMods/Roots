@@ -10,7 +10,7 @@ import mysticmods.roots.init.ModSerializers;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 
 public class PetalShellSnapshot extends Snapshot {
   public static final MapCodec<PetalShellSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
@@ -28,8 +28,8 @@ public class PetalShellSnapshot extends Snapshot {
 
   private final int count;
 
-  public PetalShellSnapshot(Player player, int decay, int count) {
-    super(player, decay);
+  public PetalShellSnapshot(LivingEntity entity, int decay, int count) {
+    super(entity, decay);
     this.count = count;
   }
 

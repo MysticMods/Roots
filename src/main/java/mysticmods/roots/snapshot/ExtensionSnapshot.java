@@ -10,6 +10,7 @@ import mysticmods.roots.init.ModSerializers;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 
@@ -32,7 +33,7 @@ public class ExtensionSnapshot extends Snapshot {
   private final int radiusZX, radiusY;
   private AABB aabb;
 
-  public ExtensionSnapshot(Player player, int decay, int radiusZX, int radiusY) {
+  public ExtensionSnapshot(LivingEntity player, int decay, int radiusZX, int radiusY) {
     super(player, decay);
     this.radiusZX = radiusZX;
     this.radiusY = radiusY;
