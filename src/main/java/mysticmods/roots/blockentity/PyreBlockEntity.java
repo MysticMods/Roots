@@ -29,12 +29,14 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -43,6 +45,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.FluidUtil;
@@ -80,6 +83,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private RecipeHolder<PyreRecipe> cachedRecipe = null;
   private Ritual currentRitual = null;
   private int lifetime = -1;
+  private Player lastPlayer;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -131,7 +135,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
-      return light(player, pos);
+      return light(player);
     } else {
       // insert
       ItemStack result = inventory.insert(inHand);
@@ -146,7 +150,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return InteractionResult.SUCCESS;
   }
 
-  public InteractionResult light(Player player, BlockPos pos) {
+  public InteractionResult light(Player player) {
     if (cachedRecipe == null) {
       revalidateRecipe();
     }
@@ -160,7 +164,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       boundingBox = null;
 
       // TODO: Provider better feedback to the player
-      ConditionResult result = cachedRecipe.value().checkConditions(level, player, PYRE_BOUNDS, pos);
+      ConditionResult result = cachedRecipe.value().checkConditions(level, player, PYRE_BOUNDS, getBlockPos());
       if (result.anyFailed()) {
         RootsAPI.LOG.info("Conditions failed.");
         result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
@@ -181,7 +185,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       lastRecipe = cachedRecipe;
       storedItems.clear();
       if (currentRitual == ModRituals.CRAFTING.get()) {
-        storedItems.addAll(cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
+        storedItems.addAll(cachedRecipe.value()
+            .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), null));
       }
       storedItems.removeIf(ItemStack::isEmpty);
       // process
@@ -202,15 +207,16 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   // Why do we never call this
-  public void startRitual (Ritual ritual, Player player) {
+  public void startRitual(Ritual ritual, Player player) {
     currentRitual = ritual;
     lifetime = ritual.getDuration();
     boundingBox = null;
     setChanged();
-/*    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.LIT, true), 3);*/
+    /*    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.LIT, true), 3);*/
   }
 
   public void startRitual(Player player) {
+    this.lastPlayer = player;
     if (currentRitual != null) {
       this.lifetime = currentRitual.getDuration();
     } else {
@@ -218,11 +224,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
   }
 
-  public RecipeHolder<PyreRecipe> getCachedRecipe () {
+  public RecipeHolder<PyreRecipe> getCachedRecipe() {
     return cachedRecipe;
   }
 
-  public RecipeHolder<PyreRecipe> getLastRecipe () {
+  public RecipeHolder<PyreRecipe> getLastRecipe() {
     return lastRecipe;
   }
 
@@ -278,6 +284,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
     pTag.putInt("lifetime", lifetime);
     pTag.put("inventory", inventory.serializeNBT(provider));
+    if (lastPlayer != null) {
+      pTag.putUUID("last_player", lastPlayer.getUUID());
+    }
   }
 
   @Override
@@ -313,6 +322,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       for (int i = 0; i < incomingStoredItems.size(); i++) {
         ItemStack.parse(provider, incomingStoredItems.getCompound(i)).ifPresent(storedItems::add);
       }
+    }
+    if (pTag.hasUUID("last_player")) {
+      lastPlayer = getLevel().getPlayerByUUID(pTag.getUUID("last_player"));
     }
   }
 
@@ -395,18 +407,21 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     this.revalidateRecipe();
   }
 
-  public void stopRitual () {
+  public void stopRitual() {
     currentRitual = null;
     lifetime = -1;
     boundingBox = null;
     setChanged();
-    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.BURNING, false).setValue(PyreBlock.LIT, false), 3);
+    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.BURNING, false)
+        .setValue(PyreBlock.LIT, false), 3);
   }
 
   @Override
   public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
+    boolean changed = false;
     if (currentRitual != null && lifetime > 0) {
       lifetime--;
+      changed = true;
       setChanged();
       if (lifetime <= 0) {
         stopRitual();
@@ -422,14 +437,42 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           }
 
           if (newState != pState) {
+            // This set block will force an update
+            changed = false;
             pLevel.setBlock(pPos, newState, 3);
-          } else {
-            updateViaState();
           }
-        } else {
-          updateViaState();
         }
       }
+    }
+
+    BlockPos below = getBlockPos().below();
+
+    if (inventory.isEmpty() && lastRecipe != null) {
+      IItemHandler handler = null;
+      if (capabilityCache != null) {
+        handler = capabilityCache.getCapability();
+      }
+
+      Recipe<?> recipe = lastRecipe.value();
+
+      if (handler == null) {
+        handler = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, below, null);
+        if (handler != null && capabilityCache == null) {
+          capabilityCache = BlockCapabilityCache.create(Capabilities.ItemHandler.BLOCK, (ServerLevel) getLevel(), below, null);
+        }
+      }
+      if (handler != null) {
+        RecipeUtil.refillRecipe(handler, recipe, inventory);
+      }
+    } else if (!inventory.isEmpty() && cachedRecipe != null && lastPlayer != null && lastRecipe != null && lifetime <= 0) {
+      if (cachedRecipe.equals(lastRecipe) && cachedRecipe.value().matches(playerlessCrafting, getLevel())) {
+        // Start
+        light(lastPlayer);
+      }
+    }
+
+    if (changed) {
+      updateViaState();
     }
   }
 }

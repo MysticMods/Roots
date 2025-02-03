@@ -67,7 +67,7 @@ public class FireStarterItem extends Item {
           }
           if (pyreBlockEntity != null) {
             level.playSound(player, below, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            if (pyreBlockEntity.light(player, below) != InteractionResult.SUCCESS_NO_ITEM_USED) {
+            if (pyreBlockEntity.light(player) != InteractionResult.SUCCESS_NO_ITEM_USED) {
               used = true;
             }
           } else if (stateAt.isAir()) {

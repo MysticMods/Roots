@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeInventory extends ItemStackHandler {
+  private boolean empty = false;
+  private boolean emptyChecked = false;
+
   public RecipeInventory() {
   }
 
@@ -20,12 +23,19 @@ public class RecipeInventory extends ItemStackHandler {
   }
 
   public boolean isEmpty() {
+    if (emptyChecked) {
+      return empty;
+    }
+    emptyChecked = true;
+
     for (int i = 0; i < getSlots(); i++) {
       if (!getStackInSlot(i).isEmpty()) {
+        empty = false;
         return false;
       }
     }
 
+    empty = true;
     return true;
   }
 
@@ -57,6 +67,8 @@ public class RecipeInventory extends ItemStackHandler {
     for (int i = 0; i < getSlots(); i++) {
       setStackInSlot(i, ItemStack.EMPTY);
     }
+    emptyChecked = true;
+    empty = true;
     return result;
   }
 
@@ -66,6 +78,7 @@ public class RecipeInventory extends ItemStackHandler {
       if (!inSlot.isEmpty()) {
         setStackInSlot(i, ItemStack.EMPTY);
         onContentsChanged(i);
+        emptyChecked = false;
         return inSlot;
       }
     }
@@ -110,6 +123,40 @@ public class RecipeInventory extends ItemStackHandler {
         result.add(leftover);
       }
     }
+    emptyChecked = false;
     return result;
+  }
+
+  @Override
+  public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+    if (!simulate) {
+      emptyChecked = false;
+    }
+    return super.insertItem(slot, stack, simulate);
+  }
+
+  @Override
+  public ItemStack extractItem(int slot, int amount, boolean simulate) {
+    if (!simulate) {
+      emptyChecked = false;
+    }
+    return super.extractItem(slot, amount, simulate);
+  }
+
+  @Override
+  public void setStackInSlot(int slot, ItemStack stack) {
+    super.setStackInSlot(slot, stack);
+    emptyChecked = false;
+  }
+
+  @Override
+  public void setSize(int size) {
+    super.setSize(size);
+    emptyChecked = false;
+  }
+
+  @Override
+  protected void onContentsChanged(int slot) {
+    this.emptyChecked = false;
   }
 }
