@@ -125,8 +125,11 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
     simpleBlockItem(ModBlocks.MORTAR.get());
     simpleBlockItem(ModBlocks.PYRE.get());
+    simpleBlockItem(ModBlocks.SOUL_PYRE.get());
     simpleBlockItem(ModBlocks.REINFORCED_PYRE.get());
+    simpleBlockItem(ModBlocks.REINFORCED_SOUL_PYRE.get());
     simpleBlockItem(ModBlocks.DECORATIVE_PYRE.get());
+    simpleBlockItem(ModBlocks.DECORATIVE_SOUL_PYRE.get());
     simpleBlockItem(ModBlocks.UNENDING_BOWL.get());
 
     // Crops have no item models

@@ -105,8 +105,11 @@ public class CreativeTabEvents {
       event.accept(ModItems.INCENSE_BURNER.get());
       event.accept(ModItems.MORTAR.get());
       event.accept(ModItems.PYRE.get());
+      event.accept(ModItems.SOUL_PYRE.get());
       event.accept(ModItems.REINFORCED_PYRE.get());
+      event.accept(ModItems.REINFORCED_SOUL_PYRE.get());
       event.accept(ModItems.DECORATIVE_PYRE.get());
+      event.accept(ModItems.DECORATIVE_SOUL_PYRE.get());
       event.accept(ModItems.UNENDING_BOWL.get());
       event.accept(ModItems.WILDROOT.get());
       event.accept(ModItems.GROVE_MOSS.get());

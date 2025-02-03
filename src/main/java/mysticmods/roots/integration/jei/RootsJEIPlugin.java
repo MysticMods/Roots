@@ -58,8 +58,11 @@ public class RootsJEIPlugin implements IModPlugin {
 
   @Override
   public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-    registration.addRecipeCatalyst(new ItemStack(ModBlocks.GROVE_CRAFTER.get()), GROVE_RECIPE_TYPE);
-    registration.addRecipeCatalyst(new ItemStack(ModBlocks.MORTAR.get()), MORTAR_RECIPE_TYPE);
-    registration.addRecipeCatalyst(new ItemStack(ModBlocks.PYRE.get()), PYRE_RECIPE_TYPE);
+    registration.addRecipeCatalyst(ModBlocks.GROVE_CRAFTER.get(), GROVE_RECIPE_TYPE);
+    registration.addRecipeCatalyst(ModBlocks.MORTAR.get(), MORTAR_RECIPE_TYPE);
+    registration.addRecipeCatalyst(ModBlocks.PYRE.get(), PYRE_RECIPE_TYPE);
+    registration.addRecipeCatalyst(ModBlocks.SOUL_PYRE.get(), PYRE_RECIPE_TYPE);
+    registration.addRecipeCatalyst(ModBlocks.REINFORCED_PYRE.get(), PYRE_RECIPE_TYPE);
+    registration.addRecipeCatalyst(ModBlocks.REINFORCED_SOUL_PYRE.get(), PYRE_RECIPE_TYPE);
   }
 }

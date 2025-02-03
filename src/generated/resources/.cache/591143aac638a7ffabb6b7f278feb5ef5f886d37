@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-31T11:11:44.5463885	Item Models: roots
+// 1.21.1	2025-02-03T15:09:39.631358	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -49,6 +49,7 @@ bfa35e72bbe273df5065c9d1d6636af0fd4a96d3 assets/roots/models/item/creeping_grove
 cb16030fdccc48ab4cd2f4242671ed2d91a7e6df assets/roots/models/item/dandelion_cordial.json
 1d69b78c715766ac4ee6d247b6c8007913b29cdd assets/roots/models/item/dark_oak_bark.json
 bc6fc6f93ea204ab36f67ab5e7688fc406068b88 assets/roots/models/item/decorative_pyre.json
+037834e61485611c15efc348276f4845cfe64331 assets/roots/models/item/decorative_soul_pyre.json
 fbf480cfc4644af754ccd825b030eb3761537705 assets/roots/models/item/deepslate_silver_ore.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/deer_spawn_egg.json
 22d09370c1bd204ca3e68224fba891c55f5de34a assets/roots/models/item/dewgonia.json
@@ -115,6 +116,7 @@ f92e3f5b1e866eb0dc8a2a79d91886db283219da assets/roots/models/item/raw_squid.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/red_sprout_spawn_egg.json
 4c614f64c7f9a5bee0e02da79c8e1f7699059555 assets/roots/models/item/reinforced_pyre.json
 926cd17b439769ba78ef46f2287ed81b42e3baef assets/roots/models/item/reinforced_ritual_pedestal.json
+c8bcb1795dbd0a28b03cb34b3385738623a65769 assets/roots/models/item/reinforced_soul_pyre.json
 536d1166266a152ea4b2ea37fe3c499f143efd99 assets/roots/models/item/reliquary.json
 256a7c001de142677be9aa40521882ee43ce6ed6 assets/roots/models/item/ritual_animal_harvest.json
 26208a71f943b4d69d284512331ef3f47ecaf089 assets/roots/models/item/ritual_blooming.json
@@ -196,6 +198,7 @@ f87e922ad38abf9fac16090d3134a0ff0dff2cc6 assets/roots/models/item/silver_block.j
 33ebd00c986c41ff3dbfd6fe703b5296f7777d8a assets/roots/models/item/silver_knife.json
 6ae2a7f0fceb1384425b93d3f92f5dcc35811ebc assets/roots/models/item/silver_nugget.json
 88f08e588fd91f3c25882cb63d21c76ddcb8fa15 assets/roots/models/item/silver_ore.json
+a2ba5cbc0f7f87a0b02d92dd6aa28dc025c55d8c assets/roots/models/item/soul_pyre.json
 1ace512915d0414d667789bd19a6b6c7f05f1857 assets/roots/models/item/spell_acid_cloud.json
 cd8a24e7114af53d2a35579627ecdab05225c632 assets/roots/models/item/spell_aqua_bubble.json
 3f5b3e5eacff7314ad9ad2a7fdff00f949dba628 assets/roots/models/item/spell_augment.json

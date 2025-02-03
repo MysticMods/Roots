@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_runestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:runestone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_soul_fire_base_blocks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:soul_fire_base_blocks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:soul_pyre"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_runestone",
+      "has_soul_fire_base_blocks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:soul_pyre"
+    ]
+  }
+}

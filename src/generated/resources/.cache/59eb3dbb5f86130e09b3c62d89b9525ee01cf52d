@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-25T14:39:12.2328093	Loot Tables
+// 1.21.1	2025-02-03T15:05:10.0428258	Loot Tables
 e8472c417eb64cb3ad295f65ece125190c4620e0 data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -10,6 +10,7 @@ f01e7c0ac3a5c06cf21bbd8832dc1ae15a7e879d data/roots/loot_table/blocks/caelic_soi
 1d78ecabdd192d4490bf83d7c3cb046137f0e109 data/roots/loot_table/blocks/cloud_berry_crop.json
 bf21b73e3fe3075ef156f385c1638e98453f9543 data/roots/loot_table/blocks/creeping_grove_moss.json
 82d05fc580137b4b8fefb00359f8cb1666e3d024 data/roots/loot_table/blocks/decorative_pyre.json
+a7ee236c9f7482ed8f2dcc074cd546837a34f862 data/roots/loot_table/blocks/decorative_soul_pyre.json
 bf78417bc47bdc04c69bbc23edaf51f08a6a5407 data/roots/loot_table/blocks/deepslate_silver_ore.json
 80fa559bde56c5672c25cda36e10a7d744d29307 data/roots/loot_table/blocks/dewgonia_crop.json
 5acba4c947b6adc59fc8e4ae62c527d6fdc4dceb data/roots/loot_table/blocks/display_pedestal.json
@@ -37,6 +38,7 @@ dcc0177dcdf03acd73c7126bb202fe1f61bcb9c3 data/roots/loot_table/blocks/pereskia_c
 1c1c1fcc736bf7c93aadd66ea6e2e11ca248ffc3 data/roots/loot_table/blocks/raw_silver_block.json
 c1d853ca073ad79c366534d8f010ea06f9c2eac5 data/roots/loot_table/blocks/reinforced_pyre.json
 efe901a4ec0b5a1ee70bfb44da0aa9d824b7addd data/roots/loot_table/blocks/reinforced_ritual_pedestal.json
+905ec5f6141b1debcd781d77f4e61a6c20ae13a3 data/roots/loot_table/blocks/reinforced_soul_pyre.json
 b53003d4d4ae960da21cfaf343722d8d9629dfd7 data/roots/loot_table/blocks/ritual_pedestal.json
 d83617cd4bc9398e50b9ccbeaeff35ed87300481 data/roots/loot_table/blocks/runed_acacia_log.json
 5149fdf6a8c82c014dc1ea65fa67f2321b31c9f1 data/roots/loot_table/blocks/runed_birch_log.json
@@ -86,6 +88,7 @@ f0915afde2f764629134925e34c0d86197cc9f3c data/roots/loot_table/blocks/runestone_
 1b53b0d358e5bfafc65f33f819fc2bfbdd39afeb data/roots/loot_table/blocks/runestone_wall.json
 7b24aadac281f8ca508f10f477b9c68e7968a750 data/roots/loot_table/blocks/silver_block.json
 eba1598aa129e6d70a946b4591784fef12c4fd08 data/roots/loot_table/blocks/silver_ore.json
+b049f4d8c057f3c99fff11bd5714acb480a59893 data/roots/loot_table/blocks/soul_pyre.json
 ba9adc4c9bb5d4af0583a28406319b0e6023d6f2 data/roots/loot_table/blocks/spiritleaf_crop.json
 acd6b94f3c006218213114e7f030034b7cc116f1 data/roots/loot_table/blocks/stalicripe_crop.json
 5a25c8dd9c9ffc5dd70ca7aeed6e3f20ede536c2 data/roots/loot_table/blocks/stonepetal.json

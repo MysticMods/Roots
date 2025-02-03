@@ -164,8 +164,11 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> INCENSE_BURNER = ITEMS.register("incense_burner", () -> new BlockItem(ModBlocks.INCENSE_BURNER.get(), DEFAULT_64.get()));
   public static DeferredHolder<Item, BlockItem> MORTAR = ITEMS.register("mortar", () -> new BlockItem(ModBlocks.MORTAR.get(), DEFAULT_64.get()));
   public static DeferredHolder<Item, BlockItem> PYRE = ITEMS.register("pyre", () -> new BlockItem(ModBlocks.PYRE.get(), DEFAULT_64.get()));
+  public static DeferredHolder<Item, BlockItem> SOUL_PYRE = ITEMS.register("soul_pyre", () -> new BlockItem(ModBlocks.SOUL_PYRE.get(), DEFAULT_64.get()));
   public static DeferredHolder<Item, BlockItem> REINFORCED_PYRE = ITEMS.register("reinforced_pyre", () -> new BlockItem(ModBlocks.REINFORCED_PYRE.get(), DEFAULT_64.get()));
+  public static DeferredHolder<Item, BlockItem> REINFORCED_SOUL_PYRE = ITEMS.register("reinforced_soul_pyre", () -> new BlockItem(ModBlocks.REINFORCED_SOUL_PYRE.get(), DEFAULT_64.get()));
   public static DeferredHolder<Item, BlockItem> DECORATIVE_PYRE = ITEMS.register("decorative_pyre", () -> new BlockItem(ModBlocks.DECORATIVE_PYRE.get(), DEFAULT_64.get()));
+  public static DeferredHolder<Item, BlockItem> DECORATIVE_SOUL_PYRE = ITEMS.register("decorative_soul_pyre", () -> new BlockItem(ModBlocks.DECORATIVE_SOUL_PYRE.get(), DEFAULT_64.get()));
   public static DeferredHolder<Item, BlockItem> UNENDING_BOWL = ITEMS.register("unending_bowl", () -> new BlockItem(ModBlocks.UNENDING_BOWL.get(), DEFAULT_64.get()));
 
   // Actual items

@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-02T19:08:05.6407819	Recipes
+// 1.21.1	2025-02-03T15:05:10.0470833	Recipes
 afb36943e341d957b4cc6aa8dfa1273afb91ba11 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_tile.json
 fa9a2f9d72f328a3b1d0922423e8d8d3f56bca81 data/roots/advancement/recipes/building_blocks/chiseled_runestone_from_runestone_tile.json
 f595b4351c25b84323636294eeee8a9dec1ecbe8 data/roots/advancement/recipes/building_blocks/mossy_runestone_button_from_mossy_runestone_stonecutting.json
@@ -189,6 +189,8 @@ c25ce974e8a4cc717cb3302eb80b4238562aee04 data/roots/advancement/recipes/misc/sil
 5898ffeb37118d1753636a09dc43b53aab91529b data/roots/advancement/recipes/misc/silver_ingot_from_silver_storage.json
 58caef8c5608f21f14a5b390fb697659a549586e data/roots/advancement/recipes/misc/silver_ingot_from_smelting_raw_silver.json
 161c3ada6abd0d3a99adab420f1a6a792f10f115 data/roots/advancement/recipes/misc/silver_nugget_from_silver_ingot.json
+4b576961685386b805406aef022c3b3bd453e4ad data/roots/advancement/recipes/misc/soul_pyre.json
+0b3bafc752255b9ff3a73b021a817c28157d7ba4 data/roots/advancement/recipes/misc/soul_pyre_from_pyre.json
 0faf7d7f4a627b421c25a6fdcaed8e5b3b8d31e6 data/roots/advancement/recipes/misc/spell/acid_cloud.json
 ec42bbe9fd5f8ea20bc0f53b58330b33a1d6b075 data/roots/advancement/recipes/misc/spell/dandelion_winds.json
 74d16ec0585e0b63353837a8f4176c5a9bef6d12 data/roots/advancement/recipes/misc/spell/extension.json
@@ -413,6 +415,8 @@ e8d41c29a2dab0b8ad40d5cf7caea10c5cb7d979 data/roots/recipe/runic_entity/fey_leat
 fe50e1e5f4a6083cae6c0a499511ae36a06bda5f data/roots/recipe/silver_ingot_from_silver_storage.json
 7aaf17e5227d5be2ac33ceda2de015b28f4df1be data/roots/recipe/silver_ingot_from_smelting_raw_silver.json
 8142bcbbc0223f32061db514e5969af2b642040c data/roots/recipe/silver_nugget_from_silver_ingot.json
+904869d65af0103b0a7165749ccf78806b4f668a data/roots/recipe/soul_pyre.json
+cbfd45d0c7ea8f16d0cca734391f168d5a3fbc3c data/roots/recipe/soul_pyre_from_pyre.json
 af8582d68ea41b04a0b1ac3a9476285faf01088c data/roots/recipe/spell/acid_cloud.json
 9baf4f43a4322a18a0c20e0092325c47c4361439 data/roots/recipe/spell/dandelion_winds.json
 a52e9604eb62ee0dae8d9dce1c6fdf6931ac66eb data/roots/recipe/spell/extension.json

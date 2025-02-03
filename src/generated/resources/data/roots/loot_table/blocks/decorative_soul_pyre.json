@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "roots:decorative_soul_pyre"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "roots:blocks/decorative_soul_pyre"
+}

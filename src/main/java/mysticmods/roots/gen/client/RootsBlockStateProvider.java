@@ -194,19 +194,49 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile pyre = models().withExistingParent("pyre", modLoc("block/complex/pyre")).renderType("cutout");
     ModelFile pyreLit = models().withExistingParent("pyre_lit", modLoc("block/complex/pyre_lit")).renderType("cutout");
     getVariantBuilder(ModBlocks.PYRE.get()).forAllStates(state -> {
-      if (state.getValue(PyreBlock.LIT)) {
+      if (state.getValue(PyreBlock.BURNING)) {
         return ConfiguredModel.builder().modelFile(pyreLit).build();
       } else {
         return ConfiguredModel.builder().modelFile(pyre).build();
       }
     });
 
+    ModelFile soulPyre = models().withExistingParent("soul_pyre", modLoc("block/complex/pyre")).renderType("cutout");
+    ModelFile soulPyreLit = models().withExistingParent("soul_pyre_lit", modLoc("block/complex/soul_pyre_lit")).renderType("cutout");
+    getVariantBuilder(ModBlocks.SOUL_PYRE.get()).forAllStates(state -> {
+      if (state.getValue(PyreBlock.BURNING)) {
+        return ConfiguredModel.builder().modelFile(soulPyreLit).build();
+      } else {
+        return ConfiguredModel.builder().modelFile(soulPyre).build();
+      }
+    });
+
     // TODO: Lit vs unlit
-    ModelFile reinforcedPyre = models().withExistingParent("reinforced_pyre", modLoc("block/complex/reinforced_pyre"));
-    getVariantBuilder(ModBlocks.REINFORCED_PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(reinforcedPyre).build());
+    ModelFile reinforcedPyre = models().withExistingParent("reinforced_pyre", modLoc("block/complex/reinforced_pyre")).renderType("cutout");
+    ModelFile reinforcedPyreLit = models().withExistingParent("reinforced_pyre_lit", modLoc("block/complex/reinforced_pyre_lit")).renderType("cutout");
+    getVariantBuilder(ModBlocks.REINFORCED_PYRE.get()).forAllStates(state -> {
+      if (state.getValue(PyreBlock.BURNING)) {
+        return ConfiguredModel.builder().modelFile(reinforcedPyreLit).build();
+      } else {
+        return ConfiguredModel.builder().modelFile(reinforcedPyre).build();
+      }
+    });
+
+    ModelFile soulReinforcedPyre = models().withExistingParent("reinforced_soul_pyre", modLoc("block/complex/reinforced_pyre")).renderType("cutout");
+    ModelFile soulReinforcedPyreLit = models().withExistingParent("reinforced_soul_pyre_lit", modLoc("block/complex/reinforced_soul_pyre_lit")).renderType("cutout");
+    getVariantBuilder(ModBlocks.REINFORCED_SOUL_PYRE.get()).forAllStates(state -> {
+      if (state.getValue(PyreBlock.BURNING)) {
+        return ConfiguredModel.builder().modelFile(soulReinforcedPyreLit).build();
+      } else {
+        return ConfiguredModel.builder().modelFile(soulReinforcedPyre).build();
+      }
+    });
 
     ModelFile decorativePyre = models().withExistingParent("decorative_pyre", modLoc("block/complex/pyre_lit")).renderType("cutout");
     getVariantBuilder(ModBlocks.DECORATIVE_PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(decorativePyre).build());
+
+    ModelFile decorativeSoulPyre = models().withExistingParent("decorative_soul_pyre", modLoc("block/complex/soul_pyre_lit")).renderType("cutout");
+    getVariantBuilder(ModBlocks.DECORATIVE_SOUL_PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(decorativeSoulPyre).build());
 
     ModelFile unendingBowl = models().withExistingParent("unending_bowl", modLoc("block/complex/unending_bowl"));
     getVariantBuilder(ModBlocks.UNENDING_BOWL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(unendingBowl).build());

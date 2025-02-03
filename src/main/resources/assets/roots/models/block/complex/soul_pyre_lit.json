@@ -1,0 +1,6 @@
+{
+	"parent": "roots:block/complex/pyre_lit",
+	"textures": {
+		"4": "block/soul_campfire_fire"
+	}
+}

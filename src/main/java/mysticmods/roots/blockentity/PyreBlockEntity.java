@@ -21,6 +21,7 @@ import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -41,11 +42,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
@@ -58,11 +61,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     @Override
     protected void onContentsChanged(int slot) {
       if (PyreBlockEntity.this.hasLevel() && !PyreBlockEntity.this.getLevel().isClientSide()) {
+        PyreBlockEntity.this.getLevel().invalidateCapabilities(PyreBlockEntity.this.getBlockPos());
         PyreBlockEntity.this.revalidateRecipe();
         PyreBlockEntity.this.updateViaState();
       }
     }
   };
+
+  private BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> capabilityCache;
 
   // TODO: UNHARDCODE THIS
   public final static BoundingBox PYRE_BOUNDS = new BoundingBox(-10, -10, -10, 11, 11, 11);
@@ -95,7 +101,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return InteractionResult.PASS;
     }
 
-    if (currentRitual != ModRituals.CRAFTING.get() && (lifetime > 0 || getBlockState().getValue(PyreBlock.LIT))) {
+    if (currentRitual != ModRituals.CRAFTING.get() && (lifetime > 0 || getBlockState().getValue(PyreBlock.BURNING))) {
       Optional<IFluidHandlerItem> optFluid = FluidUtil.getFluidHandler(inHand);
       if (optFluid.isPresent()) {
         IFluidHandlerItem fluidHandler = optFluid.get();
@@ -195,6 +201,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return InteractionResult.SUCCESS_NO_ITEM_USED;
   }
 
+  // Why do we never call this
   public void startRitual (Ritual ritual, Player player) {
     currentRitual = ritual;
     lifetime = ritual.getDuration();
@@ -367,7 +374,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     RandomSource pRandom = pLevel.getRandom();
-    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.LIT) && pRandom.nextInt(10) == 0) {
+    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING) && pRandom.nextInt(10) == 0) {
 /*      Particles.create(ModParticles.FIERY_PARTICLE.get())
         .addVelocity(0.00525f * (pRandom.nextFloat() - 0.5f), 0, 0.00525f * (pRandom.nextFloat() - 0.5f))
         .setAlpha(1f, 0.6f)
@@ -393,7 +400,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     lifetime = -1;
     boundingBox = null;
     setChanged();
-    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.LIT, false), 3);
+    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.BURNING, false).setValue(PyreBlock.LIT, false), 3);
   }
 
   @Override
@@ -403,16 +410,24 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       setChanged();
       if (lifetime <= 0) {
         stopRitual();
-/*        currentRitual = null;
-        boundingBox = null;
-        if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT)) {
-          pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, false), 3);
-        }
-        updateViaState();*/
       } else {
         currentRitual.tick(pLevel, pPos, pState, this);
-        if (pState.is(RootsTags.Blocks.PYRES) && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
-          pLevel.setBlock(pPos, pState.setValue(PyreBlock.LIT, true), 3);
+        BlockState newState = pState;
+        if (pState.is(RootsTags.Blocks.PYRES)) {
+          if (currentRitual.providesLight() && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
+            newState = newState.setValue(PyreBlock.LIT, true);
+          }
+          if (pState.hasProperty(PyreBlock.BURNING) && !pState.getValue(PyreBlock.BURNING)) {
+            newState = newState.setValue(PyreBlock.BURNING, true);
+          }
+
+          if (newState != pState) {
+            pLevel.setBlock(pPos, newState, 3);
+          } else {
+            updateViaState();
+          }
+        } else {
+          updateViaState();
         }
       }
     }

@@ -57,6 +57,10 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     return RootsRegistries.RITUALS.wrapAsHolder(this);
   }
 
+  public boolean providesLight () {
+    return true;
+  }
+
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity) {
     int dur = getDuration() - blockEntity.getLifetime();
     BoundingBox moved = getBoundingBox();

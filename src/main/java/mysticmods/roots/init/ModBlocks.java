@@ -138,8 +138,11 @@ public class ModBlocks {
   public static DeferredHolder<Block, IncenseBurnerBlock> INCENSE_BURNER = BLOCKS.register("incense_burner", () -> new IncenseBurnerBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, MortarBlock> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock( BlockBehaviour.Properties.of().dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD).lightLevel(o -> o.getValue(PyreBlock.LIT) ? 15 : 0)));
+  public static DeferredHolder<Block, PyreBlock> SOUL_PYRE = BLOCKS.register("soul_pyre", () -> new PyreBlock(BlockBehaviour.Properties.of().dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD).lightLevel(o -> o.getValue(PyreBlock.LIT) ? 2 : 0)));
   public static DeferredHolder<Block, PyreBlock> REINFORCED_PYRE = BLOCKS.register("reinforced_pyre", () -> new PyreBlock(BASE_REINFORCED_PROPERTIES));
+  public static DeferredHolder<Block, PyreBlock> REINFORCED_SOUL_PYRE = BLOCKS.register("reinforced_soul_pyre", () -> new PyreBlock(BASE_REINFORCED_PROPERTIES));
   public static DeferredHolder<Block, DecorativePyreBlock> DECORATIVE_PYRE = BLOCKS.register("decorative_pyre", () -> new DecorativePyreBlock(BASE_WOODEN_PROPERTIES.lightLevel((o) -> 15)));
+  public static DeferredHolder<Block, DecorativePyreBlock> DECORATIVE_SOUL_PYRE = BLOCKS.register("decorative_soul_pyre", () -> new DecorativePyreBlock(BASE_WOODEN_PROPERTIES.lightLevel((o) -> 2)));
   public static DeferredHolder<Block, UnendingBowlBlock> UNENDING_BOWL = BLOCKS.register("unending_bowl", () -> new UnendingBowlBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, MushroomBlock> BAFFLECAP = BLOCKS.register("bafflecap", () -> new MushroomBlock(ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
   public static DeferredHolder<Block, ThreeStageCropBlock> WILDROOT_CROP = BLOCKS.register("wildroot_crop", () -> new ThreeStageCropBlock(ModItems.WILDROOT, CROP_PROPERTIES));

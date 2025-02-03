@@ -41,6 +41,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
     @Override
     protected void onContentsChanged(int slot) {
       if (MortarBlockEntity.this.hasLevel() && !MortarBlockEntity.this.getLevel().isClientSide()) {
+        MortarBlockEntity.this.getLevel().invalidateCapabilities(MortarBlockEntity.this.getBlockPos());
         MortarBlockEntity.this.revalidateRecipe();
         MortarBlockEntity.this.updateViaState();
       }

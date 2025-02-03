@@ -238,8 +238,11 @@ public class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.INCENSE_BURNER);
     addBlock(ModBlocks.MORTAR);
     addBlock(ModBlocks.PYRE);
+    addBlock(ModBlocks.SOUL_PYRE);
     addBlock(ModBlocks.REINFORCED_PYRE);
+    addBlock(ModBlocks.REINFORCED_SOUL_PYRE);
     addBlock(ModBlocks.DECORATIVE_PYRE);
+    addBlock(ModBlocks.DECORATIVE_SOUL_PYRE);
     addBlock(ModBlocks.UNENDING_BOWL);
     addBlock(ModBlocks.BAFFLECAP);
     addBlock(ModBlocks.WILDROOT_CROP);

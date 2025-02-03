@@ -1,16 +1,16 @@
 {
   "variants": {
     "burning=false,lit=false": {
-      "model": "roots:block/pyre"
+      "model": "roots:block/soul_pyre"
     },
     "burning=false,lit=true": {
-      "model": "roots:block/pyre"
+      "model": "roots:block/soul_pyre"
     },
     "burning=true,lit=false": {
-      "model": "roots:block/pyre_lit"
+      "model": "roots:block/soul_pyre_lit"
     },
     "burning=true,lit=true": {
-      "model": "roots:block/pyre_lit"
+      "model": "roots:block/soul_pyre_lit"
     }
   }
 }

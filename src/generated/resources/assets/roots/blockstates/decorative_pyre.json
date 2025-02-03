@@ -1,9 +1,15 @@
 {
   "variants": {
-    "lit=false": {
+    "burning=false,lit=false": {
       "model": "roots:block/decorative_pyre"
     },
-    "lit=true": {
+    "burning=false,lit=true": {
+      "model": "roots:block/decorative_pyre"
+    },
+    "burning=true,lit=false": {
+      "model": "roots:block/decorative_pyre"
+    },
+    "burning=true,lit=true": {
       "model": "roots:block/decorative_pyre"
     }
   }

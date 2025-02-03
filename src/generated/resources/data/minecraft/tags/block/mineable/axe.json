@@ -24,8 +24,11 @@
     "roots:wildwood_door",
     "roots:wildwood_trapdoor",
     "roots:pyre",
+    "roots:reinforced_soul_pyre",
+    "roots:soul_pyre",
     "roots:reinforced_pyre",
     "roots:decorative_pyre",
+    "roots:decorative_soul_pyre",
     "#roots:pedestals/grove",
     "#roots:pedestals/display",
     "roots:grove_crafter"

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "burning=false,lit=false": {
+      "model": "roots:block/reinforced_soul_pyre"
+    },
+    "burning=false,lit=true": {
+      "model": "roots:block/reinforced_soul_pyre"
+    },
+    "burning=true,lit=false": {
+      "model": "roots:block/reinforced_soul_pyre_lit"
+    },
+    "burning=true,lit=true": {
+      "model": "roots:block/reinforced_soul_pyre_lit"
+    }
+  }
+}

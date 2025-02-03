@@ -1,26 +1,17 @@
 package mysticmods.roots.blockentity.template;
 
-import it.unimi.dsi.fastutil.ints.Int2IntMap;
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.blockentity.BoundedBlockEntity;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
-import mysticmods.roots.api.recipe.IRootsRecipe;
-import mysticmods.roots.api.recipe.RootsRecipe;
-import mysticmods.roots.api.recipe.RootsTileRecipe;
-import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -29,12 +20,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -44,7 +33,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
   private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
   protected AABB singleBlockBoundingBox;
   protected BoundingBox boundingBox;
-  protected BlockPos lastOutputPos = null;
+  protected BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> lastOutput;
 
   public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -118,44 +107,32 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
   }
 
   public ItemStack outputAdjacent (ItemStack stack) {
-    if (lastOutputPos != null) {
-      IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, lastOutputPos, (Direction) null);
-      ItemStack result = ItemHandlerHelper.insertItem(output, stack, false);
-      if (result.isEmpty()) {
-        return ItemStack.EMPTY;
-      }
+    // Unneccessary allocation?
+    List<ItemStack> temp = new ArrayList<>();
+    temp.add(stack);
 
-      stack = result;
+    temp = outputAdjacent(temp);
+    if (temp.isEmpty()) {
+      return ItemStack.EMPTY;
     }
 
-    for (Direction direction : Direction.values()) {
-      if (direction == Direction.DOWN) { // You can have any direction unless it's DOWN
-        continue;
-      }
-      BlockPos pos = getBlockPos().relative(direction);
-      if (lastOutputPos != null && lastOutputPos.equals(pos)) {
-        continue;
-      }
-      IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, pos, direction.getOpposite());
-      if (output != null) {
-        lastOutputPos = pos;
-        ItemStack result = ItemHandlerHelper.insertItem(output, stack, false);
-        if (result.isEmpty()) {
-          return ItemStack.EMPTY;
-        }
-        stack = result;
-      }
+    if (temp.size() != 1) {
+      RootsAPI.LOG.error("outputAdjacent returned multiple stacks, this is not supported");
     }
 
-    return stack;
+    return temp.get(0);
   }
 
   public List<ItemStack> outputAdjacent (List<ItemStack> stacks) {
-    if (lastOutputPos != null) {
-      IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, lastOutputPos, (Direction) null);
+    if (lastOutput != null) {
+      IItemHandler output = lastOutput.getCapability();
       if (output != null) {
-        return outputAdjacent(stacks, output);
+        stacks = outputAdjacent(stacks, output);
       }
+    }
+
+    if (stacks.isEmpty()) {
+      return stacks;
     }
 
     for (Direction direction : Direction.values()) {
@@ -166,13 +143,13 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
         break;
       }
       BlockPos pos = getBlockPos().relative(direction);
-      if (lastOutputPos != null && lastOutputPos.equals(pos)) {
-        continue;
-      }
       IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, pos, direction.getOpposite());
-      if (output != null) {
-        lastOutputPos = pos;
+      if (output != null && (lastOutput != null && lastOutput.getCapability() != output)) {
         stacks = outputAdjacent(stacks, output);
+        if (stacks.isEmpty()) {
+          lastOutput = BlockCapabilityCache.create(Capabilities.ItemHandler.BLOCK, (ServerLevel) getLevel(), pos, null);
+          return stacks;
+        }
       }
     }
 

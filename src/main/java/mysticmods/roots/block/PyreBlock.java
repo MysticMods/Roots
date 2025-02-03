@@ -20,11 +20,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
+  // Active -> flames of some description
+  public static final BooleanProperty BURNING = BooleanProperty.create("burning");
+  // Lit -> producing light!
   public static final BooleanProperty LIT = BooleanProperty.create("lit");
 
   public PyreBlock(Properties builder) {
     super(builder);
-    registerDefaultState(defaultBlockState().setValue(LIT, false));
+    registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(BURNING, false));
   }
 
   @Override
@@ -35,7 +38,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PyreBlock.LIT);
+    pBuilder.add(PyreBlock.LIT, PyreBlock.BURNING);
   }
 
   @Nullable

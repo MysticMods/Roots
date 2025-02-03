@@ -20,6 +20,7 @@
     "roots:runed_brick_wall",
     "roots:runed_tile_wall",
     "roots:reinforced_ritual_pedestal",
-    "roots:reinforced_pyre"
+    "roots:reinforced_pyre",
+    "roots:reinforced_soul_pyre"
   ]
 }
