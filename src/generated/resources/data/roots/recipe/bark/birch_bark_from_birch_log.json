@@ -2,6 +2,8 @@
   "type": "roots:bark",
   "condition": [
     {
+      "modifyPosition": true,
+      "name": "origin",
       "shift": "none",
       "test": {
         "type": "roots:tag_match_test",

@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -94,7 +95,7 @@ public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlock
   }
 
   private record CanonicalBlock(Block block) implements CanonicalBlockOrState{
-    public static Codec<CanonicalBlock> CODEC = Block.CODEC.xmap(CanonicalBlock::new, CanonicalBlock::block).codec();
+    public static Codec<CanonicalBlock> CODEC = BuiltInRegistries.BLOCK.byNameCodec().xmap(CanonicalBlock::new, CanonicalBlock::block);
     public static StreamCodec<RegistryFriendlyByteBuf, CanonicalBlock> STREAM_CODEC = ByteBufCodecs.registry(Registries.BLOCK)
         .map(CanonicalBlock::new, CanonicalBlock::block);
   }
