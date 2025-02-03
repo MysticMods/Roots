@@ -24,6 +24,10 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_X;
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Y;
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Z;
+
+  public static ModConfigSpec.IntValue PYRE_BOUNDS_X;
+  public static ModConfigSpec.IntValue PYRE_BOUNDS_Y;
+  public static ModConfigSpec.IntValue PYRE_BOUNDS_Z;
   public static ModConfigSpec COMMON_CONFIG;
 
   static {
@@ -41,6 +45,9 @@ public class ConfigManager {
     AOE_BOUNDING_BOX_X = COMMON_BUILDER.comment("the X half value for the size of the Runic Shears aoe bounding box").defineInRange("aoe_bounding_box_x", 3, 1, Integer.MAX_VALUE);
     AOE_BOUNDING_BOX_Y = COMMON_BUILDER.comment("the Y half value for the size of the Runic Shears aoe bounding box").defineInRange("aoe_bounding_box_y", 3, 1, Integer.MAX_VALUE);
     AOE_BOUNDING_BOX_Z = COMMON_BUILDER.comment("the Z half value for the size of the Runic Shears aoe bounding box").defineInRange("aoe_bounding_box_z", 3, 1, Integer.MAX_VALUE);
+    PYRE_BOUNDS_X = COMMON_BUILDER.comment("the X half value for the size of the Pyre aoe bounding box").defineInRange("pyre_bounds_x", 10, 1, Integer.MAX_VALUE);
+    PYRE_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Pyre aoe bounding box").defineInRange("pyre_bounds_y", 10, 1, Integer.MAX_VALUE);
+    PYRE_BOUNDS_Z = COMMON_BUILDER.comment("the Z half value for the size of the Pyre aoe bounding box").defineInRange("pyre_bounds_z", 10, 1, Integer.MAX_VALUE);
     COMMON_CONFIG = COMMON_BUILDER.build();
   }
 

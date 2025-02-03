@@ -12,6 +12,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModRituals;
@@ -73,8 +74,15 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   private BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> capabilityCache;
 
-  // TODO: UNHARDCODE THIS
-  public final static BoundingBox PYRE_BOUNDS = new BoundingBox(-10, -10, -10, 11, 11, 11);
+  private static BoundingBox PYRE_BOUNDS;
+
+  public static BoundingBox getPyreBoundingBox() {
+    if (PYRE_BOUNDS == null) {
+      PYRE_BOUNDS = new BoundingBox(-ConfigManager.PYRE_BOUNDS_X.get(), -ConfigManager.PYRE_BOUNDS_Y.get(), -ConfigManager.PYRE_BOUNDS_Z.get(), ConfigManager.PYRE_BOUNDS_X.get() + 1, ConfigManager.PYRE_BOUNDS_Y.get() + 1, ConfigManager.PYRE_BOUNDS_Z.get() + 1);
+    }
+
+    return PYRE_BOUNDS;
+  }
 
   private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
   private final List<ItemStack> storedItems = new ArrayList<>();
@@ -164,11 +172,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       boundingBox = null;
 
       // TODO: Provider better feedback to the player
-      ConditionResult result = cachedRecipe.value().checkConditions(level, player, PYRE_BOUNDS, getBlockPos());
+      ConditionResult result = cachedRecipe.value().checkConditions(level, player, getPyreBoundingBox(), getBlockPos());
       if (result.anyFailed()) {
         RootsAPI.LOG.info("Conditions failed.");
-        result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
-        result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: {}", o.getDescriptionId()));
+        result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: {}", o.getDescriptionId()));
         result.report(player);
         // Needs to be a success or it sets things on fire
         return InteractionResult.SUCCESS_NO_ITEM_USED;
@@ -425,6 +433,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       setChanged();
       if (lifetime <= 0) {
         stopRitual();
+
+        if (!inventory.isEmpty() && cachedRecipe != null && lastPlayer != null && lastRecipe != null && lifetime <= 0) {
+          if (cachedRecipe.equals(lastRecipe) && cachedRecipe.value().matches(playerlessCrafting, getLevel())) {
+            // Start
+            light(lastPlayer);
+          }
+        }
       } else {
         currentRitual.tick(pLevel, pPos, pState, this);
         BlockState newState = pState;
@@ -463,11 +478,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
       if (handler != null) {
         RecipeUtil.refillRecipe(handler, recipe, inventory);
-      }
-    } else if (!inventory.isEmpty() && cachedRecipe != null && lastPlayer != null && lastRecipe != null && lifetime <= 0) {
-      if (cachedRecipe.equals(lastRecipe) && cachedRecipe.value().matches(playerlessCrafting, getLevel())) {
-        // Start
-        light(lastPlayer);
       }
     }
 
