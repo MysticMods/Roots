@@ -35,6 +35,8 @@ public class PacketHandler {
     registrar.play(ClientboundHerbSyncPacket.TYPE, ClientboundHerbSyncPacket.CODEC);
     registrar.play(ClientboundGrantSyncPacket.TYPE, ClientboundGrantSyncPacket.CODEC);
     registrar.play(ClientboundOpenLibraryPacket.TYPE, ClientboundOpenLibraryPacket.CODEC);
+    registrar.play(ClientboundEntitySnapshotSyncPacket.TYPE, ClientboundEntitySnapshotSyncPacket.CODEC);
+    registrar.play(ClientboundDiscardEntityAttachmentPacket.TYPE, ClientboundDiscardEntityAttachmentPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {
