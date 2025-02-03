@@ -3,9 +3,12 @@ package mysticmods.roots.blockentity;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
+import mysticmods.roots.api.blockentity.RefillProvider;
+import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
+import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -14,6 +17,7 @@ import mysticmods.roots.recipe.mortar.MortarInventory;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -21,22 +25,27 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MortarBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
+public class MortarBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
   private final MortarInventory inventory = new MortarInventory() {
     @Override
     protected void onContentsChanged(int slot) {
@@ -52,6 +61,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
   private RecipeHolder<MortarRecipe> lastRecipe = null;
   private RecipeHolder<MortarRecipe> cachedRecipe = null;
   private int uses = -1;
+  private BlockCapabilityCache<IItemHandler, Direction> capabilityCache;
 
   public MortarBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -167,7 +177,9 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
       }
     } else if (inHand.isEmpty() && player.isCrouching()) {
       if (lastRecipe != null) {
-        RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
+        if (RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory)) {
+          revalidateRecipe();
+        }
       }
     } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION)) {
       if (cachedRecipe == null) {
@@ -175,7 +187,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
       }
       // TODO: Provider better feedback to the player
       if (cachedRecipe != null && cachedRecipe.value().matches(playerlessCrafting, level)) {
-        ConditionResult conditionResult = cachedRecipe.value().checkConditions(level, player, PyreBlockEntity.PYRE_BOUNDS, pos);
+        ConditionResult conditionResult = cachedRecipe.value().checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
         if (conditionResult.anyFailed()) {
           RootsAPI.LOG.info("Conditions failed.");
           conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
@@ -228,7 +240,35 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Invent
   }
 
   @Override
-  public ItemStackHandler getInventory() {
+  public MortarInventory getInventory() {
     return inventory;
+  }
+
+  @Override
+  public RecipeInventory getRefillInventory() {
+    return getInventory();
+  }
+
+  @Override
+  public @Nullable Recipe<?> getRefillRecipe() {
+    return lastRecipe != null ? lastRecipe.value() : null;
+  }
+
+  @Override
+  public @Nullable BlockCapabilityCache<IItemHandler, Direction> getBlockCapabilityCache() {
+    return capabilityCache;
+  }
+
+  @Override
+  public void setBlockCapabilityCache(BlockCapabilityCache<IItemHandler, Direction> blockCapabilityCache) {
+    this.capabilityCache = blockCapabilityCache;
+  }
+
+  @Override
+  public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
+    boolean changed = tryRefill(pLevel, pPos.below());
+    if (changed) {
+      updateViaState();
+    }
   }
 }

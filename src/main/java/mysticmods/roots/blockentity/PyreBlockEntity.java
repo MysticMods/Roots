@@ -4,10 +4,12 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
+import mysticmods.roots.api.blockentity.RefillProvider;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
+import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
@@ -54,13 +56,14 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.apache.logging.log4j.core.jmx.Server;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity {
+public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
   private final PyreInventory inventory = new PyreInventory() {
     @Override
     protected void onContentsChanged(int slot) {
@@ -337,7 +340,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Override
-  public ItemStackHandler getInventory() {
+  public PyreInventory getInventory() {
     return inventory;
   }
 
@@ -425,7 +428,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Override
-  public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
+  public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     boolean changed = false;
     if (currentRitual != null && lifetime > 0) {
       lifetime--;
@@ -435,7 +438,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         stopRitual();
 
         if (!inventory.isEmpty() && cachedRecipe != null && lastPlayer != null && lastRecipe != null && lifetime <= 0) {
-          if (cachedRecipe.equals(lastRecipe) && cachedRecipe.value().matches(playerlessCrafting, getLevel())) {
+          if (cachedRecipe.equals(lastRecipe) && cachedRecipe.value().matches(playerlessCrafting, pLevel)) {
             // Start
             light(lastPlayer);
           }
@@ -460,29 +463,33 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     }
 
-    BlockPos below = getBlockPos().below();
-
-    if (inventory.isEmpty() && lastRecipe != null) {
-      IItemHandler handler = null;
-      if (capabilityCache != null) {
-        handler = capabilityCache.getCapability();
-      }
-
-      Recipe<?> recipe = lastRecipe.value();
-
-      if (handler == null) {
-        handler = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, below, null);
-        if (handler != null && capabilityCache == null) {
-          capabilityCache = BlockCapabilityCache.create(Capabilities.ItemHandler.BLOCK, (ServerLevel) getLevel(), below, null);
-        }
-      }
-      if (handler != null) {
-        RecipeUtil.refillRecipe(handler, recipe, inventory);
-      }
+    if (tryRefill(pLevel, getBlockPos().below())) {
+      revalidateRecipe();
+      changed = true;
     }
 
     if (changed) {
       updateViaState();
     }
+  }
+
+  @Override
+  public RecipeInventory getRefillInventory() {
+    return getInventory();
+  }
+
+  @Override
+  public Recipe<?> getRefillRecipe() {
+    return lastRecipe != null ? lastRecipe.value() : null;
+  }
+
+  @Override
+  public @org.jetbrains.annotations.Nullable BlockCapabilityCache<IItemHandler, Direction> getBlockCapabilityCache() {
+    return capabilityCache;
+  }
+
+  @Override
+  public void setBlockCapabilityCache(BlockCapabilityCache<IItemHandler, Direction> blockCapabilityCache) {
+    this.capabilityCache = blockCapabilityCache;
   }
 }

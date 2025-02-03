@@ -58,28 +58,30 @@ public class RecipeUtil {
     return map;
   }
 
-  public static void refillRecipeFromPlayer(ServerPlayer player, Recipe<?> recipe, RecipeInventory inventory) {
+  public static boolean refillRecipeFromPlayer(ServerPlayer player, Recipe<?> recipe, RecipeInventory inventory) {
     if (player.isCreative()) {
       for (Ingredient ingredient : recipe.getIngredients()) {
         inventory.insert(ingredient.getItems()[0].copy());
       }
-      return;
+      return true;
     }
     PlayerMainInvWrapper wrapper = new PlayerMainInvWrapper(player.getInventory());
-    refillRecipe(wrapper, recipe, inventory);
+    return refillRecipe(wrapper, recipe, inventory);
   }
 
-  public static void refillRecipe(IItemHandler inv, Recipe<?> recipe, RecipeInventory inventory) {
+  public static boolean refillRecipe(IItemHandler inv, Recipe<?> recipe, RecipeInventory inventory) {
     Int2IntOpenHashMap counts = getIngredientMap(recipe, new RecipeInputWrapper(inv));
-    if (counts != null) {
-      for (Int2IntMap.Entry entry : counts.int2IntEntrySet()) {
-        for (int i = 0; i < entry.getIntValue(); i++) {
-          ItemStack thisStack = inv.extractItem(entry.getIntKey(), 1, false);
-          if (!inventory.insert(thisStack).isEmpty()) {
-            inv.insertItem(entry.getIntKey(), thisStack, false);
-          }
+    if (counts == null) {
+      return false;
+    }
+    for (Int2IntMap.Entry entry : counts.int2IntEntrySet()) {
+      for (int i = 0; i < entry.getIntValue(); i++) {
+        ItemStack thisStack = inv.extractItem(entry.getIntKey(), 1, false);
+        if (!inventory.insert(thisStack).isEmpty()) {
+          inv.insertItem(entry.getIntKey(), thisStack, false);
         }
       }
     }
+    return true;
   }
 }

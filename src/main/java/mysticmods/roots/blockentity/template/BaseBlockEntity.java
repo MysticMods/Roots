@@ -175,7 +175,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
 
   public static <T extends BlockEntity> void serverTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
     if (pBlockEntity instanceof ServerTickBlockEntity serverBlockEntity) {
-      serverBlockEntity.serverTick(pLevel, pPos, pState);
+      serverBlockEntity.serverTick((ServerLevel)pLevel, pPos, pState);
     }
   }
 }

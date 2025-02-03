@@ -1,8 +1,10 @@
 package mysticmods.roots.api.blockentity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.apache.logging.log4j.core.jmx.Server;
 
 public interface DualTickBlockEntity extends ClientTickBlockEntity, ServerTickBlockEntity {
   @Override
@@ -11,7 +13,7 @@ public interface DualTickBlockEntity extends ClientTickBlockEntity, ServerTickBl
   }
 
   @Override
-  default void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
+  default void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     dualTick(pLevel, pPos, pState, false);
   }
 

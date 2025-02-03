@@ -20,6 +20,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -224,7 +225,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   @Override
-  public void serverTick(Level pLevel, BlockPos pPos, BlockState pState) {
+  public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     MinecraftServer server = pLevel.getServer();
     if (server != null && server.getTickCount() % 20 == 0) {
       revalidateRecipe();
