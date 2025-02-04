@@ -23,9 +23,9 @@ import net.neoforged.fml.config.ModConfig;
 // - Juice recipes
 // - Overhaul all block properties, stop using defaults.
 // - Overhaul all item properties
-// - Soul Pyre
 // - Display "ticks" of charged spells
 // - Entity eye height?
+// - Breading
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;
