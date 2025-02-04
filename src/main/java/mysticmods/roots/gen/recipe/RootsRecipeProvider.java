@@ -39,6 +39,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     super(output, registries);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   protected void buildRecipes(RecipeOutput c, HolderLookup.Provider p) {
     ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.THATCH.get(), 32)
@@ -904,6 +905,15 @@ public class RootsRecipeProvider extends RecipeProvider {
             .requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.DUSTS_GLOWSTONE)
             .result(ModItems.GLASS_EYE, 1)), c, RootsAPI.rl("grove/glass_eye"));
 
+    RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.FROST_LANDS)
+            .build(BaseRecipeData.Builder.create()
+                .requires(Tags.Items.CROPS_SUGAR_CANE)
+                .requires(RootsTags.Items.DEWGONIA_HERB)
+                .requires(RootsTags.Items.SPRUCE_BARK)
+                .requires(RootsTags.Items.SPRUCE_BARK)
+                .requires(Items.VINE)), c, RootsAPI.rl("pyre/frost_lands"));
+
     RecipeSaver.saver().unlockedBy("has_wildroot", has(RootsTags.Items.WILDROOT_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.ANIMAL_HARVEST)
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDEWHEET_HERB).requires(ItemTags.WOOL)
@@ -1023,6 +1033,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     }
   }
 
+  @SuppressWarnings("NullableProblems")
   protected static <T extends AbstractCookingRecipe> void cookRecipes(RecipeOutput recipeOutput, String cookingMethod, RecipeSerializer<T> cookingSerializer, AbstractCookingRecipe.Factory<T> recipeFactory, int cookingTime) {
     simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.VENISON.get(), ModItems.COOKED_VENISON.get(), 0.35F);
     simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, Items.CARROT, ModItems.COOKED_CARROT.get(), 0.35F);

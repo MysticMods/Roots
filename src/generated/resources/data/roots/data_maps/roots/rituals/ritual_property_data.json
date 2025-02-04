@@ -188,6 +188,69 @@
           "default_value": 30,
           "value": 30
         }
+      },
+      {
+        "id": "roots:frost_lands/heal_interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The interval at which tagged entities are healed.",
+          "default_value": 30,
+          "value": 30
+        }
+      },
+      {
+        "id": "roots:frost_lands/spawn_chance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The chance per tick that a snowman will spawn.",
+          "default_value": 0.06,
+          "value": 0.06
+        }
+      },
+      {
+        "id": "roots:frost_lands/fluid_count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of fluid blocks to tweak per interval.",
+          "default_value": 2,
+          "value": 2
+        }
+      },
+      {
+        "id": "roots:frost_lands/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of blocks to tweak per interval.",
+          "default_value": 5,
+          "value": 5
+        }
+      },
+      {
+        "id": "roots:frost_lands/layer_chance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The chance per interval that a snow layer will be added to an existing layer",
+          "default_value": 0.1,
+          "value": 0.1
+        }
+      },
+      {
+        "id": "roots:frost_lands/powder_chance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The chance per interval that a full snow layer will convert to powdered snow.",
+          "default_value": 0.04,
+          "value": 0.04
+        }
+      },
+      {
+        "id": "roots:frost_lands/ice_chance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The chance per interval that an ice block will be converted into packed or blue ice.",
+          "default_value": 0.05,
+          "value": 0.05
+        }
       }
     ],
     "roots:gathering": [

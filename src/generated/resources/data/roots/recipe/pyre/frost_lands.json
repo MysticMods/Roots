@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/sugar_cane"
+      },
+      {
+        "tag": "roots:herbs/dewgonia"
+      },
+      {
+        "tag": "roots:barks/spruce"
+      },
+      {
+        "tag": "roots:barks/spruce"
+      },
+      {
+        "item": "minecraft:vine"
+      }
+    ]
+  },
+  "ritual": "roots:frost_lands"
+}

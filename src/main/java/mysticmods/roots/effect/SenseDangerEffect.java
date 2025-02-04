@@ -25,7 +25,7 @@ public class SenseDangerEffect extends MobEffect {
       pLevel.getEntities(player, extension.getAABB().move(player.position())).forEach(entity -> {
         // TODO: Better utility for detecting hostiles, confer pacifist checks
         // TODO: Tags for auto-exclusion, auto-inclusion
-        if (entity instanceof LivingEntity mob && (entity instanceof Enemy enemy || entity instanceof NeutralMob neutral && neutral.isAngryAt(player))) {
+        if (entity instanceof LivingEntity mob && (entity instanceof Enemy enemy || entity instanceof NeutralMob neutral && player instanceof LivingEntity living && neutral.isAngryAt(living))) {
           mob.addEffect(new MobEffectInstance(MobEffects.GLOWING, 40, 0, false, false));
         }
       });

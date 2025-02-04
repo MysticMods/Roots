@@ -18,8 +18,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -61,20 +61,20 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     return true;
   }
 
-  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity) {
+  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
     int dur = getDuration() - blockEntity.getLifetime();
     BoundingBox moved = getBoundingBox();
     if (moved != null) {
       moved = moved.moved(pPos.getX(), pPos.getY(), pPos.getZ());
     }
-    functionalTick(pLevel, pPos, pState, moved, blockEntity, dur);
-    animationTick(pLevel, pPos, pState, moved, blockEntity, dur);
+    functionalTick(pLevel, pPos, pState, moved, blockEntity, dur, random);
+    animationTick(pLevel, pPos, pState, moved, blockEntity, dur, random);
   }
 
-  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration);
+  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
   // Still executed on the server
-  protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration);
+  protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
   protected void rebuildBounds() {
     boundingBox = new BoundingBox(-getRadiusXZ(), -getRadiusY(), -getRadiusXZ(), getRadiusXZ() + 1, getRadiusY() + 1, getRadiusXZ() + 1);

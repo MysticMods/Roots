@@ -9,7 +9,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ClientboundDiscardEntityAttachmentPacket(String attachmentType, int entity) implements IRootsPacket {
-  public static final Type<ClientboundDiscardEntityAttachmentPacket> TYPE = new Type<>(RootsAPI.rl("client_bound_player_snapshot_sync"));
+  public static final Type<ClientboundDiscardEntityAttachmentPacket> TYPE = new Type<>(RootsAPI.rl("client_bound_player_discard_entity_attachment"));
   public static final StreamCodec<FriendlyByteBuf, ClientboundDiscardEntityAttachmentPacket> CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, ClientboundDiscardEntityAttachmentPacket::attachmentType, ByteBufCodecs.VAR_INT, ClientboundDiscardEntityAttachmentPacket::entity, ClientboundDiscardEntityAttachmentPacket::new);
 
   @Override

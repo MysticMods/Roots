@@ -6,6 +6,7 @@ import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -390,6 +391,7 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> FORCE_FRIENDLY = modTag("force_friendly");
 
     public static final TagKey<EntityType<?>> DISABLE_DISARM = modTag("disable_disarm");
+    public static final TagKey<EntityType<?>> HEALABLE_ICE_CREATURES = modTag("healable_ice_creatures");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

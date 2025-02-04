@@ -8,6 +8,7 @@ import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class CraftingRitual extends Ritual {
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int dur) {
+  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int dur, RandomSource randomSource) {
     if (dur == getInterval()) {
       List<ItemStack> output = blockEntity.popStoredItems();
       if (output.isEmpty()) {
@@ -31,7 +32,7 @@ public class CraftingRitual extends Ritual {
   }
 
   @Override
-  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int dur) {
+  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int dur, RandomSource randomSource) {
 
   }
 

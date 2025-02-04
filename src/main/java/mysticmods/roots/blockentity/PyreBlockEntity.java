@@ -48,20 +48,18 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
-import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
   private final PyreInventory inventory = new PyreInventory() {
@@ -95,6 +93,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private Ritual currentRitual = null;
   private int lifetime = -1;
   private Player lastPlayer;
+  private UUID lastUuid;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -228,6 +227,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   public void startRitual(Player player) {
     this.lastPlayer = player;
+    this.lastUuid = null;
     if (currentRitual != null) {
       this.lifetime = currentRitual.getDuration();
     } else {
@@ -297,6 +297,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     pTag.put("inventory", inventory.serializeNBT(provider));
     if (lastPlayer != null) {
       pTag.putUUID("last_player", lastPlayer.getUUID());
+    } else if (lastUuid != null) {
+      pTag.putUUID("last_player", lastUuid);
     }
   }
 
@@ -335,7 +337,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     }
     if (pTag.hasUUID("last_player")) {
-      lastPlayer = getLevel().getPlayerByUUID(pTag.getUUID("last_player"));
+      lastUuid = pTag.getUUID("last_player");
+      if (getLevel() != null) {
+        lastPlayer = getLevel().getPlayerByUUID(lastUuid);
+      }
     }
   }
 
@@ -427,6 +432,24 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         .setValue(PyreBlock.LIT, false), 3);
   }
 
+  @Nullable
+  private Player getLastPlayer () {
+    if (lastPlayer != null) {
+      return lastPlayer;
+    }
+
+    if (getLevel() == null) {
+      return null;
+    }
+
+    if (lastUuid != null) {
+      lastPlayer = getLevel().getPlayerByUUID(lastUuid);
+      return lastPlayer;
+    }
+
+    return null;
+  }
+
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     boolean changed = false;
@@ -437,14 +460,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       if (lifetime <= 0) {
         stopRitual();
 
-        if (!inventory.isEmpty() && cachedRecipe != null && lastPlayer != null && lastRecipe != null && lifetime <= 0) {
+        if (!inventory.isEmpty() && cachedRecipe != null && getLastPlayer () != null && lastRecipe != null && lifetime <= 0) {
           if (cachedRecipe.equals(lastRecipe) && cachedRecipe.value().matches(playerlessCrafting, pLevel)) {
             // Start
-            light(lastPlayer);
+            light(getLastPlayer());
           }
         }
       } else {
-        currentRitual.tick(pLevel, pPos, pState, this);
+        currentRitual.tick(pLevel, pPos, pState, this, this.getRandom());
         BlockState newState = pState;
         if (pState.is(RootsTags.Blocks.PYRES)) {
           if (currentRitual.providesLight() && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {

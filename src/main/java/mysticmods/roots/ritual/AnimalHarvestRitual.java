@@ -1,6 +1,5 @@
 package mysticmods.roots.ritual;
 
-import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -17,10 +16,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,11 +29,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.neoforge.common.util.FakePlayer;
@@ -50,9 +49,9 @@ public class AnimalHarvestRitual extends Ritual {
   private final Set<EntityType<?>> normalLoot = new ObjectLinkedOpenHashSet<>();
 
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
+  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
-      List<LivingEntity> entities = blockEntity.getLevel().getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !emptyLoot.contains(o.getType())));
+      List<LivingEntity> entities = blockEntity.getLevel().getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive).and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !emptyLoot.contains(o.getType())));
       if (entities.isEmpty()) {
         return;
       }
@@ -113,7 +112,7 @@ public class AnimalHarvestRitual extends Ritual {
   }
 
   @Override
-  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration) {
+  public void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
 
   }
 

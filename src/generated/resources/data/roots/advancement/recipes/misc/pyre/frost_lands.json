@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:pyre/frost_lands"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_dewgonia": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:herbs/dewgonia"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_dewgonia"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:pyre/frost_lands"
+    ]
+  }
+}

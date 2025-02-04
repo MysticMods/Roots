@@ -40,10 +40,17 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_INTERVAL = P.recordProperty("fire_storm/interval", Property.ofInt(2, RitualProperties.INTERVAL));
 
   public static final DeferredHolder<Ritual, FrostLandsRitual> FROST_LANDS = RITUAL.register("frost_lands", FrostLandsRitual::new);
+  public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_FLUID_COUNT = P.recordProperty("frost_lands/fluid_count", Property.ofInt(2, "The number of fluid blocks to tweak per interval."));
+  public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_COUNT = P.recordProperty("frost_lands/count", Property.ofInt(5, "The number of blocks to tweak per interval."));
+  public static final PropertyHolder<Property.FloatProperty> FROST_LANDS_LAYER_CHANCE = P.recordProperty("frost_lands/layer_chance", Property.ofFloat(0.1f, "The chance per interval that a snow layer will be added to an existing layer"));
+  public static final PropertyHolder<Property.FloatProperty> FROST_LANDS_POWDER_CHANCE = P.recordProperty("frost_lands/powder_chance", Property.ofFloat(0.04f, "The chance per interval that a full snow layer will convert to powdered snow."));
+  public static final PropertyHolder<Property.FloatProperty> FROST_LANDS_ICE_CHANCE = P.recordProperty("frost_lands/ice_chance", Property.ofFloat(0.05f, "The chance per interval that an ice block will be converted into packed or blue ice."));
   public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_DURATION = P.recordProperty("frost_lands/duration", Property.ofInt(6400, RitualProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_INTERVAL = P.recordProperty("frost_lands/interval", Property.ofInt(30, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_RADIUS_XZ = P.recordProperty("frost_lands/radius_xz", Property.ofInt(10, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_RADIUS_Y = P.recordProperty("frost_lands/radius_y", Property.ofInt(10, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_INTERVAL_HEAL = P.recordProperty("frost_lands/heal_interval", Property.ofInt(30, "The interval at which tagged entities are healed."));
+  public static final PropertyHolder<Property.FloatProperty> FROST_LANDS_SPAWN_CHANCE = P.recordProperty("frost_lands/spawn_chance", Property.ofFloat(0.06f, "The chance per tick that a snowman will spawn."));
 
   public static final DeferredHolder<Ritual, GatheringRitual> GATHERING = RITUAL.register("gathering", GatheringRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> GATHERING_DURATION = P.recordProperty("gathering/duration", Property.ofInt(6000, RitualProperties.DURATION));
