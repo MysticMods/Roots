@@ -29,18 +29,22 @@ public class RootsLangProvider extends LanguageProvider {
   }
 
   public void addBlock(Holder<Block> holder) {
+    //noinspection DataFlowIssue
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 
   public void addItem(Holder<Item> holder) {
+    //noinspection DataFlowIssue
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 
   public void addEntity(Holder<EntityType<?>> holder) {
+    //noinspection DataFlowIssue
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 
   public void addEffect(Holder<MobEffect> holder) {
+    //noinspection DataFlowIssue
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
 
@@ -113,7 +117,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.commands.ritual.usage", "Usage: /roots ritual <ritual>");
     add("roots.commands.ritual.ritual_not_found", "Ritual not found: %s");
     add("roots.commands.ritual.no_player", "Must be executed by a player to use this command");
-    add("roots.commands.ritual.recipe_not_found", "No recipe four for ritual %s");
+    add("roots.commands.ritual.recipe_not_found", "No recipe found for ritual %s");
     add("roots.commands.ritual.no_space", "No space to place pyre.");
     add("roots.commands.ritual.failed_condition", "Failed to place condition: %s");
 
@@ -134,12 +138,8 @@ public class RootsLangProvider extends LanguageProvider {
     RootsRegistries.RITUALS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
-    RootsRegistries.HERBS.entrySet().forEach(o -> {
-          if (o == null || o.getValue() == null || o.getValue().getDescriptionId() == null) {
-            System.out.println("Null herb");
-          }
-          add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
-        }
+    RootsRegistries.HERBS.entrySet().forEach(o ->
+        add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
     RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
