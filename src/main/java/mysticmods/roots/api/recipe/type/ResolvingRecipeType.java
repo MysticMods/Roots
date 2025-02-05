@@ -15,20 +15,23 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IRootsRecipe<C>> extends SimpleJsonResourceReloadListener {
+public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> & IRootsRecipe<C>> extends SimpleJsonResourceReloadListener {
   protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
   protected final Supplier<RecipeType<T>> type;
   protected List<RecipeHolder<T>> cache = null;
   protected final Comparator<? super RecipeHolder<T>> comparator;
   protected final Object2IntOpenHashMap<ResourceLocation> reverseLookup = new Object2IntOpenHashMap<>();
+  protected final Function<T, @org.jetbrains.annotations.Nullable V> resolver;
   private RecipeHolder<T> lastRecipe = null;
 
-  public ResolvingRecipeType(Supplier<RecipeType<T>> type, Comparator<? super RecipeHolder<T>> comparator) {
+  public ResolvingRecipeType(Supplier<RecipeType<T>> type, Comparator<? super RecipeHolder<T>> comparator, Function<T, @org.jetbrains.annotations.Nullable V> resolver) {
     super(GSON, "recipes");
     this.type = type;
     this.comparator = comparator;
+    this.resolver = resolver;
   }
 
   protected List<RecipeHolder<T>> getRecipesList() {
@@ -109,6 +112,30 @@ public class ResolvingRecipeType<C extends RecipeInput, T extends Recipe<C> & IR
     }
     for (RecipeHolder<T> recipe : getRecipes()) {
       if (recipe.value().matches(inventory, level)) {
+        lastRecipe = recipe;
+        return recipe;
+      }
+    }
+
+    return null;
+  }
+
+  @Nullable
+  public RecipeHolder<T> findRecipe (V output) {
+    if (resolver == null) {
+      return null;
+    }
+
+    if (lastRecipe != null) {
+      V lastValue = resolver.apply(lastRecipe.value());
+      if (lastValue != null && lastValue.equals(output)) {
+        return lastRecipe;
+      }
+    }
+
+    for (RecipeHolder<T> recipe : getRecipes()) {
+      V value = resolver.apply(recipe.value());
+      if (value != null && value.equals(output)) {
         lastRecipe = recipe;
         return recipe;
       }

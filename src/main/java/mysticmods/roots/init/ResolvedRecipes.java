@@ -1,7 +1,10 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.type.ResolvingRecipeType;
+import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.grove.GroveCrafting;
@@ -22,12 +25,22 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ResolvedRecipes {
-  public static final ResolvingRecipeType<GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(ModRecipes.GROVE, (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())));
-  public static final ResolvingRecipeType<MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>((ModRecipes.MORTAR), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())));
-  public static final ResolvingRecipeType<PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>((ModRecipes.PYRE), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())));
-  public static final ResolvingRecipeType<SimpleWorldCrafting, RunicBlockRecipe> RUNIC_BLOCK = new ResolvingRecipeType<>((ModRecipes.RUNIC_BLOCK), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())));
-  public static final ResolvingRecipeType<RunicEntityCrafting, RunicEntityRecipe> RUNIC_ENTITY = new ResolvingRecipeType<>((ModRecipes.RUNIC_ENTITY), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())));
-  public static final ResolvingRecipeType<SimpleWorldCrafting, BarkRecipe> BARK = new ResolvingRecipeType<>((ModRecipes.BARK), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())));
+  public static final ResolvingRecipeType<Void, GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(ModRecipes.GROVE, (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())), null);
+  public static final ResolvingRecipeType<Spell, MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>((ModRecipes.MORTAR), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())), o -> {
+    if (o.getUnlocks().isEmpty()) {
+      return null;
+    }
+    Unlock<?> unlock = o.getUnlocks().getFirst();
+    if (unlock instanceof Unlock.SpellUnlock) {
+      return ((Unlock.SpellUnlock) unlock).value().value();
+    }
+
+    return null;
+  });
+  public static final ResolvingRecipeType<Ritual, PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>((ModRecipes.PYRE), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())), PyreRecipe::getRitual);
+  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, RunicBlockRecipe> RUNIC_BLOCK = new ResolvingRecipeType<>((ModRecipes.RUNIC_BLOCK), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())), null);
+  public static final ResolvingRecipeType<Void, RunicEntityCrafting, RunicEntityRecipe> RUNIC_ENTITY = new ResolvingRecipeType<>((ModRecipes.RUNIC_ENTITY), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())), null);
+  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, BarkRecipe> BARK = new ResolvingRecipeType<>((ModRecipes.BARK), (o1, o2) -> Integer.compare(o1.id().getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value().getPriority())), null);
 
   @SubscribeEvent
   public static void onReloadListeners(AddReloadListenerEvent event) {
