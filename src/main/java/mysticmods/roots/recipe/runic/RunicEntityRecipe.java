@@ -36,10 +36,6 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
   private int cooldown;
   private int durabilityCost = 1;
 
-  public RunicEntityRecipe() {
-    super();
-  }
-
   public RunicEntityRecipe(BaseRecipeData data, EntityTest test, int cooldown, int durabilityCost) {
     super(data, test);
     this.cooldown = cooldown;

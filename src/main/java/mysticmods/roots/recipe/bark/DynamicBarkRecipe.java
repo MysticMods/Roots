@@ -2,7 +2,9 @@ package mysticmods.roots.recipe.bark;
 
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
+import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSerializers;
@@ -16,10 +18,12 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbilities;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 
 public class DynamicBarkRecipe extends BarkRecipe {
@@ -28,7 +32,7 @@ public class DynamicBarkRecipe extends BarkRecipe {
   public static ResourceLocation IDENTIFIER = RootsAPI.rl("bark/dynamic_modded_wood_bark");
 
   public DynamicBarkRecipe() {
-    super();
+    super(new BaseRecipeData(), new PartialBlockState(Blocks.AIR), Collections.emptyList(), Collections.emptyList(), 1);
   }
 
   private ItemStack newResult = null;

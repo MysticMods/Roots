@@ -52,10 +52,6 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   private int durabilityCost = 1;
   private OutputStateMapper stateMapper;
 
-  public BarkRecipe() {
-    super();
-  }
-
   public BarkRecipe(BaseRecipeData data, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost) {
     super(data, outputState, condition, skipProperties);
     this.durabilityCost = durabilityCost;

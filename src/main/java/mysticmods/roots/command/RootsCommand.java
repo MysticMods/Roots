@@ -33,6 +33,7 @@ public class RootsCommand {
   }
 
   private static List<String> spellIds = null;
+  private static List<String> ritualIds = null;
 
   private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestSpells() {
     if (spellIds == null) {
@@ -40,6 +41,16 @@ public class RootsCommand {
     }
     return Commands.argument("spell", ResourceLocationArgument.id())
         .suggests((c, build) -> SharedSuggestionProvider.suggest(spellIds, build));
+  }
+
+  private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestRituals() {
+    if (ritualIds == null) {
+      ritualIds = RootsRegistries.RITUALS.keySet().stream().map(ResourceLocation::toString)
+          .collect(Collectors.toList());
+    }
+
+    return Commands.argument("ritual", ResourceLocationArgument.id())
+        .suggests((c, build) -> SharedSuggestionProvider.suggest(ritualIds, build));
   }
 
   public static LiteralArgumentBuilder<CommandSourceStack> builder(LiteralArgumentBuilder<CommandSourceStack> builder) {
@@ -89,6 +100,25 @@ public class RootsCommand {
         player.setItemInHand(InteractionHand.MAIN_HAND, staff);
       }
       return 1;
+    })));
+    builder.then(Commands.literal("ritual").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.ritual.usage"), false);
+      return 1;
+    }).then(suggestRituals().executes(c -> {
+
+      // Get the ritual
+
+      // Create a pyre
+
+      // Fill the pyre with the ritual recipe
+
+      // Place a chest below the pyre
+
+      // Fill the chest with ingredients
+
+      // Give the player a flint and steel
+
+      // Iterate over world conditions and create them using /place
     })));
     builder.then(Commands.literal("activate").executes(c -> {
       AABB bounds = new AABB(-15, -15, -15, 15, 15, 15).move(c.getSource().getPosition());

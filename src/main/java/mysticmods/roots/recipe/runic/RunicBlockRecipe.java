@@ -52,10 +52,6 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Nullable
   private OutputStateMapper stateMapper;
 
-  public RunicBlockRecipe() {
-    super();
-  }
-
   public RunicBlockRecipe(BaseRecipeData baseRecipeData, PartialBlockState partialBlockState1, List<WorldCondition> worldCondition, OutputStateMapper outputStateMapper, List<String> strings, int durabilityCost) {
     super(baseRecipeData, partialBlockState1, worldCondition, strings);
     this.stateMapper = outputStateMapper;

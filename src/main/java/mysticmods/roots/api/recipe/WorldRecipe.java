@@ -25,9 +25,6 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   protected List<WorldCondition> conditions;
   protected List<String> skipProperties = new ArrayList<>();
 
-  public WorldRecipe() {
-  }
-
   public WorldRecipe(BaseRecipeData data, PartialBlockState outputState, List<WorldCondition> conditions, List<String> skipProperties) {
     super(data);
     this.outputState = outputState;
