@@ -121,9 +121,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         IFluidHandlerItem fluidHandler = optFluid.get();
         FluidStack toDrain = new FluidStack(Fluids.WATER, FluidType.BUCKET_VOLUME);
         if (FluidStack.isSameFluidSameComponents(fluidHandler.drain(toDrain, IFluidHandler.FluidAction.SIMULATE), toDrain)) {
-          fluidHandler.drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
           stopRitual();
-          player.setItemInHand(hand, fluidHandler.getContainer());
+          if (!player.isCreative()) {
+            fluidHandler.drain(toDrain, IFluidHandler.FluidAction.EXECUTE);
+            player.setItemInHand(hand, fluidHandler.getContainer());
+          }
           return InteractionResult.SUCCESS;
         }
       }
