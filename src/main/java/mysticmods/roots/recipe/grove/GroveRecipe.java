@@ -22,10 +22,6 @@ public class GroveRecipe extends RootsTileRecipe<GroveInventoryWrapper, GroveCra
       GroveRecipe::new
   );
 
-  public GroveRecipe() {
-    super();
-  }
-
   public GroveRecipe(BaseRecipeData data) {
     super(data);
   }

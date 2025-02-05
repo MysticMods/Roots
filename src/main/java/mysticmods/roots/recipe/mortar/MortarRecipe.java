@@ -29,10 +29,6 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
   private int times;
 
-  public MortarRecipe() {
-    super();
-  }
-
   public MortarRecipe(BaseRecipeData data, int times) {
     super(data);
     this.times = times;

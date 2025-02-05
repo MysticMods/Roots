@@ -24,9 +24,6 @@ import java.util.List;
 public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<W> {
   protected final BaseRecipeData data = new BaseRecipeData();
 
-  public RootsRecipe() {
-  }
-
   public RootsRecipe(BaseRecipeData data) {
     this.data.updateFrom(data);
   }

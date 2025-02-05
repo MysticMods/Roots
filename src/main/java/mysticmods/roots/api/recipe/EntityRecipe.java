@@ -9,10 +9,6 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecipe<ItemStackHandler, W> implements IEntityRecipe<W> {
   protected EntityTest test;
 
-  public EntityRecipe() {
-    super();
-  }
-
   public EntityRecipe(BaseRecipeData data, EntityTest test) {
     super(data);
     this.test = test;
