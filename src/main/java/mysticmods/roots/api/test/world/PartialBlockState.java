@@ -33,20 +33,16 @@ public record PartialBlockState(Block block,
       );
   public static StreamCodec<RegistryFriendlyByteBuf, PartialBlockState> STREAM_CODEC = StreamCodec.of(PartialBlockState::toNetwork, PartialBlockState::fromNetwork);
 
+  public PartialBlockState (Block block) {
+    this(block, new HashMap<>());
+  }
+
   public PartialBlockState(Block block, String... properties) {
     this(block.defaultBlockState(), Arrays.asList(properties));
   }
 
   public PartialBlockState(BlockState template, String... properties) {
     this(template, Arrays.asList(properties));
-  }
-
-  public Block getBlock() {
-    return block();
-  }
-
-  public BlockState getState () {
-    return build();
   }
 
   public PartialBlockState(BlockState template) {
@@ -85,6 +81,14 @@ public record PartialBlockState(Block block,
     }
 
     return true;
+  }
+
+  public Block getBlock() {
+    return block();
+  }
+
+  public BlockState getState () {
+    return build();
   }
 
   public BlockState build() {
