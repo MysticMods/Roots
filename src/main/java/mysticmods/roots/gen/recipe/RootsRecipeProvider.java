@@ -739,7 +739,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     BaseRecipeData.Builder groveRunestoneBuilder = BaseRecipeData.Builder.create()
         .requires(RootsTags.Items.STONELIKE)
-        .condition(ModConditions.GROVE_STONE_VALID.get())
+        .condition(ModConditions.GROVE_STONE_ACTIVE.get())
         .result(ModBlocks.RUNESTONE, 1);
 
     // TODO: Simplify this
@@ -769,7 +769,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .requires(RootsTags.Items.RUNESTONE)
         .requires(RootsTags.Items.RUNESTONE)
         .requires(Tags.Items.OBSIDIANS)
-        .condition(ModConditions.GROVE_STONE_VALID.get())
+        .condition(ModConditions.GROVE_STONE_ACTIVE.get())
         .result(ModBlocks.RUNED_OBSIDIAN, 4);
 
     saver = RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
@@ -781,7 +781,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_runic_dust", has(RootsTags.Items.RUNIC_DUST)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNIC_DUST).requires(Tags.Items.GRAVELS)
             .requires(ItemTags.DIRT).requires(ItemTags.DIRT).requires(ItemTags.DIRT).result(ModItems.ELEMENTAL_SOIL, 4)
-            .condition(ModConditions.GROVE_STONE_VALID.get())), c, RootsAPI.rl("grove/elemental_soil"));
+            .condition(ModConditions.GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/elemental_soil"));
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.AQUEOUS_SOIL.get(), 1)
         .requires(ModItems.ELEMENTAL_SOIL.get()).requires(RootsTags.Items.DEWGONIA_HERB)
@@ -813,7 +813,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDWOOD_LOGS)
             .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
             .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
-            .condition(ModConditions.GROVE_STONE_VALID.get())
+            .condition(ModConditions.GROVE_STONE_ACTIVE.get())
             .result(ModBlocks.WILDWOOD_PEDESTAL, 5)), c, RootsAPI.rl("grove/wildwood_pedestal"));
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DECORATIVE_PYRE.get(), 1)
@@ -825,7 +825,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.RUNESTONE)
             .requires(RootsTags.Items.PETALS).requires(RootsTags.Items.GROVE_MOSS_HERB)
-            .condition(ModConditions.GROVE_STONE_VALID.get())
+            .condition(ModConditions.GROVE_STONE_ACTIVE.get())
             .requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))), c, RootsAPI.rl("grove/runic_shears"));
 
     RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
@@ -918,7 +918,10 @@ public class RootsRecipeProvider extends RecipeProvider {
         .save(PyreRecipe.Builder.create().ritual(ModRituals.ANIMAL_HARVEST)
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDEWHEET_HERB).requires(ItemTags.WOOL)
                 .requires(Tags.Items.CROPS_CARROT).requires(Tags.Items.CROPS_POTATO)
-                .requires(RootsTags.Items.WILDROOT_HERB)), c, RootsAPI.rl("pyre/animal_harvest"));
+                .requires(RootsTags.Items.WILDROOT_HERB)
+                .condition(ModConditions.RUNE_PILLAR_3_HIGH.get())
+                .condition(ModConditions.RUNE_PILLAR_4_HIGH.get())
+                .condition(ModConditions.RUNE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/animal_harvest"));
 
     RecipeSaver.saver().unlockedBy("has_sugar_cane", has(Tags.Items.CROPS_SUGAR_CANE))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.OVERGROWTH)
@@ -930,7 +933,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .save(PyreRecipe.Builder.create().ritual(ModRituals.GROVE_SUPPLICATION)
             .build(BaseRecipeData.Builder.create().requires(ItemTags.DOORS).requires(Items.BOWL)
                 .requires(ItemTags.SAPLINGS).requires(RootsTags.Items.PETALS).requires(Tags.Items.FOODS_BREAD)
-                .condition(ModConditions.PRIMAL_GROVE_STONE_INVALID.get())), c, RootsAPI.rl("pyre/grove_supplication"));
+                .condition(ModConditions.PRIMAL_GROVE_STONE_INACTIVE.get())), c, RootsAPI.rl("pyre/grove_supplication"));
 
     RecipeSaver.saver().unlockedBy("has_spiritleaf", has(RootsTags.Items.SPIRITLEAF_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.WILDROOT_GROWTH)

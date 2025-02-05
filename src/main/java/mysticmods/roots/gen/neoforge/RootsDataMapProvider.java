@@ -155,9 +155,9 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     Builder<CanonicalRepresentation, LevelCondition> builder13 = builder(DataMaps.LEVEL_CONDITION_CANONS).replace(false);
     builder13.add(ModConditions.GROVE_STONE_ANY.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), false, false), false);
-    builder13.add(ModConditions.GROVE_STONE_VALID.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), true, false), false);
-    builder13.add(ModConditions.PRIMAL_GROVE_STONE_VALID.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), true, false), false);
-    builder13.add(ModConditions.PRIMAL_GROVE_STONE_INVALID.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), false, true), false);
+    builder13.add(ModConditions.GROVE_STONE_ACTIVE.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), true, false), false);
+    builder13.add(ModConditions.PRIMAL_GROVE_STONE_ACTIVE.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), true, false), false);
+    builder13.add(ModConditions.PRIMAL_GROVE_STONE_INACTIVE.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), false, true), false);
     builder13.add(ModConditions.PRIMAL_GROVE_STONE_ANY.getDelegate(), LevelCondition.GroveStoneCondition.fromBlockState(ModBlocks.PRIMAL_GROVE_STONE.get().defaultBlockState(), false, false), false);
     builder13.add(ModConditions.ACACIA_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_ACACIA_LOG.get().defaultBlockState(), Blocks.ACACIA_LOG.defaultBlockState(), 4), false);
     builder13.add(ModConditions.ACACIA_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_ACACIA_LOG.get().defaultBlockState(), Blocks.ACACIA_LOG.defaultBlockState(), 3), false);
@@ -181,6 +181,6 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder13.add(ModConditions.SPRUCE_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_SPRUCE_LOG.get().defaultBlockState(), Blocks.SPRUCE_LOG.defaultBlockState(), 4), false);
     builder13.add(ModConditions.WARPED_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_WARPED_STEM.get().defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), 3), false);
     builder13.add(ModConditions.WARPED_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_WARPED_STEM.get().defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), 4), false);
-    builder13.add(ModConditions.MATURE_WILDROOT_CROP.getDelegate(), new CanonicalRepresentation(new PartialBlockState(Blocks.FARMLAND), new PartialBlockState(ModBlocks.WILDROOT_CROP.get().defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), "age")), false);
+    builder13.add(ModConditions.MATURE_WILDROOT_CROP.getDelegate(), new CanonicalRepresentation(new PartialBlockState(Blocks.FARMLAND), new PartialBlockState(ModBlocks.WILDROOT_CROP.get().defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE)), false);
   }
 }

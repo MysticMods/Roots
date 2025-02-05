@@ -551,29 +551,81 @@
         "block": "roots:runed_wildwood_log"
       }
     ],
+    "roots:active_grove_stone": [
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "active": "true",
+          "facing": "north",
+          "part": "bottom"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "active": "true",
+          "facing": "north",
+          "part": "middle"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "active": "true",
+          "facing": "north",
+          "part": "top"
+        }
+      }
+    ],
+    "roots:active_primal_grove_stone": [
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "active": "true",
+          "facing": "north",
+          "part": "bottom"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "active": "true",
+          "facing": "north",
+          "part": "middle"
+        }
+      },
+      {
+        "block": "roots:primal_grove_stone",
+        "properties": {
+          "active": "true",
+          "facing": "north",
+          "part": "top"
+        }
+      }
+    ],
     "roots:any_grove_stone": [
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "true",
           "facing": "north",
-          "part": "bottom",
-          "valid": "true"
+          "part": "bottom"
         }
       },
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "true",
           "facing": "north",
-          "part": "middle",
-          "valid": "true"
+          "part": "middle"
         }
       },
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "true",
           "facing": "north",
-          "part": "top",
-          "valid": "true"
+          "part": "top"
         }
       }
     ],
@@ -581,51 +633,51 @@
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "true",
           "facing": "north",
-          "part": "bottom",
-          "valid": "true"
+          "part": "bottom"
         }
       },
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "true",
           "facing": "north",
-          "part": "middle",
-          "valid": "true"
+          "part": "middle"
         }
       },
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "true",
           "facing": "north",
-          "part": "top",
-          "valid": "true"
+          "part": "top"
         }
       }
     ],
-    "roots:invalid_primal_grove_stone": [
+    "roots:inactive_primal_grove_stone": [
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "false",
           "facing": "north",
-          "part": "bottom",
-          "valid": "false"
+          "part": "bottom"
         }
       },
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "false",
           "facing": "north",
-          "part": "middle",
-          "valid": "false"
+          "part": "middle"
         }
       },
       {
         "block": "roots:primal_grove_stone",
         "properties": {
+          "active": "false",
           "facing": "north",
-          "part": "top",
-          "valid": "false"
+          "part": "top"
         }
       }
     ],
@@ -637,58 +689,6 @@
         "block": "roots:wildroot_crop",
         "properties": {
           "age": "3"
-        }
-      }
-    ],
-    "roots:valid_grove_stone": [
-      {
-        "block": "roots:primal_grove_stone",
-        "properties": {
-          "facing": "north",
-          "part": "bottom",
-          "valid": "true"
-        }
-      },
-      {
-        "block": "roots:primal_grove_stone",
-        "properties": {
-          "facing": "north",
-          "part": "middle",
-          "valid": "true"
-        }
-      },
-      {
-        "block": "roots:primal_grove_stone",
-        "properties": {
-          "facing": "north",
-          "part": "top",
-          "valid": "true"
-        }
-      }
-    ],
-    "roots:valid_primal_grove_stone": [
-      {
-        "block": "roots:primal_grove_stone",
-        "properties": {
-          "facing": "north",
-          "part": "bottom",
-          "valid": "true"
-        }
-      },
-      {
-        "block": "roots:primal_grove_stone",
-        "properties": {
-          "facing": "north",
-          "part": "middle",
-          "valid": "true"
-        }
-      },
-      {
-        "block": "roots:primal_grove_stone",
-        "properties": {
-          "facing": "north",
-          "part": "top",
-          "valid": "true"
         }
       }
     ]

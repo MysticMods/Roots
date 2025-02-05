@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 // Derived from https://github.com/thiakil/MCCodecStuff/blob/main/src/main/java/com/thiakil/codecs/blockstate/PartialBlockState.java
 public record PartialBlockState(Block block,
@@ -37,13 +38,13 @@ public record PartialBlockState(Block block,
     this(block, new HashMap<>());
   }
 
-  public PartialBlockState(Block block, String... properties) {
+/*  protected PartialBlockState(Block block, String... properties) {
     this(block.defaultBlockState(), Arrays.asList(properties));
   }
 
-  public PartialBlockState(BlockState template, String... properties) {
+  protected PartialBlockState(BlockState template, String... properties) {
     this(template, Arrays.asList(properties));
-  }
+  }*/
 
   public PartialBlockState(BlockState template) {
     this(template.getBlock(), new HashMap<>());

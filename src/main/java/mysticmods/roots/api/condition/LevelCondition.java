@@ -13,18 +13,16 @@ import mysticmods.roots.block.GroveStoneBlock;
 import net.minecraft.Util;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.datafix.fixes.ChunkPalettedStorageFix;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import org.jetbrains.annotations.Nullable;
 
@@ -146,7 +144,7 @@ public abstract class LevelCondition implements IDescribed {
       List<PartialBlockState> states = new ArrayList<>();
       for (int i = 0; i < height; i++) {
         if (capstone.hasProperty(RotatedPillarBlock.AXIS)) {
-          states.add(new PartialBlockState(pillar, "axis"));
+          states.add(new PartialBlockState(pillar, RotatedPillarBlock.AXIS));
         } else {
           states.add(new PartialBlockState(pillar));
         }
@@ -216,10 +214,10 @@ public abstract class LevelCondition implements IDescribed {
     }
 
     protected boolean getValid(BlockState state) {
-      if (!state.hasProperty(StateProperties.GroveStone.VALID)) {
+      if (!state.hasProperty(StateProperties.GroveStone.ACTIVE)) {
         return false;
       } else {
-        return state.getValue(StateProperties.GroveStone.VALID);
+        return state.getValue(StateProperties.GroveStone.ACTIVE);
       }
     }
 
@@ -234,10 +232,12 @@ public abstract class LevelCondition implements IDescribed {
     }
 
     public static CanonicalRepresentation fromBlockState (BlockState state, boolean requireValid, boolean requireInvalid) {
-      BlockState bottom = state.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM).setValue(GroveStoneBlock.VALID, requireValid || !requireInvalid);
-      BlockState middle = state.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE).setValue(GroveStoneBlock.VALID, requireValid || !requireInvalid);
-      BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP).setValue(GroveStoneBlock.VALID, requireValid || !requireInvalid);
-      return new CanonicalRepresentation(new PartialBlockState(bottom, "valid", "part", "facing"), new PartialBlockState(middle, "valid", "part", "facing"), new PartialBlockState(top, "valid", "part", "facing"));
+      BlockState bottom = state.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM).setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+      BlockState middle = state.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE).setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+      BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP).setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+      //noinspection rawtypes
+      Property[] properties = new Property[] {StateProperties.GroveStone.PART, StateProperties.GroveStone.ACTIVE, StateProperties.GroveStone.FACING};
+      return new CanonicalRepresentation(new PartialBlockState(bottom, properties), new PartialBlockState(middle, properties), new PartialBlockState(top, properties));
     }
 
     @Override

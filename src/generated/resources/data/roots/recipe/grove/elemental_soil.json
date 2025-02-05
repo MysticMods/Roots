@@ -19,7 +19,7 @@
       }
     ],
     "levelConditions": [
-      "roots:valid_grove_stone"
+      "roots:active_grove_stone"
     ],
     "result": {
       "count": 4,

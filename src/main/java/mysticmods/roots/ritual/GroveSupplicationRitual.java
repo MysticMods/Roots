@@ -22,9 +22,9 @@ public class GroveSupplicationRitual extends Ritual {
         BlockPos.betweenClosedStream(blockEntity.getBoundingBox()).forEach(pos -> {
           BlockState state = blockEntity.getLevel().getBlockState(pos);
           if (state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL)) {
-            if (state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.GroveStone.VALID)) {
-              if (!state.getValue(StateProperties.GroveStone.VALID)) {
-                blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.GroveStone.VALID, true));
+            if (state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.GroveStone.ACTIVE)) {
+              if (!state.getValue(StateProperties.GroveStone.ACTIVE)) {
+                blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.GroveStone.ACTIVE, true));
               }
             }
           }

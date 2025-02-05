@@ -11,7 +11,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
@@ -159,7 +158,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     // Primal grove stone
     getVariantBuilder(ModBlocks.PRIMAL_GROVE_STONE.get())
         .forAllStates(state -> {
-          boolean valid = state.getValue(StateProperties.GroveStone.VALID);
+          boolean valid = state.getValue(StateProperties.GroveStone.ACTIVE);
           BlockModelBuilder model = switch (state.getValue(GroveStoneBlock.PART)) {
             case MIDDLE ->
                 models().withExistingParent("primal_grove_stone_middle" + (valid ? "_valid" : ""), modLoc("block/complex/grove_stone_middle"));

@@ -26,6 +26,8 @@ import net.neoforged.fml.config.ModConfig;
 // - Display "ticks" of charged spells
 // - Entity eye height?
 // - Breading
+// - Breaking pyres/mortars/pedestals drops contents
+// - Entity carry layers for all mobs
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;

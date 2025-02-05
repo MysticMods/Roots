@@ -30,14 +30,14 @@ import javax.annotation.Nullable;
 public class GroveStoneBlock extends HorizontalDirectionalBlock {
   public static final DirectionProperty FACING = StateProperties.GroveStone.FACING;
   public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
-  public static final BooleanProperty VALID = StateProperties.GroveStone.VALID;
+  public static final BooleanProperty ACTIVE = StateProperties.GroveStone.ACTIVE;
 
   public static final VoxelShape[] EAST_WEST = {VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_TOP, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_MIDDLE, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_BOTTOM, Direction.EAST)};
   public static final VoxelShape[] NORTH_SOUTH = {Shapes.GROVE_STONE_TOP, Shapes.GROVE_STONE_MIDDLE, Shapes.GROVE_STONE_BOTTOM};
 
   public GroveStoneBlock(Properties builder) {
     super(builder);
-    this.registerDefaultState(defaultBlockState().setValue(VALID, false).setValue(PART, StateProperties.Part.BOTTOM));
+    this.registerDefaultState(defaultBlockState().setValue(ACTIVE, false).setValue(PART, StateProperties.Part.BOTTOM));
   }
 
   @Override
@@ -48,7 +48,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PART, VALID, FACING);
+    pBuilder.add(PART, ACTIVE, FACING);
   }
 
   @Override

@@ -32,7 +32,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -190,8 +189,8 @@ public class RootsCommand {
       Level level = c.getSource().getLevel();
       for (BlockPos pos : positions) {
         BlockState stateAt = level.getBlockState(pos);
-        if (stateAt.is(RootsTags.Blocks.GROVE_STONES) && stateAt.hasProperty(GroveStoneBlock.VALID)) {
-          level.setBlock(pos, stateAt.setValue(GroveStoneBlock.VALID, true), 3);
+        if (stateAt.is(RootsTags.Blocks.GROVE_STONES) && stateAt.hasProperty(GroveStoneBlock.ACTIVE)) {
+          level.setBlock(pos, stateAt.setValue(GroveStoneBlock.ACTIVE, true), 3);
         }
       }
       return 1;

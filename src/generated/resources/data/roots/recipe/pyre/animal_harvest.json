@@ -17,6 +17,11 @@
       {
         "tag": "roots:herbs/wildroot"
       }
+    ],
+    "levelConditions": [
+      "roots:3_high_rune_pillar",
+      "roots:4_high_rune_pillar",
+      "roots:3_high_rune_pillar"
     ]
   },
   "ritual": "roots:animal_harvest"
