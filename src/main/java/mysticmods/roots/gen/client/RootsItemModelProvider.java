@@ -16,11 +16,13 @@ import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+@SuppressWarnings("DataFlowIssue")
 public class RootsItemModelProvider extends ItemModelProvider {
   public RootsItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
     super(output, RootsAPI.MODID, existingFileHelper);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   protected void registerModels() {
     // BLOCKS
@@ -292,6 +294,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     });
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public ItemModelBuilder subfolder(Holder<Item> itemHolder, String subfolder) {
     ResourceLocation item = itemHolder.getKey().location();
     return getBuilder(item.toString())
