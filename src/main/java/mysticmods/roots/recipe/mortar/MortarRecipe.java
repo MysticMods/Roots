@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
 // TODO: Mixed Mortar Recipe?
+//       TODO: Work out what Mixed Mortar Recipe means
 public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEntity, MortarCrafting> {
   public static MapCodec<MortarRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter(o -> o.data),
