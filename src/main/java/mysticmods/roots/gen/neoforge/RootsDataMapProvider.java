@@ -14,6 +14,8 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
+import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.init.ModGroves;
@@ -179,5 +181,6 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder13.add(ModConditions.SPRUCE_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_SPRUCE_LOG.get().defaultBlockState(), Blocks.SPRUCE_LOG.defaultBlockState(), 4), false);
     builder13.add(ModConditions.WARPED_PILLAR_3_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_WARPED_STEM.get().defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), 3), false);
     builder13.add(ModConditions.WARPED_PILLAR_4_HIGH.getDelegate(), LevelCondition.PillarCondition.fromStates(ModBlocks.RUNED_WARPED_STEM.get().defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), 4), false);
+    builder13.add(ModConditions.MATURE_WILDROOT_CROP.getDelegate(), new CanonicalRepresentation(new PartialBlockState(Blocks.FARMLAND), new PartialBlockState(ModBlocks.WILDROOT_CROP.get().defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), "age")), false);
   }
 }
