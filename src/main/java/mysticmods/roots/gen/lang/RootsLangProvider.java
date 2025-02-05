@@ -106,6 +106,17 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.entity.duck.quack", "Duck quacks");
     add("roots.subtitles.entity.deer.ambient", "Deer squeals");
 
+    add("roots.commands.staff.usage", "Usage: /roots staff <spell>");
+    add("roots.commands.staff.spell_not_found", "Spell not found: %s");
+    add("roots.commands.staff.no_spell_storage", "Staff missing spell storage somehow");
+
+    add("roots.commands.ritual.usage", "Usage: /roots ritual <ritual>");
+    add("roots.commands.ritual.ritual_not_found", "Ritual not found: %s");
+    add("roots.commands.ritual.no_player", "Must be executed by a player to use this command");
+    add("roots.commands.ritual.recipe_not_found", "No recipe four for ritual %s");
+    add("roots.commands.ritual.no_space", "No space to place pyre.");
+    add("roots.commands.ritual.failed_condition", "Failed to place condition: %s");
+
     add(KeyBindings.CATEGORY, "Roots");
     for (KeyMapping bind : KeyBindings.MAPPINGS) {
       String key = bind.getName();
