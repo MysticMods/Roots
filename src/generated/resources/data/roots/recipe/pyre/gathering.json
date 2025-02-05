@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/stalicripe"
+      },
+      {
+        "tag": "roots:herbs/wildroot"
+      },
+      {
+        "tag": "minecraft:buttons"
+      },
+      {
+        "tag": "c:levers"
+      },
+      {
+        "tag": "c:dusts/redstone"
+      }
+    ]
+  },
+  "ritual": "roots:gathering"
+}

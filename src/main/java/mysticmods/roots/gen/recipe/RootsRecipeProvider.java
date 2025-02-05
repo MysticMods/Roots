@@ -923,6 +923,15 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .condition(ModConditions.RUNE_PILLAR_4_HIGH.get())
                 .condition(ModConditions.RUNE_PILLAR_3_HIGH.get())), c, RootsAPI.rl("pyre/animal_harvest"));
 
+    RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.GATHERING).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.STALICRIPE_HERB)
+                .requires(RootsTags.Items.WILDROOT_HERB)
+                .requires(ItemTags.BUTTONS)
+                .requires(RootsTags.Items.LEVERS)
+                .requires(Tags.Items.DUSTS_REDSTONE)), c, RootsAPI.rl("pyre/gathering"));
+
     RecipeSaver.saver().unlockedBy("has_sugar_cane", has(Tags.Items.CROPS_SUGAR_CANE))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.OVERGROWTH)
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.BARKS).requires(RootsTags.Items.BARKS)

@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"DataFlowIssue", "NullableProblems"})
 public abstract class BaseBlockEntity extends BlockEntity implements BoundedBlockEntity {
   private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
   protected AABB singleBlockBoundingBox;
@@ -69,6 +70,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     super.saveAdditional(pTag, lookup);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public BoundingBox getBoundingBox() {
     if (!isBounded()) {
@@ -120,7 +122,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
       RootsAPI.LOG.error("outputAdjacent returned multiple stacks, this is not supported");
     }
 
-    return temp.get(0);
+    return temp.getFirst();
   }
 
   public List<ItemStack> outputAdjacent (List<ItemStack> stacks) {
@@ -144,7 +146,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
       }
       BlockPos pos = getBlockPos().relative(direction);
       IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, pos, direction.getOpposite());
-      if (output != null && (lastOutput != null && lastOutput.getCapability() != output)) {
+      if (output != null && (lastOutput == null || lastOutput.getCapability() != output)) {
         stacks = outputAdjacent(stacks, output);
         if (stacks.isEmpty()) {
           lastOutput = BlockCapabilityCache.create(Capabilities.ItemHandler.BLOCK, (ServerLevel) getLevel(), pos, null);

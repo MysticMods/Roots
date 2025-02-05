@@ -323,7 +323,7 @@
   "roots.commands.ritual.failed_condition": "Failed to place condition: %s",
   "roots.commands.ritual.no_player": "Must be executed by a player to use this command",
   "roots.commands.ritual.no_space": "No space to place pyre.",
-  "roots.commands.ritual.recipe_not_found": "No recipe four for ritual %s",
+  "roots.commands.ritual.recipe_not_found": "No recipe found for ritual %s",
   "roots.commands.ritual.ritual_not_found": "Ritual not found: %s",
   "roots.commands.ritual.usage": "Usage: /roots ritual <ritual>",
   "roots.commands.staff.no_spell_storage": "Staff missing spell storage somehow",

@@ -20,7 +20,6 @@ public class GatheringRitual extends Ritual {
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       List<BlockPos> positions = MagnetismUtil.store(pLevel, pPos, blockEntity, getRadiusXZ(), getRadiusY(), getRadiusXZ());
-
       // TODO: Visuals for the yoink
     }
   }
