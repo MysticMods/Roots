@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import com.google.common.collect.Iterators;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -22,21 +23,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.random.RandomGenerator;
 
 public class OvergrowthRitual extends Ritual {
-  private static final List<Direction> HORIZONTALS = new ArrayList<>(Arrays.stream(Direction.values()).filter(dir -> dir.getAxis().isHorizontal()).toList());
+  private static List<Direction> HORIZONTALS;
   private BlockPos lastChanged;
 
   private static List<Direction> horizontals() {
+    if (HORIZONTALS == null) {
+      HORIZONTALS = new ArrayList<>(Arrays.stream(Direction.values()).filter(dir -> dir.getAxis().isHorizontal()).toList());
+    }
     Collections.shuffle(HORIZONTALS);
     return HORIZONTALS;
   }
 
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+
     if (duration % interval == 0) {
       boolean placed = false;
       if (lastChanged != null && !pBoundingBox.isInside(lastChanged)) {
+        lastChanged = null;
+      }
+      if (lastChanged != null && randomSource.nextInt(4) == 0) {
         lastChanged = null;
       }
       if (lastChanged != null) {
@@ -55,10 +64,8 @@ public class OvergrowthRitual extends Ritual {
       }
       if (!placed) {
         lastChanged = null;
-        List<BlockPos> positions = new ArrayList<>(BlockPos.betweenClosedStream(pBoundingBox).map(BlockPos::immutable).toList());
-        Collections.shuffle(positions);
         outer:
-        for (BlockPos pos : positions) {
+        for (BlockPos pos : blockEntity.getRitualRandomPositions()) {
           if (pLevel.getFluidState(pos).is(FluidTags.WATER)) {
             for (Direction dir : horizontals()) {
               BlockPos offset = pos.above().relative(dir);

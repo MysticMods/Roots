@@ -56,12 +56,18 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
+  private static BoundingBox PYRE_BOUNDS;
+  public static BoundingBox getPyreBoundingBox() {
+    if (PYRE_BOUNDS == null) {
+      PYRE_BOUNDS = new BoundingBox(-ConfigManager.PYRE_BOUNDS_X.get(), -ConfigManager.PYRE_BOUNDS_Y.get(), -ConfigManager.PYRE_BOUNDS_Z.get(), ConfigManager.PYRE_BOUNDS_X.get() + 1, ConfigManager.PYRE_BOUNDS_Y.get() + 1, ConfigManager.PYRE_BOUNDS_Z.get() + 1);
+    }
+
+    return PYRE_BOUNDS;
+  }
+
   private final PyreInventory inventory = new PyreInventory() {
     @Override
     protected void onContentsChanged(int slot) {
@@ -72,19 +78,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     }
   };
-
-  private BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> capabilityCache;
-
-  private static BoundingBox PYRE_BOUNDS;
-
-  public static BoundingBox getPyreBoundingBox() {
-    if (PYRE_BOUNDS == null) {
-      PYRE_BOUNDS = new BoundingBox(-ConfigManager.PYRE_BOUNDS_X.get(), -ConfigManager.PYRE_BOUNDS_Y.get(), -ConfigManager.PYRE_BOUNDS_Z.get(), ConfigManager.PYRE_BOUNDS_X.get() + 1, ConfigManager.PYRE_BOUNDS_Y.get() + 1, ConfigManager.PYRE_BOUNDS_Z.get() + 1);
-    }
-
-    return PYRE_BOUNDS;
-  }
-
   private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
   private final List<ItemStack> storedItems = new ArrayList<>();
   // TODO: Last recipe is not being saved properly
@@ -95,12 +88,23 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private Player lastPlayer;
   private UUID lastUuid;
 
+  private BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> capabilityCache;
+  private BlockPos cachedRitualLastPosition;
+  private BoundingBox cachedRitualBoundingBox;
+  private List<BlockPos> cachedRitualPositionsInBounds;
+  private List<BlockPos> cachedRandomRitualPositionsInBounds;
+
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
   }
 
   public PyreBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.PYRE.get(), pWorldPosition, pBlockState);
+  }
+
+  private void setCurrentRitual (Ritual ritual) {
+    this.currentRitual = ritual;
+    this.refreshRitualCache();
   }
 
   @Override
@@ -169,11 +173,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (cachedRecipe != null && cachedRecipe.value().matches(playerlessCrafting, level)) {
       Ritual newRitual = cachedRecipe.value().getRitual();
       if (newRitual == null) {
-        currentRitual = ModRituals.CRAFTING.get();
+        setCurrentRitual(ModRituals.CRAFTING.get());
       } else {
-        currentRitual = newRitual;
+        setCurrentRitual(newRitual);
       }
-      boundingBox = null;
 
       // TODO: Provider better feedback to the player
       ConditionResult result = cachedRecipe.value().checkConditions(level, player, getPyreBoundingBox(), getBlockPos());
@@ -220,9 +223,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   // Why do we never call this
   public void startRitual(Ritual ritual, Player player) {
-    currentRitual = ritual;
+    setCurrentRitual(ritual);
     lifetime = ritual.getDuration();
-    boundingBox = null;
     setChanged();
     /*    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.LIT, true), 3);*/
   }
@@ -235,6 +237,52 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     } else {
       RootsAPI.LOG.error("tried to start a ritual but the ritual is null");
     }
+  }
+
+  private void refreshRitualCache () {
+    if (this.currentRitual == null) {
+      this.cachedRitualPositionsInBounds = null;
+      this.cachedRitualLastPosition = null;
+      this.cachedRitualBoundingBox = null;
+      this.cachedRandomRitualPositionsInBounds = null;
+      return;
+    }
+
+    if (this.cachedRitualLastPosition == null || !this.cachedRitualLastPosition.equals(getBlockPos())) {
+      this.cachedRitualLastPosition = getBlockPos();
+      this.cachedRitualBoundingBox = null;
+      this.cachedRitualPositionsInBounds = null;
+    }
+
+    if (this.cachedRitualBoundingBox == null) {
+      this.cachedRitualBoundingBox = currentRitual.getBoundingBox()
+          .moved(cachedRitualLastPosition.getX(), cachedRitualLastPosition.getY(), cachedRitualLastPosition.getZ());
+    }
+
+    if (this.cachedRitualPositionsInBounds == null) {
+      this.cachedRitualPositionsInBounds = new ArrayList<>(BlockPos.betweenClosedStream(this.cachedRitualBoundingBox).map(BlockPos::immutable).toList());
+      this.cachedRandomRitualPositionsInBounds = new ArrayList<>(this.cachedRitualPositionsInBounds);
+    }
+  }
+
+  public List<BlockPos> getRitualPositions () {
+    refreshRitualCache();
+    return cachedRitualPositionsInBounds == null ? Collections.emptyList() : cachedRitualPositionsInBounds;
+  }
+
+  public List<BlockPos> getRitualRandomPositions () {
+    refreshRitualCache();
+    if (cachedRandomRitualPositionsInBounds == null) {
+      return Collections.emptyList();
+    }
+
+    Collections.shuffle(cachedRandomRitualPositionsInBounds);
+    return cachedRandomRitualPositionsInBounds;
+  }
+
+  public BoundingBox getRitualBoundingBox () {
+    refreshRitualCache();
+    return cachedRitualBoundingBox;
   }
 
   public RecipeHolder<PyreRecipe> getCachedRecipe() {
@@ -426,9 +474,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   public void stopRitual() {
-    currentRitual = null;
-    lifetime = -1;
-    boundingBox = null;
+    setCurrentRitual(null);
+    this.lifetime = -1;
     setChanged();
     getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.BURNING, false)
         .setValue(PyreBlock.LIT, false), 3);

@@ -63,9 +63,12 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
 
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
     int dur = getDuration() - blockEntity.getLifetime();
-    BoundingBox moved = getBoundingBox();
-    if (moved != null) {
-      moved = moved.moved(pPos.getX(), pPos.getY(), pPos.getZ());
+    BoundingBox moved = blockEntity.getRitualBoundingBox();
+    if (moved == null) {
+      moved = getBoundingBox();
+      if (moved != null) {
+        moved = moved.moved(pPos.getX(), pPos.getY(), pPos.getZ());
+      }
     }
     functionalTick(pLevel, pPos, pState, moved, blockEntity, dur, random);
     animationTick(pLevel, pPos, pState, moved, blockEntity, dur, random);
