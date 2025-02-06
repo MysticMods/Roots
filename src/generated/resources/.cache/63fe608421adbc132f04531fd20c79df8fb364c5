@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-05T19:56:19.4341542	Roots Item Tags
+// 1.21.1	2025-02-06T14:43:10.8811943	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -50,6 +50,7 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/item/crops/pereskia.jso
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/item/crops/wildroot.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/disable_disarming.json
 1b81ce702cc93595adbcfc8dd9dcb1a5e932c8c6 data/roots/tags/item/dusts/runic.json
+c7500f481948159c566ddedb8a200fe63a413a56 data/roots/tags/item/fertilizers.json
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/item/flint.json
 39ecf884f3bb83a88b7d180276a7ac692c52fc00 data/roots/tags/item/grove_crafter_activation.json
 c0e5ac26bc57a1a6ba571b21d7fab9d6bbb6d318 data/roots/tags/item/grove_stones.json
@@ -101,6 +102,7 @@ f6e72591b01bd221546ea35352d9bf82ba98aeba data/roots/tags/item/seeds/moonglow.jso
 a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/item/seeds/pereskia.json
 80a163aedcf11772401b7b93659ba4d6d134dfe8 data/roots/tags/item/seeds/spiritleaf.json
 5d4ab94abd2241ca52663eb6d537310224a00348 data/roots/tags/item/seeds/wildewheet.json
+7d1d8f847cd3a3c2a9c7dd9749a5246f523703ec data/roots/tags/item/short_grass.json
 04422b744e0e4a88f0882757faf982f80ea08beb data/roots/tags/item/silver_items.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/skipped_foods.json
 0e0d53445f0b4eae177c5541e63c5f8e165ebd7b data/roots/tags/item/soils.json
@@ -112,5 +114,6 @@ a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/item/seeds/pereskia.jso
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/item/soils/water.json
 57b7b83328a785fad075c2c7377883654e583c09 data/roots/tags/item/stonelike.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/item/stonepetal.json
+687578420920f9ae43d80e6327d29714438d1b88 data/roots/tags/item/tall_grass.json
 6a3b552a1a9c6b96fd0855a01af8665f0c37da92 data/roots/tags/item/tempt/deer.json
 de63ed9e3b03e443f31cbe2fc6660363c46675b3 data/roots/tags/item/vegetables.json

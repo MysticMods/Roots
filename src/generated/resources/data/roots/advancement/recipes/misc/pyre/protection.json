@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:pyre/protection"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_moonglow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:herbs/moonglow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_moonglow"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:pyre/protection"
+    ]
+  }
+}

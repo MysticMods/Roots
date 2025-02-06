@@ -161,6 +161,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Items.CRIMSON_PILLARS);
     this.copy(RootsTags.Blocks.WARPED_PILLARS, RootsTags.Items.WARPED_PILLARS);*/
     this.copy(RootsTags.Blocks.STONEPETAL, RootsTags.Items.STONEPETAL);
+    this.copy(RootsTags.Blocks.SHORT_GRASS, RootsTags.Items.SHORT_GRASS);
+    this.copy(RootsTags.Blocks.TALL_GRASS, RootsTags.Items.TALL_GRASS);
     /*    this.copy(RootsTags.Blocks.GRASS, RootsTags.Items.GRASS); ??????? */
     this.copy(RootsTags.Blocks.NYI, RootsTags.Items.NYI);
 /*    this.copy(RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN, RootsTags.Items.SUPPORTS_HELL_SPROUT_SPAWN);
@@ -207,6 +209,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.HERBS).addTags(RootsTags.Items.MOONGLOW_HERB, RootsTags.Items.PERESKIA_HERB, RootsTags.Items.SPIRITLEAF_HERB, RootsTags.Items.WILDEWHEET_HERB, RootsTags.Items.GROVE_MOSS_HERB, RootsTags.Items.DEWGONIA_HERB, RootsTags.Items.STALICRIPE_HERB, RootsTags.Items.WILDROOT_HERB, RootsTags.Items.INFERNO_BULB_HERB, RootsTags.Items.BAFFLECAP_HERB, RootsTags.Items.CLOUD_BERRY_HERB);
 
     this.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
+    this.tag(RootsTags.Items.FERTILIZERS).add(Items.BONE_MEAL);
 
     // For Desaturate/Saturate
     this.tag(RootsTags.Items.SKIPPED_FOODS);

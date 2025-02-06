@@ -246,6 +246,8 @@ public class RootsTags {
     public static final TagKey<Item> WARPED_BARK = modTag("barks/warped");
     public static final TagKey<Item> MIXED_BARK = modTag("barks/mixed");
 
+    public static final TagKey<Item> FERTILIZERS = modTag("fertilizers");
+
     public static final TagKey<Item> BOTTLES = modTag("bottles");
 
     // TODO: Unused
@@ -332,6 +334,8 @@ public class RootsTags {
     public static final TagKey<Item> RAW_SILVER = compatTag("raw_materials/silver");
     public static final TagKey<Item> SILVER_INGOT = compatTag("ingots/silver");
     public static final TagKey<Item> STONEPETAL = modTag("stonepetal");
+    public static final TagKey<Item> SHORT_GRASS = modTag("short_grass");
+    public static final TagKey<Item> TALL_GRASS = modTag("tall_grass");
 
     // These are all filled in by ModTags
 

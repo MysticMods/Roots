@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:bottles"
+      },
+      {
+        "tag": "roots:herbs/wildroot"
+      },
+      {
+        "tag": "roots:herbs/bafflecap"
+      },
+      {
+        "tag": "c:gems/quartz"
+      },
+      {
+        "tag": "c:glass_blocks"
+      }
+    ]
+  },
+  "ritual": "roots:purity"
+}

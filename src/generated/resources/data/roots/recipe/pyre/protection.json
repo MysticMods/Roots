@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/moonglow"
+      },
+      {
+        "item": "minecraft:sunflower"
+      },
+      {
+        "tag": "c:raw_materials/iron"
+      },
+      {
+        "tag": "minecraft:stone_crafting_materials"
+      },
+      {
+        "item": "roots:glass_eye"
+      }
+    ]
+  },
+  "ritual": "roots:protection"
+}

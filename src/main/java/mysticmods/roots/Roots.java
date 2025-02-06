@@ -31,7 +31,8 @@ import net.neoforged.fml.config.ModConfig;
 // - Entity carry layers for all mobs
 // - Improve the Ritual command: set the last recipe and the cached recipe, why can't you remove items the first time?
 // - Knife dispenser behaviour
-// - Better drops with knives, better drops with better knives
+// - Better drops with knives, better drops with better knive
+// - Granite quartz ore smelting
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;

@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:ingots"
+      },
+      {
+        "tag": "roots:herbs/stalicripe"
+      },
+      {
+        "tag": "c:obsidians"
+      },
+      {
+        "tag": "c:leathers"
+      },
+      {
+        "tag": "c:bricks"
+      }
+    ]
+  },
+  "ritual": "roots:warding"
+}

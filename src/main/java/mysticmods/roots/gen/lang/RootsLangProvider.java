@@ -458,6 +458,7 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.WARPED_BARK, "Warped Barks");
     add(RootsTags.Items.MIXED_BARK, "Mixed Barks");
     add(RootsTags.Items.BOTTLES, "Bottles");
+    add(RootsTags.Items.FERTILIZERS, "Fertilizers");
     add(RootsTags.Items.POUCHES, "Pouches");
     add(RootsTags.Items.GROVE_CRAFTER_ACTIVATION, "Grove Crafter Activators");
     add(RootsTags.Items.MORTAR_ACTIVATION, "Mortar Activators");

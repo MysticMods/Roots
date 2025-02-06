@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "tag": "roots:fertilizers"
+      },
+      {
+        "tag": "minecraft:saplings"
+      },
+      {
+        "tag": "minecraft:saplings"
+      },
+      {
+        "tag": "roots:barks/wildwood"
+      }
+    ]
+  },
+  "ritual": "roots:spreading_forest"
+}

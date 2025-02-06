@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:pyre/spreading_forest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_spiritleaf": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:herbs/spiritleaf"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_spiritleaf"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:pyre/spreading_forest"
+    ]
+  }
+}

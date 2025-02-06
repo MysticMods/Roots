@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:fertilizers"
+      },
+      {
+        "tag": "roots:barks/oak"
+      },
+      {
+        "tag": "c:seeds"
+      },
+      {
+        "tag": "minecraft:dirt"
+      },
+      {
+        "tag": "roots:herbs/pereskia"
+      }
+    ]
+  },
+  "ritual": "roots:germination"
+}

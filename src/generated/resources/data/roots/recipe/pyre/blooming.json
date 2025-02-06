@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/pereskia"
+      },
+      {
+        "tag": "minecraft:small_flowers"
+      },
+      {
+        "tag": "minecraft:small_flowers"
+      },
+      {
+        "tag": "c:nuggets/gold"
+      },
+      {
+        "tag": "roots:fertilizers"
+      }
+    ]
+  },
+  "ritual": "roots:blooming"
+}

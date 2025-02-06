@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-05T21:00:10.2916314	Recipes
+// 1.21.1	2025-02-06T14:43:10.8872471	Recipes
 afb36943e341d957b4cc6aa8dfa1273afb91ba11 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_tile.json
 fa9a2f9d72f328a3b1d0922423e8d8d3f56bca81 data/roots/advancement/recipes/building_blocks/chiseled_runestone_from_runestone_tile.json
 f595b4351c25b84323636294eeee8a9dec1ecbe8 data/roots/advancement/recipes/building_blocks/mossy_runestone_button_from_mossy_runestone_stonecutting.json
@@ -173,15 +173,25 @@ a7ae049f00b1a11e9144dbc6b1e88d161938c895 data/roots/advancement/recipes/misc/mor
 d92789d84dedc835e83bf2a1465bc33c864db321 data/roots/advancement/recipes/misc/primal_grove_stone.json
 d504683d02dc319baf501b93602881228b0a8783 data/roots/advancement/recipes/misc/pyre.json
 71ec3eec4f8dc6a5434fe8e2ebcd420e66aa7af4 data/roots/advancement/recipes/misc/pyre/animal_harvest.json
+1d9873097f6bbd1429b451fde5161e3211afeb0c data/roots/advancement/recipes/misc/pyre/blooming.json
 96d2292eec1fffb9ea70d44f1278712ba9107d3c data/roots/advancement/recipes/misc/pyre/cloud_berry.json
 985477de408022a7f7250febd20875af0c6fb242 data/roots/advancement/recipes/misc/pyre/dewgonia.json
+35d374cd12a176fbb56c9c04802025681aea1619 data/roots/advancement/recipes/misc/pyre/fire_storm.json
 63e9595671bb92618f2dcf970020a1442b45a2d8 data/roots/advancement/recipes/misc/pyre/frost_lands.json
 5d101e8eca0f66872a9a15cc72387ea9bc7c224d data/roots/advancement/recipes/misc/pyre/gathering.json
+8508010f4f4a5cb12b699301dbf128c7e32cdbb8 data/roots/advancement/recipes/misc/pyre/germination.json
 d110a320e68a79bd6967f61346fbbbe3ed37a17f data/roots/advancement/recipes/misc/pyre/grove_supplication.json
+b3a28fea2f39910a95c0db855056bbe16f2976bd data/roots/advancement/recipes/misc/pyre/heavy_storms.json
 30f1325205f33ae728e75a0142c20b96c01cec63 data/roots/advancement/recipes/misc/pyre/inferno_bulb.json
 72f6c980c0d0f65ac04a8dbc5eedf3a933473a2a data/roots/advancement/recipes/misc/pyre/overgrowth.json
+2b19cdca61b60c8fbd05f89b8a2927ecb0bf81bc data/roots/advancement/recipes/misc/pyre/protection.json
+be2565d13bac43fb79500ce1123610b76686de6a data/roots/advancement/recipes/misc/pyre/purity.json
+da16b7106ee7f23927e2e16754a4374437062664 data/roots/advancement/recipes/misc/pyre/spreading_forest.json
 20932bd409dab4e3cef97f3b0a9a9bda1e7ff17f data/roots/advancement/recipes/misc/pyre/stalicripe.json
+15ea5d37cdcd3c5d665e7b7262545c9f010fdddd data/roots/advancement/recipes/misc/pyre/summon_creatures.json
+5e8f2786d307d83c2df62c1b581267538db09ce5 data/roots/advancement/recipes/misc/pyre/warding.json
 e943ccc653d4dfe5c76617d6fee619d3331b37ef data/roots/advancement/recipes/misc/pyre/wildroot_growth.json
+04e71af92d4f280289bd9a77a31c77d3f3a9d7e5 data/roots/advancement/recipes/misc/pyre/windwall.json
 531711b42a1b3e0394dd630183925b9fecbbbb32 data/roots/advancement/recipes/misc/raw_silver_from_raw_silver_storage.json
 32c655eeace62d2782bc00ffb9c8c454d2978ca8 data/roots/advancement/recipes/misc/reinforced_pyre.json
 d27ef5b60b495fac05b288f3877fd53b50cb7c04 data/roots/advancement/recipes/misc/reinforced_pyre_from_pyre.json
@@ -340,15 +350,25 @@ e2558a4937c853071b7b4a87cbfd6d3506c7a96d data/roots/recipe/pestle.json
 558706bf20ee533c39bfd689ce4270d00a0e6e75 data/roots/recipe/primal_grove_stone.json
 ebd352284993326d9a16b6ef0b9bf745b87af9b5 data/roots/recipe/pyre.json
 9e155f68dcd28e44104087a57f7025775a9c94c4 data/roots/recipe/pyre/animal_harvest.json
+ac119bfe841c8f69a96c9a63b7d61e933da64657 data/roots/recipe/pyre/blooming.json
 d3bf646eec9b2107f85189399ba77092e817691c data/roots/recipe/pyre/cloud_berry.json
 2b88dd2c897f605f1f0d30ae06d4f52f41e8ba29 data/roots/recipe/pyre/dewgonia.json
+c32382dacca3abd2bf73316a04a3f41da78f4b4c data/roots/recipe/pyre/fire_storm.json
 db72ebb5d66b432cae041dcaa58500ac1cbfb6c6 data/roots/recipe/pyre/frost_lands.json
 64740c7964ee67c6aa2765a0c90b023f6568163a data/roots/recipe/pyre/gathering.json
+515e273b06a7c8985014e205c1f4021a3a0674dc data/roots/recipe/pyre/germination.json
 5d975327b7a48bd945ed24c20b3627bda88c7aab data/roots/recipe/pyre/grove_supplication.json
+3b285947f9d27f0ddc496a4702f902fb98712451 data/roots/recipe/pyre/heavy_storms.json
 61011fbf5a9aaf4124a365cea96dff3b50e11818 data/roots/recipe/pyre/inferno_bulb.json
 3faafec11595d6cadeb209bab30a1644507638dd data/roots/recipe/pyre/overgrowth.json
+8fe56a7ecf0880aac90847c83aadff956b89c0dd data/roots/recipe/pyre/protection.json
+d2482169ec7f70a2546688f95ecc7e3668441978 data/roots/recipe/pyre/purity.json
+c0eaa468d78cd59061fe85f0e405dc99248afb76 data/roots/recipe/pyre/spreading_forest.json
 63d9a4c4b213cfa2be48ec6120ba262490a288c8 data/roots/recipe/pyre/stalicripe.json
+b1897d703e192f1c69a338e1013aab5e46b9106d data/roots/recipe/pyre/summon_creatures.json
+a17f761939fa5d3c47cf6a5a057e401edf244905 data/roots/recipe/pyre/warding.json
 b475f19eea5073031a3c187dc2fead7ebf51c01e data/roots/recipe/pyre/wildroot_growth.json
+d590dec11c55e6fc687a84ee848e16ccb1b60ee0 data/roots/recipe/pyre/windwall.json
 ad1f8027d16da05e74feb8868cacb9c29392cd99 data/roots/recipe/raw_silver_block.json
 e3020593a886065beb5f2f59939a1f8c8d1add0a data/roots/recipe/raw_silver_from_raw_silver_storage.json
 86c38533c1f7032f45024aa0b1b96b54a1923c5e data/roots/recipe/reinforced_pyre.json

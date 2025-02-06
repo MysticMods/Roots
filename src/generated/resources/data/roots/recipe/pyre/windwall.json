@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:petals"
+      },
+      {
+        "tag": "roots:herbs/cloud_berry"
+      },
+      {
+        "tag": "roots:short_grass"
+      },
+      {
+        "item": "minecraft:honeycomb"
+      },
+      {
+        "tag": "c:feathers"
+      }
+    ]
+  },
+  "ritual": "roots:windwall"
+}

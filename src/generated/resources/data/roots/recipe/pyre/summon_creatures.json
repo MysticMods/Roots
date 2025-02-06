@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:bones"
+      },
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "item": "minecraft:apple"
+      },
+      {
+        "tag": "c:seeds"
+      },
+      {
+        "tag": "c:mushrooms"
+      }
+    ]
+  },
+  "ritual": "roots:summon_creatures"
+}

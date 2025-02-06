@@ -932,9 +932,103 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.LEVERS)
                 .requires(Tags.Items.DUSTS_REDSTONE)), c, RootsAPI.rl("pyre/gathering"));
 
+    RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.WARDING).build(
+            BaseRecipeData.Builder.create()
+                .requires(Tags.Items.INGOTS)
+                .requires(RootsTags.Items.STALICRIPE_HERB)
+                .requires(Tags.Items.OBSIDIANS)
+                .requires(Tags.Items.LEATHERS)
+                .requires(Tags.Items.BRICKS)), c, RootsAPI.rl("pyre/warding"));
+
+    RecipeSaver.saver().unlockedBy("has_pereskia", has(RootsTags.Items.PERESKIA_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.GERMINATION).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.FERTILIZERS)
+                .requires(RootsTags.Items.OAK_BARK)
+                .requires(Tags.Items.SEEDS)
+                .requires(ItemTags.DIRT)
+                .requires(RootsTags.Items.PERESKIA_HERB)), c, RootsAPI.rl("pyre/germination"));
+
+    RecipeSaver.saver().unlockedBy("has_cloud_berry", has(RootsTags.Items.CLOUD_BERRY_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.WINDWALL).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.PETALS)
+                .requires(RootsTags.Items.CLOUD_BERRY_HERB)
+                .requires(RootsTags.Items.SHORT_GRASS)
+                .requires(Items.HONEYCOMB) // TODO: Tag?
+                .requires(Tags.Items.FEATHERS)), c, RootsAPI.rl("pyre/windwall"));
+
+    RecipeSaver.saver().unlockedBy("has_moonglow", has(RootsTags.Items.MOONGLOW_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.PROTECTION).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.MOONGLOW_HERB)
+                .requires(Items.SUNFLOWER) // TODO: Tag?
+                .requires(Tags.Items.RAW_MATERIALS_IRON)
+                .requires(ItemTags.STONE_CRAFTING_MATERIALS) // TODO: Tag
+                .requires(ModItems.GLASS_EYE) // TODO: Tag
+        ), c, RootsAPI.rl("pyre/protection"));
+
+    RecipeSaver.saver().unlockedBy("has_cloud_berry", has(RootsTags.Items.CLOUD_BERRY_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.HEAVY_STORMS).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.DEWGONIA_HERB)
+                .requires(RootsTags.Items.CLOUD_BERRY_HERB)
+                .requires(Tags.Items.GEMS_LAPIS)
+                .requires(RootsTags.Items.COPPER_NUGGET)
+                .requires(RootsTags.Items.GROVE_MOSS_HERB)), c, RootsAPI.rl("pyre/heavy_storms"));
+
+    RecipeSaver.saver().unlockedBy("has_inferno_bulb", has(RootsTags.Items.INFERNO_BULB_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.FIRE_STORM).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.INFERNO_BULB_HERB)
+                .requires(ItemTags.COALS)
+                .requires(Tags.Items.DUSTS_REDSTONE)
+                .requires(RootsTags.Items.BARKS)
+                .requires(Blocks.MAGMA_BLOCK.asItem()) // TODO: Tag
+        ), c, RootsAPI.rl("pyre/fire_storm"));
+
+    RecipeSaver.saver().unlockedBy("has_pereskia", has(RootsTags.Items.PERESKIA_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.BLOOMING).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.PERESKIA_HERB)
+                .requires(ItemTags.SMALL_FLOWERS)
+                .requires(ItemTags.SMALL_FLOWERS)
+                .requires(Tags.Items.NUGGETS_GOLD)
+                .requires(RootsTags.Items.FERTILIZERS)
+        ), c, RootsAPI.rl("pyre/blooming"));
+
+    RecipeSaver.saver().unlockedBy("has_spiritleaf", has(RootsTags.Items.SPIRITLEAF_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.SPREADING_FOREST).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.SPIRITLEAF_HERB)
+                .requires(RootsTags.Items.FERTILIZERS)
+                .requires(ItemTags.SAPLINGS)
+                .requires(ItemTags.SAPLINGS)
+                .requires(RootsTags.Items.WILDWOOD_BARK)), c, RootsAPI.rl("pyre/spreading_forest"));
+
+    RecipeSaver.saver().unlockedBy("has_bafflecap", has(RootsTags.Items.BAFFLECAP_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.PURITY).build(
+            BaseRecipeData.Builder.create()
+                .requires(RootsTags.Items.BOTTLES)
+                .requires(RootsTags.Items.WILDROOT_HERB)
+                .requires(RootsTags.Items.BAFFLECAP_HERB)
+                .requires(Tags.Items.GEMS_QUARTZ)
+                .requires(Tags.Items.GLASS_BLOCKS)), c, RootsAPI.rl("pyre/purity"));
+
+    RecipeSaver.saver().unlockedBy("has_spiritleaf", has(RootsTags.Items.SPIRITLEAF_HERB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.SUMMON_CREATURES).build(
+            BaseRecipeData.Builder.create()
+                .requires(Tags.Items.BONES)
+                .requires(RootsTags.Items.SPIRITLEAF_HERB)
+                .requires(Items.APPLE) // TODO: Tag
+                .requires(Tags.Items.SEEDS)
+                .requires(Tags.Items.MUSHROOMS)), c, RootsAPI.rl("pyre/summon_creatures"));
+
     RecipeSaver.saver().unlockedBy("has_sugar_cane", has(Tags.Items.CROPS_SUGAR_CANE))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.OVERGROWTH)
-            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.BARKS).requires(RootsTags.Items.BARKS)
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.BARKS)
+                .requires(RootsTags.Items.BARKS)
                 .requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.CROPS_SUGAR_CANE)
                 .requires(Items.SHORT_GRASS)), c, RootsAPI.rl("pyre/overgrowth"));
 

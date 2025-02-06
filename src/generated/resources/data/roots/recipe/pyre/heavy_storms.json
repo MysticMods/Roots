@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/dewgonia"
+      },
+      {
+        "tag": "roots:herbs/cloud_berry"
+      },
+      {
+        "tag": "c:gems/lapis"
+      },
+      {
+        "tag": "c:nuggets/copper"
+      },
+      {
+        "tag": "roots:herbs/grove_moss"
+      }
+    ]
+  },
+  "ritual": "roots:heavy_storms"
+}

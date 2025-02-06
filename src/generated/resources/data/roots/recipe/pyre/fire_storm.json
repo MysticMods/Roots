@@ -1,0 +1,23 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/inferno_bulb"
+      },
+      {
+        "tag": "minecraft:coals"
+      },
+      {
+        "tag": "c:dusts/redstone"
+      },
+      {
+        "tag": "roots:barks"
+      },
+      {
+        "item": "minecraft:magma_block"
+      }
+    ]
+  },
+  "ritual": "roots:fire_storm"
+}
