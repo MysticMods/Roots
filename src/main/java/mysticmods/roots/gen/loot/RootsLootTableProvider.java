@@ -1,8 +1,10 @@
 package mysticmods.roots.gen.loot;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.block.BaseBlocks;
 import mysticmods.roots.block.CreepingGroveMossBlock;
+import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.block.WildRootsBlock;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ElementalType;
@@ -15,6 +17,7 @@ import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -48,9 +51,7 @@ import net.minecraft.world.level.storage.loot.providers.number.BinomialDistribut
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
@@ -68,8 +69,13 @@ public class RootsLootTableProvider {
 
     @Override
     protected Stream<EntityType<?>> getKnownEntityTypes() {
-      List<EntityType<?>> types = List.of(ModEntities.BEETLE.get(), ModEntities.DEER.get(), ModEntities.FENNEC.get(), ModEntities.TAN_SPROUT.get(), ModEntities.GREEN_SPROUT.get(), ModEntities.RED_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.OWL.get(), ModEntities.DUCK.get());
-      return types.stream();
+      List<EntityType<?>> blocks = new ArrayList<>();
+      for (Map.Entry<ResourceKey<EntityType<?>>, EntityType<?>> entry : BuiltInRegistries.ENTITY_TYPE.entrySet()) {
+        if (entry.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
+          blocks.add(entry.getValue());
+        }
+      }
+      return blocks.stream();
     }
 
     @Override
@@ -322,8 +328,11 @@ public class RootsLootTableProvider {
                   .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))))));
       add(ModBlocks.BAFFLECAP_BLOCK.get(), createSilkTouchDispatchTable(ModBlocks.BAFFLECAP_BLOCK.get(), applyExplosionDecay(ModBlocks.BAFFLECAP_BLOCK.get(), LootItem.lootTableItem(ModItems.BAFFLECAP.get())
           .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.05f))))));
-      // TODO: That thing here
-      //dropSelf(ModBlocks.PRIMAL_GROVE_STONE.get());
+      add(ModBlocks.PRIMAL_GROVE_STONE.get(), applyExplosionDecay(ModBlocks.PRIMAL_GROVE_STONE.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.PRIMAL_GROVE_STONE.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)))
+              .add(LootItem.lootTableItem(ModItems.PRIMAL_GROVE_STONE.get())
+                  .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))));
       dropSelf(ModBlocks.INCENSE_BURNER.get());
       dropSelf(ModBlocks.MORTAR.get());
       dropSelf(ModBlocks.PYRE.get());
@@ -445,7 +454,13 @@ public class RootsLootTableProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-      return List.of(ModBlocks.THATCH.get(), ModBlocks.RUNESTONE.get(), ModBlocks.MOSSY_RUNESTONE.get(), ModBlocks.CHISELED_RUNESTONE.get(), ModBlocks.RUNESTONE_BRICK.get(), ModBlocks.RUNESTONE_TILE.get(), ModBlocks.RUNED_OBSIDIAN.get(), ModBlocks.CHISELED_RUNED_OBSIDIAN.get(), ModBlocks.RUNED_BRICK.get(), ModBlocks.RUNED_TILE.get(), ModBlocks.SILVER_ORE.get(), ModBlocks.DEEPSLATE_SILVER_ORE.get(), ModBlocks.GRANITE_QUARTZ_ORE.get(), ModBlocks.RAW_SILVER_BLOCK.get(), ModBlocks.SILVER_BLOCK.get(), ModBlocks.WILDWOOD_LOG.get(), ModBlocks.STRIPPED_WILDWOOD_LOG.get(), ModBlocks.WILDWOOD_WOOD.get(), ModBlocks.STRIPPED_WILDWOOD_WOOD.get(), ModBlocks.WILDWOOD_PLANKS.get(), ModBlocks.WILDWOOD_SAPLING.get(), ModBlocks.STONEPETAL.get(), ModBlocks.WILDWOOD_LEAVES.get(), ModBlocks.RUNED_WILDWOOD_LOG.get(), ModBlocks.RUNED_SPRUCE_LOG.get(), ModBlocks.RUNED_JUNGLE_LOG.get(), ModBlocks.RUNED_BIRCH_LOG.get(), ModBlocks.RUNED_OAK_LOG.get(), ModBlocks.RUNED_DARK_OAK_LOG.get(), ModBlocks.RUNED_ACACIA_LOG.get(), ModBlocks.RUNED_MANGROVE_LOG.get(), ModBlocks.RUNED_WARPED_STEM.get(), ModBlocks.RUNED_CRIMSON_STEM.get(), ModBlocks.RUNESTONE_STAIRS.get(), ModBlocks.MOSSY_RUNESTONE_STAIRS.get(), ModBlocks.RUNESTONE_BRICK_STAIRS.get(), ModBlocks.RUNESTONE_TILE_STAIRS.get(), ModBlocks.RUNED_STAIRS.get(), ModBlocks.RUNED_BRICK_STAIRS.get(), ModBlocks.RUNED_TILE_STAIRS.get(), ModBlocks.WILDWOOD_STAIRS.get(), ModBlocks.RUNESTONE_SLAB.get(), ModBlocks.MOSSY_RUNESTONE_SLAB.get(), ModBlocks.RUNESTONE_BRICK_SLAB.get(), ModBlocks.RUNESTONE_TILE_SLAB.get(), ModBlocks.RUNED_SLAB.get(), ModBlocks.RUNED_BRICK_SLAB.get(), ModBlocks.RUNED_TILE_SLAB.get(), ModBlocks.WILDWOOD_SLAB.get(), ModBlocks.WILDWOOD_FENCE.get(), ModBlocks.RUNESTONE_BUTTON.get(), ModBlocks.RUNESTONE_BRICK_BUTTON.get(), ModBlocks.RUNESTONE_TILE_BUTTON.get(), ModBlocks.MOSSY_RUNESTONE_BUTTON.get(), ModBlocks.RUNED_BUTTON.get(), ModBlocks.RUNED_BRICK_BUTTON.get(), ModBlocks.RUNED_TILE_BUTTON.get(), ModBlocks.WILDWOOD_BUTTON.get(), ModBlocks.RUNESTONE_PRESSURE_PLATE.get(), ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE.get(), ModBlocks.RUNESTONE_TILE_PRESSURE_PLATE.get(), ModBlocks.MOSSY_RUNESTONE_PRESSURE_PLATE.get(), ModBlocks.RUNED_PRESSURE_PLATE.get(), ModBlocks.RUNED_BRICK_PRESSURE_PLATE.get(), ModBlocks.RUNED_TILE_PRESSURE_PLATE.get(), ModBlocks.WILDWOOD_PRESSURE_PLATE.get(), ModBlocks.WILDWOOD_DOOR.get(), ModBlocks.WILDWOOD_TRAPDOOR.get(), ModBlocks.WILDWOOD_LADDER.get(), ModBlocks.WILDWOOD_GATE.get(), ModBlocks.RUNESTONE_WALL.get(), ModBlocks.MOSSY_RUNESTONE_WALL.get(), ModBlocks.RUNESTONE_BRICK_WALL.get(), ModBlocks.RUNESTONE_TILE_WALL.get(), ModBlocks.RUNED_WALL.get(), ModBlocks.RUNED_BRICK_WALL.get(), ModBlocks.RUNED_TILE_WALL.get(), ModBlocks.ELEMENTAL_SOIL.get(), ModBlocks.AQUEOUS_SOIL.get(), ModBlocks.CAELIC_SOIL.get(), ModBlocks.MAGMATIC_SOIL.get(), ModBlocks.TERRAN_SOIL.get(), ModBlocks.RITUAL_PEDESTAL.get(), ModBlocks.REINFORCED_RITUAL_PEDESTAL.get(), ModBlocks.GROVE_CRAFTER.get(), ModBlocks.GROVE_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get(), ModBlocks.DISPLAY_PEDESTAL.get(), ModBlocks.WILD_ROOTS.get(), ModBlocks.CREEPING_GROVE_MOSS.get(), ModBlocks.HANGING_GROVE_MOSS.get(), ModBlocks.BAFFLECAP_BLOCK.get(), /*ModBlocks.PRIMAL_GROVE_STONE.get(), */ModBlocks.INCENSE_BURNER.get(), ModBlocks.MORTAR.get(), ModBlocks.PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get(), ModBlocks.DECORATIVE_PYRE.get(), ModBlocks.DECORATIVE_SOUL_PYRE.get(), ModBlocks.UNENDING_BOWL.get(), ModBlocks.BAFFLECAP.get(), ModBlocks.WILDROOT_CROP.get(), ModBlocks.CLOUD_BERRY_CROP.get(), ModBlocks.DEWGONIA_CROP.get(), ModBlocks.INFERNO_BULB_CROP.get(), ModBlocks.STALICRIPE_CROP.get(), ModBlocks.MOONGLOW_CROP.get(), ModBlocks.PERESKIA_CROP.get(), ModBlocks.SPIRITLEAF_CROP.get(), ModBlocks.WILDEWHEET_CROP.get(), ModBlocks.AUBERGINE_CROP.get(), ModBlocks.WILD_AUBERGINE.get(), ModBlocks.POTTED_BAFFLECAP.get(), ModBlocks.POTTED_STONEPETAL.get(), ModBlocks.POTTED_WILDWOOD_SAPLING.get());
+      List<Block> blocks = new ArrayList<>();
+      for (Map.Entry<ResourceKey<Block>, Block> entry : BuiltInRegistries.BLOCK.entrySet()) {
+        if (entry.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
+          blocks.add(entry.getValue());
+        }
+      }
+      return blocks;
     }
 
     protected LootTable.Builder createWildwoodLeaves(Block block) {
