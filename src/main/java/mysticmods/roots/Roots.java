@@ -25,9 +25,13 @@ import net.neoforged.fml.config.ModConfig;
 // - Overhaul all item properties
 // - Display "ticks" of charged spells
 // - Entity eye height?
+// - Leash attachment points
 // - Breading
 // - Breaking pyres/mortars/pedestals drops contents
 // - Entity carry layers for all mobs
+// - Improve the Ritual command: set the last recipe and the cached recipe, why can't you remove items the first time?
+// - Knife dispenser behaviour
+// - Better drops with knives, better drops with better knives
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;
