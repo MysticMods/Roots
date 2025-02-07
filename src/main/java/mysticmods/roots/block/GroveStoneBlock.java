@@ -85,57 +85,22 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Override
   public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
     if (!pLevel.isClientSide) {
-      preventDrops(pLevel, pPos, pState, pPlayer);
-      if (!pPlayer.isCreative()) {
-        dropResources(pState, pLevel, pPos, null, pPlayer, pPlayer.getMainHandItem());
-      }
+      breakLinkedBlocks(pLevel, pPos, pState);
     }
-
     return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
   }
 
-  @Override
-  public void playerDestroy(Level pLevel, Player pPlayer, BlockPos pPos, BlockState pState, @Nullable BlockEntity pTe, ItemStack pStack) {
-    super.playerDestroy(pLevel, pPlayer, pPos, Blocks.AIR.defaultBlockState(), pTe, pStack);
-  }
+  protected void breakLinkedBlocks(Level pLevel, BlockPos pPos, BlockState pState) {
+    BlockPos basePos = pPos;
+    while (pLevel.getBlockState(basePos.below()).is(this)) {
+      basePos = basePos.below();
+    }
 
-  // TODO: Break everything but just have the loot only drop from one part
-  protected static void preventDrops(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
-    StateProperties.Part part = pState.getValue(PART);
-    if (part == StateProperties.Part.TOP) {
-      BlockPos blockpos = pPos.below();
-      BlockState blockstate = pLevel.getBlockState(blockpos);
-      if (blockstate.getBlock() == pState.getBlock() && blockstate.getValue(PART) == StateProperties.Part.MIDDLE) {
-        pLevel.destroyBlock(blockpos, false);
-      }
-      blockpos = blockpos.below();
-      blockstate = pLevel.getBlockState(blockpos);
-      if (blockstate.getBlock() == pState.getBlock() && blockstate.getValue(PART) == StateProperties.Part.BOTTOM) {
-        pLevel.destroyBlock(blockpos, false);
-      }
-    } else if (part == StateProperties.Part.MIDDLE) {
-      BlockPos blockPos = pPos.above();
-      BlockState blockState = pLevel.getBlockState(blockPos);
-      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == StateProperties.Part.TOP) {
-        pLevel.destroyBlock(blockPos, false);
-      }
-      blockPos = pPos.below();
-      blockState = pLevel.getBlockState(blockPos);
-      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == StateProperties.Part.BOTTOM) {
-        pLevel.destroyBlock(blockPos, false);
-      }
-    } else if (part == StateProperties.Part.BOTTOM) {
-      BlockPos blockPos = pPos.above();
-      BlockState blockState = pLevel.getBlockState(blockPos);
-      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == StateProperties.Part.MIDDLE) {
-        pLevel.destroyBlock(blockPos, false);
-      }
-      blockPos = blockPos.above();
-      blockState = pLevel.getBlockState(blockPos);
-      if (blockState.getBlock() == pState.getBlock() && blockState.getValue(PART) == StateProperties.Part.TOP) {
-        pLevel.destroyBlock(blockPos, false);
+    for (int i = 0; i < 3; i++) {
+      BlockPos targetPos = basePos.above(i);
+      if (pLevel.getBlockState(targetPos).is(this)) {
+        pLevel.destroyBlock(targetPos, true);
       }
     }
   }
-
 }
