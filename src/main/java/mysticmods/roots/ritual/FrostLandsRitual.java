@@ -35,13 +35,13 @@ public class FrostLandsRitual extends Ritual {
   private int healInterval, fluidCount, count;
   private float spawnChance, layerChance, powderedChance, iceChance;
 
-  private final BiPredicate<Level, BlockPos> WATER_OR_LAVA = (level, pos) -> {
+  private static final BiPredicate<Level, BlockPos> WATER_OR_LAVA = (level, pos) -> {
     FluidState fluidState = level.getFluidState(pos.below());
     return fluidState.isSource() && fluidState.is(Tags.Fluids.WATER) || fluidState.is(Tags.Fluids.LAVA);
   };
-  private final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
+  private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
 
-  private final BiPredicate<Level, BlockPos> FROST_LANDS_PREDICATE = (level, pos) -> {
+  private static final BiPredicate<Level, BlockPos> FROST_LANDS_PREDICATE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     if (!state.isAir() && !state.canBeReplaced()) {
       return false;
@@ -62,12 +62,12 @@ public class FrostLandsRitual extends Ritual {
     return snowLayer.canSurvive(level, below);
   };
 
-  private final BiPredicate<Level, BlockPos> IS_FARMLAND = (level, pos) -> {
+  private static final BiPredicate<Level, BlockPos> IS_FARMLAND = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     return state.is(Tags.Blocks.VILLAGER_FARMLANDS);
   };
 
-  private final BiPredicate<Level, BlockPos> IS_FIRE = (level, pos) -> {
+  private static final BiPredicate<Level, BlockPos> IS_FIRE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     return state.is(BlockTags.FIRE);
   };
@@ -89,6 +89,7 @@ public class FrostLandsRitual extends Ritual {
       }
     }
 
+    // TODO: Positions should come from the cached positions
     if (duration % getInterval() == 0) {
       List<BlockPos> positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), WATER_OR_LAVA);
       for (int i = 0; i < fluidCount; i++) {

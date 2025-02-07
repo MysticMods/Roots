@@ -110,6 +110,15 @@
           "default_value": 100,
           "value": 100
         }
+      },
+      {
+        "id": "roots:blooming/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of flowers to place per interval.",
+          "default_value": 1,
+          "value": 1
+        }
       }
     ],
     "roots:crafting": [

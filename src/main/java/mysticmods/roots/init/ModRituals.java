@@ -34,6 +34,7 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_INTERVAL = P.recordProperty("blooming/interval", Property.ofInt(100, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_RADIUS_XZ = P.recordProperty("blooming/radius_xz", Property.ofInt(10, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_RADIUS_Y = P.recordProperty("blooming/radius_y", Property.ofInt(10, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> BLOOMING_COUNT = P.recordProperty("blooming/count", Property.ofInt(1, "The number of flowers to place per interval."));
 
   public static final DeferredHolder<Ritual, FireStormRitual> FIRE_STORM = RITUAL.register("fire_storm", FireStormRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_DURATION = P.recordProperty("fire_storm/duration", Property.ofInt(600, RitualProperties.DURATION));
