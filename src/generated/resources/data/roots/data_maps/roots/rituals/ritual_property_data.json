@@ -450,6 +450,24 @@
           "default_value": 20,
           "value": 20
         }
+      },
+      {
+        "id": "roots:heavy_storms/lightning_chance",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The chance per interval that a lightning bolt will strike.",
+          "default_value": 0.1,
+          "value": 0.1
+        }
+      },
+      {
+        "id": "roots:heavy_storms/lightning_count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The maximum number of lightning strikes that can occur during a ritual instance.",
+          "default_value": 10,
+          "value": 10
+        }
       }
     ],
     "roots:overgrowth": [
