@@ -77,7 +77,6 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_RADIUS_XZ = P.recordProperty("heavy_storms/radius_xz", Property.ofInt(15, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_RADIUS_Y = P.recordProperty("heavy_storms/radius_y", Property.ofInt(15, RitualProperties.RADIUS_Y));
   public static final PropertyHolder<Property.FloatProperty> HEAVY_STORMS_LIGHTNING_CHANCE = P.recordProperty("heavy_storms/lightning_chance", Property.ofFloat(0.1f, "The chance per interval that a lightning bolt will strike."));
-  public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_LIGHTNING_COUNT = P.recordProperty("heavy_storms/lightning_count", Property.ofInt(10, "The maximum number of lightning strikes that can occur during a ritual instance."));
 
   public static final DeferredHolder<Ritual, OvergrowthRitual> OVERGROWTH = RITUAL.register("overgrowth", OvergrowthRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> OVERGROWTH_DURATION = P.recordProperty("overgrowth/duration", Property.ofInt(1950, RitualProperties.DURATION));

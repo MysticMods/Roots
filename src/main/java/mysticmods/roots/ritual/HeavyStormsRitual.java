@@ -34,13 +34,11 @@ public class HeavyStormsRitual extends Ritual {
   protected void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     lightningChance = properties.get(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);
-    lightningCount = properties.get(ModRituals.HEAVY_STORMS_LIGHTNING_COUNT);
   }
 
   protected void buildProperties (List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);
-    properties.add(ModRituals.HEAVY_STORMS_LIGHTNING_COUNT);
   }
 
   @Override
