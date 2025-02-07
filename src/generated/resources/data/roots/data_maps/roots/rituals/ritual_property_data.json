@@ -456,8 +456,8 @@
         "value": {
           "type": "roots:float_property",
           "comment": "The chance per interval that a lightning bolt will strike.",
-          "default_value": 0.1,
-          "value": 0.1
+          "default_value": 0.06,
+          "value": 0.06
         }
       }
     ],
