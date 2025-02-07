@@ -40,10 +40,9 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> result = super.getProperties();
+  public void buildProperties (List<PropertyHolder<?>> result) {
+    super.buildProperties(result);
     result.add(ModSpells.GROWTH_INFUSION_BASE_TICKS);
-    return result;
   }
 
   @Override

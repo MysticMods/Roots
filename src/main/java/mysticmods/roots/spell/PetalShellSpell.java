@@ -36,11 +36,10 @@ public class PetalShellSpell extends Spell {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = super.getProperties();
+  public void buildProperties (List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
     properties.add(ModSpells.PETAL_SHELL_COUNT);
     properties.add(ModSpells.PETAL_SHELL_DURATION);
-    return properties;
   }
 
   @Override

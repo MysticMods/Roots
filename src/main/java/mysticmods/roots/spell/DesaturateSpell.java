@@ -32,10 +32,9 @@ public class DesaturateSpell extends Spell {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = super.getProperties();
+  public void buildProperties (List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
     properties.add(ModSpells.DESATURATE_MULTIPLIER);
-    return properties;
   }
 
   @Override

@@ -38,13 +38,12 @@ public class LifeDrainSpell extends Spell {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = super.getProperties();
+  public void buildProperties (List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
     properties.add(ModSpells.LIFE_DRAIN_DISTANCE);
     properties.add(ModSpells.LIFE_DRAIN_BOUNDS);
     properties.add(ModSpells.LIFE_DRAIN_DAMAGE);
     properties.add(ModSpells.LIFE_DRAIN_HEAL);
-    return properties;
   }
 
   @Override

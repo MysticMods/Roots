@@ -45,10 +45,9 @@ public class SanctuarySpell extends TwoRadiusSpell {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> result = super.getProperties();
+  public void buildProperties (List<PropertyHolder<?>> result) {
+    super.buildProperties(result);
     result.add(ModSpells.SANCTUARY_VELOCITY);
-    return result;
   }
 
   @Override

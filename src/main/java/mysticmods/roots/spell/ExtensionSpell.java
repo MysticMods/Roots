@@ -47,11 +47,10 @@ public class ExtensionSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> result = super.getProperties();
+  public void buildProperties (List<PropertyHolder<?>> result) {
+    super.buildProperties(result);
     result.add(ModSpells.EXTENSION_NIGHT_VISION_DURATION);
     result.add(ModSpells.EXTENSION_SENSE_DANGER_DURATION);
-    return result;
   }
 
   @Override

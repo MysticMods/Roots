@@ -23,11 +23,10 @@ public abstract class TwoRadiusSpell extends Spell {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = super.getProperties();
+  public void buildProperties (List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
     properties.add(getRadiusZXProperty());
     properties.add(getRadiusYProperty());
-    return properties;
   }
 
   @Override

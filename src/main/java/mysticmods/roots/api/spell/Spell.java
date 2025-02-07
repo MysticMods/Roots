@@ -144,8 +144,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     modifiers.add(modifier);
   }
 
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = new ArrayList<>();
+  public void buildProperties (List<PropertyHolder<?>> properties) {
     if (getCooldownProperty() != null) {
       properties.add(getCooldownProperty());
     }
@@ -155,6 +154,11 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     if (getMaxUseProperty() != null) {
       properties.add(getMaxUseProperty());
     }
+  }
+
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> properties = new ArrayList<>();
+    buildProperties(properties);
     return properties;
   }
 
