@@ -184,6 +184,8 @@ public class RootsTags {
     public static final TagKey<Block> WILDWOOD_LOGS_TO_STRIP = modTag("bark_logs/wildwood");
     public static final TagKey<Block> GRANITE_ORE_REPLACEABLES = modTag("granite_ore_replaceables");
 
+    public static final TagKey<Block> BLOOMING_ELIGIBLE_FLOWERS = modTag("ritual/blooming/eligible_flowers");
+    public static final TagKey<Block> BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS = modTag("ritual/blooming/eligible_pedestal_flowers");
 
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
@@ -346,6 +348,44 @@ public class RootsTags {
     public static final TagKey<Item> SKIPPED_FOODS = modTag("skipped_foods");
 
     public static final TagKey<Item> DISABLE_DISARMING = modTag("disable_disarming");
+
+    public static final TagKey<Item> BLOOMING_ELIGIBLE_FLOWERS = modTag("ritual/blooming/eligible_flowers");
+    public static final TagKey<Item> BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS = modTag("ritual/blooming/eligible_pedestal_flowers");
+
+    // Capstones etc
+    public static final TagKey<Item> RUNE_CAPSTONES = modTag("capstones/runes/rune");
+    public static final TagKey<Item> RUNE_PILLARS = modTag("pillars/runes/rune");
+    public static final TagKey<Item> RUNED_CAPSTONES = modTag("capstones/runes/runed");
+    public static final TagKey<Item> RUNED_PILLARS = modTag("pillars/runes/runed");
+    public static final TagKey<Item> RUNES_CAPSTONES = modTag("capstones/runes/any");
+    public static final TagKey<Item> RUNES_PILLARS = modTag("pillars/runes/any");
+
+    public static final TagKey<Item> CAPSTONES = modTag("capstones/any");
+    public static final TagKey<Item> PILLARS = modTag("capstones/any");
+
+    public static final TagKey<Item> ACACIA_CAPSTONES = modTag("capstones/log/acacia");
+    public static final TagKey<Item> DARK_OAK_CAPSTONES = modTag("capstones/log/dark_oak");
+    public static final TagKey<Item> OAK_CAPSTONES = modTag("capstones/log/oak");
+    public static final TagKey<Item> BIRCH_CAPSTONES = modTag("capstones/log/birch");
+    public static final TagKey<Item> JUNGLE_CAPSTONES = modTag("capstones/log/jungle");
+    public static final TagKey<Item> SPRUCE_CAPSTONES = modTag("capstones/log/spruce");
+    public static final TagKey<Item> WILDWOOD_CAPSTONES = modTag("capstones/log/wildwood");
+    public static final TagKey<Item> MANGROVE_CAPSTONES = modTag("capstones/log/mangrove");
+    public static final TagKey<Item> CRIMSON_CAPSTONES = modTag("capstones/log/crimson");
+    public static final TagKey<Item> WARPED_CAPSTONES = modTag("capstones/log/warped");
+
+    public static final TagKey<Item> LOG_PILLARS = modTag("pillars/log/any");
+    public static final TagKey<Item> LOG_CAPSTONES = modTag("capstones/log/any");
+    public static final TagKey<Item> ACACIA_PILLARS = modTag("pillars/log/acacia");
+    public static final TagKey<Item> DARK_OAK_PILLARS = modTag("pillars/log/dark_oak");
+    public static final TagKey<Item> OAK_PILLARS = modTag("pillars/log/oak");
+    public static final TagKey<Item> BIRCH_PILLARS = modTag("pillars/log/birch");
+    public static final TagKey<Item> JUNGLE_PILLARS = modTag("pillars/log/jungle");
+    public static final TagKey<Item> SPRUCE_PILLARS = modTag("pillars/log/spruce");
+    public static final TagKey<Item> WILDWOOD_PILLARS = modTag("pillars/log/wildwood");
+    public static final TagKey<Item> MANGROVE_PILLARS = modTag("pillars/log/mangrove");
+    public static final TagKey<Item> CRIMSON_PILLARS = modTag("pillars/log/crimson");
+    public static final TagKey<Item> WARPED_PILLARS = modTag("pillars/log/warped");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));

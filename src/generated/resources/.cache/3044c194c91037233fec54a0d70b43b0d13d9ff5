@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-05T19:56:19.4432033	Roots Block Tags
+// 1.21.1	2025-02-07T13:39:34.2124171	Roots Block Tags
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/block/levers.json
@@ -127,6 +127,8 @@ e193f473f605776c34de80b92a855d59614ef692 data/roots/tags/block/pillars/runes/any
 e48d858e3d3974b791109f0ebc13f854f1fd3436 data/roots/tags/block/pillars/runes/rune.json
 78d10f476ff2a556d1134f349ebb6e16d3f40922 data/roots/tags/block/pillars/runes/runed.json
 be4cfc54cdf3ab97d153428240e1e941a7375e78 data/roots/tags/block/pyres.json
+0181a639f41b0ab0d567c1e41fe790b23cefebce data/roots/tags/block/ritual/blooming/eligible_flowers.json
+aec04f51c04443c2e39f8137830a11be1ef0e9a1 data/roots/tags/block/ritual/blooming/eligible_pedestal_flowers.json
 b3f0d68ad05349c00594d33d8d0832643f45d54d data/roots/tags/block/runed_obsidian.json
 a7ef113d913fd7247a2d2351669ffe371d25ed46 data/roots/tags/block/runestone.json
 7d1d8f847cd3a3c2a9c7dd9749a5246f523703ec data/roots/tags/block/short_grass.json

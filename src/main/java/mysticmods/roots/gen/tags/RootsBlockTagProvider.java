@@ -294,6 +294,39 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.MANGROVE_LOGS_TO_STRIP).add(Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD);
     this.tag(RootsTags.Blocks.WILDWOOD_LOGS_TO_STRIP).add(WILDWOOD_LOG.get(), WILDWOOD_WOOD.get());
     this.tag(RootsTags.Blocks.GRANITE_ORE_REPLACEABLES).add(Blocks.GRANITE);
+    this.tag(RootsTags.Blocks.BLOOMING_ELIGIBLE_FLOWERS).add(
+        Blocks.DANDELION,
+        Blocks.POPPY,
+        Blocks.BLUE_ORCHID,
+        Blocks.ALLIUM,
+        Blocks.AZURE_BLUET,
+        Blocks.RED_TULIP,
+        Blocks.ORANGE_TULIP,
+        Blocks.WHITE_TULIP,
+        Blocks.PINK_TULIP,
+        Blocks.OXEYE_DAISY,
+        Blocks.CORNFLOWER,
+        Blocks.LILY_OF_THE_VALLEY,
+        STONEPETAL.get()
+    );
+    this.tag(RootsTags.Blocks.BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS).add(
+        Blocks.DANDELION,
+        Blocks.POPPY,
+        Blocks.BLUE_ORCHID,
+        Blocks.ALLIUM,
+        Blocks.AZURE_BLUET,
+        Blocks.RED_TULIP,
+        Blocks.ORANGE_TULIP,
+        Blocks.WHITE_TULIP,
+        Blocks.PINK_TULIP,
+        Blocks.OXEYE_DAISY,
+        Blocks.CORNFLOWER,
+        Blocks.LILY_OF_THE_VALLEY,
+        STONEPETAL.get(),
+        Blocks.TORCHFLOWER,
+        Blocks.WITHER_ROSE,
+        Blocks.SUNFLOWER, Blocks.LILAC, Blocks.PEONY, Blocks.ROSE_BUSH, Blocks.PITCHER_PLANT // Tall flowers
+    );
   }
 
   @Override

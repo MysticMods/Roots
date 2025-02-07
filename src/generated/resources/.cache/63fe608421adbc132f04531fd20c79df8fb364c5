@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-06T14:43:10.8811943	Roots Item Tags
+// 1.21.1	2025-02-07T13:39:34.2068356	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -24,6 +24,21 @@ a1a905fc0c40dbeb097d5eab709a2633e8e6756d data/roots/tags/item/barks/mixed.json
 8473498616c937e7a388109a090efa57399841ab data/roots/tags/item/barks/warped.json
 76ab64b1af0fd463675cc19a388b583f04d4df91 data/roots/tags/item/barks/wildwood.json
 7f7d5f6cc9b5cfb39d240fc901c4ae2d2037ec14 data/roots/tags/item/bottles.json
+9e39feca0c1cb2fc9d1b5f60759f81d9fd7c2ded data/roots/tags/item/capstones/any.json
+28c8dfa3e3be0c2af2188ed1670cc8dbbfb48bf5 data/roots/tags/item/capstones/log/acacia.json
+f846d929c941f56a6a0e8dc04cf8c973e2dcc6ca data/roots/tags/item/capstones/log/any.json
+7d094f4f84acd90e833571bcf80ac4d3071962bb data/roots/tags/item/capstones/log/birch.json
+dcd6305ee737cdc1c03ba3b431ca9c0d75333a6e data/roots/tags/item/capstones/log/crimson.json
+503be33bfd28cf9c7e38dcbc1b4a934c0ba6fa48 data/roots/tags/item/capstones/log/dark_oak.json
+d10c6bdaaf24d8970c5f7e1e65f4f2f1dec96567 data/roots/tags/item/capstones/log/jungle.json
+605c5b597acf1cd8ec36e70b00fd7140abefd419 data/roots/tags/item/capstones/log/mangrove.json
+7f864839dcc0395b8d09de79feaeecbc39eb79c1 data/roots/tags/item/capstones/log/oak.json
+2fe8215e22bbc4924f949013cc8cd4fa3679e5fd data/roots/tags/item/capstones/log/spruce.json
+f6dfcd40f898081767ca4eb2e0227018db6d7a49 data/roots/tags/item/capstones/log/warped.json
+cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/item/capstones/log/wildwood.json
+9c115a6486d5471ec7da7d8d38c5e85b74069410 data/roots/tags/item/capstones/runes/any.json
+17578a8ec82cf0a4f598a8656ffaa775eea0732a data/roots/tags/item/capstones/runes/rune.json
+c9349151d99d4653238fe3843b488ad43c34374a data/roots/tags/item/capstones/runes/runed.json
 c3a2b3f26c12aec67aa597e52b49cc769f00b01c data/roots/tags/item/carapace.json
 ae71dd3be1e53de12945743c7e5062e8c2460abb data/roots/tags/item/casting_tools.json
 bc229f680fa773a41269c1569f5a700f669eb8e5 data/roots/tags/item/cooked_seafood.json
@@ -90,9 +105,25 @@ c5d89cdbb8b3fe577eed9820640231ff10ee85d8 data/roots/tags/item/pedestals/limited.
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/item/pedestals/ritual.json
 08f6581e2fabaae228e3ee44c68f32d91fedbf63 data/roots/tags/item/pelt.json
 4636f349d6690dfab85139e6012a804c930f7288 data/roots/tags/item/petals.json
+307dae19f196ef71116992f2c10a1d6367d71c5e data/roots/tags/item/pillars/log/acacia.json
+84f44f11a710757dc91be87d29f5b393478b83e7 data/roots/tags/item/pillars/log/any.json
+e6a66df990a2e59f597879f3e0d9245712d32f88 data/roots/tags/item/pillars/log/birch.json
+2ddd875c07a1d545574ca44984d769bb007a839e data/roots/tags/item/pillars/log/crimson.json
+5f5643831865b48706a8ff8da2bf2bcd7d5e929d data/roots/tags/item/pillars/log/dark_oak.json
+9f76ce32d2132a2dc0b2c123e4808332394251d9 data/roots/tags/item/pillars/log/jungle.json
+ef69f74d96a0b9cd58f7e8f004b2c7a830741305 data/roots/tags/item/pillars/log/mangrove.json
+6e496f1f3bd31bbed2abd5ec85bc028d3babe3d6 data/roots/tags/item/pillars/log/oak.json
+e025f5442dbf42cdb4e53084ad686f26138d8e97 data/roots/tags/item/pillars/log/spruce.json
+c6d64392f19c3ab3c5d775941e0be342c11f81e7 data/roots/tags/item/pillars/log/warped.json
+59f27b44b52c25fc43bc5215549f9f18b728567b data/roots/tags/item/pillars/log/wildwood.json
+e193f473f605776c34de80b92a855d59614ef692 data/roots/tags/item/pillars/runes/any.json
+e48d858e3d3974b791109f0ebc13f854f1fd3436 data/roots/tags/item/pillars/runes/rune.json
+78d10f476ff2a556d1134f349ebb6e16d3f40922 data/roots/tags/item/pillars/runes/runed.json
 1fd81efe08e8472219d41dc2e31df32980b3e6df data/roots/tags/item/proteins.json
 be4cfc54cdf3ab97d153428240e1e941a7375e78 data/roots/tags/item/pyres.json
 ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/item/pyre_activation.json
+0181a639f41b0ab0d567c1e41fe790b23cefebce data/roots/tags/item/ritual/blooming/eligible_flowers.json
+aec04f51c04443c2e39f8137830a11be1ef0e9a1 data/roots/tags/item/ritual/blooming/eligible_pedestal_flowers.json
 b3f0d68ad05349c00594d33d8d0832643f45d54d data/roots/tags/item/runed_obsidian.json
 a7ef113d913fd7247a2d2351669ffe371d25ed46 data/roots/tags/item/runestone.json
 2fe8872727a472c144211297c79b1ccf369ca4bc data/roots/tags/item/runestone_herbs.json
