@@ -33,7 +33,8 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
     ItemStack inSlot = pBlockEntity.getHeldItem();
     if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes()) {
       pPoseStack.pushPose();
-      VoxelShape pShape = pBlockEntity.getBlockState().getCollisionShape(pBlockEntity.getLevel(), pBlockEntity.getBlockPos());
+      VoxelShape pShape = pBlockEntity.getBlockState()
+          .getCollisionShape(pBlockEntity.getLevel(), pBlockEntity.getBlockPos());
       VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
       PoseStack.Pose pose = pPoseStack.last();
 
@@ -67,8 +68,10 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
         f /= f3;
         f1 /= f3;
         f2 /= f3;
-        pConsumer.addVertex(pose.pose(), (float) (pMinX + pX), (float) (pMinY + pY), (float) (pMinZ + pZ)).setColor(pRed, pGreen, pBlue, pAlpha).setNormal(pose, f, f1, f2);
-        pConsumer.addVertex(pose.pose(), (float) (pMaxX + pX), (float) (pMaxY + pY), (float) (pMaxZ + pZ)).setColor(pRed, pGreen, pBlue, pAlpha).setNormal(pose, f, f1, f2);
+        pConsumer.addVertex(pose.pose(), (float) (pMinX + pX), (float) (pMinY + pY), (float) (pMinZ + pZ))
+            .setColor(pRed, pGreen, pBlue, pAlpha).setNormal(pose, f, f1, f2);
+        pConsumer.addVertex(pose.pose(), (float) (pMaxX + pX), (float) (pMaxY + pY), (float) (pMaxZ + pZ))
+            .setColor(pRed, pGreen, pBlue, pAlpha).setNormal(pose, f, f1, f2);
       });
       pPoseStack.popPose();
     }
@@ -88,7 +91,8 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       pPoseStack.pushPose();
       int loc = pBlockEntity.getBlockPos().hashCode();
       random.setSeed(loc);
-      BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(inSlot, pBlockEntity.getLevel(), null, inSlot.hashCode());
+      BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer()
+          .getModel(inSlot, pBlockEntity.getLevel(), null, inSlot.hashCode());
       boolean flag = bakedmodel.isGui3d();
       int j = this.getRenderAmount(inSlot);
       pPoseStack.translate(0.5, pBlockEntity.offset() + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
@@ -115,7 +119,8 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
           }
         }
 
-        Minecraft.getInstance().getItemRenderer().render(inSlot, ItemDisplayContext.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+        Minecraft.getInstance().getItemRenderer()
+            .render(inSlot, ItemDisplayContext.GROUND, false, pPoseStack, pBufferSource, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
         pPoseStack.popPose();
         if (!flag) {
           pPoseStack.translate(0.0, 0.0, 0.09375F);

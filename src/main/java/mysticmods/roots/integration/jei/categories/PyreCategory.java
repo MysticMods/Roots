@@ -29,11 +29,13 @@ public class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
     if (recipe.getRitual() != null) {
       builder.addSlot(RecipeIngredientRole.OUTPUT, 100, 24).addItemStack(recipe.getRitual().getIcon());
     } else {
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 100, 24).addItemStack(recipe.getResultItem(Minecraft.getInstance().getConnection().registryAccess()));
+      builder.addSlot(RecipeIngredientRole.OUTPUT, 100, 24)
+          .addItemStack(recipe.getResultItem(Minecraft.getInstance().getConnection().registryAccess()));
     }
 
     for (int i = 0; i < recipe.getChanceOutputs().size(); i++) {
-      builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 30).addItemStack(recipe.getChanceOutputs().get(i).getOutput());
+      builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 30)
+          .addItemStack(recipe.getChanceOutputs().get(i).getOutput());
     }
 
     for (int i = 0; i < recipe.getUnlocks().size(); i++) {

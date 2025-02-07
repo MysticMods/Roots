@@ -15,7 +15,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TagMatchWorldTest extends WorldTest {
-  public static final MapCodec<TagMatchWorldTest> CODEC = TagKey.codec(Registries.BLOCK).fieldOf("tag").xmap(TagMatchWorldTest::new, test -> test.tag);
+  public static final MapCodec<TagMatchWorldTest> CODEC = TagKey.codec(Registries.BLOCK).fieldOf("tag")
+      .xmap(TagMatchWorldTest::new, test -> test.tag);
   public static final StreamCodec<ByteBuf, TagMatchWorldTest> STREAM_CODEC = ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC.map(TagMatchWorldTest::new, o -> o.tag);
   public static final ResourceKey<WorldTestType<?>> TAG_MATCH_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("tag_match_test"));
   private final TagKey<Block> tag;

@@ -94,7 +94,7 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
     reset();
   }
 
-  public void reset () {
+  public void reset() {
     cache = null;
     lastRecipe = null;
     reverseLookup.clear();
@@ -121,7 +121,7 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   }
 
   @Nullable
-  public RecipeHolder<T> findRecipe (V output) {
+  public RecipeHolder<T> findRecipe(V output) {
     if (resolver == null) {
       return null;
     }

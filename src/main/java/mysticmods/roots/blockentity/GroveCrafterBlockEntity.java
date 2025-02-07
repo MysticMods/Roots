@@ -64,7 +64,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         return InteractionResult.FAIL;
       }
       // TODO: Provider better feedback to the player
-      ConditionResult conditionResult = cachedRecipe.value().checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
+      ConditionResult conditionResult = cachedRecipe.value()
+          .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
       if (conditionResult.anyFailed()) {
         RootsAPI.LOG.info("Conditions failed.");
         conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
@@ -81,7 +82,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
         return InteractionResult.FAIL;
       }
       lastRecipe = cachedRecipe;
-      List<ItemStack> results = cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
+      List<ItemStack> results = cachedRecipe.value()
+          .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
       for (ItemStack stack : results) {
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
       }

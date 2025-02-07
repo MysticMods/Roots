@@ -19,7 +19,8 @@ import java.util.Set;
 public class LootItemBlockTagCondition implements LootItemCondition {
   private final TagKey<Block> tag;
 
-  public static final MapCodec<LootItemBlockTagCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(LootItemBlockTagCondition::getTag)).apply(instance, LootItemBlockTagCondition::new));
+  public static final MapCodec<LootItemBlockTagCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK)
+      .fieldOf("tag").forGetter(LootItemBlockTagCondition::getTag)).apply(instance, LootItemBlockTagCondition::new));
 
   protected LootItemBlockTagCondition(TagKey<Block> tag) {
     this.tag = tag;

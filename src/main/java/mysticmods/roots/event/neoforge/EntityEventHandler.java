@@ -50,7 +50,8 @@ public class EntityEventHandler {
         if (entity.getType().is(RootsTags.Entities.SQUID)) {
           if (EntityCooldowns.hasExpired(entity, ModAttachments.SQUID_MILKING_COOLDOWN)) {
             EntityCooldowns.setExpiresAt(entity, ModAttachments.SQUID_MILKING_COOLDOWN, server.getTickCount() + (20 * 15));
-            level.playSound(null, player.blockPosition(), ModSounds.SQUID_MILK.get(), SoundSource.PLAYERS, 0.5f, level.getRandom().nextFloat() * 0.25f + 0.6f);
+            level.playSound(null, player.blockPosition(), ModSounds.SQUID_MILK.get(), SoundSource.PLAYERS, 0.5f, level.getRandom()
+                .nextFloat() * 0.25f + 0.6f);
             if (!player.isCreative()) {
               heldItem.shrink(1);
             }
@@ -59,7 +60,8 @@ public class EntityEventHandler {
               ItemUtil.Spawn.spawnItem(level, player.blockPosition(), result);
             }
           } else {
-            player.displayClientMessage(Component.translatable("roots.message.squid.cooldown").setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.BLUE)).withBold(true)), true);
+            player.displayClientMessage(Component.translatable("roots.message.squid.cooldown")
+                .setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.BLUE)).withBold(true)), true);
           }
         }
       }
@@ -67,7 +69,7 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onPotionExpire (MobEffectEvent.Expired event) {
+  public static void onPotionExpire(MobEffectEvent.Expired event) {
     if (event.getEffectInstance() == null) {
       return;
     }
@@ -79,7 +81,7 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onPotionRemoved (MobEffectEvent.Remove event) {
+  public static void onPotionRemoved(MobEffectEvent.Remove event) {
     if (event.getEffectInstance() == null) {
       return;
     }
@@ -91,7 +93,7 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onEntityIncomingDamage (LivingIncomingDamageEvent event) {
+  public static void onEntityIncomingDamage(LivingIncomingDamageEvent event) {
     if (event.getEntity() instanceof Player player) {
       if (event.getSource().getEntity() instanceof LivingEntity living) {
         if (living.hasEffect(ModEffects.GEAS)) {
@@ -108,7 +110,7 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onEntityTarget (LivingChangeTargetEvent event) {
+  public static void onEntityTarget(LivingChangeTargetEvent event) {
     if (event.getEntity().hasEffect(ModEffects.GEAS)) {
       event.setNewAboutToBeSetTarget(null);
     }

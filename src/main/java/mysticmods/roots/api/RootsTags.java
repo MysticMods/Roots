@@ -2,11 +2,10 @@ package mysticmods.roots.api;
 
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
-import net.minecraft.core.HolderSet;
+import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -168,7 +167,6 @@ public class RootsTags {
     public static final TagKey<Block> QUARTZ_ORE = compatTag("ores/quartz"); // SKIP
     public static final TagKey<Block> SILVER_STORAGE = compatTag("storage_blocks/silver"); // SKIP
     public static final TagKey<Block> RAW_SILVER_STORAGE = compatTag("storage_blocks/raw_silver"); // SKIP
-
 
 
     public static final TagKey<Block> GROVE_MOSS = modTag("grove_moss");

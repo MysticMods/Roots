@@ -14,7 +14,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 
 public class EntityTagTest extends EntityTest {
-  public static final MapCodec<EntityTagTest> CODEC = TagKey.codec(Registries.ENTITY_TYPE).fieldOf("tag").xmap(EntityTagTest::new, (p_205065_) -> p_205065_.tag);
+  public static final MapCodec<EntityTagTest> CODEC = TagKey.codec(Registries.ENTITY_TYPE).fieldOf("tag")
+      .xmap(EntityTagTest::new, (p_205065_) -> p_205065_.tag);
   public static final StreamCodec<ByteBuf, EntityTagTest> STREAM_CODEC = ExtraStreamCodecs.ENTITY_TAG_STREAM_CODEC.map(EntityTagTest::new, test -> test.tag);
 
   protected final TagKey<EntityType<?>> tag;

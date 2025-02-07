@@ -16,7 +16,6 @@ import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -112,7 +111,7 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void registerClientExtensions (RegisterClientExtensionsEvent event) {
+  public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
     IClientItemExtensions deferToArmorModel = new IClientItemExtensions() {
       @Override
       public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {

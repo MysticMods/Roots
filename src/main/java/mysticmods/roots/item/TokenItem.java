@@ -9,8 +9,6 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.util.TooltipUtil;
-import net.minecraft.Util;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -38,7 +36,7 @@ public abstract class TokenItem extends Item {
   public abstract String getDescriptionId(ItemStack pStack);
 
   @Nullable
-  protected abstract Unlock<?> getUnlock ();
+  protected abstract Unlock<?> getUnlock();
 
   @Override
   public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
@@ -65,17 +63,18 @@ public abstract class TokenItem extends Item {
 
   public static class SpellTokenItem extends TokenItem {
     private final ResourceKey<Spell> spell;
+
     public SpellTokenItem(ResourceKey<Spell> spell, Properties properties) {
       super(properties);
       this.spell = spell;
     }
 
-    public Spell getSpell () {
+    public Spell getSpell() {
       return RootsRegistries.SPELLS.get(spell);
     }
 
     @Override
-    public String getDescriptionId (ItemStack stack) {
+    public String getDescriptionId(ItemStack stack) {
       return getSpell().getDescriptionId();
     }
 
@@ -99,17 +98,18 @@ public abstract class TokenItem extends Item {
 
   public static class RitualTokenItem extends TokenItem {
     private final ResourceKey<Ritual> ritual;
+
     public RitualTokenItem(ResourceKey<Ritual> ritual, Properties properties) {
       super(properties);
       this.ritual = ritual;
     }
 
-    public Ritual getRitual () {
+    public Ritual getRitual() {
       return RootsRegistries.RITUALS.get(ritual);
     }
 
     @Override
-    public String getDescriptionId (ItemStack stack) {
+    public String getDescriptionId(ItemStack stack) {
       return getRitual().getDescriptionId();
     }
 

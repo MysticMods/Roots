@@ -53,7 +53,8 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
     BlockPos pos = pContext.getClickedPos();
     FluidState fluidstate = level.getFluidState(pos);
 
-    BlockState blockstate = this.defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
+    BlockState blockstate = this.defaultBlockState()
+        .setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
     if (fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8) {
       return blockstate.setValue(WATERLOGGED, true);
     }

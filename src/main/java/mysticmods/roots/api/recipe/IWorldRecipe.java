@@ -1,11 +1,8 @@
 package mysticmods.roots.api.recipe;
 
-import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.item.crafting.RecipeInput;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 

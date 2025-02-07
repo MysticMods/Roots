@@ -106,7 +106,8 @@ public class PlayerShoulderCapability implements IPlayerShoulderCapability {
       this.shouldered = incoming.getBoolean("shouldered");
     }
     if (incoming.contains("registryName")) {
-      this.registryName = incoming.getString("registryName").isEmpty() ? null : ResourceLocation.parse(incoming.getString("registryName"));
+      this.registryName = incoming.getString("registryName")
+          .isEmpty() ? null : ResourceLocation.parse(incoming.getString("registryName"));
     }
   }
 }

@@ -39,7 +39,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -187,7 +186,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       }
       // TODO: Provider better feedback to the player
       if (cachedRecipe != null && cachedRecipe.value().matches(playerlessCrafting, level)) {
-        ConditionResult conditionResult = cachedRecipe.value().checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
+        ConditionResult conditionResult = cachedRecipe.value()
+            .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
         if (conditionResult.anyFailed()) {
           RootsAPI.LOG.info("Conditions failed.");
           conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
@@ -211,7 +211,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
           lastRecipe = cachedRecipe;
           previousRecipeItems.clear();
           previousRecipeItems.addAll(inventory.getItemsCopy());
-          List<ItemStack> results = cachedRecipe.value().assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear);
+          List<ItemStack> results = cachedRecipe.value()
+              .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear);
           for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
           }

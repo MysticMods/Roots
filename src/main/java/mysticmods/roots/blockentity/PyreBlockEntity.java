@@ -60,6 +60,7 @@ import java.util.*;
 
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
   private static BoundingBox PYRE_BOUNDS;
+
   public static BoundingBox getPyreBoundingBox() {
     if (PYRE_BOUNDS == null) {
       PYRE_BOUNDS = new BoundingBox(-ConfigManager.PYRE_BOUNDS_X.get(), -ConfigManager.PYRE_BOUNDS_Y.get(), -ConfigManager.PYRE_BOUNDS_Z.get(), ConfigManager.PYRE_BOUNDS_X.get() + 1, ConfigManager.PYRE_BOUNDS_Y.get() + 1, ConfigManager.PYRE_BOUNDS_Z.get() + 1);
@@ -102,7 +103,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     super(ModBlockEntities.PYRE.get(), pWorldPosition, pBlockState);
   }
 
-  private void setCurrentRitual (Ritual ritual) {
+  private void setCurrentRitual(Ritual ritual) {
     this.currentRitual = ritual;
     this.refreshRitualCache();
   }
@@ -239,7 +240,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
   }
 
-  private void refreshRitualCache () {
+  private void refreshRitualCache() {
     if (this.currentRitual == null) {
       this.cachedRitualPositionsInBounds = null;
       this.cachedRitualLastPosition = null;
@@ -260,17 +261,18 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
 
     if (this.cachedRitualPositionsInBounds == null) {
-      this.cachedRitualPositionsInBounds = new ArrayList<>(BlockPos.betweenClosedStream(this.cachedRitualBoundingBox).map(BlockPos::immutable).toList());
+      this.cachedRitualPositionsInBounds = new ArrayList<>(BlockPos.betweenClosedStream(this.cachedRitualBoundingBox)
+          .map(BlockPos::immutable).toList());
       this.cachedRandomRitualPositionsInBounds = new ArrayList<>(this.cachedRitualPositionsInBounds);
     }
   }
 
-  public List<BlockPos> getRitualPositions () {
+  public List<BlockPos> getRitualPositions() {
     refreshRitualCache();
     return cachedRitualPositionsInBounds == null ? Collections.emptyList() : cachedRitualPositionsInBounds;
   }
 
-  public List<BlockPos> getRitualRandomPositions () {
+  public List<BlockPos> getRitualRandomPositions() {
     refreshRitualCache();
     if (cachedRandomRitualPositionsInBounds == null) {
       return Collections.emptyList();
@@ -280,7 +282,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return cachedRandomRitualPositionsInBounds;
   }
 
-  public BoundingBox getRitualBoundingBox () {
+  public BoundingBox getRitualBoundingBox() {
     refreshRitualCache();
     return cachedRitualBoundingBox;
   }
@@ -482,7 +484,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Nullable
-  private Player getLastPlayer () {
+  private Player getLastPlayer() {
     if (lastPlayer != null) {
       return lastPlayer;
     }
@@ -509,7 +511,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       if (lifetime <= 0) {
         stopRitual();
 
-        if (!inventory.isEmpty() && cachedRecipe != null && getLastPlayer () != null && lastRecipe != null && lifetime <= 0) {
+        if (!inventory.isEmpty() && cachedRecipe != null && getLastPlayer() != null && lastRecipe != null && lifetime <= 0) {
           if (cachedRecipe.equals(lastRecipe) && cachedRecipe.value().matches(playerlessCrafting, pLevel)) {
             // Start
             light(getLastPlayer());

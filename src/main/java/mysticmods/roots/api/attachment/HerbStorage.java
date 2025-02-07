@@ -12,7 +12,8 @@ import net.minecraft.network.codec.StreamCodec;
 import java.util.Map;
 
 public class HerbStorage implements ICleanable {
-  public static final Codec<HerbStorage> CODEC = Codec.unboundedMap(RootsRegistries.HERBS.byNameCodec(), Codec.DOUBLE).xmap(HerbStorage::new, HerbStorage::getHerbMap);
+  public static final Codec<HerbStorage> CODEC = Codec.unboundedMap(RootsRegistries.HERBS.byNameCodec(), Codec.DOUBLE)
+      .xmap(HerbStorage::new, HerbStorage::getHerbMap);
   public static final StreamCodec<RegistryFriendlyByteBuf, HerbStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.map(Object2DoubleOpenHashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.HERBS), ByteBufCodecs.DOUBLE), HerbStorage::getHerbMap, HerbStorage::new);
 
   private boolean dirty = true;

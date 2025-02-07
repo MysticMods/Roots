@@ -28,7 +28,7 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
       MortarRecipe::new
   );
 
-  private int times;
+  private final int times;
 
   public MortarRecipe(BaseRecipeData data, int times) {
     super(data);

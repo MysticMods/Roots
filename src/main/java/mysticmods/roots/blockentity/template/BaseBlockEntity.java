@@ -47,7 +47,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
       return;
     }
     ChunkPos chunkPos = new ChunkPos(getBlockPos());
-    for (ServerPlayer player : ((ServerLevel)level).getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
+    for (ServerPlayer player : ((ServerLevel) level).getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
       player.connection.send(packet);
     }
   }
@@ -108,7 +108,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     return singleBlockBoundingBox;
   }
 
-  public ItemStack outputAdjacent (ItemStack stack) {
+  public ItemStack outputAdjacent(ItemStack stack) {
     // Unneccessary allocation?
     List<ItemStack> temp = new ArrayList<>();
     temp.add(stack);
@@ -125,7 +125,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     return temp.getFirst();
   }
 
-  public List<ItemStack> outputAdjacent (List<ItemStack> stacks) {
+  public List<ItemStack> outputAdjacent(List<ItemStack> stacks) {
     if (lastOutput != null) {
       IItemHandler output = lastOutput.getCapability();
       if (output != null) {
@@ -158,7 +158,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     return stacks;
   }
 
-  public List<ItemStack> outputAdjacent (List<ItemStack> stacks, IItemHandler handler) {
+  public List<ItemStack> outputAdjacent(List<ItemStack> stacks, IItemHandler handler) {
     List<ItemStack> result = new ArrayList<>();
     for (ItemStack stack : stacks) {
       ItemStack remainder = ItemHandlerHelper.insertItem(handler, stack, false);
@@ -177,7 +177,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
 
   public static <T extends BlockEntity> void serverTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
     if (pBlockEntity instanceof ServerTickBlockEntity serverBlockEntity) {
-      serverBlockEntity.serverTick((ServerLevel)pLevel, pPos, pState);
+      serverBlockEntity.serverTick((ServerLevel) pLevel, pPos, pState);
     }
   }
 }

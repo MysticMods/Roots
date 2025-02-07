@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -14,17 +13,17 @@ import net.neoforged.neoforge.items.IItemHandler;
 import javax.annotation.Nullable;
 
 public interface RefillProvider {
-  RecipeInventory getRefillInventory ();
+  RecipeInventory getRefillInventory();
 
   @Nullable
-  Recipe<?> getRefillRecipe ();
+  Recipe<?> getRefillRecipe();
 
   @Nullable
-  BlockCapabilityCache<IItemHandler, Direction> getBlockCapabilityCache ();
+  BlockCapabilityCache<IItemHandler, Direction> getBlockCapabilityCache();
 
-  void setBlockCapabilityCache (BlockCapabilityCache<IItemHandler, Direction> blockCapabilityCache);
+  void setBlockCapabilityCache(BlockCapabilityCache<IItemHandler, Direction> blockCapabilityCache);
 
-  default boolean tryRefill (ServerLevel level, BlockPos position) {
+  default boolean tryRefill(ServerLevel level, BlockPos position) {
     if (getRefillInventory().isEmpty() && getRefillRecipe() != null) {
       IItemHandler handler = null;
       if (getBlockCapabilityCache() != null) {

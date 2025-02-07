@@ -27,7 +27,8 @@ public class SkySoarerEffect extends MobEffect {
       vehicle.hasImpulse = true;
       vehicle.hurtMarked = true;
       vehicle.fallDistance = 0f;
-      vehicle.setDeltaMovement(player.getLookAngle().multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
+      vehicle.setDeltaMovement(player.getLookAngle()
+          .multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
     });
     return true;
   }

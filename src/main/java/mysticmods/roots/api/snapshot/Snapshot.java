@@ -8,8 +8,10 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.Entity;
 
 public abstract class Snapshot {
-  public static Codec<Snapshot> CODEC = RootsRegistries.SNAPSHOT_TYPES.byNameCodec().dispatch(Snapshot::getType, SnapshotType::mapCodec);
-  public static StreamCodec<RegistryFriendlyByteBuf, Snapshot> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SNAPSHOT_TYPES).dispatch(Snapshot::getType, SnapshotType::streamCodec);
+  public static Codec<Snapshot> CODEC = RootsRegistries.SNAPSHOT_TYPES.byNameCodec()
+      .dispatch(Snapshot::getType, SnapshotType::mapCodec);
+  public static StreamCodec<RegistryFriendlyByteBuf, Snapshot> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SNAPSHOT_TYPES)
+      .dispatch(Snapshot::getType, SnapshotType::streamCodec);
 
   protected int startTime;
   protected int decay;

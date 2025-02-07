@@ -5,8 +5,6 @@ import com.google.common.collect.ImmutableBiMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.registry.IDescribed;
-import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
@@ -25,9 +23,11 @@ public interface Unlock<T> {
       RootsAPI.rl("spell"), SpellUnlock.TYPE,
       RootsAPI.rl("spell_modifier"), ModifierUnlock.TYPE
   );
-  Codec<Unlock<?>> CODEC = ResourceLocation.CODEC.xmap(TYPES::get, TYPES.inverse()::get).dispatch(Unlock::unlockType, UnlockType::codec);
+  Codec<Unlock<?>> CODEC = ResourceLocation.CODEC.xmap(TYPES::get, TYPES.inverse()::get)
+      .dispatch(Unlock::unlockType, UnlockType::codec);
   Codec<List<Unlock<?>>> LIST_CODEC = CODEC.listOf();
-  StreamCodec<RegistryFriendlyByteBuf, Unlock<?>> STREAM_CODEC = StreamCodec.of(RegistryFriendlyByteBuf::writeResourceLocation, RegistryFriendlyByteBuf::readResourceLocation).map(TYPES::get, TYPES.inverse()::get).dispatch(Unlock::unlockType, UnlockType::streamCodec);
+  StreamCodec<RegistryFriendlyByteBuf, Unlock<?>> STREAM_CODEC = StreamCodec.of(RegistryFriendlyByteBuf::writeResourceLocation, RegistryFriendlyByteBuf::readResourceLocation)
+      .map(TYPES::get, TYPES.inverse()::get).dispatch(Unlock::unlockType, UnlockType::streamCodec);
   StreamCodec<RegistryFriendlyByteBuf, List<Unlock<?>>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   default boolean is(UnlockType type) {
@@ -36,7 +36,7 @@ public interface Unlock<T> {
 
   UnlockType unlockType();
 
-  Component getFailed ();
+  Component getFailed();
 
   default ItemStack getIcon() {
     return ItemStack.EMPTY;
@@ -52,8 +52,10 @@ public interface Unlock<T> {
 
   record SpellUnlock(Holder<Spell> value) implements Unlock<Spell> {
 
-    public static final MapCodec<SpellUnlock> CODEC = RootsRegistries.SPELLS.holderByNameCodec().fieldOf("value").xmap(SpellUnlock::new, SpellUnlock::value);
-    public static final StreamCodec<RegistryFriendlyByteBuf, SpellUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.SPELLS).map(SpellUnlock::new, SpellUnlock::value);
+    public static final MapCodec<SpellUnlock> CODEC = RootsRegistries.SPELLS.holderByNameCodec().fieldOf("value")
+        .xmap(SpellUnlock::new, SpellUnlock::value);
+    public static final StreamCodec<RegistryFriendlyByteBuf, SpellUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.SPELLS)
+        .map(SpellUnlock::new, SpellUnlock::value);
     public static final UnlockType TYPE = new UnlockType(CODEC, STREAM_CODEC);
 
     @Override
@@ -74,8 +76,10 @@ public interface Unlock<T> {
 
   record ModifierUnlock(Holder<SpellModifier> value) implements Unlock<SpellModifier> {
 
-    public static final MapCodec<ModifierUnlock> CODEC = RootsRegistries.SPELL_MODIFIERS.holderByNameCodec().fieldOf("defaultValue").xmap(ModifierUnlock::new, ModifierUnlock::value);
-    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.SPELL_MODIFIERS).map(ModifierUnlock::new, ModifierUnlock::value);
+    public static final MapCodec<ModifierUnlock> CODEC = RootsRegistries.SPELL_MODIFIERS.holderByNameCodec()
+        .fieldOf("defaultValue").xmap(ModifierUnlock::new, ModifierUnlock::value);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ModifierUnlock> STREAM_CODEC = ByteBufCodecs.holderRegistry(RootsRegistries.Keys.SPELL_MODIFIERS)
+        .map(ModifierUnlock::new, ModifierUnlock::value);
     public static final UnlockType TYPE = new UnlockType(CODEC, STREAM_CODEC);
 
     @Override

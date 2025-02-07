@@ -14,12 +14,14 @@ public class RootsRitualTagsProvider extends IntrinsicHolderTagsProvider<Ritual>
 
 
   public RootsRitualTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
-    super(output, RootsRegistries.Keys.RITUALS, provider, p_256665_ -> p_256665_.builtInRegistryHolder().getKey(), modId, existingFileHelper);
+    super(output, RootsRegistries.Keys.RITUALS, provider, p_256665_ -> p_256665_.builtInRegistryHolder()
+        .getKey(), modId, existingFileHelper);
   }
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
-    this.tag(RootsTags.Rituals.NYI).add(ModRituals.BLOOMING.get(), ModRituals.FIRE_STORM.get(), ModRituals.FROST_LANDS.get(), ModRituals.GATHERING.get(), ModRituals.GERMINATION.get(), ModRituals.HEALING_AURA.get(), ModRituals.HEAVY_STORMS.get(), ModRituals.OVERGROWTH.get(), ModRituals.PROTECTION.get(), ModRituals.PURITY.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.TRANSMUTATION.get(), ModRituals.WARDING.get(), ModRituals.WILDROOT_GROWTH.get(), ModRituals.WINDWALL.get());
+    this.tag(RootsTags.Rituals.NYI)
+        .add(ModRituals.BLOOMING.get(), ModRituals.FIRE_STORM.get(), ModRituals.FROST_LANDS.get(), ModRituals.GATHERING.get(), ModRituals.GERMINATION.get(), ModRituals.HEALING_AURA.get(), ModRituals.HEAVY_STORMS.get(), ModRituals.OVERGROWTH.get(), ModRituals.PROTECTION.get(), ModRituals.PURITY.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.TRANSMUTATION.get(), ModRituals.WARDING.get(), ModRituals.WILDROOT_GROWTH.get(), ModRituals.WINDWALL.get());
     this.tag(RootsTags.Rituals.PRIMAL_OPPOSED);
     this.tag(RootsTags.Rituals.PRIMAL_ALIGNED);
     this.tag(RootsTags.Rituals.FAIRY_OPPOSED);

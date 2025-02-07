@@ -24,6 +24,7 @@ public class TooltipItem extends Item {
     super.appendHoverText(arg, arg2, tooltip, arg3);
 
     tooltip.add(Component.literal(""));
-    tooltip.add(Component.translatable(translationKey).setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))));
+    tooltip.add(Component.translatable(translationKey)
+        .setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))));
   }
 }

@@ -33,7 +33,7 @@ public class ModGroves {
       new GroveData.GroveInitRecord(Groves.ELEMENTAL, RootsTags.Herbs.ELEMENTAL, RootsTags.Groves.ELEMENTAL_ALIGNED, RootsTags.Groves.ELEMENTAL_OPPOSED, RootsTags.Spells.ELEMENTAL_ALIGNED, RootsTags.Spells.ELEMENTAL_OPPOSED, RootsTags.Rituals.ELEMENTAL_ALIGNED, RootsTags.Rituals.ELEMENTAL_OPPOSED),
       new GroveData.GroveInitRecord(Groves.WILD, RootsTags.Herbs.WILD, RootsTags.Groves.WILD_ALIGNED, RootsTags.Groves.WILD_OPPOSED, RootsTags.Spells.WILD_ALIGNED, RootsTags.Spells.WILD_OPPOSED, RootsTags.Rituals.WILD_ALIGNED, RootsTags.Rituals.WILD_OPPOSED));
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     REGISTER.register(bus);
   }
 

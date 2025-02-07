@@ -14,8 +14,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockMatchWorldTest extends WorldTest {
-  public static final MapCodec<BlockMatchWorldTest> CODEC = BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block").xmap(BlockMatchWorldTest::new, test -> test.block);
-  public static final StreamCodec<RegistryFriendlyByteBuf, BlockMatchWorldTest> STREAM_CODEC = ByteBufCodecs.registry(Registries.BLOCK).map(BlockMatchWorldTest::new, test -> test.block);
+  public static final MapCodec<BlockMatchWorldTest> CODEC = BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block")
+      .xmap(BlockMatchWorldTest::new, test -> test.block);
+  public static final StreamCodec<RegistryFriendlyByteBuf, BlockMatchWorldTest> STREAM_CODEC = ByteBufCodecs.registry(Registries.BLOCK)
+      .map(BlockMatchWorldTest::new, test -> test.block);
   public static ResourceKey<WorldTestType<?>> BLOCK_MATCH_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("block_match_test"));
 
   private final Block block;

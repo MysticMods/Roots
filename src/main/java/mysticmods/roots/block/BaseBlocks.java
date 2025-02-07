@@ -35,7 +35,9 @@ public class BaseBlocks {
   }
 
   public static class WildCropBlock extends BushBlock {
-    public static final MapCodec<WildCropBlock> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(propertiesCodec(), TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(WildCropBlock::getSupporterTag)).apply(builder, (builder1, tag) -> new WildCropBlock(tag, builder1)));
+    public static final MapCodec<WildCropBlock> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(propertiesCodec(), TagKey.codec(Registries.BLOCK)
+            .fieldOf("tag").forGetter(WildCropBlock::getSupporterTag))
+        .apply(builder, (builder1, tag) -> new WildCropBlock(tag, builder1)));
 
     private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     private final TagKey<Block> supporter;

@@ -37,7 +37,7 @@ public abstract class RootsAPI {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);
   }
 
-  public static ResourceLocation parse (String path) {
+  public static ResourceLocation parse(String path) {
     return ResourceLocation.parse(path);
   }
 
@@ -62,7 +62,8 @@ public abstract class RootsAPI {
   public static Logger LOG = LogManager.getLogger();
 
   public static MutableComponent holdShift() {
-    return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift").setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
+    return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift")
+        .setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
   }
 
   public abstract void unlock(ServerPlayer player, Unlock<?> unlock);

@@ -19,7 +19,10 @@ import java.util.stream.Collectors;
 
 public class DimensionPlacement extends PlacementFilter {
   public static final MapCodec<DimensionPlacement> CODEC = RecordCodecBuilder.mapCodec((codec) -> codec.group(
-      ResourceLocation.CODEC.listOf().fieldOf("dimensions").forGetter(o -> o.dimensions.stream().map(ResourceKey::location).collect(Collectors.toList()))).apply(codec, (r) -> new DimensionPlacement(r.stream().map(o -> ResourceKey.create(Registries.DIMENSION, o)).collect(Collectors.toSet()))));
+          ResourceLocation.CODEC.listOf().fieldOf("dimensions")
+              .forGetter(o -> o.dimensions.stream().map(ResourceKey::location).collect(Collectors.toList())))
+      .apply(codec, (r) -> new DimensionPlacement(r.stream().map(o -> ResourceKey.create(Registries.DIMENSION, o))
+          .collect(Collectors.toSet()))));
 
   private final Set<ResourceKey<Level>> dimensions;
 

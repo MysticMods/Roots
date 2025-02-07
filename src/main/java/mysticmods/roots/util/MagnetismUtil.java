@@ -1,6 +1,5 @@
 package mysticmods.roots.util;
 
-import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import net.minecraft.core.BlockPos;
@@ -10,8 +9,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;

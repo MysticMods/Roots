@@ -22,18 +22,23 @@ import java.util.Locale;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
-public record WorldCondition(String name, Shift shift, WorldTest test, boolean modifyPosition) implements TriPredicate<BlockPos, Level, RandomSource> {
+public record WorldCondition(String name, Shift shift, WorldTest test,
+                             boolean modifyPosition) implements TriPredicate<BlockPos, Level, RandomSource> {
   public static final String ORIGIN = "origin";
-  public static final Codec<WorldCondition> CODEC = RecordCodecBuilder.create((codec) -> codec.group(Codec.STRING.fieldOf("name").forGetter((condition) -> condition.name), Shift.CODEC.fieldOf("shift").forGetter((condition) -> condition.shift), WorldTest.CODEC.fieldOf("test").forGetter((condition) -> condition.test), Codec.BOOL.fieldOf("modifyPosition").forGetter((condition) -> condition.modifyPosition)).apply(codec, WorldCondition::new));
+  public static final Codec<WorldCondition> CODEC = RecordCodecBuilder.create((codec) -> codec.group(Codec.STRING.fieldOf("name")
+      .forGetter((condition) -> condition.name), Shift.CODEC.fieldOf("shift")
+      .forGetter((condition) -> condition.shift), WorldTest.CODEC.fieldOf("test")
+      .forGetter((condition) -> condition.test), Codec.BOOL.fieldOf("modifyPosition")
+      .forGetter((condition) -> condition.modifyPosition)).apply(codec, WorldCondition::new));
   public static final Codec<List<WorldCondition>> LIST_CODEC = CODEC.listOf();
-  public static final StreamCodec<RegistryFriendlyByteBuf, WorldCondition> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, o -> o.name, Shift.STREAM_CODEC, o -> o.shift, WorldTest.STREAM_CODEC, o -> o.test, ByteBufCodecs.BOOL , o -> o.modifyPosition, WorldCondition::new);
+  public static final StreamCodec<RegistryFriendlyByteBuf, WorldCondition> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, o -> o.name, Shift.STREAM_CODEC, o -> o.shift, WorldTest.STREAM_CODEC, o -> o.test, ByteBufCodecs.BOOL, o -> o.modifyPosition, WorldCondition::new);
   public static final StreamCodec<RegistryFriendlyByteBuf, List<WorldCondition>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
   public WorldCondition(WorldTest test) {
     this(ORIGIN, Shift.NONE, test, true);
   }
 
-  public WorldCondition (WorldTest test, boolean modifyPosition) {
+  public WorldCondition(WorldTest test, boolean modifyPosition) {
     this(ORIGIN, Shift.NONE, test, modifyPosition);
   }
 
@@ -41,7 +46,7 @@ public record WorldCondition(String name, Shift shift, WorldTest test, boolean m
     this(name, Shift.NONE, test, false);
   }
 
-  public WorldCondition (String name, WorldTest test, boolean modifyPosition) {
+  public WorldCondition(String name, WorldTest test, boolean modifyPosition) {
     this(name, Shift.NONE, test, modifyPosition);
   }
 
@@ -53,7 +58,7 @@ public record WorldCondition(String name, Shift shift, WorldTest test, boolean m
   }
 
   @Nullable
-  public BlockPos resolvePosition (BlockPos position) {
+  public BlockPos resolvePosition(BlockPos position) {
     return !modifyPosition ? null : shift == Shift.NONE ? position : shift.apply(position);
   }
 

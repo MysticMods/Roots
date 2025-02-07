@@ -11,7 +11,9 @@ import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.block.GroveStoneBlock;
 import net.minecraft.Util;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -137,7 +139,7 @@ public abstract class LevelCondition implements IDescribed {
       return fromStates(capstoneState, pillarState, heightExcluding);
     }
 
-    public static CanonicalRepresentation fromStates (BlockState capstone, BlockState pillar, int height) {
+    public static CanonicalRepresentation fromStates(BlockState capstone, BlockState pillar, int height) {
       if (capstone.hasProperty(RotatedPillarBlock.AXIS)) {
         capstone = capstone.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
       }
@@ -231,12 +233,15 @@ public abstract class LevelCondition implements IDescribed {
       return fromBlockState(state, requireValid, requireInvalid);
     }
 
-    public static CanonicalRepresentation fromBlockState (BlockState state, boolean requireValid, boolean requireInvalid) {
-      BlockState bottom = state.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM).setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
-      BlockState middle = state.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE).setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
-      BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP).setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+    public static CanonicalRepresentation fromBlockState(BlockState state, boolean requireValid, boolean requireInvalid) {
+      BlockState bottom = state.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)
+          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+      BlockState middle = state.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE)
+          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+      BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP)
+          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
       //noinspection rawtypes
-      Property[] properties = new Property[] {StateProperties.GroveStone.PART, StateProperties.GroveStone.ACTIVE, StateProperties.GroveStone.FACING};
+      Property[] properties = new Property[]{StateProperties.GroveStone.PART, StateProperties.GroveStone.ACTIVE, StateProperties.GroveStone.FACING};
       return new CanonicalRepresentation(new PartialBlockState(bottom, properties), new PartialBlockState(middle, properties), new PartialBlockState(top, properties));
     }
 
@@ -310,7 +315,7 @@ public abstract class LevelCondition implements IDescribed {
     return groveStone(grove, requireValid, false);
   }
 
-  public static LevelCondition.GroveStoneCondition groveStone (GroveType grove, boolean requireValid, boolean requireInvalid) {
+  public static LevelCondition.GroveStoneCondition groveStone(GroveType grove, boolean requireValid, boolean requireInvalid) {
     return new GroveStoneCondition(grove.getTag(), requireValid, requireInvalid);
   }
 

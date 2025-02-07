@@ -39,14 +39,17 @@ public class BaseRecipeData {
           },
           DataResult::success
       ).forGetter(o -> o.ingredients),
-      LevelCondition.CODEC.listOf().optionalFieldOf("levelConditions", Collections.emptyList()).forGetter(o -> o.levelConditions),
-      PlayerCondition.CODEC.listOf().optionalFieldOf("playerConditions", Collections.emptyList()).forGetter(o -> o.playerConditions),
+      LevelCondition.CODEC.listOf().optionalFieldOf("levelConditions", Collections.emptyList())
+          .forGetter(o -> o.levelConditions),
+      PlayerCondition.CODEC.listOf().optionalFieldOf("playerConditions", Collections.emptyList())
+          .forGetter(o -> o.playerConditions),
       ItemStack.CODEC.optionalFieldOf("result", ItemStack.EMPTY).forGetter(o -> o.result),
       ItemStack.CODEC.listOf().optionalFieldOf("results", Collections.emptyList()).forGetter(o -> o.results),
       ChanceOutput.LIST_CODEC.optionalFieldOf("chanceOutputs", Collections.emptyList()).forGetter(o -> o.chanceOutputs),
       Unlock.LIST_CODEC.optionalFieldOf("unlocks", Collections.emptyList()).forGetter(o -> o.unlocks)
   ).apply(instance, BaseRecipeData::new));
-  public static Codec<BaseRecipeData> OPTIONAL_CODEC = ExtraCodecs.optionalEmptyMap(CODEC.codec()).xmap(o -> o.orElse(new BaseRecipeData()), o -> o == null ? Optional.empty() : Optional.of(o));
+  public static Codec<BaseRecipeData> OPTIONAL_CODEC = ExtraCodecs.optionalEmptyMap(CODEC.codec())
+      .xmap(o -> o.orElse(new BaseRecipeData()), o -> o == null ? Optional.empty() : Optional.of(o));
   public static StreamCodec<RegistryFriendlyByteBuf, NonNullList<Ingredient>> INGREDIENT_LIST_STREAM = Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.collection(NonNullList::createWithCapacity));
   public static final StreamCodec<RegistryFriendlyByteBuf, BaseRecipeData> STREAM_CODEC = ExtraStreamCodecs.composite(
       ByteBufCodecs.optional(INGREDIENT_LIST_STREAM), o -> c(o.ingredients),
@@ -101,7 +104,9 @@ public class BaseRecipeData {
 
   // TODO: Why does this exist
   public Builder builder() {
-    return new Builder(new ArrayList<>(ingredients), new ArrayList<>(levelConditions), new ArrayList<>(playerConditions), result.copy(), results.stream().map(ItemStack::copy).collect(Collectors.toList()), chanceOutputs.stream().map(ChanceOutput::copy).collect(Collectors.toList()), new ArrayList<>(unlocks));
+    return new Builder(new ArrayList<>(ingredients), new ArrayList<>(levelConditions), new ArrayList<>(playerConditions), result.copy(), results.stream()
+        .map(ItemStack::copy).collect(Collectors.toList()), chanceOutputs.stream().map(ChanceOutput::copy)
+        .collect(Collectors.toList()), new ArrayList<>(unlocks));
   }
 
   private static <V, T extends List<V>> Optional<T> c(T value) {

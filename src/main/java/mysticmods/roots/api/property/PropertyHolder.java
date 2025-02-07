@@ -9,9 +9,13 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 
 public record PropertyHolder<T extends Property<?>>(ResourceLocation id, T value) {
-  public static final Codec<PropertyHolder<? extends Property<?>>> CODEC = RecordCodecBuilder.create(instance -> instance.group(ResourceLocation.CODEC.fieldOf("id").forGetter(PropertyHolder::id), Property.CODEC.fieldOf("value").forGetter(PropertyHolder::value)).apply(instance, PropertyHolder::new));
+  public static final Codec<PropertyHolder<? extends Property<?>>> CODEC = RecordCodecBuilder.create(instance -> instance.group(ResourceLocation.CODEC.fieldOf("id")
+          .forGetter(PropertyHolder::id), Property.CODEC.fieldOf("value").forGetter(PropertyHolder::value))
+      .apply(instance, PropertyHolder::new));
   public static final StreamCodec<RegistryFriendlyByteBuf, PropertyHolder<? extends Property<?>>> STREAM_CODEC = StreamCodec.composite(ResourceLocation.STREAM_CODEC, PropertyHolder::id, Property.STREAM_CODEC, PropertyHolder::value, PropertyHolder::new);
-  public static final Codec<PropertyHolder<? extends Property<?>>> FULL_CODEC = RecordCodecBuilder.create(instance -> instance.group(ResourceLocation.CODEC.fieldOf("id").forGetter(PropertyHolder::id), Property.FULL_CODEC.fieldOf("value").forGetter(PropertyHolder::value)).apply(instance, PropertyHolder::new));
+  public static final Codec<PropertyHolder<? extends Property<?>>> FULL_CODEC = RecordCodecBuilder.create(instance -> instance.group(ResourceLocation.CODEC.fieldOf("id")
+          .forGetter(PropertyHolder::id), Property.FULL_CODEC.fieldOf("value").forGetter(PropertyHolder::value))
+      .apply(instance, PropertyHolder::new));
   public static final Codec<List<PropertyHolder<? extends Property<?>>>> FULL_LIST_CODEC = FULL_CODEC.listOf();
 
   @Override

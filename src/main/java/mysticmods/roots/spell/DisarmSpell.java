@@ -68,7 +68,8 @@ public class DisarmSpell extends TwoRadiusSpell {
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     List<EquipmentSlot> slots = List.of(EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
-    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer).and((o) -> !o.getType().is(RootsTags.Entities.DISABLE_DISARM)));
+    List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), getAABB().move(pPlayer.position()), EntityUtils.isHostileTo(pPlayer)
+        .and((o) -> !o.getType().is(RootsTags.Entities.DISABLE_DISARM)));
 
     DamageSources damage = pPlayer.damageSources();
     DamageSource source = damage.playerAttack(pPlayer);
@@ -102,7 +103,7 @@ public class DisarmSpell extends TwoRadiusSpell {
           if (defaultChance < dropChance) {
             defaultChance = dropChance;
           }
-          thisChance = EnchantmentHelper.processEquipmentDropChance((ServerLevel)pLevel, entity, source, defaultChance);
+          thisChance = EnchantmentHelper.processEquipmentDropChance((ServerLevel) pLevel, entity, source, defaultChance);
         }
 
         count++;

@@ -80,7 +80,8 @@ public class FennecEntity extends TamableAnimal {
   }
 
   public static AttributeSupplier.Builder attributes() {
-    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0d).add(Attributes.MOVEMENT_SPEED, 0.3d).add(Attributes.ATTACK_DAMAGE, 2d);
+    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0d).add(Attributes.MOVEMENT_SPEED, 0.3d)
+        .add(Attributes.ATTACK_DAMAGE, 2d);
   }
 
   @Override

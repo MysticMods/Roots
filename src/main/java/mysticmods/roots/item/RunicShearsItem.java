@@ -73,15 +73,20 @@ public class RunicShearsItem extends ShearsItem {
         }
         Level level = entity.level();
         if (EntityCooldowns.hasExpired(entity, ModAttachments.RUNIC_SHEARS_ENTITY_COOLDOWN)) {
-          EntityCooldowns.setExpiresAt(entity, ModAttachments.RUNIC_SHEARS_ENTITY_COOLDOWN, server.getTickCount() + recipe.value().getCooldown());
-          level.playSound(null, player.blockPosition(), ModSounds.SQUID_MILK.get(), SoundSource.PLAYERS, 0.5f, level.getRandom().nextFloat() * 0.25f + 0.6f);
-          heldItem.hurtAndBreak(recipe.value().getDurabilityCost(), player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND); // TODO: Check hand
-          List<ItemStack> results = recipe.value().assembleOutputs(crafting, player.getRandom(), level.registryAccess(), null);
+          EntityCooldowns.setExpiresAt(entity, ModAttachments.RUNIC_SHEARS_ENTITY_COOLDOWN, server.getTickCount() + recipe.value()
+              .getCooldown());
+          level.playSound(null, player.blockPosition(), ModSounds.SQUID_MILK.get(), SoundSource.PLAYERS, 0.5f, level.getRandom()
+              .nextFloat() * 0.25f + 0.6f);
+          heldItem.hurtAndBreak(recipe.value()
+              .getDurabilityCost(), player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND); // TODO: Check hand
+          List<ItemStack> results = recipe.value()
+              .assembleOutputs(crafting, player.getRandom(), level.registryAccess(), null);
           for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
           }
         } else {
-          player.displayClientMessage(Component.translatable("roots.message.runic_shears.cooldown").setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.BLUE)).withBold(true)), true);
+          player.displayClientMessage(Component.translatable("roots.message.runic_shears.cooldown")
+              .setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.BLUE)).withBold(true)), true);
         }
         return InteractionResult.SUCCESS;
       }
@@ -118,7 +123,8 @@ public class RunicShearsItem extends ShearsItem {
       Random rand = new java.util.Random();
       drops.forEach(d -> {
         ItemEntity ent = player.spawnAtLocation(d, 1.0F);
-        ent.setDeltaMovement(ent.getDeltaMovement().add((rand.nextFloat() - rand.nextFloat()) * 0.1F, rand.nextFloat() * 0.05F, (rand.nextFloat() - rand.nextFloat()) * 0.1F));
+        ent.setDeltaMovement(ent.getDeltaMovement()
+            .add((rand.nextFloat() - rand.nextFloat()) * 0.1F, rand.nextFloat() * 0.05F, (rand.nextFloat() - rand.nextFloat()) * 0.1F));
       });
       entity.gameEvent(GameEvent.SHEAR, player);
       return true;
@@ -149,11 +155,13 @@ public class RunicShearsItem extends ShearsItem {
       }
 
       if (player != null) {
-        itemstack.hurtAndBreak(recipe.value().getDurabilityCost(), player, pContext.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+        itemstack.hurtAndBreak(recipe.value()
+            .getDurabilityCost(), player, pContext.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
       }
 
       if (!level.isClientSide()) {
-        List<ItemStack> results = recipe.value().assembleOutputs(crafting, level.getRandom(), level.registryAccess(), null);
+        List<ItemStack> results = recipe.value()
+            .assembleOutputs(crafting, level.getRandom(), level.registryAccess(), null);
         // TODO: Item could be empty with only chance outputs
         // TODO: Isn;'t there "assemble all" now?
         for (ItemStack stack : results) {

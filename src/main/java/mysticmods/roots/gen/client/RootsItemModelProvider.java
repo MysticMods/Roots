@@ -9,8 +9,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -76,16 +74,25 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.RUNED_BRICK_SLAB.get());
     simpleBlockItem(ModBlocks.RUNED_TILE_SLAB.get());
     simpleBlockItem(ModBlocks.WILDWOOD_SLAB.get());
-    fenceInventory(ModBlocks.WILDWOOD_FENCE.getKey().location().getPath(), modLoc("block/" + ModBlocks.WILDWOOD_PLANKS.getKey().location().getPath()));
+    fenceInventory(ModBlocks.WILDWOOD_FENCE.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.WILDWOOD_PLANKS.getKey().location().getPath()));
     simpleBlockItem(ModBlocks.WILDWOOD_GATE.get());
-    buttonInventory(ModBlocks.RUNESTONE_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNESTONE_BRICK_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_BRICK.getKey().location().getPath()));
-    buttonInventory(ModBlocks.MOSSY_RUNESTONE_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.MOSSY_RUNESTONE.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNESTONE_TILE_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_TILE.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNED_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_OBSIDIAN.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNED_BRICK_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_BRICK.getKey().location().getPath()));
-    buttonInventory(ModBlocks.RUNED_TILE_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_TILE.getKey().location().getPath()));
-    buttonInventory(ModBlocks.WILDWOOD_BUTTON.getKey().location().getPath(), modLoc("block/" + ModBlocks.WILDWOOD_PLANKS.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNESTONE_BUTTON.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNESTONE.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNESTONE_BRICK_BUTTON.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNESTONE_BRICK.getKey().location().getPath()));
+    buttonInventory(ModBlocks.MOSSY_RUNESTONE_BUTTON.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.MOSSY_RUNESTONE.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNESTONE_TILE_BUTTON.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNESTONE_TILE.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNED_BUTTON.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNED_OBSIDIAN.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNED_BRICK_BUTTON.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNED_BRICK.getKey().location().getPath()));
+    buttonInventory(ModBlocks.RUNED_TILE_BUTTON.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNED_TILE.getKey().location().getPath()));
+    buttonInventory(ModBlocks.WILDWOOD_BUTTON.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.WILDWOOD_PLANKS.getKey().location().getPath()));
     simpleBlockItem(ModBlocks.RUNESTONE_PRESSURE_PLATE.get());
     simpleBlockItem(ModBlocks.RUNESTONE_BRICK_PRESSURE_PLATE.get());
     simpleBlockItem(ModBlocks.MOSSY_RUNESTONE_PRESSURE_PLATE.get());
@@ -96,26 +103,38 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.WILDWOOD_PRESSURE_PLATE.get());
     // TODO: Does htis work?
     basicItem(ModItems.WILDWOOD_DOOR.get());
-    withExistingParent(ModBlocks.WILDWOOD_TRAPDOOR.getKey().location().toString(), modLoc("block/wildwood_trapdoor_bottom"));
+    withExistingParent(ModBlocks.WILDWOOD_TRAPDOOR.getKey().location()
+        .toString(), modLoc("block/wildwood_trapdoor_bottom"));
     basicItem(ModItems.WILDWOOD_LADDER.get());
-    wallInventory(ModBlocks.RUNESTONE_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE.getKey().location().getPath()));
-    wallInventory(ModBlocks.RUNESTONE_BRICK_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_BRICK.getKey().location().getPath()));
-    wallInventory(ModBlocks.MOSSY_RUNESTONE_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.MOSSY_RUNESTONE.getKey().location().getPath()));
-    wallInventory(ModBlocks.RUNESTONE_TILE_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE_TILE.getKey().location().getPath()));
-    wallInventory(ModBlocks.RUNED_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_OBSIDIAN.getKey().location().getPath()));
-    wallInventory(ModBlocks.RUNED_BRICK_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_BRICK.getKey().location().getPath()));
-    wallInventory(ModBlocks.RUNED_TILE_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNED_TILE.getKey().location().getPath()));
+    wallInventory(ModBlocks.RUNESTONE_WALL.getKey().location().getPath(), modLoc("block/" + ModBlocks.RUNESTONE.getKey()
+        .location().getPath()));
+    wallInventory(ModBlocks.RUNESTONE_BRICK_WALL.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNESTONE_BRICK.getKey().location().getPath()));
+    wallInventory(ModBlocks.MOSSY_RUNESTONE_WALL.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.MOSSY_RUNESTONE.getKey().location().getPath()));
+    wallInventory(ModBlocks.RUNESTONE_TILE_WALL.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNESTONE_TILE.getKey().location().getPath()));
+    wallInventory(ModBlocks.RUNED_WALL.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNED_OBSIDIAN.getKey().location().getPath()));
+    wallInventory(ModBlocks.RUNED_BRICK_WALL.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNED_BRICK.getKey().location().getPath()));
+    wallInventory(ModBlocks.RUNED_TILE_WALL.getKey().location()
+        .getPath(), modLoc("block/" + ModBlocks.RUNED_TILE.getKey().location().getPath()));
     simpleBlockItem(ModBlocks.ELEMENTAL_SOIL.get());
     simpleBlockItem(ModBlocks.AQUEOUS_SOIL.get());
     simpleBlockItem(ModBlocks.CAELIC_SOIL.get());
     simpleBlockItem(ModBlocks.MAGMATIC_SOIL.get());
     simpleBlockItem(ModBlocks.TERRAN_SOIL.get());
-    withExistingParent(ModBlocks.RITUAL_PEDESTAL.getKey().location().getPath(), modLoc("block/complex/ritual_pedestal"));
-    withExistingParent(ModBlocks.REINFORCED_RITUAL_PEDESTAL.getKey().location().getPath(), modLoc("block/complex/reinforced_ritual_pedestal"));
+    withExistingParent(ModBlocks.RITUAL_PEDESTAL.getKey().location()
+        .getPath(), modLoc("block/complex/ritual_pedestal"));
+    withExistingParent(ModBlocks.REINFORCED_RITUAL_PEDESTAL.getKey().location()
+        .getPath(), modLoc("block/complex/reinforced_ritual_pedestal"));
     withExistingParent(ModBlocks.GROVE_CRAFTER.getKey().location().getPath(), modLoc("block/complex/grove_crafter"));
     withExistingParent(ModBlocks.GROVE_PEDESTAL.getKey().location().getPath(), modLoc("block/complex/grove_pedestal"));
-    withExistingParent(ModBlocks.WILDWOOD_PEDESTAL.getKey().location().getPath(), modLoc("block/complex/wildwood_pedestal"));
-    withExistingParent(ModBlocks.DISPLAY_PEDESTAL.getKey().location().getPath(), modLoc("block/complex/grove_pedestal"));
+    withExistingParent(ModBlocks.WILDWOOD_PEDESTAL.getKey().location()
+        .getPath(), modLoc("block/complex/wildwood_pedestal"));
+    withExistingParent(ModBlocks.DISPLAY_PEDESTAL.getKey().location()
+        .getPath(), modLoc("block/complex/grove_pedestal"));
     // Wild roots are existing
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
@@ -123,7 +142,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
 
     withExistingParent("bafflecap_block", modLoc("block/bafflecap_block_inventory"));
     // Is THIS correct? TODO
-    withExistingParent(ModBlocks.PRIMAL_GROVE_STONE.getKey().location().getPath(), modLoc("block/primal_grove_stone_inventory"));
+    withExistingParent(ModBlocks.PRIMAL_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/primal_grove_stone_inventory"));
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
     simpleBlockItem(ModBlocks.MORTAR.get());
     simpleBlockItem(ModBlocks.PYRE.get());
@@ -225,7 +245,9 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.RUNIC_SHEARS, "tools");
 
     ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
-    getBuilder(ModItems.STAFF.getKey().location().toString()).parent(generated).texture("layer0", modLoc("item/tools/staff")).texture("layer1", modLoc("item/tools/staff_petal_1")).texture("layer2", modLoc("item/tools/staff_petal_2"));
+    getBuilder(ModItems.STAFF.getKey().location().toString()).parent(generated)
+        .texture("layer0", modLoc("item/tools/staff")).texture("layer1", modLoc("item/tools/staff_petal_1"))
+        .texture("layer2", modLoc("item/tools/staff_petal_2"));
 
     subfolder(ModItems.WILDWOOD_BOW, "tools");
     subfolder(ModItems.WILDWOOD_QUIVER, "tools");
@@ -287,7 +309,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
       if (entry.getKey().location().getNamespace().equals(RootsAPI.MODID)) {
         if (entry.getKey().location().getPath().startsWith("spell_") && item instanceof TokenItem.SpellTokenItem) {
           spell(item.builtInRegistryHolder());
-        } else if (entry.getKey().location().getPath().startsWith("ritual_") && item instanceof TokenItem.RitualTokenItem) {
+        } else if (entry.getKey().location().getPath()
+            .startsWith("ritual_") && item instanceof TokenItem.RitualTokenItem) {
           ritual(item.builtInRegistryHolder());
         }
       }

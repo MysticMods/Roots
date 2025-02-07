@@ -41,7 +41,7 @@ public abstract class UseDelegatedBlock extends Block implements EntityBlock {
     return super.useWithoutItem(state, level, pos, player, ray);
   }
 
-  public static ItemInteractionResult fromResult (InteractionResult result) {
+  public static ItemInteractionResult fromResult(InteractionResult result) {
     return switch (result) {
       case CONSUME -> ItemInteractionResult.CONSUME;
       case SUCCESS -> ItemInteractionResult.SUCCESS;

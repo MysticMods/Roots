@@ -37,7 +37,8 @@ public class AddGrassDropsModifier extends LootModifier {
   }
 
   public static final MapCodec<AddGrassDropsModifier> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-      IGlobalLootModifier.LOOT_CONDITIONS_CODEC.fieldOf("conditions").forGetter(glm -> glm.conditions),
-      ItemStack.ITEM_NON_AIR_CODEC.fieldOf("item").forGetter(AddGrassDropsModifier::getDropItem)).apply(instance, AddGrassDropsModifier::new));
+          IGlobalLootModifier.LOOT_CONDITIONS_CODEC.fieldOf("conditions").forGetter(glm -> glm.conditions),
+          ItemStack.ITEM_NON_AIR_CODEC.fieldOf("item").forGetter(AddGrassDropsModifier::getDropItem))
+      .apply(instance, AddGrassDropsModifier::new));
 }
 

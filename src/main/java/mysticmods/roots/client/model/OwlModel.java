@@ -114,7 +114,8 @@ public class OwlModel extends AgeableListModel<OwlEntity> {
     this.head.yRot = netHeadYaw * 0.017453292F;
     this.head.zRot = 0.0F;
 
-    boolean hootfire = entityIn.hasCustomName() && entityIn.getCustomName() != null && entityIn.getCustomName().getString().equals("Hootfire");
+    boolean hootfire = entityIn.hasCustomName() && entityIn.getCustomName() != null && entityIn.getCustomName()
+        .getString().equals("Hootfire");
 
     if (this.state == State.FLYING && !hootfire) {
       setRotationAngle(this.body, 0.45f, 0, 0);

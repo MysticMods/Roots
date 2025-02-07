@@ -7,7 +7,8 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 
-public record ConditionResult(List<LevelCondition> failedLevelConditions, List<PlayerCondition> failedPlayerConditions) {
+public record ConditionResult(List<LevelCondition> failedLevelConditions,
+                              List<PlayerCondition> failedPlayerConditions) {
   public boolean anyFailed() {
     return !failedLevelConditions.isEmpty() || !failedPlayerConditions.isEmpty();
   }

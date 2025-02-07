@@ -2,7 +2,6 @@ package mysticmods.roots.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
 
@@ -42,7 +40,7 @@ public class ItemUtil {
 
   public static Predicate<DataComponentType<?>> FORGETTER = o -> o.equals(DataComponents.DAMAGE) || o.equals(DataComponents.MAX_DAMAGE) || o.equals(DataComponents.UNBREAKABLE);
 
-  public static ItemStack insertPlayerInventoryStacked (Player player, ItemStack stack, boolean simulate) {
+  public static ItemStack insertPlayerInventoryStacked(Player player, ItemStack stack, boolean simulate) {
     PlayerMainInvWrapper inv = new PlayerMainInvWrapper(player.getInventory());
     return ItemHandlerHelper.insertItemStacked(inv, stack, simulate);
   }

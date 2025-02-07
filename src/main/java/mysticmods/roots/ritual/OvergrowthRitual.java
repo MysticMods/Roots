@@ -1,6 +1,5 @@
 package mysticmods.roots.ritual;
 
-import com.google.common.collect.Iterators;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.random.RandomGenerator;
 
 public class OvergrowthRitual extends Ritual {
   private static List<Direction> HORIZONTALS;
@@ -31,7 +29,8 @@ public class OvergrowthRitual extends Ritual {
 
   private static List<Direction> horizontals() {
     if (HORIZONTALS == null) {
-      HORIZONTALS = new ArrayList<>(Arrays.stream(Direction.values()).filter(dir -> dir.getAxis().isHorizontal()).toList());
+      HORIZONTALS = new ArrayList<>(Arrays.stream(Direction.values()).filter(dir -> dir.getAxis().isHorizontal())
+          .toList());
     }
     Collections.shuffle(HORIZONTALS);
     return HORIZONTALS;
@@ -54,7 +53,8 @@ public class OvergrowthRitual extends Ritual {
           for (Direction dir : horizontals()) {
             BlockPos offset = lastChanged.relative(dir);
             if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
-              pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState().setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
+              pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
+                  .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
               lastChanged = offset;
               placed = true;
               break;
@@ -70,7 +70,8 @@ public class OvergrowthRitual extends Ritual {
             for (Direction dir : horizontals()) {
               BlockPos offset = pos.above().relative(dir);
               if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
-                pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState().setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
+                pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
+                    .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
                 lastChanged = offset;
                 break outer;
               }
@@ -79,7 +80,8 @@ public class OvergrowthRitual extends Ritual {
             for (Direction dir : horizontals()) {
               BlockPos offset = pos.relative(dir);
               if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
-                pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState().setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
+                pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
+                    .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
                 lastChanged = offset;
                 break outer;
               }

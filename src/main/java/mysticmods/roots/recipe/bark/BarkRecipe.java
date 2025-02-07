@@ -32,10 +32,12 @@ import java.util.Optional;
 
 public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static MapCodec<BarkRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-      BaseRecipeData.CODEC.codec().optionalFieldOf("data").forGetter(o -> o.data.isEmpty() ? Optional.empty() : Optional.of(o.data)),
+      BaseRecipeData.CODEC.codec().optionalFieldOf("data")
+          .forGetter(o -> o.data.isEmpty() ? Optional.empty() : Optional.of(o.data)),
       PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
       WorldCondition.LIST_CODEC.fieldOf("condition").forGetter(o -> o.conditions),
-      Codec.STRING.listOf().optionalFieldOf("skipProperties").forGetter((o) -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties)),
+      Codec.STRING.listOf().optionalFieldOf("skipProperties")
+          .forGetter((o) -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties)),
       Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost),
       OutputStateMapper.CODEC.optionalFieldOf("stateMapper").forGetter(o -> Optional.ofNullable(o.stateMapper))
   ).apply(instance, BarkRecipe::new));

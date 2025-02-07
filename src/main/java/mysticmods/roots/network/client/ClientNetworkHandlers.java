@@ -12,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
-import javax.swing.plaf.ActionMapUIResource;
 
 public class ClientNetworkHandlers {
   public static void setGrantStorage(GrantStorage storage) {
@@ -67,7 +66,7 @@ public class ClientNetworkHandlers {
     player.setData(ModAttachments.REPUTATION_STORAGE, storage);
   }
 
-  public static void openLibrary (@Nullable InteractionHand hand, int inventorySlot) {
+  public static void openLibrary(@Nullable InteractionHand hand, int inventorySlot) {
     StaffScreen.open(hand, inventorySlot);
   }
 

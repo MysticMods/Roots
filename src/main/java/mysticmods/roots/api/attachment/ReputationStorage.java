@@ -15,7 +15,8 @@ import java.util.Map;
 public class ReputationStorage implements ICleanable {
   public static final MapCodec<ReputationStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       Codec.BOOL.fieldOf("untrue_pacifist").forGetter(o -> o.untruePacifist),
-      Codec.unboundedMap(RootsRegistries.GROVES.byNameCodec(), Codec.INT).fieldOf("reputations").forGetter(o -> o.reputations)
+      Codec.unboundedMap(RootsRegistries.GROVES.byNameCodec(), Codec.INT).fieldOf("reputations")
+          .forGetter(o -> o.reputations)
   ).apply(instance, ReputationStorage::new));
   public static final Codec<ReputationStorage> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, ReputationStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.BOOL, o -> o.untruePacifist, ByteBufCodecs.map(Object2IntLinkedOpenHashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), ByteBufCodecs.INT), o -> o.reputations, ReputationStorage::new);

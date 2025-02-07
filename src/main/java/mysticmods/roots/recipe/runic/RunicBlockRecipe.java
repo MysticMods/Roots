@@ -34,7 +34,8 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
           PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
           WorldCondition.LIST_CODEC.fieldOf("condition").forGetter(o -> o.conditions),
           OutputStateMapper.CODEC.optionalFieldOf("stateMapper").forGetter(o -> Optional.ofNullable(o.stateMapper)),
-          Codec.STRING.listOf().optionalFieldOf("skipProperties").forGetter((o) -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties)),
+          Codec.STRING.listOf().optionalFieldOf("skipProperties")
+              .forGetter((o) -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties)),
           Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost)
       ).apply(instance, RunicBlockRecipe::new)
   );
@@ -50,7 +51,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   protected int durabilityCost = 1;
   @Nullable
-  private OutputStateMapper stateMapper;
+  private final OutputStateMapper stateMapper;
 
   public RunicBlockRecipe(BaseRecipeData baseRecipeData, PartialBlockState partialBlockState1, List<WorldCondition> worldCondition, OutputStateMapper outputStateMapper, List<String> strings, int durabilityCost) {
     super(baseRecipeData, partialBlockState1, worldCondition, strings);

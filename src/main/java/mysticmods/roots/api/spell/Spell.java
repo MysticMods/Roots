@@ -101,7 +101,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return color2;
   }
 
-  public int getMaxUse () {
+  public int getMaxUse() {
     return maxUse;
   }
 
@@ -243,6 +243,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   public enum Type {
     INSTANT,
     CONTINUOUS,
-    CHARGED;
+    CHARGED
   }
 }

@@ -13,7 +13,8 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public record ServerboundSwapSpellsPacket(@Nullable InteractionHand hand, int inventorySlot, int slot1, int slot2) implements IRootsPacket {
+public record ServerboundSwapSpellsPacket(@Nullable InteractionHand hand, int inventorySlot, int slot1,
+                                          int slot2) implements IRootsPacket {
   public static final Type<ServerboundSwapSpellsPacket> TYPE = new Type<>(RootsAPI.rl("server_bound_swap_spells"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundSwapSpellsPacket> CODEC =
       StreamCodec.composite(
@@ -32,8 +33,8 @@ public record ServerboundSwapSpellsPacket(@Nullable InteractionHand hand, int in
     this(hand, -1, slot1, slot2);
   }
 
-  public ServerboundSwapSpellsPacket(int inventorySlot, int slot1, int slot2)  {
-    this((InteractionHand)null, inventorySlot, slot1, slot2);
+  public ServerboundSwapSpellsPacket(int inventorySlot, int slot1, int slot2) {
+    this((InteractionHand) null, inventorySlot, slot1, slot2);
   }
 
   @Override

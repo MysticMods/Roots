@@ -3,7 +3,6 @@ package mysticmods.roots.recipe.pyre;
 import mysticmods.roots.api.recipe.crafting.RootsTileCrafting;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 

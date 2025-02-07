@@ -18,21 +18,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlockState>> states, List<BlockState> resolvedStates) {
+public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlockState>> states,
+                                      List<BlockState> resolvedStates) {
   public static Codec<CanonicalRepresentation> CODEC = Codec.either(CanonicalBlock.CODEC, CanonicalBlockState.CODEC)
       .listOf().xmap(CanonicalRepresentation::new, CanonicalRepresentation::states);
   public static StreamCodec<RegistryFriendlyByteBuf, CanonicalRepresentation> STREAM_CODEC = ByteBufCodecs.either(CanonicalBlock.STREAM_CODEC, CanonicalBlockState.STREAM_CODEC)
       .apply(ByteBufCodecs.list()).map(CanonicalRepresentation::new, CanonicalRepresentation::states);
 
-  public CanonicalRepresentation (Object ... blocks) {
+  public CanonicalRepresentation(Object... blocks) {
     this(Stream.of(blocks).map(CanonicalRepresentation::of).map(CanonicalBlockOrState::blockOrState).toList());
   }
 
-  private CanonicalRepresentation (List<Either<CanonicalBlock, CanonicalBlockState>> states) {
+  private CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlockState>> states) {
     this(states, new ArrayList<>());
   }
 
-  public List<BlockState> getStates () {
+  public List<BlockState> getStates() {
     if (resolvedStates.isEmpty() || resolvedStates.size() != states.size()) {
       resolvedStates.clear();
       states.forEach(
@@ -46,7 +47,7 @@ public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlock
     return resolvedStates;
   }
 
-  public boolean place (Level level, BlockPos pos) {
+  public boolean place(Level level, BlockPos pos) {
     List<BlockState> states = getStates();
 
     if (pos.getY() >= level.getMaxBuildHeight() || pos.getY() + states.size() >= level.getMaxBuildHeight()) {
@@ -76,12 +77,12 @@ public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlock
 
   private sealed interface CanonicalBlockOrState permits CanonicalBlock, CanonicalBlockState {
     @Nullable
-    default Block block () {
+    default Block block() {
       return null;
     }
 
     @Nullable
-    default PartialBlockState state () {
+    default PartialBlockState state() {
       return null;
     }
 
@@ -94,8 +95,9 @@ public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlock
     }
   }
 
-  private record CanonicalBlock(Block block) implements CanonicalBlockOrState{
-    public static Codec<CanonicalBlock> CODEC = BuiltInRegistries.BLOCK.byNameCodec().xmap(CanonicalBlock::new, CanonicalBlock::block);
+  private record CanonicalBlock(Block block) implements CanonicalBlockOrState {
+    public static Codec<CanonicalBlock> CODEC = BuiltInRegistries.BLOCK.byNameCodec()
+        .xmap(CanonicalBlock::new, CanonicalBlock::block);
     public static StreamCodec<RegistryFriendlyByteBuf, CanonicalBlock> STREAM_CODEC = ByteBufCodecs.registry(Registries.BLOCK)
         .map(CanonicalBlock::new, CanonicalBlock::block);
   }
@@ -105,7 +107,7 @@ public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlock
     public static StreamCodec<RegistryFriendlyByteBuf, CanonicalBlockState> STREAM_CODEC = PartialBlockState.STREAM_CODEC.map(CanonicalBlockState::new, CanonicalBlockState::state);
   }
 
-  private static CanonicalBlockOrState of (Object object) {
+  private static CanonicalBlockOrState of(Object object) {
     if (object instanceof Block block) {
       return new CanonicalBlock(block);
     } else if (object instanceof PartialBlockState state) {

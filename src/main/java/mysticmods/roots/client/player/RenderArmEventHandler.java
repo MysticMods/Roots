@@ -51,7 +51,8 @@ public class RenderArmEventHandler {
       }
 
       // TODO
-      VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(ClientHooks.getArmorTexture(player, chestStack, ModItems.CARAPACE_MATERIAL.get().layers().getFirst(), true, EquipmentSlot.CHEST))), chestStack.hasFoil());
+      VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(event.getMultiBufferSource(), RenderType.armorCutoutNoCull(Objects.requireNonNull(ClientHooks.getArmorTexture(player, chestStack, ModItems.CARAPACE_MATERIAL.get()
+          .layers().getFirst(), true, EquipmentSlot.CHEST))), chestStack.hasFoil());
       if (event.getArm() == HumanoidArm.RIGHT) {
         chestModel.rightArmPose = HumanoidModel.ArmPose.EMPTY;
       } else {

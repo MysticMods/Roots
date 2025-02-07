@@ -30,7 +30,7 @@ public class ServerNetworkHooks {
     stack.set(ModAttachments.SPELL_STORAGE, existing.setSpell(staffSlot, spell));
   }
 
-  public static void swapSpellSlots (Player player, @Nullable InteractionHand hand, int inventorySlot, int slot1, int slot2) {
+  public static void swapSpellSlots(Player player, @Nullable InteractionHand hand, int inventorySlot, int slot1, int slot2) {
     ItemStack stack;
     if (hand != null) {
       stack = player.getItemInHand(hand);

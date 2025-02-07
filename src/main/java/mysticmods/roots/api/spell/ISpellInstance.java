@@ -20,7 +20,7 @@ public interface ISpellInstance extends SpellLike {
 
   int getCooldown();
 
-  default int getMaxUse () {
+  default int getMaxUse() {
     return getSpell().getMaxUse();
   }
 
@@ -46,19 +46,19 @@ public interface ISpellInstance extends SpellLike {
   }
 
   @Override
-  default Spell asSpell () {
+  default Spell asSpell() {
     return getSpell();
   }
 
-  default boolean isEmpty () {
+  default boolean isEmpty() {
     return false;
   }
 
-  static SimpleSpell of (Spell spell) {
+  static SimpleSpell of(Spell spell) {
     return new SimpleSpell(spell);
   }
 
-  record SimpleSpell (Spell spell) implements ISpellInstance {
+  record SimpleSpell(Spell spell) implements ISpellInstance {
 
     @Override
     public Spell getSpell() {

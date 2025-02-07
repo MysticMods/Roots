@@ -64,12 +64,14 @@ public class JauntSpell extends Spell {
     }
 
     position.setY(startY);
-    if (pLevel.getBlockState(position).isPathfindable(PathComputationType.AIR) && pLevel.getFluidState(position).isEmpty()) {
+    if (pLevel.getBlockState(position).isPathfindable(PathComputationType.AIR) && pLevel.getFluidState(position)
+        .isEmpty()) {
       safeCount++;
     }
 
     position.move(direction);
-    if (pLevel.getBlockState(position).isPathfindable(PathComputationType.AIR) && pLevel.getFluidState(position).isEmpty()) {
+    if (pLevel.getBlockState(position).isPathfindable(PathComputationType.AIR) && pLevel.getFluidState(position)
+        .isEmpty()) {
       safeCount++;
     }
 

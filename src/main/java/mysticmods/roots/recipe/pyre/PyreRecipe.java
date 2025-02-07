@@ -31,7 +31,7 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
       PyreRecipe::new
   );
 
-  private Ritual ritual;
+  private final Ritual ritual;
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
   public PyreRecipe(BaseRecipeData data, Optional<Ritual> ritual) {

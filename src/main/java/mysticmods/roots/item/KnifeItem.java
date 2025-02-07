@@ -50,7 +50,8 @@ public class KnifeItem extends DiggerItem {
       }
 
       if (!level.isClientSide()) {
-        List<ItemStack> results = recipe.value().assembleOutputs(crafting, level.getRandom(), level.registryAccess(), null);
+        List<ItemStack> results = recipe.value()
+            .assembleOutputs(crafting, level.getRandom(), level.registryAccess(), null);
         for (ItemStack stack : results) {
           ItemUtil.Spawn.spawnItem(level, player == null ? blockpos : player.blockPosition(), stack);
         }

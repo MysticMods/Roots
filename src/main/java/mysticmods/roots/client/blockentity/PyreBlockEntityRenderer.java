@@ -34,7 +34,8 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
   public void render(PyreBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
 
-    if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes() && pBlockEntity.getCurrentRitual() != null) {
+    if (Minecraft.getInstance().getEntityRenderDispatcher()
+        .shouldRenderHitBoxes() && pBlockEntity.getCurrentRitual() != null) {
       AABB bounds = pBlockEntity.getCurrentRitual().getAABB();
       pPoseStack.pushPose();
       BlockPos position = pBlockEntity.getBlockPos();
@@ -50,8 +51,10 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
         f /= f3;
         f1 /= f3;
         f2 /= f3;
-        pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ)).setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
-        pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ)).setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
+        pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ))
+            .setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
+        pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ))
+            .setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
       });
       pPoseStack.popPose();
     }
@@ -67,7 +70,8 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       pPoseStack.translate(-0.5, 0, 0);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.scale(0.4f, 0.4f, 0.4f);
-      Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      Minecraft.getInstance().getItemRenderer()
+          .renderStatic(item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
 
@@ -101,7 +105,8 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       pPoseStack.translate(0.5, 1 + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
       pPoseStack.scale(1.2f, 1.2f, 1.2f);
       pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
-      Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
+      Minecraft.getInstance().getItemRenderer()
+          .renderStatic(inSlot, ItemDisplayContext.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
     }
   }

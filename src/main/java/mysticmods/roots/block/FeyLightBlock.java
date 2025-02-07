@@ -30,7 +30,8 @@ public class FeyLightBlock extends Block {
 
   public FeyLightBlock(Properties builder) {
     super(builder);
-    this.registerDefaultState(this.defaultBlockState().setValue(DECAYING, false).setValue(DECAY, 0).setValue(COLORED, false).setValue(COLOR, DyeColor.WHITE));
+    this.registerDefaultState(this.defaultBlockState().setValue(DECAYING, false).setValue(DECAY, 0)
+        .setValue(COLORED, false).setValue(COLOR, DyeColor.WHITE));
   }
 
   @Override

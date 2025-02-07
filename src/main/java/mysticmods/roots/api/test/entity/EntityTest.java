@@ -10,8 +10,10 @@ import net.minecraft.world.entity.Entity;
 import java.util.function.Predicate;
 
 public abstract class EntityTest implements Predicate<Entity> {
-  public static Codec<EntityTest> CODEC = RootsRegistries.ENTITY_TEST_TYPES.byNameCodec().dispatch(EntityTest::getType, EntityTestType::codec);
-  public static StreamCodec<RegistryFriendlyByteBuf, EntityTest> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.ENTITY_TEST_TYPES).dispatch(EntityTest::getType, EntityTestType::streamCodec);
+  public static Codec<EntityTest> CODEC = RootsRegistries.ENTITY_TEST_TYPES.byNameCodec()
+      .dispatch(EntityTest::getType, EntityTestType::codec);
+  public static StreamCodec<RegistryFriendlyByteBuf, EntityTest> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.ENTITY_TEST_TYPES)
+      .dispatch(EntityTest::getType, EntityTestType::streamCodec);
 
   @Override
   public abstract boolean test(Entity entity);

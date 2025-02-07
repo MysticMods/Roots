@@ -5,7 +5,6 @@ import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.*;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;

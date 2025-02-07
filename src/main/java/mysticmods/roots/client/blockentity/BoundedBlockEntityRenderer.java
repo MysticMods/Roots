@@ -68,8 +68,10 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
           f /= f3;
           f1 /= f3;
           f2 /= f3;
-          pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ)).setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
-          pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ)).setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
+          pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ))
+              .setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
+          pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ))
+              .setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
         });
         pPoseStack.popPose();
       }

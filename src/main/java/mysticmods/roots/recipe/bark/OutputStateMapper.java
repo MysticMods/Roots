@@ -15,7 +15,8 @@ import java.util.Map;
 
 public class OutputStateMapper {
   public static Codec<OutputStateMapper> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-      Codec.unboundedMap(BuiltInRegistries.BLOCK.byNameCodec(), BuiltInRegistries.BLOCK.byNameCodec()).fieldOf("mapBlock").forGetter(OutputStateMapper::mapBlock)
+      Codec.unboundedMap(BuiltInRegistries.BLOCK.byNameCodec(), BuiltInRegistries.BLOCK.byNameCodec())
+          .fieldOf("mapBlock").forGetter(OutputStateMapper::mapBlock)
   ).apply(instance, OutputStateMapper::new));
   public static StreamCodec<RegistryFriendlyByteBuf, OutputStateMapper> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(Registries.BLOCK), ByteBufCodecs.registry(Registries.BLOCK)), OutputStateMapper::mapBlock, OutputStateMapper::new);
   private final Map<Block, Block> mapBlock;

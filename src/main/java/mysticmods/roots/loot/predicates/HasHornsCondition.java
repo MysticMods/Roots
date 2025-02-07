@@ -13,7 +13,8 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 public class HasHornsCondition implements LootItemCondition {
   public static final MapCodec<HasHornsCondition> CODEC = RecordCodecBuilder.mapCodec(
-      instance -> instance.group(Codec.BOOL.fieldOf("inverse").forGetter(HasHornsCondition::isInverse)).apply(instance, HasHornsCondition::new));
+      instance -> instance.group(Codec.BOOL.fieldOf("inverse").forGetter(HasHornsCondition::isInverse))
+          .apply(instance, HasHornsCondition::new));
 
   private final boolean inverse;
 

@@ -11,7 +11,10 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.storage.loot.predicates.*;
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.CanItemPerformAbility;
@@ -38,7 +41,8 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
         LootItemRandomChanceCondition.randomChance(chance).build(),
         LootItemBlockTagCondition.tag(RootsTags.Blocks.TALL_GRASS),
         LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS)
-            .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)).build(),
+            .setProperties(StatePropertiesPredicate.Builder.properties()
+                .hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)).build(),
         InvertedLootItemCondition.invert(
             CanItemPerformAbility.canItemPerformAbility(ItemAbilities.SHEARS_DIG)
         ).build()

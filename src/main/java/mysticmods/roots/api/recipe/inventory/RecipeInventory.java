@@ -115,7 +115,7 @@ public class RecipeInventory extends ItemStackHandler {
     return result;
   }
 
-  public List<ItemStack> insertAll (List<ItemStack> stacks) {
+  public List<ItemStack> insertAll(List<ItemStack> stacks) {
     List<ItemStack> result = new ArrayList<>();
     for (ItemStack stack : stacks) {
       ItemStack leftover = insert(stack);

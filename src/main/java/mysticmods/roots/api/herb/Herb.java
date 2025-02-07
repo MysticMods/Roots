@@ -21,7 +21,7 @@ public class Herb implements IStyled {
   private final TagKey<Item> tag;
   private String descriptionId;
   private Style style;
-  private ChatFormatting color;
+  private final ChatFormatting color;
 
   public Herb(Holder<Item> item, TagKey<Item> tag, ChatFormatting color) {
     this.item = item;

@@ -34,7 +34,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.MIXED_BARK).add(ModItems.MIXED_BARK.get());
 
     //noinspection unchecked
-    this.tag(RootsTags.Items.BARKS).addTags(RootsTags.Items.ACACIA_BARK, RootsTags.Items.BIRCH_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.MANGROVE_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
+    this.tag(RootsTags.Items.BARKS)
+        .addTags(RootsTags.Items.ACACIA_BARK, RootsTags.Items.BIRCH_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.MANGROVE_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
 
     this.tag(RootsTags.Items.DEER_FOOD).add(Items.WHEAT).add(ModItems.WILDEWHEET.get());
 
@@ -67,22 +68,26 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.MORTAR_ACTIVATION).add(ModItems.PESTLE.get());
 
     //noinspection unchecked
-    this.tag(RootsTags.Items.SEEDS).add(ModItems.AUBERGINE_SEEDS.get()).addTags(RootsTags.Items.MOONGLOW_SEEDS, RootsTags.Items.PERESKIA_SEEDS, RootsTags.Items.WILDEWHEET_SEEDS, RootsTags.Items.SPIRITLEAF_SEEDS);
+    this.tag(RootsTags.Items.SEEDS).add(ModItems.AUBERGINE_SEEDS.get())
+        .addTags(RootsTags.Items.MOONGLOW_SEEDS, RootsTags.Items.PERESKIA_SEEDS, RootsTags.Items.WILDEWHEET_SEEDS, RootsTags.Items.SPIRITLEAF_SEEDS);
 
     this.tag(RootsTags.Items.CARAPACE).add(ModItems.CARAPACE.get());
     this.tag(RootsTags.Items.PELT).add(ModItems.PELT.get());
     this.tag(RootsTags.Items.ANTLERS).add(ModItems.ANTLERS.get());
 
-    this.tag(RootsTags.Items.PROTEINS).add(ModItems.VENISON.get(), ModItems.COOKED_VENISON.get(), ModItems.RAW_SQUID.get(), ModItems.COOKED_SQUID.get());
+    this.tag(RootsTags.Items.PROTEINS)
+        .add(ModItems.VENISON.get(), ModItems.COOKED_VENISON.get(), ModItems.RAW_SQUID.get(), ModItems.COOKED_SQUID.get());
 
-    this.tag(RootsTags.Items.COOKED_VEGETABLES).add(ModItems.COOKED_BEETROOT.get(), ModItems.COOKED_CARROT.get(), ModItems.COOKED_AUBERGINE.get(), ModItems.COOKED_PERESKIA.get());
+    this.tag(RootsTags.Items.COOKED_VEGETABLES)
+        .add(ModItems.COOKED_BEETROOT.get(), ModItems.COOKED_CARROT.get(), ModItems.COOKED_AUBERGINE.get(), ModItems.COOKED_PERESKIA.get());
     this.tag(RootsTags.Items.VEGETABLES).add(ModItems.AUBERGINE.get());
 
     this.tag(RootsTags.Items.RUNIC_SHEARS).add(ModItems.RUNIC_SHEARS.get());
 
     this.tag(RootsTags.Items.CASTING_TOOLS).add(ModItems.STAFF.get());
 
-    this.tag(RootsTags.Items.KNIVES).add(ModItems.WOODEN_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLD_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get());
+    this.tag(RootsTags.Items.KNIVES)
+        .add(ModItems.WOODEN_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLD_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get());
     // Silver?
     this.tag(ItemTags.PIGLIN_LOVED).add(ModItems.COPPER_KNIFE.get()/*, ModItems.SILVER_KNIFE.get()*/);
 
@@ -93,7 +98,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.RAW_SILVER_STORAGE, RootsTags.Items.RAW_SILVER_STORAGE);
     this.tag(RootsTags.Items.SILVER_INGOT).add(ModItems.SILVER_INGOT.get());
 
-    this.tag(RootsTags.Items.COPPER_ITEMS).add(ModItems.COPPER_KNIFE.get(), ModItems.COPPER_AXE.get(), ModItems.COPPER_HOE.get(), ModItems.COPPER_PICKAXE.get(), ModItems.COPPER_SHOVEL.get(), ModItems.COPPER_SWORD.get(), ModItems.COPPER_HELMET.get(), ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
+    this.tag(RootsTags.Items.COPPER_ITEMS)
+        .add(ModItems.COPPER_KNIFE.get(), ModItems.COPPER_AXE.get(), ModItems.COPPER_HOE.get(), ModItems.COPPER_PICKAXE.get(), ModItems.COPPER_SHOVEL.get(), ModItems.COPPER_SWORD.get(), ModItems.COPPER_HELMET.get(), ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
     this.tag(RootsTags.Items.SILVER_ITEMS).add(ModItems.SILVER_KNIFE.get());
 
     this.tag(RootsTags.Items.SILVER_NUGGET).add(ModItems.SILVER_NUGGET.get());
@@ -183,7 +189,9 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
 
     // TODO: Are there more stone blocks to go in here?
     //noinspection unchecked
-    this.tag(RootsTags.Items.STONELIKE).addTags(Tags.Items.SANDSTONE_BLOCKS, Tags.Items.STONES, ItemTags.STONE_BRICKS, ItemTags.STONE_CRAFTING_MATERIALS, ItemTags.STONE_TOOL_MATERIALS).add(Items.DIORITE, Items.GRANITE, Items.CALCITE, Items.TUFF, Items.POLISHED_DIORITE, Items.POLISHED_GRANITE, Items.POLISHED_ANDESITE, Items.ANDESITE, Items.POLISHED_DEEPSLATE, Items.POLISHED_BLACKSTONE);
+    this.tag(RootsTags.Items.STONELIKE)
+        .addTags(Tags.Items.SANDSTONE_BLOCKS, Tags.Items.STONES, ItemTags.STONE_BRICKS, ItemTags.STONE_CRAFTING_MATERIALS, ItemTags.STONE_TOOL_MATERIALS)
+        .add(Items.DIORITE, Items.GRANITE, Items.CALCITE, Items.TUFF, Items.POLISHED_DIORITE, Items.POLISHED_GRANITE, Items.POLISHED_ANDESITE, Items.ANDESITE, Items.POLISHED_DEEPSLATE, Items.POLISHED_BLACKSTONE);
 
     //noinspection unchecked
     this.tag(RootsTags.Items.RUNESTONE_HERBS).addTags(RootsTags.Items.WILDROOT_CROP, RootsTags.Items.GROVE_MOSS_CROP);
@@ -206,7 +214,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.CLOUD_BERRY_HERB).addTag(RootsTags.Items.CLOUD_BERRY_CROP);
 
     //noinspection unchecked
-    this.tag(RootsTags.Items.HERBS).addTags(RootsTags.Items.MOONGLOW_HERB, RootsTags.Items.PERESKIA_HERB, RootsTags.Items.SPIRITLEAF_HERB, RootsTags.Items.WILDEWHEET_HERB, RootsTags.Items.GROVE_MOSS_HERB, RootsTags.Items.DEWGONIA_HERB, RootsTags.Items.STALICRIPE_HERB, RootsTags.Items.WILDROOT_HERB, RootsTags.Items.INFERNO_BULB_HERB, RootsTags.Items.BAFFLECAP_HERB, RootsTags.Items.CLOUD_BERRY_HERB);
+    this.tag(RootsTags.Items.HERBS)
+        .addTags(RootsTags.Items.MOONGLOW_HERB, RootsTags.Items.PERESKIA_HERB, RootsTags.Items.SPIRITLEAF_HERB, RootsTags.Items.WILDEWHEET_HERB, RootsTags.Items.GROVE_MOSS_HERB, RootsTags.Items.DEWGONIA_HERB, RootsTags.Items.STALICRIPE_HERB, RootsTags.Items.WILDROOT_HERB, RootsTags.Items.INFERNO_BULB_HERB, RootsTags.Items.BAFFLECAP_HERB, RootsTags.Items.CLOUD_BERRY_HERB);
 
     this.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
     this.tag(RootsTags.Items.FERTILIZERS).add(Items.BONE_MEAL);

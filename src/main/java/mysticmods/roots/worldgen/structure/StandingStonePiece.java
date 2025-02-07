@@ -52,7 +52,9 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
           BlockPos pos = new BlockPos(tx, pLevel.getHeight(Heightmap.Types.WORLD_SURFACE_WG, tx, tz), tz);
           if (pLevel.getBlockState(pos.below()).is(BlockTags.DIRT)) {
             for (int j = 0; j < height; j++) {
-              pLevel.setBlock(pos.offset(0, j, 0), j == height - 1 ? ModBlocks.CHISELED_RUNESTONE.value().defaultBlockState() : pRandom.nextFloat() < 0.4f ? ModBlocks.MOSSY_RUNESTONE.value().defaultBlockState() : ModBlocks.RUNESTONE.value().defaultBlockState(), 2);
+              pLevel.setBlock(pos.offset(0, j, 0), j == height - 1 ? ModBlocks.CHISELED_RUNESTONE.value()
+                  .defaultBlockState() : pRandom.nextFloat() < 0.4f ? ModBlocks.MOSSY_RUNESTONE.value()
+                  .defaultBlockState() : ModBlocks.RUNESTONE.value().defaultBlockState(), 2);
             }
             pillarSpots.add(new PillarSpot(tx, tz));
           }
@@ -90,9 +92,10 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
         }
       }
 
-      BuiltInRegistries.BLOCK.getTag(BlockTags.SMALL_FLOWERS).ifPresent(o -> o.getRandomElement(pRandom).ifPresent(block ->
-          pLevel.setBlock(center.above(), block.value().defaultBlockState(), 2)
-      ));
+      BuiltInRegistries.BLOCK.getTag(BlockTags.SMALL_FLOWERS)
+          .ifPresent(o -> o.getRandomElement(pRandom).ifPresent(block ->
+              pLevel.setBlock(center.above(), block.value().defaultBlockState(), 2)
+          ));
     }
   }
 

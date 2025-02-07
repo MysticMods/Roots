@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 // Derived from https://github.com/thiakil/MCCodecStuff/blob/main/src/main/java/com/thiakil/codecs/blockstate/PartialBlockState.java
 public record PartialBlockState(Block block,
@@ -34,7 +33,7 @@ public record PartialBlockState(Block block,
       );
   public static StreamCodec<RegistryFriendlyByteBuf, PartialBlockState> STREAM_CODEC = StreamCodec.of(PartialBlockState::toNetwork, PartialBlockState::fromNetwork);
 
-  public PartialBlockState (Block block) {
+  public PartialBlockState(Block block) {
     this(block, new HashMap<>());
   }
 
@@ -88,7 +87,7 @@ public record PartialBlockState(Block block,
     return block();
   }
 
-  public BlockState getState () {
+  public BlockState getState() {
     return build();
   }
 

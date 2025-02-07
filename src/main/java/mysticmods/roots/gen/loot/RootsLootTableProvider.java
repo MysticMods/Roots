@@ -330,7 +330,8 @@ public class RootsLootTableProvider {
           .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.05f))))));
       add(ModBlocks.PRIMAL_GROVE_STONE.get(), applyExplosionDecay(ModBlocks.PRIMAL_GROVE_STONE.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
-              .when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.PRIMAL_GROVE_STONE.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)))
+              .when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.PRIMAL_GROVE_STONE.get()).setProperties(StatePropertiesPredicate.Builder.properties()
+                  .hasProperty(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)))
               .add(LootItem.lootTableItem(ModItems.PRIMAL_GROVE_STONE.get())
                   .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))));
       dropSelf(ModBlocks.INCENSE_BURNER.get());
@@ -355,7 +356,8 @@ public class RootsLootTableProvider {
       addCropDrops(ModBlocks.AUBERGINE_CROP.get(), ModItems.AUBERGINE.get(), ModItems.AUBERGINE_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
       add(ModBlocks.WILD_AUBERGINE.get(), this.applyExplosionDecay(ModBlocks.WILD_AUBERGINE.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
-              .add(LootItem.lootTableItem(ModItems.AUBERGINE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))))
+              .add(LootItem.lootTableItem(ModItems.AUBERGINE.get())
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))))
           .withPool(LootPool.lootPool()
               .add(LootItem.lootTableItem(ModItems.AUBERGINE_SEEDS.get())
                   .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))))));
@@ -364,7 +366,7 @@ public class RootsLootTableProvider {
       add(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get()));
     }
 
-    protected void addElementalCropDrops (Block cropBlock, Item cropItem, ElementalType matchingSoil) {
+    protected void addElementalCropDrops(Block cropBlock, Item cropItem, ElementalType matchingSoil) {
       IntegerProperty ageProperty = ElementalCropBlock.AGE;
 
       HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
@@ -374,15 +376,15 @@ public class RootsLootTableProvider {
       LootItemCondition.Builder cropIsGrownCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
           .setProperties(StatePropertiesPredicate.Builder.properties()
               .hasProperty(ageProperty, Collections.max(ageProperty.getPossibleValues())));
-     LootItemCondition.Builder normalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
-         .setProperties(StatePropertiesPredicate.Builder.properties()
-             .hasProperty(ElementalType.SOIL_TYPE, ElementalType.NONE));
-     LootItemCondition.Builder plainElementalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
-         .setProperties(StatePropertiesPredicate.Builder.properties()
-             .hasProperty(ElementalType.SOIL_TYPE, ElementalType.DEFAULT));
-     LootItemCondition.Builder matchingElementalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
-         .setProperties(StatePropertiesPredicate.Builder.properties()
-             .hasProperty(ElementalType.SOIL_TYPE, matchingSoil));
+      LootItemCondition.Builder normalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+          .setProperties(StatePropertiesPredicate.Builder.properties()
+              .hasProperty(ElementalType.SOIL_TYPE, ElementalType.NONE));
+      LootItemCondition.Builder plainElementalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+          .setProperties(StatePropertiesPredicate.Builder.properties()
+              .hasProperty(ElementalType.SOIL_TYPE, ElementalType.DEFAULT));
+      LootItemCondition.Builder matchingElementalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+          .setProperties(StatePropertiesPredicate.Builder.properties()
+              .hasProperty(ElementalType.SOIL_TYPE, matchingSoil));
 
       LootItemConditionalFunction.Builder<?> fortune = ApplyBonusCount.addBonusBinomialDistributionCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.2714286F, 3);
 
@@ -397,11 +399,23 @@ public class RootsLootTableProvider {
               .withPool(
                   LootPool.lootPool()
                       .when(cropIsGrownCondition)
-                      .add(LootItem.lootTableItem(cropItem).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))).apply(fortune).when(matchingElementalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // Matching soil default 2
-                      .add(LootItem.lootTableItem(cropItem).apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune).when(matchingElementalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // Matching soil extra chance
-                      .add(LootItem.lootTableItem(cropItem).apply(fortune).when(plainElementalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // Base soil default 1
-                      .add(LootItem.lootTableItem(cropItem).apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune).when(plainElementalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // Base soil extra chance
-                      .add(LootItem.lootTableItem(cropItem).apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune).when(normalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // No soil default 2
+                      .add(LootItem.lootTableItem(cropItem)
+                          .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))).apply(fortune)
+                          .when(matchingElementalSoilCondition)
+                          .otherwise(EmptyLootItem.emptyItem())) // Matching soil default 2
+                      .add(LootItem.lootTableItem(cropItem)
+                          .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune)
+                          .when(matchingElementalSoilCondition)
+                          .otherwise(EmptyLootItem.emptyItem())) // Matching soil extra chance
+                      .add(LootItem.lootTableItem(cropItem).apply(fortune).when(plainElementalSoilCondition)
+                          .otherwise(EmptyLootItem.emptyItem())) // Base soil default 1
+                      .add(LootItem.lootTableItem(cropItem)
+                          .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune)
+                          .when(plainElementalSoilCondition)
+                          .otherwise(EmptyLootItem.emptyItem())) // Base soil extra chance
+                      .add(LootItem.lootTableItem(cropItem)
+                          .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune)
+                          .when(normalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // No soil default 2
 
               )));
 

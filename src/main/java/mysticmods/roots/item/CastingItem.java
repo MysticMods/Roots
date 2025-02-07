@@ -216,10 +216,7 @@ public class CastingItem extends Item {
       return false;
     }
     int cooldown = storage.getCurrentCooldown();
-    if (cooldown > 0) {
-      return true;
-    }
-    return false;
+    return cooldown > 0;
   }
 
   @Override

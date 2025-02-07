@@ -12,12 +12,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.util.RecipeMatcher;
 import net.neoforged.neoforge.items.IItemHandler;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

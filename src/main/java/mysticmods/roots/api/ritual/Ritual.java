@@ -57,7 +57,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     return RootsRegistries.RITUALS.wrapAsHolder(this);
   }
 
-  public boolean providesLight () {
+  public boolean providesLight() {
     return true;
   }
 

@@ -1,11 +1,9 @@
 package mysticmods.roots.api.recipe;
 
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.util.SetUtils;
 import net.minecraft.core.BlockPos;
@@ -15,12 +13,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.neoforged.neoforge.common.util.RecipeMatcher;
 
 import javax.annotation.Nullable;
 import java.util.*;

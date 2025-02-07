@@ -88,7 +88,8 @@ public class DuckModel extends AgeableListModel<DuckEntity> {
 
   @Override
   public void setupAnim(DuckEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-    boolean vallen = pEntity.hasCustomName() && pEntity.getCustomName() != null && (pEntity.getCustomName().getString().equals("Vallen") || pEntity.getCustomName().getString().equals("VallenFrostweavr"));
+    boolean vallen = pEntity.hasCustomName() && pEntity.getCustomName() != null && (pEntity.getCustomName().getString()
+        .equals("Vallen") || pEntity.getCustomName().getString().equals("VallenFrostweavr"));
 
     if (pEntity.isInWater()) {
       this.leg_L.visible = false;

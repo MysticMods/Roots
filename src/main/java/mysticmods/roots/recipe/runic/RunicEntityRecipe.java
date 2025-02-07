@@ -20,7 +20,8 @@ import java.util.Optional;
 
 public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
   public static final MapCodec<RunicEntityRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-      BaseRecipeData.CODEC.codec().optionalFieldOf("data").forGetter((o) -> o.data.isEmpty() ? Optional.empty() : Optional.of(o.data)),
+      BaseRecipeData.CODEC.codec().optionalFieldOf("data")
+          .forGetter((o) -> o.data.isEmpty() ? Optional.empty() : Optional.of(o.data)),
       EntityTest.CODEC.fieldOf("test").forGetter((o) -> o.test),
       Codec.INT.fieldOf("cooldown").forGetter((o) -> o.cooldown),
       Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost)
@@ -33,7 +34,7 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
       RunicEntityRecipe::new
   );
 
-  private int cooldown;
+  private final int cooldown;
   private int durabilityCost = 1;
 
   public RunicEntityRecipe(BaseRecipeData data, EntityTest test, int cooldown, int durabilityCost) {

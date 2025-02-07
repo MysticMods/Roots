@@ -29,7 +29,10 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
@@ -80,21 +83,29 @@ public class RootsDataPackGenerators {
                       new ConfiguredFeature<>(
                           Feature.HUGE_RED_MUSHROOM,
                           new HugeMushroomFeatureConfiguration(
-                              BlockStateProvider.simple(ModBlocks.BAFFLECAP_BLOCK.get().defaultBlockState().setValue(HugeMushroomBlock.DOWN, false)),
-                              BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, Boolean.FALSE).setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
+                              BlockStateProvider.simple(ModBlocks.BAFFLECAP_BLOCK.get().defaultBlockState()
+                                  .setValue(HugeMushroomBlock.DOWN, false)),
+                              BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState()
+                                  .setValue(HugeMushroomBlock.UP, Boolean.FALSE)
+                                  .setValue(HugeMushroomBlock.DOWN, Boolean.FALSE)), 2)));
                   bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_KEY,
                       new ConfiguredFeature<>(
-                          ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get().defaultBlockState()))));
+                          ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get()
+                          .defaultBlockState()))));
                   // TODO: Is this used?
-                  bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_MOSSY_KEY, new ConfiguredFeature<>(ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get().defaultBlockState().setValue(WildRootsBlock.MOSSY, true)))));
-                  ConfiguredFeature<?, ?> wildAubergine = new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_AUBERGINE.get().defaultBlockState())));
+                  bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_MOSSY_KEY, new ConfiguredFeature<>(ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get()
+                      .defaultBlockState().setValue(WildRootsBlock.MOSSY, true)))));
+                  ConfiguredFeature<?, ?> wildAubergine = new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_AUBERGINE.get()
+                      .defaultBlockState())));
                   PlacedFeature placedWildAubergine = new PlacedFeature(Holder.direct(wildAubergine),
                       List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Blocks.AIR), BlockPredicate.matchesTag(new BlockPos(0, -1, 0), RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE)))));
                   bootstrap.register(
                       ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 2, 2, Holder.direct(placedWildAubergine))));
 
-                  bootstrap.register(ModFeatures.CONFIGURED_WILDWOOD_TREE_KEY, new ConfiguredFeature<>(Feature.TREE, ModFeatures.createWildwood().build()));
-                  bootstrap.register(ModFeatures.CONFIGURED_WILDWOOD_TREE_BEES_KEY, new ConfiguredFeature<>(Feature.TREE, ModFeatures.createWildwood().decorators(List.of(new BeehiveDecorator(1.0F))).build()));
+                  bootstrap.register(ModFeatures.CONFIGURED_WILDWOOD_TREE_KEY, new ConfiguredFeature<>(Feature.TREE, ModFeatures.createWildwood()
+                      .build()));
+                  bootstrap.register(ModFeatures.CONFIGURED_WILDWOOD_TREE_BEES_KEY, new ConfiguredFeature<>(Feature.TREE, ModFeatures.createWildwood()
+                      .decorators(List.of(new BeehiveDecorator(1.0F))).build()));
 
 
                   RuleTest stone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -105,8 +116,10 @@ public class RootsDataPackGenerators {
                       OreConfiguration.target(deepslate, ModBlocks.DEEPSLATE_SILVER_ORE.get().defaultBlockState())
                   );
                   bootstrap.register(ModFeatures.CONFIGURED_SILVER_ORE_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(silverOre, 9)));
-                  bootstrap.register(ModFeatures.CONFIGURED_GRANITE_QUARTZ_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(granite, ModBlocks.GRANITE_QUARTZ_ORE.get().defaultBlockState())), 4)));
-                  ConfiguredFeature<?, ?> stonepetal = new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.STONEPETAL.get().defaultBlockState())));
+                  bootstrap.register(ModFeatures.CONFIGURED_GRANITE_QUARTZ_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(granite, ModBlocks.GRANITE_QUARTZ_ORE.get()
+                      .defaultBlockState())), 4)));
+                  ConfiguredFeature<?, ?> stonepetal = new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.STONEPETAL.get()
+                      .defaultBlockState())));
                   PlacedFeature placedStonepetal = new PlacedFeature(Holder.direct(stonepetal),
                       List.of(BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlocks(Blocks.AIR), BlockPredicate.matchesTag(new BlockPos(0, -1, 0), RootsTags.Blocks.SUPPORTS_STONEPETAL)))));
 

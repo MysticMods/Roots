@@ -98,7 +98,8 @@ public class GroveSporesItem extends Item {
 
         pLevel.gameEvent(GameEvent.BLOCK_PLACE, pPos, GameEvent.Context.of(player, blockstate1));
         SoundType soundtype = blockstate1.getSoundType(pLevel, pPos, pContext.getPlayer());
-        pLevel.playSound(player, pPos, blockstate1.getSoundType(pLevel, pPos, pContext.getPlayer()).getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+        pLevel.playSound(player, pPos, blockstate1.getSoundType(pLevel, pPos, pContext.getPlayer())
+            .getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
         if (player == null || !player.getAbilities().instabuild) {
           itemstack.shrink(1);
         }

@@ -42,7 +42,8 @@ public class ModConditions {
   public static final DeferredHolder<LevelCondition, LevelCondition> PRIMAL_GROVE_STONE_INACTIVE = REGISTER.register("inactive_primal_grove_stone", () -> LevelCondition.groveStone(GroveType.PRIMAL, false, true));
   public static final DeferredHolder<LevelCondition, LevelCondition> GROVE_STONE_ANY = REGISTER.register("any_grove_stone", () -> LevelCondition.anyGroveStone(false));
   public static final DeferredHolder<LevelCondition, LevelCondition> GROVE_STONE_ACTIVE = REGISTER.register("active_grove_stone", () -> LevelCondition.anyGroveStone(true));
-  public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = REGISTER.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get().defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
+  public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = REGISTER.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
+      .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);

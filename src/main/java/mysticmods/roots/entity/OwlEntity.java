@@ -58,7 +58,8 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   }
 
   public static AttributeSupplier.Builder attributes() {
-    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0d).add(Attributes.MOVEMENT_SPEED, 0.2d).add(Attributes.FLYING_SPEED, 0.55d);
+    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0d).add(Attributes.MOVEMENT_SPEED, 0.2d)
+        .add(Attributes.FLYING_SPEED, 0.55d);
   }
 
   @Override

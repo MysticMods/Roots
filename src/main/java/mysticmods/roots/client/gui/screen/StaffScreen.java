@@ -41,7 +41,7 @@ public class StaffScreen extends RootsScreen {
     this.height = 192;
   }
 
-  private SpellStorage getStorage () {
+  private SpellStorage getStorage() {
     Player player = getMinecraft().player;
     ItemStack stack = hand == null ? player.getInventory().getItem(inventorySlot) : player.getItemInHand(hand);
     if (stack.isEmpty() || !stack.has(ModAttachments.SPELL_STORAGE)) {
@@ -90,7 +90,8 @@ public class StaffScreen extends RootsScreen {
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 8; x++) {
         if (index < spellInfo.size()) {
-          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, librarySlot(index), index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, spellInfo.get(index).granted())));
+          librarySpellButtons.add(addRenderableWidget(new LibrarySpellButton(this, librarySlot(index), index, guiLeft + offsetX + x * 18, guiTop + offsetY + y * 18, spellInfo.get(index)
+              .granted())));
           index++;
         }
       }

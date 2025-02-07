@@ -243,13 +243,15 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),
         RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellSlot::spell),
-        RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().xmap(HashSet::new, ArrayList::new).fieldOf("enabledModifiers").forGetter(o -> new HashSet<>(o.enabledModifiers)),
+        RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().xmap(HashSet::new, ArrayList::new)
+            .fieldOf("enabledModifiers").forGetter(o -> new HashSet<>(o.enabledModifiers)),
         Codec.INT.fieldOf("cooldown").forGetter(SpellSlot::cooldown)
     ).apply(instance, SpellSlot::new));
     public static StreamCodec<RegistryFriendlyByteBuf, SpellSlot> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.VAR_INT, SpellSlot::slot,
         ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), SpellSlot::spell,
-        ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS).apply(ByteBufCodecs.list()).map(HashSet::new, ArrayList::new), SpellSlot::enabledModifiers,
+        ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS).apply(ByteBufCodecs.list())
+            .map(HashSet::new, ArrayList::new), SpellSlot::enabledModifiers,
         ByteBufCodecs.VAR_INT, SpellSlot::cooldown,
         SpellSlot::new
     );

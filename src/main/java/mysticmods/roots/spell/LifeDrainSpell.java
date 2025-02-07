@@ -55,7 +55,7 @@ public class LifeDrainSpell extends Spell {
     this.damage = properties.get(ModSpells.LIFE_DRAIN_DAMAGE);
     this.heal = properties.get(ModSpells.LIFE_DRAIN_HEAL);
   }
-  
+
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     DamageSources damage = pPlayer.damageSources();

@@ -44,7 +44,8 @@ public class EntityUtils {
         return false;
       }
 
-      if (entity instanceof Player otherPlayer && pLevel.getServer() != null && pLevel.getServer().isPvpAllowed() && (pPlayer.getTeam() == null || pPlayer.getTeam().isAlliedTo(otherPlayer.getTeam()))) {
+      if (entity instanceof Player otherPlayer && pLevel.getServer() != null && pLevel.getServer()
+          .isPvpAllowed() && (pPlayer.getTeam() == null || pPlayer.getTeam().isAlliedTo(otherPlayer.getTeam()))) {
         return true;
       }
 

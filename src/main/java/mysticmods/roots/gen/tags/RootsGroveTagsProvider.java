@@ -12,7 +12,8 @@ public class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Grove> {
 
 
   public RootsGroveTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
-    super(output, RootsRegistries.Keys.GROVES, provider, p_256665_ -> p_256665_.builtInRegistryHolder().getKey(), modId, existingFileHelper);
+    super(output, RootsRegistries.Keys.GROVES, provider, p_256665_ -> p_256665_.builtInRegistryHolder()
+        .getKey(), modId, existingFileHelper);
   }
 
   @Override

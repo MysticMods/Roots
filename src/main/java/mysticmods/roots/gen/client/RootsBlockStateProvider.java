@@ -53,7 +53,9 @@ public class RootsBlockStateProvider extends BlockStateProvider {
               .texture("cross", modLoc("block/wildwood_sapling")).renderType("cutout");
           return ConfiguredModel.builder().modelFile(stage).build();
         });
-    getVariantBuilder(ModBlocks.STONEPETAL.get()).partialState().setModels(new ConfiguredModel(models().cross("stonepetal", blockTexture(ModBlocks.STONEPETAL.get())).renderType("cutout")));
+    getVariantBuilder(ModBlocks.STONEPETAL.get()).partialState()
+        .setModels(new ConfiguredModel(models().cross("stonepetal", blockTexture(ModBlocks.STONEPETAL.get()))
+            .renderType("cutout")));
     // TODO: Render type
     simpleBlock(ModBlocks.WILDWOOD_LEAVES.get());
     axisBlock(ModBlocks.RUNED_WILDWOOD_LOG.get(), modLoc("block/runed_wildwood"), modLoc("block/wildwood_log_top"));
@@ -103,7 +105,8 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     doorBlockWithRenderType(ModBlocks.WILDWOOD_DOOR.get(), "wildwood", modLoc("block/wildwood_door_bottom"), modLoc("block/wildwood_door_top"), "translucent");
     trapdoorBlockWithRenderType(ModBlocks.WILDWOOD_TRAPDOOR.get(), "wildwood", modLoc("block/wildwood_trapdoor"), true, "cutout");
     horizontalBlock(ModBlocks.WILDWOOD_LADDER.get(), models().withExistingParent("wildwood_ladder", mcLoc("block/ladder"))
-        .texture("texture", modLoc("block/wildwood_ladder")).texture("particle", modLoc("block/wildwood_ladder")).renderType("cutout"));
+        .texture("texture", modLoc("block/wildwood_ladder")).texture("particle", modLoc("block/wildwood_ladder"))
+        .renderType("cutout"));
     wallBlock(ModBlocks.RUNESTONE_WALL.get(), blockTexture(ModBlocks.RUNESTONE.get()));
     wallBlock(ModBlocks.RUNESTONE_BRICK_WALL.get(), blockTexture(ModBlocks.RUNESTONE_BRICK.get()));
     wallBlock(ModBlocks.MOSSY_RUNESTONE_WALL.get(), blockTexture(ModBlocks.MOSSY_RUNESTONE.get()));
@@ -112,48 +115,81 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     wallBlock(ModBlocks.RUNED_BRICK_WALL.get(), blockTexture(ModBlocks.RUNED_BRICK.get()));
     wallBlock(ModBlocks.RUNED_TILE_WALL.get(), blockTexture(ModBlocks.RUNED_TILE.get()));
     simpleBlock(ModBlocks.ELEMENTAL_SOIL.get());
-    ModelFile aqueousPillar = models().cubeColumn(ModBlocks.AQUEOUS_SOIL.getKey().location().getPath(), modLoc("block/water_soil_side"), modLoc("block/water_soil_top"));
-    getVariantBuilder(ModBlocks.AQUEOUS_SOIL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(aqueousPillar).build());
-    ModelFile caelicPillar = models().cubeColumn(ModBlocks.CAELIC_SOIL.getKey().location().getPath(), modLoc("block/air_soil_side"), modLoc("block/air_soil_top"));
-    getVariantBuilder(ModBlocks.CAELIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(caelicPillar).build());
-    ModelFile terranPillar = models().cubeColumn(ModBlocks.TERRAN_SOIL.getKey().location().getPath(), modLoc("block/earth_soil_side"), modLoc("block/earth_soil_top"));
-    getVariantBuilder(ModBlocks.TERRAN_SOIL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(terranPillar).build());
-    ModelFile fieryPillar = models().cubeColumn(ModBlocks.MAGMATIC_SOIL.getKey().location().getPath(), modLoc("block/fire_soil_side"), modLoc("block/fire_soil_top"));
-    getVariantBuilder(ModBlocks.MAGMATIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(fieryPillar).build());
-    ModelFile feyLightModel = models().cubeAll(ModBlocks.FEY_LIGHT.getKey().location().getPath(), modLoc("block/grove_padding")).renderType("cutout");
-    getVariantBuilder(ModBlocks.FEY_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(feyLightModel).build());
+    ModelFile aqueousPillar = models().cubeColumn(ModBlocks.AQUEOUS_SOIL.getKey().location()
+        .getPath(), modLoc("block/water_soil_side"), modLoc("block/water_soil_top"));
+    getVariantBuilder(ModBlocks.AQUEOUS_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(aqueousPillar).build());
+    ModelFile caelicPillar = models().cubeColumn(ModBlocks.CAELIC_SOIL.getKey().location()
+        .getPath(), modLoc("block/air_soil_side"), modLoc("block/air_soil_top"));
+    getVariantBuilder(ModBlocks.CAELIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(caelicPillar).build());
+    ModelFile terranPillar = models().cubeColumn(ModBlocks.TERRAN_SOIL.getKey().location()
+        .getPath(), modLoc("block/earth_soil_side"), modLoc("block/earth_soil_top"));
+    getVariantBuilder(ModBlocks.TERRAN_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(terranPillar).build());
+    ModelFile fieryPillar = models().cubeColumn(ModBlocks.MAGMATIC_SOIL.getKey().location()
+        .getPath(), modLoc("block/fire_soil_side"), modLoc("block/fire_soil_top"));
+    getVariantBuilder(ModBlocks.MAGMATIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(fieryPillar).build());
+    ModelFile feyLightModel = models().cubeAll(ModBlocks.FEY_LIGHT.getKey().location()
+        .getPath(), modLoc("block/grove_padding")).renderType("cutout");
+    getVariantBuilder(ModBlocks.FEY_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(feyLightModel).build());
     ModelFile ritualPedestal = models().withExistingParent("ritual_pedestal", modLoc("block/complex/ritual_pedestal"));
-    getVariantBuilder(ModBlocks.RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(ritualPedestal).build());
+    getVariantBuilder(ModBlocks.RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(ritualPedestal).build());
     ModelFile reinforcedRitualPedestal = models().withExistingParent("reinforced_ritual_pedestal", modLoc("block/complex/reinforced_ritual_pedestal"));
-    getVariantBuilder(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(reinforcedRitualPedestal).build());
+    getVariantBuilder(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(reinforcedRitualPedestal).build());
     ModelFile existingGroveCrafter = models().withExistingParent("grove_crafter", modLoc("block/complex/grove_crafter"));
-    getVariantBuilder(ModBlocks.GROVE_CRAFTER.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(existingGroveCrafter).build());
+    getVariantBuilder(ModBlocks.GROVE_CRAFTER.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(existingGroveCrafter).build());
     ModelFile grovePedestal = models().withExistingParent("grove_pedestal", modLoc("block/complex/grove_pedestal"));
-    getVariantBuilder(ModBlocks.GROVE_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(grovePedestal).build());
+    getVariantBuilder(ModBlocks.GROVE_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(grovePedestal).build());
     ModelFile wildwoodPedestal = models().withExistingParent("wildwood_pedestal", modLoc("block/complex/wildwood_pedestal"));
-    getVariantBuilder(ModBlocks.WILDWOOD_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(wildwoodPedestal).build());
+    getVariantBuilder(ModBlocks.WILDWOOD_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(wildwoodPedestal).build());
     ModelFile displayPedestal = models().withExistingParent("display_pedestal", modLoc("block/complex/grove_pedestal"));
-    getVariantBuilder(ModBlocks.DISPLAY_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(displayPedestal).build());
+    getVariantBuilder(ModBlocks.DISPLAY_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(displayPedestal).build());
     // Wild roots are existing
-    simpleBlock(ModBlocks.CREEPING_GROVE_MOSS.get(), models().singleTexture(ModBlocks.CREEPING_GROVE_MOSS.getKey().location().getPath(), mcLoc("block/carpet"), "wool", modLoc("block/creeping_grove_moss")).renderType("cutout"));
-    simpleBlock(ModBlocks.HANGING_GROVE_MOSS.get(), models().cross(ModBlocks.HANGING_GROVE_MOSS.getKey().location().getPath(), modLoc("block/hanging_grove_moss")).renderType("cutout"));
+    simpleBlock(ModBlocks.CREEPING_GROVE_MOSS.get(), models().singleTexture(ModBlocks.CREEPING_GROVE_MOSS.getKey()
+            .location().getPath(), mcLoc("block/carpet"), "wool", modLoc("block/creeping_grove_moss"))
+        .renderType("cutout"));
+    simpleBlock(ModBlocks.HANGING_GROVE_MOSS.get(), models().cross(ModBlocks.HANGING_GROVE_MOSS.getKey().location()
+        .getPath(), modLoc("block/hanging_grove_moss")).renderType("cutout"));
 
     // Bafflecap mushroom block
-    ModelFile modelInside = models().withExistingParent("bafflecap_block_inside", mcLoc("block/template_single_face")).texture("texture", modLoc("block/bafflecap_block_inside"));
+    ModelFile modelInside = models().withExistingParent("bafflecap_block_inside", mcLoc("block/template_single_face"))
+        .texture("texture", modLoc("block/bafflecap_block_inside"));
     models().cubeAll("bafflecap_block_inventory", modLoc("block/bafflecap_block_outside"));
-    ModelFile modelOutside = models().withExistingParent("bafflecap_block_outside", mcLoc("block/template_single_face")).texture("texture", modLoc("block/bafflecap_block_outside")).renderType("cutout");
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).addModel().condition(HugeMushroomBlock.NORTH, false).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).addModel().condition(HugeMushroomBlock.NORTH, true).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationY(180).addModel().condition(HugeMushroomBlock.SOUTH, false).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationY(180).addModel().condition(HugeMushroomBlock.SOUTH, true).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationY(270).addModel().condition(HugeMushroomBlock.WEST, false).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationY(270).addModel().condition(HugeMushroomBlock.WEST, true).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationY(90).addModel().condition(HugeMushroomBlock.EAST, false).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationY(90).addModel().condition(HugeMushroomBlock.EAST, true).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationX(270).addModel().condition(HugeMushroomBlock.UP, false).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationX(270).addModel().condition(HugeMushroomBlock.UP, true).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationX(90).addModel().condition(HugeMushroomBlock.DOWN, false).end();
-    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationX(90).addModel().condition(HugeMushroomBlock.DOWN, true).end();
+    ModelFile modelOutside = models().withExistingParent("bafflecap_block_outside", mcLoc("block/template_single_face"))
+        .texture("texture", modLoc("block/bafflecap_block_outside")).renderType("cutout");
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).addModel()
+        .condition(HugeMushroomBlock.NORTH, false).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).addModel()
+        .condition(HugeMushroomBlock.NORTH, true).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationY(180)
+        .addModel().condition(HugeMushroomBlock.SOUTH, false).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationY(180)
+        .addModel().condition(HugeMushroomBlock.SOUTH, true).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationY(270)
+        .addModel().condition(HugeMushroomBlock.WEST, false).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationY(270)
+        .addModel().condition(HugeMushroomBlock.WEST, true).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationY(90)
+        .addModel().condition(HugeMushroomBlock.EAST, false).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationY(90)
+        .addModel().condition(HugeMushroomBlock.EAST, true).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationX(270)
+        .addModel().condition(HugeMushroomBlock.UP, false).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationX(270)
+        .addModel().condition(HugeMushroomBlock.UP, true).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelInside).uvLock(true).rotationX(90)
+        .addModel().condition(HugeMushroomBlock.DOWN, false).end();
+    getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationX(90)
+        .addModel().condition(HugeMushroomBlock.DOWN, true).end();
 
     // Primal grove stone
     getVariantBuilder(ModBlocks.PRIMAL_GROVE_STONE.get())
@@ -185,10 +221,12 @@ public class RootsBlockStateProvider extends BlockStateProvider {
         });
 
     ModelFile incenseBurner = models().withExistingParent("incense_burner", modLoc("block/complex/incense_burner"));
-    getVariantBuilder(ModBlocks.INCENSE_BURNER.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(incenseBurner).build());
+    getVariantBuilder(ModBlocks.INCENSE_BURNER.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(incenseBurner).build());
 
     ModelFile mortar = models().withExistingParent("mortar", modLoc("block/complex/mortar"));
-    getVariantBuilder(ModBlocks.MORTAR.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(mortar).build());
+    getVariantBuilder(ModBlocks.MORTAR.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(mortar)
+        .build());
 
     ModelFile pyre = models().withExistingParent("pyre", modLoc("block/complex/pyre")).renderType("cutout");
     ModelFile pyreLit = models().withExistingParent("pyre_lit", modLoc("block/complex/pyre_lit")).renderType("cutout");
@@ -201,7 +239,8 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     });
 
     ModelFile soulPyre = models().withExistingParent("soul_pyre", modLoc("block/complex/pyre")).renderType("cutout");
-    ModelFile soulPyreLit = models().withExistingParent("soul_pyre_lit", modLoc("block/complex/soul_pyre_lit")).renderType("cutout");
+    ModelFile soulPyreLit = models().withExistingParent("soul_pyre_lit", modLoc("block/complex/soul_pyre_lit"))
+        .renderType("cutout");
     getVariantBuilder(ModBlocks.SOUL_PYRE.get()).forAllStates(state -> {
       if (state.getValue(PyreBlock.BURNING)) {
         return ConfiguredModel.builder().modelFile(soulPyreLit).build();
@@ -211,8 +250,10 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     });
 
     // TODO: Lit vs unlit
-    ModelFile reinforcedPyre = models().withExistingParent("reinforced_pyre", modLoc("block/complex/reinforced_pyre")).renderType("cutout");
-    ModelFile reinforcedPyreLit = models().withExistingParent("reinforced_pyre_lit", modLoc("block/complex/reinforced_pyre_lit")).renderType("cutout");
+    ModelFile reinforcedPyre = models().withExistingParent("reinforced_pyre", modLoc("block/complex/reinforced_pyre"))
+        .renderType("cutout");
+    ModelFile reinforcedPyreLit = models().withExistingParent("reinforced_pyre_lit", modLoc("block/complex/reinforced_pyre_lit"))
+        .renderType("cutout");
     getVariantBuilder(ModBlocks.REINFORCED_PYRE.get()).forAllStates(state -> {
       if (state.getValue(PyreBlock.BURNING)) {
         return ConfiguredModel.builder().modelFile(reinforcedPyreLit).build();
@@ -221,8 +262,10 @@ public class RootsBlockStateProvider extends BlockStateProvider {
       }
     });
 
-    ModelFile soulReinforcedPyre = models().withExistingParent("reinforced_soul_pyre", modLoc("block/complex/reinforced_pyre")).renderType("cutout");
-    ModelFile soulReinforcedPyreLit = models().withExistingParent("reinforced_soul_pyre_lit", modLoc("block/complex/reinforced_soul_pyre_lit")).renderType("cutout");
+    ModelFile soulReinforcedPyre = models().withExistingParent("reinforced_soul_pyre", modLoc("block/complex/reinforced_pyre"))
+        .renderType("cutout");
+    ModelFile soulReinforcedPyreLit = models().withExistingParent("reinforced_soul_pyre_lit", modLoc("block/complex/reinforced_soul_pyre_lit"))
+        .renderType("cutout");
     getVariantBuilder(ModBlocks.REINFORCED_SOUL_PYRE.get()).forAllStates(state -> {
       if (state.getValue(PyreBlock.BURNING)) {
         return ConfiguredModel.builder().modelFile(soulReinforcedPyreLit).build();
@@ -231,16 +274,23 @@ public class RootsBlockStateProvider extends BlockStateProvider {
       }
     });
 
-    ModelFile decorativePyre = models().withExistingParent("decorative_pyre", modLoc("block/complex/pyre_lit")).renderType("cutout");
-    getVariantBuilder(ModBlocks.DECORATIVE_PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(decorativePyre).build());
+    ModelFile decorativePyre = models().withExistingParent("decorative_pyre", modLoc("block/complex/pyre_lit"))
+        .renderType("cutout");
+    getVariantBuilder(ModBlocks.DECORATIVE_PYRE.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(decorativePyre).build());
 
-    ModelFile decorativeSoulPyre = models().withExistingParent("decorative_soul_pyre", modLoc("block/complex/soul_pyre_lit")).renderType("cutout");
-    getVariantBuilder(ModBlocks.DECORATIVE_SOUL_PYRE.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(decorativeSoulPyre).build());
+    ModelFile decorativeSoulPyre = models().withExistingParent("decorative_soul_pyre", modLoc("block/complex/soul_pyre_lit"))
+        .renderType("cutout");
+    getVariantBuilder(ModBlocks.DECORATIVE_SOUL_PYRE.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(decorativeSoulPyre).build());
 
     ModelFile unendingBowl = models().withExistingParent("unending_bowl", modLoc("block/complex/unending_bowl"));
-    getVariantBuilder(ModBlocks.UNENDING_BOWL.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(unendingBowl).build());
+    getVariantBuilder(ModBlocks.UNENDING_BOWL.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(unendingBowl).build());
 
-    getVariantBuilder(ModBlocks.BAFFLECAP.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(models().getBuilder("block/bafflecap").parent(crop).texture("cross", modLoc("block/bafflecap"))).build());
+    getVariantBuilder(ModBlocks.BAFFLECAP.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(models().getBuilder("block/bafflecap").parent(crop).texture("cross", modLoc("block/bafflecap")))
+        .build());
 
     crop(ModBlocks.WILDROOT_CROP, false);
     crop(ModBlocks.CLOUD_BERRY_CROP, false);
@@ -254,13 +304,17 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     crop(ModBlocks.AUBERGINE_CROP, false);
 
 
-    ModelFile cropcrop = models().withExistingParent("wild_aubergine", ResourceLocation.withDefaultNamespace("block/crop")).renderType("cutout").texture("crop", modLoc("block/wild_aubergine")).renderType("cutout");
+    ModelFile cropcrop = models().withExistingParent("wild_aubergine", ResourceLocation.withDefaultNamespace("block/crop"))
+        .renderType("cutout").texture("crop", modLoc("block/wild_aubergine")).renderType("cutout");
     getVariantBuilder(ModBlocks.WILD_AUBERGINE.get())
         .forAllStates(state ->
             ConfiguredModel.builder().modelFile(cropcrop).build());
-    simpleBlock(ModBlocks.POTTED_BAFFLECAP.get(), models().withExistingParent("potted_bafflecap", mcLoc("block/flower_pot_cross")).texture("plant", modLoc("block/bafflecap")).renderType("cutout"));
-    simpleBlock(ModBlocks.POTTED_STONEPETAL.get(), models().withExistingParent("potted_stonepetal", mcLoc("block/flower_pot_cross")).texture("plant", modLoc("block/stonepetal")).renderType("cutout"));
-    simpleBlock(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), models().withExistingParent("potted_wildwood_sapling", mcLoc("block/flower_pot_cross")).texture("plant", modLoc("block/wildwood_sapling")).renderType("cutout"));
+    simpleBlock(ModBlocks.POTTED_BAFFLECAP.get(), models().withExistingParent("potted_bafflecap", mcLoc("block/flower_pot_cross"))
+        .texture("plant", modLoc("block/bafflecap")).renderType("cutout"));
+    simpleBlock(ModBlocks.POTTED_STONEPETAL.get(), models().withExistingParent("potted_stonepetal", mcLoc("block/flower_pot_cross"))
+        .texture("plant", modLoc("block/stonepetal")).renderType("cutout"));
+    simpleBlock(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), models().withExistingParent("potted_wildwood_sapling", mcLoc("block/flower_pot_cross"))
+        .texture("plant", modLoc("block/wildwood_sapling")).renderType("cutout"));
   }
 
   private void crop(Holder<Block> holder, boolean cross) {

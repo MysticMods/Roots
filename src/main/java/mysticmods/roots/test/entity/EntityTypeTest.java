@@ -16,8 +16,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EntityTypeTest extends EntityTest {
-  public static final MapCodec<EntityTypeTest> CODEC = BuiltInRegistries.ENTITY_TYPE.byNameCodec().listOf().fieldOf("types").xmap(EntityTypeTest::new, (p_205065_) -> p_205065_.types);
-  public static final StreamCodec<RegistryFriendlyByteBuf, EntityTypeTest> STREAM_CODEC = ByteBufCodecs.registry(Registries.ENTITY_TYPE).apply(ByteBufCodecs.list()).map(EntityTypeTest::new, test -> test.types);
+  public static final MapCodec<EntityTypeTest> CODEC = BuiltInRegistries.ENTITY_TYPE.byNameCodec().listOf()
+      .fieldOf("types").xmap(EntityTypeTest::new, (p_205065_) -> p_205065_.types);
+  public static final StreamCodec<RegistryFriendlyByteBuf, EntityTypeTest> STREAM_CODEC = ByteBufCodecs.registry(Registries.ENTITY_TYPE)
+      .apply(ByteBufCodecs.list()).map(EntityTypeTest::new, test -> test.types);
 
   private final List<EntityType<?>> types;
 

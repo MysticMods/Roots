@@ -14,7 +14,8 @@ public class RootsHerbTagsProvider extends IntrinsicHolderTagsProvider<Herb> {
 
 
   public RootsHerbTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, @org.jetbrains.annotations.Nullable net.neoforged.neoforge.common.data.ExistingFileHelper existingFileHelper) {
-    super(output, RootsRegistries.Keys.HERBS, provider, p_256665_ -> p_256665_.builtInRegistryHolder().getKey(), modId, existingFileHelper);
+    super(output, RootsRegistries.Keys.HERBS, provider, p_256665_ -> p_256665_.builtInRegistryHolder()
+        .getKey(), modId, existingFileHelper);
   }
 
   @Override
@@ -23,7 +24,8 @@ public class RootsHerbTagsProvider extends IntrinsicHolderTagsProvider<Herb> {
     this.tag(RootsTags.Herbs.AIR).add(ModHerbs.CLOUD_BERRY.get());
     this.tag(RootsTags.Herbs.WATER).add(ModHerbs.DEWGONIA.get());
     this.tag(RootsTags.Herbs.EARTH).add(ModHerbs.STALICRIPE.get());
-    this.tag(RootsTags.Herbs.ELEMENTAL).addTags(RootsTags.Herbs.AIR, RootsTags.Herbs.EARTH, RootsTags.Herbs.FIRE, RootsTags.Herbs.WATER);
+    this.tag(RootsTags.Herbs.ELEMENTAL)
+        .addTags(RootsTags.Herbs.AIR, RootsTags.Herbs.EARTH, RootsTags.Herbs.FIRE, RootsTags.Herbs.WATER);
     this.tag(RootsTags.Herbs.PRIMAL).add(ModHerbs.GROVE_MOSS.get(), ModHerbs.WILDROOT.get());
     this.tag(RootsTags.Herbs.FAIRY).add(ModHerbs.PERESKIA.get());
     this.tag(RootsTags.Herbs.FUNGAL).add(ModHerbs.BAFFLECAP.get());

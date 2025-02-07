@@ -22,7 +22,10 @@ public class Cost {
   private final Holder<Herb> herb;
   private final double value;
 
-  public static final Codec<Cost> CODEC = RecordCodecBuilder.create(instance -> instance.group(CostType.CODEC.fieldOf("type").forGetter(Cost::getType), RootsRegistries.HERBS.holderByNameCodec().fieldOf("herb").forGetter(Cost::getHolder), Codec.DOUBLE.fieldOf("defaultValue").forGetter(Cost::getValue)).apply(instance, Cost::new));
+  public static final Codec<Cost> CODEC = RecordCodecBuilder.create(instance -> instance.group(CostType.CODEC.fieldOf("type")
+          .forGetter(Cost::getType), RootsRegistries.HERBS.holderByNameCodec().fieldOf("herb")
+          .forGetter(Cost::getHolder), Codec.DOUBLE.fieldOf("defaultValue").forGetter(Cost::getValue))
+      .apply(instance, Cost::new));
   public static final StreamCodec<RegistryFriendlyByteBuf, Cost> STREAM_CODEC = StreamCodec.composite(CostType.STREAM_CODEC, Cost::getType, ByteBufCodecs.holderRegistry(RootsRegistries.Keys.HERBS), Cost::getHolder, ByteBufCodecs.DOUBLE, Cost::getValue, Cost::new);
 
   protected Cost(CostType type, Holder<Herb> herb, double value) {

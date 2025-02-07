@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModDamage {
   private static final DeferredRegister<DamageType> DAMAGE_TYPES = DeferredRegister.create(Registries.DAMAGE_TYPE, RootsAPI.MODID);
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     DAMAGE_TYPES.register(bus);
   }
 }

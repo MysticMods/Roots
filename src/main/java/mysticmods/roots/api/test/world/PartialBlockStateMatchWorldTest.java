@@ -10,7 +10,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class PartialBlockStateMatchWorldTest extends WorldTest {
-  public static final MapCodec<PartialBlockStateMatchWorldTest> CODEC = PartialBlockState.CODEC.fieldOf("partial_block_state").xmap(PartialBlockStateMatchWorldTest::new, test -> test.partialBlockState);
+  public static final MapCodec<PartialBlockStateMatchWorldTest> CODEC = PartialBlockState.CODEC.fieldOf("partial_block_state")
+      .xmap(PartialBlockStateMatchWorldTest::new, test -> test.partialBlockState);
   public static final StreamCodec<RegistryFriendlyByteBuf, PartialBlockStateMatchWorldTest> STREAM_CODEC = PartialBlockState.STREAM_CODEC.map(PartialBlockStateMatchWorldTest::new, test -> test.partialBlockState);
   public static final ResourceKey<WorldTestType<?>> PARTIAL_BLOCK_STATE_MATCH_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("partial_block_state_match_test"));
 

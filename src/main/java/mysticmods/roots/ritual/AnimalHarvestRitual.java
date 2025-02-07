@@ -51,7 +51,9 @@ public class AnimalHarvestRitual extends Ritual {
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
-      List<LivingEntity> entities = blockEntity.getLevel().getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive).and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !emptyLoot.contains(o.getType())));
+      List<LivingEntity> entities = blockEntity.getLevel()
+          .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
+              .and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !emptyLoot.contains(o.getType())));
       if (entities.isEmpty()) {
         return;
       }
@@ -101,7 +103,12 @@ public class AnimalHarvestRitual extends Ritual {
     DamageSources pDamageSources = entity.damageSources();
     FakePlayer fakePlayer = FakePlayerFactory.get((ServerLevel) entity.level(), FakePlayerUtil.ROOTS);
     DamageSource pDamageSource = pDamageSources.playerAttack(fakePlayer);
-    LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel)entity.level()).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.THIS_ENTITY, entity).withParameter(LootContextParams.DAMAGE_SOURCE, pDamageSource).withParameter(LootContextParams.ATTACKING_ENTITY, fakePlayer).withParameter(LootContextParams.DIRECT_ATTACKING_ENTITY, fakePlayer).withParameter(LootContextParams.LAST_DAMAGE_PLAYER, fakePlayer);
+    LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) entity.level()).withParameter(LootContextParams.ORIGIN, entity.position())
+        .withParameter(LootContextParams.THIS_ENTITY, entity)
+        .withParameter(LootContextParams.DAMAGE_SOURCE, pDamageSource)
+        .withParameter(LootContextParams.ATTACKING_ENTITY, fakePlayer)
+        .withParameter(LootContextParams.DIRECT_ATTACKING_ENTITY, fakePlayer)
+        .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, fakePlayer);
 
 
     if (entity.getRandom().nextFloat() < lootingChance) {

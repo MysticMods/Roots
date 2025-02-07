@@ -2,7 +2,6 @@ package mysticmods.roots.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import cpw.mods.util.Lazy;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -11,12 +10,10 @@ import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.mixin.AccessorMixinLevelRenderer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -34,7 +31,7 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
 import java.util.Map;
 
-@EventBusSubscriber(value= Dist.CLIENT, modid= RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(value = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class RenderTickHandler {
   private static float clientTicks = 0;
 
@@ -47,7 +44,7 @@ public class RenderTickHandler {
     }
   }
 
-  public static void onClientTick (ClientTickEvent.Post post) {
+  public static void onClientTick(ClientTickEvent.Post post) {
     Minecraft minecraft = Minecraft.getInstance();
     Level level;
     //noinspection ConstantValue
@@ -57,7 +54,7 @@ public class RenderTickHandler {
 
   // This is stolen from Mekanism
   @SubscribeEvent
-  public static void onBlockHighlight (RenderHighlightEvent.Block event) {
+  public static void onBlockHighlight(RenderHighlightEvent.Block event) {
     Minecraft minecraft = Minecraft.getInstance();
     Player player = minecraft.player;
     if (player == null) {
@@ -85,7 +82,8 @@ public class RenderTickHandler {
             return;
           }
 
-          Map<BlockPos, BlockState> blocks = spell.getSpell().getAffectedBlocks(level, player, spell, stack, pos, blockState, rayTraceResult);
+          Map<BlockPos, BlockState> blocks = spell.getSpell()
+              .getAffectedBlocks(level, player, spell, stack, pos, blockState, rayTraceResult);
           if (!blocks.isEmpty()) {
             outliningArea = true;
             Vec3 renderView = info.getPosition();
@@ -104,7 +102,7 @@ public class RenderTickHandler {
     }
   }
 
-  public static float getClientTicks () {
+  public static float getClientTicks() {
     return clientTicks;
   }
 }

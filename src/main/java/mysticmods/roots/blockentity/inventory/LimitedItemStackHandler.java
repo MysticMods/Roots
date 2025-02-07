@@ -1,72 +1,71 @@
 package mysticmods.roots.blockentity.inventory;
 
-import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.function.IntSupplier;
 
 public class LimitedItemStackHandler extends ItemStackHandler {
-    private final IntSupplier maxStackLimit;
+  private final IntSupplier maxStackLimit;
 
-    public LimitedItemStackHandler(int size, IntSupplier maxStackLimit) {
-        super(size);
-        this.maxStackLimit = maxStackLimit;
+  public LimitedItemStackHandler(int size, IntSupplier maxStackLimit) {
+    super(size);
+    this.maxStackLimit = maxStackLimit;
+  }
+
+  @Override
+  protected int getStackLimit(int slot, ItemStack stack) {
+    return maxStackLimit.getAsInt();
+  }
+
+  @Override
+  public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+    if (stack.isEmpty()) {
+      return ItemStack.EMPTY;
     }
 
-    @Override
-    protected int getStackLimit(int slot, ItemStack stack) {
-        return maxStackLimit.getAsInt();
+    if (!isItemValid(slot, stack)) {
+      return stack;
     }
 
-    @Override
-    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-        if (stack.isEmpty()) {
-            return ItemStack.EMPTY;
-        }
+    validateSlotIndex(slot);
 
-        if (!isItemValid(slot, stack)) {
-            return stack;
-        }
+    ItemStack existing = this.stacks.get(slot);
 
-        validateSlotIndex(slot);
+    int limit = getStackLimit(slot, stack);
 
-        ItemStack existing = this.stacks.get(slot);
+    if (!existing.isEmpty()) {
+      if (!ItemStack.isSameItemSameComponents(stack, existing)) {
+        return stack;
+      }
 
-        int limit = getStackLimit(slot, stack);
-
-        if (!existing.isEmpty()) {
-            if (!ItemStack.isSameItemSameComponents(stack, existing)) {
-                return stack;
-            }
-
-            limit -= existing.getCount();
-        }
-
-        if (limit <= 0) {
-            return stack;
-        }
-
-        boolean reachedLimit = stack.getCount() > limit;
-        int toInsert = reachedLimit ? limit : stack.getCount();
-
-        if (!simulate) {
-            if (existing.isEmpty()) {
-                this.stacks.set(slot, stack.copyWithCount(toInsert));
-            } else {
-                existing.grow(toInsert);
-            }
-            onContentsChanged(slot);
-        }
-
-        return reachedLimit ? stack.copyWithCount(stack.getCount() - toInsert) : ItemStack.EMPTY;
+      limit -= existing.getCount();
     }
 
-    @Override
-    public void setStackInSlot(int slot, ItemStack stack) {
-        if (stack.getCount() > maxStackLimit.getAsInt()) {
-            stack = stack.copyWithCount(maxStackLimit.getAsInt());
-        }
-        super.setStackInSlot(slot, stack);
+    if (limit <= 0) {
+      return stack;
     }
+
+    boolean reachedLimit = stack.getCount() > limit;
+    int toInsert = reachedLimit ? limit : stack.getCount();
+
+    if (!simulate) {
+      if (existing.isEmpty()) {
+        this.stacks.set(slot, stack.copyWithCount(toInsert));
+      } else {
+        existing.grow(toInsert);
+      }
+      onContentsChanged(slot);
+    }
+
+    return reachedLimit ? stack.copyWithCount(stack.getCount() - toInsert) : ItemStack.EMPTY;
+  }
+
+  @Override
+  public void setStackInSlot(int slot, ItemStack stack) {
+    if (stack.getCount() > maxStackLimit.getAsInt()) {
+      stack = stack.copyWithCount(maxStackLimit.getAsInt());
+    }
+    super.setStackInSlot(slot, stack);
+  }
 }

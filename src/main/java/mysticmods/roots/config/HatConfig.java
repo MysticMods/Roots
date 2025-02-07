@@ -28,14 +28,22 @@ public class HatConfig extends AbstractConfig {
 
   @Override
   public void apply(ModConfigSpec.Builder builder) {
-    configAntlerFrequency = builder.comment("Spawn frequency (1 in X chances per tick while spawn conditions are met, -1 for not at all)").defineInRange("antler_frequency", antlerFrequency, 0, Integer.MAX_VALUE);
-    configAntlerThreshold = builder.comment("How many hearts under maximum health the player needs to be for a deer to spawn (-1 for any defaultValue under maximum health").defineInRange("antler_threshold", antlerThreshold, -1, Integer.MAX_VALUE);
-    configAntlerHealing = builder.comment("How much a Spirit Deer should heal for").defineInRange("antler_healing", antlerHealing, 0.5, Double.MAX_VALUE);
-    configAntlerRegenDuration = builder.comment("How long a duration Regeneration should be applied for").defineInRange("antler_regen_duration", antlerRegenDuration, 1, Integer.MAX_VALUE);
-    configAntlerRegenAmplifier = builder.comment("What amplifier should be applied to the Regeneration effect (0 = I, 1 = II, etc)").defineInRange("antler_regen_amplifier", antlerRegenAmplifier, 0, Integer.MAX_VALUE);
-    configAntlerHealthBonus = builder.comment("How much of a health bonus wearing the hat should give (-1 for no bonus, 2 for a single heart, 4 for two hearts, etc").defineInRange("antler_health_bonus", antlerHealthBonus, 0.5, Double.MAX_VALUE);
-    configAntlerDamage = builder.comment("How much damage to the antler hat spawning a spirit deer causes (-1 for no damage)").defineInRange("antler_damage", antlerDamage, -1, Integer.MAX_VALUE);
-    configMaskDamageBonus = builder.comment("How much of a damage to bonus should be provided by the mask (-1 for none)").defineInRange("mask_bonus_damage", maskBonusDamage, -1, Double.MAX_VALUE);
+    configAntlerFrequency = builder.comment("Spawn frequency (1 in X chances per tick while spawn conditions are met, -1 for not at all)")
+        .defineInRange("antler_frequency", antlerFrequency, 0, Integer.MAX_VALUE);
+    configAntlerThreshold = builder.comment("How many hearts under maximum health the player needs to be for a deer to spawn (-1 for any defaultValue under maximum health")
+        .defineInRange("antler_threshold", antlerThreshold, -1, Integer.MAX_VALUE);
+    configAntlerHealing = builder.comment("How much a Spirit Deer should heal for")
+        .defineInRange("antler_healing", antlerHealing, 0.5, Double.MAX_VALUE);
+    configAntlerRegenDuration = builder.comment("How long a duration Regeneration should be applied for")
+        .defineInRange("antler_regen_duration", antlerRegenDuration, 1, Integer.MAX_VALUE);
+    configAntlerRegenAmplifier = builder.comment("What amplifier should be applied to the Regeneration effect (0 = I, 1 = II, etc)")
+        .defineInRange("antler_regen_amplifier", antlerRegenAmplifier, 0, Integer.MAX_VALUE);
+    configAntlerHealthBonus = builder.comment("How much of a health bonus wearing the hat should give (-1 for no bonus, 2 for a single heart, 4 for two hearts, etc")
+        .defineInRange("antler_health_bonus", antlerHealthBonus, 0.5, Double.MAX_VALUE);
+    configAntlerDamage = builder.comment("How much damage to the antler hat spawning a spirit deer causes (-1 for no damage)")
+        .defineInRange("antler_damage", antlerDamage, -1, Integer.MAX_VALUE);
+    configMaskDamageBonus = builder.comment("How much of a damage to bonus should be provided by the mask (-1 for none)")
+        .defineInRange("mask_bonus_damage", maskBonusDamage, -1, Double.MAX_VALUE);
   }
 
   public int getAntlerFrequency() {

@@ -13,9 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -73,13 +71,17 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Nullable
   public BlockState getStateForPlacement(BlockPlaceContext pContext) {
     BlockPos blockpos = pContext.getClickedPos();
-    return blockpos.getY() < 255 && pContext.getLevel().getBlockState(blockpos.above()).canBeReplaced(pContext) && pContext.getLevel().getBlockState(blockpos.above().above()).canBeReplaced(pContext) ? super.getStateForPlacement(pContext) : null;
+    return blockpos.getY() < 255 && pContext.getLevel().getBlockState(blockpos.above())
+        .canBeReplaced(pContext) && pContext.getLevel().getBlockState(blockpos.above().above())
+        .canBeReplaced(pContext) ? super.getStateForPlacement(pContext) : null;
   }
 
   @Override
   public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
-    pLevel.setBlock(pPos.above(), this.defaultBlockState().setValue(PART, StateProperties.Part.MIDDLE).setValue(FACING, pState.getValue(FACING)), 3);
-    pLevel.setBlock(pPos.above().above(), this.defaultBlockState().setValue(PART, StateProperties.Part.TOP).setValue(FACING, pState.getValue(FACING)), 3);
+    pLevel.setBlock(pPos.above(), this.defaultBlockState().setValue(PART, StateProperties.Part.MIDDLE)
+        .setValue(FACING, pState.getValue(FACING)), 3);
+    pLevel.setBlock(pPos.above().above(), this.defaultBlockState().setValue(PART, StateProperties.Part.TOP)
+        .setValue(FACING, pState.getValue(FACING)), 3);
   }
 
   @Override

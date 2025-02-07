@@ -22,10 +22,14 @@ import java.util.*;
 public class GrantStorage implements ICleanable {
   public static final MapCodec<GrantStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          RootsRegistries.SPELLS.byNameCodec().listOf().fieldOf("grantedSpells").forGetter(o -> new ArrayList<>(o.grantedSpells)),
-          RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().fieldOf("grantedModifiers").forGetter(o -> new ArrayList<>(o.grantedModifiers))).apply(instance, GrantStorage::new));
+          RootsRegistries.SPELLS.byNameCodec().listOf().fieldOf("grantedSpells")
+              .forGetter(o -> new ArrayList<>(o.grantedSpells)),
+          RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().fieldOf("grantedModifiers")
+              .forGetter(o -> new ArrayList<>(o.grantedModifiers))).apply(instance, GrantStorage::new));
   public static final Codec<GrantStorage> CODEC = MAP_CODEC.codec();
-  public static final StreamCodec<RegistryFriendlyByteBuf, GrantStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS).apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpells), ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS).apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedModifiers), GrantStorage::new);
+  public static final StreamCodec<RegistryFriendlyByteBuf, GrantStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS)
+      .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpells), ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)
+      .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedModifiers), GrantStorage::new);
 
   private boolean dirty = true;
   private final Set<Spell> grantedSpells;
@@ -119,8 +123,11 @@ public class GrantStorage implements ICleanable {
   public List<LibrarySpell> getLibrarySpells() {
     if (librarySpells == null) {
       librarySpells = new ArrayList<>();
-      grantedSpells.stream().sorted(Comparator.comparing(IDescribed::getDescriptionId)).forEach(o -> librarySpells.add(new LibrarySpell(o.builtInRegistryHolder(), true)));
-      RootsRegistries.SPELLS.stream().filter(o -> !grantedSpells.contains(o)).sorted(Comparator.comparing(IDescribed::getDescriptionId)).forEach(o -> librarySpells.add(new LibrarySpell(o.builtInRegistryHolder(), false)));
+      grantedSpells.stream().sorted(Comparator.comparing(IDescribed::getDescriptionId))
+          .forEach(o -> librarySpells.add(new LibrarySpell(o.builtInRegistryHolder(), true)));
+      RootsRegistries.SPELLS.stream().filter(o -> !grantedSpells.contains(o))
+          .sorted(Comparator.comparing(IDescribed::getDescriptionId))
+          .forEach(o -> librarySpells.add(new LibrarySpell(o.builtInRegistryHolder(), false)));
     }
     return librarySpells;
   }

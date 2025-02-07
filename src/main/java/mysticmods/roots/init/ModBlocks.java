@@ -32,9 +32,13 @@ public class ModBlocks {
   private static final BlockBehaviour.Properties RUNED_STEM_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.CRIMSON_STEM);
   private static final BlockBehaviour.Properties RUNESTONE_BUTTON_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.STONE_BUTTON);
   public static BlockBehaviour.Properties SOIL_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.DIRT);
-  public static final BlockBehaviour.Properties BASE_PROPERTIES = BlockBehaviour.Properties.of().dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.STONE);
-  public static final BlockBehaviour.Properties BASE_WOODEN_PROPERTIES = BlockBehaviour.Properties.of().dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD);
-  public static final BlockBehaviour.Properties BASE_REINFORCED_PROPERTIES = BlockBehaviour.Properties.of().dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(50.0F, 1200.0F);
+  public static final BlockBehaviour.Properties BASE_PROPERTIES = BlockBehaviour.Properties.of().dynamicShape()
+      .forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.STONE);
+  public static final BlockBehaviour.Properties BASE_WOODEN_PROPERTIES = BlockBehaviour.Properties.of().dynamicShape()
+      .forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD);
+  public static final BlockBehaviour.Properties BASE_REINFORCED_PROPERTIES = BlockBehaviour.Properties.of()
+      .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.STONE).requiresCorrectToolForDrops()
+      .strength(50.0F, 1200.0F);
   public static BlockBehaviour.Properties CROP_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT);
 
   public static DeferredHolder<Block, WaterloggedBlock> THATCH = BLOCKS.register("thatch", () -> new WaterloggedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
@@ -61,7 +65,8 @@ public class ModBlocks {
   public static DeferredHolder<Block, SaplingBlock> WILDWOOD_SAPLING = BLOCKS.register("wildwood_sapling", () -> new SaplingBlock(RootsTreeGrowers.WILDWOOD_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
 
   // TODO: Whatever happened to plant types?
-  public static DeferredHolder<Block, PetrifiedFlowerBlock> STONEPETAL = BLOCKS.register("stonepetal", () -> new PetrifiedFlowerBlock(BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS).noOcclusion()));
+  public static DeferredHolder<Block, PetrifiedFlowerBlock> STONEPETAL = BLOCKS.register("stonepetal", () -> new PetrifiedFlowerBlock(BlockBehaviour.Properties.of()
+      .noCollission().instabreak().sound(SoundType.GRASS).noOcclusion()));
   public static DeferredHolder<Block, LeavesBlock> WILDWOOD_LEAVES = BLOCKS.register("wildwood_leaves", () -> new LeavesBlock(WILDWOOD_LEAVES_PROPERTIES));
   public static DeferredHolder<Block, RotatedPillarBlock> RUNED_WILDWOOD_LOG = BLOCKS.register("runed_wildwood_log", () -> new RotatedPillarBlock(RUNED_LOG_PROPERTIES));
   public static DeferredHolder<Block, RotatedPillarBlock> RUNED_SPRUCE_LOG = BLOCKS.register("runed_spruce_log", () -> new RotatedPillarBlock(RUNED_LOG_PROPERTIES));
@@ -73,14 +78,19 @@ public class ModBlocks {
   public static DeferredHolder<Block, RotatedPillarBlock> RUNED_MANGROVE_LOG = BLOCKS.register("runed_mangrove_log", () -> new RotatedPillarBlock(RUNED_LOG_PROPERTIES));
   public static DeferredHolder<Block, RotatedPillarBlock> RUNED_WARPED_STEM = BLOCKS.register("runed_warped_stem", () -> new RotatedPillarBlock(RUNED_STEM_PROPERTIES));
   public static DeferredHolder<Block, RotatedPillarBlock> RUNED_CRIMSON_STEM = BLOCKS.register("runed_crimson_stem", () -> new RotatedPillarBlock(RUNED_STEM_PROPERTIES));
-  public static DeferredHolder<Block, StairBlock> RUNESTONE_STAIRS = BLOCKS.register("runestone_stairs", () -> new StairBlock(ModBlocks.RUNESTONE.get().defaultBlockState(), RUNESTONE_PROPERTIES));
-  public static DeferredHolder<Block, StairBlock> MOSSY_RUNESTONE_STAIRS = BLOCKS.register("mossy_runestone_stairs", () -> new StairBlock(ModBlocks.MOSSY_RUNESTONE.get().defaultBlockState(), RUNESTONE_PROPERTIES));
-  public static DeferredHolder<Block, StairBlock> RUNESTONE_BRICK_STAIRS = BLOCKS.register("runestone_brick_stairs", () -> new StairBlock(ModBlocks.RUNESTONE_BRICK.get().defaultBlockState(), RUNESTONE_PROPERTIES));
-  public static DeferredHolder<Block, StairBlock> RUNESTONE_TILE_STAIRS = BLOCKS.register("runestone_tile_stairs", () -> new StairBlock(ModBlocks.RUNESTONE_TILE.get().defaultBlockState(), RUNESTONE_PROPERTIES));
+  public static DeferredHolder<Block, StairBlock> RUNESTONE_STAIRS = BLOCKS.register("runestone_stairs", () -> new StairBlock(ModBlocks.RUNESTONE.get()
+      .defaultBlockState(), RUNESTONE_PROPERTIES));
+  public static DeferredHolder<Block, StairBlock> MOSSY_RUNESTONE_STAIRS = BLOCKS.register("mossy_runestone_stairs", () -> new StairBlock(ModBlocks.MOSSY_RUNESTONE.get()
+      .defaultBlockState(), RUNESTONE_PROPERTIES));
+  public static DeferredHolder<Block, StairBlock> RUNESTONE_BRICK_STAIRS = BLOCKS.register("runestone_brick_stairs", () -> new StairBlock(ModBlocks.RUNESTONE_BRICK.get()
+      .defaultBlockState(), RUNESTONE_PROPERTIES));
+  public static DeferredHolder<Block, StairBlock> RUNESTONE_TILE_STAIRS = BLOCKS.register("runestone_tile_stairs", () -> new StairBlock(ModBlocks.RUNESTONE_TILE.get()
+      .defaultBlockState(), RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.Stairs> RUNED_STAIRS = BLOCKS.register("runed_stairs", () -> new RunedObsidianBlocks.Stairs(RUNED_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.Stairs> RUNED_BRICK_STAIRS = BLOCKS.register("runed_brick_stairs", () -> new RunedObsidianBlocks.Stairs(RUNED_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.Stairs> RUNED_TILE_STAIRS = BLOCKS.register("runed_tile_stairs", () -> new RunedObsidianBlocks.Stairs(RUNED_PROPERTIES));
-  public static DeferredHolder<Block, StairBlock> WILDWOOD_STAIRS = BLOCKS.register("wildwood_stairs", () -> new StairBlock(ModBlocks.WILDWOOD_PLANKS.get().defaultBlockState(), WILDWOOD_PLANKS_PROPERTIES));
+  public static DeferredHolder<Block, StairBlock> WILDWOOD_STAIRS = BLOCKS.register("wildwood_stairs", () -> new StairBlock(ModBlocks.WILDWOOD_PLANKS.get()
+      .defaultBlockState(), WILDWOOD_PLANKS_PROPERTIES));
   public static DeferredHolder<Block, SlabBlock> RUNESTONE_SLAB = BLOCKS.register("runestone_slab", () -> new SlabBlock(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, SlabBlock> MOSSY_RUNESTONE_SLAB = BLOCKS.register("mossy_runestone_slab", () -> new SlabBlock(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, SlabBlock> RUNESTONE_BRICK_SLAB = BLOCKS.register("runestone_brick_slab", () -> new SlabBlock(RUNESTONE_PROPERTIES));
@@ -123,7 +133,9 @@ public class ModBlocks {
   public static DeferredHolder<Block, ElementalSoilBlock> MAGMATIC_SOIL = BLOCKS.register("magmatic_soil", () -> new ElementalSoilBlock(ElementalType.FIRE, SOIL_PROPERTIES));
   public static DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(ElementalType.EARTH, SOIL_PROPERTIES));
   // TODO all: voxel shapes & bounding boxes
-  public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BlockBehaviour.Properties.of().instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL).noOcclusion()));
+  public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BlockBehaviour.Properties.of()
+      .instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL)
+      .noOcclusion()));
   public static DeferredHolder<Block, RitualPedestalBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal", () -> new RitualPedestalBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = BLOCKS.register("reinforced_ritual_pedestal", () -> new RitualPedestalBlock(BASE_REINFORCED_PROPERTIES));
   public static DeferredHolder<Block, GroveCrafterBlock> GROVE_CRAFTER = BLOCKS.register("grove_crafter", () -> new GroveCrafterBlock(BASE_WOODEN_PROPERTIES));
@@ -137,8 +149,12 @@ public class ModBlocks {
   public static DeferredHolder<Block, GroveStoneBlock> PRIMAL_GROVE_STONE = BLOCKS.register("primal_grove_stone", () -> new GroveStoneBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, IncenseBurnerBlock> INCENSE_BURNER = BLOCKS.register("incense_burner", () -> new IncenseBurnerBlock(BASE_PROPERTIES));
   public static DeferredHolder<Block, MortarBlock> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BASE_PROPERTIES));
-  public static DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock( BlockBehaviour.Properties.of().dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD).lightLevel(o -> o.getValue(PyreBlock.LIT) ? 15 : 0)));
-  public static DeferredHolder<Block, PyreBlock> SOUL_PYRE = BLOCKS.register("soul_pyre", () -> new PyreBlock(BlockBehaviour.Properties.of().dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD).lightLevel(o -> o.getValue(PyreBlock.LIT) ? 2 : 0)));
+  public static DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()
+      .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(o -> o.getValue(PyreBlock.LIT) ? 15 : 0)));
+  public static DeferredHolder<Block, PyreBlock> SOUL_PYRE = BLOCKS.register("soul_pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()
+      .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(o -> o.getValue(PyreBlock.LIT) ? 2 : 0)));
   public static DeferredHolder<Block, PyreBlock> REINFORCED_PYRE = BLOCKS.register("reinforced_pyre", () -> new PyreBlock(BASE_REINFORCED_PROPERTIES));
   public static DeferredHolder<Block, PyreBlock> REINFORCED_SOUL_PYRE = BLOCKS.register("reinforced_soul_pyre", () -> new PyreBlock(BASE_REINFORCED_PROPERTIES));
   public static DeferredHolder<Block, DecorativePyreBlock> DECORATIVE_PYRE = BLOCKS.register("decorative_pyre", () -> new DecorativePyreBlock(BASE_WOODEN_PROPERTIES.lightLevel((o) -> 15)));

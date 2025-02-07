@@ -5,12 +5,12 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.api.test.world.WorldTestType;
 import net.minecraft.core.Registry;
@@ -22,14 +22,22 @@ public class RootsRegistries {
   public static final Registry<Ritual> RITUALS = new RegistryBuilder<>(Keys.RITUALS).sync(true).create();
   public static final Registry<Spell> SPELLS = new RegistryBuilder<>(Keys.SPELLS).sync(true).create();
   public static final Registry<Herb> HERBS = new RegistryBuilder<>(Keys.HERBS).sync(true).create();
-  public static final Registry<SpellModifier> SPELL_MODIFIERS = new RegistryBuilder<>(Keys.SPELL_MODIFIERS).sync(true).create();
-  public static final Registry<PropertyType<?>> PROPERTY_TYPES = new RegistryBuilder<>(Keys.PROPERTY_TYPES).sync(true).create();
-  public static final Registry<PropertySerializer<?>> PROPERTY_SERIALIZERS = new RegistryBuilder<>(Keys.PROPERTY_SERIALIZERS).sync(true).create();
-  public static final Registry<LevelCondition> LEVEL_CONDITIONS = new RegistryBuilder<>(Keys.LEVEL_CONDITIONS).sync(true).create();
-  public static final Registry<PlayerCondition> PLAYER_CONDITIONS = new RegistryBuilder<>(Keys.PLAYER_CONDITIONS).sync(true).create();
-  public static final Registry<EntityTestType<?>> ENTITY_TEST_TYPES = new RegistryBuilder<>(Keys.ENTITY_TEST_TYPES).sync(true).create();
-  public static final Registry<WorldTestType<?>> WORLD_TEST_TYPES = new RegistryBuilder<>(Keys.WORLD_TEST_TYPES).sync(true).create();
-  public static final Registry<SnapshotType<?>> SNAPSHOT_TYPES = new RegistryBuilder<>(Keys.SNAPSHOT_TYPES).sync(true).create();
+  public static final Registry<SpellModifier> SPELL_MODIFIERS = new RegistryBuilder<>(Keys.SPELL_MODIFIERS).sync(true)
+      .create();
+  public static final Registry<PropertyType<?>> PROPERTY_TYPES = new RegistryBuilder<>(Keys.PROPERTY_TYPES).sync(true)
+      .create();
+  public static final Registry<PropertySerializer<?>> PROPERTY_SERIALIZERS = new RegistryBuilder<>(Keys.PROPERTY_SERIALIZERS).sync(true)
+      .create();
+  public static final Registry<LevelCondition> LEVEL_CONDITIONS = new RegistryBuilder<>(Keys.LEVEL_CONDITIONS).sync(true)
+      .create();
+  public static final Registry<PlayerCondition> PLAYER_CONDITIONS = new RegistryBuilder<>(Keys.PLAYER_CONDITIONS).sync(true)
+      .create();
+  public static final Registry<EntityTestType<?>> ENTITY_TEST_TYPES = new RegistryBuilder<>(Keys.ENTITY_TEST_TYPES).sync(true)
+      .create();
+  public static final Registry<WorldTestType<?>> WORLD_TEST_TYPES = new RegistryBuilder<>(Keys.WORLD_TEST_TYPES).sync(true)
+      .create();
+  public static final Registry<SnapshotType<?>> SNAPSHOT_TYPES = new RegistryBuilder<>(Keys.SNAPSHOT_TYPES).sync(true)
+      .create();
   public static final Registry<Grove> GROVES = new RegistryBuilder<>(Keys.GROVES).sync(true).create();
 
   public static class Keys {

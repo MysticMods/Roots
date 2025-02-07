@@ -179,7 +179,8 @@ public class VoxelUtil {
     // Rotate them and convert them each back into a voxel shape
     for (AABB sourceBoundingBox : sourceBoundingBoxes) {
       // Make the bounding box be centered around the middle, and then move it back after rotating
-      rotatedPieces.add(Shapes.create(rotateFunction.apply(sourceBoundingBox.move(fromOrigin.x, fromOrigin.y, fromOrigin.z)).move(-fromOrigin.x, -fromOrigin.z, -fromOrigin.z)));
+      rotatedPieces.add(Shapes.create(rotateFunction.apply(sourceBoundingBox.move(fromOrigin.x, fromOrigin.y, fromOrigin.z))
+          .move(-fromOrigin.x, -fromOrigin.z, -fromOrigin.z)));
     }
     return combine(rotatedPieces);
   }

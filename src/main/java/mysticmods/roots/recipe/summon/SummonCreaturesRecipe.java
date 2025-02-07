@@ -7,7 +7,6 @@ import mysticmods.roots.api.recipe.RootsTileRecipe;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -75,7 +74,7 @@ public class SummonCreaturesRecipe extends RootsTileRecipe<SummonCreaturesInvent
   public static class Builder {
     private EntityType<?> entity;
 
-    protected Builder () {
+    protected Builder() {
 
     }
 
@@ -84,15 +83,15 @@ public class SummonCreaturesRecipe extends RootsTileRecipe<SummonCreaturesInvent
       return this;
     }
 
-    public SummonCreaturesRecipe build (BaseRecipeData data) {
+    public SummonCreaturesRecipe build(BaseRecipeData data) {
       return new SummonCreaturesRecipe(data, entity);
     }
 
-    public SummonCreaturesRecipe build (BaseRecipeData.Builder data) {
+    public SummonCreaturesRecipe build(BaseRecipeData.Builder data) {
       return build(data.build());
     }
 
-    public static Builder create () {
+    public static Builder create() {
       return new Builder();
     }
   }

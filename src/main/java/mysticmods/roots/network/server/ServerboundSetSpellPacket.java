@@ -30,12 +30,12 @@ public record ServerboundSetSpellPacket(@Nullable InteractionHand hand, int inve
     this(hand.orElse(null), inventorySlot, staffSlot, spell);
   }
 
-  public ServerboundSetSpellPacket (InteractionHand hand, int staffSlot, Spell spell) {
+  public ServerboundSetSpellPacket(InteractionHand hand, int staffSlot, Spell spell) {
     this(hand, -1, staffSlot, spell);
   }
 
-  public ServerboundSetSpellPacket (int inventorySlot, int staffSlot, Spell spell) {
-    this((InteractionHand)null, inventorySlot, staffSlot, spell);
+  public ServerboundSetSpellPacket(int inventorySlot, int staffSlot, Spell spell) {
+    this((InteractionHand) null, inventorySlot, staffSlot, spell);
   }
 
   @Override

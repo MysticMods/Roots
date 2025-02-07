@@ -99,7 +99,8 @@ public class GrowthUtil {
       for (Property<?> prop : state.getProperties()) {
         if (AGE_PROPERTIES.contains(prop)) {
           IntegerProperty ageProp = (IntegerProperty) prop;
-          int max = ageProp.getAllValues().mapToInt(Property.Value::value).max().orElseThrow(NoSuchElementException::new);
+          int max = ageProp.getAllValues().mapToInt(Property.Value::value).max()
+              .orElseThrow(NoSuchElementException::new);
           result = new CropData(block, ageProp, max);
           CROP_AGES.put(block, result);
           return result;
@@ -107,7 +108,8 @@ public class GrowthUtil {
       }
       for (Property<?> prop : state.getProperties()) {
         if (prop instanceof IntegerProperty intProp && prop.getName().equals("age")) {
-          int max = intProp.getAllValues().mapToInt(Property.Value::value).max().orElseThrow(NoSuchElementException::new);
+          int max = intProp.getAllValues().mapToInt(Property.Value::value).max()
+              .orElseThrow(NoSuchElementException::new);
           result = new CropData(block, intProp, max);
           CROP_AGES.put(block, result);
           return result;

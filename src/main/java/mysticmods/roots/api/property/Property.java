@@ -16,9 +16,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public interface Property<T> {
-  Codec<Property<?>> CODEC = RootsRegistries.PROPERTY_SERIALIZERS.byNameCodec().dispatch(Property::getSerializer, PropertySerializer::codec);
-  Codec<Property<?>> FULL_CODEC = RootsRegistries.PROPERTY_SERIALIZERS.byNameCodec().dispatch(Property::getSerializer, PropertySerializer::fullCodec);
-  StreamCodec<RegistryFriendlyByteBuf, Property<?>> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PROPERTY_SERIALIZERS).dispatch(Property::getSerializer, PropertySerializer::streamCodec);
+  Codec<Property<?>> CODEC = RootsRegistries.PROPERTY_SERIALIZERS.byNameCodec()
+      .dispatch(Property::getSerializer, PropertySerializer::codec);
+  Codec<Property<?>> FULL_CODEC = RootsRegistries.PROPERTY_SERIALIZERS.byNameCodec()
+      .dispatch(Property::getSerializer, PropertySerializer::fullCodec);
+  StreamCodec<RegistryFriendlyByteBuf, Property<?>> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PROPERTY_SERIALIZERS)
+      .dispatch(Property::getSerializer, PropertySerializer::streamCodec);
 
   String getComment();
 

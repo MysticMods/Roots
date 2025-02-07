@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 
 public class Grove implements IStyled {
   private Style style;
-  private ChatFormatting color;
+  private final ChatFormatting color;
   private String descriptionId;
 
   public Grove(ChatFormatting color) {

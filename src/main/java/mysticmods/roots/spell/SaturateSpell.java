@@ -82,7 +82,9 @@ public class SaturateSpell extends Spell {
       return 0;
     }
 
-    List<ItemStack> sortedFoods = foodsToSlots.keySet().stream().sorted((o1, o2) -> Float.compare(saturation(o1, pPlayer, instance), saturation(o2, pPlayer, instance))).toList();
+    List<ItemStack> sortedFoods = foodsToSlots.keySet().stream()
+        .sorted((o1, o2) -> Float.compare(saturation(o1, pPlayer, instance), saturation(o2, pPlayer, instance)))
+        .toList();
 
     for (ItemStack stack : sortedFoods) {
       float thisSaturation = saturation(stack, pPlayer, instance);

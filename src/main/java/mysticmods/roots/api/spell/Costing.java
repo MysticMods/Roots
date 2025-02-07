@@ -32,7 +32,7 @@ public class Costing {
 
   private boolean noCharge = false;
 
-  public Costing (ISpellInstance spell) {
+  public Costing(ISpellInstance spell) {
     this.spell = spell;
     modifierMap.defaultReturnValue(false);
     herbMapCache = new HashMap<>();
@@ -80,7 +80,8 @@ public class Costing {
             ItemStack inSlot2 = cap.getStackInSlot(j);
             Herb herb2 = Herb.getHerb(inSlot2);
             if (herb2 != null) {
-              herbMap.computeIfAbsent(herb2, k -> new ArrayList<>()).add(new HerbEntry(HerbEntryType.CAPABILITY, herb2, i, inSlot2.getCount(), j));
+              herbMap.computeIfAbsent(herb2, k -> new ArrayList<>())
+                  .add(new HerbEntry(HerbEntryType.CAPABILITY, herb2, i, inSlot2.getCount(), j));
             }
           }
         }

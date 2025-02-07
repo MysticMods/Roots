@@ -7,11 +7,10 @@ import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
-import net.minecraft.core.registries.BuiltInRegistries;
+import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,15 +25,20 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataMaps {
-  public static final DataMapType<Ritual, ItemStack> RITUAL_DISPLAY_ITEM = DataMapType.builder(RootsAPI.rl("ritual_item_data"), RootsRegistries.Keys.RITUALS, ItemStack.CODEC).synced(ItemStack.CODEC, false)
+  public static final DataMapType<Ritual, ItemStack> RITUAL_DISPLAY_ITEM = DataMapType.builder(RootsAPI.rl("ritual_item_data"), RootsRegistries.Keys.RITUALS, ItemStack.CODEC)
+      .synced(ItemStack.CODEC, false)
       .build();
-  public static final DataMapType<Spell, ItemStack> SPELL_DISPLAY_ITEM = DataMapType.builder(RootsAPI.rl("spell_item_data"), RootsRegistries.Keys.SPELLS, ItemStack.CODEC).synced(ItemStack.CODEC, false)
+  public static final DataMapType<Spell, ItemStack> SPELL_DISPLAY_ITEM = DataMapType.builder(RootsAPI.rl("spell_item_data"), RootsRegistries.Keys.SPELLS, ItemStack.CODEC)
+      .synced(ItemStack.CODEC, false)
       .build();
-  public static final DataMapType<SpellModifier, SpellModifier> SPELL_MODIFIER_PARENT = DataMapType.builder(RootsAPI.rl("spell_modifier_parent"), RootsRegistries.Keys.SPELL_MODIFIERS, RootsRegistries.SPELL_MODIFIERS.byNameCodec()).synced(RootsRegistries.SPELL_MODIFIERS.byNameCodec(), false)
+  public static final DataMapType<SpellModifier, SpellModifier> SPELL_MODIFIER_PARENT = DataMapType.builder(RootsAPI.rl("spell_modifier_parent"), RootsRegistries.Keys.SPELL_MODIFIERS, RootsRegistries.SPELL_MODIFIERS.byNameCodec())
+      .synced(RootsRegistries.SPELL_MODIFIERS.byNameCodec(), false)
       .build();
-  public static final DataMapType<SpellModifier, Spell> SPELL_MODIFIER_SPELL = DataMapType.builder(RootsAPI.rl("spell_modifier_spell"), RootsRegistries.Keys.SPELL_MODIFIERS, RootsRegistries.SPELLS.byNameCodec()).synced(RootsRegistries.SPELLS.byNameCodec(), false)
+  public static final DataMapType<SpellModifier, Spell> SPELL_MODIFIER_SPELL = DataMapType.builder(RootsAPI.rl("spell_modifier_spell"), RootsRegistries.Keys.SPELL_MODIFIERS, RootsRegistries.SPELLS.byNameCodec())
+      .synced(RootsRegistries.SPELLS.byNameCodec(), false)
       .build();
-  public static final DataMapType<Grove, GroveData> GROVE_DATA = DataMapType.builder(RootsAPI.rl("grove_data"), RootsRegistries.Keys.GROVES, GroveData.CODEC).synced(GroveData.CODEC, false)
+  public static final DataMapType<Grove, GroveData> GROVE_DATA = DataMapType.builder(RootsAPI.rl("grove_data"), RootsRegistries.Keys.GROVES, GroveData.CODEC)
+      .synced(GroveData.CODEC, false)
       .build();
   public static final AdvancedDataMapType<Spell, List<Cost>, CostRemover<Spell>> SPELL_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_cost_data"), RootsRegistries.Keys.SPELLS, CostRemover.CODEC)
       .synced(CostRemover.CODEC, false)
