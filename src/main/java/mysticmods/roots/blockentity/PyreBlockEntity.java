@@ -477,6 +477,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   public void stopRitual() {
+    if (currentRitual != null) {
+      currentRitual.ends(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+    }
     setCurrentRitual(null);
     this.lifetime = -1;
     setChanged();
