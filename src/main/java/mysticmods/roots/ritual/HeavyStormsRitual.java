@@ -37,12 +37,10 @@ public class HeavyStormsRitual extends Ritual {
     lightningCount = properties.get(ModRituals.HEAVY_STORMS_LIGHTNING_COUNT);
   }
 
-  @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = super.getProperties();
+  protected void buildProperties (List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
     properties.add(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);
     properties.add(ModRituals.HEAVY_STORMS_LIGHTNING_COUNT);
-    return properties;
   }
 
   @Override

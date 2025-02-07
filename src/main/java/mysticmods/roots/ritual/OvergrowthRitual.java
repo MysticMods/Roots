@@ -25,6 +25,7 @@ import java.util.List;
 
 public class OvergrowthRitual extends Ritual {
   private static List<Direction> HORIZONTALS;
+  // TODO: This *must* be on the block entity
   private BlockPos lastChanged;
 
   private static List<Direction> horizontals() {

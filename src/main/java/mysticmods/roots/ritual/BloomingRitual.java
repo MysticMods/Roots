@@ -107,10 +107,9 @@ public class BloomingRitual extends Ritual {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> result = super.getProperties();
-    result.add(ModRituals.BLOOMING_COUNT);
-    return result;
+  protected void buildProperties (List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModRituals.BLOOMING_COUNT);
   }
 
   @Override

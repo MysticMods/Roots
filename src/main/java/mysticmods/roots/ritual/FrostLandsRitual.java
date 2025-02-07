@@ -212,9 +212,8 @@ public class FrostLandsRitual extends Ritual {
     return false;
   }
 
-  @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = super.getProperties();
+  protected void buildProperties (List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
     properties.add(ModRituals.FROST_LANDS_INTERVAL_HEAL);
     properties.add(ModRituals.FROST_LANDS_SPAWN_CHANCE);
     properties.add(ModRituals.FROST_LANDS_FLUID_COUNT);
@@ -222,7 +221,6 @@ public class FrostLandsRitual extends Ritual {
     properties.add(ModRituals.FROST_LANDS_LAYER_CHANCE);
     properties.add(ModRituals.FROST_LANDS_POWDER_CHANCE);
     properties.add(ModRituals.FROST_LANDS_ICE_CHANCE);
-    return properties;
   }
 
   @Override

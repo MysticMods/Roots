@@ -124,13 +124,12 @@ public class AnimalHarvestRitual extends Ritual {
   }
 
   @Override
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = super.getProperties();
+  public void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
     properties.add(ModRituals.ANIMAL_HARVEST_COUNT);
     properties.add(ModRituals.ANIMAL_HARVEST_GLOW_DURATION);
     properties.add(ModRituals.ANIMAL_HARVEST_LOOTING_VALUE);
     properties.add(ModRituals.ANIMAL_HARVEST_LOOTING_CHANCE);
-    return properties;
   }
 
   @Override

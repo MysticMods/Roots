@@ -90,8 +90,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     aabb = AABB.of(getBoundingBox());
   }
 
-  public List<PropertyHolder<?>> getProperties() {
-    List<PropertyHolder<?>> properties = new ArrayList<>();
+  protected void buildProperties (List<PropertyHolder<?>> properties) {
     if (getDurationProperty() != null) {
       properties.add(getDurationProperty());
     }
@@ -104,6 +103,11 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     if (getIntervalProperty() != null) {
       properties.add(getIntervalProperty());
     }
+  }
+
+  public List<PropertyHolder<?>> getProperties() {
+    List<PropertyHolder<?>> properties = new ArrayList<>();
+    buildProperties(properties);
     return properties;
   }
 
