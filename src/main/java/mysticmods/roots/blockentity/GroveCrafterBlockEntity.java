@@ -1,5 +1,6 @@
 package mysticmods.roots.blockentity;
 
+import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
@@ -56,7 +57,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     if (inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
-      GroveCrafting playerCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals()), this, player);
+      GroveCrafting playerCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS)), this, player);
       if (cachedRecipe == null) {
         cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
       }
@@ -97,18 +98,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     return InteractionResult.FAIL;
   }
 
-  protected List<PedestalBlockEntity> pedestals() {
-    List<PedestalBlockEntity> pedestals = new ArrayList<>();
-    for (BlockPos pedestal : pedestalPositions()) {
-      if (getLevel().getBlockEntity(pedestal) instanceof PedestalBlockEntity pedestalBlockEntity) {
-        pedestals.add(pedestalBlockEntity);
-      }
-    }
-    return pedestals;
-  }
-
   protected void revalidateRecipe() {
-    List<PedestalBlockEntity> pedestals = pedestals();
+    List<Pair<BlockPos, PedestalBlockEntity>> pedestals = pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
     if (pedestals.isEmpty()) {
       cachedRecipe = null;
       setChanged();
@@ -148,24 +139,6 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   @Override
   public int getRadiusZ() {
     return 3;
-  }
-
-  public List<BlockPos> pedestalPositions() {
-    List<BlockPos> pedestalPositions = new ArrayList<>();
-    if (getBoundingBox() != null) {
-      BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
-        BlockState state = getLevel().getBlockState(pos);
-        if (state.is(RootsTags.Blocks.GROVE_PEDESTALS) && !state.is(RootsTags.Blocks.DISPLAY_PEDESTALS)) {
-          if (getLevel().getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
-            // Already checks for empty
-            if (!pedestal.getHeldItem().isEmpty()) {
-              pedestalPositions.add(pos.immutable());
-            }
-          }
-        }
-      });
-    }
-    return pedestalPositions;
   }
 
 /*  @Override

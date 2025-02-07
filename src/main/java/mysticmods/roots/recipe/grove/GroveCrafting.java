@@ -1,8 +1,11 @@
 package mysticmods.roots.recipe.grove;
 
+import com.mojang.datafixers.util.Pair;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.recipe.crafting.RootsTileCrafting;
 import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,8 +20,11 @@ public class GroveCrafting extends RootsTileCrafting<GroveInventoryWrapper, Grov
 
   public List<ItemStack> popItems() {
     List<ItemStack> result = new ArrayList<>();
-    for (PedestalBlockEntity pedestal : getHandler().getPedestals()) {
-      result.add(pedestal.popOne());
+    if (getBlockEntity() == null) {
+      return result;
+    }
+    for (Pair<BlockPos, PedestalBlockEntity> entry : getBlockEntity().pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS)) {
+      result.add(entry.getSecond().popOne());
     }
     return result;
   }

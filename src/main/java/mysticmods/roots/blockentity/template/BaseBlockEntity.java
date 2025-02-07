@@ -1,9 +1,12 @@
 package mysticmods.roots.blockentity.template;
 
+import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.BoundedBlockEntity;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.blockentity.PedestalBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -11,9 +14,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +43,25 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
 
   public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
+  }
+
+  // TODO: Some sort of caching
+  public List<Pair<BlockPos, PedestalBlockEntity>> pedestals (TagKey<Block> include, TagKey<Block> exclude) {
+    List<Pair<BlockPos, PedestalBlockEntity>> pedestalPositions = new ArrayList<>();
+    if (getBoundingBox() != null) {
+      BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
+        BlockState state = getLevel().getBlockState(pos);
+        if (state.is(include) && !state.is(exclude)) {
+          if (getLevel().getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
+            // Already checks for empty
+            if (!pedestal.getHeldItem().isEmpty()) {
+              pedestalPositions.add(new Pair<>(pos.immutable(), pedestal));
+            }
+          }
+        }
+      });
+    }
+    return pedestalPositions;
   }
 
   public void updateViaState() {
