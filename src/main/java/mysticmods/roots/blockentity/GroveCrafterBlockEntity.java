@@ -10,7 +10,7 @@ import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.grove.GroveCrafting;
-import mysticmods.roots.recipe.grove.GroveInventoryWrapper;
+import mysticmods.roots.recipe.PedestalInventoryWrapper;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
@@ -34,7 +34,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity {
@@ -57,7 +56,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     if (inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
-      GroveCrafting playerCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS)), this, player);
+      GroveCrafting playerCrafting = new GroveCrafting(new PedestalInventoryWrapper(pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS)), this, player);
       if (cachedRecipe == null) {
         cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
       }
@@ -106,7 +105,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       updateViaState();
       return;
     }
-    GroveCrafting playerlessCrafting = new GroveCrafting(new GroveInventoryWrapper(pedestals), this, null);
+    GroveCrafting playerlessCrafting = new GroveCrafting(new PedestalInventoryWrapper(pedestals), this, null);
     boolean changed = false;
     if (cachedRecipe == null) {
       cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerlessCrafting, getLevel());

@@ -12,6 +12,8 @@ import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
+import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
+import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityCrafting;
@@ -25,7 +27,7 @@ public class ResolvedRecipes {
   public static final ResolvingRecipeType<Void, GroveCrafting, GroveRecipe> GROVE = new ResolvingRecipeType<>(ModRecipes.GROVE, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
-  public static final ResolvingRecipeType<Spell, MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>((ModRecipes.MORTAR), (o1, o2) -> Integer.compare(o1.id()
+  public static final ResolvingRecipeType<Spell, MortarCrafting, MortarRecipe> MORTAR = new ResolvingRecipeType<>(ModRecipes.MORTAR, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), o -> {
     if (o.getUnlocks().isEmpty()) {
@@ -38,16 +40,19 @@ public class ResolvedRecipes {
 
     return null;
   });
-  public static final ResolvingRecipeType<Ritual, PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>((ModRecipes.PYRE), (o1, o2) -> Integer.compare(o1.id()
+  public static final ResolvingRecipeType<Ritual, PyreCrafting, PyreRecipe> PYRE = new ResolvingRecipeType<>(ModRecipes.PYRE, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), PyreRecipe::getRitual);
-  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, RunicBlockRecipe> RUNIC_BLOCK = new ResolvingRecipeType<>((ModRecipes.RUNIC_BLOCK), (o1, o2) -> Integer.compare(o1.id()
+  public static final ResolvingRecipeType<Void, PyrePedestalCrafting, SummonCreaturesRecipe> SUMMON_CREATURES = new ResolvingRecipeType<>(ModRecipes.SUMMON_CREATURES, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
-  public static final ResolvingRecipeType<Void, RunicEntityCrafting, RunicEntityRecipe> RUNIC_ENTITY = new ResolvingRecipeType<>((ModRecipes.RUNIC_ENTITY), (o1, o2) -> Integer.compare(o1.id()
+  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, RunicBlockRecipe> RUNIC_BLOCK = new ResolvingRecipeType<>(ModRecipes.RUNIC_BLOCK, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
-  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, BarkRecipe> BARK = new ResolvingRecipeType<>((ModRecipes.BARK), (o1, o2) -> Integer.compare(o1.id()
+  public static final ResolvingRecipeType<Void, RunicEntityCrafting, RunicEntityRecipe> RUNIC_ENTITY = new ResolvingRecipeType<>(ModRecipes.RUNIC_ENTITY, (o1, o2) -> Integer.compare(o1.id()
+      .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
+      .getPriority())), null);
+  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, BarkRecipe> BARK = new ResolvingRecipeType<>(ModRecipes.BARK, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
 
@@ -59,6 +64,7 @@ public class ResolvedRecipes {
     event.addListener(BARK);
     event.addListener(RUNIC_BLOCK);
     event.addListener(RUNIC_ENTITY);
+    event.addListener(SUMMON_CREATURES);
   }
 
   public static void reset() {
@@ -68,5 +74,6 @@ public class ResolvedRecipes {
     BARK.reset();
     RUNIC_BLOCK.reset();
     RUNIC_ENTITY.reset();
+    SUMMON_CREATURES.reset();
   }
 }

@@ -6,7 +6,6 @@ import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
 
-// TODO:
 public class PyreCrafting extends RootsTileCrafting<PyreInventory, PyreBlockEntity> {
   public PyreCrafting(PyreInventory handler, PyreBlockEntity blockEntity, @Nullable Player player) {
     super(handler, blockEntity, player);

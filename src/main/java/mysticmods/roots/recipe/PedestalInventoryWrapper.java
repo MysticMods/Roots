@@ -1,4 +1,4 @@
-package mysticmods.roots.recipe.grove;
+package mysticmods.roots.recipe;
 
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
@@ -8,8 +8,8 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 
 import java.util.List;
 
-public class GroveInventoryWrapper extends CombinedInvWrapper {
-  public GroveInventoryWrapper(List<Pair<BlockPos, PedestalBlockEntity>> pairs) {
+public class PedestalInventoryWrapper extends CombinedInvWrapper {
+  public PedestalInventoryWrapper(List<Pair<BlockPos, PedestalBlockEntity>> pairs) {
     super(pairs.stream().map(Pair::getSecond).map(PedestalBlockEntity::getInventory).toArray(IItemHandlerModifiable[]::new));
   }
 }
