@@ -7,6 +7,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.api.spell.SpellInstanceData;
 import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -239,13 +240,14 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
   }
 
   public record SpellSlot(int slot, Spell spell, Set<SpellModifier> enabledModifiers,
-                          int cooldown) implements ISpellInstance {
+                          int cooldown, SpellInstanceData data) implements ISpellInstance {
     public static MapCodec<SpellSlot> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codec.INT.fieldOf("slot").forGetter(SpellSlot::slot),
         RootsRegistries.SPELLS.byNameCodec().fieldOf("spell").forGetter(SpellSlot::spell),
         RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().xmap(HashSet::new, ArrayList::new)
             .fieldOf("enabledModifiers").forGetter(o -> new HashSet<>(o.enabledModifiers)),
-        Codec.INT.fieldOf("cooldown").forGetter(SpellSlot::cooldown)
+        Codec.INT.fieldOf("cooldown").forGetter(SpellSlot::cooldown),
+        SpellInstanceData.CODEC.optionalFieldOf("data").forGetter(o -> Optional.ofNullable(o.data))
     ).apply(instance, SpellSlot::new));
     public static StreamCodec<RegistryFriendlyByteBuf, SpellSlot> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.VAR_INT, SpellSlot::slot,
@@ -253,12 +255,18 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
         ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS).apply(ByteBufCodecs.list())
             .map(HashSet::new, ArrayList::new), SpellSlot::enabledModifiers,
         ByteBufCodecs.VAR_INT, SpellSlot::cooldown,
+        ByteBufCodecs.optional(SpellInstanceData.STREAM_CODEC), o -> Optional.ofNullable(o.data),
         SpellSlot::new
     );
     public static Codec<SpellSlot> CODEC = MAP_CODEC.codec();
 
     public SpellSlot(int slot, Spell spell, Set<SpellModifier> enabledModifiers) {
-      this(slot, spell, enabledModifiers, 0);
+      this(slot, spell, enabledModifiers, 0, new SpellInstanceData());
+    }
+
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    public SpellSlot(int slot, Spell spell, Set<SpellModifier> spellModifiers, int cooldown, Optional<SpellInstanceData> spellInstanceData) {
+      this(slot, spell, spellModifiers, cooldown, spellInstanceData.orElse(null));
     }
 
     @Override
@@ -280,13 +288,20 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return enabledModifiers.contains(modifier);
     }
 
+    public SpellSlot withData (SpellInstanceData data) {
+      if (data.equals(this.data)) {
+        return this;
+      }
+      return new SpellSlot(slot, spell, enabledModifiers, cooldown, data);
+    }
+
     public SpellSlot withoutModifier(SpellModifier modifier) {
       if (!hasModifier(modifier)) {
         return copy();
       }
       Set<SpellModifier> modifiers = new HashSet<>(enabledModifiers);
       modifiers.remove(modifier);
-      return new SpellSlot(slot, spell, modifiers, cooldown);
+      return new SpellSlot(slot, spell, modifiers, cooldown, data);
     }
 
     public SpellSlot withModifier(SpellModifier modifier) {
@@ -295,19 +310,19 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       }
       Set<SpellModifier> modifiers = new HashSet<>(enabledModifiers);
       modifiers.add(modifier);
-      return new SpellSlot(slot, spell, modifiers, cooldown);
+      return new SpellSlot(slot, spell, modifiers, cooldown, data);
     }
 
     public SpellSlot withCooldown(int cooldown) {
-      return new SpellSlot(slot, spell, enabledModifiers, cooldown);
+      return new SpellSlot(slot, spell, enabledModifiers, cooldown, data);
     }
 
     public SpellSlot withSlot(int slot) {
-      return new SpellSlot(slot, spell, enabledModifiers, cooldown);
+      return new SpellSlot(slot, spell, enabledModifiers, cooldown, data);
     }
 
     public SpellSlot copy() {
-      return new SpellSlot(slot, spell, enabledModifiers, cooldown);
+      return new SpellSlot(slot, spell, enabledModifiers, cooldown, data);
     }
 
     @Override
@@ -315,18 +330,16 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       if (o == null || getClass() != o.getClass()) return false;
 
       SpellSlot spellSlot = (SpellSlot) o;
-      if (spellSlot.enabledModifiers.size() != enabledModifiers.size()) {
-        return false;
-      }
-      return slot == spellSlot.slot && cooldown == spellSlot.cooldown && Objects.equals(spell, spellSlot.spell) && Objects.equals(enabledModifiers, spellSlot.enabledModifiers);
+      return slot == spellSlot.slot && cooldown == spellSlot.cooldown && spell.equals(spellSlot.spell) && Objects.equals(data, spellSlot.data) && enabledModifiers.equals(spellSlot.enabledModifiers);
     }
 
     @Override
     public int hashCode() {
       int result = slot;
-      result = 31 * result + Objects.hashCode(spell);
-      result = 31 * result + Objects.hashCode(enabledModifiers);
+      result = 31 * result + spell.hashCode();
+      result = 31 * result + enabledModifiers.hashCode();
       result = 31 * result + cooldown;
+      result = 31 * result + Objects.hashCode(data);
       return result;
     }
   }

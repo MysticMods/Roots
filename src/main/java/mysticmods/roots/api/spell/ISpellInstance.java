@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
 import java.util.Set;
 
 public interface ISpellInstance extends SpellLike {
@@ -43,6 +44,11 @@ public interface ISpellInstance extends SpellLike {
   // Returns length of cooldown
   default int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
     return getSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
+  }
+
+  @Nullable
+  default SpellInstanceData getSpellData () {
+    return null;
   }
 
   @Override
