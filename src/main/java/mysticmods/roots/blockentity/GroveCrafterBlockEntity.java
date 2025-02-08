@@ -56,7 +56,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     if (inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
-      GroveCrafting playerCrafting = new GroveCrafting(new PedestalInventoryWrapper(pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS)), this, player);
+      GroveCrafting playerCrafting = new GroveCrafting(this, player);
       if (cachedRecipe == null) {
         cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
       }

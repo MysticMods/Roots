@@ -61,7 +61,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     return true;
   }
 
-  public void start (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+  public void starts(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
   public void ends (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {

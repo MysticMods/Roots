@@ -21,6 +21,7 @@ import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
+import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
@@ -80,6 +81,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
   };
   private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
+  private PyrePedestalCrafting playerlessPedestalCrafting;
   private final List<ItemStack> storedItems = new ArrayList<>();
   // TODO: Last recipe is not being saved properly
   private RecipeHolder<PyreRecipe> lastRecipe = null;
@@ -235,7 +237,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     this.lastUuid = null;
     if (currentRitual != null) {
       this.lifetime = currentRitual.getDuration();
-      this.currentRitual.start(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+      this.currentRitual.starts(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
     } else {
       RootsAPI.LOG.error("tried to start a ritual but the ritual is null");
     }
@@ -451,6 +453,17 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return ritual.getRadiusXZ();
   }
 
+  public PyrePedestalCrafting getPedestalCrafting() {
+    if (playerlessPedestalCrafting == null) {
+      playerlessPedestalCrafting = new PyrePedestalCrafting(this, null);
+    }
+    return playerlessPedestalCrafting;
+  }
+
+  public void clearPedestalCrafting() {
+    this.playerlessPedestalCrafting = null;
+  }
+
   @Override
   // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
@@ -488,7 +501,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Nullable
-  private Player getLastPlayer() {
+  public Player getLastPlayer() {
     if (lastPlayer != null) {
       return lastPlayer;
     }

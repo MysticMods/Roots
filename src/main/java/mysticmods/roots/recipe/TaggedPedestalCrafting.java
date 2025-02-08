@@ -19,12 +19,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TaggedPedestalCrafting<H extends IItemHandler, T extends BaseBlockEntity> extends RootsTileCrafting<H, T> {
+public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends RootsTileCrafting<PedestalInventoryWrapper, T> {
   private final TagKey<Block> includeTag;
   private final TagKey<Block> excludeTag;
 
-  public TaggedPedestalCrafting(TagKey<Block> includeTag, TagKey<Block> excludeTag, H handler, T blockEntity, @Nullable Player player) {
-    super(handler, blockEntity, player);
+  public TaggedPedestalCrafting(TagKey<Block> includeTag, TagKey<Block> excludeTag, T blockEntity, @Nullable Player player) {
+    super(new PedestalInventoryWrapper(blockEntity.pedestals(includeTag, excludeTag)), blockEntity, player);
     this.includeTag = includeTag;
     this.excludeTag = excludeTag;
   }
