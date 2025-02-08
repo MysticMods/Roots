@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -27,7 +28,9 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public abstract class Ritual implements IDescribed, TooltipComponent {
@@ -67,20 +70,13 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
   public void ends (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
-  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+  public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RitualPositionCache cache, RandomSource random) {
     int dur = getDuration() - blockEntity.getLifetime();
-    BoundingBox moved = blockEntity.getRitualBoundingBox();
-    if (moved == null) {
-      moved = getBoundingBox();
-      if (moved != null) {
-        moved = moved.moved(pPos.getX(), pPos.getY(), pPos.getZ());
-      }
-    }
-    functionalTick(pLevel, pPos, pState, moved, blockEntity, dur, random);
-    animationTick(pLevel, pPos, pState, moved, blockEntity, dur, random);
+    functionalTick(pLevel, pPos, pState, cache, blockEntity, dur, random);
+    animationTick(pLevel, pPos, pState, cache.getBoundingBox(), blockEntity, dur, random);
   }
 
-  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
+  protected abstract void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
 
   // Still executed on the server
   protected abstract void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource);
@@ -139,6 +135,10 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     initProperties(holder);
     initialize(holder);
     rebuildBounds();
+  }
+
+  public List<BiPredicate<Level, BlockPos>> getPredicates () {
+    return Collections.emptyList();
   }
 
   public ItemStack getIcon() {

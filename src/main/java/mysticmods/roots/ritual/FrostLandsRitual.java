@@ -7,7 +7,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.util.BlockUtil;
+import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
@@ -36,7 +36,7 @@ public class FrostLandsRitual extends Ritual {
   private float spawnChance, layerChance, powderedChance, iceChance;
 
   private static final BiPredicate<Level, BlockPos> WATER_OR_LAVA = (level, pos) -> {
-    FluidState fluidState = level.getFluidState(pos.below());
+    FluidState fluidState = level.getFluidState(pos);
     return fluidState.isSource() && fluidState.is(Tags.Fluids.WATER) || fluidState.is(Tags.Fluids.LAVA);
   };
   private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
@@ -72,8 +72,15 @@ public class FrostLandsRitual extends Ritual {
     return state.is(BlockTags.FIRE);
   };
 
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(WATER_OR_LAVA, FROST_LANDS_PREDICATE, IS_FARMLAND, IS_FIRE);
+
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+    return PREDICATES;
+  }
+
+  @Override
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     List<BlockPos> affectedPositions = new ArrayList<>();
 
     if (duration % healInterval == 0) {
@@ -91,44 +98,42 @@ public class FrostLandsRitual extends Ritual {
 
     // TODO: Positions should come from the cached positions
     if (duration % getInterval() == 0) {
-      List<BlockPos> positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), WATER_OR_LAVA);
-      for (int i = 0; i < fluidCount; i++) {
-        if (!positions.isEmpty()) {
-          BlockPos chosen = positions.remove(randomSource.nextInt(positions.size())).below();
+      int i = 0;
+      for (BlockPos chosen : pCache.iterate(WATER_OR_LAVA, randomSource)) {
+        if (i >= count) {
+          break;
+        }
 
-          FluidState fluidState = pLevel.getFluidState(chosen);
-          if (fluidState.isSource()) {
-            if (fluidState.is(FluidTags.WATER)) {
-              pLevel.setBlockAndUpdate(chosen, Blocks.ICE.defaultBlockState());
-              affectedPositions.add(chosen);
-            } else if (fluidState.is(FluidTags.LAVA)) {
-              pLevel.setBlockAndUpdate(chosen, Blocks.OBSIDIAN.defaultBlockState());
-              affectedPositions.add(chosen);
-            }
+        FluidState fluidState = pLevel.getFluidState(chosen);
+        if (fluidState.isSource()) {
+          if (fluidState.is(FluidTags.WATER)) {
+            pLevel.setBlockAndUpdate(chosen, Blocks.ICE.defaultBlockState());
+            i++;
+            affectedPositions.add(chosen);
+          } else if (fluidState.is(FluidTags.LAVA)) {
+            pLevel.setBlockAndUpdate(chosen, Blocks.OBSIDIAN.defaultBlockState());
+            i++;
+            affectedPositions.add(chosen);
           }
         }
       }
 
-      positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), FROST_LANDS_PREDICATE);
-      if (!positions.isEmpty()) {
-        if (randomSource.nextFloat() < spawnChance) {
-          SnowGolem golem = EntityType.SNOW_GOLEM.create(pLevel);
-          if (golem != null) {
-            BlockPos pos = positions.get(randomSource.nextInt(positions.size()));
-            golem.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-            pLevel.addFreshEntity(golem);
-          }
+      if (randomSource.nextFloat() < spawnChance) {
+        BlockPos pos = pCache.random(randomSource);
+        SnowGolem golem = EntityType.SNOW_GOLEM.create(pLevel);
+        if (golem != null && pos != null) {
+          golem.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+          pLevel.addFreshEntity(golem);
         }
       }
 
-      int breakout = 0;
-      int affected = 0;
-      while (!positions.isEmpty() && breakout < 50 && affected < count) {
-        // All these positions are below
-        BlockPos chosen = positions.remove(randomSource.nextInt(positions.size()));
+      i = 0;
+      for (BlockPos chosen : pCache.iterate(FROST_LANDS_PREDICATE, randomSource)) {
+        if (i >= count) {
+          break;
+        }
         BlockPos below = chosen.below();
 
-        breakout++;
         BlockState state = pLevel.getBlockState(chosen);
         BlockState belowState = pLevel.getBlockState(below);
 
@@ -136,19 +141,19 @@ public class FrostLandsRitual extends Ritual {
         if (belowState.is(Blocks.SNOW) && belowState.hasProperty(SnowLayerBlock.LAYERS) && belowState.getValue(SnowLayerBlock.LAYERS) < 8 && randomSource.nextFloat() < layerChance) {
           pLevel.setBlock(below, belowState.setValue(SnowLayerBlock.LAYERS, belowState.getValue(SnowLayerBlock.LAYERS) + 1), 3);
           affectedPositions.add(below);
-          affected++;
+          i++;
           continue;
         } else if (state.is(Blocks.SNOW) && state.hasProperty(SnowLayerBlock.LAYERS) && state.getValue(SnowLayerBlock.LAYERS) < 8 && randomSource.nextFloat() < layerChance) {
           pLevel.setBlock(chosen, state.setValue(SnowLayerBlock.LAYERS, state.getValue(SnowLayerBlock.LAYERS) + 1), 3);
           affectedPositions.add(chosen);
-          affected++;
+          i++;
           continue;
         }
 
         if (snowLayer.canSurvive(pLevel, chosen)) {
           pLevel.setBlock(chosen, Blocks.SNOW.defaultBlockState(), 3);
           affectedPositions.add(chosen);
-          affected++;
+          i++;
           continue;
         }
 
@@ -156,7 +161,7 @@ public class FrostLandsRitual extends Ritual {
           if (randomSource.nextFloat() < powderedChance) {
             pLevel.setBlock(below, Blocks.POWDER_SNOW.defaultBlockState(), 3);
             affectedPositions.add(below);
-            affected++;
+            i++;
             continue;
           }
         }
@@ -165,33 +170,30 @@ public class FrostLandsRitual extends Ritual {
           if (randomSource.nextFloat() < iceChance) {
             pLevel.setBlock(below, randomSource.nextBoolean() ? Blocks.BLUE_ICE.defaultBlockState() : Blocks.PACKED_ICE.defaultBlockState(), 3);
             affectedPositions.add(below);
-            affected++;
+            i++;
           }
         }
       }
+    }
 
-      // Moisturize farmland
-      positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), IS_FARMLAND);
-      for (BlockPos pos : positions) {
-        BlockState stateAt = pLevel.getBlockState(pos);
-        if (stateAt.hasProperty(FarmBlock.MOISTURE) && stateAt.getValue(FarmBlock.MOISTURE) < FarmBlock.MAX_MOISTURE) {
-          pLevel.setBlock(pos, stateAt.setValue(FarmBlock.MOISTURE, FarmBlock.MAX_MOISTURE), 3);
-          affectedPositions.add(pos);
-        }
-      }
-
-      // Extinguish fires
-      positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), IS_FIRE);
-      for (BlockPos pos : positions) {
-        pLevel.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+    // Moisturize farmland
+    for (BlockPos pos : pCache.iterate(IS_FARMLAND, randomSource)) {
+      BlockState stateAt = pLevel.getBlockState(pos);
+      if (stateAt.hasProperty(FarmBlock.MOISTURE) && stateAt.getValue(FarmBlock.MOISTURE) < FarmBlock.MAX_MOISTURE) {
+        pLevel.setBlock(pos, stateAt.setValue(FarmBlock.MOISTURE, FarmBlock.MAX_MOISTURE), 3);
         affectedPositions.add(pos);
       }
     }
 
+    for (BlockPos pos : pCache.iterate(IS_FIRE, randomSource)) {
+      pLevel.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+      affectedPositions.add(pos);
+    }
   }
 
   @Override
-  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox
+      pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
 
   }
 
@@ -212,7 +214,7 @@ public class FrostLandsRitual extends Ritual {
     return false;
   }
 
-  protected void buildProperties (List<PropertyHolder<?>> properties) {
+  protected void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModRituals.FROST_LANDS_INTERVAL_HEAL);
     properties.add(ModRituals.FROST_LANDS_SPAWN_CHANCE);

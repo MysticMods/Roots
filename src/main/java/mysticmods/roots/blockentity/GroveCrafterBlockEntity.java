@@ -105,7 +105,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       updateViaState();
       return;
     }
-    GroveCrafting playerlessCrafting = new GroveCrafting(new PedestalInventoryWrapper(pedestals), this, null);
+    GroveCrafting playerlessCrafting = new GroveCrafting(this, null);
     boolean changed = false;
     if (cachedRecipe == null) {
       cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerlessCrafting, getLevel());

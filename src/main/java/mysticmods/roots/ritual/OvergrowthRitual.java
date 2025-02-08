@@ -9,6 +9,7 @@ import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.item.GroveSporesItem;
+import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class OvergrowthRitual extends Ritual {
   private static List<Direction> HORIZONTALS;
@@ -37,12 +39,24 @@ public class OvergrowthRitual extends Ritual {
     return HORIZONTALS;
   }
 
-  @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  private static final BiPredicate<Level, BlockPos> GROVE_MOSS_PREDICATE = (level, pos) -> level.getBlockState(pos)
+      .is(RootsTags.Blocks.GROVE_MOSS);
 
+  private static final BiPredicate<Level, BlockPos> WATER_PREDICATE = (level, pos) -> level.getFluidState(pos)
+      .is(FluidTags.WATER);
+
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(GROVE_MOSS_PREDICATE, WATER_PREDICATE);
+
+  @Override
+  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+    return PREDICATES;
+  }
+
+  @Override
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % interval == 0) {
       boolean placed = false;
-      if (lastChanged != null && !pBoundingBox.isInside(lastChanged)) {
+      if (lastChanged != null && !pCache.isInside(lastChanged)) {
         lastChanged = null;
       }
       if (lastChanged != null && randomSource.nextInt(4) == 0) {
@@ -65,27 +79,25 @@ public class OvergrowthRitual extends Ritual {
       }
       if (!placed) {
         lastChanged = null;
-        outer:
-        for (BlockPos pos : blockEntity.getRitualRandomPositions()) {
-          if (pLevel.getFluidState(pos).is(FluidTags.WATER)) {
-            for (Direction dir : horizontals()) {
-              BlockPos offset = pos.above().relative(dir);
-              if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
-                pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
-                    .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
-                lastChanged = offset;
-                break outer;
-              }
+        for (BlockPos pos : pCache.iterate(GROVE_MOSS_PREDICATE, randomSource)) {
+          for (Direction dir : horizontals()) {
+            BlockPos offset = pos.relative(dir);
+            if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
+              pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
+                  .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
+              lastChanged = offset;
+              return;
             }
-          } else if (pLevel.getBlockState(pos).is(RootsTags.Blocks.GROVE_MOSS)) {
-            for (Direction dir : horizontals()) {
-              BlockPos offset = pos.relative(dir);
-              if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
-                pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
-                    .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
-                lastChanged = offset;
-                break outer;
-              }
+          }
+        }
+        for (BlockPos pos : pCache.iterate(WATER_PREDICATE, randomSource)) {
+          for (Direction dir : horizontals()) {
+            BlockPos offset = pos.above().relative(dir);
+            if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
+              pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
+                  .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
+              lastChanged = offset;
+              return;
             }
           }
         }
@@ -94,7 +106,8 @@ public class OvergrowthRitual extends Ritual {
   }
 
   @Override
-  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox
+      pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
 
   }
 

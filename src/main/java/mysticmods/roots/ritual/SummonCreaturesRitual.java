@@ -11,11 +11,11 @@ import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
 import mysticmods.roots.util.ItemUtil;
+import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -38,7 +38,7 @@ public class SummonCreaturesRitual extends Ritual {
   }
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       PyrePedestalCrafting crafting = blockEntity.getPedestalCrafting();
       RecipeHolder<SummonCreaturesRecipe> recipe = ResolvedRecipes.SUMMON_CREATURES.findRecipe(crafting, pLevel);

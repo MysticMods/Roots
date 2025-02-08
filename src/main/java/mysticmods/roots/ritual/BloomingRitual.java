@@ -10,7 +10,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.util.BlockUtil;
+import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -18,7 +18,6 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -29,6 +28,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiPredicate;
@@ -43,11 +43,17 @@ public class BloomingRitual extends Ritual {
     BlockPos above = pos.above();
     return level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos).canBeReplaced();
   };
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(TWO_AIR_ABOVE);
+
+  @Override
+  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+    return PREDICATES;
+  }
 
   // TODO:
   @SuppressWarnings("deprecation")
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       List<Pair<BlockPos, PedestalBlockEntity>> pedestals = blockEntity.pedestals(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
 
@@ -86,11 +92,11 @@ public class BloomingRitual extends Ritual {
         return;
       }
 
-      List<BlockPos> positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), TWO_AIR_ABOVE);
       int placed = 0;
-
-      while (placed < count && !positions.isEmpty()) {
-        BlockPos chosen = positions.remove(randomSource.nextInt(positions.size()));
+      for (BlockPos chosen : pCache.iterate(TWO_AIR_ABOVE, randomSource)) {
+        if (placed >= count) {
+          break;
+        }
         Vec3 center = Vec3.atCenterOf(chosen);
         BlockPlaceContext context = new BlockPlaceContext(pLevel, null, InteractionHand.MAIN_HAND, new ItemStack(flowerToPlace), new BlockHitResult(center, Direction.UP, chosen, false));
         // TODO: Supress sound

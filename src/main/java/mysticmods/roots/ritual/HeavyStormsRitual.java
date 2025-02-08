@@ -7,7 +7,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.util.BlockUtil;
+import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
@@ -15,14 +15,11 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.storage.LevelData;
-import net.minecraft.world.level.storage.PrimaryLevelData;
-import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiPredicate;
 
@@ -30,23 +27,30 @@ public class HeavyStormsRitual extends Ritual {
   private float lightningChance;
 
   private static final BiPredicate<Level, BlockPos> AIR_ABOVE = (level, pos) -> level.isEmptyBlock(pos.above()) && !level.isEmptyBlock(pos);
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(AIR_ABOVE);
 
   @Override
-  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+    return PREDICATES;
+  }
+
+  @Override
+  protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       ServerLevel serverLevel = (ServerLevel) pLevel;
       serverLevel.setWeatherParameters(0, getDuration(), true, true);
 
       // TODO: This is bad
-      List<BlockPos> positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), AIR_ABOVE);
-      if (!positions.isEmpty() && randomSource.nextFloat() < lightningChance) {
-          BlockPos pos = positions.get(randomSource.nextInt(positions.size()));
+      if (randomSource.nextFloat() < lightningChance) {
+        BlockPos pos = pCache.random(AIR_ABOVE, randomSource);
+        if (pos != null) {
           LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(pLevel);
           if (lightning == null) {
             return;
           }
           lightning.moveTo(Vec3.atBottomCenterOf(pos));
           pLevel.addFreshEntity(lightning);
+        }
       }
     }
   }

@@ -12,6 +12,7 @@ import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.mixin.AccessorMixinLootTable;
 import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
+import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -49,7 +50,7 @@ public class AnimalHarvestRitual extends Ritual {
   private final Set<EntityType<?>> normalLoot = new ObjectLinkedOpenHashSet<>();
 
   @Override
-  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+  public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)

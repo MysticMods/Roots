@@ -24,6 +24,7 @@ import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.util.ItemUtil;
+import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -92,10 +93,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private UUID lastUuid;
 
   private BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> capabilityCache;
-  private BlockPos cachedRitualLastPosition;
-  private BoundingBox cachedRitualBoundingBox;
-  private List<BlockPos> cachedRitualPositionsInBounds;
-  private List<BlockPos> cachedRandomRitualPositionsInBounds;
+  private RitualPositionCache cache;
 
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -237,6 +235,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     this.lastUuid = null;
     if (currentRitual != null) {
       this.lifetime = currentRitual.getDuration();
+      this.refreshRitualCache();
       this.currentRitual.starts(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
     } else {
       RootsAPI.LOG.error("tried to start a ritual but the ritual is null");
@@ -245,49 +244,21 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   private void refreshRitualCache() {
     if (this.currentRitual == null) {
-      this.cachedRitualPositionsInBounds = null;
-      this.cachedRitualLastPosition = null;
-      this.cachedRitualBoundingBox = null;
-      this.cachedRandomRitualPositionsInBounds = null;
+      this.cache = null;
       return;
     }
 
-    if (this.cachedRitualLastPosition == null || !this.cachedRitualLastPosition.equals(getBlockPos())) {
-      this.cachedRitualLastPosition = getBlockPos();
-      this.cachedRitualBoundingBox = null;
-      this.cachedRitualPositionsInBounds = null;
-    }
+    BlockPos p = getBlockPos();
 
-    if (this.cachedRitualBoundingBox == null) {
-      this.cachedRitualBoundingBox = currentRitual.getBoundingBox()
-          .moved(cachedRitualLastPosition.getX(), cachedRitualLastPosition.getY(), cachedRitualLastPosition.getZ());
-    }
-
-    if (this.cachedRitualPositionsInBounds == null) {
-      this.cachedRitualPositionsInBounds = new ArrayList<>(BlockPos.betweenClosedStream(this.cachedRitualBoundingBox)
-          .map(BlockPos::immutable).toList());
-      this.cachedRandomRitualPositionsInBounds = new ArrayList<>(this.cachedRitualPositionsInBounds);
+    if (cache == null || !this.cache.getPosition().equals(p)) {
+      BoundingBox bb = currentRitual.getBoundingBox().moved(p.getX(), p.getY(), p.getZ());
+      this.cache = new RitualPositionCache(p, bb, new ArrayList<>(BlockPos.betweenClosedStream(bb).map(BlockPos::immutable).toList()));
     }
   }
 
-  public List<BlockPos> getRitualPositions() {
-    refreshRitualCache();
-    return cachedRitualPositionsInBounds == null ? Collections.emptyList() : cachedRitualPositionsInBounds;
-  }
-
-  public List<BlockPos> getRitualRandomPositions() {
-    refreshRitualCache();
-    if (cachedRandomRitualPositionsInBounds == null) {
-      return Collections.emptyList();
-    }
-
-    Collections.shuffle(cachedRandomRitualPositionsInBounds);
-    return cachedRandomRitualPositionsInBounds;
-  }
-
-  public BoundingBox getRitualBoundingBox() {
-    refreshRitualCache();
-    return cachedRitualBoundingBox;
+  @Nullable
+  public RitualPositionCache getCache () {
+    return cache;
   }
 
   public RecipeHolder<PyreRecipe> getCachedRecipe() {
@@ -377,9 +348,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
     if (pTag.contains("current_ritual", Tag.TAG_STRING)) {
       ResourceLocation ritualId = ResourceLocation.parse(pTag.getString("current_ritual"));
-      currentRitual = RootsRegistries.RITUALS.get(ritualId);
+      setCurrentRitual(RootsRegistries.RITUALS.get(ritualId));
     } else {
-      currentRitual = null;
+      setCurrentRitual(null);
     }
     if (pTag.contains("lifetime", Tag.TAG_INT)) {
       lifetime = pTag.getInt("lifetime");
@@ -535,7 +506,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
           }
         }
       } else {
-        currentRitual.tick(pLevel, pPos, pState, this, this.getRandom());
+        cache.initCache(pLevel, currentRitual.getPredicates());
+        currentRitual.tick(pLevel, pPos, pState, this, cache, this.getRandom());
         BlockState newState = pState;
         if (pState.is(RootsTags.Blocks.PYRES)) {
           if (currentRitual.providesLight() && pState.hasProperty(PyreBlock.LIT) && !pState.getValue(PyreBlock.LIT)) {
