@@ -35,11 +35,11 @@ public class FrostLandsRitual extends Ritual {
   private int healInterval, fluidCount, count;
   private float spawnChance, layerChance, powderedChance, iceChance;
 
+  private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
   private static final BiPredicate<Level, BlockPos> WATER_OR_LAVA = (level, pos) -> {
     FluidState fluidState = level.getFluidState(pos);
     return fluidState.isSource() && fluidState.is(Tags.Fluids.WATER) || fluidState.is(Tags.Fluids.LAVA);
   };
-  private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
 
   private static final BiPredicate<Level, BlockPos> FROST_LANDS_PREDICATE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
@@ -100,7 +100,7 @@ public class FrostLandsRitual extends Ritual {
     if (duration % getInterval() == 0) {
       int i = 0;
       for (BlockPos chosen : pCache.iterate(WATER_OR_LAVA, randomSource)) {
-        if (i >= count) {
+        if (i >= fluidCount) {
           break;
         }
 
@@ -176,7 +176,7 @@ public class FrostLandsRitual extends Ritual {
       }
     }
 
-    // Moisturize farmland
+    // Moisturize all the farmland
     for (BlockPos pos : pCache.iterate(IS_FARMLAND, randomSource)) {
       BlockState stateAt = pLevel.getBlockState(pos);
       if (stateAt.hasProperty(FarmBlock.MOISTURE) && stateAt.getValue(FarmBlock.MOISTURE) < FarmBlock.MAX_MOISTURE) {
@@ -185,6 +185,7 @@ public class FrostLandsRitual extends Ritual {
       }
     }
 
+    // Extinguish all the fires
     for (BlockPos pos : pCache.iterate(IS_FIRE, randomSource)) {
       pLevel.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
       affectedPositions.add(pos);
