@@ -24,9 +24,12 @@ import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class HeavyStormsRitual extends Ritual {
   private float lightningChance;
+
+  private static final BiPredicate<Level, BlockPos> AIR_ABOVE = (level, pos) -> level.isEmptyBlock(pos.above()) && !level.isEmptyBlock(pos);
 
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
@@ -35,7 +38,7 @@ public class HeavyStormsRitual extends Ritual {
       serverLevel.setWeatherParameters(0, getDuration(), true, true);
 
       // TODO: This is bad
-      List<BlockPos> positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), LevelReader::isEmptyBlock);
+      List<BlockPos> positions = BlockUtil.getBlocksWithinRadius(pLevel, pPos, getRadiusXZ(), getRadiusY(), AIR_ABOVE);
       if (!positions.isEmpty() && randomSource.nextFloat() < lightningChance) {
           BlockPos pos = positions.get(randomSource.nextInt(positions.size()));
           LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(pLevel);
