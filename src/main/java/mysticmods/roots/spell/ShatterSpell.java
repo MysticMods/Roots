@@ -1,5 +1,9 @@
 package mysticmods.roots.spell;
 
+import it.unimi.dsi.fastutil.ints.Int2ShortMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -23,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ShatterSpell extends Spell {
+  private int maxWidth, maxDepth, maxHeight;
+
   public ShatterSpell(ChatFormatting color, List<Cost> costs) {
     super(Type.INSTANT, color, costs, 0x606060, 0xc0c0c0);
   }
@@ -34,7 +40,28 @@ public class ShatterSpell extends Spell {
 
   @Override
   public void initialize(Holder<Spell> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.maxWidth = properties.get(ModSpells.SHATTER_MAXIMUM_WIDTH);
+    this.maxDepth = properties.get(ModSpells.SHATTER_MAXIMUM_DEPTH);
+    this.maxHeight = properties.get(ModSpells.SHATTER_MAXIMUM_HEIGHT);
+  }
 
+  @Override
+  protected void fillDataKeyMap(Object2IntMap<String> map) {
+    super.fillDataKeyMap(map);
+    map.put("mode", 0);
+    map.put("width", 1);
+    map.put("height", 2);
+    map.put("depth", 3);
+  }
+
+  @Override
+  protected void fillDataMaximumValues(Int2ShortMap map) {
+    super.fillDataMaximumValues(map);
+    map.put(0, (short)3);
+    map.put(1, (short)maxWidth);
+    map.put(2, (short)maxHeight);
+    map.put(3, (short)maxDepth);
   }
 
   @Override
@@ -43,15 +70,33 @@ public class ShatterSpell extends Spell {
 
     float yaw = player.getViewYRot(1f);
     Direction playerFacing = Direction.fromYRot(yaw);
-    Direction side = rayTraceResult.getDirection();
-    Direction width = Direction.fromYRot(playerFacing.toYRot() + 90);
-    Direction height = side == Direction.DOWN ? playerFacing : side.getAxis() == Direction.Axis.Y ? playerFacing.getOpposite() : Direction.DOWN;
-    Direction depth = side.getOpposite();
+    Direction sideDir = rayTraceResult.getDirection();
+    Direction widthDir = Direction.fromYRot(playerFacing.toYRot() + 90);
+    Direction heightDir = sideDir == Direction.DOWN ? playerFacing : sideDir.getAxis() == Direction.Axis.Y ? playerFacing.getOpposite() : Direction.DOWN;
+    Direction depthDir = sideDir.getOpposite();
+
+    int width = getDataValue(spell, "width");
+    int height = getDataValue(spell, "height");
+    int depth = getDataValue(spell, "depth");
 
     BlockPos start = pos;
     BlockPos stop = pos;
 
-    stop = stop.relative(height);
+    if (width == 0 && height == 0 && depth == 0) {
+      stop = stop.relative(heightDir);
+    } else {
+      if (width > 0) {
+        start = start.relative(widthDir, -width);
+        stop = stop.relative(widthDir, width);
+      }
+      if (height > 0) {
+        start = start.relative(heightDir, -height);
+        stop = stop.relative(heightDir, height);
+      }
+      if (depth > 0) {
+        stop = stop.relative(depthDir, depth);
+      }
+    }
 
     for (BlockPos blockPos : BlockPos.betweenClosed(start, stop)) {
       BlockState state = level.getBlockState(blockPos);
@@ -65,12 +110,19 @@ public class ShatterSpell extends Spell {
   }
 
   @Override
+  public void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModSpells.SHATTER_MAXIMUM_DEPTH);
+    properties.add(ModSpells.SHATTER_MAXIMUM_HEIGHT);
+    properties.add(ModSpells.SHATTER_MAXIMUM_WIDTH);
+  }
+
+  @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     BlockHitResult rayTraceResult = pickBlock(pPlayer);
     Map<BlockPos, BlockState> toBreak = getAffectedBlocks(pLevel, pPlayer, instance, pStack, rayTraceResult.getBlockPos(), pLevel.getBlockState(rayTraceResult.getBlockPos()), rayTraceResult);
     for (Map.Entry<BlockPos, BlockState> entry : toBreak.entrySet()) {
       BlockPos pos = entry.getKey();
-      BlockState state = entry.getValue();
       pLevel.destroyBlock(pos, true, pPlayer);
     }
 

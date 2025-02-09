@@ -191,7 +191,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
   }
 
   public SpellStorage setData (int slot, ShortArrayList data) {
-    if (slot < 0 || slot >= maxSlot || slot == currentSlot) {
+    if (slot < 0 || slot >= maxSlot) {
       return this;
     }
 
@@ -211,7 +211,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
   }
 
   public SpellStorage setData (int slot, int index, short value) {
-    if (slot < 0 || slot >= maxSlot || slot == currentSlot) {
+    if (slot < 0 || slot >= maxSlot) {
       return this;
     }
 
@@ -291,7 +291,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
         RootsRegistries.SPELL_MODIFIERS.byNameCodec().listOf().xmap(HashSet::new, ArrayList::new)
             .fieldOf("enabledModifiers").forGetter(o -> new HashSet<>(o.enabledModifiers)),
         Codec.INT.fieldOf("cooldown").forGetter(SpellSlot::cooldown),
-        SpellInstanceData.CODEC.optionalFieldOf("data").forGetter(o -> Optional.ofNullable(o.data))
+        SpellInstanceData.CODEC.fieldOf("data").forGetter(o -> o.data)
     ).apply(instance, SpellSlot::new));
     public static StreamCodec<RegistryFriendlyByteBuf, SpellSlot> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.VAR_INT, SpellSlot::slot,
@@ -299,18 +299,13 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
         ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS).apply(ByteBufCodecs.list())
             .map(HashSet::new, ArrayList::new), SpellSlot::enabledModifiers,
         ByteBufCodecs.VAR_INT, SpellSlot::cooldown,
-        ByteBufCodecs.optional(SpellInstanceData.STREAM_CODEC), o -> Optional.ofNullable(o.data),
+        SpellInstanceData.STREAM_CODEC, o -> o.data,
         SpellSlot::new
     );
     public static Codec<SpellSlot> CODEC = MAP_CODEC.codec();
 
     public SpellSlot(int slot, Spell spell, Set<SpellModifier> enabledModifiers) {
-      this(slot, spell, enabledModifiers, 0, new SpellInstanceData());
-    }
-
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-    public SpellSlot(int slot, Spell spell, Set<SpellModifier> spellModifiers, int cooldown, Optional<SpellInstanceData> spellInstanceData) {
-      this(slot, spell, spellModifiers, cooldown, spellInstanceData.orElse(null));
+      this(slot, spell, enabledModifiers, 0, new SpellInstanceData(spell.getDataSlots()+1));
     }
 
     @Override
@@ -339,6 +334,8 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
 
     public SpellSlot withData (int index, short value) {
       ShortArrayList newData = new ShortArrayList(data.data());
+
+      newData.ensureCapacity(spell.getDataSlots()+1);
       newData.set(index, value);
       return new SpellSlot(slot, spell, enabledModifiers, cooldown, new SpellInstanceData(newData));
     }

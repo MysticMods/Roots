@@ -1,7 +1,10 @@
 package mysticmods.roots.api.spell;
 
 import com.mojang.serialization.Codec;
-import it.unimi.dsi.fastutil.objects.*;
+import it.unimi.dsi.fastutil.ints.Int2ShortMap;
+import it.unimi.dsi.fastutil.ints.Int2ShortOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -17,6 +20,7 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -55,6 +59,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected ItemStack icon;
 
   private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
+  private final Int2ShortMap dataIndexMaximums = new Int2ShortOpenHashMap();
 
   public Spell(Type type, ChatFormatting color, List<Cost> defaultCosts, int color1, int color2) {
     this.type = type;
@@ -63,22 +68,54 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     this.color1 = color1;
     this.color2 = color2;
     fillDataKeyMap(keyToDataIndex);
+    dataIndexMaximums.defaultReturnValue((short) -1);
   }
 
   public Holder<Spell> builtInRegistryHolder() {
     return RootsRegistries.SPELLS.wrapAsHolder(this);
   }
 
-  public short getData (ISpellInstance instance, String key) {
+  public boolean hasDataSlot(int slot) {
+    return slot >= 0 && slot <= keyToDataIndex.size();
+  }
+
+  public int getDataSlots() {
+    // The 0 slot is always the index
+    return keyToDataIndex.size() + 1;
+  }
+
+  // Contract: slot 0 is *always* the "mode" key.
+  public int getDataSlotValue(ISpellInstance instance) {
     if (instance.getSpellData() == null) {
       return -1;
     }
-    return getData(instance.getSpellData(), key);
+    return instance.getSpellData().get(0);
   }
 
-  public short getData(SpellInstanceData data, String key) {
+  public short getDataValue(ISpellInstance instance, String key) {
+    if (instance.getSpellData() == null) {
+      return -1;
+    }
+    return getDataValue(instance.getSpellData(), key);
+  }
+
+  public short getDataValue(SpellInstanceData data, String key) {
     int index = getDataIndex(key);
     if (index == -1 || !data.has(index)) {
+      return -1;
+    }
+    return data.get(index);
+  }
+
+  public short getDataValue(ISpellInstance instance, int index) {
+    if (instance.getSpellData() == null) {
+      return -1;
+    }
+    return getDataValue(instance.getSpellData(), index);
+  }
+
+  public short getDataValue(SpellInstanceData data, int index) {
+    if (!data.has(index)) {
       return -1;
     }
     return data.get(index);
@@ -91,7 +128,54 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return -1;
   }
 
-  protected void fillDataKeyMap (Object2IntMap<String> map) {
+  public short getDataMaximumValue(int index) {
+    return dataIndexMaximums.get(index);
+  }
+
+  public Set<String> getDataKeys() {
+    return keyToDataIndex.keySet();
+  }
+
+  @Nullable
+  public String getDataKey(int index) {
+    for (Object2IntMap.Entry<String> entry : keyToDataIndex.object2IntEntrySet()) {
+      if (entry.getIntValue() == index) {
+        return entry.getKey();
+      }
+    }
+    return null;
+  }
+
+  public Component describeData(int index, short value) {
+    if (index != 0) {
+      String keyName = getDataKey(index);
+      if (keyName == null) {
+        keyName = "unknown";
+      }
+
+      return Component.translatable(getOrCreateDescriptionId() + ".data." + keyName, value);
+    } else {
+      String mode = getDataKey(value);
+      if (mode == null) {
+        mode = "unknown";
+      }
+
+      return Component.translatable(getOrCreateDescriptionId() + ".data.mode." + mode);
+    }
+  }
+
+  public short getDataMaximumValue(String key) {
+    int index = getDataIndex(key);
+    if (index == -1) {
+      return -1;
+    }
+    return getDataMaximumValue(index);
+  }
+
+  protected void fillDataKeyMap(Object2IntMap<String> map) {
+  }
+
+  protected void fillDataMaximumValues(Int2ShortMap map) {
   }
 
   @Override
@@ -173,7 +257,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     modifiers.add(modifier);
   }
 
-  public void buildProperties (List<PropertyHolder<?>> properties) {
+  public void buildProperties(List<PropertyHolder<?>> properties) {
     if (getCooldownProperty() != null) {
       properties.add(getCooldownProperty());
     }
@@ -213,6 +297,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     }
     initializeProperties(holder);
     initialize(holder);
+    fillDataMaximumValues(dataIndexMaximums);
+    if (dataIndexMaximums.size() != keyToDataIndex.size()) {
+      RootsAPI.LOG.error("Key-to-data index and data index maximum mismatch: {}", holder.getKey());
+    }
   }
 
   public ItemStack getIcon() {

@@ -1,6 +1,7 @@
 package mysticmods.roots.network;
 
 import mysticmods.roots.network.client.*;
+import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
 import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -27,6 +28,7 @@ public class PacketHandler {
   protected void registerClientToServer(PacketRegistrar registrar) {
     registrar.play(ServerboundSetSpellPacket.TYPE, ServerboundSetSpellPacket.CODEC);
     registrar.play(ServerboundSwapSpellsPacket.TYPE, ServerboundSwapSpellsPacket.CODEC);
+    registrar.play(ServerboundSetSpellDataPacket.TYPE, ServerboundSetSpellDataPacket.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {

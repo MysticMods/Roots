@@ -3,6 +3,7 @@ package mysticmods.roots.api.spell;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.shorts.ShortArrayList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
@@ -13,8 +14,12 @@ public record SpellInstanceData(ShortArrayList data) {
       ByteBufCodecs.SHORT.apply(ByteBufCodecs.list())
           .map(ShortArrayList::new, o -> o), SpellInstanceData::data, SpellInstanceData::new);
 
-  public SpellInstanceData () {
+  public SpellInstanceData (int size) {
     this(new ShortArrayList());
+    this.data.ensureCapacity(size);
+    for (int i = 0; i < size; i++) {
+      data.add((short) 0);
+    }
   }
 
   public int size () {
