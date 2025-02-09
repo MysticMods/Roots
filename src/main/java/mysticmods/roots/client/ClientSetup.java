@@ -11,6 +11,7 @@ import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
+import mysticmods.roots.client.particle.SinglePixelParticle;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
@@ -27,6 +28,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -131,5 +133,10 @@ public class ClientSetup {
     event.registerRecipeCategoryFinder(ModRecipes.BARK.get(), (o) -> RecipeBookCategories.UNKNOWN);
     event.registerRecipeCategoryFinder(ModRecipes.RUNIC_BLOCK.get(), (o) -> RecipeBookCategories.UNKNOWN);
     event.registerRecipeCategoryFinder(ModRecipes.RUNIC_ENTITY.get(), (o) -> RecipeBookCategories.UNKNOWN);
+  }
+
+  @SubscribeEvent
+  public static void onRegisterParticle (RegisterParticleProvidersEvent event) {
+    event.registerSpriteSet(ModParticles.SINGLE_PIXEL.get(), SinglePixelParticle.Provider::new);
   }
 }

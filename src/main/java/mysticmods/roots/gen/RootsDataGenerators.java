@@ -5,6 +5,7 @@ import mysticmods.roots.gen.advancement.RootsAdvancementProvider;
 import mysticmods.roots.gen.client.RootsAtlasProvider;
 import mysticmods.roots.gen.client.RootsBlockStateProvider;
 import mysticmods.roots.gen.client.RootsItemModelProvider;
+import mysticmods.roots.gen.client.RootsParticleProvider;
 import mysticmods.roots.gen.lang.RootsLangProvider;
 import mysticmods.roots.gen.loot.RootsLootTableProvider;
 import mysticmods.roots.gen.nbt.StructureNbtUpdater;
@@ -61,6 +62,7 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsGlobalLootModifierProvider(output, provider));
     generator.addProvider(event.includeServer(), new StructureNbtUpdater("structures", RootsAPI.MODID, helper, output));
     generator.addProvider(event.includeServer(), new RootsRecipeProvider(output, provider));
+    generator.addProvider(event.includeClient(), new RootsParticleProvider(output));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
   }
 }
