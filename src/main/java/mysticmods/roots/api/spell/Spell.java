@@ -1,6 +1,7 @@
 package mysticmods.roots.api.spell;
 
 import com.mojang.serialization.Codec;
+import it.unimi.dsi.fastutil.objects.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datamap.DataMaps;
@@ -53,16 +54,44 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
 
   protected ItemStack icon;
 
+  private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
+
   public Spell(Type type, ChatFormatting color, List<Cost> defaultCosts, int color1, int color2) {
     this.type = type;
     this.textColor = color;
     this.defaultCosts = defaultCosts;
     this.color1 = color1;
     this.color2 = color2;
+    fillDataKeyMap(keyToDataIndex);
   }
 
   public Holder<Spell> builtInRegistryHolder() {
     return RootsRegistries.SPELLS.wrapAsHolder(this);
+  }
+
+  public short getData (ISpellInstance instance, String key) {
+    if (instance.getSpellData() == null) {
+      return -1;
+    }
+    return getData(instance.getSpellData(), key);
+  }
+
+  public short getData(SpellInstanceData data, String key) {
+    int index = getDataIndex(key);
+    if (index == -1 || !data.has(index)) {
+      return -1;
+    }
+    return data.get(index);
+  }
+
+  public int getDataIndex(String key) {
+    if (keyToDataIndex.containsKey(key)) {
+      return keyToDataIndex.getInt(key);
+    }
+    return -1;
+  }
+
+  protected void fillDataKeyMap (Object2IntMap<String> map) {
   }
 
   @Override

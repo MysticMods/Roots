@@ -16,4 +16,20 @@ public record SpellInstanceData(ShortArrayList data) {
   public SpellInstanceData () {
     this(new ShortArrayList());
   }
+
+  public int size () {
+    return data.size();
+  }
+
+  public boolean has (int index) {
+    return index >= 0 && index < data.size();
+  }
+
+  public short get (int index) {
+    if (index < 0 || index >= data.size()) {
+      // Maybe throw an exception instead
+      return -1;
+    }
+    return data.getShort(index);
+  }
 }

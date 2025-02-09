@@ -3,6 +3,7 @@ package mysticmods.roots.api.datacomponent;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.shorts.ShortArrayList;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -171,11 +172,13 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return this;
     }
 
-    List<SpellSlot> newSlots = new ArrayList<>(slots);
-    SpellSlot slotData = newSlots.get(slot);
+    SpellSlot slotData = slots.get(slot);
+
     if (slotData == null) {
       return this;
     }
+
+    List<SpellSlot> newSlots = new ArrayList<>(slots);
     newSlots.set(slot, slotData.withCooldown(cooldown));
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
@@ -185,6 +188,47 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return this;
     }
     return new SpellStorage(slot, maxSlot, slots);
+  }
+
+  public SpellStorage setData (int slot, ShortArrayList data) {
+    if (slot < 0 || slot >= maxSlot || slot == currentSlot) {
+      return this;
+    }
+
+    SpellSlot slotData = slots.get(slot);
+    if (slotData == null) {
+      return this;
+    }
+
+    SpellInstanceData currentData = slotData.getSpellData();
+    if (currentData != null && currentData.data().equals(data)) {
+      return this;
+    }
+
+    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    newSlots.set(slot, slotData.withData(new SpellInstanceData(data)));
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
+  }
+
+  public SpellStorage setData (int slot, int index, short value) {
+    if (slot < 0 || slot >= maxSlot || slot == currentSlot) {
+      return this;
+    }
+
+
+    SpellSlot slotData = slots.get(slot);
+    if (slotData == null) {
+      return this;
+    }
+
+    SpellInstanceData currentData = slotData.getSpellData();
+    if (currentData != null && slotData.data().has(index) && slotData.data().get(index) == value) {
+      return this;
+    }
+
+    List<SpellSlot> newSlots = new ArrayList<>(slots);
+    newSlots.set(slot, slotData.withData(index, value));
+    return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
   public int getCurrentMaxCooldown() {
@@ -270,6 +314,11 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     }
 
     @Override
+    public @Nullable SpellInstanceData getSpellData() {
+      return data();
+    }
+
+    @Override
     public Spell getSpell() {
       return spell();
     }
@@ -286,6 +335,12 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
 
     public boolean hasModifier(SpellModifier modifier) {
       return enabledModifiers.contains(modifier);
+    }
+
+    public SpellSlot withData (int index, short value) {
+      ShortArrayList newData = new ShortArrayList(data.data());
+      newData.set(index, value);
+      return new SpellSlot(slot, spell, enabledModifiers, cooldown, new SpellInstanceData(newData));
     }
 
     public SpellSlot withData (SpellInstanceData data) {
