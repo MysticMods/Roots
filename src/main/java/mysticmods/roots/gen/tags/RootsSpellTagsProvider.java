@@ -37,9 +37,7 @@ public class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Spell> {
     this.tag(RootsTags.Spells.WILD_OPPOSED);
     this.tag(RootsTags.Spells.WILD_ALIGNED);
 
-    this.tag(RootsTags.Spells.ADJUSTABLE_WIDTH).add(ModSpells.SHATTER.get());
-    this.tag(RootsTags.Spells.ADJUSTABLE_HEIGHT).add(ModSpells.SHATTER.get());
-    this.tag(RootsTags.Spells.ADJUSTABLE_DEPTH).add(ModSpells.SHATTER.get());
+    this.tag(RootsTags.Spells.ADJUSTABLE_SPELL).add(ModSpells.SHATTER.get());
   }
 
   @Override

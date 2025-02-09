@@ -475,9 +475,7 @@ public class RootsTags {
   public static class Spells extends RootsTags {
     public static final TagKey<Spell> NYI = modTag("nyi");
 
-    public static final TagKey<Spell> ADJUSTABLE_WIDTH = modTag("adjustable/width");
-    public static final TagKey<Spell> ADJUSTABLE_HEIGHT = modTag("adjustable/height");
-    public static final TagKey<Spell> ADJUSTABLE_DEPTH = modTag("adjustable/depth");
+    public static final TagKey<Spell> ADJUSTABLE_SPELL = modTag("adjustable/width");
 
     public static final TagKey<Spell> PRIMAL_ALIGNED = modTag("aligned/primal");
     public static final TagKey<Spell> FAIRY_ALIGNED = modTag("aligned/fairy");
