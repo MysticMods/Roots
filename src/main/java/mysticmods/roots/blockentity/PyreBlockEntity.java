@@ -15,10 +15,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
-import mysticmods.roots.init.ModBlockEntities;
-import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.init.*;
 import mysticmods.roots.particle.SimpleParticleOptions;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
@@ -441,13 +438,16 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
     RandomSource pRandom = pLevel.getRandom();
     if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING) && pRandom.nextInt(10) == 0) {
-      level.addParticle(
+      pLevel.addParticle(
           new SimpleParticleOptions(
-              0xe9bd39, -0.006f
+              ModParticles.PYRE,
+              0xc96c03,
+              0xb13f00,
+              -(pRandom.nextFloat() * 0.03f)
           ),
-          pPos.getX() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.4f,
-          pPos.getY() + 0.3f + (pRandom.nextFloat() - 0.5f) * 0.4f,
-          pPos.getZ() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.4f,
+          pPos.getX() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.3f,
+          pPos.getY() + 0.6f + (pRandom.nextFloat() - 0.5f) * 0.4f,
+          pPos.getZ() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.3f,
           0,
           0,
           0

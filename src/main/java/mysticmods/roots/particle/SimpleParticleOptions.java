@@ -4,52 +4,46 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
-import mysticmods.roots.init.ModParticles;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
-public record SimpleParticleOptions (int r, int g, int b, float gravity) implements ParticleOptions {
-  public static final MapCodec<SimpleParticleOptions> CODEC = RecordCodecBuilder.mapCodec(
-      instance -> instance.group(
-          Codec.INT.fieldOf("r").forGetter(SimpleParticleOptions::r),
-          Codec.INT.fieldOf("g").forGetter(SimpleParticleOptions::g),
-          Codec.INT.fieldOf("b").forGetter(SimpleParticleOptions::b),
-          Codec.FLOAT.fieldOf("gravity").forGetter(SimpleParticleOptions::gravity)
-      ).apply(instance, SimpleParticleOptions::new)
-  );
-  public static final StreamCodec<ByteBuf, SimpleParticleOptions> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.INT, o -> o.r,
-      ByteBufCodecs.INT, o -> o.g,
-      ByteBufCodecs.INT, o -> o.b,
-      ByteBufCodecs.FLOAT, o -> o.gravity,
-      SimpleParticleOptions::new
-  );
+public record SimpleParticleOptions(ParticleType<?> type, int color1, int color2,
+                                    float gravity) implements ParticleOptions {
 
-  public SimpleParticleOptions (int color, float gravity) {
-    this((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF, gravity);
+  public static MapCodec<SimpleParticleOptions> codec(ParticleType<?> type) {
+    return RecordCodecBuilder.mapCodec(instance -> instance.group(
+        Codec.INT.fieldOf("color1").forGetter(SimpleParticleOptions::color1),
+        Codec.INT.fieldOf("color2").forGetter(SimpleParticleOptions::color2),
+        Codec.FLOAT.fieldOf("gravity").forGetter(SimpleParticleOptions::gravity)
+    ).apply(instance, (c1, c2, gravity) -> new SimpleParticleOptions(type, c1, c2, gravity)));
+  }
+
+  public static StreamCodec<ByteBuf, SimpleParticleOptions> streamCodec(ParticleType<?> type) {
+    return StreamCodec.composite(
+        ByteBufCodecs.INT, o -> o.color1(),
+        ByteBufCodecs.INT, o -> o.color2(),
+        ByteBufCodecs.FLOAT, o -> o.gravity(),
+        (c1, c2, gr) -> new SimpleParticleOptions(type, c1, c2, gr)
+    );
+  }
+
+  public SimpleParticleOptions(ParticleType<?> type, int color, float gravity) {
+    this(type, color, color, gravity);
+  }
+
+  public SimpleParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<SimpleParticleOptions>> type, int color1, int color2, float gravity) {
+    this(type.get(), color1, color2, gravity);
+  }
+
+  public SimpleParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<SimpleParticleOptions>> type, int color, float gravity) {
+    this(type.get(), color, color, gravity);
   }
 
   @Override
   public ParticleType<?> getType() {
-    return ModParticles.SINGLE_PIXEL.get();
-  }
-
-  public static class Type extends ParticleType<SimpleParticleOptions> {
-    public Type(boolean overrideLimitter) {
-      super(overrideLimitter);
-    }
-
-    @Override
-    public MapCodec<SimpleParticleOptions> codec() {
-      return CODEC;
-    }
-
-    @Override
-    public StreamCodec<? super RegistryFriendlyByteBuf, SimpleParticleOptions> streamCodec() {
-      return STREAM_CODEC;
-    }
+    return type;
   }
 }
