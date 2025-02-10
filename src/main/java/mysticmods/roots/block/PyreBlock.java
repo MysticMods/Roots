@@ -1,10 +1,14 @@
 package mysticmods.roots.block;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.particle.SimpleParticleOptions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -54,6 +58,26 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
       return BaseBlockEntity::clientTick;
     } else {
       return BaseBlockEntity::serverTick;
+    }
+  }
+
+  @Override
+  public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING) && pRandom.nextInt(4) == 0) {
+        pLevel.addParticle(
+            new SimpleParticleOptions(
+                ModParticles.PYRE,
+                pRandom.nextBoolean() ? 0xc96c03 : 0xe9bd39,
+                0x8b3100,
+                -(pRandom.nextFloat() * 0.03f)
+            ),
+            pPos.getX() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.3f,
+            pPos.getY() + 0.6f + (pRandom.nextFloat()) * 0.2f,
+            pPos.getZ() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.3f,
+            0,
+            0,
+            0
+        );
     }
   }
 }

@@ -436,23 +436,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Override
   // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
-    RandomSource pRandom = pLevel.getRandom();
-    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING) && pRandom.nextInt(10) == 0) {
-      pLevel.addParticle(
-          new SimpleParticleOptions(
-              ModParticles.PYRE,
-              0xc96c03,
-              0xb13f00,
-              -(pRandom.nextFloat() * 0.03f)
-          ),
-          pPos.getX() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.3f,
-          pPos.getY() + 0.6f + (pRandom.nextFloat() - 0.5f) * 0.4f,
-          pPos.getZ() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.3f,
-          0,
-          0,
-          0
-      );
-    }
   }
 
   @Override
