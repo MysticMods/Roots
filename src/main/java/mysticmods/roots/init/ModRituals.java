@@ -38,7 +38,10 @@ public class ModRituals {
 
   public static final DeferredHolder<Ritual, FireStormRitual> FIRE_STORM = RITUAL.register("fire_storm", FireStormRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_DURATION = P.recordProperty("fire_storm/duration", Property.ofInt(600, RitualProperties.DURATION));
-  public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_INTERVAL = P.recordProperty("fire_storm/interval", Property.ofInt(2, RitualProperties.INTERVAL));
+  public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_INTERVAL = P.recordProperty("fire_storm/interval", Property.ofInt(60, RitualProperties.INTERVAL));
+  public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_RADIUS_XZ = P.recordProperty("fire_storm/radius_xz", Property.ofInt(10, RitualProperties.RADIUS_XZ));
+  public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_RADIUS_Y = P.recordProperty("fire_storm/radius_y", Property.ofInt(30, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> FIRE_STORM_COUNT = P.recordProperty("fire_storm/count", Property.ofInt(8, "The maximum number of meteors that can exist in the ritual area at once."));
 
   public static final DeferredHolder<Ritual, FrostLandsRitual> FROST_LANDS = RITUAL.register("frost_lands", FrostLandsRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> FROST_LANDS_FLUID_COUNT = P.recordProperty("frost_lands/fluid_count", Property.ofInt(2, "The number of fluid blocks to tweak per interval."));

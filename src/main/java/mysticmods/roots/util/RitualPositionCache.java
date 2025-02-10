@@ -8,6 +8,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -15,6 +16,7 @@ import java.util.function.BiPredicate;
 
 public class RitualPositionCache {
   private final BlockPos position;
+  private final AABB aabb;
   private final BoundingBox boundingBox;
   private final List<BlockPos> positions;
   private final Map<BiPredicate<Level, BlockPos>, RitualCacheEntry> cache = new HashMap<>();
@@ -23,6 +25,7 @@ public class RitualPositionCache {
     this.boundingBox = boundingBox;
     this.positions = positions;
     this.position = position;
+    this.aabb = AABB.of(boundingBox);
   }
 
   public BlockPos getPosition() {
@@ -35,6 +38,10 @@ public class RitualPositionCache {
 
   public BoundingBox getBoundingBox() {
     return boundingBox;
+  }
+
+  public AABB getAABB () {
+    return aabb;
   }
 
   public List<BlockPos> getPositions() {

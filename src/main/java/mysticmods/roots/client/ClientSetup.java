@@ -19,6 +19,7 @@ import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -89,6 +90,7 @@ public class ClientSetup {
     event.registerEntityRenderer(ModEntities.TAN_SPROUT.value(), SproutRenderer::new);
     event.registerEntityRenderer(ModEntities.RED_SPROUT.value(), SproutRenderer::new);
     event.registerEntityRenderer(ModEntities.PURPLE_SPROUT.value(), SproutRenderer::new);
+    event.registerEntityRenderer(ModEntities.METEOR.value(), NoopRenderer::new);
   }
 
   @SubscribeEvent

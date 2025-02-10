@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.entity.*;
+import mysticmods.roots.entity.projectile.MeteorEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -46,6 +47,8 @@ public class ModEntities {
       .sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("owl"));
   public static DeferredHolder<EntityType<?>, EntityType<DuckEntity>> DUCK = REGISTER.register("duck", () -> EntityType.Builder.of(DuckEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("duck"));
+
+  public static DeferredHolder<EntityType<?>, EntityType<MeteorEntity>> METEOR = REGISTER.register("meteor", () -> EntityType.Builder.of(MeteorEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).eyeHeight(0.13f).clientTrackingRange(4).updateInterval(10).build("meteor"));
 
   @SubscribeEvent
   public static void registerEntitySpawns(RegisterSpawnPlacementsEvent event) {
