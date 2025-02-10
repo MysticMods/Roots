@@ -5,18 +5,60 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.util.EntityUtils;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class WindwallRitual extends Ritual {
+  private void knockBack (Entity entity, float strength, double x, double z) {
+    // TODO: Tag entities as not being knockable
+    entity.hasImpulse = true;
+    Vec3 delta = entity.getDeltaMovement();
+    while (x * x + z * z < 1.0e-5f) {
+      x = (Math.random() - Math.random()) * 0.01;
+      z = (Math.random() - Math.random()) * 0.01;
+    }
+
+    Vec3 newDelta = new Vec3(x, 0, z).normalize().scale(strength);
+
+
+    entity.setDeltaMovement(delta.x / 2.0 - newDelta.x, entity.onGround() ? Math.min(0.4, delta.y / 2.0 + strength) : delta.y, delta.z / 2.0 - newDelta.z);
+  }
+
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (duration % getInterval() == 0) {
+      List<Entity> entities = pLevel.getEntities(null, pCache.getAABB());
+      for (Entity entity : entities) {
+        if (!entity.isRemoved() && entity instanceof Enemy) {
+          double x = pPos.getX() + 0.5 - entity.getX();
+          double z = pPos.getZ() + 0.5 - entity.getZ();
 
+          if (entity instanceof LivingEntity living) {
+            living.knockback(1.0f, x, z);
+          } else {
+            knockBack(entity, 1.0f, x, z);
+          }
+
+          // This deals with entities "stuck" against walls
+          Vec3 delta = entity.getDeltaMovement();
+          entity.setDeltaMovement(delta.x, 0.4 + (entity.getBbHeight() * 0.1), delta.z);
+          entity.hasImpulse = true;
+        }
+      }
+    }
   }
 
   @Override
