@@ -362,7 +362,7 @@ public class RootsTags {
     public static final TagKey<Item> RUNES_PILLARS = modTag("pillars/runes/any");
 
     public static final TagKey<Item> CAPSTONES = modTag("capstones/any");
-    public static final TagKey<Item> PILLARS = modTag("capstones/any");
+    public static final TagKey<Item> PILLARS = modTag("pillars/any");
 
     public static final TagKey<Item> ACACIA_CAPSTONES = modTag("capstones/log/acacia");
     public static final TagKey<Item> DARK_OAK_CAPSTONES = modTag("capstones/log/dark_oak");

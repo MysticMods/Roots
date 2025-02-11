@@ -1,7 +1,5 @@
 {
   "values": [
-    "#roots:pillars/runes/any",
-    "#roots:pillars/log/any",
     "#roots:capstones/runes/any",
     "#roots:capstones/log/any"
   ]
