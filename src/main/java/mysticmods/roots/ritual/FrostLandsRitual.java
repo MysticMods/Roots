@@ -90,7 +90,7 @@ public class FrostLandsRitual extends Ritual {
       if (!entities.isEmpty()) {
         for (LivingEntity entity : entities) {
           entity.heal(entity.getMaxHealth() - entity.getHealth());
-          entity.clearFire();
+          entity.extinguishFire();
           affectedPositions.add(entity.blockPosition());
         }
       }
