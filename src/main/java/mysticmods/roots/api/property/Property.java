@@ -187,7 +187,7 @@ public interface Property<T> {
           group -> group.group(
               Codec.BOOL.fieldOf("defaultValue").forGetter(BooleanProperty::value),
               Codec.STRING.fieldOf("comment").forGetter(BooleanProperty::comment),
-              Codec.BOOL.optionalFieldOf("defaultValue", null).forGetter(o -> o.value)
+              Codec.BOOL.optionalFieldOf("default_value", null).forGetter(o -> o.value)
           ).apply(group, BooleanProperty::new));
       public static final MapCodec<BooleanProperty> FULL_CODEC = RecordCodecBuilder.mapCodec(
           group -> group.group(

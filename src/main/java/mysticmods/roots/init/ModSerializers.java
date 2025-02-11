@@ -60,8 +60,8 @@ public class ModSerializers {
   public static final DeferredHolder<PropertyType<?>, PropertyType<Property.StringProperty>> STRING_PROPERTY_TYPE = PROPERTY_TYPES.register("string_property", Property.StringProperty.Type::new);
 
   // Bool
-  public static final DeferredHolder<PropertySerializer<?>, PropertySerializer<Property.BooleanProperty>> BOOL_PROPERTY_SERIALIZER = PROPERTY_SERIALIZERS.register("bool_property", Property.BooleanProperty.Serializer::new);
-  public static final DeferredHolder<PropertyType<?>, PropertyType<Property.BooleanProperty>> BOOL_PROPERTY_TYPE = PROPERTY_TYPES.register("bool_property", Property.BooleanProperty.Type::new);
+  public static final DeferredHolder<PropertySerializer<?>, PropertySerializer<Property.BooleanProperty>> BOOL_PROPERTY_SERIALIZER = PROPERTY_SERIALIZERS.register("boolean_property", Property.BooleanProperty.Serializer::new);
+  public static final DeferredHolder<PropertyType<?>, PropertyType<Property.BooleanProperty>> BOOL_PROPERTY_TYPE = PROPERTY_TYPES.register("boolean_property", Property.BooleanProperty.Type::new);
 
   public static void register(IEventBus bus) {
     RECIPE_SERIALIZERS.register(bus);
