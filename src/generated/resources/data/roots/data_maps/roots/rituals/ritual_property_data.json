@@ -824,6 +824,24 @@
           "default_value": 20,
           "value": 20
         }
+      },
+      {
+        "id": "roots:warding/resistance_amplifier",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The amplifier of the resistance effect applied to entities.",
+          "default_value": 10,
+          "value": 10
+        }
+      },
+      {
+        "id": "roots:warding/resistance_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The duration of the resistance effect applied to entities.",
+          "default_value": 60,
+          "value": 60
+        }
       }
     ],
     "roots:wildroot_growth": [

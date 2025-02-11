@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
@@ -20,12 +21,14 @@ import java.util.List;
 
 // TODO: More
 public class WardingRitual extends Ritual {
+  private int potionDuration, potionAmplifier;
+
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB());
       for (LivingEntity entity : entities) {
-        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 10, false, false));
+        entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, potionDuration, potionAmplifier, false, false));
       }
     }
   }
@@ -37,7 +40,16 @@ public class WardingRitual extends Ritual {
 
   @Override
   protected void initialize(Holder<Ritual> holder) {
+    var properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    this.potionAmplifier = properties.get(ModRituals.WARDING_POTION_AMPLIFIER);
+    this.potionDuration = properties.get(ModRituals.WARDING_POTION_DURATION);
+  }
 
+  @Override
+  protected void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModRituals.WARDING_POTION_AMPLIFIER);
+    properties.add(ModRituals.WARDING_POTION_DURATION);
   }
 
   @Override

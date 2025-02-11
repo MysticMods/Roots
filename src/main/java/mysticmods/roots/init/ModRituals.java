@@ -133,6 +133,8 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> WARDING_INTERVAL = P.recordProperty("warding/interval", Property.ofInt(20, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> WARDING_RADIUS_XZ = P.recordProperty("warding/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> WARDING_RADIUS_Y = P.recordProperty("warding/radius_y", Property.ofInt(6, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> WARDING_POTION_DURATION = P.recordProperty("warding/resistance_duration", Property.ofInt(60, "The duration of the resistance effect applied to entities."));
+  public static final PropertyHolder<Property.IntegerProperty> WARDING_POTION_AMPLIFIER = P.recordProperty("warding/resistance_amplifier", Property.ofInt(10, "The amplifier of the resistance effect applied to entities."));
 
   public static final DeferredHolder<Ritual, WildrootGrowthRitual> WILDROOT_GROWTH = RITUAL.register("wildroot_growth", WildrootGrowthRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> WILDROOT_GROWTH_DURATION = P.recordProperty("wildroot_growth/duration", Property.ofInt(300, RitualProperties.DURATION));
