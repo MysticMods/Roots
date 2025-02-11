@@ -25,6 +25,7 @@ import java.util.function.BiPredicate;
 
 public class HeavyStormsRitual extends Ritual {
   private float lightningChance;
+  private boolean causesRain, causesThunder;
 
   private static final BiPredicate<Level, BlockPos> AIR_ABOVE = (level, pos) -> level.isEmptyBlock(pos.above()) && !level.isEmptyBlock(pos);
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(AIR_ABOVE);
@@ -38,9 +39,10 @@ public class HeavyStormsRitual extends Ritual {
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
       ServerLevel serverLevel = (ServerLevel) pLevel;
-      serverLevel.setWeatherParameters(0, getDuration(), true, true);
+      if (causesThunder || causesRain) {
+        serverLevel.setWeatherParameters(0, getDuration(), causesRain, causesThunder);
+      }
 
-      // TODO: This is bad
       if (randomSource.nextFloat() < lightningChance) {
         BlockPos pos = pCache.random(AIR_ABOVE, randomSource);
         if (pos != null) {
@@ -64,11 +66,15 @@ public class HeavyStormsRitual extends Ritual {
   protected void initialize(Holder<Ritual> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
     lightningChance = properties.get(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);
+    causesRain = properties.get(ModRituals.HEAVY_STORMS_CAUSES_RAIN);
+    causesThunder = properties.get(ModRituals.HEAVY_STORMS_CAUSES_THUNDER);
   }
 
   protected void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);
+    properties.add(ModRituals.HEAVY_STORMS_CAUSES_RAIN);
+    properties.add(ModRituals.HEAVY_STORMS_CAUSES_THUNDER);
   }
 
   @Override

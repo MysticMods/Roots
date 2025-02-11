@@ -486,6 +486,24 @@
           "default_value": 0.06,
           "value": 0.06
         }
+      },
+      {
+        "id": "roots:heavy_storms/causes_rain",
+        "value": {
+          "type": "roots:boolean_property",
+          "comment": "Whether the ritual causes rain.",
+          "default_value": true,
+          "value": true
+        }
+      },
+      {
+        "id": "roots:heavy_storms/causes_thunder",
+        "value": {
+          "type": "roots:boolean_property",
+          "comment": "Whether the ritual causes thunder.",
+          "default_value": true,
+          "value": true
+        }
       }
     ],
     "roots:overgrowth": [
