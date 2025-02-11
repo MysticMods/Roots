@@ -25,9 +25,11 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_RADIUS_XZ = P.recordProperty("animal_harvest/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_RADIUS_Y = P.recordProperty("animal_harvest/radius_y", Property.ofInt(6, RitualProperties.RADIUS_Y));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_COUNT = P.recordProperty("animal_harvest/count", Property.ofInt(1, "The number of entities to harvest per operation."));
-  public static final PropertyHolder<Property.FloatProperty> ANIMAL_HARVEST_LOOTING_CHANCE = P.recordProperty("animal_harvest/looting_chance", Property.ofFloat(0.05f, "Chance per operation that the loot level will be set to looting_value"));
+  public static final PropertyHolder<Property.FloatProperty> ANIMAL_HARVEST_LOOTING_CHANCE = P.recordProperty("animal_harvest/looting_chance", Property.ofFloat(0.2f, "Chance per operation that the loot level will be set to looting_value"));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_LOOTING_VALUE = P.recordProperty("animal_harvest/looting_value", Property.ofInt(1, "The defaultValue passed to the loot function if looting_chance was successful."));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_GLOW_DURATION = P.recordProperty("animal_harvest/glow_duration", Property.ofInt(20, "The duration of the glow effect applied to entities that have been harvest."));
+  public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_STACK_LIMIT = P.recordProperty("animal_harvest/stack_limit", Property.ofInt(1, "The maximum stack size of each item harvested. Set to -1 to not modify."));
+  public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_STACK_COUNT_LIMIT = P.recordProperty("animal_harvest/stack_count_limit", Property.ofInt(1, "If multiple items are dropped, the maximum number of items will be selected at random and the others discarded. Set to -1 to allow all items to drop."));
 
   public static final DeferredHolder<Ritual, BloomingRitual> BLOOMING = RITUAL.register("blooming", BloomingRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_DURATION = P.recordProperty("blooming/duration", Property.ofInt(3200, RitualProperties.DURATION));

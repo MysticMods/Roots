@@ -1,4 +1,7 @@
-// 1.21.1	2025-02-11T16:10:26.6560874	Registries
+// 1.21.1	2025-02-11T20:45:24.4729016	Registries
+5e8bb855917451e7d49f50565ec458fdbf545f9f data/roots/enchantment_provider/looting_i.json
+4613ff4e5c72a645ecacd42f85dc4f3f2556c83f data/roots/enchantment_provider/looting_ii.json
+0c8596040c48ad6356a20b62ba6aa0c11a66ac54 data/roots/enchantment_provider/looting_iii.json
 c20cd59d5be5009c2378c51f50cfd030b05c4362 data/roots/neoforge/biome_modifier/beetle_spawns.json
 8c32577e2e5ad5a5b84223a681039eecfeb91a83 data/roots/neoforge/biome_modifier/deer_spawns.json
 7c331c3d575f4a5546e774a1b844c9db71bc496e data/roots/neoforge/biome_modifier/duck_spawns.json

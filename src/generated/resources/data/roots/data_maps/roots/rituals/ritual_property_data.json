@@ -69,8 +69,26 @@
         "value": {
           "type": "roots:float_property",
           "comment": "Chance per operation that the loot level will be set to looting_value",
-          "default_value": 0.05,
-          "value": 0.05
+          "default_value": 0.2,
+          "value": 0.2
+        }
+      },
+      {
+        "id": "roots:animal_harvest/stack_count_limit",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "If multiple items are dropped, the maximum number of items will be selected at random and the others discarded. Set to -1 to allow all items to drop.",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:animal_harvest/stack_limit",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The maximum stack size of each item harvested. Set to -1 to not modify.",
+          "default_value": 1,
+          "value": 1
         }
       }
     ],

@@ -7,6 +7,7 @@ import mysticmods.roots.block.WildRootsBlock;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModFeatures;
+import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
@@ -19,6 +20,9 @@ import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.providers.SingleEnchantment;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Blocks;
@@ -76,8 +80,6 @@ public class RootsDataPackGenerators {
             event.getLookupProvider(),
             new RegistrySetBuilder()
                 .add(Registries.CONFIGURED_FEATURE, bootstrap -> {
-                  HolderGetter<PlacedFeature> placedFeatures = bootstrap.lookup(Registries.PLACED_FEATURE);
-
                   bootstrap.register(
                       ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY,
                       new ConfiguredFeature<>(
@@ -220,7 +222,12 @@ public class RootsDataPackGenerators {
                   bootstrap.register(ModFeatures.BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.BARROW_KEY), new RandomSpreadStructurePlacement(150, 65, RandomSpreadType.LINEAR, BARROW_SALT)));
                   bootstrap.register(ModFeatures.STANDING_STONES_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.STANDING_STONES_KEY), new RandomSpreadStructurePlacement(80, 35, RandomSpreadType.LINEAR, STANDING_STONES_SALT)));
                   bootstrap.register(ModFeatures.HUT_SET_KEY, new StructureSet(List.of(new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.HUT_KEY), 1), new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.RUINED_HUT_KEY), 1)), new RandomSpreadStructurePlacement(70, 35, RandomSpreadType.LINEAR, HUT_SALT)));
-
+                })
+                .add(Registries.ENCHANTMENT_PROVIDER, bootstrap -> {
+                  HolderGetter<Enchantment> getter = bootstrap.lookup(Registries.ENCHANTMENT);
+                  bootstrap.register(FakePlayerUtil.LOOTING_I, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(1)));
+                  bootstrap.register(FakePlayerUtil.LOOTING_II, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(2)));
+                  bootstrap.register(FakePlayerUtil.LOOTING_III, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(3)));
                 }),
             Set.of(RootsAPI.MODID)
         )
