@@ -1,5 +1,7 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
@@ -15,24 +17,34 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.level.storage.PrimaryLevelData;
+import net.neoforged.fml.common.Mod;
+
+import java.util.List;
 
 public class ProtectionRitual extends Ritual {
+  private boolean clearsWeather, shortensNight, lengthensDay;
+  private int dayLength, nightThreshold, clearDuration;
+  private float daySpeed, nightSpeed;
+
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     ServerLevel server = (ServerLevel) pLevel;
 
-    // TODO: Hard code?
-    long dayTime = server.getDayTime() % 24000;
+    long dayTime = server.getDayTime() % dayLength;
 
-    if (dayTime % 24000 >= 0 && dayTime % 24000 < 12000) {
-      server.setDayTimePerTick(0.3f);
+    if (dayTime % dayLength >= 0 && dayTime % dayLength < nightThreshold) {
+      if (lengthensDay) {
+        server.setDayTimePerTick(nightSpeed);
+      }
     } else {
-      server.setDayTimePerTick(2f);
+      if (shortensNight) {
+        server.setDayTimePerTick(daySpeed);
+      }
     }
 
-    if (duration % getInterval() == 0) {
+    if (duration % getInterval() == 0 && clearsWeather) {
       // Clear the rains!
-      server.setWeatherParameters(6000, 0, false, false);
+      server.setWeatherParameters(clearDuration, 0, false, false);
     }
   }
 
@@ -52,8 +64,29 @@ public class ProtectionRitual extends Ritual {
   }
 
   @Override
-  protected void initialize(Holder<Ritual> holder) {
+  protected void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModRituals.PROTECTION_DAY_LENGTH);
+    properties.add(ModRituals.PROTECTION_NIGHT_THRESHOLD);
+    properties.add(ModRituals.PROTECTION_CLEAR_DURATION);
+    properties.add(ModRituals.PROTECTION_CLEARS_WEATHER);
+    properties.add(ModRituals.PROTECTION_SHORTENS_NIGHT);
+    properties.add(ModRituals.PROTECTION_LENGTHENS_DAY);
+    properties.add(ModRituals.PROTECTION_DAY_SPEED);
+    properties.add(ModRituals.PROTECTION_NIGHT_SPEED);
+  }
 
+  @Override
+  protected void initialize(Holder<Ritual> holder) {
+    PropertyDataMap properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    dayLength = properties.get(ModRituals.PROTECTION_DAY_LENGTH);
+    nightThreshold = properties.get(ModRituals.PROTECTION_NIGHT_THRESHOLD);
+    clearDuration = properties.get(ModRituals.PROTECTION_CLEAR_DURATION);
+    clearsWeather = properties.get(ModRituals.PROTECTION_CLEARS_WEATHER);
+    shortensNight = properties.get(ModRituals.PROTECTION_SHORTENS_NIGHT);
+    lengthensDay = properties.get(ModRituals.PROTECTION_LENGTHENS_DAY);
+    daySpeed = properties.get(ModRituals.PROTECTION_DAY_SPEED);
+    nightSpeed = properties.get(ModRituals.PROTECTION_NIGHT_SPEED);
   }
 
   @Override

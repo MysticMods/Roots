@@ -24,10 +24,10 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_INTERVAL = P.recordProperty("animal_harvest/interval", Property.ofInt(110, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_RADIUS_XZ = P.recordProperty("animal_harvest/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_RADIUS_Y = P.recordProperty("animal_harvest/radius_y", Property.ofInt(6, RitualProperties.RADIUS_Y));
-  public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_COUNT = P.recordProperty("animal_harvest/count", Property.ofInt(2, "The number of entities to harvest per operation."));
-  public static final PropertyHolder<Property.FloatProperty> ANIMAL_HARVEST_LOOTING_CHANCE = P.recordProperty("animal_harvest/looting_chance", Property.ofFloat(0.2f, "Chance per operation that the loot level will be set to looting_value"));
-  public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_LOOTING_VALUE = P.recordProperty("animal_harvest/looting_value", Property.ofInt(2, "The defaultValue passed to the loot function if looting_chance was successful."));
-  public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_GLOW_DURATION = P.recordProperty("animal_harvest/glow_duration", Property.ofInt(10, "The duration of the glow effect applied to entities that have been harvest."));
+  public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_COUNT = P.recordProperty("animal_harvest/count", Property.ofInt(1, "The number of entities to harvest per operation."));
+  public static final PropertyHolder<Property.FloatProperty> ANIMAL_HARVEST_LOOTING_CHANCE = P.recordProperty("animal_harvest/looting_chance", Property.ofFloat(0.05f, "Chance per operation that the loot level will be set to looting_value"));
+  public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_LOOTING_VALUE = P.recordProperty("animal_harvest/looting_value", Property.ofInt(1, "The defaultValue passed to the loot function if looting_chance was successful."));
+  public static final PropertyHolder<Property.IntegerProperty> ANIMAL_HARVEST_GLOW_DURATION = P.recordProperty("animal_harvest/glow_duration", Property.ofInt(20, "The duration of the glow effect applied to entities that have been harvest."));
 
   public static final DeferredHolder<Ritual, BloomingRitual> BLOOMING = RITUAL.register("blooming", BloomingRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> BLOOMING_DURATION = P.recordProperty("blooming/duration", Property.ofInt(3200, RitualProperties.DURATION));
@@ -92,6 +92,14 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_INTERVAL = P.recordProperty("protection/interval", Property.ofInt(20, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_RADIUS_XZ = P.recordProperty("protection/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> PROTECTION_RADIUS_Y = P.recordProperty("protection/radius_y", Property.ofInt(6, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> PROTECTION_DAY_LENGTH = P.recordProperty("protection/day_length", Property.ofInt(24000, "The length of a day."));
+  public static final PropertyHolder<Property.IntegerProperty> PROTECTION_NIGHT_THRESHOLD = P.recordProperty("protection/night_threshold", Property.ofInt(12000, "The point at which day transitions to night."));
+  public static final PropertyHolder<Property.BooleanProperty> PROTECTION_CLEARS_WEATHER = P.recordProperty("protection/clears_weather", Property.ofBool(true, "Whether the ritual should clear weather."));
+  public static final PropertyHolder<Property.BooleanProperty> PROTECTION_SHORTENS_NIGHT = P.recordProperty("protection/shortens_night", Property.ofBool(true, "Whether the ritual shortens the length of the night by the defined value."));
+  public static final PropertyHolder<Property.BooleanProperty> PROTECTION_LENGTHENS_DAY = P.recordProperty("protection/lengthens_day", Property.ofBool(true, "Whether the ritual lengthens the length of the day by the defined value."));
+  public static final PropertyHolder<Property.FloatProperty> PROTECTION_DAY_SPEED = P.recordProperty("protection/day_speed", Property.ofFloat(0.3f, "The fractional value that is applied to the time per tick during the 'day' period. The default of 0.3 means that the length of the day is increased by about 60%. -1 represents no difference."));
+  public static final PropertyHolder<Property.FloatProperty> PROTECTION_NIGHT_SPEED = P.recordProperty("protection/night_speed", Property.ofFloat(2f, "The fractional value that is applied to the time per tick during the 'night' period. The default of 2 means that the length of the night is reduced by about 50%. -1 represents no difference."));
+  public static final PropertyHolder<Property.IntegerProperty> PROTECTION_CLEAR_DURATION = P.recordProperty("protection/clear_duration", Property.ofInt(6000, "How long the weather is cleared for, if the weather is cleared."));
 
   public static final DeferredHolder<Ritual, PurityRitual> PURITY = RITUAL.register("purity", PurityRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> PURITY_DURATION = P.recordProperty("purity/duration", Property.ofInt(1200, RitualProperties.DURATION));

@@ -16,7 +16,9 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 public class HealingAuraRitual extends Ritual {
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
+    if (duration % getInterval() == 0) {
 
+    }
   }
 
   @Override

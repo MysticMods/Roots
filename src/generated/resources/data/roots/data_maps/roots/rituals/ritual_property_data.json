@@ -42,8 +42,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The number of entities to harvest per operation.",
-          "default_value": 2,
-          "value": 2
+          "default_value": 1,
+          "value": 1
         }
       },
       {
@@ -51,8 +51,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The duration of the glow effect applied to entities that have been harvest.",
-          "default_value": 10,
-          "value": 10
+          "default_value": 20,
+          "value": 20
         }
       },
       {
@@ -60,8 +60,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The defaultValue passed to the loot function if looting_chance was successful.",
-          "default_value": 2,
-          "value": 2
+          "default_value": 1,
+          "value": 1
         }
       },
       {
@@ -69,8 +69,8 @@
         "value": {
           "type": "roots:float_property",
           "comment": "Chance per operation that the loot level will be set to looting_value",
-          "default_value": 0.2,
-          "value": 0.2
+          "default_value": 0.05,
+          "value": 0.05
         }
       }
     ],
@@ -561,6 +561,78 @@
           "comment": "How often the ritual is executed (must be shorter than duration)",
           "default_value": 20,
           "value": 20
+        }
+      },
+      {
+        "id": "roots:protection/day_length",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The length of a day.",
+          "default_value": 24000,
+          "value": 24000
+        }
+      },
+      {
+        "id": "roots:protection/night_threshold",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The point at which day transitions to night.",
+          "default_value": 12000,
+          "value": 12000
+        }
+      },
+      {
+        "id": "roots:protection/clear_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the weather is cleared for, if the weather is cleared.",
+          "default_value": 6000,
+          "value": 6000
+        }
+      },
+      {
+        "id": "roots:protection/clears_weather",
+        "value": {
+          "type": "roots:boolean_property",
+          "comment": "Whether the ritual should clear weather.",
+          "default_value": true,
+          "value": true
+        }
+      },
+      {
+        "id": "roots:protection/shortens_night",
+        "value": {
+          "type": "roots:boolean_property",
+          "comment": "Whether the ritual shortens the length of the night by the defined value.",
+          "default_value": true,
+          "value": true
+        }
+      },
+      {
+        "id": "roots:protection/lengthens_day",
+        "value": {
+          "type": "roots:boolean_property",
+          "comment": "Whether the ritual lengthens the length of the day by the defined value.",
+          "default_value": true,
+          "value": true
+        }
+      },
+      {
+        "id": "roots:protection/day_speed",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The fractional value that is applied to the time per tick during the 'day' period. The default of 0.3 means that the length of the day is increased by about 60%. -1 represents no difference.",
+          "default_value": 0.3,
+          "value": 0.3
+        }
+      },
+      {
+        "id": "roots:protection/night_speed",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The fractional value that is applied to the time per tick during the 'night' period. The default of 2 means that the length of the night is reduced by about 50%. -1 represents no difference.",
+          "default_value": 2.0,
+          "value": 2.0
         }
       }
     ],
