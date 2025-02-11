@@ -22,6 +22,7 @@ public class PyreLeafParticle extends FlyTowardsPositionParticle {
     this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
     this.quadSize = 0.1f + this.random.nextFloat() * 0.1f;
+    this.lifetime = (int)(Math.random() * 10.0) + 100;
   }
 
   @Override
