@@ -42,6 +42,12 @@ public class MeteorEntity extends Entity {
     return super.getAddEntityPacket(entity);
   }
 
+  // TODO: Is this the one that does "on fire"?
+  @Override
+  public boolean fireImmune() {
+    return true;
+  }
+
   @Override
   public void recreateFromPacket(ClientboundAddEntityPacket packet) {
     super.recreateFromPacket(packet);
