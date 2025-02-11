@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-11T21:02:56.6807838	Roots Item Tags
+// 1.21.1	2025-02-11T21:10:23.6200229	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -24,7 +24,7 @@ a1a905fc0c40dbeb097d5eab709a2633e8e6756d data/roots/tags/item/barks/mixed.json
 8473498616c937e7a388109a090efa57399841ab data/roots/tags/item/barks/warped.json
 76ab64b1af0fd463675cc19a388b583f04d4df91 data/roots/tags/item/barks/wildwood.json
 7f7d5f6cc9b5cfb39d240fc901c4ae2d2037ec14 data/roots/tags/item/bottles.json
-9e39feca0c1cb2fc9d1b5f60759f81d9fd7c2ded data/roots/tags/item/capstones/any.json
+06395192da51d3a99d46275a85c8427864eb09b1 data/roots/tags/item/capstones/any.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/item/capstones/log/acacia.json
 f846d929c941f56a6a0e8dc04cf8c973e2dcc6ca data/roots/tags/item/capstones/log/any.json
 4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/roots/tags/item/capstones/log/birch.json

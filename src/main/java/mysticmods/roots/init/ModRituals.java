@@ -149,6 +149,9 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> WINDWALL_INTERVAL = P.recordProperty("windwall/interval", Property.ofInt(10, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> WINDWALL_RADIUS_XZ = P.recordProperty("windwall/radius_xz", Property.ofInt(51, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> WINDWALL_RADIUS_Y = P.recordProperty("windwall/radius_y", Property.ofInt(31, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.FloatProperty> WINDWALL_KNOCKBACK_STRENGTH = P.recordProperty("windwall/knockback_strength", Property.ofFloat(1.0f, "The strength of the knockback applied to entities."));
+  public static final PropertyHolder<Property.DoubleProperty> WINDWALL_MINIMUM_Y_VELOCITY = P.recordProperty("windwall/min_y_velocity", Property.ofDouble(0.4, "The minimum y velocity applied to entities."));
+  public static final PropertyHolder<Property.DoubleProperty> WINDWALL_HEIGHT_PERCENTAGE = P.recordProperty("windwall/height_percentage", Property.ofDouble(0.1, "The percentage of the height of the relevant entity that will be added to their y velocity."));
 
   public static final DeferredHolder<Ritual, GroveSupplicationRitual> GROVE_SUPPLICATION = RITUAL.register("grove_supplication", GroveSupplicationRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> GROVE_SUPPLICATION_DURATION = P.recordProperty("grove_supplication/duration", Property.ofInt(250, RitualProperties.DURATION));

@@ -936,6 +936,33 @@
           "default_value": 10,
           "value": 10
         }
+      },
+      {
+        "id": "roots:windwall/knockback_strength",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The strength of the knockback applied to entities.",
+          "default_value": 1.0,
+          "value": 1.0
+        }
+      },
+      {
+        "id": "roots:windwall/min_y_velocity",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The minimum y velocity applied to entities.",
+          "default_value": 0.4,
+          "value": 0.4
+        }
+      },
+      {
+        "id": "roots:windwall/height_percentage",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The percentage of the height of the relevant entity that will be added to their y velocity.",
+          "default_value": 0.1,
+          "value": 0.1
+        }
       }
     ]
   }

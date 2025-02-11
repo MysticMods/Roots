@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
@@ -22,6 +23,9 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class WindwallRitual extends Ritual {
+  private float strength;
+  private double minimumY, heightPercentage;
+
   private void knockBack (Entity entity, float strength, double x, double z) {
     // TODO: Tag entities as not being knockable
     entity.hasImpulse = true;
@@ -47,14 +51,14 @@ public class WindwallRitual extends Ritual {
           double z = pPos.getZ() + 0.5 - entity.getZ();
 
           if (entity instanceof LivingEntity living) {
-            living.knockback(1.0f, x, z);
+            living.knockback(strength, x, z);
           } else {
-            knockBack(entity, 1.0f, x, z);
+            knockBack(entity, strength, x, z);
           }
 
           // This deals with entities "stuck" against walls
           Vec3 delta = entity.getDeltaMovement();
-          entity.setDeltaMovement(delta.x, 0.4 + (entity.getBbHeight() * 0.1), delta.z);
+          entity.setDeltaMovement(delta.x, minimumY + (entity.getBbHeight() * heightPercentage), delta.z);
           entity.hasImpulse = true;
         }
       }
@@ -68,7 +72,18 @@ public class WindwallRitual extends Ritual {
 
   @Override
   protected void initialize(Holder<Ritual> holder) {
+    var properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    this.strength = properties.get(ModRituals.WINDWALL_KNOCKBACK_STRENGTH);
+    this.minimumY = properties.get(ModRituals.WINDWALL_MINIMUM_Y_VELOCITY);
+    this.heightPercentage = properties.get(ModRituals.WINDWALL_HEIGHT_PERCENTAGE);
+  }
 
+  @Override
+  protected void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModRituals.WINDWALL_KNOCKBACK_STRENGTH);
+    properties.add(ModRituals.WINDWALL_MINIMUM_Y_VELOCITY);
+    properties.add(ModRituals.WINDWALL_HEIGHT_PERCENTAGE);
   }
 
   @Override
