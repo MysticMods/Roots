@@ -12,6 +12,7 @@ import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.FeyLightParticle;
+import mysticmods.roots.client.particle.PyreLeafParticle;
 import mysticmods.roots.client.particle.PyreParticle;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
@@ -142,5 +143,6 @@ public class ClientSetup {
   public static void onRegisterParticle (RegisterParticleProvidersEvent event) {
     event.registerSpriteSet(ModParticles.PYRE.get(), PyreParticle.Provider::new);
     event.registerSpriteSet(ModParticles.FEY_LIGHT.get(), FeyLightParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.PYRE_LEAF.get(), PyreLeafParticle.Provider::new);
   }
 }

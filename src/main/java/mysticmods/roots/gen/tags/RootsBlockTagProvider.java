@@ -142,6 +142,9 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     // Mangrove
     this.tag(RootsTags.Blocks.MANGROVE_CAPSTONES).add(RUNED_MANGROVE_LOG.get());
+
+    this.tag(RootsTags.Blocks.WILDWOOD_CAPSTONES).add(RUNED_WILDWOOD_LOG.get());
+
     // Runed mangrove log
     this.tag(RootsTags.Blocks.RUNED_MANGROVE_LOG).add(RUNED_MANGROVE_LOG.get());
 
@@ -243,25 +246,15 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     //noinspection unchecked
     this.tag(BlockTags.LOGS).addTags(RootsTags.Blocks.WILDWOOD_LOGS);
     this.tag(RootsTags.Blocks.ACACIA_PILLARS).add(Blocks.ACACIA_LOG, Blocks.ACACIA_WOOD);
-    this.tag(RootsTags.Blocks.ACACIA_CAPSTONES).add(RUNED_ACACIA_LOG.get());
     this.tag(RootsTags.Blocks.BIRCH_PILLARS).add(Blocks.BIRCH_LOG, Blocks.BIRCH_WOOD);
-    this.tag(RootsTags.Blocks.BIRCH_CAPSTONES).add(RUNED_BIRCH_LOG.get());
     this.tag(RootsTags.Blocks.DARK_OAK_PILLARS).add(Blocks.DARK_OAK_LOG, Blocks.DARK_OAK_WOOD);
-    this.tag(RootsTags.Blocks.DARK_OAK_CAPSTONES).add(RUNED_DARK_OAK_LOG.get());
     this.tag(RootsTags.Blocks.JUNGLE_PILLARS).add(Blocks.JUNGLE_LOG, Blocks.JUNGLE_WOOD);
-    this.tag(RootsTags.Blocks.JUNGLE_CAPSTONES).add(RUNED_JUNGLE_LOG.get());
     this.tag(RootsTags.Blocks.OAK_PILLARS).add(Blocks.OAK_LOG, Blocks.OAK_WOOD);
-    this.tag(RootsTags.Blocks.OAK_CAPSTONES).add(RUNED_OAK_LOG.get());
     this.tag(RootsTags.Blocks.SPRUCE_PILLARS).add(Blocks.SPRUCE_LOG, Blocks.SPRUCE_WOOD);
-    this.tag(RootsTags.Blocks.SPRUCE_CAPSTONES).add(RUNED_SPRUCE_LOG.get());
     this.tag(RootsTags.Blocks.WARPED_PILLARS).add(Blocks.WARPED_STEM, Blocks.WARPED_HYPHAE);
-    this.tag(RootsTags.Blocks.WARPED_CAPSTONES).add(RUNED_WARPED_STEM.get());
     this.tag(RootsTags.Blocks.CRIMSON_PILLARS).add(Blocks.CRIMSON_STEM, Blocks.CRIMSON_HYPHAE);
-    this.tag(RootsTags.Blocks.CRIMSON_CAPSTONES).add(RUNED_CRIMSON_STEM.get());
     this.tag(RootsTags.Blocks.WILDWOOD_PILLARS).add(WILDWOOD_LOG.get(), WILDWOOD_WOOD.get());
-    this.tag(RootsTags.Blocks.WILDWOOD_CAPSTONES).add(RUNED_WILDWOOD_LOG.get());
     this.tag(RootsTags.Blocks.MANGROVE_PILLARS).add(Blocks.MANGROVE_LOG, Blocks.MANGROVE_WOOD);
-    this.tag(RootsTags.Blocks.MANGROVE_CAPSTONES).add(RUNED_MANGROVE_LOG.get());
 
     //noinspection unchecked
     this.tag(RootsTags.Blocks.LOG_PILLARS)

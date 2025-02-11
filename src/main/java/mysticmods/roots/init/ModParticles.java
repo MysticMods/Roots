@@ -13,6 +13,7 @@ public class ModParticles {
   private static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, RootsAPI.MODID);
 
   public static final DeferredHolder<ParticleType<?>, ParticleType<SimpleParticleOptions>> PYRE = PARTICLES.register("pyre", () -> new SimpleParticleType(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<SimpleParticleOptions>> PYRE_LEAF = PARTICLES.register("pyre_leaf", () -> new SimpleParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<SimpleParticleOptions>> FEY_LIGHT = PARTICLES.register("fey_light", () -> new SimpleParticleType(false));
 
   public static void register(IEventBus bus) {

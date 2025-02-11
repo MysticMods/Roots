@@ -34,6 +34,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Granite quartz ore smelting
 // - Wildwood hanging sign? Wildwood sign?
 // - Block placement tests for rituals
+// - Pyre sound burning lah
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;

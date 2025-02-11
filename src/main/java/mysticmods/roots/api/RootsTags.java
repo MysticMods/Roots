@@ -107,7 +107,7 @@ public class RootsTags {
     public static final TagKey<Block> RUNES_PILLARS = modTag("pillars/runes/any");
 
     public static final TagKey<Block> CAPSTONES = modTag("capstones/any");
-    public static final TagKey<Block> PILLARS = modTag("capstones/any");
+    public static final TagKey<Block> PILLARS = modTag("pillars/any");
 
     public static final TagKey<Block> ACACIA_CAPSTONES = modTag("capstones/log/acacia");
     public static final TagKey<Block> DARK_OAK_CAPSTONES = modTag("capstones/log/dark_oak");
@@ -122,6 +122,7 @@ public class RootsTags {
 
     public static final TagKey<Block> LOG_PILLARS = modTag("pillars/log/any");
     public static final TagKey<Block> LOG_CAPSTONES = modTag("capstones/log/any");
+
     public static final TagKey<Block> ACACIA_PILLARS = modTag("pillars/log/acacia");
     public static final TagKey<Block> DARK_OAK_PILLARS = modTag("pillars/log/dark_oak");
     public static final TagKey<Block> OAK_PILLARS = modTag("pillars/log/oak");

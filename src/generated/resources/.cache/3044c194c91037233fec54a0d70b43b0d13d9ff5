@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-07T13:39:34.2124171	Roots Block Tags
+// 1.21.1	2025-02-11T16:10:26.6525437	Roots Block Tags
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/block/levers.json
@@ -54,17 +54,17 @@ ef69f74d96a0b9cd58f7e8f004b2c7a830741305 data/roots/tags/block/bark_logs/mangrov
 e025f5442dbf42cdb4e53084ad686f26138d8e97 data/roots/tags/block/bark_logs/spruce.json
 c6d64392f19c3ab3c5d775941e0be342c11f81e7 data/roots/tags/block/bark_logs/warped.json
 59f27b44b52c25fc43bc5215549f9f18b728567b data/roots/tags/block/bark_logs/wildwood.json
-9e39feca0c1cb2fc9d1b5f60759f81d9fd7c2ded data/roots/tags/block/capstones/any.json
-28c8dfa3e3be0c2af2188ed1670cc8dbbfb48bf5 data/roots/tags/block/capstones/log/acacia.json
+e20fa114ea0bf630f3835dacec5a5cbedb4e3b60 data/roots/tags/block/capstones/any.json
+9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/block/capstones/log/acacia.json
 f846d929c941f56a6a0e8dc04cf8c973e2dcc6ca data/roots/tags/block/capstones/log/any.json
-7d094f4f84acd90e833571bcf80ac4d3071962bb data/roots/tags/block/capstones/log/birch.json
-dcd6305ee737cdc1c03ba3b431ca9c0d75333a6e data/roots/tags/block/capstones/log/crimson.json
-503be33bfd28cf9c7e38dcbc1b4a934c0ba6fa48 data/roots/tags/block/capstones/log/dark_oak.json
-d10c6bdaaf24d8970c5f7e1e65f4f2f1dec96567 data/roots/tags/block/capstones/log/jungle.json
-605c5b597acf1cd8ec36e70b00fd7140abefd419 data/roots/tags/block/capstones/log/mangrove.json
-7f864839dcc0395b8d09de79feaeecbc39eb79c1 data/roots/tags/block/capstones/log/oak.json
-2fe8215e22bbc4924f949013cc8cd4fa3679e5fd data/roots/tags/block/capstones/log/spruce.json
-f6dfcd40f898081767ca4eb2e0227018db6d7a49 data/roots/tags/block/capstones/log/warped.json
+4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/roots/tags/block/capstones/log/birch.json
+cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/roots/tags/block/capstones/log/crimson.json
+9aa6f447519134a5bfbbb1090fb68fbbf0acfba5 data/roots/tags/block/capstones/log/dark_oak.json
+9e1e35863e6c3ff5fc8d62b51de09635288b2a51 data/roots/tags/block/capstones/log/jungle.json
+e16c92e31940c0c62767ba46b55ac10f3e133b58 data/roots/tags/block/capstones/log/mangrove.json
+0ac25de6437faa2cb2f6995d75aaf74b415934a6 data/roots/tags/block/capstones/log/oak.json
+36bfb819f350d3eb47ea68b0827dc8806efd8a37 data/roots/tags/block/capstones/log/spruce.json
+441a3240108cd2a8be4b02e0a0d23d5f878e4f09 data/roots/tags/block/capstones/log/warped.json
 cfc59fd1c2786fa98589ae79b2d8cfbc2eee3494 data/roots/tags/block/capstones/log/wildwood.json
 9c115a6486d5471ec7da7d8d38c5e85b74069410 data/roots/tags/block/capstones/runes/any.json
 17578a8ec82cf0a4f598a8656ffaa775eea0732a data/roots/tags/block/capstones/runes/rune.json
@@ -112,6 +112,7 @@ c55106d54db2ac749ccc95747891b03f570d8fc3 data/roots/tags/block/pedestals.json
 a0f512d942a5e0f1365b3fcea384de8dffce2a51 data/roots/tags/block/pedestals/grove.json
 c5d89cdbb8b3fe577eed9820640231ff10ee85d8 data/roots/tags/block/pedestals/limited.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/block/pedestals/ritual.json
+f848d81ab12aa420895973949d7dd762e5a36acf data/roots/tags/block/pillars/any.json
 307dae19f196ef71116992f2c10a1d6367d71c5e data/roots/tags/block/pillars/log/acacia.json
 84f44f11a710757dc91be87d29f5b393478b83e7 data/roots/tags/block/pillars/log/any.json
 e6a66df990a2e59f597879f3e0d9245712d32f88 data/roots/tags/block/pillars/log/birch.json

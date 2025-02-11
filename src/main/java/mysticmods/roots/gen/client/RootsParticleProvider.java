@@ -15,6 +15,7 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
   protected void addDescriptions() {
     this.spriteSet(ModParticles.PYRE.get(), RootsAPI.rl("simple"), 1, false);
     this.spriteSet(ModParticles.FEY_LIGHT.get(), RootsAPI.rl("simple_large"), 1, false);
+    this.spriteSet(ModParticles.PYRE_LEAF.get(), RootsAPI.rl("leaf"), 5, false);
   }
 
   @Override

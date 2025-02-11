@@ -19,9 +19,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
   // Active -> flames of some description
@@ -63,7 +66,8 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
 
   @Override
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING) && pRandom.nextInt(4) == 0) {
+    if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING)) {
+      if (pRandom.nextInt(4) == 0) {
         pLevel.addParticle(
             new SimpleParticleOptions(
                 ModParticles.PYRE,
@@ -78,6 +82,38 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
             0,
             0
         );
+      }
+
+      double x = (double) pPos.getX() + 0.5;
+      double y = (double) pPos.getY() + 2.0;
+      double z = (double) pPos.getZ() + 0.5;
+
+      BoundingBox bb = PyreBlockEntity.getPyreBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
+      List<BlockPos> positions = BlockPos.betweenClosedStream(bb).filter(p -> {
+        BlockState state = pLevel.getBlockState(p);
+        return state.is(RootsTags.Blocks.CAPSTONES);
+      }).map(BlockPos::immutable).toList();
+
+      for (BlockPos pos : positions) {
+        if (pRandom.nextInt(16) == 0) {
+          double nx = (double) ((float) pos.getX() + 0.5f + pRandom.nextFloat() - 0.5f);
+          double ny = (double) ((float) pos.getY() + 0.5f + pRandom.nextFloat() - 0.5f);
+          double nz = (double) ((float) pos.getZ() + 0.5f + pRandom.nextFloat() - 0.5f);
+          pLevel.addParticle(
+              new SimpleParticleOptions(
+                  ModParticles.PYRE_LEAF,
+                  pRandom.nextBoolean() ? 0x7abb75 : 0x2b6322,
+                  0f
+              ),
+              x,
+              y,
+              z,
+              (nx - x),
+              (ny - y),
+              (nz - z)
+          );
+        }
+      }
     }
   }
 }
