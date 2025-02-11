@@ -15,12 +15,28 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import java.util.List;
+import java.util.function.BiPredicate;
+
 public class GroveSupplicationRitual extends Ritual {
+  private static final BiPredicate<Level, BlockPos> GROVE_STONE_PREDICATE = (level, pos) -> {
+    BlockState state = level.getBlockState(pos);
+    return state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.GroveStone.ACTIVE) && !state.getValue(StateProperties.GroveStone.ACTIVE);
+  };
+
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(GROVE_STONE_PREDICATE);
+
+  @Override
+  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+    return PREDICATES;
+  }
+
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
+      // TODO: This currently activates every grove stone; maybe it should only activate 1?
       if (blockEntity.getBoundingBox() != null) {
-        BlockPos.betweenClosedStream(blockEntity.getBoundingBox()).forEach(pos -> {
+        for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
           BlockState state = blockEntity.getLevel().getBlockState(pos);
           if (state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL)) {
             if (state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.GroveStone.ACTIVE)) {
@@ -29,7 +45,7 @@ public class GroveSupplicationRitual extends Ritual {
               }
             }
           }
-        });
+        }
       }
     }
   }
