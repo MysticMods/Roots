@@ -20,40 +20,50 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiPredicate;
+
 public class WildrootGrowthRitual extends Ritual {
+  private static final BiPredicate<Level, BlockPos> MATURE_WILDROOT_CROP = (level, pos) -> {
+    BlockState state = level.getBlockState(pos);
+    if (state.is(RootsTags.Blocks.WILDROOT_CROP)) {
+      return state.hasProperty(ThreeStageCropBlock.AGE) && state.getValue(ThreeStageCropBlock.AGE) == ModBlocks.WILDROOT_CROP.value()
+          .getMaxAge();
+    }
+    return false;
+  };
+
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(MATURE_WILDROOT_CROP);
+
+  @Override
+  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+    return PREDICATES;
+  }
 
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % interval == 0) {
-      ServerLevel level = (ServerLevel) blockEntity.getLevel();
-      BlockPos.betweenClosedStream(getAABB().move(blockEntity.getBlockPos())).filter(o -> {
-        BlockState state = level.getBlockState(o);
-        if (state.is(RootsTags.Blocks.WILDROOT_CROP)) {
-          return state.hasProperty(ThreeStageCropBlock.AGE) && state.getValue(ThreeStageCropBlock.AGE) == ModBlocks.WILDROOT_CROP.value()
-              .getMaxAge();
-        }
-        return false;
-      }).findFirst().ifPresent(pos -> {
-        // It shouldn't be null
-        // Remove the crop
-        BlockPos treePos = pos.immutable();
-        BlockState currentState = level.getBlockState(treePos);
-        level.setBlock(treePos, Blocks.AIR.defaultBlockState(), 4);
-        BlockPos below = treePos.below();
-        // If it wasn't on a full height block, replace it with dirt
-        BlockState belowState = level.getBlockState(below);
-        if (!belowState.isFaceSturdy(level, below, Direction.UP)) {
-          level.setBlock(below, Blocks.DIRT.defaultBlockState(), 4);
-        }
-        // TODO:
-        if (!((AccessorMixinSaplingBlock) ModBlocks.WILDWOOD_SAPLING.get()).getTreeGrower()
-            .growTree(level, level.getChunkSource()
-                .getGenerator(), pos, Blocks.AIR.defaultBlockState(), level.getRandom())) {
-          // If we fail, set it back to how it was
-          level.setBlock(below, belowState, 4);
-          level.setBlock(treePos, currentState, 4);
-        }
-      });
+      ServerLevel level = (ServerLevel) pLevel;
+
+      BlockPos treePos = pCache.random(MATURE_WILDROOT_CROP, randomSource);
+      if (treePos == null) {
+        return; // TODO: Something here?
+      }
+      BlockState currentState = level.getBlockState(treePos);
+      level.setBlock(treePos, Blocks.AIR.defaultBlockState(), 4);
+      BlockPos below = treePos.below();
+      // If it wasn't on a full height block, replace it with dirt
+      BlockState belowState = level.getBlockState(below);
+      if (!belowState.isFaceSturdy(level, below, Direction.UP)) {
+        level.setBlock(below, Blocks.DIRT.defaultBlockState(), 4);
+      }
+      if (!((AccessorMixinSaplingBlock) ModBlocks.WILDWOOD_SAPLING.get()).getTreeGrower()
+          .growTree(level, level.getChunkSource()
+              .getGenerator(), treePos, Blocks.AIR.defaultBlockState(), level.getRandom())) {
+        level.setBlock(below, belowState, 4);
+        level.setBlock(treePos, currentState, 4);
+      }
     }
   }
 
