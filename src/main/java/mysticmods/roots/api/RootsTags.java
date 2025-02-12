@@ -436,6 +436,12 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> DISABLE_DISARM = modTag("disable_disarm");
     public static final TagKey<EntityType<?>> HEALABLE_ICE_CREATURES = modTag("healable_ice_creatures");
 
+    public static final TagKey<EntityType<?>> WINDWALL_FORCE_EXCLUDE = modTag("windwall_force_exclude");
+    public static final TagKey<EntityType<?>> WINDWALL_FORCE_INCLUDE = modTag("windwall_force_include");
+
+    public static final TagKey<EntityType<?>> ZOMBIE_VILLAGERS = modTag("zombie_villagers");
+    public static final TagKey<EntityType<?>> ZOMBIE_VILLAGERS_EXCLUDE = modTag("zombie_villagers_exclude");
+
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));
     }

@@ -86,6 +86,10 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.FORCE_FRIENDLY);
     this.tag(RootsTags.Entities.DISABLE_DISARM);
     this.tag(RootsTags.Entities.HEALABLE_ICE_CREATURES).add(EntityType.SNOW_GOLEM);
+    this.tag(RootsTags.Entities.ZOMBIE_VILLAGERS).add(EntityType.ZOMBIE_VILLAGER);
+    this.tag(RootsTags.Entities.ZOMBIE_VILLAGERS_EXCLUDE);
+    this.tag(RootsTags.Entities.WINDWALL_FORCE_EXCLUDE);
+    this.tag(RootsTags.Entities.WINDWALL_FORCE_INCLUDE);
   }
 
   @Override

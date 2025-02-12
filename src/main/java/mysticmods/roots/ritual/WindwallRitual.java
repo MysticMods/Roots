@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -46,7 +47,15 @@ public class WindwallRitual extends Ritual {
     if (duration % getInterval() == 0) {
       List<Entity> entities = pLevel.getEntities(null, pCache.getAABB());
       for (Entity entity : entities) {
-        if (!entity.isRemoved() && entity instanceof Enemy) {
+        if (!entity.isRemoved()) {
+          if (entity.getType().is(RootsTags.Entities.WINDWALL_FORCE_EXCLUDE)) {
+            continue;
+          }
+
+          if (!(entity instanceof Enemy) && !entity.getType().is(RootsTags.Entities.WINDWALL_FORCE_INCLUDE)) {
+            continue;
+          }
+
           double x = pPos.getX() + 0.5 - entity.getX();
           double z = pPos.getZ() + 0.5 - entity.getZ();
 
