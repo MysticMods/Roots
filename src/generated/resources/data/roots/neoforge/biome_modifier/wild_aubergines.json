@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#roots:wild_aubergine_biomes",
+  "biomes": "#roots:has_wild_aubergines",
   "features": "roots:wild_aubergine_patch",
   "step": "vegetal_decoration"
 }

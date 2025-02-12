@@ -574,7 +574,7 @@ public class RootsTags {
 
   public static class Biomes {
     // TODO: ??? has_barrow_structureS?
-    public static TagKey<Biome> HAS_BARROW_STRUCTURE = modTag("has_barrow_structure");
+    public static TagKey<Biome> HAS_BARROW_STRUCTURES = modTag("has_barrow_structures");
     public static TagKey<Biome> HAS_BEETLE_SPAWNS = modTag("has_beetle_spawns");
     public static TagKey<Biome> HAS_DEER_SPAWNS = modTag("has_deer_spawns");
     public static TagKey<Biome> HAS_DUCK_SPAWNS = modTag("has_duck_spawns");
@@ -583,13 +583,13 @@ public class RootsTags {
     public static TagKey<Biome> HAS_OWL_SPAWNS = modTag("has_owl_spawns");
     public static TagKey<Biome> HAS_SPROUT_SPAWNS = modTag("has_sprout_spawns");
     public static TagKey<Biome> HAS_STANDING_STONES = modTag("has_standing_stones");
-    public static TagKey<Biome> WILD_AUBERGINE_BIOMES = modTag("wild_aubergine_biomes");
-    public static TagKey<Biome> WILD_ROOTS_FOREST_BIOMES = modTag("wild_roots_forest_biomes");
-    public static TagKey<Biome> WILD_ROOTS_SPARSE_BIOMES = modTag("wild_roots_sparse_biomes");
-    public static TagKey<Biome> WILD_ROOTS_UNDERGROUND_BIOMES = modTag("wild_roots_underground_biomes");
-    public static TagKey<Biome> HAS_SILVER_ORE = modTag("has_silver_ore");
-    public static TagKey<Biome> HAS_GRANITE_QUARTZ_ORE = modTag("has_granite_quartz_ore");
-    public static TagKey<Biome> HAS_STONEPETAL = modTag("has_stonepetal");
+    public static TagKey<Biome> HAS_WILD_AUBERGINES = modTag("has_wild_aubergines");
+    public static TagKey<Biome> HAS_FOREST_WILD_ROOTS = modTag("has_forest_wild_roots");
+    public static TagKey<Biome> HAS_SPARSE_WILD_ROOTS = modTag("has_sparse_wild_roots");
+    public static TagKey<Biome> HAS_UNDERGROUND_WILD_ROOTS = modTag("has_underground_wild_roots");
+    public static TagKey<Biome> HAS_SILVER_ORES = modTag("has_silver_ores");
+    public static TagKey<Biome> HAS_GRANITE_QUARTZ_ORES = modTag("has_granite_quartz_ores");
+    public static TagKey<Biome> HAS_STONEPETALS = modTag("has_stonepetals");
 
     static TagKey<Biome> modTag(String name) {
       return TagKey.create(Registries.BIOME, RootsAPI.rl(name));

@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#roots:wild_roots_underground_biomes",
+  "biomes": "#roots:has_underground_wild_roots",
   "features": "roots:wild_roots_underground",
   "step": "underground_decoration"
 }

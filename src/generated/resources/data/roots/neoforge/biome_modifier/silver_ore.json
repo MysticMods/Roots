@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#roots:has_silver_ore",
+  "biomes": "#roots:has_silver_ores",
   "features": "roots:silver_ore",
   "step": "underground_ores"
 }

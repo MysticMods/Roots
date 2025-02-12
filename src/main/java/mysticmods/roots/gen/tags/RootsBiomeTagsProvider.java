@@ -20,7 +20,7 @@ public class RootsBiomeTagsProvider extends BiomeTagsProvider {
   @Override
   protected void addTags(HolderLookup.Provider provider) {
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.HAS_BARROW_STRUCTURE)
+    this.tag(RootsTags.Biomes.HAS_BARROW_STRUCTURES)
         .addTags(BiomeTags.IS_SAVANNA, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_PLAINS);
 
     //noinspection unchecked
@@ -54,23 +54,23 @@ public class RootsBiomeTagsProvider extends BiomeTagsProvider {
     this.tag(RootsTags.Biomes.HAS_STANDING_STONES)
         .addTags(BiomeTags.IS_SAVANNA, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_PLAINS);
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.WILD_AUBERGINE_BIOMES)
+    this.tag(RootsTags.Biomes.HAS_WILD_AUBERGINES)
         .addTags(BiomeTags.IS_FOREST, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_FOREST, Tags.Biomes.IS_PLAINS, BiomeTags.IS_SAVANNA, Tags.Biomes.IS_SAVANNA);
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.WILD_ROOTS_FOREST_BIOMES)
+    this.tag(RootsTags.Biomes.HAS_FOREST_WILD_ROOTS)
         .addTags(BiomeTags.IS_TAIGA, BiomeTags.IS_JUNGLE, BiomeTags.IS_SAVANNA, BiomeTags.IS_FOREST, BiomeTags.HAS_RUINED_PORTAL_SWAMP, Tags.Biomes.IS_CONIFEROUS_TREE, Tags.Biomes.IS_JUNGLE_TREE, Tags.Biomes.IS_DECIDUOUS_TREE, Tags.Biomes.IS_SWAMP);
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.WILD_ROOTS_SPARSE_BIOMES).addTags(BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_PLAINS);
+    this.tag(RootsTags.Biomes.HAS_SPARSE_WILD_ROOTS).addTags(BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_PLAINS);
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.WILD_ROOTS_UNDERGROUND_BIOMES).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
+    this.tag(RootsTags.Biomes.HAS_UNDERGROUND_WILD_ROOTS).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
 
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.HAS_GRANITE_QUARTZ_ORE).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
+    this.tag(RootsTags.Biomes.HAS_GRANITE_QUARTZ_ORES).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.HAS_SILVER_ORE).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
+    this.tag(RootsTags.Biomes.HAS_SILVER_ORES).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
 
     //noinspection unchecked
-    this.tag(RootsTags.Biomes.HAS_STONEPETAL).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
+    this.tag(RootsTags.Biomes.HAS_STONEPETALS).addTags(BiomeTags.IS_OVERWORLD, Tags.Biomes.IS_OVERWORLD);
   }
 
   @Override
