@@ -75,6 +75,8 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> HEALING_AURA_INTERVAL = P.recordProperty("healing_aura/interval", Property.ofInt(60, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> HEALING_AURA_RADIUS_XZ = P.recordProperty("healing_aura/radius_xz", Property.ofInt(15, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> HEALING_AURA_RADIUS_Y = P.recordProperty("healing_aura/radius_y", Property.ofInt(15, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.FloatProperty> HEALING_AURA_PLAYER_HEAL_AMOUNT = P.recordProperty("healing_aura/player_heal_amount", Property.ofFloat(1, "The amount of health to heal per interval."));
+  public static final PropertyHolder<Property.FloatProperty> HEALING_AURA_ENTITY_HEAL_AMOUNT = P.recordProperty("healing_aura/entity_heal_amount", Property.ofFloat(1, "The amount of health to heal per interval."));
 
   public static final DeferredHolder<Ritual, HeavyStormsRitual> HEAVY_STORMS = RITUAL.register("heavy_storms", HeavyStormsRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_DURATION = P.recordProperty("heavy_storms/duration", Property.ofInt(2400, RitualProperties.DURATION));

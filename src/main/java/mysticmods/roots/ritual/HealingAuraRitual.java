@@ -1,5 +1,6 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
@@ -9,15 +10,30 @@ import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import java.util.List;
+
 public class HealingAuraRitual extends Ritual {
+  private float playerHeal, entityHeal;
+
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
+      List<Player> players = pLevel.getEntitiesOfClass(Player.class, pCache.getAABB());
+      for (Player player : players) {
+        player.heal(playerHeal);
+      }
 
+      // TODO: Tags
+      List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB(), o -> !(o instanceof Player));
+      for (LivingEntity entity : entities) {
+        entity.heal(entityHeal);
+      }
     }
   }
 
@@ -28,7 +44,16 @@ public class HealingAuraRitual extends Ritual {
 
   @Override
   protected void initialize(Holder<Ritual> holder) {
+    var proprties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    this.entityHeal = proprties.get(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT);
+    this.playerHeal = proprties.get(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT);
+  }
 
+  @Override
+  protected void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModRituals.HEALING_AURA_ENTITY_HEAL_AMOUNT);
+    properties.add(ModRituals.HEALING_AURA_PLAYER_HEAL_AMOUNT);
   }
 
   @Override

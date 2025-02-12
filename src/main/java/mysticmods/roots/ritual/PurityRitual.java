@@ -53,21 +53,22 @@ public class PurityRitual extends Ritual {
             continue;
           }
 
-          if (effect.getEffect().is(RootsTags.MobEffects.PURITY_FORCE_INCLUDE) || !effect.getEffect().value().isBeneficial()) {
+          if (effect.getEffect().is(RootsTags.MobEffects.PURITY_FORCE_INCLUDE) || !effect.getEffect().value()
+              .isBeneficial()) {
             toRemove.add(effect);
           }
         }
-      }
-      if (!toRemove.isEmpty()) {
-        for (int i = 0; i < potionCount; i++) {
-          if (toRemove.isEmpty()) {
-            break;
+        if (!toRemove.isEmpty()) {
+          for (int i = 0; i < potionCount; i++) {
+            if (toRemove.isEmpty()) {
+              break;
+            }
+            Holder<MobEffect> effectToRemove = toRemove.get(randomSource.nextInt(toRemove.size())).getEffect();
+            entity.removeEffect(effectToRemove);
           }
-          Holder<MobEffect> effectToRemove = toRemove.get(randomSource.nextInt(toRemove.size())).getEffect();
-          entity.removeEffect(effectToRemove);
         }
+        toRemove.clear();
       }
-      toRemove.clear();
     }
   }
 

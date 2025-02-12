@@ -457,6 +457,24 @@
           "default_value": 60,
           "value": 60
         }
+      },
+      {
+        "id": "roots:healing_aura/entity_heal_amount",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The amount of health to heal per interval.",
+          "default_value": 1.0,
+          "value": 1.0
+        }
+      },
+      {
+        "id": "roots:healing_aura/player_heal_amount",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The amount of health to heal per interval.",
+          "default_value": 1.0,
+          "value": 1.0
+        }
       }
     ],
     "roots:heavy_storms": [
