@@ -19,6 +19,7 @@ public class RootsBlockEntityTagsProvider extends IntrinsicHolderTagsProvider<Bl
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
+    // TODO:
   }
 
   @Override

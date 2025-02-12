@@ -400,6 +400,9 @@ public class RootsTags {
   public static class MobEffects extends RootsTags {
     public static final TagKey<MobEffect> SUPPRESS_PARTICLES = modTag("suppress_particles");
 
+    public static final TagKey<MobEffect> PURITY_FORCE_EXCLUDE = modTag("purity_force_exclude");
+    public static final TagKey<MobEffect> PURITY_FORCE_INCLUDE = modTag("purity_force_include");
+
     static TagKey<MobEffect> modTag(String name) {
       return TagKey.create(Registries.MOB_EFFECT, RootsAPI.rl(name));
     }
