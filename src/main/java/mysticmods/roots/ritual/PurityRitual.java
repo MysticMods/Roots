@@ -1,23 +1,73 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.mixin.AccessorMixinZombieVillager;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PurityRitual extends Ritual {
+  private boolean convertZombies;
+  private int conversionAddition, potionCount;
+
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (duration % getInterval() == 0) {
+    List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB());
+    List<MobEffectInstance> toRemove = new ArrayList<>();
+    for (LivingEntity entity : entities) {
+      if (entity.getType().is(RootsTags.Entities.ZOMBIE_VILLAGERS) && !(entity.getType().is(RootsTags.Entities.ZOMBIE_VILLAGERS_EXCLUDE)) && entity instanceof ZombieVillager zombie) {
+        if (zombie.isConverting()) {
+          entity.extinguishFire();
+          if (convertZombies) {
+            int conversionTime = ((AccessorMixinZombieVillager) zombie).getVillagerConversionTime();
+            ((AccessorMixinZombieVillager) zombie).setVillagerConversionTime(conversionTime - conversionAddition);
+          }
+        }
+      }
+      if (duration % getInterval() == 0) {
+        for (MobEffectInstance effect : entity.getActiveEffects()) {
+          if (effect.isInfiniteDuration()) {
+            continue;
+          }
+
+          if (effect.getEffect().is(RootsTags.MobEffects.PURITY_FORCE_EXCLUDE)) {
+            continue;
+          }
+
+          if (effect.getEffect().is(RootsTags.MobEffects.PURITY_FORCE_INCLUDE) || !effect.getEffect().value().isBeneficial()) {
+            toRemove.add(effect);
+          }
+        }
+      }
+      if (!toRemove.isEmpty()) {
+        for (int i = 0; i < potionCount; i++) {
+          if (toRemove.isEmpty()) {
+            break;
+          }
+          Holder<MobEffect> effectToRemove = toRemove.get(randomSource.nextInt(toRemove.size())).getEffect();
+          entity.removeEffect(effectToRemove);
+        }
+      }
+      toRemove.clear();
     }
   }
 
@@ -28,7 +78,18 @@ public class PurityRitual extends Ritual {
 
   @Override
   protected void initialize(Holder<Ritual> holder) {
+    var properties = holder.getData(DataMaps.RITUAL_PROPERTY_DATA);
+    this.conversionAddition = properties.get(ModRituals.PURITY_CONVERSION_ADDITION);
+    this.potionCount = properties.get(ModRituals.PURITY_POTION_COUNT);
+    this.convertZombies = properties.get(ModRituals.PURITY_CONVERT_ZOMBIES);
+  }
 
+  @Override
+  protected void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModRituals.PURITY_CONVERSION_ADDITION);
+    properties.add(ModRituals.PURITY_POTION_COUNT);
+    properties.add(ModRituals.PURITY_CONVERT_ZOMBIES);
   }
 
   @Override

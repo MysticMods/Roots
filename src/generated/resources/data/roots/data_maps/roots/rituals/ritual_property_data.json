@@ -708,6 +708,33 @@
           "default_value": 20,
           "value": 20
         }
+      },
+      {
+        "id": "roots:purity/conversion_addition",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of ticks to reduce the remaining conversion duration for zombie villagers; this is applied every teck, rather than every interval.",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:purity/potion_count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The number of potion effects to clear per entity per interval.",
+          "default_value": 1,
+          "value": 1
+        }
+      },
+      {
+        "id": "roots:purity/convert_zombies",
+        "value": {
+          "type": "roots:boolean_property",
+          "comment": "Whether the ritual should reduce the conversion time of zombie villagers.",
+          "default_value": true,
+          "value": true
+        }
       }
     ],
     "roots:spreading_forest": [

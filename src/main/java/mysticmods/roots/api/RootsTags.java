@@ -411,8 +411,6 @@ public class RootsTags {
   public static class Potions extends RootsTags {
     public static final TagKey<Potion> RANDOM_BLACKLIST = compatTag("random_potion_blacklist");
 
-    public static final TagKey<Potion> SUPPRESS_PARTICLES = modTag("suppress_particles");
-
     static TagKey<Potion> modTag(String name) {
       return TagKey.create(Registries.POTION, RootsAPI.rl(name));
     }

@@ -110,6 +110,9 @@ public class ModRituals {
   public static final PropertyHolder<Property.IntegerProperty> PURITY_INTERVAL = P.recordProperty("purity/interval", Property.ofInt(20, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> PURITY_RADIUS_XZ = P.recordProperty("purity/radius_xz", Property.ofInt(8, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> PURITY_RADIUS_Y = P.recordProperty("purity/radius_y", Property.ofInt(4, RitualProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.BooleanProperty> PURITY_CONVERT_ZOMBIES = P.recordProperty("purity/convert_zombies", Property.ofBool(true, "Whether the ritual should reduce the conversion time of zombie villagers."));
+  public static final PropertyHolder<Property.IntegerProperty> PURITY_CONVERSION_ADDITION = P.recordProperty("purity/conversion_addition", Property.ofInt(1, "The number of ticks to reduce the remaining conversion duration for zombie villagers; this is applied every teck, rather than every interval."));
+  public static final PropertyHolder<Property.IntegerProperty> PURITY_POTION_COUNT = P.recordProperty("purity/potion_count", Property.ofInt(1, "The number of potion effects to clear per entity per interval."));
 
   public static final DeferredHolder<Ritual, SpreadingForestRitual> SPREADING_FOREST = RITUAL.register("spreading_forest", SpreadingForestRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> SPREADING_FOREST_DURATION = P.recordProperty("spreading_forest/duration", Property.ofInt(2400, RitualProperties.DURATION));

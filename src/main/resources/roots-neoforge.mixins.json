@@ -9,6 +9,7 @@
     "AccessorMixinMob",
     "AccessorMixinOverworldBiomes",
     "AccessorMixinSaplingBlock",
+    "AccessorMixinZombieVillager",
     "MixinMobEffectInstance",
     "MixinRecipeBuilder"
   ],
