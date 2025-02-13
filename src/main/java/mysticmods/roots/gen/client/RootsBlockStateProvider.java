@@ -131,10 +131,10 @@ public class RootsBlockStateProvider extends BlockStateProvider {
         .getPath(), modLoc("block/fire_soil_side"), modLoc("block/fire_soil_top"));
     getVariantBuilder(ModBlocks.MAGMATIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(fieryPillar).build());
-    ModelFile feyLightModel = models().cubeAll(ModBlocks.FEY_LIGHT.getKey().location()
+/*    ModelFile feyLightModel = models().cubeAll(ModBlocks.FEY_LIGHT.getKey().location()
         .getPath(), modLoc("block/grove_padding")).renderType("cutout");
     getVariantBuilder(ModBlocks.FEY_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder()
-        .modelFile(feyLightModel).build());
+        .modelFile(feyLightModel).build());*/
     ModelFile ritualPedestal = models().withExistingParent("ritual_pedestal", modLoc("block/complex/ritual_pedestal"));
     getVariantBuilder(ModBlocks.RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(ritualPedestal).build());
@@ -289,8 +289,12 @@ public class RootsBlockStateProvider extends BlockStateProvider {
         .modelFile(unendingBowl).build());
 
     getVariantBuilder(ModBlocks.BAFFLECAP.get()).forAllStates(state -> ConfiguredModel.builder()
-        .modelFile(models().getBuilder("block/bafflecap").parent(crop).texture("cross", modLoc("block/bafflecap")))
+        .modelFile(models().getBuilder("block/bafflecap").parent(crop).texture("cross", modLoc("block/bafflecap")).renderType("cutout"))
         .build());
+
+    ModelFile feyLight = models().getExistingFile(modLoc("block/fey_light"));
+
+    getVariantBuilder(ModBlocks.FEY_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(feyLight).build());
 
     crop(ModBlocks.WILDROOT_CROP, false);
     crop(ModBlocks.CLOUD_BERRY_CROP, false);

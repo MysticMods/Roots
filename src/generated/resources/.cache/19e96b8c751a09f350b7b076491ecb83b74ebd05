@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-11T16:10:26.6495469	Block States: roots
+// 1.21.1	2025-02-13T23:17:04.8958029	Block States: roots
 d6d9d849b37d4c9bbae93caf5d0f1ab5feb69f1e assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -125,7 +125,7 @@ e270af58daeef05e46298e5587263f2668a5a014 assets/roots/models/block/aubergine_2.j
 39265f2f5183f976f94910c59279c42c4ccdcc9e assets/roots/models/block/aubergine_5.json
 840e4cdcaf021c2ed285dd56b905ab7a878bb58c assets/roots/models/block/aubergine_6.json
 08965e57fb3064ff2188c63c8abb8429bcb86765 assets/roots/models/block/aubergine_7.json
-aaaf3d858c57f54f4930ef6d9a6de9db2bbf88a7 assets/roots/models/block/bafflecap.json
+3e120acd85d6cef9eb4c8138201efe8b51b1dbe7 assets/roots/models/block/bafflecap.json
 a076c58c5f09aa86b069ca3477a91954cc5302b0 assets/roots/models/block/bafflecap_block_inside.json
 6375c58178466cc667a06fe4de33eef34e4b77d3 assets/roots/models/block/bafflecap_block_inventory.json
 f9cea8a96c762409ea11f6f6ec5c6ae1429b1640 assets/roots/models/block/bafflecap_block_outside.json
@@ -146,7 +146,6 @@ f5f46144b8eaa642931b0dc5d112818a54050be2 assets/roots/models/block/decorative_so
 a022cb36231ab157a81f943b978cefb4d34da89f assets/roots/models/block/dewgonia_3.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/block/display_pedestal.json
 fffe4a6f70ac80922be19069fb256e09224069b1 assets/roots/models/block/elemental_soil.json
-86cf2da0467ab9d3b857bbd89c34ce6a10ffc822 assets/roots/models/block/fey_light.json
 63066e6a11d1083198cbca20b72baaa62f59b0d4 assets/roots/models/block/granite_quartz_ore.json
 920b08299dc3c05b6ca2bb4004faf8b730d1974e assets/roots/models/block/grove_crafter.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/block/grove_pedestal.json

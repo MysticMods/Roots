@@ -56,7 +56,7 @@ public class FeyLightEmitter extends NoRenderParticle {
                 0f
             ),
             x + (random.nextFloat() - 0.5) * 0.2,
-            y + (random.nextFloat() - 0.5) * 0.3,
+            y + (random.nextFloat() - 0.5) * 0.2,
             z + (random.nextFloat() - 0.5) * 0.2,
             0,
             0,
