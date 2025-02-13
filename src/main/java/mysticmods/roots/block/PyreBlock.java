@@ -6,7 +6,7 @@ import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.particle.SimpleParticleOptions;
+import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
@@ -69,7 +69,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
     if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING)) {
       if (pRandom.nextInt(4) == 0) {
         pLevel.addParticle(
-            new SimpleParticleOptions(
+            new ColorGravityParticleOptions(
                 ModParticles.PYRE,
                 pRandom.nextBoolean() ? 0xc96c03 : 0xe9bd39,
                 0x8b3100,
@@ -100,7 +100,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
           double ny = (double) ((float) pos.getY() + 0.5f + pRandom.nextFloat() - 0.5f);
           double nz = (double) ((float) pos.getZ() + 0.5f + pRandom.nextFloat() - 0.5f);
           pLevel.addParticle(
-              new SimpleParticleOptions(
+              new ColorGravityParticleOptions(
                   ModParticles.PYRE_LEAF,
                   pRandom.nextBoolean() ? 0x7abb75 : 0x2b6322,
                   0f

@@ -1,7 +1,7 @@
 package mysticmods.roots.entity.projectile;
 
 import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.particle.SimpleParticleOptions;
+import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -11,8 +11,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerEntity;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
@@ -71,7 +69,7 @@ public class MeteorEntity extends Entity {
       if (this.level().isClientSide()) {
         for (int i = 0; i < 9; i++) {
           level().addParticle(
-              new SimpleParticleOptions(
+              new ColorGravityParticleOptions(
                   ModParticles.METEOR,
                   0xe87a21,
                   0xc10000,

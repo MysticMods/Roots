@@ -11,17 +11,13 @@ import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
-import mysticmods.roots.client.particle.FeyLightParticle;
-import mysticmods.roots.client.particle.MeteorParticle;
-import mysticmods.roots.client.particle.PyreLeafParticle;
-import mysticmods.roots.client.particle.PyreParticle;
+import mysticmods.roots.client.particle.*;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -144,8 +140,10 @@ public class ClientSetup {
   @SubscribeEvent
   public static void onRegisterParticle (RegisterParticleProvidersEvent event) {
     event.registerSpriteSet(ModParticles.PYRE.get(), PyreParticle.Provider::new);
-    event.registerSpriteSet(ModParticles.FEY_LIGHT.get(), FeyLightParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PYRE_LEAF.get(), PyreLeafParticle.Provider::new);
     event.registerSpriteSet(ModParticles.METEOR.get(), MeteorParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.FEY_LIGHT.get(), FeyLightParticle.Provider::new);
+
+    event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
   }
 }

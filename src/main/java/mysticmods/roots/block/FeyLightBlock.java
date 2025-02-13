@@ -4,7 +4,9 @@ import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.FeyLightBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.init.ModParticles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
@@ -24,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 
-public class FeyLightBlock extends Block implements EntityBlock {
+public class FeyLightBlock extends Block {
   public static BooleanProperty DECAYING = BooleanProperty.create("decaying");
   public static IntegerProperty DECAY = IntegerProperty.create("decay", 0, 10);
   public static BooleanProperty COLORED = BooleanProperty.create("colored");
@@ -58,10 +60,20 @@ public class FeyLightBlock extends Block implements EntityBlock {
   @Override
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRand) {
     super.animateTick(pState, pLevel, pPos, pRand);
-
+    if (pRand.nextInt(2) == 0) {
+      pLevel.addParticle(
+          (ParticleOptions) ModParticles.FEY_LIGHT_EMITTER.value(),
+          pPos.getX() + 0.5,
+          pPos.getY() + 0.5,
+          pPos.getZ() + 0.5,
+          0,
+          0,
+          0
+      );
+    }
   }
 
-  @Override
+/*  @Override
   public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
     return new FeyLightBlockEntity(pos, state);
   }
@@ -73,5 +85,5 @@ public class FeyLightBlock extends Block implements EntityBlock {
     }
 
     return null;
-  }
+  }*/
 }

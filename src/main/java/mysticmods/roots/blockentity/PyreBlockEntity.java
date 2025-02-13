@@ -16,7 +16,6 @@ import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.*;
-import mysticmods.roots.particle.SimpleParticleOptions;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;

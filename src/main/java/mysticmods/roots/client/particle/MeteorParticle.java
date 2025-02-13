@@ -1,6 +1,6 @@
 package mysticmods.roots.client.particle;
 
-import mysticmods.roots.particle.SimpleParticleOptions;
+import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
@@ -60,9 +60,9 @@ public class MeteorParticle extends TextureSheetParticle {
     }
   }
 
-  public record Provider(SpriteSet sprite) implements ParticleProvider<SimpleParticleOptions> {
+  public record Provider(SpriteSet sprite) implements ParticleProvider<ColorGravityParticleOptions> {
     @Override
-    public Particle createParticle(SimpleParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public Particle createParticle(ColorGravityParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       var particle = new MeteorParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2(), type.gravity());
       particle.pickSprite(sprite);
       return particle;
