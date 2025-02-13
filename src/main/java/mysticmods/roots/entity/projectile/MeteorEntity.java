@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerEntity;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -26,8 +27,6 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-
-// We don't extend Projectile as there's no owner, cannot be deflected, doesn't hit blocks until it is below a threshold point,
 
 public class MeteorEntity extends Entity {
   private static final EntityDataAccessor<Integer> MINIMUM_HEIGHT = SynchedEntityData.defineId(MeteorEntity.class, EntityDataSerializers.INT);
@@ -65,24 +64,24 @@ public class MeteorEntity extends Entity {
     BlockPos currentPosition = this.blockPosition();
     if (this.level().isClientSide() || this.level().hasChunkAt((this.blockPosition()))) {
       if (getDeltaMovement().equals(Vec3.ZERO)) {
-        setDeltaMovement(new Vec3(0, -0.5, 0));
+        setDeltaMovement(new Vec3(0, -0.70, 0));
         this.hasImpulse = true;
       }
 
       if (this.level().isClientSide()) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 9; i++) {
           level().addParticle(
               new SimpleParticleOptions(
-                  ModParticles.PYRE,
-                  this.random.nextBoolean() ? 0xc96c03 : 0xe9bd39,
-                  0x8b3100,
+                  ModParticles.METEOR,
+                  0xe87a21,
+                  0xc10000,
                   -(this.random.nextFloat() * 0.03f)
               ),
-              getX() + (this.random.nextFloat() - 0.5f) * 0.4f,
+              getX() + (this.random.nextFloat() - 0.5f) * 0.35f,
               getY(),
-              getZ() + (this.random.nextFloat() - 0.5f) * 0.4f,
+              getZ() + (this.random.nextFloat() - 0.5f) * 0.35f,
               0,
-              0,
+              -0.01f,
               0
           );
         }
@@ -119,7 +118,7 @@ public class MeteorEntity extends Entity {
       double d1 = this.getY() + delta.y;
       double d2 = this.getZ() + delta.z;
 
-      this.setDeltaMovement(delta.add(delta.normalize().scale(0.2)).scale(0.25));
+      this.setDeltaMovement(delta.add(delta.normalize().scale(0.2)).scale(0.45));
       this.setPos(d0, d1, d2);
     } else {
       this.discard();
@@ -180,5 +179,10 @@ public class MeteorEntity extends Entity {
   @Override
   protected void tryCheckInsideBlocks() {
     super.tryCheckInsideBlocks();
+  }
+
+  @Override
+  public boolean isOnFire() {
+    return true;
   }
 }

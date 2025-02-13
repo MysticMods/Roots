@@ -13,6 +13,7 @@ public class ModelHolder {
   public static final ModelLayerLocation SPROUT = new ModelLayerLocation(RootsAPI.rl("sprout"), "main");
   public static final ModelLayerLocation BEETLE_ARMOR = new ModelLayerLocation(RootsAPI.rl("beetle_armor"), "main");
   public static final ModelLayerLocation ANTLER_ARMOR = new ModelLayerLocation(RootsAPI.rl("antler_armor"), "main");
+  public static final ModelLayerLocation METEOR = new ModelLayerLocation(RootsAPI.rl("meteor"), "main");
 
   public static void init() {
   }

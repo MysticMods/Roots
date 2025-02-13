@@ -12,7 +12,7 @@ public class MeteorParticle extends TextureSheetParticle {
   protected MeteorParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2, float gravity) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.speedUpWhenYMotionIsBlocked = true;
-    this.lifetime = 40;
+    this.lifetime = 10;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
     this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
     this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
@@ -21,13 +21,13 @@ public class MeteorParticle extends TextureSheetParticle {
     this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
     this.gravity = gravity;
-    this.xd = 0;
-    this.yd *= 0.03f;
-    this.zd = 0;
-    this.hasPhysics = false;
+    this.hasPhysics = true;
     this.quadSize = 0.2f;
     this.rotSpeed = 0f;
     this.spinAcceleration = (float) Math.toRadians(this.random.nextBoolean() ? -5 : 5);
+    this.xd = 0;
+    this.zd = 0;
+    this.yd *= 0.03f + this.random.nextFloat() * 0.3f;
   }
 
   @Override
@@ -53,16 +53,8 @@ public class MeteorParticle extends TextureSheetParticle {
         this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
       }
 
-      float spinFactor = 1.0f - f;
-      spinFactor *= spinFactor;
       f *= f;
       f *= f;
-
-      if (this.spinAcceleration != 0.0f) {
-        this.rotSpeed += this.spinAcceleration / 20.0f * spinFactor;
-        this.oRoll = this.roll;
-        this.roll += this.rotSpeed;
-      }
 
       this.quadSize *= 1.0f - f;
     }

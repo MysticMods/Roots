@@ -29,7 +29,7 @@ public class FireStormRitual extends Ritual {
       if (entities.size() < count) {
         MeteorEntity meteor = ModEntities.METEOR.get().create(pLevel);
         double x = pPos.getX() + 16 * (randomSource.nextDouble() - 0.5);
-        double y = pPos.getY() + 23;
+        double y = pPos.getY() + 10;
         double z = pPos.getZ() + 16 * (randomSource.nextDouble() - 0.5);
         if (meteor == null) {
           return;
