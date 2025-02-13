@@ -118,7 +118,7 @@ public class MeteorEntity extends Entity {
       double d1 = this.getY() + delta.y;
       double d2 = this.getZ() + delta.z;
 
-      this.setDeltaMovement(delta.add(delta.normalize().scale(0.2)).scale(0.45));
+      this.setDeltaMovement(delta.add(delta.normalize().scale(0.2)).scale(0.5));
       this.setPos(d0, d1, d2);
     } else {
       this.discard();
