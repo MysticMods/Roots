@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -113,6 +114,13 @@ public class EntityEventHandler {
   public static void onEntityTarget(LivingChangeTargetEvent event) {
     if (event.getEntity().hasEffect(ModEffects.GEAS)) {
       event.setNewAboutToBeSetTarget(null);
+    }
+  }
+
+  @SubscribeEvent
+  public static void onEntityDetection (LivingEvent.LivingVisibilityEvent event) {
+    if (event.getEntity().hasEffect(ModEffects.NONDETECTION)) {
+      event.modifyVisibility(0);
     }
   }
 }

@@ -88,6 +88,7 @@ public class ModSpells {
   // Nondetection (350 cooldown)
   public static final DeferredHolder<Spell, NondetectionSpell> NONDETECTION = spell(Spells.NONDETECTION, NondetectionSpell::new, ChatFormatting.DARK_AQUA, () -> List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0250), Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250)));
   public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_COOLDOWN = P.recordProperty("nondetection/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_DURATION = P.recordProperty("nondetection/duration", Property.ofInt(45 * 60, "The duration of the nondetection effect in ticks."));
 
   // Fey Light (20 cooldown)
   public static final DeferredHolder<Spell, FeyLightSpell> FEY_LIGHT = spell(Spells.FEY_LIGHT, FeyLightSpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.0625), Cost.add(ModHerbs.PERESKIA, 0.0625)));

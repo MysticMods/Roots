@@ -437,6 +437,15 @@
           "default_value": 350,
           "value": 350
         }
+      },
+      {
+        "id": "roots:nondetection/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The duration of the nondetection effect in ticks.",
+          "default_value": 2700,
+          "value": 2700
+        }
       }
     ],
     "roots:petal_shell": [

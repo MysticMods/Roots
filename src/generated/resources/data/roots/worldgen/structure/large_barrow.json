@@ -7,7 +7,7 @@
   "size": 1,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": -1
+    "absolute": 0
   },
   "start_pool": "roots:large_barrow_pool/start_pool",
   "step": "surface_structures",
