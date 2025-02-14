@@ -6,6 +6,8 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.entity.projectile.WildfireEntity;
+import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSpells;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -33,6 +35,10 @@ public class WildfireSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
+    WildfireEntity wildfire = new WildfireEntity(ModEntities.WILDFIRE.get(), pPlayer, pLevel);
+    wildfire.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0, 0.1f, 0);
+    pLevel.addFreshEntity(wildfire);
+
     return cooldown;
   }
 }

@@ -1,11 +1,327 @@
 package mysticmods.roots.entity.projectile;
 
+import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.particle.ColorGravityParticleOptions;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileDeflection;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.*;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class WildfireEntity extends AbstractHurtingProjectile {
-  protected WildfireEntity(EntityType<? extends AbstractHurtingProjectile> entityType, Level level) {
+import javax.annotation.Nullable;
+
+public class WildfireEntity extends Projectile {
+  // TODO: Snapshot storage
+  private int life;
+  private SnapshotStorage snapshotStorage = new SnapshotStorage();
+
+  public WildfireEntity(EntityType<? extends WildfireEntity> entityType, Level level) {
     super(entityType, level);
+  }
+
+  public WildfireEntity(EntityType<? extends WildfireEntity> entityType, double x, double y, double z, Level level) {
+    super(entityType, level);
+    this.setPos(x, y, z);
+
+  }
+
+  public WildfireEntity(EntityType<? extends WildfireEntity> entityType, LivingEntity owner, Level level) {
+    this(entityType, owner.getX(), owner.getEyeY() - 0.1, owner.getZ(), level);
+    this.setOwner(owner);
+  }
+
+  public SnapshotStorage getSnapshotStorage() {
+    return snapshotStorage;
+  }
+
+  @Override
+  public boolean shouldRenderAtSqrDistance(double distance) {
+    double d0 = this.getBoundingBox().getSize() * 10.0;
+    if (Double.isNaN(d0)) {
+      d0 = 1.0;
+    }
+
+    d0 *= 64.0 * getViewScale();
+    return distance < d0 * d0;
+  }
+
+  @Override
+  public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
+    super.shoot(x, y, z, velocity, inaccuracy);
+    this.life = 0;
+  }
+
+  @Override
+  public void lerpMotion(double x, double y, double z) {
+    super.lerpMotion(x, y, z);
+    this.life = 0;
+  }
+
+  @Override
+  public void tick() {
+    super.tick();
+    if (!level().isClientSide) {
+      tickDespawn();
+    }
+
+    this.snapshotStorage.tick(this);
+
+    Vec3 vec3 = this.getDeltaMovement();
+    if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
+      double d0 = vec3.horizontalDistance();
+      this.setYRot((float) (Mth.atan2(vec3.x, vec3.z) * 180.0F / (float) Math.PI));
+      this.setXRot((float) (Mth.atan2(vec3.y, d0) * 180.0F / (float) Math.PI));
+      this.yRotO = this.getYRot();
+      this.xRotO = this.getXRot();
+    }
+
+    BlockPos blockpos = this.blockPosition();
+    BlockState blockstate = this.level().getBlockState(blockpos);
+    if (!blockstate.isAir()) {
+      VoxelShape voxelshape = blockstate.getCollisionShape(this.level(), blockpos);
+      if (!voxelshape.isEmpty()) {
+        Vec3 vec31 = this.position();
+
+        for (AABB aabb : voxelshape.toAabbs()) {
+          if (aabb.move(blockpos).contains(vec31)) {
+            this.discard();
+            return;
+          }
+        }
+      }
+    }
+
+    Vec3 vec32 = this.position();
+    Vec3 vec33 = vec32.add(vec3);
+    HitResult hitresult = this.level()
+        .clip(new ClipContext(vec32, vec33, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+    if (hitresult.getType() != HitResult.Type.MISS) {
+      vec33 = hitresult.getLocation();
+    }
+
+    while (!this.isRemoved()) {
+      EntityHitResult entityhitresult = this.findHitEntity(vec32, vec33);
+      if (entityhitresult != null) {
+        hitresult = entityhitresult;
+      }
+
+      if (hitresult != null && hitresult.getType() == HitResult.Type.ENTITY) {
+        Entity entity = ((EntityHitResult) hitresult).getEntity();
+        Entity entity1 = this.getOwner();
+        if (entity instanceof Player && entity1 instanceof Player && !((Player) entity1).canHarmPlayer((Player) entity)) {
+          hitresult = null;
+          entityhitresult = null;
+        }
+      }
+
+      if (hitresult != null && hitresult.getType() != HitResult.Type.MISS) {
+        if (net.neoforged.neoforge.event.EventHooks.onProjectileImpact(this, hitresult))
+          break;
+        ProjectileDeflection projectiledeflection = this.hitTargetOrDeflectSelf(hitresult);
+        this.hasImpulse = true;
+        if (projectiledeflection != ProjectileDeflection.NONE) {
+          break;
+        }
+      }
+
+      if (entityhitresult == null) {
+        break;
+      }
+
+      hitresult = null;
+    }
+
+    vec3 = this.getDeltaMovement();
+    double d5 = vec3.x;
+    double d6 = vec3.y;
+    double d1 = vec3.z;
+    for (int i = 0; i < 4; i++) {
+          level().addParticle(
+              new ColorGravityParticleOptions(
+                  ModParticles.METEOR,
+                  0xe87a21,
+                  0xc10000,
+                  -(this.random.nextFloat() * 0.03f)
+              ),
+              getX() + (this.random.nextFloat() - 0.5f) * 0.35f,
+              getY(),
+              getZ() + (this.random.nextFloat() - 0.5f) * 0.35f,
+              d5,
+              d6,
+              d1
+          );
+    }
+
+    double d7 = this.getX() + d5;
+    double d2 = this.getY() + d6;
+    double d3 = this.getZ() + d1;
+    double d4 = vec3.horizontalDistance();
+
+    this.setYRot((float) (Mth.atan2(d5, d1) * 180.0F / (float) Math.PI));
+
+    this.setXRot((float) (Mth.atan2(d6, d4) * 180.0F / (float) Math.PI));
+    this.setXRot(lerpRotation(this.xRotO, this.getXRot()));
+    this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
+    float f = 0.99F;
+
+    this.setDeltaMovement(vec3.scale(1));
+/*      if (!flag) {
+        this.applyGravity();
+      }*/
+
+    this.setPos(d7, d2, d3);
+    this.checkInsideBlocks();
+
+  }
+
+
+
+  @Override
+  protected double getDefaultGravity() {
+    return 0; // projectile is 0.05
+  }
+
+  @Override
+  public ProjectileDeflection deflection(Projectile projectile) {
+    return ProjectileDeflection.NONE;
+  }
+
+// TODO: Should fall?
+
+  // TODO: startFalling ?
+  protected void tickDespawn() {
+    this.life++;
+    if (this.life >= 1200) {
+      this.discard();
+    }
+  }
+
+  @Override
+  public void move(MoverType type, Vec3 pos) {
+    super.move(type, pos);
+    if (type != MoverType.SELF) {
+      // "startFalling" went here
+    }
+  }
+
+  @Override
+  protected void onHitEntity(EntityHitResult result) {
+    super.onHitEntity(result);
+    Entity entity = result.getEntity();
+    float f = (float) this.getDeltaMovement().length();
+    // Get damage from the spell instance
+    double d0 = 1;
+    Entity entity1 = this.getOwner();
+    // TODO:
+    DamageSource damagesource = this.damageSources()
+        .cactus(); //this.damageSources().arrow(this, (Entity) (entity1 != null ? entity1 : this));
+
+    int j = Mth.ceil(Mth.clamp((double) f * d0, 0.0, 2.147483647E9));
+
+    if (entity1 instanceof LivingEntity livingentity1) {
+      livingentity1.setLastHurtMob(entity);
+    }
+
+    boolean flag = entity.getType() == EntityType.ENDERMAN;
+    int i = entity.getRemainingFireTicks();
+
+    if (entity.hurt(damagesource, (float) j)) {
+      if (flag) {
+        return;
+      }
+
+      if (entity instanceof LivingEntity livingentity) {
+        this.doPostHurtEffects(livingentity);
+        if (livingentity != entity1 && livingentity instanceof Player && entity1 instanceof ServerPlayer && !this.isSilent()) {
+          // TODO: "Arrow hit player"
+          /*          ((ServerPlayer)entity1).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));*/
+        }
+
+
+      }
+
+      // Sound
+      //this.playSound(this.soundEvent, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+      this.discard();
+    } else {
+      entity.setRemainingFireTicks(i);
+      this.deflect(ProjectileDeflection.REVERSE, entity, this.getOwner(), false);
+      this.setDeltaMovement(this.getDeltaMovement().scale(0.2));
+      if (!this.level().isClientSide && this.getDeltaMovement().lengthSqr() < 1.0E-7) {
+        this.discard();
+      }
+    }
+    this.discard();
+  }
+
+  @Override
+  protected void onHitBlock(BlockHitResult result) {
+    super.onHitBlock(result);
+    this.discard();
+  }
+
+  @Nullable
+  protected EntityHitResult findHitEntity(Vec3 startVec, Vec3 endVec) {
+    return ProjectileUtil.getEntityHitResult(
+        this.level(), this, startVec, endVec, this.getBoundingBox().expandTowards(this.getDeltaMovement())
+            .inflate(1.0), this::canHitEntity
+    );
+  }
+
+  @Override
+  protected boolean canHitEntity(Entity target) {
+    return super.canHitEntity(target) && target != this;
+  }
+
+  @Override
+  protected void addAdditionalSaveData(CompoundTag compound) {
+    super.addAdditionalSaveData(compound);
+    compound.putShort("life", (short) this.life);
+
+    SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result().ifPresent(tag -> compound.put("snapshots", tag));
+  }
+
+  @Override
+  protected void readAdditionalSaveData(CompoundTag compound) {
+    super.readAdditionalSaveData(compound);
+    this.life = compound.getShort("life");
+
+    this.snapshotStorage = SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result().orElseGet(SnapshotStorage::new);
+  }
+
+  @Override
+  protected MovementEmission getMovementEmission() {
+    return Entity.MovementEmission.NONE;
+  }
+
+  @Override
+  public boolean isAttackable() {
+    return false;
+  }
+
+  @Override
+  protected void defineSynchedData(SynchedEntityData.Builder builder) {
+
+  }
+
+  protected void doPostHurtEffects(LivingEntity target) {
+
   }
 }

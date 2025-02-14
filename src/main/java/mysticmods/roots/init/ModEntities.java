@@ -3,6 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.entity.*;
 import mysticmods.roots.entity.projectile.MeteorEntity;
+import mysticmods.roots.entity.projectile.WildfireEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -23,32 +24,35 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModEntities {
   private static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(Registries.ENTITY_TYPE, RootsAPI.MODID);
 
-  public static DeferredHolder<EntityType<?>, EntityType<BeetleEntity>> BEETLE = REGISTER.register("beetle", () -> EntityType.Builder.of(BeetleEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<BeetleEntity>> BEETLE = REGISTER.register("beetle", () -> EntityType.Builder.of(BeetleEntity::new, MobCategory.CREATURE)
       .sized(0.75f, 0.75f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("beetle"));
-  public static DeferredHolder<EntityType<?>, EntityType<DeerEntity>> DEER = REGISTER.register("deer", () -> EntityType.Builder.of(DeerEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<DeerEntity>> DEER = REGISTER.register("deer", () -> EntityType.Builder.of(DeerEntity::new, MobCategory.CREATURE)
       .sized(1.0f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("deer"));
-  public static DeferredHolder<EntityType<?>, EntityType<FennecEntity>> FENNEC = REGISTER.register("fennec", () -> EntityType.Builder.of(FennecEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<FennecEntity>> FENNEC = REGISTER.register("fennec", () -> EntityType.Builder.of(FennecEntity::new, MobCategory.CREATURE)
       .sized(0.75f, 0.75f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("fennec"));
-  public static DeferredHolder<EntityType<?>, EntityType<SproutEntity>> TAN_SPROUT = REGISTER.register("tan_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<SproutEntity>> TAN_SPROUT = REGISTER.register("tan_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("tan_sprout"));
-  public static DeferredHolder<EntityType<?>, EntityType<SproutEntity>> GREEN_SPROUT = REGISTER.register("green_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<SproutEntity>> GREEN_SPROUT = REGISTER.register("green_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("green_sprout"));
-  public static DeferredHolder<EntityType<?>, EntityType<SproutEntity>> RED_SPROUT = REGISTER.register("red_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<SproutEntity>> RED_SPROUT = REGISTER.register("red_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("red_sprout"));
-  public static DeferredHolder<EntityType<?>, EntityType<SproutEntity>> PURPLE_SPROUT = REGISTER.register("purple_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<SproutEntity>> PURPLE_SPROUT = REGISTER.register("purple_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 1.0f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("purple_sprout"));
-  public static DeferredHolder<EntityType<?>, EntityType<OwlEntity>> OWL = REGISTER.register("owl", () -> EntityType.Builder.of(OwlEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<OwlEntity>> OWL = REGISTER.register("owl", () -> EntityType.Builder.of(OwlEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("owl"));
-  public static DeferredHolder<EntityType<?>, EntityType<DuckEntity>> DUCK = REGISTER.register("duck", () -> EntityType.Builder.of(DuckEntity::new, MobCategory.CREATURE)
+  public static final DeferredHolder<EntityType<?>, EntityType<DuckEntity>> DUCK = REGISTER.register("duck", () -> EntityType.Builder.of(DuckEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 0.9f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("duck"));
 
-  public static DeferredHolder<EntityType<?>, EntityType<MeteorEntity>> METEOR = REGISTER.register("meteor", () -> EntityType.Builder.of(MeteorEntity::new, MobCategory.MISC).sized(0.3f, 0.3f).eyeHeight(0.13f).clientTrackingRange(4).updateInterval(10).build("meteor"));
+  public static final DeferredHolder<EntityType<?>, EntityType<MeteorEntity>> METEOR = REGISTER.register("meteor", () -> EntityType.Builder.of(MeteorEntity::new, MobCategory.MISC)
+      .sized(0.3f, 0.3f).eyeHeight(0.13f).clientTrackingRange(4).updateInterval(10).build("meteor"));
+  public static final DeferredHolder<EntityType<?>, EntityType<WildfireEntity>> WILDFIRE = REGISTER.register("wildfire", () -> EntityType.Builder.<WildfireEntity>of(WildfireEntity::new, MobCategory.MISC)
+      .sized(0.5f, 0.5f).clientTrackingRange(4).updateInterval(10).build("wildfire"));
 
   @SubscribeEvent
   public static void registerEntitySpawns(RegisterSpawnPlacementsEvent event) {
