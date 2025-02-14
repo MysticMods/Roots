@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-13T23:17:04.899809	Roots Block Tags
+// 1.21.1	2025-02-14T18:42:00.7577976	Roots Block Tags
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/block/levers.json
@@ -8,6 +8,7 @@ cd69f25ff26a2b62c306b9fea7903c3c7e0aef0a data/c/tags/block/ores/quartz.json
 cd950175fadc56e90dec5f776fb9160949dafcfe data/c/tags/block/storage_blocks/silver.json
 9d01930b8d10586485700b7c1aa738059b75744c data/minecraft/tags/block/acacia_logs.json
 cd950175fadc56e90dec5f776fb9160949dafcfe data/minecraft/tags/block/beacon_base_blocks.json
+d2f2457ef825e4b6560b40dd0fadf3e1fb275462 data/minecraft/tags/block/big_dripleaf_placeable.json
 4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/minecraft/tags/block/birch_logs.json
 c6d13638c4a16cb628232a0b669ba8f156563075 data/minecraft/tags/block/buttons.json
 b6d0e662abeb2be7d10b28c25db6301f5bf0ba32 data/minecraft/tags/block/climbable.json
@@ -26,6 +27,7 @@ e16c92e31940c0c62767ba46b55ac10f3e133b58 data/minecraft/tags/block/mangrove_logs
 84ad4138f81f2c32f36030da92bf0cbfdb66650c data/minecraft/tags/block/mineable/hoe.json
 d9f56f7cc81f1e407f2d9d6e7f882c0ee1ace0b3 data/minecraft/tags/block/mineable/pickaxe.json
 d2f2457ef825e4b6560b40dd0fadf3e1fb275462 data/minecraft/tags/block/mineable/shovel.json
+d2f2457ef825e4b6560b40dd0fadf3e1fb275462 data/minecraft/tags/block/mushroom_grow_block.json
 d94e40d9884b762d3b9eb3ee1f66f143ea3becec data/minecraft/tags/block/needs_iron_tool.json
 0ac25de6437faa2cb2f6995d75aaf74b415934a6 data/minecraft/tags/block/oak_logs.json
 43fd1fad5475b5ae8ca897bfd77506ccdf7ddab7 data/minecraft/tags/block/planks.json
@@ -141,6 +143,7 @@ a7ef113d913fd7247a2d2351669ffe371d25ed46 data/roots/tags/block/runestone.json
 56557294f6a5c85d9b4eb4d23a781ed386a9f56c data/roots/tags/block/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/block/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/block/soils/water.json
+b0b78e0b5a383fc7dd5123f288ef32aed5d67184 data/roots/tags/block/soil_eligible_crops.json
 5f4f84c327055a94b7f900b7819bd4239b8d550b data/roots/tags/block/standing_stone_crops.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/block/stonepetal.json
 b147fcff5c0b4d72df1cb7809b063b2562180832 data/roots/tags/block/supports_manging_moss.json

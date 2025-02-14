@@ -50,6 +50,9 @@ public class RootsTags {
     // General soils (filled in by ModTags)
     public static final TagKey<Block> SOILS = modTag("soils");
 
+    // Blocks that can be put on soils
+    public static final TagKey<Block> SOIL_ELIGIBLE_CROPS = modTag("soil_eligible_crops");
+
     // Specific soils
     public static final TagKey<Block> WATER_SOIL = modTag("soils/water");
     public static final TagKey<Block> AIR_SOIL = modTag("soils/air");

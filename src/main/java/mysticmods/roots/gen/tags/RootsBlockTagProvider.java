@@ -2,6 +2,7 @@ package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -325,7 +326,35 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(BlockTags.BIG_DRIPLEAF_PLACEABLE).addTag(RootsTags.Blocks.SOILS);
 
-    
+    this.tag(BlockTags.MUSHROOM_GROW_BLOCK).addTag(RootsTags.Blocks.SOILS);
+
+    this.tag(RootsTags.Blocks.SOIL_ELIGIBLE_CROPS).add(
+        // Classic crops
+        Blocks.WHEAT,
+        Blocks.BEETROOTS,
+        Blocks.CARROTS,
+        Blocks.POTATOES,
+        Blocks.MELON_STEM,
+        Blocks.MELON,
+        Blocks.ATTACHED_MELON_STEM,
+        Blocks.ATTACHED_PUMPKIN_STEM,
+        Blocks.PUMPKIN_STEM,
+        Blocks.PUMPKIN,
+        Blocks.TORCHFLOWER_CROP,
+        Blocks.PITCHER_CROP,
+        // Non-traditional crops
+        Blocks.NETHER_WART,
+        // Mushrooms
+        Blocks.RED_MUSHROOM,
+        Blocks.BROWN_MUSHROOM,
+        Blocks.CRIMSON_FUNGUS,
+        Blocks.WARPED_FUNGUS,
+        BAFFLECAP.get(),
+        // Berry bushes
+        Blocks.SWEET_BERRY_BUSH
+    ).addTag(
+        RootsTags.Blocks.CROPS
+    );
   }
 
   @Override

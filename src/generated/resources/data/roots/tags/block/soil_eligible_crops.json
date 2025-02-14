@@ -1,0 +1,24 @@
+{
+  "values": [
+    "minecraft:wheat",
+    "minecraft:beetroots",
+    "minecraft:carrots",
+    "minecraft:potatoes",
+    "minecraft:melon_stem",
+    "minecraft:melon",
+    "minecraft:attached_melon_stem",
+    "minecraft:attached_pumpkin_stem",
+    "minecraft:pumpkin_stem",
+    "minecraft:pumpkin",
+    "minecraft:torchflower_crop",
+    "minecraft:pitcher_crop",
+    "minecraft:nether_wart",
+    "minecraft:red_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus",
+    "roots:bafflecap",
+    "minecraft:sweet_berry_bush",
+    "#roots:crops"
+  ]
+}

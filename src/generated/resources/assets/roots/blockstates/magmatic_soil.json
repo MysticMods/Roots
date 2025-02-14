@@ -1,21 +1,147 @@
 {
   "variants": {
-    "soil_type=air": {
+    "moisture=0,soil_type=air": {
       "model": "roots:block/magmatic_soil"
     },
-    "soil_type=default": {
+    "moisture=0,soil_type=default": {
       "model": "roots:block/magmatic_soil"
     },
-    "soil_type=earth": {
+    "moisture=0,soil_type=earth": {
       "model": "roots:block/magmatic_soil"
     },
-    "soil_type=fire": {
+    "moisture=0,soil_type=fire": {
       "model": "roots:block/magmatic_soil"
     },
-    "soil_type=none": {
+    "moisture=0,soil_type=none": {
       "model": "roots:block/magmatic_soil"
     },
-    "soil_type=water": {
+    "moisture=0,soil_type=water": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=1,soil_type=air": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=1,soil_type=default": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=1,soil_type=earth": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=1,soil_type=fire": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=1,soil_type=none": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=1,soil_type=water": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=2,soil_type=air": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=2,soil_type=default": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=2,soil_type=earth": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=2,soil_type=fire": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=2,soil_type=none": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=2,soil_type=water": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=3,soil_type=air": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=3,soil_type=default": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=3,soil_type=earth": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=3,soil_type=fire": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=3,soil_type=none": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=3,soil_type=water": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=4,soil_type=air": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=4,soil_type=default": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=4,soil_type=earth": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=4,soil_type=fire": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=4,soil_type=none": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=4,soil_type=water": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=5,soil_type=air": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=5,soil_type=default": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=5,soil_type=earth": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=5,soil_type=fire": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=5,soil_type=none": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=5,soil_type=water": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=6,soil_type=air": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=6,soil_type=default": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=6,soil_type=earth": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=6,soil_type=fire": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=6,soil_type=none": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=6,soil_type=water": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=7,soil_type=air": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=7,soil_type=default": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=7,soil_type=earth": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=7,soil_type=fire": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=7,soil_type=none": {
+      "model": "roots:block/magmatic_soil"
+    },
+    "moisture=7,soil_type=water": {
       "model": "roots:block/magmatic_soil"
     }
   }

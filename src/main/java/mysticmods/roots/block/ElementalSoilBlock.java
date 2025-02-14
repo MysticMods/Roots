@@ -1,5 +1,6 @@
 package mysticmods.roots.block;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.crop.ElementalType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +30,11 @@ public class ElementalSoilBlock extends FarmBlock {
 
   @Override
   public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
-    return super.canSustainPlant(state, level, soilPosition, facing, plant);
+    if (plant.is(RootsTags.Blocks.SOIL_ELIGIBLE_CROPS)) {
+      return TriState.TRUE;
+    }
+
+    return TriState.DEFAULT;
   }
 
   @Override
