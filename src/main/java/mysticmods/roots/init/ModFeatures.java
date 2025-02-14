@@ -94,8 +94,10 @@ public class ModFeatures {
   public static ResourceKey<BiomeModifier> STONEPETAL_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("stonepetal"));
 
   public static ResourceKey<Structure> BARROW_KEY = ResourceKey.create(Registries.STRUCTURE, RootsAPI.rl("barrow"));
+  public static ResourceKey<Structure> LARGE_BARROW_KEY = ResourceKey.create(Registries.STRUCTURE, RootsAPI.rl("large_barrow"));
   public static ResourceKey<StructureTemplatePool> BARROW_START_POOL_KEY = ResourceKey.create(Registries.TEMPLATE_POOL, RootsAPI.rl("barrow_pool/start_pool"));
   public static ResourceKey<StructureTemplatePool> BARROW_DOWN_POOL_KEY = ResourceKey.create(Registries.TEMPLATE_POOL, RootsAPI.rl("barrow_pool/down_pool"));
+  public static ResourceKey<StructureTemplatePool> LARGE_BARROW_START_POOL_KEY = ResourceKey.create(Registries.TEMPLATE_POOL, RootsAPI.rl("large_barrow_pool/start_pool"));
   public static ResourceKey<Structure> STANDING_STONES_KEY = ResourceKey.create(Registries.STRUCTURE, RootsAPI.rl("standing_stones"));
   public static ResourceKey<Structure> HUT_KEY = ResourceKey.create(Registries.STRUCTURE, RootsAPI.rl("hut"));
   public static ResourceKey<StructureTemplatePool> HUT_DOWN_POOL_KEY = ResourceKey.create(Registries.TEMPLATE_POOL, RootsAPI.rl("hut_pool/down_pool"));
@@ -105,6 +107,7 @@ public class ModFeatures {
   public static ResourceKey<StructureTemplatePool> RUINED_HUT_START_POOL_KEY = ResourceKey.create(Registries.TEMPLATE_POOL, RootsAPI.rl("hut_ruined_pool/start_pool"));
 
   public static ResourceKey<StructureSet> BARROW_SET_KEY = ResourceKey.create(Registries.STRUCTURE_SET, RootsAPI.rl("barrow"));
+  public static ResourceKey<StructureSet> LARGE_BARROW_SET_KEY = ResourceKey.create(Registries.STRUCTURE_SET, RootsAPI.rl("large_barrow"));
   public static ResourceKey<StructureSet> HUT_SET_KEY = ResourceKey.create(Registries.STRUCTURE_SET, RootsAPI.rl("hut"));
   public static ResourceKey<StructureSet> STANDING_STONES_SET_KEY = ResourceKey.create(Registries.STRUCTURE_SET, RootsAPI.rl("standing_stones"));
 

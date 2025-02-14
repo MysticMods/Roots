@@ -69,6 +69,7 @@ public class RootsDataPackGenerators {
   // Salts used for the randomization of structure placements
   public static final int HUT_SALT = 8266497;
   public static final int BARROW_SALT = 314159223;
+  public static final int LARGE_BARROW_SALT = 41415568;
   public static final int STANDING_STONES_SALT = 14987612;
 
   @SubscribeEvent
@@ -202,6 +203,7 @@ public class RootsDataPackGenerators {
                 .add(Registries.TEMPLATE_POOL, bootstrap -> {
                   HolderGetter<StructureTemplatePool> getter = bootstrap.lookup(Registries.TEMPLATE_POOL);
                   Holder<StructureTemplatePool> holder = getter.getOrThrow(Pools.EMPTY);
+                  bootstrap.register(ModFeatures.LARGE_BARROW_START_POOL_KEY, new StructureTemplatePool(holder, List.of(Pair.of(StructurePoolElement.single("roots:big_barrow"), 1)), StructureTemplatePool.Projection.RIGID));
                   bootstrap.register(ModFeatures.BARROW_START_POOL_KEY, new StructureTemplatePool(holder, List.of(Pair.of(StructurePoolElement.single("roots:barrow1"), 1)), StructureTemplatePool.Projection.RIGID));
                   bootstrap.register(ModFeatures.BARROW_DOWN_POOL_KEY, new StructureTemplatePool(holder, List.of(Pair.of(StructurePoolElement.single("roots:barrow2"), 1)), StructureTemplatePool.Projection.RIGID));
                   bootstrap.register(ModFeatures.HUT_START_POOL_KEY, new StructureTemplatePool(holder, List.of(Pair.of(StructurePoolElement.single("roots:hut_top"), 1)), StructureTemplatePool.Projection.RIGID));
@@ -212,7 +214,9 @@ public class RootsDataPackGenerators {
                 .add(Registries.STRUCTURE, bootstrap -> {
                   HolderGetter<Biome> biomeGetter = bootstrap.lookup(Registries.BIOME);
                   HolderGetter<StructureTemplatePool> poolGetter = bootstrap.lookup(Registries.TEMPLATE_POOL);
-                  bootstrap.register(ModFeatures.BARROW_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_BARROW_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.ENCAPSULATE), poolGetter.getOrThrow(ModFeatures.BARROW_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                  bootstrap.register(ModFeatures.BARROW_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_BARROW_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_BOX), poolGetter.getOrThrow(ModFeatures.BARROW_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                  // TODO: Sink it slightly, but how?
+                  bootstrap.register(ModFeatures.LARGE_BARROW_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_BARROW_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_BOX), poolGetter.getOrThrow(ModFeatures.LARGE_BARROW_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
                   bootstrap.register(ModFeatures.HUT_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_HUT_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN), poolGetter.getOrThrow(ModFeatures.HUT_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
                   bootstrap.register(ModFeatures.RUINED_HUT_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_HUT_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN), poolGetter.getOrThrow(ModFeatures.RUINED_HUT_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
                   bootstrap.register(ModFeatures.STANDING_STONES_KEY, new StandingStonesStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_STANDING_STONES), Map.of(MobCategory.CREATURE, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(ModEntities.GREEN_SPROUT.get(), 1, 3, 4), new MobSpawnSettings.SpawnerData(ModEntities.PURPLE_SPROUT.get(), 1, 3, 4), new MobSpawnSettings.SpawnerData(ModEntities.RED_SPROUT.get(), 1, 3, 4), new MobSpawnSettings.SpawnerData(ModEntities.TAN_SPROUT.get(), 1, 3, 4)))), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN)));
@@ -220,6 +224,7 @@ public class RootsDataPackGenerators {
                 .add(Registries.STRUCTURE_SET, bootstrap -> {
                   HolderGetter<Structure> structureGetter = bootstrap.lookup(Registries.STRUCTURE);
                   bootstrap.register(ModFeatures.BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.BARROW_KEY), new RandomSpreadStructurePlacement(150, 65, RandomSpreadType.LINEAR, BARROW_SALT)));
+                  bootstrap.register(ModFeatures.LARGE_BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.LARGE_BARROW_KEY), new RandomSpreadStructurePlacement(320, 120, RandomSpreadType.LINEAR, LARGE_BARROW_SALT)));
                   bootstrap.register(ModFeatures.STANDING_STONES_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.STANDING_STONES_KEY), new RandomSpreadStructurePlacement(80, 35, RandomSpreadType.LINEAR, STANDING_STONES_SALT)));
                   bootstrap.register(ModFeatures.HUT_SET_KEY, new StructureSet(List.of(new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.HUT_KEY), 1), new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.RUINED_HUT_KEY), 1)), new RandomSpreadStructurePlacement(70, 35, RandomSpreadType.LINEAR, HUT_SALT)));
                 })

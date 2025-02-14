@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 41415568,
+    "separation": 120,
+    "spacing": 320
+  },
+  "structures": [
+    {
+      "structure": "roots:large_barrow",
+      "weight": 1
+    }
+  ]
+}

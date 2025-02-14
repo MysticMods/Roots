@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-13T23:17:04.9038815	Registries
+// 1.21.1	2025-02-14T20:44:05.2668679	Registries
 5e8bb855917451e7d49f50565ec458fdbf545f9f data/roots/enchantment_provider/looting_i.json
 4613ff4e5c72a645ecacd42f85dc4f3f2556c83f data/roots/enchantment_provider/looting_ii.json
 0c8596040c48ad6356a20b62ba6aa0c11a66ac54 data/roots/enchantment_provider/looting_iii.json
@@ -30,12 +30,14 @@ e9b18bf74180382987750fc15d5858a61199a236 data/roots/worldgen/placed_feature/gran
 f183da7a634555eff065ab0e8b468bc514c32557 data/roots/worldgen/placed_feature/wild_roots_forest.json
 ef9144ad33ff5d347abc5c044a79d298434fabe8 data/roots/worldgen/placed_feature/wild_roots_sparse.json
 4c9a9af81323ce4b8a8766e3c7072d6a969f624b data/roots/worldgen/placed_feature/wild_roots_underground.json
-d65bb59dd42de47ec76e3e71c1e7d8eee0cbdd18 data/roots/worldgen/structure/barrow.json
+5f7eb3aefb4e67e597bd7027849115f462b0645d data/roots/worldgen/structure/barrow.json
 0f232c2d5e2e5485f4cadd03dfd0a43b553aef1c data/roots/worldgen/structure/hut.json
+12756a9d0c5112ad804c1740b00a50200e7ffc2d data/roots/worldgen/structure/large_barrow.json
 e04b12dcf7c2a014184ef3b5bb259b88cae2a074 data/roots/worldgen/structure/ruined_hut.json
 ef2cf544c2846dc8f80cf8261c38a31d2b35d15f data/roots/worldgen/structure/standing_stones.json
 521c5c2e14bbe5d735eb106501a61a37243d9223 data/roots/worldgen/structure_set/barrow.json
 d4818cd803325af5f299d0730d65b441c9ed9ae9 data/roots/worldgen/structure_set/hut.json
+412ed3342d0a305dfc91d95441abdae2e679b816 data/roots/worldgen/structure_set/large_barrow.json
 6f143fe565ee067e1ae52c5c853214459fc9de8a data/roots/worldgen/structure_set/standing_stones.json
 055605b83af86949c27eba8af7da3b13f6d50b3e data/roots/worldgen/template_pool/barrow_pool/down_pool.json
 9d6af09c974557fae530f5c34a0da21766088eb0 data/roots/worldgen/template_pool/barrow_pool/start_pool.json
@@ -43,3 +45,4 @@ d437243959a46591630cc18321a5562798c0bd00 data/roots/worldgen/template_pool/hut_p
 c581345342799367c885ecbd0d03293aeeddf99b data/roots/worldgen/template_pool/hut_pool/start_pool.json
 8d89996d5ea31113bbf62797641723f320ac79bd data/roots/worldgen/template_pool/hut_ruined_pool/down_pool.json
 a30f8cbc05f067bc74085d71eb7f0a9e0425734d data/roots/worldgen/template_pool/hut_ruined_pool/start_pool.json
+99dbb75c057410f5e79c5f408270cb89961683a1 data/roots/worldgen/template_pool/large_barrow_pool/start_pool.json
