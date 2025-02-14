@@ -144,6 +144,8 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.METEOR.get(), MeteorParticle.Provider::new);
     event.registerSpriteSet(ModParticles.FEY_LIGHT.get(), FeyLightParticle.Provider::new);
 
+    event.registerSprite(ModParticles.WILDFIRE.get(), WildfireParticle::createWildfireParticle);
+
     event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
   }
 }

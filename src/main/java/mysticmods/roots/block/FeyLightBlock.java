@@ -1,21 +1,13 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.reference.Shapes;
-import mysticmods.roots.blockentity.FeyLightBlockEntity;
-import mysticmods.roots.blockentity.template.BaseBlockEntity;
-import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -23,7 +15,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
 
 public class FeyLightBlock extends Block {
@@ -62,7 +53,7 @@ public class FeyLightBlock extends Block {
     super.animateTick(pState, pLevel, pPos, pRand);
     if (pRand.nextInt(2) == 0) {
       pLevel.addParticle(
-          (ParticleOptions) ModParticles.FEY_LIGHT_EMITTER.value(),
+          ModParticles.FEY_LIGHT_EMITTER_TYPE.get(),
           pPos.getX() + 0.5,
           pPos.getY() + 0.5,
           pPos.getZ() + 0.5,
