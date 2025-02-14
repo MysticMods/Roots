@@ -152,17 +152,17 @@ public class WildfireEntity extends Projectile {
     double d5 = vec3.x;
     double d6 = vec3.y;
     double d1 = vec3.z;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 8; i++) {
           level().addParticle(
               new ColorGravityParticleOptions(
-                  ModParticles.METEOR,
+                  ModParticles.WILDFIRE,
                   0xe87a21,
                   0xc10000,
                   -(this.random.nextFloat() * 0.03f)
               ),
-              getX() + (this.random.nextFloat() - 0.5f) * 0.35f,
+              getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
               getY(),
-              getZ() + (this.random.nextFloat() - 0.5f) * 0.35f,
+              getZ() + (this.random.nextFloat() - 0.5f) * 0.15f,
               d5,
               d6,
               d1
@@ -208,7 +208,7 @@ public class WildfireEntity extends Projectile {
   // TODO: startFalling ?
   protected void tickDespawn() {
     this.life++;
-    if (this.life >= 1200) {
+    if (this.life >= 90) {
       this.discard();
     }
   }

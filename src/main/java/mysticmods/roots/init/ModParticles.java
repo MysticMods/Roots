@@ -28,8 +28,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> FEY_LIGHT = PARTICLES.register("fey_light", () -> new ColorGravityParticleType(false));
 
   // Simple particle types
-  public static final DeferredHolder<ParticleType<?>, ParticleType<SimpleParticleType>> WILDFIRE = PARTICLES.register("wildfire", () -> new SimpleParticleType(false));
-  public static final Supplier<ParticleOptions> WILDFIRE_TYPE = Suppliers.memoize(() -> (ParticleOptions) ModParticles.WILDFIRE.get());
+  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> WILDFIRE = PARTICLES.register("wildfire", () -> new ColorGravityParticleType(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);

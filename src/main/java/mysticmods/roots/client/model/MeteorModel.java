@@ -5,14 +5,14 @@ package mysticmods.roots.client.model;// Made with Blockbench 4.12.2
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import mysticmods.roots.entity.projectile.MeteorEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 
-public class MeteorModel extends EntityModel<MeteorEntity> {
+public class MeteorModel extends EntityModel<Entity> {
   private final ModelPart bone;
 
   public MeteorModel(ModelPart root) {
@@ -34,7 +34,7 @@ public class MeteorModel extends EntityModel<MeteorEntity> {
   }
 
   @Override
-  public void setupAnim(MeteorEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+  public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
     this.bone.xRot = (ageInTicks * 0.2f) % Mth.TWO_PI;
     this.bone.yRot = (ageInTicks * 0.15f) % Mth.TWO_PI;
     this.bone.zRot = (ageInTicks * 0.04f) % Mth.TWO_PI;

@@ -16,8 +16,9 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 
-public class MeteorRenderer extends EntityRenderer<MeteorEntity> implements RenderLayerParent<MeteorEntity, MeteorModel> {
+public class MeteorRenderer extends EntityRenderer<MeteorEntity> {
   protected final MeteorModel model;
 
   public MeteorRenderer(EntityRendererProvider.Context context) {
@@ -27,7 +28,6 @@ public class MeteorRenderer extends EntityRenderer<MeteorEntity> implements Rend
 
   public static final ResourceLocation TEXTURE = RootsAPI.rl("textures/entity/meteor.png");
 
-  @Override
   public MeteorModel getModel() {
     return model;
   }
