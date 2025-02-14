@@ -321,7 +321,11 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
         Blocks.SUNFLOWER, Blocks.LILAC, Blocks.PEONY, Blocks.ROSE_BUSH, Blocks.PITCHER_PLANT // Tall flowers
     );
 
-    this.tag(BlockTags.MAINTAINS_FARMLAND).addTags(RootsTags.Blocks.CROPS);
+    this.tag(BlockTags.MAINTAINS_FARMLAND).addTag(RootsTags.Blocks.CROPS);
+
+    this.tag(BlockTags.BIG_DRIPLEAF_PLACEABLE).addTag(RootsTags.Blocks.SOILS);
+
+    
   }
 
   @Override
