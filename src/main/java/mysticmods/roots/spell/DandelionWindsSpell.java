@@ -22,7 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 public class DandelionWindsSpell extends Spell {
-  private float distance;
+  private float distance, vertical;
   private double r1, r2;
 
   public DandelionWindsSpell(ChatFormatting color, List<Cost> costs) {
@@ -40,6 +40,7 @@ public class DandelionWindsSpell extends Spell {
     result.add(ModSpells.DANDELION_WINDS_DISTANCE);
     result.add(ModSpells.DANDELION_WINDS_RANGE_1);
     result.add(ModSpells.DANDELION_WINDS_RANGE_2);
+    result.add(ModSpells.DANDELION_WINDS_VERTICAL);
   }
 
   @Override
@@ -48,8 +49,10 @@ public class DandelionWindsSpell extends Spell {
     this.distance = properties.get(ModSpells.DANDELION_WINDS_DISTANCE);
     this.r1 = properties.get(ModSpells.DANDELION_WINDS_RANGE_1);
     this.r2 = properties.get(ModSpells.DANDELION_WINDS_RANGE_2);
+    this.vertical = properties.get(ModSpells.DANDELION_WINDS_VERTICAL);
   }
 
+  // TODO: Taggable entities for being moved/not being moved
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Vec3 look = pPlayer.getLookAngle();
@@ -73,6 +76,6 @@ public class DandelionWindsSpell extends Spell {
   private void flingEntity(Entity entity, Vec3 look, float motion) {
     Vec3 movement = entity.getDeltaMovement();
     entity.hasImpulse = true;
-    entity.setDeltaMovement(movement.x + look.x, movement.y + (motion * 0.7), movement.z + look.z);
+    entity.setDeltaMovement(movement.x + look.x, movement.y + (motion * vertical), movement.z + look.z);
   }
 }

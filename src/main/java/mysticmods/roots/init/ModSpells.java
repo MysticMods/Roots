@@ -56,6 +56,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_DISTANCE = P.recordProperty("dandelion_winds/distance", Property.ofFloat(0.75f, "The vertical component of the vector used to move entities."));
   public static final PropertyHolder<Property.DoubleProperty> DANDELION_WINDS_RANGE_1 = P.recordProperty("dandelion_winds/range_1", Property.ofDouble(4.0, "The first range increment for calculating the bounding box from the player."));
   public static final PropertyHolder<Property.DoubleProperty> DANDELION_WINDS_RANGE_2 = P.recordProperty("dandelion_winds/range_2", Property.ofDouble(5.0, "The second range increment for calculating the bounding box from the player."));
+  public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_VERTICAL = P.recordProperty("dandelion_winds/vertical", Property.ofFloat(0.7f, "The percentage of the movement value applied to vertical momentum."));
 
   // Desaturate (500 cooldown)
   public static final DeferredHolder<Spell, DesaturateSpell> DESATURATE = spell(Spells.DESATURATE, DesaturateSpell::new, ChatFormatting.GREEN, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)));
