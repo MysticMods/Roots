@@ -90,6 +90,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.ZOMBIE_VILLAGERS_EXCLUDE);
     this.tag(RootsTags.Entities.WINDWALL_FORCE_EXCLUDE);
     this.tag(RootsTags.Entities.WINDWALL_FORCE_INCLUDE);
+    this.tag(RootsTags.Entities.TIME_STOP_EXCLUDE).add(EntityType.PLAYER);
   }
 
   @Override

@@ -123,4 +123,6 @@ public class EntityEventHandler {
       event.modifyVisibility(0);
     }
   }
+
+  // "Update" tick event handled in MixinLivingEntity
 }

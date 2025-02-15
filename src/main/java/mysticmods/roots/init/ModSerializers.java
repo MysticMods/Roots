@@ -17,6 +17,7 @@ import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.snapshot.ExtensionSnapshot;
 import mysticmods.roots.snapshot.PetalShellSnapshot;
 import mysticmods.roots.snapshot.SkySoarerSnapshot;
+import mysticmods.roots.snapshot.TimeStopEntitySnapshot;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.bus.api.IEventBus;
@@ -42,6 +43,7 @@ public class ModSerializers {
   public static final DeferredHolder<SnapshotType<?>, SkySoarerSnapshot.Type> SKY_SOARER = SNAPSHOT_TYPES.register("sky_soarer", SkySoarerSnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, PetalShellSnapshot.Type> PETAL_SHELL = SNAPSHOT_TYPES.register("petal_shell", PetalShellSnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, ExtensionSnapshot.Type> EXTENSION = SNAPSHOT_TYPES.register("extension", ExtensionSnapshot.Type::new);
+  public static final DeferredHolder<SnapshotType<?>, TimeStopEntitySnapshot.Type> TIME_STOP = SNAPSHOT_TYPES.register("time_stop", TimeStopEntitySnapshot.Type::new);
 
   // Integer
   public static final DeferredHolder<PropertySerializer<?>, PropertySerializer<Property.IntegerProperty>> INTEGER_PROPERTY_SERIALIZER = PROPERTY_SERIALIZERS.register("integer_property", Property.IntegerProperty.Serializer::new);

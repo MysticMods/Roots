@@ -5,11 +5,13 @@
   "mixins": [
     "AccessorMixinBlockLootSubProvider",
     "AccessorMixinCropBlock",
+    "AccessorMixinLivingEntity",
     "AccessorMixinLootTable",
     "AccessorMixinMob",
     "AccessorMixinOverworldBiomes",
     "AccessorMixinSaplingBlock",
     "AccessorMixinZombieVillager",
+    "MixinLivingEntity",
     "MixinMobEffectInstance",
     "MixinRecipeBuilder"
   ],

@@ -691,6 +691,33 @@
           "default_value": 320,
           "value": 320
         }
+      },
+      {
+        "id": "roots:time_stop/radius_zx",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Z and X axes",
+          "default_value": 5,
+          "value": 5
+        }
+      },
+      {
+        "id": "roots:time_stop/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Y axis",
+          "default_value": 5,
+          "value": 5
+        }
+      },
+      {
+        "id": "roots:time_stop/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 300,
+          "value": 300
+        }
       }
     ],
     "roots:wildfire": [
