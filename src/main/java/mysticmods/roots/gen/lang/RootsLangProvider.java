@@ -424,6 +424,7 @@ public class RootsLangProvider extends LanguageProvider {
     addEffect(ModEffects.NONDETECTION);
     addEffect(ModEffects.GEAS);
     addEffect(ModEffects.TIME_STOP);
+    addEffect(ModEffects.AQUA_BUBBLE);
 
     add(RootsTags.Items.SEEDS, "Seeds");
     add(RootsTags.Items.CLOUD_BERRY_SEEDS, "Cloud Berry Seeds");

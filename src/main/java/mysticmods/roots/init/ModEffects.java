@@ -22,6 +22,7 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, SimpleEffect> GEAS = REGISTER.register("geas", () -> new GeasEffect(MobEffectCategory.BENEFICIAL, 0x850101, true));
   public static final DeferredHolder<MobEffect, SenseDangerEffect> SENSE_DANGER = REGISTER.register("sense_danger", SenseDangerEffect::new);
   public static final DeferredHolder<MobEffect, SimpleEffect> TIME_STOP = REGISTER.register("time_stop", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x00008b, false));
+  public static final DeferredHolder<MobEffect, SimpleEffect> AQUA_BUBBLE = REGISTER.register("aqua_bubble", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0x00ffff));
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);

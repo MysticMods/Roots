@@ -56,6 +56,15 @@
           "default_value": 1200,
           "value": 1200
         }
+      },
+      {
+        "id": "roots:aqua_bubble/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 200,
+          "value": 200
+        }
       }
     ],
     "roots:augment": [

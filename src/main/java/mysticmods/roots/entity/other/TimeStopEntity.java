@@ -5,6 +5,7 @@ import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import mysticmods.roots.snapshot.TimeStopEntitySnapshot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -79,6 +80,7 @@ public class TimeStopEntity extends Entity {
       )) {
         TimeStopEntitySnapshot livingSnapshot = new TimeStopEntitySnapshot(living, 10, snapshot.getRadiusZX(), snapshot.getRadiusY(), 10);
         living.addEffect(new MobEffectInstance(ModEffects.TIME_STOP, livingSnapshot.getDuration(), 0, false, false));
+        SnapshotHelper.addLiving(living, ModSerializers.TIME_STOP.get(), livingSnapshot);
       }
     }
 

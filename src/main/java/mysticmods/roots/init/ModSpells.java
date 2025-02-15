@@ -34,6 +34,7 @@ public class ModSpells {
   // Aqua Bubble (1200 cooldown)
   public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> List.of(Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250)));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_COOLDOWN = P.recordProperty("aqua_bubble/cooldown", Property.ofInt(1200, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_DURATION = P.recordProperty("aqua_bubble/duration", Property.ofInt(200, SpellProperties.DURATION));
 
   // TODO: What does this actually do?
   // Augment (350 cooldown)

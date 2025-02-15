@@ -7,6 +7,7 @@ import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.MortarBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PyreBlockEntityRenderer;
+import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
 import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.ArmorModel;
@@ -19,6 +20,8 @@ import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.NoopRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -109,12 +112,14 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void registerLayers(EntityRenderersEvent.AddLayers event) {
-/*    for (String skin : event.getSkins()) {
-      LivingEntityRenderer<Player, PlayerModel<Player>> skinRenderer = event.getSkin(skin);
-      if (skinRenderer != null) {
-        skinRenderer.addLayer(new ShoulderRenderLayer<>(skinRenderer));
-      }
-    }*/
+    PlayerRenderer render = event.getSkin(PlayerSkin.Model.WIDE);
+    if (render != null) {
+      render.addLayer(new AquaBubbleRenderLayer(render));
+    }
+    render = event.getSkin(PlayerSkin.Model.SLIM);
+    if (render != null) {
+      render.addLayer(new AquaBubbleRenderLayer(render));
+    }
   }
 
   @SubscribeEvent
