@@ -24,11 +24,7 @@ public class GeasParticle extends TextureSheetParticle {
     this.zd = 0;
     this.quadSize = 0.1f;
     this.hasPhysics = false;
-    this.roll = this.oRoll = switch(level.getRandom().nextInt(4)) {
-      case 1 -> (float) Math.toRadians(0);
-      case 2 -> (float) Math.toRadians(180);
-      default -> (float) Math.toRadians(-90);
-    };
+    this.roll = this.oRoll = level.getRandom().nextBoolean() ? (float) Math.toRadians(0) : (float) Math.toRadians(-180);
   }
 
   @Override
