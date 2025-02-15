@@ -144,7 +144,6 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.PYRE_LEAF.get(), PyreLeafParticle.Provider::new);
     event.registerSpriteSet(ModParticles.METEOR.get(), MeteorParticle.Provider::new);
     event.registerSpriteSet(ModParticles.FEY_LIGHT.get(), FeyLightParticle.Provider::new);
-
     event.registerSpriteSet(ModParticles.WILDFIRE.get(), WildfireParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GEAS.get(), GeasParticle.Provider::new);
 

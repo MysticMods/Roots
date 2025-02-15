@@ -17,12 +17,12 @@ public class GeasEffect extends SimpleEffect {
   @Override
   public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
     // TODO: Better visual!
-    //PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new GeasFXPacket(livingEntity.getId()));
+    PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new GeasFXPacket(livingEntity.getId()));
     return true;
   }
 
   @Override
   public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-    return false;
+    return duration % 20 == 0;
   }
 }

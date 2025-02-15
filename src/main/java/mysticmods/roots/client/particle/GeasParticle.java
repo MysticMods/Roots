@@ -1,19 +1,34 @@
 package mysticmods.roots.client.particle;
 
+import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 
 public class GeasParticle extends TextureSheetParticle {
-  protected GeasParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+  protected float oR1, oG1, oB1;
+  protected float rCol2, gCol2, bcol2;
+
+  protected GeasParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, 0, 0, 0);
-    this.lifetime = 1;
+    this.lifetime = 12;
+    this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
+    this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
+    this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
+    this.rCol2 = ((c2 >> 16) & 0xFF) / 255.0f;
+    this.gCol2 = ((c2 >> 8) & 0xFF) / 255.0f;
+    this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
     this.xd = 0;
     this.yd = 0;
     this.zd = 0;
-    this.quadSize = 0.05f;
+    this.quadSize = 0.1f;
     this.hasPhysics = false;
+    this.roll = this.oRoll = switch(level.getRandom().nextInt(4)) {
+      case 1 -> (float) Math.toRadians(0);
+      case 2 -> (float) Math.toRadians(180);
+      default -> (float) Math.toRadians(-90);
+    };
   }
 
   @Override
@@ -29,7 +44,7 @@ public class GeasParticle extends TextureSheetParticle {
   @Override
   public void tick() {
     super.tick();
-/*    if (!this.removed) {
+    if (!this.removed) {
       float f = (float) this.age / (float) this.lifetime;
       if (this.oB1 != this.bcol2) {
         this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
@@ -40,13 +55,13 @@ public class GeasParticle extends TextureSheetParticle {
       f *= f;
 
       this.quadSize *= 1.0f - f;
-    }*/
+    }
   }
 
-  public record Provider(SpriteSet sprite) implements ParticleProvider<SimpleParticleType> {
+  public record Provider(SpriteSet sprite) implements ParticleProvider<ColorGravityParticleOptions> {
     @Override
-    public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      var particle = new GeasParticle(level, x, y, z, xSpeed, ySpeed, zSpeed);
+    public Particle createParticle(ColorGravityParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+      var particle = new GeasParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprite);
       return particle;
     }

@@ -6,6 +6,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.mixin.AccessorMixinLevelRenderer;
 import net.minecraft.client.Camera;
@@ -28,6 +29,7 @@ import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderHighlightEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.RenderLivingEvent;
 
 import java.util.Map;
 
@@ -36,6 +38,15 @@ public class RenderTickHandler {
   private static float clientTicks = 0;
 
   private static boolean outliningArea = false;
+
+/*  @SubscribeEvent
+  public static void onRenderLiving (RenderLivingEvent.Post<?, ?> event) {
+    if (event.getEntity().isAlive()) {
+      if (event.getEntity().hasEffect(ModEffects.GEAS)) {
+        // TODO: Render geas effect -- how?
+      }
+    }
+  }*/
 
   @SubscribeEvent
   public static void onRenderStage(RenderLevelStageEvent event) {

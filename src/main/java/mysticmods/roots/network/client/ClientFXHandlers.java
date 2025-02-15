@@ -13,7 +13,7 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     if (entity != null) {
-      ParticleUtil.addTrackingEmitter(entity, ModParticles.GEAS.value(),  15, ClientFX::geasEffect);
+      ParticleUtil.addTrackingEmitter(entity, 15, ClientFX::geasEffect);
     }
   }
 }

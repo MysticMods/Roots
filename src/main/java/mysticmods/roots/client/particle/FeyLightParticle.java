@@ -25,10 +25,10 @@ public class FeyLightParticle extends TextureSheetParticle {
     this.hasPhysics = false;
     this.quadSize = 0.2f;
     this.oRoll = this.roll = (float) Math.toRadians(switch (level.getRandom().nextInt(4)) {
-      case 1 -> -45;
-      case 2 -> 135;
-      case 3 -> -135;
-      default -> 45;
+      case 1 -> (float) Math.toRadians(-45);
+      case 2 -> (float) Math.toRadians(135);
+      case 3 -> (float) Math.toRadians(-135);
+      default -> (float) Math.toRadians(45);
     });
   }
 
