@@ -2,6 +2,7 @@ package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModAdvancements;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.snapshot.SnapshotHelper;
@@ -55,8 +56,6 @@ public class DamageHandler {
       return;
     }
 
-
-    // TODO:
-    /*    Advancements.PACIFIST_TRIGGER.trigger(player, event);*/
+    ModAdvancements.PACIFIST.get().trigger(player, event.getEntity());
   }
 }

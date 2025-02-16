@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "always_true": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "roots:textures/block/runestone.png",
+    "description": {
+      "translate": "lootr.advancements.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "roots:wildroot"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "roots.advancements.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "always_true"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

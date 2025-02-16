@@ -64,6 +64,7 @@ public class Roots {
     ModGroves.register(bus);
     ModDamage.register(bus);
     ModParticles.register(bus);
+    ModAdvancements.register(bus);
     packetHandler = new PacketHandler(bus);
   }
 }

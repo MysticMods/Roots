@@ -1,0 +1,27 @@
+{
+  "parent": "roots:root",
+  "criteria": {
+    "pacifist": {
+      "trigger": "roots:pacifist"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "roots.advancements.pacifist.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "minecraft:cooked_beef"
+    },
+    "title": {
+      "translate": "roots.advancements.pacifist.title"
+    }
+  },
+  "requirements": [
+    [
+      "pacifist"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

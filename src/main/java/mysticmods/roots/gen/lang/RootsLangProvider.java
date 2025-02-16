@@ -121,6 +121,12 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.commands.ritual.no_space", "No space to place pyre.");
     add("roots.commands.ritual.failed_condition", "Failed to place condition: %s");
 
+    add("roots.advancements.root.title", "Roots");
+    add("lootr.advancements.root.description", "An introduction to the magic of the wilds.");
+
+    add("roots.advancements.pacifist.title", "An Untrue Pacifist");
+    add("roots.advancements.pacifist.description", "Needlessly slaughtered one of nature's peaceful creatures.");
+
     add(KeyBindings.CATEGORY, "Roots");
     for (KeyMapping bind : KeyBindings.MAPPINGS) {
       String key = bind.getName();
