@@ -64,6 +64,7 @@ public class RootsDataGenerators {
     generator.addProvider(event.includeServer(), new RootsRecipeProvider(output, provider));
     generator.addProvider(event.includeClient(), new RootsParticleProvider(output, helper));
     generator.addProvider(event.includeServer(), new RootsMobEffectsTagsProvider(output, provider, helper));
+    generator.addProvider(event.includeServer(), new RootsDamageTagsProvider(output, provider, helper));
     generator.addProvider(true, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(Component.literal("Roots resources"), DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA), Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
   }
 }

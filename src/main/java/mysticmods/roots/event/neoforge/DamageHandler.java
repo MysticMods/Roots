@@ -1,8 +1,13 @@
 package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.init.ModSerializers;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,10 +23,6 @@ public class DamageHandler {
     LivingEntity entity = event.getEntity();
     if (entity.hasEffect(ModEffects.PETAL_SHELL)) {
       MobEffectInstance instance = entity.getEffect(ModEffects.PETAL_SHELL);
-      if (instance == null) {
-        // TODO: This is problematic?
-        return;
-      }
       event.setNewDamage(0);
       if (instance.getAmplifier() == 0) {
         entity.removeEffect(ModEffects.PETAL_SHELL);
@@ -30,6 +31,16 @@ public class DamageHandler {
         entity.removeEffect(ModEffects.PETAL_SHELL);
         entity.addEffect(newInstance);
       }
+    }
+    if (event.getNewDamage() > 0 && entity.hasEffect(ModEffects.AQUA_BUBBLE)) {
+      SnapshotHelper.applyLiving(entity, ModSerializers.AQUA_BUBBLE.get(), (e, snapshot) -> {
+        DamageSource source = event.getSource();
+        if (source.is(DamageTypeTags.IS_FIRE)) {
+          event.setNewDamage(event.getNewDamage() * snapshot.getFireResistance());
+        } else if (source.is(RootsTags.DamageTypes.IS_LAVA)) {
+          event.setNewDamage(event.getNewDamage() * snapshot.getLavaResistance());
+        }
+      });
     }
   }
 
@@ -41,7 +52,10 @@ public class DamageHandler {
     } else if (event.getSource().getDirectEntity() instanceof ServerPlayer player2) {
       player = player2;
     } else {
+      return;
     }
+
+
     // TODO:
     /*    Advancements.PACIFIST_TRIGGER.trigger(player, event);*/
   }

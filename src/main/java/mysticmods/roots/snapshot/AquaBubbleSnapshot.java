@@ -18,20 +18,48 @@ public class AquaBubbleSnapshot extends Snapshot {
   public static final MapCodec<AquaBubbleSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
           Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
-          Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay)
+          Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
+          Codec.INT.fieldOf("absorption").forGetter(AquaBubbleSnapshot::getAbsorption),
+          Codec.FLOAT.fieldOf("lavaResistance").forGetter(AquaBubbleSnapshot::getLavaResistance),
+          Codec.FLOAT.fieldOf("fireResistance").forGetter(AquaBubbleSnapshot::getFireResistance)
       ).apply(instance, AquaBubbleSnapshot::new));
   public static final Codec<AquaBubbleSnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, AquaBubbleSnapshot> STREAM_CODEC = StreamCodec.composite(
       ByteBufCodecs.VAR_INT, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
+      ByteBufCodecs.VAR_INT, o -> o.absorption,
+      ByteBufCodecs.FLOAT, o -> o.lavaResistance,
+      ByteBufCodecs.FLOAT, o -> o.fireResistance,
       AquaBubbleSnapshot::new);
 
-  public AquaBubbleSnapshot(LivingEntity player, int decay) {
+  private final int absorption;
+  private final float lavaResistance, fireResistance;
+
+  public AquaBubbleSnapshot(LivingEntity player, int decay, int absorption, float lavaResistance, float fireResistance) {
     super(player, decay);
+    this.absorption = absorption;
+    this.lavaResistance = lavaResistance;
+    this.fireResistance = fireResistance;
+
   }
 
-  public AquaBubbleSnapshot(int timestamp, int decay) {
+  public AquaBubbleSnapshot(int timestamp, int decay, int absorption, float lavaResistance, float fireResistance) {
     super(timestamp, decay);
+    this.absorption = absorption;
+    this.lavaResistance = lavaResistance;
+    this.fireResistance = fireResistance;
+  }
+
+  public int getAbsorption() {
+    return absorption;
+  }
+
+  public float getLavaResistance() {
+    return lavaResistance;
+  }
+
+  public float getFireResistance() {
+    return fireResistance;
   }
 
   @Override

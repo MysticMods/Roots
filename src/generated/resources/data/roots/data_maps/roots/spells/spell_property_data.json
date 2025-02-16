@@ -65,6 +65,33 @@
           "default_value": 200,
           "value": 200
         }
+      },
+      {
+        "id": "roots:aqua_bubble/absorption",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The amount of damage absorbed by the aqua bubble, 1 equals half a heart.",
+          "default_value": 40,
+          "value": 40
+        }
+      },
+      {
+        "id": "roots:aqua_bubble/fire_reduction",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The percentage of fire damage reduced by the aqua bubble.",
+          "default_value": 0.6,
+          "value": 0.6
+        }
+      },
+      {
+        "id": "roots:aqua_bubble/lava_reduction",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The percentage of lava damage reduced by the aqua bubble.",
+          "default_value": 0.6,
+          "value": 0.6
+        }
       }
     ],
     "roots:augment": [

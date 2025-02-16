@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -603,6 +604,14 @@ public class RootsTags {
 
     static TagKey<Biome> compatTag(String name) {
       return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("c", name));
+    }
+  }
+
+  public static class DamageTypes {
+    public static TagKey<DamageType> IS_LAVA = modTag("is_lava");
+
+    static TagKey<DamageType> modTag(String name) {
+      return TagKey.create(Registries.DAMAGE_TYPE, RootsAPI.rl(name));
     }
   }
 }
