@@ -46,6 +46,11 @@ public class PacifistTrigger extends SimpleCriterionTrigger<PacifistTrigger.Trig
         return false;
       }
 
+      // TODO: Document this somewhere
+      if (entity.getTags().contains("Roots_NoPacifist")) {
+        return false;
+      }
+
       if (entity.level()
           .getEntities(entity, AABB.move(entity.getX(), entity.getY(), entity.getZ()), e -> EntityUtils.isHostileTo(serverPlayer)
               .test(e)).isEmpty()) {
