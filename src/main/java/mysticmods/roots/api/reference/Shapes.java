@@ -7,7 +7,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public interface Shapes {
   VoxelShape FEY_LIGHT = Block.box(6, 6, 6, 10, 10, 10);
-  VoxelShape GROVE_CRAFTER = VoxelUtil.multiOr(Block.box(0, 8, 0, 16, 15, 16), Block.box(2, 0, 2, 14, 8, 14));
+  VoxelShape GROVE_CRAFTER = Block.box(0, 0, 0, 16, 10, 16);
   VoxelShape RITUAL_PEDESTAL = VoxelUtil.multiOr(Block.box(3, 12, 3, 13, 14, 13), Block.box(6, 4, 3, 10, 12, 6), Block.box(6, 4, 10, 10, 12, 13), Block.box(3, 4, 6, 6, 12, 10), Block.box(10, 4, 6, 13, 12, 10), Block.box(2, 14, 2, 14, 16, 14), Block.box(3, 2, 3, 13, 4, 13), Block.box(2, 0, 2, 14, 2, 14));
   VoxelShape GROVE_STONE_BOTTOM = Block.box(3, 0, 4, 13, 16, 12);
   VoxelShape GROVE_STONE_MIDDLE = GROVE_STONE_BOTTOM;
