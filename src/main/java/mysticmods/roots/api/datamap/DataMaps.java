@@ -1,5 +1,6 @@
 package mysticmods.roots.api.datamap;
 
+import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
@@ -65,6 +66,9 @@ public class DataMaps {
   public static final DataMapType<PlayerCondition, CanonicalRepresentation> PLAYER_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("player_condition_canons"), RootsRegistries.Keys.PLAYER_CONDITIONS, CanonicalRepresentation.CODEC)
       .synced(CanonicalRepresentation.CODEC, false)
       .build();
+  public static final DataMapType<Item, Float> SPROUT_BREEDING_ITEM_CHANCE = DataMapType.builder(RootsAPI.rl("sprout_breeding_item_chance"), Registries.ITEM, Codec.FLOAT)
+      .synced(Codec.FLOAT, false)
+      .build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -80,6 +84,7 @@ public class DataMaps {
     event.register(GROVE_DATA);
     event.register(LEVEL_CONDITION_CANONS);
     event.register(PLAYER_CONDITION_CANONS);
+    event.register(SPROUT_BREEDING_ITEM_CHANCE);
 
   }
 }

@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-13T23:17:04.8897835	Roots Item Tags
+// 1.21.1	2025-02-17T14:28:45.2447496	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -144,6 +144,7 @@ a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/item/seeds/pereskia.jso
 56557294f6a5c85d9b4eb4d23a781ed386a9f56c data/roots/tags/item/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/item/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/item/soils/water.json
+4264e5c80b6b11afe1e6aab060254ec47bd83074 data/roots/tags/item/sprout_breeding_rewards.json
 57b7b83328a785fad075c2c7377883654e583c09 data/roots/tags/item/stonelike.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/item/stonepetal.json
 687578420920f9ae43d80e6327d29714438d1b88 data/roots/tags/item/tall_grass.json

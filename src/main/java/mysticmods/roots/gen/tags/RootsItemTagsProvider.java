@@ -227,6 +227,31 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     // Items that cannot be disarmed using the disarm spell
     this.tag(RootsTags.Items.DISABLE_DISARMING);
 
+    // Rewards that sprouts can drop for being bred
+    // If they're not in the relevant data map they will use the default config chance
+    this.tag(RootsTags.Items.SPROUT_BREEDING_REWARDS).add(
+        Items.BEETROOT_SEEDS,
+        Items.MELON_SEEDS,
+        Items.PUMPKIN_SEEDS,
+        Items.WHEAT_SEEDS,
+        Items.POTATO,
+        Items.CARROT,
+        Items.COCOA_BEANS,
+        Items.PITCHER_POD,
+        Items.TORCHFLOWER_SEEDS,
+        Items.NETHER_WART,
+        Items.KELP,
+        Items.SEAGRASS,
+        Items.CHORUS_PLANT
+    ).add(
+        ModItems.AUBERGINE_SEEDS.get(),
+        ModItems.SPIRITLEAF_SEEDS.get(),
+        ModItems.MOONGLOW_SEEDS.get(),
+        ModItems.WILDEWHEET_SEEDS.get(),
+        ModItems.WILDROOT.get(),
+        ModItems.GROVE_SPORES.get(),
+        ModItems.BAFFLECAP.get()
+    );
   }
 
   @Override

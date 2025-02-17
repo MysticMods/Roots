@@ -26,6 +26,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
@@ -212,5 +213,52 @@ public class RootsDataMapProvider extends DataMapProvider {
         .defaultBlockState(), Blocks.WARPED_STEM.defaultBlockState(), 4), false);
     builder13.add(ModConditions.MATURE_WILDROOT_CROP.getDelegate(), new CanonicalRepresentation(new PartialBlockState(Blocks.FARMLAND), new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
         .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE)), false);
+
+    var builder14 = builder(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
+    // Requires finding a world-generated crop
+    builder14.add(Items.BEETROOT_SEEDS.builtInRegistryHolder(), 0.4f, false);
+    // Super-easy to find
+    builder14.add(Items.WHEAT_SEEDS.builtInRegistryHolder(), 0.05f, false);
+    // Craftable from melons, requires finding a jungle
+    builder14.add(Items.MELON_SEEDS.builtInRegistryHolder(), 0.4f, false);
+    // Requires finding a jungle
+    builder14.add(Items.COCOA_BEANS.builtInRegistryHolder(), 0.4f, false);
+    // Craftable from pumpkins, easily found
+    builder14.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), 0.15f, false);
+    // Requires finding a potato crop or potato in a whatever
+    builder14.add(Items.POTATO.builtInRegistryHolder(), 0.3f, false);
+    // Requires finding a carrot crop or a carrot in a whatever
+    builder14.add(Items.CARROT.builtInRegistryHolder(), 0.3f, false);
+
+    // Relatively easy to find eventually
+    builder14.add(ModItems.WILDROOT, 0.2f, false);
+
+    // Easy to find and replicate
+    builder14.add(ModItems.GROVE_SPORES, 0.1f, false);
+
+    // Requires finding an aubergine world spawn
+    builder14.add(ModItems.AUBERGINE_SEEDS, 0.2f, false);
+
+    // Requires specific crafting recipes
+    builder14.add(ModItems.MOONGLOW_SEEDS, 0.4f, false);
+    builder14.add(ModItems.SPIRITLEAF_SEEDS, 0.4f, false);
+    builder14.add(ModItems.WILDEWHEET_SEEDS, 0.4f, false);
+    builder14.add(ModItems.BAFFLECAP, 0.4f, false);
+
+    // These should be exceptionally rare
+    builder14.add(Items.TORCHFLOWER_SEEDS.builtInRegistryHolder(), 0.05f, false);
+    builder14.add(Items.PITCHER_POD.builtInRegistryHolder(), 0.05f, false);
+
+    // Nether-based plants
+    builder14.add(Items.CRIMSON_FUNGUS.builtInRegistryHolder(), 0.1f, false);
+    builder14.add(Items.WARPED_FUNGUS.builtInRegistryHolder(), 0.1f, false);
+    builder14.add(Items.NETHER_WART.builtInRegistryHolder(), 0.1f, false);
+
+    // Rarer plants
+    builder14.add(Items.KELP.builtInRegistryHolder(), 0.5f, false);
+    builder14.add(Items.SEAGRASS.builtInRegistryHolder(), 0.5f, false);
+
+    // Super rare plants
+    builder14.add(Items.CHORUS_PLANT.builtInRegistryHolder(), 0.01f, false);
   }
 }
