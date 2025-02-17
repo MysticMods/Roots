@@ -29,7 +29,7 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Y;
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Z;
 
-  public static ModConfigSpec.DoubleValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
+  public static ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
   public static ModConfigSpec COMMON_CONFIG;
 
   static {
@@ -64,7 +64,7 @@ public class ConfigManager {
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Options for sprout breeding rewards").push("sprouts");
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")
-        .defineInRange("default_chance", 0.1, 0.0, 1.0);
+        .defineInRange("default_chance", 10, 1, 100);
     COMMON_CONFIG = COMMON_BUILDER.build();
   }
 

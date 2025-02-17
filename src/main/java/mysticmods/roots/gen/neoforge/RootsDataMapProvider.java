@@ -216,49 +216,49 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     var builder14 = builder(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
     // Requires finding a world-generated crop
-    builder14.add(Items.BEETROOT_SEEDS.builtInRegistryHolder(), 0.4f, false);
+    builder14.add(Items.BEETROOT_SEEDS.builtInRegistryHolder(), 40, false);
     // Super-easy to find
-    builder14.add(Items.WHEAT_SEEDS.builtInRegistryHolder(), 0.05f, false);
+    builder14.add(Items.WHEAT_SEEDS.builtInRegistryHolder(), 5, false);
     // Craftable from melons, requires finding a jungle
-    builder14.add(Items.MELON_SEEDS.builtInRegistryHolder(), 0.4f, false);
+    builder14.add(Items.MELON_SEEDS.builtInRegistryHolder(), 40, false);
     // Requires finding a jungle
-    builder14.add(Items.COCOA_BEANS.builtInRegistryHolder(), 0.4f, false);
+    builder14.add(Items.COCOA_BEANS.builtInRegistryHolder(), 40, false);
     // Craftable from pumpkins, easily found
-    builder14.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), 0.15f, false);
+    builder14.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), 15, false);
     // Requires finding a potato crop or potato in a whatever
-    builder14.add(Items.POTATO.builtInRegistryHolder(), 0.3f, false);
+    builder14.add(Items.POTATO.builtInRegistryHolder(), 30, false);
     // Requires finding a carrot crop or a carrot in a whatever
-    builder14.add(Items.CARROT.builtInRegistryHolder(), 0.3f, false);
+    builder14.add(Items.CARROT.builtInRegistryHolder(), 30, false);
 
     // Relatively easy to find eventually
-    builder14.add(ModItems.WILDROOT, 0.2f, false);
+    builder14.add(ModItems.WILDROOT, 20, false);
 
     // Easy to find and replicate
-    builder14.add(ModItems.GROVE_SPORES, 0.1f, false);
+    builder14.add(ModItems.GROVE_SPORES, 10, false);
 
     // Requires finding an aubergine world spawn
-    builder14.add(ModItems.AUBERGINE_SEEDS, 0.2f, false);
+    builder14.add(ModItems.AUBERGINE_SEEDS, 20, false);
 
     // Requires specific crafting recipes
-    builder14.add(ModItems.MOONGLOW_SEEDS, 0.4f, false);
-    builder14.add(ModItems.SPIRITLEAF_SEEDS, 0.4f, false);
-    builder14.add(ModItems.WILDEWHEET_SEEDS, 0.4f, false);
-    builder14.add(ModItems.BAFFLECAP, 0.4f, false);
+    builder14.add(ModItems.MOONGLOW_SEEDS, 40, false);
+    builder14.add(ModItems.SPIRITLEAF_SEEDS, 40, false);
+    builder14.add(ModItems.WILDEWHEET_SEEDS, 40, false);
+    builder14.add(ModItems.BAFFLECAP, 40, false);
 
     // These should be exceptionally rare
-    builder14.add(Items.TORCHFLOWER_SEEDS.builtInRegistryHolder(), 0.05f, false);
-    builder14.add(Items.PITCHER_POD.builtInRegistryHolder(), 0.05f, false);
+    builder14.add(Items.TORCHFLOWER_SEEDS.builtInRegistryHolder(), 5, false);
+    builder14.add(Items.PITCHER_POD.builtInRegistryHolder(), 5, false);
 
     // Nether-based plants
-    builder14.add(Items.CRIMSON_FUNGUS.builtInRegistryHolder(), 0.1f, false);
-    builder14.add(Items.WARPED_FUNGUS.builtInRegistryHolder(), 0.1f, false);
-    builder14.add(Items.NETHER_WART.builtInRegistryHolder(), 0.1f, false);
+    builder14.add(Items.CRIMSON_FUNGUS.builtInRegistryHolder(), 10, false);
+    builder14.add(Items.WARPED_FUNGUS.builtInRegistryHolder(), 10, false);
+    builder14.add(Items.NETHER_WART.builtInRegistryHolder(), 10, false);
 
     // Rarer plants
-    builder14.add(Items.KELP.builtInRegistryHolder(), 0.5f, false);
-    builder14.add(Items.SEAGRASS.builtInRegistryHolder(), 0.5f, false);
+    builder14.add(Items.KELP.builtInRegistryHolder(), 50, false);
+    builder14.add(Items.SEAGRASS.builtInRegistryHolder(), 50, false);
 
     // Super rare plants
-    builder14.add(Items.CHORUS_PLANT.builtInRegistryHolder(), 0.01f, false);
+    builder14.add(Items.CHORUS_PLANT.builtInRegistryHolder(), 1, false);
   }
 }

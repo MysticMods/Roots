@@ -14,6 +14,7 @@ import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.*;
 import mysticmods.roots.client.render.*;
+import mysticmods.roots.entity.SproutEntity;
 import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
@@ -22,6 +23,8 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.PlayerSkin;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,10 +33,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
@@ -146,7 +146,7 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onRegisterParticle (RegisterParticleProvidersEvent event) {
+  public static void onRegisterParticle(RegisterParticleProvidersEvent event) {
     event.registerSpriteSet(ModParticles.PYRE.get(), PyreParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PYRE_LEAF.get(), PyreLeafParticle.Provider::new);
     event.registerSpriteSet(ModParticles.METEOR.get(), MeteorParticle.Provider::new);
@@ -155,5 +155,18 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.GEAS.get(), GeasParticle.Provider::new);
 
     event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
+  }
+
+  public static final ModelResourceLocation GIFT_BOX = new ModelResourceLocation(SproutEntity.GIFT_BOX, "standalone");
+  public static BakedModel GIFT_BOX_MODEL;
+
+  @SubscribeEvent
+  public static void onRegisterGeometry(ModelEvent.RegisterAdditional event) {
+    event.register(GIFT_BOX);
+  }
+
+  @SubscribeEvent
+  public static void onBakeModels (ModelEvent.BakingCompleted event) {
+    GIFT_BOX_MODEL = event.getModels().get(GIFT_BOX);
   }
 }

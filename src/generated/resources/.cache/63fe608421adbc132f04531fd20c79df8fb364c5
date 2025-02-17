@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-17T14:28:45.2447496	Roots Item Tags
+// 1.21.1	2025-02-17T20:32:44.5706224	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -149,4 +149,5 @@ a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/item/soils/water.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/item/stonepetal.json
 687578420920f9ae43d80e6327d29714438d1b88 data/roots/tags/item/tall_grass.json
 6a3b552a1a9c6b96fd0855a01af8665f0c37da92 data/roots/tags/item/tempt/deer.json
+e2a6f1db35ec3c01274db0b0783283566f3f980b data/roots/tags/item/tempt/sprout.json
 de63ed9e3b03e443f31cbe2fc6660363c46675b3 data/roots/tags/item/vegetables.json

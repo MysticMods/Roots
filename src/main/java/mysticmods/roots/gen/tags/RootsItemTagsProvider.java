@@ -14,6 +14,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings({"NullableProblems", "unchecked"})
 public class RootsItemTagsProvider extends ItemTagsProvider {
   public RootsItemTagsProvider(PackOutput p_275343_, CompletableFuture<HolderLookup.Provider> p_275729_, CompletableFuture<TagLookup<Block>> p_275322_, @org.jetbrains.annotations.Nullable ExistingFileHelper existingFileHelper) {
     super(p_275343_, p_275729_, p_275322_, RootsAPI.MODID, existingFileHelper);
@@ -33,7 +34,6 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.WARPED_BARK).add(ModItems.WARPED_BARK.get());
     this.tag(RootsTags.Items.MIXED_BARK).add(ModItems.MIXED_BARK.get());
 
-    //noinspection unchecked
     this.tag(RootsTags.Items.BARKS)
         .addTags(RootsTags.Items.ACACIA_BARK, RootsTags.Items.BIRCH_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.MANGROVE_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
 
@@ -252,6 +252,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
         ModItems.GROVE_SPORES.get(),
         ModItems.BAFFLECAP.get()
     );
+
+    this.tag(RootsTags.Items.SPROUT_FOOD).addTag(RootsTags.Items.AUBERGINE_CROP);
   }
 
   @Override

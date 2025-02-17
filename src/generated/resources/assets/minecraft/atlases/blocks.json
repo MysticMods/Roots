@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "roots:entity/gift_box"
+    }
+  ]
+}
