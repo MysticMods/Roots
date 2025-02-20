@@ -1,0 +1,330 @@
+{
+  "values": {
+    "#minecraft:saplings": {
+      "ageProperty": {},
+      "canGrowFunction": "roots:always_can_grow",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": -1,
+      "replantFunction": "roots:no_replant",
+      "ticks": 2
+    },
+    "#roots:spreading_mushrooms": {
+      "ageProperty": {},
+      "canGrowFunction": "roots:always_can_grow",
+      "lightFunction": "roots:light_below_thirteen",
+      "maximumAge": -1,
+      "replantFunction": "roots:no_replant",
+      "ticks": 2
+    },
+    "minecraft:beetroots": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:beetroots",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:beetroot_seeds",
+      "ticks": 1
+    },
+    "minecraft:cactus": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:cactus_or_cane_can_grow",
+      "cropBlock": "minecraft:cactus",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 15,
+      "replantFunction": "roots:no_replant",
+      "seedItem": "minecraft:cactus",
+      "ticks": 2
+    },
+    "minecraft:carrots": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:carrots",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:carrot",
+      "ticks": 2
+    },
+    "minecraft:cocoa": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:cocoa",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 2,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:cocoa_beans",
+      "ticks": 1
+    },
+    "minecraft:kelp": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:kelp_can_grow",
+      "cropBlock": "minecraft:kelp",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 25,
+      "replantFunction": "roots:no_replant",
+      "seedItem": "minecraft:kelp",
+      "ticks": 1
+    },
+    "minecraft:melon_stem": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:always_can_grow",
+      "cropBlock": "minecraft:melon_stem",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:self_replant",
+      "seedItem": "minecraft:melon_seeds",
+      "ticks": 2
+    },
+    "minecraft:pitcher_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:pitcher_crop",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 4,
+      "replantFunction": "roots:no_replant",
+      "seedItem": "minecraft:pitcher_pod",
+      "ticks": 1
+    },
+    "minecraft:potatoes": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:potatoes",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:potato",
+      "ticks": 2
+    },
+    "minecraft:pumpkin_stem": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:always_can_grow",
+      "cropBlock": "minecraft:pumpkin_stem",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:self_replant",
+      "seedItem": "minecraft:pumpkin_seeds",
+      "ticks": 2
+    },
+    "minecraft:sugar_cane": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:cactus_or_cane_can_grow",
+      "cropBlock": "minecraft:sugar_cane",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 15,
+      "replantFunction": "roots:no_replant",
+      "seedItem": "minecraft:sugar_cane",
+      "ticks": 2
+    },
+    "minecraft:sweet_berry_bush": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:always_can_grow",
+      "cropBlock": "minecraft:sweet_berry_bush",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 3,
+      "replantFunction": "roots:self_replant",
+      "seedItem": "minecraft:sweet_berries",
+      "ticks": 1
+    },
+    "minecraft:torchflower_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:torchflower_crop",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 2,
+      "replantFunction": "roots:self_replant",
+      "seedItem": "minecraft:torchflower_seeds",
+      "ticks": 1
+    },
+    "minecraft:twisting_vines": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:twisting_vines",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 25,
+      "replantFunction": "roots:no_replant",
+      "seedItem": "minecraft:twisting_vines",
+      "ticks": 2
+    },
+    "minecraft:vine": {
+      "ageProperty": {},
+      "canGrowFunction": "roots:always_can_grow",
+      "cropBlock": "minecraft:vine",
+      "lightFunction": "roots:any_light",
+      "maximumAge": -1,
+      "replantFunction": "roots:no_replant",
+      "seedItem": "minecraft:vine",
+      "ticks": 2
+    },
+    "minecraft:weeping_vines": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:weeping_vines",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 25,
+      "replantFunction": "roots:no_replant",
+      "seedItem": "minecraft:weeping_vines",
+      "ticks": 2
+    },
+    "minecraft:wheat": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "minecraft:wheat",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:wheat_seeds",
+      "ticks": 2
+    },
+    "roots:aubergine_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:aubergine_crop",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:aubergine_seeds",
+      "ticks": 2
+    },
+    "roots:cloud_berry_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:cloud_berry_crop",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:cloud_berry",
+      "ticks": 1
+    },
+    "roots:dewgonia_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:dewgonia_crop",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:dewgonia",
+      "ticks": 1
+    },
+    "roots:inferno_bulb_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:inferno_bulb_crop",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:inferno_bulb",
+      "ticks": 1
+    },
+    "roots:moonglow_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:moonglow_crop",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:moonglow_seeds",
+      "ticks": 2
+    },
+    "roots:pereskia_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:pereskia_crop",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:pereskia_bulb",
+      "ticks": 2
+    },
+    "roots:spiritleaf_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:spiritleaf_crop",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:spiritleaf_seeds",
+      "ticks": 2
+    },
+    "roots:stalicripe_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:stalicripe_crop",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:stalicripe",
+      "ticks": 1
+    },
+    "roots:wildewheet_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:wildewheet_crop",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:wildewheet_seeds",
+      "ticks": 2
+    },
+    "roots:wildroot_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:age_can_grow",
+      "cropBlock": "roots:wildroot_crop",
+      "lightFunction": "roots:light_above_eight",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:wildroot",
+      "ticks": 1
+    }
+  }
+}
