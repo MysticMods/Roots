@@ -35,6 +35,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Wildwood hanging sign? Wildwood sign?
 // - Block placement tests for rituals
 // - Pyre sound burning lah
+// - Entity carried item layers
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;

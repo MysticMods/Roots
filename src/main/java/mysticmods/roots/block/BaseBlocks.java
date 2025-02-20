@@ -1,12 +1,15 @@
 package mysticmods.roots.block;
 
+import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.LevelReader;
@@ -17,20 +20,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.function.Supplier;
-
 public class BaseBlocks {
   public static class SeededCropsBlock extends CropBlock {
-    private final Supplier<? extends ItemLike> seedProvider;
+    private final Holder<Item> seedProvider;
 
-    public SeededCropsBlock(Supplier<? extends ItemLike> seedProvider, Properties builder) {
+    public SeededCropsBlock(Holder<Item> seedProvider, Properties builder) {
       super(builder);
       this.seedProvider = seedProvider;
     }
 
     @Override
     protected ItemLike getBaseSeedId() {
-      return seedProvider.get();
+      return seedProvider.value();
     }
   }
 

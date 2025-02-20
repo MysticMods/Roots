@@ -22,6 +22,9 @@ public class ModRegistries {
     event.register(RootsRegistries.WORLD_TEST_TYPES);
     event.register(RootsRegistries.SNAPSHOT_TYPES);
     event.register(RootsRegistries.GROVES);
+    event.register(RootsRegistries.CAN_GROW_FUNCTIONS);
+    event.register(RootsRegistries.REPLANT_FUNCTIONS);
+    event.register(RootsRegistries.LIGHT_FUNCTIONS);
   }
 }
 

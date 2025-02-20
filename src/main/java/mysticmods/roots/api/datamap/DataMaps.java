@@ -12,9 +12,11 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
+import mysticmods.roots.growth.GrowthRecord;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.datamaps.AdvancedDataMapType;
@@ -69,6 +71,9 @@ public class DataMaps {
   public static final DataMapType<Item, Integer> SPROUT_BREEDING_ITEM_CHANCE = DataMapType.builder(RootsAPI.rl("sprout_breeding_item_chance"), Registries.ITEM, Codec.INT)
       .synced(Codec.INT, false)
       .build();
+  public static final DataMapType<Block, GrowthRecord> GROWTH_RECORDS = DataMapType.builder(RootsAPI.rl("growth_records"), Registries.BLOCK, GrowthRecord.CODEC)
+      .synced(GrowthRecord.CODEC, false)
+      .build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -85,6 +90,6 @@ public class DataMaps {
     event.register(LEVEL_CONDITION_CANONS);
     event.register(PLAYER_CONDITION_CANONS);
     event.register(SPROUT_BREEDING_ITEM_CHANCE);
-
+    event.register(GROWTH_RECORDS);
   }
 }

@@ -4,6 +4,9 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.growth.CanGrowFunction;
+import mysticmods.roots.api.growth.LightFunction;
+import mysticmods.roots.api.growth.ReplantFunction;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;
@@ -39,6 +42,12 @@ public class RootsRegistries {
   public static final Registry<SnapshotType<?>> SNAPSHOT_TYPES = new RegistryBuilder<>(Keys.SNAPSHOT_TYPES).sync(true)
       .create();
   public static final Registry<Grove> GROVES = new RegistryBuilder<>(Keys.GROVES).sync(true).create();
+  public static final Registry<CanGrowFunction> CAN_GROW_FUNCTIONS = new RegistryBuilder<>(Keys.CAN_GROW_FUNCTIONS).sync(true)
+      .create();
+  public static final Registry<ReplantFunction> REPLANT_FUNCTIONS = new RegistryBuilder<>(Keys.REPLANT_FUNCTIONS).sync(true)
+      .create();
+  public static final Registry<LightFunction> LIGHT_FUNCTIONS = new RegistryBuilder<>(Keys.LIGHT_FUNCTIONS).sync(true)
+      .create();
 
   public static class Keys {
     // Registry keys
@@ -54,6 +63,9 @@ public class RootsRegistries {
     public static ResourceKey<Registry<WorldTestType<?>>> WORLD_TEST_TYPES = key(RootsAPI.rl("world_test_types"));
     public static ResourceKey<Registry<SnapshotType<?>>> SNAPSHOT_TYPES = key(RootsAPI.rl("snapshot_types"));
     public static ResourceKey<Registry<Grove>> GROVES = key(RootsAPI.rl("groves"));
+    public static ResourceKey<Registry<CanGrowFunction>> CAN_GROW_FUNCTIONS = key(RootsAPI.rl("can_grow_functions"));
+    public static ResourceKey<Registry<ReplantFunction>> REPLANT_FUNCTIONS = key(RootsAPI.rl("replant_functions"));
+    public static ResourceKey<Registry<LightFunction>> LIGHT_FUNCTIONS = key(RootsAPI.rl("light_functions"));
 
     private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
       return ResourceKey.createRegistryKey(name);

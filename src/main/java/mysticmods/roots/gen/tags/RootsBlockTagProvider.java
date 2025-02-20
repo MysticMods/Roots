@@ -355,6 +355,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     ).addTag(
         RootsTags.Blocks.CROPS
     );
+
+    tag(RootsTags.Blocks.SPREADING_MUSHROOMS).add(Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM, BAFFLECAP.get());
   }
 
   @Override
