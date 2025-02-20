@@ -57,10 +57,13 @@ public class GrowthInfusionSpell extends Spell {
     BlockState at = level.getBlockState(result.getBlockPos());
 
     int doTicks = GrowthUtil.growthTicks(level, result.getBlockPos(), at, pPlayer);
-    if (doTicks > 0 && level.random.nextInt(doTicks) == 0) {
-      at.randomTick((ServerLevel) level, result.getBlockPos(), level.random);
+    if (doTicks > 0) {
+      if (level.random.nextInt(doTicks) == 0) {
+        at.randomTick((ServerLevel) level, result.getBlockPos(), level.random);
+      }
     } else {
       costs.noCharge();
+      pPlayer.stopUsingItem();
       return 0;
     }
 

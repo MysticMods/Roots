@@ -30,6 +30,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -215,6 +216,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   }
 
   public int getMaxUse() {
+    if (maxUse == 0 && type == Type.CONTINUOUS) {
+      return 72000;
+    }
+
     return maxUse;
   }
 

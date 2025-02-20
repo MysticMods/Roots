@@ -17,20 +17,22 @@ public class GrowthUtil {
     }
 
     if (state.is(RootsTags.Blocks.GROWTH_BLACKLIST)) {
-      return 0;
+      return -1;
     }
 
     GrowthRecord record = state.getBlockHolder().getData(DataMaps.GROWTH_RECORDS);
     if (record == null && state.getBlock() instanceof CropBlock crop) {
       record = GrowthRecord.ofCrop(crop, null);
-    } else {
-      return 0;
+    }
+
+    if (record == null) {
+      return -1;
     }
 
     if (record.canGrowFunction().test(level, pos, state, record.ageProperty().orElse(null), record.maximumAge())) {
       return record.ticks();
     }
 
-    return 0;
+    return -1;
   }
 }

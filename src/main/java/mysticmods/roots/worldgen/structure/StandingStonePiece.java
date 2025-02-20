@@ -3,9 +3,10 @@ package mysticmods.roots.worldgen.structure;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModFeatures;
-import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -78,14 +79,20 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
           BuiltInRegistries.BLOCK.getTag(RootsTags.Blocks.STANDING_STONE_CROPS).ifPresent(tag -> {
             tag.getRandomElement(pLevel.getRandom()).ifPresent(holder -> {
               Block block = holder.value();
-              /*          ForgeRegistries.BLOCKS.tags().getTag(RootsTags.Blocks.STANDING_STONE_CROPS).getRandomElement(pRandom).ifPresent(block -> {*/
               pLevel.setBlock(pillarSpot.below(), Blocks.FARMLAND.defaultBlockState(), 2);
               BlockState newState = block.defaultBlockState();
-              GrowthUtil.CropData cropData = GrowthUtil.getCropData(newState);
-              if (cropData.isEmpty()) {
+              GrowthRecord record = newState.getBlockHolder().getData(DataMaps.GROWTH_RECORDS);
+              if (record == null) {
                 pLevel.setBlock(pillarSpot, newState, 2);
               } else {
-                pLevel.setBlock(pillarSpot, newState.setValue(cropData.ageProperty(), cropData.maxAge()), 2);
+                record.ageProperty().ifPresentOrElse(prop -> {
+                      if (record.maximumAge() != -1) {
+                        pLevel.setBlock(pillarSpot, newState.setValue(prop, record.maximumAge()), 2);
+                      } else {
+                        pLevel.setBlock(pillarSpot, newState, 2);
+                      }
+                    },
+                    () -> pLevel.setBlock(pillarSpot, newState, 2));
               }
             });
           });

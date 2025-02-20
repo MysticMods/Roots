@@ -50,7 +50,7 @@ public record GrowthRecord(Block cropBlock, Item seedItem, Optional<IntegerPrope
     IntegerProperty ageProperty = null;
     if (cropBlock instanceof CropBlock crop) {
       ageProperty = ((AccessorMixinCropBlock) crop).callGetAgeProperty();
-    } else {
+    } else if (cropBlock != null) {
       BlockState blockState = cropBlock.defaultBlockState();
       for (Property<?> property : blockState.getProperties()) {
         if (property.getName().equals(agePropertyName) && property instanceof IntegerProperty) {
