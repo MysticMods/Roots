@@ -36,11 +36,6 @@ public class ModAttachments {
   public static DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
 
-  public static DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> TOKEN_LOCATION = COMPONENTS.register("token_location", () -> new DataComponentType.Builder<ResourceLocation>().persistent(ResourceLocation.CODEC)
-      .cacheEncoding().networkSynchronized(ResourceLocation.STREAM_CODEC).build());
-  public static DeferredHolder<DataComponentType<?>, DataComponentType<TokenItem.TokenType>> TOKEN_TYPE = COMPONENTS.register("token_type", () -> new DataComponentType.Builder<TokenItem.TokenType>().cacheEncoding()
-      .persistent(TokenItem.TokenType.CODEC).networkSynchronized(TokenItem.TokenType.STREAM_CODEC).build());
-
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();
   }
