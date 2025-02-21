@@ -71,8 +71,10 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  public BarkRecipe(Optional<BaseRecipeData> baseRecipeData, Optional<PartialBlockState> partialBlockState, List<WorldCondition> worldCondition, Optional<List<String>> strings, Integer integer, Optional<OutputStateMapper> outputStateMapper) {
+  public BarkRecipe(Optional<BaseRecipeData> baseRecipeData, Optional<PartialBlockState> partialBlockState, List<WorldCondition> worldCondition, Optional<List<String>> strings, int durabilityCost, Optional<OutputStateMapper> outputStateMapper) {
     super(baseRecipeData.orElse(new BaseRecipeData()), partialBlockState.orElse(null), worldCondition, strings.orElse(Collections.emptyList()));
+    this.stateMapper = outputStateMapper.orElse(null);
+    this.durabilityCost = durabilityCost;
   }
 
   @Override
@@ -90,7 +92,7 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     List<String> propertiesToSkip = new ArrayList<>(skipProperties);
     propertiesToSkip.add(RotatedPillarBlock.AXIS.getName());
     BlockState newState;
-    if (stateMapper.isEmpty()) {
+    if (stateMapper == null || stateMapper.isEmpty()) {
       if (outputState == null) {
         RootsAPI.LOG.error("Invalid recipe '{}': no output state or state mapper", this);
         newState = Blocks.AIR.defaultBlockState();
