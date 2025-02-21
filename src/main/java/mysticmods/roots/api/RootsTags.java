@@ -396,6 +396,8 @@ public class RootsTags {
     public static final TagKey<Item> WARPED_PILLARS = modTag("pillars/log/warped");
     public static final TagKey<Item> SPROUT_BREEDING_REWARDS = modTag("sprout_breeding_rewards");
 
+    public static final TagKey<Item> FORAGING_ELIGIBLE = modTag("foraging_eligible");
+
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));
     }

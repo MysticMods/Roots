@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.WildRootsBlock;
 import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModEnchantment;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModFeatures;
 import mysticmods.roots.util.FakePlayerUtil;
@@ -12,16 +13,21 @@ import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
 import net.minecraft.core.*;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.worldgen.Pools;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.*;
+import net.minecraft.world.item.enchantment.effects.AddValue;
 import net.minecraft.world.item.enchantment.providers.SingleEnchantment;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -233,8 +239,33 @@ public class RootsDataPackGenerators {
                   bootstrap.register(FakePlayerUtil.LOOTING_I, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(1)));
                   bootstrap.register(FakePlayerUtil.LOOTING_II, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(2)));
                   bootstrap.register(FakePlayerUtil.LOOTING_III, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(3)));
+                })
+                .add(Registries.ENCHANTMENT, bootstrap -> {
+                  HolderGetter<Item> itemGetter = bootstrap.lookup(Registries.ITEM);
+
+                  bootstrap.register(
+                      ModEnchantment.FORAGING,
+                      new Enchantment(
+                          Component.translatable("enchantment.roots.foraging"),
+                          new Enchantment.EnchantmentDefinition(
+                              itemGetter.getOrThrow(RootsTags.Items.FORAGING_ELIGIBLE),
+                              Optional.empty(),
+                              1,
+                              6,
+                              new Enchantment.Cost(3, 1),
+                              new Enchantment.Cost(4, 2),
+                              2,
+                              List.of(EquipmentSlotGroup.MAINHAND)
+                          ),
+                          HolderSet.empty(),
+                          DataComponentMap.builder().set(
+                              ModEnchantment.FORAGING_EFFECT,
+                              new AddValue(LevelBasedValue.perLevel(1, 0.5f))
+                          ).build()
+                      )
+                  );
                 }),
-            Set.of(RootsAPI.MODID)
+    Set.of(RootsAPI.MODID)
         )
     ).getRegistryProvider();
   }

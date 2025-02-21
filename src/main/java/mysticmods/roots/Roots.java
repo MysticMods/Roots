@@ -36,6 +36,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Block placement tests for rituals
 // - Pyre sound burning lah
 // - Entity carried item layers
+// - DiggerItem.createAttributes
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;
@@ -66,6 +67,7 @@ public class Roots {
     ModDamage.register(bus);
     ModParticles.register(bus);
     ModAdvancements.register(bus);
+    ModEnchantment.register(bus);
     packetHandler = new PacketHandler(bus);
   }
 }

@@ -1,0 +1,31 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.roots.foraging"
+  },
+  "effects": {
+    "roots:foraging": {
+      "type": "minecraft:add",
+      "value": {
+        "type": "minecraft:linear",
+        "base": 1.0,
+        "per_level_above_first": 0.5
+      }
+    }
+  },
+  "max_cost": {
+    "base": 4,
+    "per_level_above_first": 2
+  },
+  "max_level": 6,
+  "min_cost": {
+    "base": 3,
+    "per_level_above_first": 1
+  },
+  "primary_items": "#roots:knives",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#roots:foraging_eligible",
+  "weight": 1
+}

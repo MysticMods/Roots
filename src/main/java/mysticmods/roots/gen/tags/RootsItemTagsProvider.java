@@ -254,6 +254,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     );
 
     this.tag(RootsTags.Items.SPROUT_FOOD).addTag(RootsTags.Items.AUBERGINE_CROP);
+
+    this.tag(RootsTags.Items.FORAGING_ELIGIBLE).addTag(RootsTags.Items.KNIVES).add(ModItems.LIVING_HOE.get());
   }
 
   @Override
