@@ -36,11 +36,11 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
     List<LootItemCondition> conditions = new ArrayList<>();
     conditions.add(LootItemRandomChanceCondition.randomChance(chance).build());
     conditions.add(LootItemBlockTagCondition.tag(tag));
-    if (tall) {
+/*    if (tall) {
       conditions.add(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS)
           .setProperties(StatePropertiesPredicate.Builder.properties()
               .hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)).build());
-    }
+    }*/
     conditions.add(InvertedLootItemCondition.invert(
         CanItemPerformAbility.canItemPerformAbility(ItemAbilities.SHEARS_DIG)
     ).build());
@@ -51,11 +51,11 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
     List<LootItemCondition> conditions = new ArrayList<>();
     conditions.add(ForagingRandomChanceCondition.randomChance(initialChance).build());
     conditions.add(LootItemBlockTagCondition.tag(tag));
-    if (tall) {
+/*    if (tall) {
       conditions.add(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS)
           .setProperties(StatePropertiesPredicate.Builder.properties()
               .hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)).build());
-    }
+    }*/
     if (wet) {
       conditions.add(WaterloggedBlockCondition.waterlogged().build());
     } else {

@@ -10,13 +10,6 @@
       "tag": "roots:tall_grass"
     },
     {
-      "block": "minecraft:tall_grass",
-      "condition": "minecraft:block_state_property",
-      "properties": {
-        "half": "lower"
-      }
-    },
-    {
       "condition": "minecraft:inverted",
       "term": {
         "ability": "shears_dig",

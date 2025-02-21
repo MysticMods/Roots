@@ -10,13 +10,6 @@
       "tag": "roots:forageable/double"
     },
     {
-      "block": "minecraft:tall_grass",
-      "condition": "minecraft:block_state_property",
-      "properties": {
-        "half": "lower"
-      }
-    },
-    {
       "condition": "minecraft:inverted",
       "term": {
         "condition": "roots:waterlogged_block"
