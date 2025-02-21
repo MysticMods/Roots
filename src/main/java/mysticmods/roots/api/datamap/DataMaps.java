@@ -13,6 +13,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.growth.GrowthRecord;
+import mysticmods.roots.growth.HarvestRecord;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -74,6 +75,9 @@ public class DataMaps {
   public static final DataMapType<Block, GrowthRecord> GROWTH_RECORDS = DataMapType.builder(RootsAPI.rl("growth_records"), Registries.BLOCK, GrowthRecord.CODEC)
       .synced(GrowthRecord.CODEC, false)
       .build();
+  public static final DataMapType<Block, HarvestRecord> HARVEST_RECORDS = DataMapType.builder(RootsAPI.rl("harvest_records"), Registries.BLOCK, HarvestRecord.CODEC)
+      .synced(HarvestRecord.CODEC, false)
+      .build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -91,5 +95,6 @@ public class DataMaps {
     event.register(PLAYER_CONDITION_CANONS);
     event.register(SPROUT_BREEDING_ITEM_CHANCE);
     event.register(GROWTH_RECORDS);
+    event.register(HARVEST_RECORDS);
   }
 }

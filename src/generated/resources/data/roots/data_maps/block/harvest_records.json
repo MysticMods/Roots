@@ -1,0 +1,171 @@
+{
+  "values": {
+    "minecraft:beetroots": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "minecraft:beetroots",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:beetroot_seeds"
+    },
+    "minecraft:carrots": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "minecraft:carrots",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:carrot"
+    },
+    "minecraft:cocoa": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "minecraft:cocoa",
+      "maximumAge": 2,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:cocoa_beans"
+    },
+    "minecraft:melon": {
+      "ageProperty": {},
+      "cropBlock": "minecraft:melon",
+      "maximumAge": -1,
+      "replantFunction": "roots:replace_with_air",
+      "seedItem": "minecraft:melon_seeds"
+    },
+    "minecraft:nether_wart": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "minecraft:nether_wart",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:nether_wart"
+    },
+    "minecraft:potatoes": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "minecraft:potatoes",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:potato"
+    },
+    "minecraft:pumpkin": {
+      "ageProperty": {},
+      "cropBlock": "minecraft:pumpkin",
+      "maximumAge": -1,
+      "replantFunction": "roots:replace_with_air",
+      "seedItem": "minecraft:pumpkin_seeds"
+    },
+    "minecraft:sweet_berry_bush": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "minecraft:sweet_berry_bush",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:sweet_berries"
+    },
+    "minecraft:wheat": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "minecraft:wheat",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "minecraft:wheat_seeds"
+    },
+    "roots:aubergine_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:aubergine_crop",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:aubergine_seeds"
+    },
+    "roots:cloud_berry_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:cloud_berry_crop",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:cloud_berry"
+    },
+    "roots:dewgonia_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:dewgonia_crop",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:dewgonia"
+    },
+    "roots:inferno_bulb_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:inferno_bulb_crop",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:inferno_bulb"
+    },
+    "roots:moonglow_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:moonglow_crop",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:moonglow_seeds"
+    },
+    "roots:pereskia_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:pereskia_crop",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:pereskia_bulb"
+    },
+    "roots:spiritleaf_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:spiritleaf_crop",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:spiritleaf_seeds"
+    },
+    "roots:stalicripe_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:stalicripe_crop",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:stalicripe"
+    },
+    "roots:wildewheet_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:wildewheet_crop",
+      "maximumAge": 7,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:wildewheet_seeds"
+    },
+    "roots:wildroot_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "cropBlock": "roots:wildroot_crop",
+      "maximumAge": 3,
+      "replantFunction": "roots:age_replant",
+      "seedItem": "roots:wildroot"
+    }
+  }
+}

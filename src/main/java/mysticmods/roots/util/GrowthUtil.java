@@ -22,14 +22,14 @@ public class GrowthUtil {
 
     GrowthRecord record = state.getBlockHolder().getData(DataMaps.GROWTH_RECORDS);
     if (record == null && state.getBlock() instanceof CropBlock crop) {
-      record = GrowthRecord.ofCrop(crop, null);
+      record = GrowthRecord.ofCrop(crop);
     }
 
     if (record == null) {
       return -1;
     }
 
-    if (record.canGrowFunction().test(level, pos, state, record.ageProperty().orElse(null), record.maximumAge())) {
+    if (record.canGrow(level, pos, state)) {
       return record.ticks();
     }
 

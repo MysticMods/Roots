@@ -37,6 +37,7 @@ public class ModTests {
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowFunction> AGE_CAN_GROW = CAN_GROW_FUNCTIONS.register("age_can_grow", AgeCanGrowFunction::new);
   public static final DeferredHolder<CanGrowFunction, CactusCanGrowFunction> CACTUS_CANE_CAN_GROW = CAN_GROW_FUNCTIONS.register("cactus_or_cane_can_grow", CactusCanGrowFunction::new);
   public static final DeferredHolder<CanGrowFunction, KelpCanGrowFunction> KELP_CAN_GROW = CAN_GROW_FUNCTIONS.register("kelp_can_grow", KelpCanGrowFunction::new);
+  public static final DeferredHolder<CanGrowFunction, BambooCanGrowFunction> BAMBOO_CAN_GROW = CAN_GROW_FUNCTIONS.register("bamboo_can_grow", BambooCanGrowFunction::new);
 
   public static final DeferredHolder<ReplantFunction, NoReplantFunction> NO_REPLANT = REPLANT_FUNCTIONS.register("no_replant", NoReplantFunction::new);
   public static final DeferredHolder<ReplantFunction, AgeReplantFunction> AGE_REPLANT = REPLANT_FUNCTIONS.register("age_replant", AgeReplantFunction::new);

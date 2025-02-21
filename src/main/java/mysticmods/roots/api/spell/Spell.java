@@ -223,6 +223,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return maxUse;
   }
 
+  public int getChargeRate () {
+    return 20;
+  }
+
   @Override
   public List<Cost> getDefaultCosts() {
     return defaultCosts;

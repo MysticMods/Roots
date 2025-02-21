@@ -31,7 +31,7 @@ public class GrowthInfusionSpell extends Spell {
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.GROWTH_INFUSION_COOLDOWN;
+    return null;
   }
 
   @Override
@@ -64,9 +64,8 @@ public class GrowthInfusionSpell extends Spell {
     } else {
       costs.noCharge();
       pPlayer.stopUsingItem();
-      return 0;
     }
 
-    return cooldown;
+    return 0;
   }
 }

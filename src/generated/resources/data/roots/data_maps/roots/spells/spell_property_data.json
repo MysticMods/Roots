@@ -319,15 +319,6 @@
     ],
     "roots:growth_infusion": [
       {
-        "id": "roots:growth_infusion/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 20,
-          "value": 20
-        }
-      },
-      {
         "id": "roots:growth_infusion/added_reach",
         "value": {
           "type": "roots:double_property",

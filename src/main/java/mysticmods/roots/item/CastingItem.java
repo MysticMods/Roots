@@ -72,8 +72,7 @@ public class CastingItem extends Item {
     if (spell.getType() == Spell.Type.CONTINUOUS) {
       Costing costs = new Costing(spell, pPlayer);
 
-      // TODO: Charge every tick instead of assuming 20 ticks will elapse properly
-      if (ticks % 20 == 0) {
+      if (ticks % spell.getSpell().getChargeRate() == 0) {
         if (!costs.canAfford(pPlayer, true)) {
           RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getSpell().getName());
           pPlayer.stopUsingItem();
@@ -85,7 +84,7 @@ public class CastingItem extends Item {
         RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());
       }
 
-      if (ticks % 20 == 0) {
+      if (ticks % spell.getSpell().getChargeRate() == 0) {
         costs.charge(pPlayer);
       }
     }
@@ -173,7 +172,7 @@ public class CastingItem extends Item {
     super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
     if (!pLevel.isClientSide()) {
       int dur = getUseDuration(pStack, pLivingEntity) - pTimeCharged;
-      RootsAPI.LOG.info("Finished using after {} ticks {} seconds", dur, dur / 20);
+      //RootsAPI.LOG.info("Finished using after {} ticks {} seconds", dur, dur / 20);
     }
 
     if (!(pLivingEntity instanceof Player pPlayer) || pLevel.isClientSide()) {

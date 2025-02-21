@@ -5,7 +5,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.growth.CanGrowFunction;
 import mysticmods.roots.api.growth.LightFunction;
-import mysticmods.roots.api.growth.ReplantFunction;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.init.ModTests;
 import mysticmods.roots.mixin.AccessorMixinCropBlock;
@@ -18,35 +17,31 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.Optional;
 
-public record GrowthRecord(Block cropBlock, Item seedItem, Optional<IntegerProperty> ageProperty,
+public record GrowthRecord(Block cropBlock, Optional<IntegerProperty> ageProperty,
                            int maximumAge, int ticks,
-                           ReplantFunction replantFunction,
                            CanGrowFunction canGrowFunction,
                            LightFunction lightFunction) {
   public static final MapCodec<GrowthRecord> MAP_CODEC = RecordCodecBuilder.mapCodec(instance ->
       instance.group(
-              BuiltInRegistries.BLOCK.byNameCodec().optionalFieldOf("cropBlock").forGetter(o -> Optional.ofNullable(o.cropBlock)),
-              BuiltInRegistries.ITEM.byNameCodec().optionalFieldOf("seedItem").forGetter(o -> Optional.ofNullable(o.seedItem)),
+              BuiltInRegistries.BLOCK.byNameCodec().optionalFieldOf("cropBlock")
+                  .forGetter(o -> Optional.ofNullable(o.cropBlock)),
               Codec.STRING.optionalFieldOf("ageProperty").fieldOf("ageProperty")
                   .forGetter(o -> o.ageProperty().map(Property::getName)),
               Codec.INT.fieldOf("maximumAge").forGetter(GrowthRecord::maximumAge),
               Codec.INT.fieldOf("ticks").forGetter(GrowthRecord::ticks),
-              RootsRegistries.REPLANT_FUNCTIONS.byNameCodec().fieldOf("replantFunction")
-                  .forGetter(GrowthRecord::replantFunction),
               RootsRegistries.CAN_GROW_FUNCTIONS.byNameCodec().fieldOf("canGrowFunction")
                   .forGetter(GrowthRecord::canGrowFunction),
               RootsRegistries.LIGHT_FUNCTIONS.byNameCodec().fieldOf("lightFunction").forGetter(GrowthRecord::lightFunction)
           )
-          .apply(instance, (block, optItem, optPropName, maxAge, ticks, replant, canGrow, light) -> GrowthRecord.of(block.orElse(null), optItem.orElse(null), optPropName.orElse("age"), maxAge, ticks, replant, canGrow, light))
+          .apply(instance, (block, optPropName, maxAge, ticks, canGrow, light) -> GrowthRecord.of(block.orElse(null), optPropName.orElse("age"), maxAge, ticks, canGrow, light))
   );
   public static final Codec<GrowthRecord> CODEC = MAP_CODEC.codec();
 
-  public static GrowthRecord of(Block cropBlock, Item optItem, String agePropertyName, int maximumAge, int ticks, ReplantFunction replantFunction, CanGrowFunction canGrowFunction, LightFunction lightFunction) {
+  public static GrowthRecord of(Block cropBlock, String agePropertyName, int maximumAge, int ticks, CanGrowFunction canGrowFunction, LightFunction lightFunction) {
     IntegerProperty ageProperty = null;
     if (cropBlock instanceof CropBlock crop) {
       ageProperty = ((AccessorMixinCropBlock) crop).callGetAgeProperty();
@@ -59,11 +54,11 @@ public record GrowthRecord(Block cropBlock, Item seedItem, Optional<IntegerPrope
         }
       }
     }
-    return new GrowthRecord(cropBlock, optItem, Optional.ofNullable(ageProperty), maximumAge, ticks, replantFunction, canGrowFunction, lightFunction);
+    return new GrowthRecord(cropBlock, Optional.ofNullable(ageProperty), maximumAge, ticks, canGrowFunction, lightFunction);
   }
 
 
-  public static GrowthRecord of(Block cropBlock, Item seedItem, String agePropertyName, ReplantFunction replantFunction, CanGrowFunction canGrowFunction, LightFunction lightFunction) {
+  public static GrowthRecord of(Block cropBlock, String agePropertyName, CanGrowFunction canGrowFunction, LightFunction lightFunction) {
     IntegerProperty ageProperty = null;
     int maxValue = -1;
     if (cropBlock instanceof CropBlock crop) {
@@ -82,29 +77,24 @@ public record GrowthRecord(Block cropBlock, Item seedItem, Optional<IntegerPrope
         maxValue = Collections.max(ageProperty.getPossibleValues());
       }
     }
-    return new GrowthRecord(cropBlock, seedItem, Optional.ofNullable(ageProperty), maxValue, 1, replantFunction, canGrowFunction, lightFunction);
+    return new GrowthRecord(cropBlock, Optional.ofNullable(ageProperty), maxValue, 1, canGrowFunction, lightFunction);
   }
 
-  public static GrowthRecord ofCrop(CropBlock cropBlock, Item seedItem, String agePropertyName) {
-    return of(cropBlock, seedItem, agePropertyName, ModTests.AGE_REPLANT.get(), ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get());
+  public static GrowthRecord ofCrop(CropBlock cropBlock, String agePropertyName) {
+    return of(cropBlock, agePropertyName, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get());
   }
 
-  public static GrowthRecord ofCrop(CropBlock cropBlock, Item seedItem) {
-    return ofCrop(cropBlock, seedItem, "age");
+  public static GrowthRecord ofCrop(CropBlock cropBlock) {
+    return ofCrop(cropBlock, "age");
   }
 
-  boolean canGrow(Level level, BlockPos pos, BlockState state) {
+  public boolean canGrow(Level level, BlockPos pos, BlockState state) {
     if (!lightFunction.test(level, pos, state)) {
       return false;
     }
     return canGrowFunction.test(level, pos, state, ageProperty.orElse(null), maximumAge);
   }
 
-  // TODO: Should this just return the incoming state if?
-  @Nullable
-  BlockState replant(Level level, BlockPos pos, BlockState state) {
-    return replantFunction.replant(level, pos, state, ageProperty.orElse(null), maximumAge);
-  }
   // Block
 
   // Age property (if any)
