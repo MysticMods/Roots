@@ -23,7 +23,9 @@ public class AddGrassDropsModifier extends LootModifier {
   @NotNull
   @Override
   protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-    generatedLoot.add(new ItemStack(dropItem));
+    if (generatedLoot.isEmpty()) {
+      generatedLoot.add(new ItemStack(dropItem));
+    }
     return generatedLoot;
   }
 
