@@ -22,7 +22,6 @@
     "base": 3,
     "per_level_above_first": 1
   },
-  "primary_items": "#roots:knives",
   "slots": [
     "mainhand"
   ],

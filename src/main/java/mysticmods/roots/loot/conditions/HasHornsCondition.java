@@ -1,4 +1,4 @@
-package mysticmods.roots.loot.predicates;
+package mysticmods.roots.loot.conditions;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

@@ -16,6 +16,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static mysticmods.roots.init.ModBlocks.*;
 
+@SuppressWarnings("unchecked")
 public class RootsBlockTagProvider extends BlockTagsProvider {
   public RootsBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
     super(output, lookupProvider, RootsAPI.MODID, existingFileHelper);
@@ -357,6 +358,10 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     );
 
     tag(RootsTags.Blocks.SPREADING_MUSHROOMS).add(Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM, BAFFLECAP.get());
+
+    tag(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS).addTags(BlockTags.LEAVES, RootsTags.Blocks.SHORT_GRASS).add(Blocks.SEAGRASS, Blocks.VINE, Blocks.CAVE_VINES, Blocks.DEAD_BUSH, Blocks.HANGING_ROOTS);
+
+    tag(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS).addTags(RootsTags.Blocks.TALL_GRASS).add(Blocks.TALL_SEAGRASS);
   }
 
   @Override

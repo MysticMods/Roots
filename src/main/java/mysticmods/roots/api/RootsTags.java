@@ -195,6 +195,9 @@ public class RootsTags {
 
     public static final TagKey<Block> SPREADING_MUSHROOMS = modTag("spreading_mushrooms");
 
+    public static final TagKey<Block> FORAGEABLE_SINGLE_BLOCKS = modTag("forageable/single");
+    public static final TagKey<Block> FORAGEABLE_DOUBLE_BLOCKS = modTag("forageable/double");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }

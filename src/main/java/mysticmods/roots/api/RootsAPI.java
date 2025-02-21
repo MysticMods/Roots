@@ -47,8 +47,10 @@ public abstract class RootsAPI {
   public static ItemAbility KNIFE_STRIP = ItemAbility.get("knife_strip");
   public static ItemAbility KNIFE_DIG = ItemAbility.get("knife_dig");
 
+  public static ItemAbility FORAGE = ItemAbility.get("forage");
+
   public static Set<ItemAbility> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
-  public static Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG);
+  public static Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG, FORAGE);
 
   public static RootsAPI getInstance() {
     return INSTANCE;

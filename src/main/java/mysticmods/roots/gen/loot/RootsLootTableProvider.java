@@ -11,7 +11,7 @@ import mysticmods.roots.block.crop.ElementalType;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModItems;
-import mysticmods.roots.loot.predicates.HasHornsCondition;
+import mysticmods.roots.loot.conditions.HasHornsCondition;
 import mysticmods.roots.mixin.AccessorMixinBlockLootSubProvider;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;

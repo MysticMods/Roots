@@ -1,5 +1,6 @@
 package mysticmods.roots.item;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.bark.BarkRecipe;
@@ -21,12 +22,18 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
 public class KnifeItem extends DiggerItem {
   public KnifeItem(Tier tier, Properties props) {
     super(tier, BlockTags.LOGS, props);
+  }
+
+  @Override
+  public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+    return RootsAPI.KNIFE_DEFAULTS.contains(itemAbility);
   }
 
   @Override
