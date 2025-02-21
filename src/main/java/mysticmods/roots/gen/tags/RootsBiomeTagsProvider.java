@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("unchecked")
 public class RootsBiomeTagsProvider extends BiomeTagsProvider {
   public RootsBiomeTagsProvider(PackOutput arg, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
     super(arg, completableFuture, RootsAPI.MODID, existingFileHelper);
@@ -22,6 +23,8 @@ public class RootsBiomeTagsProvider extends BiomeTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Biomes.HAS_BARROW_STRUCTURES)
         .addTags(BiomeTags.IS_SAVANNA, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_PLAINS);
+
+    this.tag(RootsTags.Biomes.HAS_HANGING_MOSS).addTags(BiomeTags.IS_OVERWORLD);
 
     //noinspection unchecked
     this.tag(RootsTags.Biomes.HAS_BEETLE_SPAWNS)

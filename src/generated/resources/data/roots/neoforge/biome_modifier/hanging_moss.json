@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#roots:has_hanging_moss",
+  "features": "roots:hanging_moss",
+  "step": "vegetal_decoration"
+}

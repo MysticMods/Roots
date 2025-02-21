@@ -589,6 +589,7 @@ public class RootsTags {
   }
 
   public static class Biomes {
+    public static final TagKey<Biome> HAS_HANGING_MOSS = modTag("has_hanging_moss");
     // TODO: ??? has_barrow_structureS?
     public static TagKey<Biome> HAS_BARROW_STRUCTURES = modTag("has_barrow_structures");
     public static TagKey<Biome> HAS_BEETLE_SPAWNS = modTag("has_beetle_spawns");

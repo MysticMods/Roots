@@ -89,6 +89,7 @@ public class ModFeatures {
   public static ResourceKey<BiomeModifier> WILD_AUBERGINES_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_aubergines"));
   public static ResourceKey<BiomeModifier> WILD_ROOTS_FOREST_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_roots_forest"));
   public static ResourceKey<BiomeModifier> WILD_ROOTS_UNDERGROUND_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_roots_underground"));
+  public static ResourceKey<BiomeModifier> HANGING_MOSS_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("hanging_moss"));
   public static ResourceKey<BiomeModifier> SILVER_ORE_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("silver_ore"));
   public static ResourceKey<BiomeModifier> GRANITE_QUARTZ_ORE_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("granite_quartz_ore"));
   public static ResourceKey<BiomeModifier> STONEPETAL_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("stonepetal"));

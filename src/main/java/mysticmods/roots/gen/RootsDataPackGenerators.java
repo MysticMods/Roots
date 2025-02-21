@@ -18,7 +18,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -26,7 +25,9 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.enchantment.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.item.enchantment.effects.AddValue;
 import net.minecraft.world.item.enchantment.providers.SingleEnchantment;
 import net.minecraft.world.level.biome.Biome;
@@ -39,7 +40,10 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
@@ -100,7 +104,8 @@ public class RootsDataPackGenerators {
                           .defaultBlockState()))));
                   bootstrap.register(ModFeatures.CONFIGURED_HANGING_MOSS_KEY,
                       new ConfiguredFeature<>(
-                          ModFeatures.HANGING_MOSS_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.HANGING_GROVE_MOSS.get().defaultBlockState()))));
+                          ModFeatures.HANGING_MOSS_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.HANGING_GROVE_MOSS.get()
+                          .defaultBlockState()))));
                   // TODO: Is this used?
                   bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_MOSSY_KEY, new ConfiguredFeature<>(ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get()
                       .defaultBlockState().setValue(WildRootsBlock.MOSSY, true)))));
@@ -162,12 +167,15 @@ public class RootsDataPackGenerators {
                       CountPlacement.of(3), // make 5 new attempts for each position at the log
                       RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y defaultValue.
                   )));
-/*                  bootstrap.register(ModFeatures.PLACED_HANGING_MOSS_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_HANGING_MOSS_KEY), List.of(
+                  bootstrap.register(ModFeatures.PLACED_HANGING_MOSS_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_HANGING_MOSS_KEY), List.of(
                       BiomeFilter.biome(),
-                      CountPlacement.of(30),
+                      CountPlacement.of(256),
                       InSquarePlacement.spread(),
-
-                  )))*/
+                      HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                      RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
+                      BlockPredicateFilter.forPredicate(MatchingTreeTrunkPredicate.create()), // Check if we are at a tree's log.
+                      RandomOffsetPlacement.vertical(UniformInt.of(-2, 2))
+                  )));
                   bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY), List.of(
                       RarityFilter.onAverageOnceEvery(168),
                       HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
@@ -208,6 +216,7 @@ public class RootsDataPackGenerators {
                   bootstrap.register(ModFeatures.WILD_AUBERGINES_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_WILD_AUBERGINES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_AUBERGINE_PATCH_KEY)), GenerationStep.Decoration.VEGETAL_DECORATION));
                   bootstrap.register(ModFeatures.WILD_ROOTS_FOREST_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_FOREST_WILD_ROOTS), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_ROOTS_FOREST_KEY)), GenerationStep.Decoration.TOP_LAYER_MODIFICATION));
                   bootstrap.register(ModFeatures.WILD_ROOTS_UNDERGROUND_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_UNDERGROUND_WILD_ROOTS), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_WILD_ROOTS_UNDERGROUND_KEY)), GenerationStep.Decoration.UNDERGROUND_DECORATION));
+                  bootstrap.register(ModFeatures.HANGING_MOSS_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_HANGING_MOSS), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_HANGING_MOSS_KEY)), GenerationStep.Decoration.VEGETAL_DECORATION));
                   bootstrap.register(ModFeatures.GRANITE_QUARTZ_ORE_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_GRANITE_QUARTZ_ORES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_GRANITE_QUARTZ_KEY)), GenerationStep.Decoration.UNDERGROUND_ORES));
                   bootstrap.register(ModFeatures.SILVER_ORE_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_SILVER_ORES), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_SILVER_ORE_KEY)), GenerationStep.Decoration.UNDERGROUND_ORES));
                   bootstrap.register(ModFeatures.STONEPETAL_KEY, new BiomeModifiers.AddFeaturesBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_STONEPETALS), HolderSet.direct(placedGetter.getOrThrow(ModFeatures.PLACED_STONEPETAL_PATCH_KEY)), GenerationStep.Decoration.VEGETAL_DECORATION));
@@ -271,7 +280,7 @@ public class RootsDataPackGenerators {
                       )
                   );
                 }),
-    Set.of(RootsAPI.MODID)
+            Set.of(RootsAPI.MODID)
         )
     ).getRegistryProvider();
   }
