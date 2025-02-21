@@ -39,10 +39,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
@@ -101,6 +98,9 @@ public class RootsDataPackGenerators {
                       new ConfiguredFeature<>(
                           ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get()
                           .defaultBlockState()))));
+                  bootstrap.register(ModFeatures.CONFIGURED_HANGING_MOSS_KEY,
+                      new ConfiguredFeature<>(
+                          ModFeatures.HANGING_MOSS_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.HANGING_GROVE_MOSS.get().defaultBlockState()))));
                   // TODO: Is this used?
                   bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_MOSSY_KEY, new ConfiguredFeature<>(ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get()
                       .defaultBlockState().setValue(WildRootsBlock.MOSSY, true)))));
@@ -162,6 +162,12 @@ public class RootsDataPackGenerators {
                       CountPlacement.of(3), // make 5 new attempts for each position at the log
                       RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y defaultValue.
                   )));
+/*                  bootstrap.register(ModFeatures.PLACED_HANGING_MOSS_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_HANGING_MOSS_KEY), List.of(
+                      BiomeFilter.biome(),
+                      CountPlacement.of(30),
+                      InSquarePlacement.spread(),
+
+                  )))*/
                   bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY), List.of(
                       RarityFilter.onAverageOnceEvery(168),
                       HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface

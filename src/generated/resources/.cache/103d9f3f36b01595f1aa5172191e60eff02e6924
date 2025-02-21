@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-21T13:53:54.4844835	Registries
+// 1.21.1	2025-02-21T16:27:49.935706	Registries
 a65184c1483f870edf64b340e4bd0e5ee9227966 data/roots/enchantment/foraging.json
 5e8bb855917451e7d49f50565ec458fdbf545f9f data/roots/enchantment_provider/looting_i.json
 4613ff4e5c72a645ecacd42f85dc4f3f2556c83f data/roots/enchantment_provider/looting_ii.json
@@ -16,6 +16,7 @@ c98b47272c5e154e004d7009a7af723b1dc8cd3d data/roots/neoforge/biome_modifier/ston
 49e9cb019038dee616a734d974c719cc87482cf7 data/roots/neoforge/biome_modifier/wild_roots_forest.json
 6d981e8516a28657ef17f19b22914858f81e1f23 data/roots/neoforge/biome_modifier/wild_roots_underground.json
 2217ba4e907d34d7af258076b7c129e8ff18b182 data/roots/worldgen/configured_feature/granite_quartz.json
+4e70ca137382007085765f4d1edb3d39c1d0830a data/roots/worldgen/configured_feature/hanging_moss.json
 8822bf9738f60368db7a9f8ddb757b5b1d6dd578 data/roots/worldgen/configured_feature/huge_bafflecap.json
 b3c03b23dbf1f4334b9b511cb84aa9e6454ff5fe data/roots/worldgen/configured_feature/silver_ore.json
 76c1d9cfaa7a619f5cec984d9b10fe26d45a8c72 data/roots/worldgen/configured_feature/stonepetal_patch.json

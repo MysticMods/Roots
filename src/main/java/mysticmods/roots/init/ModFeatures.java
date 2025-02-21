@@ -1,6 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.worldgen.features.HangingMossBlockFeature;
 import mysticmods.roots.worldgen.features.SupportingDirectionalBlockFeature;
 import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
@@ -58,25 +59,24 @@ public class ModFeatures {
 
   // Features
   public static DeferredHolder<Feature<?>, SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
+  public static DeferredHolder<Feature<?>, HangingMossBlockFeature> HANGING_MOSS_BLOCK_FEATURE = FEATURES.register("hanging_moss_block_feature", () -> new HangingMossBlockFeature(SimpleBlockConfiguration.CODEC));
 
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_SILVER_ORE_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("silver_ore"));
-  public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_STONEPETAL_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("stonepetal"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_STONEPETAL_PATCH_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("stonepetal_patch"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_GRANITE_QUARTZ_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("granite_quartz"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_HUGE_BAFFLECAP_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("huge_bafflecap"));
+  public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_HANGING_MOSS_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("hanging_moss"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_WILD_ROOTS_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("wild_roots"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_WILD_ROOTS_MOSSY_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("wild_roots_mossy"));
-  public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("wild_aubergine"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_WILD_AUBERGINE_PATCH_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("wild_aubergine_patch"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_WILDWOOD_TREE_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("wildwood_tree"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_WILDWOOD_TREE_BEES_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("wildwood_tree_bees"));
+  public static ResourceKey<PlacedFeature> PLACED_HANGING_MOSS_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("hanging_moss"));
   public static ResourceKey<PlacedFeature> PLACED_WILD_ROOTS_UNDERGROUND_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_roots_underground"));
   public static ResourceKey<PlacedFeature> PLACED_WILD_ROOTS_FOREST_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_roots_forest"));
   public static ResourceKey<PlacedFeature> PLACED_WILD_ROOTS_SPARSE_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_roots_sparse"));
-  public static ResourceKey<PlacedFeature> PLACED_WILD_AUBERGINE_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_aubergine"));
   public static final ResourceKey<PlacedFeature> PLACED_WILD_AUBERGINE_PATCH_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_aubergine_patch"));
   public static ResourceKey<PlacedFeature> PLACED_SILVER_ORE_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("silver_ore"));
-  public static ResourceKey<PlacedFeature> PLACED_STONEPETAL_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("stonepetal"));
   public static ResourceKey<PlacedFeature> PLACED_STONEPETAL_PATCH_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("stonepetal_patch"));
   public static ResourceKey<PlacedFeature> PLACED_GRANITE_QUARTZ_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("granite_quartz"));
 

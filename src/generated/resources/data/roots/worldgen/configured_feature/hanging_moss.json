@@ -1,0 +1,14 @@
+{
+  "type": "roots:hanging_moss_block_feature",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "roots:hanging_grove_moss",
+        "Properties": {
+          "facing": "north"
+        }
+      }
+    }
+  }
+}

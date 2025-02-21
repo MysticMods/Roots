@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
-      "model": "roots:block/hanging_grove_moss"
+    "facing=east": {
+      "model": "roots:block/hanging_grove_moss_east"
+    },
+    "facing=north": {
+      "model": "roots:block/hanging_grove_moss_north"
+    },
+    "facing=south": {
+      "model": "roots:block/hanging_grove_moss_south"
+    },
+    "facing=west": {
+      "model": "roots:block/hanging_grove_moss_west"
     }
   }
 }

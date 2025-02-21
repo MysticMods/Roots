@@ -3,6 +3,7 @@ package mysticmods.roots.gen.client;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.block.GroveStoneBlock;
+import mysticmods.roots.block.HangingGroveMossBlock;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.mixin.AccessorMixinCropBlock;
@@ -157,8 +158,19 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     simpleBlock(ModBlocks.CREEPING_GROVE_MOSS.get(), models().singleTexture(ModBlocks.CREEPING_GROVE_MOSS.getKey()
             .location().getPath(), mcLoc("block/carpet"), "wool", modLoc("block/creeping_grove_moss"))
         .renderType("cutout"));
-    simpleBlock(ModBlocks.HANGING_GROVE_MOSS.get(), models().cross(ModBlocks.HANGING_GROVE_MOSS.getKey().location()
-        .getPath(), modLoc("block/hanging_grove_moss")).renderType("cutout"));
+    getVariantBuilder(ModBlocks.HANGING_GROVE_MOSS.get())
+        .forAllStates(state -> {
+          Direction dir = state.getValue(HangingGroveMossBlock.FACING);
+          ModelFile model = switch (dir) {
+            case EAST -> models().withExistingParent("hanging_grove_moss_east", modLoc("block/complex/hanging_grove_moss_east")).renderType("cutout");
+            case WEST -> models().withExistingParent("hanging_grove_moss_west", modLoc("block/complex/hanging_grove_moss_west")).renderType("cutout");
+            case SOUTH -> models().withExistingParent("hanging_grove_moss_south", modLoc("block/complex/hanging_grove_moss_south")).renderType("cutout");
+            default -> models().withExistingParent("hanging_grove_moss_north", modLoc("block/complex/hanging_grove_moss_north")).renderType("cutout");
+          };
+          return ConfiguredModel.builder()
+              .modelFile(model)
+              .build();
+        });
 
     // Bafflecap mushroom block
     ModelFile modelInside = models().withExistingParent("bafflecap_block_inside", mcLoc("block/template_single_face"))
