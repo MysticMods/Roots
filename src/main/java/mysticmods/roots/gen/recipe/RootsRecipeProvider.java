@@ -653,6 +653,21 @@ public class RootsRecipeProvider extends RecipeProvider {
         .save(c);
 
     // KNIFE RECIPES
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.SILVER_ORE), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 200)
+            .unlockedBy("has_silver_ore", has(RootsTags.Items.SILVER_ORE))
+                .save(c, RootsAPI.rl("silver_ingot_from_smelting_silver_ore"));
+    SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.SILVER_ORE), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 100)
+            .unlockedBy("has_silver_ore", has(RootsTags.Items.SILVER_ORE))
+                .save(c, RootsAPI.rl("silver_ingot_from_blasting_silver_ore"));
+
+    SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.QUARTZ_ORE), RecipeCategory.MISC, Items.QUARTZ, 0.2f, 200)
+            .unlockedBy("has_quartz_ore", has(RootsTags.Items.QUARTZ_ORE))
+                .save(c, RootsAPI.rl("quartz_from_smelting_quartz_ore"));
+    SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.QUARTZ_ORE), RecipeCategory.MISC, Items.QUARTZ, 0.2f, 100)
+            .unlockedBy("has_quartz_ore", has(RootsTags.Items.QUARTZ_ORE))
+                .save(c, RootsAPI.rl("quartz_from_blasting_quartz_ore"));
+
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.RAW_SILVER), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 200)
         .unlockedBy("has_raw_silver", has(RootsTags.Items.RAW_SILVER))
         .save(c, RootsAPI.rl("silver_ingot_from_smelting_raw_silver"));
