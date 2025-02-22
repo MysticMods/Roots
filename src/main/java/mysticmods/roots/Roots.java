@@ -11,25 +11,25 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
+// - Overhaul all block properties, stop using defaults.
+// - Overhaul all item properties
+// - DiggerItem.createAttributes
 // - Knife dispenser behaviour
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
-// - The pestle is held wrongly
 // - Runic tools
 // - Block entity renderers
 // - Block opacity/light block/movement block
 // - Juice recipes
-// - Overhaul all block properties, stop using defaults.
-// - Overhaul all item properties
-// - Leash attachment points
 // - Breading
-// - Entity carry layers for all mobs
-// - Wildwood hanging sign? Wildwood sign?
-// - Block placement tests for rituals
-// - DiggerItem.createAttributes
 // - Big Barrow loot chests
 // - Big Barrow redesign, breading
+// - Wildwood hanging sign? Wildwood sign?
+// - Block placement tests for rituals
+// - The pestle is held wrongly
+// - Leash attachment points
+// - Entity carry layers for all mobs
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;
