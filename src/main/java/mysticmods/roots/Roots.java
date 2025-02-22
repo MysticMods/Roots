@@ -21,7 +21,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Juice recipes
 // - Overhaul all block properties, stop using defaults.
 // - Overhaul all item properties
-// - Display "ticks" of charged spells
 // - Entity eye height?
 // - Leash attachment points
 // - Breading
@@ -33,6 +32,8 @@ import net.neoforged.fml.config.ModConfig;
 // - Block placement tests for rituals
 // - Pyre sound burning lah
 // - DiggerItem.createAttributes
+// - Big Barrow loot chests
+// - Big Barrow redesign, breading
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;
