@@ -1,6 +1,7 @@
 package mysticmods.roots.block;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.blockentity.InventoryBlockEntity;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
@@ -11,6 +12,7 @@ import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -64,6 +66,14 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
     } else {
       return BaseBlockEntity::serverTick;
     }
+  }
+
+  @Override
+  public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+    if (pState.hasBlockEntity() && (!pState.is(pNewState.getBlock()) || !pNewState.hasBlockEntity()) && pLevel.getBlockEntity(pPos) instanceof InventoryBlockEntity ibe) {
+      Containers.dropContents(pLevel, pPos, ibe.getItems());
+    }
+    super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
   }
 
   @Override

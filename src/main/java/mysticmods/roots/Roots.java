@@ -11,11 +11,12 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
-// - The pestle is held wrongly
+// - Knife dispenser behaviour
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI
-// - Runic tools
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
+// - The pestle is held wrongly
+// - Runic tools
 // - Block entity renderers
 // - Block opacity/light block/movement block
 // - Juice recipes
@@ -23,9 +24,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Overhaul all item properties
 // - Leash attachment points
 // - Breading
-// - Breaking pyres/mortars/pedestals drops contents
 // - Entity carry layers for all mobs
-// - Knife dispenser behaviour
 // - Wildwood hanging sign? Wildwood sign?
 // - Block placement tests for rituals
 // - DiggerItem.createAttributes
