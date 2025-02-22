@@ -11,7 +11,7 @@
         "pitch": 0.7
       }
     ],
-    "subtitle": "subtitle.roots.spell.acid_cloud"
+    "subtitle": "roots.subtitle.spell.acid_cloud"
   },
   "spell.acid_cloud_alt": {
     "sounds": [
@@ -20,7 +20,7 @@
         "pitch": 0.7
       }
     ],
-    "subtitle": "subtitle.roots.spell.acid_cloud_alt"
+    "subtitle": "roots.subtitle.spell.acid_cloud_alt"
   },
   "spell.chrysopoeia": {
     "sounds": [
@@ -30,7 +30,7 @@
       "minecraft:block/furnace/fire_crackle4",
       "minecraft:block/furnace/fire_crackle5"
     ],
-    "subtitle": "subtitle.roots.spell.chrysopoeia"
+    "subtitle": "roots.subtitle.spell.chrysopoeia"
   },
   "spell.dandelion_winds": {
     "sounds": [
@@ -51,7 +51,7 @@
         "pitch": 1.0
       }
     ],
-    "subtitle": "subtitle.roots.spell.dandelion_winds"
+    "subtitle": "roots.subtitle.spell.dandelion_winds"
   },
   "spell.desaturate": {
     "sounds": [
@@ -72,7 +72,7 @@
         "pitch": 1.1
       }
     ],
-    "subtitle": "subtitle.roots.spell.desaturate"
+    "subtitle": "roots.subtitle.spell.desaturate"
   },
   "spell.disarm": {
     "sounds": [
@@ -81,7 +81,7 @@
       "minecraft:entity/player/attack/knockback3",
       "minecraft:entity/player/attack/knockback4"
     ],
-    "subtitle": "subtitle.roots.spell.disarm"
+    "subtitle": "roots.subtitle.spell.disarm"
   },
   "spell.fey_light": {
     "sounds": [
@@ -102,7 +102,7 @@
         "pitch": 1.1
       }
     ],
-    "subtitle": "subtitle.roots.spell.fey_light"
+    "subtitle": "roots.subtitle.spell.fey_light"
   },
   "spell.geas": {
     "sounds": [
@@ -110,13 +110,13 @@
       "minecraft:mob/vex/charge2",
       "minecraft:mob/vex/charge3"
     ],
-    "subtitle": "subtitle.roots.spell.geas"
+    "subtitle": "roots.subtitle.spell.geas"
   },
   "spell.geas_end": {
     "sounds": [
       "minecraft:ui/toast/out"
     ],
-    "subtitle": "subtitle.roots.spell.geas_end"
+    "subtitle": "roots.subtitle.spell.geas_end"
   },
   "spell.growth_infusion": {
     "sounds": [
@@ -125,13 +125,13 @@
       "minecraft:block/chorus_flower/grow3",
       "minecraft:block/chorus_flower/grow4"
     ],
-    "subtitle": "subtitle.roots.spell.growth_infusion"
+    "subtitle": "roots.subtitle.spell.growth_infusion"
   },
   "spell.harvest": {
     "sounds": [
       "minecraft:entity/player/attack/sweep1"
     ],
-    "subtitle": "subtitle.roots.spell.harvest"
+    "subtitle": "roots.subtitle.spell.harvest"
   },
   "spell.aqua_bubble": {
     "sounds": [
@@ -141,19 +141,19 @@
         "volume": 0.5
       }
     ],
-    "subtitle": "subtitle.roots.spell.aqua_bubble"
+    "subtitle": "roots.subtitle.spell.aqua_bubble"
   },
   "spell.aqua_bubble_alt": {
     "sounds": [
       "minecraft:item/elytra/elytra_loop"
     ],
-    "subtitle": "subtitle.roots.spell.aqua_bubble_alt"
+    "subtitle": "roots.subtitle.spell.aqua_bubble_alt"
   },
   "spell.aqua_bubble_alt_end": {
     "sounds": [
       "minecraft:ui/toast/out"
     ],
-    "subtitle": "subtitle.roots.aqua_bubble_alt_end"
+    "subtitle": "roots.subtitle.aqua_bubble_alt_end"
   },
   "spell.extension": {
     "sounds": [
@@ -163,7 +163,7 @@
         "volume": 0.2
       }
     ],
-    "subtitle": "subtitle.roots.extension"
+    "subtitle": "roots.subtitle.extension"
   },
   "spell.augment": {
     "sounds": [
@@ -173,7 +173,7 @@
         "volume": 0.2
       }
     ],
-    "subtitle": "subtitle.roots.augment"
+    "subtitle": "roots.subtitle.augment"
   },
   "spell.life_drain": {
     "sounds": [
@@ -182,25 +182,25 @@
       "minecraft:mob/vex/idle3",
       "minecraft:mob/vex/idle4"
     ],
-    "subtitle": "subtitle.roots.spell.life_drain"
+    "subtitle": "roots.subtitle.spell.life_drain"
   },
   "spell.light_drifter": {
     "sounds": [
       "minecraft:item/elytra/elytra_loop"
     ],
-    "subtitle": "subtitle.roots.spell.light_drifter"
+    "subtitle": "roots.subtitle.spell.light_drifter"
   },
   "spell.light_drifter_end": {
     "sounds": [
       "minecraft:ui/toast/out"
     ],
-    "subtitle": "subtitle.roots.spell.light_drifter_end"
+    "subtitle": "roots.subtitle.spell.light_drifter_end"
   },
   "spell.magnetism": {
     "sounds": [
       "minecraft:note/icechime"
     ],
-    "subtitle": "subtitle.roots.spell.magnetism"
+    "subtitle": "roots.subtitle.spell.magnetism"
   },
   "spell.nature_scythe": {
     "sounds": [
@@ -208,13 +208,13 @@
       "minecraft:block/chorus_flower/death2",
       "minecraft:block/chorus_flower/death3"
     ],
-    "subtitle": "subtitle.roots.spell.nature_scythe"
+    "subtitle": "roots.subtitle.spell.nature_scythe"
   },
   "spell.petal_shell": {
     "sounds": [
       "minecraft:item/totem/use_totem"
     ],
-    "subtitle": "subtitle.roots.spell.petal_shell"
+    "subtitle": "roots.subtitle.spell.petal_shell"
   },
   "spell.petal_shell_break": {
     "sounds": [
@@ -235,31 +235,31 @@
         "pitch": 1.1
       }
     ],
-    "subtitle": "subtitle.roots.spell.petal_shell_break"
+    "subtitle": "roots.subtitle.spell.petal_shell_break"
   },
   "spell.petal_shell_end": {
     "sounds": [
       "minecraft:ui/toast/out"
     ],
-    "subtitle": "subtitle.roots.spell.petal_shell_end"
+    "subtitle": "roots.subtitle.spell.petal_shell_end"
   },
   "spell.radiance": {
     "sounds": [
       "minecraft:mob/guardian/attack_loop"
     ],
-    "subtitle": "subtitle.roots.spell.radiance"
+    "subtitle": "roots.subtitle.spell.radiance"
   },
   "spell.reach": {
     "sounds": [
       "minecraft:ui/toast/challenge_complete"
     ],
-    "subtitle": "subtitle.roots.spell.reach"
+    "subtitle": "roots.subtitle.spell.reach"
   },
   "spell.reach_end": {
     "sounds": [
       "minecraft:ui/toast/out"
     ],
-    "subtitle": "subtitle.roots.spell.reach_end"
+    "subtitle": "roots.subtitle.spell.reach_end"
   },
   "spell.rose_thorns": {
     "sounds": [
@@ -280,13 +280,13 @@
         "pitch": 1.1
       }
     ],
-    "subtitle": "subtitle.roots.spell.rose_thorns"
+    "subtitle": "roots.subtitle.spell.rose_thorns"
   },
   "spell.sanctuary": {
     "sounds": [
       "minecraft:item/elytra/elytra_loop"
     ],
-    "subtitle": "subtitle.roots.spell.sanctuary"
+    "subtitle": "roots.subtitle.spell.sanctuary"
   },
   "spell.saturate": {
     "sounds": [
@@ -296,7 +296,7 @@
       "minecraft:entity/horse/eat4",
       "minecraft:entity/horse/eat5"
     ],
-    "subtitle": "subtitle.roots.spell.saturate"
+    "subtitle": "roots.subtitle.spell.saturate"
   },
   "spell.second_wind": {
     "sounds": [
@@ -317,44 +317,44 @@
         "pitch": 1.1
       }
     ],
-    "subtitle": "subtitle.roots.spell.second_wind"
+    "subtitle": "roots.subtitle.spell.second_wind"
   },
   "spell.sense_animals": {
     "sounds": [
       "minecraft:mob/guardian/curse"
     ],
-    "subtitle": "subtitle.roots.spell.sense_animals"
+    "subtitle": "roots.subtitle.spell.sense_animals"
   },
   "spell.sense_animals_end": {
     "sounds": [
       "minecraft:ui/toast/out"
     ],
-    "subtitle": "subtitle.roots.spell.sense_animals_end"
+    "subtitle": "roots.subtitle.spell.sense_animals_end"
   },
   "spell.sense_danger": {
     "sounds": [
       "minecraft:mob/guardian/curse"
     ],
-    "subtitle": "subtitle.roots.spell.sense_danger"
+    "subtitle": "roots.subtitle.spell.sense_danger"
   },
   "spell.sense_danger_end": {
     "sounds": [
       "minecraft:ui/toast/out"
     ],
-    "subtitle": "subtitle.roots.spell.sense_danger_end"
+    "subtitle": "roots.subtitle.spell.sense_danger_end"
   },
   "spell.shatter": {
     "sounds": [
       "roots:spell/shatter"
     ],
     "volume": 0.5,
-    "subtitle": "subtitle.roots.spell.shatter"
+    "subtitle": "roots.subtitle.spell.shatter"
   },
   "spell.sky_soarer": {
     "sounds": [
       "minecraft:mob/zombie/infect"
     ],
-    "subtitle": "subtitle.roots.spell.sky_soarer"
+    "subtitle": "roots.subtitle.spell.sky_soarer"
   },
   "spell.storm_cloud": {
     "sounds": [
@@ -364,13 +364,13 @@
         "volume": 0.3
       }
     ],
-    "subtitle": "subtitle.roots.spell.storm_cloud"
+    "subtitle": "roots.subtitle.spell.storm_cloud"
   },
   "spell.storm_cloud_end": {
     "sounds": [
       "minecraft:ui/toast/out"
     ],
-    "subtitle": "subtitle.roots.spell.storm_cloud_end"
+    "subtitle": "roots.subtitle.spell.storm_cloud_end"
   },
   "spell.summers_thaw": {
     "sounds": [
@@ -378,19 +378,19 @@
       "minecraft:block/enchantment_table/enchant2",
       "minecraft:block/enchantment_table/enchant3"
     ],
-    "subtitle": "subtitle.roots.spell.summers_thaw"
+    "subtitle": "roots.subtitle.spell.summers_thaw"
   },
   "spell.time_stop": {
     "sounds": [
       "roots:spell/time_stop"
     ],
-    "subtitle": "subtitle.roots.spell.time_stop"
+    "subtitle": "roots.subtitle.spell.time_stop"
   },
   "spell.time_stop_end": {
     "sounds": [
       "roots:spell/time_stop_end"
     ],
-    "subtitle": "subtitle.roots.spell.time_stop_end"
+    "subtitle": "roots.subtitle.spell.time_stop_end"
   },
   "spell.wildfire": {
     "sounds": [
@@ -411,7 +411,7 @@
         "pitch": 1.1
       }
     ],
-    "subtitle": "subtitle.roots.spell.wildfire"
+    "subtitle": "roots.subtitle.spell.wildfire"
   },
   "event.imbuer.add_item": {
     "sounds": [
@@ -420,7 +420,7 @@
       "minecraft:entity/itemframe/add_item3",
       "minecraft:entity/itemframe/add_item4"
     ],
-    "subtitle": "subtitle.roots.event.imbuer.add_item"
+    "subtitle": "roots.subtitle.event.imbuer.add_item"
   },
   "event.imbuer.remove_item": {
     "sounds": [
@@ -429,7 +429,7 @@
       "minecraft:entity/itemframe/remove_item3",
       "minecraft:entity/itemframe/remove_item4"
     ],
-    "subtitle": "subtitle.roots.event.imbuer.remove_item"
+    "subtitle": "roots.subtitle.event.imbuer.remove_item"
   },
   "event.imbuer.use": {
     "sounds": [
@@ -439,13 +439,13 @@
       "minecraft:block/furnace/fire_crackle4",
       "minecraft:block/furnace/fire_crackle5"
     ],
-    "subtitle": "subtitle.roots.event.imbuer.use"
+    "subtitle": "roots.subtitle.event.imbuer.use"
   },
   "event.imbuer.finished": {
     "sounds": [
       "minecraft:mob/chicken/plop"
     ],
-    "subtitle": "subtitle.roots.event.imbuer.finished"
+    "subtitle": "roots.subtitle.event.imbuer.finished"
   },
   "event.mortar.add_item": {
     "sounds": [
@@ -454,7 +454,7 @@
       "minecraft:entity/itemframe/add_item3",
       "minecraft:entity/itemframe/add_item4"
     ],
-    "subtitle": "subtitle.roots.event.mortar.add_item"
+    "subtitle": "roots.subtitle.event.mortar.add_item"
   },
   "event.mortar.remove_item": {
     "sounds": [
@@ -463,7 +463,7 @@
       "minecraft:entity/itemframe/remove_item3",
       "minecraft:entity/itemframe/remove_item4"
     ],
-    "subtitle": "subtitle.roots.event.mortar.remove_item"
+    "subtitle": "roots.subtitle.event.mortar.remove_item"
   },
   "event.mortar.use": {
     "sounds": [
@@ -471,7 +471,7 @@
       "minecraft:mob/parrot/eat2",
       "minecraft:mob/parrot/eat3"
     ],
-    "subtitle": "subtitle.roots.event.mortar.use"
+    "subtitle": "roots.subtitle.event.mortar.use"
   },
   "event.pyre.add_item": {
     "sounds": [
@@ -480,7 +480,7 @@
       "minecraft:entity/itemframe/add_item3",
       "minecraft:entity/itemframe/add_item4"
     ],
-    "subtitle": "subtitle.roots.event.pyre.add_item"
+    "subtitle": "roots.subtitle.event.pyre.add_item"
   },
   "event.pyre.remove_item": {
     "sounds": [
@@ -489,7 +489,7 @@
       "minecraft:entity/itemframe/remove_item3",
       "minecraft:entity/itemframe/remove_item4"
     ],
-    "subtitle": "subtitle.roots.event.pyre.remove_item"
+    "subtitle": "roots.subtitle.event.pyre.remove_item"
   },
   "mob.fennec.aggro": {
     "sounds": [
@@ -612,6 +612,17 @@
     "sounds": [
       "roots:duck/swim"
     ]
+  },
+  "block.pyre.crackle": {
+    "category": "block",
+    "sounds": [
+      "block/furnace/fire_crackle1",
+      "block/furnace/fire_crackle2",
+      "block/furnace/fire_crackle3",
+      "block/furnace/fire_crackle4",
+      "block/furnace/fire_crackle5"
+    ],
+    "subtitle": "roots.subtitles.block.pyre.crackle"
   }
 }
 

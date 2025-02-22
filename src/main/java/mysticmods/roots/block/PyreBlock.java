@@ -6,8 +6,10 @@ import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -67,6 +69,13 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
   @Override
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
     if (pState.is(RootsTags.Blocks.PYRES) && pState.getValue(PyreBlock.BURNING)) {
+      double x = pPos.getX() + 0.5f;
+      double y = pPos.getY() + 0.5f;
+      double z = pPos.getZ() + 0.5f;
+      if (pRandom.nextDouble() < 0.1) {
+        pLevel.playLocalSound(x, y, z, ModSounds.PYRE_CRACKLES.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+      }
+
       if (pRandom.nextInt(4) == 0) {
         pLevel.addParticle(
             new ColorGravityParticleOptions(
@@ -75,18 +84,14 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
                 0x8b3100,
                 -(pRandom.nextFloat() * 0.03f)
             ),
-            pPos.getX() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.3f,
-            pPos.getY() + 0.6f + (pRandom.nextFloat()) * 0.2f,
-            pPos.getZ() + 0.5f + (pRandom.nextFloat() - 0.5f) * 0.3f,
+            x + (pRandom.nextFloat() - 0.5f) * 0.3f,
+            y + 0.1f + (pRandom.nextFloat()) * 0.2f,
+            z + (pRandom.nextFloat() - 0.5f) * 0.3f,
             0,
             0,
             0
         );
       }
-
-      double x = (double) pPos.getX() + 0.5;
-      double y = (double) pPos.getY() + 2.0;
-      double z = (double) pPos.getZ() + 0.5;
 
       BoundingBox bb = PyreBlockEntity.getPyreBoundingBox().moved(pPos.getX(), pPos.getY(), pPos.getZ());
       List<BlockPos> positions = BlockPos.betweenClosedStream(bb).filter(p -> {
@@ -96,9 +101,9 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
 
       for (BlockPos pos : positions) {
         if (pRandom.nextInt(16) == 0) {
-          double nx = (double) ((float) pos.getX() + 0.5f + pRandom.nextFloat() - 0.5f);
-          double ny = (double) ((float) pos.getY() + 0.5f + pRandom.nextFloat() - 0.5f);
-          double nz = (double) ((float) pos.getZ() + 0.5f + pRandom.nextFloat() - 0.5f);
+          double nx = (float) pos.getX() + 0.5f + pRandom.nextFloat() - 0.5f;
+          double ny = (float) pos.getY() + 0.5f + pRandom.nextFloat() - 0.5f;
+          double nz = (float) pos.getZ() + 0.5f + pRandom.nextFloat() - 0.5f;
           pLevel.addParticle(
               new ColorGravityParticleOptions(
                   ModParticles.PYRE_LEAF,
@@ -106,7 +111,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
                   0f
               ),
               x,
-              y,
+              y + 1.5,
               z,
               (nx - x),
               (ny - y),

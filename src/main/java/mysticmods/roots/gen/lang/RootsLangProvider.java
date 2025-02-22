@@ -560,6 +560,48 @@ public class RootsLangProvider extends LanguageProvider {
 
     // TODO: Block tags?
     // TODO: Spell names
+
+
+    add("roots.subtitles.spell.acid_cloud", "Acid cloud billows");
+    add("roots.subtitles.spell.acid_cloud_alt", "Acid cloud billows");
+    add("roots.subtitles.spell.dandelion_winds", "Dandelion winds blow");
+    add("roots.subtitles.spell.desaturate", "Desaturation");
+    add("roots.subtitles.spell.disarm", "Entities disarmed");
+    add("roots.subtitles.spell.fey_light", "Fey light created");
+    add("roots.subtitles.spell.geas", "Geas cast");
+    add("roots.subtitles.spell.geas_end", "Geas ends");
+    add("roots.subtitles.spell.growth_infusion", "Growth encouraged");
+    add("roots.subtitles.spell.harvest", "Harvest begins");
+    add("roots.subtitles.spell.aqua_bubble", "Aqua bubble encapsulates");
+    add("roots.subtitles.spell.aqua_bubble_alt", "Aqua bubble encapsulates");
+    add("roots.subtitles.aqua_bubble_alt_end", "Aqua bubble ends");
+    add("roots.subtitles.extension", "Senses extended");
+    add("roots.subtitles.spell.life_drain", "Life drained");
+    add("roots.subtitles.spell.light_drifter", "Players begin drifting");
+    add("roots.subtitles.spell.light_drifter_end", "Players end drifting");
+    add("roots.subtitles.spell.magnetism", "Magnetism activated");
+    add("roots.subtitles.spell.petal_shell", "Petal shell begins");
+    add("roots.subtitles.spell.petal_shell_break", "Petal shell broken");
+    add("roots.subtitles.spell.petal_shell_end", "Petal shell ends");
+    add("roots.subtitles.spell.radiance", "Radiance shines");
+    add("roots.subtitles.spell.rose_thorns", "Rose thorns tangle");
+    add("roots.subtitles.spell.sanctuary", "");
+    add("roots.subtitles.spell.saturate", "");
+    add("roots.subtitles.spell.shatter", "Blocks shatter");
+    add("roots.subtitles.spell.sky_soarer", "Sky soars");
+    add("roots.subtitles.spell.storm_cloud", "Storm cloud begins");
+    add("roots.subtitles.spell.storm_cloud_end", "Storm cloud ends");
+    add("roots.subtitles.spell.time_stop", "Time stops");
+    add("roots.subtitles.spell.time_stop_end", "Time begins anew");
+    add("roots.subtitles.spell.wildfire", "Meteors unfold");
+    add("roots.subtitles.event.mortar.add_item", "Mortar filled");
+    add("roots.subtitles.event.mortar.remove_item", "Mortar emptied");
+    add("roots.subtitles.event.mortar.use", "Pestle used");
+    add("roots.subtitles.event.pyre.add_item", "Pyre filled");
+    add("roots.subtitles.event.pyre.remove_item", "Pyre emptied");
+    add("roots.subtitles.item.unripe_pearl.use", "");
+    add("roots.subtitles.item.pearleporter.use", "");
+    add("roots.subtitles.block.pyre.crackle", "Pyre crackles");
   }
 
   public static String toEnglishName(String internalName) {
