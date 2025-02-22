@@ -26,7 +26,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Breading
 // - Breaking pyres/mortars/pedestals drops contents
 // - Entity carry layers for all mobs
-// - Improve the Ritual command: set the last recipe and the cached recipe, why can't you remove items the first time?
 // - Knife dispenser behaviour
 // - Wildwood hanging sign? Wildwood sign?
 // - Block placement tests for rituals

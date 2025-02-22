@@ -133,10 +133,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     }
 
-    // If there's an ongoing ritual do nothing
-    if (lifetime > 0) {
-      return InteractionResult.PASS;
-    }
+    // Once the ritual has started it doesn't matter what's happening
     if (inHand.isEmpty() && !player.isCrouching()) {
       // extract
       ItemStack popped = inventory.pop();
