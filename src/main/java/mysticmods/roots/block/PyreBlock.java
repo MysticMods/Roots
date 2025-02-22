@@ -10,9 +10,11 @@ import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -72,6 +74,17 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
   public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
     if (pState.hasBlockEntity() && (!pState.is(pNewState.getBlock()) || !pNewState.hasBlockEntity()) && pLevel.getBlockEntity(pPos) instanceof InventoryBlockEntity ibe) {
       Containers.dropContents(pLevel, pPos, ibe.getItems());
+
+      if (ibe instanceof PyreBlockEntity pyre) {
+        List<ItemStack> popped = pyre.popStoredItems();
+        if (!popped.isEmpty()) {
+          NonNullList<ItemStack> items = NonNullList.withSize(popped.size(), ItemStack.EMPTY);
+          for (int i = 0; i < popped.size(); i++) {
+            items.set(i, popped.get(i));
+          }
+          Containers.dropContents(pLevel, pPos, items);
+        }
+      }
     }
     super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
   }
