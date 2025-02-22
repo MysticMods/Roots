@@ -21,7 +21,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Juice recipes
 // - Overhaul all block properties, stop using defaults.
 // - Overhaul all item properties
-// - Entity eye height?
 // - Leash attachment points
 // - Breading
 // - Breaking pyres/mortars/pedestals drops contents

@@ -22,7 +22,7 @@ public class BeetleRenderer extends MobRenderer<BeetleEntity, BeetleModel> {
 
   @Override
   protected void scale(BeetleEntity entity, PoseStack matrix, float partialTickTime) {
-    matrix.scale(0.45f, 0.45f, 0.45f);
+    matrix.scale(0.55f, 0.55f, 0.55f);
   }
 
   @Override
