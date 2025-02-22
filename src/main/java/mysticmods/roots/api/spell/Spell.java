@@ -223,6 +223,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return maxUse;
   }
 
+  public Component getChargeText (int currentCharge) {
+    return Component.translatable("roots.message.staff.charging", currentCharge, getMaxUse());
+  }
+
   public int getChargeRate () {
     return 20;
   }

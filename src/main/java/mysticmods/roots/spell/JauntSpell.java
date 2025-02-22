@@ -13,6 +13,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -121,5 +122,11 @@ public class JauntSpell extends Spell {
     }
 
     return cooldown;
+  }
+
+  @Override
+  public Component getChargeText(int currentCharge) {
+    int chargePercent = (int) (((float) currentCharge / (float) getMaxUse()) * 100);
+    return Component.translatable("roots.message.staff.charging_percent", chargePercent);
   }
 }

@@ -81,12 +81,15 @@ public class CastingItem extends Item {
       }
 
       if (spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costs, ticks) != 0) {
+        // TODO: Kind of decide something about this
         RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());
       }
 
       if (ticks % spell.getSpell().getChargeRate() == 0) {
         costs.charge(pPlayer);
       }
+    } else if (spell.getType() == Spell.Type.CHARGED) {
+      pPlayer.displayClientMessage(spell.getSpell().getChargeText(ticks), true);
     }
   }
 

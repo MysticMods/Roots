@@ -80,11 +80,13 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.drinks.slow_regen", "Gives a burst of revitalizing energy.");
     add("roots.drinks.wakefulness", "Perks you up, night or day; shoos those scary phantoms away!");
     add("roots.drinks.sour", "Sour and awful to drink! Leaves you hungry.");
-    add("message.dandelion_cordial", "You feel well-rested!");
+    add("roots.message.dandelion_cordial", "You feel well-rested!");
 
     add("roots.message.recipe.requires", "Requires: %s");
     add("roots.message.recipe.failures", "A number of conditions were not met:");
     add("roots.message.staff.missing_herbs", "Unable to cast %s, missing herbs.");
+    add("roots.message.staff.charging", "Spell charged: %s/%s");
+    add("roots.message.staff.charging_percent", "Spell charged: %s%%");
 
     add("roots.message.spell.learned", "Learned new spell: %s");
     add("roots.message.spell.already_learned", "You already know the spell: %s");

@@ -14,7 +14,6 @@ import net.neoforged.fml.config.ModConfig;
 // - The pestle is held wrongly
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI
-// - Missing data maps?
 // - Runic tools
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Block entity renderers
@@ -30,7 +29,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Entity carry layers for all mobs
 // - Improve the Ritual command: set the last recipe and the cached recipe, why can't you remove items the first time?
 // - Knife dispenser behaviour
-// - Granite quartz ore smelting
 // - Wildwood hanging sign? Wildwood sign?
 // - Block placement tests for rituals
 // - Pyre sound burning lah
