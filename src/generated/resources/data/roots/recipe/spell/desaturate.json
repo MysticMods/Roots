@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:bowl"
+      },
+      {
+        "tag": "roots:bottles"
+      },
+      {
+        "item": "minecraft:rotten_flesh"
+      },
+      {
+        "tag": "roots:herbs/wildewheet"
+      },
+      {
+        "tag": "c:bones"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:desaturate"
+      }
+    ]
+  },
+  "times": 5
+}

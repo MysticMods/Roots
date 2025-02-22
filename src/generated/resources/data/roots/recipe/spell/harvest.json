@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:wooden_hoe"
+      },
+      {
+        "item": "minecraft:sweet_berries"
+      },
+      {
+        "item": "roots:wooden_shears"
+      },
+      {
+        "tag": "c:gems/emerald"
+      },
+      {
+        "tag": "roots:herbs/wildewheet"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:harvest"
+      }
+    ]
+  },
+  "times": 5
+}

@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/stalicripe"
+      },
+      {
+        "tag": "c:raw_materials/iron"
+      },
+      {
+        "item": "minecraft:tnt"
+      },
+      {
+        "item": "minecraft:piston"
+      },
+      {
+        "item": "minecraft:stone_pickaxe"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:shatter"
+      }
+    ]
+  },
+  "times": 5
+}

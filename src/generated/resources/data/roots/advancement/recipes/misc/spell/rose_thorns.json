@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:spell/rose_thorns"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_rose_bush": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:rose_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_rose_bush"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:spell/rose_thorns"
+    ]
+  }
+}

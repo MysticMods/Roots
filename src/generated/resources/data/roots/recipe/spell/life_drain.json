@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:iron_sword"
+      },
+      {
+        "tag": "c:raw_materials/copper"
+      },
+      {
+        "tag": "roots:herbs/bafflecap"
+      },
+      {
+        "tag": "c:gunpowders"
+      },
+      {
+        "tag": "roots:petals"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:life_drain"
+      }
+    ]
+  },
+  "times": 5
+}

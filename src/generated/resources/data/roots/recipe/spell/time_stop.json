@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/stalicripe"
+      },
+      {
+        "item": "minecraft:clock"
+      },
+      {
+        "tag": "c:sands"
+      },
+      {
+        "tag": "c:glass_blocks"
+      },
+      {
+        "item": "minecraft:tripwire_hook"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:time_stop"
+      }
+    ]
+  },
+  "times": 5
+}

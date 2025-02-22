@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:chain"
+      },
+      {
+        "tag": "roots:herbs/bafflecap"
+      },
+      {
+        "item": "minecraft:tripwire_hook"
+      },
+      {
+        "tag": "minecraft:wooden_pressure_plates"
+      },
+      {
+        "tag": "c:gunpowders"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:geas"
+      }
+    ]
+  },
+  "times": 5
+}

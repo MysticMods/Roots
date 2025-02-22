@@ -1,0 +1,32 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "item": "minecraft:iron_bars"
+      },
+      {
+        "item": "minecraft:fishing_rod"
+      },
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "tag": "c:levers"
+      },
+      {
+        "tag": "c:strings"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:disarm"
+      }
+    ]
+  },
+  "times": 5
+}

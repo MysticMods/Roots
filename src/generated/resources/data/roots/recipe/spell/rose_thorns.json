@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:rose_bush"
+      },
+      {
+        "item": "minecraft:tripwire_hook"
+      },
+      {
+        "item": "minecraft:chain"
+      },
+      {
+        "tag": "roots:herbs/wildroot"
+      },
+      {
+        "tag": "minecraft:saplings"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:rose_thorns"
+      }
+    ]
+  },
+  "times": 5
+}

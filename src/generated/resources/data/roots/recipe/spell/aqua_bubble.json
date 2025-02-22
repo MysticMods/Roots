@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/dewgonia"
+      },
+      {
+        "tag": "c:gems/lapis"
+      },
+      {
+        "tag": "c:glass_blocks"
+      },
+      {
+        "item": "minecraft:clay_ball"
+      },
+      {
+        "tag": "c:crops/sugar_cane"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:aqua_bubble"
+      }
+    ]
+  },
+  "times": 5
+}

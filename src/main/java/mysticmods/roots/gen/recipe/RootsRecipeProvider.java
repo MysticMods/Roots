@@ -383,10 +383,9 @@ public class RootsRecipeProvider extends RecipeProvider {
 
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROVE_CRAFTER.get())
-        .pattern("LLL")
-        .pattern(" L ")
+        .pattern("RGR")
         .pattern("RRR")
-        .define('L', ItemTags.LOGS)
+        .define('G', RootsTags.Items.GROVE_MOSS_HERB)
         .define('R', RootsTags.Items.RUNESTONE)
         .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
         .save(c);
@@ -655,18 +654,18 @@ public class RootsRecipeProvider extends RecipeProvider {
     // KNIFE RECIPES
 
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.SILVER_ORE), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 200)
-            .unlockedBy("has_silver_ore", has(RootsTags.Items.SILVER_ORE))
-                .save(c, RootsAPI.rl("silver_ingot_from_smelting_silver_ore"));
+        .unlockedBy("has_silver_ore", has(RootsTags.Items.SILVER_ORE))
+        .save(c, RootsAPI.rl("silver_ingot_from_smelting_silver_ore"));
     SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.SILVER_ORE), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 100)
-            .unlockedBy("has_silver_ore", has(RootsTags.Items.SILVER_ORE))
-                .save(c, RootsAPI.rl("silver_ingot_from_blasting_silver_ore"));
+        .unlockedBy("has_silver_ore", has(RootsTags.Items.SILVER_ORE))
+        .save(c, RootsAPI.rl("silver_ingot_from_blasting_silver_ore"));
 
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.QUARTZ_ORE), RecipeCategory.MISC, Items.QUARTZ, 0.2f, 200)
-            .unlockedBy("has_quartz_ore", has(RootsTags.Items.QUARTZ_ORE))
-                .save(c, RootsAPI.rl("quartz_from_smelting_quartz_ore"));
+        .unlockedBy("has_quartz_ore", has(RootsTags.Items.QUARTZ_ORE))
+        .save(c, RootsAPI.rl("quartz_from_smelting_quartz_ore"));
     SimpleCookingRecipeBuilder.blasting(Ingredient.of(RootsTags.Items.QUARTZ_ORE), RecipeCategory.MISC, Items.QUARTZ, 0.2f, 100)
-            .unlockedBy("has_quartz_ore", has(RootsTags.Items.QUARTZ_ORE))
-                .save(c, RootsAPI.rl("quartz_from_blasting_quartz_ore"));
+        .unlockedBy("has_quartz_ore", has(RootsTags.Items.QUARTZ_ORE))
+        .save(c, RootsAPI.rl("quartz_from_blasting_quartz_ore"));
 
     SimpleCookingRecipeBuilder.smelting(Ingredient.of(RootsTags.Items.RAW_SILVER), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 0.7f, 200)
         .unlockedBy("has_raw_silver", has(RootsTags.Items.RAW_SILVER))
@@ -1086,6 +1085,27 @@ public class RootsRecipeProvider extends RecipeProvider {
             .requires(RootsTags.Items.RUNIC_DUST).requires(Items.SPIDER_EYE).requires(ItemTags.WOOL)
             .unlocks(Unlock.spell(ModSpells.ACID_CLOUD))), c, RootsAPI.rl("spell/acid_cloud"));
 
+    RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB)).save(
+        MortarRecipe.Builder.create().times(5)
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.DEWGONIA_HERB)
+                .requires(Tags.Items.GEMS_LAPIS).requires(Tags.Items.GLASS_BLOCKS).requires(Items.CLAY_BALL)
+                .requires(Tags.Items.CROPS_SUGAR_CANE)
+                .unlocks(Unlock.spell(ModSpells.AQUA_BUBBLE))), c, RootsAPI.rl("spell/aqua_bubble"));
+
+    RecipeSaver.saver().unlockedBy("has_wildewheet", has(RootsTags.Items.WILDEWHEET_HERB)).save(
+        MortarRecipe.Builder.create().times(5)
+            .build(BaseRecipeData.Builder.create().requires(Items.BOWL).requires(RootsTags.Items.BOTTLES)
+                .requires(Items.ROTTEN_FLESH).requires(RootsTags.Items.WILDEWHEET_HERB).requires(Tags.Items.BONES)
+                .unlocks(Unlock.spell(ModSpells.DESATURATE))), c, RootsAPI.rl("spell/desaturate"));
+
+    RecipeSaver.saver().unlockedBy("has_spiritleaf", has(RootsTags.Items.SPIRITLEAF_HERB)).save(
+        MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(RootsTags.Items.SPIRITLEAF_HERB).requires(Items.IRON_BARS)
+                    .requires(Items.FISHING_ROD).requires(RootsTags.Items.SPIRITLEAF_HERB)
+                    .requires(RootsTags.Items.LEVERS).requires(Tags.Items.STRINGS)
+                    .unlocks(Unlock.spell(ModSpells.DISARM))), c, RootsAPI.rl("spell/disarm"));
+
     RecipeSaver.saver().unlockedBy("has_dandelion", has(Items.DANDELION)).save(MortarRecipe.Builder.create().times(5)
         .build(BaseRecipeData.Builder.create().requires(Items.DANDELION).requires(Tags.Items.CROPS_WHEAT)
             .requires(RootsTags.Items.PETALS).requires(Tags.Items.DYES_YELLOW).requires(Tags.Items.SEEDS)
@@ -1123,6 +1143,95 @@ public class RootsRecipeProvider extends RecipeProvider {
             .build(BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_CARROT).requires(Tags.Items.NUGGETS_GOLD)
                 .requires(RootsTags.Items.GROVE_MOSS_CROP).requires(RootsTags.Items.BARKS).requires(Items.TORCH)
                 .unlocks(Unlock.spell(ModSpells.EXTENSION))), c, RootsAPI.rl("spell/extension"));
+
+    RecipeSaver.saver().unlockedBy("has_bafflecap", has(RootsTags.Items.BAFFLECAP_HERB))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(Items.CHAIN).requires(RootsTags.Items.BAFFLECAP_HERB)
+                    .requires(Items.TRIPWIRE_HOOK).requires(ItemTags.WOODEN_PRESSURE_PLATES)
+                    .requires(Tags.Items.GUNPOWDERS)
+                    .unlocks(Unlock.spell(ModSpells.GEAS))), c, RootsAPI.rl("spell/geas"));
+
+    RecipeSaver.saver().unlockedBy("has_bafflecap", has(RootsTags.Items.BAFFLECAP_HERB))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(Items.IRON_SWORD).requires(Tags.Items.RAW_MATERIALS_COPPER)
+                    .requires(RootsTags.Items.BAFFLECAP_HERB).requires(Tags.Items.GUNPOWDERS)
+                    .requires(RootsTags.Items.PETALS)
+                    .unlocks(Unlock.spell(ModSpells.LIFE_DRAIN))), c, RootsAPI.rl("spell/life_drain"));
+
+    RecipeSaver.saver().unlockedBy("has_wildewheet", has(RootsTags.Items.WILDEWHEET_HERB))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(Items.WOODEN_HOE).requires(Items.SWEET_BERRIES)
+                    .requires(ModItems.WOODEN_SHEARS.get()).requires(Tags.Items.GEMS_EMERALD)
+                    .requires(RootsTags.Items.WILDEWHEET_HERB)
+                    .unlocks(Unlock.spell(ModSpells.HARVEST))), c, RootsAPI.rl("spell/harvest"));
+
+    // Nondetection
+    RecipeSaver.saver().unlockedBy("has_spiritleaf", has(RootsTags.Items.SPIRITLEAF_HERB))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(RootsTags.Items.SPIRITLEAF_HERB).requires(Items.TORCH)
+                    .requires(ItemTags.CANDLES).requires(Items.GLOW_LICHEN)
+                    .requires(ModItems.GLASS_EYE.get())
+                    .unlocks(Unlock.spell(ModSpells.NONDETECTION))), c, RootsAPI.rl("spell/nondetection"));
+
+    // Time stop
+    RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(RootsTags.Items.STALICRIPE_HERB).requires(Items.CLOCK)
+                    .requires(Tags.Items.SANDS).requires(Tags.Items.GLASS_BLOCKS)
+                    .requires(Items.TRIPWIRE_HOOK)
+                    .unlocks(Unlock.spell(ModSpells.TIME_STOP))), c, RootsAPI.rl("spell/time_stop"));
+
+    // Shatter
+    RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(RootsTags.Items.STALICRIPE_HERB)
+                    .requires(Tags.Items.RAW_MATERIALS_IRON)
+                    .requires(Items.TNT).requires(Items.PISTON)
+                    .requires(Items.STONE_PICKAXE)
+                    .unlocks(Unlock.spell(ModSpells.SHATTER))), c, RootsAPI.rl("spell/shatter"));
+
+    // Saturate
+    RecipeSaver.saver().unlockedBy("has_wildewheet", has(RootsTags.Items.WILDEWHEET_HERB))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDROOT_HERB)
+                    .requires(RootsTags.Items.WILDEWHEET_HERB)
+                    .requires(Items.COOKED_BEEF).requires(Items.COOKED_CHICKEN)
+                    .requires(Items.BAKED_POTATO)
+                    .unlocks(Unlock.spell(ModSpells.SATURATE))), c, RootsAPI.rl("spell/saturate"));
+
+    // Sanctuary
+    RecipeSaver.saver().unlockedBy("has_pereskia", has(RootsTags.Items.PERESKIA_HERB))
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(RootsTags.Items.PERESKIA_HERB)
+                    .requires(RootsTags.Items.PETALS).requires(Items.SHIELD)
+                    .requires(Items.GLOW_BERRIES).requires(Tags.Items.GEMS_AMETHYST)
+                    .unlocks(Unlock.spell(ModSpells.SANCTUARY))), c, RootsAPI.rl("spell/sanctuary"));
+
+    // Rose thorns
+    RecipeSaver.saver().unlockedBy("has_rose_bush", has(Items.ROSE_BUSH))
+            .save(MortarRecipe.Builder.create().times(5)
+                .build(
+                    BaseRecipeData.Builder.create().requires(Items.ROSE_BUSH)
+                        .requires(Items.TRIPWIRE_HOOK).requires(Items.CHAIN)
+                        .requires(RootsTags.Items.WILDROOT_HERB).requires(ItemTags.SAPLINGS)
+                        .unlocks(Unlock.spell(ModSpells.ROSE_THORNS))), c, RootsAPI.rl("spell/rose_thorns"));
+
+    // Wildfire
+    RecipeSaver.saver().unlockedBy("has_inferno_bulb", has(RootsTags.Items.INFERNO_BULB_HERB))
+            .save(MortarRecipe.Builder.create().times(5)
+                .build(
+                    BaseRecipeData.Builder.create().requires(RootsTags.Items.INFERNO_BULB_HERB)
+                        .requires(Items.GUNPOWDER).requires(Items.CAMPFIRE)
+                        .requires(Items.MAGMA_CREAM).requires(Items.LAVA_BUCKET)
+                        .unlocks(Unlock.spell(ModSpells.WILDFIRE))), c, RootsAPI.rl("spell/wildfire"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.MOSS_BLOCK)
         .pattern("XX")

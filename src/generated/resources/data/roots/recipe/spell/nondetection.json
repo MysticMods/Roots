@@ -1,0 +1,29 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/spiritleaf"
+      },
+      {
+        "item": "minecraft:torch"
+      },
+      {
+        "tag": "minecraft:candles"
+      },
+      {
+        "item": "minecraft:glow_lichen"
+      },
+      {
+        "item": "roots:glass_eye"
+      }
+    ],
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:nondetection"
+      }
+    ]
+  },
+  "times": 5
+}

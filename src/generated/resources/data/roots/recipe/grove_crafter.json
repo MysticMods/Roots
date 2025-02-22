@@ -2,16 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "L": {
-      "tag": "minecraft:logs"
+    "G": {
+      "tag": "roots:herbs/grove_moss"
     },
     "R": {
       "tag": "roots:runestone"
     }
   },
   "pattern": [
-    "LLL",
-    " L ",
+    "RGR",
     "RRR"
   ],
   "result": {
