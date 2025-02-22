@@ -616,11 +616,26 @@
   "block.pyre.crackle": {
     "category": "block",
     "sounds": [
-      "block/furnace/fire_crackle1",
-      "block/furnace/fire_crackle2",
-      "block/furnace/fire_crackle3",
-      "block/furnace/fire_crackle4",
-      "block/furnace/fire_crackle5"
+      {
+        "name": "block/furnace/fire_crackle1",
+        "pitch": 1.1
+      },
+      {
+        "name": "block/furnace/fire_crackle2",
+        "pitch": 1.1
+      },
+      {
+        "name": "block/furnace/fire_crackle3",
+        "pitch": 1.1
+      },
+      {
+        "name": "block/furnace/fire_crackle4",
+        "pitch": 1.1
+      },
+      {
+        "name": "block/furnace/fire_crackle5",
+        "pitch": 1.1
+      }
     ],
     "subtitle": "roots.subtitles.block.pyre.crackle"
   }

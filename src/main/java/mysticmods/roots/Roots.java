@@ -28,7 +28,6 @@ import net.neoforged.fml.config.ModConfig;
 // - Knife dispenser behaviour
 // - Wildwood hanging sign? Wildwood sign?
 // - Block placement tests for rituals
-// - Pyre sound burning lah
 // - DiggerItem.createAttributes
 // - Big Barrow loot chests
 // - Big Barrow redesign, breading

@@ -35,7 +35,7 @@ public class ModSounds {
   public static final DeferredHolder<SoundEvent, SoundEvent> DEER_AMBIENT = SOUNDS.register("mob.deer.ambient", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("mob.deer.ambient")));
 
   // Pyre
-  public static final DeferredHolder<SoundEvent, SoundEvent> PYRE_CRACKLES = SOUNDS.register("block.pyre.crackle", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("block.pyre.crackle.crackle")));
+  public static final DeferredHolder<SoundEvent, SoundEvent> PYRE_CRACKLES = SOUNDS.register("block.pyre.crackle", () -> SoundEvent.createVariableRangeEvent(RootsAPI.rl("block.pyre.crackle")));
 
   public static void register(IEventBus bus) {
     SOUNDS.register(bus);
