@@ -12,8 +12,6 @@ import net.neoforged.fml.config.ModConfig;
 
 // TODO:
 // - Overhaul all block properties, stop using defaults.
-// - Overhaul all item properties
-// - DiggerItem.createAttributes
 // - Knife dispenser behaviour
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI
