@@ -359,6 +359,7 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.LIVING_SHOVEL);
     addItem(ModItems.LIVING_SWORD);
     addItem(ModItems.PESTLE);
+    addItem(ModItems.RUNED_PICKAXE);
     addItem(ModItems.RUNED_AXE);
     addItem(ModItems.RUNED_DAGGER);
     addItem(ModItems.RUNED_HOE);

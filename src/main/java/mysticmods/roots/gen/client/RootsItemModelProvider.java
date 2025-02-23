@@ -236,6 +236,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
 
     subfolder(ModItems.PESTLE, "tools");
     subfolder(ModItems.RUNED_AXE, "tools");
+    subfolder(ModItems.RUNED_PICKAXE, "tools");
     subfolder(ModItems.RUNED_DAGGER, "tools");
     subfolder(ModItems.RUNED_HOE, "tools");
     // TODO: what was this missed with
