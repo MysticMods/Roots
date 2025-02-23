@@ -48,9 +48,13 @@ public class FireStarterItem extends Item {
       BlockHitResult ray = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
       boolean used = false;
       if (ray.getType() == HitResult.Type.BLOCK) {
-        BlockPos blockpos = ray.getBlockPos().relative(ray.getDirection());
+        BlockPos blockpos = ray.getBlockPos();
+        BlockState stateAt = level.getBlockState(blockpos);
+        if (!stateAt.isCollisionShapeFullBlock(level, blockpos)) {
+          blockpos = blockpos.relative(ray.getDirection());
+          stateAt = level.getBlockState(blockpos);
+        }
         if (level.mayInteract(player, blockpos) && player.mayUseItemAt(blockpos, ray.getDirection(), stack)) {
-          BlockState stateAt = level.getBlockState(blockpos);
           BlockPos below = blockpos.below();
           BlockState stateBelow = level.getBlockState(below);
           PyreBlockEntity pyreBlockEntity = null;
