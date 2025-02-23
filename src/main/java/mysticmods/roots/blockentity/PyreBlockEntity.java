@@ -107,14 +107,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
-    // TODO:
-    if (level.isClientSide()) {
-      return InteractionResult.CONSUME;
-    }
-
     // This is a very specific hack.
     if (inHand.is(ModItems.FIRE_STARTER.get())) {
       return InteractionResult.PASS;
+    }
+    // TODO:
+    if (level.isClientSide()) {
+      return InteractionResult.CONSUME;
     }
 
     if (currentRitual != ModRituals.CRAFTING.get() && (lifetime > 0 || getBlockState().getValue(PyreBlock.BURNING))) {
