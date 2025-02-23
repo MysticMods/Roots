@@ -71,7 +71,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Nullable
   public BlockState getStateForPlacement(BlockPlaceContext pContext) {
     BlockPos blockpos = pContext.getClickedPos();
-    return blockpos.getY() < 255 && pContext.getLevel().getBlockState(blockpos.above())
+    return blockpos.getY() < pContext.getLevel().getMaxBuildHeight() - 1 && pContext.getLevel().getBlockState(blockpos.above())
         .canBeReplaced(pContext) && pContext.getLevel().getBlockState(blockpos.above().above())
         .canBeReplaced(pContext) ? super.getStateForPlacement(pContext) : null;
   }
