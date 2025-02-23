@@ -1227,7 +1227,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_lightning_rod", has(Items.LIGHTNING_ROD)).save(PyreRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Items.LIGHTNING_ROD).requires(Items.SUGAR)
-            .requires(ItemTags.LEAVES).requires(ItemTags.WOOL).requires(RootsTags.Items.ACACIA_BARK)
+            .requires(ItemTags.LEAVES).requires(ItemTags.WOOL).requires(RootsTags.Items.BARKS)
             .result(ModItems.CLOUD_BERRY, 2)), c, RootsAPI.rl("pyre/cloud_berry"));
 
     RecipeSaver.saver().unlockedBy("has_kelp", has(Items.KELP)).save(PyreRecipe.Builder.create()
