@@ -3,13 +3,13 @@
   "data": {
     "ingredients": [
       {
-        "tag": "roots:flint"
+        "tag": "c:gravels"
       },
       {
-        "tag": "roots:flint"
+        "tag": "c:gravels"
       },
       {
-        "tag": "roots:flint"
+        "tag": "c:gravels"
       }
     ],
     "result": {

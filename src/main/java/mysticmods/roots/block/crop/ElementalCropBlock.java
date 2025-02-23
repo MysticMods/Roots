@@ -1,6 +1,7 @@
 package mysticmods.roots.block.crop;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.block.WaterloggedBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -30,7 +32,7 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
     if (i < this.getMaxAge()) {
       float f = getGrowthSpeed(pState, pLevel, pPos);
       if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
-        BlockState newState = this.getStateForAge(i);
+        BlockState newState = this.getStateForAge(i + 1);
 
         newState = fillBlockState(pState, newState, pLevel.getBlockState(pPos.below()));
 
@@ -53,6 +55,10 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
       } else {
         newState = newState.setValue(ElementalType.SOIL_TYPE, ElementalType.NONE);
       }
+    }
+
+    if (pState.hasProperty(BlockStateProperties.WATERLOGGED)) {
+      newState = newState.setValue(BlockStateProperties.WATERLOGGED, pState.getValue(BlockStateProperties.WATERLOGGED));
     }
     return newState;
   }

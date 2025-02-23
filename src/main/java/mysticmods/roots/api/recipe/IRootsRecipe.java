@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.util.SetUtils;
 import net.minecraft.core.BlockPos;
@@ -74,7 +75,7 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   default UnlockResult checkUnlocks(Level level, ServerPlayer player) {
     List<Unlock<?>> result = new ArrayList<>();
     for (Unlock<?> unlock : getUnlocks()) {
-      if (RootsAPI.getInstance().canUnlock(player, unlock)) {
+      if (!RootsAPI.getInstance().canUnlock(player, unlock)) {
         result.add(unlock);
       }
     }
@@ -114,6 +115,20 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
 
   default List<ItemStack> assembleOutputs(W inventory, RandomSource random, HolderLookup.Provider provider, @Nullable Supplier<List<ItemStack>> inputProvider) {
     List<ItemStack> results = new ArrayList<>();
+    // TODO: There may be doubles-up, check
+    if (!hasItemOutput(provider)) {
+      if (inventory instanceof IRootsCrafting<?> crafting) {
+        Player player = crafting.getPlayer();
+        if (player instanceof ServerPlayer sPlayer) {
+          for (Unlock<?> unlock : getUnlocks()) {
+            if (RootsAPI.getInstance().canUnlock(sPlayer, unlock)) {
+              // TODO: Message that it's unlocked
+              RootsAPI.getInstance().unlock(sPlayer, unlock);
+            }
+          }
+        }
+      }
+    }
     if (hasItemOutput(provider)) {
       results.add(assemble(inventory, provider));
     }

@@ -169,7 +169,7 @@ public class ModBlocks {
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> MOONGLOW_CROP = BLOCKS.register("moonglow_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.MOONGLOW_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> PERESKIA_CROP = BLOCKS.register("pereskia_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.PERESKIA_BULB, CROP_PROPERTIES));
   // TODO: Pottable pereskia?
-  public static DeferredHolder<Block, ThreeStageCropBlock> SPIRITLEAF_CROP = BLOCKS.register("spiritleaf_crop", () -> new ThreeStageCropBlock(ModItems.SPIRITLEAF_SEEDS, CROP_PROPERTIES));
+  public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> SPIRITLEAF_CROP = BLOCKS.register("spiritleaf_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.SPIRITLEAF_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> WILDEWHEET_CROP = BLOCKS.register("wildewheet_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.WILDEWHEET_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> AUBERGINE_CROP = BLOCKS.register("aubergine_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.AUBERGINE_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.WildCropBlock> WILD_AUBERGINE = BLOCKS.register("wild_aubergine", () -> new BaseBlocks.WildCropBlock(RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE, CROP_PROPERTIES));

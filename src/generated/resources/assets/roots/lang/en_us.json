@@ -350,6 +350,7 @@
   "roots.message.runic_shears.cooldown": "More time must pass before this entity can be sheared again.",
   "roots.message.spell.already_learned": "You already know the spell: %s",
   "roots.message.spell.learned": "Learned new spell: %s",
+  "roots.message.spell.not_granted": "You do not know the spell: %s",
   "roots.message.squid.cooldown": "Give it time to produce more ink!",
   "roots.message.staff.charging": "Spell charged: %s/%s",
   "roots.message.staff.charging_percent": "Spell charged: %s%%",

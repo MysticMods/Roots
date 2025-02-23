@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-23T16:46:04.7680697	Recipes
+// 1.21.1	2025-02-23T19:51:30.9525476	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -421,11 +421,11 @@ f734f56eb7b314968682b2d7561dd4663945987b data/roots/recipe/grove_crafter.json
 84ada0f330f325347054eaf3e3546564d8a09abe data/roots/recipe/leather_from_pelt.json
 14a34537bc36c8160db1378225730b7cadda1609 data/roots/recipe/magmatic_soil_from_elemental_soil_and_inferno_bulb.json
 ac62436e492f44cea970978d52c0204ed38b6658 data/roots/recipe/mortar.json
-c9d094ab1f913c0992b31a5567e254b8aab242a5 data/roots/recipe/mortar/flint_from_gravel.json
-005235eb9853a4c854821391930a6207ba97d3fe data/roots/recipe/mortar/flint_from_gravel_2.json
-6cc294047c08ee61dbdede8080507976ab2f3dfb data/roots/recipe/mortar/flint_from_gravel_3.json
-354cb0cbce52d8fe26b122b27fddc0a6a229add9 data/roots/recipe/mortar/flint_from_gravel_4.json
-cff51b3bd32177c89396471f6634e0b38ff80685 data/roots/recipe/mortar/flint_from_gravel_5.json
+4b8372eda2026de5c439bee3748012f673e49a2c data/roots/recipe/mortar/flint_from_gravel.json
+ddc98c00ad05254a84f274b50e0278c6d9aef22d data/roots/recipe/mortar/flint_from_gravel_2.json
+9d728096746a57528cfff1bd15f5784d08be1a0c data/roots/recipe/mortar/flint_from_gravel_3.json
+9fb95cef2fab3e8869a864c2bd1501375dedd175 data/roots/recipe/mortar/flint_from_gravel_4.json
+4a623cc0c7d04c8efb2bb41a022753607cebc8f7 data/roots/recipe/mortar/flint_from_gravel_5.json
 ae351ccbb3eec24b8815427d1bddf881fb7e498e data/roots/recipe/mortar/flour.json
 ad58f20d72510bd18971da0aef8ad132f787cb02 data/roots/recipe/mortar/flour_2.json
 56418bc3897ab99faf36aed2235b89b4dfd9c1f2 data/roots/recipe/mortar/flour_3.json
