@@ -195,6 +195,14 @@ public class BaseRecipeData {
       return this;
     }
 
+    public Builder chanceOutput (Holder<? extends ItemLike> holder, float chance) {
+      return chanceOutput(new ItemStack(holder.value().asItem()), chance);
+    }
+
+    public Builder chanceOutput (Holder<? extends ItemLike> holder, int count, float chance) {
+      return chanceOutput(new ItemStack(holder.value().asItem(), count), chance);
+    }
+
     public Builder unlocks(Unlock<?> unlock) {
       this.unlocks.add(unlock);
       return this;

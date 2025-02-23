@@ -37,33 +37,45 @@ public record PartialBlockState(Block block,
     this(block, new HashMap<>());
   }
 
-/*  protected PartialBlockState(Block block, String... properties) {
-    this(block.defaultBlockState(), Arrays.asList(properties));
-  }
-
-  protected PartialBlockState(BlockState template, String... properties) {
-    this(template, Arrays.asList(properties));
-  }*/
-
   public PartialBlockState(BlockState template) {
     this(template.getBlock(), new HashMap<>());
+    guessStates(template);
   }
 
   public PartialBlockState(BlockState template, List<String> properties) {
     this(template.getBlock(), new HashMap<>());
-    Map<String, Property<?>> propMap = new HashMap<>();
-    for (Property<?> property : template.getProperties()) {
-      propMap.put(property.getName(), property);
+    if (properties.isEmpty()) {
+      guessStates(template);
+    } else {
+      Map<String, Property<?>> propMap = new HashMap<>();
+      for (Property<?> property : template.getProperties()) {
+        propMap.put(property.getName(), property);
+      }
+      for (String property : properties) {
+        this.propertyMap.put(property, propMap.get(property).value(template));
+      }
     }
-    for (String property : properties) {
-      this.propertyMap.put(property, propMap.get(property).value(template));
+  }
+
+  private void guessStates (BlockState template) {
+    if (this.propertyMap.isEmpty()) {
+      BlockState defaultState = template.getBlock().defaultBlockState();
+      for (Property<?> property : defaultState.getProperties()) {
+        if (template.getValue(property) != defaultState.getValue(property)) {
+          this.propertyMap.put(property.getName(), property.value(template));
+        }
+      }
     }
   }
 
   public PartialBlockState(BlockState template, Property<?>... properties) {
     this(template.getBlock(), new HashMap<>());
-    for (Property<?> property : properties) {
-      this.propertyMap.put(property.getName(), property.value(template));
+    if (properties.length == 0) {
+      guessStates(template);
+    } else {
+      for (Property<?> property : properties) {
+        this.propertyMap.put(property.getName(), property.value(template));
+      }
     }
   }
 

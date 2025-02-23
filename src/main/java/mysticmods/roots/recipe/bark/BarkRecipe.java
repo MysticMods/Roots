@@ -92,12 +92,14 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
     List<String> propertiesToSkip = new ArrayList<>(skipProperties);
     propertiesToSkip.add(RotatedPillarBlock.AXIS.getName());
     BlockState newState;
+    boolean propertiesCopied = false;
     if (stateMapper == null || stateMapper.isEmpty()) {
       if (outputState == null) {
         RootsAPI.LOG.error("Invalid recipe '{}': no output state or state mapper", this);
-        newState = Blocks.AIR.defaultBlockState();
+        newState = currentState;
       } else {
         newState = outputState.copyState(currentState, propertiesToSkip);
+        propertiesCopied = true;
       }
     } else {
       Block block = currentState.getBlock();
@@ -113,9 +115,11 @@ public class BarkRecipe extends WorldRecipe<SimpleWorldCrafting> {
       newState = newState.setValue(RotatedPillarBlock.AXIS, currentState.getValue(RotatedPillarBlock.AXIS));
     }
 
-    for (Property<?> property : currentState.getProperties()) {
-      if (!propertiesToSkip.contains(property.getName()) && newState.hasProperty(property)) {
-        newState = PartialBlockState.uncheckedSet(property, currentState.getValue(property), newState);
+    if (!propertiesCopied) {
+      for (Property<?> property : currentState.getProperties()) {
+        if (!propertiesToSkip.contains(property.getName()) && newState.hasProperty(property)) {
+          newState = PartialBlockState.uncheckedSet(property, currentState.getValue(property), newState);
+        }
       }
     }
 

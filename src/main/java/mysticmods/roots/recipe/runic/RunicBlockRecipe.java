@@ -3,6 +3,7 @@ package mysticmods.roots.recipe.runic;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
 import mysticmods.roots.api.recipe.WorldRecipe;
@@ -19,6 +20,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
 
@@ -92,6 +95,39 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   public String getGroup() {
     return Identifiers.RUNIC_BLOCK_RECIPE_GROUP;
+  }
+
+  @Override
+  public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState, HolderLookup.Provider provider) {
+    List<String> propertiesToSkip = new ArrayList<>(getSkipProperties());
+    BlockState newState;
+    boolean propertiesCopied = false;
+    if (stateMapper == null || stateMapper.isEmpty()) {
+      if (outputState == null) {
+        RootsAPI.LOG.error("Invalid recipe '{}': no output state or state mapper", this);
+        newState = currentState;
+      } else {
+        newState = outputState.copyState(currentState, propertiesToSkip);
+        propertiesCopied = true;
+      }
+    } else {
+      Block block = currentState.getBlock();
+      Block mappedBlock = stateMapper.get(block);
+      if (mappedBlock == null) {
+        newState = Blocks.AIR.defaultBlockState();
+      } else {
+        newState = mappedBlock.defaultBlockState();
+      }
+    }
+
+    if (!propertiesCopied) {
+      for (Property<?> property : currentState.getProperties()) {
+        if (!propertiesToSkip.contains(property.getName()) && newState.hasProperty(property)) {
+          newState = PartialBlockState.uncheckedSet(property, currentState.getValue(property), newState);
+        }
+      }
+    }
+    return super.modifyState(pContainer, newState, provider);
   }
 
   public static class Serializer implements RecipeSerializer<RunicBlockRecipe> {

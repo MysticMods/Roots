@@ -5,6 +5,8 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
+import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.*;
 import mysticmods.roots.recipe.bark.BarkRecipe;
@@ -12,6 +14,7 @@ import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
+import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.test.entity.EntityTagTest;
 import net.minecraft.advancements.Advancement;
@@ -24,9 +27,12 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CropBlock;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 
@@ -690,7 +696,8 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
         .save(c, RootsAPI.rl("copper_nugget_from_copper_ingot"));
 
-    // TODO: recycling recipes
+    // TODO: recycling recipes ^^^
+
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(BarkRecipe.Builder.create()
         .condition(new WorldCondition(new TagMatchWorldTest(RootsTags.Blocks.OAK_LOGS_TO_STRIP)))
         .stateMapper(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG, Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD)
@@ -848,6 +855,31 @@ public class RootsRecipeProvider extends RecipeProvider {
             .build(BaseRecipeData.Builder.create()
                 .result(ModItems.FEY_LEATHER, 1)), c, RootsAPI.rl("runic_entity/fey_leather"));
 
+    RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
+        .save(RunicBlockRecipe.Builder.create().durabilityCost(15)
+            .condition(new WorldCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(Blocks.WHEAT.defaultBlockState()
+                .setValue(CropBlock.AGE, CropBlock.MAX_AGE)))))
+            .outputState(new PartialBlockState(Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, 0)))
+            .skipProperty(CropBlock.AGE)
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.WILDEWHEET_SEEDS, 1)
+                .chanceOutput(ModItems.WILDEWHEET, 0.6f)
+                .build()
+            ), c, RootsAPI.rl("runic_block/wildewheet_seeds_and_wheat_chance"));
+
+    // Spiritleaf from beetroot
+    RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
+        .save(RunicBlockRecipe.Builder.create().durabilityCost(15)
+            .condition(new WorldCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(Blocks.BEETROOTS.defaultBlockState()
+                .setValue(BeetrootBlock.AGE, BeetrootBlock.MAX_AGE)))))
+            .outputState(new PartialBlockState(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, 0)))
+            .skipProperties(BeetrootBlock.AGE)
+            .build(BaseRecipeData.Builder.create()
+                .result(ModItems.SPIRITLEAF_SEEDS, 1)
+                .chanceOutput(ModItems.SPIRITLEAF, 0.6f)
+                .build()
+            ), c, RootsAPI.rl("runic_block/spiritleaf_from_beetroot"));
+
     BaseRecipeData.Builder basePetalsBuilder = BaseRecipeData.Builder.create().requires(ItemTags.SMALL_FLOWERS)
         .result(ModItems.PETALS, 1);
     MortarRecipe.Builder petalsBuilder = MortarRecipe.Builder.create().times(1);
@@ -869,6 +901,17 @@ public class RootsRecipeProvider extends RecipeProvider {
     saver.save(petalsBuilder.times(3).build(basePetalsBuilder.multiplty(3)), c, RootsAPI.rl("mortar/petals_tall_3"));
     saver.save(petalsBuilder.times(4).build(basePetalsBuilder.multiplty(4)), c, RootsAPI.rl("mortar/petals_tall_4"));
     saver.save(petalsBuilder.times(5).build(basePetalsBuilder.multiplty(5)), c, RootsAPI.rl("mortar/petals_tall_5"));
+
+    MortarRecipe.Builder flourBuilder = MortarRecipe.Builder.create().times(5);
+    BaseRecipeData.Builder flourData = BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_WHEAT)
+        .result(ModItems.FLOUR, 1);
+    saver = RecipeSaver.saver().unlockedBy("has_wheat", has(Tags.Items.CROPS_WHEAT));
+
+    saver.save(flourBuilder.build(flourData), c, RootsAPI.rl("mortar/flour"));
+    saver.save(flourBuilder.times(2).build(flourData.multiplty(2)), c, RootsAPI.rl("mortar/flour_2"));
+    saver.save(flourBuilder.times(3).build(flourData.multiplty(3)), c, RootsAPI.rl("mortar/flour_3"));
+    saver.save(flourBuilder.times(4).build(flourData.multiplty(4)), c, RootsAPI.rl("mortar/flour_4"));
+    saver.save(flourBuilder.times(5).build(flourData.multiplty(5)), c, RootsAPI.rl("mortar/flour_5"));
 
     MortarRecipe.Builder runicDustBuilder = MortarRecipe.Builder.create().times(5);
     BaseRecipeData.Builder runicDustData = BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE)
@@ -1217,21 +1260,21 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     // Rose thorns
     RecipeSaver.saver().unlockedBy("has_rose_bush", has(Items.ROSE_BUSH))
-            .save(MortarRecipe.Builder.create().times(5)
-                .build(
-                    BaseRecipeData.Builder.create().requires(Items.ROSE_BUSH)
-                        .requires(Items.TRIPWIRE_HOOK).requires(Items.CHAIN)
-                        .requires(RootsTags.Items.WILDROOT_HERB).requires(ItemTags.SAPLINGS)
-                        .unlocks(Unlock.spell(ModSpells.ROSE_THORNS))), c, RootsAPI.rl("spell/rose_thorns"));
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(Items.ROSE_BUSH)
+                    .requires(Items.TRIPWIRE_HOOK).requires(Items.CHAIN)
+                    .requires(RootsTags.Items.WILDROOT_HERB).requires(ItemTags.SAPLINGS)
+                    .unlocks(Unlock.spell(ModSpells.ROSE_THORNS))), c, RootsAPI.rl("spell/rose_thorns"));
 
     // Wildfire
     RecipeSaver.saver().unlockedBy("has_inferno_bulb", has(RootsTags.Items.INFERNO_BULB_HERB))
-            .save(MortarRecipe.Builder.create().times(5)
-                .build(
-                    BaseRecipeData.Builder.create().requires(RootsTags.Items.INFERNO_BULB_HERB)
-                        .requires(Items.GUNPOWDER).requires(Items.CAMPFIRE)
-                        .requires(Items.MAGMA_CREAM).requires(Items.LAVA_BUCKET)
-                        .unlocks(Unlock.spell(ModSpells.WILDFIRE))), c, RootsAPI.rl("spell/wildfire"));
+        .save(MortarRecipe.Builder.create().times(5)
+            .build(
+                BaseRecipeData.Builder.create().requires(RootsTags.Items.INFERNO_BULB_HERB)
+                    .requires(Items.GUNPOWDER).requires(Items.CAMPFIRE)
+                    .requires(Items.MAGMA_CREAM).requires(Items.LAVA_BUCKET)
+                    .unlocks(Unlock.spell(ModSpells.WILDFIRE))), c, RootsAPI.rl("spell/wildfire"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.MOSS_BLOCK)
         .pattern("XX")

@@ -1,0 +1,41 @@
+{
+  "type": "roots:runic_block",
+  "condition": [
+    {
+      "modifyPosition": true,
+      "name": "origin",
+      "shift": "none",
+      "test": {
+        "type": "roots:partial_block_state_match_test",
+        "partial_block_state": {
+          "block": "minecraft:beetroots",
+          "properties": {
+            "age": "3"
+          }
+        }
+      }
+    }
+  ],
+  "data": {
+    "chanceOutputs": [
+      {
+        "chance": 0.6,
+        "output": {
+          "count": 1,
+          "id": "roots:spiritleaf"
+        }
+      }
+    ],
+    "result": {
+      "count": 1,
+      "id": "roots:spiritleaf_seeds"
+    }
+  },
+  "durabilityCost": 15,
+  "outputState": {
+    "block": "minecraft:beetroots"
+  },
+  "skipProperties": [
+    "age"
+  ]
+}

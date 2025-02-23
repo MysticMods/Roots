@@ -1,0 +1,41 @@
+{
+  "type": "roots:runic_block",
+  "condition": [
+    {
+      "modifyPosition": true,
+      "name": "origin",
+      "shift": "none",
+      "test": {
+        "type": "roots:partial_block_state_match_test",
+        "partial_block_state": {
+          "block": "minecraft:wheat",
+          "properties": {
+            "age": "7"
+          }
+        }
+      }
+    }
+  ],
+  "data": {
+    "chanceOutputs": [
+      {
+        "chance": 0.6,
+        "output": {
+          "count": 1,
+          "id": "roots:wildewheet"
+        }
+      }
+    ],
+    "result": {
+      "count": 1,
+      "id": "roots:wildewheet_seeds"
+    }
+  },
+  "durabilityCost": 15,
+  "outputState": {
+    "block": "minecraft:wheat"
+  },
+  "skipProperties": [
+    "age"
+  ]
+}

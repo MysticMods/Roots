@@ -1,0 +1,27 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "tag": "c:crops/wheat"
+      },
+      {
+        "tag": "c:crops/wheat"
+      }
+    ],
+    "result": {
+      "count": 5,
+      "id": "roots:flour"
+    }
+  },
+  "times": 5
+}
