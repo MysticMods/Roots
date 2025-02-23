@@ -164,7 +164,11 @@ public class BaseRecipeData {
     }
 
     public Builder result(Holder<? extends ItemLike> item, int count) {
-      return result(new ItemStack(item.value().asItem(), count));
+      return result(item.value(), count);
+    }
+
+    public Builder result (ItemLike item, int count) {
+      return result(new ItemStack(item.asItem(), count));
     }
 
     public Builder result(ItemStack result) {
