@@ -58,4 +58,9 @@ public class FourStageCropBlock extends BaseBlocks.SeededCropsBlock {
   protected IntegerProperty getAgeProperty() {
     return AGE;
   }
+
+  @Override
+  public int getMaxAge() {
+    return MAX_AGE;
+  }
 }
