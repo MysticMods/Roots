@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has the recipe": {
+      "conditions": {
+        "recipe": "roots:grove/living_hoe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_grove_moss": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:herbs/grove_moss"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has the recipe",
+      "has_grove_moss"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:grove/living_hoe"
+    ]
+  }
+}

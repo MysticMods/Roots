@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "tag": "c:ingots/copper"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "CCC",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:copper_pickaxe"
+  }
+}

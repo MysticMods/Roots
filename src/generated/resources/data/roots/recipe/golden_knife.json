@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:ingots/gold"
+    }
+  },
+  "pattern": [
+    "  X",
+    " S ",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:gold_knife"
+  }
+}

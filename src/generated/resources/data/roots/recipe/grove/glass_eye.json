@@ -12,7 +12,7 @@
         "tag": "c:glass_blocks"
       },
       {
-        "tag": "c:dusts/glowstone"
+        "item": "minecraft:torch"
       }
     ],
     "result": {

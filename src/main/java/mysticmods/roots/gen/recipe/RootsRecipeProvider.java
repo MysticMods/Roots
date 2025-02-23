@@ -922,6 +922,46 @@ public class RootsRecipeProvider extends RecipeProvider {
             .requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))
             .result(ModItems.RUNIC_SHEARS)), c, RootsAPI.rl("grove/runic_shears"));
 
+   RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
+        .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
+            .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+            .requires(Items.WOODEN_PICKAXE)
+            .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+            .result(ModItems.LIVING_PICKAXE)), c, RootsAPI.rl("grove/living_pickaxe"));
+
+   // Living sword
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
+          .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
+              .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+              .requires(Items.WOODEN_SWORD)
+              .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+              .result(ModItems.LIVING_SWORD)), c, RootsAPI.rl("grove/living_sword"));
+
+    // Living axe
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
+          .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
+              .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+              .requires(Items.WOODEN_AXE)
+              .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+              .result(ModItems.LIVING_AXE)), c, RootsAPI.rl("grove/living_axe"));
+
+    // Living hoe
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
+          .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
+              .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+              .requires(Items.WOODEN_HOE)
+              .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+              .result(ModItems.LIVING_HOE)), c, RootsAPI.rl("grove/living_hoe"));
+
+    // Living shovel
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
+          .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
+              .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+              .requires(Items.WOODEN_SHOVEL)
+              .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+              .result(ModItems.LIVING_SHOVEL)), c, RootsAPI.rl("grove/living_shovel"));
+
+
     RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
         .save(RunicEntityRecipe.Builder.create().durabilityCost(10)
             .test(new EntityTagTest(RootsTags.Entities.FEY_LEATHER)).cooldown(2 * 60 * 20)
@@ -1032,7 +1072,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_glowstone", has(Tags.Items.DUSTS_GLOWSTONE)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.GLASS_BLOCKS)
-            .requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.DUSTS_GLOWSTONE)
+            .requires(Tags.Items.GLASS_BLOCKS).requires(Items.TORCH)
             .result(ModItems.GLASS_EYE, 1)), c, RootsAPI.rl("grove/glass_eye"));
 
     RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB))
@@ -1376,6 +1416,202 @@ public class RootsRecipeProvider extends RecipeProvider {
         .define('X', RootsTags.Items.GROVE_MOSS_CROP)
         .unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB))
         .save(c, RootsAPI.rl("moss_block_from_grove_moss"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.WOODEN_KNIFE.get())
+        .pattern("  X")
+        .pattern(" S ")
+        .pattern("S  ")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('X', ItemTags.PLANKS)
+        .unlockedBy("has_planks", has(ItemTags.PLANKS))
+        .save(c, RootsAPI.rl("wooden_knife"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.IRON_KNIFE.get())
+        .pattern("  X")
+        .pattern(" S ")
+        .pattern("S  ")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('X', Tags.Items.INGOTS_IRON)
+        .unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+        .save(c, RootsAPI.rl("iron_knife"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.GOLD_KNIFE.get())
+        .pattern("  X")
+        .pattern(" S ")
+        .pattern("S  ")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('X', Tags.Items.INGOTS_GOLD)
+        .unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
+        .save(c, RootsAPI.rl("golden_knife"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.DIAMOND_KNIFE.get())
+        .pattern("  X")
+        .pattern(" S ")
+        .pattern("S  ")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('X', Tags.Items.GEMS_DIAMOND)
+        .unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
+        .save(c, RootsAPI.rl("diamond_knife"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.NETHERITE_KNIFE.get())
+        .pattern("  X")
+        .pattern(" S ")
+        .pattern("S  ")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('X', Tags.Items.INGOTS_NETHERITE)
+        .unlockedBy("has_netherite_ingot", has(Tags.Items.INGOTS_NETHERITE))
+        .save(c, RootsAPI.rl("netherite_knife"));
+
+    // Copper
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_KNIFE.get())
+        .pattern("  X")
+        .pattern(" S ")
+        .pattern("S  ")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('X', Tags.Items.INGOTS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_knife"));
+
+    // Silver
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SILVER_KNIFE.get())
+        .pattern("  X")
+        .pattern(" S ")
+        .pattern("S  ")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('X', RootsTags.Items.SILVER_INGOT)
+        .unlockedBy("has_silver_ingot", has(RootsTags.Items.SILVER_INGOT))
+        .save(c, RootsAPI.rl("silver_knife"));
+
+    // Stone
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STONE_KNIFE.get())
+        .pattern("  X")
+        .pattern(" S ")
+        .pattern("S  ")
+        .define('S', Tags.Items.RODS_WOODEN)
+        .define('X', ItemTags.STONE_TOOL_MATERIALS)
+        .unlockedBy("has_stone", has(ItemTags.STONE_TOOL_MATERIALS))
+        .save(c, RootsAPI.rl("stone_knife"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEETLE_HELMET.get())
+        .pattern("CCC")
+        .pattern("C C")
+        .define('C', RootsTags.Items.CARAPACE)
+        .unlockedBy("has_beetle_carapace", has(RootsTags.Items.CARAPACE))
+        .save(c, RootsAPI.rl("beetle_helmet"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEETLE_CHESTPLATE.get())
+        .pattern("C C")
+        .pattern("CCC")
+        .pattern("CCC")
+        .define('C', RootsTags.Items.CARAPACE)
+        .unlockedBy("has_beetle_carapace", has(RootsTags.Items.CARAPACE))
+        .save(c, RootsAPI.rl("beetle_chestplate"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEETLE_LEGGINGS.get())
+        .pattern("CCC")
+        .pattern("C C")
+        .pattern("C C")
+        .define('C', RootsTags.Items.CARAPACE)
+        .unlockedBy("has_beetle_carapace", has(RootsTags.Items.CARAPACE))
+        .save(c, RootsAPI.rl("beetle_leggings"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEETLE_BOOTS.get())
+        .pattern("C C")
+        .pattern("C C")
+        .define('C', RootsTags.Items.CARAPACE)
+        .unlockedBy("has_beetle_carapace", has(RootsTags.Items.CARAPACE))
+        .save(c, RootsAPI.rl("beetle_boots"));
+
+    // Copper armor
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_HELMET.get())
+        .pattern("CCC")
+        .pattern("C C")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_helmet"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_CHESTPLATE.get())
+        .pattern("C C")
+        .pattern("CCC")
+        .pattern("CCC")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_chestplate"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_LEGGINGS.get())
+        .pattern("CCC")
+        .pattern("C C")
+        .pattern("C C")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_leggings"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_BOOTS.get())
+        .pattern("C C")
+        .pattern("C C")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_boots"));
+
+    // Copper axe
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_AXE.get())
+        .pattern("CC")
+        .pattern("CS")
+        .pattern(" S")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('S', Tags.Items.RODS_WOODEN)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_axe"));
+
+    // Copper hoe
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_HOE.get())
+        .pattern("CC")
+        .pattern(" S")
+        .pattern(" S")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('S', Tags.Items.RODS_WOODEN)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_hoe"));
+
+    // Copper pickaxe
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_PICKAXE.get())
+        .pattern("CCC")
+        .pattern(" S ")
+        .pattern(" S ")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('S', Tags.Items.RODS_WOODEN)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_pickaxe"));
+
+    // Copper shovel
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_SHOVEL.get())
+        .pattern("C")
+        .pattern("S")
+        .pattern("S")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('S', Tags.Items.RODS_WOODEN)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_shovel"));
+
+    // Copper sword
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_SWORD.get())
+        .pattern("C")
+        .pattern("C")
+        .pattern("S")
+        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('S', Tags.Items.RODS_WOODEN)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .save(c, RootsAPI.rl("copper_sword"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEETLE_HELMET.get())
+        .pattern("AAA")
+        .pattern("A A")
+        .define('A', RootsTags.Items.ANTLERS)
+        .unlockedBy("has_antlers", has(RootsTags.Items.ANTLERS))
+        .save(c, RootsAPI.rl("antler_helmet"));
+
+
+
   }
 
   public static class RecipeSaver {

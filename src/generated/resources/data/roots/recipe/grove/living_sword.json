@@ -1,0 +1,29 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:herbs/grove_moss"
+      },
+      {
+        "tag": "c:ingots/gold"
+      },
+      {
+        "tag": "roots:herbs/wildroot"
+      },
+      {
+        "tag": "roots:herbs/wildroot"
+      },
+      {
+        "item": "minecraft:wooden_sword"
+      }
+    ],
+    "levelConditions": [
+      "roots:active_grove_stone"
+    ],
+    "result": {
+      "count": 1,
+      "id": "roots:living_sword"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:ingots/netherite"
+    }
+  },
+  "pattern": [
+    "  X",
+    " S ",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:netherite_knife"
+  }
+}
