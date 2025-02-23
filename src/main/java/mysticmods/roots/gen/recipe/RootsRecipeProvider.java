@@ -1059,7 +1059,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     saver.save(stringBuilder.times(5).build(stringData.multiplty(5)), c, RootsAPI.rl("mortar/string_from_wool_5"));
 
     MortarRecipe.Builder flintBuilder = MortarRecipe.Builder.create().times(1);
-    BaseRecipeData.Builder flintData = BaseRecipeData.Builder.create().requires(RootsTags.Items.FLINT)
+    BaseRecipeData.Builder flintData = BaseRecipeData.Builder.create().requires(Tags.Items.GRAVELS)
         .result(Items.FLINT.builtInRegistryHolder(), 1);
     saver = RecipeSaver.saver().unlockedBy("has_flint", has(RootsTags.Items.FLINT));
 
