@@ -11,6 +11,10 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
+// - Spell library stuff
+// - Wooden shears on hives
+
+
 // - Overhaul all block properties, stop using defaults.
 // - Knife dispenser behaviour
 // - Extend JEI integration to different recipe types
