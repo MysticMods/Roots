@@ -1,10 +1,12 @@
 package mysticmods.roots.network.server;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +15,7 @@ import javax.annotation.Nullable;
 
 public class ServerNetworkHooks {
 
-  public static void setSpellData (Player player, InteractionHand hand, int index, short value) {
+  public static void setSpellData(Player player, InteractionHand hand, int index, short value) {
     ItemStack stack = player.getItemInHand(hand);
     if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
       return;
@@ -53,6 +55,12 @@ public class ServerNetworkHooks {
     }
     SpellStorage existing = stack.get(ModAttachments.SPELL_STORAGE);
     if (existing == null) {
+      return;
+    }
+
+    GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE);
+    if (grants == null || !grants.hasSpell(spell)) {
+      player.displayClientMessage(Component.translatable("roots.message.spell.not_granted", spell.getDescriptionId()), true);
       return;
     }
     // TODO: Validate that the player has the spell

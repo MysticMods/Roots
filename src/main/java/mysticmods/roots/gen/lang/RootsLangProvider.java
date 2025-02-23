@@ -88,6 +88,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.message.staff.charging", "Spell charged: %s/%s");
     add("roots.message.staff.charging_percent", "Spell charged: %s%%");
 
+    add("roots.message.spell.not_granted", "You do not know the spell: %s");
     add("roots.message.spell.learned", "Learned new spell: %s");
     add("roots.message.spell.already_learned", "You already know the spell: %s");
     add("roots.message.modifier.learned", "Learned new modifier: %s");
