@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-21T16:39:27.0006949	Block States: roots
+// 1.21.1	2025-02-23T21:26:43.9866881	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -90,7 +90,7 @@ c050542bb4d706c8eb11b15bcf09ecc5ba39f5df assets/roots/blockstates/runestone_wall
 b6b044c6f27f0e38e4ddee2571089f2e2f9f2a65 assets/roots/blockstates/silver_block.json
 03634ad1d23034f6f428d9c2e53027c402b0a168 assets/roots/blockstates/silver_ore.json
 1eeddad17594ef179ed25a83ef658de15e75a295 assets/roots/blockstates/soul_pyre.json
-63c05c0a9394e96d76fbbca6c7cc7c211a972871 assets/roots/blockstates/spiritleaf_crop.json
+c168c34a5d1061fc9be319a20444aeaabd022002 assets/roots/blockstates/spiritleaf_crop.json
 a2e05c8e6daeb967d6ea61e168fb881bc814deda assets/roots/blockstates/stalicripe_crop.json
 04173d1a75e8f57c3501174737eaf667163ea866 assets/roots/blockstates/stonepetal.json
 6e658893da53e714ef4ce69ab984b9f9c9d5c46b assets/roots/blockstates/stripped_wildwood_log.json
@@ -314,6 +314,7 @@ f5f46144b8eaa642931b0dc5d112818a54050be2 assets/roots/models/block/soul_pyre_lit
 51ff80de375031638f0a447a7d3437d21f56b8b0 assets/roots/models/block/spiritleaf_1.json
 9b483b223fd2b9e3627a903ff72383e8a351b91d assets/roots/models/block/spiritleaf_2.json
 138f3b30c6b779623b741248129216cc9aff530b assets/roots/models/block/spiritleaf_3.json
+049e55053c83192e3fac9473f4a4a0ceca80af34 assets/roots/models/block/spiritleaf_4.json
 c9d3eb38e4a89512097794b9a99711bc7259aca6 assets/roots/models/block/stalicripe_0.json
 07f1b1989947e791ad3b64ea6825efc2a2341797 assets/roots/models/block/stalicripe_1.json
 76362df6827eff4e7b9950ef98245739685fd6cc assets/roots/models/block/stalicripe_2.json

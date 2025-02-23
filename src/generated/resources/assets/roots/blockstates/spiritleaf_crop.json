@@ -11,6 +11,9 @@
     },
     "age=3": {
       "model": "roots:block/spiritleaf_3"
+    },
+    "age=4": {
+      "model": "roots:block/spiritleaf_4"
     }
   }
 }

@@ -3,10 +3,7 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.*;
-import mysticmods.roots.block.crop.ElementalCropBlock;
-import mysticmods.roots.block.crop.ElementalType;
-import mysticmods.roots.block.crop.ThreeStageCropBlock;
-import mysticmods.roots.block.crop.WaterElementalCropBlock;
+import mysticmods.roots.block.crop.*;
 import mysticmods.roots.worldgen.trees.RootsTreeGrowers;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -169,7 +166,7 @@ public class ModBlocks {
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> MOONGLOW_CROP = BLOCKS.register("moonglow_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.MOONGLOW_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> PERESKIA_CROP = BLOCKS.register("pereskia_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.PERESKIA_BULB, CROP_PROPERTIES));
   // TODO: Pottable pereskia?
-  public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> SPIRITLEAF_CROP = BLOCKS.register("spiritleaf_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.SPIRITLEAF_SEEDS, CROP_PROPERTIES));
+  public static DeferredHolder<Block, FourStageCropBlock> SPIRITLEAF_CROP = BLOCKS.register("spiritleaf_crop", () -> new FourStageCropBlock(ModItems.SPIRITLEAF_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> WILDEWHEET_CROP = BLOCKS.register("wildewheet_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.WILDEWHEET_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.SeededCropsBlock> AUBERGINE_CROP = BLOCKS.register("aubergine_crop", () -> new BaseBlocks.SeededCropsBlock(ModItems.AUBERGINE_SEEDS, CROP_PROPERTIES));
   public static DeferredHolder<Block, BaseBlocks.WildCropBlock> WILD_AUBERGINE = BLOCKS.register("wild_aubergine", () -> new BaseBlocks.WildCropBlock(RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE, CROP_PROPERTIES));
