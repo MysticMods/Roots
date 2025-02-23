@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-21T18:22:00.6771641	Registries
+// 1.21.1	2025-02-23T16:36:34.5544464	Registries
 a65184c1483f870edf64b340e4bd0e5ee9227966 data/roots/enchantment/foraging.json
 5e8bb855917451e7d49f50565ec458fdbf545f9f data/roots/enchantment_provider/looting_i.json
 4613ff4e5c72a645ecacd42f85dc4f3f2556c83f data/roots/enchantment_provider/looting_ii.json
@@ -36,7 +36,7 @@ ef9144ad33ff5d347abc5c044a79d298434fabe8 data/roots/worldgen/placed_feature/wild
 4c9a9af81323ce4b8a8766e3c7072d6a969f624b data/roots/worldgen/placed_feature/wild_roots_underground.json
 5f7eb3aefb4e67e597bd7027849115f462b0645d data/roots/worldgen/structure/barrow.json
 0f232c2d5e2e5485f4cadd03dfd0a43b553aef1c data/roots/worldgen/structure/hut.json
-688f52975bccf89d51eb07d1ef97573e65ee2061 data/roots/worldgen/structure/large_barrow.json
+d33d83aa57a04b645ca6aed6285e33a4510e3da7 data/roots/worldgen/structure/large_barrow.json
 e04b12dcf7c2a014184ef3b5bb259b88cae2a074 data/roots/worldgen/structure/ruined_hut.json
 ef2cf544c2846dc8f80cf8261c38a31d2b35d15f data/roots/worldgen/structure/standing_stones.json
 521c5c2e14bbe5d735eb106501a61a37243d9223 data/roots/worldgen/structure_set/barrow.json
