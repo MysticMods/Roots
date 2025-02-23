@@ -136,7 +136,7 @@
         "ageProperty": "age"
       },
       "cropBlock": "roots:spiritleaf_crop",
-      "maximumAge": 7,
+      "maximumAge": 4,
       "replantFunction": "roots:age_replant",
       "seedItem": "roots:spiritleaf_seeds"
     },
