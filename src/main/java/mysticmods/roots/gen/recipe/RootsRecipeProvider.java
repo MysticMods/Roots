@@ -922,44 +922,54 @@ public class RootsRecipeProvider extends RecipeProvider {
             .requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))
             .result(ModItems.RUNIC_SHEARS)), c, RootsAPI.rl("grove/runic_shears"));
 
-   RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
-        .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
-            .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
-            .requires(Items.WOODEN_PICKAXE)
-            .condition(ModConditions.GROVE_STONE_ACTIVE.get())
-            .result(ModItems.LIVING_PICKAXE)), c, RootsAPI.rl("grove/living_pickaxe"));
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+                .requires(Items.WOODEN_PICKAXE)
+                .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+                .result(ModItems.LIVING_PICKAXE)), c, RootsAPI.rl("grove/living_pickaxe"));
 
-   // Living sword
-    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
-          .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
-              .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
-              .requires(Items.WOODEN_SWORD)
-              .condition(ModConditions.GROVE_STONE_ACTIVE.get())
-              .result(ModItems.LIVING_SWORD)), c, RootsAPI.rl("grove/living_sword"));
+    // Living sword
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+                .requires(Items.WOODEN_SWORD)
+                .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+                .result(ModItems.LIVING_SWORD)), c, RootsAPI.rl("grove/living_sword"));
 
     // Living axe
-    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
-          .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
-              .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
-              .requires(Items.WOODEN_AXE)
-              .condition(ModConditions.GROVE_STONE_ACTIVE.get())
-              .result(ModItems.LIVING_AXE)), c, RootsAPI.rl("grove/living_axe"));
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+                .requires(Items.WOODEN_AXE)
+                .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+                .result(ModItems.LIVING_AXE)), c, RootsAPI.rl("grove/living_axe"));
 
     // Living hoe
-    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
-          .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
-              .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
-              .requires(Items.WOODEN_HOE)
-              .condition(ModConditions.GROVE_STONE_ACTIVE.get())
-              .result(ModItems.LIVING_HOE)), c, RootsAPI.rl("grove/living_hoe"));
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+                .requires(Items.WOODEN_HOE)
+                .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+                .result(ModItems.LIVING_HOE)), c, RootsAPI.rl("grove/living_hoe"));
 
     // Living shovel
-    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB)).save(GroveRecipe.Builder.create()
-          .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.INGOTS_GOLD)
-              .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
-              .requires(Items.WOODEN_SHOVEL)
-              .condition(ModConditions.GROVE_STONE_ACTIVE.get())
-              .result(ModItems.LIVING_SHOVEL)), c, RootsAPI.rl("grove/living_shovel"));
+    RecipeSaver.saver().unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_HERB))
+        .save(GroveRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.GROVE_MOSS_HERB)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(RootsTags.Items.WILDROOT_HERB).requires(RootsTags.Items.WILDROOT_HERB)
+                .requires(Items.WOODEN_SHOVEL)
+                .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+                .result(ModItems.LIVING_SHOVEL)), c, RootsAPI.rl("grove/living_shovel"));
 
 
     RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
@@ -1280,7 +1290,7 @@ public class RootsRecipeProvider extends RecipeProvider {
             .build(
                 BaseRecipeData.Builder.create().requires(RootsTags.Items.SPIRITLEAF_HERB).requires(Items.IRON_BARS)
                     .requires(Items.FISHING_ROD).requires(RootsTags.Items.SPIRITLEAF_HERB)
-                    .requires(RootsTags.Items.LEVERS).requires(Tags.Items.STRINGS)
+                    .requires(RootsTags.Items.LEVERS)
                     .unlocks(Unlock.spell(ModSpells.DISARM))), c, RootsAPI.rl("spell/disarm"));
 
     RecipeSaver.saver().unlockedBy("has_dandelion", has(Items.DANDELION)).save(MortarRecipe.Builder.create().times(5)
@@ -1453,14 +1463,16 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
         .save(c, RootsAPI.rl("diamond_knife"));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.NETHERITE_KNIFE.get())
+/*    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.NETHERITE_KNIFE.get())
         .pattern("  X")
         .pattern(" S ")
         .pattern("S  ")
         .define('S', Tags.Items.RODS_WOODEN)
         .define('X', Tags.Items.INGOTS_NETHERITE)
         .unlockedBy("has_netherite_ingot", has(Tags.Items.INGOTS_NETHERITE))
-        .save(c, RootsAPI.rl("netherite_knife"));
+        .save(c, RootsAPI.rl("netherite_knife"));*/
+
+    netheriteSmithing(c, ModItems.DIAMOND_KNIFE.get(), RecipeCategory.COMBAT, ModItems.NETHERITE_KNIFE.get());
 
     // Copper
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_KNIFE.get())
@@ -1603,13 +1615,12 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
         .save(c, RootsAPI.rl("copper_sword"));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BEETLE_HELMET.get())
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.ANTLER_HAT.get())
         .pattern("AAA")
         .pattern("A A")
         .define('A', RootsTags.Items.ANTLERS)
         .unlockedBy("has_antlers", has(RootsTags.Items.ANTLERS))
         .save(c, RootsAPI.rl("antler_helmet"));
-
 
 
   }

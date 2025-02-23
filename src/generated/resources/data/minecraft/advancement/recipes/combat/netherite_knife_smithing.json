@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/netherite"
+            "items": "minecraft:netherite_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:netherite_knife"
+        "recipe": "minecraft:netherite_knife_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:netherite_knife"
+      "minecraft:netherite_knife_smithing"
     ]
   }
 }

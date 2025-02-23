@@ -1,4 +1,6 @@
-// 1.21.1	2025-02-23T15:48:02.418635	Recipes
+// 1.21.1	2025-02-23T16:46:04.7680697	Recipes
+f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
+8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
 61314c256942cfbd7167d8bba4cf44c40e486533 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_obsidian_stonecutting.json
 afb36943e341d957b4cc6aa8dfa1273afb91ba11 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_tile.json
@@ -311,14 +313,13 @@ d5c97c974209790803a04daa17ed8b2915ca973a data/roots/advancement/recipes/tools/co
 aec281328d73df26b19fc33a550478cb6fd09729 data/roots/advancement/recipes/tools/diamond_knife.json
 da0ecad16953a9ed50d16fb34bcd9f7aff73649d data/roots/advancement/recipes/tools/golden_knife.json
 b76b1d06f45a2dbb11bdbbee052e8d8c31d37e7f data/roots/advancement/recipes/tools/iron_knife.json
-8e2bb50ea60ee09b99941dad7934455824e8045a data/roots/advancement/recipes/tools/netherite_knife.json
 503eaf225b44c1ce677e857a412bfa4ade599a28 data/roots/advancement/recipes/tools/pestle.json
 01eecf49806904c61f22fec65f2220f4124965aa data/roots/advancement/recipes/tools/silver_knife.json
 7060bb089f1fe570ca9110ed325e0300a4860739 data/roots/advancement/recipes/tools/staff.json
 ae4c32add61c0fefa62f9bac0a9cfe8ce9bc195a data/roots/advancement/recipes/tools/stone_knife.json
 415b560ba1cea90427c03c262f06e95d99bae4fc data/roots/advancement/recipes/tools/wooden_knife.json
 bac00bce4824296477baa2ca0140f3979331d387 data/roots/advancement/recipes/tools/wooden_shears.json
-942cfaf5dabfea705444c3dc26286b147cea2339 data/roots/recipe/antler_helmet.json
+b4de1778c055c03d6136d5984a97334e18aa105c data/roots/recipe/antler_helmet.json
 dddbf5bca7eed5851c246b3a30e93b4d39aa5c5a data/roots/recipe/aqueous_soil_from_elemental_soil_and_dewgonia.json
 d83b78f1c6e24d72170a7ce9a8d4192cfdb08879 data/roots/recipe/assorted_seeds_from_seeds.json
 4a0d03e5c089680de647ad11f42c4d78874b76bd data/roots/recipe/aubergine_salad.json
@@ -464,7 +465,6 @@ fa141db814100e18f18710b99df5633559837dab data/roots/recipe/mossy_runestone_stair
 9327d84650cef421927e46347852231c40696e8a data/roots/recipe/mossy_runestone_wall.json
 77e91e4ef502dd3143b9c80cfcce1b4023152dc5 data/roots/recipe/mossy_runestone_wall_from_mossy_runestone_stonecutting.json
 39b6213dfac862efa1c327df134e9fba246f1f0f data/roots/recipe/moss_block_from_grove_moss.json
-171b8fa625c7e51545513d38c0ce03f10d09b7ad data/roots/recipe/netherite_knife.json
 e2558a4937c853071b7b4a87cbfd6d3506c7a96d data/roots/recipe/pestle.json
 558706bf20ee533c39bfd689ce4270d00a0e6e75 data/roots/recipe/primal_grove_stone.json
 ebd352284993326d9a16b6ef0b9bf745b87af9b5 data/roots/recipe/pyre.json
@@ -596,7 +596,7 @@ af8582d68ea41b04a0b1ac3a9476285faf01088c data/roots/recipe/spell/acid_cloud.json
 a04b3417ebf6393fa5322f835a12c60b57d7cfdc data/roots/recipe/spell/aqua_bubble.json
 9baf4f43a4322a18a0c20e0092325c47c4361439 data/roots/recipe/spell/dandelion_winds.json
 a08a6a69c08d0777d39d569795c4311cb51c28e3 data/roots/recipe/spell/desaturate.json
-c7a65a68b60783a407e8ba6b6d150a442e472671 data/roots/recipe/spell/disarm.json
+50086e6df1f2fe97fad2b7c63e2bc6638ac65a1b data/roots/recipe/spell/disarm.json
 a52e9604eb62ee0dae8d9dce1c6fdf6931ac66eb data/roots/recipe/spell/extension.json
 d49652a2b330b26a1cc44a42fa89bc6835a689ba data/roots/recipe/spell/fey_light.json
 cc512ed38d66580ee663c6b7b97f05b07c1b126e data/roots/recipe/spell/geas.json
