@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "roots:soul_pyre"
+    },
+    "X": {
+      "tag": "roots:runed_obsidian"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XCX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:reinforced_soul_pyre"
+  }
+}

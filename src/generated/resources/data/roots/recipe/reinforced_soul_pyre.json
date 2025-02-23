@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "minecraft:soul_fire_base_blocks"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "R": {
+      "tag": "roots:runed_obsidian"
+    }
+  },
+  "pattern": [
+    "LCL",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:reinforced_soul_pyre"
+  }
+}

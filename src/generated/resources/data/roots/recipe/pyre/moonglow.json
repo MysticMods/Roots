@@ -1,0 +1,35 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "chanceOutputs": [
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 2,
+          "id": "roots:moonglow_seeds"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:blue_orchid"
+      },
+      {
+        "tag": "c:glass_blocks"
+      },
+      {
+        "tag": "c:gems/amethyst"
+      },
+      {
+        "tag": "c:nuggets/iron"
+      },
+      {
+        "tag": "roots:herbs/grove_moss"
+      }
+    ],
+    "result": {
+      "count": 1,
+      "id": "roots:moonglow"
+    }
+  }
+}

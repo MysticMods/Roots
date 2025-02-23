@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "roots:chiseled_runed_obsidian"
+  },
+  "result": {
+    "count": 1,
+    "id": "roots:runed_brick"
+  }
+}

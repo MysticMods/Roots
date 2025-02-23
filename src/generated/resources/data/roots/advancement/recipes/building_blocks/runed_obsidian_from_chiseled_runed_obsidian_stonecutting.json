@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chiseled_runed_obsidian": {
+      "conditions": {
+        "items": [
+          {
+            "items": "roots:chiseled_runed_obsidian"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:runed_obsidian_from_chiseled_runed_obsidian_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chiseled_runed_obsidian"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:runed_obsidian_from_chiseled_runed_obsidian_stonecutting"
+    ]
+  }
+}

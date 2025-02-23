@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "roots:soul_pyre"
+    },
+    {
+      "tag": "c:levers"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:decorative_soul_pyre"
+  }
+}

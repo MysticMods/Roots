@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "roots:decorative_pyre"
+            "items": "roots:pyre"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "roots:decorative_pyre_from_decorative_pyre_and_lever"
+        "recipe": "roots:decorative_pyre_from_pyre_and_lever"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:decorative_pyre_from_decorative_pyre_and_lever"
+      "roots:decorative_pyre_from_pyre_and_lever"
     ]
   }
 }

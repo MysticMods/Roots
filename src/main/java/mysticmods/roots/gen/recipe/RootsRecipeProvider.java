@@ -27,7 +27,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.BeetrootBlock;
@@ -387,6 +386,54 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE_WALL.get(), ModBlocks.RUNED_TILE.get());
 
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK.get(), ModBlocks.RUNESTONE.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE.get(), ModBlocks.RUNESTONE.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNESTONE.get(), ModBlocks.RUNESTONE.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE.get(), ModBlocks.RUNESTONE_BRICK.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE.get(), ModBlocks.RUNESTONE_BRICK.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNESTONE.get(), ModBlocks.RUNESTONE_BRICK.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE.get(), ModBlocks.RUNESTONE_TILE.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK.get(), ModBlocks.RUNESTONE_TILE.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNESTONE.get(), ModBlocks.RUNESTONE_TILE.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE.get(), ModBlocks.CHISELED_RUNESTONE.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_BRICK.get(), ModBlocks.CHISELED_RUNESTONE.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE_TILE.get(), ModBlocks.CHISELED_RUNESTONE.get());
+
+    // Runed obsidian
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK.get(), ModBlocks.RUNED_OBSIDIAN.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE.get(), ModBlocks.RUNED_OBSIDIAN.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNED_OBSIDIAN.get(), ModBlocks.RUNED_OBSIDIAN.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_OBSIDIAN.get(), ModBlocks.RUNED_BRICK.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE.get(), ModBlocks.RUNED_BRICK.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNED_OBSIDIAN.get(), ModBlocks.RUNED_BRICK.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_OBSIDIAN.get(), ModBlocks.RUNED_TILE.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK.get(), ModBlocks.RUNED_TILE.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNED_OBSIDIAN.get(), ModBlocks.RUNED_TILE.get());
+
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_OBSIDIAN.get(), ModBlocks.CHISELED_RUNED_OBSIDIAN.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_BRICK.get(), ModBlocks.CHISELED_RUNED_OBSIDIAN.get());
+    stonecutterResultFromBase(c, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNED_TILE.get(), ModBlocks.CHISELED_RUNED_OBSIDIAN.get());
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.RITUAL_PEDESTAL.get())
+        .pattern("RRR")
+        .pattern(" R ")
+        .pattern("RRR")
+        .define('R', RootsTags.Items.RUNESTONE)
+        .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
+        .save(c);
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_RITUAL_PEDESTAL.get())
+        .pattern("RRR")
+        .pattern(" R ")
+        .pattern("RRR")
+        .define('R', RootsTags.Items.RUNED_OBSIDIAN)
+        .unlockedBy("has_runed_obsidian", has(RootsTags.Items.RUNED_OBSIDIAN))
+        .save(c);
 
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROVE_CRAFTER.get())
         .pattern("RGR")
@@ -470,6 +517,25 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_pyre", has(ModBlocks.PYRE.get()))
         .unlockedBy("has_soul_fire_base_blocks", has(ItemTags.SOUL_FIRE_BASE_BLOCKS))
         .save(c, RootsAPI.rl("soul_pyre_from_pyre"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_SOUL_PYRE.get())
+        .pattern("XXX")
+        .pattern("XCX")
+        .pattern("XXX")
+        .define('X', RootsTags.Items.RUNED_OBSIDIAN)
+        .define('C', ModBlocks.SOUL_PYRE.get())
+        .unlockedBy("has_runed_obsidian", has(RootsTags.Items.RUNED_OBSIDIAN))
+        .save(c, RootsAPI.rl("reinforced_soul_pyre_from_soul_pyre"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.REINFORCED_SOUL_PYRE.get())
+        .pattern("LCL")
+        .pattern("RRR")
+        .define('L', ItemTags.LOGS)
+        .define('C', ItemTags.SOUL_FIRE_BASE_BLOCKS)
+        .define('R', RootsTags.Items.RUNED_OBSIDIAN)
+        .unlockedBy("has_runestone", has(RootsTags.Items.RUNED_OBSIDIAN))
+        .unlockedBy("has_soul_fire_base_blocks", has(ItemTags.SOUL_FIRE_BASE_BLOCKS))
+        .save(c);
 
     // Grove spores
 
@@ -839,15 +905,22 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DECORATIVE_PYRE.get(), 1)
         .requires(ModItems.PYRE.get()).requires(RootsTags.Items.LEVERS)
-        .unlockedBy("has_decorative_pyre", has(ModItems.DECORATIVE_PYRE.get()))
+        .unlockedBy("has_decorative_pyre", has(ModItems.PYRE.get()))
         .unlockedBy("has_lever", has(RootsTags.Items.LEVERS))
-        .save(c, RootsAPI.rl("decorative_pyre_from_decorative_pyre_and_lever"));
+        .save(c, RootsAPI.rl("decorative_pyre_from_pyre_and_lever"));
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DECORATIVE_SOUL_PYRE.get(), 1)
+        .requires(ModItems.SOUL_PYRE.get()).requires(RootsTags.Items.LEVERS)
+        .unlockedBy("has_decorative_soul_pyre", has(ModItems.SOUL_PYRE.get()))
+        .unlockedBy("has_lever", has(RootsTags.Items.LEVERS))
+        .save(c, RootsAPI.rl("decorative_soul_pyre_from_soul_pyre_and_lever"));
 
     RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.RUNESTONE)
             .requires(RootsTags.Items.PETALS).requires(RootsTags.Items.GROVE_MOSS_HERB)
             .condition(ModConditions.GROVE_STONE_ACTIVE.get())
-            .requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))), c, RootsAPI.rl("grove/runic_shears"));
+            .requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))
+            .result(ModItems.RUNIC_SHEARS)), c, RootsAPI.rl("grove/runic_shears"));
 
     RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
         .save(RunicEntityRecipe.Builder.create().durabilityCost(10)
@@ -1109,13 +1182,34 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_kelp", has(Items.KELP)).save(PyreRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Items.WATER_BUCKET).requires(Items.CLAY_BALL)
-            .requires(Items.PUMPKIN).requires(Tags.Items.CROPS_SUGAR_CANE).requires(Items.KELP)
+            .requires(Items.SEAGRASS).requires(Tags.Items.CROPS_SUGAR_CANE).requires(Items.KELP)
             .result(ModItems.DEWGONIA, 2)), c, RootsAPI.rl("pyre/dewgonia"));
 
     RecipeSaver.saver().unlockedBy("has_netherrack", has(Tags.Items.NETHERRACKS)).save(PyreRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Items.MAGMA_CREAM).requires(Tags.Items.NETHERRACKS)
             .requires(ItemTags.COALS).requires(Items.STICK).requires(Items.BRICK)
             .result(ModItems.INFERNO_BULB, 2)), c, RootsAPI.rl("pyre/inferno_bulb"));
+
+    RecipeSaver.saver().unlockedBy("has_pink_tulip", has(Items.PINK_TULIP))
+        .save(PyreRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create().requires(Items.PINK_TULIP).requires(Items.SUGAR)
+                .requires(Items.APPLE).requires(Tags.Items.DUSTS_REDSTONE).requires(RootsTags.Items.AUBERGINE_CROP)
+                .result(ModItems.PERESKIA, 1)
+                .chanceOutput(ModItems.PERESKIA_BULB, 2, 1f)), c, RootsAPI.rl("pyre/pereskia"));
+
+    RecipeSaver.saver().unlockedBy("has_blue_orchid", has(Items.BLUE_ORCHID))
+        .save(PyreRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create().requires(Items.BLUE_ORCHID).requires(Tags.Items.GLASS_BLOCKS)
+                .requires(Tags.Items.GEMS_AMETHYST).requires(Tags.Items.NUGGETS_IRON)
+                .requires(RootsTags.Items.GROVE_MOSS_HERB).result(ModItems.MOONGLOW, 1)
+                .chanceOutput(ModItems.MOONGLOW_SEEDS, 2, 1f)), c, RootsAPI.rl("pyre/moonglow"));
+
+    RecipeSaver.saver().unlockedBy("has_brown_mushroom", has(Items.BROWN_MUSHROOM))
+        .save(PyreRecipe.Builder.create()
+            .build(BaseRecipeData.Builder.create().requires(Items.BROWN_MUSHROOM).requires(Items.RED_MUSHROOM)
+                .requires(Items.SPIDER_EYE).requires(RootsTags.Items.FERTILIZERS)
+                .requires(RootsTags.Items.WILDROOT_HERB)
+                .result(ModItems.BAFFLECAP, 2)), c, RootsAPI.rl("pyre/bafflecap"));
 
     RecipeSaver.saver().unlockedBy("has_glow_lichen", has(Items.GLOW_LICHEN)).save(PyreRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Items.GLOW_LICHEN).requires(Items.TUFF)

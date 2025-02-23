@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "roots:chiseled_runestone"
+  },
+  "result": {
+    "count": 1,
+    "id": "roots:runestone_brick"
+  }
+}

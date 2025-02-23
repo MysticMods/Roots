@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_decorative_soul_pyre": {
+      "conditions": {
+        "items": [
+          {
+            "items": "roots:soul_pyre"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lever": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:levers"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:decorative_soul_pyre_from_soul_pyre_and_lever"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_decorative_soul_pyre",
+      "has_lever"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:decorative_soul_pyre_from_soul_pyre_and_lever"
+    ]
+  }
+}

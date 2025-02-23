@@ -1,0 +1,35 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "chanceOutputs": [
+      {
+        "chance": 1.0,
+        "output": {
+          "count": 2,
+          "id": "roots:pereskia_bulb"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:pink_tulip"
+      },
+      {
+        "item": "minecraft:sugar"
+      },
+      {
+        "item": "minecraft:apple"
+      },
+      {
+        "tag": "c:dusts/redstone"
+      },
+      {
+        "tag": "roots:crops/aubergine"
+      }
+    ],
+    "result": {
+      "count": 1,
+      "id": "roots:pereskia"
+    }
+  }
+}

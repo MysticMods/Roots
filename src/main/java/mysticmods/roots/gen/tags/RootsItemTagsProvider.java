@@ -52,6 +52,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.WILDROOT_CROP).add(ModItems.WILDROOT.get());
     this.tag(RootsTags.Items.INFERNO_BULB_CROP).add(ModItems.INFERNO_BULB.get());
 
+    this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
     this.copy(RootsTags.Blocks.WATER_CROPS, RootsTags.Items.WATER_CROPS);
     this.copy(RootsTags.Blocks.EARTH_CROPS, RootsTags.Items.EARTH_CROPS);

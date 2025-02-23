@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "tag": "roots:runestone"
+    }
+  },
+  "pattern": [
+    "RRR",
+    " R ",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:ritual_pedestal"
+  }
+}
