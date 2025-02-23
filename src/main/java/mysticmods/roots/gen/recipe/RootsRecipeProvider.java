@@ -1472,6 +1472,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_netherite_ingot", has(Tags.Items.INGOTS_NETHERITE))
         .save(c, RootsAPI.rl("netherite_knife"));*/
 
+    // TODO: This is in the meincraft namespace
     netheriteSmithing(c, ModItems.DIAMOND_KNIFE.get(), RecipeCategory.COMBAT, ModItems.NETHERITE_KNIFE.get());
 
     // Copper
