@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-13T23:17:04.8938086	Loot Tables
+// 1.21.1	2025-02-23T21:35:34.8046204	Loot Tables
 e8472c417eb64cb3ad295f65ece125190c4620e0 data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -90,7 +90,7 @@ f0915afde2f764629134925e34c0d86197cc9f3c data/roots/loot_table/blocks/runestone_
 7b24aadac281f8ca508f10f477b9c68e7968a750 data/roots/loot_table/blocks/silver_block.json
 eba1598aa129e6d70a946b4591784fef12c4fd08 data/roots/loot_table/blocks/silver_ore.json
 b049f4d8c057f3c99fff11bd5714acb480a59893 data/roots/loot_table/blocks/soul_pyre.json
-ba9adc4c9bb5d4af0583a28406319b0e6023d6f2 data/roots/loot_table/blocks/spiritleaf_crop.json
+2bec4ff199b9efa4963c4cc446aa6a5ecfd54cbb data/roots/loot_table/blocks/spiritleaf_crop.json
 acd6b94f3c006218213114e7f030034b7cc116f1 data/roots/loot_table/blocks/stalicripe_crop.json
 5a25c8dd9c9ffc5dd70ca7aeed6e3f20ede536c2 data/roots/loot_table/blocks/stonepetal.json
 11f0af141e00ecfe2120db3ac6009a32f30f1818 data/roots/loot_table/blocks/stripped_wildwood_log.json

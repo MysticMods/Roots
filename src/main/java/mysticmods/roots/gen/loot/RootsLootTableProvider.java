@@ -8,6 +8,7 @@ import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.block.WildRootsBlock;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ElementalType;
+import mysticmods.roots.block.crop.FourStageCropBlock;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModItems;
@@ -351,7 +352,7 @@ public class RootsLootTableProvider {
       addElementalCropDrops(ModBlocks.STALICRIPE_CROP.get(), ModItems.STALICRIPE.get(), ElementalType.EARTH);
       addCropDrops(ModBlocks.MOONGLOW_CROP.get(), ModItems.MOONGLOW.get(), ModItems.MOONGLOW_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
       addCropDrops(ModBlocks.PERESKIA_CROP.get(), ModItems.PERESKIA.get(), ModItems.PERESKIA_BULB.get(), BaseBlocks.SeededCropsBlock.AGE);
-      addCropDrops(ModBlocks.SPIRITLEAF_CROP.get(), ModItems.SPIRITLEAF.get(), ModItems.SPIRITLEAF_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
+      addCropDrops(ModBlocks.SPIRITLEAF_CROP.get(), ModItems.SPIRITLEAF.get(), ModItems.SPIRITLEAF_SEEDS.get(), FourStageCropBlock.AGE);
       addCropDrops(ModBlocks.WILDEWHEET_CROP.get(), ModItems.WILDEWHEET.get(), ModItems.WILDEWHEET_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
       addCropDrops(ModBlocks.AUBERGINE_CROP.get(), ModItems.AUBERGINE.get(), ModItems.AUBERGINE_SEEDS.get(), BaseBlocks.SeededCropsBlock.AGE);
       add(ModBlocks.WILD_AUBERGINE.get(), this.applyExplosionDecay(ModBlocks.WILD_AUBERGINE.get(), LootTable.lootTable()
