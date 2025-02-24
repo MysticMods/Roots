@@ -362,6 +362,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS).addTags(BlockTags.LEAVES, RootsTags.Blocks.SHORT_GRASS).add(Blocks.SEAGRASS, Blocks.VINE, Blocks.CAVE_VINES, Blocks.DEAD_BUSH, Blocks.HANGING_ROOTS);
 
     tag(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS).addTags(RootsTags.Blocks.TALL_GRASS).add(Blocks.TALL_SEAGRASS);
+    tag(RootsTags.Blocks.FORAGEABLES).addTags(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS);
   }
 
   @Override

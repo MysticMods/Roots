@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-21T13:53:54.4804815	Roots Block Tags
+// 1.21.1	2025-02-24T14:57:02.2910196	Roots Block Tags
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/block/levers.json
@@ -89,6 +89,7 @@ c32082cb4a9a20e16cf30e8c55afd4219c657bd4 data/roots/tags/block/crops/moonglow.js
 ac79c9fee49d61de4d35103b3c501dcd9f00f5ff data/roots/tags/block/crops/stalicripe.json
 124deb91b6f2a320d3d065cdb42694d1905e1500 data/roots/tags/block/crops/wildewheet.json
 ecda61a71eb355925053fb56bfc8838b38a30dd2 data/roots/tags/block/crops/wildroot.json
+119233fd9e09f2482d0935240466f08a2e901a1b data/roots/tags/block/forageable/all.json
 aad685bc47fe5961230536c39cb94930971eb077 data/roots/tags/block/forageable/double.json
 0ae23011308e32f2a1e1a536aa42850c5ddaac70 data/roots/tags/block/forageable/single.json
 277febcb81e6cdedb2c430d51bcd1850d597779d data/roots/tags/block/granite_ore_replaceables.json

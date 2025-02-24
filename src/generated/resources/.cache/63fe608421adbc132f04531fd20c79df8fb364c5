@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-23T15:23:41.198052	Roots Item Tags
+// 1.21.1	2025-02-24T18:01:19.6011457	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -67,6 +67,7 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/item/crops/pereskia.jso
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/disable_disarming.json
 1b81ce702cc93595adbcfc8dd9dcb1a5e932c8c6 data/roots/tags/item/dusts/runic.json
 c7500f481948159c566ddedb8a200fe63a413a56 data/roots/tags/item/fertilizers.json
+feb585ff1dd437e8f10f0e203262652d250aed76 data/roots/tags/item/fey_leather.json
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/item/flint.json
 7c23110fe0420d3a96fab43595db02c682e00c68 data/roots/tags/item/foraging_eligible.json
 39ecf884f3bb83a88b7d180276a7ac692c52fc00 data/roots/tags/item/grove_crafter_activation.json

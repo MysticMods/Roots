@@ -17,6 +17,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
@@ -197,6 +198,7 @@ public class RootsTags {
 
     public static final TagKey<Block> FORAGEABLE_SINGLE_BLOCKS = modTag("forageable/single");
     public static final TagKey<Block> FORAGEABLE_DOUBLE_BLOCKS = modTag("forageable/double");
+    public static final TagKey<Block> FORAGEABLES = modTag("forageable/all");
 
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
@@ -400,6 +402,7 @@ public class RootsTags {
     public static final TagKey<Item> SPROUT_BREEDING_REWARDS = modTag("sprout_breeding_rewards");
 
     public static final TagKey<Item> FORAGING_ELIGIBLE = modTag("foraging_eligible");
+    public static final TagKey<Item> FEY_LEATHERS = modTag("fey_leather");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));

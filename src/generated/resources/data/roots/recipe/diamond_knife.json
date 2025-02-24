@@ -5,13 +5,16 @@
     "S": {
       "tag": "c:rods/wooden"
     },
+    "W": {
+      "tag": "roots:herbs/wildroot"
+    },
     "X": {
       "tag": "c:gems/diamond"
     }
   },
   "pattern": [
     "  X",
-    " S ",
+    " W ",
     "S  "
   ],
   "result": {

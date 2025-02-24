@@ -1429,26 +1429,29 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.WOODEN_KNIFE.get())
         .pattern("  X")
-        .pattern(" S ")
+        .pattern(" W ")
         .pattern("S  ")
         .define('S', Tags.Items.RODS_WOODEN)
+        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('X', ItemTags.PLANKS)
         .unlockedBy("has_planks", has(ItemTags.PLANKS))
         .save(c, RootsAPI.rl("wooden_knife"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.IRON_KNIFE.get())
         .pattern("  X")
-        .pattern(" S ")
+        .pattern(" W ")
         .pattern("S  ")
         .define('S', Tags.Items.RODS_WOODEN)
+        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('X', Tags.Items.INGOTS_IRON)
         .unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
         .save(c, RootsAPI.rl("iron_knife"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.GOLD_KNIFE.get())
         .pattern("  X")
-        .pattern(" S ")
+        .pattern(" W ")
         .pattern("S  ")
+        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('S', Tags.Items.RODS_WOODEN)
         .define('X', Tags.Items.INGOTS_GOLD)
         .unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
@@ -1456,21 +1459,13 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.DIAMOND_KNIFE.get())
         .pattern("  X")
-        .pattern(" S ")
+        .pattern(" W ")
         .pattern("S  ")
+        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('S', Tags.Items.RODS_WOODEN)
         .define('X', Tags.Items.GEMS_DIAMOND)
         .unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
         .save(c, RootsAPI.rl("diamond_knife"));
-
-/*    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.NETHERITE_KNIFE.get())
-        .pattern("  X")
-        .pattern(" S ")
-        .pattern("S  ")
-        .define('S', Tags.Items.RODS_WOODEN)
-        .define('X', Tags.Items.INGOTS_NETHERITE)
-        .unlockedBy("has_netherite_ingot", has(Tags.Items.INGOTS_NETHERITE))
-        .save(c, RootsAPI.rl("netherite_knife"));*/
 
     // TODO: This is in the meincraft namespace
     netheriteSmithing(c, ModItems.DIAMOND_KNIFE.get(), RecipeCategory.COMBAT, ModItems.NETHERITE_KNIFE.get());
@@ -1478,8 +1473,9 @@ public class RootsRecipeProvider extends RecipeProvider {
     // Copper
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_KNIFE.get())
         .pattern("  X")
-        .pattern(" S ")
+        .pattern(" W ")
         .pattern("S  ")
+        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('S', Tags.Items.RODS_WOODEN)
         .define('X', Tags.Items.INGOTS_COPPER)
         .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
@@ -1488,8 +1484,9 @@ public class RootsRecipeProvider extends RecipeProvider {
     // Silver
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.SILVER_KNIFE.get())
         .pattern("  X")
-        .pattern(" S ")
+        .pattern(" W ")
         .pattern("S  ")
+        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('S', Tags.Items.RODS_WOODEN)
         .define('X', RootsTags.Items.SILVER_INGOT)
         .unlockedBy("has_silver_ingot", has(RootsTags.Items.SILVER_INGOT))
@@ -1498,8 +1495,9 @@ public class RootsRecipeProvider extends RecipeProvider {
     // Stone
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.STONE_KNIFE.get())
         .pattern("  X")
-        .pattern(" S ")
+        .pattern(" W ")
         .pattern("S  ")
+        .define('W', RootsTags.Items.WILDROOT_HERB)
         .define('S', Tags.Items.RODS_WOODEN)
         .define('X', ItemTags.STONE_TOOL_MATERIALS)
         .unlockedBy("has_stone", has(ItemTags.STONE_TOOL_MATERIALS))
@@ -1623,6 +1621,13 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_antlers", has(RootsTags.Items.ANTLERS))
         .save(c, RootsAPI.rl("antler_helmet"));
 
+    ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, Items.SADDLE)
+        .pattern("FFF")
+        .pattern("FFF")
+        .pattern("F F")
+        .define('F', RootsTags.Items.FEY_LEATHERS)
+        .unlockedBy("has_fey_leather", has(RootsTags.Items.FEY_LEATHERS))
+        .save(c, RootsAPI.rl("fey_leather_saddle"));
 
   }
 

@@ -12,8 +12,9 @@ import net.neoforged.fml.config.ModConfig;
 
 // TODO:
 // - IMPORTANT: Caelic soil has sometimes no impact on cloud berry drops
+//   - Getting better but not perfect
 // - Fire starter is still inconsistent
-// - Changed copper recipes to use blocks
+// - Knives need to break leaves instantly
 
 
 // - Overhaul all block properties, stop using defaults.

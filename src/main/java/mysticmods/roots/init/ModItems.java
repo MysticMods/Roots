@@ -9,6 +9,7 @@ import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
@@ -284,13 +285,13 @@ public class ModItems {
   public static final DeferredHolder<Item, HoeItem> RUNED_HOE = ITEMS.register("runed_hoe", () -> new HoeItem(RootsAPI.RUNED_TIER, new Item.Properties().attributes(HoeItem.createAttributes(RootsAPI.RUNED_TIER, 0f, -3.f))));
   public static final DeferredHolder<Item, ShovelItem> RUNED_SHOVEL = ITEMS.register("runed_shovel", () -> new ShovelItem(RootsAPI.RUNED_TIER, new Item.Properties().attributes(ShovelItem.createAttributes(RootsAPI.RUNED_TIER, 1.5f, -3.0f))));
   public static final DeferredHolder<Item, SwordItem> RUNED_SWORD = ITEMS.register("runed_sword", () -> new SwordItem(RootsAPI.RUNED_TIER, new Item.Properties().attributes(SwordItem.createAttributes(RootsAPI.RUNED_TIER, 3.0f, -2.4f))));
-  public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = ITEMS.register("runic_shears", () -> new RunicShearsItem(new Item.Properties().durability(313).stacksTo(1)));
+  public static final DeferredHolder<Item, RunicShearsItem> RUNIC_SHEARS = ITEMS.register("runic_shears", () -> new RunicShearsItem(new Item.Properties().durability(313).stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static final DeferredHolder<Item, CastingItem> STAFF = ITEMS.register("staff", () -> new CastingItem(new Item.Properties().component(ModAttachments.SPELL_STORAGE, SpellStorage.EMPTY.get())
       .stacksTo(1)));
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384).stacksTo(1)));
   public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new Item(new Item.Properties().stacksTo(1)));
-  public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new ShearsItem(new Item.Properties().durability(120).stacksTo(1)));
+  public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new ShearsItem(new Item.Properties().durability(120).stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static DeferredHolder<Item, KnifeItem> WOODEN_KNIFE = ITEMS.register("wooden_knife", () -> new KnifeItem(Tiers.WOOD, new Item.Properties().component(ModAttachments.FORAGING, 1).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.WOOD, 1f, -2.4f))));
   public static DeferredHolder<Item, KnifeItem> STONE_KNIFE = ITEMS.register("stone_knife", () -> new KnifeItem(Tiers.STONE, new Item.Properties().component(ModAttachments.FORAGING, 2).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.STONE, 1f, -2.4f))));
   public static DeferredHolder<Item, KnifeItem> COPPER_KNIFE = ITEMS.register("copper_knife", () -> new KnifeItem(RootsAPI.COPPER_TIER, new Item.Properties().component(ModAttachments.FORAGING, 3).stacksTo(1).attributes(SwordItem.createAttributes(RootsAPI.COPPER_TIER, 1f, -2.4f))));

@@ -14,6 +14,8 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
+import static mysticmods.roots.init.ModItems.FEY_LEATHER;
+
 @SuppressWarnings({"NullableProblems", "unchecked"})
 public class RootsItemTagsProvider extends ItemTagsProvider {
   public RootsItemTagsProvider(PackOutput p_275343_, CompletableFuture<HolderLookup.Provider> p_275729_, CompletableFuture<TagLookup<Block>> p_275322_, @org.jetbrains.annotations.Nullable ExistingFileHelper existingFileHelper) {
@@ -257,6 +259,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.SPROUT_FOOD).addTag(RootsTags.Items.AUBERGINE_CROP);
 
     this.tag(RootsTags.Items.FORAGING_ELIGIBLE).addTag(RootsTags.Items.KNIVES).add(ModItems.LIVING_HOE.get());
+
+    this.tag(RootsTags.Items.FEY_LEATHERS).add(FEY_LEATHER.get());
   }
 
   @Override
