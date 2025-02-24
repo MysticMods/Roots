@@ -45,7 +45,7 @@ public record ForagingRandomChanceCondition(NumberProvider chance) implements Lo
     float baseChance = this.chance.getFloat(context);
     int foraging = ForagingUtil.getForagingValue(itemstack);
 
-    float maxMultiplier = 3.0f;
+    float maxMultiplier = 2f;
 
     float modifiedChance = Math.min(baseChance * (1 + (foraging / 6.0f) * (maxMultiplier - 1)), 0.9f);
 
