@@ -55,7 +55,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       return InteractionResult.CONSUME;
     }
 
-    if (inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
+    if (inHand.isEmpty() || inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
       GroveCrafting playerCrafting = new GroveCrafting(this, player);
       if (cachedRecipe == null) {
         cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerCrafting, getLevel());
