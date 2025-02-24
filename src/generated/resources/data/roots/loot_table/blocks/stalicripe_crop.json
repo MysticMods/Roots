@@ -29,196 +29,173 @@
       ],
       "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
+          "type": "minecraft:item",
+          "conditions": [
             {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "roots:stalicripe_crop",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "soil_type": "earth"
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "add": false,
-                  "count": 2.0,
-                  "function": "minecraft:set_count"
-                },
-                {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:binomial_with_bonus_count",
-                  "function": "minecraft:apply_bonus",
-                  "parameters": {
-                    "extra": 3,
-                    "probability": 0.2714286
-                  }
-                }
-              ],
-              "name": "roots:stalicripe"
-            },
-            {
-              "type": "minecraft:empty"
+              "block": "roots:stalicripe_crop",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "soil_type": "earth"
+              }
             }
-          ]
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "roots:stalicripe"
         },
         {
-          "type": "minecraft:alternatives",
-          "children": [
+          "type": "minecraft:item",
+          "conditions": [
             {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "roots:stalicripe_crop",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "soil_type": "earth"
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "add": false,
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 1.0,
-                    "min": 0.0
-                  },
-                  "function": "minecraft:set_count"
-                },
-                {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:binomial_with_bonus_count",
-                  "function": "minecraft:apply_bonus",
-                  "parameters": {
-                    "extra": 3,
-                    "probability": 0.2714286
-                  }
-                }
-              ],
-              "name": "roots:stalicripe"
+              "block": "roots:stalicripe_crop",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "soil_type": "earth"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
             },
             {
-              "type": "minecraft:empty"
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "function": "minecraft:apply_bonus",
+              "parameters": {
+                "extra": 3,
+                "probability": 0.2714286
+              }
             }
-          ]
+          ],
+          "name": "roots:stalicripe"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "roots:stalicripe_crop",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "roots:stalicripe_crop",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "soil_type": "default"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "roots:stalicripe"
         },
         {
-          "type": "minecraft:alternatives",
-          "children": [
+          "type": "minecraft:item",
+          "conditions": [
             {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "roots:stalicripe_crop",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "soil_type": "default"
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:binomial_with_bonus_count",
-                  "function": "minecraft:apply_bonus",
-                  "parameters": {
-                    "extra": 3,
-                    "probability": 0.2714286
-                  }
-                }
-              ],
-              "name": "roots:stalicripe"
+              "block": "roots:stalicripe_crop",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "soil_type": "default"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
             },
             {
-              "type": "minecraft:empty"
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "function": "minecraft:apply_bonus",
+              "parameters": {
+                "extra": 3,
+                "probability": 0.2714286
+              }
             }
-          ]
-        },
+          ],
+          "name": "roots:stalicripe"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "roots:stalicripe_crop",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "soil_type": "default"
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "add": false,
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 1.0,
-                    "min": 0.0
-                  },
-                  "function": "minecraft:set_count"
-                },
-                {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:binomial_with_bonus_count",
-                  "function": "minecraft:apply_bonus",
-                  "parameters": {
-                    "extra": 3,
-                    "probability": 0.2714286
-                  }
-                }
-              ],
-              "name": "roots:stalicripe"
-            },
-            {
-              "type": "minecraft:empty"
-            }
-          ]
-        },
+          "block": "roots:stalicripe_crop",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "3"
+          }
+        }
+      ],
+      "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
+          "type": "minecraft:item",
+          "conditions": [
             {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "block": "roots:stalicripe_crop",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "soil_type": "none"
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "add": false,
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 1.0,
-                    "min": 0.0
-                  },
-                  "function": "minecraft:set_count"
-                },
-                {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:binomial_with_bonus_count",
-                  "function": "minecraft:apply_bonus",
-                  "parameters": {
-                    "extra": 3,
-                    "probability": 0.2714286
-                  }
-                }
-              ],
-              "name": "roots:stalicripe"
+              "block": "roots:stalicripe_crop",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "soil_type": "none"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
             },
             {
-              "type": "minecraft:empty"
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "function": "minecraft:apply_bonus",
+              "parameters": {
+                "extra": 3,
+                "probability": 0.2714286
+              }
             }
-          ]
+          ],
+          "name": "roots:stalicripe"
         }
       ],
       "rolls": 1.0

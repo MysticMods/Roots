@@ -1250,14 +1250,14 @@ public class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_blue_orchid", has(Items.BLUE_ORCHID))
         .save(PyreRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create().requires(Items.BLUE_ORCHID).requires(Tags.Items.GLASS_BLOCKS)
-                .requires(Tags.Items.GEMS_AMETHYST).requires(Tags.Items.NUGGETS_IRON)
+                .requires(RootsTags.Items.SILVER_NUGGET).requires(Tags.Items.NUGGETS_IRON)
                 .requires(RootsTags.Items.GROVE_MOSS_HERB).result(ModItems.MOONGLOW, 1)
                 .chanceOutput(ModItems.MOONGLOW_SEEDS, 2, 1f)), c, RootsAPI.rl("pyre/moonglow"));
 
     RecipeSaver.saver().unlockedBy("has_brown_mushroom", has(Items.BROWN_MUSHROOM))
         .save(PyreRecipe.Builder.create()
             .build(BaseRecipeData.Builder.create().requires(Items.BROWN_MUSHROOM).requires(Items.RED_MUSHROOM)
-                .requires(Items.SPIDER_EYE).requires(RootsTags.Items.FERTILIZERS)
+                .requires(Items.ALLIUM).requires(RootsTags.Items.FERTILIZERS)
                 .requires(RootsTags.Items.WILDROOT_HERB)
                 .result(ModItems.BAFFLECAP, 2)), c, RootsAPI.rl("pyre/bafflecap"));
 

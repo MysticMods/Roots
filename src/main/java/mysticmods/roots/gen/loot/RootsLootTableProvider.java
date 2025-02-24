@@ -14,6 +14,7 @@ import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.loot.conditions.HasHornsCondition;
 import mysticmods.roots.mixin.AccessorMixinBlockLootSubProvider;
+import mysticmods.roots.mixin.AccessorMixinCropBlock;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -367,8 +368,8 @@ public class RootsLootTableProvider {
       add(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get()));
     }
 
-    protected void addElementalCropDrops(Block cropBlock, Item cropItem, ElementalType matchingSoil) {
-      IntegerProperty ageProperty = ElementalCropBlock.AGE;
+    protected void addElementalCropDrops(ElementalCropBlock cropBlock, Item cropItem, ElementalType matchingSoil) {
+      IntegerProperty ageProperty = ((AccessorMixinCropBlock) cropBlock).callGetAgeProperty();
 
       HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 
@@ -376,7 +377,7 @@ public class RootsLootTableProvider {
       // Crop not grown
       LootItemCondition.Builder cropIsGrownCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
           .setProperties(StatePropertiesPredicate.Builder.properties()
-              .hasProperty(ageProperty, Collections.max(ageProperty.getPossibleValues())));
+              .hasProperty(ageProperty, cropBlock.getMaxAge()));
       LootItemCondition.Builder normalSoilCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
           .setProperties(StatePropertiesPredicate.Builder.properties()
               .hasProperty(ElementalType.SOIL_TYPE, ElementalType.NONE));
@@ -389,38 +390,49 @@ public class RootsLootTableProvider {
 
       LootItemConditionalFunction.Builder<?> fortune = ApplyBonusCount.addBonusBinomialDistributionCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.2714286F, 3);
 
-      // No elemental soil: 1 normal drop with a 1/2 chance of a second
-      // Base elemental soil: 2 normal drop with a 1/2 chance of a second
-      // Matching elemental soil: 3 normal drop with a 1/2 chance of a second
       add(cropBlock, this.applyExplosionDecay(
           cropBlock,
           LootTable.lootTable()
+              // Always drop 1 item as the seed, regardless of growth or soil type
               .withPool(LootPool.lootPool()
-                  .add(LootItem.lootTableItem(cropItem))) // Default 1
+                  .add(LootItem.lootTableItem(cropItem))
+              )
               .withPool(
                   LootPool.lootPool()
                       .when(cropIsGrownCondition)
+                      // Matching Soil: Guaranteed 2 more (Total 3), plus 50% chance of 1 more
                       .add(LootItem.lootTableItem(cropItem)
-                          .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))).apply(fortune)
+                          .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))) // Exact 2 more
                           .when(matchingElementalSoilCondition)
-                          .otherwise(EmptyLootItem.emptyItem())) // Matching soil default 2
+                      )
                       .add(LootItem.lootTableItem(cropItem)
                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune)
                           .when(matchingElementalSoilCondition)
-                          .otherwise(EmptyLootItem.emptyItem())) // Matching soil extra chance
-                      .add(LootItem.lootTableItem(cropItem).apply(fortune).when(plainElementalSoilCondition)
-                          .otherwise(EmptyLootItem.emptyItem())) // Base soil default 1
+                      )
+              )
+              .withPool(
+                  LootPool.lootPool()
+                      .when(cropIsGrownCondition)
+                      // Base Elemental Soil: Guaranteed 1 more (Total 2), plus 50% chance of 1 more
+                      .add(LootItem.lootTableItem(cropItem)
+                          .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))) // Exact 1 more
+                          .when(plainElementalSoilCondition)
+                      )
                       .add(LootItem.lootTableItem(cropItem)
                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune)
                           .when(plainElementalSoilCondition)
-                          .otherwise(EmptyLootItem.emptyItem())) // Base soil extra chance
+                      )
+              )
+              .withPool(
+                  LootPool.lootPool()
+                      .when(cropIsGrownCondition)
+                      // Normal Soil: 50% chance of 1 more (Total 1 or 2)
                       .add(LootItem.lootTableItem(cropItem)
                           .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1))).apply(fortune)
-                          .when(normalSoilCondition).otherwise(EmptyLootItem.emptyItem())) // No soil default 2
-
-              )));
-
-
+                          .when(normalSoilCondition)
+                      )
+              )
+      ));
     }
 
     protected void addCropDrops(Block cropBlock, Item grownCropItem, Item seedsItem, IntegerProperty ageProperty) {

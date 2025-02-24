@@ -265,7 +265,7 @@
       "canGrowFunction": "roots:age_can_grow",
       "cropBlock": "roots:spiritleaf_crop",
       "lightFunction": "roots:light_above_eight",
-      "maximumAge": 7,
+      "maximumAge": 4,
       "ticks": 2
     },
     "roots:stalicripe_crop": {

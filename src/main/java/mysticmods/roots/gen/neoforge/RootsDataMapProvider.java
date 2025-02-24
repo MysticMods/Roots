@@ -15,6 +15,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.block.crop.FourStageCropBlock;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
@@ -355,7 +356,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder16.add(ModBlocks.MOONGLOW_CROP, HarvestRecord.of(ModBlocks.MOONGLOW_CROP.get(), ModTests.AGE_REPLANT.get()), false);
     builder15.add(ModBlocks.PERESKIA_CROP, new GrowthRecord(ModBlocks.PERESKIA_CROP.get(), Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
     builder16.add(ModBlocks.PERESKIA_CROP, HarvestRecord.of(ModBlocks.PERESKIA_CROP.get(), ModTests.AGE_REPLANT.get()), false);
-    builder15.add(ModBlocks.SPIRITLEAF_CROP, new GrowthRecord(ModBlocks.SPIRITLEAF_CROP.get(), Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
+    builder15.add(ModBlocks.SPIRITLEAF_CROP, new GrowthRecord(ModBlocks.SPIRITLEAF_CROP.get(), Optional.of(FourStageCropBlock.AGE), FourStageCropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
     builder16.add(ModBlocks.SPIRITLEAF_CROP, HarvestRecord.of(ModBlocks.SPIRITLEAF_CROP.get(), ModTests.AGE_REPLANT.get()), false);
     builder15.add(ModBlocks.WILDEWHEET_CROP, new GrowthRecord(ModBlocks.WILDEWHEET_CROP.get(), Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
     builder16.add(ModBlocks.WILDEWHEET_CROP, HarvestRecord.of(ModBlocks.WILDEWHEET_CROP.get(), ModTests.AGE_REPLANT.get()), false);
