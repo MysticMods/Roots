@@ -12,8 +12,7 @@ import net.neoforged.fml.config.ModConfig;
 
 // TODO:
 // - IMPORTANT: Caelic soil has sometimes no impact on cloud berry drops
-// - Sugar cane gets to age 15 and stops acceptuing ticks
-// - Fire starter is still inconsitent
+// - Fire starter is still inconsistent
 
 
 // - Overhaul all block properties, stop using defaults.

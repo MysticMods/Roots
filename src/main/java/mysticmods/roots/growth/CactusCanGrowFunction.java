@@ -19,7 +19,8 @@ public class CactusCanGrowFunction extends CanGrowFunction {
     }
 
     if (i < 3) {
-      return ModTests.AGE_CAN_GROW.get().test(level, pos, blockState, ageProperty, maxmimumAge);
+      return true;
+      //return ModTests.AGE_CAN_GROW.get().test(level, pos, blockState, ageProperty, maxmimumAge);
     }
 
     return false;
