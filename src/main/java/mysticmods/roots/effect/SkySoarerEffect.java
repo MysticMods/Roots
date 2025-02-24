@@ -6,6 +6,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.vehicle.Boat;
 
 // Does nothing for non-player mobs
 public class SkySoarerEffect extends MobEffect {
@@ -27,8 +28,14 @@ public class SkySoarerEffect extends MobEffect {
       vehicle.hasImpulse = true;
       vehicle.hurtMarked = true;
       vehicle.fallDistance = 0f;
-      vehicle.setDeltaMovement(player.getLookAngle()
-          .multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
+      if (vehicle instanceof Boat) {
+        // TODO: Post-apply
+        vehicle.setDeltaMovement(vehicle.getLookAngle()
+            .multiply(sky.getAmplifier(), 0, sky.getAmplifier()));
+      } else {
+        vehicle.setDeltaMovement(player.getLookAngle()
+            .multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
+      }
     });
     return true;
   }
