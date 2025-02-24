@@ -11,10 +11,12 @@ import java.util.function.BiConsumer;
 
 public class SnapshotHelper {
   public static <T extends Snapshot> void applyLivingOrVehicle(Entity living, SnapshotType<T> serializer, TriConsumer<Entity, Entity, T> consumer) {
-    SnapshotStorage storage = living.getRootVehicle().getData(ModAttachments.SNAPSHOT_STORAGE);
-    storage.ifPresent(living, serializer, snap -> consumer.accept(living.getRootVehicle(), living, snap));
+    Entity rootVehicle = living.getRootVehicle();
+
+    SnapshotStorage storage = living.getData(ModAttachments.SNAPSHOT_STORAGE);
+    storage.ifPresent(living, serializer, snap -> consumer.accept(rootVehicle, living, snap));
     if (storage.isDirty()) {
-      living.getRootVehicle().setData(ModAttachments.SNAPSHOT_STORAGE, storage);
+      living.setData(ModAttachments.SNAPSHOT_STORAGE, storage);
     }
   }
 
