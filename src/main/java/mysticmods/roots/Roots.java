@@ -11,7 +11,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
-// - Wooden shears on hives -> runic shears work fine
 // - IMPORTANT: Caelic soil has sometimes no impact on cloud berry drops
 // - Sugar cane gets to age 15 and stops acceptuing ticks
 // - Fire starter is still inconsitent
