@@ -15,7 +15,10 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
-import mysticmods.roots.init.*;
+import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.init.ModItems;
+import mysticmods.roots.init.ModRituals;
+import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
@@ -36,6 +39,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -55,7 +59,10 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
   private static BoundingBox PYRE_BOUNDS;
@@ -145,7 +152,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         RecipeUtil.refillRecipeFromPlayer((ServerPlayer) player, lastRecipe.value(), inventory);
       }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
-      return light(player);
+      InteractionResult result = light(player);
+      if (result.indicateItemUse() && inHand.isDamageableItem()) {
+        inHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+      }
+      return result;
     } else {
       // insert
       ItemStack result = inventory.insert(inHand);
@@ -245,12 +256,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
 
     if (cache == null || !this.cache.getPosition().equals(p)) {
       BoundingBox bb = currentRitual.getBoundingBox().moved(p.getX(), p.getY(), p.getZ());
-      this.cache = new RitualPositionCache(p, bb, new ArrayList<>(BlockPos.betweenClosedStream(bb).map(BlockPos::immutable).toList()));
+      this.cache = new RitualPositionCache(p, bb, new ArrayList<>(BlockPos.betweenClosedStream(bb)
+          .map(BlockPos::immutable).toList()));
     }
   }
 
   @Nullable
-  public RitualPositionCache getCache () {
+  public RitualPositionCache getCache() {
     return cache;
   }
 
