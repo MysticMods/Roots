@@ -7,6 +7,7 @@ import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.MortarBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;
 import mysticmods.roots.client.blockentity.PyreBlockEntityRenderer;
+import mysticmods.roots.client.gui.screen.HerbPouchScreen;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
 import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
@@ -159,6 +160,11 @@ public class ClientSetup {
 
     event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
     event.registerSpecial(ModParticles.GROWTH_EMITTER.get(), new GrowthEmitter.Provider());
+  }
+
+  @SubscribeEvent
+  public static void onRegisterScreens (RegisterMenuScreensEvent event) {
+    event.register(ModContainers.HERB_POUCH.get(), HerbPouchScreen::new);
   }
 
   public static final ModelResourceLocation GIFT_BOX = new ModelResourceLocation(SproutEntity.GIFT_BOX, "standalone");
