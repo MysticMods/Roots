@@ -65,7 +65,7 @@ public class ModItems {
           }),
       7,
       SoundEvents.ARMOR_EQUIP_IRON,
-      () -> Ingredient.of(Tags.Items.INGOTS_COPPER),
+      () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER),
       List.of(new ArmorMaterial.Layer(RootsAPI.rl("copper"))),
       0.0f,
       0.0f));

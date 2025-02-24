@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "C": {
-      "tag": "c:ingots/copper"
+      "tag": "c:storage_blocks/copper"
     }
   },
   "pattern": [

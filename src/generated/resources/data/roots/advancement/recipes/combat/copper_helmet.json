@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/copper"
+            "items": "#c:storage_blocks/copper"
           }
         ]
       },

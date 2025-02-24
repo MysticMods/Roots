@@ -1539,31 +1539,31 @@ public class RootsRecipeProvider extends RecipeProvider {
     ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_HELMET.get())
         .pattern("CCC")
         .pattern("C C")
-        .define('C', Tags.Items.INGOTS_COPPER)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_helmet"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_CHESTPLATE.get())
         .pattern("C C")
         .pattern("CCC")
         .pattern("CCC")
-        .define('C', Tags.Items.INGOTS_COPPER)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_chestplate"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_LEGGINGS.get())
         .pattern("CCC")
         .pattern("C C")
         .pattern("C C")
-        .define('C', Tags.Items.INGOTS_COPPER)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_leggings"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.COPPER_BOOTS.get())
         .pattern("C C")
         .pattern("C C")
-        .define('C', Tags.Items.INGOTS_COPPER)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_boots"));
 
     // Copper axe
@@ -1571,9 +1571,9 @@ public class RootsRecipeProvider extends RecipeProvider {
         .pattern("CC")
         .pattern("CS")
         .pattern(" S")
-        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
         .define('S', Tags.Items.RODS_WOODEN)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_axe"));
 
     // Copper hoe
@@ -1581,9 +1581,9 @@ public class RootsRecipeProvider extends RecipeProvider {
         .pattern("CC")
         .pattern(" S")
         .pattern(" S")
-        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
         .define('S', Tags.Items.RODS_WOODEN)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_hoe"));
 
     // Copper pickaxe
@@ -1591,9 +1591,9 @@ public class RootsRecipeProvider extends RecipeProvider {
         .pattern("CCC")
         .pattern(" S ")
         .pattern(" S ")
-        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
         .define('S', Tags.Items.RODS_WOODEN)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_pickaxe"));
 
     // Copper shovel
@@ -1601,9 +1601,9 @@ public class RootsRecipeProvider extends RecipeProvider {
         .pattern("C")
         .pattern("S")
         .pattern("S")
-        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
         .define('S', Tags.Items.RODS_WOODEN)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_shovel"));
 
     // Copper sword
@@ -1611,9 +1611,9 @@ public class RootsRecipeProvider extends RecipeProvider {
         .pattern("C")
         .pattern("C")
         .pattern("S")
-        .define('C', Tags.Items.INGOTS_COPPER)
+        .define('C', Tags.Items.STORAGE_BLOCKS_COPPER)
         .define('S', Tags.Items.RODS_WOODEN)
-        .unlockedBy("has_copper_ingot", has(Tags.Items.INGOTS_COPPER))
+        .unlockedBy("has_copper_ingot", has(Tags.Items.STORAGE_BLOCKS_COPPER))
         .save(c, RootsAPI.rl("copper_sword"));
 
     ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.ANTLER_HAT.get())
