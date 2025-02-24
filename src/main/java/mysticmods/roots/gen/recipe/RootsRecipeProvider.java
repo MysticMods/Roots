@@ -1242,7 +1242,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_pink_tulip", has(Items.PINK_TULIP))
         .save(PyreRecipe.Builder.create()
-            .build(BaseRecipeData.Builder.create().requires(Items.PINK_TULIP).requires(Items.SUGAR)
+            .build(BaseRecipeData.Builder.create().requires(Items.POPPY).requires(Items.SUGAR)
                 .requires(Items.APPLE).requires(Tags.Items.DUSTS_REDSTONE).requires(RootsTags.Items.AUBERGINE_CROP)
                 .result(ModItems.PERESKIA, 1)
                 .chanceOutput(ModItems.PERESKIA_BULB, 2, 1f)), c, RootsAPI.rl("pyre/pereskia"));

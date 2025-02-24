@@ -59,7 +59,7 @@ public class SkySoarerSpell extends Spell {
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.SKY_SOARER, duration, 0));
     Vec3 vehicleMovement = pPlayer.getVehicle() != null ? pPlayer.getVehicle().getDeltaMovement() : Vec3.ZERO;
-    SnapshotHelper.addLivingOrVehicle(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, duration + 40, pPlayer.getDeltaMovement(), vehicleMovement, amplifier));
+    SnapshotHelper.addLiving(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, duration + 40, pPlayer.getDeltaMovement(), vehicleMovement, amplifier));
     return cooldown;
   }
 }
