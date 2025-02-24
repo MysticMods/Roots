@@ -1145,8 +1145,8 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .requires(RootsTags.Items.MOONGLOW_HERB)
                 .requires(Items.SUNFLOWER) // TODO: Tag?
                 .requires(Tags.Items.RAW_MATERIALS_IRON)
-                .requires(ItemTags.STONE_CRAFTING_MATERIALS) // TODO: Tag
-                .requires(ModItems.GLASS_EYE) // TODO: Tag
+                .requires(ItemTags.STONE_CRAFTING_MATERIALS)
+                .requires(Items.HONEYCOMB)
         ), c, RootsAPI.rl("pyre/protection"));
 
     RecipeSaver.saver().unlockedBy("has_cloud_berry", has(RootsTags.Items.CLOUD_BERRY_HERB))
