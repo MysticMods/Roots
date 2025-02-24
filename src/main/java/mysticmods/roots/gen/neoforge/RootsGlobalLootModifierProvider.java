@@ -78,12 +78,12 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
     this.add("grove_spores_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.008f, true), ModItems.GROVE_SPORES));
     this.add("wildroot_from_tall_grass", new AddGrassDropsModifier(getGrassConditions(RootsTags.Blocks.TALL_GRASS, 0.004f, true), ModItems.WILDROOT));
 
-    this.add("grove_spores_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.05f, false, false), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_waterlogged_foreagable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.1f, false, true), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.05f, true, false), ModItems.GROVE_SPORES));
-    this.add("grove_spores_from_waterlogged_foreagable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.1f, true, true), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, false), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_waterlogged_foreagable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.03f, false, true), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, true, false), ModItems.GROVE_SPORES));
+    this.add("grove_spores_from_waterlogged_foreagable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.03f, true, true), ModItems.GROVE_SPORES));
 
-    this.add("wildroot_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.05f, false, false), ModItems.WILDROOT));
-    this.add("wildroot_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.05f, true, false), ModItems.WILDROOT));
+    this.add("wildroot_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, false), ModItems.WILDROOT));
+    this.add("wildroot_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, true, false), ModItems.WILDROOT));
   }
 }

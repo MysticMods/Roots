@@ -2,7 +2,7 @@
   "type": "roots:add_grass_drops",
   "conditions": [
     {
-      "chance": 0.05,
+      "chance": 0.01,
       "condition": "roots:foraging_random_chance"
     },
     {
