@@ -18,8 +18,8 @@ public class ModParticles {
   private static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, RootsAPI.MODID);
 
   // Emitters
-  public static final DeferredHolder<ParticleType<?>, ParticleType<SimpleParticleType>> FEY_LIGHT_EMITTER = PARTICLES.register("fey_light_emitter", () -> new SimpleParticleType(false));
-  public static final Supplier<ParticleOptions> FEY_LIGHT_EMITTER_TYPE = Suppliers.memoize(() -> (ParticleOptions) ModParticles.FEY_LIGHT_EMITTER.get());
+  public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FEY_LIGHT_EMITTER = PARTICLES.register("fey_light_emitter", () -> new SimpleParticleType(false));
+  public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GROWTH_EMITTER = PARTICLES.register("growth_emitter", () -> new SimpleParticleType(false));
 
   // Actual particles
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> PYRE = PARTICLES.register("pyre", () -> new ColorGravityParticleType(false));
@@ -28,6 +28,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> FEY_LIGHT = PARTICLES.register("fey_light", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> WILDFIRE = PARTICLES.register("wildfire", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> GEAS = PARTICLES.register("geas", () -> new ColorGravityParticleType(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> GROWTH = PARTICLES.register("growth", () -> new ColorGravityParticleType(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);

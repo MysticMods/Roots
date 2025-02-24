@@ -13,6 +13,8 @@ import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.*;
+import mysticmods.roots.client.particle.emitter.FeyLightEmitter;
+import mysticmods.roots.client.particle.emitter.GrowthEmitter;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.entity.SproutEntity;
 import mysticmods.roots.init.*;
@@ -153,8 +155,10 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.FEY_LIGHT.get(), FeyLightParticle.Provider::new);
     event.registerSpriteSet(ModParticles.WILDFIRE.get(), WildfireParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GEAS.get(), GeasParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.GROWTH.get(), GrowthParticle.Provider::new);
 
     event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
+    event.registerSpecial(ModParticles.GROWTH_EMITTER.get(), new GrowthEmitter.Provider());
   }
 
   public static final ModelResourceLocation GIFT_BOX = new ModelResourceLocation(SproutEntity.GIFT_BOX, "standalone");

@@ -1,32 +1,6 @@
 package mysticmods.roots.client;
 
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-
-
-/*@EventBusSubscriber(defaultValue = Dist.CLIENT, modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)*/
 public class RootsRenderer {
-  public static TextureAtlasSprite whiteIcon;
-
-  // TODO: Generate atlas sprites
-/*  @SubscribeEvent
-  public static void onStitchPre(TextureStitchEvent.Pre event) {
-    // TODO: This shouldn't be done like this; also is it needed any more?
-    if (!event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
-      return;
-    }
-
-    event.addSprite(RootsAPI.rl("block/overlay/overlay_white"));
-  }
-
-  @SubscribeEvent
-  public static void onStitchPost(TextureStitchEvent.Post event) {
-    TextureAtlas map = event.getAtlas();
-    if (!map.location().equals(TextureAtlas.LOCATION_BLOCKS)) {
-      return;
-    }
-    whiteIcon = map.getSprite(RootsAPI.rl("block/overlay/overlay_white"));
-  }*/
-
   public static int getColorARGB(int red, int green, int blue, float alpha) {
     if (alpha < 0) {
       alpha = 0;

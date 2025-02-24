@@ -53,7 +53,7 @@ public class FeyLightBlock extends Block {
     super.animateTick(pState, pLevel, pPos, pRand);
     if (pRand.nextInt(2) == 0) {
       pLevel.addParticle(
-          ModParticles.FEY_LIGHT_EMITTER_TYPE.get(),
+          ModParticles.FEY_LIGHT_EMITTER.get(),
           pPos.getX() + 0.5,
           pPos.getY() + 0.5,
           pPos.getZ() + 0.5,
