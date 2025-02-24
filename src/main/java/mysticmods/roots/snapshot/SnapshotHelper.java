@@ -10,7 +10,7 @@ import org.apache.logging.log4j.util.TriConsumer;
 import java.util.function.BiConsumer;
 
 public class SnapshotHelper {
-  public static <T extends Snapshot> void applyLivingOrVehicle(Entity living, SnapshotType<T> serializer, TriConsumer<Entity, Entity, T> consumer) {
+  public static <T extends Snapshot> void applyLivingWithVehicle(Entity living, SnapshotType<T> serializer, TriConsumer<Entity, Entity, T> consumer) {
     Entity rootVehicle = living.getRootVehicle();
 
     SnapshotStorage storage = living.getData(ModAttachments.SNAPSHOT_STORAGE);
