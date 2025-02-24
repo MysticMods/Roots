@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fey_leather": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#roots:fey_leather"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "roots:fey_leather_saddle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_fey_leather"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "roots:fey_leather_saddle"
+    ]
+  }
+}
