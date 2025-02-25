@@ -158,17 +158,13 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     simpleBlock(ModBlocks.CREEPING_GROVE_MOSS.get(), models().singleTexture(ModBlocks.CREEPING_GROVE_MOSS.getKey()
             .location().getPath(), mcLoc("block/carpet"), "wool", modLoc("block/creeping_grove_moss"))
         .renderType("cutout"));
+    ModelFile hangingGroveMoss = models().withExistingParent("hanging_grove_moss", modLoc("block/complex/hanging_grove_moss")).renderType("cutout");
     getVariantBuilder(ModBlocks.HANGING_GROVE_MOSS.get())
         .forAllStates(state -> {
           Direction dir = state.getValue(HangingGroveMossBlock.FACING);
-          ModelFile model = switch (dir) {
-            case EAST -> models().withExistingParent("hanging_grove_moss_east", modLoc("block/complex/hanging_grove_moss_east")).renderType("cutout");
-            case WEST -> models().withExistingParent("hanging_grove_moss_west", modLoc("block/complex/hanging_grove_moss_west")).renderType("cutout");
-            case SOUTH -> models().withExistingParent("hanging_grove_moss_south", modLoc("block/complex/hanging_grove_moss_south")).renderType("cutout");
-            default -> models().withExistingParent("hanging_grove_moss_north", modLoc("block/complex/hanging_grove_moss_north")).renderType("cutout");
-          };
           return ConfiguredModel.builder()
-              .modelFile(model)
+              .modelFile(hangingGroveMoss)
+              .rotationY(dir.getAxis().isVertical() ? 0 : (int) dir.toYRot())
               .build();
         });
 

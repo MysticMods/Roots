@@ -3,8 +3,11 @@ package mysticmods.roots.event.setup;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.init.ModBlocks;
+import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.P;
+import mysticmods.roots.item.KnifeItem;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -49,6 +52,16 @@ public class CommonSetup {
       fire.setFlammable(ModBlocks.HANGING_GROVE_MOSS.get(), 1, 1);
       fire.setFlammable(ModBlocks.CREEPING_GROVE_MOSS.get(), 1, 1);
       fire.setFlammable(ModBlocks.WILD_AUBERGINE.get(), 60, 100);
+
+      KnifeItem.KnifeDispenseBehaviour behaviour = new KnifeItem.KnifeDispenseBehaviour();
+      DispenserBlock.registerBehavior(ModItems.WOODEN_KNIFE.get(), behaviour);
+      DispenserBlock.registerBehavior(ModItems.STONE_KNIFE.get(), behaviour);
+      DispenserBlock.registerBehavior(ModItems.COPPER_KNIFE.get(), behaviour);
+      DispenserBlock.registerBehavior(ModItems.IRON_KNIFE.get(), behaviour);
+      DispenserBlock.registerBehavior(ModItems.GOLD_KNIFE.get(), behaviour);
+      DispenserBlock.registerBehavior(ModItems.SILVER_KNIFE.get(), behaviour);
+      DispenserBlock.registerBehavior(ModItems.DIAMOND_KNIFE.get(), behaviour);
+      DispenserBlock.registerBehavior(ModItems.NETHERITE_KNIFE.get(), behaviour);
     });
   }
 }

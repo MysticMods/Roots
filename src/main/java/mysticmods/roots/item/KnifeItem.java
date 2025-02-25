@@ -2,13 +2,20 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.bark.BarkRecipe;
+import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,10 +31,20 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.List;
+import java.util.Optional;
 
 public class KnifeItem extends TieredItem {
   public KnifeItem(Tier tier, Properties props) {
@@ -100,5 +117,52 @@ public class KnifeItem extends TieredItem {
   @Override
   public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
     stack.hurtAndBreak(2, attacker, EquipmentSlot.MAINHAND);
+  }
+
+  public static class KnifeDispenseBehaviour extends DefaultDispenseItemBehavior {
+    @Override
+    protected ItemStack execute(BlockSource blockSource, ItemStack item) {
+      BlockState state = blockSource.state();
+      if (!state.hasProperty(DispenserBlock.FACING)) {
+        return ItemStack.EMPTY;
+      }
+      Direction facing = state.getValue(DispenserBlock.FACING);
+      BlockPos target = blockSource.pos().relative(facing);
+      ServerLevel level = blockSource.level();
+      state = level.getBlockState(target);
+      if (!state.is(ModBlocks.CREEPING_GROVE_MOSS)) {
+        return item;
+      }
+
+      Player fakePlayer = FakePlayerFactory.get(level, FakePlayerUtil.ROOTS);
+      fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, item);
+      LootParams.Builder builder = new LootParams.Builder(level)
+          .withParameter(LootContextParams.ORIGIN, blockSource.center())
+          .withParameter(LootContextParams.BLOCK_STATE, state)
+          .withOptionalParameter(LootContextParams.BLOCK_ENTITY, null)
+          .withOptionalParameter(LootContextParams.THIS_ENTITY, fakePlayer)
+          .withParameter(LootContextParams.TOOL, item);
+      List<ItemStack> result = state.getDrops(builder);
+
+      level.setBlock(target, Blocks.AIR.defaultBlockState(), 3);
+      BlockPos above = blockSource.pos().above();
+      IItemHandler cap = level.getCapability(Capabilities.ItemHandler.BLOCK, above, null);
+      if (cap == null) {
+        for (ItemStack r : result) {
+          ItemUtil.Spawn.spawnItem(level, above, r);
+        }
+      } else {
+        for (ItemStack r : result) {
+          ItemStack r2 = ItemHandlerHelper.insertItem(cap, r, false);
+          if (!result.isEmpty()) {
+            ItemUtil.Spawn.spawnItem(level, above, r2);
+          }
+        }
+      }
+
+      item.hurtAndBreak(1, level, null, o -> {});
+
+      return item;
+    }
   }
 }

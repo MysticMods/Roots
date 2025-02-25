@@ -11,6 +11,10 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
+// - Nondetection
+//     Causes creepers to explode
+//     Doesn't stop alerts
+
 // - IMPORTANT: Caelic soil has sometimes no impact on cloud berry drops
 // - Elemental crop: get state for placement check soil types instead of just updating
 //   - Getting better but not perfect
