@@ -155,7 +155,7 @@ public class RootsDataPackGenerators {
                       InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
                       HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
                       RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
-                      BlockPredicateFilter.forPredicate(MatchingTreeTrunkPredicate.create()), // Check if we are at a tree's log.
+                      BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
                       CountPlacement.of(5), // make 5 new attempts for each position at the log
                       RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y defaultValue.
                   )));
@@ -165,7 +165,7 @@ public class RootsDataPackGenerators {
                       InSquarePlacement.spread(), // Randomize x/z to random spot in chunk
                       HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG), // Find surface
                       RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
-                      BlockPredicateFilter.forPredicate(MatchingTreeTrunkPredicate.create()), // Check if we are at a tree's log.
+                      BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Check if we are at a tree's log.
                       CountPlacement.of(3), // make 5 new attempts for each position at the log
                       RandomOffsetPlacement.of(UniformInt.of(-2, 2), UniformInt.of(-2, 0)) // Randomize root position to a range of 2 on x/z and can be 0-2 blocks below the log y defaultValue.
                   )));

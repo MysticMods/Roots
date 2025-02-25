@@ -23,7 +23,7 @@
     {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
-        "type": "roots:matching_tree_trunk"
+        "type": "roots:matching_tree"
       }
     },
     {
