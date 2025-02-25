@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -82,5 +84,17 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
     newState = fillBlockState(state, newState, level.getBlockState(pos.below()));
 
     level.setBlock(pos, newState, 2);
+  }
+
+  @Override
+  public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+    BlockState state = super.getStateForPlacement(context);
+    Level level = context.getLevel();
+    BlockPos pos = context.getClickedPos();
+    BlockState stateBelow = level.getBlockState(pos.below());
+    if (stateBelow.hasProperty(ElementalType.SOIL_TYPE) && state.hasProperty(ElementalType.SOIL_TYPE)) {
+      state = state.setValue(ElementalType.SOIL_TYPE, stateBelow.getValue(ElementalType.SOIL_TYPE));
+    }
+    return state;
   }
 }

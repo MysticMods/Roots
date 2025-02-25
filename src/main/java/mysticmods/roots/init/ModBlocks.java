@@ -124,7 +124,7 @@ public class ModBlocks {
   public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_WALL = BLOCKS.register("runed_wall", () -> new RunedObsidianBlocks.Wall(RUNED_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_BRICK_WALL = BLOCKS.register("runed_brick_wall", () -> new RunedObsidianBlocks.Wall(RUNED_PROPERTIES));
   public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_TILE_WALL = BLOCKS.register("runed_tile_wall", () -> new RunedObsidianBlocks.Wall(RUNED_PROPERTIES));
-  public static DeferredHolder<Block, ElementalSoilBlock> ELEMENTAL_SOIL = BLOCKS.register("elemental_soil", () -> new ElementalSoilBlock(ElementalType.NONE, SOIL_PROPERTIES));
+  public static DeferredHolder<Block, ElementalSoilBlock> ELEMENTAL_SOIL = BLOCKS.register("elemental_soil", () -> new ElementalSoilBlock(ElementalType.DEFAULT, SOIL_PROPERTIES));
   public static DeferredHolder<Block, ElementalSoilBlock> AQUEOUS_SOIL = BLOCKS.register("aqueous_soil", () -> new ElementalSoilBlock(ElementalType.WATER, SOIL_PROPERTIES));
   public static DeferredHolder<Block, ElementalSoilBlock> CAELIC_SOIL = BLOCKS.register("caelic_soil", () -> new ElementalSoilBlock(ElementalType.AIR, SOIL_PROPERTIES));
   public static DeferredHolder<Block, ElementalSoilBlock> MAGMATIC_SOIL = BLOCKS.register("magmatic_soil", () -> new ElementalSoilBlock(ElementalType.FIRE, SOIL_PROPERTIES));
