@@ -23,7 +23,6 @@ import net.neoforged.fml.config.ModConfig;
 
 
 // - Overhaul all block properties, stop using defaults.
-// - Knife dispenser behaviour
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
