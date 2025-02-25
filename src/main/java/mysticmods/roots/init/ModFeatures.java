@@ -3,9 +3,11 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.worldgen.features.HangingMossBlockFeature;
 import mysticmods.roots.worldgen.features.SupportingDirectionalBlockFeature;
+import mysticmods.roots.worldgen.features.placements.AllAroundLogPlacement;
 import mysticmods.roots.worldgen.features.placements.DimensionPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreeBranchPredicate;
+import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
 import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
 import mysticmods.roots.worldgen.structure.StandingStonePiece;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
@@ -49,13 +51,15 @@ public class ModFeatures {
 
   public static final DeferredHolder<StructureType<?>, StructureType<StandingStonesStructure>> STANDING_STONES = STRUCTURES.register("standing_stones", () -> () -> StandingStonesStructure.CODEC);
 
-  public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreeTrunkPredicate>> MATCHING_TREE_TRUNK_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreeTrunkPredicate.CODEC);
+  public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreeTrunkPredicate>> MATCHING_TREE_TRUNK_PREDICATE = BLOCK_PREDICATES.register("matching_tree_trunk", () -> () -> MatchingTreeTrunkPredicate.CODEC);
+  public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreePredicate>> MATCHING_TREE_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreePredicate.CODEC);
 
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingBlockTagPredicate>> MATCHING_BLOCK_TAG_PREDICATE = BLOCK_PREDICATES.register("matching_block_tag", () -> () -> MatchingBlockTagPredicate.CODEC);
 
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreeBranchPredicate>> MATCHING_TREE_BRANCH_PREDICATE = BLOCK_PREDICATES.register("matching_tree_branch", () -> () -> MatchingTreeBranchPredicate.CODEC);
   public static DeferredHolder<PlacementModifierType<?>, PlacementModifierType<HeightmapYRange>> HEIGHTMAP_Y_RANGE = PLACEMENT_MODIFIER.register("heightmap_y_range", () -> () -> HeightmapYRange.CODEC);
   public static DeferredHolder<PlacementModifierType<?>, PlacementModifierType<DimensionPlacement>> DIMENSION_PLACEMENT = PLACEMENT_MODIFIER.register("dimension_placement", () -> () -> DimensionPlacement.CODEC);
+  public static DeferredHolder<PlacementModifierType<?>, PlacementModifierType<AllAroundLogPlacement>> ALL_AROUND_LOG_PLACEMENT = PLACEMENT_MODIFIER.register("all_around_log_placement", () -> () -> AllAroundLogPlacement.CODEC);
 
   // Features
   public static DeferredHolder<Feature<?>, SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));

@@ -9,7 +9,9 @@ import mysticmods.roots.init.ModEnchantment;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModFeatures;
 import mysticmods.roots.util.FakePlayerUtil;
+import mysticmods.roots.worldgen.features.placements.AllAroundLogPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
+import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
 import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
 import net.minecraft.core.*;
@@ -173,8 +175,8 @@ public class RootsDataPackGenerators {
                       InSquarePlacement.spread(),
                       HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                       RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
-                      BlockPredicateFilter.forPredicate(MatchingTreeTrunkPredicate.create()), // Check if we are at a tree's log.
-                      RandomOffsetPlacement.vertical(UniformInt.of(-2, 2))
+                      BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Look for an actual tree.
+                      AllAroundLogPlacement.around()
                   )));
                   bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY), List.of(
                       RarityFilter.onAverageOnceEvery(168),

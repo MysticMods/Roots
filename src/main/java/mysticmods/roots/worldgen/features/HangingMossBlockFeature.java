@@ -1,6 +1,7 @@
 package mysticmods.roots.worldgen.features;
 
 import com.mojang.serialization.Codec;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.HangingGroveMossBlock;
 import net.minecraft.core.BlockPos;
@@ -49,6 +50,7 @@ public class HangingMossBlockFeature extends Feature<SimpleBlockConfiguration> {
 
         if (rootState.canSurvive(level, rootPos)) {
           level.setBlock(rootPos, rootState, 3);
+          RootsAPI.LOG.debug("Placed hanging moss block at " + rootPos);
           return true;
         }
       }
