@@ -553,6 +553,42 @@
           "default_value": 24,
           "value": 24
         }
+      },
+      {
+        "id": "roots:rose_thorns/radius_zx",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The radius of the rose thorns effect in the X and Z axis.",
+          "default_value": 1.2,
+          "value": 1.2
+        }
+      },
+      {
+        "id": "roots:rose_thorns/radius_y",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The radius of the rose thorns effect in the Y axis.",
+          "default_value": 1.0,
+          "value": 1.0
+        }
+      },
+      {
+        "id": "roots:rose_thorns/duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long the spell will last",
+          "default_value": 360,
+          "value": 360
+        }
+      },
+      {
+        "id": "roots:rose_thorns/damage",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "How much damage the spell will cause",
+          "default_value": 3.5,
+          "value": 3.5
+        }
       }
     ],
     "roots:sanctuary": [

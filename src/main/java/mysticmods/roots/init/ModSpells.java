@@ -146,6 +146,10 @@ public class ModSpells {
   // Rose Thorns (24 cooldown)
   public static final DeferredHolder<Spell, RoseThornsSpell> ROSE_THORNS = spell(Spells.ROSE_THORNS, RoseThornsSpell::new, ChatFormatting.RED, () -> List.of(Cost.add(ModHerbs.WILDROOT, SpellCosts.BASE_0250)));
   public static final PropertyHolder<Property.IntegerProperty> ROSE_THORNS_COOLDOWN = P.recordProperty("rose_thorns/cooldown", Property.ofInt(24, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> ROSE_THORNS_DURATION = P.recordProperty("rose_thorns/duration", Property.ofInt(20 * 18, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.DoubleProperty> ROSE_THORNS_RADIUS_ZX = P.recordProperty("rose_thorns/radius_zx", Property.ofDouble(1.2, "The radius of the rose thorns effect in the X and Z axis."));
+  public static final PropertyHolder<Property.DoubleProperty> ROSE_THORNS_RADIUS_Y = P.recordProperty("rose_thorns/radius_y", Property.ofDouble(1, "The radius of the rose thorns effect in the Y axis."));
+  public static final PropertyHolder<Property.FloatProperty> ROSE_THORNS_DAMAGE = P.recordProperty("rose_thorns/damage", Property.ofFloat(3.5f, SpellProperties.DAMAGE));
 
   // Sanctuary (20 cooldown)
   public static final DeferredHolder<Spell, SanctuarySpell> SANCTUARY = spell(Spells.SANCTUARY, SanctuarySpell::new, ChatFormatting.LIGHT_PURPLE, () -> List.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250)));

@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-15T18:24:21.3451025	Roots Entity Type Tags
+// 1.21.1	2025-02-26T15:25:38.4347328	Roots Entity Type Tags
 4b5fde4f337ce73662f973a66dcd6405771086dd data/roots/tags/entity_type/animal_harvest_entities.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_type/boats.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/disable_disarm.json
@@ -7,6 +7,7 @@
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_hostile.json
 ee75b90db1cfb03a8ce6da87690f062a665055c4 data/roots/tags/entity_type/healable_ice_creatures.json
 f1ecbd233820d9259a855e392e4a8e9de84cce46 data/roots/tags/entity_type/pacifist.json
+6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/rose_thorns_exclude.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/squid.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/time_stop_exclude.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/windwall_force_exclude.json

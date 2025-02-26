@@ -2,6 +2,7 @@ package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.entity.*;
+import mysticmods.roots.entity.other.RoseThornsEntity;
 import mysticmods.roots.entity.other.TimeStopEntity;
 import mysticmods.roots.entity.projectile.MeteorEntity;
 import mysticmods.roots.entity.projectile.WildfireEntity;
@@ -56,6 +57,8 @@ public class ModEntities {
       .sized(1f, 1f).clientTrackingRange(4).updateInterval(10).build("wildfire"));
   public static final DeferredHolder<EntityType<?>, EntityType<TimeStopEntity>> TIME_STOP = REGISTER.register("time_stop", () -> EntityType.Builder.of(TimeStopEntity::new, MobCategory.MISC)
       .sized(1f, 1f).clientTrackingRange(4).updateInterval(10).build("time_stop"));
+  public static final DeferredHolder<EntityType<?>, EntityType<RoseThornsEntity>> ROSE_THORNS = REGISTER.register("rose_thorns", () -> EntityType.Builder.of(RoseThornsEntity::new, MobCategory.MISC)
+      .sized(1f, 0.4f).clientTrackingRange(4).updateInterval(10).build("rose_thorns"));
 
   @SubscribeEvent
   public static void registerEntitySpawns(RegisterSpawnPlacementsEvent event) {

@@ -61,7 +61,7 @@ public class TimeStopSpell extends TwoRadiusSpell{
       timeStop.setLifetime(duration);
       timeStop.setPos(pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
       // Don't use the helper
-      timeStop.setSnapshot(new TimeStopEntitySnapshot(pPlayer, -1, radiusZX, radiusY, duration));
+      timeStop.setSnapshot(new TimeStopEntitySnapshot(timeStop.tickCount, -1, radiusZX, radiusY, duration));
       pLevel.addFreshEntity(timeStop);
       return cooldown;
     } else {

@@ -460,6 +460,7 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> ZOMBIE_VILLAGERS_EXCLUDE = modTag("zombie_villagers_exclude");
 
     public static final TagKey<EntityType<?>> TIME_STOP_EXCLUDE = modTag("time_stop_exclude");
+    public static final TagKey<EntityType<?>> ROSE_THORNS_EXCLUDE = modTag("rose_thorns_exclude");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

@@ -98,6 +98,7 @@ public class ClientSetup {
     event.registerEntityRenderer(ModEntities.METEOR.value(), MeteorRenderer::new);
     event.registerEntityRenderer(ModEntities.WILDFIRE.value(), WildfireRenderer::new);
     event.registerEntityRenderer(ModEntities.TIME_STOP.value(), NoopRenderer::new);
+    event.registerEntityRenderer(ModEntities.ROSE_THORNS.value(), RoseThornsRenderer::new);
   }
 
   @SubscribeEvent
@@ -111,6 +112,7 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.ANTLER_ARMOR, AntlerHatModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.BEETLE_ARMOR, BeetleArmorModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.METEOR, MeteorModel::createBodyLayer);
+    event.registerLayerDefinition(ModelHolder.ROSE_THORNS, RoseThornsModel::createBodyLayer);
   }
 
   @SubscribeEvent
