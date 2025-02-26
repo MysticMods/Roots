@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-24T21:52:57.3069329	Recipes
+// 1.21.1	2025-02-26T22:10:17.2621997	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -183,6 +183,11 @@ f1b7a68081f8bb1c317d5d6016c0df0bf9ec493c data/roots/advancement/recipes/misc/gro
 8125dfdca5a1e67630df3f1be934571d2a654902 data/roots/advancement/recipes/misc/leather_from_pelt.json
 92ada6d5b17c685cc0ca27184599c6377eee0b0d data/roots/advancement/recipes/misc/magmatic_soil_from_elemental_soil_and_inferno_bulb.json
 4f6355db256cfc43f8dea9c2dd845291b04caee0 data/roots/advancement/recipes/misc/mortar.json
+b9c3601f02c613aefd7b96ea21fe243a697892a8 data/roots/advancement/recipes/misc/mortar/bonemeal_from_bones.json
+7643f418ee878307e70816c03a3587cf2d444540 data/roots/advancement/recipes/misc/mortar/bonemeal_from_bones_2.json
+3ee9e768896255ad4f8ea5b6e3482e1095e4c5bb data/roots/advancement/recipes/misc/mortar/bonemeal_from_bones_3.json
+91257adf675b78fde4ada16c9f0d5d4dcb743816 data/roots/advancement/recipes/misc/mortar/bonemeal_from_bones_4.json
+07f0595839db918aa5d1599e383de5f71acc225c data/roots/advancement/recipes/misc/mortar/bonemeal_from_bones_5.json
 705cd4bd9cfc1937a812ccf40178f582cc1b6a11 data/roots/advancement/recipes/misc/mortar/flint_from_gravel.json
 bce926d4393e72d36e103dffb243982c8155f843 data/roots/advancement/recipes/misc/mortar/flint_from_gravel_2.json
 b709fbc3bde7147762f602c67ec773f0c61e97cf data/roots/advancement/recipes/misc/mortar/flint_from_gravel_3.json
@@ -423,6 +428,11 @@ f5bf0e4c33e334a14b529d283738f46615130546 data/roots/recipe/iron_knife.json
 84ada0f330f325347054eaf3e3546564d8a09abe data/roots/recipe/leather_from_pelt.json
 14a34537bc36c8160db1378225730b7cadda1609 data/roots/recipe/magmatic_soil_from_elemental_soil_and_inferno_bulb.json
 ac62436e492f44cea970978d52c0204ed38b6658 data/roots/recipe/mortar.json
+320730fbb62dc2d91892342066be8b72f41a03c5 data/roots/recipe/mortar/bonemeal_from_bones.json
+6d753eaeebe64787c71862f32e0a54184f1efcd6 data/roots/recipe/mortar/bonemeal_from_bones_2.json
+b1a02ad5bea542cb59ee5c433a0bd17643be97a8 data/roots/recipe/mortar/bonemeal_from_bones_3.json
+cfe86b331f530506695bb41e7e6bf0b74bdac9a0 data/roots/recipe/mortar/bonemeal_from_bones_4.json
+3a851d7d17d7ec969b026bdc499289ea3cb0ee11 data/roots/recipe/mortar/bonemeal_from_bones_5.json
 4b8372eda2026de5c439bee3748012f673e49a2c data/roots/recipe/mortar/flint_from_gravel.json
 ddc98c00ad05254a84f274b50e0278c6d9aef22d data/roots/recipe/mortar/flint_from_gravel_2.json
 9d728096746a57528cfff1bd15f5784d08be1a0c data/roots/recipe/mortar/flint_from_gravel_3.json

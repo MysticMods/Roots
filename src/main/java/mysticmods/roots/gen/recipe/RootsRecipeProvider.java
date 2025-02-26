@@ -1058,6 +1058,17 @@ public class RootsRecipeProvider extends RecipeProvider {
     saver.save(stringBuilder.times(4).build(stringData.multiplty(4)), c, RootsAPI.rl("mortar/string_from_wool_4"));
     saver.save(stringBuilder.times(5).build(stringData.multiplty(5)), c, RootsAPI.rl("mortar/string_from_wool_5"));
 
+    MortarRecipe.Builder bonemealBuilder = MortarRecipe.Builder.create().times(1);
+    BaseRecipeData.Builder bonemealData = BaseRecipeData.Builder.create().requires(Tags.Items.BONES)
+        .result(Items.BONE_MEAL.builtInRegistryHolder(), 3).chanceOutput(Items.BONE_MEAL, 0.5f);
+    saver = RecipeSaver.saver().unlockedBy("has_bones", has(Tags.Items.BONES));
+
+    saver.save(bonemealBuilder.build(bonemealData), c, RootsAPI.rl("mortar/bonemeal_from_bones"));
+    saver.save(bonemealBuilder.times(2).build(bonemealData.multiplty(2)), c, RootsAPI.rl("mortar/bonemeal_from_bones_2"));
+    saver.save(bonemealBuilder.times(3).build(bonemealData.multiplty(3)), c, RootsAPI.rl("mortar/bonemeal_from_bones_3"));
+    saver.save(bonemealBuilder.times(4).build(bonemealData.multiplty(4)), c, RootsAPI.rl("mortar/bonemeal_from_bones_4"));
+    saver.save(bonemealBuilder.times(5).build(bonemealData.multiplty(5)), c, RootsAPI.rl("mortar/bonemeal_from_bones_5"));
+
     MortarRecipe.Builder flintBuilder = MortarRecipe.Builder.create().times(1);
     BaseRecipeData.Builder flintData = BaseRecipeData.Builder.create().requires(Tags.Items.GRAVELS)
         .result(Items.FLINT.builtInRegistryHolder(), 1);

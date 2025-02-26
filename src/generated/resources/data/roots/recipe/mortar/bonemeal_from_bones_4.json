@@ -1,0 +1,54 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chanceOutputs": [
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 4,
+          "id": "minecraft:bone_meal"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 4,
+          "id": "minecraft:bone_meal"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 4,
+          "id": "minecraft:bone_meal"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 4,
+          "id": "minecraft:bone_meal"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "tag": "c:bones"
+      },
+      {
+        "tag": "c:bones"
+      },
+      {
+        "tag": "c:bones"
+      },
+      {
+        "tag": "c:bones"
+      }
+    ],
+    "result": {
+      "count": 12,
+      "id": "minecraft:bone_meal"
+    }
+  },
+  "times": 4
+}
