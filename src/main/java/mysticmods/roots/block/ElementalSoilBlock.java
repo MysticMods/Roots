@@ -4,7 +4,9 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.crop.ElementalType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,5 +42,15 @@ public class ElementalSoilBlock extends FarmBlock {
   @Override
   protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
     return Shapes.block();
+  }
+
+  @Override
+  public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+    entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());
+  }
+
+  @Override
+  public boolean isFertile(BlockState state, BlockGetter level, BlockPos pos) {
+    return true;
   }
 }

@@ -14,7 +14,7 @@ import net.neoforged.fml.config.ModConfig;
 // - Nondetection
 //     Causes creepers to explode
 //     Doesn't stop alerts
-
+// - No bone mael recipe
 // - IMPORTANT: Caelic soil has sometimes no impact on cloud berry drops
 // - Elemental crop: get state for placement check soil types instead of just updating
 //   - Getting better but not perfect
