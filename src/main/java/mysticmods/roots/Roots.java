@@ -14,13 +14,10 @@ import net.neoforged.fml.config.ModConfig;
 // - Nondetection
 //     Causes creepers to explode
 //     Doesn't stop alerts
-// - IMPORTANT: Caelic soil has sometimes no impact on cloud berry drops
-// - Elemental crop: get state for placement check soil types instead of just updating
+// Drops aren't right
 //   - Getting better but not perfect
 // - Fire starter is still inconsistent
-// - Knives need to break leaves instantly
-
-
+// Reduce hanging grove moss spawn rates
 // - Overhaul all block properties, stop using defaults.
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI

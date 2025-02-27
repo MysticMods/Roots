@@ -169,6 +169,11 @@ public class ClientSetup {
     event.register(ModContainers.HERB_POUCH.get(), HerbPouchScreen::new);
   }
 
+  @SubscribeEvent
+  public static void onRegisterGeometry (ModelEvent.RegisterGeometryLoaders event) {
+    event.register(RootsAPI.rl("moss"), MossModelLoader.Loader.INSTANCE);
+  }
+
   public static final ModelResourceLocation GIFT_BOX = new ModelResourceLocation(SproutEntity.GIFT_BOX, "standalone");
   public static BakedModel GIFT_BOX_MODEL;
 
