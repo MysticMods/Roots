@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -96,5 +97,10 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
       state = state.setValue(ElementalType.SOIL_TYPE, stateBelow.getValue(ElementalType.SOIL_TYPE));
     }
     return state;
+  }
+
+  @Override
+  protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    // No ravagers breaking these crops!
   }
 }
