@@ -65,7 +65,7 @@ public class ModBlocks {
 
   // TODO: Whatever happened to plant types?
   public static DeferredHolder<Block, PetrifiedFlowerBlock> STONEPETAL = BLOCKS.register("stonepetal", () -> new PetrifiedFlowerBlock(BlockBehaviour.Properties.of()
-      .noCollission().instabreak().sound(SoundType.GRASS).noOcclusion()));
+      .noCollission().instabreak().sound(SoundType.GRASS).noOcclusion().offsetType(BlockBehaviour.OffsetType.XZ)));
   public static DeferredHolder<Block, LeavesBlock> WILDWOOD_LEAVES = BLOCKS.register("wildwood_leaves", () -> new LeavesBlock(WILDWOOD_LEAVES_PROPERTIES));
   public static DeferredHolder<Block, RotatedPillarBlock> RUNED_WILDWOOD_LOG = BLOCKS.register("runed_wildwood_log", () -> new RotatedPillarBlock(RUNED_LOG_PROPERTIES));
   public static DeferredHolder<Block, RotatedPillarBlock> RUNED_SPRUCE_LOG = BLOCKS.register("runed_spruce_log", () -> new RotatedPillarBlock(RUNED_LOG_PROPERTIES));
