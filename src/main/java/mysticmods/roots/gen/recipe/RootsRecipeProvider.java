@@ -1650,6 +1650,16 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_fey_leather", has(RootsTags.Items.FEY_LEATHERS))
         .save(c, RootsAPI.rl("fey_leather_saddle"));
 
+    // Herb Pouch
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.HERB_POUCH.get())
+        .pattern("SWS")
+        .pattern("WHW")
+        .pattern(" W ")
+        .define('W', ItemTags.WOOL)
+        .define('S', Tags.Items.STRINGS)
+        .define('H', RootsTags.Items.RUNESTONE_HERBS)
+        .unlockedBy("has_wool", has(ItemTags.WOOL))
+        .save(c, RootsAPI.rl("herb_pouch"));
   }
 
   public static class RecipeSaver {
