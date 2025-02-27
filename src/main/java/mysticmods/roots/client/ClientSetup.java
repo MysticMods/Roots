@@ -3,10 +3,7 @@ package mysticmods.roots.client;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
-import mysticmods.roots.client.blockentity.GroveCrafterBlockEntityRenderer;
-import mysticmods.roots.client.blockentity.MortarBlockEntityRenderer;
-import mysticmods.roots.client.blockentity.PedestalBlockEntityRenderer;
-import mysticmods.roots.client.blockentity.PyreBlockEntityRenderer;
+import mysticmods.roots.client.blockentity.*;
 import mysticmods.roots.client.gui.screen.HerbPouchScreen;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
 import mysticmods.roots.client.model.*;
@@ -53,6 +50,7 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.MORTAR.get(), MortarBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.GROVE_CRAFTER.get(), GroveCrafterBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.PYRE.get(), PyreBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.VISIBLE.get(), VisibleBlockEntityRenderer::new);
   }
 
   @SubscribeEvent

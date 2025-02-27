@@ -11,6 +11,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModBlockEntities {
   private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, RootsAPI.MODID);
 
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<VisibleBlockEntity>> VISIBLE = BLOCK_ENTITIES.register("visible", () -> BlockEntityType.Builder.of(VisibleBlockEntity::new, ModBlocks.WILD_ROOTS.get(), ModBlocks.HANGING_GROVE_MOSS.get())
+      .build(null));
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FeyLightBlockEntity>> FEY_LIGHT = BLOCK_ENTITIES.register("fey_light", () -> BlockEntityType.Builder.of(FeyLightBlockEntity::new, ModBlocks.FEY_LIGHT.get())
       .build(null));
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PedestalBlockEntity>> PEDESTAL = BLOCK_ENTITIES.register("pedestal", () -> BlockEntityType.Builder.of(PedestalBlockEntity::new, ModBlocks.RITUAL_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get(), ModBlocks.REINFORCED_RITUAL_PEDESTAL.get(), ModBlocks.DISPLAY_PEDESTAL.get(), ModBlocks.GROVE_PEDESTAL.get())

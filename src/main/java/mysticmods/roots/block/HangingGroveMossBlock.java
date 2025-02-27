@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.blockentity.VisibleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -21,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.Map;
 
-public class HangingGroveMossBlock extends Block {
+public class HangingGroveMossBlock extends Block implements EntityBlock {
   public static final MapCodec<HangingGroveMossBlock> CODEC = simpleCodec(HangingGroveMossBlock::new);
 
   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -108,5 +110,10 @@ public class HangingGroveMossBlock extends Block {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(FACING);
+  }
+
+  @Override
+  public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return null;
   }
 }

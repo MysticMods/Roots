@@ -2,6 +2,7 @@ package mysticmods.roots.block;
 
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.blockentity.VisibleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -19,8 +21,9 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-public class WildRootsBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
+public class WildRootsBlock extends DirectionalBlock implements SimpleWaterloggedBlock, EntityBlock {
   public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
   public static BooleanProperty MOSSY = BooleanProperty.create("mossy");
   private static final int mossyChance = 30;
@@ -113,5 +116,10 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
   @Override
   public FluidState getFluidState(BlockState state) {
     return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+  }
+
+  @Override
+  public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return null;
   }
 }
