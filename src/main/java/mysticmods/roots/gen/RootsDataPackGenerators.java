@@ -171,12 +171,13 @@ public class RootsDataPackGenerators {
                   )));
                   bootstrap.register(ModFeatures.PLACED_HANGING_MOSS_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_HANGING_MOSS_KEY), List.of(
                       BiomeFilter.biome(),
-                      CountPlacement.of(256),
+                      CountPlacement.of(15),
                       InSquarePlacement.spread(),
                       HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                      RandomOffsetPlacement.vertical(ConstantInt.of(1)), // Offset up one to above surface
+                      RandomOffsetPlacement.vertical(UniformInt.of(1, 3)), // Offset up one to above surface
                       BlockPredicateFilter.forPredicate(MatchingTreePredicate.create()), // Look for an actual tree.
-                      AllAroundLogPlacement.around()
+                      AllAroundLogPlacement.around(),
+                      CountPlacement.of(1)
                   )));
                   bootstrap.register(ModFeatures.PLACED_WILD_AUBERGINE_PATCH_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_WILD_AUBERGINE_PATCH_KEY), List.of(
                       RarityFilter.onAverageOnceEvery(168),

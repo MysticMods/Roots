@@ -6,7 +6,7 @@
     },
     {
       "type": "minecraft:count",
-      "count": 256
+      "count": 15
     },
     {
       "type": "minecraft:in_square"
@@ -18,7 +18,11 @@
     {
       "type": "minecraft:random_offset",
       "xz_spread": 0,
-      "y_spread": 1
+      "y_spread": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 3,
+        "min_inclusive": 1
+      }
     },
     {
       "type": "minecraft:block_predicate_filter",
@@ -28,6 +32,10 @@
     },
     {
       "type": "roots:all_around_log_placement"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 1
     }
   ]
 }
