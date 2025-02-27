@@ -261,6 +261,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.FORAGING_ELIGIBLE).addTag(RootsTags.Items.KNIVES).add(ModItems.LIVING_HOE.get());
 
     this.tag(RootsTags.Items.FEY_LEATHERS).add(FEY_LEATHER.get());
+    this.tag(RootsTags.Items.DYEABLE).add(ModItems.HERB_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.FEY_POUCH.get());
   }
 
   @Override

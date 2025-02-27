@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-24T18:01:19.6011457	Roots Item Tags
+// 1.21.1	2025-02-27T19:30:36.6610889	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -66,6 +66,7 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/item/crops/pereskia.jso
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/item/crops/wildroot.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/disable_disarming.json
 1b81ce702cc93595adbcfc8dd9dcb1a5e932c8c6 data/roots/tags/item/dusts/runic.json
+84bf7ad25b0244350821f5ba14f646b7233fcd69 data/roots/tags/item/dyeable.json
 c7500f481948159c566ddedb8a200fe63a413a56 data/roots/tags/item/fertilizers.json
 feb585ff1dd437e8f10f0e203262652d250aed76 data/roots/tags/item/fey_leather.json
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/item/flint.json

@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-17T21:45:33.5215394	Item Models: roots
+// 1.21.1	2025-02-27T17:54:33.0779752	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -72,7 +72,7 @@ a9f24fd326a6cb57c1ac50440d5849502ab332cf assets/roots/models/item/flour.json
 2f13055795ba9015e6c0dbfc42f5574ccc04dd42 assets/roots/models/item/grove_moss.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/grove_pedestal.json
 97deb2b89129d391d5fdd1bb246a72b35fc3a06a assets/roots/models/item/grove_spores.json
-fec1bc6fedb7d1c3a6c4489df40737cc19eb4c4e assets/roots/models/item/herb_pouch.json
+94d1d49a0b267468e50cbd64225ae18927dd3df6 assets/roots/models/item/herb_pouch.json
 8c5ff0bdec7626843a2ea258651396914546403c assets/roots/models/item/incense_burner.json
 f49e298ede83512d9c74474554aa89982e07f3ea assets/roots/models/item/inferno_bulb.json
 209eb7ef5a39a5622f82eec32b85cafa8c98c7dc assets/roots/models/item/ink_bottle.json

@@ -260,9 +260,9 @@ public class ModItems {
   // TODO (POUCHES):
   public static final DeferredHolder<Item, Item> APOTHECARY_POUCH = ITEMS.register("apothecary_pouch", () -> new Item(new Item.Properties().stacksTo(1)));
   public static final DeferredHolder<Item, Item> COMPONENT_POUCH = ITEMS.register("component_pouch", () -> new Item(new Item.Properties().stacksTo(1)));
-  public static final DeferredHolder<Item, Item> CREATIVE_POUCH = ITEMS.register("creative_pouch", () -> new Item(new Item.Properties().stacksTo(1)));
+  public static final DeferredHolder<Item, CreativeComponentPouch> CREATIVE_POUCH = ITEMS.register("creative_pouch", () -> new CreativeComponentPouch(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
   public static final DeferredHolder<Item, Item> FEY_POUCH = ITEMS.register("fey_pouch", () -> new Item(new Item.Properties().stacksTo(1)));
-  public static final DeferredHolder<Item, Item> HERB_POUCH = ITEMS.register("herb_pouch", () -> new HerbPouchItem(new Item.Properties().stacksTo(1).component(ModAttachments.HERB_POUCH_CONTENTS, ItemContainerContents.EMPTY)));
+  public static final DeferredHolder<Item, HerbPouchItem> HERB_POUCH = ITEMS.register("herb_pouch", () -> new HerbPouchItem(new Item.Properties().stacksTo(1).component(ModAttachments.HERB_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.BROWN)));
 
   public static final DeferredHolder<Item, Item> COOKED_PERESKIA = ITEMS.register("cooked_pereskia", () -> new Item(new Item.Properties().food(ModFoods.COOKED_AUBERGINE)
       .stacksTo(64)));

@@ -25,9 +25,12 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -80,6 +83,13 @@ public class ClientSetup {
       }
       return -1;
     }, ModItems.STAFF.get());
+    event.register((stack, index) -> {
+      DyeColor color = stack.get(DataComponents.BASE_COLOR);
+      if (index == 0 && color != null) {
+        return color.getTextureDiffuseColor();
+      }
+      return -1;
+    }, ModItems.HERB_POUCH.get());
   }
 
   @SubscribeEvent

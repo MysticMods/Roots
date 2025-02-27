@@ -218,7 +218,14 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.COMPONENT_POUCH, "pouches");
     subfolder(ModItems.CREATIVE_POUCH, "pouches");
     subfolder(ModItems.FEY_POUCH, "pouches");
+
+
     subfolder(ModItems.HERB_POUCH, "pouches");
+
+    getBuilder("roots:herb_pouch")
+        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", modLoc("item/pouches/herb_pouch_main_layer"))
+        .texture("layer1", modLoc("item/pouches/herb_pouch_clasp_layer"));
 
     subfolder(ModItems.COOKED_PERESKIA, "food");
     subfolder(ModItems.FLOUR, "food");

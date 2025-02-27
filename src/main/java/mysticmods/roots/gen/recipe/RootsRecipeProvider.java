@@ -9,6 +9,7 @@ import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.*;
+import mysticmods.roots.recipe.PouchDyeRecipe;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -1660,6 +1661,8 @@ public class RootsRecipeProvider extends RecipeProvider {
         .define('H', RootsTags.Items.RUNESTONE_HERBS)
         .unlockedBy("has_wool", has(ItemTags.WOOL))
         .save(c, RootsAPI.rl("herb_pouch"));
+
+    SpecialRecipeBuilder.special(PouchDyeRecipe::new).save(c, RootsAPI.rl("dye_pouch"));
   }
 
   public static class RecipeSaver {

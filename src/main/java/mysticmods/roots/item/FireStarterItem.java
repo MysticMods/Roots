@@ -28,6 +28,7 @@ public class FireStarterItem extends Item {
     super(props);
   }
 
+  // TODO: Need this for casting item
   @Override
   public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
     if (level.isClientSide() && entity instanceof Player player) {

@@ -6,6 +6,7 @@ import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.snapshot.SnapshotType;
+import mysticmods.roots.recipe.PouchDyeRecipe;
 import mysticmods.roots.recipe.bark.BarkRecipe;
 import mysticmods.roots.recipe.bark.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -17,6 +18,7 @@ import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import mysticmods.roots.snapshot.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -36,6 +38,7 @@ public class ModSerializers {
   public static final DeferredHolder<RecipeSerializer<?>, BarkRecipe.Serializer> BARK = RECIPE_SERIALIZERS.register("bark", BarkRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, RunicBlockRecipe.Serializer> RUNIC_BLOCK = RECIPE_SERIALIZERS.register("runic_block", RunicBlockRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", RunicEntityRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<PouchDyeRecipe>> DYE_POUCH = RECIPE_SERIALIZERS.register("dye_pouch", () -> new SimpleCraftingRecipeSerializer<>(PouchDyeRecipe::new));
 
   public static final DeferredHolder<SnapshotType<?>, SkySoarerSnapshot.Type> SKY_SOARER = SNAPSHOT_TYPES.register("sky_soarer", SkySoarerSnapshot.Type::new);
   public static final DeferredHolder<SnapshotType<?>, PetalShellSnapshot.Type> PETAL_SHELL = SNAPSHOT_TYPES.register("petal_shell", PetalShellSnapshot.Type::new);

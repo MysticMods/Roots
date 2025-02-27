@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-27T17:34:45.9736315	Recipes
+// 1.21.1	2025-02-27T19:30:36.6651419	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -403,6 +403,7 @@ b2b07ab2524a44de34b2c77b43f2d39b86396926 data/roots/recipe/decorative_pyre_from_
 70bf1d4edd07285f6277beb282af457afaa6e6a4 data/roots/recipe/decorative_soul_pyre_from_soul_pyre_and_lever.json
 5f99ab95fe3d19cc4dd55d982234f4b95772a595 data/roots/recipe/diamond_knife.json
 9030cb939f0ed66a7ec99072e68f49f933ef45de data/roots/recipe/display_pedestal.json
+96e905b7ed33114e7cf495b474f2e380e781e3a1 data/roots/recipe/dye_pouch.json
 f3e62814bfe3aa0ac5b4be0804bf8f2b267d3f97 data/roots/recipe/fey_leather_saddle.json
 e834f8252ee64a0b64be8e2ec7c60e85110e2b76 data/roots/recipe/fire_starter.json
 b9fafcfa2f73b52097304634363e87a5708e2b88 data/roots/recipe/golden_knife.json

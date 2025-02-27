@@ -403,6 +403,7 @@ public class RootsTags {
 
     public static final TagKey<Item> FORAGING_ELIGIBLE = modTag("foraging_eligible");
     public static final TagKey<Item> FEY_LEATHERS = modTag("fey_leather");
+    public static final TagKey<Item> DYEABLE = modTag("dyeable");
 
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));
