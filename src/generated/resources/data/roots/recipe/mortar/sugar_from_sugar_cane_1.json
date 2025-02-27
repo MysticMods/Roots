@@ -1,0 +1,24 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chanceOutputs": [
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 1,
+          "id": "minecraft:sugar"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "tag": "c:crops/sugar_cane"
+      }
+    ],
+    "result": {
+      "count": 1,
+      "id": "minecraft:sugar"
+    }
+  },
+  "times": 1
+}

@@ -17,7 +17,6 @@ import net.neoforged.fml.config.ModConfig;
 // Drops aren't right
 //   - Getting better but not perfect
 // - Fire starter is still inconsistent
-// Reduce hanging grove moss spawn rates
 // - Overhaul all block properties, stop using defaults.
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI

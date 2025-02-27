@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-25T14:58:28.8312225	Registries
+// 1.21.1	2025-02-27T17:30:27.6070463	Registries
 a65184c1483f870edf64b340e4bd0e5ee9227966 data/roots/enchantment/foraging.json
 5e8bb855917451e7d49f50565ec458fdbf545f9f data/roots/enchantment_provider/looting_i.json
 4613ff4e5c72a645ecacd42f85dc4f3f2556c83f data/roots/enchantment_provider/looting_ii.json
@@ -27,7 +27,7 @@ e5279c275211c3c33389eb240828275b5a237bcd data/roots/worldgen/configured_feature/
 1d19b1138c890ce8349b1bc8ba3e98337e3fcc2a data/roots/worldgen/configured_feature/wild_roots.json
 07a5b74b57eb8de75c270f17b98ebfe9db590323 data/roots/worldgen/configured_feature/wild_roots_mossy.json
 e9b18bf74180382987750fc15d5858a61199a236 data/roots/worldgen/placed_feature/granite_quartz.json
-a8704aa668802a787fd7f98acf6a5100f4822d9c data/roots/worldgen/placed_feature/hanging_moss.json
+9aeab0ebfeb87979cef081b2b82b0bfccb088158 data/roots/worldgen/placed_feature/hanging_moss.json
 83f0721cc1f305185dbfdd92373e24f241acf9ea data/roots/worldgen/placed_feature/silver_ore.json
 8c54ee0c643fa0e225440ae0cafa724dd09c83d0 data/roots/worldgen/placed_feature/stonepetal_patch.json
 2437dd3cf8e2ad2a0aa6a643bab61f8a272f2332 data/roots/worldgen/placed_feature/wild_aubergine_patch.json

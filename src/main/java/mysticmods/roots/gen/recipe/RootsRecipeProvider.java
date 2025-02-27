@@ -865,6 +865,16 @@ public class RootsRecipeProvider extends RecipeProvider {
     saver.save(GroveRecipe.Builder.create()
         .build(runedObsidianBuilder.multiplty(2)), c, RootsAPI.rl("grove/runed_obsidian_8"));
 
+    saver = RecipeSaver.saver().unlockedBy("has_sugar_cane", has(Tags.Items.CROPS_SUGAR_CANE));
+    MortarRecipe.Builder mortarbuilder = MortarRecipe.Builder.create().times(1);
+    BaseRecipeData.Builder sugarbuilder = BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_SUGAR_CANE).result(Items.SUGAR, 1).chanceOutput(Items.SUGAR, 0.5f);
+
+    saver.save(mortarbuilder.build(sugarbuilder), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_1"));
+    saver.save(mortarbuilder.times(2).build(sugarbuilder.multiplty(2)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_2"));
+    saver.save(mortarbuilder.times(3).build(sugarbuilder.multiplty(3)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_3"));
+    saver.save(mortarbuilder.times(4).build(sugarbuilder.multiplty(4)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_4"));
+    saver.save(mortarbuilder.times(5).build(sugarbuilder.multiplty(5)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_5"));
+
     RecipeSaver.saver().unlockedBy("has_runic_dust", has(RootsTags.Items.RUNIC_DUST)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNIC_DUST).requires(Tags.Items.GRAVELS)
             .requires(ItemTags.DIRT).requires(ItemTags.DIRT).requires(ItemTags.DIRT).result(ModItems.ELEMENTAL_SOIL, 4)

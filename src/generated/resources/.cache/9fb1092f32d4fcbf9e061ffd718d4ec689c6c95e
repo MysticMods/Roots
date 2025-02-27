@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-26T22:10:17.2621997	Recipes
+// 1.21.1	2025-02-27T17:30:27.6100498	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -221,6 +221,11 @@ a7ae049f00b1a11e9144dbc6b1e88d161938c895 data/roots/advancement/recipes/misc/mor
 78730bc06558d58b4ec2f3c61091492bf8f316d5 data/roots/advancement/recipes/misc/mortar/string_from_wool_3.json
 7bce35aa8bc3ebf55e87a233e005954c1d5a84bb data/roots/advancement/recipes/misc/mortar/string_from_wool_4.json
 7b9146ab04af5f92be87cef13020b25cb04e9c77 data/roots/advancement/recipes/misc/mortar/string_from_wool_5.json
+b340f5d99fdb13d563021ac8b678dd01c325b27a data/roots/advancement/recipes/misc/mortar/sugar_from_sugar_cane_1.json
+ac8674b7e8d48103c806654f44a54bef8bd567cf data/roots/advancement/recipes/misc/mortar/sugar_from_sugar_cane_2.json
+3fbf9234bc97f68731de3dbc49359e47c1377e34 data/roots/advancement/recipes/misc/mortar/sugar_from_sugar_cane_3.json
+ecc77ac7cca54f9e544ae6aa41f89cac77096e0a data/roots/advancement/recipes/misc/mortar/sugar_from_sugar_cane_4.json
+daf32df02e962c3f5ddaf9eca909059fe9899c8a data/roots/advancement/recipes/misc/mortar/sugar_from_sugar_cane_5.json
 1138c041c751a8993d016db145b2a3c2ab0a9edb data/roots/advancement/recipes/misc/moss_block_from_grove_moss.json
 d92789d84dedc835e83bf2a1465bc33c864db321 data/roots/advancement/recipes/misc/primal_grove_stone.json
 d504683d02dc319baf501b93602881228b0a8783 data/roots/advancement/recipes/misc/pyre.json
@@ -466,6 +471,11 @@ eaa86659fb9204864c190849fa95de9f88ea1cb0 data/roots/recipe/mortar/string_from_wo
 241f69da7f7846903d182fa0f95eb16ea9d2e433 data/roots/recipe/mortar/string_from_wool_3.json
 8aaba7ae8b4e0655ded36489b0e0453d4022fc85 data/roots/recipe/mortar/string_from_wool_4.json
 8087501b49efd5ce709711d296daf6a0e25beb4a data/roots/recipe/mortar/string_from_wool_5.json
+eab2ae56674d812da356c1f3a79c511a7fcb9505 data/roots/recipe/mortar/sugar_from_sugar_cane_1.json
+9b52cb245e5e6b925ffaeb159d9e29da39a02ca8 data/roots/recipe/mortar/sugar_from_sugar_cane_2.json
+80b4b575900c67e2d4e6e791ca696600e9b1c824 data/roots/recipe/mortar/sugar_from_sugar_cane_3.json
+235e971fba834d3b76f0cea48bfb4bda060e59c1 data/roots/recipe/mortar/sugar_from_sugar_cane_4.json
+b94365c49f2bcfb1a6b75169abf37fc34c3dba7c data/roots/recipe/mortar/sugar_from_sugar_cane_5.json
 df95c4a0a957bbfa5994f539f9c1290c87621d7a data/roots/recipe/mossy_runestone_button.json
 d12d38bbad48f6e9a73fd3d20f3658ea80b48742 data/roots/recipe/mossy_runestone_button_from_mossy_runestone_stonecutting.json
 5d86ed377fab9831fe706b25abe8eb3395e1431d data/roots/recipe/mossy_runestone_from_runestone_grove_moss.json

@@ -1,0 +1,44 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "chanceOutputs": [
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 3,
+          "id": "minecraft:sugar"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 3,
+          "id": "minecraft:sugar"
+        }
+      },
+      {
+        "chance": 0.5,
+        "output": {
+          "count": 3,
+          "id": "minecraft:sugar"
+        }
+      }
+    ],
+    "ingredients": [
+      {
+        "tag": "c:crops/sugar_cane"
+      },
+      {
+        "tag": "c:crops/sugar_cane"
+      },
+      {
+        "tag": "c:crops/sugar_cane"
+      }
+    ],
+    "result": {
+      "count": 3,
+      "id": "minecraft:sugar"
+    }
+  },
+  "times": 3
+}
