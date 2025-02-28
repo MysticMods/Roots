@@ -326,6 +326,9 @@ public class RootsItemModelProvider extends ItemModelProvider {
 
     getBuilder("roots:gift_box").parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/gift_box"));
+
+    getBuilder("roots:geas").parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", modLoc("item/geas"));
   }
 
   @SuppressWarnings("UnusedReturnValue")

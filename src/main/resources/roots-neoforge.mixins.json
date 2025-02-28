@@ -16,6 +16,7 @@
     "MixinRecipeBuilder"
   ],
   "client": [
+    "AccessorMixinEntityRenderer",
     "AccessorMixinLevelRenderer",
     "AccessorMixinParticleEngine",
     "MixinLocalPlayer"

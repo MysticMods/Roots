@@ -25,8 +25,8 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -178,16 +178,23 @@ public class ClientSetup {
     event.register(ModContainers.HERB_POUCH.get(), HerbPouchScreen::new);
   }
 
-  public static final ModelResourceLocation GIFT_BOX = new ModelResourceLocation(SproutEntity.GIFT_BOX, "standalone");
+  public static final ResourceLocation GIFT_BOX_KEY = RootsAPI.rl("item/gift_box");
+  public static final ModelResourceLocation GIFT_BOX = new ModelResourceLocation(GIFT_BOX_KEY, "standalone");
   public static BakedModel GIFT_BOX_MODEL;
+
+  public static final ResourceLocation GEAS_KEY = RootsAPI.rl("item/geas");
+  public static final ModelResourceLocation GEAS = new ModelResourceLocation(GEAS_KEY, "standalone");
+  public static BakedModel GEAS_MODEL;
 
   @SubscribeEvent
   public static void onRegisterGeometry(ModelEvent.RegisterAdditional event) {
     event.register(GIFT_BOX);
+    event.register(GEAS);
   }
 
   @SubscribeEvent
   public static void onBakeModels (ModelEvent.BakingCompleted event) {
     GIFT_BOX_MODEL = event.getModels().get(GIFT_BOX);
+    GEAS_MODEL = event.getModels().get(GEAS);
   }
 }
