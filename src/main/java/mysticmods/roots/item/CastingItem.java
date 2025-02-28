@@ -6,6 +6,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -18,6 +19,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -55,6 +58,8 @@ public class CastingItem extends Item {
       return;
     }
 
+    InteractionHand pHand = pLivingEntity.getUsedItemHand();
+
     SpellStorage storage = pStack.get(ModAttachments.SPELL_STORAGE);
     if (storage == null) {
       pPlayer.stopUsingItem();
@@ -72,7 +77,7 @@ public class CastingItem extends Item {
     if (spell.getType() == Spell.Type.CONTINUOUS) {
       Costing costs = new Costing(spell, pPlayer);
 
-      if (ticks % spell.getSpell().getChargeRate() == 0) {
+      if (ticks % spell.getSpell().getCostChargeRate() == 0) {
         if (!costs.canAfford(pPlayer, true)) {
           RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getSpell().getName());
           pPlayer.stopUsingItem();
@@ -80,12 +85,22 @@ public class CastingItem extends Item {
         }
       }
 
-      if (spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costs, ticks) != 0) {
+      if (spell.cast(pLevel, pPlayer, pStack, pHand, costs, ticks) < 0) {
+        // This means the psell didn't cast
         // TODO: Kind of decide something about this
         RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());
+      } else {
+        // Actually transmit particles now
+        Vec3 start = pPlayer.getEyePosition();
+        Vec3 stop = spell.getBlockTarget(pPlayer);
+        if (stop != null) {
+          // Need to adjust start based on the hand
+          CastChannelFXPacket fx = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, fx);
+        }
       }
 
-      if (ticks % spell.getSpell().getChargeRate() == 0) {
+      if (ticks % spell.getSpell().getCostChargeRate() == 0) {
         costs.charge(pPlayer);
       }
     } else if (spell.getType() == Spell.Type.CHARGED) {

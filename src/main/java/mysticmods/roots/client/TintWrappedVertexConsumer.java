@@ -46,14 +46,4 @@ public class TintWrappedVertexConsumer implements VertexConsumer {
   public VertexConsumer setNormal(float pX, float pY, float pZ) {
     return wrapped.setNormal(pX, pY, pZ);
   }
-/*
-  @Override
-  public void defaultColor(int pDefaultR, int pDefaultG, int pDefaultB, int pDefaultA) {
-    wrapped.defaultColor(pDefaultR, pDefaultG, pDefaultB, pDefaultA);
-  }*/
-
-/*  @Override
-  public void unsetDefaultColor() {
-    wrapped.unsetDefaultColor();
-  }*/
 }

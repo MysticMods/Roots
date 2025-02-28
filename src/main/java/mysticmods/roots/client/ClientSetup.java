@@ -167,6 +167,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.WILDFIRE.get(), WildfireParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GEAS.get(), GeasParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GROWTH.get(), GrowthParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.CHANNEL.get(), ChannelCastParticle.Provider::new);
 
     event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
     event.registerSpecial(ModParticles.GROWTH_EMITTER.get(), new GrowthEmitter.Provider());

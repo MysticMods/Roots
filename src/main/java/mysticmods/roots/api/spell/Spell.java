@@ -30,11 +30,11 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -227,7 +227,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return Component.translatable("roots.message.staff.charging", currentCharge, getMaxUse());
   }
 
-  public int getChargeRate () {
+  public int getCostChargeRate() {
     return 20;
   }
 
@@ -372,6 +372,15 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   @Override
   public Spell asSpell() {
     return this;
+  }
+
+  public boolean hasBlockTarget(Player pPlayer) {
+    return false;
+  }
+
+  @Nullable
+  public Vec3 getBlockTarget(Player pPlayer) {
+    return null;
   }
 
   public enum Type {

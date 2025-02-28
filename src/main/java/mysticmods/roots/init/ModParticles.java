@@ -29,6 +29,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> WILDFIRE = PARTICLES.register("wildfire", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> GEAS = PARTICLES.register("geas", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> GROWTH = PARTICLES.register("growth", () -> new ColorGravityParticleType(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> CHANNEL = PARTICLES.register("channel", () -> new ColorGravityParticleType(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);
