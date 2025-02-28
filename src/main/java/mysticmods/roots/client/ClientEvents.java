@@ -3,6 +3,7 @@ package mysticmods.roots.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.mixin.AccessorMixinEntityRenderer;
@@ -32,7 +33,7 @@ public class ClientEvents {
 
   @SubscribeEvent
   public static void onEntityRender (RenderLivingEvent.Post<?, ?> event) {
-    if (event.getEntity().hasEffect(ModEffects.GEAS)) {
+    if (event.getEntity().getData(ModAttachments.HAS_GEAS)) {
       LivingEntityRenderer<?, ?> renderer = event.getRenderer();
       LivingEntity entity = event.getEntity();
       PoseStack poseStack = event.getPoseStack();

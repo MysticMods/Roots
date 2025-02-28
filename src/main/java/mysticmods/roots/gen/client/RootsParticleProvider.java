@@ -21,7 +21,6 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.sprite(ModParticles.GROWTH.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.CHANNEL.get(), RootsAPI.rl("simple"));
 
-    this.spriteSet(ModParticles.GEAS.get(), RootsAPI.rl("line"), 3, false);
     this.spriteSet(ModParticles.PYRE_LEAF.get(), RootsAPI.rl("leaf"), 5, false);
   }
 

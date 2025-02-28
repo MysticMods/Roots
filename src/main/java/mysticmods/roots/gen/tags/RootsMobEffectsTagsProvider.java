@@ -2,6 +2,7 @@ package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModEffects;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -24,5 +25,6 @@ public class RootsMobEffectsTagsProvider extends TagsProvider<MobEffect> {
     tag(RootsTags.MobEffects.SUPPRESS_PARTICLES);
     tag(RootsTags.MobEffects.PURITY_FORCE_EXCLUDE);
     tag(RootsTags.MobEffects.PURITY_FORCE_INCLUDE);
+    tag(RootsTags.MobEffects.GEAS).add(ModEffects.GEAS.getKey());
   }
 }

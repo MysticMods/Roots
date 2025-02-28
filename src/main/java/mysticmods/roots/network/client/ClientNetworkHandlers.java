@@ -102,4 +102,16 @@ public class ClientNetworkHandlers {
       actualEntity.removeData(ModAttachments.REPUTATION_STORAGE);
     }
   }
+
+  public static void syncGeas(int entityId, boolean value) {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft == null || minecraft.level == null) {
+      return;
+    }
+
+    Entity actualEntity = minecraft.level.getEntity(entityId);
+    if (actualEntity != null) {
+      actualEntity.setData(ModAttachments.HAS_GEAS, value);
+    }
+  }
 }

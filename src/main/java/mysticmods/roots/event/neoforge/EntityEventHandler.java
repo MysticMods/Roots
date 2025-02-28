@@ -8,12 +8,14 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSounds;
+import mysticmods.roots.network.client.ClientboundSyncGeasPacket;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -72,9 +74,19 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
+  public static void onPotionAdded (MobEffectEvent.Added event) {
+    if (event.getEffectInstance().getEffect().is(RootsTags.MobEffects.GEAS)) {
+      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity().getId(), true));
+    }
+  }
+
+  @SubscribeEvent
   public static void onPotionExpire(MobEffectEvent.Expired event) {
     if (event.getEffectInstance() == null) {
       return;
+    }
+    if (event.getEffectInstance().getEffect().is(RootsTags.MobEffects.GEAS)) {
+      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity().getId(), false));
     }
     if (event.getEffectInstance().getEffect().value() instanceof SimpleEffect simpleEffect) {
       if (simpleEffect.onEffectExpired(event.getEntity(), event.getEffectInstance().getAmplifier())) {
@@ -87,6 +99,9 @@ public class EntityEventHandler {
   public static void onPotionRemoved(MobEffectEvent.Remove event) {
     if (event.getEffectInstance() == null) {
       return;
+    }
+    if (event.getEffect().is(RootsTags.MobEffects.GEAS)) {
+      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity().getId(), false));
     }
     if (event.getEffectInstance().getEffect().value() instanceof SimpleEffect simpleEffect) {
       if (simpleEffect.onEffectRemoved(event.getEntity(), event.getEffectInstance().getAmplifier())) {
@@ -120,9 +135,16 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onEntityDetection (LivingEvent.LivingVisibilityEvent event) {
+  public static void onEntityDetection(LivingEvent.LivingVisibilityEvent event) {
     if (event.getEntity().hasEffect(ModEffects.NONDETECTION)) {
       event.modifyVisibility(0);
+    }
+  }
+
+  @SubscribeEvent
+  public static void onEntityStartTracking(PlayerEvent.StartTracking event) {
+    if (event.getTarget() instanceof LivingEntity living) {
+      PacketDistributor.sendToPlayer((ServerPlayer)event.getEntity(), new ClientboundSyncGeasPacket(living.getId(), living.hasEffect(ModEffects.GEAS)));
     }
   }
 

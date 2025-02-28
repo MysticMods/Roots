@@ -44,6 +44,7 @@ public class PacketHandler {
     registrar.play(ClientboundDiscardEntityAttachmentPacket.TYPE, ClientboundDiscardEntityAttachmentPacket.CODEC);
     registrar.play(GeasFXPacket.TYPE, GeasFXPacket.CODEC);
     registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
+    registrar.play(ClientboundSyncGeasPacket.TYPE, ClientboundSyncGeasPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

@@ -8,6 +8,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -20,6 +21,8 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+
+import java.util.function.Predicate;
 
 // Tags
 public class RootsTags {
@@ -419,6 +422,7 @@ public class RootsTags {
 
     public static final TagKey<MobEffect> PURITY_FORCE_EXCLUDE = modTag("purity_force_exclude");
     public static final TagKey<MobEffect> PURITY_FORCE_INCLUDE = modTag("purity_force_include");
+    public static final TagKey<MobEffect> GEAS = modTag("geas");
 
     static TagKey<MobEffect> modTag(String name) {
       return TagKey.create(Registries.MOB_EFFECT, RootsAPI.rl(name));

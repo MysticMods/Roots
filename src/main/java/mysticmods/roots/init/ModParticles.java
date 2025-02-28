@@ -27,7 +27,6 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> PYRE_LEAF = PARTICLES.register("pyre_leaf", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> FEY_LIGHT = PARTICLES.register("fey_light", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> WILDFIRE = PARTICLES.register("wildfire", () -> new ColorGravityParticleType(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> GEAS = PARTICLES.register("geas", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> GROWTH = PARTICLES.register("growth", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> CHANNEL = PARTICLES.register("channel", () -> new ColorGravityParticleType(false));
 
