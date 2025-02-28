@@ -67,6 +67,9 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.cost.cost_amount", "x%s");
     add("roots.tooltip.cost.cost_multiplier", "+%s");
 
+    add("roots.tooltip.pouch.color", "Dyed: %s");
+    add("roots.tooltip.pouch.color_name", "%s");
+
     add("roots.tooltip.staff.selected", "Selected Slot: %s");
     add("roots.tooltip.staff.no_spell", "No spell.");
     add("roots.tooltip.staff.spell_in_slot", "%s: %s%s");

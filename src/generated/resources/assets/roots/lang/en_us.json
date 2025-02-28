@@ -412,6 +412,8 @@
   "roots.tooltip.cost.cost_multiplier": "+%s",
   "roots.tooltip.cost.herb_cost": "%s %s",
   "roots.tooltip.hold_shift": "[Hold %s for more information.]",
+  "roots.tooltip.pouch.color": "Dyed: %s",
+  "roots.tooltip.pouch.color_name": "%s",
   "roots.tooltip.shift": "Shift",
   "roots.tooltip.staff.is_selected": " (Selected)",
   "roots.tooltip.staff.no_spell": "No spell.",
