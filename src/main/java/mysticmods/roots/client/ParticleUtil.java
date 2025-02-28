@@ -13,22 +13,10 @@ import net.minecraft.world.entity.Entity;
 import java.util.function.BiConsumer;
 
 public class ParticleUtil {
-  private static final Int2ObjectArrayMap<TrackingEmitter> emitters = new Int2ObjectArrayMap<>();
-
-  public static TrackingEmitter getEmitter(int id) {
-    return emitters.get(id);
-  }
-
   public static void addTrackingEmitter(Entity entity, int emitterLiftime, BiConsumer<ClientLevel, Entity> particleBuilder) {
     Minecraft minecraft = Minecraft.getInstance();
     ((AccessorMixinParticleEngine) minecraft.particleEngine).getTrackingEmitters()
         .add(new RootsTrackingEmitter(minecraft.level, entity, emitterLiftime, particleBuilder));
-  }
-
-  public enum Point {
-    X,
-    Y,
-    Z
   }
 
   public static class RootsTrackingEmitter extends TrackingEmitter {
