@@ -116,7 +116,7 @@ public class KnifeItem extends TieredItem {
 
   @Override
   public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-    stack.hurtAndBreak(2, attacker, EquipmentSlot.MAINHAND);
+    stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
   }
 
   public static class KnifeDispenseBehaviour extends DefaultDispenseItemBehavior {
