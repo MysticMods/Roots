@@ -18,10 +18,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.settings.IKeyConflictContext;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
-import net.neoforged.neoforge.client.settings.KeyModifier;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
@@ -35,14 +34,15 @@ public class KeyBindings {
   public static final KeyMapping DECREASE_SPELL = new KeyMapping("key.roots.decrease_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_BRACKET, CATEGORY);
   public static final KeyMapping CYCLE_SPELL = new KeyMapping("key.roots.cycle_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_BACKSLASH, CATEGORY);
 
-  public static final List<KeyMapping> MAPPINGS = new ArrayList<>();
+  public static final List<KeyMapping> MAPPINGS = Arrays.asList(
+      OPEN_SPELL_LIBRARY,
+      INCREASE_SPELL,
+      DECREASE_SPELL,
+      CYCLE_SPELL);
+
 
   @SubscribeEvent
   public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-    MAPPINGS.add(OPEN_SPELL_LIBRARY);
-    MAPPINGS.add(INCREASE_SPELL);
-    MAPPINGS.add(DECREASE_SPELL);
-    MAPPINGS.add(CYCLE_SPELL);
     event.register(OPEN_SPELL_LIBRARY);
     event.register(INCREASE_SPELL);
     event.register(DECREASE_SPELL);
