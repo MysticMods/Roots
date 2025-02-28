@@ -37,7 +37,9 @@ public class HerbPouchItem extends Item {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     tooltipComponents.add(Component.literal(""));
     DyeColor dye = stack.get(DataComponents.BASE_COLOR);
-    tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.getName()))
-        .setStyle(Style.EMPTY.withColor(dye.getTextColor()).withBold(true))));
+    if (dye != null) {
+      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.getName()))
+          .setStyle(Style.EMPTY.withColor(dye.getTextColor()).withBold(true))));
+    }
   }
 }
