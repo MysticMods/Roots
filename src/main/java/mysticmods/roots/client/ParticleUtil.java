@@ -1,5 +1,6 @@
 package mysticmods.roots.client;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import mysticmods.roots.mixin.AccessorMixinParticleEngine;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -12,6 +13,11 @@ import net.minecraft.world.entity.Entity;
 import java.util.function.BiConsumer;
 
 public class ParticleUtil {
+  private static final Int2ObjectArrayMap<TrackingEmitter> emitters = new Int2ObjectArrayMap<>();
+
+  public static TrackingEmitter getEmitter(int id) {
+    return emitters.get(id);
+  }
 
   public static void addTrackingEmitter(Entity entity, int emitterLiftime, BiConsumer<ClientLevel, Entity> particleBuilder) {
     Minecraft minecraft = Minecraft.getInstance();

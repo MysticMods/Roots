@@ -27,6 +27,7 @@ public class ModAttachments {
   private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, RootsAPI.MODID);
   private static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, RootsAPI.MODID);
 
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> HAS_GEAS = ATTACHMENTS.register("has_geas", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<GrantStorage>> GRANT_STORAGE = ATTACHMENTS.register("grant_storage", () -> AttachmentType.builder(GrantStorage::new)
       .serialize(GrantStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<HerbStorage>> HERB_STORAGE = ATTACHMENTS.register("herb_storage", () -> AttachmentType.builder(() -> new HerbStorage())
