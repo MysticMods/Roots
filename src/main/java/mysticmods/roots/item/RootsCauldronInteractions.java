@@ -14,11 +14,13 @@ public class RootsCauldronInteractions {
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     } else if (!stack.has(DataComponents.BASE_COLOR)) {
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    } else {
+    } else if (stack.get(DataComponents.BASE_COLOR) != DyeColor.BROWN) {
       stack.set(DataComponents.BASE_COLOR, DyeColor.BROWN);
       player.awardStat(Stats.CLEAN_ARMOR);
       LayeredCauldronBlock.lowerFillLevel(state, level, pos);
       return ItemInteractionResult.sidedSuccess(level.isClientSide());
+    } else {
+      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
   };
 }
