@@ -36,7 +36,7 @@ public class ChannelCastParticle extends TextureSheetParticle {
     this.yo = this.y;
     this.z += (random.nextDouble() - 0.5) * 0.2;
     this.zo = this.z;
-    this.quadSize *= 0.75f;
+    this.quadSize = 0.25f;
     this.setPos(this.x, this.y, this.z);
   }
 
@@ -90,6 +90,8 @@ public class ChannelCastParticle extends TextureSheetParticle {
       if (bounced) {
         this.alpha = Math.max(1.0f - ((float) this.age / this.lifetime), 0.0f);
       }
+
+      this.quadSize = Math.max(0.15f, quadSize * (1.0f - f));
     }
   }
 
