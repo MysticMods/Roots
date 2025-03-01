@@ -12,6 +12,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +37,11 @@ public class SupportingDirectionalBlockFeature extends Feature<SimpleBlockConfig
     BlockPos rootPos = context.origin();
     BlockState rootState = context.config().toPlace().getState(context.random(), rootPos);
     BlockState worldState = level.getBlockState(rootPos);
+
+    FluidState fluidState = level.getFluidState(rootPos);
+    if (fluidState.is(Fluids.WATER) && fluidState.isSource()) {
+      rootState = rootState.setValue(WildRootsBlock.WATERLOGGED, true).setValue(WildRootsBlock.MOSSY, true);
+    }
 
     // TODO: Is this new replaceable eligible?
     if (worldState.isAir() || worldState.is(BlockTags.REPLACEABLE) || worldState.is(Blocks.SNOW)) {
