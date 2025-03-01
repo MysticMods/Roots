@@ -185,15 +185,21 @@ public class ClientSetup {
   public static final ModelResourceLocation GEAS = new ModelResourceLocation(GEAS_KEY, "standalone");
   public static BakedModel GEAS_MODEL;
 
+  public static final ResourceLocation NO_GROVE_STONE_KEY = RootsAPI.rl("item/no_grove_stone");
+  public static final ModelResourceLocation NO_GROVE_STONE = new ModelResourceLocation(NO_GROVE_STONE_KEY, "standalone");
+  public static BakedModel NO_GROVE_STONE_MODEL;
+
   @SubscribeEvent
   public static void onRegisterGeometry(ModelEvent.RegisterAdditional event) {
     event.register(GIFT_BOX);
     event.register(GEAS);
+    event.register(NO_GROVE_STONE);
   }
 
   @SubscribeEvent
   public static void onBakeModels (ModelEvent.BakingCompleted event) {
     GIFT_BOX_MODEL = event.getModels().get(GIFT_BOX);
     GEAS_MODEL = event.getModels().get(GEAS);
+    NO_GROVE_STONE_MODEL = event.getModels().get(NO_GROVE_STONE);
   }
 }

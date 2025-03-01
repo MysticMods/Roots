@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-01T11:26:35.657067	Item Models: roots
+// 1.21.1	2025-03-01T13:08:13.3284188	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -101,6 +101,7 @@ d593c967526cdaae6ac45af599c2b36b98e4090a assets/roots/models/item/mossy_runeston
 0e4ed5cdc4c43e5f00562a8c55187cfeaf95e30e assets/roots/models/item/mossy_runestone_wall.json
 ac602506c37d0b22017338ee187d0d4185e18825 assets/roots/models/item/mystic_feather.json
 1c37fc0c9675461d938e9e00da8ab2b374a3688c assets/roots/models/item/netherite_knife.json
+44ebd8d47e56f77557cb48346122cb570f685c99 assets/roots/models/item/no_grove_stone.json
 bb082cec1ce31e7bcd200abe6e0eef69ade972bb assets/roots/models/item/oak_bark.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/owl_spawn_egg.json
 984d4e24e66b86fe25c5680f4209e24bebb1b8df assets/roots/models/item/pelt.json

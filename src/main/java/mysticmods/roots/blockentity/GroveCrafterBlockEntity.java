@@ -6,8 +6,11 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
+import mysticmods.roots.block.GroveCrafterBlock;
+import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
+import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.PedestalInventoryWrapper;
@@ -34,7 +37,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity {
   private RecipeHolder<GroveRecipe> lastRecipe = null;
@@ -53,6 +59,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     // TODO:
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
+    }
+
+    if (!state.getValue(GroveCrafterBlock.ACTIVE)) {
+      return InteractionResult.FAIL;
     }
 
     if (inHand.isEmpty() || inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
@@ -98,6 +108,16 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   protected void revalidateRecipe() {
+    boolean active = getBlockState().getValue(GroveCrafterBlock.ACTIVE);
+    if (getBoundingBox() != null) {
+      Set<BlockPos> groveStones = ModConditions.GROVE_STONE_ACTIVE.get().test(getLevel(), null, PyreBlockEntity.getPyreBoundingBox(), getBlockPos(), Collections.emptySet());
+      if (groveStones.isEmpty() && active) {
+        getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, false), 3);
+      } else if (!groveStones.isEmpty() && !active) {
+        getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, true), 3);
+      }
+    }
+
     List<Pair<BlockPos, PedestalBlockEntity>> pedestals = pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
     if (pedestals.isEmpty()) {
       cachedRecipe = null;
@@ -201,7 +221,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
     MinecraftServer server = pLevel.getServer();
-    if (server != null && server.getTickCount() % 20 == 0) {
+    if (server != null && server.getTickCount() % 2 == 0) {
       revalidateRecipe();
     }
   }
