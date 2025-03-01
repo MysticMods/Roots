@@ -9,17 +9,21 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.GrowthFXPacket;
 import mysticmods.roots.util.GrowthUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -42,7 +46,7 @@ public class GrowthInfusionSpell extends Spell {
   }
 
   @Override
-  public void buildProperties (List<PropertyHolder<?>> result) {
+  public void buildProperties(List<PropertyHolder<?>> result) {
     super.buildProperties(result);
     result.add(ModSpells.GROWTH_INFUSION_BASE_TICKS);
   }
@@ -66,12 +70,14 @@ public class GrowthInfusionSpell extends Spell {
   @Override
   public int cast(Level level, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     BlockHitResult result = pickBlock(pPlayer);
-    BlockState at = level.getBlockState(result.getBlockPos());
+    BlockPos pos = result.getBlockPos();
+    BlockState at = level.getBlockState(pos);
 
-    int doTicks = GrowthUtil.growthTicks(level, result.getBlockPos(), at, pPlayer);
+    int doTicks = GrowthUtil.growthTicks(level, pos, at, pPlayer);
     if (doTicks > 0) {
       if (level.random.nextInt(doTicks) == 0) {
-        at.randomTick((ServerLevel) level, result.getBlockPos(), level.random);
+        at.randomTick((ServerLevel) level, pos, level.random);
+        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(new Vec3(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5)));
       }
     } else {
       costs.noCharge();

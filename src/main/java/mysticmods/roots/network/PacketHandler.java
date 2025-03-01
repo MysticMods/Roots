@@ -4,6 +4,7 @@ import mysticmods.roots.client.particle.ChannelCastParticle;
 import mysticmods.roots.network.client.*;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.network.client.fx.GeasFXPacket;
+import mysticmods.roots.network.client.fx.GrowthFXPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
 import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
@@ -43,6 +44,7 @@ public class PacketHandler {
     registrar.play(ClientboundEntitySnapshotSyncPacket.TYPE, ClientboundEntitySnapshotSyncPacket.CODEC);
     registrar.play(ClientboundDiscardEntityAttachmentPacket.TYPE, ClientboundDiscardEntityAttachmentPacket.CODEC);
     registrar.play(GeasFXPacket.TYPE, GeasFXPacket.CODEC);
+    registrar.play(GrowthFXPacket.TYPE, GrowthFXPacket.CODEC);
     registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
     registrar.play(ClientboundSyncGeasPacket.TYPE, ClientboundSyncGeasPacket.CODEC);
   }

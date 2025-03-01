@@ -58,4 +58,33 @@ public class ClientFXHandlers {
       );
     }
   }
+
+  public static void growth(Vec3 location) {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft.level != null) {
+      for (int i = 0; i < 2; i++) {
+        double progress = minecraft.level.random.nextDouble();
+        double angle = progress * Math.PI * 4;
+        double radius = progress * 0.5;
+
+        double xOffset = radius * Math.cos(angle);
+        double zOffset = radius * Math.sin(angle);
+        double yOffset = 0.3 + (minecraft.level.random.nextFloat() - 0.5) * 0.1;
+
+        minecraft.level.addParticle(
+            new ColorGravityParticleOptions(
+                ModParticles.GROWTH,
+                0x248542,
+                0f
+            ),
+            location.x + xOffset,
+            location.y + yOffset,
+            location.z + zOffset,
+            0,
+            0.05,
+            0
+        );
+      }
+    }
+  }
 }
