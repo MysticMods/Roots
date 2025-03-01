@@ -171,7 +171,7 @@ public class RootsDataPackGenerators {
                   )));
                   bootstrap.register(ModFeatures.PLACED_HANGING_MOSS_KEY, new PlacedFeature(configuredFeatures.getOrThrow(ModFeatures.CONFIGURED_HANGING_MOSS_KEY), List.of(
                       BiomeFilter.biome(),
-                      CountPlacement.of(15),
+                      CountPlacement.of(10),
                       InSquarePlacement.spread(),
                       HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                       RandomOffsetPlacement.vertical(UniformInt.of(1, 3)), // Offset up one to above surface
