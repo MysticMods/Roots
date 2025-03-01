@@ -216,10 +216,10 @@ public abstract class LevelCondition implements IDescribed {
     }
 
     protected boolean getValid(BlockState state) {
-      if (!state.hasProperty(StateProperties.GroveStone.ACTIVE)) {
+      if (!state.hasProperty(StateProperties.ACTIVE)) {
         return false;
       } else {
-        return state.getValue(StateProperties.GroveStone.ACTIVE);
+        return state.getValue(StateProperties.ACTIVE);
       }
     }
 
@@ -241,7 +241,7 @@ public abstract class LevelCondition implements IDescribed {
       BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP)
           .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
       //noinspection rawtypes
-      Property[] properties = new Property[]{StateProperties.GroveStone.PART, StateProperties.GroveStone.ACTIVE, StateProperties.GroveStone.FACING};
+      Property[] properties = new Property[]{StateProperties.GroveStone.PART, StateProperties.ACTIVE, StateProperties.GroveStone.FACING};
       return new CanonicalRepresentation(new PartialBlockState(bottom, properties), new PartialBlockState(middle, properties), new PartialBlockState(top, properties));
     }
 

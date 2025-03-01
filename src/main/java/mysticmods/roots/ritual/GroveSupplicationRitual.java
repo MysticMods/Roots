@@ -21,7 +21,7 @@ import java.util.function.BiPredicate;
 public class GroveSupplicationRitual extends Ritual {
   private static final BiPredicate<Level, BlockPos> GROVE_STONE_PREDICATE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
-    return state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.GroveStone.ACTIVE) && !state.getValue(StateProperties.GroveStone.ACTIVE);
+    return state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL) && state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE) && !state.getValue(StateProperties.ACTIVE);
   };
 
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(GROVE_STONE_PREDICATE);
@@ -39,9 +39,9 @@ public class GroveSupplicationRitual extends Ritual {
         for (BlockPos pos : pCache.iterate(GROVE_STONE_PREDICATE, randomSource)) {
           BlockState state = blockEntity.getLevel().getBlockState(pos);
           if (state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL)) {
-            if (state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.GroveStone.ACTIVE)) {
-              if (!state.getValue(StateProperties.GroveStone.ACTIVE)) {
-                blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.GroveStone.ACTIVE, true));
+            if (state.hasProperty(StateProperties.GroveStone.PART) && state.hasProperty(StateProperties.ACTIVE)) {
+              if (!state.getValue(StateProperties.ACTIVE)) {
+                blockEntity.getLevel().setBlockAndUpdate(pos, state.setValue(StateProperties.ACTIVE, true));
               }
             }
           }

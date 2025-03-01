@@ -9,10 +9,11 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import java.util.List;
 
 public class StateProperties {
+  public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+
   public static class GroveStone {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final PartProperty PART = PartProperty.create("part");
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
   }
 
   public static class PartProperty extends EnumProperty<Part> {

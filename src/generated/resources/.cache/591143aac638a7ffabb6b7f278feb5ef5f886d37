@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-28T17:06:40.4138001	Item Models: roots
+// 1.21.1	2025-03-01T11:26:35.657067	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -69,7 +69,7 @@ cb855da7b1d0684c4bc009f0241040ca807f5123 assets/roots/models/item/geas.json
 5435be8db38522314eefe77149313635473e45a3 assets/roots/models/item/gramary.json
 3b41145a3b0d4c733c6cfc658481713ad4130b6e assets/roots/models/item/granite_quartz_ore.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/green_sprout_spawn_egg.json
-920b08299dc3c05b6ca2bb4004faf8b730d1974e assets/roots/models/item/grove_crafter.json
+06eb1d5ea6dd0dd11106b80a054fd03eae4f0605 assets/roots/models/item/grove_crafter.json
 2f13055795ba9015e6c0dbfc42f5574ccc04dd42 assets/roots/models/item/grove_moss.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/grove_pedestal.json
 97deb2b89129d391d5fdd1bb246a72b35fc3a06a assets/roots/models/item/grove_spores.json

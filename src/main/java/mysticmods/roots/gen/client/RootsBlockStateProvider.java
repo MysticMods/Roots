@@ -142,9 +142,15 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     ModelFile reinforcedRitualPedestal = models().withExistingParent("reinforced_ritual_pedestal", modLoc("block/complex/reinforced_ritual_pedestal"));
     getVariantBuilder(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(reinforcedRitualPedestal).build());
-    ModelFile existingGroveCrafter = models().withExistingParent("grove_crafter", modLoc("block/complex/grove_crafter"));
-    getVariantBuilder(ModBlocks.GROVE_CRAFTER.get()).forAllStates(state -> ConfiguredModel.builder()
-        .modelFile(existingGroveCrafter).build());
+    ModelFile existingGroveCrafterActive = models().withExistingParent("grove_crafter_active", modLoc("block/complex/grove_crafter_active"));
+    ModelFile existingGroveCrafterInactive = models().withExistingParent("grove_crafter_inactive", modLoc("block/complex/grove_crafter_inactive"));
+    getVariantBuilder(ModBlocks.GROVE_CRAFTER.get()).forAllStates(state -> {
+      if (state.getValue(StateProperties.ACTIVE)) {
+        return ConfiguredModel.builder().modelFile(existingGroveCrafterActive).build();
+      } else {
+        return ConfiguredModel.builder().modelFile(existingGroveCrafterInactive).build();
+      }
+    });
     ModelFile grovePedestal = models().withExistingParent("grove_pedestal", modLoc("block/complex/grove_pedestal"));
     getVariantBuilder(ModBlocks.GROVE_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(grovePedestal).build());
@@ -158,7 +164,8 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     simpleBlock(ModBlocks.CREEPING_GROVE_MOSS.get(), models().singleTexture(ModBlocks.CREEPING_GROVE_MOSS.getKey()
             .location().getPath(), mcLoc("block/carpet"), "wool", modLoc("block/creeping_grove_moss"))
         .renderType("cutout"));
-    ModelFile hangingGroveMoss = models().withExistingParent("hanging_grove_moss", modLoc("block/complex/hanging_grove_moss")).renderType("cutout");
+    ModelFile hangingGroveMoss = models().withExistingParent("hanging_grove_moss", modLoc("block/complex/hanging_grove_moss"))
+        .renderType("cutout");
     getVariantBuilder(ModBlocks.HANGING_GROVE_MOSS.get())
         .forAllStates(state -> {
           Direction dir = state.getValue(HangingGroveMossBlock.FACING);
@@ -202,7 +209,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     // Primal grove stone
     getVariantBuilder(ModBlocks.PRIMAL_GROVE_STONE.get())
         .forAllStates(state -> {
-          boolean valid = state.getValue(StateProperties.GroveStone.ACTIVE);
+          boolean valid = state.getValue(StateProperties.ACTIVE);
           BlockModelBuilder model = switch (state.getValue(GroveStoneBlock.PART)) {
             case MIDDLE ->
                 models().withExistingParent("primal_grove_stone_middle" + (valid ? "_valid" : ""), modLoc("block/complex/grove_stone_middle"));
@@ -297,12 +304,14 @@ public class RootsBlockStateProvider extends BlockStateProvider {
         .modelFile(unendingBowl).build());
 
     getVariantBuilder(ModBlocks.BAFFLECAP.get()).forAllStates(state -> ConfiguredModel.builder()
-        .modelFile(models().getBuilder("block/bafflecap").parent(crop).texture("cross", modLoc("block/bafflecap")).renderType("cutout"))
+        .modelFile(models().getBuilder("block/bafflecap").parent(crop).texture("cross", modLoc("block/bafflecap"))
+            .renderType("cutout"))
         .build());
 
     ModelFile feyLight = models().getExistingFile(modLoc("block/fey_light"));
 
-    getVariantBuilder(ModBlocks.FEY_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(feyLight).build());
+    getVariantBuilder(ModBlocks.FEY_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(feyLight)
+        .build());
 
     crop(ModBlocks.WILDROOT_CROP, false);
     crop(ModBlocks.CLOUD_BERRY_CROP, false);

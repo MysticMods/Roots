@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 public class GroveStoneBlock extends HorizontalDirectionalBlock {
   public static final DirectionProperty FACING = StateProperties.GroveStone.FACING;
   public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
-  public static final BooleanProperty ACTIVE = StateProperties.GroveStone.ACTIVE;
+  public static final BooleanProperty ACTIVE = StateProperties.ACTIVE;
 
   public static final VoxelShape[] EAST_WEST = {VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_TOP, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_MIDDLE, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_BOTTOM, Direction.EAST)};
   public static final VoxelShape[] NORTH_SOUTH = {Shapes.GROVE_STONE_TOP, Shapes.GROVE_STONE_MIDDLE, Shapes.GROVE_STONE_BOTTOM};
