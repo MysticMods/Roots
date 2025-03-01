@@ -1,4 +1,4 @@
-package mysticmods.roots.item;
+package mysticmods.roots.item.living;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

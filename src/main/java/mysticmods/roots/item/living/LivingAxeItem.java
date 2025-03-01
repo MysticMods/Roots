@@ -1,6 +1,5 @@
 package mysticmods.roots.item.living;
 
-import mysticmods.roots.item.ILivingRepair;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;

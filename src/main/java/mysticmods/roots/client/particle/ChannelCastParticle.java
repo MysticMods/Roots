@@ -9,6 +9,7 @@ import net.minecraft.world.phys.Vec3;
 public class ChannelCastParticle extends TextureSheetParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
+  protected boolean bounced = false;
 
   protected Vec3 stop;
 
@@ -35,12 +36,13 @@ public class ChannelCastParticle extends TextureSheetParticle {
     this.yo = this.y;
     this.z += (random.nextDouble() - 0.5) * 0.2;
     this.zo = this.z;
+    this.quadSize *= 0.75f;
     this.setPos(this.x, this.y, this.z);
   }
 
   @Override
   public ParticleRenderType getRenderType() {
-    return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
   }
 
   @Override
@@ -61,34 +63,33 @@ public class ChannelCastParticle extends TextureSheetParticle {
       }
 
       // Here is where we determine if we're close to the stop location
-      if (this.getPos().distanceTo(this.stop) < 0.1) {
-        double newXd = -this.zd;
-        double newZd = this.xd;
+      if (this.getPos().distanceTo(this.stop) < 0.18 && !bounced) {
+        Vec3 normal = stop.subtract(this.x, this.y, this.z).normalize();
+        Vec3 velocity = new Vec3(this.xd, this.yd, this.zd);
 
-        // Add slight randomness for spreading out
-        double spread = 0.05; // Adjust for more or less spread
-        newXd += (random.nextDouble() - 0.5) * spread;
-        newZd += (random.nextDouble() - 0.5) * spread;
-        this.xd = newXd;
-        this.zd = newZd;
+        Vec3 reflection = velocity.subtract(normal.scale(2 * velocity.dot(normal)));
 
-        // Set a downward motion to simulate gravity or dispersal
-        this.yd = -0.05;
+        double spread = 0.05;
+        reflection = reflection.add((random.nextDouble() - 0.5) * spread, (random.nextDouble() - 0.5) * spread, (random.nextDouble() - 0.5) * spread);
+
+        this.xd = reflection.x;
+        this.yd = reflection.y;
+        this.zd = reflection.z;
+
+        double damping = 0.08;
+        this.xd *= damping;
+        this.yd *= damping;
+        this.zd *= damping;
 
         // Shorten lifetime for quicker dispersal
         this.age = 0;
-        this.lifetime = 15;
+        this.lifetime = 12;
+        this.bounced = true;
       }
 
-      f *= f;
-
-/*      // Height control
-      if (this.age < 8) {
-        this.yd = 0; // Stay at the same height
-      } else {
-        // Start dropping slowly in the last few ticks
-        this.yd -= (0.2 * f) * 0.1f;
-      }*/
+      if (bounced) {
+        this.alpha = Math.max(1.0f - ((float) this.age / this.lifetime), 0.0f);
+      }
     }
   }
 

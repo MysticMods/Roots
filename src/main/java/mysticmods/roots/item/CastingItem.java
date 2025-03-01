@@ -90,13 +90,19 @@ public class CastingItem extends Item {
         // TODO: Kind of decide something about this
         RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());
       } else {
-        // Actually transmit particles now
-        Vec3 start = pPlayer.getEyePosition();
-        Vec3 stop = spell.getBlockTarget(pPlayer);
-        if (stop != null) {
-          // Need to adjust start based on the hand
-          CastChannelFXPacket fx = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
-          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, fx);
+        if (ticks % 2 == 0) {
+          // Actually transmit particles now
+          Vec3 lookDir = pPlayer.getViewVector(1.0f);
+          Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
+          double sideOffset = 0.3;
+          Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
+          Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
+          Vec3 stop = spell.getBlockTarget(pPlayer);
+          if (stop != null) {
+            // Need to adjust start based on the hand
+            CastChannelFXPacket fx = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+            PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, fx);
+          }
         }
       }
 
