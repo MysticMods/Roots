@@ -17,6 +17,5 @@ public class RootsAtlasProvider extends SpriteSourceProvider {
 
   @Override
   protected void gather() {
-    this.atlas(BLOCKS_ATLAS).addSource(new SingleFile(RootsAPI.rl("entity/gift_box"), Optional.empty()));
   }
 }
