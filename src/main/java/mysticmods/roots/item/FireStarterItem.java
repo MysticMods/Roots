@@ -2,8 +2,10 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -14,11 +16,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -28,7 +32,6 @@ public class FireStarterItem extends Item {
     super(props);
   }
 
-  // TODO: Need this for casting item
   @Override
   public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
     if (level.isClientSide() && entity instanceof Player player) {
@@ -51,36 +54,52 @@ public class FireStarterItem extends Item {
       if (ray.getType() == HitResult.Type.BLOCK) {
         BlockPos blockpos = ray.getBlockPos();
         BlockState stateAt = level.getBlockState(blockpos);
-        if (!stateAt.isCollisionShapeFullBlock(level, blockpos)) {
-          blockpos = blockpos.relative(ray.getDirection());
-          stateAt = level.getBlockState(blockpos);
+        BlockPos relative = blockpos.relative(ray.getDirection());
+        BlockState relativeState = level.getBlockState(relative);
+
+        boolean doPyre = false;
+        BlockPos pyrePos = blockpos;
+
+        if (stateAt.is(RootsTags.Blocks.PYRES)) {
+          doPyre = true;
+        } else if (relativeState.is(RootsTags.Blocks.PYRES)) { // The block above might have been hit
+          pyrePos = relative;
+          doPyre = true;
         }
-        if (level.mayInteract(player, blockpos) && player.mayUseItemAt(blockpos, ray.getDirection(), stack)) {
-          BlockPos below = blockpos.below();
-          BlockState stateBelow = level.getBlockState(below);
-          PyreBlockEntity pyreBlockEntity = null;
-          if (stateAt.is(RootsTags.Blocks.PYRES)) {
-            BlockEntity be = level.getBlockEntity(blockpos);
-            if (be instanceof PyreBlockEntity pbe) {
-              pyreBlockEntity = pbe;
-            }
-          } else if (stateBelow.is(RootsTags.Blocks.PYRES)) {
-            BlockEntity be = level.getBlockEntity(below);
-            if (be instanceof PyreBlockEntity pbe) {
-              pyreBlockEntity = pbe;
-            }
-          }
-          if (pyreBlockEntity != null) {
-            level.playSound(player, below, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            if (pyreBlockEntity.light(player) != InteractionResult.SUCCESS_NO_ITEM_USED) {
+
+        if (doPyre) {
+          BlockEntity be = level.getBlockEntity(pyrePos);
+          if (be instanceof PyreBlockEntity pbe) {
+            if (pbe.light(player) != InteractionResult.SUCCESS_NO_ITEM_USED) {
+              level.playSound(player, pyrePos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom()
+                  .nextFloat() * 0.4F + 0.8F);
               used = true;
             }
-          } else if (stateAt.isAir()) {
-            level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            level.setBlock(blockpos, Blocks.FIRE.defaultBlockState(), 11);
+          }
+        } else {
+          UseOnContext context = new UseOnContext(player, player.getUsedItemHand(), ray);
+          BlockState blockstate2 = stateAt.getToolModifiedState(context, net.neoforged.neoforge.common.ItemAbilities.FIRESTARTER_LIGHT, false);
+          if (blockstate2 == null) {
+            BlockPos blockpos1 = blockpos.relative(context.getClickedFace());
+            if (BaseFireBlock.canBePlacedAt(level, blockpos1, context.getHorizontalDirection())) {
+              level.playSound(player, blockpos1, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+              level.setBlock(blockpos1, BaseFireBlock.getState(level, blockpos1), 11);
+              level.gameEvent(player, GameEvent.BLOCK_PLACE, blockpos);
+              if (player instanceof ServerPlayer) {
+                CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer)player, blockpos1, stack);
+                stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
+              }
+
+              used = true;
+            }
+          } else {
+            level.playSound(player, blockpos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+            level.setBlock(blockpos, blockstate2, 11);
+            level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockpos);
             used = true;
           }
         }
+
       }
 
       if (used && !player.isCreative()) {
@@ -93,13 +112,13 @@ public class FireStarterItem extends Item {
   }
 
   @Override
-  public UseAnim getUseAnimation(ItemStack p_77661_1_) {
+  public UseAnim getUseAnimation(ItemStack stack) {
     return UseAnim.BOW;
   }
 
   @Override
-  public int getUseDuration(ItemStack p_77626_1_, LivingEntity entity) {
-    return 60;
+  public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    return 20;
   }
 
   @Override

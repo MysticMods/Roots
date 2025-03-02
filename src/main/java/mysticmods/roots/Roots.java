@@ -13,9 +13,10 @@ import net.neoforged.fml.config.ModConfig;
 // TODO:
 // - Nondetection
 //     Doesn't stop alerts
+// - Geas
+//    What other mobs will continue attacking when they lose a target?
 // Drops aren't right
 //   - Getting better but not perfect
-// - Fire starter is still inconsistent
 // - Overhaul all block properties, stop using defaults.
 // - Extend JEI integration to different recipe types
 // - Level and player conditions for JEI
