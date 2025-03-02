@@ -12,6 +12,9 @@
     "roots:magmatic_soil": {
       "burn_time": 900
     },
+    "roots:sheared_thatch": {
+      "burn_time": 300
+    },
     "roots:thatch": {
       "burn_time": 300
     },

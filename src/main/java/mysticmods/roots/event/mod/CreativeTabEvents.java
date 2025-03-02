@@ -13,6 +13,7 @@ public class CreativeTabEvents {
   public static void creativeTabOrder(BuildCreativeModeTabContentsEvent event) {
     if (event.getTab().equals(ModTabs.ROOTS_TAB.get())) {
       event.accept(ModItems.THATCH.get());
+      event.accept(ModItems.SHEARED_THATCH.get());
       event.accept(ModItems.RUNESTONE.get());
       event.accept(ModItems.MOSSY_RUNESTONE.get());
       event.accept(ModItems.CHISELED_RUNESTONE.get());

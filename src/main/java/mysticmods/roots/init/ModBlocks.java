@@ -40,7 +40,8 @@ public class ModBlocks {
       .strength(50.0F, 1200.0F);
   public static BlockBehaviour.Properties CROP_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT);
 
-  public static DeferredHolder<Block, WaterloggedBlock> THATCH = BLOCKS.register("thatch", () -> new WaterloggedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
+  public static DeferredHolder<Block, WaterloggedBlock> THATCH = BLOCKS.register("thatch", () -> new ThatchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).noOcclusion()));
+  public static DeferredHolder<Block, WaterloggedBlock> SHEARED_THATCH = BLOCKS.register("sheared_thatch", () -> new WaterloggedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
   public static DeferredHolder<Block, Block> RUNESTONE = BLOCKS.register("runestone", () -> new Block(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, Block> MOSSY_RUNESTONE = BLOCKS.register("mossy_runestone", () -> new Block(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, Block> CHISELED_RUNESTONE = BLOCKS.register("chiseled_runestone", () -> new Block(RUNESTONE_PROPERTIES));

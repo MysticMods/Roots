@@ -138,6 +138,7 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     Builder<FurnaceFuel, Item> builder10 = builder(NeoForgeDataMaps.FURNACE_FUELS).replace(false);
     builder10.add(ModItems.THATCH, new FurnaceFuel(300), false);
+    builder10.add(ModItems.SHEARED_THATCH, new FurnaceFuel(300), false);
     builder10.add(ModItems.WILDWOOD_PEDESTAL, new FurnaceFuel(300), false);
     builder10.add(ModItems.GROVE_PEDESTAL, new FurnaceFuel(300), false);
     builder10.add(ModItems.DISPLAY_PEDESTAL, new FurnaceFuel(300), false);

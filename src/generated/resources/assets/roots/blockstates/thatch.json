@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
-      "model": "roots:block/thatch"
+    "waterlogged=false": {
+      "model": "roots:block/complex/thatch"
+    },
+    "waterlogged=true": {
+      "model": "roots:block/complex/thatch"
     }
   }
 }

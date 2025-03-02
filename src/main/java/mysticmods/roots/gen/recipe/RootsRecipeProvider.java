@@ -57,6 +57,9 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_wheat", has(Items.WHEAT))
         .save(c);
 
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SHEARED_THATCH.get(), 1)
+        .requires(ModBlocks.THATCH.get()).unlockedBy("has_thatch", has(ModBlocks.THATCH.get())).save(c);
+
     ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUNESTONE.get(), 3)
         .pattern("SSS")
         .pattern("SHS")
