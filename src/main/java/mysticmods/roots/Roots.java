@@ -12,7 +12,6 @@ import net.neoforged.fml.config.ModConfig;
 
 // TODO:
 // - Nondetection
-//     Causes creepers to explode
 //     Doesn't stop alerts
 // Drops aren't right
 //   - Getting better but not perfect

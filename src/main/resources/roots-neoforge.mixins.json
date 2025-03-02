@@ -11,6 +11,7 @@
     "AccessorMixinOverworldBiomes",
     "AccessorMixinSaplingBlock",
     "AccessorMixinZombieVillager",
+    "MixinCreeper",
     "MixinLivingEntity",
     "MixinMobEffectInstance",
     "MixinRecipeBuilder"
