@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-27T19:30:36.6651419	Recipes
+// 1.21.1	2025-03-02T15:22:55.055701	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -158,7 +158,8 @@ d6d1be53bf19040b5a83f95222bca894da1b6223 data/roots/advancement/recipes/misc/dis
 19ff6d88f9ee9ac4348a62f2c0bc95ab1d99c30a data/roots/advancement/recipes/misc/fire_starter.json
 3a5dd25357a23e0a0d6dca6e3a2b209a3073b21f data/roots/advancement/recipes/misc/gray_dye_from_stonepetal.json
 14492e19804f8e1732b55f63171b3125198e5534 data/roots/advancement/recipes/misc/grove/elemental_soil.json
-78dfdb41c6afccce9c4ed335961af58cc50eaa17 data/roots/advancement/recipes/misc/grove/glass_eye.json
+b34f884186b0c3dc794dacf9d152356f58b43ce8 data/roots/advancement/recipes/misc/grove/glass_eye.json
+37b6c5f9c717635e232157354765016bcb36cc55 data/roots/advancement/recipes/misc/grove/living_arrow.json
 8ec25a5368ac033e0d83b74487b93c3c7746c06b data/roots/advancement/recipes/misc/grove/living_axe.json
 fe1bd9b42c37e717800fb107a6a2584536b9aeaa data/roots/advancement/recipes/misc/grove/living_hoe.json
 e17aee543faf934be867b387507b237d323dd85f data/roots/advancement/recipes/misc/grove/living_pickaxe.json
@@ -409,7 +410,8 @@ e834f8252ee64a0b64be8e2ec7c60e85110e2b76 data/roots/recipe/fire_starter.json
 b9fafcfa2f73b52097304634363e87a5708e2b88 data/roots/recipe/golden_knife.json
 9ec2a8b155c3abc2224e0ccf530cd5499f45662c data/roots/recipe/gray_dye_from_stonepetal.json
 1d2027e30dc17882eed9c83528dd321c50e40f12 data/roots/recipe/grove/elemental_soil.json
-c3039ac434c324c9ca857bfda3413b28a4564ca7 data/roots/recipe/grove/glass_eye.json
+dff57567f5e88a92e2f99439cef8b9d98a1d5005 data/roots/recipe/grove/glass_eye.json
+8b8363cf651d460cc871a02be794adffebfa5541 data/roots/recipe/grove/living_arrow.json
 65b13431151ae061d2eacb691aeea8e2e124e4c7 data/roots/recipe/grove/living_axe.json
 bac1f434db25432fdb7036261928a0f608bb5e0d data/roots/recipe/grove/living_hoe.json
 1a789ab1e3363c73fb692f7bd4acdf3cfe672533 data/roots/recipe/grove/living_pickaxe.json

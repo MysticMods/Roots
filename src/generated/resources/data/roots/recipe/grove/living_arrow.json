@@ -1,0 +1,26 @@
+{
+  "type": "roots:grove",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "minecraft:leaves"
+      },
+      {
+        "tag": "minecraft:leaves"
+      },
+      {
+        "tag": "roots:flint"
+      },
+      {
+        "tag": "c:rods/wooden"
+      }
+    ],
+    "levelConditions": [
+      "roots:active_grove_stone"
+    ],
+    "result": {
+      "count": 3,
+      "id": "roots:living_arrow"
+    }
+  }
+}

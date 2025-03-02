@@ -12,11 +12,17 @@
         "tag": "c:glass_blocks"
       },
       {
+        "tag": "c:glass_blocks"
+      },
+      {
         "item": "minecraft:torch"
       }
     ],
+    "levelConditions": [
+      "roots:active_grove_stone"
+    ],
     "result": {
-      "count": 1,
+      "count": 2,
       "id": "roots:glass_eye"
     }
   }

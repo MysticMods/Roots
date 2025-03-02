@@ -3,15 +3,15 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:grove/glass_eye"
+        "recipe": "roots:grove/living_arrow"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_torch": {
+    "has_leaves": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:torch"
+            "items": "#minecraft:leaves"
           }
         ]
       },
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has the recipe",
-      "has_torch"
+      "has_leaves"
     ]
   ],
   "rewards": {
     "recipes": [
-      "roots:grove/glass_eye"
+      "roots:grove/living_arrow"
     ]
   }
 }

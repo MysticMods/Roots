@@ -868,13 +868,18 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     saver = RecipeSaver.saver().unlockedBy("has_sugar_cane", has(Tags.Items.CROPS_SUGAR_CANE));
     MortarRecipe.Builder mortarbuilder = MortarRecipe.Builder.create().times(1);
-    BaseRecipeData.Builder sugarbuilder = BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_SUGAR_CANE).result(Items.SUGAR, 1).chanceOutput(Items.SUGAR, 0.5f);
+    BaseRecipeData.Builder sugarbuilder = BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_SUGAR_CANE)
+        .result(Items.SUGAR, 1).chanceOutput(Items.SUGAR, 0.5f);
 
     saver.save(mortarbuilder.build(sugarbuilder), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_1"));
-    saver.save(mortarbuilder.times(2).build(sugarbuilder.multiplty(2)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_2"));
-    saver.save(mortarbuilder.times(3).build(sugarbuilder.multiplty(3)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_3"));
-    saver.save(mortarbuilder.times(4).build(sugarbuilder.multiplty(4)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_4"));
-    saver.save(mortarbuilder.times(5).build(sugarbuilder.multiplty(5)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_5"));
+    saver.save(mortarbuilder.times(2)
+        .build(sugarbuilder.multiplty(2)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_2"));
+    saver.save(mortarbuilder.times(3)
+        .build(sugarbuilder.multiplty(3)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_3"));
+    saver.save(mortarbuilder.times(4)
+        .build(sugarbuilder.multiplty(4)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_4"));
+    saver.save(mortarbuilder.times(5)
+        .build(sugarbuilder.multiplty(5)), c, RootsAPI.rl("mortar/sugar_from_sugar_cane_5"));
 
     RecipeSaver.saver().unlockedBy("has_runic_dust", has(RootsTags.Items.RUNIC_DUST)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNIC_DUST).requires(Tags.Items.GRAVELS)
@@ -1075,10 +1080,14 @@ public class RootsRecipeProvider extends RecipeProvider {
     saver = RecipeSaver.saver().unlockedBy("has_bones", has(Tags.Items.BONES));
 
     saver.save(bonemealBuilder.build(bonemealData), c, RootsAPI.rl("mortar/bonemeal_from_bones"));
-    saver.save(bonemealBuilder.times(2).build(bonemealData.multiplty(2)), c, RootsAPI.rl("mortar/bonemeal_from_bones_2"));
-    saver.save(bonemealBuilder.times(3).build(bonemealData.multiplty(3)), c, RootsAPI.rl("mortar/bonemeal_from_bones_3"));
-    saver.save(bonemealBuilder.times(4).build(bonemealData.multiplty(4)), c, RootsAPI.rl("mortar/bonemeal_from_bones_4"));
-    saver.save(bonemealBuilder.times(5).build(bonemealData.multiplty(5)), c, RootsAPI.rl("mortar/bonemeal_from_bones_5"));
+    saver.save(bonemealBuilder.times(2)
+        .build(bonemealData.multiplty(2)), c, RootsAPI.rl("mortar/bonemeal_from_bones_2"));
+    saver.save(bonemealBuilder.times(3)
+        .build(bonemealData.multiplty(3)), c, RootsAPI.rl("mortar/bonemeal_from_bones_3"));
+    saver.save(bonemealBuilder.times(4)
+        .build(bonemealData.multiplty(4)), c, RootsAPI.rl("mortar/bonemeal_from_bones_4"));
+    saver.save(bonemealBuilder.times(5)
+        .build(bonemealData.multiplty(5)), c, RootsAPI.rl("mortar/bonemeal_from_bones_5"));
 
     MortarRecipe.Builder flintBuilder = MortarRecipe.Builder.create().times(1);
     BaseRecipeData.Builder flintData = BaseRecipeData.Builder.create().requires(Tags.Items.GRAVELS)
@@ -1102,10 +1111,11 @@ public class RootsRecipeProvider extends RecipeProvider {
     saver.save(magmaCreamFromMagmaBlockBuilder.times(3)
         .build(magmaCreamFromMagmaBlockData.multiplty(3)), c, RootsAPI.rl("mortar/magma_cream_from_magma_block_3"));
 
-    RecipeSaver.saver().unlockedBy("has_glowstone", has(Tags.Items.DUSTS_GLOWSTONE)).save(GroveRecipe.Builder.create()
+    RecipeSaver.saver().unlockedBy("has_torch", has(Items.TORCH)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.GLASS_BLOCKS)
-            .requires(Tags.Items.GLASS_BLOCKS).requires(Items.TORCH)
-            .result(ModItems.GLASS_EYE, 1)), c, RootsAPI.rl("grove/glass_eye"));
+            .requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.GLASS_BLOCKS).requires(Items.TORCH)
+            .condition(ModConditions.GROVE_STONE_ACTIVE.get())
+            .result(ModItems.GLASS_EYE, 2)), c, RootsAPI.rl("grove/glass_eye"));
 
     RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.FROST_LANDS)
@@ -1663,6 +1673,12 @@ public class RootsRecipeProvider extends RecipeProvider {
         .save(c, RootsAPI.rl("herb_pouch"));
 
     SpecialRecipeBuilder.special(PouchDyeRecipe::new).save(c, RootsAPI.rl("dye_pouch"));
+
+    // Living arrows
+    RecipeSaver.saver().unlockedBy("has_leaves", has(ItemTags.LEAVES)).save(GroveRecipe.Builder.create()
+        .build(BaseRecipeData.Builder.create().result(ModItems.LIVING_ARROW, 3).requires(ItemTags.LEAVES)
+            .requires(ItemTags.LEAVES).requires(RootsTags.Items.FLINT).requires(Tags.Items.RODS_WOODEN)
+            .condition(ModConditions.GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/living_arrow"));
   }
 
   public static class RecipeSaver {
