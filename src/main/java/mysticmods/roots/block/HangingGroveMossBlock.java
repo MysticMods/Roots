@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.Map;
 
-public class HangingGroveMossBlock extends Block implements EntityBlock {
+public class HangingGroveMossBlock extends Block {
   public static final MapCodec<HangingGroveMossBlock> CODEC = simpleCodec(HangingGroveMossBlock::new);
 
   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -110,10 +110,5 @@ public class HangingGroveMossBlock extends Block implements EntityBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(FACING);
-  }
-
-  @Override
-  public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-    return null;
   }
 }

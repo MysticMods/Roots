@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class WildRootsBlock extends DirectionalBlock implements SimpleWaterloggedBlock, EntityBlock {
+public class WildRootsBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
   public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
   public static BooleanProperty MOSSY = BooleanProperty.create("mossy");
   private static final int mossyChance = 30;
@@ -116,10 +116,5 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
   @Override
   public FluidState getFluidState(BlockState state) {
     return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-  }
-
-  @Override
-  public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-    return null;
   }
 }
