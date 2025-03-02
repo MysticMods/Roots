@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-02T12:11:06.7496344	Roots Item Tags
+// 1.21.1	2025-03-02T15:14:15.4594114	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -9,6 +9,7 @@ cd69f25ff26a2b62c306b9fea7903c3c7e0aef0a data/c/tags/item/ores/quartz.json
 4c3bfce7b1456b68f71b17c9426d9e3008caa95c data/c/tags/item/seeds.json
 459c049b3972ac3906b4b224acfb2830965bf92c data/c/tags/item/storage_blocks/raw_silver.json
 cd950175fadc56e90dec5f776fb9160949dafcfe data/c/tags/item/storage_blocks/silver.json
+c03cca07eaef993ac03a34f8983b4c79477d2c8b data/minecraft/tags/item/arrows.json
 4c3bfce7b1456b68f71b17c9426d9e3008caa95c data/minecraft/tags/item/chicken_food.json
 3c841c97e7e2fcbeb86c1ff92141c065010ffdae data/minecraft/tags/item/piglin_loved.json
 87f3beeddef89647fae4b5de6f8f86178e11f390 data/roots/tags/item/antlers.json

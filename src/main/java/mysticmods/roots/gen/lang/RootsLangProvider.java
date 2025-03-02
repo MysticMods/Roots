@@ -429,6 +429,12 @@ public class RootsLangProvider extends LanguageProvider {
     addEntity(ModEntities.OWL);
     addEntity(ModEntities.DUCK);
 
+    addEntity(ModEntities.LIVING_ARROW);
+    addEntity(ModEntities.METEOR);
+    addEntity(ModEntities.TIME_STOP);
+    addEntity(ModEntities.WILDFIRE);
+    addEntity(ModEntities.ROSE_THORNS);
+
     addEffect(ModEffects.FRIENDLY_EARTH);
     addEffect(ModEffects.WAKEFUL);
     addEffect(ModEffects.PETAL_SHELL);
@@ -499,7 +505,6 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.RUNED_OBSIDIAN, "Runed Obsidian");
     add(RootsTags.Items.RUNESTONE, "Runestone");
     add(RootsTags.Items.WILDWOOD_LOGS, "Wildwood Logs");
-    // TODO: Rune-carved?
     add(RootsTags.Items.RUNED_LOGS, "Runed Logs");
     add(RootsTags.Items.RUNED_ACACIA_LOG, "Runed Acacia Logs");
     add(RootsTags.Items.RUNED_DARK_OAK_LOG, "Runed Dark Oak Logs");

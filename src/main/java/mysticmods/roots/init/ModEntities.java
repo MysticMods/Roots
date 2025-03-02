@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.entity.*;
 import mysticmods.roots.entity.other.RoseThornsEntity;
 import mysticmods.roots.entity.other.TimeStopEntity;
+import mysticmods.roots.entity.projectile.LivingArrowEntity;
 import mysticmods.roots.entity.projectile.MeteorEntity;
 import mysticmods.roots.entity.projectile.WildfireEntity;
 import net.minecraft.core.registries.Registries;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -51,6 +53,7 @@ public class ModEntities {
   public static final DeferredHolder<EntityType<?>, EntityType<DuckEntity>> DUCK = REGISTER.register("duck", () -> EntityType.Builder.of(DuckEntity::new, MobCategory.CREATURE)
       .sized(0.6f, 1f).eyeHeight(0.86f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("duck"));
 
+  public static final DeferredHolder<EntityType<?>, EntityType<LivingArrowEntity>> LIVING_ARROW = REGISTER.register("living_arrow", () -> EntityType.Builder.<LivingArrowEntity>of(LivingArrowEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(20).build("living_arrow"));
   public static final DeferredHolder<EntityType<?>, EntityType<MeteorEntity>> METEOR = REGISTER.register("meteor", () -> EntityType.Builder.of(MeteorEntity::new, MobCategory.MISC)
       .sized(0.3f, 0.3f).eyeHeight(0.13f).clientTrackingRange(4).updateInterval(10).build("meteor"));
   public static final DeferredHolder<EntityType<?>, EntityType<WildfireEntity>> WILDFIRE = REGISTER.register("wildfire", () -> EntityType.Builder.<WildfireEntity>of(WildfireEntity::new, MobCategory.MISC)

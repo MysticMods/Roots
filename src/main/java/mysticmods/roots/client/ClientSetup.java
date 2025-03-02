@@ -107,6 +107,7 @@ public class ClientSetup {
     event.registerEntityRenderer(ModEntities.WILDFIRE.value(), WildfireRenderer::new);
     event.registerEntityRenderer(ModEntities.TIME_STOP.value(), NoopRenderer::new);
     event.registerEntityRenderer(ModEntities.ROSE_THORNS.value(), RoseThornsRenderer::new);
+    event.registerEntityRenderer(ModEntities.LIVING_ARROW.value(), LivingArrowRenderer::new);
   }
 
   @SubscribeEvent
@@ -169,7 +170,6 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.CHANNEL.get(), ChannelCastParticle.Provider::new);
 
     event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
-    event.registerSpecial(ModParticles.GROWTH_EMITTER.get(), new GrowthEmitter.Provider());
   }
 
   @SubscribeEvent
