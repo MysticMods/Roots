@@ -268,6 +268,7 @@ public class RootsTags {
 
     // TODO: Unused
     public static final TagKey<Item> POUCHES = modTag("pouches");
+    public static final TagKey<Item> CREATIVE_POUCHES = modTag("pouches/creative");
 
     public static final TagKey<Item> GROVE_CRAFTER_ACTIVATION = modTag("grove_crafter_activation");
     public static final TagKey<Item> MORTAR_ACTIVATION = modTag("mortar_activation");

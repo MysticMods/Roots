@@ -222,6 +222,9 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
         .addTags(RootsTags.Items.MOONGLOW_HERB, RootsTags.Items.PERESKIA_HERB, RootsTags.Items.SPIRITLEAF_HERB, RootsTags.Items.WILDEWHEET_HERB, RootsTags.Items.GROVE_MOSS_HERB, RootsTags.Items.DEWGONIA_HERB, RootsTags.Items.STALICRIPE_HERB, RootsTags.Items.WILDROOT_HERB, RootsTags.Items.INFERNO_BULB_HERB, RootsTags.Items.BAFFLECAP_HERB, RootsTags.Items.CLOUD_BERRY_HERB);
 
     this.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
+    this.tag(RootsTags.Items.POUCHES).add(ModItems.HERB_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
+    this.tag(RootsTags.Items.CREATIVE_POUCHES).add(ModItems.CREATIVE_POUCH.get());
+
     this.tag(RootsTags.Items.FERTILIZERS).add(Items.BONE_MEAL);
 
     // For Desaturate/Saturate

@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
@@ -31,6 +32,7 @@ public class Costing {
   private final Map<Herb, List<HerbEntry>> herbMapCache;
 
   private boolean noCharge = false;
+  private boolean foundCreativePouch = false;
 
   public Costing(ISpellInstance spell) {
     this.spell = spell;
@@ -65,6 +67,9 @@ public class Costing {
     Map<Herb, List<HerbEntry>> herbMap = new HashMap<>();
     for (int i = 0; i < playerInventory.getContainerSize(); i++) {
       ItemStack inSlot = playerInventory.getItem(i);
+      if (inSlot.is(RootsTags.Items.CREATIVE_POUCHES)) {
+        foundCreativePouch = true;
+      }
       Herb herb = Herb.getHerb(inSlot);
       if (herb != null) {
         List<HerbEntry> entries = herbMap.get(herb);
@@ -91,7 +96,7 @@ public class Costing {
   }
 
   public boolean canAfford(Player player, boolean checkModifiers) {
-    if (player.isCreative()) {
+    if (player.isCreative() || foundCreativePouch) {
       return true;
     }
     calculateCosts(checkModifiers, false);
@@ -120,7 +125,7 @@ public class Costing {
 
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
   public boolean charge(Player player) {
-    if (player.isCreative()) {
+    if (player.isCreative() || foundCreativePouch) {
       return true;
     }
     if (player.level().isClientSide()) {
