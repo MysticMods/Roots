@@ -1,4 +1,4 @@
-package mysticmods.roots.network.client;
+package mysticmods.roots.client.network;
 
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.HerbStorage;

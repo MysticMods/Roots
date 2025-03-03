@@ -6,7 +6,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.network.client.ClientNetworkHandlers;
+import mysticmods.roots.client.network.ClientNetworkHandlers;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;

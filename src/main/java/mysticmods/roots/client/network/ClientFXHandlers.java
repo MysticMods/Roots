@@ -1,12 +1,15 @@
-package mysticmods.roots.network.client;
+package mysticmods.roots.client.network;
 
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.ClientFX;
 import mysticmods.roots.client.ParticleUtil;
+import mysticmods.roots.client.gui.layer.WarningLayer;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.RandomSource;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -85,6 +88,20 @@ public class ClientFXHandlers {
             0.05,
             0
         );
+      }
+    }
+  }
+
+  public static void alert (int entityId) {
+    if (ConfigManager.ALERTNESS_VISUAL.getAsBoolean()) {
+      WarningLayer.warningTicks = ConfigManager.ALERTNESS_DURATION.getAsInt();
+    }
+
+    if (ConfigManager.ALERTNESS_SOUND.getAsBoolean()) {
+      Minecraft minecraft = Minecraft.getInstance();
+      Entity entity = minecraft.level.getEntity(entityId);
+      if (entity != null) {
+        minecraft.level.playLocalSound(entity, ModSounds.ALERTNESS.get(), SoundSource.NEUTRAL, 1f, 1f);
       }
     }
   }

@@ -263,6 +263,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.WILDWOOD_QUIVER, "tools");
     subfolder(ModItems.WOODEN_SHEARS, "tools");
 
+    subfolder(ModItems.ALERTNESS_CHARM, "charms");
+
     handheldItem(ModItems.WOODEN_KNIFE.get());
     handheldItem(ModItems.STONE_KNIFE.get());
     handheldItem(ModItems.COPPER_KNIFE.get());

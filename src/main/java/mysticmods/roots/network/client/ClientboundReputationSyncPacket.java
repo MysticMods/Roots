@@ -2,6 +2,7 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.ReputationStorage;
+import mysticmods.roots.client.network.ClientNetworkHandlers;
 import mysticmods.roots.network.ISyncPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

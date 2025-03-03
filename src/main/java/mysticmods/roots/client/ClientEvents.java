@@ -26,6 +26,8 @@ import net.neoforged.neoforge.client.model.data.ModelData;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class ClientEvents {
+  private static int warningDisplayTicks = -1;
+
   @SubscribeEvent
   public static void onRecipeUpdate(RecipesUpdatedEvent event) {
     ResolvedRecipes.reset();

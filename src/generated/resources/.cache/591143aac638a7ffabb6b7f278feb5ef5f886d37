@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-02T18:33:46.0294296	Item Models: roots
+// 1.21.1	2025-03-03T18:36:38.6324659	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -21,6 +21,7 @@ f42677fb882a85b92f783ccf865e146136baec5e assets/roots/models/item/beetle_chestpl
 83545d5ae2291322b4cc1be15964acece132e692 assets/roots/models/item/cactus_syrup.json
 db62c8b8cf515035ce028b5d63c5324bac6ea5ea assets/roots/models/item/caelic_soil.json
 af7db574ef0732a01ef2e772360ffac93b35d327 assets/roots/models/item/carapace.json
+4220a412f656a1febef7047f5422b7393b2ae9fb assets/roots/models/item/charm_of_alertness.json
 08131be57b4580ad3ebfe538f34354931505a474 assets/roots/models/item/chiseled_runed_obsidian.json
 e29526db6705de201e9fd0abb2362147c501e9d6 assets/roots/models/item/chiseled_runestone.json
 6bf881661b5f681c8869b4724755c6373409720f assets/roots/models/item/cloud_berry.json

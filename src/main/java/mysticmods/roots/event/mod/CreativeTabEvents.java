@@ -230,6 +230,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.COPPER_CHESTPLATE.get());
       event.accept(ModItems.COPPER_LEGGINGS.get());
       event.accept(ModItems.COPPER_BOOTS.get());
+      event.accept(ModItems.ALERTNESS_CHARM.get());
       event.accept(ModItems.BEETLE_SPAWN_EGG.get());
       event.accept(ModItems.DEER_SPAWN_EGG.get());
       event.accept(ModItems.FENNEC_SPAWN_EGG.get());

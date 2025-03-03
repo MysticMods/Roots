@@ -18,6 +18,10 @@ public class ConfigManager {
 
   public static HatConfig HAT_CONFIG = new HatConfig();
 
+  public static ModConfigSpec.BooleanValue ALERTNESS_VISUAL;
+  public static ModConfigSpec.IntValue ALERTNESS_DURATION;
+  public static ModConfigSpec.BooleanValue ALERTNESS_SOUND;
+
   public static ModConfigSpec.BooleanValue EXPERIENCE_ORBS;
   public static ModConfigSpec.BooleanValue PACIFIST_DISABLED;
   public static ModConfigSpec.IntValue REPUTATION_LOSS_PACIFIST;
@@ -65,6 +69,14 @@ public class ConfigManager {
     COMMON_BUILDER.comment("Options for sprout breeding rewards").push("sprouts");
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")
         .defineInRange("default_chance", 10, 1, 100);
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.comment("Options for the Alertness charm").push("alertness");
+    ALERTNESS_VISUAL = COMMON_BUILDER.comment("whether or not the Alertness charm should display a visual effect")
+        .define("visual", true);
+    ALERTNESS_DURATION = COMMON_BUILDER.comment("the duration of the Alertness charm effect in ticks").defineInRange("duration", 200, 1, Integer.MAX_VALUE);
+    ALERTNESS_SOUND = COMMON_BUILDER.comment("whether or not the Alertness charm should play a sound when activated")
+        .define("sound", true);
+    COMMON_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
   }
 

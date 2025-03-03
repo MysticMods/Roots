@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "tag": "roots:herbs"
+    },
+    "N": {
+      "tag": "c:nuggets"
+    }
+  },
+  "pattern": [
+    "HNH",
+    "N N",
+    " N "
+  ],
+  "result": {
+    "count": 1,
+    "id": "roots:charm_of_alertness"
+  }
+}

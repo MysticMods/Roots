@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.blockentity.*;
+import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.client.gui.screen.HerbPouchScreen;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
 import mysticmods.roots.client.model.*;
@@ -18,6 +19,7 @@ import mysticmods.roots.entity.SproutEntity;
 import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.NoopRenderer;
@@ -39,6 +41,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
@@ -122,6 +125,13 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.BEETLE_ARMOR, BeetleArmorModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.METEOR, MeteorModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.ROSE_THORNS, RoseThornsModel::createBodyLayer);
+  }
+
+  public static final ResourceLocation WARNING_LAYER = RootsAPI.rl("warning");
+
+  @SubscribeEvent
+  public static void registerGuiLayers (RegisterGuiLayersEvent event) {
+    event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, WARNING_LAYER, WarningLayer::render);
   }
 
   @SubscribeEvent

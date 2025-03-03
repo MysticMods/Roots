@@ -2,6 +2,7 @@ package mysticmods.roots.network;
 
 import mysticmods.roots.client.particle.ChannelCastParticle;
 import mysticmods.roots.network.client.*;
+import mysticmods.roots.network.client.fx.AlertnessFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.network.client.fx.GeasFXPacket;
 import mysticmods.roots.network.client.fx.GrowthFXPacket;
@@ -47,6 +48,7 @@ public class PacketHandler {
     registrar.play(GrowthFXPacket.TYPE, GrowthFXPacket.CODEC);
     registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
     registrar.play(ClientboundSyncGeasPacket.TYPE, ClientboundSyncGeasPacket.CODEC);
+    registrar.play(AlertnessFXPacket.TYPE, AlertnessFXPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

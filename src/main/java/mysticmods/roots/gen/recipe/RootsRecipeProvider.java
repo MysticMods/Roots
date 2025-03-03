@@ -1682,6 +1682,15 @@ public class RootsRecipeProvider extends RecipeProvider {
         .build(BaseRecipeData.Builder.create().result(ModItems.LIVING_ARROW, 3).requires(ItemTags.LEAVES)
             .requires(ItemTags.LEAVES).requires(RootsTags.Items.FLINT).requires(Tags.Items.RODS_WOODEN)
             .condition(ModConditions.GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/living_arrow"));
+
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.ALERTNESS_CHARM.get(), 1)
+        .pattern("HNH")
+        .pattern("N N")
+        .pattern(" N ")
+        .define('H', RootsTags.Items.HERBS)
+        .define('N', Tags.Items.NUGGETS)
+        .unlockedBy("has_nugget", has(Tags.Items.NUGGETS))
+        .save(c);
   }
 
   public static class RecipeSaver {

@@ -613,6 +613,13 @@
       "roots:duck/swim"
     ]
   },
+  "roots.alert": {
+    "category": "neutral",
+    "sounds": [
+      "roots:alert"
+    ],
+    "subtitle": "roots.subtitles.alert"
+  },
   "block.pyre.crackle": {
     "category": "block",
     "sounds": [
