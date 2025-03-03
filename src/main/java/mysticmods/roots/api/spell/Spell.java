@@ -1,8 +1,8 @@
 package mysticmods.roots.api.spell;
 
 import com.mojang.serialization.Codec;
-import it.unimi.dsi.fastutil.ints.Int2ShortMap;
-import it.unimi.dsi.fastutil.ints.Int2ShortOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
@@ -60,7 +60,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected ItemStack icon;
 
   private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
-  private final Int2ShortMap dataIndexMaximums = new Int2ShortOpenHashMap();
+  private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
 
   public Spell(Type type, ChatFormatting color, List<Cost> defaultCosts, int color1, int color2) {
     this.type = type;
@@ -69,7 +69,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     this.color1 = color1;
     this.color2 = color2;
     fillDataKeyMap(keyToDataIndex);
-    dataIndexMaximums.defaultReturnValue((short) -1);
+    dataIndexMaximums.defaultReturnValue(-1);
   }
 
   public Holder<Spell> builtInRegistryHolder() {
@@ -93,14 +93,14 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return instance.getSpellData().get(0);
   }
 
-  public short getDataValue(ISpellInstance instance, String key) {
+  public int getDataValue(ISpellInstance instance, String key) {
     if (instance.getSpellData() == null) {
       return -1;
     }
     return getDataValue(instance.getSpellData(), key);
   }
 
-  public short getDataValue(SpellInstanceData data, String key) {
+  public int getDataValue(SpellInstanceData data, String key) {
     int index = getDataIndex(key);
     if (index == -1 || !data.has(index)) {
       return -1;
@@ -108,14 +108,14 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return data.get(index);
   }
 
-  public short getDataValue(ISpellInstance instance, int index) {
+  public int getDataValue(ISpellInstance instance, int index) {
     if (instance.getSpellData() == null) {
       return -1;
     }
     return getDataValue(instance.getSpellData(), index);
   }
 
-  public short getDataValue(SpellInstanceData data, int index) {
+  public int getDataValue(SpellInstanceData data, int index) {
     if (!data.has(index)) {
       return -1;
     }
@@ -129,7 +129,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return -1;
   }
 
-  public short getDataMaximumValue(int index) {
+  public int getDataMaximumValue(int index) {
     return dataIndexMaximums.get(index);
   }
 
@@ -147,7 +147,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return null;
   }
 
-  public Component describeData(int index, short value) {
+  public Component describeData(int index, int value) {
     if (index != 0) {
       String keyName = getDataKey(index);
       if (keyName == null) {
@@ -165,7 +165,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     }
   }
 
-  public short getDataMaximumValue(String key) {
+  public int getDataMaximumValue(String key) {
     int index = getDataIndex(key);
     if (index == -1) {
       return -1;
@@ -176,7 +176,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected void fillDataKeyMap(Object2IntMap<String> map) {
   }
 
-  protected void fillDataMaximumValues(Int2ShortMap map) {
+  protected void fillDataMaximumValues(Int2IntMap map) {
   }
 
   @Override

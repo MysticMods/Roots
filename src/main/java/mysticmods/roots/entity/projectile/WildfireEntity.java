@@ -293,7 +293,7 @@ public class WildfireEntity extends Projectile {
   @Override
   protected void addAdditionalSaveData(CompoundTag compound) {
     super.addAdditionalSaveData(compound);
-    compound.putShort("life", (short) this.life);
+    compound.putInt("life", this.life);
 
     SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result().ifPresent(tag -> compound.put("snapshots", tag));
   }
@@ -301,7 +301,7 @@ public class WildfireEntity extends Projectile {
   @Override
   protected void readAdditionalSaveData(CompoundTag compound) {
     super.readAdditionalSaveData(compound);
-    this.life = compound.getShort("life");
+    this.life = compound.getInt("life");
 
     this.snapshotStorage = SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result().orElseGet(SnapshotStorage::new);
   }

@@ -3,7 +3,7 @@ package mysticmods.roots.api.datacomponent;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.shorts.ShortArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
@@ -190,7 +190,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return new SpellStorage(slot, maxSlot, slots);
   }
 
-  public SpellStorage setData (int slot, ShortArrayList data) {
+  public SpellStorage setData (int slot, IntArrayList data) {
     if (slot < 0 || slot >= maxSlot) {
       return this;
     }
@@ -210,7 +210,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
-  public SpellStorage setData (int slot, int index, short value) {
+  public SpellStorage setData (int slot, int index, int value) {
     if (slot < 0 || slot >= maxSlot) {
       return this;
     }
@@ -332,8 +332,8 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return enabledModifiers.contains(modifier);
     }
 
-    public SpellSlot withData (int index, short value) {
-      ShortArrayList newData = new ShortArrayList(data.data());
+    public SpellSlot withData (int index, int value) {
+      IntArrayList newData = new IntArrayList(data.data());
 
       newData.ensureCapacity(spell.getDataSlots()+1);
       newData.set(index, value);

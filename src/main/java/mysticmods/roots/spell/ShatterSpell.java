@@ -1,6 +1,6 @@
 package mysticmods.roots.spell;
 
-import it.unimi.dsi.fastutil.ints.Int2ShortMap;
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -58,12 +58,12 @@ public class ShatterSpell extends Spell {
   }
 
   @Override
-  protected void fillDataMaximumValues(Int2ShortMap map) {
+  protected void fillDataMaximumValues(Int2IntMap map) {
     super.fillDataMaximumValues(map);
-    map.put(0, (short)3);
-    map.put(1, (short)maxWidth);
-    map.put(2, (short)maxHeight);
-    map.put(3, (short)maxDepth);
+    map.put(0, 3);
+    map.put(1, maxWidth);
+    map.put(2, maxHeight);
+    map.put(3, maxDepth);
   }
 
   @Override

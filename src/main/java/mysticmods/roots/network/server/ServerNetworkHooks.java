@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 
 public class ServerNetworkHooks {
 
-  public static void setSpellData(Player player, InteractionHand hand, int index, short value) {
+  public static void setSpellData(Player player, InteractionHand hand, int index, int value) {
     ItemStack stack = player.getItemInHand(hand);
     if (!stack.is(RootsTags.Items.CASTING_TOOLS) || !stack.has(ModAttachments.SPELL_STORAGE)) {
       return;

@@ -103,9 +103,9 @@ public class KeyHandler {
     }
 
 
-    short max = source.getDataMaximumValue(index);
-    short current = source.getDataValue(spell, index);
-    short newCurrent = current;
+    int max = source.getDataMaximumValue(index);
+    int current = source.getDataValue(spell, index);
+    int newCurrent = current;
 
     if (op == 2 && current < max) {
       newCurrent++;

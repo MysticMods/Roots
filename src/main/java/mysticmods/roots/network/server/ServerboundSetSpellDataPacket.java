@@ -14,13 +14,13 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public record ServerboundSetSpellDataPacket(InteractionHand hand, int index, short value) implements IRootsPacket {
+public record ServerboundSetSpellDataPacket(InteractionHand hand, int index, int value) implements IRootsPacket {
   public static final Type<ServerboundSetSpellDataPacket> TYPE = new Type<>(RootsAPI.rl("server_bound_set_spell_data"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundSetSpellDataPacket> CODEC =
       StreamCodec.composite(
           ExtraStreamCodecs.INTERACTION_HAND_CODEC,  o -> o.hand,
           ByteBufCodecs.VAR_INT, o -> o.index,
-          ByteBufCodecs.SHORT, o -> o.value,
+          ByteBufCodecs.VAR_INT, o -> o.value,
           ServerboundSetSpellDataPacket::new);
 
   @Override

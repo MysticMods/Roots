@@ -2,39 +2,40 @@ package mysticmods.roots.api.spell;
 
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
-import it.unimi.dsi.fastutil.shorts.ShortArrayList;
-import net.minecraft.network.chat.Component;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
-public record SpellInstanceData(ShortArrayList data) {
-  public static final Codec<SpellInstanceData> CODEC = Codec.SHORT.listOf().xmap(ShortArrayList::new, o -> o)
+import java.util.function.Function;
+
+public record SpellInstanceData(IntArrayList data) {
+  public static final Codec<SpellInstanceData> CODEC = Codec.INT.listOf().xmap(IntArrayList::new, Function.identity())
       .xmap(SpellInstanceData::new, SpellInstanceData::data);
   public static final StreamCodec<ByteBuf, SpellInstanceData> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.SHORT.apply(ByteBufCodecs.list())
-          .map(ShortArrayList::new, o -> o), SpellInstanceData::data, SpellInstanceData::new);
+      ByteBufCodecs.VAR_INT.apply(ByteBufCodecs.list())
+          .map(IntArrayList::new, o -> o), SpellInstanceData::data, SpellInstanceData::new);
 
-  public SpellInstanceData (int size) {
-    this(new ShortArrayList());
+  public SpellInstanceData(int size) {
+    this(new IntArrayList(size));
     this.data.ensureCapacity(size);
     for (int i = 0; i < size; i++) {
-      data.add((short) 0);
+      data.add(0);
     }
   }
 
-  public int size () {
+  public int size() {
     return data.size();
   }
 
-  public boolean has (int index) {
+  public boolean has(int index) {
     return index >= 0 && index < data.size();
   }
 
-  public short get (int index) {
+  public int get(int index) {
     if (index < 0 || index >= data.size()) {
       // Maybe throw an exception instead
       return -1;
     }
-    return data.getShort(index);
+    return data.getInt(index);
   }
 }
