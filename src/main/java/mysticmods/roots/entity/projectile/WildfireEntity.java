@@ -179,13 +179,8 @@ public class WildfireEntity extends Projectile {
     this.setXRot((float) (Mth.atan2(d6, d4) * 180.0F / (float) Math.PI));
     this.setXRot(lerpRotation(this.xRotO, this.getXRot()));
     this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
-    float f = 0.99F;
 
     this.setDeltaMovement(vec3.scale(1));
-/*      if (!flag) {
-        this.applyGravity();
-      }*/
-
     this.setPos(d7, d2, d3);
     this.checkInsideBlocks();
 
@@ -218,6 +213,7 @@ public class WildfireEntity extends Projectile {
     super.move(type, pos);
     if (type != MoverType.SELF) {
       // "startFalling" went here
+      // I presume this is where deflection is handled
     }
   }
 
@@ -287,7 +283,7 @@ public class WildfireEntity extends Projectile {
 
   @Override
   protected boolean canHitEntity(Entity target) {
-    return super.canHitEntity(target) && target != this;
+    return super.canHitEntity(target) && target != this && target.getType() != this.getType();
   }
 
   @Override
