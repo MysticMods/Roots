@@ -10,6 +10,7 @@ import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.integration.IntegrationUtil;
+import mysticmods.roots.item.RunicShearsItem;
 import mysticmods.roots.network.client.ClientboundSyncGeasPacket;
 import mysticmods.roots.network.client.fx.AlertnessFXPacket;
 import mysticmods.roots.util.ItemUtil;
@@ -20,6 +21,7 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -174,6 +176,20 @@ public class EntityEventHandler {
   public static void onEntityStartTracking(PlayerEvent.StartTracking event) {
     if (event.getTarget() instanceof LivingEntity living) {
       PacketDistributor.sendToPlayer((ServerPlayer)event.getEntity(), new ClientboundSyncGeasPacket(living.getId(), living.hasEffect(ModEffects.GEAS)));
+    }
+  }
+
+  @SubscribeEvent
+  public static void onEntityInteract (PlayerInteractEvent.EntityInteractSpecific event) {
+    InteractionHand hand = event.getHand();
+    Player player = event.getEntity();
+    Entity target = event.getTarget();
+    ItemStack heldItem = player.getItemInHand(hand);
+    if (heldItem.is(RootsTags.Items.RUNIC_SHEARS)) {
+      if (target.getType().is(RootsTags.Entities.RUNIC_SHEARS_OVERRIDE) && target instanceof LivingEntity living) {
+        event.setCancellationResult(heldItem.interactLivingEntity(player, living, hand));
+        event.setCanceled(true);
+      }
     }
   }
 

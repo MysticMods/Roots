@@ -269,6 +269,12 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.CHARMS).addTag(RootsTags.Items.CHARM_ALERT);
 
     this.tag(ItemTags.ARROWS).add(ModItems.LIVING_ARROW.get());
+
+    this.tag(ItemTags.HOES).add(ModItems.COPPER_HOE.get(), ModItems.LIVING_HOE.get(), ModItems.RUNED_HOE.get());
+    this.tag(ItemTags.AXES).add(ModItems.COPPER_AXE.get(), ModItems.LIVING_AXE.get(), ModItems.RUNED_AXE.get());
+    this.tag(ItemTags.PICKAXES).add(ModItems.COPPER_PICKAXE.get(), ModItems.LIVING_PICKAXE.get(), ModItems.RUNED_PICKAXE.get());
+    this.tag(ItemTags.SHOVELS).add(ModItems.COPPER_SHOVEL.get(), ModItems.LIVING_SHOVEL.get(), ModItems.RUNED_SHOVEL.get());
+    this.tag(ItemTags.SWORDS).add(ModItems.COPPER_SWORD.get(), ModItems.LIVING_SWORD.get(), ModItems.RUNED_SWORD.get());
   }
 
   @Override
