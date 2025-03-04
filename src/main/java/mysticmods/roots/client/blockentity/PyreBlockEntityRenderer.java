@@ -64,7 +64,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
     for (int i = 0; i < items.size(); i++) {
       ItemStack item = items.get(i);
       pPoseStack.pushPose();
-      float shifted = (float) (RenderTickHandler.getClientTicks() + pPartialTick + i * (360.0 / items.size()));
+      float shifted = (float) ((RenderTickHandler.getClientTicks() + pPartialTick) * 0.4 + i * (360.0 / items.size()));
       pPoseStack.translate(0.5, 0.5 + 0.05 * ((double) Mth.sin((float) Math.toRadians((double) shifted * 4))), 0.5);
       pPoseStack.mulPose(Axis.YP.rotationDegrees(shifted));
       pPoseStack.translate(-0.5, 0, 0);
