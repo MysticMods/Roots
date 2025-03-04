@@ -3,6 +3,7 @@ package mysticmods.roots.event.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.EntityCooldowns;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.effect.SimpleEffect;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
@@ -142,6 +143,9 @@ public class EntityEventHandler {
     }
 
     if (event.getEntity() instanceof Mob mob && event.getOriginalAboutToBeSetTarget() instanceof Player player && mob.getTarget() != player && mob.getLastHurtByMob() != player) {
+      if (ConfigManager.ALERTNESS_TAG.get() && !mob.getType().is(RootsTags.Entities.ALERTNESS)) {
+        return;
+      }
       List<ItemStack> charms = IntegrationUtil.getCharms(player);
       if (!charms.isEmpty()) {
         boolean doAlert = false;

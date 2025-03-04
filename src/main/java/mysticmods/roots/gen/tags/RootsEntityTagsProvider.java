@@ -92,6 +92,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.WINDWALL_FORCE_INCLUDE);
     this.tag(RootsTags.Entities.TIME_STOP_EXCLUDE).add(EntityType.PLAYER);
     this.tag(RootsTags.Entities.ROSE_THORNS_EXCLUDE).add(EntityType.PLAYER);
+    this.tag(RootsTags.Entities.ALERTNESS).add(EntityType.CREEPER);
   }
 
   @Override

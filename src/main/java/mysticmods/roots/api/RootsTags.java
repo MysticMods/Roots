@@ -7,6 +7,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -469,6 +470,7 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> TIME_STOP_EXCLUDE = modTag("time_stop_exclude");
     public static final TagKey<EntityType<?>> ROSE_THORNS_EXCLUDE = modTag("rose_thorns_exclude");
+    public static final TagKey<EntityType<?>> ALERTNESS = modTag("alertness");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

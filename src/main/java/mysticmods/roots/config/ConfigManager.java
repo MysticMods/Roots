@@ -21,6 +21,7 @@ public class ConfigManager {
   public static ModConfigSpec.BooleanValue ALERTNESS_VISUAL;
   public static ModConfigSpec.IntValue ALERTNESS_DURATION;
   public static ModConfigSpec.BooleanValue ALERTNESS_SOUND;
+  public static ModConfigSpec.BooleanValue ALERTNESS_TAG;
 
   public static ModConfigSpec.BooleanValue EXPERIENCE_ORBS;
   public static ModConfigSpec.BooleanValue PACIFIST_DISABLED;
@@ -76,6 +77,8 @@ public class ConfigManager {
     ALERTNESS_DURATION = COMMON_BUILDER.comment("the duration of the Alertness charm effect in ticks").defineInRange("duration", 200, 1, Integer.MAX_VALUE);
     ALERTNESS_SOUND = COMMON_BUILDER.comment("whether or not the Alertness charm should play a sound when activated")
         .define("sound", true);
+    ALERTNESS_TAG = COMMON_BUILDER.comment("whether or not entities should be filtered to those in the roots:alertness entity tag")
+            .define("tag", false);
     COMMON_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
   }
