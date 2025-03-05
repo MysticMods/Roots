@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModSounds;
+import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
@@ -134,7 +135,7 @@ public class SproutEntity extends Animal {
     if (player.getItemInHand(hand).isEmpty() && hasGift()) {
       ItemStack gift = getGift();
       if (!gift.isEmpty()) {
-        player.drop(gift, true, false);
+        ItemUtil.Spawn.spawnItem(this.level(), this.getX(), this.getY(), this.getZ(), true, gift, -1);
         setHasGift(false);
         return InteractionResult.SUCCESS;
       }

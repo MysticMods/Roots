@@ -62,27 +62,23 @@ public class ItemUtil {
       return spawnItem(world, pos, stack, -1);
     }
 
-    public static ItemEntity spawnItem(Level world, BlockPos pos, ItemStack stack, float hoverStart) {
-      return spawnItem(world, pos, stack, true, -1, hoverStart);
+    public static ItemEntity spawnItem(Level world, BlockPos pos, ItemStack stack, boolean offset) {
+      return spawnItem(world, pos, stack, offset, -1);
     }
 
     public static ItemEntity spawnItem(Level world, BlockPos pos, ItemStack stack, int ticks) {
-      return spawnItem(world, pos, stack, true, ticks, -1);
+      return spawnItem(world, pos, stack, true, ticks);
     }
 
-    public static ItemEntity spawnItem(Level world, BlockPos pos, ItemStack stack, boolean offset) {
-      return spawnItem(world, pos, stack, offset, -1, -1);
+    public static ItemEntity spawnItem(Level world, BlockPos pos, ItemStack stack, boolean offset, int ticks) {
+      return spawnItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, offset, stack, ticks);
     }
 
-    public static ItemEntity spawnItem(Level world, BlockPos pos, ItemStack stack, boolean offset, int ticks, float hoverStart) {
-      return spawnItem(world, pos.getX(), pos.getY(), pos.getZ(), offset, stack, ticks, hoverStart);
-    }
-
-    public static ItemEntity spawnItem(Level world, double x, double y, double z, boolean offset, ItemStack stack, int ticks, float hoverStart) {
+    public static ItemEntity spawnItem(Level world, double x, double y, double z, boolean offset, ItemStack stack, int ticks) {
       if (offset) {
-        x += 0.5;
-        y += 0.5;
-        z += 0.5;
+        x += (world.random.nextDouble() - 0.5);
+        y += (world.random.nextDouble() - 0.5);
+        z += (world.random.nextDouble() - 0.5);
       }
       ItemEntity item = new ItemEntity(world, x, y, z, stack);
       if (ticks != -1) {

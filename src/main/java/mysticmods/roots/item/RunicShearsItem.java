@@ -82,7 +82,7 @@ public class RunicShearsItem extends ShearsItem {
           List<ItemStack> results = recipe.value()
               .assembleOutputs(crafting, player.getRandom(), level.registryAccess(), null);
           for (ItemStack stack : results) {
-            ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
+            ItemUtil.Spawn.spawnItem(level, entity.getX(), entity.getY(), entity.getZ(), true, stack, -1);
           }
         } else {
           player.displayClientMessage(Component.translatable("roots.message.runic_shears.cooldown")
