@@ -134,7 +134,7 @@ public class SproutEntity extends Animal {
     if (player.getItemInHand(hand).isEmpty() && hasGift()) {
       ItemStack gift = getGift();
       if (!gift.isEmpty()) {
-        player.drop(gift, false);
+        player.drop(gift, true, false);
         setHasGift(false);
         return InteractionResult.SUCCESS;
       }
