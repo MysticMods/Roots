@@ -7,13 +7,11 @@ import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.block.GroveCrafterBlock;
-import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.grove.GroveCrafting;
-import mysticmods.roots.recipe.PedestalInventoryWrapper;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
@@ -23,7 +21,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -38,7 +35,6 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -110,7 +106,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   protected void revalidateRecipe() {
     boolean active = getBlockState().getValue(GroveCrafterBlock.ACTIVE);
     if (getBoundingBox() != null) {
-      Set<BlockPos> groveStones = ModConditions.GROVE_STONE_ACTIVE.get().test(getLevel(), null, PyreBlockEntity.getPyreBoundingBox(), getBlockPos(), Collections.emptySet());
+      Set<BlockPos> groveStones = ModConditions.GROVE_STONE_ACTIVE.get()
+          .test(getLevel(), null, PyreBlockEntity.getPyreBoundingBox(), getBlockPos(), Collections.emptySet());
       if (groveStones.isEmpty() && active) {
         getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, false), 3);
       } else if (!groveStones.isEmpty() && !active) {
@@ -220,10 +217,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
 
   @Override
   public void serverTick(ServerLevel pLevel, BlockPos pPos, BlockState pState) {
-    MinecraftServer server = pLevel.getServer();
-    if (server != null && server.getTickCount() % 2 == 0) {
-      revalidateRecipe();
-    }
+    revalidateRecipe();
   }
 
   @Override
