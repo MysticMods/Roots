@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-02T18:33:46.0089322	Loot Tables
+// 1.21.1	2025-03-05T18:25:44.5556083	Loot Tables
 e8472c417eb64cb3ad295f65ece125190c4620e0 data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -106,7 +106,7 @@ e5d9bb6e33c52a49cee489bb09839cc1aad150c6 data/roots/loot_table/blocks/wildwood_b
 9ada6fddf5e7fba4297459b4f9f93d83e055d36a data/roots/loot_table/blocks/wildwood_fence.json
 6ceafc8c80c6e1fbf09f370b168e840908858756 data/roots/loot_table/blocks/wildwood_gate.json
 2f264ed7c3c3c6ea8d36ecd616b329e25eccd053 data/roots/loot_table/blocks/wildwood_ladder.json
-bce932881da1e1819cb4f505322f6e7994da1243 data/roots/loot_table/blocks/wildwood_leaves.json
+1c90d8095d4123b614180d05ca7922c3a7ab9597 data/roots/loot_table/blocks/wildwood_leaves.json
 8ce0e427acc1cae29a95fcf87c1db45cabaf8c6f data/roots/loot_table/blocks/wildwood_log.json
 a226ec121edcf341511a9b88a548ff85eecb6d4a data/roots/loot_table/blocks/wildwood_pedestal.json
 aeb9aaf575da0010aeee9731d1d738d32ba2357d data/roots/loot_table/blocks/wildwood_planks.json

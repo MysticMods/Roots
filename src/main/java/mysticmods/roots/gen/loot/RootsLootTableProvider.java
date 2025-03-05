@@ -509,7 +509,7 @@ public class RootsLootTableProvider {
                       ((LootPoolSingletonContainer.Builder<?>) this.applyExplosionCondition(ModBlocks.WILDWOOD_LEAVES.get(), LootItem.lootTableItem(ModItems.WILDROOT.get())))
                           .when(
                               BonusLevelTableCondition.bonusLevelFlatChance(
-                                  registrylookup.getOrThrow(Enchantments.FORTUNE), 0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F
+                                  registrylookup.getOrThrow(Enchantments.FORTUNE), 0.02f, 0.03f, 0.04f, 0.05f, 0.1f
                               )
                           )
                   )
