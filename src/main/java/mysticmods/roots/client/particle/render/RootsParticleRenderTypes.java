@@ -40,7 +40,6 @@ public class RootsParticleRenderTypes {
       Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       RenderSystem.enableBlend();
       RenderSystem.depthMask(true);
-      RenderSystem.setShader(GameRenderer::getParticleShader);
       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
       RenderSystem.enableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
@@ -59,7 +58,6 @@ public class RootsParticleRenderTypes {
     public @Nullable BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
       RenderSystem.enableBlend();
       RenderSystem.depthMask(false);
-      //RenderSystem.setShader(GameRenderer::getParticleShader);
       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
       RenderSystem.enableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
