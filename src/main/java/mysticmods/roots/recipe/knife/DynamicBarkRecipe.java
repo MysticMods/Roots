@@ -1,4 +1,4 @@
-package mysticmods.roots.recipe.bark;
+package mysticmods.roots.recipe.knife;
 
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class DynamicBarkRecipe extends BarkRecipe {
+public class DynamicBarkRecipe extends KnifeRecipe {
   public static DynamicBarkRecipe INSTANCE = new DynamicBarkRecipe();
 
   public static ResourceLocation IDENTIFIER = RootsAPI.rl("bark/dynamic_modded_wood_bark");

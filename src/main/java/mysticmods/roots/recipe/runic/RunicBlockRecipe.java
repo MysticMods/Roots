@@ -12,7 +12,7 @@ import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
-import mysticmods.roots.recipe.bark.OutputStateMapper;
+import mysticmods.roots.recipe.knife.OutputStateMapper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

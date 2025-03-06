@@ -5,7 +5,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
-import mysticmods.roots.recipe.bark.BarkRecipe;
+import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -14,7 +14,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -35,16 +34,13 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.List;
-import java.util.Optional;
 
 public class KnifeItem extends TieredItem {
   public KnifeItem(Tier tier, Properties props) {
@@ -73,7 +69,7 @@ public class KnifeItem extends TieredItem {
     Player player = pContext.getPlayer();
     BlockState blockstate = level.getBlockState(blockpos);
     SimpleWorldCrafting crafting = new SimpleWorldCrafting(player, level, blockpos, blockstate, pContext);
-    RecipeHolder<BarkRecipe> recipe = ResolvedRecipes.BARK.findRecipe(crafting, level);
+    RecipeHolder<KnifeRecipe> recipe = ResolvedRecipes.BARK.findRecipe(crafting, level);
     ItemStack itemstack = pContext.getItemInHand();
     if (recipe != null) {
       level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);

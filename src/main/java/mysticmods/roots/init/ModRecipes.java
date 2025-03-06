@@ -1,7 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.recipe.bark.BarkRecipe;
+import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.SummonCreaturesRecipe;
@@ -20,7 +20,7 @@ public class ModRecipes {
   public static DeferredHolder<RecipeType<?>, RecipeType<SummonCreaturesRecipe>> SUMMON_CREATURES = TYPES.register("summon_creatures", () -> RecipeType.simple(RootsAPI.rl("summon_creatures")));
   public static DeferredHolder<RecipeType<?>, RecipeType<MortarRecipe>> MORTAR = TYPES.register("mortar", () -> RecipeType.simple(RootsAPI.rl("mortar")));
   public static DeferredHolder<RecipeType<?>, RecipeType<GroveRecipe>> GROVE = TYPES.register("grove", () -> RecipeType.simple(RootsAPI.rl("grove")));
-  public static DeferredHolder<RecipeType<?>, RecipeType<BarkRecipe>> BARK = TYPES.register("bark", () -> RecipeType.simple(RootsAPI.rl("bark")));
+  public static DeferredHolder<RecipeType<?>, RecipeType<KnifeRecipe>> KNIFE = TYPES.register("knife", () -> RecipeType.simple(RootsAPI.rl("knife")));
   public static DeferredHolder<RecipeType<?>, RecipeType<RunicBlockRecipe>> RUNIC_BLOCK = TYPES.register("runic_block", () -> RecipeType.simple(RootsAPI.rl("runic_block")));
   public static DeferredHolder<RecipeType<?>, RecipeType<RunicEntityRecipe>> RUNIC_ENTITY = TYPES.register("runic_entity", () -> RecipeType.simple(RootsAPI.rl("runic_entity")));
 

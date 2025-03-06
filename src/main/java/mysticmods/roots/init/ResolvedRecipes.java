@@ -6,7 +6,7 @@ import mysticmods.roots.api.recipe.type.ResolvingRecipeType;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
-import mysticmods.roots.recipe.bark.BarkRecipe;
+import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
@@ -52,7 +52,7 @@ public class ResolvedRecipes {
   public static final ResolvingRecipeType<Void, RunicEntityCrafting, RunicEntityRecipe> RUNIC_ENTITY = new ResolvingRecipeType<>(ModRecipes.RUNIC_ENTITY, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
-  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, BarkRecipe> BARK = new ResolvingRecipeType<>(ModRecipes.BARK, (o1, o2) -> Integer.compare(o1.id()
+  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, KnifeRecipe> BARK = new ResolvingRecipeType<>(ModRecipes.KNIFE, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
 

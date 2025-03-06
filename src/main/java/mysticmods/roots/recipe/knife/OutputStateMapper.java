@@ -1,4 +1,4 @@
-package mysticmods.roots.recipe.bark;
+package mysticmods.roots.recipe.knife;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

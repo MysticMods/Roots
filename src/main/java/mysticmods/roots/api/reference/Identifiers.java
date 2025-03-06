@@ -1,7 +1,7 @@
 package mysticmods.roots.api.reference;
 
 public interface Identifiers {
-  String BARK_RECIPE_GROUP = "roots_bark";
+  String KNIFE_RECIPE_GROUP = "roots_knife";
   String GROVE_RECIPE_GROUP = "roots_grove";
   String MORTAR_RECIPE_GROUP = "roots_mortar";
   String PYRE_RECIPE_GROUP = "roots_pyre";
