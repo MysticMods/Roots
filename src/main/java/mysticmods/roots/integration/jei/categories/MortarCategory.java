@@ -6,6 +6,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -14,9 +15,12 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
   public MortarCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.MORTAR_RECIPE_TYPE, helper, 90, 53, RootsAPI.rl("textures/gui/jei/mortar_and_pestle.png"), () -> new ItemStack(ModBlocks.MORTAR.get()), Component.translatable("roots.jei.mortar_crafting"));
+    super(RootsJEIPlugin.MORTAR_RECIPE_TYPE, helper, 185, 117, RootsAPI.rl("textures/gui/jei/mortar_and_pestle.png"), () -> new ItemStack(ModBlocks.MORTAR.get()), Component.translatable("roots.jei.mortar_crafting"));
   }
 
   @Override
@@ -28,21 +32,26 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
 
     boolean hasOutput = false;
 
-    // TODO: If it's empty there's a grant
+    List<ChanceOutput> outputs = new ArrayList<>();
+
     if (recipe.getResultItem(provider) != null && !recipe.getResultItem(provider).isEmpty()) {
       hasOutput = true;
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 28).addItemStack(recipe.getResultItem(provider));
+      outputs.add(new ChanceOutput(recipe.getResultItem(provider), 1));
+/*      builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 28).addItemStack(recipe.getResultItem(provider));*/
     } else {
       if (recipe.getUnlocks().size() == 1) {
         Unlock<?> unlock = recipe.getUnlocks().getFirst();
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 28).addItemStack(unlock.getIcon());
+        outputs.add(new ChanceOutput(unlock.getIcon(), 1));
+/*        builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 28).addItemStack(unlock.getIcon());*/
       }
     }
 
-    for (int i = 0; i < recipe.getChanceOutputs().size(); i++) {
+    outputs.addAll(recipe.getChanceOutputs());
+
+/*    for (int i = 0; i < recipe.getChanceOutputs().size(); i++) {
       builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 30)
           .addItemStack(recipe.getChanceOutputs().get(i).getOutput());
-    }
+    }*/
 
     if (hasOutput) {
       for (int i = 0; i < recipe.getUnlocks().size(); i++) {
@@ -50,8 +59,22 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
         if (unlock.getIcon().isEmpty()) {
           continue;
         }
-        builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 50).addItemStack(unlock.getIcon());
+        outputs.add(new ChanceOutput(unlock.getIcon(), 1));
+/*        builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 50).addItemStack(unlock.getIcon());*/
       }
+    }
+
+    int row = 0;
+    int column = 0;
+
+    for (int i = 0; i < outputs.size(); i++) {
+      if (i % 4 == 0 && i != 0) {
+        row++;
+        column = 0;
+      }
+      builder.addSlot(RecipeIngredientRole.OUTPUT, 117 + column * 17, 2 + row * 17)
+          .addItemStack(outputs.get(i).getOutput());
+      column++;
     }
   }
 }

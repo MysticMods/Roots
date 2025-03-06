@@ -19,7 +19,7 @@ import java.util.List;
 
 public class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
   public PyreCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.PYRE_RECIPE_TYPE, helper, 166, 79, RootsAPI.rl("textures/gui/jei/ritual_crafting.png"), () -> new ItemStack(ModBlocks.PYRE.value()), Component.translatable("roots.jei.pyre"));
+    super(RootsJEIPlugin.PYRE_RECIPE_TYPE, helper, 167, 124, RootsAPI.rl("textures/gui/jei/ritual_crafting.png"), () -> new ItemStack(ModBlocks.PYRE.value()), Component.translatable("roots.jei.pyre"));
   }
 
   @Override
