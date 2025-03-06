@@ -195,11 +195,11 @@ public class Costing {
 
     Object2DoubleMap<Herb> totals = new Object2DoubleOpenHashMap<>();
 
-    for (Map.Entry<ResourceKey<Herb>, Herb> herb : RootsRegistries.HERBS.entrySet()) {
-      for (HerbEntry herbEntry : herbMapCache.getOrDefault(herb.getValue(), List.of())) {
-        totals.put(herb.getValue(), totals.getDouble(herb.getValue()) + herbEntry.count);
+    for (Herb herb : totalCosts.keySet()) {
+      for (HerbEntry herbEntry : herbMapCache.getOrDefault(herb, List.of())) {
+        totals.put(herb, totals.getDouble(herb) + herbEntry.count);
       }
-      totals.put(herb.getValue(), totals.getDouble(herb.getValue()) + cap.amount(herb.getValue()));
+      totals.put(herb, totals.getDouble(herb) + cap.amount(herb));
     }
 
     RootsAPI.getInstance().syncHerbs(player, totals);
