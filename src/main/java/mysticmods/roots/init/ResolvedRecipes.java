@@ -52,7 +52,7 @@ public class ResolvedRecipes {
   public static final ResolvingRecipeType<Void, RunicEntityCrafting, RunicEntityRecipe> RUNIC_ENTITY = new ResolvingRecipeType<>(ModRecipes.RUNIC_ENTITY, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
-  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, KnifeRecipe> BARK = new ResolvingRecipeType<>(ModRecipes.KNIFE, (o1, o2) -> Integer.compare(o1.id()
+  public static final ResolvingRecipeType<Void, SimpleWorldCrafting, KnifeRecipe> KNIFE = new ResolvingRecipeType<>(ModRecipes.KNIFE, (o1, o2) -> Integer.compare(o1.id()
       .getNamespace().compareTo(o2.id().getNamespace()), Integer.compare(o1.value().getPriority(), o2.value()
       .getPriority())), null);
 
@@ -61,7 +61,7 @@ public class ResolvedRecipes {
     event.addListener(GROVE);
     event.addListener(MORTAR);
     event.addListener(PYRE);
-    event.addListener(BARK);
+    event.addListener(KNIFE);
     event.addListener(RUNIC_BLOCK);
     event.addListener(RUNIC_ENTITY);
     event.addListener(SUMMON_CREATURES);
@@ -71,7 +71,7 @@ public class ResolvedRecipes {
     GROVE.reset();
     MORTAR.reset();
     PYRE.reset();
-    BARK.reset();
+    KNIFE.reset();
     RUNIC_BLOCK.reset();
     RUNIC_ENTITY.reset();
     SUMMON_CREATURES.reset();

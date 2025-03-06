@@ -3,6 +3,7 @@ package mysticmods.roots.api.test.world;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -33,6 +34,11 @@ public class BlockMatchWorldTest extends WorldTest {
   @Override
   public boolean test(BlockState state, RandomSource random) {
     return state.is(this.block);
+  }
+
+  @Override
+  public BlockState getBlockState(HolderLookup.Provider provider) {
+    return block.defaultBlockState();
   }
 
   @Override

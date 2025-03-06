@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -12,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TagMatchWorldTest extends WorldTest {
@@ -32,6 +34,16 @@ public class TagMatchWorldTest extends WorldTest {
   @Override
   public boolean test(BlockState state, RandomSource random) {
     return state.is(tag);
+  }
+
+  @Override
+  public BlockState getBlockState(HolderLookup.Provider provider) {
+    // This is pretty cursed
+    try {
+      return provider.lookupOrThrow(Registries.BLOCK).get(this.tag).get().get(0).value().defaultBlockState();
+    } catch (Exception e) {
+      return Blocks.AIR.defaultBlockState();
+    }
   }
 
   @Override

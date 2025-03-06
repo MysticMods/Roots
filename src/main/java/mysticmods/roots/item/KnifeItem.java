@@ -69,7 +69,7 @@ public class KnifeItem extends TieredItem {
     Player player = pContext.getPlayer();
     BlockState blockstate = level.getBlockState(blockpos);
     SimpleWorldCrafting crafting = new SimpleWorldCrafting(player, level, blockpos, blockstate, pContext);
-    RecipeHolder<KnifeRecipe> recipe = ResolvedRecipes.BARK.findRecipe(crafting, level);
+    RecipeHolder<KnifeRecipe> recipe = ResolvedRecipes.KNIFE.findRecipe(crafting, level);
     ItemStack itemstack = pContext.getItemInHand();
     if (recipe != null) {
       level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);

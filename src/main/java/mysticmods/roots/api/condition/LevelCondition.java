@@ -99,7 +99,7 @@ public abstract class LevelCondition implements IDescribed {
 
     @Override
     protected CanonicalRepresentation getDefaultRepresentation() {
-      return new CanonicalRepresentation(test.getPartialBlockState());
+      return new CanonicalRepresentation(test);
     }
 
     @Override

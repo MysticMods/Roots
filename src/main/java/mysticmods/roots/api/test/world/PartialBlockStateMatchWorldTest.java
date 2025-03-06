@@ -3,6 +3,7 @@ package mysticmods.roots.api.test.world;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -28,6 +29,11 @@ public class PartialBlockStateMatchWorldTest extends WorldTest {
   @Override
   public boolean test(BlockState state, RandomSource random) {
     return partialBlockState.test(state);
+  }
+
+  @Override
+  public BlockState getBlockState(HolderLookup.Provider provider) {
+    return getPartialBlockState().build();
   }
 
   @Override

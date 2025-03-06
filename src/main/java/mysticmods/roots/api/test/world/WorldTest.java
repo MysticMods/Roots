@@ -2,6 +2,7 @@ package mysticmods.roots.api.test.world;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -16,6 +17,8 @@ public abstract class WorldTest {
       .dispatch(WorldTest::getType, WorldTestType::streamCodec);
 
   public abstract boolean test(BlockState state, RandomSource random);
+
+  public abstract BlockState getBlockState(HolderLookup.Provider provider);
 
   protected abstract WorldTestType<?> getType();
 }

@@ -4,8 +4,11 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import mysticmods.roots.api.RootsAPI;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -14,8 +17,10 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class RenderUtil {
   private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
@@ -68,5 +73,30 @@ public class RenderUtil {
 
   private static MultiBufferSource transparentBuffer(MultiBufferSource.BufferSource bufferSource) {
     return (type) -> new TintWrappedVertexConsumer(bufferSource.getBuffer(TRANSLUCENT), 1.0f, 1.0f, 1.0f, 0.25f);
+  }
+
+  public static void renderBlock(GuiGraphics guiGraphics, BlockState block, float x, float y, float z, float rotate, float scale) {
+    Minecraft mc = Minecraft.getInstance();
+    guiGraphics.pose().pushPose();
+    guiGraphics.pose().translate(x, y, z);
+    guiGraphics.pose().scale(-scale, -scale, -scale);
+    guiGraphics.pose().translate(-0.5F, -0.5F, 0);
+    guiGraphics.pose().mulPose(Axis.XP.rotationDegrees(-30F));
+    guiGraphics.pose().translate(0.5F, 0, -0.5F);
+    guiGraphics.pose().mulPose(Axis.YP.rotationDegrees(rotate));
+    guiGraphics.pose().translate(-0.5F, 0, 0.5F);
+
+    guiGraphics.pose().pushPose();
+    RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+    guiGraphics.pose().translate(0, 0, -1);
+
+    RenderSystem.setShader(GameRenderer::getPositionTexShader);
+    RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
+    MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
+    mc.getBlockRenderer().renderSingleBlock(block, guiGraphics.pose(), bufferSource, 15728880, OverlayTexture.NO_OVERLAY);
+    bufferSource.endBatch();
+    guiGraphics.pose().popPose();
+
+    guiGraphics.pose().popPose();
   }
 }

@@ -1,19 +1,26 @@
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.condition.CanonicalRepresentation;
+import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
+import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
+import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +81,25 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
       }
       builder.addSlot(RecipeIngredientRole.OUTPUT, 117 + column * 17, 2 + row * 17)
           .addItemStack(outputs.get(i).getOutput());
+      column++;
+    }
+  }
+
+  @Override
+  public void draw(MortarRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+
+    int row;
+    int column = 0;
+
+    for (LevelCondition condition : recipe.getLevelConditions()) {
+      row = 0;
+      CanonicalRepresentation rep = condition.getRepresentation();
+      int count = rep.getStates().size();
+      for (BlockState state : rep.getStates()) {
+        RenderUtil.renderBlock(guiGraphics, state, 10 + column * 18, 81 + (count - row) * 6, row * 3, 45f, 6f);
+        row++;
+      }
       column++;
     }
   }
