@@ -1,5 +1,6 @@
 package mysticmods.roots.client.particle;
 
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -25,7 +26,7 @@ public class GrowthParticle extends TextureSheetParticle {
     this.yd = ySpeed;
     this.zd = 0;
     this.hasPhysics = false;
-    this.quadSize = 0.05f;
+    this.quadSize = 0.0025f;
   }
 
   @Override
@@ -54,7 +55,7 @@ public class GrowthParticle extends TextureSheetParticle {
         this.yd *= 0.1f;
       }
 
-      this.quadSize = 0.1f + 0.1f * f;
+      this.quadSize = 0.05f + 0.05f * f;
     }
   }
 
