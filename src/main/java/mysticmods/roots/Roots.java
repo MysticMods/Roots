@@ -11,6 +11,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
+// Wooden shears dispenser behaviour
+// Runic shears dispenser behaviour
 // Elemental crop bounding boxes are wrong
 // - Nondetection
 //     Doesn't stop alerts
