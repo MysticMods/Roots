@@ -1,9 +1,12 @@
 package mysticmods.roots.client.network;
 
+import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
@@ -112,6 +115,12 @@ public class ClientNetworkHandlers {
     Entity actualEntity = minecraft.level.getEntity(entityId);
     if (actualEntity != null) {
       actualEntity.setData(ModAttachments.HAS_GEAS, value);
+    }
+  }
+
+  public static void setHerbCount (Object2DoubleMap<Herb> map) {
+    for (Object2DoubleMap.Entry<Herb> entry : map.object2DoubleEntrySet()) {
+      HerbLayer.updateHerb(entry.getKey(), entry.getDoubleValue());
     }
   }
 }

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.CastingItem;
@@ -39,14 +40,6 @@ public class RenderTickHandler {
 
   private static boolean outliningArea = false;
 
-/*  @SubscribeEvent
-  public static void onRenderLiving (RenderLivingEvent.Post<?, ?> event) {
-    if (event.getEntity().isAlive()) {
-      if (event.getEntity().hasEffect(ModEffects.GEAS)) {
-        // TODO: Render geas effect -- how?
-      }
-    }
-  }*/
 
   @SubscribeEvent
   public static void onRenderStage(RenderLevelStageEvent event) {
@@ -55,12 +48,9 @@ public class RenderTickHandler {
     }
   }
 
+  @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post post) {
-    Minecraft minecraft = Minecraft.getInstance();
-    Level level;
-    //noinspection ConstantValue
-    if (minecraft.player != null && ((level = minecraft.player.level()) != null) && minecraft.gameMode != null) {
-    }
+    HerbLayer.tick();
   }
 
   // This is stolen from Mekanism

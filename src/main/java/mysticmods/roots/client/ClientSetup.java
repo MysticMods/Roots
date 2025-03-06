@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.blockentity.*;
+import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.client.gui.screen.HerbPouchScreen;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
@@ -128,10 +129,12 @@ public class ClientSetup {
   }
 
   public static final ResourceLocation WARNING_LAYER = RootsAPI.rl("warning");
+  public static final ResourceLocation HERB_ALERT = RootsAPI.rl("herb_alert");
 
   @SubscribeEvent
   public static void registerGuiLayers (RegisterGuiLayersEvent event) {
     event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, WARNING_LAYER, WarningLayer::render);
+    event.registerBelow(VanillaGuiLayers.HOTBAR, HERB_ALERT, HerbLayer::render);
   }
 
   @SubscribeEvent

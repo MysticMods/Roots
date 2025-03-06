@@ -31,6 +31,10 @@ public class HerbStorage implements ICleanable {
     return herbMap;
   }
 
+  public double amount (Herb herb) {
+    return herbMap.getDouble(herb);
+  }
+
   // Returns how much is left over
   public double drain(Herb herb, double value, boolean simulate) {
     double current = herbMap.getDouble(herb);
@@ -57,7 +61,6 @@ public class HerbStorage implements ICleanable {
     double oldValue = herbMap.getDouble(herb);
     double newValue = oldValue + value;
     herbMap.put(herb, newValue);
-    RootsAPI.LOG.info("Filled herb {} x{}, bringing it from {} to {}.", herb, value, oldValue, newValue);
     setDirty(true);
   }
 

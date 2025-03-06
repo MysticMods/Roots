@@ -1,15 +1,14 @@
 package mysticmods.roots.api.spell;
 
-import it.unimi.dsi.fastutil.objects.Object2BooleanLinkedOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
-import it.unimi.dsi.fastutil.objects.Object2DoubleLinkedOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import it.unimi.dsi.fastutil.objects.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.init.ModAttachments;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -111,7 +110,7 @@ public class Costing {
         List<HerbEntry> entries = herbMapCache.get(entry.getKey());
         if (entries != null) {
           for (HerbEntry herbEntry : entries) {
-            count += herbEntry.count();
+            count += herbEntry.count;
           }
         }
         if (remainder > count) {
@@ -146,35 +145,39 @@ public class Costing {
       if (remainder != 0) {
         int toConsume = Mth.ceil(remainder);
         for (HerbEntry herbEntry : herbMapCache.getOrDefault(entry.getKey(), List.of())) {
-          if (herbEntry.type() == HerbEntryType.INVENTORY) {
-            ItemStack stack = playerInventory.getItem(herbEntry.slot());
+          if (herbEntry.type == HerbEntryType.INVENTORY) {
+            ItemStack stack = playerInventory.getItem(herbEntry.slot);
             if (stack.getCount() >= toConsume) {
               stack.shrink(toConsume);
               toConsume = 0;
-              playerInventory.setItem(herbEntry.slot(), stack);
+              playerInventory.setItem(herbEntry.slot, stack);
+              herbEntry.count = stack.getCount();
               break;
             } else {
               toConsume -= stack.getCount();
               stack.setCount(0);
-              playerInventory.setItem(herbEntry.slot(), stack);
+              playerInventory.setItem(herbEntry.slot, ItemStack.EMPTY);
+              herbEntry.count = 0;
             }
           } else {
-            ItemStack capStack = playerInventory.getItem(herbEntry.slot());
+            ItemStack capStack = playerInventory.getItem(herbEntry.slot);
             IItemHandler thisCap = capStack.getCapability(Capabilities.ItemHandler.ITEM, null);
             if (thisCap == null) {
               RootsAPI.LOG.error("No capability found for {}", capStack);
               continue;
             }
-            ItemStack capItem = thisCap.getStackInSlot(herbEntry.subindex());
+            ItemStack capItem = thisCap.getStackInSlot(herbEntry.subindex);
             if (capItem.getCount() >= toConsume) {
-              thisCap.extractItem(herbEntry.subindex(), toConsume, false);
+              thisCap.extractItem(herbEntry.subindex, toConsume, false);
               toConsume = 0;
-              playerInventory.setItem(herbEntry.slot(), capStack);
+              herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
+              playerInventory.setItem(herbEntry.slot, capStack);
               break;
             } else {
-              thisCap.extractItem(herbEntry.subindex(), capItem.getCount(), false);
+              thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
               toConsume -= capItem.getCount();
-              playerInventory.setItem(herbEntry.slot(), capStack);
+              herbEntry.count = capItem.getCount();
+              playerInventory.setItem(herbEntry.slot, capStack);
             }
           }
           if (toConsume <= 0) {
@@ -189,6 +192,17 @@ public class Costing {
         player.inventoryMenu.sendAllDataToRemote();
       }
     }
+
+    Object2DoubleMap<Herb> totals = new Object2DoubleOpenHashMap<>();
+
+    for (Map.Entry<ResourceKey<Herb>, Herb> herb : RootsRegistries.HERBS.entrySet()) {
+      for (HerbEntry herbEntry : herbMapCache.getOrDefault(herb.getValue(), List.of())) {
+        totals.put(herb.getValue(), totals.getDouble(herb.getValue()) + herbEntry.count);
+      }
+      totals.put(herb.getValue(), totals.getDouble(herb.getValue()) + cap.amount(herb.getValue()));
+    }
+
+    RootsAPI.getInstance().syncHerbs(player, totals);
 
     return true;
   }
@@ -253,7 +267,20 @@ public class Costing {
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 
-  private record HerbEntry(HerbEntryType type, Herb herb, int slot, int count, int subindex) {
+  private class HerbEntry {
+    private final HerbEntryType type;
+    private final Herb herb;
+    private final int slot;
+    private int count;
+    private final int subindex;
+
+    public HerbEntry(HerbEntryType type, Herb herb, int slot, int count, int subindex) {
+      this.type = type;
+      this.herb = herb;
+      this.slot = slot;
+      this.count = count;
+      this.subindex = subindex;
+    }
   }
 
   private enum HerbEntryType {

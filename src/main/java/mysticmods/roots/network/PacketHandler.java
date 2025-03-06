@@ -49,6 +49,7 @@ public class PacketHandler {
     registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
     registrar.play(ClientboundSyncGeasPacket.TYPE, ClientboundSyncGeasPacket.CODEC);
     registrar.play(AlertnessFXPacket.TYPE, AlertnessFXPacket.CODEC);
+    registrar.play(ClientboundHerbCountSyncPacket.TYPE, ClientboundHerbCountSyncPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

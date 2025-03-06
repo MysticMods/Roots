@@ -1,6 +1,8 @@
 package mysticmods.roots.api;
 
+import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.herb.Herb;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -77,4 +79,6 @@ public abstract class RootsAPI {
   public abstract boolean isShiftKeyDown();
 
   public abstract RecipeManager getRecipeManager();
+
+  public abstract void syncHerbs (Player player, Object2DoubleMap<Herb> herbs);
 }
