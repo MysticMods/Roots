@@ -29,4 +29,9 @@ public class HerbPouchScreen extends AbstractContainerScreen<HerbPouchContainer>
     int j = (this.height - this.imageHeight) / 2;
     guiGraphics.blit(BACKGROUND, i, j, 0, 0, this.imageWidth, this.imageHeight);
   }
+
+  @Override
+  protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    // NO-OP
+  }
 }
