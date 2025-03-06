@@ -25,13 +25,11 @@ public class HerbLayer {
 
   public static void updateHerb(Herb herb, double amount) {
     HerbAlert alert = getAlert(herb);
-    if (amount < alert.getAmount()) {
       alert.setAmount(amount);
       if (alert.invalid()) {
         slots.addFirst(alert);
       }
       alert.show();
-    }
   }
 
   public static HerbAlert getAlert(Herb herb) {
@@ -136,7 +134,7 @@ public class HerbLayer {
         y -= row * 20;
       }
 
-      int barWidth = 190 + 58;
+      int barWidth = 90 + 58;
       if (!mc.player.getOffhandItem().isEmpty()) {
         barWidth += 58;
       }
