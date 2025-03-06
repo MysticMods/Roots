@@ -14,13 +14,10 @@ import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.*;
 import mysticmods.roots.client.particle.emitter.FeyLightEmitter;
-import mysticmods.roots.client.particle.emitter.GrowthEmitter;
 import mysticmods.roots.client.render.*;
-import mysticmods.roots.entity.SproutEntity;
 import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.NoopRenderer;
@@ -180,7 +177,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.FEY_LIGHT.get(), FeyLightParticle.Provider::new);
     event.registerSpriteSet(ModParticles.WILDFIRE.get(), WildfireParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GROWTH.get(), GrowthParticle.Provider::new);
-    event.registerSpriteSet(ModParticles.CHANNEL.get(), ChannelCastParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.CHANNEL_TARGET.get(), ChannelTargetCastParticle.Provider::new);
 
     event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
   }

@@ -3,17 +3,16 @@ package mysticmods.roots.client.particle;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
-public class ChannelCastParticle extends TextureSheetParticle {
+public class ChannelTargetCastParticle extends TextureSheetParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected boolean bounced = false;
 
   protected Vec3 stop;
 
-  protected ChannelCastParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
+  protected ChannelTargetCastParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.speedUpWhenYMotionIsBlocked = true;
     this.lifetime = 30;
@@ -98,7 +97,7 @@ public class ChannelCastParticle extends TextureSheetParticle {
   public record Provider(SpriteSet sprite) implements ParticleProvider<ColorGravityParticleOptions> {
     @Override
     public Particle createParticle(ColorGravityParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      var particle = new ChannelCastParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
+      var particle = new ChannelTargetCastParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprite);
       return particle;
     }

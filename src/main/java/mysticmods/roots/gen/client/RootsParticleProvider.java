@@ -1,6 +1,5 @@
 package mysticmods.roots.gen.client;
 
-import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModParticles;
 import net.minecraft.data.PackOutput;
@@ -18,8 +17,8 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.sprite(ModParticles.FEY_LIGHT.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.METEOR.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.WILDFIRE.get(), RootsAPI.rl("simple"));
-    this.sprite(ModParticles.GROWTH.get(), RootsAPI.rl("simple"));
-    this.sprite(ModParticles.CHANNEL.get(), RootsAPI.rl("simple"));
+    this.sprite(ModParticles.GROWTH.get(), RootsAPI.rl("simple_large"));
+    this.sprite(ModParticles.CHANNEL_TARGET.get(), RootsAPI.rl("simple"));
 
     this.spriteSet(ModParticles.PYRE_LEAF.get(), RootsAPI.rl("leaf"), 5, false);
   }

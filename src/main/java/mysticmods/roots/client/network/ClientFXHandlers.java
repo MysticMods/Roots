@@ -33,7 +33,7 @@ public class ClientFXHandlers {
 
       minecraft.level.addParticle(
           new ColorGravityParticleOptions(
-              ModParticles.CHANNEL,
+              ModParticles.CHANNEL_TARGET,
               col1,
               col2,
               0f
@@ -47,7 +47,7 @@ public class ClientFXHandlers {
       );
       minecraft.level.addParticle(
           new ColorGravityParticleOptions(
-              ModParticles.CHANNEL,
+              ModParticles.CHANNEL_TARGET,
               col2,
               col1,
               0f
