@@ -27,11 +27,9 @@ import net.neoforged.fml.config.ModConfig;
 //     Doesn't stop alerts
 // - Geas
 //    What other mobs will continue attacking when they lose a target?
-// - Overhaul all block properties, stop using defaults.
+// - Overhaul all block properties, stop using defaults -> done up to ritual pedestal
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Runic tools
-// - Block entity renderers
-// - Block opacity/light block/movement block
 // - Juice recipes
 // - Breading
 // - Big Barrow loot chests
