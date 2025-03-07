@@ -1,7 +1,7 @@
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -10,16 +10,14 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
-import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,24 +77,21 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
   }
 
   @Override
-  public void draw(GroveRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-    super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+  public void createRecipeExtras(IRecipeExtrasBuilder builder, GroveRecipe recipe, IFocusGroup focuses) {
+    super.createRecipeExtras(builder, recipe, focuses);
 
-    int row;
     int column = 0;
-
     for (LevelCondition condition : recipe.getLevelConditions()) {
-      row = 0;
       CanonicalRepresentation rep = condition.getRepresentation();
       int count = rep.getStates().size();
       int offset = 81;
-      if (count == 3) {
+      if (count == 4) {
         offset = 86;
       }
-      for (BlockState state : rep.getStates()) {
-        RenderUtil.renderBlock(guiGraphics, state, 10 + column * 18, offset + (count - row) * 5.2f, row * 3, 45f, 6f);
-        row++;
+      if (count == 3) {
+        offset = 89;
       }
+      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getName()));
       column++;
     }
   }
