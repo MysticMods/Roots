@@ -14,6 +14,7 @@ import net.neoforged.fml.config.ModConfig;
 // Start work on a wiki
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
 // JEI
+// - ChanceOutput ingredient
 // - Runic entity
 // - Runic block
 // - Player conditions (none exist)
@@ -26,8 +27,6 @@ import net.neoforged.fml.config.ModConfig;
 //     Doesn't stop alerts
 // - Geas
 //    What other mobs will continue attacking when they lose a target?
-// Drops aren't right
-//   - Getting better but not perfect
 // - Overhaul all block properties, stop using defaults.
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Runic tools

@@ -51,7 +51,7 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
     newState.setValue(ElementalType.ELEMENTAL_TYPE, thisType);
 
     if (soilTag != null) {
-      if (belowState.is(soilTag) && belowState.hasProperty(ElementalType.SOIL_TYPE)) {
+      if (belowState.hasProperty(ElementalType.SOIL_TYPE)) {
         newState = newState.setValue(ElementalType.SOIL_TYPE, belowState.getValue(ElementalType.SOIL_TYPE));
       } else if (belowState.is(RootsTags.Blocks.BASE_ELEMENTAL_SOIL)) {
         newState = newState.setValue(ElementalType.SOIL_TYPE, ElementalType.DEFAULT);
