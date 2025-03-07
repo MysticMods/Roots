@@ -11,7 +11,15 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO:
-// Wooden shears dispenser behaviour
+// Start work on a wiki
+// That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
+// JEI
+// - Runic entity
+// - Runic block
+// - Player conditions (none exist)
+// - Pouch dye recipe
+// Summon creatures recipes
+// Transmutation recipes
 // Runic shears dispenser behaviour
 // Elemental crop bounding boxes are wrong
 // - Nondetection
@@ -21,8 +29,6 @@ import net.neoforged.fml.config.ModConfig;
 // Drops aren't right
 //   - Getting better but not perfect
 // - Overhaul all block properties, stop using defaults.
-// - Extend JEI integration to different recipe types
-// - Level and player conditions for JEI
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Runic tools
 // - Block entity renderers
