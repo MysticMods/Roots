@@ -11,8 +11,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO
-// Herb overlays overlap
-// ADd something to the barrow to make it pop
 // Shatter charges when it does't successfully break a block
 // Start work on a wiki
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
