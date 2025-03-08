@@ -134,11 +134,11 @@ public class HerbLayer {
         y -= row * 20;
       }
 
-      int barWidth = 90 + 58;
+      int barWidth = 170 + 58;
       if (!mc.player.getOffhandItem().isEmpty()) {
         barWidth += 58;
       }
-      x += ((barWidth / 2.0) * -1 + (col * 35)) - 75;
+      x += (float) (((barWidth / 2.0) * -1 + (col * 45)) - 75);
 
       ItemStack stack = getStack();
 
