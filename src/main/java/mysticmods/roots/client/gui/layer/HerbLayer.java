@@ -134,6 +134,7 @@ public class HerbLayer {
         y -= row * 20;
       }
 
+      // TODO: This needs to be made configurable.
       int barWidth = 250 + 58;
       if (!mc.player.getOffhandItem().isEmpty()) {
         barWidth += 58;
