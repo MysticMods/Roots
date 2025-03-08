@@ -52,7 +52,7 @@ public class FeyLightSpell extends Spell {
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     Vec3 look = pPlayer.getLookAngle().scale(1.5);
-    BlockPos potentialPos = null; // TODO: BlockPos.pPlayer.position().add(look.x, 1, look.z);
+    BlockPos potentialPos = BlockPos.containing(pPlayer.getEyePosition().add(look.x, look.y, look.z));
     boolean doPlace = pLevel.isEmptyBlock(potentialPos);
     if (!doPlace) {
       BlockPlaceContext context = new BlockPlaceContext(pLevel, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY, new BlockHitResult(Vec3.ZERO, Direction.UP, potentialPos, false));
