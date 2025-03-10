@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Spell;
@@ -18,7 +19,7 @@ public abstract class TwoRadiusSpell extends Spell {
   protected BoundingBox boundingBox;
   protected AABB aabb;
 
-  public TwoRadiusSpell(Type type, ChatFormatting color, List<Cost> costs, int color1, int color2) {
+  public TwoRadiusSpell(Type type, ChatFormatting color, CostInstance costs, int color1, int color2) {
     super(type, color, costs, color1, color2);
   }
 

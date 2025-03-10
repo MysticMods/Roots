@@ -10,6 +10,7 @@ import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICosted;
@@ -45,9 +46,9 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
   protected final Type type;
-  protected final List<Cost> defaultCosts;
+  protected final CostInstance defaultCosts;
   protected final Set<SpellModifier> modifiers = new HashSet<>();
-  protected List<Cost> costs;
+  protected CostInstance costs;
   protected int cooldown = 0;
   protected double reach = 0.0;
   protected final int color1, color2;
@@ -62,7 +63,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
   private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
 
-  public Spell(Type type, ChatFormatting color, List<Cost> defaultCosts, int color1, int color2) {
+  public Spell(Type type, ChatFormatting color, CostInstance defaultCosts, int color1, int color2) {
     this.type = type;
     this.textColor = color;
     this.defaultCosts = defaultCosts;
@@ -232,12 +233,12 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   }
 
   @Override
-  public List<Cost> getDefaultCosts() {
+  public CostInstance getDefaultCosts() {
     return defaultCosts;
   }
 
   @Override
-  public List<Cost> getCosts() {
+  public CostInstance getCosts() {
     if (costs == null) {
       RootsAPI.LOG.error("Data maps haven't been initialized for spell: {}", builtInRegistryHolder().getKey());
     }
@@ -388,4 +389,5 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     CONTINUOUS,
     CHARGED
   }
+
 }

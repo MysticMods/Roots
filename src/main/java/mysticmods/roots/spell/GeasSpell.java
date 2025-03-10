@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -27,7 +28,7 @@ import java.util.List;
 public class GeasSpell extends Spell {
   private int count, duration;
 
-  public GeasSpell(ChatFormatting color, List<Cost> costs) {
+  public GeasSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x802020, 0x202020);
   }
 

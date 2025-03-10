@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -31,7 +32,7 @@ import java.util.Map;
 public class ShatterSpell extends Spell {
   private int maxWidth, maxDepth, maxHeight;
 
-  public ShatterSpell(ChatFormatting color, List<Cost> costs) {
+  public ShatterSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x606060, 0xc0c0c0);
   }
 
@@ -146,8 +147,9 @@ public class ShatterSpell extends Spell {
     if (count == 0) {
       costs.noCharge();
       return -1;
+    } else {
+      costs.operations(count);
+      return cooldown;
     }
-
-    return cooldown;
   }
 }

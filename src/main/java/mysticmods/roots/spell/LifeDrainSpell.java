@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -28,7 +29,7 @@ public class LifeDrainSpell extends Spell {
   private double vectorDistance, boundingBoxDistance;
   private float damage, heal;
 
-  public LifeDrainSpell(ChatFormatting color, List<Cost> costs) {
+  public LifeDrainSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x902040, 0xffc4f0);
   }
 

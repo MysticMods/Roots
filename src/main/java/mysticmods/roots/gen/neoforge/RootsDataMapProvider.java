@@ -9,6 +9,7 @@ import mysticmods.roots.api.datamap.GroveData;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -46,7 +47,7 @@ public class RootsDataMapProvider extends DataMapProvider {
 
   @Override
   protected void gather() {
-    Builder<List<Cost>, Spell> builder = builder(DataMaps.SPELL_COST_DATA)
+    Builder<CostInstance, Spell> builder = builder(DataMaps.SPELL_COST_DATA)
         .replace(false);
 
     RootsRegistries.SPELLS.stream().forEach(spell -> {
@@ -60,7 +61,7 @@ public class RootsDataMapProvider extends DataMapProvider {
       builder2.add(herb.getItem(), herb, false);
     });
 
-    Builder<List<Cost>, SpellModifier> builder3 = builder(DataMaps.SPELL_MODIFIER_COST_DATA)
+    Builder<CostInstance, SpellModifier> builder3 = builder(DataMaps.SPELL_MODIFIER_COST_DATA)
         .replace(false);
 
     RootsRegistries.SPELL_MODIFIERS.stream().forEach(modifier -> {

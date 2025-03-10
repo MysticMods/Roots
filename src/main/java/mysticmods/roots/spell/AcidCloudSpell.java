@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -25,7 +26,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   private float damage;
   private int count;
 
-  public AcidCloudSpell(ChatFormatting color, List<Cost> costs) {
+  public AcidCloudSpell(ChatFormatting color, CostInstance costs) {
     super(Type.CONTINUOUS, color, costs, 0x50a028, 0x405f20);
   }
 

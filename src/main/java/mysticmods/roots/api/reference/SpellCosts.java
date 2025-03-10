@@ -7,7 +7,11 @@ public interface SpellCosts {
   double BASE_0250 = 0.25;
   double BASE_0125 = 0.125;
   double BASE_0063 = 0.063;
+  double BASE_0031 = 0.031;
+  double BASE_0016 = 0.016;
+  double BASE_0008 = 0.008;
 
+  double COMPLEX_1250 = BASE_1000 + BASE_0250;
   double COMPLEX_1750 = BASE_1000 + BASE_0750;
   double COMPLEX_1875 = COMPLEX_1750 + BASE_0125;
   double COMPLEX_0625 = BASE_0500 + BASE_0125;

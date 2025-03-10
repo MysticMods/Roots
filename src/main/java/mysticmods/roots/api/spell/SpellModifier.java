@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.IParentChild;
@@ -32,29 +33,29 @@ public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellMod
   protected final Holder<SpellModifier> parent;
   protected final Set<SpellModifier> children = new HashSet<>();
   protected final Holder<Spell> spell;
-  protected final List<Cost> defaultCosts;
-  protected List<Cost> costs;
+  protected final CostInstance defaultCosts;
+  protected CostInstance costs;
   private String descriptionId;
 
   // Modifier with parent
-  public SpellModifier(@Nullable Holder<SpellModifier> parent, Holder<Spell> spell, List<Cost> defaultCosts) {
+  public SpellModifier(@Nullable Holder<SpellModifier> parent, Holder<Spell> spell, CostInstance defaultCosts) {
     this.spell = spell;
     this.parent = parent;
     this.defaultCosts = defaultCosts;
   }
 
   // Modifier with no parent
-  public SpellModifier(Holder<Spell> spell, List<Cost> defaultCosts) {
+  public SpellModifier(Holder<Spell> spell, CostInstance defaultCosts) {
     this(null, spell, defaultCosts);
   }
 
   @Override
-  public List<Cost> getDefaultCosts() {
+  public CostInstance getDefaultCosts() {
     return defaultCosts;
   }
 
   @Override
-  public List<Cost> getCosts() {
+  public CostInstance getCosts() {
     return costs == null ? defaultCosts : costs;
   }
 

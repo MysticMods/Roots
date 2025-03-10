@@ -1,6 +1,7 @@
 {
   "values": {
     "roots:acid_cloud": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -15,6 +16,7 @@
       ]
     },
     "roots:aqua_bubble": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -24,6 +26,7 @@
       ]
     },
     "roots:augment": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -38,6 +41,7 @@
       ]
     },
     "roots:control_undead": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -52,6 +56,7 @@
       ]
     },
     "roots:dandelion_winds": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -66,6 +71,7 @@
       ]
     },
     "roots:desaturate": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -80,20 +86,22 @@
       ]
     },
     "roots:disarm": {
+      "charge_type": "operation",
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.125,
           "herb": "roots:spiritleaf"
         },
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.125,
           "herb": "roots:bafflecap"
         }
       ]
     },
     "roots:extension": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -108,6 +116,7 @@
       ]
     },
     "roots:fey_light": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -122,6 +131,7 @@
       ]
     },
     "roots:geas": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -136,6 +146,7 @@
       ]
     },
     "roots:growth_infusion": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -145,34 +156,37 @@
       ]
     },
     "roots:harvest": {
+      "charge_type": "operation",
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.125,
           "herb": "roots:wildewheet"
         },
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.063,
           "herb": "roots:stalicripe"
         }
       ]
     },
     "roots:jaunt": {
+      "charge_type": "operation",
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.031,
           "herb": "roots:pereskia"
         },
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.031,
           "herb": "roots:spiritleaf"
         }
       ]
     },
     "roots:life_drain": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -187,6 +201,7 @@
       ]
     },
     "roots:light_drifter": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -196,15 +211,17 @@
       ]
     },
     "roots:magnetism": {
+      "charge_type": "operation",
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.016,
           "herb": "roots:spiritleaf"
         }
       ]
     },
     "roots:nondetection": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -219,6 +236,7 @@
       ]
     },
     "roots:petal_shell": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -228,6 +246,7 @@
       ]
     },
     "roots:radiance": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -242,6 +261,7 @@
       ]
     },
     "roots:rampant_growth": {
+      "charge_type": "operation",
       "costs": [
         {
           "type": "additive",
@@ -251,6 +271,7 @@
       ]
     },
     "roots:rose_thorns": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -260,20 +281,22 @@
       ]
     },
     "roots:sanctuary": {
+      "charge_type": "operation",
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.125,
           "herb": "roots:pereskia"
         },
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.125,
           "herb": "roots:stalicripe"
         }
       ]
     },
     "roots:saturate": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -288,24 +311,27 @@
       ]
     },
     "roots:shatter": {
+      "charge_type": "operation",
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.25,
+          "defaultValue": 0.125,
           "herb": "roots:stalicripe"
         }
       ]
     },
     "roots:sky_soarer": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 1.875,
+          "defaultValue": 1.25,
           "herb": "roots:cloud_berry"
         }
       ]
     },
     "roots:storm_cloud": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -320,6 +346,7 @@
       ]
     },
     "roots:time_stop": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",
@@ -334,6 +361,7 @@
       ]
     },
     "roots:wildfire": {
+      "charge_type": "cast",
       "costs": [
         {
           "type": "additive",

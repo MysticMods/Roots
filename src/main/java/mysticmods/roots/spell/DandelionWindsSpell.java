@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -25,7 +26,7 @@ public class DandelionWindsSpell extends Spell {
   private float distance, vertical;
   private double r1, r2;
 
-  public DandelionWindsSpell(ChatFormatting color, List<Cost> costs) {
+  public DandelionWindsSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xffff20, 0xffb020);
   }
 

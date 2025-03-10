@@ -7,6 +7,7 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -25,6 +26,7 @@ import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.DataMapValueMerger;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -44,14 +46,14 @@ public class DataMaps {
   public static final DataMapType<Grove, GroveData> GROVE_DATA = DataMapType.builder(RootsAPI.rl("grove_data"), RootsRegistries.Keys.GROVES, GroveData.CODEC)
       .synced(GroveData.CODEC, false)
       .build();
-  public static final AdvancedDataMapType<Spell, List<Cost>, CostRemover<Spell>> SPELL_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_cost_data"), RootsRegistries.Keys.SPELLS, CostRemover.CODEC)
+  public static final AdvancedDataMapType<Spell, CostInstance, CostRemover<Spell>> SPELL_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_cost_data"), RootsRegistries.Keys.SPELLS, CostRemover.CODEC)
       .synced(CostRemover.CODEC, false)
-      .merger(DataMapValueMerger.listMerger())
+      .merger(costMerger())
       .remover(CostRemover.codec())
       .build();
-  public static final AdvancedDataMapType<SpellModifier, List<Cost>, CostRemover<SpellModifier>> SPELL_MODIFIER_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_modifier_cost_data"), RootsRegistries.Keys.SPELL_MODIFIERS, CostRemover.CODEC)
+  public static final AdvancedDataMapType<SpellModifier, CostInstance, CostRemover<SpellModifier>> SPELL_MODIFIER_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_modifier_cost_data"), RootsRegistries.Keys.SPELL_MODIFIERS, CostRemover.CODEC)
       .synced(CostRemover.CODEC, false)
-      .merger(DataMapValueMerger.listMerger())
+      .merger(costMerger())
       .remover(CostRemover.codec())
       .build();
   public static final DataMapType<Item, Herb> HERB_ITEM_DATA = DataMapType.builder(RootsAPI.rl("herb_item_data"), Registries.ITEM, RootsRegistries.HERBS.byNameCodec())
@@ -96,5 +98,13 @@ public class DataMaps {
     event.register(SPROUT_BREEDING_ITEM_CHANCE);
     event.register(GROWTH_RECORDS);
     event.register(HARVEST_RECORDS);
+  }
+
+  static <R> DataMapValueMerger<R, CostInstance> costMerger() {
+    return (registry, first, firstValue, second, secondValue) -> {
+      final List<Cost> list = new ArrayList<>(firstValue.costs());
+      list.addAll(secondValue.costs());
+      return CostInstance.of(firstValue.chargeType(), list);
+    };
   }
 }

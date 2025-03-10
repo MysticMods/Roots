@@ -5,10 +5,9 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.init.ModAttachments;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -30,6 +29,9 @@ public class Costing {
 
   private final Map<Herb, List<HerbEntry>> herbMapCache;
 
+  private CostInstance.ChargeType chargeType;
+
+  private int operationsCount = 0;
   private boolean noCharge = false;
   private boolean foundCreativePouch = false;
 
@@ -37,6 +39,7 @@ public class Costing {
     this.spell = spell;
     modifierMap.defaultReturnValue(false);
     herbMapCache = new HashMap<>();
+    chargeType = spell.getSpell().getCosts().chargeType();
   }
 
   public Costing(ISpellInstance spell, Player player) {
@@ -44,10 +47,23 @@ public class Costing {
     // base cost is always a cost
     modifierMap.defaultReturnValue(false);
     herbMapCache = herbMap(player);
+    chargeType = spell.getSpell().getCosts().chargeType();
+  }
+
+  public CostInstance.ChargeType getChargeType() {
+    return chargeType;
   }
 
   public void noCharge() {
     this.noCharge = true;
+  }
+
+  public void increment() {
+    this.operationsCount++;
+  }
+
+  public void operations(int operations) {
+    this.operationsCount = operations;
   }
 
   // TODO: Multiply costs by "ticks"
@@ -98,7 +114,7 @@ public class Costing {
     if (player.isCreative() || foundCreativePouch) {
       return true;
     }
-    calculateCosts(checkModifiers, false);
+    calculateCosts(checkModifiers, false, true);
 
 
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
@@ -130,11 +146,17 @@ public class Costing {
     if (player.level().isClientSide()) {
       throw new IllegalStateException("Trying to charge '" + player + "' on the client side.");
     }
-    calculateCosts(true, false);
 
     if (noCharge) {
       return false;
     }
+
+    if (chargeType == CostInstance.ChargeType.OPERATION && operationsCount == 0) {
+      RootsAPI.LOG.error("Charging a spell with operation costs but no operations! {}", spell);
+    }
+
+    // TODO: Count modifiers <-- Now I don't know what this means
+    calculateCosts(true, false, false);
 
     Inventory playerInventory = player.getInventory();
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
@@ -207,27 +229,49 @@ public class Costing {
     return true;
   }
 
-  private void calculateCosts(boolean checkModifiers, boolean skipModifiers) {
+  private void calculateCosts(boolean checkModifiers, boolean skipModifiers, boolean maxOperations) {
     totalCosts.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
-    for (Cost cost : spell.getSpell().getDefaultCosts()) {
+    CostInstance.ChargeType thisType = spell.getSpell().getChargeType();
+    for (Cost cost : spell.getSpell().getCosts().costs()) {
       List<Cost> costs = herbCosts.get(cost.getHerb());
       if (costs == null) {
         costs = new ArrayList<>();
         herbCosts.put(cost.getHerb(), costs);
       }
-      costs.add(cost);
+      if (thisType == CostInstance.ChargeType.OPERATION && maxOperations) {
+        for (int i = 0; i < spell.getSpell().getMaximumOperations(); i++) {
+          costs.add(cost);
+        }
+      } else if (thisType == CostInstance.ChargeType.OPERATION) {
+        for (int i = 0; i < operationsCount; i++) {
+          costs.add(cost);
+        }
+      } else if (thisType == CostInstance.ChargeType.CAST) {
+        costs.add(cost);
+      }
     }
     if (!skipModifiers) {
       for (SpellModifier modifier : spell.getEnabledModifiers()) {
+        thisType = modifier.getChargeType();
         if (!checkModifiers || modifierMap.getBoolean(modifier)) {
-          for (Cost cost : modifier.getDefaultCosts()) {
+          for (Cost cost : modifier.getCosts().costs()) {
             List<Cost> costs = herbCosts.get(cost.getHerb());
             if (costs == null) {
               costs = new ArrayList<>();
               herbCosts.put(cost.getHerb(), costs);
             }
-            costs.add(cost);
+            if (thisType == CostInstance.ChargeType.OPERATION && maxOperations) {
+              for (int i = 0; i < spell.getSpell().getMaximumOperations(); i++) {
+                costs.add(cost);
+              }
+            } else if (thisType == CostInstance.ChargeType.OPERATION) {
+              for (int i = 0; i < operationsCount; i++) {
+                costs.add(cost);
+              }
+            } else if (thisType == CostInstance.ChargeType.CAST) {
+              costs.add(cost);
+            }
           }
         }
       }
@@ -258,12 +302,15 @@ public class Costing {
   }
 
   public Object2DoubleMap<Herb> getMinimumCost() {
-    calculateCosts(false, true);
+    int ops = this.operationsCount;
+    this.operationsCount = 1;
+    calculateCosts(false, true, false);
+    this.operationsCount = ops;
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 
   public Object2DoubleMap<Herb> getMaximumCost() {
-    calculateCosts(false, false);
+    calculateCosts(false, false, true);
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 

@@ -1,6 +1,7 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -18,7 +19,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class MagnetismSpell extends TwoRadiusSpell {
-  public MagnetismSpell(ChatFormatting color, List<Cost> costs) {
+  public MagnetismSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x996117, 0xe62222);
   }
 
@@ -44,11 +45,19 @@ public class MagnetismSpell extends TwoRadiusSpell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    if (MagnetismUtil.pull(pLevel, pPlayer.blockPosition(), radiusZX, radiusY, radiusZX) == 0) {
+    int pulled = MagnetismUtil.pull(pLevel, pPlayer.blockPosition(), radiusZX, radiusY, radiusZX);
+    if (pulled == 0) {
       costs.noCharge();
       return 0;
+    } else {
+      costs.operations(pulled);
     }
 
     return cooldown;
+  }
+
+  @Override
+  public int getMaximumOperations() {
+    return 100;
   }
 }

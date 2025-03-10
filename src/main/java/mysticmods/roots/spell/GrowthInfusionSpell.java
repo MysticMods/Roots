@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class GrowthInfusionSpell extends Spell {
-  public GrowthInfusionSpell(ChatFormatting color, List<Cost> costs) {
+  public GrowthInfusionSpell(ChatFormatting color, CostInstance costs) {
     super(Type.CONTINUOUS, color, costs, 0x30ff30, 0xc0ffc0);
   }
 

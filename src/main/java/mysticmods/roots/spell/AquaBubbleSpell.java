@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -27,7 +28,7 @@ public class AquaBubbleSpell extends Spell {
   private float fire_reduction, lava_reduction;
   private int absorption;
 
-  public AquaBubbleSpell(ChatFormatting color, List<Cost> costs) {
+  public AquaBubbleSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xede658, 0x5dd1de);
   }
 

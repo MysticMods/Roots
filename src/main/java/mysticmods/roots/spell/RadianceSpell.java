@@ -1,6 +1,7 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class RadianceSpell extends Spell {
-  public RadianceSpell(ChatFormatting color, List<Cost> costs) {
+  public RadianceSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xffff40, 0xffffc0);
   }
 

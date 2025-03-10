@@ -55,6 +55,7 @@ public class TooltipUtil {
       String herbCost = String.format("%.4f", entry.getDoubleValue());
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
     }
+    result.add(Component.translatable("roots.tooltip.cost.charge_type", Component.translatable("roots.tooltip.cost.charge_type." + cos.getChargeType().name().toLowerCase())));
   }
 }
 

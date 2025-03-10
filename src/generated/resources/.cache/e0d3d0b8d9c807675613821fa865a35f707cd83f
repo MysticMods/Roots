@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-10T12:46:17.0358694	Data Maps
+// 1.21.1	2025-03-10T14:18:51.6170512	Data Maps
 32873c8f421d87f46371098863a47895f5558fc1 data/neoforge/data_maps/item/compostables.json
 0ecb00d1d25604c20bc7eddd49dd91aa56c95eff data/neoforge/data_maps/item/furnace_fuels.json
 4e772becd8034399d22eea67866b7b57b6c41d06 data/roots/data_maps/block/growth_records.json
@@ -9,7 +9,7 @@ e2a864cd41639bc5e04bbf6622ac18b1279c8eb2 data/roots/data_maps/item/sprout_breedi
 07931054101ab514815e34f054940619af4d3cf4 data/roots/data_maps/roots/level_conditions/level_condition_canons.json
 e1acf2ea0780b1d0904004895a1e851d5ab40985 data/roots/data_maps/roots/rituals/ritual_item_data.json
 046ea1b55c6ae9cbb4cf2fc8c3b31a4be1bdcfc2 data/roots/data_maps/roots/rituals/ritual_property_data.json
-b048f309019f0b5387c3fdc9a227978313cd9256 data/roots/data_maps/roots/spells/spell_cost_data.json
+165e140ef61c6cb367288f5f477b0ed7c0de035a data/roots/data_maps/roots/spells/spell_cost_data.json
 ebbf77379a4d24a1e5feb5ce61b9f25f8c40d646 data/roots/data_maps/roots/spells/spell_item_data.json
 015ac48a61580396200f441a0988a12d53f00827 data/roots/data_maps/roots/spells/spell_property_data.json
 813fb735bf77d930c172d32fd84a5f09a09bb4a8 data/roots/data_maps/roots/spell_modifiers/spell_modifier_cost_data.json

@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -33,7 +34,7 @@ import java.util.List;
 public class DisarmSpell extends TwoRadiusSpell {
   private float dropChance;
 
-  public DisarmSpell(ChatFormatting color, List<Cost> costs) {
+  public DisarmSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x3a3a3a, 0x7a0000);
   }
 
@@ -118,8 +119,15 @@ public class DisarmSpell extends TwoRadiusSpell {
     if (count == 0) {
       costs.noCharge();
       return 0;
+    } else {
+      costs.operations(count);
     }
 
     return cooldown;
+  }
+
+  @Override
+  public int getMaximumOperations() {
+    return 100;
   }
 }

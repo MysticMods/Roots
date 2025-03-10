@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -29,7 +30,7 @@ import java.util.List;
 public class JauntSpell extends Spell {
   private int jauntDistance;
 
-  public JauntSpell(ChatFormatting color, List<Cost> costs) {
+  public JauntSpell(ChatFormatting color, CostInstance costs) {
     super(Type.CHARGED, color, costs, 0x538ad4, 0xede768);
   }
 
@@ -117,6 +118,7 @@ public class JauntSpell extends Spell {
       costs.noCharge();
       return 0;
     } else {
+      costs.operations(ticks);
       pPlayer.teleportTo(dest.x, dest.y, dest.z);
       pPlayer.fallDistance = 0f;
     }
@@ -128,5 +130,10 @@ public class JauntSpell extends Spell {
   public Component getChargeText(int currentCharge) {
     int chargePercent = (int) (((float) currentCharge / (float) getMaxUse()) * 100);
     return Component.translatable("roots.message.staff.charging_percent", chargePercent);
+  }
+
+  @Override
+  public int getMaximumOperations() {
+    return getMaxUse();
   }
 }

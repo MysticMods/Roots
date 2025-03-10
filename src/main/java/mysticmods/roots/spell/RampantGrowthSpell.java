@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -33,7 +34,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
 
   private static final BiPredicate<Level, BlockPos> GROWABLE_CROP = (level, pos) -> GrowthUtil.growthTicks(level, pos, null, null) > 0;
 
-  public RampantGrowthSpell(ChatFormatting color, List<Cost> costs) {
+  public RampantGrowthSpell(ChatFormatting color, CostInstance costs) {
     super(Type.CONTINUOUS, color, costs, 0x157318, 0x13c3eb);
   }
 
@@ -81,7 +82,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
         costs.noCharge();
         return -1;
       }
-      boolean hasGrown = false;
+      int growCount = 0;
       for (int i = 0; i < count; i++) {
         if (positions.isEmpty()) {
           break;
@@ -92,13 +93,15 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
           if (pLevel.random.nextInt(doTicks) == 0) {
             pLevel.getBlockState(pos).randomTick((ServerLevel) pLevel, pos, pLevel.random);
             PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new RampantGrowthFXPacket(pos));
-            hasGrown = true;
+            growCount++;
           }
         }
       }
-      if (!hasGrown) {
+      if (growCount == 0) {
         costs.noCharge();
         return -1;
+      } else {
+        costs.operations(growCount);
       }
 
       return cooldown;
@@ -106,5 +109,10 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
       costs.noCharge();
       return -1;
     }
+  }
+
+  @Override
+  public int getMaximumOperations() {
+    return count;
   }
 }

@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -25,7 +26,7 @@ import java.util.List;
 public class SaturateSpell extends Spell {
   private float saturationMultiplier, foodMultiplier;
 
-  public SaturateSpell(ChatFormatting color, List<Cost> costs) {
+  public SaturateSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xe134f6, 0x05e82a);
   }
 

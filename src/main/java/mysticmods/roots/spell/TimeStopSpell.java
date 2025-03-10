@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -23,7 +24,7 @@ import java.util.List;
 public class TimeStopSpell extends TwoRadiusSpell{
   private int duration;
 
-  public TimeStopSpell(ChatFormatting color, List<Cost> costs) {
+  public TimeStopSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x404040, 0xc020ff);
   }
 

@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
@@ -22,10 +23,11 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
+// TODO: Charge interval
 public class SanctuarySpell extends TwoRadiusSpell {
   private float velocity;
 
-  public SanctuarySpell(ChatFormatting color, List<Cost> costs) {
+  public SanctuarySpell(ChatFormatting color, CostInstance costs) {
     super(Type.CONTINUOUS, color, costs, 0xd01050, 0xe02090);
   }
 
@@ -77,8 +79,14 @@ public class SanctuarySpell extends TwoRadiusSpell {
     if (count == 0) {
       costs.noCharge();
       return 0;
+    } else {
+      costs.operations(count);
+      return cooldown;
     }
+  }
 
-    return cooldown;
+  @Override
+  public int getMaximumOperations() {
+    return 100;
   }
 }
