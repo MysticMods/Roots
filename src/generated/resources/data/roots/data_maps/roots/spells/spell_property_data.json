@@ -41,7 +41,7 @@
         "id": "roots:acid_cloud/count",
         "value": {
           "type": "roots:integer_property",
-          "comment": "How many entities the spell will affect per interval",
+          "comment": "How many entities or blocks the spell will affect per interval",
           "default_value": 1,
           "value": 1
         }
@@ -302,7 +302,7 @@
         "id": "roots:geas/count",
         "value": {
           "type": "roots:integer_property",
-          "comment": "How many entities the spell will affect per interval",
+          "comment": "How many entities or blocks the spell will affect per interval",
           "default_value": 1,
           "value": 1
         }
@@ -334,15 +334,6 @@
           "comment": "How much additional reach will be added to the default entity reach",
           "default_value": 0.0,
           "value": 0.0
-        }
-      },
-      {
-        "id": "roots:growth_infusion/base_ticks",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "The default number of growth ticks applied by base growth infusion",
-          "default_value": 2,
-          "value": 2
         }
       }
     ],
@@ -541,6 +532,42 @@
           "comment": "How long before the player can cast the spell again",
           "default_value": 20,
           "value": 20
+        }
+      },
+      {
+        "id": "roots:rampant_growth/radius_zx",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Z and X axes",
+          "default_value": 5,
+          "value": 5
+        }
+      },
+      {
+        "id": "roots:rampant_growth/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Y axis",
+          "default_value": 5,
+          "value": 5
+        }
+      },
+      {
+        "id": "roots:rampant_growth/interval",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The interval between growth ticks in ticks.",
+          "default_value": 5,
+          "value": 5
+        }
+      },
+      {
+        "id": "roots:rampant_growth/count",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How many entities or blocks the spell will affect per interval",
+          "default_value": 3,
+          "value": 3
         }
       }
     ],

@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -16,7 +17,9 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class RampantGrowthSpell extends Spell {
+public class RampantGrowthSpell extends TwoRadiusSpell {
+  private int interval, count;
+
   public RampantGrowthSpell(ChatFormatting color, List<Cost> costs) {
     super(Type.CONTINUOUS, color, costs, 0x157318, 0x13c3eb);
   }
@@ -27,8 +30,27 @@ public class RampantGrowthSpell extends Spell {
   }
 
   @Override
-  public void initialize(Holder<Spell> holder) {
+  public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
+    return ModSpells.RAMPANT_GROWTH_RADIUS_Y;
+  }
 
+  @Override
+  public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
+    return ModSpells.RAMPANT_GROWTH_RADIUS_ZX;
+  }
+
+  @Override
+  public void initialize(Holder<Spell> holder) {
+var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.interval = properties.get(ModSpells.RAMPANT_GROWTH_INTERVAL);
+    this.count = properties.get(ModSpells.RAMPANT_GROWTH_COUNT);
+  }
+
+  @Override
+  public void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModSpells.RAMPANT_GROWTH_INTERVAL);
+    properties.add(ModSpells.RAMPANT_GROWTH_COUNT);
   }
 
   @Override

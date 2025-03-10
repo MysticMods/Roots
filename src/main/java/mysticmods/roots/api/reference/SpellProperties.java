@@ -7,7 +7,7 @@ public interface SpellProperties {
   String MAX_USE = "How long the spell can be charged for";
   String DAMAGE = "How much damage the spell will cause";
 
-  String COUNT = "How many entities the spell will affect per interval";
+  String COUNT = "How many entities or blocks the spell will affect per interval";
   String ADDED_REACH = "How much additional reach will be added to the default entity reach";
   String DURATION = "How long the spell will last";
   String EXTENDED_DURATION = "How much time will be added to the standard duration when boosted";
