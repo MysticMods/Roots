@@ -115,4 +115,9 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   public int getMaximumOperations() {
     return count;
   }
+
+  @Override
+  public int getCostChargeRate() {
+    return interval;
+  }
 }

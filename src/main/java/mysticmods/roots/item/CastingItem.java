@@ -77,7 +77,7 @@ public class CastingItem extends Item {
     if (spell.getType() == Spell.Type.CONTINUOUS) {
       Costing costs = new Costing(spell, pPlayer);
 
-      if (ticks % spell.getSpell().getCostChargeRate() == 0) {
+      if (ticks % 20 == 0) {
         if (!costs.canAfford(pPlayer, true)) {
           RootsAPI.LOG.info("Not enough herbs to continue casting: {}", spell.getSpell().getName());
           pPlayer.stopUsingItem();
@@ -106,9 +106,7 @@ public class CastingItem extends Item {
         }
       }
 
-      if (ticks % spell.getSpell().getCostChargeRate() == 0) {
-        costs.charge(pPlayer);
-      }
+      costs.charge(pPlayer, true);
     } else if (spell.getType() == Spell.Type.CHARGED) {
       pPlayer.displayClientMessage(spell.getSpell().getChargeText(ticks), true);
     }

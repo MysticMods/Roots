@@ -114,7 +114,7 @@ public class Costing {
     if (player.isCreative() || foundCreativePouch) {
       return true;
     }
-    calculateCosts(checkModifiers, false, true);
+    calculateCosts(checkModifiers, false, true, false);
 
 
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
@@ -138,8 +138,16 @@ public class Costing {
     return true;
   }
 
+  public boolean shouldCharge () {
+    return !noCharge && operationsCount > 0;
+  }
+
+  public boolean charge (Player player) {
+    return charge(player, false);
+  }
+
   // NOTE: THIS DOES NOT CHECK AMOUNTS, MERELY CHARGES
-  public boolean charge(Player player) {
+  public boolean charge(Player player, boolean tick) {
     if (player.isCreative() || foundCreativePouch) {
       return true;
     }
@@ -156,7 +164,7 @@ public class Costing {
     }
 
     // TODO: Count modifiers <-- Now I don't know what this means
-    calculateCosts(true, false, false);
+    calculateCosts(true, false, false, tick);
 
     Inventory playerInventory = player.getInventory();
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
@@ -229,7 +237,7 @@ public class Costing {
     return true;
   }
 
-  private void calculateCosts(boolean checkModifiers, boolean skipModifiers, boolean maxOperations) {
+  private void calculateCosts(boolean checkModifiers, boolean skipModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
     CostInstance.ChargeType thisType = spell.getSpell().getChargeType();
@@ -297,6 +305,10 @@ public class Costing {
         continue;
       }
 
+      if (tick) {
+        total /= 20;
+      }
+
       totalCosts.put(entry.getKey(), total);
     }
   }
@@ -304,13 +316,13 @@ public class Costing {
   public Object2DoubleMap<Herb> getMinimumCost() {
     int ops = this.operationsCount;
     this.operationsCount = 1;
-    calculateCosts(false, true, false);
+    calculateCosts(false, true, false, false);
     this.operationsCount = ops;
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 
   public Object2DoubleMap<Herb> getMaximumCost() {
-    calculateCosts(false, false, true);
+    calculateCosts(false, false, true, false);
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 
