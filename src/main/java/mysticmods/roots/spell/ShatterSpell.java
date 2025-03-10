@@ -133,9 +133,19 @@ public class ShatterSpell extends Spell {
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     BlockHitResult rayTraceResult = pickBlock(pPlayer);
     Map<BlockPos, BlockState> toBreak = getAffectedBlocks(pLevel, pPlayer, instance, pStack, rayTraceResult.getBlockPos(), pLevel.getBlockState(rayTraceResult.getBlockPos()), rayTraceResult);
+    int count = 0;
     for (Map.Entry<BlockPos, BlockState> entry : toBreak.entrySet()) {
       BlockPos pos = entry.getKey();
-      pLevel.destroyBlock(pos, true, pPlayer);
+      if (!pLevel.isEmptyBlock(pos)) {
+        if (pLevel.destroyBlock(pos, true, pPlayer)) {
+          count++;
+        }
+      }
+    }
+
+    if (count == 0) {
+      costs.noCharge();
+      return -1;
     }
 
     return cooldown;
