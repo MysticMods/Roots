@@ -5,10 +5,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.registration.IModIngredientRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
@@ -31,8 +28,6 @@ import java.util.Collections;
 
 @JeiPlugin
 public class RootsJEIPlugin implements IModPlugin {
-  public static final IIngredientType<ChanceOutput> CHANCE_OUTPUT = () -> ChanceOutput.class;
-
   @Override
   public ResourceLocation getPluginUid() {
     return RootsAPI.rl("jei");
@@ -79,7 +74,7 @@ public class RootsJEIPlugin implements IModPlugin {
   }
 
   @Override
-  public void registerIngredients (IModIngredientRegistration registration) {
-    registration.register(CHANCE_OUTPUT, Collections.emptyList(), new ChanceOutputHelper(), new ChanceOutputRenderer(), ChanceOutput.CODEC);
+  public void registerIngredientAliases(IIngredientAliasRegistration registration) {
+    IModPlugin.super.registerIngredientAliases(registration);
   }
 }
