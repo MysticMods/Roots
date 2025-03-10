@@ -3,11 +3,14 @@ package mysticmods.roots.integration.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -24,8 +27,12 @@ import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
+import java.util.Collections;
+
 @JeiPlugin
 public class RootsJEIPlugin implements IModPlugin {
+  public static final IIngredientType<ChanceOutput> CHANCE_OUTPUT = () -> ChanceOutput.class;
+
   @Override
   public ResourceLocation getPluginUid() {
     return RootsAPI.rl("jei");
@@ -69,5 +76,10 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModBlocks.REINFORCED_PYRE.get(), PYRE_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModBlocks.REINFORCED_SOUL_PYRE.get(), PYRE_RECIPE_TYPE);
     registration.addRecipeCatalysts(KNIFE_RECIPE_TYPE, ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLD_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.WOODEN_KNIFE.get());
+  }
+
+  @Override
+  public void registerIngredients (IModIngredientRegistration registration) {
+    registration.register(CHANCE_OUTPUT, Collections.emptyList(), new ChanceOutputHelper(), new ChanceOutputRenderer(), ChanceOutput.CODEC);
   }
 }
