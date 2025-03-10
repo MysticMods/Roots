@@ -115,7 +115,6 @@ public class ModSpells {
   public static final DeferredHolder<Spell, GrowthInfusionSpell> GROWTH_INFUSION = spell(Spells.GROWTH_INFUSION, GrowthInfusionSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250)));
   public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_COOLDOWN = P.recordProperty("growth_infusion/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> GROWTH_INFUSION_ADDED_REACH = P.recordProperty("growth_infusion/added_reach", Property.ofDouble(0.0, SpellProperties.ADDED_REACH));
-  public static final PropertyHolder<Property.IntegerProperty> GROWTH_INFUSION_BASE_TICKS = P.recordProperty("growth_infusion/base_ticks", Property.ofInt(2, "The default number of growth ticks applied by base growth infusion"));
 
   // Rampant Growth (20 cooldown)
   public static final DeferredHolder<Spell, RampantGrowthSpell> RAMPANT_GROWTH = spell(Spells.RAMPANT_GROWTH, RampantGrowthSpell::new, ChatFormatting.YELLOW, () -> List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250)));

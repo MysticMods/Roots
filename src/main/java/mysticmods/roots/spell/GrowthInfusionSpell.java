@@ -29,8 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class GrowthInfusionSpell extends Spell {
-  private int baseTicks;
-
   public GrowthInfusionSpell(ChatFormatting color, List<Cost> costs) {
     super(Type.CONTINUOUS, color, costs, 0x30ff30, 0xc0ffc0);
   }
@@ -48,13 +46,11 @@ public class GrowthInfusionSpell extends Spell {
   @Override
   public void buildProperties(List<PropertyHolder<?>> result) {
     super.buildProperties(result);
-    result.add(ModSpells.GROWTH_INFUSION_BASE_TICKS);
   }
 
   @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    this.baseTicks = properties.get(ModSpells.GROWTH_INFUSION_BASE_TICKS);
   }
 
   @Override
