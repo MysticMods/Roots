@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
@@ -11,6 +12,7 @@ import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -18,6 +20,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, PyreCrafting> {
@@ -57,6 +60,14 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
   @Override
   public String getGroup() {
     return Identifiers.PYRE_RECIPE_GROUP;
+  }
+
+  @Override
+  public void buildCachedOutputs(List<ChanceOutput> list, HolderLookup.Provider provider) {
+    if (getResultItem(provider).isEmpty() && ritual != null) {
+      list.add(new ChanceOutput(ritual.getIcon(), 1));
+    }
+    super.buildCachedOutputs(list, provider);
   }
 
   public static class Serializer implements RecipeSerializer<PyreRecipe> {

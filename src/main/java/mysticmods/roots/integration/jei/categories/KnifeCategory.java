@@ -35,6 +35,8 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
   // but it would also need to know what blocks aren't being included
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, KnifeRecipe recipe, IFocusGroup iFocusGroup) {
+    super.setRecipe(builder, recipe, iFocusGroup);
+
     HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
     if (recipe != DynamicBarkRecipe.INSTANCE) {
       if (recipe.getStateMapper() != null) {

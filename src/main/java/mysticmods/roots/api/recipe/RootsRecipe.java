@@ -15,11 +15,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.IItemHandler;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafting<H>> implements IRootsRecipe<W> {
   protected final BaseRecipeData data = new BaseRecipeData();
+  protected final List<ChanceOutput> cachedChanceOutputs = new ArrayList<>();
 
   public RootsRecipe(BaseRecipeData data) {
     this.data.updateFrom(data);
@@ -67,6 +69,18 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
       return NonNullList.create();
     }
     return this.data.ingredients;
+  }
+
+  @Override
+  public List<ChanceOutput> getCachedOutputs () {
+    return cachedChanceOutputs;
+  }
+
+  @Override
+  public void buildCachedOutputs(HolderLookup.Provider provider) {
+    if (cachedChanceOutputs.isEmpty()) {
+      buildCachedOutputs(cachedChanceOutputs, provider);
+    }
   }
 
   @Override

@@ -55,6 +55,8 @@ public class RootsLangProvider extends LanguageProvider {
     add("itemGroup.roots_spells", "Roots Spells");
     add("itemGroup.roots_rituals", "Roots Rituals");
 
+    add("roots.tooltip.chance", "Chance: %s%%");
+
     add("roots.tooltip.token.spell", "Spell: %s");
     add("roots.tooltip.token.modifier", "Modifier: %s");
     add("roots.tooltip.token.unlock", "Right-Click to unlock.");

@@ -29,7 +29,7 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, GroveRecipe recipe, IFocusGroup iFocusGroup) {
-    HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
+    super.setRecipe(builder, recipe, iFocusGroup);
 
     int row = 0;
     int column = 0;
@@ -44,23 +44,7 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
       column++;
     }
 
-
-    // TODO: Multi-output recipes
-    List<ChanceOutput> outputs = new ArrayList<>();
-    ItemStack result = recipe.getResultItem(provider);
-    if (result != null && !result.isEmpty()) {
-      outputs.add(new ChanceOutput(result, 1));
-    }
-
-    for (int i = 0; i < recipe.getUnlocks().size(); i++) {
-      Unlock<?> unlock = recipe.getUnlocks().get(i);
-      if (unlock.getIcon().isEmpty()) {
-        continue;
-      }
-      outputs.add(new ChanceOutput(unlock.getIcon(), 1));
-    }
-
-    outputs.addAll(recipe.getChanceOutputs());
+    List<ChanceOutput> outputs = recipe.getCachedOutputs();
 
     row = 0;
     column = 0;
@@ -71,7 +55,7 @@ public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
         column = 0;
       }
       builder.addSlot(RecipeIngredientRole.OUTPUT, 117 + column * 17, 2 + row * 17)
-          .addItemStack(outputs.get(i).getOutput());
+          .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i)).addRichTooltipCallback(this.richestTooltip(recipe));
       column++;
     }
   }

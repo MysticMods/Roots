@@ -29,44 +29,12 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, MortarRecipe recipe, IFocusGroup iFocusGroup) {
-    HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
+    super.setRecipe(builder, recipe, iFocusGroup);
     for (int i = 0; i < recipe.getIngredients().size(); i++) {
       builder.addSlot(RecipeIngredientRole.INPUT, 1 + i * 18, 3).addIngredients(recipe.getIngredients().get(i));
     }
 
-    boolean hasOutput = false;
-
-    List<ChanceOutput> outputs = new ArrayList<>();
-
-    if (recipe.getResultItem(provider) != null && !recipe.getResultItem(provider).isEmpty()) {
-      hasOutput = true;
-      outputs.add(new ChanceOutput(recipe.getResultItem(provider), 1));
-      /*      builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 28).addItemStack(recipe.getResultItem(provider));*/
-    } else {
-      if (recipe.getUnlocks().size() == 1) {
-        Unlock<?> unlock = recipe.getUnlocks().getFirst();
-        outputs.add(new ChanceOutput(unlock.getIcon(), 1));
-        /*        builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 28).addItemStack(unlock.getIcon());*/
-      }
-    }
-
-    outputs.addAll(recipe.getChanceOutputs());
-
-/*    for (int i = 0; i < recipe.getChanceOutputs().size(); i++) {
-      builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 30)
-          .addItemStack(recipe.getChanceOutputs().get(i).getOutput());
-    }*/
-
-    if (hasOutput) {
-      for (int i = 0; i < recipe.getUnlocks().size(); i++) {
-        Unlock<?> unlock = recipe.getUnlocks().get(i);
-        if (unlock.getIcon().isEmpty()) {
-          continue;
-        }
-        outputs.add(new ChanceOutput(unlock.getIcon(), 1));
-        /*        builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 50).addItemStack(unlock.getIcon());*/
-      }
-    }
+    List<ChanceOutput> outputs = recipe.getCachedOutputs();
 
     int row = 0;
     int column = 0;
@@ -77,7 +45,7 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
         column = 0;
       }
       builder.addSlot(RecipeIngredientRole.OUTPUT, 117 + column * 17, 2 + row * 17)
-          .addItemStack(outputs.get(i).getOutput());
+          .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i)).addRichTooltipCallback(this.richestTooltip(recipe));
       column++;
     }
   }

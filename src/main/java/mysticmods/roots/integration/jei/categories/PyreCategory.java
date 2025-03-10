@@ -28,38 +28,15 @@ public class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, PyreRecipe recipe, IFocusGroup iFocusGroup) {
+    super.setRecipe(builder, recipe, iFocusGroup);
+
     builder.addSlot(RecipeIngredientRole.INPUT, 27, 6).addIngredients(recipe.getIngredients().get(0));
     builder.addSlot(RecipeIngredientRole.INPUT, 1, 27).addIngredients(recipe.getIngredients().get(1));
     builder.addSlot(RecipeIngredientRole.INPUT, 53, 27).addIngredients(recipe.getIngredients().get(2));
     builder.addSlot(RecipeIngredientRole.INPUT, 8, 60).addIngredients(recipe.getIngredients().get(3));
     builder.addSlot(RecipeIngredientRole.INPUT, 48, 60).addIngredients(recipe.getIngredients().get(4));
 
-    List<ChanceOutput> outputs = new ArrayList<>();
-
-    if (recipe.getRitual() != null) {
-      outputs.add(new ChanceOutput(recipe.getRitual().getIcon(), 1));
-      /*      builder.addSlot(RecipeIngredientRole.OUTPUT, 100, 24).addItemStack(recipe.getRitual().getIcon());*/
-    } else {
-      outputs.add(new ChanceOutput(recipe.getResultItem(Minecraft.getInstance().getConnection().registryAccess()), 1));
-/*      builder.addSlot(RecipeIngredientRole.OUTPUT, 100, 24)
-          .addItemStack(recipe.getResultItem(Minecraft.getInstance().getConnection().registryAccess()));*/
-    }
-
-    outputs.addAll(recipe.getChanceOutputs());
-
-/*    for (int i = 0; i < recipe.getChanceOutputs().size(); i++) {
-      builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 30)
-          .addItemStack(recipe.getChanceOutputs().get(i).getOutput());
-    }*/
-
-    for (int i = 0; i < recipe.getUnlocks().size(); i++) {
-      Unlock<?> unlock = recipe.getUnlocks().get(i);
-      if (unlock.getIcon().isEmpty()) {
-        continue;
-      }
-      outputs.add(new ChanceOutput(unlock.getIcon(), 1));
-      /*      builder.addSlot(RecipeIngredientRole.OUTPUT, i * 18, 50).addItemStack(unlock.getIcon());*/
-    }
+    List<ChanceOutput> outputs = recipe.getCachedOutputs();
 
     int row = 0;
     int column = 0;
@@ -70,7 +47,7 @@ public class PyreCategory extends RootsRecipeBaseCategory<PyreRecipe> {
         column = 0;
       }
       builder.addSlot(RecipeIngredientRole.OUTPUT, 97 + column * 17, 2 + row * 17)
-          .addItemStack(outputs.get(i).getOutput());
+          .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i)).addRichTooltipCallback(this.richestTooltip(recipe));
       column++;
     }
   }

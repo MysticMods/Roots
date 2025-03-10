@@ -1,12 +1,19 @@
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotRichTooltipCallback;
+import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mysticmods.roots.api.recipe.RootsRecipe;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -33,6 +40,11 @@ public abstract class RootsRecipeBaseCategory<T extends RootsRecipe<?, ?>> imple
   }
 
   @Override
+  public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
+    recipe.buildCachedOutputs(Minecraft.getInstance().level.registryAccess());
+  }
+
+  @Override
   public void draw(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
     IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
   }
@@ -56,5 +68,21 @@ public abstract class RootsRecipeBaseCategory<T extends RootsRecipe<?, ?>> imple
   @Override
   public IDrawable getIcon() {
     return icon;
+  }
+
+  protected IRecipeSlotRichTooltipCallback richestTooltip (T recipe) {
+    return (IRecipeSlotView view, ITooltipBuilder builder) -> {
+      view.getSlotName().ifPresent(slot -> {
+        try {
+          int num = Integer.parseInt(slot);
+          if (num >= 0 && num < recipe.getCachedOutputs().size()) {
+            ChanceOutput output = recipe.getCachedOutputs().get(num);
+            builder.add(Component.translatable("roots.tooltip.chance", output.getChance() * 100));
+          }
+        } catch (NumberFormatException ignored) {
+
+        }
+      });
+    };
   }
 }

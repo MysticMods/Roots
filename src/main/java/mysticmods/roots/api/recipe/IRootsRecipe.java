@@ -51,6 +51,24 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return Collections.emptyList();
   }
 
+  default List<ChanceOutput> getCachedOutputs () {
+    return Collections.emptyList();
+  }
+
+  default void buildCachedOutputs (List<ChanceOutput> list, HolderLookup.Provider provider) {
+    if (hasOutput(provider)) {
+      ItemStack result = getResultItem(provider);
+      if (!result.isEmpty()) {
+        list.add(new ChanceOutput(result, 1f));
+      }
+    }
+    if (hasChanceOutputs(provider)) {
+      list.addAll(getChanceOutputs());
+    }
+  }
+
+  void buildCachedOutputs(HolderLookup.Provider provider);
+
   default ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
     List<PlayerCondition> failedPlayer = new ArrayList<>();
     for (PlayerCondition condition : this.getPlayerConditions()) {

@@ -3,20 +3,23 @@ package mysticmods.roots.recipe.mortar;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.RootsTileRecipe;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.blockentity.MortarBlockEntity;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
-// TODO: Mixed Mortar Recipe?
-//       TODO: Work out what Mixed Mortar Recipe means
+import java.util.List;
+
 public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEntity, MortarCrafting> {
   public static MapCodec<MortarRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter(o -> o.data),
@@ -52,6 +55,17 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
   @Override
   public String getGroup() {
     return Identifiers.MORTAR_RECIPE_GROUP;
+  }
+
+  @Override
+  public void buildCachedOutputs(List<ChanceOutput> list, HolderLookup.Provider provider) {
+    if (getResultItem(provider).isEmpty() && !getUnlocks().isEmpty()) {
+      Unlock<?> unlock = getUnlocks().getFirst();
+      if (unlock instanceof Unlock.SpellUnlock spellUnlock) {
+        list.add(new ChanceOutput(spellUnlock.getIcon(), 1));
+      }
+    }
+    super.buildCachedOutputs(list, provider);
   }
 
   public static class Serializer implements RecipeSerializer<MortarRecipe> {

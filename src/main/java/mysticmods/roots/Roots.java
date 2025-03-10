@@ -14,7 +14,6 @@ import net.neoforged.fml.config.ModConfig;
 // Start work on a wiki
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
 // JEI
-// - ChanceOutput ingredient
 // - Runic entity
 // - Runic block
 // - Player conditions (none exist)
