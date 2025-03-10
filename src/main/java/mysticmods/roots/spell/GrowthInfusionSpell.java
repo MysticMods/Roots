@@ -73,7 +73,7 @@ public class GrowthInfusionSpell extends Spell {
     if (doTicks > 0) {
       if (level.random.nextInt(doTicks) == 0) {
         at.randomTick((ServerLevel) level, pos, level.random);
-        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(new Vec3(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5)));
+        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(pos));
       }
     } else {
       costs.noCharge();

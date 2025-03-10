@@ -122,8 +122,8 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COOLDOWN = P.recordProperty("rampant_growth/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_ZX = P.recordProperty("rampant_growth/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_RADIUS_Y = P.recordProperty("rampant_growth/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
-  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_INTERVAL = P.recordProperty("rampant_growth/interval", Property.ofInt(5, "The interval between growth ticks in ticks."));
-  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COUNT = P.recordProperty("rampant_growth/count", Property.ofInt(3, SpellProperties.COUNT));
+  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_INTERVAL = P.recordProperty("rampant_growth/interval", Property.ofInt(2, "The interval between growth ticks in ticks."));
+  public static final PropertyHolder<Property.IntegerProperty> RAMPANT_GROWTH_COUNT = P.recordProperty("rampant_growth/count", Property.ofInt(5, SpellProperties.COUNT));
 
 
   // Harvest (25 cooldown)

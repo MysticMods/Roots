@@ -9,13 +9,13 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record GrowthFXPacket(BlockPos location) implements IRootsPacket {
-  public static final Type<GrowthFXPacket> TYPE = new Type<>(RootsAPI.rl("client_fx/growth"));
-  public static final StreamCodec<FriendlyByteBuf, GrowthFXPacket> CODEC = StreamCodec.composite(BlockPos.STREAM_CODEC, GrowthFXPacket::location, GrowthFXPacket::new);
+public record RampantGrowthFXPacket(BlockPos location) implements IRootsPacket {
+  public static final Type<RampantGrowthFXPacket> TYPE = new Type<>(RootsAPI.rl("client_fx/rampant_growth"));
+  public static final StreamCodec<FriendlyByteBuf, RampantGrowthFXPacket> CODEC = StreamCodec.composite(BlockPos.STREAM_CODEC, RampantGrowthFXPacket::location, RampantGrowthFXPacket::new);
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientFXHandlers.growth(location);
+    ClientFXHandlers.rampantGrowth(location);
   }
 
   @Override

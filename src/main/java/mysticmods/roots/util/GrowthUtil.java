@@ -1,5 +1,6 @@
 package mysticmods.roots.util;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.growth.GrowthRecord;
@@ -23,6 +24,7 @@ public class GrowthUtil {
     GrowthRecord record = state.getBlockHolder().getData(DataMaps.GROWTH_RECORDS);
     if (record == null && state.getBlock() instanceof CropBlock crop) {
       record = GrowthRecord.ofCrop(crop);
+      RootsAPI.LOG.error("We're guessing a growth record for crop '{}'. This should be added as a growth record.", crop);
     }
 
     if (record == null) {
