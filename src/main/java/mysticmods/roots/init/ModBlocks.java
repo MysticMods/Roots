@@ -185,10 +185,11 @@ public class ModBlocks {
       .instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL)
       .noOcclusion()));
 
-  // TODO: More from here
-  public static DeferredHolder<Block, RitualPedestalBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal", () -> new RitualPedestalBlock(BASE_PROPERTIES));
-  public static DeferredHolder<Block, RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = BLOCKS.register("reinforced_ritual_pedestal", () -> new RitualPedestalBlock(BASE_REINFORCED_PROPERTIES));
-  public static DeferredHolder<Block, GroveCrafterBlock> GROVE_CRAFTER = BLOCKS.register("grove_crafter", () -> new GroveCrafterBlock(BASE_WOODEN_PROPERTIES));
+  public static DeferredHolder<Block, RitualPedestalBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal", () -> new RitualPedestalBlock(BlockBehaviour.Properties.of().mapColor(DyeColor.BLUE).instrument(NoteBlockInstrument.BASS).strength(2.5f).sound(SoundType.STONE)));
+  public static DeferredHolder<Block, RitualPedestalBlock> REINFORCED_RITUAL_PEDESTAL = BLOCKS.register("reinforced_ritual_pedestal", () -> new RitualPedestalBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASS).strength(2.5f, 1200f)));
+  public static DeferredHolder<Block, GroveCrafterBlock> GROVE_CRAFTER = BLOCKS.register("grove_crafter", () -> new GroveCrafterBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM)));
+
+  // TODO: FROM HERE
   public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> GROVE_PEDESTAL = BLOCKS.register("grove_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
   public static DeferredHolder<Block, PedestalBlock.WildwoodPedestalBlock> WILDWOOD_PEDESTAL = BLOCKS.register("wildwood_pedestal", () -> new PedestalBlock.WildwoodPedestalBlock(BASE_WOODEN_PROPERTIES));
   public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> DISPLAY_PEDESTAL = BLOCKS.register("display_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
