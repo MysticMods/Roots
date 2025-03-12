@@ -1,7 +1,6 @@
-package mysticmods.roots.growth;
+package mysticmods.roots.growth.grow;
 
 import mysticmods.roots.api.growth.CanGrowFunction;
-import mysticmods.roots.init.ModTests;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;

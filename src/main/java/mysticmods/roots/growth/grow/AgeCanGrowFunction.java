@@ -1,4 +1,4 @@
-package mysticmods.roots.growth;
+package mysticmods.roots.growth.grow;
 
 import mysticmods.roots.api.growth.CanGrowFunction;
 import net.minecraft.core.BlockPos;

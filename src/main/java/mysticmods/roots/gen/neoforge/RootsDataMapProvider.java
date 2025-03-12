@@ -8,7 +8,6 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.GroveData;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -35,7 +34,6 @@ import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -274,9 +272,8 @@ public class RootsDataMapProvider extends DataMapProvider {
     int AGE_THREE_TICKS = 4;
     int SAPLING_TICKS = 4;
 
-    // Explore what bamboo saplings look like
-    builder15.add(Blocks.BAMBOO_SAPLING.builtInRegistryHolder(), new GrowthRecord(Blocks.BAMBOO_SAPLING, Optional.empty(), -1, SAPLING_TICKS, ModTests.BAMBOO_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder15.add(Blocks.BAMBOO.builtInRegistryHolder(), new GrowthRecord(Blocks.BAMBOO, Optional.empty(), 1, AGE_THREE_TICKS, ModTests.BAMBOO_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
+    builder15.add(Blocks.BAMBOO_SAPLING.builtInRegistryHolder(), new GrowthRecord(Blocks.BAMBOO_SAPLING, Optional.empty(), -1, SAPLING_TICKS, ModTests.ALWAYS_CAN_GROW_UP.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
+    builder15.add(Blocks.BAMBOO.builtInRegistryHolder(), new GrowthRecord(Blocks.BAMBOO, Optional.empty(), 1, AGE_THREE_TICKS, ModTests.ALWAYS_CAN_GROW_UP.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     // TOdO: Bamboo harvest
 
@@ -290,7 +287,8 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder15.add(Blocks.COCOA.builtInRegistryHolder(), new GrowthRecord(Blocks.COCOA, Optional.of(CocoaBlock.AGE), CocoaBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
     builder16.add(Blocks.COCOA.builtInRegistryHolder(), new HarvestRecord(Blocks.COCOA, Items.COCOA_BEANS, Optional.of(CocoaBlock.AGE), CocoaBlock.MAX_AGE, ModTests.AGE_REPLANT.get()), false);
 
-    builder15.add(RootsTags.Blocks.SPREADING_MUSHROOMS, new GrowthRecord(null, Optional.empty(), -1, 2, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_BELOW_THIRTEEN.get()), false);
+    // Mushrooms can spread in any light condition
+    builder15.add(RootsTags.Blocks.SPREADING_MUSHROOMS, new GrowthRecord(null, Optional.empty(), -1, 2, ModTests.ALWAYS_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
 
     // TODO: Custom harvest
 
@@ -306,6 +304,7 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     builder16.add(Blocks.POTATOES.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.POTATOES, ModTests.AGE_REPLANT.get()), false);
 
+    // TODO: Mangrove stuff
     builder15.add(BlockTags.SAPLINGS, new GrowthRecord(null, Optional.empty(), -1, SAPLING_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     builder15.add(Blocks.MELON_STEM.builtInRegistryHolder(), new GrowthRecord(Blocks.MELON_STEM, Optional.of(StemBlock.AGE), StemBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
@@ -314,7 +313,6 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder15.add(Blocks.NETHER_WART.builtInRegistryHolder(), new GrowthRecord(Blocks.NETHER_WART, Optional.of(NetherWartBlock.AGE), NetherWartBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
     builder16.add(Blocks.NETHER_WART.builtInRegistryHolder(), new HarvestRecord(Blocks.NETHER_WART, Items.NETHER_WART, Optional.of(NetherWartBlock.AGE), NetherWartBlock.MAX_AGE, ModTests.AGE_REPLANT.get()), false);
 
-    // TOOD: Stemmy?
     builder16.add(Blocks.PUMPKIN.builtInRegistryHolder(), new HarvestRecord(Blocks.PUMPKIN, Items.PUMPKIN_SEEDS, Optional.empty(), -1, ModTests.REPLACE_WITH_AIR.get()), false);
     builder15.add(Blocks.PUMPKIN_STEM.builtInRegistryHolder(), new GrowthRecord(Blocks.PUMPKIN_STEM, Optional.of(StemBlock.AGE), StemBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
@@ -325,13 +323,13 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     // TODO: Check for farmland below
 
-    builder15.add(Blocks.TWISTING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.TWISTING_VINES, Optional.of(TwistingVinesBlock.AGE), TwistingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
+    builder15.add(Blocks.TWISTING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.TWISTING_VINES, Optional.of(TwistingVinesBlock.AGE), TwistingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW_UP.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     // TODO: Replace all but one, transform the lowest/highest block into the original plant
 
     builder15.add(Blocks.VINE.builtInRegistryHolder(), new GrowthRecord(Blocks.VINE, Optional.empty(), -1, 2, ModTests.ALWAYS_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
 
-    builder15.add(Blocks.WEEPING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.WEEPING_VINES, Optional.of(WeepingVinesBlock.AGE), WeepingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
+    builder15.add(Blocks.WEEPING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.WEEPING_VINES, Optional.of(WeepingVinesBlock.AGE), WeepingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW_DOWN.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     builder15.add(Blocks.WHEAT.builtInRegistryHolder(), new GrowthRecord(Blocks.WHEAT, Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
     builder16.add(Blocks.WHEAT.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.WHEAT, ModTests.AGE_REPLANT.get()), false);

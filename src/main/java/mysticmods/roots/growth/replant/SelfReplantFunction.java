@@ -1,4 +1,4 @@
-package mysticmods.roots.growth;
+package mysticmods.roots.growth.replant;
 
 import mysticmods.roots.api.growth.ReplantFunction;
 import net.minecraft.core.BlockPos;

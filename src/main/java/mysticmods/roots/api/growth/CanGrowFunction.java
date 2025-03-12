@@ -8,5 +8,5 @@ import org.jetbrains.annotations.Nullable;
 
 @FunctionalInterface
 public interface CanGrowFunction {
-  boolean test(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maxmimumAge);
+  boolean test(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maximumAge);
 }

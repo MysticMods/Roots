@@ -7,9 +7,11 @@ import mysticmods.roots.api.growth.ReplantFunction;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.api.test.world.*;
-import mysticmods.roots.growth.*;
+import mysticmods.roots.growth.grow.*;
+import mysticmods.roots.growth.replant.*;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
+import net.minecraft.core.Direction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -34,10 +36,12 @@ public class ModTests {
       .getPath(), PartialBlockStateMatchWorldTest.Type::new);
 
   public static final DeferredHolder<CanGrowFunction, AlwaysCanGrowFunction> ALWAYS_CAN_GROW = CAN_GROW_FUNCTIONS.register("always_can_grow", AlwaysCanGrowFunction::new);
+  public static final DeferredHolder<CanGrowFunction, AlwaysCanGrowUp> ALWAYS_CAN_GROW_UP = CAN_GROW_FUNCTIONS.register("always_can_grow_up", AlwaysCanGrowUp::new);
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowFunction> AGE_CAN_GROW = CAN_GROW_FUNCTIONS.register("age_can_grow", AgeCanGrowFunction::new);
   public static final DeferredHolder<CanGrowFunction, CactusCanGrowFunction> CACTUS_CANE_CAN_GROW = CAN_GROW_FUNCTIONS.register("cactus_or_cane_can_grow", CactusCanGrowFunction::new);
   public static final DeferredHolder<CanGrowFunction, KelpCanGrowFunction> KELP_CAN_GROW = CAN_GROW_FUNCTIONS.register("kelp_can_grow", KelpCanGrowFunction::new);
-  public static final DeferredHolder<CanGrowFunction, BambooCanGrowFunction> BAMBOO_CAN_GROW = CAN_GROW_FUNCTIONS.register("bamboo_can_grow", BambooCanGrowFunction::new);
+  public static final DeferredHolder<CanGrowFunction, AgeCanGrowDirectionFunction> AGE_CAN_GROW_UP = CAN_GROW_FUNCTIONS.register("age_can_grow_up", () -> new AgeCanGrowDirectionFunction(Direction.UP));
+  public static final DeferredHolder<CanGrowFunction, AgeCanGrowDirectionFunction> AGE_CAN_GROW_DOWN = CAN_GROW_FUNCTIONS.register("age_can_grow_down", () -> new AgeCanGrowDirectionFunction(Direction.DOWN));
 
   public static final DeferredHolder<ReplantFunction, NoReplantFunction> NO_REPLANT = REPLANT_FUNCTIONS.register("no_replant", NoReplantFunction::new);
   public static final DeferredHolder<ReplantFunction, AgeReplantFunction> AGE_REPLANT = REPLANT_FUNCTIONS.register("age_replant", AgeReplantFunction::new);

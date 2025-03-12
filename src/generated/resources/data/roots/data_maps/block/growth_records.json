@@ -10,13 +10,13 @@
     "#roots:spreading_mushrooms": {
       "ageProperty": {},
       "canGrowFunction": "roots:always_can_grow",
-      "lightFunction": "roots:light_below_thirteen",
+      "lightFunction": "roots:any_light",
       "maximumAge": -1,
       "ticks": 2
     },
     "minecraft:bamboo": {
       "ageProperty": {},
-      "canGrowFunction": "roots:bamboo_can_grow",
+      "canGrowFunction": "roots:always_can_grow_up",
       "cropBlock": "minecraft:bamboo",
       "lightFunction": "roots:light_above_eight",
       "maximumAge": 1,
@@ -24,7 +24,7 @@
     },
     "minecraft:bamboo_sapling": {
       "ageProperty": {},
-      "canGrowFunction": "roots:bamboo_can_grow",
+      "canGrowFunction": "roots:always_can_grow_up",
       "cropBlock": "minecraft:bamboo_sapling",
       "lightFunction": "roots:light_above_eight",
       "maximumAge": -1,
@@ -164,7 +164,7 @@
       "ageProperty": {
         "ageProperty": "age"
       },
-      "canGrowFunction": "roots:age_can_grow",
+      "canGrowFunction": "roots:age_can_grow_up",
       "cropBlock": "minecraft:twisting_vines",
       "lightFunction": "roots:light_above_eight",
       "maximumAge": 25,
@@ -182,7 +182,7 @@
       "ageProperty": {
         "ageProperty": "age"
       },
-      "canGrowFunction": "roots:age_can_grow",
+      "canGrowFunction": "roots:age_can_grow_down",
       "cropBlock": "minecraft:weeping_vines",
       "lightFunction": "roots:light_above_eight",
       "maximumAge": 25,
