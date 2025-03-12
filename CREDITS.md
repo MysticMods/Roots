@@ -7,6 +7,8 @@ Roots 3 was authored by EpicSquid, Davoleo, Noobanidus, Martacus, with assets by
 
 Roots 4 was authored by Noobanidus, with assets by Ridanisaurus, Vulpie and Noobanidus.
 
+The "Alertness" warning sound was created by DatBloxyBirb and released as CC0 (Public Domain) on [freesound.org](https://freesound.org/people/DatBloxyBirb/sounds/739749/).
+
 AI Declaration
 ==============
 
