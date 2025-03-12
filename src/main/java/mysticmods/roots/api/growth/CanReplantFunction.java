@@ -7,6 +7,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
 @FunctionalInterface
-public interface CanGrowFunction {
+public interface CanReplantFunction {
   boolean test(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maxmimumAge);
 }

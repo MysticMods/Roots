@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
-public class CactusCanGrowFunction extends CanGrowFunction {
+public record CactusCanGrowFunction () implements CanGrowFunction {
   @Override
   public boolean test(Level level, BlockPos pos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maxmimumAge) {
     // Hard-coded as 3 currently

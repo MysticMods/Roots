@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
-public class SelfReplantFunction extends ReplantFunction {
+public record SelfReplantFunction () implements ReplantFunction {
   @Override
   public @Nullable BlockState replant(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maximumAge) {
     return blockState;

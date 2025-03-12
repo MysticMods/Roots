@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
-public class AirReplantFunction extends ReplantFunction {
-  private final BlockState AIR_STATE = Blocks.AIR.defaultBlockState();
+public record AirReplantFunction () implements ReplantFunction {
+  private static final BlockState AIR_STATE = Blocks.AIR.defaultBlockState();
 
   @Override
   public @Nullable BlockState replant(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maximumAge) {

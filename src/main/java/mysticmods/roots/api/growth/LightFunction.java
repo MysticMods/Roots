@@ -4,10 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class LightFunction {
-  public abstract boolean test(Level level, BlockPos blockPos, BlockState blockState);
+@FunctionalInterface
+public interface LightFunction {
+  boolean test(Level level, BlockPos blockPos, BlockState blockState);
 
-  public static class LightLessThanFunction extends LightFunction {
+  class LightLessThanFunction implements LightFunction {
     private final int lightValue;
 
     public LightLessThanFunction(int lightValue) {
@@ -19,7 +20,7 @@ public abstract class LightFunction {
     }
   }
 
-  public static class LightGreaterThanFunction extends LightFunction {
+  class LightGreaterThanFunction implements LightFunction {
     private final int lightValue;
 
     public LightGreaterThanFunction(int lightValue) {
@@ -31,7 +32,7 @@ public abstract class LightFunction {
     }
   }
 
-  public static class AnyLightFunction extends LightFunction {
+  class AnyLightFunction implements LightFunction {
     public boolean test(Level level, BlockPos blockPos, BlockState blockState) {
       return true;
     }
