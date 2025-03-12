@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
-public record BambooCanHarvestFunction () implements CanHarvestFunction {
+public record CanHarvestLowestBlock() implements CanHarvestFunction {
   @Override
   public boolean test(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maximumAge) {
     BlockPos below = blockPos.below();
@@ -17,7 +17,7 @@ public record BambooCanHarvestFunction () implements CanHarvestFunction {
       return false;
     }
 
-    // You can only harvest the lowest block of bamboo
+    // You can only harvest the lowest block of bamboo, sugar can, etc
     return true;
   }
 }

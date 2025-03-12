@@ -6,12 +6,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public record SingleCropAgeCanHarvest () implements CanHarvestFunction {
-  private static final Logger log = LoggerFactory.getLogger(SingleCropAgeCanHarvest.class);
-
+public record SingleCropAgeCanHarvest() implements CanHarvestFunction {
   @Override
   public boolean test(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maximumAge) {
     if (ageProperty == null) {
