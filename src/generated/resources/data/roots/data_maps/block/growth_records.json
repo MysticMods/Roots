@@ -60,6 +60,16 @@
       "maximumAge": 7,
       "ticks": 2
     },
+    "minecraft:chorus_flower": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canGrowFunction": "roots:always_can_grow_up",
+      "cropBlock": "minecraft:chorus_flower",
+      "lightFunction": "roots:any_light",
+      "maximumAge": 5,
+      "ticks": 2
+    },
     "minecraft:cocoa": {
       "ageProperty": {
         "ageProperty": "age"

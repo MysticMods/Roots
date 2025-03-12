@@ -327,6 +327,7 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     // TODO: Replace all but one, transform the lowest/highest block into the original plant
 
+    // TODO: Better can-grow check on adjacent surfaces
     builder15.add(Blocks.VINE.builtInRegistryHolder(), new GrowthRecord(Blocks.VINE, Optional.empty(), -1, 2, ModTests.ALWAYS_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
 
     builder15.add(Blocks.WEEPING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.WEEPING_VINES, Optional.of(WeepingVinesBlock.AGE), WeepingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW_DOWN.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
@@ -337,6 +338,8 @@ public class RootsDataMapProvider extends DataMapProvider {
     // TODO: Replants similar to vines
     builder15.add(Blocks.CACTUS.builtInRegistryHolder(), new GrowthRecord(Blocks.CACTUS, Optional.of(CactusBlock.AGE), CactusBlock.MAX_AGE, 2, ModTests.CACTUS_CANE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
     builder15.add(Blocks.SUGAR_CANE.builtInRegistryHolder(), new GrowthRecord(Blocks.SUGAR_CANE, Optional.of(SugarCaneBlock.AGE), 15, 2, ModTests.CACTUS_CANE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
+
+    builder15.add(Blocks.CHORUS_FLOWER.builtInRegistryHolder(), new GrowthRecord(Blocks.CHORUS_FLOWER, Optional.of(ChorusFlowerBlock.AGE), ChorusFlowerBlock.DEAD_AGE, 2, ModTests.ALWAYS_CAN_GROW_UP.get(), ModTests.ANY_LIGHT.get()), false);
 
     builder15.add(ModBlocks.WILDROOT_CROP, new GrowthRecord(ModBlocks.WILDROOT_CROP.get(), Optional.of(ThreeStageCropBlock.AGE), ThreeStageCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
     builder16.add(ModBlocks.WILDROOT_CROP, HarvestRecord.of(ModBlocks.WILDROOT_CROP.get(), ModTests.AGE_REPLANT.get()), false);
