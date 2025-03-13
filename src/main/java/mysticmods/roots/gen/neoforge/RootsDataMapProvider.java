@@ -286,7 +286,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder16.add(Blocks.CARROTS.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.CARROTS, ModTests.AGE_REPLANT.get()), false);
 
     builder15.add(Blocks.COCOA.builtInRegistryHolder(), new GrowthRecord(Blocks.COCOA, Optional.of(CocoaBlock.AGE), CocoaBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
-    builder16.add(Blocks.COCOA.builtInRegistryHolder(), new HarvestRecord(Blocks.COCOA, Items.COCOA_BEANS, Optional.of(CocoaBlock.AGE), CocoaBlock.MAX_AGE, ModTests.GENERATE_DROPS.get(), ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.COCOA.builtInRegistryHolder(), new HarvestRecord(Blocks.COCOA, Items.COCOA_BEANS, Optional.of(CocoaBlock.AGE), CocoaBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
 
     // Mushrooms can spread in any light condition
     builder15.add(RootsTags.Blocks.SPREADING_MUSHROOMS, new GrowthRecord(null, Optional.empty(), -1, 2, ModTests.ALWAYS_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
@@ -309,16 +309,16 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder15.add(BlockTags.SAPLINGS, new GrowthRecord(null, Optional.empty(), -1, SAPLING_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     builder15.add(Blocks.MELON_STEM.builtInRegistryHolder(), new GrowthRecord(Blocks.MELON_STEM, Optional.of(StemBlock.AGE), StemBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(Blocks.MELON.builtInRegistryHolder(), new HarvestRecord(Blocks.MELON, Items.MELON_SEEDS, Optional.empty(), -1, ModTests.NO_DROPS.get(), ModTests.CAN_HARVEST_MELON.get(), ModTests.BREAK_BLOCK.get()), false);
+    builder16.add(Blocks.MELON.builtInRegistryHolder(), new HarvestRecord(Blocks.MELON, Items.MELON_SEEDS, Optional.empty(), -1, ModTests.CAN_HARVEST_MELON.get(), ModTests.BREAK_BLOCK.get()), false);
 
     builder15.add(Blocks.NETHER_WART.builtInRegistryHolder(), new GrowthRecord(Blocks.NETHER_WART, Optional.of(NetherWartBlock.AGE), NetherWartBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
-    builder16.add(Blocks.NETHER_WART.builtInRegistryHolder(), new HarvestRecord(Blocks.NETHER_WART, Items.NETHER_WART, Optional.of(NetherWartBlock.AGE), NetherWartBlock.MAX_AGE, ModTests.GENERATE_DROPS.get(), ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.NETHER_WART.builtInRegistryHolder(), new HarvestRecord(Blocks.NETHER_WART, Items.NETHER_WART, Optional.of(NetherWartBlock.AGE), NetherWartBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
 
-    builder16.add(Blocks.PUMPKIN.builtInRegistryHolder(), new HarvestRecord(Blocks.PUMPKIN, Items.PUMPKIN_SEEDS, Optional.empty(), -1, ModTests.NO_DROPS.get(), ModTests.CAN_HARVEST_PUMKPIN.get(), ModTests.BREAK_BLOCK.get()), false);
+    builder16.add(Blocks.PUMPKIN.builtInRegistryHolder(), new HarvestRecord(Blocks.PUMPKIN, Items.PUMPKIN_SEEDS, Optional.empty(), -1, ModTests.CAN_HARVEST_PUMKPIN.get(), ModTests.BREAK_BLOCK.get()), false);
     builder15.add(Blocks.PUMPKIN_STEM.builtInRegistryHolder(), new GrowthRecord(Blocks.PUMPKIN_STEM, Optional.of(StemBlock.AGE), StemBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     builder15.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new GrowthRecord(Blocks.SWEET_BERRY_BUSH, Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new HarvestRecord(Blocks.SWEET_BERRY_BUSH, Items.SWEET_BERRIES, Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, ModTests.GENERATE_DROPS.get(), ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new HarvestRecord(Blocks.SWEET_BERRY_BUSH, Items.SWEET_BERRIES, Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
 
     builder15.add(Blocks.TORCHFLOWER_CROP.builtInRegistryHolder(), new GrowthRecord(Blocks.TORCHFLOWER_CROP, Optional.of(TorchflowerCropBlock.AGE), TorchflowerCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 

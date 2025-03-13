@@ -23,10 +23,9 @@ public class ModRegistries {
     event.register(RootsRegistries.SNAPSHOT_TYPES);
     event.register(RootsRegistries.GROVES);
     event.register(RootsRegistries.CAN_GROW_FUNCTIONS);
-    event.register(RootsRegistries.REPLANT_FUNCTIONS);
+    event.register(RootsRegistries.HARVEST_FUNCTIONS);
     event.register(RootsRegistries.LIGHT_FUNCTIONS);
     event.register(RootsRegistries.CAN_HARVEST_FUNCTIONS);
-    event.register(RootsRegistries.GET_DROPS_FUNCTIONS);
   }
 }
 

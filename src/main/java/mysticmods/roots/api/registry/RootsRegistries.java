@@ -42,13 +42,9 @@ public class RootsRegistries {
   public static final Registry<Grove> GROVES = new RegistryBuilder<>(Keys.GROVES).sync(true).create();
   public static final Registry<CanGrowFunction> CAN_GROW_FUNCTIONS = new RegistryBuilder<>(Keys.CAN_GROW_FUNCTIONS).sync(true)
       .create();
-  public static final Registry<ReplantFunction> REPLANT_FUNCTIONS = new RegistryBuilder<>(Keys.REPLANT_FUNCTIONS).sync(true)
-      .create();
   public static final Registry<LightFunction> LIGHT_FUNCTIONS = new RegistryBuilder<>(Keys.LIGHT_FUNCTIONS).sync(true)
       .create();
   public static final Registry<CanHarvestFunction> CAN_HARVEST_FUNCTIONS = new RegistryBuilder<>(Keys.CAN_HARVEST_FUNCTIONS).sync(true)
-      .create();
-  public static final Registry<GetDropsFunction> GET_DROPS_FUNCTIONS = new RegistryBuilder<>(Keys.GET_DROPS_FUNCTIONS).sync(true)
       .create();
 
   public static class Keys {
@@ -66,10 +62,8 @@ public class RootsRegistries {
     public static ResourceKey<Registry<SnapshotType<?>>> SNAPSHOT_TYPES = key(RootsAPI.rl("snapshot_types"));
     public static ResourceKey<Registry<Grove>> GROVES = key(RootsAPI.rl("groves"));
     public static ResourceKey<Registry<CanGrowFunction>> CAN_GROW_FUNCTIONS = key(RootsAPI.rl("can_grow_functions"));
-    public static ResourceKey<Registry<ReplantFunction>> REPLANT_FUNCTIONS = key(RootsAPI.rl("replant_functions"));
     public static ResourceKey<Registry<LightFunction>> LIGHT_FUNCTIONS = key(RootsAPI.rl("light_functions"));
     public static ResourceKey<Registry<CanHarvestFunction>> CAN_HARVEST_FUNCTIONS = key(RootsAPI.rl("can_harvest_functions"));
-    public static ResourceKey<Registry<GetDropsFunction>> GET_DROPS_FUNCTIONS = key(RootsAPI.rl("get_drops_functions"));
 
     private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
       return ResourceKey.createRegistryKey(name);
