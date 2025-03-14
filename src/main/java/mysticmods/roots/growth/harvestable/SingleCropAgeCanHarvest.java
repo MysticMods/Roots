@@ -1,4 +1,4 @@
-package mysticmods.roots.growth.harvest;
+package mysticmods.roots.growth.harvestable;
 
 import mysticmods.roots.api.growth.CanHarvestFunction;
 import net.minecraft.core.BlockPos;

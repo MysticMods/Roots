@@ -1,8 +1,12 @@
-// 1.21.1	2025-03-01T20:06:23.3498201	Registries
+// 1.21.1	2025-03-14T21:56:13.6016632	Registries
 a65184c1483f870edf64b340e4bd0e5ee9227966 data/roots/enchantment/foraging.json
+5d49d1a83648edb820b3caf2c0134aaccc7e526c data/roots/enchantment_provider/fortune_i.json
+ecdee376546ff26b669e9bdcbf3fa6e640759c52 data/roots/enchantment_provider/fortune_ii.json
+8c51f6af5d354c37ca38dc1e873fed3458f0eb78 data/roots/enchantment_provider/fortune_iii.json
 5e8bb855917451e7d49f50565ec458fdbf545f9f data/roots/enchantment_provider/looting_i.json
 4613ff4e5c72a645ecacd42f85dc4f3f2556c83f data/roots/enchantment_provider/looting_ii.json
 0c8596040c48ad6356a20b62ba6aa0c11a66ac54 data/roots/enchantment_provider/looting_iii.json
+bbcbba83554fbf0e9241d09826d64bc82d2984e0 data/roots/enchantment_provider/silk_touch.json
 c20cd59d5be5009c2378c51f50cfd030b05c4362 data/roots/neoforge/biome_modifier/beetle_spawns.json
 8c32577e2e5ad5a5b84223a681039eecfeb91a83 data/roots/neoforge/biome_modifier/deer_spawns.json
 7c331c3d575f4a5546e774a1b844c9db71bc496e data/roots/neoforge/biome_modifier/duck_spawns.json

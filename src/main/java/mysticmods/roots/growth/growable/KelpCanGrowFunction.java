@@ -1,4 +1,4 @@
-package mysticmods.roots.growth.grow;
+package mysticmods.roots.growth.growable;
 
 import mysticmods.roots.api.growth.CanGrowFunction;
 import mysticmods.roots.init.ModTests;

@@ -257,6 +257,10 @@ public class RootsDataPackGenerators {
                   bootstrap.register(FakePlayerUtil.LOOTING_I, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(1)));
                   bootstrap.register(FakePlayerUtil.LOOTING_II, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(2)));
                   bootstrap.register(FakePlayerUtil.LOOTING_III, new SingleEnchantment(getter.getOrThrow(Enchantments.LOOTING), ConstantInt.of(3)));
+                  bootstrap.register(FakePlayerUtil.SILK_TOUCH, new SingleEnchantment(getter.getOrThrow(Enchantments.SILK_TOUCH), ConstantInt.of(1)));
+                  bootstrap.register(FakePlayerUtil.FORTUNE_I, new SingleEnchantment(getter.getOrThrow(Enchantments.FORTUNE), ConstantInt.of(1)));
+                  bootstrap.register(FakePlayerUtil.FORTUNE_II, new SingleEnchantment(getter.getOrThrow(Enchantments.FORTUNE), ConstantInt.of(2)));
+                  bootstrap.register(FakePlayerUtil.FORTUNE_III, new SingleEnchantment(getter.getOrThrow(Enchantments.FORTUNE), ConstantInt.of(3)));
                 })
                 .add(Registries.ENCHANTMENT, bootstrap -> {
                   HolderGetter<Item> itemGetter = bootstrap.lookup(Registries.ITEM);

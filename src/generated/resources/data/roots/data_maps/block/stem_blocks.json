@@ -1,0 +1,6 @@
+{
+  "values": {
+    "minecraft:melon": "minecraft:attached_melon_stem",
+    "minecraft:pumpkin": "minecraft:attached_pumpkin_stem"
+  }
+}

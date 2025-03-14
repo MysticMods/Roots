@@ -55,15 +55,9 @@ public class AnimalHarvestRitual extends Ritual {
   private final Set<EntityType<?>> emptyLoot = new ObjectLinkedOpenHashSet<>();
   private final Set<EntityType<?>> normalLoot = new ObjectLinkedOpenHashSet<>();
 
-  private static ItemStack LOOTING_ITEM = ItemStack.EMPTY;
-
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
-    if (LOOTING_ITEM.isEmpty()) {
-      LOOTING_ITEM = new ItemStack(Items.DIAMOND_SWORD);
-      LOOTING_ITEM.set(DataComponents.UNBREAKABLE, new Unbreakable(false));
-      EnchantmentHelper.enchantItemFromProvider(LOOTING_ITEM, pLevel.registryAccess(), lootingValue == 1 ? FakePlayerUtil.LOOTING_I : lootingValue == 2 ? FakePlayerUtil.LOOTING_II : FakePlayerUtil.LOOTING_III, pLevel.getCurrentDifficultyAt(pPos), randomSource);
-    }
+    FakePlayerUtil.buildItems(pLevel, randomSource);
 
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
@@ -118,7 +112,11 @@ public class AnimalHarvestRitual extends Ritual {
     DamageSources pDamageSources = entity.damageSources();
     FakePlayer fakePlayer = FakePlayerFactory.get((ServerLevel) entity.level(), FakePlayerUtil.ROOTS);
     if (pRandom.nextFloat() < lootingChance) {
-      fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, LOOTING_ITEM);
+      fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, switch (lootingValue) {
+        case 2 -> FakePlayerUtil.LOOTING_II_ITEM;
+        case 3 -> FakePlayerUtil.LOOTING_III_ITEM;
+        default -> FakePlayerUtil.LOOTING_I_ITEM;
+      });
     } else {
       fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
     }

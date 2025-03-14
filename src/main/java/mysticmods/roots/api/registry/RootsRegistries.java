@@ -46,6 +46,8 @@ public class RootsRegistries {
       .create();
   public static final Registry<CanHarvestFunction> CAN_HARVEST_FUNCTIONS = new RegistryBuilder<>(Keys.CAN_HARVEST_FUNCTIONS).sync(true)
       .create();
+  public static final Registry<HarvestFunction> HARVEST_FUNCTIONS = new RegistryBuilder<>(Keys.HARVEST_FUNCTIONS).sync(true)
+      .create();
 
   public static class Keys {
     // Registry keys
@@ -64,6 +66,7 @@ public class RootsRegistries {
     public static ResourceKey<Registry<CanGrowFunction>> CAN_GROW_FUNCTIONS = key(RootsAPI.rl("can_grow_functions"));
     public static ResourceKey<Registry<LightFunction>> LIGHT_FUNCTIONS = key(RootsAPI.rl("light_functions"));
     public static ResourceKey<Registry<CanHarvestFunction>> CAN_HARVEST_FUNCTIONS = key(RootsAPI.rl("can_harvest_functions"));
+    public static ResourceKey<Registry<HarvestFunction>> HARVEST_FUNCTIONS = key(RootsAPI.rl("harvest_functions"));
 
     private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
       return ResourceKey.createRegistryKey(name);

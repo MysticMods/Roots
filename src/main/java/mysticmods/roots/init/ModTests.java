@@ -3,18 +3,23 @@ package mysticmods.roots.init;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.growth.CanGrowFunction;
 import mysticmods.roots.api.growth.CanHarvestFunction;
+import mysticmods.roots.api.growth.HarvestFunction;
 import mysticmods.roots.api.growth.LightFunction;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.api.test.world.*;
-import mysticmods.roots.growth.grow.*;
-import mysticmods.roots.growth.harvest.CanHarvestLowestBlock;
-import mysticmods.roots.growth.harvest.CanHarvestStemBlock;
-import mysticmods.roots.growth.harvest.SingleCropAgeCanHarvest;
+import mysticmods.roots.growth.growable.*;
+import mysticmods.roots.growth.harvest.HarvestAllAboveSameBlock;
+import mysticmods.roots.growth.harvest.HarvestBreakSingleBlock;
+import mysticmods.roots.growth.harvest.HarvestCropAndAbove;
+import mysticmods.roots.growth.harvest.HarvestSingleCropBlock;
+import mysticmods.roots.growth.harvestable.CanHarvestLowestBlock;
+import mysticmods.roots.growth.harvestable.CanHarvestStemBlock;
+import mysticmods.roots.growth.harvestable.SingleCropAgeCanHarvest;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
+import mysticmods.roots.util.HarvestUtil;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -25,6 +30,7 @@ public class ModTests {
   private static final DeferredRegister<CanGrowFunction> CAN_GROW_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.CAN_GROW_FUNCTIONS, RootsAPI.MODID);
   private static final DeferredRegister<LightFunction> LIGHT_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.LIGHT_FUNCTIONS, RootsAPI.MODID);
   private static final DeferredRegister<CanHarvestFunction> CAN_HARVEST_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.CAN_HARVEST_FUNCTIONS, RootsAPI.MODID);
+  private static final DeferredRegister<HarvestFunction> HARVEST_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.HARVEST_FUNCTIONS, RootsAPI.MODID);
 
   public static final DeferredHolder<EntityTestType<?>, EntityTestType<EntityTagTest>> ENTITY_TAG_TEST = ENTITY_TESTS.register("entity_tag_test", EntityTagTest.Type::new);
   public static final DeferredHolder<EntityTestType<?>, EntityTestType<EntityTypeTest>> ENTITY_TYPE_TEST = ENTITY_TESTS.register("entity_type_test", EntityTypeTest.Type::new);
@@ -52,11 +58,15 @@ public class ModTests {
   public static final DeferredHolder<LightFunction, LightFunction.LightLessThanFunction> LIGHT_BELOW_THIRTEEN = LIGHT_FUNCTIONS.register("light_below_thirteen", () -> new LightFunction.LightLessThanFunction(13));
 
   public static final DeferredHolder<CanHarvestFunction, SingleCropAgeCanHarvest> SINGLE_CROP_AGE = CAN_HARVEST_FUNCTIONS.register("single_crop_age", SingleCropAgeCanHarvest::new);
+
   public static final DeferredHolder<CanHarvestFunction, CanHarvestLowestBlock> CAN_HARVEST_LOWEST = CAN_HARVEST_FUNCTIONS.register("can_harvest_lowest_block", CanHarvestLowestBlock::new);
 
-  public static final DeferredHolder<CanHarvestFunction, CanHarvestStemBlock> CAN_HARVEST_PUMKPIN = CAN_HARVEST_FUNCTIONS.register("can_harvest_pumpkin", () -> new CanHarvestStemBlock(Blocks.ATTACHED_PUMPKIN_STEM));
+  public static final DeferredHolder<CanHarvestFunction, CanHarvestStemBlock> CAN_HARVEST_STEM_BLOCK = CAN_HARVEST_FUNCTIONS.register("can_harvest_stem_block", CanHarvestStemBlock::new);
 
-  public static final DeferredHolder<CanHarvestFunction, CanHarvestStemBlock> CAN_HARVEST_MELON = CAN_HARVEST_FUNCTIONS.register("can_harvest_melon", () -> new CanHarvestStemBlock(Blocks.ATTACHED_MELON_STEM));
+  public static final DeferredHolder<HarvestFunction, HarvestAllAboveSameBlock> HARVEST_ALL_ABOVE_SAME_BLOCK = HARVEST_FUNCTIONS.register("harvest_all_above_same_block", HarvestAllAboveSameBlock::new);
+  public static final DeferredHolder<HarvestFunction, HarvestBreakSingleBlock> HARVEST_BREAK_SINGLE_BLOCK = HARVEST_FUNCTIONS.register("harvest_break_single_block", HarvestBreakSingleBlock::new);
+  public static final DeferredHolder<HarvestFunction, HarvestCropAndAbove> HARVEST_CROP_AND_ABOVE = HARVEST_FUNCTIONS.register("harvest_crop_and_above", HarvestCropAndAbove::new);
+  public static final DeferredHolder<HarvestFunction, HarvestSingleCropBlock> HARVEST_SINGLE_CROP_BLOCK = HARVEST_FUNCTIONS.register("harvest_single_crop_block", HarvestSingleCropBlock::new);
 
   public static void register(IEventBus bus) {
     ENTITY_TESTS.register(bus);
@@ -64,5 +74,6 @@ public class ModTests {
     CAN_GROW_FUNCTIONS.register(bus);
     CAN_HARVEST_FUNCTIONS.register(bus);
     LIGHT_FUNCTIONS.register(bus);
+    HARVEST_FUNCTIONS.register(bus);
   }
 }

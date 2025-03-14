@@ -267,6 +267,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     // Growth records!
     var builder15 = builder(DataMaps.GROWTH_RECORDS);
     var builder16 = builder(DataMaps.HARVEST_RECORDS);
+    var builder17 = builder(DataMaps.STEM_BLOCKS);
 
     int AGE_SEVEN_TICKS = 2;
     int AGE_THREE_TICKS = 4;
@@ -280,13 +281,13 @@ public class RootsDataMapProvider extends DataMapProvider {
 
 
     builder15.add(Blocks.BEETROOTS.builtInRegistryHolder(), new GrowthRecord(Blocks.BEETROOTS, Optional.of(BeetrootBlock.AGE), BeetrootBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(Blocks.BEETROOTS.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.BEETROOTS, ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.BEETROOTS.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.BEETROOTS, ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     builder15.add(Blocks.CARROTS.builtInRegistryHolder(), new GrowthRecord(Blocks.CARROTS, Optional.of(CarrotBlock.AGE), CarrotBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(Blocks.CARROTS.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.CARROTS, ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.CARROTS.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.CARROTS, ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     builder15.add(Blocks.COCOA.builtInRegistryHolder(), new GrowthRecord(Blocks.COCOA, Optional.of(CocoaBlock.AGE), CocoaBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
-    builder16.add(Blocks.COCOA.builtInRegistryHolder(), new HarvestRecord(Blocks.COCOA, Items.COCOA_BEANS, Optional.of(CocoaBlock.AGE), CocoaBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.COCOA.builtInRegistryHolder(), new HarvestRecord(Blocks.COCOA, Optional.of(Items.COCOA_BEANS), Optional.of(CocoaBlock.AGE), CocoaBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     // Mushrooms can spread in any light condition
     builder15.add(RootsTags.Blocks.SPREADING_MUSHROOMS, new GrowthRecord(null, Optional.empty(), -1, 2, ModTests.ALWAYS_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
@@ -300,25 +301,28 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     // Pitcher crop
     builder15.add(Blocks.PITCHER_CROP.builtInRegistryHolder(), new GrowthRecord(Blocks.PITCHER_CROP, Optional.of(PitcherCropBlock.AGE), PitcherCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
+    builder16.add(Blocks.PITCHER_CROP.builtInRegistryHolder(), new HarvestRecord(Blocks.PITCHER_CROP, Optional.empty(), Optional.empty(), -1, ModTests.SINGLE_CROP_AGE.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     builder15.add(Blocks.POTATOES.builtInRegistryHolder(), new GrowthRecord(Blocks.POTATOES, Optional.of(PotatoBlock.AGE), PotatoBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
-    builder16.add(Blocks.POTATOES.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.POTATOES, ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.POTATOES.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.POTATOES, ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     // TODO: Mangrove stuff
     builder15.add(BlockTags.SAPLINGS, new GrowthRecord(null, Optional.empty(), -1, SAPLING_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
+    builder17.add(Blocks.MELON.builtInRegistryHolder(), Blocks.ATTACHED_MELON_STEM, false);
     builder15.add(Blocks.MELON_STEM.builtInRegistryHolder(), new GrowthRecord(Blocks.MELON_STEM, Optional.of(StemBlock.AGE), StemBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(Blocks.MELON.builtInRegistryHolder(), new HarvestRecord(Blocks.MELON, Items.MELON_SEEDS, Optional.empty(), -1, ModTests.CAN_HARVEST_MELON.get(), ModTests.BREAK_BLOCK.get()), false);
+    builder16.add(Blocks.MELON.builtInRegistryHolder(), new HarvestRecord(Blocks.MELON, Optional.empty(), Optional.empty(), -1, ModTests.CAN_HARVEST_STEM_BLOCK.get(), ModTests.HARVEST_BREAK_SINGLE_BLOCK.get()), false);
 
     builder15.add(Blocks.NETHER_WART.builtInRegistryHolder(), new GrowthRecord(Blocks.NETHER_WART, Optional.of(NetherWartBlock.AGE), NetherWartBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
-    builder16.add(Blocks.NETHER_WART.builtInRegistryHolder(), new HarvestRecord(Blocks.NETHER_WART, Items.NETHER_WART, Optional.of(NetherWartBlock.AGE), NetherWartBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.NETHER_WART.builtInRegistryHolder(), new HarvestRecord(Blocks.NETHER_WART, Optional.of(Items.NETHER_WART), Optional.of(NetherWartBlock.AGE), NetherWartBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
-    builder16.add(Blocks.PUMPKIN.builtInRegistryHolder(), new HarvestRecord(Blocks.PUMPKIN, Items.PUMPKIN_SEEDS, Optional.empty(), -1, ModTests.CAN_HARVEST_PUMKPIN.get(), ModTests.BREAK_BLOCK.get()), false);
+    builder17.add(Blocks.PUMPKIN.builtInRegistryHolder(), Blocks.ATTACHED_PUMPKIN_STEM, false);
+    builder16.add(Blocks.PUMPKIN.builtInRegistryHolder(), new HarvestRecord(Blocks.PUMPKIN, Optional.empty(), Optional.empty(), -1, ModTests.CAN_HARVEST_STEM_BLOCK.get(), ModTests.HARVEST_BREAK_SINGLE_BLOCK.get()), false);
     builder15.add(Blocks.PUMPKIN_STEM.builtInRegistryHolder(), new GrowthRecord(Blocks.PUMPKIN_STEM, Optional.of(StemBlock.AGE), StemBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     builder15.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new GrowthRecord(Blocks.SWEET_BERRY_BUSH, Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new HarvestRecord(Blocks.SWEET_BERRY_BUSH, Items.SWEET_BERRIES, Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new HarvestRecord(Blocks.SWEET_BERRY_BUSH, Optional.of(Items.SWEET_BERRIES), Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     builder15.add(Blocks.TORCHFLOWER_CROP.builtInRegistryHolder(), new GrowthRecord(Blocks.TORCHFLOWER_CROP, Optional.of(TorchflowerCropBlock.AGE), TorchflowerCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
@@ -334,37 +338,39 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder15.add(Blocks.WEEPING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.WEEPING_VINES, Optional.of(WeepingVinesBlock.AGE), WeepingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW_DOWN.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     builder15.add(Blocks.WHEAT.builtInRegistryHolder(), new GrowthRecord(Blocks.WHEAT, Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(Blocks.WHEAT.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.WHEAT, ModTests.AGE_REPLANT.get()), false);
+    builder16.add(Blocks.WHEAT.builtInRegistryHolder(), HarvestRecord.of((CropBlock) Blocks.WHEAT, ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     // TODO: Replants similar to vines
     builder15.add(Blocks.CACTUS.builtInRegistryHolder(), new GrowthRecord(Blocks.CACTUS, Optional.of(CactusBlock.AGE), CactusBlock.MAX_AGE, 2, ModTests.CACTUS_CANE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
+    builder16.add(Blocks.CACTUS.builtInRegistryHolder(), new HarvestRecord(Blocks.CACTUS, Optional.empty(), Optional.empty(), -1, ModTests.CAN_HARVEST_LOWEST.get(), ModTests.HARVEST_ALL_ABOVE_SAME_BLOCK.get()), false);
     builder15.add(Blocks.SUGAR_CANE.builtInRegistryHolder(), new GrowthRecord(Blocks.SUGAR_CANE, Optional.of(SugarCaneBlock.AGE), 15, 2, ModTests.CACTUS_CANE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
+    builder16.add(Blocks.SUGAR_CANE.builtInRegistryHolder(), new HarvestRecord(Blocks.SUGAR_CANE, Optional.empty(), Optional.empty(), -1, ModTests.CAN_HARVEST_LOWEST.get(), ModTests.HARVEST_ALL_ABOVE_SAME_BLOCK.get()), false);
 
     builder15.add(Blocks.CHORUS_FLOWER.builtInRegistryHolder(), new GrowthRecord(Blocks.CHORUS_FLOWER, Optional.of(ChorusFlowerBlock.AGE), ChorusFlowerBlock.DEAD_AGE, 2, ModTests.ALWAYS_CAN_GROW_UP.get(), ModTests.ANY_LIGHT.get()), false);
 
     builder15.add(ModBlocks.WILDROOT_CROP, new GrowthRecord(ModBlocks.WILDROOT_CROP.get(), Optional.of(ThreeStageCropBlock.AGE), ThreeStageCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(ModBlocks.WILDROOT_CROP, HarvestRecord.of(ModBlocks.WILDROOT_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.WILDROOT_CROP, HarvestRecord.of(ModBlocks.WILDROOT_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     // Elemental crops can grow in any light
     builder15.add(ModBlocks.CLOUD_BERRY_CROP, new GrowthRecord(ModBlocks.CLOUD_BERRY_CROP.get(), Optional.of(ThreeStageCropBlock.AGE), ThreeStageCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
-    builder16.add(ModBlocks.CLOUD_BERRY_CROP, HarvestRecord.of(ModBlocks.CLOUD_BERRY_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.CLOUD_BERRY_CROP, HarvestRecord.of(ModBlocks.CLOUD_BERRY_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
     builder15.add(ModBlocks.INFERNO_BULB_CROP, new GrowthRecord(ModBlocks.INFERNO_BULB_CROP.get(), Optional.of(ThreeStageCropBlock.AGE), ThreeStageCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
-    builder16.add(ModBlocks.INFERNO_BULB_CROP, HarvestRecord.of(ModBlocks.INFERNO_BULB_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.INFERNO_BULB_CROP, HarvestRecord.of(ModBlocks.INFERNO_BULB_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
     builder15.add(ModBlocks.STALICRIPE_CROP, new GrowthRecord(ModBlocks.STALICRIPE_CROP.get(), Optional.of(ThreeStageCropBlock.AGE), ThreeStageCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
-    builder16.add(ModBlocks.STALICRIPE_CROP, HarvestRecord.of(ModBlocks.STALICRIPE_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.STALICRIPE_CROP, HarvestRecord.of(ModBlocks.STALICRIPE_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
     builder15.add(ModBlocks.DEWGONIA_CROP, new GrowthRecord(ModBlocks.DEWGONIA_CROP.get(), Optional.of(ThreeStageCropBlock.AGE), ThreeStageCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
-    builder16.add(ModBlocks.DEWGONIA_CROP, HarvestRecord.of(ModBlocks.DEWGONIA_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.DEWGONIA_CROP, HarvestRecord.of(ModBlocks.DEWGONIA_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     // Moonglow
     builder15.add(ModBlocks.MOONGLOW_CROP, new GrowthRecord(ModBlocks.MOONGLOW_CROP.get(), Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(ModBlocks.MOONGLOW_CROP, HarvestRecord.of(ModBlocks.MOONGLOW_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.MOONGLOW_CROP, HarvestRecord.of(ModBlocks.MOONGLOW_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
     builder15.add(ModBlocks.PERESKIA_CROP, new GrowthRecord(ModBlocks.PERESKIA_CROP.get(), Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(ModBlocks.PERESKIA_CROP, HarvestRecord.of(ModBlocks.PERESKIA_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.PERESKIA_CROP, HarvestRecord.of(ModBlocks.PERESKIA_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
     builder15.add(ModBlocks.SPIRITLEAF_CROP, new GrowthRecord(ModBlocks.SPIRITLEAF_CROP.get(), Optional.of(FourStageCropBlock.AGE), FourStageCropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(ModBlocks.SPIRITLEAF_CROP, HarvestRecord.of(ModBlocks.SPIRITLEAF_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.SPIRITLEAF_CROP, HarvestRecord.of(ModBlocks.SPIRITLEAF_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
     builder15.add(ModBlocks.WILDEWHEET_CROP, new GrowthRecord(ModBlocks.WILDEWHEET_CROP.get(), Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(ModBlocks.WILDEWHEET_CROP, HarvestRecord.of(ModBlocks.WILDEWHEET_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.WILDEWHEET_CROP, HarvestRecord.of(ModBlocks.WILDEWHEET_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
     builder15.add(ModBlocks.AUBERGINE_CROP, new GrowthRecord(ModBlocks.AUBERGINE_CROP.get(), Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(ModBlocks.AUBERGINE_CROP, HarvestRecord.of(ModBlocks.AUBERGINE_CROP.get(), ModTests.AGE_REPLANT.get()), false);
+    builder16.add(ModBlocks.AUBERGINE_CROP, HarvestRecord.of(ModBlocks.AUBERGINE_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
   }
 }
