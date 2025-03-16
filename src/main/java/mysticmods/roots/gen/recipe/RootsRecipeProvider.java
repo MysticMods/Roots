@@ -999,8 +999,8 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
         .save(RunicBlockRecipe.Builder.create().durabilityCost(15)
-            .condition(new WorldCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(Blocks.WHEAT.defaultBlockState()
-                .setValue(CropBlock.AGE, CropBlock.MAX_AGE)))))
+            .test(new PartialBlockStateMatchWorldTest(new PartialBlockState(Blocks.WHEAT.defaultBlockState()
+                .setValue(CropBlock.AGE, CropBlock.MAX_AGE))))
             .outputState(new PartialBlockState(Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, 0)))
             .skipProperty(CropBlock.AGE)
             .build(BaseRecipeData.Builder.create()
@@ -1012,8 +1012,8 @@ public class RootsRecipeProvider extends RecipeProvider {
     // Spiritleaf from beetroot
     RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
         .save(RunicBlockRecipe.Builder.create().durabilityCost(15)
-            .condition(new WorldCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(Blocks.BEETROOTS.defaultBlockState()
-                .setValue(BeetrootBlock.AGE, BeetrootBlock.MAX_AGE)))))
+            .test(new PartialBlockStateMatchWorldTest(new PartialBlockState(Blocks.BEETROOTS.defaultBlockState()
+                .setValue(BeetrootBlock.AGE, BeetrootBlock.MAX_AGE))))
             .outputState(new PartialBlockState(Blocks.BEETROOTS.defaultBlockState().setValue(BeetrootBlock.AGE, 0)))
             .skipProperties(BeetrootBlock.AGE)
             .build(BaseRecipeData.Builder.create()

@@ -3,12 +3,14 @@ package mysticmods.roots.recipe.runic;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
 import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.api.test.world.WorldTest;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -19,6 +21,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,10 +33,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static MapCodec<RunicBlockRecipe> CODEC = RecordCodecBuilder.mapCodec(
       (instance) -> instance.group(
           BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
+          WorldTest.CODEC.fieldOf("test").forGetter(o -> o.targetCondition),
           PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
           WorldCondition.LIST_CODEC.fieldOf("condition").forGetter(o -> o.conditions),
           OutputStateMapper.CODEC.optionalFieldOf("stateMapper").forGetter(o -> Optional.ofNullable(o.stateMapper)),
@@ -42,8 +47,9 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
           Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost)
       ).apply(instance, RunicBlockRecipe::new)
   );
-  public static StreamCodec<RegistryFriendlyByteBuf, RunicBlockRecipe> STREAM_CODEC = StreamCodec.composite(
+  public static StreamCodec<RegistryFriendlyByteBuf, RunicBlockRecipe> STREAM_CODEC = ExtraStreamCodecs.composite(
       BaseRecipeData.STREAM_CODEC, o -> o.data,
+      WorldTest.STREAM_CODEC, o -> o.targetCondition,
       ByteBufCodecs.optional(PartialBlockState.STREAM_CODEC), o -> Optional.ofNullable(o.outputState),
       WorldCondition.LIST_STREAM_CODEC, o -> o.conditions,
       ByteBufCodecs.optional(OutputStateMapper.STREAM_CODEC), o -> Optional.ofNullable(o.stateMapper),
@@ -55,17 +61,29 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   protected int durabilityCost = 1;
   @Nullable
   private final OutputStateMapper stateMapper;
+  private final WorldTest targetCondition;
 
-  public RunicBlockRecipe(BaseRecipeData baseRecipeData, PartialBlockState partialBlockState1, List<WorldCondition> worldCondition, OutputStateMapper outputStateMapper, List<String> strings, int durabilityCost) {
+  public RunicBlockRecipe(BaseRecipeData baseRecipeData, WorldTest targetCondition, PartialBlockState partialBlockState1, List<WorldCondition> worldCondition, @Nullable OutputStateMapper outputStateMapper, List<String> strings, int durabilityCost) {
     super(baseRecipeData, partialBlockState1, worldCondition, strings);
+    this.targetCondition = targetCondition;
     this.stateMapper = outputStateMapper;
     this.durabilityCost = durabilityCost;
   }
 
-  public RunicBlockRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState1, List<WorldCondition> worldCondition, Optional<OutputStateMapper> outputStateMapper, Optional<List<String>> strings, int durabilityCost) {
+  public RunicBlockRecipe(BaseRecipeData baseRecipeData, WorldTest targetCondition, Optional<PartialBlockState> partialBlockState1, List<WorldCondition> worldCondition, Optional<OutputStateMapper> outputStateMapper, Optional<List<String>> strings, int durabilityCost) {
     super(baseRecipeData, partialBlockState1.orElse(null), worldCondition, strings.orElse(Collections.emptyList()));
+    this.targetCondition = targetCondition;
     this.stateMapper = outputStateMapper.orElse(null);
     this.durabilityCost = durabilityCost;
+  }
+
+  @Override
+  public boolean matches(SimpleWorldCrafting pContainer, Level pLevel) {
+    //noinspection DataFlowIssue
+    if (!targetCondition.test(pContainer.getBlockState(), pContainer.getLevel().getRandom())) {
+      return false;
+    }
+    return super.matches(pContainer, pLevel);
   }
 
   public int getDurabilityCost() {
@@ -85,6 +103,10 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   public RecipeType<?> getType() {
     return ModRecipes.RUNIC_BLOCK.get();
+  }
+
+  public WorldTest getTest() {
+    return targetCondition;
   }
 
   @Override
@@ -145,11 +167,17 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static class Builder {
     private final List<String> skipProperties = new ArrayList<>();
     private int durabilityCost;
+    private WorldTest targetCondition;
     private PartialBlockState outputState;
     private final List<WorldCondition> condition = new ArrayList<>();
     private OutputStateMapper stateMapper;
 
     protected Builder() {
+    }
+
+    public Builder test (WorldTest targetCondition) {
+      this.targetCondition = targetCondition;
+      return this;
     }
 
     public Builder durabilityCost(int durabilityCost) {
@@ -200,7 +228,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     }
 
     public RunicBlockRecipe build(BaseRecipeData data) {
-      return new RunicBlockRecipe(data, outputState, condition, stateMapper, skipProperties, durabilityCost);
+      return new RunicBlockRecipe(data, targetCondition, outputState, condition, stateMapper, skipProperties, durabilityCost);
     }
 
     public RunicBlockRecipe build(BaseRecipeData.Builder data) {
