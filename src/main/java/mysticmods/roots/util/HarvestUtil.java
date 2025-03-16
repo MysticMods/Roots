@@ -3,13 +3,19 @@ package mysticmods.roots.util;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.growth.HarvestRecord;
+import mysticmods.roots.init.ModTests;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -26,6 +32,20 @@ public class HarvestUtil {
   private static boolean capturingDrops = false;
   private static final Long2ObjectMap<List<DropStuff>> adjustmentMap = new Long2ObjectOpenHashMap<>();
   private static final List<ItemEntity> capturedDrops = new ArrayList<>();
+
+  public static HarvestRecord getRecord(Level level, BlockPos pos, @Nullable BlockState state, @Nullable Player player) {
+    if (state == null) {
+      state = level.getBlockState(pos);
+    }
+
+    HarvestRecord record = state.getBlockHolder().getData(DataMaps.HARVEST_RECORDS);
+    if (record == null && state.getBlock() instanceof CropBlock crop) {
+      record = HarvestRecord.of(crop, ModTests.HARVEST_SINGLE_CROP_BLOCK.get());
+      RootsAPI.LOG.error("We're guessing a harvest record for block '{}'. This should be added as a harvest record.", state.getBlock());
+    }
+
+    return record;
+  }
 
   public static void beginCapture() {
     if (capturingDrops) {
@@ -45,7 +65,10 @@ public class HarvestUtil {
   }
 
   public static void adjustOrCapture(DropStuff entry) {
-    List<DropStuff> list = adjustmentMap.getOrDefault(entry.pos.asLong(), new ArrayList<>());
+    if (!adjustmentMap.containsKey(entry.pos.asLong())) {
+      adjustmentMap.put(entry.pos.asLong(), new ArrayList<>());
+    }
+    List<DropStuff> list = adjustmentMap.get(entry.pos.asLong());
     list.add(entry);
   }
 

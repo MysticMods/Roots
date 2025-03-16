@@ -17,6 +17,11 @@ public record CanHarvestLowestBlock() implements CanHarvestFunction {
       return false;
     }
 
+    BlockState stateAbove = level.getBlockState(blockPos.above());
+    if (!stateAbove.is(blockState.getBlock())) {
+      return false;
+    }
+
     // You can only harvest the lowest block of bamboo, sugar can, etc
     return true;
   }

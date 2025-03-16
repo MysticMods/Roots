@@ -27,7 +27,7 @@ public record HarvestAllAboveSameBlock() implements HarvestFunction {
 
     newAbovePos = newAbovePos.below();
     BlockPos.MutableBlockPos mPos = newAbovePos.mutable();
-    for (int y = newAbovePos.getY(); y >= pos.getY(); y--) {
+    for (int y = newAbovePos.getY(); y > pos.getY(); y--) {
       mPos.set(newAbovePos.getX(), y, newAbovePos.getZ());
       HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(mPos, level.dimension()));
       level.destroyBlock(mPos, true, entity);

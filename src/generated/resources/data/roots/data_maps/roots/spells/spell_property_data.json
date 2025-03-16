@@ -346,6 +346,24 @@
           "default_value": 25,
           "value": 25
         }
+      },
+      {
+        "id": "roots:harvest/radius_zx",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Z and X axes",
+          "default_value": 5,
+          "value": 5
+        }
+      },
+      {
+        "id": "roots:harvest/radius_y",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The size of the area that will be affected on the Y axis",
+          "default_value": 5,
+          "value": 5
+        }
       }
     ],
     "roots:jaunt": [
