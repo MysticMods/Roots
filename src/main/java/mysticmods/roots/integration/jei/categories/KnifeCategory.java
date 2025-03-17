@@ -9,6 +9,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
@@ -56,20 +57,39 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
           outputs.add(b);
         });
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 39, 35)
+        // 35 -> 39
+
+        builder.addSlot(RecipeIngredientRole.INPUT, 7, 34)
             .addIngredients(Ingredient.of(inputs.toArray(new ItemLike[0])));
-        builder.addSlot(RecipeIngredientRole.INPUT, 105, 35)
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
             .addIngredients(Ingredient.of(outputs.toArray(new ItemLike[0])));
       }
 
       if (recipe instanceof KnifeOffHandRecipe offHandRecipe) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 71, 12)
+        builder.addSlot(RecipeIngredientRole.INPUT, 39, 11)
             .addIngredients(Ingredient.of(offHandRecipe.getOffHandTag()));
       }
     }
 
+/*
     builder.addSlot(RecipeIngredientRole.OUTPUT, 128, 35)
         .addItemStack(recipe.getResultItem(provider));
+*/
+
+    List<ChanceOutput> outputs = recipe.getCachedOutputs();
+
+    int row = 0;
+    int column = 0;
+
+    for (int i = 0; i < outputs.size(); i++) {
+      if (i % 4 == 0 && i != 0) {
+        row++;
+        column = 0;
+      }
+      builder.addSlot(RecipeIngredientRole.OUTPUT, 97 + column * 17, 2 + row * 17)
+          .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i)).addRichTooltipCallback(this.richestTooltip(recipe));
+      column++;
+    }
   }
 
   @Override
