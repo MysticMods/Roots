@@ -87,6 +87,10 @@ public class KnifeOffHandRecipe extends KnifeRecipe {
     return super.matches(pContainer, pLevel);
   }
 
+  public TagKey<Item> getOffHandTag() {
+    return offHandTag;
+  }
+
   @Override
   public RecipeSerializer<?> getSerializer() {
     return ModSerializers.KNIFE_OFF_HAND.get();
