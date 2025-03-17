@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:bark/jungle_bark_from_jungle_log"
+        "recipe": "roots:knife/dark_oak_bark_from_dark_oak_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:bark/jungle_bark_from_jungle_log"
+      "roots:knife/dark_oak_bark_from_dark_oak_log"
     ]
   }
 }

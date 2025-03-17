@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:bark/spruce_bark_from_spruce_log"
+        "recipe": "roots:knife/spruce_bark_from_spruce_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:bark/spruce_bark_from_spruce_log"
+      "roots:knife/spruce_bark_from_spruce_log"
     ]
   }
 }

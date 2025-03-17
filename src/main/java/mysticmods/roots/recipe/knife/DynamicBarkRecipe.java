@@ -30,7 +30,7 @@ import java.util.List;
 public class DynamicBarkRecipe extends KnifeRecipe {
   public static DynamicBarkRecipe INSTANCE = new DynamicBarkRecipe();
 
-  public static ResourceLocation IDENTIFIER = RootsAPI.rl("bark/dynamic_modded_wood_bark");
+  public static ResourceLocation IDENTIFIER = RootsAPI.rl("knife/dynamic_modded_wood_bark");
 
   public DynamicBarkRecipe() {
     // TODO: Should this be "AlwaysTrueTest"?

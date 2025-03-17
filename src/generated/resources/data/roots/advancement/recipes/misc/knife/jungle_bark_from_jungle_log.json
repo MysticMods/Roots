@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:bark/acacia_bark_from_acacia_log"
+        "recipe": "roots:knife/jungle_bark_from_jungle_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:bark/acacia_bark_from_acacia_log"
+      "roots:knife/jungle_bark_from_jungle_log"
     ]
   }
 }

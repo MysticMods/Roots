@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:bark/wildwood_bark_from_wildwood_log"
+        "recipe": "roots:knife/crimson_bark_from_crimson_stem"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:bark/wildwood_bark_from_wildwood_log"
+      "roots:knife/crimson_bark_from_crimson_stem"
     ]
   }
 }

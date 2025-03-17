@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:bark/dark_oak_bark_from_dark_oak_log"
+        "recipe": "roots:knife/warped_bark_from_warped_stem"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:bark/dark_oak_bark_from_dark_oak_log"
+      "roots:knife/warped_bark_from_warped_stem"
     ]
   }
 }

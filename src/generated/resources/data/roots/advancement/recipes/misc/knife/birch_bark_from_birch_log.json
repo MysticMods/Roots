@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:bark/warped_bark_from_warped_stem"
+        "recipe": "roots:knife/birch_bark_from_birch_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:bark/warped_bark_from_warped_stem"
+      "roots:knife/birch_bark_from_birch_log"
     ]
   }
 }

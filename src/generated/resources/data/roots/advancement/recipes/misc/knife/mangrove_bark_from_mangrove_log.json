@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:bark/mangrove_bark_from_mangrove_log"
+        "recipe": "roots:knife/mangrove_bark_from_mangrove_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:bark/mangrove_bark_from_mangrove_log"
+      "roots:knife/mangrove_bark_from_mangrove_log"
     ]
   }
 }
