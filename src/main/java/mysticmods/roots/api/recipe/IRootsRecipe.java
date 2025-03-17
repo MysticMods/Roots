@@ -51,11 +51,11 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return Collections.emptyList();
   }
 
-  default List<ChanceOutput> getCachedOutputs () {
+  default List<ChanceOutput> getCachedOutputs() {
     return Collections.emptyList();
   }
 
-  default void buildCachedOutputs (List<ChanceOutput> list, HolderLookup.Provider provider) {
+  default void buildCachedOutputs(List<ChanceOutput> list, HolderLookup.Provider provider) {
     if (hasOutput(provider)) {
       ItemStack result = getResultItem(provider);
       if (!result.isEmpty()) {
@@ -145,9 +145,7 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
         }
       }
     }
-    if (hasItemOutput(provider)) {
-      results.add(assemble(inventory, provider));
-    }
+    results.add(assemble(inventory, provider));
     if (hasChanceOutputs(provider)) {
       results.addAll(assembleChanceOutputs(inventory, random, provider));
     }
