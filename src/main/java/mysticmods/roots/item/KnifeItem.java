@@ -76,24 +76,28 @@ public class KnifeItem extends TieredItem {
     SimpleWorldCrafting crafting = new SimpleWorldCrafting(player, level, blockpos, blockstate, pContext);
     RecipeHolder<KnifeRecipe> recipe = ResolvedRecipes.KNIFE.findRecipe(crafting, level);
     ItemStack itemstack = pContext.getItemInHand();
-    if (recipe != null && !level.isClientSide()) {
+    if (recipe != null) {
       ConditionResult conditionResult = recipe.value()
           .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), blockpos);
       if (conditionResult.anyFailed()) {
-        RootsAPI.LOG.info("Conditions failed.");
-        conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
-        conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
-        conditionResult.report(player);
+        if (!level.isClientSide()) {
+          RootsAPI.LOG.info("Conditions failed.");
+          conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+          conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+          conditionResult.report(player);
+        }
         return InteractionResult.FAIL;
       }
 
-      UnlockResult failedGrants = recipe.value().checkUnlocks(level, (ServerPlayer) player);
-      if (failedGrants.anyFailed() && !recipe.value().hasOutput(level.registryAccess())) {
-        RootsAPI.LOG.info("Grants failed and recipe has no output");
-        // TODO:
-        /*        failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
-        failedGrants.report();
-        return InteractionResult.FAIL;
+      if (!level.isClientSide()) {
+        UnlockResult failedGrants = recipe.value().checkUnlocks(level, (ServerPlayer) player);
+        if (failedGrants.anyFailed() && !recipe.value().hasOutput(level.registryAccess())) {
+          RootsAPI.LOG.info("Grants failed and recipe has no output");
+          // TODO:
+          /*        failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
+          failedGrants.report();
+          return InteractionResult.FAIL;
+        }
       }
 
       level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
