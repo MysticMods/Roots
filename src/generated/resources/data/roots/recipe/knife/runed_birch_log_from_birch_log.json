@@ -1,0 +1,20 @@
+{
+  "type": "roots:bark",
+  "condition": [],
+  "data": {
+    "playerConditions": [
+      "roots:runed_log_off_hand"
+    ]
+  },
+  "durabilityCost": 1,
+  "stateMapper": {
+    "mapBlock": {
+      "minecraft:birch_log": "roots:runed_birch_log",
+      "minecraft:birch_wood": "roots:runed_birch_log"
+    }
+  },
+  "test": {
+    "type": "roots:tag_match_test",
+    "tag": "roots:bark_logs/birch"
+  }
+}

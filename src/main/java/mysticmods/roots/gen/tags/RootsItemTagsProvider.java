@@ -275,6 +275,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(ItemTags.PICKAXES).add(ModItems.COPPER_PICKAXE.get(), ModItems.LIVING_PICKAXE.get(), ModItems.RUNED_PICKAXE.get());
     this.tag(ItemTags.SHOVELS).add(ModItems.COPPER_SHOVEL.get(), ModItems.LIVING_SHOVEL.get(), ModItems.RUNED_SHOVEL.get());
     this.tag(ItemTags.SWORDS).add(ModItems.COPPER_SWORD.get(), ModItems.LIVING_SWORD.get(), ModItems.RUNED_SWORD.get());
+
+    this.tag(RootsTags.Items.RUNED_LOG_HERBS).add(ModItems.WILDROOT.get(), ModItems.GROVE_MOSS.get());
   }
 
   @Override

@@ -1,0 +1,20 @@
+{
+  "type": "roots:bark",
+  "condition": [],
+  "data": {
+    "playerConditions": [
+      "roots:runed_log_off_hand"
+    ]
+  },
+  "durabilityCost": 1,
+  "stateMapper": {
+    "mapBlock": {
+      "minecraft:warped_hyphae": "roots:runed_warped_stem",
+      "minecraft:warped_stem": "roots:runed_warped_stem"
+    }
+  },
+  "test": {
+    "type": "roots:tag_match_test",
+    "tag": "roots:bark_logs/warped"
+  }
+}

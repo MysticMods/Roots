@@ -1,0 +1,20 @@
+{
+  "type": "roots:bark",
+  "condition": [],
+  "data": {
+    "playerConditions": [
+      "roots:runed_log_off_hand"
+    ]
+  },
+  "durabilityCost": 1,
+  "stateMapper": {
+    "mapBlock": {
+      "roots:wildwood_log": "roots:runed_wildwood_log",
+      "roots:wildwood_wood": "roots:runed_wildwood_log"
+    }
+  },
+  "test": {
+    "type": "roots:tag_match_test",
+    "tag": "roots:bark_logs/wildwood"
+  }
+}

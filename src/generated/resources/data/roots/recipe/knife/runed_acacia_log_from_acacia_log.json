@@ -1,0 +1,20 @@
+{
+  "type": "roots:bark",
+  "condition": [],
+  "data": {
+    "playerConditions": [
+      "roots:runed_log_off_hand"
+    ]
+  },
+  "durabilityCost": 1,
+  "stateMapper": {
+    "mapBlock": {
+      "minecraft:acacia_log": "roots:runed_acacia_log",
+      "minecraft:acacia_wood": "roots:runed_acacia_log"
+    }
+  },
+  "test": {
+    "type": "roots:tag_match_test",
+    "tag": "roots:bark_logs/acacia"
+  }
+}

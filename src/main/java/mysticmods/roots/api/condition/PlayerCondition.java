@@ -8,7 +8,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,4 +39,21 @@ public abstract class PlayerCondition implements IDescribed {
   }
 
   public abstract boolean test(Level level, @Nullable Player player);
+
+  public static class PlayerOffHandTaggedItemCondition extends PlayerCondition {
+    private final TagKey<Item> tag;
+
+    public PlayerOffHandTaggedItemCondition(TagKey<Item> tag) {
+      this.tag = tag;
+    }
+
+    @Override
+    public boolean test(Level level, @Nullable Player player) {
+      if (player == null) {
+        return false;
+      }
+
+      return player.getOffhandItem().is(tag);
+    }
+  }
 }

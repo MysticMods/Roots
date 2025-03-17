@@ -412,6 +412,9 @@ public class RootsTags {
     public static final TagKey<Item> CHARMS = modTag("charms");
     public static final TagKey<Item> CHARM_ALERT = modTag("charms/alertness");
 
+    // Items that, when held in off-hand transforms a log into a runed log equivalent
+    public static final TagKey<Item> RUNED_LOG_HERBS = modTag("runed_log_herbs");
+
     protected static TagKey<Item> modTag(String name) {
       return ItemTags.create(RootsAPI.rl(name));
     }
