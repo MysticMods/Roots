@@ -18,6 +18,7 @@
         "tag": "roots:dusts/runic"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

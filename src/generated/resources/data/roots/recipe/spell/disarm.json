@@ -18,6 +18,7 @@
         "tag": "c:levers"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

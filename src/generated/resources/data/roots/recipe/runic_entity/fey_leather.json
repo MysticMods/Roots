@@ -2,6 +2,7 @@
   "type": "roots:runic_entity",
   "cooldown": 2400,
   "data": {
+    "priority": 0,
     "result": {
       "count": 1,
       "id": "roots:fey_leather"

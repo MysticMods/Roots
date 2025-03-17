@@ -18,6 +18,7 @@
         "tag": "c:bones"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

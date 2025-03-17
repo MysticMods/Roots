@@ -18,6 +18,7 @@
         "item": "minecraft:stone_pickaxe"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

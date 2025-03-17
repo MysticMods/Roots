@@ -45,18 +45,20 @@ public class BaseRecipeData {
           .forGetter(o -> o.playerConditions),
       ItemStack.CODEC.optionalFieldOf("result", ItemStack.EMPTY).forGetter(o -> o.result),
       ChanceOutput.LIST_CODEC.optionalFieldOf("chanceOutputs", Collections.emptyList()).forGetter(o -> o.chanceOutputs),
-      Unlock.LIST_CODEC.optionalFieldOf("unlocks", Collections.emptyList()).forGetter(o -> o.unlocks)
+      Unlock.LIST_CODEC.optionalFieldOf("unlocks", Collections.emptyList()).forGetter(o -> o.unlocks),
+      Codec.INT.fieldOf("priority").forGetter(o -> o.priority)
   ).apply(instance, BaseRecipeData::new));
   public static Codec<BaseRecipeData> OPTIONAL_CODEC = ExtraCodecs.optionalEmptyMap(CODEC.codec())
       .xmap(o -> o.orElse(new BaseRecipeData()), o -> o == null ? Optional.empty() : Optional.of(o));
   public static StreamCodec<RegistryFriendlyByteBuf, NonNullList<Ingredient>> INGREDIENT_LIST_STREAM = Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.collection(NonNullList::createWithCapacity));
-  public static final StreamCodec<RegistryFriendlyByteBuf, BaseRecipeData> STREAM_CODEC = StreamCodec.composite(
+  public static final StreamCodec<RegistryFriendlyByteBuf, BaseRecipeData> STREAM_CODEC = ExtraStreamCodecs.composite(
       ByteBufCodecs.optional(INGREDIENT_LIST_STREAM), o -> c(o.ingredients),
       ByteBufCodecs.optional(LevelCondition.LIST_STREAM_CODEC), o -> c(o.levelConditions),
       ByteBufCodecs.optional(PlayerCondition.LIST_STREAM_CODEC), o -> c(o.playerConditions),
       ByteBufCodecs.optional(ItemStack.STREAM_CODEC), o -> o.result == null || o.result.isEmpty() ? Optional.empty() : Optional.of(o.result),
       ByteBufCodecs.optional(ChanceOutput.LIST_STREAM_CODEC), o -> c(o.chanceOutputs),
       ByteBufCodecs.optional(Unlock.LIST_STREAM_CODEC), o -> c(o.unlocks),
+      ByteBufCodecs.VAR_INT, o -> o.priority,
       BaseRecipeData::new
   );
 
@@ -66,22 +68,24 @@ public class BaseRecipeData {
   public ItemStack result;
   public List<ChanceOutput> chanceOutputs;
   public List<Unlock<?>> unlocks;
+  public int priority;
 
   public BaseRecipeData() {
   }
 
-  public BaseRecipeData(NonNullList<Ingredient> ingredients, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks) {
+  public BaseRecipeData(NonNullList<Ingredient> ingredients, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, int priority) {
     this.ingredients = ingredients;
     this.levelConditions = Collections.unmodifiableList(levelConditions);
     this.playerConditions = Collections.unmodifiableList(playerConditions);
     this.result = result;
     this.chanceOutputs = Collections.unmodifiableList(chanceOutputs);
     this.unlocks = Collections.unmodifiableList(unlocks);
+    this.priority = priority;
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  private BaseRecipeData(Optional<NonNullList<Ingredient>> ingredients, Optional<List<LevelCondition>> levelConditions, Optional<List<PlayerCondition>> playerConditions, Optional<ItemStack> itemStack, Optional<List<ChanceOutput>> chanceOutputs, Optional<List<Unlock<?>>> unlocks) {
-    this(ingredients.orElse(NonNullList.create()), levelConditions.orElse(new ArrayList<>()), playerConditions.orElse(new ArrayList<>()), itemStack.orElse(ItemStack.EMPTY), chanceOutputs.orElse(new ArrayList<>()), unlocks.orElse(new ArrayList<>()));
+  private BaseRecipeData(Optional<NonNullList<Ingredient>> ingredients, Optional<List<LevelCondition>> levelConditions, Optional<List<PlayerCondition>> playerConditions, Optional<ItemStack> itemStack, Optional<List<ChanceOutput>> chanceOutputs, Optional<List<Unlock<?>>> unlocks, int priority) {
+    this(ingredients.orElse(NonNullList.create()), levelConditions.orElse(new ArrayList<>()), playerConditions.orElse(new ArrayList<>()), itemStack.orElse(ItemStack.EMPTY), chanceOutputs.orElse(new ArrayList<>()), unlocks.orElse(new ArrayList<>()), priority);
   }
 
   public void updateFrom(BaseRecipeData data) {
@@ -91,6 +95,7 @@ public class BaseRecipeData {
     this.result = data.result;
     this.chanceOutputs = data.chanceOutputs;
     this.unlocks = data.unlocks;
+    this.priority = data.priority;
   }
 
   public boolean isEmpty() {
@@ -100,7 +105,7 @@ public class BaseRecipeData {
   // TODO: Why does this exist
   public Builder builder() {
     return new Builder(new ArrayList<>(ingredients), new ArrayList<>(levelConditions), new ArrayList<>(playerConditions), result.copy(), chanceOutputs.stream().map(ChanceOutput::copy)
-        .collect(Collectors.toList()), new ArrayList<>(unlocks));
+        .collect(Collectors.toList()), new ArrayList<>(unlocks), this.priority);
   }
 
   private static <V, T extends List<V>> Optional<T> c(T value) {
@@ -114,14 +119,16 @@ public class BaseRecipeData {
     private ItemStack result;
     private final List<ChanceOutput> chanceOutputs;
     private final List<Unlock<?>> unlocks;
+    private int priority;
 
-    protected Builder(List<Ingredient> ingredients, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks) {
+    protected Builder(List<Ingredient> ingredients, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, int priority) {
       this.ingredients = ingredients;
       this.levelConditions = levelConditions;
       this.playerConditions = playerConditions;
       this.result = result;
       this.chanceOutputs = chanceOutputs;
       this.unlocks = unlocks;
+      this.priority = priority;
     }
 
     protected Builder() {
@@ -131,6 +138,12 @@ public class BaseRecipeData {
       this.result = ItemStack.EMPTY;
       this.chanceOutputs = new ArrayList<>();
       this.unlocks = new ArrayList<>();
+      this.priority = 0;
+    }
+
+    public Builder priority (int value) {
+      this.priority = value;
+      return this;
     }
 
     public Builder requires(Ingredient ingredient) {
@@ -219,11 +232,11 @@ public class BaseRecipeData {
       }
       ItemStack newResult = result.copy();
       newResult.setCount(newResult.getCount() * value);
-      return new Builder(newIngredients, new ArrayList<>(levelConditions), new ArrayList<>(playerConditions), newResult, newChances, new ArrayList<>(unlocks));
+      return new Builder(newIngredients, new ArrayList<>(levelConditions), new ArrayList<>(playerConditions), newResult, newChances, new ArrayList<>(unlocks), priority);
     }
 
     public BaseRecipeData build() {
-      return new BaseRecipeData(NonNullList.copyOf(ingredients), levelConditions, playerConditions, result, chanceOutputs, unlocks);
+      return new BaseRecipeData(NonNullList.copyOf(ingredients), levelConditions, playerConditions, result, chanceOutputs, unlocks, priority);
     }
 
     public static Builder create() {

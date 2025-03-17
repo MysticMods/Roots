@@ -18,6 +18,7 @@
         "item": "minecraft:torch"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

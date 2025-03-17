@@ -12,6 +12,7 @@
         "tag": "minecraft:tall_flowers"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 6,
       "id": "roots:petals"

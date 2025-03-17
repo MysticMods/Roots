@@ -20,7 +20,8 @@
     ],
     "levelConditions": [
       "roots:mature_wildroot_crop"
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:wildroot_growth"
 }

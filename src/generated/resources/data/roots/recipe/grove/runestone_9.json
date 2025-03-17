@@ -33,6 +33,7 @@
     "levelConditions": [
       "roots:active_grove_stone"
     ],
+    "priority": 0,
     "result": {
       "count": 9,
       "id": "roots:runestone"

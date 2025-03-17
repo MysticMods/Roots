@@ -17,7 +17,8 @@
       {
         "item": "minecraft:short_grass"
       }
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:overgrowth"
 }

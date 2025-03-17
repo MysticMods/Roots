@@ -18,6 +18,7 @@
         "item": "minecraft:short_grass"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

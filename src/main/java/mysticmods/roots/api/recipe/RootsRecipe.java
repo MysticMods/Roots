@@ -114,4 +114,9 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
     }
     return data.result;
   }
+
+  @Override
+  public int getPriority() {
+    return data.priority;
+  }
 }

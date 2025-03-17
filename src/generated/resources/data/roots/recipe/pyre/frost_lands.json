@@ -17,7 +17,8 @@
       {
         "item": "minecraft:vine"
       }
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:frost_lands"
 }

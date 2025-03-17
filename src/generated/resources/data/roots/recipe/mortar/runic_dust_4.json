@@ -15,6 +15,7 @@
         "tag": "roots:runestone"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 4,
       "id": "roots:runic_dust"

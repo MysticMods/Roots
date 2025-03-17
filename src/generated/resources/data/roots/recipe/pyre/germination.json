@@ -17,7 +17,8 @@
       {
         "tag": "roots:herbs/pereskia"
       }
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:germination"
 }

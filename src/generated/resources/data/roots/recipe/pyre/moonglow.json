@@ -27,6 +27,7 @@
         "tag": "roots:herbs/grove_moss"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 1,
       "id": "roots:moonglow"

@@ -18,6 +18,7 @@
         "tag": "minecraft:small_flowers"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 5,
       "id": "roots:petals"

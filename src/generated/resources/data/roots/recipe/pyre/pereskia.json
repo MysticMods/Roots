@@ -27,6 +27,7 @@
         "tag": "roots:crops/aubergine"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 1,
       "id": "roots:pereskia"

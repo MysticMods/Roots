@@ -17,7 +17,8 @@
       {
         "tag": "c:dusts/redstone"
       }
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:gathering"
 }

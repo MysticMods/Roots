@@ -45,6 +45,7 @@
         "tag": "c:bones"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 12,
       "id": "minecraft:bone_meal"

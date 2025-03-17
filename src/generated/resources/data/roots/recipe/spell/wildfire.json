@@ -18,6 +18,7 @@
         "item": "minecraft:lava_bucket"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

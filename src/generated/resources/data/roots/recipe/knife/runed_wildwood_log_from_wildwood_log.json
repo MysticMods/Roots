@@ -4,7 +4,8 @@
   "data": {
     "playerConditions": [
       "roots:runed_log_off_hand"
-    ]
+    ],
+    "priority": 0
   },
   "durabilityCost": 1,
   "stateMapper": {

@@ -18,6 +18,7 @@
         "tag": "minecraft:wool"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

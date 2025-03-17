@@ -35,6 +35,7 @@
         "tag": "c:crops/sugar_cane"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 3,
       "id": "minecraft:sugar"

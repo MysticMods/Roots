@@ -17,7 +17,8 @@
       {
         "tag": "c:bricks"
       }
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:warding"
 }

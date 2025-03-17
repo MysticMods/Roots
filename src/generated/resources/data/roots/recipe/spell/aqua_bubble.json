@@ -18,6 +18,7 @@
         "tag": "c:crops/sugar_cane"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

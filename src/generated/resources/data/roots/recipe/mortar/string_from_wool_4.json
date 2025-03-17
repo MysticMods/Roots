@@ -15,6 +15,7 @@
         "tag": "minecraft:wool"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 4,
       "id": "minecraft:string"

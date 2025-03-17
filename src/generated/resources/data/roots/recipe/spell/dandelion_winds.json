@@ -18,6 +18,7 @@
         "tag": "c:seeds"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

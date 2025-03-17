@@ -18,6 +18,7 @@
         "item": "roots:glass_eye"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

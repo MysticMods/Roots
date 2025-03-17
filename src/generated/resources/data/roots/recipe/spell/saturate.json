@@ -18,6 +18,7 @@
         "item": "minecraft:baked_potato"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

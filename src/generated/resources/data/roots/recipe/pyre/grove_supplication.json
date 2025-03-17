@@ -20,7 +20,8 @@
     ],
     "levelConditions": [
       "roots:inactive_primal_grove_stone"
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:grove_supplication"
 }

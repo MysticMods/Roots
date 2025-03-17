@@ -18,6 +18,7 @@
         "item": "minecraft:tripwire_hook"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

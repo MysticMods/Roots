@@ -18,6 +18,7 @@
     "levelConditions": [
       "roots:active_grove_stone"
     ],
+    "priority": 0,
     "result": {
       "count": 4,
       "id": "roots:runed_obsidian"

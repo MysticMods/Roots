@@ -101,9 +101,7 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return new UnlockResult(result, player);
   }
 
-  default int getPriority() {
-    return 0;
-  }
+  int getPriority();
 
   default boolean isDynamic() {
     return false;

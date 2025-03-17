@@ -9,6 +9,7 @@
         "tag": "c:gravels"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 2,
       "id": "minecraft:flint"

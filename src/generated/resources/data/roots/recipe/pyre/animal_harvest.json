@@ -22,7 +22,8 @@
       "roots:3_high_rune_pillar",
       "roots:4_high_rune_pillar",
       "roots:3_high_rune_pillar"
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:animal_harvest"
 }

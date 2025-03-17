@@ -9,6 +9,7 @@
         "item": "minecraft:magma_block"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 8,
       "id": "minecraft:magma_cream"

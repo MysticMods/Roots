@@ -17,7 +17,8 @@
       {
         "tag": "c:mushrooms"
       }
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:summon_creatures"
 }

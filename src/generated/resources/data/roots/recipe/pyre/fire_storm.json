@@ -17,7 +17,8 @@
       {
         "item": "minecraft:magma_block"
       }
-    ]
+    ],
+    "priority": 0
   },
   "ritual": "roots:fire_storm"
 }

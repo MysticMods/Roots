@@ -18,6 +18,7 @@
         "tag": "c:glass_blocks"
       }
     ],
+    "priority": 0,
     "unlocks": [
       {
         "type": "roots:spell",

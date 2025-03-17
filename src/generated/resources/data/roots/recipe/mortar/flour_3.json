@@ -12,6 +12,7 @@
         "tag": "c:crops/wheat"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 3,
       "id": "roots:flour"

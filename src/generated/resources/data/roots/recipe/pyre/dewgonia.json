@@ -18,6 +18,7 @@
         "item": "minecraft:kelp"
       }
     ],
+    "priority": 0,
     "result": {
       "count": 2,
       "id": "roots:dewgonia"
