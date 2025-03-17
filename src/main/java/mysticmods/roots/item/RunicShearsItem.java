@@ -101,7 +101,7 @@ public class RunicShearsItem extends ShearsItem {
       boolean anySheared = false;
       for (LivingEntity newTarget : entity.level().getEntitiesOfClass(LivingEntity.class, aabb)) {
         if (newTarget instanceof IShearable) {
-          if (doShear((IShearable) newTarget, player, heldItem, newTarget, pos, hand)) {
+          if (doShear(target, player, heldItem, newTarget, entity, pos, hand)) {
             anySheared = true;
           }
         }
@@ -116,13 +116,13 @@ public class RunicShearsItem extends ShearsItem {
     return InteractionResult.PASS;
   }
 
-  protected boolean doShear(IShearable target, Player player, ItemStack heldItem, LivingEntity entity, BlockPos pos, InteractionHand hand) {
+  protected boolean doShear(IShearable target, Player player, ItemStack heldItem, LivingEntity entity, LivingEntity original, BlockPos pos, InteractionHand hand) {
     if (target.isShearable(player, heldItem, entity.level(), pos)) {
       // EnchantmentHelper.getItemEnchantmentLevel(entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FORTUNE), heldItem)
       List<ItemStack> drops = target.onSheared(player, heldItem, entity.level(), pos);
       Random rand = new java.util.Random();
       drops.forEach(d -> {
-        ItemEntity ent = player.spawnAtLocation(d, 1.0F);
+        ItemEntity ent = original.spawnAtLocation(d, 1.0F);
         ent.setDeltaMovement(ent.getDeltaMovement()
             .add((rand.nextFloat() - rand.nextFloat()) * 0.1F, rand.nextFloat() * 0.05F, (rand.nextFloat() - rand.nextFloat()) * 0.1F));
       });
