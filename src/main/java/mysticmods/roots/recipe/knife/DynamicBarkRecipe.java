@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
+import mysticmods.roots.api.test.world.AlwaysTrueWorldTest;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModItems;
@@ -32,7 +33,8 @@ public class DynamicBarkRecipe extends KnifeRecipe {
   public static ResourceLocation IDENTIFIER = RootsAPI.rl("bark/dynamic_modded_wood_bark");
 
   public DynamicBarkRecipe() {
-    super(new BaseRecipeData(), new PartialBlockState(Blocks.AIR), Collections.emptyList(), Collections.emptyList(), 1);
+    // TODO: Should this be "AlwaysTrueTest"?
+    super(new BaseRecipeData(), null, new PartialBlockState(Blocks.AIR), Collections.emptyList(), Collections.emptyList(), 1);
   }
 
   private ItemStack newResult = null;

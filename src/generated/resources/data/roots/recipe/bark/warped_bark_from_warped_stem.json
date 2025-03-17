@@ -1,16 +1,6 @@
 {
   "type": "roots:bark",
-  "condition": [
-    {
-      "modifyPosition": true,
-      "name": "origin",
-      "shift": "none",
-      "test": {
-        "type": "roots:tag_match_test",
-        "tag": "roots:bark_logs/warped"
-      }
-    }
-  ],
+  "condition": [],
   "data": {
     "result": {
       "count": 3,
@@ -23,5 +13,9 @@
       "minecraft:warped_hyphae": "minecraft:stripped_warped_hyphae",
       "minecraft:warped_stem": "minecraft:stripped_warped_stem"
     }
+  },
+  "test": {
+    "type": "roots:tag_match_test",
+    "tag": "roots:bark_logs/warped"
   }
 }

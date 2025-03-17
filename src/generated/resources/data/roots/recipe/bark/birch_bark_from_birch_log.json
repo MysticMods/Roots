@@ -1,16 +1,6 @@
 {
   "type": "roots:bark",
-  "condition": [
-    {
-      "modifyPosition": true,
-      "name": "origin",
-      "shift": "none",
-      "test": {
-        "type": "roots:tag_match_test",
-        "tag": "roots:bark_logs/birch"
-      }
-    }
-  ],
+  "condition": [],
   "data": {
     "result": {
       "count": 3,
@@ -23,5 +13,9 @@
       "minecraft:birch_log": "minecraft:stripped_birch_log",
       "minecraft:birch_wood": "minecraft:stripped_birch_wood"
     }
+  },
+  "test": {
+    "type": "roots:tag_match_test",
+    "tag": "roots:bark_logs/birch"
   }
 }

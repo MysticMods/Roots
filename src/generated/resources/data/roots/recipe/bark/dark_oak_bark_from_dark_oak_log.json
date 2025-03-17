@@ -1,16 +1,6 @@
 {
   "type": "roots:bark",
-  "condition": [
-    {
-      "modifyPosition": true,
-      "name": "origin",
-      "shift": "none",
-      "test": {
-        "type": "roots:tag_match_test",
-        "tag": "roots:bark_logs/dark_oak"
-      }
-    }
-  ],
+  "condition": [],
   "data": {
     "result": {
       "count": 3,
@@ -23,5 +13,9 @@
       "minecraft:dark_oak_log": "minecraft:stripped_dark_oak_log",
       "minecraft:dark_oak_wood": "minecraft:stripped_dark_oak_wood"
     }
+  },
+  "test": {
+    "type": "roots:tag_match_test",
+    "tag": "roots:bark_logs/dark_oak"
   }
 }

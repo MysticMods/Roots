@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.api.test.world.WorldTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,12 +22,15 @@ import java.util.List;
 
 public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<ItemStackHandler, W> implements IWorldRecipe<W> {
   @Nullable
+  protected final WorldTest test;
+  @Nullable
   protected PartialBlockState outputState;
   protected List<WorldCondition> conditions;
-  protected List<String> skipProperties = new ArrayList<>();
+  protected List<String> skipProperties;
 
-  public WorldRecipe(BaseRecipeData data, PartialBlockState outputState, List<WorldCondition> conditions, List<String> skipProperties) {
+  public WorldRecipe(BaseRecipeData data, WorldTest test, PartialBlockState outputState, List<WorldCondition> conditions, List<String> skipProperties) {
     super(data);
+    this.test = test;
     this.outputState = outputState;
     this.conditions = conditions;
     this.skipProperties = skipProperties;
@@ -36,6 +40,11 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   @Nullable
   public PartialBlockState getOutputState() {
     return this.outputState;
+  }
+
+  @Nullable
+  public WorldTest getTest() {
+    return test;
   }
 
   @Override
@@ -50,6 +59,12 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
 
   @Override
   public boolean matches(W pContainer, Level pLevel) {
+    if (test != null) {
+      BlockState state = pContainer.getBlockState();
+      if (!test.test(state, pLevel.getRandom())) {
+        return false;
+      }
+    }
     for (WorldCondition condition : getConditions()) {
       if (!condition.test(pContainer.getBlockPos(), pLevel, pLevel.getRandom())) {
         return false;

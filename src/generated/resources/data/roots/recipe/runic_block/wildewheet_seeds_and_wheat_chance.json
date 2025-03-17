@@ -1,21 +1,6 @@
 {
   "type": "roots:runic_block",
-  "condition": [
-    {
-      "modifyPosition": true,
-      "name": "origin",
-      "shift": "none",
-      "test": {
-        "type": "roots:partial_block_state_match_test",
-        "partial_block_state": {
-          "block": "minecraft:wheat",
-          "properties": {
-            "age": "7"
-          }
-        }
-      }
-    }
-  ],
+  "condition": [],
   "data": {
     "chanceOutputs": [
       {
@@ -37,5 +22,14 @@
   },
   "skipProperties": [
     "age"
-  ]
+  ],
+  "test": {
+    "type": "roots:partial_block_state_match_test",
+    "partial_block_state": {
+      "block": "minecraft:wheat",
+      "properties": {
+        "age": "7"
+      }
+    }
+  }
 }

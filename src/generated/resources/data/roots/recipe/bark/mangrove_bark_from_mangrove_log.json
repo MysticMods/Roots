@@ -1,16 +1,6 @@
 {
   "type": "roots:bark",
-  "condition": [
-    {
-      "modifyPosition": true,
-      "name": "origin",
-      "shift": "none",
-      "test": {
-        "type": "roots:tag_match_test",
-        "tag": "roots:bark_logs/mangrove"
-      }
-    }
-  ],
+  "condition": [],
   "data": {
     "result": {
       "count": 3,
@@ -23,5 +13,9 @@
       "minecraft:mangrove_log": "minecraft:stripped_mangrove_log",
       "minecraft:mangrove_wood": "minecraft:stripped_mangrove_wood"
     }
+  },
+  "test": {
+    "type": "roots:tag_match_test",
+    "tag": "roots:bark_logs/mangrove"
   }
 }

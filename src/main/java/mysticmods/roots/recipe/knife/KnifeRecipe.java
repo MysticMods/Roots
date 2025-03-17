@@ -3,12 +3,14 @@ package mysticmods.roots.recipe.knife;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
 import mysticmods.roots.api.recipe.WorldRecipe;
 import mysticmods.roots.api.reference.Identifiers;
 import mysticmods.roots.api.test.world.PartialBlockState;
+import mysticmods.roots.api.test.world.WorldTest;
 import mysticmods.roots.init.ModRecipes;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -35,6 +37,7 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
   public static MapCodec<KnifeRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.codec().optionalFieldOf("data")
           .forGetter(o -> o.data.isEmpty() ? Optional.empty() : Optional.of(o.data)),
+      WorldTest.CODEC.optionalFieldOf("test").forGetter(o -> Optional.ofNullable(o.test)),
       PartialBlockState.CODEC.optionalFieldOf("outputState").forGetter((o) -> Optional.ofNullable(o.outputState)),
       WorldCondition.LIST_CODEC.fieldOf("condition").forGetter(o -> o.conditions),
       Codec.STRING.listOf().optionalFieldOf("skipProperties")
@@ -42,8 +45,9 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
       Codec.INT.fieldOf("durabilityCost").forGetter((o) -> o.durabilityCost),
       OutputStateMapper.CODEC.optionalFieldOf("stateMapper").forGetter(o -> Optional.ofNullable(o.stateMapper))
   ).apply(instance, KnifeRecipe::new));
-  public static StreamCodec<RegistryFriendlyByteBuf, KnifeRecipe> STREAM_CODEC = StreamCodec.composite(
+  public static StreamCodec<RegistryFriendlyByteBuf, KnifeRecipe> STREAM_CODEC = ExtraStreamCodecs.composite(
       BaseRecipeData.STREAM_CODEC, o -> o.data,
+      ByteBufCodecs.optional(WorldTest.STREAM_CODEC), o -> Optional.ofNullable(o.test),
       ByteBufCodecs.optional(PartialBlockState.STREAM_CODEC), o -> Optional.ofNullable(o.outputState),
       WorldCondition.LIST_STREAM_CODEC, o -> o.conditions,
       ByteBufCodecs.optional(ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list())), o -> o.skipProperties.isEmpty() ? Optional.empty() : Optional.of(o.skipProperties),
@@ -55,25 +59,25 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
   private int durabilityCost = 1;
   private OutputStateMapper stateMapper;
 
-  public KnifeRecipe(BaseRecipeData data, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost) {
-    super(data, outputState, condition, skipProperties);
+  public KnifeRecipe(BaseRecipeData data, WorldTest test, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost) {
+    super(data, test, outputState, condition, skipProperties);
     this.durabilityCost = durabilityCost;
   }
 
-  public KnifeRecipe(BaseRecipeData data, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost, OutputStateMapper stateMapper) {
-    super(data, outputState, condition, skipProperties);
+  public KnifeRecipe(BaseRecipeData data, WorldTest test, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost, OutputStateMapper stateMapper) {
+    super(data, test, outputState, condition, skipProperties);
     this.stateMapper = stateMapper;
     this.durabilityCost = durabilityCost;
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  public KnifeRecipe(BaseRecipeData baseRecipeData, Optional<PartialBlockState> partialBlockState, List<WorldCondition> worldCondition, Optional<List<String>> skipProperties, int durabilityCost, Optional<OutputStateMapper> stateMapper) {
-    this(baseRecipeData, partialBlockState.orElse(null), worldCondition, skipProperties.orElse(Collections.emptyList()), durabilityCost, stateMapper.orElse(null));
+  public KnifeRecipe(BaseRecipeData baseRecipeData, Optional<WorldTest> test, Optional<PartialBlockState> partialBlockState, List<WorldCondition> worldCondition, Optional<List<String>> skipProperties, int durabilityCost, Optional<OutputStateMapper> stateMapper) {
+    this(baseRecipeData, test.orElse(null), partialBlockState.orElse(null), worldCondition, skipProperties.orElse(Collections.emptyList()), durabilityCost, stateMapper.orElse(null));
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  public KnifeRecipe(Optional<BaseRecipeData> baseRecipeData, Optional<PartialBlockState> partialBlockState, List<WorldCondition> worldCondition, Optional<List<String>> strings, int durabilityCost, Optional<OutputStateMapper> outputStateMapper) {
-    super(baseRecipeData.orElse(new BaseRecipeData()), partialBlockState.orElse(null), worldCondition, strings.orElse(Collections.emptyList()));
+  public KnifeRecipe(Optional<BaseRecipeData> baseRecipeData, Optional<WorldTest> test, Optional<PartialBlockState> partialBlockState, List<WorldCondition> worldCondition, Optional<List<String>> strings, int durabilityCost, Optional<OutputStateMapper> outputStateMapper) {
+    super(baseRecipeData.orElse(new BaseRecipeData()), test.orElse(null), partialBlockState.orElse(null), worldCondition, strings.orElse(Collections.emptyList()));
     this.stateMapper = outputStateMapper.orElse(null);
     this.durabilityCost = durabilityCost;
   }
@@ -157,6 +161,7 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   public static class Builder {
     private PartialBlockState outputState;
+    private WorldTest test;
     private List<WorldCondition> condition = new ArrayList<>();
     private OutputStateMapper stateMapper;
     private int durabilityCost = 1;
@@ -169,6 +174,11 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
       this.outputState = outputState;
       this.condition = condition;
       this.stateMapper = stateMapper;
+    }
+
+    public Builder test (WorldTest test) {
+      this.test = test;
+      return this;
     }
 
     public Builder stateMapper(OutputStateMapper stateMapper) {
@@ -220,10 +230,10 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
     }
 
     public KnifeRecipe build(BaseRecipeData data) {
-      if (outputState == null && stateMapper == null || stateMapper.isEmpty()) {
-        throw new IllegalStateException("Cannot build a bark recipe without an output state or state mapper");
+      if (outputState == null && (stateMapper == null || stateMapper.isEmpty() || test == null)) {
+        throw new IllegalStateException("Cannot build a bark recipe without an output state or test or state mapper");
       }
-      return new KnifeRecipe(data, outputState, condition, skipProperties, durabilityCost, stateMapper);
+      return new KnifeRecipe(data, test, outputState, condition, skipProperties, durabilityCost, stateMapper);
     }
 
     public KnifeRecipe build(BaseRecipeData.Builder data) {
