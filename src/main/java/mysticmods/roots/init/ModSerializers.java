@@ -7,6 +7,7 @@ import mysticmods.roots.api.property.PropertyType;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.recipe.PouchDyeRecipe;
+import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -35,7 +36,8 @@ public class ModSerializers {
   public static final DeferredHolder<RecipeSerializer<?>, MortarRecipe.Serializer> MORTAR = RECIPE_SERIALIZERS.register("mortar", MortarRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, PyreRecipe.Serializer> PYRE = RECIPE_SERIALIZERS.register("pyre", PyreRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, SummonCreaturesRecipe.Serializer> SUMMON_CREATURES = RECIPE_SERIALIZERS.register("pyre_pedestal", SummonCreaturesRecipe.Serializer::new);
-  public static final DeferredHolder<RecipeSerializer<?>, KnifeRecipe.Serializer> BARK = RECIPE_SERIALIZERS.register("bark", KnifeRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, KnifeRecipe.Serializer> KNIFE = RECIPE_SERIALIZERS.register("knife", KnifeRecipe.Serializer::new);
+  public static final DeferredHolder<RecipeSerializer<?>, KnifeOffHandRecipe.Serializer> KNIFE_OFF_HAND = RECIPE_SERIALIZERS.register("knife_off_hand", KnifeOffHandRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, RunicBlockRecipe.Serializer> RUNIC_BLOCK = RECIPE_SERIALIZERS.register("runic_block", RunicBlockRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, RunicEntityRecipe.Serializer> RUNIC_ENTITY = RECIPE_SERIALIZERS.register("runic_entity", RunicEntityRecipe.Serializer::new);
   public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<PouchDyeRecipe>> DYE_POUCH = RECIPE_SERIALIZERS.register("dye_pouch", () -> new SimpleCraftingRecipeSerializer<>(PouchDyeRecipe::new));

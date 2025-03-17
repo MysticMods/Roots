@@ -56,8 +56,8 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
       KnifeRecipe::new
   );
 
-  private int durabilityCost = 1;
-  private OutputStateMapper stateMapper;
+  protected int durabilityCost = 1;
+  protected OutputStateMapper stateMapper;
 
   public KnifeRecipe(BaseRecipeData data, WorldTest test, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost) {
     super(data, test, outputState, condition, skipProperties);
@@ -133,7 +133,7 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return ModSerializers.BARK.get();
+    return ModSerializers.KNIFE.get();
   }
 
   @Override

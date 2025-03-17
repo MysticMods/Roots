@@ -48,8 +48,6 @@ public class ModConditions {
   public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = LEVEL.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
       .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
 
-  public static final DeferredHolder<PlayerCondition, PlayerCondition.PlayerOffHandTaggedItemCondition> RUNED_LOG_OFF_HAND = PLAYER.register("runed_log_off_hand", () -> new PlayerCondition.PlayerOffHandTaggedItemCondition(RootsTags.Items.RUNIC_SHEARS));
-
   public static void register(IEventBus bus) {
     LEVEL.register(bus);
     PLAYER.register(bus);

@@ -1,13 +1,8 @@
 {
-  "type": "roots:bark",
+  "type": "roots:knife_off_hand",
   "condition": [],
-  "data": {
-    "playerConditions": [
-      "roots:runed_log_off_hand"
-    ],
-    "priority": 100
-  },
   "durabilityCost": 1,
+  "offHandTag": "roots:runed_log_herbs",
   "stateMapper": {
     "mapBlock": {
       "minecraft:mangrove_log": "roots:runed_mangrove_log",

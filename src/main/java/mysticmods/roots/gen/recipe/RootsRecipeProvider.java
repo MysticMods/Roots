@@ -11,6 +11,7 @@ import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.*;
 import mysticmods.roots.recipe.PouchDyeRecipe;
+import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
@@ -777,12 +778,12 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.OAK_BARK, 2)), c, RootsAPI.rl("knife/oak_bark_from_oak_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.OAK_LOGS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.OAK_LOG, ModBlocks.RUNED_OAK_LOG.get(), Blocks.OAK_WOOD, ModBlocks.RUNED_OAK_LOG.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_oak_log_from_oak_log"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_oak_log_from_oak_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.BIRCH_LOGS_TO_STRIP))
@@ -792,12 +793,12 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.BIRCH_BARK, 2)), c, RootsAPI.rl("knife/birch_bark_from_birch_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.BIRCH_LOGS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.BIRCH_LOG, ModBlocks.RUNED_BIRCH_LOG.get(), Blocks.BIRCH_WOOD, ModBlocks.RUNED_BIRCH_LOG.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_birch_log_from_birch_log"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_birch_log_from_birch_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.SPRUCE_LOGS_TO_STRIP))
@@ -807,12 +808,12 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.SPRUCE_BARK, 2)), c, RootsAPI.rl("knife/spruce_bark_from_spruce_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.SPRUCE_LOGS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.SPRUCE_LOG, ModBlocks.RUNED_SPRUCE_LOG.get(), Blocks.SPRUCE_WOOD, ModBlocks.RUNED_SPRUCE_LOG.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_spruce_log_from_spruce_log"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_spruce_log_from_spruce_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.JUNGLE_LOGS_TO_STRIP))
@@ -822,12 +823,12 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.JUNGLE_BARK, 2)), c, RootsAPI.rl("knife/jungle_bark_from_jungle_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.JUNGLE_LOGS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.JUNGLE_LOG, ModBlocks.RUNED_JUNGLE_LOG.get(), Blocks.JUNGLE_WOOD, ModBlocks.RUNED_JUNGLE_LOG.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_jungle_log_from_jungle_log"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_jungle_log_from_jungle_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.ACACIA_LOGS_TO_STRIP))
@@ -837,12 +838,12 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.ACACIA_BARK, 2)), c, RootsAPI.rl("knife/acacia_bark_from_acacia_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.ACACIA_LOGS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.ACACIA_LOG, ModBlocks.RUNED_ACACIA_LOG.get(), Blocks.ACACIA_WOOD, ModBlocks.RUNED_ACACIA_LOG.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_acacia_log_from_acacia_log"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_acacia_log_from_acacia_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.DARK_OAK_LOGS_TO_STRIP))
@@ -852,12 +853,12 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.DARK_OAK_BARK, 2)), c, RootsAPI.rl("knife/dark_oak_bark_from_dark_oak_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.DARK_OAK_LOGS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.DARK_OAK_LOG, ModBlocks.RUNED_DARK_OAK_LOG.get(), Blocks.DARK_OAK_WOOD, ModBlocks.RUNED_DARK_OAK_LOG.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_dark_oak_log_from_dark_oak_log"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_dark_oak_log_from_dark_oak_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.CRIMSON_STEMS_TO_STRIP))
@@ -867,12 +868,12 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.CRIMSON_BARK, 2)), c, RootsAPI.rl("knife/crimson_bark_from_crimson_stem"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.CRIMSON_STEMS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.CRIMSON_STEM, ModBlocks.RUNED_CRIMSON_STEM.get(), Blocks.CRIMSON_HYPHAE, ModBlocks.RUNED_CRIMSON_STEM.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_crimson_stem_from_crimson_stem"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_crimson_stem_from_crimson_stem"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.WARPED_STEMS_TO_STRIP))
@@ -882,12 +883,13 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.WARPED_BARK, 2)), c, RootsAPI.rl("knife/warped_bark_from_warped_stem"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.WARPED_STEMS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.WARPED_STEM, ModBlocks.RUNED_WARPED_STEM.get(), Blocks.WARPED_HYPHAE, ModBlocks.RUNED_WARPED_STEM.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_warped_stem_from_warped_stem"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_warped_stem_from_warped_stem"));
+
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.MANGROVE_LOGS_TO_STRIP))
@@ -897,12 +899,12 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.MANGROVE_BARK, 2)), c, RootsAPI.rl("knife/mangrove_bark_from_mangrove_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.MANGROVE_LOGS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(Blocks.MANGROVE_LOG, ModBlocks.RUNED_MANGROVE_LOG.get(), Blocks.MANGROVE_WOOD, ModBlocks.RUNED_MANGROVE_LOG.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_mangrove_log_from_mangrove_log"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_mangrove_log_from_mangrove_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(KnifeRecipe.Builder.create()
         .test(new TagMatchWorldTest(RootsTags.Blocks.WILDWOOD_LOGS_TO_STRIP))
@@ -912,12 +914,13 @@ public class RootsRecipeProvider extends RecipeProvider {
             .result(ModItems.WILDWOOD_BARK, 2)), c, RootsAPI.rl("knife/wildwood_bark_from_wildwood_log"));
 
     RecipeSaver.saver().unlockedBy("has_knife", has(RootsTags.Items.KNIVES)).save(
-        KnifeRecipe.Builder.create()
+        KnifeOffHandRecipe.Builder.create()
             .test(new TagMatchWorldTest(RootsTags.Blocks.WILDWOOD_LOGS_TO_STRIP))
+            .tag(RootsTags.Items.RUNED_LOG_HERBS)
             .stateMapper(ModBlocks.WILDWOOD_LOG.get(), ModBlocks.RUNED_WILDWOOD_LOG.get(), ModBlocks.WILDWOOD_WOOD.get(), ModBlocks.RUNED_WILDWOOD_LOG.get())
             .build(BaseRecipeData.Builder.create()
-                .priority(100)
-                .condition(ModConditions.RUNED_LOG_OFF_HAND.get())), c, RootsAPI.rl("knife/runed_wildwood_log_from_wildwood_log"));
+                .priority(100)), c, RootsAPI.rl("knife/runed_wildwood_log_from_wildwood_log"));
+
 
     BaseRecipeData.Builder groveRunestoneBuilder = BaseRecipeData.Builder.create()
         .requires(RootsTags.Items.STONELIKE)
