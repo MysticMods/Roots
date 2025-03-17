@@ -107,7 +107,7 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
 
   @Nullable
   public RecipeHolder<T> findRecipe(C inventory, Level level) {
-    if (lastRecipe != null && !lastRecipe.value().isDynamic() && lastRecipe.value().matches(inventory, level)) {
+    if (lastRecipe != null && !lastRecipe.value().isDynamic() && lastRecipe.value().getPriority() >= 0 && lastRecipe.value().matches(inventory, level)) {
       return lastRecipe;
     }
     for (RecipeHolder<T> recipe : getRecipes()) {
