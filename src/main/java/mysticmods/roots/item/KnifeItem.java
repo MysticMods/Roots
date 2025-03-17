@@ -2,6 +2,9 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.recipe.ConditionResult;
+import mysticmods.roots.api.recipe.UnlockResult;
+import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
@@ -24,7 +27,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -71,7 +76,26 @@ public class KnifeItem extends TieredItem {
     SimpleWorldCrafting crafting = new SimpleWorldCrafting(player, level, blockpos, blockstate, pContext);
     RecipeHolder<KnifeRecipe> recipe = ResolvedRecipes.KNIFE.findRecipe(crafting, level);
     ItemStack itemstack = pContext.getItemInHand();
-    if (recipe != null) {
+    if (recipe != null && !level.isClientSide()) {
+      ConditionResult conditionResult = recipe.value()
+          .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), blockpos);
+      if (conditionResult.anyFailed()) {
+        RootsAPI.LOG.info("Conditions failed.");
+        conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        conditionResult.report(player);
+        return InteractionResult.FAIL;
+      }
+
+      UnlockResult failedGrants = recipe.value().checkUnlocks(level, (ServerPlayer) player);
+      if (failedGrants.anyFailed() && !recipe.value().hasOutput(level.registryAccess())) {
+        RootsAPI.LOG.info("Grants failed and recipe has no output");
+        // TODO:
+        /*        failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
+        failedGrants.report();
+        return InteractionResult.FAIL;
+      }
+
       level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
 
       if (player instanceof ServerPlayer) {
@@ -156,7 +180,8 @@ public class KnifeItem extends TieredItem {
         }
       }
 
-      item.hurtAndBreak(1, level, null, o -> {});
+      item.hurtAndBreak(1, level, null, o -> {
+      });
 
       return item;
     }

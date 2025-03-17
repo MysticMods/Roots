@@ -2,6 +2,9 @@ package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.EntityCooldowns;
+import mysticmods.roots.api.recipe.ConditionResult;
+import mysticmods.roots.api.recipe.UnlockResult;
+import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModSounds;
@@ -75,7 +78,7 @@ public class RunicShearsItem extends ShearsItem {
         if (EntityCooldowns.hasExpired(entity, ModAttachments.RUNIC_SHEARS_ENTITY_COOLDOWN)) {
           EntityCooldowns.setExpiresAt(entity, ModAttachments.RUNIC_SHEARS_ENTITY_COOLDOWN, server.getTickCount() + recipe.value()
               .getCooldown());
-          level.playSound(null, player.blockPosition(), ModSounds.SQUID_MILK.get(), SoundSource.PLAYERS, 0.5f, level.getRandom()
+          level.playSound(null, player.blockPosition(), SoundEvents.AXE_STRIP, SoundSource.PLAYERS, 0.5f, level.getRandom()
               .nextFloat() * 0.25f + 0.6f);
           heldItem.hurtAndBreak(recipe.value()
               .getDurabilityCost(), player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND); // TODO: Check hand
@@ -148,6 +151,26 @@ public class RunicShearsItem extends ShearsItem {
     RecipeHolder<RunicBlockRecipe> recipe = ResolvedRecipes.RUNIC_BLOCK.findRecipe(crafting, level);
     ItemStack itemstack = pContext.getItemInHand();
     if (recipe != null) {
+      ConditionResult conditionResult = recipe.value()
+          .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), blockpos);
+      if (conditionResult.anyFailed()) {
+        RootsAPI.LOG.info("Conditions failed.");
+        conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        conditionResult.report(player);
+        return InteractionResult.FAIL;
+      }
+
+      UnlockResult failedGrants = recipe.value().checkUnlocks(level, (ServerPlayer) player);
+      if (failedGrants.anyFailed() && !recipe.value().hasOutput(level.registryAccess())) {
+        RootsAPI.LOG.info("Grants failed and recipe has no output");
+        // TODO:
+        /*        failedUnlocks.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed grant of type " + o.type().name() + " with id " + o.id()));*/
+        failedGrants.report();
+        return InteractionResult.FAIL;
+      }
+
+
       level.playSound(player, blockpos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
 
       if (player instanceof ServerPlayer) {
