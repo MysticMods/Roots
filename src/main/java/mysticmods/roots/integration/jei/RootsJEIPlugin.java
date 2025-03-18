@@ -4,8 +4,10 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredientType;
+import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
+import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
@@ -22,7 +24,10 @@ import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 
@@ -64,17 +69,34 @@ public class RootsJEIPlugin implements IModPlugin {
 
   @Override
   public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-    registration.addRecipeCatalyst(ModBlocks.GROVE_CRAFTER.get(), GROVE_RECIPE_TYPE);
-    registration.addRecipeCatalyst(ModBlocks.MORTAR.get(), MORTAR_RECIPE_TYPE);
-    registration.addRecipeCatalyst(ModBlocks.PYRE.get(), PYRE_RECIPE_TYPE);
-    registration.addRecipeCatalyst(ModBlocks.SOUL_PYRE.get(), PYRE_RECIPE_TYPE);
-    registration.addRecipeCatalyst(ModBlocks.REINFORCED_PYRE.get(), PYRE_RECIPE_TYPE);
-    registration.addRecipeCatalyst(ModBlocks.REINFORCED_SOUL_PYRE.get(), PYRE_RECIPE_TYPE);
+    registration.addRecipeCatalysts(GROVE_RECIPE_TYPE, ModBlocks.GROVE_CRAFTER.get(), ModBlocks.GROVE_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get());
+    registration.addRecipeCatalysts(MORTAR_RECIPE_TYPE, ModBlocks.MORTAR.get(), ModItems.PESTLE.get());
+        registration.addRecipeCatalysts(PYRE_RECIPE_TYPE, ModBlocks.PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get());
     registration.addRecipeCatalysts(KNIFE_RECIPE_TYPE, ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLD_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.WOODEN_KNIFE.get());
   }
 
+  public static IJeiRuntime runtime = null;
+
   @Override
-  public void registerIngredientAliases(IIngredientAliasRegistration registration) {
-    IModPlugin.super.registerIngredientAliases(registration);
+  public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+    runtime = jeiRuntime;
+  }
+
+  @Override
+  public void onRuntimeUnavailable() {
+    runtime = null;
+  }
+
+  @Nullable
+  public static <V> ITypedIngredient<V> getTypedIngredient (V ingredient) {
+    if (runtime == null) {
+      return null;
+    }
+    return runtime.getIngredientManager().createTypedIngredient(ingredient).orElse(null);
+  }
+
+  @Nullable
+  public static ITypedIngredient<ItemStack> createItemIngredient (ItemLike item) {
+    return getTypedIngredient(new ItemStack(item));
   }
 }

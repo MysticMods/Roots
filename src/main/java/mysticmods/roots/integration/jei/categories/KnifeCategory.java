@@ -71,11 +71,6 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
       }
     }
 
-/*
-    builder.addSlot(RecipeIngredientRole.OUTPUT, 128, 35)
-        .addItemStack(recipe.getResultItem(provider));
-*/
-
     List<ChanceOutput> outputs = recipe.getCachedOutputs();
 
     int row = 0;
@@ -117,11 +112,11 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
       if (recipe.getOutputState() != null) {
         // TODO: Create a recipe that uses this
         BlockState output = recipe.getOutputState().build();
-        builder.addWidget(new WorldTestWidget(12, 32, 24, 24, output, new ItemStack(output.getBlock())));
+        builder.addWidget(new WorldTestWidget(12, 29, 24, 24, output, RootsJEIPlugin.createItemIngredient(output.getBlock())));
       }
-      if (recipe.getTest() != null && recipe.getStateMapper() == null) {
+      if (recipe.getTest() != null/* && recipe.getStateMapper() == null*/) {
         BlockState output = recipe.getTest().getBlockState(provider);
-        builder.addWidget(new WorldTestWidget(35, 30, 24, 24, output, new ItemStack(output.getBlock())));
+        builder.addWidget(new WorldTestWidget(3, 29, 24, 24, output, RootsJEIPlugin.createItemIngredient(output.getBlock())));
       }
     }
   }
