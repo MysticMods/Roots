@@ -1,20 +1,30 @@
 package mysticmods.roots.api.test.world;
 
+import com.google.common.collect.Lists;
 import com.mojang.serialization.MapCodec;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class TagMatchWorldTest extends WorldTest {
   public static final MapCodec<TagMatchWorldTest> CODEC = TagKey.codec(Registries.BLOCK).fieldOf("tag")
@@ -22,9 +32,11 @@ public class TagMatchWorldTest extends WorldTest {
   public static final StreamCodec<ByteBuf, TagMatchWorldTest> STREAM_CODEC = ExtraStreamCodecs.BLOCK_TAG_STREAM_CODEC.map(TagMatchWorldTest::new, o -> o.tag);
   public static final ResourceKey<WorldTestType<?>> TAG_MATCH_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("tag_match_test"));
   private final TagKey<Block> tag;
+  private final Ingredient ingredient;
 
   public TagMatchWorldTest(TagKey<Block> tag) {
     this.tag = tag;
+    this.ingredient = Ingredient.of(TagKey.create(Registries.ITEM, tag.location()));
   }
 
   public TagKey<Block> getTag() {
@@ -44,6 +56,11 @@ public class TagMatchWorldTest extends WorldTest {
     } catch (Exception e) {
       return Blocks.AIR.defaultBlockState();
     }
+  }
+
+  @Override
+  public @Nullable Ingredient getIngredient() {
+    return ingredient;
   }
 
   @Override

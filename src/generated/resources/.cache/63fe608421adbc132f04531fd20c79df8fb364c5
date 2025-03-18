@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-17T12:26:54.6139289	Roots Item Tags
+// 1.21.1	2025-03-18T12:28:25.5088017	Roots Item Tags
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
 3f83552202a0038e9d4952c7c3d00b3fd6d2d9a7 data/c/tags/item/nuggets/copper.json
@@ -30,6 +30,16 @@ a1a905fc0c40dbeb097d5eab709a2633e8e6756d data/roots/tags/item/barks/mixed.json
 0c26a98ba7c57280bd9e86241acebe3b15efde75 data/roots/tags/item/barks/spruce.json
 8473498616c937e7a388109a090efa57399841ab data/roots/tags/item/barks/warped.json
 76ab64b1af0fd463675cc19a388b583f04d4df91 data/roots/tags/item/barks/wildwood.json
+307dae19f196ef71116992f2c10a1d6367d71c5e data/roots/tags/item/bark_logs/acacia.json
+e6a66df990a2e59f597879f3e0d9245712d32f88 data/roots/tags/item/bark_logs/birch.json
+2ddd875c07a1d545574ca44984d769bb007a839e data/roots/tags/item/bark_logs/crimson.json
+5f5643831865b48706a8ff8da2bf2bcd7d5e929d data/roots/tags/item/bark_logs/dark_oak.json
+9f76ce32d2132a2dc0b2c123e4808332394251d9 data/roots/tags/item/bark_logs/jungle.json
+ef69f74d96a0b9cd58f7e8f004b2c7a830741305 data/roots/tags/item/bark_logs/mangrove.json
+6e496f1f3bd31bbed2abd5ec85bc028d3babe3d6 data/roots/tags/item/bark_logs/oak.json
+e025f5442dbf42cdb4e53084ad686f26138d8e97 data/roots/tags/item/bark_logs/spruce.json
+c6d64392f19c3ab3c5d775941e0be342c11f81e7 data/roots/tags/item/bark_logs/warped.json
+59f27b44b52c25fc43bc5215549f9f18b728567b data/roots/tags/item/bark_logs/wildwood.json
 7f7d5f6cc9b5cfb39d240fc901c4ae2d2037ec14 data/roots/tags/item/bottles.json
 e20fa114ea0bf630f3835dacec5a5cbedb4e3b60 data/roots/tags/item/capstones/any.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/item/capstones/log/acacia.json
@@ -159,6 +169,7 @@ a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/item/seeds/pereskia.jso
 56557294f6a5c85d9b4eb4d23a781ed386a9f56c data/roots/tags/item/soils/elemental.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/item/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/item/soils/water.json
+05bb766c4ed71aacf3743262f41dd663aa45fbff data/roots/tags/item/spreading_mushrooms.json
 4264e5c80b6b11afe1e6aab060254ec47bd83074 data/roots/tags/item/sprout_breeding_rewards.json
 57b7b83328a785fad075c2c7377883654e583c09 data/roots/tags/item/stonelike.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/item/stonepetal.json

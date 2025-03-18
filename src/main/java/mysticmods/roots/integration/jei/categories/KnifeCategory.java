@@ -114,7 +114,7 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
         BlockState output = recipe.getOutputState().build();
         builder.addWidget(new WorldTestWidget(12, 29, 24, 24, output, RootsJEIPlugin.createItemIngredient(output.getBlock())));
       }
-      if (recipe.getTest() != null/* && recipe.getStateMapper() == null*/) {
+      if (recipe.getTest() != null && recipe.getStateMapper() == null) {
         BlockState output = recipe.getTest().getBlockState(provider);
         builder.addWidget(new WorldTestWidget(3, 29, 24, 24, output, RootsJEIPlugin.createItemIngredient(output.getBlock())));
       }

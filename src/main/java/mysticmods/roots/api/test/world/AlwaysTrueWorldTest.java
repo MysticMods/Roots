@@ -8,8 +8,10 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class AlwaysTrueWorldTest extends WorldTest {
   public static ResourceKey<WorldTestType<?>> ALWAYS_TRUE_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("always_true_test"));
@@ -25,6 +27,11 @@ public class AlwaysTrueWorldTest extends WorldTest {
   @Override
   public BlockState getBlockState(HolderLookup.Provider provider) {
     return Blocks.AIR.defaultBlockState();
+  }
+
+  @Override
+  public @Nullable Ingredient getIngredient() {
+    return null;
   }
 
   @Override

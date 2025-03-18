@@ -4,9 +4,12 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModItems;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -53,13 +56,6 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.STALICRIPE_CROP).add(ModItems.STALICRIPE.get());
     this.tag(RootsTags.Items.WILDROOT_CROP).add(ModItems.WILDROOT.get());
     this.tag(RootsTags.Items.INFERNO_BULB_CROP).add(ModItems.INFERNO_BULB.get());
-
-    this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
-    this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
-    this.copy(RootsTags.Blocks.WATER_CROPS, RootsTags.Items.WATER_CROPS);
-    this.copy(RootsTags.Blocks.EARTH_CROPS, RootsTags.Items.EARTH_CROPS);
-    this.copy(RootsTags.Blocks.AIR_CROPS, RootsTags.Items.AIR_CROPS);
-    this.copy(RootsTags.Blocks.FIRE_CROPS, RootsTags.Items.FIRE_CROPS);
 
     this.tag(RootsTags.Items.MOONGLOW_SEEDS).add(ModItems.MOONGLOW_SEEDS.get());
     this.tag(RootsTags.Items.PERESKIA_SEEDS).add(ModItems.PERESKIA_BULB.get());
@@ -277,6 +273,34 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(ItemTags.SWORDS).add(ModItems.COPPER_SWORD.get(), ModItems.LIVING_SWORD.get(), ModItems.RUNED_SWORD.get());
 
     this.tag(RootsTags.Items.RUNED_LOG_HERBS).add(ModItems.WILDROOT.get(), ModItems.GROVE_MOSS.get());
+
+    this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
+    this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
+    this.copy(RootsTags.Blocks.WATER_CROPS, RootsTags.Items.WATER_CROPS);
+    this.copy(RootsTags.Blocks.EARTH_CROPS, RootsTags.Items.EARTH_CROPS);
+    this.copy(RootsTags.Blocks.AIR_CROPS, RootsTags.Items.AIR_CROPS);
+    this.copy(RootsTags.Blocks.FIRE_CROPS, RootsTags.Items.FIRE_CROPS);
+
+    // Manually copied tags cannot have blocks that don't have an item equivalent
+    manualCopy(RootsTags.Blocks.OAK_LOGS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.SPRUCE_LOGS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.BIRCH_LOGS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.JUNGLE_LOGS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.ACACIA_LOGS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.DARK_OAK_LOGS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.CRIMSON_STEMS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.WARPED_STEMS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.WILDWOOD_LOGS_TO_STRIP);
+    manualCopy(RootsTags.Blocks.MANGROVE_LOGS_TO_STRIP);
+
+    manualCopy(RootsTags.Blocks.BLOOMING_ELIGIBLE_FLOWERS);
+    manualCopy(RootsTags.Blocks.BLOOMING_ELIGIBLE_PEDESTAL_FLOWERS);
+    manualCopy(RootsTags.Blocks.SPREADING_MUSHROOMS);
+  }
+
+  protected void manualCopy (TagKey<Block> blockTag) {
+    TagKey<Item> itemTag = TagKey.create(Registries.ITEM, blockTag.location());
+    copy(blockTag, itemTag);
   }
 
   @Override

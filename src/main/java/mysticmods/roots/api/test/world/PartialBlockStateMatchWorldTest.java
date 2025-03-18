@@ -8,7 +8,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class PartialBlockStateMatchWorldTest extends WorldTest {
   public static final MapCodec<PartialBlockStateMatchWorldTest> CODEC = PartialBlockState.CODEC.fieldOf("partial_block_state")
@@ -17,9 +19,16 @@ public class PartialBlockStateMatchWorldTest extends WorldTest {
   public static final ResourceKey<WorldTestType<?>> PARTIAL_BLOCK_STATE_MATCH_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("partial_block_state_match_test"));
 
   private final PartialBlockState partialBlockState;
+  private final Ingredient ingredient;
 
   public PartialBlockStateMatchWorldTest(PartialBlockState partialBlockState) {
     this.partialBlockState = partialBlockState;
+    this.ingredient = Ingredient.of(partialBlockState.block());
+  }
+
+  @Override
+  public @Nullable Ingredient getIngredient() {
+    return ingredient;
   }
 
   public PartialBlockState getPartialBlockState() {

@@ -7,7 +7,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 // TODO: BlockState match!
 public abstract class WorldTest {
@@ -19,6 +21,9 @@ public abstract class WorldTest {
   public abstract boolean test(BlockState state, RandomSource random);
 
   public abstract BlockState getBlockState(HolderLookup.Provider provider);
+
+  @Nullable
+  public abstract Ingredient getIngredient();
 
   protected abstract WorldTestType<?> getType();
 }

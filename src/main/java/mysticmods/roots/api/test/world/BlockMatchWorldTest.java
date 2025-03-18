@@ -11,8 +11,10 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class BlockMatchWorldTest extends WorldTest {
   public static final MapCodec<BlockMatchWorldTest> CODEC = BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block")
@@ -22,9 +24,11 @@ public class BlockMatchWorldTest extends WorldTest {
   public static ResourceKey<WorldTestType<?>> BLOCK_MATCH_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("block_match_test"));
 
   private final Block block;
+  private final Ingredient ingredient;
 
   public BlockMatchWorldTest(Block block) {
     this.block = block;
+    this.ingredient = Ingredient.of(block);
   }
 
   public Block getBlock() {
@@ -39,6 +43,11 @@ public class BlockMatchWorldTest extends WorldTest {
   @Override
   public BlockState getBlockState(HolderLookup.Provider provider) {
     return block.defaultBlockState();
+  }
+
+  @Override
+  public @Nullable Ingredient getIngredient() {
+    return ingredient;
   }
 
   @Override
