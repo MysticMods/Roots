@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,7 +56,6 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
   );
 
   protected int durabilityCost = 1;
-  protected OutputStateMapper stateMapper;
 
   public KnifeRecipe(BaseRecipeData data, WorldTest test, PartialBlockState outputState, List<WorldCondition> condition, List<String> skipProperties, int durabilityCost) {
     super(data, test, outputState, condition, skipProperties);
@@ -85,11 +83,6 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
   @Override
   public boolean hasOtherOutput(HolderLookup.Provider provider) {
     return true;
-  }
-
-  @Nullable
-  public OutputStateMapper getStateMapper() {
-    return stateMapper;
   }
 
   @Override

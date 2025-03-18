@@ -5,6 +5,7 @@ import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.crafting.IWorldCrafting;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.WorldTest;
+import mysticmods.roots.recipe.knife.OutputStateMapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,6 +28,7 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
   protected PartialBlockState outputState;
   protected List<WorldCondition> conditions;
   protected List<String> skipProperties;
+  protected OutputStateMapper stateMapper;
 
   public WorldRecipe(BaseRecipeData data, WorldTest test, PartialBlockState outputState, List<WorldCondition> conditions, List<String> skipProperties) {
     super(data);
@@ -71,6 +73,11 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
       }
     }
     return true;
+  }
+
+  @Nullable
+  public OutputStateMapper getStateMapper() {
+    return stateMapper;
   }
 
   @Override

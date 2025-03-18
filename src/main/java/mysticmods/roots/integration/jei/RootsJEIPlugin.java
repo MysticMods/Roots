@@ -13,10 +13,7 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
-import mysticmods.roots.integration.jei.categories.GroveCategory;
-import mysticmods.roots.integration.jei.categories.KnifeCategory;
-import mysticmods.roots.integration.jei.categories.MortarCategory;
-import mysticmods.roots.integration.jei.categories.PyreCategory;
+import mysticmods.roots.integration.jei.categories.*;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -53,6 +50,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new MortarCategory(guiHelper));
     registration.addRecipeCategories(new PyreCategory(guiHelper));
     registration.addRecipeCategories(new KnifeCategory(guiHelper));
+    registration.addRecipeCategories(new RunicBlockCategory(guiHelper));
   }
 
   @Override
@@ -65,6 +63,8 @@ public class RootsJEIPlugin implements IModPlugin {
         .toList());
     registration.addRecipes(KNIFE_RECIPE_TYPE, ResolvedRecipes.KNIFE.getRecipes().stream().map(RecipeHolder::value)
         .toList());
+    registration.addRecipes(RUNIC_RECIPE_TYPE, ResolvedRecipes.RUNIC_BLOCK.getRecipes().stream().map(RecipeHolder::value)
+        .toList());
   }
 
   @Override
@@ -73,6 +73,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalysts(MORTAR_RECIPE_TYPE, ModBlocks.MORTAR.get(), ModItems.PESTLE.get());
         registration.addRecipeCatalysts(PYRE_RECIPE_TYPE, ModBlocks.PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get());
     registration.addRecipeCatalysts(KNIFE_RECIPE_TYPE, ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLD_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.WOODEN_KNIFE.get());
+    registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_RECIPE_TYPE);
   }
 
   public static IJeiRuntime runtime = null;
