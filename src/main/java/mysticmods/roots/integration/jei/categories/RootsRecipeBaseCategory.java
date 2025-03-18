@@ -77,7 +77,7 @@ public abstract class RootsRecipeBaseCategory<T extends RootsRecipe<?, ?>> imple
           int num = Integer.parseInt(slot);
           if (num >= 0 && num < recipe.getCachedOutputs().size()) {
             ChanceOutput output = recipe.getCachedOutputs().get(num);
-            builder.add(Component.translatable("roots.tooltip.chance", output.getChance() * 100));
+            builder.add(Component.translatable("roots.tooltip.chance", String.format("%.2f", output.getChance() * 100)));
           }
         } catch (NumberFormatException ignored) {
 
