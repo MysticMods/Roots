@@ -1,7 +1,6 @@
 package mysticmods.roots.integration.jei.categories;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -10,7 +9,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
-import mysticmods.roots.client.RenderUtil;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
 import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
@@ -19,15 +17,12 @@ import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
 import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.knife.OutputStateMapper;
-import mysticmods.roots.recipe.mortar.MortarRecipe;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
@@ -63,27 +58,47 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
             .addIngredients(Ingredient.of(inputs.toArray(new ItemLike[0])));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
             .addIngredients(Ingredient.of(outputs.toArray(new ItemLike[0])));
+      } else {
+        var acceptor = builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT);
+
+        if (recipe.getOutputState() != null) {
+          // TODO: Create a recipe that uses this
+          BlockState output = recipe.getOutputState().build();
+          acceptor.addIngredients(Ingredient.of(output.getBlock()));
+        }
+
+        acceptor = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
+
+        if (recipe.getTest() != null && recipe.getStateMapper() == null) {
+          if (recipe.getTest().getIngredient() != null) {
+            acceptor.addIngredients(recipe.getTest().getIngredient());
+          } else {
+            BlockState output = recipe.getTest().getBlockState(provider);
+            acceptor.addIngredients(Ingredient.of(output.getBlock()));
+          }
+        }
+
+        if (recipe instanceof KnifeOffHandRecipe offHandRecipe) {
+          builder.addSlot(RecipeIngredientRole.INPUT, 39, 11)
+              .addIngredients(Ingredient.of(offHandRecipe.getOffHandTag()));
+        }
       }
 
-      if (recipe instanceof KnifeOffHandRecipe offHandRecipe) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 39, 11)
-            .addIngredients(Ingredient.of(offHandRecipe.getOffHandTag()));
+      List<ChanceOutput> outputs = recipe.getCachedOutputs();
+
+      int row = 0;
+      int column = 0;
+
+      for (int i = 0; i < outputs.size(); i++) {
+        if (i % 4 == 0 && i != 0) {
+          row++;
+          column = 0;
+        }
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 97 + column * 17, 2 + row * 17)
+            .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i))
+            .addRichTooltipCallback(this.richestTooltip(recipe));
+        column++;
       }
-    }
-
-    List<ChanceOutput> outputs = recipe.getCachedOutputs();
-
-    int row = 0;
-    int column = 0;
-
-    for (int i = 0; i < outputs.size(); i++) {
-      if (i % 4 == 0 && i != 0) {
-        row++;
-        column = 0;
-      }
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 97 + column * 17, 2 + row * 17)
-          .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i)).addRichTooltipCallback(this.richestTooltip(recipe));
-      column++;
     }
   }
 
@@ -112,11 +127,11 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
       if (recipe.getOutputState() != null) {
         // TODO: Create a recipe that uses this
         BlockState output = recipe.getOutputState().build();
-        builder.addWidget(new WorldTestWidget(12, 29, 24, 24, output, RootsJEIPlugin.createItemIngredient(output.getBlock())));
+        builder.addWidget(new WorldTestWidget(12, 29, 24, 24, output, new ItemStack(output.getBlock())));
       }
       if (recipe.getTest() != null && recipe.getStateMapper() == null) {
         BlockState output = recipe.getTest().getBlockState(provider);
-        builder.addWidget(new WorldTestWidget(3, 29, 24, 24, output, RootsJEIPlugin.createItemIngredient(output.getBlock())));
+        builder.addWidget(new WorldTestWidget(3, 29, 24, 24, output, new ItemStack(output.getBlock())));
       }
     }
   }
