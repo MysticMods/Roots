@@ -248,7 +248,7 @@ public class RootsDataPackGenerators {
                 .add(Registries.STRUCTURE_SET, bootstrap -> {
                   HolderGetter<Structure> structureGetter = bootstrap.lookup(Registries.STRUCTURE);
                   bootstrap.register(ModFeatures.BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.BARROW_KEY), new RandomSpreadStructurePlacement(150, 65, RandomSpreadType.LINEAR, BARROW_SALT)));
-                  bootstrap.register(ModFeatures.LARGE_BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.LARGE_BARROW_KEY), new RandomSpreadStructurePlacement(320, 120, RandomSpreadType.LINEAR, LARGE_BARROW_SALT)));
+/*                  bootstrap.register(ModFeatures.LARGE_BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.LARGE_BARROW_KEY), new RandomSpreadStructurePlacement(320, 120, RandomSpreadType.LINEAR, LARGE_BARROW_SALT)));*/
                   bootstrap.register(ModFeatures.STANDING_STONES_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.STANDING_STONES_KEY), new RandomSpreadStructurePlacement(80, 35, RandomSpreadType.LINEAR, STANDING_STONES_SALT)));
                   bootstrap.register(ModFeatures.HUT_SET_KEY, new StructureSet(List.of(new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.HUT_KEY), 1), new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.RUINED_HUT_KEY), 1)), new RandomSpreadStructurePlacement(70, 35, RandomSpreadType.LINEAR, HUT_SALT)));
                 })
