@@ -101,7 +101,7 @@ public class MeteorEntity extends Entity {
           if (!this.level().isClientSide()) {
             if (this.level().getBlockState(hit.above()).isAir()) {
               // TODO: Fey fire
-              this.level().setBlock(hit.above(), Blocks.FIRE.defaultBlockState(), 3);
+/*              this.level().setBlock(hit.above(), Blocks.FIRE.defaultBlockState(), 3);*/
             }
           }
           this.discard();
