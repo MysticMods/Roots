@@ -21,7 +21,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-// This recipe is for SummonCreatures
+// TODO
 public class SummonCreaturesRecipe extends RootsTileRecipe<PedestalInventoryWrapper, PyreBlockEntity, PyrePedestalCrafting> {
   public static MapCodec<SummonCreaturesRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
