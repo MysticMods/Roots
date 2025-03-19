@@ -264,6 +264,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.CHARM_ALERT).add(ModItems.ALERTNESS_CHARM.get());
     this.tag(RootsTags.Items.CHARMS).addTag(RootsTags.Items.CHARM_ALERT);
 
+    this.tag(RootsTags.Items.CURIOS_CHARMS).addTag(RootsTags.Items.CHARMS);
+
     this.tag(ItemTags.ARROWS).add(ModItems.LIVING_ARROW.get());
 
     this.tag(ItemTags.HOES).add(ModItems.COPPER_HOE.get(), ModItems.LIVING_HOE.get(), ModItems.RUNED_HOE.get());

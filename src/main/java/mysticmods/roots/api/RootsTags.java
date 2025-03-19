@@ -412,6 +412,8 @@ public class RootsTags {
     public static final TagKey<Item> CHARMS = modTag("charms");
     public static final TagKey<Item> CHARM_ALERT = modTag("charms/alertness");
 
+    public static final TagKey<Item> CURIOS_CHARMS = curiosTag("charm");
+
     // Items that, when held in off-hand transforms a log into a runed log equivalent
     public static final TagKey<Item> RUNED_LOG_HERBS = modTag("runed_log_herbs");
 
@@ -421,6 +423,10 @@ public class RootsTags {
 
     protected static TagKey<Item> compatTag(String name) {
       return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
+    }
+
+    protected static TagKey<Item> curiosTag (String name) {
+      return ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", name));
     }
   }
 
