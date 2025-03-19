@@ -3,6 +3,7 @@ package mysticmods.roots.api.recipe;
 import mysticmods.roots.api.recipe.crafting.IEntityCrafting;
 import mysticmods.roots.api.test.entity.EntityTest;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
@@ -24,7 +25,12 @@ public abstract class EntityRecipe<W extends IEntityCrafting> extends RootsRecip
     return test.test(pContainer.getEntity());
   }
 
-  // TODO: Ensure this is used in the assemble
+  @Override
+  public ItemStack assemble(W arg, HolderLookup.Provider arg2) {
+    modifyEntity(arg, arg2);
+    return super.assemble(arg, arg2);
+  }
+
   @Override
   public abstract void modifyEntity(W pContainer, HolderLookup.Provider provider);
 }
