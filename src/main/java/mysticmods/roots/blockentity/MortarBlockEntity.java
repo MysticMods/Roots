@@ -99,7 +99,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
     super.saveAdditional(pTag, provider);
     // TODO: reference this
-    pTag.putInt("uses", uses);
+    pTag.putInt("MortarUses", uses);
     boolean previous = false;
     ListTag previousItems = new ListTag();
     for (ItemStack stack : previousRecipeItems) {
@@ -111,46 +111,46 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     }
 
     if (previous) {
-      pTag.put("previous_items", previousItems);
+      pTag.put("MortarPreviousItems", previousItems);
     }
 
     if (cachedRecipe != null) {
-      pTag.putString("cached_recipe", cachedRecipe.id().toString());
+      pTag.putString("MortarCachedRecipe", cachedRecipe.id().toString());
     }
     if (lastRecipe != null) {
-      pTag.putString("last_recipe", lastRecipe.id().toString());
+      pTag.putString("MortarLastRecipe", lastRecipe.id().toString());
     }
-    pTag.put("inventory", inventory.serializeNBT(provider));
+    pTag.put("MortarInventory", inventory.serializeNBT(provider));
   }
 
   @Override
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
     super.loadAdditional(pTag, provider);
     // TODO: reference this
-    if (pTag.contains("uses", Tag.TAG_INT)) {
+    if (pTag.contains("MortarUses", Tag.TAG_INT)) {
       this.uses = pTag.getInt("uses");
     }
-    if (pTag.contains("previous_items", Tag.TAG_LIST)) {
+    if (pTag.contains("MortarPreviousItems", Tag.TAG_LIST)) {
       previousRecipeItems.clear();
-      ListTag previousItems = pTag.getList("previous_items", Tag.TAG_COMPOUND);
+      ListTag previousItems = pTag.getList("MortarPreviousItems", Tag.TAG_COMPOUND);
       for (int i = 0; i < previousItems.size(); i++) {
         ItemStack.parse(provider, previousItems.getCompound(i)).ifPresent(previousRecipeItems::add);
       }
     }
-    if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
-      ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("cached_recipe"));
+    if (pTag.contains("MortarCachedRecipe", Tag.TAG_STRING)) {
+      ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("MortarCachedRecipe"));
       cachedRecipe = ResolvedRecipes.MORTAR.getRecipe(cachedId);
     } else {
       cachedRecipe = null;
     }
-    if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
-      ResourceLocation lastId = ResourceLocation.parse(pTag.getString("last_recipe"));
+    if (pTag.contains("MortarLastRecipe", Tag.TAG_STRING)) {
+      ResourceLocation lastId = ResourceLocation.parse(pTag.getString("MortarLastRecipe"));
       lastRecipe = ResolvedRecipes.MORTAR.getRecipe(lastId);
     } else {
       cachedRecipe = null;
     }
-    if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
-      inventory.deserializeNBT(provider, pTag.getCompound("inventory"));
+    if (pTag.contains("MortarInventory", Tag.TAG_COMPOUND)) {
+      inventory.deserializeNBT(provider, pTag.getCompound("MortarInventory"));
     }
   }
 
