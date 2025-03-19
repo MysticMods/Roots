@@ -24,7 +24,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
-// TODO: Handle item colors
 public class CastingItem extends Item {
   public CastingItem(Properties pProperties) {
     super(pProperties);
