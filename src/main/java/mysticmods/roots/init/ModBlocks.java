@@ -170,7 +170,6 @@ public class ModBlocks {
   public static DeferredHolder<Block, ElementalSoilBlock> CAELIC_SOIL = BLOCKS.register("caelic_soil", () -> new ElementalSoilBlock(ElementalType.AIR, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.WOOL)));
   public static DeferredHolder<Block, ElementalSoilBlock> MAGMATIC_SOIL = BLOCKS.register("magmatic_soil", () -> new ElementalSoilBlock(ElementalType.FIRE, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.CANDLE)));
   public static DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(ElementalType.EARTH, BlockBehaviour.Properties.of().mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.HANGING_ROOTS)));
-  // TODO all: voxel shapes & bounding boxes
   public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BlockBehaviour.Properties.of()
       .instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL)
       .noOcclusion()));
