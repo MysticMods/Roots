@@ -88,7 +88,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
   private PyrePedestalCrafting playerlessPedestalCrafting;
   private final List<ItemStack> storedItems = new ArrayList<>();
-  // TODO: Last recipe is not being saved properly
   private RecipeHolder<PyreRecipe> lastRecipe = null;
   private RecipeHolder<PyreRecipe> cachedRecipe = null;
   private Ritual currentRitual = null;
