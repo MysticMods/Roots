@@ -373,7 +373,7 @@
   "roots.message.staff.charging": "Spell charged: %s/%s",
   "roots.message.staff.charging_percent": "Spell charged: %s%%",
   "roots.message.staff.missing_herbs": "Unable to cast %s, missing herbs.",
-  "roots.nyi": "Not Yet Implemented",
+  "roots.nyi": "[Not Yet Implemented]",
   "roots.subtitles.aqua_bubble_alt_end": "Aqua bubble ends",
   "roots.subtitles.block.pyre.crackle": "Pyre crackles",
   "roots.subtitles.entity.deer.ambient": "Deer squeals",
@@ -428,7 +428,7 @@
   "roots.subtitles.spell.time_stop_end": "Time begins anew",
   "roots.subtitles.spell.wildfire": "Meteors unfold",
   "roots.tooltip.chance": "Chance: %s%%",
-  "roots.tooltip.cost.charge_type": "Charges %s",
+  "roots.tooltip.cost.charge_type": "[Charges %s.]",
   "roots.tooltip.cost.charge_type.cast": "per cast",
   "roots.tooltip.cost.charge_type.operation": "per operation",
   "roots.tooltip.cost.cost_amount": "x%s",
@@ -449,7 +449,7 @@
   "roots.tooltip.token.spell": "Spell: %s",
   "roots.tooltip.token.unlock": "Right-Click to unlock.",
   "roots.tooltip.token.unlocked": "You've already unlocked this.",
-  "roots.wip": "Work In Progress",
+  "roots.wip": "[Work In Progress]",
   "spell.roots.acid_cloud": "Acid Cloud",
   "spell.roots.aqua_bubble": "Aqua Bubble",
   "spell.roots.augment": "Augment",
@@ -566,7 +566,7 @@
   "tag.item.roots.logs.wildwood": "Wildwood Logs",
   "tag.item.roots.mortar_activation": "Mortar Activators",
   "tag.item.roots.mortars": "Mortars",
-  "tag.item.roots.nyi": "Not Yet Implemented",
+  "tag.item.roots.nyi": "[Not Yet Implemented]",
   "tag.item.roots.pedestals": "Pedestals",
   "tag.item.roots.pedestals.grove": "Grove Crafting Pedestals",
   "tag.item.roots.pedestals.ritual": "Ritual Pedestals",
@@ -607,5 +607,5 @@
   "tag.item.roots.tempt.owl": "Food for Owls",
   "tag.item.roots.tempt.sprout": "Food for Sprouts",
   "tag.item.roots.vegetables": "Vegetables",
-  "tag.item.roots.wip": "Work In Progress"
+  "tag.item.roots.wip": "[Work In Progress]"
 }

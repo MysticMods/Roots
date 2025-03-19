@@ -68,7 +68,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.cost.herb_cost", "%s %s");
     add("roots.tooltip.cost.cost_amount", "x%s");
     add("roots.tooltip.cost.cost_multiplier", "+%s");
-    add("roots.tooltip.cost.charge_type", "Charges %s");
+    add("roots.tooltip.cost.charge_type", "[Charges %s.]");
     add("roots.tooltip.cost.charge_type.operation", "per operation");
     add("roots.tooltip.cost.charge_type.cast", "per cast");
 
@@ -502,8 +502,8 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.STONELIKE, "Stone-like");
     add(RootsTags.Items.CASTING_TOOLS, "Casting Tools");
     add(RootsTags.Items.RUNESTONE_HERBS, "Herbs for crafting Runestone");
-    add(RootsTags.Items.NYI, "Not Yet Implemented");
-    add(RootsTags.Items.WIP, "Work In Progress");
+    add(RootsTags.Items.NYI, "[Not Yet Implemented]");
+    add(RootsTags.Items.WIP, "[Work In Progress]");
     add(RootsTags.Items.SOILS, "Soils");
     add(RootsTags.Items.WATER_SOIL, "Water Elemental Soils");
     add(RootsTags.Items.AIR_SOIL, "Air Elemental Soils");
@@ -623,8 +623,8 @@ public class RootsLangProvider extends LanguageProvider {
 
     add("enchantment.roots.foraging", "Foraging");
 
-    add("roots.nyi", "Not Yet Implemented");
-    add("roots.wip", "Work In Progress");
+    add("roots.nyi", "[Not Yet Implemented]");
+    add("roots.wip", "[Work In Progress]");
 
     // JEI
     add("roots.jei.runic_entity", "Runic Shears (Entity)");

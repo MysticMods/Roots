@@ -87,7 +87,7 @@ public record HarvestRecord (Block cropBlock, Optional<Item> seedItem, Optional<
     IntegerProperty ageProperty = ((AccessorMixinCropBlock) cropBlock).callGetAgeProperty();
     Item seedItem = ((AccessorMixinCropBlock) cropBlock).callGetBaseSeedId().asItem();
 
-    return new HarvestRecord(cropBlock, Optional.of(seedItem), Optional.ofNullable(ageProperty), cropBlock.getMaxAge(), ModTests.SINGLE_CROP_AGE.get(), harvestFunction);
+    return new HarvestRecord(cropBlock, Optional.of(seedItem), Optional.ofNullable(ageProperty), cropBlock.getMaxAge(), ModTests.SAFE_SINGLE_CROP_AGE.get(), harvestFunction);
   }
 
   public boolean canHarvest (Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity) {

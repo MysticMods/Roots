@@ -16,6 +16,7 @@ import mysticmods.roots.growth.harvest.HarvestSingleCropBlock;
 import mysticmods.roots.growth.harvestable.CanHarvestLowestBlock;
 import mysticmods.roots.growth.harvestable.CanHarvestStemBlock;
 import mysticmods.roots.growth.harvestable.SingleCropAgeCanHarvest;
+import mysticmods.roots.growth.harvestable.SingleCropAgeCanSafeHarvest;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
 import mysticmods.roots.util.HarvestUtil;
@@ -58,6 +59,8 @@ public class ModTests {
   public static final DeferredHolder<LightFunction, LightFunction.LightLessThanFunction> LIGHT_BELOW_THIRTEEN = LIGHT_FUNCTIONS.register("light_below_thirteen", () -> new LightFunction.LightLessThanFunction(13));
 
   public static final DeferredHolder<CanHarvestFunction, SingleCropAgeCanHarvest> SINGLE_CROP_AGE = CAN_HARVEST_FUNCTIONS.register("single_crop_age", SingleCropAgeCanHarvest::new);
+
+  public static final DeferredHolder<CanHarvestFunction, SingleCropAgeCanSafeHarvest> SAFE_SINGLE_CROP_AGE = CAN_HARVEST_FUNCTIONS.register("safe_single_crop_age", SingleCropAgeCanSafeHarvest::new);
 
   public static final DeferredHolder<CanHarvestFunction, CanHarvestLowestBlock> CAN_HARVEST_LOWEST = CAN_HARVEST_FUNCTIONS.register("can_harvest_lowest_block", CanHarvestLowestBlock::new);
 
