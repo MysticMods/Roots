@@ -60,7 +60,6 @@ public class Herb implements IStyled {
     return style;
   }
 
-  // TODO: ItemStack data map
   @Nullable
   public static Herb getHerb(ItemStack stack) {
     return stack.getItemHolder().getData(DataMaps.HERB_ITEM_DATA);
