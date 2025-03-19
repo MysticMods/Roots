@@ -7,10 +7,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.PushReaction;
 
-/**
- * These classes are specifically designed to be wither- and ender-dragon-proof
- * along with a high resistance to explosion damage.
- */
+// TODO: Re-implement using the BlockBehavior.Properties.of().pushReaction
 public class RunedObsidianBlocks {
   public static class Block extends net.minecraft.world.level.block.Block {
     public Block(Properties p_i48440_1_) {
@@ -70,29 +67,6 @@ public class RunedObsidianBlocks {
   public static class Wall extends WallBlock {
     public Wall(Properties p_i48301_1_) {
       super(p_i48301_1_);
-    }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState pState) {
-      return PushReaction.BLOCK;
-    }
-  }
-
-  public static class Fence extends FenceBlock {
-    public Fence(Properties properties) {
-      super(properties);
-    }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState pState) {
-      return PushReaction.BLOCK;
-    }
-  }
-
-  // TODO:
-  public static class Gate extends FenceGateBlock {
-    public Gate(WoodType p_273340_, Properties p_273352_) {
-      super(p_273340_, p_273352_);
     }
 
     @Override
