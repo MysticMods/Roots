@@ -29,8 +29,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityRecipe> {
-  private static final RootsEntityRenderer renderer = new RootsEntityRenderer(32);
-
   public RunicEntityCategory(IGuiHelper helper) {
     super(RootsJEIPlugin.RUNIC_ENTITY_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/runic_entity.png"), () -> new ItemStack(ModItems.RUNIC_SHEARS.get()), Component.translatable("roots.jei.runic_entity"));
   }
@@ -49,7 +47,7 @@ public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityReci
     List<RootsEntityType> types = recipe.getEntityTest().getEntityTypes().stream().map(RootsEntityType::new).toList();
 
     builder.addSlot(RecipeIngredientRole.INPUT, 12, 26)
-        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, renderer)
+        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.ENTITY_RENDERER)
         .addIngredients(RootsJEIPlugin.ENTITY_TYPE, types);
 
     List<ChanceOutput> outputs = recipe.getCachedOutputs();

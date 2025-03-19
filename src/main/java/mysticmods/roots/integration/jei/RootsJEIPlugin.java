@@ -87,6 +87,8 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_ENTITY_RECIPE_TYPE);
   }
 
+  public static final RootsEntityRenderer ENTITY_RENDERER = new RootsEntityRenderer(32);
+
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
     registration.register(ENTITY_TYPE, Collections.emptyList(), new RootsEntityHelper(), new RootsEntityRenderer(16), BuiltInRegistries.ENTITY_TYPE.byNameCodec().xmap(RootsEntityType::new, RootsEntityType::entity));
