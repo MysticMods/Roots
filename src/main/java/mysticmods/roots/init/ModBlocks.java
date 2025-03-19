@@ -25,16 +25,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModBlocks {
   private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(RootsAPI.MODID);
 
-  public static BlockBehaviour.Properties SOIL_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.DIRT);
-  public static final BlockBehaviour.Properties BASE_PROPERTIES = BlockBehaviour.Properties.of().dynamicShape()
-      .forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.STONE);
-  public static final BlockBehaviour.Properties BASE_WOODEN_PROPERTIES = BlockBehaviour.Properties.of().dynamicShape()
-      .forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD);
-  public static final BlockBehaviour.Properties BASE_REINFORCED_PROPERTIES = BlockBehaviour.Properties.of()
-      .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.STONE).requiresCorrectToolForDrops()
-      .strength(50.0F, 1200.0F);
-  public static BlockBehaviour.Properties CROP_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT);
-
   public static DeferredHolder<Block, WaterloggedBlock> THATCH = BLOCKS.register("thatch", () -> new ThatchBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BANJO).strength(0.5f).sound(SoundType.GRASS)));
   public static DeferredHolder<Block, WaterloggedBlock> SHEARED_THATCH = BLOCKS.register("sheared_thatch", () -> new WaterloggedBlock(BlockBehaviour.Properties.of()
@@ -190,11 +180,11 @@ public class ModBlocks {
   public static DeferredHolder<Block, GroveCrafterBlock> GROVE_CRAFTER = BLOCKS.register("grove_crafter", () -> new GroveCrafterBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM)));
 
   // TODO: FROM HERE
-  public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> GROVE_PEDESTAL = BLOCKS.register("grove_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
-  public static DeferredHolder<Block, PedestalBlock.WildwoodPedestalBlock> WILDWOOD_PEDESTAL = BLOCKS.register("wildwood_pedestal", () -> new PedestalBlock.WildwoodPedestalBlock(BASE_WOODEN_PROPERTIES));
-  public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> DISPLAY_PEDESTAL = BLOCKS.register("display_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BASE_WOODEN_PROPERTIES));
-  public static DeferredHolder<Block, WildRootsBlock> WILD_ROOTS = BLOCKS.register("wild_roots", () -> new WildRootsBlock(BASE_WOODEN_PROPERTIES.strength(0.2f)));
-  public static DeferredHolder<Block, CreepingGroveMossBlock> CREEPING_GROVE_MOSS = BLOCKS.register("creeping_grove_moss", () -> new CreepingGroveMossBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_CARPET)));
+  public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> GROVE_PEDESTAL = BLOCKS.register("grove_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)));
+  public static DeferredHolder<Block, PedestalBlock.WildwoodPedestalBlock> WILDWOOD_PEDESTAL = BLOCKS.register("wildwood_pedestal", () -> new PedestalBlock.WildwoodPedestalBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)));
+  public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> DISPLAY_PEDESTAL = BLOCKS.register("display_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)));
+  public static DeferredHolder<Block, WildRootsBlock> WILD_ROOTS = BLOCKS.register("wild_roots", () -> new WildRootsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(0.2f).sound(SoundType.WOOD)));
+  public static DeferredHolder<Block, CreepingGroveMossBlock> CREEPING_GROVE_MOSS = BLOCKS.register("creeping_grove_moss", () -> new CreepingGroveMossBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).strength(0.1f).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
   public static DeferredHolder<Block, HangingGroveMossBlock> HANGING_GROVE_MOSS = BLOCKS.register("hanging_grove_moss", () -> new HangingGroveMossBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.GRASS)
       .replaceable()
@@ -203,22 +193,33 @@ public class ModBlocks {
       .sound(SoundType.HANGING_ROOTS)
       .ignitedByLava()
       .pushReaction(PushReaction.DESTROY)));
-  public static DeferredHolder<Block, HugeMushroomBlock> BAFFLECAP_BLOCK = BLOCKS.register("bafflecap_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM_BLOCK)));
-  public static DeferredHolder<Block, GroveStoneBlock> PRIMAL_GROVE_STONE = BLOCKS.register("primal_grove_stone", () -> new GroveStoneBlock(BASE_PROPERTIES));
-  public static DeferredHolder<Block, IncenseBurnerBlock> INCENSE_BURNER = BLOCKS.register("incense_burner", () -> new IncenseBurnerBlock(BASE_PROPERTIES));
-  public static DeferredHolder<Block, MortarBlock> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BASE_PROPERTIES));
+  public static DeferredHolder<Block, HugeMushroomBlock> BAFFLECAP_BLOCK = BLOCKS.register("bafflecap_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2f).sound(SoundType.WOOD).ignitedByLava()));
+  public static DeferredHolder<Block, GroveStoneBlock> PRIMAL_GROVE_STONE = BLOCKS.register("primal_grove_stone", () -> new GroveStoneBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0f, 6.0f).forceSolidOn()));
+  public static DeferredHolder<Block, IncenseBurnerBlock> INCENSE_BURNER = BLOCKS.register("incense_burner", () -> new IncenseBurnerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0f, 6.0f).forceSolidOn()));
+  public static DeferredHolder<Block, MortarBlock> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.0f, 6.0f).forceSolidOn().dynamicShape().noOcclusion()));
   public static DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()
       .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD)
       .lightLevel(o -> o.getValue(PyreBlock.LIT) ? 15 : 0)));
   public static DeferredHolder<Block, PyreBlock> SOUL_PYRE = BLOCKS.register("soul_pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()
       .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD)
       .lightLevel(o -> o.getValue(PyreBlock.LIT) ? 2 : 0)));
-  public static DeferredHolder<Block, PyreBlock> REINFORCED_PYRE = BLOCKS.register("reinforced_pyre", () -> new PyreBlock(BASE_REINFORCED_PROPERTIES));
-  public static DeferredHolder<Block, PyreBlock> REINFORCED_SOUL_PYRE = BLOCKS.register("reinforced_soul_pyre", () -> new PyreBlock(BASE_REINFORCED_PROPERTIES));
-  public static DeferredHolder<Block, DecorativePyreBlock> DECORATIVE_PYRE = BLOCKS.register("decorative_pyre", () -> new DecorativePyreBlock(BASE_WOODEN_PROPERTIES.lightLevel((o) -> 15)));
-  public static DeferredHolder<Block, DecorativePyreBlock> DECORATIVE_SOUL_PYRE = BLOCKS.register("decorative_soul_pyre", () -> new DecorativePyreBlock(BASE_WOODEN_PROPERTIES.lightLevel((o) -> 2)));
-  public static DeferredHolder<Block, UnendingBowlBlock> UNENDING_BOWL = BLOCKS.register("unending_bowl", () -> new UnendingBowlBlock(BASE_PROPERTIES));
+  public static DeferredHolder<Block, PyreBlock> REINFORCED_PYRE = BLOCKS.register("reinforced_pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()
+      .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f, 1200f).sound(SoundType.STONE)
+      .lightLevel(o -> o.getValue(PyreBlock.LIT) ? 15 : 0)));
+  public static DeferredHolder<Block, PyreBlock> REINFORCED_SOUL_PYRE = BLOCKS.register("reinforced_soul_pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()
+      .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f, 1200f).sound(SoundType.STONE)
+      .lightLevel(o -> o.getValue(PyreBlock.LIT) ? 2 : 0)));
+  public static DeferredHolder<Block, DecorativePyreBlock> DECORATIVE_PYRE = BLOCKS.register("decorative_pyre", () -> new DecorativePyreBlock(BlockBehaviour.Properties.of()
+      .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(o -> 15)));
+  public static DeferredHolder<Block, DecorativePyreBlock> DECORATIVE_SOUL_PYRE = BLOCKS.register("decorative_soul_pyre", () -> new DecorativePyreBlock(BlockBehaviour.Properties.of()
+      .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD)
+      .lightLevel(o -> 2)));
+  public static DeferredHolder<Block, UnendingBowlBlock> UNENDING_BOWL = BLOCKS.register("unending_bowl", () -> new UnendingBowlBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.0f, 6.0f).forceSolidOn().dynamicShape().noOcclusion()));
   public static DeferredHolder<Block, MushroomBlock> BAFFLECAP = BLOCKS.register("bafflecap", () -> new MushroomBlock(ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
+
+  private static final BlockBehaviour.Properties CROP_PROPERTIES = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
+
   public static DeferredHolder<Block, ThreeStageCropBlock> WILDROOT_CROP = BLOCKS.register("wildroot_crop", () -> new ThreeStageCropBlock(ModItems.WILDROOT, CROP_PROPERTIES));
   public static DeferredHolder<Block, ElementalCropBlock> CLOUD_BERRY_CROP = BLOCKS.register("cloud_berry_crop", () -> new ElementalCropBlock(ModItems.CLOUD_BERRY, ElementalType.AIR, CROP_PROPERTIES));
   public static DeferredHolder<Block, WaterElementalCropBlock> DEWGONIA_CROP = BLOCKS.register("dewgonia_crop", () -> new WaterElementalCropBlock(ModItems.DEWGONIA, ElementalType.WATER, CROP_PROPERTIES));

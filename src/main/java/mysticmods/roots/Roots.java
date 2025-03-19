@@ -19,7 +19,6 @@ import net.neoforged.fml.config.ModConfig;
 // Elemental crop bounding boxes are wrong
 // - Geas
 //    What other mobs will continue attacking when they lose a target?
-// - Overhaul all block properties, stop using defaults -> done up to ritual pedestal
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Runic tools
 // - Juice recipes
