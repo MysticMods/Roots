@@ -182,7 +182,7 @@
     },
     "minecraft:vine": {
       "ageProperty": {},
-      "canGrowFunction": "roots:always_can_grow",
+      "canGrowFunction": "roots:vines_can_spread",
       "cropBlock": "minecraft:vine",
       "lightFunction": "roots:any_light",
       "maximumAge": -1,

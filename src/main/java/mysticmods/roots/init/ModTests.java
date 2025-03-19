@@ -50,6 +50,7 @@ public class ModTests {
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowFunction> AGE_CAN_GROW = CAN_GROW_FUNCTIONS.register("age_can_grow", AgeCanGrowFunction::new);
   public static final DeferredHolder<CanGrowFunction, CactusCanGrowFunction> CACTUS_CANE_CAN_GROW = CAN_GROW_FUNCTIONS.register("cactus_or_cane_can_grow", CactusCanGrowFunction::new);
   public static final DeferredHolder<CanGrowFunction, KelpCanGrowFunction> KELP_CAN_GROW = CAN_GROW_FUNCTIONS.register("kelp_can_grow", KelpCanGrowFunction::new);
+  public static final DeferredHolder<CanGrowFunction, VinesCanSpreadFunction> VINES_CAN_SPREAD = CAN_GROW_FUNCTIONS.register("vines_can_spread", VinesCanSpreadFunction::new);
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowDirectionFunction> AGE_CAN_GROW_UP = CAN_GROW_FUNCTIONS.register("age_can_grow_up", () -> new AgeCanGrowDirectionFunction(Direction.UP));
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowDirectionFunction> AGE_CAN_GROW_DOWN = CAN_GROW_FUNCTIONS.register("age_can_grow_down", () -> new AgeCanGrowDirectionFunction(Direction.DOWN));
 

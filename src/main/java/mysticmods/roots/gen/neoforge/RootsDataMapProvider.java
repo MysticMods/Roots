@@ -332,8 +332,7 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     // TODO: Replace all but one, transform the lowest/highest block into the original plant
 
-    // TODO: Better can-grow check on adjacent surfaces
-    builder15.add(Blocks.VINE.builtInRegistryHolder(), new GrowthRecord(Blocks.VINE, Optional.empty(), -1, 2, ModTests.ALWAYS_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
+    builder15.add(Blocks.VINE.builtInRegistryHolder(), new GrowthRecord(Blocks.VINE, Optional.empty(), -1, 2, ModTests.VINES_CAN_SPREAD.get(), ModTests.ANY_LIGHT.get()), false);
 
     builder15.add(Blocks.WEEPING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.WEEPING_VINES, Optional.of(WeepingVinesBlock.AGE), WeepingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW_DOWN.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 

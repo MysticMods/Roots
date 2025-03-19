@@ -1,7 +1,7 @@
-// 1.21.1	2025-03-19T18:44:05.5335162	Data Maps
+// 1.21.1	2025-03-19T18:57:30.6662358	Data Maps
 32873c8f421d87f46371098863a47895f5558fc1 data/neoforge/data_maps/item/compostables.json
 0ecb00d1d25604c20bc7eddd49dd91aa56c95eff data/neoforge/data_maps/item/furnace_fuels.json
-30309a7b1b7fbfd5276394b4520d9f957cdb04e7 data/roots/data_maps/block/growth_records.json
+d7a356884f874dc2270b605022a3c04ead0841f9 data/roots/data_maps/block/growth_records.json
 713c005865489851918ae4369fe869649d68f068 data/roots/data_maps/block/harvest_records.json
 9bedf2851a606a541c2b0a4ed6c635d406ba1392 data/roots/data_maps/block/stem_blocks.json
 26f578a3dff09716ddf6ffc6423ee5fe95de396a data/roots/data_maps/item/herb_item_data.json
