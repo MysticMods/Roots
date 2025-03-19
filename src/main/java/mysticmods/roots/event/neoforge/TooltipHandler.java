@@ -15,7 +15,10 @@ public class TooltipHandler {
   public static void onItemTooltip(ItemTooltipEvent event) {
     ItemStack stack = event.getItemStack();
     if (stack.is(RootsTags.Items.NYI)) {
-      event.getToolTip().add(Component.literal("Not Yet Implemented"));
+      event.getToolTip().add(Component.translatable("roots.nyi"));
+    }
+    if (stack.is(RootsTags.Items.WIP)) {
+      event.getToolTip().add(Component.translatable("roots.wip"));
     }
   }
 }

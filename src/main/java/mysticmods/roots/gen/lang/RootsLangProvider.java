@@ -503,6 +503,7 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.CASTING_TOOLS, "Casting Tools");
     add(RootsTags.Items.RUNESTONE_HERBS, "Herbs for crafting Runestone");
     add(RootsTags.Items.NYI, "Not Yet Implemented");
+    add(RootsTags.Items.WIP, "Work In Progress");
     add(RootsTags.Items.SOILS, "Soils");
     add(RootsTags.Items.WATER_SOIL, "Water Elemental Soils");
     add(RootsTags.Items.AIR_SOIL, "Air Elemental Soils");
@@ -619,6 +620,21 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.item.unripe_pearl.use", "");
     add("roots.subtitles.item.pearleporter.use", "");
     add("roots.subtitles.block.pyre.crackle", "Pyre crackles");
+
+    add("enchantment.roots.foraging", "Foraging");
+
+    add("roots.nyi", "Not Yet Implemented");
+    add("roots.wip", "Work In Progress");
+
+    // JEI
+    add("roots.jei.runic_entity", "Runic Shears (Entity)");
+    add("roots.jei.runic_block", "Runic Shears (Block)");
+    add("roots.jei.knife_crafting", "Knife Carving");
+    add("roots.jei.grove_crafting", "Grove Crafting");
+    add("roots.jei.pyre", "Pyre");
+    add("roots.jei.mortar_crafting", "Mortar Crafting");
+
+
   }
 
   public static String toEnglishName(String internalName) {

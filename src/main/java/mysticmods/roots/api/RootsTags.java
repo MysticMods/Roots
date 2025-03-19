@@ -282,6 +282,7 @@ public class RootsTags {
     public static final TagKey<Item> RUNESTONE_HERBS = modTag("runestone_herbs");
 
     public static final TagKey<Item> NYI = modTag("nyi");
+    public static final TagKey<Item> WIP = modTag("wip");
     public static final TagKey<Item> SOILS = modTag("soils");
     public static final TagKey<Item> WATER_SOIL = modTag("soils/water");
     public static final TagKey<Item> AIR_SOIL = modTag("soils/air");
