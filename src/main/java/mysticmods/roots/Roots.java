@@ -23,11 +23,9 @@ import net.neoforged.fml.config.ModConfig;
 // - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Runic tools
 // - Juice recipes
-// - Breading
 // - Big Barrow loot chests
 // - Big Barrow redesign, breading
 // - Wildwood hanging sign? Wildwood sign?
-// - Block placement tests for rituals
 // - The pestle is held wrongly
 // - Leash attachment points
 // - Entity carry layers for all mobs
