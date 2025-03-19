@@ -68,7 +68,6 @@ public class RenderUtil {
     } else {
       itemRenderer.render(stack, ItemDisplayContext.GUI, false, poseStack, bufferSource, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, itemBakedModel);
     }
-    // TODO: ???
     bufferSource.endBatch();
     if (flag) {
       Lighting.setupFor3DItems();
