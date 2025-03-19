@@ -12,6 +12,9 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PouchDyeRecipe extends CustomRecipe {
 
   public PouchDyeRecipe(CraftingBookCategory category) {
@@ -19,67 +22,65 @@ public class PouchDyeRecipe extends CustomRecipe {
   }
 
   public boolean matches(CraftingInput input, Level level) {
-    ItemStack itemstack = ItemStack.EMPTY;
-    ItemStack list = ItemStack.EMPTY;
-
+    List<ItemStack> items = new ArrayList<>();
     for (int i = 0; i < input.size(); i++) {
-      ItemStack itemstack1 = input.getItem(i);
-      if (!itemstack1.isEmpty()) {
-        if (itemstack1.is(RootsTags.Items.DYEABLE)) {
-          if (!itemstack.isEmpty()) {
-            return false;
-          }
-
-          itemstack = itemstack1;
-        } else {
-          if (!(itemstack1.getItem() instanceof DyeItem)) {
-            return false;
-          }
-
-          list = itemstack1;
-          break;
-        }
+      ItemStack item = input.getItem(i);
+      if (!item.isEmpty()) {
+        items.add(item);
       }
     }
 
-    return !itemstack.isEmpty() && !list.isEmpty();
+    if (items.size() != 2) {
+      return false;
+    }
+
+    ItemStack itemstack1 = items.get(0);
+    ItemStack itemstack2 = items.get(1);
+
+    if (itemstack2.getItem() instanceof DyeItem && itemstack1.is(RootsTags.Items.DYEABLE)) {
+      return true;
+    } else if (itemstack1.getItem() instanceof DyeItem && itemstack2.is(RootsTags.Items.DYEABLE)) {
+      return true;
+    }
+
+    return false;
   }
 
   public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
-    DyeItem list = null;
-    ItemStack itemstack = ItemStack.EMPTY;
-
+    List<ItemStack> items = new ArrayList<>();
     for (int i = 0; i < input.size(); i++) {
-      ItemStack itemstack1 = input.getItem(i);
-      if (!itemstack1.isEmpty()) {
-        if (itemstack1.is(RootsTags.Items.DYEABLE)) {
-          if (!itemstack.isEmpty()) {
-            return ItemStack.EMPTY;
-          }
-
-          itemstack = itemstack1.copy();
-        } else {
-          if (!(itemstack1.getItem() instanceof DyeItem dyeitem)) {
-            return ItemStack.EMPTY;
-          }
-
-          list = dyeitem;
-          break;
-        }
+      ItemStack item = input.getItem(i);
+      if (!item.isEmpty()) {
+        items.add(item);
       }
     }
 
-    if (itemstack.isEmpty() || list == null) {
+    if (items.size() != 2) {
       return ItemStack.EMPTY;
     }
 
-    itemstack.set(DataComponents.BASE_COLOR, list.getDyeColor());
-    return itemstack;
+    ItemStack itemstack1 = items.get(0);
+    ItemStack itemstack2 = items.get(1);
+    DyeItem dye = null;
+    ItemStack toModify = null;
+
+    if (itemstack1.getItem() instanceof DyeItem dyeitem) {
+      dye = dyeitem;
+      toModify = itemstack2;
+    } else if (itemstack2.getItem() instanceof DyeItem dyeItem) {
+      dye = dyeItem;
+      toModify = itemstack1;
+    }
+
+    if (dye == null || toModify == null) {
+      return ItemStack.EMPTY;
+    }
+
+
+    toModify.set(DataComponents.BASE_COLOR, dye.getDyeColor());
+    return toModify;
   }
 
-  /**
-   * Used to determine if this recipe can fit in a grid of the given width/height
-   */
   @Override
   public boolean canCraftInDimensions(int width, int height) {
     return width * height >= 2;
