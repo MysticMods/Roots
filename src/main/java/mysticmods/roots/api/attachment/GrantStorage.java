@@ -94,7 +94,7 @@ public class GrantStorage implements ICleanable {
     }
   }
 
-  private void unlockSpell(ServerPlayer player, SpellModifier modifier) {
+  private void unlockModifier(ServerPlayer player, SpellModifier modifier) {
     if (grantedModifiers.add(modifier)) {
       setDirty(true);
     }
