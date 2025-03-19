@@ -87,7 +87,7 @@ public class GrantStorage implements ICleanable {
   private void unlockSpell(ServerPlayer player, Spell spell) {
     if (grantedSpells.add(spell)) {
       setDirty(true);
-      player.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getName()), true);
+      player.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getStyledName()), true);
       // TODO: Handle reputation gains from learning new spells
     }
   }
