@@ -284,23 +284,6 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.NYI).add(ModItems.APPLE_CORDIAL.get(), ModItems.CACTUS_SYRUP.get(), ModItems.DANDELION_CORDIAL.get(), ModItems.LILAC_CORDIAL.get(), ModItems.PEONY_CORDIAL.get(), ModItems.ROSE_CORDIAL.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.RUNED_DAGGER.get(), ModItems.RUNED_SHOVEL.get(), ModItems.RUNED_PICKAXE.get(), ModItems.RUNED_AXE.get(), ModItems.RUNED_HOE.get(), ModItems.RUNED_SWORD.get(), ModItems.RELIQUARY.get(), ModItems.SPIRIT_BAG.get(), ModItems.LIFE_ESSENCE.get(), ModItems.GRAMARY.get(), ModItems.WILDWOOD_BOW.get(), ModItems.WILDWOOD_QUIVER.get());
     this.tag(RootsTags.Items.WIP).add(ModItems.BEETLE_BOOTS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.ANTLER_HAT.get(), ModItems.ALERTNESS_CHARM.get());
 
-    for (Map.Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
-      Item item = entry.getValue();
-      if (item instanceof TokenItem.SpellTokenItem spellTokenItem) {
-        if (spellTokenItem.getSpell().is(RootsTags.Spells.NYI)) {
-          this.tag(RootsTags.Items.NYI).add(item);
-        } else if (spellTokenItem.getSpell().is(RootsTags.Spells.WIP)) {
-          this.tag(RootsTags.Items.WIP).add(item);
-        }
-      } else if (item instanceof TokenItem.RitualTokenItem ritualTokenItem) {
-        if (ritualTokenItem.getRitual().is(RootsTags.Rituals.NYI)) {
-          this.tag(RootsTags.Items.NYI).add(item);
-        } else if (ritualTokenItem.getRitual().is(RootsTags.Rituals.WIP)) {
-          this.tag(RootsTags.Items.WIP).add(item);
-        }
-      }
-    }
-
     this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
     this.copy(RootsTags.Blocks.WATER_CROPS, RootsTags.Items.WATER_CROPS);
