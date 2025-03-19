@@ -24,6 +24,11 @@ public record VinesCanSpreadFunction() implements CanGrowFunction {
       return false;
     }
 
+    // Prevent vines from consuming too many ticks
+    if (level.getRandom().nextBoolean()) {
+      return false;
+    }
+
     for (Direction direction : Direction.values()) {
       if (canSpread(level, pos, state, direction)) {
         return true;
