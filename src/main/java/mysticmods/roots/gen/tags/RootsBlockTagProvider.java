@@ -166,7 +166,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
         .addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL)
         .addTag(RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
     this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
-    this.tag(RootsTags.Blocks.NYI).addTag(RootsTags.Blocks.SOILS).add(INCENSE_BURNER.get(), UNENDING_BOWL.get());
+    this.tag(RootsTags.Blocks.NYI).add(INCENSE_BURNER.get(), UNENDING_BOWL.get());
+    this.tag(RootsTags.Blocks.WIP).addTag(RootsTags.Blocks.SOILS);
     this.tag(RootsTags.Blocks.DISPLAY_PEDESTALS).add(DISPLAY_PEDESTAL.get());
     this.tag(RootsTags.Blocks.RITUAL_PEDESTALS).add(RITUAL_PEDESTAL.get(), REINFORCED_RITUAL_PEDESTAL.get());
     this.tag(RootsTags.Blocks.GROVE_PEDESTALS).add(GROVE_PEDESTAL.get(), WILDWOOD_PEDESTAL.get());

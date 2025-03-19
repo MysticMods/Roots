@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-13T23:17:04.8988019	Roots Spell Tags
+// 1.21.1	2025-03-19T18:16:04.6176962	Roots Spell Tags
 d4e1d7627b0d08acf9d74b81c8306ac9da6bd6e5 data/roots/tags/roots/spells/adjustable/width.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/aligned/elemental.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/aligned/fairy.json
@@ -7,7 +7,7 @@ d4e1d7627b0d08acf9d74b81c8306ac9da6bd6e5 data/roots/tags/roots/spells/adjustable
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/aligned/sprout.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/aligned/twilight.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/aligned/wild.json
-e28a09a63226623463cc748e388569812bc39ee6 data/roots/tags/roots/spells/nyi.json
+d9daba96406890c4b4b324b8a75287869e8ffbd0 data/roots/tags/roots/spells/nyi.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/opposed/elemental.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/opposed/fairy.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/opposed/fungal.json
@@ -15,3 +15,4 @@ e28a09a63226623463cc748e388569812bc39ee6 data/roots/tags/roots/spells/nyi.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/opposed/sprout.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/opposed/twilight.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/opposed/wild.json
+7b6b902b09e68d6db384d3cdc3281fc3ebfcb9dd data/roots/tags/roots/spells/wip.json

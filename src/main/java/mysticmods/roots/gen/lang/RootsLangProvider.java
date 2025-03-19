@@ -68,7 +68,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.cost.herb_cost", "%s %s");
     add("roots.tooltip.cost.cost_amount", "x%s");
     add("roots.tooltip.cost.cost_multiplier", "+%s");
-    add("roots.tooltip.cost.charge_type", "Charges ");
+    add("roots.tooltip.cost.charge_type", "Charges %s");
     add("roots.tooltip.cost.charge_type.operation", "per operation");
     add("roots.tooltip.cost.charge_type.cast", "per cast");
 

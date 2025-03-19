@@ -1,6 +1,26 @@
 {
   "values": [
-    "#roots:soils",
+    "roots:apple_cordial",
+    "roots:cactus_syrup",
+    "roots:dandelion_cordial",
+    "roots:lilac_cordial",
+    "roots:peony_cordial",
+    "roots:rose_cordial",
+    "roots:apothecary_pouch",
+    "roots:component_pouch",
+    "roots:fey_pouch",
+    "roots:runed_dagger",
+    "roots:runed_shovel",
+    "roots:runed_pickaxe",
+    "roots:runed_axe",
+    "roots:runed_hoe",
+    "roots:runed_sword",
+    "roots:reliquary",
+    "roots:spirit_bag",
+    "roots:life_essence",
+    "roots:gramary",
+    "roots:wildwood_bow",
+    "roots:wildwood_quiver",
     "roots:incense_burner",
     "roots:unending_bowl"
   ]

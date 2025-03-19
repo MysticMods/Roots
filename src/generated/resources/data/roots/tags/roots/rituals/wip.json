@@ -4,17 +4,17 @@
     "roots:fire_storm",
     "roots:frost_lands",
     "roots:gathering",
-    "roots:germination",
-    "roots:healing_aura",
     "roots:heavy_storms",
     "roots:overgrowth",
     "roots:protection",
     "roots:purity",
+    "roots:wildroot_growth",
+    "roots:windwall",
+    "roots:germination",
+    "roots:healing_aura",
     "roots:spreading_forest",
     "roots:summon_creatures",
     "roots:transmutation",
-    "roots:warding",
-    "roots:wildroot_growth",
-    "roots:windwall"
+    "roots:warding"
   ]
 }

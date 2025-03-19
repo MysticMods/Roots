@@ -164,6 +164,7 @@ public class RootsTags {
     public static final TagKey<Block> TALL_GRASS = modTag("tall_grass");
 
     public static final TagKey<Block> NYI = modTag("nyi");
+    public static final TagKey<Block> WIP = modTag("wip");
 
     // Doesn't exist so I have to make it
     public static final TagKey<Block> LEVERS = compatTag("levers"); // SKIP
@@ -493,6 +494,7 @@ public class RootsTags {
 
   public static class Rituals extends RootsTags {
     public static final TagKey<Ritual> NYI = modTag("nyi");
+    public static final TagKey<Ritual> WIP = modTag("wip");
 
     public static final TagKey<Ritual> PRIMAL_ALIGNED = modTag("aligned/primal");
     public static final TagKey<Ritual> FAIRY_ALIGNED = modTag("aligned/fairy");
@@ -521,6 +523,7 @@ public class RootsTags {
 
   public static class Spells extends RootsTags {
     public static final TagKey<Spell> NYI = modTag("nyi");
+    public static final TagKey<Spell> WIP = modTag("wip");
 
     public static final TagKey<Spell> ADJUSTABLE_SPELL = modTag("adjustable/width");
 

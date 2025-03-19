@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-13T23:17:04.9068762	Roots Ritual Tags
+// 1.21.1	2025-03-19T18:16:04.6226816	Roots Ritual Tags
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/aligned/elemental.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/aligned/fairy.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/aligned/fungal.json
@@ -6,7 +6,6 @@
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/aligned/sprout.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/aligned/twilight.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/aligned/wild.json
-118c4c0fed0a6391268c181bdaa43dbf4d474873 data/roots/tags/roots/rituals/nyi.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/opposed/elemental.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/opposed/fairy.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/opposed/fungal.json
@@ -14,3 +13,4 @@
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/opposed/sprout.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/opposed/twilight.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/rituals/opposed/wild.json
+ab05d98c5d821ab97cf02b3c3a7692e86e502467 data/roots/tags/roots/rituals/wip.json

@@ -3,10 +3,13 @@ package mysticmods.roots.gen.tags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModItems;
+import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -15,6 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import static mysticmods.roots.init.ModItems.FEY_LEATHER;
@@ -170,6 +174,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.TALL_GRASS, RootsTags.Items.TALL_GRASS);
     /*    this.copy(RootsTags.Blocks.GRASS, RootsTags.Items.GRASS); ??????? */
     this.copy(RootsTags.Blocks.NYI, RootsTags.Items.NYI);
+    this.copy(RootsTags.Blocks.WIP, RootsTags.Items.WIP);
 /*    this.copy(RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN, RootsTags.Items.SUPPORTS_HELL_SPROUT_SPAWN);
     this.copy(RootsTags.Blocks.BAFFLECAP_CONVERSION, RootsTags.Items.BAFFLECAP_CONVERSION);
     this.copy(RootsTags.Blocks.GROVE_MOSS, RootsTags.Items.GROVE_MOSS);*/
@@ -275,6 +280,26 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(ItemTags.SWORDS).add(ModItems.COPPER_SWORD.get(), ModItems.LIVING_SWORD.get(), ModItems.RUNED_SWORD.get());
 
     this.tag(RootsTags.Items.RUNED_LOG_HERBS).add(ModItems.WILDROOT.get(), ModItems.GROVE_MOSS.get());
+
+    this.tag(RootsTags.Items.NYI).add(ModItems.APPLE_CORDIAL.get(), ModItems.CACTUS_SYRUP.get(), ModItems.DANDELION_CORDIAL.get(), ModItems.LILAC_CORDIAL.get(), ModItems.PEONY_CORDIAL.get(), ModItems.ROSE_CORDIAL.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.RUNED_DAGGER.get(), ModItems.RUNED_SHOVEL.get(), ModItems.RUNED_PICKAXE.get(), ModItems.RUNED_AXE.get(), ModItems.RUNED_HOE.get(), ModItems.RUNED_SWORD.get(), ModItems.RELIQUARY.get(), ModItems.SPIRIT_BAG.get(), ModItems.LIFE_ESSENCE.get(), ModItems.GRAMARY.get(), ModItems.WILDWOOD_BOW.get(), ModItems.WILDWOOD_QUIVER.get());
+    this.tag(RootsTags.Items.WIP).add(ModItems.BEETLE_BOOTS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.ANTLER_HAT.get(), ModItems.ALERTNESS_CHARM.get());
+
+    for (Map.Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
+      Item item = entry.getValue();
+      if (item instanceof TokenItem.SpellTokenItem spellTokenItem) {
+        if (spellTokenItem.getSpell().is(RootsTags.Spells.NYI)) {
+          this.tag(RootsTags.Items.NYI).add(item);
+        } else if (spellTokenItem.getSpell().is(RootsTags.Spells.WIP)) {
+          this.tag(RootsTags.Items.WIP).add(item);
+        }
+      } else if (item instanceof TokenItem.RitualTokenItem ritualTokenItem) {
+        if (ritualTokenItem.getRitual().is(RootsTags.Rituals.NYI)) {
+          this.tag(RootsTags.Items.NYI).add(item);
+        } else if (ritualTokenItem.getRitual().is(RootsTags.Rituals.WIP)) {
+          this.tag(RootsTags.Items.WIP).add(item);
+        }
+      }
+    }
 
     this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
