@@ -11,7 +11,7 @@ public class ModFoods {
   public static final FoodProperties VENISON = (new FoodProperties.Builder().nutrition(3)
       .saturationModifier(0.3f)).build();
   public static final FoodProperties COOKED_VENISON = (new FoodProperties.Builder().nutrition(7)
-      .saturationModifier(0.8f)).build(); // todo :e meat
+      .saturationModifier(0.8f)).build();
   public static final FoodProperties AUBERGINE = (new FoodProperties.Builder().nutrition(4)
       .saturationModifier(0.3f)).build();
   public static final FoodProperties COOKED_BEETROOT = (new FoodProperties.Builder()).nutrition(4)
