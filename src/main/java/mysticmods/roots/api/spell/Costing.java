@@ -161,7 +161,6 @@ public class Costing {
       RootsAPI.LOG.error("Charging a spell with operation costs but no operations! {}", spell);
     }
 
-    // TODO: Count modifiers <-- Now I don't know what this means
     calculateCosts(true, false, false, tick);
 
     Inventory playerInventory = player.getInventory();
