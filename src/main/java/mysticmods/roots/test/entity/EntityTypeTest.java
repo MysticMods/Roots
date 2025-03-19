@@ -43,6 +43,11 @@ public class EntityTypeTest extends EntityTest {
   }
 
   @Override
+  public List<EntityType<?>> getEntityTypes() {
+    return types;
+  }
+
+  @Override
   protected EntityTestType<?> getType() {
     return ModTests.ENTITY_TYPE_TEST.get();
   }

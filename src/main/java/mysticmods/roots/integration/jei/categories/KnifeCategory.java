@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Durability cost
 public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
   public KnifeCategory(IGuiHelper helper) {
     super(RootsJEIPlugin.KNIFE_RECIPE_TYPE, helper, 166, 124, RootsAPI.rl("textures/gui/jei/bark_carving.png"), () -> new ItemStack(ModItems.SILVER_KNIFE.get()), Component.translatable("roots.jei.knife_crafting"));

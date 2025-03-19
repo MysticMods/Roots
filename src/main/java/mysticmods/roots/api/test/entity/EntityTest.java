@@ -6,7 +6,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class EntityTest implements Predicate<Entity> {
@@ -17,6 +19,8 @@ public abstract class EntityTest implements Predicate<Entity> {
 
   @Override
   public abstract boolean test(Entity entity);
+
+  public abstract List<EntityType<?>> getEntityTypes();
 
   protected abstract EntityTestType<?> getType();
 }
