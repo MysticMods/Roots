@@ -24,7 +24,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-// TODO: Activation with right-click wildroot? (or just right-click)
 public class GroveStoneBlock extends HorizontalDirectionalBlock {
   public static final DirectionProperty FACING = StateProperties.GroveStone.FACING;
   public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
