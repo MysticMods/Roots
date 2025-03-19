@@ -1,5 +1,6 @@
 package mysticmods.roots.entity;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
@@ -45,7 +46,7 @@ public class FennecEntity extends TamableAnimal {
 
   @Override
   public boolean isFood(@Nonnull ItemStack stack) {
-    return stack.getItem() == Items.CHICKEN;
+    return stack.is(RootsTags.Items.FENNEC_FOOD);
   }
 
   @Nullable
@@ -65,7 +66,7 @@ public class FennecEntity extends TamableAnimal {
     goalSelector.addGoal(0, new FloatGoal(this));
     goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
     goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
-    goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.CHICKEN), false));
+    goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(RootsTags.Items.FENNEC_FOOD), false));
     goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
     goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
     goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));

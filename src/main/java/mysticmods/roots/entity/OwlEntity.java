@@ -55,6 +55,7 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 8.0F));
     goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
     goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1D));
+    // TODO: Currently has no tempt goal
   }
 
   public static AttributeSupplier.Builder attributes() {

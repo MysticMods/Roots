@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-19T19:43:14.0820172	Registries
+// 1.21.1	2025-03-19T21:06:29.6632503	Registries
 a65184c1483f870edf64b340e4bd0e5ee9227966 data/roots/enchantment/foraging.json
 5d49d1a83648edb820b3caf2c0134aaccc7e526c data/roots/enchantment_provider/fortune_i.json
 ecdee376546ff26b669e9bdcbf3fa6e640759c52 data/roots/enchantment_provider/fortune_ii.json
@@ -38,9 +38,9 @@ e9b18bf74180382987750fc15d5858a61199a236 data/roots/worldgen/placed_feature/gran
 f183da7a634555eff065ab0e8b468bc514c32557 data/roots/worldgen/placed_feature/wild_roots_forest.json
 ef9144ad33ff5d347abc5c044a79d298434fabe8 data/roots/worldgen/placed_feature/wild_roots_sparse.json
 4c9a9af81323ce4b8a8766e3c7072d6a969f624b data/roots/worldgen/placed_feature/wild_roots_underground.json
-5f7eb3aefb4e67e597bd7027849115f462b0645d data/roots/worldgen/structure/barrow.json
+91eefcf99c2b0990c71234afde3246ac23521373 data/roots/worldgen/structure/barrow.json
 0f232c2d5e2e5485f4cadd03dfd0a43b553aef1c data/roots/worldgen/structure/hut.json
-d33d83aa57a04b645ca6aed6285e33a4510e3da7 data/roots/worldgen/structure/large_barrow.json
+d364c3ee83222d09d03831e010c94271d0317ffa data/roots/worldgen/structure/large_barrow.json
 e04b12dcf7c2a014184ef3b5bb259b88cae2a074 data/roots/worldgen/structure/ruined_hut.json
 ef2cf544c2846dc8f80cf8261c38a31d2b35d15f data/roots/worldgen/structure/standing_stones.json
 521c5c2e14bbe5d735eb106501a61a37243d9223 data/roots/worldgen/structure_set/barrow.json

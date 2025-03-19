@@ -1,5 +1,6 @@
 package mysticmods.roots.entity;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.entity.ai.DuckSwimGoal;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSounds;
@@ -52,7 +53,7 @@ public class DuckEntity extends Animal {
     goalSelector.addGoal(0, new DuckSwimGoal(this));
     goalSelector.addGoal(1, new PanicGoal(this, 1.6d));
     goalSelector.addGoal(2, new BreedGoal(this, 1.0d));
-    goalSelector.addGoal(3, new TemptGoal(this, 1.0d, Ingredient.of(ItemTags.CHICKEN_FOOD), false));
+    goalSelector.addGoal(3, new TemptGoal(this, 1.0d, Ingredient.of(RootsTags.Items.DUCK_FOOD), false));
     goalSelector.addGoal(4, new FollowParentGoal(this, 1.0d));
     goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
     goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0d, 120));
@@ -62,7 +63,7 @@ public class DuckEntity extends Animal {
 
   @Override
   public boolean isFood(ItemStack pStack) {
-    return pStack.is(ItemTags.CHICKEN_FOOD);
+    return pStack.is(RootsTags.Items.DUCK_FOOD);
   }
 
   @org.jetbrains.annotations.Nullable

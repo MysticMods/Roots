@@ -1,6 +1,7 @@
 package mysticmods.roots.entity;
 
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -110,7 +111,7 @@ public class BeetleEntity extends TamableAnimal {
 
         return actionresulttype;
         // TODO: Tag
-      } else if (item == Items.MELON_SEEDS) {
+      } else if (item.builtInRegistryHolder().is(RootsTags.Items.BEETLE_FOOD)) {
         if (!player.isCreative()) {
           itemstack.shrink(1);
         }

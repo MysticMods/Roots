@@ -261,6 +261,11 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     );
 
     this.tag(RootsTags.Items.SPROUT_FOOD).addTag(RootsTags.Items.AUBERGINE_CROP);
+    this.tag(RootsTags.Items.BEETLE_FOOD).add(Items.MELON_SEEDS);
+    this.tag(RootsTags.Items.OWL_FOOD).add(Items.CHICKEN);
+    this.tag(RootsTags.Items.DUCK_FOOD).addTag(ItemTags.CHICKEN_FOOD);
+    this.tag(RootsTags.Items.FENNEC_FOOD).addTag(ItemTags.FOX_FOOD);
+    this.tag(RootsTags.Items.DEER_FOOD).addTag(ItemTags.COW_FOOD);
 
     this.tag(RootsTags.Items.FORAGING_ELIGIBLE).addTag(RootsTags.Items.KNIVES).add(ModItems.LIVING_HOE.get());
 

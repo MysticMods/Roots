@@ -90,8 +90,7 @@ public class DeerEntity extends Animal {
 
   @Override
   public boolean isFood(ItemStack arg) {
-    // TODO:
-    return false;
+    return arg.is(RootsTags.Items.DEER_FOOD);
   }
 
   @Override

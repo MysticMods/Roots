@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-19T18:28:02.9996612	Roots Item Tags
+// 1.21.1	2025-03-19T21:06:29.6663321	Roots Item Tags
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
@@ -175,7 +175,11 @@ a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/item/soils/water.json
 57b7b83328a785fad075c2c7377883654e583c09 data/roots/tags/item/stonelike.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/item/stonepetal.json
 687578420920f9ae43d80e6327d29714438d1b88 data/roots/tags/item/tall_grass.json
-6a3b552a1a9c6b96fd0855a01af8665f0c37da92 data/roots/tags/item/tempt/deer.json
+e18010b7b33e33c79f0d5417dd5bb2bc8becd9df data/roots/tags/item/tempt/beetle.json
+506cbcc42de2bc4584a99df2c0af65375bd4ab9b data/roots/tags/item/tempt/deer.json
+0d9bf2834b0b3e82b07ce73fd12caa23b2837782 data/roots/tags/item/tempt/duck.json
+dc9d890e77fffc8f5587efedc009417477be3b64 data/roots/tags/item/tempt/fennec.json
+3acc48b98a61c64992c20898e3cda550f0dac516 data/roots/tags/item/tempt/owl.json
 e2a6f1db35ec3c01274db0b0783283566f3f980b data/roots/tags/item/tempt/sprout.json
 de63ed9e3b03e443f31cbe2fc6660363c46675b3 data/roots/tags/item/vegetables.json
 8b63c5e5993870ffd87d183af07dd96aa603a722 data/roots/tags/item/wip.json

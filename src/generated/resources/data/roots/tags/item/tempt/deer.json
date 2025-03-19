@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:wheat",
-    "roots:wildewheet"
+    "roots:wildewheet",
+    "#minecraft:cow_food"
   ]
 }
