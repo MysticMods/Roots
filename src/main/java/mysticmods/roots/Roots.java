@@ -14,16 +14,9 @@ import net.neoforged.fml.config.ModConfig;
 // Start work on a wiki
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
 // JEI
-// - Runic entity
-// - Runic block
-// - Player conditions (none exist)
 // - Pouch dye recipe
-// Summon creatures recipes
-// Transmutation recipes
 // Runic shears dispenser behaviour
 // Elemental crop bounding boxes are wrong
-// - Nondetection
-//     Doesn't stop alerts
 // - Geas
 //    What other mobs will continue attacking when they lose a target?
 // - Overhaul all block properties, stop using defaults -> done up to ritual pedestal
@@ -38,6 +31,8 @@ import net.neoforged.fml.config.ModConfig;
 // - The pestle is held wrongly
 // - Leash attachment points
 // - Entity carry layers for all mobs
+// - Summon creatures recipes
+// - Transmutation recipes
 @Mod(RootsAPI.MODID)
 public class Roots {
   protected PacketHandler packetHandler;
