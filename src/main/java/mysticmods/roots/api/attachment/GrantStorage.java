@@ -13,6 +13,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
@@ -74,14 +75,10 @@ public class GrantStorage implements ICleanable {
   public boolean unlock(ServerPlayer player, Unlock<?> unlock) {
     if (unlock instanceof Unlock.SpellUnlock(Holder<Spell> value)) {
       Spell spell = value.value();
-      if (grantedSpells.add(spell)) {
-        setDirty(true);
-      }
+      unlockSpell(player, spell);
     } else if (unlock instanceof Unlock.ModifierUnlock(Holder<SpellModifier> value)) {
       SpellModifier modifier = value.value();
-      if (grantedModifiers.add(modifier)) {
-        setDirty(true);
-      }
+      unlockModifier(player, modifier);
     }
 
     return false;
@@ -90,6 +87,7 @@ public class GrantStorage implements ICleanable {
   private void unlockSpell(ServerPlayer player, Spell spell) {
     if (grantedSpells.add(spell)) {
       setDirty(true);
+      player.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getName()), true);
       // TODO: Handle reputation gains from learning new spells
     }
   }
