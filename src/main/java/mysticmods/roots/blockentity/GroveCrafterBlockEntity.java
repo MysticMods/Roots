@@ -52,7 +52,6 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
-    // TODO:
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
