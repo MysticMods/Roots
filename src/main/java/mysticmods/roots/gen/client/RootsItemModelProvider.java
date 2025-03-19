@@ -254,7 +254,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.RUNED_SWORD, "tools");
     subfolder(ModItems.RUNIC_SHEARS, "tools");
 
-    ModelFile generated = new ModelFile.UncheckedModelFile("item/generated");
+    ModelFile generated = new ModelFile.UncheckedModelFile(modLoc("item/staff_template"));
     getBuilder(ModItems.STAFF.getKey().location().toString()).parent(generated)
         .texture("layer0", modLoc("item/tools/staff")).texture("layer1", modLoc("item/tools/staff_petal_1"))
         .texture("layer2", modLoc("item/tools/staff_petal_2"));

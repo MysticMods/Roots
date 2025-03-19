@@ -31,7 +31,6 @@ public class CastingItem extends Item {
 
   @Override
   public UseAnim getUseAnimation(ItemStack pStack) {
-    // TODO: Bow?
     return UseAnim.BOW;
   }
 

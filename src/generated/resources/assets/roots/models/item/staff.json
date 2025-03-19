@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "roots:item/staff_template",
   "textures": {
     "layer0": "roots:item/tools/staff",
     "layer1": "roots:item/tools/staff_petal_1",
