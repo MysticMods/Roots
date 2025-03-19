@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.vehicle.Boat;
 
 // Does nothing for non-player mobs
-public class SkySoarerEffect extends MobEffect {
+public class SkySoarerEffect extends SimpleEffect {
   public SkySoarerEffect() {
     super(MobEffectCategory.BENEFICIAL, 0x03f0fc);
   }
@@ -21,7 +21,6 @@ public class SkySoarerEffect extends MobEffect {
       if (vehicle == null) {
         vehicle = player;
       } else {
-        // TODO: Is hurt marked actually used or useful here?
         player.hurtMarked = true;
         player.fallDistance = 0f;
       }
@@ -52,10 +51,9 @@ public class SkySoarerEffect extends MobEffect {
 
   // TODO: Move on effect end from GSU
 
-/*  @Override
-  public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
-    super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
-    SnapshotHelper.applyPlayerVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
+  @Override
+  public boolean onEffectRemoved(LivingEntity pLivingEntity, int amplifier) {
+    SnapshotHelper.applyLivingWithVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
       if (vehicle != null) {
         vehicle.hasImpulse = true;
         vehicle.hurtMarked = true;
@@ -67,5 +65,5 @@ public class SkySoarerEffect extends MobEffect {
       player.fallDistance = 0f;
       player.setDeltaMovement(sky.getOriginalMovement());
     });
-  }*/
+  }
 }
