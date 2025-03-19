@@ -231,7 +231,6 @@ public class RootsTags {
     public static final TagKey<Item> WILDROOT_SEEDS = modTag("seeds/wildroot");
 
     public static final TagKey<Item> CROPS = modTag("crops");
-    // TODO: Unused
     public static final TagKey<Item> ELEMENTAL_CROPS = modTag("crops/elemental");
     public static final TagKey<Item> WATER_CROPS = modTag("crops/elemental/water");
     public static final TagKey<Item> EARTH_CROPS = modTag("crops/elemental/earth");

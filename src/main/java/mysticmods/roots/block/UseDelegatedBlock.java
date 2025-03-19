@@ -19,8 +19,6 @@ public abstract class UseDelegatedBlock extends Block implements EntityBlock {
     super(p_49795_);
   }
 
-  // TODO: ???
-
   @Override
   protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
     BlockEntity be = level.getBlockEntity(pos);

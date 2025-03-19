@@ -1,5 +1,6 @@
 package mysticmods.roots.block;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.blockentity.VisibleBlockEntity;
@@ -26,10 +27,8 @@ import org.jetbrains.annotations.Nullable;
 public class WildRootsBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
   public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
   public static BooleanProperty MOSSY = BooleanProperty.create("mossy");
-  private static final int mossyChance = 30;
 
-  //private static final VoxelShape UP_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
-  //private static final VoxelShape DOWN_AABB = Block.box(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+  private static final MapCodec<WildRootsBlock> CODEC = simpleCodec(WildRootsBlock::new);
 
   private static final VoxelShape UP_AABB = Block.box(3, 0, 2, 13, 4, 14);
   private static final VoxelShape DOWN_AABB = Block.box(3, 12, 2, 13, 16, 14);
@@ -46,8 +45,7 @@ public class WildRootsBlock extends DirectionalBlock implements SimpleWaterlogge
 
   @Override
   protected MapCodec<? extends DirectionalBlock> codec() {
-    // TODO:
-    return null;
+    return CODEC;
   }
 
   @Override
