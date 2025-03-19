@@ -90,8 +90,6 @@ public class BeetleEntity extends TamableAnimal {
             itemstack.shrink(1);
           }
 
-          // TODO:
-
           FoodProperties food = itemstack.getFoodProperties(this);
           if (food != null) {
             this.heal((float) food.nutrition());
