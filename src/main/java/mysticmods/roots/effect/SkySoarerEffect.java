@@ -65,5 +65,6 @@ public class SkySoarerEffect extends SimpleEffect {
       player.fallDistance = 0f;
       player.setDeltaMovement(sky.getOriginalMovement());
     });
+    return false;
   }
 }
