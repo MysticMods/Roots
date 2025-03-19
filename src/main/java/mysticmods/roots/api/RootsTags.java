@@ -169,7 +169,7 @@ public class RootsTags {
     // Doesn't exist so I have to make it
     public static final TagKey<Block> LEVERS = compatTag("levers"); // SKIP
 
-    // TODO: Fill these tags
+    // TODO: Hell sprouts aren't currently active
     public static final TagKey<Block> SUPPORTS_HELL_SPROUT_SPAWN = modTag("supports_hell_sprout_spawn");
     public static final TagKey<Block> BAFFLECAP_CONVERSION = modTag("converts_to_bafflecap");
 
@@ -267,7 +267,6 @@ public class RootsTags {
 
     public static final TagKey<Item> BOTTLES = modTag("bottles");
 
-    // TODO: Unused
     public static final TagKey<Item> POUCHES = modTag("pouches");
     public static final TagKey<Item> CREATIVE_POUCHES = modTag("pouches/creative");
 
@@ -616,23 +615,22 @@ public class RootsTags {
 
   public static class Biomes {
     public static final TagKey<Biome> HAS_HANGING_MOSS = modTag("has_hanging_moss");
-    // TODO: ??? has_barrow_structureS?
-    public static TagKey<Biome> HAS_BARROW_STRUCTURES = modTag("has_barrow_structures");
-    public static TagKey<Biome> HAS_BEETLE_SPAWNS = modTag("has_beetle_spawns");
-    public static TagKey<Biome> HAS_DEER_SPAWNS = modTag("has_deer_spawns");
-    public static TagKey<Biome> HAS_DUCK_SPAWNS = modTag("has_duck_spawns");
-    public static TagKey<Biome> HAS_FENNEC_SPAWNS = modTag("has_fennec_spawns");
-    public static TagKey<Biome> HAS_HUT_STRUCTURES = modTag("has_hut_structures");
-    public static TagKey<Biome> HAS_OWL_SPAWNS = modTag("has_owl_spawns");
-    public static TagKey<Biome> HAS_SPROUT_SPAWNS = modTag("has_sprout_spawns");
-    public static TagKey<Biome> HAS_STANDING_STONES = modTag("has_standing_stones");
-    public static TagKey<Biome> HAS_WILD_AUBERGINES = modTag("has_wild_aubergines");
-    public static TagKey<Biome> HAS_FOREST_WILD_ROOTS = modTag("has_forest_wild_roots");
-    public static TagKey<Biome> HAS_SPARSE_WILD_ROOTS = modTag("has_sparse_wild_roots");
-    public static TagKey<Biome> HAS_UNDERGROUND_WILD_ROOTS = modTag("has_underground_wild_roots");
-    public static TagKey<Biome> HAS_SILVER_ORES = modTag("has_silver_ores");
-    public static TagKey<Biome> HAS_GRANITE_QUARTZ_ORES = modTag("has_granite_quartz_ores");
-    public static TagKey<Biome> HAS_STONEPETALS = modTag("has_stonepetals");
+    public static final TagKey<Biome> HAS_BARROW_STRUCTURES = modTag("has_barrow_structure");
+    public static final TagKey<Biome> HAS_BEETLE_SPAWNS = modTag("has_beetle_spawns");
+    public static final TagKey<Biome> HAS_DEER_SPAWNS = modTag("has_deer_spawns");
+    public static final TagKey<Biome> HAS_DUCK_SPAWNS = modTag("has_duck_spawns");
+    public static final TagKey<Biome> HAS_FENNEC_SPAWNS = modTag("has_fennec_spawns");
+    public static final TagKey<Biome> HAS_HUT_STRUCTURES = modTag("has_hut_structures");
+    public static final TagKey<Biome> HAS_OWL_SPAWNS = modTag("has_owl_spawns");
+    public static final TagKey<Biome> HAS_SPROUT_SPAWNS = modTag("has_sprout_spawns");
+    public static final TagKey<Biome> HAS_STANDING_STONES = modTag("has_standing_stones");
+    public static final TagKey<Biome> HAS_WILD_AUBERGINES = modTag("has_wild_aubergines");
+    public static final TagKey<Biome> HAS_FOREST_WILD_ROOTS = modTag("has_forest_wild_roots");
+    public static final TagKey<Biome> HAS_SPARSE_WILD_ROOTS = modTag("has_sparse_wild_roots");
+    public static final TagKey<Biome> HAS_UNDERGROUND_WILD_ROOTS = modTag("has_underground_wild_roots");
+    public static final TagKey<Biome> HAS_SILVER_ORES = modTag("has_silver_ores");
+    public static final TagKey<Biome> HAS_GRANITE_QUARTZ_ORES = modTag("has_granite_quartz_ores");
+    public static final TagKey<Biome> HAS_STONEPETALS = modTag("has_stonepetals");
 
     static TagKey<Biome> modTag(String name) {
       return TagKey.create(Registries.BIOME, RootsAPI.rl(name));
@@ -644,7 +642,7 @@ public class RootsTags {
   }
 
   public static class DamageTypes {
-    public static TagKey<DamageType> IS_LAVA = modTag("is_lava");
+    public static final TagKey<DamageType> IS_LAVA = modTag("is_lava");
 
     static TagKey<DamageType> modTag(String name) {
       return TagKey.create(Registries.DAMAGE_TYPE, RootsAPI.rl(name));
