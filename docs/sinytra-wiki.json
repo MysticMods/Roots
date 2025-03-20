@@ -1,7 +1,5 @@
 {
   "id": "roots",
-  "platforms": {
-    "curseforge": "246183"
-  },
+  "platform": "curseforge",
   "slug": "roots"
 }
