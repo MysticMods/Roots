@@ -131,6 +131,9 @@ public class RootsItemModelProvider extends ItemModelProvider {
         .getPath(), modLoc("block/complex/ritual_pedestal"));
     withExistingParent(ModBlocks.REINFORCED_RITUAL_PEDESTAL.getKey().location()
         .getPath(), modLoc("block/complex/reinforced_ritual_pedestal"));
+    withExistingParent(ModBlocks.CREEPING_GROVE_MOSS.getKey().location().getPath(), modLoc("block/moss"));
+    withExistingParent(ModBlocks.HANGING_GROVE_MOSS.getKey().location().getPath(), modLoc("block/complex/hanging_grove_moss"));
+    withExistingParent(ModBlocks.WILD_ROOTS.getKey().location().getPath(), modLoc("block/complex/wild_roots"));
     withExistingParent(ModBlocks.GROVE_CRAFTER.getKey().location().getPath(), modLoc("block/complex/grove_crafter_active"));
     withExistingParent(ModBlocks.GROVE_PEDESTAL.getKey().location().getPath(), modLoc("block/complex/grove_pedestal"));
     withExistingParent(ModBlocks.WILDWOOD_PEDESTAL.getKey().location()

@@ -73,6 +73,9 @@ public class ModItems {
       0.0f));
 
   // BLOCK ITEMS
+  public static DeferredHolder<Item, BlockItem> WILD_ROOTS = ITEMS.register("wild_roots", () -> new BlockItem(ModBlocks.WILD_ROOTS.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> HANGING_GROVE_MOSS = ITEMS.register("hanging_grove_moss", () -> new BlockItem(ModBlocks.HANGING_GROVE_MOSS.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> CREEPING_GROVE_MOSS = ITEMS.register("creeping_grove_moss", () -> new BlockItem(ModBlocks.CREEPING_GROVE_MOSS.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> THATCH = ITEMS.register("thatch", () -> new BlockItem(ModBlocks.THATCH.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> SHEARED_THATCH = ITEMS.register("sheared_thatch", () -> new BlockItem(ModBlocks.SHEARED_THATCH.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> RUNESTONE = ITEMS.register("runestone", () -> new BlockItem(ModBlocks.RUNESTONE.get(), new Item.Properties()));

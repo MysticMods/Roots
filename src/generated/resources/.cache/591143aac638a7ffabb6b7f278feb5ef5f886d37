@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-19T20:53:15.7640457	Item Models: roots
+// 1.21.1	2025-03-20T11:15:29.5119918	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -74,6 +74,7 @@ cb855da7b1d0684c4bc009f0241040ca807f5123 assets/roots/models/item/geas.json
 2f13055795ba9015e6c0dbfc42f5574ccc04dd42 assets/roots/models/item/grove_moss.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/grove_pedestal.json
 97deb2b89129d391d5fdd1bb246a72b35fc3a06a assets/roots/models/item/grove_spores.json
+1beeb16114aedeaa02e4ce5f88499e58ef183814 assets/roots/models/item/hanging_grove_moss.json
 94d1d49a0b267468e50cbd64225ae18927dd3df6 assets/roots/models/item/herb_pouch.json
 8c5ff0bdec7626843a2ea258651396914546403c assets/roots/models/item/incense_burner.json
 f49e298ede83512d9c74474554aa89982e07f3ea assets/roots/models/item/inferno_bulb.json
@@ -276,5 +277,6 @@ c03c56153fc81b6519e197410c3198f6f87823f1 assets/roots/models/item/wildwood_slab.
 c950515847d88396f3cbbbd15c386b2d0a57acc3 assets/roots/models/item/wildwood_stairs.json
 52bb3628587f298de6f9f3a6bb532cc46b2bea12 assets/roots/models/item/wildwood_trapdoor.json
 ab86137beca3474198e292a5f4693ec26e405481 assets/roots/models/item/wildwood_wood.json
+4316b3ca078b8c4eafc9d885dae083fc708cb3a0 assets/roots/models/item/wild_roots.json
 075fc2889e5cccb7314a841f0aec4946f00a5f14 assets/roots/models/item/wooden_knife.json
 6a1bbe309afe0348326ada7af851a525399cbbc2 assets/roots/models/item/wooden_shears.json
