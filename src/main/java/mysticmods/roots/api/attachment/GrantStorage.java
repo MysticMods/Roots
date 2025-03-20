@@ -95,6 +95,7 @@ public class GrantStorage implements ICleanable {
   private void unlockModifier(ServerPlayer player, SpellModifier modifier) {
     if (grantedModifiers.add(modifier)) {
       setDirty(true);
+      player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
     }
   }
 
