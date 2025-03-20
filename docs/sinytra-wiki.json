@@ -3,7 +3,5 @@
   "platforms": {
     "curseforge": "246183"
   },
-  "version": {
-    "1.21.1": "1.21"
-  }
+  "slug": "roots"
 }
