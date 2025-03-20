@@ -1,0 +1,18 @@
+{
+  "getting-started": {
+    "name": "Getting Started With Roots 4!",
+    "icon": null
+  },
+  "spells": {
+    "name": "Staff & Spells",
+    "icon": null
+  },
+  "rituals": {
+    "name": "Rituals",
+    "icon": null
+  },
+  "dev": {
+    "name": "Information for Pack Developers",
+    "icon": null
+  }
+}

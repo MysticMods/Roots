@@ -3,6 +3,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.72'
+    id 'org.moddedmc.wiki.toolkit' version '0.2.7'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -216,4 +217,14 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+wiki {
+    docs {
+        roots {
+            root = file('docs')
+        }
+    }
+
+    wikiAccessToken = wikiToken
 }

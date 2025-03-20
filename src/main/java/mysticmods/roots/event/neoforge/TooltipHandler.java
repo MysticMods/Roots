@@ -9,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -16,7 +17,7 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class TooltipHandler {
-  @SubscribeEvent
+  @SubscribeEvent(priority= EventPriority.HIGHEST)
   public static void onItemTooltip(ItemTooltipEvent event) {
     ItemStack stack = event.getItemStack();
     if (stack.is(RootsTags.Items.NYI)) {

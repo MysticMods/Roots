@@ -80,6 +80,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.tooltip.staff.spell_in_slot", "%s: %s%s");
     add("roots.tooltip.staff.is_selected", " (Selected)");
 
+    add("roots.tooltip.staff.key_binding", "Press '%s' to open your spell library.");
     add("roots.tooltip.hold_shift", "[Hold %s for more information.]");
     add("roots.tooltip.shift", "Shift");
 

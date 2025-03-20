@@ -6,10 +6,12 @@ import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.client.KeyBindings;
 import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -122,5 +124,9 @@ public class ClientNetworkHandlers {
     for (Object2DoubleMap.Entry<Herb> entry : map.object2DoubleEntrySet()) {
       HerbLayer.updateHerb(entry.getKey(), entry.getDoubleValue());
     }
+  }
+
+  public static Component getStaffKeyBind () {
+    return KeyBindings.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
   }
 }

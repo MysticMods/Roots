@@ -11,9 +11,15 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO: Main TODO list
-// Start work on a wiki
+// Reorder the creative tab
+// Breaking grove stone in creative does drops
+// Inserting items onto pedestals in creative mode removes from inventory
+// Decorative pyres are missing particles
+// Particle colours for soul pyre are incorrect
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
 // JEI
+// - Durability costs knife/runic shears
+// - Cooldowns on entity recipes
 // - Pouch dye recipe
 // Runic shears dispenser behaviour
 // Elemental crop bounding boxes are wrong
@@ -28,7 +34,6 @@ import net.neoforged.fml.config.ModConfig;
 // - The pestle is held wrongly
 // - Leash attachment points
 // - Entity carry layers for all mobs
-// - Summon creatures recipes
 // - Transmutation recipes
 @Mod(RootsAPI.MODID)
 public class Roots {

@@ -1,0 +1,269 @@
+## Staff
+
+The primary method of casting spells in Roots 4 is using the staff.
+
+Once you have crafted a staff, you can access the Spell Library using the default key binding "K". This key binding may be changed from the default, but will be displayed in the staff's tooltip.
+
+## Spell Library
+
+The spell library will display the 5 slots in your held staff, as well as all of the available spells.
+
+In the library pane, spells you have not learned will be transparent.
+
+Clicking on a slot in either the staff or the library will "select" that slot, highlighting it in gold. Clicking on another slot will perform an operation:
+
+- If you have an empty spell slot selected, and you select a spell from the library that you know, that spell will be inserted into that slot.
+- If you have an empty slot selected, or a spell in the staff selected, and you select another slot in the staff, they will be swapped
+
+## Learning Spells
+
+Spells are considered "unlockables". By default, crafting specific mortar & pestle recipes will teach you a spell.
+
+It is recommended that you use Just Enough Items to view the recipes for a spell, as they can be configured in multiple ways.
+
+## Modifying Spells
+
+Certain spells can be modified.
+
+Modifiable spells have a number of values. For our example, we will use Shatter, which can have its height, width and depth adjusted.
+
+To switch between each attribute, use the "cycle spell" key binding (by default \\).
+
+Each attribute can be increased using the "increase spell" key binding (by default \[) or decreased using the "decrease spell" key binding (by default \]).
+
+The new value will be displayed on screen.
+
+Status:
+
+- Make the system clearer
+- Audio cue whenever a spell has been adjusted
+- Show the adjusted values within the tooltip
+
+## Spell Types
+
+Spells are one of three types:
+
+- Instant, which perform their action and immediately charge you the herb cost
+- Charged, which require you to hold right-click with your staff, and perform their action and charge you the herb cost once the staff is released
+- Channeled, which perform their action at an interval while right-click is held and charge a percentage cost every tick
+
+While charging or channeling a spell while holding a staff, you are able to move at your normal speed.
+
+Spells are also charged in different ways:
+
+- Per cast, meaning the herb cost is deducted once every time the spell is cast
+- Per operation, meaning that, for each "operation" of the spell (for example, the Harvest spell counts "each" crop broken and replanted as an operation)
+
+(For clarification, each individual "crop" is considered a single operation, regardless of how many actual blocks are broken.)
+
+## Herb Costs
+
+The costs of a spell are displayed in the tooltip of the spell.
+
+Herbs are consumed directly from the player's inventory. One herb is considered one (1) full amount, although the majority of spells use a fractional amount. "Left over" herb are stored in the player data itself.
+
+Additionally, herbs can also be consumed from containers in the player's inventory, such as the herb pouch, shulker boxes and bundles.
+
+Once a herb cost has been charged, a total amount of herb remaining will render on the screen to the left of your hot bar. [Note: this may appear incorrectly or off the screen at lower resolutions.]
+
+## Acid Cloud
+
+Does damage in an area around the player.
+
+Status:
+
+- Missing visual
+- Incorrect damage type
+
+## Aqua Bubble
+
+Applies a potion effect and an absorption effect. The potion effect reduces the amount of damage taken from lava and fire.
+
+Status:
+
+- Improve visual
+- Missing features
+
+## Augment
+
+Not implemented.
+
+## Control Undead
+
+Not implemented.
+
+## Dandelion Winds
+
+Knocks entities away from you.
+
+Status:
+- Missing visuals
+
+## Desaturate
+
+Converts your saturation (hunger shanks, etc) directly into healing.
+
+Status:
+
+- Missing visuals
+- Untested
+
+## Disarm
+
+Disarms nearby entities, with a chance to drop the disarmed items.
+
+Status:
+
+- Missing visuals
+- Untested
+
+## Extension
+
+Provides the "Sense Danger" and "Night Vision" effects. Sense Danger causes nearby hostile entities to glow.
+
+Status:
+
+- Missing visuals
+
+## Fey Light
+
+Creates a block of light in the direction you are facing.
+
+Status:
+
+- Visuals do not match the theme of the mod
+
+## Geas
+
+Applies an effect to a nearby hostile entity that prevents it from targeting or attacking you for the duration.
+
+Status:
+
+- Missing visuals
+- Current "eye strike through" visual doesn't match the theme.
+
+## Growth Infusion
+
+Channeled spell that encourages growth.
+
+Status:
+
+- Mostly complete
+- Not yet tested with cross-mod integration
+
+## Harvest
+
+Attempts to harvest nearby plants, and replant eligible ones.
+
+Status:
+
+- Not fully tested
+- Not fully implemented for Vanilla
+- Missing twisting vines
+- Missing weeping vines
+- Missing bamboo
+- Missing visuals
+
+## Jaunt
+
+Teleports the player a direction forward depending on the amount of time spent charging. In addition to forward movement, it tries to find the next highest (or lowest) safe space for the player to occupy.
+
+Status:
+
+- Missing visual
+- Functionality isn't really suitable: with the caves update, it mostly just teleports you underground
+- Should instead be modified to teleport you down (or up) depending on how long you charge the spell for
+
+## Life Drain
+
+Drains health from nearby enemies to heal the player.
+
+Status:
+
+- Missing visual
+- Does not have the correct damage type
+
+## Light Drifter
+
+Not yet implemented.
+
+## Magnetism
+
+Teleports experience orbs and items to your location.
+
+Status:
+- Missing visual
+
+## Nondetection
+
+Reduces the range at which enemies can detect you.
+
+Status:
+- Missing visual
+- Implementation-wise it's problematic as "group alert" effects will still cause enemies to target you
+- Occasionally makes creepers immediately explode
+
+## Petal Shell
+
+Surrounds you in a layer of (by default) 3 petal shells.
+
+Every time you are damaged, you take no damage instead and lose one of the petals until the effect is consumed.
+
+Status:
+
+- Missing visuals
+
+## Radiance
+
+Not implemented.
+
+## Sanctuary
+
+Forces enemies (and projectiles) away from you.
+
+Status:
+
+- Missing visuals
+
+## Shatter
+
+Destroys (by default) 2 blocks: the block you are looking at and the one directly below it.
+
+The width, height and depth of this effect can be adjusted (see the "Modifying Spells" section above).
+
+The blocks to be destroyed are highlighted when holding the staff.
+
+Status:
+
+- Missing visuals
+
+## Sky Soarer
+
+Applies an effect that causes you to fly in the direction you are looking. If you are riding an entity, it instead causes that entity to fly in that direction.
+
+Status:
+
+- Missing visuals
+
+## Storm Cloud
+
+Not yet implemented.
+
+## Time Stop
+
+Creates an entity that applies a Time Stop effect. While under the effects of Time Stop, entities do not perform their base tick.
+
+Status:
+
+- Missing visuals
+- This is entirely problematic and may need to be reconsidered
+
+## Wildfire
+
+Flings a meteor in the direction you are looking.
+
+Status:
+
+- Visuals could be improved
+- Damage type is not correct
+- Speed might need to be adjusted

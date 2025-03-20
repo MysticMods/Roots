@@ -5,6 +5,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.network.ClientNetworkHandlers;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.util.TooltipUtil;
@@ -288,6 +289,10 @@ public class CastingItem extends Item {
   @Override
   public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+
+    if (context.level() != null && context.level().isClientSide()) {
+      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", ClientNetworkHandlers.getStaffKeyBind()));
+    }
 
     TooltipUtil.spellStaffTooltip(context, tooltipComponents, stack, tooltipFlag);
   }
