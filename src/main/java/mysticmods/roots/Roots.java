@@ -14,8 +14,6 @@ import net.neoforged.fml.config.ModConfig;
 // Edit the beetle armor layers for overlap
 // Planting roots plants doesn't trigger a seedy place
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
-// JEI
-// - Cooldowns on entity recipes
 // Runic shears dispenser behaviour
 // Elemental crop bounding boxes are wrong
 // - Geas

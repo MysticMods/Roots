@@ -16,6 +16,7 @@ import mysticmods.roots.integration.jei.categories.drawable.DrawableComponent;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
 import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
+import mysticmods.roots.integration.jei.categories.widget.CooldownWidget;
 import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.client.Minecraft;
@@ -78,6 +79,11 @@ public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityReci
     if (recipe.getDurabilityCost() != -1) {
       Component durability = Component.translatable("roots.jei.text.durability", recipe.getDurabilityCost());
       builder.addWidget(new DurabilityWidget(recipe.getDurabilityCost(), 75, 50, durability));
+    }
+
+    if (recipe.getCooldown() != -1) {
+      Component cooldown = Component.translatable("roots.jei.text.cooldown", recipe.getCooldown() / 20);
+      builder.addWidget(new CooldownWidget(recipe.getCooldown(), 70, 70, cooldown));
     }
 
     int column = 0;

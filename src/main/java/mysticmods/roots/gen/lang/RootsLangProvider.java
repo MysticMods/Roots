@@ -635,7 +635,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.jei.pyre", "Pyre");
     add("roots.jei.mortar_crafting", "Mortar Crafting");
     add("roots.jei.text.durability", "Durability: %s");
-    add("roots.jei.text.cooldown", "Cooldown: %s");
+    add("roots.jei.text.cooldown", "Cooldown: %ss");
 
 
   }
