@@ -11,6 +11,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO: Main TODO list
+// Edit the beetle armor layers for overlap
 // Planting roots plants doesn't trigger a seedy place
 // Beetle armor legs/boots don't render properly
 // Breaking grove stone in creative does drops
