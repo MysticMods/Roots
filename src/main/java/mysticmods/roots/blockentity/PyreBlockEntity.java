@@ -117,7 +117,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (inHand.is(ModItems.FIRE_STARTER.get())) {
       return InteractionResult.PASS;
     }
-    // TODO:
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;
     }
@@ -442,14 +441,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   @Override
-  // TODO: handle client ticking
   public void clientTick(Level pLevel, BlockPos pPos, BlockState pState) {
   }
 
   @Override
   public void onLoad() {
     super.onLoad();
-    // WOULDN'T YOU KNOW, THIS BREAKS THE RECIPE CACHE!
     this.revalidateRecipe();
   }
 

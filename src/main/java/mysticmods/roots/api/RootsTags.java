@@ -337,7 +337,6 @@ public class RootsTags {
     public static final TagKey<Item> BAFFLECAP_HERB = modTag("herbs/bafflecap");
     public static final TagKey<Item> HERBS = modTag("herbs");
 
-    // TODO: POPULATE THIS
     public static final TagKey<Item> OWL_FOOD = modTag("tempt/owl");
     public static final TagKey<Item> BEETLE_FOOD = modTag("tempt/beetle");
     public static final TagKey<Item> DUCK_FOOD = modTag("tempt/duck");

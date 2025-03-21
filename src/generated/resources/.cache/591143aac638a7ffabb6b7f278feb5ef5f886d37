@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-20T11:15:29.5119918	Item Models: roots
+// 1.21.1	2025-03-21T15:44:14.9641789	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -66,7 +66,7 @@ a9f24fd326a6cb57c1ac50440d5849502ab332cf assets/roots/models/item/flour.json
 cb855da7b1d0684c4bc009f0241040ca807f5123 assets/roots/models/item/geas.json
 9907759431eb2eabffe2b5fac3a34337273fe463 assets/roots/models/item/gift_box.json
 733417364febd98d98daf39450a5755322e7261d assets/roots/models/item/glass_eye.json
-95918c8a5389f3be8c67dea890b97c16f26b0186 assets/roots/models/item/gold_knife.json
+1f500ef66b0ca053aabb91da18d416662b6c2b03 assets/roots/models/item/golden_knife.json
 5435be8db38522314eefe77149313635473e45a3 assets/roots/models/item/gramary.json
 3b41145a3b0d4c733c6cfc658481713ad4130b6e assets/roots/models/item/granite_quartz_ore.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/green_sprout_spawn_egg.json

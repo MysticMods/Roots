@@ -129,7 +129,6 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
 
   public SpellStorage setSpell(int slot, Spell spell) {
     if (!validateSlot(slot)) {
-      // TODO:
       return this;
     }
 

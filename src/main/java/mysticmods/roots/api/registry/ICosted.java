@@ -1,9 +1,6 @@
 package mysticmods.roots.api.registry;
 
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
-
-import java.util.List;
 
 // TODO: Format costs as a list of components
 public interface ICosted {
@@ -15,7 +12,7 @@ public interface ICosted {
     return getCosts().chargeType();
   }
 
-  default int getMaximumOperations () {
+  default int getMaximumOperations() {
     return 1;
   }
 }

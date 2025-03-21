@@ -23,7 +23,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.function.Supplier;
 
 public class ModItems {
   private static final DeferredRegister<Item> ITEMS = DeferredRegister.createItems(RootsAPI.MODID);
@@ -302,7 +301,7 @@ public class ModItems {
   public static DeferredHolder<Item, KnifeItem> STONE_KNIFE = ITEMS.register("stone_knife", () -> new KnifeItem(Tiers.STONE, new Item.Properties().component(ModAttachments.FORAGING, 2).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.STONE, 1f, -2.4f))));
   public static DeferredHolder<Item, KnifeItem> COPPER_KNIFE = ITEMS.register("copper_knife", () -> new KnifeItem(RootsAPI.COPPER_TIER, new Item.Properties().component(ModAttachments.FORAGING, 3).stacksTo(1).attributes(SwordItem.createAttributes(RootsAPI.COPPER_TIER, 1f, -2.4f))));
   public static DeferredHolder<Item, KnifeItem> IRON_KNIFE = ITEMS.register("iron_knife", () -> new KnifeItem(Tiers.IRON, new Item.Properties().component(ModAttachments.FORAGING, 3).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.IRON, 1f, -2.4f))));
-  public static DeferredHolder<Item, KnifeItem> GOLD_KNIFE = ITEMS.register("gold_knife", () -> new KnifeItem(Tiers.GOLD, new Item.Properties().component(ModAttachments.FORAGING, 4).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.GOLD, 1f, -2.4f))));
+  public static DeferredHolder<Item, KnifeItem> GOLDEN_KNIFE = ITEMS.register("golden_knife", () -> new KnifeItem(Tiers.GOLD, new Item.Properties().component(ModAttachments.FORAGING, 4).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.GOLD, 1f, -2.4f))));
   public static DeferredHolder<Item, KnifeItem> SILVER_KNIFE = ITEMS.register("silver_knife", () -> new KnifeItem(Tiers.GOLD, new Item.Properties().component(ModAttachments.FORAGING, 4).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.GOLD, 1f, -2.4f))));
   public static DeferredHolder<Item, KnifeItem> DIAMOND_KNIFE = ITEMS.register("diamond_knife", () -> new KnifeItem(Tiers.DIAMOND, new Item.Properties().component(ModAttachments.FORAGING, 5).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.DIAMOND, 1f, -2.4f))));
   public static DeferredHolder<Item, KnifeItem> NETHERITE_KNIFE = ITEMS.register("netherite_knife", () -> new KnifeItem(Tiers.NETHERITE, new Item.Properties().component(ModAttachments.FORAGING, 6).stacksTo(1).attributes(SwordItem.createAttributes(Tiers.NETHERITE, 1f, -2.4f))));

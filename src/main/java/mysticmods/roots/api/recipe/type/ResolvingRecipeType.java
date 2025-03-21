@@ -37,8 +37,7 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   protected List<RecipeHolder<T>> getRecipesList() {
     RecipeManager manager = RootsAPI.getInstance().getRecipeManager();
     if (manager == null) {
-      // TODO:
-      return null;
+      return Collections.emptyList();
     }
     return manager.getAllRecipesFor(type.get());
   }

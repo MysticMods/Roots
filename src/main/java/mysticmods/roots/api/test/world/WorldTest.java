@@ -11,7 +11,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-// TODO: BlockState match!
 public abstract class WorldTest {
   public static final Codec<WorldTest> CODEC = RootsRegistries.WORLD_TEST_TYPES.byNameCodec()
       .dispatch("type", WorldTest::getType, WorldTestType::codec);

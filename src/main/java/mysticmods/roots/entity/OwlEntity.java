@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,6 +21,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -55,7 +57,7 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 8.0F));
     goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
     goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1D));
-    // TODO: Currently has no tempt goal
+    goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(RootsTags.Items.OWL_FOOD), false));
   }
 
   public static AttributeSupplier.Builder attributes() {
@@ -114,8 +116,7 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   public static <T extends OwlEntity> boolean placement(EntityType<T> pAnimal, LevelAccessor worldIn, MobSpawnType reason, BlockPos blockpos, RandomSource pRandom) {
     BlockState down = worldIn.getBlockState(blockpos.below());
     Block block = down.getBlock();
-    // TODO: Tag for logs
-    return block instanceof LeavesBlock || block == Blocks.GRASS_BLOCK || (block instanceof RotatedPillarBlock) || block == Blocks.AIR && worldIn.getMaxLocalRawBrightness(blockpos) > 8;
+    return block instanceof LeavesBlock || block == Blocks.GRASS_BLOCK || block.builtInRegistryHolder().is(BlockTags.LOGS) || block == Blocks.AIR && worldIn.getMaxLocalRawBrightness(blockpos) > 8;
   }
 
   @Override

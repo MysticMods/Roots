@@ -28,7 +28,6 @@ public class SkySoarerEffect extends SimpleEffect {
       vehicle.hurtMarked = true;
       vehicle.fallDistance = 0f;
       if (vehicle instanceof Boat) {
-        // TODO: Post-apply
         vehicle.setDeltaMovement(vehicle.getLookAngle()
             .multiply(sky.getAmplifier(), 0, sky.getAmplifier()));
       } else {
@@ -48,8 +47,6 @@ public class SkySoarerEffect extends SimpleEffect {
   public void removeAttributeModifiers(AttributeMap pAttributeMap) {
     super.removeAttributeModifiers(pAttributeMap);
   }
-
-  // TODO: Move on effect end from GSU
 
   @Override
   public boolean onEffectRemoved(LivingEntity pLivingEntity, int amplifier) {

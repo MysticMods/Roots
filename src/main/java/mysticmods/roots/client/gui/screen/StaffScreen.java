@@ -162,8 +162,6 @@ public class StaffScreen extends RootsScreen {
     return false;
   }
 
-  // TODO: "Slot" changes
-
   public static void open(@Nullable InteractionHand hand, int inventorySlot) {
     StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
     Minecraft.getInstance().setScreen(newScreen);

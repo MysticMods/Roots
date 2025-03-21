@@ -30,7 +30,6 @@ public class DeerEntity extends Animal {
 
   public DeerEntity(EntityType<? extends DeerEntity> type, Level world) {
     super(type, world);
-    // TODO: ???
     this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 

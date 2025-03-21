@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-19T21:06:29.6663321	Roots Item Tags
+// 1.21.1	2025-03-21T15:44:14.952627	Roots Item Tags
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
@@ -105,7 +105,7 @@ e9fdf8ddb1256a33128e181d1c6f39c027944fd4 data/roots/tags/item/herbs/spiritleaf.j
 5dd52dc26ff5a76a22fab1dca7ceaacbc66ecabe data/roots/tags/item/herbs/stalicripe.json
 b1b4c38e5bcca0cfa734df1c87c4a3e1a56b2d5a data/roots/tags/item/herbs/wildewheet.json
 23b0cf7706593177366ab2bc2553a24687215595 data/roots/tags/item/herbs/wildroot.json
-e509fc4c41f680481ca8648179a2891387301472 data/roots/tags/item/knives.json
+2cc69a8ceea7c1f8652a69c6679b3791a8307b95 data/roots/tags/item/knives.json
 047b7c7631a4b09bd9bbdf8c77cfe781370cd790 data/roots/tags/item/logs/runed.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/item/logs/runed/acacia.json
 4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/roots/tags/item/logs/runed/birch.json

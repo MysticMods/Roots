@@ -41,7 +41,6 @@ public class WaterElementalCropBlock extends ElementalCropBlock implements Simpl
 
   @Override
   @Nullable
-  // TODO: Add check for elemental soils
   public BlockState getStateForPlacement(BlockPlaceContext pContext) {
     Level level = pContext.getLevel();
     BlockPos pos = pContext.getClickedPos();

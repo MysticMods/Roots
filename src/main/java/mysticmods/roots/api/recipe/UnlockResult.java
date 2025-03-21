@@ -6,7 +6,6 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 
-// TODO: Handle when there are repeatables and non-repeatable grants
 public record UnlockResult(List<Unlock<?>> failedUnlocks, Player player) {
   public boolean anyFailed() {
     return !failedUnlocks.isEmpty();

@@ -9,7 +9,6 @@ import mysticmods.roots.item.KnifeItem;
 import mysticmods.roots.item.RootsCauldronInteractions;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FireBlock;
@@ -62,7 +61,7 @@ public class CommonSetup {
       DispenserBlock.registerBehavior(ModItems.STONE_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.COPPER_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.IRON_KNIFE.get(), behaviour);
-      DispenserBlock.registerBehavior(ModItems.GOLD_KNIFE.get(), behaviour);
+      DispenserBlock.registerBehavior(ModItems.GOLDEN_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.SILVER_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.DIAMOND_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.NETHERITE_KNIFE.get(), behaviour);

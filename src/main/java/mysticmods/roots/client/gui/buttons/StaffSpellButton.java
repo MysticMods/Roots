@@ -29,9 +29,4 @@ public class StaffSpellButton extends TypedButton<ISpellInstance, StaffScreen> {
       graphics.blit(highlight, x, y, 0, 0, 18, 18, 18, 18);
     }
   }
-
-  // TODO: Neve rused?
-  public ISpellInstance getSpellInstance() {
-    return spellSupplier.get();
-  }
 }

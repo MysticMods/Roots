@@ -348,7 +348,6 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return (BlockHitResult) pPlayer.pick(getRange(pPlayer), 1f, fluids);
   }
 
-  // TODO: Pick entity
   public boolean is(ResourceLocation key) {
     return builtInRegistryHolder().is(key);
   }

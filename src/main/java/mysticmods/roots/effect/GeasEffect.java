@@ -16,8 +16,6 @@ public class GeasEffect extends SimpleEffect {
 
   @Override
   public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-    // TODO: Better visual!
-    // PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new GeasFXPacket(livingEntity.getId()));
     return true;
   }
 

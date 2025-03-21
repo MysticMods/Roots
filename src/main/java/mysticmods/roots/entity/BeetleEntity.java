@@ -40,8 +40,7 @@ public class BeetleEntity extends TamableAnimal {
     goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
     goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
     goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
-    // TODO: Convert to tag
-    goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.MELON_SLICE), false));
+    goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(RootsTags.Items.BEETLE_FOOD), false));
     goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
     goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
     goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -108,7 +107,6 @@ public class BeetleEntity extends TamableAnimal {
         }
 
         return actionresulttype;
-        // TODO: Tag
       } else if (item.builtInRegistryHolder().is(RootsTags.Items.BEETLE_FOOD)) {
         if (!player.isCreative()) {
           itemstack.shrink(1);

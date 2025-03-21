@@ -385,7 +385,7 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.STONE_KNIFE);
     addItem(ModItems.COPPER_KNIFE);
     addItem(ModItems.IRON_KNIFE);
-    addItem(ModItems.GOLD_KNIFE);
+    addItem(ModItems.GOLDEN_KNIFE);
     addItem(ModItems.SILVER_KNIFE);
     addItem(ModItems.DIAMOND_KNIFE);
     addItem(ModItems.NETHERITE_KNIFE);
@@ -568,7 +568,6 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.RAW_SILVER_STORAGE, "Raw Silver Storage Blocks");
     add(RootsTags.Items.SILVER_NUGGET, "Silver Nuggets");
     add(RootsTags.Items.SILVER_ITEMS, "Silver Items");
-    // TODO:
     add(RootsTags.Items.SKIPPED_FOODS, "Ignored foods");
     add(RootsTags.Items.DEER_FOOD, "Foor for Deer");
     add(RootsTags.Items.FENNEC_FOOD, "Food for Fennecs");
@@ -576,10 +575,6 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.DUCK_FOOD, "Food for Ducks");
     add(RootsTags.Items.OWL_FOOD, "Food for Owls");
     add(RootsTags.Items.SPROUT_FOOD, "Food for Sprouts");
-
-    // TODO: Block tags?
-    // TODO: Spell names
-
 
     add("roots.subtitles.spell.acid_cloud", "Acid cloud billows");
     add("roots.subtitles.spell.acid_cloud_alt", "Acid cloud billows");

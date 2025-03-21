@@ -107,7 +107,6 @@ public abstract class WorldRecipe<W extends IWorldCrafting> extends RootsRecipe<
       }
     }
 
-    // TODO: List results
     if (hasItemOutput(provider)) {
       return getResultItem(provider).copy();
     } else {

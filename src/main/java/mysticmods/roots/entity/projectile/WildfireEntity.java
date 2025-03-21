@@ -198,9 +198,6 @@ public class WildfireEntity extends Projectile {
     return ProjectileDeflection.NONE;
   }
 
-// TODO: Should fall?
-
-  // TODO: startFalling ?
   protected void tickDespawn() {
     this.life++;
     if (this.life >= 90) {

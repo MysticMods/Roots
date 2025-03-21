@@ -131,14 +131,12 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
 
   default List<ItemStack> assembleOutputs(W inventory, RandomSource random, HolderLookup.Provider provider, @Nullable Supplier<List<ItemStack>> inputProvider) {
     List<ItemStack> results = new ArrayList<>();
-    // TODO: There may be doubles-up, check
     if (!hasItemOutput(provider)) {
       if (inventory instanceof IRootsCrafting<?> crafting) {
         Player player = crafting.getPlayer();
         if (player instanceof ServerPlayer sPlayer) {
           for (Unlock<?> unlock : getUnlocks()) {
             if (RootsAPI.getInstance().canUnlock(sPlayer, unlock)) {
-              // TODO: Message that it's unlocked
               RootsAPI.getInstance().unlock(sPlayer, unlock);
             }
           }

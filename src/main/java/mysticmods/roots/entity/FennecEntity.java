@@ -162,20 +162,6 @@ public class FennecEntity extends TamableAnimal {
   }
 
   @Override
-  public boolean doHurtTarget(Entity entityIn) {
-    return super.doHurtTarget(entityIn);
-    // TODO: sound effect
-/*    boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float) ((int) getAttributeValue(Attributes.ATTACK_DAMAGE)));
-
-    if (flag) {
-      doEnchantDamageEffects(this, entityIn);
-      playSound(ModSounds.FENNEC_BITE.get(), 1.0f, 1.0f);
-    }
-
-    return flag;*/
-  }
-
-  @Override
   public void setTame(boolean tamed, boolean unknown) {
     super.setTame(tamed, unknown);
     if (tamed) {

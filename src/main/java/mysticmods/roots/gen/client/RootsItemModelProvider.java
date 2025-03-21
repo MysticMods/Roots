@@ -103,7 +103,6 @@ public class RootsItemModelProvider extends ItemModelProvider {
     simpleBlockItem(ModBlocks.RUNED_BRICK_PRESSURE_PLATE.get());
     simpleBlockItem(ModBlocks.RUNED_TILE_PRESSURE_PLATE.get());
     simpleBlockItem(ModBlocks.WILDWOOD_PRESSURE_PLATE.get());
-    // TODO: Does htis work?
     basicItem(ModItems.WILDWOOD_DOOR.get());
     withExistingParent(ModBlocks.WILDWOOD_TRAPDOOR.getKey().location()
         .toString(), modLoc("block/wildwood_trapdoor_bottom"));
@@ -142,11 +141,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
         .getPath(), modLoc("block/complex/grove_pedestal"));
     // Wild roots are existing
     simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
-    simpleBlockItem(ModBlocks.CREEPING_GROVE_MOSS.get());
-    // TODO: is this correct?
 
     withExistingParent("bafflecap_block", modLoc("block/bafflecap_block_inventory"));
-    // Is THIS correct? TODO
     withExistingParent(ModBlocks.PRIMAL_GROVE_STONE.getKey().location()
         .getPath(), modLoc("block/primal_grove_stone_inventory"));
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
@@ -251,7 +247,6 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.RUNED_PICKAXE, "tools");
     subfolder(ModItems.RUNED_DAGGER, "tools");
     subfolder(ModItems.RUNED_HOE, "tools");
-    // TODO: what was this missed with
     subfolder(ModItems.RUNED_PICKAXE, "tools");
     subfolder(ModItems.RUNED_SHOVEL, "tools");
     subfolder(ModItems.RUNED_SWORD, "tools");
@@ -272,7 +267,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     handheldItem(ModItems.STONE_KNIFE.get());
     handheldItem(ModItems.COPPER_KNIFE.get());
     handheldItem(ModItems.IRON_KNIFE.get());
-    handheldItem(ModItems.GOLD_KNIFE.get()); // TODO: golden?
+    handheldItem(ModItems.GOLDEN_KNIFE.get());
     handheldItem(ModItems.SILVER_KNIFE.get());
     handheldItem(ModItems.DIAMOND_KNIFE.get());
     handheldItem(ModItems.NETHERITE_KNIFE.get());

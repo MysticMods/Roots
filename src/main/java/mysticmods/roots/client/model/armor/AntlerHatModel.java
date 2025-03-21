@@ -41,14 +41,6 @@ public class AntlerHatModel extends ArmorModel {
     super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
   }
 
-// TODO:
-/*
-  @Override
-  public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-    super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-  }
-*/
-
   public static LayerDefinition createBodyLayer() {
     MeshDefinition meshdefinition = new MeshDefinition();
     PartDefinition partdefinition = meshdefinition.getRoot();

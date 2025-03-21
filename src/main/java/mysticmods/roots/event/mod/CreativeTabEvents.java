@@ -231,7 +231,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.STONE_KNIFE.get());
       event.accept(ModItems.COPPER_KNIFE.get());
       event.accept(ModItems.IRON_KNIFE.get());
-      event.accept(ModItems.GOLD_KNIFE.get());
+      event.accept(ModItems.GOLDEN_KNIFE.get());
       event.accept(ModItems.SILVER_KNIFE.get());
       event.accept(ModItems.DIAMOND_KNIFE.get());
       event.accept(ModItems.NETHERITE_KNIFE.get());

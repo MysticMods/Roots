@@ -102,12 +102,6 @@ public class BaseRecipeData {
     return ingredients.isEmpty() && levelConditions.isEmpty() && playerConditions.isEmpty() && result.isEmpty() && chanceOutputs.isEmpty() && unlocks.isEmpty();
   }
 
-  // TODO: Why does this exist
-  public Builder builder() {
-    return new Builder(new ArrayList<>(ingredients), new ArrayList<>(levelConditions), new ArrayList<>(playerConditions), result.copy(), chanceOutputs.stream().map(ChanceOutput::copy)
-        .collect(Collectors.toList()), new ArrayList<>(unlocks), this.priority);
-  }
-
   private static <V, T extends List<V>> Optional<T> c(T value) {
     return value == null || value.isEmpty() ? Optional.empty() : Optional.of(value);
   }

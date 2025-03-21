@@ -108,9 +108,6 @@ public class RootsDataPackGenerators {
                       new ConfiguredFeature<>(
                           ModFeatures.HANGING_MOSS_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.HANGING_GROVE_MOSS.get()
                           .defaultBlockState()))));
-                  // TODO: Is this used?
-                  bootstrap.register(ModFeatures.CONFIGURED_WILD_ROOTS_MOSSY_KEY, new ConfiguredFeature<>(ModFeatures.SUPPORTING_DIRECTIONAL_BLOCK_FEATURE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_ROOTS.get()
-                      .defaultBlockState().setValue(WildRootsBlock.MOSSY, true)))));
                   ConfiguredFeature<?, ?> wildAubergine = new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.WILD_AUBERGINE.get()
                       .defaultBlockState())));
                   PlacedFeature placedWildAubergine = new PlacedFeature(Holder.direct(wildAubergine),
@@ -239,7 +236,7 @@ public class RootsDataPackGenerators {
                   HolderGetter<Biome> biomeGetter = bootstrap.lookup(Registries.BIOME);
                   HolderGetter<StructureTemplatePool> poolGetter = bootstrap.lookup(Registries.TEMPLATE_POOL);
                   bootstrap.register(ModFeatures.BARROW_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_BARROW_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_BOX), poolGetter.getOrThrow(ModFeatures.BARROW_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
-                  // TODO: Sink it slightly, but how?
+                  // TODO: Rework large barrow
                   bootstrap.register(ModFeatures.LARGE_BARROW_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_BARROW_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN), poolGetter.getOrThrow(ModFeatures.LARGE_BARROW_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
                   bootstrap.register(ModFeatures.HUT_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_HUT_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN), poolGetter.getOrThrow(ModFeatures.HUT_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
                   bootstrap.register(ModFeatures.RUINED_HUT_KEY, new JigsawStructure(new Structure.StructureSettings(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_HUT_STRUCTURES), Collections.emptyMap(), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN), poolGetter.getOrThrow(ModFeatures.RUINED_HUT_START_POOL_KEY), Optional.empty(), 1, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 80, Collections.emptyList(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));

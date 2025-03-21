@@ -1,11 +1,9 @@
 package mysticmods.roots.gen.recipe;
 
-import mysticmods.roots.Roots;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.recipe.BaseRecipeData;
-import mysticmods.roots.api.recipe.WorldCondition;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
@@ -1576,7 +1574,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
         .save(c, RootsAPI.rl("iron_knife"));
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.GOLD_KNIFE.get())
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.GOLDEN_KNIFE.get())
         .pattern("  X")
         .pattern(" W ")
         .pattern("S  ")
