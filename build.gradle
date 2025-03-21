@@ -4,10 +4,7 @@ plugins {
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.72'
     id 'org.moddedmc.wiki.toolkit' version '0.2.7'
-    id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
-
-apply plugin: "me.modmuss50.mod-publish-plugin"
 
 tasks.named('wrapper', Wrapper).configure {
     // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
@@ -229,70 +226,4 @@ wiki {
     }
 
     wikiAccessToken = project.findProperty("wikiToken")
-}
-
-Map<String, Map<String, String>> platformSettings = [
-        "neoforge": [
-                "curse-id": "246183",
-                "curse-slug": "roots",
-                "title": "for NeoForge"
-        ]
-]
-
-Map<String, Map<String, Boolean>> platformDependencies = [
-        "neoforge": [
-        ]
-]
-
-var env = System.getenv()
-def uploadSettings = platformSettings.get(name)
-def uploadDependencies = platformDependencies.get(name)
-
-String changelogText = ""
-
-if (uploadSettings != null && uploadDependencies != null) {
-
-    //File changeLog = rootProject.file("CHANGELOG.md")
-    //String changelogText = changeLog.exists() ? changeLog.text : ""
-
-    publishMods {
-        file = tasks.remapJar.archiveFile
-        type = ALPHA
-        changelog = changelogText
-
-        displayName = "roots-${name}-${rootProject.minecraft_version}-${rootProject.mod_version}"
-        version = "${rootProject.mod_version}"
-        modLoaders.add(name)
-
-        if (project.hasProperty("curse_auth")) {
-            curseforge {
-                accessToken = project.findProperty("curse_auth")
-                projectId = uploadSettings["curse-id"]
-                projectSlug = uploadSettings["curse-slug"]
-                announcementTitle = "Roots ${rootProject.minecraft_version}-${rootProject.mod_version} ${uploadSettings["title"]} on CurseForge"
-                // TODO: Hard-coded
-                minecraftVersions.add(rootProject.minecraft_version)
-                minecraftVersions.add("1.21.1")
-
-                if (uploadDependencies.size() > 0) {
-                    uploadDependencies.each { dep, required ->
-                        if (required) {
-                            requires(dep)
-                        }
-                        else {
-                            optional(dep)
-                        }
-                    }
-                }
-            }
-        }
-
-        if (project.hasProperty("curse_discord_webhook")) {
-            discord {
-                webhookUrl = project.findProperty("curse_discord_webhook")
-                username = "Roots Update"
-                setPlatforms(publishMods.platforms.curseforge)
-            }
-        }
-    }
 }
