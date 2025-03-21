@@ -89,7 +89,9 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
     } else if (inSlot.isEmpty()) {
       // insert
       ItemStack result = inventory.insertItem(0, inHand, false);
-      player.setItemInHand(hand, result);
+      if (!player.isCreative()) {
+        player.setItemInHand(hand, result);
+      }
     } else {
       // Are they the same item?
       if (ItemStack.isSameItemSameComponents(inSlot, inHand)) {

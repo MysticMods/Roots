@@ -14,7 +14,6 @@ import net.neoforged.fml.config.ModConfig;
 // Edit the beetle armor layers for overlap
 // Planting roots plants doesn't trigger a seedy place
 // Beetle armor legs/boots don't render properly
-// Inserting items onto pedestals in creative mode removes from inventory
 // Decorative pyres are missing particles
 // Particle colours for soul pyre are incorrect
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index

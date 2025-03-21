@@ -152,7 +152,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     } else if (inHand.is(RootsTags.Items.PYRE_ACTIVATION)) {
       InteractionResult result = light(player);
-      if (result.indicateItemUse() && inHand.isDamageableItem()) {
+      if (result.indicateItemUse() && inHand.isDamageableItem() && !player.isCreative()) {
         inHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
       }
       return result;
@@ -164,7 +164,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       if (inHand.equals(result)) {
         return InteractionResult.PASS;
       }
-      player.setItemInHand(hand, result);
+      if (!player.isCreative()) {
+        player.setItemInHand(hand, result);
+      }
     }
 
     return InteractionResult.SUCCESS;

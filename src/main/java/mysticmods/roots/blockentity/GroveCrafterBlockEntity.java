@@ -86,7 +86,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       lastRecipe = cachedRecipe;
       List<ItemStack> results = cachedRecipe.value()
           .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
-      for (ItemStack stack : results) {
+      for (ItemStack stack : this.outputAdjacent(results)) {
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
       }
       cachedRecipe = null;
