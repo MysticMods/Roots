@@ -16,7 +16,9 @@ import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -63,6 +65,7 @@ public class AquaBubbleSpell extends Spell {
     }
     SnapshotHelper.addLiving(pPlayer, ModSerializers.AQUA_BUBBLE.get(), new AquaBubbleSnapshot(pPlayer, duration, absorption, fire_reduction, lava_reduction));
     pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, (int) absorption / 2, false, false));
+    pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, (int) absorption / 2, false, false));
     return cooldown;
   }
 }

@@ -25,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -41,7 +42,7 @@ public class BloomingRitual extends Ritual {
   // TODO: Caching of positions based on predicate
   private static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE = (level, pos) -> {
     BlockPos above = pos.above();
-    return level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos).canBeReplaced();
+    return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above()).isEmpty() && level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos).canBeReplaced() && level.getFluidState(pos).isEmpty();
   };
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(TWO_AIR_ABOVE);
 

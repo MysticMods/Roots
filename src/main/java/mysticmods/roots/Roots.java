@@ -11,6 +11,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO: Main TODO list
+// Can throw a herb pouch out while editing it
+// Can move herb pouch while editing it
+// Petal shell effect icon
 // Edit the beetle armor layers for overlap
 // Planting roots plants doesn't trigger a seedy place
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index

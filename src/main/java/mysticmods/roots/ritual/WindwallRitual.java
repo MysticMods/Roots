@@ -65,10 +65,12 @@ public class WindwallRitual extends Ritual {
             knockBack(entity, strength, x, z);
           }
 
-          // This deals with entities "stuck" against walls
-          Vec3 delta = entity.getDeltaMovement();
-          entity.setDeltaMovement(delta.x, minimumY + (entity.getBbHeight() * heightPercentage), delta.z);
-          entity.hasImpulse = true;
+          if (entity.onGround()) {
+            // This deals with entities "stuck" against walls
+            Vec3 delta = entity.getDeltaMovement();
+            entity.setDeltaMovement(delta.x, minimumY + (entity.getBbHeight() * heightPercentage + entity.getBbHeight() * 0.1), delta.z);
+            entity.hasImpulse = true;
+          }
         }
       }
     }

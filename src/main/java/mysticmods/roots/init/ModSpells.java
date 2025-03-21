@@ -37,7 +37,7 @@ public class ModSpells {
   // Aqua Bubble (1200 cooldown)
   public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250))));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_COOLDOWN = P.recordProperty("aqua_bubble/cooldown", Property.ofInt(1200, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_DURATION = P.recordProperty("aqua_bubble/duration", Property.ofInt(200, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_DURATION = P.recordProperty("aqua_bubble/duration", Property.ofInt(20 * 90, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_ABSORPTION = P.recordProperty("aqua_bubble/absorption", Property.ofInt(40, "The amount of damage absorbed by the aqua bubble, 1 equals half a heart."));
   public static final PropertyHolder<Property.FloatProperty> AQUA_BUBBLE_FIRE_REDUCTION = P.recordProperty("aqua_bubble/fire_reduction", Property.ofFloat(0.6f, "The percentage of fire damage reduced by the aqua bubble."));
   public static final PropertyHolder<Property.FloatProperty> AQUA_BUBBLE_LAVA_REDUCTION = P.recordProperty("aqua_bubble/lava_reduction", Property.ofFloat(0.6f, "The percentage of lava damage reduced by the aqua bubble."));
@@ -136,7 +136,7 @@ public class ModSpells {
 
   // Life Drain (20 cooldown)
   public static final DeferredHolder<Spell, LifeDrainSpell> LIFE_DRAIN = spell(Spells.LIFE_DRAIN, LifeDrainSpell::new, ChatFormatting.DARK_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250))));
-  public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = P.recordProperty("life_drain/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = P.recordProperty("life_drain/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_DISTANCE = P.recordProperty("life_drain/distance", Property.ofDouble(3.0, "The first defaultValue used when calculating the vector from the caster."));
   public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_BOUNDS = P.recordProperty("life_drain/bounds", Property.ofDouble(2.0, "The second defaultValue used when calculating the size of the bounding box from the caster's look vector."));
   public static final PropertyHolder<Property.FloatProperty> LIFE_DRAIN_DAMAGE = P.recordProperty("life_drain/damage", Property.ofFloat(3.0f, SpellProperties.DAMAGE));
@@ -145,7 +145,7 @@ public class ModSpells {
   // Petal Shell (120 cooldown)
   public static final DeferredHolder<Spell, PetalShellSpell> PETAL_SHELL = spell(Spells.PETAL_SHELL, PetalShellSpell::new, ChatFormatting.LIGHT_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.PERESKIA, SpellCosts.BASE_0250))));
   public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_COOLDOWN = P.recordProperty("petal_shell/cooldown", Property.ofInt(120, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_DURATION = P.recordProperty("petal_shell/duration", Property.ofInt(100, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_DURATION = P.recordProperty("petal_shell/duration", Property.ofInt(20 * 90, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> PETAL_SHELL_COUNT = P.recordProperty("petal_shell/count", Property.ofInt(3, "The number of petal shells."));
 
   // Radiance (20 cooldown)
@@ -201,7 +201,7 @@ public class ModSpells {
 
   // Wildfire (24 cooldown)
   public static final DeferredHolder<Spell, WildfireSpell> WILDFIRE = spell(Spells.WILDFIRE, WildfireSpell::new, ChatFormatting.DARK_RED, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250))));
-  public static final PropertyHolder<Property.IntegerProperty> WILDFIRE_COOLDOWN = P.recordProperty("wildfire/cooldown", Property.ofInt(24, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> WILDFIRE_COOLDOWN = P.recordProperty("wildfire/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
 
   private static <T extends Spell> DeferredHolder<Spell, T> spell(ResourceKey<Spell> key, SpellConstructor<T> consturctor, ChatFormatting color, Supplier<CostInstance> costs) {
     return REGISTER.register(key.location().getPath(), spellBuilder(consturctor, color, costs));

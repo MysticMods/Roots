@@ -30,7 +30,7 @@ public class LifeDrainSpell extends Spell {
   private float damage, heal;
 
   public LifeDrainSpell(ChatFormatting color, CostInstance costs) {
-    super(Type.INSTANT, color, costs, 0x902040, 0xffc4f0);
+    super(Type.CONTINUOUS, color, costs, 0x902040, 0xffc4f0);
   }
 
   @Override
@@ -77,6 +77,8 @@ public class LifeDrainSpell extends Spell {
         }
       }
     }
+
+    // TODO: Charge per operation
     if (foundTarget) {
       costs.noCharge();
       return 0;

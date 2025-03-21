@@ -67,7 +67,7 @@ public class OvergrowthRitual extends Ritual {
         if (lastState.is(RootsTags.Blocks.GROVE_MOSS)) {
           for (Direction dir : horizontals()) {
             BlockPos offset = lastChanged.relative(dir);
-            if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
+            if (pLevel.getFluidState(offset).isEmpty() && GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
               pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
                   .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
               lastChanged = offset;
@@ -82,7 +82,7 @@ public class OvergrowthRitual extends Ritual {
         for (BlockPos pos : pCache.iterate(GROVE_MOSS_PREDICATE, randomSource)) {
           for (Direction dir : horizontals()) {
             BlockPos offset = pos.relative(dir);
-            if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
+            if (pLevel.getFluidState(offset).isEmpty() && GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
               pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
                   .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
               lastChanged = offset;
@@ -93,7 +93,7 @@ public class OvergrowthRitual extends Ritual {
         for (BlockPos pos : pCache.iterate(WATER_PREDICATE, randomSource)) {
           for (Direction dir : horizontals()) {
             BlockPos offset = pos.above().relative(dir);
-            if (GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
+            if (pLevel.getFluidState(offset).isEmpty() && GroveSporesItem.canPlace(pLevel, offset, Direction.UP)) {
               pLevel.setBlock(offset, ModBlocks.CREEPING_GROVE_MOSS.get().defaultBlockState()
                   .setValue(CreepingGroveMossBlock.RITUAL_PLACED, true), 3);
               lastChanged = offset;

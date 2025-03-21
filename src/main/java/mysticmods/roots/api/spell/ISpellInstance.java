@@ -40,7 +40,7 @@ public interface ISpellInstance extends SpellLike {
   }
 
   default boolean canCast(Player pCaster) {
-    return getCooldown() == 0;
+    return getCooldown() <= 0;
   }
 
   // Returns length of cooldown

@@ -51,9 +51,9 @@ public class MagnetismSpell extends TwoRadiusSpell {
       return 0;
     } else {
       costs.operations(pulled);
+      return cooldown;
     }
 
-    return cooldown;
   }
 
   @Override
