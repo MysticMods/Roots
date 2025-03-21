@@ -226,6 +226,4 @@ wiki {
             root = file('docs')
         }
     }
-
-    wikiAccessToken = project.findProperty("wiki_token")
 }
