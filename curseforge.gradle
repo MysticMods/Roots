@@ -76,14 +76,8 @@ curseforge {
             id = "${curse_project}"
             debug = false
             releaseType = getDefaultString('curse_release_type', 'alpha')
-            changelog = project.ext.modChangelog
-            
-            if (!project.hasProperty("patreon_disabled") && project.ext.patreon && project.ext.patreon.pledgeLog) {
-                
-                def patreonText = project.ext.patreon.campaignUrlTracked ? "[Patreon](${project.ext.patreon.campaignUrlTracked})" : 'Patreon'
-                changelog += "\n\nThis mod was made possible by ${patreonText} support from players like you. Thank you!\n\n${project.ext.patreon.pledgeLog}"
-            }
-            
+            changelog = ""
+
             changelogType = 'markdown'
 
             if (project.hasProperty('curse_versions')) {
