@@ -85,6 +85,10 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
     return true;
   }
 
+  public int getDurabilityCost() {
+    return durabilityCost;
+  }
+
   @Override
   public BlockState modifyState(SimpleWorldCrafting pContainer, BlockState currentState, HolderLookup.Provider provider) {
     List<String> propertiesToSkip = new ArrayList<>(skipProperties);

@@ -15,13 +15,11 @@ import net.neoforged.fml.config.ModConfig;
 // Planting roots plants doesn't trigger a seedy place
 // That mod that includes the wiki in-game - https://www.curseforge.com/minecraft/mc-mods/oracle-index
 // JEI
-// - Durability costs knife/runic shears
 // - Cooldowns on entity recipes
 // Runic shears dispenser behaviour
 // Elemental crop bounding boxes are wrong
 // - Geas
 //    What other mobs will continue attacking when they lose a target?
-// - Reach -> block interaction range, entity interaction range -> Item.getPlayerPOVHitResult
 // - Runic tools
 // - Juice recipes
 // - Big Barrow loot chests

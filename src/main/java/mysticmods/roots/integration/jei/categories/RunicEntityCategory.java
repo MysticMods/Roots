@@ -12,9 +12,11 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.drawable.DrawableComponent;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
 import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
+import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -72,6 +74,11 @@ public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityReci
     super.createRecipeExtras(builder, recipe, focuses);
 
     HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
+
+    if (recipe.getDurabilityCost() != -1) {
+      Component durability = Component.translatable("roots.jei.text.durability", recipe.getDurabilityCost());
+      builder.addWidget(new DurabilityWidget(recipe.getDurabilityCost(), 75, 50, durability));
+    }
 
     int column = 0;
     for (LevelCondition condition : recipe.getLevelConditions()) {

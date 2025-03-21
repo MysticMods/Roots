@@ -11,7 +11,9 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.drawable.DrawableComponent;
 import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
+import mysticmods.roots.integration.jei.categories.widget.DurabilityWidget;
 import mysticmods.roots.integration.jei.categories.widget.WorldTestWidget;
 import mysticmods.roots.recipe.knife.OutputStateMapper;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
@@ -99,6 +101,11 @@ public class RunicBlockCategory extends RootsRecipeBaseCategory<RunicBlockRecipe
     super.createRecipeExtras(builder, recipe, focuses);
 
     HolderLookup.Provider provider = Minecraft.getInstance().getConnection().registryAccess();
+
+    if (recipe.getDurabilityCost() != -1) {
+      Component durability = Component.translatable("roots.jei.text.durability", recipe.getDurabilityCost());
+      builder.addWidget(new DurabilityWidget(recipe.getDurabilityCost(), 40, 44, durability));
+    }
 
     int column = 0;
     for (LevelCondition condition : recipe.getLevelConditions()) {
