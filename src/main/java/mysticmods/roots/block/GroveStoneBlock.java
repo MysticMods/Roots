@@ -86,22 +86,21 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Override
   public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
     if (!pLevel.isClientSide) {
-      breakLinkedBlocks(pLevel, pPos, pState);
+      breakLinkedBlocks(pLevel, pPos, pState, pPlayer);
     }
     return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
   }
 
-  protected void breakLinkedBlocks(Level pLevel, BlockPos pPos, BlockState pState) {
-    BlockPos basePos = pPos;
-    while (pLevel.getBlockState(basePos.below()).is(this)) {
-      basePos = basePos.below();
-    }
-
-    for (int i = 0; i < 3; i++) {
-      BlockPos targetPos = basePos.above(i);
-      if (pLevel.getBlockState(targetPos).is(this)) {
-        pLevel.destroyBlock(targetPos, true);
-      }
+  protected void breakLinkedBlocks(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+    if (pState.getValue(PART) == StateProperties.Part.BOTTOM) {
+      pLevel.destroyBlock(pPos.above(), false);
+      pLevel.destroyBlock(pPos.above().above(), false);
+    } else if (pState.getValue(PART) == StateProperties.Part.MIDDLE) {
+      pLevel.destroyBlock(pPos.below(), !pPlayer.isCreative());
+      pLevel.destroyBlock(pPos.above(), false);
+    } else {
+      pLevel.destroyBlock(pPos.below(), false);
+      pLevel.destroyBlock(pPos.below().below(), !pPlayer.isCreative());
     }
   }
 }
