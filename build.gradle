@@ -227,5 +227,5 @@ wiki {
         }
     }
 
-    wikiAccessToken = project.findProperty("wikiToken")
+    wikiAccessToken = project.findProperty("wiki_token")
 }
