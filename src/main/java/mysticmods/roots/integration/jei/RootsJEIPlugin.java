@@ -2,9 +2,12 @@ package mysticmods.roots.integration.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.ITypedIngredient;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
+import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
@@ -17,12 +20,14 @@ import mysticmods.roots.integration.jei.categories.*;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityHelper;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
+import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
 import mysticmods.roots.recipe.runic.RunicEntityRecipe;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -75,6 +80,7 @@ public class RootsJEIPlugin implements IModPlugin {
         .toList());
     registration.addRecipes(RUNIC_ENTITY_RECIPE_TYPE, ResolvedRecipes.RUNIC_ENTITY.getRecipes().stream().map(RecipeHolder::value)
         .toList());
+    registration.addRecipes(RecipeTypes.CRAFTING, DyeRecipeGenerator.generate());
   }
 
   @Override
@@ -85,6 +91,23 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCatalysts(KNIFE_RECIPE_TYPE, ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLD_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.WOODEN_KNIFE.get());
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_ENTITY_RECIPE_TYPE);
+  }
+
+  @Override
+  public void registerItemSubtypes(ISubtypeRegistration registration) {
+    ISubtypeInterpreter<ItemStack> colorInterpreter = new ISubtypeInterpreter<>() {
+      @Override
+      public @Nullable Object getSubtypeData(ItemStack ingredient, UidContext context) {
+        return ingredient.get(DataComponents.BASE_COLOR);
+      }
+
+      @Override
+      public String getLegacyStringSubtypeInfo(ItemStack ingredient, UidContext context) {
+        return "color";
+      }
+    };
+
+    registration.registerSubtypeInterpreter(ModItems.HERB_POUCH.get(), colorInterpreter);
   }
 
   public static final RootsEntityRenderer ENTITY_RENDERER = new RootsEntityRenderer(32);

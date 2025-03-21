@@ -3,13 +3,10 @@ package mysticmods.roots.gen.tags;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModItems;
-import mysticmods.roots.item.TokenItem;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -18,7 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import static mysticmods.roots.init.ModItems.FEY_LEATHER;
@@ -223,7 +219,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
         .addTags(RootsTags.Items.MOONGLOW_HERB, RootsTags.Items.PERESKIA_HERB, RootsTags.Items.SPIRITLEAF_HERB, RootsTags.Items.WILDEWHEET_HERB, RootsTags.Items.GROVE_MOSS_HERB, RootsTags.Items.DEWGONIA_HERB, RootsTags.Items.STALICRIPE_HERB, RootsTags.Items.WILDROOT_HERB, RootsTags.Items.INFERNO_BULB_HERB, RootsTags.Items.BAFFLECAP_HERB, RootsTags.Items.CLOUD_BERRY_HERB);
 
     this.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
-    this.tag(RootsTags.Items.POUCHES).add(ModItems.HERB_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
+    this.tag(RootsTags.Items.POUCHES)
+        .add(ModItems.HERB_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
     this.tag(RootsTags.Items.CREATIVE_POUCHES).add(ModItems.CREATIVE_POUCH.get());
 
     this.tag(RootsTags.Items.FERTILIZERS).add(Items.BONE_MEAL);
@@ -270,7 +267,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.FORAGING_ELIGIBLE).addTag(RootsTags.Items.KNIVES).add(ModItems.LIVING_HOE.get());
 
     this.tag(RootsTags.Items.FEY_LEATHERS).add(FEY_LEATHER.get());
-    this.tag(RootsTags.Items.DYEABLE).add(ModItems.HERB_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.FEY_POUCH.get());
+    this.tag(RootsTags.Items.DYEABLE)
+        .add(ModItems.HERB_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.FEY_POUCH.get());
     this.tag(RootsTags.Items.CHARM_ALERT).add(ModItems.ALERTNESS_CHARM.get());
     this.tag(RootsTags.Items.CHARMS).addTag(RootsTags.Items.CHARM_ALERT);
 
@@ -280,14 +278,18 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(ItemTags.HOES).add(ModItems.COPPER_HOE.get(), ModItems.LIVING_HOE.get(), ModItems.RUNED_HOE.get());
     this.tag(ItemTags.AXES).add(ModItems.COPPER_AXE.get(), ModItems.LIVING_AXE.get(), ModItems.RUNED_AXE.get());
-    this.tag(ItemTags.PICKAXES).add(ModItems.COPPER_PICKAXE.get(), ModItems.LIVING_PICKAXE.get(), ModItems.RUNED_PICKAXE.get());
-    this.tag(ItemTags.SHOVELS).add(ModItems.COPPER_SHOVEL.get(), ModItems.LIVING_SHOVEL.get(), ModItems.RUNED_SHOVEL.get());
+    this.tag(ItemTags.PICKAXES)
+        .add(ModItems.COPPER_PICKAXE.get(), ModItems.LIVING_PICKAXE.get(), ModItems.RUNED_PICKAXE.get());
+    this.tag(ItemTags.SHOVELS)
+        .add(ModItems.COPPER_SHOVEL.get(), ModItems.LIVING_SHOVEL.get(), ModItems.RUNED_SHOVEL.get());
     this.tag(ItemTags.SWORDS).add(ModItems.COPPER_SWORD.get(), ModItems.LIVING_SWORD.get(), ModItems.RUNED_SWORD.get());
 
     this.tag(RootsTags.Items.RUNED_LOG_HERBS).add(ModItems.WILDROOT.get(), ModItems.GROVE_MOSS.get());
 
-    this.tag(RootsTags.Items.NYI).add(ModItems.APPLE_CORDIAL.get(), ModItems.CACTUS_SYRUP.get(), ModItems.DANDELION_CORDIAL.get(), ModItems.LILAC_CORDIAL.get(), ModItems.PEONY_CORDIAL.get(), ModItems.ROSE_CORDIAL.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.RUNED_DAGGER.get(), ModItems.RUNED_SHOVEL.get(), ModItems.RUNED_PICKAXE.get(), ModItems.RUNED_AXE.get(), ModItems.RUNED_HOE.get(), ModItems.RUNED_SWORD.get(), ModItems.RELIQUARY.get(), ModItems.SPIRIT_BAG.get(), ModItems.LIFE_ESSENCE.get(), ModItems.GRAMARY.get(), ModItems.WILDWOOD_BOW.get(), ModItems.WILDWOOD_QUIVER.get(), ModItems.MYSTIC_FEATHER.get(), ModItems.STRANGE_OOZE.get());
-    this.tag(RootsTags.Items.WIP).add(ModItems.BEETLE_BOOTS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.ANTLER_HAT.get(), ModItems.ALERTNESS_CHARM.get());
+    this.tag(RootsTags.Items.NYI)
+        .add(ModItems.APPLE_CORDIAL.get(), ModItems.CACTUS_SYRUP.get(), ModItems.DANDELION_CORDIAL.get(), ModItems.LILAC_CORDIAL.get(), ModItems.PEONY_CORDIAL.get(), ModItems.ROSE_CORDIAL.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.RUNED_DAGGER.get(), ModItems.RUNED_SHOVEL.get(), ModItems.RUNED_PICKAXE.get(), ModItems.RUNED_AXE.get(), ModItems.RUNED_HOE.get(), ModItems.RUNED_SWORD.get(), ModItems.RELIQUARY.get(), ModItems.SPIRIT_BAG.get(), ModItems.LIFE_ESSENCE.get(), ModItems.GRAMARY.get(), ModItems.WILDWOOD_BOW.get(), ModItems.WILDWOOD_QUIVER.get(), ModItems.MYSTIC_FEATHER.get(), ModItems.STRANGE_OOZE.get());
+    this.tag(RootsTags.Items.WIP)
+        .add(ModItems.BEETLE_BOOTS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.ANTLER_HAT.get(), ModItems.ALERTNESS_CHARM.get());
 
     this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
@@ -313,7 +315,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     manualCopy(RootsTags.Blocks.SPREADING_MUSHROOMS);
   }
 
-  protected void manualCopy (TagKey<Block> blockTag) {
+  protected void manualCopy(TagKey<Block> blockTag) {
     TagKey<Item> itemTag = TagKey.create(Registries.ITEM, blockTag.location());
     copy(blockTag, itemTag);
   }

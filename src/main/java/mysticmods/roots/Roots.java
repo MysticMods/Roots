@@ -11,6 +11,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
 // TODO: Main TODO list
+// Planting roots plants doesn't trigger a seedy place
+// Beetle armor legs/boots don't render properly
 // Reorder the creative tab
 // Breaking grove stone in creative does drops
 // Inserting items onto pedestals in creative mode removes from inventory
@@ -20,7 +22,6 @@ import net.neoforged.fml.config.ModConfig;
 // JEI
 // - Durability costs knife/runic shears
 // - Cooldowns on entity recipes
-// - Pouch dye recipe
 // Runic shears dispenser behaviour
 // Elemental crop bounding boxes are wrong
 // - Geas
