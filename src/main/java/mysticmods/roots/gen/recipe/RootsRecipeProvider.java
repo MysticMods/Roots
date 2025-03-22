@@ -683,9 +683,9 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_wildewheet", has(RootsTags.Items.WILDEWHEET_CROP))
         .save(c);
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.WILDROOT_STEW.get(), 3)
-        .pattern(" W ")
-        .pattern("BBB")
+    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.WILDROOT_STEW.get(), 2)
+        .pattern("W ")
+        .pattern("BB")
         .define('W', RootsTags.Items.WILDROOT_CROP)
         .define('B', Ingredient.of(Items.BOWL))
         .unlockedBy("has_wildroot", has(RootsTags.Items.WILDROOT_CROP))

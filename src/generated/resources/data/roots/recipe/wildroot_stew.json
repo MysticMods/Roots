@@ -10,11 +10,11 @@
     }
   },
   "pattern": [
-    " W ",
-    "BBB"
+    "W ",
+    "BB"
   ],
   "result": {
-    "count": 3,
+    "count": 2,
     "id": "roots:wildroot_stew"
   }
 }

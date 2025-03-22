@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-21T15:44:14.9556273	Recipes
+// 1.21.1	2025-03-22T15:55:40.8789456	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -675,7 +675,7 @@ c19a3cc3a77749a4d127c10ae4dcca10572c7fc0 data/roots/recipe/terran_soil_from_elem
 8cef38408365f141afffa8bbe9896e9d4f3aa600 data/roots/recipe/vegetable_juice.json
 fecb822745bae5e88d7a8c6bc50623889777a282 data/roots/recipe/vinegar.json
 508a73f201a27be546aae77ed3c42c462966d275 data/roots/recipe/wildewheet_bread.json
-4e9c13bede07fd03c259f4e3795017989da3945c data/roots/recipe/wildroot_stew.json
+f60e460b3ddf0756cb7dac5b20f89bb94062c7ce data/roots/recipe/wildroot_stew.json
 eba3e9eaa640ffc5dad84dcbe7bdbbfd09cc180a data/roots/recipe/wildwood_button.json
 74f9f67623e6e642ab547010f48cf7bc9b8ac057 data/roots/recipe/wildwood_door.json
 0a71f23e8293174c55d223ba95ebac8eebc4d0c5 data/roots/recipe/wildwood_fence.json

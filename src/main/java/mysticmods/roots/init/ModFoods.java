@@ -57,6 +57,6 @@ public class ModFoods {
       .usingConvertsTo(Items.BOWL).build();
   public static final FoodProperties STEWED_EGGPLANT = new FoodProperties.Builder().nutrition(6)
       .saturationModifier(0.8F).usingConvertsTo(Items.BOWL).build();
-  public static final FoodProperties WILDROOT_STEW = new FoodProperties.Builder().nutrition(2).saturationModifier(0.8f)
+  public static final FoodProperties WILDROOT_STEW = new FoodProperties.Builder().nutrition(5).saturationModifier(0.5f)
       .usingConvertsTo(Items.BOWL).build();
 }
