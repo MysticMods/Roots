@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-22T16:45:57.744464	Block States: roots
+// 1.21.1	2025-03-22T16:48:06.4925136	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -369,9 +369,9 @@ f6446826bbc247c9424aad55703360e8bfc7ccf3 assets/roots/models/block/wildwood_slab
 d5a6583a5d3e19614a585fe07f89519959199c47 assets/roots/models/block/wildwood_stairs.json
 2a11a720829b58bc4443b34b9ae332b63e5ad488 assets/roots/models/block/wildwood_stairs_inner.json
 81d25f1dd0423bf20b5c0c58a0026491e5821f1d assets/roots/models/block/wildwood_stairs_outer.json
-f5174c749f7c0f7a3622e6d55c5eb5446a5187c6 assets/roots/models/block/wildwood_trapdoor_bottom.json
-b6a1c06bfec2dd58e02b8bddd5d9943dfad178cf assets/roots/models/block/wildwood_trapdoor_open.json
-51c6b2b86e37d85d51d624cc6154b810ba6844d8 assets/roots/models/block/wildwood_trapdoor_top.json
+4d71f8b172c11c0d3216e61568fe1bbbc69ea6bb assets/roots/models/block/wildwood_trapdoor_bottom.json
+3080203c9ee915487c844a6a55cde91de6e7e98a assets/roots/models/block/wildwood_trapdoor_open.json
+4b6e41494bf2fbf0f6fcdc274efb33b0e67e407d assets/roots/models/block/wildwood_trapdoor_top.json
 251b4649f794082d07907186d73abbc5e213ce90 assets/roots/models/block/wildwood_wood.json
 3decfc2ceb4b2b5ca5fdf580e0bd16e3e537e064 assets/roots/models/block/wildwood_wood_horizontal.json
 ac4be8bea599f627e309021602d8f901209eead4 assets/roots/models/block/wild_aubergine.json
