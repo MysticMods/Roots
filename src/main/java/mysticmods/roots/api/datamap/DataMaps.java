@@ -103,6 +103,7 @@ public class DataMaps {
     event.register(SPROUT_BREEDING_ITEM_CHANCE);
     event.register(GROWTH_RECORDS);
     event.register(HARVEST_RECORDS);
+    event.register(STEM_BLOCKS);
   }
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {
