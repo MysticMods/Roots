@@ -51,6 +51,11 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   @Override
+  protected boolean canOutputTo(BlockState state, BlockPos pos) {
+    return !state.is(RootsTags.Blocks.PEDESTALS);
+  }
+
+  @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray, InteractionHand hand, ItemStack inHand) {
     if (level.isClientSide()) {
       return InteractionResult.CONSUME;

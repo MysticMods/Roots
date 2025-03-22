@@ -45,6 +45,10 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     super(pType, pWorldPosition, pBlockState);
   }
 
+  protected boolean canOutputTo (BlockState state, BlockPos pos) {
+    return true;
+  }
+
   // TODO: Some sort of caching
   public List<Pair<BlockPos, PedestalBlockEntity>> pedestals (TagKey<Block> include, TagKey<Block> exclude) {
     List<Pair<BlockPos, PedestalBlockEntity>> pedestalPositions = new ArrayList<>();
@@ -169,6 +173,10 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
         break;
       }
       BlockPos pos = getBlockPos().relative(direction);
+      BlockState state = getLevel().getBlockState(pos);
+      if (!canOutputTo(state, pos)) {
+        continue;
+      }
       IItemHandler output = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, pos, direction.getOpposite());
       if (output != null && (lastOutput == null || lastOutput.getCapability() != output)) {
         stacks = outputAdjacent(stacks, output);
