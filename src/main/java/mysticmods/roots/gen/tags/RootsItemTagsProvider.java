@@ -291,6 +291,11 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.WIP)
         .add(ModItems.BEETLE_BOOTS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.ANTLER_HAT.get(), ModItems.ALERTNESS_CHARM.get());
 
+    this.tag(ItemTags.MINING_ENCHANTABLE).addTag(RootsTags.Items.KNIVES).add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
+    this.tag(ItemTags.MINING_LOOT_ENCHANTABLE).addTag(RootsTags.Items.KNIVES).add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
+    this.tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(RootsTags.Items.KNIVES);
+    this.tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(RootsTags.Items.KNIVES).add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
+
     this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
     this.copy(RootsTags.Blocks.WATER_CROPS, RootsTags.Items.WATER_CROPS);

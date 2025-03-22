@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-21T15:44:14.952627	Roots Item Tags
+// 1.21.1	2025-03-22T14:05:09.0498773	Roots Item Tags
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
@@ -13,6 +13,10 @@ cd950175fadc56e90dec5f776fb9160949dafcfe data/c/tags/item/storage_blocks/silver.
 c03cca07eaef993ac03a34f8983b4c79477d2c8b data/minecraft/tags/item/arrows.json
 f7e26a67b126e19a782b7725861e11547c0cb7b7 data/minecraft/tags/item/axes.json
 4c3bfce7b1456b68f71b17c9426d9e3008caa95c data/minecraft/tags/item/chicken_food.json
+a23108cfe5e1e4d7d932897fe1b83b6b1a77167e data/minecraft/tags/item/enchantable/durability.json
+a23108cfe5e1e4d7d932897fe1b83b6b1a77167e data/minecraft/tags/item/enchantable/mining.json
+a23108cfe5e1e4d7d932897fe1b83b6b1a77167e data/minecraft/tags/item/enchantable/mining_loot.json
+80f33bcd94f91bb84daa1257b24b0d94c89400c8 data/minecraft/tags/item/enchantable/sharp_weapon.json
 566ccbb7a788ff1e66d248921f8d99b4288c709f data/minecraft/tags/item/hoes.json
 13779c2da19740afaf64895b4637a5a4542d7222 data/minecraft/tags/item/pickaxes.json
 3c841c97e7e2fcbeb86c1ff92141c065010ffdae data/minecraft/tags/item/piglin_loved.json
