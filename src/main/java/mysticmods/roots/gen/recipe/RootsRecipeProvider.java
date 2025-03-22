@@ -439,7 +439,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROVE_CRAFTER.get())
         .pattern("RGR")
         .pattern("RRR")
-        .define('G', RootsTags.Items.GROVE_MOSS_HERB)
+        .define('G', RootsTags.Items.RUNESTONE_HERBS)
         .define('R', RootsTags.Items.RUNESTONE)
         .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
         .save(c);
