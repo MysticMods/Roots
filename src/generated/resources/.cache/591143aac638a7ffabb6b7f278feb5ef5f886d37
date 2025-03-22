@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-22T16:45:57.7600206	Item Models: roots
+// 1.21.1	2025-03-22T19:51:31.3722127	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -204,6 +204,7 @@ f87e922ad38abf9fac16090d3134a0ff0dff2cc6 assets/roots/models/item/silver_block.j
 33ebd00c986c41ff3dbfd6fe703b5296f7777d8a assets/roots/models/item/silver_knife.json
 6ae2a7f0fceb1384425b93d3f92f5dcc35811ebc assets/roots/models/item/silver_nugget.json
 88f08e588fd91f3c25882cb63d21c76ddcb8fa15 assets/roots/models/item/silver_ore.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/snow_sprout_spawn_egg.json
 a2ba5cbc0f7f87a0b02d92dd6aa28dc025c55d8c assets/roots/models/item/soul_pyre.json
 1ace512915d0414d667789bd19a6b6c7f05f1857 assets/roots/models/item/spell_acid_cloud.json
 cd8a24e7114af53d2a35579627ecdab05225c632 assets/roots/models/item/spell_aqua_bubble.json

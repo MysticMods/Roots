@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#roots:has_snow_sprout_spawns",
+  "spawners": {
+    "type": "roots:snow_sprout",
+    "maxCount": 6,
+    "minCount": 3,
+    "weight": 2
+  }
+}

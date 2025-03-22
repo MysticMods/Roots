@@ -48,6 +48,9 @@ public class ModEntities {
   public static final DeferredHolder<EntityType<?>, EntityType<SproutEntity>> PURPLE_SPROUT = REGISTER.register("purple_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 1.0f).eyeHeight(0.6f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("purple_sprout"));
+  public static final DeferredHolder<EntityType<?>, EntityType<SproutEntity>> SNOW_SPROUT = REGISTER.register("snow_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
+      .sized(0.5f, 1.0f).eyeHeight(0.6f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
+      .build("snow_sprout"));
   public static final DeferredHolder<EntityType<?>, EntityType<OwlEntity>> OWL = REGISTER.register("owl", () -> EntityType.Builder.of(OwlEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 1.35f).eyeHeight(1f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("owl"));
   public static final DeferredHolder<EntityType<?>, EntityType<DuckEntity>> DUCK = REGISTER.register("duck", () -> EntityType.Builder.of(DuckEntity::new, MobCategory.CREATURE)
@@ -70,6 +73,7 @@ public class ModEntities {
     event.register(TAN_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(RED_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(PURPLE_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(SNOW_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(FENNEC.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(BEETLE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(OWL.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, OwlEntity::placement, RegisterSpawnPlacementsEvent.Operation.AND);
@@ -85,6 +89,7 @@ public class ModEntities {
     event.put(ModEntities.TAN_SPROUT.get(), SproutEntity.attributes().build());
     event.put(ModEntities.RED_SPROUT.get(), SproutEntity.attributes().build());
     event.put(ModEntities.PURPLE_SPROUT.get(), SproutEntity.attributes().build());
+    event.put(ModEntities.SNOW_SPROUT.get(), SproutEntity.attributes().build());
     event.put(ModEntities.OWL.get(), OwlEntity.attributes().build());
     event.put(ModEntities.DUCK.get(), DuckEntity.attributes().build());
   }

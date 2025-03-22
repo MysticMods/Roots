@@ -39,6 +39,7 @@ public class SproutRenderer extends MobRenderer<SproutEntity, SproutModel> {
       textures.put(ModEntities.TAN_SPROUT.get(), RootsAPI.rl("textures/entity/sprout_tan.png"));
       textures.put(ModEntities.PURPLE_SPROUT.get(), RootsAPI.rl("textures/entity/sprout_purple.png"));
       textures.put(ModEntities.RED_SPROUT.get(), RootsAPI.rl("textures/entity/sprout_red.png"));
+      textures.put(ModEntities.SNOW_SPROUT.get(), RootsAPI.rl("textures/entity/sprout_snow.png"));
     }
     ResourceLocation result = textures.get(entity.getType());
     if (result == null) {

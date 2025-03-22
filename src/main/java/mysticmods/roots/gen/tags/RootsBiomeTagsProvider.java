@@ -54,6 +54,9 @@ public class RootsBiomeTagsProvider extends BiomeTagsProvider {
     this.tag(RootsTags.Biomes.HAS_SPROUT_SPAWNS)
         .addTags(BiomeTags.IS_FOREST, BiomeTags.IS_RIVER, BiomeTags.IS_BEACH, BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.HAS_JUNGLE_TEMPLE, BiomeTags.IS_JUNGLE, Tags.Biomes.IS_FOREST, Tags.Biomes.IS_RIVER, Tags.Biomes.IS_BEACH);
     //noinspection unchecked
+    this.tag(RootsTags.Biomes.HAS_SNOW_SPROUT_SPAWNS)
+        .addTags(BiomeTags.IS_TAIGA, Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_ICY);
+    //noinspection unchecked
     this.tag(RootsTags.Biomes.HAS_STANDING_STONES)
         .addTags(BiomeTags.IS_SAVANNA, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_PLAINS);
     //noinspection unchecked

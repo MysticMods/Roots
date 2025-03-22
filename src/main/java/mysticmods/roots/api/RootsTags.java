@@ -622,6 +622,7 @@ public class RootsTags {
     public static final TagKey<Biome> HAS_HUT_STRUCTURES = modTag("has_hut_structures");
     public static final TagKey<Biome> HAS_OWL_SPAWNS = modTag("has_owl_spawns");
     public static final TagKey<Biome> HAS_SPROUT_SPAWNS = modTag("has_sprout_spawns");
+    public static final TagKey<Biome> HAS_SNOW_SPROUT_SPAWNS = modTag("has_snow_sprout_spawns");
     public static final TagKey<Biome> HAS_STANDING_STONES = modTag("has_standing_stones");
     public static final TagKey<Biome> HAS_WILD_AUBERGINES = modTag("has_wild_aubergines");
     public static final TagKey<Biome> HAS_FOREST_WILD_ROOTS = modTag("has_forest_wild_roots");

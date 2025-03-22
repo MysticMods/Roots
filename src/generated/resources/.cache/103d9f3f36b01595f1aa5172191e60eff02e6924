@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-21T15:44:14.9516344	Registries
+// 1.21.1	2025-03-22T21:18:58.0456048	Registries
 a65184c1483f870edf64b340e4bd0e5ee9227966 data/roots/enchantment/foraging.json
 5d49d1a83648edb820b3caf2c0134aaccc7e526c data/roots/enchantment_provider/fortune_i.json
 ecdee376546ff26b669e9bdcbf3fa6e640759c52 data/roots/enchantment_provider/fortune_ii.json
@@ -15,6 +15,7 @@ c20cd59d5be5009c2378c51f50cfd030b05c4362 data/roots/neoforge/biome_modifier/beet
 1d9973e87909e836ae5efde5316cc6483380db27 data/roots/neoforge/biome_modifier/hanging_moss.json
 d19a4cefa934267376dd73dcb277e9ad9bf6bb51 data/roots/neoforge/biome_modifier/owl_spawns.json
 849d065d5f2ffd63ac6497ac6be5198e49cba82a data/roots/neoforge/biome_modifier/silver_ore.json
+f4cd831376f03c5a332a8a8358e1b11f65f89349 data/roots/neoforge/biome_modifier/snow_sprout_spawns.json
 d1c2dec9b586bea7a27058db4b15c555d3805ca1 data/roots/neoforge/biome_modifier/sprout_spawns.json
 c98b47272c5e154e004d7009a7af723b1dc8cd3d data/roots/neoforge/biome_modifier/stonepetal.json
 5f1a426294abe2afb3976884fd33f83bcb09af92 data/roots/neoforge/biome_modifier/wild_aubergines.json
@@ -41,7 +42,7 @@ ef9144ad33ff5d347abc5c044a79d298434fabe8 data/roots/worldgen/placed_feature/wild
 0f232c2d5e2e5485f4cadd03dfd0a43b553aef1c data/roots/worldgen/structure/hut.json
 d364c3ee83222d09d03831e010c94271d0317ffa data/roots/worldgen/structure/large_barrow.json
 e04b12dcf7c2a014184ef3b5bb259b88cae2a074 data/roots/worldgen/structure/ruined_hut.json
-ef2cf544c2846dc8f80cf8261c38a31d2b35d15f data/roots/worldgen/structure/standing_stones.json
+4af955615be18c4b479731382ebc5b6dab395929 data/roots/worldgen/structure/standing_stones.json
 521c5c2e14bbe5d735eb106501a61a37243d9223 data/roots/worldgen/structure_set/barrow.json
 d4818cd803325af5f299d0730d65b441c9ed9ae9 data/roots/worldgen/structure_set/hut.json
 6f143fe565ee067e1ae52c5c853214459fc9de8a data/roots/worldgen/structure_set/standing_stones.json

@@ -28,6 +28,12 @@
           "maxCount": 4,
           "minCount": 3,
           "weight": 1
+        },
+        {
+          "type": "roots:snow_sprout",
+          "maxCount": 4,
+          "minCount": 3,
+          "weight": 1
         }
       ]
     }

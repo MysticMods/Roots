@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-07T21:23:17.8273487	Loot Tables
+// 1.21.1	2025-03-22T21:10:22.9420619	Loot Tables
 e8472c417eb64cb3ad295f65ece125190c4620e0 data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
@@ -122,10 +122,11 @@ b02970a3a35249968b20475a378d50460e26221c data/roots/loot_table/blocks/wild_auber
 58eedfcc7cc9e608006b146789eaad99dcdef56f data/roots/loot_table/entities/deer.json
 67bba0afba350b439a09304c6af456706bdb0d95 data/roots/loot_table/entities/duck.json
 a75dfe6c5a66857b453091baa49d7ccd774b5804 data/roots/loot_table/entities/fennec.json
-79771642304cedad2a9e409f365193f1b3431d38 data/roots/loot_table/entities/green_sprout.json
+5b4dfafdfe86be513da1fc89162d7051b812a6c8 data/roots/loot_table/entities/green_sprout.json
 09951d2db94e1b03bd7a183186a32bd4c656707f data/roots/loot_table/entities/owl.json
-7c99d0a7f4dd1bb363d51f2355f7e0523e4b9506 data/roots/loot_table/entities/purple_sprout.json
-c59d66559c7d2614a4ea20466053438f408b40ed data/roots/loot_table/entities/red_sprout.json
-825bd5d147f0fed27dedfbf774418e7c56640928 data/roots/loot_table/entities/tan_sprout.json
+a0b018a1b78ee5eb2db30433935670a12f2b6f01 data/roots/loot_table/entities/purple_sprout.json
+e80816804d571e7a999a45bdc29fb6caa8e05d23 data/roots/loot_table/entities/red_sprout.json
+ec67c32b647af952b4d34b8309bf51d43e23b140 data/roots/loot_table/entities/snow_sprout.json
+856d0bf3f6aa2545e36de3827f58d4ad6e513015 data/roots/loot_table/entities/tan_sprout.json
 b5195ad05d252179dfdf76580a9a3c37fad876c7 data/roots/loot_table/hut.json
 e53240e540b21eb5b6b026d7a77ca93927d550ff data/roots/loot_table/standing_stones.json

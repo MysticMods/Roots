@@ -40,7 +40,7 @@
               "function": "minecraft:furnace_smelt"
             }
           ],
-          "name": "minecraft:melon_slice"
+          "name": "minecraft:sweet_berries"
         },
         {
           "type": "minecraft:item",
@@ -78,11 +78,11 @@
               "function": "minecraft:furnace_smelt"
             }
           ],
-          "name": "minecraft:cocoa_beans"
+          "name": "minecraft:brown_mushroom"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "roots:entities/green_sprout"
+  "random_sequence": "roots:entities/snow_sprout"
 }

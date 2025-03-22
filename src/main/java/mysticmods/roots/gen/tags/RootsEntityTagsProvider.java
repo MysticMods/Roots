@@ -66,6 +66,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             ModEntities.FENNEC.get(),
             ModEntities.GREEN_SPROUT.get(),
             ModEntities.PURPLE_SPROUT.get(),
+            ModEntities.SNOW_SPROUT.get(),
             ModEntities.RED_SPROUT.get(),
             ModEntities.TAN_SPROUT.get()
         );
