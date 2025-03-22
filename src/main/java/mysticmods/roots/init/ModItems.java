@@ -12,6 +12,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -309,7 +311,7 @@ public class ModItems {
   public static final DeferredHolder<Item, Item> RELIQUARY = ITEMS.register("reliquary", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
   public static final DeferredHolder<Item, Item> SPIRIT_BAG = ITEMS.register("spirit_bag", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
   public static final DeferredHolder<Item, Item> FEY_LEATHER = ITEMS.register("fey_leather", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-  public static final DeferredHolder<Item, Item> GLASS_EYE = ITEMS.register("glass_eye", () -> new Item(new Item.Properties()));
+  public static final DeferredHolder<Item, EffectUseItem> GLASS_EYE = ITEMS.register("glass_eye", () -> new EffectUseItem(MobEffects.NIGHT_VISION, 0, 20 * 30, new Item.Properties()));
   public static final DeferredHolder<Item, Item> LIFE_ESSENCE = ITEMS.register("life_essence", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> MYSTIC_FEATHER = ITEMS.register("mystic_feather", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
