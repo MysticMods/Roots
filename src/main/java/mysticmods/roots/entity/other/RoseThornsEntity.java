@@ -25,7 +25,14 @@ public class RoseThornsEntity extends Entity {
 
   public RoseThornsEntity(EntityType<RoseThornsEntity> timeStopEntityEntityType, Level level) {
     super(ModEntities.ROSE_THORNS.get(), level);
+    setNoGravity(false);
   }
+
+  @Override
+  protected double getDefaultGravity() {
+    return 0.05;
+  }
+
 
   public SnapshotStorage getSnapshotStorage() {
     return snapshotStorage;
@@ -65,6 +72,11 @@ public class RoseThornsEntity extends Entity {
   @Override
   public void tick() {
     super.tick();
+    if (!onGround()) {
+      this.applyGravity();
+      this.move(MoverType.SELF, this.getDeltaMovement());
+    }
+
     this.snapshotStorage.tick(this);
     AABB aabb = this.getAabb();
     int newLifetime = this.getLifetime() - 1;
