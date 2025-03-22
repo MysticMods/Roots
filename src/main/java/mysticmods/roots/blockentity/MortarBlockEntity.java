@@ -180,7 +180,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
           revalidateRecipe();
         }
       }
-    } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION)) {
+    } else if (inHand.is(RootsTags.Items.MORTAR_ACTIVATION) && !inventory.isEmpty()) {
       if (cachedRecipe == null) {
         revalidateRecipe();
       }
