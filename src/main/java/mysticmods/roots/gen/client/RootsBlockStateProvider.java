@@ -26,8 +26,7 @@ public class RootsBlockStateProvider extends BlockStateProvider {
 
   @Override
   protected void registerStatesAndModels() {
-    getVariantBuilder(ModBlocks.THATCH.get()).forAllStates(state -> ConfiguredModel.builder()
-        .modelFile(models().getExistingFile(RootsAPI.rl("block/complex/thatch"))).build());
+    simpleBlock(ModBlocks.THATCH.get());
     simpleBlock(ModBlocks.SHEARED_THATCH.get());
     simpleBlock(ModBlocks.RUNESTONE.get());
     simpleBlock(ModBlocks.MOSSY_RUNESTONE.get());

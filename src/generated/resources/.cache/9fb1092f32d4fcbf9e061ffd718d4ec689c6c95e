@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-22T15:55:40.8789456	Recipes
+// 1.21.1	2025-03-22T16:45:57.7525052	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -83,7 +83,6 @@ a575d7d4c0a290db3aed220fac83c8b6bdfe8613 data/roots/advancement/recipes/building
 8c01f6bae55a7801a06787b9f372dabfd7c17f6c data/roots/advancement/recipes/building_blocks/runestone_tile_wall_from_runestone_tile_stonecutting.json
 bfc2df7b0a05c6c4aae21f1b9d89d5ac1e6b3d1f data/roots/advancement/recipes/building_blocks/runestone_wall.json
 05700411fad0b2ab76b56a2a277f51d3e69fe066 data/roots/advancement/recipes/building_blocks/runestone_wall_from_runestone_stonecutting.json
-d329aee90e47ef81ae55049d1f4788ee3c353493 data/roots/advancement/recipes/building_blocks/sheared_thatch.json
 d7117c98ec7589a05517801a7ca306cbd81ee64c data/roots/advancement/recipes/building_blocks/silver_block.json
 5db3cc472c120047dadf0273cfbf3c10bc975452 data/roots/advancement/recipes/building_blocks/stripped_wildwood_wood_from_logs.json
 45f046c985baf27235cb3a1d7e5e1e2673059625 data/roots/advancement/recipes/building_blocks/thatch.json
@@ -631,7 +630,6 @@ e53a29eee9031844880ebd604b88db07077a3971 data/roots/recipe/runestone_wall.json
 f80436094c9be53e373652057df22f766d6d1653 data/roots/recipe/runic_block/spiritleaf_from_beetroot.json
 995723a044fa52f7765d35de7c4d1b33e4876cb9 data/roots/recipe/runic_block/wildewheet_seeds_and_wheat_chance.json
 f9600c79ef7771ac0ee8861a6aae0e42a1d747bd data/roots/recipe/runic_entity/fey_leather.json
-71018d8ceff7771b7c085a77312e05528fc6f57a data/roots/recipe/sheared_thatch.json
 571d8a75864ad5a530733cb823be8cdcbf925b78 data/roots/recipe/silver_block.json
 2688be47b947ef1feab35e6593b5adba14e51a46 data/roots/recipe/silver_ingot.json
 05bdd26b93c3d59fb8ceb36446531497f0897a56 data/roots/recipe/silver_ingot_from_blasting_raw_silver.json

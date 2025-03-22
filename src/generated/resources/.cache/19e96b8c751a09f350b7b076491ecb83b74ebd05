@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-02T18:33:46.0119198	Block States: roots
+// 1.21.1	2025-03-22T16:45:57.744464	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -97,7 +97,7 @@ a2e05c8e6daeb967d6ea61e168fb881bc814deda assets/roots/blockstates/stalicripe_cro
 6e658893da53e714ef4ce69ab984b9f9c9d5c46b assets/roots/blockstates/stripped_wildwood_log.json
 746fbd35c83cfa749492b887333500481004841d assets/roots/blockstates/stripped_wildwood_wood.json
 f91fb136f50ffb93588f9e67d3b802cd5892af36 assets/roots/blockstates/terran_soil.json
-f60bf3d2a294cacc071c2487fb4e1c617d8d43dd assets/roots/blockstates/thatch.json
+f528f067470dd67b55f0954546a3f9a8d91d769c assets/roots/blockstates/thatch.json
 bb992c9ee0187923bd9e8952f19ae190a7035c27 assets/roots/blockstates/unending_bowl.json
 92cb194c2deaac322d922dad9a33ffcddc00e1d9 assets/roots/blockstates/wildewheet_crop.json
 ff1fe41b9e48812cd022a1c7e34cae2b3adcd775 assets/roots/blockstates/wildroot_crop.json
@@ -325,6 +325,7 @@ a855766a53e5f6b3b8c0f32301e275ffdf2b8437 assets/roots/models/block/stripped_wild
 cd9ef5e63856406f8e1f67fbc664faa92e0ef049 assets/roots/models/block/stripped_wildwood_wood.json
 105a725d56dd8c6f6a4d1ff2c17f9919e0b2512c assets/roots/models/block/stripped_wildwood_wood_horizontal.json
 bed96c02e24b051095e57af4e3eec30b9cdd20a4 assets/roots/models/block/terran_soil.json
+5bc4bccc1b5405b53e3fb7dbd7358de3ca6fda5b assets/roots/models/block/thatch.json
 dad122fab6ca1e804cc2d165f1b348d7650dcbf9 assets/roots/models/block/unending_bowl.json
 397795bf846c6a778bc7562d7ec6db24b5b4291d assets/roots/models/block/wildewheet_0.json
 ce2575abc66210d0e28c2fb8679adad9c4bad0db assets/roots/models/block/wildewheet_1.json

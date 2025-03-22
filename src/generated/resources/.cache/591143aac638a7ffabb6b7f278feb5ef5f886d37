@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-21T15:44:14.9641789	Item Models: roots
+// 1.21.1	2025-03-22T16:45:57.7600206	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -248,7 +248,7 @@ b48da5338d6df199a05029fe52defa82b3042c55 assets/roots/models/item/strange_ooze.j
 75a4376dc4f58209c6914ef28676354a24e92d32 assets/roots/models/item/stuffed_aubergine.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/tan_sprout_spawn_egg.json
 ab91c5fb468f89dc5c9d4f93ab4e86592126e160 assets/roots/models/item/terran_soil.json
-4946642e6ac6d0b54f8c87544680a90df819d36c assets/roots/models/item/thatch.json
+9ac737c965f9e6f55e4479561c55b6dd74eaa3c8 assets/roots/models/item/thatch.json
 b03656e91a705b09ef920587eae3deaa4fb4dffc assets/roots/models/item/unending_bowl.json
 818b3422a2217e5c3b1c53c417eccb45970f1baa assets/roots/models/item/vegetable_juice.json
 2cf4d0007bbab1c05a9b2538114af3df538584ef assets/roots/models/item/venison.json
