@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-23T19:45:29.1611286	Recipes
+// 1.21.1	2025-03-23T19:57:01.1724832	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -308,6 +308,7 @@ f68054062f527a35bc336adc96b8b516427d81f1 data/roots/advancement/recipes/misc/spe
 cb95697079d824aeac10154fa625daeec1ec59b7 data/roots/advancement/recipes/misc/spell/time_stop.json
 f75ffef2f2b6e90eccb953775d9249682ae60e2e data/roots/advancement/recipes/misc/spell/wildfire.json
 d5ef0dfbf5d1b3032f986670e7dfcc8f983f0377 data/roots/advancement/recipes/misc/terran_soil_from_elemental_soil_and_stalicripe.json
+87a2da6c82cd14dd78a204110f31f2b8d5413ad9 data/roots/advancement/recipes/misc/writable_book_ink_bottle.json
 b905a465b19b2d3c39f88034207abbeb1e7be2f0 data/roots/advancement/recipes/redstone/mossy_runestone_button.json
 ddbbf319ce233f7954e26adbda255d89cf6194ef data/roots/advancement/recipes/redstone/mossy_runestone_pressure_plate.json
 919d1cf1f12ab6a70ea0d92db57e59668bd96ba7 data/roots/advancement/recipes/redstone/runed_brick_button.json
@@ -689,3 +690,4 @@ b2ceee2f3cfa5e2d669f64f3046a6aa53355bb47 data/roots/recipe/wildwood_trapdoor.jso
 925259d6df15f0278a2ea9a68a62f9045822153b data/roots/recipe/wildwood_wood_from_logs.json
 a22b906f4d96ca0eb2a90a1ac4ac9edd89344879 data/roots/recipe/wooden_knife.json
 29a3c4acd463868c57e024daa0bc374374f0a99d data/roots/recipe/wooden_shears.json
+82e9ca8787afcfa0bb520d72e3daa23d084972ae data/roots/recipe/writable_book_ink_bottle.json

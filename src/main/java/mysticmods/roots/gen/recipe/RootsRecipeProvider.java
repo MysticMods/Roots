@@ -1790,6 +1790,13 @@ public class RootsRecipeProvider extends RecipeProvider {
         .define('N', Tags.Items.NUGGETS)
         .unlockedBy("has_nugget", has(Tags.Items.NUGGETS))
         .save(c);
+
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WRITABLE_BOOK)
+        .requires(Items.BOOK)
+        .requires(Items.FEATHER)
+        .requires(ModItems.INK_BOTTLE.get())
+        .unlockedBy("has_ink_bottle", has(ModItems.INK_BOTTLE.get()))
+        .save(c, RootsAPI.rl("writable_book_ink_bottle"));
   }
 
   public static class RecipeSaver {
