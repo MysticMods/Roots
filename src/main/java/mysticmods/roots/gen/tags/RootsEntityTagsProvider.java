@@ -77,6 +77,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             EntityType.COW,
             EntityType.DONKEY,
             EntityType.HORSE,
+            EntityType.GOAT,
             EntityType.LLAMA,
             EntityType.MULE,
             EntityType.MOOSHROOM,
