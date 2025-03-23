@@ -22,10 +22,13 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -88,6 +91,29 @@ public abstract class LevelCondition implements IDescribed {
     }
 
     return Collections.emptySet();
+  }
+
+  public static class FluidSourcePropertyCondition extends LevelCondition {
+    private final Fluid fluidType;
+
+    public FluidSourcePropertyCondition(Fluid fluidType) {
+      this.fluidType = fluidType;
+    }
+
+
+    @Override
+    protected CanonicalRepresentation getDefaultRepresentation() {
+      return new CanonicalRepresentation(Blocks.WATER);
+    }
+
+    @Override
+    public Set<BlockPos> test(BlockPos pos, Level level, @Nullable Player player) {
+      FluidState fluid = level.getFluidState(pos);
+      if (fluid.is(fluidType)) {
+        return Set.of(pos);
+      }
+      return Set.of();
+    }
   }
 
   public static class BlockStatePropertyCondition extends LevelCondition {

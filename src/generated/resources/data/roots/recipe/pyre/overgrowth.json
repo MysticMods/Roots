@@ -18,6 +18,9 @@
         "item": "minecraft:short_grass"
       }
     ],
+    "levelConditions": [
+      "roots:water_source"
+    ],
     "priority": 0
   },
   "ritual": "roots:overgrowth"
