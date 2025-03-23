@@ -66,6 +66,8 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   public RecipeHolder<T> getRecipe(ResourceLocation location) {
     RecipeManager manager = RootsAPI.getInstance().getRecipeManager();
     if (manager == null) {
+      // TODO: Potentially fall back on the cache, if it exists
+      RootsAPI.LOG.error("Unable to locate recipe {}, as the recipe manager is null.", location);
       return null;
     }
     //noinspection unchecked
