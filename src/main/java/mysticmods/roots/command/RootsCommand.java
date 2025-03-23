@@ -146,7 +146,9 @@ public class RootsCommand {
       BlockPos pos = BlockPos.containing(c.getSource().getPosition());
       Level level = c.getSource().getLevel();
 
-      if (!level.getBlockState(pos).isAir()) {
+      BlockState state = level.getBlockState(pos);
+
+      if (!state.isAir() && !state.canBeReplaced()) {
         c.getSource().sendFailure(Component.translatable("roots.commands.ritual.no_space"));
         return 1;
       }
