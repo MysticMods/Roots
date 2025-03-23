@@ -291,10 +291,19 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.WIP)
         .add(ModItems.BEETLE_BOOTS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.ANTLER_HAT.get(), ModItems.ALERTNESS_CHARM.get());
 
-    this.tag(ItemTags.MINING_ENCHANTABLE).addTag(RootsTags.Items.KNIVES).add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
-    this.tag(ItemTags.MINING_LOOT_ENCHANTABLE).addTag(RootsTags.Items.KNIVES).add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
-    this.tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(RootsTags.Items.KNIVES);
-    this.tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(RootsTags.Items.KNIVES).add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
+    this.tag(ItemTags.MINING_ENCHANTABLE).addTag(RootsTags.Items.KNIVES)
+        .add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
+    this.tag(ItemTags.MINING_LOOT_ENCHANTABLE).addTag(RootsTags.Items.KNIVES)
+        .add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
+    this.tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(RootsTags.Items.KNIVES).add(ModItems.RUNED_DAGGER.get());
+    this.tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(RootsTags.Items.KNIVES)
+        .add(ModItems.WOODEN_SHEARS.get(), ModItems.RUNIC_SHEARS.get());
+
+    this.tag(ItemTags.HEAD_ARMOR)
+        .add(ModItems.ANTLER_HAT.get(), ModItems.BEETLE_HELMET.get(), ModItems.COPPER_HELMET.get());
+    this.tag(ItemTags.CHEST_ARMOR).add(ModItems.BEETLE_CHESTPLATE.get(), ModItems.COPPER_CHESTPLATE.get());
+    this.tag(ItemTags.LEG_ARMOR).add(ModItems.BEETLE_LEGGINGS.get(), ModItems.COPPER_LEGGINGS.get());
+    this.tag(ItemTags.FOOT_ARMOR).add(ModItems.BEETLE_BOOTS.get(), ModItems.COPPER_BOOTS.get());
 
     this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
