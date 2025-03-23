@@ -144,7 +144,7 @@ public class FrostLandsRitual extends Ritual {
         if (i >= fluidCount) {
           BlockState state = pLevel.getBlockState(chosen);
           if (state.is(Blocks.MAGMA_BLOCK)) {
-            pLevel.setBlockAndUpdate(chosen, Blocks.BASALT.defaultBlockState()));
+            pLevel.setBlockAndUpdate(chosen, Blocks.BASALT.defaultBlockState());
             i++;
             affectedPositions.add(chosen);
           }
