@@ -206,6 +206,7 @@ public class RootsTags {
     public static final TagKey<Block> FORAGEABLES = modTag("forageable/all");
 
     public static final TagKey<Block> SHATTER_EXCLUDE = modTag("spells/shatter/exclude");
+    public static final TagKey<Block> SHATTER_INCLUDE = modTag("spells/shatter/include");
 
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));

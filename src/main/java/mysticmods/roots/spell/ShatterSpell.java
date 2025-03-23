@@ -17,13 +17,18 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -135,19 +140,43 @@ public class ShatterSpell extends Spell {
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     FakePlayerUtil.buildItems(pLevel, pLevel.getRandom());
 
+    ServerPlayer player = (ServerPlayer) pPlayer;
+
     BlockHitResult rayTraceResult = pickBlock(pPlayer);
     Map<BlockPos, BlockState> toBreak = getAffectedBlocks(pLevel, pPlayer, instance, pStack, rayTraceResult.getBlockPos(), pLevel.getBlockState(rayTraceResult.getBlockPos()), rayTraceResult);
     int count = 0;
     for (Map.Entry<BlockPos, BlockState> entry : toBreak.entrySet()) {
       BlockPos pos = entry.getKey();
       BlockState state = entry.getValue();
+      // We don't try to destroy air
+      if (pLevel.isEmptyBlock(pos)) {
+        continue;
+      }
+      // We ignored explicitly tagged blocks
       if (state.is(RootsTags.Blocks.SHATTER_EXCLUDE)) {
         continue;
       }
-      if (!pLevel.isEmptyBlock(pos)) {
-        if (pLevel.destroyBlock(pos, true, pPlayer)) {
-          count++;
-        }
+      // We also ignore blocks that have a negative destroy speed, unless we forcefully include them
+      if (state.getDestroySpeed(pLevel, pos) < 0 && !state.is(RootsTags.Blocks.SHATTER_INCLUDE)) {
+        continue;
+      }
+      // We check to see if the player is allowed to edit at this place
+      if (!pPlayer.mayInteract(pLevel, pos)) {
+        continue;
+      }
+      // Check if it's restricted by game mode
+      if (pPlayer.blockActionRestricted(pLevel, pos, player.gameMode.getGameModeForPlayer())) {
+        continue;
+      }
+      // Now fire a NeoForge event
+      BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(pLevel, pos, state, player);
+      NeoForge.EVENT_BUS.post(event);
+      if (event.isCanceled()) {
+        continue;
+      }
+
+      if (pLevel.destroyBlock(pos, true, pPlayer)) {
+        count++;
       }
     }
 
