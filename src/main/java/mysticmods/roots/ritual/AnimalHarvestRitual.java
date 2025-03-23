@@ -133,13 +133,14 @@ public class AnimalHarvestRitual extends Ritual {
     if (randomItems.isEmpty()) {
       RootsAPI.LOG.error("Generated empty loot for entity {}.", entity);
     }
-    if (itemStackCountLimit > 1) {
+    if (itemStackCountLimit != -1) {
       for (ItemStack stack : randomItems) {
         if (stack.getCount() > itemStackCountLimit) {
           stack.setCount(itemStackCountLimit);
         }
       }
     }
+    randomItems.removeIf(ItemStack::isEmpty);
     // TODO: Should this be < or <=
     if (itemStackLimit == -1 || randomItems.size() <= itemStackLimit) {
       return randomItems;
