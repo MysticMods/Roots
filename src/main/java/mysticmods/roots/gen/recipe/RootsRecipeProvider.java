@@ -9,10 +9,10 @@ import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.*;
 import mysticmods.roots.recipe.PouchDyeRecipe;
+import mysticmods.roots.recipe.grove.GroveRecipe;
+import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
 import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
-import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
-import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;
@@ -1208,6 +1208,16 @@ public class RootsRecipeProvider extends RecipeProvider {
             .requires(Tags.Items.GLASS_BLOCKS).requires(Tags.Items.GLASS_BLOCKS).requires(Items.TORCH)
             .condition(ModConditions.GROVE_STONE_ACTIVE.get())
             .result(ModItems.GLASS_EYE, 2)), c, RootsAPI.rl("grove/glass_eye"));
+
+    RecipeSaver.saver().unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
+        .save(PyreRecipe.Builder.create().ritual(ModRituals.HEALING_AURA)
+            .build(BaseRecipeData.Builder.create()
+                .requires(Items.GLISTERING_MELON_SLICE)
+                .requires(Tags.Items.CROPS_CARROT)
+                .requires(Items.HONEYCOMB)
+                .requires(Items.APPLE)
+                .requires(RootsTags.Items.SILVER_INGOT)), c, RootsAPI.rl("pyre/healing_aura")
+        );
 
     RecipeSaver.saver().unlockedBy("has_dewgonia", has(RootsTags.Items.DEWGONIA_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.FROST_LANDS)

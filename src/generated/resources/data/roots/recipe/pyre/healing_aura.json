@@ -1,0 +1,24 @@
+{
+  "type": "roots:pyre",
+  "data": {
+    "ingredients": [
+      {
+        "item": "minecraft:glistering_melon_slice"
+      },
+      {
+        "tag": "c:crops/carrot"
+      },
+      {
+        "item": "minecraft:honeycomb"
+      },
+      {
+        "item": "minecraft:apple"
+      },
+      {
+        "tag": "c:ingots/silver"
+      }
+    ],
+    "priority": 0
+  },
+  "ritual": "roots:healing_aura"
+}

@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-22T16:49:53.9417873	Recipes
+// 1.21.1	2025-03-23T19:45:29.1611286	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -250,6 +250,7 @@ d504683d02dc319baf501b93602881228b0a8783 data/roots/advancement/recipes/misc/pyr
 5d101e8eca0f66872a9a15cc72387ea9bc7c224d data/roots/advancement/recipes/misc/pyre/gathering.json
 8508010f4f4a5cb12b699301dbf128c7e32cdbb8 data/roots/advancement/recipes/misc/pyre/germination.json
 d110a320e68a79bd6967f61346fbbbe3ed37a17f data/roots/advancement/recipes/misc/pyre/grove_supplication.json
+3cd5b87601948ec8be85d2a2be00d124b47d1317 data/roots/advancement/recipes/misc/pyre/healing_aura.json
 b3a28fea2f39910a95c0db855056bbe16f2976bd data/roots/advancement/recipes/misc/pyre/heavy_storms.json
 30f1325205f33ae728e75a0142c20b96c01cec63 data/roots/advancement/recipes/misc/pyre/inferno_bulb.json
 f7b745872da788c2212b88a620574032d018f55e data/roots/advancement/recipes/misc/pyre/moonglow.json
@@ -527,6 +528,7 @@ a9ff249d005203ba20fcd80cf9cec77477ad0164 data/roots/recipe/pyre/frost_lands.json
 981035cbd2e78abde76b63660eab5d0e383997f7 data/roots/recipe/pyre/gathering.json
 ce75dbdeeb3eafd82501ab76941a94b095d36263 data/roots/recipe/pyre/germination.json
 bf05e5f99b89a6b211754e5d9f871d394093ccd2 data/roots/recipe/pyre/grove_supplication.json
+73e12b972c5f36f5a2571ee2d563268521275670 data/roots/recipe/pyre/healing_aura.json
 5216c4be60b4935eab5a7aa0b32040708f146a2a data/roots/recipe/pyre/heavy_storms.json
 13045198195e91c567f38185c1157b7e2964ae3b data/roots/recipe/pyre/inferno_bulb.json
 4c56555dcd4cc447e5901db5742935ff46274a67 data/roots/recipe/pyre/moonglow.json
