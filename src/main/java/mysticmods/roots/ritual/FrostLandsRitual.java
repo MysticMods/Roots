@@ -9,6 +9,7 @@ import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -19,12 +20,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.SnowGolem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.ArrayList;
@@ -34,6 +37,16 @@ import java.util.function.BiPredicate;
 public class FrostLandsRitual extends Ritual {
   private int healInterval, fluidCount, count;
   private float spawnChance, layerChance, powderedChance, iceChance;
+
+  private static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE_SOLID = (level, pos) -> {
+    BlockPos above = pos.above();
+    BlockState state = level.getBlockState(pos);
+    VoxelShape shape = state.getBlockSupportShape(level, pos);
+    if (!Block.isFaceFull(shape, Direction.UP)) {
+      return false;
+    }
+    return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above()).isEmpty() && level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos).canBeReplaced() && level.getFluidState(pos).isEmpty();
+  };
 
   private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
   private static final BiPredicate<Level, BlockPos> WATER_OR_LAVA = (level, pos) -> {
@@ -72,7 +85,7 @@ public class FrostLandsRitual extends Ritual {
     return state.is(BlockTags.FIRE);
   };
 
-  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(WATER_OR_LAVA, FROST_LANDS_PREDICATE, IS_FARMLAND, IS_FIRE);
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(WATER_OR_LAVA, FROST_LANDS_PREDICATE, IS_FARMLAND, IS_FIRE, TWO_AIR_ABOVE_SOLID);
 
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates() {
@@ -119,11 +132,13 @@ public class FrostLandsRitual extends Ritual {
       }
 
       if (randomSource.nextFloat() < spawnChance) {
-        BlockPos pos = pCache.random(randomSource);
-        SnowGolem golem = EntityType.SNOW_GOLEM.create(pLevel);
-        if (golem != null && pos != null) {
-          golem.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-          pLevel.addFreshEntity(golem);
+        BlockPos pos = pCache.random(TWO_AIR_ABOVE_SOLID, randomSource);
+        if (pos != null) {
+          SnowGolem golem = EntityType.SNOW_GOLEM.create(pLevel);
+          if (golem != null) {
+            golem.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+            pLevel.addFreshEntity(golem);
+          }
         }
       }
 
