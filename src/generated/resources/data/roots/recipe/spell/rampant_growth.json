@@ -1,0 +1,24 @@
+{
+  "type": "roots:mortar",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "roots:crops/wildewheet"
+      },
+      {
+        "tag": "roots:seeds/wildewheet"
+      },
+      {
+        "tag": "c:crops/sugar_cane"
+      },
+      {
+        "tag": "c:crops/carrot"
+      },
+      {
+        "item": "minecraft:milk_bucket"
+      }
+    ],
+    "priority": 0
+  },
+  "times": 5
+}

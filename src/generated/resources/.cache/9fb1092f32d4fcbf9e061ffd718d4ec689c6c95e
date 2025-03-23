@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-23T19:57:01.1724832	Recipes
+// 1.21.1	2025-03-23T20:08:01.2035278	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -300,6 +300,7 @@ e1fb846b90609d6b53ac4f59251e4f8ff65b7e08 data/roots/advancement/recipes/misc/spe
 55c70c182d479212756fccd3a9b5e35bf471a9d4 data/roots/advancement/recipes/misc/spell/magnetism.json
 01924068f44cd655f0c85573d4d2c2483bc28e63 data/roots/advancement/recipes/misc/spell/nondetection.json
 baf615d9b31599bb68dbd9339aa77e750049f1ba data/roots/advancement/recipes/misc/spell/petal_shell.json
+30e553ce1e46dbbe1b458253adf2a2ba6babce1d data/roots/advancement/recipes/misc/spell/rampant_growth.json
 2727b0e142d7deb46dbe8675328b23016c02b6d5 data/roots/advancement/recipes/misc/spell/rose_thorns.json
 ac419c8e0546e93c5895a8ca830b08388f0e4bc2 data/roots/advancement/recipes/misc/spell/sanctuary.json
 104b6ba8f369afb333c02f366f773a3afd1ef18d data/roots/advancement/recipes/misc/spell/saturate.json
@@ -659,6 +660,7 @@ e10b633e8d8e05d05bbe9a5b499b75719b8e554c data/roots/recipe/spell/life_drain.json
 d588cb212056ae8acbaf21e5a5fead2993d10137 data/roots/recipe/spell/magnetism.json
 586aed70bb2ab1db30158274e85d5d63236a1099 data/roots/recipe/spell/nondetection.json
 f37021f4646c6fb9a56854dd9b8a22b3a669a542 data/roots/recipe/spell/petal_shell.json
+735d2ba9f4b584b6f6cf3720ed8399abc56fa339 data/roots/recipe/spell/rampant_growth.json
 8f0f95339c274d16be25d016254d33686c4d3d06 data/roots/recipe/spell/rose_thorns.json
 589822101e34227a7aaf9aab2d196d081a082d3e data/roots/recipe/spell/sanctuary.json
 8f1e11be6dc2b315a3977c54ac2ccca9a2a6cc2a data/roots/recipe/spell/saturate.json
