@@ -205,6 +205,8 @@ public class RootsTags {
     public static final TagKey<Block> FORAGEABLE_DOUBLE_BLOCKS = modTag("forageable/double");
     public static final TagKey<Block> FORAGEABLES = modTag("forageable/all");
 
+    public static final TagKey<Block> SHATTER_EXCLUDE = modTag("spells/shatter/exclude");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }

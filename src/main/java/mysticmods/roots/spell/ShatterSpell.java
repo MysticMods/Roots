@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.CostInstance;
@@ -139,6 +140,10 @@ public class ShatterSpell extends Spell {
     int count = 0;
     for (Map.Entry<BlockPos, BlockState> entry : toBreak.entrySet()) {
       BlockPos pos = entry.getKey();
+      BlockState state = entry.getValue();
+      if (state.is(RootsTags.Blocks.SHATTER_EXCLUDE)) {
+        continue;
+      }
       if (!pLevel.isEmptyBlock(pos)) {
         if (pLevel.destroyBlock(pos, true, pPlayer)) {
           count++;
