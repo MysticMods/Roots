@@ -141,7 +141,8 @@ public class EntityEventHandler {
   @SubscribeEvent
   public static void onEntityTarget(LivingChangeTargetEvent event) {
     if (event.getEntity().hasEffect(ModEffects.GEAS)) {
-      event.setCanceled(true);
+      event.setNewAboutToBeSetTarget(null);
+      return;
     }
 
     if (event.getEntity() instanceof Mob mob && event.getOriginalAboutToBeSetTarget() instanceof Player player && mob.getTarget() != player && mob.getLastHurtByMob() != player) {
