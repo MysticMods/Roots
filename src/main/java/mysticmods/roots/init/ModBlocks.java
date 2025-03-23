@@ -129,7 +129,7 @@ public class ModBlocks {
   public static DeferredHolder<Block, FenceBlock> WILDWOOD_FENCE = BLOCKS.register("wildwood_fence", () -> new FenceBlock(WILDWOOD_PLANKS_PROPERTIES));
 
   private static final BlockBehaviour.Properties RUNESTONE_BUTTON_PROPERTIES = BlockBehaviour.Properties.of()
-      .noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY);
+      .noCollission().strength(0.5F).sound(SoundType.STONE).pushReaction(PushReaction.DESTROY);
 
   public static DeferredHolder<Block, ButtonBlock> RUNESTONE_BUTTON = BLOCKS.register("runestone_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
   public static DeferredHolder<Block, ButtonBlock> RUNESTONE_BRICK_BUTTON = BLOCKS.register("runestone_brick_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
