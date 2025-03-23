@@ -45,13 +45,21 @@ public class FrostLandsRitual extends Ritual {
     if (!Block.isFaceFull(shape, Direction.UP)) {
       return false;
     }
-    return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above()).isEmpty() && level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos).canBeReplaced() && level.getFluidState(pos).isEmpty();
+    return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above())
+        .isEmpty() && level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos)
+        .canBeReplaced() && level.getFluidState(pos).isEmpty();
   };
 
   private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
   private static final BiPredicate<Level, BlockPos> WATER_OR_LAVA = (level, pos) -> {
     FluidState fluidState = level.getFluidState(pos);
     return fluidState.isSource() && fluidState.is(Tags.Fluids.WATER) || fluidState.is(Tags.Fluids.LAVA);
+  };
+
+  private static final BiPredicate<Level, BlockPos> MAGMA = (level, pos) -> {
+    BlockState state = level.getBlockState(pos);
+    // TODO: Tag
+    return state.is(Blocks.MAGMA_BLOCK);
   };
 
   private static final BiPredicate<Level, BlockPos> FROST_LANDS_PREDICATE = (level, pos) -> {
@@ -125,6 +133,18 @@ public class FrostLandsRitual extends Ritual {
             affectedPositions.add(chosen);
           } else if (fluidState.is(FluidTags.LAVA)) {
             pLevel.setBlockAndUpdate(chosen, Blocks.OBSIDIAN.defaultBlockState());
+            i++;
+            affectedPositions.add(chosen);
+          }
+        }
+      }
+
+      i = 0;
+      for (BlockPos chosen : pCache.iterate(MAGMA, randomSource)) {
+        if (i >= fluidCount) {
+          BlockState state = pLevel.getBlockState(chosen);
+          if (state.is(Blocks.MAGMA_BLOCK)) {
+            pLevel.setBlockAndUpdate(chosen, Blocks.BASALT.defaultBlockState()));
             i++;
             affectedPositions.add(chosen);
           }
