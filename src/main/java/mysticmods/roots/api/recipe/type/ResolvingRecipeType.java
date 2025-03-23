@@ -23,9 +23,9 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   protected final Supplier<RecipeType<T>> type;
   protected List<RecipeHolder<T>> cache = null;
   protected final Comparator<? super RecipeHolder<T>> comparator;
-  protected final Object2IntOpenHashMap<ResourceLocation> reverseLookup = new Object2IntOpenHashMap<>();
   protected final Function<T, @org.jetbrains.annotations.Nullable V> resolver;
   private RecipeHolder<T> lastRecipe = null;
+  private boolean sorted = false;
 
   public ResolvingRecipeType(Supplier<RecipeType<T>> type, Comparator<? super RecipeHolder<T>> comparator, Function<T, @org.jetbrains.annotations.Nullable V> resolver) {
     super(GSON, "recipes");
@@ -46,16 +46,15 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
     if (cache == null) {
       cache = getRecipesList();
     }
-    if (cache != null) {
-      try {
-        cache.sort(comparator);
-      } catch (UnsupportedOperationException exception) {
-        cache = new ArrayList<>(cache);
-        cache.sort(comparator);
-      }
-      reverseLookup.clear();
-      for (int i = 0; i < cache.size(); i++) {
-        reverseLookup.put(cache.get(i).id(), i);
+    if (cache != null)  {
+      if (!sorted) {
+        try {
+          cache.sort(comparator);
+        } catch (UnsupportedOperationException exception) {
+          cache = new ArrayList<>(cache);
+          cache.sort(comparator);
+        }
+        sorted = true;
       }
       return cache;
     } else {
@@ -65,27 +64,16 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
 
   @Nullable
   public RecipeHolder<T> getRecipe(ResourceLocation location) {
-    int index = lookup(location);
-    if (index == -1) {
+    RecipeManager manager = RootsAPI.getInstance().getRecipeManager();
+    if (manager == null) {
       return null;
     }
-    return getRecipe(index);
+    //noinspection unchecked
+    return (RecipeHolder<T>) manager.byKey(location).orElse(null);
   }
 
   public int size() {
     return getRecipes().size();
-  }
-
-  public RecipeHolder<T> getRecipe(int index) {
-    if (index < 0 || index >= getRecipes().size()) {
-      throw new RuntimeException("Index " + index + " not in valid range for recipe type " + type + " [0," + getRecipes().size() + ")");
-    }
-
-    return getRecipes().get(index);
-  }
-
-  public boolean hasRecipe(int index) {
-    return index < getRecipes().size();
   }
 
   @Override
@@ -96,12 +84,7 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   public void reset() {
     cache = null;
     lastRecipe = null;
-    reverseLookup.clear();
-  }
-
-  public int lookup(ResourceLocation recipeId) {
-    getRecipes();
-    return reverseLookup.getOrDefault(recipeId, -1);
+    sorted = false;
   }
 
   @Nullable
