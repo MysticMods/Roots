@@ -1,6 +1,7 @@
 package mysticmods.roots.ritual;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
@@ -129,7 +130,10 @@ public class AnimalHarvestRitual extends Ritual {
         .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, fakePlayer);
 
     List<ItemStack> randomItems = loottable.getRandomItems(lootParamsBuilder.create(LootContextParamSets.ENTITY));
-    if (itemStackCountLimit > 0) {
+    if (randomItems.isEmpty()) {
+      RootsAPI.LOG.error("Generated empty loot for entity {}.", entity);
+    }
+    if (itemStackCountLimit > 1) {
       for (ItemStack stack : randomItems) {
         if (stack.getCount() > itemStackCountLimit) {
           stack.setCount(itemStackCountLimit);
