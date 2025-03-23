@@ -1,10 +1,13 @@
 {
   "values": {
+    "#roots:barks": {
+      "burn_time": 100
+    },
     "roots:display_pedestal": {
       "burn_time": 300
     },
     "roots:grove_pedestal": {
-      "burn_time": 300
+      "burn_time": 100
     },
     "roots:inferno_bulb": {
       "burn_time": 600
@@ -13,12 +16,48 @@
       "burn_time": 900
     },
     "roots:sheared_thatch": {
+      "burn_time": 100
+    },
+    "roots:stripped_wildwood_log": {
+      "burn_time": 300
+    },
+    "roots:stripped_wildwood_wood": {
       "burn_time": 300
     },
     "roots:thatch": {
+      "burn_time": 100
+    },
+    "roots:wildwood_button": {
+      "burn_time": 100
+    },
+    "roots:wildwood_door": {
+      "burn_time": 200
+    },
+    "roots:wildwood_fence": {
+      "burn_time": 300
+    },
+    "roots:wildwood_gate": {
+      "burn_time": 300
+    },
+    "roots:wildwood_log": {
       "burn_time": 300
     },
     "roots:wildwood_pedestal": {
+      "burn_time": 100
+    },
+    "roots:wildwood_planks": {
+      "burn_time": 300
+    },
+    "roots:wildwood_slab": {
+      "burn_time": 150
+    },
+    "roots:wildwood_stairs": {
+      "burn_time": 300
+    },
+    "roots:wildwood_trapdoor": {
+      "burn_time": 300
+    },
+    "roots:wildwood_wood": {
       "burn_time": 300
     }
   }

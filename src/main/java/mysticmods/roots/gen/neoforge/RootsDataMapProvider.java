@@ -143,6 +143,23 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.DISPLAY_PEDESTAL, new FurnaceFuel(300), false);
     builder10.add(ModItems.INFERNO_BULB, new FurnaceFuel(600), false);
     builder10.add(ModItems.MAGMATIC_SOIL, new FurnaceFuel(900), false);
+    builder10.add(ModItems.WILDWOOD_PLANKS, new FurnaceFuel(300), false);
+    builder10.add(ModItems.WILDWOOD_LOG, new FurnaceFuel(300), false);
+    builder10.add(ModItems.WILDWOOD_WOOD, new FurnaceFuel(300), false);
+    builder10.add(ModItems.STRIPPED_WILDWOOD_LOG, new FurnaceFuel(300), false);
+    builder10.add(ModItems.STRIPPED_WILDWOOD_WOOD, new FurnaceFuel(300), false);
+    builder10.add(ModItems.WILDWOOD_FENCE, new FurnaceFuel(300), false);
+    builder10.add(ModItems.WILDWOOD_GATE, new FurnaceFuel(300), false);
+    builder10.add(ModItems.WILDWOOD_PEDESTAL, new FurnaceFuel(100), false);
+    builder10.add(ModItems.WILDWOOD_DOOR, new FurnaceFuel(200), false);
+    builder10.add(ModItems.WILDWOOD_TRAPDOOR, new FurnaceFuel(300), false);
+    builder10.add(ModItems.WILDWOOD_BUTTON, new FurnaceFuel(100), false);
+    builder10.add(ModItems.WILDWOOD_STAIRS, new FurnaceFuel(300), false);
+    builder10.add(ModItems.WILDWOOD_SLAB, new FurnaceFuel(150), false);
+    builder10.add(ModItems.GROVE_PEDESTAL, new FurnaceFuel(100), false);
+    builder10.add(ModItems.SHEARED_THATCH, new FurnaceFuel(100), false);
+    builder10.add(ModItems.THATCH, new FurnaceFuel(100), false);
+    builder10.add(RootsTags.Items.BARKS, new FurnaceFuel(100), false);
 
     Builder<ItemStack, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
     Builder<ItemStack, Spell> builder12 = builder(DataMaps.SPELL_DISPLAY_ITEM).replace(false);
