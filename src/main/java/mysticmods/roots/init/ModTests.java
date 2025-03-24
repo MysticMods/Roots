@@ -13,10 +13,7 @@ import mysticmods.roots.growth.harvest.HarvestAllAboveSameBlock;
 import mysticmods.roots.growth.harvest.HarvestBreakSingleBlock;
 import mysticmods.roots.growth.harvest.HarvestCropAndAbove;
 import mysticmods.roots.growth.harvest.HarvestSingleCropBlock;
-import mysticmods.roots.growth.harvestable.CanHarvestLowestBlock;
-import mysticmods.roots.growth.harvestable.CanHarvestStemBlock;
-import mysticmods.roots.growth.harvestable.SingleCropAgeCanHarvest;
-import mysticmods.roots.growth.harvestable.SingleCropAgeCanSafeHarvest;
+import mysticmods.roots.growth.harvestable.*;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
 import mysticmods.roots.util.HarvestUtil;
@@ -64,6 +61,8 @@ public class ModTests {
   public static final DeferredHolder<CanHarvestFunction, SingleCropAgeCanSafeHarvest> SAFE_SINGLE_CROP_AGE = CAN_HARVEST_FUNCTIONS.register("safe_single_crop_age", SingleCropAgeCanSafeHarvest::new);
 
   public static final DeferredHolder<CanHarvestFunction, CanHarvestLowestBlock> CAN_HARVEST_LOWEST = CAN_HARVEST_FUNCTIONS.register("can_harvest_lowest_block", CanHarvestLowestBlock::new);
+
+  public static final DeferredHolder<CanHarvestFunction, CanHarvestTwoBlockPlantAge> CAN_HARVEST_TWO_BLOCK_PLANT_AGE = CAN_HARVEST_FUNCTIONS.register("can_harvest_two_block_plant_age", CanHarvestTwoBlockPlantAge::new);
 
   public static final DeferredHolder<CanHarvestFunction, CanHarvestStemBlock> CAN_HARVEST_STEM_BLOCK = CAN_HARVEST_FUNCTIONS.register("can_harvest_stem_block", CanHarvestStemBlock::new);
 

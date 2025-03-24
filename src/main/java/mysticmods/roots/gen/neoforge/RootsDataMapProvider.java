@@ -319,9 +319,10 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     // Pitcher crop
     builder15.add(Blocks.PITCHER_CROP.builtInRegistryHolder(), new GrowthRecord(Blocks.PITCHER_CROP, Optional.of(PitcherCropBlock.AGE), PitcherCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    //builder16.add(Blocks.PITCHER_CROP.builtInRegistryHolder(), new HarvestRecord(Blocks.PITCHER_CROP, Optional.empty(), Optional.of(PitcherCropBlock.AGE), PitcherCropBlock.MAX_AGE, ModTests..get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
+    builder16.add(Blocks.PITCHER_CROP.builtInRegistryHolder(), new HarvestRecord(Blocks.PITCHER_CROP, Optional.empty(), Optional.of(PitcherCropBlock.AGE), PitcherCropBlock.MAX_AGE, ModTests.CAN_HARVEST_TWO_BLOCK_PLANT_AGE.get(), ModTests.HARVEST_CROP_AND_ABOVE.get()), false);
 
     builder15.add(Blocks.TORCHFLOWER_CROP.builtInRegistryHolder(), new GrowthRecord(Blocks.TORCHFLOWER_CROP, Optional.of(TorchflowerCropBlock.AGE), TorchflowerCropBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
+    builder16.add(Blocks.TORCHFLOWER_CROP.builtInRegistryHolder(), new HarvestRecord(Blocks.TORCHFLOWER_CROP, Optional.empty(), Optional.of(TorchflowerCropBlock.AGE), TorchflowerCropBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
 
     builder15.add(Blocks.POTATOES.builtInRegistryHolder(), new GrowthRecord(Blocks.POTATOES, Optional.of(PotatoBlock.AGE), PotatoBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 

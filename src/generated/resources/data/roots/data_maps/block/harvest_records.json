@@ -61,6 +61,15 @@
       "maximumAge": 3,
       "seedItem": "minecraft:nether_wart"
     },
+    "minecraft:pitcher_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canHarvestFunction": "roots:can_harvest_two_block_plant_age",
+      "cropBlock": "minecraft:pitcher_crop",
+      "harvestFunction": "roots:harvest_crop_and_above",
+      "maximumAge": 4
+    },
     "minecraft:potatoes": {
       "ageProperty": {
         "ageProperty": "age"
@@ -94,6 +103,15 @@
       "harvestFunction": "roots:harvest_single_crop_block",
       "maximumAge": 3,
       "seedItem": "minecraft:sweet_berries"
+    },
+    "minecraft:torchflower_crop": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canHarvestFunction": "roots:single_crop_age",
+      "cropBlock": "minecraft:torchflower_crop",
+      "harvestFunction": "roots:harvest_single_crop_block",
+      "maximumAge": 2
     },
     "minecraft:wheat": {
       "ageProperty": {
