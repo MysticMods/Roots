@@ -67,11 +67,6 @@ public class DeerEntity extends Animal {
     return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0d).add(Attributes.MOVEMENT_SPEED, 0.2d);
   }
 
-/*  @Override
-  public float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-    return this.isBaby() ? this.getBbHeight() : 1.3F;
-  }*/
-
   @Nullable
   @Override
   protected SoundEvent getAmbientSound() {
