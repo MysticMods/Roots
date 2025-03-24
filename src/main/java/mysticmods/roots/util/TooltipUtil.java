@@ -27,7 +27,7 @@ public class TooltipUtil {
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
       }
       pTooltipComponents.add(Component.literal(""));
-      // TODO: 
+      // TODO:
       if (RootsAPI.getInstance().isShiftKeyDown()) {
         int tempSlot = 0;
         for (SpellStorage.SpellSlot entry : storage.getSpells()) {

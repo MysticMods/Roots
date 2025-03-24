@@ -76,19 +76,21 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   protected void fillDataKeyMap(Object2IntMap<String> map) {
     super.fillDataKeyMap(map);
     map.put("mode", 0);
+    map.put("untagged", 1);
+    map.put("tagged", 2);
   }
 
   @Override
   protected void fillDataMaximumValues(Int2IntMap map) {
     super.fillDataMaximumValues(map);
-    map.put(0, 1);
+    map.put(0, 2);
   }
 
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (ticks % interval == 0) {
-      boolean checkTag = getDataValue(instance, "mode") == 1;
+      boolean checkTag = getDataValue(instance, "mode") == 2;
       BoundingBox search = box.moved((int) pPlayer.getX(), (int) pPlayer.getY(), (int) pPlayer.getZ());
       List<BlockPos> positions = new ArrayList<>();
       BlockPos.betweenClosedStream(search).forEach(pos -> {
