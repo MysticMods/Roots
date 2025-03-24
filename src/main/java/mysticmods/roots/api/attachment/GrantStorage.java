@@ -1,10 +1,12 @@
 package mysticmods.roots.api.attachment;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.LibraryModifier;
@@ -158,5 +160,37 @@ public class GrantStorage implements ICleanable {
   @Override
   public boolean isDirty() {
     return this.dirty;
+  }
+
+  @Override
+  public final boolean equals(Object o) {
+    if (!(o instanceof GrantStorage that)) return false;
+
+    return dirty == that.dirty && grantedSpells.equals(that.grantedSpells) && grantedModifiers.equals(that.grantedModifiers);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = Boolean.hashCode(dirty);
+    result = 31 * result + grantedSpells.hashCode();
+    result = 31 * result + grantedModifiers.hashCode();
+    return result;
+  }
+
+  public void difference (GrantStorage otherStorage) {
+    Set<Spell> newOther = Sets.difference(otherStorage.grantedSpells, grantedSpells);
+    if (!newOther.isEmpty()) {
+      RootsAPI.LOG.error("The following spells are contained in `otherStorage` but not this and will be added:");
+      for (Spell spell : newOther) {
+        RootsAPI.LOG.error("- {}", spell);
+      }
+    }
+    Set<Spell> removing = Sets.difference(grantedSpells, otherStorage.grantedSpells);
+    if (!removing.isEmpty()) {
+      RootsAPI.LOG.error("The following spells are contained in this but not `otherStorage` and will be removed:");
+      for (Spell spell : removing) {
+        RootsAPI.LOG.error("- {}", spell);
+      }
+    }
   }
 }

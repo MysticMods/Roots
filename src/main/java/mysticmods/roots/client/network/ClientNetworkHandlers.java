@@ -29,6 +29,9 @@ public class ClientNetworkHandlers {
       return;
     }
 
+    GrantStorage oldStorage = player.getData(ModAttachments.GRANT_STORAGE);
+    oldStorage.difference(storage);
+
     player.setData(ModAttachments.GRANT_STORAGE, storage);
   }
 
