@@ -34,21 +34,6 @@ public class RootsAPIImpl extends RootsAPI {
   }
 
   @Override
-  public Player getPlayer() {
-    return Accessor.getPlayer();
-  }
-
-  @Override
-  public boolean isShiftKeyDown() {
-    return Accessor.isShiftKeyDown();
-  }
-
-  @Override
-  public RecipeManager getRecipeManager() {
-    return Accessor.getManager();
-  }
-
-  @Override
   public void syncHerbs(Player player, Object2DoubleMap<Herb> herbs) {
     PacketDistributor.sendToPlayer((ServerPlayer) player, new ClientboundHerbCountSyncPacket(herbs));
   }

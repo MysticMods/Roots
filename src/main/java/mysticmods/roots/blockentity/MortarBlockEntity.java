@@ -71,6 +71,19 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
   }
 
   protected void revalidateRecipe() {
+    if (getLevel() == null) {
+      return;
+    }
+
+    if (cachedRecipeId != null) {
+      cachedRecipe = ResolvedRecipes.MORTAR.getRecipe(getLevel(), cachedRecipeId);
+      cachedRecipeId = null;
+    }
+    if (lastRecipeId != null) {
+      lastRecipe = ResolvedRecipes.MORTAR.getRecipe(getLevel(), lastRecipeId);
+      lastRecipeId = null;
+    }
+
     boolean matched = false;
     if (cachedRecipe == null) {
       uses = -1;
@@ -123,6 +136,9 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     pTag.put("MortarInventory", inventory.serializeNBT(provider));
   }
 
+  private ResourceLocation cachedRecipeId = null;
+  private ResourceLocation lastRecipeId = null;
+
   @Override
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
     super.loadAdditional(pTag, provider);
@@ -137,17 +153,13 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
         ItemStack.parse(provider, previousItems.getCompound(i)).ifPresent(previousRecipeItems::add);
       }
     }
+    cachedRecipeId = null;
     if (pTag.contains("MortarCachedRecipe", Tag.TAG_STRING)) {
-      ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("MortarCachedRecipe"));
-      cachedRecipe = ResolvedRecipes.MORTAR.getRecipe(cachedId);
-    } else {
-      cachedRecipe = null;
+      cachedRecipeId = ResourceLocation.parse(pTag.getString("MortarCachedRecipe"));
     }
+    lastRecipeId = null;
     if (pTag.contains("MortarLastRecipe", Tag.TAG_STRING)) {
-      ResourceLocation lastId = ResourceLocation.parse(pTag.getString("MortarLastRecipe"));
-      lastRecipe = ResolvedRecipes.MORTAR.getRecipe(lastId);
-    } else {
-      cachedRecipe = null;
+      lastRecipeId = ResourceLocation.parse(pTag.getString("MortarLastRecipe"));
     }
     if (pTag.contains("MortarInventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(provider, pTag.getCompound("MortarInventory"));

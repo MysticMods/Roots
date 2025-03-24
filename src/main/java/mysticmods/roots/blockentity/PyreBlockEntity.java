@@ -284,6 +284,19 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   }
 
   protected void revalidateRecipe() {
+    if (getLevel() == null) {
+      return;
+    }
+
+    if (cachedRecipeId != null) {
+      cachedRecipe = ResolvedRecipes.PYRE.getRecipe(getLevel(), cachedRecipeId);
+      cachedRecipeId = null;
+    }
+    if (lastRecipeId != null) {
+      lastRecipe = ResolvedRecipes.PYRE.getRecipe(getLevel(), lastRecipeId);
+      lastRecipeId = null;
+    }
+
     boolean matched = false;
     if (cachedRecipe == null) {
       if (lastRecipe != null && lastRecipe.value().matches(playerlessCrafting, getLevel())) {
@@ -333,20 +346,19 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
   }
 
+  private ResourceLocation cachedRecipeId = null;
+  private ResourceLocation lastRecipeId = null;
+
   @Override
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
     super.loadAdditional(pTag, provider);
+    cachedRecipeId = null;
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
-      ResourceLocation cachedId = ResourceLocation.parse(pTag.getString("cached_recipe"));
-      cachedRecipe = ResolvedRecipes.PYRE.getRecipe(cachedId);
-    } else {
-      cachedRecipe = null;
+      cachedRecipeId = ResourceLocation.parse(pTag.getString("cached_recipe"));
     }
+    lastRecipeId = null;
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
-      ResourceLocation lastId = ResourceLocation.parse(pTag.getString("last_recipe"));
-      lastRecipe = ResolvedRecipes.PYRE.getRecipe(lastId);
-    } else {
-      lastRecipe = null;
+      lastRecipeId = ResourceLocation.parse(pTag.getString("last_recipe"));
     }
     if (pTag.contains("inventory", Tag.TAG_COMPOUND)) {
       inventory.deserializeNBT(provider, pTag.getCompound("inventory"));

@@ -63,7 +63,7 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
 
     Set<Block> skippedInputs = new HashSet<>();
     Set<Block> skippedOutputs = new HashSet<>();
-    for (RecipeHolder<KnifeRecipe> recipe2 : ResolvedRecipes.KNIFE.getRecipes()) {
+    for (RecipeHolder<KnifeRecipe> recipe2 : ResolvedRecipes.KNIFE.getRecipes(Minecraft.getInstance().level)) {
       if (recipe2.value().equals(DynamicBarkRecipe.INSTANCE)) {
         continue;
       }

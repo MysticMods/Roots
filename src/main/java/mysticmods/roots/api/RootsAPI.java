@@ -74,11 +74,5 @@ public abstract class RootsAPI {
 
   public abstract boolean canUnlock(ServerPlayer player, Unlock<?> unlock);
 
-  public abstract Player getPlayer();
-
-  public abstract boolean isShiftKeyDown();
-
-  public abstract RecipeManager getRecipeManager();
-
   public abstract void syncHerbs (Player player, Object2DoubleMap<Herb> herbs);
 }

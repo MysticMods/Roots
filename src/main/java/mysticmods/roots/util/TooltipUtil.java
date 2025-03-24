@@ -1,7 +1,6 @@
 package mysticmods.roots.util;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
-import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.spell.Costing;
@@ -27,21 +26,16 @@ public class TooltipUtil {
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
       }
       pTooltipComponents.add(Component.literal(""));
-      // TODO:
-      if (RootsAPI.getInstance().isShiftKeyDown()) {
-        int tempSlot = 0;
-        for (SpellStorage.SpellSlot entry : storage.getSpells()) {
-          // TODO: Include cooling down
-          // TODO: Spell data
-          int slotId = tempSlot + 1;
-          Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell().getStyledName();
-          Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("");
-          pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, selected));
-          tempSlot++;
-        }
-      } else {
-        // TODO:
-        pTooltipComponents.add(RootsAPI.holdShift());
+      int tempSlot = 0;
+      for (SpellStorage.SpellSlot entry : storage.getSpells()) {
+        // TODO: Include cooling down
+        // TODO: Spell data
+        int slotId = tempSlot + 1;
+        Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell()
+            .getStyledName();
+        Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("");
+        pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, selected));
+        tempSlot++;
       }
     }
   }
@@ -59,7 +53,8 @@ public class TooltipUtil {
       String herbCost = String.format("%.4f", entry.getDoubleValue());
       result.add(Component.translatable("roots.tooltip.cost.herb_cost", herb.getStyledName(), Component.translatable("roots.tooltip.cost.cost_amount", herbCost)));
     }
-    result.add(Component.translatable("roots.tooltip.cost.charge_type", Component.translatable("roots.tooltip.cost.charge_type." + cos.getChargeType().name().toLowerCase())));
+    result.add(Component.translatable("roots.tooltip.cost.charge_type", Component.translatable("roots.tooltip.cost.charge_type." + cos.getChargeType()
+        .name().toLowerCase())));
   }
 }
 

@@ -134,7 +134,7 @@ public class RootsCommand {
       }
 
       // Get the ritual recipe
-      RecipeHolder<PyreRecipe> recipe = ResolvedRecipes.PYRE.findRecipe(ritual);
+      RecipeHolder<PyreRecipe> recipe = ResolvedRecipes.PYRE.findRecipe(c.getSource().getLevel(), ritual);
 
       if (recipe == null) {
         c.getSource()

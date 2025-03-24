@@ -3,7 +3,6 @@ package mysticmods.roots.api.recipe.type;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.IRootsRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -34,19 +33,16 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
     this.resolver = resolver;
   }
 
-  protected List<RecipeHolder<T>> getRecipesList() {
-    RecipeManager manager = RootsAPI.getInstance().getRecipeManager();
-    if (manager == null) {
-      return Collections.emptyList();
-    }
+  protected List<RecipeHolder<T>> getRecipesList(Level level) {
+    RecipeManager manager = level.getRecipeManager();
     return manager.getAllRecipesFor(type.get());
   }
 
-  public List<RecipeHolder<T>> getRecipes() {
+  public List<RecipeHolder<T>> getRecipes(Level level) {
     if (cache == null) {
-      cache = getRecipesList();
+      cache = getRecipesList(level);
     }
-    if (cache != null)  {
+    if (cache != null) {
       if (!sorted) {
         try {
           cache.sort(comparator);
@@ -63,8 +59,8 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   }
 
   @Nullable
-  public RecipeHolder<T> getRecipe(ResourceLocation location) {
-    RecipeManager manager = RootsAPI.getInstance().getRecipeManager();
+  public RecipeHolder<T> getRecipe(Level level, ResourceLocation location) {
+    RecipeManager manager = level.getRecipeManager();
     if (manager == null) {
       // TODO: Potentially fall back on the cache, if it exists
       RootsAPI.LOG.error("Unable to locate recipe {}, as the recipe manager is null.", location);
@@ -72,10 +68,6 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
     }
     //noinspection unchecked
     return (RecipeHolder<T>) manager.byKey(location).orElse(null);
-  }
-
-  public int size() {
-    return getRecipes().size();
   }
 
   @Override
@@ -91,10 +83,11 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
 
   @Nullable
   public RecipeHolder<T> findRecipe(C inventory, Level level) {
-    if (lastRecipe != null && !lastRecipe.value().isDynamic() && lastRecipe.value().getPriority() >= 0 && lastRecipe.value().matches(inventory, level)) {
+    if (lastRecipe != null && !lastRecipe.value().isDynamic() && lastRecipe.value()
+        .getPriority() >= 0 && lastRecipe.value().matches(inventory, level)) {
       return lastRecipe;
     }
-    for (RecipeHolder<T> recipe : getRecipes()) {
+    for (RecipeHolder<T> recipe : getRecipes(level)) {
       if (recipe.value().matches(inventory, level)) {
         lastRecipe = recipe;
         return recipe;
@@ -105,7 +98,7 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
   }
 
   @Nullable
-  public RecipeHolder<T> findRecipe(V output) {
+  public RecipeHolder<T> findRecipe(Level level, V output) {
     if (resolver == null) {
       return null;
     }
@@ -117,7 +110,7 @@ public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> &
       }
     }
 
-    for (RecipeHolder<T> recipe : getRecipes()) {
+    for (RecipeHolder<T> recipe : getRecipes(level)) {
       V value = resolver.apply(recipe.value());
       if (value != null && value.equals(output)) {
         lastRecipe = recipe;

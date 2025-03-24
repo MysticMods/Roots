@@ -105,6 +105,19 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }
 
   protected void revalidateRecipe() {
+    if (getLevel() == null) {
+      return;
+    }
+
+    if (cachedRecipeId != null) {
+      cachedRecipe = ResolvedRecipes.GROVE.getRecipe(getLevel(), cachedRecipeId);
+      cachedRecipeId = null;
+    }
+    if (lastRecipeId != null) {
+      lastRecipe = ResolvedRecipes.GROVE.getRecipe(getLevel(), lastRecipeId);
+      lastRecipeId = null;
+    }
+
     boolean active = getBlockState().getValue(GroveCrafterBlock.ACTIVE);
     if (getBoundingBox() != null) {
       Set<BlockPos> groveStones = ModConditions.GROVE_STONE_ACTIVE.get()
@@ -194,20 +207,19 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
   }
 
+  private ResourceLocation cachedRecipeId = null;
+  private ResourceLocation lastRecipeId = null;
+
   @Override
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.loadAdditional(pTag, lookup);
+    cachedRecipe = null;
     if (pTag.contains("cached_recipe", Tag.TAG_STRING)) {
-      ResourceLocation cachedId = RootsAPI.parse(pTag.getString("cached_recipe"));
-      cachedRecipe = ResolvedRecipes.GROVE.getRecipe(cachedId);
-    } else {
-      cachedRecipe = null;
+      cachedRecipeId = RootsAPI.parse(pTag.getString("cached_recipe"));
     }
+    lastRecipe = null;
     if (pTag.contains("last_recipe", Tag.TAG_STRING)) {
-      ResourceLocation lastId = RootsAPI.parse(pTag.getString("last_recipe"));
-      lastRecipe = ResolvedRecipes.GROVE.getRecipe(lastId);
-    } else {
-      lastRecipe = null;
+      lastRecipeId = RootsAPI.parse(pTag.getString("last_recipe"));
     }
   }
 
