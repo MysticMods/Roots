@@ -87,7 +87,7 @@ public class CastingItem extends Item {
       if (spell.cast(pLevel, pPlayer, pStack, pHand, costs, ticks) < 0) {
         // This means the psell didn't cast
         // TODO: Kind of decide something about this
-        RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());
+/*        RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());*/
       } else {
         if (ticks % 2 == 0) {
           // Actually transmit particles now
