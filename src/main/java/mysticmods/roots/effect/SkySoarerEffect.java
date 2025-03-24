@@ -55,12 +55,12 @@ public class SkySoarerEffect extends SimpleEffect {
         vehicle.hasImpulse = true;
         vehicle.hurtMarked = true;
         vehicle.fallDistance = 0f;
-        vehicle.setDeltaMovement(sky.getVehicleOriginalMovement());
+/*        vehicle.setDeltaMovement(sky.getVehicleOriginalMovement());*/
       }
       player.hasImpulse = true;
       player.hurtMarked = true;
       player.fallDistance = 0f;
-      player.setDeltaMovement(sky.getOriginalMovement());
+/*      player.setDeltaMovement(sky.getOriginalMovement());*/
     });
     return false;
   }
