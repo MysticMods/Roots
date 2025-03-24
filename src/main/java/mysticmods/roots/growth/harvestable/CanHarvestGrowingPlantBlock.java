@@ -1,7 +1,9 @@
 package mysticmods.roots.growth.harvestable;
 
 import mysticmods.roots.api.growth.CanHarvestFunction;
+import mysticmods.roots.mixin.AccessorMixinGrowingPlantBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantBlock;
@@ -14,8 +16,16 @@ public record CanHarvestGrowingPlantBlock () implements CanHarvestFunction {
   @Override
   public boolean test(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maximumAge) {
     Block block = blockState.getBlock();
-    if (!(block instanceof GrowingPlantBlock)) {
+    if (!(block instanceof GrowingPlantBlock growing)) {
       return false;
     }
+    Direction dir = ((AccessorMixinGrowingPlantBlock) growing).rootsGetGrowthDirection();
+
+    BlockPos relative = blockPos.relative(dir);
+    if (level.getBlockState(relative).is(growing)) {
+      return false;
+    }
+
+    return true;
   }
 }

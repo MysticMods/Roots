@@ -9,10 +9,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.test.entity.EntityTestType;
 import mysticmods.roots.api.test.world.*;
 import mysticmods.roots.growth.growable.*;
-import mysticmods.roots.growth.harvest.HarvestAllAboveSameBlock;
-import mysticmods.roots.growth.harvest.HarvestBreakSingleBlock;
-import mysticmods.roots.growth.harvest.HarvestCropAndAbove;
-import mysticmods.roots.growth.harvest.HarvestSingleCropBlock;
+import mysticmods.roots.growth.harvest.*;
 import mysticmods.roots.growth.harvestable.*;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
@@ -70,6 +67,7 @@ public class ModTests {
   public static final DeferredHolder<HarvestFunction, HarvestBreakSingleBlock> HARVEST_BREAK_SINGLE_BLOCK = HARVEST_FUNCTIONS.register("harvest_break_single_block", HarvestBreakSingleBlock::new);
   public static final DeferredHolder<HarvestFunction, HarvestCropAndAbove> HARVEST_CROP_AND_ABOVE = HARVEST_FUNCTIONS.register("harvest_crop_and_above", HarvestCropAndAbove::new);
   public static final DeferredHolder<HarvestFunction, HarvestSingleCropBlock> HARVEST_SINGLE_CROP_BLOCK = HARVEST_FUNCTIONS.register("harvest_single_crop_block", HarvestSingleCropBlock::new);
+  public static final DeferredHolder<HarvestFunction, HarvestGrowingPlantBlock> HARVEST_GROWING_PLANT_BLOCK = HARVEST_FUNCTIONS.register("harvest_growing_plant_block", HarvestGrowingPlantBlock::new);
 
   public static void register(IEventBus bus) {
     ENTITY_TESTS.register(bus);
