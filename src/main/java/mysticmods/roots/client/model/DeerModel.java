@@ -136,12 +136,12 @@ public class DeerModel extends AgeableListModel<DeerEntity> {
 
   @Override
   protected Iterable<ModelPart> headParts() {
-    return Collections.emptyList();
+    return ImmutableList.of(head);
   }
 
   @Override
   protected Iterable<ModelPart> bodyParts() {
-    return ImmutableList.of(neck, body, tail, legRF, legLF, legLB, legRB, head);
+    return ImmutableList.of(neck, body, tail, legRF, legLF, legLB, legRB);
   }
 
   @Override
