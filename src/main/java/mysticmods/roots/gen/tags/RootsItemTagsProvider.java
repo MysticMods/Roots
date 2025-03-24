@@ -222,6 +222,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.POUCHES)
         .add(ModItems.HERB_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
     this.tag(RootsTags.Items.CREATIVE_POUCHES).add(ModItems.CREATIVE_POUCH.get());
+    this.tag(RootsTags.Items.ALL_POUCHES).addTags(RootsTags.Items.POUCHES, RootsTags.Items.CREATIVE_POUCHES);
 
     this.tag(RootsTags.Items.FERTILIZERS).add(Items.BONE_MEAL);
 
@@ -273,7 +274,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.CHARMS).addTag(RootsTags.Items.CHARM_ALERT);
 
     this.tag(RootsTags.Items.CURIOS_CHARMS).addTag(RootsTags.Items.CHARMS);
-    this.tag(RootsTags.Items.CURIOS_BELTS).addTag(RootsTags.Items.POUCHES);
+    this.tag(RootsTags.Items.CURIOS_BELTS).addTag(RootsTags.Items.ALL_POUCHES);
 
     this.tag(ItemTags.ARROWS).add(ModItems.LIVING_ARROW.get());
 

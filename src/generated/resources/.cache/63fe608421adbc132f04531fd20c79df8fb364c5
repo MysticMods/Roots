@@ -1,5 +1,5 @@
-// 1.21.1	2025-03-24T15:09:12.5142074	Roots Item Tags
-cc5f0803cbd0eea726e4c0c671f18ed5a3a181be data/curios/tags/item/belt.json
+// 1.21.1	2025-03-24T18:42:07.4110093	Roots Item Tags
+5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/item/levers.json
@@ -153,6 +153,7 @@ e193f473f605776c34de80b92a855d59614ef692 data/roots/tags/item/pillars/runes/any.
 e48d858e3d3974b791109f0ebc13f854f1fd3436 data/roots/tags/item/pillars/runes/rune.json
 78d10f476ff2a556d1134f349ebb6e16d3f40922 data/roots/tags/item/pillars/runes/runed.json
 6e9dd9cfac207ae12b606c7aaac23c9efdbf7692 data/roots/tags/item/pouches.json
+ae4117882af5a5a5d43ce988fa9906246bcdbf96 data/roots/tags/item/pouches/all.json
 c42cd05d45cb4e4c36ad0e2116c8ba8abb98af20 data/roots/tags/item/pouches/creative.json
 1fd81efe08e8472219d41dc2e31df32980b3e6df data/roots/tags/item/proteins.json
 be4cfc54cdf3ab97d153428240e1e941a7375e78 data/roots/tags/item/pyres.json

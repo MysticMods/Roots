@@ -20,7 +20,7 @@ public class CuriosIntegration {
   }
 
   public static List<ItemStack> getPouches (Player player) {
-    return getTagged(player, RootsTags.Items.POUCHES);
+    return getTagged(player, RootsTags.Items.ALL_POUCHES);
   }
 
   public static List<ItemStack> getTagged (Player player, TagKey<Item> itemTagKey) {
