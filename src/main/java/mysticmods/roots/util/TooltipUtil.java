@@ -27,12 +27,16 @@ public class TooltipUtil {
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
       }
       pTooltipComponents.add(Component.literal(""));
+      // TODO: 
       if (RootsAPI.getInstance().isShiftKeyDown()) {
         int tempSlot = 0;
         for (SpellStorage.SpellSlot entry : storage.getSpells()) {
           // TODO: Include cooling down
-          pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", tempSlot + 1, entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell()
-              .getStyledName(), tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("")));
+          // TODO: Spell data
+          int slotId = tempSlot + 1;
+          Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell().getStyledName();
+          Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("");
+          pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, selected));
           tempSlot++;
         }
       } else {

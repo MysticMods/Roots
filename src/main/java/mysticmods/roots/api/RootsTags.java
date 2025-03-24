@@ -208,6 +208,8 @@ public class RootsTags {
     public static final TagKey<Block> SHATTER_EXCLUDE = modTag("spells/shatter/exclude");
     public static final TagKey<Block> SHATTER_INCLUDE = modTag("spells/shatter/include");
 
+    public static final TagKey<Block> RAMPANT_GROWTH_EXCLUDE_MODE = modTag("spells/rampant_growth/exclude");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
@@ -525,7 +527,7 @@ public class RootsTags {
     public static final TagKey<Spell> NYI = modTag("nyi");
     public static final TagKey<Spell> WIP = modTag("wip");
 
-    public static final TagKey<Spell> ADJUSTABLE_SPELL = modTag("adjustable/width");
+    public static final TagKey<Spell> ADJUSTABLE_SPELL = modTag("adjustable");
 
     public static final TagKey<Spell> PRIMAL_ALIGNED = modTag("aligned/primal");
     public static final TagKey<Spell> FAIRY_ALIGNED = modTag("aligned/fairy");

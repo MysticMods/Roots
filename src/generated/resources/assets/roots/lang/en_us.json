@@ -477,6 +477,8 @@
   "spell.roots.petal_shell": "Petal Shell",
   "spell.roots.radiance": "Radiance",
   "spell.roots.rampant_growth": "Rampant Growth",
+  "spell.roots.rampant_growth.data.mode": "Set Mode to %s",
+  "spell.roots.rampant_growth.data.mode.mode": "Modifying: Mode",
   "spell.roots.rose_thorns": "Rose Thorns",
   "spell.roots.sanctuary": "Sanctuary",
   "spell.roots.saturate": "Saturate",

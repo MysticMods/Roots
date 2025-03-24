@@ -155,6 +155,7 @@ public class RootsLangProvider extends LanguageProvider {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
           for (String n : o.getValue().getDataKeys()) {
             add(o.getValue().getDescriptionId() + ".data.mode." + n, "Modifying: " + toEnglishName(n));
+            // TODO: Value -> name
             add(o.getValue().getDescriptionId() + ".data." + n, "Set " + toEnglishName(n) + " to %s");
           }
         }

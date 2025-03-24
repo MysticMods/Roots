@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-23T12:46:00.5808275	Roots Block Tags
+// 1.21.1	2025-03-24T13:36:48.653726	Roots Block Tags
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/block/levers.json
@@ -147,6 +147,7 @@ a7ef113d913fd7247a2d2351669ffe371d25ed46 data/roots/tags/block/runestone.json
 5700981ba32b91513f51843a4b1a61787bbcdc32 data/roots/tags/block/soils/fire.json
 a8fbaa4ca6386aaec8b6bc0045a894f1cac674a1 data/roots/tags/block/soils/water.json
 b0b78e0b5a383fc7dd5123f288ef32aed5d67184 data/roots/tags/block/soil_eligible_crops.json
+26ff06fb180d4a6475ed595111919d1e2893c48c data/roots/tags/block/spells/rampant_growth/exclude.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/spells/shatter/exclude.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/spells/shatter/include.json
 05bb766c4ed71aacf3743262f41dd663aa45fbff data/roots/tags/block/spreading_mushrooms.json

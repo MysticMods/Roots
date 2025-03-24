@@ -366,6 +366,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.FORAGEABLES).addTags(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS);
     tag(RootsTags.Blocks.SHATTER_EXCLUDE);
     tag(RootsTags.Blocks.SHATTER_INCLUDE);
+    tag(RootsTags.Blocks.RAMPANT_GROWTH_EXCLUDE_MODE).add(Blocks.VINE);
   }
 
   @Override

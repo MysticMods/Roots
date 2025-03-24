@@ -1,5 +1,8 @@
 package mysticmods.roots.spell;
 
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
@@ -20,6 +23,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -69,12 +73,30 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   }
 
   @Override
+  protected void fillDataKeyMap(Object2IntMap<String> map) {
+    super.fillDataKeyMap(map);
+    map.put("mode", 0);
+  }
+
+  @Override
+  protected void fillDataMaximumValues(Int2IntMap map) {
+    super.fillDataMaximumValues(map);
+    map.put(0, 1);
+  }
+
+
+  @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (ticks % interval == 0) {
+      boolean checkTag = getDataValue(instance, "mode") == 1;
       BoundingBox search = box.moved((int) pPlayer.getX(), (int) pPlayer.getY(), (int) pPlayer.getZ());
       List<BlockPos> positions = new ArrayList<>();
       BlockPos.betweenClosedStream(search).forEach(pos -> {
-        if (GrowthUtil.growthTicks(pLevel, pos, null, pPlayer) > 0) {
+        BlockState state = pLevel.getBlockState(pos);
+        if (GrowthUtil.growthTicks(pLevel, pos, state, pPlayer) > 0) {
+          if (checkTag && state.is(RootsTags.Blocks.RAMPANT_GROWTH_EXCLUDE_MODE)) {
+            return;
+          }
           positions.add(pos.immutable());
         }
       });
