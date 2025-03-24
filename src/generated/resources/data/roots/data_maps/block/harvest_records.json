@@ -1,5 +1,12 @@
 {
   "values": {
+    "minecraft:bamboo": {
+      "ageProperty": {},
+      "canHarvestFunction": "roots:can_harvest_lowest_block",
+      "cropBlock": "minecraft:bamboo",
+      "harvestFunction": "roots:harvest_all_above_same_block",
+      "maximumAge": -1
+    },
     "minecraft:beetroots": {
       "ageProperty": {
         "ageProperty": "age"
@@ -53,13 +60,6 @@
       "harvestFunction": "roots:harvest_single_crop_block",
       "maximumAge": 3,
       "seedItem": "minecraft:nether_wart"
-    },
-    "minecraft:pitcher_crop": {
-      "ageProperty": {},
-      "canHarvestFunction": "roots:single_crop_age",
-      "cropBlock": "minecraft:pitcher_crop",
-      "harvestFunction": "roots:harvest_single_crop_block",
-      "maximumAge": -1
     },
     "minecraft:potatoes": {
       "ageProperty": {

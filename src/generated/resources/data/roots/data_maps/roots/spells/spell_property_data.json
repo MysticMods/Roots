@@ -548,8 +548,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How long before the player can cast the spell again",
-          "default_value": 20,
-          "value": 20
+          "default_value": 0,
+          "value": 0
         }
       },
       {
@@ -584,8 +584,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How many entities or blocks the spell will affect per interval",
-          "default_value": 5,
-          "value": 5
+          "default_value": 9,
+          "value": 9
         }
       }
     ],
