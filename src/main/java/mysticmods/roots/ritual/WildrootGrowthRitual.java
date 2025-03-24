@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiPredicate;
 
@@ -58,7 +57,7 @@ public class WildrootGrowthRitual extends Ritual {
       if (!belowState.isFaceSturdy(level, below, Direction.UP) || !belowState.isCollisionShapeFullBlock(level, below)) {
         level.setBlock(below, Blocks.DIRT.defaultBlockState(), 3);
       }
-      if (!((AccessorMixinSaplingBlock) ModBlocks.WILDWOOD_SAPLING.get()).getTreeGrower()
+      if (!((AccessorMixinSaplingBlock) ModBlocks.WILDWOOD_SAPLING.get()).rootsGetTreeGrower()
           .growTree(level, level.getChunkSource()
               .getGenerator(), treePos, Blocks.AIR.defaultBlockState(), level.getRandom())) {
         level.setBlock(below, belowState, 3);

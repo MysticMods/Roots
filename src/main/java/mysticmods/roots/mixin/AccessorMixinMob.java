@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Mob.class)
 public interface AccessorMixinMob {
-  @Invoker
-  float invokeGetEquipmentDropChance(EquipmentSlot slot);
+  @Invoker("getEquipmentDropChance")
+  float rootsInvokeGetEquipmentDropChance(EquipmentSlot slot);
 }

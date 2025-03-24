@@ -430,7 +430,7 @@ public class RootsLootTableProvider {
     }
 
     protected void addElementalCropDrops(ElementalCropBlock cropBlock, Item cropItem, ElementalType matchingSoil) {
-      IntegerProperty ageProperty = ((AccessorMixinCropBlock) cropBlock).callGetAgeProperty();
+      IntegerProperty ageProperty = ((AccessorMixinCropBlock) cropBlock).rootsCallGetAgeProperty();
 
       HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 
@@ -639,12 +639,12 @@ public class RootsLootTableProvider {
                   ModBlocks.WILDWOOD_LEAVES.get(), LootItem.lootTableItem(Items.STICK)
                       .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
               ))
-                  .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), ((AccessorMixinBlockLootSubProvider) this).getNORMAL_LEAVES_STICK_CHANCES()))
+                  .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), ((AccessorMixinBlockLootSubProvider) this).rootsGetNORMAL_LEAVES_STICK_CHANCES()))
           )
           .withPool(
               LootPool.lootPool()
                   .setRolls(ConstantValue.exactly(1.0F))
-                  .when(((AccessorMixinBlockLootSubProvider) this).callDoesNotHaveShearsOrSilkTouch())
+                  .when(((AccessorMixinBlockLootSubProvider) this).RootsCallDoesNotHaveShearsOrSilkTouch())
                   .add(
                       ((LootPoolSingletonContainer.Builder<?>) this.applyExplosionCondition(ModBlocks.WILDWOOD_LEAVES.get(), LootItem.lootTableItem(ModItems.WILDROOT.get())))
                           .when(

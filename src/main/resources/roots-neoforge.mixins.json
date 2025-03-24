@@ -5,6 +5,7 @@
   "mixins": [
     "AccessorMixinBlockLootSubProvider",
     "AccessorMixinCropBlock",
+    "AccessorMixinGrowingPlantBlock",
     "AccessorMixinLivingEntity",
     "AccessorMixinLootTable",
     "AccessorMixinMob",

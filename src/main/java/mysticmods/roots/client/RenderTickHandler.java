@@ -7,7 +7,6 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.mixin.AccessorMixinLevelRenderer;
 import net.minecraft.client.Camera;
@@ -30,7 +29,6 @@ import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderHighlightEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.client.event.RenderLivingEvent;
 
 import java.util.Map;
 
@@ -93,7 +91,7 @@ public class RenderTickHandler {
             for (Map.Entry<BlockPos, BlockState> entry : blocks.entrySet()) {
               BlockPos target = entry.getKey();
               if (!pos.equals(target) && !ClientHooks.onDrawHighlight(renderer, info, rayTraceResult.withPosition(target), event.getDeltaTracker(), matrix, buffer)) {
-                ((AccessorMixinLevelRenderer) renderer).callRenderHitOutline(matrix, consumer, player, renderView.x, renderView.y, renderView.z, target, entry.getValue());
+                ((AccessorMixinLevelRenderer) renderer).rootsCallRenderHitOutline(matrix, consumer, player, renderView.x, renderView.y, renderView.z, target, entry.getValue());
               }
             }
             outliningArea = false;

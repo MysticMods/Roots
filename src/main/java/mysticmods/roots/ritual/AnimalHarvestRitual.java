@@ -16,7 +16,6 @@ import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -30,9 +29,6 @@ import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.Unbreakable;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -94,7 +90,7 @@ public class AnimalHarvestRitual extends Ritual {
       return false;
     }
 
-    List<LootPool> pools = ((AccessorMixinLootTable) table).getPools();
+    List<LootPool> pools = ((AccessorMixinLootTable) table).rootsGetPools();
     if (pools.isEmpty()) {
       emptyLoot.add(entity.getType());
       return false;

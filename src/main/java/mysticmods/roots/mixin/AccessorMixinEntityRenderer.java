@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(EntityRenderer.class)
 public interface AccessorMixinEntityRenderer {
-  @Accessor
-  EntityRenderDispatcher getEntityRenderDispatcher();
+  @Accessor("entityRenderDispatcher")
+  EntityRenderDispatcher rootsGetEntityRenderDispatcher();
 }

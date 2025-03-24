@@ -10,7 +10,6 @@ import mysticmods.roots.init.ModTests;
 import mysticmods.roots.mixin.AccessorMixinCropBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -44,7 +43,7 @@ public record GrowthRecord(Block cropBlock, Optional<IntegerProperty> agePropert
   public static GrowthRecord of(Block cropBlock, String agePropertyName, int maximumAge, int ticks, CanGrowFunction canGrowFunction, LightFunction lightFunction) {
     IntegerProperty ageProperty = null;
     if (cropBlock instanceof CropBlock crop) {
-      ageProperty = ((AccessorMixinCropBlock) crop).callGetAgeProperty();
+      ageProperty = ((AccessorMixinCropBlock) crop).rootsCallGetAgeProperty();
     } else if (cropBlock != null) {
       BlockState blockState = cropBlock.defaultBlockState();
       for (Property<?> property : blockState.getProperties()) {
@@ -62,7 +61,7 @@ public record GrowthRecord(Block cropBlock, Optional<IntegerProperty> agePropert
     IntegerProperty ageProperty = null;
     int maxValue = -1;
     if (cropBlock instanceof CropBlock crop) {
-      ageProperty = ((AccessorMixinCropBlock) crop).callGetAgeProperty();
+      ageProperty = ((AccessorMixinCropBlock) crop).rootsCallGetAgeProperty();
       maxValue = crop.getMaxAge();
     } else {
       BlockState blockState = cropBlock.defaultBlockState();

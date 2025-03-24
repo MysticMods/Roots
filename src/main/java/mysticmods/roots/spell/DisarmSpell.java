@@ -3,7 +3,6 @@ package mysticmods.roots.spell;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -96,7 +95,7 @@ public class DisarmSpell extends TwoRadiusSpell {
         }
 
         if (mob != null) {
-          float defaultChance = ((AccessorMixinMob) mob).invokeGetEquipmentDropChance(slot);
+          float defaultChance = ((AccessorMixinMob) mob).rootsInvokeGetEquipmentDropChance(slot);
           if (defaultChance == 0.0f) {
             continue;
           }

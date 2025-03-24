@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(BlockLootSubProvider.class)
 public interface AccessorMixinBlockLootSubProvider {
-  @Accessor
-  float[] getNORMAL_LEAVES_STICK_CHANCES();
+  @Accessor("NORMAL_LEAVES_STICK_CHANCES")
+  float[] rootsGetNORMAL_LEAVES_STICK_CHANCES();
 
-  @Invoker
-  LootItemCondition.Builder callDoesNotHaveShearsOrSilkTouch();
+  @Invoker("doesNotHaveShearsOrSilkTouch")
+  LootItemCondition.Builder RootsCallDoesNotHaveShearsOrSilkTouch();
 }

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(OverworldBiomes.class)
 public interface AccessorMixinOverworldBiomes {
   @Accessor("NORMAL_WATER_COLOR")
-  static int getNormalWaterColor() {
+  static int rootsGetNormalWaterColor() {
     throw new AssertionError();
   }
 }

@@ -11,12 +11,10 @@ import mysticmods.roots.mixin.AccessorMixinZombieVillager;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,8 +36,8 @@ public class PurityRitual extends Ritual {
         if (zombie.isConverting()) {
           entity.extinguishFire();
           if (convertZombies) {
-            int conversionTime = ((AccessorMixinZombieVillager) zombie).getVillagerConversionTime();
-            ((AccessorMixinZombieVillager) zombie).setVillagerConversionTime(conversionTime - conversionAddition);
+            int conversionTime = ((AccessorMixinZombieVillager) zombie).rootsGetVillagerConversionTime();
+            ((AccessorMixinZombieVillager) zombie).rootsSetVillagerConversionTime(conversionTime - conversionAddition);
           }
         }
       }

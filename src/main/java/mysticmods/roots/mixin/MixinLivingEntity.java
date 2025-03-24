@@ -17,7 +17,7 @@ public abstract class MixinLivingEntity {
       return;
     }
     if (entity.hasEffect(ModEffects.TIME_STOP)) {
-      ((AccessorMixinLivingEntity) entity).callTickEffects();
+      ((AccessorMixinLivingEntity) entity).rootsCallTickEffects();
       ci.cancel();
     }
   }

@@ -64,7 +64,7 @@ public class ClientSetup {
 
   @SubscribeEvent
   public static void onColorHandlerItem(RegisterColorHandlersEvent.Item event) {
-    event.register((stack, index) -> index == 1 ? AccessorMixinOverworldBiomes.getNormalWaterColor() : -1, ModBlocks.UNENDING_BOWL.get());
+    event.register((stack, index) -> index == 1 ? AccessorMixinOverworldBiomes.rootsGetNormalWaterColor() : -1, ModBlocks.UNENDING_BOWL.get());
     event.register((stack, index) -> {
       if (index != 0) {
         SpellStorage storage = stack.get(ModAttachments.SPELL_STORAGE);

@@ -9,6 +9,6 @@ import java.util.Queue;
 
 @Mixin(ParticleEngine.class)
 public interface AccessorMixinParticleEngine {
-  @Accessor
-  Queue<TrackingEmitter> getTrackingEmitters ();
+  @Accessor("trackingEmitters")
+  Queue<TrackingEmitter> rootsGetTrackingEmitters();
 }

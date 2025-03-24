@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(CropBlock.class)
 public interface AccessorMixinCropBlock {
-  @Invoker
-  IntegerProperty callGetAgeProperty();
+  @Invoker("getAgeProperty")
+  IntegerProperty rootsCallGetAgeProperty();
 
-  @Invoker
-  ItemLike callGetBaseSeedId();
+  @Invoker("getBaseSeedId")
+  ItemLike rootsCallGetBaseSeedId();
 }

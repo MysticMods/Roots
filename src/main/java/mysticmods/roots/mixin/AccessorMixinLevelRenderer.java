@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(LevelRenderer.class)
 public interface AccessorMixinLevelRenderer {
-  @Invoker
-  void callRenderHitOutline(
+  @Invoker("renderHitOutline")
+  void rootsCallRenderHitOutline(
       PoseStack poseStack,
       VertexConsumer consumer,
       Entity entity,

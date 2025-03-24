@@ -9,6 +9,6 @@ import java.util.List;
 
 @Mixin(LootTable.class)
 public interface AccessorMixinLootTable {
-  @Accessor
-  List<LootPool> getPools();
+  @Accessor("pools")
+  List<LootPool> rootsGetPools();
 }

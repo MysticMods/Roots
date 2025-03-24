@@ -67,9 +67,9 @@ public record HarvestRecord (Block cropBlock, Optional<Item> seedItem, Optional<
   public static HarvestRecord of (Block cropBlock, Optional<Item> seedItem, String propertyName, int maximumAge, CanHarvestFunction harvest, HarvestFunction replant) {
     IntegerProperty ageProperty = null;
     if (cropBlock instanceof CropBlock crop) {
-      ageProperty = ((AccessorMixinCropBlock) crop).callGetAgeProperty();
+      ageProperty = ((AccessorMixinCropBlock) crop).rootsCallGetAgeProperty();
       if (seedItem.isEmpty()) {
-        seedItem = Optional.of(((AccessorMixinCropBlock) crop).callGetBaseSeedId().asItem());
+        seedItem = Optional.of(((AccessorMixinCropBlock) crop).rootsCallGetBaseSeedId().asItem());
       }
     } else if (cropBlock != null) {
       BlockState blockState = cropBlock.defaultBlockState();
@@ -84,8 +84,8 @@ public record HarvestRecord (Block cropBlock, Optional<Item> seedItem, Optional<
   }
 
   public static HarvestRecord of (CropBlock cropBlock, HarvestFunction harvestFunction) {
-    IntegerProperty ageProperty = ((AccessorMixinCropBlock) cropBlock).callGetAgeProperty();
-    Item seedItem = ((AccessorMixinCropBlock) cropBlock).callGetBaseSeedId().asItem();
+    IntegerProperty ageProperty = ((AccessorMixinCropBlock) cropBlock).rootsCallGetAgeProperty();
+    Item seedItem = ((AccessorMixinCropBlock) cropBlock).rootsCallGetBaseSeedId().asItem();
 
     return new HarvestRecord(cropBlock, Optional.of(seedItem), Optional.ofNullable(ageProperty), cropBlock.getMaxAge(), ModTests.SAFE_SINGLE_CROP_AGE.get(), harvestFunction);
   }

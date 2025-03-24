@@ -1,10 +1,8 @@
 package mysticmods.roots.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.mixin.AccessorMixinEntityRenderer;
 import net.minecraft.client.Minecraft;
@@ -46,7 +44,7 @@ public class ClientEvents {
           float bobbingOffset = Mth.sin(ticks * 0.1f) * 0.05f;
           float pulse = 0.05f * Mth.sin(ticks * 0.1f) + 0.95f;
           poseStack.translate(0f, entity.getBbHeight() + entity.getBbHeight() * 0.2 + bobbingOffset, 0);
-          poseStack.mulPose(((AccessorMixinEntityRenderer)renderer).getEntityRenderDispatcher().cameraOrientation());
+          poseStack.mulPose(((AccessorMixinEntityRenderer)renderer).rootsGetEntityRenderDispatcher().cameraOrientation());
           poseStack.scale(0.3f * pulse, 0.3f * pulse, 0.3f * pulse);
           poseStack.translate(-0.5f, 0, -0.5f);
           Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
