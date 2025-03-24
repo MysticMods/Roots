@@ -74,9 +74,11 @@ public class RootsJEIPlugin implements IModPlugin {
         .toList());
     registration.addRecipes(KNIFE_RECIPE_TYPE, ResolvedRecipes.KNIFE.getRecipes().stream().map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(RUNIC_RECIPE_TYPE, ResolvedRecipes.RUNIC_BLOCK.getRecipes().stream().map(RecipeHolder::value)
+    registration.addRecipes(RUNIC_RECIPE_TYPE, ResolvedRecipes.RUNIC_BLOCK.getRecipes().stream()
+        .map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(RUNIC_ENTITY_RECIPE_TYPE, ResolvedRecipes.RUNIC_ENTITY.getRecipes().stream().map(RecipeHolder::value)
+    registration.addRecipes(RUNIC_ENTITY_RECIPE_TYPE, ResolvedRecipes.RUNIC_ENTITY.getRecipes().stream()
+        .map(RecipeHolder::value)
         .toList());
     registration.addRecipes(RecipeTypes.CRAFTING, DyeRecipeGenerator.generate());
   }
@@ -85,7 +87,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
     registration.addRecipeCatalysts(GROVE_RECIPE_TYPE, ModBlocks.GROVE_CRAFTER.get(), ModBlocks.GROVE_PEDESTAL.get(), ModBlocks.WILDWOOD_PEDESTAL.get());
     registration.addRecipeCatalysts(MORTAR_RECIPE_TYPE, ModBlocks.MORTAR.get(), ModItems.PESTLE.get());
-        registration.addRecipeCatalysts(PYRE_RECIPE_TYPE, ModBlocks.PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get());
+    registration.addRecipeCatalysts(PYRE_RECIPE_TYPE, ModBlocks.PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get());
     registration.addRecipeCatalysts(KNIFE_RECIPE_TYPE, ModItems.COPPER_KNIFE.get(), ModItems.SILVER_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.NETHERITE_KNIFE.get(), ModItems.STONE_KNIFE.get(), ModItems.WOODEN_KNIFE.get());
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_RECIPE_TYPE);
     registration.addRecipeCatalyst(ModItems.RUNIC_SHEARS.get(), RUNIC_ENTITY_RECIPE_TYPE);
@@ -112,7 +114,8 @@ public class RootsJEIPlugin implements IModPlugin {
 
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
-    registration.register(ENTITY_TYPE, Collections.emptyList(), new RootsEntityHelper(), new RootsEntityRenderer(16), BuiltInRegistries.ENTITY_TYPE.byNameCodec().xmap(RootsEntityType::new, RootsEntityType::entity));
+    registration.register(ENTITY_TYPE, Collections.emptyList(), new RootsEntityHelper(), new RootsEntityRenderer(16), BuiltInRegistries.ENTITY_TYPE.byNameCodec()
+        .xmap(RootsEntityType::new, RootsEntityType::entity));
   }
 
   public static IJeiRuntime runtime = null;
@@ -128,7 +131,7 @@ public class RootsJEIPlugin implements IModPlugin {
   }
 
   @Nullable
-  public static <V> ITypedIngredient<V> getTypedIngredient (V ingredient) {
+  public static <V> ITypedIngredient<V> getTypedIngredient(V ingredient) {
     if (runtime == null) {
       return null;
     }
@@ -136,7 +139,7 @@ public class RootsJEIPlugin implements IModPlugin {
   }
 
   @Nullable
-  public static ITypedIngredient<ItemStack> createItemIngredient (ItemLike item) {
+  public static ITypedIngredient<ItemStack> createItemIngredient(ItemLike item) {
     return getTypedIngredient(new ItemStack(item));
   }
 }

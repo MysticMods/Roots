@@ -66,13 +66,13 @@ public class PouchDyeRecipe extends CustomRecipe {
 
     if (itemstack1.getItem() instanceof DyeItem dyeitem) {
       dye = dyeitem;
-      toModify = itemstack2;
+      toModify = itemstack2.copy();
     } else if (itemstack2.getItem() instanceof DyeItem dyeItem) {
       dye = dyeItem;
-      toModify = itemstack1;
+      toModify = itemstack1.copy();
     }
 
-    if (dye == null || toModify == null) {
+    if (dye == null) {
       return ItemStack.EMPTY;
     }
 
