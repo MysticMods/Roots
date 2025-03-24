@@ -33,7 +33,7 @@ public class DeerModel extends AgeableListModel<DeerEntity> {
   private final ModelPart horn8;
 
   public DeerModel(ModelPart pRoot) {
-    super(true, 5.0f, 2.0f);
+    super(true, 12.5f, 1f);
     this.head = pRoot.getChild("head");
     this.horn1 = head.getChild("horn1");
     this.horn2 = head.getChild("horn2");
