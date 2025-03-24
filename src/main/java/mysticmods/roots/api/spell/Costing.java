@@ -8,6 +8,7 @@ import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.integration.curios.CuriosIntegration;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// TODO: Urgent -- CuriosIntegration breaks API
 public class Costing {
   private final ISpellInstance spell;
 
@@ -82,6 +84,7 @@ public class Costing {
       ItemStack inSlot = playerInventory.getItem(i);
       if (inSlot.is(RootsTags.Items.CREATIVE_POUCHES)) {
         foundCreativePouch = true;
+        return herbMap;
       }
       Herb herb = Herb.getHerb(inSlot);
       if (herb != null) {
@@ -101,6 +104,25 @@ public class Costing {
               herbMap.computeIfAbsent(herb2, k -> new ArrayList<>())
                   .add(new HerbEntry(HerbEntryType.CAPABILITY, herb2, i, inSlot2.getCount(), j));
             }
+          }
+        }
+      }
+    }
+    List<ItemStack> curios = CuriosIntegration.getPouches(player);
+    for (int i = 0; i < curios.size(); i++) {
+      ItemStack inSlot = curios.get(i);
+      if (inSlot.is(RootsTags.Items.CREATIVE_POUCHES)) {
+        foundCreativePouch = true;
+        return herbMap;
+      }
+      IItemHandler cap = inSlot.getCapability(Capabilities.ItemHandler.ITEM, null);
+      if (cap != null) {
+        for (int j = 0; j < cap.getSlots(); j++) {
+          ItemStack inSlot2 = cap.getStackInSlot(j);
+          Herb herb2 = Herb.getHerb(inSlot2);
+          if (herb2 != null) {
+            herbMap.computeIfAbsent(herb2, k -> new ArrayList<>())
+                .add(new HerbEntry(HerbEntryType.CURIOS_CAPABILITY, herb2, i, inSlot2.getCount(), j));
           }
         }
       }
@@ -136,11 +158,11 @@ public class Costing {
     return true;
   }
 
-  public boolean shouldCharge () {
+  public boolean shouldCharge() {
     return !noCharge && operationsCount > 0;
   }
 
-  public boolean charge (Player player) {
+  public boolean charge(Player player) {
     return charge(player, false);
   }
 
@@ -164,9 +186,9 @@ public class Costing {
     calculateCosts(true, false, false, tick);
 
     Inventory playerInventory = player.getInventory();
+    List<ItemStack> curios = CuriosIntegration.getPouches(player);
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
 
-    // TODO: Curios
     for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
       double remainder = cap.drain(entry.getKey(), entry.getDoubleValue(), false);
       if (remainder != 0) {
@@ -186,6 +208,27 @@ public class Costing {
               playerInventory.setItem(herbEntry.slot, ItemStack.EMPTY);
               herbEntry.count = 0;
             }
+          } else if (herbEntry.type == HerbEntryType.CURIOS_CAPABILITY) {
+            ItemStack capStack = curios.get(herbEntry.slot);
+            IItemHandler thisCap = capStack.getCapability(Capabilities.ItemHandler.ITEM, null);
+            if (thisCap == null) {
+              RootsAPI.LOG.error("No capability found for {}", capStack);
+              continue;
+            }
+            ItemStack capItem = thisCap.getStackInSlot(herbEntry.subindex);
+            if (capItem.getCount() >= toConsume) {
+              thisCap.extractItem(herbEntry.subindex, toConsume, false);
+              toConsume = 0;
+              herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
+              // TODO: All of this should modify in place
+/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              break;
+            } else {
+              thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
+              toConsume -= capItem.getCount();
+              herbEntry.count = capItem.getCount();
+/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+            }
           } else {
             ItemStack capStack = playerInventory.getItem(herbEntry.slot);
             IItemHandler thisCap = capStack.getCapability(Capabilities.ItemHandler.ITEM, null);
@@ -198,13 +241,14 @@ public class Costing {
               thisCap.extractItem(herbEntry.subindex, toConsume, false);
               toConsume = 0;
               herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
-              playerInventory.setItem(herbEntry.slot, capStack);
+              // TODO: As above, so below
+/*              playerInventory.setItem(herbEntry.slot, capStack);*/
               break;
             } else {
               thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
               toConsume -= capItem.getCount();
               herbEntry.count = capItem.getCount();
-              playerInventory.setItem(herbEntry.slot, capStack);
+/*              playerInventory.setItem(herbEntry.slot, capStack);*/
             }
           }
           if (toConsume <= 0) {
@@ -340,6 +384,6 @@ public class Costing {
   }
 
   private enum HerbEntryType {
-    CAPABILITY, INVENTORY
+    CAPABILITY, INVENTORY, CURIOS_CAPABILITY
   }
 }
