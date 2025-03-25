@@ -71,6 +71,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             ModEntities.TAN_SPROUT.get()
         );
     this.tag(RootsTags.Entities.ANIMAL_HARVEST).addTag(RootsTags.Entities.PACIFIST).add(EntityType.BAT);
+    this.tag(RootsTags.Entities.ANIMAL_HARVEST_EXCLUDE).add(EntityType.IRON_GOLEM);
     this.tag(RootsTags.Entities.BOATS).add(EntityType.BOAT, EntityType.CHEST_BOAT);
     this.tag(RootsTags.Entities.FEY_LEATHER)
         .add(

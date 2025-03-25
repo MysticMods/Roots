@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-23T20:39:27.8428351	Roots Entity Type Tags
+// 1.21.1	2025-03-25T14:31:28.7237438	Roots Entity Type Tags
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
 4b5fde4f337ce73662f973a66dcd6405771086dd data/roots/tags/entity_type/animal_harvest_entities.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_type/boats.json
@@ -8,6 +8,7 @@ f6a415ffe9fa7f9a65011b28aa30ae34f4bc3866 data/roots/tags/entity_type/fey_leather
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_hostile.json
 ee75b90db1cfb03a8ce6da87690f062a665055c4 data/roots/tags/entity_type/healable_ice_creatures.json
 ec566ef1d51ffef188be91658be9e9a3e6a79bad data/roots/tags/entity_type/pacifist.json
+29671cfa11d074462c259806e9d60468451e3cdb data/roots/tags/entity_type/rituals/animal_harvest/exclude.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/rose_thorns_exclude.json
 9717909a6109cd9ec9ea5ab3263ee9a5294e63bc data/roots/tags/entity_type/runic_shears_override.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/squid.json
