@@ -32,9 +32,9 @@ import java.util.Set;
 
 public abstract class RootsAPI {
   public static RootsAPI INSTANCE;
-  public static Tier LIVING_TOOL_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_STONE_TOOL, 300, 6.0f, 2.0f, 19, () -> Ingredient.of(RootsTags.Items.BARKS));
-  public static Tier COPPER_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 150, 4.0f, 2.0f, 2, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
-  public static Tier RUNED_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 9.0f, 4.0f, 15, () -> Ingredient.of(RootsTags.Items.RUNED_OBSIDIAN));
+  public static final Tier LIVING_TOOL_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_STONE_TOOL, 300, 6.0f, 2.0f, 19, () -> Ingredient.of(RootsTags.Items.BARKS));
+  public static final Tier COPPER_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 350, 6.0f, 2.0f, 14, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
+  public static final Tier RUNED_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 9.0f, 4.0f, 15, () -> Ingredient.of(RootsTags.Items.RUNED_OBSIDIAN));
 
   public static final ResourceKey<LootTable> HUT = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("hut"));
   public static final ResourceKey<LootTable> BARROW = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("barrow"));
@@ -68,8 +68,6 @@ public abstract class RootsAPI {
   // Identifiers & Logs
   public static final String MODID = "roots";
 
-  public static ResourceLocation LIVING_TOOL_TIER_ID = rl("living_tool");
-  public static final String MOD_IDENTIFIER = "Roots";
   public static Logger LOG = LogManager.getLogger();
 
   public static MutableComponent holdShift() {
