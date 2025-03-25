@@ -136,6 +136,11 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   }
 
   @Override
+  public CostInstance.ChargeType getChargeType() {
+    return CostInstance.ChargeType.OPERATION;
+  }
+
+  @Override
   public int getMaximumOperations() {
     return count;
   }

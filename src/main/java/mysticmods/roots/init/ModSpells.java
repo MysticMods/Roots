@@ -135,7 +135,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_Y = P.recordProperty("harvest/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
 
   // Life Drain (20 cooldown)
-  public static final DeferredHolder<Spell, LifeDrainSpell> LIFE_DRAIN = spell(Spells.LIFE_DRAIN, LifeDrainSpell::new, ChatFormatting.DARK_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250))));
+  public static final DeferredHolder<Spell, LifeDrainSpell> LIFE_DRAIN = spell(Spells.LIFE_DRAIN, LifeDrainSpell::new, ChatFormatting.DARK_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0063), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0063))));
   public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = P.recordProperty("life_drain/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_DISTANCE = P.recordProperty("life_drain/distance", Property.ofDouble(1.5, "The first defaultValue used when calculating the vector from the caster."));
   public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_BOUNDS = P.recordProperty("life_drain/bounds", Property.ofDouble(0.5, "The second defaultValue used when calculating the size of the bounding box from the caster's look vector."));

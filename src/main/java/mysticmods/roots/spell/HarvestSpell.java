@@ -69,4 +69,9 @@ public class HarvestSpell extends TwoRadiusSpell {
     costs.operations(positions.size());
     return cooldown;
   }
+
+  @Override
+  public CostInstance.ChargeType getChargeType() {
+    return CostInstance.ChargeType.OPERATION;
+  }
 }

@@ -2,7 +2,6 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -40,7 +39,7 @@ public class LifeDrainSpell extends Spell {
   }
 
   @Override
-  public void buildProperties (List<PropertyHolder<?>> properties) {
+  public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModSpells.LIFE_DRAIN_DISTANCE);
     properties.add(ModSpells.LIFE_DRAIN_BOUNDS);
@@ -64,6 +63,7 @@ public class LifeDrainSpell extends Spell {
     Vec3 position = pPlayer.position();
     float eyeHeight = pPlayer.getEyeHeight(pPlayer.getPose());
     boolean foundTarget = false;
+    int count = 0;
     for (int i = 0; i < 4 && !foundTarget; i++) {
       double x = position.x + look.x * vectorDistance * (float) i;
       double y = position.y + eyeHeight + look.y * vectorDistance * (float) i;
@@ -76,6 +76,7 @@ public class LifeDrainSpell extends Spell {
         // TODO: Damage types
         if (entity.hurt(ModDamage.lifeDrain(pPlayer), this.damage)) {
           pPlayer.heal(heal);
+          count++;
         }
       }
     }
@@ -84,8 +85,14 @@ public class LifeDrainSpell extends Spell {
     if (foundTarget) {
       costs.noCharge();
       return 0;
+    } else {
+      costs.operations(count);
+      return cooldown;
     }
+  }
 
-    return cooldown;
+  @Override
+  public CostInstance.ChargeType getChargeType() {
+    return CostInstance.ChargeType.OPERATION;
   }
 }

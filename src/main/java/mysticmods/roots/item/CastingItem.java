@@ -105,6 +105,7 @@ public class CastingItem extends Item {
         }
       }
 
+      // TODO: Properly handle operations
       costs.charge(pPlayer, true);
     } else if (spell.getType() == Spell.Type.CHARGED) {
       pPlayer.displayClientMessage(spell.getSpell().getChargeText(ticks), true);

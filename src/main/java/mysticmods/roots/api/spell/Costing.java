@@ -346,6 +346,7 @@ public class Costing {
         continue;
       }
 
+      // TODO: Check this
       if (tick) {
         total /= 20;
       }

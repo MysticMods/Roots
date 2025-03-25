@@ -188,4 +188,9 @@ public class ShatterSpell extends Spell {
       return cooldown;
     }
   }
+
+  @Override
+  public CostInstance.ChargeType getChargeType() {
+    return CostInstance.ChargeType.OPERATION;
+  }
 }

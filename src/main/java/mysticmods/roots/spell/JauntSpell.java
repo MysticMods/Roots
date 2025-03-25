@@ -136,4 +136,9 @@ public class JauntSpell extends Spell {
   public int getMaximumOperations() {
     return getMaxUse();
   }
+
+  @Override
+  public CostInstance.ChargeType getChargeType() {
+    return CostInstance.ChargeType.OPERATION;
+  }
 }

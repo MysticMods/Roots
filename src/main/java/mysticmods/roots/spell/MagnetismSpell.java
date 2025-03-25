@@ -60,4 +60,9 @@ public class MagnetismSpell extends TwoRadiusSpell {
   public int getMaximumOperations() {
     return 100;
   }
+
+  @Override
+  public CostInstance.ChargeType getChargeType() {
+    return CostInstance.ChargeType.OPERATION;
+  }
 }
