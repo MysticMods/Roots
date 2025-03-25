@@ -53,7 +53,7 @@ public class FrostLandsRitual extends Ritual {
   private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
   private static final BiPredicate<Level, BlockPos> WATER_OR_LAVA = (level, pos) -> {
     FluidState fluidState = level.getFluidState(pos);
-    return fluidState.isSource() && fluidState.is(Tags.Fluids.WATER) || fluidState.is(Tags.Fluids.LAVA);
+    return fluidState.isSource() && fluidState.is(FluidTags.WATER) || fluidState.is(FluidTags.LAVA);
   };
 
   private static final BiPredicate<Level, BlockPos> MAGMA = (level, pos) -> {

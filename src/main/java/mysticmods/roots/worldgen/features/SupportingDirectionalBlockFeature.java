@@ -6,6 +6,7 @@ import mysticmods.roots.block.WildRootsBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,7 +40,7 @@ public class SupportingDirectionalBlockFeature extends Feature<SimpleBlockConfig
     BlockState worldState = level.getBlockState(rootPos);
 
     FluidState fluidState = level.getFluidState(rootPos);
-    if (fluidState.is(Fluids.WATER) && fluidState.isSource()) {
+    if (fluidState.is(FluidTags.WATER) && fluidState.isSource()) {
       rootState = rootState.setValue(WildRootsBlock.WATERLOGGED, true).setValue(WildRootsBlock.MOSSY, true);
     }
 

@@ -94,10 +94,10 @@ public abstract class LevelCondition implements IDescribed {
   }
 
   public static class FluidSourcePropertyCondition extends LevelCondition {
-    private final Fluid fluidType;
+    private final TagKey<Fluid> fluidTag;
 
-    public FluidSourcePropertyCondition(Fluid fluidType) {
-      this.fluidType = fluidType;
+    public FluidSourcePropertyCondition(TagKey<Fluid> fluidType) {
+      this.fluidTag = fluidType;
     }
 
 
@@ -109,7 +109,7 @@ public abstract class LevelCondition implements IDescribed {
     @Override
     public Set<BlockPos> test(BlockPos pos, Level level, @Nullable Player player) {
       FluidState fluid = level.getFluidState(pos);
-      if (fluid.is(fluidType)) {
+      if (fluid.is(fluidTag)) {
         return Set.of(pos);
       }
       return Set.of();
