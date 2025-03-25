@@ -11,10 +11,14 @@ import mysticmods.roots.init.ModItems;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
 
@@ -636,8 +640,12 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.jei.text.durability", "Durability: %s");
     add("roots.jei.text.cooldown", "Cooldown: %ss");
 
-
   }
+
+  // TODO: Translations for damage
+/*  public void addDamage(ResourceKey<DamageType> damage, String death, String item, String player) {
+    add("death.attack.")
+  } */
 
   public static String toEnglishName(String internalName) {
     return Arrays.stream(internalName.toLowerCase(Locale.ROOT).split("_"))
