@@ -1455,7 +1455,8 @@ public class RootsRecipeProvider extends RecipeProvider {
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDEWHEET_CROP)
                 .requires(RootsTags.Items.WILDEWHEET_SEEDS).requires(Tags.Items.CROPS_SUGAR_CANE)
                 .requires(Tags.Items.CROPS_CARROT)
-                .requires(Items.MILK_BUCKET)), c, RootsAPI.rl("spell/rampant_growth"));
+                .requires(Items.MILK_BUCKET)
+                .unlocks(Unlock.spell(ModSpells.RAMPANT_GROWTH))), c, RootsAPI.rl("spell/rampant_growth"));
     RecipeSaver.saver().unlockedBy("has_bow", has(Tags.Items.TOOLS_BOW)).save(MortarRecipe.Builder.create().times(5)
         .build(BaseRecipeData.Builder.create().requires(Tags.Items.TOOLS_BOW).requires(Items.PAPER)
             .requires(Items.LADDER).requires(RootsTags.Items.CLOUD_BERRY_CROP).requires(Items.SHORT_GRASS)

@@ -18,7 +18,13 @@
         "item": "minecraft:milk_bucket"
       }
     ],
-    "priority": 0
+    "priority": 0,
+    "unlocks": [
+      {
+        "type": "roots:spell",
+        "value": "roots:rampant_growth"
+      }
+    ]
   },
   "times": 5
 }
