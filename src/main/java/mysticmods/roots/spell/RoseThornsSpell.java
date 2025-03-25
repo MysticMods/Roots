@@ -62,9 +62,9 @@ public class RoseThornsSpell extends Spell {
 
     RoseThornsEntity rose = ModEntities.ROSE_THORNS.get().create(pLevel);
     if (rose != null) {
+      rose.setOwner(pPlayer);
       rose.setLifetime(duration);
       rose.setPos(result.getLocation());
-      // Decay does't matter
       rose.setSnapshot(new RoseThornsEntitySnapshot(rose.tickCount, -1, radiusZX, radiusY, duration, damage));
       pLevel.addFreshEntity(rose);
       return cooldown;

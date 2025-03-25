@@ -1,6 +1,6 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.herb.Cost;
+import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -10,6 +10,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.entity.projectile.WildfireEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.snapshot.WildfireEntitySnapshot;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
@@ -20,6 +21,8 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class WildfireSpell extends Spell {
+  private float damage;
+
   public WildfireSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xff8020, 0xff4020);
   }
@@ -31,15 +34,25 @@ public class WildfireSpell extends Spell {
 
   @Override
   public void initialize(Holder<Spell> holder) {
+    var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
+    this.damage = properties.get(ModSpells.WILDFIRE_DAMAGE);
+  }
 
+  @Override
+  public void buildProperties(List<PropertyHolder<?>> properties) {
+    super.buildProperties(properties);
+    properties.add(ModSpells.WILDFIRE_DAMAGE);
   }
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     // TODO: Damage type
-    WildfireEntity wildfire = new WildfireEntity(ModEntities.WILDFIRE.get(), pPlayer, pLevel);
-    wildfire.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0, 0.81f, 0);
-    pLevel.addFreshEntity(wildfire);
+    WildfireEntity wildfire = ModEntities.WILDFIRE.get().create(pLevel);
+    if (wildfire != null) {
+      wildfire.setSnapshot(new WildfireEntitySnapshot(pPlayer, 120, damage));
+      wildfire.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0, 0.81f, 0);
+      pLevel.addFreshEntity(wildfire);
+    }
 
     return cooldown;
   }

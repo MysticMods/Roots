@@ -1,8 +1,12 @@
 package mysticmods.roots.entity.projectile;
 
 import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.snapshot.RoseThornsEntitySnapshot;
+import mysticmods.roots.snapshot.WildfireEntitySnapshot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -49,6 +53,10 @@ public class WildfireEntity extends Projectile {
 
   public SnapshotStorage getSnapshotStorage() {
     return snapshotStorage;
+  }
+
+  public void setSnapshot(WildfireEntitySnapshot snapshot) {
+    this.snapshotStorage.addSnapshot(this, ModSerializers.WILDFIRE.get(), snapshot);
   }
 
   @Override
@@ -186,8 +194,6 @@ public class WildfireEntity extends Projectile {
 
   }
 
-
-
   @Override
   protected double getDefaultGravity() {
     return 0; // projectile is 0.05
@@ -206,59 +212,42 @@ public class WildfireEntity extends Projectile {
   }
 
   @Override
-  public void move(MoverType type, Vec3 pos) {
-    super.move(type, pos);
-    if (type != MoverType.SELF) {
-      // "startFalling" went here
-      // I presume this is where deflection is handled
-    }
-  }
-
-  @Override
   protected void onHitEntity(EntityHitResult result) {
     super.onHitEntity(result);
     Entity entity = result.getEntity();
     float f = (float) this.getDeltaMovement().length();
     // Get damage from the spell instance
-    double d0 = 1;
-    Entity entity1 = this.getOwner();
-    // TODO:
-    DamageSource damagesource = this.damageSources()
-        .cactus(); //this.damageSources().arrow(this, (Entity) (entity1 != null ? entity1 : this));
+    WildfireEntitySnapshot snapshot = snapshotStorage.getSnapshot(this, ModSerializers.WILDFIRE.get());
+    if (snapshot != null) {
+      // TODO:
+      DamageSource damagesource = ModDamage.wildfire(this, getOwner() == null ? this : getOwner());
 
-    int j = Mth.ceil(Mth.clamp((double) f * d0, 0.0, 2.147483647E9));
-
-    if (entity1 instanceof LivingEntity livingentity1) {
-      livingentity1.setLastHurtMob(entity);
-    }
-
-    boolean flag = entity.getType() == EntityType.ENDERMAN;
-    int i = entity.getRemainingFireTicks();
-
-    if (entity.hurt(damagesource, (float) j)) {
-      if (flag) {
-        return;
+      if (getOwner() instanceof LivingEntity livingentity1) {
+        livingentity1.setLastHurtMob(entity);
       }
 
-      if (entity instanceof LivingEntity livingentity) {
-        this.doPostHurtEffects(livingentity);
-        if (livingentity != entity1 && livingentity instanceof Player && entity1 instanceof ServerPlayer && !this.isSilent()) {
-          // TODO: "Arrow hit player"
-          /*          ((ServerPlayer)entity1).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));*/
+      boolean flag = entity.getType() == EntityType.ENDERMAN;
+      int i = entity.getRemainingFireTicks();
+
+      if (entity.hurt(damagesource, snapshot.getDamage())) {
+        if (flag) {
+          return;
         }
 
+        if (entity instanceof LivingEntity livingentity) {
+          this.doPostHurtEffects(livingentity);
+        }
 
-      }
-
-      // Sound
-      //this.playSound(this.soundEvent, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
-      this.discard();
-    } else {
-      entity.setRemainingFireTicks(i);
-      this.deflect(ProjectileDeflection.REVERSE, entity, this.getOwner(), false);
-      this.setDeltaMovement(this.getDeltaMovement().scale(0.2));
-      if (!this.level().isClientSide && this.getDeltaMovement().lengthSqr() < 1.0E-7) {
+        // Sound
+        //this.playSound(this.soundEvent, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         this.discard();
+      } else {
+        entity.setRemainingFireTicks(i);
+        this.deflect(ProjectileDeflection.REVERSE, entity, this.getOwner(), false);
+        this.setDeltaMovement(this.getDeltaMovement().scale(0.2));
+        if (!this.level().isClientSide && this.getDeltaMovement().lengthSqr() < 1.0E-7) {
+          this.discard();
+        }
       }
     }
     this.discard();
@@ -274,7 +263,7 @@ public class WildfireEntity extends Projectile {
   protected EntityHitResult findHitEntity(Vec3 startVec, Vec3 endVec) {
     return ProjectileUtil.getEntityHitResult(
         this.level(), this, startVec, endVec, this.getBoundingBox().expandTowards(this.getDeltaMovement())
-            .inflate(1.0), this::canHitEntity
+            .inflate(2), this::canHitEntity
     );
   }
 

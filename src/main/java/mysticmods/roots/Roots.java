@@ -57,7 +57,6 @@ public class Roots {
     ModTabs.register(bus);
     ModAttachments.register(bus);
     ModGroves.register(bus);
-    ModDamage.register(bus);
     ModParticles.register(bus);
     ModAdvancements.register(bus);
     ModEnchantment.register(bus);

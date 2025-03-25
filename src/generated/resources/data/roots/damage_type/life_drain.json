@@ -1,0 +1,6 @@
+{
+  "effects": "roots:draining",
+  "exhaustion": 0.1,
+  "message_id": "roots:life_drain",
+  "scaling": "when_caused_by_living_non_player"
+}

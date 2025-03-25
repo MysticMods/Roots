@@ -8,7 +8,7 @@
     "announce_to_chat": false,
     "background": "roots:textures/block/runestone.png",
     "description": {
-      "translate": "lootr.advancements.root.description"
+      "translate": "roots.advancements.root.description"
     },
     "icon": {
       "count": 1,

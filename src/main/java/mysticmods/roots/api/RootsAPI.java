@@ -1,5 +1,6 @@
 package mysticmods.roots.api;
 
+import com.google.common.base.Supplier;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.herb.Herb;
@@ -11,12 +12,16 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.damagesource.DamageEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.neoforged.fml.common.asm.enumextension.EnumProxy;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.common.Tags;
@@ -44,15 +49,17 @@ public abstract class RootsAPI {
   }
 
   // Tool Actions (Forge-specific)
-  public static ItemAbility RUNIC_SHEARS_HARVEST = ItemAbility.get("runic_shears_harvest");
-  public static ItemAbility RUNIC_SHEARS_DIG = ItemAbility.get("runic_shears_dig");
-  public static ItemAbility KNIFE_STRIP = ItemAbility.get("knife_strip");
-  public static ItemAbility KNIFE_DIG = ItemAbility.get("knife_dig");
+  public static final ItemAbility RUNIC_SHEARS_HARVEST = ItemAbility.get("runic_shears_harvest");
+  public static final ItemAbility RUNIC_SHEARS_DIG = ItemAbility.get("runic_shears_dig");
+  public static final ItemAbility KNIFE_STRIP = ItemAbility.get("knife_strip");
+  public static final ItemAbility KNIFE_DIG = ItemAbility.get("knife_dig");
 
-  public static ItemAbility FORAGE = ItemAbility.get("forage");
+  public static final ItemAbility FORAGE = ItemAbility.get("forage");
 
-  public static Set<ItemAbility> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
-  public static Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG, FORAGE);
+  public static final Set<ItemAbility> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
+  public static final Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG, FORAGE);
+
+
 
   public static RootsAPI getInstance() {
     return INSTANCE;

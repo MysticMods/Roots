@@ -1,7 +1,9 @@
 package mysticmods.roots.entity.other;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.snapshot.RoseThornsEntitySnapshot;
@@ -10,15 +12,22 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
-public class RoseThornsEntity extends Entity {
+public class RoseThornsEntity extends Entity implements TraceableEntity {
+  @javax.annotation.Nullable
+  private UUID ownerUUID;
+  @javax.annotation.Nullable
+  private Entity cachedOwner;
   private static final EntityDataAccessor<Integer> LIFETIME = SynchedEntityData.defineId(RoseThornsEntity.class, EntityDataSerializers.INT);
   private AABB aabb;
   private SnapshotStorage snapshotStorage = new SnapshotStorage();
@@ -26,6 +35,26 @@ public class RoseThornsEntity extends Entity {
   public RoseThornsEntity(EntityType<RoseThornsEntity> timeStopEntityEntityType, Level level) {
     super(ModEntities.ROSE_THORNS.get(), level);
     setNoGravity(false);
+  }
+
+  public void setOwner(@javax.annotation.Nullable Entity owner) {
+    if (owner != null) {
+      this.ownerUUID = owner.getUUID();
+      this.cachedOwner = owner;
+    }
+  }
+
+  @Nullable
+  @Override
+  public Entity getOwner() {
+    if (this.cachedOwner != null && !this.cachedOwner.isRemoved()) {
+      return this.cachedOwner;
+    } else if (this.ownerUUID != null && this.level() instanceof ServerLevel serverlevel) {
+      this.cachedOwner = serverlevel.getEntity(this.ownerUUID);
+      return this.cachedOwner;
+    } else {
+      return null;
+    }
   }
 
   @Override
@@ -82,19 +111,25 @@ public class RoseThornsEntity extends Entity {
     int newLifetime = this.getLifetime() - 1;
     this.setLifetime(newLifetime);
     this.checkInsideBlocks();
-    if (aabb != null && !this.level().isClientSide()) {
-      if (!this.hasExactlyOnePlayerPassenger()) {
-        List<Entity> list = this.level()
-            .getEntities(this, aabb, EntitySelector.pushableBy(this)
-                .and(o -> !o.getType().is(RootsTags.Entities.ROSE_THORNS_EXCLUDE)));
-        if (!list.isEmpty()) {
-          for (Entity entity : list) {
-            if (!entity.hasPassenger(this)) {
-              if (this.getPassengers().isEmpty() && !entity.isPassenger() && entity instanceof LivingEntity) {
-                entity.hurt(this.damageSources().magic(), 1.0F);
-                entity.startRiding(this);
-              } else {
-                this.push(entity);
+    RoseThornsEntitySnapshot snapshot = this.snapshotStorage.getSnapshot(this, ModSerializers.ROSE_THORNS.get());
+    if (snapshot == null) {
+      RootsAPI.LOG.error("RoseThornsEntitySnapshot is null for {}", this);
+    } else {
+      float damage = snapshot.getDamage();
+      if (aabb != null && !this.level().isClientSide()) {
+        if (!this.hasExactlyOnePlayerPassenger()) {
+          List<Entity> list = this.level()
+              .getEntities(this, aabb, EntitySelector.pushableBy(this)
+                  .and(o -> !o.getType().is(RootsTags.Entities.ROSE_THORNS_EXCLUDE) && o != getOwner()));
+          if (!list.isEmpty()) {
+            for (Entity entity : list) {
+              if (!entity.hasPassenger(this)) {
+                if (this.getPassengers().isEmpty() && !entity.isPassenger() && entity instanceof LivingEntity) {
+                  entity.hurt(ModDamage.roseThorns(this, getOwner() == null ? this : getOwner()), damage);
+                  entity.startRiding(this);
+                } else {
+                  this.push(entity);
+                }
               }
             }
           }
@@ -113,17 +148,36 @@ public class RoseThornsEntity extends Entity {
   }
 
   @Override
+  protected void addAdditionalSaveData(CompoundTag compound) {
+    if (this.ownerUUID != null) {
+      compound.putUUID("Owner", this.ownerUUID);
+    }
+    compound.putInt("lifetime", this.getLifetime());
+    SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result()
+        .ifPresent(storage -> this.snapshotStorage = storage);
+  }
+
+  protected boolean ownedBy(Entity entity) {
+    return entity.getUUID().equals(this.ownerUUID);
+  }
+
+  @Override
   protected void readAdditionalSaveData(CompoundTag compound) {
+    if (compound.hasUUID("Owner")) {
+      this.ownerUUID = compound.getUUID("Owner");
+      this.cachedOwner = null;
+    }
     this.setLifetime(compound.getInt("lifetime"));
     SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result()
         .ifPresent(tag -> compound.put("snapshots", tag));
   }
 
   @Override
-  protected void addAdditionalSaveData(CompoundTag compound) {
-    compound.putInt("lifetime", this.getLifetime());
-    SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result()
-        .ifPresent(storage -> this.snapshotStorage = storage);
+  public void restoreFrom(Entity entity) {
+    super.restoreFrom(entity);
+    if (entity instanceof RoseThornsEntity projectile) {
+      this.cachedOwner = projectile.cachedOwner;
+    }
   }
 
   public void setLifetime(int duration) {

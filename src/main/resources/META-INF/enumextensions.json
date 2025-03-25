@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/damagesource/DamageEffects",
+      "name": "ROOTS_DRAINING",
+      "constructor": "(Ljava/lang/String;Ljava/util/function/Supplier;)V",
+      "parameters": {
+        "class": "mysticmods/roots/api/EnumProxies",
+        "field": "ROOTS_DRAINING"
+      }
+    }
+  ]
+}

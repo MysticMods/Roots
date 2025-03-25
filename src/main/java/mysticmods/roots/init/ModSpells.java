@@ -202,6 +202,7 @@ public class ModSpells {
   // Wildfire (24 cooldown)
   public static final DeferredHolder<Spell, WildfireSpell> WILDFIRE = spell(Spells.WILDFIRE, WildfireSpell::new, ChatFormatting.DARK_RED, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250))));
   public static final PropertyHolder<Property.IntegerProperty> WILDFIRE_COOLDOWN = P.recordProperty("wildfire/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.FloatProperty> WILDFIRE_DAMAGE = P.recordProperty("wildfire/damage", Property.ofFloat(4.5f, SpellProperties.DAMAGE));
 
   private static <T extends Spell> DeferredHolder<Spell, T> spell(ResourceKey<Spell> key, SpellConstructor<T> consturctor, ChatFormatting color, Supplier<CostInstance> costs) {
     return REGISTER.register(key.location().getPath(), spellBuilder(consturctor, color, costs));

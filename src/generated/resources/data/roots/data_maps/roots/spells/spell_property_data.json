@@ -846,6 +846,15 @@
           "default_value": 0,
           "value": 0
         }
+      },
+      {
+        "id": "roots:wildfire/damage",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "How much damage the spell will cause",
+          "default_value": 4.5,
+          "value": 4.5
+        }
       }
     ]
   }

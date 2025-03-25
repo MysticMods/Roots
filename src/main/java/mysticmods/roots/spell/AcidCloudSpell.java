@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
@@ -71,11 +72,10 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       LivingEntity entity = entities.remove(pLevel.getRandom().nextInt(entities.size()));
       totalDamaged++;
       // TODO:
-      //  - Acid damage
       //  - Acid damage effect
       //  - Acid damage by player
       //  - Visuals
-      entity.hurt(pPlayer.damageSources().playerAttack(pPlayer), damage);
+      entity.hurt(ModDamage.acidCloud(pPlayer), damage);
     }
     if (totalDamaged == 0) {
       costs.noCharge();

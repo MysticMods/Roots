@@ -9,6 +9,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
@@ -72,7 +73,7 @@ public class LifeDrainSpell extends Spell {
       for (LivingEntity entity : entities) {
         foundTarget = true;
         // TODO: Damage types
-        if (entity.hurt(damage.playerAttack(pPlayer), this.damage)) {
+        if (entity.hurt(ModDamage.lifeDrain(pPlayer), this.damage)) {
           pPlayer.heal(heal);
         }
       }

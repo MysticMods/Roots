@@ -1,18 +1,14 @@
 package mysticmods.roots.gen;
 
 import com.mojang.datafixers.util.Pair;
+import mysticmods.roots.api.EnumProxies;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.block.WildRootsBlock;
-import mysticmods.roots.init.ModBlocks;
-import mysticmods.roots.init.ModEnchantment;
-import mysticmods.roots.init.ModEntities;
-import mysticmods.roots.init.ModFeatures;
+import mysticmods.roots.init.*;
 import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.worldgen.features.placements.AllAroundLogPlacement;
 import mysticmods.roots.worldgen.features.placements.HeightmapYRange;
 import mysticmods.roots.worldgen.predicate.MatchingTreePredicate;
-import mysticmods.roots.worldgen.predicate.MatchingTreeTrunkPredicate;
 import mysticmods.roots.worldgen.structure.StandingStonesStructure;
 import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponentMap;
@@ -24,6 +20,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.damagesource.DamageEffects;
+import net.minecraft.world.damagesource.DamageScaling;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
@@ -246,7 +245,7 @@ public class RootsDataPackGenerators {
                 .add(Registries.STRUCTURE_SET, bootstrap -> {
                   HolderGetter<Structure> structureGetter = bootstrap.lookup(Registries.STRUCTURE);
                   bootstrap.register(ModFeatures.BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.BARROW_KEY), new RandomSpreadStructurePlacement(150, 65, RandomSpreadType.LINEAR, BARROW_SALT)));
-/*                  bootstrap.register(ModFeatures.LARGE_BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.LARGE_BARROW_KEY), new RandomSpreadStructurePlacement(320, 120, RandomSpreadType.LINEAR, LARGE_BARROW_SALT)));*/
+                  /*                  bootstrap.register(ModFeatures.LARGE_BARROW_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.LARGE_BARROW_KEY), new RandomSpreadStructurePlacement(320, 120, RandomSpreadType.LINEAR, LARGE_BARROW_SALT)));*/
                   bootstrap.register(ModFeatures.STANDING_STONES_SET_KEY, new StructureSet(structureGetter.getOrThrow(ModFeatures.STANDING_STONES_KEY), new RandomSpreadStructurePlacement(80, 35, RandomSpreadType.LINEAR, STANDING_STONES_SALT)));
                   bootstrap.register(ModFeatures.HUT_SET_KEY, new StructureSet(List.of(new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.HUT_KEY), 1), new StructureSet.StructureSelectionEntry(structureGetter.getOrThrow(ModFeatures.RUINED_HUT_KEY), 1)), new RandomSpreadStructurePlacement(70, 35, RandomSpreadType.LINEAR, HUT_SALT)));
                 })
@@ -284,6 +283,15 @@ public class RootsDataPackGenerators {
                           ).build()
                       )
                   );
+                })
+                .add(Registries.DAMAGE_TYPE, bootstrap -> {
+
+                  bootstrap.register(ModDamage.ACID_CLOUD, new DamageType(ModDamage.ACID_CLOUD.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.METEOR, new DamageType(ModDamage.METEOR.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.WILDFIRE, new DamageType(ModDamage.WILDFIRE.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.ROSE_THORNS, new DamageType(ModDamage.ROSE_THORNS.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.LIFE_DRAIN, new DamageType(ModDamage.LIFE_DRAIN.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, EnumProxies.ROOTS_DRAINING.getValue()));
+
                 }),
             Set.of(RootsAPI.MODID)
         )
