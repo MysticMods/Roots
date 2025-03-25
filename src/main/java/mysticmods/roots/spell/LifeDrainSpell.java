@@ -68,7 +68,8 @@ public class LifeDrainSpell extends Spell {
       double x = position.x + look.x * vectorDistance * (float) i;
       double y = position.y + eyeHeight + look.y * vectorDistance * (float) i;
       double z = position.z + look.z * vectorDistance * (float) i;
-      List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), new AABB(x - boundingBoxDistance, y - boundingBoxDistance, z - boundingBoxDistance, x + boundingBoxDistance, y + boundingBoxDistance, z + boundingBoxDistance), EntityUtils.isHostileTo(pPlayer));
+      AABB bounds = new AABB(x - boundingBoxDistance, y - boundingBoxDistance, z - boundingBoxDistance, x + boundingBoxDistance, y + boundingBoxDistance, z + boundingBoxDistance);
+      List<LivingEntity> entities = pLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), bounds, EntityUtils.isHostileTo(pPlayer));
 
       for (LivingEntity entity : entities) {
         foundTarget = true;

@@ -137,8 +137,8 @@ public class ModSpells {
   // Life Drain (20 cooldown)
   public static final DeferredHolder<Spell, LifeDrainSpell> LIFE_DRAIN = spell(Spells.LIFE_DRAIN, LifeDrainSpell::new, ChatFormatting.DARK_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250))));
   public static final PropertyHolder<Property.IntegerProperty> LIFE_DRAIN_COOLDOWN = P.recordProperty("life_drain/cooldown", Property.ofInt(0, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_DISTANCE = P.recordProperty("life_drain/distance", Property.ofDouble(3.0, "The first defaultValue used when calculating the vector from the caster."));
-  public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_BOUNDS = P.recordProperty("life_drain/bounds", Property.ofDouble(2.0, "The second defaultValue used when calculating the size of the bounding box from the caster's look vector."));
+  public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_DISTANCE = P.recordProperty("life_drain/distance", Property.ofDouble(1.5, "The first defaultValue used when calculating the vector from the caster."));
+  public static final PropertyHolder<Property.DoubleProperty> LIFE_DRAIN_BOUNDS = P.recordProperty("life_drain/bounds", Property.ofDouble(0.5, "The second defaultValue used when calculating the size of the bounding box from the caster's look vector."));
   public static final PropertyHolder<Property.FloatProperty> LIFE_DRAIN_DAMAGE = P.recordProperty("life_drain/damage", Property.ofFloat(3.0f, SpellProperties.DAMAGE));
   public static final PropertyHolder<Property.FloatProperty> LIFE_DRAIN_HEAL = P.recordProperty("life_drain/heal", Property.ofFloat(0.5f, "The amount a player should be healed for each entity damaged."));
 

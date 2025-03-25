@@ -410,8 +410,8 @@
         "value": {
           "type": "roots:double_property",
           "comment": "The first defaultValue used when calculating the vector from the caster.",
-          "default_value": 3.0,
-          "value": 3.0
+          "default_value": 1.5,
+          "value": 1.5
         }
       },
       {
@@ -419,8 +419,8 @@
         "value": {
           "type": "roots:double_property",
           "comment": "The second defaultValue used when calculating the size of the bounding box from the caster's look vector.",
-          "default_value": 2.0,
-          "value": 2.0
+          "default_value": 0.5,
+          "value": 0.5
         }
       },
       {
