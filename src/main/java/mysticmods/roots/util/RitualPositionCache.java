@@ -59,7 +59,7 @@ public class RitualPositionCache {
   @Nullable
   public BlockPos random (BiPredicate<Level, BlockPos> predicate, RandomSource random) {
     RitualCacheEntry entry = cache.get(predicate);
-    if (entry == null) {
+    if (entry == null || entry.matches.isEmpty()) {
       return null;
     }
     return positions.get(entry.matches.getInt(random.nextInt(entry.matches.size())));
