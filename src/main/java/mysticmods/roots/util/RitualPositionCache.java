@@ -68,7 +68,7 @@ public class RitualPositionCache {
   public Iterable<BlockPos> iterate(BiPredicate<Level, BlockPos> predicate, RandomSource random) {
     return () -> {
       RitualCacheEntry entry = cache.get(predicate);
-      if (entry == null) {
+      if (entry == null || entry.matches.isEmpty()) {
         return Collections.emptyIterator();
       }
 
@@ -127,6 +127,10 @@ public class RitualPositionCache {
 
       @Override
       public BlockPos next() {
+        if (matches.isEmpty()) {
+          throw new NoSuchElementException();
+        }
+
         while (index == -1 || iteratorConsumed.contains(index)) {
           index = random.nextInt(matches.size());
         }
@@ -156,6 +160,10 @@ public class RitualPositionCache {
 
     @Override
     public BlockPos next() {
+      if (positions.isEmpty()) {
+        throw new NoSuchElementException();
+      }
+
       while (index == -1 || iteratorConsumed.contains(index)) {
         index = random.nextInt(positions.size());
       }
