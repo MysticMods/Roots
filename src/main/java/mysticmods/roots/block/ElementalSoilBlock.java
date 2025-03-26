@@ -4,13 +4,19 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.block.crop.ElementalType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.piston.MovingPistonBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -52,5 +58,18 @@ public class ElementalSoilBlock extends FarmBlock {
   @Override
   public boolean isFertile(BlockState state, BlockGetter level, BlockPos pos) {
     return true;
+  }
+
+  @Override
+  protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    return true;
+  }
+
+  @Override
+  protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    int i = state.getValue(MOISTURE);
+    if (i != MAX_MOISTURE) {
+      level.setBlock(pos, state.setValue(MOISTURE, MAX_MOISTURE), 2);
+    }
   }
 }
