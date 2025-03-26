@@ -56,6 +56,8 @@ public class CommonSetup {
       fire.setFlammable(ModBlocks.CREEPING_GROVE_MOSS.get(), 1, 1);
       fire.setFlammable(ModBlocks.WILD_AUBERGINE.get(), 60, 100);
 
+      DispenserBlock.registerProjectileBehavior(ModItems.LIVING_ARROW.get());
+
       KnifeItem.KnifeDispenseBehaviour behaviour = new KnifeItem.KnifeDispenseBehaviour();
       DispenserBlock.registerBehavior(ModItems.WOODEN_KNIFE.get(), behaviour);
       DispenserBlock.registerBehavior(ModItems.STONE_KNIFE.get(), behaviour);
