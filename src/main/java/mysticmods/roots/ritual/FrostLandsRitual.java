@@ -39,15 +39,38 @@ public class FrostLandsRitual extends Ritual {
   private float spawnChance, layerChance, powderedChance, iceChance;
 
   private static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE_SOLID = (level, pos) -> {
-    BlockPos above = pos.above();
+    // Check that the current block is solid
+    if (level.isEmptyBlock(pos) || !level.getFluidState(pos).isEmpty()) {
+      return false;
+    }
+
     BlockState state = level.getBlockState(pos);
     VoxelShape shape = state.getBlockSupportShape(level, pos);
     if (!Block.isFaceFull(shape, Direction.UP)) {
       return false;
     }
-    return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above())
-        .isEmpty() && level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos)
-        .canBeReplaced() && level.getFluidState(pos).isEmpty();
+
+    BlockPos above = pos.above();
+    if (!level.isEmptyBlock(above) && !level.getBlockState(above).canBeReplaced()) {
+      return false;
+    }
+
+    FluidState fState = level.getFluidState(above);
+    if (!fState.isEmpty()) {
+      return false;
+    }
+
+    above = above.above();
+    if (!level.isEmptyBlock(above) && !level.getBlockState(above).canBeReplaced()) {
+      return false;
+    }
+
+    fState = level.getFluidState(above);
+    if (!fState.isEmpty()) {
+      return false;
+    }
+
+    return true;
   };
 
   private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
