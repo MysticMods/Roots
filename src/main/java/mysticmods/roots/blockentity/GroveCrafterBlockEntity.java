@@ -109,13 +109,21 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       return;
     }
 
+    boolean changed = false;
+
     if (cachedRecipeId != null) {
       cachedRecipe = ResolvedRecipes.GROVE.getRecipe(getLevel(), cachedRecipeId);
-      cachedRecipeId = null;
+      if (cachedRecipe != null) {
+        cachedRecipeId = null;
+        changed = true;
+      }
     }
     if (lastRecipeId != null) {
       lastRecipe = ResolvedRecipes.GROVE.getRecipe(getLevel(), lastRecipeId);
-      lastRecipeId = null;
+      if (lastRecipe != null) {
+        lastRecipeId = null;
+        changed = true;
+      }
     }
 
     boolean active = getBlockState().getValue(GroveCrafterBlock.ACTIVE);
@@ -137,7 +145,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       return;
     }
     GroveCrafting playerlessCrafting = new GroveCrafting(this, null);
-    boolean changed = false;
+
     if (cachedRecipe == null) {
       cachedRecipe = ResolvedRecipes.GROVE.findRecipe(playerlessCrafting, getLevel());
       if (cachedRecipe != null) {
@@ -150,7 +158,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       }
     }
 
-    if (changed) {
+    if (changed && !getLevel().isClientSide()) {
       setChanged();
       updateViaState();
     }
@@ -239,6 +247,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
       loadAdditional(tag, lookup);
+      revalidateRecipe();
     } else {
       lastRecipe = null;
       cachedRecipe = null;

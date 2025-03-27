@@ -279,6 +279,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     super.onDataPacket(net, pkt, provider);
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
+      revalidateRecipe();
       loadAdditional(tag, provider);
     }
   }
@@ -288,13 +289,21 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       return;
     }
 
+    boolean changed = false;
+
     if (cachedRecipeId != null) {
       cachedRecipe = ResolvedRecipes.PYRE.getRecipe(getLevel(), cachedRecipeId);
-      cachedRecipeId = null;
+      if (cachedRecipe != null) {
+        changed = true;
+        cachedRecipeId = null;
+      }
     }
     if (lastRecipeId != null) {
       lastRecipe = ResolvedRecipes.PYRE.getRecipe(getLevel(), lastRecipeId);
-      lastRecipeId = null;
+      if (lastRecipe != null) {
+        changed = true;
+        lastRecipeId = null;
+      }
     }
 
     boolean matched = false;
@@ -302,8 +311,10 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       if (lastRecipe != null && lastRecipe.value().matches(playerlessCrafting, getLevel())) {
         cachedRecipe = lastRecipe;
         matched = true;
+        changed = true;
       } else {
         cachedRecipe = ResolvedRecipes.PYRE.findRecipe(playerlessCrafting, getLevel());
+        changed = true;
       }
     }
 
@@ -312,6 +323,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       if (!matched && !cachedRecipe.value().matches(playerlessCrafting, getLevel())) {
         cachedRecipe = null;
       }
+    }
+
+    if (changed && !getLevel().isClientSide()) {
+      setChanged();
+      updateViaState();
     }
   }
 

@@ -75,13 +75,21 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       return;
     }
 
+    boolean changed = false;
+
     if (cachedRecipeId != null) {
       cachedRecipe = ResolvedRecipes.MORTAR.getRecipe(getLevel(), cachedRecipeId);
-      cachedRecipeId = null;
+      if (cachedRecipe != null) {
+        cachedRecipeId = null;
+        changed = true;
+      }
     }
     if (lastRecipeId != null) {
       lastRecipe = ResolvedRecipes.MORTAR.getRecipe(getLevel(), lastRecipeId);
-      lastRecipeId = null;
+      if (lastRecipe != null) {
+        lastRecipeId = null;
+        changed = true;
+      }
     }
 
     boolean matched = false;
@@ -89,9 +97,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       uses = -1;
       if (lastRecipe != null && lastRecipe.value().matches(playerlessCrafting, getLevel())) {
         cachedRecipe = lastRecipe;
+        changed = true;
         matched = true;
       } else {
         cachedRecipe = ResolvedRecipes.MORTAR.findRecipe(playerlessCrafting, getLevel());
+        changed = true;
       }
     }
 
@@ -105,6 +115,11 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
         cachedRecipe = null;
         uses = -1;
       }
+    }
+
+    if (changed && !getLevel().isClientSide()) {
+      setChanged();
+      updateViaState();
     }
   }
 
@@ -172,6 +187,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     CompoundTag tag = pkt.getTag();
     if (tag != null) {
       loadAdditional(tag, provider);
+      revalidateRecipe();
     }
   }
 
