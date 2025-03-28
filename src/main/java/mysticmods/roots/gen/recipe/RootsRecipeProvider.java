@@ -1344,7 +1344,7 @@ public class RootsRecipeProvider extends RecipeProvider {
             .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.BARKS)
                 .requires(RootsTags.Items.BARKS)
                 .requires(RootsTags.Items.GROVE_MOSS_HERB).requires(Tags.Items.CROPS_SUGAR_CANE)
-                .requires(Items.SHORT_GRASS)
+                .requires(RootsTags.Items.SHORT_GRASS)
                 .condition(ModConditions.WATER_SOURCE.get())), c, RootsAPI.rl("pyre/overgrowth"));
 
     RecipeSaver.saver().unlockedBy("has_door", has(ItemTags.DOORS))
