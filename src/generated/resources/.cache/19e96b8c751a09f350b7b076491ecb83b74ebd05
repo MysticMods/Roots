@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-22T16:48:06.4925136	Block States: roots
+// 1.21.1	2025-03-28T14:22:58.0351978	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -117,7 +117,7 @@ c14328ea237126dae623b465b87bbce8199cd24a assets/roots/blockstates/wildwood_stair
 787c98e5254d7a054a86689dbe8870e13d7220b7 assets/roots/blockstates/wildwood_trapdoor.json
 800777ce27ed88fbabab9f70cc48e3ee605962f8 assets/roots/blockstates/wildwood_wood.json
 c1be696d939bfc31110cd183931ba08b029a72d5 assets/roots/blockstates/wild_aubergine.json
-033e966812abd6e5404cc673241f004d463500ac assets/roots/models/block/aqueous_soil.json
+bdcdb2684d49719aebae51e534a002cf60de637f assets/roots/models/block/aqueous_soil.json
 a8cb86dc7cec4d44135bae0abb223173e6f84f44 assets/roots/models/block/aubergine_0.json
 1948d9c7ccc5377ca9bdeb63d51499ff4f19c3fa assets/roots/models/block/aubergine_1.json
 e270af58daeef05e46298e5587263f2668a5a014 assets/roots/models/block/aubergine_2.json
@@ -130,7 +130,7 @@ e270af58daeef05e46298e5587263f2668a5a014 assets/roots/models/block/aubergine_2.j
 a076c58c5f09aa86b069ca3477a91954cc5302b0 assets/roots/models/block/bafflecap_block_inside.json
 6375c58178466cc667a06fe4de33eef34e4b77d3 assets/roots/models/block/bafflecap_block_inventory.json
 f9cea8a96c762409ea11f6f6ec5c6ae1429b1640 assets/roots/models/block/bafflecap_block_outside.json
-dfa82fb95a1f994653222dbb765cf53a1051ff37 assets/roots/models/block/caelic_soil.json
+d9bf8aed0a4a52ebc7026fc3f45c4b3bfc659227 assets/roots/models/block/caelic_soil.json
 2dd35e917f221aeb92eebd3c2d080c608270e237 assets/roots/models/block/chiseled_runed_obsidian.json
 f131f71ef09b71287fc8eb266030ab5ffe109d21 assets/roots/models/block/chiseled_runestone.json
 2c80c5f394767ec85618607b733ffdfc97e80a86 assets/roots/models/block/cloud_berry_0.json
@@ -157,7 +157,7 @@ c754625b4a2af545f705145c79c0e84726594acf assets/roots/models/block/hanging_grove
 c58ed48e8f68f10ba887e1331a3e04e0d4eb17bc assets/roots/models/block/inferno_bulb_1.json
 7266bd4383f3ccbbdc261ca1d3bf940b80530c90 assets/roots/models/block/inferno_bulb_2.json
 af177ac5215f81dff72baba87597a7935ff28e18 assets/roots/models/block/inferno_bulb_3.json
-2c3604de01554b5ec531f86a589b2a31e7a8fe87 assets/roots/models/block/magmatic_soil.json
+2ebcfda6b0cdcdd17c4ff32362a3c2c41290a7a5 assets/roots/models/block/magmatic_soil.json
 24459dd586c967360a26e36bf5507f3aa0b18ec5 assets/roots/models/block/moonglow_0.json
 4a4d569a87947860a91158cfd6fe988d120c06b2 assets/roots/models/block/moonglow_1.json
 41f99638f077515e07670132f5e7f1b7e659e3b4 assets/roots/models/block/moonglow_2.json
@@ -324,7 +324,7 @@ d1948fe4d9251b128f839a495b96f7c5207f28a6 assets/roots/models/block/stalicripe_3.
 a855766a53e5f6b3b8c0f32301e275ffdf2b8437 assets/roots/models/block/stripped_wildwood_log_horizontal.json
 cd9ef5e63856406f8e1f67fbc664faa92e0ef049 assets/roots/models/block/stripped_wildwood_wood.json
 105a725d56dd8c6f6a4d1ff2c17f9919e0b2512c assets/roots/models/block/stripped_wildwood_wood_horizontal.json
-bed96c02e24b051095e57af4e3eec30b9cdd20a4 assets/roots/models/block/terran_soil.json
+45d8188b8be696b140084ef661e89cc36ebf2435 assets/roots/models/block/terran_soil.json
 5bc4bccc1b5405b53e3fb7dbd7358de3ca6fda5b assets/roots/models/block/thatch.json
 dad122fab6ca1e804cc2d165f1b348d7650dcbf9 assets/roots/models/block/unending_bowl.json
 397795bf846c6a778bc7562d7ec6db24b5b4291d assets/roots/models/block/wildewheet_0.json

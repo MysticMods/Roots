@@ -15,7 +15,7 @@
         "tag": "c:crops/sugar_cane"
       },
       {
-        "item": "minecraft:short_grass"
+        "tag": "roots:short_grass"
       }
     ],
     "levelConditions": [
