@@ -24,7 +24,7 @@ public class Grove implements IStyled {
 
   public String getOrCreateDescriptionId() {
     if (this.descriptionId == null) {
-      this.descriptionId = Util.makeDescriptionId("herb", builtInRegistryHolder().getKey().location());
+      this.descriptionId = Util.makeDescriptionId("grove", builtInRegistryHolder().getKey().location());
     }
 
     return this.descriptionId;
