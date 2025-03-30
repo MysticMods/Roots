@@ -1,6 +1,14 @@
 package mysticmods.roots.api.action;
 
+import mysticmods.roots.api.registry.RootsRegistries;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 // Actions:
 // - Growing crops (from one stage to another, not just random ticks)
@@ -56,6 +64,54 @@ import java.util.function.Consumer;
 // - Visit the end for the first time
 // - Visit the nether for the first time
 
-public interface GroveAction extends Consumer<GroveContextParameters>, GroveContextUser {
+public interface GroveAction<C extends GroveContext> extends Consumer<C>, GroveContextUser {
+  @Override
+  default void accept(C context) {
+    validate(context);
+    if (test(context)) {
+      reward(context);
+    }
+  }
 
+  boolean test (C context);
+
+  void reward (C context);
+
+  default void validate(C context) {
+    for (GroveContext.Parameter type : getUsedParameters()) {
+      if (!GroveContext.hasParameter(context, type)) {
+        throw new NoSuchElementException("Missing required parameter '" + type.name() + "' in context");
+      }
+    }
+  }
+
+  default Holder<GroveAction<?>> builtinRegistryHolder() {
+    return RootsRegistries.GROVE_ACTIONS.wrapAsHolder(this);
+  }
+
+  @Deprecated
+  default boolean is (Holder<GroveAction<?>> holder) {
+    return builtinRegistryHolder().is(holder);
+  }
+
+  @Deprecated
+  default boolean is (GroveAction<?> action) {
+    return builtinRegistryHolder().is(action.builtinRegistryHolder());
+  }
+
+  default boolean is(ResourceLocation location) {
+    return builtinRegistryHolder().is(location);
+  }
+
+  default boolean is(ResourceKey<GroveAction<?>> resourceKey) {
+    return builtinRegistryHolder().is(resourceKey);
+  }
+
+  default boolean is(Predicate<ResourceKey<GroveAction<?>>> predicate) {
+    return builtinRegistryHolder().is(predicate);
+  }
+
+  default boolean is(TagKey<GroveAction<?>> tagKey) {
+    return builtinRegistryHolder().is(tagKey);
+  }
 }

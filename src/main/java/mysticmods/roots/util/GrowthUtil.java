@@ -12,6 +12,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class GrowthUtil {
+  @Nullable
+  public static GrowthRecord getGrowthRecord (BlockState state) {
+    GrowthRecord record = state.getBlockHolder().getData(DataMaps.GROWTH_RECORDS);
+    if (record == null && state.getBlock() instanceof CropBlock crop) {
+      record = GrowthRecord.ofCrop(crop);
+      RootsAPI.LOG.error("We're guessing a growth record for crop '{}'. This should be added as a growth record.", crop);
+    }
+
+    return record;
+  }
+
   public static int growthTicks(Level level, BlockPos pos, @Nullable BlockState state, @Nullable Player player) {
     if (state == null) {
       state = level.getBlockState(pos);
@@ -21,11 +32,7 @@ public class GrowthUtil {
       return -1;
     }
 
-    GrowthRecord record = state.getBlockHolder().getData(DataMaps.GROWTH_RECORDS);
-    if (record == null && state.getBlock() instanceof CropBlock crop) {
-      record = GrowthRecord.ofCrop(crop);
-      RootsAPI.LOG.error("We're guessing a growth record for crop '{}'. This should be added as a growth record.", crop);
-    }
+    GrowthRecord record = getGrowthRecord(state);
 
     if (record == null) {
       return -1;

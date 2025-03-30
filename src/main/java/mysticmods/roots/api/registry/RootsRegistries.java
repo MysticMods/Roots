@@ -51,7 +51,7 @@ public class RootsRegistries {
       .create();
   public static final Registry<HarvestFunction> HARVEST_FUNCTIONS = new RegistryBuilder<>(Keys.HARVEST_FUNCTIONS).sync(true)
       .create();
-  public static final Registry<GroveAction> GROVE_ACTIONS = new RegistryBuilder<>(Keys.GROVE_ACTIONS).sync(true).create();
+  public static final Registry<GroveAction<?>> GROVE_ACTIONS = new RegistryBuilder<>(Keys.GROVE_ACTIONS).sync(true).create();
 
   public static class Keys {
     // Registry keys
@@ -72,7 +72,7 @@ public class RootsRegistries {
     public static ResourceKey<Registry<LightFunction>> LIGHT_FUNCTIONS = key(RootsAPI.rl("light_functions"));
     public static ResourceKey<Registry<CanHarvestFunction>> CAN_HARVEST_FUNCTIONS = key(RootsAPI.rl("can_harvest_functions"));
     public static ResourceKey<Registry<HarvestFunction>> HARVEST_FUNCTIONS = key(RootsAPI.rl("harvest_functions"));
-    public static ResourceKey<Registry<GroveAction>> GROVE_ACTIONS = key(RootsAPI.rl("grove_actions"));
+    public static ResourceKey<Registry<GroveAction<?>>> GROVE_ACTIONS = key(RootsAPI.rl("grove_actions"));
 
     private static <T> ResourceKey<Registry<T>> key(ResourceLocation name) {
       return ResourceKey.createRegistryKey(name);
