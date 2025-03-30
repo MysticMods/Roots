@@ -10,6 +10,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.Set;
 
 public interface ISpellInstance extends SpellLike {
@@ -84,7 +85,7 @@ public interface ISpellInstance extends SpellLike {
 
     @Override
     public Set<SpellModifier> getEnabledModifiers() {
-      return Set.of();
+      return Collections.emptySet();
     }
 
     @Override

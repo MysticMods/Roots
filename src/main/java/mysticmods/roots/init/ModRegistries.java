@@ -27,6 +27,7 @@ public class ModRegistries {
     event.register(RootsRegistries.LIGHT_FUNCTIONS);
     event.register(RootsRegistries.CAN_HARVEST_FUNCTIONS);
     event.register(RootsRegistries.GROVE_ACTIONS);
+    event.register(RootsRegistries.RITUAL_MODIFIERS);
   }
 }
 

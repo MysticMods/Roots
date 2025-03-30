@@ -12,6 +12,7 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.RitualModifier;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.api.test.world.PartialBlockState;
@@ -66,6 +67,13 @@ public class RootsDataMapProvider extends DataMapProvider {
       builder3.add(modifier.builtInRegistryHolder(), modifier.getDefaultCosts(), false);
     });
 
+    Builder<CostInstance, RitualModifier> builder18 = builder(DataMaps.RITUAL_MODIFIER_COST_DATA)
+        .replace(false);
+
+    RootsRegistries.RITUAL_MODIFIERS.stream().forEach(modifier -> {
+      builder18.add(modifier.builtInRegistryHolder(), modifier.getDefaultCosts(), false);
+    });
+
     Builder<PropertyDataMap, Spell> builder4 = builder(DataMaps.SPELL_PROPERTY_DATA)
         .replace(false);
     RootsRegistries.SPELLS.stream().forEach(spell -> {
@@ -87,6 +95,11 @@ public class RootsDataMapProvider extends DataMapProvider {
     Builder<Spell, SpellModifier> builder7 = builder(DataMaps.SPELL_MODIFIER_SPELL).replace(false);
     RootsRegistries.SPELL_MODIFIERS.stream().forEach(modifier -> {
       builder7.add(modifier.builtInRegistryHolder(), modifier.getSpell().value(), false);
+    });
+
+    Builder<Ritual, RitualModifier> builder19 = builder(DataMaps.RITUAL_MODIFIER_RITUAL).replace(false);
+    RootsRegistries.RITUAL_MODIFIERS.stream().forEach(modifier -> {
+      builder19.add(modifier.builtInRegistryHolder(), modifier.getRitual().value(), false);
     });
 
     Builder<SpellModifier, SpellModifier> builder8 = builder(DataMaps.SPELL_MODIFIER_PARENT).replace(false);

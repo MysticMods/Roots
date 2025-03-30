@@ -10,6 +10,7 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.RitualModifier;
 import mysticmods.roots.api.snapshot.SnapshotType;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
@@ -26,6 +27,7 @@ public class RootsRegistries {
   public static final Registry<Herb> HERBS = new RegistryBuilder<>(Keys.HERBS).sync(true).create();
   public static final Registry<SpellModifier> SPELL_MODIFIERS = new RegistryBuilder<>(Keys.SPELL_MODIFIERS).sync(true)
       .create();
+  public static final Registry<RitualModifier> RITUAL_MODIFIERS = new RegistryBuilder<>(Keys.RITUAL_MODIFIERS).sync(true).create();
   public static final Registry<PropertyType<?>> PROPERTY_TYPES = new RegistryBuilder<>(Keys.PROPERTY_TYPES).sync(true)
       .create();
   public static final Registry<PropertySerializer<?>> PROPERTY_SERIALIZERS = new RegistryBuilder<>(Keys.PROPERTY_SERIALIZERS).sync(true)
@@ -57,6 +59,7 @@ public class RootsRegistries {
     public static ResourceKey<Registry<Ritual>> RITUALS = key(RootsAPI.rl("rituals"));
     public static ResourceKey<Registry<Spell>> SPELLS = key(RootsAPI.rl("spells"));
     public static ResourceKey<Registry<SpellModifier>> SPELL_MODIFIERS = key(RootsAPI.rl("spell_modifiers"));
+    public static ResourceKey<Registry<RitualModifier>> RITUAL_MODIFIERS = key(RootsAPI.rl("ritual_modifiers"));
     public static ResourceKey<Registry<PropertyType<?>>> PROPERTY_TYPES = key(RootsAPI.rl("property_types"));
     public static ResourceKey<Registry<PropertySerializer<?>>> PROPERTY_SERIALIZERS = key(RootsAPI.rl("property_serializers"));
     public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITIONS = key(RootsAPI.rl("level_conditions"));

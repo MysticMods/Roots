@@ -8,6 +8,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.Util;
@@ -27,9 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -39,6 +38,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
 
   protected String descriptionId;
 
+  protected final Set<RitualModifier> modifiers = new HashSet<>();
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected int duration = 0;
@@ -167,6 +167,14 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
 
   public AABB getAABB() {
     return aabb;
+  }
+
+  public Set<RitualModifier> getModifiers() {
+    return modifiers;
+  }
+
+  public void addModifier(RitualModifier modifier) {
+    modifiers.add(modifier);
   }
 
   public boolean is(ResourceLocation key) {

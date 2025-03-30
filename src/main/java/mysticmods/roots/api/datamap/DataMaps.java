@@ -11,13 +11,14 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.RitualModifier;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -48,6 +49,8 @@ public class DataMaps {
   public static final DataMapType<SpellModifier, Spell> SPELL_MODIFIER_SPELL = DataMapType.builder(RootsAPI.rl("spell_modifier_spell"), RootsRegistries.Keys.SPELL_MODIFIERS, RootsRegistries.SPELLS.byNameCodec())
       .synced(RootsRegistries.SPELLS.byNameCodec(), false)
       .build();
+  public static final DataMapType<RitualModifier, Ritual> RITUAL_MODIFIER_RITUAL = DataMapType.builder(RootsAPI.rl("ritual_modifier_ritual"), RootsRegistries.Keys.RITUAL_MODIFIERS, RootsRegistries.RITUALS.byNameCodec())
+      .synced(RootsRegistries.RITUALS.byNameCodec(), false).build();
   public static final DataMapType<Grove, GroveData> GROVE_DATA = DataMapType.builder(RootsAPI.rl("grove_data"), RootsRegistries.Keys.GROVES, GroveData.CODEC)
       .synced(GroveData.CODEC, false)
       .build();
@@ -57,6 +60,11 @@ public class DataMaps {
       .remover(CostRemover.codec())
       .build();
   public static final AdvancedDataMapType<SpellModifier, CostInstance, CostRemover<SpellModifier>> SPELL_MODIFIER_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_modifier_cost_data"), RootsRegistries.Keys.SPELL_MODIFIERS, CostRemover.CODEC)
+      .synced(CostRemover.CODEC, false)
+      .merger(costMerger())
+      .remover(CostRemover.codec())
+      .build();
+  public static final AdvancedDataMapType<RitualModifier, CostInstance, CostRemover<RitualModifier>> RITUAL_MODIFIER_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("ritual_modifier_cost_data"), RootsRegistries.Keys.RITUAL_MODIFIERS, CostRemover.CODEC)
       .synced(CostRemover.CODEC, false)
       .merger(costMerger())
       .remover(CostRemover.codec())
@@ -90,10 +98,12 @@ public class DataMaps {
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
     event.register(SPELL_COST_DATA);
     event.register(SPELL_MODIFIER_COST_DATA);
+    event.register(RITUAL_MODIFIER_COST_DATA);
     event.register(HERB_ITEM_DATA);
     event.register(SPELL_PROPERTY_DATA);
     event.register(RITUAL_PROPERTY_DATA);
     event.register(RITUAL_DISPLAY_ITEM);
+    event.register(RITUAL_MODIFIER_RITUAL);
     event.register(SPELL_DISPLAY_ITEM);
     event.register(SPELL_MODIFIER_PARENT);
     event.register(SPELL_MODIFIER_SPELL);
