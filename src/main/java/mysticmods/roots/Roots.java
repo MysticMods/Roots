@@ -61,6 +61,7 @@ public class Roots {
     ModAdvancements.register(bus);
     ModEnchantment.register(bus);
     ModContainers.register(bus);
+    ModActions.register(bus);
     packetHandler = new PacketHandler(bus);
   }
 }

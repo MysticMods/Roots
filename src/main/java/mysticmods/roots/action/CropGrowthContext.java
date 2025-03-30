@@ -23,4 +23,12 @@ public record CropGrowthContext(ServerLevel level, ServerPlayer player, BlockPos
   public CropGrowthContext(ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState, BlockState oldBlockState, InteractionHand hand, ItemStack item) {
     this(level, player, position, blockState, oldBlockState, hand, item, null, null);
   }
+
+  public CropGrowthContext(ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState, BlockState oldBlockState, InteractionHand hand, ItemStack item, ISpellInstance spell) {
+    this(level, player, position, blockState, oldBlockState, hand, item, spell, null);
+  }
+
+  public CropGrowthContext(ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState, BlockState oldBlockState, InteractionHand hand, ItemStack item, IRitualInstance ritual) {
+    this(level, player, position, blockState, oldBlockState, hand, item, null, ritual);
+  }
 }
