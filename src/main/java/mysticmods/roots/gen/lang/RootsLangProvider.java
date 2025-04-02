@@ -126,6 +126,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.entity.duck.quack", "Duck quacks");
     add("roots.subtitles.entity.deer.ambient", "Deer squeals");
 
+    add("roots.commands.usage", "Usage: /roots staff | ritual | pyre | activate");
     add("roots.commands.staff.usage", "Usage: /roots staff <spell>");
     add("roots.commands.staff.spell_not_found", "Spell not found: %s");
     add("roots.commands.staff.no_spell_storage", "Staff missing spell storage somehow");
@@ -136,6 +137,12 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.commands.ritual.recipe_not_found", "No recipe found for ritual %s");
     add("roots.commands.ritual.no_space", "No space to place pyre.");
     add("roots.commands.ritual.failed_condition", "Failed to place condition: %s");
+
+    add("roots.commands.pyre.usage", "Usage: /roots pyre <recipe>");
+    add("roots.commands.pyre.no_player", "Must be executed by a player to use this command");
+    add("roots.commands.pyre.recipe_not_found", "No recipe found for pyre %s");
+    add("roots.commands.pyre.no_space", "No space to place pyre.");
+    add("roots.commands.pyre.failed_condition", "Failed to place condition: %s");
 
     add("roots.advancements.root.title", "Roots");
     add("roots.advancements.root.description", "An introduction to the magic of the wilds.");

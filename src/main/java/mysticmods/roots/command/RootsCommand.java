@@ -1,11 +1,14 @@
 package mysticmods.roots.command;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
@@ -15,10 +18,12 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
 import mysticmods.roots.recipe.pyre.PyreRecipe;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -39,6 +44,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.List;
@@ -52,6 +58,16 @@ public class RootsCommand {
   private static List<String> spellIds = null;
   private static List<String> ritualIds = null;
   private static List<String> craftingRecipeIds = null;
+  private static List<String> groveIds = null;
+
+  private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestGroves() {
+    if (groveIds == null) {
+      groveIds = RootsRegistries.GROVES.keySet().stream().map(ResourceLocation::toString).toList();
+    }
+
+    return Commands.argument("grove", ResourceLocationArgument.id())
+        .suggests((c, build) -> SharedSuggestionProvider.suggest(groveIds, build));
+  }
 
   private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestSpells() {
     if (spellIds == null) {
@@ -71,7 +87,7 @@ public class RootsCommand {
         .suggests((c, build) -> SharedSuggestionProvider.suggest(ritualIds, build));
   }
 
-  private static List<String> getCraftingRecipeIds () {
+  private static List<String> getCraftingRecipeIds() {
     if (craftingRecipeIds == null) {
       ServerLevel level = ServerLifecycleHooks.getCurrentServer().overworld();
       craftingRecipeIds = ResolvedRecipes.PYRE.getRecipes(level).stream()
@@ -148,7 +164,7 @@ public class RootsCommand {
       }
 
       if (c.getSource().getPlayer() == null) {
-        c.getSource().sendFailure(Component.translatable("roots.commands.ritual.no_player"));
+        c.getSource().sendFailure(Component.translatable("roots.commands.pyre.no_player"));
         return 1;
       }
 
@@ -159,7 +175,7 @@ public class RootsCommand {
       BlockState state = level.getBlockState(pos);
 
       if (!state.isAir() && !state.canBeReplaced()) {
-        c.getSource().sendFailure(Component.translatable("roots.commands.ritual.no_space"));
+        c.getSource().sendFailure(Component.translatable("roots.commands.pyre.no_space"));
         return 1;
       }
 
@@ -191,7 +207,7 @@ public class RootsCommand {
         LevelCondition condition = conditions.get(i);
         if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
           c.getSource()
-              .sendFailure(Component.translatable("roots.commands.ritual.failed_condition", condition.builtInRegistryHolder()
+              .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", condition.builtInRegistryHolder()
                   .getKey()));
           return 1;
         }
@@ -283,6 +299,96 @@ public class RootsCommand {
       }
       return 1;
     }));
+    builder.then(Commands.literal("reputation").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.usage"), false);
+      return 1;
+    }).then(Commands.argument("player", EntityArgument.player()).executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.usage"), false);
+      return 1;
+    }).then(suggestGroves().executes(c -> {
+      ResourceLocation groveId = ResourceLocationArgument.getId(c, "grove");
+      Grove grove = RootsRegistries.GROVES.get(groveId);
+      ServerPlayer player = EntityArgument.getPlayer(c, "player");
+      if (grove == null) {
+        c.getSource()
+            .sendFailure(Component.translatable("roots.commands.reputation.grove_not_found", groveId.toString()));
+        return 1;
+      }
+
+      ReputationStorage storage = player.getData(ModAttachments.REPUTATION_STORAGE);
+      if (storage == null) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.reputation.no_reputation_storage"));
+        return 1;
+      }
+
+      int reputation = storage.getReputation(grove);
+      c.getSource()
+          .sendSuccess(() -> Component.translatable("roots.command.reputation.current_reputation", grove.getName(), reputation), false);
+      return 1;
+    }).then(Commands.literal("add").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.add.usage"), false);
+      return 1;
+    }).then(Commands.argument("amount", IntegerArgumentType.integer()).executes(c -> {
+      ResourceLocation groveId = ResourceLocationArgument.getId(c, "grove");
+      Grove grove = RootsRegistries.GROVES.get(groveId);
+      ServerPlayer player = EntityArgument.getPlayer(c, "player");
+      if (grove == null) {
+        c.getSource()
+            .sendFailure(Component.translatable("roots.commands.reputation.grove_not_found", groveId.toString()));
+        return 1;
+      }
+      ReputationStorage storage = player.getData(ModAttachments.REPUTATION_STORAGE);
+      if (storage == null) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.reputation.no_reputation_storage"));
+        return 1;
+      }
+      int amount = IntegerArgumentType.getInteger(c, "amount");
+      storage.increaseReputation(grove, amount);
+      PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
+      return 0;
+    }))).then(Commands.literal("remove").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove.usage"), false);
+      return 1;
+    }).then(Commands.argument("amount", IntegerArgumentType.integer()).executes(c -> {
+      ResourceLocation groveId = ResourceLocationArgument.getId(c, "grove");
+      Grove grove = RootsRegistries.GROVES.get(groveId);
+      ServerPlayer player = EntityArgument.getPlayer(c, "player");
+      if (grove == null) {
+        c.getSource()
+            .sendFailure(Component.translatable("roots.commands.reputation.grove_not_found", groveId.toString()));
+        return 1;
+      }
+      ReputationStorage storage = player.getData(ModAttachments.REPUTATION_STORAGE);
+      if (storage == null) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.reputation.no_reputation_storage"));
+        return 1;
+      }
+      int amount = IntegerArgumentType.getInteger(c, "amount");
+      storage.decreaseReputation(grove, amount);
+      PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
+      return 0;
+    }))).then(Commands.literal("set").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set.usage"), false);
+      return 1;
+    }).then(Commands.argument("amount", IntegerArgumentType.integer()).executes(c -> {
+      ResourceLocation groveId = ResourceLocationArgument.getId(c, "grove");
+      Grove grove = RootsRegistries.GROVES.get(groveId);
+      ServerPlayer player = EntityArgument.getPlayer(c, "player");
+      if (grove == null) {
+        c.getSource()
+            .sendFailure(Component.translatable("roots.commands.reputation.grove_not_found", groveId.toString()));
+        return 1;
+      }
+      ReputationStorage storage = player.getData(ModAttachments.REPUTATION_STORAGE);
+      if (storage == null) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.reputation.no_reputation_storage"));
+        return 1;
+      }
+      int amount = IntegerArgumentType.getInteger(c, "amount");
+      storage.setReputation(grove, amount);
+      PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
+      return 0;
+    }))))));
     return builder;
   }
 }
