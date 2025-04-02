@@ -1,0 +1,28 @@
+{
+  "values": {
+    "roots:crop_growth": [
+      {
+        "grove": "roots:sprout",
+        "name": "roots:sprout_crop_growth",
+        "reputation": {
+          "gain1": 100,
+          "gain2": 10,
+          "gain3": 1,
+          "gain4": 0
+        },
+        "tag": "roots:grove/sprout/crops"
+      },
+      {
+        "grove": "roots:elemental",
+        "name": "roots:elemental_crop_growth",
+        "reputation": {
+          "gain1": 100,
+          "gain2": 10,
+          "gain3": 1,
+          "gain4": 0
+        },
+        "tag": "roots:grove/elemental/crops"
+      }
+    ]
+  }
+}
