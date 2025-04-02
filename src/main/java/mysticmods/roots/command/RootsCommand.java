@@ -24,6 +24,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -38,6 +39,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.neoforged.neoforge.items.wrapper.PlayerMainInvWrapper;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,6 +51,7 @@ public class RootsCommand {
 
   private static List<String> spellIds = null;
   private static List<String> ritualIds = null;
+  private static List<String> craftingRecipeIds = null;
 
   private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestSpells() {
     if (spellIds == null) {
@@ -66,6 +69,22 @@ public class RootsCommand {
 
     return Commands.argument("ritual", ResourceLocationArgument.id())
         .suggests((c, build) -> SharedSuggestionProvider.suggest(ritualIds, build));
+  }
+
+  private static List<String> getCraftingRecipeIds () {
+    if (craftingRecipeIds == null) {
+      ServerLevel level = ServerLifecycleHooks.getCurrentServer().overworld();
+      craftingRecipeIds = ResolvedRecipes.PYRE.getRecipes(level).stream()
+          .filter(o -> o.value().getRitual() == null).map(recipe -> recipe.id().toString())
+          .collect(Collectors.toList());
+    }
+
+    return craftingRecipeIds;
+  }
+
+  private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestRitualRecipes() {
+    return Commands.argument("recipe", ResourceLocationArgument.id())
+        .suggests((c, build) -> SharedSuggestionProvider.suggest(getCraftingRecipeIds(), build));
   }
 
   public static LiteralArgumentBuilder<CommandSourceStack> builder(LiteralArgumentBuilder<CommandSourceStack> builder) {
@@ -113,6 +132,69 @@ public class RootsCommand {
         player.addItem(staff);
       } else {
         player.setItemInHand(InteractionHand.MAIN_HAND, staff);
+      }
+      return 1;
+    })));
+    builder.then(Commands.literal("pyre").executes(c -> {
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.pyre.usage"), false);
+      return 1;
+    }).then(suggestRitualRecipes().executes(c -> {
+      ResourceLocation recipeId = ResourceLocationArgument.getId(c, "recipe");
+      RecipeHolder<PyreRecipe> recipe = ResolvedRecipes.PYRE.getRecipe(c.getSource().getLevel(), recipeId);
+      if (recipe == null) {
+        c.getSource()
+            .sendFailure(Component.translatable("roots.commands.pyre.recipe_not_found", recipeId.toString()));
+        return 1;
+      }
+
+      if (c.getSource().getPlayer() == null) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.ritual.no_player"));
+        return 1;
+      }
+
+      // Create a pyre
+      BlockPos pos = BlockPos.containing(c.getSource().getPosition());
+      Level level = c.getSource().getLevel();
+
+      BlockState state = level.getBlockState(pos);
+
+      if (!state.isAir() && !state.canBeReplaced()) {
+        c.getSource().sendFailure(Component.translatable("roots.commands.ritual.no_space"));
+        return 1;
+      }
+
+      level.setBlock(pos, ModBlocks.PYRE.get().defaultBlockState(), 3);
+      level.setBlock(pos.below(), Blocks.CHEST.defaultBlockState(), 3);
+
+      // Place a chest below the pyre
+      InvWrapper chest = new InvWrapper((ChestBlockEntity) level.getBlockEntity(pos.below()));
+      PyreBlockEntity pyre = (PyreBlockEntity) level.getBlockEntity(pos);
+      // Fill the pyre with the ritual recipe
+
+      for (Ingredient ingredient : recipe.value().getIngredients()) {
+        pyre.getInventory().insert(ingredient.getItems()[0].copy());
+        ItemStack stack = ingredient.getItems()[0].copy();
+        stack.setCount(stack.getMaxStackSize());
+        for (int i = 0; i < 5; i++) {
+          // Fill the chest with ingredients
+          ItemHandlerHelper.insertItemStacked(chest, stack.copy(), false);
+        }
+      }
+
+      PlayerMainInvWrapper playerInv = new PlayerMainInvWrapper(c.getSource().getPlayer().getInventory());
+      // Give the player a flint and steel
+      ItemHandlerHelper.insertItemStacked(playerInv, new ItemStack(Items.FLINT_AND_STEEL), false);
+
+      // Iterate over world conditions and create them using /place
+      List<LevelCondition> conditions = recipe.value().getLevelConditions();
+      for (int i = 0; i < conditions.size(); i++) {
+        LevelCondition condition = conditions.get(i);
+        if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
+          c.getSource()
+              .sendFailure(Component.translatable("roots.commands.ritual.failed_condition", condition.builtInRegistryHolder()
+                  .getKey()));
+          return 1;
+        }
       }
       return 1;
     })));
