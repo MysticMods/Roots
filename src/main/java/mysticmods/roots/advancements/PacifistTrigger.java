@@ -6,6 +6,7 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAdvancements;
 import mysticmods.roots.util.EntityUtils;
+import mysticmods.roots.util.PacifistUtil;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
@@ -19,8 +20,6 @@ import net.minecraft.world.phys.AABB;
 import java.util.Optional;
 
 public class PacifistTrigger extends SimpleCriterionTrigger<PacifistTrigger.TriggerInstance> {
-  public static AABB AABB = new AABB(-0.75, -0.75, -0.75, 0.75, 0.75, 0.75);
-
   @Override
   public Codec<PacifistTrigger.TriggerInstance> codec() {
     return TriggerInstance.CODEC;
@@ -37,32 +36,7 @@ public class PacifistTrigger extends SimpleCriterionTrigger<PacifistTrigger.Trig
             .apply(codec, TriggerInstance::new));
 
     public boolean test(ServerPlayer serverPlayer, Entity entity) {
-      if (ConfigManager.PACIFIST_DISABLED.get()) {
-        return false;
-      }
-
-      EntityType<?> type = entity.getType();
-      if (!type.is(RootsTags.Entities.PACIFIST)) {
-        return false;
-      }
-
-      // Chicken jockeys
-      if (entity.getControllingPassenger() != null) {
-        return false;
-      }
-
-      // TODO: Document this somewhere
-      if (entity.getTags().contains("Roots_NoPacifist")) {
-        return false;
-      }
-
-      if (entity.level()
-          .getEntities(entity, AABB.move(entity.getX(), entity.getY(), entity.getZ()), e -> EntityUtils.isHostileTo(serverPlayer)
-              .test(e)).isEmpty()) {
-        return true;
-      }
-
-      return false;
+      return PacifistUtil.test(serverPlayer, entity);
     }
   }
 
