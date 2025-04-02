@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
+import mysticmods.roots.api.action.GroveReputation;
+import mysticmods.roots.api.datamap.GroveReputationEntry;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -13,6 +15,8 @@ import net.minecraft.network.codec.StreamCodec;
 import java.util.Map;
 
 public class ReputationStorage implements ICleanable {
+  private static final int RANK_THRESHOLD = 5000;
+
   public static final MapCodec<ReputationStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       Codec.BOOL.fieldOf("untrue_pacifist").forGetter(o -> o.untruePacifist),
       Codec.unboundedMap(RootsRegistries.GROVES.byNameCodec(), Codec.INT).fieldOf("reputations")
@@ -43,6 +47,15 @@ public class ReputationStorage implements ICleanable {
     int result = reputations.put(grove, reputation);
     setDirty(true);
     return result;
+  }
+
+  public int adjust (Grove grove, GroveReputation reputation) {
+    int[] reps = {reputation.gain1(), reputation.gain2(), reputation.gain3(), reputation.gain4()};
+    int current = reputations.getOrDefault(grove, 0);
+    int rank = Math.min(Math.max((current / RANK_THRESHOLD) - 1, 0), reps.length);
+    current = reputations.put(grove, current + reps[rank]);
+    setDirty(true);
+    return current;
   }
 
   public int increaseReputation(Grove grove, int reputation) {

@@ -13,6 +13,7 @@ import java.util.List;
 public class ConfigManager {
 
   private static final ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
+  private static final ModConfigSpec.Builder CLIENT_BUILDER = new ModConfigSpec.Builder();
 
   public static List<AbstractConfig> CONFIGS = new ArrayList<>();
 
@@ -35,7 +36,13 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Z;
 
   public static ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
+
+  public static ModConfigSpec.BooleanValue DEBUG_REPUTATION;
+  public static ModConfigSpec.BooleanValue SUPPRESS_REPUTATION_CHANGES;
+
+
   public static ModConfigSpec COMMON_CONFIG;
+  public static ModConfigSpec CLIENT_CONFIG;
 
   static {
     COMMON_BUILDER.comment("magnetism-related configuration").push("magnetism");
@@ -80,6 +87,13 @@ public class ConfigManager {
     ALERTNESS_TAG = COMMON_BUILDER.comment("whether or not entities should be filtered to those in the roots:alertness entity tag")
             .define("tag", false);
     COMMON_BUILDER.pop();
+    COMMON_BUILDER.push("debug");
+    DEBUG_REPUTATION = COMMON_BUILDER.comment("if true, will send messages for all reputation gains and losses")
+        .define("debug_reputation", false);
+    COMMON_BUILDER.pop();
+    CLIENT_BUILDER.push("debug");
+    SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
+        .define("display_reputation_gains", true);
     COMMON_CONFIG = COMMON_BUILDER.build();
   }
 

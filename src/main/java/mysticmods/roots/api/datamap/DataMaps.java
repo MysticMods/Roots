@@ -2,6 +2,7 @@ package mysticmods.roots.api.datamap;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
@@ -93,6 +94,9 @@ public class DataMaps {
   public static final DataMapType<Block, HarvestRecord> HARVEST_RECORDS = DataMapType.builder(RootsAPI.rl("harvest_records"), Registries.BLOCK, HarvestRecord.CODEC)
       .synced(HarvestRecord.CODEC, false)
       .build();
+  public static final DataMapType<GroveAction, List<GroveReputationEntry>> GROVE_ACTION_REPUTATIONS = DataMapType.builder(RootsAPI.rl("grant_action_reputations"), RootsRegistries.Keys.GROVE_ACTIONS, GroveReputationEntry.LIST_CODEC)
+      .synced(GroveReputationEntry.LIST_CODEC, false)
+      .build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -114,6 +118,7 @@ public class DataMaps {
     event.register(GROWTH_RECORDS);
     event.register(HARVEST_RECORDS);
     event.register(STEM_BLOCKS);
+    event.register(GROVE_ACTION_REPUTATIONS);
   }
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {

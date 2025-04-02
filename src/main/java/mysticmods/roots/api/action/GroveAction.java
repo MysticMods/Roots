@@ -1,11 +1,16 @@
 package mysticmods.roots.api.action;
 
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.GroveReputationEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -64,20 +69,26 @@ import java.util.function.Predicate;
 // - Visit the end for the first time
 // - Visit the nether for the first time
 
-public interface GroveAction<C extends GroveContext> extends Consumer<C>, GroveContextUser {
+public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   @Override
-  default void accept(C context) {
+  default void accept(GroveContext context) {
     validate(context);
     if (test(context)) {
       reward(context);
     }
   }
 
-  boolean test (C context);
+  boolean test (GroveContext context);
 
-  void reward (C context);
+  default void reward (GroveContext context) {
+    for (GroveReputationEntry entry : getReputationEntries()) {
+      if (context.testTag(entry.tag())) {
+        RootsAPI.getInstance().grant(context.player(), entry);
+      }
+    }
+  }
 
-  default void validate(C context) {
+  default void validate(GroveContext context) {
     for (GroveContext.Parameter type : getUsedParameters()) {
       if (!GroveContext.hasParameter(context, type)) {
         throw new NoSuchElementException("Missing required parameter '" + type.name() + "' in context");
@@ -85,17 +96,27 @@ public interface GroveAction<C extends GroveContext> extends Consumer<C>, GroveC
     }
   }
 
-  default Holder<GroveAction<?>> builtinRegistryHolder() {
+  default List<GroveReputationEntry> getReputationEntries() {
+    List<GroveReputationEntry> result = builtinRegistryHolder().getData(DataMaps.GROVE_ACTION_REPUTATIONS);
+    if (result == null) {
+      RootsAPI.LOG.error("Grove action " + this + " has no reputation entries");
+      return Collections.emptyList();
+    }
+
+    return result;
+  }
+
+  default Holder<GroveAction> builtinRegistryHolder() {
     return RootsRegistries.GROVE_ACTIONS.wrapAsHolder(this);
   }
 
   @Deprecated
-  default boolean is (Holder<GroveAction<?>> holder) {
+  default boolean is (Holder<GroveAction> holder) {
     return builtinRegistryHolder().is(holder);
   }
 
   @Deprecated
-  default boolean is (GroveAction<?> action) {
+  default boolean is (GroveAction action) {
     return builtinRegistryHolder().is(action.builtinRegistryHolder());
   }
 
@@ -103,15 +124,15 @@ public interface GroveAction<C extends GroveContext> extends Consumer<C>, GroveC
     return builtinRegistryHolder().is(location);
   }
 
-  default boolean is(ResourceKey<GroveAction<?>> resourceKey) {
+  default boolean is(ResourceKey<GroveAction> resourceKey) {
     return builtinRegistryHolder().is(resourceKey);
   }
 
-  default boolean is(Predicate<ResourceKey<GroveAction<?>>> predicate) {
+  default boolean is(Predicate<ResourceKey<GroveAction>> predicate) {
     return builtinRegistryHolder().is(predicate);
   }
 
-  default boolean is(TagKey<GroveAction<?>> tagKey) {
+  default boolean is(TagKey<GroveAction> tagKey) {
     return builtinRegistryHolder().is(tagKey);
   }
 }

@@ -28,6 +28,9 @@ public class AttachmentUtil {
 
   public static <T extends ICleanable> void monitorForChange(ServerPlayer player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer<ServerPlayer, T> consumer, @Nullable BiConsumer<ServerPlayer, T> whenDirty) {
     T attachmentInstance = player.getData(attachment.value());
+    if (attachmentInstance == null) {
+      return;
+    }
     if (consumer != null) {
       consumer.accept(player, attachmentInstance);
     }

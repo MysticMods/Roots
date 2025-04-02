@@ -1,8 +1,8 @@
 package mysticmods.roots.api;
 
-import com.google.common.base.Supplier;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.attachment.Unlock;
+import mysticmods.roots.api.datamap.GroveReputationEntry;
 import mysticmods.roots.api.herb.Herb;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
@@ -12,16 +12,11 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.damagesource.DamageEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.neoforged.fml.common.asm.enumextension.EnumProxy;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.common.Tags;
@@ -60,7 +55,6 @@ public abstract class RootsAPI {
   public static final Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG, FORAGE);
 
 
-
   public static RootsAPI getInstance() {
     return INSTANCE;
   }
@@ -79,5 +73,7 @@ public abstract class RootsAPI {
 
   public abstract boolean canUnlock(ServerPlayer player, Unlock<?> unlock);
 
-  public abstract void syncHerbs (Player player, Object2DoubleMap<Herb> herbs);
+  public abstract void syncHerbs(Player player, Object2DoubleMap<Herb> herbs);
+
+  public abstract void grant (ServerPlayer player, GroveReputationEntry entry);
 }

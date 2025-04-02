@@ -36,6 +36,7 @@ public class Roots {
 
   public Roots(ModContainer container, IEventBus bus) {
     container.registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
+    container.registerConfig(ModConfig.Type.CLIENT, ConfigManager.CLIENT_CONFIG);
 
     RootsAPI.INSTANCE = new RootsAPIImpl();
 

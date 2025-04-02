@@ -1,5 +1,6 @@
 package mysticmods.roots.spell;
 
+import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.Cost;
@@ -9,6 +10,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.GrowthFXPacket;
 import mysticmods.roots.util.GrowthUtil;
@@ -16,6 +18,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -74,6 +77,9 @@ public class GrowthInfusionSpell extends Spell {
     if (doTicks > 0) {
       if (level.random.nextInt(doTicks) == 0) {
         at.randomTick((ServerLevel) level, pos, level.random);
+        BlockState newState = level.getBlockState(pos);
+        CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) level, (ServerPlayer) pPlayer, pos, newState, at, pHand, pStack, instance);
+        ModActions.CROP_GROWTH.get().accept(context);
         PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(result.getBlockPos()), new GrowthFXPacket(pos));
       }
     } else {

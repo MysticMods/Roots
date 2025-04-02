@@ -9,9 +9,9 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModActions {
-  private static final DeferredRegister<GroveAction<?>> ACTIONS = DeferredRegister.create(RootsRegistries.Keys.GROVE_ACTIONS, RootsAPI.MODID);
+  private static final DeferredRegister<GroveAction> ACTIONS = DeferredRegister.create(RootsRegistries.Keys.GROVE_ACTIONS, RootsAPI.MODID);
 
-  public static final DeferredHolder<GroveAction<?>, CropGrowthAction> CROP_GROWTH = ACTIONS.register("crop_growth", CropGrowthAction::new);
+  public static final DeferredHolder<GroveAction, CropGrowthAction> CROP_GROWTH = ACTIONS.register("crop_growth", CropGrowthAction::new);
 
   public static void register (IEventBus bus) {
     ACTIONS.register(bus);
