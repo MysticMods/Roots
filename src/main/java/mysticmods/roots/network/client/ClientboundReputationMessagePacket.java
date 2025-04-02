@@ -12,9 +12,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ClientboundReputationMessagePacket (Grove grove, int totalReputation, int adjustment) implements IRootsPacket {
+public record ClientboundReputationMessagePacket (Grove grove, int adjustment) implements IRootsPacket {
   public static final CustomPacketPayload.Type<ClientboundReputationMessagePacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_bound_reputation_message"));
-  public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundReputationMessagePacket> CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), ClientboundReputationMessagePacket::grove, ByteBufCodecs.VAR_INT, ClientboundReputationMessagePacket::totalReputation, ByteBufCodecs.VAR_INT, ClientboundReputationMessagePacket::adjustment, ClientboundReputationMessagePacket::new);
+  public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundReputationMessagePacket> CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), ClientboundReputationMessagePacket::grove, ByteBufCodecs.VAR_INT, ClientboundReputationMessagePacket::adjustment, ClientboundReputationMessagePacket::new);
 
   @Override
   public void handle(IPayloadContext context) {
@@ -28,7 +28,7 @@ public record ClientboundReputationMessagePacket (Grove grove, int totalReputati
       key = "roots.reputation.increased";
     }
     // TODO: Ranks, etc
-    context.player().displayClientMessage(Component.translatable(key, grove().getStyledName(), adjustment(), totalReputation()), true);
+    context.player().displayClientMessage(Component.translatable(key, grove().getStyledName(), adjustment()), true);
   }
 
   @Override

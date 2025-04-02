@@ -52,9 +52,6 @@ public class DataMaps {
       .build();
   public static final DataMapType<RitualModifier, Ritual> RITUAL_MODIFIER_RITUAL = DataMapType.builder(RootsAPI.rl("ritual_modifier_ritual"), RootsRegistries.Keys.RITUAL_MODIFIERS, RootsRegistries.RITUALS.byNameCodec())
       .synced(RootsRegistries.RITUALS.byNameCodec(), false).build();
-  public static final DataMapType<Grove, GroveData> GROVE_DATA = DataMapType.builder(RootsAPI.rl("grove_data"), RootsRegistries.Keys.GROVES, GroveData.CODEC)
-      .synced(GroveData.CODEC, false)
-      .build();
   public static final AdvancedDataMapType<Spell, CostInstance, CostRemover<Spell>> SPELL_COST_DATA = AdvancedDataMapType.builder(RootsAPI.rl("spell_cost_data"), RootsRegistries.Keys.SPELLS, CostRemover.CODEC)
       .synced(CostRemover.CODEC, false)
       .merger(costMerger())
@@ -111,7 +108,6 @@ public class DataMaps {
     event.register(SPELL_DISPLAY_ITEM);
     event.register(SPELL_MODIFIER_PARENT);
     event.register(SPELL_MODIFIER_SPELL);
-    event.register(GROVE_DATA);
     event.register(LEVEL_CONDITION_CANONS);
     event.register(PLAYER_CONDITION_CANONS);
     event.register(SPROUT_BREEDING_ITEM_CHANCE);

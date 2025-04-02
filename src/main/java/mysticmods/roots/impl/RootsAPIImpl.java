@@ -8,9 +8,11 @@ import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.GroveReputationEntry;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.ClientboundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientboundHerbCountSyncPacket;
+import mysticmods.roots.network.client.ClientboundReputationMessagePacket;
 import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -42,7 +44,11 @@ public class RootsAPIImpl extends RootsAPI {
   @Override
   public void grant(ServerPlayer player, GroveReputationEntry entry) {
     AttachmentUtil.monitorAndSync(player, ModAttachments.REPUTATION_STORAGE, (serverPlayer, reputationStorage) -> {
-      reputationStorage.adjust(entry.grove(), entry.reputation());
+      int change = reputationStorage.adjust(entry.grove(), entry.reputation());
+      // TODO: When a rank changes etc
+      if (change != 0 && ConfigManager.DEBUG_REPUTATION.get()) {
+        PacketDistributor.sendToPlayer(serverPlayer, new ClientboundReputationMessagePacket(entry.grove(), change));
+      }
     }, ClientboundReputationSyncPacket::new);
   }
 }

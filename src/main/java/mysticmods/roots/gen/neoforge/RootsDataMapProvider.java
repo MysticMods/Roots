@@ -2,12 +2,12 @@ package mysticmods.roots.gen.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.datamap.GroveData;
+import mysticmods.roots.api.datamap.GroveReputationEntry;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -35,6 +35,7 @@ import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -85,11 +86,6 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     RootsRegistries.RITUALS.stream().forEach(ritual -> {
       builder5.add(ritual.builtInRegistryHolder(), new PropertyDataMap(ritual.getProperties()), false);
-    });
-
-    Builder<GroveData, Grove> builder6 = builder(DataMaps.GROVE_DATA).replace(false);
-    ModGroves.RECORDS.forEach(record -> {
-      builder6.add(RootsRegistries.GROVES.getHolderOrThrow(record.groveKey()), new GroveData(record), false);
     });
 
     Builder<Spell, SpellModifier> builder7 = builder(DataMaps.SPELL_MODIFIER_SPELL).replace(false);
@@ -407,5 +403,11 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     builder15.add(ModBlocks.AUBERGINE_CROP, new GrowthRecord(ModBlocks.AUBERGINE_CROP.get(), Optional.of(CropBlock.AGE), CropBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.AGE_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
     builder16.add(ModBlocks.AUBERGINE_CROP, HarvestRecord.of(ModBlocks.AUBERGINE_CROP.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
+
+    var builder20 = builder(DataMaps.GROVE_ACTION_REPUTATIONS);
+    builder20.add(ModActions.CROP_GROWTH, List.of(
+        new GroveReputationEntry(ModGroves.SPROUT.value(), RootsAPI.rl("sprout_crop_growth"), new GroveReputation(100, 10, 1, 0), RootsTags.Blocks.SPROUT_REPUTATION_CROPS),
+        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(100, 10, 1, 0), RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS)
+    ), false);
   }
 }

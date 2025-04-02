@@ -53,34 +53,6 @@ public class Grove implements IStyled {
     return RootsRegistries.GROVES.wrapAsHolder(this);
   }
 
-/*  public boolean aligned(Herb herb) {
-    return herb.is(herbs);
-  }
-
-  public boolean aligned(Spell spell) {
-    return spell.is(alignedSpells);
-  }
-
-  public boolean aligned(Grove grove) {
-    return grove.is(alignedGroves);
-  }
-
-  public boolean aligned(Ritual ritual) {
-    return ritual.is(alignedRituals);
-  }
-
-  public boolean opposed(Spell spell) {
-    return spell.is(opposedSpells);
-  }
-
-  public boolean opposed(Grove grove) {
-    return grove.is(opposedGroves);
-  }
-
-  public boolean opposed(Ritual ritual) {
-    return ritual.is(opposedRituals);
-  }*/
-
   public boolean is(ResourceLocation location) {
     return builtInRegistryHolder().is(location);
   }

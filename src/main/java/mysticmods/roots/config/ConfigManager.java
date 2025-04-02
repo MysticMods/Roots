@@ -26,7 +26,6 @@ public class ConfigManager {
 
   public static ModConfigSpec.BooleanValue EXPERIENCE_ORBS;
   public static ModConfigSpec.BooleanValue PACIFIST_DISABLED;
-  public static ModConfigSpec.IntValue REPUTATION_LOSS_PACIFIST;
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_X;
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Y;
   public static ModConfigSpec.IntValue AOE_BOUNDING_BOX_Z;
@@ -53,8 +52,6 @@ public class ConfigManager {
     HAT_CONFIG.apply(COMMON_BUILDER);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.comment("Reputation-related configurations").push("reputation_config");
-    REPUTATION_LOSS_PACIFIST = COMMON_BUILDER.comment("how much reputation is lost when killing a pacifist mob [if 0, no reputation is lost]")
-        .defineInRange("reputation_loss_pacifist", 10, 0, Integer.MAX_VALUE);
     PACIFIST_DISABLED = COMMON_BUILDER.comment("whether or not the Untrue Pacifist advancement is granted or utilized")
         .define("pacifist_disabled", false);
     COMMON_BUILDER.pop();
@@ -93,7 +90,7 @@ public class ConfigManager {
     COMMON_BUILDER.pop();
     CLIENT_BUILDER.push("debug");
     SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
-        .define("display_reputation_gains", true);
+        .define("suppress_reputation_changes", true);
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
   }

@@ -43,33 +43,35 @@ public class ReputationStorage implements ICleanable {
     return reputations.computeIfAbsent(grove, t -> 0);
   }
 
-  public int setReputation(Grove grove, int reputation) {
-    int result = reputations.put(grove, reputation);
+  public void setReputation(Grove grove, int reputation) {
+    reputations.put(grove, reputation);
     setDirty(true);
-    return result;
   }
 
   public int adjust (Grove grove, GroveReputation reputation) {
     int[] reps = {reputation.gain1(), reputation.gain2(), reputation.gain3(), reputation.gain4()};
     int current = reputations.getOrDefault(grove, 0);
     int rank = Math.min(Math.max((current / RANK_THRESHOLD) - 1, 0), reps.length);
-    current = reputations.put(grove, current + reps[rank]);
+    reputations.put(grove, current + reps[rank]);
     setDirty(true);
-    return current;
+    return reps[rank];
   }
 
   public int increaseReputation(Grove grove, int reputation) {
     int current = reputations.computeIfAbsent(grove, t -> 0);
-    int result = reputations.put(grove, current + reputation);
+    reputations.put(grove, current + reputation);
     setDirty(true);
-    return result;
+    return reputation;
   }
 
   public int decreaseReputation(Grove grove, int reputation) {
     int current = reputations.computeIfAbsent(grove, t -> 0);
-    int result = reputations.put(grove, Math.max(0, current - reputation));
+    if (reputation > 0) {
+      reputation = -reputation;
+    }
+    reputations.put(grove, Math.max(0, current + reputation));
     setDirty(true);
-    return result;
+    return reputation;
   }
 
   public boolean markUntruePacifist(boolean value) {
@@ -78,7 +80,7 @@ public class ReputationStorage implements ICleanable {
     return untruePacifist;
   }
 
-  public boolean getUntruePacifist() {
+  public boolean isUntruePacifist() {
     return untruePacifist;
   }
 

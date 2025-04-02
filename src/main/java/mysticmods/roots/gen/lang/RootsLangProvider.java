@@ -11,14 +11,10 @@ import mysticmods.roots.init.ModItems;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,8 +55,8 @@ public class RootsLangProvider extends LanguageProvider {
     add("itemGroup.roots_spells", "Roots Spells");
     add("itemGroup.roots_rituals", "Roots Rituals");
 
-    add("roots.reputation.decreased", "Your reputation with the %s grove has decreased by %s [%s]");
-    add("roots.reputation.increased", "Your reputation with the %s grove has increased by %s [%s]");
+    add("roots.reputation.decreased", "Your reputation with the %s grove has decreased by %s");
+    add("roots.reputation.increased", "Your reputation with the %s grove has increased by %s");
 
     add("roots.tooltip.effect", "Use to gain %s for %s seconds.");
     add("roots.tooltip.chance", "Chance: %s%%");
@@ -643,6 +639,10 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.jei.text.durability", "Durability: %s");
     add("roots.jei.text.cooldown", "Cooldown: %ss");
 
+    RootsRegistries.GROVES.entrySet().forEach(o -> {
+          add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
+        }
+    );
   }
 
   // TODO: Translations for damage

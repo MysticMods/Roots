@@ -210,6 +210,9 @@ public class RootsTags {
 
     public static final TagKey<Block> RAMPANT_GROWTH_EXCLUDE_MODE = modTag("spells/rampant_growth/exclude");
 
+    public static final TagKey<Block> SPROUT_REPUTATION_CROPS = modTag("grove/sprout/crops");
+    public static final TagKey<Block> ELEMENTAL_REPUTATION_CROPS = modTag("grove/elemental/crops");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
