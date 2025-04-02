@@ -47,6 +47,7 @@ public class PacketHandler {
     registrar.play(AlertnessFXPacket.TYPE, AlertnessFXPacket.CODEC);
     registrar.play(ClientboundHerbCountSyncPacket.TYPE, ClientboundHerbCountSyncPacket.CODEC);
     registrar.play(RampantGrowthFXPacket.TYPE, RampantGrowthFXPacket.CODEC);
+    registrar.play(ClientboundReputationMessagePacket.TYPE, ClientboundReputationMessagePacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {

@@ -95,6 +95,7 @@ public class ConfigManager {
     SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
         .define("display_reputation_gains", true);
     COMMON_CONFIG = COMMON_BUILDER.build();
+    CLIENT_CONFIG = CLIENT_BUILDER.build();
   }
 
   @SubscribeEvent

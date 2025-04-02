@@ -59,6 +59,9 @@ public class RootsLangProvider extends LanguageProvider {
     add("itemGroup.roots_spells", "Roots Spells");
     add("itemGroup.roots_rituals", "Roots Rituals");
 
+    add("roots.reputation.decreased", "Your reputation with the %s grove has decreased by %s [%s]");
+    add("roots.reputation.increased", "Your reputation with the %s grove has increased by %s [%s]");
+
     add("roots.tooltip.effect", "Use to gain %s for %s seconds.");
     add("roots.tooltip.chance", "Chance: %s%%");
 

@@ -379,6 +379,8 @@
   "roots.message.staff.charging_percent": "Spell charged: %s%%",
   "roots.message.staff.missing_herbs": "Unable to cast %s, missing herbs.",
   "roots.nyi": "[Not Yet Implemented]",
+  "roots.reputation.decreased": "Your reputation with the %s grove has decreased by %s [%s]",
+  "roots.reputation.increased": "Your reputation with the %s grove has increased by %s [%s]",
   "roots.subtitles.aqua_bubble_alt_end": "Aqua bubble ends",
   "roots.subtitles.block.pyre.crackle": "Pyre crackles",
   "roots.subtitles.entity.deer.ambient": "Deer squeals",
