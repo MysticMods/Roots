@@ -8,12 +8,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.trialspawner.TrialSpawner;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,12 +40,14 @@ public interface GroveContext {
   Parameter ENTITY_TARGET = new Parameter(RootsAPI.rl("target"), GroveContext::target);
   Parameter ENTITY_SECONDARY = new Parameter(RootsAPI.rl("secondary"), GroveContext::secondary);
   Parameter ENTITY_TERTIARY = new Parameter(RootsAPI.rl("tertiary"), GroveContext::tertiary);
+  Parameter RECIPE_ID = new Parameter(RootsAPI.rl("recipe_id"), GroveContext::recipeId);
   Parameter RECIPE = new Parameter(RootsAPI.rl("recipe"), GroveContext::recipe);
   Parameter MENU = new Parameter(RootsAPI.rl("menu"), GroveContext::menu);
   Parameter DAMAGE = new Parameter(RootsAPI.rl("damage"), GroveContext::damage);
   Parameter FEATURE = new Parameter(RootsAPI.rl("feature"), GroveContext::feature);
   Parameter TRIAL = new Parameter(RootsAPI.rl("trial"), GroveContext::trial);
   Parameter COSTING = new Parameter(RootsAPI.rl("costing"), GroveContext::costing);
+  Parameter CONTAINER = new Parameter(RootsAPI.rl("container"), GroveContext::container);
 
   @Nonnull
   ServerLevel level();
@@ -120,6 +124,16 @@ public interface GroveContext {
 
   @Nullable
   default Recipe<?> recipe() {
+    return null;
+  }
+
+  @Nullable
+  default ResourceLocation recipeId () {
+    return null;
+  }
+
+  @Nullable
+  default Container container () {
     return null;
   }
 

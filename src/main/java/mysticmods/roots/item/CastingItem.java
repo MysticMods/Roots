@@ -1,15 +1,19 @@
 package mysticmods.roots.item;
 
+import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.network.ClientNetworkHandlers;
+import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -106,6 +110,8 @@ public class CastingItem extends Item {
       }
 
       // TODO: Properly handle operations
+      SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pHand, pStack, spell, costs);
+      ModActions.SPELL_CAST.get().accept(context);
       costs.charge(pPlayer, true);
     } else if (spell.getType() == Spell.Type.CHARGED) {
       pPlayer.displayClientMessage(spell.getSpell().getChargeText(ticks), true);
@@ -174,6 +180,8 @@ public class CastingItem extends Item {
     if (spell.getType() == Spell.Type.INSTANT) {
       int cooldown = spell.cast(pLevel, pPlayer, stack, pUsedHand, costing, -1);
       if (costing.charge(pPlayer)) {
+        SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pUsedHand, stack, spell, costing);
+        ModActions.SPELL_CAST.get().accept(context);
         stack.set(ModAttachments.SPELL_STORAGE, storage.setCooldown(current, cooldown));
       }
     } else {

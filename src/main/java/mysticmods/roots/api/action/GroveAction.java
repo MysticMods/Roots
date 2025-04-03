@@ -15,8 +15,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 // Actions:
-// - Growing crops (from one stage to another, not just random ticks)
-// -> level, player, blockpos, oldblockstate, newblockstate, spell instance
 // - Successfully breeding (producing offspring) two animals
 // -> level, player, parent1, parent2, offspring, spell instance
 // - Aging up a baby animal

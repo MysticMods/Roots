@@ -1,14 +1,19 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.action.CraftItemAction;
+import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -25,9 +30,29 @@ public class CraftingRitual extends Ritual {
       if (output.isEmpty()) {
         return;
       }
+      if (blockEntity.getLastPlayer() != null) {
+        for (ItemStack item : output) {
+          CraftItemAction.Context context = new CraftItemAction.Context(
+              (ServerLevel) blockEntity.getLevel(),
+              (ServerPlayer) blockEntity.getLastPlayer(),
+              item
+          );
+          ModActions.CRAFT_ITEM.get().accept(context);
+        }
+      }
       output = blockEntity.outputAdjacent(output); // Try to output to adjacent inventories
       for (ItemStack stack : output) { // Drop whatever's left over
         ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), blockEntity.getBlockPos().above(), stack);
+      }
+      if (blockEntity.getLastPlayer() != null && blockEntity.getLastRecipe() != null) {
+        CraftRecipeAction.Context context = new CraftRecipeAction.Context(
+            (ServerLevel) blockEntity.getLevel(),
+            (ServerPlayer) blockEntity.getLastPlayer(),
+            blockEntity.getLastRecipe().id(),
+            blockEntity.getLastRecipe().value(),
+            blockEntity
+        );
+        ModActions.CRAFT_RECIPE.get().accept(context);
       }
     }
   }

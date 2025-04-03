@@ -24,8 +24,7 @@ import java.util.Set;
 public class SpellCastAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-
-    return false;
+    return context.costing().shouldCharge();
   }
 
   @Override

@@ -38,7 +38,8 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
     ITEM,
     ENTITY_TYPE,
     RITUAL,
-    SPELL;
+    SPELL,
+    RECIPE;
 
     public static final Codec<SubEntryType> CODEC = StringRepresentable.fromEnum(SubEntryType::values);
 

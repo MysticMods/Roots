@@ -1,5 +1,6 @@
 package mysticmods.roots.blockentity;
 
+import mysticmods.roots.action.StartRitualAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
@@ -11,14 +12,12 @@ import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
 import mysticmods.roots.config.ConfigManager;
-import mysticmods.roots.init.ModBlockEntities;
-import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.init.ResolvedRecipes;
+import mysticmods.roots.init.*;
 import mysticmods.roots.recipe.pyre.PyreCrafting;
 import mysticmods.roots.recipe.pyre.PyreInventory;
 import mysticmods.roots.recipe.pyre.PyrePedestalCrafting;
@@ -241,6 +240,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       this.lifetime = currentRitual.getDuration();
       this.refreshRitualCache();
       this.currentRitual.starts(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+      StartRitualAction.Context context = new StartRitualAction.Context((ServerLevel) getLevel(), (ServerPlayer) player, IRitualInstance.of(currentRitual), this);
+      ModActions.START_RITUAL.get().accept(context);
     } else {
       RootsAPI.LOG.error("tried to start a ritual but the ritual is null");
     }

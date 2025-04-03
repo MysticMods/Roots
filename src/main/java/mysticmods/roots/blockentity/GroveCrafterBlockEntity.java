@@ -1,6 +1,8 @@
 package mysticmods.roots.blockentity;
 
 import com.mojang.datafixers.util.Pair;
+import mysticmods.roots.action.CraftItemAction;
+import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
@@ -8,6 +10,7 @@ import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.block.GroveCrafterBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -91,9 +94,25 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       lastRecipe = cachedRecipe;
       List<ItemStack> results = cachedRecipe.value()
           .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), playerCrafting::popItems);
+      for (ItemStack item : results) {
+        CraftItemAction.Context context = new CraftItemAction.Context(
+            (ServerLevel) level,
+            (ServerPlayer) player,
+            item
+        );
+        ModActions.CRAFT_ITEM.get().accept(context);
+      }
       for (ItemStack stack : this.outputAdjacent(results)) {
         ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
       }
+      CraftRecipeAction.Context context = new CraftRecipeAction.Context(
+          (ServerLevel) level,
+          (ServerPlayer) player,
+          cachedRecipe.id(),
+          cachedRecipe.value(),
+          this
+      );
+      ModActions.CRAFT_RECIPE.get().accept(context);
       cachedRecipe = null;
       setChanged();
       updateViaState();

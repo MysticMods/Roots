@@ -1,5 +1,7 @@
 package mysticmods.roots.blockentity;
 
+import mysticmods.roots.action.CraftItemAction;
+import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.InventoryBlockEntity;
@@ -10,6 +12,7 @@ import mysticmods.roots.api.recipe.RecipeUtil;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.api.recipe.inventory.RecipeInventory;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.mortar.MortarCrafting;
@@ -242,8 +245,24 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
           List<ItemStack> results = cachedRecipe.value()
               .assembleOutputs(playerCrafting, level.getRandom(), level.registryAccess(), inventory::getItemsAndClear);
           for (ItemStack stack : results) {
+            CraftItemAction.Context context = new CraftItemAction.Context(
+                (ServerLevel) this.getLevel(),
+                (ServerPlayer) player,
+                stack
+            );
+            ModActions.CRAFT_ITEM.get().accept(context);
+          }
+          for (ItemStack stack : results) {
             ItemUtil.Spawn.spawnItem(level, player.blockPosition(), stack);
           }
+          CraftRecipeAction.Context context = new CraftRecipeAction.Context(
+              (ServerLevel) level,
+              (ServerPlayer) player,
+              lastRecipe.id(),
+              lastRecipe.value(),
+              this
+          );
+          ModActions.CRAFT_RECIPE.get().accept(context);
           uses = -1;
           cachedRecipe = null;
         }
