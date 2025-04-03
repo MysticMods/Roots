@@ -64,6 +64,10 @@ public class Costing {
     this.operationsCount++;
   }
 
+  public int operations () {
+    return this.operationsCount;
+  }
+
   public void operations(int operations) {
     this.operationsCount = operations;
   }

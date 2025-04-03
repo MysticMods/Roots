@@ -2,12 +2,12 @@ package mysticmods.roots.api.action;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.ritual.IRitualInstance;
+import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -21,7 +21,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.function.Predicate;
 
 public interface GroveContext {
   Parameter LEVEL = new Parameter(RootsAPI.rl("level"), GroveContext::level);
@@ -44,6 +43,7 @@ public interface GroveContext {
   Parameter DAMAGE = new Parameter(RootsAPI.rl("damage"), GroveContext::damage);
   Parameter FEATURE = new Parameter(RootsAPI.rl("feature"), GroveContext::feature);
   Parameter TRIAL = new Parameter(RootsAPI.rl("trial"), GroveContext::trial);
+  Parameter COSTING = new Parameter(RootsAPI.rl("costing"), GroveContext::costing);
 
   @Nonnull
   ServerLevel level();
@@ -143,7 +143,12 @@ public interface GroveContext {
     return null;
   }
 
-  boolean testTag (ResourceLocation tag);
+  @Nullable
+  default Costing costing() {
+    return null;
+  }
+
+  boolean is(ResourceLocation tag);
 
   static boolean hasParameter (GroveContext context, Parameter type) {
     Object result = type.parameter().getParameter(context);

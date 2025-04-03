@@ -2,11 +2,13 @@ package mysticmods.roots.impl;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.datamap.GroveReputationEntry;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
@@ -14,6 +16,7 @@ import mysticmods.roots.network.client.ClientboundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientboundHerbCountSyncPacket;
 import mysticmods.roots.network.client.ClientboundReputationMessagePacket;
 import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -42,12 +45,12 @@ public class RootsAPIImpl extends RootsAPI {
   }
 
   @Override
-  public void grant(ServerPlayer player, GroveReputationEntry entry) {
+  public void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation) {
     AttachmentUtil.monitorAndSync(player, ModAttachments.REPUTATION_STORAGE, (serverPlayer, reputationStorage) -> {
-      int change = reputationStorage.adjust(entry.grove(), entry.reputation());
+      int change = reputationStorage.adjust(grove, reputation);
       // TODO: When a rank changes etc
       if (change != 0 && ConfigManager.DEBUG_REPUTATION.get()) {
-        PacketDistributor.sendToPlayer(serverPlayer, new ClientboundReputationMessagePacket(entry.grove(), change));
+        PacketDistributor.sendToPlayer(serverPlayer, new ClientboundReputationMessagePacket(grove, change));
       }
     }, ClientboundReputationSyncPacket::new);
   }

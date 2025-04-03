@@ -72,7 +72,7 @@ public class CropGrowthAction implements GroveAction {
     }
 
     @Override
-    public boolean testTag(ResourceLocation tag) {
+    public boolean is(ResourceLocation tag) {
       return blockState().is(TagKey.create(Registries.BLOCK, tag));
     }
   }
