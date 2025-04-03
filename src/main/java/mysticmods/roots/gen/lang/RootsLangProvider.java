@@ -144,6 +144,17 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.commands.pyre.no_space", "No space to place pyre.");
     add("roots.commands.pyre.failed_condition", "Failed to place condition: %s");
 
+    add("roots.commands.reputation.current_reputation", "Current reputation for %s grove: %s");
+    add("roots.commands.reputation.add.usage", "Usage: /roots reputation <player> <grove> add <amount>");
+    add("roots.commands.reputation.add", "Reputation for %s with %s grove increased by %s, now: %s");
+    add("roots.commands.reputation.grove_not_found", "Grove not found: %s");
+    add("roots.commands.reputation.no_reputation_storage", "Reputation storage not found.");
+    add("roots.commands.reputation.remove.usage", "Usage: /roots reputation <player> <grove> remove <amount>");
+    add("roots.commands.reputation.remove", "Reputation for %s with %s grove decreased by %s, now: %s");
+    add("roots.commands.reputation.set.usage", "Usage: /roots reputation <player> <grove> set <amount>");
+    add("roots.commands.reputation.set", "Reputation for %s with %s grove set to %s.");
+    add("roots.commands.reputation.usage", "Usage: /roots reputation <player> <grove>  <set <amount> | add <amount> | remove <amount>>");
+
     add("roots.advancements.root.title", "Roots");
     add("roots.advancements.root.description", "An introduction to the magic of the wilds.");
 

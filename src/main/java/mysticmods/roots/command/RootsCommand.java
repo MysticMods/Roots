@@ -323,7 +323,7 @@ public class RootsCommand {
 
       int reputation = storage.getReputation(grove);
       c.getSource()
-          .sendSuccess(() -> Component.translatable("roots.command.reputation.current_reputation", grove.getName(), reputation), false);
+          .sendSuccess(() -> Component.translatable("roots.commands.reputation.current_reputation", grove.getName(), reputation), false);
       return 1;
     }).then(Commands.literal("add").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.add.usage"), false);
@@ -345,7 +345,8 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.increaseReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      return 0;
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.add", player.getDisplayName(), grove.getStyledName(), amount, storage.getReputation(grove)), false);
+      return 1;
     }))).then(Commands.literal("remove").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove.usage"), false);
       return 1;
@@ -366,7 +367,8 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.decreaseReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      return 0;
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove", player.getDisplayName(), grove.getStyledName(), amount, storage.getReputation(grove)), false);
+      return 1;
     }))).then(Commands.literal("set").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set.usage"), false);
       return 1;
@@ -387,7 +389,8 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.setReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      return 0;
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set", player.getDisplayName(), grove.getStyledName(), amount), false);
+      return 1;
     }))))));
     return builder;
   }
