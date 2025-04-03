@@ -6,7 +6,7 @@ import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.datamap.GroveReputationEntry;
+import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
@@ -406,8 +406,8 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     var builder20 = builder(DataMaps.GROVE_ACTION_REPUTATIONS);
     builder20.add(ModActions.CROP_GROWTH, List.of(
-        new GroveReputationEntry(ModGroves.SPROUT.value(), RootsAPI.rl("sprout_crop_growth"), new GroveReputation(100, 10, 1, 0), RootsTags.Blocks.SPROUT_REPUTATION_CROPS),
-        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(100, 10, 1, 0), RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS)
+        new GroveReputationEntry(ModGroves.SPROUT.value(), RootsAPI.rl("sprout_crop_growth"), new GroveReputation(100, 10, 1, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.SPROUT_REPUTATION_CROPS),
+        new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(100, 10, 1, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS)
     ), false);
   }
 }

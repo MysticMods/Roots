@@ -2,7 +2,6 @@ package mysticmods.roots.api.action;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.datamap.GroveReputationEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -86,9 +85,12 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
 
   default void reward (GroveContext context) {
     for (GroveReputationEntry entry : getReputationEntries()) {
-      if (context.is(entry.tag())) {
-        RootsAPI.getInstance().grant(context.player(), entry.grove(), entry.name(), modify(context, entry.reputation()));
+      for (GroveReputationEntry.SubEntry subEntry : entry.entries()) {
+        if (!context.is(subEntry.type(), subEntry.name())) {
+          break;
+        }
       }
+      RootsAPI.getInstance().grant(context.player(), entry.grove(), entry.name(), modify(context, entry.reputation()));
     }
   }
 

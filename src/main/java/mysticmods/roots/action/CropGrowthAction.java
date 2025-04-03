@@ -2,6 +2,8 @@ package mysticmods.roots.action;
 
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
+import mysticmods.roots.api.action.GroveReputationEntry;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.growth.GrowthRecord;
@@ -72,8 +74,13 @@ public class CropGrowthAction implements GroveAction {
     }
 
     @Override
-    public boolean is(ResourceLocation tag) {
-      return blockState().is(TagKey.create(Registries.BLOCK, tag));
+    public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
+      return switch (type) {
+        case BLOCK -> blockState().is(TagKey.create(Registries.BLOCK, tag));
+        case SPELL -> spell() != null && spell().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+        case RITUAL -> ritual() != null && ritual().getRitual().is(TagKey.create(RootsRegistries.Keys.RITUALS, tag));
+        default -> false;
+      };
     }
   }
 }

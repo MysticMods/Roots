@@ -3,6 +3,7 @@ package mysticmods.roots.action;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputation;
+import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.Costing;
@@ -45,8 +46,11 @@ public class SpellCastAction implements GroveAction {
     public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.HAND, GroveContext.ITEM, GroveContext.SPELL, GroveContext.COSTING);
 
     @Override
-    public boolean is(ResourceLocation tag) {
-      return this.spell().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+    public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
+      if (type == GroveReputationEntry.SubEntryType.SPELL) {
+        return this.spell().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
+      }
+      return false;
     }
   }
 }

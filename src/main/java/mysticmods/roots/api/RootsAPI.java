@@ -3,7 +3,6 @@ package mysticmods.roots.api;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.attachment.Unlock;
-import mysticmods.roots.api.datamap.GroveReputationEntry;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import net.minecraft.ChatFormatting;

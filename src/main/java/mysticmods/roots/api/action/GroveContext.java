@@ -148,7 +148,7 @@ public interface GroveContext {
     return null;
   }
 
-  boolean is(ResourceLocation tag);
+  boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag);
 
   static boolean hasParameter (GroveContext context, Parameter type) {
     Object result = type.parameter().getParameter(context);
