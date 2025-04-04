@@ -43,7 +43,7 @@ public class RootsAPIImpl extends RootsAPI {
   }
 
   @Override
-  public void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation) {
+  public void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique) {
     AttachmentUtil.monitorAndSync(player, ModAttachments.REPUTATION_STORAGE, (serverPlayer, reputationStorage) -> {
       int change = reputationStorage.adjust(grove, reputation);
       // TODO: When a rank changes etc

@@ -64,7 +64,7 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
       }
       if (doReward) {
         RootsAPI.getInstance()
-            .grant(context.player(), entry.grove(), entry.name(), modify(context, entry.reputation()));
+            .grant(context.player(), entry.grove(), entry.name(), modify(context, entry.reputation()), entry.unique());
       }
     }
   }

@@ -14,22 +14,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveReputation reputation,
+public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveReputation reputation, boolean unique,
                                    List<SubEntry> entries) {
   public static final MapCodec<GroveReputationEntry> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       RootsRegistries.GROVES.byNameCodec().fieldOf("grove").forGetter(GroveReputationEntry::grove),
       ResourceLocation.CODEC.fieldOf("name").forGetter(GroveReputationEntry::name),
       GroveReputation.CODEC.fieldOf("reputation").forGetter(GroveReputationEntry::reputation),
+      Codec.BOOL.optionalFieldOf("unique", false).forGetter(GroveReputationEntry::unique),
       SubEntry.LIST_CODEC.optionalFieldOf("entries", List.of()).forGetter(GroveReputationEntry::entries)
   ).apply(instance, GroveReputationEntry::new));
   public static final Codec<List<GroveReputationEntry>> LIST_CODEC = CODEC.codec().listOf();
 
   public GroveReputationEntry(Grove grove, ResourceLocation name, GroveReputation reputation, SubEntryType type, TagKey<?> tag) {
-    this(grove, name, reputation, List.of(new SubEntry(type, tag.location())));
+    this(grove, name, reputation, false, List.of(new SubEntry(type, tag.location())));
   }
 
   public GroveReputationEntry (Grove grove, ResourceLocation name, GroveReputation reputation) {
-    this(grove, name, reputation, Collections.emptyList());
+    this(grove, name, reputation, false, Collections.emptyList());
   }
 
   public enum SubEntryType implements StringRepresentable {
