@@ -26,13 +26,13 @@ import java.util.Set;
 public class CropGrowthAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
+    if (context.oldBlockState().isAir() && !context.blockState().isAir()) {
+      return true;
+    }
+
     GrowthRecord record = GrowthUtil.getGrowthRecord(context.blockState());
     if (record == null) {
       return false;
-    }
-
-    if (context.oldBlockState().isAir() && !context.blockState().isAir()) {
-      return true;
     }
 
     IntegerProperty age = record.ageProperty().orElse(null);
