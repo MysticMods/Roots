@@ -7,7 +7,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.mixin.AccessorMixinZombieVillager;
+import mysticmods.roots.mixin.accessor.AccessorMixinZombieVillager;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

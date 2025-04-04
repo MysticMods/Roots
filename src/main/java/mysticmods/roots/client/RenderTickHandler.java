@@ -8,7 +8,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingItem;
-import mysticmods.roots.mixin.AccessorMixinLevelRenderer;
+import mysticmods.roots.mixin.accessor.AccessorMixinLevelRenderer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;

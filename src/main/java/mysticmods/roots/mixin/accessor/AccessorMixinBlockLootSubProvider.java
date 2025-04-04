@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin;
+package mysticmods.roots.mixin.accessor;
 
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;

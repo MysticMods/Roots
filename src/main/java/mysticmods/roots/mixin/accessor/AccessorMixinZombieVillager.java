@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin;
+package mysticmods.roots.mixin.accessor;
 
 import net.minecraft.world.entity.monster.ZombieVillager;
 import org.spongepowered.asm.mixin.Mixin;

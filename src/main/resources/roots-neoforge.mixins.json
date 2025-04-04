@@ -3,25 +3,26 @@
   "package": "mysticmods.roots.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AccessorMixinBlockLootSubProvider",
-    "AccessorMixinCropBlock",
-    "AccessorMixinGrowingPlantBlock",
-    "AccessorMixinLivingEntity",
-    "AccessorMixinLootTable",
-    "AccessorMixinMob",
-    "AccessorMixinOverworldBiomes",
-    "AccessorMixinSaplingBlock",
-    "AccessorMixinZombieVillager",
-    "MixinBoneMealItem",
     "MixinLivingEntity",
     "MixinMobEffectInstance",
-    "MixinRecipeBuilder"
+    "MixinRecipeBuilder",
+    "accessor.AccessorMixinBlockLootSubProvider",
+    "accessor.AccessorMixinCropBlock",
+    "accessor.AccessorMixinGrowingPlantBlock",
+    "accessor.AccessorMixinLivingEntity",
+    "accessor.AccessorMixinLootTable",
+    "accessor.AccessorMixinMob",
+    "accessor.AccessorMixinOverworldBiomes",
+    "accessor.AccessorMixinSaplingBlock",
+    "accessor.AccessorMixinZombieVillager",
+    "action.MixinBoneMealItem",
+    "action.MixinBredAnimalsTrigger"
   ],
   "client": [
-    "AccessorMixinEntityRenderer",
-    "AccessorMixinLevelRenderer",
-    "AccessorMixinParticleEngine",
-    "MixinLocalPlayer"
+    "MixinLocalPlayer",
+    "accessor.AccessorMixinEntityRenderer",
+    "accessor.AccessorMixinLevelRenderer",
+    "accessor.AccessorMixinParticleEngine"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -2,6 +2,7 @@ package mysticmods.roots.mixin;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.init.ModEffects;
+import mysticmods.roots.mixin.accessor.AccessorMixinLivingEntity;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

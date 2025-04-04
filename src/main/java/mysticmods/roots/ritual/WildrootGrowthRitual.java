@@ -8,7 +8,7 @@ import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.mixin.AccessorMixinSaplingBlock;
+import mysticmods.roots.mixin.accessor.AccessorMixinSaplingBlock;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

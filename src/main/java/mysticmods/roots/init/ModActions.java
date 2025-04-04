@@ -16,6 +16,7 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, StartRitualAction> START_RITUAL = ACTIONS.register("start_ritual", StartRitualAction::new);
   public static final DeferredHolder<GroveAction, CraftRecipeAction> CRAFT_RECIPE = ACTIONS.register("craft_recipe", CraftRecipeAction::new);
   public static final DeferredHolder<GroveAction, CraftItemAction> CRAFT_ITEM = ACTIONS.register("craft_item", CraftItemAction::new);
+  public static final DeferredHolder<GroveAction, BredAnimalAction> BRED_ANIMAL = ACTIONS.register("bred_animal", BredAnimalAction::new);
 
   public static void register (IEventBus bus) {
     ACTIONS.register(bus);

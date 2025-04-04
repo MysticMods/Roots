@@ -15,8 +15,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 // Actions:
-// - Successfully breeding (producing offspring) two animals
-// -> level, player, parent1, parent2, offspring, spell instance
 // - Aging up a baby animal
 // -> level, player, baby, spellinstance, itemstack
 // - Breaking blocks with shatter -> pickaxe?

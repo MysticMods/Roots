@@ -1,7 +1,7 @@
 package mysticmods.roots.growth.harvest;
 
 import mysticmods.roots.api.growth.HarvestFunction;
-import mysticmods.roots.mixin.AccessorMixinGrowingPlantBlock;
+import mysticmods.roots.mixin.accessor.AccessorMixinGrowingPlantBlock;
 import mysticmods.roots.util.HarvestUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

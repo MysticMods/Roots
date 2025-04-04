@@ -27,7 +27,7 @@ public class CraftRecipeAction implements GroveAction {
 
   public record Context(ServerLevel level, ServerPlayer player, ResourceLocation recipeId, Recipe<?> recipe,
                         BlockEntity blockEntity) implements GroveContext {
-    public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.RECIPE, GroveContext.BLOCK_ENTITY);
+    public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.RECIPE_ID, GroveContext.RECIPE, GroveContext.BLOCK_ENTITY);
 
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {

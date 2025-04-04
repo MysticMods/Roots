@@ -10,7 +10,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.mixin.AccessorMixinMob;
+import mysticmods.roots.mixin.accessor.AccessorMixinMob;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;

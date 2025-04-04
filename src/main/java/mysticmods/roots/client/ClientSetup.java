@@ -16,7 +16,7 @@ import mysticmods.roots.client.particle.*;
 import mysticmods.roots.client.particle.emitter.FeyLightEmitter;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
-import mysticmods.roots.mixin.AccessorMixinOverworldBiomes;
+import mysticmods.roots.mixin.accessor.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.BiomeColors;

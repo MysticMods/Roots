@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin;
+package mysticmods.roots.mixin.accessor;
 
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;

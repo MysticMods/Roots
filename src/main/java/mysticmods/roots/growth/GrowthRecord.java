@@ -7,7 +7,7 @@ import mysticmods.roots.api.growth.CanGrowFunction;
 import mysticmods.roots.api.growth.LightFunction;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.init.ModTests;
-import mysticmods.roots.mixin.AccessorMixinCropBlock;
+import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.Level;

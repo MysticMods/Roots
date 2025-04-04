@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin;
+package mysticmods.roots.mixin.accessor;
 
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.CropBlock;

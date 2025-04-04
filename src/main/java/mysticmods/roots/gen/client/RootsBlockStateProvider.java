@@ -6,7 +6,7 @@ import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.block.HangingGroveMossBlock;
 import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.init.ModBlocks;
-import mysticmods.roots.mixin.AccessorMixinCropBlock;
+import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;

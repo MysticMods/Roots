@@ -5,16 +5,9 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.ritual.Ritual;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 import java.util.Locale;
@@ -35,8 +28,11 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
 
   public enum SubEntryType implements StringRepresentable {
     BLOCK,
+    OLD_BLOCK,
     ITEM,
-    ENTITY_TYPE,
+    TARGET_ENTITY,
+    SECONDARY_ENTITY,
+    TERTIARY_ENTITY,
     RITUAL,
     SPELL,
     RECIPE;

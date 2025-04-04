@@ -10,7 +10,7 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.mixin.AccessorMixinLootTable;
+import mysticmods.roots.mixin.accessor.AccessorMixinLootTable;
 import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.RitualPositionCache;

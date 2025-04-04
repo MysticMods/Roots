@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin;
+package mysticmods.roots.mixin.accessor;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.GrowingPlantBlock;

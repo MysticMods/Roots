@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin;
+package mysticmods.roots.mixin.accessor;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
