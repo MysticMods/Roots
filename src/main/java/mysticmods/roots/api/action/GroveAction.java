@@ -19,8 +19,6 @@ import java.util.function.Predicate;
 // -> level, player, baby, spellinstance, itemstack
 // - Successfully trading with a villager giving them experience
 // -> level, player, villager, spell instance
-// - Killing a peaceful animal
-// -> level, player, indirect entity, spell instance, hand, damage source
 // - Curing a zombie villager
 
 // - Eating specific food

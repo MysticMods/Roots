@@ -15,6 +15,7 @@
     "accessor.AccessorMixinOverworldBiomes",
     "accessor.AccessorMixinSaplingBlock",
     "accessor.AccessorMixinZombieVillager",
+    "action.MixinAbstractVillager",
     "action.MixinBoneMealItem",
     "action.MixinBredAnimalsTrigger"
   ],

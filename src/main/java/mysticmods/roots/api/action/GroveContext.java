@@ -15,6 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.trialspawner.TrialSpawner;
 import net.minecraft.world.level.block.state.BlockState;
@@ -47,6 +48,7 @@ public interface GroveContext {
   Parameter TRIAL = new Parameter(RootsAPI.rl("trial"), GroveContext::trial);
   Parameter COSTING = new Parameter(RootsAPI.rl("costing"), GroveContext::costing);
   Parameter CONTAINER = new Parameter(RootsAPI.rl("container"), GroveContext::container);
+  Parameter OFFER = new Parameter(RootsAPI.rl("offer"), GroveContext::offer);
 
   @Nonnull
   ServerLevel level();
@@ -158,6 +160,11 @@ public interface GroveContext {
 
   @Nullable
   default Costing costing() {
+    return null;
+  }
+
+  @Nullable
+  default MerchantOffer offer () {
     return null;
   }
 

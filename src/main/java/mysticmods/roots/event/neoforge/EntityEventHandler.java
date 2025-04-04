@@ -35,6 +35,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
@@ -197,6 +198,11 @@ public class EntityEventHandler {
     }
     TameAnimalAction.Context context = new TameAnimalAction.Context(player.serverLevel(), player, event.getAnimal());
     ModActions.TAME_ANIMAL.get().accept(context);
+  }
+
+  @SubscribeEvent
+  public static void onTrade (TradeWithVillagerEvent event) {
+
   }
 
   // "Update" tick event handled in MixinLivingEntity
