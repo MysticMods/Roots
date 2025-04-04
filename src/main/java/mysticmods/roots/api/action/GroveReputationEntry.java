@@ -3,12 +3,14 @@ package mysticmods.roots.api.action;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,6 +26,10 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
 
   public GroveReputationEntry(Grove grove, ResourceLocation name, GroveReputation reputation, SubEntryType type, TagKey<?> tag) {
     this(grove, name, reputation, List.of(new SubEntry(type, tag.location())));
+  }
+
+  public GroveReputationEntry (Grove grove, ResourceLocation name, GroveReputation reputation) {
+    this(grove, name, reputation, Collections.emptyList());
   }
 
   public enum SubEntryType implements StringRepresentable {
@@ -53,5 +59,9 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
         ResourceLocation.CODEC.fieldOf("name").forGetter(SubEntry::name)
     ).apply(instance, SubEntry::new));
     public static Codec<List<SubEntry>> LIST_CODEC = CODEC.listOf();
+
+    public SubEntry () {
+      this(SubEntryType.ALWAYS, RootsAPI.rl("always"));
+    }
   }
 }
