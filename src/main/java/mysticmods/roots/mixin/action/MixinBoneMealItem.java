@@ -1,5 +1,6 @@
 package mysticmods.roots.mixin.action;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import mysticmods.roots.action.CropGrowthAction;
 import mysticmods.roots.init.ModActions;
 import net.minecraft.core.BlockPos;
@@ -19,8 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(BoneMealItem.class)
 public class MixinBoneMealItem {
-  @Inject(method="applyBonemeal",at=@At(value="INVOKE", target="Lnet/minecraft/world/level/block/BonemealableBlock;performBonemeal(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/util/RandomSource;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", shift= At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
-  private static void RootsActionApplyBonemeal(ItemStack stack, Level level, BlockPos pos, Player player, CallbackInfoReturnable<Boolean> cir, BlockState originalState) {
+  @Inject(method = "applyBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BonemealableBlock;performBonemeal(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/util/RandomSource;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", shift = At.Shift.AFTER))
+  private static void RootsActionApplyBonemeal(ItemStack stack, Level level, BlockPos pos, Player player, CallbackInfoReturnable<Boolean> cir, @Local BlockState originalState) {
     if (player == null || level.isClientSide()) {
       return;
     }
