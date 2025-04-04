@@ -62,6 +62,8 @@ public class SaturateSpell extends Spell {
     float newSat = currentSaturation;
     int newFood = currentFood;
 
+    // TODO: Handle ModActions.EAT_ITEM
+
     Object2IntLinkedOpenHashMap<ItemStack> foodsToSlots = new Object2IntLinkedOpenHashMap<>();
     Object2IntLinkedOpenHashMap<ItemStack> usedAmounts = new Object2IntLinkedOpenHashMap<>();
 /*    pPlayer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {

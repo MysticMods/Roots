@@ -18,8 +18,6 @@ import java.util.function.Predicate;
 // - Aging up a baby animal -> Unsure about this
 // -> level, player, baby, spellinstance, itemstack
 
-// - Eating specific food
-// -> level, player, spell instance, itemstack
 // - Brush a block
 // -> level, player, blockstate, block entity, itemstack
 // - Harvest a bee hive

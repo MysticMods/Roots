@@ -18,6 +18,7 @@
     "action.MixinAbstractVillager",
     "action.MixinBoneMealItem",
     "action.MixinBredAnimalsTrigger",
+    "action.MixinConsumeItemTrigger",
     "action.MixinCuredZombieVillagerTrigger",
     "action.MixinPiglinAi"
   ],
