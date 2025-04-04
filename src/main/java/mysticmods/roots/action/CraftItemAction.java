@@ -1,5 +1,6 @@
 package mysticmods.roots.action;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
@@ -17,6 +18,8 @@ import java.util.Set;
 public class CraftItemAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
+    RootsAPI.LOG.error("CraftItemAction fired by '{}' with item '{}'",
+        context.player().getName().getString(), context.item().getDisplayName().getString());
     return true;
   }
 

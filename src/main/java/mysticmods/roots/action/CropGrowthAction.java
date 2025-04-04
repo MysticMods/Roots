@@ -1,5 +1,6 @@
 package mysticmods.roots.action;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
@@ -46,7 +47,12 @@ public class CropGrowthAction implements GroveAction {
     int oldAge = context.oldBlockState().getValue(age);
     int newAge = context.blockState().getValue(age);
 
-    return newAge > oldAge;
+    if (newAge > oldAge) {
+      RootsAPI.LOG.error("CropGrowthAction fired by '{}' with new block state '{}'",
+          context.player().getName().getString(), context.blockState());
+      return true;
+    }
+    return false;
   }
 
   @Override
