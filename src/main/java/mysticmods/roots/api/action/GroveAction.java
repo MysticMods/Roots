@@ -34,8 +34,6 @@ import java.util.function.Predicate;
 // -> level, player, blockpos mushroom original
 // - Successfully casting a geas
 // -> level, player, entity, spell instance
-// - Successfully draining an enemy
-// -> level, player, entity, spell instance, damage source
 
 // Milestones
 // - Visit the end for the first time
