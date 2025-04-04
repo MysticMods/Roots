@@ -1,5 +1,6 @@
 package mysticmods.roots.action;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
@@ -15,6 +16,7 @@ import java.util.Set;
 public class EatItemAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
+    RootsAPI.LOG.error("EeatItemAction triggered by '{}' for item '{}'", context.player().getName().getString(), context.item().getDescriptionId());
     return true;
   }
 

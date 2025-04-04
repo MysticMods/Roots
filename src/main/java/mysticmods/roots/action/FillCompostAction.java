@@ -1,5 +1,6 @@
 package mysticmods.roots.action;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
@@ -19,7 +20,12 @@ import java.util.Set;
 public class FillCompostAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    return context.blockState().getValue(ComposterBlock.LEVEL) == ComposterBlock.MAX_LEVEL;
+    if (context.blockState().getValue(ComposterBlock.LEVEL) == ComposterBlock.MAX_LEVEL) {
+      RootsAPI.LOG.error("FillCompostAction triggered by '{}' at '{}' with full composter", context.player().getName().getString(), context.position());
+      return true;
+    }
+
+    return false;
   }
 
   @Override
