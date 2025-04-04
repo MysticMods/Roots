@@ -15,36 +15,22 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 // Actions:
-// - Aging up a baby animal
+// - Aging up a baby animal -> Unsure about this
 // -> level, player, baby, spellinstance, itemstack
-// - Breaking blocks with shatter -> pickaxe?
-// -> level, player, blockpos, blockstate, spell instance
-// - Flying with sky soarer
-// -> level, player, spell instance
 // - Successfully trading with a villager giving them experience
 // -> level, player, villager, spell instance
 // - Killing a peaceful animal
 // -> level, player, indirect entity, spell instance, hand, damage source
 // - Curing a zombie villager
 
-// - Taming an animal
-// -> level, player, animal, spell instance, itemstack
 // - Eating specific food
 // -> level, player, spell instance, itemstack
-// - Crafting specific items
-// -> level, player, recipe, itemstack, container?
 // - Brush a block
 // -> level, player, blockstate, block entity, itemstack
 // - Trade with a piglin
 // -> level, player, piglin, itemstack, spell instance
 // - Harvest a bee hive
 // -> level, player, blockpos, blockstate, block entity, itemstack
-// - Defeat an undead creature
-// -> level, player, entity, indirect entity, itemstack, spell instance
-// - Defeat a wither
-// -> level, player, entity, indirect entity, itemstack, spell instance
-// - Defeat the ender dragon
-// -> level, player, entity, indirect entity, itemstack, spell instance
 // - Milking a cow
 // -> level, player, entity, itemstack, spell instance
 // - Completing a trial

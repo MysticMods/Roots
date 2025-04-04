@@ -1,14 +1,12 @@
 package mysticmods.roots.event.neoforge;
 
+import mysticmods.roots.action.TameAnimalAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.EntityCooldowns;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.effect.SimpleEffect;
-import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.init.ModEffects;
-import mysticmods.roots.init.ModItems;
-import mysticmods.roots.init.ModSounds;
+import mysticmods.roots.init.*;
 import mysticmods.roots.integration.IntegrationUtil;
 import mysticmods.roots.item.RunicShearsItem;
 import mysticmods.roots.network.client.ClientboundSyncGeasPacket;
@@ -31,12 +29,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -192,6 +188,15 @@ public class EntityEventHandler {
         event.setCanceled(true);
       }
     }
+  }
+
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public static void onEntityTame (AnimalTameEvent event) {
+    if (!(event.getTamer() instanceof ServerPlayer player)) {
+      return;
+    }
+    TameAnimalAction.Context context = new TameAnimalAction.Context(player.serverLevel(), player, event.getAnimal());
+    ModActions.TAME_ANIMAL.get().accept(context);
   }
 
   // "Update" tick event handled in MixinLivingEntity

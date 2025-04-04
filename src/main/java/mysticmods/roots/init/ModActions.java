@@ -17,6 +17,9 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, CraftRecipeAction> CRAFT_RECIPE = ACTIONS.register("craft_recipe", CraftRecipeAction::new);
   public static final DeferredHolder<GroveAction, CraftItemAction> CRAFT_ITEM = ACTIONS.register("craft_item", CraftItemAction::new);
   public static final DeferredHolder<GroveAction, BredAnimalAction> BRED_ANIMAL = ACTIONS.register("bred_animal", BredAnimalAction::new);
+  public static final DeferredHolder<GroveAction, ShatterBlockAction> SHATTER_BLOCK = ACTIONS.register("shatter_block", ShatterBlockAction::new);
+  public static final DeferredHolder<GroveAction, KillEntityAction> KILL_ENTITY = ACTIONS.register("kill_entity", KillEntityAction::new);
+  public static final DeferredHolder<GroveAction, TameAnimalAction> TAME_ANIMAL = ACTIONS.register("tame_animal", TameAnimalAction::new);
 
   public static void register (IEventBus bus) {
     ACTIONS.register(bus);

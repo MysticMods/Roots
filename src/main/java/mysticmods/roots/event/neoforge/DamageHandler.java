@@ -1,7 +1,9 @@
 package mysticmods.roots.event.neoforge;
 
+import mysticmods.roots.action.KillEntityAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAdvancements;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
@@ -10,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -47,15 +50,22 @@ public class DamageHandler {
 
   @SubscribeEvent
   public static void onDeathEvent(LivingDeathEvent event) {
+    DamageSource source = event.getSource();
+    Entity target = event.getEntity();
+    Entity directEntity = source.getDirectEntity();
+    Entity sourceEntity = source.getEntity();
     ServerPlayer player;
-    if (event.getSource().getEntity() instanceof ServerPlayer player1) {
+    if (directEntity instanceof ServerPlayer player1) {
       player = player1;
-    } else if (event.getSource().getDirectEntity() instanceof ServerPlayer player2) {
+    } else if (sourceEntity instanceof ServerPlayer player2) {
       player = player2;
     } else {
       return;
     }
 
-    ModAdvancements.PACIFIST.get().trigger(player, event.getEntity());
+    ModAdvancements.PACIFIST.get().trigger(player, target);
+
+    KillEntityAction.Context context = new KillEntityAction.Context(player.serverLevel(), player, target, directEntity, source);
+    ModActions.KILL_ENTITY.get().accept(context);
   }
 }
