@@ -6,17 +6,18 @@ import mysticmods.roots.init.ModActions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(BoneMealItem.class)
 public class MixinBoneMealItem {
@@ -33,5 +34,8 @@ public class MixinBoneMealItem {
     BlockState state = level.getBlockState(pos);
     CropGrowthAction.Context context = new CropGrowthAction.Context((ServerLevel) level, (ServerPlayer) player, pos, state, originalState, hand, stack);
     ModActions.CROP_GROWTH.get().accept(context);
+    if (originalState.getBlock() instanceof MushroomBlock && !state.is(originalState.getBlock())) {
+      ModActions.GROW_HUGE_MUSHROOM.get().accept(context);
+    }
   }
 }

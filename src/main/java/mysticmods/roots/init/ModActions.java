@@ -26,6 +26,7 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, EatItemAction> EAT_ITEM = ACTIONS.register("eat_item", EatItemAction::new);
   public static final DeferredHolder<GroveAction, HarvestBeeHiveAction> HARVEST_BEE_HIVE = ACTIONS.register("harvest_bee_hive", HarvestBeeHiveAction::new);
   public static final DeferredHolder<GroveAction, FillCompostAction> FILL_COMPOST = ACTIONS.register("fill_compost", FillCompostAction::new);
+  public static final DeferredHolder<GroveAction, GrowHugeMushroomAction> GROW_HUGE_MUSHROOM = ACTIONS.register("grow_huge_mushroom", GrowHugeMushroomAction::new);
 
   public static void register (IEventBus bus) {
     ACTIONS.register(bus);

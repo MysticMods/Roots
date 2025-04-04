@@ -24,10 +24,6 @@ import java.util.function.Predicate;
 // -> level, player, entity, itemstack, spell instance
 // - Completing a trial
 // -> level, player, List<Player> other players, block pos, block state, block entity, TrialSpawner instance
-// - Successfully composting
-// -> level, player, itemstack, blockpos
-// - Growing a big mushroom
-// -> level, player, blockpos mushroom original
 // - Successfully casting a geas
 // -> level, player, entity, spell instance
 
