@@ -18,7 +18,8 @@
     "action.MixinAbstractVillager",
     "action.MixinBoneMealItem",
     "action.MixinBredAnimalsTrigger",
-    "action.MixinCuredZombieVillagerTrigger"
+    "action.MixinCuredZombieVillagerTrigger",
+    "action.MixinPiglinAi"
   ],
   "client": [
     "MixinLocalPlayer",

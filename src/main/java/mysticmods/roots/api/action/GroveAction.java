@@ -22,8 +22,6 @@ import java.util.function.Predicate;
 // -> level, player, spell instance, itemstack
 // - Brush a block
 // -> level, player, blockstate, block entity, itemstack
-// - Trade with a piglin
-// -> level, player, piglin, itemstack, spell instance
 // - Harvest a bee hive
 // -> level, player, blockpos, blockstate, block entity, itemstack
 // - Milking a cow

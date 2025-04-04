@@ -22,6 +22,7 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, TameAnimalAction> TAME_ANIMAL = ACTIONS.register("tame_animal", TameAnimalAction::new);
   public static final DeferredHolder<GroveAction, TradeVillagerAction> TRADE_VILLAGER = ACTIONS.register("trade_villager", TradeVillagerAction::new);
   public static final DeferredHolder<GroveAction, CureVillagerAction> CURE_VILLAGER = ACTIONS.register("cure_villager", CureVillagerAction::new);
+  public static final DeferredHolder<GroveAction, TradePiglinAction> TRADE_PIGLIN = ACTIONS.register("trade_piglin", TradePiglinAction::new);
 
   public static void register (IEventBus bus) {
     ACTIONS.register(bus);
