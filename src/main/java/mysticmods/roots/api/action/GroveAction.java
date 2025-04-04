@@ -28,8 +28,6 @@ import java.util.function.Predicate;
 // -> level, player, List<Player> other players, block pos, block state, block entity, TrialSpawner instance
 // - Successfully composting
 // -> level, player, itemstack, blockpos
-// - Spreading mushrooms
-// -> level, player, blockpos mushroom, blockpos other mushroom
 // - Growing a big mushroom
 // -> level, player, blockpos mushroom original
 // - Successfully casting a geas
