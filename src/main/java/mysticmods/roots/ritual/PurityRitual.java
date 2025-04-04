@@ -32,7 +32,8 @@ public class PurityRitual extends Ritual {
     List<LivingEntity> entities = pLevel.getEntitiesOfClass(LivingEntity.class, pCache.getAABB());
     List<MobEffectInstance> toRemove = new ArrayList<>();
     for (LivingEntity entity : entities) {
-      if (entity.getType().is(RootsTags.Entities.ZOMBIE_VILLAGERS) && !(entity.getType().is(RootsTags.Entities.ZOMBIE_VILLAGERS_EXCLUDE)) && entity instanceof ZombieVillager zombie) {
+      if (entity.getType().is(RootsTags.Entities.ZOMBIE_VILLAGERS) && !(entity.getType()
+          .is(RootsTags.Entities.ZOMBIE_VILLAGERS_EXCLUDE)) && entity instanceof ZombieVillager zombie) {
         if (zombie.isConverting()) {
           entity.extinguishFire();
           if (convertZombies) {
@@ -40,32 +41,33 @@ public class PurityRitual extends Ritual {
             ((AccessorMixinZombieVillager) zombie).rootsSetVillagerConversionTime(conversionTime - conversionAddition);
           }
         }
-      }
-      if (duration % getInterval() == 0) {
-        for (MobEffectInstance effect : entity.getActiveEffects()) {
-          if (effect.isInfiniteDuration()) {
-            continue;
-          }
-
-          if (effect.getEffect().is(RootsTags.MobEffects.PURITY_FORCE_EXCLUDE)) {
-            continue;
-          }
-
-          if (effect.getEffect().is(RootsTags.MobEffects.PURITY_FORCE_INCLUDE) || !effect.getEffect().value()
-              .isBeneficial()) {
-            toRemove.add(effect);
-          }
-        }
-        if (!toRemove.isEmpty()) {
-          for (int i = 0; i < potionCount; i++) {
-            if (toRemove.isEmpty()) {
-              break;
+      } else {
+        if (duration % getInterval() == 0) {
+          for (MobEffectInstance effect : entity.getActiveEffects()) {
+            if (effect.isInfiniteDuration()) {
+              continue;
             }
-            Holder<MobEffect> effectToRemove = toRemove.get(randomSource.nextInt(toRemove.size())).getEffect();
-            entity.removeEffect(effectToRemove);
+
+            if (effect.getEffect().is(RootsTags.MobEffects.PURITY_FORCE_EXCLUDE)) {
+              continue;
+            }
+
+            if (effect.getEffect().is(RootsTags.MobEffects.PURITY_FORCE_INCLUDE) || !effect.getEffect().value()
+                .isBeneficial()) {
+              toRemove.add(effect);
+            }
           }
+          if (!toRemove.isEmpty()) {
+            for (int i = 0; i < potionCount; i++) {
+              if (toRemove.isEmpty()) {
+                break;
+              }
+              Holder<MobEffect> effectToRemove = toRemove.get(randomSource.nextInt(toRemove.size())).getEffect();
+              entity.removeEffect(effectToRemove);
+            }
+          }
+          toRemove.clear();
         }
-        toRemove.clear();
       }
     }
   }
