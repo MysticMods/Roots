@@ -200,10 +200,5 @@ public class EntityEventHandler {
     ModActions.TAME_ANIMAL.get().accept(context);
   }
 
-  @SubscribeEvent
-  public static void onTrade (TradeWithVillagerEvent event) {
-
-  }
-
   // "Update" tick event handled in MixinLivingEntity
 }
