@@ -17,8 +17,6 @@ import java.util.function.Predicate;
 // Actions:
 // - Aging up a baby animal -> Unsure about this
 // -> level, player, baby, spellinstance, itemstack
-// - Successfully trading with a villager giving them experience
-// -> level, player, villager, spell instance
 // - Curing a zombie villager
 
 // - Eating specific food
