@@ -62,12 +62,20 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
 
   default void reward (GroveContext context) {
     for (GroveReputationEntry entry : getReputationEntries()) {
+      boolean doReward = true;
       for (GroveReputationEntry.SubEntry subEntry : entry.entries()) {
+        if (subEntry.type() == GroveReputationEntry.SubEntryType.ALWAYS) {
+          break;
+        }
         if (!context.is(subEntry.type(), subEntry.name())) {
+          doReward = false;
           break;
         }
       }
-      RootsAPI.getInstance().grant(context.player(), entry.grove(), entry.name(), modify(context, entry.reputation()));
+      if (doReward) {
+        RootsAPI.getInstance()
+            .grant(context.player(), entry.grove(), entry.name(), modify(context, entry.reputation()));
+      }
     }
   }
 
