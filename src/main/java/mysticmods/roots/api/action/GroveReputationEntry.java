@@ -20,7 +20,7 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
       RootsRegistries.GROVES.byNameCodec().fieldOf("grove").forGetter(GroveReputationEntry::grove),
       ResourceLocation.CODEC.fieldOf("name").forGetter(GroveReputationEntry::name),
       GroveReputation.CODEC.fieldOf("reputation").forGetter(GroveReputationEntry::reputation),
-      Codec.BOOL.optionalFieldOf("unique", false).forGetter(GroveReputationEntry::unique),
+      Codec.BOOL.fieldOf("unique").forGetter(GroveReputationEntry::unique),
       SubEntry.LIST_CODEC.optionalFieldOf("entries", List.of()).forGetter(GroveReputationEntry::entries)
   ).apply(instance, GroveReputationEntry::new));
   public static final Codec<List<GroveReputationEntry>> LIST_CODEC = CODEC.codec().listOf();

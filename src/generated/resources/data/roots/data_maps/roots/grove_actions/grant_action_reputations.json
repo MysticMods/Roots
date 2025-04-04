@@ -15,7 +15,8 @@
           "gain2": 10,
           "gain3": 1,
           "gain4": 0
-        }
+        },
+        "unique": false
       },
       {
         "entries": [
@@ -31,7 +32,8 @@
           "gain2": 10,
           "gain3": 1,
           "gain4": 0
-        }
+        },
+        "unique": false
       }
     ]
   }
