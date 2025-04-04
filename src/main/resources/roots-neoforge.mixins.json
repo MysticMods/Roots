@@ -16,6 +16,7 @@
     "accessor.AccessorMixinSaplingBlock",
     "accessor.AccessorMixinZombieVillager",
     "action.MixinAbstractVillager",
+    "action.MixinBeehiveBlock",
     "action.MixinBoneMealItem",
     "action.MixinBredAnimalsTrigger",
     "action.MixinConsumeItemTrigger",

@@ -20,8 +20,6 @@ import java.util.function.Predicate;
 
 // - Brush a block
 // -> level, player, blockstate, block entity, itemstack
-// - Harvest a bee hive
-// -> level, player, blockpos, blockstate, block entity, itemstack
 // - Milking a cow
 // -> level, player, entity, itemstack, spell instance
 // - Completing a trial
