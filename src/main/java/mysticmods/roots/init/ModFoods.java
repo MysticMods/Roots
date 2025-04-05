@@ -53,7 +53,7 @@ public class ModFoods {
   // Salads
   public static final FoodProperties AUBERGINE_SALAD = new FoodProperties.Builder().nutrition(5)
       .saturationModifier(0.4F).usingConvertsTo(Items.BOWL).build();
-  public static final FoodProperties BEETROOT_SALAD = new FoodProperties.Builder().nutrition(2).saturationModifier(0.6F)
+  public static final FoodProperties BEETROOT_SALAD = new FoodProperties.Builder().nutrition(4).saturationModifier(0.5F)
       .usingConvertsTo(Items.BOWL).build();
   public static final FoodProperties STEWED_EGGPLANT = new FoodProperties.Builder().nutrition(6)
       .saturationModifier(0.8F).usingConvertsTo(Items.BOWL).build();
