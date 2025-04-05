@@ -17,13 +17,14 @@ import java.util.function.Predicate;
 // Actions:
 // - Aging up a baby animal -> Unsure about this
 // -> level, player, baby, spellinstance, itemstack
+// - Completing a trial <- Unsure about this too
+// -> level, player, List<Player> other players, block pos, block state, block entity, TrialSpawner instance
+
 
 // - Brush a block
 // -> level, player, blockstate, block entity, itemstack
 // - Milking a cow
 // -> level, player, entity, itemstack, spell instance
-// - Completing a trial
-// -> level, player, List<Player> other players, block pos, block state, block entity, TrialSpawner instance
 // - Successfully casting a geas
 // -> level, player, entity, spell instance
 

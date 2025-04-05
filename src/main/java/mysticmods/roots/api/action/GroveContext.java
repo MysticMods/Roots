@@ -42,12 +42,9 @@ public interface GroveContext {
   Parameter TERTIARY_ENTITY = new Parameter(RootsAPI.rl("tertiary"), GroveContext::tertiary);
   Parameter RECIPE_ID = new Parameter(RootsAPI.rl("recipe_id"), GroveContext::recipeId);
   Parameter RECIPE = new Parameter(RootsAPI.rl("recipe"), GroveContext::recipe);
-  Parameter MENU = new Parameter(RootsAPI.rl("menu"), GroveContext::menu);
   Parameter DAMAGE = new Parameter(RootsAPI.rl("damage"), GroveContext::damage);
-  Parameter FEATURE = new Parameter(RootsAPI.rl("feature"), GroveContext::feature);
   Parameter TRIAL = new Parameter(RootsAPI.rl("trial"), GroveContext::trial);
   Parameter COSTING = new Parameter(RootsAPI.rl("costing"), GroveContext::costing);
-  Parameter CONTAINER = new Parameter(RootsAPI.rl("container"), GroveContext::container);
   Parameter OFFER = new Parameter(RootsAPI.rl("offer"), GroveContext::offer);
 
   @Nonnull
@@ -89,7 +86,7 @@ public interface GroveContext {
   }
 
   @Nullable
-  default BlockPos newPosition () {
+  default BlockPos newPosition() {
     return null;
   }
 
@@ -129,17 +126,7 @@ public interface GroveContext {
   }
 
   @Nullable
-  default ResourceLocation recipeId () {
-    return null;
-  }
-
-  @Nullable
-  default Container container () {
-    return null;
-  }
-
-  @Nullable
-  default AbstractContainerMenu menu() {
+  default ResourceLocation recipeId() {
     return null;
   }
 
@@ -164,23 +151,23 @@ public interface GroveContext {
   }
 
   @Nullable
-  default MerchantOffer offer () {
+  default MerchantOffer offer() {
     return null;
   }
 
   boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag);
 
-  static boolean hasParameter (GroveContext context, Parameter type) {
+  static boolean hasParameter(GroveContext context, Parameter type) {
     Object result = type.parameter().getParameter(context);
     return result != null;
   }
 
   @FunctionalInterface
   interface ParameterType {
-    Object getParameter (GroveContext context);
+    Object getParameter(GroveContext context);
   }
 
-  record Parameter (ResourceLocation name, ParameterType parameter) {
+  record Parameter(ResourceLocation name, ParameterType parameter) {
 
   }
 }
