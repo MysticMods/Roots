@@ -223,7 +223,6 @@ public class WildfireEntity extends Projectile {
       }
 
       boolean flag = entity.getType() == EntityType.ENDERMAN;
-      int i = entity.getRemainingFireTicks();
 
       if (entity.hurt(damagesource, snapshot.getDamage())) {
         if (flag) {
@@ -234,11 +233,11 @@ public class WildfireEntity extends Projectile {
           this.doPostHurtEffects(livingentity);
         }
 
+        entity.setRemainingFireTicks(120);
         // Sound
         //this.playSound(this.soundEvent, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         this.discard();
       } else {
-        entity.setRemainingFireTicks(i);
         this.deflect(ProjectileDeflection.REVERSE, entity, this.getOwner(), false);
         this.setDeltaMovement(this.getDeltaMovement().scale(0.2));
         if (!this.level().isClientSide && this.getDeltaMovement().lengthSqr() < 1.0E-7) {
