@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-25T13:20:57.2745651	Registries
+// 1.21.1	2025-04-05T18:44:06.9002799	Registries
 0bc455da35caed8a91dba6976f568f90d9953dfd data/roots/damage_type/acid_cloud.json
 12a245bc55ca0ff991380aad3be5f85219b9b204 data/roots/damage_type/life_drain.json
 4bce0062992bcb825820d0cdfeec90648eb7c7d3 data/roots/damage_type/meteor.json
@@ -48,9 +48,9 @@ ef9144ad33ff5d347abc5c044a79d298434fabe8 data/roots/worldgen/placed_feature/wild
 d364c3ee83222d09d03831e010c94271d0317ffa data/roots/worldgen/structure/large_barrow.json
 e04b12dcf7c2a014184ef3b5bb259b88cae2a074 data/roots/worldgen/structure/ruined_hut.json
 4af955615be18c4b479731382ebc5b6dab395929 data/roots/worldgen/structure/standing_stones.json
-521c5c2e14bbe5d735eb106501a61a37243d9223 data/roots/worldgen/structure_set/barrow.json
-d4818cd803325af5f299d0730d65b441c9ed9ae9 data/roots/worldgen/structure_set/hut.json
-6f143fe565ee067e1ae52c5c853214459fc9de8a data/roots/worldgen/structure_set/standing_stones.json
+c4c584a235d043ddb3355f446ac011669451877c data/roots/worldgen/structure_set/barrow.json
+4b9834211f69473164269f519c8c60f8e470f045 data/roots/worldgen/structure_set/hut.json
+2324b5209c9f65cd9564a6250e3a582d9234e97c data/roots/worldgen/structure_set/standing_stones.json
 055605b83af86949c27eba8af7da3b13f6d50b3e data/roots/worldgen/template_pool/barrow_pool/down_pool.json
 9d6af09c974557fae530f5c34a0da21766088eb0 data/roots/worldgen/template_pool/barrow_pool/start_pool.json
 d437243959a46591630cc18321a5562798c0bd00 data/roots/worldgen/template_pool/hut_pool/down_pool.json

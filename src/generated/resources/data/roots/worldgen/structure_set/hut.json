@@ -3,12 +3,12 @@
     "type": "minecraft:random_spread",
     "salt": 8266497,
     "separation": 35,
-    "spacing": 70
+    "spacing": 50
   },
   "structures": [
     {
       "structure": "roots:hut",
-      "weight": 1
+      "weight": 3
     },
     {
       "structure": "roots:ruined_hut",
