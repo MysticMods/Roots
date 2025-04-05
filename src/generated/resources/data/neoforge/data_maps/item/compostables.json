@@ -18,6 +18,10 @@
       "can_villager_compost": true,
       "chance": 0.9
     },
+    "roots:bafflecap_block": {
+      "can_villager_compost": true,
+      "chance": 0.5
+    },
     "roots:cloud_berry": {
       "can_villager_compost": true,
       "chance": 0.9

@@ -133,6 +133,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder9.add(ModItems.DEWGONIA, new Compostable(0.9f, true), false);
     builder9.add(ModItems.GROVE_MOSS, new Compostable(0.4f, true), false);
     builder9.add(ModItems.BAFFLECAP, new Compostable(0.9f, true), false);
+    builder9.add(ModItems.BAFFLECAP_BLOCK, new Compostable(0.5f, true), false);
     builder9.add(ModItems.SPIRITLEAF, new Compostable(0.9f, true), false);
     builder9.add(ModItems.MOONGLOW, new Compostable(0.9f, true), false);
     builder9.add(ModItems.WILDEWHEET, new Compostable(0.9f, true), false);
