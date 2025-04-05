@@ -27,10 +27,6 @@ import java.util.function.Predicate;
 // - Successfully casting a geas
 // -> level, player, entity, spell instance
 
-// Milestones
-// - Visit the end for the first time
-// - Visit the nether for the first time
-
 public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   @Override
   default void accept(GroveContext context) {

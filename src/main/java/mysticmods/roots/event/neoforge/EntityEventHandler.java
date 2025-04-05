@@ -1,5 +1,6 @@
 package mysticmods.roots.event.neoforge;
 
+import mysticmods.roots.action.ArriveDimensionAction;
 import mysticmods.roots.action.TameAnimalAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
@@ -199,6 +200,14 @@ public class EntityEventHandler {
     }
     TameAnimalAction.Context context = new TameAnimalAction.Context(player.serverLevel(), player, event.getAnimal());
     ModActions.TAME_ANIMAL.get().accept(context);
+  }
+
+  @SubscribeEvent
+  public static void onDimensionChange (PlayerEvent.PlayerChangedDimensionEvent event) {
+    if (event.getEntity() instanceof ServerPlayer player) {
+      ArriveDimensionAction.Context context = new ArriveDimensionAction.Context(player.serverLevel(), player);
+      ModActions.ARRIVE_DIMENSION.get().accept(context);
+    }
   }
 
   // "Update" tick event handled in MixinLivingEntity
