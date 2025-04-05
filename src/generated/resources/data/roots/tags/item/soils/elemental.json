@@ -3,7 +3,6 @@
     "#roots:soils/air",
     "#roots:soils/fire",
     "#roots:soils/water",
-    "#roots:soils/earth",
-    "#roots:soils/base"
+    "#roots:soils/earth"
   ]
 }

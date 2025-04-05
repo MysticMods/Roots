@@ -293,6 +293,7 @@ public class RootsTags {
     public static final TagKey<Item> EARTH_SOIL = modTag("soils/earth");
     public static final TagKey<Item> FIRE_SOIL = modTag("soils/fire");
     public static final TagKey<Item> BASE_ELEMENTAL_SOIL = modTag("soils/base");
+    public static final TagKey<Item> ALL_SOIL = modTag("soils/all");
     public static final TagKey<Item> ELEMENTAL_SOIL = modTag("soils/elemental");
     public static final TagKey<Item> RUNED_OBSIDIAN = modTag("runed_obsidian");
     public static final TagKey<Item> RUNESTONE = modTag("runestone");

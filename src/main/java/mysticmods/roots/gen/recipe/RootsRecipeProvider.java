@@ -60,6 +60,10 @@ public class RootsRecipeProvider extends RecipeProvider {
   @SuppressWarnings("deprecation")
   @Override
   protected void buildRecipes(RecipeOutput c, HolderLookup.Provider p) {
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.ELEMENTAL_SOIL.get(), 1)
+        .requires(RootsTags.Items.ELEMENTAL_SOIL)
+        .unlockedBy("has_elemental_soil", has(RootsTags.Items.ELEMENTAL_SOIL))
+        .save(c, RootsAPI.rl("base_elemental_soil_from_elemental_soil"));
     ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.THATCH.get(), 32)
         .pattern("XY")
         .pattern("YX")

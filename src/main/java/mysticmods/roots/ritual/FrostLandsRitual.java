@@ -99,7 +99,6 @@ public class FrostLandsRitual extends Ritual {
 
     return snowLayer.canSurvive(level, below);
   };
-  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(WATER_OR_LAVA, FROST_LANDS_PREDICATE, IS_FARMLAND, IS_FIRE, TWO_AIR_ABOVE_SOLID);
   private static final BiPredicate<Level, BlockPos> IS_FARMLAND = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     return state.is(Tags.Blocks.VILLAGER_FARMLANDS);
@@ -110,6 +109,8 @@ public class FrostLandsRitual extends Ritual {
   };
   private int healInterval, fluidCount, count;
   private float spawnChance, layerChance, powderedChance, iceChance;
+
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(WATER_OR_LAVA, FROST_LANDS_PREDICATE, IS_FARMLAND, IS_FIRE, TWO_AIR_ABOVE_SOLID);
 
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates() {

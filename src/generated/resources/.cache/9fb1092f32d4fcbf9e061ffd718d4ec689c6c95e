@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-28T14:22:58.0443579	Recipes
+// 1.21.1	2025-04-05T19:32:13.5144945	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -136,6 +136,7 @@ eb22a7a1d96f6a15225236b3caa1f4ad04db5d6a data/roots/advancement/recipes/food/veg
 e9ec2dc03260a1debc144088da75e75c75887438 data/roots/advancement/recipes/food/wildewheet_bread.json
 934d9af1483aee723c314cac0b5ac09436100c00 data/roots/advancement/recipes/food/wildroot_stew.json
 c9b65b91bd4e6799cb672e23bbcaea4f94436628 data/roots/advancement/recipes/misc/aqueous_soil_from_elemental_soil_and_dewgonia.json
+6efed36d672a9f13c809d310413ebabb9e413f54 data/roots/advancement/recipes/misc/base_elemental_soil_from_elemental_soil.json
 e6eb3871fa6104b3b8815835bc20a4431c4daf5a data/roots/advancement/recipes/misc/black_dye_from_ink_bottle.json
 1cefd9a417d81abc4f6f9eb58db11dd1072d5b7f data/roots/advancement/recipes/misc/blue_dye_from_carapace.json
 2137cbdc077dc7e9435a6e762798b24ee44587e6 data/roots/advancement/recipes/misc/bone_meal_from_antlers.json
@@ -350,6 +351,7 @@ b4de1778c055c03d6136d5984a97334e18aa105c data/roots/recipe/antler_helmet.json
 dddbf5bca7eed5851c246b3a30e93b4d39aa5c5a data/roots/recipe/aqueous_soil_from_elemental_soil_and_dewgonia.json
 d83b78f1c6e24d72170a7ce9a8d4192cfdb08879 data/roots/recipe/assorted_seeds_from_seeds.json
 4a0d03e5c089680de647ad11f42c4d78874b76bd data/roots/recipe/aubergine_salad.json
+046c30d89c3e19f5cea039a25dc5b510c5af9feb data/roots/recipe/base_elemental_soil_from_elemental_soil.json
 79d7fb2543139e5aace2aa618f9955584f5f7c21 data/roots/recipe/beetle_boots.json
 b3406f606613b20982f6548e0de36ca0bca98fc5 data/roots/recipe/beetle_chestplate.json
 7b8010ae4378027bdd0d5f89025846c486d1a15b data/roots/recipe/beetle_helmet.json
