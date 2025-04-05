@@ -48,7 +48,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MortarBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
-  private final List<ItemStack> previousRecipeItems = new ArrayList<>();  private final MortarInventory inventory = new MortarInventory() {
+  private final List<ItemStack> previousRecipeItems = new ArrayList<>();
+  private final MortarInventory inventory = new MortarInventory() {
     @Override
     protected void onContentsChanged(int slot) {
       if (MortarBlockEntity.this.hasLevel() && !MortarBlockEntity.this.getLevel().isClientSide()) {
@@ -58,7 +59,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       }
     }
   };
-  private RecipeHolder<MortarRecipe> lastRecipe = null;  private final MortarCrafting playerlessCrafting = new MortarCrafting(inventory, this, null);
+  private RecipeHolder<MortarRecipe> lastRecipe = null;
+  private final MortarCrafting playerlessCrafting = new MortarCrafting(inventory, this, null);
   private RecipeHolder<MortarRecipe> cachedRecipe = null;
   private int uses = -1;
   private BlockCapabilityCache<IItemHandler, Direction> capabilityCache;
@@ -71,6 +73,20 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
 
   public MortarBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
     super(ModBlockEntities.MORTAR.get(), pWorldPosition, pBlockState);
+  }
+
+  private boolean onlyMortar () {
+    if (this.inventory.getStackInSlot(0).is(RootsTags.Items.MORTAR_ACTIVATION)) {
+      for (int i = 1; i < this.inventory.getSlots(); i++) {
+        if (!this.inventory.getStackInSlot(i).isEmpty()) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    return false;
   }
 
   protected void revalidateRecipe() {
@@ -265,10 +281,14 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
         }
 
         updateViaState();
+      } else {
+        return InteractionResult.FAIL;
       }
-    } else {
+    } else if (!onlyMortar()) {
       // insert
       player.setItemInHand(hand, inventory.insert(inHand));
+    } else {
+      return InteractionResult.FAIL;
     }
 
     return InteractionResult.SUCCESS;
@@ -316,8 +336,6 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       updateViaState();
     }
   }
-
-
 
 
 }
