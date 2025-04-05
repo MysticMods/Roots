@@ -22,6 +22,7 @@ import mysticmods.roots.growth.GrowthRecord;
 import mysticmods.roots.growth.HarvestRecord;
 import mysticmods.roots.init.*;
 import mysticmods.roots.item.TokenItem;
+import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -29,6 +30,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
@@ -420,5 +422,24 @@ public class RootsDataMapProvider extends DataMapProvider {
     BuiltInRegistries.BLOCK.forEach(block -> {
       builder22.add(block.builtInRegistryHolder(), 1, false);
     });
+
+    var builder23 = builder(DataMaps.SEED_TO_CROP);
+    BuiltInRegistries.BLOCK.forEach(block -> {
+      if (block instanceof CropBlock crop) {
+        Item seed = ((AccessorMixinCropBlock) crop).rootsCallGetBaseSeedId().asItem();
+        builder23.add(seed.builtInRegistryHolder(), block, false);
+      }
+    });
+
+    builder23.add(ModItems.PERESKIA, ModBlocks.PERESKIA_CROP.get(), false);
+    builder23.add(ModItems.MOONGLOW, ModBlocks.MOONGLOW_CROP.get(), false);
+    builder23.add(ModItems.SPIRITLEAF, ModBlocks.SPIRITLEAF_CROP.get(), false);
+    builder23.add(ModItems.WILDEWHEET, ModBlocks.WILDEWHEET_CROP.get(), false);
+    builder23.add(Items.PITCHER_PLANT.builtInRegistryHolder(), Blocks.PITCHER_CROP, false);
+    builder23.add(Items.MELON.builtInRegistryHolder(), Blocks.MELON_STEM, false);
+    builder23.add(Items.MELON_SLICE.builtInRegistryHolder(), Blocks.MELON_STEM, false);
+    builder23.add(Items.MELON_SEEDS.builtInRegistryHolder(), Blocks.MELON_STEM, false);
+    builder23.add(Items.PUMPKIN.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
+    builder23.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
   }
 }

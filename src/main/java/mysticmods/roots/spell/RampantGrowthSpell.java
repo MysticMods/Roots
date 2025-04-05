@@ -22,8 +22,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -75,12 +77,13 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
     map.put("mode", 0);
     map.put("untagged", 1);
     map.put("tagged", 2);
+    map.put("held", 3);
   }
 
   @Override
   protected void fillDataMaximumValues(Int2IntMap map) {
     super.fillDataMaximumValues(map);
-    map.put(0, 2);
+    map.put(0, 3);
   }
 
 
@@ -88,12 +91,27 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
     if (ticks % interval == 0) {
       boolean checkTag = getDataValue(instance, "mode") == 2;
+      ItemStack offHandItem = pPlayer.getOffhandItem();
+      Block tempBlock = offHandItem.getItemHolder().getData(DataMaps.SEED_TO_CROP);
+      if (tempBlock == null) {
+        if (offHandItem.getItem() instanceof BlockItem blockItem) {
+          tempBlock = blockItem.getBlock();
+        }
+      }
+
+      final Block block = tempBlock;
+
+      boolean offHand = getDataValue(instance, "mode") == 3 && !offHandItem.isEmpty() && tempBlock != null;
+
       BoundingBox search = box.moved((int) pPlayer.getX(), (int) pPlayer.getY(), (int) pPlayer.getZ());
       List<BlockPos> positions = new ArrayList<>();
       BlockPos.betweenClosedStream(search).forEach(pos -> {
         BlockState state = pLevel.getBlockState(pos);
         if (GrowthUtil.growthTicks(pLevel, pos, state, pPlayer) > 0) {
           if (checkTag && state.is(RootsTags.Blocks.RAMPANT_GROWTH_EXCLUDE_MODE)) {
+            return;
+          }
+          if (offHand && !state.is(block)) {
             return;
           }
           positions.add(pos.immutable());

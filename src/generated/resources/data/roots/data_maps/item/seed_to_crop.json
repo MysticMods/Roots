@@ -1,0 +1,29 @@
+{
+  "values": {
+    "minecraft:beetroot_seeds": "minecraft:beetroots",
+    "minecraft:carrot": "minecraft:carrots",
+    "minecraft:melon": "minecraft:melon_stem",
+    "minecraft:melon_seeds": "minecraft:melon_stem",
+    "minecraft:melon_slice": "minecraft:melon_stem",
+    "minecraft:pitcher_plant": "minecraft:pitcher_crop",
+    "minecraft:potato": "minecraft:potatoes",
+    "minecraft:pumpkin": "minecraft:pumpkin_stem",
+    "minecraft:pumpkin_seeds": "minecraft:pumpkin_stem",
+    "minecraft:torchflower_seeds": "minecraft:torchflower_crop",
+    "minecraft:wheat_seeds": "minecraft:wheat",
+    "roots:aubergine_seeds": "roots:aubergine_crop",
+    "roots:cloud_berry": "roots:cloud_berry_crop",
+    "roots:dewgonia": "roots:dewgonia_crop",
+    "roots:inferno_bulb": "roots:inferno_bulb_crop",
+    "roots:moonglow": "roots:moonglow_crop",
+    "roots:moonglow_seeds": "roots:moonglow_crop",
+    "roots:pereskia": "roots:pereskia_crop",
+    "roots:pereskia_bulb": "roots:pereskia_crop",
+    "roots:spiritleaf": "roots:spiritleaf_crop",
+    "roots:spiritleaf_seeds": "roots:spiritleaf_crop",
+    "roots:stalicripe": "roots:stalicripe_crop",
+    "roots:wildewheet": "roots:wildewheet_crop",
+    "roots:wildewheet_seeds": "roots:wildewheet_crop",
+    "roots:wildroot": "roots:wildroot_crop"
+  }
+}

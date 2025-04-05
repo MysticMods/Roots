@@ -101,6 +101,9 @@ public class DataMaps {
   public static final DataMapType<Block, Integer> OPERATION_COST = DataMapType.builder(RootsAPI.rl("shatter_operation_cost"), Registries.BLOCK, Codec.INT)
       .synced(Codec.INT, false)
       .build();
+  public static final DataMapType<Item, Block> SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
+      .synced(BuiltInRegistries.BLOCK.byNameCodec(), false)
+      .build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -124,6 +127,7 @@ public class DataMaps {
     event.register(GROVE_ACTION_REPUTATIONS);
     event.register(GROVE_RANKS);
     event.register(OPERATION_COST);
+    event.register(SEED_TO_CROP);
   }
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {

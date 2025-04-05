@@ -22,14 +22,13 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
 
   public int getRank (int reputation) {
     if (reputation >= threshold4) {
-      return 4;
-    } else if (reputation >= threshold3) {
       return 3;
-    } else if (reputation >= threshold2) {
+    } else if (reputation >= threshold3) {
       return 2;
-    } else if (reputation >= threshold1) {
+    } else if (reputation >= threshold2) {
       return 1;
+    } else {
+      return 0;
     }
-    return 0;
   }
 }
