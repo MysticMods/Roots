@@ -98,9 +98,6 @@ public class ShatterSpell extends Spell {
     BlockPos start = pos;
     BlockPos stop = pos;
 
-/*    if (width == 0 && height == 0 && depth == 0) {
-      stop = stop.relative(heightDir);
-    } else {*/
     if (width > 0) {
       int[] widthOffsets = getAsymmetricOffsets(width);
       start = start.relative(widthDir, -widthOffsets[0]);
@@ -116,7 +113,6 @@ public class ShatterSpell extends Spell {
       start = start.relative(depthDir, -depthOffsets[0]);
       stop = stop.relative(depthDir, depthOffsets[1]);
     }
-    /*    }*/
 
     for (BlockPos blockPos : BlockPos.betweenClosed(start, stop)) {
       BlockState state = level.getBlockState(blockPos);
