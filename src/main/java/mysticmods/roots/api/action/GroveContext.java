@@ -8,11 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -30,7 +28,7 @@ public interface GroveContext {
   Parameter SPELL = new Parameter(RootsAPI.rl("spell"), GroveContext::spell);
   Parameter RITUAL = new Parameter(RootsAPI.rl("ritual"), GroveContext::ritual);
   Parameter ITEM = new Parameter(RootsAPI.rl("item"), GroveContext::item);
-  Parameter NEW_ITEM = new Parameter(RootsAPI.rl("new_item"), GroveContext::newItem);
+  Parameter OLD_ITEM = new Parameter(RootsAPI.rl("old_item"), GroveContext::oldItem);
   Parameter HAND = new Parameter(RootsAPI.rl("hand"), GroveContext::hand);
   Parameter POSITION = new Parameter(RootsAPI.rl("position"), GroveContext::position);
   Parameter NEW_POSITION = new Parameter(RootsAPI.rl("new_position"), GroveContext::newPosition);
@@ -71,7 +69,7 @@ public interface GroveContext {
   }
 
   @Nullable
-  default ItemStack newItem() {
+  default ItemStack oldItem() {
     return null;
   }
 

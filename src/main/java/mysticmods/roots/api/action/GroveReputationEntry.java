@@ -37,6 +37,7 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
     BLOCK,
     OLD_BLOCK,
     ITEM,
+    OLD_ITEM,
     TARGET_ENTITY,
     SECONDARY_ENTITY,
     TERTIARY_ENTITY,
