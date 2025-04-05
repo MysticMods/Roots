@@ -19,8 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class ReputationStorage implements ICleanable {
-  private static final int RANK_THRESHOLD = 5000;
-
   public static final MapCodec<ReputationStorage> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
       Codec.BOOL.fieldOf("untrue_pacifist").forGetter(o -> o.untruePacifist),
       Codec.unboundedMap(RootsRegistries.GROVES.byNameCodec(), Codec.INT).fieldOf("reputations")
@@ -47,6 +45,10 @@ public class ReputationStorage implements ICleanable {
     this.uniqueReputations = new ObjectOpenHashSet<>(uniqueReputations);
   }
 
+  public int getRank (Grove grove) {
+    return grove.getRanks().getRank(reputations.computeIfAbsent(grove, t -> 0));
+  }
+
   public int getReputation(Grove grove) {
     return reputations.computeIfAbsent(grove, t -> 0);
   }
@@ -69,7 +71,7 @@ public class ReputationStorage implements ICleanable {
   public int adjust (Grove grove, GroveReputation reputation) {
     int[] reps = {reputation.gain1(), reputation.gain2(), reputation.gain3(), reputation.gain4()};
     int current = reputations.getOrDefault(grove, 0);
-    int rank = Math.min(Math.max((current / RANK_THRESHOLD) - 1, 0), reps.length);
+    int rank = getRank(grove);
     reputations.put(grove, current + reps[rank]);
     setDirty(true);
     return reps[rank];
