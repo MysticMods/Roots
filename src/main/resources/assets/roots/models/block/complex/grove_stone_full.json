@@ -17,7 +17,7 @@
 				"south": {"uv": [9, 0, 14, 8], "texture": "#monolith"},
 				"west": {"uv": [5, 8, 9, 16], "texture": "#monolith"},
 				"up": {"uv": [11, 12, 16, 16], "texture": "#monolith"},
-				"down": {"uv": [11, 16, 16, 12], "texture": "#monolith"}
+				"down": {"uv": [0, 16, 5, 12], "texture": "#monolith"}
 			}
 		},
 		{
