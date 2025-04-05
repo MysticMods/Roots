@@ -24,12 +24,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import org.jetbrains.annotations.Nullable;
@@ -76,6 +74,12 @@ public class ShatterSpell extends Spell {
     map.put(3, maxDepth);
   }
 
+  private int[] getAsymmetricOffsets(int value) {
+    int right = (value + 1) / 2;
+    int left = value / 2;
+    return new int[]{left, right};
+  }
+
   @Override
   public Map<BlockPos, BlockState> getAffectedBlocks(Level level, Player player, ISpellInstance spell, ItemStack stack, BlockPos pos, BlockState blockState, BlockHitResult rayTraceResult) {
     Map<BlockPos, BlockState> result = new HashMap<>();
@@ -94,21 +98,25 @@ public class ShatterSpell extends Spell {
     BlockPos start = pos;
     BlockPos stop = pos;
 
-    if (width == 0 && height == 0 && depth == 0) {
+/*    if (width == 0 && height == 0 && depth == 0) {
       stop = stop.relative(heightDir);
-    } else {
-      if (width > 0) {
-        start = start.relative(widthDir, -width);
-        stop = stop.relative(widthDir, width);
-      }
-      if (height > 0) {
-        start = start.relative(heightDir, -height);
-        stop = stop.relative(heightDir, height);
-      }
-      if (depth > 0) {
-        stop = stop.relative(depthDir, depth);
-      }
+    } else {*/
+    if (width > 0) {
+      int[] widthOffsets = getAsymmetricOffsets(width);
+      start = start.relative(widthDir, -widthOffsets[0]);
+      stop = stop.relative(widthDir, widthOffsets[1]);
     }
+    if (height > 0) {
+      int[] heightOffsets = getAsymmetricOffsets(height);
+      start = start.relative(heightDir, -heightOffsets[0]);
+      stop = stop.relative(heightDir, heightOffsets[1]);
+    }
+    if (depth > 0) {
+      int[] depthOffsets = getAsymmetricOffsets(depth);
+      start = start.relative(depthDir, -depthOffsets[0]);
+      stop = stop.relative(depthDir, depthOffsets[1]);
+    }
+    /*    }*/
 
     for (BlockPos blockPos : BlockPos.betweenClosed(start, stop)) {
       BlockState state = level.getBlockState(blockPos);
