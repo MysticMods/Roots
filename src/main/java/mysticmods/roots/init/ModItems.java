@@ -248,7 +248,7 @@ public class ModItems {
   // TODO: Contents
   public static DeferredHolder<Item, BlockItem> RITUAL_PEDESTAL = ITEMS.register("ritual_pedestal", () -> new BlockItem(ModBlocks.RITUAL_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
   // TODO: Contens
-  public static DeferredHolder<Item, BlockItem> REINFORCED_RITUAL_PEDESTAL = ITEMS.register("reinforced_ritual_pedestal", () -> new BlockItem(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
+  public static DeferredHolder<Item, BlockItem> REINFORCED_RITUAL_PEDESTAL = ITEMS.register("reinforced_ritual_pedestal", () -> new BlockItem(ModBlocks.REINFORCED_RITUAL_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY).fireResistant()));
   public static DeferredHolder<Item, BlockItem> GROVE_CRAFTER = ITEMS.register("grove_crafter", () -> new BlockItem(ModBlocks.GROVE_CRAFTER.get(), new Item.Properties()));
   // TODO: Contents
   public static DeferredHolder<Item, BlockItem> GROVE_PEDESTAL = ITEMS.register("grove_pedestal", () -> new BlockItem(ModBlocks.GROVE_PEDESTAL.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
@@ -266,9 +266,9 @@ public class ModItems {
   // TODO: Contents
   public static DeferredHolder<Item, BlockItem> SOUL_PYRE = ITEMS.register("soul_pyre", () -> new BlockItem(ModBlocks.SOUL_PYRE.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
   // TODO: Contents
-  public static DeferredHolder<Item, BlockItem> REINFORCED_PYRE = ITEMS.register("reinforced_pyre", () -> new BlockItem(ModBlocks.REINFORCED_PYRE.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
+  public static DeferredHolder<Item, BlockItem> REINFORCED_PYRE = ITEMS.register("reinforced_pyre", () -> new BlockItem(ModBlocks.REINFORCED_PYRE.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY).fireResistant()));
   // TODO: Contents
-  public static DeferredHolder<Item, BlockItem> REINFORCED_SOUL_PYRE = ITEMS.register("reinforced_soul_pyre", () -> new BlockItem(ModBlocks.REINFORCED_SOUL_PYRE.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
+  public static DeferredHolder<Item, BlockItem> REINFORCED_SOUL_PYRE = ITEMS.register("reinforced_soul_pyre", () -> new BlockItem(ModBlocks.REINFORCED_SOUL_PYRE.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY).fireResistant()));
   public static DeferredHolder<Item, BlockItem> DECORATIVE_PYRE = ITEMS.register("decorative_pyre", () -> new BlockItem(ModBlocks.DECORATIVE_PYRE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> DECORATIVE_SOUL_PYRE = ITEMS.register("decorative_soul_pyre", () -> new BlockItem(ModBlocks.DECORATIVE_SOUL_PYRE.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> UNENDING_BOWL = ITEMS.register("unending_bowl", () -> new BlockItem(ModBlocks.UNENDING_BOWL.get(), new Item.Properties()));
