@@ -409,5 +409,10 @@ public class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.SPROUT.value(), RootsAPI.rl("sprout_crop_growth"), new GroveReputation(100, 10, 1, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.SPROUT_REPUTATION_CROPS),
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("elemental_crop_growth"), new GroveReputation(100, 10, 1, 0), GroveReputationEntry.SubEntryType.BLOCK, RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS)
     ), false);
+
+    var builder21 = builder(DataMaps.GROVE_RANKS);
+    RootsRegistries.GROVES.forEach(grove -> {
+      builder21.add(grove.builtInRegistryHolder(), grove.getDefaultRanks(), false);
+    });
   }
 }

@@ -7,6 +7,8 @@ import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
@@ -93,6 +95,9 @@ public class DataMaps {
   public static final DataMapType<GroveAction, List<GroveReputationEntry>> GROVE_ACTION_REPUTATIONS = DataMapType.builder(RootsAPI.rl("grant_action_reputations"), RootsRegistries.Keys.GROVE_ACTIONS, GroveReputationEntry.LIST_CODEC)
       .synced(GroveReputationEntry.LIST_CODEC, false)
       .build();
+  public static final DataMapType<Grove, ReputationRanks> GROVE_RANKS = DataMapType.builder(RootsAPI.rl("grove_ranks"), RootsRegistries.Keys.GROVES, ReputationRanks.CODEC)
+      .synced(ReputationRanks.CODEC, false)
+      .build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -114,6 +119,7 @@ public class DataMaps {
     event.register(HARVEST_RECORDS);
     event.register(STEM_BLOCKS);
     event.register(GROVE_ACTION_REPUTATIONS);
+    event.register(GROVE_RANKS);
   }
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {
