@@ -13,7 +13,6 @@ import mysticmods.roots.growth.harvest.*;
 import mysticmods.roots.growth.harvestable.*;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
-import mysticmods.roots.util.HarvestUtil;
 import net.minecraft.core.Direction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -21,15 +20,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModTests {
   private static final DeferredRegister<EntityTestType<?>> ENTITY_TESTS = DeferredRegister.create(RootsRegistries.Keys.ENTITY_TEST_TYPES, RootsAPI.MODID);
-  private static final DeferredRegister<WorldTestType<?>> WORLD_TESTS = DeferredRegister.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.MODID);
-  private static final DeferredRegister<CanGrowFunction> CAN_GROW_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.CAN_GROW_FUNCTIONS, RootsAPI.MODID);
-  private static final DeferredRegister<LightFunction> LIGHT_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.LIGHT_FUNCTIONS, RootsAPI.MODID);
-  private static final DeferredRegister<CanHarvestFunction> CAN_HARVEST_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.CAN_HARVEST_FUNCTIONS, RootsAPI.MODID);
-  private static final DeferredRegister<HarvestFunction> HARVEST_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.HARVEST_FUNCTIONS, RootsAPI.MODID);
-
   public static final DeferredHolder<EntityTestType<?>, EntityTestType<EntityTagTest>> ENTITY_TAG_TEST = ENTITY_TESTS.register("entity_tag_test", EntityTagTest.Type::new);
   public static final DeferredHolder<EntityTestType<?>, EntityTestType<EntityTypeTest>> ENTITY_TYPE_TEST = ENTITY_TESTS.register("entity_type_test", EntityTypeTest.Type::new);
-
+  private static final DeferredRegister<WorldTestType<?>> WORLD_TESTS = DeferredRegister.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.MODID);
   public static final DeferredHolder<WorldTestType<?>, WorldTestType<AlwaysTrueWorldTest>> ALWAYS_TRUE_TEST = WORLD_TESTS.register(AlwaysTrueWorldTest.ALWAYS_TRUE_TEST_KEY.location()
       .getPath(), AlwaysTrueWorldTest.Type::new);
   public static final DeferredHolder<WorldTestType<?>, WorldTestType<BlockMatchWorldTest>> BLOCK_MATCH_TEST = WORLD_TESTS.register(BlockMatchWorldTest.BLOCK_MATCH_TEST_KEY.location()
@@ -38,7 +31,7 @@ public class ModTests {
       .getPath(), TagMatchWorldTest.Type::new);
   public static final DeferredHolder<WorldTestType<?>, WorldTestType<PartialBlockStateMatchWorldTest>> PARTIAL_BLOCK_STATE_MATCH_TEST = WORLD_TESTS.register(PartialBlockStateMatchWorldTest.PARTIAL_BLOCK_STATE_MATCH_TEST_KEY.location()
       .getPath(), PartialBlockStateMatchWorldTest.Type::new);
-
+  private static final DeferredRegister<CanGrowFunction> CAN_GROW_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.CAN_GROW_FUNCTIONS, RootsAPI.MODID);
   public static final DeferredHolder<CanGrowFunction, AlwaysCanGrowFunction> ALWAYS_CAN_GROW = CAN_GROW_FUNCTIONS.register("always_can_grow", AlwaysCanGrowFunction::new);
   public static final DeferredHolder<CanGrowFunction, AlwaysCanGrowUp> ALWAYS_CAN_GROW_UP = CAN_GROW_FUNCTIONS.register("always_can_grow_up", AlwaysCanGrowUp::new);
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowFunction> AGE_CAN_GROW = CAN_GROW_FUNCTIONS.register("age_can_grow", AgeCanGrowFunction::new);
@@ -47,22 +40,18 @@ public class ModTests {
   public static final DeferredHolder<CanGrowFunction, VinesCanSpreadFunction> VINES_CAN_SPREAD = CAN_GROW_FUNCTIONS.register("vines_can_spread", VinesCanSpreadFunction::new);
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowDirectionFunction> AGE_CAN_GROW_UP = CAN_GROW_FUNCTIONS.register("age_can_grow_up", () -> new AgeCanGrowDirectionFunction(Direction.UP));
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowDirectionFunction> AGE_CAN_GROW_DOWN = CAN_GROW_FUNCTIONS.register("age_can_grow_down", () -> new AgeCanGrowDirectionFunction(Direction.DOWN));
-
+  private static final DeferredRegister<LightFunction> LIGHT_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.LIGHT_FUNCTIONS, RootsAPI.MODID);
   public static final DeferredHolder<LightFunction, LightFunction.AnyLightFunction> ANY_LIGHT = LIGHT_FUNCTIONS.register("any_light", LightFunction.AnyLightFunction::new);
   public static final DeferredHolder<LightFunction, LightFunction.LightGreaterThanFunction> LIGHT_ABOVE_ZERO = LIGHT_FUNCTIONS.register("light_above_zero", () -> new LightFunction.LightGreaterThanFunction(0));
   public static final DeferredHolder<LightFunction, LightFunction.LightGreaterThanFunction> LIGHT_ABOVE_EIGHT = LIGHT_FUNCTIONS.register("light_above_eight", () -> new LightFunction.LightGreaterThanFunction(8));
   public static final DeferredHolder<LightFunction, LightFunction.LightLessThanFunction> LIGHT_BELOW_THIRTEEN = LIGHT_FUNCTIONS.register("light_below_thirteen", () -> new LightFunction.LightLessThanFunction(13));
-
+  private static final DeferredRegister<CanHarvestFunction> CAN_HARVEST_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.CAN_HARVEST_FUNCTIONS, RootsAPI.MODID);
   public static final DeferredHolder<CanHarvestFunction, SingleCropAgeCanHarvest> SINGLE_CROP_AGE = CAN_HARVEST_FUNCTIONS.register("single_crop_age", SingleCropAgeCanHarvest::new);
-
   public static final DeferredHolder<CanHarvestFunction, SingleCropAgeCanSafeHarvest> SAFE_SINGLE_CROP_AGE = CAN_HARVEST_FUNCTIONS.register("safe_single_crop_age", SingleCropAgeCanSafeHarvest::new);
-
   public static final DeferredHolder<CanHarvestFunction, CanHarvestLowestBlock> CAN_HARVEST_LOWEST = CAN_HARVEST_FUNCTIONS.register("can_harvest_lowest_block", CanHarvestLowestBlock::new);
-
   public static final DeferredHolder<CanHarvestFunction, CanHarvestTwoBlockPlantAge> CAN_HARVEST_TWO_BLOCK_PLANT_AGE = CAN_HARVEST_FUNCTIONS.register("can_harvest_two_block_plant_age", CanHarvestTwoBlockPlantAge::new);
-
   public static final DeferredHolder<CanHarvestFunction, CanHarvestStemBlock> CAN_HARVEST_STEM_BLOCK = CAN_HARVEST_FUNCTIONS.register("can_harvest_stem_block", CanHarvestStemBlock::new);
-
+  private static final DeferredRegister<HarvestFunction> HARVEST_FUNCTIONS = DeferredRegister.create(RootsRegistries.Keys.HARVEST_FUNCTIONS, RootsAPI.MODID);
   public static final DeferredHolder<HarvestFunction, HarvestAllAboveSameBlock> HARVEST_ALL_ABOVE_SAME_BLOCK = HARVEST_FUNCTIONS.register("harvest_all_above_same_block", HarvestAllAboveSameBlock::new);
   public static final DeferredHolder<HarvestFunction, HarvestBreakSingleBlock> HARVEST_BREAK_SINGLE_BLOCK = HARVEST_FUNCTIONS.register("harvest_break_single_block", HarvestBreakSingleBlock::new);
   public static final DeferredHolder<HarvestFunction, HarvestCropAndAbove> HARVEST_CROP_AND_ABOVE = HARVEST_FUNCTIONS.register("harvest_crop_and_above", HarvestCropAndAbove::new);

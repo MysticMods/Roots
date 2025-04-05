@@ -1,7 +1,6 @@
 package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -12,14 +11,12 @@ import mysticmods.roots.entity.other.RoseThornsEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.snapshot.RoseThornsEntitySnapshot;
-import mysticmods.roots.snapshot.TimeStopEntitySnapshot;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;

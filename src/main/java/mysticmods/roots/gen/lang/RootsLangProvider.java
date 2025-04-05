@@ -28,6 +28,17 @@ public class RootsLangProvider extends LanguageProvider {
     super(output, RootsAPI.MODID, "en_us");
   }
 
+  public static String toEnglishName(String internalName) {
+    return Arrays.stream(internalName.toLowerCase(Locale.ROOT).split("_"))
+        .map(StringUtils::capitalize)
+        .collect(Collectors.joining(" "));
+  }
+
+  public static String getComplexDescription(String defaultValue) {
+    String[] split = defaultValue.split("/");
+    return String.format("%s: %s", toEnglishName(split[0]), toEnglishName(split[1]));
+  }
+
   public void addBlock(Holder<Block> holder) {
     //noinspection DataFlowIssue
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
@@ -42,6 +53,11 @@ public class RootsLangProvider extends LanguageProvider {
     //noinspection DataFlowIssue
     add(holder.value(), toEnglishName(holder.getKey().location().getPath()));
   }
+
+  // TODO: Translations for damage
+/*  public void addDamage(ResourceKey<DamageType> damage, String death, String item, String player) {
+    add("death.attack.")
+  } */
 
   public void addEffect(Holder<MobEffect> holder) {
     //noinspection DataFlowIssue
@@ -661,21 +677,5 @@ public class RootsLangProvider extends LanguageProvider {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
         }
     );
-  }
-
-  // TODO: Translations for damage
-/*  public void addDamage(ResourceKey<DamageType> damage, String death, String item, String player) {
-    add("death.attack.")
-  } */
-
-  public static String toEnglishName(String internalName) {
-    return Arrays.stream(internalName.toLowerCase(Locale.ROOT).split("_"))
-        .map(StringUtils::capitalize)
-        .collect(Collectors.joining(" "));
-  }
-
-  public static String getComplexDescription(String defaultValue) {
-    String[] split = defaultValue.split("/");
-    return String.format("%s: %s", toEnglishName(split[0]), toEnglishName(split[1]));
   }
 }

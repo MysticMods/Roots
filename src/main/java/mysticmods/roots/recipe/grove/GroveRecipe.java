@@ -59,16 +59,16 @@ public class GroveRecipe extends RootsTileRecipe<PedestalInventoryWrapper, Grove
     protected Builder() {
     }
 
+    public static Builder create() {
+      return new Builder();
+    }
+
     public GroveRecipe build(BaseRecipeData data) {
       return new GroveRecipe(data);
     }
 
     public GroveRecipe build(BaseRecipeData.Builder data) {
       return build(data.build());
-    }
-
-    public static Builder create() {
-      return new Builder();
     }
   }
 }

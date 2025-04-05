@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MortarBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
-  private final MortarInventory inventory = new MortarInventory() {
+  private final List<ItemStack> previousRecipeItems = new ArrayList<>();  private final MortarInventory inventory = new MortarInventory() {
     @Override
     protected void onContentsChanged(int slot) {
       if (MortarBlockEntity.this.hasLevel() && !MortarBlockEntity.this.getLevel().isClientSide()) {
@@ -58,12 +58,12 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       }
     }
   };
-  private final MortarCrafting playerlessCrafting = new MortarCrafting(inventory, this, null);
-  private final List<ItemStack> previousRecipeItems = new ArrayList<>();
-  private RecipeHolder<MortarRecipe> lastRecipe = null;
+  private RecipeHolder<MortarRecipe> lastRecipe = null;  private final MortarCrafting playerlessCrafting = new MortarCrafting(inventory, this, null);
   private RecipeHolder<MortarRecipe> cachedRecipe = null;
   private int uses = -1;
   private BlockCapabilityCache<IItemHandler, Direction> capabilityCache;
+  private ResourceLocation cachedRecipeId = null;
+  private ResourceLocation lastRecipeId = null;
 
   public MortarBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -153,9 +153,6 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     }
     pTag.put("MortarInventory", inventory.serializeNBT(provider));
   }
-
-  private ResourceLocation cachedRecipeId = null;
-  private ResourceLocation lastRecipeId = null;
 
   @Override
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
@@ -319,4 +316,8 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
       updateViaState();
     }
   }
+
+
+
+
 }

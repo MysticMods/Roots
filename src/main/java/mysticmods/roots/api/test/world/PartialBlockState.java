@@ -57,17 +57,6 @@ public record PartialBlockState(Block block,
     }
   }
 
-  private void guessStates (BlockState template) {
-    if (this.propertyMap.isEmpty()) {
-      BlockState defaultState = template.getBlock().defaultBlockState();
-      for (Property<?> property : defaultState.getProperties()) {
-        if (template.getValue(property) != defaultState.getValue(property)) {
-          this.propertyMap.put(property.getName(), property.value(template));
-        }
-      }
-    }
-  }
-
   public PartialBlockState(BlockState template, Property<?>... properties) {
     this(template.getBlock(), new HashMap<>());
     if (properties.length == 0) {
@@ -75,6 +64,85 @@ public record PartialBlockState(Block block,
     } else {
       for (Property<?> property : properties) {
         this.propertyMap.put(property.getName(), property.value(template));
+      }
+    }
+  }
+
+  public static PartialBlockState fromNetwork(RegistryFriendlyByteBuf buffer) {
+    Block incomingBlock = ByteBufCodecs.registry(Registries.BLOCK).decode(buffer);
+    BlockState templateState = incomingBlock.defaultBlockState();
+    Map<String, Property<?>> properties = new HashMap<>();
+    for (Property<?> property : templateState.getProperties()) {
+      properties.put(property.getName(), property);
+    }
+    int pairCount = buffer.readVarInt();
+    List<String> keys = new ArrayList<>();
+    for (int i = 0; i < pairCount; i++) {
+      String key = buffer.readUtf();
+      String value = buffer.readUtf();
+      Property<?> prop = properties.get(key);
+      if (prop == null) {
+        throw new IllegalArgumentException("Property '" + key + "' not found on block " + incomingBlock);
+      }
+      Optional<? extends Comparable<?>> propValue = prop.getValue(value);
+      if (propValue.isPresent()) {
+        templateState = uncheckedSet(prop, propValue.get(), templateState);
+      } else {
+        throw new IllegalArgumentException("Value '" + value + "' not found for property '" + key + "' on block " + incomingBlock);
+      }
+    }
+    return new PartialBlockState(templateState, keys);
+  }
+
+  public static void toNetwork(RegistryFriendlyByteBuf buffer, PartialBlockState state) {
+    ByteBufCodecs.registry(Registries.BLOCK).encode(buffer, state.block);
+    buffer.writeVarInt(state.propertyMap.size());
+    for (Map.Entry<String, Property.Value<?>> entry : state.propertyMap.entrySet()) {
+      buffer.writeUtf(entry.getKey());
+      buffer.writeUtf(uncheckedValue(entry.getValue().property(), entry.getValue().value()));
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T extends Comparable<T>, V extends T> BlockState uncheckedSet(Property<?> property, Comparable<?> value, BlockState state) {
+    return state.setValue((Property<T>) property, (V) value);
+  }
+
+  @SuppressWarnings("unchecked")
+  static <T extends Comparable<T>, V extends T> String uncheckedValue(Property<?> property, Comparable<?> value) {
+    return ((Property<T>) property).getName((V) value);
+  }
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  // I agree, these are terrible, but I do some worse stuff in other places too
+  //properties are a terrible place. Mostly copied from net.minecraft.world.level.block.state.StateDefinition.appendPropertyCodec
+  static Codec<Map<String, Property.Value<?>>> blockPropertiesOf(Block block) {
+    MapCodec<Map<String, Property.Value<?>>> mapcodec = MapCodec.of(Encoder.empty(), Decoder.unit(HashMap::new));
+    BlockState baseState = block.defaultBlockState();
+    for (Property<?> property : baseState.getProperties()) {
+      mapcodec = Codec.mapPair(mapcodec, property.valueCodec().optionalFieldOf(property.getName()))
+          .xmap(
+              thePair -> {
+                Optional<? extends Property.Value<?>> optionalProperty = thePair.getSecond();
+                if (optionalProperty.isPresent()) {
+                  Property.Value<?> value = optionalProperty.get();
+                  thePair.getFirst().put(value.property().getName(), value);
+                }
+                return thePair.getFirst();
+              },
+              theMap -> Pair.of(theMap, (Optional) Optional.ofNullable(theMap.get(property.getName())))
+          );
+    }
+    return mapcodec.codec();
+  }
+
+  private void guessStates(BlockState template) {
+    if (this.propertyMap.isEmpty()) {
+      BlockState defaultState = template.getBlock().defaultBlockState();
+      for (Property<?> property : defaultState.getProperties()) {
+        if (template.getValue(property) != defaultState.getValue(property)) {
+          this.propertyMap.put(property.getName(), property.value(template));
+        }
       }
     }
   }
@@ -145,73 +213,5 @@ public record PartialBlockState(Block block,
     }
 
     return state;
-  }
-
-  public static PartialBlockState fromNetwork(RegistryFriendlyByteBuf buffer) {
-    Block incomingBlock = ByteBufCodecs.registry(Registries.BLOCK).decode(buffer);
-    BlockState templateState = incomingBlock.defaultBlockState();
-    Map<String, Property<?>> properties = new HashMap<>();
-    for (Property<?> property : templateState.getProperties()) {
-      properties.put(property.getName(), property);
-    }
-    int pairCount = buffer.readVarInt();
-    List<String> keys = new ArrayList<>();
-    for (int i = 0; i < pairCount; i++) {
-      String key = buffer.readUtf();
-      String value = buffer.readUtf();
-      Property<?> prop = properties.get(key);
-      if (prop == null) {
-        throw new IllegalArgumentException("Property '" + key + "' not found on block " + incomingBlock);
-      }
-      Optional<? extends Comparable<?>> propValue = prop.getValue(value);
-      if (propValue.isPresent()) {
-        templateState = uncheckedSet(prop, propValue.get(), templateState);
-      } else {
-        throw new IllegalArgumentException("Value '" + value + "' not found for property '" + key + "' on block " + incomingBlock);
-      }
-    }
-    return new PartialBlockState(templateState, keys);
-  }
-
-  public static void toNetwork(RegistryFriendlyByteBuf buffer, PartialBlockState state) {
-    ByteBufCodecs.registry(Registries.BLOCK).encode(buffer, state.block);
-    buffer.writeVarInt(state.propertyMap.size());
-    for (Map.Entry<String, Property.Value<?>> entry : state.propertyMap.entrySet()) {
-      buffer.writeUtf(entry.getKey());
-      buffer.writeUtf(uncheckedValue(entry.getValue().property(), entry.getValue().value()));
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  public static <T extends Comparable<T>, V extends T> BlockState uncheckedSet(Property<?> property, Comparable<?> value, BlockState state) {
-    return state.setValue((Property<T>) property, (V) value);
-  }
-
-  @SuppressWarnings("unchecked")
-  static <T extends Comparable<T>, V extends T> String uncheckedValue(Property<?> property, Comparable<?> value) {
-    return ((Property<T>) property).getName((V) value);
-  }
-
-  @SuppressWarnings({"unchecked", "rawtypes"})
-  // I agree, these are terrible, but I do some worse stuff in other places too
-  //properties are a terrible place. Mostly copied from net.minecraft.world.level.block.state.StateDefinition.appendPropertyCodec
-  static Codec<Map<String, Property.Value<?>>> blockPropertiesOf(Block block) {
-    MapCodec<Map<String, Property.Value<?>>> mapcodec = MapCodec.of(Encoder.empty(), Decoder.unit(HashMap::new));
-    BlockState baseState = block.defaultBlockState();
-    for (Property<?> property : baseState.getProperties()) {
-      mapcodec = Codec.mapPair(mapcodec, property.valueCodec().optionalFieldOf(property.getName()))
-          .xmap(
-              thePair -> {
-                Optional<? extends Property.Value<?>> optionalProperty = thePair.getSecond();
-                if (optionalProperty.isPresent()) {
-                  Property.Value<?> value = optionalProperty.get();
-                  thePair.getFirst().put(value.property().getName(), value);
-                }
-                return thePair.getFirst();
-              },
-              theMap -> Pair.of(theMap, (Optional) Optional.ofNullable(theMap.get(property.getName())))
-          );
-    }
-    return mapcodec.codec();
   }
 }

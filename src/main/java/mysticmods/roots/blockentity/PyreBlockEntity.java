@@ -65,16 +65,8 @@ import java.util.UUID;
 
 public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTickBlockEntity, ServerTickBlockEntity, InventoryBlockEntity, RefillProvider {
   private static BoundingBox PYRE_BOUNDS;
-
-  public static BoundingBox getPyreBoundingBox() {
-    if (PYRE_BOUNDS == null) {
-      PYRE_BOUNDS = new BoundingBox(-ConfigManager.PYRE_BOUNDS_X.get(), -ConfigManager.PYRE_BOUNDS_Y.get(), -ConfigManager.PYRE_BOUNDS_Z.get(), ConfigManager.PYRE_BOUNDS_X.get() + 1, ConfigManager.PYRE_BOUNDS_Y.get() + 1, ConfigManager.PYRE_BOUNDS_Z.get() + 1);
-    }
-
-    return PYRE_BOUNDS;
-  }
-
-  private final PyreInventory inventory = new PyreInventory() {
+  private final List<ItemStack> storedItems = new ArrayList<>();
+  private PyrePedestalCrafting playerlessPedestalCrafting;  private final PyreInventory inventory = new PyreInventory() {
     @Override
     protected void onContentsChanged(int slot) {
       if (PyreBlockEntity.this.hasLevel() && !PyreBlockEntity.this.getLevel().isClientSide()) {
@@ -84,19 +76,16 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       }
     }
   };
-  private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
-  private PyrePedestalCrafting playerlessPedestalCrafting;
-  private final List<ItemStack> storedItems = new ArrayList<>();
-  private RecipeHolder<PyreRecipe> lastRecipe = null;
+  private RecipeHolder<PyreRecipe> lastRecipe = null;  private final PyreCrafting playerlessCrafting = new PyreCrafting(inventory, this, null);
   private RecipeHolder<PyreRecipe> cachedRecipe = null;
   private Ritual currentRitual = null;
   private int lifetime = -1;
   private Player lastPlayer;
   private UUID lastUuid;
-
   private BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> capabilityCache;
   private RitualPositionCache cache;
-
+  private ResourceLocation cachedRecipeId = null;
+  private ResourceLocation lastRecipeId = null;
   public PyreBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
   }
@@ -105,9 +94,12 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     super(ModBlockEntities.PYRE.get(), pWorldPosition, pBlockState);
   }
 
-  private void setCurrentRitual(Ritual ritual) {
-    this.currentRitual = ritual;
-    this.refreshRitualCache();
+  public static BoundingBox getPyreBoundingBox() {
+    if (PYRE_BOUNDS == null) {
+      PYRE_BOUNDS = new BoundingBox(-ConfigManager.PYRE_BOUNDS_X.get(), -ConfigManager.PYRE_BOUNDS_Y.get(), -ConfigManager.PYRE_BOUNDS_Z.get(), ConfigManager.PYRE_BOUNDS_X.get() + 1, ConfigManager.PYRE_BOUNDS_Y.get() + 1, ConfigManager.PYRE_BOUNDS_Z.get() + 1);
+    }
+
+    return PYRE_BOUNDS;
   }
 
   @Override
@@ -363,9 +355,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     }
   }
 
-  private ResourceLocation cachedRecipeId = null;
-  private ResourceLocation lastRecipeId = null;
-
   @Override
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider provider) {
     super.loadAdditional(pTag, provider);
@@ -426,6 +415,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   @Nullable
   public Ritual getCurrentRitual() {
     return currentRitual;
+  }
+
+  private void setCurrentRitual(Ritual ritual) {
+    this.currentRitual = ritual;
+    this.refreshRitualCache();
   }
 
   @Override
@@ -574,4 +568,8 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public void setBlockCapabilityCache(BlockCapabilityCache<IItemHandler, Direction> blockCapabilityCache) {
     this.capabilityCache = blockCapabilityCache;
   }
+
+
+
+
 }

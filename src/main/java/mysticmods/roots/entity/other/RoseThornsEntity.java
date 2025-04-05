@@ -14,7 +14,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -24,24 +23,17 @@ import java.util.List;
 import java.util.UUID;
 
 public class RoseThornsEntity extends Entity implements TraceableEntity {
+  private static final EntityDataAccessor<Integer> LIFETIME = SynchedEntityData.defineId(RoseThornsEntity.class, EntityDataSerializers.INT);
   @javax.annotation.Nullable
   private UUID ownerUUID;
   @javax.annotation.Nullable
   private Entity cachedOwner;
-  private static final EntityDataAccessor<Integer> LIFETIME = SynchedEntityData.defineId(RoseThornsEntity.class, EntityDataSerializers.INT);
   private AABB aabb;
   private SnapshotStorage snapshotStorage = new SnapshotStorage();
 
   public RoseThornsEntity(EntityType<RoseThornsEntity> timeStopEntityEntityType, Level level) {
     super(ModEntities.ROSE_THORNS.get(), level);
     setNoGravity(false);
-  }
-
-  public void setOwner(@javax.annotation.Nullable Entity owner) {
-    if (owner != null) {
-      this.ownerUUID = owner.getUUID();
-      this.cachedOwner = owner;
-    }
   }
 
   @Nullable
@@ -57,6 +49,13 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
     }
   }
 
+  public void setOwner(@javax.annotation.Nullable Entity owner) {
+    if (owner != null) {
+      this.ownerUUID = owner.getUUID();
+      this.cachedOwner = owner;
+    }
+  }
+
   @Override
   protected double getDefaultGravity() {
     return 0.05;
@@ -67,10 +66,6 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
     return snapshotStorage;
   }
 
-  public void setSnapshot(RoseThornsEntitySnapshot snapshot) {
-    this.snapshotStorage.addSnapshot(this, ModSerializers.ROSE_THORNS.get(), snapshot);
-  }
-
   protected RoseThornsEntitySnapshot getSnapshot() {
     SnapshotStorage storage = getSnapshotStorage();
     if (storage == null) {
@@ -78,6 +73,10 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
     }
 
     return storage.getSnapshot(this, ModSerializers.ROSE_THORNS.get());
+  }
+
+  public void setSnapshot(RoseThornsEntitySnapshot snapshot) {
+    this.snapshotStorage.addSnapshot(this, ModSerializers.ROSE_THORNS.get(), snapshot);
   }
 
   @Override
@@ -180,12 +179,12 @@ public class RoseThornsEntity extends Entity implements TraceableEntity {
     }
   }
 
-  public void setLifetime(int duration) {
-    this.entityData.set(LIFETIME, duration);
-  }
-
   public int getLifetime() {
     return this.entityData.get(LIFETIME);
+  }
+
+  public void setLifetime(int duration) {
+    this.entityData.set(LIFETIME, duration);
   }
 
   @Override

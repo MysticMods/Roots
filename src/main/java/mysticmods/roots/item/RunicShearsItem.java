@@ -7,7 +7,6 @@ import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ResolvedRecipes;
 import mysticmods.roots.recipe.SimpleWorldCrafting;
 import mysticmods.roots.recipe.runic.RunicBlockRecipe;

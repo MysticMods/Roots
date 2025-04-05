@@ -10,6 +10,7 @@ import java.util.List;
 
 public class PedestalInventoryWrapper extends CombinedInvWrapper {
   public PedestalInventoryWrapper(List<Pair<BlockPos, PedestalBlockEntity>> pairs) {
-    super(pairs.stream().map(Pair::getSecond).map(PedestalBlockEntity::getInventory).toArray(IItemHandlerModifiable[]::new));
+    super(pairs.stream().map(Pair::getSecond).map(PedestalBlockEntity::getInventory)
+        .toArray(IItemHandlerModifiable[]::new));
   }
 }

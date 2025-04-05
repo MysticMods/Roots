@@ -19,7 +19,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -100,7 +99,7 @@ public class MeteorEntity extends Entity {
           if (!this.level().isClientSide()) {
             if (this.level().getBlockState(hit.above()).isAir()) {
               // TODO: Fey fire
-/*              this.level().setBlock(hit.above(), Blocks.FIRE.defaultBlockState(), 3);*/
+              /*              this.level().setBlock(hit.above(), Blocks.FIRE.defaultBlockState(), 3);*/
             }
           }
           this.discard();
@@ -153,12 +152,12 @@ public class MeteorEntity extends Entity {
     builder.define(MINIMUM_HEIGHT, 512);
   }
 
-  public void setMinimumHeight(int height) {
-    this.entityData.set(MINIMUM_HEIGHT, height);
-  }
-
   public int getMinimumHeight() {
     return this.entityData.get(MINIMUM_HEIGHT);
+  }
+
+  public void setMinimumHeight(int height) {
+    this.entityData.set(MINIMUM_HEIGHT, height);
   }
 
   @Override

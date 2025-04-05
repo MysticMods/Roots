@@ -7,11 +7,9 @@ import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
-import mysticmods.roots.util.EntityUtils;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,7 +25,7 @@ public class WindwallRitual extends Ritual {
   private float strength;
   private double minimumY, heightPercentage;
 
-  private void knockBack (Entity entity, float strength, double x, double z) {
+  private void knockBack(Entity entity, float strength, double x, double z) {
     // TODO: Tag entities as not being knockable
     entity.hasImpulse = true;
     Vec3 delta = entity.getDeltaMovement();

@@ -40,7 +40,7 @@ public class RitualPositionCache {
     return boundingBox;
   }
 
-  public AABB getAABB () {
+  public AABB getAABB() {
     return aabb;
   }
 
@@ -49,7 +49,7 @@ public class RitualPositionCache {
   }
 
   @Nullable
-  public BlockPos random (RandomSource random) {
+  public BlockPos random(RandomSource random) {
     if (positions.isEmpty()) {
       return null;
     }
@@ -57,7 +57,7 @@ public class RitualPositionCache {
   }
 
   @Nullable
-  public BlockPos random (BiPredicate<Level, BlockPos> predicate, RandomSource random) {
+  public BlockPos random(BiPredicate<Level, BlockPos> predicate, RandomSource random) {
     RitualCacheEntry entry = cache.get(predicate);
     if (entry == null || entry.matches.isEmpty()) {
       return null;

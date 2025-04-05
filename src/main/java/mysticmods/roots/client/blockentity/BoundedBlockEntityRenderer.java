@@ -22,12 +22,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEntity> implements BlockEntityRenderer<T> {
-  protected final BlockEntityRendererProvider.Context context;
-
-  private final Model3D model = null;
-  // TODO: dynamic bounds?
-  private AABB bounds = null;
-
   // TODO: Why is this
   private static final int[] colors = new int[EnumUtils.DIRECTIONS.length];
 
@@ -39,6 +33,11 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
     colors[Direction.WEST.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.58F);
     colors[Direction.EAST.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.58F);
   }
+
+  protected final BlockEntityRendererProvider.Context context;
+  private final Model3D model = null;
+  // TODO: dynamic bounds?
+  private AABB bounds = null;
 
   public BoundedBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     this.context = context;

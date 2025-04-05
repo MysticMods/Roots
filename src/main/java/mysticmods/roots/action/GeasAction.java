@@ -26,7 +26,7 @@ public class GeasAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context (ServerLevel level, ServerPlayer player, LivingEntity target) implements GroveContext {
+  public record Context(ServerLevel level, ServerPlayer player, LivingEntity target) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(
         GroveContext.LEVEL,
         GroveContext.PLAYER,

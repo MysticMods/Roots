@@ -1,7 +1,6 @@
 package mysticmods.roots.growth.harvest;
 
 import mysticmods.roots.api.growth.HarvestFunction;
-import mysticmods.roots.block.RunedObsidianBlocks;
 import mysticmods.roots.util.HarvestUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -27,9 +26,9 @@ public record HarvestGlowBerries() implements HarvestFunction {
       List<ItemStack> stacks = Block.getDrops(state, (ServerLevel) level, pos, null);
       level.setBlock(pos, state.setValue(CaveVines.BERRIES, false), 3);
       double d0 = (double) EntityType.ITEM.getHeight() / 2.0;
-      double d1 = (double)pos.getX() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
-      double d2 = (double)pos.getY() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25) - d0;
-      double d3 = (double)pos.getZ() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
+      double d1 = (double) pos.getX() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
+      double d2 = (double) pos.getY() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25) - d0;
+      double d3 = (double) pos.getZ() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
       for (ItemStack stack : stacks) {
         ItemEntity itemEntity = new ItemEntity(level, d1, d2, d3, stack);
         itemEntity.setDefaultPickUpDelay();

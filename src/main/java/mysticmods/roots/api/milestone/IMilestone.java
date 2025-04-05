@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 //   - Is breaking the pact again another milestone? How many loops is it?
 public interface IMilestone {
   Component getTitle();
+
   Component getDescription();
 
 

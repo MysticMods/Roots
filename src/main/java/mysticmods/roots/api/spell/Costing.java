@@ -64,7 +64,7 @@ public class Costing {
     this.operationsCount++;
   }
 
-  public int operations () {
+  public int operations() {
     return this.operationsCount;
   }
 
@@ -225,13 +225,13 @@ public class Costing {
               toConsume = 0;
               herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
               // TODO: All of this should modify in place
-/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
               break;
             } else {
               thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
               toConsume -= capItem.getCount();
               herbEntry.count = capItem.getCount();
-/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
             }
           } else {
             ItemStack capStack = playerInventory.getItem(herbEntry.slot);
@@ -246,13 +246,13 @@ public class Costing {
               toConsume = 0;
               herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
               // TODO: As above, so below
-/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
               break;
             } else {
               thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
               toConsume -= capItem.getCount();
               herbEntry.count = capItem.getCount();
-/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
             }
           }
           if (toConsume <= 0) {
@@ -372,12 +372,16 @@ public class Costing {
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 
+  private enum HerbEntryType {
+    CAPABILITY, INVENTORY, CURIOS_CAPABILITY
+  }
+
   private class HerbEntry {
     private final HerbEntryType type;
     private final Herb herb;
     private final int slot;
-    private int count;
     private final int subindex;
+    private int count;
 
     public HerbEntry(HerbEntryType type, Herb herb, int slot, int count, int subindex) {
       this.type = type;
@@ -386,9 +390,5 @@ public class Costing {
       this.count = count;
       this.subindex = subindex;
     }
-  }
-
-  private enum HerbEntryType {
-    CAPABILITY, INVENTORY, CURIOS_CAPABILITY
   }
 }

@@ -17,8 +17,6 @@ import net.minecraft.world.level.Level;
 import java.util.UUID;
 
 public class FakePlayerUtil {
-  private static boolean initialized = false;
-
   public static final ResourceKey<EnchantmentProvider> LOOTING_I = ResourceKey.create(Registries.ENCHANTMENT_PROVIDER, RootsAPI.rl("looting_i"));
   public static final ResourceKey<EnchantmentProvider> LOOTING_II = ResourceKey.create(Registries.ENCHANTMENT_PROVIDER, RootsAPI.rl("looting_ii"));
   public static final ResourceKey<EnchantmentProvider> LOOTING_III = ResourceKey.create(Registries.ENCHANTMENT_PROVIDER, RootsAPI.rl("looting_iii"));
@@ -26,18 +24,16 @@ public class FakePlayerUtil {
   public static final ResourceKey<EnchantmentProvider> FORTUNE_I = ResourceKey.create(Registries.ENCHANTMENT_PROVIDER, RootsAPI.rl("fortune_i"));
   public static final ResourceKey<EnchantmentProvider> FORTUNE_II = ResourceKey.create(Registries.ENCHANTMENT_PROVIDER, RootsAPI.rl("fortune_ii"));
   public static final ResourceKey<EnchantmentProvider> FORTUNE_III = ResourceKey.create(Registries.ENCHANTMENT_PROVIDER, RootsAPI.rl("fortune_iii"));
-
+  public static final UUID ROOTS_UUID = UUID.fromString("d16d208c-3636-4341-ae0b-bc89e8866e95");
+  public static final GameProfile ROOTS = new GameProfile(ROOTS_UUID, "[roots]");
   public static ItemStack LOOTING_I_ITEM = ItemStack.EMPTY;
   public static ItemStack LOOTING_II_ITEM = ItemStack.EMPTY;
   public static ItemStack LOOTING_III_ITEM = ItemStack.EMPTY;
-
   public static ItemStack FORTUNE_I_ITEM = ItemStack.EMPTY;
   public static ItemStack FORTUNE_II_ITEM = ItemStack.EMPTY;
   public static ItemStack FORTUNE_III_ITEM = ItemStack.EMPTY;
   public static ItemStack SILK_TOUCH_ITEM = ItemStack.EMPTY;
-
-  public static final UUID ROOTS_UUID = UUID.fromString("d16d208c-3636-4341-ae0b-bc89e8866e95");
-  public static final GameProfile ROOTS = new GameProfile(ROOTS_UUID, "[roots]");
+  private static boolean initialized = false;
 
   public static void buildItems(Level pLevel, RandomSource randomSource) {
     if (initialized) {

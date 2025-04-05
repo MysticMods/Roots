@@ -36,6 +36,17 @@ public class ChanceOutput {
     }
   }
 
+  public static List<ItemStack> getOutputs(List<ChanceOutput> chanceOptions, RandomSource random) {
+    List<ItemStack> result = new ArrayList<>();
+    for (ChanceOutput output : chanceOptions) {
+      ItemStack thisResult = output.getResult(random);
+      if (thisResult != null) {
+        result.add(thisResult);
+      }
+    }
+    return result;
+  }
+
   @Nonnull
   public ItemStack getResult(RandomSource random) {
     if (random.nextFloat() < this.chance) {
@@ -61,16 +72,5 @@ public class ChanceOutput {
     ItemStack newStack = output.copy();
     newStack.setCount(newStack.getCount() * value);
     return new ChanceOutput(newStack, chance);
-  }
-
-  public static List<ItemStack> getOutputs(List<ChanceOutput> chanceOptions, RandomSource random) {
-    List<ItemStack> result = new ArrayList<>();
-    for (ChanceOutput output : chanceOptions) {
-      ItemStack thisResult = output.getResult(random);
-      if (thisResult != null) {
-        result.add(thisResult);
-      }
-    }
-    return result;
   }
 }

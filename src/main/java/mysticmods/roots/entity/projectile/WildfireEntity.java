@@ -5,21 +5,17 @@ import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
-import mysticmods.roots.snapshot.RoseThornsEntitySnapshot;
 import mysticmods.roots.snapshot.WildfireEntitySnapshot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -161,20 +157,20 @@ public class WildfireEntity extends Projectile {
     double d6 = vec3.y;
     double d1 = vec3.z;
     for (int i = 0; i < 8; i++) {
-          level().addParticle(
-              new ColorGravityParticleOptions(
-                  ModParticles.WILDFIRE,
-                  0xe87a21,
-                  0xc10000,
-                  -(this.random.nextFloat() * 0.03f)
-              ),
-              getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
-              getY(),
-              getZ() + (this.random.nextFloat() - 0.5f) * 0.15f,
-              d5,
-              d6,
-              d1
-          );
+      level().addParticle(
+          new ColorGravityParticleOptions(
+              ModParticles.WILDFIRE,
+              0xe87a21,
+              0xc10000,
+              -(this.random.nextFloat() * 0.03f)
+          ),
+          getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
+          getY(),
+          getZ() + (this.random.nextFloat() - 0.5f) * 0.15f,
+          d5,
+          d6,
+          d1
+      );
     }
 
     double d7 = this.getX() + d5;
@@ -277,7 +273,8 @@ public class WildfireEntity extends Projectile {
     super.addAdditionalSaveData(compound);
     compound.putInt("life", this.life);
 
-    SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result().ifPresent(tag -> compound.put("snapshots", tag));
+    SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result()
+        .ifPresent(tag -> compound.put("snapshots", tag));
   }
 
   @Override
@@ -285,7 +282,8 @@ public class WildfireEntity extends Projectile {
     super.readAdditionalSaveData(compound);
     this.life = compound.getInt("life");
 
-    this.snapshotStorage = SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result().orElseGet(SnapshotStorage::new);
+    this.snapshotStorage = SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result()
+        .orElseGet(SnapshotStorage::new);
   }
 
   @Override

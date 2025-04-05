@@ -29,9 +29,9 @@ import java.util.function.Predicate;
 
 @EventBusSubscriber
 public class HarvestUtil {
-  private static boolean capturingDrops = false;
   private static final Long2ObjectMap<List<DropStuff>> adjustmentMap = new Long2ObjectOpenHashMap<>();
   private static final List<ItemEntity> capturedDrops = new ArrayList<>();
+  private static boolean capturingDrops = false;
 
   public static HarvestRecord getRecord(Level level, BlockPos pos, @Nullable BlockState state, @Nullable Player player) {
     if (state == null) {
@@ -72,7 +72,7 @@ public class HarvestUtil {
     list.add(entry);
   }
 
-  public static boolean capture (ItemEntity entity) {
+  public static boolean capture(ItemEntity entity) {
     if (capturingDrops) {
       capturedDrops.add(entity);
       return true;

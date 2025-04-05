@@ -112,7 +112,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.EARTH_SOIL, RootsTags.Items.EARTH_SOIL);
     this.copy(RootsTags.Blocks.FIRE_SOIL, RootsTags.Items.FIRE_SOIL);
     this.copy(RootsTags.Blocks.BASE_ELEMENTAL_SOIL, RootsTags.Items.BASE_ELEMENTAL_SOIL);
-    this.copy(RootsTags.Blocks.ELEMENTAL_SOIL, RootsTags.Items.ELEMENTAL_SOIL);
+    this.copy(RootsTags.Blocks.ALL_SOIL, RootsTags.Items.ELEMENTAL_SOIL);
     this.copy(RootsTags.Blocks.RUNED_OBSIDIAN, RootsTags.Items.RUNED_OBSIDIAN);
     this.copy(RootsTags.Blocks.RUNESTONE, RootsTags.Items.RUNESTONE);
     this.copy(RootsTags.Blocks.WILDWOOD_LOGS, RootsTags.Items.WILDWOOD_LOGS);

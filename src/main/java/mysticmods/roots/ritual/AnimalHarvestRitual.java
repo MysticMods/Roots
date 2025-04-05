@@ -46,11 +46,10 @@ import java.util.List;
 import java.util.Set;
 
 public class AnimalHarvestRitual extends Ritual {
-  private int count, glowDuration, lootingValue, itemStackCountLimit, itemStackLimit;
-  private float lootingChance;
-
   private final Set<EntityType<?>> emptyLoot = new ObjectLinkedOpenHashSet<>();
   private final Set<EntityType<?>> normalLoot = new ObjectLinkedOpenHashSet<>();
+  private int count, glowDuration, lootingValue, itemStackCountLimit, itemStackLimit;
+  private float lootingChance;
 
   @Override
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
@@ -59,7 +58,8 @@ public class AnimalHarvestRitual extends Ritual {
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
-              .and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !o.getType().is(RootsTags.Entities.ANIMAL_HARVEST_EXCLUDE) && !emptyLoot.contains(o.getType())));
+              .and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !o.getType()
+                  .is(RootsTags.Entities.ANIMAL_HARVEST_EXCLUDE) && !emptyLoot.contains(o.getType())));
       if (entities.isEmpty()) {
         return;
       }

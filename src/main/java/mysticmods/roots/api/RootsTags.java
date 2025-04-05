@@ -6,10 +6,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -19,11 +16,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-
-import java.util.function.Predicate;
 
 // Tags
 public class RootsTags {
@@ -66,6 +60,7 @@ public class RootsTags {
     public static final TagKey<Block> EARTH_SOIL = modTag("soils/earth");
     public static final TagKey<Block> FIRE_SOIL = modTag("soils/fire");
     public static final TagKey<Block> BASE_ELEMENTAL_SOIL = modTag("soils/base");
+    public static final TagKey<Block> ALL_SOIL = modTag("soils/all");
     public static final TagKey<Block> ELEMENTAL_SOIL = modTag("soils/elemental");
 
     public static final TagKey<Block> RUNED_OBSIDIAN = modTag("runed_obsidian");
@@ -435,7 +430,7 @@ public class RootsTags {
       return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
 
-    protected static TagKey<Item> curiosTag (String name) {
+    protected static TagKey<Item> curiosTag(String name) {
       return ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", name));
     }
   }

@@ -97,6 +97,10 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
     protected Builder() {
     }
 
+    public static Builder create() {
+      return new Builder();
+    }
+
     public Builder cooldown(int cooldown) {
       this.cooldown = cooldown;
       return this;
@@ -118,10 +122,6 @@ public class RunicEntityRecipe extends EntityRecipe<RunicEntityCrafting> {
 
     public RunicEntityRecipe build(BaseRecipeData.Builder data) {
       return build(data.build());
-    }
-
-    public static Builder create() {
-      return new Builder();
     }
   }
 }

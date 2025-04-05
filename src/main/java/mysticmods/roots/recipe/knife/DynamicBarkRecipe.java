@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.recipe.WorldCondition;
-import mysticmods.roots.api.test.world.AlwaysTrueWorldTest;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
 import mysticmods.roots.init.ModItems;
@@ -31,13 +30,22 @@ public class DynamicBarkRecipe extends KnifeRecipe {
   public static DynamicBarkRecipe INSTANCE = new DynamicBarkRecipe();
 
   public static ResourceLocation IDENTIFIER = RootsAPI.rl("knife/dynamic_modded_wood_bark");
+  private ItemStack newResult = null;
+  private WorldCondition barkCondition = null;
 
   public DynamicBarkRecipe() {
     // TODO: Should this be "AlwaysTrueTest"?
     super(new BaseRecipeData(), null, new PartialBlockState(Blocks.AIR), Collections.emptyList(), Collections.emptyList(), 1);
   }
 
-  private ItemStack newResult = null;
+  @Nullable
+  protected static BlockState getStrippedState(SimpleWorldCrafting pContainer, BlockState state) {
+    BlockState outputState = state.getToolModifiedState(pContainer.getContext(), ItemAbilities.AXE_STRIP, false);
+    if (outputState == null) {
+      outputState = AxeItem.getAxeStrippingState(state);
+    }
+    return outputState;
+  }
 
   @Override
   public ItemStack getResultItem(HolderLookup.Provider provider) {
@@ -46,8 +54,6 @@ public class DynamicBarkRecipe extends KnifeRecipe {
     }
     return newResult;
   }
-
-  private WorldCondition barkCondition = null;
 
   @Override
   public List<WorldCondition> getConditions() {
@@ -70,15 +76,6 @@ public class DynamicBarkRecipe extends KnifeRecipe {
   @Override
   public int getPriority() {
     return -1000;
-  }
-
-  @Nullable
-  protected static BlockState getStrippedState(SimpleWorldCrafting pContainer, BlockState state) {
-    BlockState outputState = state.getToolModifiedState(pContainer.getContext(), ItemAbilities.AXE_STRIP, false);
-    if (outputState == null) {
-      outputState = AxeItem.getAxeStrippingState(state);
-    }
-    return outputState;
   }
 
   @Override

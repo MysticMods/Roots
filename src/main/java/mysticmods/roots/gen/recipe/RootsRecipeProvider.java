@@ -45,6 +45,18 @@ public class RootsRecipeProvider extends RecipeProvider {
     super(output, registries);
   }
 
+  @SuppressWarnings("NullableProblems")
+  protected static <T extends AbstractCookingRecipe> void cookRecipes(RecipeOutput recipeOutput, String cookingMethod, RecipeSerializer<T> cookingSerializer, AbstractCookingRecipe.Factory<T> recipeFactory, int cookingTime) {
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.VENISON.get(), ModItems.COOKED_VENISON.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, Items.CARROT, ModItems.COOKED_CARROT.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, Items.BEETROOT, ModItems.COOKED_BEETROOT.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.ASSORTED_SEEDS.get(), ModItems.COOKED_SEEDS.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.AUBERGINE.get(), ModItems.COOKED_AUBERGINE.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.RAW_SQUID.get(), ModItems.COOKED_SQUID.get(), 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.FLOUR.get(), Items.BREAD, 0.35F);
+    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.PERESKIA_BULB.get(), ModItems.COOKED_PERESKIA.get(), 0.35F);
+  }
+
   @SuppressWarnings("deprecation")
   @Override
   protected void buildRecipes(RecipeOutput c, HolderLookup.Provider p) {
@@ -1810,13 +1822,13 @@ public class RootsRecipeProvider extends RecipeProvider {
   public static class RecipeSaver {
     private final Map<String, Criterion<?>> criteria = new HashMap<>();
 
+    public static RecipeSaver saver() {
+      return new RecipeSaver();
+    }
+
     public RecipeSaver unlockedBy(String name, Criterion<?> criterion) {
       this.criteria.put(name, criterion);
       return this;
-    }
-
-    public static RecipeSaver saver() {
-      return new RecipeSaver();
     }
 
     public void save(Recipe<?> recipe, RecipeOutput recipeOutput, ResourceLocation id) {
@@ -1827,17 +1839,5 @@ public class RootsRecipeProvider extends RecipeProvider {
       this.criteria.forEach(advancements::addCriterion);
       recipeOutput.accept(id, recipe, advancements.build(id.withPrefix("recipes/" + RecipeCategory.MISC.getFolderName() + "/")));
     }
-  }
-
-  @SuppressWarnings("NullableProblems")
-  protected static <T extends AbstractCookingRecipe> void cookRecipes(RecipeOutput recipeOutput, String cookingMethod, RecipeSerializer<T> cookingSerializer, AbstractCookingRecipe.Factory<T> recipeFactory, int cookingTime) {
-    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.VENISON.get(), ModItems.COOKED_VENISON.get(), 0.35F);
-    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, Items.CARROT, ModItems.COOKED_CARROT.get(), 0.35F);
-    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, Items.BEETROOT, ModItems.COOKED_BEETROOT.get(), 0.35F);
-    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.ASSORTED_SEEDS.get(), ModItems.COOKED_SEEDS.get(), 0.35F);
-    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.AUBERGINE.get(), ModItems.COOKED_AUBERGINE.get(), 0.35F);
-    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.RAW_SQUID.get(), ModItems.COOKED_SQUID.get(), 0.35F);
-    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.FLOUR.get(), Items.BREAD, 0.35F);
-    simpleCookingRecipe(recipeOutput, cookingMethod, cookingSerializer, recipeFactory, cookingTime, ModItems.PERESKIA_BULB.get(), ModItems.COOKED_PERESKIA.get(), 0.35F);
   }
 }

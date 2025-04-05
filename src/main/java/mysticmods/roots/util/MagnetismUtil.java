@@ -15,11 +15,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class MagnetismUtil {
-  public enum MagnetismContext {
-    SPELL,
-    RITUAL
-  }
-
   public static List<Entity> collect(Level pLevel, BlockPos startPosition, int radiusX, int radiusY, int radiusZ, MagnetismContext context) {
     AABB radius = new AABB(-radiusX, -radiusY, -radiusZ, radiusX, radiusY, radiusZ).move(startPosition);
     return pLevel.getEntities((Entity) null, radius, o -> !skipPull(o, context));
@@ -80,5 +75,10 @@ public class MagnetismUtil {
     }
 
     return true;
+  }
+
+  public enum MagnetismContext {
+    SPELL,
+    RITUAL
   }
 }

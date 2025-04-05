@@ -8,10 +8,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
-import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
-public record KelpCanGrowFunction () implements CanGrowFunction {
+public record KelpCanGrowFunction() implements CanGrowFunction {
   @Override
   public boolean test(Level level, BlockPos blockPos, BlockState blockState, @Nullable IntegerProperty ageProperty, int maxmimumAge) {
     FluidState stateAbove = level.getFluidState(blockPos.above());

@@ -17,16 +17,14 @@ import java.util.function.IntFunction;
 
 public class Cost {
   public static final List<Cost> NO_COSTS = List.of();
-
-  private final CostType type;
-  private final Holder<Herb> herb;
-  private final double value;
-
   public static final Codec<Cost> CODEC = RecordCodecBuilder.create(instance -> instance.group(CostType.CODEC.fieldOf("type")
           .forGetter(Cost::getType), RootsRegistries.HERBS.holderByNameCodec().fieldOf("herb")
           .forGetter(Cost::getHolder), Codec.DOUBLE.fieldOf("defaultValue").forGetter(Cost::getValue))
       .apply(instance, Cost::new));
   public static final StreamCodec<RegistryFriendlyByteBuf, Cost> STREAM_CODEC = StreamCodec.composite(CostType.STREAM_CODEC, Cost::getType, ByteBufCodecs.holderRegistry(RootsRegistries.Keys.HERBS), Cost::getHolder, ByteBufCodecs.DOUBLE, Cost::getValue, Cost::new);
+  private final CostType type;
+  private final Holder<Herb> herb;
+  private final double value;
 
   protected Cost(CostType type, Holder<Herb> herb, double value) {
     this.type = type;
@@ -34,6 +32,13 @@ public class Cost {
     this.value = value;
   }
 
+  public static Cost add(Holder<Herb> herb, double value) {
+    return new Cost(CostType.ADDITIVE, herb, value);
+  }
+
+  public static Cost mult(Holder<Herb> herb, double value) {
+    return new Cost(CostType.MULTIPLICATIVE, herb, value);
+  }
 
   public CostType getType() {
     return type;
@@ -49,14 +54,6 @@ public class Cost {
 
   public double getValue() {
     return value;
-  }
-
-  public static Cost add(Holder<Herb> herb, double value) {
-    return new Cost(CostType.ADDITIVE, herb, value);
-  }
-
-  public static Cost mult(Holder<Herb> herb, double value) {
-    return new Cost(CostType.MULTIPLICATIVE, herb, value);
   }
 
   public enum CostType implements StringRepresentable {

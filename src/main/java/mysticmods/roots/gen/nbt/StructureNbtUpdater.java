@@ -48,6 +48,15 @@ public class StructureNbtUpdater implements DataProvider {
     }
   }
 
+  private static CompoundTag updateNBT(CompoundTag nbt) {
+    final CompoundTag updatedNBT = DataFixTypes.STRUCTURE.updateToCurrentVersion(
+        DataFixers.getDataFixer(), nbt, nbt.getInt("DataVersion")
+    );
+    StructureTemplate template = new StructureTemplate();
+    template.load(BuiltInRegistries.BLOCK.asLookup(), updatedNBT);
+    return template.save(new CompoundTag());
+  }
+
   @Override
   public @NotNull CompletableFuture<?> run(@Nonnull CachedOutput cache) {
     try {
@@ -81,15 +90,6 @@ public class StructureNbtUpdater implements DataProvider {
     byte[] bytes = bytearrayoutputstream.toByteArray();
     Path outputPath = output.getOutputFolder().resolve("data/" + loc.getNamespace() + "/" + loc.getPath());
     cache.writeIfNeeded(outputPath, bytes, Hashing.sha256().hashBytes(bytes));
-  }
-
-  private static CompoundTag updateNBT(CompoundTag nbt) {
-    final CompoundTag updatedNBT = DataFixTypes.STRUCTURE.updateToCurrentVersion(
-        DataFixers.getDataFixer(), nbt, nbt.getInt("DataVersion")
-    );
-    StructureTemplate template = new StructureTemplate();
-    template.load(BuiltInRegistries.BLOCK.asLookup(), updatedNBT);
-    return template.save(new CompoundTag());
   }
 
   @Nonnull

@@ -123,13 +123,13 @@ public class ClientNetworkHandlers {
     }
   }
 
-  public static void setHerbCount (Object2DoubleMap<Herb> map) {
+  public static void setHerbCount(Object2DoubleMap<Herb> map) {
     for (Object2DoubleMap.Entry<Herb> entry : map.object2DoubleEntrySet()) {
       HerbLayer.updateHerb(entry.getKey(), entry.getDoubleValue());
     }
   }
 
-  public static Component getStaffKeyBind () {
+  public static Component getStaffKeyBind() {
     return KeyBindings.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
   }
 }

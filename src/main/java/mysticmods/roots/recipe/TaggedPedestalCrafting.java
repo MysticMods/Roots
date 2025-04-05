@@ -1,9 +1,6 @@
 package mysticmods.roots.recipe;
 
 import com.mojang.datafixers.util.Pair;
-import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.recipe.crafting.IRootsBlockEntityCrafting;
-import mysticmods.roots.api.recipe.crafting.RootsCrafting;
 import mysticmods.roots.api.recipe.crafting.RootsTileCrafting;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
@@ -12,8 +9,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -32,6 +27,7 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
   public TagKey<Block> getIncludeTag() {
     return includeTag;
   }
+
   public TagKey<Block> getExcludeTag() {
     return excludeTag;
   }

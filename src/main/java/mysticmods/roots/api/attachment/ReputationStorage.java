@@ -14,7 +14,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,11 +26,9 @@ public class ReputationStorage implements ICleanable {
   ).apply(instance, ReputationStorage::new));
   public static final Codec<ReputationStorage> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<RegistryFriendlyByteBuf, ReputationStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.BOOL, o -> o.untruePacifist, ByteBufCodecs.map(Object2IntLinkedOpenHashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.GROVES), ByteBufCodecs.INT), o -> o.reputations, UniqueReputation.SET_STREAM_CODEC, o -> o.uniqueReputations, ReputationStorage::new);
-  private boolean untruePacifist = false;
-
   private final Object2IntLinkedOpenHashMap<Grove> reputations;
   private final ObjectOpenHashSet<UniqueReputation> uniqueReputations;
-
+  private boolean untruePacifist = false;
   private boolean dirty = true;
 
   public ReputationStorage() {
@@ -45,7 +42,7 @@ public class ReputationStorage implements ICleanable {
     this.uniqueReputations = new ObjectOpenHashSet<>(uniqueReputations);
   }
 
-  public int getRank (Grove grove) {
+  public int getRank(Grove grove) {
     return grove.getRanks().getRank(reputations.computeIfAbsent(grove, t -> 0));
   }
 
@@ -58,7 +55,7 @@ public class ReputationStorage implements ICleanable {
     setDirty(true);
   }
 
-  public boolean apply (Grove grove, ResourceLocation name, GroveReputation reputation) {
+  public boolean apply(Grove grove, ResourceLocation name, GroveReputation reputation) {
     UniqueReputation rep = new UniqueReputation(grove.builtInRegistryHolder().getKey().location(), name);
     if (uniqueReputations.contains(rep)) {
       return false;
@@ -68,7 +65,7 @@ public class ReputationStorage implements ICleanable {
     return true;
   }
 
-  public int adjust (Grove grove, GroveReputation reputation) {
+  public int adjust(Grove grove, GroveReputation reputation) {
     int[] reps = {reputation.gain1(), reputation.gain2(), reputation.gain3(), reputation.gain4()};
     int current = reputations.getOrDefault(grove, 0);
     int rank = getRank(grove);
@@ -109,11 +106,11 @@ public class ReputationStorage implements ICleanable {
     return false;
   }
 
-  public void setDirty(boolean dirty) {
-    this.dirty = dirty;
-  }
-
   public boolean isDirty() {
     return dirty;
+  }
+
+  public void setDirty(boolean dirty) {
+    this.dirty = dirty;
   }
 }

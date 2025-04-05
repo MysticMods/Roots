@@ -45,6 +45,11 @@ public interface GroveContext {
   Parameter COSTING = new Parameter(RootsAPI.rl("costing"), GroveContext::costing);
   Parameter OFFER = new Parameter(RootsAPI.rl("offer"), GroveContext::offer);
 
+  static boolean hasParameter(GroveContext context, Parameter type) {
+    Object result = type.parameter().getParameter(context);
+    return result != null;
+  }
+
   @Nonnull
   ServerLevel level();
 
@@ -154,11 +159,6 @@ public interface GroveContext {
   }
 
   boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag);
-
-  static boolean hasParameter(GroveContext context, Parameter type) {
-    Object result = type.parameter().getParameter(context);
-    return result != null;
-  }
 
   @FunctionalInterface
   interface ParameterType {

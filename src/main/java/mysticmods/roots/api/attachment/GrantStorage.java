@@ -33,11 +33,9 @@ public class GrantStorage implements ICleanable {
   public static final StreamCodec<RegistryFriendlyByteBuf, GrantStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS)
       .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedSpells), ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS)
       .apply(ByteBufCodecs.list()), o -> List.copyOf(o.grantedModifiers), GrantStorage::new);
-
-  private boolean dirty = true;
   private final Set<Spell> grantedSpells;
   private final Set<SpellModifier> grantedModifiers;
-
+  private boolean dirty = true;
   private List<LibrarySpell> librarySpells = null;
   private Map<Spell, List<LibraryModifier>> libraryModifiers = null;
 
@@ -153,13 +151,13 @@ public class GrantStorage implements ICleanable {
   }
 
   @Override
-  public void setDirty(boolean dirty) {
-    this.dirty = dirty;
+  public boolean isDirty() {
+    return this.dirty;
   }
 
   @Override
-  public boolean isDirty() {
-    return this.dirty;
+  public void setDirty(boolean dirty) {
+    this.dirty = dirty;
   }
 
   @Override
@@ -177,7 +175,7 @@ public class GrantStorage implements ICleanable {
     return result;
   }
 
-  public void difference (GrantStorage otherStorage) {
+  public void difference(GrantStorage otherStorage) {
     Set<Spell> newOther = Sets.difference(otherStorage.grantedSpells, grantedSpells);
     if (!newOther.isEmpty()) {
       RootsAPI.LOG.error("The following spells are contained in `otherStorage` but not this and will be added:");

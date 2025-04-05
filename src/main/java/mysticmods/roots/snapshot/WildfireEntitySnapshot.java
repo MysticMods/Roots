@@ -12,7 +12,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.AABB;
 
 public class WildfireEntitySnapshot extends Snapshot {
   public static final MapCodec<WildfireEntitySnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
@@ -45,7 +44,7 @@ public class WildfireEntitySnapshot extends Snapshot {
     return ModSerializers.WILDFIRE.get();
   }
 
-  public float getDamage () {
+  public float getDamage() {
     return damage;
   }
 

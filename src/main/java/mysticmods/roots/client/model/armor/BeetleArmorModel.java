@@ -9,10 +9,10 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.EquipmentSlot;
 
 public class BeetleArmorModel extends ArmorModel {
-  private final ModelPart headAnchor;
-  private final ModelPart bodyAnchor;
   public final ModelPart armR;
   public final ModelPart armL;
+  private final ModelPart headAnchor;
+  private final ModelPart bodyAnchor;
   private final ModelPart legR;
   private final ModelPart bootR;
   private final ModelPart legL;
@@ -40,10 +40,6 @@ public class BeetleArmorModel extends ArmorModel {
     bootL.visible = slot == EquipmentSlot.FEET;
     bootR.visible = slot == EquipmentSlot.FEET;
     hat.visible = false;
-  }
-
-  @Override
-  protected void setPartVisibility(EquipmentSlot slot) {
   }
 
   public static LayerDefinition createBodyLayer() {
@@ -187,5 +183,9 @@ public class BeetleArmorModel extends ArmorModel {
         .addBox(-1.125F, -0.5F, -1.0F, 3.0F, 1.0F, 2.0F), PartPose.ZERO);
 
     return LayerDefinition.create(meshdefinition, 64, 64);
+  }
+
+  @Override
+  protected void setPartVisibility(EquipmentSlot slot) {
   }
 }

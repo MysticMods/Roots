@@ -17,7 +17,8 @@ import java.util.Set;
 public class KillEntityAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    RootsAPI.LOG.error("KillEntityAction triggered by '{}' with entity '{}'", context.player().getName().getString(), context.target().getType());
+    RootsAPI.LOG.error("KillEntityAction triggered by '{}' with entity '{}'", context.player().getName()
+        .getString(), context.target().getType());
     return true;
   }
 

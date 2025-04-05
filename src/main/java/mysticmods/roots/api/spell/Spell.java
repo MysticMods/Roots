@@ -9,7 +9,6 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -48,20 +47,17 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
   protected final Type type;
   protected final CostInstance defaultCosts;
   protected final Set<SpellModifier> modifiers = new HashSet<>();
+  protected final int color1, color2;
+  private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
+  private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
   protected CostInstance costs;
   protected int cooldown = 0;
   protected double reach = 0.0;
-  protected final int color1, color2;
   protected int maxUse;
-
   protected Style style;
   protected ChatFormatting textColor;
   protected String descriptionId;
-
   protected ItemStack icon;
-
-  private final Object2IntMap<String> keyToDataIndex = new Object2IntOpenHashMap<>();
-  private final Int2IntMap dataIndexMaximums = new Int2IntOpenHashMap();
 
   public Spell(Type type, ChatFormatting color, CostInstance defaultCosts, int color1, int color2) {
     this.type = type;
@@ -224,7 +220,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return maxUse;
   }
 
-  public Component getChargeText (int currentCharge) {
+  public Component getChargeText(int currentCharge) {
     return Component.translatable("roots.message.staff.charging", currentCharge, getMaxUse());
   }
 

@@ -78,11 +78,12 @@ public class ConfigManager {
     COMMON_BUILDER.comment("Options for the Alertness charm").push("alertness");
     ALERTNESS_VISUAL = COMMON_BUILDER.comment("whether or not the Alertness charm should display a visual effect")
         .define("visual", true);
-    ALERTNESS_DURATION = COMMON_BUILDER.comment("the duration of the Alertness charm effect in ticks").defineInRange("duration", 200, 1, Integer.MAX_VALUE);
+    ALERTNESS_DURATION = COMMON_BUILDER.comment("the duration of the Alertness charm effect in ticks")
+        .defineInRange("duration", 200, 1, Integer.MAX_VALUE);
     ALERTNESS_SOUND = COMMON_BUILDER.comment("whether or not the Alertness charm should play a sound when activated")
         .define("sound", true);
     ALERTNESS_TAG = COMMON_BUILDER.comment("whether or not entities should be filtered to those in the roots:alertness entity tag")
-            .define("tag", false);
+        .define("tag", false);
     COMMON_BUILDER.pop();
     COMMON_BUILDER.push("debug");
     DEBUG_REPUTATION = COMMON_BUILDER.comment("if true, will send messages for all reputation gains and losses")

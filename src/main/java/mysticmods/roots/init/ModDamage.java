@@ -21,6 +21,7 @@ public class ModDamage {
   public static final ResourceKey<DamageType> WILDFIRE = create(RootsAPI.rl("wildfire"));
   public static final ResourceKey<DamageType> ACID_CLOUD = create(RootsAPI.rl("acid_cloud"));
   public static final ResourceKey<DamageType> LIFE_DRAIN = create(RootsAPI.rl("life_drain"));
+  private static DamageSource meteor = null;
 
   private static DamageSource fromEntity(ResourceKey<DamageType> type, Entity direct, Entity indirect) {
     var registry = direct.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE);
@@ -35,15 +36,13 @@ public class ModDamage {
     return fromEntity(WILDFIRE, direct, indirect);
   }
 
-  public static DamageSource acidCloud (Entity direct) {
+  public static DamageSource acidCloud(Entity direct) {
     return fromEntity(ACID_CLOUD, direct, null);
   }
 
-  public static DamageSource lifeDrain (Entity direct) {
+  public static DamageSource lifeDrain(Entity direct) {
     return fromEntity(LIFE_DRAIN, direct, null);
   }
-
-  private static DamageSource meteor = null;
 
   public static DamageSource meteor(Level level) {
     if (meteor == null) {

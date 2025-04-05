@@ -2,7 +2,6 @@ package mysticmods.roots.loot.conditions;
 
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.init.ModLoot;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -18,6 +17,10 @@ public record WaterloggedBlockCondition() implements LootItemCondition {
 
   public static final MapCodec<WaterloggedBlockCondition> CODEC = MapCodec.unit(INSTANCE);
 
+  public static LootItemCondition.Builder waterlogged() {
+    return () -> INSTANCE;
+  }
+
   @Override
   public LootItemConditionType getType() {
     return ModLoot.WATERLOGGED_BLOCK.get();
@@ -31,9 +34,5 @@ public record WaterloggedBlockCondition() implements LootItemCondition {
   public boolean test(LootContext context) {
     BlockState blockstate = context.getParamOrNull(LootContextParams.BLOCK_STATE);
     return blockstate != null && (blockstate.hasProperty(BlockStateProperties.WATERLOGGED) && blockstate.getValue(BlockStateProperties.WATERLOGGED));
-  }
-
-  public static LootItemCondition.Builder waterlogged() {
-    return () -> INSTANCE;
   }
 }

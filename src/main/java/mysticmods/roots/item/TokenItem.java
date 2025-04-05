@@ -61,6 +61,28 @@ public abstract class TokenItem extends Item {
     return InteractionResultHolder.success(stack);
   }
 
+  public enum TokenType implements StringRepresentable {
+    SPELL, MODIFIER, RITUAL;
+
+    public static final Codec<TokenType> CODEC = StringRepresentable.fromEnum(TokenType::values);
+    public static final StreamCodec<ByteBuf, TokenType> STREAM_CODEC = ByteBufCodecs.VAR_INT.map(TokenType::fromOrdinal, TokenType::ordinal);
+
+    private final String name;
+
+    TokenType() {
+      this.name = name().toLowerCase(Locale.ROOT);
+    }
+
+    public static TokenType fromOrdinal(int ordinal) {
+      return TokenType.values()[ordinal];
+    }
+
+    @Override
+    public String getSerializedName() {
+      return name;
+    }
+  }
+
   public static class SpellTokenItem extends TokenItem {
     private final ResourceKey<Spell> spell;
 
@@ -116,28 +138,6 @@ public abstract class TokenItem extends Item {
     @Override
     protected @Nullable Unlock<?> getUnlock() {
       return null;
-    }
-  }
-
-  public enum TokenType implements StringRepresentable {
-    SPELL, MODIFIER, RITUAL;
-
-    public static final Codec<TokenType> CODEC = StringRepresentable.fromEnum(TokenType::values);
-    public static final StreamCodec<ByteBuf, TokenType> STREAM_CODEC = ByteBufCodecs.VAR_INT.map(TokenType::fromOrdinal, TokenType::ordinal);
-
-    private final String name;
-
-    TokenType() {
-      this.name = name().toLowerCase(Locale.ROOT);
-    }
-
-    @Override
-    public String getSerializedName() {
-      return name;
-    }
-
-    public static TokenType fromOrdinal(int ordinal) {
-      return TokenType.values()[ordinal];
     }
   }
 }

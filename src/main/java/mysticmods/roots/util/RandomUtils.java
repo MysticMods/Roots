@@ -11,9 +11,9 @@ public class RandomUtils {
   public static <T> Iterable<T> shuffle(final List<T> input) {
     return () -> new Iterator<T>() {
       final Random randomizer = new Random();
-      int i = 0;
       final int n = input.size();
       final Int2ObjectOpenHashMap<T> shuffled = new Int2ObjectOpenHashMap<>();
+      int i = 0;
 
       @Override
       public boolean hasNext() {

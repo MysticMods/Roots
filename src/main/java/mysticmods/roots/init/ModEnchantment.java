@@ -15,9 +15,10 @@ public class ModEnchantment {
 
   private static final DeferredRegister<DataComponentType<?>> REGISTER = DeferredRegister.create(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, RootsAPI.MODID);
 
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<EnchantmentValueEffect>> FORAGING_EFFECT = REGISTER.register("foraging", () -> new DataComponentType.Builder<EnchantmentValueEffect>().persistent(EnchantmentValueEffect.CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<EnchantmentValueEffect>> FORAGING_EFFECT = REGISTER.register("foraging", () -> new DataComponentType.Builder<EnchantmentValueEffect>().persistent(EnchantmentValueEffect.CODEC)
+      .build());
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     REGISTER.register(bus);
   }
 }

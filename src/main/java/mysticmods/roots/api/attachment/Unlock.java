@@ -30,6 +30,14 @@ public interface Unlock<T> {
       .map(TYPES::get, TYPES.inverse()::get).dispatch(Unlock::unlockType, UnlockType::streamCodec);
   StreamCodec<RegistryFriendlyByteBuf, List<Unlock<?>>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
+  static SpellUnlock spell(Holder<Spell> value) {
+    return new SpellUnlock(value);
+  }
+
+  static ModifierUnlock modifier(Holder<SpellModifier> value) {
+    return new ModifierUnlock(value);
+  }
+
   default boolean is(UnlockType type) {
     return unlockType().equals(type);
   }
@@ -40,14 +48,6 @@ public interface Unlock<T> {
 
   default ItemStack getIcon() {
     return ItemStack.EMPTY;
-  }
-
-  static SpellUnlock spell(Holder<Spell> value) {
-    return new SpellUnlock(value);
-  }
-
-  static ModifierUnlock modifier(Holder<SpellModifier> value) {
-    return new ModifierUnlock(value);
   }
 
   record SpellUnlock(Holder<Spell> value) implements Unlock<Spell> {

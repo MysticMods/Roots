@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.trading.MerchantOffer;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,13 +16,13 @@ public class MixinAbstractVillager {
   @Unique
   private int roots_1_21$lastExperience = -1;
 
-  @Inject(method="notifyTrade",at=@At("HEAD"))
-  public void RootsNotifyTradeStart (MerchantOffer offer, CallbackInfo ci) {
+  @Inject(method = "notifyTrade", at = @At("HEAD"))
+  public void RootsNotifyTradeStart(MerchantOffer offer, CallbackInfo ci) {
     this.roots_1_21$lastExperience = ((AbstractVillager) (Object) this).getVillagerXp();
   }
 
-  @Inject(method="notifyTrade",at=@At("RETURN"))
-  public void RootsNotifyTradeEnd (MerchantOffer offer, CallbackInfo ci) {
+  @Inject(method = "notifyTrade", at = @At("RETURN"))
+  public void RootsNotifyTradeEnd(MerchantOffer offer, CallbackInfo ci) {
     if (this.roots_1_21$lastExperience != -1) {
       int currentExperience = ((AbstractVillager) (Object) this).getVillagerXp();
       if (currentExperience > this.roots_1_21$lastExperience) {

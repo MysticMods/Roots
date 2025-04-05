@@ -21,7 +21,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,10 +56,9 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
       ByteBufCodecs.VAR_INT, o -> o.durabilityCost,
       RunicBlockRecipe::new
   );
-
-  protected int durabilityCost = 1;
   @Nullable
   private final OutputStateMapper stateMapper;
+  protected int durabilityCost = 1;
 
   public RunicBlockRecipe(BaseRecipeData baseRecipeData, WorldTest targetCondition, PartialBlockState partialBlockState1, List<WorldCondition> worldCondition, @Nullable OutputStateMapper outputStateMapper, List<String> strings, int durabilityCost) {
     super(baseRecipeData, targetCondition, partialBlockState1, worldCondition, strings);
@@ -150,16 +148,20 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
   public static class Builder {
     private final List<String> skipProperties = new ArrayList<>();
+    private final List<WorldCondition> condition = new ArrayList<>();
     private int durabilityCost;
     private WorldTest test;
     private PartialBlockState outputState;
-    private final List<WorldCondition> condition = new ArrayList<>();
     private OutputStateMapper stateMapper;
 
     protected Builder() {
     }
 
-    public Builder test (WorldTest targetCondition) {
+    public static Builder create() {
+      return new Builder();
+    }
+
+    public Builder test(WorldTest targetCondition) {
       this.test = targetCondition;
       return this;
     }
@@ -217,10 +219,6 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
     public RunicBlockRecipe build(BaseRecipeData.Builder data) {
       return build(data.build());
-    }
-
-    public static Builder create() {
-      return new Builder();
     }
   }
 }

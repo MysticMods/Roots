@@ -18,6 +18,14 @@ public class MatchingTreeTrunkPredicate extends StateTestingPredicate {
     super(offset);
   }
 
+  public static MatchingTreeTrunkPredicate create() {
+    return new MatchingTreeTrunkPredicate(Vec3i.ZERO);
+  }
+
+  public static MatchingTreeTrunkPredicate create(Vec3i offset) {
+    return new MatchingTreeTrunkPredicate(offset);
+  }
+
   @Override
   protected boolean test(BlockState pState) {
     return pState.is(BlockTags.LOGS_THAT_BURN) && pState.hasProperty(RotatedPillarBlock.AXIS) && pState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y;
@@ -26,13 +34,5 @@ public class MatchingTreeTrunkPredicate extends StateTestingPredicate {
   @Override
   public BlockPredicateType<?> type() {
     return ModFeatures.MATCHING_TREE_TRUNK_PREDICATE.get();
-  }
-
-  public static MatchingTreeTrunkPredicate create() {
-    return new MatchingTreeTrunkPredicate(Vec3i.ZERO);
-  }
-
-  public static MatchingTreeTrunkPredicate create(Vec3i offset) {
-    return new MatchingTreeTrunkPredicate(offset);
   }
 }

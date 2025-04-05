@@ -2,7 +2,6 @@ package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -163,9 +162,9 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.EARTH_SOIL).add(TERRAN_SOIL.get());
     //noinspection unchecked
     this.tag(RootsTags.Blocks.ELEMENTAL_SOIL)
-        .addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL)
-        .addTag(RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
-    this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ELEMENTAL_SOIL);
+        .addTags(RootsTags.Blocks.AIR_SOIL, RootsTags.Blocks.FIRE_SOIL, RootsTags.Blocks.WATER_SOIL, RootsTags.Blocks.EARTH_SOIL);
+    this.tag(RootsTags.Blocks.ALL_SOIL).addTags(RootsTags.Blocks.ELEMENTAL_SOIL, RootsTags.Blocks.BASE_ELEMENTAL_SOIL);
+    this.tag(RootsTags.Blocks.SOILS).addTag(RootsTags.Blocks.ALL_SOIL);
     this.tag(RootsTags.Blocks.NYI).add(INCENSE_BURNER.get(), UNENDING_BOWL.get());
     this.tag(RootsTags.Blocks.WIP).addTag(RootsTags.Blocks.SOILS);
     this.tag(RootsTags.Blocks.DISPLAY_PEDESTALS).add(DISPLAY_PEDESTAL.get());
@@ -360,7 +359,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     tag(RootsTags.Blocks.SPREADING_MUSHROOMS).add(Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM, BAFFLECAP.get());
 
-    tag(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS).addTags(BlockTags.LEAVES, RootsTags.Blocks.SHORT_GRASS).add(Blocks.SEAGRASS, Blocks.VINE, Blocks.CAVE_VINES, Blocks.DEAD_BUSH, Blocks.HANGING_ROOTS);
+    tag(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS).addTags(BlockTags.LEAVES, RootsTags.Blocks.SHORT_GRASS)
+        .add(Blocks.SEAGRASS, Blocks.VINE, Blocks.CAVE_VINES, Blocks.DEAD_BUSH, Blocks.HANGING_ROOTS);
 
     tag(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS).addTags(RootsTags.Blocks.TALL_GRASS).add(Blocks.TALL_SEAGRASS);
     tag(RootsTags.Blocks.FORAGEABLES).addTags(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS);

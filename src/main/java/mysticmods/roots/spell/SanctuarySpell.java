@@ -2,7 +2,6 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -47,7 +46,7 @@ public class SanctuarySpell extends TwoRadiusSpell {
   }
 
   @Override
-  public void buildProperties (List<PropertyHolder<?>> result) {
+  public void buildProperties(List<PropertyHolder<?>> result) {
     super.buildProperties(result);
     result.add(ModSpells.SANCTUARY_VELOCITY);
   }

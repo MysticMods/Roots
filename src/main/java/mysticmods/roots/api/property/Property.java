@@ -23,26 +23,6 @@ public interface Property<T> {
   StreamCodec<RegistryFriendlyByteBuf, Property<?>> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.PROPERTY_SERIALIZERS)
       .dispatch(Property::getSerializer, PropertySerializer::streamCodec);
 
-  String getComment();
-
-  T getDefaultValue();
-
-  @Nullable
-  T getValue();
-
-  @NotNull
-  default T get() {
-    T val = getValue();
-    if (val == null) {
-      return getDefaultValue();
-    }
-    return val;
-  }
-
-  PropertySerializer<?> getSerializer();
-
-  PropertyType<?> getType();
-
   static IntegerProperty ofInt(int value, String comment) {
     return new IntegerProperty(value, comment);
   }
@@ -62,6 +42,26 @@ public interface Property<T> {
   static StringProperty ofString(String value, String comment) {
     return new StringProperty(value, comment);
   }
+
+  String getComment();
+
+  T getDefaultValue();
+
+  @Nullable
+  T getValue();
+
+  @NotNull
+  default T get() {
+    T val = getValue();
+    if (val == null) {
+      return getDefaultValue();
+    }
+    return val;
+  }
+
+  PropertySerializer<?> getSerializer();
+
+  PropertyType<?> getType();
 
   record IntegerProperty(int defaultValue, String comment, @Nullable Integer value) implements Property<Integer> {
     public static final ResourceKey<PropertySerializer<?>> SERIALIZER = ResourceKey.create(RootsRegistries.Keys.PROPERTY_SERIALIZERS, RootsAPI.rl("integer_property"));

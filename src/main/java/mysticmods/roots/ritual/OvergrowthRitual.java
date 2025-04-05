@@ -26,6 +26,11 @@ import java.util.List;
 import java.util.function.BiPredicate;
 
 public class OvergrowthRitual extends Ritual {
+  private static final BiPredicate<Level, BlockPos> GROVE_MOSS_PREDICATE = (level, pos) -> level.getBlockState(pos)
+      .is(RootsTags.Blocks.GROVE_MOSS);
+  private static final BiPredicate<Level, BlockPos> WATER_PREDICATE = (level, pos) -> level.getFluidState(pos)
+      .is(FluidTags.WATER);
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(GROVE_MOSS_PREDICATE, WATER_PREDICATE);
   private static List<Direction> HORIZONTALS;
   // TODO: This *must* be on the block entity
   private BlockPos lastChanged;
@@ -38,14 +43,6 @@ public class OvergrowthRitual extends Ritual {
     Collections.shuffle(HORIZONTALS);
     return HORIZONTALS;
   }
-
-  private static final BiPredicate<Level, BlockPos> GROVE_MOSS_PREDICATE = (level, pos) -> level.getBlockState(pos)
-      .is(RootsTags.Blocks.GROVE_MOSS);
-
-  private static final BiPredicate<Level, BlockPos> WATER_PREDICATE = (level, pos) -> level.getFluidState(pos)
-      .is(FluidTags.WATER);
-
-  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(GROVE_MOSS_PREDICATE, WATER_PREDICATE);
 
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates() {

@@ -41,30 +41,24 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.OptionalInt;
 
 public class ModFeatures {
+  public static final ResourceKey<PlacedFeature> PLACED_WILD_AUBERGINE_PATCH_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_aubergine_patch"));
   private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, RootsAPI.MODID);
   private static final DeferredRegister<PlacementModifierType<?>> PLACEMENT_MODIFIER = DeferredRegister.create(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE, RootsAPI.MODID);
   private static final DeferredRegister<BlockPredicateType<?>> BLOCK_PREDICATES = DeferredRegister.create(BuiltInRegistries.BLOCK_PREDICATE_TYPE, RootsAPI.MODID);
   private static final DeferredRegister<StructurePieceType> STRUCTURE_PIECE_TYPES = DeferredRegister.create(BuiltInRegistries.STRUCTURE_PIECE, RootsAPI.MODID);
-  private static final DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(BuiltInRegistries.STRUCTURE_TYPE, RootsAPI.MODID);
-
   public static final DeferredHolder<StructurePieceType, StructurePieceType> STANDING_STONES_PIECE = STRUCTURE_PIECE_TYPES.register("standing_stones_piece", () -> (pContext, pTag) -> new StandingStonePiece(pTag));
-
+  private static final DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(BuiltInRegistries.STRUCTURE_TYPE, RootsAPI.MODID);
   public static final DeferredHolder<StructureType<?>, StructureType<StandingStonesStructure>> STANDING_STONES = STRUCTURES.register("standing_stones", () -> () -> StandingStonesStructure.CODEC);
-
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreeTrunkPredicate>> MATCHING_TREE_TRUNK_PREDICATE = BLOCK_PREDICATES.register("matching_tree_trunk", () -> () -> MatchingTreeTrunkPredicate.CODEC);
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreePredicate>> MATCHING_TREE_PREDICATE = BLOCK_PREDICATES.register("matching_tree", () -> () -> MatchingTreePredicate.CODEC);
-
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingBlockTagPredicate>> MATCHING_BLOCK_TAG_PREDICATE = BLOCK_PREDICATES.register("matching_block_tag", () -> () -> MatchingBlockTagPredicate.CODEC);
-
   public static DeferredHolder<BlockPredicateType<?>, BlockPredicateType<MatchingTreeBranchPredicate>> MATCHING_TREE_BRANCH_PREDICATE = BLOCK_PREDICATES.register("matching_tree_branch", () -> () -> MatchingTreeBranchPredicate.CODEC);
   public static DeferredHolder<PlacementModifierType<?>, PlacementModifierType<HeightmapYRange>> HEIGHTMAP_Y_RANGE = PLACEMENT_MODIFIER.register("heightmap_y_range", () -> () -> HeightmapYRange.CODEC);
   public static DeferredHolder<PlacementModifierType<?>, PlacementModifierType<DimensionPlacement>> DIMENSION_PLACEMENT = PLACEMENT_MODIFIER.register("dimension_placement", () -> () -> DimensionPlacement.CODEC);
   public static DeferredHolder<PlacementModifierType<?>, PlacementModifierType<AllAroundLogPlacement>> ALL_AROUND_LOG_PLACEMENT = PLACEMENT_MODIFIER.register("all_around_log_placement", () -> () -> AllAroundLogPlacement.CODEC);
-
   // Features
   public static DeferredHolder<Feature<?>, SupportingDirectionalBlockFeature> SUPPORTING_DIRECTIONAL_BLOCK_FEATURE = FEATURES.register("supporting_directional_block_feature", () -> new SupportingDirectionalBlockFeature(SimpleBlockConfiguration.CODEC));
   public static DeferredHolder<Feature<?>, HangingMossBlockFeature> HANGING_MOSS_BLOCK_FEATURE = FEATURES.register("hanging_moss_block_feature", () -> new HangingMossBlockFeature(SimpleBlockConfiguration.CODEC));
-
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_SILVER_ORE_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("silver_ore"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_STONEPETAL_PATCH_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("stonepetal_patch"));
   public static ResourceKey<ConfiguredFeature<?, ?>> CONFIGURED_GRANITE_QUARTZ_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, RootsAPI.rl("granite_quartz"));
@@ -79,7 +73,6 @@ public class ModFeatures {
   public static ResourceKey<PlacedFeature> PLACED_WILD_ROOTS_UNDERGROUND_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_roots_underground"));
   public static ResourceKey<PlacedFeature> PLACED_WILD_ROOTS_FOREST_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_roots_forest"));
   public static ResourceKey<PlacedFeature> PLACED_WILD_ROOTS_SPARSE_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_roots_sparse"));
-  public static final ResourceKey<PlacedFeature> PLACED_WILD_AUBERGINE_PATCH_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("wild_aubergine_patch"));
   public static ResourceKey<PlacedFeature> PLACED_SILVER_ORE_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("silver_ore"));
   public static ResourceKey<PlacedFeature> PLACED_STONEPETAL_PATCH_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("stonepetal_patch"));
   public static ResourceKey<PlacedFeature> PLACED_GRANITE_QUARTZ_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("granite_quartz"));

@@ -13,6 +13,10 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
 
 public class AddGrassDropsModifier extends LootModifier {
+  public static final MapCodec<AddGrassDropsModifier> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+          IGlobalLootModifier.LOOT_CONDITIONS_CODEC.fieldOf("conditions").forGetter(glm -> glm.conditions),
+          ItemStack.ITEM_NON_AIR_CODEC.fieldOf("item").forGetter(AddGrassDropsModifier::getDropItem))
+      .apply(instance, AddGrassDropsModifier::new));
   private final Holder<Item> dropItem;
 
   public AddGrassDropsModifier(LootItemCondition[] conditionsIn, Holder<Item> item) {
@@ -37,10 +41,5 @@ public class AddGrassDropsModifier extends LootModifier {
   public MapCodec<? extends IGlobalLootModifier> codec() {
     return CODEC;
   }
-
-  public static final MapCodec<AddGrassDropsModifier> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-          IGlobalLootModifier.LOOT_CONDITIONS_CODEC.fieldOf("conditions").forGetter(glm -> glm.conditions),
-          ItemStack.ITEM_NON_AIR_CODEC.fieldOf("item").forGetter(AddGrassDropsModifier::getDropItem))
-      .apply(instance, AddGrassDropsModifier::new));
 }
 

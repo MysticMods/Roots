@@ -2,7 +2,6 @@ package mysticmods.roots.blockentity.template;
 
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.BoundedBlockEntity;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
@@ -40,17 +39,30 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
   protected AABB singleBlockBoundingBox;
   protected BoundingBox boundingBox;
   protected BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> lastOutput;
+  private AABB clientBounds;
 
   public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
   }
 
-  protected boolean canOutputTo (BlockState state, BlockPos pos) {
+  public static <T extends BlockEntity> void clientTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
+    if (pBlockEntity instanceof ClientTickBlockEntity clientBlockEntity) {
+      clientBlockEntity.clientTick(pLevel, pPos, pState);
+    }
+  }
+
+  public static <T extends BlockEntity> void serverTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
+    if (pBlockEntity instanceof ServerTickBlockEntity serverBlockEntity) {
+      serverBlockEntity.serverTick((ServerLevel) pLevel, pPos, pState);
+    }
+  }
+
+  protected boolean canOutputTo(BlockState state, BlockPos pos) {
     return true;
   }
 
   // TODO: Some sort of caching
-  public List<Pair<BlockPos, PedestalBlockEntity>> pedestals (TagKey<Block> include, TagKey<Block> exclude) {
+  public List<Pair<BlockPos, PedestalBlockEntity>> pedestals(TagKey<Block> include, TagKey<Block> exclude) {
     List<Pair<BlockPos, PedestalBlockEntity>> pedestalPositions = new ArrayList<>();
     if (getBoundingBox() != null) {
       BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
@@ -109,8 +121,6 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     }
     return boundingBox;
   }
-
-  private AABB clientBounds;
 
   @Nullable
   public AABB getRenderBoundingBox() {
@@ -199,17 +209,5 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
       }
     }
     return result;
-  }
-
-  public static <T extends BlockEntity> void clientTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
-    if (pBlockEntity instanceof ClientTickBlockEntity clientBlockEntity) {
-      clientBlockEntity.clientTick(pLevel, pPos, pState);
-    }
-  }
-
-  public static <T extends BlockEntity> void serverTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
-    if (pBlockEntity instanceof ServerTickBlockEntity serverBlockEntity) {
-      serverBlockEntity.serverTick((ServerLevel) pLevel, pPos, pState);
-    }
   }
 }

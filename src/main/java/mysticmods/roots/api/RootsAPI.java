@@ -27,14 +27,24 @@ import org.apache.logging.log4j.Logger;
 import java.util.Set;
 
 public abstract class RootsAPI {
-  public static RootsAPI INSTANCE;
   public static final Tier LIVING_TOOL_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 300, 6.0f, 2.0f, 19, () -> Ingredient.of(RootsTags.Items.BARKS));
   public static final Tier COPPER_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 350, 6.0f, 2.0f, 10, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
   public static final Tier RUNED_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 9.0f, 4.0f, 15, () -> Ingredient.of(RootsTags.Items.RUNED_OBSIDIAN));
-
+  // Tool Actions (Forge-specific)
+  public static final ItemAbility RUNIC_SHEARS_HARVEST = ItemAbility.get("runic_shears_harvest");
+  public static final ItemAbility RUNIC_SHEARS_DIG = ItemAbility.get("runic_shears_dig");
+  public static final ItemAbility KNIFE_STRIP = ItemAbility.get("knife_strip");
+  public static final ItemAbility KNIFE_DIG = ItemAbility.get("knife_dig");
+  public static final ItemAbility FORAGE = ItemAbility.get("forage");
+  public static final Set<ItemAbility> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
+  public static final Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG, FORAGE);
+  // Identifiers & Logs
+  public static final String MODID = "roots";
   public static final ResourceKey<LootTable> HUT = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("hut"));
   public static final ResourceKey<LootTable> BARROW = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("barrow"));
   public static final ResourceKey<LootTable> STANDING_STONES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("standing_stones"));
+  public static RootsAPI INSTANCE;
+  public static Logger LOG = LogManager.getLogger();
 
   public static ResourceLocation rl(String path) {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);
@@ -44,26 +54,9 @@ public abstract class RootsAPI {
     return ResourceLocation.parse(path);
   }
 
-  // Tool Actions (Forge-specific)
-  public static final ItemAbility RUNIC_SHEARS_HARVEST = ItemAbility.get("runic_shears_harvest");
-  public static final ItemAbility RUNIC_SHEARS_DIG = ItemAbility.get("runic_shears_dig");
-  public static final ItemAbility KNIFE_STRIP = ItemAbility.get("knife_strip");
-  public static final ItemAbility KNIFE_DIG = ItemAbility.get("knife_dig");
-
-  public static final ItemAbility FORAGE = ItemAbility.get("forage");
-
-  public static final Set<ItemAbility> RUNIC_SHEARS_DEFAULTS = Set.of(RUNIC_SHEARS_HARVEST, RUNIC_SHEARS_DIG);
-  public static final Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG, FORAGE);
-
-
   public static RootsAPI getInstance() {
     return INSTANCE;
   }
-
-  // Identifiers & Logs
-  public static final String MODID = "roots";
-
-  public static Logger LOG = LogManager.getLogger();
 
   public static MutableComponent holdShift() {
     return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift")
@@ -76,5 +69,5 @@ public abstract class RootsAPI {
 
   public abstract void syncHerbs(Player player, Object2DoubleMap<Herb> herbs);
 
-  public abstract void grant (ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique);
+  public abstract void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique);
 }

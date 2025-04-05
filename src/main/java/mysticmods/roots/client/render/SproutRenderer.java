@@ -26,11 +26,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SproutRenderer extends MobRenderer<SproutEntity, SproutModel> {
+  private static final Map<EntityType<?>, ResourceLocation> textures = new HashMap<>();
+
   public SproutRenderer(EntityRendererProvider.Context context) {
     super(context, new SproutModel(context.bakeLayer(ModelHolder.SPROUT)), 0.15f);
   }
-
-  private static final Map<EntityType<?>, ResourceLocation> textures = new HashMap<>();
 
   @Override
   public ResourceLocation getTextureLocation(SproutEntity entity) {

@@ -6,7 +6,6 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.IDescribed;
-import mysticmods.roots.api.registry.IParentChild;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -17,9 +16,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
 import java.util.function.Predicate;
 
 public class RitualModifier implements IDescribed, ICosted, /*IParentChild<RitualModifier>, */TooltipComponent {

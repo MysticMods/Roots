@@ -96,7 +96,8 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.TIME_STOP_EXCLUDE).add(EntityType.PLAYER);
     this.tag(RootsTags.Entities.ROSE_THORNS_EXCLUDE).add(EntityType.PLAYER);
     this.tag(RootsTags.Entities.ALERTNESS).add(EntityType.CREEPER);
-    this.tag(RootsTags.Entities.RUNIC_SHEARS_OVERRIDE).add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.LLAMA, EntityType.TRADER_LLAMA, EntityType.CAMEL);
+    this.tag(RootsTags.Entities.RUNIC_SHEARS_OVERRIDE)
+        .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.LLAMA, EntityType.TRADER_LLAMA, EntityType.CAMEL);
   }
 
   @Override

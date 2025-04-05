@@ -1,7 +1,6 @@
 package mysticmods.roots.block.crop;
 
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.block.WaterloggedBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -26,25 +25,6 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
         .setValue(ElementalType.SOIL_TYPE, ElementalType.NONE));
   }
 
-  @Override
-  public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-    if (!pLevel.isAreaLoaded(pPos, 1)) {
-      return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-    }
-    int i = this.getAge(pState);
-    if (i < this.getMaxAge()) {
-      float f = getGrowthSpeed(pState, pLevel, pPos);
-      if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
-        BlockState newState = this.getStateForAge(i + 1);
-
-        newState = fillBlockState(pState, newState, pLevel.getBlockState(pPos.below()));
-
-        pLevel.setBlock(pPos, newState, 2);
-        net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(pLevel, pPos, pState);
-      }
-    }
-  }
-
   private static @NotNull BlockState fillBlockState(BlockState pState, BlockState newState, BlockState belowState) {
     ElementalType thisType = pState.getValue(ElementalType.ELEMENTAL_TYPE);
     TagKey<Block> soilTag = thisType.getTag();
@@ -64,6 +44,25 @@ public class ElementalCropBlock extends ThreeStageCropBlock {
       newState = newState.setValue(BlockStateProperties.WATERLOGGED, pState.getValue(BlockStateProperties.WATERLOGGED));
     }
     return newState;
+  }
+
+  @Override
+  public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+    if (!pLevel.isAreaLoaded(pPos, 1)) {
+      return; // Forge: prevent loading unloaded chunks when checking neighbor's light
+    }
+    int i = this.getAge(pState);
+    if (i < this.getMaxAge()) {
+      float f = getGrowthSpeed(pState, pLevel, pPos);
+      if (net.neoforged.neoforge.common.CommonHooks.canCropGrow(pLevel, pPos, pState, pRandom.nextInt((int) (25.0F / f) + 1) == 0)) {
+        BlockState newState = this.getStateForAge(i + 1);
+
+        newState = fillBlockState(pState, newState, pLevel.getBlockState(pPos.below()));
+
+        pLevel.setBlock(pPos, newState, 2);
+        net.neoforged.neoforge.common.CommonHooks.fireCropGrowPost(pLevel, pPos, pState);
+      }
+    }
   }
 
   @Override

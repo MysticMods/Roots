@@ -16,6 +16,12 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ServerTickHandler {
+  private static final List<Runnable> runnableList = new LinkedList<>();
+  private static final List<Runnable> pendingRunnables = new LinkedList<>();
+  private final static Object listLock = new Object();
+  private final static Object worldLock = new Object();
+  private static boolean tickingList = false;
+
   @SubscribeEvent
   public static void onTickEntity(EntityTickEvent.Post event) {
     if (!event.getEntity().level().isClientSide()) {
@@ -54,16 +60,6 @@ public class ServerTickHandler {
       );
     }
   }
-
-
-  private static final List<Runnable> runnableList = new LinkedList<>();
-  private static final List<Runnable> pendingRunnables = new LinkedList<>();
-
-  private final static Object listLock = new Object();
-
-  private final static Object worldLock = new Object();
-
-  private static boolean tickingList = false;
 
   @SubscribeEvent
   public static void onServerTickStart(ServerTickEvent.Pre event) {

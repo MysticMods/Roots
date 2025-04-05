@@ -5,8 +5,6 @@ import mysticmods.roots.effect.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -25,7 +23,7 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, SenseDangerEffect> SENSE_DANGER = REGISTER.register("sense_danger", SenseDangerEffect::new);
   public static final DeferredHolder<MobEffect, SimpleEffect> TIME_STOP = REGISTER.register("time_stop", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x00008b, false));
   public static final DeferredHolder<MobEffect, AquaBubbleEffect> AQUA_BUBBLE = REGISTER.register("aqua_bubble", () -> (AquaBubbleEffect) new AquaBubbleEffect(MobEffectCategory.BENEFICIAL, 0x00ffff));
-/*      .addAttributeModifier(Attributes.MAX_ABSORPTION, RootsAPI.rl("aqua_bubble_absorb"), AttributeModifier.Operation.ADD_VALUE, (o) -> o / 0.5));*/
+  /*      .addAttributeModifier(Attributes.MAX_ABSORPTION, RootsAPI.rl("aqua_bubble_absorb"), AttributeModifier.Operation.ADD_VALUE, (o) -> o / 0.5));*/
 
   public static void register(IEventBus bus) {
     REGISTER.register(bus);

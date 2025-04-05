@@ -1,6 +1,5 @@
 package mysticmods.roots.client.particle;
 
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;

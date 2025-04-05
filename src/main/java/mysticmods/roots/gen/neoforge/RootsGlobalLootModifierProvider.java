@@ -7,16 +7,11 @@ import mysticmods.roots.loot.conditions.ForagingRandomChanceCondition;
 import mysticmods.roots.loot.conditions.LootItemBlockTagCondition;
 import mysticmods.roots.loot.conditions.WaterloggedBlockCondition;
 import mysticmods.roots.loot.modifiers.AddGrassDropsModifier;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.neoforged.neoforge.common.ItemAbilities;
@@ -47,7 +42,7 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
     return conditions.toArray(LootItemCondition[]::new);
   }
 
-  private LootItemCondition[] getForagingConditions (TagKey<Block> tag, float initialChance, boolean tall, boolean wet) {
+  private LootItemCondition[] getForagingConditions(TagKey<Block> tag, float initialChance, boolean tall, boolean wet) {
     List<LootItemCondition> conditions = new ArrayList<>();
     conditions.add(ForagingRandomChanceCondition.randomChance(initialChance).build());
     conditions.add(LootItemBlockTagCondition.tag(tag));
