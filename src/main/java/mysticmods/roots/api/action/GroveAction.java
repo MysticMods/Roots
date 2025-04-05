@@ -14,15 +14,6 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-// Actions:
-// - Aging up a baby animal -> Unsure about this
-// -> level, player, baby, spellinstance, itemstack
-// - Completing a trial <- Unsure about this too
-// -> level, player, List<Player> other players, block pos, block state, block entity, TrialSpawner instance
-
-// - Milking a cow
-// -> level, player, entity, itemstack, spell instance
-
 public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   @Override
   default void accept(GroveContext context) {
