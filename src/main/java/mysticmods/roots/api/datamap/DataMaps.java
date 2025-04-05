@@ -92,11 +92,14 @@ public class DataMaps {
   public static final DataMapType<Block, HarvestRecord> HARVEST_RECORDS = DataMapType.builder(RootsAPI.rl("harvest_records"), Registries.BLOCK, HarvestRecord.CODEC)
       .synced(HarvestRecord.CODEC, false)
       .build();
-  public static final DataMapType<GroveAction, List<GroveReputationEntry>> GROVE_ACTION_REPUTATIONS = DataMapType.builder(RootsAPI.rl("grant_action_reputations"), RootsRegistries.Keys.GROVE_ACTIONS, GroveReputationEntry.LIST_CODEC)
+  public static final DataMapType<GroveAction, List<GroveReputationEntry>> GROVE_ACTION_REPUTATIONS = DataMapType.builder(RootsAPI.rl("grove_action_reputations"), RootsRegistries.Keys.GROVE_ACTIONS, GroveReputationEntry.LIST_CODEC)
       .synced(GroveReputationEntry.LIST_CODEC, false)
       .build();
   public static final DataMapType<Grove, ReputationRanks> GROVE_RANKS = DataMapType.builder(RootsAPI.rl("grove_ranks"), RootsRegistries.Keys.GROVES, ReputationRanks.CODEC)
       .synced(ReputationRanks.CODEC, false)
+      .build();
+  public static final DataMapType<Block, Integer> OPERATION_COST = DataMapType.builder(RootsAPI.rl("shatter_operation_cost"), Registries.BLOCK, Codec.INT)
+      .synced(Codec.INT, false)
       .build();
 
   @SubscribeEvent
@@ -120,6 +123,7 @@ public class DataMaps {
     event.register(STEM_BLOCKS);
     event.register(GROVE_ACTION_REPUTATIONS);
     event.register(GROVE_RANKS);
+    event.register(OPERATION_COST);
   }
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {

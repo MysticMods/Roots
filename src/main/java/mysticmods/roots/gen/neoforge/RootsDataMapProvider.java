@@ -414,5 +414,10 @@ public class RootsDataMapProvider extends DataMapProvider {
     RootsRegistries.GROVES.forEach(grove -> {
       builder21.add(grove.builtInRegistryHolder(), grove.getDefaultRanks(), false);
     });
+
+    var builder22 = builder(DataMaps.OPERATION_COST);
+    BuiltInRegistries.BLOCK.forEach(block -> {
+      builder22.add(block.builtInRegistryHolder(), 1, false);
+    });
   }
 }
