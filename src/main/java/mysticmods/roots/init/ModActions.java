@@ -29,6 +29,7 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, GrowHugeMushroomAction> GROW_HUGE_MUSHROOM = ACTIONS.register("grow_huge_mushroom", GrowHugeMushroomAction::new);
   public static final DeferredHolder<GroveAction, ArriveDimensionAction> ARRIVE_DIMENSION = ACTIONS.register("arrive_dimension", ArriveDimensionAction::new);
   public static final DeferredHolder<GroveAction, GeasAction> GEAS = ACTIONS.register("geas", GeasAction::new);
+  public static final DeferredHolder<GroveAction, BrushBlockAction> BRUSH_BLOCK = ACTIONS.register("brush_block", BrushBlockAction::new);
 
   public static void register (IEventBus bus) {
     ACTIONS.register(bus);

@@ -19,6 +19,7 @@
     "action.MixinBeehiveBlock",
     "action.MixinBoneMealItem",
     "action.MixinBredAnimalsTrigger",
+    "action.MixinBrushableBlockEntity",
     "action.MixinComposterBlock",
     "action.MixinConsumeItemTrigger",
     "action.MixinCuredZombieVillagerTrigger",

@@ -20,9 +20,6 @@ import java.util.function.Predicate;
 // - Completing a trial <- Unsure about this too
 // -> level, player, List<Player> other players, block pos, block state, block entity, TrialSpawner instance
 
-
-// - Brush a block
-// -> level, player, blockstate, block entity, itemstack
 // - Milking a cow
 // -> level, player, entity, itemstack, spell instance
 
