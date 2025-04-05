@@ -1,15 +1,7 @@
 {
   "values": [
-    "#roots:barks/acacia",
-    "#roots:barks/birch",
-    "#roots:barks/dark_oak",
-    "#roots:barks/jungle",
-    "#roots:barks/oak",
-    "#roots:barks/spruce",
-    "#roots:barks/wildwood",
-    "#roots:barks/mangrove",
+    "#roots:barks_that_burn",
     "#roots:barks/crimson",
-    "#roots:barks/warped",
-    "#roots:barks/mixed"
+    "#roots:barks/warped"
   ]
 }

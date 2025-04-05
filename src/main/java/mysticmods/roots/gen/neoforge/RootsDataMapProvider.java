@@ -139,12 +139,12 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder9.add(ModItems.WILDEWHEET, new Compostable(0.9f, true), false);
     builder9.add(ModItems.PERESKIA, new Compostable(0.9f, true), false);
 
-    // TODO: Burnable barks, should exclude crimson/warped
     builder9.add(RootsTags.Items.BARKS, new Compostable(0.3f, false), false);
 
     builder9.add(ModItems.PETALS, new Compostable(0.65f, true), false);
     builder9.add(ModItems.STONEPETAL, new Compostable(0.65f, false), false);
 
+    // TODO: Recalculate all of these
     Builder<FurnaceFuel, Item> builder10 = builder(NeoForgeDataMaps.FURNACE_FUELS).replace(false);
     builder10.add(ModItems.THATCH, new FurnaceFuel(300), false);
     builder10.add(ModItems.SHEARED_THATCH, new FurnaceFuel(300), false);
@@ -169,7 +169,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.GROVE_PEDESTAL, new FurnaceFuel(100), false);
     builder10.add(ModItems.SHEARED_THATCH, new FurnaceFuel(100), false);
     builder10.add(ModItems.THATCH, new FurnaceFuel(100), false);
-    builder10.add(RootsTags.Items.BARKS, new FurnaceFuel(100), false);
+    builder10.add(RootsTags.Items.BARKS_THAT_BURN, new FurnaceFuel(100), false);
 
     Builder<ItemStack, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
     Builder<ItemStack, Spell> builder12 = builder(DataMaps.SPELL_DISPLAY_ITEM).replace(false);

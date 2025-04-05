@@ -259,6 +259,7 @@ public class RootsTags {
     public static final TagKey<Item> BAFFLECAP_CROP = modTag("crops/bafflecap");
 
     public static final TagKey<Item> BARKS = modTag("barks");
+    public static final TagKey<Item> BARKS_THAT_BURN = modTag("barks_that_burn");
     public static final TagKey<Item> ACACIA_BARK = modTag("barks/acacia");
     public static final TagKey<Item> BIRCH_BARK = modTag("barks/birch");
     public static final TagKey<Item> DARK_OAK_BARK = modTag("barks/dark_oak");

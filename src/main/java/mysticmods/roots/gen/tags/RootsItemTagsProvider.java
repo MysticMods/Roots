@@ -40,7 +40,9 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.MIXED_BARK).add(ModItems.MIXED_BARK.get());
 
     this.tag(RootsTags.Items.BARKS)
-        .addTags(RootsTags.Items.ACACIA_BARK, RootsTags.Items.BIRCH_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.MANGROVE_BARK, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK, RootsTags.Items.MIXED_BARK);
+        .addTags(RootsTags.Items.BARKS_THAT_BURN, RootsTags.Items.CRIMSON_BARK, RootsTags.Items.WARPED_BARK);
+    this.tag(RootsTags.Items.BARKS_THAT_BURN)
+        .addTags(RootsTags.Items.ACACIA_BARK, RootsTags.Items.BIRCH_BARK, RootsTags.Items.DARK_OAK_BARK, RootsTags.Items.JUNGLE_BARK, RootsTags.Items.OAK_BARK, RootsTags.Items.SPRUCE_BARK, RootsTags.Items.WILDWOOD_BARK, RootsTags.Items.MANGROVE_BARK, RootsTags.Items.MIXED_BARK);
 
     this.tag(RootsTags.Items.DEER_FOOD).add(Items.WHEAT).add(ModItems.WILDEWHEET.get());
 
