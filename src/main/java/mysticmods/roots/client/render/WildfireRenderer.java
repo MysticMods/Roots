@@ -32,7 +32,9 @@ public class WildfireRenderer extends EntityRenderer<WildfireEntity> {
     poseStack.scale(0.05625F, 0.05625F, 0.05625F);
     poseStack.translate(-4.0F, 0.0F, 0.0F);*/
 
-    poseStack.scale(0.4f, 0.4f, 0.4f);
+    poseStack.translate(0.0f, 0.4f, 0.0f);
+
+    poseStack.scale(1.8f, 1.8f, 1.8f);
     this.model.prepareMobModel(entity, 0, 0, partialTicks);
     this.model.setupAnim(entity, 0f, 0f, entity.tickCount + partialTicks, 0, 0);
     Minecraft minecraft = Minecraft.getInstance();
