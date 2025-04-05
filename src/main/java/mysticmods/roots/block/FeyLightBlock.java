@@ -17,22 +17,17 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 
-public class FeyLightBlock extends Block {
+public class FeyLightBlock extends WaterloggedBlock {
+  public static BooleanProperty WATERLOGGED = WaterloggedBlock.WATERLOGGED;
   public static BooleanProperty DECAYING = BooleanProperty.create("decaying");
   public static IntegerProperty DECAY = IntegerProperty.create("decay", 0, 10);
   public static BooleanProperty COLORED = BooleanProperty.create("colored");
   public static EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
 
-  public static final int[][] UNCOLORED = {
-      {177, 255, 255, 219, 122},
-      {255, 223, 163, 179, 144},
-      {117, 163, 255, 255, 255}
-  };
-
   public FeyLightBlock(Properties builder) {
     super(builder);
     this.registerDefaultState(this.defaultBlockState().setValue(DECAYING, false).setValue(DECAY, 0)
-        .setValue(COLORED, false).setValue(COLOR, DyeColor.WHITE));
+        .setValue(COLORED, false).setValue(COLOR, DyeColor.WHITE).setValue(WATERLOGGED, false));
   }
 
 
@@ -63,18 +58,4 @@ public class FeyLightBlock extends Block {
       );
     }
   }
-
-/*  @Override
-  public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-    return new FeyLightBlockEntity(pos, state);
-  }
-
-  @Override
-  public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-    if (level.isClientSide()) {
-      return BaseBlockEntity::clientTick;
-    }
-
-    return null;
-  }*/
 }
