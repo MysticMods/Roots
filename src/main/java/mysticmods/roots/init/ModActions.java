@@ -28,6 +28,7 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, FillCompostAction> FILL_COMPOST = ACTIONS.register("fill_compost", FillCompostAction::new);
   public static final DeferredHolder<GroveAction, GrowHugeMushroomAction> GROW_HUGE_MUSHROOM = ACTIONS.register("grow_huge_mushroom", GrowHugeMushroomAction::new);
   public static final DeferredHolder<GroveAction, ArriveDimensionAction> ARRIVE_DIMENSION = ACTIONS.register("arrive_dimension", ArriveDimensionAction::new);
+  public static final DeferredHolder<GroveAction, GeasAction> GEAS = ACTIONS.register("geas", GeasAction::new);
 
   public static void register (IEventBus bus) {
     ACTIONS.register(bus);

@@ -25,8 +25,6 @@ import java.util.function.Predicate;
 // -> level, player, blockstate, block entity, itemstack
 // - Milking a cow
 // -> level, player, entity, itemstack, spell instance
-// - Successfully casting a geas
-// -> level, player, entity, spell instance
 
 public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   @Override
