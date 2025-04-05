@@ -44,7 +44,9 @@ public class StaffScreen extends RootsScreen {
 
   public static void open(@Nullable InteractionHand hand, int inventorySlot) {
     StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
+    Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
     Minecraft.getInstance().setScreen(newScreen);
+
   }
 
   private SpellStorage getStorage() {
