@@ -38,9 +38,11 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
   private final Model3D model = null;
   // TODO: dynamic bounds?
   private AABB bounds = null;
+  private AABB renderBounds = null;
 
   public BoundedBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     this.context = context;
+    this.renderBounds = new AABB(-30, -30, -30, 30, 30, 30);
   }
 
   @Override
@@ -84,11 +86,16 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
 
   @Override
   public int getViewDistance() {
-    return 64 * 4;
+    return 64 * 64;
   }
 
   @Override
   public boolean shouldRenderOffScreen(T pBlockEntity) {
     return true;
+  }
+
+  @Override
+  public AABB getRenderBoundingBox(T blockEntity) {
+    return renderBounds.move(blockEntity.getBlockPos());
   }
 }
