@@ -3,8 +3,14 @@
     "#roots:barks_that_burn": {
       "burn_time": 100
     },
+    "#roots:logs/runed": {
+      "burn_time": 300
+    },
     "roots:display_pedestal": {
       "burn_time": 300
+    },
+    "roots:fire_starter": {
+      "burn_time": 90
     },
     "roots:grove_pedestal": {
       "burn_time": 100
@@ -17,6 +23,9 @@
     },
     "roots:sheared_thatch": {
       "burn_time": 100
+    },
+    "roots:staff": {
+      "burn_time": 900
     },
     "roots:stripped_wildwood_log": {
       "burn_time": 300
@@ -39,6 +48,9 @@
     "roots:wildwood_gate": {
       "burn_time": 300
     },
+    "roots:wildwood_ladder": {
+      "burn_time": 300
+    },
     "roots:wildwood_log": {
       "burn_time": 300
     },
@@ -59,6 +71,9 @@
     },
     "roots:wildwood_wood": {
       "burn_time": 300
+    },
+    "roots:wooden_shears": {
+      "burn_time": 1500
     }
   }
 }

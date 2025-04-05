@@ -170,6 +170,11 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.GROVE_PEDESTAL, new FurnaceFuel(100), false);
     builder10.add(ModItems.SHEARED_THATCH, new FurnaceFuel(100), false);
     builder10.add(ModItems.THATCH, new FurnaceFuel(100), false);
+    builder10.add(ModItems.STAFF, new FurnaceFuel(900), false);
+    builder10.add(ModItems.WOODEN_SHEARS, new FurnaceFuel(1500), false);
+    builder10.add(ModItems.WILDWOOD_LADDER, new FurnaceFuel(300), false);
+    builder10.add(ModItems.FIRE_STARTER, new FurnaceFuel(90), false);
+    builder10.add(RootsTags.Items.RUNED_LOGS, new FurnaceFuel(300), false);
     builder10.add(RootsTags.Items.BARKS_THAT_BURN, new FurnaceFuel(100), false);
 
     Builder<ItemStack, Ritual> builder11 = builder(DataMaps.RITUAL_DISPLAY_ITEM).replace(false);
