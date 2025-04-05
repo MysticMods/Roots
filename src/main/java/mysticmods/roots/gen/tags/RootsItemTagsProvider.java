@@ -186,6 +186,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.COOKED_VEGETABLES).add(Items.BAKED_POTATO);
     this.tag(RootsTags.Items.COOKED_SEAFOOD).add(Items.COOKED_COD, Items.COOKED_SALMON);
 
+    this.tag(ItemTags.LOGS_THAT_BURN).addTag(RootsTags.Items.WILDWOOD_LOGS);
+
     this.tag(RootsTags.Items.FLINT).add(Items.FLINT);
 
     // TODO: Are there more stone blocks to go in here?

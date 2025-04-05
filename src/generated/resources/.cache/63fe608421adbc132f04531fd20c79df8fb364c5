@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-24T18:42:07.4110093	Roots Item Tags
+// 1.21.1	2025-04-05T15:02:37.6953698	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -23,6 +23,7 @@ e0e65cab5a31762891e3c621c7fe8e389c63409a data/minecraft/tags/item/foot_armor.jso
 ca4be7f2a2f75c90936b26662964abad4c1f46d1 data/minecraft/tags/item/head_armor.json
 566ccbb7a788ff1e66d248921f8d99b4288c709f data/minecraft/tags/item/hoes.json
 9a5ca1a9295d5d0bef4186df475397eede036498 data/minecraft/tags/item/leg_armor.json
+26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/item/logs_that_burn.json
 13779c2da19740afaf64895b4637a5a4542d7222 data/minecraft/tags/item/pickaxes.json
 3c841c97e7e2fcbeb86c1ff92141c065010ffdae data/minecraft/tags/item/piglin_loved.json
 50ec12b5ae41cf93adbfe643215052a22a52d293 data/minecraft/tags/item/shovels.json
