@@ -82,8 +82,6 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
       } else if (recipe3.getTest() != null && recipe3.getOutputState() != null) {
         skippedInputs.add(recipe3.getTest().getBlockState(provider).getBlock());
         skippedOutputs.add(recipe3.getOutputState().getBlock());
-      } else {
-        continue;
       }
     }
 
@@ -138,6 +136,11 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
           .addIngredients(Ingredient.of(inputs.toArray(new ItemLike[0])));
       builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 34)
           .addIngredients(Ingredient.of(outputs.toArray(new ItemLike[0])));
+
+      if (recipe instanceof KnifeOffHandRecipe offHandRecipe) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 39, 11)
+            .addIngredients(Ingredient.of(offHandRecipe.getOffHandTag()));
+      }
     } else {
       if (recipe == DynamicBarkRecipe.INSTANCE) {
         if (dynamicInputs == null) {
