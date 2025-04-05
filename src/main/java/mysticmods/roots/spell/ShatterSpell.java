@@ -181,7 +181,12 @@ public class ShatterSpell extends Spell {
       if (pLevel.destroyBlock(pos, true, pPlayer)) {
         ShatterBlockAction.Context context = new ShatterBlockAction.Context((ServerLevel) pLevel, player, pos, state, instance);
         ModActions.SHATTER_BLOCK.get().accept(context);
-        count++;
+        Integer opCost = state.getBlockHolder().getData(DataMaps.OPERATION_COST);
+        if (opCost == null) {
+          count++;
+        } else {
+          count += opCost;
+        }
       }
     }
 
