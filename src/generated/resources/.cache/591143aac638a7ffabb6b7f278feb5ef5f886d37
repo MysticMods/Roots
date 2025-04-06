@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-22T19:51:31.3722127	Item Models: roots
+// 1.21.1	2025-04-06T15:00:04.2267807	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -61,13 +61,13 @@ d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/display_pedest
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/fennec_spawn_egg.json
 5b7ecfad827acdf6b56386fe184beba2553f4f27 assets/roots/models/item/fey_leather.json
 9f26dada3953d97ff0d875094cb9b9859ecaa96a assets/roots/models/item/fey_pouch.json
-a1d37ce2fb2fa339ff79ec991648a83ebf41eb77 assets/roots/models/item/fire_starter.json
+ed9102b2e94017998ecf81b2c86cb29365462194 assets/roots/models/item/fire_starter.json
 a9f24fd326a6cb57c1ac50440d5849502ab332cf assets/roots/models/item/flour.json
 cb855da7b1d0684c4bc009f0241040ca807f5123 assets/roots/models/item/geas.json
 9907759431eb2eabffe2b5fac3a34337273fe463 assets/roots/models/item/gift_box.json
 733417364febd98d98daf39450a5755322e7261d assets/roots/models/item/glass_eye.json
 1f500ef66b0ca053aabb91da18d416662b6c2b03 assets/roots/models/item/golden_knife.json
-5435be8db38522314eefe77149313635473e45a3 assets/roots/models/item/gramary.json
+a29b76b795c7b9db9d670c008740b58bb3a77e2d assets/roots/models/item/gramary.json
 3b41145a3b0d4c733c6cfc658481713ad4130b6e assets/roots/models/item/granite_quartz_ore.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/green_sprout_spawn_egg.json
 06eb1d5ea6dd0dd11106b80a054fd03eae4f0605 assets/roots/models/item/grove_crafter.json
@@ -83,12 +83,12 @@ f49e298ede83512d9c74474554aa89982e07f3ea assets/roots/models/item/inferno_bulb.j
 5a69aa2da7a46f4d23db5ee0f46b65c18210345d assets/roots/models/item/jungle_bark.json
 07ac679ec17fe212caece89bfa2729cba6367410 assets/roots/models/item/life_essence.json
 2d13b03401c4afaf2f0a49c28eb7eb58bfd2a5be assets/roots/models/item/lilac_cordial.json
-0c4949e74b949ad4743f430249d503ca1ac3ae6d assets/roots/models/item/living_arrow.json
-32cf9ea4173c2928b3d8617e05d350a9a4f56482 assets/roots/models/item/living_axe.json
-8846a785a5b9df5037713c29dd203b58425bc031 assets/roots/models/item/living_hoe.json
-e28948ede91b3892afbfadec42b5ee823064bfda assets/roots/models/item/living_pickaxe.json
-fa6ba53ffe537e405e09905a8f72b76a847f2c22 assets/roots/models/item/living_shovel.json
-5e9b753d1bad5e21e7715b265c5fef86699ad7f0 assets/roots/models/item/living_sword.json
+dcbc8e5274324f73154d4a6e243bfa2cb763616f assets/roots/models/item/living_arrow.json
+100974babb39a126475658528c0b5bf001e1876b assets/roots/models/item/living_axe.json
+b53d0c657a02cd435e69acfe92f80c82d2be0306 assets/roots/models/item/living_hoe.json
+c17bb20ed1c59646f719b0ed23185a90968e5a86 assets/roots/models/item/living_pickaxe.json
+d55f477cd866819a1816a8c3a9ae80d9ad1e1bf8 assets/roots/models/item/living_shovel.json
+4cdb54748f238359366a5c4e15e3d3d0285cead8 assets/roots/models/item/living_sword.json
 705bcaee0dc9fff3acd43613739aa49bf19fb6ab assets/roots/models/item/magmatic_soil.json
 b7d348bfc345b6f5c042d545a7cc1b3e86bc8800 assets/roots/models/item/mangrove_bark.json
 ecf0fb0b807eadf02730884b26ca34b67129b954 assets/roots/models/item/mixed_bark.json
@@ -110,7 +110,7 @@ bb082cec1ce31e7bcd200abe6e0eef69ade972bb assets/roots/models/item/oak_bark.json
 0a0823eebd55217ab4635daf2b9165285509a802 assets/roots/models/item/peony_cordial.json
 19b6878a79f3eea445e3994e51e665050a66fa10 assets/roots/models/item/pereskia.json
 84c41742217ef91ae241182d083d40defd5aadcf assets/roots/models/item/pereskia_bulb.json
-23d5f54db897a21477eb86920bf8a61dc20f2d46 assets/roots/models/item/pestle.json
+667e9628b663d19a58ade97fa9cdb885b1c9c585 assets/roots/models/item/pestle.json
 dde16f862d56b92c0e5d8e61445d10cee1bfe590 assets/roots/models/item/petals.json
 f8ce532274205437bee1ca636d8d9835d90f5708 assets/roots/models/item/primal_grove_stone.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/purple_sprout_spawn_egg.json
@@ -145,7 +145,7 @@ fe57e1054b44344cd60222a20c2d176ffa30f898 assets/roots/models/item/ritual_summon_
 ad382601b391d21b7fdf003afb465605ee7a4dfc assets/roots/models/item/ritual_windwall.json
 dbb40ba5b6a9832df81c07287fc68e961d0d082d assets/roots/models/item/rose_cordial.json
 90cba9eeb6eb9a781d34ba38a616308b0d58b3e3 assets/roots/models/item/runed_acacia_log.json
-0dc2329ea0cfb64cd6a5a19317f325112da959fe assets/roots/models/item/runed_axe.json
+deccdc87883db4d9f022452298c081122e0ea7ad assets/roots/models/item/runed_axe.json
 13c651d79ace2fe48a545539ba829418c8ef56cf assets/roots/models/item/runed_birch_log.json
 c8291f6a8050d816491d782f4acaa6f69a87e2cb assets/roots/models/item/runed_brick.json
 f351eb545d13e926311c17cb8d41a7782365ff67 assets/roots/models/item/runed_brick_button.json
@@ -155,20 +155,20 @@ dc7014b7c3f618ecb9ec6deddb464289ae575a6a assets/roots/models/item/runed_brick_st
 072044856069aa3bdfc11c53d73be153af351721 assets/roots/models/item/runed_brick_wall.json
 79bb0f75a35612e05be9e820b17b6cb9f428a46b assets/roots/models/item/runed_button.json
 ba2eb3344a0a5a5fae9d2b370b455e9f3ad34d07 assets/roots/models/item/runed_crimson_stem.json
-de31be53f0a9b94c99903a97259f79399262cc12 assets/roots/models/item/runed_dagger.json
+28f33eb644d319b0aaa73e21790a1241e03c6da4 assets/roots/models/item/runed_dagger.json
 0a8c547df135abb1feb854beff808491c8bea8bf assets/roots/models/item/runed_dark_oak_log.json
-46e325820a5b0623cc699b4e2b6d6d21512a0435 assets/roots/models/item/runed_hoe.json
+4772820f205ebec46d36544a8f34e9ad580c84bd assets/roots/models/item/runed_hoe.json
 c1c46c2b56e252f1f37879c3cd82d3bd6d9ad1be assets/roots/models/item/runed_jungle_log.json
 6d045ea0cd7dbd9b6aae725a5847c5cc8af65eae assets/roots/models/item/runed_mangrove_log.json
 4715a8cdd16e3525aa378d2a4500515380469cfe assets/roots/models/item/runed_oak_log.json
 88caea085d06236282dc960d7e58a4db19800177 assets/roots/models/item/runed_obsidian.json
-e7467e88fb2bae79b3580176b1e3fb993be1f5e5 assets/roots/models/item/runed_pickaxe.json
+ca339e70b99b9710e78c0834ba6de08e961fe9a0 assets/roots/models/item/runed_pickaxe.json
 44cf7ba7fd96683dba00c54c3ad46c62a9c1a150 assets/roots/models/item/runed_pressure_plate.json
-e38a702ca357cf22ee1a1abe51ee0b0cb3e65bcb assets/roots/models/item/runed_shovel.json
+4b42bc6b86929971d7cbfe41c7979e42f60045f3 assets/roots/models/item/runed_shovel.json
 d5c9c92463d85fbd9589030d43daa4410c01a684 assets/roots/models/item/runed_slab.json
 06706fa39fb1471df8c2731a32fb172e25148ca0 assets/roots/models/item/runed_spruce_log.json
 e5b697f9db99974d47fa74d1772fb2d121101a9d assets/roots/models/item/runed_stairs.json
-d72eab30509bf84ba22f93952eeb2864059f0c5d assets/roots/models/item/runed_sword.json
+1ccccb45d77cf923e51c6689d05c527e19609fdf assets/roots/models/item/runed_sword.json
 c13a6ac48f264165f9123cc6378d379b0aa85dec assets/roots/models/item/runed_tile.json
 71c8413237f5a83628d475afda4f883dabda9091 assets/roots/models/item/runed_tile_button.json
 4b53fbad73b3fcd067158cf1561d50625aa80ed5 assets/roots/models/item/runed_tile_pressure_plate.json
@@ -197,7 +197,7 @@ d8f0dc593c135534c27485ff8b5227f41ff3250c assets/roots/models/item/runestone_tile
 b41ae896ebb09549c9988672a008f0bd1b01864b assets/roots/models/item/runestone_tile_wall.json
 24e437f127d83d661b4c3d80977c8b20b8095976 assets/roots/models/item/runestone_wall.json
 046b7ac3c277dff28aa2b23060980ae829c19183 assets/roots/models/item/runic_dust.json
-979f81433097c238ee318f10db5211c7fefa499a assets/roots/models/item/runic_shears.json
+e44d172ee9eeec7c6d5fe9ed4d0fbf3de80445f3 assets/roots/models/item/runic_shears.json
 6cb5610a1d2993b32620a443bc9fb0bf9c18aaab assets/roots/models/item/sheared_thatch.json
 f87e922ad38abf9fac16090d3134a0ff0dff2cc6 assets/roots/models/item/silver_block.json
 71e31aada81b293442ab6cd03baf84ee9c698ea2 assets/roots/models/item/silver_ingot.json

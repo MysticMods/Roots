@@ -232,24 +232,24 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.WILDEWHEET_BREAD, "food");
     subfolder(ModItems.WILDROOT_STEW, "food");
 
-    subfolder(ModItems.FIRE_STARTER, "tools");
-    subfolder(ModItems.GRAMARY, "tools");
-    subfolder(ModItems.LIVING_ARROW, "tools");
-    subfolder(ModItems.LIVING_AXE, "tools");
-    subfolder(ModItems.LIVING_HOE, "tools");
-    subfolder(ModItems.LIVING_PICKAXE, "tools");
-    subfolder(ModItems.LIVING_SHOVEL, "tools");
-    subfolder(ModItems.LIVING_SWORD, "tools");
+    handheld(ModItems.FIRE_STARTER, "tools");
+    handheld(ModItems.GRAMARY, "tools");
+    handheld(ModItems.LIVING_ARROW, "tools");
+    handheld(ModItems.LIVING_AXE, "tools");
+    handheld(ModItems.LIVING_HOE, "tools");
+    handheld(ModItems.LIVING_PICKAXE, "tools");
+    handheld(ModItems.LIVING_SHOVEL, "tools");
+    handheld(ModItems.LIVING_SWORD, "tools");
 
-    subfolder(ModItems.PESTLE, "tools");
-    subfolder(ModItems.RUNED_AXE, "tools");
-    subfolder(ModItems.RUNED_PICKAXE, "tools");
-    subfolder(ModItems.RUNED_DAGGER, "tools");
-    subfolder(ModItems.RUNED_HOE, "tools");
-    subfolder(ModItems.RUNED_PICKAXE, "tools");
-    subfolder(ModItems.RUNED_SHOVEL, "tools");
-    subfolder(ModItems.RUNED_SWORD, "tools");
-    subfolder(ModItems.RUNIC_SHEARS, "tools");
+    handheld(ModItems.PESTLE, "tools");
+    handheld(ModItems.RUNED_AXE, "tools");
+    handheld(ModItems.RUNED_PICKAXE, "tools");
+    handheld(ModItems.RUNED_DAGGER, "tools");
+    handheld(ModItems.RUNED_HOE, "tools");
+    handheld(ModItems.RUNED_PICKAXE, "tools");
+    handheld(ModItems.RUNED_SHOVEL, "tools");
+    handheld(ModItems.RUNED_SWORD, "tools");
+    handheld(ModItems.RUNIC_SHEARS, "tools");
 
     ModelFile generated = new ModelFile.UncheckedModelFile(modLoc("item/staff_template"));
     getBuilder(ModItems.STAFF.getKey().location().toString()).parent(generated)
@@ -341,6 +341,13 @@ public class RootsItemModelProvider extends ItemModelProvider {
     ResourceLocation item = itemHolder.getKey().location();
     return getBuilder(item.toString())
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/" + subfolder + "/" + item.getPath()));
+  }
+
+  public ItemModelBuilder handheld(Holder<Item> itemHolder, String subfolder) {
+    ResourceLocation item = itemHolder.getKey().location();
+    return getBuilder(item.toString())
+        .parent(new ModelFile.UncheckedModelFile("item/handheld"))
         .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/" + subfolder + "/" + item.getPath()));
   }
 
