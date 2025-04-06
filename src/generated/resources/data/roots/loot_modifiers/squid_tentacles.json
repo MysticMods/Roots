@@ -1,0 +1,13 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "#roots:add_tentacle_loot"
+      }
+    }
+  ],
+  "table": "roots:entity/squid/tentacles"
+}

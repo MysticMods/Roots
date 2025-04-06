@@ -145,6 +145,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.RUNIC_SHEARS_OVERRIDE)
         .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.LLAMA, EntityType.TRADER_LLAMA, EntityType.CAMEL);
     this.tag(RootsTags.Entities.ALLOW_CASTING_TOOL_RIGHT_CLICK);
+    this.tag(RootsTags.Entities.ADD_TENTACLE_LOOT).add(EntityType.SQUID, EntityType.GLOW_SQUID);
   }
 
   @Override

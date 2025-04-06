@@ -60,7 +60,7 @@ import java.util.stream.Stream;
 
 public class RootsLootTableProvider {
   public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY)), provider);
+    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES, RootsAPI.TENTACLES), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY)), provider);
   }
 
   public static class RootsEntityLootTables extends EntityLootSubProvider {
@@ -666,6 +666,21 @@ public class RootsLootTableProvider {
 
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
+      consumer.accept(
+          RootsAPI.TENTACLES,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool()
+                  .add(LootItem.lootTableItem(ModItems.RAW_SQUID.get())
+                      .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                      .apply(EnchantedCountIncreaseFunction.lootingMultiplier(provider, UniformGenerator.between(0, 1)))
+                      .apply(SmeltItemFunction.smelted()
+                          .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
+                              .flags(EntityFlagsPredicate.Builder.flags()
+                                  .setOnFire(true)))))
+                  )
+                  .setRolls(ConstantValue.exactly(1))
+              )
+      );
       consumer.accept(
           RootsAPI.STANDING_STONES,
           LootTable.lootTable()

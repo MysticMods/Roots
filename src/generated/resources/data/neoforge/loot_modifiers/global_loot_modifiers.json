@@ -1,17 +1,18 @@
 {
   "entries": [
-    "roots:wildroot_from_forageable_single_blocks",
-    "roots:wildroot_from_foragable_double_blocks",
     "roots:grove_spores_from_forageable_single_blocks",
-    "roots:grove_spores_from_foragable_double_blocks",
     "roots:wildroot_from_short_grass",
     "roots:aubergine_from_tall_grass",
     "roots:grove_spores_from_tall_grass",
-    "roots:wildroot_from_tall_grass",
     "roots:grove_spores_from_short_grass",
-    "roots:grove_spores_from_waterlogged_foreagable_single_blocks",
     "roots:aubergine_from_short_grass",
-    "roots:grove_spores_from_waterlogged_foreagable_double_blocks"
+    "roots:wildroot_from_forageable_single_blocks",
+    "roots:wildroot_from_foragable_double_blocks",
+    "roots:grove_spores_from_foragable_double_blocks",
+    "roots:wildroot_from_tall_grass",
+    "roots:grove_spores_from_waterlogged_foreagable_single_blocks",
+    "roots:grove_spores_from_waterlogged_foreagable_double_blocks",
+    "roots:squid_tentacles"
   ],
   "replace": false
 }

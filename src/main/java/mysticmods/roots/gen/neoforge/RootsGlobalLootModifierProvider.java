@@ -7,20 +7,20 @@ import mysticmods.roots.loot.conditions.ForagingRandomChanceCondition;
 import mysticmods.roots.loot.conditions.LootItemBlockTagCondition;
 import mysticmods.roots.loot.conditions.WaterloggedBlockCondition;
 import mysticmods.roots.loot.modifiers.AddGrassDropsModifier;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.EntityTypePredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
+import net.neoforged.neoforge.common.loot.AddTableLootModifier;
 import net.neoforged.neoforge.common.loot.CanItemPerformAbility;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
     return conditions.toArray(LootItemCondition[]::new);
   }
 
-  private LootItemCondition[] getForagingConditions (TagKey<Block> tag, float initialChance, boolean tall, boolean wet) {
+  private LootItemCondition[] getForagingConditions(TagKey<Block> tag, float initialChance, boolean tall, boolean wet) {
     List<LootItemCondition> conditions = new ArrayList<>();
     conditions.add(ForagingRandomChanceCondition.randomChance(initialChance).build());
     conditions.add(LootItemBlockTagCondition.tag(tag));
@@ -85,5 +85,11 @@ public class RootsGlobalLootModifierProvider extends GlobalLootModifierProvider 
 
     this.add("wildroot_from_forageable_single_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_SINGLE_BLOCKS, 0.01f, false, false), ModItems.WILDROOT));
     this.add("wildroot_from_foragable_double_blocks", new AddGrassDropsModifier(getForagingConditions(RootsTags.Blocks.FORAGEABLE_DOUBLE_BLOCKS, 0.01f, true, false), ModItems.WILDROOT));
+
+    this.add("squid_tentacles", new AddTableLootModifier(new LootItemCondition[]{LootItemEntityPropertyCondition.hasProperties(
+        LootContext.EntityTarget.THIS,
+        EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(RootsTags.Entities.ADD_TENTACLE_LOOT))
+    ).build()}, RootsAPI.TENTACLES));
+
   }
 }
