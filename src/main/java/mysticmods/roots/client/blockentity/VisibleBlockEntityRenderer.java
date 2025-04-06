@@ -18,6 +18,12 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class VisibleBlockEntityRenderer implements BlockEntityRenderer<VisibleBlockEntity> {
+  protected final BlockEntityRendererProvider.Context context;
+
+  private final Model3D model = null;
+  // TODO: dynamic bounds?
+  private AABB bounds = null;
+
   // TODO: Why is this
   private static final int[] colors = new int[EnumUtils.DIRECTIONS.length];
 
@@ -29,11 +35,6 @@ public class VisibleBlockEntityRenderer implements BlockEntityRenderer<VisibleBl
     colors[Direction.WEST.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.58F);
     colors[Direction.EAST.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.58F);
   }
-
-  protected final BlockEntityRendererProvider.Context context;
-  private final Model3D model = null;
-  // TODO: dynamic bounds?
-  private AABB bounds = null;
 
   public VisibleBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     this.context = context;

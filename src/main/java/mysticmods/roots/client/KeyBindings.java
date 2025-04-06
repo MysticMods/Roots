@@ -52,12 +52,12 @@ public class KeyBindings {
   public static class HoldingTaggedItem implements IKeyConflictContext {
     private final TagKey<Item> tag;
 
-    protected HoldingTaggedItem(TagKey<Item> tag) {
-      this.tag = tag;
-    }
-
     public static HoldingTaggedItem item(TagKey<Item> tag) {
       return new HoldingTaggedItem(tag);
+    }
+
+    protected HoldingTaggedItem(TagKey<Item> tag) {
+      this.tag = tag;
     }
 
     @Override
@@ -88,6 +88,14 @@ public class KeyBindings {
   public static class CastingTaggedSpell extends HoldingTaggedItem {
     private final TagKey<Spell> tag;
 
+    public static CastingTaggedSpell spell(TagKey<Spell> tag) {
+      return new CastingTaggedSpell(tag);
+    }
+
+    public static CastingTaggedSpell spell(TagKey<Item> item, TagKey<Spell> spell) {
+      return new CastingTaggedSpell(item, spell);
+    }
+
     protected CastingTaggedSpell(TagKey<Item> item, TagKey<Spell> spell) {
       super(item);
       this.tag = spell;
@@ -96,14 +104,6 @@ public class KeyBindings {
     protected CastingTaggedSpell(TagKey<Spell> tag) {
       super(RootsTags.Items.CASTING_TOOLS);
       this.tag = tag;
-    }
-
-    public static CastingTaggedSpell spell(TagKey<Spell> tag) {
-      return new CastingTaggedSpell(tag);
-    }
-
-    public static CastingTaggedSpell spell(TagKey<Item> item, TagKey<Spell> spell) {
-      return new CastingTaggedSpell(item, spell);
     }
 
     @Override

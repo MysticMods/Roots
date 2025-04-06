@@ -1,7 +1,9 @@
 package mysticmods.roots.block;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.blockentity.VisibleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -19,17 +22,21 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class WildRootsBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
+  public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  public static BooleanProperty MOSSY = BooleanProperty.create("mossy");
+
+  private static final MapCodec<WildRootsBlock> CODEC = simpleCodec(WildRootsBlock::new);
+
   private static final VoxelShape UP_AABB = Block.box(3, 0, 2, 13, 4, 14);
   private static final VoxelShape DOWN_AABB = Block.box(3, 12, 2, 13, 16, 14);
+
   private static final VoxelShape EAST_AABB = Block.box(0, 2, 3, 4, 14, 13);
   private static final VoxelShape WEST_AABB = Block.box(12, 2, 3, 16, 14, 13);
   private static final VoxelShape SOUTH_AABB = Block.box(3, 2, 0, 13, 14, 4);
   private static final VoxelShape NORTH_AABB = Block.box(3, 2, 12, 13, 14, 16);
-  public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-  public static BooleanProperty MOSSY = BooleanProperty.create("mossy");
-  private static final MapCodec<WildRootsBlock> CODEC = simpleCodec(WildRootsBlock::new);
 
   public WildRootsBlock(Properties properties) {
     super(properties);

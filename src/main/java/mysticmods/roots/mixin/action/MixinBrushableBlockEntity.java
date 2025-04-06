@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BrushableBlockEntity;
+import org.checkerframework.checker.units.qual.A;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,8 +19,8 @@ public class MixinBrushableBlockEntity {
   @Shadow
   private ItemStack item;
 
-  @Inject(method = "brush", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BrushableBlockEntity;brushingCompleted(Lnet/minecraft/world/entity/player/Player;)V"))
-  private void RootsOnBlockBrush(long startTick, Player player, Direction hitDirection, CallbackInfoReturnable<Boolean> cir) {
+  @Inject(method="brush", at=@At(value="INVOKE", target="Lnet/minecraft/world/level/block/entity/BrushableBlockEntity;brushingCompleted(Lnet/minecraft/world/entity/player/Player;)V"))
+  private void RootsOnBlockBrush (long startTick, Player player, Direction hitDirection, CallbackInfoReturnable<Boolean> cir) {
     if (!(player instanceof ServerPlayer serverPlayer)) {
       return;
     }

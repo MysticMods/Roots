@@ -2,6 +2,7 @@ package mysticmods.roots.api.attachment;
 
 import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -14,8 +15,9 @@ public class HerbStorage implements ICleanable {
   public static final Codec<HerbStorage> CODEC = Codec.unboundedMap(RootsRegistries.HERBS.byNameCodec(), Codec.DOUBLE)
       .xmap(HerbStorage::new, HerbStorage::getHerbMap);
   public static final StreamCodec<RegistryFriendlyByteBuf, HerbStorage> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.map(Object2DoubleOpenHashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.HERBS), ByteBufCodecs.DOUBLE), HerbStorage::getHerbMap, HerbStorage::new);
-  private final Object2DoubleOpenHashMap<Herb> herbMap;
+
   private boolean dirty = true;
+  private final Object2DoubleOpenHashMap<Herb> herbMap;
 
   public HerbStorage() {
     herbMap = new Object2DoubleOpenHashMap<>();
@@ -29,7 +31,7 @@ public class HerbStorage implements ICleanable {
     return herbMap;
   }
 
-  public double amount(Herb herb) {
+  public double amount (Herb herb) {
     return herbMap.getDouble(herb);
   }
 
@@ -67,11 +69,11 @@ public class HerbStorage implements ICleanable {
     return herbMap.isEmpty();
   }
 
-  public boolean isDirty() {
-    return dirty;
-  }
-
   public void setDirty(boolean dirty) {
     this.dirty = dirty;
+  }
+
+  public boolean isDirty() {
+    return dirty;
   }
 }

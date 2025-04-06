@@ -3,10 +3,10 @@ package mysticmods.roots.gen.neoforge;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.action.GroveReputation;
-import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
@@ -30,6 +30,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
@@ -373,7 +374,7 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     builder15.add(Blocks.CACTUS.builtInRegistryHolder(), new GrowthRecord(Blocks.CACTUS, Optional.of(CactusBlock.AGE), CactusBlock.MAX_AGE, 2, ModTests.CACTUS_CANE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
     builder16.add(Blocks.CACTUS.builtInRegistryHolder(), new HarvestRecord(Blocks.CACTUS, Optional.empty(), Optional.empty(), -1, ModTests.CAN_HARVEST_LOWEST.get(), ModTests.HARVEST_ALL_ABOVE_SAME_BLOCK.get()), false);
-
+    
     builder15.add(Blocks.SUGAR_CANE.builtInRegistryHolder(), new GrowthRecord(Blocks.SUGAR_CANE, Optional.of(SugarCaneBlock.AGE), 15, 2, ModTests.CACTUS_CANE_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
     builder16.add(Blocks.SUGAR_CANE.builtInRegistryHolder(), new HarvestRecord(Blocks.SUGAR_CANE, Optional.empty(), Optional.empty(), -1, ModTests.CAN_HARVEST_LOWEST.get(), ModTests.HARVEST_ALL_ABOVE_SAME_BLOCK.get()), false);
 

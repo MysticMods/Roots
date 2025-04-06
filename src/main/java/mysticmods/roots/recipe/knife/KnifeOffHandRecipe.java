@@ -110,12 +110,12 @@ public class KnifeOffHandRecipe extends KnifeRecipe {
   }
 
   public static class Builder {
-    private final List<String> skipProperties = new ArrayList<>();
     private PartialBlockState outputState;
     private WorldTest test;
     private List<WorldCondition> condition = new ArrayList<>();
     private OutputStateMapper stateMapper;
     private int durabilityCost = 1;
+    private final List<String> skipProperties = new ArrayList<>();
     private TagKey<Item> offHandTag;
 
     protected Builder() {
@@ -125,10 +125,6 @@ public class KnifeOffHandRecipe extends KnifeRecipe {
       this.outputState = outputState;
       this.condition = condition;
       this.stateMapper = stateMapper;
-    }
-
-    public static Builder create() {
-      return new Builder();
     }
 
     public Builder tag(TagKey<Item> offHandTag) {
@@ -166,6 +162,7 @@ public class KnifeOffHandRecipe extends KnifeRecipe {
       return this;
     }
 
+
     public Builder skipProperties(String... properties) {
       Collections.addAll(skipProperties, properties);
       return this;
@@ -197,6 +194,10 @@ public class KnifeOffHandRecipe extends KnifeRecipe {
 
     public KnifeRecipe build(BaseRecipeData.Builder data) {
       return build(data.build());
+    }
+
+    public static Builder create() {
+      return new Builder();
     }
   }
 }

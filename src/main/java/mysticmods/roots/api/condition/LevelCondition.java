@@ -44,26 +44,6 @@ public abstract class LevelCondition implements IDescribed {
   public LevelCondition() {
   }
 
-  public static LevelCondition.PillarCondition runePillar(int height) {
-    return new LevelCondition.PillarCondition(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Blocks.RUNE_PILLARS, height);
-  }
-
-  public static LevelCondition.PillarCondition logPillar(PillarType type, int height) {
-    return new PillarCondition(type.getCapstoneTag(), type.getPillarTag(), height);
-  }
-
-  public static LevelCondition.GroveStoneCondition groveStone(GroveType grove, boolean requireValid) {
-    return groveStone(grove, requireValid, false);
-  }
-
-  public static LevelCondition.GroveStoneCondition groveStone(GroveType grove, boolean requireValid, boolean requireInvalid) {
-    return new GroveStoneCondition(grove.getTag(), requireValid, requireInvalid);
-  }
-
-  public static LevelCondition.GroveStoneCondition anyGroveStone(boolean requireValid) {
-    return new GroveStoneCondition(RootsTags.Blocks.GROVE_STONES, requireValid);
-  }
-
   public Holder<LevelCondition> builtInRegistryHolder() {
     return RootsRegistries.LEVEL_CONDITIONS.wrapAsHolder(this);
   }
@@ -111,40 +91,6 @@ public abstract class LevelCondition implements IDescribed {
     }
 
     return Collections.emptySet();
-  }
-
-  public enum PillarType {
-    ACACIA(RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Blocks.ACACIA_CAPSTONES),
-    BIRCH(RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Blocks.BIRCH_CAPSTONES),
-    DARK_OAK(RootsTags.Blocks.DARK_OAK_PILLARS, RootsTags.Blocks.DARK_OAK_CAPSTONES),
-    JUNGLE(RootsTags.Blocks.JUNGLE_PILLARS, RootsTags.Blocks.JUNGLE_CAPSTONES),
-    OAK(RootsTags.Blocks.OAK_PILLARS, RootsTags.Blocks.OAK_CAPSTONES),
-    SPRUCE(RootsTags.Blocks.SPRUCE_PILLARS, RootsTags.Blocks.SPRUCE_CAPSTONES),
-    CRIMSON(RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Blocks.CRIMSON_CAPSTONES),
-    WARPED(RootsTags.Blocks.WARPED_PILLARS, RootsTags.Blocks.WARPED_CAPSTONES),
-    WILDWOOD(RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.WILDWOOD_CAPSTONES),
-    MANGROVE(RootsTags.Blocks.MANGROVE_PILLARS, RootsTags.Blocks.MANGROVE_CAPSTONES),
-    ANY_LOG(RootsTags.Blocks.LOG_PILLARS, RootsTags.Blocks.LOG_CAPSTONES),
-    RUNE(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Blocks.RUNE_CAPSTONES),
-    RUNED(RootsTags.Blocks.RUNED_PILLARS, RootsTags.Blocks.RUNED_CAPSTONES),
-    ANY_RUNE(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Blocks.RUNES_CAPSTONES),
-    ANY(RootsTags.Blocks.PILLARS, RootsTags.Blocks.CAPSTONES);
-
-    private final TagKey<Block> pillarTag;
-    private final TagKey<Block> capstoneTag;
-
-    PillarType(TagKey<Block> pillarTag, TagKey<Block> capstoneTag) {
-      this.pillarTag = pillarTag;
-      this.capstoneTag = capstoneTag;
-    }
-
-    public TagKey<Block> getPillarTag() {
-      return pillarTag;
-    }
-
-    public TagKey<Block> getCapstoneTag() {
-      return capstoneTag;
-    }
   }
 
   public static class FluidSourcePropertyCondition extends LevelCondition {
@@ -203,22 +149,6 @@ public abstract class LevelCondition implements IDescribed {
       this.heightExcluding = height;
     }
 
-    public static CanonicalRepresentation fromStates(BlockState capstone, BlockState pillar, int height) {
-      if (capstone.hasProperty(RotatedPillarBlock.AXIS)) {
-        capstone = capstone.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
-      }
-      List<PartialBlockState> states = new ArrayList<>();
-      for (int i = 0; i < height; i++) {
-        if (capstone.hasProperty(RotatedPillarBlock.AXIS)) {
-          states.add(new PartialBlockState(pillar, RotatedPillarBlock.AXIS));
-        } else {
-          states.add(new PartialBlockState(pillar));
-        }
-      }
-      states.add(new PartialBlockState(capstone));
-      return new CanonicalRepresentation(states.toArray());
-    }
-
     @Override
     protected CanonicalRepresentation getDefaultRepresentation() {
       var tag1 = BuiltInRegistries.BLOCK.getTag(capstone);
@@ -233,6 +163,22 @@ public abstract class LevelCondition implements IDescribed {
       }
       BlockState pillarState = tag2.get().get(0).value().defaultBlockState();
       return fromStates(capstoneState, pillarState, heightExcluding);
+    }
+
+    public static CanonicalRepresentation fromStates(BlockState capstone, BlockState pillar, int height) {
+      if (capstone.hasProperty(RotatedPillarBlock.AXIS)) {
+        capstone = capstone.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
+      }
+      List<PartialBlockState> states = new ArrayList<>();
+      for (int i = 0; i < height; i++) {
+        if (capstone.hasProperty(RotatedPillarBlock.AXIS)) {
+          states.add(new PartialBlockState(pillar, RotatedPillarBlock.AXIS));
+        } else {
+          states.add(new PartialBlockState(pillar));
+        }
+      }
+      states.add(new PartialBlockState(capstone));
+      return new CanonicalRepresentation(states.toArray());
     }
 
     @Override
@@ -286,18 +232,6 @@ public abstract class LevelCondition implements IDescribed {
       this(groveType, requireValid, false);
     }
 
-    public static CanonicalRepresentation fromBlockState(BlockState state, boolean requireValid, boolean requireInvalid) {
-      BlockState bottom = state.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)
-          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
-      BlockState middle = state.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE)
-          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
-      BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP)
-          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
-      //noinspection rawtypes
-      Property[] properties = new Property[]{StateProperties.GroveStone.PART, StateProperties.ACTIVE, StateProperties.GroveStone.FACING};
-      return new CanonicalRepresentation(new PartialBlockState(bottom, properties), new PartialBlockState(middle, properties), new PartialBlockState(top, properties));
-    }
-
     @Nullable
     protected StateProperties.Part getPart(BlockState state) {
       if (!state.hasProperty(StateProperties.GroveStone.PART)) {
@@ -323,6 +257,18 @@ public abstract class LevelCondition implements IDescribed {
       }
       BlockState state = tag.get().get(0).value().defaultBlockState();
       return fromBlockState(state, requireValid, requireInvalid);
+    }
+
+    public static CanonicalRepresentation fromBlockState(BlockState state, boolean requireValid, boolean requireInvalid) {
+      BlockState bottom = state.setValue(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)
+          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+      BlockState middle = state.setValue(GroveStoneBlock.PART, StateProperties.Part.MIDDLE)
+          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+      BlockState top = state.setValue(GroveStoneBlock.PART, StateProperties.Part.TOP)
+          .setValue(GroveStoneBlock.ACTIVE, requireValid || !requireInvalid);
+      //noinspection rawtypes
+      Property[] properties = new Property[]{StateProperties.GroveStone.PART, StateProperties.ACTIVE, StateProperties.GroveStone.FACING};
+      return new CanonicalRepresentation(new PartialBlockState(bottom, properties), new PartialBlockState(middle, properties), new PartialBlockState(top, properties));
     }
 
     @Override
@@ -380,6 +326,60 @@ public abstract class LevelCondition implements IDescribed {
       }
 
       return result;
+    }
+  }
+
+  public static LevelCondition.PillarCondition runePillar(int height) {
+    return new LevelCondition.PillarCondition(RootsTags.Blocks.RUNE_CAPSTONES, RootsTags.Blocks.RUNE_PILLARS, height);
+  }
+
+  public static LevelCondition.PillarCondition logPillar(PillarType type, int height) {
+    return new PillarCondition(type.getCapstoneTag(), type.getPillarTag(), height);
+  }
+
+  public static LevelCondition.GroveStoneCondition groveStone(GroveType grove, boolean requireValid) {
+    return groveStone(grove, requireValid, false);
+  }
+
+  public static LevelCondition.GroveStoneCondition groveStone(GroveType grove, boolean requireValid, boolean requireInvalid) {
+    return new GroveStoneCondition(grove.getTag(), requireValid, requireInvalid);
+  }
+
+  public static LevelCondition.GroveStoneCondition anyGroveStone(boolean requireValid) {
+    return new GroveStoneCondition(RootsTags.Blocks.GROVE_STONES, requireValid);
+  }
+
+  public enum PillarType {
+    ACACIA(RootsTags.Blocks.ACACIA_PILLARS, RootsTags.Blocks.ACACIA_CAPSTONES),
+    BIRCH(RootsTags.Blocks.BIRCH_PILLARS, RootsTags.Blocks.BIRCH_CAPSTONES),
+    DARK_OAK(RootsTags.Blocks.DARK_OAK_PILLARS, RootsTags.Blocks.DARK_OAK_CAPSTONES),
+    JUNGLE(RootsTags.Blocks.JUNGLE_PILLARS, RootsTags.Blocks.JUNGLE_CAPSTONES),
+    OAK(RootsTags.Blocks.OAK_PILLARS, RootsTags.Blocks.OAK_CAPSTONES),
+    SPRUCE(RootsTags.Blocks.SPRUCE_PILLARS, RootsTags.Blocks.SPRUCE_CAPSTONES),
+    CRIMSON(RootsTags.Blocks.CRIMSON_PILLARS, RootsTags.Blocks.CRIMSON_CAPSTONES),
+    WARPED(RootsTags.Blocks.WARPED_PILLARS, RootsTags.Blocks.WARPED_CAPSTONES),
+    WILDWOOD(RootsTags.Blocks.WILDWOOD_PILLARS, RootsTags.Blocks.WILDWOOD_CAPSTONES),
+    MANGROVE(RootsTags.Blocks.MANGROVE_PILLARS, RootsTags.Blocks.MANGROVE_CAPSTONES),
+    ANY_LOG(RootsTags.Blocks.LOG_PILLARS, RootsTags.Blocks.LOG_CAPSTONES),
+    RUNE(RootsTags.Blocks.RUNE_PILLARS, RootsTags.Blocks.RUNE_CAPSTONES),
+    RUNED(RootsTags.Blocks.RUNED_PILLARS, RootsTags.Blocks.RUNED_CAPSTONES),
+    ANY_RUNE(RootsTags.Blocks.RUNES_PILLARS, RootsTags.Blocks.RUNES_CAPSTONES),
+    ANY(RootsTags.Blocks.PILLARS, RootsTags.Blocks.CAPSTONES);
+
+    private final TagKey<Block> pillarTag;
+    private final TagKey<Block> capstoneTag;
+
+    PillarType(TagKey<Block> pillarTag, TagKey<Block> capstoneTag) {
+      this.pillarTag = pillarTag;
+      this.capstoneTag = capstoneTag;
+    }
+
+    public TagKey<Block> getPillarTag() {
+      return pillarTag;
+    }
+
+    public TagKey<Block> getCapstoneTag() {
+      return capstoneTag;
     }
   }
 }

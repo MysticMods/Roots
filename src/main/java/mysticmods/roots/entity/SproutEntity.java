@@ -18,9 +18,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -41,10 +39,6 @@ public class SproutEntity extends Animal {
   public SproutEntity(EntityType<? extends SproutEntity> type, Level world) {
     super(type, world);
     this.setPathfindingMalus(PathType.WATER, -1.0f);
-  }
-
-  public static AttributeSupplier.Builder attributes() {
-    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0d).add(Attributes.MOVEMENT_SPEED, 0.2d);
   }
 
   @Override
@@ -73,6 +67,10 @@ public class SproutEntity extends Animal {
     goalSelector.addGoal(7, new RandomLookAroundGoal(this));
   }
 
+  public static AttributeSupplier.Builder attributes() {
+    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0d).add(Attributes.MOVEMENT_SPEED, 0.2d);
+  }
+
   @Override
   public boolean isFood(ItemStack stack) {
     return stack.is(RootsTags.Items.SPROUT_FOOD);
@@ -84,11 +82,11 @@ public class SproutEntity extends Animal {
     builder.define(hasGift, false);
   }
 
-  public boolean hasGift() {
+  public boolean hasGift () {
     return this.entityData.get(hasGift);
   }
 
-  public void setHasGift(boolean value) {
+  public void setHasGift (boolean value) {
     this.entityData.set(hasGift, value);
   }
 

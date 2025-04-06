@@ -44,8 +44,6 @@ import java.util.Set;
 public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements ServerTickBlockEntity {
   private RecipeHolder<GroveRecipe> lastRecipe = null;
   private RecipeHolder<GroveRecipe> cachedRecipe = null;
-  private ResourceLocation cachedRecipeId = null;
-  private ResourceLocation lastRecipeId = null;
 
   public GroveCrafterBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
     super(pType, pWorldPosition, pBlockState);
@@ -190,6 +188,16 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     return 3;
   }
 
+  @Override
+  public int getRadiusY() {
+    return 2;
+  }
+
+  @Override
+  public int getRadiusZ() {
+    return 3;
+  }
+
 /*  @Override
   public void notify(ServerLevel pLevel, BlockPos pPos) {
     if (pedestalPositions == null) {
@@ -216,16 +224,6 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
   }*/
 
   @Override
-  public int getRadiusY() {
-    return 2;
-  }
-
-  @Override
-  public int getRadiusZ() {
-    return 3;
-  }
-
-  @Override
   protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {
     super.saveAdditional(pTag, lookup);
     if (cachedRecipe != null) {
@@ -235,6 +233,9 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       pTag.putString("last_recipe", lastRecipe.id().toString());
     }
   }
+
+  private ResourceLocation cachedRecipeId = null;
+  private ResourceLocation lastRecipeId = null;
 
   @Override
   public void loadAdditional(CompoundTag pTag, HolderLookup.Provider lookup) {

@@ -17,8 +17,7 @@ import java.util.Set;
 public class TradeVillagerAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    RootsAPI.LOG.error("TradeVillagerAction triggered by '{}' with offer '{}'", context.player().getName()
-        .getString(), context.offer().getResult().getDisplayName().getString());
+    RootsAPI.LOG.error("TradeVillagerAction triggered by '{}' with offer '{}'", context.player().getName().getString(), context.offer().getResult().getDisplayName().getString());
     return true;
   }
 
@@ -27,8 +26,7 @@ public class TradeVillagerAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, AbstractVillager target,
-                        MerchantOffer offer) implements GroveContext {
+  public record Context(ServerLevel level, ServerPlayer player, AbstractVillager target, MerchantOffer offer) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(
         GroveContext.LEVEL,
         GroveContext.PLAYER,

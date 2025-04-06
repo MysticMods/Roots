@@ -25,8 +25,7 @@ public class StartRitualAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, IRitualInstance ritual,
-                        BlockEntity blockEntity) implements GroveContext {
+  public record Context(ServerLevel level, ServerPlayer player, IRitualInstance ritual, BlockEntity blockEntity) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.RITUAL, GroveContext.BLOCK_ENTITY);
 
     @Override

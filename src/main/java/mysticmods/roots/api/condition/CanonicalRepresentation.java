@@ -33,16 +33,6 @@ public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlock
     this(states, new ArrayList<>());
   }
 
-  private static CanonicalBlockOrState of(Object object) {
-    if (object instanceof Block block) {
-      return new CanonicalBlock(block);
-    } else if (object instanceof PartialBlockState state) {
-      return new CanonicalBlockState(state);
-    } else {
-      throw new IllegalArgumentException("Invalid object type");
-    }
-  }
-
   public List<BlockState> getStates() {
     if (resolvedStates.isEmpty() || resolvedStates.size() != states.size()) {
       resolvedStates.clear();
@@ -115,5 +105,15 @@ public record CanonicalRepresentation(List<Either<CanonicalBlock, CanonicalBlock
   private record CanonicalBlockState(PartialBlockState state) implements CanonicalBlockOrState {
     public static Codec<CanonicalBlockState> CODEC = PartialBlockState.CODEC.xmap(CanonicalBlockState::new, CanonicalBlockState::state);
     public static StreamCodec<RegistryFriendlyByteBuf, CanonicalBlockState> STREAM_CODEC = PartialBlockState.STREAM_CODEC.map(CanonicalBlockState::new, CanonicalBlockState::state);
+  }
+
+  private static CanonicalBlockOrState of(Object object) {
+    if (object instanceof Block block) {
+      return new CanonicalBlock(block);
+    } else if (object instanceof PartialBlockState state) {
+      return new CanonicalBlockState(state);
+    } else {
+      throw new IllegalArgumentException("Invalid object type");
+    }
   }
 }

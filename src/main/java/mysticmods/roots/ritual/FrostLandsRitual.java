@@ -35,6 +35,9 @@ import java.util.List;
 import java.util.function.BiPredicate;
 
 public class FrostLandsRitual extends Ritual {
+  private int healInterval, fluidCount, count;
+  private float spawnChance, layerChance, powderedChance, iceChance;
+
   private static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE_SOLID = (level, pos) -> {
     // Check that the current block is solid
     if (level.isEmptyBlock(pos) || !level.getFluidState(pos).isEmpty()) {
@@ -69,16 +72,19 @@ public class FrostLandsRitual extends Ritual {
 
     return true;
   };
+
   private static final BlockState snowLayer = Blocks.SNOW.defaultBlockState();
   private static final BiPredicate<Level, BlockPos> WATER_OR_LAVA = (level, pos) -> {
     FluidState fluidState = level.getFluidState(pos);
     return fluidState.isSource() && fluidState.is(FluidTags.WATER) || fluidState.is(FluidTags.LAVA);
   };
+
   private static final BiPredicate<Level, BlockPos> MAGMA = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     // TODO: Tag
     return state.is(Blocks.MAGMA_BLOCK);
   };
+
   private static final BiPredicate<Level, BlockPos> FROST_LANDS_PREDICATE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     if (!state.isAir() && !state.canBeReplaced()) {
@@ -99,16 +105,16 @@ public class FrostLandsRitual extends Ritual {
 
     return snowLayer.canSurvive(level, below);
   };
+
   private static final BiPredicate<Level, BlockPos> IS_FARMLAND = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     return state.is(Tags.Blocks.VILLAGER_FARMLANDS);
   };
+
   private static final BiPredicate<Level, BlockPos> IS_FIRE = (level, pos) -> {
     BlockState state = level.getBlockState(pos);
     return state.is(BlockTags.FIRE);
   };
-  private int healInterval, fluidCount, count;
-  private float spawnChance, layerChance, powderedChance, iceChance;
 
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = List.of(WATER_OR_LAVA, FROST_LANDS_PREDICATE, IS_FARMLAND, IS_FIRE, TWO_AIR_ABOVE_SOLID);
 

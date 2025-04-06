@@ -5,6 +5,7 @@ import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -19,8 +20,7 @@ import java.util.Set;
 public class ShatterBlockAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    RootsAPI.LOG.error("ShatterBlockAction triggered by '{}' at '{}' with block '{}'", context.player().getName()
-        .getString(), context.position(), context.blockState());
+    RootsAPI.LOG.error("ShatterBlockAction triggered by '{}' at '{}' with block '{}'", context.player().getName().getString(), context.position(), context.blockState());
     return true;
   }
 
@@ -29,8 +29,7 @@ public class ShatterBlockAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState,
-                        ISpellInstance spell) implements GroveContext {
+  public record Context (ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState, ISpellInstance spell) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.POSITION, GroveContext.BLOCK_STATE, GroveContext.SPELL);
 
     @Override

@@ -17,16 +17,13 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import java.util.Set;
 
 public class LootItemBlockTagCondition implements LootItemCondition {
+  private final TagKey<Block> tag;
+
   public static final MapCodec<LootItemBlockTagCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(TagKey.codec(Registries.BLOCK)
       .fieldOf("tag").forGetter(LootItemBlockTagCondition::getTag)).apply(instance, LootItemBlockTagCondition::new));
-  private final TagKey<Block> tag;
 
   protected LootItemBlockTagCondition(TagKey<Block> tag) {
     this.tag = tag;
-  }
-
-  public static LootItemBlockTagCondition tag(TagKey<Block> tag) {
-    return new LootItemBlockTagCondition(tag);
   }
 
   @Override
@@ -47,6 +44,10 @@ public class LootItemBlockTagCondition implements LootItemCondition {
   public boolean test(LootContext lootContext) {
     BlockState blockstate = lootContext.getParamOrNull(LootContextParams.BLOCK_STATE);
     return blockstate != null && blockstate.is(this.tag);
+  }
+
+  public static LootItemBlockTagCondition tag(TagKey<Block> tag) {
+    return new LootItemBlockTagCondition(tag);
   }
 
   public static class Builder implements LootItemCondition.Builder {

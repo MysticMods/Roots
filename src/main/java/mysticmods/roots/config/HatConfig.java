@@ -4,14 +4,6 @@ package mysticmods.roots.config;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class HatConfig extends AbstractConfig {
-  public int antlerFrequency = 50;
-  public int antlerThreshold = -1;
-  public double antlerHealing = 2.0;
-  public int antlerRegenDuration = 130;
-  public int antlerRegenAmplifier = 1;
-  public float antlerHealthBonus = 4f;
-  public int antlerDamage = 1;
-  public double maskBonusDamage = 0.3;
   protected ModConfigSpec.IntValue configAntlerFrequency;
   protected ModConfigSpec.IntValue configAntlerThreshold;
   protected ModConfigSpec.DoubleValue configAntlerHealing;
@@ -20,6 +12,15 @@ public class HatConfig extends AbstractConfig {
   protected ModConfigSpec.DoubleValue configAntlerHealthBonus;
   protected ModConfigSpec.IntValue configAntlerDamage;
   protected ModConfigSpec.DoubleValue configMaskDamageBonus;
+
+  public int antlerFrequency = 50;
+  public int antlerThreshold = -1;
+  public double antlerHealing = 2.0;
+  public int antlerRegenDuration = 130;
+  public int antlerRegenAmplifier = 1;
+  public float antlerHealthBonus = 4f;
+  public int antlerDamage = 1;
+  public double maskBonusDamage = 0.3;
 
   public HatConfig() {
     super();

@@ -8,19 +8,15 @@ import java.util.Collections;
 import java.util.Set;
 
 public interface IRitualInstance extends RitualLike {
-  static IRitualInstance.SimpleRitual of(Ritual spell) {
-    return new IRitualInstance.SimpleRitual(spell);
-  }
-
   Ritual getRitual();
 
   default MutableComponent getName() {
     return getRitual().getName();
   }
 
-  int getLifetime();
+  int getLifetime ();
 
-  default int getDuration() {
+  default int getDuration () {
     return getRitual().getDuration();
   }
 
@@ -42,6 +38,10 @@ public interface IRitualInstance extends RitualLike {
 
   default boolean isEmpty() {
     return false;
+  }
+
+  static IRitualInstance.SimpleRitual of(Ritual spell) {
+    return new IRitualInstance.SimpleRitual(spell);
   }
 
   record SimpleRitual(Ritual ritual) implements IRitualInstance {

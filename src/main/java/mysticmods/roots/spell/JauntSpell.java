@@ -2,6 +2,7 @@ package mysticmods.roots.spell;
 
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -44,7 +45,7 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public void buildProperties(List<PropertyHolder<?>> properties) {
+  public void buildProperties (List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModSpells.JAUNT_DISTANCE);
   }

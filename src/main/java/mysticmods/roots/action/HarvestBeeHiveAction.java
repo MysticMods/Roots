@@ -18,8 +18,7 @@ import java.util.Set;
 public class HarvestBeeHiveAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    RootsAPI.LOG.error("HarvestBeeHiveAction triggered by '{}' at '{}' using item '{}'", context.player().getName()
-        .getString(), context.position(), context.item());
+    RootsAPI.LOG.error("HarvestBeeHiveAction triggered by '{}' at '{}' using item '{}'", context.player().getName().getString(), context.position(), context.item());
     return true;
   }
 
@@ -28,8 +27,7 @@ public class HarvestBeeHiveAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState,
-                        ItemStack item) implements GroveContext {
+  public record Context (ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState, ItemStack item) implements GroveContext {
     public static final Set<GroveContext.Parameter> PARAMETERS = Set.of(
         GroveContext.LEVEL,
         GroveContext.PLAYER,

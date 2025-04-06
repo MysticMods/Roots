@@ -20,12 +20,6 @@ import java.util.EnumMap;
 public class ArmorModel extends HumanoidModel<LivingEntity> {
   private static ArmorModel antlerModel = null;
   private static EnumMap<EquipmentSlot, ArmorModel> beetleModels = null;
-  protected final EquipmentSlot slot;
-
-  public ArmorModel(ModelPart root, EquipmentSlot slot) {
-    super(root);
-    this.slot = slot;
-  }
 
   public static void init(EntityRendererProvider.Context context) {
     antlerModel = new AntlerHatModel(context.bakeLayer(ModelHolder.ANTLER_ARMOR));
@@ -46,6 +40,13 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
     }
 
     return null;
+  }
+
+  protected final EquipmentSlot slot;
+
+  public ArmorModel(ModelPart root, EquipmentSlot slot) {
+    super(root);
+    this.slot = slot;
   }
 
   // [VanillaCopy] ArmorStandArmorModel.setupAnim because armor stands are dumb

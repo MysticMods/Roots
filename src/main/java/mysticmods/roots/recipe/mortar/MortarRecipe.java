@@ -87,10 +87,6 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
     protected Builder() {
     }
 
-    public static Builder create() {
-      return new Builder();
-    }
-
     public Builder times(int times) {
       this.times = times;
       return this;
@@ -102,6 +98,10 @@ public class MortarRecipe extends RootsTileRecipe<MortarInventory, MortarBlockEn
 
     public MortarRecipe build(BaseRecipeData.Builder data) {
       return build(data.build());
+    }
+
+    public static Builder create() {
+      return new Builder();
     }
   }
 }

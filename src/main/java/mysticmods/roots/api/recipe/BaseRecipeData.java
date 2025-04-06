@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class BaseRecipeData {
   public static final MapCodec<BaseRecipeData> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -87,10 +88,6 @@ public class BaseRecipeData {
     this(ingredients.orElse(NonNullList.create()), levelConditions.orElse(new ArrayList<>()), playerConditions.orElse(new ArrayList<>()), itemStack.orElse(ItemStack.EMPTY), chanceOutputs.orElse(new ArrayList<>()), unlocks.orElse(new ArrayList<>()), priority);
   }
 
-  private static <V, T extends List<V>> Optional<T> c(T value) {
-    return value == null || value.isEmpty() ? Optional.empty() : Optional.of(value);
-  }
-
   public void updateFrom(BaseRecipeData data) {
     this.ingredients = data.ingredients;
     this.levelConditions = data.levelConditions;
@@ -105,13 +102,17 @@ public class BaseRecipeData {
     return ingredients.isEmpty() && levelConditions.isEmpty() && playerConditions.isEmpty() && result.isEmpty() && chanceOutputs.isEmpty() && unlocks.isEmpty();
   }
 
+  private static <V, T extends List<V>> Optional<T> c(T value) {
+    return value == null || value.isEmpty() ? Optional.empty() : Optional.of(value);
+  }
+
   public static class Builder {
     private final List<Ingredient> ingredients;
     private final List<LevelCondition> levelConditions;
     private final List<PlayerCondition> playerConditions;
+    private ItemStack result;
     private final List<ChanceOutput> chanceOutputs;
     private final List<Unlock<?>> unlocks;
-    private ItemStack result;
     private int priority;
 
     protected Builder(List<Ingredient> ingredients, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, int priority) {
@@ -134,11 +135,7 @@ public class BaseRecipeData {
       this.priority = 0;
     }
 
-    public static Builder create() {
-      return new Builder();
-    }
-
-    public Builder priority(int value) {
+    public Builder priority (int value) {
       this.priority = value;
       return this;
     }
@@ -168,7 +165,7 @@ public class BaseRecipeData {
       return result(item.value(), count);
     }
 
-    public Builder result(ItemLike item, int count) {
+    public Builder result (ItemLike item, int count) {
       return result(new ItemStack(item.asItem(), count));
     }
 
@@ -187,19 +184,19 @@ public class BaseRecipeData {
       return this;
     }
 
-    public Builder chanceOutput(ItemLike item, float chance) {
+    public Builder chanceOutput (ItemLike item, float chance) {
       return chanceOutput(new ItemStack(item.asItem()), chance);
     }
 
-    public Builder chanceOutput(ItemLike item, int count, float chance) {
+    public Builder chanceOutput (ItemLike item, int count, float chance) {
       return chanceOutput(new ItemStack(item.asItem(), count), chance);
     }
 
-    public Builder chanceOutput(Holder<? extends ItemLike> holder, float chance) {
+    public Builder chanceOutput (Holder<? extends ItemLike> holder, float chance) {
       return chanceOutput(new ItemStack(holder.value().asItem()), chance);
     }
 
-    public Builder chanceOutput(Holder<? extends ItemLike> holder, int count, float chance) {
+    public Builder chanceOutput (Holder<? extends ItemLike> holder, int count, float chance) {
       return chanceOutput(new ItemStack(holder.value().asItem(), count), chance);
     }
 
@@ -234,6 +231,10 @@ public class BaseRecipeData {
 
     public BaseRecipeData build() {
       return new BaseRecipeData(NonNullList.copyOf(ingredients), levelConditions, playerConditions, result, chanceOutputs, unlocks, priority);
+    }
+
+    public static Builder create() {
+      return new Builder();
     }
   }
 }

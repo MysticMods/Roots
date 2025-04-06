@@ -13,7 +13,7 @@ public class ModAdvancements {
 
   public static final DeferredHolder<CriterionTrigger<?>, PacifistTrigger> PACIFIST = REGISTER.register("pacifist", PacifistTrigger::new);
 
-  public static void register(IEventBus bus) {
+  public static void register (IEventBus bus) {
     REGISTER.register(bus);
   }
 }

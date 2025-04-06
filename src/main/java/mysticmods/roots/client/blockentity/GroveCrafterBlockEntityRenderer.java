@@ -7,6 +7,7 @@ import mysticmods.roots.blockentity.GroveCrafterBlockEntity;
 import mysticmods.roots.client.ClientSetup;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.TintWrappedVertexConsumer;
+import mysticmods.roots.init.ModItems;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;

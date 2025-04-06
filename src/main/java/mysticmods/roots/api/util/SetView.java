@@ -17,10 +17,6 @@ public class SetView<E> extends AbstractSet<E> {
     this.delegate = delegate;
   }
 
-  public static <E> SetView<E> of(Set<E> set) {
-    return new SetView<>(set);
-  }
-
   public final boolean add(E e) {
     throw new UnsupportedOperationException();
   }
@@ -88,5 +84,9 @@ public class SetView<E> extends AbstractSet<E> {
   @Override
   public boolean contains(@CheckForNull Object object) {
     return delegate.contains(object);
+  }
+
+  public static <E> SetView<E> of(Set<E> set) {
+    return new SetView<>(set);
   }
 }

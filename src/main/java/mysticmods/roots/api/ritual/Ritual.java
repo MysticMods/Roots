@@ -8,6 +8,7 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.Util;
@@ -34,8 +35,10 @@ import java.util.function.Predicate;
 public abstract class Ritual implements IDescribed, TooltipComponent {
   public static final Codec<Ritual> CODEC = RootsRegistries.RITUALS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Ritual> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.RITUALS);
-  protected final Set<RitualModifier> modifiers = new HashSet<>();
+
   protected String descriptionId;
+
+  protected final Set<RitualModifier> modifiers = new HashSet<>();
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected int duration = 0;
@@ -64,7 +67,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
   public void starts(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
-  public void ends(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+  public void ends (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RitualPositionCache cache, RandomSource random) {
@@ -83,7 +86,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     aabb = AABB.of(getBoundingBox());
   }
 
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
+  protected void buildProperties (List<PropertyHolder<?>> properties) {
     if (getDurationProperty() != null) {
       properties.add(getDurationProperty());
     }
@@ -134,7 +137,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     rebuildBounds();
   }
 
-  public List<BiPredicate<Level, BlockPos>> getPredicates() {
+  public List<BiPredicate<Level, BlockPos>> getPredicates () {
     return Collections.emptyList();
   }
 

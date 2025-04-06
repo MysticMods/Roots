@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class AlwaysTrueWorldTest extends WorldTest {
-  public static final AlwaysTrueWorldTest INSTANCE = new AlwaysTrueWorldTest();
   public static ResourceKey<WorldTestType<?>> ALWAYS_TRUE_TEST_KEY = ResourceKey.create(RootsRegistries.Keys.WORLD_TEST_TYPES, RootsAPI.rl("always_true_test"));
+  public static final AlwaysTrueWorldTest INSTANCE = new AlwaysTrueWorldTest();
   public static MapCodec<AlwaysTrueWorldTest> CODEC = MapCodec.unit(() -> INSTANCE);
   public static StreamCodec<RegistryFriendlyByteBuf, AlwaysTrueWorldTest> STREAM_CODEC = StreamCodec.unit(INSTANCE);
 

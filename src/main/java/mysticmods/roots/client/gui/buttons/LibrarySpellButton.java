@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.function.Supplier;
 
 public class LibrarySpellButton extends TypedButton<Spell, StaffScreen> {
-  private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/library_spell_slot_highlight.png");
   private final boolean transparent;
 
   public LibrarySpellButton(StaffScreen parentScreen, Supplier<Spell> spellSupplier, int id, int pX, int pY, boolean transparent) {
@@ -25,6 +24,8 @@ public class LibrarySpellButton extends TypedButton<Spell, StaffScreen> {
   public Spell getSpell() {
     return spellSupplier.get();
   }
+
+  private static final ResourceLocation highlight = RootsAPI.rl("textures/gui/library_spell_slot_highlight.png");
 
   @Override
   public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {

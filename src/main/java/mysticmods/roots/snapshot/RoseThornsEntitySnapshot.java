@@ -72,7 +72,7 @@ public class RoseThornsEntitySnapshot extends Snapshot {
     return duration;
   }
 
-  public float getDamage() {
+  public float getDamage () {
     return damage;
   }
 

@@ -15,15 +15,11 @@ public class HasHornsCondition implements LootItemCondition {
   public static final MapCodec<HasHornsCondition> CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(Codec.BOOL.fieldOf("inverse").forGetter(HasHornsCondition::isInverse))
           .apply(instance, HasHornsCondition::new));
-  private static final HasHornsCondition INSTANCE = new HasHornsCondition(false);
+
   private final boolean inverse;
 
   public HasHornsCondition(boolean inverseIn) {
     this.inverse = inverseIn;
-  }
-
-  public static Builder builder() {
-    return () -> INSTANCE;
   }
 
   public boolean isInverse() {
@@ -45,6 +41,12 @@ public class HasHornsCondition implements LootItemCondition {
   @Override
   public LootItemConditionType getType() {
     return ModLoot.HAS_HORNS.get();
+  }
+
+  private static final HasHornsCondition INSTANCE = new HasHornsCondition(false);
+
+  public static Builder builder() {
+    return () -> INSTANCE;
   }
 }
 

@@ -43,18 +43,6 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientSetup {
-  public static final ResourceLocation WARNING_LAYER = RootsAPI.rl("warning");
-  public static final ResourceLocation HERB_ALERT = RootsAPI.rl("herb_alert");
-  public static final ResourceLocation GIFT_BOX_KEY = RootsAPI.rl("item/gift_box");
-  public static final ModelResourceLocation GIFT_BOX = new ModelResourceLocation(GIFT_BOX_KEY, "standalone");
-  public static final ResourceLocation GEAS_KEY = RootsAPI.rl("item/geas");
-  public static final ModelResourceLocation GEAS = new ModelResourceLocation(GEAS_KEY, "standalone");
-  public static final ResourceLocation NO_GROVE_STONE_KEY = RootsAPI.rl("item/no_grove_stone");
-  public static final ModelResourceLocation NO_GROVE_STONE = new ModelResourceLocation(NO_GROVE_STONE_KEY, "standalone");
-  public static BakedModel GIFT_BOX_MODEL;
-  public static BakedModel GEAS_MODEL;
-  public static BakedModel NO_GROVE_STONE_MODEL;
-
   @SubscribeEvent
   public static void clientSetup(FMLClientSetupEvent event) {
     ModelHolder.init();
@@ -137,8 +125,11 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.ROSE_THORNS, RoseThornsModel::createBodyLayer);
   }
 
+  public static final ResourceLocation WARNING_LAYER = RootsAPI.rl("warning");
+  public static final ResourceLocation HERB_ALERT = RootsAPI.rl("herb_alert");
+
   @SubscribeEvent
-  public static void registerGuiLayers(RegisterGuiLayersEvent event) {
+  public static void registerGuiLayers (RegisterGuiLayersEvent event) {
     event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, WARNING_LAYER, WarningLayer::render);
     event.registerBelow(VanillaGuiLayers.HOTBAR, HERB_ALERT, HerbLayer::render);
   }
@@ -192,9 +183,21 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onRegisterScreens(RegisterMenuScreensEvent event) {
+  public static void onRegisterScreens (RegisterMenuScreensEvent event) {
     event.register(ModContainers.HERB_POUCH.get(), HerbPouchScreen::new);
   }
+
+  public static final ResourceLocation GIFT_BOX_KEY = RootsAPI.rl("item/gift_box");
+  public static final ModelResourceLocation GIFT_BOX = new ModelResourceLocation(GIFT_BOX_KEY, "standalone");
+  public static BakedModel GIFT_BOX_MODEL;
+
+  public static final ResourceLocation GEAS_KEY = RootsAPI.rl("item/geas");
+  public static final ModelResourceLocation GEAS = new ModelResourceLocation(GEAS_KEY, "standalone");
+  public static BakedModel GEAS_MODEL;
+
+  public static final ResourceLocation NO_GROVE_STONE_KEY = RootsAPI.rl("item/no_grove_stone");
+  public static final ModelResourceLocation NO_GROVE_STONE = new ModelResourceLocation(NO_GROVE_STONE_KEY, "standalone");
+  public static BakedModel NO_GROVE_STONE_MODEL;
 
   @SubscribeEvent
   public static void onRegisterGeometry(ModelEvent.RegisterAdditional event) {
@@ -204,7 +207,7 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onBakeModels(ModelEvent.BakingCompleted event) {
+  public static void onBakeModels (ModelEvent.BakingCompleted event) {
     GIFT_BOX_MODEL = event.getModels().get(GIFT_BOX);
     GEAS_MODEL = event.getModels().get(GEAS);
     NO_GROVE_STONE_MODEL = event.getModels().get(NO_GROVE_STONE);

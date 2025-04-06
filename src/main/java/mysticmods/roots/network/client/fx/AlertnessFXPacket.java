@@ -9,7 +9,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record AlertnessFXPacket(int entityId) implements IRootsPacket {
+public record AlertnessFXPacket (int entityId) implements IRootsPacket  {
   public static final CustomPacketPayload.Type<AlertnessFXPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_fx/alertness"));
   public static final StreamCodec<FriendlyByteBuf, AlertnessFXPacket> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, AlertnessFXPacket::entityId, AlertnessFXPacket::new);
 

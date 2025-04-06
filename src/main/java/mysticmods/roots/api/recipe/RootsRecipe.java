@@ -72,7 +72,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
   @Override
-  public List<ChanceOutput> getCachedOutputs() {
+  public List<ChanceOutput> getCachedOutputs () {
     return cachedChanceOutputs;
   }
 

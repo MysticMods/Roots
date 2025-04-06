@@ -51,14 +51,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RootsCommand {
+  public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+    dispatcher.register(builder(Commands.literal("roots").requires(p -> p.hasPermission(2))));
+  }
+
   private static List<String> spellIds = null;
   private static List<String> ritualIds = null;
   private static List<String> craftingRecipeIds = null;
   private static List<String> groveIds = null;
-
-  public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-    dispatcher.register(builder(Commands.literal("roots").requires(p -> p.hasPermission(2))));
-  }
 
   private static RequiredArgumentBuilder<CommandSourceStack, ResourceLocation> suggestGroves() {
     if (groveIds == null) {
@@ -346,8 +346,7 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.increaseReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      c.getSource()
-          .sendSuccess(() -> Component.translatable("roots.commands.reputation.add", player.getDisplayName(), grove.getStyledName(), amount, storage.getRank(grove), storage.getReputation(grove)), false);
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.add", player.getDisplayName(), grove.getStyledName(), amount, storage.getRank(grove), storage.getReputation(grove)), false);
       return 1;
     }))).then(Commands.literal("remove").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove.usage"), false);
@@ -369,8 +368,7 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.decreaseReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      c.getSource()
-          .sendSuccess(() -> Component.translatable("roots.commands.reputation.remove", player.getDisplayName(), grove.getStyledName(), amount, storage.getRank(grove), storage.getReputation(grove)), false);
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove", player.getDisplayName(), grove.getStyledName(), amount, storage.getRank(grove), storage.getReputation(grove)), false);
       return 1;
     }))).then(Commands.literal("set").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set.usage"), false);
@@ -392,8 +390,7 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.setReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      c.getSource()
-          .sendSuccess(() -> Component.translatable("roots.commands.reputation.set", player.getDisplayName(), grove.getStyledName(), storage.getRank(grove), amount), false);
+      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set", player.getDisplayName(), grove.getStyledName(), storage.getRank(grove), amount), false);
       return 1;
     }))))));
     return builder;

@@ -19,19 +19,14 @@ import java.util.function.Predicate;
 public class Herb implements IStyled {
   private final Holder<Item> item;
   private final TagKey<Item> tag;
-  private final ChatFormatting color;
   private String descriptionId;
   private Style style;
+  private final ChatFormatting color;
 
   public Herb(Holder<Item> item, TagKey<Item> tag, ChatFormatting color) {
     this.item = item;
     this.tag = tag;
     this.color = color;
-  }
-
-  @Nullable
-  public static Herb getHerb(ItemStack stack) {
-    return stack.getItemHolder().getData(DataMaps.HERB_ITEM_DATA);
   }
 
   public Holder<Herb> builtInRegistryHolder() {
@@ -63,6 +58,11 @@ public class Herb implements IStyled {
       }
     }
     return style;
+  }
+
+  @Nullable
+  public static Herb getHerb(ItemStack stack) {
+    return stack.getItemHolder().getData(DataMaps.HERB_ITEM_DATA);
   }
 
   public Holder<Item> getItem() {

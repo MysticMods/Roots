@@ -17,8 +17,7 @@ public class BredAnimalAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
     RootsAPI.LOG.error("BredAnimalAction fired by '{}' with offspring '{}' from first parent '{}' and second parent '{}'",
-        context.player().getName().getString(), context.target().getName().getString(), context.secondary().getName()
-            .getString(), context.tertiary().getName().getString());
+        context.player().getName().getString(), context.target().getName().getString(), context.secondary().getName().getString(), context.tertiary().getName().getString());
     return true;
   }
 
@@ -27,8 +26,7 @@ public class BredAnimalAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, Entity target, Entity secondary,
-                        Entity tertiary) implements GroveContext {
+  public record Context(ServerLevel level, ServerPlayer player, Entity target, Entity secondary, Entity tertiary) implements GroveContext {
     public static Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.TARGET_ENTITY,
         GroveContext.SECONDARY_ENTITY, GroveContext.TERTIARY_ENTITY);
 

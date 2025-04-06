@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CuredZombieVillagerTrigger.class)
 public class MixinCuredZombieVillagerTrigger {
-  @Inject(method = "trigger", at = @At("HEAD"))
-  private void RootsTriggerCureZombieVillager(ServerPlayer player, Zombie zombie, Villager villager, CallbackInfo ci) {
+  @Inject(method="trigger", at=@At("HEAD"))
+  private void RootsTriggerCureZombieVillager (ServerPlayer player, Zombie zombie, Villager villager, CallbackInfo ci) {
     CureVillagerAction.Context context = new CureVillagerAction.Context(player.serverLevel(), player, villager, zombie);
     ModActions.CURE_VILLAGER.get().accept(context);
 

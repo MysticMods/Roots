@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class BeetleModel extends AgeableListModel<BeetleEntity> {
-  private static final ResourceLocation texture = RootsAPI.rl("textures/entity/beetle_blue.png");
   private final ModelPart body;
   private final ModelPart head;
   private final ModelPart antennaR1;
@@ -117,6 +116,26 @@ public class BeetleModel extends AgeableListModel<BeetleEntity> {
     return (float) Math.sin(ageInTicks * 0.03125f * (Math.PI * 2.0f) + Math.toRadians(deg));
   }
 
+  @Override
+  public void setupAnim(BeetleEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    // where did ticks go
+    this.head.xRot = headPitch * 0.017453292F;
+    this.head.yRot = netHeadYaw * 0.017453292F;
+    this.antennaR1.xRot = 0.1308996938995747F + getBobble(30, ageInTicks) * 0.2617993877991494F;
+    this.antennaL1.xRot = 0.1308996938995747F + getBobble(100, ageInTicks) * 0.2617993877991494F;
+    this.wingL.yRot = 0.17453292519943295F + 0.0872664626F * getBobble(45, ageInTicks);
+    this.wingR.yRot = -0.17453292519943295F - 0.0872664626F * getBobble(160, ageInTicks);
+
+    /*    if (state == ModelState.NORMAL) {*/
+    this.legL1.zRot = limbSwingAmount * getSwing(0, ageInTicks) - 0.2617993877991494F;
+    this.legL2.zRot = limbSwingAmount * getSwing(120, ageInTicks) - 0.2617993877991494F;
+    this.legL3.zRot = limbSwingAmount * getSwing(240, ageInTicks) - 0.2617993877991494F;
+    this.legR1.zRot = limbSwingAmount * getSwing(180, ageInTicks) + 0.2617993877991494F;
+    this.legR2.zRot = limbSwingAmount * getSwing(300, ageInTicks) + 0.2617993877991494F;
+    this.legR3.zRot = limbSwingAmount * getSwing(60, ageInTicks) + 0.2617993877991494F;
+    /*    }*/
+  }
+
 /*  @Override
   protected void prepare(ModelState state) {
     if (state == ModelState.SITTING) {
@@ -138,25 +157,7 @@ public class BeetleModel extends AgeableListModel<BeetleEntity> {
     }
   }*/
 
-  @Override
-  public void setupAnim(BeetleEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-    // where did ticks go
-    this.head.xRot = headPitch * 0.017453292F;
-    this.head.yRot = netHeadYaw * 0.017453292F;
-    this.antennaR1.xRot = 0.1308996938995747F + getBobble(30, ageInTicks) * 0.2617993877991494F;
-    this.antennaL1.xRot = 0.1308996938995747F + getBobble(100, ageInTicks) * 0.2617993877991494F;
-    this.wingL.yRot = 0.17453292519943295F + 0.0872664626F * getBobble(45, ageInTicks);
-    this.wingR.yRot = -0.17453292519943295F - 0.0872664626F * getBobble(160, ageInTicks);
-
-    /*    if (state == ModelState.NORMAL) {*/
-    this.legL1.zRot = limbSwingAmount * getSwing(0, ageInTicks) - 0.2617993877991494F;
-    this.legL2.zRot = limbSwingAmount * getSwing(120, ageInTicks) - 0.2617993877991494F;
-    this.legL3.zRot = limbSwingAmount * getSwing(240, ageInTicks) - 0.2617993877991494F;
-    this.legR1.zRot = limbSwingAmount * getSwing(180, ageInTicks) + 0.2617993877991494F;
-    this.legR2.zRot = limbSwingAmount * getSwing(300, ageInTicks) + 0.2617993877991494F;
-    this.legR3.zRot = limbSwingAmount * getSwing(60, ageInTicks) + 0.2617993877991494F;
-    /*    }*/
-  }
+  private static final ResourceLocation texture = RootsAPI.rl("textures/entity/beetle_blue.png");
   /*
   @Override
   public ResourceLocation getTexture() {

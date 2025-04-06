@@ -25,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -34,17 +35,16 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 
 public class BloomingRitual extends Ritual {
+  private int count;
+  private int nextTick;
+  // TODO: Data map for block costs that increase the interval
+
   // TODO: Caching of positions based on predicate
   private static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE = (level, pos) -> {
     BlockPos above = pos.above();
-    return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above())
-        .isEmpty() && level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos)
-        .canBeReplaced() && level.getFluidState(pos).isEmpty();
+    return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above()).isEmpty() && level.isEmptyBlock(pos) && level.isEmptyBlock(above) || level.isEmptyBlock(above) && level.getBlockState(pos).canBeReplaced() && level.getFluidState(pos).isEmpty();
   };
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(TWO_AIR_ABOVE);
-  // TODO: Data map for block costs that increase the interval
-  private int count;
-  private int nextTick;
 
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates() {
@@ -114,7 +114,7 @@ public class BloomingRitual extends Ritual {
   }
 
   @Override
-  protected void buildProperties(List<PropertyHolder<?>> properties) {
+  protected void buildProperties (List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModRituals.BLOOMING_COUNT);
   }

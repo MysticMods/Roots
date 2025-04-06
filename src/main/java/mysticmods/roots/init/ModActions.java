@@ -32,7 +32,7 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, BrushBlockAction> BRUSH_BLOCK = ACTIONS.register("brush_block", BrushBlockAction::new);
   public static final DeferredHolder<GroveAction, MilkCowAction> MILK_COW = ACTIONS.register("milk_cow", MilkCowAction::new);
 
-  public static void register(IEventBus bus) {
+  public static void register (IEventBus bus) {
     ACTIONS.register(bus);
   }
 }

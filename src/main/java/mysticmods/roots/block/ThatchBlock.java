@@ -2,6 +2,7 @@ package mysticmods.roots.block;
 
 import mysticmods.roots.init.ModBlocks;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;

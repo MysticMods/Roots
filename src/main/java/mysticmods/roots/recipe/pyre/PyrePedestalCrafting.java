@@ -2,6 +2,7 @@ package mysticmods.roots.recipe.pyre;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.recipe.PedestalInventoryWrapper;
 import mysticmods.roots.recipe.TaggedPedestalCrafting;
 import net.minecraft.world.entity.player.Player;
 

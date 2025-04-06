@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ConsumeItemTrigger.class)
 public class MixinConsumeItemTrigger {
-  @Inject(method = "trigger", at = @At("HEAD"))
-  private void RootsTriggerConsumeItem(ServerPlayer player, ItemStack stack, CallbackInfo ci) {
+  @Inject(method="trigger", at=@At("HEAD"))
+  private void RootsTriggerConsumeItem (ServerPlayer player, ItemStack stack, CallbackInfo ci) {
     EatItemAction.Context context = new EatItemAction.Context(player.serverLevel(), player, stack);
     ModActions.EAT_ITEM.get().accept(context);
   }

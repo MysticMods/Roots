@@ -35,6 +35,10 @@ public class TimeStopEntity extends Entity {
     return snapshotStorage;
   }
 
+  public void setSnapshot(TimeStopEntitySnapshot snapshot) {
+    this.snapshotStorage.addSnapshot(this, ModSerializers.TIME_STOP.get(), snapshot);
+  }
+
   protected TimeStopEntitySnapshot getSnapshot() {
     SnapshotStorage storage = getSnapshotStorage();
     if (storage == null) {
@@ -42,10 +46,6 @@ public class TimeStopEntity extends Entity {
     }
 
     return storage.getSnapshot(this, ModSerializers.TIME_STOP.get());
-  }
-
-  public void setSnapshot(TimeStopEntitySnapshot snapshot) {
-    this.snapshotStorage.addSnapshot(this, ModSerializers.TIME_STOP.get(), snapshot);
   }
 
   @Nullable
@@ -108,12 +108,12 @@ public class TimeStopEntity extends Entity {
         .ifPresent(storage -> this.snapshotStorage = storage);
   }
 
-  public int getLifetime() {
-    return this.entityData.get(LIFETIME);
-  }
-
   public void setLifetime(int duration) {
     this.entityData.set(LIFETIME, duration);
+  }
+
+  public int getLifetime() {
+    return this.entityData.get(LIFETIME);
   }
 
   @Override

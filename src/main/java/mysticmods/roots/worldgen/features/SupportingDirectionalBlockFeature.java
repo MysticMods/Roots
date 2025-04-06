@@ -13,18 +13,20 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class SupportingDirectionalBlockFeature extends Feature<SimpleBlockConfiguration> {
 
-  private List<Direction> directions = null;
-
   public SupportingDirectionalBlockFeature(Codec<SimpleBlockConfiguration> configFactory) {
     super(configFactory);
   }
+
+  private List<Direction> directions = null;
 
   @Override
   public boolean place(FeaturePlaceContext<SimpleBlockConfiguration> context) {

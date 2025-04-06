@@ -44,11 +44,6 @@ public class FennecEntity extends TamableAnimal {
     this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
-  public static AttributeSupplier.Builder attributes() {
-    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0d).add(Attributes.MOVEMENT_SPEED, 0.3d)
-        .add(Attributes.ATTACK_DAMAGE, 2d);
-  }
-
   @Override
   public boolean isFood(@Nonnull ItemStack stack) {
     return stack.is(RootsTags.Items.FENNEC_FOOD);
@@ -83,6 +78,11 @@ public class FennecEntity extends TamableAnimal {
     targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
     targetSelector.addGoal(3, new HurtByTargetGoal(this));
     targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(this, Animal.class, false, e -> e instanceof Chicken || e instanceof Rabbit));
+  }
+
+  public static AttributeSupplier.Builder attributes() {
+    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0d).add(Attributes.MOVEMENT_SPEED, 0.3d)
+        .add(Attributes.ATTACK_DAMAGE, 2d);
   }
 
   @Override

@@ -20,8 +20,7 @@ public class BrushBlockAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
     RootsAPI.LOG.error("BrushBlockAction fired by '{}' at '{}' on block '{}' with item '{}'",
-        context.player().getName().getString(), context.position(), context.blockState(), context.item()
-            .getDisplayName().getString());
+        context.player().getName().getString(), context.position(), context.blockState(), context.item().getDisplayName().getString());
     return true;
   }
 
@@ -30,8 +29,7 @@ public class BrushBlockAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState,
-                        ItemStack item, BrushableBlockEntity blockEntity) implements GroveContext {
+  public record Context (ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState, ItemStack item, BrushableBlockEntity blockEntity) implements GroveContext {
     public static Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.POSITION, GroveContext.BLOCK_STATE, GroveContext.ITEM, GroveContext.BLOCK_ENTITY);
 
     @Override

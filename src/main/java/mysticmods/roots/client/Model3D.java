@@ -10,10 +10,11 @@ import java.util.Arrays;
 // https://github.com/mekanism/Mekanism/blob/1e5ff6a4a3ef4abc2f9866ca21a2f7ee09664989/src/main/java/mekanism/client/render/MekanismRenderer.java#L464
 public class Model3D {
 
-  private final SpriteInfo[] textures = new SpriteInfo[6];
-  private final boolean[] renderSides = new boolean[]{true, true, true, true, true, true};
   public float minX, minY, minZ;
   public float maxX, maxY, maxZ;
+
+  private final SpriteInfo[] textures = new SpriteInfo[6];
+  private final boolean[] renderSides = new boolean[]{true, true, true, true, true, true};
 
   public void setSideRender(Direction side, boolean value) {
     renderSides[side.ordinal()] = value;

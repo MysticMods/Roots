@@ -1,6 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.faction.GroveType;
@@ -9,6 +10,7 @@ import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -16,6 +18,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModConditions {
   private static final DeferredRegister<LevelCondition> LEVEL = DeferredRegister.create(RootsRegistries.LEVEL_CONDITIONS, RootsAPI.MODID);
+  private static final DeferredRegister<PlayerCondition> PLAYER = DeferredRegister.create(RootsRegistries.PLAYER_CONDITIONS, RootsAPI.MODID);
+
   public static final DeferredHolder<LevelCondition, LevelCondition> RUNE_PILLAR_4_HIGH = LEVEL.register("4_high_rune_pillar", () -> LevelCondition.runePillar(4));
   public static final DeferredHolder<LevelCondition, LevelCondition> RUNE_PILLAR_3_HIGH = LEVEL.register("3_high_rune_pillar", () -> LevelCondition.runePillar(3));
   public static final DeferredHolder<LevelCondition, LevelCondition> LOG_PILLAR_4_HIGH = LEVEL.register("4_high_log_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.ANY_LOG, 4));
@@ -46,7 +50,7 @@ public class ModConditions {
   public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = LEVEL.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
       .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
   public static final DeferredHolder<LevelCondition, LevelCondition> WATER_SOURCE = LEVEL.register("water_source", () -> new LevelCondition.FluidSourcePropertyCondition(FluidTags.WATER));
-  private static final DeferredRegister<PlayerCondition> PLAYER = DeferredRegister.create(RootsRegistries.PLAYER_CONDITIONS, RootsAPI.MODID);
+
 
   public static void register(IEventBus bus) {
     LEVEL.register(bus);

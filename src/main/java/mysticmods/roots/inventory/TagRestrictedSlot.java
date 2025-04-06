@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 
 public class TagRestrictedSlot extends Slot {
   private final TagKey<Item> tag;
-
   public TagRestrictedSlot(TagKey<Item> tag, Container container, int slot, int x, int y) {
     super(container, slot, x, y);
     this.tag = tag;

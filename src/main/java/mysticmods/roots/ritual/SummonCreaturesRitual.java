@@ -55,7 +55,7 @@ public class SummonCreaturesRitual extends Ritual {
 
         // Handle any actual outputs, process inputs
         List<ItemStack> results = recipe.value()
-            .assembleOutputs(crafting, randomSource, pLevel.registryAccess(), crafting::popItems);
+            .assembleOutputs(crafting, randomSource, pLevel.registryAccess(),  crafting::popItems);
         results = blockEntity.outputAdjacent(results);
         if (!results.isEmpty()) {
           for (ItemStack stack : results) {

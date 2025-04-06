@@ -15,6 +15,7 @@ import net.neoforged.neoforge.registries.datamaps.DataMapValueRemover;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 public record CostRemover<T>(Herb herbCost, Cost.CostType type,
                              float value) implements DataMapValueRemover<T, CostInstance> {

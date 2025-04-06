@@ -36,6 +36,11 @@ public class AntlerHatModel extends ArmorModel {
     this.horn8_1 = this.horn6_1.getChild("horn8_1");
   }
 
+  @Override
+  public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+    super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
+  }
+
   public static LayerDefinition createBodyLayer() {
     MeshDefinition meshdefinition = new MeshDefinition();
     PartDefinition partdefinition = meshdefinition.getRoot();
@@ -69,10 +74,5 @@ public class AntlerHatModel extends ArmorModel {
         .addBox(-4.5F, 0.0F, -0.5F, 9, 9, 1), PartPose.offsetAndRotation(0.0F, -8.1F, -0.5F, -0.25132741228718347F, 0.0F, 0.0F));
 
     return LayerDefinition.create(meshdefinition, 128, 64);
-  }
-
-  @Override
-  public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-    super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
   }
 }

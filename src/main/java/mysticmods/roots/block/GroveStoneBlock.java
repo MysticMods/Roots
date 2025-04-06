@@ -13,6 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -70,8 +71,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Nullable
   public BlockState getStateForPlacement(BlockPlaceContext pContext) {
     BlockPos blockpos = pContext.getClickedPos();
-    BlockState newState = blockpos.getY() < pContext.getLevel().getMaxBuildHeight() - 1 && pContext.getLevel()
-        .getBlockState(blockpos.above())
+    BlockState newState = blockpos.getY() < pContext.getLevel().getMaxBuildHeight() - 1 && pContext.getLevel().getBlockState(blockpos.above())
         .canBeReplaced(pContext) && pContext.getLevel().getBlockState(blockpos.above().above())
         .canBeReplaced(pContext) ? super.getStateForPlacement(pContext) : null;
     if (newState == null) {

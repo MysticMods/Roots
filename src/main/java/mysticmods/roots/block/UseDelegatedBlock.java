@@ -19,16 +19,6 @@ public abstract class UseDelegatedBlock extends Block implements EntityBlock {
     super(p_49795_);
   }
 
-  public static ItemInteractionResult fromResult(InteractionResult result) {
-    return switch (result) {
-      case CONSUME -> ItemInteractionResult.CONSUME;
-      case SUCCESS -> ItemInteractionResult.SUCCESS;
-      case CONSUME_PARTIAL -> ItemInteractionResult.CONSUME_PARTIAL;
-      case FAIL -> ItemInteractionResult.FAIL;
-      default -> ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    };
-  }
-
   @Override
   protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
     BlockEntity be = level.getBlockEntity(pos);
@@ -47,5 +37,15 @@ public abstract class UseDelegatedBlock extends Block implements EntityBlock {
     }
 
     return super.useWithoutItem(state, level, pos, player, ray);
+  }
+
+  public static ItemInteractionResult fromResult(InteractionResult result) {
+    return switch (result) {
+      case CONSUME -> ItemInteractionResult.CONSUME;
+      case SUCCESS -> ItemInteractionResult.SUCCESS;
+      case CONSUME_PARTIAL -> ItemInteractionResult.CONSUME_PARTIAL;
+      case FAIL -> ItemInteractionResult.FAIL;
+      default -> ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    };
   }
 }

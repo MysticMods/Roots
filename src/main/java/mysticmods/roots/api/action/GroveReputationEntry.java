@@ -29,7 +29,7 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
     this(grove, name, reputation, false, List.of(new SubEntry(type, tag.location())));
   }
 
-  public GroveReputationEntry(Grove grove, ResourceLocation name, GroveReputation reputation) {
+  public GroveReputationEntry (Grove grove, ResourceLocation name, GroveReputation reputation) {
     this(grove, name, reputation, false, Collections.emptyList());
   }
 
@@ -63,7 +63,7 @@ public record GroveReputationEntry(Grove grove, ResourceLocation name, GroveRepu
     ).apply(instance, SubEntry::new));
     public static Codec<List<SubEntry>> LIST_CODEC = CODEC.listOf();
 
-    public SubEntry() {
+    public SubEntry () {
       this(SubEntryType.ALWAYS, RootsAPI.rl("always"));
     }
   }

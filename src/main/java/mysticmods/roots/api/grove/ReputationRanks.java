@@ -20,7 +20,7 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
       ByteBufCodecs.VAR_INT, ReputationRanks::threshold3,
       ByteBufCodecs.VAR_INT, ReputationRanks::threshold4, ReputationRanks::new);
 
-  public int getRank(int reputation) {
+  public int getRank (int reputation) {
     if (reputation >= threshold4) {
       return 3;
     } else if (reputation >= threshold3) {

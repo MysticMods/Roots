@@ -24,10 +24,11 @@ import java.util.List;
 import java.util.function.BiPredicate;
 
 public class HeavyStormsRitual extends Ritual {
-  private static final BiPredicate<Level, BlockPos> AIR_ABOVE = (level, pos) -> level.isEmptyBlock(pos.above()) && !level.isEmptyBlock(pos);
-  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(AIR_ABOVE);
   private float lightningChance;
   private boolean causesRain, causesThunder;
+
+  private static final BiPredicate<Level, BlockPos> AIR_ABOVE = (level, pos) -> level.isEmptyBlock(pos.above()) && !level.isEmptyBlock(pos);
+  private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(AIR_ABOVE);
 
   @Override
   public List<BiPredicate<Level, BlockPos>> getPredicates() {

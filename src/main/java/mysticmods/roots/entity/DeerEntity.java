@@ -33,10 +33,6 @@ public class DeerEntity extends Animal {
     this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
-  public static AttributeSupplier.Builder attributes() {
-    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0d).add(Attributes.MOVEMENT_SPEED, 0.2d);
-  }
-
   @Nullable
   @Override
   public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pEntity) {
@@ -65,6 +61,10 @@ public class DeerEntity extends Animal {
   public void tick() {
     super.tick();
     this.setYRot(this.yHeadRot);
+  }
+
+  public static AttributeSupplier.Builder attributes() {
+    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0d).add(Attributes.MOVEMENT_SPEED, 0.2d);
   }
 
   @Nullable

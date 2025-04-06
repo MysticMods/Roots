@@ -286,16 +286,11 @@ public class RootsDataPackGenerators {
                 })
                 .add(Registries.DAMAGE_TYPE, bootstrap -> {
 
-                  bootstrap.register(ModDamage.ACID_CLOUD, new DamageType(ModDamage.ACID_CLOUD.location()
-                      .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
-                  bootstrap.register(ModDamage.METEOR, new DamageType(ModDamage.METEOR.location()
-                      .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
-                  bootstrap.register(ModDamage.WILDFIRE, new DamageType(ModDamage.WILDFIRE.location()
-                      .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
-                  bootstrap.register(ModDamage.ROSE_THORNS, new DamageType(ModDamage.ROSE_THORNS.location()
-                      .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
-                  bootstrap.register(ModDamage.LIFE_DRAIN, new DamageType(ModDamage.LIFE_DRAIN.location()
-                      .toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, EnumProxies.ROOTS_DRAINING.getValue()));
+                  bootstrap.register(ModDamage.ACID_CLOUD, new DamageType(ModDamage.ACID_CLOUD.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.METEOR, new DamageType(ModDamage.METEOR.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.WILDFIRE, new DamageType(ModDamage.WILDFIRE.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.ROSE_THORNS, new DamageType(ModDamage.ROSE_THORNS.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT));
+                  bootstrap.register(ModDamage.LIFE_DRAIN, new DamageType(ModDamage.LIFE_DRAIN.location().toString(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, EnumProxies.ROOTS_DRAINING.getValue()));
 
                 }),
             Set.of(RootsAPI.MODID)

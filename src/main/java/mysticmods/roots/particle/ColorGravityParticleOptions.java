@@ -13,18 +13,6 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public record ColorGravityParticleOptions(ParticleType<?> type, int color1, int color2,
                                           float gravity) implements ParticleOptions {
 
-  public ColorGravityParticleOptions(ParticleType<?> type, int color, float gravity) {
-    this(type, color, color, gravity);
-  }
-
-  public ColorGravityParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> type, int color1, int color2, float gravity) {
-    this(type.get(), color1, color2, gravity);
-  }
-
-  public ColorGravityParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> type, int color, float gravity) {
-    this(type.get(), color, color, gravity);
-  }
-
   public static MapCodec<ColorGravityParticleOptions> codec(ParticleType<?> type) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codec.INT.fieldOf("color1").forGetter(ColorGravityParticleOptions::color1),
@@ -40,6 +28,18 @@ public record ColorGravityParticleOptions(ParticleType<?> type, int color1, int 
         ByteBufCodecs.FLOAT, o -> o.gravity(),
         (c1, c2, gr) -> new ColorGravityParticleOptions(type, c1, c2, gr)
     );
+  }
+
+  public ColorGravityParticleOptions(ParticleType<?> type, int color, float gravity) {
+    this(type, color, color, gravity);
+  }
+
+  public ColorGravityParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> type, int color1, int color2, float gravity) {
+    this(type.get(), color1, color2, gravity);
+  }
+
+  public ColorGravityParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> type, int color, float gravity) {
+    this(type.get(), color, color, gravity);
   }
 
   @Override

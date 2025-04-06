@@ -15,10 +15,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Predicate;
 
 public class Grove implements IStyled {
-  private final ChatFormatting color;
-  private final ReputationRanks defaultReputationRanks = new ReputationRanks(5000, 8000, 10000, 15000);
   private Style style;
+  private final ChatFormatting color;
   private String descriptionId;
+
+  private final ReputationRanks defaultReputationRanks = new ReputationRanks(5000, 8000, 10000, 15000);
   private ReputationRanks reputationRanks;
 
   public Grove(ChatFormatting color) {

@@ -4,9 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.client.model.MeteorModel;
 import mysticmods.roots.client.model.ModelHolder;
 import mysticmods.roots.client.model.RoseThornsModel;
 import mysticmods.roots.entity.other.RoseThornsEntity;
+import mysticmods.roots.entity.projectile.MeteorEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,13 +20,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class RoseThornsRenderer extends EntityRenderer<RoseThornsEntity> {
-  public static final ResourceLocation TEXTURE = RootsAPI.rl("textures/entity/rose_thorns.png");
   protected final RoseThornsModel model;
 
   public RoseThornsRenderer(EntityRendererProvider.Context context) {
     super(context);
     this.model = new RoseThornsModel(context.bakeLayer(ModelHolder.ROSE_THORNS));
   }
+
+  public static final ResourceLocation TEXTURE = RootsAPI.rl("textures/entity/rose_thorns.png");
 
   public RoseThornsModel getModel() {
     return model;

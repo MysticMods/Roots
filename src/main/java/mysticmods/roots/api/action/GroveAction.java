@@ -23,13 +23,13 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
     }
   }
 
-  default GroveReputation modify(GroveContext context, GroveReputation reputation) {
+  default GroveReputation modify (GroveContext context, GroveReputation reputation) {
     return reputation;
   }
 
-  boolean test(GroveContext context);
+  boolean test (GroveContext context);
 
-  default void reward(GroveContext context) {
+  default void reward (GroveContext context) {
     for (GroveReputationEntry entry : getReputationEntries()) {
       boolean doReward = true;
       for (GroveReputationEntry.SubEntry subEntry : entry.entries()) {
@@ -71,12 +71,12 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   }
 
   @Deprecated
-  default boolean is(Holder<GroveAction> holder) {
+  default boolean is (Holder<GroveAction> holder) {
     return builtinRegistryHolder().is(holder);
   }
 
   @Deprecated
-  default boolean is(GroveAction action) {
+  default boolean is (GroveAction action) {
     return builtinRegistryHolder().is(action.builtinRegistryHolder());
   }
 

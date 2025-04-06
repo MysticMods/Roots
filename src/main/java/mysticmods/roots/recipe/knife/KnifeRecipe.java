@@ -157,12 +157,12 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
   }
 
   public static class Builder {
-    private final List<String> skipProperties = new ArrayList<>();
     private PartialBlockState outputState;
     private WorldTest test;
     private List<WorldCondition> condition = new ArrayList<>();
     private OutputStateMapper stateMapper;
     private int durabilityCost = 1;
+    private final List<String> skipProperties = new ArrayList<>();
 
     protected Builder() {
     }
@@ -173,11 +173,7 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
       this.stateMapper = stateMapper;
     }
 
-    public static Builder create() {
-      return new Builder();
-    }
-
-    public Builder test(WorldTest test) {
+    public Builder test (WorldTest test) {
       this.test = test;
       return this;
     }
@@ -206,6 +202,7 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
       this.durabilityCost = durabilityCost;
       return this;
     }
+
 
     public Builder skipProperties(String... properties) {
       Collections.addAll(skipProperties, properties);
@@ -238,6 +235,10 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
 
     public KnifeRecipe build(BaseRecipeData.Builder data) {
       return build(data.build());
+    }
+
+    public static Builder create() {
+      return new Builder();
     }
   }
 }

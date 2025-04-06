@@ -34,10 +34,6 @@ public class BeetleEntity extends TamableAnimal {
     this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
-  public static AttributeSupplier.Builder attributes() {
-    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0d).add(Attributes.MOVEMENT_SPEED, 0.15d);
-  }
-
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FloatGoal(this));
@@ -132,6 +128,10 @@ public class BeetleEntity extends TamableAnimal {
 
       return super.mobInteract(player, hand);
     }
+  }
+
+  public static AttributeSupplier.Builder attributes() {
+    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0d).add(Attributes.MOVEMENT_SPEED, 0.15d);
   }
 
   @Nullable

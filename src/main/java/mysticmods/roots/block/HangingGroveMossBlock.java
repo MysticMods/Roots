@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.blockentity.VisibleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -22,8 +24,9 @@ import javax.annotation.Nullable;
 import java.util.Map;
 
 public class HangingGroveMossBlock extends Block {
-  public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
   public static final MapCodec<HangingGroveMossBlock> CODEC = simpleCodec(HangingGroveMossBlock::new);
+
+  public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
   private static final Map<Direction, VoxelShape> AABBS = Maps.newEnumMap(
       ImmutableMap.of(
           Direction.NORTH,
@@ -38,24 +41,14 @@ public class HangingGroveMossBlock extends Block {
   );
 
 
-  public HangingGroveMossBlock(BlockBehaviour.Properties properties) {
-    super(properties);
-    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-  }
-
-  public static VoxelShape getShape(BlockState state) {
-    return AABBS.get(state.getValue(FACING));
-  }
-
-  public static boolean canSurvive(LevelReader level, BlockPos pos, Direction facing) {
-    BlockPos blockpos = pos.relative(facing.getOpposite());
-    BlockState blockstate = level.getBlockState(blockpos);
-    return blockstate.isFaceSturdy(level, blockpos, facing) && blockstate.is(RootsTags.Blocks.SUPPORTS_HANGING_MOSS);
-  }
-
   @Override
   public MapCodec<HangingGroveMossBlock> codec() {
     return CODEC;
+  }
+
+  public HangingGroveMossBlock(BlockBehaviour.Properties properties) {
+    super(properties);
+    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
   }
 
   @Override
@@ -63,9 +56,19 @@ public class HangingGroveMossBlock extends Block {
     return getShape(state);
   }
 
+  public static VoxelShape getShape(BlockState state) {
+    return AABBS.get(state.getValue(FACING));
+  }
+
   @Override
   protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
     return canSurvive(level, pos, state.getValue(FACING));
+  }
+
+  public static boolean canSurvive(LevelReader level, BlockPos pos, Direction facing) {
+    BlockPos blockpos = pos.relative(facing.getOpposite());
+    BlockState blockstate = level.getBlockState(blockpos);
+    return blockstate.isFaceSturdy(level, blockpos, facing) && blockstate.is(RootsTags.Blocks.SUPPORTS_HANGING_MOSS);
   }
 
   @Nullable

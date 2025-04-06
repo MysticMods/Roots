@@ -88,10 +88,6 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
     protected Builder() {
     }
 
-    public static Builder create() {
-      return new Builder();
-    }
-
     public Builder ritual(Ritual ritual) {
       this.ritual = ritual;
       return this;
@@ -107,6 +103,10 @@ public class PyreRecipe extends RootsTileRecipe<PyreInventory, PyreBlockEntity, 
 
     public PyreRecipe build(BaseRecipeData.Builder data) {
       return build(data.build());
+    }
+
+    public static Builder create() {
+      return new Builder();
     }
   }
 }

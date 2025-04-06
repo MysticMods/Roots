@@ -19,8 +19,6 @@ import java.util.function.Predicate;
  */
 @SuppressWarnings("unused")
 public class ItemUtil {
-  public static Predicate<DataComponentType<?>> FORGETTER = o -> o.equals(DataComponents.DAMAGE) || o.equals(DataComponents.MAX_DAMAGE) || o.equals(DataComponents.UNBREAKABLE);
-
   /**
    * Compares two itemstacks without considering their size.
    *
@@ -39,6 +37,8 @@ public class ItemUtil {
     }
     return contents;
   }
+
+  public static Predicate<DataComponentType<?>> FORGETTER = o -> o.equals(DataComponents.DAMAGE) || o.equals(DataComponents.MAX_DAMAGE) || o.equals(DataComponents.UNBREAKABLE);
 
   public static ItemStack insertPlayerInventoryStacked(Player player, ItemStack stack, boolean simulate) {
     PlayerMainInvWrapper inv = new PlayerMainInvWrapper(player.getInventory());

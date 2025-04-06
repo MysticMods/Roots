@@ -124,7 +124,7 @@ public class ClientFXHandlers {
     }
   }
 
-  public static void alert(int entityId) {
+  public static void alert (int entityId) {
     if (ConfigManager.ALERTNESS_VISUAL.getAsBoolean()) {
       WarningLayer.warningTicks = ConfigManager.ALERTNESS_DURATION.getAsInt();
     }

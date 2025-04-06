@@ -6,6 +6,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -13,10 +14,6 @@ import java.util.Collections;
 import java.util.Set;
 
 public interface ISpellInstance extends SpellLike {
-  static SimpleSpell of(Spell spell) {
-    return new SimpleSpell(spell);
-  }
-
   Spell getSpell();
 
   default MutableComponent getStyledName() {
@@ -52,7 +49,7 @@ public interface ISpellInstance extends SpellLike {
     return getSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
   }
 
-  default boolean hasBlockTarget(Player pPlayer) {
+  default boolean hasBlockTarget (Player pPlayer) {
     return getSpell().hasBlockTarget(pPlayer);
   }
 
@@ -62,7 +59,7 @@ public interface ISpellInstance extends SpellLike {
   }
 
   @Nullable
-  default SpellInstanceData getSpellData() {
+  default SpellInstanceData getSpellData () {
     return null;
   }
 
@@ -73,6 +70,10 @@ public interface ISpellInstance extends SpellLike {
 
   default boolean isEmpty() {
     return false;
+  }
+
+  static SimpleSpell of(Spell spell) {
+    return new SimpleSpell(spell);
   }
 
   record SimpleSpell(Spell spell) implements ISpellInstance {

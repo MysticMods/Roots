@@ -29,14 +29,6 @@ public class ExtraStreamCodecs {
       ByteBufCodecs.DOUBLE, Vec3::y,
       ByteBufCodecs.DOUBLE, Vec3::z,
       Vec3::new);
-  public static final StreamCodec<ByteBuf, TagKey<Item>> ITEM_TAG_STREAM_CODEC = tagStreamCodec(Registries.ITEM);
-  public static final StreamCodec<ByteBuf, TagKey<Block>> BLOCK_TAG_STREAM_CODEC = tagStreamCodec(Registries.BLOCK);
-  public static final StreamCodec<ByteBuf, TagKey<EntityType<?>>> ENTITY_TAG_STREAM_CODEC = tagStreamCodec(Registries.ENTITY_TYPE);
-  public static final StreamCodec<ByteBuf, TagKey<Herb>> HERB_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.HERBS);
-  public static final StreamCodec<ByteBuf, TagKey<Spell>> SPELL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.SPELLS);
-  public static final StreamCodec<ByteBuf, TagKey<Grove>> GROVE_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.GROVES);
-  public static final StreamCodec<ByteBuf, TagKey<Ritual>> RITUAL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.RITUALS);
-  public static final StreamCodec<ByteBuf, InteractionHand> INTERACTION_HAND_CODEC = ByteBufCodecs.VAR_INT.map(o -> o == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, Enum::ordinal);
 
   public static <B, C, T1, T2, T3, T4, T5, T6, T7> StreamCodec<B, C> composite(
       final StreamCodec<? super B, T1> arg, final Function<C, T1> function,
@@ -108,6 +100,17 @@ public class ExtraStreamCodecs {
       }
     };
   }
+
+  public static final StreamCodec<ByteBuf, TagKey<Item>> ITEM_TAG_STREAM_CODEC = tagStreamCodec(Registries.ITEM);
+  public static final StreamCodec<ByteBuf, TagKey<Block>> BLOCK_TAG_STREAM_CODEC = tagStreamCodec(Registries.BLOCK);
+  public static final StreamCodec<ByteBuf, TagKey<EntityType<?>>> ENTITY_TAG_STREAM_CODEC = tagStreamCodec(Registries.ENTITY_TYPE);
+
+  public static final StreamCodec<ByteBuf, TagKey<Herb>> HERB_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.HERBS);
+  public static final StreamCodec<ByteBuf, TagKey<Spell>> SPELL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.SPELLS);
+  public static final StreamCodec<ByteBuf, TagKey<Grove>> GROVE_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.GROVES);
+  public static final StreamCodec<ByteBuf, TagKey<Ritual>> RITUAL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.RITUALS);
+
+  public static final StreamCodec<ByteBuf, InteractionHand> INTERACTION_HAND_CODEC = ByteBufCodecs.VAR_INT.map(o -> o == 0 ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, Enum::ordinal);
 
   public static <T> StreamCodec<ByteBuf, TagKey<T>> tagStreamCodec(ResourceKey<Registry<T>> registry) {
     return ResourceLocation.STREAM_CODEC.map(o -> TagKey.create(registry, o), TagKey::location);

@@ -41,32 +41,18 @@ import java.util.Collections;
 @JeiPlugin
 public class RootsJEIPlugin implements IModPlugin {
   public static final IIngredientType<RootsEntityType> ENTITY_TYPE = () -> RootsEntityType.class;
+
+  @Override
+  public ResourceLocation getPluginUid() {
+    return RootsAPI.rl("jei");
+  }
+
   public static final RecipeType<GroveRecipe> GROVE_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("grove_recipe"), GroveRecipe.class);
   public static final RecipeType<MortarRecipe> MORTAR_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("mortar_recipe"), MortarRecipe.class);
   public static final RecipeType<KnifeRecipe> KNIFE_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("knife_recipe"), KnifeRecipe.class);
   public static final RecipeType<PyreRecipe> PYRE_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("pyre_recipe"), PyreRecipe.class);
   public static final RecipeType<RunicBlockRecipe> RUNIC_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_recipe"), RunicBlockRecipe.class);
   public static final RecipeType<RunicEntityRecipe> RUNIC_ENTITY_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_entity_recipe"), RunicEntityRecipe.class);
-  public static final RootsEntityRenderer ENTITY_RENDERER = new RootsEntityRenderer(32);
-  public static IJeiRuntime runtime = null;
-
-  @Nullable
-  public static <V> ITypedIngredient<V> getTypedIngredient(V ingredient) {
-    if (runtime == null) {
-      return null;
-    }
-    return runtime.getIngredientManager().createTypedIngredient(ingredient).orElse(null);
-  }
-
-  @Nullable
-  public static ITypedIngredient<ItemStack> createItemIngredient(ItemLike item) {
-    return getTypedIngredient(new ItemStack(item));
-  }
-
-  @Override
-  public ResourceLocation getPluginUid() {
-    return RootsAPI.rl("jei");
-  }
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -85,8 +71,7 @@ public class RootsJEIPlugin implements IModPlugin {
     Level level = Minecraft.getInstance().level;
     registration.addRecipes(GROVE_RECIPE_TYPE, ResolvedRecipes.GROVE.getRecipes(level).stream().map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream()
-        .map(RecipeHolder::value)
+    registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream().map(RecipeHolder::value)
         .toList());
     registration.addRecipes(PYRE_RECIPE_TYPE, ResolvedRecipes.PYRE.getRecipes(level).stream().map(RecipeHolder::value)
         .toList());
@@ -128,11 +113,15 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.registerSubtypeInterpreter(ModItems.HERB_POUCH.get(), colorInterpreter);
   }
 
+  public static final RootsEntityRenderer ENTITY_RENDERER = new RootsEntityRenderer(32);
+
   @Override
   public void registerIngredients(IModIngredientRegistration registration) {
     registration.register(ENTITY_TYPE, Collections.emptyList(), new RootsEntityHelper(), new RootsEntityRenderer(16), BuiltInRegistries.ENTITY_TYPE.byNameCodec()
         .xmap(RootsEntityType::new, RootsEntityType::entity));
   }
+
+  public static IJeiRuntime runtime = null;
 
   @Override
   public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
@@ -142,5 +131,18 @@ public class RootsJEIPlugin implements IModPlugin {
   @Override
   public void onRuntimeUnavailable() {
     runtime = null;
+  }
+
+  @Nullable
+  public static <V> ITypedIngredient<V> getTypedIngredient(V ingredient) {
+    if (runtime == null) {
+      return null;
+    }
+    return runtime.getIngredientManager().createTypedIngredient(ingredient).orElse(null);
+  }
+
+  @Nullable
+  public static ITypedIngredient<ItemStack> createItemIngredient(ItemLike item) {
+    return getTypedIngredient(new ItemStack(item));
   }
 }

@@ -16,8 +16,7 @@ import java.util.Set;
 public class EatItemAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    RootsAPI.LOG.error("EeatItemAction triggered by '{}' for item '{}'", context.player().getName()
-        .getString(), context.item().getDescriptionId());
+    RootsAPI.LOG.error("EeatItemAction triggered by '{}' for item '{}'", context.player().getName().getString(), context.item().getDescriptionId());
     return true;
   }
 
@@ -26,7 +25,7 @@ public class EatItemAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context(ServerLevel level, ServerPlayer player, ItemStack item) implements GroveContext {
+  public record Context (ServerLevel level, ServerPlayer player, ItemStack item) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(
         GroveContext.LEVEL,
         GroveContext.PLAYER,

@@ -70,7 +70,7 @@ public abstract class RootsRecipeBaseCategory<T extends RootsRecipe<?, ?>> imple
     return icon;
   }
 
-  protected IRecipeSlotRichTooltipCallback richestTooltip(T recipe) {
+  protected IRecipeSlotRichTooltipCallback richestTooltip (T recipe) {
     return (IRecipeSlotView view, ITooltipBuilder builder) -> {
       view.getSlotName().ifPresent(slot -> {
         try {

@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class StaffScreen extends RootsScreen {
-  private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_gui_new.png");
   private final InteractionHand hand;
   private final int inventorySlot;
   private final List<StaffSpellButton> staffSpellButtons = new ArrayList<>();
@@ -41,12 +40,6 @@ public class StaffScreen extends RootsScreen {
     this.inventorySlot = inventorySlot;
     this.width = 256;
     this.height = 192;
-  }
-
-  public static void open(@Nullable InteractionHand hand, int inventorySlot) {
-    StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
-    Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
-    ClientHooks.pushGuiLayer(Minecraft.getInstance(), newScreen);
   }
 
   private SpellStorage getStorage() {
@@ -169,6 +162,14 @@ public class StaffScreen extends RootsScreen {
     }
     return false;
   }
+
+  public static void open(@Nullable InteractionHand hand, int inventorySlot) {
+    StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
+    Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
+    ClientHooks.pushGuiLayer(Minecraft.getInstance(), newScreen);
+  }
+
+  private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_gui_new.png");
 
   @Override
   public ResourceLocation getBackground() {

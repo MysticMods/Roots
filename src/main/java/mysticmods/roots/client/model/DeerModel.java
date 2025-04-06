@@ -10,6 +10,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
+import java.util.Collections;
+
 public class DeerModel extends AgeableListModel<DeerEntity> {
 
   //fields

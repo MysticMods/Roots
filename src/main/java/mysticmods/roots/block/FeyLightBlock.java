@@ -31,6 +31,7 @@ public class FeyLightBlock extends WaterloggedBlock {
   }
 
 
+
   @Override
   public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
     return Shapes.FEY_LIGHT;

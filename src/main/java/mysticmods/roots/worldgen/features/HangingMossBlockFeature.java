@@ -17,11 +17,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HangingMossBlockFeature extends Feature<SimpleBlockConfiguration> {
-  private List<Direction> directions;
-
   public HangingMossBlockFeature(Codec<SimpleBlockConfiguration> pCodec) {
     super(pCodec);
   }
+
+  private List<Direction> directions;
 
   @Override
   public boolean place(FeaturePlaceContext<SimpleBlockConfiguration> context) {

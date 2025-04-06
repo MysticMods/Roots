@@ -26,7 +26,6 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 public class PedestalBlockEntity extends UseDelegatedBlockEntity implements InventoryBlockEntity {
   protected ItemStackHandler inventory;
   protected int limit;
-  private double offset = -1;
 
   public PedestalBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState, int limit) {
     super(pType, pWorldPosition, pBlockState);
@@ -160,6 +159,8 @@ public class PedestalBlockEntity extends UseDelegatedBlockEntity implements Inve
   public ItemStackHandler getInventory() {
     return inventory;
   }
+
+  private double offset = -1;
 
   public double offset() {
     if (offset == -1) {

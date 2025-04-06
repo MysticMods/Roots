@@ -3,6 +3,7 @@ package mysticmods.roots.spell;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -35,7 +36,7 @@ public class SaturateSpell extends Spell {
   }
 
   @Override
-  public void buildProperties(List<PropertyHolder<?>> result) {
+  public void buildProperties (List<PropertyHolder<?>> result) {
     super.buildProperties(result);
     result.add(ModSpells.SATURATE_FOOD_MULTIPLIER);
     result.add(ModSpells.SATURATE_SATURATION_MULTIPLIER);

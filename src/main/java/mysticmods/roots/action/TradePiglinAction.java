@@ -10,15 +10,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.monster.piglin.Piglin;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.trading.MerchantOffer;
 
 import java.util.Set;
 
 public class TradePiglinAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    RootsAPI.LOG.error("TradePiglinAction triggered by '{}' with item '{}'", context.player().getName()
-        .getString(), context.item().getItem().getDescriptionId());
+    RootsAPI.LOG.error("TradePiglinAction triggered by '{}' with item '{}'", context.player().getName().getString(), context.item().getItem().getDescriptionId());
     return true;
   }
 

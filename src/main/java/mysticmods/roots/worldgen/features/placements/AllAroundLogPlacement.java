@@ -17,12 +17,14 @@ import java.util.stream.Stream;
 
 public class AllAroundLogPlacement extends PlacementModifier {
   private static final AllAroundLogPlacement INSTANCE = new AllAroundLogPlacement();
-  public static MapCodec<AllAroundLogPlacement> CODEC = MapCodec.unit(INSTANCE);
-  private final List<Direction> DIRECTIONS = new ArrayList<>(Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
 
   public static AllAroundLogPlacement around() {
     return INSTANCE;
   }
+
+  public static MapCodec<AllAroundLogPlacement> CODEC = MapCodec.unit(INSTANCE);
+
+  private final List<Direction> DIRECTIONS = new ArrayList<>(Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
 
   @Override
   public Stream<BlockPos> getPositions(PlacementContext context, RandomSource random, BlockPos pos) {

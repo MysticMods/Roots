@@ -50,13 +50,13 @@ public class SnapshotStorage implements ICleanable {
     return dirty;
   }
 
-  public void setDirty(boolean dirty) {
-    this.dirty = dirty;
-  }
-
   @Override
   public boolean isEmpty() {
     return snapshots.isEmpty();
+  }
+
+  public void setDirty(boolean dirty) {
+    this.dirty = dirty;
   }
 
   @Nullable

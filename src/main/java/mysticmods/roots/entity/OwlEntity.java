@@ -27,6 +27,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
@@ -49,29 +50,6 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     this.setPathfindingMalus(PathType.WATER, -1.0f);
   }
 
-  public static AttributeSupplier.Builder attributes() {
-    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0d).add(Attributes.MOVEMENT_SPEED, 0.2d)
-        .add(Attributes.FLYING_SPEED, 0.55d);
-  }
-
-  public static <T extends OwlEntity> boolean placement(EntityType<T> pAnimal, LevelAccessor worldIn, MobSpawnType reason, BlockPos blockpos, RandomSource pRandom) {
-    BlockState down = worldIn.getBlockState(blockpos.below());
-    Block block = down.getBlock();
-    return block instanceof LeavesBlock || block == Blocks.GRASS_BLOCK || block.builtInRegistryHolder()
-        .is(BlockTags.LOGS) || block == Blocks.AIR && worldIn.getMaxLocalRawBrightness(blockpos) > 8;
-  }
-
-  private static float getPitch(RandomSource random) {
-    return (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
-  }
-
-/*
-  @Override
-  public float getEyeHeight(Pose pose) {
-    return this.getBbHeight() * 0.6F;
-  }
-*/
-
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
@@ -82,6 +60,11 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(RootsTags.Items.OWL_FOOD), false));
   }
 
+  public static AttributeSupplier.Builder attributes() {
+    return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0d).add(Attributes.MOVEMENT_SPEED, 0.2d)
+        .add(Attributes.FLYING_SPEED, 0.55d);
+  }
+
   @Override
   protected PathNavigation createNavigation(Level worldIn) {
     FlyingPathNavigation pathnavigateflying = new FlyingPathNavigation(this, worldIn);
@@ -90,6 +73,13 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     pathnavigateflying.setCanPassDoors(true);
     return pathnavigateflying;
   }
+
+/*
+  @Override
+  public float getEyeHeight(Pose pose) {
+    return this.getBbHeight() * 0.6F;
+  }
+*/
 
   @Override
   public void tick() {
@@ -123,6 +113,12 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
     return stack.is(RootsTags.Items.OWL_FOOD);
   }
 
+  public static <T extends OwlEntity> boolean placement(EntityType<T> pAnimal, LevelAccessor worldIn, MobSpawnType reason, BlockPos blockpos, RandomSource pRandom) {
+    BlockState down = worldIn.getBlockState(blockpos.below());
+    Block block = down.getBlock();
+    return block instanceof LeavesBlock || block == Blocks.GRASS_BLOCK || block.builtInRegistryHolder().is(BlockTags.LOGS) || block == Blocks.AIR && worldIn.getMaxLocalRawBrightness(blockpos) > 8;
+  }
+
   @Override
   public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
     return false;
@@ -132,17 +128,17 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
   }
 
-/*  @Override
-  public boolean doHurtTarget(Entity entityIn) {
-    super.doHurtTarget()
-    return entityIn.hurt(DamageSource.mobAttack(this), 3.0F);
-  }*/
-
   @Override
   @Nonnull
   public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob ageable) {
     return ModEntities.OWL.get().create(world);
   }
+
+/*  @Override
+  public boolean doHurtTarget(Entity entityIn) {
+    super.doHurtTarget()
+    return entityIn.hurt(DamageSource.mobAttack(this), 3.0F);
+  }*/
 
   @Override
   @Nullable
@@ -179,6 +175,10 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   @Override
   public float getVoicePitch() {
     return getPitch(this.random);
+  }
+
+  private static float getPitch(RandomSource random) {
+    return (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
   }
 
   @Override

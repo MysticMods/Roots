@@ -20,9 +20,9 @@ import java.util.function.Supplier;
 public class ResolvingRecipeType<V, C extends RecipeInput, T extends Recipe<C> & IRootsRecipe<C>> extends SimpleJsonResourceReloadListener {
   protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
   protected final Supplier<RecipeType<T>> type;
+  protected List<RecipeHolder<T>> cache = null;
   protected final Comparator<? super RecipeHolder<T>> comparator;
   protected final Function<T, @org.jetbrains.annotations.Nullable V> resolver;
-  protected List<RecipeHolder<T>> cache = null;
   private RecipeHolder<T> lastRecipe = null;
   private boolean sorted = false;
 

@@ -9,6 +9,7 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.effect.SimpleEffect;
 import mysticmods.roots.init.*;
 import mysticmods.roots.integration.IntegrationUtil;
+import mysticmods.roots.item.RunicShearsItem;
 import mysticmods.roots.network.client.ClientboundSyncGeasPacket;
 import mysticmods.roots.network.client.fx.AlertnessFXPacket;
 import mysticmods.roots.util.ItemUtil;
@@ -32,9 +33,11 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.item.ItemEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
@@ -81,10 +84,9 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onPotionAdded(MobEffectEvent.Added event) {
+  public static void onPotionAdded (MobEffectEvent.Added event) {
     if (event.getEffectInstance().getEffect().is(RootsTags.MobEffects.GEAS)) {
-      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity()
-          .getId(), true));
+      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity().getId(), true));
     }
   }
 
@@ -94,8 +96,7 @@ public class EntityEventHandler {
       return;
     }
     if (event.getEffectInstance().getEffect().is(RootsTags.MobEffects.GEAS)) {
-      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity()
-          .getId(), false));
+      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity().getId(), false));
     }
     if (event.getEffectInstance().getEffect().value() instanceof SimpleEffect simpleEffect) {
       if (simpleEffect.onEffectExpired(event.getEntity(), event.getEffectInstance().getAmplifier())) {
@@ -110,8 +111,7 @@ public class EntityEventHandler {
       return;
     }
     if (event.getEffect().is(RootsTags.MobEffects.GEAS)) {
-      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity()
-          .getId(), false));
+      PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new ClientboundSyncGeasPacket(event.getEntity().getId(), false));
     }
     if (event.getEffectInstance().getEffect().value() instanceof SimpleEffect simpleEffect) {
       if (simpleEffect.onEffectRemoved(event.getEntity(), event.getEffectInstance().getAmplifier())) {
@@ -175,7 +175,7 @@ public class EntityEventHandler {
   @SubscribeEvent
   public static void onEntityStartTracking(PlayerEvent.StartTracking event) {
     if (event.getTarget() instanceof LivingEntity living) {
-      PacketDistributor.sendToPlayer((ServerPlayer) event.getEntity(), new ClientboundSyncGeasPacket(living.getId(), living.hasEffect(ModEffects.GEAS)));
+      PacketDistributor.sendToPlayer((ServerPlayer)event.getEntity(), new ClientboundSyncGeasPacket(living.getId(), living.hasEffect(ModEffects.GEAS)));
     }
   }
 
@@ -213,7 +213,7 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)
-  public static void onEntityTame(AnimalTameEvent event) {
+  public static void onEntityTame (AnimalTameEvent event) {
     if (!(event.getTamer() instanceof ServerPlayer player)) {
       return;
     }
@@ -222,7 +222,7 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
+  public static void onDimensionChange (PlayerEvent.PlayerChangedDimensionEvent event) {
     if (event.getEntity() instanceof ServerPlayer player) {
       ArriveDimensionAction.Context context = new ArriveDimensionAction.Context(player.serverLevel(), player);
       ModActions.ARRIVE_DIMENSION.get().accept(context);

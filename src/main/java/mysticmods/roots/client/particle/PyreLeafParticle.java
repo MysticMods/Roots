@@ -22,7 +22,7 @@ public class PyreLeafParticle extends FlyTowardsPositionParticle {
     this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
     this.quadSize = 0.1f + this.random.nextFloat() * 0.1f;
-    this.lifetime = (int) (Math.random() * 10.0) + 100;
+    this.lifetime = (int)(Math.random() * 10.0) + 100;
   }
 
   @Override
@@ -40,7 +40,7 @@ public class PyreLeafParticle extends FlyTowardsPositionParticle {
     }
   }
 
-  public record Provider(SpriteSet sprites) implements ParticleProvider<ColorGravityParticleOptions> {
+  public record Provider (SpriteSet sprites) implements ParticleProvider<ColorGravityParticleOptions> {
     @Override
     public @Nullable Particle createParticle(ColorGravityParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       var particle = new PyreLeafParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());

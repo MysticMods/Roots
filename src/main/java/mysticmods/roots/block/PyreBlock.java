@@ -116,20 +116,20 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
         pLevel.playLocalSound(x, y, z, ModSounds.PYRE_CRACKLES.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
       }
 
-      int color1 = pState.is(ModBlocks.SOUL_PYRE) || pState.is(ModBlocks.REINFORCED_SOUL_PYRE) ? 0x5be3e8 : 0xc96c03;
-      if (pRandom.nextBoolean()) {
-        color1 = pState.is(ModBlocks.SOUL_PYRE) || pState.is(ModBlocks.REINFORCED_SOUL_PYRE) ? 0x9adfe1 : 0xe9bd39;
-      }
+    int color1 = pState.is(ModBlocks.SOUL_PYRE) || pState.is(ModBlocks.REINFORCED_SOUL_PYRE) ? 0x5be3e8 : 0xc96c03;
+    if (pRandom.nextBoolean()) {
+      color1 = pState.is(ModBlocks.SOUL_PYRE) || pState.is(ModBlocks.REINFORCED_SOUL_PYRE) ? 0x9adfe1 : 0xe9bd39;
+    }
 
-      int color2 = pState.is(ModBlocks.SOUL_PYRE) || pState.is(ModBlocks.REINFORCED_SOUL_PYRE) ? 0x088f92 : 0x8b3100;
+    int color2 = pState.is(ModBlocks.SOUL_PYRE) || pState.is(ModBlocks.REINFORCED_SOUL_PYRE) ? 0x088f92 : 0x8b3100;
 
-      if (pRandom.nextInt(4) == 0) {
-        pLevel.addParticle(
-            new ColorGravityParticleOptions(
-                ModParticles.PYRE,
-                color1,
-                color2,
-                -(pRandom.nextFloat() * 0.03f)
+    if (pRandom.nextInt(4) == 0) {
+      pLevel.addParticle(
+          new ColorGravityParticleOptions(
+              ModParticles.PYRE,
+              color1,
+              color2,
+              -(pRandom.nextFloat() * 0.03f)
             ),
             x + (pRandom.nextFloat() - 0.5f) * 0.3f,
             y + 0.1f + (pRandom.nextFloat()) * 0.2f,

@@ -1,5 +1,6 @@
 package mysticmods.roots.integration.jei.categories;
 
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -11,6 +12,8 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.drawable.DrawableComponent;
+import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
 import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
 import mysticmods.roots.integration.jei.categories.widget.CooldownWidget;
@@ -26,6 +29,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RunicEntityCategory extends RootsRecipeBaseCategory<RunicEntityRecipe> {
   public RunicEntityCategory(IGuiHelper helper) {

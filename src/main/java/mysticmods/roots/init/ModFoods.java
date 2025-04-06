@@ -6,8 +6,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Items;
 
 public class ModFoods {
-  public static final FoodProperties WILDEWHEET_BREAD = new FoodProperties.Builder().nutrition(7)
-      .saturationModifier(0.8F).build();
+  public static final FoodProperties WILDEWHEET_BREAD = new FoodProperties.Builder().nutrition(7).saturationModifier(0.8F).build();
   public static final FoodProperties FISH_AND_CHIPS = (new FoodProperties.Builder().nutrition(10)
       .saturationModifier(0.8f)).build();
   public static final FoodProperties VENISON = (new FoodProperties.Builder().nutrition(3)

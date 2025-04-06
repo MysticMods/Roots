@@ -189,7 +189,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return new SpellStorage(slot, maxSlot, slots);
   }
 
-  public SpellStorage setData(int slot, IntArrayList data) {
+  public SpellStorage setData (int slot, IntArrayList data) {
     if (slot < 0 || slot >= maxSlot) {
       return this;
     }
@@ -209,7 +209,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     return new SpellStorage(currentSlot, maxSlot, newSlots);
   }
 
-  public SpellStorage setData(int slot, int index, int value) {
+  public SpellStorage setData (int slot, int index, int value) {
     if (slot < 0 || slot >= maxSlot) {
       return this;
     }
@@ -304,7 +304,7 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     public static Codec<SpellSlot> CODEC = MAP_CODEC.codec();
 
     public SpellSlot(int slot, Spell spell, Set<SpellModifier> enabledModifiers) {
-      this(slot, spell, enabledModifiers, 0, new SpellInstanceData(spell.getDataSlots() + 1));
+      this(slot, spell, enabledModifiers, 0, new SpellInstanceData(spell.getDataSlots()+1));
     }
 
     @Override
@@ -331,15 +331,15 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
       return enabledModifiers.contains(modifier);
     }
 
-    public SpellSlot withData(int index, int value) {
+    public SpellSlot withData (int index, int value) {
       IntArrayList newData = new IntArrayList(data.data());
 
-      newData.ensureCapacity(spell.getDataSlots() + 1);
+      newData.ensureCapacity(spell.getDataSlots()+1);
       newData.set(index, value);
       return new SpellSlot(slot, spell, enabledModifiers, cooldown, new SpellInstanceData(newData));
     }
 
-    public SpellSlot withData(SpellInstanceData data) {
+    public SpellSlot withData (SpellInstanceData data) {
       if (data.equals(this.data)) {
         return this;
       }

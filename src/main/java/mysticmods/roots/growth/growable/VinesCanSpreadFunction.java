@@ -18,29 +18,6 @@ import org.jetbrains.annotations.Nullable;
 // - ChatGPT was used to simplify this code
 // I still feel like this logic is just too much to trigger so often
 public record VinesCanSpreadFunction() implements CanGrowFunction {
-  private static BooleanProperty getPropertyForFace(Direction face) {
-    return VineBlock.PROPERTY_BY_DIRECTION.get(face);
-  }
-
-  private static boolean isAcceptableNeighbour(BlockGetter level, BlockPos pos, Direction face) {
-    return MultifaceBlock.canAttachTo(level, face, pos, level.getBlockState(pos));
-  }
-
-  private static boolean hasHorizontalConnection(BlockState state) {
-    return state.getValue(VineBlock.NORTH) || state.getValue(VineBlock.EAST) ||
-        state.getValue(VineBlock.SOUTH) || state.getValue(VineBlock.WEST);
-  }
-
-  private static BlockState fillFaces(BlockState source, BlockState target) {
-    for (Direction direction : Direction.Plane.HORIZONTAL) {
-      BooleanProperty property = getPropertyForFace(direction);
-      if (source.getValue(property)) {
-        target = target.setValue(property, true);
-      }
-    }
-    return target;
-  }
-
   @Override
   public boolean test(Level level, BlockPos pos, BlockState state, @Nullable IntegerProperty ageProperty, int maximumAge) {
     if (!level.getGameRules().getBoolean(GameRules.RULE_DO_VINES_SPREAD)) {
@@ -112,6 +89,29 @@ public record VinesCanSpreadFunction() implements CanGrowFunction {
     boolean canSpreadLeft = state.getValue(getPropertyForFace(left)) && isAcceptableNeighbour(level, targetPos.relative(left), left);
     boolean canSpreadRight = state.getValue(getPropertyForFace(right)) && isAcceptableNeighbour(level, targetPos.relative(right), right);
     return canSpreadLeft || canSpreadRight;
+  }
+
+  private static BooleanProperty getPropertyForFace(Direction face) {
+    return VineBlock.PROPERTY_BY_DIRECTION.get(face);
+  }
+
+  private static boolean isAcceptableNeighbour(BlockGetter level, BlockPos pos, Direction face) {
+    return MultifaceBlock.canAttachTo(level, face, pos, level.getBlockState(pos));
+  }
+
+  private static boolean hasHorizontalConnection(BlockState state) {
+    return state.getValue(VineBlock.NORTH) || state.getValue(VineBlock.EAST) ||
+        state.getValue(VineBlock.SOUTH) || state.getValue(VineBlock.WEST);
+  }
+
+  private static BlockState fillFaces(BlockState source, BlockState target) {
+    for (Direction direction : Direction.Plane.HORIZONTAL) {
+      BooleanProperty property = getPropertyForFace(direction);
+      if (source.getValue(property)) {
+        target = target.setValue(property, true);
+      }
+    }
+    return target;
   }
 }
 

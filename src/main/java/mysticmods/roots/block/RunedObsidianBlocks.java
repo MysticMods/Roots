@@ -4,6 +4,7 @@ import mysticmods.roots.init.ModBlocks;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.PushReaction;
 
 // TODO: Re-implement using the BlockBehavior.Properties.of().pushReaction

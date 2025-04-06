@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GrowthUtil {
   @Nullable
-  public static GrowthRecord getGrowthRecord(BlockState state) {
+  public static GrowthRecord getGrowthRecord (BlockState state) {
     GrowthRecord record = state.getBlockHolder().getData(DataMaps.GROWTH_RECORDS);
     if (record == null && state.getBlock() instanceof CropBlock crop) {
       record = GrowthRecord.ofCrop(crop);

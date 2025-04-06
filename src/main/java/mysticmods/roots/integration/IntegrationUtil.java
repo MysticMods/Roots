@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IntegrationUtil {
-  public static List<ItemStack> getCharms(Player player) {
+  public static List<ItemStack> getCharms (Player player) {
     List<ItemStack> charms = new ArrayList<>();
 
     if (ModList.get().isLoaded("curios")) {
