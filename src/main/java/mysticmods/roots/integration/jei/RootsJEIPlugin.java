@@ -9,6 +9,7 @@ import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
@@ -84,6 +85,8 @@ public class RootsJEIPlugin implements IModPlugin {
         .map(RecipeHolder::value)
         .toList());
     registration.addRecipes(RecipeTypes.CRAFTING, DyeRecipeGenerator.generate());
+    IVanillaRecipeFactory factory = registration.getJeiHelpers().getVanillaRecipeFactory();
+    registration.addRecipes(RecipeTypes.ANVIL, RootsRepairRecipes.getRootsAnvilRepairRecipes(factory, registration.getIngredientManager()));
   }
 
   @Override
@@ -131,18 +134,5 @@ public class RootsJEIPlugin implements IModPlugin {
   @Override
   public void onRuntimeUnavailable() {
     runtime = null;
-  }
-
-  @Nullable
-  public static <V> ITypedIngredient<V> getTypedIngredient(V ingredient) {
-    if (runtime == null) {
-      return null;
-    }
-    return runtime.getIngredientManager().createTypedIngredient(ingredient).orElse(null);
-  }
-
-  @Nullable
-  public static ITypedIngredient<ItemStack> createItemIngredient(ItemLike item) {
-    return getTypedIngredient(new ItemStack(item));
   }
 }
