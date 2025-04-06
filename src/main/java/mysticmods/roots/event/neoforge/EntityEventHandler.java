@@ -180,7 +180,7 @@ public class EntityEventHandler {
   }
 
   @SubscribeEvent
-  public static void onEntityInteract(PlayerInteractEvent.EntityInteractSpecific event) {
+  public static void onEntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
     InteractionHand hand = event.getHand();
     Player player = event.getEntity();
     Entity target = event.getTarget();
@@ -188,6 +188,25 @@ public class EntityEventHandler {
     if (heldItem.is(RootsTags.Items.RUNIC_SHEARS)) {
       if (target.getType().is(RootsTags.Entities.RUNIC_SHEARS_OVERRIDE) && target instanceof LivingEntity living) {
         event.setCancellationResult(heldItem.interactLivingEntity(player, living, hand));
+        event.setCanceled(true);
+      }
+    } else if (heldItem.is(RootsTags.Items.CASTING_TOOLS)) {
+      if (!target.getType().is(RootsTags.Entities.ALLOW_CASTING_TOOL_RIGHT_CLICK)) {
+        event.setCancellationResult(InteractionResult.FAIL);
+        event.setCanceled(true);
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
+    InteractionHand hand = event.getHand();
+    Player player = event.getEntity();
+    ItemStack heldItem = player.getItemInHand(hand);
+    Entity target = event.getTarget();
+    if (heldItem.is(RootsTags.Items.CASTING_TOOLS)) {
+      if (!target.getType().is(RootsTags.Entities.ALLOW_CASTING_TOOL_RIGHT_CLICK)) {
+        event.setCancellationResult(InteractionResult.FAIL);
         event.setCanceled(true);
       }
     }

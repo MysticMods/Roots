@@ -204,6 +204,7 @@ public class RootsTags {
     public static final TagKey<Block> SHATTER_INCLUDE = modTag("spells/shatter/include");
 
     public static final TagKey<Block> RAMPANT_GROWTH_EXCLUDE_MODE = modTag("spells/rampant_growth/exclude");
+    public static final TagKey<Block> ALLOW_CASTING_TOOL_RIGHT_CLICK = modTag("allow_casting_tool_right_click");
 
     public static final TagKey<Block> SPROUT_REPUTATION_CROPS = modTag("grove/sprout/crops");
     public static final TagKey<Block> ELEMENTAL_REPUTATION_CROPS = modTag("grove/elemental/crops");
@@ -488,6 +489,7 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> TIME_STOP_EXCLUDE = modTag("time_stop_exclude");
     public static final TagKey<EntityType<?>> ROSE_THORNS_EXCLUDE = modTag("rose_thorns_exclude");
     public static final TagKey<EntityType<?>> ALERTNESS = modTag("alertness");
+    public static final TagKey<EntityType<?>> ALLOW_CASTING_TOOL_RIGHT_CLICK = modTag("allow_casting_tool_right_click");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

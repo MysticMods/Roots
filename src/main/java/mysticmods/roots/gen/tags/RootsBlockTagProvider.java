@@ -367,6 +367,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.SHATTER_EXCLUDE);
     tag(RootsTags.Blocks.SHATTER_INCLUDE);
     tag(RootsTags.Blocks.RAMPANT_GROWTH_EXCLUDE_MODE).add(Blocks.VINE);
+    tag(RootsTags.Blocks.ALLOW_CASTING_TOOL_RIGHT_CLICK);
 
     tag(RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS).addTag(RootsTags.Blocks.ELEMENTAL_CROPS);
     tag(RootsTags.Blocks.SPROUT_REPUTATION_CROPS).addTags(BlockTags.CROPS);

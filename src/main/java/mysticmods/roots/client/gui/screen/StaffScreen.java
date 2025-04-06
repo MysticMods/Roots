@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
@@ -45,8 +46,7 @@ public class StaffScreen extends RootsScreen {
   public static void open(@Nullable InteractionHand hand, int inventorySlot) {
     StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
     Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
-    Minecraft.getInstance().setScreen(newScreen);
-
+    ClientHooks.pushGuiLayer(Minecraft.getInstance(), newScreen);
   }
 
   private SpellStorage getStorage() {

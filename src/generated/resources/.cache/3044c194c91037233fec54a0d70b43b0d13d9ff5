@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-05T19:30:30.4925951	Roots Block Tags
+// 1.21.1	2025-04-06T14:06:48.013037	Roots Block Tags
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
 d44fd2d0eb53894f71dcc1dfec7ab67e07c7c7ed data/c/tags/block/levers.json
@@ -47,6 +47,7 @@ eed7a7d567816010ffe4270c406795ccb198102b data/minecraft/tags/block/wooden_fences
 d7025d5bb3e26753998649f9c96e3deb8a17f8d9 data/minecraft/tags/block/wooden_slabs.json
 9f7584e18a231792346e711184e6129f728ce0a0 data/minecraft/tags/block/wooden_stairs.json
 a9b05c4d5ff23f4f21119cd72f81f051ed1f8b98 data/minecraft/tags/block/wooden_trapdoors.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/allow_casting_tool_right_click.json
 307dae19f196ef71116992f2c10a1d6367d71c5e data/roots/tags/block/bark_logs/acacia.json
 e6a66df990a2e59f597879f3e0d9245712d32f88 data/roots/tags/block/bark_logs/birch.json
 2ddd875c07a1d545574ca44984d769bb007a839e data/roots/tags/block/bark_logs/crimson.json
