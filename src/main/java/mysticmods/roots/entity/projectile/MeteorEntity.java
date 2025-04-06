@@ -61,7 +61,7 @@ public class MeteorEntity extends Entity {
     BlockPos currentPosition = this.blockPosition();
     if (this.level().isClientSide() || this.level().hasChunkAt((this.blockPosition()))) {
       if (getDeltaMovement().equals(Vec3.ZERO)) {
-        setDeltaMovement(new Vec3(0, -0.70, 0));
+        setDeltaMovement(new Vec3(0, -0.90, 0));
         this.hasImpulse = true;
       }
 
@@ -115,7 +115,7 @@ public class MeteorEntity extends Entity {
       double d1 = this.getY() + delta.y;
       double d2 = this.getZ() + delta.z;
 
-      this.setDeltaMovement(delta.add(delta.normalize().scale(0.2)).scale(0.5));
+      this.setDeltaMovement(delta.add(delta.normalize().scale(0.2)).scale(0.65));
       this.setPos(d0, d1, d2);
     } else {
       this.discard();
