@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-05T19:30:30.4986062	Roots Item Tags
+// 1.21.1	2025-04-06T14:26:03.2884693	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -175,7 +175,7 @@ a28460a267c42183ee6aa93edc0e14034b86c27b data/roots/tags/item/seeds/pereskia.jso
 7d1d8f847cd3a3c2a9c7dd9749a5246f523703ec data/roots/tags/item/short_grass.json
 04422b744e0e4a88f0882757faf982f80ea08beb data/roots/tags/item/silver_items.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/skipped_foods.json
-fdf2321a0e3ecc7cd4564c0aab61423d375c4c01 data/roots/tags/item/soils.json
+0e0d53445f0b4eae177c5541e63c5f8e165ebd7b data/roots/tags/item/soils.json
 4425285b1f5c8c681722ad2e252862e4ef08107b data/roots/tags/item/soils/air.json
 f78f44ddaa59f7a5f24f66a31c23d397a6ac438b data/roots/tags/item/soils/all.json
 029758e23f40cafe7ad14026e097a11645841307 data/roots/tags/item/soils/base.json
