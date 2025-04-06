@@ -27,6 +27,7 @@ public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEnti
   private final Model3D model = null;
   // TODO: dynamic bounds?
   private AABB bounds = null;
+  private AABB renderBounds = null;
 
   // TODO: Why is this
   private static final int[] colors = new int[EnumUtils.DIRECTIONS.length];
