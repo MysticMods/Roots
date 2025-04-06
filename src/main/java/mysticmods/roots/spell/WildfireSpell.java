@@ -49,7 +49,7 @@ public class WildfireSpell extends Spell {
     // TODO: Damage type
     WildfireEntity wildfire = new WildfireEntity(ModEntities.WILDFIRE.get(), pPlayer, pLevel);
     wildfire.setSnapshot(new WildfireEntitySnapshot(pPlayer, -1, damage));
-    wildfire.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0, 0.81f, 0);
+    wildfire.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0, 0.99f, 0);
     pLevel.addFreshEntity(wildfire);
 
     return cooldown;
