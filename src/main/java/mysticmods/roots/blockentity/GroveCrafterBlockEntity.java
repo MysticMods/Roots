@@ -65,7 +65,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     if (!state.getValue(GroveCrafterBlock.ACTIVE)) {
-      return InteractionResult.FAIL;
+      return InteractionResult.PASS;
     }
 
     if (inHand.isEmpty() || inHand.is(RootsTags.Items.GROVE_CRAFTER_ACTIVATION)) {
@@ -120,7 +120,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       return InteractionResult.SUCCESS;
     }
 
-    return InteractionResult.FAIL;
+    return InteractionResult.PASS;
   }
 
   protected void revalidateRecipe() {
