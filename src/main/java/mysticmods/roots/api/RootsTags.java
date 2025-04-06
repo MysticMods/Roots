@@ -4,12 +4,10 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
+import mysticmods.roots.api.ritual.RitualModifier;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.api.spell.SpellModifier;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -19,11 +17,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-
-import java.util.function.Predicate;
 
 // Tags
 public class RootsTags {
@@ -567,7 +562,7 @@ public class RootsTags {
     }
   }
 
-  public static class Modifiers extends RootsTags {
+  public static class SpellModifiers extends RootsTags {
     public static final TagKey<SpellModifier> NYI = modTag("nyi");
 
     static TagKey<SpellModifier> modTag(String name) {
@@ -576,6 +571,18 @@ public class RootsTags {
 
     static TagKey<SpellModifier> compatTag(String name) {
       return TagKey.create(RootsRegistries.Keys.SPELL_MODIFIERS, ResourceLocation.fromNamespaceAndPath("c", name));
+    }
+  }
+
+  public static class RitualModifiers extends RootsTags {
+    public static final TagKey<RitualModifier> NYI = modTag("nyi");
+
+    static TagKey<RitualModifier> modTag(String name) {
+      return TagKey.create(RootsRegistries.Keys.RITUAL_MODIFIERS, RootsAPI.rl(name));
+    }
+
+    static TagKey<RitualModifier> compatTag(String name) {
+      return TagKey.create(RootsRegistries.Keys.RITUAL_MODIFIERS, ResourceLocation.fromNamespaceAndPath("c", name));
     }
   }
 
