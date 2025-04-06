@@ -50,7 +50,7 @@ public class NondetectionSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    pPlayer.addEffect(new MobEffectInstance(ModEffects.NONDETECTION, potionDuration, 0));
+    pPlayer.addEffect(new MobEffectInstance(ModEffects.NONDETECTION, potionDuration, 0, false, false));
     // TODO: Do we need a snapshot?
 /*    SnapshotHelper.addLiving(pPlayer, ModSerializers.PETAL_SHELL.get(), new PetalShellSnapshot(pPlayer, duration + 40, count));*/
     return cooldown;
