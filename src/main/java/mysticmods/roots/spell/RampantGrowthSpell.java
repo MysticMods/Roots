@@ -126,7 +126,7 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
         if (positions.isEmpty()) {
           break;
         }
-        BlockPos pos = positions.remove(pLevel.random.nextInt(positions.size()));
+        BlockPos pos = positions.get(pLevel.random.nextInt(positions.size()));
         int doTicks = GrowthUtil.growthTicks(pLevel, pos, null, pPlayer);
         if (doTicks > 0) {
           if (pLevel.random.nextInt(doTicks) == 0) {
