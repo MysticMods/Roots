@@ -4,6 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.ritual.IRitualInstance;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.SpellModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -44,6 +45,7 @@ public interface GroveContext {
   Parameter TRIAL = new Parameter(RootsAPI.rl("trial"), GroveContext::trial);
   Parameter COSTING = new Parameter(RootsAPI.rl("costing"), GroveContext::costing);
   Parameter OFFER = new Parameter(RootsAPI.rl("offer"), GroveContext::offer);
+  Parameter SPELL_MODIFIER = new Parameter(RootsAPI.rl("spell_modifier"), GroveContext::spellModifier);
 
   @Nonnull
   ServerLevel level();
@@ -150,6 +152,11 @@ public interface GroveContext {
 
   @Nullable
   default MerchantOffer offer() {
+    return null;
+  }
+
+  @Nullable
+  default SpellModifier spellModifier() {
     return null;
   }
 

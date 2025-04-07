@@ -6,13 +6,13 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import mysticmods.roots.action.LearnSpellAction;
+import mysticmods.roots.action.LearnSpellModifierAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.LibraryModifier;
-import mysticmods.roots.api.spell.LibrarySpell;
-import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.api.spell.SpellModifier;
+import mysticmods.roots.api.spell.*;
+import mysticmods.roots.init.ModActions;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -90,7 +90,8 @@ public class GrantStorage implements ICleanable {
     if (grantedSpells.add(spell)) {
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.spell.learned", spell.getStyledName()), true);
-      // TODO: Handle reputation gains from learning new spells
+      LearnSpellAction.Context context = new LearnSpellAction.Context(player.serverLevel(), player, ISpellInstance.of(spell));
+      ModActions.LEARN_SPELL.get().accept(context);
     }
   }
 
@@ -98,6 +99,8 @@ public class GrantStorage implements ICleanable {
     if (grantedModifiers.add(modifier)) {
       setDirty(true);
       player.displayClientMessage(Component.translatable("roots.message.modifier.learned", modifier.getName()), true);
+      LearnSpellModifierAction.Context context = new LearnSpellModifierAction.Context(player.serverLevel(), player, modifier);
+      ModActions.LEARN_SPELL_MODIFIER.get().accept(context);
     }
   }
 

@@ -31,6 +31,8 @@ public class ModActions {
   public static final DeferredHolder<GroveAction, GeasAction> GEAS = ACTIONS.register("geas", GeasAction::new);
   public static final DeferredHolder<GroveAction, BrushBlockAction> BRUSH_BLOCK = ACTIONS.register("brush_block", BrushBlockAction::new);
   public static final DeferredHolder<GroveAction, MilkCowAction> MILK_COW = ACTIONS.register("milk_cow", MilkCowAction::new);
+  public static final DeferredHolder<GroveAction, LearnSpellAction> LEARN_SPELL = ACTIONS.register("learn_spell", LearnSpellAction::new);
+  public static final DeferredHolder<GroveAction, LearnSpellModifierAction> LEARN_SPELL_MODIFIER = ACTIONS.register("learn_spell_modifier", LearnSpellModifierAction::new);
 
   public static void register (IEventBus bus) {
     ACTIONS.register(bus);

@@ -464,7 +464,6 @@ public class RootsTags {
 
   public static class Entities extends RootsTags {
     public static final TagKey<EntityType<?>> ANIMAL_HARVEST = modTag("animal_harvest_entities");
-    // TODO: This is really only temporary
     public static final TagKey<EntityType<?>> ANIMAL_HARVEST_EXCLUDE = modTag("rituals/animal_harvest/exclude");
     public static final TagKey<EntityType<?>> PACIFIST = modTag("pacifist");
 
