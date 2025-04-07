@@ -23,7 +23,6 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-// TODO: List of ItemStack results
 public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   default NonNullList<ItemStack> process(List<ItemStack> ingredients) {
     NonNullList<ItemStack> result = NonNullList.create();
