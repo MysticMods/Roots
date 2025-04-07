@@ -58,7 +58,6 @@ public class LifeDrainSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    DamageSources damage = pPlayer.damageSources();
     Vec3 look = pPlayer.getLookAngle();
     Vec3 position = pPlayer.position();
     float eyeHeight = pPlayer.getEyeHeight(pPlayer.getPose());
@@ -81,8 +80,7 @@ public class LifeDrainSpell extends Spell {
       }
     }
 
-    // TODO: Charge per operation
-    if (foundTarget) {
+    if (!foundTarget) {
       costs.noCharge();
       return 0;
     } else {
