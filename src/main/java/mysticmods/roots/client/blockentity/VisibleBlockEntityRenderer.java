@@ -20,11 +20,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class VisibleBlockEntityRenderer implements BlockEntityRenderer<VisibleBlockEntity> {
   protected final BlockEntityRendererProvider.Context context;
 
-  private final Model3D model = null;
-  // TODO: dynamic bounds?
-  private AABB bounds = null;
-
-  // TODO: Why is this
   private static final int[] colors = new int[EnumUtils.DIRECTIONS.length];
 
   static {
