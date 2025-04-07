@@ -2,6 +2,7 @@ package mysticmods.roots.client.model.armor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.client.model.ModelHolder;
 import mysticmods.roots.client.player.RenderArmEventHandler;
 import mysticmods.roots.init.ModItems;
@@ -32,10 +33,10 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
 
   @Nullable
   public static ArmorModel getModel(ItemStack stack) {
-    if (stack.is(ModItems.ANTLER_HAT.get())) {
+    if (stack.is(RootsTags.Items.ANTLER_ARMOR)) {
       return antlerModel;
       // TODO: Turn this into a tag
-    } else if (stack.is(ModItems.BEETLE_BOOTS.get()) || stack.is(ModItems.BEETLE_HELMET.get()) || stack.is(ModItems.BEETLE_CHESTPLATE.get()) || stack.is(ModItems.BEETLE_LEGGINGS.get())) {
+    } else if (stack.is(RootsTags.Items.BEETLE_ARMOR)) {
       return beetleModels.get(((ArmorItem) stack.getItem()).getType().getSlot());
     }
 

@@ -422,6 +422,10 @@ public class RootsTags {
     public static final TagKey<Item> CURIOS_CHARMS = curiosTag("charm");
     public static final TagKey<Item> CURIOS_BELTS = curiosTag("belt");
 
+    public static final TagKey<Item> BEETLE_ARMOR = modTag("armor/beetle");
+    public static final TagKey<Item> ANTLER_ARMOR = modTag("armor/antler");
+    public static final TagKey<Item> COPPER_ARMOR = modTag("armor/copper");
+
     // Items that, when held in off-hand transforms a log into a runed log equivalent
     public static final TagKey<Item> RUNED_LOG_HERBS = modTag("runed_log_herbs");
 

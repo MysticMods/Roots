@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-06T14:26:03.2884693	Roots Item Tags
+// 1.21.1	2025-04-07T18:54:26.7171037	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -29,6 +29,9 @@ ca4be7f2a2f75c90936b26662964abad4c1f46d1 data/minecraft/tags/item/head_armor.jso
 50ec12b5ae41cf93adbfe643215052a22a52d293 data/minecraft/tags/item/shovels.json
 bf77bddf53a2fdf31168d5839627632f0c96c0ff data/minecraft/tags/item/swords.json
 87f3beeddef89647fae4b5de6f8f86178e11f390 data/roots/tags/item/antlers.json
+a000fcaeb8818c9664e2b088d9cfcbf1c9edf080 data/roots/tags/item/armor/antler.json
+717aa42eb4d9f9f28cbad53dd736c1ba21de2da3 data/roots/tags/item/armor/beetle.json
+7bd2a5224a7849d3c3512a35e810d8c6f9ba43f6 data/roots/tags/item/armor/copper.json
 6fe47a2fa2f55c3e392aa1ae1512c372e3fc8b20 data/roots/tags/item/barks.json
 f84f7ba61349a204c6cce987fd1a6ff40bdb79a6 data/roots/tags/item/barks/acacia.json
 bcad6160f09c7188906ce6d9a107dda512c3237a data/roots/tags/item/barks/birch.json
