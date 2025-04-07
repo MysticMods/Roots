@@ -45,7 +45,6 @@ public class TypedButton<S extends SpellLike, V extends RootsScreen> extends But
     }
   }
 
-  // TODO: Tooltips have changed
   public void renderToolTip(PoseStack pPoseStack, int pMouseX, int pMouseY) {
     if (spellSupplier.get() == null) {
       return;
