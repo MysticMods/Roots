@@ -43,7 +43,7 @@ public class ModBlocks {
 
   private static final BlockBehaviour.Properties RUNED_OBSIDIAN_PROPERTIES = BlockBehaviour.Properties.of()
       .mapColor(DyeColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
-      .strength(50.0f, 1200.0f);
+      .strength(50.0f, 1200.0f).pushReaction(PushReaction.BLOCK);
   public static DeferredHolder<Block, Block> RUNED_OBSIDIAN = BLOCKS.register("runed_obsidian", () -> new Block(RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, Block> CHISELED_RUNED_OBSIDIAN = BLOCKS.register("chiseled_runed_obsidian", () -> new Block(RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, Block> RUNED_BRICK = BLOCKS.register("runed_brick", () -> new Block(RUNED_OBSIDIAN_PROPERTIES));
@@ -113,18 +113,18 @@ public class ModBlocks {
       .defaultBlockState(), RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, StairBlock> RUNESTONE_TILE_STAIRS = BLOCKS.register("runestone_tile_stairs", () -> new StairBlock(ModBlocks.RUNESTONE_TILE.get()
       .defaultBlockState(), RUNESTONE_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Stairs> RUNED_STAIRS = BLOCKS.register("runed_stairs", () -> new RunedObsidianBlocks.Stairs(RUNED_OBSIDIAN_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Stairs> RUNED_BRICK_STAIRS = BLOCKS.register("runed_brick_stairs", () -> new RunedObsidianBlocks.Stairs(RUNED_OBSIDIAN_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Stairs> RUNED_TILE_STAIRS = BLOCKS.register("runed_tile_stairs", () -> new RunedObsidianBlocks.Stairs(RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, StairBlock> RUNED_STAIRS = BLOCKS.register("runed_stairs", () -> new StairBlock(ModBlocks.RUNED_OBSIDIAN.get().defaultBlockState(), RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, StairBlock> RUNED_BRICK_STAIRS = BLOCKS.register("runed_brick_stairs", () -> new StairBlock(ModBlocks.RUNED_BRICK.get().defaultBlockState(), RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, StairBlock> RUNED_TILE_STAIRS = BLOCKS.register("runed_tile_stairs", () -> new StairBlock(ModBlocks.RUNED_TILE.get().defaultBlockState(), RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, StairBlock> WILDWOOD_STAIRS = BLOCKS.register("wildwood_stairs", () -> new StairBlock(ModBlocks.WILDWOOD_PLANKS.get()
       .defaultBlockState(), WILDWOOD_PLANKS_PROPERTIES));
   public static DeferredHolder<Block, SlabBlock> RUNESTONE_SLAB = BLOCKS.register("runestone_slab", () -> new SlabBlock(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, SlabBlock> MOSSY_RUNESTONE_SLAB = BLOCKS.register("mossy_runestone_slab", () -> new SlabBlock(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, SlabBlock> RUNESTONE_BRICK_SLAB = BLOCKS.register("runestone_brick_slab", () -> new SlabBlock(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, SlabBlock> RUNESTONE_TILE_SLAB = BLOCKS.register("runestone_tile_slab", () -> new SlabBlock(RUNESTONE_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Slab> RUNED_SLAB = BLOCKS.register("runed_slab", () -> new RunedObsidianBlocks.Slab(RUNED_OBSIDIAN_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Slab> RUNED_BRICK_SLAB = BLOCKS.register("runed_brick_slab", () -> new RunedObsidianBlocks.Slab(RUNED_OBSIDIAN_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Slab> RUNED_TILE_SLAB = BLOCKS.register("runed_tile_slab", () -> new RunedObsidianBlocks.Slab(RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, SlabBlock> RUNED_SLAB = BLOCKS.register("runed_slab", () -> new SlabBlock(RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, SlabBlock> RUNED_BRICK_SLAB = BLOCKS.register("runed_brick_slab", () -> new SlabBlock(RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, SlabBlock> RUNED_TILE_SLAB = BLOCKS.register("runed_tile_slab", () -> new SlabBlock(RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, SlabBlock> WILDWOOD_SLAB = BLOCKS.register("wildwood_slab", () -> new SlabBlock(WILDWOOD_PLANKS_PROPERTIES));
   public static DeferredHolder<Block, FenceBlock> WILDWOOD_FENCE = BLOCKS.register("wildwood_fence", () -> new FenceBlock(WILDWOOD_PLANKS_PROPERTIES));
 
@@ -135,17 +135,17 @@ public class ModBlocks {
   public static DeferredHolder<Block, ButtonBlock> RUNESTONE_BRICK_BUTTON = BLOCKS.register("runestone_brick_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
   public static DeferredHolder<Block, ButtonBlock> RUNESTONE_TILE_BUTTON = BLOCKS.register("runestone_tile_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
   public static DeferredHolder<Block, ButtonBlock> MOSSY_RUNESTONE_BUTTON = BLOCKS.register("mossy_runestone_button", () -> new ButtonBlock(ModTypes.RUNESTONE_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Button> RUNED_BUTTON = BLOCKS.register("runed_button", () -> new RunedObsidianBlocks.Button(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Button> RUNED_BRICK_BUTTON = BLOCKS.register("runed_brick_button", () -> new RunedObsidianBlocks.Button(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Button> RUNED_TILE_BUTTON = BLOCKS.register("runed_tile_button", () -> new RunedObsidianBlocks.Button(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
+  public static DeferredHolder<Block, ButtonBlock> RUNED_BUTTON = BLOCKS.register("runed_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
+  public static DeferredHolder<Block, ButtonBlock> RUNED_BRICK_BUTTON = BLOCKS.register("runed_brick_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
+  public static DeferredHolder<Block, ButtonBlock> RUNED_TILE_BUTTON = BLOCKS.register("runed_tile_button", () -> new ButtonBlock(ModTypes.RUNED_OBSIDIAN_SET, 20, RUNESTONE_BUTTON_PROPERTIES));
   public static DeferredHolder<Block, ButtonBlock> WILDWOOD_BUTTON = BLOCKS.register("wildwood_button", () -> new ButtonBlock(ModTypes.WILDWOOD_SET, 20, WILDWOOD_PLANKS_PROPERTIES));
   public static DeferredHolder<Block, PressurePlateBlock> RUNESTONE_PRESSURE_PLATE = BLOCKS.register("runestone_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNESTONE_SET, RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, PressurePlateBlock> RUNESTONE_BRICK_PRESSURE_PLATE = BLOCKS.register("runestone_brick_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNESTONE_SET, RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, PressurePlateBlock> RUNESTONE_TILE_PRESSURE_PLATE = BLOCKS.register("runestone_tile_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNESTONE_SET, RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, PressurePlateBlock> MOSSY_RUNESTONE_PRESSURE_PLATE = BLOCKS.register("mossy_runestone_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNESTONE_SET, RUNESTONE_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.PressurePlate> RUNED_PRESSURE_PLATE = BLOCKS.register("runed_pressure_plate", () -> new RunedObsidianBlocks.PressurePlate(ModTypes.RUNED_OBSIDIAN_SET, RUNED_OBSIDIAN_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.PressurePlate> RUNED_BRICK_PRESSURE_PLATE = BLOCKS.register("runed_brick_pressure_plate", () -> new RunedObsidianBlocks.PressurePlate(ModTypes.RUNED_OBSIDIAN_SET, RUNED_OBSIDIAN_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.PressurePlate> RUNED_TILE_PRESSURE_PLATE = BLOCKS.register("runed_tile_pressure_plate", () -> new RunedObsidianBlocks.PressurePlate(ModTypes.RUNED_OBSIDIAN_SET, RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, PressurePlateBlock> RUNED_PRESSURE_PLATE = BLOCKS.register("runed_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNED_OBSIDIAN_SET, RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, PressurePlateBlock> RUNED_BRICK_PRESSURE_PLATE = BLOCKS.register("runed_brick_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNED_OBSIDIAN_SET, RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, PressurePlateBlock> RUNED_TILE_PRESSURE_PLATE = BLOCKS.register("runed_tile_pressure_plate", () -> new PressurePlateBlock(ModTypes.RUNED_OBSIDIAN_SET, RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, PressurePlateBlock> WILDWOOD_PRESSURE_PLATE = BLOCKS.register("wildwood_pressure_plate", () -> new PressurePlateBlock(ModTypes.WILDWOOD_SET, BlockBehaviour.Properties.of()
       .mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5f)
       .ignitedByLava().pushReaction(PushReaction.DESTROY)));
@@ -163,9 +163,9 @@ public class ModBlocks {
   public static DeferredHolder<Block, WallBlock> MOSSY_RUNESTONE_WALL = BLOCKS.register("mossy_runestone_wall", () -> new WallBlock(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, WallBlock> RUNESTONE_BRICK_WALL = BLOCKS.register("runestone_brick_wall", () -> new WallBlock(RUNESTONE_PROPERTIES));
   public static DeferredHolder<Block, WallBlock> RUNESTONE_TILE_WALL = BLOCKS.register("runestone_tile_wall", () -> new WallBlock(RUNESTONE_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_WALL = BLOCKS.register("runed_wall", () -> new RunedObsidianBlocks.Wall(RUNED_OBSIDIAN_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_BRICK_WALL = BLOCKS.register("runed_brick_wall", () -> new RunedObsidianBlocks.Wall(RUNED_OBSIDIAN_PROPERTIES));
-  public static DeferredHolder<Block, RunedObsidianBlocks.Wall> RUNED_TILE_WALL = BLOCKS.register("runed_tile_wall", () -> new RunedObsidianBlocks.Wall(RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, WallBlock> RUNED_WALL = BLOCKS.register("runed_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, WallBlock> RUNED_BRICK_WALL = BLOCKS.register("runed_brick_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
+  public static DeferredHolder<Block, WallBlock> RUNED_TILE_WALL = BLOCKS.register("runed_tile_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, ElementalSoilBlock> ELEMENTAL_SOIL = BLOCKS.register("elemental_soil", () -> new ElementalSoilBlock(ElementalType.DEFAULT, BlockBehaviour.Properties.of().mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.GRAVEL)));
   public static DeferredHolder<Block, ElementalSoilBlock> AQUEOUS_SOIL = BLOCKS.register("aqueous_soil", () -> new ElementalSoilBlock(ElementalType.WATER, BlockBehaviour.Properties.of().mapColor(MapColor.WATER).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.LILY_PAD)));
   public static DeferredHolder<Block, ElementalSoilBlock> CAELIC_SOIL = BLOCKS.register("caelic_soil", () -> new ElementalSoilBlock(ElementalType.AIR, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.WOOL)));

@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 // TODO: Urgent -- CuriosIntegration breaks API
+// TODO: Split this into a parent class; implement SpellCosting
+// Abstract the rest out not to use spells/spell modifiers
+// but more of a parent -> child costs
 public class Costing {
   private final ISpellInstance spell;
 
