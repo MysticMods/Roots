@@ -35,7 +35,6 @@ public class ArmorModel extends HumanoidModel<LivingEntity> {
   public static ArmorModel getModel(ItemStack stack) {
     if (stack.is(RootsTags.Items.ANTLER_ARMOR)) {
       return antlerModel;
-      // TODO: Turn this into a tag
     } else if (stack.is(RootsTags.Items.BEETLE_ARMOR)) {
       return beetleModels.get(((ArmorItem) stack.getItem()).getType().getSlot());
     }
