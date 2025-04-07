@@ -40,7 +40,6 @@ public class PacketHandler {
     registrar.play(ClientboundOpenLibraryPacket.TYPE, ClientboundOpenLibraryPacket.CODEC);
     registrar.play(ClientboundEntitySnapshotSyncPacket.TYPE, ClientboundEntitySnapshotSyncPacket.CODEC);
     registrar.play(ClientboundDiscardEntityAttachmentPacket.TYPE, ClientboundDiscardEntityAttachmentPacket.CODEC);
-    registrar.play(GeasFXPacket.TYPE, GeasFXPacket.CODEC);
     registrar.play(GrowthFXPacket.TYPE, GrowthFXPacket.CODEC);
     registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
     registrar.play(ClientboundSyncGeasPacket.TYPE, ClientboundSyncGeasPacket.CODEC);

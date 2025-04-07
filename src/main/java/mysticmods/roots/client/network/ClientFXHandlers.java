@@ -16,15 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class ClientFXHandlers {
-  // TODO: Unused
-  public static void geas(int entityId) {
-    Minecraft minecraft = Minecraft.getInstance();
-    Entity entity = minecraft.level.getEntity(entityId);
-    if (entity != null) {
-      ParticleUtil.addTrackingEmitter(entity, 15, ClientFX::geasEffect);
-    }
-  }
-
   public static void castChannel(Spell spell, int casterId, Vec3 start, Vec3 stop, int ticks) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);

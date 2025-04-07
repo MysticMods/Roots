@@ -1,9 +1,7 @@
 package mysticmods.roots.effect;
 
-import mysticmods.roots.network.client.fx.GeasFXPacket;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 public class GeasEffect extends SimpleEffect {
   public GeasEffect(MobEffectCategory pCategory, int pColor) {
