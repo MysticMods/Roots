@@ -470,6 +470,7 @@
   "roots.tooltip.pouch.color_name": "%s",
   "roots.tooltip.shift": "Shift",
   "roots.tooltip.staff.cooldown": " (CD: %ss)",
+  "roots.tooltip.staff.data": "  %s: %s",
   "roots.tooltip.staff.is_selected": " (Selected)",
   "roots.tooltip.staff.key_binding": "Press '%s' to open your spell library.",
   "roots.tooltip.staff.no_spell": "No spell.",

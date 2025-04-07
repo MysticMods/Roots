@@ -5,6 +5,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
+import java.util.Set;
 
 public class TooltipUtil {
   public static void spellStaffTooltip(Item.TooltipContext context, List<Component> pTooltipComponents, ItemStack pStack, TooltipFlag flag) {
@@ -42,8 +44,31 @@ public class TooltipUtil {
 
   public static void spellInstanceTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {
     result.add(spell.getStyledName());
+    spellDataTooltip(context, result, spell, flag);
     result.add(Component.empty());
     spellCostTooltip(context, result, spell, flag);
+  }
+
+  public static void spellDataTooltip (Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
+    Spell spell = instance.getSpell();
+    Set<String> keys = instance.getSpell().getTooltipDataKeys();
+/*    if (!keys.isEmpty()) {
+      result.add(Component.empty());
+    }*/
+    for (String key : keys) {
+      int index = spell.getDataIndex(key);
+      // TODO: Clean this up
+      Component keyC = Component.translatable(spell.getOrCreateDescriptionId() + ".data." + key);
+      Component valC;
+      if (index == 0) {
+        keyC = Component.literal("Mode");
+        valC = Component.literal(spell.getDataKey(spell.getDataValue(instance, key)));
+      } else {
+        keyC = Component.literal(key);
+        valC = Component.literal(String.valueOf(spell.getDataValue(instance, key)));
+      }
+      result.add(Component.translatable("roots.tooltip.staff.data", keyC, valC));
+    }
   }
 
   public static void spellCostTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance spell, TooltipFlag flag) {

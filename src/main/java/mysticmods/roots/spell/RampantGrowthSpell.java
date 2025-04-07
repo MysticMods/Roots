@@ -32,6 +32,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class RampantGrowthSpell extends TwoRadiusSpell {
   private int interval, count;
@@ -86,6 +87,10 @@ public class RampantGrowthSpell extends TwoRadiusSpell {
     map.put(0, 3);
   }
 
+  @Override
+  public Set<String> getTooltipDataKeys() {
+    return Set.of("mode");
+  }
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {

@@ -35,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ShatterSpell extends Spell {
   private int maxWidth, maxDepth, maxHeight;
@@ -63,6 +64,11 @@ public class ShatterSpell extends Spell {
     map.put("width", 1);
     map.put("height", 2);
     map.put("depth", 3);
+  }
+
+  @Override
+  public Set<String> getTooltipDataKeys() {
+    return Set.of("width", "height", "depth");
   }
 
   @Override

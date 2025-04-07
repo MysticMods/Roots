@@ -138,6 +138,10 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return keyToDataIndex.keySet();
   }
 
+  public Set<String> getTooltipDataKeys () {
+    return getDataKeys();
+  }
+
   @Nullable
   public String getDataKey(int index) {
     for (Object2IntMap.Entry<String> entry : keyToDataIndex.object2IntEntrySet()) {
