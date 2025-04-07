@@ -32,7 +32,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 
 public class WildfireEntity extends Projectile {
-  // TODO: Snapshot storage
   private int life;
   private SnapshotStorage snapshotStorage = new SnapshotStorage();
 
