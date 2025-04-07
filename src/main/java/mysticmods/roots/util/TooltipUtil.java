@@ -28,13 +28,13 @@ public class TooltipUtil {
       pTooltipComponents.add(Component.literal(""));
       int tempSlot = 0;
       for (SpellStorage.SpellSlot entry : storage.getSpells()) {
-        // TODO: Include cooling down
         // TODO: Spell data
         int slotId = tempSlot + 1;
         Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell()
             .getStyledName();
         Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("");
-        pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, selected));
+        Component cd = entry == null ? Component.literal("") : entry.cooldown() > 0 ? Component.translatable("roots.tooltip.staff.cooldown", entry.cooldown() / 20) : Component.literal("");
+        pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, selected, cd));
         tempSlot++;
       }
     }
