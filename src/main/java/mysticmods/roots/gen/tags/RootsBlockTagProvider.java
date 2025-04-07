@@ -371,6 +371,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     tag(RootsTags.Blocks.ELEMENTAL_REPUTATION_CROPS).addTag(RootsTags.Blocks.ELEMENTAL_CROPS);
     tag(RootsTags.Blocks.SPROUT_REPUTATION_CROPS).addTags(BlockTags.CROPS);
+    tag(RootsTags.Blocks.UNDERWATER_FARMLAND).add(Blocks.DIRT, Blocks.DIRT_PATH, Blocks.COARSE_DIRT, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.GRASS_BLOCK);
   }
 
   @Override

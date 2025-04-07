@@ -210,6 +210,8 @@ public class RootsTags {
     public static final TagKey<Block> SPROUT_REPUTATION_CROPS = modTag("grove/sprout/crops");
     public static final TagKey<Block> ELEMENTAL_REPUTATION_CROPS = modTag("grove/elemental/crops");
 
+    public static final TagKey<Block> UNDERWATER_FARMLAND = modTag("underwater_farmland");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
