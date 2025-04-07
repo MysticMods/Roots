@@ -35,7 +35,6 @@ public class HangingMossBlockFeature extends Feature<SimpleBlockConfiguration> {
     BlockState worldState = level.getBlockState(rootPos);
     BlockState stateAbove;
 
-    // TODO: Compare replaceable, replaceable_by_trees
     if (worldState.isAir()) {
       BlockPos.MutableBlockPos target = rootPos.mutable();
       for (Direction direction : directions) {

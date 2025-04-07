@@ -44,7 +44,6 @@ public class SupportingDirectionalBlockFeature extends Feature<SimpleBlockConfig
       rootState = rootState.setValue(WildRootsBlock.WATERLOGGED, true).setValue(WildRootsBlock.MOSSY, true);
     }
 
-    // TODO: Is this new replaceable eligible?
     if (worldState.isAir() || worldState.is(BlockTags.REPLACEABLE) || worldState.is(Blocks.SNOW)) {
       BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
       for (Direction direction : directions) {
