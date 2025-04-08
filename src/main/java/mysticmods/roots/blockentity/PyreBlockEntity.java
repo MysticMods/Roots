@@ -225,14 +225,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     return InteractionResult.SUCCESS_NO_ITEM_USED;
   }
 
-  // Why do we never call this
-  public void startRitual(Ritual ritual, Player player) {
-    setCurrentRitual(ritual);
-    lifetime = ritual.getDuration();
-    setChanged();
-    /*    getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.LIT, true), 3);*/
-  }
-
   public void startRitual(Player player) {
     this.lastPlayer = player;
     this.lastUuid = null;
@@ -479,7 +471,11 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     this.revalidateRecipe();
   }
 
-  public void stopRitual() {
+  public void stopRitual () {
+    stopRitual(true);
+  }
+
+  public void stopRitual(boolean doLight) {
     if (currentRitual != null) {
       currentRitual.ends(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
     }
@@ -487,7 +483,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     this.lifetime = -1;
     setChanged();
     getLevel().setBlock(getBlockPos(), getBlockState().setValue(PyreBlock.BURNING, false)
-        .setValue(PyreBlock.LIT, false), 3);
+        .setValue(PyreBlock.LIT, !doLight), 3);
   }
 
   @Nullable
@@ -516,13 +512,13 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       changed = true;
       setChanged();
       if (lifetime <= 0) {
-        stopRitual();
-
-        if (!inventory.isEmpty() && cachedRecipe != null && getLastPlayer() != null && lastRecipe != null && lifetime <= 0) {
-          if (cachedRecipe.equals(lastRecipe) && cachedRecipe.value().matches(playerlessCrafting, pLevel)) {
-            // Start
-            light(getLastPlayer());
-          }
+        if ((!inventory.isEmpty() && cachedRecipe != null && getLastPlayer() != null && lastRecipe != null && lifetime <= 0) && (cachedRecipe.equals(lastRecipe) && cachedRecipe.value()
+            .matches(playerlessCrafting, pLevel))) {
+          stopRitual(false);
+          // Start
+          light(getLastPlayer());
+        } else {
+          stopRitual();
         }
       } else {
         cache.initCache(pLevel, currentRitual.getPredicates());
