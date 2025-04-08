@@ -1,6 +1,5 @@
 package mysticmods.roots.spell;
 
-import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
@@ -15,8 +14,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-
-import java.util.List;
 
 public class MagnetismSpell extends TwoRadiusSpell {
   public MagnetismSpell(ChatFormatting color, CostInstance costs) {

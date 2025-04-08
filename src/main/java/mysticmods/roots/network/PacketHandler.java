@@ -1,7 +1,10 @@
 package mysticmods.roots.network;
 
 import mysticmods.roots.network.client.*;
-import mysticmods.roots.network.client.fx.*;
+import mysticmods.roots.network.client.fx.AlertnessFXPacket;
+import mysticmods.roots.network.client.fx.CastChannelFXPacket;
+import mysticmods.roots.network.client.fx.GrowthFXPacket;
+import mysticmods.roots.network.client.fx.RampantGrowthFXPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
 import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;

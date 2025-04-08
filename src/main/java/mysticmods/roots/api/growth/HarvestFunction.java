@@ -1,6 +1,5 @@
 package mysticmods.roots.api.growth;
 
-import mysticmods.roots.api.property.Property;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;

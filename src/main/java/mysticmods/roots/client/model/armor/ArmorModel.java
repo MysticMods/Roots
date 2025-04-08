@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.client.model.ModelHolder;
 import mysticmods.roots.client.player.RenderArmEventHandler;
-import mysticmods.roots.init.ModItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

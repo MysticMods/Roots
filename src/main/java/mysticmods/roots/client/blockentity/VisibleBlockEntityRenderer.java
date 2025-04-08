@@ -3,7 +3,6 @@ package mysticmods.roots.client.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import mysticmods.roots.blockentity.VisibleBlockEntity;
-import mysticmods.roots.client.Model3D;
 import mysticmods.roots.client.RootsRenderer;
 import mysticmods.roots.util.EnumUtils;
 import net.minecraft.client.Minecraft;
@@ -14,7 +13,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class VisibleBlockEntityRenderer implements BlockEntityRenderer<VisibleBlockEntity> {

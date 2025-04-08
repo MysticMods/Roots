@@ -13,7 +13,6 @@ import mysticmods.roots.growth.harvest.*;
 import mysticmods.roots.growth.harvestable.*;
 import mysticmods.roots.test.entity.EntityTagTest;
 import mysticmods.roots.test.entity.EntityTypeTest;
-import mysticmods.roots.util.HarvestUtil;
 import net.minecraft.core.Direction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;

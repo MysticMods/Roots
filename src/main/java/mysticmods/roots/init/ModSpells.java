@@ -16,10 +16,8 @@ import net.minecraft.resources.ResourceKey;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.apache.logging.log4j.util.Cast;
 
 import java.util.List;
-import java.util.Properties;
 import java.util.function.Supplier;
 
 

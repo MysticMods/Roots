@@ -1,11 +1,14 @@
 package mysticmods.roots.api.registry;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
-import mysticmods.roots.api.action.GroveAction;
-import mysticmods.roots.api.growth.*;
+import mysticmods.roots.api.growth.CanGrowFunction;
+import mysticmods.roots.api.growth.CanHarvestFunction;
+import mysticmods.roots.api.growth.HarvestFunction;
+import mysticmods.roots.api.growth.LightFunction;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.property.PropertySerializer;
 import mysticmods.roots.api.property.PropertyType;

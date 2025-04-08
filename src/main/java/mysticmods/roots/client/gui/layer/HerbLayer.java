@@ -3,7 +3,6 @@ package mysticmods.roots.client.gui.layer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.client.RenderUtil;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

@@ -1,7 +1,6 @@
 package mysticmods.roots.block.crop;
 
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.block.WaterloggedBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;

@@ -3,7 +3,6 @@ package mysticmods.roots.network.client;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.client.network.ClientNetworkHandlers;

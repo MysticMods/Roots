@@ -2,7 +2,6 @@ package mysticmods.roots.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.model.MeteorModel;
 import mysticmods.roots.client.model.ModelHolder;
@@ -15,7 +14,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 public class WildfireRenderer extends EntityRenderer<WildfireEntity> {
   protected final MeteorModel model;

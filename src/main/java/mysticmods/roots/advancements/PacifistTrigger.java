@@ -2,20 +2,13 @@ package mysticmods.roots.advancements;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAdvancements;
-import mysticmods.roots.util.EntityUtils;
 import mysticmods.roots.util.PacifistUtil;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.phys.AABB;
 
 import java.util.Optional;
 

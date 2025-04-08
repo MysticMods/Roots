@@ -2,7 +2,6 @@ package mysticmods.roots.loot.conditions;
 
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.init.ModLoot;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootContext;

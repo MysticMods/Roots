@@ -8,7 +8,6 @@ import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.SpellModifier;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.Util;

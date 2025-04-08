@@ -5,7 +5,6 @@ import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveContext;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.registry.RootsRegistries;
-import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;

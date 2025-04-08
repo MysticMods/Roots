@@ -1,8 +1,6 @@
 package mysticmods.roots.client.network;
 
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.ClientFX;
-import mysticmods.roots.client.ParticleUtil;
 import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
