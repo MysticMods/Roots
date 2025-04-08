@@ -18,17 +18,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class VisibleBlockEntityRenderer implements BlockEntityRenderer<VisibleBlockEntity> {
   protected final BlockEntityRendererProvider.Context context;
 
-  private static final int[] colors = new int[EnumUtils.DIRECTIONS.length];
-
-  static {
-    colors[Direction.DOWN.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.62F);
-    colors[Direction.UP.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.62F);
-    colors[Direction.NORTH.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.6F);
-    colors[Direction.SOUTH.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.6F);
-    colors[Direction.WEST.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.58F);
-    colors[Direction.EAST.ordinal()] = RootsRenderer.getColorARGB(255, 255, 255, 0.58F);
-  }
-
   public VisibleBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     this.context = context;
   }

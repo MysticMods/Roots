@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Random;
 
 public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBlockEntity> {
-  private final Random random = new Random();
-
   public PyreBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
   }

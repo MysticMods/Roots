@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,8 +23,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.Random;
 
 public class PedestalBlockEntityRenderer implements BlockEntityRenderer<PedestalBlockEntity> {
-  private static final Random random = new Random();
-
   public PedestalBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
   }
 
@@ -86,6 +85,8 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
       Minecraft.getInstance().getItemRenderer().renderStatic(inSlot, ItemTransforms.TransformType.GROUND, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, 0);
       pPoseStack.popPose();
     }*/
+
+    RandomSource random = pBlockEntity.getLevel().getRandom();
 
     if (!inSlot.isEmpty()) {
       pPoseStack.pushPose();
