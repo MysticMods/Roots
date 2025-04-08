@@ -4,10 +4,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.client.KeyBindings;
-import mysticmods.roots.init.ModBlocks;
-import mysticmods.roots.init.ModEffects;
-import mysticmods.roots.init.ModEntities;
-import mysticmods.roots.init.ModItems;
+import mysticmods.roots.init.*;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
@@ -193,8 +190,14 @@ public class RootsLangProvider extends LanguageProvider {
     RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
-    RootsRegistries.LEVEL_CONDITIONS.entrySet().forEach(o ->
-        add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
+    RootsRegistries.LEVEL_CONDITIONS.entrySet().forEach(o -> {
+          if (o == ModConditions.OVERGROWTH_CONDITION) {
+            add(o.getValue().getDescriptionId(), "Water Source or Creeping Grove Moss");
+
+          } else {
+            add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
+          }
+        }
     );
     RootsRegistries.PLAYER_CONDITIONS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
