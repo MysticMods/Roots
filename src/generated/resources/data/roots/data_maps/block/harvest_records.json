@@ -34,6 +34,13 @@
       "maximumAge": 7,
       "seedItem": "minecraft:carrot"
     },
+    "minecraft:cave_vines_plant": {
+      "ageProperty": {},
+      "canHarvestFunction": "roots:can_harvest_glow_berries",
+      "cropBlock": "minecraft:cave_vines_plant",
+      "harvestFunction": "roots:harvest_glow_berries",
+      "maximumAge": -1
+    },
     "minecraft:cocoa": {
       "ageProperty": {
         "ageProperty": "age"
