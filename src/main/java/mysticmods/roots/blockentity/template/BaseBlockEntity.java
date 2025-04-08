@@ -73,10 +73,8 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     if (packet == null) {
       return;
     }
-    ChunkPos chunkPos = new ChunkPos(getBlockPos());
-    for (ServerPlayer player : ((ServerLevel) level).getChunkSource().chunkMap.getPlayers(chunkPos, false)) {
-      player.connection.send(packet);
-    }
+    BlockPos pos = getBlockPos();
+    ((ServerLevel) level).getServer().getPlayerList().broadcast(null, pos.getX(), pos.getY(), pos.getZ(), 64, level.dimension(), packet);
   }
 
   @Nullable
