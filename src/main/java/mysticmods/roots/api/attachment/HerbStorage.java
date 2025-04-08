@@ -30,7 +30,7 @@ public class HerbStorage implements ICleanable {
     return herbMap;
   }
 
-  public double amount (Herb herb) {
+  public double amount(Herb herb) {
     return herbMap.getDouble(herb);
   }
 

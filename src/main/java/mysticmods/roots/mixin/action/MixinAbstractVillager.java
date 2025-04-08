@@ -16,13 +16,13 @@ public class MixinAbstractVillager {
   @Unique
   private int roots_1_21$lastExperience = -1;
 
-  @Inject(method="notifyTrade",at=@At("HEAD"))
-  public void RootsNotifyTradeStart (MerchantOffer offer, CallbackInfo ci) {
+  @Inject(method = "notifyTrade", at = @At("HEAD"))
+  public void RootsNotifyTradeStart(MerchantOffer offer, CallbackInfo ci) {
     this.roots_1_21$lastExperience = ((AbstractVillager) (Object) this).getVillagerXp();
   }
 
-  @Inject(method="notifyTrade",at=@At("RETURN"))
-  public void RootsNotifyTradeEnd (MerchantOffer offer, CallbackInfo ci) {
+  @Inject(method = "notifyTrade", at = @At("RETURN"))
+  public void RootsNotifyTradeEnd(MerchantOffer offer, CallbackInfo ci) {
     if (this.roots_1_21$lastExperience != -1) {
       int currentExperience = ((AbstractVillager) (Object) this).getVillagerXp();
       if (currentExperience > this.roots_1_21$lastExperience) {

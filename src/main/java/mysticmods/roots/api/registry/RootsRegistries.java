@@ -30,7 +30,8 @@ public class RootsRegistries {
   public static final Registry<Herb> HERBS = new RegistryBuilder<>(Keys.HERBS).sync(true).create();
   public static final Registry<SpellModifier> SPELL_MODIFIERS = new RegistryBuilder<>(Keys.SPELL_MODIFIERS).sync(true)
       .create();
-  public static final Registry<RitualModifier> RITUAL_MODIFIERS = new RegistryBuilder<>(Keys.RITUAL_MODIFIERS).sync(true).create();
+  public static final Registry<RitualModifier> RITUAL_MODIFIERS = new RegistryBuilder<>(Keys.RITUAL_MODIFIERS).sync(true)
+      .create();
   public static final Registry<PropertyType<?>> PROPERTY_TYPES = new RegistryBuilder<>(Keys.PROPERTY_TYPES).sync(true)
       .create();
   public static final Registry<PropertySerializer<?>> PROPERTY_SERIALIZERS = new RegistryBuilder<>(Keys.PROPERTY_SERIALIZERS).sync(true)
@@ -54,7 +55,8 @@ public class RootsRegistries {
       .create();
   public static final Registry<HarvestFunction> HARVEST_FUNCTIONS = new RegistryBuilder<>(Keys.HARVEST_FUNCTIONS).sync(true)
       .create();
-  public static final Registry<GroveAction> GROVE_ACTIONS = new RegistryBuilder<>(Keys.GROVE_ACTIONS).sync(true).create();
+  public static final Registry<GroveAction> GROVE_ACTIONS = new RegistryBuilder<>(Keys.GROVE_ACTIONS).sync(true)
+      .create();
 
   public static class Keys {
     // Registry keys

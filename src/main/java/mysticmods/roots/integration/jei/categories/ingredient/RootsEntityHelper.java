@@ -12,41 +12,41 @@ import java.util.Objects;
 
 public class RootsEntityHelper implements IIngredientHelper<RootsEntityType> {
 
-	@Override
-	public IIngredientType<RootsEntityType> getIngredientType() {
-		return RootsJEIPlugin.ENTITY_TYPE;
-	}
-
-	@Override
-	public String getDisplayName(RootsEntityType type) {
-		return type.entity().getDescription().getString();
-	}
-
-	@SuppressWarnings("removal")
   @Override
-	public String getUniqueId(RootsEntityType type, UidContext context) {
-		return Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(type.entity())).toString();
-	}
+  public IIngredientType<RootsEntityType> getIngredientType() {
+    return RootsJEIPlugin.ENTITY_TYPE;
+  }
 
-	@Override
-	public ResourceLocation getResourceLocation(RootsEntityType type) {
-		return Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(type.entity()));
-	}
+  @Override
+  public String getDisplayName(RootsEntityType type) {
+    return type.entity().getDescription().getString();
+  }
 
-	@Override
-	public RootsEntityType copyIngredient(RootsEntityType type) {
-		return type;
-	}
+  @SuppressWarnings("removal")
+  @Override
+  public String getUniqueId(RootsEntityType type, UidContext context) {
+    return Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(type.entity())).toString();
+  }
 
-	@Override
-	public String getErrorInfo(@Nullable RootsEntityType type) {
-		if (type == null) {
-			return "null";
-		}
-		ResourceLocation name = BuiltInRegistries.ENTITY_TYPE.getKey(type.entity());
-		if (name == null) {
-			return "unnamed";
-		}
-		return name.toString();
-	}
+  @Override
+  public ResourceLocation getResourceLocation(RootsEntityType type) {
+    return Objects.requireNonNull(BuiltInRegistries.ENTITY_TYPE.getKey(type.entity()));
+  }
+
+  @Override
+  public RootsEntityType copyIngredient(RootsEntityType type) {
+    return type;
+  }
+
+  @Override
+  public String getErrorInfo(@Nullable RootsEntityType type) {
+    if (type == null) {
+      return "null";
+    }
+    ResourceLocation name = BuiltInRegistries.ENTITY_TYPE.getKey(type.entity());
+    if (name == null) {
+      return "unnamed";
+    }
+    return name.toString();
+  }
 }

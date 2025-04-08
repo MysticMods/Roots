@@ -44,12 +44,12 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     super(pType, pWorldPosition, pBlockState);
   }
 
-  protected boolean canOutputTo (BlockState state, BlockPos pos) {
+  protected boolean canOutputTo(BlockState state, BlockPos pos) {
     return true;
   }
 
   // TODO: Some sort of caching
-  public List<Pair<BlockPos, PedestalBlockEntity>> pedestals (TagKey<Block> include, TagKey<Block> exclude) {
+  public List<Pair<BlockPos, PedestalBlockEntity>> pedestals(TagKey<Block> include, TagKey<Block> exclude) {
     List<Pair<BlockPos, PedestalBlockEntity>> pedestalPositions = new ArrayList<>();
     if (getBoundingBox() != null) {
       BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {

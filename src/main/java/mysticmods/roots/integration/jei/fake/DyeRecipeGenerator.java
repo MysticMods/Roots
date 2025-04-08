@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DyeRecipeGenerator {
-  public static List<RecipeHolder<CraftingRecipe>> generate () {
+  public static List<RecipeHolder<CraftingRecipe>> generate() {
     List<RecipeHolder<CraftingRecipe>> recipes = new ArrayList<>();
 
     for (Item item : Arrays.asList(ModItems.HERB_POUCH.get())) {
@@ -33,7 +33,8 @@ public class DyeRecipeGenerator {
         ShapedRecipePattern pattern = new ShapedRecipePattern(1, 2, recipeIngredients, Optional.empty());
         ItemStack output = new ItemStack(item);
         output.set(DataComponents.BASE_COLOR, dyeColor);
-        recipes.add(new RecipeHolder<>(RootsAPI.rl("dye_" + item.builtInRegistryHolder().key().location().getPath() + "_" + dyeColor.getName()), new ShapedRecipe("", CraftingBookCategory.MISC, pattern, output)));
+        recipes.add(new RecipeHolder<>(RootsAPI.rl("dye_" + item.builtInRegistryHolder().key().location()
+            .getPath() + "_" + dyeColor.getName()), new ShapedRecipe("", CraftingBookCategory.MISC, pattern, output)));
       }
     }
 

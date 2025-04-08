@@ -47,7 +47,8 @@ import java.util.Optional;
 //    - For manually creating drops, it needs to do so via loot table for fortune, silk touch, etc
 //
 
-public record HarvestRecord (Block cropBlock, Optional<Item> seedItem, Optional<IntegerProperty> ageProperty, int maximumAge, CanHarvestFunction canHarvestFunction, HarvestFunction harvestFunction) {
+public record HarvestRecord(Block cropBlock, Optional<Item> seedItem, Optional<IntegerProperty> ageProperty,
+                            int maximumAge, CanHarvestFunction canHarvestFunction, HarvestFunction harvestFunction) {
   public static final MapCodec<HarvestRecord> MAP_CODEC = RecordCodecBuilder.mapCodec(instance ->
       instance.group(
               BuiltInRegistries.BLOCK.byNameCodec().fieldOf("cropBlock").forGetter(HarvestRecord::cropBlock),
@@ -61,10 +62,10 @@ public record HarvestRecord (Block cropBlock, Optional<Item> seedItem, Optional<
                   .forGetter(HarvestRecord::harvestFunction)
           )
           .apply(instance, (block, item, optProp, max, drops, replant) -> HarvestRecord.of(block, item, optProp.orElse("age"), max, drops, replant))
-      );
+  );
   public static final Codec<HarvestRecord> CODEC = MAP_CODEC.codec();
 
-  public static HarvestRecord of (Block cropBlock, Optional<Item> seedItem, String propertyName, int maximumAge, CanHarvestFunction harvest, HarvestFunction replant) {
+  public static HarvestRecord of(Block cropBlock, Optional<Item> seedItem, String propertyName, int maximumAge, CanHarvestFunction harvest, HarvestFunction replant) {
     IntegerProperty ageProperty = null;
     if (cropBlock instanceof CropBlock crop) {
       ageProperty = ((AccessorMixinCropBlock) crop).rootsCallGetAgeProperty();
@@ -83,18 +84,18 @@ public record HarvestRecord (Block cropBlock, Optional<Item> seedItem, Optional<
     return new HarvestRecord(cropBlock, seedItem, Optional.ofNullable(ageProperty), maximumAge, harvest, replant);
   }
 
-  public static HarvestRecord of (CropBlock cropBlock, HarvestFunction harvestFunction) {
+  public static HarvestRecord of(CropBlock cropBlock, HarvestFunction harvestFunction) {
     IntegerProperty ageProperty = ((AccessorMixinCropBlock) cropBlock).rootsCallGetAgeProperty();
     Item seedItem = ((AccessorMixinCropBlock) cropBlock).rootsCallGetBaseSeedId().asItem();
 
     return new HarvestRecord(cropBlock, Optional.of(seedItem), Optional.ofNullable(ageProperty), cropBlock.getMaxAge(), ModTests.SAFE_SINGLE_CROP_AGE.get(), harvestFunction);
   }
 
-  public boolean canHarvest (Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity) {
+  public boolean canHarvest(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity) {
     return canHarvestFunction.test(level, pos, state, ageProperty.orElse(null), maximumAge);
   }
 
-  public void harvest (Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity) {
+  public void harvest(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity) {
     harvestFunction.harvest(level, pos, state, entity, ageProperty.orElse(null), maximumAge, seedItem.orElse(null));
   }
 }

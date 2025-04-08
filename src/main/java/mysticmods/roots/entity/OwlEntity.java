@@ -115,7 +115,8 @@ public class OwlEntity extends TamableAnimal implements FlyingAnimal {
   public static <T extends OwlEntity> boolean placement(EntityType<T> pAnimal, LevelAccessor worldIn, MobSpawnType reason, BlockPos blockpos, RandomSource pRandom) {
     BlockState down = worldIn.getBlockState(blockpos.below());
     Block block = down.getBlock();
-    return block instanceof LeavesBlock || block == Blocks.GRASS_BLOCK || block.builtInRegistryHolder().is(BlockTags.LOGS) || block == Blocks.AIR && worldIn.getMaxLocalRawBrightness(blockpos) > 8;
+    return block instanceof LeavesBlock || block == Blocks.GRASS_BLOCK || block.builtInRegistryHolder()
+        .is(BlockTags.LOGS) || block == Blocks.AIR && worldIn.getMaxLocalRawBrightness(blockpos) > 8;
   }
 
   @Override

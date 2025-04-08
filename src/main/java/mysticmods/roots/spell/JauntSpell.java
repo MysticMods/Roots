@@ -44,7 +44,7 @@ public class JauntSpell extends Spell {
   }
 
   @Override
-  public void buildProperties (List<PropertyHolder<?>> properties) {
+  public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModSpells.JAUNT_DISTANCE);
   }

@@ -30,37 +30,38 @@ public class ClientEvents {
   }
 
   @SubscribeEvent
-  public static void onEntityRender (RenderLivingEvent.Post<?, ?> event) {
+  public static void onEntityRender(RenderLivingEvent.Post<?, ?> event) {
     if (event.getEntity().getData(ModAttachments.HAS_GEAS)) {
       LivingEntityRenderer<?, ?> renderer = event.getRenderer();
       LivingEntity entity = event.getEntity();
       PoseStack poseStack = event.getPoseStack();
       MultiBufferSource buffer = event.getMultiBufferSource();
       float partialTicks = event.getPartialTick();
-        Vec3 vec3 = entity.getAttachments().getNullable(EntityAttachment.NAME_TAG, 0, entity.getViewYRot(partialTicks));
-        if (vec3 != null) {
-          poseStack.pushPose();
-          float ticks = RenderTickHandler.getClientTicks() + partialTicks;
-          float bobbingOffset = Mth.sin(ticks * 0.1f) * 0.05f;
-          float pulse = 0.05f * Mth.sin(ticks * 0.1f) + 0.95f;
-          poseStack.translate(0f, entity.getBbHeight() + entity.getBbHeight() * 0.2 + bobbingOffset, 0);
-          poseStack.mulPose(((AccessorMixinEntityRenderer)renderer).rootsGetEntityRenderDispatcher().cameraOrientation());
-          poseStack.scale(0.3f * pulse, 0.3f * pulse, 0.3f * pulse);
-          poseStack.translate(-0.5f, 0, -0.5f);
-          Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
-              poseStack.last(),
-              buffer.getBuffer(Sheets.translucentItemSheet()),
-              null,
-              ClientSetup.GEAS_MODEL,
-              1,
-              1,
-              1,
-              LightTexture.FULL_SKY,
-              OverlayTexture.NO_OVERLAY,
-              ModelData.EMPTY,
-              Sheets.translucentItemSheet());
-          poseStack.popPose();
-        }
+      Vec3 vec3 = entity.getAttachments().getNullable(EntityAttachment.NAME_TAG, 0, entity.getViewYRot(partialTicks));
+      if (vec3 != null) {
+        poseStack.pushPose();
+        float ticks = RenderTickHandler.getClientTicks() + partialTicks;
+        float bobbingOffset = Mth.sin(ticks * 0.1f) * 0.05f;
+        float pulse = 0.05f * Mth.sin(ticks * 0.1f) + 0.95f;
+        poseStack.translate(0f, entity.getBbHeight() + entity.getBbHeight() * 0.2 + bobbingOffset, 0);
+        poseStack.mulPose(((AccessorMixinEntityRenderer) renderer).rootsGetEntityRenderDispatcher()
+            .cameraOrientation());
+        poseStack.scale(0.3f * pulse, 0.3f * pulse, 0.3f * pulse);
+        poseStack.translate(-0.5f, 0, -0.5f);
+        Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
+            poseStack.last(),
+            buffer.getBuffer(Sheets.translucentItemSheet()),
+            null,
+            ClientSetup.GEAS_MODEL,
+            1,
+            1,
+            1,
+            LightTexture.FULL_SKY,
+            OverlayTexture.NO_OVERLAY,
+            ModelData.EMPTY,
+            Sheets.translucentItemSheet());
+        poseStack.popPose();
+      }
     }
   }
 }

@@ -78,5 +78,5 @@ public abstract class RootsAPI {
 
   public abstract void syncHerbs(Player player, Object2DoubleMap<Herb> herbs);
 
-  public abstract void grant (ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique);
+  public abstract void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique);
 }

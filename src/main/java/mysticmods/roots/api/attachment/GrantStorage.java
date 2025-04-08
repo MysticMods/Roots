@@ -180,7 +180,7 @@ public class GrantStorage implements ICleanable {
     return result;
   }
 
-  public void difference (GrantStorage otherStorage) {
+  public void difference(GrantStorage otherStorage) {
     Set<Spell> newOther = Sets.difference(otherStorage.grantedSpells, grantedSpells);
     if (!newOther.isEmpty()) {
       RootsAPI.LOG.error("The following spells are contained in `otherStorage` but not this and will be added:");

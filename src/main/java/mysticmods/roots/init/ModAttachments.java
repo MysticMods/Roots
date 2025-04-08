@@ -22,7 +22,8 @@ public class ModAttachments {
   private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, RootsAPI.MODID);
   private static final DeferredRegister.DataComponents COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, RootsAPI.MODID);
 
-  public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> HAS_GEAS = ATTACHMENTS.register("has_geas", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build());
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> HAS_GEAS = ATTACHMENTS.register("has_geas", () -> AttachmentType.builder(() -> false)
+      .serialize(Codec.BOOL).build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<GrantStorage>> GRANT_STORAGE = ATTACHMENTS.register("grant_storage", () -> AttachmentType.builder(GrantStorage::new)
       .serialize(GrantStorage.CODEC).copyOnDeath().build());
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<HerbStorage>> HERB_STORAGE = ATTACHMENTS.register("herb_storage", () -> AttachmentType.builder(() -> new HerbStorage())
@@ -39,7 +40,8 @@ public class ModAttachments {
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> HERB_POUCH_CONTENTS = COMPONENTS.register("herb_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FORAGING = COMPONENTS.register("foraging", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FORAGING = COMPONENTS.register("foraging", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT)
+      .networkSynchronized(ByteBufCodecs.VAR_INT).build());
 
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();

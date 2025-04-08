@@ -66,7 +66,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
   public void starts(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
-  public void ends (Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+  public void ends(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
   }
 
   public void tick(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RitualPositionCache cache, RandomSource random) {
@@ -85,7 +85,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     aabb = AABB.of(getBoundingBox());
   }
 
-  protected void buildProperties (List<PropertyHolder<?>> properties) {
+  protected void buildProperties(List<PropertyHolder<?>> properties) {
     if (getDurationProperty() != null) {
       properties.add(getDurationProperty());
     }
@@ -136,7 +136,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
     rebuildBounds();
   }
 
-  public List<BiPredicate<Level, BlockPos>> getPredicates () {
+  public List<BiPredicate<Level, BlockPos>> getPredicates() {
     return Collections.emptyList();
   }
 

@@ -158,7 +158,7 @@ public class RunicBlockRecipe extends WorldRecipe<SimpleWorldCrafting> {
     protected Builder() {
     }
 
-    public Builder test (WorldTest targetCondition) {
+    public Builder test(WorldTest targetCondition) {
       this.test = targetCondition;
       return this;
     }

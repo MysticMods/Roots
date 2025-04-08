@@ -70,7 +70,8 @@ public class RootsJEIPlugin implements IModPlugin {
     Level level = Minecraft.getInstance().level;
     registration.addRecipes(GROVE_RECIPE_TYPE, ResolvedRecipes.GROVE.getRecipes(level).stream().map(RecipeHolder::value)
         .toList());
-    registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream().map(RecipeHolder::value)
+    registration.addRecipes(MORTAR_RECIPE_TYPE, ResolvedRecipes.MORTAR.getRecipes(level).stream()
+        .map(RecipeHolder::value)
         .toList());
     registration.addRecipes(PYRE_RECIPE_TYPE, ResolvedRecipes.PYRE.getRecipes(level).stream().map(RecipeHolder::value)
         .toList());

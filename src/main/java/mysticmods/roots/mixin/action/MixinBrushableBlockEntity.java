@@ -18,8 +18,8 @@ public class MixinBrushableBlockEntity {
   @Shadow
   private ItemStack item;
 
-  @Inject(method="brush", at=@At(value="INVOKE", target="Lnet/minecraft/world/level/block/entity/BrushableBlockEntity;brushingCompleted(Lnet/minecraft/world/entity/player/Player;)V"))
-  private void RootsOnBlockBrush (long startTick, Player player, Direction hitDirection, CallbackInfoReturnable<Boolean> cir) {
+  @Inject(method = "brush", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/BrushableBlockEntity;brushingCompleted(Lnet/minecraft/world/entity/player/Player;)V"))
+  private void RootsOnBlockBrush(long startTick, Player player, Direction hitDirection, CallbackInfoReturnable<Boolean> cir) {
     if (!(player instanceof ServerPlayer serverPlayer)) {
       return;
     }

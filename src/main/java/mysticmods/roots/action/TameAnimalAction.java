@@ -14,7 +14,8 @@ import java.util.Set;
 public class TameAnimalAction implements GroveAction {
   @Override
   public boolean test(GroveContext context) {
-    RootsAPI.LOG.error("TameAnimalAction triggered by '{}' on entity '{}'", context.player().getName().getString(), context.target().getName().getString());
+    RootsAPI.LOG.error("TameAnimalAction triggered by '{}' on entity '{}'", context.player().getName()
+        .getString(), context.target().getName().getString());
     return true;
   }
 
@@ -23,7 +24,7 @@ public class TameAnimalAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context (ServerLevel level, ServerPlayer player, Animal target) implements GroveContext {
+  public record Context(ServerLevel level, ServerPlayer player, Animal target) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.TARGET_ENTITY);
 
     @Override

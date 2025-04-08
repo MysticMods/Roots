@@ -129,7 +129,7 @@ public class ClientSetup {
   public static final ResourceLocation HERB_ALERT = RootsAPI.rl("herb_alert");
 
   @SubscribeEvent
-  public static void registerGuiLayers (RegisterGuiLayersEvent event) {
+  public static void registerGuiLayers(RegisterGuiLayersEvent event) {
     event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, WARNING_LAYER, WarningLayer::render);
     event.registerBelow(VanillaGuiLayers.HOTBAR, HERB_ALERT, HerbLayer::render);
   }
@@ -183,7 +183,7 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onRegisterScreens (RegisterMenuScreensEvent event) {
+  public static void onRegisterScreens(RegisterMenuScreensEvent event) {
     event.register(ModContainers.HERB_POUCH.get(), HerbPouchScreen::new);
   }
 
@@ -207,7 +207,7 @@ public class ClientSetup {
   }
 
   @SubscribeEvent
-  public static void onBakeModels (ModelEvent.BakingCompleted event) {
+  public static void onBakeModels(ModelEvent.BakingCompleted event) {
     GIFT_BOX_MODEL = event.getModels().get(GIFT_BOX);
     GEAS_MODEL = event.getModels().get(GEAS);
     NO_GROVE_STONE_MODEL = event.getModels().get(NO_GROVE_STONE);

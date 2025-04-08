@@ -173,7 +173,7 @@ public class KnifeRecipe extends WorldRecipe<SimpleWorldCrafting> {
       this.stateMapper = stateMapper;
     }
 
-    public Builder test (WorldTest test) {
+    public Builder test(WorldTest test) {
       this.test = test;
       return this;
     }

@@ -23,7 +23,7 @@ public class LearnSpellModifierAction implements GroveAction {
     return Context.PARAMETERS;
   }
 
-  public record Context (ServerLevel level, ServerPlayer player, SpellModifier spellModifier) implements GroveContext {
+  public record Context(ServerLevel level, ServerPlayer player, SpellModifier spellModifier) implements GroveContext {
     public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.SPELL_MODIFIER);
 
     @Override

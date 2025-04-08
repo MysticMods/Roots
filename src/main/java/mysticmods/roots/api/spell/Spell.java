@@ -137,7 +137,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return keyToDataIndex.keySet();
   }
 
-  public Set<String> getTooltipDataKeys () {
+  public Set<String> getTooltipDataKeys() {
     return getDataKeys();
   }
 
@@ -227,7 +227,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     return maxUse;
   }
 
-  public Component getChargeText (int currentCharge) {
+  public Component getChargeText(int currentCharge) {
     return Component.translatable("roots.message.staff.charging", currentCharge, getMaxUse());
   }
 

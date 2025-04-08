@@ -44,7 +44,7 @@ public class WildfireEntitySnapshot extends Snapshot {
     return ModSerializers.WILDFIRE.get();
   }
 
-  public float getDamage () {
+  public float getDamage() {
     return damage;
   }
 

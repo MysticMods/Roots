@@ -28,12 +28,15 @@ public class ModEntities {
   private static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(Registries.ENTITY_TYPE, RootsAPI.MODID);
 
   public static final DeferredHolder<EntityType<?>, EntityType<BeetleEntity>> BEETLE = REGISTER.register("beetle", () -> EntityType.Builder.of(BeetleEntity::new, MobCategory.CREATURE)
-      .sized(0.75f, 0.75f).eyeHeight(0.27f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
+      .sized(0.75f, 0.75f).eyeHeight(0.27f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true)
+      .setUpdateInterval(3)
       .build("beetle"));
   public static final DeferredHolder<EntityType<?>, EntityType<DeerEntity>> DEER = REGISTER.register("deer", () -> EntityType.Builder.of(DeerEntity::new, MobCategory.CREATURE)
-      .sized(0.8f, 1.2f).eyeHeight(1.1f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("deer"));
+      .sized(0.8f, 1.2f).eyeHeight(1.1f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
+      .build("deer"));
   public static final DeferredHolder<EntityType<?>, EntityType<FennecEntity>> FENNEC = REGISTER.register("fennec", () -> EntityType.Builder.of(FennecEntity::new, MobCategory.CREATURE)
-      .sized(0.75f, 0.75f).eyeHeight(0.6f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
+      .sized(0.75f, 0.75f).eyeHeight(0.6f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true)
+      .setUpdateInterval(3)
       .build("fennec"));
   public static final DeferredHolder<EntityType<?>, EntityType<SproutEntity>> TAN_SPROUT = REGISTER.register("tan_sprout", () -> EntityType.Builder.of(SproutEntity::new, MobCategory.CREATURE)
       .sized(0.5f, 1.0f).eyeHeight(0.6f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
@@ -51,11 +54,14 @@ public class ModEntities {
       .sized(0.5f, 1.0f).eyeHeight(0.6f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("snow_sprout"));
   public static final DeferredHolder<EntityType<?>, EntityType<OwlEntity>> OWL = REGISTER.register("owl", () -> EntityType.Builder.of(OwlEntity::new, MobCategory.CREATURE)
-      .sized(0.5f, 1.35f).eyeHeight(1f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("owl"));
+      .sized(0.5f, 1.35f).eyeHeight(1f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
+      .build("owl"));
   public static final DeferredHolder<EntityType<?>, EntityType<DuckEntity>> DUCK = REGISTER.register("duck", () -> EntityType.Builder.of(DuckEntity::new, MobCategory.CREATURE)
-      .sized(0.6f, 1f).eyeHeight(0.86f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("duck"));
+      .sized(0.6f, 1f).eyeHeight(0.86f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
+      .build("duck"));
 
-  public static final DeferredHolder<EntityType<?>, EntityType<LivingArrowEntity>> LIVING_ARROW = REGISTER.register("living_arrow", () -> EntityType.Builder.<LivingArrowEntity>of(LivingArrowEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(20).build("living_arrow"));
+  public static final DeferredHolder<EntityType<?>, EntityType<LivingArrowEntity>> LIVING_ARROW = REGISTER.register("living_arrow", () -> EntityType.Builder.<LivingArrowEntity>of(LivingArrowEntity::new, MobCategory.MISC)
+      .sized(0.5F, 0.5F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(20).build("living_arrow"));
   public static final DeferredHolder<EntityType<?>, EntityType<MeteorEntity>> METEOR = REGISTER.register("meteor", () -> EntityType.Builder.of(MeteorEntity::new, MobCategory.MISC)
       .sized(0.3f, 0.3f).eyeHeight(0.13f).clientTrackingRange(4).updateInterval(10).build("meteor"));
   public static final DeferredHolder<EntityType<?>, EntityType<WildfireEntity>> WILDFIRE = REGISTER.register("wildfire", () -> EntityType.Builder.<WildfireEntity>of(WildfireEntity::new, MobCategory.MISC)

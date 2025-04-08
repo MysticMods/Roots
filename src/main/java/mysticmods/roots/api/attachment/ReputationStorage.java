@@ -44,7 +44,7 @@ public class ReputationStorage implements ICleanable {
     this.uniqueReputations = new ObjectOpenHashSet<>(uniqueReputations);
   }
 
-  public int getRank (Grove grove) {
+  public int getRank(Grove grove) {
     return grove.getRanks().getRank(reputations.computeIfAbsent(grove, t -> 0));
   }
 
@@ -57,7 +57,7 @@ public class ReputationStorage implements ICleanable {
     setDirty(true);
   }
 
-  public boolean apply (Grove grove, ResourceLocation name, GroveReputation reputation) {
+  public boolean apply(Grove grove, ResourceLocation name, GroveReputation reputation) {
     UniqueReputation rep = new UniqueReputation(grove.builtInRegistryHolder().getKey().location(), name);
     if (uniqueReputations.contains(rep)) {
       return false;
@@ -67,7 +67,7 @@ public class ReputationStorage implements ICleanable {
     return true;
   }
 
-  public int adjust (Grove grove, GroveReputation reputation) {
+  public int adjust(Grove grove, GroveReputation reputation) {
     int[] reps = {reputation.gain1(), reputation.gain2(), reputation.gain3(), reputation.gain4()};
     int current = reputations.getOrDefault(grove, 0);
     int rank = getRank(grove);

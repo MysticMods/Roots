@@ -12,11 +12,11 @@ public record GroveReputation(int gain1, int gain2, int gain3, int gain4) {
       Codec.INT.fieldOf("gain4").forGetter(GroveReputation::gain4)
   ).apply(instance, GroveReputation::new));
 
-  public GroveReputation multiply (int amount) {
+  public GroveReputation multiply(int amount) {
     return new GroveReputation(gain1 * amount, gain2 * amount, gain3 * amount, gain4 * amount);
   }
 
-  public GroveReputation add (GroveReputation ... others) {
+  public GroveReputation add(GroveReputation... others) {
     int g1 = gain1;
     int g2 = gain2;
     int g3 = gain3;

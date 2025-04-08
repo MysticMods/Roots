@@ -67,7 +67,7 @@ public class Costing {
     this.operationsCount++;
   }
 
-  public int operations () {
+  public int operations() {
     return this.operationsCount;
   }
 
@@ -228,13 +228,13 @@ public class Costing {
               toConsume = 0;
               herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
               // TODO: All of this should modify in place
-/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
               break;
             } else {
               thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
               toConsume -= capItem.getCount();
               herbEntry.count = capItem.getCount();
-/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
             }
           } else {
             ItemStack capStack = playerInventory.getItem(herbEntry.slot);
@@ -249,13 +249,13 @@ public class Costing {
               toConsume = 0;
               herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
               // TODO: As above, so below
-/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
               break;
             } else {
               thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
               toConsume -= capItem.getCount();
               herbEntry.count = capItem.getCount();
-/*              playerInventory.setItem(herbEntry.slot, capStack);*/
+              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
             }
           }
           if (toConsume <= 0) {

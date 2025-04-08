@@ -38,7 +38,7 @@ public class SkySoarerSpell extends Spell {
   }
 
   @Override
-  public void buildProperties (List<PropertyHolder<?>> properties) {
+  public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModSpells.SKY_SOARER_AMPLIFIER);
     properties.add(ModSpells.SKY_SOARER_BOOSTED_AMPLIFIER);

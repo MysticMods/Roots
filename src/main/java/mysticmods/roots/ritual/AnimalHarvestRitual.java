@@ -59,7 +59,8 @@ public class AnimalHarvestRitual extends Ritual {
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
-              .and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !o.getType().is(RootsTags.Entities.ANIMAL_HARVEST_EXCLUDE) && !emptyLoot.contains(o.getType())));
+              .and((o) -> o.getType().is(RootsTags.Entities.ANIMAL_HARVEST) && !o.getType()
+                  .is(RootsTags.Entities.ANIMAL_HARVEST_EXCLUDE) && !emptyLoot.contains(o.getType())));
       if (entities.isEmpty()) {
         return;
       }

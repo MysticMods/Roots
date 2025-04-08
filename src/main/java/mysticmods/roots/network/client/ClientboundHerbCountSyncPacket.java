@@ -13,7 +13,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ClientboundHerbCountSyncPacket (Object2DoubleMap<Herb> data) implements IRootsPacket {
+public record ClientboundHerbCountSyncPacket(Object2DoubleMap<Herb> data) implements IRootsPacket {
   public static final CustomPacketPayload.Type<ClientboundHerbCountSyncPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_bound_herb_count_sync"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundHerbCountSyncPacket> CODEC = StreamCodec.composite(ByteBufCodecs.map(Object2DoubleOpenHashMap::new, ByteBufCodecs.registry(RootsRegistries.Keys.HERBS), ByteBufCodecs.DOUBLE), ClientboundHerbCountSyncPacket::data, ClientboundHerbCountSyncPacket::new);
 

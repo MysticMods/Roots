@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BredAnimalsTrigger.class)
 public class MixinBredAnimalsTrigger {
-  @Inject(method="trigger", at=@At("HEAD"))
-  public void RootsTriggerAnimalBreeding (ServerPlayer player, Animal parent, Animal partner, AgeableMob child, CallbackInfo ci) {
+  @Inject(method = "trigger", at = @At("HEAD"))
+  public void RootsTriggerAnimalBreeding(ServerPlayer player, Animal parent, Animal partner, AgeableMob child, CallbackInfo ci) {
     BredAnimalAction.Context context = new BredAnimalAction.Context(player.serverLevel(), player, child, parent, partner);
     ModActions.BRED_ANIMAL.get().accept(context);
   }

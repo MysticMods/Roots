@@ -107,7 +107,8 @@ public class RenderUtil {
     RenderSystem.setShader(GameRenderer::getPositionTexShader);
     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
     MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
-    mc.getBlockRenderer().renderSingleBlock(block, guiGraphics.pose(), bufferSource, 15728880, OverlayTexture.NO_OVERLAY);
+    mc.getBlockRenderer()
+        .renderSingleBlock(block, guiGraphics.pose(), bufferSource, 15728880, OverlayTexture.NO_OVERLAY);
     bufferSource.endBatch();
     guiGraphics.pose().popPose();
 
@@ -234,7 +235,8 @@ public class RenderUtil {
     quaternion1.conjugate();
     ItemEntity item = (ItemEntity) fetchEntity(EntityType.ITEM, level);
     Objects.requireNonNull(item).setItem(stack);
-    RenderSystem.runAsFancy(() -> render(item, Minecraft.getInstance().getTimer().getGameTimeDeltaTicks(), posestack, graphics.bufferSource(), bobOffset));
+    RenderSystem.runAsFancy(() -> render(item, Minecraft.getInstance().getTimer()
+        .getGameTimeDeltaTicks(), posestack, graphics.bufferSource(), bobOffset));
     graphics.flush();
     posestack.popPose();
     Lighting.setupFor3DItems();
@@ -244,8 +246,10 @@ public class RenderUtil {
   private static void render(ItemEntity entity, float partialTicks, PoseStack stack, MultiBufferSource buffer, float bobOffset) {
     stack.pushPose();
     ItemStack itemstack = entity.getItem();
-    BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, entity.level(), null, entity.getId());
-    float f1 = Mth.sin((Objects.requireNonNull(Minecraft.getInstance().level).getGameTime() + partialTicks) / 10.0F + bobOffset) * 0.1F + 0.1F;
+    BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer()
+        .getModel(itemstack, entity.level(), null, entity.getId());
+    float f1 = Mth.sin((Objects.requireNonNull(Minecraft.getInstance().level)
+        .getGameTime() + partialTicks) / 10.0F + bobOffset) * 0.1F + 0.1F;
     float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
     stack.translate(0.0D, f1 + 0.25F * f2, 0.0D);
     float f3 = getSpin(partialTicks, bobOffset);
@@ -253,7 +257,8 @@ public class RenderUtil {
 
     stack.pushPose();
 
-    Minecraft.getInstance().getItemRenderer().render(itemstack, ItemDisplayContext.GROUND, false, stack, buffer, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+    Minecraft.getInstance().getItemRenderer()
+        .render(itemstack, ItemDisplayContext.GROUND, false, stack, buffer, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
     stack.popPose();
 
 
@@ -268,7 +273,8 @@ public class RenderUtil {
     List<Component> components = new ArrayList<>();
     components.add(type.getDescription());
     if (Minecraft.getInstance().options.advancedItemTooltips) {
-      components.add(Component.literal(BuiltInRegistries.ENTITY_TYPE.getKey(type).toString()).withStyle(ChatFormatting.DARK_GRAY));
+      components.add(Component.literal(BuiltInRegistries.ENTITY_TYPE.getKey(type).toString())
+          .withStyle(ChatFormatting.DARK_GRAY));
     }
     return components;
   }

@@ -14,7 +14,7 @@ public record ServerboundSetSpellDataPacket(InteractionHand hand, int index, int
   public static final Type<ServerboundSetSpellDataPacket> TYPE = new Type<>(RootsAPI.rl("server_bound_set_spell_data"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ServerboundSetSpellDataPacket> CODEC =
       StreamCodec.composite(
-          ExtraStreamCodecs.INTERACTION_HAND_CODEC,  o -> o.hand,
+          ExtraStreamCodecs.INTERACTION_HAND_CODEC, o -> o.hand,
           ByteBufCodecs.VAR_INT, o -> o.index,
           ByteBufCodecs.VAR_INT, o -> o.value,
           ServerboundSetSpellDataPacket::new);

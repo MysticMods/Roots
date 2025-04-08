@@ -14,9 +14,9 @@ public interface IRitualInstance extends RitualLike {
     return getRitual().getName();
   }
 
-  int getLifetime ();
+  int getLifetime();
 
-  default int getDuration () {
+  default int getDuration() {
     return getRitual().getDuration();
   }
 

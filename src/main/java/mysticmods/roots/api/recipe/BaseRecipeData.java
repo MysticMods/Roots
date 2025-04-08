@@ -134,7 +134,7 @@ public class BaseRecipeData {
       this.priority = 0;
     }
 
-    public Builder priority (int value) {
+    public Builder priority(int value) {
       this.priority = value;
       return this;
     }
@@ -164,7 +164,7 @@ public class BaseRecipeData {
       return result(item.value(), count);
     }
 
-    public Builder result (ItemLike item, int count) {
+    public Builder result(ItemLike item, int count) {
       return result(new ItemStack(item.asItem(), count));
     }
 
@@ -183,19 +183,19 @@ public class BaseRecipeData {
       return this;
     }
 
-    public Builder chanceOutput (ItemLike item, float chance) {
+    public Builder chanceOutput(ItemLike item, float chance) {
       return chanceOutput(new ItemStack(item.asItem()), chance);
     }
 
-    public Builder chanceOutput (ItemLike item, int count, float chance) {
+    public Builder chanceOutput(ItemLike item, int count, float chance) {
       return chanceOutput(new ItemStack(item.asItem(), count), chance);
     }
 
-    public Builder chanceOutput (Holder<? extends ItemLike> holder, float chance) {
+    public Builder chanceOutput(Holder<? extends ItemLike> holder, float chance) {
       return chanceOutput(new ItemStack(holder.value().asItem()), chance);
     }
 
-    public Builder chanceOutput (Holder<? extends ItemLike> holder, int count, float chance) {
+    public Builder chanceOutput(Holder<? extends ItemLike> holder, int count, float chance) {
       return chanceOutput(new ItemStack(holder.value().asItem(), count), chance);
     }
 

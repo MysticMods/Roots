@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
-public record HarvestBreakSingleBlock () implements HarvestFunction  {
+public record HarvestBreakSingleBlock() implements HarvestFunction {
   @Override
   public void harvest(Level level, BlockPos pos, BlockState state, LivingEntity entity, @Nullable IntegerProperty ageProperty, int maximumAge, @Nullable Item seedItem) {
     HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(pos, level.dimension()));

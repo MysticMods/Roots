@@ -25,7 +25,7 @@ public class WindwallRitual extends Ritual {
   private float strength;
   private double minimumY, heightPercentage;
 
-  private void knockBack (Entity entity, float strength, double x, double z) {
+  private void knockBack(Entity entity, float strength, double x, double z) {
     // TODO: Tag entities as not being knockable
     entity.hasImpulse = true;
     Vec3 delta = entity.getDeltaMovement();

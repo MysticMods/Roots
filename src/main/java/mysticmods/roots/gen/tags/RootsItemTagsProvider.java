@@ -312,8 +312,10 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(ItemTags.LEG_ARMOR).add(ModItems.BEETLE_LEGGINGS.get(), ModItems.COPPER_LEGGINGS.get());
     this.tag(ItemTags.FOOT_ARMOR).add(ModItems.BEETLE_BOOTS.get(), ModItems.COPPER_BOOTS.get());
 
-    this.tag(RootsTags.Items.BEETLE_ARMOR).add(ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_BOOTS.get());
-    this.tag(RootsTags.Items.COPPER_ARMOR).add(ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_HELMET.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
+    this.tag(RootsTags.Items.BEETLE_ARMOR)
+        .add(ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_BOOTS.get());
+    this.tag(RootsTags.Items.COPPER_ARMOR)
+        .add(ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_HELMET.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
     this.tag(RootsTags.Items.ANTLER_ARMOR).add(ModItems.ANTLER_HAT.get());
 
     this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);

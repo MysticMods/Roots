@@ -25,7 +25,8 @@ import java.util.Optional;
 public class SummonCreaturesRecipe extends RootsTileRecipe<PedestalInventoryWrapper, PyreBlockEntity, PyrePedestalCrafting> {
   public static MapCodec<SummonCreaturesRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
       BaseRecipeData.CODEC.fieldOf("data").forGetter((o) -> o.data),
-      BuiltInRegistries.ENTITY_TYPE.byNameCodec().optionalFieldOf("entity").forGetter((o) -> Optional.ofNullable(o.entity))
+      BuiltInRegistries.ENTITY_TYPE.byNameCodec().optionalFieldOf("entity")
+          .forGetter((o) -> Optional.ofNullable(o.entity))
   ).apply(instance, SummonCreaturesRecipe::new));
   public static StreamCodec<RegistryFriendlyByteBuf, SummonCreaturesRecipe> STREAM_CODEC = StreamCodec.composite(
       BaseRecipeData.STREAM_CODEC, o -> o.data,
@@ -42,7 +43,7 @@ public class SummonCreaturesRecipe extends RootsTileRecipe<PedestalInventoryWrap
   }
 
   @Nullable
-  public EntityType<?> getEntity () {
+  public EntityType<?> getEntity() {
     return entity;
   }
 

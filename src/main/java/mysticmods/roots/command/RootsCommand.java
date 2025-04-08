@@ -346,7 +346,8 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.increaseReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.add", player.getDisplayName(), grove.getStyledName(), amount, storage.getRank(grove), storage.getReputation(grove)), false);
+      c.getSource()
+          .sendSuccess(() -> Component.translatable("roots.commands.reputation.add", player.getDisplayName(), grove.getStyledName(), amount, storage.getRank(grove), storage.getReputation(grove)), false);
       return 1;
     }))).then(Commands.literal("remove").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove.usage"), false);
@@ -368,7 +369,8 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.decreaseReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.remove", player.getDisplayName(), grove.getStyledName(), amount, storage.getRank(grove), storage.getReputation(grove)), false);
+      c.getSource()
+          .sendSuccess(() -> Component.translatable("roots.commands.reputation.remove", player.getDisplayName(), grove.getStyledName(), amount, storage.getRank(grove), storage.getReputation(grove)), false);
       return 1;
     }))).then(Commands.literal("set").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set.usage"), false);
@@ -390,7 +392,8 @@ public class RootsCommand {
       int amount = IntegerArgumentType.getInteger(c, "amount");
       storage.setReputation(grove, amount);
       PacketDistributor.sendToPlayer(player, new ClientboundReputationSyncPacket(storage));
-      c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.set", player.getDisplayName(), grove.getStyledName(), storage.getRank(grove), amount), false);
+      c.getSource()
+          .sendSuccess(() -> Component.translatable("roots.commands.reputation.set", player.getDisplayName(), grove.getStyledName(), storage.getRank(grove), amount), false);
       return 1;
     }))))));
     return builder;

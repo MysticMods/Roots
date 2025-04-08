@@ -24,11 +24,11 @@ public class HerbLayer {
 
   public static void updateHerb(Herb herb, double amount) {
     HerbAlert alert = getAlert(herb);
-      alert.setAmount(amount);
-      if (alert.invalid()) {
-        slots.addFirst(alert);
-      }
-      alert.show();
+    alert.setAmount(amount);
+    if (alert.invalid()) {
+      slots.addFirst(alert);
+    }
+    alert.show();
   }
 
   public static HerbAlert getAlert(Herb herb) {

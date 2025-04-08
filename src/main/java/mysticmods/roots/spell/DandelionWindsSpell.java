@@ -35,7 +35,7 @@ public class DandelionWindsSpell extends Spell {
   }
 
   @Override
-  public void buildProperties (List<PropertyHolder<?>> result) {
+  public void buildProperties(List<PropertyHolder<?>> result) {
     super.buildProperties(result);
     result.add(ModSpells.DANDELION_WINDS_DISTANCE);
     result.add(ModSpells.DANDELION_WINDS_RANGE_1);

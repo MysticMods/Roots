@@ -34,7 +34,7 @@ public class FireStormRitual extends Ritual {
         if (meteor == null) {
           return;
         }
-        meteor.setMinimumHeight(pPos.getY()+5);
+        meteor.setMinimumHeight(pPos.getY() + 5);
         meteor.setPos(x, y, z);
         pLevel.addFreshEntity(meteor);
       }

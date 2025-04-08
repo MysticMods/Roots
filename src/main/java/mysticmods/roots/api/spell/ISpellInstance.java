@@ -48,7 +48,7 @@ public interface ISpellInstance extends SpellLike {
     return getSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
   }
 
-  default boolean hasBlockTarget (Player pPlayer) {
+  default boolean hasBlockTarget(Player pPlayer) {
     return getSpell().hasBlockTarget(pPlayer);
   }
 
@@ -58,7 +58,7 @@ public interface ISpellInstance extends SpellLike {
   }
 
   @Nullable
-  default SpellInstanceData getSpellData () {
+  default SpellInstanceData getSpellData() {
     return null;
   }
 

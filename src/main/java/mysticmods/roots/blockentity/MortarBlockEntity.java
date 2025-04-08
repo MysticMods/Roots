@@ -73,7 +73,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     super(ModBlockEntities.MORTAR.get(), pWorldPosition, pBlockState);
   }
 
-  private boolean onlyMortar () {
+  private boolean onlyMortar() {
     if (this.inventory.getStackInSlot(0).is(RootsTags.Items.MORTAR_ACTIVATION)) {
       for (int i = 1; i < this.inventory.getSlots(); i++) {
         if (!this.inventory.getStackInSlot(i).isEmpty()) {

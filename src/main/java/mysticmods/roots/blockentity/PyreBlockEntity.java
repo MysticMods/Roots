@@ -471,7 +471,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     this.revalidateRecipe();
   }
 
-  public void stopRitual () {
+  public void stopRitual() {
     stopRitual(true);
   }
 

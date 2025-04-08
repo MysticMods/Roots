@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class TimeStopSpell extends TwoRadiusSpell{
+public class TimeStopSpell extends TwoRadiusSpell {
   private int duration;
 
   public TimeStopSpell(ChatFormatting color, CostInstance costs) {

@@ -84,11 +84,11 @@ public class SproutEntity extends Animal {
     builder.define(hasGift, false);
   }
 
-  public boolean hasGift () {
+  public boolean hasGift() {
     return this.entityData.get(hasGift);
   }
 
-  public void setHasGift (boolean value) {
+  public void setHasGift(boolean value) {
     this.entityData.set(hasGift, value);
   }
 

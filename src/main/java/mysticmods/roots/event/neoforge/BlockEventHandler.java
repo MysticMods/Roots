@@ -11,10 +11,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-@EventBusSubscriber(modid= RootsAPI.MODID, bus= EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class BlockEventHandler {
   @SubscribeEvent
-  public static void onRightClickBlock (PlayerInteractEvent.RightClickBlock event) {
+  public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
     Player player = event.getEntity();
     InteractionHand hand = event.getHand();
     ItemStack heldItem = player.getItemInHand(hand);

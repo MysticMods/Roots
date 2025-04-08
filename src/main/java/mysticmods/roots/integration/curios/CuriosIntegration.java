@@ -19,11 +19,11 @@ public class CuriosIntegration {
     return getTagged(player, RootsTags.Items.CHARMS);
   }
 
-  public static List<ItemStack> getPouches (Player player) {
+  public static List<ItemStack> getPouches(Player player) {
     return getTagged(player, RootsTags.Items.ALL_POUCHES);
   }
 
-  public static List<ItemStack> getTagged (Player player, TagKey<Item> itemTagKey) {
+  public static List<ItemStack> getTagged(Player player, TagKey<Item> itemTagKey) {
     List<ItemStack> result = new ArrayList<>();
     Optional<ICuriosItemHandler> optHandler = CuriosApi.getCuriosInventory(player);
     if (optHandler.isPresent()) {

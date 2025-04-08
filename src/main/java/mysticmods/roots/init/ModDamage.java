@@ -35,11 +35,11 @@ public class ModDamage {
     return fromEntity(WILDFIRE, direct, indirect);
   }
 
-  public static DamageSource acidCloud (Entity direct) {
+  public static DamageSource acidCloud(Entity direct) {
     return fromEntity(ACID_CLOUD, direct, null);
   }
 
-  public static DamageSource lifeDrain (Entity direct) {
+  public static DamageSource lifeDrain(Entity direct) {
     return fromEntity(LIFE_DRAIN, direct, null);
   }
 

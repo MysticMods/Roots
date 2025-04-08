@@ -441,7 +441,7 @@ public class RootsTags {
       return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
 
-    protected static TagKey<Item> curiosTag (String name) {
+    protected static TagKey<Item> curiosTag(String name) {
       return ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", name));
     }
   }

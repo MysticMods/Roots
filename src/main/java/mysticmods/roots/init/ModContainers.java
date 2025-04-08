@@ -13,7 +13,7 @@ public class ModContainers {
 
   public static final DeferredHolder<MenuType<?>, MenuType<HerbPouchContainer>> HERB_POUCH = REGISTER.register("herb_pouch", () -> new MenuType<>(HerbPouchContainer::new, FeatureFlags.REGISTRY.allFlags()));
 
-  public static void register (IEventBus bus) {
+  public static void register(IEventBus bus) {
     REGISTER.register(bus);
   }
 }

@@ -156,20 +156,20 @@ public class WildfireEntity extends Projectile {
     double d6 = vec3.y;
     double d1 = vec3.z;
     for (int i = 0; i < 8; i++) {
-          level().addParticle(
-              new ColorGravityParticleOptions(
-                  ModParticles.WILDFIRE,
-                  0xe87a21,
-                  0xc10000,
-                  -(this.random.nextFloat() * 0.03f)
-              ),
-              getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
-              getY(),
-              getZ() + (this.random.nextFloat() - 0.5f) * 0.15f,
-              d5,
-              d6,
-              d1
-          );
+      level().addParticle(
+          new ColorGravityParticleOptions(
+              ModParticles.WILDFIRE,
+              0xe87a21,
+              0xc10000,
+              -(this.random.nextFloat() * 0.03f)
+          ),
+          getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
+          getY(),
+          getZ() + (this.random.nextFloat() - 0.5f) * 0.15f,
+          d5,
+          d6,
+          d1
+      );
     }
 
     double d7 = this.getX() + d5;
@@ -271,7 +271,8 @@ public class WildfireEntity extends Projectile {
     super.addAdditionalSaveData(compound);
     compound.putInt("life", this.life);
 
-    SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result().ifPresent(tag -> compound.put("snapshots", tag));
+    SnapshotStorage.CODEC.encodeStart(NbtOps.INSTANCE, this.snapshotStorage).result()
+        .ifPresent(tag -> compound.put("snapshots", tag));
   }
 
   @Override
@@ -279,7 +280,8 @@ public class WildfireEntity extends Projectile {
     super.readAdditionalSaveData(compound);
     this.life = compound.getInt("life");
 
-    this.snapshotStorage = SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result().orElseGet(SnapshotStorage::new);
+    this.snapshotStorage = SnapshotStorage.CODEC.parse(NbtOps.INSTANCE, compound.get("snapshots")).result()
+        .orElseGet(SnapshotStorage::new);
   }
 
   @Override

@@ -27,6 +27,7 @@ public abstract class TaggedPedestalCrafting<T extends BaseBlockEntity> extends 
   public TagKey<Block> getIncludeTag() {
     return includeTag;
   }
+
   public TagKey<Block> getExcludeTag() {
     return excludeTag;
   }

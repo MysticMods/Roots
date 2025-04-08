@@ -72,7 +72,7 @@ public class HarvestUtil {
     list.add(entry);
   }
 
-  public static boolean capture (ItemEntity entity) {
+  public static boolean capture(ItemEntity entity) {
     if (capturingDrops) {
       capturedDrops.add(entity);
       return true;

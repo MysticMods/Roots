@@ -46,7 +46,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
   }
 
   @Override
-  public void buildProperties (List<PropertyHolder<?>> properties) {
+  public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModSpells.ACID_CLOUD_DAMAGE);
     properties.add(ModSpells.ACID_CLOUD_COUNT);

@@ -49,7 +49,7 @@ public class TooltipUtil {
     spellCostTooltip(context, result, spell, flag);
   }
 
-  public static void spellDataTooltip (Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
+  public static void spellDataTooltip(Item.TooltipContext context, List<Component> result, ISpellInstance instance, TooltipFlag flag) {
     Spell spell = instance.getSpell();
     Set<String> keys = instance.getSpell().getTooltipDataKeys();
 /*    if (!keys.isEmpty()) {
@@ -61,7 +61,7 @@ public class TooltipUtil {
       Component keyC = Component.translatable(spell.getOrCreateDescriptionId() + ".data." + key + ".name");
       Component valC;
       if (index == 0) {
-        valC = Component.translatable(spell.getOrCreateDescriptionId() +".data." + spell.getDataKey(spell.getDataValue(instance, key)) + ".name");
+        valC = Component.translatable(spell.getOrCreateDescriptionId() + ".data." + spell.getDataKey(spell.getDataValue(instance, key)) + ".name");
       } else {
         valC = Component.literal(String.valueOf(Math.max(1, spell.getDataValue(instance, key))));
       }

@@ -20,7 +20,8 @@ import java.util.Set;
 
 public record ForagingRandomChanceCondition(NumberProvider chance) implements LootItemCondition {
   public static final MapCodec<ForagingRandomChanceCondition> CODEC = RecordCodecBuilder.mapCodec(
-      p_344719_ -> p_344719_.group(NumberProviders.CODEC.fieldOf("chance").forGetter(ForagingRandomChanceCondition::chance))
+      p_344719_ -> p_344719_.group(NumberProviders.CODEC.fieldOf("chance")
+              .forGetter(ForagingRandomChanceCondition::chance))
           .apply(p_344719_, ForagingRandomChanceCondition::new)
   );
 

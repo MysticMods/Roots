@@ -35,7 +35,7 @@ public class SaturateSpell extends Spell {
   }
 
   @Override
-  public void buildProperties (List<PropertyHolder<?>> result) {
+  public void buildProperties(List<PropertyHolder<?>> result) {
     super.buildProperties(result);
     result.add(ModSpells.SATURATE_FOOD_MULTIPLIER);
     result.add(ModSpells.SATURATE_SATURATION_MULTIPLIER);

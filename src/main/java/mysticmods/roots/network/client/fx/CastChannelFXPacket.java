@@ -13,7 +13,8 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record CastChannelFXPacket(Spell spell, int casterId, Vec3 casterPosition, Vec3 targetPosition, int ticks) implements IRootsPacket {
+public record CastChannelFXPacket(Spell spell, int casterId, Vec3 casterPosition, Vec3 targetPosition,
+                                  int ticks) implements IRootsPacket {
   public static final CustomPacketPayload.Type<CastChannelFXPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_fx/channel"));
   public static final StreamCodec<RegistryFriendlyByteBuf, CastChannelFXPacket> CODEC = StreamCodec.composite(
       ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), CastChannelFXPacket::spell,
