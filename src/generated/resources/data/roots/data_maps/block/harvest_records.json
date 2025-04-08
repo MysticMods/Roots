@@ -120,12 +120,12 @@
       "maximumAge": 3,
       "seedItem": "minecraft:sweet_berries"
     },
-    "minecraft:torchflower_crop": {
+    "minecraft:torchflower": {
       "ageProperty": {
         "ageProperty": "age"
       },
-      "canHarvestFunction": "roots:single_crop_age",
-      "cropBlock": "minecraft:torchflower_crop",
+      "canHarvestFunction": "roots:safe_harvest_farmland",
+      "cropBlock": "minecraft:torchflower",
       "harvestFunction": "roots:harvest_single_crop_block",
       "maximumAge": 2
     },

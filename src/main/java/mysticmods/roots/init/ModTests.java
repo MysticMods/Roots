@@ -64,6 +64,7 @@ public class ModTests {
   public static final DeferredHolder<CanHarvestFunction, CanHarvestGlowBerries> CAN_HARVEST_GLOW_BERRIES = CAN_HARVEST_FUNCTIONS.register("can_harvest_glow_berries", CanHarvestGlowBerries::new);
 
   public static final DeferredHolder<CanHarvestFunction, CanHarvestStemBlock> CAN_HARVEST_STEM_BLOCK = CAN_HARVEST_FUNCTIONS.register("can_harvest_stem_block", CanHarvestStemBlock::new);
+  public static final DeferredHolder<CanHarvestFunction, CanHarvestOnFarmland> CAN_SAFE_HARVEST_FARMLAND = CAN_HARVEST_FUNCTIONS.register("safe_harvest_farmland", CanHarvestOnFarmland::new);
 
   public static final DeferredHolder<HarvestFunction, HarvestAllAboveSameBlock> HARVEST_ALL_ABOVE_SAME_BLOCK = HARVEST_FUNCTIONS.register("harvest_all_above_same_block", HarvestAllAboveSameBlock::new);
   public static final DeferredHolder<HarvestFunction, HarvestBreakSingleBlock> HARVEST_BREAK_SINGLE_BLOCK = HARVEST_FUNCTIONS.register("harvest_break_single_block", HarvestBreakSingleBlock::new);

@@ -212,6 +212,8 @@ public class RootsTags {
 
     public static final TagKey<Block> UNDERWATER_FARMLAND = modTag("underwater_farmland");
 
+    public static final TagKey<Block> FARMLANDS = compatTag("farmlands");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
