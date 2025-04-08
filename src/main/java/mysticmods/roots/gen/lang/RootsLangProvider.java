@@ -180,6 +180,7 @@ public class RootsLangProvider extends LanguageProvider {
             add(o.getValue().getDescriptionId() + ".data.mode." + n, "Modifying: " + toEnglishName(n));
             // TODO: Value -> name
             add(o.getValue().getDescriptionId() + ".data." + n, "Set " + toEnglishName(n) + " to %s");
+            add(o.getValue().getDescriptionId() + ".data." + n + ".name", toEnglishName(n));
           }
         }
     );

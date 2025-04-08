@@ -58,14 +58,12 @@ public class TooltipUtil {
     for (String key : keys) {
       int index = spell.getDataIndex(key);
       // TODO: Clean this up
-      Component keyC = Component.translatable(spell.getOrCreateDescriptionId() + ".data." + key);
+      Component keyC = Component.translatable(spell.getOrCreateDescriptionId() + ".data." + key + ".name");
       Component valC;
       if (index == 0) {
-        keyC = Component.literal("Mode");
-        valC = Component.literal(spell.getDataKey(spell.getDataValue(instance, key)));
+        valC = Component.translatable(spell.getOrCreateDescriptionId() +".data." + spell.getDataKey(spell.getDataValue(instance, key)) + ".name");
       } else {
-        keyC = Component.literal(key);
-        valC = Component.literal(String.valueOf(spell.getDataValue(instance, key)));
+        valC = Component.literal(String.valueOf(Math.max(1, spell.getDataValue(instance, key))));
       }
       result.add(Component.translatable("roots.tooltip.staff.data", keyC, valC));
     }
