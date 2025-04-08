@@ -39,7 +39,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       AABB bounds = pBlockEntity.getCurrentRitual().getAABB();
       pPoseStack.pushPose();
       BlockPos position = pBlockEntity.getBlockPos();
-      VoxelShape pShape = Shapes.create(bounds.move(-position.getX(), -position.getY(), -position.getZ()));
+      VoxelShape pShape = Shapes.create(bounds); //.move(-position.getX(), -position.getY(), -position.getZ()));
       VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
       PoseStack.Pose pose = pPoseStack.last();
 
