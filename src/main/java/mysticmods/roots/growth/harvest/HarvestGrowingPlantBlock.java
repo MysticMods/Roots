@@ -23,29 +23,29 @@ public record HarvestGrowingPlantBlock () implements HarvestFunction {
     }
 
     Direction dir = ((AccessorMixinGrowingPlantBlock) growing).rootsGetGrowthDirection();
-    BlockPos abovePos = pos.relative(dir);
-    BlockState aboveState = level.getBlockState(abovePos);
-    if (!aboveState.is(state.getBlock())) {
+    BlockPos relativePos = pos.relative(dir);
+    BlockState relativeState = level.getBlockState(relativePos);
+    if (!relativeState.is(state.getBlock())) {
       return;
     }
 
-    BlockPos newAbovePos = abovePos;
-    while (aboveState.is(state.getBlock())) {
-      newAbovePos = newAbovePos.relative(dir);
-      aboveState = level.getBlockState(newAbovePos);
+    BlockPos newRelativePos = relativePos;
+    while (relativeState.is(state.getBlock())) {
+      newRelativePos = newRelativePos.relative(dir);
+      relativeState = level.getBlockState(newRelativePos);
     }
 
-    newAbovePos = newAbovePos.relative(dir.getOpposite());
-    BlockPos.MutableBlockPos mPos = newAbovePos.mutable();
+    newRelativePos = newRelativePos.relative(dir.getOpposite());
+    BlockPos.MutableBlockPos mPos = newRelativePos.mutable();
     if (dir == Direction.UP) {
-      for (int y = newAbovePos.getY(); y > pos.getY(); y--) {
-        mPos.set(newAbovePos.getX(), y, newAbovePos.getZ());
+      for (int y = newRelativePos.getY(); y > pos.getY(); y--) {
+        mPos.set(newRelativePos.getX(), y, newRelativePos.getZ());
         HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(mPos, level.dimension()));
         level.destroyBlock(mPos, true, entity);
       }
     } else if (dir == Direction.DOWN) {
-      for (int y = pos.getY(); y < newAbovePos.getY(); y++) {
-        mPos.set(newAbovePos.getX(), y, newAbovePos.getZ());
+      for (int y = newRelativePos.getY(); y < pos.getY(); y++) {
+        mPos.set(newRelativePos.getX(), y, newRelativePos.getZ());
         HarvestUtil.adjustOrCapture(new HarvestUtil.DropStuff(mPos, level.dimension()));
         level.destroyBlock(mPos, true, entity);
       }

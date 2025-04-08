@@ -60,6 +60,7 @@ public class ModTests {
   public static final DeferredHolder<CanHarvestFunction, CanHarvestLowestBlock> CAN_HARVEST_LOWEST = CAN_HARVEST_FUNCTIONS.register("can_harvest_lowest_block", CanHarvestLowestBlock::new);
 
   public static final DeferredHolder<CanHarvestFunction, CanHarvestTwoBlockPlantAge> CAN_HARVEST_TWO_BLOCK_PLANT_AGE = CAN_HARVEST_FUNCTIONS.register("can_harvest_two_block_plant_age", CanHarvestTwoBlockPlantAge::new);
+  public static final DeferredHolder<CanHarvestFunction, CanHarvestGrowingPlantBlock> CAN_HARVEST_GROWING_PLANT_BLOCK = CAN_HARVEST_FUNCTIONS.register("can_harvest_growing_plant_block", CanHarvestGrowingPlantBlock::new);
 
   public static final DeferredHolder<CanHarvestFunction, CanHarvestStemBlock> CAN_HARVEST_STEM_BLOCK = CAN_HARVEST_FUNCTIONS.register("can_harvest_stem_block", CanHarvestStemBlock::new);
 
@@ -68,6 +69,7 @@ public class ModTests {
   public static final DeferredHolder<HarvestFunction, HarvestCropAndAbove> HARVEST_CROP_AND_ABOVE = HARVEST_FUNCTIONS.register("harvest_crop_and_above", HarvestCropAndAbove::new);
   public static final DeferredHolder<HarvestFunction, HarvestSingleCropBlock> HARVEST_SINGLE_CROP_BLOCK = HARVEST_FUNCTIONS.register("harvest_single_crop_block", HarvestSingleCropBlock::new);
   public static final DeferredHolder<HarvestFunction, HarvestGrowingPlantBlock> HARVEST_GROWING_PLANT_BLOCK = HARVEST_FUNCTIONS.register("harvest_growing_plant_block", HarvestGrowingPlantBlock::new);
+  public static final DeferredHolder<HarvestFunction, HarvestSweetBerries> HARVEST_SWEET_BERRIES = HARVEST_FUNCTIONS.register("harvest_sweet_berries", HarvestSweetBerries::new);
 
   public static void register(IEventBus bus) {
     ENTITY_TESTS.register(bus);

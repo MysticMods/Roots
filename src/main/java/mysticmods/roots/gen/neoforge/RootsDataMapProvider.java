@@ -331,6 +331,7 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     // Kelp block
     builder15.add(Blocks.KELP.builtInRegistryHolder(), new GrowthRecord(Blocks.KELP, Optional.of(KelpBlock.AGE), KelpBlock.MAX_AGE, 1, ModTests.KELP_CAN_GROW.get(), ModTests.ANY_LIGHT.get()), false);
+    builder16.add(Blocks.KELP_PLANT.builtInRegistryHolder(), new HarvestRecord(Blocks.KELP_PLANT, Optional.empty(), Optional.of(KelpBlock.AGE), KelpBlock.MAX_AGE, ModTests.CAN_HARVEST_GROWING_PLANT_BLOCK.get(), ModTests.HARVEST_GROWING_PLANT_BLOCK.get()), false);
 
     // TODO: Custom harvest
 
@@ -360,10 +361,13 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder15.add(Blocks.PUMPKIN_STEM.builtInRegistryHolder(), new GrowthRecord(Blocks.PUMPKIN_STEM, Optional.of(StemBlock.AGE), StemBlock.MAX_AGE, AGE_SEVEN_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
 
     builder15.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new GrowthRecord(Blocks.SWEET_BERRY_BUSH, Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, AGE_THREE_TICKS, ModTests.ALWAYS_CAN_GROW.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false);
-    builder16.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new HarvestRecord(Blocks.SWEET_BERRY_BUSH, Optional.of(Items.SWEET_BERRIES), Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.HARVEST_SINGLE_CROP_BLOCK.get()), false);
+    builder16.add(Blocks.SWEET_BERRY_BUSH.builtInRegistryHolder(), new HarvestRecord(Blocks.SWEET_BERRY_BUSH, Optional.of(Items.SWEET_BERRIES), Optional.of(SweetBerryBushBlock.AGE), SweetBerryBushBlock.MAX_AGE, ModTests.SINGLE_CROP_AGE.get(), ModTests.HARVEST_SWEET_BERRIES.get()), false);
 
     builder15.add(Blocks.TWISTING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.TWISTING_VINES, Optional.of(TwistingVinesBlock.AGE), TwistingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW_UP.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false); // Harvest: all above but base
+    builder16.add(Blocks.TWISTING_VINES_PLANT.builtInRegistryHolder(), new HarvestRecord(Blocks.TWISTING_VINES_PLANT, Optional.empty(), Optional.of(TwistingVinesBlock.AGE), TwistingVinesBlock.MAX_AGE, ModTests.CAN_HARVEST_GROWING_PLANT_BLOCK.get(), ModTests.HARVEST_GROWING_PLANT_BLOCK.get()), false);
+
     builder15.add(Blocks.WEEPING_VINES.builtInRegistryHolder(), new GrowthRecord(Blocks.WEEPING_VINES, Optional.of(WeepingVinesBlock.AGE), WeepingVinesBlock.MAX_AGE, 2, ModTests.AGE_CAN_GROW_DOWN.get(), ModTests.LIGHT_ABOVE_EIGHT.get()), false); // Harvest: all below but top
+    builder16.add(Blocks.WEEPING_VINES_PLANT.builtInRegistryHolder(), new HarvestRecord(Blocks.WEEPING_VINES_PLANT, Optional.empty(), Optional.of(WeepingVinesBlock.AGE), WeepingVinesBlock.MAX_AGE, ModTests.CAN_HARVEST_GROWING_PLANT_BLOCK.get(), ModTests.HARVEST_GROWING_PLANT_BLOCK.get()), false);
 
 
     builder15.add(Blocks.VINE.builtInRegistryHolder(), new GrowthRecord(Blocks.VINE, Optional.empty(), -1, 2, ModTests.VINES_CAN_SPREAD.get(), ModTests.ANY_LIGHT.get()), false);

@@ -44,6 +44,15 @@
       "maximumAge": 2,
       "seedItem": "minecraft:cocoa_beans"
     },
+    "minecraft:kelp_plant": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canHarvestFunction": "roots:can_harvest_growing_plant_block",
+      "cropBlock": "minecraft:kelp_plant",
+      "harvestFunction": "roots:harvest_growing_plant_block",
+      "maximumAge": 25
+    },
     "minecraft:melon": {
       "ageProperty": {},
       "canHarvestFunction": "roots:can_harvest_stem_block",
@@ -100,7 +109,7 @@
       },
       "canHarvestFunction": "roots:single_crop_age",
       "cropBlock": "minecraft:sweet_berry_bush",
-      "harvestFunction": "roots:harvest_single_crop_block",
+      "harvestFunction": "roots:harvest_sweet_berries",
       "maximumAge": 3,
       "seedItem": "minecraft:sweet_berries"
     },
@@ -112,6 +121,24 @@
       "cropBlock": "minecraft:torchflower_crop",
       "harvestFunction": "roots:harvest_single_crop_block",
       "maximumAge": 2
+    },
+    "minecraft:twisting_vines_plant": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canHarvestFunction": "roots:can_harvest_growing_plant_block",
+      "cropBlock": "minecraft:twisting_vines_plant",
+      "harvestFunction": "roots:harvest_growing_plant_block",
+      "maximumAge": 25
+    },
+    "minecraft:weeping_vines_plant": {
+      "ageProperty": {
+        "ageProperty": "age"
+      },
+      "canHarvestFunction": "roots:can_harvest_growing_plant_block",
+      "cropBlock": "minecraft:weeping_vines_plant",
+      "harvestFunction": "roots:harvest_growing_plant_block",
+      "maximumAge": 25
     },
     "minecraft:wheat": {
       "ageProperty": {
