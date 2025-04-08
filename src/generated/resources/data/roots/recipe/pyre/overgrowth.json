@@ -19,7 +19,7 @@
       }
     ],
     "levelConditions": [
-      "roots:water_source"
+      "roots:overgrowth"
     ],
     "priority": 0
   },
