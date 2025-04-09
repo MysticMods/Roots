@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-07T18:54:26.7171037	Roots Item Tags
+// 1.21.1	2025-04-09T14:53:16.1188044	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -165,6 +165,7 @@ be4cfc54cdf3ab97d153428240e1e941a7375e78 data/roots/tags/item/pyres.json
 ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/item/pyre_activation.json
 0181a639f41b0ab0d567c1e41fe790b23cefebce data/roots/tags/item/ritual/blooming/eligible_flowers.json
 aec04f51c04443c2e39f8137830a11be1ef0e9a1 data/roots/tags/item/ritual/blooming/eligible_pedestal_flowers.json
+ed812d11a070d92ca88d1d889a167aa4dcda4159 data/roots/tags/item/rotten_flesh.json
 55bed570a04ad9cf0548ee9d75e129d42ca7dc99 data/roots/tags/item/runed_log_herbs.json
 b3f0d68ad05349c00594d33d8d0832643f45d54d data/roots/tags/item/runed_obsidian.json
 a7ef113d913fd7247a2d2351669ffe371d25ed46 data/roots/tags/item/runestone.json

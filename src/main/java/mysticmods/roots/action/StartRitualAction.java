@@ -31,7 +31,9 @@ public class StartRitualAction implements GroveAction {
 
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
-      if (type == GroveReputationEntry.SubEntryType.RITUAL) {
+      if (type == GroveReputationEntry.SubEntryType.EXACT_RITUAL) {
+        return this.ritual.getRitual().builtInRegistryHolder().getKey().location().equals(tag);
+      } else if (type == GroveReputationEntry.SubEntryType.RITUAL) {
         return this.ritual().getRitual().is(tag);
       }
       return false;

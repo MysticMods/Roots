@@ -318,6 +318,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
         .add(ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_HELMET.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
     this.tag(RootsTags.Items.ANTLER_ARMOR).add(ModItems.ANTLER_HAT.get());
 
+    this.tag(RootsTags.Items.ROTTEN_FLESH).add(Items.ROTTEN_FLESH);
+
     this.copy(RootsTags.Blocks.QUARTZ_ORE, RootsTags.Items.QUARTZ_ORE);
     this.copy(RootsTags.Blocks.ELEMENTAL_CROPS, RootsTags.Items.ELEMENTAL_CROPS);
     this.copy(RootsTags.Blocks.WATER_CROPS, RootsTags.Items.WATER_CROPS);

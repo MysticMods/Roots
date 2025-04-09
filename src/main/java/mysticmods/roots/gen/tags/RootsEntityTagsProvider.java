@@ -146,6 +146,12 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
         .add(EntityType.HORSE, EntityType.MULE, EntityType.DONKEY, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.LLAMA, EntityType.TRADER_LLAMA, EntityType.CAMEL);
     this.tag(RootsTags.Entities.ALLOW_CASTING_TOOL_RIGHT_CLICK);
     this.tag(RootsTags.Entities.ADD_TENTACLE_LOOT).add(EntityType.SQUID, EntityType.GLOW_SQUID);
+
+    this.tag(RootsTags.Entities.WITHERS).add(EntityType.WITHER);
+    this.tag(RootsTags.Entities.DRAGONS).add(EntityType.ENDER_DRAGON);
+    this.tag(RootsTags.Entities.TRADERS).add(EntityType.PIGLIN, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.ZOMBIE_VILLAGER);
+    this.tag(RootsTags.Entities.UNDEAD).add(EntityType.ZOMBIE_VILLAGER, EntityType.ZOMBIE, EntityType.ZOMBIE_HORSE, EntityType.ZOMBIFIED_PIGLIN, EntityType.SKELETON, EntityType.SKELETON_HORSE, EntityType.WITHER_SKELETON, EntityType.BOGGED, EntityType.STRAY, EntityType.WITHER, EntityType.HUSK, EntityType.ZOGLIN);
+    this.tag(RootsTags.Entities.SPROUTS).add(ModEntities.GREEN_SPROUT.get(), ModEntities.SNOW_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.TAN_SPROUT.get(), ModEntities.RED_SPROUT.get());
   }
 
   @Override

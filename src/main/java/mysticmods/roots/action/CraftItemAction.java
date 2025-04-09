@@ -33,6 +33,8 @@ public class CraftItemAction implements GroveAction {
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       if (type == GroveReputationEntry.SubEntryType.ITEM) {
         return this.item().is(TagKey.create(Registries.ITEM, tag));
+      } else if (type == GroveReputationEntry.SubEntryType.EXACT_ITEM) {
+        return this.item().getItemHolder().is(tag);
       }
 
       return false;

@@ -49,7 +49,9 @@ public class SpellCastAction implements GroveAction {
 
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
-      if (type == GroveReputationEntry.SubEntryType.SPELL) {
+      if (type == GroveReputationEntry.SubEntryType.EXACT_SPELL) {
+        return this.spell().getSpell().builtInRegistryHolder().getKey().location().equals(tag);
+      } else if (type == GroveReputationEntry.SubEntryType.SPELL) {
         return this.spell().getSpell().is(TagKey.create(RootsRegistries.Keys.SPELLS, tag));
       }
       return false;

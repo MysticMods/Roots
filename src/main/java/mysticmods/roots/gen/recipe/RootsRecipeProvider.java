@@ -70,22 +70,10 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_herb", has(RootsTags.Items.RUNESTONE_HERBS))
         .save(c, RootsAPI.rl("runestone_simple_crafting"));
 
-    // Grove Recipe builder
-
     ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE.get())
         .requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.GROVE_MOSS_CROP)
         .unlockedBy("has_grove_moss", has(RootsTags.Items.GROVE_MOSS_CROP))
         .save(c, RootsAPI.rl("mossy_runestone_from_runestone_grove_moss"));
-
-/*    ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_RUNESTONE.get())
-        .pattern("VVV")
-        .pattern("VSV")
-        .pattern("VVV")
-        .define('S', RootsTags.Items.RUNESTONE)
-        // TODO: Tag-ify
-        .define('V', Ingredient.of(Items.VINE))
-        .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
-        .save(c, RootsAPI.rl("mossy_runestone_from_runestone_vine"));*/
 
     ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RUNESTONE.get(), 4)
         .pattern("XX")
