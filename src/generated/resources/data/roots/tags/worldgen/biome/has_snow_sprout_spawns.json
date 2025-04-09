@@ -2,6 +2,9 @@
   "values": [
     "#minecraft:is_taiga",
     "#c:is_cold/overworld",
-    "#c:is_icy"
+    "#c:is_icy",
+    "#minecraft:has_structure/village_snowy",
+    "#c:is_snowy",
+    "#c:is_snowy_plains"
   ]
 }

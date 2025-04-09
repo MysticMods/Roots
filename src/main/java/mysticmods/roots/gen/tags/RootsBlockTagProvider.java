@@ -228,6 +228,10 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.GROWTH_BLACKLIST);
     this.tag(RootsTags.Blocks.GROWTH_REDUCE);
 
+    this.tag(RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN).add(Blocks.NETHERRACK, Blocks.NETHER_BRICKS, Blocks.RED_NETHER_BRICKS, Blocks.MAGMA_BLOCK, Blocks.OBSIDIAN, Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM);
+    this.tag(RootsTags.Blocks.SUPPORTS_MELODY_SPROUT_SPAWN).add(Blocks.END_STONE, Blocks.PURPUR_BLOCK);
+    this.tag(RootsTags.Blocks.SUPPORTS_SNOW_SPROUT_SPAWN).add(Blocks.SNOW, Blocks.SNOW_BLOCK, Blocks.ICE, Blocks.PACKED_ICE, Blocks.BLUE_ICE, Blocks.FROSTED_ICE);
+
     // TODO: CHECK
     this.tag(RootsTags.Blocks.SUPPORTS_STONEPETAL).addTag(BlockTags.STONE_ORE_REPLACEABLES).addTag(Tags.Blocks.GRAVELS);
     this.tag(RootsTags.Blocks.SUPPORTS_WILD_AUBERGINE).addTag(BlockTags.DIRT);

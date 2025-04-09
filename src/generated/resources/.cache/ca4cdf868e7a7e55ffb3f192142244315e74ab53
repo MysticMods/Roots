@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-09T15:36:32.0976409	Roots Biome Tags
+// 1.21.1	2025-04-09T18:07:50.494793	Roots Biome Tags
 925592c1ead4fb2c26b64a11317cb7f88f5d3356 data/roots/tags/worldgen/biome/has_barrow_structure.json
 d06f3747c607f63a0bc9f5931892c0d30093b386 data/roots/tags/worldgen/biome/has_beetle_spawns.json
 df4ed4b9b3bc0681a49bd1ad5c34faeb6323b2b7 data/roots/tags/worldgen/biome/has_deer_spawns.json
@@ -11,7 +11,7 @@ b020f6cdcd2d955793278b2f89a178a1d31e599a data/roots/tags/worldgen/biome/has_hang
 2848fd21678020e480817af24906cc7471b13118 data/roots/tags/worldgen/biome/has_melody_sprout_spawns.json
 2de3465c0bf03f321d78c27a07eeb8d752295b4a data/roots/tags/worldgen/biome/has_owl_spawns.json
 5a2931ef953e5514fb6f73eedec6ae10a3fbeb2c data/roots/tags/worldgen/biome/has_silver_ores.json
-653d71192dae58d031875d37ff3f9490ac0e0c2b data/roots/tags/worldgen/biome/has_snow_sprout_spawns.json
+4e714b9871eb5031392807d5cd53f77b3c8cfb02 data/roots/tags/worldgen/biome/has_snow_sprout_spawns.json
 58edb172cc0eba5bf109c20203bf0b1b0af8cf8d data/roots/tags/worldgen/biome/has_sparse_wild_roots.json
 3ec50ede509d4298dd9b80457da8379b39365454 data/roots/tags/worldgen/biome/has_sprout_spawns.json
 925592c1ead4fb2c26b64a11317cb7f88f5d3356 data/roots/tags/worldgen/biome/has_standing_stones.json

@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-08T16:06:40.8370744	Roots Block Tags
+// 1.21.1	2025-04-09T18:00:57.1180408	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -158,7 +158,10 @@ b0b78e0b5a383fc7dd5123f288ef32aed5d67184 data/roots/tags/block/soil_eligible_cro
 05bb766c4ed71aacf3743262f41dd663aa45fbff data/roots/tags/block/spreading_mushrooms.json
 5f4f84c327055a94b7f900b7819bd4239b8d550b data/roots/tags/block/standing_stone_crops.json
 32842e85b35f5a10c0039fa17fefcebee22ad159 data/roots/tags/block/stonepetal.json
+e06dd835d3feaf113f412d48c994a18110a96659 data/roots/tags/block/supports_hell_sprout_spawn.json
 b147fcff5c0b4d72df1cb7809b063b2562180832 data/roots/tags/block/supports_manging_moss.json
+cf963fc8c19ce3e222afb761b1695d7bd2dae840 data/roots/tags/block/supports_melody_sprout_spawn.json
+8c980550ff8f1d83143b1e663d4cf4de40225507 data/roots/tags/block/supports_snow_sprout_spawn.json
 dbcf6062890fdc753f15738749733d1f2d8d2c8f data/roots/tags/block/supports_stonepetal.json
 69c396cb051bbe9a130e6979b67065e5041b179d data/roots/tags/block/supports_wild_aubergine.json
 8e754dfb87a88a938678560a373f5788d297921f data/roots/tags/block/supports_wild_roots.json

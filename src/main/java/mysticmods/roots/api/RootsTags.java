@@ -167,6 +167,8 @@ public class RootsTags {
 
     // TODO: Hell sprouts aren't currently active
     public static final TagKey<Block> SUPPORTS_HELL_SPROUT_SPAWN = modTag("supports_hell_sprout_spawn");
+    public static final TagKey<Block> SUPPORTS_MELODY_SPROUT_SPAWN = modTag("supports_melody_sprout_spawn");
+    public static final TagKey<Block> SUPPORTS_SNOW_SPROUT_SPAWN = modTag("supports_snow_sprout_spawn");
     public static final TagKey<Block> BAFFLECAP_CONVERSION = modTag("converts_to_bafflecap");
 
 
@@ -507,6 +509,10 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> TRADERS = modTag("traders");
     public static final TagKey<EntityType<?>> UNDEAD = modTag("undead");
     public static final TagKey<EntityType<?>> SPROUTS = modTag("sprouts");
+
+    public static final TagKey<EntityType<?>> END_ANIMALS = modTag("end_animals");
+    public static final TagKey<EntityType<?>> SNOW_ANIMALS = modTag("snow_animals");
+    public static final TagKey<EntityType<?>> HELL_ANIMALS = modTag("hell_animals");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

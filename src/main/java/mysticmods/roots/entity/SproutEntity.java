@@ -5,6 +5,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.util.ItemUtil;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
@@ -15,12 +16,16 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -30,7 +35,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
 
@@ -162,5 +172,41 @@ public class SproutEntity extends Animal {
   public void readAdditionalSaveData(CompoundTag compound) {
     super.readAdditionalSaveData(compound);
     this.setHasGift(compound.getBoolean("hasGift"));
+  }
+
+  @Override
+  public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+    TagKey<Block> blockTag = null;
+    if (this.getType().is(RootsTags.Entities.END_ANIMALS)) {
+      blockTag = RootsTags.Blocks.SUPPORTS_MELODY_SPROUT_SPAWN;
+    } else if (this.getType().is(RootsTags.Entities.SNOW_ANIMALS)) {
+      blockTag = RootsTags.Blocks.SUPPORTS_SNOW_SPROUT_SPAWN;
+    } else if (this.getType().is(RootsTags.Entities.HELL_ANIMALS)) {
+      blockTag = RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN;
+    }
+    if (blockTag == null) {
+      return level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) ? 10.0F : level.getPathfindingCostFromLightLevels(pos);
+    } else {
+      return level.getBlockState(pos.below()).is(blockTag) ? 10.0f : level.getPathfindingCostFromLightLevels(pos);
+    }
+  }
+
+  public static boolean checkMelodySpawnRule (
+      EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random
+  ) {
+    return level.getBlockState(pos.below()).is(RootsTags.Blocks.SUPPORTS_MELODY_SPROUT_SPAWN);
+  }
+
+  public static boolean checkHellSpawnRule (
+      EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random
+  ) {
+    return level.getBlockState(pos.below()).is(RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN);
+  }
+
+  public static boolean checkSnowSpawnRule (
+      EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random
+  ) {
+    boolean flag = MobSpawnType.ignoresLightRequirements(spawnType) || isBrightEnoughToSpawn(level, pos);
+    return level.getBlockState(pos.below()).is(RootsTags.Blocks.SUPPORTS_SNOW_SPROUT_SPAWN) && flag;
   }
 }
