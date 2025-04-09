@@ -1,5 +1,9 @@
 package mysticmods.roots.ritual;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
@@ -11,6 +15,7 @@ import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.mixin.accessor.AccessorMixinLootTable;
+import mysticmods.roots.network.client.fx.AnimalHarvestFXPacket;
 import mysticmods.roots.util.FakePlayerUtil;
 import mysticmods.roots.util.ItemUtil;
 import mysticmods.roots.util.RitualPositionCache;
@@ -39,6 +44,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,6 +62,7 @@ public class AnimalHarvestRitual extends Ritual {
   public void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     FakePlayerUtil.buildItems(pLevel, randomSource);
 
+    IntSet marked = new IntOpenHashSet();
     if (duration % getInterval() == 0) {
       List<LivingEntity> entities = blockEntity.getLevel()
           .getEntitiesOfClass(LivingEntity.class, getAABB().move(blockEntity.getBlockPos()), EntitySelector.NO_SPECTATORS.and(Entity::isAlive)
@@ -65,15 +72,17 @@ public class AnimalHarvestRitual extends Ritual {
         return;
       }
       for (int i = 0; i < count; i++) {
-        if (entities.isEmpty()) {
-          break;
-        }
-        LivingEntity entity = entities.remove(blockEntity.getRandom().nextInt(entities.size()));
-        for (ItemStack stack : getDrops(entity, randomSource)) {
-          ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), entity.blockPosition(), stack);
-        }
-        if (glowDuration > 0) {
-          entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
+        LivingEntity entity = entities.get(blockEntity.getRandom().nextInt(entities.size()));
+        List<ItemStack> result = getDrops(entity, randomSource);
+        if (!result.isEmpty()) {
+          for (ItemStack stack : result) {
+            ItemUtil.Spawn.spawnItem(blockEntity.getLevel(), entity.blockPosition(), stack);
+          }
+          if (glowDuration > 0) {
+            entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
+          }
+          AnimalHarvestFXPacket packet = new AnimalHarvestFXPacket(entity.getId());
+          PacketDistributor.sendToPlayersTrackingEntity(entity, packet);
         }
       }
     }

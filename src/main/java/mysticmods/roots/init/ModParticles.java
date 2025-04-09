@@ -23,6 +23,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> FEY_LIGHT = PARTICLES.register("fey_light", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> WILDFIRE = PARTICLES.register("wildfire", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> GROWTH = PARTICLES.register("growth", () -> new ColorGravityParticleType(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> ANIMAL_HARVEST = PARTICLES.register("animal_harvest", () -> new ColorGravityParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> CHANNEL_TARGET = PARTICLES.register("channel_target", () -> new ColorGravityParticleType(false));
 
   public static void register(IEventBus bus) {

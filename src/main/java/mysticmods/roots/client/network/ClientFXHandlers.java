@@ -9,11 +9,52 @@ import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class ClientFXHandlers {
+  public static void animalHarvest(int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    RandomSource random = minecraft.level.random;
+    if (entity != null) {
+      int col2 = 0xb764c2;
+      int col1 = 0xf9a0ee;
+
+      double size = (entity.getBbHeight() + entity.getBbWidth()) / 4;
+
+      for (int i = 0; i < 40; i++) {
+
+        double angle = random.nextDouble() * 2 * Math.PI; // 0 to 360 degrees
+        double radius = random.nextDouble() * 0.2 * size * 0.5; // scale outward spread by entity size
+
+        double xSpeed = Math.cos(angle) * radius;
+        double zSpeed = Math.sin(angle) * radius;
+
+        double ySpeed = 0.08 + random.nextDouble() * 0.04 + (size * 0.02); // upward bias scaled by size
+
+        // Emit near top of entity, scaled by height
+        double yOffset = entity.getY() + entity.getBbHeight() * (0.8 + random.nextDouble() * 0.2);
+        minecraft.level.addParticle(
+            new ColorGravityParticleOptions(
+                ModParticles.ANIMAL_HARVEST,
+                col1,
+                col2,
+                0f
+            ),
+            entity.getX(),
+            yOffset,
+            entity.getZ(),
+            xSpeed,
+            ySpeed,
+            zSpeed
+        );
+      }
+    }
+  }
+
   public static void castChannel(Spell spell, int casterId, Vec3 start, Vec3 stop, int ticks) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);

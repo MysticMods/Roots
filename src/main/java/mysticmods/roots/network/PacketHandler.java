@@ -1,10 +1,7 @@
 package mysticmods.roots.network;
 
 import mysticmods.roots.network.client.*;
-import mysticmods.roots.network.client.fx.AlertnessFXPacket;
-import mysticmods.roots.network.client.fx.CastChannelFXPacket;
-import mysticmods.roots.network.client.fx.GrowthFXPacket;
-import mysticmods.roots.network.client.fx.RampantGrowthFXPacket;
+import mysticmods.roots.network.client.fx.*;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
 import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
@@ -50,6 +47,7 @@ public class PacketHandler {
     registrar.play(ClientboundHerbCountSyncPacket.TYPE, ClientboundHerbCountSyncPacket.CODEC);
     registrar.play(RampantGrowthFXPacket.TYPE, RampantGrowthFXPacket.CODEC);
     registrar.play(ClientboundReputationMessagePacket.TYPE, ClientboundReputationMessagePacket.CODEC);
+    registrar.play(AnimalHarvestFXPacket.TYPE, AnimalHarvestFXPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {
