@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-06T19:35:32.665205	Loot Tables
+// 1.21.1	2025-04-09T11:07:59.2829439	Loot Tables
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
 d53d055fadc939e4d850a6e995abee2b8d1e6705 data/roots/loot_table/blocks/bafflecap.json
@@ -86,7 +86,6 @@ f0915afde2f764629134925e34c0d86197cc9f3c data/roots/loot_table/blocks/runestone_
 4228e1325120bb77b7cb745403c2c08071bee316 data/roots/loot_table/blocks/runestone_tile_stairs.json
 90fae28470095b8a75ec33198bdca8e506a1c93c data/roots/loot_table/blocks/runestone_tile_wall.json
 1b53b0d358e5bfafc65f33f819fc2bfbdd39afeb data/roots/loot_table/blocks/runestone_wall.json
-1e83c4a96319d2fe0121482c25b99c3df1b877fd data/roots/loot_table/blocks/sheared_thatch.json
 7b24aadac281f8ca508f10f477b9c68e7968a750 data/roots/loot_table/blocks/silver_block.json
 eba1598aa129e6d70a946b4591784fef12c4fd08 data/roots/loot_table/blocks/silver_ore.json
 b049f4d8c057f3c99fff11bd5714acb480a59893 data/roots/loot_table/blocks/soul_pyre.json

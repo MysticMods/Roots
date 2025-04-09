@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-06T15:00:04.2267807	Item Models: roots
+// 1.21.1	2025-04-09T11:07:59.293216	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -198,7 +198,6 @@ b41ae896ebb09549c9988672a008f0bd1b01864b assets/roots/models/item/runestone_tile
 24e437f127d83d661b4c3d80977c8b20b8095976 assets/roots/models/item/runestone_wall.json
 046b7ac3c277dff28aa2b23060980ae829c19183 assets/roots/models/item/runic_dust.json
 e44d172ee9eeec7c6d5fe9ed4d0fbf3de80445f3 assets/roots/models/item/runic_shears.json
-6cb5610a1d2993b32620a443bc9fb0bf9c18aaab assets/roots/models/item/sheared_thatch.json
 f87e922ad38abf9fac16090d3134a0ff0dff2cc6 assets/roots/models/item/silver_block.json
 71e31aada81b293442ab6cd03baf84ee9c698ea2 assets/roots/models/item/silver_ingot.json
 33ebd00c986c41ff3dbfd6fe703b5296f7777d8a assets/roots/models/item/silver_knife.json
