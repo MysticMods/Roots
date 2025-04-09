@@ -205,7 +205,6 @@ public class RootsLangProvider extends LanguageProvider {
 
     // Blocks
     addBlock(ModBlocks.THATCH);
-    addBlock(ModBlocks.SHEARED_THATCH);
     addBlock(ModBlocks.RUNESTONE);
     addBlock(ModBlocks.MOSSY_RUNESTONE);
     addBlock(ModBlocks.CHISELED_RUNESTONE);

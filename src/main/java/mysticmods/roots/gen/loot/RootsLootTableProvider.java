@@ -264,7 +264,6 @@ public class RootsLootTableProvider {
     @Override
     protected void generate() {
       dropSelf(ModBlocks.THATCH.get());
-      dropSelf(ModBlocks.SHEARED_THATCH.get());
       dropSelf(ModBlocks.RUNESTONE.get());
       dropSelf(ModBlocks.MOSSY_RUNESTONE.get());
       dropSelf(ModBlocks.CHISELED_RUNESTONE.get());

@@ -148,7 +148,6 @@ public class RootsDataMapProvider extends DataMapProvider {
     // TODO: Recalculate all of these
     Builder<FurnaceFuel, Item> builder10 = builder(NeoForgeDataMaps.FURNACE_FUELS).replace(false);
     builder10.add(ModItems.THATCH, new FurnaceFuel(300), false);
-    builder10.add(ModItems.SHEARED_THATCH, new FurnaceFuel(300), false);
     builder10.add(ModItems.WILDWOOD_PEDESTAL, new FurnaceFuel(300), false);
     builder10.add(ModItems.GROVE_PEDESTAL, new FurnaceFuel(300), false);
     builder10.add(ModItems.DISPLAY_PEDESTAL, new FurnaceFuel(300), false);
@@ -168,7 +167,6 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder10.add(ModItems.WILDWOOD_STAIRS, new FurnaceFuel(300), false);
     builder10.add(ModItems.WILDWOOD_SLAB, new FurnaceFuel(150), false);
     builder10.add(ModItems.GROVE_PEDESTAL, new FurnaceFuel(100), false);
-    builder10.add(ModItems.SHEARED_THATCH, new FurnaceFuel(100), false);
     builder10.add(ModItems.THATCH, new FurnaceFuel(100), false);
     builder10.add(ModItems.STAFF, new FurnaceFuel(900), false);
     builder10.add(ModItems.WOODEN_SHEARS, new FurnaceFuel(1500), false);

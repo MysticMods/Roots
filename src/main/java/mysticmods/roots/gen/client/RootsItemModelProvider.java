@@ -26,7 +26,6 @@ public class RootsItemModelProvider extends ItemModelProvider {
     // BLOCKS
 
     simpleBlockItem(ModBlocks.THATCH.get());
-    simpleBlockItem(ModBlocks.SHEARED_THATCH.get());
     simpleBlockItem(ModBlocks.RUNESTONE.get());
     simpleBlockItem(ModBlocks.MOSSY_RUNESTONE.get());
     simpleBlockItem(ModBlocks.CHISELED_RUNESTONE.get());

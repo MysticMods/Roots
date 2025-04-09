@@ -27,7 +27,6 @@ public class RootsBlockStateProvider extends BlockStateProvider {
   @Override
   protected void registerStatesAndModels() {
     simpleBlock(ModBlocks.THATCH.get());
-    simpleBlock(ModBlocks.SHEARED_THATCH.get());
     simpleBlock(ModBlocks.RUNESTONE.get());
     simpleBlock(ModBlocks.MOSSY_RUNESTONE.get());
     simpleBlock(ModBlocks.CHISELED_RUNESTONE.get());
