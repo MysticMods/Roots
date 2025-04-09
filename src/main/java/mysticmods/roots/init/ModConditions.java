@@ -49,6 +49,9 @@ public class ModConditions {
   public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = LEVEL.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
       .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
   public static final DeferredHolder<LevelCondition, OvergrowthCondition> OVERGROWTH_CONDITION = LEVEL.register("overgrowth", OvergrowthCondition::new);
+  static {
+    LEVEL.addAlias(RootsAPI.rl("overgrowth"), RootsAPI.rl("water_source"));
+  }
 
   public static void register(IEventBus bus) {
     LEVEL.register(bus);
