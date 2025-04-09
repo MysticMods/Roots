@@ -631,8 +631,8 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.spell.petal_shell_end", "Petal shell ends");
     add("roots.subtitles.spell.radiance", "Radiance shines");
     add("roots.subtitles.spell.rose_thorns", "Rose thorns tangle");
-    add("roots.subtitles.spell.sanctuary", "");
-    add("roots.subtitles.spell.saturate", "");
+    add("roots.subtitles.spell.sanctuary", "Sanctuary pulses");
+    add("roots.subtitles.spell.saturate", "Food consumed");
     add("roots.subtitles.spell.shatter", "Blocks shatter");
     add("roots.subtitles.spell.sky_soarer", "Sky soars");
     add("roots.subtitles.spell.storm_cloud", "Storm cloud begins");
@@ -645,8 +645,9 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.event.mortar.use", "Pestle used");
     add("roots.subtitles.event.pyre.add_item", "Pyre filled");
     add("roots.subtitles.event.pyre.remove_item", "Pyre emptied");
-    add("roots.subtitles.item.unripe_pearl.use", "");
-    add("roots.subtitles.item.pearleporter.use", "");
+    add("roots.subtitles.alert", "Targeted by enemy");
+/*    add("roots.subtitles.item.unripe_pearl.use", "");
+    add("roots.subtitles.item.pearleporter.use", "");*/
     add("roots.subtitles.block.pyre.crackle", "Pyre crackles");
 
     add("enchantment.roots.foraging", "Foraging");
