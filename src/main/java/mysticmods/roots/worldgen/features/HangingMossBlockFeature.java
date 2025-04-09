@@ -60,7 +60,6 @@ public class HangingMossBlockFeature extends Feature<SimpleBlockConfiguration> {
 
         if (rootState.canSurvive(level, rootPos)) {
           level.setBlock(rootPos, rootState, 3);
-          RootsAPI.LOG.debug("Placed hanging moss at " + rootPos);
           return true;
         }
       }
