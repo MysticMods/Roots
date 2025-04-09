@@ -91,6 +91,7 @@ public class ModFeatures {
   public static ResourceKey<BiomeModifier> OWL_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("owl_spawns"));
   public static ResourceKey<BiomeModifier> SPROUT_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("sprout_spawns"));
   public static ResourceKey<BiomeModifier> SNOW_SPROUT_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("snow_sprout_spawns"));
+  public static ResourceKey<BiomeModifier> MELODY_SPROUT_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("melody_sprout_spawns"));
   public static ResourceKey<BiomeModifier> WILD_AUBERGINES_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_aubergines"));
   public static ResourceKey<BiomeModifier> WILD_ROOTS_FOREST_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_roots_forest"));
   public static ResourceKey<BiomeModifier> WILD_ROOTS_UNDERGROUND_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("wild_roots_underground"));

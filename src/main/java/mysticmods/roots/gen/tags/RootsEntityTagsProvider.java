@@ -68,7 +68,8 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             ModEntities.PURPLE_SPROUT.get(),
             ModEntities.SNOW_SPROUT.get(),
             ModEntities.RED_SPROUT.get(),
-            ModEntities.TAN_SPROUT.get()
+            ModEntities.TAN_SPROUT.get(),
+            ModEntities.MELODY_SPROUT.get()
         );
     this.tag(RootsTags.Entities.ANIMAL_HARVEST)
         .add(
@@ -114,6 +115,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             ModEntities.GREEN_SPROUT.get(),
             ModEntities.PURPLE_SPROUT.get(),
             ModEntities.SNOW_SPROUT.get(),
+            ModEntities.MELODY_SPROUT.get(),
             ModEntities.RED_SPROUT.get(),
             ModEntities.TAN_SPROUT.get(),
             EntityType.BAT);
@@ -151,7 +153,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.DRAGONS).add(EntityType.ENDER_DRAGON);
     this.tag(RootsTags.Entities.TRADERS).add(EntityType.PIGLIN, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.ZOMBIE_VILLAGER);
     this.tag(RootsTags.Entities.UNDEAD).add(EntityType.ZOMBIE_VILLAGER, EntityType.ZOMBIE, EntityType.ZOMBIE_HORSE, EntityType.ZOMBIFIED_PIGLIN, EntityType.SKELETON, EntityType.SKELETON_HORSE, EntityType.WITHER_SKELETON, EntityType.BOGGED, EntityType.STRAY, EntityType.WITHER, EntityType.HUSK, EntityType.ZOGLIN);
-    this.tag(RootsTags.Entities.SPROUTS).add(ModEntities.GREEN_SPROUT.get(), ModEntities.SNOW_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.TAN_SPROUT.get(), ModEntities.RED_SPROUT.get());
+    this.tag(RootsTags.Entities.SPROUTS).add(ModEntities.GREEN_SPROUT.get(), ModEntities.SNOW_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.TAN_SPROUT.get(), ModEntities.RED_SPROUT.get(), ModEntities.MELODY_SPROUT.get());
   }
 
   @Override

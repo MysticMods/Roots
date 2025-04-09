@@ -56,6 +56,8 @@ public class RootsBiomeTagsProvider extends BiomeTagsProvider {
     //noinspection unchecked
     this.tag(RootsTags.Biomes.HAS_SNOW_SPROUT_SPAWNS)
         .addTags(BiomeTags.IS_TAIGA, Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_ICY);
+    this.tag(RootsTags.Biomes.HAS_MELODY_SPROUT_SPAWNS)
+        .addTags(BiomeTags.IS_END);
     //noinspection unchecked
     this.tag(RootsTags.Biomes.HAS_STANDING_STONES)
         .addTags(BiomeTags.IS_SAVANNA, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_PLAINS);

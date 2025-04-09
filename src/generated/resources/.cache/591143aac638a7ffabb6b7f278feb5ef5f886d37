@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-09T11:07:59.293216	Item Models: roots
+// 1.21.1	2025-04-09T15:36:32.0996478	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -91,6 +91,7 @@ d55f477cd866819a1816a8c3a9ae80d9ad1e1bf8 assets/roots/models/item/living_shovel.
 4cdb54748f238359366a5c4e15e3d3d0285cead8 assets/roots/models/item/living_sword.json
 705bcaee0dc9fff3acd43613739aa49bf19fb6ab assets/roots/models/item/magmatic_soil.json
 b7d348bfc345b6f5c042d545a7cc1b3e86bc8800 assets/roots/models/item/mangrove_bark.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/melody_sprout_spawn_egg.json
 ecf0fb0b807eadf02730884b26ca34b67129b954 assets/roots/models/item/mixed_bark.json
 39c7e264c6891ac87bcea01113f73d93eb9e5744 assets/roots/models/item/moonglow.json
 f75bbe6c5b1bb7da95b3b4f5bb5bcf45aeb91f82 assets/roots/models/item/moonglow_seeds.json

@@ -453,6 +453,7 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.RED_SPROUT_SPAWN_EGG);
     addItem(ModItems.PURPLE_SPROUT_SPAWN_EGG);
     addItem(ModItems.SNOW_SPROUT_SPAWN_EGG);
+    addItem(ModItems.MELODY_SPROUT_SPAWN_EGG);
     addItem(ModItems.OWL_SPAWN_EGG);
     addItem(ModItems.DUCK_SPAWN_EGG);
 
@@ -464,6 +465,7 @@ public class RootsLangProvider extends LanguageProvider {
     addEntity(ModEntities.RED_SPROUT);
     addEntity(ModEntities.PURPLE_SPROUT);
     addEntity(ModEntities.SNOW_SPROUT);
+    addEntity(ModEntities.MELODY_SPROUT);
     addEntity(ModEntities.OWL);
     addEntity(ModEntities.DUCK);
 

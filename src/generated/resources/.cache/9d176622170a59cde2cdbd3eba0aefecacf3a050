@@ -1,8 +1,8 @@
-// 1.21.1	2025-04-09T14:53:16.123807	Roots Entity Type Tags
+// 1.21.1	2025-04-09T15:31:22.3078137	Roots Entity Type Tags
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/add_tentacle_loot.json
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/allow_casting_tool_right_click.json
-88a4313ef0e1ae68c104619757fccced56258de4 data/roots/tags/entity_type/animal_harvest_entities.json
+751ed0d287273d6e16d5f4c05e93dcbe961173ba data/roots/tags/entity_type/animal_harvest_entities.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_type/boats.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/disable_disarm.json
 e00f2931577049b9a4400a87ed9c249373be376c data/roots/tags/entity_type/dragons.json
@@ -10,11 +10,11 @@ f6a415ffe9fa7f9a65011b28aa30ae34f4bc3866 data/roots/tags/entity_type/fey_leather
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_friendly.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_hostile.json
 ee75b90db1cfb03a8ce6da87690f062a665055c4 data/roots/tags/entity_type/healable_ice_creatures.json
-ec566ef1d51ffef188be91658be9e9a3e6a79bad data/roots/tags/entity_type/pacifist.json
+9709246b220f865af98fa7685736b105c8109dff data/roots/tags/entity_type/pacifist.json
 29671cfa11d074462c259806e9d60468451e3cdb data/roots/tags/entity_type/rituals/animal_harvest/exclude.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/rose_thorns_exclude.json
 9717909a6109cd9ec9ea5ab3263ee9a5294e63bc data/roots/tags/entity_type/runic_shears_override.json
-04bd786f0536766f10bfe2510fb0096e182994cd data/roots/tags/entity_type/sprouts.json
+05430a8b8e8dca2114bbaddac120df103aa795ec data/roots/tags/entity_type/sprouts.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/squid.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/time_stop_exclude.json
 1b7e7801f876a0240e1e163329e1387f064856d4 data/roots/tags/entity_type/traders.json

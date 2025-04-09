@@ -236,6 +236,19 @@ public class RootsLootTableProvider {
               )
               .setRolls(ConstantValue.exactly(1))
           ));
+      // TODO: Other stuff
+      add(ModEntities.MELODY_SPROUT.get(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .add(LootItem.lootTableItem(Items.CHORUS_FRUIT)
+                  .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+                  .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(1, 3)))
+                  .apply(SmeltItemFunction.smelted()
+                      .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
+                          .flags(EntityFlagsPredicate.Builder.flags()
+                              .setOnFire(true)))))
+              )
+              .setRolls(ConstantValue.exactly(1))
+          ));
       add(ModEntities.OWL.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
               .add(LootItem.lootTableItem(Items.FEATHER)

@@ -359,7 +359,8 @@ public class ModItems {
   public static DeferredHolder<Item, DeferredSpawnEggItem> TAN_SPROUT_SPAWN_EGG = ITEMS.register("tan_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.TAN_SPROUT, 0xeeca5f, 0xbb6c20, new Item.Properties()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> RED_SPROUT_SPAWN_EGG = ITEMS.register("red_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.RED_SPROUT, 0xe6754c, 0xbd2637, new Item.Properties()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> PURPLE_SPROUT_SPAWN_EGG = ITEMS.register("purple_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.PURPLE_SPROUT, 0xdd45e6, 0x6825ba, new Item.Properties()));
-  public static DeferredHolder<Item, DeferredSpawnEggItem> SNOW_SPROUT_SPAWN_EGG = ITEMS.register("snow_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.SNOW_SPROUT, 0xcbe7e8, 0xfffffe, new Item.Properties()));
+  public static DeferredHolder<Item, DeferredSpawnEggItem> SNOW_SPROUT_SPAWN_EGG = ITEMS.register("snow_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.SNOW_SPROUT, 0xfffffe, 0xcbe7e8, new Item.Properties()));
+  public static DeferredHolder<Item, DeferredSpawnEggItem> MELODY_SPROUT_SPAWN_EGG = ITEMS.register("melody_sprout_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.MELODY_SPROUT, 0xecfbaf, 0xa472a3, new Item.Properties()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> OWL_SPAWN_EGG = ITEMS.register("owl_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.OWL, 0x8c654a, 0xdec9ba, new Item.Properties()));
   public static DeferredHolder<Item, DeferredSpawnEggItem> DUCK_SPAWN_EGG = ITEMS.register("duck_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.DUCK, 0xe4d6a5, 0xe9ad36, new Item.Properties()));
 

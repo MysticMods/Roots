@@ -283,6 +283,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.RED_SPROUT_SPAWN_EGG.get());
       event.accept(ModItems.PURPLE_SPROUT_SPAWN_EGG.get());
       event.accept(ModItems.SNOW_SPROUT_SPAWN_EGG.get());
+      event.accept(ModItems.MELODY_SPROUT_SPAWN_EGG.get());
     }
     if (event.getTab().equals(ModTabs.SPELLS_TAB.get())) {
       event.accept(ModItems.SPELL_ACID_CLOUD.get());

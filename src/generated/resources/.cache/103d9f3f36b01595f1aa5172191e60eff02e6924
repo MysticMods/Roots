@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-05T18:44:06.9002799	Registries
+// 1.21.1	2025-04-09T15:36:32.0966459	Registries
 0bc455da35caed8a91dba6976f568f90d9953dfd data/roots/damage_type/acid_cloud.json
 12a245bc55ca0ff991380aad3be5f85219b9b204 data/roots/damage_type/life_drain.json
 4bce0062992bcb825820d0cdfeec90648eb7c7d3 data/roots/damage_type/meteor.json
@@ -18,6 +18,7 @@ c20cd59d5be5009c2378c51f50cfd030b05c4362 data/roots/neoforge/biome_modifier/beet
 4f2b3bb7b489df2e25b606bdb65109bbaef4f56a data/roots/neoforge/biome_modifier/fennec_spawns.json
 18326886f57235661dd018c77b78681b84a1b3b1 data/roots/neoforge/biome_modifier/granite_quartz_ore.json
 1d9973e87909e836ae5efde5316cc6483380db27 data/roots/neoforge/biome_modifier/hanging_moss.json
+6248f9ad93b2b5f8a1c00bf9557861114d990dc9 data/roots/neoforge/biome_modifier/melody_sprout_spawns.json
 d19a4cefa934267376dd73dcb277e9ad9bf6bb51 data/roots/neoforge/biome_modifier/owl_spawns.json
 849d065d5f2ffd63ac6497ac6be5198e49cba82a data/roots/neoforge/biome_modifier/silver_ore.json
 f4cd831376f03c5a332a8a8358e1b11f65f89349 data/roots/neoforge/biome_modifier/snow_sprout_spawns.json
