@@ -161,8 +161,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     List<Pair<BlockPos, PedestalBlockEntity>> pedestals = pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
     if (pedestals.isEmpty()) {
       cachedRecipe = null;
-      setChanged();
-      updateViaState();
+      if (!getLevel().isClientSide()) {
+        setChanged();
+        updateViaState();
+      }
       return;
     }
     GroveCrafting playerlessCrafting = new GroveCrafting(this, null);
