@@ -29,9 +29,9 @@ public class Costing {
 
   private final Object2BooleanMap<ICosted> modifierMap = new Object2BooleanLinkedOpenHashMap<>();
 
-  private final Map<Herb, List<HerbEntry>> herbMapCache;
+  private Map<Herb, List<HerbEntry>> herbMapCache;
 
-  private CostInstance.ChargeType chargeType;
+  private final CostInstance.ChargeType chargeType;
 
   private int operationsCount = 0;
   private boolean noCharge = false;
@@ -46,6 +46,7 @@ public class Costing {
 
   public Costing(ICostedParent parent, Player player) {
     this(parent);
+    herbMapCache = herbMap(player);
   }
 
   public CostInstance.ChargeType getChargeType() {
@@ -281,6 +282,7 @@ public class Costing {
 
   private void calculateCosts(boolean checkModifiers, boolean skipModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
+    herbMapCache.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
     CostInstance.ChargeType thisType = getChargeType();
     for (Cost cost : parent.getCosts().costs()) {
