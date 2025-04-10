@@ -98,7 +98,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.RUNED_CAPSTONES).add(CHISELED_RUNED_OBSIDIAN.get());
     this.tag(RootsTags.Blocks.RUNED_PILLARS).add(RUNED_OBSIDIAN.get(), RUNED_BRICK.get(), RUNED_TILE.get());
     this.tag(RootsTags.Blocks.RUNESTONE)
-        .add(RUNESTONE.get(), RUNESTONE_BRICK.get(), CHISELED_RUNESTONE.get(), MOSSY_RUNESTONE.get());
+        .add(RUNESTONE.get(), RUNESTONE_BRICK.get(), CHISELED_RUNESTONE.get(), MOSSY_RUNESTONE.get(), RUNESTONE_TILE.get());
     this.tag(RootsTags.Blocks.RUNE_CAPSTONES).add(CHISELED_RUNESTONE.get());
     this.tag(RootsTags.Blocks.RUNE_PILLARS)
         .add(RUNESTONE.get(), RUNESTONE_BRICK.get(), MOSSY_RUNESTONE.get(), RUNESTONE_TILE.get());
