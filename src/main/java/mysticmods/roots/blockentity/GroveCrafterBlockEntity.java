@@ -114,8 +114,10 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       );
       ModActions.CRAFT_RECIPE.get().accept(context);
       cachedRecipe = null;
-      setChanged();
-      updateViaState();
+      if (!level.isClientSide()) {
+        setChanged();
+        updateViaState();
+      }
 
       return InteractionResult.SUCCESS;
     }
