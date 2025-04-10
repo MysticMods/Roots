@@ -16,10 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // TODO: Urgent -- CuriosIntegration breaks API
 // TODO: Split this into a parent class; implement SpellCosting
@@ -134,6 +131,7 @@ public class Costing {
         }
       }
     }
+    herbMap.forEach((a, b) -> b.sort(Comparator.comparingInt(HerbEntry::getCount)));
     return herbMap;
   }
 
@@ -376,11 +374,11 @@ public class Costing {
   }
 
   private class HerbEntry {
-    private final HerbEntryType type;
-    private final Herb herb;
-    private final int slot;
-    private int count;
-    private final int subindex;
+    public final HerbEntryType type;
+    public final Herb herb;
+    public final int slot;
+    public int count;
+    public final int subindex;
 
     public HerbEntry(HerbEntryType type, Herb herb, int slot, int count, int subindex) {
       this.type = type;
@@ -388,6 +386,26 @@ public class Costing {
       this.slot = slot;
       this.count = count;
       this.subindex = subindex;
+    }
+
+    public HerbEntryType getType() {
+      return type;
+    }
+
+    public Herb getHerb() {
+      return herb;
+    }
+
+    public int getSlot() {
+      return slot;
+    }
+
+    public int getCount() {
+      return count;
+    }
+
+    public int getSubindex() {
+      return subindex;
     }
   }
 
