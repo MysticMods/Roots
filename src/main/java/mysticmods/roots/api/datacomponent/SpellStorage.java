@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -17,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) {
   private static final List<SpellSlot> EMPTY_SLOTS = new ArrayList<>(Arrays.asList(new SpellSlot[]{null, null, null, null, null}));
@@ -325,6 +327,11 @@ public record SpellStorage(int currentSlot, int maxSlot, List<SpellSlot> slots) 
     @Override
     public int getCooldown() {
       return cooldown();
+    }
+
+    @Override
+    public Set<ICosted> getChildren() {
+      return getEnabledModifiers().stream().map(o -> (ICosted) o).collect(Collectors.toSet());
     }
 
     public boolean hasModifier(SpellModifier modifier) {
