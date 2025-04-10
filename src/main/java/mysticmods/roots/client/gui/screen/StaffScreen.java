@@ -166,7 +166,7 @@ public class StaffScreen extends RootsScreen {
   public static void open(@Nullable InteractionHand hand, int inventorySlot) {
     StaffScreen newScreen = new StaffScreen(hand, inventorySlot);
     Minecraft.getInstance().gameMode.releaseUsingItem(Minecraft.getInstance().player);
-    ClientHooks.pushGuiLayer(Minecraft.getInstance(), newScreen);
+    Minecraft.getInstance().setScreen(newScreen);
   }
 
   private static final ResourceLocation background = RootsAPI.rl("textures/gui/staff_gui_new.png");
