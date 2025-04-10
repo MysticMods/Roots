@@ -40,13 +40,11 @@ public class Costing {
   public Costing(ICostedParent parent) {
     this.parent = parent;
     modifierMap.defaultReturnValue(false);
-    herbMapCache = new HashMap<>();
     chargeType = parent.getChargeType();
   }
 
   public Costing(ICostedParent parent, Player player) {
     this(parent);
-    herbMapCache = herbMap(player);
   }
 
   public CostInstance.ChargeType getChargeType() {
@@ -136,8 +134,8 @@ public class Costing {
     if (player.isCreative() || foundCreativePouch) {
       return true;
     }
+    this.herbMapCache = herbMap(player);
     calculateCosts(checkModifiers, false, true, false);
-
 
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
 
@@ -185,6 +183,7 @@ public class Costing {
       RootsAPI.LOG.error("Charging with operation costs but no operations! {}", parent);
     }
 
+    this.herbMapCache = herbMap(player);
     calculateCosts(true, false, false, tick);
 
     Inventory playerInventory = player.getInventory();
@@ -214,7 +213,6 @@ public class Costing {
             ItemStack capStack = curios.get(herbEntry.slot);
             IItemHandler thisCap = capStack.getCapability(Capabilities.ItemHandler.ITEM, null);
             if (thisCap == null) {
-              RootsAPI.LOG.error("No capability found for {}", capStack);
               continue;
             }
             ItemStack capItem = thisCap.getStackInSlot(herbEntry.subindex);
@@ -222,14 +220,11 @@ public class Costing {
               thisCap.extractItem(herbEntry.subindex, toConsume, false);
               toConsume = 0;
               herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
-              // TODO: All of this should modify in place
-              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
               break;
             } else {
               thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
               toConsume -= capItem.getCount();
               herbEntry.count = capItem.getCount();
-              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
             }
           } else {
             ItemStack capStack = playerInventory.getItem(herbEntry.slot);
@@ -243,14 +238,11 @@ public class Costing {
               thisCap.extractItem(herbEntry.subindex, toConsume, false);
               toConsume = 0;
               herbEntry.count = thisCap.getStackInSlot(herbEntry.subindex).getCount();
-              // TODO: As above, so below
-              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
               break;
             } else {
               thisCap.extractItem(herbEntry.subindex, capItem.getCount(), false);
               toConsume -= capItem.getCount();
               herbEntry.count = capItem.getCount();
-              /*              playerInventory.setItem(herbEntry.slot, capStack);*/
             }
           }
           if (toConsume <= 0) {
@@ -282,7 +274,6 @@ public class Costing {
 
   private void calculateCosts(boolean checkModifiers, boolean skipModifiers, boolean maxOperations, boolean tick) {
     totalCosts.clear();
-    herbMapCache.clear();
     Map<Herb, List<Cost>> herbCosts = new HashMap<>();
     CostInstance.ChargeType thisType = getChargeType();
     for (Cost cost : parent.getCosts().costs()) {
