@@ -13,6 +13,7 @@ import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.registry.ICostedParent;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
@@ -40,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipComponent {
+public abstract class Spell implements IStyled, ICostedParent, SpellLike, TooltipComponent {
   public static final Codec<Spell> CODEC = RootsRegistries.SPELLS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Spell> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS);
 
