@@ -46,10 +46,10 @@ public class WildfireSpell extends Spell {
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    // TODO: Damage type
     WildfireEntity wildfire = new WildfireEntity(ModEntities.WILDFIRE.get(), pPlayer, pLevel);
     wildfire.setSnapshot(new WildfireEntitySnapshot(pPlayer, -1, damage));
-    wildfire.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0, 0.99f, 0);
+
+    wildfire.shootFromRotation(pPlayer, pPlayer.getViewXRot(1), pPlayer.getViewYRot(1), 0, 3f, 0);
     pLevel.addFreshEntity(wildfire);
 
     return cooldown;
