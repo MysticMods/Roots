@@ -14,14 +14,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class ControlUndeadSpell extends Spell {
-  public ControlUndeadSpell(ChatFormatting color, CostInstance costs) {
+public class EnslaveUndeadSpell extends Spell {
+  public EnslaveUndeadSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xcc6d0e, 0x9e1827);
   }
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.CONTROL_UNDEAD_COOLDOWN;
+    return ModSpells.SUMMON_UNDEAD_COOLDOWN;
   }
 
   @Override

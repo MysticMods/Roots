@@ -8,14 +8,6 @@
       "count": 1,
       "id": "roots:spell_aqua_bubble"
     },
-    "roots:augment": {
-      "count": 1,
-      "id": "roots:spell_augment"
-    },
-    "roots:control_undead": {
-      "count": 1,
-      "id": "roots:spell_control_undead"
-    },
     "roots:dandelion_winds": {
       "count": 1,
       "id": "roots:spell_dandelion_winds"
@@ -103,6 +95,10 @@
     "roots:storm_cloud": {
       "count": 1,
       "id": "roots:spell_storm_cloud"
+    },
+    "roots:summon_undead": {
+      "count": 1,
+      "id": "roots:spell_control_undead"
     },
     "roots:time_stop": {
       "count": 1,

@@ -472,11 +472,11 @@
         "entries": [
           {
             "type": "exact_spell",
-            "name": "roots:control_undead"
+            "name": "roots:summon_undead"
           }
         ],
         "grove": "roots:fungal",
-        "name": "roots:learn_spell/control_undead",
+        "name": "roots:learn_spell/summon_undead",
         "reputation": {
           "gain1": 250,
           "gain2": 0,

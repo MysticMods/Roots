@@ -94,28 +94,6 @@
         }
       }
     ],
-    "roots:augment": [
-      {
-        "id": "roots:augment/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 350,
-          "value": 350
-        }
-      }
-    ],
-    "roots:control_undead": [
-      {
-        "id": "roots:control_undead/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 320,
-          "value": 320
-        }
-      }
-    ],
     "roots:dandelion_winds": [
       {
         "id": "roots:dandelion_winds/cooldown",
@@ -796,6 +774,17 @@
           "comment": "How long before the player can cast the spell again",
           "default_value": 100,
           "value": 100
+        }
+      }
+    ],
+    "roots:summon_undead": [
+      {
+        "id": "roots:summon_undead/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 320,
+          "value": 320
         }
       }
     ],

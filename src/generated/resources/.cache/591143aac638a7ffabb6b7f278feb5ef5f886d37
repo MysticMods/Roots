@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-09T15:36:32.0996478	Item Models: roots
+// 1.21.1	2025-04-11T13:04:44.4470668	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -208,7 +208,6 @@ f87e922ad38abf9fac16090d3134a0ff0dff2cc6 assets/roots/models/item/silver_block.j
 a2ba5cbc0f7f87a0b02d92dd6aa28dc025c55d8c assets/roots/models/item/soul_pyre.json
 1ace512915d0414d667789bd19a6b6c7f05f1857 assets/roots/models/item/spell_acid_cloud.json
 cd8a24e7114af53d2a35579627ecdab05225c632 assets/roots/models/item/spell_aqua_bubble.json
-3f5b3e5eacff7314ad9ad2a7fdff00f949dba628 assets/roots/models/item/spell_augment.json
 dea19c39d873cf59285725c35b14d09ef4520124 assets/roots/models/item/spell_control_undead.json
 84ebab543b659946c5aa7f19acd4075b1af77b2a assets/roots/models/item/spell_dandelion_winds.json
 9ff6e9689fd5a176c45b816818095493f95ccbad assets/roots/models/item/spell_desaturate.json

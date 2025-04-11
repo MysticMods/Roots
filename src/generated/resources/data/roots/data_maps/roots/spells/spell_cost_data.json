@@ -25,36 +25,6 @@
         }
       ]
     },
-    "roots:augment": {
-      "charge_type": "cast",
-      "costs": [
-        {
-          "type": "additive",
-          "defaultValue": 0.25,
-          "herb": "roots:grove_moss"
-        },
-        {
-          "type": "additive",
-          "defaultValue": 0.125,
-          "herb": "roots:inferno_bulb"
-        }
-      ]
-    },
-    "roots:control_undead": {
-      "charge_type": "cast",
-      "costs": [
-        {
-          "type": "additive",
-          "defaultValue": 0.25,
-          "herb": "roots:bafflecap"
-        },
-        {
-          "type": "additive",
-          "defaultValue": 0.25,
-          "herb": "roots:moonglow"
-        }
-      ]
-    },
     "roots:dandelion_winds": {
       "charge_type": "cast",
       "costs": [
@@ -347,6 +317,21 @@
           "type": "additive",
           "defaultValue": 0.25,
           "herb": "roots:cloud_berry"
+        }
+      ]
+    },
+    "roots:summon_undead": {
+      "charge_type": "cast",
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:bafflecap"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.25,
+          "herb": "roots:moonglow"
         }
       ]
     },

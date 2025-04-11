@@ -9,7 +9,6 @@ public interface Spells {
   ResourceKey<Spell> NONE = spell("none");
   ResourceKey<Spell> ACID_CLOUD = spell("acid_cloud");
   ResourceKey<Spell> AQUA_BUBBLE = spell("aqua_bubble");
-  ResourceKey<Spell> AUGMENT = spell("augment");
   ResourceKey<Spell> LIGHT_DRIFTER = spell("light_drifter");
   ResourceKey<Spell> MAGNETISM = spell("magnetism");
   ResourceKey<Spell> DANDELION_WINDS = spell("dandelion_winds");
@@ -19,7 +18,7 @@ public interface Spells {
   ResourceKey<Spell> NONDETECTION = spell("nondetection");
   ResourceKey<Spell> FEY_LIGHT = spell("fey_light");
   ResourceKey<Spell> GEAS = spell("geas");
-  ResourceKey<Spell> CONTROL_UNDEAD = spell("control_undead");
+  ResourceKey<Spell> SUMMON_UNDEAD = spell("summon_undead");
   ResourceKey<Spell> GROWTH_INFUSION = spell("growth_infusion");
   ResourceKey<Spell> RAMPANT_GROWTH = spell("rampant_growth");
   ResourceKey<Spell> HARVEST = spell("harvest");

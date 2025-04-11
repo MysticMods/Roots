@@ -40,11 +40,6 @@ public class ModSpells {
   public static final PropertyHolder<Property.FloatProperty> AQUA_BUBBLE_FIRE_REDUCTION = P.recordProperty("aqua_bubble/fire_reduction", Property.ofFloat(0.6f, "The percentage of fire damage reduced by the aqua bubble."));
   public static final PropertyHolder<Property.FloatProperty> AQUA_BUBBLE_LAVA_REDUCTION = P.recordProperty("aqua_bubble/lava_reduction", Property.ofFloat(0.6f, "The percentage of lava damage reduced by the aqua bubble."));
 
-  // TODO: What does this actually do?
-  // Augment (350 cooldown)
-  public static final DeferredHolder<Spell, AugmentSpell> AUGMENT = spell(Spells.AUGMENT, AugmentSpell::new, ChatFormatting.DARK_GREEN, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250), Cost.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0125))));
-  public static final PropertyHolder<Property.IntegerProperty> AUGMENT_COOLDOWN = P.recordProperty("augment/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
-
   // Light Drifter (600 cooldown)
   public static final DeferredHolder<Spell, LightDrifterSpell> LIGHT_DRIFTER = spell(Spells.LIGHT_DRIFTER, LightDrifterSpell::new, ChatFormatting.DARK_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250))));
   public static final PropertyHolder<Property.IntegerProperty> LIGHT_DRIFTER_COOLDOWN = P.recordProperty("light_drifter/cooldown", Property.ofInt(600, SpellProperties.COOLDOWN));
@@ -107,9 +102,13 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> GEAS_DURATION = P.recordProperty("geas/duration", Property.ofInt(400, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> GEAS_COUNT = P.recordProperty("geas/count", Property.ofInt(1, SpellProperties.COUNT));
 
+  static {
+    REGISTER.addAlias(RootsAPI.rl("enslave_undead"), RootsAPI.rl("control_undead"));
+  }
+
   // Control Undead (320 cooldown)
-  public static final DeferredHolder<Spell, ControlUndeadSpell> CONTROL_UNDEAD = spell(Spells.CONTROL_UNDEAD, ControlUndeadSpell::new, ChatFormatting.DARK_GREEN, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250))));
-  public static final PropertyHolder<Property.IntegerProperty> CONTROL_UNDEAD_COOLDOWN = P.recordProperty("control_undead/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
+  public static final DeferredHolder<Spell, EnslaveUndeadSpell> SUMMON_UNDEAD = spell(Spells.SUMMON_UNDEAD, EnslaveUndeadSpell::new, ChatFormatting.DARK_GREEN, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250))));
+  public static final PropertyHolder<Property.IntegerProperty> SUMMON_UNDEAD_COOLDOWN = P.recordProperty("summon_undead/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
 
 
   // Growth Infusion (20 cooldown)
