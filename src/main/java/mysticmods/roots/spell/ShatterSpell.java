@@ -205,7 +205,7 @@ public class ShatterSpell extends Spell {
       return -1;
     } else {
       costs.operations(count);
-      return cooldown;
+      return cooldown * count;
     }
   }
 

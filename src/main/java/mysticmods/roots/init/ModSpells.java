@@ -46,7 +46,7 @@ public class ModSpells {
 
   // Magnetism (350 cooldown)
   public static final DeferredHolder<Spell, MagnetismSpell> MAGNETISM = spell(Spells.MAGNETISM, MagnetismSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0016)))); // TODO: Operation or cast?
-  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_COOLDOWN = P.recordProperty("magnetism/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_COOLDOWN = P.recordProperty("magnetism/cooldown", Property.ofInt(60, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_ZX = P.recordProperty("magnetism/radius_zx", Property.ofInt(20, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> MAGNETISM_RADIUS_Y = P.recordProperty("magnetism/radius_y", Property.ofInt(10, SpellProperties.RADIUS_Y));
 
@@ -72,7 +72,7 @@ public class ModSpells {
 
   // Disarm spell (350 cooldown)
   public static final DeferredHolder<Spell, DisarmSpell> DISARM = spell(Spells.DISARM, DisarmSpell::new, ChatFormatting.AQUA, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0125), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0125))));
-  public static final PropertyHolder<Property.IntegerProperty> DISARM_COOLDOWN = P.recordProperty("disarm/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_COOLDOWN = P.recordProperty("disarm/cooldown", Property.ofInt(60, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_ZX = P.recordProperty("disarm/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_Y = P.recordProperty("disarm/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
   public static final PropertyHolder<Property.FloatProperty> DISARM_DROP_CHANCE = P.recordProperty("disarm/drop_chance", Property.ofFloat(0.35f, "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed."));
@@ -127,7 +127,7 @@ public class ModSpells {
 
   // Harvest (25 cooldown)
   public static final DeferredHolder<Spell, HarvestSpell> HARVEST = spell(Spells.HARVEST, HarvestSpell::new, ChatFormatting.YELLOW, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0063), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0063))));
-  public static final PropertyHolder<Property.IntegerProperty> HARVEST_COOLDOWN = P.recordProperty("harvest/cooldown", Property.ofInt(25, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> HARVEST_COOLDOWN = P.recordProperty("harvest/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_ZX = P.recordProperty("harvest/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
   public static final PropertyHolder<Property.IntegerProperty> HARVEST_RADIUS_Y = P.recordProperty("harvest/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
 

@@ -122,7 +122,7 @@ public class DisarmSpell extends TwoRadiusSpell {
       costs.operations(count);
     }
 
-    return cooldown;
+    return cooldown * count;
   }
 
   @Override
