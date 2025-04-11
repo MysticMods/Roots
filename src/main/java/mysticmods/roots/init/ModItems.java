@@ -329,7 +329,6 @@ public class ModItems {
   public static final DeferredHolder<Item, EffectUseItem> GLASS_EYE = ITEMS.register("glass_eye", () -> new EffectUseItem(MobEffects.NIGHT_VISION, 0, 20 * 30, new Item.Properties()));
   public static final DeferredHolder<Item, Item> LIFE_ESSENCE = ITEMS.register("life_essence", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> MYSTIC_FEATHER = ITEMS.register("mystic_feather", () -> new Item(new Item.Properties()));
-  public static final DeferredHolder<Item, Item> PETALS = ITEMS.register("petals", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> RUNIC_DUST = ITEMS.register("runic_dust", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> STRANGE_OOZE = ITEMS.register("strange_ooze", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, ArmorItem> ANTLER_HAT = ITEMS.register("antler_hat", () -> new ArmorItem(ANTLER_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().durability(399)));

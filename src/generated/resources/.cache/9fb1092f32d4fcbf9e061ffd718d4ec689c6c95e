@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-08T21:14:52.1775912	Recipes
+// 1.21.1	2025-04-11T13:13:42.5959954	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -213,16 +213,6 @@ ce1b365e5c44f4fca5664a1f27056a0ee6078425 data/roots/advancement/recipes/misc/mor
 97eec4b6c987eda934829579ad4c2094a36b12d1 data/roots/advancement/recipes/misc/mortar/magma_cream_from_magma_block.json
 31f2792bc211fed1a50138e64d6a04692f4125a9 data/roots/advancement/recipes/misc/mortar/magma_cream_from_magma_block_2.json
 af4b9a71789076d75a7bfdd899c12749475effe7 data/roots/advancement/recipes/misc/mortar/magma_cream_from_magma_block_3.json
-29643406d67f64cd308ed72ba7a003b08a7f50d1 data/roots/advancement/recipes/misc/mortar/petals.json
-23bc934d85a6a34b892b818c2736c5ea54c243bd data/roots/advancement/recipes/misc/mortar/petals_2.json
-6eabfa6bce031ae297f8b0bc0dc9bfe07da35fc5 data/roots/advancement/recipes/misc/mortar/petals_3.json
-c37894fc5b11305a1e4a50c642afa4d3dd8f1e2b data/roots/advancement/recipes/misc/mortar/petals_4.json
-0a4aa899b75be1647331d81950e13e4f6b9129b9 data/roots/advancement/recipes/misc/mortar/petals_5.json
-b68d51112d114d554c0f20eff512045bcc34de1a data/roots/advancement/recipes/misc/mortar/petals_tall.json
-8a4377a6b62baf1deb1fba89df6a39eccd824cc2 data/roots/advancement/recipes/misc/mortar/petals_tall_2.json
-cc09e70efe78095cd54ce6a5b9be202a421f1f57 data/roots/advancement/recipes/misc/mortar/petals_tall_3.json
-f8c2093a3b2f4a5e3af5e19a9bdcced9310e1cec data/roots/advancement/recipes/misc/mortar/petals_tall_4.json
-9eacb12e6b05c9c117d389729db4f9e49efa0897 data/roots/advancement/recipes/misc/mortar/petals_tall_5.json
 50e8e87d16bc94778ef2b78e131294cc92d66060 data/roots/advancement/recipes/misc/mortar/runic_dust.json
 bda21dfbb8d7ee41cc3eef6f892fb8599b65c7ed data/roots/advancement/recipes/misc/mortar/runic_dust_2.json
 a7ae049f00b1a11e9144dbc6b1e88d161938c895 data/roots/advancement/recipes/misc/mortar/runic_dust_3.json
@@ -435,7 +425,7 @@ d93a9a39e6d13d24b84f735247fd5c3e29dc3d43 data/roots/recipe/grove/runestone_3.jso
 ac0112350d7e35b08a68f81f948b217d73d92dc6 data/roots/recipe/grove/runestone_7.json
 2bfae30ee4a3cb3b50ce69ab9439feef306c7704 data/roots/recipe/grove/runestone_8.json
 8eb86a007ef0b2014fb6e4e9d98d7b9155cec49a data/roots/recipe/grove/runestone_9.json
-956677b3ae5267bc4d889aff1b6dea575d0f4ac5 data/roots/recipe/grove/runic_shears.json
+9451444270c7b05faef51a3ec6cb22419347161b data/roots/recipe/grove/runic_shears.json
 a6302c48af567888250e6127be487c1c3220ba8f data/roots/recipe/grove/wildwood_pedestal.json
 d66821b5bc1aed99fbb28bf7611fbe362591d991 data/roots/recipe/grove_crafter.json
 6101110900ce102dd2d1c2786cbcc9c3fac5b4c9 data/roots/recipe/grove_pedestal.json
@@ -483,16 +473,6 @@ cbeddf9e9d50ccc94d9478df1e4df2b14a6e90d6 data/roots/recipe/mortar/flour_2.json
 af64ae9fc3c51e54e771031f49f468da340f62d7 data/roots/recipe/mortar/magma_cream_from_magma_block.json
 dcf6482b6397cb1f0114a61f6ae70b4e63f51eb5 data/roots/recipe/mortar/magma_cream_from_magma_block_2.json
 5c10fd52fce56cf32040e8d9c26758f1239e3bd7 data/roots/recipe/mortar/magma_cream_from_magma_block_3.json
-a361909b863dea1a949cee7da0208d315c2230a8 data/roots/recipe/mortar/petals.json
-f1ced2ca1d786178d24c2c4a775885780cceb73e data/roots/recipe/mortar/petals_2.json
-704aee7717e6cb2722528bffb7fd5388b8022abb data/roots/recipe/mortar/petals_3.json
-7807318de8b5a67acdeebd5f82749b1aabc11665 data/roots/recipe/mortar/petals_4.json
-a25108e79fa1e354f122e375e11f928de505210e data/roots/recipe/mortar/petals_5.json
-9a77add7da7da21aeedbf47aa727b69f4138d692 data/roots/recipe/mortar/petals_tall.json
-51ae8684b9417bd964b224dd266768bd03ee30dd data/roots/recipe/mortar/petals_tall_2.json
-8400d8ecf5cf957a68fbf04603e785e61634af0a data/roots/recipe/mortar/petals_tall_3.json
-3e8807aca3ecf4ff5eacf6c73ecf77680039f0f1 data/roots/recipe/mortar/petals_tall_4.json
-09208ee38c2df2a7146ff919cbc5969c03ba0cd0 data/roots/recipe/mortar/petals_tall_5.json
 7a9d39f752b8805ccc6522f58fd99da7d8c72361 data/roots/recipe/mortar/runic_dust.json
 1b691be1391a818a7dcf52d999a6c5688ab302f4 data/roots/recipe/mortar/runic_dust_2.json
 51ccc17c1f729eeef709ab715b54fe2e67509adc data/roots/recipe/mortar/runic_dust_3.json
@@ -545,7 +525,7 @@ e52699ea5b24e83c449875fc25c81aadfdcf50c6 data/roots/recipe/pyre/purity.json
 aca338c89de19e9ecefef8d2bd718dffff9d369e data/roots/recipe/pyre/summon_creatures.json
 a503dd0507dee7866a79436b4103bad5dbd9e88c data/roots/recipe/pyre/warding.json
 e3eac5a872cb6865b9fe2e6098b655acf3ddf58f data/roots/recipe/pyre/wildroot_growth.json
-e7705e43b57abbb5daaf794d63e0fc1f8af35ce4 data/roots/recipe/pyre/windwall.json
+2a89a67ad5330334fe3c41e8038c2089f6bbf8ff data/roots/recipe/pyre/windwall.json
 132404037a09da58379636f3594aadd9d5b380ac data/roots/recipe/quartz_from_blasting_quartz_ore.json
 d9bacf1e042d6d91710995838b6ca611b5b0c433 data/roots/recipe/quartz_from_smelting_quartz_ore.json
 ad1f8027d16da05e74feb8868cacb9c29392cd99 data/roots/recipe/raw_silver_block.json
@@ -649,7 +629,7 @@ fe50e1e5f4a6083cae6c0a499511ae36a06bda5f data/roots/recipe/silver_ingot_from_sil
 cbfd45d0c7ea8f16d0cca734391f168d5a3fbc3c data/roots/recipe/soul_pyre_from_pyre.json
 4c077cd9db500940877e29458c947208b21df495 data/roots/recipe/spell/acid_cloud.json
 a25e78114be494cfd7e8b6e1ca5148b4f17937f6 data/roots/recipe/spell/aqua_bubble.json
-a93ab0b0855c726213113c77b6562508b85c6c2a data/roots/recipe/spell/dandelion_winds.json
+f5086607ef06c3f3560bfdc869a978c5d7e20b80 data/roots/recipe/spell/dandelion_winds.json
 3ff49a6978153281c549acc0612760afc426aa95 data/roots/recipe/spell/desaturate.json
 f732f9482beee18fdcc90397c821bf194b8d6794 data/roots/recipe/spell/disarm.json
 7e86c5e0f3650307961b0e5c16fd40a64c029e32 data/roots/recipe/spell/extension.json
@@ -658,13 +638,13 @@ efa39da893029841bb0936afcb19ca95970da980 data/roots/recipe/spell/geas.json
 937a4c7c243d19b0ee79d006bcf2ae315e243561 data/roots/recipe/spell/growth_infusion.json
 07420d3d2f186a2c27eae10773683c07ca748242 data/roots/recipe/spell/harvest.json
 2a7b220c9765a23f6e636c27113f6b93a08c867c data/roots/recipe/spell/jaunt.json
-e10b633e8d8e05d05bbe9a5b499b75719b8e554c data/roots/recipe/spell/life_drain.json
+84243de313d035e7003cb9b1291cd7884e5b996d data/roots/recipe/spell/life_drain.json
 d588cb212056ae8acbaf21e5a5fead2993d10137 data/roots/recipe/spell/magnetism.json
 586aed70bb2ab1db30158274e85d5d63236a1099 data/roots/recipe/spell/nondetection.json
-f37021f4646c6fb9a56854dd9b8a22b3a669a542 data/roots/recipe/spell/petal_shell.json
+364243925d5f9109b5b8702ccf60cb2c3c4f9228 data/roots/recipe/spell/petal_shell.json
 5ca18951ebc630f2b3f56dc3dea1c2699fce081b data/roots/recipe/spell/rampant_growth.json
 8f0f95339c274d16be25d016254d33686c4d3d06 data/roots/recipe/spell/rose_thorns.json
-589822101e34227a7aaf9aab2d196d081a082d3e data/roots/recipe/spell/sanctuary.json
+0a1520c6c4d879329d43fa6878b781d18f019676 data/roots/recipe/spell/sanctuary.json
 8f1e11be6dc2b315a3977c54ac2ccca9a2a6cc2a data/roots/recipe/spell/saturate.json
 88e8fa740c9a034f07a88e651c6079e53bdbf87c data/roots/recipe/spell/shatter.json
 06a1ccb13b0a97c85fd59f143be71ccf548f5bee data/roots/recipe/spell/sky_soarer.json

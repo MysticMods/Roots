@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-10T13:19:06.6376385	Roots Item Tags
+// 1.21.1	2025-04-11T13:13:42.591983	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -141,7 +141,6 @@ a0f512d942a5e0f1365b3fcea384de8dffce2a51 data/roots/tags/item/pedestals/grove.js
 c5d89cdbb8b3fe577eed9820640231ff10ee85d8 data/roots/tags/item/pedestals/limited.json
 2d93845c6c028de74245f643e9cb9c69c8be7763 data/roots/tags/item/pedestals/ritual.json
 08f6581e2fabaae228e3ee44c68f32d91fedbf63 data/roots/tags/item/pelt.json
-4636f349d6690dfab85139e6012a804c930f7288 data/roots/tags/item/petals.json
 f848d81ab12aa420895973949d7dd762e5a36acf data/roots/tags/item/pillars/any.json
 307dae19f196ef71116992f2c10a1d6367d71c5e data/roots/tags/item/pillars/log/acacia.json
 84f44f11a710757dc91be87d29f5b393478b83e7 data/roots/tags/item/pillars/log/any.json

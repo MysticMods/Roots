@@ -163,7 +163,6 @@ public class CreativeTabEvents {
       event.accept(ModItems.CARAPACE.get());
       event.accept(ModItems.PELT.get());
       event.accept(ModItems.ANTLERS.get());
-      event.accept(ModItems.PETALS.get());
       event.accept(ModItems.RUNIC_DUST.get());
       event.accept(ModItems.FEY_LEATHER.get());
       event.accept(ModItems.GLASS_EYE.get());

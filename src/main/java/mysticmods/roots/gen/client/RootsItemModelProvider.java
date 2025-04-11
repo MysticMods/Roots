@@ -279,7 +279,6 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.GLASS_EYE, "resources");
     subfolder(ModItems.LIFE_ESSENCE, "resources");
     subfolder(ModItems.MYSTIC_FEATHER, "resources");
-    subfolder(ModItems.PETALS, "resources");
     subfolder(ModItems.RUNIC_DUST, "resources");
     subfolder(ModItems.STRANGE_OOZE, "resources");
 

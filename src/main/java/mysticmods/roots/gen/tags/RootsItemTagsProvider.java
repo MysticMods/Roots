@@ -92,7 +92,6 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     // Silver?
     this.tag(ItemTags.PIGLIN_LOVED).add(ModItems.COPPER_KNIFE.get()/*, ModItems.SILVER_KNIFE.get()*/);
 
-    this.tag(RootsTags.Items.PETALS).add(ModItems.PETALS.get());
     this.tag(RootsTags.Items.RUNIC_DUST).add(ModItems.RUNIC_DUST.get());
 
     this.tag(RootsTags.Items.RAW_SILVER).add(ModItems.RAW_SILVER.get());

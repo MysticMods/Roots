@@ -144,7 +144,6 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     builder9.add(RootsTags.Items.BARKS, new Compostable(0.3f, false), false);
 
-    builder9.add(ModItems.PETALS, new Compostable(0.65f, true), false);
     builder9.add(ModItems.STONEPETAL, new Compostable(0.65f, false), false);
 
     // TODO: Recalculate all of these

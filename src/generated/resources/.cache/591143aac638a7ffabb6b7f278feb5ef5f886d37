@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-11T13:04:44.4470668	Item Models: roots
+// 1.21.1	2025-04-11T13:13:42.6065334	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -112,7 +112,6 @@ bb082cec1ce31e7bcd200abe6e0eef69ade972bb assets/roots/models/item/oak_bark.json
 19b6878a79f3eea445e3994e51e665050a66fa10 assets/roots/models/item/pereskia.json
 84c41742217ef91ae241182d083d40defd5aadcf assets/roots/models/item/pereskia_bulb.json
 667e9628b663d19a58ade97fa9cdb885b1c9c585 assets/roots/models/item/pestle.json
-dde16f862d56b92c0e5d8e61445d10cee1bfe590 assets/roots/models/item/petals.json
 f8ce532274205437bee1ca636d8d9835d90f5708 assets/roots/models/item/primal_grove_stone.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/purple_sprout_spawn_egg.json
 0824c7912db87cec40c50f94e43bd9278784aa44 assets/roots/models/item/pyre.json

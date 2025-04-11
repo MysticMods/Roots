@@ -80,10 +80,6 @@
       "can_villager_compost": true,
       "chance": 0.3
     },
-    "roots:petals": {
-      "can_villager_compost": true,
-      "chance": 0.65
-    },
     "roots:spiritleaf": {
       "can_villager_compost": true,
       "chance": 0.9

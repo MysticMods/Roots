@@ -1017,7 +1017,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.RUNESTONE).requires(RootsTags.Items.RUNESTONE)
-            .requires(RootsTags.Items.PETALS).requires(RootsTags.Items.GROVE_MOSS_HERB)
+            .requires(ItemTags.SMALL_FLOWERS).requires(RootsTags.Items.GROVE_MOSS_HERB)
             .condition(ModConditions.GROVE_STONE_ACTIVE.get())
             .requires(Ingredient.of(ModItems.WOODEN_SHEARS.get(), Items.SHEARS))
             .result(ModItems.RUNIC_SHEARS)), c, RootsAPI.rl("grove/runic_shears"));
@@ -1102,28 +1102,6 @@ public class RootsRecipeProvider extends RecipeProvider {
                 .chanceOutput(ModItems.SPIRITLEAF, 0.6f)
                 .build()
             ), c, RootsAPI.rl("runic_block/spiritleaf_from_beetroot"));
-
-    BaseRecipeData.Builder basePetalsBuilder = BaseRecipeData.Builder.create().requires(ItemTags.SMALL_FLOWERS)
-        .result(ModItems.PETALS, 1);
-    MortarRecipe.Builder petalsBuilder = MortarRecipe.Builder.create().times(1);
-
-    saver = RecipeSaver.saver().unlockedBy("has_small_flowers", has(ItemTags.SMALL_FLOWERS));
-    saver.save(petalsBuilder.build(basePetalsBuilder), c, RootsAPI.rl("mortar/petals"));
-    saver.save(petalsBuilder.times(2).build(basePetalsBuilder.multiplty(2)), c, RootsAPI.rl("mortar/petals_2"));
-    saver.save(petalsBuilder.times(3).build(basePetalsBuilder.multiplty(3)), c, RootsAPI.rl("mortar/petals_3"));
-    saver.save(petalsBuilder.times(4).build(basePetalsBuilder.multiplty(4)), c, RootsAPI.rl("mortar/petals_4"));
-    saver.save(petalsBuilder.times(5).build(basePetalsBuilder.multiplty(5)), c, RootsAPI.rl("mortar/petals_5"));
-
-    basePetalsBuilder = BaseRecipeData.Builder.create().requires(ItemTags.TALL_FLOWERS).result(ModItems.PETALS, 2);
-    petalsBuilder = MortarRecipe.Builder.create().times(1);
-
-    saver = RecipeSaver.saver().unlockedBy("has_tall_flowers", has(ItemTags.TALL_FLOWERS));
-
-    saver.save(petalsBuilder.build(basePetalsBuilder), c, RootsAPI.rl("mortar/petals_tall"));
-    saver.save(petalsBuilder.times(2).build(basePetalsBuilder.multiplty(2)), c, RootsAPI.rl("mortar/petals_tall_2"));
-    saver.save(petalsBuilder.times(3).build(basePetalsBuilder.multiplty(3)), c, RootsAPI.rl("mortar/petals_tall_3"));
-    saver.save(petalsBuilder.times(4).build(basePetalsBuilder.multiplty(4)), c, RootsAPI.rl("mortar/petals_tall_4"));
-    saver.save(petalsBuilder.times(5).build(basePetalsBuilder.multiplty(5)), c, RootsAPI.rl("mortar/petals_tall_5"));
 
     MortarRecipe.Builder flourBuilder = MortarRecipe.Builder.create().times(5);
     BaseRecipeData.Builder flourData = BaseRecipeData.Builder.create().requires(Tags.Items.CROPS_WHEAT)
@@ -1259,7 +1237,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_cloud_berry", has(RootsTags.Items.CLOUD_BERRY_HERB))
         .save(PyreRecipe.Builder.create().ritual(ModRituals.WINDWALL).build(
             BaseRecipeData.Builder.create()
-                .requires(RootsTags.Items.PETALS)
+                .requires(ItemTags.SMALL_FLOWERS)
                 .requires(RootsTags.Items.CLOUD_BERRY_HERB)
                 .requires(RootsTags.Items.SHORT_GRASS)
                 .requires(Items.HONEYCOMB) // TODO: Tag?
@@ -1422,7 +1400,7 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_dandelion", has(Items.DANDELION)).save(MortarRecipe.Builder.create().times(5)
         .build(BaseRecipeData.Builder.create().requires(Items.DANDELION).requires(Tags.Items.CROPS_WHEAT)
-            .requires(RootsTags.Items.PETALS).requires(Tags.Items.DYES_YELLOW).requires(Tags.Items.SEEDS)
+            .requires(ItemTags.SMALL_FLOWERS).requires(Tags.Items.DYES_YELLOW).requires(Tags.Items.SEEDS)
             .unlocks(Unlock.spell(ModSpells.DANDELION_WINDS))), c, RootsAPI.rl("spell/dandelion_winds"));
 
     RecipeSaver.saver().unlockedBy("has_torch", has(Items.TORCH)).save(MortarRecipe.Builder.create().times(5)
@@ -1430,7 +1408,7 @@ public class RootsRecipeProvider extends RecipeProvider {
             .requires(Items.JACK_O_LANTERN).requires(RootsTags.Items.COPPER_NUGGET).requires(RootsTags.Items.RUNIC_DUST)
             .unlocks(Unlock.spell(ModSpells.FEY_LIGHT))), c, RootsAPI.rl("spell/fey_light"));
     RecipeSaver.saver().unlockedBy("has_shield", has(Items.SHIELD)).save(MortarRecipe.Builder.create().times(5)
-        .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.PETALS).requires(Items.SHIELD)
+        .build(BaseRecipeData.Builder.create().requires(ItemTags.SMALL_FLOWERS).requires(Items.SHIELD)
             .requires(Tags.Items.INGOTS_IRON).requires(Items.EGG).requires(Tags.Items.GLASS_BLOCKS)
             .unlocks(Unlock.spell(ModSpells.PETAL_SHELL))), c, RootsAPI.rl("spell/petal_shell"));
     RecipeSaver.saver().unlockedBy("has_birch_bark", has(RootsTags.Items.BIRCH_BARK))
@@ -1478,7 +1456,7 @@ public class RootsRecipeProvider extends RecipeProvider {
             .build(
                 BaseRecipeData.Builder.create().requires(Items.IRON_SWORD).requires(Tags.Items.RAW_MATERIALS_COPPER)
                     .requires(RootsTags.Items.BAFFLECAP_HERB).requires(Tags.Items.GUNPOWDERS)
-                    .requires(RootsTags.Items.PETALS)
+                    .requires(ItemTags.SMALL_FLOWERS)
                     .unlocks(Unlock.spell(ModSpells.LIFE_DRAIN))), c, RootsAPI.rl("spell/life_drain"));
 
     RecipeSaver.saver().unlockedBy("has_wildewheet", has(RootsTags.Items.WILDEWHEET_HERB))
@@ -1532,7 +1510,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .save(MortarRecipe.Builder.create().times(5)
             .build(
                 BaseRecipeData.Builder.create().requires(RootsTags.Items.PERESKIA_HERB)
-                    .requires(RootsTags.Items.PETALS).requires(Items.SHIELD)
+                    .requires(ItemTags.SMALL_FLOWERS).requires(Items.SHIELD)
                     .requires(Items.GLOW_BERRIES).requires(Tags.Items.GEMS_AMETHYST)
                     .unlocks(Unlock.spell(ModSpells.SANCTUARY))), c, RootsAPI.rl("spell/sanctuary"));
 

@@ -423,7 +423,6 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.GLASS_EYE);
     addItem(ModItems.LIFE_ESSENCE);
     addItem(ModItems.MYSTIC_FEATHER);
-    addItem(ModItems.PETALS);
     addItem(ModItems.RUNIC_DUST);
     addItem(ModItems.STRANGE_OOZE);
     addItem(ModItems.ANTLER_HAT);
@@ -565,7 +564,6 @@ public class RootsLangProvider extends LanguageProvider {
     add(RootsTags.Items.PYRES, "Pyres");
     add(RootsTags.Items.GROVE_CRAFTERS, "Grove Crafters");
     add(RootsTags.Items.MORTARS, "Mortars");
-    add(RootsTags.Items.PETALS, "Pestles");
     add(RootsTags.Items.RUNIC_DUST, "Runic Dust");
     add(RootsTags.Items.RUNIC_SHEARS, "Runic Shears");
     add(RootsTags.Items.VEGETABLES, "Vegetables");

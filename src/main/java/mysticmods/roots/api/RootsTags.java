@@ -327,7 +327,6 @@ public class RootsTags {
     public static final TagKey<Item> PYRES = modTag("pyres");
     public static final TagKey<Item> GROVE_CRAFTERS = modTag("crafters");
     public static final TagKey<Item> MORTARS = modTag("mortars");
-    public static final TagKey<Item> PETALS = modTag("petals");
     public static final TagKey<Item> RUNIC_DUST = modTag("dusts/runic");
     public static final TagKey<Item> RUNIC_SHEARS = modTag("runic_shears");
     public static final TagKey<Item> VEGETABLES = modTag("vegetables");
