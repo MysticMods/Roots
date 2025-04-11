@@ -36,7 +36,7 @@ public abstract class RootsAPI {
   public static final ResourceKey<LootTable> HUT = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("chests/hut"));
   public static final ResourceKey<LootTable> BARROW = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("chests/barrow"));
   public static final ResourceKey<LootTable> STANDING_STONES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("chests/standing_stones"));
-  public static final ResourceKey<LootTable> TENTACLES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("entity/squid/tentacles"));
+  public static final ResourceKey<LootTable> TENTACLES = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("entities/squid/tentacles"));
 
   public static ResourceLocation rl(String path) {
     return ResourceLocation.fromNamespaceAndPath(RootsAPI.MODID, path);

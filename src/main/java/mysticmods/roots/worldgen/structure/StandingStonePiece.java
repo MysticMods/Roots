@@ -66,7 +66,7 @@ public class StandingStonePiece extends ScatteredFeaturePiece {
         BlockPos chestPos = center.offset(0, -2, 0);
         pLevel.setBlock(chestPos, Blocks.CHEST.defaultBlockState(), 2);
         if (pLevel.getBlockEntity(chestPos) instanceof RandomizableContainerBlockEntity lootChest) {
-          lootChest.setLootTable(ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("standing_stones")), pRandom.nextLong());
+          lootChest.setLootTable(ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.STANDING_STONES.location()), pRandom.nextLong());
         }
       }
       for (int i = 0; i < 5; i++) {

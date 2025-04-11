@@ -46,5 +46,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "roots:entity/squid/tentacles"
+  "random_sequence": "roots:entities/squid/tentacles"
 }
