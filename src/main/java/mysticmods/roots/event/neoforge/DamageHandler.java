@@ -31,7 +31,7 @@ public class DamageHandler {
       if (instance.getAmplifier() == 0) {
         entity.removeEffect(ModEffects.PETAL_SHELL);
       } else {
-        MobEffectInstance newInstance = new MobEffectInstance(ModEffects.PETAL_SHELL, instance.getDuration(), instance.getAmplifier() - 1);
+        MobEffectInstance newInstance = new MobEffectInstance(ModEffects.PETAL_SHELL, instance.getDuration(), instance.getAmplifier() - 1, false, false);
         entity.removeEffect(ModEffects.PETAL_SHELL);
         entity.addEffect(newInstance);
       }
