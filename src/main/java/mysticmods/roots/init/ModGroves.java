@@ -15,7 +15,10 @@ public class ModGroves {
   public static final DeferredHolder<Grove, Grove> FAIRY = REGISTER.register("fairy", () -> new Grove(ChatFormatting.LIGHT_PURPLE));
   public static final DeferredHolder<Grove, Grove> TWILIGHT = REGISTER.register("twilight", () -> new Grove(ChatFormatting.DARK_PURPLE));
   public static final DeferredHolder<Grove, Grove> FUNGAL = REGISTER.register("fungal", () -> new Grove(ChatFormatting.DARK_AQUA));
-  public static final DeferredHolder<Grove, Grove> SPROUT = REGISTER.register("sprout", () -> new Grove(ChatFormatting.GREEN));
+  public static final DeferredHolder<Grove, Grove> SPROUTING = REGISTER.register("sprouting", () -> new Grove(ChatFormatting.GREEN));
+  static {
+    REGISTER.addAlias(RootsAPI.rl("sprouting"), RootsAPI.rl("sprout"));
+  }
   public static final DeferredHolder<Grove, Grove> ELEMENTAL = REGISTER.register("elemental", () -> new Grove(ChatFormatting.DARK_RED));
   public static final DeferredHolder<Grove, Grove> WILD = REGISTER.register("wild", () -> new Grove(ChatFormatting.YELLOW));
   public static final DeferredHolder<Grove, Grove> HOLLOW = REGISTER.register("hollow", () -> new Grove(ChatFormatting.DARK_GRAY));

@@ -18,20 +18,6 @@ public class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Grove> {
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
-/*      this.tag(RootsTags.Groves.PRIMAL_ALIGNED).add(ModGroves.FUNGAL.get(), ModGroves.SPROUT.get(), ModGroves.FAIRY.get(), ModGroves.WILD.get(), ModGroves.TWILIGHT.get(), ModGroves.ELEMENTAL.get());
-      this.tag(RootsTags.Groves.PRIMAL_OPPOSED);
-      this.tag(RootsTags.Groves.FAIRY_ALIGNED).add(ModGroves.SPROUT.get());
-      this.tag(RootsTags.Groves.FAIRY_OPPOSED).add(ModGroves.TWILIGHT.get());
-      this.tag(RootsTags.Groves.TWILIGHT_ALIGNED).add(ModGroves.FUNGAL.get());
-      this.tag(RootsTags.Groves.TWILIGHT_OPPOSED).add(ModGroves.FAIRY.get());
-      this.tag(RootsTags.Groves.FUNGAL_ALIGNED).add(ModGroves.TWILIGHT.get());
-      this.tag(RootsTags.Groves.FUNGAL_OPPOSED);
-      this.tag(RootsTags.Groves.SPROUT_ALIGNED).add(ModGroves.FAIRY.get(), ModGroves.WILD.get());
-      this.tag(RootsTags.Groves.SPROUT_OPPOSED);
-      this.tag(RootsTags.Groves.ELEMENTAL_ALIGNED);
-      this.tag(RootsTags.Groves.ELEMENTAL_OPPOSED);
-      this.tag(RootsTags.Groves.WILD_ALIGNED).add(ModGroves.SPROUT.get());
-      this.tag(RootsTags.Groves.WILD_OPPOSED);*/
   }
 
   @Override

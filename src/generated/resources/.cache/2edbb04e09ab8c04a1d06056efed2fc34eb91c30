@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-09T14:53:16.1157809	Roots Spell Tags
+// 1.21.1	2025-04-11T10:25:45.9017963	Roots Spell Tags
 98fc9b37dbbb32c844dea8e7fc87e5735b16f31b data/roots/tags/roots/spells/action/geas.json
 2bb0c1d2d9ee9e8b8e83a9d5abaf0b142bb20e49 data/roots/tags/roots/spells/adjustable.json
 fab327e953ae0407ef953026d47e264c24fd5b7a data/roots/tags/roots/spells/elemental.json
@@ -7,7 +7,7 @@ c1c6dee28dc87e30c41dc59f2c695781553499a5 data/roots/tags/roots/spells/fungal.jso
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/hollow.json
 2e9b9634473578211631fd83ba69a29e0a52e107 data/roots/tags/roots/spells/nyi.json
 e78123b28f0fbd4764d6247df185ef934c47982e data/roots/tags/roots/spells/primal.json
-b4369415e281971edbd658ad150e69aec9015444 data/roots/tags/roots/spells/sprout.json
+b4369415e281971edbd658ad150e69aec9015444 data/roots/tags/roots/spells/sprouting.json
 a7a52d0800b3da56779c4c1dee2a2b2b47876f61 data/roots/tags/roots/spells/twilight.json
 1005f3b4bc4202605ac6313bab7ae24d27501135 data/roots/tags/roots/spells/wild.json
 7b6b902b09e68d6db384d3cdc3281fc3ebfcb9dd data/roots/tags/roots/spells/wip.json

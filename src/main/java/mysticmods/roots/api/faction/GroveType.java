@@ -9,7 +9,7 @@ public enum GroveType {
   ELEMENTAL,
   FAIRY,
   FUNGAL,
-  SPROUT,
+  SPROUTING,
   TWILIGHT,
   WILD;
 

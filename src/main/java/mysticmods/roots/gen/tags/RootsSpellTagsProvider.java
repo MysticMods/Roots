@@ -29,7 +29,7 @@ public class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Spell> {
     this.tag(RootsTags.Spells.FAIRY).add(ModSpells.FEY_LIGHT.get(), ModSpells.PETAL_SHELL.get(), ModSpells.ROSE_THORNS.get(), ModSpells.SANCTUARY.get());
     this.tag(RootsTags.Spells.FUNGAL).add(ModSpells.ACID_CLOUD.get(), ModSpells.DISARM.get(), ModSpells.GEAS.get(), ModSpells.CONTROL_UNDEAD.get());
     this.tag(RootsTags.Spells.ELEMENTAL).add(ModSpells.AQUA_BUBBLE.get(), ModSpells.DANDELION_WINDS.get(), ModSpells.RADIANCE.get(), ModSpells.SHATTER.get(), ModSpells.STORM_CLOUD.get(), ModSpells.SKY_SOARER.get(), ModSpells.WILDFIRE.get());
-    this.tag(RootsTags.Spells.SPROUT).add(ModSpells.DESATURATE.get(), ModSpells.SATURATE.get(), ModSpells.GROWTH_INFUSION.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get());
+    this.tag(RootsTags.Spells.SPROUTING).add(ModSpells.DESATURATE.get(), ModSpells.SATURATE.get(), ModSpells.GROWTH_INFUSION.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get());
     this.tag(RootsTags.Spells.PRIMAL).add(ModSpells.AUGMENT.get(), ModSpells.MAGNETISM.get(), ModSpells.EXTENSION.get());
     this.tag(RootsTags.Spells.TWILIGHT).add(ModSpells.LIGHT_DRIFTER.get(), ModSpells.LIFE_DRAIN.get(), ModSpells.JAUNT.get(), ModSpells.TIME_STOP.get());
     this.tag(RootsTags.Spells.WILD).add(ModSpells.NONDETECTION.get());

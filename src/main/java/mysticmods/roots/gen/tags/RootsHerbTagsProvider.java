@@ -29,7 +29,7 @@ public class RootsHerbTagsProvider extends IntrinsicHolderTagsProvider<Herb> {
     this.tag(RootsTags.Herbs.PRIMAL).add(ModHerbs.GROVE_MOSS.get(), ModHerbs.WILDROOT.get());
     this.tag(RootsTags.Herbs.FAIRY).add(ModHerbs.PERESKIA.get());
     this.tag(RootsTags.Herbs.FUNGAL).add(ModHerbs.BAFFLECAP.get());
-    this.tag(RootsTags.Herbs.SPROUT).add(ModHerbs.WILDEWHEET.get());
+    this.tag(RootsTags.Herbs.SPROUTING).add(ModHerbs.WILDEWHEET.get());
     this.tag(RootsTags.Herbs.TWILIGHT).add(ModHerbs.MOONGLOW.get());
     this.tag(RootsTags.Herbs.WILD).add(ModHerbs.SPIRITLEAF.get());
   }

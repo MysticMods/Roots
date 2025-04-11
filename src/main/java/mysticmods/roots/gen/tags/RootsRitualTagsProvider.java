@@ -1,7 +1,6 @@
 package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsTags;
-import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.init.ModRituals;
@@ -27,7 +26,7 @@ public class RootsRitualTagsProvider extends IntrinsicHolderTagsProvider<Ritual>
         .add(ModRituals.GERMINATION.get(), ModRituals.HEALING_AURA.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.TRANSMUTATION.get(), ModRituals.WARDING.get());
     this.tag(RootsTags.Rituals.FUNGAL).add(ModRituals.PURITY.get());
     this.tag(RootsTags.Rituals.ELEMENTAL).add(ModRituals.FIRE_STORM.get(), ModRituals.FROST_LANDS.get(), ModRituals.HEAVY_STORMS.get(), ModRituals.WINDWALL.get());
-    this.tag(RootsTags.Rituals.SPROUT).add(ModRituals.GERMINATION.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.WILDROOT_GROWTH.get());
+    this.tag(RootsTags.Rituals.SPROUTING).add(ModRituals.GERMINATION.get(), ModRituals.SPREADING_FOREST.get(), ModRituals.WILDROOT_GROWTH.get());
     this.tag(RootsTags.Rituals.PRIMAL).add(ModRituals.OVERGROWTH.get(), ModRituals.GROVE_SUPPLICATION.get());
     this.tag(RootsTags.Rituals.TWILIGHT).add(ModRituals.HEALING_AURA.get(), ModRituals.TRANSMUTATION.get());
     this.tag(RootsTags.Rituals.WILD).add(ModRituals.ANIMAL_HARVEST.get(), ModRituals.SUMMON_CREATURES.get(), ModRituals.GATHERING.get());
