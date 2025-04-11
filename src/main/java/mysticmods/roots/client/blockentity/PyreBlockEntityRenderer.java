@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +20,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
-import java.util.Random;
 
 public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBlockEntity> {
   public PyreBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
@@ -39,6 +37,7 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
       VoxelShape pShape = Shapes.create(bounds);
       VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
       PoseStack.Pose pose = pPoseStack.last();
+      ColorHelper.Color color = ColorHelper.color(pBlockEntity.getBlockPos());
 
       pShape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
         float f = (float) (pMaxX - pMinX);
@@ -49,9 +48,9 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
         f1 /= f3;
         f2 /= f3;
         pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ))
-            .setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
+            .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
         pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ))
-            .setColor(1f, 0.5f, 0.25f, 1f).setNormal(pose, f, f1, f2);
+            .setColor(color.g(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
       });
       pPoseStack.popPose();
     }

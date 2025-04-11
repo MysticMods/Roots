@@ -28,6 +28,11 @@ public interface BoundedBlockEntity {
   }
 
   @Nullable
+  default AABB getAABB () {
+    return null;
+  }
+
+  @Nullable
   default AABB getRenderBoundingBox() {
     return null;
   }

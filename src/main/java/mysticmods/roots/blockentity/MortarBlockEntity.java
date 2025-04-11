@@ -87,6 +87,14 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
     return false;
   }
 
+  public RecipeHolder<MortarRecipe> getCachedRecipe () {
+    return cachedRecipe;
+  }
+
+  public RecipeHolder<MortarRecipe> getLastRecipe () {
+    return lastRecipe;
+  }
+
   protected void revalidateRecipe() {
     if (getLevel() == null) {
       return;

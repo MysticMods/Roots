@@ -38,6 +38,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
   private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
   protected AABB singleBlockBoundingBox;
   protected BoundingBox boundingBox;
+  protected AABB aabb;
   protected BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> lastOutput;
 
   public BaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
@@ -105,6 +106,22 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
       boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX(), getRadiusY(), getRadiusZ()).move(getBlockPos());
     }
     return boundingBox;
+  }
+
+  @Override
+  public AABB getAABB () {
+    if (!isBounded()) {
+      return null;
+    }
+    if (aabb == null) {
+      BoundingBox box = getBoundingBox();
+      if (box == null) {
+        return null;
+      }
+      aabb = AABB.of(box);
+    }
+
+    return aabb;
   }
 
   private AABB clientBounds;
