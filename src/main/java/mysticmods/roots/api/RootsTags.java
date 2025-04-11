@@ -621,6 +621,9 @@ public class RootsTags {
   }
 
   public static class Groves extends RootsTags {
+    // TODO: Does it make sense to use tags to denote opposition/alignment?
+    // These are core facets that I don't necessarily want to be "configurable"
+    // but technically hard-coded. However, tags do make it easier.
     public static final TagKey<Grove> PRIMAL_ALIGNED = modTag("aligned/primal");
     public static final TagKey<Grove> FAIRY_ALIGNED = modTag("aligned/fairy");
     public static final TagKey<Grove> TWILIGHT_ALIGNED = modTag("aligned/twilight");
