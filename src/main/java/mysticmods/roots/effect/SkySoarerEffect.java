@@ -21,11 +21,11 @@ public class SkySoarerEffect extends SimpleEffect {
         vehicle = player;
       } else {
         player.hurtMarked = true;
-        player.fallDistance = 0f;
+        player.resetFallDistance();
       }
       vehicle.hasImpulse = true;
       vehicle.hurtMarked = true;
-      vehicle.fallDistance = 0f;
+      vehicle.resetFallDistance();
       if (vehicle instanceof Boat) {
         vehicle.setDeltaMovement(vehicle.getLookAngle()
             .multiply(sky.getAmplifier(), 0, sky.getAmplifier()));
