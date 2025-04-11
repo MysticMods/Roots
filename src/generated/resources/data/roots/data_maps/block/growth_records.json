@@ -94,7 +94,7 @@
       "ageProperty": {
         "ageProperty": "age"
       },
-      "canGrowFunction": "roots:always_can_grow",
+      "canGrowFunction": "roots:stem_block_can_grow",
       "cropBlock": "minecraft:melon_stem",
       "lightFunction": "roots:light_above_eight",
       "maximumAge": 7,
@@ -134,7 +134,7 @@
       "ageProperty": {
         "ageProperty": "age"
       },
-      "canGrowFunction": "roots:always_can_grow",
+      "canGrowFunction": "roots:stem_block_can_grow",
       "cropBlock": "minecraft:pumpkin_stem",
       "lightFunction": "roots:light_above_eight",
       "maximumAge": 7,

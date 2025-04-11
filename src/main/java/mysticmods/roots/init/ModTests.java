@@ -46,6 +46,7 @@ public class ModTests {
   public static final DeferredHolder<CanGrowFunction, VinesCanSpreadFunction> VINES_CAN_SPREAD = CAN_GROW_FUNCTIONS.register("vines_can_spread", VinesCanSpreadFunction::new);
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowDirectionFunction> AGE_CAN_GROW_UP = CAN_GROW_FUNCTIONS.register("age_can_grow_up", () -> new AgeCanGrowDirectionFunction(Direction.UP));
   public static final DeferredHolder<CanGrowFunction, AgeCanGrowDirectionFunction> AGE_CAN_GROW_DOWN = CAN_GROW_FUNCTIONS.register("age_can_grow_down", () -> new AgeCanGrowDirectionFunction(Direction.DOWN));
+  public static final DeferredHolder<CanGrowFunction, StemBlockCanGrow> STEM_BLOCK_CAN_GROW = CAN_GROW_FUNCTIONS.register("stem_block_can_grow", StemBlockCanGrow::new);
 
   public static final DeferredHolder<LightFunction, LightFunction.AnyLightFunction> ANY_LIGHT = LIGHT_FUNCTIONS.register("any_light", LightFunction.AnyLightFunction::new);
   public static final DeferredHolder<LightFunction, LightFunction.LightGreaterThanFunction> LIGHT_ABOVE_ZERO = LIGHT_FUNCTIONS.register("light_above_zero", () -> new LightFunction.LightGreaterThanFunction(0));
