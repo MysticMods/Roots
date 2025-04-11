@@ -23,7 +23,8 @@ public abstract class UseDelegatedBlock extends Block implements EntityBlock {
   protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
     BlockEntity be = level.getBlockEntity(pos);
     if (be instanceof UseDelegatedBlockEntity ube) {
-      return fromResult(ube.use(state, level, pos, player, hitResult, hand, stack));
+      ItemInteractionResult newResult = fromResult(ube.use(state, level, pos, player, hitResult, hand, stack));
+      return newResult;
     }
 
     return super.useItemOn(stack, state, level, pos, player, hand, hitResult);

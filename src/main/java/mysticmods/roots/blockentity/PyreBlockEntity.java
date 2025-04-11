@@ -190,14 +190,14 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
         result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: {}", o.getDescriptionId()));
         result.report(player);
         // Needs to be a success or it sets things on fire
-        return InteractionResult.SUCCESS_NO_ITEM_USED;
+        return InteractionResult.FAIL;
       }
       UnlockResult failedGrants = cachedRecipe.value().checkUnlocks(level, (ServerPlayer) player);
       if (failedGrants.anyFailed() && !cachedRecipe.value().hasOutput(level.registryAccess())) {
         RootsAPI.LOG.info("Grants failed and recipe has no output");
         failedGrants.failedUnlocks().forEach(o -> RootsAPI.LOG.info("Failed unlock {}", o));
         failedGrants.report();
-        return InteractionResult.SUCCESS_NO_ITEM_USED;
+        return InteractionResult.FAIL;
       }
 
       PyreCrafting playerCrafting = new PyreCrafting(inventory, this, player);
