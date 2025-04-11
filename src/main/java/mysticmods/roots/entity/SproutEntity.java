@@ -3,12 +3,14 @@ package mysticmods.roots.entity;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.config.ConfigManager;
+import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -94,6 +96,20 @@ public class SproutEntity extends Animal {
     builder.define(hasGift, false);
   }
 
+  @Override
+  public void aiStep() {
+    if (this.is(RootsTags.Entities.MELODY_SPROUT)) {
+      if (this.level().isClientSide && this.random.nextInt(5) == 0) {
+        for (int i = 0; i < 2; ++i) {
+          this.level()
+              .addParticle(ModParticles.SPROUT_PORTAL.get(), this.getRandomX(0.1F), this.getRandomY() - (double) 0.45F, this.getRandomZ(0.1F), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F, -this.random.nextDouble(), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F);
+        }
+      }
+    }
+
+    super.aiStep();
+  }
+
   public boolean hasGift() {
     return this.entityData.get(hasGift);
   }
@@ -177,11 +193,11 @@ public class SproutEntity extends Animal {
   @Override
   public float getWalkTargetValue(BlockPos pos, LevelReader level) {
     TagKey<Block> blockTag = null;
-    if (this.getType().is(RootsTags.Entities.END_ANIMALS)) {
+    if (this.is(RootsTags.Entities.END_ANIMALS)) {
       blockTag = RootsTags.Blocks.SUPPORTS_MELODY_SPROUT_SPAWN;
-    } else if (this.getType().is(RootsTags.Entities.SNOW_ANIMALS)) {
+    } else if (this.is(RootsTags.Entities.SNOW_ANIMALS)) {
       blockTag = RootsTags.Blocks.SUPPORTS_SNOW_SPROUT_SPAWN;
-    } else if (this.getType().is(RootsTags.Entities.HELL_ANIMALS)) {
+    } else if (this.is(RootsTags.Entities.HELL_ANIMALS)) {
       blockTag = RootsTags.Blocks.SUPPORTS_HELL_SPROUT_SPAWN;
     }
     if (blockTag == null) {
@@ -189,6 +205,10 @@ public class SproutEntity extends Animal {
     } else {
       return level.getBlockState(pos.below()).is(blockTag) ? 10.0f : level.getPathfindingCostFromLightLevels(pos);
     }
+  }
+
+  private boolean is (TagKey<EntityType<?>> tag) {
+    return getType().is(tag);
   }
 
   public static boolean checkMelodySpawnRule (

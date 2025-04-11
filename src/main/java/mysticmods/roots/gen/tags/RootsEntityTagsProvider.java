@@ -157,6 +157,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.HELL_ANIMALS);
     this.tag(RootsTags.Entities.SNOW_ANIMALS).add(ModEntities.SNOW_SPROUT.get());
     this.tag(RootsTags.Entities.END_ANIMALS).add(ModEntities.MELODY_SPROUT.get());
+    this.tag(RootsTags.Entities.MELODY_SPROUT).add(ModEntities.MELODY_SPROUT.get());
   }
 
   @Override

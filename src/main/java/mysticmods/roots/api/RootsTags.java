@@ -514,6 +514,8 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> SNOW_ANIMALS = modTag("snow_animals");
     public static final TagKey<EntityType<?>> HELL_ANIMALS = modTag("hell_animals");
 
+    public static final TagKey<EntityType<?>> MELODY_SPROUT = modTag("sprouts/melody");
+
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));
     }

@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-09T16:58:31.0832425	Roots Particle Provider
+// 1.21.1	2025-04-11T10:57:49.025039	Roots Particle Provider
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/animal_harvest.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel_target.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/fey_light.json
@@ -6,4 +6,5 @@ e010db985110904ded48d94ce298a1dc29566d98 assets/roots/particles/growth.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/meteor.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/pyre.json
 a84f731247477228effe74040741fd88d8f2ba8e assets/roots/particles/pyre_leaf.json
+2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/sprout_portal.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/wildfire.json
