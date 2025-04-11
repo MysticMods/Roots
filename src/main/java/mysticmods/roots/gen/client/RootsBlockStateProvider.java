@@ -116,26 +116,22 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     wallBlock(ModBlocks.RUNED_BRICK_WALL.get(), blockTexture(ModBlocks.RUNED_BRICK.get()));
     wallBlock(ModBlocks.RUNED_TILE_WALL.get(), blockTexture(ModBlocks.RUNED_TILE.get()));
     simpleBlock(ModBlocks.ELEMENTAL_SOIL.get());
-    ModelFile aqueousPillar = models().cubeTop(ModBlocks.AQUEOUS_SOIL.getKey().location()
-        .getPath(), modLoc("block/water_soil_side"), modLoc("block/water_soil_top"));
+    ModelFile aqueousPillar = models().cubeBottomTop(ModBlocks.AQUEOUS_SOIL.getKey().location()
+        .getPath(), modLoc("block/water_soil_side"), modLoc("block/water_soil_top"), modLoc("block/elemental_soil"));
     getVariantBuilder(ModBlocks.AQUEOUS_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(aqueousPillar).build());
-    ModelFile caelicPillar = models().cubeTop(ModBlocks.CAELIC_SOIL.getKey().location()
-        .getPath(), modLoc("block/air_soil_side"), modLoc("block/air_soil_top"));
+    ModelFile caelicPillar = models().cubeBottomTop(ModBlocks.CAELIC_SOIL.getKey().location()
+        .getPath(), modLoc("block/air_soil_side"), modLoc("block/air_soil_top"), modLoc("block/elemental_soil"));
     getVariantBuilder(ModBlocks.CAELIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(caelicPillar).build());
-    ModelFile terranPillar = models().cubeTop(ModBlocks.TERRAN_SOIL.getKey().location()
-        .getPath(), modLoc("block/earth_soil_side"), modLoc("block/earth_soil_top"));
+    ModelFile terranPillar = models().cubeBottomTop(ModBlocks.TERRAN_SOIL.getKey().location()
+        .getPath(), modLoc("block/earth_soil_side"), modLoc("block/earth_soil_top"), modLoc("block/elemental_soil"));
     getVariantBuilder(ModBlocks.TERRAN_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(terranPillar).build());
-    ModelFile fieryPillar = models().cubeTop(ModBlocks.MAGMATIC_SOIL.getKey().location()
-        .getPath(), modLoc("block/fire_soil_side"), modLoc("block/fire_soil_top"));
+    ModelFile fieryPillar = models().cubeBottomTop(ModBlocks.MAGMATIC_SOIL.getKey().location()
+        .getPath(), modLoc("block/fire_soil_side"), modLoc("block/fire_soil_top"), modLoc("block/elemental_soil"));
     getVariantBuilder(ModBlocks.MAGMATIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(fieryPillar).build());
-/*    ModelFile feyLightModel = models().cubeAll(ModBlocks.FEY_LIGHT.getKey().location()
-        .getPath(), modLoc("block/grove_padding")).renderType("cutout");
-    getVariantBuilder(ModBlocks.FEY_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder()
-        .modelFile(feyLightModel).build());*/
     ModelFile ritualPedestal = models().withExistingParent("ritual_pedestal", modLoc("block/complex/ritual_pedestal"));
     getVariantBuilder(ModBlocks.RITUAL_PEDESTAL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(ritualPedestal).build());
