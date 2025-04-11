@@ -207,8 +207,7 @@ public class RootsCommand {
         LevelCondition condition = conditions.get(i);
         if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
           c.getSource()
-              .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", condition.builtInRegistryHolder()
-                  .getKey()));
+              .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", condition.getName()));
           return 1;
         }
       }
@@ -279,8 +278,7 @@ public class RootsCommand {
         LevelCondition condition = conditions.get(i);
         if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
           c.getSource()
-              .sendFailure(Component.translatable("roots.commands.ritual.failed_condition", condition.builtInRegistryHolder()
-                  .getKey()));
+              .sendFailure(Component.translatable("roots.commands.ritual.failed_condition", condition.getName()));
           return 1;
         }
       }
