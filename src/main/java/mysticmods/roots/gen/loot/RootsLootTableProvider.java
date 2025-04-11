@@ -43,6 +43,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
@@ -60,7 +61,7 @@ import java.util.stream.Stream;
 
 public class RootsLootTableProvider {
   public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES, RootsAPI.TENTACLES), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY)), provider);
+    return new LootTableProvider(output, Set.of(RootsAPI.HUT, RootsAPI.BARROW, RootsAPI.STANDING_STONES, RootsAPI.TENTACLES), List.of(new LootTableProvider.SubProviderEntry(ChestLootTables::new, LootContextParamSets.CHEST), new LootTableProvider.SubProviderEntry(RootsBlockLootTables::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(RootsEntityLootTables::new, LootContextParamSets.ENTITY), new LootTableProvider.SubProviderEntry(ChestLootTablesFixer::new, LootContextParamSets.CHEST)), provider);
   }
 
   public static class RootsEntityLootTables extends EntityLootSubProvider {
@@ -666,6 +667,46 @@ public class RootsLootTableProvider {
                           )
                   )
           );
+    }
+  }
+
+  public static class ChestLootTablesFixer implements LootTableSubProvider {
+    private final HolderLookup.Provider provider;
+
+    public ChestLootTablesFixer(HolderLookup.Provider provider) {
+      this.provider = provider;
+    }
+
+    @Override
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
+      ResourceKey<LootTable> old_stones = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("standing_stones"));
+      ResourceKey<LootTable> old_barrow = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("barrow"));
+      ResourceKey<LootTable> old_hut = ResourceKey.create(Registries.LOOT_TABLE, RootsAPI.rl("hut"));
+
+      consumer.accept(
+          old_stones,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool()
+                  .add(
+                      NestedLootTable.lootTableReference(RootsAPI.STANDING_STONES)
+                  ))
+      );
+      consumer.accept(
+          old_barrow,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool()
+                  .add(
+                      NestedLootTable.lootTableReference(RootsAPI.BARROW)
+                  ))
+      );
+      consumer.accept(
+          old_hut,
+          LootTable.lootTable()
+              .withPool(LootPool.lootPool()
+                  .add(
+                      NestedLootTable.lootTableReference(RootsAPI.HUT)
+                  ))
+      );
     }
   }
 

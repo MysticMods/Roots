@@ -1,4 +1,5 @@
-// 1.21.1	2025-04-09T15:31:22.3038205	Loot Tables
+// 1.21.1	2025-04-11T14:40:37.7012144	Loot Tables
+66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
 d53d055fadc939e4d850a6e995abee2b8d1e6705 data/roots/loot_table/blocks/bafflecap.json
@@ -131,3 +132,5 @@ e80816804d571e7a999a45bdc29fb6caa8e05d23 data/roots/loot_table/entities/red_spro
 ec67c32b647af952b4d34b8309bf51d43e23b140 data/roots/loot_table/entities/snow_sprout.json
 856d0bf3f6aa2545e36de3827f58d4ad6e513015 data/roots/loot_table/entities/tan_sprout.json
 a87b9149c20365779a473fa0168a456f15a47c88 data/roots/loot_table/entity/squid/tentacles.json
+fe903b4345c9c914095e1e1318ab0e05a03e3832 data/roots/loot_table/hut.json
+45c913292a79cf3b051b92ab887056b54c7cc3b1 data/roots/loot_table/standing_stones.json
