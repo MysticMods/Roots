@@ -45,6 +45,7 @@ public class Costing {
 
   public Costing(ICostedParent parent, Player player) {
     this(parent);
+    herbMapCache = herbMap(player);
   }
 
   public CostInstance.ChargeType getChargeType() {
