@@ -191,9 +191,8 @@ public class RootsLangProvider extends LanguageProvider {
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
     RootsRegistries.LEVEL_CONDITIONS.entrySet().forEach(o -> {
-          if (o == ModConditions.OVERGROWTH_CONDITION) {
+          if (ModConditions.OVERGROWTH_CONDITION.is(o.getKey())) {
             add(o.getValue().getDescriptionId(), "Water Source or Creeping Grove Moss");
-
           } else {
             add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
           }
