@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin;
+package mysticmods.roots.mixin.client;
 
 import mysticmods.roots.api.RootsTags;
 import net.minecraft.client.Minecraft;

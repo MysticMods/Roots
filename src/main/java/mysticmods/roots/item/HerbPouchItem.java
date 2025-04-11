@@ -35,7 +35,7 @@ public class HerbPouchItem extends Item {
   @Override
   public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-    tooltipComponents.add(Component.literal(""));
+    tooltipComponents.add(Component.empty());
     DyeColor dye = stack.get(DataComponents.BASE_COLOR);
     if (dye != null) {
       tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.getName()))

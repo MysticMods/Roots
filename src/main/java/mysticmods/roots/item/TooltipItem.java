@@ -23,7 +23,7 @@ public class TooltipItem extends Item {
   public void appendHoverText(ItemStack arg, TooltipContext arg2, List<Component> tooltip, TooltipFlag arg3) {
     super.appendHoverText(arg, arg2, tooltip, arg3);
 
-    tooltip.add(Component.literal(""));
+    tooltip.add(Component.empty());
     tooltip.add(Component.translatable(translationKey)
         .setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))));
   }

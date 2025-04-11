@@ -5,7 +5,6 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.network.ClientNetworkHandlers;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import net.minecraft.client.Minecraft;
@@ -51,7 +50,7 @@ public class KeyHandler {
         return;
       }
 
-      ClientNetworkHandlers.openLibrary(hand, inventorySlot);
+      RootsClientHooks.openLibrary(hand, inventorySlot);
     }
 
     int op = -1;

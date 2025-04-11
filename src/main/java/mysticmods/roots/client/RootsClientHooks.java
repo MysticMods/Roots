@@ -1,4 +1,4 @@
-package mysticmods.roots.client.network;
+package mysticmods.roots.client;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.attachment.GrantStorage;
@@ -6,19 +6,26 @@ import mysticmods.roots.api.attachment.HerbStorage;
 import mysticmods.roots.api.attachment.ReputationStorage;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.api.herb.Herb;
-import mysticmods.roots.client.KeyBindings;
+import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.item.TokenItem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
-public class ClientNetworkHandlers {
+public class RootsClientHooks {
   public static void setGrantStorage(GrantStorage storage) {
     if (Minecraft.getInstance() == null) {
       return;
@@ -131,5 +138,32 @@ public class ClientNetworkHandlers {
 
   public static Component getStaffKeyBind() {
     return KeyBindings.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
+  }
+
+  public static void appendTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft == null || minecraft.level == null) {
+      return;
+    }
+
+    LocalPlayer player = minecraft.player;
+    if (player == null) {
+      return;
+    }
+
+    if (minecraft.screen instanceof StaffScreen) {
+      return;
+    }
+
+
+    GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE);
+    if (item instanceof TokenItem.SpellTokenItem spellTokenItem) {
+      tooltipComponents.add(Component.empty());
+      if (grants.hasSpell(spellTokenItem.getSpell())) {
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.unlocked"));
+      } else {
+        tooltipComponents.add(Component.translatable("roots.tooltip.token.unlock"));
+      }
+    }
   }
 }

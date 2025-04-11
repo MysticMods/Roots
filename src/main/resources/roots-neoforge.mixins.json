@@ -28,10 +28,10 @@
     "action.MixinPiglinAi"
   ],
   "client": [
-    "MixinLocalPlayer",
-    "accessor.AccessorMixinEntityRenderer",
-    "accessor.AccessorMixinLevelRenderer",
-    "accessor.AccessorMixinParticleEngine"
+    "client.MixinLocalPlayer",
+    "client.accessor.AccessorMixinEntityRenderer",
+    "client.accessor.AccessorMixinLevelRenderer",
+    "client.accessor.AccessorMixinParticleEngine"
   ],
   "injectors": {
     "defaultRequire": 1

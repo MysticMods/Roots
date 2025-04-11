@@ -1,7 +1,7 @@
 package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.network.ClientNetworkHandlers;
+import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.network.IRootsPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -15,7 +15,7 @@ public record ClientboundDiscardEntityAttachmentPacket(String attachmentType, in
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientNetworkHandlers.discardEntityAttachment(attachmentType, entity);
+    RootsClientHooks.discardEntityAttachment(attachmentType, entity);
   }
 
   @Override

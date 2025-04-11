@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ResolvedRecipes;
-import mysticmods.roots.mixin.accessor.AccessorMixinEntityRenderer;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinEntityRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;

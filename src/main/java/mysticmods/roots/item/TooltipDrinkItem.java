@@ -21,7 +21,7 @@ public class TooltipDrinkItem extends Item {
   @Override
   public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
     super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
-    pTooltipComponents.add(Component.literal(""));
+    pTooltipComponents.add(Component.empty());
     pTooltipComponents.add(Component.translatable(translationKey)
         .setStyle(Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW))));
   }

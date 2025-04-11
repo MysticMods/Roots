@@ -1,7 +1,7 @@
 package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.network.ClientNetworkHandlers;
+import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.network.IRootsPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -15,7 +15,7 @@ public record ClientboundSyncGeasPacket(int entityId, boolean value) implements 
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientNetworkHandlers.syncGeas(entityId, value);
+    RootsClientHooks.syncGeas(entityId, value);
   }
 
   @Override

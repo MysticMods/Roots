@@ -1,6 +1,6 @@
 package mysticmods.roots.client;
 
-import mysticmods.roots.mixin.accessor.AccessorMixinParticleEngine;
+import mysticmods.roots.mixin.client.accessor.AccessorMixinParticleEngine;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.TrackingEmitter;

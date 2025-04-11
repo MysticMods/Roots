@@ -2,7 +2,7 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.client.network.ClientNetworkHandlers;
+import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.network.IRootsPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -29,7 +29,7 @@ public record ClientboundOpenLibraryPacket(@Nullable InteractionHand hand, int i
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientNetworkHandlers.openLibrary(this.hand, this.inventorySlot);
+    RootsClientHooks.openLibrary(this.hand, this.inventorySlot);
   }
 
   @Override

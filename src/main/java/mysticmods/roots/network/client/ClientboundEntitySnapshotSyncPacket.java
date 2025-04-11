@@ -2,7 +2,7 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.SnapshotStorage;
-import mysticmods.roots.client.network.ClientNetworkHandlers;
+import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.network.ISyncPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -17,7 +17,7 @@ public record ClientboundEntitySnapshotSyncPacket(SnapshotStorage storage,
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientNetworkHandlers.setEntitySnapshot(this.entity, this.storage);
+    RootsClientHooks.setEntitySnapshot(this.entity, this.storage);
   }
 
   @Override

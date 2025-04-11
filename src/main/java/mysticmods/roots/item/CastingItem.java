@@ -6,7 +6,7 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
-import mysticmods.roots.client.network.ClientNetworkHandlers;
+import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
@@ -300,7 +300,7 @@ public class CastingItem extends Item {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
     if (context.level() != null && context.level().isClientSide()) {
-      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", ClientNetworkHandlers.getStaffKeyBind()));
+      tooltipComponents.add(Component.translatable("roots.tooltip.staff.key_binding", RootsClientHooks.getStaffKeyBind()));
     }
 
     TooltipUtil.spellStaffTooltip(context, tooltipComponents, stack, tooltipFlag);

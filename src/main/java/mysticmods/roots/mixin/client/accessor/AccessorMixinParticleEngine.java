@@ -1,4 +1,4 @@
-package mysticmods.roots.mixin.accessor;
+package mysticmods.roots.mixin.client.accessor;
 
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.TrackingEmitter;

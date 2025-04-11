@@ -21,21 +21,21 @@ public class TooltipUtil {
     if (storage != null) {
       pTooltipComponents.add(Component.translatable("roots.tooltip.staff.selected", (storage.currentSlot()) + 1));
       ISpellInstance spell = storage.getCurrentSpell();
-      pTooltipComponents.add(Component.literal(""));
+      pTooltipComponents.add(Component.empty());
       if (spell != null) {
         TooltipUtil.spellInstanceTooltip(context, pTooltipComponents, spell, flag);
       } else {
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.no_spell"));
       }
-      pTooltipComponents.add(Component.literal(""));
+      pTooltipComponents.add(Component.empty());
       int tempSlot = 0;
       for (SpellStorage.SpellSlot entry : storage.getSpells()) {
         // TODO: Spell data
         int slotId = tempSlot + 1;
         Component spellName = entry == null ? Component.translatable("roots.tooltip.staff.no_spell") : entry.spell()
             .getStyledName();
-        Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.literal("");
-        Component cd = entry == null ? Component.literal("") : entry.cooldown() > 0 ? Component.translatable("roots.tooltip.staff.cooldown", entry.cooldown() / 20) : Component.literal("");
+        Component selected = tempSlot == storage.currentSlot() ? Component.translatable("roots.tooltip.staff.is_selected") : Component.empty();
+        Component cd = entry == null ? Component.empty() : entry.cooldown() > 0 ? Component.translatable("roots.tooltip.staff.cooldown", entry.cooldown() / 20) : Component.empty();
         pTooltipComponents.add(Component.translatable("roots.tooltip.staff.spell_in_slot", slotId, spellName, selected, cd));
         tempSlot++;
       }
