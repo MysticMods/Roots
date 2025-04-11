@@ -36,7 +36,7 @@ public class ModSpells {
   public static final DeferredHolder<Spell, AquaBubbleSpell> AQUA_BUBBLE = spell(Spells.AQUA_BUBBLE, AquaBubbleSpell::new, ChatFormatting.AQUA, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.DEWGONIA, SpellCosts.BASE_0250))));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_COOLDOWN = P.recordProperty("aqua_bubble/cooldown", Property.ofInt(1200, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_DURATION = P.recordProperty("aqua_bubble/duration", Property.ofInt(20 * 90, SpellProperties.DURATION));
-  public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_ABSORPTION = P.recordProperty("aqua_bubble/absorption", Property.ofInt(40, "The amount of damage absorbed by the aqua bubble, 1 equals half a heart."));
+  public static final PropertyHolder<Property.IntegerProperty> AQUA_BUBBLE_ABSORPTION = P.recordProperty("aqua_bubble/absorption", Property.ofInt(4, "The amount of damage absorbed by the aqua bubble, 1 equals half a heart."));
   public static final PropertyHolder<Property.FloatProperty> AQUA_BUBBLE_FIRE_REDUCTION = P.recordProperty("aqua_bubble/fire_reduction", Property.ofFloat(0.6f, "The percentage of fire damage reduced by the aqua bubble."));
   public static final PropertyHolder<Property.FloatProperty> AQUA_BUBBLE_LAVA_REDUCTION = P.recordProperty("aqua_bubble/lava_reduction", Property.ofFloat(0.6f, "The percentage of lava damage reduced by the aqua bubble."));
 

@@ -62,8 +62,8 @@ public class AquaBubbleSpell extends Spell {
       return 0;
     }
     SnapshotHelper.addLiving(pPlayer, ModSerializers.AQUA_BUBBLE.get(), new AquaBubbleSnapshot(pPlayer, duration, absorption, fire_reduction, lava_reduction));
-    pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, (int) absorption / 2, false, false));
-    pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, (int) absorption / 2, false, false));
+    pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, 0, false, false));
+    pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, absorption, false, false));
     return cooldown;
   }
 }

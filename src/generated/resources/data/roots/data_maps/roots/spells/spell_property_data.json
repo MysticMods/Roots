@@ -71,8 +71,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "The amount of damage absorbed by the aqua bubble, 1 equals half a heart.",
-          "default_value": 40,
-          "value": 40
+          "default_value": 4,
+          "value": 4
         }
       },
       {
