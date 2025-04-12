@@ -8,6 +8,7 @@ import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
+import mysticmods.roots.api.datamap.SproutGift;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -251,50 +252,69 @@ public class RootsDataMapProvider extends DataMapProvider {
 
     var builder14 = builder(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
     // Requires finding a world-generated crop
-    builder14.add(Items.BEETROOT_SEEDS.builtInRegistryHolder(), 40, false);
+    builder14.add(Items.BEETROOT_SEEDS.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 40)
+    ), false);
     // Super-easy to find
-    builder14.add(Items.WHEAT_SEEDS.builtInRegistryHolder(), 5, false);
+    builder14.add(Items.WHEAT_SEEDS.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 5)
+    ), false);
     // Craftable from melons, requires finding a jungle
-    builder14.add(Items.MELON_SEEDS.builtInRegistryHolder(), 40, false);
+    builder14.add(Items.MELON_SEEDS.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 20)
+    ), false);
     // Requires finding a jungle
-    builder14.add(Items.COCOA_BEANS.builtInRegistryHolder(), 40, false);
+    builder14.add(Items.COCOA_BEANS.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 40)
+    ), false);
     // Craftable from pumpkins, easily found
-    builder14.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), 15, false);
+    builder14.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 10)
+    ), false);
     // Requires finding a potato crop or potato in a whatever
-    builder14.add(Items.POTATO.builtInRegistryHolder(), 30, false);
+    builder14.add(Items.POTATO.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 50)
+    ), false);
     // Requires finding a carrot crop or a carrot in a whatever
-    builder14.add(Items.CARROT.builtInRegistryHolder(), 30, false);
-
-    // Relatively easy to find eventually
-    builder14.add(ModItems.WILDROOT, 20, false);
-
-    // Easy to find and replicate
-    builder14.add(ModItems.GROVE_SPORES, 10, false);
-
-    // Requires finding an aubergine world spawn
-    builder14.add(ModItems.AUBERGINE_SEEDS, 20, false);
+    builder14.add(Items.CARROT.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 40)
+    ), false);
 
     // Requires specific crafting recipes
-    builder14.add(ModItems.MOONGLOW_SEEDS, 40, false);
-    builder14.add(ModItems.SPIRITLEAF_SEEDS, 40, false);
-    builder14.add(ModItems.WILDEWHEET_SEEDS, 40, false);
-    builder14.add(ModItems.BAFFLECAP, 40, false);
+    SproutGift rootsHerbs = new SproutGift(RootsTags.Entities.SPROUTS, 40);
+
+    builder14.add(ModItems.MOONGLOW_SEEDS, List.of(rootsHerbs), false);
+    builder14.add(ModItems.SPIRITLEAF_SEEDS, List.of(rootsHerbs), false);
+    builder14.add(ModItems.WILDEWHEET_SEEDS, List.of(rootsHerbs), false);
+    builder14.add(ModItems.BAFFLECAP, List.of(rootsHerbs), false);
 
     // These should be exceptionally rare
-    builder14.add(Items.TORCHFLOWER_SEEDS.builtInRegistryHolder(), 5, false);
-    builder14.add(Items.PITCHER_POD.builtInRegistryHolder(), 5, false);
+    builder14.add(Items.TORCHFLOWER_SEEDS.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.SPROUTS, 8)
+    ), false);
+    builder14.add(Items.PITCHER_POD.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.SPROUTS, 8)
+    ), false);
 
     // Nether-based plants
-    builder14.add(Items.CRIMSON_FUNGUS.builtInRegistryHolder(), 10, false);
-    builder14.add(Items.WARPED_FUNGUS.builtInRegistryHolder(), 10, false);
-    builder14.add(Items.NETHER_WART.builtInRegistryHolder(), 10, false);
+    List<SproutGift> nether = List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 10),
+        new SproutGift(RootsTags.Entities.SPECIAL_SPROUTS, 30)
+    );
+    builder14.add(Items.CRIMSON_FUNGUS.builtInRegistryHolder(), nether, false);
+    builder14.add(Items.WARPED_FUNGUS.builtInRegistryHolder(), nether, false);
+    builder14.add(Items.NETHER_WART.builtInRegistryHolder(), nether, false);
 
     // Rarer plants
-    builder14.add(Items.KELP.builtInRegistryHolder(), 50, false);
-    builder14.add(Items.SEAGRASS.builtInRegistryHolder(), 50, false);
+    builder14.add(Items.KELP.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 20)
+    ), false);
 
     // Super rare plants
-    builder14.add(Items.CHORUS_PLANT.builtInRegistryHolder(), 1, false);
+    builder14.add(Items.CHORUS_FLOWER.builtInRegistryHolder(), List.of(
+        new SproutGift(RootsTags.Entities.NORMAL_SPROUTS, 5),
+        new SproutGift(RootsTags.Entities.SPECIAL_SPROUTS, 15)
+    ), false);
 
     // Growth records!
     var builder15 = builder(DataMaps.GROWTH_RECORDS);

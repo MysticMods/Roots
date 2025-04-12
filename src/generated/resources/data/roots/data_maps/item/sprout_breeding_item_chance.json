@@ -1,26 +1,128 @@
 {
   "values": {
-    "minecraft:beetroot_seeds": 40,
-    "minecraft:carrot": 30,
-    "minecraft:chorus_plant": 1,
-    "minecraft:cocoa_beans": 40,
-    "minecraft:crimson_fungus": 10,
-    "minecraft:kelp": 50,
-    "minecraft:melon_seeds": 40,
-    "minecraft:nether_wart": 10,
-    "minecraft:pitcher_pod": 5,
-    "minecraft:potato": 30,
-    "minecraft:pumpkin_seeds": 15,
-    "minecraft:seagrass": 50,
-    "minecraft:torchflower_seeds": 5,
-    "minecraft:warped_fungus": 10,
-    "minecraft:wheat_seeds": 5,
-    "roots:aubergine_seeds": 20,
-    "roots:bafflecap": 40,
-    "roots:grove_spores": 10,
-    "roots:moonglow_seeds": 40,
-    "roots:spiritleaf_seeds": 40,
-    "roots:wildewheet_seeds": 40,
-    "roots:wildroot": 20
+    "minecraft:beetroot_seeds": [
+      {
+        "chance": 40,
+        "sproutTag": "roots:sprouts/normal"
+      }
+    ],
+    "minecraft:carrot": [
+      {
+        "chance": 40,
+        "sproutTag": "roots:sprouts/normal"
+      }
+    ],
+    "minecraft:chorus_flower": [
+      {
+        "chance": 5,
+        "sproutTag": "roots:sprouts/normal"
+      },
+      {
+        "chance": 15,
+        "sproutTag": "roots:sprouts/special"
+      }
+    ],
+    "minecraft:cocoa_beans": [
+      {
+        "chance": 40,
+        "sproutTag": "roots:sprouts/normal"
+      }
+    ],
+    "minecraft:crimson_fungus": [
+      {
+        "chance": 10,
+        "sproutTag": "roots:sprouts/normal"
+      },
+      {
+        "chance": 30,
+        "sproutTag": "roots:sprouts/special"
+      }
+    ],
+    "minecraft:kelp": [
+      {
+        "chance": 20,
+        "sproutTag": "roots:sprouts/normal"
+      }
+    ],
+    "minecraft:melon_seeds": [
+      {
+        "chance": 20,
+        "sproutTag": "roots:sprouts/normal"
+      }
+    ],
+    "minecraft:nether_wart": [
+      {
+        "chance": 10,
+        "sproutTag": "roots:sprouts/normal"
+      },
+      {
+        "chance": 30,
+        "sproutTag": "roots:sprouts/special"
+      }
+    ],
+    "minecraft:pitcher_pod": [
+      {
+        "chance": 8,
+        "sproutTag": "roots:sprouts"
+      }
+    ],
+    "minecraft:potato": [
+      {
+        "chance": 50,
+        "sproutTag": "roots:sprouts/normal"
+      }
+    ],
+    "minecraft:pumpkin_seeds": [
+      {
+        "chance": 10,
+        "sproutTag": "roots:sprouts/normal"
+      }
+    ],
+    "minecraft:torchflower_seeds": [
+      {
+        "chance": 8,
+        "sproutTag": "roots:sprouts"
+      }
+    ],
+    "minecraft:warped_fungus": [
+      {
+        "chance": 10,
+        "sproutTag": "roots:sprouts/normal"
+      },
+      {
+        "chance": 30,
+        "sproutTag": "roots:sprouts/special"
+      }
+    ],
+    "minecraft:wheat_seeds": [
+      {
+        "chance": 5,
+        "sproutTag": "roots:sprouts/normal"
+      }
+    ],
+    "roots:bafflecap": [
+      {
+        "chance": 40,
+        "sproutTag": "roots:sprouts"
+      }
+    ],
+    "roots:moonglow_seeds": [
+      {
+        "chance": 40,
+        "sproutTag": "roots:sprouts"
+      }
+    ],
+    "roots:spiritleaf_seeds": [
+      {
+        "chance": 40,
+        "sproutTag": "roots:sprouts"
+      }
+    ],
+    "roots:wildewheet_seeds": [
+      {
+        "chance": 40,
+        "sproutTag": "roots:sprouts"
+      }
+    ]
   }
 }

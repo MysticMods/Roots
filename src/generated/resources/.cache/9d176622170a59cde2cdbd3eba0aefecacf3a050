@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-11T10:53:27.6424722	Roots Entity Type Tags
+// 1.21.1	2025-04-12T21:26:04.5136449	Roots Entity Type Tags
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/add_tentacle_loot.json
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/allow_casting_tool_right_click.json
@@ -18,7 +18,14 @@ ee75b90db1cfb03a8ce6da87690f062a665055c4 data/roots/tags/entity_type/healable_ic
 9717909a6109cd9ec9ea5ab3263ee9a5294e63bc data/roots/tags/entity_type/runic_shears_override.json
 b9316b35927bc11406131118efbee4d9bc15f237 data/roots/tags/entity_type/snow_animals.json
 05430a8b8e8dca2114bbaddac120df103aa795ec data/roots/tags/entity_type/sprouts.json
+7b614260da126eebdd8094b61fe1ef093df96a89 data/roots/tags/entity_type/sprouts/green.json
 40bd37384798902352ba5e5b6bb4a2d1cbecdb7b data/roots/tags/entity_type/sprouts/melody.json
+6faea5bc076ec38c2b50a40a91dd19c9eb6dc428 data/roots/tags/entity_type/sprouts/normal.json
+298a8cebd511792830318377b6f61469448b8898 data/roots/tags/entity_type/sprouts/purple.json
+379289cb9eb0c289a48e6991510d74789df8db00 data/roots/tags/entity_type/sprouts/red.json
+b9316b35927bc11406131118efbee4d9bc15f237 data/roots/tags/entity_type/sprouts/snow.json
+020676adc729a21d998bebe891c65e3b75057b5e data/roots/tags/entity_type/sprouts/special.json
+43eaeeb534e1d8046215163e5656a0c133d41cf3 data/roots/tags/entity_type/sprouts/tan.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/squid.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/time_stop_exclude.json
 1b7e7801f876a0240e1e163329e1387f064856d4 data/roots/tags/entity_type/traders.json

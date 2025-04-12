@@ -514,6 +514,16 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> HELL_ANIMALS = modTag("hell_animals");
 
     public static final TagKey<EntityType<?>> MELODY_SPROUT = modTag("sprouts/melody");
+    public static final TagKey<EntityType<?>> SNOW_SPROUT = modTag("sprouts/snow");
+    public static final TagKey<EntityType<?>> HELL_SPROUT = modTag("sprouts/hell");
+
+    public static final TagKey<EntityType<?>> RED_SPROUT = modTag("sprouts/red");
+    public static final TagKey<EntityType<?>> TAN_SPROUT = modTag("sprouts/tan");
+    public static final TagKey<EntityType<?>> GREEN_SPROUT = modTag("sprouts/green");
+    public static final TagKey<EntityType<?>> PURPLE_SPROUT = modTag("sprouts/purple");
+
+    public static final TagKey<EntityType<?>> SPECIAL_SPROUTS = modTag("sprouts/special");
+    public static final TagKey<EntityType<?>> NORMAL_SPROUTS = modTag("sprouts/normal");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

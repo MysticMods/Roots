@@ -2,6 +2,7 @@ package mysticmods.roots.entity;
 
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.datamap.SproutGift;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
@@ -45,6 +46,7 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class SproutEntity extends Animal {
 
@@ -146,11 +148,16 @@ public class SproutEntity extends Animal {
     int defaultWeight = ConfigManager.SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE.getAsInt();
 
     for (Holder<Item> item : items) {
-      Integer weight = item.getData(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
-      if (weight == null) {
-        weight = defaultWeight;
+      List<SproutGift> entries = item.getData(DataMaps.SPROUT_BREEDING_ITEM_CHANCE);
+      if (entries == null) {
+        builder.add(item.value(), defaultWeight);
+      } else {
+        for (SproutGift entry : entries) {
+          if (is(entry.sproutTag())) {
+            builder.add(item.value(), entry.chance());
+          }
+        }
       }
-      builder.add(item.value(), weight);
     }
 
     SimpleWeightedRandomList<Item> result = builder.build();
