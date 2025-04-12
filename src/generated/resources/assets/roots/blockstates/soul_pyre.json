@@ -1,15 +1,27 @@
 {
   "variants": {
-    "burning=false,lit=false": {
+    "burning=false,lit=false,waterlogged=false": {
       "model": "roots:block/soul_pyre"
     },
-    "burning=false,lit=true": {
+    "burning=false,lit=false,waterlogged=true": {
       "model": "roots:block/soul_pyre"
     },
-    "burning=true,lit=false": {
+    "burning=false,lit=true,waterlogged=false": {
+      "model": "roots:block/soul_pyre"
+    },
+    "burning=false,lit=true,waterlogged=true": {
+      "model": "roots:block/soul_pyre"
+    },
+    "burning=true,lit=false,waterlogged=false": {
       "model": "roots:block/soul_pyre_lit"
     },
-    "burning=true,lit=true": {
+    "burning=true,lit=false,waterlogged=true": {
+      "model": "roots:block/soul_pyre_lit"
+    },
+    "burning=true,lit=true,waterlogged=false": {
+      "model": "roots:block/soul_pyre_lit"
+    },
+    "burning=true,lit=true,waterlogged=true": {
       "model": "roots:block/soul_pyre_lit"
     }
   }

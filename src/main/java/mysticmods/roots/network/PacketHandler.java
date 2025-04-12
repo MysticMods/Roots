@@ -2,6 +2,7 @@ package mysticmods.roots.network;
 
 import mysticmods.roots.network.client.*;
 import mysticmods.roots.network.client.fx.*;
+import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellPacket;
 import mysticmods.roots.network.server.ServerboundSwapSpellsPacket;
@@ -30,6 +31,7 @@ public class PacketHandler {
     registrar.play(ServerboundSetSpellPacket.TYPE, ServerboundSetSpellPacket.CODEC);
     registrar.play(ServerboundSwapSpellsPacket.TYPE, ServerboundSwapSpellsPacket.CODEC);
     registrar.play(ServerboundSetSpellDataPacket.TYPE, ServerboundSetSpellDataPacket.CODEC);
+    registrar.play(ServerboundOpenPouchPacket.TYPE, ServerboundOpenPouchPacket.CODEC);
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {

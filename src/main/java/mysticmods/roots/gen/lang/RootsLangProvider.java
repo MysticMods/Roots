@@ -75,6 +75,7 @@ public class RootsLangProvider extends LanguageProvider {
 
     add("roots.tooltip.pouch.color", "Dyed: %s");
     add("roots.tooltip.pouch.color_name", "%s");
+    add("roots.tooltip.pouch.key_binding", "Press '%s' to open your pouch.");
 
     add("roots.tooltip.staff.selected", "Selected Slot: %s");
     add("roots.tooltip.staff.no_spell", "No spell.");

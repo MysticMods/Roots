@@ -1,19 +1,49 @@
 package mysticmods.roots.network.server;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.inventory.HerbPouchMenu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
 public class ServerNetworkHooks {
+  public static void openPouch (Player player) {
+      ItemStack stack = ItemStack.EMPTY;
+      for (ItemStack curioStack : RootsAPI.INSTANCE.getCurios(player, RootsTags.Items.POUCHES)) {
+        stack = curioStack;
+        break;
+      }
+      if (!stack.is(RootsTags.Items.POUCHES)) {
+        player.getItemInHand(InteractionHand.MAIN_HAND);
+      }
+      if (!stack.is(RootsTags.Items.POUCHES)) {
+        stack = player.getItemInHand(InteractionHand.OFF_HAND);
+      }
+      if (!stack.is(RootsTags.Items.POUCHES)) {
+        Inventory inv = player.getInventory();
+        for (int i = 0; i < inv.getContainerSize(); i++) {
+          stack = inv.getItem(i);
+          if (stack.is(RootsTags.Items.POUCHES)) {
+            break;
+          }
+        }
+      }
+      if (!stack.is(RootsTags.Items.POUCHES)) {
+        return;
+      }
+
+      player.openMenu(new HerbPouchMenu(stack));
+  }
 
   public static void setSpellData(Player player, InteractionHand hand, int index, int value) {
     ItemStack stack = player.getItemInHand(hand);

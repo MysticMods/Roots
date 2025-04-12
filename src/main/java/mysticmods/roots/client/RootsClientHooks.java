@@ -140,6 +140,10 @@ public class RootsClientHooks {
     return KeyBindings.OPEN_SPELL_LIBRARY.getKey().getDisplayName();
   }
 
+  public static Component getPouchKeyBind () {
+    return KeyBindings.OPEN_POUCH.getKey().getDisplayName();
+  }
+
   public static void appendTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft == null || minecraft.level == null) {

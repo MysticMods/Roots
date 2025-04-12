@@ -6,6 +6,8 @@ import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.inventory.HerbPouchMenu;
+import mysticmods.roots.network.server.ServerboundOpenPouchPacket;
 import mysticmods.roots.network.server.ServerboundSetSpellDataPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
@@ -24,6 +26,11 @@ public class KeyHandler {
   public static void onClientTick(ClientTickEvent.Post event) {
     Minecraft mc = Minecraft.getInstance();
     if (mc.player == null) {
+      return;
+    }
+
+    while (KeyBindings.OPEN_POUCH.consumeClick()) {
+      PacketDistributor.sendToServer(ServerboundOpenPouchPacket.INSTANCE);
       return;
     }
 
@@ -51,6 +58,7 @@ public class KeyHandler {
       }
 
       RootsClientHooks.openLibrary(hand, inventorySlot);
+      return;
     }
 
     int op = -1;
