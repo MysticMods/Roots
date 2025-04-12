@@ -1,6 +1,7 @@
 package mysticmods.roots.impl;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import mysticmods.roots.api.IRootsAPI;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.attachment.AttachmentUtil;
@@ -11,16 +12,22 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.integration.curios.CuriosIntegration;
 import mysticmods.roots.network.client.ClientboundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientboundHerbCountSyncPacket;
 import mysticmods.roots.network.client.ClientboundReputationMessagePacket;
 import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class RootsAPIImpl extends RootsAPI {
+import java.util.List;
+
+public class RootsAPIImpl implements IRootsAPI {
   @Override
   public void unlock(ServerPlayer player, Unlock<?> unlock) {
     AttachmentUtil.monitorAndSync(player, ModAttachments.GRANT_STORAGE, (sPlayer, storage) -> {
@@ -57,5 +64,10 @@ public class RootsAPIImpl extends RootsAPI {
   @Override
   public RitualInformation.RitualResolutionType getRitualResolutionType() {
     return ConfigManager.RITUAL_RESOLUTION_TYPE.get();
+  }
+
+  @Override
+  public List<ItemStack> getCurios(Player player, TagKey<Item> tag) {
+    return CuriosIntegration.getTagged(player, tag);
   }
 }

@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -25,10 +26,11 @@ import net.neoforged.neoforge.common.Tags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Set;
 
 public abstract class RootsAPI {
-  public static RootsAPI INSTANCE;
+  public static IRootsAPI INSTANCE = null;
   public static final Tier LIVING_TOOL_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 300, 6.0f, 2.0f, 19, () -> Ingredient.of(RootsTags.Items.BARKS));
   public static final Tier COPPER_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 350, 6.0f, 2.0f, 10, () -> Ingredient.of(Tags.Items.STORAGE_BLOCKS_COPPER));
   public static final Tier RUNED_TIER = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 9.0f, 4.0f, 15, () -> Ingredient.of(RootsTags.Items.RUNED_OBSIDIAN));
@@ -59,7 +61,7 @@ public abstract class RootsAPI {
   public static final Set<ItemAbility> KNIFE_DEFAULTS = Set.of(KNIFE_STRIP, KNIFE_DIG, FORAGE);
 
 
-  public static RootsAPI getInstance() {
+  public static IRootsAPI getInstance() {
     return INSTANCE;
   }
 
@@ -72,14 +74,4 @@ public abstract class RootsAPI {
     return Component.translatable("roots.tooltip.hold_shift", Component.translatable("roots.tooltip.shift")
         .setStyle(Style.EMPTY.withBold(true).withUnderlined(true).withColor(ChatFormatting.DARK_GRAY)));
   }
-
-  public abstract void unlock(ServerPlayer player, Unlock<?> unlock);
-
-  public abstract boolean canUnlock(ServerPlayer player, Unlock<?> unlock);
-
-  public abstract void syncHerbs(Player player, Object2DoubleMap<Herb> herbs);
-
-  public abstract void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique);
-
-  public abstract RitualInformation.RitualResolutionType getRitualResolutionType();
 }

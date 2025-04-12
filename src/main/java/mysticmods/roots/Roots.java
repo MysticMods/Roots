@@ -1,5 +1,6 @@
 package mysticmods.roots;
 
+import mysticmods.roots.api.IRootsAPI;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.impl.RootsAPIImpl;
@@ -9,6 +10,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+
+import java.util.ServiceLoader;
 
 // TODO: Main TODO list
 // Can throw a herb pouch out while editing it
@@ -38,7 +41,14 @@ public class Roots {
     container.registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
     container.registerConfig(ModConfig.Type.CLIENT, ConfigManager.CLIENT_CONFIG);
 
-    RootsAPI.INSTANCE = new RootsAPIImpl();
+    ServiceLoader<IRootsAPI> loader = ServiceLoader.load(IRootsAPI.class);
+    for (IRootsAPI api : loader) {
+      RootsAPI.INSTANCE = api;
+      break;
+    }
+    if (RootsAPI.INSTANCE == null) {
+      throw new IllegalStateException("No implementation of IRootsAPI found. Please ensure that the Roots API is included in your classpath.");
+    }
 
     ModBlocks.register(bus);
     ModBlockEntities.register(bus);
