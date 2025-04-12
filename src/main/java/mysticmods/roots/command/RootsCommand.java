@@ -13,6 +13,7 @@ import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.block.GroveStoneBlock;
+import mysticmods.roots.block.PyreBlock;
 import mysticmods.roots.blockentity.PyreBlockEntity;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
@@ -31,6 +32,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -179,7 +181,11 @@ public class RootsCommand {
         return 1;
       }
 
-      level.setBlock(pos, ModBlocks.PYRE.get().defaultBlockState(), 3);
+      if (level.getFluidState(pos).is(FluidTags.WATER) && level.getFluidState(pos).isSource()) {
+        level.setBlock(pos, ModBlocks.PYRE.get().defaultBlockState().setValue(PyreBlock.WATERLOGGED, true), 3);
+      } else {
+        level.setBlock(pos, ModBlocks.PYRE.get().defaultBlockState(), 3);
+      }
       level.setBlock(pos.below(), Blocks.CHEST.defaultBlockState(), 3);
 
       // Place a chest below the pyre
@@ -250,7 +256,11 @@ public class RootsCommand {
         return 1;
       }
 
-      level.setBlock(pos, ModBlocks.PYRE.get().defaultBlockState(), 3);
+      if (level.getFluidState(pos).is(FluidTags.WATER) && level.getFluidState(pos).isSource()) {
+        level.setBlock(pos, ModBlocks.PYRE.get().defaultBlockState().setValue(PyreBlock.WATERLOGGED, true), 3);
+      } else {
+        level.setBlock(pos, ModBlocks.PYRE.get().defaultBlockState(), 3);
+      }
       level.setBlock(pos.below(), Blocks.CHEST.defaultBlockState(), 3);
 
       // Place a chest below the pyre

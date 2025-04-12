@@ -11,23 +11,31 @@ import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.particle.ColorGravityParticleOptions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -35,15 +43,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
+public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleWaterloggedBlock {
   // Active -> flames of some description
   public static final BooleanProperty BURNING = BooleanProperty.create("burning");
   // Lit -> producing light!
   public static final BooleanProperty LIT = BooleanProperty.create("lit");
+  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   public PyreBlock(Properties builder) {
     super(builder);
-    registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(BURNING, false));
+    registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(BURNING, false).setValue(WATERLOGGED, false));
   }
 
   @Override
@@ -54,7 +63,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PyreBlock.LIT, PyreBlock.BURNING);
+    pBuilder.add(PyreBlock.LIT, PyreBlock.BURNING, PyreBlock.WATERLOGGED);
   }
 
   @Nullable
@@ -167,5 +176,31 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
         }
       }
     }
+  }
+
+  @javax.annotation.Nullable
+  @Override
+  public BlockState getStateForPlacement(BlockPlaceContext context) {
+    BlockState state = defaultBlockState();
+    FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+    if (fluidState.is(FluidTags.WATER)) {
+      return state.setValue(WATERLOGGED, true);
+    }
+
+    return state;
+  }
+
+  @Override
+  public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+    if (stateIn.getValue(WATERLOGGED)) {
+      worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+    }
+
+    return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+  }
+
+  @Override
+  public FluidState getFluidState(BlockState state) {
+    return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 }

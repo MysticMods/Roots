@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings({"Duplicates"})
 public class WaterloggedBlock extends Block implements SimpleWaterloggedBlock {
-  protected static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   public WaterloggedBlock(Properties properties) {
     super(properties);
