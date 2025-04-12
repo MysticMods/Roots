@@ -54,8 +54,7 @@ public class GrowthEmitter extends NoRenderParticle {
         level.addParticle(
             new ColorGravityParticleOptions(
                 ModParticles.GROWTH,
-                0x248542,
-                0f
+                0x248542
             ),
             pos.x,
             pos.y,

@@ -9,7 +9,7 @@ public class MeteorParticle extends TextureSheetParticle {
   protected float rCol2, gCol2, bcol2;
   protected float rotSpeed, spinAcceleration;
 
-  protected MeteorParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2, float gravity) {
+  protected MeteorParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.speedUpWhenYMotionIsBlocked = true;
     this.lifetime = 10;
@@ -63,7 +63,7 @@ public class MeteorParticle extends TextureSheetParticle {
   public record Provider(SpriteSet sprite) implements ParticleProvider<ColorGravityParticleOptions> {
     @Override
     public Particle createParticle(ColorGravityParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      var particle = new MeteorParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2(), type.gravity());
+      var particle = new MeteorParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprite);
       return particle;
     }

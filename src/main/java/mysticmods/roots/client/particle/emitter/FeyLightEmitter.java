@@ -52,8 +52,7 @@ public class FeyLightEmitter extends NoRenderParticle {
             new ColorGravityParticleOptions(
                 ModParticles.FEY_LIGHT,
                 color[0],
-                color[1],
-                0f
+                color[1]
             ),
             x + (random.nextFloat() - 0.5) * 0.2,
             y + (random.nextFloat() - 0.5) * 0.2,

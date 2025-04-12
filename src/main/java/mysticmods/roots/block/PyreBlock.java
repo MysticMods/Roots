@@ -137,8 +137,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
             new ColorGravityParticleOptions(
                 ModParticles.PYRE,
                 color1,
-                color2,
-                -(pRandom.nextFloat() * 0.03f)
+                color2
             ),
             x + (pRandom.nextFloat() - 0.5f) * 0.3f,
             y + 0.1f + (pRandom.nextFloat()) * 0.2f,
@@ -163,8 +162,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
           pLevel.addParticle(
               new ColorGravityParticleOptions(
                   ModParticles.PYRE_LEAF,
-                  pRandom.nextBoolean() ? 0x7abb75 : 0x2b6322,
-                  0f
+                  pRandom.nextBoolean() ? 0x7abb75 : 0x2b6322
               ),
               x,
               y + 1.5,

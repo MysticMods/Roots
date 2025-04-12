@@ -41,8 +41,7 @@ public class ClientFXHandlers {
             new ColorGravityParticleOptions(
                 ModParticles.ANIMAL_HARVEST,
                 col1,
-                col2,
-                0f
+                col2
             ),
             entity.getX(),
             yOffset,
@@ -67,8 +66,7 @@ public class ClientFXHandlers {
           new ColorGravityParticleOptions(
               ModParticles.CHANNEL_TARGET,
               col1,
-              col2,
-              0f
+              col2
           ),
           start.x,
           start.y,
@@ -81,8 +79,7 @@ public class ClientFXHandlers {
           new ColorGravityParticleOptions(
               ModParticles.CHANNEL_TARGET,
               col2,
-              col1,
-              0f
+              col1
           ),
           start.x,
           start.y,
@@ -106,8 +103,7 @@ public class ClientFXHandlers {
             new ColorGravityParticleOptions(
                 ModParticles.GROWTH,
                 0x2ce713,
-                0x4d7e20,
-                0f
+                0x4d7e20
             ),
             location.getX() + 0.5 + xOffset,
             location.getY() + yOffset,
@@ -132,8 +128,7 @@ public class ClientFXHandlers {
             new ColorGravityParticleOptions(
                 ModParticles.GROWTH,
                 0xc2d02a,
-                0x7fc73c,
-                0f
+                0x7fc73c
             ),
             location.getX() + 0.5 + xOffset,
             location.getY() + yOffset,

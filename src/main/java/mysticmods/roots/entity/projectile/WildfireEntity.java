@@ -160,8 +160,7 @@ public class WildfireEntity extends Projectile {
           new ColorGravityParticleOptions(
               ModParticles.WILDFIRE,
               0xe87a21,
-              0xc10000,
-              -(this.random.nextFloat() * 0.03f)
+              0xc10000
           ),
           getX() + (this.random.nextFloat() - 0.5f) * 0.15f,
           getY(),

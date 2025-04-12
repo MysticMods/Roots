@@ -10,36 +10,34 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-public record ColorGravityParticleOptions(ParticleType<?> type, int color1, int color2,
-                                          float gravity) implements ParticleOptions {
+public record ColorGravityParticleOptions(ParticleType<?> type, int color1, int color2
+) implements ParticleOptions {
 
   public static MapCodec<ColorGravityParticleOptions> codec(ParticleType<?> type) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codec.INT.fieldOf("color1").forGetter(ColorGravityParticleOptions::color1),
-        Codec.INT.fieldOf("color2").forGetter(ColorGravityParticleOptions::color2),
-        Codec.FLOAT.fieldOf("gravity").forGetter(ColorGravityParticleOptions::gravity)
-    ).apply(instance, (c1, c2, gravity) -> new ColorGravityParticleOptions(type, c1, c2, gravity)));
+        Codec.INT.fieldOf("color2").forGetter(ColorGravityParticleOptions::color2)
+    ).apply(instance, (c1, c2) -> new ColorGravityParticleOptions(type, c1, c2)));
   }
 
   public static StreamCodec<ByteBuf, ColorGravityParticleOptions> streamCodec(ParticleType<?> type) {
     return StreamCodec.composite(
-        ByteBufCodecs.INT, o -> o.color1(),
-        ByteBufCodecs.INT, o -> o.color2(),
-        ByteBufCodecs.FLOAT, o -> o.gravity(),
-        (c1, c2, gr) -> new ColorGravityParticleOptions(type, c1, c2, gr)
+        ByteBufCodecs.INT, ColorGravityParticleOptions::color1,
+        ByteBufCodecs.INT, ColorGravityParticleOptions::color2,
+        (c1, c2) -> new ColorGravityParticleOptions(type, c1, c2)
     );
   }
 
-  public ColorGravityParticleOptions(ParticleType<?> type, int color, float gravity) {
-    this(type, color, color, gravity);
+  public ColorGravityParticleOptions(ParticleType<?> type, int color) {
+    this(type, color, color);
   }
 
-  public ColorGravityParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> type, int color1, int color2, float gravity) {
-    this(type.get(), color1, color2, gravity);
+  public ColorGravityParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> type, int color1, int color2) {
+    this(type.get(), color1, color2);
   }
 
-  public ColorGravityParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> type, int color, float gravity) {
-    this(type.get(), color, color, gravity);
+  public ColorGravityParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> type, int color) {
+    this(type.get(), color, color);
   }
 
   @Override

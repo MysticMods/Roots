@@ -70,8 +70,7 @@ public class MeteorEntity extends Entity {
               new ColorGravityParticleOptions(
                   ModParticles.METEOR,
                   0xe87a21,
-                  0xc10000,
-                  -(this.random.nextFloat() * 0.03f)
+                  0xc10000
               ),
               getX() + (this.random.nextFloat() - 0.5f) * 0.35f,
               getY(),

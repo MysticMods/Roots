@@ -54,8 +54,7 @@ public class DecorativePyreBlock extends Block {
           new ColorGravityParticleOptions(
               ModParticles.PYRE,
               color1,
-              color2,
-              -(pRandom.nextFloat() * 0.03f)
+              color2
           ),
           x + (pRandom.nextFloat() - 0.5f) * 0.3f,
           y + 0.1f + (pRandom.nextFloat()) * 0.2f,
