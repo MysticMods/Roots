@@ -12,7 +12,7 @@ public class AnimalHarvestParticle extends TextureSheetParticle {
   protected AnimalHarvestParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.speedUpWhenYMotionIsBlocked = true;
-    this.lifetime = 60;
+    this.lifetime = 25;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
     this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
     this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
