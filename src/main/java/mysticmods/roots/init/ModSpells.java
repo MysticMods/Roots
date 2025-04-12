@@ -103,7 +103,7 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> GEAS_COUNT = P.recordProperty("geas/count", Property.ofInt(1, SpellProperties.COUNT));
 
   static {
-    REGISTER.addAlias(RootsAPI.rl("enslave_undead"), RootsAPI.rl("control_undead"));
+    REGISTER.addAlias(RootsAPI.rl("control_undead"), RootsAPI.rl("summon_undead"));
   }
 
   // Control Undead (320 cooldown)

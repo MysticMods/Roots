@@ -50,7 +50,7 @@ public class ModConditions {
       .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
   public static final DeferredHolder<LevelCondition, OvergrowthCondition> OVERGROWTH_CONDITION = LEVEL.register("overgrowth", OvergrowthCondition::new);
   static {
-    LEVEL.addAlias(RootsAPI.rl("overgrowth"), RootsAPI.rl("water_source"));
+    LEVEL.addAlias(RootsAPI.rl("water_source"), RootsAPI.rl("overgrowth"));
   }
 
   public static void register(IEventBus bus) {

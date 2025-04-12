@@ -28,7 +28,7 @@ public class ModBlocks {
   public static DeferredHolder<Block, WaterloggedBlock> THATCH = BLOCKS.register("thatch", () -> new WaterloggedBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BANJO).strength(0.5f).sound(SoundType.GRASS)));
   static {
-    BLOCKS.addAlias(RootsAPI.rl("thatch"), RootsAPI.rl("sheared_thatch"));
+    BLOCKS.addAlias(RootsAPI.rl("sheared_thatch"), RootsAPI.rl("thatch"));
   }
 
   private static final BlockBehaviour.Properties RUNESTONE_PROPERTIES = BlockBehaviour.Properties.of()

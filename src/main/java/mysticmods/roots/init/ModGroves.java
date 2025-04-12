@@ -17,7 +17,7 @@ public class ModGroves {
   public static final DeferredHolder<Grove, Grove> FUNGAL = REGISTER.register("fungal", () -> new Grove(ChatFormatting.DARK_AQUA));
   public static final DeferredHolder<Grove, Grove> SPROUTING = REGISTER.register("sprouting", () -> new Grove(ChatFormatting.GREEN));
   static {
-    REGISTER.addAlias(RootsAPI.rl("sprouting"), RootsAPI.rl("sprout"));
+    REGISTER.addAlias(RootsAPI.rl("sprout"), RootsAPI.rl("sprouting"));
   }
   public static final DeferredHolder<Grove, Grove> ELEMENTAL = REGISTER.register("elemental", () -> new Grove(ChatFormatting.DARK_RED));
   public static final DeferredHolder<Grove, Grove> WILD = REGISTER.register("wild", () -> new Grove(ChatFormatting.YELLOW));
