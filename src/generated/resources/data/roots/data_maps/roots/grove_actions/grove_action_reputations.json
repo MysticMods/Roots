@@ -47,6 +47,23 @@
           "gain4": 1
         },
         "unique": false
+      },
+      {
+        "entries": [
+          {
+            "type": "target_entity",
+            "name": "roots:sprouts"
+          }
+        ],
+        "grove": "roots:sprouting",
+        "name": "roots:bred_sprouts",
+        "reputation": {
+          "gain1": 20,
+          "gain2": 10,
+          "gain3": 5,
+          "gain4": 1
+        },
+        "unique": false
       }
     ],
     "roots:craft_item": [

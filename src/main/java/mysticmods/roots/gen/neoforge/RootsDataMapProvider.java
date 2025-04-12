@@ -488,7 +488,8 @@ public class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("create_runic_shears"), new GroveReputation(50), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_ITEM, ModItems.RUNIC_SHEARS.getId())))
     ), false);
     builder20.add(ModActions.BRED_ANIMAL, List.of(
-        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("bred_animal"), new GroveReputation(10, 8, 4, 1))
+        new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("bred_animal"), new GroveReputation(10, 8, 4, 1)),
+        new GroveReputationEntry(ModGroves.SPROUTING.value(), RootsAPI.rl("bred_sprouts"), new GroveReputation(20, 10, 5, 1), GroveReputationEntry.SubEntryType.TARGET_ENTITY, RootsTags.Entities.SPROUTS)
     ), false);
     builder20.add(ModActions.SHATTER_BLOCK, List.of(
         new GroveReputationEntry(ModGroves.ELEMENTAL.value(), RootsAPI.rl("shattered_ore_block"), new GroveReputation(2, 1, 0, 0), GroveReputationEntry.SubEntryType.BLOCK, Tags.Blocks.ORES)
