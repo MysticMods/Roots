@@ -35,10 +35,7 @@ import java.util.function.BiPredicate;
 
 public class BloomingRitual extends Ritual {
   private int count;
-  private int nextTick;
-  // TODO: Data map for block costs that increase the interval
 
-  // TODO: Caching of positions based on predicate
   private static final BiPredicate<Level, BlockPos> TWO_AIR_ABOVE = (level, pos) -> {
     BlockPos above = pos.above();
     return level.getFluidState(pos).isEmpty() && level.getFluidState(pos.above())
