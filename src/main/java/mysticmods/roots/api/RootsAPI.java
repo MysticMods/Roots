@@ -2,6 +2,7 @@ package mysticmods.roots.api;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import mysticmods.roots.api.action.GroveReputation;
+import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
@@ -79,4 +80,6 @@ public abstract class RootsAPI {
   public abstract void syncHerbs(Player player, Object2DoubleMap<Herb> herbs);
 
   public abstract void grant(ServerPlayer player, Grove grove, ResourceLocation id, GroveReputation reputation, boolean unique);
+
+  public abstract RitualInformation.RitualResolutionType getRitualResolutionType();
 }

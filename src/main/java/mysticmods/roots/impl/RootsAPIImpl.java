@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.api.attachment.GrantStorage;
+import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
@@ -51,5 +52,10 @@ public class RootsAPIImpl extends RootsAPI {
         PacketDistributor.sendToPlayer(serverPlayer, new ClientboundReputationMessagePacket(grove, change));
       }
     }, ClientboundReputationSyncPacket::new);
+  }
+
+  @Override
+  public RitualInformation.RitualResolutionType getRitualResolutionType() {
+    return ConfigManager.RITUAL_RESOLUTION_TYPE.get();
   }
 }

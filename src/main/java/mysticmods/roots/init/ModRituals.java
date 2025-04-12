@@ -80,6 +80,7 @@ public class ModRituals {
 
   public static final DeferredHolder<Ritual, HeavyStormsRitual> HEAVY_STORMS = RITUAL.register("heavy_storms", HeavyStormsRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_DURATION = P.recordProperty("heavy_storms/duration", Property.ofInt(2400, RitualProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_WEATHER_DURATION = P.recordProperty("heavy_storms/weather_duration", Property.ofInt(200, "How long storms and rain should continue for."));
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_INTERVAL = P.recordProperty("heavy_storms/interval", Property.ofInt(20, RitualProperties.INTERVAL));
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_RADIUS_XZ = P.recordProperty("heavy_storms/radius_xz", Property.ofInt(15, RitualProperties.RADIUS_XZ));
   public static final PropertyHolder<Property.IntegerProperty> HEAVY_STORMS_RADIUS_Y = P.recordProperty("heavy_storms/radius_y", Property.ofInt(15, RitualProperties.RADIUS_Y));
@@ -105,7 +106,7 @@ public class ModRituals {
   public static final PropertyHolder<Property.BooleanProperty> PROTECTION_LENGTHENS_DAY = P.recordProperty("protection/lengthens_day", Property.ofBool(true, "Whether the ritual lengthens the length of the day by the defined value."));
   public static final PropertyHolder<Property.FloatProperty> PROTECTION_DAY_SPEED = P.recordProperty("protection/day_speed", Property.ofFloat(0.3f, "The fractional value that is applied to the time per tick during the 'day' period. The default of 0.3 means that the length of the day is increased by about 60%. -1 represents no difference."));
   public static final PropertyHolder<Property.FloatProperty> PROTECTION_NIGHT_SPEED = P.recordProperty("protection/night_speed", Property.ofFloat(2f, "The fractional value that is applied to the time per tick during the 'night' period. The default of 2 means that the length of the night is reduced by about 50%. -1 represents no difference."));
-  public static final PropertyHolder<Property.IntegerProperty> PROTECTION_CLEAR_DURATION = P.recordProperty("protection/clear_duration", Property.ofInt(6000, "How long the weather is cleared for, if the weather is cleared."));
+  public static final PropertyHolder<Property.IntegerProperty> PROTECTION_CLEAR_DURATION = P.recordProperty("protection/clear_duration", Property.ofInt(20 * 60 * 20, "How long the weather is cleared for, if the weather is cleared."));
 
   public static final DeferredHolder<Ritual, PurityRitual> PURITY = RITUAL.register("purity", PurityRitual::new);
   public static final PropertyHolder<Property.IntegerProperty> PURITY_DURATION = P.recordProperty("purity/duration", Property.ofInt(1200, RitualProperties.DURATION));

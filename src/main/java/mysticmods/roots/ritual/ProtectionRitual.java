@@ -1,11 +1,13 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
@@ -39,9 +41,15 @@ public class ProtectionRitual extends Ritual {
       }
     }
 
+    // TODO: Modded dimensions
     if (duration % getInterval() == 0 && clearsWeather) {
       // Clear the rains!
-      server.setWeatherParameters(clearDuration, 0, false, false);
+      RitualInformation info = server.getData(ModAttachments.RITUAL_INFORMATION);
+      if (info.shouldStopWeather()) {
+        server.setWeatherParameters(clearDuration, 0, false, false);
+        info.startProtection();
+        info.stopHeavyStorms();
+      }
     }
   }
 
@@ -50,14 +58,28 @@ public class ProtectionRitual extends Ritual {
 
   }
 
-  // TODO: Is this really enough?
-  // - Consider: breaking the pyre block, replacing the pyre block with air
+  @Override
+  public void stops(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.stops(pLevel, pPos, pState, blockEntity, random);
+    RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);
+    info.stopProtection();
+  }
+
   @Override
   public void ends(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
     super.ends(pLevel, pPos, pState, blockEntity, random);
 
     ServerLevel server = (ServerLevel) pLevel;
     server.setDayTimePerTick(-1f);
+  }
+
+  @Override
+  public void removed(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.removed(pLevel, pPos, pState, blockEntity, random);
+    ServerLevel server = (ServerLevel) pLevel;
+    server.setDayTimePerTick(-1f);
+    RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);
+    info.stopProtection();
   }
 
   @Override

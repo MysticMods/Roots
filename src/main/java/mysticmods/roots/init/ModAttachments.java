@@ -2,10 +2,7 @@ package mysticmods.roots.init;
 
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.attachment.GrantStorage;
-import mysticmods.roots.api.attachment.HerbStorage;
-import mysticmods.roots.api.attachment.ReputationStorage;
-import mysticmods.roots.api.attachment.SnapshotStorage;
+import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -35,6 +32,7 @@ public class ModAttachments {
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> RUNIC_SHEARS_ENTITY_COOLDOWN = ATTACHMENTS.register("runic_shears_entity_cooldown", ModAttachments::createIntegerAttachmentType);
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> RUNIC_SHEARS_TOKEN_COOLDOWN = ATTACHMENTS.register("runic_shears_token_cooldown", ModAttachments::createIntegerAttachmentType);
   public static final DeferredHolder<AttachmentType<?>, AttachmentType<Integer>> SQUID_MILKING_COOLDOWN = ATTACHMENTS.register("squid_milking_cooldown", ModAttachments::createIntegerAttachmentType);
+  public static final DeferredHolder<AttachmentType<?>, AttachmentType<RitualInformation>> RITUAL_INFORMATION = ATTACHMENTS.register("ritual_information", () -> AttachmentType.builder(RitualInformation::new).serialize(RitualInformation.CODEC).build());
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());

@@ -1,11 +1,13 @@
 package mysticmods.roots.ritual;
 
+import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.blockentity.PyreBlockEntity;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModRituals;
 import mysticmods.roots.util.RitualPositionCache;
 import net.minecraft.core.BlockPos;
@@ -26,6 +28,7 @@ import java.util.function.BiPredicate;
 public class HeavyStormsRitual extends Ritual {
   private float lightningChance;
   private boolean causesRain, causesThunder;
+  private int weatherDuration;
 
   private static final BiPredicate<Level, BlockPos> AIR_ABOVE = (level, pos) -> level.isEmptyBlock(pos.above()) && !level.isEmptyBlock(pos);
   private static final List<BiPredicate<Level, BlockPos>> PREDICATES = Arrays.asList(AIR_ABOVE);
@@ -38,9 +41,15 @@ public class HeavyStormsRitual extends Ritual {
   @Override
   protected void functionalTick(Level pLevel, BlockPos pPos, BlockState pState, RitualPositionCache pCache, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
     if (duration % getInterval() == 0) {
+      // TODO: Weather in modded dimensions
       ServerLevel serverLevel = (ServerLevel) pLevel;
       if (causesThunder || causesRain) {
-        serverLevel.setWeatherParameters(0, getDuration(), causesRain, causesThunder);
+        RitualInformation info = serverLevel.getData(ModAttachments.RITUAL_INFORMATION);
+        if (info.shouldStartWeather()) {
+          info.startHeavyStorms();
+          info.stopProtection();
+          serverLevel.setWeatherParameters(0, getDuration(), causesRain, causesThunder);
+        }
       }
 
       if (randomSource.nextFloat() < lightningChance) {
@@ -58,6 +67,20 @@ public class HeavyStormsRitual extends Ritual {
   }
 
   @Override
+  public void stops(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.stops(pLevel, pPos, pState, blockEntity, random);
+    RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);
+    info.stopHeavyStorms();
+  }
+
+  @Override
+  public void removed(Level pLevel, BlockPos pPos, BlockState pState, PyreBlockEntity blockEntity, RandomSource random) {
+    super.removed(pLevel, pPos, pState, blockEntity, random);
+    RitualInformation info = pLevel.getData(ModAttachments.RITUAL_INFORMATION);
+    info.stopHeavyStorms();
+  }
+
+  @Override
   protected void animationTick(Level pLevel, BlockPos pPos, BlockState pState, BoundingBox pBoundingBox, PyreBlockEntity blockEntity, int duration, RandomSource randomSource) {
 
   }
@@ -68,6 +91,7 @@ public class HeavyStormsRitual extends Ritual {
     lightningChance = properties.get(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);
     causesRain = properties.get(ModRituals.HEAVY_STORMS_CAUSES_RAIN);
     causesThunder = properties.get(ModRituals.HEAVY_STORMS_CAUSES_THUNDER);
+    weatherDuration = properties.get(ModRituals.HEAVY_STORMS_WEATHER_DURATION);
   }
 
   protected void buildProperties(List<PropertyHolder<?>> properties) {
@@ -75,6 +99,7 @@ public class HeavyStormsRitual extends Ritual {
     properties.add(ModRituals.HEAVY_STORMS_LIGHTNING_CHANCE);
     properties.add(ModRituals.HEAVY_STORMS_CAUSES_RAIN);
     properties.add(ModRituals.HEAVY_STORMS_CAUSES_THUNDER);
+    properties.add(ModRituals.HEAVY_STORMS_WEATHER_DURATION);
   }
 
   @Override

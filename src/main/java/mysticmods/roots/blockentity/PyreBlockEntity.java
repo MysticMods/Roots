@@ -48,7 +48,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -479,6 +478,9 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
   public void stopRitual(boolean doLight) {
     resetBounds();
     if (currentRitual != null) {
+      if (!doLight) {
+        currentRitual.stops(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+      }
       currentRitual.ends(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
     }
     setCurrentRitual(null);
@@ -557,6 +559,7 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
     if (getLevel() != null && !getLevel().isClientSide()) {
       if (currentRitual != null) {
         currentRitual.ends(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
+        currentRitual.removed(getLevel(), getBlockPos(), getBlockState(), this, getRandom());
       }
     }
   }

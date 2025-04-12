@@ -540,6 +540,15 @@
           "default_value": true,
           "value": true
         }
+      },
+      {
+        "id": "roots:heavy_storms/weather_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long storms and rain should continue for.",
+          "default_value": 200,
+          "value": 200
+        }
       }
     ],
     "roots:overgrowth": [
@@ -640,8 +649,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How long the weather is cleared for, if the weather is cleared.",
-          "default_value": 6000,
-          "value": 6000
+          "default_value": 24000,
+          "value": 24000
         }
       },
       {

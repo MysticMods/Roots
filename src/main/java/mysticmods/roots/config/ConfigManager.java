@@ -1,6 +1,7 @@
 package mysticmods.roots.config;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.attachment.RitualInformation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
@@ -36,6 +37,8 @@ public class ConfigManager {
 
   public static ModConfigSpec.BooleanValue DEBUG_REPUTATION;
   public static ModConfigSpec.BooleanValue SUPPRESS_REPUTATION_CHANGES;
+
+  public static ModConfigSpec.EnumValue<RitualInformation.RitualResolutionType> RITUAL_RESOLUTION_TYPE;
 
 
   public static ModConfigSpec COMMON_CONFIG;
@@ -87,6 +90,9 @@ public class ConfigManager {
     CLIENT_BUILDER.push("debug");
     SUPPRESS_REPUTATION_CHANGES = CLIENT_BUILDER.comment("if true, will suppress all reputation changes from being display on the client")
         .define("suppress_reputation_changes", true);
+    COMMON_BUILDER.push("ritual_conflict");
+    RITUAL_RESOLUTION_TYPE = COMMON_BUILDER.comment("how rituals (heavy storms, protection) will be resolved on the server: [protection_priority=the protection ritual will always suppress the weather effects of heavy storms, storm_priority=the heavy storms ritual will always change the weather even with protection running, age_priority=the ritual started earliest will have priority]").defineEnum("ritual_resolution_type", RitualInformation.RitualResolutionType.AGE_PRIORITY);
+
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
   }
