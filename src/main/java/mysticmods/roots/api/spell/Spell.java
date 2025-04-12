@@ -317,6 +317,7 @@ public abstract class Spell implements IStyled, ICosted, SpellLike, TooltipCompo
     initialize(holder);
     fillDataMaximumValues(dataIndexMaximums);
     if (dataIndexMaximums.size() != keyToDataIndex.size()) {
+      // TODO: Rampant growth breaks this contract?
       RootsAPI.LOG.error("Key-to-data index and data index maximum mismatch: {}", holder.getKey());
     }
   }
