@@ -30,6 +30,8 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -257,6 +259,7 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
         }
 
         uses++;
+        getLevel().playSound(null, getBlockPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0f, 0.6f);
         setChanged();
 
         if (uses >= cachedRecipe.value().getTimes()) {
