@@ -98,12 +98,8 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.level != null) {
       for (int i = 0; i < 2; i++) {
-        double progress = minecraft.level.random.nextDouble();
-        double angle = progress * Math.PI * 4;
-        double radius = progress * 0.5;
-
-        double xOffset = radius * Math.cos(angle);
-        double zOffset = radius * Math.sin(angle);
+        double xOffset = minecraft.level.random.nextDouble() - 0.5;
+        double zOffset = minecraft.level.random.nextDouble() - 0.5;
         double yOffset = (minecraft.level.random.nextFloat() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
@@ -128,12 +124,8 @@ public class ClientFXHandlers {
     Minecraft minecraft = Minecraft.getInstance();
     if (minecraft.level != null) {
       for (int i = 0; i < 1; i++) {
-        double progress = minecraft.level.random.nextDouble();
-        double angle = progress * Math.PI * 4;
-        double radius = progress * 0.5;
-
-        double xOffset = radius * Math.cos(angle);
-        double zOffset = radius * Math.sin(angle);
+        double xOffset = minecraft.level.random.nextDouble() - 0.5;
+        double zOffset = minecraft.level.random.nextDouble() - 0.5;
         double yOffset = (minecraft.level.random.nextFloat() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
