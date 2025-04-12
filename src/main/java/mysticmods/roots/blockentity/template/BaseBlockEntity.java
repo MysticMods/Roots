@@ -96,6 +96,11 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     super.saveAdditional(pTag, lookup);
   }
 
+  protected void resetBounds () {
+    boundingBox = null;
+    aabb = null;
+  }
+
   @SuppressWarnings("deprecation")
   @Override
   public BoundingBox getBoundingBox() {
@@ -103,7 +108,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
       return null;
     }
     if (boundingBox == null) {
-      boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX(), getRadiusY(), getRadiusZ()).move(getBlockPos());
+      boundingBox = new BoundingBox(-getRadiusX(), -getRadiusY(), -getRadiusZ(), getRadiusX(), getRadiusY(), getRadiusZ());
     }
     return boundingBox;
   }
@@ -124,7 +129,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     return aabb;
   }
 
-  private AABB clientBounds;
+/*  private AABB clientBounds;
 
   @Nullable
   public AABB getRenderBoundingBox() {
@@ -148,7 +153,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
     }
 
     return singleBlockBoundingBox;
-  }
+  }*/
 
   public ItemStack outputAdjacent(ItemStack stack) {
     // Unneccessary allocation?

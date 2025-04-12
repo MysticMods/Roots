@@ -92,6 +92,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock {
       Containers.dropContents(pLevel, pPos, ibe.getItems());
 
       if (ibe instanceof PyreBlockEntity pyre) {
+        pyre.removed();
         List<ItemStack> popped = pyre.popStoredItems();
         if (!popped.isEmpty()) {
           NonNullList<ItemStack> items = NonNullList.withSize(popped.size(), ItemStack.EMPTY);

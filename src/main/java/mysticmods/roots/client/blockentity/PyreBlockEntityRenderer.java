@@ -30,31 +30,6 @@ public class PyreBlockEntityRenderer extends BoundedBlockEntityRenderer<PyreBloc
   public void render(PyreBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
     super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
 
-    if (Minecraft.getInstance().getEntityRenderDispatcher()
-        .shouldRenderHitBoxes() && pBlockEntity.getCurrentRitual() != null) {
-      AABB bounds = pBlockEntity.getCurrentRitual().getAABB();
-      pPoseStack.pushPose();
-      VoxelShape pShape = Shapes.create(bounds);
-      VertexConsumer pConsumer = pBufferSource.getBuffer(RenderType.lines());
-      PoseStack.Pose pose = pPoseStack.last();
-      ColorHelper.Color color = ColorHelper.color(pBlockEntity.getBlockPos());
-
-      pShape.forAllEdges((pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ) -> {
-        float f = (float) (pMaxX - pMinX);
-        float f1 = (float) (pMaxY - pMinY);
-        float f2 = (float) (pMaxZ - pMinZ);
-        float f3 = Mth.sqrt(f * f + f1 * f1 + f2 * f2);
-        f /= f3;
-        f1 /= f3;
-        f2 /= f3;
-        pConsumer.addVertex(pose.pose(), (float) (pMinX), (float) (pMinY), (float) (pMinZ))
-            .setColor(color.r(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
-        pConsumer.addVertex(pose.pose(), (float) (pMaxX), (float) (pMaxY), (float) (pMaxZ))
-            .setColor(color.g(), color.g(), color.b(), color.a()).setNormal(pose, f, f1, f2);
-      });
-      pPoseStack.popPose();
-    }
-
     List<ItemStack> items = pBlockEntity.getNonEmptyItems();
 
     for (int i = 0; i < items.size(); i++) {

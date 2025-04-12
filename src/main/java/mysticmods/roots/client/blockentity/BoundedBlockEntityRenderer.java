@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BoundedBlockEntityRenderer<T extends BlockEntity & BoundedBlockEntity> implements BlockEntityRenderer<T> {
   protected final BlockEntityRendererProvider.Context context;
 
-  private AABB renderBounds = null;
+  private final AABB renderBounds;
 
   public BoundedBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     this.context = context;
