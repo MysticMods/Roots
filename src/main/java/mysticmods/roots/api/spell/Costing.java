@@ -10,7 +10,6 @@ import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.ICosted;
 import mysticmods.roots.api.registry.ICostedParent;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.integration.curios.CuriosIntegration;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +19,6 @@ import net.neoforged.neoforge.items.IItemHandler;
 
 import java.util.*;
 
-// TODO: Urgent -- CuriosIntegration breaks API
 // TODO: Abstract this away from player-based
 public class Costing {
   private final ICostedParent parent;
@@ -108,7 +106,7 @@ public class Costing {
         }
       }
     }
-    List<ItemStack> curios = CuriosIntegration.getPouches(player);
+    List<ItemStack> curios = RootsAPI.getInstance().getCurios(player, RootsTags.Items.CURIOS_BELTS);
     for (int i = 0; i < curios.size(); i++) {
       ItemStack inSlot = curios.get(i);
       if (inSlot.is(RootsTags.Items.CREATIVE_POUCHES)) {
@@ -188,7 +186,7 @@ public class Costing {
     calculateCosts(true, false, false, tick);
 
     Inventory playerInventory = player.getInventory();
-    List<ItemStack> curios = CuriosIntegration.getPouches(player);
+    List<ItemStack> curios = RootsAPI.getInstance().getCurios(player, RootsTags.Items.CURIOS_BELTS);
     HerbStorage cap = player.getData(ModAttachments.HERB_STORAGE);
 
     for (Object2DoubleMap.Entry<Herb> entry : totalCosts.object2DoubleEntrySet()) {
