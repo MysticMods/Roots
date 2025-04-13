@@ -235,7 +235,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
 
     handheld(ModItems.FIRE_STARTER, "tools");
     handheld(ModItems.GRAMARY, "tools");
-    handheld(ModItems.LIVING_ARROW, "tools");
+    subfolder(ModItems.LIVING_ARROW, "tools");
     handheld(ModItems.LIVING_AXE, "tools");
     handheld(ModItems.LIVING_HOE, "tools");
     handheld(ModItems.LIVING_PICKAXE, "tools");

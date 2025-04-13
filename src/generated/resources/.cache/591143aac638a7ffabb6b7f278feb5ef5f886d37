@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-13T15:38:51.2093392	Item Models: roots
+// 1.21.1	2025-04-13T15:41:36.4934514	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -83,7 +83,7 @@ f49e298ede83512d9c74474554aa89982e07f3ea assets/roots/models/item/inferno_bulb.j
 5a69aa2da7a46f4d23db5ee0f46b65c18210345d assets/roots/models/item/jungle_bark.json
 07ac679ec17fe212caece89bfa2729cba6367410 assets/roots/models/item/life_essence.json
 2d13b03401c4afaf2f0a49c28eb7eb58bfd2a5be assets/roots/models/item/lilac_cordial.json
-dcbc8e5274324f73154d4a6e243bfa2cb763616f assets/roots/models/item/living_arrow.json
+0c4949e74b949ad4743f430249d503ca1ac3ae6d assets/roots/models/item/living_arrow.json
 100974babb39a126475658528c0b5bf001e1876b assets/roots/models/item/living_axe.json
 b53d0c657a02cd435e69acfe92f80c82d2be0306 assets/roots/models/item/living_hoe.json
 c17bb20ed1c59646f719b0ed23185a90968e5a86 assets/roots/models/item/living_pickaxe.json
