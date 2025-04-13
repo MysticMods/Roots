@@ -152,7 +152,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
   }
 
   protected void breakLinkedBlocks(LevelAccessor pLevel, BlockPos pPos, BlockState pState, @Nullable Player pPlayer) {
-    boolean creative = pPlayer == null || pPlayer.isCreative();
+    boolean creative = pPlayer != null && pPlayer.isCreative();
     if (pState.getValue(PART) == StateProperties.Part.BOTTOM) {
       pLevel.destroyBlock(pPos.above(), false);
       pLevel.destroyBlock(pPos.above().above(), false);
