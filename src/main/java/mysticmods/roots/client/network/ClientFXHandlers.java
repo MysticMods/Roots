@@ -130,9 +130,9 @@ public class ClientFXHandlers {
                 0xc2d02a,
                 0x7fc73c
             ),
-            location.getX() + 0.5 + xOffset,
+            location.getX() + xOffset,
             location.getY() + yOffset,
-            location.getZ() + 0.5 + zOffset,
+            location.getZ() + zOffset,
             0,
             0.05,
             0
