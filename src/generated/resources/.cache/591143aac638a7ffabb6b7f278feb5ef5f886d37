@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-11T14:59:13.9606331	Item Models: roots
+// 1.21.1	2025-04-13T15:38:51.2093392	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -236,7 +236,7 @@ d5f15af95c736c49538888947373791719c0a5bf assets/roots/models/item/spell_wildfire
 32a9711cefcabebd0824e9eba60a1cbdcb158ee3 assets/roots/models/item/spiritleaf_seeds.json
 c68601e032263101e606ccc23c50554e7f1ff146 assets/roots/models/item/spirit_bag.json
 2b1b250ab42ad09248340b485b900c393c1b7836 assets/roots/models/item/spruce_bark.json
-b8dacc5fc3b2002ff27bff3afe1eabbfc5dc98a7 assets/roots/models/item/staff.json
+a1befa04f566bee36903477cfe9652b5e306b655 assets/roots/models/item/staff.json
 5a929348fda9aa77e8f53beb544ea3f216bcebe9 assets/roots/models/item/stalicripe.json
 3c94bcaaf7009d4d301a6ba18645a6fbfa590f42 assets/roots/models/item/stewed_eggplant.json
 ffd0dd13123a5ff1afecc71ec7f9ed4b19fe01b4 assets/roots/models/item/stonepetal.json

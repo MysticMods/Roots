@@ -252,7 +252,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     handheld(ModItems.RUNED_SWORD, "tools");
     handheld(ModItems.RUNIC_SHEARS, "tools");
 
-    ModelFile generated = new ModelFile.UncheckedModelFile(modLoc("item/staff_template"));
+    ModelFile generated = new ModelFile.UncheckedModelFile(mcLoc("item/handheld"));
     getBuilder(ModItems.STAFF.getKey().location().toString()).parent(generated)
         .texture("layer0", modLoc("item/tools/staff")).texture("layer1", modLoc("item/tools/staff_petal_1"))
         .texture("layer2", modLoc("item/tools/staff_petal_2"));
