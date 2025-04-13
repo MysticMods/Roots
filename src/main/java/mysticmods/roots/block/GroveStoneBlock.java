@@ -12,29 +12,36 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class GroveStoneBlock extends HorizontalDirectionalBlock {
+public class GroveStoneBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
   public static final DirectionProperty FACING = StateProperties.GroveStone.FACING;
   public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
   public static final BooleanProperty ACTIVE = StateProperties.ACTIVE;
+  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   public static final VoxelShape[] EAST_WEST = {VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_TOP, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_MIDDLE, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_BOTTOM, Direction.EAST)};
   public static final VoxelShape[] NORTH_SOUTH = {Shapes.GROVE_STONE_TOP, Shapes.GROVE_STONE_MIDDLE, Shapes.GROVE_STONE_BOTTOM};
 
   public GroveStoneBlock(Properties builder) {
     super(builder);
-    this.registerDefaultState(defaultBlockState().setValue(ACTIVE, false).setValue(PART, StateProperties.Part.BOTTOM));
+    this.registerDefaultState(defaultBlockState().setValue(ACTIVE, false).setValue(PART, StateProperties.Part.BOTTOM).setValue(WATERLOGGED, false));
   }
 
   @Override
@@ -45,7 +52,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PART, ACTIVE, FACING);
+    pBuilder.add(PART, ACTIVE, FACING, WATERLOGGED);
   }
 
   @Override
@@ -70,6 +77,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
   @Nullable
   public BlockState getStateForPlacement(BlockPlaceContext pContext) {
     BlockPos blockpos = pContext.getClickedPos();
+    boolean waterlogged = pContext.getLevel().getFluidState(blockpos).isSourceOfType(Fluids.WATER);
     BlockState newState = blockpos.getY() < pContext.getLevel().getMaxBuildHeight() - 1 && pContext.getLevel()
         .getBlockState(blockpos.above())
         .canBeReplaced(pContext) && pContext.getLevel().getBlockState(blockpos.above().above())
@@ -77,6 +85,8 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
     if (newState == null) {
       return null;
     }
+
+    newState = newState.setValue(WATERLOGGED, waterlogged);
 
     for (Direction direction : pContext.getNearestLookingDirections()) {
       if (direction.getAxis().isHorizontal()) {
@@ -103,16 +113,55 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock {
     return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
   }
 
-  protected void breakLinkedBlocks(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+  @Override
+  protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+    if (state.getValue(WATERLOGGED)) {
+      level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+    }
+
+    StateProperties.Part part = state.getValue(PART);
+
+    if (facing.getAxis() == Direction.Axis.Y) {
+      if (part == StateProperties.Part.BOTTOM && facing == Direction.UP) {
+        if (!facingState.is(this) || facingState.getValue(PART) != StateProperties.Part.MIDDLE) {
+          return Blocks.AIR.defaultBlockState();
+        }
+      } else if (part == StateProperties.Part.MIDDLE) {
+        if (facing == Direction.UP) {
+          if (!facingState.is(this) || facingState.getValue(PART) != StateProperties.Part.TOP) {
+            return Blocks.AIR.defaultBlockState();
+          }
+        } else if (facing == Direction.DOWN) {
+          if (!facingState.is(this) || facingState.getValue(PART) != StateProperties.Part.BOTTOM) {
+            return Blocks.AIR.defaultBlockState();
+          }
+        }
+      } else if (part == StateProperties.Part.TOP && facing == Direction.DOWN) {
+        if (!facingState.is(this) || facingState.getValue(PART) != StateProperties.Part.MIDDLE) {
+          return Blocks.AIR.defaultBlockState();
+        }
+      }
+    }
+
+    return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+  }
+
+  @Override
+  public FluidState getFluidState(BlockState state) {
+    return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+  }
+
+  protected void breakLinkedBlocks(LevelAccessor pLevel, BlockPos pPos, BlockState pState, @Nullable Player pPlayer) {
+    boolean creative = pPlayer == null || pPlayer.isCreative();
     if (pState.getValue(PART) == StateProperties.Part.BOTTOM) {
       pLevel.destroyBlock(pPos.above(), false);
       pLevel.destroyBlock(pPos.above().above(), false);
     } else if (pState.getValue(PART) == StateProperties.Part.MIDDLE) {
-      pLevel.destroyBlock(pPos.below(), !pPlayer.isCreative());
+      pLevel.destroyBlock(pPos.below(), !creative);
       pLevel.destroyBlock(pPos.above(), false);
     } else {
       pLevel.destroyBlock(pPos.below(), false);
-      pLevel.destroyBlock(pPos.below().below(), !pPlayer.isCreative());
+      pLevel.destroyBlock(pPos.below().below(), !creative);
     }
   }
 }
