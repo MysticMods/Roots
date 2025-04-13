@@ -117,19 +117,19 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     wallBlock(ModBlocks.RUNED_TILE_WALL.get(), blockTexture(ModBlocks.RUNED_TILE.get()));
     simpleBlock(ModBlocks.ELEMENTAL_SOIL.get());
     ModelFile aqueousPillar = models().cubeBottomTop(ModBlocks.AQUEOUS_SOIL.getKey().location()
-        .getPath(), modLoc("block/water_soil_side"), modLoc("block/water_soil_top"), modLoc("block/elemental_soil"));
+        .getPath(), modLoc("block/water_soil_side"),modLoc("block/elemental_soil"), modLoc("block/water_soil_top"));
     getVariantBuilder(ModBlocks.AQUEOUS_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(aqueousPillar).build());
     ModelFile caelicPillar = models().cubeBottomTop(ModBlocks.CAELIC_SOIL.getKey().location()
-        .getPath(), modLoc("block/air_soil_side"), modLoc("block/air_soil_top"), modLoc("block/elemental_soil"));
+        .getPath(), modLoc("block/air_soil_side"), modLoc("block/elemental_soil"), modLoc("block/air_soil_top"));
     getVariantBuilder(ModBlocks.CAELIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(caelicPillar).build());
     ModelFile terranPillar = models().cubeBottomTop(ModBlocks.TERRAN_SOIL.getKey().location()
-        .getPath(), modLoc("block/earth_soil_side"), modLoc("block/earth_soil_top"), modLoc("block/elemental_soil"));
+        .getPath(), modLoc("block/earth_soil_side"), modLoc("block/elemental_soil"), modLoc("block/earth_soil_top"));
     getVariantBuilder(ModBlocks.TERRAN_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(terranPillar).build());
     ModelFile fieryPillar = models().cubeBottomTop(ModBlocks.MAGMATIC_SOIL.getKey().location()
-        .getPath(), modLoc("block/fire_soil_side"), modLoc("block/fire_soil_top"), modLoc("block/elemental_soil"));
+        .getPath(), modLoc("block/fire_soil_side"), modLoc("block/elemental_soil"), modLoc("block/fire_soil_top"));
     getVariantBuilder(ModBlocks.MAGMATIC_SOIL.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(fieryPillar).build());
     ModelFile ritualPedestal = models().withExistingParent("ritual_pedestal", modLoc("block/complex/ritual_pedestal"));
