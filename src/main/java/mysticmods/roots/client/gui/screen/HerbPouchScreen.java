@@ -1,7 +1,7 @@
 package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.inventory.HerbPouchContainer;
+import mysticmods.roots.inventory.pouch.herb.HerbPouchContainer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;

@@ -1,6 +1,6 @@
 package mysticmods.roots.init;
 
-import mysticmods.roots.inventory.HerbPouchContainer;
+import mysticmods.roots.inventory.pouch.herb.HerbPouchContainer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;

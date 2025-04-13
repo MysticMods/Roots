@@ -36,7 +36,17 @@ public class ModAttachments {
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
+  // 9 only herb slots
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> HERB_POUCH_CONTENTS = COMPONENTS.register("herb_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
+      .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
+  // 12 item slots, 6 only herb slots
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> COMPONENT_POUCH_CONTENTS = COMPONENTS.register("component_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
+      .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
+  // 18 item slots, 9 only herb slots
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> APOTHECARY_POUCH_CONTENTS = COMPONENTS.register("apothecary_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
+      .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
+  // 12 item slots, 15 herb slots
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> FEY_POUCH_CONTENTS = COMPONENTS.register("fey_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FORAGING = COMPONENTS.register("foraging", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT)
       .networkSynchronized(ByteBufCodecs.VAR_INT).build());
