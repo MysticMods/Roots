@@ -41,10 +41,13 @@ public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBloc
     RecipeHolder<MortarRecipe> recipe = pBlockEntity.getCachedRecipe();
     if (recipe != null) {
       ItemStack inSlot = recipe.value().getResultItem(Minecraft.getInstance().getConnection().registryAccess());
+      if (inSlot.isEmpty() && !recipe.value().getUnlocks().isEmpty()) {
+        inSlot = recipe.value().getUnlocks().getFirst().getIcon();
+      }
       pPoseStack.pushPose();
       pPoseStack.translate(0.5, 1.15 + Mth.cos((loc + RenderTickHandler.getClientTicks() + pPartialTick) / 10.0f + (float) Math.PI * 2f) * 0.05f, 0.5);
       pPoseStack.mulPose(Axis.YP.rotationDegrees((loc + RenderTickHandler.getClientTicks() + pPartialTick) * 0.5f));
-      pPoseStack.scale(0.8f, 0.8f, 0.8f);
+      pPoseStack.scale(0.4f, 0.4f, 0.4f);
       Minecraft.getInstance().getItemRenderer()
           .renderStatic(inSlot, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, null, 0);
       pPoseStack.popPose();
