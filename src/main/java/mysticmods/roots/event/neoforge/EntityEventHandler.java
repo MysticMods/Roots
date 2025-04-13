@@ -4,6 +4,7 @@ import mysticmods.roots.action.ArriveDimensionAction;
 import mysticmods.roots.action.TameAnimalAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.api.attachment.EntityCooldowns;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.effect.SimpleEffect;
@@ -226,6 +227,21 @@ public class EntityEventHandler {
     if (event.getEntity() instanceof ServerPlayer player) {
       ArriveDimensionAction.Context context = new ArriveDimensionAction.Context(player.serverLevel(), player);
       ModActions.ARRIVE_DIMENSION.get().accept(context);
+      var data = player.getData(ModAttachments.HERB_STORAGE);
+      data.setDirty(true);
+      player.setData(ModAttachments.HERB_STORAGE, data);
+
+      var data2 = player.getData(ModAttachments.GRANT_STORAGE);
+      data2.setDirty(true);
+      player.setData(ModAttachments.GRANT_STORAGE, data2);
+
+      var data3 = player.getData(ModAttachments.REPUTATION_STORAGE);
+      data3.setDirty(true);
+      player.setData(ModAttachments.REPUTATION_STORAGE, data3);
+
+      var data4 = player.getData(ModAttachments.SNAPSHOT_STORAGE);
+      data4.setDirty(true);
+      player.setData(ModAttachments.SNAPSHOT_STORAGE, data4);
     }
   }
 
