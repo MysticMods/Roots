@@ -160,12 +160,12 @@
       "costs": [
         {
           "type": "additive",
-          "defaultValue": 0.063,
+          "defaultValue": 0.125,
           "herb": "roots:moonglow"
         },
         {
           "type": "additive",
-          "defaultValue": 0.063,
+          "defaultValue": 0.125,
           "herb": "roots:stalicripe"
         }
       ]
