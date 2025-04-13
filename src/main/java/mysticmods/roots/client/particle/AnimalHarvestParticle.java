@@ -1,7 +1,7 @@
 package mysticmods.roots.client.particle;
 
 import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
@@ -30,7 +30,7 @@ public class AnimalHarvestParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.GLOW;
+    return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
   }
 
   @Override
@@ -50,23 +50,19 @@ public class AnimalHarvestParticle extends TextureSheetParticle {
       }
     }
 
-    // Simulate a "well up then overflow down" motion:
-    // 1. Gravity-like downward acceleration
-    this.yd -= 0.005; // Tune this value for fall speed
+    this.yd -= 0.008;
 
-    // 2. Optional: Add slight resistance to horizontal movement
     this.xd *= 0.96;
     this.zd *= 0.96;
 
-    // 3. Optional: Slow upward motion to make welling more pronounced
     if (this.age < this.lifetime / 3) {
       this.yd *= 0.9;
     }
   }
 
-  public record Provider(SpriteSet sprite) implements ParticleProvider<ColorGravityParticleOptions> {
+  public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {
     @Override
-    public Particle createParticle(ColorGravityParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       var particle = new AnimalHarvestParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprite);
       return particle;

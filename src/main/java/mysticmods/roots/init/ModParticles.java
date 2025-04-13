@@ -1,9 +1,7 @@
 package mysticmods.roots.init;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
-import mysticmods.roots.particle.ColorGravityParticleType;
-import net.minecraft.core.particles.ParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,17 +16,17 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FEY_LIGHT_EMITTER = PARTICLES.register("fey_light_emitter", () -> new SimpleParticleType(false));
 
   // Actual particles
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> PYRE = PARTICLES.register("pyre", () -> new ColorGravityParticleType(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> METEOR = PARTICLES.register("meteor", () -> new ColorGravityParticleType(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> PYRE_LEAF = PARTICLES.register("pyre_leaf", () -> new ColorGravityParticleType(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> FEY_LIGHT = PARTICLES.register("fey_light", () -> new ColorGravityParticleType(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> WILDFIRE = PARTICLES.register("wildfire", () -> new ColorGravityParticleType(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> GROWTH = PARTICLES.register("growth", () -> new ColorGravityParticleType(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> ANIMAL_HARVEST = PARTICLES.register("animal_harvest", () -> new ColorGravityParticleType(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<ColorGravityParticleOptions>> CHANNEL_TARGET = PARTICLES.register("channel_target", () -> new ColorGravityParticleType(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PYRE = PARTICLES.register("pyre", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> METEOR = PARTICLES.register("meteor", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PYRE_LEAF = PARTICLES.register("pyre_leaf", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> FEY_LIGHT = PARTICLES.register("fey_light", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> WILDFIRE = PARTICLES.register("wildfire", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROWTH = PARTICLES.register("growth", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> ANIMAL_HARVEST = PARTICLES.register("animal_harvest", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> CHANNEL_TARGET = PARTICLES.register("channel_target", () -> new RootsParticleOptions.Type(false));
 
   // "Simple" particles
-  public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SPROUT_PORTAL = PARTICLES.register("sprout_portal", () -> new SimpleParticleType(false));
+  public static final DeferredHolder<ParticleType<?>, RootsParticleOptions.Type> SPROUT_PORTAL = PARTICLES.register("sprout_portal", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);

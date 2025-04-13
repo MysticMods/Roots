@@ -1,7 +1,7 @@
 package mysticmods.roots.client.particle.emitter;
 
 import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
@@ -52,7 +52,7 @@ public class GrowthEmitter extends NoRenderParticle {
       if (this.age % this.interval == 0) {
         Vec3 pos = positions[count--];
         level.addParticle(
-            new ColorGravityParticleOptions(
+            new RootsParticleOptions(
                 ModParticles.GROWTH,
                 0x248542
             ),

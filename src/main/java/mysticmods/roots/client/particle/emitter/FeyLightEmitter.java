@@ -1,7 +1,7 @@
 package mysticmods.roots.client.particle.emitter;
 
 import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
@@ -49,7 +49,7 @@ public class FeyLightEmitter extends NoRenderParticle {
         count--;
         int[] color = COLORS[level.getRandom().nextInt(COLORS.length)];
         level.addParticle(
-            new ColorGravityParticleOptions(
+            new RootsParticleOptions(
                 ModParticles.FEY_LIGHT,
                 color[0],
                 color[1]

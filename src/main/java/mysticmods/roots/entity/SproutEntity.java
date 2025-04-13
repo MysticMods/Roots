@@ -6,6 +6,7 @@ import mysticmods.roots.api.datamap.SproutGift;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
+import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -104,7 +105,7 @@ public class SproutEntity extends Animal {
       if (this.level().isClientSide && this.random.nextInt(5) == 0) {
         for (int i = 0; i < 2; ++i) {
           this.level()
-              .addParticle(ModParticles.SPROUT_PORTAL.get(), this.getRandomX(0.1F), this.getRandomY() - (double) 0.45F, this.getRandomZ(0.1F), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F, -this.random.nextDouble(), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F);
+              .addParticle(new RootsParticleOptions(ModParticles.SPROUT_PORTAL.get(), 0, 0, this.getId()), this.getRandomX(0.1F), this.getRandomY() - (double) 0.45F, this.getRandomZ(0.1F), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F, -this.random.nextDouble(), (this.random.nextDouble() - (double) 0.5F) * (double) 1.5F);
         }
       }
     }

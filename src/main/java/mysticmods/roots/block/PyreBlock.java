@@ -9,7 +9,7 @@ import mysticmods.roots.init.ModBlockEntities;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -134,7 +134,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
 
       if (pRandom.nextInt(4) == 0) {
         pLevel.addParticle(
-            new ColorGravityParticleOptions(
+            new RootsParticleOptions(
                 ModParticles.PYRE,
                 color1,
                 color2
@@ -160,7 +160,7 @@ public class PyreBlock extends UseDelegatedBlock implements EntityBlock, SimpleW
           double ny = (float) pos.getY() + 0.5f + pRandom.nextFloat() - 0.5f;
           double nz = (float) pos.getZ() + 0.5f + pRandom.nextFloat() - 0.5f;
           pLevel.addParticle(
-              new ColorGravityParticleOptions(
+              new RootsParticleOptions(
                   ModParticles.PYRE_LEAF,
                   pRandom.nextBoolean() ? 0x7abb75 : 0x2b6322
               ),

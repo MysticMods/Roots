@@ -1,7 +1,7 @@
 package mysticmods.roots.entity.projectile;
 
 import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -67,7 +67,7 @@ public class MeteorEntity extends Entity {
       if (this.level().isClientSide()) {
         for (int i = 0; i < 9; i++) {
           level().addParticle(
-              new ColorGravityParticleOptions(
+              new RootsParticleOptions(
                   ModParticles.METEOR,
                   0xe87a21,
                   0xc10000

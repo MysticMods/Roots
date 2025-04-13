@@ -1,6 +1,6 @@
 package mysticmods.roots.client.particle;
 
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.FlyTowardsPositionParticle;
 import net.minecraft.client.particle.Particle;
@@ -40,9 +40,9 @@ public class PyreLeafParticle extends FlyTowardsPositionParticle {
     }
   }
 
-  public record Provider(SpriteSet sprites) implements ParticleProvider<ColorGravityParticleOptions> {
+  public record Provider(SpriteSet sprites) implements ParticleProvider<RootsParticleOptions> {
     @Override
-    public @Nullable Particle createParticle(ColorGravityParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public @Nullable Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       var particle = new PyreLeafParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprites);
       return particle;

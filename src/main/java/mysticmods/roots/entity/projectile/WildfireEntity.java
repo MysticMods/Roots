@@ -4,7 +4,7 @@ import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSerializers;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.snapshot.WildfireEntitySnapshot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -157,7 +157,7 @@ public class WildfireEntity extends Projectile {
     double d1 = vec3.z;
     for (int i = 0; i < 8; i++) {
       level().addParticle(
-          new ColorGravityParticleOptions(
+          new RootsParticleOptions(
               ModParticles.WILDFIRE,
               0xe87a21,
               0xc10000

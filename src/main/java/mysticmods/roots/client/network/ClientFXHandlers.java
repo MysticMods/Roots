@@ -5,7 +5,7 @@ import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
@@ -38,7 +38,7 @@ public class ClientFXHandlers {
         // Emit near top of entity, scaled by height
         double yOffset = entity.getY() + entity.getBbHeight() * (0.8 + random.nextDouble() * 0.2);
         minecraft.level.addParticle(
-            new ColorGravityParticleOptions(
+            new RootsParticleOptions(
                 ModParticles.ANIMAL_HARVEST,
                 col1,
                 col2
@@ -63,7 +63,7 @@ public class ClientFXHandlers {
       int col2 = spell.getColor2();
 
       minecraft.level.addParticle(
-          new ColorGravityParticleOptions(
+          new RootsParticleOptions(
               ModParticles.CHANNEL_TARGET,
               col1,
               col2
@@ -76,7 +76,7 @@ public class ClientFXHandlers {
           stop.z
       );
       minecraft.level.addParticle(
-          new ColorGravityParticleOptions(
+          new RootsParticleOptions(
               ModParticles.CHANNEL_TARGET,
               col2,
               col1
@@ -100,7 +100,7 @@ public class ClientFXHandlers {
         double yOffset = (minecraft.level.random.nextFloat() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
-            new ColorGravityParticleOptions(
+            new RootsParticleOptions(
                 ModParticles.GROWTH,
                 0x2ce713,
                 0x4d7e20
@@ -125,7 +125,7 @@ public class ClientFXHandlers {
         double yOffset = (minecraft.level.random.nextFloat() - 0.5) * 0.1;
 
         minecraft.level.addParticle(
-            new ColorGravityParticleOptions(
+            new RootsParticleOptions(
                 ModParticles.GROWTH,
                 0xc2d02a,
                 0x7fc73c

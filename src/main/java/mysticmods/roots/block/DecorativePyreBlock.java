@@ -4,7 +4,7 @@ import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -51,7 +51,7 @@ public class DecorativePyreBlock extends Block {
 
     if (pRandom.nextInt(4) == 0) {
       pLevel.addParticle(
-          new ColorGravityParticleOptions(
+          new RootsParticleOptions(
               ModParticles.PYRE,
               color1,
               color2

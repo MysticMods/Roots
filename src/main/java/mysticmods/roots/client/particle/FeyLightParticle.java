@@ -1,6 +1,6 @@
 package mysticmods.roots.client.particle;
 
-import mysticmods.roots.particle.ColorGravityParticleOptions;
+import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
@@ -67,9 +67,9 @@ public class FeyLightParticle extends TextureSheetParticle {
     }
   }
 
-  public record Provider(SpriteSet sprite) implements ParticleProvider<ColorGravityParticleOptions> {
+  public record Provider(SpriteSet sprite) implements ParticleProvider<RootsParticleOptions> {
     @Override
-    public Particle createParticle(ColorGravityParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
       var particle = new FeyLightParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, type.color1(), type.color2());
       particle.pickSprite(sprite);
       return particle;
