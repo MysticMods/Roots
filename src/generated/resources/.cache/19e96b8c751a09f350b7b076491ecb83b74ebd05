@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-13T12:08:28.3599937	Block States: roots
+// 1.21.1	2025-04-13T14:57:31.1773237	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -34,7 +34,7 @@ a326bd69a0c580f62d551b0c5998c6036b674983 assets/roots/blockstates/mossy_runeston
 809910fd8985fc875071ee497afcdd4935ec6a9d assets/roots/blockstates/potted_bafflecap.json
 3debdcba82c11246ece47a26b4c904c08d99eb63 assets/roots/blockstates/potted_stonepetal.json
 b19c4a01cc7537660370cb226cf0008d846d1544 assets/roots/blockstates/potted_wildwood_sapling.json
-50789abc4d2001e6b33935cf6d193dcfe313573c assets/roots/blockstates/primal_grove_stone.json
+d9ce1afd09c5e9be40c1c83523964d0aad9dbb2a assets/roots/blockstates/primal_grove_stone.json
 4dd7efce8a5cf059fca0baf8c85dab3a032d3e3b assets/roots/blockstates/pyre.json
 e04a88f7b36d66c2be3e1f00ff27e046ea9efbb8 assets/roots/blockstates/raw_silver_block.json
 28215c5c1aaed02e9e88a7cda22a7fae043f7183 assets/roots/blockstates/reinforced_pyre.json

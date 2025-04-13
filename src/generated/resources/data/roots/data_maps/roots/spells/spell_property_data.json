@@ -832,8 +832,8 @@
         "value": {
           "type": "roots:integer_property",
           "comment": "How long before the player can cast the spell again",
-          "default_value": 0,
-          "value": 0
+          "default_value": 60,
+          "value": 60
         }
       },
       {
@@ -843,6 +843,15 @@
           "comment": "How much damage the spell will cause",
           "default_value": 4.5,
           "value": 4.5
+        }
+      },
+      {
+        "id": "roots:wildfire/velocity",
+        "value": {
+          "type": "roots:float_property",
+          "comment": "The velocity of the wildfire projectile.",
+          "default_value": 3.2,
+          "value": 3.2
         }
       }
     ]

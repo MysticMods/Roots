@@ -21,7 +21,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class WildfireSpell extends Spell {
-  private float damage;
+  private float damage, velocity;
 
   public WildfireSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xff8020, 0xff4020);
@@ -36,12 +36,14 @@ public class WildfireSpell extends Spell {
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.damage = properties.get(ModSpells.WILDFIRE_DAMAGE);
+    this.velocity = properties.get(ModSpells.WILDFIRE_VELOCITY);
   }
 
   @Override
   public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
     properties.add(ModSpells.WILDFIRE_DAMAGE);
+    properties.add(ModSpells.WILDFIRE_VELOCITY);
   }
 
   @Override
@@ -49,7 +51,7 @@ public class WildfireSpell extends Spell {
     WildfireEntity wildfire = new WildfireEntity(ModEntities.WILDFIRE.get(), pPlayer, pLevel);
     wildfire.setSnapshot(new WildfireEntitySnapshot(pPlayer, -1, damage));
 
-    wildfire.shootFromRotation(pPlayer, pPlayer.getViewXRot(1), pPlayer.getViewYRot(1), 0, 3f, 0);
+    wildfire.shootFromRotation(pPlayer, pPlayer.getViewXRot(1), pPlayer.getViewYRot(1), 0, velocity, 0);
     pLevel.addFreshEntity(wildfire);
 
     return cooldown;

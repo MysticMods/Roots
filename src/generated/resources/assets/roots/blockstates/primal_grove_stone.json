@@ -1,92 +1,182 @@
 {
   "variants": {
-    "active=false,facing=east,part=bottom": {
+    "active=false,facing=east,part=bottom,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_bottom",
       "y": 270
     },
-    "active=false,facing=east,part=middle": {
+    "active=false,facing=east,part=bottom,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_middle",
       "y": 270
     },
-    "active=false,facing=east,part=top": {
+    "active=false,facing=east,part=middle,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_top",
       "y": 270
     },
-    "active=false,facing=north,part=bottom": {
+    "active=false,facing=east,part=top,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=north,part=bottom,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_bottom",
       "y": 180
     },
-    "active=false,facing=north,part=middle": {
+    "active=false,facing=north,part=bottom,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_middle",
       "y": 180
     },
-    "active=false,facing=north,part=top": {
+    "active=false,facing=north,part=middle,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_top",
       "y": 180
     },
-    "active=false,facing=south,part=bottom": {
+    "active=false,facing=north,part=top,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=south,part=bottom,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_bottom"
     },
-    "active=false,facing=south,part=middle": {
+    "active=false,facing=south,part=bottom,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=middle,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_middle"
     },
-    "active=false,facing=south,part=top": {
+    "active=false,facing=south,part=middle,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=top,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_top"
     },
-    "active=false,facing=west,part=bottom": {
+    "active=false,facing=south,part=top,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_top"
+    },
+    "active=false,facing=west,part=bottom,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_bottom",
       "y": 90
     },
-    "active=false,facing=west,part=middle": {
+    "active=false,facing=west,part=bottom,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_middle",
       "y": 90
     },
-    "active=false,facing=west,part=top": {
+    "active=false,facing=west,part=middle,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_top",
       "y": 90
     },
-    "active=true,facing=east,part=bottom": {
+    "active=false,facing=west,part=top,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_top",
+      "y": 90
+    },
+    "active=true,facing=east,part=bottom,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_bottom_valid",
       "y": 270
     },
-    "active=true,facing=east,part=middle": {
+    "active=true,facing=east,part=bottom,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_middle_valid",
       "y": 270
     },
-    "active=true,facing=east,part=top": {
+    "active=true,facing=east,part=middle,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_top_valid",
       "y": 270
     },
-    "active=true,facing=north,part=bottom": {
+    "active=true,facing=east,part=top,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=north,part=bottom,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_bottom_valid",
       "y": 180
     },
-    "active=true,facing=north,part=middle": {
+    "active=true,facing=north,part=bottom,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_middle_valid",
       "y": 180
     },
-    "active=true,facing=north,part=top": {
+    "active=true,facing=north,part=middle,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_top_valid",
       "y": 180
     },
-    "active=true,facing=south,part=bottom": {
+    "active=true,facing=north,part=top,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=south,part=bottom,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_bottom_valid"
     },
-    "active=true,facing=south,part=middle": {
+    "active=true,facing=south,part=bottom,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=middle,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_middle_valid"
     },
-    "active=true,facing=south,part=top": {
+    "active=true,facing=south,part=middle,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=top,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_top_valid"
     },
-    "active=true,facing=west,part=bottom": {
+    "active=true,facing=south,part=top,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_top_valid"
+    },
+    "active=true,facing=west,part=bottom,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_bottom_valid",
       "y": 90
     },
-    "active=true,facing=west,part=middle": {
+    "active=true,facing=west,part=bottom,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,waterlogged=false": {
       "model": "roots:block/primal_grove_stone_middle_valid",
       "y": 90
     },
-    "active=true,facing=west,part=top": {
+    "active=true,facing=west,part=middle,waterlogged=true": {
+      "model": "roots:block/primal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,waterlogged=false": {
+      "model": "roots:block/primal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,waterlogged=true": {
       "model": "roots:block/primal_grove_stone_top_valid",
       "y": 90
     }
