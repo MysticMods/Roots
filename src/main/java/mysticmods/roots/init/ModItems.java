@@ -302,7 +302,7 @@ public class ModItems {
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)
       .stacksTo(1)));
-  public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new Item(new Item.Properties().stacksTo(1)));
+  public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new Item(new Item.Properties().stacksTo(1).component(ModAttachments.QUIVER_CONTENTS, ItemContainerContents.EMPTY)));
   public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new ShearsItem(new Item.Properties().durability(120)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static DeferredHolder<Item, KnifeItem> WOODEN_KNIFE = ITEMS.register("wooden_knife", () -> new KnifeItem(Tiers.WOOD, new Item.Properties().component(ModAttachments.FORAGING, 1)

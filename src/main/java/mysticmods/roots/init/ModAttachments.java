@@ -36,6 +36,8 @@ public class ModAttachments {
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpellStorage>> SPELL_STORAGE = COMPONENTS.register("spell_storage", () -> new DataComponentType.Builder<SpellStorage>().persistent(SpellStorage.CODEC)
       .networkSynchronized(SpellStorage.STREAM_CODEC).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> QUIVER_CONTENTS = COMPONENTS.register("quiver_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
+      .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
   // 9 only herb slots
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> HERB_POUCH_CONTENTS = COMPONENTS.register("herb_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
