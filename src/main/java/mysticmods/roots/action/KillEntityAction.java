@@ -29,15 +29,15 @@ public class KillEntityAction implements GroveAction {
 
   public record Context(ServerLevel level, ServerPlayer player, Entity target, Entity secondary,
                         DamageSource damage) implements GroveContext {
-    public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.TARGET_ENTITY, GroveContext.SECONDARY_ENTITY, GroveContext.DAMAGE);
+    public static final Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.TARGET_ENTITY, GroveContext.DAMAGE);
 
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
       if (type == GroveReputationEntry.SubEntryType.TARGET_ENTITY) {
         return this.target().getType().is(TagKey.create(Registries.ENTITY_TYPE, tag));
-      } else if (type == GroveReputationEntry.SubEntryType.SECONDARY_ENTITY) {
+      } else if (type == GroveReputationEntry.SubEntryType.SECONDARY_ENTITY && this.secondary() != null) {
         return this.secondary().getType().is(TagKey.create(Registries.ENTITY_TYPE, tag));
-      } else if (type == GroveReputationEntry.SubEntryType.ITEM) {
+      } else if (type == GroveReputationEntry.SubEntryType.ITEM && this.item() != null) {
         return this.item().is(TagKey.create(Registries.ITEM, tag));
       } else if (type == GroveReputationEntry.SubEntryType.DAMAGE) {
         return this.damage().is(TagKey.create(Registries.DAMAGE_TYPE, tag));

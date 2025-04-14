@@ -32,7 +32,7 @@ public class BrushBlockAction implements GroveAction {
 
   public record Context(ServerLevel level, ServerPlayer player, BlockPos position, BlockState blockState,
                         ItemStack item, BrushableBlockEntity blockEntity) implements GroveContext {
-    public static Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.POSITION, GroveContext.BLOCK_STATE, GroveContext.ITEM, GroveContext.BLOCK_ENTITY);
+    public static Set<Parameter> PARAMETERS = Set.of(GroveContext.LEVEL, GroveContext.PLAYER, GroveContext.POSITION, GroveContext.BLOCK_STATE, GroveContext.ITEM);
 
     @Override
     public boolean is(GroveReputationEntry.SubEntryType type, ResourceLocation tag) {
