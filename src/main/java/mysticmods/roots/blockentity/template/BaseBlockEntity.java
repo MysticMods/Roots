@@ -53,7 +53,7 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
   public List<Pair<BlockPos, PedestalBlockEntity>> pedestals(TagKey<Block> include, TagKey<Block> exclude) {
     List<Pair<BlockPos, PedestalBlockEntity>> pedestalPositions = new ArrayList<>();
     if (getBoundingBox() != null) {
-      BlockPos.betweenClosedStream(getBoundingBox()).forEach(pos -> {
+      BlockPos.betweenClosedStream(getBoundingBox().move(getBlockPos())).forEach(pos -> {
         BlockState state = getLevel().getBlockState(pos);
         if (state.is(include) && !state.is(exclude)) {
           if (getLevel().getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {

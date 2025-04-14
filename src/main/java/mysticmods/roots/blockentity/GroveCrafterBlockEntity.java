@@ -148,14 +148,12 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     boolean active = getBlockState().getValue(GroveCrafterBlock.ACTIVE);
-    if (getBoundingBox() != null) {
-      Set<BlockPos> groveStones = ModConditions.GROVE_STONE_ACTIVE.get()
-          .test(getLevel(), null, PyreBlockEntity.getPyreBoundingBox(), getBlockPos(), Collections.emptySet());
-      if (groveStones.isEmpty() && active) {
-        getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, false), 3);
-      } else if (!groveStones.isEmpty() && !active) {
-        getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, true), 3);
-      }
+    Set<BlockPos> groveStones = ModConditions.GROVE_STONE_ACTIVE.get()
+        .test(getLevel(), null, PyreBlockEntity.getPyreBoundingBox(), getBlockPos(), Collections.emptySet());
+    if (groveStones.isEmpty() && active) {
+      getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, false), 3);
+    } else if (!groveStones.isEmpty() && !active) {
+      getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, true), 3);
     }
 
     List<Pair<BlockPos, PedestalBlockEntity>> pedestals = pedestals(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Blocks.DISPLAY_PEDESTALS);
