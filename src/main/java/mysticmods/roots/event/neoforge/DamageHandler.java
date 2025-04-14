@@ -57,10 +57,16 @@ public class DamageHandler {
     ServerPlayer player;
     if (directEntity instanceof ServerPlayer player1) {
       player = player1;
+      directEntity = null;
     } else if (sourceEntity instanceof ServerPlayer player2) {
       player = player2;
+      sourceEntity = null;
     } else {
       return;
+    }
+
+    if (directEntity == null) {
+      directEntity = sourceEntity;
     }
 
     ModAdvancements.PACIFIST.get().trigger(player, target);
