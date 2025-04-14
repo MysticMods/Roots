@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:spell/time_stop"
+        "recipe": "roots:spell/temporal_morass"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:spell/time_stop"
+      "roots:spell/temporal_morass"
     ]
   }
 }

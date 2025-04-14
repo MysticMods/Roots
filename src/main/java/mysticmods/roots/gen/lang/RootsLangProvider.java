@@ -470,7 +470,7 @@ public class RootsLangProvider extends LanguageProvider {
 
     addEntity(ModEntities.LIVING_ARROW);
     addEntity(ModEntities.METEOR);
-    addEntity(ModEntities.TIME_STOP);
+    addEntity(ModEntities.TEMPORAL_MORASS);
     addEntity(ModEntities.WILDFIRE);
     addEntity(ModEntities.ROSE_THORNS);
 
@@ -481,7 +481,7 @@ public class RootsLangProvider extends LanguageProvider {
     addEffect(ModEffects.SKY_SOARER);
     addEffect(ModEffects.NONDETECTION);
     addEffect(ModEffects.GEAS);
-    addEffect(ModEffects.TIME_STOP);
+    addEffect(ModEffects.TEMPORAL_MORASS);
     addEffect(ModEffects.AQUA_BUBBLE);
 
     add(RootsTags.Items.SEEDS, "Seeds");
@@ -635,8 +635,8 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.spell.sky_soarer", "Sky soars");
     add("roots.subtitles.spell.storm_cloud", "Storm cloud begins");
     add("roots.subtitles.spell.storm_cloud_end", "Storm cloud ends");
-    add("roots.subtitles.spell.time_stop", "Time stops");
-    add("roots.subtitles.spell.time_stop_end", "Time begins anew");
+    add("roots.subtitles.spell.temporal_morass", "Time slows");
+    add("roots.subtitles.spell.temporal_morass_end", "Time flows normally");
     add("roots.subtitles.spell.wildfire", "Meteors unfold");
     add("roots.subtitles.event.mortar.add_item", "Mortar filled");
     add("roots.subtitles.event.mortar.remove_item", "Mortar emptied");

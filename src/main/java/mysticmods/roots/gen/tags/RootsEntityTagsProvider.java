@@ -142,7 +142,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.ZOMBIE_VILLAGERS_EXCLUDE);
     this.tag(RootsTags.Entities.WINDWALL_FORCE_EXCLUDE);
     this.tag(RootsTags.Entities.WINDWALL_FORCE_INCLUDE);
-    this.tag(RootsTags.Entities.TIME_STOP_EXCLUDE).add(EntityType.PLAYER);
+    this.tag(RootsTags.Entities.TEMPORAL_MORASS_EXCLUDE).add(EntityType.PLAYER);
     this.tag(RootsTags.Entities.ROSE_THORNS_EXCLUDE).add(EntityType.PLAYER);
     this.tag(RootsTags.Entities.ALERTNESS).add(EntityType.CREEPER);
     this.tag(RootsTags.Entities.RUNIC_SHEARS_OVERRIDE)

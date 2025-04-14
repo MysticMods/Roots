@@ -761,11 +761,11 @@
         "entries": [
           {
             "type": "exact_spell",
-            "name": "roots:time_stop"
+            "name": "roots:temporal_morass"
           }
         ],
         "grove": "roots:twilight",
-        "name": "roots:learn_spell/time_stop",
+        "name": "roots:learn_spell/temporal_morass",
         "reputation": {
           "gain1": 250,
           "gain2": 0,

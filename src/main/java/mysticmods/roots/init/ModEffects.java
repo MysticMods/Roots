@@ -21,7 +21,10 @@ public class ModEffects {
   // TODO: is it beneficial?
   public static final DeferredHolder<MobEffect, SimpleEffect> GEAS = REGISTER.register("geas", () -> new GeasEffect(MobEffectCategory.BENEFICIAL, 0x850101, true));
   public static final DeferredHolder<MobEffect, SenseDangerEffect> SENSE_DANGER = REGISTER.register("sense_danger", SenseDangerEffect::new);
-  public static final DeferredHolder<MobEffect, SimpleEffect> TIME_STOP = REGISTER.register("time_stop", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x00008b, false));
+  public static final DeferredHolder<MobEffect, SimpleEffect> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> new SimpleEffect(MobEffectCategory.NEUTRAL, 0x00008b, false));
+  static {
+    REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
+  }
   public static final DeferredHolder<MobEffect, AquaBubbleEffect> AQUA_BUBBLE = REGISTER.register("aqua_bubble", () -> (AquaBubbleEffect) new AquaBubbleEffect(MobEffectCategory.BENEFICIAL, 0x00ffff));
   /*      .addAttributeModifier(Attributes.MAX_ABSORPTION, RootsAPI.rl("aqua_bubble_absorb"), AttributeModifier.Operation.ADD_VALUE, (o) -> o / 0.5));*/
 

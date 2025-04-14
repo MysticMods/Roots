@@ -1483,7 +1483,7 @@ public class RootsRecipeProvider extends RecipeProvider {
                 BaseRecipeData.Builder.create().requires(RootsTags.Items.STALICRIPE_HERB).requires(Items.CLOCK)
                     .requires(Tags.Items.SANDS).requires(Tags.Items.GLASS_BLOCKS)
                     .requires(Items.TRIPWIRE_HOOK)
-                    .unlocks(Unlock.spell(ModSpells.TIME_STOP))), c, RootsAPI.rl("spell/time_stop"));
+                    .unlocks(Unlock.spell(ModSpells.TEMPORAL_MORASS))), c, RootsAPI.rl("spell/temporal_morass"));
 
     // Shatter
     RecipeSaver.saver().unlockedBy("has_stalicripe", has(RootsTags.Items.STALICRIPE_HERB))

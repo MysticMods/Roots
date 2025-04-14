@@ -788,9 +788,9 @@
         }
       }
     ],
-    "roots:time_stop": [
+    "roots:temporal_morass": [
       {
-        "id": "roots:time_stop/cooldown",
+        "id": "roots:temporal_morass/cooldown",
         "value": {
           "type": "roots:integer_property",
           "comment": "How long before the player can cast the spell again",
@@ -799,7 +799,7 @@
         }
       },
       {
-        "id": "roots:time_stop/radius_zx",
+        "id": "roots:temporal_morass/radius_zx",
         "value": {
           "type": "roots:integer_property",
           "comment": "The size of the area that will be affected on the Z and X axes",
@@ -808,7 +808,7 @@
         }
       },
       {
-        "id": "roots:time_stop/radius_y",
+        "id": "roots:temporal_morass/radius_y",
         "value": {
           "type": "roots:integer_property",
           "comment": "The size of the area that will be affected on the Y axis",
@@ -817,7 +817,7 @@
         }
       },
       {
-        "id": "roots:time_stop/duration",
+        "id": "roots:temporal_morass/duration",
         "value": {
           "type": "roots:integer_property",
           "comment": "How long the spell will last",

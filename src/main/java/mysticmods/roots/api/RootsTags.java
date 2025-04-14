@@ -497,7 +497,7 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> ZOMBIE_VILLAGERS = modTag("zombie_villagers");
     public static final TagKey<EntityType<?>> ZOMBIE_VILLAGERS_EXCLUDE = modTag("zombie_villagers_exclude");
 
-    public static final TagKey<EntityType<?>> TIME_STOP_EXCLUDE = modTag("time_stop_exclude");
+    public static final TagKey<EntityType<?>> TEMPORAL_MORASS_EXCLUDE = modTag("temporal_morass_exclude");
     public static final TagKey<EntityType<?>> ROSE_THORNS_EXCLUDE = modTag("rose_thorns_exclude");
     public static final TagKey<EntityType<?>> ALERTNESS = modTag("alertness");
     public static final TagKey<EntityType<?>> ALLOW_CASTING_TOOL_RIGHT_CLICK = modTag("allow_casting_tool_right_click");

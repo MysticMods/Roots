@@ -100,9 +100,9 @@
       "count": 1,
       "id": "roots:spell_control_undead"
     },
-    "roots:time_stop": {
+    "roots:temporal_morass": {
       "count": 1,
-      "id": "roots:spell_time_stop"
+      "id": "roots:spell_temporal_morass"
     },
     "roots:wildfire": {
       "count": 1,

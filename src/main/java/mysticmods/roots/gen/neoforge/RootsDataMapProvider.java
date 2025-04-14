@@ -458,7 +458,7 @@ public class RootsDataMapProvider extends DataMapProvider {
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("learn_spell/light_drifter"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.LIGHT_DRIFTER.getId()))),
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("learn_spell/life_drain"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.LIFE_DRAIN.getId()))),
         new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("learn_spell/jaunt"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.JAUNT.getId()))),
-        new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("learn_spell/time_stop"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.TIME_STOP.getId()))),
+        new GroveReputationEntry(ModGroves.TWILIGHT.value(), RootsAPI.rl("learn_spell/temporal_morass"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.TEMPORAL_MORASS.getId()))),
         new GroveReputationEntry(ModGroves.WILD.value(), RootsAPI.rl("learn_spell/nondetection"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.NONDETECTION.getId())))
     ), false);
 

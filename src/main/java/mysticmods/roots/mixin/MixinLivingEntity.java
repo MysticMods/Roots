@@ -14,10 +14,10 @@ public abstract class MixinLivingEntity {
   @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
   public void RootsLivingEntityTick(CallbackInfo ci) {
     LivingEntity entity = (LivingEntity) (Object) this;
-    if (entity.getType().is(RootsTags.Entities.TIME_STOP_EXCLUDE)) {
+    if (entity.getType().is(RootsTags.Entities.TEMPORAL_MORASS_EXCLUDE)) {
       return;
     }
-    if (entity.hasEffect(ModEffects.TIME_STOP)) {
+    if (entity.hasEffect(ModEffects.TEMPORAL_MORASS)) {
       ((AccessorMixinLivingEntity) entity).rootsCallTickEffects();
       ci.cancel();
     }

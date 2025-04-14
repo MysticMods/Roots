@@ -32,7 +32,7 @@ public interface Spells {
   ResourceKey<Spell> SKY_SOARER = spell("sky_soarer");
   ResourceKey<Spell> JAUNT = spell("jaunt");
   ResourceKey<Spell> STORM_CLOUD = spell("storm_cloud");
-  ResourceKey<Spell> TIME_STOP = spell("time_stop");
+  ResourceKey<Spell> TEMPORAL_MORASS = spell("temporal_morass");
   ResourceKey<Spell> WILDFIRE = spell("wildfire");
 
   static ResourceKey<Spell> spell(String name) {

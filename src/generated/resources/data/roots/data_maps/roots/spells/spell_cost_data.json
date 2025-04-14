@@ -335,7 +335,7 @@
         }
       ]
     },
-    "roots:time_stop": {
+    "roots:temporal_morass": {
       "charge_type": "cast",
       "costs": [
         {

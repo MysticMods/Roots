@@ -310,7 +310,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.SPELL_SHATTER.get());
       event.accept(ModItems.SPELL_SKY_SOARER.get());
       event.accept(ModItems.SPELL_STORM_CLOUD.get());
-      event.accept(ModItems.SPELL_TIME_STOP.get());
+      event.accept(ModItems.SPELL_TEMPORAL_MORASS.get());
       event.accept(ModItems.SPELL_WILDFIRE.get());
     }
     if (event.getTab().equals(ModTabs.RITUALS_TAB.get())) {

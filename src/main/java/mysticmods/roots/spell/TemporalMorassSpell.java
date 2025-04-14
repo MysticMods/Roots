@@ -10,7 +10,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.entity.other.TimeStopEntity;
 import mysticmods.roots.init.ModEntities;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.snapshot.TimeStopEntitySnapshot;
+import mysticmods.roots.snapshot.TemporalMorassEntitySnapshot;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
@@ -20,48 +20,48 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class TimeStopSpell extends TwoRadiusSpell {
+public class TemporalMorassSpell extends TwoRadiusSpell {
   private int duration;
 
-  public TimeStopSpell(ChatFormatting color, CostInstance costs) {
+  public TemporalMorassSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x404040, 0xc020ff);
   }
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.TIME_STOP_COOLDOWN;
+    return ModSpells.TEMPORAL_MORASS_COOLDOWN;
   }
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getRadiusYProperty() {
-    return ModSpells.TIME_STOP_RADIUS_Y;
+    return ModSpells.TEMPORAL_MORASS_RADIUS_Y;
   }
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getRadiusZXProperty() {
-    return ModSpells.TIME_STOP_RADIUS_ZX;
+    return ModSpells.TEMPORAL_MORASS_RADIUS_ZX;
   }
 
   @Override
   public void initialize(Holder<Spell> holder) {
     var properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    this.duration = properties.get(ModSpells.TIME_STOP_DURATION);
+    this.duration = properties.get(ModSpells.TEMPORAL_MORASS_DURATION);
   }
 
   @Override
   public void buildProperties(List<PropertyHolder<?>> properties) {
     super.buildProperties(properties);
-    properties.add(ModSpells.TIME_STOP_DURATION);
+    properties.add(ModSpells.TEMPORAL_MORASS_DURATION);
   }
 
   @Override
   public int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, ISpellInstance instance, int ticks) {
-    TimeStopEntity timeStop = ModEntities.TIME_STOP.get().create(pLevel);
+    TimeStopEntity timeStop = ModEntities.TEMPORAL_MORASS.get().create(pLevel);
     if (timeStop != null) {
       timeStop.setLifetime(duration);
       timeStop.setPos(pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
       // Don't use the helper
-      timeStop.setSnapshot(new TimeStopEntitySnapshot(timeStop.tickCount, -1, radiusZX, radiusY, duration));
+      timeStop.setSnapshot(new TemporalMorassEntitySnapshot(timeStop.tickCount, -1, radiusZX, radiusY, duration));
       pLevel.addFreshEntity(timeStop);
       return cooldown;
     } else {

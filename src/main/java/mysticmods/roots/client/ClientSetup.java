@@ -107,7 +107,7 @@ public class ClientSetup {
     event.registerEntityRenderer(ModEntities.MELODY_SPROUT.value(), SproutRenderer::new);
     event.registerEntityRenderer(ModEntities.METEOR.value(), MeteorRenderer::new);
     event.registerEntityRenderer(ModEntities.WILDFIRE.value(), WildfireRenderer::new);
-    event.registerEntityRenderer(ModEntities.TIME_STOP.value(), NoopRenderer::new);
+    event.registerEntityRenderer(ModEntities.TEMPORAL_MORASS.value(), NoopRenderer::new);
     event.registerEntityRenderer(ModEntities.ROSE_THORNS.value(), RoseThornsRenderer::new);
     event.registerEntityRenderer(ModEntities.LIVING_ARROW.value(), LivingArrowRenderer::new);
   }

@@ -388,7 +388,10 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SHATTER = ITEMS.register("spell_shatter", () -> spell(ModSpells.SHATTER));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SKY_SOARER = ITEMS.register("spell_sky_soarer", () -> spell(ModSpells.SKY_SOARER));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_STORM_CLOUD = ITEMS.register("spell_storm_cloud", () -> spell(ModSpells.STORM_CLOUD));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_TIME_STOP = ITEMS.register("spell_time_stop", () -> spell(ModSpells.TIME_STOP));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_TEMPORAL_MORASS = ITEMS.register("spell_temporal_morass", () -> spell(ModSpells.TEMPORAL_MORASS));
+  static {
+    ITEMS.addAlias(RootsAPI.rl("spell_time_stop"), RootsAPI.rl("spell_temporal_morass"));
+  }
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_WILDFIRE = ITEMS.register("spell_wildfire", () -> spell(ModSpells.WILDFIRE));
 
   public static DeferredHolder<Item, TokenItem.RitualTokenItem> RITUAL_ANIMAL_HARVEST = ITEMS.register("ritual_animal_harvest", () -> ritual(ModRituals.ANIMAL_HARVEST));

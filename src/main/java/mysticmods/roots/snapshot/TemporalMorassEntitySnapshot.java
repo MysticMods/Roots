@@ -14,35 +14,35 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 
-public class TimeStopEntitySnapshot extends Snapshot {
-  public static final MapCodec<TimeStopEntitySnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
+public class TemporalMorassEntitySnapshot extends Snapshot {
+  public static final MapCodec<TemporalMorassEntitySnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
           Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
-          Codec.INT.fieldOf("radiusZX").forGetter(TimeStopEntitySnapshot::getRadiusZX),
-          Codec.INT.fieldOf("radiusY").forGetter(TimeStopEntitySnapshot::getRadiusY),
-          Codec.INT.fieldOf("duration").forGetter(TimeStopEntitySnapshot::getDuration)
-      ).apply(instance, TimeStopEntitySnapshot::new));
-  public static final Codec<TimeStopEntitySnapshot> CODEC = MAP_CODEC.codec();
-  public static final StreamCodec<ByteBuf, TimeStopEntitySnapshot> STREAM_CODEC = StreamCodec.composite(
+          Codec.INT.fieldOf("radiusZX").forGetter(TemporalMorassEntitySnapshot::getRadiusZX),
+          Codec.INT.fieldOf("radiusY").forGetter(TemporalMorassEntitySnapshot::getRadiusY),
+          Codec.INT.fieldOf("duration").forGetter(TemporalMorassEntitySnapshot::getDuration)
+      ).apply(instance, TemporalMorassEntitySnapshot::new));
+  public static final Codec<TemporalMorassEntitySnapshot> CODEC = MAP_CODEC.codec();
+  public static final StreamCodec<ByteBuf, TemporalMorassEntitySnapshot> STREAM_CODEC = StreamCodec.composite(
       ByteBufCodecs.VAR_INT, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ByteBufCodecs.VAR_INT, o -> o.radiusZX,
       ByteBufCodecs.VAR_INT, o -> o.radiusY,
       ByteBufCodecs.VAR_INT, o -> o.duration,
-      TimeStopEntitySnapshot::new);
+      TemporalMorassEntitySnapshot::new);
 
   private final int radiusZX, radiusY, duration;
   private AABB aabb;
 
-  public TimeStopEntitySnapshot(LivingEntity player, int decay, int radiusZX, int radiusY, int duration) {
+  public TemporalMorassEntitySnapshot(LivingEntity player, int decay, int radiusZX, int radiusY, int duration) {
     super(player, decay);
     this.radiusZX = radiusZX;
     this.radiusY = radiusY;
     this.duration = duration;
   }
 
-  public TimeStopEntitySnapshot(int timestamp, int decay, int radiusZX, int radiusY, int duration) {
+  public TemporalMorassEntitySnapshot(int timestamp, int decay, int radiusZX, int radiusY, int duration) {
     super(timestamp, decay);
     this.radiusY = radiusY;
     this.radiusZX = radiusZX;
@@ -51,7 +51,7 @@ public class TimeStopEntitySnapshot extends Snapshot {
 
   @Override
   public SnapshotType<?> getType() {
-    return ModSerializers.TIME_STOP.get();
+    return ModSerializers.TEMPORAL_MORASS.get();
   }
 
   public int getRadiusZX() {
@@ -81,19 +81,19 @@ public class TimeStopEntitySnapshot extends Snapshot {
     return super.isExpired(entity);
   }
 
-  public static class Type implements SnapshotType<TimeStopEntitySnapshot> {
+  public static class Type implements SnapshotType<TemporalMorassEntitySnapshot> {
     @Override
-    public Codec<TimeStopEntitySnapshot> codec() {
+    public Codec<TemporalMorassEntitySnapshot> codec() {
       return CODEC;
     }
 
     @Override
-    public MapCodec<TimeStopEntitySnapshot> mapCodec() {
+    public MapCodec<TemporalMorassEntitySnapshot> mapCodec() {
       return MAP_CODEC;
     }
 
     @Override
-    public StreamCodec<RegistryFriendlyByteBuf, TimeStopEntitySnapshot> streamCodec() {
+    public StreamCodec<RegistryFriendlyByteBuf, TemporalMorassEntitySnapshot> streamCodec() {
       return STREAM_CODEC.cast();
     }
   }

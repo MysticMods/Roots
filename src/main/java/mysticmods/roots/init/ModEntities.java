@@ -69,8 +69,11 @@ public class ModEntities {
       .sized(0.3f, 0.3f).eyeHeight(0.13f).clientTrackingRange(4).updateInterval(10).build("meteor"));
   public static final DeferredHolder<EntityType<?>, EntityType<WildfireEntity>> WILDFIRE = REGISTER.register("wildfire", () -> EntityType.Builder.<WildfireEntity>of(WildfireEntity::new, MobCategory.MISC)
       .sized(1.9f, 1.9f).clientTrackingRange(4).updateInterval(10).build("wildfire"));
-  public static final DeferredHolder<EntityType<?>, EntityType<TimeStopEntity>> TIME_STOP = REGISTER.register("time_stop", () -> EntityType.Builder.of(TimeStopEntity::new, MobCategory.MISC)
-      .sized(1f, 1f).clientTrackingRange(4).updateInterval(10).build("time_stop"));
+  public static final DeferredHolder<EntityType<?>, EntityType<TimeStopEntity>> TEMPORAL_MORASS = REGISTER.register("temporal_morass", () -> EntityType.Builder.of(TimeStopEntity::new, MobCategory.MISC)
+      .sized(1f, 1f).clientTrackingRange(4).updateInterval(10).build("temporal_morass"));
+  static {
+    REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
+  }
   public static final DeferredHolder<EntityType<?>, EntityType<RoseThornsEntity>> ROSE_THORNS = REGISTER.register("rose_thorns", () -> EntityType.Builder.of(RoseThornsEntity::new, MobCategory.MISC)
       .sized(1f, 0.4f).clientTrackingRange(4).updateInterval(10).build("rose_thorns"));
 

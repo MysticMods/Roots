@@ -22,7 +22,7 @@
     "unlocks": [
       {
         "type": "roots:spell",
-        "value": "roots:time_stop"
+        "value": "roots:temporal_morass"
       }
     ]
   },

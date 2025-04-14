@@ -189,12 +189,15 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_DURATION = P.recordProperty("sky_soarer/duration", Property.ofInt(50, SpellProperties.DURATION));
   public static final PropertyHolder<Property.IntegerProperty> SKY_SOARER_BOOSTED_DURATION = P.recordProperty("sky_soarer/boosted_duration", Property.ofInt(28, SpellProperties.EXTENDED_DURATION));
 
-  // Time Stop (320 cooldown)
-  public static final DeferredHolder<Spell, TimeStopSpell> TIME_STOP = spell(Spells.TIME_STOP, TimeStopSpell::new, ChatFormatting.DARK_BLUE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250))));
-  public static final PropertyHolder<Property.IntegerProperty> TIME_STOP_COOLDOWN = P.recordProperty("time_stop/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> TIME_STOP_DURATION = P.recordProperty("time_stop/duration", Property.ofInt(300, SpellProperties.DURATION));
-  public static final PropertyHolder<Property.IntegerProperty> TIME_STOP_RADIUS_Y = P.recordProperty("time_stop/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
-  public static final PropertyHolder<Property.IntegerProperty> TIME_STOP_RADIUS_ZX = P.recordProperty("time_stop/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
+  // Temporal Morass (320 cooldown)
+  public static final DeferredHolder<Spell, TemporalMorassSpell> TEMPORAL_MORASS = spell(Spells.TEMPORAL_MORASS, TemporalMorassSpell::new, ChatFormatting.DARK_BLUE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.MOONGLOW, SpellCosts.BASE_0250), Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250))));
+  static {
+    REGISTER.addAlias(RootsAPI.rl("time_stop"), RootsAPI.rl("temporal_morass"));
+  }
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_COOLDOWN = P.recordProperty("temporal_morass/cooldown", Property.ofInt(320, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_DURATION = P.recordProperty("temporal_morass/duration", Property.ofInt(300, SpellProperties.DURATION));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_Y = P.recordProperty("temporal_morass/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> TEMPORAL_MORASS_RADIUS_ZX = P.recordProperty("temporal_morass/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
 
   // Wildfire (24 cooldown)
   public static final DeferredHolder<Spell, WildfireSpell> WILDFIRE = spell(Spells.WILDFIRE, WildfireSpell::new, ChatFormatting.DARK_RED, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.INFERNO_BULB, SpellCosts.BASE_0250))));
