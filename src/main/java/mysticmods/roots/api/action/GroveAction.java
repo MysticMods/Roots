@@ -52,7 +52,7 @@ public interface GroveAction extends Consumer<GroveContext>, GroveContextUser {
   default void validate(GroveContext context) {
     for (GroveContext.Parameter type : getUsedParameters()) {
       if (!GroveContext.hasParameter(context, type)) {
-        throw new NoSuchElementException("Missing required parameter '" + type.name() + "' in context");
+        throw new NoSuchElementException("Missing required parameter '" + type.name() + "' in context '" + context + "' for action '" + this + "'");
       }
     }
   }
