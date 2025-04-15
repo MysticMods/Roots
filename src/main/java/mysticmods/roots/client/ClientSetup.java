@@ -181,6 +181,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.CHANNEL_TARGET.get(), ChannelTargetCastParticle.Provider::new);
     event.registerSpriteSet(ModParticles.ANIMAL_HARVEST.get(), AnimalHarvestParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SPROUT_PORTAL.get(), SproutPortalParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.SPIRAL.get(), SpiralParticle.Provider::new);
 
     event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
   }

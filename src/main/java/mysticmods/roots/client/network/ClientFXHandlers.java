@@ -15,6 +15,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class ClientFXHandlers {
+  public static void spiral(BlockPos position, double radius, double angle, int color1, int color2) {
+    Minecraft minecraft = Minecraft.getInstance();
+    minecraft.level.addParticle(new RootsParticleOptions(ModParticles.SPIRAL, color1, color2),
+        position.getX() + 0.5f,
+        position.getY() + 1.15f,
+        position.getZ() + 0.5f, radius, angle, 0);
+  }
+
   public static void animalHarvest(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);

@@ -24,9 +24,8 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROWTH = PARTICLES.register("growth", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> ANIMAL_HARVEST = PARTICLES.register("animal_harvest", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> CHANNEL_TARGET = PARTICLES.register("channel_target", () -> new RootsParticleOptions.Type(false));
-
-  // "Simple" particles
-  public static final DeferredHolder<ParticleType<?>, RootsParticleOptions.Type> SPROUT_PORTAL = PARTICLES.register("sprout_portal", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SPROUT_PORTAL = PARTICLES.register("sprout_portal", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SPIRAL = PARTICLES.register("spiral", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);
