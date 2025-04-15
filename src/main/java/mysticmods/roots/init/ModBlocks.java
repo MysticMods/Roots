@@ -171,17 +171,17 @@ public class ModBlocks {
   public static DeferredHolder<Block, WallBlock> RUNED_BRICK_WALL = BLOCKS.register("runed_brick_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, WallBlock> RUNED_TILE_WALL = BLOCKS.register("runed_tile_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, ElementalSoilBlock> ELEMENTAL_SOIL = BLOCKS.register("elemental_soil", () -> new ElementalSoilBlock(ElementalType.DEFAULT, BlockBehaviour.Properties.of()
-      .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.GRAVEL)));
+      .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.GRAVEL).requiresCorrectToolForDrops()));
   public static DeferredHolder<Block, ElementalSoilBlock> AQUEOUS_SOIL = BLOCKS.register("aqueous_soil", () -> new ElementalSoilBlock(ElementalType.WATER, BlockBehaviour.Properties.of()
-      .mapColor(MapColor.WATER).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.LILY_PAD)));
+      .mapColor(MapColor.WATER).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.LILY_PAD).requiresCorrectToolForDrops()));
   public static DeferredHolder<Block, ElementalSoilBlock> CAELIC_SOIL = BLOCKS.register("caelic_soil", () -> new ElementalSoilBlock(ElementalType.AIR, BlockBehaviour.Properties.of()
       .mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f)
-      .sound(SoundType.WOOL)));
+      .sound(SoundType.WOOL).requiresCorrectToolForDrops()));
   public static DeferredHolder<Block, ElementalSoilBlock> MAGMATIC_SOIL = BLOCKS.register("magmatic_soil", () -> new ElementalSoilBlock(ElementalType.FIRE, BlockBehaviour.Properties.of()
-      .mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.CANDLE)));
+      .mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.CANDLE).requiresCorrectToolForDrops()));
   public static DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(ElementalType.EARTH, BlockBehaviour.Properties.of()
       .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f)
-      .sound(SoundType.HANGING_ROOTS)));
+      .sound(SoundType.HANGING_ROOTS).requiresCorrectToolForDrops()));
   public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BlockBehaviour.Properties.of()
       .instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL)
       .noOcclusion()));

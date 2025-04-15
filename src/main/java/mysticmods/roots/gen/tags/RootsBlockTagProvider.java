@@ -24,7 +24,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
   @Override
   protected void addTags(HolderLookup.Provider provider) {
     // THIS FILE IS MORE DISORDERED THAN FREUD
-    this.tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(RootsTags.Blocks.SOILS);
+    this.tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(RootsTags.Blocks.ALL_SOIL);
     // HOE
     this.tag(BlockTags.MINEABLE_WITH_HOE)
         .add(THATCH.get(), STONEPETAL.get(), WILDWOOD_LEAVES.get(), WILD_ROOTS.get(), CREEPING_GROVE_MOSS.get(), HANGING_GROVE_MOSS.get(), BAFFLECAP_BLOCK.get(), BAFFLECAP.get());
