@@ -75,9 +75,6 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       //  - Acid damage by player
       //  - Visuals
       entity.hurt(ModDamage.acidCloud(pPlayer), damage);
-      // Hurt isn't sufficient
-      entity.setLastHurtByPlayer(pPlayer);
-      entity.setLastHurtByMob(pPlayer);
     }
     if (totalDamaged == 0) {
       costs.noCharge();
