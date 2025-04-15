@@ -23,7 +23,11 @@ public class ModDamage {
   public static final ResourceKey<DamageType> LIFE_DRAIN = create(RootsAPI.rl("life_drain"));
 
   private static DamageSource fromEntity(ResourceKey<DamageType> type, Entity direct, Entity indirect) {
-    var registry = direct.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE);
+    if (direct == null && indirect == null) {
+      throw new IllegalStateException("Both direct and indirect cannot be null");
+    }
+    var level = direct != null ? direct.level() : indirect.level();
+    var registry = level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE);
     return new DamageSource(registry.getHolderOrThrow(type), direct, indirect, null);
   }
 
@@ -36,11 +40,11 @@ public class ModDamage {
   }
 
   public static DamageSource acidCloud(Entity direct) {
-    return fromEntity(ACID_CLOUD, direct, null);
+    return fromEntity(ACID_CLOUD, null, direct);
   }
 
   public static DamageSource lifeDrain(Entity direct) {
-    return fromEntity(LIFE_DRAIN, direct, null);
+    return fromEntity(LIFE_DRAIN, null, direct);
   }
 
   private static DamageSource meteor = null;
