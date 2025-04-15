@@ -433,7 +433,7 @@ public class RootsDataMapProvider extends DataMapProvider {
     int first_spell_reward = 250;
 
     builder20.add(ModActions.LEARN_SPELL, List.of(
-        new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("learn_spell/fey_light"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.FEY_LIGHT.getId()))),
+        new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("learn_spell/sylvan_light"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.SYLVAN_LIGHT.getId()))),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("learn_spell/petal_shell"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.PETAL_SHELL.getId()))),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("learn_spell/rose_thorns"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.ROSE_THORNS.getId()))),
         new GroveReputationEntry(ModGroves.FAIRY.value(), RootsAPI.rl("learn_spell/sanctuary"), new GroveReputation(first_spell_reward), true, List.of(new GroveReputationEntry.SubEntry(GroveReputationEntry.SubEntryType.EXACT_SPELL, ModSpells.SANCTUARY.getId()))),

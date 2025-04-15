@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-14T16:41:08.1339205	Item Models: roots
+// 1.21.1	2025-04-15T22:26:17.0326726	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
@@ -59,8 +59,6 @@ d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/display_pedest
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/duck_spawn_egg.json
 80bd3330615a9c7632d0f241f0ed9576caccfe5a assets/roots/models/item/elemental_soil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/fennec_spawn_egg.json
-5b7ecfad827acdf6b56386fe184beba2553f4f27 assets/roots/models/item/fey_leather.json
-9f26dada3953d97ff0d875094cb9b9859ecaa96a assets/roots/models/item/fey_pouch.json
 ed9102b2e94017998ecf81b2c86cb29365462194 assets/roots/models/item/fire_starter.json
 a9f24fd326a6cb57c1ac50440d5849502ab332cf assets/roots/models/item/flour.json
 cb855da7b1d0684c4bc009f0241040ca807f5123 assets/roots/models/item/geas.json
@@ -212,7 +210,6 @@ dea19c39d873cf59285725c35b14d09ef4520124 assets/roots/models/item/spell_control_
 9ff6e9689fd5a176c45b816818095493f95ccbad assets/roots/models/item/spell_desaturate.json
 e26e7f541f59b0e2e3c1e62fa8d31129cdf2c724 assets/roots/models/item/spell_disarm.json
 475b50a9bb200fa8e59a9daa58acbcf2efbd859e assets/roots/models/item/spell_extension.json
-8788cac217881ed8066dea6074247d8d7d02e09c assets/roots/models/item/spell_fey_light.json
 290cdc0d78e9eacaf33815267dd113ca91b485e8 assets/roots/models/item/spell_geas.json
 a0ad2f4ebccc562e786088dc4d882241c5d67347 assets/roots/models/item/spell_growth_infusion.json
 5f37ad2947e72e541aee37df7584fce8a8077b06 assets/roots/models/item/spell_harvest.json
@@ -230,6 +227,7 @@ a2629c81bc1ba6189c60e7bd93672aff64144e89 assets/roots/models/item/spell_sanctuar
 8cf2b5fd71effb1e81b02727dc22e8f1d82b5e0b assets/roots/models/item/spell_shatter.json
 5238fe5210131ac9db072508b502c04cf8de00e5 assets/roots/models/item/spell_sky_soarer.json
 8e1fef22f813c4ad657e04bea3e68fd811404971 assets/roots/models/item/spell_storm_cloud.json
+3743eeb54d7790ba8842e767493b20bd3c4e2e5a assets/roots/models/item/spell_sylvan_light.json
 aecb01679e50c7dce1a2efda797b0b59299cb953 assets/roots/models/item/spell_temporal_morass.json
 d5f15af95c736c49538888947373791719c0a5bf assets/roots/models/item/spell_wildfire.json
 52ae965e43ad94ecd7b43af4b84f893f1dd6fe0c assets/roots/models/item/spiritleaf.json
@@ -245,6 +243,8 @@ b48da5338d6df199a05029fe52defa82b3042c55 assets/roots/models/item/strange_ooze.j
 0a0edad27f33509be58c3387f932c7ea33f12fd2 assets/roots/models/item/stripped_wildwood_log.json
 94154ab2fc29a76b2075c14847710e02785413e4 assets/roots/models/item/stripped_wildwood_wood.json
 75a4376dc4f58209c6914ef28676354a24e92d32 assets/roots/models/item/stuffed_aubergine.json
+18fdf50fa0dfbed4d9877386814f9ba8becc6200 assets/roots/models/item/sylvan_leather.json
+4208237195fa7d08c34e3a9c4a633c8dafee7b5a assets/roots/models/item/sylvan_pouch.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/roots/models/item/tan_sprout_spawn_egg.json
 ab91c5fb468f89dc5c9d4f93ab4e86592126e160 assets/roots/models/item/terran_soil.json
 9ac737c965f9e6f55e4479561c55b6dd74eaa3c8 assets/roots/models/item/thatch.json

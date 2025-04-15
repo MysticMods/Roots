@@ -24,10 +24,6 @@
       "count": 1,
       "id": "roots:spell_extension"
     },
-    "roots:fey_light": {
-      "count": 1,
-      "id": "roots:spell_fey_light"
-    },
     "roots:geas": {
       "count": 1,
       "id": "roots:spell_geas"
@@ -99,6 +95,10 @@
     "roots:summon_undead": {
       "count": 1,
       "id": "roots:spell_control_undead"
+    },
+    "roots:sylvan_light": {
+      "count": 1,
+      "id": "roots:spell_sylvan_light"
     },
     "roots:temporal_morass": {
       "count": 1,

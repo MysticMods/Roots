@@ -22,7 +22,7 @@
     "unlocks": [
       {
         "type": "roots:spell",
-        "value": "roots:fey_light"
+        "value": "roots:sylvan_light"
       }
     ]
   },

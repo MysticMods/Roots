@@ -353,11 +353,11 @@
         "entries": [
           {
             "type": "exact_spell",
-            "name": "roots:fey_light"
+            "name": "roots:sylvan_light"
           }
         ],
         "grove": "roots:fairy",
-        "name": "roots:learn_spell/fey_light",
+        "name": "roots:learn_spell/sylvan_light",
         "reputation": {
           "gain1": 250,
           "gain2": 0,

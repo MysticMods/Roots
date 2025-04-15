@@ -3,7 +3,6 @@ package mysticmods.roots.gen.client;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModParticles;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
 
@@ -15,7 +14,7 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
   @Override
   protected void addDescriptions() {
     this.sprite(ModParticles.PYRE.get(), RootsAPI.rl("simple"));
-    this.sprite(ModParticles.FEY_LIGHT.get(), RootsAPI.rl("simple"));
+    this.sprite(ModParticles.SYLVAN_LIGHT.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.METEOR.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.WILDFIRE.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.GROWTH.get(), RootsAPI.rl("simple_square"));

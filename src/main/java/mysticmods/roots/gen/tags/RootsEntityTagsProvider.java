@@ -122,7 +122,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             EntityType.BAT);
     this.tag(RootsTags.Entities.ANIMAL_HARVEST_EXCLUDE).add(EntityType.IRON_GOLEM);
     this.tag(RootsTags.Entities.BOATS).add(EntityType.BOAT, EntityType.CHEST_BOAT);
-    this.tag(RootsTags.Entities.FEY_LEATHER)
+    this.tag(RootsTags.Entities.SYLVAN_LEATHER)
         .add(
             EntityType.COW,
             EntityType.DONKEY,

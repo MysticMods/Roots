@@ -246,26 +246,6 @@
         }
       }
     ],
-    "roots:fey_light": [
-      {
-        "id": "roots:fey_light/cooldown",
-        "value": {
-          "type": "roots:integer_property",
-          "comment": "How long before the player can cast the spell again",
-          "default_value": 20,
-          "value": 20
-        }
-      },
-      {
-        "id": "roots:fey_light/max_distance",
-        "value": {
-          "type": "roots:double_property",
-          "comment": "The maximum distance a fey light can be placed from the caster",
-          "default_value": 10.0,
-          "value": 10.0
-        }
-      }
-    ],
     "roots:geas": [
       {
         "id": "roots:geas/cooldown",
@@ -785,6 +765,26 @@
           "comment": "How long before the player can cast the spell again",
           "default_value": 320,
           "value": 320
+        }
+      }
+    ],
+    "roots:sylvan_light": [
+      {
+        "id": "roots:sylvan_light/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      },
+      {
+        "id": "roots:sylvan_light/max_distance",
+        "value": {
+          "type": "roots:double_property",
+          "comment": "The maximum distance a sylvan light can be placed from the caster",
+          "default_value": 10.0,
+          "value": 10.0
         }
       }
     ],

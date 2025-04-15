@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-14T16:41:08.1197919	Recipes
+// 1.21.1	2025-04-15T22:26:17.0286171	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -266,7 +266,7 @@ a4e8ed7cbdf0ae9123e9d587c4ef4c0b820cb830 data/roots/advancement/recipes/misc/rei
 88a9db4e280ad5207ffbe1911ac75a29b77e8a49 data/roots/advancement/recipes/misc/ritual_pedestal.json
 3ecc9b4c1a8ed3301b3df1bcd9a65262cb054a2c data/roots/advancement/recipes/misc/runic_block/spiritleaf_from_beetroot.json
 4364cfc145885a3dd8c4ed69b4c7908503663900 data/roots/advancement/recipes/misc/runic_block/wildewheet_seeds_and_wheat_chance.json
-9528feb649beae164c3387dfdc400f1c82a6394c data/roots/advancement/recipes/misc/runic_entity/fey_leather.json
+9d6bd8a5c7839d86b38d707f71fa056f68fd5baa data/roots/advancement/recipes/misc/runic_entity/sylvan_leather.json
 4168ddcbd363202e2558bd68dc34844fdcf3242b data/roots/advancement/recipes/misc/silver_ingot.json
 c25ce974e8a4cc717cb3302eb80b4238562aee04 data/roots/advancement/recipes/misc/silver_ingot_from_blasting_raw_silver.json
 78d8e070447c7a1f2afcd9aa0ea8f48c9f9fe489 data/roots/advancement/recipes/misc/silver_ingot_from_blasting_silver_ore.json
@@ -282,7 +282,6 @@ ec42bbe9fd5f8ea20bc0f53b58330b33a1d6b075 data/roots/advancement/recipes/misc/spe
 9f8f09a78170884e70c64148a2ca7c776a7505d9 data/roots/advancement/recipes/misc/spell/desaturate.json
 b7b6ceeb92d5abea1cc961471964eb1d0b42005f data/roots/advancement/recipes/misc/spell/disarm.json
 74d16ec0585e0b63353837a8f4176c5a9bef6d12 data/roots/advancement/recipes/misc/spell/extension.json
-f4737f4ed9ec7300dc8c24130efef95ee74bc389 data/roots/advancement/recipes/misc/spell/fey_light.json
 983e14e2f3b896f8331fb51c01329aa1c7115c47 data/roots/advancement/recipes/misc/spell/geas.json
 e293ce2ec611d2897dd360a606316672d60d1584 data/roots/advancement/recipes/misc/spell/growth_infusion.json
 55348c092e5d9c0120a01ceb7bb0a99cb33cf490 data/roots/advancement/recipes/misc/spell/harvest.json
@@ -297,6 +296,7 @@ ac419c8e0546e93c5895a8ca830b08388f0e4bc2 data/roots/advancement/recipes/misc/spe
 104b6ba8f369afb333c02f366f773a3afd1ef18d data/roots/advancement/recipes/misc/spell/saturate.json
 405d38e92f7ac2580b682d12d2176a7a99034426 data/roots/advancement/recipes/misc/spell/shatter.json
 f68054062f527a35bc336adc96b8b516427d81f1 data/roots/advancement/recipes/misc/spell/sky_soarer.json
+0cb090aacb96aba17465ed955fa57656574a884b data/roots/advancement/recipes/misc/spell/sylvan_light.json
 770b3906b27e5c63f325d0c2b6a1279eb8defdfe data/roots/advancement/recipes/misc/spell/temporal_morass.json
 f75ffef2f2b6e90eccb953775d9249682ae60e2e data/roots/advancement/recipes/misc/spell/wildfire.json
 d5ef0dfbf5d1b3032f986670e7dfcc8f983f0377 data/roots/advancement/recipes/misc/terran_soil_from_elemental_soil_and_stalicripe.json
@@ -336,7 +336,7 @@ b76b1d06f45a2dbb11bdbbee052e8d8c31d37e7f data/roots/advancement/recipes/tools/ir
 ae4c32add61c0fefa62f9bac0a9cfe8ce9bc195a data/roots/advancement/recipes/tools/stone_knife.json
 415b560ba1cea90427c03c262f06e95d99bae4fc data/roots/advancement/recipes/tools/wooden_knife.json
 bac00bce4824296477baa2ca0140f3979331d387 data/roots/advancement/recipes/tools/wooden_shears.json
-b45994363298bbc2327d28214f10a65deb9a3ca1 data/roots/advancement/recipes/transportation/fey_leather_saddle.json
+86494bd5d2afa87f5372fd9658e19128af393c75 data/roots/advancement/recipes/transportation/sylvan_leather_saddle.json
 b4de1778c055c03d6136d5984a97334e18aa105c data/roots/recipe/antler_helmet.json
 dddbf5bca7eed5851c246b3a30e93b4d39aa5c5a data/roots/recipe/aqueous_soil_from_elemental_soil_and_dewgonia.json
 d83b78f1c6e24d72170a7ce9a8d4192cfdb08879 data/roots/recipe/assorted_seeds_from_seeds.json
@@ -401,7 +401,6 @@ b2b07ab2524a44de34b2c77b43f2d39b86396926 data/roots/recipe/decorative_pyre_from_
 5f99ab95fe3d19cc4dd55d982234f4b95772a595 data/roots/recipe/diamond_knife.json
 9030cb939f0ed66a7ec99072e68f49f933ef45de data/roots/recipe/display_pedestal.json
 96e905b7ed33114e7cf495b474f2e380e781e3a1 data/roots/recipe/dye_pouch.json
-f3e62814bfe3aa0ac5b4be0804bf8f2b267d3f97 data/roots/recipe/fey_leather_saddle.json
 e834f8252ee64a0b64be8e2ec7c60e85110e2b76 data/roots/recipe/fire_starter.json
 7f0d77b703f0685e9aab823b05967f9bddffcd69 data/roots/recipe/golden_knife.json
 9ec2a8b155c3abc2224e0ccf530cd5499f45662c data/roots/recipe/gray_dye_from_stonepetal.json
@@ -615,7 +614,7 @@ e53a29eee9031844880ebd604b88db07077a3971 data/roots/recipe/runestone_wall.json
 1e5d946454097144bf18710357611db0263a0f11 data/roots/recipe/runestone_wall_from_runestone_stonecutting.json
 f80436094c9be53e373652057df22f766d6d1653 data/roots/recipe/runic_block/spiritleaf_from_beetroot.json
 995723a044fa52f7765d35de7c4d1b33e4876cb9 data/roots/recipe/runic_block/wildewheet_seeds_and_wheat_chance.json
-f9600c79ef7771ac0ee8861a6aae0e42a1d747bd data/roots/recipe/runic_entity/fey_leather.json
+0c463452685489d8379402adf8c4ce1927ea4ac3 data/roots/recipe/runic_entity/sylvan_leather.json
 571d8a75864ad5a530733cb823be8cdcbf925b78 data/roots/recipe/silver_block.json
 2688be47b947ef1feab35e6593b5adba14e51a46 data/roots/recipe/silver_ingot.json
 05bdd26b93c3d59fb8ceb36446531497f0897a56 data/roots/recipe/silver_ingot_from_blasting_raw_silver.json
@@ -633,7 +632,6 @@ f5086607ef06c3f3560bfdc869a978c5d7e20b80 data/roots/recipe/spell/dandelion_winds
 3ff49a6978153281c549acc0612760afc426aa95 data/roots/recipe/spell/desaturate.json
 f732f9482beee18fdcc90397c821bf194b8d6794 data/roots/recipe/spell/disarm.json
 7e86c5e0f3650307961b0e5c16fd40a64c029e32 data/roots/recipe/spell/extension.json
-1b8cb4585e2329ae3c8b4d87002bba5167f04f9a data/roots/recipe/spell/fey_light.json
 efa39da893029841bb0936afcb19ca95970da980 data/roots/recipe/spell/geas.json
 937a4c7c243d19b0ee79d006bcf2ae315e243561 data/roots/recipe/spell/growth_infusion.json
 07420d3d2f186a2c27eae10773683c07ca748242 data/roots/recipe/spell/harvest.json
@@ -648,6 +646,7 @@ d588cb212056ae8acbaf21e5a5fead2993d10137 data/roots/recipe/spell/magnetism.json
 8f1e11be6dc2b315a3977c54ac2ccca9a2a6cc2a data/roots/recipe/spell/saturate.json
 88e8fa740c9a034f07a88e651c6079e53bdbf87c data/roots/recipe/spell/shatter.json
 06a1ccb13b0a97c85fd59f143be71ccf548f5bee data/roots/recipe/spell/sky_soarer.json
+196697994255c50ca40889dcca54799962449e94 data/roots/recipe/spell/sylvan_light.json
 11ebb4297e83c4508b7f2ee6a1626fe29ee77f32 data/roots/recipe/spell/temporal_morass.json
 1f1990b290186971ff82825be3a4fe2808e8da10 data/roots/recipe/spell/wildfire.json
 fbb062e06498624fabe9e8db3040e856604e28c6 data/roots/recipe/staff.json
@@ -655,6 +654,7 @@ fbb062e06498624fabe9e8db3040e856604e28c6 data/roots/recipe/staff.json
 4b81aeb7e059cf884197e478334837c31e979eab data/roots/recipe/stone_knife.json
 3196bf771241ebb4efb766dc14cfe51728680347 data/roots/recipe/stripped_wildwood_wood_from_logs.json
 8f0a515fe526a080f022a358685bc519d30b4243 data/roots/recipe/stuffed_aubergine.json
+e6eea6a5045208b75fa76cba9c271ba70b65cf34 data/roots/recipe/sylvan_leather_saddle.json
 c19a3cc3a77749a4d127c10ae4dcca10572c7fc0 data/roots/recipe/terran_soil_from_elemental_soil_and_stalicripe.json
 97a5e8333529712476a9010b712479b8bb4114ee data/roots/recipe/thatch.json
 8cef38408365f141afffa8bbe9896e9d4f3aa600 data/roots/recipe/vegetable_juice.json

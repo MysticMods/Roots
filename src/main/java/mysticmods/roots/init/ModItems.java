@@ -274,7 +274,10 @@ public class ModItems {
   public static final DeferredHolder<Item, Item> COMPONENT_POUCH = ITEMS.register("component_pouch", () -> new Item(new Item.Properties().stacksTo(1).component(ModAttachments.COMPONENT_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.BROWN)));
   public static final DeferredHolder<Item, CreativeComponentPouch> CREATIVE_POUCH = ITEMS.register("creative_pouch", () -> new CreativeComponentPouch(new Item.Properties().stacksTo(1)
       .rarity(Rarity.EPIC)));
-  public static final DeferredHolder<Item, Item> FEY_POUCH = ITEMS.register("fey_pouch", () -> new Item(new Item.Properties().stacksTo(1).component(ModAttachments.FEY_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.LIGHT_BLUE)));
+  public static final DeferredHolder<Item, Item> SYLVAN_POUCH = ITEMS.register("sylvan_pouch", () -> new Item(new Item.Properties().stacksTo(1).component(ModAttachments.SYLVAN_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.LIGHT_BLUE)));
+  static {
+    ITEMS.addAlias(RootsAPI.rl("fey_pouch"), RootsAPI.rl("sylvan_pouch"));
+  }
   public static final DeferredHolder<Item, HerbPouchItem> HERB_POUCH = ITEMS.register("herb_pouch", () -> new HerbPouchItem(new Item.Properties().stacksTo(1)
       .component(ModAttachments.HERB_POUCH_CONTENTS, ItemContainerContents.EMPTY)
       .component(DataComponents.BASE_COLOR, DyeColor.BROWN)));
@@ -324,7 +327,10 @@ public class ModItems {
 
   public static final DeferredHolder<Item, Item> RELIQUARY = ITEMS.register("reliquary", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
   public static final DeferredHolder<Item, Item> SPIRIT_BAG = ITEMS.register("spirit_bag", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-  public static final DeferredHolder<Item, Item> FEY_LEATHER = ITEMS.register("fey_leather", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+  public static final DeferredHolder<Item, Item> SYLVAN_LEATHER = ITEMS.register("sylvan_leather", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+  static {
+    ITEMS.addAlias(RootsAPI.rl("fey_leather"), RootsAPI.rl("sylvan_leather"));
+  }
   public static final DeferredHolder<Item, EffectUseItem> GLASS_EYE = ITEMS.register("glass_eye", () -> new EffectUseItem(MobEffects.NIGHT_VISION, 0, 20 * 30, new Item.Properties()));
   public static final DeferredHolder<Item, Item> LIFE_ESSENCE = ITEMS.register("life_essence", () -> new Item(new Item.Properties()));
   public static final DeferredHolder<Item, Item> MYSTIC_FEATHER = ITEMS.register("mystic_feather", () -> new Item(new Item.Properties()));
@@ -369,7 +375,10 @@ public class ModItems {
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DESATURATE = ITEMS.register("spell_desaturate", () -> spell(ModSpells.DESATURATE));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_DISARM = ITEMS.register("spell_disarm", () -> spell(ModSpells.DISARM));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_EXTENSION = ITEMS.register("spell_extension", () -> spell(ModSpells.EXTENSION));
-  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_FEY_LIGHT = ITEMS.register("spell_fey_light", () -> spell(ModSpells.FEY_LIGHT));
+  public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_SYLVAN_LIGHT = ITEMS.register("spell_sylvan_light", () -> spell(ModSpells.SYLVAN_LIGHT));
+  static {
+    ITEMS.addAlias(RootsAPI.rl("spell_dwt_light"), RootsAPI.rl("spell_sylvan_light"));
+  }
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_GEAS = ITEMS.register("spell_geas", () -> spell(ModSpells.GEAS));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_GROWTH_INFUSION = ITEMS.register("spell_growth_infusion", () -> spell(ModSpells.GROWTH_INFUSION));
   public static DeferredHolder<Item, TokenItem.SpellTokenItem> SPELL_HARVEST = ITEMS.register("spell_harvest", () -> spell(ModSpells.HARVEST));

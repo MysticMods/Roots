@@ -13,13 +13,19 @@ public class ModParticles {
   private static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, RootsAPI.MODID);
 
   // Emitters
-  public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FEY_LIGHT_EMITTER = PARTICLES.register("fey_light_emitter", () -> new SimpleParticleType(false));
+  public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SYLVAN_LIGHT_EMITTER = PARTICLES.register("sylvan_light_emitter", () -> new SimpleParticleType(false));
+  static {
+    PARTICLES.addAlias(RootsAPI.rl("fey_light_emitter"), RootsAPI.rl("sylvan_light_emitter"));
+  }
 
   // Actual particles
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PYRE = PARTICLES.register("pyre", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> METEOR = PARTICLES.register("meteor", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PYRE_LEAF = PARTICLES.register("pyre_leaf", () -> new RootsParticleOptions.Type(false));
-  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> FEY_LIGHT = PARTICLES.register("fey_light", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SYLVAN_LIGHT = PARTICLES.register("sylvan_light", () -> new RootsParticleOptions.Type(false));
+  static {
+    PARTICLES.addAlias(RootsAPI.rl("fey_light"), RootsAPI.rl("sylvan_light"));
+  }
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> WILDFIRE = PARTICLES.register("wildfire", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROWTH = PARTICLES.register("growth", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> ANIMAL_HARVEST = PARTICLES.register("animal_harvest", () -> new RootsParticleOptions.Type(false));

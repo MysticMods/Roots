@@ -7,11 +7,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class FeyLightBlockEntity extends BlockEntity implements ClientTickBlockEntity {
+public class SylvanLightBlockEntity extends BlockEntity implements ClientTickBlockEntity {
   private int ticks;
 
-  public FeyLightBlockEntity(BlockPos pos, BlockState blockState) {
-    super(ModBlockEntities.FEY_LIGHT.get(), pos, blockState);
+  public SylvanLightBlockEntity(BlockPos pos, BlockState blockState) {
+    super(ModBlockEntities.SYLVAN_LIGHT.get(), pos, blockState);
   }
 
   @Override

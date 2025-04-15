@@ -286,7 +286,7 @@ public class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.CAELIC_SOIL);
     addBlock(ModBlocks.MAGMATIC_SOIL);
     addBlock(ModBlocks.TERRAN_SOIL);
-    addBlock(ModBlocks.FEY_LIGHT);
+    addBlock(ModBlocks.SYLVAN_LIGHT);
     addBlock(ModBlocks.RITUAL_PEDESTAL);
     addBlock(ModBlocks.REINFORCED_RITUAL_PEDESTAL);
     addBlock(ModBlocks.GROVE_CRAFTER);
@@ -383,7 +383,7 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.APOTHECARY_POUCH);
     addItem(ModItems.COMPONENT_POUCH);
     addItem(ModItems.CREATIVE_POUCH);
-    addItem(ModItems.FEY_POUCH);
+    addItem(ModItems.SYLVAN_POUCH);
     addItem(ModItems.HERB_POUCH);
     addItem(ModItems.COOKED_PERESKIA);
     addItem(ModItems.FLOUR);
@@ -419,7 +419,7 @@ public class RootsLangProvider extends LanguageProvider {
     addItem(ModItems.NETHERITE_KNIFE);
     addItem(ModItems.RELIQUARY);
     addItem(ModItems.SPIRIT_BAG);
-    addItem(ModItems.FEY_LEATHER);
+    addItem(ModItems.SYLVAN_LEATHER);
     addItem(ModItems.GLASS_EYE);
     addItem(ModItems.LIFE_ESSENCE);
     addItem(ModItems.MYSTIC_FEATHER);
@@ -611,7 +611,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.spell.dandelion_winds", "Dandelion winds blow");
     add("roots.subtitles.spell.desaturate", "Desaturation");
     add("roots.subtitles.spell.disarm", "Entities disarmed");
-    add("roots.subtitles.spell.fey_light", "Fey light created");
+    add("roots.subtitles.spell.sylvan_light", "Sylvan light created");
     add("roots.subtitles.spell.geas", "Geas cast");
     add("roots.subtitles.spell.geas_end", "Geas ends");
     add("roots.subtitles.spell.growth_infusion", "Growth encouraged");

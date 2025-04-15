@@ -25,28 +25,28 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class FeyLightSpell extends Spell {
+public class SylvanLightSpell extends Spell {
   protected double maxDistance = 0;
 
-  public FeyLightSpell(ChatFormatting color, CostInstance costs) {
+  public SylvanLightSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0xf7f6d2, 0xe351f4);
   }
 
   @Override
   public PropertyHolder<Property.IntegerProperty> getCooldownProperty() {
-    return ModSpells.FEY_LIGHT_COOLDOWN;
+    return ModSpells.SYLVAN_LIGHT_COOLDOWN;
   }
 
   @Override
   public void buildProperties(List<PropertyHolder<?>> result) {
     super.buildProperties(result);
-    result.add(ModSpells.FEY_LIGHT_MAX_DISTANCE);
+    result.add(ModSpells.SYLVAN_LIGHT_MAX_DISTANCE);
   }
 
   @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
-    this.maxDistance = properties.get(ModSpells.FEY_LIGHT_MAX_DISTANCE);
+    this.maxDistance = properties.get(ModSpells.SYLVAN_LIGHT_MAX_DISTANCE);
   }
 
   @Override
@@ -68,7 +68,7 @@ public class FeyLightSpell extends Spell {
     }
 
     if (doPlace) {
-      pLevel.setBlock(potentialPos, ModBlocks.FEY_LIGHT.get().defaultBlockState(), 3);
+      pLevel.setBlock(potentialPos, ModBlocks.SYLVAN_LIGHT.get().defaultBlockState(), 3);
     } else {
       costs.noCharge();
       return 0;

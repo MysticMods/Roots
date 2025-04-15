@@ -91,10 +91,13 @@ public class ModSpells {
   public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_COOLDOWN = P.recordProperty("nondetection/cooldown", Property.ofInt(350, SpellProperties.COOLDOWN));
   public static final PropertyHolder<Property.IntegerProperty> NONDETECTION_DURATION = P.recordProperty("nondetection/duration", Property.ofInt(45 * 60, "The duration of the nondetection effect in ticks."));
 
-  // Fey Light (20 cooldown)
-  public static final DeferredHolder<Spell, FeyLightSpell> FEY_LIGHT = spell(Spells.FEY_LIGHT, FeyLightSpell::new, ChatFormatting.LIGHT_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.0625), Cost.add(ModHerbs.PERESKIA, 0.0625))));
-  public static final PropertyHolder<Property.IntegerProperty> FEY_LIGHT_COOLDOWN = P.recordProperty("fey_light/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.DoubleProperty> FEY_LIGHT_MAX_DISTANCE = P.recordProperty("fey_light/max_distance", Property.ofDouble(10.0, "The maximum distance a fey light can be placed from the caster"));
+  // Sylvan Light (20 cooldown)
+  public static final DeferredHolder<Spell, SylvanLightSpell> SYLVAN_LIGHT = spell(Spells.SYLVAN_LIGHT, SylvanLightSpell::new, ChatFormatting.LIGHT_PURPLE, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.GROVE_MOSS, 0.0625), Cost.add(ModHerbs.PERESKIA, 0.0625))));
+  static {
+    REGISTER.addAlias(RootsAPI.rl("fey_light"), RootsAPI.rl("sylvan_light"));
+  }
+  public static final PropertyHolder<Property.IntegerProperty> SYLVAN_LIGHT_COOLDOWN = P.recordProperty("sylvan_light/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+  public static final PropertyHolder<Property.DoubleProperty> SYLVAN_LIGHT_MAX_DISTANCE = P.recordProperty("sylvan_light/max_distance", Property.ofDouble(10.0, "The maximum distance a sylvan light can be placed from the caster"));
 
   // Geas (80 cooldown)
   public static final DeferredHolder<Spell, GeasSpell> GEAS = spell(Spells.GEAS, GeasSpell::new, ChatFormatting.RED, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250))));

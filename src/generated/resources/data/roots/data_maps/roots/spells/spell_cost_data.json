@@ -85,21 +85,6 @@
         }
       ]
     },
-    "roots:fey_light": {
-      "charge_type": "cast",
-      "costs": [
-        {
-          "type": "additive",
-          "defaultValue": 0.0625,
-          "herb": "roots:grove_moss"
-        },
-        {
-          "type": "additive",
-          "defaultValue": 0.0625,
-          "herb": "roots:pereskia"
-        }
-      ]
-    },
     "roots:geas": {
       "charge_type": "cast",
       "costs": [
@@ -332,6 +317,21 @@
           "type": "additive",
           "defaultValue": 0.25,
           "herb": "roots:moonglow"
+        }
+      ]
+    },
+    "roots:sylvan_light": {
+      "charge_type": "cast",
+      "costs": [
+        {
+          "type": "additive",
+          "defaultValue": 0.0625,
+          "herb": "roots:grove_moss"
+        },
+        {
+          "type": "additive",
+          "defaultValue": 0.0625,
+          "herb": "roots:pereskia"
         }
       ]
     },

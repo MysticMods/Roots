@@ -37,7 +37,7 @@ public class CapabilityHandler {
     event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, ModAttachments.HERB_POUCH_CONTENTS.get(), 9), ModItems.HERB_POUCH.get());
     event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, ModAttachments.COMPONENT_POUCH_CONTENTS.get(), 18), ModItems.COMPONENT_POUCH.get());
     event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, ModAttachments.APOTHECARY_POUCH_CONTENTS.get(), 27), ModItems.APOTHECARY_POUCH.get());
-    event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, ModAttachments.FEY_POUCH_CONTENTS.get(), 27), ModItems.FEY_POUCH.get());
+    event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, ModAttachments.SYLVAN_POUCH_CONTENTS.get(), 27), ModItems.SYLVAN_POUCH.get());
     event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, ModAttachments.QUIVER_CONTENTS.get(), 6), ModItems.WILDWOOD_QUIVER.get());
   }
 }

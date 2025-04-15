@@ -48,8 +48,11 @@ public class ModAttachments {
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> APOTHECARY_POUCH_CONTENTS = COMPONENTS.register("apothecary_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
   // 12 item slots, 15 herb slots
-  public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> FEY_POUCH_CONTENTS = COMPONENTS.register("fey_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> SYLVAN_POUCH_CONTENTS = COMPONENTS.register("sylvan_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
+  static {
+    COMPONENTS.addAlias(RootsAPI.rl("fey_pouch_contents"), RootsAPI.rl("sylvan_pouch_contents"));
+  }
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FORAGING = COMPONENTS.register("foraging", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT)
       .networkSynchronized(ByteBufCodecs.VAR_INT).build());
 

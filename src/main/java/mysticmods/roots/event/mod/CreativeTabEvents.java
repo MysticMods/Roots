@@ -164,7 +164,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.PELT.get());
       event.accept(ModItems.ANTLERS.get());
       event.accept(ModItems.RUNIC_DUST.get());
-      event.accept(ModItems.FEY_LEATHER.get());
+      event.accept(ModItems.SYLVAN_LEATHER.get());
       event.accept(ModItems.GLASS_EYE.get());
       event.accept(ModItems.LIFE_ESSENCE.get());
       event.accept(ModItems.MYSTIC_FEATHER.get());
@@ -218,7 +218,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.APOTHECARY_POUCH.get());
       event.accept(ModItems.COMPONENT_POUCH.get());
       event.accept(ModItems.CREATIVE_POUCH.get());
-      event.accept(ModItems.FEY_POUCH.get());
+      event.accept(ModItems.SYLVAN_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.HERB_POUCH.get());
         stack.set(DataComponents.BASE_COLOR, dye);
@@ -292,7 +292,7 @@ public class CreativeTabEvents {
       event.accept(ModItems.SPELL_DESATURATE.get());
       event.accept(ModItems.SPELL_DISARM.get());
       event.accept(ModItems.SPELL_EXTENSION.get());
-      event.accept(ModItems.SPELL_FEY_LIGHT.get());
+      event.accept(ModItems.SPELL_SYLVAN_LIGHT.get());
       event.accept(ModItems.SPELL_GEAS.get());
       event.accept(ModItems.SPELL_GROWTH_INFUSION.get());
       event.accept(ModItems.SPELL_HARVEST.get());

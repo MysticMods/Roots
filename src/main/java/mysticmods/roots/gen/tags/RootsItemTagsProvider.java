@@ -17,8 +17,6 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-import static mysticmods.roots.init.ModItems.FEY_LEATHER;
-
 @SuppressWarnings({"NullableProblems", "unchecked"})
 public class RootsItemTagsProvider extends ItemTagsProvider {
   public RootsItemTagsProvider(PackOutput p_275343_, CompletableFuture<HolderLookup.Provider> p_275729_, CompletableFuture<TagLookup<Block>> p_275322_, @org.jetbrains.annotations.Nullable ExistingFileHelper existingFileHelper) {
@@ -224,7 +222,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
     this.tag(RootsTags.Items.POUCHES)
-        .add(ModItems.HERB_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
+        .add(ModItems.HERB_POUCH.get(), ModItems.SYLVAN_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
     this.tag(RootsTags.Items.CREATIVE_POUCHES).add(ModItems.CREATIVE_POUCH.get());
     this.tag(RootsTags.Items.ALL_POUCHES).addTags(RootsTags.Items.POUCHES, RootsTags.Items.CREATIVE_POUCHES);
 
@@ -271,9 +269,9 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
 
     this.tag(RootsTags.Items.FORAGING_ELIGIBLE).addTag(RootsTags.Items.KNIVES).add(ModItems.LIVING_HOE.get());
 
-    this.tag(RootsTags.Items.FEY_LEATHERS).add(FEY_LEATHER.get());
+    this.tag(RootsTags.Items.SYLVAN_LEATHERS).add(ModItems.SYLVAN_LEATHER.get());
     this.tag(RootsTags.Items.DYEABLE)
-        .add(ModItems.HERB_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.FEY_POUCH.get());
+        .add(ModItems.HERB_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.SYLVAN_POUCH.get());
     this.tag(RootsTags.Items.CHARM_ALERT).add(ModItems.ALERTNESS_CHARM.get());
     this.tag(RootsTags.Items.CHARMS).addTag(RootsTags.Items.CHARM_ALERT);
 
@@ -293,7 +291,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.RUNED_LOG_HERBS).add(ModItems.WILDROOT.get(), ModItems.GROVE_MOSS.get());
 
     this.tag(RootsTags.Items.NYI)
-        .add(ModItems.APPLE_CORDIAL.get(), ModItems.CACTUS_SYRUP.get(), ModItems.DANDELION_CORDIAL.get(), ModItems.LILAC_CORDIAL.get(), ModItems.PEONY_CORDIAL.get(), ModItems.ROSE_CORDIAL.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.FEY_POUCH.get(), ModItems.RUNED_DAGGER.get(), ModItems.RUNED_SHOVEL.get(), ModItems.RUNED_PICKAXE.get(), ModItems.RUNED_AXE.get(), ModItems.RUNED_HOE.get(), ModItems.RUNED_SWORD.get(), ModItems.RELIQUARY.get(), ModItems.SPIRIT_BAG.get(), ModItems.LIFE_ESSENCE.get(), ModItems.GRAMARY.get(), ModItems.WILDWOOD_BOW.get(), ModItems.WILDWOOD_QUIVER.get(), ModItems.MYSTIC_FEATHER.get(), ModItems.STRANGE_OOZE.get());
+        .add(ModItems.APPLE_CORDIAL.get(), ModItems.CACTUS_SYRUP.get(), ModItems.DANDELION_CORDIAL.get(), ModItems.LILAC_CORDIAL.get(), ModItems.PEONY_CORDIAL.get(), ModItems.ROSE_CORDIAL.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get(), ModItems.SYLVAN_POUCH.get(), ModItems.RUNED_DAGGER.get(), ModItems.RUNED_SHOVEL.get(), ModItems.RUNED_PICKAXE.get(), ModItems.RUNED_AXE.get(), ModItems.RUNED_HOE.get(), ModItems.RUNED_SWORD.get(), ModItems.RELIQUARY.get(), ModItems.SPIRIT_BAG.get(), ModItems.LIFE_ESSENCE.get(), ModItems.GRAMARY.get(), ModItems.WILDWOOD_BOW.get(), ModItems.WILDWOOD_QUIVER.get(), ModItems.MYSTIC_FEATHER.get(), ModItems.STRANGE_OOZE.get());
     this.tag(RootsTags.Items.WIP)
         .add(ModItems.BEETLE_BOOTS.get(), ModItems.BEETLE_CHESTPLATE.get(), ModItems.BEETLE_HELMET.get(), ModItems.BEETLE_LEGGINGS.get(), ModItems.ANTLER_HAT.get(), ModItems.ALERTNESS_CHARM.get());
 

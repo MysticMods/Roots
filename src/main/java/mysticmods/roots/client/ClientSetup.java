@@ -13,7 +13,7 @@ import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.*;
-import mysticmods.roots.client.particle.emitter.FeyLightEmitter;
+import mysticmods.roots.client.particle.emitter.SylvanLightEmitter;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
 import mysticmods.roots.mixin.accessor.AccessorMixinOverworldBiomes;
@@ -175,7 +175,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.PYRE.get(), PyreParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PYRE_LEAF.get(), PyreLeafParticle.Provider::new);
     event.registerSpriteSet(ModParticles.METEOR.get(), MeteorParticle.Provider::new);
-    event.registerSpriteSet(ModParticles.FEY_LIGHT.get(), FeyLightParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.SYLVAN_LIGHT.get(), SylvanLightParticle.Provider::new);
     event.registerSpriteSet(ModParticles.WILDFIRE.get(), WildfireParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GROWTH.get(), GrowthParticle.Provider::new);
     event.registerSpriteSet(ModParticles.CHANNEL_TARGET.get(), ChannelTargetCastParticle.Provider::new);
@@ -183,7 +183,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.SPROUT_PORTAL.get(), SproutPortalParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SPIRAL.get(), SpiralParticle.Provider::new);
 
-    event.registerSpecial(ModParticles.FEY_LIGHT_EMITTER.get(), new FeyLightEmitter.Provider());
+    event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());
   }
 
   @SubscribeEvent

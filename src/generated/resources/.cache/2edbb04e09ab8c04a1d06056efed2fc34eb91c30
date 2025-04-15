@@ -1,8 +1,8 @@
-// 1.21.1	2025-04-14T16:41:08.1160651	Roots Spell Tags
+// 1.21.1	2025-04-15T22:26:17.0236181	Roots Spell Tags
 98fc9b37dbbb32c844dea8e7fc87e5735b16f31b data/roots/tags/roots/spells/action/geas.json
 2bb0c1d2d9ee9e8b8e83a9d5abaf0b142bb20e49 data/roots/tags/roots/spells/adjustable.json
 fab327e953ae0407ef953026d47e264c24fd5b7a data/roots/tags/roots/spells/elemental.json
-69e34131b5f71f448f12b3fcd8b0fde6872a8948 data/roots/tags/roots/spells/fairy.json
+bc5977b843234b5cf22bd18ac8d5f76a0e9a898c data/roots/tags/roots/spells/fairy.json
 3bb414e35931610276aa2847149bfa84e77984ef data/roots/tags/roots/spells/fungal.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/roots/spells/hollow.json
 d9242c596c7a57bc1e6ae573fe0238b3677fb254 data/roots/tags/roots/spells/nyi.json

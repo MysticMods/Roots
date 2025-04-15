@@ -179,9 +179,12 @@ public class ModBlocks {
   public static DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(ElementalType.EARTH, BlockBehaviour.Properties.of()
       .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f)
       .sound(SoundType.HANGING_ROOTS)));
-  public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BlockBehaviour.Properties.of()
+  public static DeferredHolder<Block, SylvanLightBlock> SYLVAN_LIGHT = BLOCKS.register("sylvan_light", () -> new SylvanLightBlock(BlockBehaviour.Properties.of()
       .instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL)
       .noOcclusion()));
+  static {
+    BLOCKS.addAlias(RootsAPI.rl("fey_light"), RootsAPI.rl("sylvan_light"));
+  }
 
   public static DeferredHolder<Block, RitualPedestalBlock> RITUAL_PEDESTAL = BLOCKS.register("ritual_pedestal", () -> new RitualPedestalBlock(BlockBehaviour.Properties.of()
       .mapColor(DyeColor.BLUE).instrument(NoteBlockInstrument.BASS).strength(2.5f).sound(SoundType.STONE)

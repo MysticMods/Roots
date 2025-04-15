@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-13T14:57:31.1773237	Block States: roots
+// 1.21.1	2025-04-15T22:26:17.0170321	Block States: roots
 c63d2fc9ffbe6368ea5f1d9b0b7e1f7243d89539 assets/roots/blockstates/aqueous_soil.json
 32b9de3deee6d9506daa128f6bd1189101389605 assets/roots/blockstates/aubergine_crop.json
 07d95b39cff19a3a48b8cc34ce746c1b94c228d4 assets/roots/blockstates/bafflecap.json
@@ -14,7 +14,6 @@ d150026942f199390b6674a03335b9aad0fef000 assets/roots/blockstates/decorative_pyr
 f3be946b17e0aa9b1babb376c7969563b204c21c assets/roots/blockstates/dewgonia_crop.json
 fd2047b3db4d4cfb1d77e4f5df48457eb7153bca assets/roots/blockstates/display_pedestal.json
 d256cf7816bc89f7c5f024790771665e58ad52e2 assets/roots/blockstates/elemental_soil.json
-4d81c725e2b6023a0b966528c03a109e0a88048c assets/roots/blockstates/fey_light.json
 8689bdbdd69fd55eafb855074519c75569eff8e5 assets/roots/blockstates/granite_quartz_ore.json
 bdcef51b9b44a3cb63cfe45a6bb1fd271b117257 assets/roots/blockstates/grove_crafter.json
 8bb3cb4e3d0f0f4d27a85f622c611c124ba26005 assets/roots/blockstates/grove_pedestal.json
@@ -95,6 +94,7 @@ a2e05c8e6daeb967d6ea61e168fb881bc814deda assets/roots/blockstates/stalicripe_cro
 04173d1a75e8f57c3501174737eaf667163ea866 assets/roots/blockstates/stonepetal.json
 6e658893da53e714ef4ce69ab984b9f9c9d5c46b assets/roots/blockstates/stripped_wildwood_log.json
 746fbd35c83cfa749492b887333500481004841d assets/roots/blockstates/stripped_wildwood_wood.json
+d70745cff075db706286c85a52f7ba402e884c98 assets/roots/blockstates/sylvan_light.json
 f91fb136f50ffb93588f9e67d3b802cd5892af36 assets/roots/blockstates/terran_soil.json
 f528f067470dd67b55f0954546a3f9a8d91d769c assets/roots/blockstates/thatch.json
 bb992c9ee0187923bd9e8952f19ae190a7035c27 assets/roots/blockstates/unending_bowl.json

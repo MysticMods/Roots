@@ -26,7 +26,7 @@ public class RootsSpellTagsProvider extends IntrinsicHolderTagsProvider<Spell> {
         .add(ModSpells.LIGHT_DRIFTER.get(), ModSpells.SUMMON_UNDEAD.get(), ModSpells.RADIANCE.get(), ModSpells.STORM_CLOUD.get(), ModSpells.SATURATE.get());
     this.tag(RootsTags.Spells.ADJUSTABLE_SPELL).add(ModSpells.SHATTER.get(), ModSpells.RAMPANT_GROWTH.get());
 
-    this.tag(RootsTags.Spells.FAIRY).add(ModSpells.FEY_LIGHT.get(), ModSpells.PETAL_SHELL.get(), ModSpells.ROSE_THORNS.get(), ModSpells.SANCTUARY.get());
+    this.tag(RootsTags.Spells.FAIRY).add(ModSpells.SYLVAN_LIGHT.get(), ModSpells.PETAL_SHELL.get(), ModSpells.ROSE_THORNS.get(), ModSpells.SANCTUARY.get());
     this.tag(RootsTags.Spells.FUNGAL).add(ModSpells.ACID_CLOUD.get(), ModSpells.DISARM.get(), ModSpells.GEAS.get(), ModSpells.SUMMON_UNDEAD.get());
     this.tag(RootsTags.Spells.ELEMENTAL).add(ModSpells.AQUA_BUBBLE.get(), ModSpells.DANDELION_WINDS.get(), ModSpells.RADIANCE.get(), ModSpells.SHATTER.get(), ModSpells.STORM_CLOUD.get(), ModSpells.SKY_SOARER.get(), ModSpells.WILDFIRE.get());
     this.tag(RootsTags.Spells.SPROUTING).add(ModSpells.DESATURATE.get(), ModSpells.SATURATE.get(), ModSpells.GROWTH_INFUSION.get(), ModSpells.RAMPANT_GROWTH.get(), ModSpells.HARVEST.get());

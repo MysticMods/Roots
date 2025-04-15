@@ -5,12 +5,12 @@
     "priority": 0,
     "result": {
       "count": 1,
-      "id": "roots:fey_leather"
+      "id": "roots:sylvan_leather"
     }
   },
   "durabilityCost": 10,
   "test": {
     "type": "roots:entity_tag_test",
-    "tag": "roots:fey_leather"
+    "tag": "roots:sylvan_leather"
   }
 }

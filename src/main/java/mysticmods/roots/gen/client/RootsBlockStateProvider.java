@@ -304,9 +304,9 @@ public class RootsBlockStateProvider extends BlockStateProvider {
             .renderType("cutout"))
         .build());
 
-    ModelFile feyLight = models().getExistingFile(modLoc("block/fey_light"));
+    ModelFile sylvanLight = models().getExistingFile(modLoc("block/sylvan_light"));
 
-    getVariantBuilder(ModBlocks.FEY_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(feyLight)
+    getVariantBuilder(ModBlocks.SYLVAN_LIGHT.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(sylvanLight)
         .build());
 
     crop(ModBlocks.WILDROOT_CROP, false);

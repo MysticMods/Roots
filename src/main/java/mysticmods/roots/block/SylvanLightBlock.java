@@ -17,14 +17,14 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 
-public class FeyLightBlock extends WaterloggedBlock {
+public class SylvanLightBlock extends WaterloggedBlock {
   public static BooleanProperty WATERLOGGED = WaterloggedBlock.WATERLOGGED;
   public static BooleanProperty DECAYING = BooleanProperty.create("decaying");
   public static IntegerProperty DECAY = IntegerProperty.create("decay", 0, 10);
   public static BooleanProperty COLORED = BooleanProperty.create("colored");
   public static EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
 
-  public FeyLightBlock(Properties builder) {
+  public SylvanLightBlock(Properties builder) {
     super(builder);
     this.registerDefaultState(this.defaultBlockState().setValue(DECAYING, false).setValue(DECAY, 0)
         .setValue(COLORED, false).setValue(COLOR, DyeColor.WHITE).setValue(WATERLOGGED, false));
@@ -33,7 +33,7 @@ public class FeyLightBlock extends WaterloggedBlock {
 
   @Override
   public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-    return Shapes.FEY_LIGHT;
+    return Shapes.SYLVAN_LIGHT;
   }
 
   @Override
@@ -47,7 +47,7 @@ public class FeyLightBlock extends WaterloggedBlock {
     super.animateTick(pState, pLevel, pPos, pRand);
     if (pRand.nextInt(2) == 0) {
       pLevel.addParticle(
-          ModParticles.FEY_LIGHT_EMITTER.get(),
+          ModParticles.SYLVAN_LIGHT_EMITTER.get(),
           pPos.getX() + 0.5,
           pPos.getY() + 0.5,
           pPos.getZ() + 0.5,

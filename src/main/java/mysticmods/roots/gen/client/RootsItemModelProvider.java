@@ -218,7 +218,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.APOTHECARY_POUCH, "pouches");
     subfolder(ModItems.COMPONENT_POUCH, "pouches");
     subfolder(ModItems.CREATIVE_POUCH, "pouches");
-    subfolder(ModItems.FEY_POUCH, "pouches");
+    subfolder(ModItems.SYLVAN_POUCH, "pouches");
 
 
     subfolder(ModItems.HERB_POUCH, "pouches");
@@ -275,7 +275,7 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.RELIQUARY, "containers");
     subfolder(ModItems.SPIRIT_BAG, "containers");
 
-    subfolder(ModItems.FEY_LEATHER, "resources");
+    subfolder(ModItems.SYLVAN_LEATHER, "resources");
     subfolder(ModItems.GLASS_EYE, "resources");
     subfolder(ModItems.LIFE_ESSENCE, "resources");
     subfolder(ModItems.MYSTIC_FEATHER, "resources");

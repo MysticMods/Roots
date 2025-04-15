@@ -9,7 +9,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.core.particles.SimpleParticleType;
 
-public class FeyLightEmitter extends NoRenderParticle {
+public class SylvanLightEmitter extends NoRenderParticle {
   private static final int[][] COLORS = {
       {0xffe383, 0xffbd83},
       {0xffb4eb, 0x9da2ff},
@@ -21,7 +21,7 @@ public class FeyLightEmitter extends NoRenderParticle {
 
   protected int count, interval;
 
-  protected FeyLightEmitter(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+  protected SylvanLightEmitter(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
     this.lifetime = 30;
     this.interval = 10;
@@ -50,7 +50,7 @@ public class FeyLightEmitter extends NoRenderParticle {
         int[] color = COLORS[level.getRandom().nextInt(COLORS.length)];
         level.addParticle(
             new RootsParticleOptions(
-                ModParticles.FEY_LIGHT,
+                ModParticles.SYLVAN_LIGHT,
                 color[0],
                 color[1]
             ),
@@ -68,7 +68,7 @@ public class FeyLightEmitter extends NoRenderParticle {
   public static class Provider implements ParticleProvider<SimpleParticleType> {
     @Override
     public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-      return new FeyLightEmitter(level, x, y, z, xSpeed, ySpeed, zSpeed);
+      return new SylvanLightEmitter(level, x, y, z, xSpeed, ySpeed, zSpeed);
     }
   }
 }

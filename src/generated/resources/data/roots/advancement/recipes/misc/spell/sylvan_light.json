@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:spell/fey_light"
+        "recipe": "roots:spell/sylvan_light"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:spell/fey_light"
+      "roots:spell/sylvan_light"
     ]
   }
 }

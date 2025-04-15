@@ -98,7 +98,7 @@ public class RootsTags {
     // Pyres (does not include decorative)
     public static final TagKey<Block> PYRES = modTag("pyres");
 
-    // Fey and runic crafters
+    // Sylvan and runic crafters
     public static final TagKey<Block> GROVE_CRAFTERS = modTag("crafters");
 
     // Mortars
@@ -419,7 +419,7 @@ public class RootsTags {
     public static final TagKey<Item> SPROUT_BREEDING_REWARDS = modTag("sprout_breeding_rewards");
 
     public static final TagKey<Item> FORAGING_ELIGIBLE = modTag("foraging_eligible");
-    public static final TagKey<Item> FEY_LEATHERS = modTag("fey_leather");
+    public static final TagKey<Item> SYLVAN_LEATHERS = modTag("sylvan_leather");
     public static final TagKey<Item> DYEABLE = modTag("dyeable");
     public static final TagKey<Item> CHARMS = modTag("charms");
     public static final TagKey<Item> CHARM_ALERT = modTag("charms/alertness");
@@ -483,7 +483,8 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> RUNIC_SHEARS_OVERRIDE = modTag("runic_shears_override");
 
-    public static final TagKey<EntityType<?>> FEY_LEATHER = modTag("fey_leather");
+    // TODO: Sylvan leather sis also a thing?
+    public static final TagKey<EntityType<?>> SYLVAN_LEATHER = modTag("sylvan_leather");
 
     public static final TagKey<EntityType<?>> FORCE_HOSTILE = modTag("force_hostile");
     public static final TagKey<EntityType<?>> FORCE_FRIENDLY = modTag("force_friendly");

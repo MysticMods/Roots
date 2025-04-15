@@ -20,7 +20,7 @@ import java.util.List;
 
 public class GroveCategory extends RootsRecipeBaseCategory<GroveRecipe> {
   public GroveCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.GROVE_RECIPE_TYPE, helper, 186, 118, RootsAPI.rl("textures/gui/jei/fey_crafting.png"), () -> new ItemStack(ModBlocks.GROVE_CRAFTER.get()), Component.translatable("roots.jei.grove_crafting"));
+    super(RootsJEIPlugin.GROVE_RECIPE_TYPE, helper, 186, 118, RootsAPI.rl("textures/gui/jei/sylvan_crafting.png"), () -> new ItemStack(ModBlocks.GROVE_CRAFTER.get()), Component.translatable("roots.jei.grove_crafting"));
   }
 
   @Override

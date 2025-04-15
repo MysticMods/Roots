@@ -16,7 +16,7 @@ public interface Spells {
   ResourceKey<Spell> DISARM = spell("disarm");
   ResourceKey<Spell> EXTENSION = spell("extension");
   ResourceKey<Spell> NONDETECTION = spell("nondetection");
-  ResourceKey<Spell> FEY_LIGHT = spell("fey_light");
+  ResourceKey<Spell> SYLVAN_LIGHT = spell("sylvan_light");
   ResourceKey<Spell> GEAS = spell("geas");
   ResourceKey<Spell> SUMMON_UNDEAD = spell("summon_undead");
   ResourceKey<Spell> GROWTH_INFUSION = spell("growth_infusion");

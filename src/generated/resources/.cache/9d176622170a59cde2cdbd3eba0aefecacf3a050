@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-14T16:41:08.1182092	Roots Entity Type Tags
+// 1.21.1	2025-04-15T22:26:17.027621	Roots Entity Type Tags
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/add_tentacle_loot.json
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/allow_casting_tool_right_click.json
@@ -7,7 +7,6 @@ da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.j
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/disable_disarm.json
 e00f2931577049b9a4400a87ed9c249373be376c data/roots/tags/entity_type/dragons.json
 40bd37384798902352ba5e5b6bb4a2d1cbecdb7b data/roots/tags/entity_type/end_animals.json
-f6a415ffe9fa7f9a65011b28aa30ae34f4bc3866 data/roots/tags/entity_type/fey_leather.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_friendly.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_hostile.json
 ee75b90db1cfb03a8ce6da87690f062a665055c4 data/roots/tags/entity_type/healable_ice_creatures.json
@@ -27,6 +26,7 @@ b9316b35927bc11406131118efbee4d9bc15f237 data/roots/tags/entity_type/sprouts/sno
 020676adc729a21d998bebe891c65e3b75057b5e data/roots/tags/entity_type/sprouts/special.json
 43eaeeb534e1d8046215163e5656a0c133d41cf3 data/roots/tags/entity_type/sprouts/tan.json
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/squid.json
+f6a415ffe9fa7f9a65011b28aa30ae34f4bc3866 data/roots/tags/entity_type/sylvan_leather.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/temporal_morass_exclude.json
 1b7e7801f876a0240e1e163329e1387f064856d4 data/roots/tags/entity_type/traders.json
 9744c7bce1ae34ed719c2d139c7817a7f9f10f5b data/roots/tags/entity_type/undead.json

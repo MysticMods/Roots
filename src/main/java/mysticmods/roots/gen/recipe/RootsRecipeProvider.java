@@ -1074,9 +1074,9 @@ public class RootsRecipeProvider extends RecipeProvider {
 
     RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
         .save(RunicEntityRecipe.Builder.create().durabilityCost(10)
-            .test(new EntityTagTest(RootsTags.Entities.FEY_LEATHER)).cooldown(2 * 60 * 20)
+            .test(new EntityTagTest(RootsTags.Entities.SYLVAN_LEATHER)).cooldown(2 * 60 * 20)
             .build(BaseRecipeData.Builder.create()
-                .result(ModItems.FEY_LEATHER, 1)), c, RootsAPI.rl("runic_entity/fey_leather"));
+                .result(ModItems.SYLVAN_LEATHER, 1)), c, RootsAPI.rl("runic_entity/sylvan_leather"));
 
     RecipeSaver.saver().unlockedBy("has_shears", has(RootsTags.Items.RUNIC_SHEARS))
         .save(RunicBlockRecipe.Builder.create().durabilityCost(15)
@@ -1406,7 +1406,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_torch", has(Items.TORCH)).save(MortarRecipe.Builder.create().times(5)
         .build(BaseRecipeData.Builder.create().requires(ItemTags.WOOL).requires(Items.TORCH)
             .requires(Items.JACK_O_LANTERN).requires(RootsTags.Items.COPPER_NUGGET).requires(RootsTags.Items.RUNIC_DUST)
-            .unlocks(Unlock.spell(ModSpells.FEY_LIGHT))), c, RootsAPI.rl("spell/fey_light"));
+            .unlocks(Unlock.spell(ModSpells.SYLVAN_LIGHT))), c, RootsAPI.rl("spell/sylvan_light"));
     RecipeSaver.saver().unlockedBy("has_shield", has(Items.SHIELD)).save(MortarRecipe.Builder.create().times(5)
         .build(BaseRecipeData.Builder.create().requires(ItemTags.SMALL_FLOWERS).requires(Items.SHIELD)
             .requires(Tags.Items.INGOTS_IRON).requires(Items.EGG).requires(Tags.Items.GLASS_BLOCKS)
@@ -1737,9 +1737,9 @@ public class RootsRecipeProvider extends RecipeProvider {
         .pattern("FFF")
         .pattern("FFF")
         .pattern("F F")
-        .define('F', RootsTags.Items.FEY_LEATHERS)
-        .unlockedBy("has_fey_leather", has(RootsTags.Items.FEY_LEATHERS))
-        .save(c, RootsAPI.rl("fey_leather_saddle"));
+        .define('F', RootsTags.Items.SYLVAN_LEATHERS)
+        .unlockedBy("has_sylvan_leather", has(RootsTags.Items.SYLVAN_LEATHERS))
+        .save(c, RootsAPI.rl("sylvan_leather_saddle"));
 
     // Herb Pouch
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.HERB_POUCH.get())

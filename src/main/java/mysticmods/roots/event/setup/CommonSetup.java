@@ -73,7 +73,7 @@ public class CommonSetup {
       CauldronInteraction.WATER.map().put(ModItems.APOTHECARY_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
       CauldronInteraction.WATER.map().put(ModItems.COMPONENT_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
       CauldronInteraction.WATER.map().put(ModItems.HERB_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
-      CauldronInteraction.WATER.map().put(ModItems.FEY_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
+      CauldronInteraction.WATER.map().put(ModItems.SYLVAN_POUCH.get(), RootsCauldronInteractions.CLEAN_POUCH);
     });
   }
 }

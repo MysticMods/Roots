@@ -3,7 +3,7 @@
   "criteria": {
     "has the recipe": {
       "conditions": {
-        "recipe": "roots:runic_entity/fey_leather"
+        "recipe": "roots:runic_entity/sylvan_leather"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "roots:runic_entity/fey_leather"
+      "roots:runic_entity/sylvan_leather"
     ]
   }
 }
