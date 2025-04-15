@@ -27,12 +27,12 @@ public class ModBlocks {
 
   public static DeferredHolder<Block, WaterloggedBlock> THATCH = BLOCKS.register("thatch", () -> new WaterloggedBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BANJO).strength(0.5f).sound(SoundType.GRASS)));
+
   static {
     BLOCKS.addAlias(RootsAPI.rl("sheared_thatch"), RootsAPI.rl("thatch"));
   }
 
   private static final BlockBehaviour.Properties RUNESTONE_PROPERTIES = BlockBehaviour.Properties.of()
-      .mapColor(MapColor.COLOR_BLUE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f);
 
   public static DeferredHolder<Block, Block> RUNESTONE = BLOCKS.register("runestone", () -> new Block(RUNESTONE_PROPERTIES));
@@ -56,13 +56,10 @@ public class ModBlocks {
       .mapColor(MapColor.DEEPSLATE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(4.5f, 3.0f).sound(SoundType.DEEPSLATE)));
   public static DeferredHolder<Block, DropExperienceBlock> GRANITE_QUARTZ_ORE = BLOCKS.register("granite_quartz_ore", () -> new DropExperienceBlock(UniformInt.of(2, 5), BlockBehaviour.Properties.of()
-      .mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(3.0f, 3.0f)));
   public static DeferredHolder<Block, Block> RAW_SILVER_BLOCK = BLOCKS.register("raw_silver_block", () -> new Block(BlockBehaviour.Properties.of()
-      .mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(5.0f, 6.0f)));
   public static DeferredHolder<Block, Block> SILVER_BLOCK = BLOCKS.register("silver_block", () -> new Block(BlockBehaviour.Properties.of()
-      .mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BELL).requiresCorrectToolForDrops()
       .strength(3.0f, 6.0f).sound(SoundType.METAL)));
   public static DeferredHolder<Block, RotatedPillarBlock> WILDWOOD_LOG = BLOCKS.register("wildwood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of()
       .mapColor((state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.WOOD : MapColor.COLOR_BROWN))
@@ -171,17 +168,17 @@ public class ModBlocks {
   public static DeferredHolder<Block, WallBlock> RUNED_BRICK_WALL = BLOCKS.register("runed_brick_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, WallBlock> RUNED_TILE_WALL = BLOCKS.register("runed_tile_wall", () -> new WallBlock(RUNED_OBSIDIAN_PROPERTIES));
   public static DeferredHolder<Block, ElementalSoilBlock> ELEMENTAL_SOIL = BLOCKS.register("elemental_soil", () -> new ElementalSoilBlock(ElementalType.DEFAULT, BlockBehaviour.Properties.of()
-      .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.GRAVEL).requiresCorrectToolForDrops()));
+      .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.GRAVEL)));
   public static DeferredHolder<Block, ElementalSoilBlock> AQUEOUS_SOIL = BLOCKS.register("aqueous_soil", () -> new ElementalSoilBlock(ElementalType.WATER, BlockBehaviour.Properties.of()
-      .mapColor(MapColor.WATER).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.LILY_PAD).requiresCorrectToolForDrops()));
+      .mapColor(MapColor.WATER).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.LILY_PAD)));
   public static DeferredHolder<Block, ElementalSoilBlock> CAELIC_SOIL = BLOCKS.register("caelic_soil", () -> new ElementalSoilBlock(ElementalType.AIR, BlockBehaviour.Properties.of()
       .mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f)
-      .sound(SoundType.WOOL).requiresCorrectToolForDrops()));
+      .sound(SoundType.WOOL)));
   public static DeferredHolder<Block, ElementalSoilBlock> MAGMATIC_SOIL = BLOCKS.register("magmatic_soil", () -> new ElementalSoilBlock(ElementalType.FIRE, BlockBehaviour.Properties.of()
-      .mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.CANDLE).requiresCorrectToolForDrops()));
+      .mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f).sound(SoundType.CANDLE)));
   public static DeferredHolder<Block, ElementalSoilBlock> TERRAN_SOIL = BLOCKS.register("terran_soil", () -> new ElementalSoilBlock(ElementalType.EARTH, BlockBehaviour.Properties.of()
       .mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASEDRUM).strength(0.5f)
-      .sound(SoundType.HANGING_ROOTS).requiresCorrectToolForDrops()));
+      .sound(SoundType.HANGING_ROOTS)));
   public static DeferredHolder<Block, FeyLightBlock> FEY_LIGHT = BLOCKS.register("fey_light", () -> new FeyLightBlock(BlockBehaviour.Properties.of()
       .instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL)
       .noOcclusion()));
@@ -197,13 +194,13 @@ public class ModBlocks {
 
   public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> GROVE_PEDESTAL = BLOCKS.register("grove_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
-      .requiresCorrectToolForDrops()));
+  ));
   public static DeferredHolder<Block, PedestalBlock.WildwoodPedestalBlock> WILDWOOD_PEDESTAL = BLOCKS.register("wildwood_pedestal", () -> new PedestalBlock.WildwoodPedestalBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
-      .requiresCorrectToolForDrops()));
+  ));
   public static DeferredHolder<Block, PedestalBlock.GrovePedestalBlock> DISPLAY_PEDESTAL = BLOCKS.register("display_pedestal", () -> new PedestalBlock.GrovePedestalBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)
-      .requiresCorrectToolForDrops()));
+  ));
   public static DeferredHolder<Block, WildRootsBlock> WILD_ROOTS = BLOCKS.register("wild_roots", () -> new WildRootsBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(0.2f).sound(SoundType.WOOD)));
   public static DeferredHolder<Block, CreepingGroveMossBlock> CREEPING_GROVE_MOSS = BLOCKS.register("creeping_grove_moss", () -> new CreepingGroveMossBlock(BlockBehaviour.Properties.of()
@@ -227,7 +224,6 @@ public class ModBlocks {
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
   public static DeferredHolder<Block, MortarBlock> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BlockBehaviour.Properties.of()
-      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(1.0f, 6.0f).forceSolidOn().dynamicShape().noOcclusion()));
   public static DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()
       .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD)
@@ -248,7 +244,6 @@ public class ModBlocks {
       .dynamicShape().forceSolidOn().noOcclusion().strength(1.5f).sound(SoundType.WOOD)
       .lightLevel(o -> 2)));
   public static DeferredHolder<Block, UnendingBowlBlock> UNENDING_BOWL = BLOCKS.register("unending_bowl", () -> new UnendingBowlBlock(BlockBehaviour.Properties.of()
-      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(1.0f, 6.0f).forceSolidOn().dynamicShape().noOcclusion()));
   public static DeferredHolder<Block, MushroomBlock> BAFFLECAP = BLOCKS.register("bafflecap", () -> new MushroomBlock(ModFeatures.CONFIGURED_HUGE_BAFFLECAP_KEY, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
 

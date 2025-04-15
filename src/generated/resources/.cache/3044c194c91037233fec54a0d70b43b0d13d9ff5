@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-15T14:17:36.9776708	Roots Block Tags
+// 1.21.1	2025-04-15T14:24:35.0258328	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -24,7 +24,7 @@ cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/minecraft/tags/block/crimson_stems
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/block/logs_that_burn.json
 4dd1110a08f7c4386cffaa774af4841bc323c2f1 data/minecraft/tags/block/maintains_farmland.json
 e16c92e31940c0c62767ba46b55ac10f3e133b58 data/minecraft/tags/block/mangrove_logs.json
-7f1729288ed2281b2beafdc17c9594a597609f9d data/minecraft/tags/block/mineable/axe.json
+2c17112083cb819f0774571e8ced2279fe326e60 data/minecraft/tags/block/mineable/axe.json
 84ad4138f81f2c32f36030da92bf0cbfdb66650c data/minecraft/tags/block/mineable/hoe.json
 c79c05af92ab60de942c819b72acbe3faf38854f data/minecraft/tags/block/mineable/pickaxe.json
 fdf2321a0e3ecc7cd4564c0aab61423d375c4c01 data/minecraft/tags/block/mineable/shovel.json

@@ -83,7 +83,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(BlockTags.SPRUCE_LOGS).add(RUNED_SPRUCE_LOG.get());
     this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(RootsTags.Blocks.RITUAL_PEDESTALS);
-
+    this.tag(BlockTags.MINEABLE_WITH_AXE).addTag(RootsTags.Blocks.GROVE_PEDESTALS);
 
     this.tag(RootsTags.Blocks.STONEPETAL).add(STONEPETAL.get());
     this.tag(RootsTags.Blocks.RAW_SILVER_STORAGE).add(RAW_SILVER_BLOCK.get());
