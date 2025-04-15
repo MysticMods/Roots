@@ -33,6 +33,10 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Y;
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Z;
 
+  public static ModConfigSpec.BooleanValue DROP_AUBERGINE_SEEDS;
+  public static ModConfigSpec.BooleanValue DROP_WILDROOT;
+  public static ModConfigSpec.BooleanValue DROP_GROVE_SPORES;
+
   public static ModConfigSpec.IntValue SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE;
 
   public static ModConfigSpec.BooleanValue DEBUG_REPUTATION;
@@ -92,7 +96,15 @@ public class ConfigManager {
         .define("suppress_reputation_changes", true);
     COMMON_BUILDER.push("ritual_conflict");
     RITUAL_RESOLUTION_TYPE = COMMON_BUILDER.comment("how rituals (heavy storms, protection) will be resolved on the server: [protection_priority=the protection ritual will always suppress the weather effects of heavy storms, storm_priority=the heavy storms ritual will always change the weather even with protection running, age_priority=the ritual started earliest will have priority]").defineEnum("ritual_resolution_type", RitualInformation.RitualResolutionType.AGE_PRIORITY);
-
+    COMMON_BUILDER.pop();
+    COMMON_BUILDER.push("grass_drops");
+    DROP_AUBERGINE_SEEDS = COMMON_BUILDER.comment("whether or not aubergine seeds should drop from grass")
+        .define("drop_aubergine_seeds", true);
+    DROP_WILDROOT = COMMON_BUILDER.comment("whether or not wildroot should drop from grass")
+        .define("drop_wildroot", true);
+    DROP_GROVE_SPORES = COMMON_BUILDER.comment("whether or not grove spores should drop from grass")
+        .define("drop_grove_spores", true);
+    COMMON_BUILDER.pop();
     COMMON_CONFIG = COMMON_BUILDER.build();
     CLIENT_CONFIG = CLIENT_BUILDER.build();
   }

@@ -10,6 +10,10 @@
       "tag": "roots:short_grass"
     },
     {
+      "condition": "roots:config_specific",
+      "name": "grove_spores"
+    },
+    {
       "condition": "minecraft:inverted",
       "term": {
         "ability": "shears_dig",
