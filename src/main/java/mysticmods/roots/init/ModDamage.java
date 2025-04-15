@@ -10,12 +10,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 
 public class ModDamage {
-  // Rose Thorns -> Primal
-  // Meteor      -> Elemental fire
-  // Wildfire    -> Elemental fire
-  // Acid Cloud  -> Bafflecap
-  // Life Drain  -> Moonglow
-
   public static final ResourceKey<DamageType> ROSE_THORNS = create(RootsAPI.rl("rose_thorns"));
   public static final ResourceKey<DamageType> METEOR = create(RootsAPI.rl("meteor"));
   public static final ResourceKey<DamageType> WILDFIRE = create(RootsAPI.rl("wildfire"));

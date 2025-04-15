@@ -72,7 +72,6 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       totalDamaged++;
       // TODO:
       //  - Acid damage effect
-      //  - Acid damage by player
       //  - Visuals
       entity.hurt(ModDamage.acidCloud(pPlayer), damage);
     }
