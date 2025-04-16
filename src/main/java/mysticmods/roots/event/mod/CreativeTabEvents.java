@@ -216,8 +216,6 @@ public class CreativeTabEvents {
       event.accept(ModItems.RUNIC_SHEARS.get());
       event.accept(ModItems.GRAMARY.get());
       event.accept(ModItems.ALERTNESS_CHARM.get());
-
-
       event.accept(ModItems.HERB_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.HERB_POUCH.get());
