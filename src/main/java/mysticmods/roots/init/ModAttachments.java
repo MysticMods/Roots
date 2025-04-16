@@ -4,9 +4,12 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.*;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.item.Dyeable;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
@@ -14,6 +17,7 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
 public class ModAttachments {
   private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, RootsAPI.MODID);
@@ -55,6 +59,7 @@ public class ModAttachments {
   }
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FORAGING = COMPONENTS.register("foraging", () -> new DataComponentType.Builder<Integer>().persistent(ExtraCodecs.POSITIVE_INT)
       .networkSynchronized(ByteBufCodecs.VAR_INT).build());
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<Dyeable>> DYEABLE = COMPONENTS.register("dyeable", () -> new DataComponentType.Builder<Dyeable>().persistent(Dyeable.CODEC).networkSynchronized(Dyeable.STREAM_CODEC).build());
 
   private static AttachmentType<Integer> createIntegerAttachmentType() {
     return AttachmentType.builder(() -> -1).serialize(Codec.INT).build();

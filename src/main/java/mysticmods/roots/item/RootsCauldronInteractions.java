@@ -1,6 +1,7 @@
 package mysticmods.roots.item;
 
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.stats.Stats;
@@ -12,10 +13,10 @@ public class RootsCauldronInteractions {
   public static final CauldronInteraction CLEAN_POUCH = (state, level, pos, player, hand, stack) -> {
     if (!stack.is(RootsTags.Items.DYEABLE)) {
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    } else if (!stack.has(DataComponents.BASE_COLOR)) {
+    } else if (!stack.has(ModAttachments.DYEABLE)) {
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    } else if (stack.get(DataComponents.BASE_COLOR) != DyeColor.BROWN) {
-      stack.set(DataComponents.BASE_COLOR, DyeColor.BROWN);
+    } else if (stack.get(ModAttachments.DYEABLE) != Dyeable.DEFAULT) {
+      stack.set(ModAttachments.DYEABLE, Dyeable.DEFAULT);
       player.awardStat(Stats.CLEAN_ARMOR);
       LayeredCauldronBlock.lowerFillLevel(state, level, pos);
       return ItemInteractionResult.sidedSuccess(level.isClientSide());

@@ -1,8 +1,10 @@
 package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModTabs;
+import mysticmods.roots.item.Dyeable;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -215,15 +217,32 @@ public class CreativeTabEvents {
       event.accept(ModItems.GRAMARY.get());
       event.accept(ModItems.ALERTNESS_CHARM.get());
 
-      event.accept(ModItems.APOTHECARY_POUCH.get());
-      event.accept(ModItems.COMPONENT_POUCH.get());
-      event.accept(ModItems.CREATIVE_POUCH.get());
-      event.accept(ModItems.SYLVAN_POUCH.get());
+
+      event.accept(ModItems.HERB_POUCH.get());
       for (DyeColor dye : DyeColor.values()) {
         ItemStack stack = new ItemStack(ModItems.HERB_POUCH.get());
-        stack.set(DataComponents.BASE_COLOR, dye);
+        stack.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye));
         event.accept(stack);
       }
+      event.accept(ModItems.COMPONENT_POUCH.get());
+      for (DyeColor dye : DyeColor.values()) {
+        ItemStack stack = new ItemStack(ModItems.COMPONENT_POUCH.get());
+        stack.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye));
+        event.accept(stack);
+      }
+      event.accept(ModItems.APOTHECARY_POUCH.get());
+      for (DyeColor dye : DyeColor.values()) {
+        ItemStack stack = new ItemStack(ModItems.APOTHECARY_POUCH.get());
+        stack.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye));
+        event.accept(stack);
+      }
+      event.accept(ModItems.SYLVAN_POUCH.get());
+      for (DyeColor dye : DyeColor.values()) {
+        ItemStack stack = new ItemStack(ModItems.SYLVAN_POUCH.get());
+        stack.set(ModAttachments.DYEABLE, Dyeable.fromColor(dye));
+        event.accept(stack);
+      }
+      event.accept(ModItems.CREATIVE_POUCH.get());
 
       event.accept(ModItems.WOODEN_KNIFE.get());
       event.accept(ModItems.STONE_KNIFE.get());

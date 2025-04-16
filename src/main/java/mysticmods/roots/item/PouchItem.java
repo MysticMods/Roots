@@ -1,6 +1,8 @@
 package mysticmods.roots.item;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.client.RootsClientHooks;
+import mysticmods.roots.init.ModAttachments;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -43,13 +45,13 @@ public class PouchItem extends Item {
   @Override
   public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-    tooltipComponents.add(Component.empty());
-    DyeColor dye = stack.get(DataComponents.BASE_COLOR);
-    if (dye != null) {
-      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.getName()))
-          .setStyle(Style.EMPTY.withColor(dye.getTextColor()).withBold(true))));
+    Dyeable dye = stack.get(ModAttachments.DYEABLE);
+    if (dye != Dyeable.DEFAULT) {
+      tooltipComponents.add(Component.empty());
+      tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.color().getName()))
+          .setStyle(Style.EMPTY.withColor(dye.color().getTextColor()).withBold(true))));
     }
-    if (context.level() != null && context.level().isClientSide()) {
+    if (context.level() != null && context.level().isClientSide() && stack.is(RootsTags.Items.POUCHES)) {
       tooltipComponents.add(Component.empty());
       tooltipComponents.add(Component.translatable("roots.tooltip.pouch.key_binding", RootsClientHooks.getPouchKeyBind()));
     }

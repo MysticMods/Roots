@@ -16,6 +16,7 @@ import mysticmods.roots.client.particle.*;
 import mysticmods.roots.client.particle.emitter.SylvanLightEmitter;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
+import mysticmods.roots.item.Dyeable;
 import mysticmods.roots.mixin.accessor.AccessorMixinOverworldBiomes;
 import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.model.HumanoidModel;
@@ -84,12 +85,18 @@ public class ClientSetup {
       return -1;
     }, ModItems.STAFF.get());
     event.register((stack, index) -> {
-      DyeColor color = stack.get(DataComponents.BASE_COLOR);
+      Dyeable dye = stack.get(ModAttachments.DYEABLE);
+      if (dye == Dyeable.DEFAULT || dye == null) {
+        return -1;
+      }
+      DyeColor color = dye.color();
       if (index == 0 && color != null) {
         return color.getTextureDiffuseColor();
       }
       return -1;
-    }, ModItems.HERB_POUCH.get());
+    }, ModItems.HERB_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
+    // TODO: Different string colours
+    ModItems.SYLVAN_POUCH.get();
   }
 
   @SubscribeEvent

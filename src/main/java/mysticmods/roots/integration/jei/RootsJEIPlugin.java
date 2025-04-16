@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -103,7 +104,7 @@ public class RootsJEIPlugin implements IModPlugin {
     ISubtypeInterpreter<ItemStack> colorInterpreter = new ISubtypeInterpreter<>() {
       @Override
       public @Nullable Object getSubtypeData(ItemStack ingredient, UidContext context) {
-        return ingredient.get(DataComponents.BASE_COLOR);
+        return ingredient.get(ModAttachments.DYEABLE);
       }
 
       @Override
@@ -113,6 +114,9 @@ public class RootsJEIPlugin implements IModPlugin {
     };
 
     registration.registerSubtypeInterpreter(ModItems.HERB_POUCH.get(), colorInterpreter);
+    registration.registerSubtypeInterpreter(ModItems.APOTHECARY_POUCH.get(), colorInterpreter);
+    registration.registerSubtypeInterpreter(ModItems.COMPONENT_POUCH.get(), colorInterpreter);
+    registration.registerSubtypeInterpreter(ModItems.SYLVAN_POUCH.get(), colorInterpreter);
   }
 
   public static final RootsEntityRenderer ENTITY_RENDERER = new RootsEntityRenderer(32);
