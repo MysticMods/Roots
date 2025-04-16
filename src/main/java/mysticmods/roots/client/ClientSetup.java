@@ -6,7 +6,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.blockentity.*;
 import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.client.gui.layer.WarningLayer;
-import mysticmods.roots.client.gui.screen.HerbPouchScreen;
+import mysticmods.roots.client.gui.screen.*;
 import mysticmods.roots.client.layer.AquaBubbleRenderLayer;
 import mysticmods.roots.client.model.*;
 import mysticmods.roots.client.model.armor.AntlerHatModel;
@@ -189,6 +189,10 @@ public class ClientSetup {
   @SubscribeEvent
   public static void onRegisterScreens(RegisterMenuScreensEvent event) {
     event.register(ModContainers.HERB_POUCH.get(), HerbPouchScreen::new);
+    event.register(ModContainers.SYLVAN_POUCH.get(), SylvanPouchScreen::new);
+    event.register(ModContainers.APOTHECARY_POUCH.get(), ApothecaryPouchScreen::new);
+    event.register(ModContainers.COMPONENT_POUCH.get(), ComponentPouchScreen::new);
+    event.register(ModContainers.QUIVER.get(), QuiverScreen::new);
   }
 
   public static final ResourceLocation GIFT_BOX_KEY = RootsAPI.rl("item/gift_box");

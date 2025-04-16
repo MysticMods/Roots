@@ -47,7 +47,7 @@ public class ModAttachments {
   // 18 item slots, 9 only herb slots
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> APOTHECARY_POUCH_CONTENTS = COMPONENTS.register("apothecary_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
-  // 12 item slots, 15 herb slots
+  // 15 item slots, 15 herb slots
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> SYLVAN_POUCH_CONTENTS = COMPONENTS.register("sylvan_pouch_contents", () -> new DataComponentType.Builder<ItemContainerContents>().persistent(ItemContainerContents.CODEC)
       .networkSynchronized(ItemContainerContents.STREAM_CODEC).build());
   static {

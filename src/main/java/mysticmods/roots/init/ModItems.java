@@ -5,6 +5,11 @@ import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.ritual.Ritual;
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchMenu;
+import mysticmods.roots.inventory.pouch.component.ComponentPouchMenu;
+import mysticmods.roots.inventory.pouch.herb.HerbPouchMenu;
+import mysticmods.roots.inventory.pouch.sylvan.SylvanPouchMenu;
+import mysticmods.roots.inventory.quiver.QuiverMenu;
 import mysticmods.roots.item.*;
 import mysticmods.roots.item.living.*;
 import net.minecraft.Util;
@@ -270,15 +275,15 @@ public class ModItems {
   public static final DeferredHolder<Item, Item> MIXED_BARK = ITEMS.register("mixed_bark", () -> new Item(new Item.Properties()));
 
   // TODO (POUCHES):
-  public static final DeferredHolder<Item, Item> APOTHECARY_POUCH = ITEMS.register("apothecary_pouch", () -> new Item(new Item.Properties().stacksTo(1).component(ModAttachments.APOTHECARY_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.BROWN)));
-  public static final DeferredHolder<Item, Item> COMPONENT_POUCH = ITEMS.register("component_pouch", () -> new Item(new Item.Properties().stacksTo(1).component(ModAttachments.COMPONENT_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.BROWN)));
+  public static final DeferredHolder<Item, PouchItem> APOTHECARY_POUCH = ITEMS.register("apothecary_pouch", () -> new PouchItem(ApothecaryPouchMenu::new, new Item.Properties().stacksTo(1).component(ModAttachments.APOTHECARY_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.BROWN)));
+  public static final DeferredHolder<Item, PouchItem> COMPONENT_POUCH = ITEMS.register("component_pouch", () -> new PouchItem(ComponentPouchMenu::new, new Item.Properties().stacksTo(1).component(ModAttachments.COMPONENT_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.BROWN)));
   public static final DeferredHolder<Item, CreativeComponentPouch> CREATIVE_POUCH = ITEMS.register("creative_pouch", () -> new CreativeComponentPouch(new Item.Properties().stacksTo(1)
       .rarity(Rarity.EPIC)));
-  public static final DeferredHolder<Item, Item> SYLVAN_POUCH = ITEMS.register("sylvan_pouch", () -> new Item(new Item.Properties().stacksTo(1).component(ModAttachments.SYLVAN_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.LIGHT_BLUE)));
+  public static final DeferredHolder<Item, PouchItem> SYLVAN_POUCH = ITEMS.register("sylvan_pouch", () -> new PouchItem(SylvanPouchMenu::new, new Item.Properties().stacksTo(1).component(ModAttachments.SYLVAN_POUCH_CONTENTS, ItemContainerContents.EMPTY).component(DataComponents.BASE_COLOR, DyeColor.LIGHT_BLUE)));
   static {
     ITEMS.addAlias(RootsAPI.rl("fey_pouch"), RootsAPI.rl("sylvan_pouch"));
   }
-  public static final DeferredHolder<Item, HerbPouchItem> HERB_POUCH = ITEMS.register("herb_pouch", () -> new HerbPouchItem(new Item.Properties().stacksTo(1)
+  public static final DeferredHolder<Item, PouchItem> HERB_POUCH = ITEMS.register("herb_pouch", () -> new PouchItem(HerbPouchMenu::new, new Item.Properties().stacksTo(1)
       .component(ModAttachments.HERB_POUCH_CONTENTS, ItemContainerContents.EMPTY)
       .component(DataComponents.BASE_COLOR, DyeColor.BROWN)));
 
@@ -305,7 +310,7 @@ public class ModItems {
   // TODO: Durability?
   public static final DeferredHolder<Item, Item> WILDWOOD_BOW = ITEMS.register("wildwood_bow", () -> new Item(new Item.Properties().durability(384)
       .stacksTo(1)));
-  public static final DeferredHolder<Item, Item> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new Item(new Item.Properties().stacksTo(1).component(ModAttachments.QUIVER_CONTENTS, ItemContainerContents.EMPTY)));
+  public static final DeferredHolder<Item, PouchItem> WILDWOOD_QUIVER = ITEMS.register("wildwood_quiver", () -> new PouchItem(QuiverMenu::new, new Item.Properties().stacksTo(1).component(ModAttachments.QUIVER_CONTENTS, ItemContainerContents.EMPTY)));
   public static final DeferredHolder<Item, ShearsItem> WOODEN_SHEARS = ITEMS.register("wooden_shears", () -> new ShearsItem(new Item.Properties().durability(120)
       .stacksTo(1).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
   public static DeferredHolder<Item, KnifeItem> WOODEN_KNIFE = ITEMS.register("wooden_knife", () -> new KnifeItem(Tiers.WOOD, new Item.Properties().component(ModAttachments.FORAGING, 1)

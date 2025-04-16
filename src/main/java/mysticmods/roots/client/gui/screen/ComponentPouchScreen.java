@@ -2,19 +2,20 @@ package mysticmods.roots.client.gui.screen;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.inventory.pouch.apothecary.ApothecaryPouchContainer;
+import mysticmods.roots.inventory.pouch.component.ComponentPouchContainer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ApothecaryPouchScreen extends AbstractContainerScreen<ApothecaryPouchContainer> {
-  private static final ResourceLocation BACKGROUND = RootsAPI.rl("textures/gui/apothecary_pouch_gui.png");
+public class ComponentPouchScreen extends AbstractContainerScreen<ComponentPouchContainer> {
+  private static final ResourceLocation BACKGROUND = RootsAPI.rl("textures/gui/component_pouch_gui.png");
 
-  public ApothecaryPouchScreen(ApothecaryPouchContainer menu, Inventory playerInventory, Component title) {
+  public ComponentPouchScreen(ComponentPouchContainer menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
-    imageHeight = 215;
-    imageWidth = 204;
+    imageHeight = 207;
+    imageWidth = 176;
   }
 
   @Override

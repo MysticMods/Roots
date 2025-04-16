@@ -17,12 +17,17 @@ import org.codehaus.plexus.util.StringUtils;
 
 import java.util.List;
 
-public abstract class BasePouchItem extends Item {
-  public BasePouchItem(Properties properties) {
+public class PouchItem extends Item {
+  private final PouchMenuProvider provider;
+
+  public PouchItem(PouchMenuProvider provider, Properties properties) {
     super(properties);
+    this.provider = provider;
   }
 
-  public abstract PouchMenuProvider getMenuProvider ();
+  public PouchMenuProvider getMenuProvider () {
+    return provider;
+  }
 
   @Override
   public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {

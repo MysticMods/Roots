@@ -223,6 +223,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.BOTTLES).add(Items.GLASS_BOTTLE);
     this.tag(RootsTags.Items.POUCHES)
         .add(ModItems.HERB_POUCH.get(), ModItems.SYLVAN_POUCH.get(), ModItems.APOTHECARY_POUCH.get(), ModItems.COMPONENT_POUCH.get());
+    this.tag(RootsTags.Items.QUIVERS).add(ModItems.WILDWOOD_QUIVER.get());
     this.tag(RootsTags.Items.CREATIVE_POUCHES).add(ModItems.CREATIVE_POUCH.get());
     this.tag(RootsTags.Items.ALL_POUCHES).addTags(RootsTags.Items.POUCHES, RootsTags.Items.CREATIVE_POUCHES);
 
