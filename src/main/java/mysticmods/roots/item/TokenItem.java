@@ -23,8 +23,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.loading.FMLEnvironment;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -96,7 +94,7 @@ public abstract class TokenItem extends Item {
       super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
       tooltipComponents.add(Component.empty());
       TooltipUtil.spellCostTooltip(context, tooltipComponents, ISpellInstance.of(getSpell()), tooltipFlag);
-      if (FMLEnvironment.dist == Dist.CLIENT) {
+      if (context.level() != null && context.level().isClientSide()) {
         RootsClientHooks.appendTokenHoverText(this, stack, context, tooltipComponents, tooltipFlag);
       }
     }

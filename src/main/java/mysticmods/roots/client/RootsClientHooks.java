@@ -146,21 +146,13 @@ public class RootsClientHooks {
 
   public static void appendTokenHoverText(TokenItem item, ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     Minecraft minecraft = Minecraft.getInstance();
-    if (minecraft == null || minecraft.level == null) {
-      return;
-    }
 
-    LocalPlayer player = minecraft.player;
-    if (player == null) {
-      return;
-    }
-
-    if (minecraft.screen instanceof StaffScreen) {
+    if (minecraft.screen instanceof StaffScreen || minecraft.player == null) {
       return;
     }
 
 
-    GrantStorage grants = player.getData(ModAttachments.GRANT_STORAGE);
+    GrantStorage grants = minecraft.player.getData(ModAttachments.GRANT_STORAGE);
     if (item instanceof TokenItem.SpellTokenItem spellTokenItem) {
       tooltipComponents.add(Component.empty());
       if (grants.hasSpell(spellTokenItem.getSpell())) {

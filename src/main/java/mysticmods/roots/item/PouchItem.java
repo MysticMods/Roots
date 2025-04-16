@@ -46,7 +46,7 @@ public class PouchItem extends Item {
   public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     Dyeable dye = stack.get(ModAttachments.DYEABLE);
-    if (dye != Dyeable.DEFAULT) {
+    if (dye != null && dye != Dyeable.DEFAULT) {
       tooltipComponents.add(Component.empty());
       tooltipComponents.add(Component.translatable("roots.tooltip.pouch.color", Component.translatable("roots.tooltip.pouch.color_name", StringUtils.capitalise(dye.color().getName()))
           .setStyle(Style.EMPTY.withColor(dye.color().getTextColor()).withBold(true))));
