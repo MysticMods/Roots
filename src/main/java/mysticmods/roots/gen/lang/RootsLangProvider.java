@@ -644,8 +644,6 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.subtitles.event.pyre.add_item", "Pyre filled");
     add("roots.subtitles.event.pyre.remove_item", "Pyre emptied");
     add("roots.subtitles.alert", "Targeted by enemy");
-/*    add("roots.subtitles.item.unripe_pearl.use", "");
-    add("roots.subtitles.item.pearleporter.use", "");*/
     add("roots.subtitles.block.pyre.crackle", "Pyre crackles");
 
     add("enchantment.roots.foraging", "Foraging");
@@ -662,6 +660,7 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.jei.mortar_crafting", "Mortar Crafting");
     add("roots.jei.text.durability", "Durability: %s");
     add("roots.jei.text.cooldown", "Cooldown: %ss");
+    add("roots.jei.sprout_gifts", "Rewards for Breeding Sprouts");
 
     RootsRegistries.GROVES.entrySet().forEach(o -> {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));

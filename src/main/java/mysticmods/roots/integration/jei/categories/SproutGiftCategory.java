@@ -12,46 +12,53 @@ import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
+import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
 import mysticmods.roots.integration.jei.categories.widget.ConditionWidget;
+import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
 import java.util.List;
 
-public class SproutGiftCategory extends RootsRecipeBaseCategory<GroveRecipe> {
+public class SproutGiftCategory extends RootsRecipeBaseCategory<SproutGiftRecipe> {
   public SproutGiftCategory(IGuiHelper helper) {
-    super(RootsJEIPlugin.GROVE_RECIPE_TYPE, helper, 128, 163, RootsAPI.rl("textures/gui/jei/loot.png"), () -> new ItemStack(ModItems.AUBERGINE.get()), Component.translatable("roots.jei.sprout_gifts"));
+    super(RootsJEIPlugin.SPROUT_GIFTS, helper, 128, 163, RootsAPI.rl("textures/gui/jei/loot.png"), () -> new ItemStack(ModItems.AUBERGINE.get()), Component.translatable("roots.jei.sprout_gifts"));
   }
 
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, GroveRecipe recipe, IFocusGroup iFocusGroup) {
+  public List<ChanceOutput> getChanceOutputs(SproutGiftRecipe recipe) {
+    return recipe.outputs();
+  }
+
+  @Override
+  public void setRecipe(IRecipeLayoutBuilder builder, SproutGiftRecipe recipe, IFocusGroup iFocusGroup) {
     super.setRecipe(builder, recipe, iFocusGroup);
+
+    var collector = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
+
+    SpawnEggItem inputItem = DeferredSpawnEggItem.byId(recipe.sprout());
+    collector.addIngredients(Ingredient.of(inputItem));
+    List<RootsEntityType> types = List.of(new RootsEntityType(recipe.sprout()));
+    builder.addSlot(RecipeIngredientRole.INPUT, 47, 12)
+        .setCustomRenderer(RootsJEIPlugin.ENTITY_TYPE, RootsJEIPlugin.ENTITY_RENDERER)
+        .addIngredients(RootsJEIPlugin.ENTITY_TYPE, types);
 
     int row = 0;
     int column = 0;
 
-    for (int i = 0; i < recipe.getIngredients().size(); i++) {
-      if (i % 4 == 0 && i != 0) {
-        row++;
-        column = 0;
-      }
-      builder.addSlot(RecipeIngredientRole.INPUT, 2 + column * 17, 2 + row * 17)
-          .addIngredients(recipe.getIngredients().get(i));
-      column++;
-    }
-
-    List<ChanceOutput> outputs = recipe.getCachedOutputs();
-
-    row = 0;
-    column = 0;
+    List<ChanceOutput> outputs = recipe.outputs();
 
     for (int i = 0; i < outputs.size(); i++) {
-      if (i % 4 == 0 && i != 0) {
+      if (i % 7 == 0 && i != 0) {
         row++;
         column = 0;
       }
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 117 + column * 17, 2 + row * 17)
+      builder.addSlot(RecipeIngredientRole.OUTPUT, 2 + column * 18, 72 + row * 18)
           .addItemStack(outputs.get(i).getOutput()).setSlotName(String.valueOf(i))
           .addRichTooltipCallback(this.richestTooltip(recipe));
       column++;
@@ -59,22 +66,7 @@ public class SproutGiftCategory extends RootsRecipeBaseCategory<GroveRecipe> {
   }
 
   @Override
-  public void createRecipeExtras(IRecipeExtrasBuilder builder, GroveRecipe recipe, IFocusGroup focuses) {
+  public void createRecipeExtras(IRecipeExtrasBuilder builder, SproutGiftRecipe recipe, IFocusGroup focuses) {
     super.createRecipeExtras(builder, recipe, focuses);
-
-    int column = 0;
-    for (LevelCondition condition : recipe.getLevelConditions()) {
-      CanonicalRepresentation rep = condition.getRepresentation();
-      int count = rep.getStates().size();
-      int offset = 81;
-      if (count == 4) {
-        offset = 86;
-      }
-      if (count == 3) {
-        offset = 89;
-      }
-      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getName()));
-      column++;
-    }
   }
 }
