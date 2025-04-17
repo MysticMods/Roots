@@ -1,5 +1,6 @@
 {
   "values": [
-    "#roots:soils"
+    "#roots:soils",
+    "#roots:soils/all"
   ]
 }
