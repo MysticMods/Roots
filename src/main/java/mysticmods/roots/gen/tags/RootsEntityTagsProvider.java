@@ -37,7 +37,6 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             EntityType.GLOW_SQUID,
             EntityType.GOAT,
             EntityType.HORSE,
-            EntityType.IRON_GOLEM,
             EntityType.LLAMA,
             EntityType.MULE,
             EntityType.MOOSHROOM,
@@ -50,7 +49,6 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             EntityType.RABBIT, // Specific exclusion for killer bunnies
             EntityType.SALMON,
             EntityType.SHEEP,
-            EntityType.SNOW_GOLEM,
             EntityType.SQUID,
             EntityType.STRIDER,
             EntityType.TADPOLE,
@@ -100,7 +98,6 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             EntityType.RABBIT, // Specific exclusion for killer bunnies
             EntityType.SALMON,
             EntityType.SHEEP,
-            EntityType.SNOW_GOLEM,
             EntityType.SQUID,
             EntityType.STRIDER,
             EntityType.TADPOLE,

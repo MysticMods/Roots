@@ -1,8 +1,8 @@
-// 1.21.1	2025-04-15T22:26:17.027621	Roots Entity Type Tags
+// 1.21.1	2025-04-17T18:48:11.468002	Roots Entity Type Tags
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/add_tentacle_loot.json
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/allow_casting_tool_right_click.json
-751ed0d287273d6e16d5f4c05e93dcbe961173ba data/roots/tags/entity_type/animal_harvest_entities.json
+b735d341b01f904ff16db1cd0ad4650f839e6f06 data/roots/tags/entity_type/animal_harvest_entities.json
 28fdc2f8ec536db734910259f5df902d7e824d84 data/roots/tags/entity_type/boats.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/disable_disarm.json
 e00f2931577049b9a4400a87ed9c249373be376c data/roots/tags/entity_type/dragons.json
@@ -11,7 +11,7 @@ e00f2931577049b9a4400a87ed9c249373be376c data/roots/tags/entity_type/dragons.jso
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/force_hostile.json
 ee75b90db1cfb03a8ce6da87690f062a665055c4 data/roots/tags/entity_type/healable_ice_creatures.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/hell_animals.json
-9709246b220f865af98fa7685736b105c8109dff data/roots/tags/entity_type/pacifist.json
+b19830e7db0eece497af9c111dcb6459fc2f851e data/roots/tags/entity_type/pacifist.json
 29671cfa11d074462c259806e9d60468451e3cdb data/roots/tags/entity_type/rituals/animal_harvest/exclude.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/rose_thorns_exclude.json
 9717909a6109cd9ec9ea5ab3263ee9a5294e63bc data/roots/tags/entity_type/runic_shears_override.json
