@@ -21,6 +21,7 @@ import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityHelper;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityRenderer;
 import mysticmods.roots.integration.jei.categories.ingredient.RootsEntityType;
 import mysticmods.roots.integration.jei.fake.DyeRecipeGenerator;
+import mysticmods.roots.integration.jei.fake.SproutGiftRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.KnifeRecipe;
 import mysticmods.roots.recipe.mortar.MortarRecipe;
@@ -53,6 +54,7 @@ public class RootsJEIPlugin implements IModPlugin {
   public static final RecipeType<PyreRecipe> PYRE_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("pyre_recipe"), PyreRecipe.class);
   public static final RecipeType<RunicBlockRecipe> RUNIC_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_recipe"), RunicBlockRecipe.class);
   public static final RecipeType<RunicEntityRecipe> RUNIC_ENTITY_RECIPE_TYPE = new RecipeType<>(RootsAPI.rl("runic_entity_recipe"), RunicEntityRecipe.class);
+  public static final RecipeType<SproutGiftRecipe> SPROUT_GIFTS = new RecipeType<>(RootsAPI.rl("sprout_gift_recipe"), SproutGiftRecipe.class);
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -64,6 +66,7 @@ public class RootsJEIPlugin implements IModPlugin {
     registration.addRecipeCategories(new KnifeCategory(guiHelper));
     registration.addRecipeCategories(new RunicBlockCategory(guiHelper));
     registration.addRecipeCategories(new RunicEntityCategory(guiHelper));
+    registration.addRecipeCategories(new SproutGiftCategory(guiHelper));
   }
 
   @Override

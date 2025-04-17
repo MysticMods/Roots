@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "roots:item/apothecary_pouch_coloured",
+      "predicate": {
+        "roots:undyed": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "roots:item/pouches/apothecary_pouch"
   }

@@ -1,7 +1,14 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "roots:item/herb_pouch_coloured",
+      "predicate": {
+        "roots:undyed": 1.0
+      }
+    }
+  ],
   "textures": {
-    "layer0": "roots:item/pouches/herb_pouch_main_layer",
-    "layer1": "roots:item/pouches/herb_pouch_clasp_layer"
+    "layer0": "roots:item/pouches/herb_pouch"
   }
 }

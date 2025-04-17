@@ -1,8 +1,9 @@
-// 1.21.1	2025-04-15T22:26:17.0326726	Item Models: roots
+// 1.21.1	2025-04-16T19:17:27.5294063	Item Models: roots
 d1eec9cecde977336d4b1e02ecddd93dfc340855 assets/roots/models/item/acacia_bark.json
 2fe62fb9a828c89de984c257c08ed2f7be1c73e4 assets/roots/models/item/antlers.json
 7fd4d476109401f263d37fe0a2c5e37cd9917f5d assets/roots/models/item/antler_hat.json
-dfb1282e7837305d24af5f6310f21733fdac68ef assets/roots/models/item/apothecary_pouch.json
+0205fcf8e27d5e44832707757df41b1a7f37934e assets/roots/models/item/apothecary_pouch.json
+4e0673b9dc4d088947cebea0a6b547cc706d7cfa assets/roots/models/item/apothecary_pouch_coloured.json
 404486842e7642b537cd496376dfb91232d711bd assets/roots/models/item/apple_cordial.json
 458fe829501acba9fb72bf7b89d53539f795e0cc assets/roots/models/item/aqueous_soil.json
 2e3a2863d41833919d41b8b6060ff566dc23ad4e assets/roots/models/item/assorted_seeds.json
@@ -25,7 +26,8 @@ af7db574ef0732a01ef2e772360ffac93b35d327 assets/roots/models/item/carapace.json
 08131be57b4580ad3ebfe538f34354931505a474 assets/roots/models/item/chiseled_runed_obsidian.json
 e29526db6705de201e9fd0abb2362147c501e9d6 assets/roots/models/item/chiseled_runestone.json
 6bf881661b5f681c8869b4724755c6373409720f assets/roots/models/item/cloud_berry.json
-956203eccdb1af3f577c189136367b000b46af3a assets/roots/models/item/component_pouch.json
+4342437168bfe18e54af446935367b8f754ac62e assets/roots/models/item/component_pouch.json
+cc6196015a89644a473efcbb1df472eb79e34dbf assets/roots/models/item/component_pouch_coloured.json
 55328372ea7b4a9ae1c80f86f8606b51e13ebd77 assets/roots/models/item/cooked_aubergine.json
 dd35f7b5104b563d286f4f8ffb8ffd8abff7c241 assets/roots/models/item/cooked_beetroot.json
 78ac1337abee5dc4c01a80c9bbe195406fe069b3 assets/roots/models/item/cooked_carrot.json
@@ -73,7 +75,8 @@ a29b76b795c7b9db9d670c008740b58bb3a77e2d assets/roots/models/item/gramary.json
 d2c37a9a6e04ab57d56cab62fec3e740263abf3c assets/roots/models/item/grove_pedestal.json
 97deb2b89129d391d5fdd1bb246a72b35fc3a06a assets/roots/models/item/grove_spores.json
 1beeb16114aedeaa02e4ce5f88499e58ef183814 assets/roots/models/item/hanging_grove_moss.json
-94d1d49a0b267468e50cbd64225ae18927dd3df6 assets/roots/models/item/herb_pouch.json
+dbf4c4d63cb7b6030aa3cd51c09a4f621b1b4b7a assets/roots/models/item/herb_pouch.json
+94d1d49a0b267468e50cbd64225ae18927dd3df6 assets/roots/models/item/herb_pouch_coloured.json
 8c5ff0bdec7626843a2ea258651396914546403c assets/roots/models/item/incense_burner.json
 f49e298ede83512d9c74474554aa89982e07f3ea assets/roots/models/item/inferno_bulb.json
 209eb7ef5a39a5622f82eec32b85cafa8c98c7dc assets/roots/models/item/ink_bottle.json

@@ -1,6 +1,7 @@
 package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.event.setup.ClientSetup;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.item.TokenItem;
@@ -215,18 +216,29 @@ public class RootsItemModelProvider extends ItemModelProvider {
     subfolder(ModItems.WILDWOOD_BARK, "bark");
     subfolder(ModItems.MIXED_BARK, "bark");
 
-    subfolder(ModItems.APOTHECARY_POUCH, "pouches");
-    subfolder(ModItems.COMPONENT_POUCH, "pouches");
-    subfolder(ModItems.CREATIVE_POUCH, "pouches");
     subfolder(ModItems.SYLVAN_POUCH, "pouches");
+    subfolder(ModItems.CREATIVE_POUCH, "pouches");
 
-
-    subfolder(ModItems.HERB_POUCH, "pouches");
-
-    getBuilder("roots:herb_pouch")
+    ModelFile generated = new ModelFile.UncheckedModelFile(mcLoc("item/generated"));
+    ModelFile coloured = getBuilder("roots:herb_pouch_coloured")
         .parent(new ModelFile.UncheckedModelFile("item/generated"))
         .texture("layer0", modLoc("item/pouches/herb_pouch_main_layer"))
         .texture("layer1", modLoc("item/pouches/herb_pouch_clasp_layer"));
+    getBuilder("roots:herb_pouch").parent(generated)
+        .texture("layer0", modLoc("item/pouches/herb_pouch")).override().predicate(ClientSetup.UNDYED, 1).model(coloured).end();
+    coloured = getBuilder("roots:apothecary_pouch_coloured")
+        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", modLoc("item/pouches/apothecary_pouch_main_layer"))
+        .texture("layer1", modLoc("item/pouches/apothecary_pouch_clasp_layer"));
+    getBuilder("roots:apothecary_pouch").parent(generated)
+        .texture("layer0", modLoc("item/pouches/apothecary_pouch")).override().predicate(ClientSetup.UNDYED, 1).model(coloured).end();
+    coloured = getBuilder("roots:component_pouch_coloured")
+        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+        .texture("layer0", modLoc("item/pouches/component_pouch_main_layer"))
+        .texture("layer1", modLoc("item/pouches/component_pouch_clasp_layer"));
+    getBuilder("roots:component_pouch").parent(generated)
+        .texture("layer0", modLoc("item/pouches/component_pouch")).override().predicate(ClientSetup.UNDYED, 1).model(coloured).end();
+
 
     subfolder(ModItems.COOKED_PERESKIA, "food");
     subfolder(ModItems.FLOUR, "food");
@@ -252,8 +264,8 @@ public class RootsItemModelProvider extends ItemModelProvider {
     handheld(ModItems.RUNED_SWORD, "tools");
     handheld(ModItems.RUNIC_SHEARS, "tools");
 
-    ModelFile generated = new ModelFile.UncheckedModelFile(mcLoc("item/handheld"));
-    getBuilder(ModItems.STAFF.getKey().location().toString()).parent(generated)
+    ModelFile handheld = new ModelFile.UncheckedModelFile(mcLoc("item/handheld"));
+    getBuilder(ModItems.STAFF.getKey().location().toString()).parent(handheld)
         .texture("layer0", modLoc("item/tools/staff")).texture("layer1", modLoc("item/tools/staff_petal_1"))
         .texture("layer2", modLoc("item/tools/staff_petal_2"));
 
