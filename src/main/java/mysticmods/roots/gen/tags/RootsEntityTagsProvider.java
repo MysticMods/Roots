@@ -95,7 +95,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
             EntityType.PIG,
             EntityType.POLAR_BEAR,
             EntityType.PUFFERFISH,
-            EntityType.RABBIT, // Specific exclusion for killer bunnies
+            EntityType.RABBIT,
             EntityType.SALMON,
             EntityType.SHEEP,
             EntityType.SQUID,

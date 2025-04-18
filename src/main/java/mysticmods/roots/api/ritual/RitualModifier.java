@@ -5,6 +5,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.ICosted;
+import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.Util;
@@ -19,7 +20,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 
 import java.util.function.Predicate;
 
-public class RitualModifier implements IDescribed, ICosted, /*IParentChild<RitualModifier>, */TooltipComponent {
+public class RitualModifier implements IDescribed, ICosted, /*IParentChild<RitualModifier>, */TooltipComponent, IDataMapInitialize<RitualModifier> {
   public static final Codec<RitualModifier> CODEC = RootsRegistries.RITUAL_MODIFIERS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, RitualModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.RITUAL_MODIFIERS);
 
@@ -47,6 +48,7 @@ public class RitualModifier implements IDescribed, ICosted, /*IParentChild<Ritua
     return ritual;
   }
 
+  @Override
   public void init(Holder<RitualModifier> holder) {
     Ritual parent = holder.getData(DataMaps.RITUAL_MODIFIER_RITUAL);
     if (parent == null) {

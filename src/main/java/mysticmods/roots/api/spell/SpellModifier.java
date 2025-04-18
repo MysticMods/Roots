@@ -4,10 +4,7 @@ import com.mojang.serialization.Codec;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.herb.CostInstance;
-import mysticmods.roots.api.registry.ICosted;
-import mysticmods.roots.api.registry.IDescribed;
-import mysticmods.roots.api.registry.IParentChild;
-import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.registry.*;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -23,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellModifier>, TooltipComponent {
+public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellModifier>, TooltipComponent, IDataMapInitialize<SpellModifier> {
   public static final Codec<SpellModifier> CODEC = RootsRegistries.SPELL_MODIFIERS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, SpellModifier> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SPELL_MODIFIERS);
 
@@ -61,6 +58,7 @@ public class SpellModifier implements IDescribed, ICosted, IParentChild<SpellMod
     return spell;
   }
 
+  @Override
   public void init(Holder<SpellModifier> holder) {
     Spell parent = holder.getData(DataMaps.SPELL_MODIFIER_SPELL);
     if (parent == null) {

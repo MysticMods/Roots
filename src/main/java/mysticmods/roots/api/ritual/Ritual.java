@@ -6,6 +6,7 @@ import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.property.Property;
 import mysticmods.roots.api.property.PropertyHolder;
+import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IDescribed;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.PyreBlockEntity;
@@ -31,7 +32,7 @@ import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-public abstract class Ritual implements IDescribed, TooltipComponent {
+public abstract class Ritual implements IDescribed, TooltipComponent, IDataMapInitialize<Ritual> {
   public static final Codec<Ritual> CODEC = RootsRegistries.RITUALS.byNameCodec();
   public static final StreamCodec<RegistryFriendlyByteBuf, Ritual> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.RITUALS);
 
@@ -135,6 +136,7 @@ public abstract class Ritual implements IDescribed, TooltipComponent {
 
   protected abstract void initialize(Holder<Ritual> holder);
 
+  @Override
   public void init(Holder<Ritual> holder) {
     icon = holder.getData(DataMaps.RITUAL_DISPLAY_ITEM);
     if (icon == null || icon.isEmpty()) {

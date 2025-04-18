@@ -1,6 +1,7 @@
 package mysticmods.roots.api.grove;
 
 import mysticmods.roots.api.datamap.DataMaps;
+import mysticmods.roots.api.registry.IDataMapInitialize;
 import mysticmods.roots.api.registry.IStyled;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.ChatFormatting;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-public class Grove implements IStyled {
+public class Grove implements IStyled, IDataMapInitialize<Grove> {
   private Style style;
   private final ChatFormatting color;
   private String descriptionId;
@@ -45,6 +46,7 @@ public class Grove implements IStyled {
     return reputationRanks;
   }
 
+  @Override
   public void init(Holder<Grove> holder) {
     this.reputationRanks = holder.getData(DataMaps.GROVE_RANKS);
   }
