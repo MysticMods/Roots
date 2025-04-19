@@ -216,6 +216,13 @@ public class RootsTags {
 
     public static final TagKey<Block> FARMLANDS = compatTag("farmlands");
 
+    public static final TagKey<Block> FAIRY_GROVE_GENERATORS = modTag("grove_generators/fairy");
+    public static final TagKey<Block> WILD_GROVE_GENERATORS = modTag("grove_generators/wild");
+    public static final TagKey<Block> SPROUTING_GROVE_GENERATORS = modTag("grove_generators/sprouting");
+    public static final TagKey<Block> FUNGAL_GROVE_GENERATORS = modTag("grove_generators/fungal");
+    public static final TagKey<Block> TWILIGHT_GROVE_GENERATORS = modTag("grove_generators/twilight");
+    public static final TagKey<Block> ELEMENTAL_GROVE_GENERATORS = modTag("grove_generators/elemental");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }

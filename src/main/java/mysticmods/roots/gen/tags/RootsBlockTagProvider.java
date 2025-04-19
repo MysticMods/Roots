@@ -2,6 +2,7 @@ package mysticmods.roots.gen.tags;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
+import mysticmods.roots.init.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -378,6 +379,13 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.UNDERWATER_FARMLAND).add(Blocks.DIRT, Blocks.DIRT_PATH, Blocks.COARSE_DIRT, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.GRASS_BLOCK);
     tag(RootsTags.Blocks.FARMLANDS).add(Blocks.FARMLAND).addTag(RootsTags.Blocks.ALL_SOIL);
     tag(BlockTags.MUSHROOM_GROW_BLOCK).addTag(RootsTags.Blocks.ALL_SOIL);
+
+    tag(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS).add(Blocks.SNOW_BLOCK, Blocks.MAGMA_BLOCK, Blocks.LAVA, Blocks.WATER, Blocks.MUD, Blocks.OBSIDIAN, Blocks.ICE, Blocks.PACKED_ICE, Blocks.PACKED_MUD, Blocks.BLUE_ICE, Blocks.END_STONE).addTags(RootsTags.Blocks.ALL_SOIL);
+    tag(RootsTags.Blocks.FAIRY_GROVE_GENERATORS).addTags(BlockTags.SMALL_FLOWERS, BlockTags.TALL_FLOWERS);
+    tag(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS).addTags(BlockTags.CROPS);
+    tag(RootsTags.Blocks.WILD_GROVE_GENERATORS).add(Blocks.DRAGON_EGG);
+    tag(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS).add(Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK, Blocks.POTTED_RED_MUSHROOM, Blocks.POTTED_BROWN_MUSHROOM, BAFFLECAP.get(), BAFFLECAP_BLOCK.get(), POTTED_BAFFLECAP.get(), Blocks.MYCELIUM, Blocks.PODZOL);
+    tag(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS).add(Blocks.CREEPER_HEAD, Blocks.CREEPER_WALL_HEAD, Blocks.DRAGON_HEAD, Blocks.DRAGON_WALL_HEAD, Blocks.PIGLIN_WALL_HEAD, Blocks.PIGLIN_HEAD, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD, Blocks.ZOMBIE_HEAD, Blocks.ZOMBIE_WALL_HEAD);
   }
 
   @Override

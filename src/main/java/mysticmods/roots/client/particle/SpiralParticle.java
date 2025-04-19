@@ -1,5 +1,6 @@
 package mysticmods.roots.client.particle;
 
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -42,7 +43,7 @@ public class SpiralParticle extends TextureSheetParticle {
     this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
     this.hasPhysics = false;
-    this.quadSize = 0.02f;
+    this.quadSize = 0.05f;
     this.rollSpeed = (float) ((x * 17 + z * 4 + y * 8) % (Math.PI * 2)) * 0.01f;
     this.wobblePhase = (x * 31 + z * 17 + y * 8) % (Math.PI * 2);
     this.oRoll = 0;
@@ -57,7 +58,7 @@ public class SpiralParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    return RootsParticleRenderTypes.GLOW_NO_MASK;
   }
 
   @Override

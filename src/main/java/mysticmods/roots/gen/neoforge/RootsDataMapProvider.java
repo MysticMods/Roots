@@ -566,5 +566,8 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder23.add(Items.MELON_SEEDS.builtInRegistryHolder(), Blocks.MELON_STEM, false);
     builder23.add(Items.PUMPKIN.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
     builder23.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
+
+
+    var builder24 = builder(DataMaps.GROVE_POWER_GENERATORS);
   }
 }

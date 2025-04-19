@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-17T12:41:28.436114	Roots Block Tags
+// 1.21.1	2025-04-19T17:16:56.6274039	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -97,6 +97,12 @@ aad685bc47fe5961230536c39cb94930971eb077 data/roots/tags/block/forageable/double
 277febcb81e6cdedb2c430d51bcd1850d597779d data/roots/tags/block/granite_ore_replaceables.json
 4fd76122f15f8ad5b0091e94cc3027e509642ac2 data/roots/tags/block/grove/elemental/crops.json
 e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/block/grove/sprout/crops.json
+d66fd5801ed493567186dbdb2f7d2d91f4497aee data/roots/tags/block/grove_generators/elemental.json
+c05e998c718feb7c79e577ca9f09edc7225b3d22 data/roots/tags/block/grove_generators/fairy.json
+b8a92c6420b5d74d8f27913e62c747a7e4a48d49 data/roots/tags/block/grove_generators/fungal.json
+e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/block/grove_generators/sprouting.json
+fdf434e3111509bd2720d8ce34fe694fd85712c9 data/roots/tags/block/grove_generators/twilight.json
+fdf0229f5dd8b82a9a07d37302c8eab1ed4ebeab data/roots/tags/block/grove_generators/wild.json
 7a563616d4716d016ea50970baef809fc59d6dcf data/roots/tags/block/grove_moss.json
 c0e5ac26bc57a1a6ba571b21d7fab9d6bbb6d318 data/roots/tags/block/grove_stones.json
 9ce47e233dd6af731b5f5a7562ccb7fa94f97db5 data/roots/tags/block/grove_stones/primal.json

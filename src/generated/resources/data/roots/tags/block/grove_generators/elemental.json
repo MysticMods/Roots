@@ -1,0 +1,16 @@
+{
+  "values": [
+    "minecraft:snow_block",
+    "minecraft:magma_block",
+    "minecraft:lava",
+    "minecraft:water",
+    "minecraft:mud",
+    "minecraft:obsidian",
+    "minecraft:ice",
+    "minecraft:packed_ice",
+    "minecraft:packed_mud",
+    "minecraft:blue_ice",
+    "minecraft:end_stone",
+    "#roots:soils/all"
+  ]
+}

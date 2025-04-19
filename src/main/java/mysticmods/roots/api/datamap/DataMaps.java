@@ -8,6 +8,7 @@ import mysticmods.roots.api.condition.CanonicalRepresentation;
 import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.condition.PlayerCondition;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.herb.Cost;
 import mysticmods.roots.api.herb.CostInstance;
@@ -83,7 +84,8 @@ public class DataMaps {
   public static final DataMapType<PlayerCondition, CanonicalRepresentation> PLAYER_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("player_condition_canons"), RootsRegistries.Keys.PLAYER_CONDITIONS, CanonicalRepresentation.CODEC)
       .synced(CanonicalRepresentation.CODEC, false)
       .build();
-  public static final DataMapType<Item, List<SproutGift>> SPROUT_BREEDING_ITEM_CHANCE = DataMapType.builder(RootsAPI.rl("sprout_breeding_item_chance"), Registries.ITEM, SproutGift.LIST_CODEC).synced(SproutGift.LIST_CODEC, false)
+  public static final DataMapType<Item, List<SproutGift>> SPROUT_BREEDING_ITEM_CHANCE = DataMapType.builder(RootsAPI.rl("sprout_breeding_item_chance"), Registries.ITEM, SproutGift.LIST_CODEC)
+      .synced(SproutGift.LIST_CODEC, false)
       .build();
   public static final DataMapType<Block, GrowthRecord> GROWTH_RECORDS = DataMapType.builder(RootsAPI.rl("growth_records"), Registries.BLOCK, GrowthRecord.CODEC)
       .synced(GrowthRecord.CODEC, false)
@@ -103,6 +105,8 @@ public class DataMaps {
   public static final DataMapType<Item, Block> SEED_TO_CROP = DataMapType.builder(RootsAPI.rl("seed_to_crop"), Registries.ITEM, BuiltInRegistries.BLOCK.byNameCodec())
       .synced(BuiltInRegistries.BLOCK.byNameCodec(), false)
       .build();
+  public static final DataMapType<Block, List<GrovePower.Generator>> GROVE_POWER_GENERATORS = DataMapType.builder(RootsAPI.rl("grove_power_generator"), Registries.BLOCK, GrovePower.Generator.LIST_CODEC)
+      .synced(GrovePower.Generator.LIST_CODEC, false).build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -127,6 +131,7 @@ public class DataMaps {
     event.register(GROVE_RANKS);
     event.register(OPERATION_COST);
     event.register(SEED_TO_CROP);
+    event.register(GROVE_POWER_GENERATORS);
   }
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {
