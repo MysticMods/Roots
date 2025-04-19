@@ -6,6 +6,7 @@ import mysticmods.roots.init.ModEntities;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -150,7 +151,7 @@ public class RootsEntityTagsProvider extends EntityTypeTagsProvider {
     this.tag(RootsTags.Entities.WITHERS).add(EntityType.WITHER);
     this.tag(RootsTags.Entities.DRAGONS).add(EntityType.ENDER_DRAGON);
     this.tag(RootsTags.Entities.TRADERS).add(EntityType.PIGLIN, EntityType.VILLAGER, EntityType.WANDERING_TRADER, EntityType.ZOMBIE_VILLAGER);
-    this.tag(RootsTags.Entities.UNDEAD).add(EntityType.ZOMBIE_VILLAGER, EntityType.ZOMBIE, EntityType.ZOMBIE_HORSE, EntityType.ZOMBIFIED_PIGLIN, EntityType.SKELETON, EntityType.SKELETON_HORSE, EntityType.WITHER_SKELETON, EntityType.BOGGED, EntityType.STRAY, EntityType.WITHER, EntityType.HUSK, EntityType.ZOGLIN);
+    this.tag(RootsTags.Entities.UNDEAD).addTag(EntityTypeTags.UNDEAD);
     this.tag(RootsTags.Entities.SPROUTS).add(ModEntities.GREEN_SPROUT.get(), ModEntities.SNOW_SPROUT.get(), ModEntities.PURPLE_SPROUT.get(), ModEntities.TAN_SPROUT.get(), ModEntities.RED_SPROUT.get(), ModEntities.MELODY_SPROUT.get());
     this.tag(RootsTags.Entities.HELL_ANIMALS);
     this.tag(RootsTags.Entities.SNOW_ANIMALS).add(ModEntities.SNOW_SPROUT.get());

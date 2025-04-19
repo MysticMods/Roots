@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-17T18:48:11.468002	Roots Entity Type Tags
+// 1.21.1	2025-04-19T18:14:46.5925683	Roots Entity Type Tags
 a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/add_tentacle_loot.json
 da9ec5f7ed64a0d225e00ee60b8e6d6408b431fb data/roots/tags/entity_type/alertness.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/allow_casting_tool_right_click.json
@@ -29,7 +29,7 @@ a3a9d720d750c535ce708114ef25bc65fda0168d data/roots/tags/entity_type/squid.json
 f6a415ffe9fa7f9a65011b28aa30ae34f4bc3866 data/roots/tags/entity_type/sylvan_leather.json
 6ded3ea2e35a47445f95b3e2a263d918575d48cf data/roots/tags/entity_type/temporal_morass_exclude.json
 1b7e7801f876a0240e1e163329e1387f064856d4 data/roots/tags/entity_type/traders.json
-9744c7bce1ae34ed719c2d139c7817a7f9f10f5b data/roots/tags/entity_type/undead.json
+e2f26c4696552a05feacf8eaadfb3b41a8907161 data/roots/tags/entity_type/undead.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/windwall_force_exclude.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/entity_type/windwall_force_include.json
 65ca45c69365d0c6890ba45795a5e19e77d25d7d data/roots/tags/entity_type/withers.json

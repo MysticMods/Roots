@@ -1,16 +1,5 @@
 {
   "values": [
-    "minecraft:zombie_villager",
-    "minecraft:zombie",
-    "minecraft:zombie_horse",
-    "minecraft:zombified_piglin",
-    "minecraft:skeleton",
-    "minecraft:skeleton_horse",
-    "minecraft:wither_skeleton",
-    "minecraft:bogged",
-    "minecraft:stray",
-    "minecraft:wither",
-    "minecraft:husk",
-    "minecraft:zoglin"
+    "#minecraft:undead"
   ]
 }
