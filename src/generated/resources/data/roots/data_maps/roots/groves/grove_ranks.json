@@ -1,52 +1,52 @@
 {
   "values": {
     "roots:elemental": {
-      "threshold1": 5000,
-      "threshold2": 8000,
-      "threshold3": 10000,
-      "threshold4": 15000
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
     },
     "roots:fairy": {
-      "threshold1": 5000,
-      "threshold2": 8000,
-      "threshold3": 10000,
-      "threshold4": 15000
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
     },
     "roots:fungal": {
-      "threshold1": 5000,
-      "threshold2": 8000,
-      "threshold3": 10000,
-      "threshold4": 15000
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
     },
     "roots:hollow": {
-      "threshold1": 5000,
-      "threshold2": 8000,
-      "threshold3": 10000,
-      "threshold4": 15000
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
     },
     "roots:primal": {
-      "threshold1": 5000,
-      "threshold2": 8000,
-      "threshold3": 10000,
-      "threshold4": 15000
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
     },
     "roots:sprouting": {
-      "threshold1": 5000,
-      "threshold2": 8000,
-      "threshold3": 10000,
-      "threshold4": 15000
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
     },
     "roots:twilight": {
-      "threshold1": 5000,
-      "threshold2": 8000,
-      "threshold3": 10000,
-      "threshold4": 15000
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
     },
     "roots:wild": {
-      "threshold1": 5000,
-      "threshold2": 8000,
-      "threshold3": 10000,
-      "threshold4": 15000
+      "threshold1": 1000,
+      "threshold2": 5000,
+      "threshold3": 15000,
+      "threshold4": 30000
     }
   }
 }

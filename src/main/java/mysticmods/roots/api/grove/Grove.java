@@ -20,7 +20,7 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
   private final ChatFormatting color;
   private String descriptionId;
 
-  private final ReputationRanks defaultReputationRanks = new ReputationRanks(5000, 8000, 10000, 15000);
+  private final ReputationRanks defaultReputationRanks = new ReputationRanks(1000, 5000, 15000, 30000);
   private ReputationRanks reputationRanks;
 
   public Grove(ChatFormatting color) {

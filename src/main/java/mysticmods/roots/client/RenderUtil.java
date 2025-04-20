@@ -4,8 +4,11 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import com.mojang.math.MatrixUtil;
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.mixin.accessor.AccessorMixinItemRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,6 +24,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -28,10 +32,17 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HalfTransparentBlock;
+import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.ClientHooks;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.joml.Quaternionf;
 
 import javax.annotation.Nullable;
@@ -220,7 +231,7 @@ public class RenderUtil {
     if (entity == EntityType.ELDER_GUARDIAN) stack.scale(0.6F, 0.6F, 0.6F);
   }
 
-  public static void renderItemEntity(GuiGraphics graphics, ItemStack stack, @Nullable Level level, float bobOffset) {
+/*  public static void renderItemEntity(GuiGraphics graphics, ItemStack stack, @Nullable Level level, float bobOffset) {
     PoseStack posestack = graphics.pose();
     posestack.pushPose();
     posestack.translate(16.0D, 32.0D, 50.0D);
@@ -256,18 +267,16 @@ public class RenderUtil {
     stack.mulPose(Axis.YP.rotation(f3));
 
     stack.pushPose();
-
-    Minecraft.getInstance().getItemRenderer()
-        .render(itemstack, ItemDisplayContext.GROUND, false, stack, buffer, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+    renderItem(itemstack, ItemDisplayContext.GROUND, false, stack, buffer, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel, Minecraft.getInstance().getItemRenderer());
     stack.popPose();
 
 
     stack.popPose();
-  }
+  }*/
 
-  private static float getSpin(float partialTicks, float bobOffset) {
+/*  private static float getSpin(float partialTicks, float bobOffset) {
     return (Objects.requireNonNull(Minecraft.getInstance().level).getGameTime() + partialTicks) / 20.0F + bobOffset;
-  }
+  }*/
 
   public static List<Component> getMobTooltip(EntityType<?> type) {
     List<Component> components = new ArrayList<>();
@@ -277,5 +286,65 @@ public class RenderUtil {
           .withStyle(ChatFormatting.DARK_GRAY));
     }
     return components;
+  }
+
+  // Drop-in replacement for ItemRenderer.render
+  public static void renderItem(ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel bakedModel, ItemRenderer renderer, int progress, int progressMax) {
+    if (!itemStack.isEmpty()) {
+      poseStack.pushPose();
+      boolean flag = displayContext == ItemDisplayContext.GUI || displayContext == ItemDisplayContext.GROUND || displayContext == ItemDisplayContext.FIXED;
+      if (flag) {
+        if (itemStack.is(Items.TRIDENT)) {
+          bakedModel = ((AccessorMixinItemRenderer) renderer).RootsGetItemModelShaper().getModelManager()
+              .getModel(((AccessorMixinItemRenderer) renderer).RootsGetTridentModel());
+        } else if (itemStack.is(Items.SPYGLASS)) {
+          bakedModel = ((AccessorMixinItemRenderer) renderer).RootsGetItemModelShaper().getModelManager()
+              .getModel(((AccessorMixinItemRenderer) renderer).RootsGetSpyglassModel());
+        }
+      }
+
+      bakedModel = ClientHooks.handleCameraTransforms(poseStack, bakedModel, displayContext, leftHand);
+      poseStack.translate(-0.5F, -0.5F, -0.5F);
+      if (!bakedModel.isCustomRenderer() && (!itemStack.is(Items.TRIDENT) || flag)) {
+        boolean flag1;
+        if (displayContext != ItemDisplayContext.GUI && !displayContext.firstPerson() && itemStack.getItem() instanceof BlockItem blockitem) {
+          Block block = blockitem.getBlock();
+          flag1 = !(block instanceof HalfTransparentBlock) && !(block instanceof StainedGlassPaneBlock);
+        } else {
+          flag1 = true;
+        }
+
+        for (var model : bakedModel.getRenderPasses(itemStack, flag1)) {
+          for (var rendertype : model.getRenderTypes(itemStack, flag1)) {
+            VertexConsumer vertexconsumer;
+            if (hasAnimatedTexture(itemStack) && itemStack.hasFoil()) {
+              PoseStack.Pose pose = poseStack.last().copy();
+              if (displayContext == ItemDisplayContext.GUI) {
+                MatrixUtil.mulComponentWise(pose.pose(), 0.5F);
+              } else if (displayContext.firstPerson()) {
+                MatrixUtil.mulComponentWise(pose.pose(), 0.75F);
+              }
+
+              vertexconsumer = ItemRenderer.getCompassFoilBuffer(bufferSource, rendertype, pose);
+            } else if (flag1) {
+              vertexconsumer = ItemRenderer.getFoilBufferDirect(bufferSource, rendertype, true, itemStack.hasFoil());
+            } else {
+              vertexconsumer = ItemRenderer.getFoilBuffer(bufferSource, rendertype, true, itemStack.hasFoil());
+            }
+
+            renderer.renderModelLists(model, itemStack, combinedLight, combinedOverlay, poseStack, vertexconsumer);
+          }
+        }
+      } else {
+        IClientItemExtensions.of(itemStack).getCustomRenderer()
+            .renderByItem(itemStack, displayContext, poseStack, bufferSource, combinedLight, combinedOverlay);
+      }
+
+      poseStack.popPose();
+    }
+  }
+
+  private static boolean hasAnimatedTexture(ItemStack stack) {
+    return stack.is(ItemTags.COMPASSES) || stack.is(Items.CLOCK);
   }
 }
