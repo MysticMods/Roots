@@ -56,6 +56,7 @@ public class ClientSetup {
     event.registerBlockEntityRenderer(ModBlockEntities.GROVE_CRAFTER.get(), GroveCrafterBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.PYRE.get(), PyreBlockEntityRenderer::new);
     event.registerBlockEntityRenderer(ModBlockEntities.VISIBLE.get(), VisibleBlockEntityRenderer::new);
+    event.registerBlockEntityRenderer(ModBlockEntities.GROVE_STONE.get(), BoundedBlockEntityRenderer::new);
   }
 
   @SubscribeEvent
@@ -189,6 +190,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.ANIMAL_HARVEST.get(), AnimalHarvestParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SPROUT_PORTAL.get(), SproutPortalParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SPIRAL.get(), SpiralParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.GROVE_STONE.get(), GroveStoneParticle.Provider::new);
 
     event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());
   }

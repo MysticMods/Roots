@@ -23,8 +23,12 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
   private final ReputationRanks defaultReputationRanks = new ReputationRanks(1000, 5000, 15000, 30000);
   private ReputationRanks reputationRanks;
 
-  public Grove(ChatFormatting color) {
+  private final int color1, color2;
+
+  public Grove(ChatFormatting color, int color1, int color2) {
     this.color = color;
+    this.color1 = color1;
+    this.color2 = color2;
   }
 
   public String getOrCreateDescriptionId() {
@@ -44,6 +48,14 @@ public class Grove implements IStyled, IDataMapInitialize<Grove> {
       return getDefaultRanks();
     }
     return reputationRanks;
+  }
+
+  public int getColor1() {
+    return color1;
+  }
+
+  public int getColor2() {
+    return color2;
   }
 
   @Override

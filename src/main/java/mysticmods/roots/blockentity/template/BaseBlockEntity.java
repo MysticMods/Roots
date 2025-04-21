@@ -35,8 +35,8 @@ import java.util.List;
 
 @SuppressWarnings({"DataFlowIssue", "NullableProblems"})
 public abstract class BaseBlockEntity extends BlockEntity implements BoundedBlockEntity {
-  private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
-  protected AABB singleBlockBoundingBox;
+/*  private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
+  protected AABB singleBlockBoundingBox;*/
   protected BoundingBox boundingBox;
   protected AABB aabb;
   protected BlockCapabilityCache<IItemHandler, @org.jetbrains.annotations.Nullable Direction> lastOutput;
@@ -223,13 +223,13 @@ public abstract class BaseBlockEntity extends BlockEntity implements BoundedBloc
   }
 
   public static <T extends BlockEntity> void clientTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
-    if (pBlockEntity instanceof ClientTickBlockEntity clientBlockEntity) {
+    if (pLevel.isClientSide() && pBlockEntity instanceof ClientTickBlockEntity clientBlockEntity) {
       clientBlockEntity.clientTick(pLevel, pPos, pState);
     }
   }
 
   public static <T extends BlockEntity> void serverTick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
-    if (pBlockEntity instanceof ServerTickBlockEntity serverBlockEntity) {
+    if (!pLevel.isClientSide() && pBlockEntity instanceof ServerTickBlockEntity serverBlockEntity) {
       serverBlockEntity.serverTick((ServerLevel) pLevel, pPos, pState);
     }
   }

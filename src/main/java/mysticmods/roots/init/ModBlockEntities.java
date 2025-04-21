@@ -26,6 +26,8 @@ public class ModBlockEntities {
       .build(null));
   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PyreBlockEntity>> PYRE = BLOCK_ENTITIES.register("pyre", () -> BlockEntityType.Builder.of(PyreBlockEntity::new, ModBlocks.PYRE.get(), ModBlocks.REINFORCED_PYRE.get(), ModBlocks.SOUL_PYRE.get(), ModBlocks.REINFORCED_SOUL_PYRE.get())
       .build(null));
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GroveStoneBlockEntity>> GROVE_STONE = BLOCK_ENTITIES.register("grove_stone", () -> BlockEntityType.Builder.of(GroveStoneBlockEntity::new, ModBlocks.WILD_GROVE_STONE.get(), ModBlocks.FAIRY_GROVE_STONE.get(), ModBlocks.SPROUTING_GROVE_STONE.get(), ModBlocks.TWILIGHT_GROVE_STONE.get(), ModBlocks.FUNGAL_GROVE_STONE.get(), ModBlocks.ELEMENTAL_GROVE_STONE.get())
+      .build(null));
 
   public static void register(IEventBus bus) {
     BLOCK_ENTITIES.register(bus);

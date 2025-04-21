@@ -1,16 +1,20 @@
 package mysticmods.roots.block;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.StateProperties;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.blockentity.GroveStoneBlockEntity;
+import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.VoxelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,10 +22,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -32,7 +34,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class GroveStoneBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
+public class GroveStoneBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, EntityBlock {
   public static final DirectionProperty FACING = StateProperties.GroveStone.FACING;
   public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
   public static final BooleanProperty ACTIVE = StateProperties.ACTIVE;
@@ -175,6 +177,45 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
     } else {
       pLevel.destroyBlock(pPos.below(), false);
       pLevel.destroyBlock(pPos.below().below(), !creative);
+    }
+  }
+
+  @Override
+  public @org.jetbrains.annotations.Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    if (state.is(RootsTags.Blocks.GROVE_STONE_PRIMAL)) {
+      return null;
+    }
+
+    if (state.getValue(PART) != StateProperties.Part.TOP) {
+      return null;
+    }
+
+    return new GroveStoneBlockEntity(pos, state);
+  }
+
+  @Override
+  public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+    if (pState.getValue(PART) == StateProperties.Part.TOP && pState.getValue(ACTIVE)) {
+      double x = pPos.getX() + 0.5;
+      double y = pPos.getY() - 1.5;
+      double z = pPos.getZ() + 0.5;
+
+      for (int i = 0; i < 5; i++) {
+        int col1, col2;
+        if (pRandom.nextBoolean()) {
+          col1 = grove.value().getColor1();
+          col2 = grove.value().getColor2();
+        } else {
+          col1 = grove.value().getColor2();
+          col2 = grove.value().getColor1();
+        }
+
+        pLevel.addParticle(
+            new RootsParticleOptions(ModParticles.GROVE_STONE, col1, col2),
+            x, y + (pRandom.nextDouble() - 0.5) * 0.3, z,
+            0, 0, 0
+        );
+      }
     }
   }
 }

@@ -6,6 +6,8 @@ import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
 
+import java.util.List;
+
 public class RootsParticleProvider extends ParticleDescriptionProvider {
   public RootsParticleProvider(PackOutput output, ExistingFileHelper fileHelper) {
     super(output, fileHelper);
@@ -24,6 +26,8 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.spriteSet(ModParticles.SPIRAL.get(), RootsAPI.rl("petal"), 4, false);
 
     this.spriteSet(ModParticles.PYRE_LEAF.get(), RootsAPI.rl("leaf"), 5, false);
+    this.spriteSet(ModParticles.GROVE_STONE.get(), List.of(RootsAPI.rl("leaf_0"), RootsAPI.rl("leaf_1"), RootsAPI.rl("leaf_2"), RootsAPI.rl("leaf_3"), RootsAPI.rl("leaf_4"), RootsAPI.rl("petal_0"), RootsAPI.rl("petal_1"), RootsAPI.rl("petal_2"), RootsAPI.rl("petal_3")));
+
     this.sprite(ModParticles.SPROUT_PORTAL.get(), RootsAPI.rl("simple"));
   }
 

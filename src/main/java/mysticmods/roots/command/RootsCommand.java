@@ -306,7 +306,19 @@ public class RootsCommand {
         }
       }
       return 1;
-    }));
+    }).then(Commands.argument("rank", IntegerArgumentType.integer(1)).executes(c -> {
+      int rank = IntegerArgumentType.getInteger(c, "rank");
+      AABB bounds = new AABB(-15, -15, -15, 15, 15, 15).move(c.getSource().getPosition());
+      List<BlockPos> positions = BlockPos.betweenClosedStream(bounds).map(BlockPos::immutable).toList();
+      Level level = c.getSource().getLevel();
+      for (BlockPos pos : positions) {
+        BlockState stateAt = level.getBlockState(pos);
+        if (stateAt.is(RootsTags.Blocks.GROVE_STONES) && stateAt.hasProperty(GroveStoneBlock.RANK)) {
+          level.setBlock(pos, stateAt.setValue(GroveStoneBlock.RANK, rank).setValue(GroveStoneBlock.ACTIVE, true), 3);
+        }
+      }
+      return 1;
+    })));
     builder.then(Commands.literal("reputation").executes(c -> {
       c.getSource().sendSuccess(() -> Component.translatable("roots.commands.reputation.usage"), false);
       return 1;

@@ -33,6 +33,18 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Y;
   public static ModConfigSpec.IntValue PYRE_BOUNDS_Z;
 
+  public static ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_ZX;
+  public static ModConfigSpec.IntValue RANK_1_GROVE_BOUNDS_Y;
+
+  public static ModConfigSpec.IntValue RANK_2_GROVE_BOUNDS_ZX;
+  public static ModConfigSpec.IntValue RANK_2_GROVE_BOUNDS_Y;
+
+  public static ModConfigSpec.IntValue RANK_3_GROVE_BOUNDS_ZX;
+  public static ModConfigSpec.IntValue RANK_3_GROVE_BOUNDS_Y;
+
+  public static ModConfigSpec.IntValue RANK_4_GROVE_BOUNDS_ZX;
+  public static ModConfigSpec.IntValue RANK_4_GROVE_BOUNDS_Y;
+
   public static ModConfigSpec.BooleanValue DROP_AUBERGINE_SEEDS;
   public static ModConfigSpec.BooleanValue DROP_WILDROOT;
   public static ModConfigSpec.BooleanValue DROP_GROVE_SPORES;
@@ -73,6 +85,23 @@ public class ConfigManager {
     PYRE_BOUNDS_Z = COMMON_BUILDER.comment("the Z half value for the size of the Pyre aoe bounding box")
         .defineInRange("pyre_bounds_z", 10, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.pop();
+    COMMON_BUILDER.comment("Options for Grove Stones").push("grove_stones");
+    RANK_1_GROVE_BOUNDS_ZX = COMMON_BUILDER.comment("the X and Z half value for the size of the Rank 1 Grove Stone aoe bounding box")
+        .defineInRange("rank_1_grove_bounds_zx", 3, 1, Integer.MAX_VALUE);
+    RANK_1_GROVE_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Rank 1 Grove Stone aoe bounding box")
+        .defineInRange("rank_1_grove_bounds_y", 3, 1, Integer.MAX_VALUE);
+    RANK_2_GROVE_BOUNDS_ZX = COMMON_BUILDER.comment("the X and Z half value for the size of the Rank 2 Grove Stone aoe bounding box")
+        .defineInRange("rank_2_grove_bounds_zx", 8, 1, Integer.MAX_VALUE);
+    RANK_2_GROVE_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Rank 2 Grove Stone aoe bounding box")
+        .defineInRange("rank_2_grove_bounds_y", 8, 1, Integer.MAX_VALUE);
+    RANK_3_GROVE_BOUNDS_ZX = COMMON_BUILDER.comment("the X and Z half value for the size of the Rank 3 Grove Stone aoe bounding box")
+        .defineInRange("rank_3_grove_bounds_zx", 15, 1, Integer.MAX_VALUE);
+    RANK_3_GROVE_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Rank 3 Grove Stone aoe bounding box")
+        .defineInRange("rank_3_grove_bounds_y", 15, 1, Integer.MAX_VALUE);
+    RANK_4_GROVE_BOUNDS_ZX = COMMON_BUILDER.comment("the X and Z half value for the size of the Rank 4 Grove Stone aoe bounding box")
+        .defineInRange("rank_4_grove_bounds_zx", 30, 1, Integer.MAX_VALUE);
+    RANK_4_GROVE_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Rank 4 Grove Stone aoe bounding box")
+        .defineInRange("rank_4_grove_bounds_y", 30, 1, Integer.MAX_VALUE);
     COMMON_BUILDER.comment("Options for sprout breeding rewards").push("sprouts");
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")
         .defineInRange("default_chance", 10, 1, 100);
