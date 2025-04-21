@@ -109,6 +109,12 @@ public class CreativeTabEvents {
       event.accept(ModItems.TERRAN_SOIL.get());
 
       event.accept(ModItems.PRIMAL_GROVE_STONE.get());
+      event.accept(ModItems.WILD_GROVE_STONE.get());
+      event.accept(ModItems.FAIRY_GROVE_STONE.get());
+      event.accept(ModItems.ELEMENTAL_GROVE_STONE.get());
+      event.accept(ModItems.TWILIGHT_GROVE_STONE.get());
+      event.accept(ModItems.FUNGAL_GROVE_STONE.get());
+      event.accept(ModItems.SPROUTING_GROVE_STONE.get());
 
       event.accept(ModItems.GROVE_CRAFTER.get());
       event.accept(ModItems.GROVE_PEDESTAL.get());

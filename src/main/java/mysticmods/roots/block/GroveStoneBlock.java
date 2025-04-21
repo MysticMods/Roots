@@ -1,11 +1,16 @@
 package mysticmods.roots.block;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.reference.Shapes;
+import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.util.VoxelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,10 +24,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -35,28 +37,39 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
   public static final EnumProperty<StateProperties.Part> PART = StateProperties.GroveStone.PART;
   public static final BooleanProperty ACTIVE = StateProperties.ACTIVE;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  public static final IntegerProperty RANK = StateProperties.GroveStone.RANK;
 
   public static final VoxelShape[] EAST_WEST = {VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_TOP, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_MIDDLE, Direction.EAST), VoxelUtil.rotateHorizontal(Shapes.GROVE_STONE_BOTTOM, Direction.EAST)};
   public static final VoxelShape[] NORTH_SOUTH = {Shapes.GROVE_STONE_TOP, Shapes.GROVE_STONE_MIDDLE, Shapes.GROVE_STONE_BOTTOM};
 
-  public GroveStoneBlock(Properties builder) {
+  private final Holder<Grove> grove;
+
+  public GroveStoneBlock(Holder<Grove> grove, Properties builder) {
     super(builder);
-    this.registerDefaultState(defaultBlockState().setValue(ACTIVE, false).setValue(PART, StateProperties.Part.BOTTOM).setValue(WATERLOGGED, false));
+    this.registerDefaultState(defaultBlockState().setValue(ACTIVE, false).setValue(PART, StateProperties.Part.BOTTOM)
+        .setValue(WATERLOGGED, false));
+    this.grove = grove;
+  }
+
+  public Holder<Grove> getGrove() {
+    return grove;
   }
 
   @Override
   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-    return simpleCodec(GroveStoneBlock::new);
+    return RecordCodecBuilder.mapCodec(instance -> instance.group(RootsRegistries.GROVES.holderByNameCodec()
+            .fieldOf("grove").forGetter(o -> ((GroveStoneBlock) o).getGrove()), propertiesCodec())
+        .apply(instance, GroveStoneBlock::new));
   }
 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
     super.createBlockStateDefinition(pBuilder);
-    pBuilder.add(PART, ACTIVE, FACING, WATERLOGGED);
+    pBuilder.add(PART, ACTIVE, FACING, WATERLOGGED, RANK);
   }
 
   @Override
-  public VoxelShape getShape(BlockState state, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
+  public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
     VoxelShape[] parts;
     Direction facing = state.getValue(FACING);
 

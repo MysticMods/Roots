@@ -6,12 +6,12 @@ import net.minecraft.world.level.block.Block;
 
 public enum GroveType {
   PRIMAL(RootsTags.Blocks.GROVE_STONE_PRIMAL),
-  ELEMENTAL,
-  FAIRY,
-  FUNGAL,
-  SPROUTING,
-  TWILIGHT,
-  WILD;
+  ELEMENTAL(RootsTags.Blocks.GROVE_STONE_ELEMENTAL),
+  FAIRY(RootsTags.Blocks.GROVE_STONE_FAIRY),
+  FUNGAL(RootsTags.Blocks.GROVE_STONE_FUNGAL),
+  SPROUTING(RootsTags.Blocks.GROVE_STONE_SPROUTING),
+  TWILIGHT(RootsTags.Blocks.GROVE_STONE_TWILIGHT),
+  WILD(RootsTags.Blocks.GROVE_STONE_WILD);
 
   private final TagKey<Block> tag;
 

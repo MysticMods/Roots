@@ -127,6 +127,12 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.RUNED_WARPED_STEM, RootsTags.Items.RUNED_WARPED_STEM);
     this.copy(RootsTags.Blocks.GROVE_STONES, RootsTags.Items.GROVE_STONES);
     this.copy(RootsTags.Blocks.GROVE_STONE_PRIMAL, RootsTags.Items.GROVE_STONE_PRIMAL);
+    this.copy(RootsTags.Blocks.GROVE_STONE_ELEMENTAL, RootsTags.Items.GROVE_STONE_ELEMENTAL);
+    this.copy(RootsTags.Blocks.GROVE_STONE_FAIRY, RootsTags.Items.GROVE_STONE_FAIRY);
+    this.copy(RootsTags.Blocks.GROVE_STONE_FUNGAL, RootsTags.Items.GROVE_STONE_FUNGAL);
+    this.copy(RootsTags.Blocks.GROVE_STONE_SPROUTING, RootsTags.Items.GROVE_STONE_SPROUTING);
+    this.copy(RootsTags.Blocks.GROVE_STONE_TWILIGHT, RootsTags.Items.GROVE_STONE_TWILIGHT);
+    this.copy(RootsTags.Blocks.GROVE_STONE_WILD, RootsTags.Items.GROVE_STONE_WILD);
     this.copy(RootsTags.Blocks.PEDESTALS, RootsTags.Items.PEDESTALS);
     this.copy(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Items.RITUAL_PEDESTALS);
     this.copy(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Items.GROVE_PEDESTALS);

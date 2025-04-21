@@ -146,6 +146,18 @@ public class RootsItemModelProvider extends ItemModelProvider {
     withExistingParent("bafflecap_block", modLoc("block/bafflecap_block_inventory"));
     withExistingParent(ModBlocks.PRIMAL_GROVE_STONE.getKey().location()
         .getPath(), modLoc("block/primal_grove_stone_inventory"));
+    withExistingParent(ModBlocks.WILD_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/wild_grove_stone_inventory"));
+    withExistingParent(ModBlocks.SPROUTING_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/sprouting_grove_stone_inventory"));
+    withExistingParent(ModBlocks.FAIRY_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/fairy_grove_stone_inventory"));
+    withExistingParent(ModBlocks.ELEMENTAL_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/elemental_grove_stone_inventory"));
+    withExistingParent(ModBlocks.TWILIGHT_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/twilight_grove_stone_inventory"));
+    withExistingParent(ModBlocks.FUNGAL_GROVE_STONE.getKey().location()
+        .getPath(), modLoc("block/fungal_grove_stone_inventory"));
     simpleBlockItem(ModBlocks.INCENSE_BURNER.get());
     simpleBlockItem(ModBlocks.MORTAR.get());
     simpleBlockItem(ModBlocks.PYRE.get());

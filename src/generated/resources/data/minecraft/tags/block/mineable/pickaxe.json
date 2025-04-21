@@ -50,11 +50,11 @@
     "roots:runestone_brick_wall",
     "roots:runestone_tile_wall",
     "roots:mossy_runestone_wall",
-    "roots:primal_grove_stone",
     "roots:incense_burner",
     "roots:mortar",
     "roots:unending_bowl",
     "roots:grove_crafter",
+    "#roots:grove_stones",
     "#roots:pedestals/ritual"
   ]
 }

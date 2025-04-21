@@ -298,6 +298,12 @@ public class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.HANGING_GROVE_MOSS);
     addBlock(ModBlocks.BAFFLECAP_BLOCK);
     addBlock(ModBlocks.PRIMAL_GROVE_STONE);
+    addBlock(ModBlocks.WILD_GROVE_STONE);
+    addBlock(ModBlocks.TWILIGHT_GROVE_STONE);
+    addBlock(ModBlocks.ELEMENTAL_GROVE_STONE);
+    addBlock(ModBlocks.SPROUTING_GROVE_STONE);
+    addBlock(ModBlocks.FAIRY_GROVE_STONE);
+    addBlock(ModBlocks.FUNGAL_GROVE_STONE);
     addBlock(ModBlocks.INCENSE_BURNER);
     addBlock(ModBlocks.MORTAR);
     addBlock(ModBlocks.PYRE);

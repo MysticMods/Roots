@@ -202,35 +202,6 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     getMultipartBuilder(ModBlocks.BAFFLECAP_BLOCK.get()).part().modelFile(modelOutside).uvLock(true).rotationX(90)
         .addModel().condition(HugeMushroomBlock.DOWN, true).end();
 
-    // Primal grove stone
-    getVariantBuilder(ModBlocks.PRIMAL_GROVE_STONE.get())
-        .forAllStates(state -> {
-          boolean valid = state.getValue(StateProperties.ACTIVE);
-          BlockModelBuilder model = switch (state.getValue(GroveStoneBlock.PART)) {
-            case MIDDLE ->
-                models().withExistingParent("primal_grove_stone_middle" + (valid ? "_valid" : ""), modLoc("block/complex/grove_stone_middle"));
-            case BOTTOM ->
-                models().withExistingParent("primal_grove_stone_bottom" + (valid ? "_valid" : ""), modLoc("block/complex/grove_stone_bottom"));
-            default ->
-                models().withExistingParent("primal_grove_stone_top" + (valid ? "_valid" : ""), modLoc("block/complex/grove_stone_top"));
-          };
-
-          ResourceLocation active = modLoc("block/ob_stone_active");
-          if (valid) {
-            model.texture("monolith", active);
-            model.texture("particle", active);
-          }
-
-          models().withExistingParent("primal_grove_stone_inventory", modLoc("block/complex/grove_stone_full"));
-
-          Direction dir = state.getValue(GroveStoneBlock.FACING);
-          return ConfiguredModel.builder()
-              .modelFile(model)
-              .rotationX(0)
-              .rotationY(dir.getAxis().isVertical() ? 0 : (int) dir.toYRot() % 360)
-              .build();
-        });
-
     ModelFile incenseBurner = models().withExistingParent("incense_burner", modLoc("block/complex/incense_burner"));
     getVariantBuilder(ModBlocks.INCENSE_BURNER.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(incenseBurner).build());
@@ -320,7 +291,6 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     crop(ModBlocks.WILDEWHEET_CROP, false);
     crop(ModBlocks.AUBERGINE_CROP, false);
 
-
     ModelFile cropcrop = models().withExistingParent("wild_aubergine", ResourceLocation.withDefaultNamespace("block/crop"))
         .renderType("cutout").texture("crop", modLoc("block/wild_aubergine")).renderType("cutout");
     getVariantBuilder(ModBlocks.WILD_AUBERGINE.get())
@@ -332,6 +302,50 @@ public class RootsBlockStateProvider extends BlockStateProvider {
         .texture("plant", modLoc("block/stonepetal")).renderType("cutout"));
     simpleBlock(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), models().withExistingParent("potted_wildwood_sapling", mcLoc("block/flower_pot_cross"))
         .texture("plant", modLoc("block/wildwood_sapling")).renderType("cutout"));
+
+    groveStone(ModBlocks.PRIMAL_GROVE_STONE);
+    groveStone(ModBlocks.WILD_GROVE_STONE);
+    groveStone(ModBlocks.FAIRY_GROVE_STONE);
+    groveStone(ModBlocks.TWILIGHT_GROVE_STONE);
+    groveStone(ModBlocks.ELEMENTAL_GROVE_STONE);
+    groveStone(ModBlocks.SPROUTING_GROVE_STONE);
+    groveStone(ModBlocks.FUNGAL_GROVE_STONE);
+  }
+
+  private void groveStone (Holder<Block> holder) {
+    getVariantBuilder(holder.value())
+        .forAllStates(state -> {
+          boolean valid = state.getValue(StateProperties.ACTIVE);
+          String partName = state.getValue(GroveStoneBlock.PART).getSerializedName();
+          String groveType = ((GroveStoneBlock)state.getBlock()).getGrove().getKey().location().getPath();
+          String name = groveType + "_grove_stone_" + partName;
+          if (valid) {
+            name = name + "_valid";
+          }
+          BlockModelBuilder model = models().withExistingParent(name, modLoc("block/complex/grove_stone_" + partName));
+
+          ResourceLocation active;
+
+          if (groveType.equals("primal")) {
+            active = modLoc("block/ob_stone_active");
+            models().withExistingParent("primal_grove_stone_inventory", modLoc("block/complex/grove_stone_full"));
+          } else {
+            active = modLoc("block/ob_stone_active_" + groveType);
+            models().withExistingParent(groveType + "_grove_stone_inventory", modLoc("block/complex/grove_stone_full")).texture("monolith", active).texture("particle", active);
+          }
+
+          if (valid) {
+            model.texture("monolith", active);
+            model.texture("particle", active);
+          }
+
+          Direction dir = state.getValue(GroveStoneBlock.FACING);
+          return ConfiguredModel.builder()
+              .modelFile(model)
+              .rotationX(0)
+              .rotationY(dir.getAxis().isVertical() ? 0 : (int) dir.toYRot() % 360)
+              .build();
+        });
   }
 
   private void crop(Holder<Block> holder, boolean cross) {

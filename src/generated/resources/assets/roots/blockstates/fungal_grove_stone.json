@@ -1,0 +1,3064 @@
+{
+  "variants": {
+    "active=false,facing=east,part=bottom,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=bottom,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=middle,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=east,part=top,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 270
+    },
+    "active=false,facing=north,part=bottom,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=bottom,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=middle,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=north,part=top,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 180
+    },
+    "active=false,facing=south,part=bottom,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=bottom,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom"
+    },
+    "active=false,facing=south,part=middle,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=middle,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle"
+    },
+    "active=false,facing=south,part=top,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=south,part=top,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top"
+    },
+    "active=false,facing=west,part=bottom,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=bottom,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=middle,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=false,facing=west,part=top,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top",
+      "y": 90
+    },
+    "active=true,facing=east,part=bottom,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=bottom,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=middle,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=east,part=top,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 270
+    },
+    "active=true,facing=north,part=bottom,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=bottom,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=middle,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=north,part=top,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 180
+    },
+    "active=true,facing=south,part=bottom,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=bottom,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid"
+    },
+    "active=true,facing=south,part=middle,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=middle,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid"
+    },
+    "active=true,facing=south,part=top,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=south,part=top,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid"
+    },
+    "active=true,facing=west,part=bottom,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=bottom,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_bottom_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=middle,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_middle_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=0,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=0,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=1,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=1,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=10,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=10,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=11,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=11,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=12,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=12,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=13,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=13,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=14,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=14,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=15,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=15,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=16,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=16,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=2,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=2,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=3,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=3,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=4,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=4,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=5,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=5,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=6,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=6,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=7,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=7,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=8,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=8,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=9,waterlogged=false": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    },
+    "active=true,facing=west,part=top,rank=9,waterlogged=true": {
+      "model": "roots:block/fungal_grove_stone_top_valid",
+      "y": 90
+    }
+  }
+}

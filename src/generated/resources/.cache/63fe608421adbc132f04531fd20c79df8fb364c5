@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-16T13:56:13.5417711	Roots Item Tags
+// 1.21.1	2025-04-21T13:56:45.4767014	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -104,8 +104,14 @@ c7500f481948159c566ddedb8a200fe63a413a56 data/roots/tags/item/fertilizers.json
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/item/flint.json
 7c23110fe0420d3a96fab43595db02c682e00c68 data/roots/tags/item/foraging_eligible.json
 39ecf884f3bb83a88b7d180276a7ac692c52fc00 data/roots/tags/item/grove_crafter_activation.json
-c0e5ac26bc57a1a6ba571b21d7fab9d6bbb6d318 data/roots/tags/item/grove_stones.json
+0b84a7b844d869f56ca22683e394d08ece1c1d7e data/roots/tags/item/grove_stones.json
+fe934ceccc4232fc0d8a73f6ae26291c0403badb data/roots/tags/item/grove_stones/elemental.json
+b0e60b9a7562b461a7ff4e1d6e2e8c6460f2ff40 data/roots/tags/item/grove_stones/fairy.json
+a10f4893aa793d9a58932b14d983daca8e055665 data/roots/tags/item/grove_stones/fungal.json
 9ce47e233dd6af731b5f5a7562ccb7fa94f97db5 data/roots/tags/item/grove_stones/primal.json
+ecd2f0dde1c61318a3c87219ac7830a7061e71ac data/roots/tags/item/grove_stones/sprouting.json
+bbbdabc47adfef24d589a4860b387406ffacd3bd data/roots/tags/item/grove_stones/twilight.json
+ff28b287e0c4905db9dbe63238a5d61bd7999497 data/roots/tags/item/grove_stones/wild.json
 a49f80806de2f40b79a2700f33930cc814298cf8 data/roots/tags/item/herbs.json
 d6ef38e38b2457620f02a7c7cd8c35b9915bded1 data/roots/tags/item/herbs/bafflecap.json
 e4c7774a71c33e82d562f08c73d3ee806325fd74 data/roots/tags/item/herbs/cloud_berry.json

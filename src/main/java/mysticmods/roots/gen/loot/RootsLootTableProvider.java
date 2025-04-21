@@ -18,6 +18,7 @@ import mysticmods.roots.mixin.accessor.AccessorMixinCropBlock;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -404,12 +405,6 @@ public class RootsLootTableProvider {
                   .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(1, 0.05f)))))));
       add(ModBlocks.BAFFLECAP_BLOCK.get(), createSilkTouchDispatchTable(ModBlocks.BAFFLECAP_BLOCK.get(), applyExplosionDecay(ModBlocks.BAFFLECAP_BLOCK.get(), LootItem.lootTableItem(ModItems.BAFFLECAP.get())
           .apply(SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, 0.05f))))));
-      add(ModBlocks.PRIMAL_GROVE_STONE.get(), applyExplosionDecay(ModBlocks.PRIMAL_GROVE_STONE.get(), LootTable.lootTable()
-          .withPool(LootPool.lootPool()
-              .when(new LootItemBlockStatePropertyCondition.Builder(ModBlocks.PRIMAL_GROVE_STONE.get()).setProperties(StatePropertiesPredicate.Builder.properties()
-                  .hasProperty(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)))
-              .add(LootItem.lootTableItem(ModItems.PRIMAL_GROVE_STONE.get())
-                  .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))));
       dropSelf(ModBlocks.INCENSE_BURNER.get());
       dropSelf(ModBlocks.MORTAR.get());
       dropSelf(ModBlocks.PYRE.get());
@@ -440,6 +435,13 @@ public class RootsLootTableProvider {
       add(ModBlocks.POTTED_BAFFLECAP.get(), createPotFlowerItemTable(ModBlocks.BAFFLECAP.get()));
       add(ModBlocks.POTTED_STONEPETAL.get(), createPotFlowerItemTable(ModBlocks.STONEPETAL.get()));
       add(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get()));
+      addGroveStoneDrops(ModBlocks.PRIMAL_GROVE_STONE, ModItems.PRIMAL_GROVE_STONE);
+      addGroveStoneDrops(ModBlocks.WILD_GROVE_STONE, ModItems.WILD_GROVE_STONE);
+      addGroveStoneDrops(ModBlocks.FUNGAL_GROVE_STONE, ModItems.FUNGAL_GROVE_STONE);
+      addGroveStoneDrops(ModBlocks.FAIRY_GROVE_STONE, ModItems.FAIRY_GROVE_STONE);
+      addGroveStoneDrops(ModBlocks.SPROUTING_GROVE_STONE, ModItems.SPROUTING_GROVE_STONE);
+      addGroveStoneDrops(ModBlocks.ELEMENTAL_GROVE_STONE, ModItems.ELEMENTAL_GROVE_STONE);
+      addGroveStoneDrops(ModBlocks.TWILIGHT_GROVE_STONE, ModItems.TWILIGHT_GROVE_STONE);
     }
 
     protected void addElementalCropDrops(ElementalCropBlock cropBlock, Item cropItem, ElementalType matchingSoil) {
@@ -587,6 +589,15 @@ public class RootsLootTableProvider {
                       )
               )
       ));
+    }
+
+    protected void addGroveStoneDrops (Holder<Block> groveStone, Holder<Item> groveStoneItem) {
+      add(groveStone.value(), applyExplosionDecay(groveStoneItem.value(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .when(new LootItemBlockStatePropertyCondition.Builder(groveStone.value()).setProperties(StatePropertiesPredicate.Builder.properties()
+                  .hasProperty(GroveStoneBlock.PART, StateProperties.Part.BOTTOM)))
+              .add(LootItem.lootTableItem(groveStoneItem.value())
+                  .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))));
     }
 
     protected void addCropDrops(Block cropBlock, Item grownCropItem, Item seedsItem, IntegerProperty ageProperty) {

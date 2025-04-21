@@ -86,6 +86,12 @@ public class RootsTags {
     public static final TagKey<Block> GROVE_STONES = modTag("grove_stones");
 
     public static final TagKey<Block> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
+    public static final TagKey<Block> GROVE_STONE_WILD = modTag("grove_stones/wild");
+    public static final TagKey<Block> GROVE_STONE_TWILIGHT = modTag("grove_stones/twilight");
+    public static final TagKey<Block> GROVE_STONE_ELEMENTAL = modTag("grove_stones/elemental");
+    public static final TagKey<Block> GROVE_STONE_FAIRY = modTag("grove_stones/fairy");
+    public static final TagKey<Block> GROVE_STONE_FUNGAL = modTag("grove_stones/fungal");
+    public static final TagKey<Block> GROVE_STONE_SPROUTING = modTag("grove_stones/sprouting");
 
     // Catalyst plates, offering plates and incense plates
     public static final TagKey<Block> PEDESTALS = modTag("pedestals");
@@ -328,6 +334,12 @@ public class RootsTags {
     public static final TagKey<Item> RUNED_WARPED_STEM = modTag("logs/runed/warped");
     public static final TagKey<Item> GROVE_STONES = modTag("grove_stones");
     public static final TagKey<Item> GROVE_STONE_PRIMAL = modTag("grove_stones/primal");
+    public static final TagKey<Item> GROVE_STONE_WILD = modTag("grove_stones/wild");
+    public static final TagKey<Item> GROVE_STONE_TWILIGHT = modTag("grove_stones/twilight");
+    public static final TagKey<Item> GROVE_STONE_ELEMENTAL = modTag("grove_stones/elemental");
+    public static final TagKey<Item> GROVE_STONE_FAIRY = modTag("grove_stones/fairy");
+    public static final TagKey<Item> GROVE_STONE_FUNGAL = modTag("grove_stones/fungal");
+    public static final TagKey<Item> GROVE_STONE_SPROUTING = modTag("grove_stones/sprouting");
     public static final TagKey<Item> PEDESTALS = modTag("pedestals");
     public static final TagKey<Item> RITUAL_PEDESTALS = modTag("pedestals/ritual");
     public static final TagKey<Item> GROVE_PEDESTALS = modTag("pedestals/grove");

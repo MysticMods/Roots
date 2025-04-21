@@ -177,6 +177,12 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> DISPLAY_PEDESTAL = ITEMS.register("display_pedestal", () -> new BlockItem(ModBlocks.DISPLAY_PEDESTAL.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> BAFFLECAP_BLOCK = ITEMS.register("bafflecap_block", () -> new BlockItem(ModBlocks.BAFFLECAP_BLOCK.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> PRIMAL_GROVE_STONE = ITEMS.register("primal_grove_stone", () -> new BlockItem(ModBlocks.PRIMAL_GROVE_STONE.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> WILD_GROVE_STONE = ITEMS.register("wild_grove_stone", () -> new BlockItem(ModBlocks.WILD_GROVE_STONE.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> SPROUTING_GROVE_STONE = ITEMS.register("sprouting_grove_stone", () -> new BlockItem(ModBlocks.SPROUTING_GROVE_STONE.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> TWILIGHT_GROVE_STONE = ITEMS.register("twilight_grove_stone", () -> new BlockItem(ModBlocks.TWILIGHT_GROVE_STONE.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> FUNGAL_GROVE_STONE = ITEMS.register("fungal_grove_stone", () -> new BlockItem(ModBlocks.FUNGAL_GROVE_STONE.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> FAIRY_GROVE_STONE = ITEMS.register("fairy_grove_stone", () -> new BlockItem(ModBlocks.FAIRY_GROVE_STONE.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> ELEMENTAL_GROVE_STONE = ITEMS.register("elemental_grove_stone", () -> new BlockItem(ModBlocks.ELEMENTAL_GROVE_STONE.get(), new Item.Properties()));
   // TODO: Info
   public static DeferredHolder<Item, BlockItem> INCENSE_BURNER = ITEMS.register("incense_burner", () -> new BlockItem(ModBlocks.INCENSE_BURNER.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> MORTAR = ITEMS.register("mortar", () -> new BlockItem(ModBlocks.MORTAR.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));

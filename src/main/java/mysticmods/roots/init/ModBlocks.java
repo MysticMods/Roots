@@ -182,6 +182,7 @@ public class ModBlocks {
   public static DeferredHolder<Block, SylvanLightBlock> SYLVAN_LIGHT = BLOCKS.register("sylvan_light", () -> new SylvanLightBlock(BlockBehaviour.Properties.of()
       .instabreak().lightLevel((o) -> 15).noCollission().noLootTable().noTerrainParticles().sound(SoundType.WOOL)
       .noOcclusion()));
+
   static {
     BLOCKS.addAlias(RootsAPI.rl("fey_light"), RootsAPI.rl("sylvan_light"));
   }
@@ -220,7 +221,25 @@ public class ModBlocks {
   public static DeferredHolder<Block, HugeMushroomBlock> BAFFLECAP_BLOCK = BLOCKS.register("bafflecap_block", () -> new HugeMushroomBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.BASS).strength(0.2f).sound(SoundType.WOOD)
       .ignitedByLava()));
-  public static DeferredHolder<Block, GroveStoneBlock> PRIMAL_GROVE_STONE = BLOCKS.register("primal_grove_stone", () -> new GroveStoneBlock(BlockBehaviour.Properties.of()
+  public static DeferredHolder<Block, GroveStoneBlock> PRIMAL_GROVE_STONE = BLOCKS.register("primal_grove_stone", () -> new GroveStoneBlock(ModGroves.PRIMAL, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(2.0f, 6.0f).forceSolidOn()));
+  public static DeferredHolder<Block, GroveStoneBlock> FAIRY_GROVE_STONE = BLOCKS.register("fairy_grove_stone", () -> new GroveStoneBlock(ModGroves.FAIRY, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(2.0f, 6.0f).forceSolidOn()));
+  public static DeferredHolder<Block, GroveStoneBlock> WILD_GROVE_STONE = BLOCKS.register("wild_grove_stone", () -> new GroveStoneBlock(ModGroves.WILD, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(2.0f, 6.0f).forceSolidOn()));
+  public static DeferredHolder<Block, GroveStoneBlock> FUNGAL_GROVE_STONE = BLOCKS.register("fungal_grove_stone", () -> new GroveStoneBlock(ModGroves.FUNGAL, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(2.0f, 6.0f).forceSolidOn()));
+  public static DeferredHolder<Block, GroveStoneBlock> ELEMENTAL_GROVE_STONE = BLOCKS.register("elemental_grove_stone", () -> new GroveStoneBlock(ModGroves.ELEMENTAL, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(2.0f, 6.0f).forceSolidOn()));
+  public static DeferredHolder<Block, GroveStoneBlock> SPROUTING_GROVE_STONE = BLOCKS.register("sprouting_grove_stone", () -> new GroveStoneBlock(ModGroves.SPROUTING, BlockBehaviour.Properties.of()
+      .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+      .strength(2.0f, 6.0f).forceSolidOn()));
+  public static DeferredHolder<Block, GroveStoneBlock> TWILIGHT_GROVE_STONE = BLOCKS.register("twilight_grove_stone", () -> new GroveStoneBlock(ModGroves.TWILIGHT, BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
   public static DeferredHolder<Block, IncenseBurnerBlock> INCENSE_BURNER = BLOCKS.register("incense_burner", () -> new IncenseBurnerBlock(BlockBehaviour.Properties.of()

@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class StateProperties {
   public static class GroveStone {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final PartProperty PART = PartProperty.create("part");
+    public static final IntegerProperty RANK = IntegerProperty.create("rank", 0, 16);
   }
 
   public static class PartProperty extends EnumProperty<Part> {
