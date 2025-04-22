@@ -1,7 +1,6 @@
 package mysticmods.roots.client.particle;
 
 
-import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -32,7 +31,8 @@ public class GroveStoneParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return RootsParticleRenderTypes.GLOW;
+    return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    //return RootsParticleRenderTypes.GLOW;
   }
 
   @Override
