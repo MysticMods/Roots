@@ -56,7 +56,7 @@ public class GroveStoneParticle extends TextureSheetParticle {
       this.oRoll = this.roll;
       this.roll += rollAmount;
 
-      float fadeStart = 0.85f;
+      float fadeStart = 0.9f;
       if (f < fadeStart) {
         this.alpha = 1f;
       } else {
