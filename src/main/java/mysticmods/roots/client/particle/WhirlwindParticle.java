@@ -37,7 +37,7 @@ public class WhirlwindParticle extends TextureSheetParticle {
     this.alpha = 1f;
     this.xd = xSpeed;
     this.yd = ySpeed;
-    this.zd = ySpeed;
+    this.zd = zSpeed;
     this.hasPhysics = false;
     this.quadSize = 0.05f;
     this.gravity = 0;

@@ -13,7 +13,7 @@ public class GroveStoneParticle extends TextureSheetParticle {
 
   protected GroveStoneParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int c1, int c2) {
     super(level, x, y, z, xSpeed, ySpeed, zSpeed);
-    this.lifetime = 260;
+    this.lifetime = 60;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
     this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
     this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
@@ -23,9 +23,10 @@ public class GroveStoneParticle extends TextureSheetParticle {
     this.alpha = 1f;
     this.xd = xSpeed;
     this.yd = ySpeed;
-    this.zd = ySpeed;
+    this.zd = zSpeed;
     this.hasPhysics = false;
     this.quadSize = 0.05f;
+    this.gravity = 0.0f;
     this.rollAmount = 0.1f + random.nextFloat() * 0.2f; // randomized roll amount
   }
 

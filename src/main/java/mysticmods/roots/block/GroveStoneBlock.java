@@ -199,24 +199,70 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
   @Override
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
     if (pState.getValue(PART) == StateProperties.Part.TOP && pState.getValue(ACTIVE)) {
-      double x = pPos.getX() + 0.5;
-      double y = pPos.getY() - 1.5;
-      double z = pPos.getZ() + 0.5;
+      Direction facing = pState.getValue(FACING);
+      double centerX = pPos.getX() + 0.5;
+      double centerY = pPos.getY() + 0.3;
+      double centerZ = pPos.getZ() + 0.5;
 
-      for (int i = 0; i < 5; i++) {
-        int col1, col2;
-        if (pRandom.nextBoolean()) {
-          col1 = grove.value().getColor1();
-          col2 = grove.value().getColor2();
-        } else {
-          col1 = grove.value().getColor2();
-          col2 = grove.value().getColor1();
-        }
+      int col1 = grove.value().getColor1();
+      int col2 = grove.value().getColor2();
+      if (pRandom.nextBoolean()) {
+        int temp = col1;
+        col1 = col2;
+        col2 = temp;
+      }
+
+      double baseAngle1 = switch (facing) {
+        case SOUTH -> Math.PI / 2;
+        case WEST -> Math.PI;
+        case NORTH -> -Math.PI / 2;
+        default -> 0.0;
+      };
+
+      double baseAngle2 = switch (facing) {
+        case SOUTH -> -Math.PI / 2;
+        case WEST -> 0.0;
+        case NORTH -> Math.PI / 2;
+        default -> Math.PI;
+      };
+
+      for (int i = 0; i < 3; i++) {
+        // Spread angle in radians: ±15° (≈0.26 radians)
+        double angleOffset = (pRandom.nextDouble() - 0.5) * Math.toRadians(25);
+
+
+        double finalAngle = baseAngle1 + angleOffset;
+
+        double dx = Math.cos(finalAngle);
+        double dz = Math.sin(finalAngle);
+
+        double velocityScale = 0.05 + pRandom.nextDouble() * 0.06;
+
+        dx *= velocityScale;
+        dz *= velocityScale;
+
+        double dy = 0.01 + (pRandom.nextDouble() - 0.5) * 0.05;
 
         pLevel.addParticle(
             new RootsParticleOptions(ModParticles.GROVE_STONE, col1, col2),
-            x, y + (pRandom.nextDouble() - 0.5) * 0.3, z,
-            0, 0, 0
+            centerX, centerY, centerZ,
+            dx, dy, dz
+        );
+
+        finalAngle = baseAngle2 + angleOffset;
+
+        dx = Math.cos(finalAngle);
+        dz = Math.sin(finalAngle);
+
+        dx *= velocityScale;
+        dz *= velocityScale;
+
+        dy = 0.01 + (pRandom.nextDouble() - 0.5) * 0.05;
+
+        pLevel.addParticle(
+            new RootsParticleOptions(ModParticles.GROVE_STONE, col1, col2),
+            centerX, centerY, centerZ,
+            dx, dy, dz
         );
       }
     }
