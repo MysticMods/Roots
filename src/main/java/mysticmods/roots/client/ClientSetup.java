@@ -26,7 +26,6 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -191,6 +190,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.SPROUT_PORTAL.get(), SproutPortalParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SPIRAL.get(), SpiralParticle.Provider::new);
     event.registerSpriteSet(ModParticles.GROVE_STONE.get(), GroveStoneParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.WHIRLWIND.get(), WhirlwindParticle.Provider::new);
 
     event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());
   }

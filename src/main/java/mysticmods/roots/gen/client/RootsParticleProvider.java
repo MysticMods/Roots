@@ -3,6 +3,7 @@ package mysticmods.roots.gen.client;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModParticles;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
 
@@ -26,7 +27,9 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.spriteSet(ModParticles.SPIRAL.get(), RootsAPI.rl("petal"), 4, false);
 
     this.spriteSet(ModParticles.PYRE_LEAF.get(), RootsAPI.rl("leaf"), 5, false);
-    this.spriteSet(ModParticles.GROVE_STONE.get(), List.of(RootsAPI.rl("leaf_0"), RootsAPI.rl("leaf_1"), RootsAPI.rl("leaf_2"), RootsAPI.rl("leaf_3"), RootsAPI.rl("leaf_4"), RootsAPI.rl("petal_0"), RootsAPI.rl("petal_1"), RootsAPI.rl("petal_2"), RootsAPI.rl("petal_3")));
+    List<ResourceLocation> leafPetals = List.of(RootsAPI.rl("leaf_0"), RootsAPI.rl("leaf_1"), RootsAPI.rl("leaf_2"), RootsAPI.rl("leaf_3"), RootsAPI.rl("leaf_4"), RootsAPI.rl("petal_0"), RootsAPI.rl("petal_1"), RootsAPI.rl("petal_2"), RootsAPI.rl("petal_3"));
+    this.spriteSet(ModParticles.GROVE_STONE.get(), leafPetals);
+    this.spriteSet(ModParticles.WHIRLWIND.get(), leafPetals);
 
     this.sprite(ModParticles.SPROUT_PORTAL.get(), RootsAPI.rl("simple"));
   }
