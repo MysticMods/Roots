@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -200,9 +201,7 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
   public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
     if (pState.getValue(PART) == StateProperties.Part.TOP && pState.getValue(ACTIVE)) {
       Direction facing = pState.getValue(FACING);
-      double centerX = pPos.getX() + 0.5;
-      double centerY = pPos.getY() + 0.3;
-      double centerZ = pPos.getZ() + 0.5;
+      Vec3 center = new Vec3(pPos.getX() + 0.5, pPos.getY() + 0.3, pPos.getZ() + 0.5);
 
       int col1 = grove.value().getColor1();
       int col2 = grove.value().getColor2();
@@ -212,60 +211,47 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
         col2 = temp;
       }
 
-      double baseAngle1 = switch (facing) {
-        case SOUTH -> Math.PI / 2;
-        case WEST -> Math.PI;
-        case NORTH -> -Math.PI / 2;
-        default -> 0.0;
-      };
+      // Define angles based on the facing direction
+      double[] angles = getBaseAngles(facing);
 
-      double baseAngle2 = switch (facing) {
-        case SOUTH -> -Math.PI / 2;
-        case WEST -> 0.0;
-        case NORTH -> Math.PI / 2;
-        default -> Math.PI;
-      };
+      if (pRandom.nextBoolean()) {
+        double angleOffset = (pRandom.nextDouble() - 0.5) * Math.toRadians(35);
 
-      for (int i = 0; i < 3; i++) {
-        // Spread angle in radians: ±15° (≈0.26 radians)
-        double angleOffset = (pRandom.nextDouble() - 0.5) * Math.toRadians(25);
-
-
-        double finalAngle = baseAngle1 + angleOffset;
-
-        double dx = Math.cos(finalAngle);
-        double dz = Math.sin(finalAngle);
-
-        double velocityScale = 0.05 + pRandom.nextDouble() * 0.06;
-
-        dx *= velocityScale;
-        dz *= velocityScale;
-
-        double dy = 0.01 + (pRandom.nextDouble() - 0.5) * 0.05;
-
-        pLevel.addParticle(
-            new RootsParticleOptions(ModParticles.GROVE_STONE, col1, col2),
-            centerX, centerY, centerZ,
-            dx, dy, dz
-        );
-
-        finalAngle = baseAngle2 + angleOffset;
-
-        dx = Math.cos(finalAngle);
-        dz = Math.sin(finalAngle);
-
-        dx *= velocityScale;
-        dz *= velocityScale;
-
-        dy = 0.01 + (pRandom.nextDouble() - 0.5) * 0.05;
-
-        pLevel.addParticle(
-            new RootsParticleOptions(ModParticles.GROVE_STONE, col1, col2),
-            centerX, centerY, centerZ,
-            dx, dy, dz
-        );
+        // Spawn two particles in different directions
+        spawnParticle(pLevel, pRandom, center, col1, col2, angles[0], angleOffset);
+        spawnParticle(pLevel, pRandom, center, col1, col2, angles[1], angleOffset);
       }
     }
+  }
+
+  private double[] getBaseAngles(Direction facing) {
+    switch (facing) {
+      case SOUTH:
+        return new double[]{Math.PI / 2, -Math.PI / 2};
+      case WEST:
+        return new double[]{Math.PI, 0.0};
+      case NORTH:
+        return new double[]{-Math.PI / 2, Math.PI / 2};
+      default:
+        return new double[]{0.0, Math.PI};
+    }
+  }
+
+  private void spawnParticle(Level pLevel, RandomSource pRandom, Vec3 center, int col1, int col2, double baseAngle, double angleOffset) {
+    double finalAngle = baseAngle + angleOffset;
+    double distance = 1.7 + pRandom.nextDouble() * 0.3;
+
+    // Calculate the spawn position using Vec3
+    Vec3 spawnPos = center.add(Math.cos(finalAngle) * distance, (pRandom.nextDouble() - 0.5) * 1.5, Math.sin(finalAngle) * distance);
+
+    // Calculate the direction to the center
+    Vec3 direction = center.subtract(spawnPos).normalize().scale(0.03 + pRandom.nextDouble() * 0.04);
+
+    pLevel.addParticle(
+        new RootsParticleOptions(ModParticles.GROVE_STONE, col1, col2),
+        spawnPos.x, spawnPos.y, spawnPos.z,
+        direction.x, direction.y, direction.z
+    );
   }
 
   @org.jetbrains.annotations.Nullable
