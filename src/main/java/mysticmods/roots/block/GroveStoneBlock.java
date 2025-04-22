@@ -211,29 +211,19 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
         col2 = temp;
       }
 
-      // Define angles based on the facing direction
-      double[] angles = getBaseAngles(facing);
+      double[] angles = switch (facing) {
+        case SOUTH -> new double[]{Math.PI / 2, -Math.PI / 2};
+        case WEST -> new double[]{Math.PI, 0.0};
+        case NORTH -> new double[]{-Math.PI / 2, Math.PI / 2};
+        default -> new double[]{0.0, Math.PI};
+      };
 
       if (pRandom.nextBoolean()) {
         double angleOffset = (pRandom.nextDouble() - 0.5) * Math.toRadians(35);
 
-        // Spawn two particles in different directions
         spawnParticle(pLevel, pRandom, center, col1, col2, angles[0], angleOffset);
         spawnParticle(pLevel, pRandom, center, col1, col2, angles[1], angleOffset);
       }
-    }
-  }
-
-  private double[] getBaseAngles(Direction facing) {
-    switch (facing) {
-      case SOUTH:
-        return new double[]{Math.PI / 2, -Math.PI / 2};
-      case WEST:
-        return new double[]{Math.PI, 0.0};
-      case NORTH:
-        return new double[]{-Math.PI / 2, Math.PI / 2};
-      default:
-        return new double[]{0.0, Math.PI};
     }
   }
 
@@ -241,10 +231,8 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
     double finalAngle = baseAngle + angleOffset;
     double distance = 1.7 + pRandom.nextDouble() * 0.3;
 
-    // Calculate the spawn position using Vec3
     Vec3 spawnPos = center.add(Math.cos(finalAngle) * distance, (pRandom.nextDouble() - 0.5) * 1.5, Math.sin(finalAngle) * distance);
 
-    // Calculate the direction to the center
     Vec3 direction = center.subtract(spawnPos).normalize().scale(0.03 + pRandom.nextDouble() * 0.04);
 
     pLevel.addParticle(
