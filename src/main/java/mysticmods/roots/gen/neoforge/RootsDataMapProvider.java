@@ -9,6 +9,7 @@ import mysticmods.roots.api.condition.LevelCondition;
 import mysticmods.roots.api.datamap.DataMaps;
 import mysticmods.roots.api.datamap.PropertyDataMap;
 import mysticmods.roots.api.datamap.SproutGift;
+import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -567,7 +568,29 @@ public class RootsDataMapProvider extends DataMapProvider {
     builder23.add(Items.PUMPKIN.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
     builder23.add(Items.PUMPKIN_SEEDS.builtInRegistryHolder(), Blocks.PUMPKIN_STEM, false);
 
-
     var builder24 = builder(DataMaps.GROVE_POWER_GENERATORS);
+    builder24.add(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, List.of(
+        new GrovePower.Generator(RootsTags.Groves.FAIRY, 5)), false);
+    builder24.add(RootsTags.Blocks.FAIRY_GROVE_PATHS, List.of(
+        new GrovePower.Generator(RootsTags.Groves.FAIRY, 1)), false);
+    builder24.add(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, List.of(
+        new GrovePower.Generator(RootsTags.Groves.ELEMENTAL, 5)), false);
+    builder24.add(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS, List.of(
+        new GrovePower.Generator(RootsTags.Groves.SPROUTING, 5)), false);
+    builder24.add(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS, List.of(
+        new GrovePower.Generator(RootsTags.Groves.FUNGAL, 5)), false);
+    builder24.add(RootsTags.Blocks.WILD_GROVE_GENERATORS, List.of(
+        new GrovePower.Generator(RootsTags.Groves.WILD, 5)), false);
+    builder24.add(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS, List.of(
+        new GrovePower.Generator(RootsTags.Groves.TWILIGHT, 5)), false);
+
+    var builder25 = builder(DataMaps.GROVE_GENERATION_ENTRIES);
+    builder25.add(ModGroves.FAIRY, List.of(
+        new GrovePower.GenerationEntry(RootsTags.Blocks.FAIRY_GROVE_GENERATORS, 2, GrovePower.Symmetry.RADIAL_SAME_BLOCK),
+        new GrovePower.GenerationEntry(RootsTags.Blocks.FAIRY_GROVE_PATHS, 30, GrovePower.Symmetry.RADIAL_SAME_BLOCK)
+    ), false);
+    builder25.add(ModGroves.ELEMENTAL, List.of(
+        new GrovePower.GenerationEntry(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS, 2, GrovePower.Symmetry.RADIAL_DIFFERENT_SAME_TAG)
+    ), false);
   }
 }

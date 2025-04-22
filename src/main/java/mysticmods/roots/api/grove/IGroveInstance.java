@@ -1,6 +1,8 @@
 package mysticmods.roots.api.grove;
 
-public interface IGroveInstance {
+import mysticmods.roots.api.blockentity.Bounded;
+
+public interface IGroveInstance extends Bounded {
   Grove asGrove ();
 
   int getRank();

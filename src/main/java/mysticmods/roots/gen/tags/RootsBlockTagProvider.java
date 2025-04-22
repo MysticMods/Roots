@@ -388,6 +388,7 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     tag(RootsTags.Blocks.ELEMENTAL_GROVE_GENERATORS).add(Blocks.SNOW_BLOCK, Blocks.MAGMA_BLOCK, Blocks.LAVA, Blocks.WATER, Blocks.MUD, Blocks.OBSIDIAN, Blocks.ICE, Blocks.PACKED_ICE, Blocks.PACKED_MUD, Blocks.BLUE_ICE, Blocks.END_STONE).addTags(RootsTags.Blocks.ALL_SOIL);
     tag(RootsTags.Blocks.FAIRY_GROVE_GENERATORS).addTags(BlockTags.SMALL_FLOWERS, BlockTags.TALL_FLOWERS);
+    tag(RootsTags.Blocks.FAIRY_GROVE_PATHS).add(Blocks.DIRT_PATH);
     tag(RootsTags.Blocks.SPROUTING_GROVE_GENERATORS).addTags(BlockTags.CROPS);
     tag(RootsTags.Blocks.WILD_GROVE_GENERATORS).add(Blocks.DRAGON_EGG);
     tag(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS).add(Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK, Blocks.POTTED_RED_MUSHROOM, Blocks.POTTED_BROWN_MUSHROOM, BAFFLECAP.get(), BAFFLECAP_BLOCK.get(), POTTED_BAFFLECAP.get(), Blocks.MYCELIUM, Blocks.PODZOL);

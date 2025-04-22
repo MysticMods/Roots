@@ -1,0 +1,23 @@
+{
+  "values": {
+    "roots:elemental": [
+      {
+        "max_count": 2,
+        "symmetry": "radial_different_same_tag",
+        "tag": "roots:grove_generators/elemental"
+      }
+    ],
+    "roots:fairy": [
+      {
+        "max_count": 2,
+        "symmetry": "radial_same_block",
+        "tag": "roots:grove_generators/fairy"
+      },
+      {
+        "max_count": 30,
+        "symmetry": "radial_same_block",
+        "tag": "roots:grove_generators/fairy/paths"
+      }
+    ]
+  }
+}

@@ -8,6 +8,7 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
+import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.particle.RootsParticleOptions;
 import mysticmods.roots.util.VoxelUtil;
@@ -24,6 +25,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -216,6 +219,16 @@ public class GroveStoneBlock extends HorizontalDirectionalBlock implements Simpl
             0, 0, 0
         );
       }
+    }
+  }
+
+  @org.jetbrains.annotations.Nullable
+  @Override
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+    if (pLevel.isClientSide()) {
+      return BaseBlockEntity::clientTick;
+    } else {
+      return BaseBlockEntity::serverTick;
     }
   }
 }

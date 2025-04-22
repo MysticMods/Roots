@@ -45,6 +45,10 @@ public class ConfigManager {
   public static ModConfigSpec.IntValue RANK_4_GROVE_BOUNDS_ZX;
   public static ModConfigSpec.IntValue RANK_4_GROVE_BOUNDS_Y;
 
+  public static ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_X;
+  public static ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_Y;
+  public static ModConfigSpec.IntValue GROVE_STONE_POWER_RANGE_Z;
+
   public static ModConfigSpec.BooleanValue DROP_AUBERGINE_SEEDS;
   public static ModConfigSpec.BooleanValue DROP_WILDROOT;
   public static ModConfigSpec.BooleanValue DROP_GROVE_SPORES;
@@ -102,6 +106,13 @@ public class ConfigManager {
         .defineInRange("rank_4_grove_bounds_zx", 30, 1, Integer.MAX_VALUE);
     RANK_4_GROVE_BOUNDS_Y = COMMON_BUILDER.comment("the Y half value for the size of the Rank 4 Grove Stone aoe bounding box")
         .defineInRange("rank_4_grove_bounds_y", 30, 1, Integer.MAX_VALUE);
+    GROVE_STONE_POWER_RANGE_X = COMMON_BUILDER.comment("the X half value for the size of the Grove Stone power range")
+        .defineInRange("grove_stone_power_range_x", 30, 1, Integer.MAX_VALUE);
+    GROVE_STONE_POWER_RANGE_Y = COMMON_BUILDER.comment("the Y half value for the size of the Grove Stone power range")
+        .defineInRange("grove_stone_power_range_y", 30, 1, Integer.MAX_VALUE);
+    GROVE_STONE_POWER_RANGE_Z = COMMON_BUILDER.comment("the Z half value for the size of the Grove Stone power range")
+        .defineInRange("grove_stone_power_range_z", 30, 1, Integer.MAX_VALUE);
+
     COMMON_BUILDER.comment("Options for sprout breeding rewards").push("sprouts");
     SPROUT_BREEDING_REWARDS_DEFAULT_CHANCE = COMMON_BUILDER.comment("the default chance for a sprout breeding reward to be given when not contained within the sprout breeding rewards data map (only applies to items within the roots:sprout_breeding_rewards tag)")
         .defineInRange("default_chance", 10, 1, 100);

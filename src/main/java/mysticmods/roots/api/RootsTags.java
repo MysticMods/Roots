@@ -222,7 +222,10 @@ public class RootsTags {
 
     public static final TagKey<Block> FARMLANDS = compatTag("farmlands");
 
+    public static final TagKey<Block> GROVE_CONSUMERS = modTag("grove_consumers");
+
     public static final TagKey<Block> FAIRY_GROVE_GENERATORS = modTag("grove_generators/fairy");
+    public static final TagKey<Block> FAIRY_GROVE_PATHS = modTag("grove_generators/fairy/paths");
     public static final TagKey<Block> WILD_GROVE_GENERATORS = modTag("grove_generators/wild");
     public static final TagKey<Block> SPROUTING_GROVE_GENERATORS = modTag("grove_generators/sprouting");
     public static final TagKey<Block> FUNGAL_GROVE_GENERATORS = modTag("grove_generators/fungal");
@@ -654,25 +657,13 @@ public class RootsTags {
   }
 
   public static class Groves extends RootsTags {
-    // TODO: Does it make sense to use tags to denote opposition/alignment?
-    // These are core facets that I don't necessarily want to be "configurable"
-    // but technically hard-coded. However, tags do make it easier.
-    public static final TagKey<Grove> PRIMAL_ALIGNED = modTag("aligned/primal");
-    public static final TagKey<Grove> FAIRY_ALIGNED = modTag("aligned/fairy");
-    public static final TagKey<Grove> TWILIGHT_ALIGNED = modTag("aligned/twilight");
-    public static final TagKey<Grove> FUNGAL_ALIGNED = modTag("aligned/fungal");
-    public static final TagKey<Grove> SPROUTING_ALIGNED = modTag("aligned/sprouting");
-    public static final TagKey<Grove> ELEMENTAL_ALIGNED = modTag("aligned/elemental");
-    public static final TagKey<Grove> WILD_ALIGNED = modTag("aligned/wild");
-
-    public static final TagKey<Grove> PRIMAL_OPPOSED = modTag("opposed/primal");
-    public static final TagKey<Grove> FAIRY_OPPOSED = modTag("opposed/fairy");
-    public static final TagKey<Grove> TWILIGHT_OPPOSED = modTag("opposed/twilight");
-    public static final TagKey<Grove> FUNGAL_OPPOSED = modTag("opposed/fungal");
-    public static final TagKey<Grove> SPROUTING_OPPOSED = modTag("opposed/sprouting");
-    public static final TagKey<Grove> ELEMENTAL_OPPOSED = modTag("opposed/elemental");
-    public static final TagKey<Grove> WILD_OPPOSED = modTag("opposed/wild");
-
+    public static final TagKey<Grove> PRIMAL = modTag("primal");
+    public static final TagKey<Grove> FAIRY = modTag("fairy");
+    public static final TagKey<Grove> TWILIGHT = modTag("twilight");
+    public static final TagKey<Grove> FUNGAL = modTag("fungal");
+    public static final TagKey<Grove> SPROUTING = modTag("sprouting");
+    public static final TagKey<Grove> ELEMENTAL = modTag("elemental");
+    public static final TagKey<Grove> WILD = modTag("wild");
 
     static TagKey<Grove> modTag(String name) {
       return TagKey.create(RootsRegistries.Keys.GROVES, RootsAPI.rl(name));

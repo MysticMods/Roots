@@ -107,6 +107,8 @@ public class DataMaps {
       .build();
   public static final DataMapType<Block, List<GrovePower.Generator>> GROVE_POWER_GENERATORS = DataMapType.builder(RootsAPI.rl("grove_power_generator"), Registries.BLOCK, GrovePower.Generator.LIST_CODEC)
       .synced(GrovePower.Generator.LIST_CODEC, false).build();
+  public static final DataMapType<Grove, List<GrovePower.GenerationEntry>> GROVE_GENERATION_ENTRIES = DataMapType.builder(RootsAPI.rl("grove_generation_entries"), RootsRegistries.Keys.GROVES, GrovePower.GenerationEntry.LIST_CODEC)
+      .synced(GrovePower.GenerationEntry.LIST_CODEC, false).build();
 
   @SubscribeEvent
   public static void registerDataMaps(RegisterDataMapTypesEvent event) {
@@ -132,6 +134,7 @@ public class DataMaps {
     event.register(OPERATION_COST);
     event.register(SEED_TO_CROP);
     event.register(GROVE_POWER_GENERATORS);
+    event.register(GROVE_GENERATION_ENTRIES);
   }
 
   static <R> DataMapValueMerger<R, CostInstance> costMerger() {

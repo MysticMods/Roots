@@ -1,7 +1,9 @@
 package mysticmods.roots.gen.tags;
 
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.init.ModGroves;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
@@ -18,6 +20,13 @@ public class RootsGroveTagsProvider extends IntrinsicHolderTagsProvider<Grove> {
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
+    tag(RootsTags.Groves.PRIMAL).add(ModGroves.PRIMAL.get());
+    tag(RootsTags.Groves.FAIRY).add(ModGroves.FAIRY.get());
+    tag(RootsTags.Groves.ELEMENTAL).add(ModGroves.ELEMENTAL.get());
+    tag(RootsTags.Groves.WILD).add(ModGroves.WILD.get());
+    tag(RootsTags.Groves.TWILIGHT).add(ModGroves.TWILIGHT.get());
+    tag(RootsTags.Groves.SPROUTING).add(ModGroves.SPROUTING.get());
+    tag(RootsTags.Groves.FUNGAL).add(ModGroves.FUNGAL.get());
   }
 
   @Override

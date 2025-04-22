@@ -5,7 +5,7 @@ import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
 
-public interface BoundedBlockEntity {
+public interface Bounded {
   default boolean isBounded() {
     return getRadiusX() != 0 || getRadiusY() != 0 || getRadiusZ() != 0;
   }
@@ -29,11 +29,6 @@ public interface BoundedBlockEntity {
 
   @Nullable
   default AABB getAABB () {
-    return null;
-  }
-
-  @Nullable
-  default AABB getRenderBoundingBox() {
     return null;
   }
 }

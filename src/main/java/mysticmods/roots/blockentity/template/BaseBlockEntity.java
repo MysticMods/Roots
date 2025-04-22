@@ -2,7 +2,7 @@ package mysticmods.roots.blockentity.template;
 
 import com.mojang.datafixers.util.Pair;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.blockentity.BoundedBlockEntity;
+import mysticmods.roots.api.blockentity.Bounded;
 import mysticmods.roots.api.blockentity.ClientTickBlockEntity;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
 import mysticmods.roots.blockentity.PedestalBlockEntity;
@@ -12,10 +12,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,7 +21,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -34,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"DataFlowIssue", "NullableProblems"})
-public abstract class BaseBlockEntity extends BlockEntity implements BoundedBlockEntity {
+public abstract class BaseBlockEntity extends BlockEntity implements Bounded {
 /*  private static final AABB singleBlock = AABB.ofSize(Vec3.ZERO, 1, 1, 1);
   protected AABB singleBlockBoundingBox;*/
   protected BoundingBox boundingBox;
