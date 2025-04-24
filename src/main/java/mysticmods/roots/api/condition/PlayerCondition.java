@@ -39,21 +39,4 @@ public abstract class PlayerCondition implements IDescribed {
   }
 
   public abstract boolean test(Level level, @Nullable Player player);
-
-  public static class PlayerOffHandTaggedItemCondition extends PlayerCondition {
-    private final TagKey<Item> tag;
-
-    public PlayerOffHandTaggedItemCondition(TagKey<Item> tag) {
-      this.tag = tag;
-    }
-
-    @Override
-    public boolean test(Level level, @Nullable Player player) {
-      if (player == null) {
-        return false;
-      }
-
-      return player.getOffhandItem().is(tag);
-    }
-  }
 }
