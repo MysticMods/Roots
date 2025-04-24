@@ -1,5 +1,7 @@
 package mysticmods.roots.mixin.client;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import mysticmods.roots.api.RootsTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
@@ -15,24 +17,24 @@ public class MixinLocalPlayer {
   @Shadow
   protected int sprintTriggerTime;
 
-  @Redirect(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/Input;forwardImpulse:F", opcode = Opcodes.PUTFIELD))
-  private void RootsModifyChannelMovementSpeedForward(Input input, float newValue) {
+  @WrapOperation(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/Input;forwardImpulse:F", opcode = Opcodes.PUTFIELD))
+  private void RootsModifyChannelMovementSpeedForward(Input input, float newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
       input.forwardImpulse = newValue;
     }
   }
 
-  @Redirect(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/Input;leftImpulse:F", opcode = Opcodes.PUTFIELD))
-  private void RootsModifyChannelMovementSpeedLeft(Input input, float newValue) {
+  @WrapOperation(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/Input;leftImpulse:F", opcode = Opcodes.PUTFIELD))
+  private void RootsModifyChannelMovementSpeedLeft(Input input, float newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
       input.leftImpulse = newValue;
     }
   }
 
-  @Redirect(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/LocalPlayer;sprintTriggerTime:I", opcode = Opcodes.PUTFIELD))
-  private void RootsModifyChannelMovementSpeedSprint(LocalPlayer player, int newValue) {
+  @WrapOperation(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/LocalPlayer;sprintTriggerTime:I", opcode = Opcodes.PUTFIELD))
+  private void RootsModifyChannelMovementSpeedSprint(LocalPlayer player, int newValue, Operation<Void> original) {
     if (Minecraft.getInstance().player == null || !Minecraft.getInstance().player.getUseItem()
         .is(RootsTags.Items.CASTING_TOOLS)) {
       this.sprintTriggerTime = newValue;
