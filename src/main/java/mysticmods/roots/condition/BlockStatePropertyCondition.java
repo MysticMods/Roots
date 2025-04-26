@@ -35,7 +35,7 @@ public record BlockStatePropertyCondition (String name, PartialBlockStateMatchWo
 
   @Override
   public CanonicalRepresentation getRepresentation() {
-    return new CanonicalRepresentation(test);
+    return new CanonicalRepresentation(test.getPartialBlockState());
   }
 
   @Override
