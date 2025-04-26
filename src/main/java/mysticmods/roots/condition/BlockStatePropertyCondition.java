@@ -35,6 +35,9 @@ public record BlockStatePropertyCondition (String name, PartialBlockStateMatchWo
 
   @Override
   public CanonicalRepresentation getRepresentation() {
+    if (ModConditions.SPECIAL_REPRESENTATIONS.containsKey(getName().intern())) {
+      return ModConditions.SPECIAL_REPRESENTATIONS.get(getName().intern()).get();
+    }
     return new CanonicalRepresentation(test.getPartialBlockState());
   }
 
@@ -44,8 +47,8 @@ public record BlockStatePropertyCondition (String name, PartialBlockStateMatchWo
   }
 
   @Override
-  public Component getName() {
-    return Component.translatable("level_condition.roots." + name);
+  public String getName() {
+    return name;
   }
 
   public static class Type implements ILevelConditionType<BlockStatePropertyCondition> {

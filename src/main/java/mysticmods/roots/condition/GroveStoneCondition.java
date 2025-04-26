@@ -14,7 +14,6 @@ import mysticmods.roots.init.ModConditions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
@@ -144,7 +143,7 @@ public record GroveStoneCondition(GroveType groveType, boolean requireValid,
   }
 
   @Override
-  public Component getName() {
+  public String getName() {
     String req;
     if (!requireInvalid && !requireValid) {
       req = "any";
@@ -157,7 +156,7 @@ public record GroveStoneCondition(GroveType groveType, boolean requireValid,
       req += "_" + groveType.name().toLowerCase(Locale.ROOT);
     }
 
-    return Component.translatable("level_condition.roots." + req + "_grove_stone");
+    return req + "_grove_stone";
   }
 
   public static class Type implements ILevelConditionType<GroveStoneCondition> {

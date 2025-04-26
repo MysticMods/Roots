@@ -54,8 +54,8 @@ public record FluidSourcePropertyCondition(String name, TagKey<Fluid> fluidTag) 
   }
 
   @Override
-  public Component getName() {
-    return Component.translatable("level_condition.roots." + name);
+  public String getName () {
+    return name;
   }
 
   public static class Type implements ILevelConditionType<FluidSourcePropertyCondition> {

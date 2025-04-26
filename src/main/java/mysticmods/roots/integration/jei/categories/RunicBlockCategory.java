@@ -117,7 +117,7 @@ public class RunicBlockCategory extends RootsRecipeBaseCategory<RunicBlockRecipe
       if (count == 3) {
         offset = 79;
       }
-      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getName()));
+      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent()));
       column++;
     }
 

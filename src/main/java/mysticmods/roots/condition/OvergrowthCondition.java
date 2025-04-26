@@ -43,8 +43,8 @@ public record OvergrowthCondition() implements ILevelCondition {
   }
 
   @Override
-  public Component getName() {
-    return Component.translatable("level_condition.roots.overgrowth");
+  public String getName() {
+    return "overgrowth";
   }
 
   @Override

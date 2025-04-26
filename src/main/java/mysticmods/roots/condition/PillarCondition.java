@@ -61,7 +61,7 @@ public record PillarCondition(PillarType pillar,
   }
 
   @Override
-  public Component getName() {
+  public String getName() {
     String req = heightExcluding + "_high_";
     if (pillar == PillarType.ANY || pillar == PillarType.ANY_LOG || pillar == PillarType.ANY_RUNE) {
       req = req + "pillar";
@@ -69,7 +69,7 @@ public record PillarCondition(PillarType pillar,
     } else {
       req = req + pillar.name().toLowerCase(Locale.ROOT) + "_pillar";
     }
-    return Component.translatable("level_condition.roots." + req);
+    return req;
   }
 
   public static CanonicalRepresentation fromStates(BlockState capstone, BlockState pillar, int height) {
