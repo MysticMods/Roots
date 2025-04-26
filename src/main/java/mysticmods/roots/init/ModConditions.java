@@ -1,57 +1,37 @@
 package mysticmods.roots.init;
 
+import com.google.common.base.Suppliers;
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
-import mysticmods.roots.api.faction.GroveType;
-import mysticmods.roots.api.registry.RootsRegistries;
+import mysticmods.roots.api.condition.*;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.block.crop.ThreeStageCropBlock;
-import mysticmods.roots.condition.OvergrowthCondition;
-import net.minecraft.tags.FluidTags;
+import mysticmods.roots.condition.*;
+import mysticmods.roots.api.registry.RootsRegistries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Supplier;
+
 
 public class ModConditions {
-  private static final DeferredRegister<LevelCondition> LEVEL = DeferredRegister.create(RootsRegistries.LEVEL_CONDITIONS, RootsAPI.MODID);
-  private static final DeferredRegister<PlayerCondition> PLAYER = DeferredRegister.create(RootsRegistries.PLAYER_CONDITIONS, RootsAPI.MODID);
+  private static final DeferredRegister<ILevelConditionType<?>> LEVEL = DeferredRegister.create(RootsRegistries.LEVEL_CONDITIONS, RootsAPI.MODID);
+  private static final DeferredRegister<IPlayerConditionType<?>> PLAYER = DeferredRegister.create(RootsRegistries.PLAYER_CONDITIONS, RootsAPI.MODID);
 
-  public static final DeferredHolder<LevelCondition, LevelCondition> RUNE_PILLAR_4_HIGH = LEVEL.register("4_high_rune_pillar", () -> LevelCondition.runePillar(4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> RUNE_PILLAR_3_HIGH = LEVEL.register("3_high_rune_pillar", () -> LevelCondition.runePillar(3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> LOG_PILLAR_4_HIGH = LEVEL.register("4_high_log_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.ANY_LOG, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> LOG_PILLAR_3_HIGH = LEVEL.register("3_high_log_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.ANY_LOG, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> ACACIA_PILLAR_4_HIGH = LEVEL.register("4_high_acacia_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.ACACIA, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> ACACIA_PILLAR_3_HIGH = LEVEL.register("3_high_acacia_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.ACACIA, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> BIRCH_PILLAR_4_HIGH = LEVEL.register("4_high_birch_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.BIRCH, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> BIRCH_PILLAR_3_HIGH = LEVEL.register("3_high_birch_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.BIRCH, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> CRIMSON_PILLAR_4_HIGH = LEVEL.register("4_high_crimson_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.CRIMSON, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> CRIMSON_PILLAR_3_HIGH = LEVEL.register("3_high_crimson_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.CRIMSON, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> DARK_OAK_PILLAR_4_HIGH = LEVEL.register("4_high_dark_oak_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.DARK_OAK, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> DARK_OAK_PILLAR_3_HIGH = LEVEL.register("3_high_dark_oak_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.DARK_OAK, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> JUNGLE_PILLAR_4_HIGH = LEVEL.register("4_high_jungle_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.JUNGLE, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> JUNGLE_PILLAR_3_HIGH = LEVEL.register("3_high_jungle_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.JUNGLE, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> OAK_PILLAR_4_HIGH = LEVEL.register("4_high_oak_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.OAK, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> OAK_PILLAR_3_HIGH = LEVEL.register("3_high_oak_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.OAK, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> SPRUCE_PILLAR_4_HIGH = LEVEL.register("4_high_spruce_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.SPRUCE, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> SPRUCE_PILLAR_3_HIGH = LEVEL.register("3_high_spruce_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.SPRUCE, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> WARPED_PILLAR_4_HIGH = LEVEL.register("4_high_warped_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.WARPED, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> WARPED_PILLAR_3_HIGH = LEVEL.register("3_high_warped_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.WARPED, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> WILDWOOD_PILLAR_4_HIGH = LEVEL.register("4_high_wildwood_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.WILDWOOD, 4));
-  public static final DeferredHolder<LevelCondition, LevelCondition> WILDWOOD_PILLAR_3_HIGH = LEVEL.register("3_high_wildwood_pillar", () -> LevelCondition.logPillar(LevelCondition.PillarType.WILDWOOD, 3));
-  public static final DeferredHolder<LevelCondition, LevelCondition> PRIMAL_GROVE_STONE_ANY = LEVEL.register("any_primal_grove_stone", () -> LevelCondition.groveStone(GroveType.PRIMAL, false));
-  public static final DeferredHolder<LevelCondition, LevelCondition> PRIMAL_GROVE_STONE_ACTIVE = LEVEL.register("active_primal_grove_stone", () -> LevelCondition.groveStone(GroveType.PRIMAL, true));
-  public static final DeferredHolder<LevelCondition, LevelCondition> PRIMAL_GROVE_STONE_INACTIVE = LEVEL.register("inactive_primal_grove_stone", () -> LevelCondition.groveStone(GroveType.PRIMAL, false, true));
-  public static final DeferredHolder<LevelCondition, LevelCondition> GROVE_STONE_ANY = LEVEL.register("any_grove_stone", () -> LevelCondition.anyGroveStone(false));
-  public static final DeferredHolder<LevelCondition, LevelCondition> GROVE_STONE_ACTIVE = LEVEL.register("active_grove_stone", () -> LevelCondition.anyGroveStone(true));
-  public static final DeferredHolder<LevelCondition, LevelCondition> MATURE_WILDROOT_CROP = LEVEL.register("mature_wildroot_crop", () -> new LevelCondition.BlockStatePropertyCondition(new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
+  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<GroveStoneCondition>> GROVE_STONE_CONDITION_TYPE = LEVEL.register("grove_stone_condition", GroveStoneCondition.Type::new);
+  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<PillarCondition>> PILLAR_CONDITION_TYPE = LEVEL.register("pillar_condition", PillarCondition.Type::new);
+  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<FluidSourcePropertyCondition>> FLUID_SOURCE_CONDITION_TYPE = LEVEL.register("fluid_source_property_condition", FluidSourcePropertyCondition.Type::new);
+  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<BlockStatePropertyCondition>> BLOCK_STATE_CONDITION_TYPE = LEVEL.register("block_state_property_condition", BlockStatePropertyCondition.Type::new);
+  public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<OvergrowthCondition>> OVERGROWTH_CONDITION_TYPE = LEVEL.register("overgrowth_condition", OvergrowthCondition.Type::new);
+
+  public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_4_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 4));
+  public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_3_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 3));
+  public static final Supplier<ILevelCondition> ANY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, true));
+  public static final Supplier<ILevelCondition> ANY_GROVE_STONE_INACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, true));
+  public static final Supplier<ILevelCondition> MATURE_WILDROOT_CROP = Suppliers.memoize(() -> new BlockStatePropertyCondition("mature_wildroot_crop", new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
       .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
-  public static final DeferredHolder<LevelCondition, OvergrowthCondition> OVERGROWTH_CONDITION = LEVEL.register("overgrowth", OvergrowthCondition::new);
-  static {
-    LEVEL.addAlias(RootsAPI.rl("water_source"), RootsAPI.rl("overgrowth"));
-  }
+  public static final Supplier<ILevelCondition> OVERGROWTH = Suppliers.memoize(OvergrowthCondition::getInstance);
 
   public static void register(IEventBus bus) {
     LEVEL.register(bus);

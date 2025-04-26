@@ -2,8 +2,8 @@ package mysticmods.roots.api.recipe;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.api.util.SetUtils;
@@ -34,11 +34,11 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
     return result;
   }
 
-  default List<LevelCondition> getLevelConditions() {
+  default List<ILevelCondition> getLevelConditions() {
     return Collections.emptyList();
   }
 
-  default List<PlayerCondition> getPlayerConditions() {
+  default List<IPlayerCondition> getPlayerConditions() {
     return Collections.emptyList();
   }
 
@@ -69,15 +69,15 @@ public interface IRootsRecipe<W extends RecipeInput> extends Recipe<W> {
   void buildCachedOutputs(HolderLookup.Provider provider);
 
   default ConditionResult checkConditions(Level level, Player player, BoundingBox bounds, BlockPos center) {
-    List<PlayerCondition> failedPlayer = new ArrayList<>();
-    for (PlayerCondition condition : this.getPlayerConditions()) {
+    List<IPlayerCondition> failedPlayer = new ArrayList<>();
+    for (IPlayerCondition condition : this.getPlayerConditions()) {
       if (!condition.test(level, player)) {
         failedPlayer.add(condition);
       }
     }
-    List<LevelCondition> failedLevel = new ArrayList<>();
+    List<ILevelCondition> failedLevel = new ArrayList<>();
     Set<BlockPos> testedPositions = new HashSet<>();
-    for (LevelCondition condition : this.getLevelConditions()) {
+    for (ILevelCondition condition : this.getLevelConditions()) {
       Set<BlockPos> newPositions = condition.test(level, player, bounds, center, testedPositions);
       if (newPositions.isEmpty() || SetUtils.containsAny(testedPositions, newPositions)) {
         failedLevel.add(condition);

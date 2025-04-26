@@ -80,10 +80,7 @@ public class KnifeItem extends TieredItem {
       ConditionResult conditionResult = recipe.value()
           .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), blockpos);
       if (conditionResult.anyFailed()) {
-        if (!level.isClientSide()) {
-          RootsAPI.LOG.info("Conditions failed.");
-          conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
-          conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
+        if (!level.isClientSide() && player != null) {
           conditionResult.report(player);
         }
         return InteractionResult.FAIL;

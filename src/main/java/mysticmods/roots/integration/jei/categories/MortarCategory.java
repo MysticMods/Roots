@@ -7,7 +7,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModBlocks;
 import mysticmods.roots.integration.jei.RootsJEIPlugin;
@@ -52,7 +52,7 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
     super.createRecipeExtras(builder, recipe, focuses);
 
     int column = 0;
-    for (LevelCondition condition : recipe.getLevelConditions()) {
+    for (ILevelCondition condition : recipe.getLevelConditions()) {
       CanonicalRepresentation rep = condition.getRepresentation();
       int count = rep.getStates().size();
       int offset = 81;

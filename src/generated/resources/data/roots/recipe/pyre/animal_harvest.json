@@ -19,9 +19,18 @@
       }
     ],
     "levelConditions": [
-      "roots:3_high_rune_pillar",
-      "roots:4_high_rune_pillar",
-      "roots:3_high_rune_pillar"
+      {
+        "type": "roots:pillar_condition",
+        "height": 3
+      },
+      {
+        "type": "roots:pillar_condition",
+        "height": 4
+      },
+      {
+        "type": "roots:pillar_condition",
+        "height": 3
+      }
     ],
     "priority": 0
   },

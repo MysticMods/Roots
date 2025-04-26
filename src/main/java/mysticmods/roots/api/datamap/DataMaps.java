@@ -5,8 +5,8 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
 import mysticmods.roots.api.action.GroveReputationEntry;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.grove.GrovePower;
 import mysticmods.roots.api.grove.ReputationRanks;
@@ -78,12 +78,12 @@ public class DataMaps {
   public static final DataMapType<Ritual, PropertyDataMap> RITUAL_PROPERTY_DATA = DataMapType.builder(RootsAPI.rl("ritual_property_data"), RootsRegistries.Keys.RITUALS, PropertyDataMap.CODEC)
       .synced(PropertyDataMap.CODEC, false)
       .build();
-  public static final DataMapType<LevelCondition, CanonicalRepresentation> LEVEL_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("level_condition_canons"), RootsRegistries.Keys.LEVEL_CONDITIONS, CanonicalRepresentation.CODEC)
+/*  public static final DataMapType<ILevelCondition, CanonicalRepresentation> LEVEL_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("level_condition_canons"), RootsRegistries.Keys.LEVEL_CONDITIONS, CanonicalRepresentation.CODEC)
       .synced(CanonicalRepresentation.CODEC, false)
       .build();
-  public static final DataMapType<PlayerCondition, CanonicalRepresentation> PLAYER_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("player_condition_canons"), RootsRegistries.Keys.PLAYER_CONDITIONS, CanonicalRepresentation.CODEC)
+  public static final DataMapType<IPlayerCondition, CanonicalRepresentation> PLAYER_CONDITION_CANONS = DataMapType.builder(RootsAPI.rl("player_condition_canons"), RootsRegistries.Keys.PLAYER_CONDITIONS, CanonicalRepresentation.CODEC)
       .synced(CanonicalRepresentation.CODEC, false)
-      .build();
+      .build();*/
   public static final DataMapType<Item, List<SproutGift>> SPROUT_BREEDING_ITEM_CHANCE = DataMapType.builder(RootsAPI.rl("sprout_breeding_item_chance"), Registries.ITEM, SproutGift.LIST_CODEC)
       .synced(SproutGift.LIST_CODEC, false)
       .build();
@@ -123,8 +123,6 @@ public class DataMaps {
     event.register(SPELL_DISPLAY_ITEM);
     event.register(SPELL_MODIFIER_PARENT);
     event.register(SPELL_MODIFIER_SPELL);
-    event.register(LEVEL_CONDITION_CANONS);
-    event.register(PLAYER_CONDITION_CANONS);
     event.register(SPROUT_BREEDING_ITEM_CHANCE);
     event.register(GROWTH_RECORDS);
     event.register(HARVEST_RECORDS);

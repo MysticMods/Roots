@@ -244,9 +244,6 @@ public class MortarBlockEntity extends UseDelegatedBlockEntity implements Server
         ConditionResult conditionResult = cachedRecipe.value()
             .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
         if (conditionResult.anyFailed()) {
-          RootsAPI.LOG.info("Conditions failed.");
-          conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
-          conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
           conditionResult.report(player);
           return InteractionResult.FAIL;
         }

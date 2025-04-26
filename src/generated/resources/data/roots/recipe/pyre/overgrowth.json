@@ -19,7 +19,9 @@
       }
     ],
     "levelConditions": [
-      "roots:overgrowth"
+      {
+        "type": "roots:overgrowth_condition"
+      }
     ],
     "priority": 0
   },

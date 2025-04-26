@@ -6,8 +6,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.attachment.Unlock;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
@@ -38,9 +38,9 @@ public class BaseRecipeData {
           },
           DataResult::success
       ).forGetter(o -> o.ingredients),
-      LevelCondition.CODEC.listOf().optionalFieldOf("levelConditions", Collections.emptyList())
+      ILevelCondition.LIST_CODEC.optionalFieldOf("levelConditions", Collections.emptyList())
           .forGetter(o -> o.levelConditions),
-      PlayerCondition.CODEC.listOf().optionalFieldOf("playerConditions", Collections.emptyList())
+      IPlayerCondition.LIST_CODEC.optionalFieldOf("playerConditions", Collections.emptyList())
           .forGetter(o -> o.playerConditions),
       ItemStack.CODEC.optionalFieldOf("result", ItemStack.EMPTY).forGetter(o -> o.result),
       ChanceOutput.LIST_CODEC.optionalFieldOf("chanceOutputs", Collections.emptyList()).forGetter(o -> o.chanceOutputs),
@@ -52,8 +52,8 @@ public class BaseRecipeData {
   public static StreamCodec<RegistryFriendlyByteBuf, NonNullList<Ingredient>> INGREDIENT_LIST_STREAM = Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.collection(NonNullList::createWithCapacity));
   public static final StreamCodec<RegistryFriendlyByteBuf, BaseRecipeData> STREAM_CODEC = ExtraStreamCodecs.composite(
       ByteBufCodecs.optional(INGREDIENT_LIST_STREAM), o -> c(o.ingredients),
-      ByteBufCodecs.optional(LevelCondition.LIST_STREAM_CODEC), o -> c(o.levelConditions),
-      ByteBufCodecs.optional(PlayerCondition.LIST_STREAM_CODEC), o -> c(o.playerConditions),
+      ByteBufCodecs.optional(ILevelCondition.LIST_STREAM_CODEC), o -> c(o.levelConditions),
+      ByteBufCodecs.optional(IPlayerCondition.LIST_STREAM_CODEC), o -> c(o.playerConditions),
       ByteBufCodecs.optional(ItemStack.STREAM_CODEC), o -> o.result == null || o.result.isEmpty() ? Optional.empty() : Optional.of(o.result),
       ByteBufCodecs.optional(ChanceOutput.LIST_STREAM_CODEC), o -> c(o.chanceOutputs),
       ByteBufCodecs.optional(Unlock.LIST_STREAM_CODEC), o -> c(o.unlocks),
@@ -62,8 +62,8 @@ public class BaseRecipeData {
   );
 
   public NonNullList<Ingredient> ingredients;
-  public List<LevelCondition> levelConditions;
-  public List<PlayerCondition> playerConditions;
+  public List<ILevelCondition> levelConditions;
+  public List<IPlayerCondition> playerConditions;
   public ItemStack result;
   public List<ChanceOutput> chanceOutputs;
   public List<Unlock<?>> unlocks;
@@ -72,7 +72,7 @@ public class BaseRecipeData {
   public BaseRecipeData() {
   }
 
-  public BaseRecipeData(NonNullList<Ingredient> ingredients, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, int priority) {
+  public BaseRecipeData(NonNullList<Ingredient> ingredients, List<ILevelCondition> levelConditions, List<IPlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, int priority) {
     this.ingredients = ingredients;
     this.levelConditions = Collections.unmodifiableList(levelConditions);
     this.playerConditions = Collections.unmodifiableList(playerConditions);
@@ -83,7 +83,7 @@ public class BaseRecipeData {
   }
 
   @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-  private BaseRecipeData(Optional<NonNullList<Ingredient>> ingredients, Optional<List<LevelCondition>> levelConditions, Optional<List<PlayerCondition>> playerConditions, Optional<ItemStack> itemStack, Optional<List<ChanceOutput>> chanceOutputs, Optional<List<Unlock<?>>> unlocks, int priority) {
+  private BaseRecipeData(Optional<NonNullList<Ingredient>> ingredients, Optional<List<ILevelCondition>> levelConditions, Optional<List<IPlayerCondition>> playerConditions, Optional<ItemStack> itemStack, Optional<List<ChanceOutput>> chanceOutputs, Optional<List<Unlock<?>>> unlocks, int priority) {
     this(ingredients.orElse(NonNullList.create()), levelConditions.orElse(new ArrayList<>()), playerConditions.orElse(new ArrayList<>()), itemStack.orElse(ItemStack.EMPTY), chanceOutputs.orElse(new ArrayList<>()), unlocks.orElse(new ArrayList<>()), priority);
   }
 
@@ -107,14 +107,14 @@ public class BaseRecipeData {
 
   public static class Builder {
     private final List<Ingredient> ingredients;
-    private final List<LevelCondition> levelConditions;
-    private final List<PlayerCondition> playerConditions;
+    private final List<ILevelCondition> levelConditions;
+    private final List<IPlayerCondition> playerConditions;
     private ItemStack result;
     private final List<ChanceOutput> chanceOutputs;
     private final List<Unlock<?>> unlocks;
     private int priority;
 
-    protected Builder(List<Ingredient> ingredients, List<LevelCondition> levelConditions, List<PlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, int priority) {
+    protected Builder(List<Ingredient> ingredients, List<ILevelCondition> levelConditions, List<IPlayerCondition> playerConditions, ItemStack result, List<ChanceOutput> chanceOutputs, List<Unlock<?>> unlocks, int priority) {
       this.ingredients = ingredients;
       this.levelConditions = levelConditions;
       this.playerConditions = playerConditions;
@@ -204,12 +204,12 @@ public class BaseRecipeData {
       return this;
     }
 
-    public Builder condition(LevelCondition levelCondition) {
+    public Builder condition(ILevelCondition levelCondition) {
       this.levelConditions.add(levelCondition);
       return this;
     }
 
-    public Builder condition(PlayerCondition playerCondition) {
+    public Builder condition(IPlayerCondition playerCondition) {
       this.playerConditions.add(playerCondition);
       return this;
     }

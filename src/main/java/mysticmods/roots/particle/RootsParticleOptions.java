@@ -11,8 +11,8 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-public record RootsParticleOptions(ParticleType<?> type, int color1, int color2, int entityId
-) implements ParticleOptions {
+public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
+                                   int entityId) implements ParticleOptions {
 
   public static MapCodec<RootsParticleOptions> codec(ParticleType<?> type) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(

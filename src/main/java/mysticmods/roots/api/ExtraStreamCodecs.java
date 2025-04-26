@@ -19,6 +19,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Function;
@@ -104,6 +105,7 @@ public class ExtraStreamCodecs {
   public static final StreamCodec<ByteBuf, TagKey<Item>> ITEM_TAG_STREAM_CODEC = tagStreamCodec(Registries.ITEM);
   public static final StreamCodec<ByteBuf, TagKey<Block>> BLOCK_TAG_STREAM_CODEC = tagStreamCodec(Registries.BLOCK);
   public static final StreamCodec<ByteBuf, TagKey<EntityType<?>>> ENTITY_TAG_STREAM_CODEC = tagStreamCodec(Registries.ENTITY_TYPE);
+  public static final StreamCodec<ByteBuf, TagKey<Fluid>> FLUID_TAG_STREAM_CODEC = tagStreamCodec(Registries.FLUID);
 
   public static final StreamCodec<ByteBuf, TagKey<Herb>> HERB_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.HERBS);
   public static final StreamCodec<ByteBuf, TagKey<Spell>> SPELL_TAG_STREAM_CODEC = tagStreamCodec(RootsRegistries.Keys.SPELLS);

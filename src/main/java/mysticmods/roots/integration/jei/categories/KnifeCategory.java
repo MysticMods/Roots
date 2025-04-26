@@ -8,7 +8,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.condition.CanonicalRepresentation;
-import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ResolvedRecipes;
@@ -207,7 +207,7 @@ public class KnifeCategory extends RootsRecipeBaseCategory<KnifeRecipe> {
     }
 
     int column = 0;
-    for (LevelCondition condition : recipe.getLevelConditions()) {
+    for (ILevelCondition condition : recipe.getLevelConditions()) {
       CanonicalRepresentation rep = condition.getRepresentation();
       int count = rep.getStates().size();
       int offset = 71;

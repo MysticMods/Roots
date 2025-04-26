@@ -191,7 +191,7 @@ public class RootsLangProvider extends LanguageProvider {
     RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
-    RootsRegistries.LEVEL_CONDITIONS.entrySet().forEach(o -> {
+/*    RootsRegistries.LEVEL_CONDITIONS.entrySet().forEach(o -> {
           if (ModConditions.OVERGROWTH_CONDITION.is(o.getKey())) {
             add(o.getValue().getDescriptionId(), "Water Source or Creeping Grove Moss");
           } else {
@@ -201,7 +201,7 @@ public class RootsLangProvider extends LanguageProvider {
     );
     RootsRegistries.PLAYER_CONDITIONS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
-    );
+    );*/
 
     // Blocks
     addBlock(ModBlocks.THATCH);

@@ -7,7 +7,14 @@
       }
     ],
     "levelConditions": [
-      "roots:active_grove_stone"
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "any",
+          "tag": "roots:grove_stones"
+        },
+        "require_active": true
+      }
     ],
     "priority": 0,
     "result": {

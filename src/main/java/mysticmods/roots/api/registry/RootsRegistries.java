@@ -2,8 +2,11 @@ package mysticmods.roots.api.registry;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.action.GroveAction;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.condition.ILevelConditionType;
+import mysticmods.roots.api.condition.IPlayerCondition;
+import mysticmods.roots.api.condition.IPlayerConditionType;
+import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.growth.CanGrowFunction;
 import mysticmods.roots.api.growth.CanHarvestFunction;
@@ -36,9 +39,9 @@ public class RootsRegistries {
       .create();
   public static final Registry<PropertySerializer<?>> PROPERTY_SERIALIZERS = new RegistryBuilder<>(Keys.PROPERTY_SERIALIZERS).sync(true)
       .create();
-  public static final Registry<LevelCondition> LEVEL_CONDITIONS = new RegistryBuilder<>(Keys.LEVEL_CONDITIONS).sync(true)
+  public static final Registry<ILevelConditionType<?>> LEVEL_CONDITIONS = new RegistryBuilder<>(Keys.LEVEL_CONDITIONS).sync(true)
       .create();
-  public static final Registry<PlayerCondition> PLAYER_CONDITIONS = new RegistryBuilder<>(Keys.PLAYER_CONDITIONS).sync(true)
+  public static final Registry<IPlayerConditionType<?>> PLAYER_CONDITIONS = new RegistryBuilder<>(Keys.PLAYER_CONDITIONS).sync(true)
       .create();
   public static final Registry<EntityTestType<?>> ENTITY_TEST_TYPES = new RegistryBuilder<>(Keys.ENTITY_TEST_TYPES).sync(true)
       .create();
@@ -67,8 +70,8 @@ public class RootsRegistries {
     public static ResourceKey<Registry<RitualModifier>> RITUAL_MODIFIERS = key(RootsAPI.rl("ritual_modifiers"));
     public static ResourceKey<Registry<PropertyType<?>>> PROPERTY_TYPES = key(RootsAPI.rl("property_types"));
     public static ResourceKey<Registry<PropertySerializer<?>>> PROPERTY_SERIALIZERS = key(RootsAPI.rl("property_serializers"));
-    public static ResourceKey<Registry<LevelCondition>> LEVEL_CONDITIONS = key(RootsAPI.rl("level_conditions"));
-    public static ResourceKey<Registry<PlayerCondition>> PLAYER_CONDITIONS = key(RootsAPI.rl("player_conditions"));
+    public static ResourceKey<Registry<ILevelConditionType<?>>> LEVEL_CONDITIONS = key(RootsAPI.rl("level_conditions"));
+    public static ResourceKey<Registry<IPlayerConditionType<?>>> PLAYER_CONDITIONS = key(RootsAPI.rl("player_conditions"));
     public static ResourceKey<Registry<EntityTestType<?>>> ENTITY_TEST_TYPES = key(RootsAPI.rl("entity_test_types"));
     public static ResourceKey<Registry<WorldTestType<?>>> WORLD_TEST_TYPES = key(RootsAPI.rl("world_test_types"));
     public static ResourceKey<Registry<SnapshotType<?>>> SNAPSHOT_TYPES = key(RootsAPI.rl("snapshot_types"));

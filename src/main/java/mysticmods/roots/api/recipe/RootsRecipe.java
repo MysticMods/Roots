@@ -2,8 +2,8 @@ package mysticmods.roots.api.recipe;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.Unlock;
-import mysticmods.roots.api.condition.LevelCondition;
-import mysticmods.roots.api.condition.PlayerCondition;
+import mysticmods.roots.api.condition.ILevelCondition;
+import mysticmods.roots.api.condition.IPlayerCondition;
 import mysticmods.roots.api.recipe.crafting.IRootsCrafting;
 import mysticmods.roots.api.recipe.output.ChanceOutput;
 import net.minecraft.core.HolderLookup;
@@ -32,7 +32,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
   @Override
-  public List<LevelCondition> getLevelConditions() {
+  public List<ILevelCondition> getLevelConditions() {
     if (this.data.levelConditions == null) {
       return Collections.emptyList();
     }
@@ -40,7 +40,7 @@ public abstract class RootsRecipe<H extends IItemHandler, W extends IRootsCrafti
   }
 
   @Override
-  public List<PlayerCondition> getPlayerConditions() {
+  public List<IPlayerCondition> getPlayerConditions() {
     if (this.data.playerConditions == null) {
       return Collections.emptyList();
     }

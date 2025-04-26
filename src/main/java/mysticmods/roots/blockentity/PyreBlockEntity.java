@@ -185,9 +185,6 @@ public class PyreBlockEntity extends UseDelegatedBlockEntity implements ClientTi
       // TODO: Provider better feedback to the player
       ConditionResult result = cachedRecipe.value().checkConditions(level, player, getPyreBoundingBox(), getBlockPos());
       if (result.anyFailed()) {
-        RootsAPI.LOG.info("Conditions failed.");
-        result.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: {}", o.getDescriptionId()));
-        result.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: {}", o.getDescriptionId()));
         result.report(player);
         // Needs to be a success or it sets things on fire
         return InteractionResult.FAIL;

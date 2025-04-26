@@ -6,7 +6,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.ReputationStorage;
-import mysticmods.roots.api.condition.LevelCondition;
+import mysticmods.roots.api.condition.ILevelCondition;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -208,9 +208,9 @@ public class RootsCommand {
       ItemHandlerHelper.insertItemStacked(playerInv, new ItemStack(Items.FLINT_AND_STEEL), false);
 
       // Iterate over world conditions and create them using /place
-      List<LevelCondition> conditions = recipe.value().getLevelConditions();
+      List<ILevelCondition> conditions = recipe.value().getLevelConditions();
       for (int i = 0; i < conditions.size(); i++) {
-        LevelCondition condition = conditions.get(i);
+        ILevelCondition condition = conditions.get(i);
         if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
           c.getSource()
               .sendFailure(Component.translatable("roots.commands.pyre.failed_condition", condition.getName()));
@@ -283,9 +283,9 @@ public class RootsCommand {
       ItemHandlerHelper.insertItemStacked(playerInv, new ItemStack(Items.FLINT_AND_STEEL), false);
 
       // Iterate over world conditions and create them using /place
-      List<LevelCondition> conditions = recipe.value().getLevelConditions();
+      List<ILevelCondition> conditions = recipe.value().getLevelConditions();
       for (int i = 0; i < conditions.size(); i++) {
-        LevelCondition condition = conditions.get(i);
+        ILevelCondition condition = conditions.get(i);
         if (!condition.getRepresentation().place(level, pos.relative(Direction.NORTH, i + 1))) {
           c.getSource()
               .sendFailure(Component.translatable("roots.commands.ritual.failed_condition", condition.getName()));

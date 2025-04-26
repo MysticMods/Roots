@@ -6,15 +6,15 @@ import mysticmods.roots.action.CraftRecipeAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.blockentity.ServerTickBlockEntity;
+import mysticmods.roots.api.condition.GroveType;
 import mysticmods.roots.api.recipe.ConditionResult;
 import mysticmods.roots.api.recipe.UnlockResult;
 import mysticmods.roots.block.GroveCrafterBlock;
 import mysticmods.roots.blockentity.template.UseDelegatedBlockEntity;
+import mysticmods.roots.condition.GroveStoneCondition;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModBlockEntities;
-import mysticmods.roots.init.ModConditions;
 import mysticmods.roots.init.ResolvedRecipes;
-import mysticmods.roots.network.client.fx.SpiralFXPacket;
 import mysticmods.roots.recipe.grove.GroveCrafting;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.util.ItemUtil;
@@ -27,7 +27,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -37,7 +36,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -83,9 +81,6 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
       ConditionResult conditionResult = cachedRecipe.value()
           .checkConditions(level, player, PyreBlockEntity.getPyreBoundingBox(), pos);
       if (conditionResult.anyFailed()) {
-        RootsAPI.LOG.info("Conditions failed.");
-        conditionResult.failedLevelConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
-        conditionResult.failedPlayerConditions().forEach(o -> RootsAPI.LOG.info("Failed: " + o.getDescriptionId()));
         conditionResult.report(player);
         return InteractionResult.FAIL;
       }
@@ -128,6 +123,8 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     return InteractionResult.PASS;
   }
 
+  public static final GroveStoneCondition ANY_VALID_GROVE_STONE = new GroveStoneCondition(GroveType.ANY, true);
+
   protected void revalidateRecipe() {
     if (getLevel() == null) {
       return;
@@ -151,7 +148,7 @@ public class GroveCrafterBlockEntity extends UseDelegatedBlockEntity implements 
     }
 
     boolean active = getBlockState().getValue(GroveCrafterBlock.ACTIVE);
-    Set<BlockPos> groveStones = ModConditions.GROVE_STONE_ACTIVE.get()
+    Set<BlockPos> groveStones = ANY_VALID_GROVE_STONE
         .test(getLevel(), null, PyreBlockEntity.getPyreBoundingBox(), getBlockPos(), Collections.emptySet());
     if (groveStones.isEmpty() && active) {
       getLevel().setBlock(getBlockPos(), getBlockState().setValue(GroveCrafterBlock.ACTIVE, false), 3);
