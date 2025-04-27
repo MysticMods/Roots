@@ -1777,6 +1777,8 @@ public class RootsRecipeProvider extends RecipeProvider {
         .requires(ModItems.INK_BOTTLE.get())
         .unlockedBy("has_ink_bottle", has(ModItems.INK_BOTTLE.get()))
         .save(c, RootsAPI.rl("writable_book_ink_bottle"));
+
+    
   }
 
   public static class RecipeSaver {
