@@ -8,14 +8,19 @@ import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.state.BlockState;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public record ConditionWidget(int xOffset, int yOffset, int width, int height, List<BlockState> states,
-                              Component tooltip) implements IRecipeWidget {
+                              Component tooltip, @Nullable Component description) implements IRecipeWidget {
   @Override
   public void getTooltip(ITooltipBuilder tooltip, double mouseX, double mouseY) {
     if (mouseX > 0 && mouseX <= width && mouseY > 0 && mouseY <= height) {
       tooltip.add(this.tooltip);
+      if (description != null) {
+        tooltip.add(Component.empty());
+        tooltip.add(description);
+      }
     }
   }
 

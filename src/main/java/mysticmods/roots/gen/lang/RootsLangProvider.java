@@ -191,17 +191,21 @@ public class RootsLangProvider extends LanguageProvider {
     RootsRegistries.SPELL_MODIFIERS.entrySet().forEach(o ->
         add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
     );
-/*    RootsRegistries.LEVEL_CONDITIONS.entrySet().forEach(o -> {
-          if (ModConditions.OVERGROWTH_CONDITION.is(o.getKey())) {
-            add(o.getValue().getDescriptionId(), "Water Source or Creeping Grove Moss");
-          } else {
-            add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
-          }
-        }
-    );
-    RootsRegistries.PLAYER_CONDITIONS.entrySet().forEach(o ->
-        add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()))
-    );*/
+
+    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get().getName(), "Active Grove Stone");
+    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_ACTIVE.get().getName() + ".description", "A Grove Stone that has been activated by the ritual Grove Supplication.");
+    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_INACTIVE.get().getName(), "Inactive Grove Stone");
+    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE_INACTIVE.get().getName() + ".description", "A Grove Stone that has not yet been activated.");
+    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE.get().getName(), "Any Grove Stone");
+    add("level_condition.roots." + ModConditions.ANY_GROVE_STONE.get().getName() + ".description", "A Grove Stone of any kind, active or inactive.");
+    add("level_condition.roots." + ModConditions.RUNESTONE_PILLAR_3_HIGH.get().getName(), "3 High Runestone Pillar");
+    add("level_condition.roots." + ModConditions.RUNESTONE_PILLAR_3_HIGH.get().getName() + ".description", "A pillar of three (3) runestone or runed obsidian blocks, topped with a chiseled runestone or runed obsidian block.");
+    add("level_condition.roots." + ModConditions.RUNESTONE_PILLAR_4_HIGH.get().getName(), "4 High Runestone Pillar");
+    add("level_condition.roots." + ModConditions.RUNESTONE_PILLAR_4_HIGH.get().getName() + ".description", "A pillar of four (4) runestone or runed obsidian blocks, topped with a chiseled runestone or runed obsidian block.");
+    add("level_condition.roots." + ModConditions.MATURE_WILDROOT_CROP.get().getName(), "Mature Wildroot Crop");
+    add("level_condition.roots." + ModConditions.MATURE_WILDROOT_CROP.get().getName() + ".description", "A wildroot crop that has reached its final growth stage.");
+    add("level_condition.roots." + ModConditions.OVERGROWTH.get().getName(), "Creeping Grove Moss or Water Source");
+    add("level_condition.roots." + ModConditions.OVERGROWTH.get().getName() + ".description", "An already existing block of creeping grove moss with space adjacent for future growth, or any solid block that has a water source block adjacent to it.");
 
     // Blocks
     addBlock(ModBlocks.THATCH);

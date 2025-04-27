@@ -22,7 +22,7 @@ public class ModConditions {
   private static final DeferredRegister<ILevelConditionType<?>> LEVEL = DeferredRegister.create(RootsRegistries.LEVEL_CONDITIONS, RootsAPI.MODID);
   private static final DeferredRegister<IPlayerConditionType<?>> PLAYER = DeferredRegister.create(RootsRegistries.PLAYER_CONDITIONS, RootsAPI.MODID);
 
-
+  // TODO: This needs to not be a map
   public static final Map<String, Supplier<CanonicalRepresentation>> SPECIAL_REPRESENTATIONS = new Object2ObjectOpenHashMap<>();
   public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<GroveStoneCondition>> GROVE_STONE_CONDITION_TYPE = LEVEL.register("grove_stone_condition", GroveStoneCondition.Type::new);
   public static final DeferredHolder<ILevelConditionType<?>, ILevelConditionType<PillarCondition>> PILLAR_CONDITION_TYPE = LEVEL.register("pillar_condition", PillarCondition.Type::new);
@@ -34,7 +34,8 @@ public class ModConditions {
   public static final Supplier<ILevelCondition> RUNESTONE_PILLAR_3_HIGH = Suppliers.memoize(() -> new PillarCondition(PillarType.ANY_RUNE, 3));
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE_ACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, true));
   public static final Supplier<ILevelCondition> ANY_GROVE_STONE_INACTIVE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, true));
-  private static final String WILDROOT_CROP = ("mature_wildroot_crop").intern();
+  public static final Supplier<ILevelCondition> ANY_GROVE_STONE = Suppliers.memoize(() -> new GroveStoneCondition(GroveType.ANY, false, false));
+  private static final String WILDROOT_CROP = "mature_wildroot_crop";
   public static final Supplier<ILevelCondition> MATURE_WILDROOT_CROP = Suppliers.memoize(() -> new BlockStatePropertyCondition(WILDROOT_CROP, new PartialBlockStateMatchWorldTest(new PartialBlockState(ModBlocks.WILDROOT_CROP.get()
       .defaultBlockState().setValue(ThreeStageCropBlock.AGE, 3), ThreeStageCropBlock.AGE))));
   static {

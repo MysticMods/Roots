@@ -55,4 +55,8 @@ public interface ILevelCondition {
   default Component getNameComponent() {
     return Component.translatable("level_condition.roots." + getName());
   }
+
+  default Component getDescriptionComponent() {
+    return Component.translatable("level_condition.roots." + getName() + ".description");
+  }
 }

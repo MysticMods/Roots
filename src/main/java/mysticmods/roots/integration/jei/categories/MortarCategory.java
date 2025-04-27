@@ -62,7 +62,7 @@ public class MortarCategory extends RootsRecipeBaseCategory<MortarRecipe> {
       if (count == 3) {
         offset = 89;
       }
-      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent()));
+      builder.addWidget(new ConditionWidget(column * 18, offset, 18, 40, rep.getStates(), condition.getNameComponent(), condition.getDescriptionComponent()));
       column++;
     }
   }
