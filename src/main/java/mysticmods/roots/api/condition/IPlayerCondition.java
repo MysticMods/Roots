@@ -3,6 +3,7 @@ package mysticmods.roots.api.condition;
 import com.mojang.serialization.Codec;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
@@ -23,9 +24,11 @@ public interface IPlayerCondition {
 
   boolean test(Level level, @Nonnull Player player);
 
-  ItemStack getIcon();
-
-  Component getName ();
-
   IPlayerConditionType<?> type();
+
+  String getName ();
+
+  default Component getNameComponent() {
+    return Component.translatable("level_condition.roots." + getName());
+  }
 }

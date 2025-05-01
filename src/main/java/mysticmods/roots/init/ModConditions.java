@@ -46,6 +46,8 @@ public class ModConditions {
   }
   public static final Supplier<ILevelCondition> OVERGROWTH = Suppliers.memoize(OvergrowthCondition::getInstance);
 
+  public static final DeferredHolder<IPlayerConditionType<?>, IPlayerConditionType<GroveRankReputation>> GROVE_RANK_CONDITION_TYPE = PLAYER.register("grove_rank_condition", GroveRankReputation.Type::new);
+
   public static void register(IEventBus bus) {
     LEVEL.register(bus);
     PLAYER.register(bus);
