@@ -3,11 +3,13 @@ package mysticmods.roots.api.attachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.action.UniqueReputation;
 import mysticmods.roots.api.grove.Grove;
+import mysticmods.roots.api.grove.ReputationRanks;
 import mysticmods.roots.api.registry.RootsRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -46,6 +48,10 @@ public class ReputationStorage implements ICleanable {
 
   public int getRank(Grove grove) {
     return grove.getRanks().getRank(reputations.computeIfAbsent(grove, t -> 0));
+  }
+
+  public ReputationRanks.Progress getProgress (Grove grove) {
+    return grove.getRanks().getProgress(reputations.computeIfAbsent(grove, t -> 0));
   }
 
   public int getReputation(Grove grove) {

@@ -31,4 +31,39 @@ public record ReputationRanks(int threshold1, int threshold2, int threshold3, in
       return 0;
     }
   }
+
+  // Calculates how much reputation you have in the current rank
+  public int getCurrentRankProgress(int reputation) {
+    if (reputation >= threshold4) {
+      return reputation - threshold4;
+    } else if (reputation >= threshold3) {
+      return reputation - threshold3;
+    } else if (reputation >= threshold2) {
+      return reputation - threshold2;
+    } else {
+      return reputation;
+    }
+  }
+
+  // Determines the reputation needed to complete this rank and move to the next
+  public int getCurrentRankMax(int reputation) {
+    if (reputation >= threshold4) {
+      return 0; // already at highest rank
+    } else if (reputation >= threshold3) {
+      return threshold4 - threshold3;
+    } else if (reputation >= threshold2) {
+      return threshold3 - threshold2;
+    } else {
+      return threshold2;
+    }
+  }
+
+  public Progress getProgress (int reputation) {
+    int rank = getRank(reputation);
+    int progress = getCurrentRankProgress(reputation);
+    int nextRank = getCurrentRankMax(reputation);
+    return new Progress(rank, progress, nextRank, reputation);
+  }
+
+  public record Progress (int rank, int progress, int nextRank, int total) {};
 }

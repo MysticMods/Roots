@@ -70,7 +70,7 @@ public abstract class RootsScreen extends Screen {
     stack.translate(guiLeft, guiTop, 0);
     RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     drawBackground(graphics, pMouseX, pMouseY, pPartialTick);
-    drawForeground(stack, pMouseX, pMouseY, pPartialTick);
+    drawForeground(graphics, pMouseX, pMouseY, pPartialTick);
     stack.popPose();
     for (Renderable renderable : this.renderables) {
       renderable.render(graphics, pMouseX, pMouseY, pPartialTick);
@@ -91,6 +91,6 @@ public abstract class RootsScreen extends Screen {
     graphics.blit(resourceLocation, 0, 0, 0, 0, uvW, uvH, maxW, maxH);
   }
 
-  public void drawForeground(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+  public void drawForeground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
   }
 }
