@@ -8,6 +8,7 @@ import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.layer.HerbLayer;
+import mysticmods.roots.client.gui.screen.ReputationScreen;
 import mysticmods.roots.client.gui.screen.StaffScreen;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.TokenItem;
@@ -83,6 +84,10 @@ public class RootsClientHooks {
 
   public static void openLibrary(@Nullable InteractionHand hand, int inventorySlot) {
     StaffScreen.open(hand, inventorySlot);
+  }
+
+  public static void openReputation() {
+    ReputationScreen.open();
   }
 
   public static void setEntitySnapshot(int entity, SnapshotStorage storage) {

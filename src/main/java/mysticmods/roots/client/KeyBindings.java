@@ -30,7 +30,8 @@ public class KeyBindings {
   public static final CastingTaggedSpell ADJUSTABLE = CastingTaggedSpell.spell(RootsTags.Spells.ADJUSTABLE_SPELL);
 
   public static final KeyMapping OPEN_SPELL_LIBRARY = new KeyMapping("key.roots.open_spell_library", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_K, CATEGORY);
-  public static final KeyMapping OPEN_POUCH = new KeyMapping("ley.roots.open_pouch", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
+  public static final KeyMapping OPEN_POUCH = new KeyMapping("key.roots.open_pouch", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
+  public static final KeyMapping OPEN_REPUTATION = new KeyMapping("key.roots.open_reputation", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY);
   public static final KeyMapping INCREASE_SPELL = new KeyMapping("key.roots.increase_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_RBRACKET, CATEGORY);
   public static final KeyMapping DECREASE_SPELL = new KeyMapping("key.roots.decrease_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_LBRACKET, CATEGORY);
   public static final KeyMapping CYCLE_SPELL = new KeyMapping("key.roots.cycle_spell", ADJUSTABLE, InputConstants.Type.KEYSYM, InputConstants.KEY_BACKSLASH, CATEGORY);
@@ -40,7 +41,8 @@ public class KeyBindings {
       INCREASE_SPELL,
       DECREASE_SPELL,
       CYCLE_SPELL,
-      OPEN_POUCH);
+      OPEN_POUCH,
+      OPEN_REPUTATION);
 
 
   @SubscribeEvent
@@ -50,6 +52,7 @@ public class KeyBindings {
     event.register(DECREASE_SPELL);
     event.register(CYCLE_SPELL);
     event.register(OPEN_POUCH);
+    event.register(OPEN_REPUTATION);
   }
 
   public static class HoldingTaggedItem implements IKeyConflictContext {

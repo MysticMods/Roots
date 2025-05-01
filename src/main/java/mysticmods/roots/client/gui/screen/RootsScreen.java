@@ -79,12 +79,16 @@ public abstract class RootsScreen extends Screen {
   }
 
   public void drawBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-    ResourceLocation resourceLocation = getBackground();
     int width1 = getBackgroundWidth();
     int height1 = getBackgroundHeight();
     int fileWidth = getBackgroundWidth();
     int fileHeight = getBackgroundHeight();
-    graphics.blit(resourceLocation, 0, 0, 0, 0, width1, height1, fileWidth, fileHeight);
+    drawBackground(graphics, mouseX, mouseY, partialTicks, width1, height1, fileWidth, fileHeight);
+  }
+
+  public void drawBackground (GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, int uvW, int uvH, int maxW, int maxH) {
+    ResourceLocation resourceLocation = getBackground();
+    graphics.blit(resourceLocation, 0, 0, 0, 0, uvW, uvH, maxW, maxH);
   }
 
   public void drawForeground(PoseStack stack, int mouseX, int mouseY, float partialTicks) {

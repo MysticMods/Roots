@@ -28,6 +28,11 @@ public class KeyHandler {
       return;
     }
 
+    while (KeyBindings.OPEN_REPUTATION.consumeClick()) {
+      RootsClientHooks.openReputation();
+      return;
+    }
+
     while (KeyBindings.OPEN_POUCH.consumeClick()) {
       PacketDistributor.sendToServer(ServerboundOpenPouchPacket.INSTANCE);
       return;

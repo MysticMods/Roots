@@ -51,6 +51,7 @@ public class PacketHandler {
     registrar.play(ClientboundReputationMessagePacket.TYPE, ClientboundReputationMessagePacket.CODEC);
     registrar.play(AnimalHarvestFXPacket.TYPE, AnimalHarvestFXPacket.CODEC);
     registrar.play(SpiralFXPacket.TYPE, SpiralFXPacket.CODEC);
+    registrar.play(ClientboundOpenReputationPacket.TYPE, ClientboundOpenReputationPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {
