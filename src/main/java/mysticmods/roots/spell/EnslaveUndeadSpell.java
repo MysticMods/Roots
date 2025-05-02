@@ -26,7 +26,6 @@ public class EnslaveUndeadSpell extends Spell {
 
   @Override
   public void initialize(Holder<Spell> holder) {
-
   }
 
   @Override

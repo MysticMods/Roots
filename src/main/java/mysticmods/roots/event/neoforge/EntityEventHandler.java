@@ -25,6 +25,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +34,8 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -243,6 +246,13 @@ public class EntityEventHandler {
       data4.setDirty(true);
       player.setData(ModAttachments.SNAPSHOT_STORAGE, data4);
     }
+  }
+
+  @SubscribeEvent
+  public static void onAttributes (EntityAttributeModificationEvent event) {
+    event.add(EntityType.PLAYER, ModAttributes.COOLDOWN_REDUCTION);
+    event.add(EntityType.PLAYER, ModAttributes.COST_REDUCTION);
+    event.add(EntityType.PLAYER, ModAttributes.FORAGING);
   }
 
   // "Update" tick event handled in MixinLivingEntity
