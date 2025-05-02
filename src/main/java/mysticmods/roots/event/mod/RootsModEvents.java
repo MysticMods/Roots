@@ -2,18 +2,20 @@ package mysticmods.roots.event.mod;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.init.ModItems;
 import mysticmods.roots.init.ModTabs;
 import mysticmods.roots.item.Dyeable;
-import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 
 @EventBusSubscriber(modid = RootsAPI.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class CreativeTabEvents {
+public class RootsModEvents {
   @SubscribeEvent
   public static void creativeTabOrder(BuildCreativeModeTabContentsEvent event) {
     if (event.getTab().equals(ModTabs.ROOTS_TAB.get())) {
@@ -357,5 +359,13 @@ public class CreativeTabEvents {
       event.accept(ModItems.RITUAL_WILDROOT_GROWTH.get());
       event.accept(ModItems.RITUAL_WINDWALL.get());
     }
+  }
+
+
+  @SubscribeEvent
+  public static void onAttributes (EntityAttributeModificationEvent event) {
+    event.add(EntityType.PLAYER, ModAttributes.COOLDOWN_REDUCTION);
+    event.add(EntityType.PLAYER, ModAttributes.COST_REDUCTION);
+    event.add(EntityType.PLAYER, ModAttributes.FORAGING);
   }
 }

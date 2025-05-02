@@ -6,7 +6,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.init.ModLoot;
 import mysticmods.roots.util.ForagingUtil;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -20,7 +23,8 @@ import java.util.Set;
 
 public record ForagingRandomChanceCondition(NumberProvider chance) implements LootItemCondition {
   public static final MapCodec<ForagingRandomChanceCondition> CODEC = RecordCodecBuilder.mapCodec(
-      p_344719_ -> p_344719_.group(NumberProviders.CODEC.fieldOf("chance")
+      p_344719_ -> p_344719_.group(
+          NumberProviders.CODEC.fieldOf("chance")
               .forGetter(ForagingRandomChanceCondition::chance))
           .apply(p_344719_, ForagingRandomChanceCondition::new)
   );
@@ -40,8 +44,16 @@ public record ForagingRandomChanceCondition(NumberProvider chance) implements Lo
     if (itemstack == null || !itemstack.canPerformAction(RootsAPI.FORAGE)) {
       return false;
     }
+
+    Player player;
+    if (context.getParamOrNull(LootContextParams.THIS_ENTITY) instanceof Player pPlayer) {
+      player = pPlayer;
+    } else {
+      player = null;
+    }
+
     float baseChance = this.chance.getFloat(context);
-    int foraging = ForagingUtil.getForagingValue(itemstack);
+    int foraging = ForagingUtil.getForagingValue(player, itemstack);
 
     float maxMultiplier = 2f;
 

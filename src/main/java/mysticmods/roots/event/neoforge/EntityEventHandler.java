@@ -248,12 +248,6 @@ public class EntityEventHandler {
     }
   }
 
-  @SubscribeEvent
-  public static void onAttributes (EntityAttributeModificationEvent event) {
-    event.add(EntityType.PLAYER, ModAttributes.COOLDOWN_REDUCTION);
-    event.add(EntityType.PLAYER, ModAttributes.COST_REDUCTION);
-    event.add(EntityType.PLAYER, ModAttributes.FORAGING);
-  }
 
   // "Update" tick event handled in MixinLivingEntity
 }
