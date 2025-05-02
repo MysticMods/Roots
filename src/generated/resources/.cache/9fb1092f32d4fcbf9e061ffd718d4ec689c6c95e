@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-02T18:42:45.3107641	Recipes
+// 1.21.1	2025-05-02T20:10:13.5227619	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -425,7 +425,7 @@ fd2fdbd17584e9a352a82f4cfd71c041b0d24730 data/roots/recipe/grove/runestone_7.jso
 258ea4190dd70d20cc1983d4077f016870eeafe7 data/roots/recipe/grove/runestone_8.json
 9a04e6f89858d9e6450efa99b6b2b1e685bef288 data/roots/recipe/grove/runestone_9.json
 1b1ff2bec519a44b47104a39a12890aaf0a8c14f data/roots/recipe/grove/runic_shears.json
-b5c0226f116e7d3857a17bec348c1cd5ba9cd05f data/roots/recipe/grove/wildwood_pedestal.json
+1b8102255b7b536fa1f9e359875c5a90e8d6a3a7 data/roots/recipe/grove/wildwood_pedestal.json
 d66821b5bc1aed99fbb28bf7611fbe362591d991 data/roots/recipe/grove_crafter.json
 00d11decd717c1e41bac77424b9e7aa8699238d1 data/roots/recipe/grove_pedestal.json
 b87182eda80d7534e34ee0090dd1fcada3587d48 data/roots/recipe/herb_pouch.json

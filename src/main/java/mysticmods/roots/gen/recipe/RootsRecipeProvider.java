@@ -1001,7 +1001,7 @@ public class RootsRecipeProvider extends RecipeProvider {
     RecipeSaver.saver().unlockedBy("has_wildwood", has(RootsTags.Items.WILDWOOD_LOGS)).save(GroveRecipe.Builder.create()
         .build(BaseRecipeData.Builder.create().requires(RootsTags.Items.WILDWOOD_LOGS)
             .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
-            .requires(RootsTags.Items.WILDWOOD_LOGS).requires(RootsTags.Items.WILDWOOD_LOGS)
+            .requires(RootsTags.Items.WILDWOOD_LOGS)
             .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())
             .result(ModBlocks.WILDWOOD_PEDESTAL, 5)), c, RootsAPI.rl("grove/wildwood_pedestal"));
 

@@ -13,9 +13,6 @@
       },
       {
         "tag": "roots:logs/wildwood"
-      },
-      {
-        "tag": "roots:logs/wildwood"
       }
     ],
     "levelConditions": [
