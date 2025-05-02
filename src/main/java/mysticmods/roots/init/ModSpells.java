@@ -58,6 +58,10 @@ public class ModSpells {
   public static final PropertyHolder<Property.DoubleProperty> DANDELION_WINDS_RANGE_2 = P.recordProperty("dandelion_winds/range_2", Property.ofDouble(5.0, "The second range increment for calculating the bounding box from the player."));
   public static final PropertyHolder<Property.FloatProperty> DANDELION_WINDS_VERTICAL = P.recordProperty("dandelion_winds/vertical", Property.ofFloat(0.7f, "The percentage of the movement value applied to vertical momentum."));
 
+  // Decay
+  public static final DeferredHolder<Spell, DecaySpell> DECAY = spell(Spells.DECAY, DecaySpell::new, ChatFormatting.DARK_GREEN, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.STALICRIPE, SpellCosts.BASE_0250), Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250))));
+  public static final PropertyHolder<Property.IntegerProperty> DECAY_COOLDOWN = P.recordProperty("decay/cooldown", Property.ofInt(20, SpellProperties.COOLDOWN));
+
   // Desaturate (500 cooldown)
   public static final DeferredHolder<Spell, DesaturateSpell> DESATURATE = spell(Spells.DESATURATE, DesaturateSpell::new, ChatFormatting.GREEN, () -> CostInstance.of(CostInstance.ChargeType.CAST, List.of(Cost.add(ModHerbs.WILDEWHEET, SpellCosts.BASE_0250), Cost.add(ModHerbs.GROVE_MOSS, SpellCosts.BASE_0250))));
   public static final PropertyHolder<Property.IntegerProperty> DESATURATE_COOLDOWN = P.recordProperty("desaturate/cooldown", Property.ofInt(500, SpellProperties.COOLDOWN));

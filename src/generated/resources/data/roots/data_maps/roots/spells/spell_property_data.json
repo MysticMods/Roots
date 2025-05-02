@@ -141,6 +141,17 @@
         }
       }
     ],
+    "roots:decay": [
+      {
+        "id": "roots:decay/cooldown",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "How long before the player can cast the spell again",
+          "default_value": 20,
+          "value": 20
+        }
+      }
+    ],
     "roots:desaturate": [
       {
         "id": "roots:desaturate/cooldown",
