@@ -439,7 +439,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_runestone", has(RootsTags.Items.RUNESTONE))
         .save(c);
 
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROVE_PEDESTAL.get(), 4)
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.GROVE_PEDESTAL.get(), 5)
         .pattern("LLL")
         .pattern(" L ")
         .pattern("LLL")
