@@ -32,6 +32,7 @@ public class Costing {
   private final CostInstance.ChargeType chargeType;
 
   private int operationsCount = 0;
+  private double discount = 0;
   private boolean noCharge = false;
   private boolean foundCreativePouch = false;
 
@@ -64,6 +65,14 @@ public class Costing {
 
   public void operations(int operations) {
     this.operationsCount = operations;
+  }
+
+  public double discount () {
+    return this.discount;
+  }
+
+  public void discount(double discount) {
+    this.discount = discount;
   }
 
   public void charge(ICosted modifier) {
@@ -344,8 +353,14 @@ public class Costing {
         total /= 20;
       }
 
+      // Apply discounts
+      if (discount > 0) {
+        total -= total * discount;
+      }
+
       totalCosts.put(entry.getKey(), total);
     }
+
   }
 
   public Object2DoubleMap<Herb> getMinimumCost() {
@@ -361,7 +376,7 @@ public class Costing {
     return new Object2DoubleLinkedOpenHashMap<>(totalCosts);
   }
 
-  private class HerbEntry {
+  private static class HerbEntry {
     public final HerbEntryType type;
     public final Herb herb;
     public final int slot;

@@ -233,6 +233,8 @@ public class CastingItem extends Item {
 
       int cooldown = spell.cast(pLevel, pPlayer, pStack, pPlayer.getUsedItemHand(), costing, ticks);
       if (costing.charge(pPlayer)) {
+        SpellCastAction.Context context = new SpellCastAction.Context((ServerLevel) pLevel, (ServerPlayer) pPlayer, pPlayer.getUsedItemHand(), pPlayer.getItemInHand(pPlayer.getUsedItemHand()), spell, costing);
+        ModActions.SPELL_CAST.get().accept(context);
         pStack.set(ModAttachments.SPELL_STORAGE, storage.setCooldown(current, cooldown));
       }
     }

@@ -27,4 +27,7 @@ public interface IRootsAPI {
   RitualInformation.RitualResolutionType getRitualResolutionType();
 
   List<ItemStack> getCurios(Player player, TagKey<Item> tag);
+
+  double getCostReduction (Player player);
+  double getCooldownReduction (Player player);
 }

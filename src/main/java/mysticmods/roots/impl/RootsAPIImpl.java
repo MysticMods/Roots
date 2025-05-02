@@ -12,6 +12,7 @@ import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModAttachments;
+import mysticmods.roots.init.ModAttributes;
 import mysticmods.roots.integration.curios.CuriosIntegration;
 import mysticmods.roots.network.client.ClientboundGrantSyncPacket;
 import mysticmods.roots.network.client.ClientboundHerbCountSyncPacket;
@@ -69,5 +70,15 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public List<ItemStack> getCurios(Player player, TagKey<Item> tag) {
     return CuriosIntegration.getTagged(player, tag);
+  }
+
+  @Override
+  public double getCostReduction(Player player) {
+    return player.getAttributeValue(ModAttributes.COST_REDUCTION);
+  }
+
+  @Override
+  public double getCooldownReduction(Player player) {
+    return player.getAttributeValue(ModAttributes.COOLDOWN_REDUCTION);
   }
 }

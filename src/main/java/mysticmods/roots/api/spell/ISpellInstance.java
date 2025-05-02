@@ -1,5 +1,6 @@
 package mysticmods.roots.api.spell;
 
+import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.SpellLike;
 import mysticmods.roots.api.herb.CostInstance;
 import mysticmods.roots.api.registry.ICosted;
@@ -66,7 +67,12 @@ public interface ISpellInstance extends SpellLike, ICostedParent {
 
   // Returns length of cooldown
   default int cast(Level pLevel, Player pPlayer, ItemStack pStack, InteractionHand pHand, Costing costs, int ticks) {
-    return getSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
+    // TODO: Cooldown reduction and and cost reduction are applied here
+    int cooldown = getSpell().cast(pLevel, pPlayer, pStack, pHand, costs, this, ticks);
+    double costReduction = RootsAPI.getInstance().getCostReduction(pPlayer);
+    double cooldownReduction = RootsAPI.getInstance().getCooldownReduction(pPlayer);
+    costs.discount(costReduction);
+    return cooldown - (int) (cooldown * cooldownReduction);
   }
 
   default boolean hasBlockTarget(Player pPlayer) {
