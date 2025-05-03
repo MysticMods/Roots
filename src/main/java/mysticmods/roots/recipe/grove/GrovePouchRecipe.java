@@ -49,12 +49,7 @@ public class GrovePouchRecipe extends GroveRecipe {
     ItemStack result = super.assemble(arg, arg2);
 
     ItemContainerContents contents = pouch.get(((PouchItem) pouch.getItem()).getComponent());
-    ItemContainerContents newContents = result.get(((PouchItem) result.getItem()).getComponent());
-
-    if (contents != null && newContents != null) {
-      newContents.copyInto(NonNullList.copyOf(contents.stream().toList()));
-      result.set(((PouchItem) result.getItem()).getComponent(), newContents);
-    }
+    result.set(((PouchItem) result.getItem()).getComponent(), contents);
 
     return result;
   }
