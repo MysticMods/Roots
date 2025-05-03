@@ -1,14 +1,17 @@
-// 1.21.1	2025-04-21T13:56:45.4665783	Loot Tables
+// 1.21.1	2025-05-03T20:10:11.870736	Loot Tables
 66bd26a7c1449d3e7f67f3e279e1c960917b8d2f data/roots/loot_table/barrow.json
 f63203733497455eb34d3cc6a137001c8aff668a data/roots/loot_table/blocks/aqueous_soil.json
 0cc0b11ed64ff86dac70aea1e5221207549a403b data/roots/loot_table/blocks/aubergine_crop.json
 d53d055fadc939e4d850a6e995abee2b8d1e6705 data/roots/loot_table/blocks/bafflecap.json
 7c79b6868224c7233f74bb64475e05f7bfaf6950 data/roots/loot_table/blocks/bafflecap_block.json
+9eac29f30bec7424220c6551f8107bf00ecaa826 data/roots/loot_table/blocks/bafflecap_fairy_hut.json
+f1c0949382afc8793577cec6f42d0d934b68ecad data/roots/loot_table/blocks/brown_fairy_hut.json
 f01e7c0ac3a5c06cf21bbd8832dc1ae15a7e879d data/roots/loot_table/blocks/caelic_soil.json
 1051b692eaf9acd79b5da32eedda56f941895122 data/roots/loot_table/blocks/chiseled_runed_obsidian.json
 3c5eecd523903a3c801ea4f7aaf0707ebb2dee65 data/roots/loot_table/blocks/chiseled_runestone.json
 f3630283321b3fc5b68d38056fc98c35e41dddbd data/roots/loot_table/blocks/cloud_berry_crop.json
 bf21b73e3fe3075ef156f385c1638e98453f9543 data/roots/loot_table/blocks/creeping_grove_moss.json
+4d1bdcf873eeb957f85b467b2160b2504e96866a data/roots/loot_table/blocks/crimson_fairy_hut.json
 82d05fc580137b4b8fefb00359f8cb1666e3d024 data/roots/loot_table/blocks/decorative_pyre.json
 a7ee236c9f7482ed8f2dcc074cd546837a34f862 data/roots/loot_table/blocks/decorative_soul_pyre.json
 bf78417bc47bdc04c69bbc23edaf51f08a6a5407 data/roots/loot_table/blocks/deepslate_silver_ore.json
@@ -40,6 +43,7 @@ dcc0177dcdf03acd73c7126bb202fe1f61bcb9c3 data/roots/loot_table/blocks/pereskia_c
 cc248133c6eb8b737296fb0d65d137e6643c1795 data/roots/loot_table/blocks/primal_grove_stone.json
 0b9f5310ef18e3c7283f528688b7c8d134720567 data/roots/loot_table/blocks/pyre.json
 1c1c1fcc736bf7c93aadd66ea6e2e11ca248ffc3 data/roots/loot_table/blocks/raw_silver_block.json
+841a7d04b1c91f488201a59c033dbe5e6a62ccb4 data/roots/loot_table/blocks/red_fairy_hut.json
 c1d853ca073ad79c366534d8f010ea06f9c2eac5 data/roots/loot_table/blocks/reinforced_pyre.json
 efe901a4ec0b5a1ee70bfb44da0aa9d824b7addd data/roots/loot_table/blocks/reinforced_ritual_pedestal.json
 905ec5f6141b1debcd781d77f4e61a6c20ae13a3 data/roots/loot_table/blocks/reinforced_soul_pyre.json
@@ -103,6 +107,7 @@ a61a15020f054ac048ad0711fb575265698efd7b data/roots/loot_table/blocks/terran_soi
 bf1e65c8a2da41bc60327b96d24a202adb72dad0 data/roots/loot_table/blocks/thatch.json
 f4af7ff7120d0100b6cfc844ddecec41aa4040db data/roots/loot_table/blocks/twilight_grove_stone.json
 91d9bc6d7bc47222032e787cf046205037c81222 data/roots/loot_table/blocks/unending_bowl.json
+5e80c85d38737c3d9b0fd3478886b12c089ff3bf data/roots/loot_table/blocks/warped_fairy_hut.json
 97015411597c4200676a563a530597d2a181b273 data/roots/loot_table/blocks/wildewheet_crop.json
 1992b45ad9921cb0704366ad6536e3e23d95680b data/roots/loot_table/blocks/wildroot_crop.json
 e5d9bb6e33c52a49cee489bb09839cc1aad150c6 data/roots/loot_table/blocks/wildwood_button.json

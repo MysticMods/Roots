@@ -297,6 +297,11 @@ public class RootsLangProvider extends LanguageProvider {
     addBlock(ModBlocks.GROVE_PEDESTAL);
     addBlock(ModBlocks.WILDWOOD_PEDESTAL);
     addBlock(ModBlocks.DISPLAY_PEDESTAL);
+    addBlock(ModBlocks.RED_FAIRY_HUT);
+    addBlock(ModBlocks.CRIMSON_FAIRY_HUT);
+    addBlock(ModBlocks.WARPED_FAIRY_HUT);
+    addBlock(ModBlocks.BROWN_FAIRY_HUT);
+    addBlock(ModBlocks.BAFFLECAP_FAIRY_HUT);
     addBlock(ModBlocks.WILD_ROOTS);
     addBlock(ModBlocks.CREEPING_GROVE_MOSS);
     addBlock(ModBlocks.HANGING_GROVE_MOSS);

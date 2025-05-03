@@ -2,10 +2,7 @@ package mysticmods.roots.gen.loot;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.StateProperties;
-import mysticmods.roots.block.BaseBlocks;
-import mysticmods.roots.block.CreepingGroveMossBlock;
-import mysticmods.roots.block.GroveStoneBlock;
-import mysticmods.roots.block.WildRootsBlock;
+import mysticmods.roots.block.*;
 import mysticmods.roots.block.crop.ElementalCropBlock;
 import mysticmods.roots.block.crop.ElementalType;
 import mysticmods.roots.block.crop.FourStageCropBlock;
@@ -37,6 +34,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -435,6 +433,12 @@ public class RootsLootTableProvider {
       add(ModBlocks.POTTED_BAFFLECAP.get(), createPotFlowerItemTable(ModBlocks.BAFFLECAP.get()));
       add(ModBlocks.POTTED_STONEPETAL.get(), createPotFlowerItemTable(ModBlocks.STONEPETAL.get()));
       add(ModBlocks.POTTED_WILDWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.WILDWOOD_SAPLING.get()));
+      addFairyHouseDrops(ModBlocks.RED_FAIRY_HUT, ModItems.RED_FAIRY_HUT);
+      addFairyHouseDrops(ModBlocks.BROWN_FAIRY_HUT, ModItems.BROWN_FAIRY_HUT);
+      addFairyHouseDrops(ModBlocks.BAFFLECAP_FAIRY_HUT, ModItems.BAFFLECAP_FAIRY_HUT);
+      addFairyHouseDrops(ModBlocks.CRIMSON_FAIRY_HUT, ModItems.CRIMSON_FAIRY_HUT);
+      addFairyHouseDrops(ModBlocks.WARPED_FAIRY_HUT, ModItems.WARPED_FAIRY_HUT);
+
       addGroveStoneDrops(ModBlocks.PRIMAL_GROVE_STONE, ModItems.PRIMAL_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.WILD_GROVE_STONE, ModItems.WILD_GROVE_STONE);
       addGroveStoneDrops(ModBlocks.FUNGAL_GROVE_STONE, ModItems.FUNGAL_GROVE_STONE);
@@ -589,6 +593,15 @@ public class RootsLootTableProvider {
                       )
               )
       ));
+    }
+
+    protected void addFairyHouseDrops (Holder<Block> house, Holder<Item> houseItem) {
+      add(house.value(), applyExplosionDecay(houseItem.value(), LootTable.lootTable()
+          .withPool(LootPool.lootPool()
+              .when(new LootItemBlockStatePropertyCondition.Builder(house.value()).setProperties(StatePropertiesPredicate.Builder.properties()
+                  .hasProperty(FairyHutBlock.HALF, DoubleBlockHalf.LOWER)))
+              .add(LootItem.lootTableItem(houseItem.value())
+                  .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1f)))))));
     }
 
     protected void addGroveStoneDrops (Holder<Block> groveStone, Holder<Item> groveStoneItem) {

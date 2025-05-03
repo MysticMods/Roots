@@ -4,7 +4,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"1": "block/mossy_cobblestone",
-		"4": "red_mushroom_fairy_house",
+		"4": "red_fairy_house",
 		"particle": "block/mossy_cobblestone"
 	},
 	"elements": [

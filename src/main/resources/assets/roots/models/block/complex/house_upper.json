@@ -3,8 +3,7 @@
 	"parent": "block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"4": "red_mushroom_fairy_house",
-		"particle": "block/mossy_cobblestone"
+		"4": "roots:block/red_fairy_house"
 	},
 	"elements": [
 		{
@@ -12,7 +11,7 @@
 			"to": [14.25, 5.5, 2],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8.25, -4.375, 8]},
 			"faces": {
-				"north": {"uv": [0, 10, 6, 12.75], "rotation": 180, "texture": "#4"},
+				"north": {"uv": [0, 13.25, 6, 16], "rotation": 180, "texture": "#4"},
 				"east": {"uv": [0, 10, 0.75, 12.75], "texture": "#4"},
 				"south": {"uv": [6, 10, 12, 16], "texture": "#4"},
 				"west": {"uv": [0, 10, 0.75, 12.75], "texture": "#4"},
@@ -26,7 +25,7 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [8.25, -4.375, 8]},
 			"faces": {
 				"north": {"uv": [0, 10, 0.75, 12.75], "texture": "#4"},
-				"east": {"uv": [0, 10, 6, 12.75], "rotation": 180, "texture": "#4"},
+				"east": {"uv": [0, 13.25, 6, 16], "rotation": 180, "texture": "#4"},
 				"south": {"uv": [0, 10, 0.75, 12.75], "texture": "#4"},
 				"west": {"uv": [6, 10, 12, 16], "texture": "#4"},
 				"up": {"uv": [6, 16, 0, 15.25], "rotation": 90, "texture": "#4"},

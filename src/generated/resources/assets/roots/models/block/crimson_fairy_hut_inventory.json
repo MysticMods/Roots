@@ -1,0 +1,7 @@
+{
+  "parent": "roots:block/complex/house_full",
+  "textures": {
+    "4": "roots:block/crimson_fairy_house",
+    "particle": "roots:block/crimson_fairy_house"
+  }
+}

@@ -2,6 +2,7 @@ package mysticmods.roots.gen.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.block.FairyHutBlock;
 import mysticmods.roots.block.GroveStoneBlock;
 import mysticmods.roots.block.HangingGroveMossBlock;
 import mysticmods.roots.block.PyreBlock;
@@ -13,6 +14,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -310,6 +312,39 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     groveStone(ModBlocks.ELEMENTAL_GROVE_STONE);
     groveStone(ModBlocks.SPROUTING_GROVE_STONE);
     groveStone(ModBlocks.FUNGAL_GROVE_STONE);
+
+    fairyHut(ModBlocks.RED_FAIRY_HUT);
+    fairyHut(ModBlocks.WARPED_FAIRY_HUT);
+    fairyHut(ModBlocks.BAFFLECAP_FAIRY_HUT);
+    fairyHut(ModBlocks.CRIMSON_FAIRY_HUT);
+    fairyHut(ModBlocks.BROWN_FAIRY_HUT);
+  }
+
+  private void fairyHut(Holder<Block> holder) {
+    getVariantBuilder(holder.value())
+        .forAllStates(state -> {
+          String partName = state.getValue(FairyHutBlock.HALF).getSerializedName();
+          String material = holder.getKey().location().getPath().split("_")[0];
+          String name = material + "_fairy_hut_" + partName;
+          BlockModelBuilder model = models().withExistingParent(name, modLoc("block/complex/house_" + partName));
+
+          ResourceLocation texture = modLoc("block/" + material + "_fairy_house");
+
+          model.texture("4", texture);
+          // TODO: Fix particle texture
+          model.texture("particle", texture);
+
+          if (state.getValue(FairyHutBlock.HALF) == DoubleBlockHalf.LOWER) {
+            models().withExistingParent(material + "_fairy_hut_inventory", modLoc("block/complex/house_full")).texture("4", texture).texture("particle", texture);
+          }
+
+          Direction dir = state.getValue(FairyHutBlock.FACING);
+          return ConfiguredModel.builder()
+              .modelFile(model)
+              .rotationX(0)
+              .rotationY(dir.getAxis().isVertical() ? 0 : (int) (dir.toYRot() - 90) % 360)
+              .build();
+        });
   }
 
   private void groveStone (Holder<Block> holder) {

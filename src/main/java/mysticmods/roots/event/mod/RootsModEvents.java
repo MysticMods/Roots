@@ -123,6 +123,11 @@ public class RootsModEvents {
       event.accept(ModItems.WILDWOOD_PEDESTAL.get());
       event.accept(ModItems.DISPLAY_PEDESTAL.get());
 
+      event.accept(ModItems.RED_FAIRY_HUT.get());
+      event.accept(ModItems.BROWN_FAIRY_HUT.get());
+      event.accept(ModItems.BAFFLECAP_FAIRY_HUT.get());
+      event.accept(ModItems.CRIMSON_FAIRY_HUT.get());
+      event.accept(ModItems.WARPED_FAIRY_HUT.get());
 
       event.accept(ModItems.PYRE.get());
       event.accept(ModItems.SOUL_PYRE.get());
