@@ -97,7 +97,11 @@ public class HerbLayer {
     }
 
     public void show() {
-      this.ticks = TIME_VISIBLE;
+      if (this.ticks > 0) {
+        this.ticks = TIME_VISIBLE - ANIMATION_TIME;
+      } else {
+        this.ticks = TIME_VISIBLE;
+      }
     }
 
     public void render(GuiGraphics graphics, PoseStack pose, float partialTicks, int slot) {
