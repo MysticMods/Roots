@@ -14,6 +14,7 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.TokenItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -109,6 +111,27 @@ public class RootsClientHooks {
     }
 
     Entity actualEntity = minecraft.level.getEntity(entity);
+    if (actualEntity == null) {
+      return;
+    }
+    if (attachmentType.equals(ModAttachments.SNAPSHOT_STORAGE.getKey().location().toString())) {
+      actualEntity.removeData(ModAttachments.SNAPSHOT_STORAGE);
+    } else if (attachmentType.equals(ModAttachments.GRANT_STORAGE.getKey().location().toString())) {
+      actualEntity.removeData(ModAttachments.GRANT_STORAGE);
+    } else if (attachmentType.equals(ModAttachments.HERB_STORAGE.getKey().location().toString())) {
+      actualEntity.removeData(ModAttachments.HERB_STORAGE);
+    } else if (attachmentType.equals(ModAttachments.REPUTATION_STORAGE.getKey().location().toString())) {
+      actualEntity.removeData(ModAttachments.REPUTATION_STORAGE);
+    }
+  }
+
+  public static void discardBlockEntityAttachment(String attachmentType, long entity) {
+    Minecraft minecraft = Minecraft.getInstance();
+    if (minecraft == null || minecraft.level == null) {
+      return;
+    }
+
+    BlockEntity actualEntity = minecraft.level.getBlockEntity(BlockPos.of(entity));
     if (actualEntity == null) {
       return;
     }

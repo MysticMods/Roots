@@ -15,6 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
 import java.util.List;
@@ -36,4 +37,5 @@ public interface IRootsAPI {
   double getCooldownReduction (Player player);
 
   IRootsPacket getEntityDiscardPacket (ResourceKey<AttachmentType<?>> attachmentType, Entity entity);
+  IRootsPacket getBlockEntityDiscardPacket (ResourceKey<AttachmentType<?>> attachmentType, BlockEntity entity);
 }

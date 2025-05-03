@@ -24,6 +24,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -86,5 +87,11 @@ public class RootsAPIImpl implements IRootsAPI {
   @Override
   public IRootsPacket getEntityDiscardPacket(ResourceKey<AttachmentType<?>> attachmentType, Entity entity) {
     return new ClientboundDiscardEntityAttachmentPacket(attachmentType.location().toString(), entity.getId());
+  }
+
+  @Override
+  public IRootsPacket getBlockEntityDiscardPacket(ResourceKey<AttachmentType<?>> attachmentType, BlockEntity entity) {
+    return new ClientboundDiscardBlockEntityAttachmentPacket(attachmentType.location().toString(), entity.getBlockPos()
+        .asLong());
   }
 }
