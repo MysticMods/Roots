@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-02T20:10:13.5227619	Recipes
+// 1.21.1	2025-05-03T18:27:02.3028605	Recipes
 f5d5dbea68e55b3419545976a6e46541d333be34 data/minecraft/advancement/recipes/combat/netherite_knife_smithing.json
 8505bd1abf1dab5e51f5e7aec78b3980af5db086 data/minecraft/recipe/netherite_knife_smithing.json
 ffa109849b8a369a2ab0e0551b24987b4786b5f0 data/roots/advancement/recipes/building_blocks/chiseled_runed_obsidian_from_runed_brick_stonecutting.json
@@ -148,6 +148,9 @@ ce8e6adb59643c75106aec325883534abbaac62f data/roots/advancement/recipes/misc/cop
 d6d1be53bf19040b5a83f95222bca894da1b6223 data/roots/advancement/recipes/misc/display_pedestal.json
 19ff6d88f9ee9ac4348a62f2c0bc95ab1d99c30a data/roots/advancement/recipes/misc/fire_starter.json
 3a5dd25357a23e0a0d6dca6e3a2b209a3073b21f data/roots/advancement/recipes/misc/gray_dye_from_stonepetal.json
+6de8f977eedc12b01ee57d266884e998daab2a51 data/roots/advancement/recipes/misc/grove/apothecary_pouch.json
+75753d5a50ceadb1ec68a420ce0a627148524780 data/roots/advancement/recipes/misc/grove/component_pouch.json
+a76db854de3c6c9220d3056d61748a54d32a08f7 data/roots/advancement/recipes/misc/grove/dye_pouch.json
 14492e19804f8e1732b55f63171b3125198e5534 data/roots/advancement/recipes/misc/grove/elemental_soil.json
 b34f884186b0c3dc794dacf9d152356f58b43ce8 data/roots/advancement/recipes/misc/grove/glass_eye.json
 37b6c5f9c717635e232157354765016bcb36cc55 data/roots/advancement/recipes/misc/grove/living_arrow.json
@@ -404,6 +407,9 @@ b2b07ab2524a44de34b2c77b43f2d39b86396926 data/roots/recipe/decorative_pyre_from_
 e834f8252ee64a0b64be8e2ec7c60e85110e2b76 data/roots/recipe/fire_starter.json
 7f0d77b703f0685e9aab823b05967f9bddffcd69 data/roots/recipe/golden_knife.json
 9ec2a8b155c3abc2224e0ccf530cd5499f45662c data/roots/recipe/gray_dye_from_stonepetal.json
+cbf56237b6a532255c3f8ee1f4e8c6f32a5028fa data/roots/recipe/grove/apothecary_pouch.json
+0cecf836e63c4dc4a848a0e4d732368a83bfaaad data/roots/recipe/grove/component_pouch.json
+dbd714acba078e70de0ddb66ff53ef2f9a614663 data/roots/recipe/grove/dye_pouch.json
 fd512580762ea50a0c95743fc5653deeb294685f data/roots/recipe/grove/elemental_soil.json
 d71127c557af294e92cb0f6d7812b90e2e7d601b data/roots/recipe/grove/glass_eye.json
 724ae0bf4ae2f2cfc5e5de191c0d30d88e77c15c data/roots/recipe/grove/living_arrow.json

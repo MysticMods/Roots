@@ -1,0 +1,49 @@
+{
+  "type": "roots:grove_pouch",
+  "data": {
+    "ingredients": [
+      {
+        "tag": "c:strings"
+      },
+      {
+        "item": "roots:herb_pouch"
+      },
+      {
+        "tag": "c:strings"
+      },
+      {
+        "tag": "c:ingots/iron"
+      },
+      {
+        "tag": "c:ingots/iron"
+      },
+      {
+        "tag": "minecraft:wool"
+      },
+      {
+        "tag": "minecraft:wool"
+      },
+      {
+        "tag": "c:chests"
+      },
+      {
+        "tag": "c:chests"
+      }
+    ],
+    "levelConditions": [
+      {
+        "type": "roots:grove_stone_condition",
+        "grove_type": {
+          "name": "any",
+          "tag": "roots:grove_stones"
+        },
+        "require_active": true
+      }
+    ],
+    "priority": 0,
+    "result": {
+      "count": 1,
+      "id": "roots:component_pouch"
+    }
+  }
+}

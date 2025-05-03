@@ -7,10 +7,9 @@ import mysticmods.roots.api.recipe.BaseRecipeData;
 import mysticmods.roots.api.test.world.PartialBlockState;
 import mysticmods.roots.api.test.world.PartialBlockStateMatchWorldTest;
 import mysticmods.roots.api.test.world.TagMatchWorldTest;
-import mysticmods.roots.condition.GroveStoneCondition;
-import mysticmods.roots.condition.OvergrowthCondition;
 import mysticmods.roots.init.*;
 import mysticmods.roots.recipe.PouchDyeRecipe;
+import mysticmods.roots.recipe.grove.GrovePouchRecipe;
 import mysticmods.roots.recipe.grove.GroveRecipe;
 import mysticmods.roots.recipe.knife.DynamicBarkRecipe;
 import mysticmods.roots.recipe.knife.KnifeOffHandRecipe;
@@ -29,7 +28,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
@@ -1754,6 +1752,31 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_wool", has(ItemTags.WOOL))
         .save(c, RootsAPI.rl("herb_pouch"));
 
+    RecipeSaver.saver().unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON)).save(GrovePouchRecipe.Builder.create()
+        .build(BaseRecipeData.Builder.create().result(ModItems.COMPONENT_POUCH, 1).requires(Tags.Items.STRINGS)
+            .requires(ModItems.HERB_POUCH.get())
+            .requires(Tags.Items.STRINGS).requires(Tags.Items.INGOTS_IRON).requires(Tags.Items.INGOTS_IRON)
+            .requires(ItemTags.WOOL).requires(ItemTags.WOOL).requires(Tags.Items.CHESTS).requires(Tags.Items.CHESTS)
+            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/component_pouch"));
+
+    RecipeSaver.saver().unlockedBy("has_gold", has(Tags.Items.INGOTS_GOLD)).save(GrovePouchRecipe.Builder.create()
+        .build(BaseRecipeData.Builder.create().result(ModItems.APOTHECARY_POUCH, 1).requires(Tags.Items.STRINGS)
+            .requires(ModItems.COMPONENT_POUCH.get())
+            .requires(Tags.Items.STRINGS).requires(Tags.Items.INGOTS_GOLD).requires(Tags.Items.INGOTS_GOLD)
+            .requires(ItemTags.WOOL).requires(ItemTags.WOOL).requires(Tags.Items.CHESTS).requires(Tags.Items.CHESTS)
+            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/apothecary_pouch"));
+
+    RecipeSaver.saver().unlockedBy("has_sylvan_leather", has(RootsTags.Items.SYLVAN_LEATHERS))
+        .save(GrovePouchRecipe.Builder.create().build(BaseRecipeData.Builder.create().result(ModItems.SYLVAN_POUCH, 1)
+            .requires(ModItems.APOTHECARY_POUCH.get())
+            .requires(RootsTags.Items.SYLVAN_LEATHERS).requires(RootsTags.Items.SYLVAN_LEATHERS).
+            requires(RootsTags.Items.SYLVAN_LEATHERS).requires(RootsTags.Items.SYLVAN_LEATHERS).
+            requires(RootsTags.Items.SYLVAN_LEATHERS)
+            .requires(RootsTags.Items.PERESKIA_HERB).requires(RootsTags.Items.PERESKIA_HERB)
+            .requires(Tags.Items.INGOTS_GOLD).requires(Tags.Items.INGOTS_GOLD)
+            .requires(Tags.Items.CHESTS).requires(Tags.Items.CHESTS)
+            .condition(ModConditions.ANY_GROVE_STONE_ACTIVE.get())), c, RootsAPI.rl("grove/dye_pouch"));
+
     SpecialRecipeBuilder.special(PouchDyeRecipe::new).save(c, RootsAPI.rl("dye_pouch"));
 
     // Living arrows
@@ -1778,7 +1801,7 @@ public class RootsRecipeProvider extends RecipeProvider {
         .unlockedBy("has_ink_bottle", has(ModItems.INK_BOTTLE.get()))
         .save(c, RootsAPI.rl("writable_book_ink_bottle"));
 
-    
+
   }
 
   public static class RecipeSaver {
