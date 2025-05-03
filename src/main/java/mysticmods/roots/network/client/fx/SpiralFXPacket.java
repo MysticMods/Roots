@@ -2,9 +2,7 @@ package mysticmods.roots.network.client.fx;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.network.ClientFXHandlers;
-import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.network.IRootsPacket;
-import mysticmods.roots.particle.RootsParticleOptions;
+import mysticmods.roots.api.network.IRootsPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

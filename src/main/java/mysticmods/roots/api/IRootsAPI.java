@@ -6,12 +6,16 @@ import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.attachment.Unlock;
 import mysticmods.roots.api.grove.Grove;
 import mysticmods.roots.api.herb.Herb;
+import mysticmods.roots.api.network.IRootsPacket;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.attachment.AttachmentType;
 
 import java.util.List;
 
@@ -30,4 +34,6 @@ public interface IRootsAPI {
 
   double getCostReduction (Player player);
   double getCooldownReduction (Player player);
+
+  IRootsPacket getEntityDiscardPacket (ResourceKey<AttachmentType<?>> attachmentType, Entity entity);
 }

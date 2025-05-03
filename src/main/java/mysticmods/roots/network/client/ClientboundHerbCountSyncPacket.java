@@ -6,7 +6,7 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.herb.Herb;
 import mysticmods.roots.api.registry.RootsRegistries;
 import mysticmods.roots.client.RootsClientHooks;
-import mysticmods.roots.network.IRootsPacket;
+import mysticmods.roots.api.network.IRootsPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

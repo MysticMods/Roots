@@ -1,10 +1,8 @@
 package mysticmods.roots.network.client.fx;
 
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import it.unimi.dsi.fastutil.ints.IntSet;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.network.ClientFXHandlers;
-import mysticmods.roots.network.IRootsPacket;
+import mysticmods.roots.api.network.IRootsPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

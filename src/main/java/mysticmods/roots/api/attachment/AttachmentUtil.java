@@ -1,7 +1,7 @@
 package mysticmods.roots.api.attachment;
 
-import mysticmods.roots.network.ISyncPacket;
-import mysticmods.roots.network.client.ClientboundDiscardEntityAttachmentPacket;
+import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.network.ISyncPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -9,7 +9,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -55,8 +54,8 @@ public class AttachmentUtil {
     T attachmentInstance = entity.getData(attachment.value());
     if (attachmentInstance.isEmpty()) {
       entity.removeData(attachment.value());
-      PacketDistributor.sendToPlayersTrackingEntity(entity, new ClientboundDiscardEntityAttachmentPacket(attachment.getKey()
-          .location().toString(), entity.getId()));
+      PacketDistributor.sendToPlayersTrackingEntity(entity, RootsAPI.getInstance()
+          .getEntityDiscardPacket(attachment.getKey(), entity));
       return;
     }
     if (consumer != null) {

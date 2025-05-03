@@ -3,7 +3,7 @@ package mysticmods.roots.network.client;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.attachment.GrantStorage;
 import mysticmods.roots.client.RootsClientHooks;
-import mysticmods.roots.network.ISyncPacket;
+import mysticmods.roots.api.network.ISyncPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

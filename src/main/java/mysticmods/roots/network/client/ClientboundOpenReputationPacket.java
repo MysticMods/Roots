@@ -2,7 +2,7 @@ package mysticmods.roots.network.client;
 
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.client.RootsClientHooks;
-import mysticmods.roots.network.IRootsPacket;
+import mysticmods.roots.api.network.IRootsPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

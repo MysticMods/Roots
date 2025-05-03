@@ -1,4 +1,4 @@
-package mysticmods.roots.network;
+package mysticmods.roots.api.network;
 
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
