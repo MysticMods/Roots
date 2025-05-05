@@ -1,6 +1,7 @@
 package mysticmods.roots.api;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
+import mysticmods.roots.Roots;
 import mysticmods.roots.api.action.GroveReputation;
 import mysticmods.roots.api.attachment.RitualInformation;
 import mysticmods.roots.api.attachment.Unlock;
@@ -27,6 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.ServiceLoader;
 import java.util.Set;
 
 public abstract class RootsAPI {
@@ -62,6 +64,14 @@ public abstract class RootsAPI {
 
 
   public static IRootsAPI getInstance() {
+    if (INSTANCE == null) {
+      ServiceLoader<IRootsAPI> loader = ServiceLoader.load(IRootsAPI.class, Roots.class
+          .getClassLoader());
+      INSTANCE = loader.findFirst().orElse(null);
+      if (INSTANCE == null) {
+        throw new IllegalStateException("No implementation of IRootsAPI found. Please ensure that the Roots API is included in your classpath.");
+      }
+    }
     return INSTANCE;
   }
 

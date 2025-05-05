@@ -41,15 +41,6 @@ public class Roots {
     container.registerConfig(ModConfig.Type.COMMON, ConfigManager.COMMON_CONFIG);
     container.registerConfig(ModConfig.Type.CLIENT, ConfigManager.CLIENT_CONFIG);
 
-    ServiceLoader<IRootsAPI> loader = ServiceLoader.load(IRootsAPI.class);
-    for (IRootsAPI api : loader) {
-      RootsAPI.INSTANCE = api;
-      break;
-    }
-    if (RootsAPI.INSTANCE == null) {
-      throw new IllegalStateException("No implementation of IRootsAPI found. Please ensure that the Roots API is included in your classpath.");
-    }
-
     ModBlocks.register(bus);
     ModBlockEntities.register(bus);
     ModItems.register(bus);
