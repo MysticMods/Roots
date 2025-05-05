@@ -677,6 +677,15 @@ public class RootsLangProvider extends LanguageProvider {
     add("roots.jei.text.cooldown", "Cooldown: %ss");
     add("roots.jei.sprout_gifts", "Rewards for Breeding Sprouts");
 
+    add("roots.hud.pyre.begin1", "Light pyre to");
+    add("roots.hud.pyre.begin2", "start %s");
+    add("roots.hud.pyre.begin3", "craft %s");
+
+    add("roots.hud.pyre.restart1", "Sneak-Right-Click with");
+    add("roots.hud.pyre.restart2", "empty hand to repeat");
+
+    add("roots.hud.pyre.auto1", "will start automatically");
+
     RootsRegistries.GROVES.entrySet().forEach(o -> {
           add(o.getValue().getDescriptionId(), toEnglishName(o.getKey().location().getPath()));
         }

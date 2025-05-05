@@ -30,7 +30,7 @@ import java.util.*;
 public record PillarCondition(PillarType pillar,
                               int heightExcluding) implements ILevelCondition {
   public static final MapCodec<PillarCondition> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-      PillarType.CODEC.fieldOf("type").forGetter(o -> o.pillar),
+      PillarType.CODEC.fieldOf("pillar_type").forGetter(o -> o.pillar),
       Codec.INT.fieldOf("height").forGetter(PillarCondition::heightExcluding)
   ).apply(instance, PillarCondition::new));
   public static final Codec<PillarCondition> CODEC = MAP_CODEC.codec();

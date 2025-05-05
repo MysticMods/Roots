@@ -18,7 +18,7 @@
         "tag": "minecraft:saplings"
       }
     ],
-    "levelConditions": [
+    "level_conditions": [
       {
         "type": "roots:block_state_property_condition",
         "name": "mature_wildroot_crop",

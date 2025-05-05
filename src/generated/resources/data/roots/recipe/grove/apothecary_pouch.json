@@ -30,7 +30,7 @@
         "tag": "c:chests"
       }
     ],
-    "levelConditions": [
+    "level_conditions": [
       {
         "type": "roots:grove_stone_condition",
         "grove_type": {

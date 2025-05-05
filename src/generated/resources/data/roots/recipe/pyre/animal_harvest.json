@@ -18,18 +18,33 @@
         "tag": "roots:herbs/wildroot"
       }
     ],
-    "levelConditions": [
+    "level_conditions": [
       {
         "type": "roots:pillar_condition",
-        "height": 3
+        "height": 3,
+        "pillar_type": {
+          "capstone": "roots:capstones/runes/any",
+          "name": "any_rune",
+          "pillar": "roots:pillars/runes/any"
+        }
       },
       {
         "type": "roots:pillar_condition",
-        "height": 4
+        "height": 4,
+        "pillar_type": {
+          "capstone": "roots:capstones/runes/any",
+          "name": "any_rune",
+          "pillar": "roots:pillars/runes/any"
+        }
       },
       {
         "type": "roots:pillar_condition",
-        "height": 3
+        "height": 3,
+        "pillar_type": {
+          "capstone": "roots:capstones/runes/any",
+          "name": "any_rune",
+          "pillar": "roots:pillars/runes/any"
+        }
       }
     ],
     "priority": 0

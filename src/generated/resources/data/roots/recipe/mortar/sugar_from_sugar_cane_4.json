@@ -1,7 +1,7 @@
 {
   "type": "roots:mortar",
   "data": {
-    "chanceOutputs": [
+    "chance_outputs": [
       {
         "chance": 0.5,
         "output": {

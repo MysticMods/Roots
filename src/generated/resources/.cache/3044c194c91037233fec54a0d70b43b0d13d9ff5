@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-22T11:53:01.2802279	Roots Block Tags
+// 1.21.1	2025-05-05T16:59:05.0672388	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -91,9 +91,11 @@ c32082cb4a9a20e16cf30e8c55afd4219c657bd4 data/roots/tags/block/crops/moonglow.js
 ac79c9fee49d61de4d35103b3c501dcd9f00f5ff data/roots/tags/block/crops/stalicripe.json
 124deb91b6f2a320d3d065cdb42694d1905e1500 data/roots/tags/block/crops/wildewheet.json
 ecda61a71eb355925053fb56bfc8838b38a30dd2 data/roots/tags/block/crops/wildroot.json
+ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/block/decorative_pyres.json
 119233fd9e09f2482d0935240466f08a2e901a1b data/roots/tags/block/forageable/all.json
 aad685bc47fe5961230536c39cb94930971eb077 data/roots/tags/block/forageable/double.json
 0ae23011308e32f2a1e1a536aa42850c5ddaac70 data/roots/tags/block/forageable/single.json
+d17a97ae6e613b481dec932c38e92f9776fcf84c data/roots/tags/block/functional_pyres.json
 277febcb81e6cdedb2c430d51bcd1850d597779d data/roots/tags/block/granite_ore_replaceables.json
 4fd76122f15f8ad5b0091e94cc3027e509642ac2 data/roots/tags/block/grove/elemental/crops.json
 e1e0b0b25f60e64386ddf24bd76413a9a02c707d data/roots/tags/block/grove/sprout/crops.json
@@ -150,7 +152,8 @@ c6d64392f19c3ab3c5d775941e0be342c11f81e7 data/roots/tags/block/pillars/log/warpe
 e193f473f605776c34de80b92a855d59614ef692 data/roots/tags/block/pillars/runes/any.json
 e48d858e3d3974b791109f0ebc13f854f1fd3436 data/roots/tags/block/pillars/runes/rune.json
 78d10f476ff2a556d1134f349ebb6e16d3f40922 data/roots/tags/block/pillars/runes/runed.json
-be4cfc54cdf3ab97d153428240e1e941a7375e78 data/roots/tags/block/pyres.json
+07323a0aef4cb95578247a2c6ad88c7b7c6b9a80 data/roots/tags/block/pyres.json
+4a1b57b5c04f9ecd549b356dad8e35b4d17a5bdf data/roots/tags/block/pyre_hud_layer.json
 0181a639f41b0ab0d567c1e41fe790b23cefebce data/roots/tags/block/ritual/blooming/eligible_flowers.json
 aec04f51c04443c2e39f8137830a11be1ef0e9a1 data/roots/tags/block/ritual/blooming/eligible_pedestal_flowers.json
 b3f0d68ad05349c00594d33d8d0832643f45d54d data/roots/tags/block/runed_obsidian.json

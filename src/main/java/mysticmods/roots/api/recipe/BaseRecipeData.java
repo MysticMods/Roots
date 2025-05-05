@@ -38,12 +38,12 @@ public class BaseRecipeData {
           },
           DataResult::success
       ).forGetter(o -> o.ingredients),
-      ILevelCondition.LIST_CODEC.optionalFieldOf("levelConditions", Collections.emptyList())
+      ILevelCondition.LIST_CODEC.optionalFieldOf("level_conditions", Collections.emptyList())
           .forGetter(o -> o.levelConditions),
-      IPlayerCondition.LIST_CODEC.optionalFieldOf("playerConditions", Collections.emptyList())
+      IPlayerCondition.LIST_CODEC.optionalFieldOf("player_conditions", Collections.emptyList())
           .forGetter(o -> o.playerConditions),
       ItemStack.CODEC.optionalFieldOf("result", ItemStack.EMPTY).forGetter(o -> o.result),
-      ChanceOutput.LIST_CODEC.optionalFieldOf("chanceOutputs", Collections.emptyList()).forGetter(o -> o.chanceOutputs),
+      ChanceOutput.LIST_CODEC.optionalFieldOf("chance_outputs", Collections.emptyList()).forGetter(o -> o.chanceOutputs),
       Unlock.LIST_CODEC.optionalFieldOf("unlocks", Collections.emptyList()).forGetter(o -> o.unlocks),
       Codec.INT.fieldOf("priority").forGetter(o -> o.priority)
   ).apply(instance, BaseRecipeData::new));

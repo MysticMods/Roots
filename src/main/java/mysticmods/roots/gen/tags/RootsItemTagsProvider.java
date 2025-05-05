@@ -138,6 +138,8 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.copy(RootsTags.Blocks.GROVE_PEDESTALS, RootsTags.Items.GROVE_PEDESTALS);
     this.copy(RootsTags.Blocks.LIMITED_PEDESTALS, RootsTags.Items.LIMITED_PEDESTALS);
     this.copy(RootsTags.Blocks.DISPLAY_PEDESTALS, RootsTags.Items.DISPLAY_PEDESTALS);
+    this.copy(RootsTags.Blocks.FUNCTIONAL_PYRES, RootsTags.Items.FUNCTIONAL_PYRES);
+    this.copy(RootsTags.Blocks.DECORATIVE_PYRES, RootsTags.Items.DECORATIVE_PYRES);
     this.copy(RootsTags.Blocks.PYRES, RootsTags.Items.PYRES);
     this.copy(RootsTags.Blocks.GROVE_CRAFTERS, RootsTags.Items.GROVE_CRAFTERS);
     this.copy(RootsTags.Blocks.MORTARS, RootsTags.Items.MORTARS);

@@ -103,6 +103,8 @@ public class RootsTags {
 
     // Pyres (does not include decorative)
     public static final TagKey<Block> PYRES = modTag("pyres");
+    public static final TagKey<Block> DECORATIVE_PYRES = modTag("decorative_pyres");
+    public static final TagKey<Block> FUNCTIONAL_PYRES = modTag("functional_pyres");
 
     // Sylvan and runic crafters
     public static final TagKey<Block> GROVE_CRAFTERS = modTag("crafters");
@@ -232,6 +234,10 @@ public class RootsTags {
     public static final TagKey<Block> TWILIGHT_GROVE_GENERATORS = modTag("grove_generators/twilight");
     public static final TagKey<Block> ELEMENTAL_GROVE_GENERATORS = modTag("grove_generators/elemental");
 
+    public static final TagKey<Block> PYRE_HUD_RENDERER = modTag("pyre_hud_layer");
+    public static final TagKey<Block> GROVE_CRAFTER_HUD_RENDERER = modTag("grove_crafter_hud_layer");
+    public static final TagKey<Block> MORTAR_HUD_RENDERER = modTag("mortar_hud_layer");
+
     private static TagKey<Block> modTag(String name) {
       return BlockTags.create(RootsAPI.rl(name));
     }
@@ -349,6 +355,8 @@ public class RootsTags {
     public static final TagKey<Item> LIMITED_PEDESTALS = modTag("pedestals/limited");
     public static final TagKey<Item> DISPLAY_PEDESTALS = modTag("pedestals/display");
     public static final TagKey<Item> PYRES = modTag("pyres");
+    public static final TagKey<Item> DECORATIVE_PYRES = modTag("decorative_pyres");
+    public static final TagKey<Item> FUNCTIONAL_PYRES = modTag("functional_pyres");
     public static final TagKey<Item> GROVE_CRAFTERS = modTag("crafters");
     public static final TagKey<Item> MORTARS = modTag("mortars");
     public static final TagKey<Item> RUNIC_DUST = modTag("dusts/runic");
@@ -549,6 +557,8 @@ public class RootsTags {
 
     public static final TagKey<EntityType<?>> SPECIAL_SPROUTS = modTag("sprouts/special");
     public static final TagKey<EntityType<?>> NORMAL_SPROUTS = modTag("sprouts/normal");
+
+    public static final TagKey<EntityType<?>> SHOULD_RENDER_HUD = modTag("should_render_hud");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

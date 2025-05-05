@@ -2,7 +2,7 @@
   "type": "roots:runic_block",
   "condition": [],
   "data": {
-    "chanceOutputs": [
+    "chance_outputs": [
       {
         "chance": 0.6,
         "output": {

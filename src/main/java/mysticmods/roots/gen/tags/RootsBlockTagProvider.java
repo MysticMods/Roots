@@ -193,8 +193,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
 
     this.tag(RootsTags.Blocks.MORTARS).add(MORTAR.get());
 
-    this.tag(RootsTags.Blocks.PYRES)
-        .add(PYRE.get(), REINFORCED_PYRE.get(), DECORATIVE_PYRE.get(), SOUL_PYRE.get(), REINFORCED_SOUL_PYRE.get());
+    this.tag(RootsTags.Blocks.FUNCTIONAL_PYRES).add(PYRE.get(), REINFORCED_PYRE.get(), SOUL_PYRE.get(), REINFORCED_SOUL_PYRE.get());
+    this.tag(RootsTags.Blocks.DECORATIVE_PYRES).add(DECORATIVE_PYRE.get(), DECORATIVE_SOUL_PYRE.get());
 
     this.tag(RootsTags.Blocks.WILDROOT_CROP).add(WILDROOT_CROP.get());
     this.tag(RootsTags.Blocks.CLOUD_BERRY_CROP).add(CLOUD_BERRY_CROP.get());
@@ -252,6 +252,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     this.tag(RootsTags.Blocks.PEDESTALS).addTags(RootsTags.Blocks.RITUAL_PEDESTALS, RootsTags.Blocks.GROVE_PEDESTALS);
 
     this.tag(BlockTags.CROPS).addTag(RootsTags.Blocks.CROPS);
+
+    this.tag(RootsTags.Blocks.PYRES).addTags(RootsTags.Blocks.FUNCTIONAL_PYRES, RootsTags.Blocks.DECORATIVE_PYRES);
 
     // Logs that burn
     //noinspection unchecked
@@ -393,6 +395,8 @@ public class RootsBlockTagProvider extends BlockTagsProvider {
     tag(RootsTags.Blocks.WILD_GROVE_GENERATORS).add(Blocks.DRAGON_EGG);
     tag(RootsTags.Blocks.FUNGAL_GROVE_GENERATORS).add(Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK, Blocks.POTTED_RED_MUSHROOM, Blocks.POTTED_BROWN_MUSHROOM, BAFFLECAP.get(), BAFFLECAP_BLOCK.get(), POTTED_BAFFLECAP.get(), Blocks.MYCELIUM, Blocks.PODZOL);
     tag(RootsTags.Blocks.TWILIGHT_GROVE_GENERATORS).add(Blocks.CREEPER_HEAD, Blocks.CREEPER_WALL_HEAD, Blocks.DRAGON_HEAD, Blocks.DRAGON_WALL_HEAD, Blocks.PIGLIN_WALL_HEAD, Blocks.PIGLIN_HEAD, Blocks.PLAYER_HEAD, Blocks.PLAYER_WALL_HEAD, Blocks.ZOMBIE_HEAD, Blocks.ZOMBIE_WALL_HEAD);
+
+    tag(RootsTags.Blocks.PYRE_HUD_RENDERER).addTag(RootsTags.Blocks.FUNCTIONAL_PYRES);
   }
 
   @Override

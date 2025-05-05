@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-21T13:56:45.4767014	Roots Item Tags
+// 1.21.1	2025-05-05T16:59:05.0692348	Roots Item Tags
 5d921d0e2608da5dd94ef57938fcc0c2374d0031 data/curios/tags/item/belt.json
 c3bb83b05da180e2ff3f51d5c6d1ef50b14005f5 data/curios/tags/item/charm.json
 7928b910e0b5f474c9711038f76ad788c884b7da data/c/tags/item/ingots/silver.json
@@ -97,12 +97,14 @@ de5c603697a1b90e414d6fb1ede037986d027348 data/roots/tags/item/crops/pereskia.jso
 314ec0136f8dbb967b704dda383c03d9e2057910 data/roots/tags/item/crops/stalicripe.json
 9572b957ea3e17cd5ad572e6ceabd95ba9a86fae data/roots/tags/item/crops/wildewheet.json
 9536487427196a17060523ea2bdd61dfc4bc619d data/roots/tags/item/crops/wildroot.json
+ca8d3a8ef9afe286221fe6a5eb5984185f5fb1eb data/roots/tags/item/decorative_pyres.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/item/disable_disarming.json
 1b81ce702cc93595adbcfc8dd9dcb1a5e932c8c6 data/roots/tags/item/dusts/runic.json
 5b28ef157c0fd6f0022f555656f0e53a177ca4d2 data/roots/tags/item/dyeable.json
 c7500f481948159c566ddedb8a200fe63a413a56 data/roots/tags/item/fertilizers.json
 4333e5b0d3c082c5e91baec1955d1a9d418dc318 data/roots/tags/item/flint.json
 7c23110fe0420d3a96fab43595db02c682e00c68 data/roots/tags/item/foraging_eligible.json
+d17a97ae6e613b481dec932c38e92f9776fcf84c data/roots/tags/item/functional_pyres.json
 39ecf884f3bb83a88b7d180276a7ac692c52fc00 data/roots/tags/item/grove_crafter_activation.json
 0b84a7b844d869f56ca22683e394d08ece1c1d7e data/roots/tags/item/grove_stones.json
 fe934ceccc4232fc0d8a73f6ae26291c0403badb data/roots/tags/item/grove_stones/elemental.json
@@ -165,7 +167,7 @@ e48d858e3d3974b791109f0ebc13f854f1fd3436 data/roots/tags/item/pillars/runes/rune
 ae4117882af5a5a5d43ce988fa9906246bcdbf96 data/roots/tags/item/pouches/all.json
 c42cd05d45cb4e4c36ad0e2116c8ba8abb98af20 data/roots/tags/item/pouches/creative.json
 1fd81efe08e8472219d41dc2e31df32980b3e6df data/roots/tags/item/proteins.json
-be4cfc54cdf3ab97d153428240e1e941a7375e78 data/roots/tags/item/pyres.json
+07323a0aef4cb95578247a2c6ad88c7b7c6b9a80 data/roots/tags/item/pyres.json
 ea5453bb23292a045408ae8581a1bcde5230ac72 data/roots/tags/item/pyre_activation.json
 56c0c94575f95db61092fa29c297d258f3c8a658 data/roots/tags/item/quivers.json
 0181a639f41b0ab0d567c1e41fe790b23cefebce data/roots/tags/item/ritual/blooming/eligible_flowers.json
