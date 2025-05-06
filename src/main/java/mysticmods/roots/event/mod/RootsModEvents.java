@@ -138,6 +138,7 @@ public class RootsModEvents {
       event.accept(ModItems.RITUAL_PEDESTAL.get());
       event.accept(ModItems.REINFORCED_RITUAL_PEDESTAL.get());
       event.accept(ModItems.INCENSE_BURNER.get());
+      event.accept(ModItems.STONE_ALTAR.get());
 
       event.accept(ModItems.MORTAR.get());
       event.accept(ModItems.PESTLE.get());

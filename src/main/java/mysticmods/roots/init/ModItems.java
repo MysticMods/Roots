@@ -191,6 +191,7 @@ public class ModItems {
   public static DeferredHolder<Item, BlockItem> ELEMENTAL_GROVE_STONE = ITEMS.register("elemental_grove_stone", () -> new BlockItem(ModBlocks.ELEMENTAL_GROVE_STONE.get(), new Item.Properties()));
   // TODO: Info
   public static DeferredHolder<Item, BlockItem> INCENSE_BURNER = ITEMS.register("incense_burner", () -> new BlockItem(ModBlocks.INCENSE_BURNER.get(), new Item.Properties()));
+  public static DeferredHolder<Item, BlockItem> STONE_ALTAR = ITEMS.register("stone_altar", () -> new BlockItem(ModBlocks.STONE_ALTAR.get(), new Item.Properties()));
   public static DeferredHolder<Item, BlockItem> MORTAR = ITEMS.register("mortar", () -> new BlockItem(ModBlocks.MORTAR.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
   // TODO: Contents
   public static DeferredHolder<Item, BlockItem> PYRE = ITEMS.register("pyre", () -> new BlockItem(ModBlocks.PYRE.get(), new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));

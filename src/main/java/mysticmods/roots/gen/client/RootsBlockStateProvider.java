@@ -208,6 +208,10 @@ public class RootsBlockStateProvider extends BlockStateProvider {
     getVariantBuilder(ModBlocks.INCENSE_BURNER.get()).forAllStates(state -> ConfiguredModel.builder()
         .modelFile(incenseBurner).build());
 
+    ModelFile stoneAltar = models().withExistingParent("stone_altar", modLoc("block/complex/stone_altar"));
+    getVariantBuilder(ModBlocks.STONE_ALTAR.get()).forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(stoneAltar).build());
+
     ModelFile mortar = models().withExistingParent("mortar", modLoc("block/complex/mortar"));
     getVariantBuilder(ModBlocks.MORTAR.get()).forAllStates(state -> ConfiguredModel.builder().modelFile(mortar)
         .build());

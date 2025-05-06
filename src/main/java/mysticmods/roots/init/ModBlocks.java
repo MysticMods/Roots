@@ -258,6 +258,7 @@ public class ModBlocks {
   public static final DeferredHolder<Block, IncenseBurnerBlock> INCENSE_BURNER = BLOCKS.register("incense_burner", () -> new IncenseBurnerBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
       .strength(2.0f, 6.0f).forceSolidOn()));
+  public static final DeferredHolder<Block, AltarBlock> STONE_ALTAR = BLOCKS.register("stone_altar", () -> new AltarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0f, 6.0f).forceSolidOn()));
   public static final DeferredHolder<Block, MortarBlock> MORTAR = BLOCKS.register("mortar", () -> new MortarBlock(BlockBehaviour.Properties.of()
       .strength(1.0f, 6.0f).forceSolidOn().dynamicShape().noOcclusion()));
   public static final DeferredHolder<Block, PyreBlock> PYRE = BLOCKS.register("pyre", () -> new PyreBlock(BlockBehaviour.Properties.of()

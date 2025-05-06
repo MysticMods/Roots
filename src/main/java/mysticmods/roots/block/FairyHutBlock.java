@@ -3,6 +3,7 @@ package mysticmods.roots.block;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import mysticmods.roots.api.StateProperties;
+import mysticmods.roots.api.reference.Shapes;
 import mysticmods.roots.blockentity.GroveStoneBlockEntity;
 import mysticmods.roots.blockentity.template.BaseBlockEntity;
 import mysticmods.roots.util.VoxelUtil;
@@ -47,11 +48,9 @@ public class FairyHutBlock extends HorizontalDirectionalBlock implements SimpleW
 
   private VoxelShape getShape(BlockState blockState) {
     if (blockState.getValue(HALF) == DoubleBlockHalf.LOWER) {
-      VoxelShape half = VoxelUtil.multiOr(Block.box(3.5, 4, 4,11.5, 10, 12), Block.box(2.25, 10, 2,14.25, 16, 14), Block.box(2.25, 9.5, 0.5,14.25, 16, 2), Block.box(14.25, 9.5, 2,15.75, 16, 14), Block.box(2.25, 9.5, 14,14.25, 16, 15.5), Block.box(0.75, 9.5, 2,2.25, 16, 14), Block.box(2.5, 2, 3,12.5, 4, 13), Block.box(2, 2, 6,3.5, 7, 10), Block.box(0, 0, 0,16, 2, 16)/*, Block.box(3.5, 4.26339, -1.37885,5.5, 7.26339, 0.62115)*/, Block.box(2, 4, 0,7, 7, 4), Block.box(12, 2, 12,14, 6, 14), Block.box(10.5, 6, 10.5,15.5, 9, 15.5)/*, Block.box(7.75, 3.7222, 15.68541,8.75, 6.7222, 16.68541)*//*, Block.box(6.25, 6.14398, 14.30586,10.25, 9.14398, 18.30586)*/);
-      return VoxelUtil.rotateHorizontal(half, blockState.getValue(FACING).getClockWise());
-    } else {
-      VoxelShape half = VoxelUtil.multiOr(Block.box(2.25, 0, 0.5,14.25, 5.5, 2), Block.box(14.25, 0, 2,15.75, 5.5, 14), Block.box(2.25, 5.5, 2,14.25, 7, 14), Block.box(2.25, 0, 14,14.25, 5.5, 15.5), Block.box(0.75, 0, 2,2.25, 5.5, 14));
-      return VoxelUtil.rotateHorizontal(half, blockState.getValue(FACING).getClockWise());
+      return VoxelUtil.rotateHorizontal(Shapes.HUT_LOWER, blockState.getValue(FACING).getClockWise());
+    } else {;
+      return VoxelUtil.rotateHorizontal(Shapes.HUT_UPPER, blockState.getValue(FACING).getClockWise());
     }
   }
 

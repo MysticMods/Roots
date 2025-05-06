@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-05T16:59:05.0672388	Roots Block Tags
+// 1.21.1	2025-05-06T13:17:24.4376455	Roots Block Tags
 cee05fb44a2bd6eeb5f4be31be33a5f085922582 data/c/tags/block/farmlands.json
 eed7a7d567816010ffe4270c406795ccb198102b data/c/tags/block/fences/wooden.json
 3e417952c18b1dfc07bd94db365534d3c30eda97 data/c/tags/block/fence_gates/wooden.json
@@ -24,9 +24,9 @@ cf6b759b2d3166ab787bc1ea1aaac9b30b3ece53 data/minecraft/tags/block/crimson_stems
 26d82747ae34d82d879c66a451e1c6b2b6dfd412 data/minecraft/tags/block/logs_that_burn.json
 4dd1110a08f7c4386cffaa774af4841bc323c2f1 data/minecraft/tags/block/maintains_farmland.json
 e16c92e31940c0c62767ba46b55ac10f3e133b58 data/minecraft/tags/block/mangrove_logs.json
-2c17112083cb819f0774571e8ced2279fe326e60 data/minecraft/tags/block/mineable/axe.json
+e180ada3de095c86ffc5ddc548a9e689f524ec5b data/minecraft/tags/block/mineable/axe.json
 84ad4138f81f2c32f36030da92bf0cbfdb66650c data/minecraft/tags/block/mineable/hoe.json
-2fa78f879290ff7575290b1d7ee87079dd58cdc5 data/minecraft/tags/block/mineable/pickaxe.json
+3cf7c44725ccce41751ac0534598953ee4751d6a data/minecraft/tags/block/mineable/pickaxe.json
 fdf2321a0e3ecc7cd4564c0aab61423d375c4c01 data/minecraft/tags/block/mineable/shovel.json
 07582669ffa5bc4de499f946a1d320d06685cf33 data/minecraft/tags/block/mushroom_grow_block.json
 d94e40d9884b762d3b9eb3ee1f66f143ea3becec data/minecraft/tags/block/needs_iron_tool.json
@@ -118,6 +118,7 @@ ff28b287e0c4905db9dbe63238a5d61bd7999497 data/roots/tags/block/grove_stones/wild
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/force.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/roots/tags/block/growth/reduce.json
+3f9791f6926dfe99b98612d18897e601ccdaa3d3 data/roots/tags/block/huts.json
 047b7c7631a4b09bd9bbdf8c77cfe781370cd790 data/roots/tags/block/logs/runed.json
 9d01930b8d10586485700b7c1aa738059b75744c data/roots/tags/block/logs/runed/acacia.json
 4b6d7ed21ea8860476fd6b3348d74fdc88bbf600 data/roots/tags/block/logs/runed/birch.json
