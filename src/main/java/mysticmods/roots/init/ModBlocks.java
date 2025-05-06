@@ -208,15 +208,15 @@ public class ModBlocks {
   ));
 
   public static final DeferredHolder<Block, FairyHutBlock> RED_FAIRY_HUT = BLOCKS.register("red_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)));
+      .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> BROWN_FAIRY_HUT = BLOCKS.register("brown_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.BROWN).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)));
+      .mapColor(DyeColor.BROWN).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> BAFFLECAP_FAIRY_HUT = BLOCKS.register("bafflecap_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.YELLOW).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)));
+      .mapColor(DyeColor.YELLOW).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> CRIMSON_FAIRY_HUT = BLOCKS.register("crimson_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)));
+      .mapColor(DyeColor.RED).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
   public static final DeferredHolder<Block, FairyHutBlock> WARPED_FAIRY_HUT = BLOCKS.register("warped_fairy_hut", () -> new FairyHutBlock(BlockBehaviour.Properties.of()
-      .mapColor(DyeColor.BLUE).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD)));
+      .mapColor(DyeColor.BLUE).instrument(NoteBlockInstrument.BASS).strength(1.5f).sound(SoundType.WOOD).lightLevel(FairyHutBlock::lightLevel)));
 
   public static final DeferredHolder<Block, WildRootsBlock> WILD_ROOTS = BLOCKS.register("wild_roots", () -> new WildRootsBlock(BlockBehaviour.Properties.of()
       .mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(0.2f).sound(SoundType.WOOD)));
