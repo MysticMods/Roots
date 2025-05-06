@@ -20,7 +20,6 @@ public class PyreParticle extends TextureSheetParticle {
     this.gCol2 = ((c2 >> 8) & 0xFF) / 255.0f;
     this.bcol2 = ((c2) & 0xFF) / 255.0f;
     this.alpha = 1f;
-    this.gravity = gravity;
     this.xd = 0;
     this.yd *= 0.03f;
     this.zd = 0;
