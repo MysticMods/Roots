@@ -390,6 +390,7 @@ public class RootsTags {
     public static final TagKey<Item> FENNEC_FOOD = modTag("tempt/fennec");
     public static final TagKey<Item> SPROUT_FOOD = modTag("tempt/sprout");
     public static final TagKey<Item> DEER_FOOD = modTag("tempt/deer");
+    public static final TagKey<Item> JERBOA_FOOD = modTag("tempt/jerboa");
     public static final TagKey<Item> CARAPACE = modTag("carapace");
     public static final TagKey<Item> PELT = modTag("pelt");
     public static final TagKey<Item> ANTLERS = modTag("antlers");
@@ -691,6 +692,7 @@ public class RootsTags {
     public static final TagKey<Biome> HAS_BARROW_STRUCTURES = modTag("has_barrow_structure");
     public static final TagKey<Biome> HAS_BEETLE_SPAWNS = modTag("has_beetle_spawns");
     public static final TagKey<Biome> HAS_DEER_SPAWNS = modTag("has_deer_spawns");
+    public static final TagKey<Biome> HAS_JERBOA_SPAWNS = modTag("has_jerboa_spawns");
     public static final TagKey<Biome> HAS_DUCK_SPAWNS = modTag("has_duck_spawns");
     public static final TagKey<Biome> HAS_FENNEC_SPAWNS = modTag("has_fennec_spawns");
     public static final TagKey<Biome> HAS_HUT_STRUCTURES = modTag("has_hut_structures");

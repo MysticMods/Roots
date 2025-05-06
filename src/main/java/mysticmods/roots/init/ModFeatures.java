@@ -85,6 +85,7 @@ public class ModFeatures {
   public static ResourceKey<PlacedFeature> PLACED_GRANITE_QUARTZ_KEY = ResourceKey.create(Registries.PLACED_FEATURE, RootsAPI.rl("granite_quartz"));
 
   public static ResourceKey<BiomeModifier> BEETLE_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("beetle_spawns"));
+  public static ResourceKey<BiomeModifier> JERBOA_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("jerboa_spawns"));
   public static ResourceKey<BiomeModifier> DEER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("deer_spawns"));
   public static ResourceKey<BiomeModifier> DUCK_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("duck_spawns"));
   public static ResourceKey<BiomeModifier> FENNEC_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, RootsAPI.rl("fennec_spawns"));

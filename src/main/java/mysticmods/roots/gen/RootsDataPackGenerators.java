@@ -65,6 +65,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -207,6 +208,7 @@ public class RootsDataPackGenerators {
                   HolderGetter<Biome> biomeGetter = bootstrap.lookup(Registries.BIOME);
                   HolderGetter<PlacedFeature> placedGetter = bootstrap.lookup(Registries.PLACED_FEATURE);
                   bootstrap.register(ModFeatures.BEETLE_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_BEETLE_SPAWNS), List.of(new MobSpawnSettings.SpawnerData(ModEntities.BEETLE.get(), 5, 2, 4))));
+                  bootstrap.register(ModFeatures.JERBOA_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_JERBOA_SPAWNS), List.of(new MobSpawnSettings.SpawnerData(ModEntities.JERBOA.get(), 4, 1, 3))));
                   bootstrap.register(ModFeatures.DEER_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_DEER_SPAWNS), List.of(new MobSpawnSettings.SpawnerData(ModEntities.DEER.get(), 6, 2, 4))));
                   bootstrap.register(ModFeatures.DUCK_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_DUCK_SPAWNS), List.of(new MobSpawnSettings.SpawnerData(ModEntities.DUCK.get(), 5, 1, 3))));
                   bootstrap.register(ModFeatures.FENNEC_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(biomeGetter.getOrThrow(RootsTags.Biomes.HAS_FENNEC_SPAWNS), List.of(new MobSpawnSettings.SpawnerData(ModEntities.FENNEC.get(), 4, 1, 3))));

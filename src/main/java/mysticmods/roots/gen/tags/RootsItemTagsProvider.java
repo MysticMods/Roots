@@ -275,6 +275,7 @@ public class RootsItemTagsProvider extends ItemTagsProvider {
     this.tag(RootsTags.Items.DUCK_FOOD).addTag(ItemTags.CHICKEN_FOOD);
     this.tag(RootsTags.Items.FENNEC_FOOD).addTag(ItemTags.FOX_FOOD);
     this.tag(RootsTags.Items.DEER_FOOD).addTag(ItemTags.COW_FOOD);
+    this.tag(RootsTags.Items.JERBOA_FOOD).addTags(Tags.Items.SEEDS, Tags.Items.CROPS);
 
     this.tag(RootsTags.Items.FORAGING_ELIGIBLE).addTag(RootsTags.Items.KNIVES).add(ModItems.LIVING_HOE.get());
 

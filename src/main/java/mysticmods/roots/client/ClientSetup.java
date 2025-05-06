@@ -118,6 +118,7 @@ public class ClientSetup {
     event.registerEntityRenderer(ModEntities.TEMPORAL_MORASS.value(), NoopRenderer::new);
     event.registerEntityRenderer(ModEntities.ROSE_THORNS.value(), RoseThornsRenderer::new);
     event.registerEntityRenderer(ModEntities.LIVING_ARROW.value(), LivingArrowRenderer::new);
+    event.registerEntityRenderer(ModEntities.JERBOA.value(), JerboaRenderer::new);
   }
 
   @SubscribeEvent
@@ -132,6 +133,7 @@ public class ClientSetup {
     event.registerLayerDefinition(ModelHolder.BEETLE_ARMOR, BeetleArmorModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.METEOR, MeteorModel::createBodyLayer);
     event.registerLayerDefinition(ModelHolder.ROSE_THORNS, RoseThornsModel::createBodyLayer);
+    event.registerLayerDefinition(ModelHolder.JERBOA, JerboaModel::createBodyLayer);
   }
 
   public static final ResourceLocation WARNING_LAYER = RootsAPI.rl("warning");

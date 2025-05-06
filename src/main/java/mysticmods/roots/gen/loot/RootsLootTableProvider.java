@@ -94,6 +94,8 @@ public class RootsLootTableProvider {
                   .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0, 2)))
               )
           ));
+      // TODO:
+      add(ModEntities.JERBOA.get(), LootTable.lootTable());
       add(ModEntities.DEER.get(), LootTable.lootTable()
           .withPool(LootPool.lootPool()
               .add(LootItem.lootTableItem(Items.LEATHER)

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:has_structure/desert_pyramid",
+    "#minecraft:has_structure/ruined_portal_desert",
+    "#minecraft:has_structure/village_desert",
+    "#c:is_hot/overworld",
+    "#c:is_desert"
+  ]
+}

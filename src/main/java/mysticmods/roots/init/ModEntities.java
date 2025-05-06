@@ -62,6 +62,7 @@ public class ModEntities {
   public static final DeferredHolder<EntityType<?>, EntityType<DuckEntity>> DUCK = REGISTER.register("duck", () -> EntityType.Builder.of(DuckEntity::new, MobCategory.CREATURE)
       .sized(0.6f, 1f).eyeHeight(0.86f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3)
       .build("duck"));
+  public static final DeferredHolder<EntityType<?>, EntityType<JerboaEntity>> JERBOA = REGISTER.register("jerboa", () -> EntityType.Builder.of(JerboaEntity::new, MobCategory.CREATURE).sized(0.4f, 0.4f).eyeHeight(0.2f).setTrackingRange(16).setShouldReceiveVelocityUpdates(true).setUpdateInterval(3).build("duck"));
 
   public static final DeferredHolder<EntityType<?>, EntityType<LivingArrowEntity>> LIVING_ARROW = REGISTER.register("living_arrow", () -> EntityType.Builder.<LivingArrowEntity>of(LivingArrowEntity::new, MobCategory.MISC)
       .sized(0.5F, 0.5F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(20).build("living_arrow"));
@@ -88,6 +89,7 @@ public class ModEntities {
     event.register(MELODY_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SproutEntity::checkMelodySpawnRule, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(FENNEC.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(BEETLE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
+    event.register(JERBOA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(OWL.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING, OwlEntity::placement, RegisterSpawnPlacementsEvent.Operation.AND);
     event.register(DUCK.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
   }
@@ -95,6 +97,7 @@ public class ModEntities {
   @SubscribeEvent
   public static void registerAttributes(EntityAttributeCreationEvent event) {
     event.put(ModEntities.BEETLE.get(), BeetleEntity.attributes().build());
+    event.put(ModEntities.JERBOA.get(), JerboaEntity.attributes().build());
     event.put(ModEntities.DEER.get(), DeerEntity.attributes().build());
     event.put(ModEntities.FENNEC.get(), FennecEntity.attributes().build());
     event.put(ModEntities.GREEN_SPROUT.get(), SproutEntity.attributes().build());

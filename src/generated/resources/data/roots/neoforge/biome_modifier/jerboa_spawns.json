@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#roots:has_jerboa_spawns",
+  "spawners": {
+    "type": "roots:jerboa",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 4
+  }
+}

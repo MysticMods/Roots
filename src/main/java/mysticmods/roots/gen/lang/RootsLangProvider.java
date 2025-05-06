@@ -483,6 +483,7 @@ public class RootsLangProvider extends LanguageProvider {
     addEntity(ModEntities.MELODY_SPROUT);
     addEntity(ModEntities.OWL);
     addEntity(ModEntities.DUCK);
+    addEntity(ModEntities.JERBOA);
 
     addEntity(ModEntities.LIVING_ARROW);
     addEntity(ModEntities.METEOR);

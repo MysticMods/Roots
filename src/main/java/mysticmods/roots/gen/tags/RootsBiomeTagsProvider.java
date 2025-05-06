@@ -35,6 +35,10 @@ public class RootsBiomeTagsProvider extends BiomeTagsProvider {
         .addTags(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA, BiomeTags.HAS_VILLAGE_PLAINS, Tags.Biomes.IS_TAIGA, Tags.Biomes.IS_PLAINS, Tags.Biomes.IS_COLD_OVERWORLD);
 
     //noinspection unchecked
+    this.tag(RootsTags.Biomes.HAS_JERBOA_SPAWNS)
+        .addTags(BiomeTags.HAS_DESERT_PYRAMID, BiomeTags.HAS_RUINED_PORTAL_DESERT, BiomeTags.HAS_VILLAGE_DESERT, Tags.Biomes.IS_HOT_OVERWORLD, Tags.Biomes.IS_DESERT);
+
+    //noinspection unchecked
     this.tag(RootsTags.Biomes.HAS_DUCK_SPAWNS)
         .addTags(BiomeTags.IS_RIVER, BiomeTags.IS_BEACH, BiomeTags.HAS_RUINED_PORTAL_SWAMP, Tags.Biomes.IS_SWAMP, Tags.Biomes.IS_RIVER, Tags.Biomes.IS_BEACH);
 
