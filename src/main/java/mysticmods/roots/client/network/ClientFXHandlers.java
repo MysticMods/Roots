@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -62,11 +63,66 @@ public class ClientFXHandlers {
     }
   }
 
+  public static void castChannelFail(Spell spell, int casterId, int ticks) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity caster = minecraft.level.getEntity(casterId);
+    if (caster != null) {
+      int col1 = spell.getColor1();
+      int col2 = spell.getColor2();
+
+      InteractionHand hand = InteractionHand.MAIN_HAND;
+      if (caster instanceof Player player) {
+        hand = player.getUsedItemHand();
+      }
+
+      double radius = 0.05 + minecraft.level.random.nextDouble() * 0.05;
+      double angle = minecraft.level.random.nextDouble() * (2 * Math.PI);
+
+      Vec3 lookDir = caster.getViewVector(1.0f).normalize();
+      Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
+      Vec3 upVec = rightVec.cross(lookDir).normalize();
+
+      double localX = Math.cos(angle) * radius;
+      double localY = Math.sin(angle) * radius;
+      Vec3 circleOffset = rightVec.scale(localX).add(upVec.scale(localY));
+
+      double handOffset = hand == InteractionHand.MAIN_HAND ? 0.3 : -0.3;
+
+      Vec3 eyePos = caster.getEyePosition(1.0f);
+      Vec3 start = eyePos.add(lookDir.scale(0.6)).add(circleOffset).add(rightVec.scale(handOffset));
+
+
+      minecraft.level.addParticle(
+          new RootsParticleOptions(ModParticles.CHANNEL_FAIL, col1, col2, casterId),
+          start.x,
+          start.y,
+          start.z,
+          0, 0, 0
+      );
+
+      radius = 0.05 + minecraft.level.random.nextDouble() * 0.05;
+      angle = minecraft.level.random.nextDouble() * (2 * Math.PI);
+      localX = Math.cos(angle) * radius;
+      localY = Math.sin(angle) * radius;
+      circleOffset = rightVec.scale(localX).add(upVec.scale(localY));
+      start = eyePos.add(lookDir.scale(0.6)).add(circleOffset).add(rightVec.scale(handOffset));
+
+      minecraft.level.addParticle(
+          new RootsParticleOptions(ModParticles.CHANNEL_FAIL, col2, col1, casterId),
+          start.x,
+          start.y,
+          start.z,
+          0, 0, 0
+      );
+    }
+  }
+
   public static void castChannel(Spell spell, int casterId, Vec3 start, int ticks) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
     Player player = minecraft.player;
     if (player != null && caster != null) {
+      start = player.getPosition(0f);
       int col1 = spell.getColor1();
       int col2 = spell.getColor2();
 

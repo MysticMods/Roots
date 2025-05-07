@@ -11,6 +11,7 @@ import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
+import mysticmods.roots.network.client.fx.CastChannelFailFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelTargetFXPacket;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
@@ -94,21 +95,23 @@ public class CastingItem extends Item {
         // This means the psell didn't cast
         // TODO: Kind of decide something about this
         /*        RootsAPI.LOG.error("Failed casting spell returned a cooldown on a channel: {}", spell.getSpell().getName());*/
+        if (ticks % 2 == 0) {
+          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastChannelFailFXPacket(spell.getSpell(), pPlayer.getId(), ticks));
+        }
       } else {
         if (ticks % 2 == 0) {
-          // Actually transmit particles now
-          Vec3 lookDir = pPlayer.getViewVector(1.0f);
-          Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
-          double sideOffset = 0.3;
-          Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
-          Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
           Vec3 stop = spell.getBlockTarget(pPlayer);
           IRootsPacket packet;
-          if (stop != null) {
-            // Need to adjust start based on the hand
-            packet = new CastChannelTargetFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+          if (stop == null) {
+            packet = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), Vec3.ZERO, ticks);
           } else {
-            packet = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), start, ticks);
+            // Actually transmit particles now
+            Vec3 lookDir = pPlayer.getViewVector(1.0f);
+            Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
+            double sideOffset = 0.3;
+            Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
+            Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
+            packet = new CastChannelTargetFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
           }
 
           PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, packet);

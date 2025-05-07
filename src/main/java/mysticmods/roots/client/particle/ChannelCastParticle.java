@@ -43,7 +43,7 @@ public class ChannelCastParticle extends TextureSheetParticle {
     this.gCol = oG;
     this.bCol = oB;
 
-    this.lifetime = 30 + random.nextInt(10); // ~1.5s
+    this.lifetime = 18 + random.nextInt(10); // ~1.5s
     this.radius = radius;
     this.angle = random.nextDouble() * 2 * Math.PI;
     this.quadSize = 0.2f;
@@ -57,10 +57,10 @@ public class ChannelCastParticle extends TextureSheetParticle {
 
   private void updatePosition(float partialTicks) {
     if (caster != null) {
-      Vec3 eyePos = caster.getEyePosition(partialTicks);         // Forward
+      Vec3 eyePos = caster.getEyePosition(partialTicks);
       Vec3 lookDir = caster.getViewVector(partialTicks).normalize();
-      Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();  // Right
-      Vec3 upVec = rightVec.cross(lookDir).normalize();              // Up (local plane Y)
+      Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
+      Vec3 upVec = rightVec.cross(lookDir).normalize();
 
       double dynamicRadius = radius + 0.02 * Math.sin((age + partialTicks) * 0.2 + radius * 10);
       double localX = Math.cos(angle) * dynamicRadius;

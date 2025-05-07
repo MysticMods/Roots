@@ -198,6 +198,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.WHIRLWIND.get(), WhirlwindParticle.Provider::new);
     event.registerSpriteSet(ModParticles.TEST.get(), TestParticle.Provider::new);
     event.registerSpriteSet(ModParticles.CHANNEL.get(), ChannelCastParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.CHANNEL_FAIL.get(), ChannelNoCastParticle.Provider::new);
 
     event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());
   }

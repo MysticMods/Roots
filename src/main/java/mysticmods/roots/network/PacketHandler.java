@@ -53,6 +53,7 @@ public class PacketHandler {
     registrar.play(AnimalHarvestFXPacket.TYPE, AnimalHarvestFXPacket.CODEC);
     registrar.play(SpiralFXPacket.TYPE, SpiralFXPacket.CODEC);
     registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
+    registrar.play(CastChannelFailFXPacket.TYPE, CastChannelFailFXPacket.CODEC);
     registrar.play(ClientboundOpenReputationPacket.TYPE, ClientboundOpenReputationPacket.CODEC);
   }
 
