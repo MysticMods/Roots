@@ -5,6 +5,7 @@ import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
+import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -58,6 +59,25 @@ public class ClientFXHandlers {
             xSpeed,
             ySpeed,
             zSpeed
+        );
+      }
+    }
+  }
+
+  public static void aquaBubble(int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    RandomSource random = minecraft.level.random;
+    if (entity != null) {
+      for (int i = 0; i < 4; i++) {
+        minecraft.level.addParticle(
+            ModParticles.AIR_BUBBLE.value(),
+            entity.getX() + (random.nextDouble() - 0.5),
+            entity.getY() + (entity.getEyeHeight()) + (random.nextDouble() - 0.5),
+            entity.getZ() + (random.nextDouble() - 0.5),
+            (random.nextDouble() - 0.5) * 0.25,
+            (random.nextDouble() - 0.5) * 0.34,
+            (random.nextDouble() - 0.5) * 0.28
         );
       }
     }

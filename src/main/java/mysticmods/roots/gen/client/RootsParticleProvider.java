@@ -24,6 +24,7 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.sprite(ModParticles.CHANNEL_TARGET.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.CHANNEL.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.CHANNEL_FAIL.get(), RootsAPI.rl("simple"));
+    this.sprite(ModParticles.AIR_BUBBLE.get(), ResourceLocation.withDefaultNamespace("bubble"));
 
     this.sprite(ModParticles.ANIMAL_HARVEST.get(), RootsAPI.rl("simple"));
 
