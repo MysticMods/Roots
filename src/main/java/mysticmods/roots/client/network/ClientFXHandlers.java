@@ -156,12 +156,12 @@ public class ClientFXHandlers {
     }
   }
 
-  public static void castChannel(Spell spell, int casterId, Vec3 start, int ticks) {
+  public static void castChannel(Spell spell, int casterId, int ticks) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
     Player player = minecraft.player;
     if (player != null && caster != null) {
-      start = player.getPosition(0f);
+      Vec3 start = player.getPosition(0f);
       int col1 = spell.getColor1();
       int col2 = spell.getColor2();
 

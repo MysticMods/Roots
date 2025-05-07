@@ -1,6 +1,5 @@
 package mysticmods.roots.network.client.fx;
 
-import mysticmods.roots.api.ExtraStreamCodecs;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.registry.RootsRegistries;
@@ -10,22 +9,20 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record CastChannelFXPacket(Spell spell, int casterId, Vec3 casterPosition,                                   int ticks) implements IRootsPacket {
+public record CastChannelFXPacket(Spell spell, int casterId, int ticks) implements IRootsPacket {
   public static final Type<CastChannelFXPacket> TYPE = new Type<>(RootsAPI.rl("client_fx/channel"));
   public static final StreamCodec<RegistryFriendlyByteBuf, CastChannelFXPacket> CODEC = StreamCodec.composite(
       ByteBufCodecs.registry(RootsRegistries.Keys.SPELLS), CastChannelFXPacket::spell,
       ByteBufCodecs.VAR_INT, CastChannelFXPacket::casterId,
-      ExtraStreamCodecs.VEC3, CastChannelFXPacket::casterPosition,
       ByteBufCodecs.VAR_INT, CastChannelFXPacket::ticks,
       CastChannelFXPacket::new
   );
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientFXHandlers.castChannel(spell, casterId, casterPosition, ticks);
+    ClientFXHandlers.castChannel(spell, casterId, ticks);
   }
 
   @Override

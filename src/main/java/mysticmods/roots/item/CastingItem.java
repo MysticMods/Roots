@@ -103,7 +103,7 @@ public class CastingItem extends Item {
           Vec3 stop = spell.getBlockTarget(pPlayer);
           IRootsPacket packet;
           if (stop == null) {
-            packet = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), Vec3.ZERO, ticks);
+            packet = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), ticks);
           } else {
             // Actually transmit particles now
             Vec3 lookDir = pPlayer.getViewVector(1.0f);
