@@ -136,7 +136,7 @@ public class ClientFXHandlers {
           start.x,
           start.y,
           start.z,
-          0, 0, 0
+          radius, angle, handOffset
       );
 
       radius = 0.05 + minecraft.level.random.nextDouble() * 0.05;
@@ -151,7 +151,7 @@ public class ClientFXHandlers {
           start.x,
           start.y,
           start.z,
-          0, 0, 0
+          radius, angle, handOffset
       );
     }
   }
