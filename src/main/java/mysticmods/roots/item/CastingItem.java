@@ -3,6 +3,7 @@ package mysticmods.roots.item;
 import mysticmods.roots.action.SpellCastAction;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
+import mysticmods.roots.api.network.IRootsPacket;
 import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
@@ -10,6 +11,7 @@ import mysticmods.roots.client.RootsClientHooks;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
+import mysticmods.roots.network.client.fx.CastChannelTargetFXPacket;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -101,11 +103,15 @@ public class CastingItem extends Item {
           Vec3 handOffset = pHand == InteractionHand.MAIN_HAND ? rightVec.scale(sideOffset) : rightVec.scale(-sideOffset);
           Vec3 start = pPlayer.getEyePosition().add(handOffset).add(lookDir.scale(0.6));
           Vec3 stop = spell.getBlockTarget(pPlayer);
+          IRootsPacket packet;
           if (stop != null) {
             // Need to adjust start based on the hand
-            CastChannelFXPacket fx = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
-            PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, fx);
+            packet = new CastChannelTargetFXPacket(spell.getSpell(), pPlayer.getId(), start, stop, ticks);
+          } else {
+            packet = new CastChannelFXPacket(spell.getSpell(), pPlayer.getId(), start, ticks);
           }
+
+          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, packet);
         }
       }
 

@@ -43,6 +43,10 @@ public record RootsParticleOptions(ParticleType<?> type, int color1, int color2,
     this(type.get(), color, color, -1);
   }
 
+  public RootsParticleOptions(DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> type, int color1, int color2, int entityId) {
+    this(type.get(), color1, color2, entityId);
+  }
+
   @Override
   public ParticleType<?> getType() {
     return type;

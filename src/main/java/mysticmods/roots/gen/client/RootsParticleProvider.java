@@ -22,6 +22,7 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
     this.sprite(ModParticles.WILDFIRE.get(), RootsAPI.rl("simple"));
     this.sprite(ModParticles.GROWTH.get(), RootsAPI.rl("simple_square"));
     this.sprite(ModParticles.CHANNEL_TARGET.get(), RootsAPI.rl("simple"));
+    this.sprite(ModParticles.CHANNEL.get(), RootsAPI.rl("simple"));
 
     this.sprite(ModParticles.ANIMAL_HARVEST.get(), RootsAPI.rl("simple"));
 

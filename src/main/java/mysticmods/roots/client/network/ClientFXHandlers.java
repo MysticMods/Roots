@@ -62,6 +62,47 @@ public class ClientFXHandlers {
     }
   }
 
+  public static void castChannel(Spell spell, int casterId, Vec3 start, int ticks) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity caster = minecraft.level.getEntity(casterId);
+    Player player = minecraft.player;
+    if (player != null && caster != null) {
+      int col1 = spell.getColor1();
+      int col2 = spell.getColor2();
+
+      double radius = 0.1 + minecraft.level.random.nextDouble() * 0.15;
+
+      minecraft.level.addParticle(
+          new RootsParticleOptions(
+              ModParticles.CHANNEL,
+              col1,
+              col2,
+              casterId
+          ),
+          start.x,
+          start.y,
+          start.z,
+          radius,
+          0,
+          0
+      );
+      minecraft.level.addParticle(
+          new RootsParticleOptions(
+              ModParticles.CHANNEL,
+              col2,
+              col1,
+              casterId
+          ),
+          start.x,
+          start.y,
+          start.z,
+          radius,
+          0,
+          0
+      );
+    }
+  }
+
   public static void castChannel(Spell spell, int casterId, Vec3 start, Vec3 stop, int ticks) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);

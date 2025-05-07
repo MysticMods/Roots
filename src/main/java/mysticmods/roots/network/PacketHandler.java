@@ -44,7 +44,7 @@ public class PacketHandler {
     registrar.play(ClientboundEntitySnapshotSyncPacket.TYPE, ClientboundEntitySnapshotSyncPacket.CODEC);
     registrar.play(ClientboundDiscardEntityAttachmentPacket.TYPE, ClientboundDiscardEntityAttachmentPacket.CODEC);
     registrar.play(GrowthFXPacket.TYPE, GrowthFXPacket.CODEC);
-    registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
+    registrar.play(CastChannelTargetFXPacket.TYPE, CastChannelTargetFXPacket.CODEC);
     registrar.play(ClientboundSyncGeasPacket.TYPE, ClientboundSyncGeasPacket.CODEC);
     registrar.play(AlertnessFXPacket.TYPE, AlertnessFXPacket.CODEC);
     registrar.play(ClientboundHerbCountSyncPacket.TYPE, ClientboundHerbCountSyncPacket.CODEC);
@@ -52,6 +52,7 @@ public class PacketHandler {
     registrar.play(ClientboundReputationMessagePacket.TYPE, ClientboundReputationMessagePacket.CODEC);
     registrar.play(AnimalHarvestFXPacket.TYPE, AnimalHarvestFXPacket.CODEC);
     registrar.play(SpiralFXPacket.TYPE, SpiralFXPacket.CODEC);
+    registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
     registrar.play(ClientboundOpenReputationPacket.TYPE, ClientboundOpenReputationPacket.CODEC);
   }
 
