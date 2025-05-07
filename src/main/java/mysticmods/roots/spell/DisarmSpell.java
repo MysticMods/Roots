@@ -75,8 +75,10 @@ public class DisarmSpell extends TwoRadiusSpell {
 
     int count = 0;
 
+
     for (LivingEntity entity : entities) {
       Mob mob = null;
+      boolean didDrop = false;
       if (entity instanceof Mob mobEntity) {
         mob = mobEntity;
       }
@@ -106,12 +108,17 @@ public class DisarmSpell extends TwoRadiusSpell {
         }
 
         count++;
+        didDrop = true;
 
         if (pPlayer.getRandom().nextFloat() < thisChance) {
           entity.spawnAtLocation(stack);
         }
 
         entity.setItemSlot(slot, ItemStack.EMPTY);
+      }
+
+      if (didDrop) {
+
       }
     }
 
