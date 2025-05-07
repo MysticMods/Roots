@@ -82,7 +82,7 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
       this.gCol = oG + (rG - oG) * t;
       this.bCol = oB + (rB - oB) * t;
 
-      this.alpha = 1.0f - t; // non-linear fade
+      this.alpha = 1.0f - (t * t); // non-linear fade
 
       // Begin falling after short delay
       updatePosition();
