@@ -10,6 +10,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.CastAquaBubbleFXPacket;
 import mysticmods.roots.snapshot.AquaBubbleSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
@@ -20,6 +21,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -64,6 +66,7 @@ public class AquaBubbleSpell extends Spell {
     SnapshotHelper.addLiving(pPlayer, ModSerializers.AQUA_BUBBLE.get(), new AquaBubbleSnapshot(pPlayer, duration, absorption, fire_reduction, lava_reduction));
     pPlayer.addEffect(new MobEffectInstance(ModEffects.AQUA_BUBBLE, duration, 0, false, false));
     pPlayer.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, duration, absorption, false, false));
+    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastAquaBubbleFXPacket(pPlayer.getId()));
     return cooldown;
   }
 }

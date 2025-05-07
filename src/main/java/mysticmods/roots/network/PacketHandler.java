@@ -55,6 +55,7 @@ public class PacketHandler {
     registrar.play(CastChannelFXPacket.TYPE, CastChannelFXPacket.CODEC);
     registrar.play(CastChannelFailFXPacket.TYPE, CastChannelFailFXPacket.CODEC);
     registrar.play(AquaBubbleFXPacket.TYPE, AquaBubbleFXPacket.CODEC);
+    registrar.play(CastAquaBubbleFXPacket.TYPE, CastAquaBubbleFXPacket.CODEC);
     registrar.play(ClientboundOpenReputationPacket.TYPE, ClientboundOpenReputationPacket.CODEC);
   }
 

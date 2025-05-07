@@ -83,6 +83,25 @@ public class ClientFXHandlers {
     }
   }
 
+  public static void castAquaBubble(int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    RandomSource random = minecraft.level.random;
+    if (entity != null) {
+      for (int i = 0; i < 31; i++) {
+        minecraft.level.addParticle(
+            ModParticles.AIR_BUBBLE.value(),
+            entity.getX() + (random.nextDouble() - 0.5),
+            entity.getY() + (entity.getEyeHeight()) + (random.nextDouble() - 0.5),
+            entity.getZ() + (random.nextDouble() - 0.5),
+            (random.nextDouble() - 0.5) * 0.25,
+            (random.nextDouble() - 0.5) * 0.34,
+            (random.nextDouble() - 0.5) * 0.28
+        );
+      }
+    }
+  }
+
   public static void castChannelFail(Spell spell, int casterId, int ticks) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity caster = minecraft.level.getEntity(casterId);
