@@ -114,7 +114,7 @@ public class ClientFXHandlers {
         hand = player.getUsedItemHand();
       }
 
-      double radius = 0.05 + minecraft.level.random.nextDouble() * 0.05;
+      double radius = 0.08 + minecraft.level.random.nextDouble() * 0.08;
       double angle = minecraft.level.random.nextDouble() * (2 * Math.PI);
 
       Vec3 lookDir = caster.getViewVector(1.0f).normalize();
@@ -139,7 +139,7 @@ public class ClientFXHandlers {
           radius, angle, handOffset
       );
 
-      radius = 0.05 + minecraft.level.random.nextDouble() * 0.05;
+      radius = 0.08 + minecraft.level.random.nextDouble() * 0.08;
       angle = minecraft.level.random.nextDouble() * (2 * Math.PI);
       localX = Math.cos(angle) * radius;
       localY = Math.sin(angle) * radius;
