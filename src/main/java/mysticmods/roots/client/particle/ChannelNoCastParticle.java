@@ -9,6 +9,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 
 public class ChannelNoCastParticle extends TextureSheetParticle {
+  private static final int threshold = 13;
+
   private final float oR, oG, oB, rR, rG, rB;
   private double fallSpeed = 0;
   private final Entity entity;
@@ -54,7 +56,7 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
       Vec3 start = eyePos.add(lookDir.scale(0.6)).add(circleOffset).add(rightVec.scale(hand));
 
       this.x = start.x;
-      if (age > 13) {
+      if (age > threshold) {
         this.y = start.y - fallSpeed;
       } else {
         this.y = start.y;
@@ -71,7 +73,7 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
     if (this.age++ >= this.lifetime) {
       this.remove();
     } else {
-      if (age > 13) {
+      if (age > threshold) {
         fallSpeed += 0.06; // acceleration
       }
       float t = (float) age / lifetime;
