@@ -208,6 +208,15 @@
           "default_value": 0.35,
           "value": 0.35
         }
+      },
+      {
+        "id": "roots:disarm/glow_duration",
+        "value": {
+          "type": "roots:integer_property",
+          "comment": "The duration of the glow effect in ticks on entities that are disarmed.",
+          "default_value": 100,
+          "value": 100
+        }
       }
     ],
     "roots:extension": [

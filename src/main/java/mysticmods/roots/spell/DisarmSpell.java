@@ -11,6 +11,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.mixin.accessor.AccessorMixinMob;
+import mysticmods.roots.network.client.fx.DisarmFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -18,6 +19,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -27,11 +30,13 @@ import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
 public class DisarmSpell extends TwoRadiusSpell {
   private float dropChance;
+  private int glowDuration;
 
   public DisarmSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x3a3a3a, 0x7a0000);
@@ -56,12 +61,14 @@ public class DisarmSpell extends TwoRadiusSpell {
   public void buildProperties(List<PropertyHolder<?>> result) {
     super.buildProperties(result);
     result.add(ModSpells.DISARM_DROP_CHANCE);
+    result.add(ModSpells.DISARM_GLOW_DURATION);
   }
 
   @Override
   public void initialize(Holder<Spell> holder) {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.dropChance = properties.get(ModSpells.DISARM_DROP_CHANCE);
+    this.glowDuration = properties.get(ModSpells.DISARM_GLOW_DURATION);
   }
 
   @Override
@@ -74,7 +81,6 @@ public class DisarmSpell extends TwoRadiusSpell {
     DamageSource source = damage.playerAttack(pPlayer);
 
     int count = 0;
-
 
     for (LivingEntity entity : entities) {
       Mob mob = null;
@@ -118,7 +124,8 @@ public class DisarmSpell extends TwoRadiusSpell {
       }
 
       if (didDrop) {
-
+        entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
+        PacketDistributor.sendToPlayersTrackingEntity(entity, new DisarmFXPacket(entity.getId()));
       }
     }
 

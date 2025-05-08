@@ -17,6 +17,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class ClientFXHandlers {
+  public static void disarm(int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    RandomSource random = minecraft.level.getRandom();
+    int color1 = ModSpells.DISARM.get().getColor1();
+    int color2 = ModSpells.DISARM.get().getColor2();
+    Entity entity = minecraft.level.getEntity(entityId);
+    if (entity != null) {
+      minecraft.level.addParticle(new RootsParticleOptions(ModParticles.DISARM_EMITTER, color1, color2, entityId), entity.getX(), entity.getY(), entity.getZ(), 18, 2, 0.4);
+    }
+  }
+
   public static void spiral(BlockPos position, double radius, double angle, int color1, int color2) {
     Minecraft minecraft = Minecraft.getInstance();
     minecraft.level.addParticle(new RootsParticleOptions(ModParticles.SPIRAL, color1, color2),

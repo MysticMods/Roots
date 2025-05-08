@@ -14,6 +14,7 @@ import mysticmods.roots.client.model.armor.AntlerHatModel;
 import mysticmods.roots.client.model.armor.ArmorModel;
 import mysticmods.roots.client.model.armor.BeetleArmorModel;
 import mysticmods.roots.client.particle.*;
+import mysticmods.roots.client.particle.emitter.EntityEmitter;
 import mysticmods.roots.client.particle.emitter.SylvanLightEmitter;
 import mysticmods.roots.client.render.*;
 import mysticmods.roots.init.*;
@@ -200,7 +201,9 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.CHANNEL.get(), ChannelCastParticle.Provider::new);
     event.registerSpriteSet(ModParticles.CHANNEL_FAIL.get(), ChannelNoCastParticle.Provider::new);
     event.registerSpriteSet(ModParticles.AIR_BUBBLE.get(), AirBubbleParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.DISARM.get(), DisarmParticle.Provider::new);
 
+    event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());
   }
 
