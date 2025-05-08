@@ -6,6 +6,8 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.layer.HerbLayer;
+import mysticmods.roots.client.particle.BoltEffect;
+import mysticmods.roots.client.particle.BoltRenderer;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinLevelRenderer;
@@ -37,12 +39,26 @@ public class RenderTickHandler {
   private static float clientTicks = 0;
 
   private static boolean outliningArea = false;
+  private static final BoltRenderer boltRenderer = new BoltRenderer();
 
+  public static float getPartialTick() {
+    return Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
+  }
+
+  public static void renderBolt(Object renderer, BoltEffect bolt) {
+    boltRenderer.update(renderer, bolt, getPartialTick());
+  }
 
   @SubscribeEvent
   public static void onRenderStage(RenderLevelStageEvent event) {
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
       clientTicks += event.getPartialTick().getGameTimeDeltaPartialTick(false);
+    }
+    if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && boltRenderer.hasBoltsToRender()) {
+      MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
+      boltRenderer.render(event.getPartialTick()
+          .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
+      renderer.endBatch(RootsRenderTypes.ROOTS_LIGHTNING);
     }
   }
 
