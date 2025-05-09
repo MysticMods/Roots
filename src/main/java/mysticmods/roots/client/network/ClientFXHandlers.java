@@ -9,8 +9,6 @@ import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -19,14 +17,52 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class ClientFXHandlers {
-  public static void acidCloud (int entityId) {
+  public static void dandelionWinds(int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    RandomSource random = minecraft.level.random;
+
+    if (entity != null) {
+      int color1 = ModSpells.DANDELION_WINDS.get().getColor1();
+      int color2 = ModSpells.DANDELION_WINDS.get().getColor2();
+
+      Vec3 origin = entity.getEyePosition().subtract(0, 0.6, 0);
+      Vec3 look = entity.getLookAngle().normalize();
+
+      int streamCount = 6;
+
+      for (int stream = 0; stream < streamCount; stream++) {
+        // Slight variation per stream
+        float angle = (float) ((random.nextDouble() - 0.5) * Math.toRadians(8)); // very narrow cone
+        Vec3 streamDir = look.yRot(angle).normalize();
+
+        // Base speed per stream (uniform)
+        Vec3 baseMotion = streamDir.scale(0.07).add(0, 0.04, 0);
+
+        // Each stream spawns multiple particles in a row
+        for (int i = 0; i < 5; i++) {
+          RootsParticleOptions opts = random.nextBoolean()
+              ? new RootsParticleOptions(ModParticles.WIND, color1, color2)
+              : new RootsParticleOptions(ModParticles.WIND, color2, color1);
+
+          // Offset origin slightly to make trails
+          Vec3 offset = streamDir.scale(i * 0.1);
+          Vec3 spawnPos = origin.add(offset);
+
+          minecraft.level.addParticle(opts, spawnPos.x, spawnPos.y, spawnPos.z, baseMotion.x, baseMotion.y, baseMotion.z);
+        }
+      }
+    }
+  }
+
+  public static void acidCloud(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     int color1 = ModSpells.ACID_CLOUD.get().getColor1();
     int color2 = ModSpells.ACID_CLOUD.get().getColor2();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = minecraft.level.random;
     if (entity != null) {
-      for (float i = 0; i < 360; i+= (random.nextFloat() * 5)) {
+      for (float i = 0; i < 360; i += (random.nextFloat() * 5)) {
         RootsParticleOptions opts = random.nextBoolean() ? new RootsParticleOptions(ModParticles.SMOKE, color1, color2) : new RootsParticleOptions(ModParticles.SMOKE, color2, color1);
         double rad = Math.toRadians(i);
         double x = entity.getX() + (1.5 * random.nextDouble()) * Math.sin(rad);

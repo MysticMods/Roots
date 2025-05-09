@@ -9,6 +9,7 @@ import mysticmods.roots.api.spell.Costing;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.DandelionWindsFXPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -66,10 +68,14 @@ public class DandelionWindsSpell extends Spell {
       flingEntity(entity, look, motion);
       moved++;
     }
+
+    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new DandelionWindsFXPacket(pPlayer.getId()));
+
     if (moved == 0) {
       costs.noCharge();
       return 0;
     }
+
     return cooldown;
   }
 

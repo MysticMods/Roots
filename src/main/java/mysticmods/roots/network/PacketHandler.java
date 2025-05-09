@@ -59,6 +59,7 @@ public class PacketHandler {
     registrar.play(DisarmFXPacket.TYPE, DisarmFXPacket.CODEC);
     registrar.play(LightningFXPacket.TYPE, LightningFXPacket.CODEC);
     registrar.play(AcidCloudFXPacket.TYPE, AcidCloudFXPacket.CODEC);
+    registrar.play(DandelionWindsFXPacket.TYPE, DandelionWindsFXPacket.CODEC);
     registrar.play(ClientboundOpenReputationPacket.TYPE, ClientboundOpenReputationPacket.CODEC);
   }
 
