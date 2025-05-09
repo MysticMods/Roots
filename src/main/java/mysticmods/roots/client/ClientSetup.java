@@ -202,6 +202,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.CHANNEL_FAIL.get(), ChannelNoCastParticle.Provider::new);
     event.registerSpriteSet(ModParticles.AIR_BUBBLE.get(), AirBubbleParticle.Provider::new);
     event.registerSpriteSet(ModParticles.DISARM.get(), DisarmParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.SMOKE.get(), SmokeParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());

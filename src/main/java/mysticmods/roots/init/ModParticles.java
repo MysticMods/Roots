@@ -41,6 +41,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> TEST = PARTICLES.register("test", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AIR_BUBBLE = PARTICLES.register("air_bubble", () -> new SimpleParticleType(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> DISARM = PARTICLES.register("disarm", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SMOKE = PARTICLES.register("smoke", () -> new RootsParticleOptions.Type(false));
 
 
   public static void register(IEventBus bus) {

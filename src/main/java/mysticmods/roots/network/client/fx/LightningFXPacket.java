@@ -23,7 +23,7 @@ public record LightningFXPacket (LightningPreset preset, int renderer, Vec3 star
     this(preset, renderer, start, end, (int) (Math.sqrt(start.distanceTo(end) * 5)));
   }
 
-  public static final CustomPacketPayload.Type<LightningFXPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("fx/lightning"));
+  public static final CustomPacketPayload.Type<LightningFXPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_fx/lightning"));
   public static final StreamCodec<ByteBuf, LightningFXPacket> CODEC = StreamCodec.composite(
       LightningPreset.STREAM_CODEC, LightningFXPacket::preset,
       ByteBufCodecs.VAR_INT, LightningFXPacket::renderer,

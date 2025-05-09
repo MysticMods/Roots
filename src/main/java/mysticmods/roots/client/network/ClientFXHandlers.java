@@ -9,6 +9,8 @@ import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -17,6 +19,30 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class ClientFXHandlers {
+  public static void acidCloud (int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    int color1 = ModSpells.ACID_CLOUD.get().getColor1();
+    int color2 = ModSpells.ACID_CLOUD.get().getColor2();
+    Entity entity = minecraft.level.getEntity(entityId);
+    RandomSource random = minecraft.level.random;
+    if (entity != null) {
+      for (float i = 0; i < 360; i+= (random.nextFloat() * 5)) {
+        RootsParticleOptions opts = random.nextBoolean() ? new RootsParticleOptions(ModParticles.SMOKE, color1, color2) : new RootsParticleOptions(ModParticles.SMOKE, color2, color1);
+        double rad = Math.toRadians(i);
+        double x = entity.getX() + (1.5 * random.nextDouble()) * Math.sin(rad);
+        double y = entity.getY() + 0.5;
+        double z = entity.getZ() + (1.5 * random.nextDouble()) * Math.cos(rad);
+        double vx = 0.0825 * Math.sin(rad);
+        double vz = 0.0825 * Math.cos(rad);
+/*        if (random.nextBoolean()) {
+          vx *= -1;
+          vz *= -1;
+        }*/
+        minecraft.level.addParticle(opts, x, y, z, vx, 0.0525 * (random.nextDouble() - 0.5), vz);
+      }
+    }
+  }
+
   public static void disarm(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     int color1 = ModSpells.DISARM.get().getColor1();

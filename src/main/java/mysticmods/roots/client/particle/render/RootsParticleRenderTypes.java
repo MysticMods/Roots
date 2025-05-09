@@ -37,7 +37,6 @@ public class RootsParticleRenderTypes {
   public static ParticleRenderType GLOW = new ParticleRenderType() {
     @Override
     public @Nullable BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
-      Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
       RenderSystem.enableBlend();
       RenderSystem.depthMask(true);
       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);

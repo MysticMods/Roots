@@ -30,6 +30,8 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
 
     this.sprite(ModParticles.TEST.get(), RootsAPI.rl("simple"));
 
+    this.spriteSet(ModParticles.SMOKE.get(), ResourceLocation.withDefaultNamespace("generic"), 8, true);
+
     this.spriteSet(ModParticles.DISARM.get(), RootsAPI.rl("petal"), 4, false);
 
     this.spriteSet(ModParticles.SPIRAL.get(), RootsAPI.rl("petal"), 4, false);

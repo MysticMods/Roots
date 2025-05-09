@@ -10,6 +10,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.AcidCloudFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -75,9 +77,14 @@ public class AcidCloudSpell extends TwoRadiusSpell {
       //  - Visuals
       entity.hurt(ModDamage.acidCloud(pPlayer), damage);
     }
+
+    if (ticks % 3 == 0) {
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new AcidCloudFXPacket(pPlayer.getId()));
+    }
+
     if (totalDamaged == 0) {
       costs.noCharge();
-      return 0;
+      return -1;
     }
 
     return cooldown;
