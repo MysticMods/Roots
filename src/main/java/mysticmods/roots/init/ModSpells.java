@@ -77,10 +77,11 @@ public class ModSpells {
   // Disarm spell (350 cooldown)
   public static final DeferredHolder<Spell, DisarmSpell> DISARM = spell(Spells.DISARM, DisarmSpell::new, ChatFormatting.AQUA, () -> CostInstance.of(CostInstance.ChargeType.OPERATION, List.of(Cost.add(ModHerbs.SPIRITLEAF, SpellCosts.BASE_0125), Cost.add(ModHerbs.BAFFLECAP, SpellCosts.BASE_0125))));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_COOLDOWN = P.recordProperty("disarm/cooldown", Property.ofInt(60, SpellProperties.COOLDOWN));
-  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_ZX = P.recordProperty("disarm/radius_zx", Property.ofInt(5, SpellProperties.RADIUS_ZX));
-  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_Y = P.recordProperty("disarm/radius_y", Property.ofInt(5, SpellProperties.RADIUS_Y));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_ZX = P.recordProperty("disarm/radius_zx", Property.ofInt(9, SpellProperties.RADIUS_ZX));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_RADIUS_Y = P.recordProperty("disarm/radius_y", Property.ofInt(9, SpellProperties.RADIUS_Y));
   public static final PropertyHolder<Property.FloatProperty> DISARM_DROP_CHANCE = P.recordProperty("disarm/drop_chance", Property.ofFloat(0.35f, "Percentage change for an entity's dropped item to spawn in the world instead of being destroyed."));
   public static final PropertyHolder<Property.IntegerProperty> DISARM_GLOW_DURATION = P.recordProperty("disarm/glow_duration", Property.ofInt(20 * 5, "The duration of the glow effect in ticks on entities that are disarmed."));
+  public static final PropertyHolder<Property.IntegerProperty> DISARM_COUNT = P.recordProperty("disarm/count", Property.ofInt(2, "The number of entities that can be disarmed per cast."));
 
   // Long night vision & sense danger
   // Extension spell (350 cooldown)

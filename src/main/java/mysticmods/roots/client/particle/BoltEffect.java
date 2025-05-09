@@ -256,6 +256,9 @@ public class BoltEffect {
      */
     SegmentSpreader NO_MEMORY = (perpendicularDist, randVec, maxDiff, scale, progress, rand) -> randVec.scale(maxDiff * rand);
 
+    // Segment spreader a la ChatGPT
+    SegmentSpreader JAGGED = (perp, randVec, maxDiff, scale, progress, rand) -> randVec.scale(maxDiff);
+
     /**
      * Move from where the previous segment ended by a certain memory factor. Higher memory will restrict perpendicular movement.
      */
@@ -405,7 +408,7 @@ public class BoltEffect {
     }
 
     public static BoltRenderInfo vines () {
-      return new BoltRenderInfo().color(Color.rgbad(0.34f, 0.8f, 0.3f, 0.4f)).noise(0.3f, 0.1f).branching(0.1f, 0.4f).spreader(SegmentSpreader.memory(0.9f));
+      return new BoltRenderInfo().color(Color.rgbad(0.34f, 0.8f, 0.3f, 0.4f)).noise(0f, 0.1f).branching(0.1f, 0.4f).spreader(SegmentSpreader.JAGGED).spreadFunction(SpreadFunction.SINE).randomFunction(RandomFunction.UNIFORM);
     }
 
     public BoltRenderInfo noise(float parallelNoise, float spreadFactor) {

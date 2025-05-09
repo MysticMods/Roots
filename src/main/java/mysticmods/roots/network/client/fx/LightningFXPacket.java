@@ -20,7 +20,7 @@ import java.util.function.IntFunction;
 public record LightningFXPacket (LightningPreset preset, int renderer, Vec3 start, Vec3 end,
                                     int segments) implements IRootsPacket {
   public LightningFXPacket (LightningPreset preset, int renderer, Vec3 start, Vec3 end) {
-    this(preset, renderer, start, end, (int) (Math.sqrt(start.distanceTo(end) * 100)));
+    this(preset, renderer, start, end, (int) (Math.sqrt(start.distanceTo(end) * 5)));
   }
 
   public static final CustomPacketPayload.Type<LightningFXPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("fx/lightning"));
@@ -58,7 +58,7 @@ public record LightningFXPacket (LightningPreset preset, int renderer, Vec3 star
     TOOL_AOE(() -> true, (start, end, segments) ->
         new BoltEffect(BoltEffect.BoltRenderInfo.ELECTRICITY, start, end, segments).size(0.015F).lifespan(12)
             .spawn(BoltEffect.SpawnFunction.NO_DELAY)),
-    FANCY(() -> true, (start, end, segments) -> new BoltEffect(BoltEffect.BoltRenderInfo.VINES, start, end, segments).size(0.07f).lifespan(21).spawn(BoltEffect.SpawnFunction.NO_DELAY));
+    FANCY(() -> true, (start, end, segments) -> new BoltEffect(BoltEffect.BoltRenderInfo.VINES, start, end, segments).size(0.07f).lifespan(21).spawn(BoltEffect.SpawnFunction.NO_DELAY).fade(BoltEffect.FadeFunction.fade(0.1f)).count(1));
 
     public static final IntFunction<LightningPreset> BY_ID = ByIdMap.continuous(LightningPreset::ordinal, values(), ByIdMap.OutOfBoundsStrategy.WRAP);
     public static final StreamCodec<ByteBuf, LightningPreset> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, LightningPreset::ordinal);

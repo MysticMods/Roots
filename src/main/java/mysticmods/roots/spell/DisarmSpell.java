@@ -31,13 +31,14 @@ import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
 public class DisarmSpell extends TwoRadiusSpell {
   private float dropChance;
-  private int glowDuration;
+  private int glowDuration, count;
 
   public DisarmSpell(ChatFormatting color, CostInstance costs) {
     super(Type.INSTANT, color, costs, 0x3a3a3a, 0x7a0000);
@@ -63,6 +64,7 @@ public class DisarmSpell extends TwoRadiusSpell {
     super.buildProperties(result);
     result.add(ModSpells.DISARM_DROP_CHANCE);
     result.add(ModSpells.DISARM_GLOW_DURATION);
+    result.add(ModSpells.DISARM_COUNT);
   }
 
   @Override
@@ -70,6 +72,7 @@ public class DisarmSpell extends TwoRadiusSpell {
     PropertyDataMap properties = holder.getData(DataMaps.SPELL_PROPERTY_DATA);
     this.dropChance = properties.get(ModSpells.DISARM_DROP_CHANCE);
     this.glowDuration = properties.get(ModSpells.DISARM_GLOW_DURATION);
+    this.count = properties.get(ModSpells.DISARM_COUNT);
   }
 
   @Override
@@ -127,7 +130,9 @@ public class DisarmSpell extends TwoRadiusSpell {
       if (didDrop) {
         entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
         PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new DisarmFXPacket(entity.getId()));
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new LightningFXPacket(LightningFXPacket.LightningPreset.FANCY, 1, pPlayer.getEyePosition(), entity.getEyePosition()));
+        Vec3 start = pPlayer.position().add(0, 0.5, 0);
+        Vec3 stop = entity.position().add(0, entity.getBbHeight() / 2, 0);
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new LightningFXPacket(LightningFXPacket.LightningPreset.FANCY, 1, start, stop));
       }
     }
 
