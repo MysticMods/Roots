@@ -31,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+// Note: VISUALS DONE!
 public class GrowthInfusionSpell extends Spell {
   public GrowthInfusionSpell(ChatFormatting color, CostInstance costs) {
     super(Type.CONTINUOUS, color, costs, 0x30ff30, 0xc0ffc0);

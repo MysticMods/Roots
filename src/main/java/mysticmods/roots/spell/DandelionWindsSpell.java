@@ -23,6 +23,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
+// Note: VISUALS DISGUSTING
 public class DandelionWindsSpell extends Spell {
   private float distance, vertical;
   private double r1, r2;

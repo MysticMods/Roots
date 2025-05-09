@@ -24,6 +24,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
+// Note: VISUALS DONE!
 public class AcidCloudSpell extends TwoRadiusSpell {
   private float damage;
   private int count;

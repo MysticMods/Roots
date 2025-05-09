@@ -36,6 +36,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
+// Note: VISUALS DONE!
 public class DisarmSpell extends TwoRadiusSpell {
   private float dropChance;
   private int glowDuration, count;

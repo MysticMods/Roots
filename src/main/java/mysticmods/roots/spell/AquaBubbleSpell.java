@@ -25,6 +25,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
+// Note: VISUALS TEMPORARY
 public class AquaBubbleSpell extends Spell {
   private int duration;
   private float fire_reduction, lava_reduction;
