@@ -70,7 +70,7 @@ public class AcidCloudSpell extends TwoRadiusSpell {
         break;
       }
 
-      LivingEntity entity = entities.remove(pLevel.getRandom().nextInt(entities.size()));
+      LivingEntity entity = entities.get(pLevel.getRandom().nextInt(entities.size()));
       totalDamaged++;
       entity.hurt(ModDamage.acidCloud(pPlayer), damage);
     }
