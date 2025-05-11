@@ -19,6 +19,8 @@ public class ModParticles {
     PARTICLES.addAlias(RootsAPI.rl("fey_light_emitter"), RootsAPI.rl("sylvan_light_emitter"));
   }
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> DISARM_EMITTER = PARTICLES.register("disarm_emitter", () -> new RootsParticleOptions.Type(false));
+  // Sky Soarer Emitter
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SKY_SOARER_EMITTER = PARTICLES.register("sky_soarer_emitter", () -> new RootsParticleOptions.Type(false));
 
   // Actual particles
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PYRE = PARTICLES.register("pyre", () -> new RootsParticleOptions.Type(false));
@@ -43,6 +45,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> DISARM = PARTICLES.register("disarm", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SMOKE = PARTICLES.register("smoke", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> WIND = PARTICLES.register("wind", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SKY_SOARER = PARTICLES.register("sky_soarer", () -> new RootsParticleOptions.Type(false));
 
 
   public static void register(IEventBus bus) {

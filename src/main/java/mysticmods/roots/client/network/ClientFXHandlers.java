@@ -17,6 +17,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class ClientFXHandlers {
+  // TODO: This probably doesn't need to be an emitter
+  public static void castSkySorarer (int entityId, int duration) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+
+    if (entity != null) {
+      int color1 = ModSpells.SKY_SOARER.get().getColor1();
+      int color2 = ModSpells.SKY_SOARER.get().getColor2();
+
+      minecraft.level.addParticle(new RootsParticleOptions(ModParticles.SKY_SOARER_EMITTER, color1, color2, entityId), entity.getX(), entity.getY(), entity.getZ(), duration, 5, 0.8);
+    }
+  }
+
   public static void dandelionWinds(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);

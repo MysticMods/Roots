@@ -43,7 +43,7 @@ public abstract class EntityEmitter extends Particle {
     }
   }
 
-  public abstract void particleTick ();
+  public abstract void particleTick();
 
   @Override
   public void render(VertexConsumer buffer, Camera camera, float partialTicks) {
@@ -80,6 +80,32 @@ public abstract class EntityEmitter extends Particle {
     }
   }
 
+  public static class SkySorarerEmitter extends EntityEmitter {
+    private final double chance;
+    private final int count;
+
+    protected SkySorarerEmitter(ClientLevel level, double x, double y, double z, RootsParticleOptions options, Entity entity, int lifetime, int count, double chance) {
+      super(level, x, y, z, options, entity, lifetime);
+      this.count = count;
+      this.chance = chance;
+    }
+
+    @Override
+    public void particleTick() {
+      for (int i = 0; i < count; i++) {
+        if (random.nextDouble() < chance) {
+          RootsParticleOptions opt;
+          if (random.nextBoolean()) {
+            opt = new RootsParticleOptions(options.type(), options.color2(), options.color1(), options.entityId());
+          } else {
+            opt = new RootsParticleOptions(options.type(), options.color1(), options.color2(), options.entityId());
+          }
+          level.addParticle(opt, x + (random.nextDouble() - 0.5), entity.getY() - 0.3, z + (random.nextDouble() - 0.5), (random.nextDouble() - 0.5) * 0.2, 0, (random.nextDouble() - 0.5) * 0.2);
+        }
+      }
+    }
+  }
+
   public static class DisarmProvider implements ParticleProvider<RootsParticleOptions> {
     @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
@@ -88,6 +114,17 @@ public abstract class EntityEmitter extends Particle {
         return null;
       }
       return new DisarmEmitter(level, x, y, z, new RootsParticleOptions(ModParticles.DISARM, type.color1(), type.color2(), type.entityId()), entity, (int) xSpeed, (int) ySpeed, zSpeed);
+    }
+  }
+
+  public static class SkySoarerProvider implements ParticleProvider<RootsParticleOptions> {
+    @Override
+    public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+      Entity entity = level.getEntity(type.entityId());
+      if (entity == null) {
+        return null;
+      }
+      return new SkySorarerEmitter(level, x, y, z, new RootsParticleOptions(ModParticles.SKY_SOARER, type.color1(), type.color2(), type.entityId()), entity, (int) xSpeed, (int) ySpeed, zSpeed);
     }
   }
 }

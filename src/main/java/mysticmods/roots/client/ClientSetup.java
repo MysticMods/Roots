@@ -204,8 +204,10 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.DISARM.get(), DisarmParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SMOKE.get(), SmokeParticle.Provider::new);
     event.registerSpriteSet(ModParticles.WIND.get(), WindParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.SKY_SOARER.get(), SkySoarerParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
+    event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());
     event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());
   }
 

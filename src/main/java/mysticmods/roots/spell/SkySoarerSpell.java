@@ -11,6 +11,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModEffects;
 import mysticmods.roots.init.ModSerializers;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.CastSkySoarerFXPacket;
 import mysticmods.roots.snapshot.SkySoarerSnapshot;
 import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.ChatFormatting;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -60,6 +62,7 @@ public class SkySoarerSpell extends Spell {
     pPlayer.addEffect(new MobEffectInstance(ModEffects.SKY_SOARER, duration, 0, false, false));
     Vec3 vehicleMovement = pPlayer.getVehicle() != null ? pPlayer.getVehicle().getDeltaMovement() : Vec3.ZERO;
     SnapshotHelper.addLiving(pPlayer, ModSerializers.SKY_SOARER.get(), new SkySoarerSnapshot(pPlayer, duration + 40, pPlayer.getDeltaMovement(), vehicleMovement, amplifier));
+    PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastSkySoarerFXPacket(pPlayer.getId(), duration));
     return cooldown;
   }
 }
