@@ -35,11 +35,15 @@ public abstract class EntityEmitter extends Particle {
     this.zo = this.z;
     if (this.age++ >= this.lifetime) {
       this.remove();
+    } else {
+      this.x = entity.getX();
+      this.y = entity.getY() + entity.getEyeHeight();
+      this.z = entity.getZ();
+      this.particleTick();
     }
-    this.x = entity.getX();
-    this.y = entity.getY() + entity.getEyeHeight();
-    this.z = entity.getZ();
   }
+
+  public abstract void particleTick ();
 
   @Override
   public void render(VertexConsumer buffer, Camera camera, float partialTicks) {
@@ -61,11 +65,7 @@ public abstract class EntityEmitter extends Particle {
     }
 
     @Override
-    public void tick() {
-      super.tick();
-      if (this.removed) {
-        return;
-      }
+    public void particleTick() {
       for (int i = 0; i < count; i++) {
         if (random.nextDouble() < chance) {
           RootsParticleOptions opt;
