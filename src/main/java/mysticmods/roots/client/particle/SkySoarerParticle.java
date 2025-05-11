@@ -1,5 +1,6 @@
 package mysticmods.roots.client.particle;
 
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -25,14 +26,15 @@ public class SkySoarerParticle extends TextureSheetParticle {
     this.hasPhysics = false;
     // These values seem innaccurate
     this.oRoll = this.roll = random.nextFloat() * 360f;
-    this.rollAmount = random.nextFloat() * 0.1f;
-    this.quadSize = 0.15f;
+    this.rollAmount = random.nextFloat() * 0.05f;
+    this.quadSize = 0.12f;
     this.gravity = 0.05f;
   }
 
   @Override
   public ParticleRenderType getRenderType() {
-    return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    return RootsParticleRenderTypes.GLOW;
+    //return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
   }
 
   @Override

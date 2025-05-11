@@ -100,7 +100,7 @@ public abstract class EntityEmitter extends Particle {
           } else {
             opt = new RootsParticleOptions(options.type(), options.color1(), options.color2(), options.entityId());
           }
-          level.addParticle(opt, x + (random.nextDouble() - 0.5), entity.getY() - 0.3, z + (random.nextDouble() - 0.5), (random.nextDouble() - 0.5) * 0.2, 0, (random.nextDouble() - 0.5) * 0.2);
+          level.addParticle(opt, x + (random.nextDouble() - 0.5) * 0.3, entity.getY() + entity.getEyeHeight() - 0.2, z + (random.nextDouble() - 0.5) * 0.3, (random.nextDouble() - 0.5) * 0.1, 0, (random.nextDouble() - 0.5) * 0.1);
         }
       }
     }

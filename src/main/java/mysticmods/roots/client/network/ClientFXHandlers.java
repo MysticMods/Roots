@@ -23,10 +23,10 @@ public class ClientFXHandlers {
     Entity entity = minecraft.level.getEntity(entityId);
 
     if (entity != null) {
-      int color1 = ModSpells.SKY_SOARER.get().getColor1();
-      int color2 = ModSpells.SKY_SOARER.get().getColor2();
+      int color1 = 0xb0ecff; //ModSpells.SKY_SOARER.get().getColor1();
+      int color2 = 0xccd3ff; //ModSpells.SKY_SOARER.get().getColor2();
 
-      minecraft.level.addParticle(new RootsParticleOptions(ModParticles.SKY_SOARER_EMITTER, color1, color2, entityId), entity.getX(), entity.getY(), entity.getZ(), duration, 5, 0.8);
+      minecraft.level.addParticle(new RootsParticleOptions(ModParticles.SKY_SOARER_EMITTER, color1, color2, entityId), entity.getX(), entity.getY(), entity.getZ(), duration + 25, 3, 0.6);
     }
   }
 
