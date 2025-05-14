@@ -9,13 +9,14 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class EntityEmitter extends Particle {
   protected final RootsParticleOptions options;
   protected final Entity entity;
 
   protected EntityEmitter(ClientLevel level, double x, double y, double z, RootsParticleOptions options, Entity entity, int lifetime) {
-    super(level, entity.getX(), entity.getY() + entity.getEyeHeight(), entity.getZ());
+    super(level, entity.getX(), entity.getY() + entity.getEyeHeight() - 0.2, entity.getZ());
     this.xd = 0;
     this.yd = 0;
     this.zd = 0;
@@ -37,7 +38,7 @@ public abstract class EntityEmitter extends Particle {
       this.remove();
     } else {
       this.x = entity.getX();
-      this.y = entity.getY() + entity.getEyeHeight();
+      this.y = entity.getY() + entity.getEyeHeight() - 0.2;
       this.z = entity.getZ();
       this.particleTick();
     }
@@ -92,15 +93,24 @@ public abstract class EntityEmitter extends Particle {
 
     @Override
     public void particleTick() {
-      for (int i = 0; i < count; i++) {
+      Vec3 from = new Vec3(xo, yo, zo);
+      Vec3 to = new Vec3(x, y, z);
+      Vec3 motion = entity.getLookAngle().normalize().scale(-0.3);
+
+      int steps = count;
+      for (int i = 0; i < steps; i++) {
         if (random.nextDouble() < chance) {
-          RootsParticleOptions opt;
-          if (random.nextBoolean()) {
-            opt = new RootsParticleOptions(options.type(), options.color2(), options.color1(), options.entityId());
-          } else {
-            opt = new RootsParticleOptions(options.type(), options.color1(), options.color2(), options.entityId());
-          }
-          level.addParticle(opt, x + (random.nextDouble() - 0.5) * 0.3, entity.getY() + entity.getEyeHeight() - 0.2, z + (random.nextDouble() - 0.5) * 0.3, (random.nextDouble() - 0.5) * 0.1, 0, (random.nextDouble() - 0.5) * 0.1);
+          double t = (double) i / (steps - 1);
+          Vec3 pos = from.lerp(to, t);
+          double px = pos.x + (random.nextDouble() - 0.5) * 0.3;
+          double py = pos.y + (random.nextDouble() - 0.5) * 0.2;
+          double pz = pos.z + (random.nextDouble() - 0.5) * 0.3;
+
+          RootsParticleOptions opt = random.nextBoolean()
+              ? new RootsParticleOptions(options.type(), options.color2(), options.color1(), options.entityId())
+              : new RootsParticleOptions(options.type(), options.color1(), options.color2(), options.entityId());
+
+          level.addParticle(opt, px, py, pz, motion.x, 0, motion.z);
         }
       }
     }
