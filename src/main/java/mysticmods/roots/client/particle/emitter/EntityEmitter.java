@@ -113,6 +113,26 @@ public abstract class EntityEmitter extends Particle {
           level.addParticle(opt, px, py, pz, motion.x, 0, motion.z);
         }
       }
+
+/*      if (this.age % 10 == 0) {
+        for (float angle = 0; angle < 360; angle += 15 + random.nextFloat() * 5) {
+          double radians = Math.toRadians(angle);
+          double radius = 0.5 + random.nextDouble() * 0.3;
+
+          double offsetX = Math.cos(radians) * radius;
+          double offsetZ = Math.sin(radians) * radius;
+          double offsetY = (random.nextDouble() - 0.5) * 0.2;
+
+          Vec3 spawnPos = new Vec3(x + offsetX, y + offsetY, z + offsetZ);
+          motion = new Vec3(offsetX, offsetY, offsetZ).normalize().scale(0.05 + random.nextDouble() * 0.05);
+
+          RootsParticleOptions opt = random.nextBoolean()
+              ? new RootsParticleOptions(ModParticles.SKY_SOARER_PUFF, options.color2(), options.color1(), options.entityId())
+              : new RootsParticleOptions(ModParticles.SKY_SOARER_PUFF, options.color1(), options.color2(), options.entityId());
+
+          level.addParticle(opt, spawnPos.x, spawnPos.y, spawnPos.z, motion.x, motion.y, motion.z);
+        }
+      }*/
     }
   }
 

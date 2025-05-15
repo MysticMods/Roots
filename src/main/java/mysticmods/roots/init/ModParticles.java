@@ -46,7 +46,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SMOKE = PARTICLES.register("smoke", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> WIND = PARTICLES.register("wind", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SKY_SOARER = PARTICLES.register("sky_soarer", () -> new RootsParticleOptions.Type(false));
-
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SKY_SOARER_PUFF = PARTICLES.register("sky_soarer_puff", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);
