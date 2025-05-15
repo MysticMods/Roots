@@ -17,6 +17,40 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 public class ClientFXHandlers {
+
+  public static void castExtension (int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    RandomSource random = minecraft.level.getRandom();
+
+    int color1 = ModSpells.EXTENSION.get().getColor1();
+    int color2 = ModSpells.EXTENSION.get().getColor2();
+
+    if (entity != null) {
+      double x = entity.getX();
+      double y = entity.getY() + (entity.getEyeHeight() * 0.8);
+      double z = entity.getZ();
+
+      for (float angle = 0; angle < 360; angle += 1 + random.nextFloat() * 2) {
+        double radians = Math.toRadians(angle);
+        double radius = 0.5 + random.nextDouble() * 0.3;
+
+        double offsetX = Math.cos(radians) * radius;
+        double offsetZ = Math.sin(radians) * radius;
+        double offsetY = (random.nextDouble() - 0.5) * 0.2;
+
+        Vec3 spawnPos = new Vec3(x + offsetX, y + offsetY, z + offsetZ);
+        Vec3 motion = new Vec3(offsetX, offsetY, offsetZ).normalize().scale(0.1 + random.nextDouble() * 0.15);
+
+        RootsParticleOptions opt = random.nextBoolean()
+            ? new RootsParticleOptions(ModParticles.EXTENSION, color2, color1)
+            : new RootsParticleOptions(ModParticles.EXTENSION, color1, color2);
+
+        minecraft.level.addParticle(opt, spawnPos.x, spawnPos.y, spawnPos.z, motion.x, motion.y, motion.z);
+      }
+    }
+  }
+
   // TODO: This probably doesn't need to be an emitter
   public static void castSkySorarer (int entityId, int duration) {
     Minecraft minecraft = Minecraft.getInstance();
