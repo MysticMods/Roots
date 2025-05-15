@@ -85,6 +85,8 @@ public class DisarmSpell extends TwoRadiusSpell {
     DamageSources damage = pPlayer.damageSources();
     DamageSource source = damage.playerAttack(pPlayer);
 
+    Vec3 start = pPlayer.position().add(0, 0.5, 0);
+
     int count = 0;
 
     for (LivingEntity entity : entities) {
@@ -93,6 +95,9 @@ public class DisarmSpell extends TwoRadiusSpell {
       if (entity instanceof Mob mobEntity) {
         mob = mobEntity;
       }
+
+      Vec3 stop = entity.position().add(0, entity.getBbHeight() / 2, 0);
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new LightningFXPacket(LightningFXPacket.LightningPreset.FANCY, 1, start, stop));
 
       for (EquipmentSlot slot : slots) {
         ItemStack stack = entity.getItemBySlot(slot);
@@ -131,9 +136,6 @@ public class DisarmSpell extends TwoRadiusSpell {
       if (didDrop) {
         entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
         PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new DisarmFXPacket(entity.getId()));
-        Vec3 start = pPlayer.position().add(0, 0.5, 0);
-        Vec3 stop = entity.position().add(0, entity.getBbHeight() / 2, 0);
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new LightningFXPacket(LightningFXPacket.LightningPreset.FANCY, 1, start, stop));
       }
     }
 
