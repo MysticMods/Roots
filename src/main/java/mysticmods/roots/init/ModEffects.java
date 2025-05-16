@@ -16,7 +16,7 @@ public class ModEffects {
   public static final DeferredHolder<MobEffect, WakefulEffect> WAKEFUL = REGISTER.register("wakeful", WakefulEffect::new);
   public static final DeferredHolder<MobEffect, FriendlyEarthEffect> FRIENDLY_EARTH = REGISTER.register("friendly_earth", FriendlyEarthEffect::new);
   public static final DeferredHolder<MobEffect, SkySoarerEffect> SKY_SOARER = REGISTER.register("sky_soarer", SkySoarerEffect::new);
-  public static final DeferredHolder<MobEffect, SimpleEffect> PETAL_SHELL = REGISTER.register("petal_shell", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0xcc5ec8));
+  public static final DeferredHolder<MobEffect, PetalShellEffect> PETAL_SHELL = REGISTER.register("petal_shell", () -> new PetalShellEffect(MobEffectCategory.BENEFICIAL, 0xcc5ec8));
   public static final DeferredHolder<MobEffect, SimpleEffect> NONDETECTION = REGISTER.register("nondetection", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0x29465b));
   // TODO: is it beneficial?
   public static final DeferredHolder<MobEffect, SimpleEffect> GEAS = REGISTER.register("geas", () -> new GeasEffect(MobEffectCategory.BENEFICIAL, 0x850101, true));

@@ -3,24 +3,66 @@ package mysticmods.roots.client.network;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.config.ConfigManager;
-import mysticmods.roots.init.ModParticles;
-import mysticmods.roots.init.ModSounds;
-import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.init.*;
 import mysticmods.roots.particle.RootsParticleOptions;
+import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public class ClientFXHandlers {
-  public static void castMagnetism (int entityId) {
+  public static void petalShell(int entityId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+
+    int color1 = ModSpells.PETAL_SHELL.get().getColor1();
+    int color2 = ModSpells.PETAL_SHELL.get().getColor2();
+
+    if (entity == null) {
+      return;
+    }
+    SnapshotHelper.applyLiving(entity, ModSerializers.PETAL_SHELL.get(), (e, snapshot) -> {
+      if (!(e instanceof LivingEntity living)) {
+        return;
+      }
+
+      MobEffectInstance effect = living.getEffect(ModEffects.PETAL_SHELL);
+      if (effect == null) {
+        return;
+      }
+
+      int count = effect.getAmplifier();
+      int max = snapshot.getCount();
+
+      double radius = 0.8f;
+      double height = 1.0f;
+      double anglePerShell = Math.PI * 2 / count;
+      double angleOffset = Math.toRadians(e.tickCount % 360);
+
+      for (int i = 0; i < max; i++) {
+        double x = e.getX() + radius * Math.sin(angleOffset + i * anglePerShell);
+        double y = e.getY() + height;
+        double z = e.getZ() + radius * Math.cos(angleOffset + i * anglePerShell);
+        minecraft.level.addParticle(new RootsParticleOptions(ModParticles.PETAL_SHELL, color1, color2), x, y, z, 0, 0, 0);
+        count--;
+        if (count <= 0) {
+          break;
+        }
+      }
+    });
+  }
+
+  public static void castMagnetism(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = minecraft.level.getRandom();
@@ -42,7 +84,8 @@ public class ClientFXHandlers {
         double offsetY = (random.nextDouble() - 0.5) * 0.2;
 
         Vec3 spawnPos = new Vec3(x + offsetX, y + offsetY, z + offsetZ);
-        Vec3 motion = new Vec3(x - spawnPos.x, y - spawnPos.y, z - spawnPos.z).normalize().scale(0.21 + random.nextDouble() * 0.09);
+        Vec3 motion = new Vec3(x - spawnPos.x, y - spawnPos.y, z - spawnPos.z).normalize()
+            .scale(0.21 + random.nextDouble() * 0.09);
 
         RootsParticleOptions opt = random.nextBoolean()
             ? new RootsParticleOptions(ModParticles.MAGNETISM, color2, color1, entityId)
@@ -79,7 +122,7 @@ public class ClientFXHandlers {
       double step = 0.2;
       int steps = Math.max(1, Mth.floor(dist / step));
 
-      for (int j = 0; j <= steps; j++ ) {
+      for (int j = 0; j <= steps; j++) {
         double frac = j / (double) steps;
         Vec3 base = start.add(dir.scale(frac * dist));
         double jitter = 0.05;

@@ -562,6 +562,7 @@ public class RootsTags {
     public static final TagKey<EntityType<?>> NORMAL_SPROUTS = modTag("sprouts/normal");
 
     public static final TagKey<EntityType<?>> SHOULD_RENDER_HUD = modTag("should_render_hud");
+    public static final TagKey<EntityType<?>> PLAYERS = modTag("players");
 
     static TagKey<EntityType<?>> modTag(String name) {
       return TagKey.create(Registries.ENTITY_TYPE, RootsAPI.rl(name));

@@ -1,10 +1,13 @@
 package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
+import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.*;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -18,7 +21,7 @@ import java.util.List;
 public class ServerTickHandler {
   @SubscribeEvent
   public static void onTickEntity(EntityTickEvent.Post event) {
-    if (!event.getEntity().level().isClientSide()) {
+    if (!event.getEntity().level().isClientSide() && !event.getEntity().getType().is(RootsTags.Entities.PLAYERS)) {
       AttachmentUtil.monitorAndSyncEntity(
           event.getEntity(),
           ModAttachments.SNAPSHOT_STORAGE,

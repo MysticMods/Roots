@@ -9,6 +9,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
+// TODO: URGENT -- SYNC ALL OF THESE TO EVERYONE!!!
 public record ClientboundPlayerSnapshotSyncPacket(SnapshotStorage storage) implements ISyncPacket<SnapshotStorage> {
   public static final CustomPacketPayload.Type<ClientboundPlayerSnapshotSyncPacket> TYPE = new CustomPacketPayload.Type<>(RootsAPI.rl("client_bound_player_snapshot_sync"));
   public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundPlayerSnapshotSyncPacket> CODEC = StreamCodec.composite(SnapshotStorage.STREAM_CODEC, ClientboundPlayerSnapshotSyncPacket::storage, ClientboundPlayerSnapshotSyncPacket::new);
