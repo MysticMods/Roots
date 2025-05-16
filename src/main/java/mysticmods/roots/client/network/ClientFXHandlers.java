@@ -10,15 +10,58 @@ import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
-public class ClientFXHandlers {
+import java.util.List;
 
-  public static void castExtension (int entityId) {
+public class ClientFXHandlers {
+  public static void castShatter(int entityId, List<BlockPos> positions) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    RandomSource random = minecraft.level.getRandom();
+    int color1 = ModSpells.SHATTER.get().getColor1();
+    int color2 = ModSpells.SHATTER.get().getColor2();
+
+    if (entity == null) {
+      return;
+    }
+
+    Vec3 start = entity.getEyePosition();
+
+    RootsParticleOptions first = new RootsParticleOptions(ModParticles.SHATTER_BEAM, color1, color2);
+    RootsParticleOptions second = new RootsParticleOptions(ModParticles.SHATTER_BEAM, color2, color1);
+
+    for (BlockPos pos : positions) {
+      Vec3 stop = Vec3.atCenterOf(pos);
+      Vec3 diff = stop.subtract(start).normalize();
+
+      double dist = diff.length();
+      Vec3 dir = diff.normalize();
+
+      double step = 0.2;
+      int steps = Math.max(1, Mth.floor(dist / step));
+
+      for (int j = 0; j <= steps; j++ ) {
+        double frac = j / (double) steps;
+        Vec3 base = start.add(dir.scale(frac * dist));
+        double jitter = 0.05;
+        Vec3 spawnPos = base.add(
+            (random.nextDouble() - 0.5) * jitter,
+            (random.nextDouble() - 0.5) * jitter,
+            (random.nextDouble() - 0.5) * jitter
+        );
+
+        minecraft.level.addParticle(random.nextBoolean() ? first : second, spawnPos.x, spawnPos.y, spawnPos.z, 0.05 * j, 0, 0);
+      }
+    }
+  }
+
+  public static void castExtension(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
     RandomSource random = minecraft.level.getRandom();
@@ -52,7 +95,7 @@ public class ClientFXHandlers {
   }
 
   // TODO: This probably doesn't need to be an emitter
-  public static void castSkySorarer (int entityId, int duration) {
+  public static void castSkySorarer(int entityId, int duration) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);
 

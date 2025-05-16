@@ -62,6 +62,7 @@ public class PacketHandler {
     registrar.play(DandelionWindsFXPacket.TYPE, DandelionWindsFXPacket.CODEC);
     registrar.play(CastSkySoarerFXPacket.TYPE, CastSkySoarerFXPacket.CODEC);
     registrar.play(CastExtensionFXPacket.TYPE, CastExtensionFXPacket.CODEC);
+    registrar.play(CastShatterFX.TYPE, CastShatterFX.CODEC);
     registrar.play(ClientboundOpenReputationPacket.TYPE, ClientboundOpenReputationPacket.CODEC);
   }
 

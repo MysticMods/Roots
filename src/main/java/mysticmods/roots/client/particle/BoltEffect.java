@@ -408,7 +408,7 @@ public class BoltEffect {
     }
 
     public static BoltRenderInfo vines () {
-      return new BoltRenderInfo().color(Color.rgbad(0.34f, 0.8f, 0.3f, 0.4f)).noise(0f, 0.1f).branching(0.1f, 0.4f).spreader(SegmentSpreader.JAGGED).spreadFunction(SpreadFunction.SINE).randomFunction(RandomFunction.UNIFORM);
+      return new BoltRenderInfo().color(Color.rgbad(0.34f, 0.8f, 0.3f, 0.5f)).noise(0f, 0.1f).branching(0.4f, 0f).spreader(SegmentSpreader.memory(0.7f)).spreadFunction(SpreadFunction.LINEAR_ASCENT).randomFunction(RandomFunction.UNIFORM);
     }
 
     public BoltRenderInfo noise(float parallelNoise, float spreadFactor) {

@@ -14,6 +14,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.CastShatterFX;
 import mysticmods.roots.util.FakePlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -30,12 +31,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ShatterSpell extends Spell {
   private int maxWidth, maxDepth, maxHeight;
@@ -155,6 +154,8 @@ public class ShatterSpell extends Spell {
 
     ServerPlayer player = (ServerPlayer) pPlayer;
 
+    List<BlockPos> broken = new ArrayList<>();
+
     BlockHitResult rayTraceResult = pickBlock(pPlayer);
     Map<BlockPos, BlockState> toBreak = getAffectedBlocks(pLevel, pPlayer, instance, pStack, rayTraceResult.getBlockPos(), pLevel.getBlockState(rayTraceResult.getBlockPos()), rayTraceResult);
     int count = 0;
@@ -192,12 +193,17 @@ public class ShatterSpell extends Spell {
         ShatterBlockAction.Context context = new ShatterBlockAction.Context((ServerLevel) pLevel, player, pos, state, instance);
         ModActions.SHATTER_BLOCK.get().accept(context);
         Integer opCost = state.getBlockHolder().getData(DataMaps.OPERATION_COST);
+        broken.add(pos);
         if (opCost == null) {
           count++;
         } else {
           count += opCost;
         }
       }
+    }
+
+    if (!broken.isEmpty()) {
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastShatterFX(pPlayer.getId(), broken));
     }
 
     if (count == 0) {

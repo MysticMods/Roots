@@ -85,7 +85,7 @@ public class DisarmSpell extends TwoRadiusSpell {
     DamageSources damage = pPlayer.damageSources();
     DamageSource source = damage.playerAttack(pPlayer);
 
-    Vec3 start = pPlayer.position().add(0, 0.5, 0);
+    Vec3 start = pPlayer.getEyePosition().subtract(0, 0.3, 0);
 
     int count = 0;
 
