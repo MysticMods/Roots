@@ -4,6 +4,7 @@ import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
+// This needs to become entity bound
 public class MagnetismParticle extends TextureSheetParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
