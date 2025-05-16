@@ -377,6 +377,7 @@ public class BoltEffect {
     public static final BoltRenderInfo DEFAULT = new BoltRenderInfo();
     public static final BoltRenderInfo ELECTRICITY = electricity();
     public static final BoltRenderInfo VINES = vines();
+    public static final BoltRenderInfo SHATTER = shatter();
 
     /**
      * How much variance is allowed in segment lengths (parallel to straight line).
@@ -409,6 +410,10 @@ public class BoltEffect {
 
     public static BoltRenderInfo vines () {
       return new BoltRenderInfo().color(Color.rgbad(0.34f, 0.8f, 0.3f, 0.5f)).noise(0f, 0.1f).branching(0.4f, 0f).spreader(SegmentSpreader.memory(0.7f)).spreadFunction(SpreadFunction.LINEAR_ASCENT).randomFunction(RandomFunction.UNIFORM);
+    }
+
+    public static BoltRenderInfo shatter () {
+      return new BoltRenderInfo().color(Color.rgbad(0.64f, 0.5f, 0.4f, 1f)).noise(0.1f, 0.05f).branching(0.4f, 0f).spreader(SegmentSpreader.memory(0.5f)).spreadFunction(SpreadFunction.SINE).randomFunction(RandomFunction.GAUSSIAN);
     }
 
     public BoltRenderInfo noise(float parallelNoise, float spreadFactor) {

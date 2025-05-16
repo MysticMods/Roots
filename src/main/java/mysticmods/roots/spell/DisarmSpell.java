@@ -138,7 +138,7 @@ public class DisarmSpell extends TwoRadiusSpell {
         entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
         PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new DisarmFXPacket(entity.getId()));
         Vec3 stop = entity.position().add(0, entity.getBbHeight() / 2, 0);
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new LightningFXPacket(LightningFXPacket.LightningPreset.FANCY, 1, start, stop));
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new LightningFXPacket(LightningFXPacket.LightningPreset.DISARM, 1, start, stop));
       }
     }
 
