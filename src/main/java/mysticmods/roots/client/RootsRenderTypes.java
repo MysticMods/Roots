@@ -8,7 +8,7 @@ public class RootsRenderTypes {
   public static final RenderType ROOTS_LIGHTNING = RenderType.create("roots_lightning", DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256,
       false, true, RenderType.CompositeState.builder()
           .setShaderState(RenderType.RENDERTYPE_LIGHTNING_SHADER)
-          .setTransparencyState(RenderType.LIGHTNING_TRANSPARENCY)
+          .setTransparencyState(RenderType.ADDITIVE_TRANSPARENCY)
           .createCompositeState(false)
   );
 }

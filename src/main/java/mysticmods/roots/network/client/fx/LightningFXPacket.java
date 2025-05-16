@@ -58,7 +58,7 @@ public record LightningFXPacket (LightningPreset preset, int renderer, Vec3 star
     TOOL_AOE(() -> true, (start, end, segments) ->
         new BoltEffect(BoltEffect.BoltRenderInfo.ELECTRICITY, start, end, segments).size(0.015F).lifespan(12)
             .spawn(BoltEffect.SpawnFunction.NO_DELAY)),
-    FANCY(() -> true, (start, end, segments) -> new BoltEffect(BoltEffect.BoltRenderInfo.vines(), start, end, segments).size(0.07f).lifespan(9).spawn(BoltEffect.SpawnFunction.NO_DELAY).fade(BoltEffect.FadeFunction.fade(0.3f)));
+    FANCY(() -> true, (start, end, segments) -> new BoltEffect(BoltEffect.BoltRenderInfo.vines(), start, end, segments).size(0.02f).lifespan(9).spawn(BoltEffect.SpawnFunction.NO_DELAY).fade(BoltEffect.FadeFunction.fade(0.3f)));
 
     public static final IntFunction<LightningPreset> BY_ID = ByIdMap.continuous(LightningPreset::ordinal, values(), ByIdMap.OutOfBoundsStrategy.WRAP);
     public static final StreamCodec<ByteBuf, LightningPreset> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, LightningPreset::ordinal);
