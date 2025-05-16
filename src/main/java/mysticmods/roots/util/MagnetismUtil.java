@@ -9,6 +9,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,34 +27,38 @@ public class MagnetismUtil {
   }
 
   public static int pull(Level pLevel, BlockPos startPosition, int radiusX, int raduisY, int radiusZ) {
+    return pull(pLevel, startPosition, radiusX, raduisY, radiusZ, new ArrayList<>()).size();
+  }
+
+  public static List<Vec3> pull(Level pLevel, BlockPos startPosition, int radiusX, int radiusY, int radiusZ, List<Vec3> positions) {
     if (pLevel.isClientSide()) {
-      return 0;
+      return positions;
     }
-    List<Entity> entities = collect(pLevel, startPosition, radiusX, raduisY, radiusZ, MagnetismContext.SPELL);
+    List<Entity> entities = collect(pLevel, startPosition, radiusX, radiusY, radiusZ, MagnetismContext.SPELL);
     int pulled = 0;
     for (Entity entity : entities) {
       if (entity instanceof ItemEntity item) {
         item.setPickUpDelay(0);
       }
+      positions.add(entity.position());
       entity.teleportTo(startPosition.getX(), startPosition.getY(), startPosition.getZ());
-      pulled++;
     }
 
-    return pulled;
+    return positions;
   }
 
-  public static List<BlockPos> store(Level pLevel, BlockPos startPosition, BaseBlockEntity pyre, int radiusX, int radiusY, int radiusZ) {
+  public static List<Vec3> store(Level pLevel, BlockPos startPosition, BaseBlockEntity pyre, int radiusX, int radiusY, int radiusZ) {
     if (pLevel.isClientSide()) {
       return Collections.emptyList();
     }
 
     List<Entity> entities = collect(pLevel, startPosition, radiusX, radiusY, radiusZ, MagnetismContext.RITUAL);
-    List<BlockPos> positions = new ArrayList<>();
+    List<Vec3> positions = new ArrayList<>();
     for (Entity entity : entities) {
       if (entity instanceof ItemEntity entityItem) {
         ItemStack item = entityItem.getItem();
         ItemStack result = pyre.outputAdjacent(item);
-        positions.add(entityItem.blockPosition());
+        positions.add(entityItem.position());
         if (result.isEmpty()) {
           entityItem.discard();
         } else {
