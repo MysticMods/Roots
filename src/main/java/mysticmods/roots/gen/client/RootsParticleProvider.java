@@ -38,6 +38,8 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
 
     this.sprite(ModParticles.SHATTER_BEAM.get(), RootsAPI.rl("simple"));
 
+    this.sprite(ModParticles.MAGNETISM.get(), RootsAPI.rl("simple"));
+
     this.spriteSet(ModParticles.SMOKE.get(), ResourceLocation.withDefaultNamespace("generic"), 8, true);
 
     this.spriteSet(ModParticles.DISARM.get(), RootsAPI.rl("petal"), 4, false);

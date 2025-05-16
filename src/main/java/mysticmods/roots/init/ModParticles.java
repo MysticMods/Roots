@@ -49,6 +49,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SKY_SOARER_PUFF = PARTICLES.register("sky_soarer_puff", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> EXTENSION = PARTICLES.register("extension", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SHATTER_BEAM = PARTICLES.register("shatter_beam", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> MAGNETISM = PARTICLES.register("magnetism", () -> new RootsParticleOptions.Type(false));
   //public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SHATTER = PARTICLES.register("shatter", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {
