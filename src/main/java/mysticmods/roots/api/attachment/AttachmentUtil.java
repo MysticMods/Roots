@@ -81,6 +81,12 @@ public class AttachmentUtil {
     }
   }
 
+  public static <T extends ICleanable, V extends ISyncPacket<T>> void manuallySync(Entity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiFunction<T, Integer, V> packetSupplier) {
+    if (entity.hasData(attachment.value())) {
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, packetSupplier.apply(entity.getData(attachment.value()), entity.getId()));
+    }
+  }
+
   public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSyncEntity(Entity player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<Entity, T> consumer, BiFunction<T, Integer, V> packetSupplier) {
     monitorEntityForChange(player, attachment, consumer, (p, t) -> PacketDistributor.sendToPlayersTrackingEntityAndSelf(p, packetSupplier.apply(t, p.getId())));
   }

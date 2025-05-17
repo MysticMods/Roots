@@ -7,9 +7,11 @@ import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
@@ -19,6 +21,14 @@ import java.util.List;
 
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ServerTickHandler {
+  @SubscribeEvent
+  public static void onEntityTrack (PlayerEvent.StartTracking event) {
+    Entity entity = event.getEntity();
+    if (!entity.level().isClientSide() && entity.hasData(ModAttachments.SNAPSHOT_STORAGE.get())) {
+      AttachmentUtil.manuallySync(entity, ModAttachments.SNAPSHOT_STORAGE, ClientboundEntitySnapshotSyncPacket::new);
+    }
+  }
+
   @SubscribeEvent
   public static void onTickEntity(EntityTickEvent.Post event) {
     if (!event.getEntity().level().isClientSide() && event.getEntity().hasData(ModAttachments.SNAPSHOT_STORAGE)) {
