@@ -1,8 +1,6 @@
 package mysticmods.roots.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import it.unimi.dsi.fastutil.floats.FloatArrayList;
-import it.unimi.dsi.fastutil.floats.FloatList;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
@@ -21,13 +19,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 
-// TODO: Fix the rolls
 public class PetalShellParticle extends TextureSheetParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected int count, maxCount;
-  protected float rollAmount;
-  protected final FloatList randoms = new FloatArrayList();
+  protected float[][] rolls;
 
   private final LivingEntity entity;
 
@@ -47,7 +43,6 @@ public class PetalShellParticle extends TextureSheetParticle {
     this.zd = 0;
     this.hasPhysics = false;
     this.quadSize = 0.2f;
-    this.rollAmount = 0.05f + random.nextFloat() * 0.05f;
     tick();
   }
 
@@ -90,8 +85,13 @@ public class PetalShellParticle extends TextureSheetParticle {
 
     this.maxCount = snapshot.getCount();
 
-    while (randoms.size() < count) {
-      randoms.add(random.nextFloat() - 0.5f);
+    if (rolls == null) {
+      rolls = new float[maxCount][3];
+      for (int i = 0; i < maxCount; i++) {
+        rolls[i][0] = 0.05f + (random.nextFloat() - 0.5f) * 0.05f;
+        rolls[i][1] = 0;
+        rolls[i][2] = 0;
+      }
     }
 
     this.xo = this.x;
@@ -101,8 +101,10 @@ public class PetalShellParticle extends TextureSheetParticle {
     this.y = entity.getY();
     this.z = entity.getZ();
 
-    this.oRoll = this.roll;
-    this.roll += this.rollAmount;
+    for (int i = 0; i < maxCount; i++) {
+      rolls[i][2] = rolls[i][1];
+      rolls[i][1] += rolls[i][0];
+    }
 
     if (!this.removed) {
       float f = (float) this.age / (float) this.lifetime;
@@ -151,7 +153,10 @@ public class PetalShellParticle extends TextureSheetParticle {
       float f1 = (float) (Mth.lerp(partialTicks, yo, y) - vec3.y());
       float f2 = (float) (Mth.lerp(partialTicks, zo, z) - vec3.z());
 
-      this.renderRotatedQuad(buffer, quaternion, f, f1, f2, partialTicks);
+      Quaternionf q = new Quaternionf(quaternion);
+      q.rotateZ(Mth.lerp(partialTicks, rolls[i][1], rolls[i][2]));
+
+      this.renderRotatedQuad(buffer, q, f, f1, f2, partialTicks);
 
       newCount--;
       if (newCount <= 0) {
