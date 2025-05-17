@@ -15,7 +15,7 @@ import net.minecraft.world.entity.LivingEntity;
 public class AquaBubbleSnapshot extends Snapshot {
   public static final MapCodec<AquaBubbleSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.LONG.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Codec.INT.fieldOf("absorption").forGetter(AquaBubbleSnapshot::getAbsorption),
           Codec.FLOAT.fieldOf("lavaResistance").forGetter(AquaBubbleSnapshot::getLavaResistance),
@@ -23,7 +23,7 @@ public class AquaBubbleSnapshot extends Snapshot {
       ).apply(instance, AquaBubbleSnapshot::new));
   public static final Codec<AquaBubbleSnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, AquaBubbleSnapshot> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ByteBufCodecs.VAR_INT, o -> o.absorption,
       ByteBufCodecs.FLOAT, o -> o.lavaResistance,
@@ -41,7 +41,7 @@ public class AquaBubbleSnapshot extends Snapshot {
 
   }
 
-  public AquaBubbleSnapshot(int timestamp, int decay, int absorption, float lavaResistance, float fireResistance) {
+  public AquaBubbleSnapshot(long timestamp, int decay, int absorption, float lavaResistance, float fireResistance) {
     super(timestamp, decay);
     this.absorption = absorption;
     this.lavaResistance = lavaResistance;

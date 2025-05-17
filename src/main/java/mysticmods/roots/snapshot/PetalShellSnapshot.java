@@ -15,13 +15,13 @@ import net.minecraft.world.entity.LivingEntity;
 public class PetalShellSnapshot extends Snapshot {
   public static final MapCodec<PetalShellSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.LONG.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Codec.INT.fieldOf("count").forGetter(PetalShellSnapshot::getCount)
       ).apply(instance, PetalShellSnapshot::new));
   public static final Codec<PetalShellSnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, PetalShellSnapshot> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ByteBufCodecs.VAR_INT, o -> o.count,
       PetalShellSnapshot::new);
@@ -33,7 +33,7 @@ public class PetalShellSnapshot extends Snapshot {
     this.count = count;
   }
 
-  public PetalShellSnapshot(int timestamp, int decay, int count) {
+  public PetalShellSnapshot(long timestamp, int decay, int count) {
     super(timestamp, decay);
     this.count = count;
   }

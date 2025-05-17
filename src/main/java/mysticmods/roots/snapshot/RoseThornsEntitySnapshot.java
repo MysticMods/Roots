@@ -17,7 +17,7 @@ import net.minecraft.world.phys.AABB;
 public class RoseThornsEntitySnapshot extends Snapshot {
   public static final MapCodec<RoseThornsEntitySnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.LONG.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Codec.DOUBLE.fieldOf("radiusZX").forGetter(RoseThornsEntitySnapshot::getRadiusZX),
           Codec.DOUBLE.fieldOf("radiusY").forGetter(RoseThornsEntitySnapshot::getRadiusY),
@@ -26,7 +26,7 @@ public class RoseThornsEntitySnapshot extends Snapshot {
       ).apply(instance, RoseThornsEntitySnapshot::new));
   public static final Codec<RoseThornsEntitySnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, RoseThornsEntitySnapshot> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ByteBufCodecs.DOUBLE, o -> o.radiusZX,
       ByteBufCodecs.DOUBLE, o -> o.radiusY,
@@ -47,7 +47,7 @@ public class RoseThornsEntitySnapshot extends Snapshot {
     this.damage = damage;
   }
 
-  public RoseThornsEntitySnapshot(int timestamp, int decay, double radiusZX, double radiusY, int duration, float damage) {
+  public RoseThornsEntitySnapshot(long timestamp, int decay, double radiusZX, double radiusY, int duration, float damage) {
     super(timestamp, decay);
     this.radiusY = radiusY;
     this.radiusZX = radiusZX;

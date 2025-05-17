@@ -16,14 +16,14 @@ import net.minecraft.world.phys.AABB;
 public class ExtensionSnapshot extends Snapshot {
   public static final MapCodec<ExtensionSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.LONG.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Codec.INT.fieldOf("radiusZX").forGetter(ExtensionSnapshot::getRadiusZX),
           Codec.INT.fieldOf("radiusY").forGetter(ExtensionSnapshot::getRadiusY)
       ).apply(instance, ExtensionSnapshot::new));
   public static final Codec<ExtensionSnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, ExtensionSnapshot> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ByteBufCodecs.VAR_INT, o -> o.radiusZX,
       ByteBufCodecs.VAR_INT, o -> o.radiusY,
@@ -38,7 +38,7 @@ public class ExtensionSnapshot extends Snapshot {
     this.radiusY = radiusY;
   }
 
-  public ExtensionSnapshot(int timestamp, int decay, int radiusZX, int radiusY) {
+  public ExtensionSnapshot(long timestamp, int decay, int radiusZX, int radiusY) {
     super(timestamp, decay);
     this.radiusY = radiusY;
     this.radiusZX = radiusZX;

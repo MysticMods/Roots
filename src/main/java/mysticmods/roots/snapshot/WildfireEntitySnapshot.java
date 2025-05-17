@@ -16,13 +16,13 @@ import net.minecraft.world.entity.LivingEntity;
 public class WildfireEntitySnapshot extends Snapshot {
   public static final MapCodec<WildfireEntitySnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.LONG.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Codec.FLOAT.fieldOf("damage").forGetter(WildfireEntitySnapshot::getDamage)
       ).apply(instance, WildfireEntitySnapshot::new));
   public static final Codec<WildfireEntitySnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, WildfireEntitySnapshot> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ByteBufCodecs.FLOAT, o -> o.damage,
       WildfireEntitySnapshot::new);
@@ -34,7 +34,7 @@ public class WildfireEntitySnapshot extends Snapshot {
     this.damage = damage;
   }
 
-  public WildfireEntitySnapshot(int timestamp, int decay, float damage) {
+  public WildfireEntitySnapshot(long timestamp, int decay, float damage) {
     super(timestamp, decay);
     this.damage = damage;
   }

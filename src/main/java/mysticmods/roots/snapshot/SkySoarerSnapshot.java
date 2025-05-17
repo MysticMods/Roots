@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 public class SkySoarerSnapshot extends Snapshot {
   public static MapCodec<SkySoarerSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.LONG.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Vec3.CODEC.fieldOf("originalMovement").forGetter(SkySoarerSnapshot::getOriginalMovement),
           Vec3.CODEC.fieldOf("vehicleOriginalMovement").forGetter(SkySoarerSnapshot::getVehicleOriginalMovement),
@@ -26,7 +26,7 @@ public class SkySoarerSnapshot extends Snapshot {
   );
   public static Codec<SkySoarerSnapshot> CODEC = MAP_CODEC.codec();
   public static StreamCodec<ByteBuf, SkySoarerSnapshot> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ExtraStreamCodecs.VEC3, o -> o.originalMovement,
       ExtraStreamCodecs.VEC3, o -> o.vehicleOriginalMovement,
@@ -45,7 +45,7 @@ public class SkySoarerSnapshot extends Snapshot {
     this.vehicleOriginalMovement = vehicleOriginalMovement;
   }
 
-  public SkySoarerSnapshot(int timestamp, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
+  public SkySoarerSnapshot(long timestamp, int decay, Vec3 originalMovement, Vec3 vehicleOriginalMovement, float amplifier) {
     super(timestamp, decay);
     this.originalMovement = originalMovement;
     this.amplifier = amplifier;

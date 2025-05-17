@@ -15,12 +15,12 @@ import net.minecraft.world.entity.LivingEntity;
 public class GeasSnapshot extends Snapshot {
   public static final MapCodec<GeasSnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.LONG.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay)
       ).apply(instance, GeasSnapshot::new));
   public static final Codec<GeasSnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, GeasSnapshot> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       GeasSnapshot::new);
 
@@ -28,7 +28,7 @@ public class GeasSnapshot extends Snapshot {
     super(player, decay);
   }
 
-  public GeasSnapshot(int timestamp, int decay) {
+  public GeasSnapshot(long timestamp, int decay) {
     super(timestamp, decay);
   }
 

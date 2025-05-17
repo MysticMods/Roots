@@ -13,21 +13,23 @@ public abstract class Snapshot {
   public static StreamCodec<RegistryFriendlyByteBuf, Snapshot> STREAM_CODEC = ByteBufCodecs.registry(RootsRegistries.Keys.SNAPSHOT_TYPES)
       .dispatch(Snapshot::getType, SnapshotType::streamCodec);
 
-  protected int startTime;
+  protected long startTime;
   protected int decay;
 
   public Snapshot(Entity entity, int decay) {
-    this.startTime = entity.tickCount;
+    if (entity.level().isClientSide()) {
+      throw new IllegalArgumentException("Cannot create a snapshot from an entity on the client side");
+    }
+    this.startTime = entity.level().getGameTime();
     this.decay = decay;
-
   }
 
-  public Snapshot(int startTime, int decay) {
+  public Snapshot(long startTime, int decay) {
     this.startTime = startTime;
     this.decay = decay;
   }
 
-  public int getStartTime() {
+  public long getStartTime() {
     return startTime;
   }
 
@@ -39,7 +41,7 @@ public abstract class Snapshot {
     if (entity.level().isClientSide()) {
       return false;
     }
-    return entity.tickCount >= (startTime + decay) || entity.tickCount < startTime;
+    return entity.level().getGameTime() >= (startTime + decay) || entity.level().getGameTime() < startTime;
   }
 
   public abstract SnapshotType<?> getType();

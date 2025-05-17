@@ -17,7 +17,7 @@ import net.minecraft.world.phys.AABB;
 public class TemporalMorassEntitySnapshot extends Snapshot {
   public static final MapCodec<TemporalMorassEntitySnapshot> MAP_CODEC = RecordCodecBuilder.mapCodec(
       instance -> instance.group(
-          Codec.INT.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
+          Codec.LONG.fieldOf("timestamp").forGetter(Snapshot::getStartTime),
           Codec.INT.fieldOf("decay").forGetter(Snapshot::getDecay),
           Codec.INT.fieldOf("radiusZX").forGetter(TemporalMorassEntitySnapshot::getRadiusZX),
           Codec.INT.fieldOf("radiusY").forGetter(TemporalMorassEntitySnapshot::getRadiusY),
@@ -25,7 +25,7 @@ public class TemporalMorassEntitySnapshot extends Snapshot {
       ).apply(instance, TemporalMorassEntitySnapshot::new));
   public static final Codec<TemporalMorassEntitySnapshot> CODEC = MAP_CODEC.codec();
   public static final StreamCodec<ByteBuf, TemporalMorassEntitySnapshot> STREAM_CODEC = StreamCodec.composite(
-      ByteBufCodecs.VAR_INT, o -> o.startTime,
+      ByteBufCodecs.VAR_LONG, o -> o.startTime,
       ByteBufCodecs.VAR_INT, o -> o.decay,
       ByteBufCodecs.VAR_INT, o -> o.radiusZX,
       ByteBufCodecs.VAR_INT, o -> o.radiusY,
@@ -42,7 +42,7 @@ public class TemporalMorassEntitySnapshot extends Snapshot {
     this.duration = duration;
   }
 
-  public TemporalMorassEntitySnapshot(int timestamp, int decay, int radiusZX, int radiusY, int duration) {
+  public TemporalMorassEntitySnapshot(long timestamp, int decay, int radiusZX, int radiusY, int duration) {
     super(timestamp, decay);
     this.radiusY = radiusY;
     this.radiusZX = radiusZX;
