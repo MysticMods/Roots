@@ -49,7 +49,7 @@ public class ChannelJauntParticle extends TextureSheetParticle {
     this.gCol = oG;
     this.bCol = oB;
 
-    this.yd = motionUp ? -motion : motion;
+    this.yd = 0;
     this.xd = 0;
     this.zd = 0;
 
