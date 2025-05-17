@@ -36,6 +36,9 @@ public abstract class Snapshot {
   }
 
   public boolean isExpired(Entity entity) {
+    if (entity.level().isClientSide()) {
+      return false;
+    }
     return entity.tickCount >= (startTime + decay) || entity.tickCount < startTime;
   }
 

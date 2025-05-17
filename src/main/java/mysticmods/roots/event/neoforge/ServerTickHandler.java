@@ -21,7 +21,7 @@ import java.util.List;
 public class ServerTickHandler {
   @SubscribeEvent
   public static void onTickEntity(EntityTickEvent.Post event) {
-    if (!event.getEntity().level().isClientSide() && !event.getEntity().getType().is(RootsTags.Entities.PLAYERS)) {
+    if (!event.getEntity().level().isClientSide() && event.getEntity().hasData(ModAttachments.SNAPSHOT_STORAGE)) {
       AttachmentUtil.monitorAndSyncEntity(
           event.getEntity(),
           ModAttachments.SNAPSHOT_STORAGE,
@@ -43,12 +43,6 @@ public class ServerTickHandler {
           player,
           ModAttachments.HERB_STORAGE,
           ClientboundHerbSyncPacket::new
-      );
-      AttachmentUtil.monitorAndSync(
-          player,
-          ModAttachments.SNAPSHOT_STORAGE,
-          (player1, data) -> data.tick(player1),
-          ClientboundPlayerSnapshotSyncPacket::new
       );
       AttachmentUtil.monitorAndSync(
           player,

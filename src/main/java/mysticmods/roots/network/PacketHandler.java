@@ -36,7 +36,6 @@ public class PacketHandler {
   }
 
   protected void registerServerToClient(PacketRegistrar registrar) {
-    registrar.play(ClientboundPlayerSnapshotSyncPacket.TYPE, ClientboundPlayerSnapshotSyncPacket.CODEC);
     registrar.play(ClientboundReputationSyncPacket.TYPE, ClientboundReputationSyncPacket.CODEC);
     registrar.play(ClientboundHerbSyncPacket.TYPE, ClientboundHerbSyncPacket.CODEC);
     registrar.play(ClientboundGrantSyncPacket.TYPE, ClientboundGrantSyncPacket.CODEC);

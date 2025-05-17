@@ -41,7 +41,7 @@ public class ClientFXHandlers {
         return;
       }
 
-      int count = effect.getAmplifier();
+      int count = effect.getAmplifier() + 1;
       int max = snapshot.getCount();
 
       double radius = 0.8f;
@@ -49,7 +49,7 @@ public class ClientFXHandlers {
       double anglePerShell = Math.PI * 2 / count;
       double angleOffset = Math.toRadians(e.tickCount % 360);
 
-      for (int i = 0; i < max; i++) {
+      for (int i = 0; i <= max; i++) {
         double x = e.getX() + radius * Math.sin(angleOffset + i * anglePerShell);
         double y = e.getY() + height;
         double z = e.getZ() + radius * Math.cos(angleOffset + i * anglePerShell);

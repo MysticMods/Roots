@@ -82,7 +82,7 @@ public class AttachmentUtil {
   }
 
   public static <T extends ICleanable, V extends ISyncPacket<T>> void monitorAndSyncEntity(Entity player, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, BiConsumer<Entity, T> consumer, BiFunction<T, Integer, V> packetSupplier) {
-    monitorEntityForChange(player, attachment, consumer, (p, t) -> PacketDistributor.sendToPlayersTrackingEntity(p, packetSupplier.apply(t, p.getId())));
+    monitorEntityForChange(player, attachment, consumer, (p, t) -> PacketDistributor.sendToPlayersTrackingEntityAndSelf(p, packetSupplier.apply(t, p.getId())));
   }
 
   public static <T extends ICleanable> void monitorEntityForChange(Entity entity, DeferredHolder<AttachmentType<?>, AttachmentType<T>> attachment, @Nullable BiConsumer<Entity, T> consumer, @Nullable BiConsumer<Entity, T> whenDirty) {
@@ -92,7 +92,7 @@ public class AttachmentUtil {
     T attachmentInstance = entity.getData(attachment.value());
     if (attachmentInstance.isEmpty()) {
       entity.removeData(attachment.value());
-      PacketDistributor.sendToPlayersTrackingEntity(entity, RootsAPI.getInstance()
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, RootsAPI.getInstance()
           .getEntityDiscardPacket(attachment.getKey(), entity));
       return;
     }

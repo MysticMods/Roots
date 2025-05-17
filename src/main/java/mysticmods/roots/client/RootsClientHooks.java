@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 
 public class RootsClientHooks {
   public static void setGrantStorage(GrantStorage storage) {
@@ -56,19 +57,6 @@ public class RootsClientHooks {
     }
 
     player.setData(ModAttachments.HERB_STORAGE, storage);
-  }
-
-  public static void setSnapshotStorage(SnapshotStorage storage) {
-    if (Minecraft.getInstance() == null) {
-      return;
-    }
-    Player player = Minecraft.getInstance().player;
-
-    if (player == null) {
-      return;
-    }
-
-    player.setData(ModAttachments.SNAPSHOT_STORAGE, storage);
   }
 
   public static void setReputationStorage(ReputationStorage storage) {
