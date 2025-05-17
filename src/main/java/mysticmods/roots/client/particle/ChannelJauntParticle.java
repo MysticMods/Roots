@@ -69,6 +69,7 @@ public class ChannelJauntParticle extends TextureSheetParticle {
       Vec3 lookDir = caster.getViewVector(partialTicks).normalize();
       Vec3 rightVec = lookDir.cross(new Vec3(0, 1, 0)).normalize();
 
+      // TODO: MAJOR TODO: Left-handedness
       // Hand-based horizontal offset (right for MAIN_HAND, left for OFF_HAND)
       double handOffset = hand == InteractionHand.MAIN_HAND ? 0.25 : -0.25;
       float t = (float) (age + partialTicks) / lifetime;
