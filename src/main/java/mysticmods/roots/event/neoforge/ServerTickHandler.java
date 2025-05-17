@@ -1,19 +1,21 @@
 package mysticmods.roots.event.neoforge;
 
 import mysticmods.roots.api.RootsAPI;
-import mysticmods.roots.api.RootsTags;
 import mysticmods.roots.api.attachment.AttachmentUtil;
 import mysticmods.roots.init.ModAttachments;
-import mysticmods.roots.network.client.*;
+import mysticmods.roots.network.client.ClientboundEntitySnapshotSyncPacket;
+import mysticmods.roots.network.client.ClientboundGrantSyncPacket;
+import mysticmods.roots.network.client.ClientboundHerbSyncPacket;
+import mysticmods.roots.network.client.ClientboundReputationSyncPacket;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -22,7 +24,22 @@ import java.util.List;
 @EventBusSubscriber(modid = RootsAPI.MODID)
 public class ServerTickHandler {
   @SubscribeEvent
-  public static void onEntityTrack (PlayerEvent.StartTracking event) {
+  public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+    Player player = event.getEntity();
+    if (player.level().isClientSide()) {
+      return;
+    }
+
+    // TODO:
+    if (player.hasData(ModAttachments.SNAPSHOT_STORAGE)) {
+      ServerTickHandler.nextTick(() ->
+          PacketDistributor.sendToPlayer((ServerPlayer) player, new ClientboundEntitySnapshotSyncPacket(player.getData(ModAttachments.SNAPSHOT_STORAGE), player.getId()))
+      );
+    }
+  }
+
+  @SubscribeEvent
+  public static void onEntityTrack(PlayerEvent.StartTracking event) {
     Entity entity = event.getEntity();
     if (!entity.level().isClientSide() && entity.hasData(ModAttachments.SNAPSHOT_STORAGE.get())) {
       AttachmentUtil.manuallySync(entity, ModAttachments.SNAPSHOT_STORAGE, ClientboundEntitySnapshotSyncPacket::new);
