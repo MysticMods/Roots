@@ -36,6 +36,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> CHANNEL_TARGET = PARTICLES.register("channel_target", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> CHANNEL = PARTICLES.register("channel", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> CHANNEL_FAIL = PARTICLES.register("channel_fail", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> CHANNEL_JAUNT = PARTICLES.register("channel_jaunt", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SPROUT_PORTAL = PARTICLES.register("sprout_portal", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SPIRAL = PARTICLES.register("spiral", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> GROVE_STONE = PARTICLES.register("grove_stone", () -> new RootsParticleOptions.Type(false));

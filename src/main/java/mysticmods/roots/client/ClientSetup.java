@@ -200,6 +200,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.TEST.get(), TestParticle.Provider::new);
     event.registerSpriteSet(ModParticles.CHANNEL.get(), ChannelCastParticle.Provider::new);
     event.registerSpriteSet(ModParticles.CHANNEL_FAIL.get(), ChannelNoCastParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.CHANNEL_JAUNT.get(), ChannelJauntParticle.Provider::new);
     event.registerSpriteSet(ModParticles.AIR_BUBBLE.get(), AirBubbleParticle.Provider::new);
     event.registerSpriteSet(ModParticles.DISARM.get(), DisarmParticle.Provider::new);
     event.registerSpriteSet(ModParticles.SMOKE.get(), SmokeParticle.Provider::new);

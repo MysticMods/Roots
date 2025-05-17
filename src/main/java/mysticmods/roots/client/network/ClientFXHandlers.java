@@ -3,24 +3,54 @@ package mysticmods.roots.client.network;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.config.ConfigManager;
-import mysticmods.roots.init.*;
+import mysticmods.roots.init.ModParticles;
+import mysticmods.roots.init.ModSounds;
+import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.particle.RootsParticleOptions;
-import mysticmods.roots.snapshot.SnapshotHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public class ClientFXHandlers {
+  public static void castChannelJaunt(Spell spell, int casterId, int ticks) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity caster = minecraft.level.getEntity(casterId);
+    if (caster != null) {
+      int col1 = spell.getColor1();
+      int col2 = spell.getColor2();
+
+      InteractionHand hand = InteractionHand.MAIN_HAND;
+      if (caster instanceof Player player) {
+        hand = player.getUsedItemHand();
+      }
+
+      double handOffset = hand == InteractionHand.MAIN_HAND ? 0.3 : -0.3;
+
+      minecraft.level.addParticle(
+          new RootsParticleOptions(ModParticles.CHANNEL_JAUNT, col1, col2, casterId),
+          caster.getX(),
+          caster.getY(),
+          caster.getZ(),
+          1, 0, handOffset
+      );
+      minecraft.level.addParticle(
+          new RootsParticleOptions(ModParticles.CHANNEL_JAUNT, col2, col1, casterId),
+          caster.getX(),
+          caster.getY(),
+          caster.getZ(),
+          -1, 0, handOffset
+      );
+    }
+  }
+
   public static void petalShell(int entityId) {
     Minecraft minecraft = Minecraft.getInstance();
     Entity entity = minecraft.level.getEntity(entityId);

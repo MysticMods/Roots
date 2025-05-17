@@ -12,6 +12,7 @@ import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.network.client.fx.CastChannelFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelFailFXPacket;
+import mysticmods.roots.network.client.fx.CastChannelJauntFXPacket;
 import mysticmods.roots.network.client.fx.CastChannelTargetFXPacket;
 import mysticmods.roots.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
@@ -124,6 +125,10 @@ public class CastingItem extends Item {
       costs.charge(pPlayer, true);
     } else if (spell.getType() == Spell.Type.CHARGED) {
       pPlayer.displayClientMessage(spell.getSpell().getChargeText(ticks), true);
+
+      if (ticks % 2 == 0) {
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new CastChannelJauntFXPacket(spell.getSpell(), pPlayer.getId(), ticks));
+      }
     }
   }
 

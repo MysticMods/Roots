@@ -1,8 +1,9 @@
-// 1.21.1	2025-05-16T22:14:03.8185441	Roots Particle Provider
+// 1.21.1	2025-05-17T21:20:25.3391287	Roots Particle Provider
 32a41ad35180f7899f7a75f0ba7b6e17915bb028 assets/roots/particles/air_bubble.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/animal_harvest.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel_fail.json
+2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel_jaunt.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/channel_target.json
 c8b62f8d850dcf143ab1311edf34979fc0c0ec18 assets/roots/particles/disarm.json
 2d951d782cf3d6950298a32ee25977f7b06d2852 assets/roots/particles/extension.json
