@@ -29,9 +29,11 @@
   ],
   "client": [
     "accessor.AccessorMixinItemRenderer",
+    "client.MixinEntity",
     "client.MixinLocalPlayer",
     "client.accessor.AccessorMixinEntityRenderer",
     "client.accessor.AccessorMixinLevelRenderer",
+    "client.accessor.AccessorMixinParticle",
     "client.accessor.AccessorMixinParticleEngine"
   ],
   "injectors": {

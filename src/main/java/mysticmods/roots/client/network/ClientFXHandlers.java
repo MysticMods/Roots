@@ -31,7 +31,9 @@ public class ClientFXHandlers {
     if (entity == null) {
       return;
     }
-    SnapshotHelper.applyLiving(entity, ModSerializers.PETAL_SHELL.get(), (e, snapshot) -> {
+
+    minecraft.level.addParticle(new RootsParticleOptions(ModParticles.PETAL_SHELL, color1, color2, entityId), entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
+/*    SnapshotHelper.applyLiving(entity, ModSerializers.PETAL_SHELL.get(), (e, snapshot) -> {
       if (!(e instanceof LivingEntity living)) {
         return;
       }
@@ -59,7 +61,7 @@ public class ClientFXHandlers {
           break;
         }
       }
-    });
+    });*/
   }
 
   public static void castMagnetism(int entityId) {
