@@ -1,6 +1,8 @@
 package mysticmods.roots.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import it.unimi.dsi.fastutil.floats.FloatArrayList;
+import it.unimi.dsi.fastutil.floats.FloatList;
 import mysticmods.roots.api.attachment.SnapshotStorage;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.init.ModEffects;
@@ -19,11 +21,13 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 
+// TODO: Fix the rolls
 public class PetalShellParticle extends TextureSheetParticle {
   protected float oR1, oG1, oB1;
   protected float rCol2, gCol2, bcol2;
   protected int count, maxCount;
   protected float rollAmount;
+  protected final FloatList randoms = new FloatArrayList();
 
   private final LivingEntity entity;
 
@@ -86,6 +90,10 @@ public class PetalShellParticle extends TextureSheetParticle {
 
     this.maxCount = snapshot.getCount();
 
+    while (randoms.size() < count) {
+      randoms.add(random.nextFloat() - 0.5f);
+    }
+
     this.xo = this.x;
     this.yo = this.y;
     this.zo = this.z;
@@ -142,7 +150,6 @@ public class PetalShellParticle extends TextureSheetParticle {
       float f = (float) (Mth.lerp(partialTicks, xo, x) - vec3.x());
       float f1 = (float) (Mth.lerp(partialTicks, yo, y) - vec3.y());
       float f2 = (float) (Mth.lerp(partialTicks, zo, z) - vec3.z());
-      quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll + i, this.roll + i));
 
       this.renderRotatedQuad(buffer, quaternion, f, f1, f2, partialTicks);
 
