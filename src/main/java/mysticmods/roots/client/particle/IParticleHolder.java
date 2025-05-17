@@ -6,5 +6,5 @@ import net.minecraft.core.particles.ParticleType;
 public interface IParticleHolder {
   Particle roots_1_21$getParticle(ParticleType<?> type);
 
-  boolean roots_1_21$setParticle(ParticleType<?> type, Particle particle);
+  void roots_1_21$setParticle(ParticleType<?> type, Particle particle);
 }
