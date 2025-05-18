@@ -78,16 +78,20 @@ public class ChannelCastParticle extends TextureSheetParticle {
           .add(lookDir.scale(0.6 + smoothedDepth))
           .add(rightVec.scale(handOffset));
 
-      this.x = basePos.x + circleOffset.x;
-      this.y = basePos.y + circleOffset.y;
-      this.z = basePos.z + circleOffset.z;
+      this.x = Mth.lerp(0, basePos.x + circleOffset.x, this.xo);
+      this.y = Mth.lerp(0, basePos.y + circleOffset.y, this.yo);
+      this.z = Mth.lerp(0, basePos.z + circleOffset.z, this.zo);
     }
   }
 
   @Override
   public void tick() {
-    super.tick();
-    if (!removed) {
+    this.xo = this.x;
+    this.yo = this.y;
+    this.zo = this.z;
+    if (this.age++ >= this.lifetime) {
+      this.remove();
+    } else {
       if (caster == null || caster.isRemoved()) {
         this.remove();
         return;

@@ -5,6 +5,7 @@ import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 
@@ -30,6 +31,9 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
     this.rR = ((color2 >> 16) & 0xFF) / 255.0f;
     this.rG = ((color2 >> 8) & 0xFF) / 255.0f;
     this.rB = ((color2) & 0xFF) / 255.0f;
+    this.xd = 0;
+    this.yd = 0;
+    this.zd = 0;
 
     this.rCol = oR;
     this.gCol = oG;
@@ -40,6 +44,7 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
     this.alpha = 1f;
     this.hasPhysics = false;
     updatePosition();
+    tick();
   }
 
   private void updatePosition() {
@@ -55,13 +60,13 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
       Vec3 eyePos = entity.getEyePosition(1.0f);
       Vec3 start = eyePos.add(lookDir.scale(0.6)).add(circleOffset).add(rightVec.scale(hand));
 
-      this.x = start.x;
+      this.x = Mth.lerp(0, start.x, this.xo);
       if (age > threshold) {
-        this.y = start.y - fallSpeed;
+        this.y = Mth.lerp(0, start.y - fallSpeed, this.yo);
       } else {
-        this.y = start.y;
+        this.y = Mth.lerp(0, start.y, this.yo);
       }
-      this.z = start.z;
+      this.z = Mth.lerp(0, start.z, this.zo);
     }
   }
 
@@ -74,7 +79,7 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
       this.remove();
     } else {
       if (age > threshold) {
-        fallSpeed += 0.06; // acceleration
+        fallSpeed += 0.03; // acceleration
       }
       float t = (float) age / lifetime;
 
@@ -82,7 +87,7 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
       this.gCol = oG + (rG - oG) * t;
       this.bCol = oB + (rB - oB) * t;
 
-      this.alpha = 1.0f - (t * t); // non-linear fade
+      this.alpha = 1.0f - (float) Math.pow(t, 9); // non-linear fade
 
       // Begin falling after short delay
       updatePosition();
@@ -115,6 +120,9 @@ public class ChannelNoCastParticle extends TextureSheetParticle {
     @Override
     public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double radius, double unusedY, double unusedZ) {
       Entity entity = level.getEntity(type.entityId());
+      if (entity == null) {
+        return null;
+      }
       ChannelNoCastParticle p = new ChannelNoCastParticle(level, x, y, z, radius, unusedY, unusedZ, type.color1(), type.color2(), entity);
       p.pickSprite(sprite);
       return p;

@@ -27,7 +27,7 @@ public record CastChannelTargetFXPacket(Spell spell, int casterId, Vec3 casterPo
 
   @Override
   public void handle(IPayloadContext context) {
-    ClientFXHandlers.castChannel(spell, casterId, casterPosition, targetPosition, ticks);
+    ClientFXHandlers.castChannelTarget(spell, casterId, casterPosition, targetPosition, ticks);
   }
 
   @Override

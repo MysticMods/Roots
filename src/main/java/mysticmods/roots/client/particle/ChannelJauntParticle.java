@@ -32,11 +32,7 @@ public class ChannelJauntParticle extends TextureSheetParticle {
       hand = InteractionHand.MAIN_HAND;
     }
 
-    if (motion < 1) {
-      motionUp = false;
-    } else {
-      motionUp = true;
-    }
+    motionUp = !(motion < 1);
 
     this.oR = ((color1 >> 16) & 0xFF) / 255.0f;
     this.oG = ((color1 >> 8) & 0xFF) / 255.0f;
