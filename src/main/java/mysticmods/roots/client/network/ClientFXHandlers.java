@@ -102,28 +102,28 @@ public class ClientFXHandlers {
     int color1 = ModSpells.MAGNETISM.get().getColor1();
     int color2 = ModSpells.MAGNETISM.get().getColor2();
 
+    RootsParticleOptions opt1 = new RootsParticleOptions(ModParticles.MAGNETISM, color2, color1, entityId);
+    RootsParticleOptions opt2 = new RootsParticleOptions(ModParticles.MAGNETISM, color1, color2, entityId);
+
     if (entity != null) {
       double x = entity.getX();
-      double y = entity.getY() + (entity.getEyeHeight() * 0.8);
+      double y = entity.getY();
       double z = entity.getZ();
 
-      for (float angle = 0; angle < 360; angle += 1 + random.nextFloat() * 2) {
-        double radians = Math.toRadians(angle);
+      for (double angle = 0; angle < 360; angle += 1 + random.nextDouble() * 2) {
         double radius = 3.2 + random.nextDouble() * 0.3;
+        double yOffset = (random.nextDouble() - 0.5) * 0.2;
 
-        double offsetX = Math.cos(radians) * radius;
-        double offsetZ = Math.sin(radians) * radius;
+/*        double offsetX = Math.cos(angle) * radius;
+        double offsetZ = Math.sin(angle) * radius;
         double offsetY = (random.nextDouble() - 0.5) * 0.2;
 
         Vec3 spawnPos = new Vec3(x + offsetX, y + offsetY, z + offsetZ);
         Vec3 motion = new Vec3(x - spawnPos.x, y - spawnPos.y, z - spawnPos.z).normalize()
-            .scale(0.21 + random.nextDouble() * 0.09);
+            .scale(0.21 + random.nextDouble() * 0.09);*/
 
-        RootsParticleOptions opt = random.nextBoolean()
-            ? new RootsParticleOptions(ModParticles.MAGNETISM, color2, color1, entityId)
-            : new RootsParticleOptions(ModParticles.MAGNETISM, color1, color2, entityId);
 
-        minecraft.level.addParticle(opt, spawnPos.x, spawnPos.y, spawnPos.z, motion.x, motion.y, motion.z);
+        minecraft.level.addParticle(random.nextBoolean() ? opt1 : opt2, x, y, z, radius, angle, yOffset);
       }
     }
   }
