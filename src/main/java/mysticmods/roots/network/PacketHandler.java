@@ -65,6 +65,7 @@ public class PacketHandler {
     registrar.play(CastMagnetismFXPacket.TYPE, CastMagnetismFXPacket.CODEC);
     registrar.play(PetalShellFXPacket.TYPE, PetalShellFXPacket.CODEC);
     registrar.play(CastChannelJauntFXPacket.TYPE, CastChannelJauntFXPacket.CODEC);
+    registrar.play(EntityBeamFXPacket.TYPE, EntityBeamFXPacket.CODEC);
     registrar.play(ClientboundOpenReputationPacket.TYPE, ClientboundOpenReputationPacket.CODEC);
   }
 

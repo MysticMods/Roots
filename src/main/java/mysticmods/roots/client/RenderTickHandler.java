@@ -6,6 +6,8 @@ import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.datacomponent.SpellStorage;
 import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.layer.HerbLayer;
+import mysticmods.roots.client.particle.Beam;
+import mysticmods.roots.client.particle.BeamManager;
 import mysticmods.roots.client.particle.BoltEffect;
 import mysticmods.roots.client.particle.BoltRenderer;
 import mysticmods.roots.init.ModAttachments;
@@ -49,6 +51,10 @@ public class RenderTickHandler {
     boltRenderer.update(renderer, bolt, getPartialTick());
   }
 
+  public static void renderBeam (Beam beam) {
+    BeamManager.addBeam(beam);
+  }
+
   @SubscribeEvent
   public static void onRenderStage(RenderLevelStageEvent event) {
     if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
@@ -59,12 +65,17 @@ public class RenderTickHandler {
       boltRenderer.render(event.getPartialTick()
           .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
       renderer.endBatch(RootsRenderTypes.ROOTS_LIGHTNING);
+    } else if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
+      MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
+      BeamManager.render(event.getPartialTick().getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
+      renderer.endLastBatch();
     }
   }
 
   @SubscribeEvent
   public static void onClientTick(ClientTickEvent.Post post) {
     HerbLayer.tick();
+    BeamManager.tick();
   }
 
   // This is stolen from Mekanism

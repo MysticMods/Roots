@@ -1,7 +1,9 @@
 package mysticmods.roots.client.network;
 
 import mysticmods.roots.api.spell.Spell;
+import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningLayer;
+import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
@@ -549,5 +551,19 @@ public class ClientFXHandlers {
         minecraft.level.playLocalSound(entity, ModSounds.ALERTNESS.get(), SoundSource.NEUTRAL, 1f, 1f);
       }
     }
+  }
+
+  public static void addEntityBeam(int entityId1, int entityId2) {
+    Minecraft mc = Minecraft.getInstance();
+    if (mc == null) {
+      return;
+    }
+
+    Entity entity1 = mc.level.getEntity(entityId1);
+    Entity entity2 = mc.level.getEntity(entityId2);
+    if (entity1 == null || entity2 == null) {
+      return;
+    }
+    RenderTickHandler.renderBeam(new Beam.EntityBeam(new Beam.BeamAlpha(0.5f), entity1, entity2, 20));
   }
 }

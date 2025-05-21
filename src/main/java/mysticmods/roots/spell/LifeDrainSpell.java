@@ -10,6 +10,7 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.EntityBeamFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -74,6 +76,8 @@ public class LifeDrainSpell extends Spell {
         if (entity.hurt(ModDamage.lifeDrain(pPlayer), this.damage)) {
           pPlayer.heal(heal);
           count++;
+
+          PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new EntityBeamFXPacket(pPlayer.getId(), entity.getId()));
         }
       }
     }
