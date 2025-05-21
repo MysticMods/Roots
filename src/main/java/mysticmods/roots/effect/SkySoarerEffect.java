@@ -16,27 +16,29 @@ public class SkySoarerEffect extends SimpleEffect {
   @Override
   public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
     super.applyEffectTick(pLivingEntity, pAmplifier);
-    SnapshotHelper.applyLivingWithVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
-      if (vehicle == null) {
-        vehicle = player;
-      } else {
-        player.hurtMarked = true;
-        player.resetFallDistance();
-      }
-      vehicle.hasImpulse = true;
-      vehicle.hurtMarked = true;
-      vehicle.resetFallDistance();
-      if (vehicle instanceof Boat) {
-        vehicle.setDeltaMovement(vehicle.getLookAngle()
-            .multiply(sky.getAmplifier(), 0, sky.getAmplifier()));
-      } else {
-        vehicle.setDeltaMovement(player.getLookAngle()
-            .multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
-        if (vehicle instanceof LivingEntity living) {
-          living.yya = sky.getAmplifier();
+    if (!pLivingEntity.level().isClientSide()) {
+      SnapshotHelper.applyLivingWithVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
+        if (vehicle == null) {
+          vehicle = player;
+        } else {
+          player.hurtMarked = true;
+          player.resetFallDistance();
         }
-      }
-    });
+        vehicle.hasImpulse = true;
+        vehicle.hurtMarked = true;
+        vehicle.resetFallDistance();
+        if (vehicle instanceof Boat) {
+          vehicle.setDeltaMovement(vehicle.getLookAngle()
+              .multiply(sky.getAmplifier(), 0, sky.getAmplifier()));
+        } else {
+          vehicle.setDeltaMovement(player.getLookAngle()
+              .multiply(sky.getAmplifier(), sky.getAmplifier(), sky.getAmplifier()));
+          if (vehicle instanceof LivingEntity living) {
+            living.yya = sky.getAmplifier();
+          }
+        }
+      });
+    }
     return true;
   }
 
@@ -52,18 +54,20 @@ public class SkySoarerEffect extends SimpleEffect {
 
   @Override
   public boolean onEffectRemoved(LivingEntity pLivingEntity, int amplifier) {
-    SnapshotHelper.applyLivingWithVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
-      if (vehicle != null) {
-        vehicle.hasImpulse = true;
-        vehicle.hurtMarked = true;
-        vehicle.fallDistance = 0f;
-        /*        vehicle.setDeltaMovement(sky.getVehicleOriginalMovement());*/
-      }
-      player.hasImpulse = true;
-      player.hurtMarked = true;
-      player.fallDistance = 0f;
-      /*      player.setDeltaMovement(sky.getOriginalMovement());*/
-    });
+    if (!pLivingEntity.level().isClientSide()) {
+      SnapshotHelper.applyLivingWithVehicle(pLivingEntity, ModSerializers.SKY_SOARER.get(), (vehicle, player, sky) -> {
+        if (vehicle != null) {
+          vehicle.hasImpulse = true;
+          vehicle.hurtMarked = true;
+          vehicle.fallDistance = 0f;
+          /*        vehicle.setDeltaMovement(sky.getVehicleOriginalMovement());*/
+        }
+        player.hasImpulse = true;
+        player.hurtMarked = true;
+        player.fallDistance = 0f;
+        /*      player.setDeltaMovement(sky.getOriginalMovement());*/
+      });
+    }
     return false;
   }
 }
