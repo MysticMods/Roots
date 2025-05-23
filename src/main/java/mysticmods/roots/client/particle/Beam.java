@@ -7,8 +7,14 @@ import org.joml.Vector4f;
 public interface Beam {
   int MAX_DISTANCE = 24 * 24;
 
-  Vec3 getStart ();
-  Vec3 getStop ();
+  default Vec3 getStart () {
+    return getStart(0f);
+  }
+  default Vec3 getStop () {
+    return getStop(0f);
+  }
+  Vec3 getStart (float partialTicks);
+  Vec3 getStop (float partialTicks);
   int getAge ();
   int getMaxAge ();
 
@@ -74,13 +80,13 @@ public interface Beam {
     }
 
     @Override
-    public Vec3 getStart() {
-      return start.getEyePosition().subtract(0, 0.5, 0);
+    public Vec3 getStart(float partialTicks) {
+      return start.getEyePosition(partialTicks).subtract(0, 0.5, 0);
     }
 
     @Override
-    public Vec3 getStop() {
-      return stop.getEyePosition().subtract(0, 0.5, 0);
+    public Vec3 getStop(float partialTicks) {
+      return stop.getEyePosition(partialTicks).subtract(0, 0.5, 0);
     }
 
     @Override
@@ -112,12 +118,12 @@ public interface Beam {
     }
 
     @Override
-    public Vec3 getStart() {
+    public Vec3 getStart(float partialTicks) {
       return start;
     }
 
     @Override
-    public Vec3 getStop() {
+    public Vec3 getStop(float partialTicks) {
       return stop;
     }
 
@@ -128,54 +134,54 @@ public interface Beam {
   }
 
   interface BeamColor {
-    float getRed ();
-    float getGreen ();
-    float getBlue ();
-    float getAlpha ();
+    int getRed ();
+    int getGreen ();
+    int getBlue ();
+    int getAlpha ();
   }
 
-  record BeamAlpha (float alpha) implements BeamColor {
+  record BeamAlpha (int alpha) implements BeamColor {
 
     @Override
-    public float getRed() {
-      return 1;
+    public int getRed() {
+      return 255;
     }
 
     @Override
-    public float getGreen() {
-      return 1;
+    public int getGreen() {
+      return 255;
     }
 
     @Override
-    public float getBlue() {
-      return 1;
+    public int getBlue() {
+      return 255;
     }
 
     @Override
-    public float getAlpha() {
+    public int getAlpha() {
       return alpha;
     }
   }
 
-  record BeamColorVec4 (Vector4f colours) implements BeamColor {
+  record BeamColorVec4 (int r, int g, int b, int a) implements BeamColor {
     @Override
-    public float getRed() {
-      return colours.x();
+    public int getRed() {
+      return r();
     }
 
     @Override
-    public float getGreen() {
-      return colours.y();
+    public int getGreen() {
+      return g();
     }
 
     @Override
-    public float getBlue() {
-      return colours.z();
+    public int getBlue() {
+      return b();
     }
 
     @Override
-    public float getAlpha() {
-      return colours.w();
+    public int getAlpha() {
+      return a();
     }
   }
 }

@@ -1,4 +1,4 @@
-package mysticmods.roots.client.particle;
+package mysticmods.roots.client.particle.bolt;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 import mysticmods.roots.client.RootsRenderTypes;
 import net.minecraft.SharedConstants;
@@ -59,10 +60,10 @@ public class BoltRenderer {
           tickAndRemove(data, timestamp);
         }
         if (data.bolts.isEmpty() && data.lastBolt != null && data.lastBolt.getSpawnFunction().isConsecutive()) {
-          data.addBolt(new BoltInstance(data.lastBolt, timestamp), timestamp, random);
+          data.addBolt(new StaticBoltInstance(data.lastBolt, timestamp), timestamp, random);
         }
-        for (BoltInstance bolt : data.bolts) {
-          bolt.render(matrix, buffer, timestamp, cameraPos);
+        for (BoltRenderInstance bolt : data.bolts) {
+          bolt.render(matrix, buffer, timestamp, cameraPos, partialTicks);
         }
 
         if (data.bolts.isEmpty() && timestamp.isPassed(data.lastUpdateTimestamp, MAX_OWNER_TRACK_TIME)) {
@@ -73,7 +74,7 @@ public class BoltRenderer {
   }
 
   private static void tickAndRemove(BoltOwnerData data, Timestamp timestamp) {
-    Iterator<BoltInstance> iterator = data.bolts.iterator();
+    Iterator<BoltRenderInstance> iterator = data.bolts.iterator();
     //noinspection Java8CollectionRemoveIf: requires capture
     while (iterator.hasNext()) {
       if (iterator.next().tick(timestamp)) {
@@ -82,7 +83,7 @@ public class BoltRenderer {
     }
   }
 
-  public void update(Object owner, BoltEffect newBoltData, float partialTicks) {
+  public void update(Object owner, IBoltEffect newBoltData, float partialTicks) {
     if (minecraft.level == null) {
       return;
     }
@@ -91,7 +92,11 @@ public class BoltRenderer {
       data.lastBolt = newBoltData;
       Timestamp timestamp = new Timestamp(minecraft.level.getGameTime(), partialTicks);
       if ((!data.lastBolt.getSpawnFunction().isConsecutive() || data.bolts.isEmpty()) && timestamp.isPassed(data.lastBoltTimestamp, data.lastBoltDelay)) {
-        data.addBolt(new BoltInstance(newBoltData, timestamp), timestamp, random);
+        if (newBoltData instanceof DynamicBoltEffect) {
+          data.addBolt(new DynamicBoltInstance((DynamicBoltEffect) newBoltData, timestamp), timestamp, random);
+        } else {
+          data.addBolt(new StaticBoltInstance(newBoltData, timestamp), timestamp, random);
+        }
       }
       data.lastUpdateTimestamp = timestamp;
     }
@@ -99,34 +104,35 @@ public class BoltRenderer {
 
   public static class BoltOwnerData {
 
-    private final Set<BoltInstance> bolts = new ObjectOpenHashSet<>();
-    private BoltEffect lastBolt;
+    private final Set<BoltRenderInstance> bolts = new ObjectOpenHashSet<>();
+    private IBoltEffect lastBolt;
     private Timestamp lastBoltTimestamp = new Timestamp();
     private Timestamp lastUpdateTimestamp = new Timestamp();
+    private BiFunction<IBoltEffect, Timestamp, BoltRenderInstance> builder;
     private double lastBoltDelay;
 
-    private void addBolt(BoltInstance instance, Timestamp timestamp, RandomSource random) {
+    private void addBolt(BoltRenderInstance instance, Timestamp timestamp, RandomSource random) {
       bolts.add(instance);
-      lastBoltDelay = instance.bolt.getSpawnFunction().getSpawnDelay(random);
+      lastBoltDelay = instance.getSpawnFunction().getSpawnDelay(random);
       lastBoltTimestamp = timestamp;
     }
   }
 
-  public static class BoltInstance {
-
-    private final BoltEffect bolt;
-    private final List<BoltEffect.BoltQuads> renderQuads;
+  public static class StaticBoltInstance implements BoltRenderInstance {
+    private final IBoltEffect bolt;
+    private final List<BoltQuads> renderQuads;
     private final Timestamp createdTimestamp;
 
-    public BoltInstance(BoltEffect bolt, Timestamp timestamp) {
+    public StaticBoltInstance(IBoltEffect bolt, Timestamp timestamp) {
       this.bolt = bolt;
-      this.renderQuads = bolt.generate();
+      this.renderQuads = bolt.generate(timestamp.partial());
       this.createdTimestamp = timestamp;
     }
 
-    public void render(Matrix4f matrix, VertexConsumer buffer, Timestamp timestamp, @Nullable Vec3 cameraPos) {
+    @Override
+    public void render(Matrix4f matrix, VertexConsumer buffer, Timestamp timestamp, @Nullable Vec3 cameraPos, float partialTicks) {
       float lifeScale = timestamp.subtract(createdTimestamp).value() / bolt.getLifespan();
-      BoltEffect.FadeFunction.RenderBounds bounds = bolt.getFadeFunction().getRenderBounds(renderQuads.size(), lifeScale);
+      FadeFunction.RenderBounds bounds = bolt.getFadeFunction().getRenderBounds(renderQuads.size(), lifeScale);
       for (int i = bounds.start(); i < bounds.end(); i++) {
         for (Vec3 v : renderQuads.get(i).getVecs()) {
           Vec3 shiftedVertex = cameraPos == null ? v : v.subtract(cameraPos);
@@ -136,49 +142,49 @@ public class BoltRenderer {
       }
     }
 
+    @Override
     public boolean tick(Timestamp timestamp) {
       return timestamp.isPassed(createdTimestamp, bolt.getLifespan());
     }
-  }
 
-  public static class Timestamp {
-
-    private final long ticks;
-    private final float partial;
-
-    public Timestamp() {
-      this(0, 0);
-    }
-
-    public Timestamp(long ticks, float partial) {
-      this.ticks = ticks;
-      this.partial = partial;
-    }
-
-    public Timestamp subtract(Timestamp other) {
-      long newTicks = ticks - other.ticks;
-      float newPartial = partial - other.partial;
-      if (newPartial < 0) {
-        newPartial += 1;
-        newTicks -= 1;
-      }
-      return new Timestamp(newTicks, newPartial);
-    }
-
-    public float value() {
-      return ticks + partial;
-    }
-
-    public boolean isPassed(Timestamp prev, double duration) {
-      long ticksPassed = ticks - prev.ticks;
-      if (ticksPassed > duration) {
-        return true;
-      }
-      duration -= ticksPassed;
-      if (duration >= 1) {
-        return false;
-      }
-      return (partial - prev.partial) >= duration;
+    @Override
+    public IBoltEffect getBolt() {
+      return bolt;
     }
   }
+
+  public static class DynamicBoltInstance implements BoltRenderInstance {
+    private final DynamicBoltEffect bolt;
+    private final Timestamp createdTimestamp;
+
+    public DynamicBoltInstance(DynamicBoltEffect bolt, Timestamp timestamp) {
+      this.bolt = bolt;
+      this.createdTimestamp = timestamp;
+    }
+
+    @Override
+    public void render(Matrix4f matrix, VertexConsumer buffer, Timestamp timestamp, @Nullable Vec3 cameraPos, float partialTicks) {
+      float lifeScale = timestamp.subtract(createdTimestamp).value() / bolt.getLifespan();
+      List<BoltQuads> quads = bolt.generate(partialTicks);
+      FadeFunction.RenderBounds bounds = bolt.getFadeFunction().getRenderBounds(quads.size(), lifeScale);
+      for (int i = bounds.start(); i < bounds.end(); i++) {
+        for (Vec3 v : quads.get(i).getVecs()) {
+          Vec3 shiftedVertex = cameraPos == null ? v : v.subtract(cameraPos);
+          buffer.addVertex(matrix, (float) shiftedVertex.x, (float) shiftedVertex.y, (float) shiftedVertex.z)
+              .setColor(bolt.getColor().r(), bolt.getColor().g(), bolt.getColor().b(), bolt.getColor().a());
+        }
+      }
+    }
+
+    @Override
+    public boolean tick(Timestamp timestamp) {
+      return timestamp.isPassed(createdTimestamp, bolt.getLifespan());
+    }
+
+    @Override
+    public IBoltEffect getBolt() {
+      return bolt;
+    }
+  }
+
 }

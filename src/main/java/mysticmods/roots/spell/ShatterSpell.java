@@ -14,8 +14,9 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModActions;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.network.client.fx.CastShatterFX;
-import mysticmods.roots.network.client.fx.LightningFXPacket;
+import mysticmods.roots.network.client.fx.lightning.LightningPreset;
+import mysticmods.roots.network.client.fx.lightning.SemiDynamicLightningFXPacket;
+import mysticmods.roots.network.client.fx.lightning.StaticLightningFXPacket;
 import mysticmods.roots.util.FakePlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -210,7 +211,8 @@ public class ShatterSpell extends Spell {
     Vec3 start = pPlayer.getEyePosition().subtract(0, 0.3, 0);
 
     for (BlockPos pos : broken) {
-      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new LightningFXPacket(LightningFXPacket.LightningPreset.SHATTER, 2, start, Vec3.atCenterOf(pos)));
+      Vec3 stop = Vec3.atCenterOf(pos);
+      PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new SemiDynamicLightningFXPacket(LightningPreset.SHATTER, 2, pPlayer.getId(), stop, /*(int) Math.sqrt(start.subtract(stop).lengthSqr() * 2)*/8));
     }
 
     if (count == 0) {

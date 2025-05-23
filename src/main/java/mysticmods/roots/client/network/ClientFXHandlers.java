@@ -4,10 +4,12 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.gui.layer.WarningLayer;
 import mysticmods.roots.client.particle.Beam;
+import mysticmods.roots.client.particle.bolt.PositionProvider;
 import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ModSpells;
+import mysticmods.roots.network.client.fx.lightning.LightningPreset;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -564,6 +566,39 @@ public class ClientFXHandlers {
     if (entity1 == null || entity2 == null) {
       return;
     }
-    RenderTickHandler.renderBeam(new Beam.EntityBeam(new Beam.BeamAlpha(0.5f), entity1, entity2, 20));
+    RenderTickHandler.renderBeam(new Beam.EntityBeam(new Beam.BeamAlpha(255), entity1, entity2, 500));
+  }
+
+  public static void createBolt(int renderer, LightningPreset preset, int start, int end, int segments) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity1 = minecraft.level.getEntity(start);
+    Entity entity2 = minecraft.level.getEntity(end);
+    if (entity1 == null || entity2 == null) {
+      return;
+    }
+
+    if (preset.getShouldAdd().getAsBoolean()) {
+      RenderTickHandler.renderBolt(renderer, preset.getBoltCreator()
+          .create(PositionProvider.ofEyes(entity1, entity2, 0.5f), segments));
+    }
+  }
+
+  public static void createBolt(int renderer, LightningPreset preset, Vec3 start, Vec3 end, int segments) {
+    if (preset.getShouldAdd().getAsBoolean()) {
+      RenderTickHandler.renderBolt(renderer, preset.getBoltCreator().create(PositionProvider.of(start, end), segments));
+    }
+  }
+
+  public static void createBolt(int renderer, LightningPreset preset, int start, Vec3 end, int segments) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity1 = minecraft.level.getEntity(start);
+    if (entity1 == null) {
+      return;
+    }
+
+    if (preset.getShouldAdd().getAsBoolean()) {
+      RenderTickHandler.renderBolt(renderer, preset.getBoltCreator()
+          .create(PositionProvider.ofEyes(entity1, end, 0.5f), segments));
+    }
   }
 }

@@ -3,6 +3,7 @@ package mysticmods.roots.client;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.Util;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -17,17 +18,19 @@ public class RootsRenderTypes {
           .createCompositeState(false)
   );
 
-  public static final Function<ResourceLocation, RenderType> ROOTS_BEAM = Util.memoize(
+  public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
+
+  public static final Function<ResourceLocation, RenderType> ROOTS_BEAM =
       p_286159_ -> {
         RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
-            .setShaderState(RenderType.RENDERTYPE_ENTITY_TRANSLUCENT_EMISSIVE_SHADER)
+            .setShaderState(RenderType.RENDERTYPE_ENTITY_TRANSLUCENT_SHADER)
             .setTransparencyState(RenderType.LIGHTNING_TRANSPARENCY)
-            .setTextureState(new RenderStateShard.TextureStateShard(p_286159_, false, false))
             .setCullState(RenderType.NO_CULL)
-            .setLightmapState(RenderType.LIGHTMAP)
             .setOverlayState(RenderType.OVERLAY)
+            .setLightmapState(RenderType.LIGHTMAP)
+            .setDepthTestState(RenderType.NO_DEPTH_TEST)
+            .setTextureState(new RenderStateShard.TextureStateShard(p_286159_, false, false))
             .createCompositeState(false);
-        return RenderType.create("roots_beam", DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, false, true, rendertype$compositestate);
-      }
-  );
+        return RenderType.create("roots_beam", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, rendertype$compositestate);
+      };
 }

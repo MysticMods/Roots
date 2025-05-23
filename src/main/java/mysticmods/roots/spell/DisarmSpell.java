@@ -12,7 +12,9 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.mixin.accessor.AccessorMixinMob;
 import mysticmods.roots.network.client.fx.DisarmFXPacket;
-import mysticmods.roots.network.client.fx.LightningFXPacket;
+import mysticmods.roots.network.client.fx.lightning.DynamicLightningFXPacket;
+import mysticmods.roots.network.client.fx.lightning.LightningPreset;
+import mysticmods.roots.network.client.fx.lightning.StaticLightningFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -138,7 +140,7 @@ public class DisarmSpell extends TwoRadiusSpell {
         entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, glowDuration, 0, false, false));
         PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new DisarmFXPacket(entity.getId()));
         Vec3 stop = entity.position().add(0, entity.getBbHeight() / 2, 0);
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new LightningFXPacket(LightningFXPacket.LightningPreset.DISARM, 1, start, stop));
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new DynamicLightningFXPacket(LightningPreset.DISARM, 1, pPlayer.getId(), entity.getId(), (int) Math.sqrt(start.subtract(stop).lengthSqr() * 5)));
       }
     }
 

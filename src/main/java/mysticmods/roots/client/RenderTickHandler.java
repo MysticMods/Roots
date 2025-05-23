@@ -8,8 +8,8 @@ import mysticmods.roots.api.spell.ISpellInstance;
 import mysticmods.roots.client.gui.layer.HerbLayer;
 import mysticmods.roots.client.particle.Beam;
 import mysticmods.roots.client.particle.BeamManager;
-import mysticmods.roots.client.particle.BoltEffect;
-import mysticmods.roots.client.particle.BoltRenderer;
+import mysticmods.roots.client.particle.bolt.BoltRenderer;
+import mysticmods.roots.client.particle.bolt.IBoltEffect;
 import mysticmods.roots.init.ModAttachments;
 import mysticmods.roots.item.CastingItem;
 import mysticmods.roots.mixin.client.accessor.AccessorMixinLevelRenderer;
@@ -47,7 +47,7 @@ public class RenderTickHandler {
     return Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
   }
 
-  public static void renderBolt(Object renderer, BoltEffect bolt) {
+  public static void renderBolt(Object renderer, IBoltEffect bolt) {
     boltRenderer.update(renderer, bolt, getPartialTick());
   }
 
