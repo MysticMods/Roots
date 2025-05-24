@@ -396,18 +396,18 @@
         "id": "roots:life_drain/distance",
         "value": {
           "type": "roots:double_property",
-          "comment": "The first defaultValue used when calculating the vector from the caster.",
-          "default_value": 1.5,
-          "value": 1.5
+          "comment": "The range in blocks for the life drain search.",
+          "default_value": 8.0,
+          "value": 8.0
         }
       },
       {
-        "id": "roots:life_drain/bounds",
+        "id": "roots:life_drain/angle",
         "value": {
-          "type": "roots:double_property",
-          "comment": "The second defaultValue used when calculating the size of the bounding box from the caster's look vector.",
-          "default_value": 0.5,
-          "value": 0.5
+          "type": "roots:integer_property",
+          "comment": "The angle in degrees for the life drain search, centered on the player's view vector.",
+          "default_value": 80,
+          "value": 80
         }
       },
       {

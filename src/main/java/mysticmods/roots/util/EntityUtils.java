@@ -16,15 +16,15 @@ import java.util.function.Predicate;
 public class EntityUtils {
   public static Predicate<Entity> isProjectile = entity -> entity instanceof Projectile;
 
-  public static Predicate<Entity> isProjectileOrHostile(Player pPlayer) {
+  public static Predicate<Entity> isProjectileOrHostile(LivingEntity pPlayer) {
     return entity -> isProjectile.test(entity) || isHostileTo(pPlayer).test(entity);
   }
 
-  public static Predicate<Entity> isHostileTo(Player pPlayer) {
+  public static Predicate<Entity> isHostileTo(LivingEntity pPlayer) {
     return isHostileTo(pPlayer, true);
   }
 
-  public static Predicate<Entity> isHostileTo(Player pPlayer, boolean skipSelf) {
+  public static Predicate<Entity> isHostileTo(LivingEntity pPlayer, boolean skipSelf) {
     return inc -> {
       if (!(inc instanceof LivingEntity entity)) {
         return false;

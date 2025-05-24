@@ -52,6 +52,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SHATTER_BEAM = PARTICLES.register("shatter_beam", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> MAGNETISM = PARTICLES.register("magnetism", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PETAL_SHELL = PARTICLES.register("petal_shell", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> LIFE_DRAIN = PARTICLES.register("life_drain", () -> new RootsParticleOptions.Type(false));
   //public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SHATTER = PARTICLES.register("shatter", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {

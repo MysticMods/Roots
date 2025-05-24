@@ -212,6 +212,7 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.MAGNETISM.get(), MagnetismParticle.Provider::new);
     event.registerSpriteSet(ModParticles.PETAL_SHELL.get(), PetalShellParticle.Provider::new);
     //event.registerSpriteSet(ModParticles.SHATTER.get(), ShatterBeamParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.LIFE_DRAIN.get(), LifeDrainParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());

@@ -601,4 +601,29 @@ public class ClientFXHandlers {
           .create(PositionProvider.ofEyes(entity1, end, 0.5f), segments));
     }
   }
+
+  public static void castLifeDrain(int entityId, double distance, int angle) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    RandomSource random = minecraft.level.getRandom();
+
+    int color1 = 0x1e0e13;//ModSpells.LIFE_DRAIN.get().getColor1();
+    int color2 = 0x6b5766; //ModSpells.LIFE_DRAIN.get().getColor2();
+
+    RootsParticleOptions opt1 = new RootsParticleOptions(ModParticles.LIFE_DRAIN, color2, color1, entityId);
+    RootsParticleOptions opt2 = new RootsParticleOptions(ModParticles.LIFE_DRAIN, color1, color2, entityId);
+
+    if (entity != null) {
+      double x = entity.getX();
+      double y = entity.getY();
+      double z = entity.getZ();
+
+      for (int i = 0; i < 25; i++) {
+        double rand = random.nextDouble() - 0.5;
+        double r = random.nextDouble() * distance;
+
+        minecraft.level.addParticle(random.nextBoolean() ? opt1 : opt2, x, y, z, r, rand, angle);
+      }
+    }
+  }
 }

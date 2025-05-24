@@ -72,6 +72,7 @@ public class PacketHandler {
     registrar.play(CastChannelJauntFXPacket.TYPE, CastChannelJauntFXPacket.CODEC);
     registrar.play(EntityBeamFXPacket.TYPE, EntityBeamFXPacket.CODEC);
     registrar.play(ClientboundOpenReputationPacket.TYPE, ClientboundOpenReputationPacket.CODEC);
+    registrar.play(CastLifeDrainFXPacket.TYPE, CastLifeDrainFXPacket.CODEC);
   }
 
   protected record PacketRegistrar(PayloadRegistrar registrar, boolean toServer) {
