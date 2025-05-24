@@ -21,7 +21,7 @@ public enum LightningPreset {
           .spawn(SpawnFunction.NO_DELAY)),
   DISARM(() -> true, (provider, segments) -> BoltCreator.createBolt(BoltRenderInfo.VINES, provider, segments).size(0.02f)
       .lifespan(9).spawn(SpawnFunction.NO_DELAY).fade(FadeFunction.fade(0.3f))),
-  SHATTER(() -> true, (provider, segments) -> BoltCreator.createBolt(BoltRenderInfo.shatter(), provider, segments).size(0.01f)
+  SHATTER(() -> true, (provider, segments) -> BoltCreator.createBolt(BoltRenderInfo.SHATTER, provider, segments).size(0.01f)
       .lifespan(26).spawn(SpawnFunction.NO_DELAY).fade(FadeFunction.fade(0.1f, 0.3f)));
 
   public static final IntFunction<LightningPreset> BY_ID = ByIdMap.continuous(LightningPreset::ordinal, values(), ByIdMap.OutOfBoundsStrategy.WRAP);

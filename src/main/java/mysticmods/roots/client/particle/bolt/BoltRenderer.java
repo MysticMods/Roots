@@ -19,6 +19,12 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
+// TODO:
+// - Add a way to specify that bolts should be unique, this means PositionProvider has to implement some equality system:
+//   - For static Vec3s, just compare
+//   - For enitites, compare entity id
+// - Bezier smoothing
+// - Textures?
 public class BoltRenderer {
 
   /** Amount of times per tick we refresh. 3 implies 60 Hz. */
@@ -59,6 +65,7 @@ public class BoltRenderer {
         if (refresh) {
           tickAndRemove(data, timestamp);
         }
+        // TODO: This doesn't support dynamic bolts
         if (data.bolts.isEmpty() && data.lastBolt != null && data.lastBolt.getSpawnFunction().isConsecutive()) {
           data.addBolt(new StaticBoltInstance(data.lastBolt, timestamp), timestamp, random);
         }
@@ -92,6 +99,7 @@ public class BoltRenderer {
       data.lastBolt = newBoltData;
       Timestamp timestamp = new Timestamp(minecraft.level.getGameTime(), partialTicks);
       if ((!data.lastBolt.getSpawnFunction().isConsecutive() || data.bolts.isEmpty()) && timestamp.isPassed(data.lastBoltTimestamp, data.lastBoltDelay)) {
+        // TODO: `IBoltEffect` should provide the constructor
         if (newBoltData instanceof DynamicBoltEffect) {
           data.addBolt(new DynamicBoltInstance((DynamicBoltEffect) newBoltData, timestamp), timestamp, random);
         } else {
