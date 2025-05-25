@@ -626,4 +626,26 @@ public class ClientFXHandlers {
       }
     }
   }
+
+  public static void drainLife (int entityId, int casterId) {
+    Minecraft minecraft = Minecraft.getInstance();
+    Entity entity = minecraft.level.getEntity(entityId);
+    Entity caster = minecraft.level.getEntity(casterId);
+    if (entity == null || caster == null) {
+      return;
+    }
+
+    int color1 = ModSpells.LIFE_DRAIN.get().getColor1();
+    int color2 = ModSpells.LIFE_DRAIN.get().getColor2();
+
+    minecraft.level.addParticle(
+        new RootsParticleOptions(ModParticles.LIFE_DRAIN_EMITTER, color1, color2, entityId, casterId),
+        entity.getX(),
+        entity.getY(),
+        entity.getZ(),
+        60,
+        0,
+        0
+    );
+  }
 }

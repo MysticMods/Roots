@@ -81,6 +81,22 @@ public abstract class EntityEmitter extends Particle {
     }
   }
 
+  public static class LifeDrainEmitter extends EntityEmitter {
+    private final Entity target;
+
+    protected LifeDrainEmitter(ClientLevel level, double x, double y, double z, RootsParticleOptions options, Entity entity, int lifetime, Entity target) {
+      super(level, x, y, z, options, entity, lifetime);
+      this.target = target;
+    }
+
+    @Override
+    public void particleTick() {
+      for (int i = 0; i < 3; i++) {
+        level.addParticle(random.nextBoolean() ? new RootsParticleOptions(options.type(), options.color2(), options.color1(), target.getId()) : new RootsParticleOptions(options.type(), options.color1(), options.color2(), target.getId()), x + (random.nextDouble() - 0.5) * 0.2, y + (random.nextDouble() - 0.5) * 0.2, z + (random.nextDouble() - 0.5) * 0.2, 0, 0, 0);
+      }
+    }
+  }
+
   public static class SkySorarerEmitter extends EntityEmitter {
     private final double chance;
     private final int count;
@@ -113,6 +129,18 @@ public abstract class EntityEmitter extends Particle {
           level.addParticle(opt, px, py, pz, motion.x, 0, motion.z);
         }
       }
+    }
+  }
+
+  public static class LifeDrainProvider implements ParticleProvider<RootsParticleOptions> {
+    @Override
+    public Particle createParticle(RootsParticleOptions type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+      Entity entity = level.getEntity(type.entityId());
+      Entity target = level.getEntity(type.casterId());
+      if (entity == null || target == null) {
+        return null;
+      }
+      return new LifeDrainEmitter(level, x, y, z, new RootsParticleOptions(ModParticles.LIFE_DRAINED, type.color1(), type.color2(), type.entityId(), type.casterId()), entity, (int) xSpeed, target);
     }
   }
 

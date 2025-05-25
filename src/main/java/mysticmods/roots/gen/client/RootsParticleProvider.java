@@ -41,6 +41,8 @@ public class RootsParticleProvider extends ParticleDescriptionProvider {
 
     this.sprite(ModParticles.MAGNETISM.get(), RootsAPI.rl("simple"));
 
+    this.sprite(ModParticles.LIFE_DRAINED.get(), RootsAPI.rl("simple"));
+
     this.sprite(ModParticles.LIFE_DRAIN.get(), RootsAPI.rl("simple"));
 
     this.sprite(ModParticles.PETAL_SHELL.get(), RootsAPI.rl("petal_1"));

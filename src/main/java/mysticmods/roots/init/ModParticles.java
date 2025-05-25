@@ -21,6 +21,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> DISARM_EMITTER = PARTICLES.register("disarm_emitter", () -> new RootsParticleOptions.Type(false));
   // Sky Soarer Emitter
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SKY_SOARER_EMITTER = PARTICLES.register("sky_soarer_emitter", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> LIFE_DRAIN_EMITTER = PARTICLES.register("life_drain_emitter", () -> new RootsParticleOptions.Type(false));
 
   // Actual particles
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PYRE = PARTICLES.register("pyre", () -> new RootsParticleOptions.Type(false));
@@ -53,7 +54,7 @@ public class ModParticles {
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> MAGNETISM = PARTICLES.register("magnetism", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> PETAL_SHELL = PARTICLES.register("petal_shell", () -> new RootsParticleOptions.Type(false));
   public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> LIFE_DRAIN = PARTICLES.register("life_drain", () -> new RootsParticleOptions.Type(false));
-  //public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> SHATTER = PARTICLES.register("shatter", () -> new RootsParticleOptions.Type(false));
+  public static final DeferredHolder<ParticleType<?>, ParticleType<RootsParticleOptions>> LIFE_DRAINED = PARTICLES.register("life_drained", () -> new RootsParticleOptions.Type(false));
 
   public static void register(IEventBus bus) {
     PARTICLES.register(bus);

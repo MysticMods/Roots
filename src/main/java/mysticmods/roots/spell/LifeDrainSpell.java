@@ -11,6 +11,7 @@ import mysticmods.roots.api.spell.Spell;
 import mysticmods.roots.init.ModDamage;
 import mysticmods.roots.init.ModSpells;
 import mysticmods.roots.network.client.fx.CastLifeDrainFXPacket;
+import mysticmods.roots.network.client.fx.DrainLifeFXPacket;
 import mysticmods.roots.network.client.fx.EntityBeamFXPacket;
 import mysticmods.roots.util.EntityUtils;
 import net.minecraft.ChatFormatting;
@@ -86,7 +87,7 @@ public class LifeDrainSpell extends Spell {
         pPlayer.heal(heal);
         count++;
 
-        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new EntityBeamFXPacket(pPlayer.getId(), entity.getId()));
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(pPlayer, new DrainLifeFXPacket(entity.getId(), pPlayer.getId()));
       }
     }
 

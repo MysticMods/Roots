@@ -20,7 +20,6 @@ public class LifeDrainParticle extends TextureSheetParticle {
   protected double yOffset;
   protected final double angleRandom;
   protected final int angle;
-  protected float prevAlpha;
 
   protected LifeDrainParticle(ClientLevel level, double x, double y, double z, double radius, double angleRandom, double angle, int c1, int c2, Entity entity) {
     super(level, entity.getX(), entity.getY(), entity.getZ());
@@ -29,7 +28,7 @@ public class LifeDrainParticle extends TextureSheetParticle {
     this.angle = (int) angle;
     this.yOffset = (random.nextDouble() - 1.5) * 0.15;
     this.entity = entity;
-    this.lifetime = 21;
+    this.lifetime = 15;
     this.rCol = this.oR1 = ((c1 >> 16) & 0xFF) / 255.0f;
     this.gCol = this.oG1 = ((c1 >> 8) & 0xFF) / 255.0f;
     this.bCol = this.oB1 = ((c1) & 0xFF) / 255.0f;
@@ -67,40 +66,32 @@ public class LifeDrainParticle extends TextureSheetParticle {
     if (this.age++ >= this.lifetime || entity == null || entity.isRemoved()) {
       this.remove();
     } else {
-      this.xo = this.x;
-      this.yo = this.y;
-      this.zo = this.z;
+      this.xo = this.x = entity.getX();
+      this.yo = this.y = entity.getY();
+      this.zo = this.z = entity.getZ();
       this.prevRadius = this.radius;
-      this.prevAlpha = this.alpha;
 
-      this.radius *= 0.96f;
-      this.yOffset -= 0.03f;
+      this.radius *= 0.91f;
+      this.yOffset -= 0.02f;
 
       float f = (float) this.age / (float) this.lifetime;
 
-      // Color lerp
       if (this.oB1 != this.bcol2) {
         this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
         this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
         this.bCol = this.oB1 + (this.bcol2 - this.oB1) * f;
       }
-
-      // Roll and fade
       this.oRoll = this.roll;
       this.roll += this.rollAmount;
 
       float FADE_IN_TICKS = 8f;
-      float f2 = (float) this.age / (float) this.lifetime;
       if (this.age <= FADE_IN_TICKS) {
-        this.alpha = (float) this.age / (float) FADE_IN_TICKS;
+        this.alpha = (float) this.age / FADE_IN_TICKS;
       } else {
         this.alpha = 1f;
-/*        float fadeOutStart = 1f - ((float) FADE_IN_TICKS / (float) this.lifetime);
-        float fadeOutProgress = (f2 - fadeOutStart) / (1f - fadeOutStart);
-        this.alpha = 1f - Mth.clamp(fadeOutProgress, 0f, 1f);*/
       }
 
-      this.quadSize = 0.395f * (1.0f - f * f); // Shrink size over time
+      this.quadSize = 0.395f * (1.0f - f * f * f);
     }
   }
 
@@ -110,12 +101,9 @@ public class LifeDrainParticle extends TextureSheetParticle {
       return;
     }
 
-    double px = Mth.lerp(partialTicks, entity.xo, entity.getX());
-    double py = Mth.lerp(partialTicks, entity.yo, entity.getY());
-    double pz = Mth.lerp(partialTicks, entity.zo, entity.getZ());
+    Vec3 pos = entity.getPosition(partialTicks);
 
-    // Interpolated Yaw
-    float yRot = Mth.lerp(partialTicks, entity.yRotO, entity.getYRot());
+    float yRot = entity.getViewYRot(partialTicks);
     double yawRad = Math.toRadians(-yRot);
 
     double coneOffset = Math.toRadians(angle / 2.0) * angleRandom;
@@ -126,24 +114,21 @@ public class LifeDrainParticle extends TextureSheetParticle {
     double offsetX = Math.sin(finalAngle) * radius;
     double offsetZ = Math.cos(finalAngle) * radius;
 
-    double x = px + offsetX;
-    double y = py + entity.getEyeHeight() - 0.5 + yOffset;
-    double z = pz + offsetZ;
+    double x = pos.x + offsetX;
+    double y = pos.y + entity.getEyeHeight() - 0.5 + yOffset;
+    double z = pos.z + offsetZ;
 
-    // --- CAMERA OFFSET ---
     Vec3 cam = renderInfo.getPosition();
     float rx = (float) (x - cam.x);
     float ry = (float) (y - cam.y);
     float rz = (float) (z - cam.z);
 
-    // --- ROTATION SETUP ---
     Quaternionf quaternion = new Quaternionf();
     this.getFacingCameraMode().setRotation(quaternion, renderInfo, partialTicks);
     if (this.roll != 0.0F) {
       quaternion.rotateZ(Mth.lerp(partialTicks, this.oRoll, this.roll));
     }
 
-    // --- RENDER QUAD AT FINAL POSITION ---
     renderRotatedQuad(buffer, quaternion, rx, ry, rz, partialTicks);
   }
 

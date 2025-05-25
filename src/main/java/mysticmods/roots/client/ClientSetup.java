@@ -213,10 +213,12 @@ public class ClientSetup {
     event.registerSpriteSet(ModParticles.PETAL_SHELL.get(), PetalShellParticle.Provider::new);
     //event.registerSpriteSet(ModParticles.SHATTER.get(), ShatterBeamParticle.Provider::new);
     event.registerSpriteSet(ModParticles.LIFE_DRAIN.get(), LifeDrainParticle.Provider::new);
+    event.registerSpriteSet(ModParticles.LIFE_DRAINED.get(), LifeDrainedParticle.Provider::new);
 
     event.registerSpecial(ModParticles.DISARM_EMITTER.get(), new EntityEmitter.DisarmProvider());
     event.registerSpecial(ModParticles.SKY_SOARER_EMITTER.get(), new EntityEmitter.SkySoarerProvider());
     event.registerSpecial(ModParticles.SYLVAN_LIGHT_EMITTER.get(), new SylvanLightEmitter.Provider());
+    event.registerSpecial(ModParticles.LIFE_DRAIN_EMITTER.get(), new EntityEmitter.LifeDrainProvider());
   }
 
   @SubscribeEvent
