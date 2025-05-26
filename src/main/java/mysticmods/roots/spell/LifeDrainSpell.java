@@ -97,7 +97,7 @@ public class LifeDrainSpell extends Spell {
 
     if (!foundTarget) {
       costs.noCharge();
-      return 0;
+      return -1;
     } else {
       costs.operations(count);
       return cooldown;
