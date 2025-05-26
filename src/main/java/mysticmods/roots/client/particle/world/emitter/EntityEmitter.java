@@ -9,11 +9,13 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
 public abstract class EntityEmitter extends Particle {
   protected final RootsParticleOptions options;
   protected final Entity entity;
+  protected final LivingEntity living;
 
   protected EntityEmitter(ClientLevel level, double x, double y, double z, RootsParticleOptions options, Entity entity, int lifetime) {
     super(level, entity.getX(), entity.getY() + entity.getEyeHeight() - 0.2, entity.getZ());
@@ -21,6 +23,11 @@ public abstract class EntityEmitter extends Particle {
     this.yd = 0;
     this.zd = 0;
     this.entity = entity;
+    if (entity instanceof LivingEntity livingEntity) {
+      this.living = livingEntity;
+    } else {
+      this.living = null;
+    }
     this.options = options;
     this.lifetime = lifetime;
   }
@@ -28,6 +35,10 @@ public abstract class EntityEmitter extends Particle {
   @Override
   public void tick() {
     if (this.entity == null || this.entity.isRemoved()) {
+      this.remove();
+      return;
+    }
+    if (living != null && living.isDeadOrDying()) {
       this.remove();
       return;
     }
