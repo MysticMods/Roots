@@ -1,5 +1,6 @@
 package mysticmods.roots.client.particle.world;
 
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -24,7 +25,6 @@ public class SmokeParticle extends TextureSheetParticle {
     this.yd = ySpeed;
     this.zd = zSpeed;
     this.hasPhysics = false;
-    // These values seem innaccurate
     this.oRoll = this.roll = random.nextFloat() * 360f;
     this.quadSize = 0.15f;
     this.sprites = sprites;
@@ -32,7 +32,7 @@ public class SmokeParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
   }
 
   @Override
@@ -44,9 +44,10 @@ public class SmokeParticle extends TextureSheetParticle {
   public void tick() {
     super.tick();
     if (!this.removed) {
-      setSpriteFromAge(this.sprites);
 
       float f = (float) this.age / (float) this.lifetime;
+
+      setSpriteFromAge(this.sprites);
       if (this.oB1 != this.bcol2) {
         this.rCol = this.oR1 + (this.rCol2 - this.oR1) * f;
         this.gCol = this.oG1 + (this.gCol2 - this.oG1) * f;
@@ -56,7 +57,7 @@ public class SmokeParticle extends TextureSheetParticle {
       this.oRoll = this.roll;
       this.roll = this.roll + this.rollAmount;
 
-      this.alpha = 1f - f * f * f;
+      this.alpha = 1f - f;
     }
   }
 

@@ -1,6 +1,7 @@
 package mysticmods.roots.client.particle.world;
 
 import mysticmods.roots.client.RenderTickHandler;
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -37,7 +38,7 @@ public class LifeDrainedParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
   }
 
   @Override

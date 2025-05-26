@@ -1,6 +1,7 @@
 package mysticmods.roots.client.particle.world;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import mysticmods.roots.client.particle.render.RootsParticleRenderTypes;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -115,7 +116,7 @@ public class ChannelJauntParticle extends TextureSheetParticle {
 
   @Override
   public ParticleRenderType getRenderType() {
-    return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    return RootsParticleRenderTypes.TRANSLUCENT_NO_MASK;
   }
 
   @Override

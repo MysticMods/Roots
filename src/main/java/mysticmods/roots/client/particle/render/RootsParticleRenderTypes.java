@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
@@ -60,13 +59,34 @@ public class RootsParticleRenderTypes {
       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
       RenderSystem.enableCull();
       RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-      RenderSystem.disableDepthTest();
+      RenderSystem.enableDepthTest();
       return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
     }
 
     @Override
     public String toString() {
       return "roots:glow_no_mask";
+    }
+  };
+
+  public static ParticleRenderType TRANSLUCENT_NO_MASK = new ParticleRenderType() {
+    @Override
+    public BufferBuilder begin(Tesselator tess, TextureManager tex) {
+      RenderSystem.depthMask(false);
+      RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
+      RenderSystem.enableBlend();
+      RenderSystem.blendFuncSeparate(
+          GlStateManager.SourceFactor.SRC_ALPHA,
+          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
+          GlStateManager.SourceFactor.ONE,
+          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA
+      );
+      return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+    }
+
+    @Override
+    public String toString() {
+      return "roots:translucent_no_mask";
     }
   };
 }
