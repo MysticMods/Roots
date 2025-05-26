@@ -2,6 +2,7 @@ package mysticmods.roots.client.particle.bolt;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import java.util.Iterator;
@@ -14,6 +15,7 @@ import mysticmods.roots.client.RootsRenderTypes;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -50,7 +52,6 @@ public class BoltRenderer {
   }
 
   public void render(float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn, @Nullable Vec3 cameraPos) {
-    VertexConsumer buffer = bufferIn.getBuffer(RootsRenderTypes.ROOTS_LIGHTNING);
     Matrix4f matrix = matrixStack.last().pose();
     Timestamp timestamp = new Timestamp(minecraft.level.getGameTime(), partialTicks);
     boolean refresh = timestamp.isPassed(refreshTimestamp, (1 / REFRESH_TIME));
@@ -69,8 +70,13 @@ public class BoltRenderer {
         if (data.bolts.isEmpty() && data.lastBolt != null && data.lastBolt.getSpawnFunction().isConsecutive()) {
           data.addBolt(new StaticBoltInstance(data.lastBolt, timestamp), timestamp, random);
         }
-        for (BoltRenderInstance bolt : data.bolts) {
-          bolt.render(matrix, buffer, timestamp, cameraPos, partialTicks);
+
+        for (Map.Entry<RenderType, Set<BoltRenderInstance>> renderEntry : data.bolts.entrySet()) {
+          VertexConsumer buffer = bufferIn.getBuffer(renderEntry.getKey());
+          // render all bolts for this owner
+          for (BoltRenderInstance bolt : renderEntry.getValue()) {
+            bolt.render(matrix, buffer, timestamp, cameraPos, partialTicks);
+          }
         }
 
         if (data.bolts.isEmpty() && timestamp.isPassed(data.lastUpdateTimestamp, MAX_OWNER_TRACK_TIME)) {
@@ -81,13 +87,15 @@ public class BoltRenderer {
   }
 
   private static void tickAndRemove(BoltOwnerData data, Timestamp timestamp) {
-    Iterator<BoltRenderInstance> iterator = data.bolts.iterator();
-    //noinspection Java8CollectionRemoveIf: requires capture
-    while (iterator.hasNext()) {
-      if (iterator.next().tick(timestamp)) {
-        iterator.remove();
+    data.bolts.forEach((a, b) -> {
+      Iterator<BoltRenderInstance> iterator = b.iterator();
+      //noinspection Java8CollectionRemoveIf: requires capture
+      while (iterator.hasNext()) {
+        if (iterator.next().tick(timestamp)) {
+          iterator.remove();
+        }
       }
-    }
+    });
   }
 
   public void update(Object owner, IBoltEffect newBoltData, float partialTicks) {
@@ -112,7 +120,7 @@ public class BoltRenderer {
 
   public static class BoltOwnerData {
 
-    private final Set<BoltRenderInstance> bolts = new ObjectOpenHashSet<>();
+    private final Map<RenderType, Set<BoltRenderInstance>> bolts = new Object2ObjectLinkedOpenHashMap<>();
     private IBoltEffect lastBolt;
     private Timestamp lastBoltTimestamp = new Timestamp();
     private Timestamp lastUpdateTimestamp = new Timestamp();
@@ -120,7 +128,8 @@ public class BoltRenderer {
     private double lastBoltDelay;
 
     private void addBolt(BoltRenderInstance instance, Timestamp timestamp, RandomSource random) {
-      bolts.add(instance);
+      bolts.computeIfAbsent(instance.getBolt().getRenderType(), k -> new ObjectOpenHashSet<>())
+          .add(instance);
       lastBoltDelay = instance.getSpawnFunction().getSpawnDelay(random);
       lastBoltTimestamp = timestamp;
     }

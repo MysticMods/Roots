@@ -1,6 +1,8 @@
 package mysticmods.roots.client.particle.bolt;
 
+import mysticmods.roots.client.RootsRenderTypes;
 import mysticmods.roots.client.particle.Color;
+import net.minecraft.client.renderer.RenderType;
 
 public class BoltRenderInfo {
 
@@ -32,6 +34,8 @@ public class BoltRenderInfo {
   public RandomFunction randomFunction = RandomFunction.GAUSSIAN;
   public SpreadFunction spreadFunction = SpreadFunction.SINE;
   public SegmentSpreader segmentSpreader = SegmentSpreader.NO_MEMORY;
+
+  public RenderType renderType = RootsRenderTypes.ROOTS_LIGHTNING;
 
   public static BoltRenderInfo electricity() {
     return new BoltRenderInfo().color(Color.rgbad(0.54F, 0.91F, 1F, 0.8F)).noise(0.2F, 0.2F).branching(0.1F, 0.6F)
@@ -79,6 +83,11 @@ public class BoltRenderInfo {
 
   public BoltRenderInfo color(Color color) {
     this.color = color;
+    return this;
+  }
+
+  public BoltRenderInfo renderType(RenderType renderType) {
+    this.renderType = renderType;
     return this;
   }
 }

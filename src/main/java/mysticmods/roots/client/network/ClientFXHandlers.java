@@ -9,7 +9,7 @@ import mysticmods.roots.config.ConfigManager;
 import mysticmods.roots.init.ModParticles;
 import mysticmods.roots.init.ModSounds;
 import mysticmods.roots.init.ModSpells;
-import mysticmods.roots.network.client.fx.lightning.LightningPreset;
+import mysticmods.roots.client.particle.bolt.LightningPreset;
 import mysticmods.roots.particle.RootsParticleOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

@@ -3,13 +3,11 @@ package mysticmods.roots.network.client.fx.lightning;
 import io.netty.buffer.ByteBuf;
 import mysticmods.roots.api.RootsAPI;
 import mysticmods.roots.api.network.IRootsPacket;
-import mysticmods.roots.client.RenderTickHandler;
 import mysticmods.roots.client.network.ClientFXHandlers;
 import mysticmods.roots.client.particle.bolt.*;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,6 +1,7 @@
 package mysticmods.roots.client.particle.bolt;
 
 import mysticmods.roots.client.particle.Color;
+import net.minecraft.client.renderer.RenderType;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface IBoltEffect {
   List<BoltQuads> generate(float partialTicks);
 
   int getCount();
+
+  RenderType getRenderType ();
 }

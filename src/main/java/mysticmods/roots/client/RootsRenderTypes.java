@@ -18,6 +18,12 @@ public class RootsRenderTypes {
           .createCompositeState(false)
   );
 
+  public static final RenderType ROOTS_WHAT = RenderType.create("roots_what", DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256,
+      false, true, RenderType.CompositeState.builder()
+          .setShaderState(RenderType.POSITION_COLOR_SHADER)
+          .createCompositeState(false)
+  );
+
   public static final RenderStateShard.ShaderStateShard PARTICLE_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getParticleShader);
 
   public static final Function<ResourceLocation, RenderType> ROOTS_BEAM =

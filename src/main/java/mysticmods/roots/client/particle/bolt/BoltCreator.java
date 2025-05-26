@@ -1,7 +1,4 @@
-package mysticmods.roots.network.client.fx.lightning;
-
-import mysticmods.roots.client.particle.bolt.*;
-import net.minecraft.world.phys.Vec3;
+package mysticmods.roots.client.particle.bolt;
 
 @FunctionalInterface
 public interface BoltCreator {

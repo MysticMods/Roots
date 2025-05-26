@@ -1,10 +1,6 @@
-package mysticmods.roots.network.client.fx.lightning;
+package mysticmods.roots.client.particle.bolt;
 
 import io.netty.buffer.ByteBuf;
-import mysticmods.roots.client.particle.bolt.BoltEffect;
-import mysticmods.roots.client.particle.bolt.BoltRenderInfo;
-import mysticmods.roots.client.particle.bolt.FadeFunction;
-import mysticmods.roots.client.particle.bolt.SpawnFunction;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
