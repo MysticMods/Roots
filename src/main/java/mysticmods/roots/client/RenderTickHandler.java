@@ -64,7 +64,6 @@ public class RenderTickHandler {
       MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
       boltRenderer.render(event.getPartialTick()
           .getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());
-      renderer.endBatch(RootsRenderTypes.ROOTS_LIGHTNING);
     } else if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
       MultiBufferSource.BufferSource renderer = Minecraft.getInstance().renderBuffers().bufferSource();
       BeamManager.render(event.getPartialTick().getGameTimeDeltaPartialTick(false), event.getPoseStack(), renderer, event.getCamera().getPosition());

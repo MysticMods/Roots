@@ -2,7 +2,6 @@ package mysticmods.roots.client.particle.bolt;
 
 import mysticmods.roots.client.particle.Color;
 import net.minecraft.SharedConstants;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
@@ -166,8 +165,8 @@ public class BoltEffect implements IBoltEffect {
   }
 
   @Override
-  public RenderType getRenderType() {
-    return renderInfo.renderType;
+  public RenderPreset getRenderType() {
+    return renderInfo.renderPreset;
   }
 
   private static Vec3 findRandomOrthogonalVector(Vec3 vec, RandomSource rand) {

@@ -41,6 +41,8 @@ public class BoltRenderer {
 
   private final Map<Object, BoltOwnerData> boltOwners = new Object2ObjectOpenHashMap<>();
 
+
+
   public boolean hasBoltsToRender() {
     synchronized (boltOwners) {
       return boltOwners.values().stream().anyMatch(data -> !data.bolts.isEmpty());
@@ -77,6 +79,7 @@ public class BoltRenderer {
           for (BoltRenderInstance bolt : renderEntry.getValue()) {
             bolt.render(matrix, buffer, timestamp, cameraPos, partialTicks);
           }
+          Minecraft.getInstance().renderBuffers().bufferSource().endBatch(renderEntry.getKey());
         }
 
         if (data.bolts.isEmpty() && timestamp.isPassed(data.lastUpdateTimestamp, MAX_OWNER_TRACK_TIME)) {
@@ -128,7 +131,7 @@ public class BoltRenderer {
     private double lastBoltDelay;
 
     private void addBolt(BoltRenderInstance instance, Timestamp timestamp, RandomSource random) {
-      bolts.computeIfAbsent(instance.getBolt().getRenderType(), k -> new ObjectOpenHashSet<>())
+      bolts.computeIfAbsent(fromRenderPreset(instance.getBolt().getRenderType()), k -> new ObjectOpenHashSet<>())
           .add(instance);
       lastBoltDelay = instance.getSpawnFunction().getSpawnDelay(random);
       lastBoltTimestamp = timestamp;
@@ -204,4 +207,15 @@ public class BoltRenderer {
     }
   }
 
+  private static final Map<RenderPreset, RenderType> renderPresets = new Object2ObjectOpenHashMap<>();
+
+  public static void registerRenderPreset(RenderPreset preset, RenderType renderType) {
+    synchronized (renderPresets) {
+      renderPresets.put(preset, renderType);
+    }
+  }
+
+  public static RenderType fromRenderPreset (RenderPreset preset) {
+    return renderPresets.getOrDefault(preset, RootsRenderTypes.ROOTS_LIGHTNING);
+  }
 }

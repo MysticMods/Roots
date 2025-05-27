@@ -28,5 +28,5 @@ public interface IBoltEffect {
 
   int getCount();
 
-  RenderType getRenderType ();
+  RenderPreset getRenderType ();
 }
