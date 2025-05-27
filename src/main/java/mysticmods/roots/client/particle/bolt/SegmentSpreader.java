@@ -14,9 +14,6 @@ public interface SegmentSpreader {
    */
   SegmentSpreader NO_MEMORY = (perpendicularDist, randVec, maxDiff, scale, progress, rand) -> randVec.scale(maxDiff * rand);
 
-  // Segment spreader a la ChatGPT
-  SegmentSpreader JAGGED = (perp, randVec, maxDiff, scale, progress, rand) -> randVec.scale(maxDiff);
-
   /**
    * Move from where the previous segment ended by a certain memory factor. Higher memory will restrict perpendicular movement.
    */
@@ -30,6 +27,32 @@ public interface SegmentSpreader {
         perpendicularDist = perpendicularDist.scale(maxDiff / length);
       }
       return perpendicularDist.add(cur);
+    };
+  }
+
+  static SegmentSpreader memoryMinimumAngle (float memoryFactor, double minimumAngle) {
+    double minRadians = Math.cos(Math.toRadians(minimumAngle));
+
+    return (perpendicularDist, randVec, maxDiff, spreadScale, progress, rand) -> {
+      double nextDiff = maxDiff * (1 - memoryFactor) * rand;
+      Vec3 cur = randVec.scale(nextDiff);
+
+      if (!perpendicularDist.equals(Vec3.ZERO)) {
+        double dot = perpendicularDist.normalize().dot(cur.normalize());
+
+        if (dot > minRadians) {
+          cur = cur.scale(-1);
+        }
+      }
+
+      Vec3 next = perpendicularDist.scale(memoryFactor).add(cur);
+
+      double length = next.length();
+      if (length > maxDiff) {
+        next = next.scale(maxDiff / length);
+      }
+
+      return next;
     };
   }
 

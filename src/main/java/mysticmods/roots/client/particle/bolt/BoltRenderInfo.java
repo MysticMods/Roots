@@ -48,7 +48,7 @@ public class BoltRenderInfo {
 
   public static BoltRenderInfo shatter() {
     return new BoltRenderInfo().color(Color.rgbad(0.64f, 0.5f, 0.4f, 1f)).noise(0.1f, 0.05f).branching(0.5f, 0f)
-        .spreader(SegmentSpreader.memory(0.5f)).spreadFunction(SpreadFunction.SINE)
+        .spreader(SegmentSpreader.memoryMinimumAngle(0.5f, 130)).spreadFunction(SpreadFunction.SINE)
         .randomFunction(RandomFunction.GAUSSIAN);
   }
 
